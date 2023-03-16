@@ -1,0 +1,25 @@
+{
+  "name": "starbook",
+  "version": "0.0.0",
+  "description": "Build beautiful, high-performance documentation websites with Astro",
+  "scripts": {},
+  "keywords": [
+    "docs",
+    "documentation",
+    "astro",
+    "withastro"
+  ],
+  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./index.astro": "./index.astro"
+  },
+  "peerDependencies": {
+    "astro": "^2"
+  },
+  "devDependencies": {
+    "astro": "^2.0.18"
+  }
+}

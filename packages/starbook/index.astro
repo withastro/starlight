@@ -1,0 +1,46 @@
+---
+import type {
+  GetStaticPathsResult,
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+} from 'astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+
+  const handleIndexSlugs = (slug: string) =>
+    slug === 'index'
+      ? undefined
+      : slug.endsWith('/index')
+      ? slug.replace('/index', '')
+      : slug;
+
+  return docs.map((doc) => ({
+    params: { slug: handleIndexSlugs(doc.slug) },
+    props: doc,
+  })) satisfies GetStaticPathsResult;
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { render, data } = Astro.props;
+const { Content } = await render();
+---
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{data.title}</title>
+  </head>
+  <body>
+    <main>
+      <h1>{data.title}</h1>
+      <Content />
+    </main>
+  </body>
+</html>
