@@ -1,7 +1,4 @@
 import type { AstroIntegration } from 'astro';
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
 
 export default function StarbookIntegration(): AstroIntegration {
   return {
@@ -10,7 +7,7 @@ export default function StarbookIntegration(): AstroIntegration {
       'astro:config:setup': ({ injectRoute }) => {
         injectRoute({
           pattern: '[...slug]',
-          entryPoint: require.resolve('./index.astro'),
+          entryPoint: 'starbook/index.astro',
         });
       },
     },
