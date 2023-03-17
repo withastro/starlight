@@ -3,5 +3,10 @@ import starbook from 'starbook';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [starbook()],
+  integrations: [
+    starbook({
+      title: 'StarBook',
+      tagline: 'Launch your next docs with Astro',
+    }),
+  ],
 });

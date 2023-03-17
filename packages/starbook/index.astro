@@ -5,6 +5,7 @@ import type {
   InferGetStaticPropsType,
 } from 'astro';
 import { getCollection } from 'astro:content';
+import Header from './components/Header.astro';
 import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
@@ -40,6 +41,7 @@ const { Content, headings } = await render();
     />
   </head>
   <body>
+    <Header />
     <div class="wrapper">
       <Sidebar />
       <main id="overview">
