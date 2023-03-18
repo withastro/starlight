@@ -1,14 +1,17 @@
 ---
 import config from 'virtual:starbook/user-config';
+import Search from './Search.astro';
 ---
 
 <header>
   <span><strong>{config.title}</strong> {config.tagline}</span>
+  <Search />
 </header>
 
 <style>
   header {
     display: flex;
+    justify-content: space-between;
     padding: 1rem;
   }
 </style>
