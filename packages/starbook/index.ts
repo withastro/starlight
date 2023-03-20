@@ -1,4 +1,4 @@
-import type { AstroIntegration, AstroUserConfig } from 'astro';
+import type { AstroIntegration, AstroUserConfig, ViteUserConfig } from 'astro';
 import { StarbookConfig } from './types';
 
 const virtualModuleId = 'virtual:starbook/user-config';
@@ -17,22 +17,27 @@ export default function StarbookIntegration(
         });
         const newConfig: AstroUserConfig = {
           vite: {
-            plugins: [
-              {
-                name: 'vite-plugin-starbook-user-config',
-                resolveId(id) {
-                  if (id === virtualModuleId) return resolvedVirtualModuleId;
-                },
-                load(id) {
-                  if (id === resolvedVirtualModuleId)
-                    return `export default ${JSON.stringify(opts)}`;
-                },
-              },
-            ],
+            plugins: [vitePluginStarBookUserConfig(opts)],
           },
         };
         updateConfig(newConfig);
       },
+    },
+  };
+}
+
+/** Expose the StarBook user config object via a virtual module. */
+function vitePluginStarBookUserConfig(
+  opts: StarbookConfig
+): NonNullable<ViteUserConfig['plugins']>[number] {
+  return {
+    name: 'vite-plugin-starbook-user-config',
+    resolveId(id) {
+      if (id === virtualModuleId) return resolvedVirtualModuleId;
+    },
+    load(id) {
+      if (id === resolvedVirtualModuleId)
+        return `export default ${JSON.stringify(opts)}`;
     },
   };
 }
