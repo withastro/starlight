@@ -35,7 +35,11 @@ export const StarbookConfigSchema = z.object({
   tagline: z.string().optional().describe('The tagline for your website.'),
   /** Configure locales for internationalization (i18n). */
   locales: z
-    .record(LocaleSchema)
+    .object({
+      /** Configure a “root” locale to serve a default language from `/`. */
+      root: LocaleSchema.required({ lang: true }).optional(),
+    })
+    .catchall(LocaleSchema)
     .optional()
     .describe('Configure locales for internationalization (i18n).'),
 });
