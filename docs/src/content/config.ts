@@ -1,6 +1,5 @@
-import { defineCollection } from 'astro:content';
-import schema from 'starbook/schema';
+import { defineDocsCollection } from 'starbook/schema';
 
 export const collections = {
-  docs: defineCollection({ schema }),
+  docs: defineDocsCollection(),
 };
