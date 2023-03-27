@@ -21,7 +21,7 @@
     "astro": "^2"
   },
   "devDependencies": {
-    "astro": "^2.0.18"
+    "astro": "^2.1.7"
   },
   "dependencies": {
     "pagefind": "^0.12.0"
