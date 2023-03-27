@@ -70,3 +70,23 @@ The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. If not set,
 **type:** `'ltr' | 'rtl'`
 
 The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.
+
+#### Root locale
+
+You can serve the default language without a `/lang/` directory by setting a `root` locale:
+
+```js
+starbook({
+  locales: {
+    root: {
+      label: 'English',
+      lang: 'en',
+    },
+    fr: {
+      label: 'Français',
+    },
+  },
+});
+```
+
+For example, this allows you to serve `/getting-started/` as an English route and use `/fr/getting-started/` as the equivalent French page.
