@@ -15,6 +15,7 @@
   "exports": {
     ".": "./index.ts",
     "./schema": "./schema.ts",
+    "./types": "./types.ts",
     "./index.astro": "./index.astro"
   },
   "peerDependencies": {

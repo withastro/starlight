@@ -3,7 +3,10 @@ lockfileVersion: 5.4
 importers:
 
   .:
-    specifiers: {}
+    specifiers:
+      astro: ^2.1.7
+    devDependencies:
+      astro: 2.1.7
 
   docs:
     specifiers:
