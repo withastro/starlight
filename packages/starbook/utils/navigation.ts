@@ -9,6 +9,7 @@ interface PageEntry {
   type: 'page';
   label: string;
   href: string;
+  isCurrent: boolean;
 }
 
 interface CategoryEntry {
@@ -20,10 +21,10 @@ interface CategoryEntry {
 export type SidebarEntry = PageEntry | CategoryEntry;
 
 export function getSidebar(
-  slug: CollectionEntry<'docs'>['slug']
+  currentSlug: CollectionEntry<'docs'>['slug']
 ): SidebarEntry[] {
   let docs = allDocs;
-  const locale = slugToLocale(slug);
+  const locale = slugToLocale(currentSlug);
 
   if (config.locales) {
     if (locale && locale in config.locales) {
@@ -77,6 +78,7 @@ export function getSidebar(
       type: 'page',
       label: doc.data.title,
       href: slugToPathname(doc.slug),
+      isCurrent: doc.slug === currentSlug,
     };
   }
 

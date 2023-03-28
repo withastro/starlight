@@ -11,7 +11,7 @@ interface Props {
     Astro.props.sublist.map((entry) => (
       <li>
         {entry.type === 'page' ? (
-          <a href={entry.href}>{entry.label}</a>
+          <a href={entry.href} aria-current={entry.isCurrent && 'true'}>{entry.label}</a>
         ) : (
           <strong>{entry.label}</strong>
           <Astro.self sublist={entry.entries} />
@@ -22,10 +22,13 @@ interface Props {
 </ul>
 
 <style>
-    ul {
+  ul {
     line-height: 2;
   }
   ul strong {
     text-transform: uppercase;
+  }
+  [aria-current="true"] {
+    color: #00f;
   }
 </style>
