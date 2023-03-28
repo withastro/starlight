@@ -1,9 +1,5 @@
 ---
-import type {
-  GetStaticPathsResult,
-  InferGetStaticParamsType,
-  InferGetStaticPropsType,
-} from 'astro';
+import type { GetStaticPathsResult, InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import Header from './components/Header.astro';
 import Sidebar from './components/Sidebar.astro';
@@ -20,10 +16,9 @@ export async function getStaticPaths() {
   })) satisfies GetStaticPathsResult;
 }
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { render, data } = Astro.props;
+const { render, data, slug } = Astro.props;
 const { Content, headings } = await render();
 ---
 
@@ -43,7 +38,7 @@ const { Content, headings } = await render();
   <body>
     <Header />
     <div class="wrapper">
-      <Sidebar />
+      <Sidebar currentSlug={slug} />
       <main id="overview">
         <div class="content" data-pagefind-body>
           <h1>{data.title}</h1>
