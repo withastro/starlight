@@ -5,7 +5,23 @@ import config from 'virtual:starbook/user-config';
 
 const allDocs = await getCollection('docs');
 
-export function getSidebar(slug: CollectionEntry<'docs'>['slug']) {
+interface PageEntry {
+  type: 'page';
+  label: string;
+  href: string;
+}
+
+interface CategoryEntry {
+  type: 'category';
+  label: string;
+  entries: (PageEntry | CategoryEntry)[];
+}
+
+export type SidebarEntry = PageEntry | CategoryEntry;
+
+export function getSidebar(
+  slug: CollectionEntry<'docs'>['slug']
+): SidebarEntry[] {
   let docs = allDocs;
   const locale = slugToLocale(slug);
 
@@ -30,7 +46,7 @@ export function getSidebar(slug: CollectionEntry<'docs'>['slug']) {
   }
 
   /** Turn flat array of docs into a tree structure. */
-  function treeify(docs: CollectionEntry<'docs'>[]) {
+  function treeify(docs: CollectionEntry<'docs'>[]): Dir {
     function getBreadcrumb(doc: CollectionEntry<'docs'>): string[] {
       const dir = dirname(doc.id);
       // Return no breadcrumbs for items in the root directory.
@@ -55,12 +71,6 @@ export function getSidebar(slug: CollectionEntry<'docs'>['slug']) {
     return treeRoot;
   }
 
-  interface PageEntry {
-    type: 'page';
-    label: string;
-    href: string;
-  }
-
   function makePageEntry(id: CollectionEntry<'docs'>['id']): PageEntry {
     const doc = docs.find((doc) => doc.id === id)!;
     return {
@@ -70,13 +80,11 @@ export function getSidebar(slug: CollectionEntry<'docs'>['slug']) {
     };
   }
 
-  interface Category {
-    type: 'category';
-    label: string;
-    entries: (PageEntry | Category)[];
-  }
-
-  function makeCategory(dir: Dir, fullPath: string, dirName: string): Category {
+  function makeCategory(
+    dir: Dir,
+    fullPath: string,
+    dirName: string
+  ): CategoryEntry {
     const entries = Object.entries(dir).map(([key, dirOrId]) =>
       dirToItem(dirOrId, `${fullPath}/${key}`, key)
     );
@@ -87,13 +95,17 @@ export function getSidebar(slug: CollectionEntry<'docs'>['slug']) {
     };
   }
 
-  function dirToItem(dirOrId: Dir[string], fullPath: string, dirName: string) {
+  function dirToItem(
+    dirOrId: Dir[string],
+    fullPath: string,
+    dirName: string
+  ): SidebarEntry {
     return typeof dirOrId === 'string'
       ? makePageEntry(dirOrId)
       : makeCategory(dirOrId, fullPath, dirName);
   }
 
-  function makeSidebar(tree: Dir) {
+  function makeSidebar(tree: Dir): SidebarEntry[] {
     return Object.entries(tree).map(([key, dirOrId]) =>
       dirToItem(dirOrId, key, key)
     );

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getSidebar } from '../utils/navigation'
+import { getSidebar } from '../utils/navigation';
+import SidebarSublist from './SidebarSublist.astro';
 
 interface Props {
   currentSlug: CollectionEntry<'docs'>['slug'];
@@ -10,32 +11,11 @@ const sidebar = getSidebar(Astro.props.currentSlug);
 ---
 
 <nav>
-  <ul>
-    {
-      sidebar.map((entry) => (
-        <li>
-          {entry.type === 'page' ? (
-            <a href={entry.href}>{entry.label}</a>
-          ) : (
-            <strong>{entry.label}</strong>
-            <ul>
-              {entry.entries.map((entry) => (
-                <li>
-                  {entry.type === 'page' && (
-                    <a href={entry.href}>{entry.label}</a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))
-    }
-  </ul>
+  <SidebarSublist sublist={sidebar} />
   <p>
     <small>
-      generated from the file structure 👆<br>
-      alphabetical 😱<br>
+      generated from the file structure 👆<br />
+      alphabetical 😱<br />
       TODO: make configurable
     </small>
   </p>
@@ -44,11 +24,5 @@ const sidebar = getSidebar(Astro.props.currentSlug);
 <style>
   nav {
     display: block;
-  }
-  ul {
-    line-height: 2;
-  }
-  ul strong {
-    text-transform: uppercase;
   }
 </style>

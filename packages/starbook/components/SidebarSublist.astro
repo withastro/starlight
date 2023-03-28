@@ -1,0 +1,31 @@
+---
+import type { SidebarEntry } from '../utils/navigation';
+
+interface Props {
+  sublist: SidebarEntry[]
+}
+---
+
+<ul>
+  {
+    Astro.props.sublist.map((entry) => (
+      <li>
+        {entry.type === 'page' ? (
+          <a href={entry.href}>{entry.label}</a>
+        ) : (
+          <strong>{entry.label}</strong>
+          <Astro.self sublist={entry.entries} />
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+    ul {
+    line-height: 2;
+  }
+  ul strong {
+    text-transform: uppercase;
+  }
+</style>
