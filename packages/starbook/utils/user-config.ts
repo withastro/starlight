@@ -1,4 +1,5 @@
 import { z } from 'astro/zod';
+import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 
 const LocaleSchema = z.object({
   /** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -24,6 +25,8 @@ const LocaleSchema = z.object({
     ),
 });
 
+const ProcessedLocaleSchema = LocaleSchema.required({ lang: true });
+
 export const StarbookConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
@@ -40,6 +43,39 @@ export const StarbookConfigSchema = z.object({
       root: LocaleSchema.required({ lang: true }).optional(),
     })
     .catchall(LocaleSchema)
+    .transform((locales, ctx) => {
+      for (const key in locales) {
+        const locale = locales[key]!;
+        // Fall back to the key in the locales object as the lang.
+        let lang = locale.lang || key;
+
+        // Parse the lang tag so we can check it is valid according to BCP-47.
+        const schema = bcpParse(lang, { forgiving: true });
+        schema.region = schema.region?.toUpperCase();
+        const normalizedLang = bcpStringify(schema);
+
+        // Error if parsing the language tag failed.
+        if (!normalizedLang) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Could not validate language tag "${lang}" at locales.${key}.lang.`,
+          });
+          return z.NEVER;
+        }
+
+        // Let users know we’re modifying their configured `lang`.
+        if (normalizedLang !== lang) {
+          console.warn(
+            `Warning: using "${normalizedLang}" language tag for locales.${key}.lang instead of "${lang}".`
+          );
+          lang = normalizedLang;
+        }
+
+        // Set the final value as the normalized lang, based on the key if needed.
+        locale.lang = lang;
+      }
+      return locales;
+    })
     .optional()
     .describe('Configure locales for internationalization (i18n).'),
 });
