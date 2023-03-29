@@ -50,10 +50,10 @@ function vitePluginStarBookUserConfig(
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   return {
     name: 'vite-plugin-starbook-user-config',
-    resolveId(id) {
+    resolveId(id): string | void {
       if (id === virtualModuleId) return resolvedVirtualModuleId;
     },
-    load(id) {
+    load(id): string | void {
       if (id === resolvedVirtualModuleId)
         return `export default ${JSON.stringify(opts)}`;
     },
