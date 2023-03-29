@@ -18,8 +18,8 @@ const LocaleSchema = z.object({
   /** The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left. */
   dir: z
     .enum(['rtl', 'ltr'])
-    .default('ltr')
     .optional()
+    .default('ltr')
     .describe(
       'The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.'
     ),
