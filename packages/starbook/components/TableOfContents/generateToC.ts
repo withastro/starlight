@@ -7,9 +7,10 @@ export interface TocItem extends MarkdownHeading {
 function diveChildren(item: TocItem, depth: number): TocItem[] {
   if (depth === 1) {
     return item.children;
+  } else if (item.children.length > 0) {
+    return diveChildren(item.children.at(-1)!, depth - 1);
   } else {
-    // e.g., 2
-    return diveChildren(item.children.at(-1), depth - 1);
+    return [];
   }
 }
 
