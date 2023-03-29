@@ -1,11 +1,17 @@
 ---
 import config from 'virtual:starbook/user-config';
+import LanguageSelect from './LanguageSelect.astro';
 import Search from './Search.astro';
+
+interface Props {
+  locale: string | undefined;
+}
 ---
 
 <header>
   <span><strong>{config.title}</strong> {config.tagline}</span>
   <Search />
+  <LanguageSelect locale={Astro.props.locale} />
 </header>
 
 <style>

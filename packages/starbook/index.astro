@@ -6,7 +6,7 @@ import Header from './components/Header.astro';
 import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
-import { slugToParam } from './utils/slugs';
+import { slugToLang, slugToLocale, slugToParam } from './utils/slugs';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -21,9 +21,11 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { render, data, slug } = Astro.props;
 const { Content, headings } = await render();
+const lang = slugToLang(slug);
+const locale = slugToLocale(slug);
 ---
 
-<html>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -37,7 +39,7 @@ const { Content, headings } = await render();
     />
   </head>
   <body>
-    <Header />
+    <Header locale={locale} />
     <div class="wrapper">
       <Sidebar currentSlug={slug} />
       <main id="overview">
