@@ -9,15 +9,26 @@ function diveChildren(item: TocItem, depth: number): TocItem[] {
     return item.children;
   } else {
     // e.g., 2
-    return diveChildren(item.children[item.children.length - 1], depth - 1);
+    return diveChildren(item.children.at(-1), depth - 1);
   }
 }
 
-export function generateToC(headings: MarkdownHeading[], title = 'Overview') {
+interface TocOpts {
+  minHeadingLevel: number;
+  maxHeadingLevel: number;
+  title?: string;
+}
+
+export function generateToC(
+  headings: MarkdownHeading[],
+  { minHeadingLevel, maxHeadingLevel, title = 'Overview' }: TocOpts
+) {
   const overview = { depth: 2, slug: 'overview', text: title };
   headings = [
     overview,
-    ...headings.filter(({ depth }) => depth > 1 && depth < 4),
+    ...headings.filter(
+      ({ depth }) => depth >= minHeadingLevel && depth <= maxHeadingLevel
+    ),
   ];
   const toc: Array<TocItem> = [];
 
@@ -28,7 +39,7 @@ export function generateToC(headings: MarkdownHeading[], title = 'Overview') {
         children: [],
       });
     } else {
-      const lastItemInToc = toc[toc.length - 1];
+      const lastItemInToc = toc.at(-1)!;
       if (heading.depth < lastItemInToc.depth) {
         throw new Error(`Orphan heading found: ${heading.text}.`);
       }
