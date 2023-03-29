@@ -1,8 +1,8 @@
 import type { AstroIntegration, AstroUserConfig, ViteUserConfig } from 'astro';
 import { spawn } from 'node:child_process';
-import { basename, dirname, relative } from 'node:path';
+import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { StarbookConfig } from './types';
+import { StarbookConfig, StarbookConfigSchema } from './utils/user-config';
 
 const virtualModuleId = 'virtual:starbook/user-config';
 const resolvedVirtualModuleId = '\0' + virtualModuleId;
@@ -10,6 +10,8 @@ const resolvedVirtualModuleId = '\0' + virtualModuleId;
 export default function StarbookIntegration(
   opts: StarbookConfig
 ): AstroIntegration {
+  const config = StarbookConfigSchema.parse(opts);
+
   return {
     name: 'starbook',
     hooks: {
@@ -20,7 +22,7 @@ export default function StarbookIntegration(
         });
         const newConfig: AstroUserConfig = {
           vite: {
-            plugins: [vitePluginStarBookUserConfig(opts)],
+            plugins: [vitePluginStarBookUserConfig(config)],
           },
         };
         updateConfig(newConfig);
@@ -48,10 +50,10 @@ function vitePluginStarBookUserConfig(
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   return {
     name: 'vite-plugin-starbook-user-config',
-    resolveId(id) {
+    resolveId(id): string | void {
       if (id === virtualModuleId) return resolvedVirtualModuleId;
     },
-    load(id) {
+    load(id): string | void {
       if (id === resolvedVirtualModuleId)
         return `export default ${JSON.stringify(opts)}`;
     },

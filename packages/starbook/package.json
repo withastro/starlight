@@ -15,15 +15,17 @@
   "exports": {
     ".": "./index.ts",
     "./schema": "./schema.ts",
+    "./types": "./types.ts",
     "./index.astro": "./index.astro"
   },
   "peerDependencies": {
     "astro": "^2"
   },
   "devDependencies": {
-    "astro": "^2.0.18"
+    "astro": "^2.1.7"
   },
   "dependencies": {
+    "bcp-47": "^2.1.0",
     "pagefind": "^0.12.0"
   }
 }

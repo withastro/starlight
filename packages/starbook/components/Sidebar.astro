@@ -1,120 +1,21 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
-import { basename, dirname } from 'node:path';
-import { slugToPathname } from '../utils/slugs';
+import type { CollectionEntry } from 'astro:content';
+import { getSidebar } from '../utils/navigation';
+import SidebarSublist from './SidebarSublist.astro';
 
-const docs = await getCollection('docs');
-
-/**
- * A representation of the file structure. For each object entry:
- * If it's a folder, the key is the directory name, and value is the directory
- * content; If it's a doc file, the key is the doc's source file name, and value
- * is the collection entry.
- */
-interface Dir {
-  [item: string]: Dir | CollectionEntry<'docs'>['id'];
+interface Props {
+  currentSlug: CollectionEntry<'docs'>['slug'];
 }
 
-/** Turn flat array of docs into a tree structure. */
-function treeify(docs: CollectionEntry<'docs'>[]) {
-  function getBreadcrumb(doc: CollectionEntry<'docs'>): string[] {
-    const dir = dirname(doc.id);
-    // Return no breadcrumbs for items in the root directory.
-    if (dir === '.') return [];
-    return dir.split('/');
-  }
-  const treeRoot: Dir = {};
-  docs.forEach((doc) => {
-    const breadcrumb = getBreadcrumb(doc);
-
-    // Walk down the file's path to generate the fs structure
-    let currentDir = treeRoot;
-    breadcrumb.forEach((dir) => {
-      // Create new folder if needed.
-      if (typeof currentDir[dir] === 'undefined') currentDir[dir] = {};
-      // Go into the subdirectory.
-      currentDir = currentDir[dir] as Dir;
-    });
-    // We've walked through the path. Register the file in this directory.
-    currentDir[basename(doc.id)] = doc.id;
-  });
-  return treeRoot;
-}
-
-interface PageEntry {
-  type: 'page';
-  label: string;
-  href: string;
-}
-
-function makePageEntry(id: CollectionEntry<'docs'>['id']): PageEntry {
-  const doc = docs.find((doc) => doc.id === id);
-  return {
-    type: 'page',
-    label: doc.data.title,
-    href: slugToPathname(doc.slug),
-  };
-}
-
-interface Category {
-  type: 'category';
-  label: string;
-  entries: (PageEntry | Category)[];
-}
-
-function makeCategory(dir: Dir, fullPath: string, dirName: string): Category {
-  const entries = Object.entries(dir).map(([key, dirOrId]) =>
-    dirToItem(dirOrId, `${fullPath}/${key}`, key)
-  );
-  return {
-    type: 'category',
-    label: dirName,
-    entries,
-  };
-}
-
-function dirToItem(dirOrId: Dir[string], fullPath: string, dirName: string) {
-  return typeof dirOrId === 'string'
-    ? makePageEntry(dirOrId)
-    : makeCategory(dirOrId, fullPath, dirName);
-}
-
-function makeSidebar(tree: Dir) {
-  return Object.entries(tree).map(([key, dirOrId]) =>
-    dirToItem(dirOrId, key, key)
-  );
-}
-
-const sidebar = makeSidebar(treeify(docs));
+const sidebar = getSidebar(Astro.props.currentSlug);
 ---
 
 <nav>
-  <ul>
-    {
-      sidebar.map((entry) => (
-        <li>
-          {entry.type === 'page' ? (
-            <a href={entry.href}>{entry.label}</a>
-          ) : (
-            <strong>{entry.label}</strong>
-            <ul>
-              {entry.entries.map((entry) => (
-                <li>
-                  {entry.type === 'page' && (
-                    <a href={entry.href}>{entry.label}</a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))
-    }
-  </ul>
+  <SidebarSublist sublist={sidebar} />
   <p>
     <small>
-      generated from the file structure 👆<br>
-      alphabetical 😱<br>
+      generated from the file structure 👆<br />
+      alphabetical 😱<br />
       TODO: make configurable
     </small>
   </p>
@@ -123,11 +24,5 @@ const sidebar = makeSidebar(treeify(docs));
 <style>
   nav {
     display: block;
-  }
-  ul {
-    line-height: 2;
-  }
-  ul strong {
-    text-transform: uppercase;
   }
 </style>

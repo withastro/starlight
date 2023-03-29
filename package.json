@@ -4,5 +4,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {},
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "astro": "^2.1.7"
+  }
 }

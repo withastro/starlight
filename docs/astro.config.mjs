@@ -7,6 +7,20 @@ export default defineConfig({
     starbook({
       title: 'StarBook',
       tagline: 'Launch your next docs with Astro',
+      locales: {
+        root: {
+          label: 'English',
+          lang: 'en',
+        },
+        de: {
+          label: 'Deutsch',
+          lang: 'de',
+        },
+        'fr-ca': {
+          label: 'Français canadien',
+          lang: 'fr-CA',
+        },
+      },
     }),
   ],
 });
