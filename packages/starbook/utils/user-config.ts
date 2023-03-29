@@ -25,8 +25,6 @@ const LocaleSchema = z.object({
     ),
 });
 
-const ProcessedLocaleSchema = LocaleSchema.required({ lang: true });
-
 export const StarbookConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
@@ -34,8 +32,24 @@ export const StarbookConfigSchema = z.object({
     .describe(
       'Title for your website. Will be used in metadata and as browser tab title.'
     ),
+
   /** The tagline for your website. */
   tagline: z.string().optional().describe('The tagline for your website.'),
+
+  /** Configure the defaults for the table of contents on each page. */
+  tableOfContents: z
+    .object({
+      /** The level to start including headings at in the table of contents. Default: 2. */
+      minHeadingLevel: z.number().int().min(1).max(6).optional().default(2),
+      /** The level to stop including headings at in the table of contents. Default: 3. */
+      maxHeadingLevel: z.number().int().min(1).max(6).optional().default(3),
+    })
+    .optional()
+    .default({ minHeadingLevel: 2, maxHeadingLevel: 3 })
+    .refine((toc) => toc.minHeadingLevel <= toc.maxHeadingLevel, {
+      message: 'minHeadingLevel must be less than or equal to maxHeadingLevel',
+    }),
+
   /** Configure locales for internationalization (i18n). */
   locales: z
     .object({
