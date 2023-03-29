@@ -52,7 +52,10 @@ export function getSidebar(
       const dir = dirname(doc.id);
       // Return no breadcrumbs for items in the root directory.
       if (dir === '.') return [];
-      return dir.split('/');
+      const breadcrumbs = dir.split('/');
+      // If we’re in a localized root, ignore the base lang directory.
+      if (breadcrumbs[0] === locale) return breadcrumbs.slice(1);
+      return breadcrumbs;
     }
     const treeRoot: Dir = {};
     docs.forEach((doc) => {
