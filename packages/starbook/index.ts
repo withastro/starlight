@@ -2,13 +2,17 @@ import type { AstroIntegration, AstroUserConfig, ViteUserConfig } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { StarbookConfig, StarbookConfigSchema } from './utils/user-config';
+import {
+  StarBookUserConfig,
+  StarbookConfig,
+  StarbookConfigSchema,
+} from './utils/user-config';
 
 const virtualModuleId = 'virtual:starbook/user-config';
 const resolvedVirtualModuleId = '\0' + virtualModuleId;
 
 export default function StarbookIntegration(
-  opts: StarbookConfig
+  opts: StarBookUserConfig
 ): AstroIntegration {
   const config = StarbookConfigSchema.parse(opts);
 

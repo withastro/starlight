@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPathsResult, InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
+import config from 'virtual:starbook/user-config';
 import Header from './components/Header.astro';
 import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
@@ -46,7 +47,9 @@ const { Content, headings } = await render();
         </div>
         <aside>
           <h2>On this page</h2>
-          <TableOfContents toc={generateToC(headings)} />
+          <TableOfContents
+            toc={generateToC(headings, config.tableOfContents)}
+          />
         </aside>
       </main>
     </div>

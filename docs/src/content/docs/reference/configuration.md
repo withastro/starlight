@@ -12,6 +12,13 @@ You can pass the following options to the `starbook` integration.
 
 Set the title for your website. Will be used in metadata and in the browser tab title.
 
+### `tableOfContents`
+
+**type:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`
+**default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+
+Configure the table of contents shown on the right of each page. By default, `<h2>` and `<h3>` headings will be included in this table of contents.
+
 ### `locales`
 
 **type:** `{ [dir: string]: LocaleConfig }`
