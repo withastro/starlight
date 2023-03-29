@@ -81,3 +81,4 @@ export const StarbookConfigSchema = z.object({
 });
 
 export type StarbookConfig = z.infer<typeof StarbookConfigSchema>;
+export type StarBookUserConfig = z.input<typeof StarbookConfigSchema>;
