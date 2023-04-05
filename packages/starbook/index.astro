@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
 import { slugToLang, slugToLocale, slugToParam } from './utils/slugs';
+import HeadSEO from './components/HeadSEO.astro';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -29,10 +30,7 @@ const locale = slugToLocale(slug);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-
-    <title>{data.title}</title>
-
+    <HeadSEO data={data} lang={lang} />
     <link
       rel="stylesheet"
       href="https://unpkg.com/papercss@1.9.1/dist/paper.min.css"
