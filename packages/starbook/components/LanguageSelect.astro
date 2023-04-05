@@ -1,31 +1,17 @@
 ---
 import config from 'virtual:starbook/user-config';
+import { localizedUrl } from '../utils/localizedUrl';
 
 interface Props {
   locale: string | undefined;
 }
 
-const { pathname } = Astro.url;
-
 /**
  * Get the equivalent of the current page path for the passed locale.
  */
-const localizedPathname = (locale: string | undefined): string => {
-  if (!config.locales) {
-    // i18n is not configured on this site, no localization required.
-    return pathname;
-  }
-  const [_leadingSlash, baseSegment] = pathname.split('/');
-  if (baseSegment && baseSegment in config.locales) {
-    // We’re in a localized route, substitute the new locale (or strip for root lang).
-    return locale
-      ? pathname.replace(baseSegment, locale)
-      : pathname.replace('/' + baseSegment, '');
-  } else {
-    // We’re either in the root language. Inject the new locale if we have one.
-    return locale ? '/' + locale + pathname : pathname;
-  }
-};
+function localizedPathname(locale: string | undefined): string {
+  return localizedUrl(Astro.url, locale).pathname;
+}
 ---
 
 {
@@ -53,7 +39,7 @@ const localizedPathname = (locale: string | undefined): string => {
         <select value={localizedPathname(Astro.props.locale)}>
           {Object.entries(config.locales).map(([code, locale]) => (
             <option
-              value={localizedPathname(code === 'root' ? '' : code)}
+              value={localizedPathname(code)}
               selected={code === Astro.props.locale}
             >
               <span>{locale!.label}&nbsp;&nbsp;&nbsp;</span>
