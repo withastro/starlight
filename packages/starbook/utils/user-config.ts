@@ -33,6 +33,22 @@ export const StarbookConfigSchema = z.object({
       'Title for your website. Will be used in metadata and as browser tab title.'
     ),
 
+  /** Description metadata for your website. Can be used in page metadata. */
+  description: z
+    .string()
+    .optional()
+    .describe(
+      'Description metadata for your website. Can be used in page metadata.'
+    ),
+
+  /** Optional details about the social media accounts for this site. */
+  social: z
+    .object({
+      /** Main Twitter handle for this site, e.g. `'astrodotbuild'`. */
+      twitter: z.string().optional(),
+    })
+    .optional(),
+
   /** The tagline for your website. */
   tagline: z.string().optional().describe('The tagline for your website.'),
 

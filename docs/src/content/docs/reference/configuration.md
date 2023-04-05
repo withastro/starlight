@@ -12,6 +12,12 @@ You can pass the following options to the `starbook` integration.
 
 Set the title for your website. Will be used in metadata and in the browser tab title.
 
+### `description`
+
+**type:** `string`
+
+Set the description for your website. Used in metadata shared with search engines in the `<meta name="description">` tag if `description` is not set in a page’s frontmatter.
+
 ### `tableOfContents`
 
 **type:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`
@@ -97,3 +103,16 @@ starbook({
 ```
 
 For example, this allows you to serve `/getting-started/` as an English route and use `/fr/getting-started/` as the equivalent French page.
+
+### `social`
+
+Optional details about the social media accounts for this site.
+
+```js
+starbook({
+  social: {
+    // Main Twitter handle for this site
+    twitter: 'astrodotbuild',
+  },
+});
+```
