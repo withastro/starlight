@@ -2,6 +2,7 @@ import type { AstroIntegration, AstroUserConfig, ViteUserConfig } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { starbookAsides } from './integrations/asides';
 import {
   StarBookUserConfig,
   StarbookConfig,
@@ -27,6 +28,9 @@ export default function StarbookIntegration(
         const newConfig: AstroUserConfig = {
           vite: {
             plugins: [vitePluginStarBookUserConfig(config)],
+          },
+          markdown: {
+            remarkPlugins: [...starbookAsides()],
           },
         };
         updateConfig(newConfig);
