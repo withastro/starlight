@@ -1,4 +1,9 @@
-import type { AstroIntegration, AstroUserConfig, ViteUserConfig } from 'astro';
+import type {
+  AstroConfig,
+  AstroIntegration,
+  AstroUserConfig,
+  ViteUserConfig,
+} from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,25 +14,22 @@ import {
   StarbookConfigSchema,
 } from './utils/user-config';
 
-const virtualModuleId = 'virtual:starbook/user-config';
-const resolvedVirtualModuleId = '\0' + virtualModuleId;
-
 export default function StarbookIntegration(
   opts: StarBookUserConfig
 ): AstroIntegration {
-  const config = StarbookConfigSchema.parse(opts);
+  const userConfig = StarbookConfigSchema.parse(opts);
 
   return {
     name: 'starbook',
     hooks: {
-      'astro:config:setup': ({ injectRoute, updateConfig }) => {
+      'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
         injectRoute({
           pattern: '[...slug]',
           entryPoint: 'starbook/index.astro',
         });
         const newConfig: AstroUserConfig = {
           vite: {
-            plugins: [vitePluginStarBookUserConfig(config)],
+            plugins: [vitePluginStarBookUserConfig(userConfig, config)],
           },
           markdown: {
             remarkPlugins: [...starbookAsides()],
@@ -52,18 +54,36 @@ export default function StarbookIntegration(
   };
 }
 
+function resolveVirtualModuleId(id: string) {
+  return '\0' + id;
+}
+
 /** Expose the StarBook user config object via a virtual module. */
 function vitePluginStarBookUserConfig(
-  opts: StarbookConfig
+  opts: StarbookConfig,
+  { root }: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
+  const modules = {
+    'virtual:starbook/user-config': `export default ${JSON.stringify(opts)}`,
+    'virtual:starbook/project-context': `export default ${JSON.stringify({
+      root,
+    })}`,
+  };
+  const resolutionMap = Object.fromEntries(
+    (Object.keys(modules) as (keyof typeof modules)[]).map((key) => [
+      resolveVirtualModuleId(key),
+      key,
+    ])
+  );
+
   return {
     name: 'vite-plugin-starbook-user-config',
     resolveId(id): string | void {
-      if (id === virtualModuleId) return resolvedVirtualModuleId;
+      if (id in modules) return resolveVirtualModuleId(id);
     },
     load(id): string | void {
-      if (id === resolvedVirtualModuleId)
-        return `export default ${JSON.stringify(opts)}`;
+      const resolution = resolutionMap[id];
+      if (resolution) return modules[resolution];
     },
   };
 }
