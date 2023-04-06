@@ -8,6 +8,7 @@ import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
 import { slugToLang, slugToLocale, slugToParam } from './utils/slugs';
 import HeadSEO from './components/HeadSEO.astro';
+import LastUpdated from './components/LastUpdated.astro';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { render, data, slug } = Astro.props;
+const { render, data, slug, id } = Astro.props;
 const { Content, headings } = await render();
 const lang = slugToLang(slug);
 const locale = slugToLocale(slug);
@@ -44,6 +45,9 @@ const locale = slugToLocale(slug);
         <div class="content" data-pagefind-body>
           <h1>{data.title}</h1>
           <Content />
+          <footer>
+            <LastUpdated id={id} lang={lang} />
+          </footer>
         </div>
         <aside>
           <h2>On this page</h2>

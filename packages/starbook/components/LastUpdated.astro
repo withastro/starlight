@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { fileURLToPath } from 'node:url';
+import project from 'virtual:starbook/project-context';
+import { getFileCommitDate } from '../utils/git';
+
+interface Props {
+  id: CollectionEntry<'docs'>['id'];
+  lang: string;
+}
+
+const { id, lang } = Astro.props;
+
+const currentFilePath = fileURLToPath(
+  new URL('src/content/docs/' + id, project.root)
+);
+---
+
+Last updated: {
+  getFileCommitDate(currentFilePath).date.toLocaleDateString(lang, {
+    dateStyle: 'medium',
+  })
+}
