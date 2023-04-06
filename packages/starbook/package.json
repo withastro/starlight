@@ -27,6 +27,7 @@
   "dependencies": {
     "@types/mdast": "^3.0.11",
     "bcp-47": "^2.1.0",
+    "execa": "^7.1.1",
     "hastscript": "^7.2.0",
     "pagefind": "^0.12.0",
     "remark-directive": "^2.0.1",
