@@ -66,6 +66,15 @@ export const StarbookConfigSchema = z.object({
       message: 'minHeadingLevel must be less than or equal to maxHeadingLevel',
     }),
 
+  /** Enable and configure “Edit this page” links. */
+  editLink: z
+    .object({
+      /** Set the base URL for edit links. The final link will be `baseUrl` + the current page path. */
+      baseUrl: z.string().url().optional(),
+    })
+    .optional()
+    .default({}),
+
   /** Configure locales for internationalization (i18n). */
   locales: z
     .object({

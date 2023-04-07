@@ -7,6 +7,9 @@ export default defineConfig({
     starbook({
       title: 'StarBook',
       tagline: 'Launch your next docs with Astro',
+      editLink: {
+        baseUrl: 'https://github.com/withastro/starbook/edit/main/docs/',
+      },
       locales: {
         root: {
           label: 'English',

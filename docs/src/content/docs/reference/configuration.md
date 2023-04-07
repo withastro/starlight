@@ -25,6 +25,22 @@ Set the description for your website. Used in metadata shared with search engine
 
 Configure the table of contents shown on the right of each page. By default, `<h2>` and `<h3>` headings will be included in this table of contents.
 
+### `editLink`
+
+**type:** `{ baseUrl: string }`
+
+Enable “Edit this page” links by setting the base URL these should use. The final link will be `editLink.baseUrl` + the current page path. For example, to enable editing pages in the `withastro/starbook` repo on GitHub:
+
+```js
+starbook({
+  editLink: {
+    baseUrl: 'https://github.com/withastro/starbook/edit/main/',
+  },
+});
+```
+
+With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starbook/edit/main/src/docs/introduction.md`.
+
 ### `locales`
 
 **type:** `{ [dir: string]: LocaleConfig }`

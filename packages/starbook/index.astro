@@ -9,6 +9,7 @@ import { generateToC } from './components/TableOfContents/generateToC';
 import { slugToLang, slugToLocale, slugToParam } from './utils/slugs';
 import HeadSEO from './components/HeadSEO.astro';
 import LastUpdated from './components/LastUpdated.astro';
+import EditLink from './components/EditLink.astro';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -54,6 +55,7 @@ const locale = slugToLocale(slug);
           <TableOfContents
             toc={generateToC(headings, config.tableOfContents)}
           />
+          <EditLink data={data} id={id} />
         </aside>
       </main>
     </div>
