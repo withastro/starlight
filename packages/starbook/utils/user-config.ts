@@ -25,6 +25,52 @@ const LocaleSchema = z.object({
     ),
 });
 
+const LinkItemSchema = z.object({
+  /** The visible label for this item in the sidebar. */
+  label: z.string(),
+  /** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
+  link: z.string(),
+});
+
+const AutoSidebarGroupSchema = z.object({
+  /** The visible label for this item in the sidebar. */
+  label: z.string(),
+  /** Enable autogenerating a sidebar category from a specific docs directory. */
+  autogenerate: z.object({
+    /** The directory to generate sidebar items for. */
+    directory: z.string(),
+    // TODO: not supported by Docusaurus but would be good to have
+    /** How many directories deep to include from this directory in the sidebar. Default: `Infinity`. */
+    // depth: z.number().optional(),
+  }),
+});
+
+type ManualSidebarGroupItem = {
+  /** The visible label for this item in the sidebar. */
+  label: string;
+  /** Array of links and subcategories to display in this category. */
+  items: Array<
+    | z.infer<typeof LinkItemSchema>
+    | z.infer<typeof AutoSidebarGroupSchema>
+    | ManualSidebarGroupItem
+  >;
+};
+
+const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroupItem> = z.object({
+  /** The visible label for this item in the sidebar. */
+  label: z.string(),
+  /** Array of links and subcategories to display in this category. */
+  items: z.lazy(() =>
+    z
+      .union([LinkItemSchema, ManualSidebarGroupSchema, AutoSidebarGroupSchema])
+      .array()
+  ),
+});
+
+const SidebarGroupSchema: z.ZodType<
+  ManualSidebarGroupItem | z.infer<typeof AutoSidebarGroupSchema>
+> = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
+
 export const StarbookConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
@@ -117,6 +163,9 @@ export const StarbookConfigSchema = z.object({
     })
     .optional()
     .describe('Configure locales for internationalization (i18n).'),
+
+  /** Configure your site’s sidebar navigation items. */
+  sidebar: SidebarGroupSchema.array().optional(),
 });
 
 export type StarbookConfig = z.infer<typeof StarbookConfigSchema>;

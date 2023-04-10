@@ -41,6 +41,63 @@ starbook({
 
 With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starbook/edit/main/src/docs/introduction.md`.
 
+### `sidebar`
+
+**type:** [`SidebarGroup[]`](#sidebargroup)
+
+Configure your site’s sidebar navigation items.
+
+A sidebar is an array of groups, each with a `label` for the group and either an `items` array or an `autogenerate` configuration object.
+
+You can manually set the contents of a group using `items`, which is an array that can include links and subgroups. You can also automatically generate the contents of a group from a specific directory of your docs, using `autogenerate`.
+
+```js
+starbook({
+  sidebar: [
+    // A group labelled “Start Here” containing two links.
+    {
+      label: 'Start Here',
+      items: [
+        { label: 'Introduction', link: '/intro' },
+        { label: 'Next Steps', link: '/next-steps' },
+      ],
+    },
+    // A group linking to all pages in the reference directory.
+    {
+      label: 'Reference',
+      autogenerate: {
+        directory: 'reference',
+      },
+    },
+  ],
+});
+```
+
+#### `SidebarGroup`
+
+```ts
+type SidebarGroup =
+  | {
+      label: string;
+      items: Array<LinkItem | SidebarGroup>;
+    }
+  | {
+      label: string;
+      autogenerate: {
+        directory: string;
+      };
+    };
+```
+
+#### `LinkItem`
+
+```ts
+interface LinkItem {
+  label: string;
+  link: string;
+}
+```
+
 ### `locales`
 
 **type:** `{ [dir: string]: LocaleConfig }`
