@@ -25,12 +25,13 @@ const LocaleSchema = z.object({
     ),
 });
 
-const LinkItemSchema = z.object({
+const SidebarLinkItemSchema = z.object({
   /** The visible label for this item in the sidebar. */
   label: z.string(),
   /** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
   link: z.string(),
 });
+export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
 const AutoSidebarGroupSchema = z.object({
   /** The visible label for this item in the sidebar. */
@@ -44,31 +45,43 @@ const AutoSidebarGroupSchema = z.object({
     // depth: z.number().optional(),
   }),
 });
+export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
-type ManualSidebarGroupItem = {
+type ManualSidebarGroup = {
   /** The visible label for this item in the sidebar. */
   label: string;
   /** Array of links and subcategories to display in this category. */
   items: Array<
-    | z.infer<typeof LinkItemSchema>
+    | SidebarLinkItem
     | z.infer<typeof AutoSidebarGroupSchema>
-    | ManualSidebarGroupItem
+    | ManualSidebarGroup
   >;
 };
 
-const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroupItem> = z.object({
+const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroup> = z.object({
   /** The visible label for this item in the sidebar. */
   label: z.string(),
   /** Array of links and subcategories to display in this category. */
   items: z.lazy(() =>
     z
-      .union([LinkItemSchema, ManualSidebarGroupSchema, AutoSidebarGroupSchema])
+      .union([
+        SidebarLinkItemSchema,
+        ManualSidebarGroupSchema,
+        AutoSidebarGroupSchema,
+      ])
       .array()
   ),
 });
 
+const SidebarItemSchema = z.union([
+  SidebarLinkItemSchema,
+  ManualSidebarGroupSchema,
+  AutoSidebarGroupSchema,
+]);
+export type SidebarItem = z.infer<typeof SidebarItemSchema>;
+
 const SidebarGroupSchema: z.ZodType<
-  ManualSidebarGroupItem | z.infer<typeof AutoSidebarGroupSchema>
+  ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
 export const StarbookConfigSchema = z.object({

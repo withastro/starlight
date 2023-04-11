@@ -1,13 +1,12 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { getSidebar } from '../utils/navigation';
 import SidebarSublist from './SidebarSublist.astro';
 
 interface Props {
-  currentSlug: CollectionEntry<'docs'>['slug'];
+  locale: string | undefined;
 }
 
-const sidebar = getSidebar(Astro.props.currentSlug);
+const sidebar = getSidebar(Astro.url.pathname, Astro.props.locale);
 ---
 
 <nav>

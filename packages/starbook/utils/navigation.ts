@@ -2,6 +2,11 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import { basename, dirname } from 'node:path';
 import { slugToLocale, slugToPathname } from '../utils/slugs';
 import config from 'virtual:starbook/user-config';
+import type {
+  AutoSidebarGroup,
+  SidebarItem,
+  SidebarLinkItem,
+} from './user-config';
 
 const allDocs = await getCollection('docs');
 
@@ -30,28 +35,98 @@ interface Dir {
   [item: string]: Dir | CollectionEntry<'docs'>['id'];
 }
 
+/** Convert an item in a user’s sidebar config to a sidebar entry. */
+function configItemToEntry(
+  item: SidebarItem,
+  currentPathname: string,
+  locale: string | undefined,
+  docs: CollectionEntry<'docs'>[]
+): SidebarEntry {
+  if ('link' in item) {
+    return linkFromConfig(item, locale, currentPathname);
+  } else if ('autogenerate' in item) {
+    return groupFromAutogenerateConfig(item, locale, docs, currentPathname);
+  } else {
+    return {
+      type: 'group',
+      label: item.label,
+      entries: item.items.map((i) =>
+        configItemToEntry(i, currentPathname, locale, docs)
+      ),
+    };
+  }
+}
+
+/** Autogenerate a group of links from a user’s sidebar config. */
+function groupFromAutogenerateConfig(
+  item: AutoSidebarGroup,
+  locale: string | undefined,
+  docs: CollectionEntry<'docs'>[],
+  currentPathname: string
+): Group {
+  const { directory } = item.autogenerate;
+  const localeDir = locale ? locale + '/' + directory : directory;
+  const dirDocs = docs.filter((doc) => doc.id.startsWith(localeDir));
+  const tree = treeify(dirDocs, localeDir);
+  return {
+    type: 'group',
+    label: item.label,
+    entries: sidebarFromDir(tree, currentPathname, locale),
+  };
+}
+
+/** Check if a string starts with one of `http://` or `https://`. */
+const isAbsolute = (link: string) => /^https?:\/\//.test(link);
+
+/** Create a link entry from a user config object. */
+function linkFromConfig(
+  item: SidebarLinkItem,
+  locale: string | undefined,
+  currentPathname: string
+) {
+  let href = item.link;
+  if (!isAbsolute(href)) {
+    // Ensure user-configured paths start and end with trailing slash.
+    if (href[0] !== '/') href = '/' + href;
+    if (!href.endsWith('/')) href += '/';
+    // Inject current locale into link.
+    if (locale) href = '/' + locale + href;
+  }
+  return makeLink(href, item.label, currentPathname);
+}
+
+/** Create a link entry. */
+function makeLink(href: string, label: string, currentPathname: string): Link {
+  const isCurrent = href === currentPathname;
+  if (!isAbsolute(href)) {
+    href = new URL(href, 'https://eg.co').pathname;
+    /** Base URL with trailing `/` stripped. */
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    if (base) href = base + href;
+  }
+  return { type: 'link', label, href, isCurrent };
+}
+
 /** Get the segments leading to a page. */
 function getBreadcrumbs(
   id: CollectionEntry<'docs'>['id'],
-  locale: string | undefined
+  baseDir: string
 ): string[] {
-  const dir = dirname(id);
+  // Ensure base directory ends in a trailing slash.
+  if (!baseDir.endsWith('/')) baseDir += '/';
+  // Strip base directory from file ID if present.
+  const relativeId = id.startsWith(baseDir) ? id.replace(baseDir, '') : id;
+  let dir = dirname(relativeId);
   // Return no breadcrumbs for items in the root directory.
   if (dir === '.') return [];
-  const breadcrumbs = dir.split('/');
-  // If we’re in a localized root, ignore the base lang directory.
-  if (breadcrumbs[0] === locale) return breadcrumbs.slice(1);
-  return breadcrumbs;
+  return dir.split('/');
 }
 
 /** Turn a flat array of docs into a tree structure. */
-function treeify(
-  docs: CollectionEntry<'docs'>[],
-  locale: string | undefined
-): Dir {
+function treeify(docs: CollectionEntry<'docs'>[], baseDir: string): Dir {
   const treeRoot: Dir = {};
   docs.forEach((doc) => {
-    const breadcrumbs = getBreadcrumbs(doc.id, locale);
+    const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
 
     // Walk down the file's path to generate the fs structure
     let currentDir = treeRoot;
@@ -67,27 +142,25 @@ function treeify(
   return treeRoot;
 }
 
-function makeLink(
+/** Create a link entry for a given content collection entry. */
+function linkFromId(
   id: CollectionEntry<'docs'>['id'],
-  currentSlug: CollectionEntry<'docs'>['slug']
+  currentPathname: string
 ): Link {
   const doc = allDocs.find((doc) => doc.id === id)!;
-  return {
-    type: 'link',
-    label: doc.data.title,
-    href: slugToPathname(doc.slug),
-    isCurrent: doc.slug === currentSlug,
-  };
+  return makeLink(slugToPathname(doc.slug), doc.data.title, currentPathname);
 }
 
-function makeGroup(
+/** Create a group entry for a given content collection directory. */
+function groupFromDir(
   dir: Dir,
   fullPath: string,
   dirName: string,
-  currentSlug: CollectionEntry<'docs'>['slug']
+  currentPathname: string,
+  locale: string | undefined
 ): Group {
   const entries = Object.entries(dir).map(([key, dirOrId]) =>
-    dirToItem(dirOrId, `${fullPath}/${key}`, key, currentSlug)
+    dirToItem(dirOrId, `${fullPath}/${key}`, key, currentPathname, locale)
   );
   return {
     type: 'group',
@@ -96,22 +169,35 @@ function makeGroup(
   };
 }
 
+/** C */
 function dirToItem(
   dirOrId: Dir[string],
   fullPath: string,
   dirName: string,
-  currentSlug: CollectionEntry<'docs'>['slug']
+  currentPathname: string,
+  locale: string | undefined
 ): SidebarEntry {
   return typeof dirOrId === 'string'
-    ? makeLink(dirOrId, currentSlug)
-    : makeGroup(dirOrId, fullPath, dirName, currentSlug);
+    ? linkFromId(dirOrId, currentPathname)
+    : groupFromDir(dirOrId, fullPath, dirName, currentPathname, locale);
 }
 
-export function getSidebar(
-  currentSlug: CollectionEntry<'docs'>['slug']
-): SidebarEntry[] {
-  const locale = slugToLocale(currentSlug);
+/** Create a sidebar entry for a given content directory. */
+function sidebarFromDir(
+  tree: Dir,
+  currentPathname: string,
+  locale: string | undefined
+) {
+  return Object.entries(tree).map(([key, dirOrId]) =>
+    dirToItem(dirOrId, key, key, currentPathname, locale)
+  );
+}
 
+/** Get the sidebar for the current page. */
+export function getSidebar(
+  pathname: string,
+  locale: string | undefined
+): SidebarEntry[] {
   let docs = allDocs;
   if (config.locales) {
     if (locale && locale in config.locales) {
@@ -123,8 +209,12 @@ export function getSidebar(
     }
   }
 
-  const tree = treeify(docs, locale);
-  return Object.entries(tree).map(([key, dirOrId]) =>
-    dirToItem(dirOrId, key, key, currentSlug)
-  );
+  if (config.sidebar) {
+    return config.sidebar.map((group) =>
+      configItemToEntry(group, pathname, locale, docs)
+    );
+  } else {
+    const tree = treeify(docs, locale || '');
+    return sidebarFromDir(tree, pathname, locale);
+  }
 }
