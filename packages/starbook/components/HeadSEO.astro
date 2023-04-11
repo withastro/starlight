@@ -35,6 +35,11 @@ const description = data.description || config.description;
     )
 }
 <meta name="generator" content={Astro.generator} />
+<link
+  rel="shortcut icon"
+  href={import.meta.env.BASE_URL + 'favicon.svg'}
+  type="image/svg+xml"
+/>
 
 <!-- OpenGraph Tags -->
 <meta property="og:title" content={title} />
