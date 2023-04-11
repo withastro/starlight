@@ -78,6 +78,13 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
+/** Ensure the passed path starts and ends with trailing slashes. */
+function ensureLeadingAndTrailingSlashes(href: string): string {
+  if (href[0] !== '/') href = '/' + href;
+  if (href[href.length - 1] !== '/') href += '/';
+  return href;
+}
+
 /** Create a link entry from a user config object. */
 function linkFromConfig(
   item: SidebarLinkItem,
@@ -86,9 +93,7 @@ function linkFromConfig(
 ) {
   let href = item.link;
   if (!isAbsolute(href)) {
-    // Ensure user-configured paths start and end with trailing slash.
-    if (href[0] !== '/') href = '/' + href;
-    if (!href.endsWith('/')) href += '/';
+    href = ensureLeadingAndTrailingSlashes(href);
     // Inject current locale into link.
     if (locale) href = '/' + locale + href;
   }
@@ -98,7 +103,7 @@ function linkFromConfig(
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
   if (!isAbsolute(href)) {
-    href = new URL(href, 'https://eg.co').pathname;
+    href = ensureLeadingAndTrailingSlashes(href);
     /** Base URL with trailing `/` stripped. */
     const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     if (base) href = base + href;
