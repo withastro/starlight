@@ -24,6 +24,24 @@ export default defineConfig({
           lang: 'fr-CA',
         },
       },
+      sidebar: [
+        {
+          label: 'Start Here',
+          items: [{ label: 'Getting Started', link: 'getting-started' }],
+        },
+        {
+          label: 'Guides',
+          items: [
+            { label: 'Internationalization (i18n)', link: 'guides/i18n' },
+          ],
+        },
+        {
+          label: 'Reference',
+          autogenerate: {
+            directory: 'reference',
+          },
+        },
+      ],
     }),
   ],
 });
