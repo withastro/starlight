@@ -6,7 +6,12 @@ import Header from './components/Header.astro';
 import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
-import { slugToLang, slugToLocale, slugToParam } from './utils/slugs';
+import {
+  slugToDir,
+  slugToLang,
+  slugToLocale,
+  slugToParam,
+} from './utils/slugs';
 import HeadSEO from './components/HeadSEO.astro';
 import LastUpdated from './components/LastUpdated.astro';
 import EditLink from './components/EditLink.astro';
@@ -26,9 +31,10 @@ const { render, data, slug, id } = Astro.props;
 const { Content, headings } = await render();
 const lang = slugToLang(slug);
 const locale = slugToLocale(slug);
+const dir = slugToDir(slug);
 ---
 
-<html lang={lang}>
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
