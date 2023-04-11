@@ -1,0 +1,40 @@
+---
+import type { Link } from '../utils/navigation';
+
+interface Props {
+  prev: Link | undefined;
+  next: Link | undefined;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav>
+  {
+    prev && (
+      <a href={prev.href} rel="prev">
+        Previous
+        <br />
+        {prev.label}
+      </a>
+    )
+  }
+  {
+    next && (
+      <a href={next.href} rel="next">
+        Next
+        <br />
+        {next.label}
+      </a>
+    )
+  }
+</nav>
+
+<style>
+  [rel='prev'] {
+    margin-inline-end: auto;
+  }
+  [rel='next'] {
+    margin-inline-start: auto;
+  }
+</style>

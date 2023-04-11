@@ -1,6 +1,6 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import { basename, dirname } from 'node:path';
-import { slugToLocale, slugToPathname } from '../utils/slugs';
+import { slugToPathname } from '../utils/slugs';
 import config from 'virtual:starbook/user-config';
 import type {
   AutoSidebarGroup,
@@ -10,7 +10,7 @@ import type {
 
 const allDocs = await getCollection('docs');
 
-interface Link {
+export interface Link {
   type: 'link';
   label: string;
   href: string;
@@ -217,4 +217,23 @@ export function getSidebar(
     const tree = treeify(docs, locale || '');
     return sidebarFromDir(tree, pathname, locale);
   }
+}
+
+/** Turn the nested tree structure of a sidebar into a flat list of all the links. */
+function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
+  return sidebar.flatMap((entry) =>
+    entry.type === 'group' ? flattenSidebar(entry.entries) : entry
+  );
+}
+
+/** Get previous/next pages in the sidebar if there are any. */
+export function getPrevNextLinks(sidebar: SidebarEntry[]): {
+  prev: Link | undefined;
+  next: Link | undefined;
+} {
+  const entries = flattenSidebar(sidebar);
+  const currentIndex = entries.findIndex((entry) => entry.isCurrent);
+  const prev = entries[currentIndex - 1];
+  const next = entries[currentIndex + 1];
+  return { prev, next };
 }

@@ -1,16 +1,14 @@
 ---
-import { getSidebar } from '../utils/navigation';
+import type { getSidebar } from '../utils/navigation';
 import SidebarSublist from './SidebarSublist.astro';
 
 interface Props {
-  locale: string | undefined;
+  sidebar: ReturnType<typeof getSidebar>;
 }
-
-const sidebar = getSidebar(Astro.url.pathname, Astro.props.locale);
 ---
 
 <nav>
-  <SidebarSublist sublist={sidebar} />
+  <SidebarSublist sublist={Astro.props.sidebar} />
 </nav>
 
 <style>
