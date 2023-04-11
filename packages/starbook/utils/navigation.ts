@@ -97,13 +97,13 @@ function linkFromConfig(
 
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
-  const isCurrent = href === currentPathname;
   if (!isAbsolute(href)) {
     href = new URL(href, 'https://eg.co').pathname;
     /** Base URL with trailing `/` stripped. */
     const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     if (base) href = base + href;
   }
+  const isCurrent = href === currentPathname;
   return { type: 'link', label, href, isCurrent };
 }
 
