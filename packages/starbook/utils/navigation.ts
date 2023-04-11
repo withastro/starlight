@@ -169,7 +169,7 @@ function groupFromDir(
   };
 }
 
-/** C */
+/** Create a sidebar entry for a directory or content ID. */
 function dirToItem(
   dirOrId: Dir[string],
   fullPath: string,
