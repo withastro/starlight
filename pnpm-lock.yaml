@@ -19,6 +19,9 @@ importers:
 
   packages/starbook:
     dependencies:
+      '@pagefind/default-ui':
+        specifier: ^0.12.0
+        version: 0.12.0
       '@types/mdast':
         specifier: ^3.0.11
         version: 3.0.11
@@ -581,6 +584,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+
+  /@pagefind/default-ui@0.12.0:
+    resolution: {integrity: sha512-O+27oCGwIjHjcb3AMJ9J1KWwXqv+hm71jCfTyUf+BrJusNBpgX4BaqKRRx8rbElYew2aglqf9yl5wYJUt5w33Q==}
+    dev: false
 
   /@pkgr/utils@2.3.1:
     resolution: {integrity: sha512-wfzX8kc1PMyUILA+1Z/EqoE4UCXGy0iRGMhPwdfae1+f0OXlLqCk+By+aMzgJBzR9AzS4CDizioG6Ss1gvAFJw==}

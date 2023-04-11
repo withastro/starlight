@@ -1,21 +1,30 @@
-<link href="/_pagefind/pagefind-ui.css" rel="stylesheet" />
-<script src="/_pagefind/pagefind-ui.js" type="text/javascript"></script>
-<div id="search"></div>
-<script is:inline>
+---
+import '@pagefind/default-ui/css/ui.css';
+---
+
+<div class="search-container">
+  <div id="search"></div>
+</div>
+<script>
   window.addEventListener('DOMContentLoaded', () => {
-    new PagefindUI({ element: '#search' });
+    requestIdleCallback(async () => {
+      const { PagefindUI } = await import('@pagefind/default-ui');
+      new PagefindUI({ element: '#search' });
+    });
   });
 </script>
 
 <style>
+  .search-container {
+    position: relative;
+    width: 100%;
+  }
   #search {
     position: absolute;
     top: 0;
-    right: 0;
     width: calc(100% - 1rem);
     max-width: 22rem;
     background: white;
-    padding: 0.5rem;
-    z-index: 9999999;
+    padding: 0 0.5rem 0.5rem;
   }
 </style>
