@@ -68,6 +68,9 @@ function vitePluginStarBookUserConfig(
     'virtual:starbook/project-context': `export default ${JSON.stringify({
       root,
     })}`,
+    'virtual:starbook/user-css': opts.customCss
+      .map((id) => `import "${id}";`)
+      .join(''),
   };
   const resolutionMap = Object.fromEntries(
     (Object.keys(modules) as (keyof typeof modules)[]).map((key) => [

@@ -5,3 +5,5 @@ declare module 'virtual:starbook/user-config' {
 declare module 'virtual:starbook/project-context' {
   export default { root: string };
 }
+
+declare module 'virtual:starbook/user-css' {}
