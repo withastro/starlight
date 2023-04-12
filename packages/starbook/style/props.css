@@ -1,0 +1,74 @@
+:root {
+  /* Colors (dark mode) */
+  --sb-color-black: hsl(223, 13%, 10%);
+  --sb-color-gray-1: hsl(231, 23%, 94%);
+  --sb-color-gray-2: hsl(228, 8%, 77%);
+  --sb-color-gray-3: hsl(221, 8%, 56%);
+  --sb-color-gray-4: hsl(225, 9%, 36%);
+  --sb-color-gray-5: hsl(222, 11%, 23%);
+  --sb-color-gray-6: hsl(222, 13%, 16%);
+  --sb-color-white: hsl(0, 0%, 100%);
+
+  --sb-color-accent-dark: hsl(234, 54%, 20%);
+  --sb-color-accent: hsl(234, 100%, 60%);
+  --sb-color-accent-light: hsl(235, 100%, 87%);
+
+  /* Shadows (dark mode) */
+  --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.12),
+    0px 2px 1px hsla(0, 0%, 0%, 0.24);
+  --sb-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.08),
+    0px 5px 2px hsla(0, 0%, 0%, 0.08), 0px 3px 2px hsla(0, 0%, 0%, 0.12),
+    0px 1px 1px hsla(0, 0%, 0%, 0.15);
+  --sb-shadow-lg: 0px 25px 7px hsla(0, 0%, 0%, 0.03),
+    0px 16px 6px hsla(0, 0%, 0%, 0.1), 0px 9px 5px hsla(223, 13%, 10%, 0.33),
+    0px 4px 4px hsla(0, 0%, 0%, 0.75), 0px 4px 2px hsla(0, 0%, 0%, 0.25);
+
+  /* Text size and line height */
+  --sb-text-sm: 0.8125rem; /* 13px */
+  --sb-text-base: 1rem; /* 16px */
+  --sb-text-lg: 1.125rem; /* 18px */
+  --sb-text-xl: 1.25rem; /* 20px */
+  --sb-text-2xl: 1.5rem; /* 24px */
+  --sb-text-3xl: 1.8125rem; /* 29px */
+  --sb-text-4xl: 2.1875rem; /* 35px */
+  --sb-text-5xl: 2.625rem; /* 42px */
+
+  --sb-text-body: var(--sb-text-base);
+  --sb-text-body-sm: var(--sb-text-sm);
+  --sb-text-code: var(--sb-text-base);
+  --sb-text-code-sm: var(--sb-text-sm);
+  --sb-text-h1: var(--sb-text-5xl);
+  --sb-text-h2: var(--sb-text-4xl);
+  --sb-text-h3: var(--sb-text-3xl);
+  --sb-text-h4: var(--sb-text-2xl);
+  --sb-text-h5: var(--sb-text-lg);
+
+  --sb-line-height: 1.8;
+  --sb-line-height--headings: 1.2;
+}
+
+:root[data-theme='light'] {
+  /* Colours (light mode) */
+  --sb-color-white: #17191e;
+  --sb-color-gray-1: #23262d;
+  --sb-color-gray-2: #343841;
+  --sb-color-gray-3: #545864;
+  --sb-color-gray-4: #858b98;
+  --sb-color-gray-5: #bfc1c9;
+  --sb-color-gray-6: #ecedf3;
+  --sb-color-black: #ffffff;
+
+  --sb-color-accent-dark: #0f1b8a;
+  --sb-color-accent: #3d4ef5;
+  --sb-color-accent-light: #cfd3fc;
+
+  /* Shadows (light mode) */
+  --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06),
+    0px 2px 1px hsla(0, 0%, 0%, 0.06);
+  --sb-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.03),
+    0px 5px 2px hsla(0, 0%, 0%, 0.03), 0px 3px 2px hsla(0, 0%, 0%, 0.06),
+    0px 1px 1px hsla(0, 0%, 0%, 0.06);
+  --sb-shadow-lg: 0px 25px 7px rgba(0, 0, 0, 0.01),
+    0px 16px 6px hsla(0, 0%, 0%, 0.03), 0px 9px 5px hsla(223, 13%, 10%, 0.08),
+    0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04);
+}
