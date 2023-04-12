@@ -179,6 +179,20 @@ export const StarbookConfigSchema = z.object({
 
   /** Configure your site’s sidebar navigation items. */
   sidebar: SidebarGroupSchema.array().optional(),
+
+  /**
+   * Provide CSS files to customize the look and feel of StarBook.
+   *
+   * Supports local CSS files relative to the root of your project,
+   * e.g. `'/src/custom.css'`, and CSS you installed as an npm
+   * module, e.g. `'@fontsource/roboto'`.
+   *
+   * @example
+   * starbook({
+   *  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+   * })
+   */
+  customCss: z.string().array().optional().default([]),
 });
 
 export type StarbookConfig = z.infer<typeof StarbookConfigSchema>;
