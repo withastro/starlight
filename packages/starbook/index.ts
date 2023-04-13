@@ -22,14 +22,26 @@ export default function StarbookIntegration(
   return {
     name: 'starbook',
     hooks: {
-      'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
+      'astro:config:setup': ({
+        config,
+        injectRoute,
+        updateConfig,
+        command,
+      }) => {
         injectRoute({
           pattern: '[...slug]',
           entryPoint: 'starbook/index.astro',
         });
+        injectRoute({
+          pattern: '[...path]',
+          entryPoint: 'starbook/pagefind.ts',
+        });
         const newConfig: AstroUserConfig = {
           vite: {
             plugins: [vitePluginStarBookUserConfig(userConfig, config)],
+            ssr: {
+              external: command === 'dev' ? ['@astrojs/markdown-remark'] : [],
+            },
           },
           markdown: {
             remarkPlugins: [...starbookAsides()],

@@ -19,6 +19,9 @@ importers:
 
   packages/starbook:
     dependencies:
+      '@astrojs/markdown-remark':
+        specifier: ^2.1.3
+        version: 2.1.3(astro@2.1.7)
       '@pagefind/default-ui':
         specifier: ^0.12.0
         version: 0.12.0
@@ -35,8 +38,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       pagefind:
-        specifier: ^0.12.0
-        version: 0.12.0
+        specifier: 1.0.0-alpha.4
+        version: 1.0.0-alpha.4
       remark-directive:
         specifier: ^2.0.1
         version: 2.0.1
@@ -89,10 +92,10 @@ packages:
       vscode-languageserver-types: 3.17.3
       vscode-uri: 3.0.7
 
-  /@astrojs/markdown-remark@2.1.2(astro@2.1.7):
-    resolution: {integrity: sha512-rYkmFEv2w7oEk6ZPgxHkhWzwcxSUGc1vJU0cbCu5sHF8iFNnc1cmMsjXWa5DrU5sCEf8VVYE1iFlbbnFzvHQJw==}
+  /@astrojs/markdown-remark@2.1.3(astro@2.1.7):
+    resolution: {integrity: sha512-Di8Qbit9p7L7eqKklAJmiW9nVD+XMsNHpaNzCLduWjOonDu9fVgEzdjeDrTVCDtgrvkfhpAekuNXrp5+w4F91g==}
     peerDependencies:
-      astro: ^2.1.5
+      astro: ^2.2.0
     dependencies:
       '@astrojs/prism': 2.1.1
       astro: 2.1.7(@types/node@18.15.11)
@@ -585,9 +588,49 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
+  /@pagefind/darwin-arm64@1.0.0-alpha.4:
+    resolution: {integrity: sha512-GRnVOXO4DizWBvJWvsO346evi8IRa8OiGWjdNhXoeAaQUGahPi4SlMkt3WyocSOnKI0k1lh7lSXZijLZqqYnVg==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@pagefind/darwin-x64@1.0.0-alpha.4:
+    resolution: {integrity: sha512-quNvLDrHBp2kmp2PBWSThkiKqHGv9v68NyyTkXdkfM+BST5bQs5zg3rxHV39rVM2wXsM5jYxuoP+en35dOyRZg==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /@pagefind/default-ui@0.12.0:
     resolution: {integrity: sha512-O+27oCGwIjHjcb3AMJ9J1KWwXqv+hm71jCfTyUf+BrJusNBpgX4BaqKRRx8rbElYew2aglqf9yl5wYJUt5w33Q==}
     dev: false
+
+  /@pagefind/linux-arm64@1.0.0-alpha.4:
+    resolution: {integrity: sha512-rLw9kJJ/EwDV4z/IiHz7cQEMvEU1cVgwGaj3vWGvpO6KE9VYcRsCn3gRysVcmjCJGq1YoOUFWFdN41cUGi3Awg==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@pagefind/linux-x64@1.0.0-alpha.4:
+    resolution: {integrity: sha512-PFxXBZxI+TWqDwVNMBAc4yoa+txFYr53j3SgCzsustyEI3BDw6+8dbHj4Ah14w2yU4ybr1jEcxuq3WQDSOCSkA==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@pagefind/windows-x64@1.0.0-alpha.4:
+    resolution: {integrity: sha512-f1UGIPRBOmiHObT2JzUslXCAOoTcYKGKRu04BbSpkEcjI5uHbZH7+Nfkmiy+C6eEzamRqEVwr3nTc6LE/JYyDg==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /@pkgr/utils@2.3.1:
     resolution: {integrity: sha512-wfzX8kc1PMyUILA+1Z/EqoE4UCXGy0iRGMhPwdfae1+f0OXlLqCk+By+aMzgJBzR9AzS4CDizioG6Ss1gvAFJw==}
@@ -686,15 +729,6 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  /agent-base@6.0.2:
-    resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
-    engines: {node: '>= 6.0.0'}
-    dependencies:
-      debug: 4.3.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
     dependencies:
@@ -751,7 +785,7 @@ packages:
     dependencies:
       '@astrojs/compiler': 1.3.0
       '@astrojs/language-server': 0.28.3
-      '@astrojs/markdown-remark': 2.1.2(astro@2.1.7)
+      '@astrojs/markdown-remark': 2.1.3(astro@2.1.7)
       '@astrojs/telemetry': 2.1.0
       '@astrojs/webapi': 2.1.0
       '@babel/core': 7.21.3
@@ -1339,16 +1373,6 @@ packages:
 
   /html-void-elements@2.0.1:
     resolution: {integrity: sha512-0quDb7s97CfemeJAnW9wC0hw78MtW7NU3hqtCD75g2vFlDLt36llsYD7uB7SUzojLMP24N5IatXf7ylGXiGG9A==}
-
-  /https-proxy-agent@5.0.1:
-    resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
-    engines: {node: '>= 6'}
-    dependencies:
-      agent-base: 6.0.2
-      debug: 4.3.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /human-signals@3.0.1:
     resolution: {integrity: sha512-rQLskxnM/5OCldHo+wNXbpVgDn5A17CUoKX+7Sokwaknlq7CdSnphy0W39GU8dw59XiCXmFXDg4fRuckQRKewQ==}
@@ -2032,15 +2056,15 @@ packages:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
 
-  /pagefind@0.12.0:
-    resolution: {integrity: sha512-LHUmlYYweBM6/rK1G+7z2q2WjYeycrB7g5Kuw0w6yMkYztzsEdO2Qj2pJ3z8gsWV8eJsYQyAGOAdqE3SZWlCqA==}
+  /pagefind@1.0.0-alpha.4:
+    resolution: {integrity: sha512-OCsnw1q89pXOSSu4GxAm4J1IQkx6sqkBZzdoS45y8n/CcAhOPfhrLhUo1MhFMz9eCGm6O8Hv2+WqvNkzHgeIqQ==}
     hasBin: true
-    requiresBuild: true
-    dependencies:
-      https-proxy-agent: 5.0.1
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - supports-color
+    optionalDependencies:
+      '@pagefind/darwin-arm64': 1.0.0-alpha.4
+      '@pagefind/darwin-x64': 1.0.0-alpha.4
+      '@pagefind/linux-arm64': 1.0.0-alpha.4
+      '@pagefind/linux-x64': 1.0.0-alpha.4
+      '@pagefind/windows-x64': 1.0.0-alpha.4
     dev: false
 
   /parse-entities@4.0.1:
@@ -2145,10 +2169,6 @@ packages:
 
   /property-information@6.2.0:
     resolution: {integrity: sha512-kma4U7AFCTwpqq5twzC1YVIDXSqg6qQK6JN0smOw8fgRy1OkMi0CYSzFmsy6dnqSenamAtj0CyXMUJ1Mf6oROg==}
-
-  /proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-    dev: false
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
