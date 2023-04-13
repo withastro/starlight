@@ -9,7 +9,7 @@ import '@pagefind/default-ui/css/ui.css';
   window.addEventListener('DOMContentLoaded', () => {
     requestIdleCallback(async () => {
       const { PagefindUI } = await import('@pagefind/default-ui');
-      new PagefindUI({ element: '#search' });
+      new PagefindUI({ element: '#search', baseUrl: import.meta.env.BASE_URL });
     });
   });
 </script>
