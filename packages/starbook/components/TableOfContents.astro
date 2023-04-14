@@ -7,5 +7,7 @@ interface Props {
 }
 ---
 
-<h2>On this page</h2>
-<TableOfContentsSublist toc={Astro.props.toc} />
+<nav aria-labelledby="starbook--on-this-page">
+  <h2 id="starbook--on-this-page">On this page</h2>
+  <TableOfContentsSublist toc={Astro.props.toc} />
+</nav>
