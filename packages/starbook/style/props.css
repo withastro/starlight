@@ -93,7 +93,7 @@
   --sb-text-h5: var(--sb-text-lg);
 
   --sb-line-height: 1.8;
-  --sb-line-height--headings: 1.2;
+  --sb-line-height-headings: 1.2;
 
   --sb-font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
@@ -102,6 +102,14 @@
     'Liberation Mono', 'Courier New', monospace;
   --__sb-font: var(--sb-font, ''), var(--sb-font-system);
   --__sb-font-mono: var(--sb-font-mono, ''), var(--sb-font-system-mono);
+
+  /** Key layout values */
+  --sb-nav-height: 4rem;
+  --sb-sidebar-width: 18.75rem;
+  --sb-content-width: 45rem;
+
+  /* Global z-index values */
+  --sb-z-index-navbar: 10;
 }
 
 :root[data-theme='light'] {

@@ -2,19 +2,23 @@
 import type { SidebarEntry } from '../utils/navigation';
 
 interface Props {
-  sublist: SidebarEntry[]
+  sublist: SidebarEntry[];
 }
 ---
 
 <ul>
   {
     Astro.props.sublist.map((entry) => (
-      <li>
+      <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
         {entry.type === 'link' ? (
-          <a href={entry.href} aria-current={entry.isCurrent && 'true'}>{entry.label}</a>
+          <a href={entry.href} aria-current={entry.isCurrent && 'true'}>
+            {entry.label}
+          </a>
         ) : (
-          <strong>{entry.label}</strong>
-          <Astro.self sublist={entry.entries} />
+          <>
+            <strong>{entry.label}</strong>
+            <Astro.self sublist={entry.entries} />
+          </>
         )}
       </li>
     ))
@@ -23,12 +27,40 @@ interface Props {
 
 <style>
   ul {
-    line-height: 2;
+    --sb-sidebar-item-padding-inline: 0.5rem;
+    list-style-type: none;
+    padding: 0;
   }
+
   ul strong {
-    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--sb-color-white);
+    padding-inline: var(--sb-sidebar-item-padding-inline);
   }
-  [aria-current="true"] {
-    background-color: rgb(211, 241, 255);
+
+  .sidebar-group + .sidebar-group {
+    margin-top: 0.5rem;
+  }
+
+  a {
+    display: block;
+    border-radius: 0.25rem;
+    font-size: var(--sb-text-sm);
+    text-decoration: none;
+    color: var(--sb-color-gray-2);
+    padding-inline: var(--sb-sidebar-item-padding-inline);
+  }
+
+  a:hover,
+  a:focus {
+    color: var(--sb-color-white);
+  }
+
+  [aria-current='true'],
+  [aria-current='true']:hover,
+  [aria-current='true']:focus {
+    font-weight: 600;
+    color: var(--sb-color-text-invert);
+    background-color: var(--sb-color-text-accent);
   }
 </style>

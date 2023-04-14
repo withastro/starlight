@@ -1,0 +1,31 @@
+<div class="right-sidebar-panel">
+  <div class="container">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .right-sidebar-panel {
+    padding: 1rem;
+  }
+  .right-sidebar-panel + .right-sidebar-panel {
+    border-top: 1px solid var(--sb-color-gray-5);
+  }
+  .container {
+    max-width: var(--sb-sidebar-width);
+  }
+  .right-sidebar-panel :global(h2) {
+    color: var(--sb-color-white);
+    font-size: var(--sb-text-base);
+    font-weight: 600;
+  }
+  .right-sidebar-panel :global(a) {
+    display: block;
+    font-size: var(--sb-text-sm);
+    text-decoration: none;
+    color: var(--sb-color-gray-3);
+  }
+  .right-sidebar-panel :global(a:hover) {
+    color: var(--sb-color-white);
+  }
+</style>

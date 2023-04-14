@@ -1,0 +1,59 @@
+<div class="content"><slot /></div>
+
+<style>
+  .content :global(* + *) {
+    margin-top: 1.5rem;
+  }
+
+  .content :global(li + li) {
+    margin-top: 0.25rem;
+  }
+
+  .content :global(h1),
+  .content :global(h2),
+  .content :global(h3),
+  .content :global(h4),
+  .content :global(h5),
+  .content :global(h6) {
+    color: var(--sb-color-white);
+    line-height: var(--sb-line-height-headings);
+    font-weight: 600;
+  }
+
+  .content :global(* + h1),
+  .content :global(* + h2),
+  .content :global(* + h3),
+  .content :global(* + h4),
+  .content :global(* + h5),
+  .content :global(* + h6) {
+    margin-top: 2.5rem;
+  }
+
+  .content :global(img),
+  .content :global(picture),
+  .content :global(video),
+  .content :global(canvas),
+  .content :global(svg) {
+    display: block;
+    max-width: 100%;
+  }
+
+  .content :global(h1) {
+    font-size: var(--sb-text-h1);
+  }
+  .content :global(h2) {
+    font-size: var(--sb-text-h2);
+  }
+  .content :global(h3) {
+    font-size: var(--sb-text-h3);
+  }
+  .content :global(h4) {
+    font-size: var(--sb-text-h4);
+  }
+  .content :global(h5) {
+    font-size: var(--sb-text-h5);
+  }
+  .content :global(h6) {
+    font-size: var(--sb-text-h6);
+  }
+</style>
