@@ -9,13 +9,13 @@ interface Props {
 const { prev, next } = Astro.props;
 ---
 
-<nav>
+<div class="pagination-links">
   {
     prev && (
       <a href={prev.href} rel="prev">
         Previous
         <br />
-        {prev.label}
+        <span class="link-title">{prev.label}</span>
       </a>
     )
   }
@@ -24,17 +24,32 @@ const { prev, next } = Astro.props;
       <a href={next.href} rel="next">
         Next
         <br />
-        {next.label}
+        <span class="link-title">{next.label}</span>
       </a>
     )
   }
-</nav>
+</div>
 
 <style>
-  [rel='prev'] {
-    margin-inline-end: auto;
+  .pagination-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  a {
+    width: 100%;
+    border: 1px solid var(--sb-color-gray-5);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-decoration: none;
   }
   [rel='next'] {
-    margin-inline-start: auto;
+    text-align: end;
+  }
+
+  .link-title {
+    color: var(--sb-color-white);
+    font-size: var(--sb-text-2xl);
+    line-height: var(--sb-line-height-headings);
   }
 </style>
