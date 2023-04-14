@@ -6,7 +6,7 @@ interface Props {
 }
 ---
 
-<ul>
+<ul role="list">
   {
     Astro.props.sublist.map((entry) => (
       <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
@@ -16,7 +16,7 @@ interface Props {
           </a>
         ) : (
           <>
-            <strong>{entry.label}</strong>
+            <h2>{entry.label}</h2>
             <Astro.self sublist={entry.entries} />
           </>
         )}
@@ -28,11 +28,12 @@ interface Props {
 <style>
   ul {
     --sb-sidebar-item-padding-inline: 0.5rem;
-    list-style-type: none;
+    list-style: none;
     padding: 0;
   }
 
-  ul strong {
+  ul h2 {
+    font-size: 1rem;
     font-weight: 600;
     color: var(--sb-color-white);
     padding-inline: var(--sb-sidebar-item-padding-inline);
