@@ -58,7 +58,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
   <body>
     <Layout>
       <Header slot="header" locale={locale} />
-      <Sidebar slot="sidebar" sidebar={sidebar} />
+      <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
       <Fragment slot="right-sidebar">
         <RightSidebarPanel>
           <TableOfContents
@@ -70,7 +70,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
           <EditLink data={data} id={id} />
         </RightSidebarPanel>
       </Fragment>
-      <main id="overview" data-pagefind-body>
+      <main id="starbook__overview" data-pagefind-body>
         <ContentPanel>
           <h1
             style="font-size: var(--sb-text-h1); font-weight: 600; color: var(--sb-color-white);"

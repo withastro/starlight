@@ -32,21 +32,20 @@ interface Props {
     padding: 0;
   }
 
-  ul h2 {
-    font-size: 1rem;
+  h2 {
+    font-size: var(--sb-text-lg);
     font-weight: 600;
     color: var(--sb-color-white);
     padding-inline: var(--sb-sidebar-item-padding-inline);
   }
 
   .sidebar-group + .sidebar-group {
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
   }
 
   a {
     display: block;
     border-radius: 0.25rem;
-    font-size: var(--sb-text-sm);
     text-decoration: none;
     color: var(--sb-color-gray-2);
     padding-inline: var(--sb-sidebar-item-padding-inline);
@@ -63,5 +62,17 @@ interface Props {
     font-weight: 600;
     color: var(--sb-color-text-invert);
     background-color: var(--sb-color-text-accent);
+  }
+
+  @media (min-width: 50rem) {
+    .sidebar-group + .sidebar-group {
+      margin-top: 0.5rem;
+    }
+    h2 {
+      font-size: var(--sb-text-base);
+    }
+    a {
+      font-size: var(--sb-text-sm);
+    }
   }
 </style>

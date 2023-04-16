@@ -42,7 +42,7 @@ function localizedPathname(locale: string | undefined): string {
               value={localizedPathname(code)}
               selected={code === Astro.props.locale}
             >
-              <span>{locale!.label}&nbsp;&nbsp;&nbsp;</span>
+              {locale!.label}
             </option>
           ))}
         </select>
@@ -70,5 +70,13 @@ function localizedPathname(locale: string | undefined): string {
     display: flex;
     align-items: center;
     gap: 0.25rem;
+  }
+
+  select {
+    border: 0;
+    padding-block: 0.625rem;
+    width: 5.5rem;
+    background-color: transparent;
+    text-overflow: ellipsis;
   }
 </style>

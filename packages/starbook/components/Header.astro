@@ -9,9 +9,11 @@ interface Props {
 ---
 
 <div class="header">
-  <span class="site-title">{config.title}</span>
+  <a href={import.meta.env.BASE_URL} class="site-title">{config.title}</a>
   <Search />
-  <LanguageSelect locale={Astro.props.locale} />
+  <div class="hidden md:visible">
+    <LanguageSelect locale={Astro.props.locale} />
+  </div>
 </div>
 
 <style>
@@ -26,5 +28,7 @@ interface Props {
     font-size: var(--sb-text-2xl);
     font-weight: 600;
     color: var(--sb-color-text-accent);
+    text-decoration: none;
+    white-space: nowrap;
   }
 </style>

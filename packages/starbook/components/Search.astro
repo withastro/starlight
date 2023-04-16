@@ -3,13 +3,16 @@ import '@pagefind/default-ui/css/ui.css';
 ---
 
 <div class="search-container">
-  <div id="search"></div>
+  <div id="starbook__search"></div>
 </div>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     requestIdleCallback(async () => {
       const { PagefindUI } = await import('@pagefind/default-ui');
-      new PagefindUI({ element: '#search', baseUrl: import.meta.env.BASE_URL });
+      new PagefindUI({
+        element: '#starbook__search',
+        baseUrl: import.meta.env.BASE_URL,
+      });
     });
   });
 </script>

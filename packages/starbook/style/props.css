@@ -107,6 +107,7 @@
   --sb-nav-height: 4rem;
   --sb-sidebar-width: 18.75rem;
   --sb-content-width: 45rem;
+  --sb-menu-button-size: 2rem;
 
   /* Global z-index values */
   --sb-z-index-navbar: 10;

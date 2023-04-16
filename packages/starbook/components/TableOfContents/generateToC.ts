@@ -24,7 +24,7 @@ export function generateToC(
   headings: MarkdownHeading[],
   { minHeadingLevel, maxHeadingLevel, title = 'Overview' }: TocOpts
 ) {
-  const overview = { depth: 2, slug: 'overview', text: title };
+  const overview = { depth: 2, slug: 'starbook__overview', text: title };
   headings = [
     overview,
     ...headings.filter(

@@ -9,3 +9,18 @@
   white-space: nowrap;
   border-width: 0;
 }
+
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+@media (min-width: 50rem) {
+  .md\:hidden {
+    visibility: hidden;
+  }
+  .md\:visible {
+    visibility: visible;
+  }
+}
