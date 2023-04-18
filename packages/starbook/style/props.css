@@ -73,7 +73,8 @@
   );
 
   /* Text size and line height */
-  --sb-text-sm: 0.8125rem; /* 13px */
+  --sb-text-xs: 0.8125rem; /* 13px */
+  --sb-text-sm: 0.875rem; /* 14px */
   --sb-text-base: 1rem; /* 16px */
   --sb-text-lg: 1.125rem; /* 18px */
   --sb-text-xl: 1.25rem; /* 20px */
@@ -83,9 +84,9 @@
   --sb-text-5xl: 2.625rem; /* 42px */
 
   --sb-text-body: var(--sb-text-base);
-  --sb-text-body-sm: var(--sb-text-sm);
+  --sb-text-body-sm: var(--sb-text-xs);
   --sb-text-code: var(--sb-text-base);
-  --sb-text-code-sm: var(--sb-text-sm);
+  --sb-text-code-sm: var(--sb-text-xs);
   --sb-text-h1: var(--sb-text-5xl);
   --sb-text-h2: var(--sb-text-4xl);
   --sb-text-h3: var(--sb-text-3xl);
