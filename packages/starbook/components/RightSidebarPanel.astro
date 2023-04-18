@@ -12,7 +12,7 @@
     border-top: 1px solid var(--sb-color-gray-5);
   }
   .container {
-    max-width: var(--sb-sidebar-width);
+    width: var(--sb-sidebar-width);
   }
   .right-sidebar-panel :global(h2) {
     color: var(--sb-color-white);
@@ -27,5 +27,12 @@
   }
   .right-sidebar-panel :global(a:hover) {
     color: var(--sb-color-white);
+  }
+  @media (min-width: 72rem) {
+    .container {
+      max-width: calc(
+        100vw - var(--sb-content-width) - var(--sb-sidebar-width)
+      );
+    }
   }
 </style>
