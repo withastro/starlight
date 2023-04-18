@@ -1,20 +1,13 @@
 ---
 import type { generateToC } from './TableOfContents/generateToC';
+import TableOfContentsSublist from './TableOfContentsSublist.astro';
 
 interface Props {
   toc: ReturnType<typeof generateToC>;
 }
-
-const { toc } = Astro.props;
 ---
 
-<ul>
-  {
-    toc.map((heading) => (
-      <li>
-        <a href={'#' + heading.slug}>{heading.text}</a>
-        {heading.children.length > 0 && <Astro.self toc={heading.children} />}
-      </li>
-    ))
-  }
-</ul>
+<nav aria-labelledby="starbook__on-this-page">
+  <h2 id="starbook__on-this-page">On this page</h2>
+  <TableOfContentsSublist toc={Astro.props.toc} />
+</nav>

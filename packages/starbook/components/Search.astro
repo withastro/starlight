@@ -3,28 +3,38 @@ import '@pagefind/default-ui/css/ui.css';
 ---
 
 <div class="search-container">
-  <div id="search"></div>
+  <div id="starbook__search"></div>
 </div>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     requestIdleCallback(async () => {
       const { PagefindUI } = await import('@pagefind/default-ui');
-      new PagefindUI({ element: '#search', baseUrl: import.meta.env.BASE_URL });
+      new PagefindUI({
+        element: '#starbook__search',
+        baseUrl: import.meta.env.BASE_URL,
+      });
     });
   });
 </script>
 
 <style>
   .search-container {
+    --pagefind-ui-scale: 0.65;
+    --pagefind-ui-primary: var(--sb-color-accent-light);
+    --pagefind-ui-text: var(--sb-color-gray-2);
+    --pagefind-ui-background: var(--sb-color-gray-6);
+    --pagefind-ui-border: var(--sb-color-gray-5);
+
     position: relative;
-    width: 100%;
+    width: 50%;
+    height: 100%;
   }
   #search {
     position: absolute;
     top: 0;
     width: calc(100% - 1rem);
     max-width: 22rem;
-    background: white;
+    background: var(--sb-color-gray-6);
     padding: 0 0.5rem 0.5rem;
   }
 </style>

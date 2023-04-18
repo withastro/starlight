@@ -20,7 +20,7 @@ Set the description for your website. Used in metadata shared with search engine
 
 ### `tableOfContents`
 
-**type:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`
+**type:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`  
 **default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Configure the table of contents shown on the right of each page. By default, `<h2>` and `<h3>` headings will be included in this table of contents.

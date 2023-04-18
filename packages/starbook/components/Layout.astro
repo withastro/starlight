@@ -1,0 +1,122 @@
+---
+import MobileMenuToggle from './MobileMenuToggle.astro';
+---
+
+<div class="page">
+  <header class="header"><slot name="header" /></header>
+  <nav class="sidebar" aria-label="Main">
+    <MobileMenuToggle />
+    <div id="starbook__sidebar" class="sidebar-pane">
+      <div class="sidebar-content">
+        <slot name="sidebar" />
+      </div>
+    </div>
+  </nav>
+  <div class="main-frame">
+    <div class="container">
+      <aside class="right-sidebar-container">
+        <div class="right-sidebar"><slot name="right-sidebar" /></div>
+      </aside>
+      <div class="main-pane"><slot /></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .header {
+    --sb-header-pad-x: 1.5rem;
+    --sb-header-pad-y: 0.75rem;
+
+    z-index: var(--sb-z-index-navbar);
+    position: fixed;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    width: 100%;
+    height: var(--sb-nav-height);
+    border-bottom: 1px solid var(--sb-color-black);
+    padding: var(--sb-header-pad-y) var(--sb-header-pad-y);
+    padding-inline-end: calc(
+      var(--sb-header-pad-x) * 2 + var(--sb-menu-button-size)
+    );
+    background-color: var(--sb-color-gray-6);
+  }
+
+  .sidebar-pane {
+    visibility: var(--sb-sidebar-visibility, hidden);
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    padding-top: var(--sb-nav-height);
+    width: 100%;
+    background-color: var(--sb-color-black);
+  }
+
+  :global([aria-expanded='true']) ~ .sidebar-pane {
+    --sb-sidebar-visibility: visible;
+  }
+
+  .sidebar-content {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .main-frame {
+    padding-top: var(--sb-nav-height);
+  }
+
+  @media (min-width: 50rem) {
+    .header {
+      padding-inline-end: var(--sb-header-pad-x);
+    }
+    .sidebar-pane {
+      --sb-sidebar-visibility: visible;
+      width: var(--sb-sidebar-width);
+      background-color: var(--sb-color-gray-6);
+      border-inline-end: 1px solid var(--sb-color-black);
+    }
+
+    .main-frame {
+      padding-inline-start: var(--sb-sidebar-width);
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .container {
+      display: flex;
+    }
+
+    .right-sidebar-container {
+      order: 2;
+      position: relative;
+      width: calc(
+        var(--sb-sidebar-width) +
+          (100% - var(--sb-content-width) - var(--sb-sidebar-width)) / 2
+      );
+    }
+
+    .right-sidebar {
+      position: fixed;
+      top: 0;
+      border-inline-start: 1px solid var(--sb-color-gray-6);
+      padding-top: var(--sb-nav-height);
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .main-pane {
+      order: 1;
+      width: calc(
+        var(--sb-content-width) +
+          (100% - var(--sb-content-width) - var(--sb-sidebar-width)) / 2
+      );
+    }
+  }
+</style>

@@ -2,6 +2,11 @@
 import type { GetStaticPathsResult, InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starbook/user-config';
+
+import './style/props.css';
+import './style/reset.css';
+import './style/util.css';
+
 import Header from './components/Header.astro';
 import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
@@ -18,8 +23,11 @@ import EditLink from './components/EditLink.astro';
 import { getPrevNextLinks, getSidebar } from './utils/navigation';
 import PrevNextLinks from './components/PrevNextLinks.astro';
 
-import './style/props.css';
 import 'virtual:starbook/user-css';
+import Layout from './components/Layout.astro';
+import RightSidebarPanel from './components/RightSidebarPanel.astro';
+import ContentPanel from './components/ContentPanel.astro';
+import MarkdownContent from './components/MarkdownContent.astro';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -48,44 +56,36 @@ const prevNextLinks = getPrevNextLinks(sidebar);
     <HeadSEO data={data} lang={lang} />
   </head>
   <body>
-    <Header locale={locale} />
-    <div class="wrapper">
-      <Sidebar sidebar={sidebar} />
-      <main id="overview">
-        <div class="content" data-pagefind-body>
-          <h1>{data.title}</h1>
-          <Content />
+    <Layout>
+      <Header slot="header" locale={locale} />
+      <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
+      <Fragment slot="right-sidebar">
+        <RightSidebarPanel>
+          <TableOfContents
+            toc={generateToC(headings, config.tableOfContents)}
+          />
+        </RightSidebarPanel>
+        <RightSidebarPanel>
+          <h2>Contribute</h2>
+          <EditLink data={data} id={id} />
+        </RightSidebarPanel>
+      </Fragment>
+      <main id="starbook__overview" data-pagefind-body>
+        <ContentPanel>
+          <h1
+            style="font-size: var(--sb-text-h1); font-weight: 600; color: var(--sb-color-white);"
+          >
+            {data.title}
+          </h1>
+        </ContentPanel>
+        <ContentPanel>
+          <MarkdownContent><Content /></MarkdownContent>
           <footer>
             <PrevNextLinks {...prevNextLinks} />
             <LastUpdated id={id} lang={lang} />
           </footer>
-        </div>
-        <aside>
-          <h2>On this page</h2>
-          <TableOfContents
-            toc={generateToC(headings, config.tableOfContents)}
-          />
-          <EditLink data={data} id={id} />
-        </aside>
+        </ContentPanel>
       </main>
-    </div>
-
-    <style>
-      .wrapper {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 4rem;
-      }
-      main {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 4rem;
-      }
-
-      .content {
-        max-width: 65ch;
-        margin-inline: auto;
-      }
-    </style>
+    </Layout>
   </body>
 </html>

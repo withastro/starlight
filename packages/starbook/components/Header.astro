@@ -8,16 +8,27 @@ interface Props {
 }
 ---
 
-<header>
-  <span><strong>{config.title}</strong> {config.tagline}</span>
+<div class="header">
+  <a href={import.meta.env.BASE_URL} class="site-title">{config.title}</a>
   <Search />
-  <LanguageSelect locale={Astro.props.locale} />
-</header>
+  <div class="hidden md:visible">
+    <LanguageSelect locale={Astro.props.locale} />
+  </div>
+</div>
 
 <style>
-  header {
+  .header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    align-items: center;
+    height: 100%;
+  }
+
+  .site-title {
+    font-size: var(--sb-text-2xl);
+    font-weight: 600;
+    color: var(--sb-color-text-accent);
+    text-decoration: none;
+    white-space: nowrap;
   }
 </style>

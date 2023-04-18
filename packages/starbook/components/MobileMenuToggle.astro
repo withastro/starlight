@@ -1,0 +1,73 @@
+<button
+  is="starbook-menu-button"
+  aria-expanded="false"
+  aria-label="Menu"
+  aria-controls="starbook__sidebar"
+  class="md:hidden"
+>
+  <!-- TODO: Replace with an SVG icon -->
+  <span aria-hidden="true">☰</span>
+</button>
+
+<script>
+  class StarbookMenuButton extends HTMLButtonElement {
+    constructor() {
+      super();
+      // Toggle `aria-expanded` state when a user clicks the button.
+      this.addEventListener('click', () => this.toggleExpanded());
+
+      // Close the menu when a user presses the escape key.
+      const parentNav = this.closest('nav');
+      if (parentNav) {
+        parentNav.addEventListener('keyup', (e) => this.closeOnEscape(e));
+      }
+    }
+
+    setExpanded(expanded: boolean) {
+      this.setAttribute('aria-expanded', String(expanded));
+      document.body.toggleAttribute('data-mobile-menu-expanded', expanded);
+    }
+
+    toggleExpanded() {
+      this.setExpanded(this.getAttribute('aria-expanded') !== 'true');
+    }
+
+    closeOnEscape(e: KeyboardEvent) {
+      if (e.code === 'Escape') {
+        this.setExpanded(false);
+        this.focus();
+      }
+    }
+  }
+
+  customElements.define('starbook-menu-button', StarbookMenuButton, {
+    extends: 'button',
+  });
+</script>
+
+<style>
+  button {
+    position: fixed;
+    top: calc((var(--sb-nav-height) - var(--sb-menu-button-size)) / 2);
+    inset-inline-end: 1.5rem;
+    z-index: var(--sb-z-index-navbar);
+    border: 0;
+    border-radius: 50%;
+    width: var(--sb-menu-button-size);
+    height: var(--sb-menu-button-size);
+    background-color: var(--sb-color-white);
+    color: var(--sb-color-accent);
+    cursor: pointer;
+  }
+
+  button[aria-expanded='true'] {
+    background-color: var(--sb-color-gray-2);
+    color: var(--sb-color-black);
+  }
+</style>
+
+<style is:global>
+  [data-mobile-menu-expanded] {
+    overflow: hidden;
+  }
+</style>
