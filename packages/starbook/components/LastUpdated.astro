@@ -14,10 +14,15 @@ const { id, lang } = Astro.props;
 const currentFilePath = fileURLToPath(
   new URL('src/content/docs/' + id, project.root)
 );
+
+let date: Date | undefined;
+try {
+  ({ date } = getFileCommitDate(currentFilePath));
+} catch {}
 ---
 
-Last updated: {
-  getFileCommitDate(currentFilePath).date.toLocaleDateString(lang, {
-    dateStyle: 'medium',
-  })
+{
+  date && (
+    <>Last updated: {date.toLocaleDateString(lang, { dateStyle: 'medium' })}</>
+  )
 }
