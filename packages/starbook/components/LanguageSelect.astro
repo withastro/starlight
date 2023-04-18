@@ -19,12 +19,11 @@ function localizedPathname(locale: string | undefined): string {
     <label>
       <span class="sr-only">Select language</span>
       <svg
-        width="1.25em"
-        height="1.25em"
+        width="1em"
+        height="1em"
         viewBox="0 0 88.6 77.3"
         focusable="false"
         aria-hidden="true"
-        role="img"
       >
         <path
           fill="currentColor"
@@ -67,16 +66,41 @@ function localizedPathname(locale: string | undefined): string {
 
 <style>
   label {
+    --sb-icon-size: 0.875rem;
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    color: var(--sb-color-gray-1);
+  }
+
+  label:hover {
+    color: var(--sb-color-gray-2);
+  }
+
+  svg {
+    font-size: var(--sb-icon-size);
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
   select {
     border: 0;
     padding-block: 0.625rem;
-    width: 5.5rem;
+    padding-inline-start: calc(var(--sb-icon-size) + 0.25rem);
+    width: 6rem;
     background-color: transparent;
     text-overflow: ellipsis;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  @media (min-width: 50rem) {
+    select {
+      font-size: var(--sb-text-sm);
+    }
   }
 </style>
