@@ -1,6 +1,7 @@
 ---
 import config from 'virtual:starbook/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
+import Icon from './Icon.astro';
 
 interface Props {
   locale: string | undefined;
@@ -18,17 +19,7 @@ function localizedPathname(locale: string | undefined): string {
   config.locales && Object.keys(config.locales).length > 1 && (
     <label>
       <span class="sr-only">Select language</span>
-      <svg
-        class="language-icon"
-        width="1em"
-        height="1em"
-        viewBox="0 0 88.6 77.3"
-        aria-hidden="true"
-        fill="currentColor"
-      >
-        <path d="M61 24.6h7.9l18.7 51.6h-7.7l-5.4-15.5H54.3l-5.6 15.5h-7.2L61 24.6zM72.6 55l-8-22.8L56.3 55h16.3z" />
-        <path d="M53.6 60.6c-10-4-16-9-22-14 0 0 1.3 1.3 0 0-6 5-20 13-20 13l-4-6c8-5 10-6 19-13-2.1-1.9-12-13-13-19h8c4 9 10 14 10 14 10-8 10-19 10-19h8s-1 13-12 24c5 5 10 9 19 13l-3 7zm-52-44h56v-8h-23v-7h-9v7h-24v8z" />
-      </svg>
+      <Icon name="translate" class="icon language" />
       <starbook-lang-select>
         <select value={localizedPathname(Astro.props.locale)}>
           {Object.entries(config.locales).map(([code, locale]) => (
@@ -41,16 +32,7 @@ function localizedPathname(locale: string | undefined): string {
           ))}
         </select>
       </starbook-lang-select>
-      <svg
-        class="caret-icon"
-        width="1em"
-        height="1em"
-        viewBox="0 0 20 20"
-        aria-hidden="true"
-        fill="currentColor"
-      >
-        <path d="M14.1666 7.64174C14.0104 7.48653 13.7992 7.39941 13.5791 7.39941C13.3589 7.39941 13.1477 7.48653 12.9916 7.64174L9.99992 10.5917L7.04992 7.64174C6.89378 7.48653 6.68257 7.39941 6.46242 7.39941C6.24226 7.39941 6.03105 7.48653 5.87492 7.64174C5.79681 7.71921 5.73481 7.81138 5.69251 7.91293C5.6502 8.01448 5.62842 8.1234 5.62842 8.23341C5.62842 8.34342 5.6502 8.45234 5.69251 8.55389C5.73481 8.65544 5.79681 8.74761 5.87492 8.82507L9.40825 12.3584C9.48572 12.4365 9.57789 12.4985 9.67944 12.5408C9.78098 12.5831 9.88991 12.6049 9.99992 12.6049C10.1099 12.6049 10.2188 12.5831 10.3204 12.5408C10.4219 12.4985 10.5141 12.4365 10.5916 12.3584L14.1666 8.82507C14.2447 8.74761 14.3067 8.65544 14.349 8.55389C14.3913 8.45234 14.4131 8.34342 14.4131 8.23341C14.4131 8.1234 14.3913 8.01448 14.349 7.91293C14.3067 7.81138 14.2447 7.71921 14.1666 7.64174Z" />
-      </svg>
+      <Icon name="down-caret" class="icon caret" />
     </label>
   )
 }
@@ -84,19 +66,19 @@ function localizedPathname(locale: string | undefined): string {
     color: var(--sb-color-gray-2);
   }
 
-  svg {
+  .icon {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
   }
 
-  .language-icon {
+  .language {
     font-size: var(--sb-icon-size);
     inset-inline-start: 0;
   }
 
-  .caret-icon {
+  .caret {
     font-size: var(--sb-caret-size);
     inset-inline-end: 0;
   }
