@@ -1,30 +1,39 @@
 ---
 import type { Link } from '../utils/navigation';
+import Icon from './Icon.astro';
 
 interface Props {
   prev: Link | undefined;
   next: Link | undefined;
+  dir: 'ltr' | 'rtl';
 }
 
-const { prev, next } = Astro.props;
+const { prev, next, dir } = Astro.props;
+const isRtl = dir === 'rtl';
 ---
 
-<div class="pagination-links">
+<div class="pagination-links" dir={dir}>
   {
     prev && (
       <a href={prev.href} rel="prev">
-        Previous
-        <br />
-        <span class="link-title">{prev.label}</span>
+        <Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.5rem" />
+        <span>
+          Previous
+          <br />
+          <span class="link-title">{prev.label}</span>
+        </span>
       </a>
     )
   }
   {
     next && (
       <a href={next.href} rel="next">
-        Next
-        <br />
-        <span class="link-title">{next.label}</span>
+        <Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.5rem" />
+        <span>
+          Next
+          <br />
+          <span class="link-title">{next.label}</span>
+        </span>
       </a>
     )
   }
@@ -37,6 +46,10 @@ const { prev, next } = Astro.props;
   }
 
   a {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
     width: 100%;
     border: 1px solid var(--sb-color-gray-5);
     border-radius: 0.5rem;
@@ -44,7 +57,12 @@ const { prev, next } = Astro.props;
     text-decoration: none;
   }
   [rel='next'] {
+    justify-content: end;
     text-align: end;
+    flex-direction: row-reverse;
+  }
+  a:hover {
+    border-color: var(--sb-color-gray-2);
   }
 
   .link-title {
