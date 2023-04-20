@@ -81,7 +81,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
         <ContentPanel>
           <MarkdownContent><Content /></MarkdownContent>
           <footer>
-            <PrevNextLinks {...prevNextLinks} />
+            <PrevNextLinks {...prevNextLinks} dir={dir} />
             <LastUpdated id={id} lang={lang} />
           </footer>
         </ContentPanel>
