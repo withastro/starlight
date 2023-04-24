@@ -80,4 +80,25 @@
     all: unset;
   }
 
+  .content :global(blockquote) {
+    border-inline-start: 1px solid var(--sb-color-gray-5);
+    padding-inline-start: 1rem;
+  }
+
+  .content :global(table) {
+    border: 1px solid var(--sb-color-gray-5);
+    border-collapse: collapse;
+  }
+  .content :global(tr:nth-child(2n)) {
+    background-color: var(--sb-color-gray-7, var(--sb-color-gray-6));
+  }
+  .content :global(:is(th, td)) {
+    border: 1px solid var(--sb-color-hairline);
+    padding: 0.375rem 0.8125rem;
+  }
+
+  .content :global(hr) {
+    border: 0;
+    border-bottom: 1px solid var(--sb-color-hairline);
+  }
 </style>
