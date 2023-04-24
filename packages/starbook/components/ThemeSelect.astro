@@ -1,5 +1,4 @@
 ---
-import Icon from './Icon.astro';
 import Select from './Select.astro';
 ---
 
@@ -15,43 +14,75 @@ import Select from './Select.astro';
     ]}
     width="5.5em"
   />
-  <template data-theme="light"><Icon name="sun" /></template>
-  <template data-theme="dark"><Icon name="moon" /></template>
-  <template data-theme="auto"><Icon name="laptop" /></template>
 </starbook-theme-select>
 
+{/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
+<script is:inline>
+  StarbookThemeProvider.updatePickers();
+</script>
+
 <script>
+  type Theme = 'auto' | 'dark' | 'light';
+
   class StarBookThemeSelect extends HTMLElement {
+    /** Key in `localStorage` to store color theme preference at. */
+    #key = 'starbook-theme';
+
     constructor() {
       super();
-      this.setTheme('auto');
-      this.querySelector('select')?.addEventListener('change', (e) => {
-        if (e.currentTarget instanceof HTMLSelectElement) {
-          this.setTheme(e.currentTarget.value);
-        }
-      });
+      this.#onThemeChange(this.#loadTheme());
+      const select = this.querySelector('select');
+      if (select) {
+        select.addEventListener('change', (e) => {
+          if (e.currentTarget instanceof HTMLSelectElement) {
+            this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
+          }
+        });
+      }
     }
 
-    getPreferredTheme() {
+    /** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
+    #parseTheme(theme: unknown): Theme {
+      if (theme === 'auto' || theme === 'dark' || theme === 'light') {
+        return theme;
+      } else {
+        return 'auto';
+      }
+    }
+
+    /** Get the preferred system color scheme. */
+    #getPreferredColorScheme(): Theme {
       return matchMedia('(prefers-color-scheme: light)').matches
         ? 'light'
         : 'dark';
     }
 
-    setTheme(theme: string) {
-      const icon = [...this.querySelectorAll('template')].find(
-        (templ) => templ.dataset.theme === theme
-      );
-      const iconPaths =
-        icon?.content.firstElementChild?.cloneNode(true).childNodes;
-      if (iconPaths) {
-        console.log(iconPaths);
-        const targetIcon = this.querySelector('svg.label-icon') as SVGElement;
-        targetIcon.replaceChildren(...iconPaths);
-      }
+    /** Update select menu UI, document theme, and local storage state. */
+    #onThemeChange(theme: Theme): void {
+      StarbookThemeProvider.updatePickers(theme);
       document.documentElement.dataset.theme =
-        theme === 'auto' ? this.getPreferredTheme() : theme;
+        theme === 'auto' ? this.#getPreferredColorScheme() : theme;
+      this.#storeTheme(theme);
+    }
+
+    /** Store the user’s preference in `localStorage`. */
+    #storeTheme(theme: Theme): void {
+      if (typeof localStorage !== 'undefined') {
+        if (theme === 'light' || theme === 'dark') {
+          localStorage.setItem(this.#key, theme);
+        } else {
+          localStorage.removeItem(this.#key);
+        }
+      }
+    }
+
+    /** Load the user’s preference from `localStorage`. */
+    #loadTheme(): Theme {
+      const theme =
+        typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
+      return this.#parseTheme(theme);
     }
   }
+
   customElements.define('starbook-theme-select', StarBookThemeSelect);
 </script>
