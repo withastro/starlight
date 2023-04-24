@@ -30,9 +30,6 @@ import MobileMenuToggle from './MobileMenuToggle.astro';
   }
 
   .header {
-    --sb-header-pad-x: 1.5rem;
-    --sb-header-pad-y: 0.75rem;
-
     z-index: var(--sb-z-index-navbar);
     position: fixed;
     inset-inline-start: 0;
@@ -40,9 +37,9 @@ import MobileMenuToggle from './MobileMenuToggle.astro';
     width: 100%;
     height: var(--sb-nav-height);
     border-bottom: 1px solid var(--sb-color-black);
-    padding: var(--sb-header-pad-y) var(--sb-header-pad-y);
+    padding: var(--sb-nav-pad-y) var(--sb-nav-pad-x);
     padding-inline-end: calc(
-      var(--sb-header-pad-x) * 2 + var(--sb-menu-button-size)
+      var(--sb-nav-pad-x) * 2 + var(--sb-menu-button-size)
     );
     background-color: var(--sb-color-gray-6);
   }
@@ -72,7 +69,7 @@ import MobileMenuToggle from './MobileMenuToggle.astro';
 
   @media (min-width: 50rem) {
     .header {
-      padding-inline-end: var(--sb-header-pad-x);
+      padding-inline-end: var(--sb-nav-pad-x);
     }
     .sidebar-pane {
       --sb-sidebar-visibility: visible;
