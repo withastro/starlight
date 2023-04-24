@@ -1,20 +1,26 @@
-<button
-  is="starbook-menu-button"
-  aria-expanded="false"
-  aria-label="Menu"
-  aria-controls="starbook__sidebar"
-  class="md:hidden"
->
-  <!-- TODO: Replace with an SVG icon -->
-  <span aria-hidden="true">☰</span>
-</button>
+---
+import Icon from './Icon.astro';
+---
+
+<starbook-menu-button>
+  <button
+    aria-expanded="false"
+    aria-label="Menu"
+    aria-controls="starbook__sidebar"
+    class="md:hidden"
+  >
+    <Icon name="bars" />
+  </button>
+</starbook-menu-button>
 
 <script>
-  class StarbookMenuButton extends HTMLButtonElement {
+  class StarbookMenuButton extends HTMLElement {
+    btn = this.querySelector('button')!;
+
     constructor() {
       super();
       // Toggle `aria-expanded` state when a user clicks the button.
-      this.addEventListener('click', () => this.toggleExpanded());
+      this.btn.addEventListener('click', () => this.toggleExpanded());
 
       // Close the menu when a user presses the escape key.
       const parentNav = this.closest('nav');
@@ -35,32 +41,32 @@
     closeOnEscape(e: KeyboardEvent) {
       if (e.code === 'Escape') {
         this.setExpanded(false);
-        this.focus();
+        this.btn.focus();
       }
     }
   }
 
-  customElements.define('starbook-menu-button', StarbookMenuButton, {
-    extends: 'button',
-  });
+  customElements.define('starbook-menu-button', StarbookMenuButton);
 </script>
 
 <style>
   button {
     position: fixed;
     top: calc((var(--sb-nav-height) - var(--sb-menu-button-size)) / 2);
-    inset-inline-end: 1.5rem;
+    inset-inline-end: var(--sb-nav-pad-x);
     z-index: var(--sb-z-index-navbar);
     border: 0;
     border-radius: 50%;
+    display: flex;
     width: var(--sb-menu-button-size);
     height: var(--sb-menu-button-size);
+    padding: 0.5rem;
     background-color: var(--sb-color-white);
     color: var(--sb-color-accent);
     cursor: pointer;
   }
 
-  button[aria-expanded='true'] {
+  [aria-expanded='true'] button {
     background-color: var(--sb-color-gray-2);
     color: var(--sb-color-black);
   }

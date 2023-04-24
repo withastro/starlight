@@ -7,7 +7,8 @@ import '@pagefind/default-ui/css/ui.css';
 </div>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    requestIdleCallback(async () => {
+    const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+    onIdle(async () => {
       const { PagefindUI } = await import('@pagefind/default-ui');
       new PagefindUI({
         element: '#starbook__search',

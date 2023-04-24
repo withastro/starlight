@@ -106,6 +106,8 @@
 
   /** Key layout values */
   --sb-nav-height: 4rem;
+  --sb-nav-pad-x: 1.5rem;
+  --sb-nav-pad-y: 0.75rem;
   --sb-sidebar-width: 18.75rem;
   --sb-content-width: 45rem;
   --sb-menu-button-size: 2rem;
