@@ -1,3 +1,7 @@
+---
+import Icon from './Icon.astro';
+---
+
 <starbook-menu-button>
   <button
     aria-expanded="false"
@@ -5,8 +9,7 @@
     aria-controls="starbook__sidebar"
     class="md:hidden"
   >
-    <!-- TODO: Replace with an SVG icon -->
-    <span aria-hidden="true">☰</span>
+    <Icon name="bars" />
   </button>
 </starbook-menu-button>
 
@@ -54,8 +57,10 @@
     z-index: var(--sb-z-index-navbar);
     border: 0;
     border-radius: 50%;
+    display: flex;
     width: var(--sb-menu-button-size);
     height: var(--sb-menu-button-size);
+    padding: 0.5rem;
     background-color: var(--sb-color-white);
     color: var(--sb-color-accent);
     cursor: pointer;
