@@ -37,11 +37,14 @@ function localizedPathname(locale: string | undefined): string {
   class StarBookLanguageSelect extends HTMLElement {
     constructor() {
       super();
-      this.querySelector('select')?.addEventListener('change', (e) => {
-        if (e.currentTarget instanceof HTMLSelectElement) {
-          window.location.pathname = e.currentTarget.value;
-        }
-      });
+      const select = this.querySelector('select');
+      if (select) {
+        select.addEventListener('change', (e) => {
+          if (e.currentTarget instanceof HTMLSelectElement) {
+            window.location.pathname = e.currentTarget.value;
+          }
+        });
+      }
     }
   }
   customElements.define('starbook-lang-select', StarBookLanguageSelect);
