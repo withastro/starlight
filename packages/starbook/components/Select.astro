@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  label: string;
+  value: string;
+  icon: Parameters<typeof Icon>[0]['name'];
+  options: Array<{
+    label: string;
+    value: string;
+    selected: boolean;
+  }>;
+}
+---
+
+<label>
+  <span class="sr-only">{Astro.props.label}</span>
+  <Icon name={Astro.props.icon} class="icon label-icon" />
+  <select value={Astro.props.value}>
+    {
+      Astro.props.options.map(({ value, selected, label }) => (
+        <option value={value} selected={selected} set:html={label} />
+      ))
+    }
+  </select>
+  <Icon name="down-caret" class="icon caret" />
+</label>
+
+<style>
+  label {
+    --sb-icon-size: 0.875rem;
+    --sb-caret-size: 1.25rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--sb-color-gray-1);
+  }
+
+  label:hover {
+    color: var(--sb-color-gray-2);
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .label-icon {
+    font-size: var(--sb-icon-size);
+    inset-inline-start: 0;
+  }
+
+  .caret {
+    font-size: var(--sb-caret-size);
+    inset-inline-end: 0;
+  }
+
+  select {
+    border: 0;
+    padding-block: 0.625rem;
+    padding-inline: calc(var(--sb-icon-size) + 0.25rem)
+      calc(var(--sb-caret-size) + 0.25rem);
+    width: 6.5rem;
+    background-color: transparent;
+    text-overflow: ellipsis;
+    color: inherit;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  @media (min-width: 50rem) {
+    select {
+      font-size: var(--sb-text-sm);
+    }
+  }
+</style>
