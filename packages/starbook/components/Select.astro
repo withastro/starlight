@@ -5,6 +5,7 @@ interface Props {
   label: string;
   value: string;
   icon: Parameters<typeof Icon>[0]['name'];
+  width?: string;
   options: Array<{
     label: string;
     value: string;
@@ -13,7 +14,7 @@ interface Props {
 }
 ---
 
-<label>
+<label style={`--sb-select-width: ${Astro.props.width}`}>
   <span class="sr-only">{Astro.props.label}</span>
   <Icon name={Astro.props.icon} class="icon label-icon" />
   <select value={Astro.props.value}>
@@ -63,7 +64,7 @@ interface Props {
     padding-block: 0.625rem;
     padding-inline: calc(var(--sb-label-icon-size) + 0.25rem)
       calc(var(--sb-caret-size) + 0.25rem);
-    width: 6.5rem;
+    width: var(--sb-select-width);
     background-color: transparent;
     text-overflow: ellipsis;
     color: inherit;

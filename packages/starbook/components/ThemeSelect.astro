@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+import Select from './Select.astro';
+---
+
+<starbook-theme-select>
+  <Select
+    icon="laptop"
+    label="Select theme"
+    value="auto"
+    options={[
+      { label: 'Dark', selected: false, value: 'dark' },
+      { label: 'Light', selected: false, value: 'light' },
+      { label: 'Auto', selected: true, value: 'auto' },
+    ]}
+    width="5.5em"
+  />
+  <template data-theme="light"><Icon name="sun" /></template>
+  <template data-theme="dark"><Icon name="moon" /></template>
+  <template data-theme="auto"><Icon name="laptop" /></template>
+</starbook-theme-select>
+
+<script>
+  class StarBookThemeSelect extends HTMLElement {
+    constructor() {
+      super();
+      this.setTheme('auto');
+      this.querySelector('select')?.addEventListener('change', (e) => {
+        if (e.currentTarget instanceof HTMLSelectElement) {
+          this.setTheme(e.currentTarget.value);
+        }
+      });
+    }
+
+    getPreferredTheme() {
+      return matchMedia('(prefers-color-scheme: light)').matches
+        ? 'light'
+        : 'dark';
+    }
+
+    setTheme(theme: string) {
+      const icon = [...this.querySelectorAll('template')].find(
+        (templ) => templ.dataset.theme === theme
+      );
+      const iconPaths =
+        icon?.content.firstElementChild?.cloneNode(true).childNodes;
+      if (iconPaths) {
+        console.log(iconPaths);
+        const targetIcon = this.querySelector('svg.label-icon') as SVGElement;
+        targetIcon.replaceChildren(...iconPaths);
+      }
+      document.documentElement.dataset.theme =
+        theme === 'auto' ? this.getPreferredTheme() : theme;
+    }
+  }
+  customElements.define('starbook-theme-select', StarBookThemeSelect);
+</script>

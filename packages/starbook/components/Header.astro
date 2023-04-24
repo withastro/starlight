@@ -2,6 +2,7 @@
 import config from 'virtual:starbook/user-config';
 import LanguageSelect from './LanguageSelect.astro';
 import Search from './Search.astro';
+import ThemeSelect from './ThemeSelect.astro';
 
 interface Props {
   locale: string | undefined;
@@ -11,7 +12,8 @@ interface Props {
 <div class="header">
   <a href={import.meta.env.BASE_URL} class="site-title">{config.title}</a>
   <Search />
-  <div class="hidden md:visible">
+  <div class="hidden md:visible right-group">
+    <ThemeSelect />
     <LanguageSelect locale={Astro.props.locale} />
   </div>
 </div>
@@ -30,5 +32,10 @@ interface Props {
     color: var(--sb-color-text-accent);
     text-decoration: none;
     white-space: nowrap;
+  }
+
+  .right-group {
+    display: flex;
+    gap: 1rem;
   }
 </style>
