@@ -1,39 +1,47 @@
 <div class="content"><slot /></div>
 
 <style>
-  .content :global(* + *) {
+  .content
+    :global(
+      :not(a, strong, em, del, span, input)
+        + :not(a, strong, em, del, span, input)
+    ) {
     margin-top: 1.5rem;
   }
 
-  .content :global(li + li) {
+  /* Headings after non-headings have more spacing. */
+  .content :global(:not(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6)) {
+    margin-top: 2.5rem;
+  }
+
+  .content :global(li + li),
+  .content :global(dt + dt),
+  .content :global(dt + dd),
+  .content :global(dd + dd) {
     margin-top: 0.25rem;
   }
 
-  .content :global(h1),
-  .content :global(h2),
-  .content :global(h3),
-  .content :global(h4),
-  .content :global(h5),
-  .content :global(h6) {
+  .content
+    :global(
+      li > :last-child:not(li, ul, ol):not(a, strong, em, del, span, input)
+    ) {
+    margin-bottom: 1.25rem;
+  }
+
+  .content :global(dt) {
+    font-weight: 700;
+  }
+  .content :global(dd) {
+    padding-inline-start: 1rem;
+  }
+
+  .content :global(:is(h1, h2, h3, h4, h5, h6)) {
     color: var(--sb-color-white);
     line-height: var(--sb-line-height-headings);
     font-weight: 600;
   }
 
-  .content :global(* + h1),
-  .content :global(* + h2),
-  .content :global(* + h3),
-  .content :global(* + h4),
-  .content :global(* + h5),
-  .content :global(* + h6) {
-    margin-top: 2.5rem;
-  }
-
-  .content :global(img),
-  .content :global(picture),
-  .content :global(video),
-  .content :global(canvas),
-  .content :global(svg) {
+  .content :global(:is(img, picture, video, canvas, svg, iframe)) {
     display: block;
     max-width: 100%;
   }
@@ -55,5 +63,50 @@
   }
   .content :global(h6) {
     font-size: var(--sb-text-h6);
+  }
+
+  .content :global(a) {
+    color: var(--sb-color-text-accent);
+  }
+  .content :global(a:hover) {
+    color: var(--sb-color-white);
+  }
+
+  .content :global(code) {
+    background-color: var(--sb-color-bg-inline-code);
+    margin-block: -0.125rem;
+    padding: 0.125rem 0.375rem;
+  }
+
+  .content :global(pre) {
+    border: 1px solid var(--sb-color-gray-5);
+    padding: 0.75rem 1rem;
+    font-size: var(--sb-text-code);
+  }
+
+  .content :global(pre code) {
+    all: unset;
+  }
+
+  .content :global(blockquote) {
+    border-inline-start: 1px solid var(--sb-color-gray-5);
+    padding-inline-start: 1rem;
+  }
+
+  .content :global(table) {
+    border: 1px solid var(--sb-color-gray-5);
+    border-collapse: collapse;
+  }
+  .content :global(tr:nth-child(2n)) {
+    background-color: var(--sb-color-gray-7, var(--sb-color-gray-6));
+  }
+  .content :global(:is(th, td)) {
+    border: 1px solid var(--sb-color-hairline);
+    padding: 0.375rem 0.8125rem;
+  }
+
+  .content :global(hr) {
+    border: 0;
+    border-bottom: 1px solid var(--sb-color-hairline);
   }
 </style>

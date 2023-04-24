@@ -33,6 +33,11 @@ export default function StarbookIntegration(
           },
           markdown: {
             remarkPlugins: [...starbookAsides()],
+            shikiConfig:
+              // Configure Shiki theme if the user is using the default github-dark theme.
+              config.markdown.shikiConfig.theme !== 'github-dark'
+                ? {}
+                : { theme: 'css-variables' },
           },
         };
         updateConfig(newConfig);
