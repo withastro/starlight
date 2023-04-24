@@ -6,9 +6,10 @@ Welcome to StarBook, an intuitive and user-friendly website builder that allows 
 
 ## Getting Started with StarBook
 
-To get started with StarBook, you will first need to install it. StarBook is built on top of the Astro all-in-one framework, which means you will also need to install Astro before installing StarBook. Once both are installed, you can create a new StarBook project using the following command:
+To get started with StarBook, you will first need to install it. StarBook is built on top of the [Astro](https://astro.build) all-in-one framework, which means you will also need to install Astro before installing StarBook. Once both are installed, you can create a new StarBook project using the following command:
 
 ```sh
+# create a new project with npm
 npm create astro --template starbook
 ```
 
