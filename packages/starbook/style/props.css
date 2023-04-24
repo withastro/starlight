@@ -41,6 +41,7 @@
   --sb-color-bg: var(--sb-color-black);
   --sb-color-bg-nav: var(--sb-color-gray-6);
   --sb-color-bg-sidebar: var(--sb-color-gray-6);
+  --sb-color-bg-inline-code: var(--sb-color-gray-5);
   --sb-color-hairline: var(--sb-color-gray-6);
   --sb-color-hairline-shade: var(--sb-color-black);
 
@@ -156,6 +157,7 @@
   --sb-color-text-invert: var(--sb-color-black);
   --sb-color-bg-nav: var(--sb-color-gray-7);
   --sb-color-bg-sidebar: var(--sb-color-bg);
+  --sb-color-bg-inline-code: var(--sb-color-gray-6);
   --sb-color-hairline-shade: var(--sb-color-gray-6);
 
   /* Shadows (light mode) */
