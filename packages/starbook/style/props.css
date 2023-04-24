@@ -39,6 +39,10 @@
   --sb-color-text-accent: var(--sb-color-accent-high);
   --sb-color-text-invert: var(--sb-color-accent-low);
   --sb-color-bg: var(--sb-color-black);
+  --sb-color-bg-nav: var(--sb-color-gray-6);
+  --sb-color-bg-sidebar: var(--sb-color-gray-6);
+  --sb-color-hairline: var(--sb-color-gray-6);
+  --sb-color-hairline-shade: var(--sb-color-black);
 
   /* Shadows (dark mode) */
   --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.12),
@@ -125,6 +129,7 @@
   --sb-color-gray-4: hsl(221, 8%, 56%);
   --sb-color-gray-5: hsl(228, 8%, 77%);
   --sb-color-gray-6: hsl(231, 23%, 94%);
+  --sb-color-gray-7: hsl(240, 20%, 97%);
   --sb-color-black: hsl(0, 0%, 100%);
 
   --sb-color-orange-high: hsl(var(--sb-hue-orange), 80%, 25%);
@@ -149,6 +154,9 @@
 
   --sb-color-text-accent: var(--sb-color-accent);
   --sb-color-text-invert: var(--sb-color-black);
+  --sb-color-bg-nav: var(--sb-color-gray-7);
+  --sb-color-bg-sidebar: var(--sb-color-bg);
+  --sb-color-hairline-shade: var(--sb-color-gray-6);
 
   /* Shadows (light mode) */
   --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06),
