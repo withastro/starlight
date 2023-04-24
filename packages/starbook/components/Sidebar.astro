@@ -2,6 +2,7 @@
 import type { getSidebar } from '../utils/navigation';
 import LanguageSelect from './LanguageSelect.astro';
 import SidebarSublist from './SidebarSublist.astro';
+import ThemeSelect from './ThemeSelect.astro';
 
 interface Props {
   sidebar: ReturnType<typeof getSidebar>;
@@ -12,8 +13,7 @@ interface Props {
 <div class="sidebar">
   <SidebarSublist sublist={Astro.props.sidebar} />
   <div class="mobile-preferences md:hidden">
-    <!-- TODO: implement theme switcher -->
-    <span>dark/light</span>
+    <ThemeSelect />
     <LanguageSelect locale={Astro.props.locale} />
   </div>
 </div>

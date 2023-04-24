@@ -28,6 +28,7 @@ import Layout from './components/Layout.astro';
 import RightSidebarPanel from './components/RightSidebarPanel.astro';
 import ContentPanel from './components/ContentPanel.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
+import ThemeProvider from './components/ThemeProvider.astro';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -56,6 +57,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
     <HeadSEO data={data} lang={lang} />
   </head>
   <body>
+    <ThemeProvider />
     <Layout>
       <Header slot="header" locale={locale} />
       <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />

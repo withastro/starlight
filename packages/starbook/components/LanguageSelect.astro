@@ -1,7 +1,7 @@
 ---
 import config from 'virtual:starbook/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
-import Icon from './Icon.astro';
+import Select from './Select.astro';
 
 interface Props {
   locale: string | undefined;
@@ -17,23 +17,19 @@ function localizedPathname(locale: string | undefined): string {
 
 {
   config.locales && Object.keys(config.locales).length > 1 && (
-    <label>
-      <span class="sr-only">Select language</span>
-      <Icon name="translate" class="icon language" />
-      <starbook-lang-select>
-        <select value={localizedPathname(Astro.props.locale)}>
-          {Object.entries(config.locales).map(([code, locale]) => (
-            <option
-              value={localizedPathname(code)}
-              selected={code === Astro.props.locale}
-            >
-              {locale!.label}
-            </option>
-          ))}
-        </select>
-      </starbook-lang-select>
-      <Icon name="down-caret" class="icon caret" />
-    </label>
+    <starbook-lang-select>
+      <Select
+        icon="translate"
+        label="Select language"
+        value={localizedPathname(Astro.props.locale)}
+        options={Object.entries(config.locales).map(([code, locale]) => ({
+          value: localizedPathname(code),
+          selected: code === Astro.props.locale,
+          label: locale!.label,
+        }))}
+        width="7em"
+      />
+    </starbook-lang-select>
   )
 }
 
@@ -41,64 +37,15 @@ function localizedPathname(locale: string | undefined): string {
   class StarBookLanguageSelect extends HTMLElement {
     constructor() {
       super();
-      this.querySelector('select')?.addEventListener('change', (e) => {
-        if (e.currentTarget instanceof HTMLSelectElement) {
-          window.location.pathname = e.currentTarget.value;
-        }
-      });
+      const select = this.querySelector('select');
+      if (select) {
+        select.addEventListener('change', (e) => {
+          if (e.currentTarget instanceof HTMLSelectElement) {
+            window.location.pathname = e.currentTarget.value;
+          }
+        });
+      }
     }
   }
   customElements.define('starbook-lang-select', StarBookLanguageSelect);
 </script>
-
-<style>
-  label {
-    --sb-icon-size: 0.875rem;
-    --sb-caret-size: 1.25rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: var(--sb-color-gray-1);
-  }
-
-  label:hover {
-    color: var(--sb-color-gray-2);
-  }
-
-  .icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  .language {
-    font-size: var(--sb-icon-size);
-    inset-inline-start: 0;
-  }
-
-  .caret {
-    font-size: var(--sb-caret-size);
-    inset-inline-end: 0;
-  }
-
-  select {
-    border: 0;
-    padding-block: 0.625rem;
-    padding-inline: calc(var(--sb-icon-size) + 0.25rem)
-      calc(var(--sb-caret-size) + 0.25rem);
-    width: 6.5rem;
-    background-color: transparent;
-    text-overflow: ellipsis;
-    color: inherit;
-    cursor: pointer;
-    appearance: none;
-  }
-
-  @media (min-width: 50rem) {
-    select {
-      font-size: var(--sb-text-sm);
-    }
-  }
-</style>
