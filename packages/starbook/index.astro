@@ -32,6 +32,9 @@ import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
 import ThemeProvider from './components/ThemeProvider.astro';
 
+// Remark component CSS (needs to override `MarkdownContent.astro`)
+import './style/asides.css';
+
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starbook/user-css';
 
