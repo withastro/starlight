@@ -23,7 +23,7 @@ try {
 
 {
   date && (
-    <p style="margin-block: 1.5rem; text-align: end; color: var(--sb-color-gray-3);">
+    <p>
       Last updated:{' '}
       <time datetime={date.toISOString()}>
         {date.toLocaleDateString(lang, { dateStyle: 'medium' })}
@@ -31,3 +31,11 @@ try {
     </p>
   )
 }
+
+<style>
+  p {
+    margin-block: 3rem 1.5rem;
+    font-size: var(--sb-text-sm);
+    color: var(--sb-color-gray-3);
+  }
+</style>
