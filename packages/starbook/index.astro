@@ -3,33 +3,40 @@ import type { GetStaticPathsResult, InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starbook/user-config';
 
-import './style/props.css';
-import './style/shiki.css';
-import './style/reset.css';
-import './style/util.css';
-
-import Header from './components/Header.astro';
-import Sidebar from './components/Sidebar.astro';
-import TableOfContents from './components/TableOfContents.astro';
-import { generateToC } from './components/TableOfContents/generateToC';
+import { getPrevNextLinks, getSidebar } from './utils/navigation';
 import {
   slugToDir,
   slugToLang,
   slugToLocale,
   slugToParam,
 } from './utils/slugs';
-import HeadSEO from './components/HeadSEO.astro';
-import LastUpdated from './components/LastUpdated.astro';
-import EditLink from './components/EditLink.astro';
-import { getPrevNextLinks, getSidebar } from './utils/navigation';
-import PrevNextLinks from './components/PrevNextLinks.astro';
 
-import 'virtual:starbook/user-css';
-import Layout from './components/Layout.astro';
-import RightSidebarPanel from './components/RightSidebarPanel.astro';
+// Built-in CSS styles.
+import './style/props.css';
+import './style/reset.css';
+import './style/shiki.css';
+import './style/util.css';
+
+// Components — can override built-in CSS, but not user CSS.
 import ContentPanel from './components/ContentPanel.astro';
+import EditLink from './components/EditLink.astro';
+import HeadSEO from './components/HeadSEO.astro';
+import Header from './components/Header.astro';
+import LastUpdated from './components/LastUpdated.astro';
+import Layout from './components/Layout.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
+import PrevNextLinks from './components/PrevNextLinks.astro';
+import RightSidebarPanel from './components/RightSidebarPanel.astro';
+import Sidebar from './components/Sidebar.astro';
+import TableOfContents from './components/TableOfContents.astro';
+import { generateToC } from './components/TableOfContents/generateToC';
 import ThemeProvider from './components/ThemeProvider.astro';
+
+// Remark component CSS (needs to override `MarkdownContent.astro`)
+import './style/asides.css';
+
+// Important that this is the last import so it can override built-in styles.
+import 'virtual:starbook/user-css';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -69,8 +76,14 @@ const prevNextLinks = getPrevNextLinks(sidebar);
           />
         </RightSidebarPanel>
         <RightSidebarPanel>
-          <h2>Contribute</h2>
-          <EditLink data={data} id={id} />
+          {
+            config.editLink.baseUrl && (
+              <>
+                <h2>Contribute</h2>
+                <EditLink data={data} id={id} />
+              </>
+            )
+          }
         </RightSidebarPanel>
       </Fragment>
       <main id="starbook__overview" data-pagefind-body>

@@ -50,6 +50,83 @@ You can structure content using a heading. Headings in Markdown are indicated by
 ###### Heading 6
 ```
 
+## Asides
+
+Asides (also known as “admonitions” or “callouts”) are useful for displaying secondary information alongside a page’s main content.
+
+StarBook provides a custom Markdown syntax for rendering asides. Aside blocks are indicated using a triple colon `:::` and can be of type `note`, `tip`, `caution` or `danger`.
+
+You can nest any other Markdown content types inside an aside, but asides are best suited to short and concise chunks of content.
+
+### Note aside
+
+:::note
+StarBook is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
+
+```sh
+npm run create astro@latest --template starbook
+```
+
+:::
+
+````md
+:::note
+StarBook is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
+
+```sh
+npm run create astro@latest --template starbook
+```
+
+:::
+````
+
+### Custom aside titles
+
+You can specify a custom title for the aside in square brackets following the aside type, e.g. `:::tip[Did you know?]`.
+
+:::tip[Did you know?]
+Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
+:::
+
+```md
+:::tip[Did you know?]
+Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
+:::
+```
+
+### More aside types
+
+Caution and danger asides are helpful for drawing a user’s attention to details that may trip them up.
+If you find yourself using these a lot, it may also be a sign that the thing you are documenting could benefit from being redesigned.
+
+:::caution
+If you are not sure you want an awesome docs site, think twice before using [StarBook](../../).
+:::
+
+:::danger
+Your users may be more productive and find your product easier to use thanks to helpful StarBook features.
+
+- Clear navigation
+- User-configurable colour theme
+- [i18n support](./guides/i18n)
+
+:::
+
+```md
+:::caution
+If you are not sure you want an awesome docs site, think twice before using [StarBook](../../).
+:::
+
+:::danger
+Your users may be more productive and find your product easier to use thanks to helpful StarBook features.
+
+- Clear navigation
+- User-configurable colour theme
+- [i18n support](./guides/i18n)
+
+:::
+```
+
 ## Blockquotes
 
 > This is a blockquote, which is commonly used when quoting another person or document.
