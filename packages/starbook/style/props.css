@@ -92,10 +92,10 @@
   --sb-text-body-sm: var(--sb-text-xs);
   --sb-text-code: var(--sb-text-base);
   --sb-text-code-sm: var(--sb-text-xs);
-  --sb-text-h1: var(--sb-text-5xl);
-  --sb-text-h2: var(--sb-text-4xl);
-  --sb-text-h3: var(--sb-text-3xl);
-  --sb-text-h4: var(--sb-text-2xl);
+  --sb-text-h1: var(--sb-text-4xl);
+  --sb-text-h2: var(--sb-text-3xl);
+  --sb-text-h3: var(--sb-text-2xl);
+  --sb-text-h4: var(--sb-text-xl);
   --sb-text-h5: var(--sb-text-lg);
 
   --sb-line-height: 1.8;
@@ -171,12 +171,11 @@
     0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04);
 }
 
-@media (max-width: 50em) {
+@media (min-width: 50em) {
   :root {
-    --sb-text-h1: var(--sb-text-4xl);
-    --sb-text-h2: var(--sb-text-3xl);
-    --sb-text-h3: var(--sb-text-2xl);
-    --sb-text-h4: var(--sb-text-xl);
-    --sb-text-h5: var(--sb-text-lg);
+    --sb-text-h1: var(--sb-text-5xl);
+    --sb-text-h2: var(--sb-text-4xl);
+    --sb-text-h3: var(--sb-text-3xl);
+    --sb-text-h4: var(--sb-text-2xl);
   }
 }
