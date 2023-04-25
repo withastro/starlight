@@ -42,6 +42,7 @@ const isRtl = dir === 'rtl';
 <style>
   .pagination-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
 
@@ -51,6 +52,8 @@ const isRtl = dir === 'rtl';
     justify-content: start;
     gap: 0.5rem;
     width: 100%;
+    flex-basis: calc(50% - 0.5rem);
+    flex-grow: 1;
     border: 1px solid var(--sb-color-gray-5);
     border-radius: 0.5rem;
     padding: 1rem;
