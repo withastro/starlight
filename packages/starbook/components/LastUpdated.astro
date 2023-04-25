@@ -17,7 +17,7 @@ const currentFilePath = fileURLToPath(
 
 let date: Date | undefined;
 try {
-  ({ date } = getFileCommitDate(currentFilePath));
+  ({ date } = getFileCommitDate(currentFilePath, 'newest'));
 } catch {}
 ---
 
