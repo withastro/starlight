@@ -4,17 +4,26 @@
 
 <style>
   .content-panel {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
   .content-panel + .content-panel {
     border-top: 1px solid var(--sb-color-hairline);
   }
   .container {
     max-width: var(--sb-content-width);
-    margin-inline-start: auto;
   }
 
   .container > :global(* + *) {
     margin-top: 1.5rem;
+  }
+
+  @media (min-width: 50em) {
+    .content-panel {
+      padding: 1.5rem;
+    }
+
+    .container {
+      margin-inline-start: auto;
+    }
   }
 </style>
