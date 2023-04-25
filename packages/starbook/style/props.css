@@ -170,3 +170,13 @@
     0px 16px 6px hsla(0, 0%, 0%, 0.03), 0px 9px 5px hsla(223, 13%, 10%, 0.08),
     0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04);
 }
+
+@media (max-width: 50em) {
+  :root {
+    --sb-text-h1: var(--sb-text-4xl);
+    --sb-text-h2: var(--sb-text-3xl);
+    --sb-text-h3: var(--sb-text-2xl);
+    --sb-text-h4: var(--sb-text-xl);
+    --sb-text-h5: var(--sb-text-lg);
+  }
+}
