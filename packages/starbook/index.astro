@@ -28,7 +28,6 @@ import PrevNextLinks from './components/PrevNextLinks.astro';
 import RightSidebarPanel from './components/RightSidebarPanel.astro';
 import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
-import { generateToC } from './components/TableOfContents/generateToC';
 import ThemeProvider from './components/ThemeProvider.astro';
 import PageFrame from './layout/PageFrame.astro';
 import TwoColumnContent from './layout/TwoColumnContent.astro';
@@ -73,9 +72,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
       <TwoColumnContent>
         <Fragment slot="right-sidebar">
           <RightSidebarPanel>
-            <TableOfContents
-              toc={generateToC(headings, config.tableOfContents)}
-            />
+            <TableOfContents headings={headings} />
           </RightSidebarPanel>
           <RightSidebarPanel>
             {
