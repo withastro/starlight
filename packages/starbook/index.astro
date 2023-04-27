@@ -23,7 +23,6 @@ import EditLink from './components/EditLink.astro';
 import HeadSEO from './components/HeadSEO.astro';
 import Header from './components/Header.astro';
 import LastUpdated from './components/LastUpdated.astro';
-import Layout from './components/Layout.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
 import PrevNextLinks from './components/PrevNextLinks.astro';
 import RightSidebarPanel from './components/RightSidebarPanel.astro';
@@ -31,6 +30,8 @@ import Sidebar from './components/Sidebar.astro';
 import TableOfContents from './components/TableOfContents.astro';
 import { generateToC } from './components/TableOfContents/generateToC';
 import ThemeProvider from './components/ThemeProvider.astro';
+import PageFrame from './layout/PageFrame.astro';
+import TwoColumnContent from './layout/TwoColumnContent.astro';
 
 // Remark component CSS (needs to override `MarkdownContent.astro`)
 import './style/asides.css';
@@ -66,42 +67,44 @@ const prevNextLinks = getPrevNextLinks(sidebar);
   </head>
   <body>
     <ThemeProvider />
-    <Layout>
+    <PageFrame>
       <Header slot="header" locale={locale} />
       <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
-      <Fragment slot="right-sidebar">
-        <RightSidebarPanel>
-          <TableOfContents
-            toc={generateToC(headings, config.tableOfContents)}
-          />
-        </RightSidebarPanel>
-        <RightSidebarPanel>
-          {
-            config.editLink.baseUrl && (
-              <>
-                <h2>Contribute</h2>
-                <EditLink data={data} id={id} />
-              </>
-            )
-          }
-        </RightSidebarPanel>
-      </Fragment>
-      <main id="starbook__overview" data-pagefind-body>
-        <ContentPanel>
-          <h1
-            style="font-size: var(--sb-text-h1); line-height: var(--sb-line-height-headings); font-weight: 600; color: var(--sb-color-white); margin-top: 1rem;"
-          >
-            {data.title}
-          </h1>
-        </ContentPanel>
-        <ContentPanel>
-          <MarkdownContent><Content /></MarkdownContent>
-          <footer>
-            <LastUpdated id={id} lang={lang} />
-            <PrevNextLinks {...prevNextLinks} dir={dir} />
-          </footer>
-        </ContentPanel>
-      </main>
-    </Layout>
+      <TwoColumnContent>
+        <Fragment slot="right-sidebar">
+          <RightSidebarPanel>
+            <TableOfContents
+              toc={generateToC(headings, config.tableOfContents)}
+            />
+          </RightSidebarPanel>
+          <RightSidebarPanel>
+            {
+              config.editLink.baseUrl && (
+                <>
+                  <h2>Contribute</h2>
+                  <EditLink data={data} id={id} />
+                </>
+              )
+            }
+          </RightSidebarPanel>
+        </Fragment>
+        <main id="starbook__overview" data-pagefind-body>
+          <ContentPanel>
+            <h1
+              style="font-size: var(--sb-text-h1); line-height: var(--sb-line-height-headings); font-weight: 600; color: var(--sb-color-white); margin-top: 1rem;"
+            >
+              {data.title}
+            </h1>
+          </ContentPanel>
+          <ContentPanel>
+            <MarkdownContent><Content /></MarkdownContent>
+            <footer>
+              <LastUpdated id={id} lang={lang} />
+              <PrevNextLinks {...prevNextLinks} dir={dir} />
+            </footer>
+          </ContentPanel>
+        </main>
+      </TwoColumnContent>
+    </PageFrame>
   </body>
 </html>
