@@ -62,13 +62,23 @@ import Icon from './Icon.astro';
     height: var(--sb-menu-button-size);
     padding: 0.5rem;
     background-color: var(--sb-color-white);
-    color: var(--sb-color-accent);
+    color: var(--sb-color-black);
+    box-shadow: var(--sb-shadow-md);
     cursor: pointer;
   }
 
   [aria-expanded='true'] button {
     background-color: var(--sb-color-gray-2);
-    color: var(--sb-color-black);
+    box-shadow: none;
+  }
+
+  :global([data-theme='light']) button {
+    background-color: var(--sb-color-black);
+    color: var(--sb-color-white);
+  }
+
+  :global([data-theme='light']) [aria-expanded='true'] button {
+    background-color: var(--sb-color-gray-5);
   }
 </style>
 
