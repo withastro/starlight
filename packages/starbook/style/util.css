@@ -16,11 +16,17 @@
 .flex {
   display: flex;
 }
+.block {
+  display: block;
+}
 @media (min-width: 50rem) {
   .md\:hidden {
     display: none;
   }
   .md\:flex {
     display: flex;
+  }
+  .md\:block {
+    display: block;
   }
 }

@@ -1,4 +1,5 @@
-:root {
+:root,
+::backdrop {
   /* Colors (dark mode) */
   --sb-color-white: hsl(0, 0%, 100%); /* “white” */
   --sb-color-gray-1: hsl(231, 23%, 94%);
@@ -121,7 +122,8 @@
   --sb-z-index-navbar: 10;
 }
 
-:root[data-theme='light'] {
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
   /* Colours (light mode) */
   --sb-color-white: hsl(223, 13%, 10%);
   --sb-color-gray-1: hsl(222, 13%, 16%);
