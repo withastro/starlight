@@ -12,7 +12,7 @@ interface Props {
 <div class="header">
   <a href={import.meta.env.BASE_URL} class="site-title">{config.title}</a>
   <Search />
-  <div class="hidden md:visible right-group">
+  <div class="hidden md:flex right-group">
     <ThemeSelect />
     <LanguageSelect locale={Astro.props.locale} />
   </div>
@@ -35,7 +35,6 @@ interface Props {
   }
 
   .right-group {
-    display: flex;
     gap: 1rem;
   }
 </style>
