@@ -23,6 +23,7 @@ export default function StarbookIntegration(
     name: 'starbook',
     hooks: {
       'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
+        injectRoute({ pattern: '404', entryPoint: 'starbook/404.astro' });
         injectRoute({
           pattern: '[...slug]',
           entryPoint: 'starbook/index.astro',
