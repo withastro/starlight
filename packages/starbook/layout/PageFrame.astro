@@ -43,7 +43,7 @@ const hasSidebar = Astro.slots.has('sidebar');
 
   .hasSidebar .header {
     padding-inline-end: calc(
-      var(--sb-nav-pad-x) * 2 + var(--sb-menu-button-size)
+      var(--sb-nav-gap) + var(--sb-nav-pad-x) + var(--sb-menu-button-size)
     );
   }
 

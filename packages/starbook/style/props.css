@@ -115,8 +115,11 @@
   --sb-nav-pad-x: 1.5rem;
   --sb-nav-pad-y: 0.75rem;
   --sb-sidebar-width: 18.75rem;
+  --sb-sidebar-pad-x: 1rem;
   --sb-content-width: 45rem;
+  --sb-content-pad-x: 1rem;
   --sb-menu-button-size: 2rem;
+  --sb-nav-gap: var(--sb-content-pad-x);
 
   /* Global z-index values */
   --sb-z-index-navbar: 10;
@@ -179,5 +182,11 @@
     --sb-text-h2: var(--sb-text-4xl);
     --sb-text-h3: var(--sb-text-3xl);
     --sb-text-h4: var(--sb-text-2xl);
+  }
+}
+
+@media (min-width: 72rem) {
+  :root {
+    --sb-content-pad-x: 1.5rem;
   }
 }

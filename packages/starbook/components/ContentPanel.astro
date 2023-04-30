@@ -4,7 +4,7 @@
 
 <style>
   .content-panel {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem var(--sb-content-pad-x);
   }
   .content-panel + .content-panel {
     border-top: 1px solid var(--sb-color-hairline);
@@ -17,11 +17,7 @@
     margin-top: 1.5rem;
   }
 
-  @media (min-width: 50em) {
-    .content-panel {
-      padding: 1.5rem;
-    }
-
+  @media (min-width: 72rem) {
     .container {
       margin-inline-start: auto;
     }
