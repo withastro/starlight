@@ -16,9 +16,7 @@ import Icon from './Icon.astro';
 
   <dialog style="padding:0" aria-label="Search the documentation">
     <div class="dialog-frame">
-      <button data-close-modal class="flex md:hidden">
-        <Icon name="close" label="Close" />
-      </button>
+      <button data-close-modal class="flex md:hidden">Cancel</button>
       <div class="search-container">
         <div id="starbook__search"></div>
       </div>
@@ -147,11 +145,15 @@ import Icon from './Icon.astro';
   }
 
   button[data-close-modal] {
-    align-self: end;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    height: calc(64px * var(--pagefind-ui-scale));
     padding: 0.25rem;
     border: 0;
     background: transparent;
-    font-size: var(--sb-text-lg);
     cursor: pointer;
   }
 
@@ -179,6 +181,13 @@ import Icon from './Icon.astro';
 <style is:global>
   #starbook__search .pagefind-ui__search-input {
     font-weight: 400;
+    width: calc(100% - 5rem);
+  }
+
+  @media (min-width: 50rem) {
+    #starbook__search .pagefind-ui__search-input {
+      width: 100%;
+    }
   }
 
   #starbook__search input:focus {
