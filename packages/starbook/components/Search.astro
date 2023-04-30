@@ -184,7 +184,12 @@ import Icon from './Icon.astro';
 </style>
 
 <style is:global>
+  #starbook__search .pagefind-ui__form::before {
+    --pagefind-ui-text: var(--sb-color-gray-1);
+  }
+
   #starbook__search .pagefind-ui__search-input {
+    color: var(--sb-color-white);
     font-weight: 400;
     width: calc(100% - 5rem);
   }
