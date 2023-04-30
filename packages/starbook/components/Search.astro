@@ -164,9 +164,14 @@ import Icon from './Icon.astro';
     --pagefind-ui-background: var(--sb-color-black);
     --pagefind-ui-border: var(--sb-color-gray-5);
     --pagefind-ui-border-width: 1px;
+    --sb-search-cancel-space: 5rem;
   }
 
   @media (min-width: 50rem) {
+    #starbook__search {
+      --sb-search-cancel-space: 0px;
+    }
+
     dialog {
       margin: 4rem auto auto;
       border-radius: 0.5rem;
@@ -186,18 +191,13 @@ import Icon from './Icon.astro';
 <style is:global>
   #starbook__search .pagefind-ui__form::before {
     --pagefind-ui-text: var(--sb-color-gray-1);
+    opacity: 1;
   }
 
   #starbook__search .pagefind-ui__search-input {
     color: var(--sb-color-white);
     font-weight: 400;
-    width: calc(100% - 5rem);
-  }
-
-  @media (min-width: 50rem) {
-    #starbook__search .pagefind-ui__search-input {
-      width: 100%;
-    }
+    width: calc(100% - var(--sb-search-cancel-space));
   }
 
   #starbook__search input:focus {
@@ -205,7 +205,25 @@ import Icon from './Icon.astro';
   }
 
   #starbook__search .pagefind-ui__search-clear {
-    display: none;
+    inset-inline-end: var(--sb-search-cancel-space);
+    width: calc(60px * var(--pagefind-ui-scale));
+    padding: 0;
+    background-color: transparent;
+    overflow: hidden;
+  }
+  #starbook__search .pagefind-ui__search-clear:focus {
+    outline: 1px solid var(--sb-color-accent);
+  }
+  #starbook__search .pagefind-ui__search-clear::before {
+    content: '';
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+      center / 50% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+      center / 50% no-repeat;
+    background-color: var(--sb-color-text-accent);
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   #starbook__search .pagefind-ui__results > * + * {
