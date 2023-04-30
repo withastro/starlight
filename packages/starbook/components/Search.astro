@@ -269,4 +269,15 @@ import Icon from './Icon.astro';
   #starbook__search .pagefind-ui__result-excerpt {
     font-size: var(--sb-text-body-sm);
   }
+
+  #starbook__search mark {
+    color: var(--sb-color-white);
+    background-color: var(--sb-color-accent-low);
+    font-weight: 500;
+    padding: 0.1em 0.2em;
+  }
+
+  #starbook__search .pagefind-ui__result:focus-within mark {
+    text-decoration: underline;
+  }
 </style>
