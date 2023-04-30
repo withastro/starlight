@@ -46,6 +46,8 @@
   --sb-color-hairline: var(--sb-color-gray-6);
   --sb-color-hairline-shade: var(--sb-color-black);
 
+  --sb-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+
   /* Shadows (dark mode) */
   --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.12),
     0px 2px 1px hsla(0, 0%, 0%, 0.24);
@@ -164,6 +166,8 @@
   --sb-color-bg-sidebar: var(--sb-color-bg);
   --sb-color-bg-inline-code: var(--sb-color-gray-6);
   --sb-color-hairline-shade: var(--sb-color-gray-6);
+
+  --sb-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 
   /* Shadows (light mode) */
   --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06),
