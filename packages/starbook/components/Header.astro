@@ -21,6 +21,7 @@ interface Props {
 <style>
   .header {
     display: flex;
+    gap: var(--sb-nav-gap);
     justify-content: space-between;
     align-items: center;
     height: 100%;
@@ -36,5 +37,26 @@ interface Props {
 
   .right-group {
     gap: 1rem;
+  }
+
+  @media (min-width: 50rem) {
+    .header {
+      --__sidebar-width: var(--sb-sidebar-width) - var(--sb-nav-pad-x);
+      --__main-column-fr: calc(
+        (100% - var(--sb-content-width) - 2 * var(--sb-sidebar-width)) / 2
+      );
+      display: grid;
+      grid-template-columns:
+        /* 1 (site title): runs up until the main content column’s left edge.  */
+        calc(
+          var(--__sidebar-width) +
+            max(0rem, var(--__main-column-fr) - var(--sb-nav-gap))
+        )
+        /* 2 (search box): all free space that is available. */
+        1fr
+        /* 3 (right items): use the space that these need. */
+        auto;
+      align-content: center;
+    }
   }
 </style>
