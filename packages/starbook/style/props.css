@@ -125,6 +125,7 @@
 
   /* Global z-index values */
   --sb-z-index-navbar: 10;
+  --sb-z-index-skiplink: 20;
 }
 
 :root[data-theme='light'],
