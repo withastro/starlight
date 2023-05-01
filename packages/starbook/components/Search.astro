@@ -130,6 +130,9 @@ import Icon from './Icon.astro';
     max-height: 100%;
     box-shadow: var(--sb-shadow-lg);
   }
+  dialog[open] {
+    display: grid;
+  }
 
   dialog::backdrop {
     background-color: var(--sb-color-backdrop-overlay);
