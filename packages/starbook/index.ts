@@ -33,10 +33,12 @@ export default function StarbookIntegration(
           pattern: '[...slug]',
           entryPoint: 'starbook/index.astro',
         });
-        injectRoute({
-          pattern: '[...path]',
-          entryPoint: 'starbook/pagefind.ts',
-        });
+        if (command === 'dev') {
+          injectRoute({
+            pattern: '[...path]',
+            entryPoint: 'starbook/pagefind.ts',
+          });
+        }
         const newConfig: AstroUserConfig = {
           vite: {
             plugins: [vitePluginStarBookUserConfig(userConfig, config)],
