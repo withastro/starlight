@@ -1,4 +1,5 @@
-:root {
+:root,
+::backdrop {
   /* Colors (dark mode) */
   --sb-color-white: hsl(0, 0%, 100%); /* “white” */
   --sb-color-gray-1: hsl(231, 23%, 94%);
@@ -44,6 +45,8 @@
   --sb-color-bg-inline-code: var(--sb-color-gray-5);
   --sb-color-hairline: var(--sb-color-gray-6);
   --sb-color-hairline-shade: var(--sb-color-black);
+
+  --sb-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
 
   /* Shadows (dark mode) */
   --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.12),
@@ -114,14 +117,18 @@
   --sb-nav-pad-x: 1.5rem;
   --sb-nav-pad-y: 0.75rem;
   --sb-sidebar-width: 18.75rem;
+  --sb-sidebar-pad-x: 1rem;
   --sb-content-width: 45rem;
+  --sb-content-pad-x: 1rem;
   --sb-menu-button-size: 2rem;
+  --sb-nav-gap: var(--sb-content-pad-x);
 
   /* Global z-index values */
   --sb-z-index-navbar: 10;
 }
 
-:root[data-theme='light'] {
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
   /* Colours (light mode) */
   --sb-color-white: hsl(223, 13%, 10%);
   --sb-color-gray-1: hsl(222, 13%, 16%);
@@ -160,6 +167,8 @@
   --sb-color-bg-inline-code: var(--sb-color-gray-6);
   --sb-color-hairline-shade: var(--sb-color-gray-6);
 
+  --sb-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
+
   /* Shadows (light mode) */
   --sb-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06),
     0px 2px 1px hsla(0, 0%, 0%, 0.06);
@@ -177,5 +186,11 @@
     --sb-text-h2: var(--sb-text-4xl);
     --sb-text-h3: var(--sb-text-3xl);
     --sb-text-h4: var(--sb-text-2xl);
+  }
+}
+
+@media (min-width: 72rem) {
+  :root {
+    --sb-content-pad-x: 1.5rem;
   }
 }

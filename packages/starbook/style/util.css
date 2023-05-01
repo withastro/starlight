@@ -11,16 +11,22 @@
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
-.visible {
-  visibility: visible;
+.flex {
+  display: flex;
+}
+.block {
+  display: block;
 }
 @media (min-width: 50rem) {
   .md\:hidden {
-    visibility: hidden;
+    display: none;
   }
-  .md\:visible {
-    visibility: visible;
+  .md\:flex {
+    display: flex;
+  }
+  .md\:block {
+    display: block;
   }
 }
