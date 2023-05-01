@@ -1,0 +1,49 @@
+.starbook-aside {
+  padding: 1rem;
+  border-inline-start: 0.25rem solid;
+  color: var(--sb-color-white);
+}
+.starbook-aside--note {
+  --sb-color-asides-text-accent: var(--sb-color-blue-high);
+  border-color: var(--sb-color-blue);
+  background-color: var(--sb-color-blue-low);
+}
+.starbook-aside--tip {
+  --sb-color-asides-text-accent: var(--sb-color-purple-high);
+  border-color: var(--sb-color-purple);
+  background-color: var(--sb-color-purple-low);
+}
+.starbook-aside--caution {
+  --sb-color-asides-text-accent: var(--sb-color-orange-high);
+  border-color: var(--sb-color-orange);
+  background-color: var(--sb-color-orange-low);
+}
+.starbook-aside--danger {
+  --sb-color-asides-text-accent: var(--sb-color-red-high);
+  border-color: var(--sb-color-red);
+  background-color: var(--sb-color-red-low);
+}
+
+.starbook-aside__title {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: var(--sb-text-h5);
+  font-weight: 600;
+  line-height: var(--sb-line-height-headings);
+  color: var(--sb-color-asides-text-accent);
+}
+
+.starbook-aside__icon {
+  font-size: 1.333em;
+  width: 1em;
+  height: 1em;
+}
+
+.starbook-aside__title + .starbook-aside__content {
+  margin-top: 0.5rem;
+}
+
+.starbook-aside__content a {
+  color: var(--sb-color-asides-text-accent);
+}

@@ -17,7 +17,8 @@
     "./schema": "./schema.ts",
     "./types": "./types.ts",
     "./pagefind.ts": "./pagefind.ts",
-    "./index.astro": "./index.astro"
+    "./index.astro": "./index.astro",
+    "./404.astro": "./404.astro"
   },
   "peerDependencies": {
     "astro": "^2"

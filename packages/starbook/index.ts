@@ -28,6 +28,7 @@ export default function StarbookIntegration(
         updateConfig,
         command,
       }) => {
+        injectRoute({ pattern: '404', entryPoint: 'starbook/404.astro' });
         injectRoute({
           pattern: '[...slug]',
           entryPoint: 'starbook/index.astro',
@@ -45,6 +46,11 @@ export default function StarbookIntegration(
           },
           markdown: {
             remarkPlugins: [...starbookAsides()],
+            shikiConfig:
+              // Configure Shiki theme if the user is using the default github-dark theme.
+              config.markdown.shikiConfig.theme !== 'github-dark'
+                ? {}
+                : { theme: 'css-variables' },
           },
         };
         updateConfig(newConfig);

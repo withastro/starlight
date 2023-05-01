@@ -2,22 +2,61 @@
 import config from 'virtual:starbook/user-config';
 import LanguageSelect from './LanguageSelect.astro';
 import Search from './Search.astro';
+import ThemeSelect from './ThemeSelect.astro';
 
 interface Props {
   locale: string | undefined;
 }
 ---
 
-<header>
-  <span><strong>{config.title}</strong> {config.tagline}</span>
+<div class="header">
+  <a href={import.meta.env.BASE_URL} class="site-title">{config.title}</a>
   <Search />
-  <LanguageSelect locale={Astro.props.locale} />
-</header>
+  <div class="hidden md:flex right-group">
+    <ThemeSelect />
+    <LanguageSelect locale={Astro.props.locale} />
+  </div>
+</div>
 
 <style>
-  header {
+  .header {
     display: flex;
+    gap: var(--sb-nav-gap);
     justify-content: space-between;
-    padding: 1rem;
+    align-items: center;
+    height: 100%;
+  }
+
+  .site-title {
+    font-size: var(--sb-text-2xl);
+    font-weight: 600;
+    color: var(--sb-color-text-accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .right-group {
+    gap: 1rem;
+  }
+
+  @media (min-width: 50rem) {
+    .header {
+      --__sidebar-width: var(--sb-sidebar-width) - var(--sb-nav-pad-x);
+      --__main-column-fr: calc(
+        (100% - var(--sb-content-width) - 2 * var(--sb-sidebar-width)) / 2
+      );
+      display: grid;
+      grid-template-columns:
+        /* 1 (site title): runs up until the main content column’s left edge.  */
+        calc(
+          var(--__sidebar-width) +
+            max(0rem, var(--__main-column-fr) - var(--sb-nav-gap))
+        )
+        /* 2 (search box): all free space that is available. */
+        1fr
+        /* 3 (right items): use the space that these need. */
+        auto;
+      align-content: center;
+    }
   }
 </style>

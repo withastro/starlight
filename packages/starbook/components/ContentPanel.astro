@@ -1,0 +1,25 @@
+<div class="content-panel">
+  <div class="container"><slot /></div>
+</div>
+
+<style>
+  .content-panel {
+    padding: 1.5rem var(--sb-content-pad-x);
+  }
+  .content-panel + .content-panel {
+    border-top: 1px solid var(--sb-color-hairline);
+  }
+  .container {
+    max-width: var(--sb-content-width);
+  }
+
+  .container > :global(* + *) {
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 72rem) {
+    .container {
+      margin-inline-start: auto;
+    }
+  }
+</style>

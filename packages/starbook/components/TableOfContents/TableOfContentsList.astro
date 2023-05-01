@@ -1,0 +1,35 @@
+---
+import type { generateToC } from './generateToC';
+
+interface Props {
+  toc: ReturnType<typeof generateToC>;
+  nested?: boolean;
+}
+
+const { toc, nested } = Astro.props;
+---
+
+<ul class:list={{ nested }}>
+  {
+    toc.map((heading) => (
+      <li>
+        <a href={'#' + heading.slug}>{heading.text}</a>
+        {heading.children.length > 0 && (
+          <Astro.self toc={heading.children} nested />
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    padding: 0;
+  }
+  .nested {
+    padding-inline-start: 1rem;
+  }
+  ul :global(::marker) {
+    color: transparent;
+  }
+</style>

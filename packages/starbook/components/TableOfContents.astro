@@ -1,20 +1,17 @@
 ---
-import type { generateToC } from './TableOfContents/generateToC';
+import type { MarkdownHeading } from 'astro';
+import config from 'virtual:starbook/user-config';
+import { generateToC } from './TableOfContents/generateToC';
+import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
 
 interface Props {
-  toc: ReturnType<typeof generateToC>;
+  headings: MarkdownHeading[];
 }
 
-const { toc } = Astro.props;
+const toc = generateToC(Astro.props.headings, config.tableOfContents);
 ---
 
-<ul>
-  {
-    toc.map((heading) => (
-      <li>
-        <a href={'#' + heading.slug}>{heading.text}</a>
-        {heading.children.length > 0 && <Astro.self toc={heading.children} />}
-      </li>
-    ))
-  }
-</ul>
+<nav aria-labelledby="starbook__on-this-page">
+  <h2 id="starbook__on-this-page">On this page</h2>
+  <TableOfContentsList toc={toc} />
+</nav>
