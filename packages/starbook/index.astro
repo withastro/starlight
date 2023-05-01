@@ -27,6 +27,7 @@ import MarkdownContent from './components/MarkdownContent.astro';
 import PrevNextLinks from './components/PrevNextLinks.astro';
 import RightSidebarPanel from './components/RightSidebarPanel.astro';
 import Sidebar from './components/Sidebar.astro';
+import SkipLink from './components/SkipLink.astro';
 import TableOfContents from './components/TableOfContents.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
 import PageFrame from './layout/PageFrame.astro';
@@ -66,6 +67,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
   </head>
   <body>
     <ThemeProvider />
+    <SkipLink />
     <PageFrame>
       <Header slot="header" locale={locale} />
       <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
