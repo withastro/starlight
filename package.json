@@ -7,5 +7,6 @@
   "license": "MIT",
   "devDependencies": {
     "astro": "^2.1.7"
-  }
+  },
+  "packageManager": "pnpm@8.2.0"
 }
