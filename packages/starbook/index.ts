@@ -1,3 +1,4 @@
+import mdx from '@astrojs/mdx';
 import type {
   AstroConfig,
   AstroIntegration,
@@ -16,10 +17,10 @@ import {
 
 export default function StarbookIntegration(
   opts: StarBookUserConfig
-): AstroIntegration {
+): AstroIntegration[] {
   const userConfig = StarbookConfigSchema.parse(opts);
 
-  return {
+  const StarBook: AstroIntegration = {
     name: 'starbook',
     hooks: {
       'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
@@ -58,6 +59,8 @@ export default function StarbookIntegration(
       },
     },
   };
+
+  return [StarBook, mdx()];
 }
 
 function resolveVirtualModuleId(id: string) {
