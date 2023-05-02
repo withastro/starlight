@@ -17,9 +17,18 @@ import Icon from './Icon.astro';
   <dialog style="padding:0" aria-label="Search the documentation">
     <div class="dialog-frame">
       <button data-close-modal class="flex md:hidden">Cancel</button>
-      <div class="search-container">
-        <div id="starbook__search"></div>
-      </div>
+      {
+        import.meta.env.DEV ? (
+          <div style="margin: auto; text-align: center;">
+            <p>Search is only available in production builds.</p>
+            <p>Try building and previewing the site to test it out locally.</p>
+          </div>
+        ) : (
+          <div class="search-container">
+            <div id="starbook__search" />
+          </div>
+        )
+      }
     </div>
   </dialog>
 </site-search>
@@ -73,6 +82,7 @@ import Icon from './Icon.astro';
   customElements.define('site-search', SiteSearch);
 
   window.addEventListener('DOMContentLoaded', () => {
+    if (import.meta.env.DEV) return;
     const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
     onIdle(async () => {
       const { PagefindUI } = await import('@pagefind/default-ui');
