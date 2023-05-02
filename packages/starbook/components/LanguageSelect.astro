@@ -16,7 +16,7 @@ function localizedPathname(locale: string | undefined): string {
 ---
 
 {
-  config.locales && Object.keys(config.locales).length > 1 && (
+  config.isMultilingual && (
     <starbook-lang-select>
       <Select
         icon="translate"
