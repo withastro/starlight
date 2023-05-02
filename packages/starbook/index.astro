@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPathsResult, InferGetStaticPropsType } from 'astro';
-import { getCollection } from 'astro:content';
 import config from 'virtual:starbook/user-config';
 
+import { docs } from './utils/collections';
 import { getPrevNextLinks, getSidebar } from './utils/navigation';
 import {
   slugToDir,
@@ -40,8 +40,6 @@ import './style/asides.css';
 import 'virtual:starbook/user-css';
 
 export async function getStaticPaths() {
-  const docs = await getCollection('docs');
-
   return docs.map((doc) => ({
     params: { slug: slugToParam(doc.slug) },
     props: doc,

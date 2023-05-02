@@ -1,14 +1,13 @@
-import { CollectionEntry, getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import { basename, dirname } from 'node:path';
 import { slugToPathname } from '../utils/slugs';
 import config from 'virtual:starbook/user-config';
+import { docs as allDocs, getLocaleDocs } from './collections';
 import type {
   AutoSidebarGroup,
   SidebarItem,
   SidebarLinkItem,
 } from './user-config';
-
-const allDocs = await getCollection('docs');
 
 export interface Link {
   type: 'link';
@@ -203,17 +202,7 @@ export function getSidebar(
   pathname: string,
   locale: string | undefined
 ): SidebarEntry[] {
-  let docs = allDocs;
-  if (config.locales) {
-    if (locale && locale in config.locales) {
-      docs = allDocs.filter((doc) => doc.id.startsWith(locale + '/'));
-    } else if (config.locales.root) {
-      const langKeys = Object.keys(config.locales).filter((k) => k !== 'root');
-      const isLangDir = new RegExp(`^(${langKeys.join('|')})/`);
-      docs = allDocs.filter((doc) => !isLangDir.test(doc.id));
-    }
-  }
-
+  const docs = getLocaleDocs(locale);
   if (config.sidebar) {
     return config.sidebar.map((group) =>
       configItemToEntry(group, pathname, locale, docs)
