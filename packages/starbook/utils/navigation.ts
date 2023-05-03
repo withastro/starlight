@@ -145,7 +145,7 @@ function treeify(routes: Route[], baseDir: string): Dir {
 }
 
 /** Create a link entry for a given content collection entry. */
-function linkFromId(slug: string, currentPathname: string): Link {
+function linkFromSlug(slug: string, currentPathname: string): Link {
   const doc = routes.find((doc) => doc.slug === slug)!;
   return makeLink(
     slugToPathname(doc.slug),
@@ -162,8 +162,8 @@ function groupFromDir(
   currentPathname: string,
   locale: string | undefined
 ): Group {
-  const entries = Object.entries(dir).map(([key, dirOrId]) =>
-    dirToItem(dirOrId, `${fullPath}/${key}`, key, currentPathname, locale)
+  const entries = Object.entries(dir).map(([key, dirOrSlug]) =>
+    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale)
   );
   return {
     type: 'group',
@@ -172,17 +172,17 @@ function groupFromDir(
   };
 }
 
-/** Create a sidebar entry for a directory or content ID. */
+/** Create a sidebar entry for a directory or content slug. */
 function dirToItem(
-  dirOrId: Dir[string],
+  dirOrSlug: Dir[string],
   fullPath: string,
   dirName: string,
   currentPathname: string,
   locale: string | undefined
 ): SidebarEntry {
-  return typeof dirOrId === 'string'
-    ? linkFromId(dirOrId, currentPathname)
-    : groupFromDir(dirOrId, fullPath, dirName, currentPathname, locale);
+  return typeof dirOrSlug === 'string'
+    ? linkFromSlug(dirOrSlug, currentPathname)
+    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale);
 }
 
 /** Create a sidebar entry for a given content directory. */
@@ -191,8 +191,8 @@ function sidebarFromDir(
   currentPathname: string,
   locale: string | undefined
 ) {
-  return Object.entries(tree).map(([key, dirOrId]) =>
-    dirToItem(dirOrId, key, key, currentPathname, locale)
+  return Object.entries(tree).map(([key, dirOrSlug]) =>
+    dirToItem(dirOrSlug, key, key, currentPathname, locale)
   );
 }
 
