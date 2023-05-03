@@ -209,7 +209,6 @@ export const StarbookConfigSchema = StarbookUserConfigSchema.strict().transform(
       // Make sure we can find the default locale and if not, help the user set it.
       // We treat the root locale as the default if present and no explicit default is set.
       const defaultLocaleConfig = locales[defaultLocale || 'root'];
-      console.log({ defaultLocaleConfig });
 
       if (!defaultLocaleConfig) {
         const availableLocales = Object.keys(locales)
