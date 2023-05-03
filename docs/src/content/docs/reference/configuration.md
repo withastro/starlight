@@ -114,6 +114,7 @@ import starbook from 'starbook';
 export default defineConfig({
   integrations: [
     starbook({
+      // Set English as the default language for this site.
       defaultLocale: 'en',
       locales: {
         // English docs in `src/content/docs/en/`
