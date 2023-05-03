@@ -1,8 +1,7 @@
-import type { CollectionEntry } from 'astro:content';
 import { basename, dirname } from 'node:path';
-import { slugToPathname } from '../utils/slugs';
 import config from 'virtual:starbook/user-config';
-import { docs as allDocs, getLocaleDocs } from './collections';
+import { slugToPathname } from '../utils/slugs';
+import { Route, getLocaleRoutes, routes } from './routing';
 import type {
   AutoSidebarGroup,
   SidebarItem,
@@ -25,13 +24,13 @@ interface Group {
 export type SidebarEntry = Link | Group;
 
 /**
- * A representation of the file structure. For each object entry:
- * if it's a folder, the key is the directory name, and value is the directory
- * content; if it's a doc file, the key is the doc's source file name, and value
- * is the collection entry.
+ * A representation of the route structure. For each object entry:
+ * if it’s a folder, the key is the directory name, and value is the directory
+ * content; if it’s a route entry, the key is the last segment of the route, and value
+ * is the entry’s full slug.
  */
 interface Dir {
-  [item: string]: Dir | CollectionEntry<'docs'>['id'];
+  [item: string]: Dir | string;
 }
 
 /** Convert an item in a user’s sidebar config to a sidebar entry. */
@@ -39,18 +38,18 @@ function configItemToEntry(
   item: SidebarItem,
   currentPathname: string,
   locale: string | undefined,
-  docs: CollectionEntry<'docs'>[]
+  routes: Route[]
 ): SidebarEntry {
   if ('link' in item) {
     return linkFromConfig(item, locale, currentPathname);
   } else if ('autogenerate' in item) {
-    return groupFromAutogenerateConfig(item, locale, docs, currentPathname);
+    return groupFromAutogenerateConfig(item, locale, routes, currentPathname);
   } else {
     return {
       type: 'group',
       label: item.label,
       entries: item.items.map((i) =>
-        configItemToEntry(i, currentPathname, locale, docs)
+        configItemToEntry(i, currentPathname, locale, routes)
       ),
     };
   }
@@ -60,12 +59,12 @@ function configItemToEntry(
 function groupFromAutogenerateConfig(
   item: AutoSidebarGroup,
   locale: string | undefined,
-  docs: CollectionEntry<'docs'>[],
+  routes: Route[],
   currentPathname: string
 ): Group {
   const { directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
-  const dirDocs = docs.filter((doc) => doc.id.startsWith(localeDir));
+  const dirDocs = routes.filter((doc) => doc.slug.startsWith(localeDir));
   const tree = treeify(dirDocs, localeDir);
   return {
     type: 'group',
@@ -112,27 +111,26 @@ function makeLink(href: string, label: string, currentPathname: string): Link {
 }
 
 /** Get the segments leading to a page. */
-function getBreadcrumbs(
-  id: CollectionEntry<'docs'>['id'],
-  baseDir: string
-): string[] {
+function getBreadcrumbs(slug: string, baseDir: string): string[] {
   // Ensure base directory ends in a trailing slash.
   if (!baseDir.endsWith('/')) baseDir += '/';
-  // Strip base directory from file ID if present.
-  const relativeId = id.startsWith(baseDir) ? id.replace(baseDir, '') : id;
-  let dir = dirname(relativeId);
+  // Strip base directory from slug if present.
+  const relativeSlug = slug.startsWith(baseDir)
+    ? slug.replace(baseDir, '')
+    : slug;
+  let dir = dirname(relativeSlug);
   // Return no breadcrumbs for items in the root directory.
   if (dir === '.') return [];
   return dir.split('/');
 }
 
-/** Turn a flat array of docs into a tree structure. */
-function treeify(docs: CollectionEntry<'docs'>[], baseDir: string): Dir {
+/** Turn a flat array of routes into a tree structure. */
+function treeify(routes: Route[], baseDir: string): Dir {
   const treeRoot: Dir = {};
-  docs.forEach((doc) => {
-    const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
+  routes.forEach((doc) => {
+    const breadcrumbs = getBreadcrumbs(doc.slug, baseDir);
 
-    // Walk down the file's path to generate the fs structure
+    // Walk down the route’s path to generate the tree.
     let currentDir = treeRoot;
     breadcrumbs.forEach((dir) => {
       // Create new folder if needed.
@@ -140,19 +138,20 @@ function treeify(docs: CollectionEntry<'docs'>[], baseDir: string): Dir {
       // Go into the subdirectory.
       currentDir = currentDir[dir] as Dir;
     });
-    // We've walked through the path. Register the file in this directory.
-    currentDir[basename(doc.id)] = doc.id;
+    // We’ve walked through the path. Register the route in this directory.
+    currentDir[basename(doc.slug)] = doc.slug;
   });
   return treeRoot;
 }
 
 /** Create a link entry for a given content collection entry. */
-function linkFromId(
-  id: CollectionEntry<'docs'>['id'],
-  currentPathname: string
-): Link {
-  const doc = allDocs.find((doc) => doc.id === id)!;
-  return makeLink(slugToPathname(doc.slug), doc.data.title, currentPathname);
+function linkFromId(slug: string, currentPathname: string): Link {
+  const doc = routes.find((doc) => doc.slug === slug)!;
+  return makeLink(
+    slugToPathname(doc.slug),
+    doc.entry.data.title,
+    currentPathname
+  );
 }
 
 /** Create a group entry for a given content collection directory. */
@@ -202,13 +201,13 @@ export function getSidebar(
   pathname: string,
   locale: string | undefined
 ): SidebarEntry[] {
-  const docs = getLocaleDocs(locale);
+  const routes = getLocaleRoutes(locale);
   if (config.sidebar) {
     return config.sidebar.map((group) =>
-      configItemToEntry(group, pathname, locale, docs)
+      configItemToEntry(group, pathname, locale, routes)
     );
   } else {
-    const tree = treeify(docs, locale || '');
+    const tree = treeify(routes, locale || '');
     return sidebarFromDir(tree, pathname, locale);
   }
 }

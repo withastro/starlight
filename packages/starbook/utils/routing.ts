@@ -1,7 +1,7 @@
 import type { GetStaticPathsItem } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import config from 'virtual:starbook/user-config';
-import { defaultLocaleDocs, docs, getLocaleDocs } from './collections';
+import { docs } from './collections';
 import {
   LocaleData,
   localizedSlug,
@@ -9,7 +9,7 @@ import {
   slugToParam,
 } from './slugs';
 
-interface Route extends LocaleData {
+export interface Route extends LocaleData {
   entry: CollectionEntry<'docs'>;
   slug: string;
   isFallback?: true;
@@ -30,6 +30,12 @@ function getRoutes(): Route[] {
 
   // In multilingual sites, add required fallback routes.
   if (config.isMultilingual) {
+    /** Entries in the docs content collection for the default locale. */
+    const defaultLocaleDocs = getLocaleDocs(
+      config.defaultLocale?.locale === 'root'
+        ? undefined
+        : config.defaultLocale?.locale
+    );
     for (const key in config.locales) {
       if (key === config.defaultLocale.locale) continue;
       const locale = config.locales[key];
@@ -62,3 +68,36 @@ function getPaths(): Path[] {
   }));
 }
 export const paths = getPaths();
+
+/**
+ * Get all routes for a specific locale.
+ * A locale of `undefined` is treated as the “root” locale, if configured.
+ */
+export function getLocaleRoutes(locale: string | undefined): Route[] {
+  return filterByLocale(routes, locale);
+}
+
+/**
+ * Get all entries in the docs content collection for a specific locale.
+ * A locale of `undefined` is treated as the “root” locale, if configured.
+ */
+function getLocaleDocs(locale: string | undefined): CollectionEntry<'docs'>[] {
+  return filterByLocale(docs, locale);
+}
+
+/** Filter an array to find items whose slug matches the passed locale. */
+function filterByLocale<T extends { slug: string }>(
+  items: T[],
+  locale: string | undefined
+): T[] {
+  if (config.locales) {
+    if (locale && locale in config.locales) {
+      return items.filter((i) => i.slug.startsWith(locale + '/'));
+    } else if (config.locales.root) {
+      const langKeys = Object.keys(config.locales).filter((k) => k !== 'root');
+      const isLangDir = new RegExp(`^(${langKeys.join('|')})/`);
+      return items.filter((i) => !isLangDir.test(i.slug));
+    }
+  }
+  return items;
+}
