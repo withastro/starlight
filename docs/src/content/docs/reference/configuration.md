@@ -114,6 +114,8 @@ import starbook from 'starbook';
 export default defineConfig({
   integrations: [
     starbook({
+      // Set English as the default language for this site.
+      defaultLocale: 'en',
       locales: {
         // English docs in `src/content/docs/en/`
         en: {
@@ -176,6 +178,16 @@ starbook({
 ```
 
 For example, this allows you to serve `/getting-started/` as an English route and use `/fr/getting-started/` as the equivalent French page.
+
+### `defaultLocale`
+
+**type:** `string`
+
+Set the language which is the default for this site.
+The value should match one of the keys of your [`locales`](#locales) object.
+(If your default language is your [root locale](#root-locale), you can skip this.)
+
+The default locale will be used to provide fallback content where translations are missing.
 
 ### `social`
 

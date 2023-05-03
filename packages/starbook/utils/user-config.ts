@@ -84,7 +84,7 @@ const SidebarGroupSchema: z.ZodType<
   ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
-export const StarbookConfigSchema = z.object({
+const StarbookUserConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
     .string()
@@ -177,6 +177,13 @@ export const StarbookConfigSchema = z.object({
     .optional()
     .describe('Configure locales for internationalization (i18n).'),
 
+  /**
+   * Specify the default language for this site.
+   *
+   * The default locale will be used to provide fallback content where translations are missing.
+   */
+  defaultLocale: z.string().optional(),
+
   /** Configure your site’s sidebar navigation items. */
   sidebar: SidebarGroupSchema.array().optional(),
 
@@ -194,6 +201,50 @@ export const StarbookConfigSchema = z.object({
    */
   customCss: z.string().array().optional().default([]),
 });
+
+export const StarbookConfigSchema = StarbookUserConfigSchema.strict().transform(
+  ({ locales, defaultLocale, ...config }, ctx) => {
+    if (locales !== undefined && Object.keys(locales).length > 1) {
+      // This is a multilingual site (more than one locale configured).
+      // Make sure we can find the default locale and if not, help the user set it.
+      // We treat the root locale as the default if present and no explicit default is set.
+      const defaultLocaleConfig = locales[defaultLocale || 'root'];
+
+      if (!defaultLocaleConfig) {
+        const availableLocales = Object.keys(locales)
+          .map((l) => `"${l}"`)
+          .join(', ');
+        ctx.addIssue({
+          code: 'custom',
+          message:
+            'Could not determine the default locale. ' +
+            'Please make sure `defaultLocale` in your StarBook config is one of ' +
+            availableLocales,
+        });
+        return z.NEVER;
+      }
+
+      return {
+        ...config,
+        /** Flag indicating if this site has multiple locales set up. */
+        isMultilingual: true,
+        /** Full locale object for this site’s default language. */
+        defaultLocale: { ...defaultLocaleConfig, locale: defaultLocale },
+        locales,
+      } as const;
+    }
+
+    // This is a monolingual site, so things are pretty simple.
+    return {
+      ...config,
+      /** Flag indicating if this site has multiple locales set up. */
+      isMultilingual: false,
+      /** Full locale object for this site’s default language. */
+      defaultLocale: undefined,
+      locales: undefined,
+    } as const;
+  }
+);
 
 export type StarbookConfig = z.infer<typeof StarbookConfigSchema>;
 export type StarBookUserConfig = z.input<typeof StarbookConfigSchema>;

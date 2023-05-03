@@ -22,7 +22,7 @@ const description = data.description || config.description;
 <link rel="canonical" href={canonical} />
 {
   canonical &&
-    config.locales &&
+    config.isMultilingual &&
     Object.entries(config.locales).map(
       ([locale, localeOpts]) =>
         localeOpts && (
