@@ -81,9 +81,9 @@ const prevNextLinks = getPrevNextLinks(sidebar);
             >
               {entry.data.title}
             </h1>
+            {isFallback && <FallbackContentNotice />}
           </ContentPanel>
           <ContentPanel>
-            {isFallback && <FallbackContentNotice />}
             <MarkdownContent><Content /></MarkdownContent>
             <footer>
               <LastUpdated id={entry.id} lang={lang} />
