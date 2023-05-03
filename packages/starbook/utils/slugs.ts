@@ -1,13 +1,22 @@
 import type { CollectionEntry } from 'astro:content';
 import config from 'virtual:starbook/user-config';
 
+export interface LocaleData {
+  /** Writing direction. */
+  dir: 'ltr' | 'rtl';
+  /** BCP-47 language tag. */
+  lang: string;
+  /** The base path at which a language is served. `undefined` for root locale slugs. */
+  locale: string | undefined;
+}
+
 /**
  * Get the “locale” of a slug. This is the base path at which a language is served.
  * For example, if French docs are in `src/content/docs/french/`, the locale is `french`.
  * Root locale slugs will return `undefined`.
  * @param slug A collection entry slug
  */
-export function slugToLocale(
+function slugToLocale(
   slug: CollectionEntry<'docs'>['slug']
 ): string | undefined {
   const locales = Object.keys(config.locales || {});
@@ -16,12 +25,19 @@ export function slugToLocale(
   return undefined;
 }
 
-/**
- * Get the BCP-47 language tag for the locale of a slug.
- * @param slug A collection entry slug
- */
-export function slugToLang(slug: CollectionEntry<'docs'>['slug']): string {
+/** Get locale information for a given slug. */
+export function slugToLocaleData(
+  slug: CollectionEntry<'docs'>['slug']
+): LocaleData {
   const locale = slugToLocale(slug);
+  return { dir: localeToDir(locale), lang: localeToLang(locale), locale };
+}
+
+/**
+ * Get the BCP-47 language tag for the given locale.
+ * @param locale Locale string or `undefined` for the root locale.
+ */
+function localeToLang(locale: string | undefined): string {
   const lang = locale
     ? config.locales?.[locale]?.lang
     : config.locales?.root?.lang;
@@ -29,13 +45,10 @@ export function slugToLang(slug: CollectionEntry<'docs'>['slug']): string {
 }
 
 /**
- * Get the configured writing direction for the locale of a slug.
- * @param slug A collection entry slug
+ * Get the configured writing direction for the given locale.
+ * @param locale Locale string or `undefined` for the root locale.
  */
-export function slugToDir(
-  slug: CollectionEntry<'docs'>['slug']
-): 'ltr' | 'rtl' {
-  const locale = slugToLocale(slug);
+function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
   const dir = locale
     ? config.locales?.[locale]?.dir
     : config.locales?.root?.dir;
@@ -53,4 +66,26 @@ export function slugToParam(slug: string): string | undefined {
 export function slugToPathname(slug: string): string {
   const param = slugToParam(slug);
   return param ? '/' + param + '/' : '/';
+}
+
+/**
+ * Convert a slug to a different locale.
+ * For example, passing a slug of `en/home` and a locale of `fr` results in `fr/home`.
+ * An undefined locale is treated as the root locale, resulting in `home`
+ * @param slug A collection entry slug
+ * @param locale The target locale
+ * @example
+ * localizedSlug('en/home', 'fr')       // => 'fr/home'
+ * localizedSlug('en/home', undefined)  // => 'home'
+ */
+export function localizedSlug(
+  slug: CollectionEntry<'docs'>['slug'],
+  locale: string | undefined
+): string {
+  const slugLocale = slugToLocale(slug);
+  if (slugLocale === locale) return slug;
+  if (slugLocale) {
+    return slug.replace(slugLocale + '/', locale ? locale + '/' : '');
+  }
+  return locale + '/' + slug;
 }

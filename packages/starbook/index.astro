@@ -1,15 +1,9 @@
 ---
-import type { GetStaticPathsResult, InferGetStaticPropsType } from 'astro';
+import type { InferGetStaticPropsType } from 'astro';
 import config from 'virtual:starbook/user-config';
 
-import { docs } from './utils/collections';
 import { getPrevNextLinks, getSidebar } from './utils/navigation';
-import {
-  slugToDir,
-  slugToLang,
-  slugToLocale,
-  slugToParam,
-} from './utils/slugs';
+import { paths } from './utils/routing';
 
 // Built-in CSS styles.
 import './style/props.css';
@@ -40,19 +34,13 @@ import './style/asides.css';
 import 'virtual:starbook/user-css';
 
 export async function getStaticPaths() {
-  return docs.map((doc) => ({
-    params: { slug: slugToParam(doc.slug) },
-    props: doc,
-  })) satisfies GetStaticPathsResult;
+  return paths;
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { render, data, slug, id } = Astro.props;
-const { Content, headings } = await render();
-const lang = slugToLang(slug);
-const locale = slugToLocale(slug);
-const dir = slugToDir(slug);
+const { dir, entry, isFallback, lang, locale } = Astro.props;
+const { Content, headings } = await entry.render();
 const sidebar = getSidebar(Astro.url.pathname, locale);
 const prevNextLinks = getPrevNextLinks(sidebar);
 ---
@@ -61,7 +49,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <HeadSEO data={data} lang={lang} />
+    <HeadSEO data={entry.data} lang={lang} />
   </head>
   <body>
     <ThemeProvider />
@@ -79,7 +67,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
               config.editLink.baseUrl && (
                 <>
                   <h2>Contribute</h2>
-                  <EditLink data={data} id={id} />
+                  <EditLink data={entry.data} id={entry.id} />
                 </>
               )
             }
@@ -90,13 +78,13 @@ const prevNextLinks = getPrevNextLinks(sidebar);
             <h1
               style="font-size: var(--sb-text-h1); line-height: var(--sb-line-height-headings); font-weight: 600; color: var(--sb-color-white); margin-top: 1rem;"
             >
-              {data.title}
+              {entry.data.title}
             </h1>
           </ContentPanel>
           <ContentPanel>
             <MarkdownContent><Content /></MarkdownContent>
             <footer>
-              <LastUpdated id={id} lang={lang} />
+              <LastUpdated id={entry.id} lang={lang} />
               <PrevNextLinks {...prevNextLinks} dir={dir} />
             </footer>
           </ContentPanel>

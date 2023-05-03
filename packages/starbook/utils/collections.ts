@@ -3,6 +3,12 @@ import config from 'virtual:starbook/user-config';
 
 /** All entries in the docs content collection. */
 export const docs = await getCollection('docs');
+/** Entries in the docs content collection for the default locale. */
+export const defaultLocaleDocs = getLocaleDocs(
+  config.defaultLocale?.locale === 'root'
+    ? undefined
+    : config.defaultLocale?.locale
+);
 
 /**
  * Get all entries in the docs content collection for a specific locale.
