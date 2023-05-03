@@ -40,20 +40,21 @@ function getRoutes(): Route[] {
     );
     for (const key in config.locales) {
       if (key === config.defaultLocale.locale) continue;
-      const locale = config.locales[key];
-      if (!locale) continue;
-      const localeDocs = getLocaleDocs(key === 'root' ? undefined : key);
+      const localeConfig = config.locales[key];
+      if (!localeConfig) continue;
+      const locale = key === 'root' ? undefined : key;
+      const localeDocs = getLocaleDocs(locale);
       for (const fallback of defaultLocaleDocs) {
-        const slug = localizedSlug(fallback.slug, key);
+        const slug = localizedSlug(fallback.slug, locale);
         const doesNotNeedFallback = localeDocs.some((doc) => doc.slug === slug);
         if (doesNotNeedFallback) continue;
         routes.push({
           entry: fallback,
           slug,
           isFallback: true,
-          lang: locale.lang || 'en',
-          locale: key,
-          dir: locale.dir,
+          lang: localeConfig.lang || 'en',
+          locale,
+          dir: localeConfig.dir,
           entryMeta: slugToLocaleData(fallback.slug),
         });
       }
