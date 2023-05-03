@@ -14,6 +14,7 @@ import './style/util.css';
 // Components — can override built-in CSS, but not user CSS.
 import ContentPanel from './components/ContentPanel.astro';
 import EditLink from './components/EditLink.astro';
+import FallbackContentNotice from './components/FallbackContentNotice.astro';
 import HeadSEO from './components/HeadSEO.astro';
 import Header from './components/Header.astro';
 import LastUpdated from './components/LastUpdated.astro';
@@ -80,6 +81,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
             >
               {entry.data.title}
             </h1>
+            {isFallback && <FallbackContentNotice />}
           </ContentPanel>
           <ContentPanel>
             <MarkdownContent><Content /></MarkdownContent>

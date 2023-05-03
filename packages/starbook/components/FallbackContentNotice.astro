@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+---
+
+<p>
+  <Icon
+    name={'information'}
+    size="1.5rem"
+    color="var(--sb-color-text-accent)"
+  /><span>This content is not available in your language yet.</span>
+</p>
+
+<style>
+  p {
+    border: 1px solid var(--sb-color-gray-5);
+    padding: 0.5rem 1rem;
+    background-color: var(--sb-color-gray-6);
+    color: var(--sb-color-white);
+  }
+  p > * {
+    vertical-align: middle;
+    margin-inline-end: 0.5rem;
+  }
+  p > :last-child {
+    margin-inline-end: 0;
+  }
+</style>
