@@ -1,7 +1,6 @@
 import type { GetStaticPathsItem } from 'astro';
-import type { CollectionEntry } from 'astro:content';
+import { CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starbook/user-config';
-import { docs } from './collections';
 import {
   LocaleData,
   localizedSlug,
@@ -21,6 +20,9 @@ interface Path extends GetStaticPathsItem {
   params: { slug: string | undefined };
   props: Route;
 }
+
+/** All entries in the docs content collection. */
+const docs = await getCollection('docs');
 
 function getRoutes(): Route[] {
   const routes: Route[] = docs.map((entry) => ({
