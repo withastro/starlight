@@ -11,6 +11,7 @@ import {
 
 export interface Route extends LocaleData {
   entry: CollectionEntry<'docs'>;
+  entryMeta: LocaleData;
   slug: string;
   isFallback?: true;
   [key: string]: unknown;
@@ -25,6 +26,7 @@ function getRoutes(): Route[] {
   const routes: Route[] = docs.map((entry) => ({
     entry,
     slug: entry.slug,
+    entryMeta: slugToLocaleData(entry.slug),
     ...slugToLocaleData(entry.slug),
   }));
 
@@ -52,6 +54,7 @@ function getRoutes(): Route[] {
           lang: locale.lang || 'en',
           locale: key,
           dir: locale.dir,
+          entryMeta: slugToLocaleData(fallback.slug),
         });
       }
     }

@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { dir, entry, isFallback, lang, locale } = Astro.props;
+const { dir, entry, entryMeta, isFallback, lang, locale } = Astro.props;
 const { Content, headings } = await entry.render();
 const sidebar = getSidebar(Astro.url.pathname, locale);
 const prevNextLinks = getPrevNextLinks(sidebar);
@@ -74,7 +74,12 @@ const prevNextLinks = getPrevNextLinks(sidebar);
             }
           </RightSidebarPanel>
         </Fragment>
-        <main id="starbook__overview" data-pagefind-body>
+        <main
+          id="starbook__overview"
+          data-pagefind-body
+          lang={entryMeta.lang}
+          dir={entryMeta.dir}
+        >
           <ContentPanel>
             <h1
               style="font-size: var(--sb-text-h1); line-height: var(--sb-line-height-headings); font-weight: 600; color: var(--sb-color-white); margin-top: 1rem;"
