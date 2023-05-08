@@ -1,6 +1,6 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
-import { slugToPathname } from '../utils/slugs';
+import { slugToPathname } from './slugs';
 import { Route, getLocaleRoutes, routes } from './routing';
 import type {
   AutoSidebarGroup,

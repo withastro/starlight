@@ -15,9 +15,9 @@ importers:
         version: 2.1.7(@types/node@18.15.11)
       starlight:
         specifier: workspace:*
-        version: link:../packages/starbook
+        version: link:../packages/starlight
 
-  packages/starbook:
+  packages/starlight:
     dependencies:
       '@astrojs/mdx':
         specifier: ^0.19.0
