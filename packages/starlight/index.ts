@@ -21,13 +21,16 @@ export default function StarlightIntegration(
   const userConfig = StarlightConfigSchema.parse(opts);
 
   const Starlight: AstroIntegration = {
-    name: 'starlight',
+    name: '@astrojs/starlight',
     hooks: {
       'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
-        injectRoute({ pattern: '404', entryPoint: 'starlight/404.astro' });
+        injectRoute({
+          pattern: '404',
+          entryPoint: '@astrojs/starlight/404.astro',
+        });
         injectRoute({
           pattern: '[...slug]',
-          entryPoint: 'starlight/index.astro',
+          entryPoint: '@astrojs/starlight/index.astro',
         });
         const newConfig: AstroUserConfig = {
           vite: {
