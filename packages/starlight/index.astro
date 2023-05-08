@@ -1,0 +1,102 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import config from 'virtual:starlight/user-config';
+
+import { getPrevNextLinks, getSidebar } from './utils/navigation';
+import { paths } from './utils/routing';
+
+// Built-in CSS styles.
+import './style/props.css';
+import './style/reset.css';
+import './style/shiki.css';
+import './style/util.css';
+
+// Components — can override built-in CSS, but not user CSS.
+import ContentPanel from './components/ContentPanel.astro';
+import EditLink from './components/EditLink.astro';
+import FallbackContentNotice from './components/FallbackContentNotice.astro';
+import HeadSEO from './components/HeadSEO.astro';
+import Header from './components/Header.astro';
+import LastUpdated from './components/LastUpdated.astro';
+import MarkdownContent from './components/MarkdownContent.astro';
+import PrevNextLinks from './components/PrevNextLinks.astro';
+import RightSidebarPanel from './components/RightSidebarPanel.astro';
+import Sidebar from './components/Sidebar.astro';
+import SkipLink from './components/SkipLink.astro';
+import TableOfContents from './components/TableOfContents.astro';
+import ThemeProvider from './components/ThemeProvider.astro';
+import PageFrame from './layout/PageFrame.astro';
+import TwoColumnContent from './layout/TwoColumnContent.astro';
+
+// Remark component CSS (needs to override `MarkdownContent.astro`)
+import './style/asides.css';
+
+// Important that this is the last import so it can override built-in styles.
+import 'virtual:starlight/user-css';
+
+export async function getStaticPaths() {
+  return paths;
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { dir, entry, entryMeta, isFallback, lang, locale } = Astro.props;
+const { Content, headings } = await entry.render();
+const sidebar = getSidebar(Astro.url.pathname, locale);
+const prevNextLinks = getPrevNextLinks(sidebar);
+---
+
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <HeadSEO data={entry.data} lang={lang} />
+  </head>
+  <body>
+    <ThemeProvider />
+    <SkipLink />
+    <PageFrame>
+      <Header slot="header" locale={locale} />
+      <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
+      <TwoColumnContent>
+        <Fragment slot="right-sidebar">
+          <RightSidebarPanel>
+            <TableOfContents headings={headings} />
+          </RightSidebarPanel>
+          <RightSidebarPanel>
+            {
+              config.editLink.baseUrl && (
+                <>
+                  <h2>Contribute</h2>
+                  <EditLink data={entry.data} id={entry.id} />
+                </>
+              )
+            }
+          </RightSidebarPanel>
+        </Fragment>
+        <main
+          id="starlight__overview"
+          data-pagefind-body
+          lang={entryMeta.lang}
+          dir={entryMeta.dir}
+        >
+          <ContentPanel>
+            <h1
+              style="font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); margin-top: 1rem;"
+            >
+              {entry.data.title}
+            </h1>
+            {isFallback && <FallbackContentNotice />}
+          </ContentPanel>
+          <ContentPanel>
+            <MarkdownContent><Content /></MarkdownContent>
+            <footer>
+              <LastUpdated id={entry.id} lang={lang} />
+              <PrevNextLinks {...prevNextLinks} dir={dir} />
+            </footer>
+          </ContentPanel>
+        </main>
+      </TwoColumnContent>
+    </PageFrame>
+  </body>
+</html>

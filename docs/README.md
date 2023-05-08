@@ -1,9 +1,9 @@
-# StarBook Docs
+# Starlight Docs
 
-This directory contains the StarBook documentation website (built with StarBook!)
+This directory contains the Starlight documentation website (built with Starlight!)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starbook/tree/main/docs)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starbook/tree/main/docs)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/docs)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/docs)
 
 ## 🧞 Commands
 

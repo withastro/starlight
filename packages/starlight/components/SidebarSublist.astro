@@ -1,0 +1,78 @@
+---
+import type { SidebarEntry } from '../utils/navigation';
+
+interface Props {
+  sublist: SidebarEntry[];
+}
+---
+
+<ul>
+  {
+    Astro.props.sublist.map((entry) => (
+      <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
+        {entry.type === 'link' ? (
+          <a href={entry.href} aria-current={entry.isCurrent && 'true'}>
+            {entry.label}
+          </a>
+        ) : (
+          <>
+            <h2>{entry.label}</h2>
+            <Astro.self sublist={entry.entries} />
+          </>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    --sl-sidebar-item-padding-inline: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  h2 {
+    font-size: var(--sl-text-lg);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    padding-inline: var(--sl-sidebar-item-padding-inline);
+  }
+
+  .sidebar-group + .sidebar-group {
+    margin-top: 0.75rem;
+  }
+
+  a {
+    display: block;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: var(--sl-color-gray-2);
+    padding-inline: var(--sl-sidebar-item-padding-inline);
+  }
+
+  a:hover,
+  a:focus {
+    color: var(--sl-color-white);
+  }
+
+  [aria-current='true'],
+  [aria-current='true']:hover,
+  [aria-current='true']:focus {
+    font-weight: 600;
+    color: var(--sl-color-text-invert);
+    background-color: var(--sl-color-text-accent);
+  }
+
+  @media (min-width: 50rem) {
+    .sidebar-group + .sidebar-group {
+      margin-top: 0.5rem;
+    }
+    h2 {
+      font-size: var(--sl-text-base);
+    }
+    a {
+      font-size: var(--sl-text-xs);
+    }
+  }
+</style>

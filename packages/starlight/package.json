@@ -1,0 +1,42 @@
+{
+  "name": "starlight",
+  "version": "0.0.0",
+  "description": "Build beautiful, high-performance documentation websites with Astro",
+  "scripts": {},
+  "keywords": [
+    "docs",
+    "documentation",
+    "astro",
+    "withastro"
+  ],
+  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./schema": "./schema.ts",
+    "./types": "./types.ts",
+    "./index.astro": "./index.astro",
+    "./404.astro": "./404.astro"
+  },
+  "peerDependencies": {
+    "astro": "^2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "astro": "^2.1.7"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.19.0",
+    "@pagefind/default-ui": "^0.12.0",
+    "@types/mdast": "^3.0.11",
+    "bcp-47": "^2.1.0",
+    "execa": "^7.1.1",
+    "hastscript": "^7.2.0",
+    "pagefind": "^0.12.0",
+    "remark-directive": "^2.0.1",
+    "unified": "^10.1.2",
+    "unist-util-remove": "^3.1.1",
+    "unist-util-visit": "^4.1.2"
+  }
+}
