@@ -20,14 +20,14 @@
     "./404.astro": "./404.astro"
   },
   "peerDependencies": {
-    "astro": "^2"
+    "astro": "^2.4.3"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "astro": "^2.1.7"
+    "astro": "^2.4.3"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.19.0",
+    "@astrojs/mdx": "^0.19.1",
     "@pagefind/default-ui": "^0.12.0",
     "@types/mdast": "^3.0.11",
     "bcp-47": "^2.1.0",
