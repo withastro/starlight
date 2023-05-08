@@ -1,10 +1,10 @@
-# StarBook
+# Starlight
 
-StarBook is a documentation website framework for [Astro][astro].
+Starlight is a documentation website framework for [Astro][astro].
 
 ## Documentation
 
-[Read the StarBook docs][docs] (they’re built with StarBook!)
+[Read the Starlight docs][docs] (they’re built with Starlight!)
 
 ## Contributing
 
@@ -15,10 +15,10 @@ StarBook is a documentation website framework for [Astro][astro].
 
 MIT
 
-Copyright (c) 2023–present [StarBook contributors][contributors]
+Copyright (c) 2023–present [Starlight contributors][contributors]
 
 [astro]: https://astro.build/
-[docs]: https://star-book.netlify.app/
+[docs]: https://starlight.astro.build/
 [coc]: https://github.com/withastro/.github/blob/main/CODE_OF_CONDUCT.md
 [community]: https://github.com/withastro/.github/blob/main/COMMUNITY_GUIDE.md
-[contributors]: https://github.com/withastro/starbook/graphs/contributors
+[contributors]: https://github.com/withastro/starlight/graphs/contributors

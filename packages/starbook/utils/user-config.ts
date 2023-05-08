@@ -188,7 +188,7 @@ const StarbookUserConfigSchema = z.object({
   sidebar: SidebarGroupSchema.array().optional(),
 
   /**
-   * Provide CSS files to customize the look and feel of StarBook.
+   * Provide CSS files to customize the look and feel of your Starlight site.
    *
    * Supports local CSS files relative to the root of your project,
    * e.g. `'/src/custom.css'`, and CSS you installed as an npm
@@ -218,7 +218,7 @@ export const StarbookConfigSchema = StarbookUserConfigSchema.strict().transform(
           code: 'custom',
           message:
             'Could not determine the default locale. ' +
-            'Please make sure `defaultLocale` in your StarBook config is one of ' +
+            'Please make sure `defaultLocale` in your Starlight config is one of ' +
             availableLocales,
         });
         return z.NEVER;

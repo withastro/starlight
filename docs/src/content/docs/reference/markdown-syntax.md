@@ -2,7 +2,7 @@
 title: Markdown Syntax
 ---
 
-StarBook supports the full range of Markdown syntax.
+Starlight supports the full range of Markdown syntax.
 
 ## Inline styles
 
@@ -54,14 +54,14 @@ You can structure content using a heading. Headings in Markdown are indicated by
 
 Asides (also known as “admonitions” or “callouts”) are useful for displaying secondary information alongside a page’s main content.
 
-StarBook provides a custom Markdown syntax for rendering asides. Aside blocks are indicated using a triple colon `:::` and can be of type `note`, `tip`, `caution` or `danger`.
+Starlight provides a custom Markdown syntax for rendering asides. Aside blocks are indicated using a triple colon `:::` and can be of type `note`, `tip`, `caution` or `danger`.
 
 You can nest any other Markdown content types inside an aside, but asides are best suited to short and concise chunks of content.
 
 ### Note aside
 
 :::note
-StarBook is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
+Starlight is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
 
 ```sh
 npm run create astro@latest --template starbook
@@ -71,7 +71,7 @@ npm run create astro@latest --template starbook
 
 ````md
 :::note
-StarBook is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
+Starlight is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
 
 ```sh
 npm run create astro@latest --template starbook
@@ -100,11 +100,11 @@ Caution and danger asides are helpful for drawing a user’s attention to detail
 If you find yourself using these a lot, it may also be a sign that the thing you are documenting could benefit from being redesigned.
 
 :::caution
-If you are not sure you want an awesome docs site, think twice before using [StarBook](../../).
+If you are not sure you want an awesome docs site, think twice before using [Starlight](../../).
 :::
 
 :::danger
-Your users may be more productive and find your product easier to use thanks to helpful StarBook features.
+Your users may be more productive and find your product easier to use thanks to helpful Starlight features.
 
 - Clear navigation
 - User-configurable colour theme
@@ -114,11 +114,11 @@ Your users may be more productive and find your product easier to use thanks to 
 
 ```md
 :::caution
-If you are not sure you want an awesome docs site, think twice before using [StarBook](../../).
+If you are not sure you want an awesome docs site, think twice before using [Starlight](../../).
 :::
 
 :::danger
-Your users may be more productive and find your product easier to use thanks to helpful StarBook features.
+Your users may be more productive and find your product easier to use thanks to helpful Starlight features.
 
 - Clear navigation
 - User-configurable colour theme

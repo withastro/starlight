@@ -204,7 +204,7 @@ starbook({
 
 ### `customCss`
 
-Provide CSS files to customize the look and feel of StarBook.
+Provide CSS files to customize the look and feel of your Starlight site.
 
 Supports local CSS files relative to the root of your project, e.g. `'/src/custom.css'`, and CSS you installed as an npm module, e.g. `'@fontsource/roboto'`.
 

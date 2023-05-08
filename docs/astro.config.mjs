@@ -5,7 +5,7 @@ import starbook from 'starbook';
 export default defineConfig({
   integrations: [
     starbook({
-      title: 'StarBook Docs',
+      title: 'Starlight Docs',
       editLink: {
         baseUrl: 'https://github.com/withastro/starbook/edit/main/docs/',
       },
