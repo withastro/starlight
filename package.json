@@ -6,6 +6,8 @@
   "scripts": {},
   "license": "MIT",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.1",
     "astro": "^2.1.7"
   },
   "packageManager": "pnpm@8.2.0"
