@@ -1,1 +1,1 @@
-export { StarbookConfig } from './utils/user-config';
+export { StarlightConfig } from './utils/user-config';

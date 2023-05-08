@@ -2,9 +2,9 @@
 title: Configuration Reference
 ---
 
-## Configure the `starbook` integration
+## Configure the `starlight` integration
 
-You can pass the following options to the `starbook` integration.
+You can pass the following options to the `starlight` integration.
 
 ### `title` (required)
 
@@ -29,17 +29,17 @@ Configure the table of contents shown on the right of each page. By default, `<h
 
 **type:** `{ baseUrl: string }`
 
-Enable “Edit this page” links by setting the base URL these should use. The final link will be `editLink.baseUrl` + the current page path. For example, to enable editing pages in the `withastro/starbook` repo on GitHub:
+Enable “Edit this page” links by setting the base URL these should use. The final link will be `editLink.baseUrl` + the current page path. For example, to enable editing pages in the `withastro/starlight` repo on GitHub:
 
 ```js
-starbook({
+starlight({
   editLink: {
-    baseUrl: 'https://github.com/withastro/starbook/edit/main/',
+    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
   },
 });
 ```
 
-With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starbook/edit/main/src/docs/introduction.md`.
+With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
 
 ### `sidebar`
 
@@ -52,7 +52,7 @@ A sidebar is an array of groups, each with a `label` for the group and either an
 You can manually set the contents of a group using `items`, which is an array that can include links and subgroups. You can also automatically generate the contents of a group from a specific directory of your docs, using `autogenerate`.
 
 ```js
-starbook({
+starlight({
   sidebar: [
     // A group labelled “Start Here” containing two links.
     {
@@ -109,11 +109,11 @@ Each entry should use the directory where that language’s files are saved as t
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
-import starbook from 'starbook';
+import starlight from 'starlight';
 
 export default defineConfig({
   integrations: [
-    starbook({
+    starlight({
       // Set English as the default language for this site.
       defaultLocale: 'en',
       locales: {
@@ -164,7 +164,7 @@ The writing direction of this language; `"ltr"` for left-to-right (the default) 
 You can serve the default language without a `/lang/` directory by setting a `root` locale:
 
 ```js
-starbook({
+starlight({
   locales: {
     root: {
       label: 'English',
@@ -194,7 +194,7 @@ The default locale will be used to provide fallback content where translations a
 Optional details about the social media accounts for this site.
 
 ```js
-starbook({
+starlight({
   social: {
     // Main Twitter handle for this site
     twitter: 'astrodotbuild',
@@ -209,7 +209,7 @@ Provide CSS files to customize the look and feel of your Starlight site.
 Supports local CSS files relative to the root of your project, e.g. `'/src/custom.css'`, and CSS you installed as an npm module, e.g. `'@fontsource/roboto'`.
 
 ```js
-starbook({
+starlight({
   customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
 });
 ```

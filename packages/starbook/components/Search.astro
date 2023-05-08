@@ -25,7 +25,7 @@ import Icon from './Icon.astro';
           </div>
         ) : (
           <div class="search-container">
-            <div id="starbook__search" />
+            <div id="starlight__search" />
           </div>
         )
       }
@@ -87,7 +87,7 @@ import Icon from './Icon.astro';
     onIdle(async () => {
       const { PagefindUI } = await import('@pagefind/default-ui');
       new PagefindUI({
-        element: '#starbook__search',
+        element: '#starlight__search',
         baseUrl: import.meta.env.BASE_URL,
         showImages: false,
       });
@@ -171,7 +171,7 @@ import Icon from './Icon.astro';
     color: var(--sb-color-text-accent);
   }
 
-  #starbook__search {
+  #starlight__search {
     --pagefind-ui-primary: var(--sb-color-accent-light);
     --pagefind-ui-text: var(--sb-color-gray-2);
     --pagefind-ui-background: var(--sb-color-black);
@@ -181,7 +181,7 @@ import Icon from './Icon.astro';
   }
 
   @media (min-width: 50rem) {
-    #starbook__search {
+    #starlight__search {
       --sb-search-cancel-space: 0px;
     }
 
@@ -202,32 +202,32 @@ import Icon from './Icon.astro';
 </style>
 
 <style is:global>
-  #starbook__search .pagefind-ui__form::before {
+  #starlight__search .pagefind-ui__form::before {
     --pagefind-ui-text: var(--sb-color-gray-1);
     opacity: 1;
   }
 
-  #starbook__search .pagefind-ui__search-input {
+  #starlight__search .pagefind-ui__search-input {
     color: var(--sb-color-white);
     font-weight: 400;
     width: calc(100% - var(--sb-search-cancel-space));
   }
 
-  #starbook__search input:focus {
+  #starlight__search input:focus {
     --pagefind-ui-border: var(--sb-color-accent);
   }
 
-  #starbook__search .pagefind-ui__search-clear {
+  #starlight__search .pagefind-ui__search-clear {
     inset-inline-end: var(--sb-search-cancel-space);
     width: calc(60px * var(--pagefind-ui-scale));
     padding: 0;
     background-color: transparent;
     overflow: hidden;
   }
-  #starbook__search .pagefind-ui__search-clear:focus {
+  #starlight__search .pagefind-ui__search-clear:focus {
     outline: 1px solid var(--sb-color-accent);
   }
-  #starbook__search .pagefind-ui__search-clear::before {
+  #starlight__search .pagefind-ui__search-clear::before {
     content: '';
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
       center / 50% no-repeat;
@@ -239,10 +239,10 @@ import Icon from './Icon.astro';
     height: 100%;
   }
 
-  #starbook__search .pagefind-ui__results > * + * {
+  #starlight__search .pagefind-ui__results > * + * {
     margin-top: 0.5rem;
   }
-  #starbook__search .pagefind-ui__result {
+  #starlight__search .pagefind-ui__result {
     position: relative;
     border: 0;
     border-radius: 0.25rem;
@@ -250,47 +250,47 @@ import Icon from './Icon.astro';
     background-color: var(--sb-color-black);
   }
 
-  #starbook__search .pagefind-ui__result:hover,
-  #starbook__search .pagefind-ui__result:focus-within {
+  #starlight__search .pagefind-ui__result:hover,
+  #starlight__search .pagefind-ui__result:focus-within {
     outline: 1px solid var(--sb-color-accent-high);
   }
 
-  #starbook__search .pagefind-ui__result:focus-within {
+  #starlight__search .pagefind-ui__result:focus-within {
     background-color: var(--sb-color-accent-low);
   }
 
-  #starbook__search .pagefind-ui__result-thumb,
-  #starbook__search .pagefind-ui__result-inner {
+  #starlight__search .pagefind-ui__result-thumb,
+  #starlight__search .pagefind-ui__result-inner {
     margin-top: 0;
   }
 
-  #starbook__search .pagefind-ui__result-link {
+  #starlight__search .pagefind-ui__result-link {
     --pagefind-ui-text: var(--sb-color-white);
     font-weight: 600;
   }
 
-  #starbook__search .pagefind-ui__result-link:hover {
+  #starlight__search .pagefind-ui__result-link:hover {
     text-decoration: none;
   }
 
-  #starbook__search .pagefind-ui__result-link::after {
+  #starlight__search .pagefind-ui__result-link::after {
     content: '';
     position: absolute;
     inset: 0;
   }
 
-  #starbook__search .pagefind-ui__result-excerpt {
+  #starlight__search .pagefind-ui__result-excerpt {
     font-size: var(--sb-text-body-sm);
   }
 
-  #starbook__search mark {
+  #starlight__search mark {
     color: var(--sb-color-white);
     background-color: var(--sb-color-accent-low);
     font-weight: 500;
     padding: 0.1em 0.2em;
   }
 
-  #starbook__search .pagefind-ui__result:focus-within mark {
+  #starlight__search .pagefind-ui__result:focus-within mark {
     text-decoration: underline;
   }
 </style>

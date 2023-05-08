@@ -1,5 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
-import config from 'virtual:starbook/user-config';
+import config from 'virtual:starlight/user-config';
 
 export interface LocaleData {
   /** Writing direction. */

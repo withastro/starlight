@@ -8,33 +8,33 @@ import type {
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { starbookAsides } from './integrations/asides';
+import { starlightAsides } from './integrations/asides';
 import {
-  StarBookUserConfig,
-  StarbookConfig,
-  StarbookConfigSchema,
+  StarlightUserConfig,
+  StarlightConfig,
+  StarlightConfigSchema,
 } from './utils/user-config';
 
-export default function StarbookIntegration(
-  opts: StarBookUserConfig
+export default function StarlightIntegration(
+  opts: StarlightUserConfig
 ): AstroIntegration[] {
-  const userConfig = StarbookConfigSchema.parse(opts);
+  const userConfig = StarlightConfigSchema.parse(opts);
 
-  const StarBook: AstroIntegration = {
-    name: 'starbook',
+  const Starlight: AstroIntegration = {
+    name: 'starlight',
     hooks: {
       'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
-        injectRoute({ pattern: '404', entryPoint: 'starbook/404.astro' });
+        injectRoute({ pattern: '404', entryPoint: 'starlight/404.astro' });
         injectRoute({
           pattern: '[...slug]',
-          entryPoint: 'starbook/index.astro',
+          entryPoint: 'starlight/index.astro',
         });
         const newConfig: AstroUserConfig = {
           vite: {
-            plugins: [vitePluginStarBookUserConfig(userConfig, config)],
+            plugins: [vitePluginStarlightUserConfig(userConfig, config)],
           },
           markdown: {
-            remarkPlugins: [...starbookAsides()],
+            remarkPlugins: [...starlightAsides()],
             shikiConfig:
               // Configure Shiki theme if the user is using the default github-dark theme.
               config.markdown.shikiConfig.theme !== 'github-dark'
@@ -60,24 +60,24 @@ export default function StarbookIntegration(
     },
   };
 
-  return [StarBook, mdx()];
+  return [Starlight, mdx()];
 }
 
 function resolveVirtualModuleId(id: string) {
   return '\0' + id;
 }
 
-/** Expose the StarBook user config object via a virtual module. */
-function vitePluginStarBookUserConfig(
-  opts: StarbookConfig,
+/** Expose the Starlight user config object via a virtual module. */
+function vitePluginStarlightUserConfig(
+  opts: StarlightConfig,
   { root }: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   const modules = {
-    'virtual:starbook/user-config': `export default ${JSON.stringify(opts)}`,
-    'virtual:starbook/project-context': `export default ${JSON.stringify({
+    'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
+    'virtual:starlight/project-context': `export default ${JSON.stringify({
       root,
     })}`,
-    'virtual:starbook/user-css': opts.customCss
+    'virtual:starlight/user-css': opts.customCss
       .map((id) => `import "${id}";`)
       .join(''),
   };
@@ -89,7 +89,7 @@ function vitePluginStarBookUserConfig(
   );
 
   return {
-    name: 'vite-plugin-starbook-user-config',
+    name: 'vite-plugin-starlight-user-config',
     resolveId(id): string | void {
       if (id in modules) return resolveVirtualModuleId(id);
     },

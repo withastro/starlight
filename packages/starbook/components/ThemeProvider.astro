@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 
 <script>
   declare global {
-    var StarbookThemeProvider: {
+    var StarlightThemeProvider: {
       updatePickers(theme?: string): void;
     };
   }
@@ -12,10 +12,10 @@ import Icon from './Icon.astro';
 
 {/* This is intentionally inlined to avoid FOUC. */}
 <script is:inline>
-  window.StarbookThemeProvider = (() => {
+  window.StarlightThemeProvider = (() => {
     const storedTheme =
       typeof localStorage !== 'undefined' &&
-      localStorage.getItem('starbook-theme');
+      localStorage.getItem('starlight-theme');
     const theme =
       storedTheme ||
       (window.matchMedia('(prefers-color-scheme: light)').matches
@@ -25,7 +25,7 @@ import Icon from './Icon.astro';
       theme === 'light' ? 'light' : 'dark';
     return {
       updatePickers(theme = storedTheme || 'auto') {
-        document.querySelectorAll('starbook-theme-select').forEach((picker) => {
+        document.querySelectorAll('starlight-theme-select').forEach((picker) => {
           const select = picker.querySelector('select');
           if (select) select.value = theme;
           /** @type {HTMLTemplateElement | null} */

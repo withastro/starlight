@@ -42,9 +42,9 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * will produce this output
  *
  * ```astro
- * <aside class="starbook-aside starbook-aside--tip" aria-label="Did you know?">
- *   <p class="starbook-aside__title" aria-hidden="true">Did you know?</p>
- *   <section class="starbook-aside__content">
+ * <aside class="starlight-aside starlight-aside--tip" aria-label="Did you know?">
+ *   <p class="starlight-aside__title" aria-hidden="true">Did you know?</p>
+ *   <section class="starlight-aside__content">
  *     <p>Astro helps you build faster websites with “Islands Architecture”.</p>
  *   </section>
  * </Aside>
@@ -125,10 +125,10 @@ function remarkAsides(): Plugin<[], Root> {
         'aside',
         {
           'aria-label': title,
-          class: `starbook-aside starbook-aside--${variant}`,
+          class: `starlight-aside starlight-aside--${variant}`,
         },
         [
-          h('p', { class: 'starbook-aside__title', 'aria-hidden': 'true' }, [
+          h('p', { class: 'starlight-aside__title', 'aria-hidden': 'true' }, [
             s(
               'svg',
               {
@@ -136,13 +136,13 @@ function remarkAsides(): Plugin<[], Root> {
                 width: 16,
                 height: 16,
                 fill: 'currentColor',
-                class: 'starbook-aside__icon',
+                class: 'starlight-aside__icon',
               },
               iconPaths[variant]
             ),
             { type: 'text', value: title },
           ]),
-          h('section', { class: 'starbook-aside__content' }, node.children),
+          h('section', { class: 'starlight-aside__content' }, node.children),
         ]
       );
 
@@ -159,6 +159,6 @@ type RemarkPlugins = NonNullable<
   NonNullable<AstroUserConfig['markdown']>['remarkPlugins']
 >;
 
-export function starbookAsides(): RemarkPlugins {
+export function starlightAsides(): RemarkPlugins {
   return [remarkDirective, remarkAsides()];
 }

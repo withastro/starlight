@@ -84,7 +84,7 @@ const SidebarGroupSchema: z.ZodType<
   ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
-const StarbookUserConfigSchema = z.object({
+const StarlightUserConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
     .string()
@@ -195,14 +195,14 @@ const StarbookUserConfigSchema = z.object({
    * module, e.g. `'@fontsource/roboto'`.
    *
    * @example
-   * starbook({
+   * starlight({
    *  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
    * })
    */
   customCss: z.string().array().optional().default([]),
 });
 
-export const StarbookConfigSchema = StarbookUserConfigSchema.strict().transform(
+export const StarlightConfigSchema = StarlightUserConfigSchema.strict().transform(
   ({ locales, defaultLocale, ...config }, ctx) => {
     if (locales !== undefined && Object.keys(locales).length > 1) {
       // This is a multilingual site (more than one locale configured).
@@ -246,5 +246,5 @@ export const StarbookConfigSchema = StarbookUserConfigSchema.strict().transform(
   }
 );
 
-export type StarbookConfig = z.infer<typeof StarbookConfigSchema>;
-export type StarBookUserConfig = z.input<typeof StarbookConfigSchema>;
+export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
+export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;

@@ -1,6 +1,6 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
-import config from 'virtual:starbook/user-config';
+import config from 'virtual:starlight/user-config';
 
 import { getPrevNextLinks, getSidebar } from './utils/navigation';
 import { paths } from './utils/routing';
@@ -32,7 +32,7 @@ import TwoColumnContent from './layout/TwoColumnContent.astro';
 import './style/asides.css';
 
 // Important that this is the last import so it can override built-in styles.
-import 'virtual:starbook/user-css';
+import 'virtual:starlight/user-css';
 
 export async function getStaticPaths() {
   return paths;
@@ -75,7 +75,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
           </RightSidebarPanel>
         </Fragment>
         <main
-          id="starbook__overview"
+          id="starlight__overview"
           data-pagefind-body
           lang={entryMeta.lang}
           dir={entryMeta.dir}

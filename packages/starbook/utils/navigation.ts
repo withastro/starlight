@@ -1,5 +1,5 @@
 import { basename, dirname } from 'node:path';
-import config from 'virtual:starbook/user-config';
+import config from 'virtual:starlight/user-config';
 import { slugToPathname } from '../utils/slugs';
 import { Route, getLocaleRoutes, routes } from './routing';
 import type {

@@ -1,13 +1,13 @@
 import { defineConfig } from 'astro/config';
-import starbook from 'starbook';
+import starlight from 'starlight';
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    starbook({
+    starlight({
       title: 'Starlight Docs',
       editLink: {
-        baseUrl: 'https://github.com/withastro/starbook/edit/main/docs/',
+        baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
       },
       locales: {
         root: {

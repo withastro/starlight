@@ -1,5 +1,5 @@
 {
-  "name": "starbook-docs",
+  "name": "starlight-docs",
   "private": true,
   "type": "module",
   "version": "0.0.1",
@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "astro": "^2.1.7",
-    "starbook": "workspace:*"
+    "starlight": "workspace:*"
   }
 }

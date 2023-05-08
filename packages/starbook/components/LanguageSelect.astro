@@ -1,5 +1,5 @@
 ---
-import config from 'virtual:starbook/user-config';
+import config from 'virtual:starlight/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
 import Select from './Select.astro';
 
@@ -17,7 +17,7 @@ function localizedPathname(locale: string | undefined): string {
 
 {
   config.isMultilingual && (
-    <starbook-lang-select>
+    <starlight-lang-select>
       <Select
         icon="translate"
         label="Select language"
@@ -29,12 +29,12 @@ function localizedPathname(locale: string | undefined): string {
         }))}
         width="7em"
       />
-    </starbook-lang-select>
+    </starlight-lang-select>
   )
 }
 
 <script>
-  class StarBookLanguageSelect extends HTMLElement {
+  class StarlightLanguageSelect extends HTMLElement {
     constructor() {
       super();
       const select = this.querySelector('select');
@@ -47,5 +47,5 @@ function localizedPathname(locale: string | undefined): string {
       }
     }
   }
-  customElements.define('starbook-lang-select', StarBookLanguageSelect);
+  customElements.define('starlight-lang-select', StarlightLanguageSelect);
 </script>

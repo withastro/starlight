@@ -2,7 +2,7 @@
 import Select from './Select.astro';
 ---
 
-<starbook-theme-select>
+<starlight-theme-select>
   <Select
     icon="laptop"
     label="Select theme"
@@ -14,19 +14,19 @@ import Select from './Select.astro';
     ]}
     width="5.5em"
   />
-</starbook-theme-select>
+</starlight-theme-select>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
-  StarbookThemeProvider.updatePickers();
+  StarlightThemeProvider.updatePickers();
 </script>
 
 <script>
   type Theme = 'auto' | 'dark' | 'light';
 
-  class StarBookThemeSelect extends HTMLElement {
+  class StarlightThemeSelect extends HTMLElement {
     /** Key in `localStorage` to store color theme preference at. */
-    #key = 'starbook-theme';
+    #key = 'starlight-theme';
 
     constructor() {
       super();
@@ -59,7 +59,7 @@ import Select from './Select.astro';
 
     /** Update select menu UI, document theme, and local storage state. */
     #onThemeChange(theme: Theme): void {
-      StarbookThemeProvider.updatePickers(theme);
+      StarlightThemeProvider.updatePickers(theme);
       document.documentElement.dataset.theme =
         theme === 'auto' ? this.#getPreferredColorScheme() : theme;
       this.#storeTheme(theme);
@@ -84,5 +84,5 @@ import Select from './Select.astro';
     }
   }
 
-  customElements.define('starbook-theme-select', StarBookThemeSelect);
+  customElements.define('starlight-theme-select', StarlightThemeSelect);
 </script>

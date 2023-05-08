@@ -2,19 +2,19 @@
 import Icon from './Icon.astro';
 ---
 
-<starbook-menu-button>
+<starlight-menu-button>
   <button
     aria-expanded="false"
     aria-label="Menu"
-    aria-controls="starbook__sidebar"
+    aria-controls="starlight__sidebar"
     class="md:hidden"
   >
     <Icon name="bars" />
   </button>
-</starbook-menu-button>
+</starlight-menu-button>
 
 <script>
-  class StarbookMenuButton extends HTMLElement {
+  class StarlightMenuButton extends HTMLElement {
     btn = this.querySelector('button')!;
 
     constructor() {
@@ -46,7 +46,7 @@ import Icon from './Icon.astro';
     }
   }
 
-  customElements.define('starbook-menu-button', StarbookMenuButton);
+  customElements.define('starlight-menu-button', StarlightMenuButton);
 </script>
 
 <style>

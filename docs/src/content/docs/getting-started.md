@@ -10,7 +10,7 @@ To get started with Starlight, you will first need to install it. Starlight is b
 
 ```sh
 # create a new project with npm
-npm create astro --template starbook
+npm create astro --template starlight
 ```
 
 This will create a new project directory with all the necessary files and configurations for your documentation website.
