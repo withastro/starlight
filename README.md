@@ -1,1 +1,1 @@
-packages/starbook/README.md
+packages/starlight/README.md
