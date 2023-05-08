@@ -2,6 +2,11 @@
 title: Getting Started
 ---
 
+:::caution[Work in progress]
+Starlight is in early development so expect bugs and changes as we develop it.
+If you find something that’s not working, [open an issue on GitHub](https://github.com/withastro/starlight/issues/new/choose) or let us know on [Discord](https://astro.build/chat).
+:::
+
 Welcome to Starlight, an intuitive and user-friendly framework ideal for documentation websites. In this introductory guide, we will explore the main features and benefits of Starlight.
 
 ## Getting started with Starlight
