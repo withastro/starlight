@@ -21,16 +21,16 @@ interface Props {
 <style>
   .header {
     display: flex;
-    gap: var(--sb-nav-gap);
+    gap: var(--sl-nav-gap);
     justify-content: space-between;
     align-items: center;
     height: 100%;
   }
 
   .site-title {
-    font-size: var(--sb-text-2xl);
+    font-size: var(--sl-text-2xl);
     font-weight: 600;
-    color: var(--sb-color-text-accent);
+    color: var(--sl-color-text-accent);
     text-decoration: none;
     white-space: nowrap;
   }
@@ -41,16 +41,16 @@ interface Props {
 
   @media (min-width: 50rem) {
     .header {
-      --__sidebar-width: var(--sb-sidebar-width) - var(--sb-nav-pad-x);
+      --__sidebar-width: var(--sl-sidebar-width) - var(--sl-nav-pad-x);
       --__main-column-fr: calc(
-        (100% - var(--sb-content-width) - 2 * var(--sb-sidebar-width)) / 2
+        (100% - var(--sl-content-width) - 2 * var(--sl-sidebar-width)) / 2
       );
       display: grid;
       grid-template-columns:
         /* 1 (site title): runs up until the main content column’s left edge.  */
         calc(
           var(--__sidebar-width) +
-            max(0rem, var(--__main-column-fr) - var(--sb-nav-gap))
+            max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
         )
         /* 2 (search box): all free space that is available. */
         1fr

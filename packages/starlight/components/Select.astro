@@ -14,7 +14,7 @@ interface Props {
 }
 ---
 
-<label style={`--sb-select-width: ${Astro.props.width}`}>
+<label style={`--sl-select-width: ${Astro.props.width}`}>
   <span class="sr-only">{Astro.props.label}</span>
   <Icon name={Astro.props.icon} class="icon label-icon" />
   <select value={Astro.props.value}>
@@ -29,17 +29,17 @@ interface Props {
 
 <style>
   label {
-    --sb-label-icon-size: 0.875rem;
-    --sb-caret-size: 1.25rem;
+    --sl-label-icon-size: 0.875rem;
+    --sl-caret-size: 1.25rem;
     position: relative;
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    color: var(--sb-color-gray-1);
+    color: var(--sl-color-gray-1);
   }
 
   label:hover {
-    color: var(--sb-color-gray-2);
+    color: var(--sl-color-gray-2);
   }
 
   .icon {
@@ -50,21 +50,21 @@ interface Props {
   }
 
   .label-icon {
-    font-size: var(--sb-label-icon-size);
+    font-size: var(--sl-label-icon-size);
     inset-inline-start: 0;
   }
 
   .caret {
-    font-size: var(--sb-caret-size);
+    font-size: var(--sl-caret-size);
     inset-inline-end: 0;
   }
 
   select {
     border: 0;
     padding-block: 0.625rem;
-    padding-inline: calc(var(--sb-label-icon-size) + 0.25rem)
-      calc(var(--sb-caret-size) + 0.25rem);
-    width: var(--sb-select-width);
+    padding-inline: calc(var(--sl-label-icon-size) + 0.25rem)
+      calc(var(--sl-caret-size) + 0.25rem);
+    width: var(--sl-select-width);
     background-color: transparent;
     text-overflow: ellipsis;
     color: inherit;
@@ -74,7 +74,7 @@ interface Props {
 
   @media (min-width: 50rem) {
     select {
-      font-size: var(--sb-text-sm);
+      font-size: var(--sl-text-sm);
     }
   }
 </style>

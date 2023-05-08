@@ -102,27 +102,27 @@ import Icon from './Icon.astro';
     gap: 0.5rem;
     border: 0;
     background-color: transparent;
-    color: var(--sb-color-gray-1);
+    color: var(--sl-color-gray-1);
     cursor: pointer;
     height: 2.5rem;
-    font-size: var(--sb-text-xl);
+    font-size: var(--sl-text-xl);
   }
 
   @media (min-width: 50rem) {
     button[data-open-modal] {
-      border: 1px solid var(--sb-color-gray-5);
+      border: 1px solid var(--sl-color-gray-5);
       border-radius: 0.5rem;
       padding-inline-start: 0.75rem;
       padding-inline-end: 1rem;
-      background-color: var(--sb-color-black);
-      color: var(--sb-color-gray-2);
-      font-size: var(--sb-text-sm);
+      background-color: var(--sl-color-black);
+      color: var(--sl-color-gray-2);
+      font-size: var(--sl-text-sm);
       width: 100%;
       max-width: 22rem;
     }
     button[data-open-modal]:hover {
-      border-color: var(--sb-color-gray-2);
-      color: var(--sb-color-white);
+      border-color: var(--sl-color-gray-2);
+      color: var(--sl-color-white);
     }
 
     button[data-open-modal] > :last-child {
@@ -132,20 +132,20 @@ import Icon from './Icon.astro';
 
   dialog {
     margin: 0;
-    background-color: var(--sb-color-gray-6);
-    border: 1px solid var(--sb-color-gray-5);
+    background-color: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
     width: 100%;
     max-width: 100%;
     height: 100%;
     max-height: 100%;
-    box-shadow: var(--sb-shadow-lg);
+    box-shadow: var(--sl-shadow-lg);
   }
   dialog[open] {
     display: grid;
   }
 
   dialog::backdrop {
-    background-color: var(--sb-color-backdrop-overlay);
+    background-color: var(--sl-color-backdrop-overlay);
     -webkit-backdrop-filter: blur(0.25rem);
     backdrop-filter: blur(0.25rem);
   }
@@ -168,21 +168,21 @@ import Icon from './Icon.astro';
     border: 0;
     background: transparent;
     cursor: pointer;
-    color: var(--sb-color-text-accent);
+    color: var(--sl-color-text-accent);
   }
 
   #starlight__search {
-    --pagefind-ui-primary: var(--sb-color-accent-light);
-    --pagefind-ui-text: var(--sb-color-gray-2);
-    --pagefind-ui-background: var(--sb-color-black);
-    --pagefind-ui-border: var(--sb-color-gray-5);
+    --pagefind-ui-primary: var(--sl-color-accent-light);
+    --pagefind-ui-text: var(--sl-color-gray-2);
+    --pagefind-ui-background: var(--sl-color-black);
+    --pagefind-ui-border: var(--sl-color-gray-5);
     --pagefind-ui-border-width: 1px;
-    --sb-search-cancel-space: 5rem;
+    --sl-search-cancel-space: 5rem;
   }
 
   @media (min-width: 50rem) {
     #starlight__search {
-      --sb-search-cancel-space: 0px;
+      --sl-search-cancel-space: 0px;
     }
 
     dialog {
@@ -203,29 +203,29 @@ import Icon from './Icon.astro';
 
 <style is:global>
   #starlight__search .pagefind-ui__form::before {
-    --pagefind-ui-text: var(--sb-color-gray-1);
+    --pagefind-ui-text: var(--sl-color-gray-1);
     opacity: 1;
   }
 
   #starlight__search .pagefind-ui__search-input {
-    color: var(--sb-color-white);
+    color: var(--sl-color-white);
     font-weight: 400;
-    width: calc(100% - var(--sb-search-cancel-space));
+    width: calc(100% - var(--sl-search-cancel-space));
   }
 
   #starlight__search input:focus {
-    --pagefind-ui-border: var(--sb-color-accent);
+    --pagefind-ui-border: var(--sl-color-accent);
   }
 
   #starlight__search .pagefind-ui__search-clear {
-    inset-inline-end: var(--sb-search-cancel-space);
+    inset-inline-end: var(--sl-search-cancel-space);
     width: calc(60px * var(--pagefind-ui-scale));
     padding: 0;
     background-color: transparent;
     overflow: hidden;
   }
   #starlight__search .pagefind-ui__search-clear:focus {
-    outline: 1px solid var(--sb-color-accent);
+    outline: 1px solid var(--sl-color-accent);
   }
   #starlight__search .pagefind-ui__search-clear::before {
     content: '';
@@ -233,7 +233,7 @@ import Icon from './Icon.astro';
       center / 50% no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
       center / 50% no-repeat;
-    background-color: var(--sb-color-text-accent);
+    background-color: var(--sl-color-text-accent);
     display: block;
     width: 100%;
     height: 100%;
@@ -247,16 +247,16 @@ import Icon from './Icon.astro';
     border: 0;
     border-radius: 0.25rem;
     padding: 1rem;
-    background-color: var(--sb-color-black);
+    background-color: var(--sl-color-black);
   }
 
   #starlight__search .pagefind-ui__result:hover,
   #starlight__search .pagefind-ui__result:focus-within {
-    outline: 1px solid var(--sb-color-accent-high);
+    outline: 1px solid var(--sl-color-accent-high);
   }
 
   #starlight__search .pagefind-ui__result:focus-within {
-    background-color: var(--sb-color-accent-low);
+    background-color: var(--sl-color-accent-low);
   }
 
   #starlight__search .pagefind-ui__result-thumb,
@@ -265,7 +265,7 @@ import Icon from './Icon.astro';
   }
 
   #starlight__search .pagefind-ui__result-link {
-    --pagefind-ui-text: var(--sb-color-white);
+    --pagefind-ui-text: var(--sl-color-white);
     font-weight: 600;
   }
 
@@ -280,12 +280,12 @@ import Icon from './Icon.astro';
   }
 
   #starlight__search .pagefind-ui__result-excerpt {
-    font-size: var(--sb-text-body-sm);
+    font-size: var(--sl-text-body-sm);
   }
 
   #starlight__search mark {
-    color: var(--sb-color-white);
-    background-color: var(--sb-color-accent-low);
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-accent-low);
     font-weight: 500;
     padding: 0.1em 0.2em;
   }

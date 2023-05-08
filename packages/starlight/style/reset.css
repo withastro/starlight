@@ -10,7 +10,7 @@
 
 html {
   color-scheme: dark;
-  accent-color: var(--sb-color-accent);
+  accent-color: var(--sl-color-accent);
 }
 
 html[data-theme='light'] {
@@ -19,10 +19,10 @@ html[data-theme='light'] {
 
 body {
   font-family: var(--__sb-font);
-  line-height: var(--sb-line-height);
+  line-height: var(--sl-line-height);
   -webkit-font-smoothing: antialiased;
-  color: var(--sb-color-text);
-  background-color: var(--sb-color-bg);
+  color: var(--sl-color-text);
+  background-color: var(--sl-color-bg);
 }
 
 input,
