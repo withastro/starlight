@@ -1,5 +1,9 @@
 # Starlight
 
+> **Warning**
+> This tool is an early release and very much still work in progress!  
+> [Open an issue on GitHub](https://github.com/withastro/starlight/issues/new/choose) if you find something that’s not working.
+
 Starlight is a documentation website framework for [Astro][astro].
 
 ## Documentation
