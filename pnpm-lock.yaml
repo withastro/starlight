@@ -16,12 +16,12 @@ importers:
 
   docs:
     dependencies:
+      '@astrojs/starlight':
+        specifier: workspace:*
+        version: link:../packages/starlight
       astro:
         specifier: ^2.1.7
         version: 2.1.7(@types/node@18.15.11)
-      starlight:
-        specifier: workspace:*
-        version: link:../packages/starlight
 
   packages/starlight:
     dependencies:

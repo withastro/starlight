@@ -1,5 +1,5 @@
 {
-  "name": "starlight",
+  "name": "@astrojs/starlight",
   "version": "0.0.0",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {},

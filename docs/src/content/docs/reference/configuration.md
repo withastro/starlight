@@ -109,7 +109,7 @@ Each entry should use the directory where that language’s files are saved as t
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
-import starlight from 'starlight';
+import starlight from '@astrojs/starlight';
 
 export default defineConfig({
   integrations: [
