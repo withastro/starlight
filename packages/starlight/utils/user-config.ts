@@ -103,8 +103,14 @@ const UserConfigSchema = z.object({
   /** Optional details about the social media accounts for this site. */
   social: z
     .object({
-      /** Main Twitter handle for this site, e.g. `'astrodotbuild'`. */
-      twitter: z.string().optional(),
+      /** Link to the main Twitter profile for this site, e.g. `'https://twitter.com/astrodotbuild'`. */
+      twitter: z.string().url().optional(),
+      /** Link to the main Mastodon profile for this site, e.g. `'https://m.webtoo.ls/@astro'`. */
+      mastodon: z.string().url().optional(),
+      /** Link to the main GitHub org or repo for this site, e.g. `'https://github.com/withastro/starlight'`. */
+      github: z.string().url().optional(),
+      /** Link to the Discord server for this site, e.g. `'https://astro.build/chat'`. */
+      discord: z.string().url().optional(),
     })
     .optional(),
 

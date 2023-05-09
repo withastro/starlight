@@ -191,13 +191,15 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-Optional details about the social media accounts for this site.
+Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
 ```js
 starlight({
   social: {
-    // Main Twitter handle for this site
-    twitter: 'astrodotbuild',
+    discord: 'https://astro.build/chat',
+    github: 'https://github.com/withastro/starlight',
+    mastodon: 'https://m.webtoo.ls/@astro',
+    twitter: 'https://twitter.com/astrodotbuild',
   },
 });
 ```
