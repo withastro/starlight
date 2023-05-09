@@ -4,16 +4,23 @@ import Icon from './Icon.astro';
 
 const links = Object.entries(config.social || {}).filter(([, url]) =>
   Boolean(url)
-) as [brand: keyof NonNullable<typeof config.social>, url: string][];
+) as [platform: keyof NonNullable<typeof config.social>, url: string][];
+
+const labels = {
+  github: 'GitHub',
+  discord: 'Discord',
+  twitter: 'Twitter',
+  mastodon: 'Mastodon',
+};
 ---
 
 {
   links.length > 0 && (
     <>
-      {links.map(([brand, url]) => (
+      {links.map(([platform, url]) => (
         <a href={url} rel="me">
-          <span class="sr-only">{brand}</span>
-          <Icon name={brand} />
+          <span class="sr-only">{labels[platform]}</span>
+          <Icon name={platform} />
         </a>
       ))}
       <div class="divider" />
