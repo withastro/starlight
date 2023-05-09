@@ -2,16 +2,18 @@
 import config from 'virtual:starlight/user-config';
 import Icon from './Icon.astro';
 
-const links = Object.entries(config.social || {}).filter(([, url]) =>
-  Boolean(url)
-) as [platform: keyof NonNullable<typeof config.social>, url: string][];
+type Platform = keyof NonNullable<typeof config.social>;
 
-const labels = {
+const labels: Record<Platform, string> = {
   github: 'GitHub',
   discord: 'Discord',
   twitter: 'Twitter',
   mastodon: 'Mastodon',
 };
+
+const links = Object.entries(config.social || {}).filter(([, url]) =>
+  Boolean(url)
+) as [platform: Platform, url: string][];
 ---
 
 {
