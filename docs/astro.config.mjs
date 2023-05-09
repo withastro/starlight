@@ -9,6 +9,10 @@ export default defineConfig({
       editLink: {
         baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
       },
+      social: {
+        github: 'https://github.com/withastro/starlight',
+        discord: 'https://astro.build/chat',
+      },
       locales: {
         root: {
           label: 'English',

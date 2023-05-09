@@ -1,0 +1,44 @@
+---
+import config from 'virtual:starlight/user-config';
+import Icon from './Icon.astro';
+
+type Platform = keyof NonNullable<typeof config.social>;
+
+const labels: Record<Platform, string> = {
+  github: 'GitHub',
+  discord: 'Discord',
+  twitter: 'Twitter',
+  mastodon: 'Mastodon',
+};
+
+const links = Object.entries(config.social || {}).filter(([, url]) =>
+  Boolean(url)
+) as [platform: Platform, url: string][];
+---
+
+{
+  links.length > 0 && (
+    <>
+      {links.map(([platform, url]) => (
+        <a href={url} rel="me">
+          <span class="sr-only">{labels[platform]}</span>
+          <Icon name={platform} />
+        </a>
+      ))}
+      <div class="divider" />
+    </>
+  )
+}
+
+<style>
+  a {
+    color: var(--sl-color-text-accent);
+  }
+  a:hover {
+    opacity: 0.66;
+  }
+  .divider {
+    height: 2rem;
+    border-inline-end: 1px solid var(--sl-color-gray-5);
+  }
+</style>

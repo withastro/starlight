@@ -84,7 +84,7 @@ const SidebarGroupSchema: z.ZodType<
   ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
-const StarlightUserConfigSchema = z.object({
+const UserConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
     .string()
@@ -103,8 +103,14 @@ const StarlightUserConfigSchema = z.object({
   /** Optional details about the social media accounts for this site. */
   social: z
     .object({
-      /** Main Twitter handle for this site, e.g. `'astrodotbuild'`. */
-      twitter: z.string().optional(),
+      /** Link to the main Twitter profile for this site, e.g. `'https://twitter.com/astrodotbuild'`. */
+      twitter: z.string().url().optional(),
+      /** Link to the main Mastodon profile for this site, e.g. `'https://m.webtoo.ls/@astro'`. */
+      mastodon: z.string().url().optional(),
+      /** Link to the main GitHub org or repo for this site, e.g. `'https://github.com/withastro/starlight'`. */
+      github: z.string().url().optional(),
+      /** Link to the Discord server for this site, e.g. `'https://astro.build/chat'`. */
+      discord: z.string().url().optional(),
     })
     .optional(),
 
@@ -202,7 +208,7 @@ const StarlightUserConfigSchema = z.object({
   customCss: z.string().array().optional().default([]),
 });
 
-export const StarlightConfigSchema = StarlightUserConfigSchema.strict().transform(
+export const StarlightConfigSchema = UserConfigSchema.strict().transform(
   ({ locales, defaultLocale, ...config }, ctx) => {
     if (locales !== undefined && Object.keys(locales).length > 1) {
       // This is a multilingual site (more than one locale configured).
