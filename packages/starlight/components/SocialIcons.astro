@@ -1,0 +1,35 @@
+---
+import config from 'virtual:starlight/user-config';
+import Icon from './Icon.astro';
+
+const links = Object.entries(config.social || {}).filter(([, url]) =>
+  Boolean(url)
+) as [brand: keyof NonNullable<typeof config.social>, url: string][];
+---
+
+{
+  links.length > 0 && (
+    <>
+      {links.map(([brand, url]) => (
+        <a href={url} rel="me">
+          <span class="sr-only">{brand}</span>
+          <Icon name={brand} />
+        </a>
+      ))}
+      <div class="divider" />
+    </>
+  )
+}
+
+<style>
+  a {
+    color: var(--sl-color-text-accent);
+  }
+  a:hover {
+    opacity: 0.66;
+  }
+  .divider {
+    height: 2rem;
+    border-inline-end: 1px solid var(--sl-color-gray-5);
+  }
+</style>
