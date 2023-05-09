@@ -84,7 +84,7 @@ const SidebarGroupSchema: z.ZodType<
   ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
-const StarlightUserConfigSchema = z.object({
+const UserConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
     .string()
@@ -202,7 +202,7 @@ const StarlightUserConfigSchema = z.object({
   customCss: z.string().array().optional().default([]),
 });
 
-export const StarlightConfigSchema = StarlightUserConfigSchema.strict().transform(
+export const StarlightConfigSchema = UserConfigSchema.strict().transform(
   ({ locales, defaultLocale, ...config }, ctx) => {
     if (locales !== undefined && Object.keys(locales).length > 1) {
       // This is a multilingual site (more than one locale configured).
