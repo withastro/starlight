@@ -1,4 +1,4 @@
-# Starlight
+# <img src="https://github.com/withastro/starlight/assets/357379/494fcd83-42aa-4891-87e0-87402fa0b6f3" alt="" align="left" width="40" height="40"> Starlight
 
 > **Warning**
 > This tool is an early release and very much still work in progress!  
