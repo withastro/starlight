@@ -1,0 +1,29 @@
+---
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import config from 'virtual:starlight/user-config';
+import EditLink from './EditLink.astro';
+import RightSidebarPanel from './RightSidebarPanel.astro';
+import TableOfContents from './TableOfContents.astro';
+
+interface Props {
+  entry: CollectionEntry<'docs'>;
+  headings: MarkdownHeading[];
+}
+
+const { entry, headings } = Astro.props;
+---
+
+<RightSidebarPanel>
+  <TableOfContents headings={headings} />
+</RightSidebarPanel>
+<RightSidebarPanel>
+  {
+    config.editLink.baseUrl && (
+      <>
+        <h2>Contribute</h2>
+        <EditLink data={entry.data} id={entry.id} />
+      </>
+    )
+  }
+</RightSidebarPanel>

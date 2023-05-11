@@ -1,6 +1,5 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
-import config from 'virtual:starlight/user-config';
 
 import { getPrevNextLinks, getSidebar } from './utils/navigation';
 import { paths } from './utils/routing';
@@ -13,17 +12,16 @@ import './style/util.css';
 
 // Components — can override built-in CSS, but not user CSS.
 import ContentPanel from './components/ContentPanel.astro';
-import EditLink from './components/EditLink.astro';
 import FallbackContentNotice from './components/FallbackContentNotice.astro';
 import HeadSEO from './components/HeadSEO.astro';
 import Header from './components/Header.astro';
 import LastUpdated from './components/LastUpdated.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
 import PrevNextLinks from './components/PrevNextLinks.astro';
-import RightSidebarPanel from './components/RightSidebarPanel.astro';
+import RightSidebar from './components/RightSidebar.astro';
 import Sidebar from './components/Sidebar.astro';
 import SkipLink from './components/SkipLink.astro';
-import TableOfContents from './components/TableOfContents.astro';
+import MobileTableOfContents from './components/TableOfContents/MobileTableOfContents.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
 import PageFrame from './layout/PageFrame.astro';
 import TwoColumnContent from './layout/TwoColumnContent.astro';
@@ -58,22 +56,9 @@ const prevNextLinks = getPrevNextLinks(sidebar);
     <PageFrame>
       <Header slot="header" locale={locale} />
       <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
+      <MobileTableOfContents headings={headings} />
       <TwoColumnContent>
-        <Fragment slot="right-sidebar">
-          <RightSidebarPanel>
-            <TableOfContents headings={headings} />
-          </RightSidebarPanel>
-          <RightSidebarPanel>
-            {
-              config.editLink.baseUrl && (
-                <>
-                  <h2>Contribute</h2>
-                  <EditLink data={entry.data} id={entry.id} />
-                </>
-              )
-            }
-          </RightSidebarPanel>
-        </Fragment>
+        <RightSidebar slot="right-sidebar" entry={entry} headings={headings} />
         <main
           id="starlight__overview"
           data-pagefind-body
