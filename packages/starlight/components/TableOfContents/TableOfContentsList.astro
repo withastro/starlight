@@ -4,18 +4,23 @@ import type { generateToC } from './generateToC';
 interface Props {
   toc: ReturnType<typeof generateToC>;
   depth?: number;
+  isMobile?: boolean;
 }
 
-const { toc, depth = 0 } = Astro.props;
+const { toc, isMobile = false, depth = 0 } = Astro.props;
 ---
 
-<ul>
+<ul class:list={{ isMobile }}>
   {
     toc.map((heading) => (
       <li>
         <a href={'#' + heading.slug}>{heading.text}</a>
         {heading.children.length > 0 && (
-          <Astro.self toc={heading.children} depth={depth + 1} />
+          <Astro.self
+            toc={heading.children}
+            depth={depth + 1}
+            isMobile={isMobile}
+          />
         )}
       </li>
     ))
@@ -26,12 +31,26 @@ const { toc, depth = 0 } = Astro.props;
   ul {
     padding: 0;
   }
-  a {
-    display: block;
-    padding-inline: calc(1rem * var(--depth) + var(--toc-pad-inline, 0rem))
-      var(--toc-pad-inline, 0rem);
-  }
   ul :global(::marker) {
     color: transparent;
+  }
+  a {
+    --pad-inline: 0rem;
+    display: block;
+    padding-inline: calc(1rem * var(--depth) + var(--pad-inline))
+      var(--pad-inline);
+  }
+  .isMobile a {
+    --pad-inline: 1rem;
+    border-top: 1px solid var(--sl-color-gray-6);
+    padding-block: 0.5rem;
+    color: var(--sl-color-text);
+    font-size: var(--sl-text-sm);
+    line-height: 1.25;
+    text-decoration: none;
+    outline-offset: var(--sl-outline-offset-inside);
+  }
+  .isMobile:first-child > li:first-child > a {
+    border-top: 0;
   }
 </style>

@@ -21,6 +21,7 @@ import PrevNextLinks from './components/PrevNextLinks.astro';
 import RightSidebar from './components/RightSidebar.astro';
 import Sidebar from './components/Sidebar.astro';
 import SkipLink from './components/SkipLink.astro';
+import MobileTableOfContents from './components/TableOfContents/MobileTableOfContents.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
 import PageFrame from './layout/PageFrame.astro';
 import TwoColumnContent from './layout/TwoColumnContent.astro';
@@ -55,6 +56,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
     <PageFrame>
       <Header slot="header" locale={locale} />
       <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
+      <MobileTableOfContents headings={headings} />
       <TwoColumnContent>
         <RightSidebar slot="right-sidebar" entry={entry} headings={headings} />
         <main

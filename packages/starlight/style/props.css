@@ -116,14 +116,18 @@
   --sl-nav-height: 3.5rem;
   --sl-nav-pad-x: 1.5rem;
   --sl-nav-pad-y: 0.75rem;
+  --sl-mobile-toc-height: 3rem;
   --sl-sidebar-width: 18.75rem;
   --sl-sidebar-pad-x: 1rem;
   --sl-content-width: 45rem;
   --sl-content-pad-x: 1rem;
   --sl-menu-button-size: 2rem;
   --sl-nav-gap: var(--sl-content-pad-x);
+  /* Offset required to show outline inside an element instead of round the outside */
+  --sl-outline-offset-inside: -0.1875rem;
 
   /* Global z-index values */
+  --sl-z-index-menu: 5;
   --sl-z-index-navbar: 10;
   --sl-z-index-skiplink: 20;
 }
@@ -194,5 +198,6 @@
 @media (min-width: 72rem) {
   :root {
     --sl-content-pad-x: 1.5rem;
+    --sl-mobile-toc-height: 0rem;
   }
 }
