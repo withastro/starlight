@@ -1,5 +1,6 @@
 ---
 title: Configuration Reference
+description: An overview of all the configuration options Starlight supports.
 ---
 
 ## Configure the `starlight` integration

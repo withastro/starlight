@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Learn how to start building your next documentation site with Starlight by Astro.
 ---
 
 :::caution[Work in progress]
