@@ -11,6 +11,13 @@
   ],
   "author": "Chris Swithinbank <swithinbank@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/withastro/starlight",
+    "directory": "packages/starlight"
+  },
+  "bugs": "https://github.com/withastro/starlight/issues",
+  "homepage": "https://starlight.astro.build",
   "type": "module",
   "exports": {
     ".": "./index.ts",
