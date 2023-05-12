@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.0.4
+
+### Patch Changes
+
+- [#40](https://github.com/withastro/starlight/pull/40) [`e22dd76`](https://github.com/withastro/starlight/commit/e22dd76136f9749bb5d43f96241385faccfc90a1) Thanks [@delucis](https://github.com/delucis)! - Generate sitemaps for Starlight sites
+
+- [#38](https://github.com/withastro/starlight/pull/38) [`623b577`](https://github.com/withastro/starlight/commit/623b577319b1dea2d6c42f1b680139fb858d85d6) Thanks [@delucis](https://github.com/delucis)! - Add tab components for use in MDX.
+
 ## 0.0.3
 
 ### Patch Changes
