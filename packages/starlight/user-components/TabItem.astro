@@ -1,0 +1,14 @@
+---
+import { TabItemTagname } from './rehype-tabs';
+
+interface Props {
+  id: string;
+  label?: string;
+}
+
+const { id, label = id } = Astro.props;
+---
+
+<TabItemTagname data-id={id} data-label={label}>
+  <slot />
+</TabItemTagname>

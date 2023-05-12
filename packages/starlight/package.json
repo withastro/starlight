@@ -21,6 +21,7 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./components": "./components.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
     "./index.astro": "./index.astro",
@@ -41,9 +42,11 @@
     "execa": "^7.1.1",
     "hastscript": "^7.2.0",
     "pagefind": "^0.12.0",
+    "rehype": "^12.0.1",
     "remark-directive": "^2.0.1",
     "unified": "^10.1.2",
     "unist-util-remove": "^3.1.1",
-    "unist-util-visit": "^4.1.2"
+    "unist-util-visit": "^4.1.2",
+    "vfile": "^5.3.7"
   }
 }
