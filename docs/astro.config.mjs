@@ -37,9 +37,9 @@ export default defineConfig({
         },
         {
           label: 'Guides',
-          items: [
-            { label: 'Internationalization (i18n)', link: 'guides/i18n' },
-          ],
+          autogenerate: {
+            directory: 'guides',
+          },
         },
         {
           label: 'Reference',

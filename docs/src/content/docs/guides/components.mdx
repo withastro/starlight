@@ -1,0 +1,69 @@
+---
+title: Components
+description: Using components in MDX with Starlight.
+---
+
+Components let you easily re-use a piece of UI or styling consistently.
+Examples might include a link card or a YouTube embed.
+Starlight supports the use of components in [MDX](https://mdxjs.com/) files and provides some common components for you to use.
+
+## Using a component
+
+You can use a component by importing it into your MDX file and then calling it as a JSX tag.
+These look like HTML tags but start with an uppercase letter matching the name in your `import` statement:
+
+```mdx
+---
+# src/content/docs/index.mdx
+title: Welcome to my docs
+---
+
+import SomeComponent from '../../components/SomeComponent.astro';
+import AnotherComponent from '../../components/AnotherComponent.astro';
+
+<SomeComponent prop="something" />
+
+<AnotherComponent>
+  Components can also contain **nested content**.
+</AnotherComponent>
+```
+
+Because Starlight is powered by Astro, you can use components built with any UI framework in your MDX files.
+Learn more about [using components in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) in the Astro docs.
+
+## Built-in components
+
+Starlight provides built-in components for common documentation use cases.
+These components are available from the `@astrojs/starlight/components` package.
+
+### Tabs
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+You can display a tabbed interface using the `<Tabs>` and `<TabItem>` components.
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem id="stars" label="Stars">
+    Sirius, Vega, Betelgeuse
+  </TabItem>
+  <TabItem id="moons" label="Moons">
+    Io, Europa, Ganymede
+  </TabItem>
+</Tabs>
+```
+
+The code above generates the following tabs on the page:
+
+<Tabs>
+  <TabItem id="stars" label="Stars">
+    Sirius, Vega, Betelgeuse
+  </TabItem>
+  <TabItem id="moons" label="Moons">
+    Io, Europa, Ganymede
+  </TabItem>
+</Tabs>
+
+Each `<TabItem>` must have a `label` to display to users and a unique `id`.
