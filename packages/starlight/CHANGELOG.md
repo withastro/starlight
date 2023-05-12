@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.0.3
+
+### Patch Changes
+
+- [`1f62c75`](https://github.com/withastro/starlight/commit/1f62c75297ed44da721350840744823876a64bc5) Thanks [@delucis](https://github.com/delucis)! - Add repo, issues & homepage links to package.json
+
+- [#36](https://github.com/withastro/starlight/pull/36) [`62265e4`](https://github.com/withastro/starlight/commit/62265e4a653d161483e3844b568ab150334e9238) Thanks [@delucis](https://github.com/delucis)! - Collapse table of contents in dropdown on narrower viewports
+
 ## 0.0.2
 
 ### Patch Changes
