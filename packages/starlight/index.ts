@@ -9,6 +9,7 @@ import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
+import { starlightSitemap } from './integrations/sitemap';
 import {
   StarlightUserConfig,
   StarlightConfig,
@@ -63,7 +64,7 @@ export default function StarlightIntegration(
     },
   };
 
-  return [Starlight, mdx()];
+  return [starlightSitemap(userConfig), Starlight, mdx()];
 }
 
 function resolveVirtualModuleId(id: string) {
