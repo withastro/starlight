@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.1",
+    "@astrojs/sitemap": "^1.3.1",
     "@pagefind/default-ui": "^0.12.0",
     "@types/mdast": "^3.0.11",
     "bcp-47": "^2.1.0",

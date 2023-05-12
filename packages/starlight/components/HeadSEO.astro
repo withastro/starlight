@@ -40,6 +40,8 @@ const description = data.description || config.description;
   href={import.meta.env.BASE_URL + 'favicon.svg'}
   type="image/svg+xml"
 />
+{/* Link to sitemap, but only when `site` is set. */}
+{Astro.site && <link rel="sitemap" href="/sitemap-index.xml" />}
 
 <!-- OpenGraph Tags -->
 <meta property="og:title" content={title} />
