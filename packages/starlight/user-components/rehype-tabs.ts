@@ -4,7 +4,6 @@ import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 interface Panel {
   panelId: string;
   tabId: string;
-  dataId: string;
   label: string;
 }
 
@@ -38,16 +37,14 @@ const tabsProcessor = rehype()
           return CONTINUE;
         }
 
-        const { dataId, dataLabel } = node.properties;
+        const { dataLabel } = node.properties;
         const ids = getIDs();
         file.data.panels?.push({
           ...ids,
-          dataId: String(dataId),
           label: String(dataLabel),
         });
 
-        // Remove TabItem props
-        delete node.properties.dataId;
+        // Remove `<TabItem>` props
         delete node.properties.dataLabel;
         // Turn into `<section>` with required attributes
         node.tagName = 'section';

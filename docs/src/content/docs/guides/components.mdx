@@ -41,29 +41,20 @@ These components are available from the `@astrojs/starlight/components` package.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 You can display a tabbed interface using the `<Tabs>` and `<TabItem>` components.
+Each `<TabItem>` must have a `label` to display to users.
 
 ```mdx
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem id="stars" label="Stars">
-    Sirius, Vega, Betelgeuse
-  </TabItem>
-  <TabItem id="moons" label="Moons">
-    Io, Europa, Ganymede
-  </TabItem>
+  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 The code above generates the following tabs on the page:
 
 <Tabs>
-  <TabItem id="stars" label="Stars">
-    Sirius, Vega, Betelgeuse
-  </TabItem>
-  <TabItem id="moons" label="Moons">
-    Io, Europa, Ganymede
-  </TabItem>
+  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
-
-Each `<TabItem>` must have a `label` to display to users and a unique `id`.
