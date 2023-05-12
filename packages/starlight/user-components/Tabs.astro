@@ -8,21 +8,23 @@ const { html, panels } = processPanels(panelHtml);
 <starlight-tabs>
   {
     panels && (
-      <ul role="tablist">
-        {panels.map(({ label, panelId, tabId }, idx) => (
-          <li role="presentation" class="tab">
-            <a
-              role="tab"
-              href={'#' + panelId}
-              id={tabId}
-              aria-selected={idx === 0 && 'true'}
-              tabindex={idx !== 0 ? -1 : 0}
-            >
-              {label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="tablist-wrapper">
+        <ul role="tablist">
+          {panels.map(({ label, panelId, tabId }, idx) => (
+            <li role="presentation" class="tab">
+              <a
+                role="tab"
+                href={'#' + panelId}
+                id={tabId}
+                aria-selected={idx === 0 && 'true'}
+                tabindex={idx !== 0 ? -1 : 0}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     )
   }
   <Fragment set:html={html} />
@@ -31,6 +33,10 @@ const { html, panels } = processPanels(panelHtml);
 <style>
   starlight-tabs {
     display: block;
+  }
+
+  .tablist-wrapper {
+    overflow-x: auto;
   }
 
   [role='tablist'] {
@@ -59,7 +65,7 @@ const { html, panels } = processPanels(panelHtml);
     font-weight: 600;
   }
 
-  [role='tablist'] ~ :global([role='tabpanel']) {
+  .tablist-wrapper ~ :global([role='tabpanel']) {
     margin-top: 1rem;
   }
 </style>
@@ -103,12 +109,13 @@ const { html, panels } = processPanels(panelHtml);
               ? 'down'
               : null;
           if (dir === null) return;
-          e.preventDefault();
           // If the down key is pressed, move focus to the open panel,
           // otherwise switch to the adjacent tab
           if (dir === 'down') {
+            e.preventDefault();
             this.panels[i]?.focus();
-          } else {
+          } else if (this.tabs[dir]) {
+            e.preventDefault();
             this.switchTab(this.tabs[dir], dir);
           }
         });
