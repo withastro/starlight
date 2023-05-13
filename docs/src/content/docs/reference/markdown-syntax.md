@@ -231,36 +231,6 @@ Some text
      - level 3 item (ul)
 - level 1 item (ul)
 
-### And a task list
-
-- [ ] Hello, this is a TODO item
-- [ ] Hello, this is another TODO item
-- [x] Goodbye, this item is done
-
-### Nesting task lists
-
-- [ ] level 1 item (task)
-  - [ ] level 2 item (task)
-  - [ ] level 2 item (task)
-- [ ] level 1 item (task)
-- [ ] level 1 item (task)
-
-### Nesting a ul in a task list
-
-- [ ] level 1 item (task)
-  - level 2 item (ul)
-  - level 2 item (ul)
-- [ ] level 1 item (task)
-- [ ] level 1 item (task)
-
-### Nesting a task list in a ul
-
-- level 1 item (ul)
-  - [ ] level 2 item (task)
-  - [ ] level 2 item (task)
-- level 1 item (ul)
-- level 1 item (ul)
-
 ### Nesting mixed content in lists
 
 - This list contains code samples
