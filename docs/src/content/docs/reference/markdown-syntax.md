@@ -326,7 +326,3 @@ even when it comes at the beginning](.) of the line.
 ### Supercalifragilisticexpialidocious!
 
 Making sure that this heading with a very long word in wraps instead of overflowing on small screens.
-
-### YouTube embed
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/6F-lQe_BzeM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
