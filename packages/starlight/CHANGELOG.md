@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.0.5
+
+### Patch Changes
+
+- [#42](https://github.com/withastro/starlight/pull/42) [`c6c1b67`](https://github.com/withastro/starlight/commit/c6c1b6727140a76c42c661f406000cc6e9b175de) Thanks [@delucis](https://github.com/delucis)! - Support setting custom `<head>` tags in config or frontmatter.
+
 ## 0.0.4
 
 ### Patch Changes
