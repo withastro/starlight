@@ -1,4 +1,5 @@
 import { z } from 'astro/zod';
+import { HeadConfigSchema } from './schemas/head';
 
 export function docsSchema() {
   return z.object({
@@ -19,5 +20,8 @@ export function docsSchema() {
      * Can also be set to `false` to disable showing an edit link on this page.
      */
     editUrl: z.union([z.string().url(), z.boolean()]).optional().default(true),
+
+    /** Set custom `<head>` tags just for this page. */
+    head: HeadConfigSchema(),
   });
 }
