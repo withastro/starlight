@@ -1,6 +1,8 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry, z } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import type { HeadConfigSchema } from '../schemas/head';
+import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
 
 interface Props {
@@ -15,48 +17,87 @@ const canonical = Astro.site
   : undefined;
 const title = data.title || config.title;
 const description = data.description || config.description;
+
+const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
+  { tag: 'meta', attrs: { charset: 'utf-8' } },
+  { tag: 'meta', attrs: { name: 'viewport', content: 'width=device-width' } },
+  { tag: 'title', content: title },
+  { tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
+  { tag: 'meta', attrs: { name: 'generator', content: Astro.generator } },
+  // Favicon
+  {
+    tag: 'link',
+    attrs: {
+      rel: 'shortcut icon',
+      href: import.meta.env.BASE_URL + 'favicon.svg',
+      type: 'image/svg+xml',
+    },
+  },
+  // OpenGraph Tags
+  { tag: 'meta', attrs: { property: 'og:title', content: title } },
+  { tag: 'meta', attrs: { property: 'og:type', content: 'article' } },
+  { tag: 'meta', attrs: { property: 'og:url', content: canonical?.href } },
+  { tag: 'meta', attrs: { property: 'og:locale', content: lang } },
+  { tag: 'meta', attrs: { property: 'og:description', content: description } },
+  { tag: 'meta', attrs: { property: 'og:site_name', content: config.title } },
+  // Twitter Tags
+  {
+    tag: 'meta',
+    attrs: { name: 'twitter:card', content: 'summary_large_image' },
+  },
+  { tag: 'meta', attrs: { name: 'twitter:title', content: title } },
+  { tag: 'meta', attrs: { name: 'twitter:description', content: description } },
+];
+
+if (description)
+  headDefaults.push({
+    tag: 'meta',
+    attrs: { name: 'description', content: description },
+  });
+
+// Link to language alternates.
+if (canonical && config.isMultilingual) {
+  for (const locale in config.locales) {
+    const localeOpts = config.locales[locale];
+    if (!localeOpts) continue;
+    headDefaults.push({
+      tag: 'link',
+      attrs: {
+        rel: 'alternate',
+        hreflang: localeOpts.lang,
+        href: localizedUrl(canonical, locale).href,
+      },
+    });
+  }
+}
+
+// Link to sitemap, but only when `site` is set.
+if (Astro.site) {
+  headDefaults.push({
+    tag: 'link',
+    attrs: {
+      rel: 'sitemap',
+      href: import.meta.env.BASE_URL + 'sitemap-index.xml',
+    },
+  });
+}
+
+// Link to Twitter account if set in Starlight config.
+if (config.social?.twitter) {
+  headDefaults.push({
+    tag: 'meta',
+    attrs: {
+      name: 'twitter:site',
+      content: new URL(config.social.twitter).pathname,
+    },
+  });
+}
+
+const head = createHead(headDefaults, config.head, data.head);
 ---
 
-<title>{title}</title>
-{description && <meta name="description" content={description} />}
-<link rel="canonical" href={canonical} />
 {
-  canonical &&
-    config.isMultilingual &&
-    Object.entries(config.locales).map(
-      ([locale, localeOpts]) =>
-        localeOpts && (
-          <link
-            rel="alternate"
-            hreflang={localeOpts.lang}
-            href={localizedUrl(canonical, locale)}
-          />
-        )
-    )
+  head.map(({ tag: Tag, attrs, content }) => (
+    <Tag {...attrs} set:html={content} />
+  ))
 }
-<meta name="generator" content={Astro.generator} />
-<link
-  rel="shortcut icon"
-  href={import.meta.env.BASE_URL + 'favicon.svg'}
-  type="image/svg+xml"
-/>
-{/* Link to sitemap, but only when `site` is set. */}
-{Astro.site && <link rel="sitemap" href="/sitemap-index.xml" />}
-
-<!-- OpenGraph Tags -->
-<meta property="og:title" content={title} />
-<meta property="og:type" content="article" />
-<meta property="og:url" content={canonical} />
-<meta property="og:locale" content={lang} />
-<meta property="og:description" content={description} />
-<meta property="og:site_name" content={config.title} />
-
-<!-- Twitter Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-{
-  config.social?.twitter && (
-    <meta name="twitter:site" content={config.social.twitter} />
-  )
-}
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />

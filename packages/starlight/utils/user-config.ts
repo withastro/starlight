@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
+import { HeadConfigSchema } from '../schemas/head';
 
 const LocaleSchema = z.object({
   /** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -192,6 +193,28 @@ const UserConfigSchema = z.object({
 
   /** Configure your site’s sidebar navigation items. */
   sidebar: SidebarGroupSchema.array().optional(),
+
+  /**
+   * Add extra tags to your site’s `<head>`.
+   *
+   * Can also be set for a single page in a page’s frontmatter.
+   *
+   * @example
+   * // Add Fathom analytics to your site
+   * starlight({
+   *  head: [
+   *    {
+   *      tag: 'script',
+   *      attrs: {
+   *        src: 'https://cdn.usefathom.com/script.js',
+   *        'data-site': 'MY-FATHOM-ID',
+   *        defer: true,
+   *      },
+   *    },
+   *  ],
+   * })
+   */
+  head: HeadConfigSchema(),
 
   /**
    * Provide CSS files to customize the look and feel of your Starlight site.

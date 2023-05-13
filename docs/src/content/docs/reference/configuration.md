@@ -192,6 +192,8 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
+**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
 ```js
@@ -207,6 +209,8 @@ starlight({
 
 ### `customCss`
 
+**type:** `string[]`
+
 Provide CSS files to customize the look and feel of your Starlight site.
 
 Supports local CSS files relative to the root of your project, e.g. `'/src/custom.css'`, and CSS you installed as an npm module, e.g. `'@fontsource/roboto'`.
@@ -215,4 +219,37 @@ Supports local CSS files relative to the root of your project, e.g. `'/src/custo
 starlight({
   customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `head`
+
+**type:** `HeadConfig[]`
+
+Add custom tags to the `<head>` of your Starlight site.
+Can be useful for adding analytics and other third-party scripts and resources.
+
+```js
+starlight({
+  head: [
+    // Example: add Fathom analytics script tag.
+    {
+      tag: 'script',
+      attrs: {
+        src: 'https://cdn.usefathom.com/script.js',
+        'data-site': 'MY-FATHOM-ID',
+        defer: true,
+      },
+    },
+  ],
+});
+```
+
+#### `HeadConfig`
+
+```ts
+interface HeadConfig {
+  tag: string;
+  attrs?: Record<string, string | boolean | undefined>;
+  content?: string;
+}
 ```
