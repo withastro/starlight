@@ -33,7 +33,9 @@ jobs:
         run: pnpm i
 
       - name: Build docs site
-        run: cd docs && pnpm build
+        working-directory: ./docs
+        run: pnpm build
 
       - name: Run accessibility audit
+        working-directory: ./docs
         run: pnpm t
