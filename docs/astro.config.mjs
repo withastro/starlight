@@ -14,6 +14,16 @@ export default defineConfig({
         github: 'https://github.com/withastro/starlight',
         discord: 'https://astro.build/chat',
       },
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            src: 'https://cdn.usefathom.com/script.js',
+            'data-site': 'EZBHTSIG',
+            defer: true,
+          },
+        },
+      ],
       locales: {
         root: {
           label: 'English',
