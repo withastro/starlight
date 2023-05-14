@@ -6,6 +6,7 @@
   "scripts": {
     "test": "start-server-and-test preview http://localhost:3000 pa11y",
     "pa11y": "pa11y-ci --sitemap 'http://localhost:3000/sitemap-index.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:3000'",
+    "size": "size-limit",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -17,7 +18,23 @@
     "astro": "^2.4.3"
   },
   "devDependencies": {
+    "@size-limit/preset-app": "^8.2.4",
     "pa11y-ci": "^3.0.1",
+    "size-limit": "^8.2.4",
     "start-server-and-test": "^2.0.0"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.html",
+      "limit": "350 ms"
+    },
+    {
+      "path": "dist/_astro/*.js",
+      "limit": "750 ms"
+    },
+    {
+      "path": "dist/_astro/*.css",
+      "limit": "250 ms"
+    }
+  ]
 }
