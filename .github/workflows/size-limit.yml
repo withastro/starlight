@@ -26,3 +26,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           directory: docs/
           package_manager: pnpm
+          script: pnpm size --json
