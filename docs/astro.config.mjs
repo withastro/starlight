@@ -44,6 +44,7 @@ export default defineConfig({
           items: [
             { label: 'Welcome, world', link: '/' },
             { label: 'Getting Started', link: 'getting-started' },
+            { label: 'Environmental Impact', link: 'environmental-impact' },
           ],
         },
         {
