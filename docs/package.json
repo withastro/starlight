@@ -25,16 +25,21 @@
   },
   "size-limit": [
     {
+      "name": "/index.html",
       "path": "dist/index.html",
-      "limit": "350 ms"
+      "limit": "350 ms",
+      "running": false
     },
     {
+      "name": "/_astro/*.js",
       "path": "dist/_astro/*.js",
       "limit": "750 ms"
     },
     {
+      "name": "/_astro/*.css",
       "path": "dist/_astro/*.css",
-      "limit": "250 ms"
+      "limit": "250 ms",
+      "running": false
     }
   ]
 }
