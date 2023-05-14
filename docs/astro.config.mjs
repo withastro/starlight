@@ -6,7 +6,7 @@ export default defineConfig({
   site: 'https://starlight.astro.build',
   integrations: [
     starlight({
-      title: 'Starlight Docs',
+      title: 'Starlight',
       editLink: {
         baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
       },
