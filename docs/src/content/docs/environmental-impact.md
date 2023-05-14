@@ -88,14 +88,16 @@ Choosing a host that uses renewable energy will mean lower carbon emissions for 
 Curious how other docs frameworks compare?
 These tests with the [Website Carbon Calculator][wcc] compare similar pages built with different tools.
 
-- [Starlight][sl-carbon] produces **0.01g of CO₂** per page visit.
-- [VitePress][vp-carbon] produces **0.05g of CO₂** per page visit.
-- [Sphinx][sx-carbon] produces **0.07g of CO₂** per page visit.
-- [MkDocs][mk-carbon] produces **0.10g of CO₂** per page visit.
-- [Nextra][nx-carbon] produces **0.11g of CO₂** per page visit.
-- [Docusaurus][ds-carbon] produces **0.24g of CO₂** per page visit.
-- [Read the Docs][rtd-carbon] produces **0.24g of CO₂** per page visit.
-- [GitBook][gb-carbon] produces **0.71g of CO₂** per page visit.
+| Framework                   | CO₂ per page visit |
+| --------------------------- | ------------------ |
+| [Starlight][sl-carbon]      | 0.01g              |
+| [VitePress][vp-carbon]      | 0.05g              |
+| [Sphinx][sx-carbon]         | 0.07g              |
+| [MkDocs][mk-carbon]         | 0.10g              |
+| [Nextra][nx-carbon]         | 0.11g              |
+| [Docusaurus][ds-carbon]     | 0.24g              |
+| [Read the Docs][rtd-carbon] | 0.24g              |
+| [GitBook][gb-carbon]        | 0.71g              |
 
 <small>Data collected on 14 May 2023. Click a link to see up-to-date figures.</small>
 
