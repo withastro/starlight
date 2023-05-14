@@ -20,7 +20,10 @@ const description = data.description || config.description;
 
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
   { tag: 'meta', attrs: { charset: 'utf-8' } },
-  { tag: 'meta', attrs: { name: 'viewport', content: 'width=device-width' } },
+  {
+    tag: 'meta',
+    attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  },
   { tag: 'title', content: title },
   { tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
   { tag: 'meta', attrs: { name: 'generator', content: Astro.generator } },
