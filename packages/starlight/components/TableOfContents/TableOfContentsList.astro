@@ -14,7 +14,9 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
   {
     toc.map((heading) => (
       <li>
-        <a href={'#' + heading.slug}>{heading.text}</a>
+        <a href={'#' + heading.slug} aria-current={heading.current && 'true'}>
+          <span>{heading.text}</span>
+        </a>
         {heading.children.length > 0 && (
           <Astro.self
             toc={heading.children}
