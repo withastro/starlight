@@ -12,19 +12,25 @@ interface Props {
 const toc = generateToC(Astro.props.headings, config.tableOfContents);
 ---
 
-<nav aria-labelledby="starlight__on-this-page--mobile" class="lg:hidden">
-  <details id="starlight__mobile-toc">
-    <summary id="starlight__on-this-page--mobile" class="flex">
-      <div class="toggle flex">
-        On this page
-        <Icon name={'right-caret'} class="caret" size="1rem" />
+<mobile-starlight-toc
+  data-min-h={config.tableOfContents.minHeadingLevel}
+  data-max-h={config.tableOfContents.maxHeadingLevel}
+>
+  <nav aria-labelledby="starlight__on-this-page--mobile" class="lg:hidden">
+    <details id="starlight__mobile-toc">
+      <summary id="starlight__on-this-page--mobile" class="flex">
+        <div class="toggle flex">
+          On this page
+          <Icon name={'right-caret'} class="caret" size="1rem" />
+        </div>
+        <span class="display-current">{toc[0]?.text}</span>
+      </summary>
+      <div class="dropdown">
+        <TableOfContentsList toc={toc} isMobile />
       </div>
-    </summary>
-    <div class="dropdown">
-      <TableOfContentsList toc={toc} isMobile />
-    </div>
-  </details>
-</nav>
+    </details>
+  </nav>
+</mobile-starlight-toc>
 
 <style>
   nav {
@@ -41,9 +47,12 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
   }
 
   summary {
+    gap: 0.5rem;
+    align-items: center;
     height: var(--sl-mobile-toc-height);
     border-bottom: 1px solid var(--sl-color-hairline-shade);
     padding: 0.5rem 1rem;
+    font-size: var(--sl-text-xs);
     outline-offset: var(--sl-outline-offset-inside);
   }
   summary::marker,
@@ -52,6 +61,7 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
   }
 
   .toggle {
+    flex-shrink: 0;
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
@@ -60,7 +70,6 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
     padding-block: 0.5rem;
     padding-inline-start: 0.75rem;
     padding-inline-end: 0.5rem;
-    font-size: var(--sl-text-xs);
     line-height: 1;
     background-color: var(--sl-color-black);
     user-select: none;
@@ -82,6 +91,13 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
     transform: rotateZ(90deg);
   }
 
+  .display-current {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: var(--sl-color-white);
+  }
+
   .dropdown {
     --border-top: 1px;
     margin-top: calc(-1 * var(--border-top));
@@ -95,31 +111,43 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
 </style>
 
 <script>
-  const details = document.querySelector<HTMLDetailsElement>(
-    '#starlight__mobile-toc'
-  );
-  if (details) {
-    const closeToC = () => {
-      details.open = false;
-    };
-    // Close the table of contents whenever a link is clicked.
-    details.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', closeToC);
-    });
-    // Close the table of contents when a user clicks outside of it.
-    window.addEventListener('click', (e) => {
-      if (!details.contains(e.target as Node)) closeToC();
-    });
-    // Or when they press the escape key.
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && details.open) {
-        const hasFocus = details.contains(document.activeElement);
-        closeToC();
-        if (hasFocus) {
-          const summary = details.querySelector('summary');
-          if (summary) summary.focus();
+  import { StarlightTOC } from './starlight-toc';
+
+  class MobileStarlightTOC extends StarlightTOC {
+    override set current(link: HTMLAnchorElement) {
+      super.current = link;
+      const display = this.querySelector('.display-current') as HTMLSpanElement;
+      if (display) display.textContent = link.textContent;
+    }
+
+    constructor() {
+      super();
+      const details = this.querySelector('details');
+      if (!details) return;
+      const closeToC = () => {
+        details.open = false;
+      };
+      // Close the table of contents whenever a link is clicked.
+      details.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', closeToC);
+      });
+      // Close the table of contents when a user clicks outside of it.
+      window.addEventListener('click', (e) => {
+        if (!details.contains(e.target as Node)) closeToC();
+      });
+      // Or when they press the escape key.
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && details.open) {
+          const hasFocus = details.contains(document.activeElement);
+          closeToC();
+          if (hasFocus) {
+            const summary = details.querySelector('summary');
+            if (summary) summary.focus();
+          }
         }
-      }
-    });
+      });
+    }
   }
+
+  customElements.define('mobile-starlight-toc', MobileStarlightTOC);
 </script>
