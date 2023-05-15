@@ -11,7 +11,14 @@ interface Props {
 const toc = generateToC(Astro.props.headings, config.tableOfContents);
 ---
 
-<nav aria-labelledby="starlight__on-this-page">
-  <h2 id="starlight__on-this-page">On this page</h2>
-  <TableOfContentsList toc={toc} />
-</nav>
+<starlight-toc
+  data-min-h={config.tableOfContents.minHeadingLevel}
+  data-max-h={config.tableOfContents.maxHeadingLevel}
+>
+  <nav aria-labelledby="starlight__on-this-page">
+    <h2 id="starlight__on-this-page">On this page</h2>
+    <TableOfContentsList toc={toc} />
+  </nav>
+</starlight-toc>
+
+<script src="./TableOfContents/starlight-toc"></script>
