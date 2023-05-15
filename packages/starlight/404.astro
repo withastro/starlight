@@ -1,4 +1,6 @@
 ---
+import config from 'virtual:starlight/user-config';
+
 // Built-in CSS styles.
 import './style/props.css';
 import './style/reset.css';
@@ -16,10 +18,7 @@ import ThemeProvider from './components/ThemeProvider.astro';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
-// TODO: replace with proper values — requires support for a “default” locale
-const lang = 'en';
-const dir = 'ltr';
-const locale = undefined;
+const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
 ---
 
 <html lang={lang} dir={dir}>
