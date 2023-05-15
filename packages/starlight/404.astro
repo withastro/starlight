@@ -1,14 +1,20 @@
 ---
-import Header from './components/Header.astro';
-import MarkdownContent from './components/MarkdownContent.astro';
-import ThemeProvider from './components/ThemeProvider.astro';
-import PageFrame from './layout/PageFrame.astro';
-
 // Built-in CSS styles.
 import './style/props.css';
 import './style/reset.css';
 import './style/shiki.css';
 import './style/util.css';
+
+// Layout
+import PageFrame from './layout/PageFrame.astro';
+
+// Components
+import Header from './components/Header.astro';
+import MarkdownContent from './components/MarkdownContent.astro';
+import ThemeProvider from './components/ThemeProvider.astro';
+
+// Important that this is the last import so it can override built-in styles.
+import 'virtual:starlight/user-css';
 
 // TODO: replace with proper values — requires support for a “default” locale
 const lang = 'en';
@@ -26,9 +32,9 @@ const locale = undefined;
     <ThemeProvider />
     <PageFrame>
       <Header slot="header" locale={locale} />
-      <main id="starlight__overview">
+      <main>
         <MarkdownContent>
-          <h1>404</h1>
+          <h1 id="starlight__overview">404</h1>
           <p>Houston, we have a problem.</p>
           <p>
             We couldn’t find that link. Check the address or <a
@@ -40,7 +46,7 @@ const locale = undefined;
     </PageFrame>
 
     <style>
-      #starlight__overview {
+      main {
         margin: auto;
         padding: clamp(2rem, 10vmin, 6rem) var(--sl-nav-pad-x);
         max-width: var(--sl-content-width);

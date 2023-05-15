@@ -57,14 +57,10 @@ const prevNextLinks = getPrevNextLinks(sidebar);
       <MobileTableOfContents headings={headings} />
       <TwoColumnContent>
         <RightSidebar slot="right-sidebar" entry={entry} headings={headings} />
-        <main
-          id="starlight__overview"
-          data-pagefind-body
-          lang={entryMeta.lang}
-          dir={entryMeta.dir}
-        >
+        <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
           <ContentPanel>
             <h1
+              id="starlight__overview"
               style="font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); margin-top: 1rem;"
             >
               {entry.data.title}

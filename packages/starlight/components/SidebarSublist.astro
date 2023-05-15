@@ -11,7 +11,7 @@ interface Props {
     Astro.props.sublist.map((entry) => (
       <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
         {entry.type === 'link' ? (
-          <a href={entry.href} aria-current={entry.isCurrent && 'true'}>
+          <a href={entry.href} aria-current={entry.isCurrent && 'page'}>
             {entry.label}
           </a>
         ) : (
@@ -56,9 +56,9 @@ interface Props {
     color: var(--sl-color-white);
   }
 
-  [aria-current='true'],
-  [aria-current='true']:hover,
-  [aria-current='true']:focus {
+  [aria-current='page'],
+  [aria-current='page']:hover,
+  [aria-current='page']:focus {
     font-weight: 600;
     color: var(--sl-color-text-invert);
     background-color: var(--sl-color-text-accent);
