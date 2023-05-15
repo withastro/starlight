@@ -32,9 +32,7 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 <style define:vars={{ depth }}>
   ul {
     padding: 0;
-  }
-  ul :global(::marker) {
-    color: transparent;
+    list-style: none;
   }
   a {
     --pad-inline: 0rem;
