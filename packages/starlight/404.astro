@@ -1,14 +1,17 @@
 ---
-import Header from './components/Header.astro';
-import MarkdownContent from './components/MarkdownContent.astro';
-import ThemeProvider from './components/ThemeProvider.astro';
-import PageFrame from './layout/PageFrame.astro';
-
 // Built-in CSS styles.
 import './style/props.css';
 import './style/reset.css';
 import './style/shiki.css';
 import './style/util.css';
+
+// Layout
+import PageFrame from './layout/PageFrame.astro';
+
+// Components
+import Header from './components/Header.astro';
+import MarkdownContent from './components/MarkdownContent.astro';
+import ThemeProvider from './components/ThemeProvider.astro';
 
 // TODO: replace with proper values — requires support for a “default” locale
 const lang = 'en';
