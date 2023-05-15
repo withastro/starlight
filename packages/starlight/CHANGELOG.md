@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.0.6
+
+### Patch Changes
+
+- [#47](https://github.com/withastro/starlight/pull/47) [`e96d9a7`](https://github.com/withastro/starlight/commit/e96d9a7628c5c04fe34dbc65ddd6fabdc0667a6d) Thanks [@delucis](https://github.com/delucis)! - Fix CSS ordering issue caused by imports in 404 route.
+
+- [#47](https://github.com/withastro/starlight/pull/47) [`e96d9a7`](https://github.com/withastro/starlight/commit/e96d9a7628c5c04fe34dbc65ddd6fabdc0667a6d) Thanks [@delucis](https://github.com/delucis)! - Highlight current page section in table of contents.
+
+- [`1028119`](https://github.com/withastro/starlight/commit/10281196aba65075e4ac202dc0f23927c44403ee) Thanks [@delucis](https://github.com/delucis)! - Use default locale in `404.astro`.
+
+- [`05f8fd4`](https://github.com/withastro/starlight/commit/05f8fd4c3114e4c25075b35086c5b3e7d0ff49d7) Thanks [@delucis](https://github.com/delucis)! - Include `initial-scale=1` in viewport meta tag.
+
+- [#47](https://github.com/withastro/starlight/pull/47) [`e96d9a7`](https://github.com/withastro/starlight/commit/e96d9a7628c5c04fe34dbc65ddd6fabdc0667a6d) Thanks [@delucis](https://github.com/delucis)! - Fix usage of `aria-current` in navigation sidebar to use `page` value.
+
+- [#48](https://github.com/withastro/starlight/pull/48) [`a49485d`](https://github.com/withastro/starlight/commit/a49485def3fe4f505e90bf934eedcb135b3d3f51) Thanks [@delucis](https://github.com/delucis)! - Improve right sidebar layout.
+
 ## 0.0.5
 
 ### Patch Changes
