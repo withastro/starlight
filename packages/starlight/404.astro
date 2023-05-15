@@ -13,6 +13,9 @@ import Header from './components/Header.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
 
+// Important that this is the last import so it can override built-in styles.
+import 'virtual:starlight/user-css';
+
 // TODO: replace with proper values — requires support for a “default” locale
 const lang = 'en';
 const dir = 'ltr';
