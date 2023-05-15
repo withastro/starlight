@@ -26,9 +26,9 @@ const locale = undefined;
     <ThemeProvider />
     <PageFrame>
       <Header slot="header" locale={locale} />
-      <main id="starlight__overview">
+      <main>
         <MarkdownContent>
-          <h1>404</h1>
+          <h1 id="starlight__overview">404</h1>
           <p>Houston, we have a problem.</p>
           <p>
             We couldn’t find that link. Check the address or <a
@@ -40,7 +40,7 @@ const locale = undefined;
     </PageFrame>
 
     <style>
-      #starlight__overview {
+      main {
         margin: auto;
         padding: clamp(2rem, 10vmin, 6rem) var(--sl-nav-pad-x);
         max-width: var(--sl-content-width);
