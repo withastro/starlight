@@ -86,7 +86,7 @@ You should then be able to open <http://localhost:3000> and see your changes.
   This allows us to specify the permissible frontmatter via [a Starlight-specific schema](./packages/starlight/schema.ts) and get predictable data while providing clear error messages if a user sets invalid frontmatter in a page.
 
 - Components that require JavaScript for their functionality are all written without a UI framework, most often as custom elements.
-  This helps keep Starlight lightweight and makes it easier for a user to choose to add components from a framework of their choice to the their project.
+  This helps keep Starlight lightweight and makes it easier for a user to choose to add components from a framework of their choice to their project.
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues
