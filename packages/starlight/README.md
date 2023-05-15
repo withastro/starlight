@@ -12,6 +12,9 @@ Starlight is a documentation website framework for [Astro][astro].
 
 ## Contributing
 
+Join us as a Starlight contributor! These links will help you get started:
+
+- [Contributor Manual][contributing]
 - [Code of Conduct][coc]
 - [Community Guide][community]
 
@@ -23,6 +26,7 @@ Copyright (c) 2023–present [Starlight contributors][contributors]
 
 [astro]: https://astro.build/
 [docs]: https://starlight.astro.build/
+[contributing]: https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md
 [coc]: https://github.com/withastro/.github/blob/main/CODE_OF_CONDUCT.md
 [community]: https://github.com/withastro/.github/blob/main/COMMUNITY_GUIDE.md
 [contributors]: https://github.com/withastro/starlight/graphs/contributors
