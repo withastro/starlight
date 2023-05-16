@@ -1,4 +1,3 @@
-import type { CollectionEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 
 export interface LocaleData {
@@ -16,9 +15,7 @@ export interface LocaleData {
  * Root locale slugs will return `undefined`.
  * @param slug A collection entry slug
  */
-function slugToLocale(
-  slug: CollectionEntry<'docs'>['slug']
-): string | undefined {
+function slugToLocale(slug: string): string | undefined {
   const locales = Object.keys(config.locales || {});
   const baseSegment = slug.split('/')[0];
   if (baseSegment && locales.includes(baseSegment)) return baseSegment;
@@ -26,9 +23,7 @@ function slugToLocale(
 }
 
 /** Get locale information for a given slug. */
-export function slugToLocaleData(
-  slug: CollectionEntry<'docs'>['slug']
-): LocaleData {
+export function slugToLocaleData(slug: string): LocaleData {
   const locale = slugToLocale(slug);
   return { dir: localeToDir(locale), lang: localeToLang(locale), locale };
 }
@@ -56,7 +51,7 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
 }
 
 export function slugToParam(slug: string): string | undefined {
-  return slug === 'index'
+  return slug === 'index' || slug === ''
     ? undefined
     : slug.endsWith('/index')
     ? slug.replace('/index', '')
@@ -79,13 +74,16 @@ export function slugToPathname(slug: string): string {
  * localizedSlug('en/home', undefined)  // => 'home'
  */
 export function localizedSlug(
-  slug: CollectionEntry<'docs'>['slug'],
+  slug: string,
   locale: string | undefined
 ): string {
   const slugLocale = slugToLocale(slug);
   if (slugLocale === locale) return slug;
+  locale = locale || '';
   if (slugLocale) {
-    return slug.replace(slugLocale + '/', locale ? locale + '/' : '');
+    return slug
+      .replace(slugLocale + '/', locale ? locale + '/' : '')
+      .replace(/\/$/, '');
   }
-  return locale + '/' + slug;
+  return slug ? locale + '/' + slug : locale;
 }

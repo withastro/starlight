@@ -8,8 +8,12 @@ import {
   slugToParam,
 } from './slugs';
 
+export type StarlightDocsEntry = Omit<CollectionEntry<'docs'>, 'slug'> & {
+  slug: string;
+};
+
 export interface Route extends LocaleData {
-  entry: CollectionEntry<'docs'>;
+  entry: StarlightDocsEntry;
   entryMeta: LocaleData;
   slug: string;
   isFallback?: true;
@@ -21,8 +25,17 @@ interface Path extends GetStaticPathsItem {
   props: Route;
 }
 
+/**
+ * Astro is inconsistent in its `index.md` slug generation. In most cases,
+ * `index` is stripped, but in the root of a collection, we get a slug of `index`.
+ * We map that to an empty string for consistent behaviour.
+ */
+const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
+
 /** All entries in the docs content collection. */
-const docs = await getCollection('docs');
+const docs: StarlightDocsEntry[] = (await getCollection('docs')).map(
+  ({ slug, ...entry }) => ({ ...entry, slug: normalizeIndexSlug(slug) })
+);
 
 function getRoutes(): Route[] {
   const routes: Route[] = docs.map((entry) => ({
@@ -87,7 +100,7 @@ export function getLocaleRoutes(locale: string | undefined): Route[] {
  * Get all entries in the docs content collection for a specific locale.
  * A locale of `undefined` is treated as the “root” locale, if configured.
  */
-function getLocaleDocs(locale: string | undefined): CollectionEntry<'docs'>[] {
+function getLocaleDocs(locale: string | undefined): StarlightDocsEntry[] {
   return filterByLocale(docs, locale);
 }
 
@@ -98,11 +111,16 @@ function filterByLocale<T extends { slug: string }>(
 ): T[] {
   if (config.locales) {
     if (locale && locale in config.locales) {
-      return items.filter((i) => i.slug.startsWith(locale + '/'));
+      return items.filter(
+        (i) => i.slug === locale || i.slug.startsWith(locale + '/')
+      );
     } else if (config.locales.root) {
       const langKeys = Object.keys(config.locales).filter((k) => k !== 'root');
+      const isLangIndex = new RegExp(`^(${langKeys.join('|')})$`);
       const isLangDir = new RegExp(`^(${langKeys.join('|')})/`);
-      return items.filter((i) => !isLangDir.test(i.slug));
+      return items.filter(
+        (i) => !isLangIndex.test(i.slug) && !isLangDir.test(i.slug)
+      );
     }
   }
   return items;
