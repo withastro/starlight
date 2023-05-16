@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { HeadConfigSchema } from '../schemas/head';
+import { LogoConfigSchema } from '../schemas/logo';
 
 const LocaleSchema = z.object({
   /** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -100,6 +101,9 @@ const UserConfigSchema = z.object({
     .describe(
       'Description metadata for your website. Can be used in page metadata.'
     ),
+
+  /** Set a logo image to show in the navigation bar alongside or instead of the site title. */
+  logo: LogoConfigSchema(),
 
   /** Optional details about the social media accounts for this site. */
   social: z

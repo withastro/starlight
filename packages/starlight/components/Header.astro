@@ -1,9 +1,9 @@
 ---
-import config from 'virtual:starlight/user-config';
 import LanguageSelect from './LanguageSelect.astro';
 import Search from './Search.astro';
-import ThemeSelect from './ThemeSelect.astro';
+import SiteTitle from './SiteTitle.astro';
 import SocialIcons from './SocialIcons.astro';
+import ThemeSelect from './ThemeSelect.astro';
 
 interface Props {
   locale: string | undefined;
@@ -11,7 +11,7 @@ interface Props {
 ---
 
 <div class="header">
-  <a href={import.meta.env.BASE_URL} class="site-title">{config.title}</a>
+  <SiteTitle />
   <Search />
   <div class="hidden md:flex right-group">
     <SocialIcons />
@@ -27,14 +27,6 @@ interface Props {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-  }
-
-  .site-title {
-    font-size: var(--sl-text-h4);
-    font-weight: 600;
-    color: var(--sl-color-text-accent);
-    text-decoration: none;
-    white-space: nowrap;
   }
 
   .right-group {

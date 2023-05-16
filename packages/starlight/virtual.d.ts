@@ -7,3 +7,11 @@ declare module 'virtual:starlight/project-context' {
 }
 
 declare module 'virtual:starlight/user-css' {}
+
+declare module 'virtual:starlight/user-images' {
+  type ImageMetadata = import('astro').ImageMetadata;
+  export const logos: {
+    dark?: ImageMetadata;
+    light?: ImageMetadata;
+  };
+}

@@ -7,6 +7,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Starlight',
+      logo: {
+        light: '/src/assets/logo-light.svg',
+        dark: '/src/assets/logo-dark.svg',
+        replacesTitle: true,
+      },
       editLink: {
         baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
       },
