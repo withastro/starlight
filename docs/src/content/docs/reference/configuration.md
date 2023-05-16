@@ -246,7 +246,7 @@ starlight({
 
 ### `head`
 
-**type:** `HeadConfig[]`
+**type:** [`HeadConfig[]`](#headconfig)
 
 Add custom tags to the `<head>` of your Starlight site.
 Can be useful for adding analytics and other third-party scripts and resources.
