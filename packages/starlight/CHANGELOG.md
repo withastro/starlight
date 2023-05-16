@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.0.7
+
+### Patch Changes
+
+- [#55](https://github.com/withastro/starlight/pull/55) [`8597b9c`](https://github.com/withastro/starlight/commit/8597b9c1002f8c5073d25ae5cacd4060ded2f8c8) Thanks [@delucis](https://github.com/delucis)! - Fix routing logic to handle `index.md` slug differences between docs collection root and nested directories.
+
+- [#54](https://github.com/withastro/starlight/pull/54) [`db728d6`](https://github.com/withastro/starlight/commit/db728d61afa5cea060c66f746a4cc4ab3e1c3bcd) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Add padding to scroll preventing headings being obscured by nav
+
+- [#51](https://github.com/withastro/starlight/pull/51) [`3adbdbb`](https://github.com/withastro/starlight/commit/3adbdbbb71a4b3648984fa1028fa116d0aff9a7d) Thanks [@delucis](https://github.com/delucis)! - Support displaying a custom logo in the nav bar.
+
+- [#51](https://github.com/withastro/starlight/pull/51) [`3adbdbb`](https://github.com/withastro/starlight/commit/3adbdbbb71a4b3648984fa1028fa116d0aff9a7d) Thanks [@delucis](https://github.com/delucis)! - All Starlight projects now use Astro’s experimental optimized asset support.
+
 ## 0.0.6
 
 ### Patch Changes
