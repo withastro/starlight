@@ -19,6 +19,21 @@ Set the title for your website. Will be used in metadata and in the browser tab 
 
 Set the description for your website. Used in metadata shared with search engines in the `<meta name="description">` tag if `description` is not set in a page’s frontmatter.
 
+### `logo`
+
+**type:** [`LogoConfig`](#logoconfig)
+
+Set a logo image to show in the navigation bar alongside or instead of the site title. You can either set a single `src` property or set separate image sources for `light` and `dark`.
+
+#### `LogoConfig`
+
+```ts
+type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
+  | { src: string }
+  | { light: string; dark: string }
+);
+```
+
 ### `tableOfContents`
 
 **type:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`  
