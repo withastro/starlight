@@ -25,6 +25,14 @@ Set the description for your website. Used in metadata shared with search engine
 
 Set a logo image to show in the navigation bar alongside or instead of the site title. You can either set a single `src` property or set separate image sources for `light` and `dark`.
 
+```js
+starlight({
+  logo: {
+    src: '/src/assets/my-logo.svg',
+  },
+});
+```
+
 #### `LogoConfig`
 
 ```ts
