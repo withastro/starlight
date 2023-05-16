@@ -47,6 +47,20 @@ const prevNextLinks = getPrevNextLinks(sidebar);
 <html lang={lang} dir={dir}>
   <head>
     <HeadSEO data={entry.data} lang={lang} />
+    <style>
+      /* Add scroll padding to ensure anchor headings aren't obscured by nav */
+      html {
+        /* Additional padding is needed to account for the mobile TOC */
+        scroll-padding-top: calc(
+          1.5rem + var(--sl-nav-height) + var(--sl-mobile-toc-height)
+        );
+      }
+      @media (min-width: 72em) {
+        html {
+          scroll-padding-top: calc(1.5rem + var(--sl-nav-height));
+        }
+      }
+    </style>
   </head>
   <body>
     <ThemeProvider />
