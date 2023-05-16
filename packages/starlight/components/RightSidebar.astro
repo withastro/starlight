@@ -1,13 +1,13 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import type { CollectionEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import type { StarlightDocsEntry } from '../utils/routing';
 import EditLink from './EditLink.astro';
 import RightSidebarPanel from './RightSidebarPanel.astro';
 import TableOfContents from './TableOfContents.astro';
 
 interface Props {
-  entry: CollectionEntry<'docs'>;
+  entry: StarlightDocsEntry;
   headings: MarkdownHeading[];
 }
 

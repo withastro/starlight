@@ -38,10 +38,6 @@ export default defineConfig({
           label: 'Deutsch',
           lang: 'de',
         },
-        'fr-ca': {
-          label: 'Français canadien',
-          lang: 'fr-CA',
-        },
       },
       sidebar: [
         {
