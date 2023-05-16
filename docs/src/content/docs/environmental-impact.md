@@ -20,7 +20,8 @@ With a good caching strategy, subsequent navigations can download as little as 1
 
 ### Images
 
-While Starlight provides a good baseline, images you add to your docs pages can quickly increase your page weight. Try enabling Astro’s [optimized asset support][assets] if your docs require a lot of images.
+While Starlight provides a good baseline, images you add to your docs pages can quickly increase your page weight.
+Starlight uses Astro’s [optimized asset support][assets] to optimize local images in your Markdown and MDX files.
 
 ### UI components
 

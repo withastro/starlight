@@ -45,6 +45,7 @@ export default function StarlightIntegration(
                 ? {}
                 : { theme: 'css-variables' },
           },
+          experimental: { assets: true },
         };
         updateConfig(newConfig);
       },
