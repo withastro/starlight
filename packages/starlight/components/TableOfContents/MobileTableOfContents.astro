@@ -121,7 +121,7 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
     }
 
     constructor() {
-      super();
+      super({ smallViewport: true });
       const details = this.querySelector('details');
       if (!details) return;
       const closeToC = () => {

@@ -12,7 +12,7 @@ export class StarlightTOC extends HTMLElement {
     this._current = link;
   }
 
-  constructor() {
+  constructor({ smallViewport = false } = {}) {
     super();
 
     /** All the links in the table of contents. */
@@ -68,8 +68,8 @@ export class StarlightTOC extends HTMLElement {
       }
     };
 
-    const headingsObserver = new IntersectionObserver(setCurrent, {
-      rootMargin: '-10% 0% -85%',
+    const observer = new IntersectionObserver(setCurrent, {
+      rootMargin: smallViewport ? '-20% 0% -75%' : '-10% 0% -85%',
     });
 
     // Observe elements with an `id` (most likely headings) and their siblings.
@@ -78,7 +78,7 @@ export class StarlightTOC extends HTMLElement {
     const toObserve = document.querySelectorAll(
       'main [id], main [id] ~ *, main .content > *'
     );
-    toObserve.forEach((h) => headingsObserver.observe(h));
+    toObserve.forEach((h) => observer.observe(h));
   }
 }
 
