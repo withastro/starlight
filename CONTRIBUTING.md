@@ -63,7 +63,7 @@ Instead of working locally on your machine, you can also contribute using an onl
 
 **Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
 
-1. ** Open the Gitpod URL ** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
+1. **Open the Gitpod URL** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
 
 2. **Install dependencies** with `pnpm`:
 
