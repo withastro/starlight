@@ -1,6 +1,7 @@
 ---
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
+import { withBase } from '../utils/base';
 
 interface Props {
   locale: string | undefined;
@@ -22,11 +23,7 @@ if (config.logo) {
   if (err) throw new Error(err);
 }
 
-const { locale } = Astro.props
-
-const href = locale
-  ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${locale}/`
-  : import.meta.env.BASE_URL
+const href = withBase(Astro.props.locale || '/');
 ---
 
 <a {href} class="site-title flex">

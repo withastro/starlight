@@ -1,7 +1,8 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
-import { slugToPathname } from './slugs';
+import { withBase } from './base';
 import { Route, getLocaleRoutes, routes } from './routing';
+import { slugToPathname } from './slugs';
 import type {
   AutoSidebarGroup,
   SidebarItem,
@@ -100,12 +101,7 @@ function linkFromConfig(
 
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
-  if (!isAbsolute(href)) {
-    href = ensureLeadingAndTrailingSlashes(href);
-    /** Base URL with trailing `/` stripped. */
-    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-    if (base) href = base + href;
-  }
+  if (!isAbsolute(href)) href = withBase(href);
   const isCurrent = href === currentPathname;
   return { type: 'link', label, href, isCurrent };
 }
