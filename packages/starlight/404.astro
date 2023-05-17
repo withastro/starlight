@@ -17,6 +17,7 @@ import ThemeProvider from './components/ThemeProvider.astro';
 
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
+import { withBase } from './utils/base';
 
 const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
 ---
@@ -37,7 +38,7 @@ const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
           <p>Houston, we have a problem.</p>
           <p>
             We couldn’t find that link. Check the address or <a
-              href={import.meta.env.BASE_URL}>head back home</a
+              href={withBase('/')}>head back home</a
             >.
           </p>
         </MarkdownContent>
