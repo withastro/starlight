@@ -8,15 +8,17 @@ import ThemeSelect from './ThemeSelect.astro';
 interface Props {
   locale: string | undefined;
 }
+
+const { locale } = Astro.props
 ---
 
 <div class="header">
-  <SiteTitle />
+  <SiteTitle {locale} />
   <Search />
   <div class="hidden md:flex right-group">
     <SocialIcons />
     <ThemeSelect />
-    <LanguageSelect locale={Astro.props.locale} />
+    <LanguageSelect {locale}/>
   </div>
 </div>
 
