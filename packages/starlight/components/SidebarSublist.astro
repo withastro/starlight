@@ -1,29 +1,52 @@
 ---
 import type { SidebarEntry } from '../utils/navigation';
+import Icon from './Icon.astro';
 
 interface Props {
   sublist: SidebarEntry[];
 }
 ---
 
-<ul>
-  {
-    Astro.props.sublist.map((entry) => (
-      <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
-        {entry.type === 'link' ? (
-          <a href={entry.href} aria-current={entry.isCurrent && 'page'}>
-            {entry.label}
-          </a>
-        ) : (
-          <>
-            <h2>{entry.label}</h2>
-            <Astro.self sublist={entry.entries} />
-          </>
-        )}
-      </li>
-    ))
+<sidebar-sublist>
+  <ul>
+    {
+      Astro.props.sublist.map((entry) => (
+        <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
+          {entry.type === 'link' ? (
+            <a href={entry.href} aria-current={entry.isCurrent && 'page'}>
+              {entry.label}
+            </a>
+          ) : (
+            <>
+              <div class="sidebar-group-header">
+                <h2>{entry.label}</h2>
+                <Icon name="down-caret" class="icon caret" />
+              </div>
+              <Astro.self sublist={entry.entries} />
+            </>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</sidebar-sublist>
+
+<script>
+  class SiderBarSublist extends HTMLElement {
+    constructor() {
+      super();
+
+      const headers = this.querySelectorAll('.sidebar-group-header');
+      headers.forEach((head) => {
+        head.addEventListener('click', () => {
+          const expanded = head.getAttribute('aria-expanded') !== 'true'
+          head.setAttribute('aria-expanded', String(expanded));
+        });
+      });
+    }
   }
-</ul>
+  customElements.define('sidebar-sublist', SiderBarSublist);
+</script>
 
 <style>
   ul {
@@ -41,6 +64,26 @@ interface Props {
 
   .sidebar-group + .sidebar-group {
     margin-top: 0.75rem;
+  }
+
+  .sidebar-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .caret {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  [aria-expanded='false'] .caret {
+    transform: rotate(-90deg);
+  }
+
+  [aria-expanded='false'] + * {
+    display: none;
   }
 
   a {
