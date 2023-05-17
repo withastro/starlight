@@ -68,17 +68,35 @@ export class StarlightTOC extends HTMLElement {
       }
     };
 
-    const observer = new IntersectionObserver(setCurrent, {
-      rootMargin: smallViewport ? '-20% 0% -75%' : '-10% 0% -85%',
-    });
-
     // Observe elements with an `id` (most likely headings) and their siblings.
     // Also observe direct children of `.content` to include elements before
     // the first heading.
     const toObserve = document.querySelectorAll(
       'main [id], main [id] ~ *, main .content > *'
     );
-    toObserve.forEach((h) => observer.observe(h));
+    /** Start intersections at nav height + 2rem padding. */
+    const top = (smallViewport ? 104 : 64) + 32;
+    /** End intersections 1.5rem later. */
+    const bottom = top + 24;
+
+    let observer: IntersectionObserver | undefined;
+    function observe() {
+      if (observer) observer.disconnect();
+      const height = document.documentElement.clientHeight;
+      const rootMargin = `-${top}px 0% ${bottom - height}px`;
+      observer = new IntersectionObserver(setCurrent, { rootMargin });
+      toObserve.forEach((h) => observer!.observe(h));
+    }
+    observe();
+
+    const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+    let timeout: NodeJS.Timeout;
+    window.addEventListener('resize', () => {
+      // Disable intersection observer while window is resizing.
+      if (observer) observer.disconnect();
+      clearTimeout(timeout);
+      timeout = setTimeout(() => onIdle(observe), 200);
+    });
   }
 }
 
