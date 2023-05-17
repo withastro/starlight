@@ -59,6 +59,7 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
    ```sh
    pnpm i
    ```
+
 #### Developing using Gitpod
 
 Instead of working locally on your machine, you can also contribute using an online coding development environment like Gitpod.
