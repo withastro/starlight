@@ -57,6 +57,19 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
    ```sh
    pnpm i
    ```
+#### Contributing using Gitpod
+
+Instead of working locally on your machine, you can also contribute using an online coding development environment like Gitpod.
+
+**Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
+
+1. ** Open the Gitpod URL ** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
+
+2. **Install dependencies** with `pnpm`:
+
+   ```sh
+   pnpm i
+   ```
 
 ### Testing changes while you work
 
