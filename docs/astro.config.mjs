@@ -38,6 +38,10 @@ export default defineConfig({
           label: 'Deutsch',
           lang: 'de',
         },
+        es: {
+          label: 'Español',
+          lang: 'es',
+        }
       },
       sidebar: [
         {
