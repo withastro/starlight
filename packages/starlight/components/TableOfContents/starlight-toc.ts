@@ -69,7 +69,7 @@ export class StarlightTOC extends HTMLElement {
     };
 
     const headingsObserver = new IntersectionObserver(setCurrent, {
-      rootMargin: '5% 0% -85%',
+      rootMargin: '-10% 0% -85%',
     });
 
     // Observe elements with an `id` (most likely headings) and their siblings.
