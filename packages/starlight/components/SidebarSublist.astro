@@ -56,6 +56,9 @@ interface Props {
     user-select: none;
   }
 
+  :global([dir='rtl']) .caret {
+    transform: rotateZ(180deg);
+  }
   [open] .caret {
     transform: rotateZ(90deg);
   }
