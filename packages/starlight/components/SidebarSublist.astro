@@ -17,7 +17,7 @@ interface Props {
           </a>
         ) : (
           <details open>
-            <summary class="sidebar-group-header">
+            <summary>
               <h2>{entry.label}</h2>
               <Icon name="right-caret" class="caret" size="1.25rem" />
             </summary>
@@ -46,11 +46,7 @@ interface Props {
     margin-top: 0.75rem;
   }
 
-  summary::marker,
-  summary::-webkit-details-marker {
-    display: none;
-  }
-  .sidebar-group-header {
+  summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -58,16 +54,19 @@ interface Props {
     cursor: pointer;
     user-select: none;
   }
+  summary::marker,
+  summary::-webkit-details-marker {
+    display: none;
+  }
 
+  .caret {
+    transition: transform 0.2s ease-in-out;
+  }
   :global([dir='rtl']) .caret {
     transform: rotateZ(180deg);
   }
   [open] .caret {
     transform: rotateZ(90deg);
-  }
-
-  .caret {
-    transition: transform 0.2s ease-in-out;
   }
 
   a {
