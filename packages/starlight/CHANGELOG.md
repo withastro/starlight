@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.0.9
+
+### Patch Changes
+
+- [#72](https://github.com/withastro/starlight/pull/72) [`3dc1d0c`](https://github.com/withastro/starlight/commit/3dc1d0c342c6db4e30b016035fa446101b1805a2) Thanks [@delucis](https://github.com/delucis)! - Fix vertical alignment of social icons in site header
+
+- [#63](https://github.com/withastro/starlight/pull/63) [`823e351`](https://github.com/withastro/starlight/commit/823e351e1c1fc68ca3c20ab35c9a7d9b13760a70) Thanks [@liruifengv](https://github.com/liruifengv)! - Make sidebar groups to collapsible
+
+- [#72](https://github.com/withastro/starlight/pull/72) [`3dc1d0c`](https://github.com/withastro/starlight/commit/3dc1d0c342c6db4e30b016035fa446101b1805a2) Thanks [@delucis](https://github.com/delucis)! - Fix image aspect ratio in Markdown content
+
 ## 0.0.8
 
 ### Patch Changes
