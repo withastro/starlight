@@ -36,6 +36,8 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
+#### Developing locally
+
 **Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/). Make sure you have these installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
@@ -53,6 +55,20 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
    ```
 
 4. **Install dependencies** with `pnpm`:
+
+   ```sh
+   pnpm i
+   ```
+
+#### Developing using Gitpod
+
+Instead of working locally on your machine, you can also contribute using an online coding development environment like Gitpod.
+
+**Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
+
+1. **Open the Gitpod URL** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
+
+2. **Install dependencies** with `pnpm`:
 
    ```sh
    pnpm i
