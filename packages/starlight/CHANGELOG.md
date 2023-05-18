@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.0.8
+
+### Patch Changes
+
+- [#62](https://github.com/withastro/starlight/pull/62) [`a91191e`](https://github.com/withastro/starlight/commit/a91191e8308ffa746a3eadeea61e39412f32f926) Thanks [@delucis](https://github.com/delucis)! - Make `base` support consistent, including when `trailingSlash: 'never'` is set.
+
+- [#61](https://github.com/withastro/starlight/pull/61) [`608f34c`](https://github.com/withastro/starlight/commit/608f34cbbe485c39730f33828971397f9c8a3534) Thanks [@liruifengv](https://github.com/liruifengv)! - Fix toc headingsObserver rootMargin
+
+- [#66](https://github.com/withastro/starlight/pull/66) [`9ca67d8`](https://github.com/withastro/starlight/commit/9ca67d8984f76c22e5411d7352aa8e0bd4514f42) Thanks [@Yan-Thomas](https://github.com/Yan-Thomas)! - Make site title width fit the content
+
+- [#64](https://github.com/withastro/starlight/pull/64) [`4460e55`](https://github.com/withastro/starlight/commit/4460e55de210fd9a23a762fe76f5c32297d68d76) Thanks [@delucis](https://github.com/delucis)! - Fix table of contents intersection observer for all possible viewport sizes.
+
+- [#67](https://github.com/withastro/starlight/pull/67) [`38c2c1f`](https://github.com/withastro/starlight/commit/38c2c1f1ed25d6efe6ab2637ca2d9fbcdafcd240) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Fix background color on select component
+
+- [#57](https://github.com/withastro/starlight/pull/57) [`5b6cccb`](https://github.com/withastro/starlight/commit/5b6cccb7f9ee5810c75fbbb45496e2a1d022f7dd) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Update site title link to include locale
+
 ## 0.0.7
 
 ### Patch Changes
