@@ -56,8 +56,8 @@ interface Props {
     user-select: none;
   }
 
-  details:not([open]) .caret {
-    transform: rotate(-90deg);
+  [open] .caret {
+    transform: rotateZ(90deg);
   }
 
   .caret {
