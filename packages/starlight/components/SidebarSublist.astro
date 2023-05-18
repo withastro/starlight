@@ -7,46 +7,27 @@ interface Props {
 }
 ---
 
-<sidebar-sublist>
-  <ul>
-    {
-      Astro.props.sublist.map((entry) => (
-        <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
-          {entry.type === 'link' ? (
-            <a href={entry.href} aria-current={entry.isCurrent && 'page'}>
-              {entry.label}
-            </a>
-          ) : (
-            <>
-              <div class="sidebar-group-header">
-                <h2>{entry.label}</h2>
-                <Icon name="down-caret" class="icon caret" />
-              </div>
-              <Astro.self sublist={entry.entries} />
-            </>
-          )}
-        </li>
-      ))
-    }
-  </ul>
-</sidebar-sublist>
-
-<script>
-  class SiderBarSublist extends HTMLElement {
-    constructor() {
-      super();
-
-      const headers = this.querySelectorAll('.sidebar-group-header');
-      headers.forEach((head) => {
-        head.addEventListener('click', () => {
-          const expanded = head.getAttribute('aria-expanded') !== 'true'
-          head.setAttribute('aria-expanded', String(expanded));
-        });
-      });
-    }
+<ul>
+  {
+    Astro.props.sublist.map((entry) => (
+      <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
+        {entry.type === 'link' ? (
+          <a href={entry.href} aria-current={entry.isCurrent && 'page'}>
+            {entry.label}
+          </a>
+        ) : (
+          <details open>
+            <summary class="sidebar-group-header">
+              <h2>{entry.label}</h2>
+              <Icon name="down-caret" class="icon caret" />
+            </summary>
+            <Astro.self sublist={entry.entries} />
+          </details>
+        )}
+      </li>
+    ))
   }
-  customElements.define('sidebar-sublist', SiderBarSublist);
-</script>
+</ul>
 
 <style>
   ul {
@@ -74,16 +55,12 @@ interface Props {
     user-select: none;
   }
 
-  .caret {
-    transition: transform 0.2s ease-in-out;
-  }
-
-  [aria-expanded='false'] .caret {
+  details:not([open]) .caret {
     transform: rotate(-90deg);
   }
 
-  [aria-expanded='false'] + * {
-    display: none;
+  .caret {
+    transition: transform 0.2s ease-in-out;
   }
 
   a {
