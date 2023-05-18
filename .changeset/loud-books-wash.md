@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Add a collapse function to the sidebar
+Make sidebar groups to collapsible
