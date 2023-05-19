@@ -25,3 +25,7 @@ export function docsSchema() {
     head: HeadConfigSchema(),
   });
 }
+
+export function i18nSchema() {
+  return z.object({});
+}
