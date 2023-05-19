@@ -93,7 +93,7 @@
 
   --sl-text-body: var(--sl-text-base);
   --sl-text-body-sm: var(--sl-text-xs);
-  --sl-text-code: var(--sl-text-base);
+  --sl-text-code: var(--sl-text-sm);
   --sl-text-code-sm: var(--sl-text-xs);
   --sl-text-h1: var(--sl-text-4xl);
   --sl-text-h2: var(--sl-text-3xl);
