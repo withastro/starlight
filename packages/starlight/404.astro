@@ -30,8 +30,8 @@ const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
   </head>
   <body>
     <ThemeProvider />
-    <PageFrame>
-      <Header slot="header" locale={locale} />
+    <PageFrame {locale}>
+      <Header slot="header" {locale} />
       <main>
         <MarkdownContent>
           <h1 id="starlight__overview">404</h1>

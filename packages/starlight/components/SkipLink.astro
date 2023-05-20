@@ -1,4 +1,14 @@
-<a href="#starlight__overview">Skip to content</a>
+---
+import { useTranslations } from '../utils/translations';
+
+interface Props {
+  locale: string | undefined;
+}
+
+const t = useTranslations(Astro.props.locale);
+---
+
+<a href="#starlight__overview">{t('skipLink.label')}</a>
 
 <style>
   a {

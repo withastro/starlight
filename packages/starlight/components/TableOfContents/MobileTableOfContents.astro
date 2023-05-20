@@ -1,15 +1,21 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import config from 'virtual:starlight/user-config';
-import { generateToC } from './generateToC';
-import TableOfContentsList from './TableOfContentsList.astro';
+import { useTranslations } from '../../utils/translations';
 import Icon from '../Icon.astro';
+import TableOfContentsList from './TableOfContentsList.astro';
+import { generateToC } from './generateToC';
 
 interface Props {
   headings: MarkdownHeading[];
+  locale: string | undefined;
 }
 
-const toc = generateToC(Astro.props.headings, config.tableOfContents);
+const t = useTranslations(Astro.props.locale);
+const toc = generateToC(Astro.props.headings, {
+  ...config.tableOfContents,
+  title: t('tableOfContents.overview'),
+});
 ---
 
 <mobile-starlight-toc
@@ -20,7 +26,7 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
     <details id="starlight__mobile-toc">
       <summary id="starlight__on-this-page--mobile" class="flex">
         <div class="toggle flex">
-          On this page
+          {t('tableOfContents.onThisPage')}
           <Icon name={'right-caret'} class="caret" size="1rem" />
         </div>
         <span class="display-current">{toc[0]?.text}</span>

@@ -1,5 +1,12 @@
 ---
+import { useTranslations } from '../utils/translations';
 import Icon from './Icon.astro';
+
+interface Props {
+  locale: string | undefined;
+}
+
+const t = useTranslations(Astro.props.locale);
 ---
 
 <p>
@@ -7,7 +14,7 @@ import Icon from './Icon.astro';
     name={'warning'}
     size="1.5em"
     color="var(--sl-color-orange-high)"
-  /><span>This content is not available in your language yet.</span>
+  /><span>{t('i18n.untranslatedContent')}</span>
 </p>
 
 <style>

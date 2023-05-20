@@ -1,5 +1,13 @@
 ---
 import MobileMenuToggle from '../components/MobileMenuToggle.astro';
+import { useTranslations } from '../utils/translations';
+
+interface Props {
+  locale: string | undefined;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 
 const hasSidebar = Astro.slots.has('sidebar');
 ---
@@ -8,8 +16,8 @@ const hasSidebar = Astro.slots.has('sidebar');
   <header class="header"><slot name="header" /></header>
   {
     hasSidebar && (
-      <nav class="sidebar" aria-label="Main">
-        <MobileMenuToggle />
+      <nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
+        <MobileMenuToggle {locale} />
         <div id="starlight__sidebar" class="sidebar-pane">
           <div class="sidebar-content">
             <slot name="sidebar" />
