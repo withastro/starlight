@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { HeadConfigSchema } from './schemas/head';
+export { i18nSchema } from './schemas/i18n';
 
 export function docsSchema() {
   return z.object({
@@ -24,8 +25,4 @@ export function docsSchema() {
     /** Set custom `<head>` tags just for this page. */
     head: HeadConfigSchema(),
   });
-}
-
-export function i18nSchema() {
-  return z.object({});
 }
