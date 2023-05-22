@@ -4,108 +4,108 @@ export function i18nSchema() {
   return z.object({
     'skipLink.label': z
       .string()
-      .default('Skip to content')
+      .optional()
       .describe(
         'Text displayed in the accessible “Skip link” when a keyboard user first tabs into a page.'
       ),
 
     'search.label': z
       .string()
-      .default('Search')
+      .optional()
       .describe('Text displayed in the search bar.'),
 
     'search.shortcutLabel': z
       .string()
-      .default('(Press / to search)')
+      .optional()
       .describe(
         'Accessible label for the shortcut key to open the search modal.'
       ),
 
     'search.cancelLabel': z
       .string()
-      .default('Cancel')
+      .optional()
       .describe('Text for the “Cancel” button that closes the search modal.'),
 
     'themeSelect.accessibleLabel': z
       .string()
-      .default('Select theme')
+      .optional()
       .describe('Accessible label for the theme selection dropdown.'),
 
     'themeSelect.dark': z
       .string()
-      .default('Dark')
+      .optional()
       .describe('Name of the dark color theme.'),
 
     'themeSelect.light': z
       .string()
-      .default('Light')
+      .optional()
       .describe('Name of the light color theme.'),
 
     'themeSelect.auto': z
       .string()
-      .default('Auto')
+      .optional()
       .describe(
         'Name of the automatic color theme that syncs with system preferences.'
       ),
 
     'languageSelect.accessibleLabel': z
       .string()
-      .default('Select language')
+      .optional()
       .describe('Accessible label for the language selection dropdown.'),
 
     'menuButton.accessibleLabel': z
       .string()
-      .default('Menu')
+      .optional()
       .describe('Accessible label for he mobile menu button.'),
 
     'sidebarNav.accessibleLabel': z
       .string()
-      .default('Main')
+      .optional()
       .describe(
         'Accessible label for the main sidebar `<nav>` element to distinguish it fom other `<nav>` landmarks on the page.'
       ),
 
     'tableOfContents.onThisPage': z
       .string()
-      .default('On this page')
+      .optional()
       .describe('Title for the table of contents component.'),
 
     'tableOfContents.overview': z
       .string()
-      .default('Overview')
+      .optional()
       .describe(
         'Label used for the first link in the table of contents, linking to the page title.'
       ),
 
     'i18n.untranslatedContent': z
       .string()
-      .default('This content is not available in your language yet.')
+      .optional()
       .describe(
         'Notice informing users they are on a page that is not yet translated to their language.'
       ),
 
     'page.editLink': z
       .string()
-      .default('Edit page')
+      .optional()
       .describe('Text for the link to edit a page.'),
 
     'page.lastUpdated': z
       .string()
-      .default('Last updated:')
+      .optional()
       .describe(
         'Text displayed in front of the last updated date in the page footer.'
       ),
 
     'page.previousLink': z
       .string()
-      .default('Previous')
+      .optional()
       .describe(
         'Label shown on the “previous page” pagination arrow in the page footer.'
       ),
 
     'page.nextLink': z
       .string()
-      .default('Next')
+      .optional()
       .describe(
         'Label shown on the “next page” pagination arrow in the page footer.'
       ),
