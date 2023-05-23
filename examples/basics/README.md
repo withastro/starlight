@@ -15,15 +15,15 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 
 ```
 .
-├── astro.config.mjs
-├── package.json
 ├── public/
 ├── src/
 │   ├── assets/
 │   ├── content/
-│   │   ├── config.ts
-│   │   └── docs/
+│   │   ├── docs/
+│   │   └── config.ts
 │   └── env.d.ts
+├── astro.config.mjs
+├── package.json
 └── tsconfig.json
 ```
 
