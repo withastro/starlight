@@ -8,13 +8,15 @@ interface Props {
   sidebar: ReturnType<typeof getSidebar>;
   locale: string | undefined;
 }
+
+const { sidebar, locale } = Astro.props;
 ---
 
 <div class="sidebar flex">
-  <SidebarSublist sublist={Astro.props.sidebar} />
+  <SidebarSublist sublist={sidebar} />
   <div class="mobile-preferences flex md:hidden">
-    <ThemeSelect />
-    <LanguageSelect locale={Astro.props.locale} />
+    <ThemeSelect {locale} />
+    <LanguageSelect {locale} />
   </div>
 </div>
 

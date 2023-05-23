@@ -32,11 +32,13 @@ export function slugToLocaleData(slug: string): LocaleData {
  * Get the BCP-47 language tag for the given locale.
  * @param locale Locale string or `undefined` for the root locale.
  */
-function localeToLang(locale: string | undefined): string {
+export function localeToLang(locale: string | undefined): string {
   const lang = locale
     ? config.locales?.[locale]?.lang
     : config.locales?.root?.lang;
-  return lang || 'en';
+  const defaultLang =
+    config.defaultLocale?.lang || config.defaultLocale?.locale;
+  return lang || defaultLang || 'en';
 }
 
 /**

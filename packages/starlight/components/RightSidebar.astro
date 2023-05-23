@@ -9,20 +9,21 @@ import TableOfContents from './TableOfContents.astro';
 interface Props {
   entry: StarlightDocsEntry;
   headings: MarkdownHeading[];
+  locale: string | undefined;
 }
 
-const { entry, headings } = Astro.props;
+const { entry, headings, locale } = Astro.props;
 ---
 
 <RightSidebarPanel>
-  <TableOfContents headings={headings} />
+  <TableOfContents {headings} {locale} />
 </RightSidebarPanel>
 <RightSidebarPanel>
   {
     config.editLink.baseUrl && (
       <>
         <h2>Contribute</h2>
-        <EditLink data={entry.data} id={entry.id} />
+        <EditLink data={entry.data} id={entry.id} {locale} />
       </>
     )
   }

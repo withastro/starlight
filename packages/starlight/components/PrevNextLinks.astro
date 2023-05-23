@@ -1,15 +1,18 @@
 ---
 import type { Link } from '../utils/navigation';
+import { useTranslations } from '../utils/translations';
 import Icon from './Icon.astro';
 
 interface Props {
   prev: Link | undefined;
   next: Link | undefined;
   dir: 'ltr' | 'rtl';
+  locale: string | undefined;
 }
 
-const { prev, next, dir } = Astro.props;
+const { prev, next, dir, locale } = Astro.props;
 const isRtl = dir === 'rtl';
+const t = useTranslations(locale);
 ---
 
 <div class="pagination-links" dir={dir}>
@@ -18,7 +21,7 @@ const isRtl = dir === 'rtl';
       <a href={prev.href} rel="prev">
         <Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.5rem" />
         <span>
-          Previous
+          {t('page.previousLink')}
           <br />
           <span class="link-title">{prev.label}</span>
         </span>
@@ -30,7 +33,7 @@ const isRtl = dir === 'rtl';
       <a href={next.href} rel="next">
         <Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.5rem" />
         <span>
-          Next
+          {t('page.nextLink')}
           <br />
           <span class="link-title">{next.label}</span>
         </span>

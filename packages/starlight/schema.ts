@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { HeadConfigSchema } from './schemas/head';
+export { i18nSchema } from './schemas/i18n';
 
 export function docsSchema() {
   return z.object({

@@ -28,11 +28,11 @@
     "./404.astro": "./404.astro"
   },
   "peerDependencies": {
-    "astro": "^2.4.3"
+    "astro": "^2.5.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "astro": "^2.4.3"
+    "astro": "^2.5.0"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.1",

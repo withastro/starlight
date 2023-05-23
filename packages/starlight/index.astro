@@ -64,13 +64,13 @@ const prevNextLinks = getPrevNextLinks(sidebar);
   </head>
   <body>
     <ThemeProvider />
-    <SkipLink />
-    <PageFrame>
-      <Header slot="header" locale={locale} />
-      <Sidebar slot="sidebar" sidebar={sidebar} locale={locale} />
-      <MobileTableOfContents headings={headings} />
+    <SkipLink {locale} />
+    <PageFrame {locale}>
+      <Header slot="header" {locale} />
+      <Sidebar slot="sidebar" {sidebar} {locale} />
+      <MobileTableOfContents {headings} {locale} />
       <TwoColumnContent>
-        <RightSidebar slot="right-sidebar" entry={entry} headings={headings} />
+        <RightSidebar slot="right-sidebar" {entry} {headings} {locale} />
         <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
           <ContentPanel>
             <h1
@@ -79,13 +79,13 @@ const prevNextLinks = getPrevNextLinks(sidebar);
             >
               {entry.data.title}
             </h1>
-            {isFallback && <FallbackContentNotice />}
+            {isFallback && <FallbackContentNotice {locale} />}
           </ContentPanel>
           <ContentPanel>
             <MarkdownContent><Content /></MarkdownContent>
             <footer>
-              <LastUpdated id={entry.id} lang={lang} />
-              <PrevNextLinks {...prevNextLinks} dir={dir} />
+              <LastUpdated id={entry.id} {lang} {locale} />
+              <PrevNextLinks {...prevNextLinks} {dir} {locale} />
             </footer>
           </ContentPanel>
         </main>
