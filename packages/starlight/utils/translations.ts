@@ -6,9 +6,13 @@ import builtinTranslations from '../translations';
 const defaultLocale = config.defaultLocale?.locale || 'root';
 
 /** All translation data from the i18n collection, keyed by `id`, which matches locale. */
-const userTranslations = Object.fromEntries(
-  (await getCollection('i18n')).map((entry) => [entry.id, entry.data] as const)
-);
+let userTranslations: Record<string, CollectionEntry<'i18n'>['data']> = {};
+try {
+  // Load the user’s i18n collection and ignore the error if it doesn’t exist.
+  userTranslations = Object.fromEntries(
+    (await getCollection('i18n')).map(({ id, data }) => [id, data] as const)
+  );
+} catch {}
 
 /** Default map of UI strings based on Starlight’s defaults + those for the user-configured default locale. */
 const defaults = {
