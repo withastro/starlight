@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import builtinTranslations from '../translations';
 
@@ -14,12 +14,13 @@ try {
   );
 } catch {}
 
-/** Default map of UI strings based on Starlight’s defaults + those for the user-configured default locale. */
-const defaults = {
-  ...builtinTranslations['en'],
-  ...builtinTranslations[defaultLocale],
-  ...userTranslations[defaultLocale],
-};
+/** Default map of UI strings based on Starlight and user-configured defaults. */
+const defaults = buildDictionary(
+  builtinTranslations.en!,
+  userTranslations.en,
+  builtinTranslations[defaultLocale],
+  userTranslations[defaultLocale]
+);
 
 /**
  * Generate a utility function that returns UI strings for the given `locale`.
@@ -31,10 +32,26 @@ const defaults = {
 export function useTranslations(locale = 'root') {
   // TODO: Use better locale mapping, e.g. so that `en-GB` matches `en`.
   // TODO: Use `lang` instead of `locale` for translations? Otherwise root locales won’t work properly.
-  const dictionary = {
-    ...defaults,
-    ...builtinTranslations[locale],
-    ...userTranslations[locale],
-  };
+  const dictionary = buildDictionary(
+    defaults,
+    builtinTranslations[locale],
+    userTranslations[locale]
+  );
   return (key: keyof typeof dictionary) => dictionary[key];
+}
+
+/** Build a dictionary by layering preferred translation sources. */
+function buildDictionary(
+  base: (typeof builtinTranslations)[string],
+  ...dictionaries: (CollectionEntry<'i18n'>['data'] | undefined)[]
+) {
+  const dictionary = { ...base };
+  // Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
+  for (const dict of dictionaries) {
+    for (const key in dict) {
+      const value = dict[key as keyof typeof dict];
+      if (value) dictionary[key as keyof typeof dict] = value;
+    }
+  }
+  return dictionary;
 }
