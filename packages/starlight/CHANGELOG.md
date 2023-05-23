@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.0.11
+
+### Patch Changes
+
+- [`4da9cbd`](https://github.com/withastro/starlight/commit/4da9cbd7e643c97acbf4c2016aefb8f712bc9869) Thanks [@delucis](https://github.com/delucis)! - Fix typo in English UI strings
+
 ## 0.0.10
 
 ### Patch Changes
