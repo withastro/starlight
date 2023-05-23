@@ -1,5 +1,26 @@
 # @astrojs/starlight
 
+## 0.0.10
+
+### Patch Changes
+
+- [#78](https://github.com/withastro/starlight/pull/78) [`d3ee6fc`](https://github.com/withastro/starlight/commit/d3ee6fc643de7a320a6bb83432cdcfbb0a4e4289) Thanks [@delucis](https://github.com/delucis)! - Add support for customising and translating Starlight’s UI.
+
+  Users can provide translations in JSON files in `src/content/i18n/` which is a data collection. For example, a `src/content/i18n/de.json` might translate the search UI:
+
+  ```json
+  {
+    "search.label": "Suchen",
+    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  }
+  ```
+
+  This change also allows Starlight to provide built-in support for more languages than just English and adds German & Spanish support.
+
+- [#76](https://github.com/withastro/starlight/pull/76) [`5e82073`](https://github.com/withastro/starlight/commit/5e8207350dba0fce92fa101d311db627e2157654) Thanks [@lloydjatkinson](https://github.com/lloydjatkinson)! - Scale down code block font size to match Figma design
+
+- [#78](https://github.com/withastro/starlight/pull/78) [`d3ee6fc`](https://github.com/withastro/starlight/commit/d3ee6fc643de7a320a6bb83432cdcfbb0a4e4289) Thanks [@delucis](https://github.com/delucis)! - Require a minimum Astro version of 2.5.0
+
 ## 0.0.9
 
 ### Patch Changes
