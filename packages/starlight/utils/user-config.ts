@@ -273,7 +273,12 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
       /** Flag indicating if this site has multiple locales set up. */
       isMultilingual: false,
       /** Full locale object for this site’s default language. */
-      defaultLocale: undefined,
+      defaultLocale: {
+        label: 'English',
+        lang: 'en',
+        dir: 'ltr',
+        ...locales?.root,
+      },
       locales: undefined,
     } as const;
   }

@@ -36,7 +36,9 @@ export function localeToLang(locale: string | undefined): string {
   const lang = locale
     ? config.locales?.[locale]?.lang
     : config.locales?.root?.lang;
-  return lang || 'en';
+  const defaultLang =
+    config.defaultLocale?.lang || config.defaultLocale?.locale;
+  return lang || defaultLang || 'en';
 }
 
 /**
