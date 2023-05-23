@@ -1,6 +1,7 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import builtinTranslations from '../translations';
+import { localeToLang } from './slugs';
 
 /** User-configured default locale. */
 const defaultLocale = config.defaultLocale?.locale || 'root';
@@ -29,13 +30,13 @@ const defaults = buildDictionary(
  * const t = useTranslations('en');
  * const label = t('search.label'); // => 'Search'
  */
-export function useTranslations(locale = 'root') {
-  // TODO: Use better locale mapping, e.g. so that `en-GB` matches `en`.
-  // TODO: Use `lang` instead of `locale` for translations? Otherwise root locales won’t work properly.
+export function useTranslations(locale: string | undefined) {
+  // TODO: Use better mapping, e.g. so that `en-GB` matches `en`.
+  const lang = localeToLang(locale);
   const dictionary = buildDictionary(
     defaults,
-    builtinTranslations[locale],
-    userTranslations[locale]
+    builtinTranslations[lang],
+    userTranslations[lang]
   );
   return (key: keyof typeof dictionary) => dictionary[key];
 }
