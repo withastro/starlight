@@ -181,39 +181,7 @@ Markdown supports unordered lists (often call “bullet” lists) and ordered li
 1.  Item two
 1.  Item three
 
-### And an ordered list, continued:
-
-1.  Item one
-1.  Item two
-
-Some text
-
-3.  Item three
-1.  Item four
-
-### And an ordered list starting from 42:
-
-42. Item 42
-1.  Item 43
-1.  Item 44
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Nesting an ol in ul in an ol
+### And some nested lists
 
 - level 1 item (ul)
   1. level 2 item (ol)
