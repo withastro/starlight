@@ -138,6 +138,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
+      title: 'My Docs',
       // Establece el inglés como el idioma predeterminado para este sitio.
       defaultLocale: 'en',
       locales: {
