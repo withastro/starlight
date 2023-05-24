@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {},
   "keywords": [
