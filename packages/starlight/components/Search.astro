@@ -63,7 +63,7 @@ const t = useTranslations(Astro.props.locale);
 
       /** Close the modal if a user clicks outside of the modal. */
       const onWindowClick = (event: MouseEvent) => {
-        if (!dialogFrame.contains(event.target as Node)) closeModal();
+        if (document.body.contains(event.target as Node) && !dialogFrame.contains(event.target as Node)) closeModal();
       };
 
       const openModal = (event?: MouseEvent) => {
