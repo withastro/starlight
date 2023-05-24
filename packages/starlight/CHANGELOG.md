@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.0.12
+
+### Patch Changes
+
+- [#85](https://github.com/withastro/starlight/pull/85) [`c86c1d6`](https://github.com/withastro/starlight/commit/c86c1d6e93d978d13e42bbc449e0225a06793ba3) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Improve outside click detection on the search modal
+
 ## 0.0.11
 
 ### Patch Changes
