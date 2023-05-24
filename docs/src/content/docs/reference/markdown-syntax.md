@@ -1,5 +1,6 @@
 ---
 title: Markdown Syntax
+description: An overview of the Markdown syntax Starlight supports.
 ---
 
 Starlight supports the full range of Markdown syntax.
