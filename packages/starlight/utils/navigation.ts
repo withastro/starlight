@@ -65,7 +65,13 @@ function groupFromAutogenerateConfig(
 ): Group {
   const { directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
-  const dirDocs = routes.filter((doc) => doc.slug.startsWith(localeDir));
+  const dirDocs = routes.filter(
+    (doc) =>
+      // Match against `foo.md` or `foo/index.md`.
+      doc.slug === localeDir ||
+      // Match against `foo/anything/else.md`.
+      doc.slug.startsWith(localeDir + '/')
+  );
   const tree = treeify(dirDocs, localeDir);
   return {
     type: 'group',
