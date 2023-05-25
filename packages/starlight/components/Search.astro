@@ -34,7 +34,7 @@ const t = useTranslations(Astro.props.locale);
       </button>
       {
         import.meta.env.DEV ? (
-          <div style="margin: auto; text-align: center;">
+          <div style="margin: auto; text-align: center;" dir="ltr">
             <p>Search is only available in production builds.</p>
             <p>Try building and previewing the site to test it out locally.</p>
           </div>
@@ -63,7 +63,11 @@ const t = useTranslations(Astro.props.locale);
 
       /** Close the modal if a user clicks outside of the modal. */
       const onWindowClick = (event: MouseEvent) => {
-        if (document.body.contains(event.target as Node) && !dialogFrame.contains(event.target as Node)) closeModal();
+        if (
+          document.body.contains(event.target as Node) &&
+          !dialogFrame.contains(event.target as Node)
+        )
+          closeModal();
       };
 
       const openModal = (event?: MouseEvent) => {
