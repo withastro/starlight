@@ -82,6 +82,7 @@ export function localizedSlug(
   const slugLocale = slugToLocale(slug);
   if (slugLocale === locale) return slug;
   locale = locale || '';
+  if (slugLocale === slug) return locale;
   if (slugLocale) {
     return slug
       .replace(slugLocale + '/', locale ? locale + '/' : '')
