@@ -45,8 +45,8 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1
       '@pagefind/default-ui':
-        specifier: ^0.12.0
-        version: 0.12.0
+        specifier: ^1.0.0-alpha.5
+        version: 1.0.0-alpha.5
       '@types/mdast':
         specifier: ^3.0.11
         version: 3.0.11
@@ -60,8 +60,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       pagefind:
-        specifier: ^0.12.0
-        version: 0.12.0
+        specifier: ^1.0.0-alpha.5
+        version: 1.0.0-alpha.5
       rehype:
         specifier: ^12.0.1
         version: 12.0.1
@@ -957,9 +957,49 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@pagefind/default-ui@0.12.0:
-    resolution: {integrity: sha512-O+27oCGwIjHjcb3AMJ9J1KWwXqv+hm71jCfTyUf+BrJusNBpgX4BaqKRRx8rbElYew2aglqf9yl5wYJUt5w33Q==}
+  /@pagefind/darwin-arm64@1.0.0-alpha.5:
+    resolution: {integrity: sha512-peZTl2+ndCupYkJ2qg16UDMKijosAU4BBFhpDv1ckjW49BE0Lh4vXHY12DxTvKaHrEu2XvC5blSjC+fkMe64vg==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
     dev: false
+    optional: true
+
+  /@pagefind/darwin-x64@1.0.0-alpha.5:
+    resolution: {integrity: sha512-3M35um77sLndK+nBS0eyYf9FvdzwFQ0BPhVu5Gs6pP7vPAtayzBkwtLsdrbRBeHpCODwF8Eg4zvxTQBc2+nhAg==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@pagefind/default-ui@1.0.0-alpha.5:
+    resolution: {integrity: sha512-swifkGRaPijH7mwMfQ7eNUxPh9Uvxzhi2sgmA9ipcc3Kcptu/O8em0jdCOwynyBIb5gJC6Paq3Hr+i2hJ5o1Hw==}
+    dev: false
+
+  /@pagefind/linux-arm64@1.0.0-alpha.5:
+    resolution: {integrity: sha512-LkOCsyhw15X87eJLHiHPcZmhM7QON4Au/68j0e7y6zCnXhzqjvs/26GqSfUdXhVIdGydxiKiPbSp9scbu15mKQ==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@pagefind/linux-x64@1.0.0-alpha.5:
+    resolution: {integrity: sha512-k4k5hDX1zVejCby+f58/Ymx2ftQ/Misb31T0Zje0aO7n41GeWAimfZVetHOpHmBsyXBXm+afHwXdpWHL5vUkuA==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@pagefind/windows-x64@1.0.0-alpha.5:
+    resolution: {integrity: sha512-lXvE/4hsfF0tRkvPV+RkmAdysFcqlfGCTh/326E5NMtaQr9zILf9skuX3/1GwkmeojBAZssIQm2w+MdtULIzMA==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /@pkgr/utils@2.3.1:
     resolution: {integrity: sha512-wfzX8kc1PMyUILA+1Z/EqoE4UCXGy0iRGMhPwdfae1+f0OXlLqCk+By+aMzgJBzR9AzS4CDizioG6Ss1gvAFJw==}
@@ -1173,6 +1213,7 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -2655,6 +2696,7 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /human-id@1.0.2:
     resolution: {integrity: sha512-UNopramDEhHJD+VR+ehk8rOslwSfByxPIZyJRfV739NDhN5LF1fa1MqnzKm2lGTQRjNrjK19Q5fhkgIfjlVUKw==}
@@ -3971,15 +4013,15 @@ packages:
       - utf-8-validate
     dev: true
 
-  /pagefind@0.12.0:
-    resolution: {integrity: sha512-LHUmlYYweBM6/rK1G+7z2q2WjYeycrB7g5Kuw0w6yMkYztzsEdO2Qj2pJ3z8gsWV8eJsYQyAGOAdqE3SZWlCqA==}
+  /pagefind@1.0.0-alpha.5:
+    resolution: {integrity: sha512-uf0AMnxoAwiyn5a8mfaCk7skeXCRoZEh6E8JeX4NX3aUOoVyQNA2hJ2VGGbtM85mYT2AdiaG89zh7EqzakeDIw==}
     hasBin: true
-    requiresBuild: true
-    dependencies:
-      https-proxy-agent: 5.0.1
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - supports-color
+    optionalDependencies:
+      '@pagefind/darwin-arm64': 1.0.0-alpha.5
+      '@pagefind/darwin-x64': 1.0.0-alpha.5
+      '@pagefind/linux-arm64': 1.0.0-alpha.5
+      '@pagefind/linux-x64': 1.0.0-alpha.5
+      '@pagefind/windows-x64': 1.0.0-alpha.5
     dev: false
 
   /parse-entities@4.0.1:
@@ -4179,6 +4221,7 @@ packages:
 
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
+    dev: true
 
   /ps-tree@1.2.0:
     resolution: {integrity: sha512-0VnamPPYHl4uaU/nSFeZZpR21QAWRz+sRv4iW9+v/GS/J5U5iZB5BNN6J0RMoOvdx2gWM2+ZFMIm58q24e4UYA==}
