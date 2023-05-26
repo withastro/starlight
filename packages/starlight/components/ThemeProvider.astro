@@ -2,14 +2,6 @@
 import Icon from './Icon.astro';
 ---
 
-<script>
-  declare global {
-    var StarlightThemeProvider: {
-      updatePickers(theme?: string): void;
-    };
-  }
-</script>
-
 {/* This is intentionally inlined to avoid FOUC. */}
 <script is:inline>
   window.StarlightThemeProvider = (() => {
