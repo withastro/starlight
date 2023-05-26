@@ -114,6 +114,8 @@ function makeLink(href: string, label: string, currentPathname: string): Link {
 
 /** Get the segments leading to a page. */
 function getBreadcrumbs(slug: string, baseDir: string): string[] {
+  // Index slugs will match `baseDir` and don’t include breadcrumbs.
+  if (slug === baseDir) return [];
   // Ensure base directory ends in a trailing slash.
   if (!baseDir.endsWith('/')) baseDir += '/';
   // Strip base directory from slug if present.
