@@ -1,8 +1,9 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
 import { withBase } from './base';
+import { pickLang } from './i18n';
 import { Route, getLocaleRoutes, routes } from './routing';
-import { slugToPathname } from './slugs';
+import { localeToLang, slugToPathname } from './slugs';
 import type {
   AutoSidebarGroup,
   SidebarItem,
@@ -48,7 +49,7 @@ function configItemToEntry(
   } else {
     return {
       type: 'group',
-      label: item.label,
+      label: pickLang(item.translations, localeToLang(locale)) || item.label,
       entries: item.items.map((i) =>
         configItemToEntry(i, currentPathname, locale, routes)
       ),
@@ -75,7 +76,7 @@ function groupFromAutogenerateConfig(
   const tree = treeify(dirDocs, localeDir);
   return {
     type: 'group',
-    label: item.label,
+    label: pickLang(item.translations, localeToLang(locale)) || item.label,
     entries: sidebarFromDir(tree, currentPathname, locale),
   };
 }
@@ -102,7 +103,8 @@ function linkFromConfig(
     // Inject current locale into link.
     if (locale) href = '/' + locale + href;
   }
-  return makeLink(href, item.label, currentPathname);
+  const label = pickLang(item.translations, localeToLang(locale)) || item.label;
+  return makeLink(href, label, currentPathname);
 }
 
 /** Create a link entry. */
