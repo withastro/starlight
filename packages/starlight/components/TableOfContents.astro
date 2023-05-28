@@ -12,22 +12,24 @@ interface Props {
 
 const { locale, headings } = Astro.props;
 const t = useTranslations(locale);
-const toc = generateToC(headings, {
-  ...config.tableOfContents,
-  title: t('tableOfContents.overview'),
-});
 ---
 
-<starlight-toc
-  data-min-h={config.tableOfContents.minHeadingLevel}
-  data-max-h={config.tableOfContents.maxHeadingLevel}
->
-  <nav aria-labelledby="starlight__on-this-page">
-    <h2 id="starlight__on-this-page">
-      {t('tableOfContents.onThisPage')}
-    </h2>
-    <TableOfContentsList toc={toc} />
-  </nav>
-</starlight-toc>
-
+{
+  config.tableOfContents && (
+    <starlight-toc
+      data-min-h={config.tableOfContents.minHeadingLevel}
+      data-max-h={config.tableOfContents.maxHeadingLevel}
+    >
+      <nav aria-labelledby="starlight__on-this-page">
+        <h2 id="starlight__on-this-page">{t('tableOfContents.onThisPage')}</h2>
+        <TableOfContentsList
+          toc={generateToC(headings, {
+            ...config.tableOfContents,
+            title: t('tableOfContents.overview'),
+          })}
+        />
+      </nav>
+    </starlight-toc>
+  )
+}
 <script src="./TableOfContents/starlight-toc"></script>
