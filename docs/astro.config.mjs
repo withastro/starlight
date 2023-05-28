@@ -30,22 +30,14 @@ export default defineConfig({
         },
       ],
       locales: {
-        root: {
-          label: 'English',
-          lang: 'en',
-        },
-        de: {
-          label: 'Deutsch',
-          lang: 'de',
-        },
-        es: {
-          label: 'Español',
-          lang: 'es',
-        }
+        root: { label: 'English', lang: 'en' },
+        de: { label: 'Deutsch', lang: 'de' },
+        es: { label: 'Español', lang: 'es' },
       },
       sidebar: [
         {
           label: 'Start Here',
+          translations: { de: 'Beginne hier', es: 'Comienza aqui' },
           items: [
             { label: 'Welcome, world', link: '/' },
             { label: 'Getting Started', link: 'getting-started' },
@@ -54,15 +46,13 @@ export default defineConfig({
         },
         {
           label: 'Guides',
-          autogenerate: {
-            directory: 'guides',
-          },
+          translations: { de: 'Anleitungen', es: 'Guías' },
+          autogenerate: { directory: 'guides' },
         },
         {
           label: 'Reference',
-          autogenerate: {
-            directory: 'reference',
-          },
+          translations: { de: 'Referenz', es: 'Referencias' },
+          autogenerate: { directory: 'reference' },
         },
       ],
     }),
