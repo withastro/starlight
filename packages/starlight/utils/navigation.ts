@@ -233,6 +233,6 @@ export function getPrevNextLinks(sidebar: SidebarEntry[]): {
   const entries = flattenSidebar(sidebar);
   const currentIndex = entries.findIndex((entry) => entry.isCurrent);
   const prev = entries[currentIndex - 1];
-  const next = entries[currentIndex + 1];
+  const next = currentIndex > -1 ? entries[currentIndex + 1] : undefined;
   return { prev, next };
 }
