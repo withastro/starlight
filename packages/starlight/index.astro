@@ -1,7 +1,7 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
 
-import { getPrevNextLinks, getSidebar } from './utils/navigation';
+import { getSidebar } from './utils/navigation';
 import { paths } from './utils/routing';
 
 // Built-in CSS styles.
@@ -15,9 +15,8 @@ import ContentPanel from './components/ContentPanel.astro';
 import FallbackContentNotice from './components/FallbackContentNotice.astro';
 import HeadSEO from './components/HeadSEO.astro';
 import Header from './components/Header.astro';
-import LastUpdated from './components/LastUpdated.astro';
+import Footer from './components/Footer.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
-import PrevNextLinks from './components/PrevNextLinks.astro';
 import RightSidebar from './components/RightSidebar.astro';
 import Sidebar from './components/Sidebar.astro';
 import SkipLink from './components/SkipLink.astro';
@@ -41,7 +40,6 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { dir, entry, entryMeta, isFallback, lang, locale } = Astro.props;
 const { Content, headings } = await entry.render();
 const sidebar = getSidebar(Astro.url.pathname, locale);
-const prevNextLinks = getPrevNextLinks(sidebar);
 ---
 
 <html lang={lang} dir={dir}>
@@ -70,7 +68,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
       <Sidebar slot="sidebar" {sidebar} {locale} />
       <MobileTableOfContents {headings} {locale} />
       <TwoColumnContent>
-        <RightSidebar slot="right-sidebar" {entry} {headings} {locale} />
+        <RightSidebar slot="right-sidebar" {headings} {locale} />
         <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
           <ContentPanel>
             <h1
@@ -83,10 +81,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
           </ContentPanel>
           <ContentPanel>
             <MarkdownContent><Content /></MarkdownContent>
-            <footer>
-              <LastUpdated id={entry.id} {lang} {locale} />
-              <PrevNextLinks {...prevNextLinks} {dir} {locale} />
-            </footer>
+            <Footer {...{ entry, dir, lang, locale, sidebar }} />
           </ContentPanel>
         </main>
       </TwoColumnContent>
