@@ -27,17 +27,20 @@ const LocaleSchema = z.object({
     ),
 });
 
-const SidebarLinkItemSchema = z.object({
+const SidebarBaseSchema = z.object({
   /** The visible label for this item in the sidebar. */
   label: z.string(),
+  /** Translations of the `label` for each supported language. */
+  translations: z.record(z.string()).default({}),
+});
+
+const SidebarLinkItemSchema = SidebarBaseSchema.extend({
   /** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
   link: z.string(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
-const AutoSidebarGroupSchema = z.object({
-  /** The visible label for this item in the sidebar. */
-  label: z.string(),
+const AutoSidebarGroupSchema = SidebarBaseSchema.extend({
   /** Enable autogenerating a sidebar category from a specific docs directory. */
   autogenerate: z.object({
     /** The directory to generate sidebar items for. */
@@ -49,20 +52,29 @@ const AutoSidebarGroupSchema = z.object({
 });
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
-type ManualSidebarGroup = {
-  /** The visible label for this item in the sidebar. */
-  label: string;
+type ManualSidebarGroupInput = z.input<typeof SidebarBaseSchema> & {
   /** Array of links and subcategories to display in this category. */
   items: Array<
-    | SidebarLinkItem
-    | z.infer<typeof AutoSidebarGroupSchema>
-    | ManualSidebarGroup
+    | z.input<typeof SidebarLinkItemSchema>
+    | z.input<typeof AutoSidebarGroupSchema>
+    | ManualSidebarGroupInput
   >;
 };
 
-const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroup> = z.object({
-  /** The visible label for this item in the sidebar. */
-  label: z.string(),
+type ManualSidebarGroupOutput = z.output<typeof SidebarBaseSchema> & {
+  /** Array of links and subcategories to display in this category. */
+  items: Array<
+    | z.output<typeof SidebarLinkItemSchema>
+    | z.output<typeof AutoSidebarGroupSchema>
+    | ManualSidebarGroupOutput
+  >;
+};
+
+const ManualSidebarGroupSchema: z.ZodType<
+  ManualSidebarGroupOutput,
+  z.ZodTypeDef,
+  ManualSidebarGroupInput
+> = SidebarBaseSchema.extend({
   /** Array of links and subcategories to display in this category. */
   items: z.lazy(() =>
     z
@@ -83,7 +95,11 @@ const SidebarItemSchema = z.union([
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
 
 const SidebarGroupSchema: z.ZodType<
-  ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
+  | z.output<typeof ManualSidebarGroupSchema>
+  | z.output<typeof AutoSidebarGroupSchema>,
+  z.ZodTypeDef,
+  | z.input<typeof ManualSidebarGroupSchema>
+  | z.input<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
 const UserConfigSchema = z.object({
