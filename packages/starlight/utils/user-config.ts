@@ -293,6 +293,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
         label: 'English',
         lang: 'en',
         dir: 'ltr',
+        locale: undefined,
         ...locales?.root,
       },
       locales: undefined,
