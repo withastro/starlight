@@ -1,7 +1,16 @@
-<div class="container">
-  <aside class="right-sidebar-container hidden lg:block">
-    <div class="right-sidebar"><slot name="right-sidebar" /></div>
-  </aside>
+---
+const sidebar = await Astro.slots.render('right-sidebar');
+const hasSidebar = Boolean(sidebar.trim());
+---
+
+<div class:list={['container', { hasSidebar }]}>
+  {
+    hasSidebar && (
+      <aside class="right-sidebar-container hidden lg:block">
+        <div class="right-sidebar" set:html={sidebar} />
+      </aside>
+    )
+  }
   <div class="main-pane"><slot /></div>
 </div>
 
@@ -32,6 +41,12 @@
     }
 
     .main-pane {
+      width: 100%;
+    }
+
+    .hasSidebar .main-pane {
+      --sl-content-margin-inline: auto 0;
+
       order: 1;
       width: calc(
         var(--sl-content-width) +
