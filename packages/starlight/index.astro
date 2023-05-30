@@ -57,6 +57,9 @@ const hasToC = Boolean(tocConfig);
       html:not([data-has-toc]) {
         --sl-mobile-toc-height: 0rem;
       }
+      html:not([data-has-sidebar]) {
+        --sl-content-width: 67.5rem;
+      }
       /* Add scroll padding to ensure anchor headings aren't obscured by nav */
       html {
         /* Additional padding is needed to account for the mobile TOC */
