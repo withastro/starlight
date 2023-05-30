@@ -61,6 +61,12 @@ export function i18nSchema() {
           'Label used for the first link in the table of contents, linking to the page title.'
         ),
 
+      'tableOfContents.contribute': z
+        .string()
+        .describe(
+          'Title for the “Contribute” section in the right sidebar.'
+        ),
+
       'i18n.untranslatedContent': z
         .string()
         .describe(
