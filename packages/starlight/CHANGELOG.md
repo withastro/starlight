@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.0.14
+
+### Patch Changes
+
+- [#95](https://github.com/withastro/starlight/pull/95) [`de24b54`](https://github.com/withastro/starlight/commit/de24b54971577912979a3fb67570f4c95efe27a6) Thanks [@delucis](https://github.com/delucis)! - Support translations in sidebar config
+
+- [#97](https://github.com/withastro/starlight/pull/97) [`2d51762`](https://github.com/withastro/starlight/commit/2d517623fb8670d4e7f2656eacff0d5beb27d95a) Thanks [@morinokami](https://github.com/morinokami)! - Add Japanese language support
+
 ## 0.0.13
 
 ### Patch Changes
