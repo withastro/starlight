@@ -1,0 +1,41 @@
+---
+import config from 'virtual:starlight/user-config';
+import { SidebarEntry, getPrevNextLinks } from '../utils/navigation';
+import type { StarlightDocsEntry } from '../utils/routing';
+import type { LocaleData } from '../utils/slugs';
+
+import LastUpdated from '../components/LastUpdated.astro';
+import PrevNextLinks from '../components/PrevNextLinks.astro';
+import EditLink from './EditLink.astro';
+
+interface Props extends LocaleData {
+  entry: StarlightDocsEntry;
+  sidebar: SidebarEntry[];
+}
+
+const { entry, dir, lang, locale, sidebar } = Astro.props;
+const prevNextLinks = getPrevNextLinks(sidebar);
+---
+
+<footer>
+  <div class="meta flex">
+    {
+      config.editLink.baseUrl && (
+        <EditLink data={entry.data} id={entry.id} {locale} />
+      )
+    }
+    <LastUpdated id={entry.id} {lang} {locale} />
+  </div>
+  <PrevNextLinks {...prevNextLinks} {dir} {locale} />
+</footer>
+
+<style>
+  .meta {
+    gap: 0.75rem 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-block: 3rem 1.5rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+</style>

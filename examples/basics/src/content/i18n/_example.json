@@ -1,7 +1,0 @@
-{
-  "This file is an example i18n data file": "Learn more at https://starlight.astro.build/guides/i18n/#translate-starlights-ui",
-
-  "skipLink.label": "Skip to content",
-  "tableOfContents.onThisPage": "On this page",
-  "tableOfContents.overview": "Overview"
-}

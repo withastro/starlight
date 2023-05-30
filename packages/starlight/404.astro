@@ -1,5 +1,6 @@
 ---
 import config from 'virtual:starlight/user-config';
+import { withBase } from './utils/base';
 
 // Built-in CSS styles.
 import './style/props.css';
@@ -14,10 +15,10 @@ import PageFrame from './layout/PageFrame.astro';
 import Header from './components/Header.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
+import SkipLink from './components/SkipLink.astro';
 
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
-import { withBase } from './utils/base';
 
 const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
 ---
@@ -30,16 +31,16 @@ const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
   </head>
   <body>
     <ThemeProvider />
-    <PageFrame {locale}>
+    <SkipLink {locale} />
+    <PageFrame {locale} hasSidebar={false}>
       <Header slot="header" {locale} />
       <main>
         <MarkdownContent>
           <h1 id="starlight__overview">404</h1>
           <p>Houston, we have a problem.</p>
           <p>
-            We couldn’t find that link. Check the address or <a
-              href={withBase('/')}>head back home</a
-            >.
+            We couldn’t find that link. Check the address or
+            <a href={withBase('/')}>head back home</a>.
           </p>
         </MarkdownContent>
       </main>

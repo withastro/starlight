@@ -44,7 +44,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**type:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
 **default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 各ページの右側に表示される目次を設定します。デフォルトでは、`<h2>`と`<h3>`の見出しがこの目次に含まれます。

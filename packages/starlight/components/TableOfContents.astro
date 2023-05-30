@@ -1,32 +1,23 @@
 ---
-import type { MarkdownHeading } from 'astro';
-import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../utils/translations';
 import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
-import { generateToC } from './TableOfContents/generateToC';
+import type { TocItem } from './TableOfContents/generateToC';
 
 interface Props {
-  headings: MarkdownHeading[];
+  toc: TocItem[];
   locale: string | undefined;
+  maxHeadingLevel: number;
+  minHeadingLevel: number;
 }
 
-const { locale, headings } = Astro.props;
+const { locale, toc, maxHeadingLevel, minHeadingLevel } = Astro.props;
 const t = useTranslations(locale);
-const toc = generateToC(headings, {
-  ...config.tableOfContents,
-  title: t('tableOfContents.overview'),
-});
 ---
 
-<starlight-toc
-  data-min-h={config.tableOfContents.minHeadingLevel}
-  data-max-h={config.tableOfContents.maxHeadingLevel}
->
+<starlight-toc data-min-h={minHeadingLevel} data-max-h={maxHeadingLevel}>
   <nav aria-labelledby="starlight__on-this-page">
-    <h2 id="starlight__on-this-page">
-      {t('tableOfContents.onThisPage')}
-    </h2>
-    <TableOfContentsList toc={toc} />
+    <h2 id="starlight__on-this-page">{t('tableOfContents.onThisPage')}</h2>
+    <TableOfContentsList {toc} />
   </nav>
 </starlight-toc>
 

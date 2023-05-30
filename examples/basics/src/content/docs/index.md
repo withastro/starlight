@@ -1,6 +1,7 @@
 ---
 title: Welcome to Starlight
 description: Get started building your docs site with Starlight.
+template: splash
 ---
 
 Congrats on setting up a new Starlight project!

@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.0.15
+
+### Patch Changes
+
+- [`ded79af`](https://github.com/withastro/starlight/commit/ded79af43fad5ae0ec35739f655bf9e0c141a559) Thanks [@delucis](https://github.com/delucis)! - Add missing skip link to 404 page
+
+- [#99](https://github.com/withastro/starlight/pull/99) [`d162b2f`](https://github.com/withastro/starlight/commit/d162b2fc0795248fa89d45f2e5d4207126a59256) Thanks [@delucis](https://github.com/delucis)! - Fix “next page” arrow showing on pages not in sidebar
+
+- [#99](https://github.com/withastro/starlight/pull/99) [`d162b2f`](https://github.com/withastro/starlight/commit/d162b2fc0795248fa89d45f2e5d4207126a59256) Thanks [@delucis](https://github.com/delucis)! - Add support for a “splash” layout
+
+- [#99](https://github.com/withastro/starlight/pull/99) [`d162b2f`](https://github.com/withastro/starlight/commit/d162b2fc0795248fa89d45f2e5d4207126a59256) Thanks [@delucis](https://github.com/delucis)! - Support hiding right sidebar table of contents
+
+- [#99](https://github.com/withastro/starlight/pull/99) [`d162b2f`](https://github.com/withastro/starlight/commit/d162b2fc0795248fa89d45f2e5d4207126a59256) Thanks [@delucis](https://github.com/delucis)! - Move edit page link to page footer so it is accessible on mobile
+
 ## 0.0.14
 
 ### Patch Changes

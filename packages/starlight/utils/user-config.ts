@@ -2,6 +2,7 @@ import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
+import { TableOfContentsSchema } from '../schemas/tableOfContents';
 
 const LocaleSchema = z.object({
   /** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -139,18 +140,7 @@ const UserConfigSchema = z.object({
   tagline: z.string().optional().describe('The tagline for your website.'),
 
   /** Configure the defaults for the table of contents on each page. */
-  tableOfContents: z
-    .object({
-      /** The level to start including headings at in the table of contents. Default: 2. */
-      minHeadingLevel: z.number().int().min(1).max(6).optional().default(2),
-      /** The level to stop including headings at in the table of contents. Default: 3. */
-      maxHeadingLevel: z.number().int().min(1).max(6).optional().default(3),
-    })
-    .optional()
-    .default({ minHeadingLevel: 2, maxHeadingLevel: 3 })
-    .refine((toc) => toc.minHeadingLevel <= toc.maxHeadingLevel, {
-      message: 'minHeadingLevel must be less than or equal to maxHeadingLevel',
-    }),
+  tableOfContents: TableOfContentsSchema(),
 
   /** Enable and configure “Edit this page” links. */
   editLink: z
@@ -293,6 +283,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
         label: 'English',
         lang: 'en',
         dir: 'ltr',
+        locale: undefined,
         ...locales?.root,
       },
       locales: undefined,
