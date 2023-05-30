@@ -1,21 +1,36 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import config from 'virtual:starlight/user-config';
 import RightSidebarPanel from './RightSidebarPanel.astro';
+import MobileTableOfContents from './TableOfContents/MobileTableOfContents.astro';
 import TableOfContents from './TableOfContents.astro';
+import { generateToC } from './TableOfContents/generateToC';
+import { useTranslations } from '../utils/translations';
 
 interface Props {
   headings: MarkdownHeading[];
   locale: string | undefined;
+  tocConfig: { maxHeadingLevel: number; minHeadingLevel: number } | false;
 }
 
-const { headings, locale } = Astro.props;
+const { headings, locale, tocConfig } = Astro.props;
+const t = useTranslations(locale);
+const tocProps = tocConfig && {
+  ...tocConfig,
+  locale,
+  toc: generateToC(headings, {
+    ...tocConfig,
+    title: t('tableOfContents.overview'),
+  }),
+};
 ---
 
 {
-  config.tableOfContents && (
-    <RightSidebarPanel>
-      <TableOfContents {headings} {locale} />
-    </RightSidebarPanel>
+  tocProps && (
+    <>
+      <MobileTableOfContents {...tocProps} />
+      <RightSidebarPanel>
+        <TableOfContents {...tocProps} />
+      </RightSidebarPanel>
+    </>
   )
 }

@@ -9,19 +9,18 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const hasSidebar = Astro.slots.has('sidebar');
+const sidebar = await Astro.slots.render('sidebar');
+const hasSidebar = Boolean(sidebar.trim());
 ---
 
-<div class:list={['page', { hasSidebar }]}>
+<div class="page">
   <header class="header"><slot name="header" /></header>
   {
     hasSidebar && (
       <nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
         <MobileMenuToggle {locale} />
         <div id="starlight__sidebar" class="sidebar-pane">
-          <div class="sidebar-content">
-            <slot name="sidebar" />
-          </div>
+          <div class="sidebar-content" set:html={sidebar} />
         </div>
       </nav>
     )
@@ -49,7 +48,7 @@ const hasSidebar = Astro.slots.has('sidebar');
     background-color: var(--sl-color-bg-nav);
   }
 
-  .hasSidebar .header {
+  :global([data-has-sidebar]) .header {
     padding-inline-end: calc(
       var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
     );
@@ -77,10 +76,11 @@ const hasSidebar = Astro.slots.has('sidebar');
 
   .main-frame {
     padding-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height));
+    padding-inline-start: var(--sl-content-inline-start);
   }
 
   @media (min-width: 50rem) {
-    .hasSidebar .header {
+    :global([data-has-sidebar]) .header {
       padding-inline-end: var(--sl-nav-pad-x);
     }
     .sidebar-pane {
@@ -88,10 +88,6 @@ const hasSidebar = Astro.slots.has('sidebar');
       width: var(--sl-sidebar-width);
       background-color: var(--sl-color-bg-sidebar);
       border-inline-end: 1px solid var(--sl-color-hairline-shade);
-    }
-
-    .hasSidebar .main-frame {
-      padding-inline-start: var(--sl-sidebar-width);
     }
   }
 </style>
