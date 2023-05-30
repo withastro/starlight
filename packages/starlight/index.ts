@@ -25,7 +25,7 @@ export default function StarlightIntegration(
   });
 
   if (!parsedConfig.success) {
-    throw new Error(parsedConfig.error.issues.map(i => i.message).join('\n'));
+    throw new Error("Invalid config passed to starlight integration\n" + parsedConfig.error.issues.map(i => i.message).join('\n'));
   }
 
   const userConfig = parsedConfig.data;
