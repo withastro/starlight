@@ -20,12 +20,13 @@ import { errorMap } from './utils/error-map';
 export default function StarlightIntegration(
   opts: StarlightUserConfig
 ): AstroIntegration[] {
-  const parsedConfig = StarlightConfigSchema.safeParse(opts, {
-    errorMap
-  });
+  const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
 
   if (!parsedConfig.success) {
-    throw new Error("Invalid config passed to starlight integration\n" + parsedConfig.error.issues.map(i => i.message).join('\n'));
+    throw new Error(
+      'Invalid config passed to starlight integration\n' +
+        parsedConfig.error.issues.map((i) => i.message).join('\n')
+    );
   }
 
   const userConfig = parsedConfig.data;
