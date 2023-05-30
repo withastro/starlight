@@ -1,13 +1,16 @@
 ---
-const sidebar = await Astro.slots.render('right-sidebar');
-const hasSidebar = Boolean(sidebar.trim());
+interface Props {
+  hasToC: boolean;
+}
 ---
 
-<div class:list={['container', { hasSidebar }]}>
+<div class="container">
   {
-    hasSidebar && (
+    Astro.props.hasToC && (
       <aside class="right-sidebar-container">
-        <div class="right-sidebar" set:html={sidebar} />
+        <div class="right-sidebar">
+          <slot name="right-sidebar" />
+        </div>
       </aside>
     )
   }
@@ -44,7 +47,7 @@ const hasSidebar = Boolean(sidebar.trim());
       width: 100%;
     }
 
-    .hasSidebar .main-pane {
+    :global([data-has-sidebar]) .main-pane {
       --sl-content-margin-inline: auto 0;
 
       order: 1;

@@ -79,10 +79,10 @@ const hasToC = Boolean(tocConfig);
   <body>
     <ThemeProvider />
     <SkipLink {locale} />
-    <PageFrame {locale}>
+    <PageFrame {locale} {hasSidebar}>
       <Header slot="header" {locale} />
       {hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
-      <TwoColumnContent>
+      <TwoColumnContent {hasToC}>
         <RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
         <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
           <ContentPanel>
