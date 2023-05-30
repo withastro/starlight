@@ -44,7 +44,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**Typ:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
 **Voreinstellung:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Konfiguriere das Inhaltsverzeichnis, das rechts auf jeder Seite angezeigt wird. Standardmäßig werden `<h2>` und `<h3>` Überschriften in dieses Inhaltsverzeichnis aufgenommen.

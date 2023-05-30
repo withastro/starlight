@@ -44,7 +44,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**tipo:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
 **por defecto:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Configura la tabla de contenidos que se muestra a la derecha de cada página. De forma predeterminada, los encabezados `<h2>` y `<h3>` se incluirán en esta tabla de contenidos.
