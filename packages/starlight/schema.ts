@@ -33,6 +33,6 @@ export function docsSchema() {
      * Set the layout style for this page.
      * Can be `'doc'` (the default) or `'splash'` for a wider layout without any sidebars.
      */
-    pageType: z.enum(['doc', 'splash']).default('doc'),
+    template: z.enum(['doc', 'splash']).default('doc'),
   });
 }

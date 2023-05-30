@@ -41,7 +41,7 @@ const { dir, entry, entryMeta, isFallback, lang, locale } = Astro.props;
 const { Content, headings } = await entry.render();
 const sidebar = getSidebar(Astro.url.pathname, locale);
 
-const hasSidebar = entry.data.pageType !== 'splash';
+const hasSidebar = entry.data.template !== 'splash';
 const tocConfig = !hasSidebar
   ? false
   : entry.data.tableOfContents !== undefined
