@@ -1,7 +1,8 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
+import config from 'virtual:starlight/user-config';
 
-import { getPrevNextLinks, getSidebar } from './utils/navigation';
+import { getSidebar } from './utils/navigation';
 import { paths } from './utils/routing';
 
 // Built-in CSS styles.
@@ -15,13 +16,11 @@ import ContentPanel from './components/ContentPanel.astro';
 import FallbackContentNotice from './components/FallbackContentNotice.astro';
 import HeadSEO from './components/HeadSEO.astro';
 import Header from './components/Header.astro';
-import LastUpdated from './components/LastUpdated.astro';
+import Footer from './components/Footer.astro';
 import MarkdownContent from './components/MarkdownContent.astro';
-import PrevNextLinks from './components/PrevNextLinks.astro';
 import RightSidebar from './components/RightSidebar.astro';
 import Sidebar from './components/Sidebar.astro';
 import SkipLink from './components/SkipLink.astro';
-import MobileTableOfContents from './components/TableOfContents/MobileTableOfContents.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
 import PageFrame from './layout/PageFrame.astro';
 import TwoColumnContent from './layout/TwoColumnContent.astro';
@@ -41,19 +40,34 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { dir, entry, entryMeta, isFallback, lang, locale } = Astro.props;
 const { Content, headings } = await entry.render();
 const sidebar = getSidebar(Astro.url.pathname, locale);
-const prevNextLinks = getPrevNextLinks(sidebar);
+
+const hasSidebar = entry.data.template !== 'splash';
+const tocConfig = !hasSidebar
+  ? false
+  : entry.data.tableOfContents !== undefined
+  ? entry.data.tableOfContents
+  : config.tableOfContents;
+const hasToC = Boolean(tocConfig);
 ---
 
-<html lang={lang} dir={dir}>
+<html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar}>
   <head>
     <HeadSEO data={entry.data} lang={lang} />
     <style>
+      html:not([data-has-toc]) {
+        --sl-mobile-toc-height: 0rem;
+      }
       /* Add scroll padding to ensure anchor headings aren't obscured by nav */
       html {
         /* Additional padding is needed to account for the mobile TOC */
         scroll-padding-top: calc(
           1.5rem + var(--sl-nav-height) + var(--sl-mobile-toc-height)
         );
+      }
+      @media (min-width: 50em) {
+        [data-has-sidebar] {
+          --sl-content-inline-start: var(--sl-sidebar-width);
+        }
       }
       @media (min-width: 72em) {
         html {
@@ -65,12 +79,11 @@ const prevNextLinks = getPrevNextLinks(sidebar);
   <body>
     <ThemeProvider />
     <SkipLink {locale} />
-    <PageFrame {locale}>
+    <PageFrame {locale} {hasSidebar}>
       <Header slot="header" {locale} />
-      <Sidebar slot="sidebar" {sidebar} {locale} />
-      <MobileTableOfContents {headings} {locale} />
-      <TwoColumnContent>
-        <RightSidebar slot="right-sidebar" {entry} {headings} {locale} />
+      {hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
+      <TwoColumnContent {hasToC}>
+        <RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
         <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
           <ContentPanel>
             <h1
@@ -83,10 +96,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
           </ContentPanel>
           <ContentPanel>
             <MarkdownContent><Content /></MarkdownContent>
-            <footer>
-              <LastUpdated id={entry.id} {lang} {locale} />
-              <PrevNextLinks {...prevNextLinks} {dir} {locale} />
-            </footer>
+            <Footer {...{ entry, dir, lang, locale, sidebar }} />
           </ContentPanel>
         </main>
       </TwoColumnContent>

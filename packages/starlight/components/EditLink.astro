@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../utils/translations';
+import Icon from './Icon.astro';
 
 interface Props {
   data: CollectionEntry<'docs'>['data'];
@@ -23,4 +24,23 @@ const url =
     : undefined;
 ---
 
-{editUrl !== false && url && <a href={url}>{t('page.editLink')}</a>}
+{
+  editUrl !== false && url && (
+    <a href={url} class="flex">
+      <Icon name="pencil" size="1.2em" />
+      {t('page.editLink')}
+    </a>
+  )
+}
+
+<style>
+  a {
+    gap: 0.5rem;
+    align-items: center;
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+  }
+  a:hover {
+    color: var(--sl-color-white);
+  }
+</style>

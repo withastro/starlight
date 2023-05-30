@@ -1,30 +1,36 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import config from 'virtual:starlight/user-config';
-import type { StarlightDocsEntry } from '../utils/routing';
-import EditLink from './EditLink.astro';
 import RightSidebarPanel from './RightSidebarPanel.astro';
+import MobileTableOfContents from './TableOfContents/MobileTableOfContents.astro';
 import TableOfContents from './TableOfContents.astro';
+import { generateToC } from './TableOfContents/generateToC';
+import { useTranslations } from '../utils/translations';
 
 interface Props {
-  entry: StarlightDocsEntry;
   headings: MarkdownHeading[];
   locale: string | undefined;
+  tocConfig: { maxHeadingLevel: number; minHeadingLevel: number } | false;
 }
 
-const { entry, headings, locale } = Astro.props;
+const { headings, locale, tocConfig } = Astro.props;
+const t = useTranslations(locale);
+const tocProps = tocConfig && {
+  ...tocConfig,
+  locale,
+  toc: generateToC(headings, {
+    ...tocConfig,
+    title: t('tableOfContents.overview'),
+  }),
+};
 ---
 
-<RightSidebarPanel>
-  <TableOfContents {headings} {locale} />
-</RightSidebarPanel>
-<RightSidebarPanel>
-  {
-    config.editLink.baseUrl && (
-      <>
-        <h2>Contribute</h2>
-        <EditLink data={entry.data} id={entry.id} {locale} />
-      </>
-    )
-  }
-</RightSidebarPanel>
+{
+  tocProps && (
+    <>
+      <MobileTableOfContents {...tocProps} />
+      <RightSidebarPanel>
+        <TableOfContents {...tocProps} />
+      </RightSidebarPanel>
+    </>
+  )
+}
