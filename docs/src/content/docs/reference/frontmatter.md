@@ -34,6 +34,15 @@ The page description is used for page metadata and will be picked up by search e
 
 Overrides the [global `editLink` config](/reference/configuration/#editlink). Set to `false` to disable the “Edit page” link for a specific page or provide an alternative URL where the content of this page is editable.
 
+### `pageType`
+
+**type:** `'doc' | 'splash'`  
+**default:** `'doc'`
+
+Set the layout type for this page.
+Pages use the `'doc'` layout by default.
+Set to `'splash'` to use a wider layout without any sidebars designed for landing pages.
+
 ### `head`
 
 **type:** [`HeadConfig[]`](/reference/configuration/#headconfig)
@@ -49,3 +58,10 @@ head:
     content: Custom about title
 ---
 ```
+
+### `tableOfContents`
+
+**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
+
+Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
+Customize the heading levels to be included or set to `false` to hide the table of contents on this page.

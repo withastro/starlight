@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { HeadConfigSchema } from './schemas/head';
+import { TableOfContentsSchema } from './schemas/tableOfContents';
 export { i18nSchema } from './schemas/i18n';
 
 export function docsSchema() {
@@ -24,5 +25,14 @@ export function docsSchema() {
 
     /** Set custom `<head>` tags just for this page. */
     head: HeadConfigSchema(),
+
+    /** Override global table of contents configuration for this page. */
+    tableOfContents: TableOfContentsSchema().optional(),
+
+    /**
+     * Set the layout style for this page.
+     * Can be `'doc'` (the default) or `'splash'` for a wider layout without any sidebars.
+     */
+    pageType: z.enum(['doc', 'splash']).default('doc'),
   });
 }
