@@ -32,7 +32,7 @@ const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
   <body>
     <ThemeProvider />
     <SkipLink {locale} />
-    <PageFrame {locale}>
+    <PageFrame {locale} hasSidebar={false}>
       <Header slot="header" {locale} />
       <main>
         <MarkdownContent>
