@@ -15,11 +15,20 @@ import {
   StarlightConfig,
   StarlightConfigSchema,
 } from './utils/user-config';
+import { errorMap } from './utils/error-map';
 
 export default function StarlightIntegration(
   opts: StarlightUserConfig
 ): AstroIntegration[] {
-  const userConfig = StarlightConfigSchema.parse(opts);
+  const parsedConfig = StarlightConfigSchema.safeParse(opts, {
+    errorMap
+  });
+
+  if (!parsedConfig.success) {
+    throw new Error(parsedConfig.error.issues.map(i => i.message).join('\n'));
+  }
+
+  const userConfig = parsedConfig.data;
 
   const Starlight: AstroIntegration = {
     name: '@astrojs/starlight',
