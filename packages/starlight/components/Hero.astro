@@ -17,7 +17,6 @@ const {
 ---
 
 <div class="hero">
-  {/* TODO: proper layout handling here for the raw HTML case. */}
   {
     image?.file ? (
       <Image
@@ -28,7 +27,7 @@ const {
         alt={image.alt}
       />
     ) : (
-      image?.html && <Fragment set:html={image.html} />
+      image?.html && <div class="hero-html" set:html={image.html} />
     )
   }
   <div class="flex stack">
@@ -40,7 +39,7 @@ const {
       actions.length > 0 && (
         <div class="flex actions">
           {actions.map(({ text, ...attrs }) => (
-            <CallToAction {...attrs}>{text}</CallToAction>
+            <CallToAction {...attrs} set:html={text} />
           ))}
         </div>
       )
@@ -52,14 +51,19 @@ const {
   .hero {
     display: grid;
     align-items: center;
+    gap: 1rem;
   }
 
-  .hero > :global(img),
-  .hero > :global(svg) {
+  .hero > img,
+  .hero > .hero-html {
     object-fit: contain;
     width: min(70%, 20rem);
     height: auto;
     margin-inline: auto;
+  }
+
+  .hero-html {
+    display: flex;
   }
 
   .stack {
@@ -76,7 +80,7 @@ const {
   h1 {
     font-size: clamp(
       var(--sl-text-3xl),
-      calc(0.25rem + 6vw),
+      calc(0.25rem + 5vw),
       var(--sl-text-6xl)
     );
     line-height: var(--sl-line-height-headings);
@@ -87,7 +91,7 @@ const {
   .tagline {
     font-size: clamp(
       var(--sl-text-base),
-      calc(0.0625rem + 3vw),
+      calc(0.0625rem + 2vw),
       var(--sl-text-xl)
     );
     color: var(--sl-color-gray-2);
@@ -102,11 +106,12 @@ const {
   @media (min-width: 50rem) {
     .hero {
       grid-template-columns: 3fr 2fr;
+      gap: 3%;
       padding: clamp(2.5rem, calc(1rem + 10vmin), 10rem) 2.5rem;
     }
 
-    .hero > :global(img),
-    .hero > :global(svg) {
+    .hero > img,
+    .hero > .hero-html {
       order: 2;
       width: min(100%, 25rem);
     }
