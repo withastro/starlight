@@ -29,6 +29,7 @@ export default defineConfig({
           },
         },
       ],
+      customCss: ['/src/assets/landing.css'],
       locales: {
         root: { label: 'English', lang: 'en' },
         de: { label: 'Deutsch', lang: 'de' },
