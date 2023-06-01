@@ -34,15 +34,6 @@ The page description is used for page metadata and will be picked up by search e
 
 Overrides the [global `editLink` config](/reference/configuration/#editlink). Set to `false` to disable the “Edit page” link for a specific page or provide an alternative URL where the content of this page is editable.
 
-### `template`
-
-**type:** `'doc' | 'splash'`  
-**default:** `'doc'`
-
-Set the layout template for this page.
-Pages use the `'doc'` layout by default.
-Set to `'splash'` to use a wider layout without any sidebars designed for landing pages.
-
 ### `head`
 
 **type:** [`HeadConfig[]`](/reference/configuration/#headconfig)
@@ -65,3 +56,64 @@ head:
 
 Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
 Customize the heading levels to be included or set to `false` to hide the table of contents on this page.
+
+### `template`
+
+**type:** `'doc' | 'splash'`  
+**default:** `'doc'`
+
+Set the layout template for this page.
+Pages use the `'doc'` layout by default.
+Set to `'splash'` to use a wider layout without any sidebars designed for landing pages.
+
+### `hero`
+
+**type:** [`HeroConfig`](#heroconfig)
+
+Add a hero component to the top of this page. Works well with `template: splash`.
+
+For example, this config shows some common options, including loading an image from your repository.
+
+```md
+---
+title: My Home Page
+template: splash
+hero:
+  title: 'My Project: Stellar Stuff Sooner'
+  tagline: Take your stuff to the moon and back in the blink of an eye.
+  image:
+    alt: A glittering, brightly colored logo
+    file: ../../assets/logo.png
+  actions:
+    - text: Tell me more
+      link: /getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/astronaut/my-project
+      icon: external
+---
+```
+
+#### `HeroConfig`
+
+```ts
+interface HeroConfig {
+  title?: string;
+  tagline?: string;
+  image?: {
+    alt?: string;
+    // Relative path to an image in your repository.
+    file?: string;
+    // Raw HTML to use in the image slot.
+    // Could be a custom `<img>` tag or inline `<svg>`.
+    html?: string;
+  };
+  actions?: Array<{
+    text: string;
+    link: string;
+    variant: 'primary' | 'secondary' | 'minimal';
+    icon: string;
+  }>;
+}
+```
