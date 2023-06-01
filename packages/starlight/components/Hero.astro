@@ -20,7 +20,13 @@ const {
   {/* TODO: proper layout handling here for the raw HTML case. */}
   {
     image?.file ? (
-      <Image src={image.file} width={600} height={600} alt={image.alt} />
+      <Image
+        src={image.file}
+        loading="eager"
+        width={400}
+        height={400}
+        alt={image.alt}
+      />
     ) : (
       image?.html && <Fragment set:html={image.html} />
     )
