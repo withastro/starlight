@@ -49,9 +49,10 @@ const tocConfig = !hasSidebar
   ? entry.data.tableOfContents
   : config.tableOfContents;
 const hasToC = Boolean(tocConfig);
+const hasHero = Boolean(entry.data.hero);
 ---
 
-<html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar}>
+<html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar} data-has-hero={hasHero}>
   <head>
     <HeadSEO data={entry.data} lang={lang} />
     <style>
