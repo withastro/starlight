@@ -90,6 +90,7 @@
   --sl-text-3xl: 1.8125rem; /* 29px */
   --sl-text-4xl: 2.1875rem; /* 35px */
   --sl-text-5xl: 2.625rem; /* 42px */
+  --sl-text-6xl: 4rem; /* 64px */
 
   --sl-text-body: var(--sl-text-base);
   --sl-text-body-sm: var(--sl-text-xs);
