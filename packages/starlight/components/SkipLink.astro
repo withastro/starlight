@@ -12,11 +12,13 @@ const t = useTranslations(Astro.props.locale);
 
 <style>
   a {
+    clip: rect(0, 0, 0, 0);
     position: fixed;
     top: 0.75rem;
     inset-inline-start: 0.75rem;
   }
   a:focus {
+    clip: unset;
     z-index: var(--sl-z-index-skiplink);
     display: block;
     padding: 0.5rem 1rem;
