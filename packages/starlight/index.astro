@@ -24,6 +24,7 @@ import SkipLink from './components/SkipLink.astro';
 import ThemeProvider from './components/ThemeProvider.astro';
 import PageFrame from './layout/PageFrame.astro';
 import TwoColumnContent from './layout/TwoColumnContent.astro';
+import Hero from './components/Hero.astro';
 
 // Remark component CSS (needs to override `MarkdownContent.astro`)
 import './style/asides.css';
@@ -48,9 +49,10 @@ const tocConfig = !hasSidebar
   ? entry.data.tableOfContents
   : config.tableOfContents;
 const hasToC = Boolean(tocConfig);
+const hasHero = Boolean(entry.data.hero);
 ---
 
-<html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar}>
+<html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar} data-has-hero={hasHero}>
   <head>
     <HeadSEO data={entry.data} lang={lang} />
     <style>
@@ -88,19 +90,27 @@ const hasToC = Boolean(tocConfig);
       <TwoColumnContent {hasToC}>
         <RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
         <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
-          <ContentPanel>
-            <h1
-              id="starlight__overview"
-              style="font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); margin-top: 1rem;"
-            >
-              {entry.data.title}
-            </h1>
-            {isFallback && <FallbackContentNotice {locale} />}
-          </ContentPanel>
-          <ContentPanel>
-            <MarkdownContent><Content /></MarkdownContent>
-            <Footer {...{ entry, dir, lang, locale, sidebar }} />
-          </ContentPanel>
+          {/* TODO: Revisit how this logic flows. */}
+          {entry.data.hero ? (
+            <ContentPanel>
+              <Hero hero={entry.data.hero} fallbackTitle={entry.data.title} />
+              <MarkdownContent><Content /></MarkdownContent>
+            </ContentPanel>
+          ) : (
+            <ContentPanel>
+              <h1
+                id="starlight__overview"
+                style="font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); margin-top: 1rem;"
+              >
+                {entry.data.title}
+              </h1>
+              {isFallback && <FallbackContentNotice {locale} />}
+            </ContentPanel>
+            <ContentPanel>
+              <MarkdownContent><Content /></MarkdownContent>
+              <Footer {...{ entry, dir, lang, locale, sidebar }} />
+            </ContentPanel>
+          )}
         </main>
       </TwoColumnContent>
     </PageFrame>
