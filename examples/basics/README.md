@@ -1,7 +1,7 @@
 # Starlight Starter Kit: Basics
 
 ```
-npm create astro@latest -- --template withastro/starlight/examples/basics
+npm create astro@latest -- --template starlight
 ```
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
