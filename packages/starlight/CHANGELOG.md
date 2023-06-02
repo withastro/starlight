@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.0.16
+
+### Patch Changes
+
+- [#103](https://github.com/withastro/starlight/pull/103) [`ccb919d`](https://github.com/withastro/starlight/commit/ccb919d6580955e3428430a704f4a33fbc55a78d) Thanks [@delucis](https://github.com/delucis)! - Support adding a hero section to pages
+
+- [#101](https://github.com/withastro/starlight/pull/101) [`6a2c0df`](https://github.com/withastro/starlight/commit/6a2c0df4d5586b70b46c854061df67b028e73630) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Add better error messages for starlight config
+
 ## 0.0.15
 
 ### Patch Changes
