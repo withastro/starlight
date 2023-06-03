@@ -17,23 +17,30 @@ hero:
       link: https://github.com/withastro/starlight
 ---
 
-:::caution[Work in progress]
-Starlight is in early development so expect bugs and changes as we develop it.
-If you find something that’s not working, [open an issue on GitHub](https://github.com/withastro/starlight/issues/new/choose) or let us know on [Discord](https://astro.build/chat).
-:::
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../components/about-astro.astro';
 
-## What’s in the box?
+<CardGrid stagger>
+  <Card title="Documentation that delights" icon="open-book">
+    Includes: Site navigation, search, i18n, SEO, easy-to-read typography, code
+    highlighting, dark mode and more.
+  </Card>
+  <Card title="Powered by Astro" icon="rocket">
+    Leverage the full power and performance of Astro. Extend Starlight with your
+    favorite Astro integrations and libraries.
+  </Card>
+  <Card title="Markdown, Markdoc, and MDX" icon="document">
+    Bring your favorite markup language. Starlight gives you built-in
+    frontmatter validation with TypeScript type-safety.
+  </Card>
+  <Card title="Bring your own UI components" icon="puzzle">
+    Starlight ships as a framework-agnostic, complete docs solution. Extend with
+    React, Vue, Svelte, Solid, and more.
+  </Card>
+</CardGrid>
 
-Starlight includes all the features you need to get a documentation site up and running quickly:
-
-- Markdown and MDX support
-- Easy-to-read typographic styles
-- Syntax highlighting for code blocks
-- Simple-to-configure navigation menus
-- Built-in site search
-- [Internationalization features](/guides/i18n)
-- Accessible site structure
-- [Component in content](/guides/components) support with MDX
-- Support for custom styles
-- Fast and [eco-friendly](/environmental-impact) architecture
-- Compatibility with the [Astro ecosystem](https://astro.build/integrations)
+<AboutAstro title="Brought to you by">
+  Astro is the all-in-one web framework designed for speed. Pull your content
+  from anywhere and deploy everywhere, all powered by your favorite UI
+  components and libraries.
+</AboutAstro>
