@@ -12,7 +12,7 @@ interface Props {
 const { locale } = Astro.props;
 ---
 
-<div class="header">
+<div class="header flex">
   <SiteTitle {locale} />
   <Search {locale} />
   <div class="hidden md:flex right-group">
@@ -24,7 +24,6 @@ const { locale } = Astro.props;
 
 <style>
   .header {
-    display: flex;
     gap: var(--sl-nav-gap);
     justify-content: space-between;
     align-items: center;

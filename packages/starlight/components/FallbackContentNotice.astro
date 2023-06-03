@@ -9,7 +9,7 @@ interface Props {
 const t = useTranslations(Astro.props.locale);
 ---
 
-<p>
+<p class="flex">
   <Icon
     name={'warning'}
     size="1.5em"
@@ -25,7 +25,6 @@ const t = useTranslations(Astro.props.locale);
     color: var(--sl-color-orange-high);
     width: max-content;
     max-width: 100%;
-    display: flex;
     align-items: center;
     gap: 0.75em;
     font-size: var(--sl-text-body-sm);

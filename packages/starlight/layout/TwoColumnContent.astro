@@ -4,7 +4,7 @@ interface Props {
 }
 ---
 
-<div class="container">
+<div class="lg:flex">
   {
     Astro.props.hasToC && (
       <aside class="right-sidebar-container">
@@ -19,10 +19,6 @@ interface Props {
 
 <style>
   @media (min-width: 72rem) {
-    .container {
-      display: flex;
-    }
-
     .right-sidebar-container {
       order: 2;
       position: relative;
