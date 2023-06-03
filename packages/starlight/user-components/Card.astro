@@ -11,7 +11,7 @@ const { icon, title } = Astro.props;
 ---
 
 <article class="card flex">
-  <p class="title">
+  <p class="title flex">
     {icon && <Icon name={icon} class="icon" size="1.333em" />}
     <span set:html={title} />
   </p>
@@ -49,7 +49,6 @@ const { icon, title } = Astro.props;
     font-size: var(--sl-text-h4);
     color: var(--sl-color-white);
     line-height: var(--sl-line-height-headings);
-    display: flex;
     gap: 1rem;
     align-items: center;
   }
