@@ -12,7 +12,7 @@ const { icon, title } = Astro.props;
 
 <article class="card flex">
   <p class="title">
-    {icon && <Icon name={icon} class="icon" />}
+    {icon && <Icon name={icon} class="icon" size="1.333em" />}
     <span set:html={title} />
   </p>
   <div class="body"><slot /></div>
@@ -54,12 +54,9 @@ const { icon, title } = Astro.props;
     align-items: center;
   }
   .card .icon {
-    display: inline-block;
     border: 1px solid var(--sl-card-border);
     background-color: var(--sl-card-bg);
-    width: 1.333em;
-    height: 1.333em;
-    padding: 0.2916em;
+    padding: 0.2em;
     border-radius: 0.25rem;
   }
   .card .body {
