@@ -14,7 +14,7 @@ const t = useTranslations(Astro.props.locale);
     aria-expanded="false"
     aria-label={t('menuButton.accessibleLabel')}
     aria-controls="starlight__sidebar"
-    class="md:hidden"
+    class="flex md:hidden"
   >
     <Icon name="bars" />
   </button>
@@ -64,7 +64,6 @@ const t = useTranslations(Astro.props.locale);
     z-index: var(--sl-z-index-navbar);
     border: 0;
     border-radius: 50%;
-    display: flex;
     width: var(--sl-menu-button-size);
     height: var(--sl-menu-button-size);
     padding: 0.5rem;

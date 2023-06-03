@@ -27,7 +27,7 @@ const {
         alt={image.alt}
       />
     ) : (
-      image?.html && <div class="hero-html" set:html={image.html} />
+      image?.html && <div class="hero-html flex" set:html={image.html} />
     )
   }
   <div class="flex stack">
@@ -61,10 +61,6 @@ const {
     width: min(70%, 20rem);
     height: auto;
     margin-inline: auto;
-  }
-
-  .hero-html {
-    display: flex;
   }
 
   .stack {
