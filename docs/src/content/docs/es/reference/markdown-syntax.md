@@ -181,8 +181,7 @@ Markdown admite listas desordenadas (a menudo llamadas listas de “puntos”) y
 1.  Elemento dos
 1.  Elemento tres
 
-### 
-Y algunas listas anidadas
+### Y algunas listas anidadas
 - Elemento de nivel 1 (ul)
   1. Elemento de nivel 2 (ol)
   2. Elemento de nivel 2 (ol)
