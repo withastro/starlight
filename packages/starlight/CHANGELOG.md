@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.0.18
+
+### Patch Changes
+
+- [`a76ae4d`](https://github.com/withastro/starlight/commit/a76ae4d4c459eae1690ed7fe6d4f4debb0137975) Thanks [@delucis](https://github.com/delucis)! - Add new icons for use in starter project
+
 ## 0.0.17
 
 ### Patch Changes
