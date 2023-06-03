@@ -125,7 +125,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 - [“Building a greener web”](https://youtu.be/EfPoOt7T5lg), talk by Michelle Barker
 - [“Sustainable Web Development Strategies Within An Organization”](https://www.smashingmagazine.com/2022/10/sustainable-web-development-strategies-organization/), article by Michelle Barker
 - [“A sustainable web for everyone”](https://2021.stateofthebrowser.com/speakers/tom-greenwood/), talk by Tom Greenwood
-- [How Web Content Can Affect Power Usage”](https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/), article by Benjamin Poulain and Simon Fraser
+- [“How Web Content Can Affect Power Usage”](https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/), article by Benjamin Poulain and Simon Fraser
 
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
