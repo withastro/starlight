@@ -45,8 +45,8 @@ Puedes agregar etiquetas adicionales a la etiqueta `<head>` de tu página usando
 title: Acerca de nosotros
 head:
   # Usa una etiqueta <title> personalizada
-  - tag: title
-    content: Custom about title
+  - tag: titúlo
+    content: Título personalizado sobre nosotros
 ---
 ```
 
