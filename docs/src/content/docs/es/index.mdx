@@ -1,26 +1,43 @@
 ---
-title: Bienvenido, mundo
-description: Starlight te ayuda a construir sitios web de documentación hermosos y de alto rendimiento con Astro.
+title: Starlight 🌟 Construye sitios de documentación con Astro
+description: Starlight te ayuda a construir sitios web de documentación hermosos y de alto rendimiento utilizando Astro.
 template: splash
+hero:
+  title: Haz que tus docs brillen con Starlight
+  tagline: Todo lo que necesitas para construir un sitio web de documentación estelar. Rápido, accesible y fácil de usar.
+  image:
+    file: ../../../assets/hero-star.webp
+  actions:
+    - text: Empezar
+      icon: right-arrow
+      variant: primary
+      link: /es/getting-started/
+    - text: Ver en GitHub
+      icon: external
+      link: https://github.com/withastro/starlight
 ---
 
-:::caution[Trabajo en progreso]
-Starlight se encuentra en desarrollo temprano, por lo que debes esperar errores y cambios a medida que lo desarrollemos.
-Si encuentras algo que no funciona, [abre un issue en GitHub](https://github.com/withastro/starlight/issues/new/choose) o háznoslo saber en [Discord](https://astro.build/chat).
-:::
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../../components/about-astro.astro';
 
-## ¿Qué hay en el paquete?
+<CardGrid stagger>
+  <Card title="Documentación que deleita" icon="open-book">
+    Incluye: navegación del sitio, búsqueda, internacionalización, SEO, tipografía fácil de leer, resaltado de código, modo oscuro y mucho más.
+  </Card>
+  <Card title="Impulsado por Astro" icon="rocket">
+    Aprovecha todo el poder y rendimiento de Astro. Amplía Starlight con tus integraciones y bibliotecas favoritas de Astro.
+  </Card>
+  <Card title="Markdown, Markdoc y MDX" icon="document">
+    Lleva tu lenguaje de marcado favorito. Starlight te ofrece validación de frontmatter integrada con seguridad de tipos en TypeScript.
+  </Card>
+  <Card title="Lleva tus propios componentes de UI" icon="puzzle">
+    Starlight se ofrece como una solución completa para la documentación, independiente de cualquier framework. Puedes extenderlo con React, Vue, Svelte, Solid y otros.
+  </Card>
+</CardGrid>
 
-Starlight incluye todas las funciones que necesitas para poner en marcha un sitio de documentación rápidamente:
+<AboutAstro title="Presentado por">
+Astro es el framework web todo en uno diseñado para la velocidad. Obtén tu contenido desde cualquier lugar y despliégalo en cualquier parte, todo potenciado por tus componentes y bibliotecas de UI favoritas.
 
-- Soporte para Markdown y MDX
-- Estilos de tipografía fáciles de leer
-- Resaltado de sintaxis para bloques de código
-- Menús de navegación fáciles de configurar
-- Búsqueda de sitio integrada
-- [Características de internacionalización](/guides/i18n)
-- Estructura accesible del sitio
-- [Componentes en el contenido](/guides/components) con soporte MDX
-- Soporte para estilos personalizados
-- Arquitectura rápida y [ecológica](/environmental-impact)
-- Compatibilidad con el [ecosistema de Astro](https://astro.build/integrations)
+[Aprende sobre Astro](https://astro.build/)
+
+</AboutAstro>
