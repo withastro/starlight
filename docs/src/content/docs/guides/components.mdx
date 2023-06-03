@@ -58,3 +58,52 @@ The code above generates the following tabs on the page:
   <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
   <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
+
+### Cards
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+You can display content in a box matching Starlight’s styles using the `<Card>` component.
+Wrap multiple cards in the `<CardGrid>` component to display cards side-by-side when there’s enough space.
+
+A `<Card>` should have a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="Check this out">Interesting content you want to highlight.</Card>
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+```
+
+The code above generates the following on the page:
+
+<Card title="Check this out">Interesting content you want to highlight.</Card>
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+
+:::tip
+Use a card grid on your home page to display your project’s key features.
+Add the `stagger` attribute to shift the second column of cards vertically and add visual interest:
+
+```astro
+<CardGrid stagger>
+  <!-- cards -->
+</CardGrid>
+```
+
+:::
