@@ -1,0 +1,66 @@
+---
+title: Empezando
+description: Aprende cómo empezar a construir tu próximo sitio de documentación con Starlight utilizando Astro.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+:::caution[Trabajo en progreso]
+Starlight se encuentra en una etapa temprana de desarrollo, por lo que se pueden esperar errores y cambios a medida que lo desarrollamos. Si encuentras algo que no funciona correctamente, te invitamos a [abrir un issue en GitHub](https://github.com/withastro/starlight/issues/new/choose) o comunicárnoslo a través de [Discord](https://astro.build/chat).
+:::
+
+## Creando un nuevo proyecto
+
+Starlight se construye sobre el framework todo en uno [Astro](https://astro.build). Puedes crear un nuevo proyecto de Astro + Starlight utilizando el siguiente comando:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# crear un nuevo proyecto con npm
+npm create astro@latest -- --template starlight
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# crear un nuevo proyecto con  pnpm
+pnpm create astro --template starlight
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# crear un nuevo proyecto con  yarn
+yarn create astro --template starlight
+```
+
+</TabItem>
+</Tabs>
+
+Esto creará un nuevo directorio de proyecto con todos los archivos y configuraciones necesarios para tu sitio.
+
+## Creando contenido con Starlight
+
+Starlight admite la creación de contenido en Markdown y MDX.
+
+Puedes agregar nuevas páginas creando archivos `.md` o `.mdx` en la carpeta `src/content/docs/`. Por ejemplo, el archivo `src/content/docs/hello-world.md` estará disponible en tu sitio en la ruta `/hello-world`.
+
+Todas las páginas de Starlight comparten un conjunto común de propiedades frontmatter que puedes establecer para controlar cómo se muestra la página:
+
+```md
+---
+title: ¡Hola, Mundo!
+description: Esta es una página en mi sitio impulsado por Starlight
+---
+```
+
+Si olvidas algo importante, Starlight te lo hará saber.
+
+## Desplegando tu sitio web de Starlight
+
+Una vez que hayas creado y personalizado tu sitio web de Starlight, puedes desplegarlo en un servidor web o plataforma de hosting de tu elección. Astro proporciona soporte integrado para varios plataformas de hosting populares, como Netlify, Vercel y GitHub Pages, lo que significa que puedes desplegar tu sitio web con solo unos simples comandos.
+
+[Aprende sobre cómo desplegar un sitio Astro en la documentación de Astro.](https://docs.astro.build/es/guides/deploy/)
