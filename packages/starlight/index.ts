@@ -55,7 +55,7 @@ export default function StarlightIntegration(
                 ? {}
                 : { theme: 'css-variables' },
           },
-          experimental: { assets: true },
+          experimental: { assets: true, inlineStylesheets: 'auto' },
         };
         updateConfig(newConfig);
       },

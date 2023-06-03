@@ -17,7 +17,7 @@
   --sl-hue-green: 101;
   --sl-color-green-low: hsl(var(--sl-hue-green), 39%, 22%);
   --sl-color-green: hsl(var(--sl-hue-green), 82%, 63%);
-  --sl-color-green-high: hsl(var(--sl-hue-green), 82%, 87%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 82%, 80%);
   --sl-hue-blue: 234;
   --sl-color-blue-low: hsl(var(--sl-hue-blue), 54%, 20%);
   --sl-color-blue: hsl(var(--sl-hue-blue), 100%, 60%);
@@ -57,28 +57,6 @@
   --sl-shadow-lg: 0px 25px 7px hsla(0, 0%, 0%, 0.03),
     0px 16px 6px hsla(0, 0%, 0%, 0.1), 0px 9px 5px hsla(223, 13%, 10%, 0.33),
     0px 4px 4px hsla(0, 0%, 0%, 0.75), 0px 4px 2px hsla(0, 0%, 0%, 0.25);
-
-  /* Gradients (unchanged across dark & light modes) */
-  --sl-gradient-blue-purple: linear-gradient(
-    to bottom,
-    hsl(234, 100%, 59.8%) 0%,
-    hsl(281, 82.1%, 62.7%) 100%
-  );
-  --sl-gradient-red-pink: linear-gradient(
-    to bottom,
-    hsl(0, 67.9%, 52.4%) 0%,
-    hsl(295, 100%, 62.7%) 100%
-  );
-  --sl-gradient-orange-yellow: linear-gradient(
-    to bottom,
-    hsl(54, 93.5%, 57.6%) 0%,
-    hsl(14, 100%, 66.5%) 100%
-  );
-  --sl-gradient-blue-green: linear-gradient(
-    to bottom,
-    hsl(165, 86.6%, 62%) 0%,
-    hsl(227, 58.4%, 44.3%) 100%
-  );
 
   /* Text size and line height */
   --sl-text-xs: 0.8125rem; /* 13px */
@@ -151,7 +129,7 @@
   --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);
   --sl-color-green-high: hsl(var(--sl-hue-green), 80%, 22%);
-  --sl-color-green: hsl(var(--sl-hue-green), 90%, 60%);
+  --sl-color-green: hsl(var(--sl-hue-green), 90%, 46%);
   --sl-color-green-low: hsl(var(--sl-hue-green), 85%, 90%);
   --sl-color-blue-high: hsl(var(--sl-hue-blue), 80%, 30%);
   --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);

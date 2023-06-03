@@ -27,7 +27,7 @@
     {
       "name": "/index.html",
       "path": "dist/index.html",
-      "limit": "13 kB"
+      "limit": "14 kB"
     },
     {
       "name": "/_astro/*.js",
@@ -37,7 +37,7 @@
     {
       "name": "/_astro/*.css",
       "path": "dist/_astro/*.css",
-      "limit": "11 kB"
+      "limit": "10 kB"
     }
   ]
 }
