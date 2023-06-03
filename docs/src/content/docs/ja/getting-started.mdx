@@ -1,0 +1,66 @@
+---
+title: 入門
+description: AstroのStarlightで新しいドキュメントサイトを作成する方法について学びます。
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+:::caution[作業中]
+Starlightはまだ開発の初期段階にあり、開発が進むにつれバグや変更が生じることが予想されます。何か不具合を見つけた場合は、[GitHubでissueを開く](https://github.com/withastro/starlight/issues/new/choose)か、または[Discord](https://astro.build/chat)でお知らせください。
+:::
+
+## 新しいプロジェクトを作成する
+
+Starlightは、オールインワンのフレームワークである[Astro](https://astro.build)の上に構築されています。次のコマンドにより、Astro + Starlightの新しいプロジェクトを作成できます。
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# npmで新しいプロジェクトを作成する
+npm create astro@latest -- --template starlight
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# pnpmで新しいプロジェクトを作成する
+pnpm create astro --template starlight
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# yarnで新しいプロジェクトを作成する
+yarn create astro --template starlight
+```
+
+</TabItem>
+</Tabs>
+
+これにより、サイトに必要なすべてのファイルと設定が含まれた、新しいプロジェクトディレクトリが作成されます。
+
+## Starlightでコンテンツを作成する
+
+Starlightでは、MarkdownとMDXでコンテンツを作成できます。
+
+`src/content/docs/`に`.md`または`.mdx`ファイルを作成して、新しいページを追加します。たとえば、`src/content/docs/hello-world.md`は、サイトの`/hello-world`からアクセスできます。
+
+Starlightのページは、ページの表示方法を制御するための、共通のフロントマタープロパティを認識します。
+
+```md
+---
+title: こんにちは、世界！
+description: これはStarlightで作成されたサイトのページです
+---
+```
+
+何か重要なことを忘れてしまっていても、Starlightが教えてくれます。
+
+## Starlightサイトをデプロイする
+
+Starlightサイトの作成とカスタマイズが完了したら、お好みのウェブサーバーやホスティングプラットフォームにデプロイできます。Astroには、Netlify、Vercel、GitHub Pagesなど、人気のホスティングプラットフォームへのサポートが組み込まれているため、簡単なコマンドをいくつか実行するだけでウェブサイトをデプロイできます。
+
+[Astroサイトのデプロイについては、Astroのドキュメントを参照してください。](https://docs.astro.build/ja/guides/deploy/)
