@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.0.17
+
+### Patch Changes
+
+- [#107](https://github.com/withastro/starlight/pull/107) [`2f2d3ee`](https://github.com/withastro/starlight/commit/2f2d3eed1e7ed48d75205cfc3169719da7fdae1a) Thanks [@delucis](https://github.com/delucis)! - Small CSS size optimisation
+
+- [#105](https://github.com/withastro/starlight/pull/105) [`55fec5d`](https://github.com/withastro/starlight/commit/55fec5d7e15da0e7365cee196d091bf5d15129c9) Thanks [@delucis](https://github.com/delucis)! - Add `<Card>` and `<CardGrid>` components for landing pages and other uses
+
 ## 0.0.16
 
 ### Patch Changes
