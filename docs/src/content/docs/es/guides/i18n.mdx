@@ -3,6 +3,8 @@ title: Internacionalización (i18n)
 description: Aprende a configurar tu sitio Starlight para admitir varios idiomas.
 ---
 
+import FileTree from '../../../../components/file-tree.astro';
+
 Starlight proporciona soporte incorporado para sitios multilingües, incluidas las rutas, el contenido de respaldo y el soporte completo de idiomas de derecha a izquierda (RTL).
 
 ## Configura i18n
@@ -46,6 +48,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 2. Crea un directorio para cada idioma en `src/content/docs/`.
    Por ejemplo, suponiendo la configuración mostrada en el paso 1, esto podría verse así:
 
+   <FileTree>
 
    - src/
      - content/
@@ -53,6 +56,8 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
          - ar/
          - en/
          - zh/
+
+   </FileTree>
 
 3. Ahora puedes crear archivos de contenido en los directorios de tu idioma. Utiliza el mismo nombre de archivo para vincular páginas en todos los idiomas. Por ejemplo, `ar/index.md` y `en/index.md` representarían la página de inicio para árabe e inglés respectivamente.
 
@@ -89,12 +94,16 @@ export default defineConfig({
 
 Cuando uses una `root` locale, coloca las páginas para ese idioma directamente en `src/content/docs/` en lugar de en una carpeta de idioma dedicada. Por ejemplo, aquí están los archivos de la página de inicio para inglés y chino cuando se usa la configuración anterior:
 
+<FileTree>
+
 - src/
   - content/
     - docs/
-      - index.md
+      - **index.md**
       - zh/
-        - index.md
+        - **index.md**
+
+</FileTree>
 
 #### Sitios monolingües
 
@@ -131,11 +140,15 @@ Puedes proporcionar traducciones para los idiomas adicionales que admites, o anu
 2. Crea un archivo JSON en `src/content/i18n/` para cada idioma al que quieras traducir la UI de Starlight.
    Por ejemplo, esto agregaría archivos de traducción para árabe y chino simplificado:
 
+   <FileTree>
+
    - src/
      - content/
        - i18n/
          - ar.json
          - zh-CN.json
+
+   </FileTree>
 
 3. Agrega traducciones para las claves que deseas traducir a los archivos JSON. Puedes usar los valores predeterminados en inglés para ayudarte a traducir:
 

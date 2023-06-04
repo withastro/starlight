@@ -3,6 +3,8 @@ title: 国際化（i18n）
 description: 複数言語をサポートするためにStarlightサイトを設定する方法について学びます。
 ---
 
+import FileTree from '../../../../components/file-tree.astro';
+
 Starlightは、ルーティング、フォールバックコンテンツ、右横書き（right-to-left、RTL）言語へのフルサポートなど、複数言語サイトを構築するための機能を組み込みで提供します。
 
 ## i18nの設定
@@ -45,12 +47,16 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 2. `src/content/docs/`に各言語のディレクトリを作成します。たとえばステップ1で示した構成を仮定すると、次のようになります。
 
+   <FileTree>
+
    - src/
      - content/
        - docs/
          - ar/
          - en/
          - zh/
+
+   </FileTree>
 
 3. これで各言語のディレクトリにコンテンツ用のファイルを作成できるようになりました。言語間でページを対応させるために、同じページには同じファイル名を使用します。たとえば、`ar/index.md`と`en/index.md`は、アラビア語版と英語版のホームページをそれぞれ表わします。
 
@@ -87,12 +93,16 @@ export default defineConfig({
 
 `root`ロケールを使用する場合は、言語専用のフォルダではなく、`src/content/docs/`にその言語のページを直接配置します。たとえば上記の設定を使用した場合、英語と中国語のホームページ用ファイルは次のようになります。
 
+<FileTree>
+
 - src/
   - content/
     - docs/
-      - index.md
+      - **index.md**
       - zh/
-        - index.md
+        - **index.md**
+
+</FileTree>
 
 #### 単一言語のサイト
 
@@ -124,11 +134,15 @@ StarlightのデフォルトUIの一部はテキストラベルを必要としま
 
 2. StarlightのUIを翻訳したいロケールごとに、JSONファイルを`src/content/i18n/`に作成します。たとえば、以下ではアラビア語と簡体字中国語の翻訳ファイルを追加しています。
 
+   <FileTree>
+
    - src/
      - content/
        - i18n/
          - ar.json
          - zh-CN.json
+
+   </FileTree>
 
 3. 翻訳したいキーに対応する翻訳を、JSONファイルに追加します。英語のデフォルトを参考にしながら翻訳を進めてください。
 
