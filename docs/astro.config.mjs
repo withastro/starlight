@@ -48,12 +48,12 @@ export default defineConfig({
             {
               label: 'Getting Started',
               link: 'getting-started',
-              translations: { ja: '入門' },
+              translations: { es: "Empezando", ja: '入門' },
             },
             {
               label: 'Environmental Impact',
               link: 'environmental-impact',
-              translations: { ja: '環境への負荷' },
+              translations: { es: "Documentación ecológica", ja: '環境への負荷' },
             },
           ],
         },
