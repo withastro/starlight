@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.0.19
+
+### Patch Changes
+
+- [`fab453c`](https://github.com/withastro/starlight/commit/fab453c27a26a3928c0b355306d45b313a5fc531) Thanks [@delucis](https://github.com/delucis)! - Design tweak: larger sidebar text with more spacing
+
+- [#134](https://github.com/withastro/starlight/pull/134) [`5f4acdf`](https://github.com/withastro/starlight/commit/5f4acdf75102f4431f5c60f65912db8d690b098c) Thanks [@Yan-Thomas](https://github.com/Yan-Thomas)! - Add Portuguese language support
+
+- [`8805fbf`](https://github.com/withastro/starlight/commit/8805fbf30a2c26208aaf6d29ee53586f2dbf6cce) Thanks [@delucis](https://github.com/delucis)! - Add box-shadow to prev/next page links as per designs
+
+- [`81ef58e`](https://github.com/withastro/starlight/commit/81ef58eac2a53672773d7d564068539190960127) Thanks [@delucis](https://github.com/delucis)! - Design tweak: slightly less horizontal padding in header component on narrower viewports
+
+- [`8c103b3`](https://github.com/withastro/starlight/commit/8c103b3b44e4b91159f8225fffdf9ba843f9c395) Thanks [@delucis](https://github.com/delucis)! - Design tweak: pad bottom of page content slightly
+
+- [#129](https://github.com/withastro/starlight/pull/129) [`bbcb277`](https://github.com/withastro/starlight/commit/bbcb277591514705fcc39665068aa331cfa2a653) Thanks [@delucis](https://github.com/delucis)! - Fix bug setting writing direction from a single root locale
+
 ## 0.0.18
 
 ### Patch Changes
