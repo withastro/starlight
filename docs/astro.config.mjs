@@ -39,11 +39,22 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Start Here',
-          translations: { de: 'Beginne hier', es: 'Comienza aqui', ja: 'ここから始める' },
+          translations: {
+            de: 'Beginne hier',
+            es: 'Comienza aqui',
+            ja: 'ここからはじめる',
+          },
           items: [
-            { label: 'Welcome, world', link: '/' },
-            { label: 'Getting Started', link: 'getting-started' },
-            { label: 'Environmental Impact', link: 'environmental-impact' },
+            {
+              label: 'Getting Started',
+              link: 'getting-started',
+              translations: { ja: '入門' },
+            },
+            {
+              label: 'Environmental Impact',
+              link: 'environmental-impact',
+              translations: { ja: '環境への負荷' },
+            },
           ],
         },
         {
@@ -53,7 +64,11 @@ export default defineConfig({
         },
         {
           label: 'Reference',
-          translations: { de: 'Referenz', es: 'Referencias', ja: 'リファレンス' },
+          translations: {
+            de: 'Referenz',
+            es: 'Referencias',
+            ja: 'リファレンス',
+          },
           autogenerate: { directory: 'reference' },
         },
       ],
