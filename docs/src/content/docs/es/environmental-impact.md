@@ -5,7 +5,7 @@ description: Aprende cómo Starlight puede ayudarte a construir sitios de docume
 
 Las estimaciones del impacto climático de la industria web oscilan entre el [2%][sf] y el [4% de las emisiones globales de carbono][bbc], equivalente aproximadamente a las emisiones de la industria de la aviación. Hay muchos factores complejos en el cálculo del impacto ecológico de un sitio web, pero esta guía incluye algunos consejos para reducir la huella ambiental de tu sitio de documentación.
 
-La buena noticia es que elegir Starlight es un excelente comienzo. Según el Website Carbon Calculator, este sitio es [más limpio que el 99% de las páginas web analizadas](https://www.websitecarbon.com/website/starlight-astro-build/), produciendo 0.01g de CO₂ por visita a la página.
+La buena noticia es que elegir Starlight es un excelente comienzo. Según el Website Carbon Calculator, este sitio es [más limpio que el 99% de las páginas web analizadas][sl-carbon], produciendo 0.01g de CO₂ por visita a la página.
 
 ## Peso de la página
 
