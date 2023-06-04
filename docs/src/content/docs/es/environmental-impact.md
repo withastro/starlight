@@ -9,7 +9,7 @@ La buena noticia es que elegir Starlight es un excelente comienzo. Según el Web
 
 ## Peso de la página
 
-Cuanto más datos transfiera una página web, más recursos energéticos requerirá. En abril de 2023, la mediana de una página web requería que un usuario descargara más de 2.000 KB, según [los datos del archivo HTTP][http].
+Cuanto más datos transfiera una página web, más recursos energéticos requerirá. En abril de 2023, la mediana de una página web requería que un usuario descargara más de 2.000 KB, según [los datos del HTTP Archive][http].
 
 Starlight construye páginas que son lo más livianas posible. Por ejemplo, en una primera visita, un usuario descargará menos de 50 KB de datos comprimidos, lo que representa solo el 2.5% de la mediana del archivo HTTP. Con una buena estrategia de almacenamiento en caché, las navegaciones posteriores pueden descargar tan solo 10 KB.
 
