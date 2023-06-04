@@ -1,9 +1,10 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
+const site = 'https://starlight.astro.build/';
+
 export default defineConfig({
-  site: 'https://starlight.astro.build',
+  site,
   integrations: [
     starlight({
       title: 'Starlight',
@@ -27,6 +28,14 @@ export default defineConfig({
             'data-site': 'EZBHTSIG',
             defer: true,
           },
+        },
+        {
+          tag: 'meta',
+          attrs: { property: 'og:image', content: site + 'og.jpg' },
+        },
+        {
+          tag: 'meta',
+          attrs: { property: 'twitter:image', content: site + 'og.jpg' },
         },
       ],
       customCss: process.env.NO_GRADIENTS ? [] : ['/src/assets/landing.css'],

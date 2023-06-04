@@ -49,7 +49,7 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
   const dir = locale
     ? config.locales?.[locale]?.dir
     : config.locales?.root?.dir;
-  return dir || 'ltr';
+  return dir || config.defaultLocale.dir;
 }
 
 export function slugToParam(slug: string): string | undefined {
