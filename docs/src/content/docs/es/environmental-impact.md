@@ -1,5 +1,5 @@
 ---
-title: Docs respetuosos con el medio ambiente
+title: Documentación amigable con el medio ambiente
 description: Aprende cómo Starlight puede ayudarte a construir sitios de documentación más ecológicos y reducir tu huella de carbono.
 ---
 
