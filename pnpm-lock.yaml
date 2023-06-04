@@ -26,15 +26,30 @@ importers:
       '@size-limit/file':
         specifier: ^8.2.4
         version: 8.2.4(size-limit@8.2.4)
+      hast-util-from-html:
+        specifier: ^1.0.2
+        version: 1.0.2
+      hast-util-to-string:
+        specifier: ^2.0.0
+        version: 2.0.0
+      hastscript:
+        specifier: ^7.2.0
+        version: 7.2.0
       pa11y-ci:
         specifier: ^3.0.1
         version: 3.0.1
+      rehype:
+        specifier: ^12.0.1
+        version: 12.0.1
       size-limit:
         specifier: ^8.2.4
         version: 8.2.4
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
+      unist-util-visit:
+        specifier: ^4.1.2
+        version: 4.1.2
 
   packages/starlight:
     dependencies:
@@ -2561,6 +2576,16 @@ packages:
     dependencies:
       function-bind: 1.1.1
 
+  /hast-util-from-html@1.0.2:
+    resolution: {integrity: sha512-LhrTA2gfCbLOGJq2u/asp4kwuG0y6NhWTXiPKP+n0qNukKy7hc10whqqCFfyvIA1Q5U5d0sp9HhNim9gglEH4A==}
+    dependencies:
+      '@types/hast': 2.3.4
+      hast-util-from-parse5: 7.1.2
+      parse5: 7.1.2
+      vfile: 5.3.7
+      vfile-message: 3.1.4
+    dev: true
+
   /hast-util-from-parse5@7.1.2:
     resolution: {integrity: sha512-Nz7FfPBuljzsN3tCQ4kCBKqdNhQE2l0Tn+X1ubgKBPRoiDIu1mL08Cfw4k7q71+Duyaw7DXDN+VTAp4Vh3oCOw==}
     dependencies:
@@ -2638,6 +2663,12 @@ packages:
       space-separated-tokens: 2.0.2
       web-namespaces: 2.0.1
       zwitch: 2.0.4
+
+  /hast-util-to-string@2.0.0:
+    resolution: {integrity: sha512-02AQ3vLhuH3FisaMM+i/9sm4OXGSq1UhOOCpTLLQtHdL3tZt7qil69r8M8iDkZYyC0HCFylcYoP+8IO7ddta1A==}
+    dependencies:
+      '@types/hast': 2.3.4
+    dev: true
 
   /hast-util-whitespace@2.0.1:
     resolution: {integrity: sha512-nAxA0v8+vXSBDt3AnRUNjyRIQ0rD+ntpbAp4LnPkumc5M9yUbSMa4XDU9Q6etY4f1Wp4bNgvc1yjiZtsTTrSng==}
