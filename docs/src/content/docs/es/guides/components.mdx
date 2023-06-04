@@ -15,14 +15,14 @@ Puedes utilizar un componente importándolo en tu archivo MDX y luego llamándol
 title: Bienvenido a mis docs
 ---
 
-import SomeComponent from '../../components/SomeComponent.astro';
-import AnotherComponent from '../../components/AnotherComponent.astro';
+import UnComponente from '../../componentes/UnComponente.astro';
+import OtroComponente from '../../componentes/OtroComponente.astro';
 
-<SomeComponent prop="algo" />
+<UnComponente prop="algo" />
 
-<AnotherComponent>
+<OtroComponente>
   Los componentes también pueden contener **contenido anidado**.
-</AnotherComponent>
+</OtroComponente>
 ```
 
 Debido a que Starlight está impulsado por Astro, puedes utilizar componentes construidos con cualquier framework UI en tus archivos MDX. Obtén más información sobre [cómo usar componentes en MDX](https://docs.astro.build/es/guides/markdown-content/#usando-componentes-en-mdx) en la documentación de Astro.
@@ -41,16 +41,16 @@ Puedes mostrar una interfaz con pestañas utilizando los componentes `<Tabs>` y 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+  <TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 El código anterior genera las siguientes pestañas en la página:
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+  <TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Tarjetas
