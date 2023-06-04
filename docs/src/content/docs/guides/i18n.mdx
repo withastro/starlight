@@ -3,6 +3,8 @@ title: Internationalization (i18n)
 description: Learn how to configure your Starlight site to support multiple languages.
 ---
 
+import FileTree from '../../../components/file-tree.astro';
+
 Starlight provides built-in support for multilingual sites, including routing, fallback content, and full right-to-left (RTL) language support.
 
 ## Configure i18n
@@ -46,12 +48,16 @@ Starlight provides built-in support for multilingual sites, including routing, f
 2. Create a directory for each language in `src/content/docs/`.
    For example, assuming the configuration shown in step 1, this might look like:
 
+   <FileTree>
+
    - src/
      - content/
        - docs/
          - ar/
          - en/
          - zh/
+
+   </FileTree>
 
 3. You can now create content files in your language directories. Use the same file name to tie pages together across languages. For example, `ar/index.md` and `en/index.md` would represent the homepage for Arabic and English respectively.
 
@@ -88,12 +94,16 @@ export default defineConfig({
 
 When using a `root` locale, place pages for that language directly in `src/content/docs/` instead of in a dedicated language folder. For example, here are the home page files for English and Chinese when using the config above:
 
+<FileTree>
+
 - src/
   - content/
     - docs/
-      - index.md
+      - **index.md**
       - zh/
-        - index.md
+        - **index.md**
+
+</FileTree>
 
 #### Monolingual sites
 
@@ -129,11 +139,15 @@ You can provide translations for additional languages you support — or overrid
 2. Create a JSON file in `src/content/i18n/` for each locale you want to translate Starlight’s UI for.
    For example, this would add translation files for Arabic and Simplified Chinese:
 
+   <FileTree>
+
    - src/
      - content/
        - i18n/
          - ar.json
          - zh-CN.json
+
+   </FileTree>
 
 3. Add translations for the keys you want to translate to the JSON files. You can use the English defaults to help you translate:
 

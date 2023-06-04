@@ -11,6 +11,7 @@ concurrency:
 
 jobs:
   size-limit:
+    if: ${{ github.event.pull_request.head.repo.full_name == 'withastro/starlight' }}
     name: Check build output is within performance budget
     runs-on: ubuntu-latest
     steps:
