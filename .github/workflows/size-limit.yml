@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   size-limit:
-    if: ${{ github.repository_owner == 'withastro' }}
+    if: ${{ github.event.pull_request.head.repo == 'withastro/starlight' }}
     name: Check build output is within performance budget
     runs-on: ubuntu-latest
     steps:
