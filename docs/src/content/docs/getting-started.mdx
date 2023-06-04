@@ -12,7 +12,9 @@ If you find something that’s not working, [open an issue on GitHub](https://gi
 
 ## Creating a new project
 
-Starlight is built on top of the [Astro](https://astro.build) all-in-one framework. You can create a new Astro + Starlight project using the following command:
+Starlight is a full-featured documentation theme built on top of the [Astro](https://astro.build) framework.
+
+You can create a new Astro + Starlight project using the following command:
 
 <Tabs>
 <TabItem label="npm">
@@ -41,7 +43,7 @@ yarn create astro --template starlight
 </TabItem>
 </Tabs>
 
-This will create a new project directory with all the necessary files and configurations for your site.
+This will create a new [project directory](/guides/project-structure/) with all the necessary files and configurations for your site.
 
 :::tip[See it in action]
 Try Starlight in your browser:
@@ -50,11 +52,24 @@ Try Starlight in your browser:
 
 ## Creating content with Starlight
 
-Starlight supports authoring content in Markdown and MDX.
+Starlight is ready for you to add new content, or bring your existing files!
 
-You can add new pages by creating `.md` or `.mdx` files in `src/content/docs/`. For example, `src/content/docs/hello-world.md` will be available on your site at `/hello-world`.
+### File formats
 
-All Starlight pages share a [common set of frontmatter properties](/reference/frontmatter/) you can set to control how the page appears:
+Starlight supports authoring content in Markdown and MDX. (You can add support for Markdoc by installing the experimental [Astro Markdoc integration](https://docs.astro.build/en/guides/integrations-guide/markdoc/).)
+
+
+### Add pages
+Add new pages to your site automatically by creating `.md` or `.mdx` files in `src/content/docs/`. Add sub-folders to organize your files, and to create multiple path segments:
+
+```js
+`src/content/docs/hello-world.md` -> `your-site/hello-world`
+`src/content/docs/guides/faq.md` -> `your-site/guides/faq`
+```
+
+### Type-safe frontmatter
+
+All Starlight pages share a customizable [common set of frontmatter properties](/reference/frontmatter/) to control how the page appears:
 
 ```md
 ---
@@ -67,6 +82,6 @@ If you forget anything important, Starlight will let you know.
 
 ## Deploying your Starlight website
 
-Once you have created and customized your Starlight website, you can deploy it to a web server or hosting platform of your choice. Astro provides built-in support for several popular hosting platforms, including Netlify, Vercel, and GitHub Pages, which means you can deploy your website with just a few simple commands.
+Once you have created and customized your Starlight website, you can deploy it to a web server or hosting platform of your choice including Netlify, Vercel, GitHub Pages and many more.
 
 [Learn about deploying an Astro site in the Astro docs.](https://docs.astro.build/en/guides/deploy/)
