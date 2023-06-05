@@ -15,10 +15,10 @@ Le texte peut être **gras**, _italique_, ou ~~barré~~.
 Le texte peut être **gras**, _italique_, ou ~~barré~~.
 ```
 
-Vous pouvez [faire un lien vers une autre page](/fr-fr/getting-started/).
+Vous pouvez [faire un lien vers une autre page](/fr-FR/getting-started/).
 
 ```md
-Vous pouvez [faire un lien vers une autre page](/fr-fr/getting-started/).
+Vous pouvez [faire un lien vers une autre page](/fr-FR/getting-started/).
 ```
 
 Vous pouvez mettre en évidence le `code en ligne` à l'aide d'un astérisque.
@@ -147,7 +147,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 - Navigation claire
 - Thème de couleurs configurable par l'utilisateur
-- [Support i18n](/fr-fr/guides/i18n)
+- [Support i18n](/fr-FR/guides/i18n)
 
 :::
 
@@ -161,7 +161,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 - Navigation claire
 - Thème de couleurs configurable par l'utilisateur
-- [Support i18n](/fr-fr/guides/i18n)
+- [Support i18n](/fr-FR/guides/i18n)
 
 :::
 ```

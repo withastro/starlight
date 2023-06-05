@@ -32,13 +32,13 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type:** `string | boolean`
 
-Remplace la [configuration globale `editLink`](/fr-fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Editer la page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
+Remplace la [configuration globale `editLink`](/fr-FR/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Editer la page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
-**type:** [`HeadConfig[]`](/fr-fr/reference/configuration/#headconfig)
+**type:** [`HeadConfig[]`](/fr-FR/reference/configuration/#headconfig)
 
-Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr-fr/reference/configuration/#head).
+Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr-FR/reference/configuration/#head).
 
 ```md
 ---
@@ -54,7 +54,7 @@ head:
 
 **type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-Remplace la [configuration globale `tableOfContents`](/fr-fr/reference/configuration/#tableofcontents).
+Remplace la [configuration globale `tableOfContents`](/fr-FR/reference/configuration/#tableofcontents).
 Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la table des matières sur cette page.
 
 ### `template`
@@ -62,9 +62,9 @@ Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la
 **type:** `'doc' | 'splash'`  
 **default:** `'doc'`
 
-Set the layout template for this page.
-Pages use the `'doc'` layout by default.
-Set to `'splash'` to use a wider layout without any sidebars designed for landing pages.
+Définit le modèle de mise en page pour cette page.
+Les pages utilisent la mise en page `'doc'`' par défaut.
+La valeur `'splash''` permet d'utiliser une mise en page plus large, sans barres latérales, conçue pour les pages d'atterrissage.
 
 ### `hero`
 
