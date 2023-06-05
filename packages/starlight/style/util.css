@@ -41,3 +41,8 @@
     display: block;
   }
 }
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+}

@@ -111,4 +111,11 @@
     border: 0;
     border-bottom: 1px solid var(--sl-color-hairline);
   }
+
+  @media print {
+    .content :global(pre) {
+      overflow-x: hidden !important;
+      white-space: pre-wrap !important;
+    }
+  }
 </style>

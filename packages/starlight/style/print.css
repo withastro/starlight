@@ -1,0 +1,51 @@
+:root, ::backdrop {
+    /* Colours (light mode) */
+  --sl-color-white: hsl(223, 13%, 10%) !important;
+  --sl-color-gray-1: hsl(222, 13%, 16%) !important;
+  --sl-color-gray-2: hsl(222, 11%, 23%) !important;
+  --sl-color-gray-3: hsl(225, 9%, 36%) !important;
+  --sl-color-gray-4: hsl(221, 8%, 56%) !important;
+  --sl-color-gray-5: hsl(228, 8%, 77%) !important;
+  --sl-color-gray-6: hsl(231, 23%, 94%) !important;
+  --sl-color-gray-7: hsl(240, 20%, 97%) !important;
+  --sl-color-black: hsl(0, 0%, 100%) !important;
+
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 80%, 25%) !important;
+  --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%) !important;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%) !important;
+  --sl-color-green-high: hsl(var(--sl-hue-green), 80%, 22%) !important;
+  --sl-color-green: hsl(var(--sl-hue-green), 90%, 46%) !important;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 85%, 90%) !important;
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 80%, 30%) !important;
+  --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%) !important;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 88%, 90%) !important;
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 39%, 30%) !important;
+  --sl-color-purple: hsl(var(--sl-hue-purple), 90%, 60%) !important;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 80%, 90%) !important;
+  --sl-color-red-high: hsl(var(--sl-hue-red), 80%, 30%) !important;
+  --sl-color-red: hsl(var(--sl-hue-red), 90%, 60%) !important;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 80%, 90%) !important;
+
+  --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%) !important;
+  --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%) !important;
+  --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%) !important;
+
+  --sl-color-text-accent: var(--sl-color-accent) !important;
+  --sl-color-text-invert: var(--sl-color-black) !important;
+  --sl-color-bg-nav: var(--sl-color-gray-7) !important;
+  --sl-color-bg-sidebar: var(--sl-color-bg) !important;
+  --sl-color-bg-inline-code: var(--sl-color-gray-6) !important;
+  --sl-color-hairline-shade: var(--sl-color-gray-6) !important;
+
+  --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66) !important;
+
+  /* Shadows (light mode) */
+  --sl-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06),
+    0px 2px 1px hsla(0, 0%, 0%, 0.06) !important;
+  --sl-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.03),
+    0px 5px 2px hsla(0, 0%, 0%, 0.03), 0px 3px 2px hsla(0, 0%, 0%, 0.06),
+    0px 1px 1px hsla(0, 0%, 0%, 0.06) !important;
+  --sl-shadow-lg: 0px 25px 7px rgba(0, 0, 0, 0.01),
+    0px 16px 6px hsla(0, 0%, 0%, 0.03), 0px 9px 5px hsla(223, 13%, 10%, 0.08),
+    0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04) !important;
+  }

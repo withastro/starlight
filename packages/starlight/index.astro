@@ -32,6 +32,8 @@ import './style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
+import printHref from './style/print.css?url';
+
 export async function getStaticPaths() {
   return paths;
 }
@@ -54,6 +56,7 @@ const hasHero = Boolean(entry.data.hero);
 
 <html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar} data-has-hero={hasHero}>
   <head>
+    <link rel="stylesheet" href={printHref} media="print">
     <HeadSEO data={entry.data} lang={lang} />
     <style>
       html:not([data-has-toc]) {

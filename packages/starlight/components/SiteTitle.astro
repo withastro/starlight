@@ -79,4 +79,14 @@ const href = pathWithBase(Astro.props.locale || '/');
   :global([data-theme='dark']) .light-only {
     display: none;
   }
+
+  @media print {
+    .dark-only {
+      display: none !important;
+    }
+
+    .light-only {
+      display: initial !important;
+    }
+  }
 </style>
