@@ -57,12 +57,19 @@ export default defineConfig({
             {
               label: 'Getting Started',
               link: 'getting-started',
-              translations: { es: "Empezando", ja: '入門' },
+              translations: {
+                de: 'Erste Schritte',
+                es: 'Empezando',
+                ja: '入門',
+              },
             },
             {
               label: 'Environmental Impact',
               link: 'environmental-impact',
-              translations: { es: "Documentación ecológica", ja: '環境への負荷' },
+              translations: {
+                es: 'Documentación ecológica',
+                ja: '環境への負荷',
+              },
             },
           ],
         },
