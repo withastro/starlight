@@ -15,7 +15,7 @@ const { locale } = Astro.props;
 <div class="header flex">
   <SiteTitle {locale} />
   <Search {locale} />
-  <div class="hidden md:flex right-group">
+  <div class="hidden md:flex print:hidden right-group">
     <SocialIcons />
     <ThemeSelect {locale} />
     <LanguageSelect {locale} />
