@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.1.0
+
+### Minor Changes
+
+- [`43f3a02`](https://github.com/withastro/starlight/commit/43f3a024d6903072780f158dd95fb04b9f678535) Thanks [@delucis](https://github.com/delucis)! - Release v0.1.0
+
 ## 0.0.19
 
 ### Patch Changes
