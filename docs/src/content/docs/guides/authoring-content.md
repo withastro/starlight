@@ -29,12 +29,22 @@ You can highlight `inline code` with backticks.
 
 ## Images
 
-Markdown supports syntax for displaying images that includes alt-text for screen readers and assistive technology.
+Images in Starlight use Astro's built-in optimized asset support.
+
+Markdown and MDX support the Markdown syntax for displaying images that includes alt-text for screen readers and assistive technology.
 
 ![An illustration of planets and stars featuring the word “astro”](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
 
 ```md
 ![An illustration of planets and stars featuring the word “astro”](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+```
+
+Relative image paths are also supported for images stored locally in your project.
+
+```md
+// src/content/docs/page-1.md
+
+![A rocketship in space.](../../assets/images/rocket.svg)
 ```
 
 
