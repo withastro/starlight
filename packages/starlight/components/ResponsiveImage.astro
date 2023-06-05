@@ -1,0 +1,17 @@
+---
+import { LocalImageProps, getImage } from 'astro:assets';
+
+type Props = LocalImageProps & { widths: number[] };
+
+const { src: _src, widths, ...attrs } = Astro.props;
+
+const sources = await Promise.all(
+  widths.map((width) => getImage({ src: _src, width }))
+);
+const src = sources[0]?.src;
+const srcset = sources
+  .map((img) => `${img.src} ${img.attributes.width}w`)
+  .join(', ');
+---
+
+<img {...attrs} {src} {srcset} />
