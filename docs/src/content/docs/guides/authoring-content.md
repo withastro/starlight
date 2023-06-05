@@ -197,5 +197,5 @@ Long, single-line code blocks should not wrap. They should horizontally scroll i
 
 ## Other common Markdown features
 
-Starlight supports all other common Markdown authoring syntax, such as lists and tables. See the [Markdown documentation](https://daringfireball.net/projects/markdown/) for all the options available.
+Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/)] for a quick overview of all the Markdown syntax elements.
 
