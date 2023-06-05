@@ -32,13 +32,13 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type:** `string | boolean`
 
-Remplace la [configuration globale `editLink`](/fr-FR/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Editer la page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
+Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Editer la page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
 **type:** [`HeadConfig[]`](/fr-FR/reference/configuration/#headconfig)
 
-Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr-FR/reference/configuration/#head).
+Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr/reference/configuration/#head).
 
 ```md
 ---
@@ -54,7 +54,7 @@ head:
 
 **type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-Remplace la [configuration globale `tableOfContents`](/fr-FR/reference/configuration/#tableofcontents).
+Remplace la [configuration globale `tableOfContents`](/fr/reference/configuration/#tableofcontents).
 Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la table des matières sur cette page.
 
 ### `template`
