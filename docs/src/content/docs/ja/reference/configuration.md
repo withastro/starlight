@@ -5,6 +5,21 @@ description: Starlightがサポートするすべての設定オプションの�
 
 ## `starlight`インテグレーションの設定
 
+Starlightは[Astro](https://astro.build)ウェブフレームワークの上に構築されたインテグレーションです。Astroの`astro.config.mjs`設定ファイル内でプロジェクトの設定をおこないます。
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: "私の楽しいドキュメントサイト",
+    }),
+  ],
+});
+```
+
 以下のオプションを`starlight`インテグレーションに設定できます。
 
 ### `title`（必須）
