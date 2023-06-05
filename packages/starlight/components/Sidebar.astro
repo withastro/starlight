@@ -12,7 +12,7 @@ interface Props {
 const { sidebar, locale } = Astro.props;
 ---
 
-<div class="sidebar flex">
+<div class="sidebar flex print:hidden">
   <SidebarSublist sublist={sidebar} />
   <div class="mobile-preferences flex md:hidden">
     <ThemeSelect {locale} />

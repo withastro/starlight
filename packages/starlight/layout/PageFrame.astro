@@ -15,7 +15,7 @@ const t = useTranslations(locale);
   <header class="header"><slot name="header" /></header>
   {
     hasSidebar && (
-      <nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
+      <nav class="sidebar print:hidden" aria-label={t('sidebarNav.accessibleLabel')}>
         <MobileMenuToggle {locale} />
         <div id="starlight__sidebar" class="sidebar-pane">
           <div class="sidebar-content">
@@ -87,6 +87,12 @@ const t = useTranslations(locale);
       width: var(--sl-sidebar-width);
       background-color: var(--sl-color-bg-sidebar);
       border-inline-end: 1px solid var(--sl-color-hairline-shade);
+    }
+  }
+
+  @media print {
+    .main-frame {
+      padding-inline-start: 0 !important;
     }
   }
 </style>

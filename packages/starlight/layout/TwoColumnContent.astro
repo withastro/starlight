@@ -7,7 +7,7 @@ interface Props {
 <div class="lg:flex">
   {
     Astro.props.hasToC && (
-      <aside class="right-sidebar-container">
+      <aside class="right-sidebar-container print:hidden">
         <div class="right-sidebar">
           <slot name="right-sidebar" />
         </div>
@@ -51,6 +51,13 @@ interface Props {
         var(--sl-content-width) +
           (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
       );
+    }
+  }
+
+  @media print {
+    .main-pane {
+      --sl-sidebar-width: 0px;
+      --sl-content-width: 100%;
     }
   }
 </style>
