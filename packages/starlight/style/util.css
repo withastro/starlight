@@ -42,7 +42,13 @@
   }
 }
 @media print {
-  .print-hidden {
+  .print\:hidden {
     display: none !important;
+  }
+  .print\:flex {
+    display: flex !important;
+  }
+  .print\:block {
+    display: block !important;
   }
 }

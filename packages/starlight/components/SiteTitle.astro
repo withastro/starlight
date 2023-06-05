@@ -31,7 +31,7 @@ const href = pathWithBase(Astro.props.locale || '/');
     config.logo && logos.dark && (
       <>
         <img
-          class:list={{ 'dark-only': !('src' in config.logo) }}
+          class:list={{ 'dark-only print:hidden': !('src' in config.logo) }}
           alt={config.logo.alt}
           src={logos.dark.src}
           width={logos.dark.width}
@@ -40,7 +40,7 @@ const href = pathWithBase(Astro.props.locale || '/');
         {/* Show light alternate if a user configure both light and dark logos. */}
         {!('src' in config.logo) && (
           <img
-            class="light-only"
+            class="light-only print:block"
             alt={config.logo.alt}
             src={logos.light?.src}
             width={logos.light?.width}
@@ -78,15 +78,5 @@ const href = pathWithBase(Astro.props.locale || '/');
   }
   :global([data-theme='dark']) .light-only {
     display: none;
-  }
-
-  @media print {
-    .dark-only {
-      display: none !important;
-    }
-
-    .light-only {
-      display: initial !important;
-    }
   }
 </style>
