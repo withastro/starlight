@@ -5,6 +5,22 @@ description: An overview of all the configuration options Starlight supports.
 
 ## Configure the `starlight` integration
 
+Starlight is an [Astro integration](https://docs.astro.build/en/guides/integrations-guide/), configured in `astro.config.mjs`.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: "My delightful docs site",
+    }),
+  ],
+});
+```
+
 You can pass the following options to the `starlight` integration.
 
 ### `title` (required)
