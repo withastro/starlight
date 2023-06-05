@@ -51,15 +51,15 @@ Puedes estructurar el contenido utilizando encabezados. Los encabezados en Markd
 ###### Encabezado 6
 ```
 
-## Asides
+## Apartados
 
-Los asides (también conocidos como “admoniciones” o ”callouts”) son útiles para mostrar información secundaria junto al contenido principal de una página.
+Los apartados (también conocidos como “apartados” o ”contenido destacado”) son útiles para mostrar información secundaria junto al contenido principal de una página.
 
-Starlight proporciona una sintaxis personalizada de Markdown para renderizar asides. Los bloques de asides se indican utilizando tres dos puntos `:::` y pueden ser de tipo `note`, `tip`, `caution` o `danger`.
+Starlight proporciona una sintaxis personalizada de Markdown para renderizar apartados. Los bloques de apartados se indican utilizando tres dos puntos `:::` y pueden ser de tipo `note`, `tip`, `caution` o `danger`.
 
-Puedes anidar cualquier otro tipo de contenido Markdown dentro de un aside, pero los asides son más adecuados para fragmentos de contenido cortos y concisos.
+Puedes anidar cualquier otro tipo de contenido Markdown dentro de un apartado, pero los apartados son más adecuados para fragmentos de contenido cortos y concisos.
 
-### Nota aside
+### Nota de apartado
 
 :::note
 Starlight es un conjunto de herramientas para crear sitios web de documentación construido con [Astro](https://astro.build/). Puedes comenzar con este comando:
@@ -81,9 +81,9 @@ npm run create astro@latest --template starlight
 :::
 ````
 
-### Títulos personalizados para los asides
+### Títulos personalizados para los apartados
 
-Puedes especificar un título personalizado para el aside utilizando corchetes cuadrados después del tipo del aside, por ejemplo, `:::tip[¿Sabías esto?]`.
+Puedes especificar un título personalizado para el apartado utilizando corchetes cuadrados después del tipo del apartado, por ejemplo, `:::tip[¿Sabías esto?]`.
 
 :::tip[¿Sabías esto?]
 Astro te ayuda a construir sitios web más rápidos con la[“Arquitectura de Islas”](https://docs.astro.build/es/concepts/islands/).
@@ -95,9 +95,9 @@ Astro te ayuda a construir sitios web más rápidos con la[“Arquitectura de Is
 :::
 ```
 
-### Más tipos de asides
+### Más tipos de apartados
 
-Los asides de caution y danger son útiles para llamar la atención del usuario sobre detalles que podrían generar problemas. Si te encuentras utilizando estos tipos de asides con frecuencia, también puede ser una señal de que lo que estás documentando podría beneficiarse de una reestructuración o rediseño.
+Los apartados de caution y danger son útiles para llamar la atención del usuario sobre detalles que podrían generar problemas. Si te encuentras utilizando estos tipos de apartados con frecuencia, también puede ser una señal de que lo que estás documentando podría beneficiarse de una reestructuración o rediseño.
 
 :::caution
 Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](../../).
