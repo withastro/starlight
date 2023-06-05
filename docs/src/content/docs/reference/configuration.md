@@ -5,7 +5,7 @@ description: An overview of all the configuration options Starlight supports.
 
 ## Configure the `starlight` integration
 
-Starlight is an [Astro integration](https://docs.astro.build/en/guides/integrations-guide/), configured in `astro.config.mjs`.
+Starlight is an integration built on top the [Astro](https://astro.build) web framework. You can configure your project inside the Astro `astro.config.mjs` configuration file:
 
 ```js
 // astro.config.mjs
