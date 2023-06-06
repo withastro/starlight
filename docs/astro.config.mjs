@@ -31,11 +31,11 @@ export default defineConfig({
         },
         {
           tag: 'meta',
-          attrs: { property: 'og:image', content: site + 'og.jpg' },
+          attrs: { property: 'og:image', content: site + 'og.jpg?v=1' },
         },
         {
           tag: 'meta',
-          attrs: { property: 'twitter:image', content: site + 'og.jpg' },
+          attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
         },
       ],
       customCss: process.env.NO_GRADIENTS ? [] : ['/src/assets/landing.css'],
@@ -44,6 +44,7 @@ export default defineConfig({
         de: { label: 'Deutsch', lang: 'de' },
         es: { label: 'Español', lang: 'es' },
         ja: { label: '日本語', lang: 'ja' },
+        fr: { label: 'Français', lang: 'fr' },
       },
       sidebar: [
         {
@@ -52,23 +53,33 @@ export default defineConfig({
             de: 'Beginne hier',
             es: 'Comienza aqui',
             ja: 'ここからはじめる',
+            fr: 'Commencez ici',
           },
           items: [
             {
               label: 'Getting Started',
               link: 'getting-started',
-              translations: { ja: '入門' },
+              translations: {
+                de: 'Erste Schritte',
+                es: 'Empezando',
+                ja: '入門',
+                fr: 'Mise en route'
+              },
             },
             {
               label: 'Environmental Impact',
               link: 'environmental-impact',
-              translations: { ja: '環境への負荷' },
+              translations: {
+                es: 'Documentación ecológica',
+                ja: '環境への負荷',
+                fr: 'Impact environnemental'
+              },
             },
           ],
         },
         {
           label: 'Guides',
-          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド' },
+          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides' },
           autogenerate: { directory: 'guides' },
         },
         {
@@ -77,6 +88,7 @@ export default defineConfig({
             de: 'Referenz',
             es: 'Referencias',
             ja: 'リファレンス',
+            fr: 'Référence',
           },
           autogenerate: { directory: 'reference' },
         },

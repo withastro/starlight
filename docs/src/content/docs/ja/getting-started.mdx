@@ -11,7 +11,9 @@ Starlightはまだ開発の初期段階にあります。何か不具合を見�
 
 ## 新しいプロジェクトを作成する
 
-Starlightは、オールインワンのフレームワークである[Astro](https://astro.build)の上に構築されています。次のコマンドにより、Astro + Starlightの新しいプロジェクトを作成できます。
+Starlightは、[Astro](https://astro.build)の上に構築された、フル機能のドキュメント向けテーマです。
+
+以下のコマンドにより、Astro + Starlightの新しいプロジェクトを作成できます。
 
 <Tabs>
 <TabItem label="npm">
@@ -40,7 +42,7 @@ yarn create astro --template starlight
 </TabItem>
 </Tabs>
 
-これにより、サイトに必要なすべてのファイルと設定が含まれた、新しいプロジェクトディレクトリが作成されます。
+これにより、サイトに必要なすべてのファイルと設定が含まれた、新しい[プロジェクトディレクトリ](/ja/guides/project-structure/)が作成されます。
 
 :::tip[試してみよう]
 Starlightをブラウザで試すには、[StackBlitzでテンプレートを開きます](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)。
@@ -48,11 +50,24 @@ Starlightをブラウザで試すには、[StackBlitzでテンプレートを開
 
 ## Starlightでコンテンツを作成する
 
-Starlightでは、MarkdownとMDXでコンテンツを作成できます。
+以上で、Starlightに新しいコンテンツを追加したり、既存のファイルを持ち込んだりする準備ができました！
 
-`src/content/docs/`に`.md`または`.mdx`ファイルを作成して、新しいページを追加します。たとえば、`src/content/docs/hello-world.md`は、サイトの`/hello-world`からアクセスできます。
+### ファイルフォーマット
 
-Starlightのページは、ページの表示方法を制御するための、共通のフロントマタープロパティを認識します。
+Starlightでは、MarkdownとMDXでコンテンツを作成できます。（Markdocのサポートは、実験的な[AstroのMarkdocインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)をインストールして追加できます。）
+
+### ページの追加
+
+`src/content/docs/`に`.md`または`.mdx`ファイルを作成して、サイトに新しいページを自動で追加できます。ファイルを整理するためにサブフォルダを追加し、複数のパスセグメントを作成することもできます。
+
+```js
+`src/content/docs/hello-world.md` -> `your-site/hello-world`
+`src/content/docs/guides/faq.md` -> `your-site/guides/faq`
+```
+
+### 型安全なフロントマター
+
+Starlightのページは、ページの表示方法を制御するための、カスタマイズ可能な[共通のフロントマタープロパティ](/ja/reference/frontmatter/)を認識します。
 
 ```md
 ---
@@ -65,6 +80,6 @@ description: これはStarlightで作成されたサイトのページです
 
 ## Starlightサイトをデプロイする
 
-Starlightサイトの作成とカスタマイズが完了したら、お好みのウェブサーバーやホスティングプラットフォームにデプロイできます。Astroには、Netlify、Vercel、GitHub Pagesなど、人気のホスティングプラットフォームへのサポートが組み込まれているため、簡単なコマンドをいくつか実行するだけでウェブサイトをデプロイできます。
+Starlightサイトの作成とカスタマイズが完了したら、Netlify、Vercel、GitHub Pages、その他多くのお好みのウェブサーバーやホスティングプラットフォームにデプロイできます。
 
 [Astroサイトのデプロイについては、Astroのドキュメントを参照してください。](https://docs.astro.build/ja/guides/deploy/)
