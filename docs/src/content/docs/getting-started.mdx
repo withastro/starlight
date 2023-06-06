@@ -85,3 +85,40 @@ If you forget anything important, Starlight will let you know.
 Once you have created and customized your Starlight website, you can deploy it to a web server or hosting platform of your choice including Netlify, Vercel, GitHub Pages and many more.
 
 [Learn about deploying an Astro site in the Astro docs.](https://docs.astro.build/en/guides/deploy/)
+
+## Updating Starlight
+
+:::tip
+Because Starlight is beta software, there will be frequent updates and improvements. Be sure to update Starlight regularly!
+:::
+
+Starlight is an Astro integration, and is updated like any `@astrojs/*` integration:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# upgrade Starlight with npm
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# upgrade Starlight with pnpm
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# upgrade Starlight with yarn
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+You can see a full list of the changes made in each release in [the Starlight changelog](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
