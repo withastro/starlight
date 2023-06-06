@@ -135,8 +135,7 @@ Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Arc
 
 ### Plus de types pour l'aside
 
-Les apartés de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le faire trébucher.
-Si vous les utilisez souvent, c'est peut-être aussi le signe que la chose que vous documentez gagnerait à être repensée.
+Les apartés de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
 
 :::caution
 Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](../../../).
