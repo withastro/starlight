@@ -1,0 +1,111 @@
+---
+title: Composants
+description: Utilisation de composants dans MDX avec Starlight.
+---
+
+Les composants vous permettent de réutiliser facilement un élément d'interface utilisateur ou de style de manière cohérente.
+Il peut s'agir par exemple d'une carte de lien ou d'une intégration YouTube.
+Starlight prend en charge l'utilisation de composants dans les fichiers [MDX](https://mdxjs.com/) et fournit des composants courants que vous pouvez utiliser.
+
+[Pour en savoir plus sur la création de composants, consultez les Astro Docs](https://docs.astro.build/fr/core-concepts/astro-components/).
+
+## Utilisation d'un composant
+
+Vous pouvez utiliser un composant en l'important dans votre fichier MDX et en le rendant sous forme de balise JSX.
+Ces balises ressemblent à des balises HTML mais commencent par une lettre majuscule correspondant au nom de votre déclaration `import` :
+
+```mdx
+---
+# src/content/docs/index.mdx
+title: Bienvenue dans ma documentation
+---
+
+import SomeComponent from '../../components/SomeComponent.astro';
+import AnotherComponent from '../../components/AnotherComponent.astro';
+
+<SomeComponent prop="something" />
+
+<AnotherComponent>
+  Les composants peuvent également contenir du **contenu imbriqué**.
+</AnotherComponent>
+```
+
+Starlight étant alimenté par Astro, vous pouvez ajouter la prise en charge des composants construits avec n'importe quel [cadre d'interface utilisateur pris en charge (React, Preact, Svelte, Vue, Solid, Lit et Alpine)](https://docs.astro.build/fr/core-concepts/framework-components/) dans vos fichiers MDX.
+Pour en savoir plus sur [l'utilisation de composants dans MDX](https://docs.astro.build/fr/guides/markdown-content/#using-components-in-mdx), consultez la documentation Astro.
+
+## Composants intégrés
+
+Starlight fournit quelques composants intégrés pour les cas d'utilisation courants de la documentation.
+Ces composants sont disponibles dans le paquet `@astrojs/starlight/components`.
+
+### Onglets
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Vous pouvez afficher une interface à onglets en utilisant les composants `<Tabs>` et `<TabItem>`.
+Chaque `<TabItem>` doit avoir un `label` à afficher aux utilisateurs.
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+```
+
+Le code ci-dessus génère les onglets suivants sur la page :
+
+<Tabs>
+  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+### Cards
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Vous pouvez afficher du contenu dans une boîte correspondant aux styles de Starlight en utilisant le composant `<Card>`.
+Enveloppez plusieurs cartes dans le composant `<CardGrid>` pour afficher les cartes côte à côte lorsqu'il y a suffisamment d'espace.
+
+Une `<Card>` nécessite un `titre` et peut éventuellement inclure un attribut `icon` fixé au nom de [l'une des icônes intégrées de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="Check this out">Contenu intéressant que vous souhaitez mettre en évidence.</Card>
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+<Card title="Check this out">Contenu intéressant que vous souhaitez mettre en évidence.</Card>
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Moons" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+
+:::tip
+Utilisez une grille de cartes sur votre page d'accueil pour afficher les principales caractéristiques de votre projet.
+Ajoutez l'attribut `stagger` pour décaler verticalement la deuxième colonne de cartes et ajouter un intérêt visuel :
+
+```astro
+<CardGrid stagger>
+  <!-- cards -->
+</CardGrid>
+```
+
+:::
