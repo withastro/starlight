@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.1.1
+
+### Patch Changes
+
+- [`6df9c4e`](https://github.com/withastro/starlight/commit/6df9c4e14aa9151c3627f952be4281b451162ebd) Thanks [@delucis](https://github.com/delucis)! - Add French language support — Thanks [@thomasbnt](https://github.com/thomasbnt)!
+
+- [#158](https://github.com/withastro/starlight/pull/158) [`92d82f5`](https://github.com/withastro/starlight/commit/92d82f534c6ff8513b01f9f26748d9980a6d4c79) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fix word wrapping in search modal on narrow screens
+
 ## 0.1.0
 
 ### Minor Changes
