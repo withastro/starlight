@@ -1,6 +1,6 @@
 {
     "skipLink.label": "Aller au contenu",
-    "search.label": "rechercher",
+    "search.label": "Rechercher",
     "search.shortcutLabel": "(Presser / pour rechercher)",
     "search.cancelLabel": "Annuler",
     "themeSelect.accessibleLabel": "Selectionner le thème",
@@ -9,7 +9,7 @@
     "themeSelect.auto": "Auto",
     "languageSelect.accessibleLabel": "Selectionner la langue",
     "menuButton.accessibleLabel": "Menu",
-    "sidebarNav.accessibleLabel": "Main",
+    "sidebarNav.accessibleLabel": "principale",
     "tableOfContents.onThisPage": "Sur cette page",
     "tableOfContents.overview": "Vue d'ensemble",
     "i18n.untranslatedContent": "Ce contenu n'est pas encore disponible dans votre langue.",
