@@ -44,6 +44,7 @@ export default defineConfig({
         de: { label: 'Deutsch', lang: 'de' },
         es: { label: 'Español', lang: 'es' },
         ja: { label: '日本語', lang: 'ja' },
+        fr: { label: 'Français', lang: 'fr' },
       },
       sidebar: [
         {
@@ -52,6 +53,7 @@ export default defineConfig({
             de: 'Beginne hier',
             es: 'Comienza aqui',
             ja: 'ここからはじめる',
+            fr: 'Commencez ici',
           },
           items: [
             {
@@ -61,6 +63,7 @@ export default defineConfig({
                 de: 'Erste Schritte',
                 es: 'Empezando',
                 ja: '入門',
+                fr: 'Mise en route'
               },
             },
             {
@@ -69,13 +72,14 @@ export default defineConfig({
               translations: {
                 es: 'Documentación ecológica',
                 ja: '環境への負荷',
+                fr: 'Impact environnemental'
               },
             },
           ],
         },
         {
           label: 'Guides',
-          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド' },
+          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides' },
           autogenerate: { directory: 'guides' },
         },
         {
@@ -84,6 +88,7 @@ export default defineConfig({
             de: 'Referenz',
             es: 'Referencias',
             ja: 'リファレンス',
+            fr: 'Référence',
           },
           autogenerate: { directory: 'reference' },
         },
