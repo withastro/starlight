@@ -31,11 +31,11 @@ export default defineConfig({
         },
         {
           tag: 'meta',
-          attrs: { property: 'og:image', content: site + 'og.jpg' },
+          attrs: { property: 'og:image', content: site + 'og.jpg?v=1' },
         },
         {
           tag: 'meta',
-          attrs: { property: 'twitter:image', content: site + 'og.jpg' },
+          attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
         },
       ],
       customCss: process.env.NO_GRADIENTS ? [] : ['/src/assets/landing.css'],
@@ -57,12 +57,19 @@ export default defineConfig({
             {
               label: 'Getting Started',
               link: 'getting-started',
-              translations: { es: "Empezando", ja: '入門' },
+              translations: {
+                de: 'Erste Schritte',
+                es: 'Empezando',
+                ja: '入門',
+              },
             },
             {
               label: 'Environmental Impact',
               link: 'environmental-impact',
-              translations: { es: "Documentación ecológica", ja: '環境への負荷' },
+              translations: {
+                es: 'Documentación ecológica',
+                ja: '環境への負荷',
+              },
             },
           ],
         },
