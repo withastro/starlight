@@ -104,7 +104,7 @@ You can nest any other Markdown content types inside an aside, but asides are be
 Starlight is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
 
 ```sh
-npm run create astro@latest --template starlight
+npm create astro@latest -- --template starlight
 ```
 
 :::
@@ -114,7 +114,7 @@ npm run create astro@latest --template starlight
 Starlight is a documentation website toolkit built with [Astro](https://astro.build/). You can get started with this command:
 
 ```sh
-npm run create astro@latest --template starlight
+npm create astro@latest -- --template starlight
 ```
 
 :::
