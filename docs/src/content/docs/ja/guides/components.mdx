@@ -5,9 +5,11 @@ description: StarlightにおけるMDXでのコンポーネントの利用。
 
 コンポーネントにより、UI やスタイリングの一部を一貫性を保って簡単に再利用できます。例として、リンクカードやYouTubeの埋め込みなどが考えられます。Starlightは[MDX](https://mdxjs.com/)ファイルでのコンポーネントの使用をサポートしており、すぐに使える一般的なコンポーネントもいくつか提供しています。
 
+[コンポーネントの作り方について、詳しくはAstroドキュメントを参照してください](https://docs.astro.build/ja/core-concepts/astro-components/)。
+
 ## コンポーネントを使う
 
-コンポーネントは、MDXファイルにインポートしてJSXタグとして呼び出すことで使用できます。HTMLタグのように見えますが、`import`文の名前と同じ大文字で始まります。
+コンポーネントは、MDXファイルにインポートしてJSXタグとしてレンダリングすることで使用できます。HTMLタグのように見えますが、`import`文の名前と同じ大文字で始まります。
 
 ```mdx
 ---
@@ -25,11 +27,11 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 </AnotherComponent>
 ```
 
-StarlightはAstroの上で動作しているため、どのUIフレームワークで作成されたコンポーネントでもMDXファイルで使用できます。[MDXでのコンポーネントの使用](https://docs.astro.build/ja/guides/markdown-content/#using-components-in-mdx)について、詳しくはAstroドキュメントを参照してください。
+StarlightはAstro製であるため、[サポート対象のUIフレームワーク（React、Preact、Svelte、Vue、Solid、Lit、Alpine）](https://docs.astro.build/ja/core-concepts/framework-components/)で作成されたコンポーネントであればMDXファイルで使用できます。[MDXでのコンポーネントの使用](https://docs.astro.build/ja/guides/markdown-content/#using-components-in-mdx)について、詳しくはAstroドキュメントを参照してください。
 
 ## 組み込みのコンポーネント
 
-Starlightは、一般的なドキュメントのユースケースに対して組み込みのコンポーネントを提供しています。これらのコンポーネントは、`@astrojs/starlight/components`パッケージから利用できます。
+Starlightは、一般的なドキュメントのユースケースに対して組み込みのコンポーネントをいくつか提供しています。これらのコンポーネントは、`@astrojs/starlight/components`パッケージから利用できます。
 
 ### タブ
 
