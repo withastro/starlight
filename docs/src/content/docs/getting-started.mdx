@@ -6,7 +6,7 @@ description: Learn how to start building your next documentation site with Starl
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 :::caution[Work in progress]
-Starlight is in early development.
+Starlight is in early development. There will be frequent updates, so be sure to [update Starlight regularly](#updating-starlight)!
 If you find something that’s not working, [open an issue on GitHub](https://github.com/withastro/starlight/issues/new/choose) or let us know on [Discord](https://astro.build/chat).
 :::
 
@@ -85,3 +85,34 @@ If you forget anything important, Starlight will let you know.
 Once you have created and customized your Starlight website, you can deploy it to a web server or hosting platform of your choice including Netlify, Vercel, GitHub Pages and many more.
 
 [Learn about deploying an Astro site in the Astro docs.](https://docs.astro.build/en/guides/deploy/)
+
+## Updating Starlight
+
+Starlight is an Astro integration, and is updated like any `@astrojs/*` integration:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# upgrade Starlight with npm
+npm upgrade @astrojs/starlight
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# upgrade Starlight with pnpm
+pnpm upgrade @astrojs/starlight
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# upgrade Starlight with yarn
+yarn upgrade @astrojs/starlight
+```
+
+</TabItem>
+</Tabs>
