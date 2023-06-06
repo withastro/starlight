@@ -46,7 +46,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
    Tu `defaultLocale` se utilizará para el contenido y las etiquetas de la UI de respaldo, por lo que elige el idioma en el que es más probable que comiences a escribir contenido o que ya tengas contenido.
 
 2. Crea un directorio para cada idioma en `src/content/docs/`.
-   Por ejemplo, suponiendo la configuración mostrada en el paso 1, esto podría verse así:
+   Por ejemplo, para la configuración mostrada  anteriormente, crea las siguientes carpetas:
 
    <FileTree>
 
@@ -59,11 +59,13 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 
    </FileTree>
 
-3. Ahora puedes crear archivos de contenido en los directorios de tu idioma. Utiliza el mismo nombre de archivo para vincular páginas en todos los idiomas. Por ejemplo, `ar/index.md` y `en/index.md` representarían la página de inicio para árabe e inglés respectivamente.
+3. Ahora puedes agregar archivos de contenido en los directorios de tu idioma. Utiliza el mismo nombre de archivo para asociar páginas entre idiomas y aprovechar todas las características de internacionalización (i18n) de Starlight, como contenido de respaldo, avisos de traducción y más.
+
+Por ejemplo, crea `ar/index.md` y `en/index.md` para representar la página de inicio en árabe e inglés, respectivamente.
 
 ### Usa una raíz de configuración regional
 
-Puedes usar una raíz de configuración regional para servir un idioma sin ningún prefijo i18n en tu ruta. Por ejemplo, si el inglés es tu configuración regional, una ruta de página en inglés podría verse como `/about` en lugar de `/en/about`.
+Puedes usar una raíz de configuración regional para servir un idioma sin ningún prefijo i18n en tu ruta. Por ejemplo, si el inglés es tu configuración regional, una ruta de página en inglés se vería como `/about` en lugar de `/en/about`.
 
 Para establecer una configuración regional, usa la clave `root` en tu configuración de `locales`. Si la configuración regional raíz también es la configuración regional predeterminada para tu contenido, elimina `defaultLocale` o configúralo en `'root'`.
 
@@ -92,7 +94,7 @@ export default defineConfig({
 });
 ```
 
-Cuando uses una `root` locale, coloca las páginas para ese idioma directamente en `src/content/docs/` en lugar de en una carpeta de idioma dedicada. Por ejemplo, aquí están los archivos de la página de inicio para inglés y chino cuando se usa la configuración anterior:
+Cuando uses una `root` locale, mantén las páginas para ese idioma directamente en `src/content/docs/` en lugar de en una carpeta de idioma dedicada. Por ejemplo, aquí están los archivos de la página de inicio para inglés y chino cuando se usa la configuración anterior:
 
 <FileTree>
 
@@ -107,27 +109,43 @@ Cuando uses una `root` locale, coloca las páginas para ese idioma directamente 
 
 #### Sitios monolingües
 
-Si tienes un sitio de un solo idioma, puedes establecer la configuración regional raíz para configurar tu idioma.
+De forma predeterminada, Starlight es un sitio monolingüe (en inglés). Para crear un sitio de un solo idioma en otro idioma, configúralo como el `root` en tu configuración de `locales`:
 
-Esto te permite anular el idioma predeterminado de Starlight, que es el inglés, pero no habilitará otras funciones de internacionalización como el selector de idiomas.
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'Mis docs',
+      locales: {
+        root: {
+          label: '简体中文',
+          lang: 'zh-CN',
+        },
+      },
+    }),
+  ],
+});
+```
+
+Esto te permite anular el idioma predeterminado de Starlight sin habilitar otras características de internacionalización para sitios multilingües, como el selector de idioma.
 
 ## Contenido de respaldo
 
-Starlight espera que crees páginas equivalentes en todos tus idiomas. Por ejemplo, si tienes un archivo `en/about.md`, debes crear un `about.md` para cada otro idioma que admitas.
+Starlight espera que crees páginas equivalentes en todos tus idiomas. Por ejemplo, si tienes un archivo `en/about.md`, crea un archivo `about.md` para cada otro idioma que admitas. Esto permite que Starlight proporcione automáticamente contenido de respaldo para las páginas que aún no se han traducido.
 
-Si una traducción no está disponible para un idioma, Starlight mostrará a los lectores el contenido de esa página en el idioma predeterminado (establecido a través de `defaultLocale`). Por ejemplo, si aún no has creado una versión en francés de una página Acerca de y tu idioma predeterminado es el inglés, los visitantes a `/fr/about` verán el contenido en inglés. Esto te ayuda a agregar contenido en tu idioma predeterminado y luego traducirlo progresivamente cuando tus traductores tengan tiempo.
+Si no hay una traducción disponible para un idioma, Starlight mostrará a los lectores el contenido de esa página en el idioma predeterminado (establecido mediante `defaultLocale`). Por ejemplo, si aún no has creado una versión en francés de tu página Acerca de y tu idioma predeterminado es el inglés, los visitantes a `/fr/about` verán el contenido en inglés de `/en/about` con un aviso de que esta página aún no se ha traducido. Esto te ayuda a agregar contenido en tu idioma predeterminado y luego traducirlo progresivamente cuando tus traductores tengan tiempo.
 
 ## Traduce la UI de Starlight
 
-Algunos de los elementos de la UI de Starlight requieren etiquetas de texto para funcionar.
-Por ejemplo, la tabla de contenido de esta página tiene un encabezado "En esta página" en inglés.
-Nosotros apuntamos a enviar estas etiquetas en tantos idiomas como sea posible, pero actualmente solo tenemos soporte para inglés, alemán, japonés y español.
-
-Puedes proporcionar traducciones para los idiomas adicionales que admites, o anular nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
+Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, francés, alemán, japonés, portugués y español. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 
    ```js
+   // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -137,7 +155,7 @@ Puedes proporcionar traducciones para los idiomas adicionales que admites, o anu
    };
    ```
 
-2. Crea un archivo JSON en `src/content/i18n/` para cada idioma al que quieras traducir la UI de Starlight.
+2. Crea un archivo JSON en `src/content/i18n/` para cada idioma adicional para el cual deseas proporcionar strings de traducción de la UI.
    Por ejemplo, esto agregaría archivos de traducción para árabe y chino simplificado:
 
    <FileTree>
@@ -150,7 +168,9 @@ Puedes proporcionar traducciones para los idiomas adicionales que admites, o anu
 
    </FileTree>
 
-3. Agrega traducciones para las claves que deseas traducir a los archivos JSON. Puedes usar los valores predeterminados en inglés para ayudarte a traducir:
+3. Agrega traducciones para las claves que deseas traducir en los archivos JSON. Traduce solo los valores, dejando las claves en inglés (p. ej. `"search.label": "Buscar"`).
+
+Estos son los valores predeterminados en inglés de las cadenas existentes que se incluyen en Starlight:
 
    ```json
    {
