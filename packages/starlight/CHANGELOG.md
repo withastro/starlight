@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- [#175](https://github.com/withastro/starlight/pull/175) [`e322521`](https://github.com/withastro/starlight/commit/e3225214f99e358c13f6d44928206e33fb86a03a) Thanks [@delucis](https://github.com/delucis)! - Split `withBase` URL helper to fix use with files.
+- [#174](https://github.com/withastro/starlight/pull/174) [`6ab31b4`](https://github.com/withastro/starlight/commit/6ab31b4900166f952c1ca5ec4e4a1ef66f31be97) Thanks [@rviscomi](https://github.com/rviscomi)! - Split `withBase` URL helper to fix use with files.
 
 - [#168](https://github.com/withastro/starlight/pull/168) [`cb18eef`](https://github.com/withastro/starlight/commit/cb18eef4fda8227a6c5ec73589526dd7fbb8f4a6) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Fix bottom padding on left sidebar
 
