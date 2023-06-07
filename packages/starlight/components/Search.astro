@@ -108,6 +108,7 @@ const t = useTranslations(Astro.props.locale);
       new PagefindUI({
         element: '#starlight__search',
         baseUrl: import.meta.env.BASE_URL,
+        bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/_pagefind/',
         showImages: false,
       });
     });
