@@ -44,7 +44,7 @@ Les chemins d'accès relatifs aux images sont également supportés pour les ima
 ```md
 // src/content/docs/page-1.md
 
-![Une fusée dans l'espace.](../../assets/images/rocket.svg)
+![Une fusée dans l'espace](../../assets/images/rocket.svg)
 ```
 
 ## En-têtes

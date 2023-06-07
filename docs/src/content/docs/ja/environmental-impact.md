@@ -76,9 +76,11 @@ JavaScriptの解析とコンパイルは、ブラウザが実行する最も高�
 | --------------------------- | ------------------ |
 | [Starlight][sl-carbon]      | 0.01g              |
 | [VitePress][vp-carbon]      | 0.05g              |
+| [Docus][dc-carbon]          | 0.05g              |
 | [Sphinx][sx-carbon]         | 0.07g              |
 | [MkDocs][mk-carbon]         | 0.10g              |
 | [Nextra][nx-carbon]         | 0.11g              |
+| [docsify][dy-carbon]        | 0.11g              |
 | [Docusaurus][ds-carbon]     | 0.24g              |
 | [Read the Docs][rtd-carbon] | 0.24g              |
 | [GitBook][gb-carbon]        | 0.71g              |
@@ -87,9 +89,11 @@ JavaScriptの解析とコンパイルは、ブラウザが実行する最も高�
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
+[dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
@@ -99,6 +103,7 @@ JavaScriptの解析とコンパイルは、ブラウザが実行する最も高�
 ### ツール
 
 - [Website Carbon Calculator][wcc]
+- [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
 - [Ecoping](https://ecoping.earth/)
