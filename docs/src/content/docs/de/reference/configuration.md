@@ -15,7 +15,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      title: "My delightful docs site",
+      title: 'My delightful docs site',
     }),
   ],
 });
