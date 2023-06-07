@@ -3,7 +3,7 @@ title: Authoring Content in Markdown
 description: An overview of the Markdown syntax Starlight supports.
 ---
 
-Starlight supports the full range of [Markdown](https://daringfireball.net/projects/markdown/) syntax in `.md` files as well as frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) to define metadata such as a title and description. 
+Starlight supports the full range of [Markdown](https://daringfireball.net/projects/markdown/) syntax in `.md` files as well as frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) to define metadata such as a title and description.
 
 Please be sure to check the [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) or [Markdoc docs](https://markdoc.dev/docs/syntax) if using those file formats, as Markdown support and usage can differ.
 
@@ -44,13 +44,12 @@ Relative image paths are also supported for images stored locally in your projec
 ```md
 // src/content/docs/page-1.md
 
-![A rocketship in space.](../../assets/images/rocket.svg)
+![A rocketship in space](../../assets/images/rocket.svg)
 ```
-
 
 ## Headings
 
-You can structure content using a heading. Headings in Markdown are indicated by a number of `#` at the start of the line. 
+You can structure content using a heading. Headings in Markdown are indicated by a number of `#` at the start of the line.
 
 ### How to structure page content in Starlight
 
@@ -67,7 +66,6 @@ This page describes how to use Markdown in Starlight.
 ## Inline Styles
 
 ## Headings
-
 ```
 
 ### Automatic heading anchor links
@@ -79,16 +77,17 @@ Using headings in Markdown will automatically give you anchor links so you can l
 title: My page of content
 description: How to use Starlight's built-in anchor links
 ---
+
 ## Introduction
 
 I can link to [my conclusion](#conclusion) lower on the same page.
 
 ## Conclusion
 
-`https://my-site.com/page1/#introduction` navigates directly to my Introduction. 
+`https://my-site.com/page1/#introduction` navigates directly to my Introduction.
 ```
-Level 2 (`<h2>`) and Level 3 (`<h3>`) headings will automatically appear in the page table of contents.
 
+Level 2 (`<h2>`) and Level 3 (`<h3>`) headings will automatically appear in the page table of contents.
 
 ## Asides
 
@@ -208,4 +207,3 @@ Long, single-line code blocks should not wrap. They should horizontally scroll i
 ## Other common Markdown features
 
 Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) for a quick overview of all the Markdown syntax elements.
-

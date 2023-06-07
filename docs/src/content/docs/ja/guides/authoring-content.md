@@ -44,7 +44,7 @@ MarkdownとMDXは、スクリーンリーダーや支援技術のための代替
 ```md
 // src/content/docs/page-1.md
 
-![宇宙空間に浮かぶロケット。](../../assets/images/rocket.svg)
+![宇宙空間に浮かぶロケット](../../assets/images/rocket.svg)
 ```
 
 
