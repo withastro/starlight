@@ -1,6 +1,6 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
-import { withBase } from './base';
+import { pathWithBase } from './base';
 import { pickLang } from './i18n';
 import { Route, getLocaleRoutes, routes } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
@@ -109,7 +109,7 @@ function linkFromConfig(
 
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
-  if (!isAbsolute(href)) href = withBase(href);
+  if (!isAbsolute(href)) href = pathWithBase(href);
   const isCurrent = href === currentPathname;
   return { type: 'link', label, href, isCurrent };
 }
