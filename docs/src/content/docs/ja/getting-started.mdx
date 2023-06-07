@@ -83,3 +83,40 @@ description: これはStarlightで作成されたサイトのページです
 Starlightサイトの作成とカスタマイズが完了したら、Netlify、Vercel、GitHub Pages、その他多くのお好みのウェブサーバーやホスティングプラットフォームにデプロイできます。
 
 [Astroサイトのデプロイについては、Astroのドキュメントを参照してください。](https://docs.astro.build/ja/guides/deploy/)
+
+## Starlightを更新する
+
+:::tip[ヒント]
+Starlightはベータ版のソフトウェアであるため、頻繁に更新や改善がおこなわれます。Starlightを定期的に更新してください！
+:::
+
+StarlightはAstroインテグレーションであり、他の`@astrojs/*`インテグレーションと同様に更新できます。
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# npmでStarlightをアップグレードする
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# pnpmでStarlightをアップグレードする
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# yarnでStarlightをアップグレードする
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+各リリースでおこなわれた変更の全リストは、[Starlightのチェンジログ](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md)で確認できます。
