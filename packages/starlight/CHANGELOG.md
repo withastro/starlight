@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.1.2
+
+### Patch Changes
+
+- [#175](https://github.com/withastro/starlight/pull/175) [`e322521`](https://github.com/withastro/starlight/commit/e3225214f99e358c13f6d44928206e33fb86a03a) Thanks [@delucis](https://github.com/delucis)! - Split `withBase` URL helper to fix use with files.
+
+- [#168](https://github.com/withastro/starlight/pull/168) [`cb18eef`](https://github.com/withastro/starlight/commit/cb18eef4fda8227a6c5ec73589526dd7fbb8f4a6) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Fix bottom padding on left sidebar
+
+- [#167](https://github.com/withastro/starlight/pull/167) [`990ec53`](https://github.com/withastro/starlight/commit/990ec53dee099fdb6d113a3be5ef375c73e6945a) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Add `bundlePath` option to Pagefind configuration
+
+- [`4f666ba`](https://github.com/withastro/starlight/commit/4f666ba4fad7118a31bae819eb6be068da9e4d94) Thanks [@delucis](https://github.com/delucis)! - Fix focus outline positioning in tabs
+
 ## 0.1.1
 
 ### Patch Changes
