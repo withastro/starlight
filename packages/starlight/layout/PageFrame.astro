@@ -91,8 +91,11 @@ const t = useTranslations(locale);
   }
 
   @media print {
+    header {
+      position: relative !important;
+    }
     .main-frame {
-      padding-inline-start: 0 !important;
+      padding-block-start: 0 !important;
     }
   }
 </style>
