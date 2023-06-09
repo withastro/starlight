@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.1.3
+
+### Patch Changes
+
+- [#183](https://github.com/withastro/starlight/pull/183) [`89e0a04`](https://github.com/withastro/starlight/commit/89e0a04c26639246f550957acda2285e50417729) Thanks [@delucis](https://github.com/delucis)! - Fix disclosure caret rotation in sidebar sub-groups
+
+- [`689617b`](https://github.com/withastro/starlight/commit/689617bf757bf0f10ff1b1b6646af2c6614d6f81) Thanks [@delucis](https://github.com/delucis)! - Fix Markdown table overflow
+
+- [#185](https://github.com/withastro/starlight/pull/185) [`4844915`](https://github.com/withastro/starlight/commit/4844915c25c9cdfb852e41584d93abfd85b82d08) Thanks [@delucis](https://github.com/delucis)! - Support setting an SVG as the hero image file
+
 ## 0.1.2
 
 ### Patch Changes
