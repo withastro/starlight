@@ -1,6 +1,6 @@
-import fs from 'fs';
+import * as fs from 'node:fs';
 
-export function tryGetFrontMatterBlock(filePath: string): string {
+export function tryGetFrontMatterBlock(filePath: string): string | undefined {
 	const contents = fs.readFileSync(filePath, 'utf8');
 	const matches = contents.match(/^\s*---([\S\s]*?)\n---/);
 	if (!matches) return '';

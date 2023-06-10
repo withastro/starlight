@@ -11,6 +11,7 @@
     "@actions/core": "^1.10.0",
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
+    "@types/html-escaper": "^3.0.0",
     "astro": "^2.5.0",
     "dedent-js": "^1.0.1",
     "fast-glob": "^3.2.12",

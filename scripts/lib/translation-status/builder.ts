@@ -43,7 +43,7 @@ export class TranslationStatusBuilder {
 		targetLanguages: string[];
 		languageLabels: { [key: string]: string };
 		githubRepo: string;
-		githubToken?: string;
+		githubToken?: string | undefined;
 	}) {
 		this.pageSourceDir = config.pageSourceDir;
 		this.htmlOutputFilePath = path.resolve(config.htmlOutputFilePath);
@@ -51,7 +51,7 @@ export class TranslationStatusBuilder {
 		this.targetLanguages = config.targetLanguages;
 		this.languageLabels = config.languageLabels;
 		this.githubRepo = config.githubRepo;
-		this.githubToken = config.githubToken;
+		this.githubToken = config.githubToken ?? "";
 		this.git = simpleGit({
 			maxConcurrentProcesses: Math.max(2, Math.min(32, os.cpus().length)),
 		});
@@ -138,17 +138,16 @@ export class TranslationStatusBuilder {
 		const updatedPages = await Promise.all(
 			pagePaths.sort().map(async (pagePath) => {
 				const pathParts = pagePath.split('/');
-				if (pathParts.length < 2) return;
-				const lang = pathParts[0];
-				const subpath = pathParts.splice(1).join('/');
+				const isLanguageSubpathIncluded = this.targetLanguages.includes(pathParts[0]!);
 
-				// Ignore pages with languages not contained in our configuration
-				if (!pages[lang]) return;
+				// If the first path of a file does not belong to a language, it will be by default a page of the original language set.
+				const lang = isLanguageSubpathIncluded ? pathParts[0] : this.sourceLanguage;
+				const subpath = pathParts.splice(1).join('/');
 
 				// Create or update page data for the page
 				return {
 					lang,
-					subpath,
+					subpath: isLanguageSubpathIncluded ? subpath : pagePath,
 					pageData: await this.getSinglePageData(pagePath),
 				};
 			})
@@ -158,7 +157,7 @@ export class TranslationStatusBuilder {
 		updatedPages.forEach((page) => {
 			if (!page) return;
 			const { lang, subpath, pageData } = page;
-			pages[lang][subpath] = pageData;
+			pages[lang!]![subpath] = pageData;
 		});
 
 		return pages;
@@ -176,7 +175,7 @@ export class TranslationStatusBuilder {
 
 		// Retrieve i18nReady flag from frontmatter
 		const frontMatterBlock = tryGetFrontMatterBlock(fullFilePath);
-		const i18nReady = /^\s*i18nReady:\s*true\s*$/m.test(frontMatterBlock);
+		const i18nReady = /^\s*i18nReady:\s*true\s*$/m.test(frontMatterBlock!);
 
 		return {
 			...(i18nReady ? { i18nReady: true } : {}),
@@ -219,8 +218,8 @@ export class TranslationStatusBuilder {
 		const sourcePages = pages[this.sourceLanguage];
 		const arrContent: PageTranslationStatus[] = [];
 
-		Object.keys(sourcePages).forEach((subpath) => {
-			const sourcePage = sourcePages[subpath];
+		Object.keys(sourcePages!).forEach((subpath) => {
+			const sourcePage = sourcePages![subpath]!;
 
 			const content: PageTranslationStatus = {
 				subpath,
@@ -230,7 +229,7 @@ export class TranslationStatusBuilder {
 			};
 
 			this.targetLanguages.forEach((lang) => {
-				const i18nPage = pages[lang][subpath];
+				const i18nPage = pages[lang]![subpath]!;
 				content.translations[lang] = {
 					page: i18nPage,
 					isMissing: !i18nPage,
@@ -264,11 +263,10 @@ export class TranslationStatusBuilder {
 		subpath: string;
 		query?: string;
 	}) {
-		//! TODO: Add lang param
 		const noDotSrcDir = this.pageSourceDir.replace(/^.\//, '');
+		const isSrcLang = lang === this.sourceLanguage;
 		return (
-			`https://github.com/${this.githubRepo}/${type}/${refName}` +
-			`/${noDotSrcDir}/${subpath}${query}`
+			`https://github.com/${this.githubRepo}/${type}/${refName}/${noDotSrcDir}${isSrcLang ? '' : `/${lang}`}/${subpath}${query}`
 		);
 	}
 
@@ -302,8 +300,8 @@ export class TranslationStatusBuilder {
 		const lines: string[] = [];
 
 		this.targetLanguages.forEach((lang) => {
-			const missing = statusByPage.filter((content) => content.translations[lang].isMissing);
-			const outdated = statusByPage.filter((content) => content.translations[lang].isOutdated);
+			const missing = statusByPage.filter((content) => content.translations[lang]!.isMissing);
+			const outdated = statusByPage.filter((content) => content.translations[lang]!.isOutdated);
 			lines.push('<details>');
 			lines.push(
 				`<summary><strong>` +
@@ -328,10 +326,10 @@ export class TranslationStatusBuilder {
 							`<li>` +
 							`${this.renderLink(content.githubUrl, content.subpath)} ` +
 							`(${this.renderLink(
-								content.translations[lang].githubUrl,
+								content.translations[lang]!.githubUrl,
 								'outdated translation'
 							)}, ${this.renderLink(
-								content.translations[lang].sourceHistoryUrl,
+								content.translations[lang]!.sourceHistoryUrl,
 								'source change history'
 							)})` +
 							`</li>`
@@ -383,6 +381,7 @@ export class TranslationStatusBuilder {
 	renderTranslationStatusByPage(statusByPage: PageTranslationStatus[]) {
 		const lines: string[] = [];
 
+		lines.push('<div class="table-container"/>')
 		lines.push('<table role="table" class="status-by-page">');
 
 		lines.push('<thead><tr>');
@@ -399,7 +398,7 @@ export class TranslationStatusBuilder {
 			cols.push(this.renderLink(content.githubUrl, content.subpath));
 			cols.push(
 				...this.targetLanguages.map((lang) => {
-					const translation = content.translations[lang];
+					const translation = content.translations[lang]!;
 					if (translation.isMissing)
 						return `<span title="${lang}: Missing"><span aria-hidden="true">❌</span></span>`;
 					if (translation.isOutdated)
@@ -413,9 +412,10 @@ export class TranslationStatusBuilder {
 		lines.push('</tbody>');
 
 		lines.push('</table>');
-
+		
 		lines.push(`\n<sup>❌ Missing &nbsp; 🔄 Needs updating &nbsp; ✔ Completed</sup>`);
-
+		lines.push('</div>');
+		
 		return lines.join('\n');
 	}
 
@@ -460,6 +460,6 @@ export class TranslationStatusBuilder {
 	}
 
 	renderLink(href: string, text: string, className = ''): string {
-		return `<a href="${escape(href)}" class="${escape(className)}">${escape(text)}</a>`;
+		return `<a href="${escape(href)}" class="${escape(className)}" target="_blank" rel="noopener noreferrer">${escape(text)}</a>`;
 	}
 }
