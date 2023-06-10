@@ -119,8 +119,7 @@ export class TranslationStatusBuilder {
 			githubToken: this.githubToken,
 		});
 
-		//! TODO: Filter this
-		return pullRequests;
+		return pullRequests.filter((pr) => pr.labels.find((label) => label.name === 'i18n'));
 	}
 
 	async createPageIndex(): Promise<PageIndex> {
