@@ -217,12 +217,10 @@ export class TranslationStatusBuilder {
 
 	getTranslationStatusByPage(pages: PageIndex): PageTranslationStatus[] {
 		const sourcePages = pages[this.sourceLanguage];
-		console.log(pages);
 		const arrContent: PageTranslationStatus[] = [];
 
 		Object.keys(sourcePages).forEach((subpath) => {
 			const sourcePage = sourcePages[subpath];
-			if (!sourcePage.i18nReady) return;
 
 			const content: PageTranslationStatus = {
 				subpath,
@@ -266,10 +264,11 @@ export class TranslationStatusBuilder {
 		subpath: string;
 		query?: string;
 	}) {
+		//! TODO: Add lang param
 		const noDotSrcDir = this.pageSourceDir.replace(/^.\//, '');
 		return (
 			`https://github.com/${this.githubRepo}/${type}/${refName}` +
-			`/${noDotSrcDir}/${lang}/${subpath}${query}`
+			`/${noDotSrcDir}/${subpath}${query}`
 		);
 	}
 
@@ -448,7 +447,14 @@ export class TranslationStatusBuilder {
 		const doneLength = size - outdatedLength - missingLength;
 		return (
 			'<span class="progress-bar" aria-hidden="true">' +
-			 "Nothing"+
+			[
+				[doneLength, '🟪'],
+				[outdatedLength, '🟧'],
+				[missingLength, '⬜'],
+			]
+				.map(([length, icon]) => Array(length).fill(icon))
+				.flat()
+				.join('') +
 			'</span>'
 		);
 	}
