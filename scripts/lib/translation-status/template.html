@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+		<meta name="theme-color" content="hsl(256, 44%, 15%)" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="hsl(273, 37%, 93%)" media="(prefers-color-scheme: light)" />
+
+		<title>Astro Docs Translation Status</title>
+		<meta
+			name="description"
+			content="Translation progress tracker for the Astro Docs site. See how much has been translated in your language and get involved!"
+		/>
+		<link rel="canonical" href="https://i18n.docs.astro.build/" />
+		<meta property="og:title" content="Astro Docs Translation Status" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://i18n.docs.astro.build/" />
+		<meta
+			property="og:description"
+			content="Translation progress tracker for the Astro Docs site. See how much has been translated in your language and get involved!"
+		/>
+
+		<style>
+			:root {
+				--font-fallback: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif,
+					Apple Color Emoji, Segoe UI Emoji;
+				--font-body: system-ui, var(--font-fallback);
+				--font-mono: 'IBM Plex Mono', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+					'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+					'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
+				--theme-navbar-height: 6rem;
+				--theme-mobile-toc-height: 4rem;
+				--color-base-gray: 250, 14%;
+				--color-base-orange: 22, 100%;
+				--color-gray-90: var(--color-base-gray), 90%;
+				--color-orange: var(--color-base-orange), 60%;
+				--theme-accent: #539bf5;
+				--theme-accent-secondary: hsla(var(--color-orange), 1);
+				--theme-bg: hsl(256, 27%, 19%);
+				--theme-bg-gradient-top: var(--theme-bg);
+				--theme-bg-gradient-bottom: hsl(251, 29%, 11%);
+				--theme-bg-gradient: linear-gradient(
+					180deg,
+					var(--theme-bg-gradient-top),
+					var(--theme-bg-gradient-top)
+						calc(var(--theme-navbar-height) + var(--theme-mobile-toc-height)),
+					var(--theme-bg-gradient-bottom)
+				);
+				--theme-table-header: hsl(252, 34%, 25%);
+				--theme-table-border: 1px solid hsl(252, 34%, 37%);
+				--theme-table-hover: hsla(252, 34%, 25%, 0.5);
+				--theme-text: hsla(var(--color-gray-90), 1);
+				color-scheme: dark;
+			}
+			* {
+				box-sizing: border-box;
+				margin: 0;
+			}
+			html {
+				background: var(--theme-bg-gradient-bottom);
+			}
+			body::before {
+				content: '';
+				display: block;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: -999;
+				background: var(--theme-bg-gradient);
+			}
+			body {
+				color: var(--theme-text);
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				font-family: var(--font-body);
+				font-size: 16px;
+				line-height: 1.5;
+				margin-block: 2rem;
+				margin-inline: 1rem;
+			}
+			:is(h1, h2, h3, h4, h5, h6) {
+				margin-bottom: 1rem;
+				font-weight: bold;
+				line-height: 1.3;
+			}
+			:is(h2):not(:first-child) {
+				margin-top: 4rem;
+			}
+			:is(h3, h4):not(:first-child) {
+				margin-top: 3rem;
+			}
+			:is(h5, h6):not(:first-child) {
+				margin-top: 2rem;
+			}
+			h1,
+			h2 {
+				max-width: 40ch;
+			}
+			h1 {
+				font-size: 2.25rem;
+				font-weight: 900;
+			}
+			h2 {
+				font-size: 1.875rem;
+			}
+			@media (min-width: 37.75em) {
+				h1 {
+					font-size: 2.5rem;
+				}
+			}
+			main {
+				max-width: 80ch;
+				margin-inline: auto;
+			}
+			.limit-to-viewport {
+				max-width: calc(100vw - 2rem);
+			}
+			p + p {
+				margin-top: 1.25rem;
+			}
+			a {
+				color: var(--theme-accent);
+				text-decoration: none;
+			}
+			h2 a {
+				color: inherit;
+			}
+			p a {
+				color: var(--theme-accent-secondary);
+				text-decoration: underline;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			ul {
+				font-size: 0.875rem;
+			}
+			details {
+				margin-bottom: 1.25rem;
+			}
+			details summary {
+				cursor: pointer;
+				user-select: none;
+			}
+			details summary:hover strong {
+				color: var(--theme-accent-secondary);
+			}
+			details h5 {
+				margin-top: 1rem !important;
+			}
+			details > :last-child {
+				margin-bottom: 1rem;
+			}
+			.create-button {
+				padding: 0.1em 0.5em;
+				background-color: hsl(213deg 89% 64% / 20%);
+				display: inline-block;
+				border-radius: 0.5em;
+				font-weight: bold;
+				font-size: 0.75rem;
+			}
+			.status-by-page {
+				margin-bottom: 1rem;
+				border-collapse: collapse;
+				margin-inline: -1rem;
+				border: var(--theme-table-border);
+				font-size: 0.8125rem;
+			}
+			.status-by-page th {
+				position: sticky;
+				top: -1px;
+				background: var(--theme-table-header);
+				white-space: nowrap;
+				padding-inline: 0.3rem;
+			}
+			.status-by-page th,
+			.status-by-page td {
+				padding-block: 0.2rem;
+			}
+			.status-by-page tbody tr:not(.spacer):hover td {
+				background: var(--theme-table-hover);
+			}
+			.status-by-page .spacer td {
+				height: 0.5rem;
+			}
+			.status-by-page th:first-of-type,
+			.status-by-page td:first-of-type {
+				text-align: left;
+				padding-inline-start: 1rem;
+			}
+			.status-by-page th:last-of-type,
+			.status-by-page td:last-of-type {
+				text-align: center;
+				padding-inline-end: 1rem;
+			}
+			.status-by-page td:not(:first-of-type) {
+				min-width: 2rem;
+				text-align: center;
+				cursor: default;
+			}
+			.status-by-page td:not(:first-of-type) a {
+				text-decoration: none;
+			}
+			.progress-summary {
+				font-size: 0.8125rem;
+			}
+			.progress-bar {
+				font-size: 0.6875rem;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div class="limit-to-viewport">
+				<h1>Astro Docs Translation Status</h1>
+
+				<p>
+					If you're interested in helping us translate
+					<a href="https://docs.astro.build/">docs.astro.build</a> into one of the languages listed
+					below, you've come to the right place! This auto-updating page always lists all the
+					content that could use your help right now.
+				</p>
+
+				<p>
+					Before starting, please read our
+					<a href="https://github.com/withastro/docs/blob/main/TRANSLATING.md">i18n Guide</a>
+					to learn about our translation process and how you can get involved.
+				</p>
+
+				<h2 id="by-language">
+					<a href="#by-language">Translation progress by language</a>
+				</h2>
+				<!-- TranslationStatusByLanguage -->
+
+				<h2 id="needs-review">
+					<a href="#needs-review">Translations that need reviews</a>
+				</h2>
+				<!-- TranslationNeedsReview -->
+
+				<h2 id="by-content">
+					<a href="#by-content">Translation status by content</a>
+				</h2>
+			</div>
+			<!-- This table is not limited to the viewport to allow horizontal scrolling -->
+			<!-- TranslationStatusByPage -->
+		</main>
+	</body>
+</html>

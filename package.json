@@ -3,12 +3,23 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "translation-status": "tsm --require=./scripts/lib/filter-warnings.cjs ./scripts/translation-status.ts"
+  },
   "license": "MIT",
   "devDependencies": {
+    "@actions/core": "^1.10.0",
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
-    "astro": "^2.5.0"
+    "astro": "^2.5.0",
+    "dedent-js": "^1.0.1",
+    "fast-glob": "^3.2.12",
+    "html-escaper": "^3.0.3",
+    "kleur": "^4.1.5",
+    "node-fetch": "^3.3.1",
+    "p-retry": "^5.1.2",
+    "simple-git": "^3.19.0",
+    "tsm": "^2.3.0"
   },
   "packageManager": "pnpm@8.2.0"
 }
