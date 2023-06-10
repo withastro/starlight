@@ -56,6 +56,7 @@ export default function StarlightIntegration(
                 : { theme: 'css-variables' },
           },
           experimental: { assets: true, inlineStylesheets: 'auto' },
+          image: { service: { entrypoint: 'astro/assets/services/sharp' } },
         };
         updateConfig(newConfig);
       },
