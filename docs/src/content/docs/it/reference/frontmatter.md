@@ -103,7 +103,7 @@ interface HeroConfig {
   tagline?: string;
   image?: {
     alt?: string;
-    // Percorso relativo ad un’immagine dentro tuo progetto.
+    // Percorso relativo ad un’immagine dentro il tuo progetto.
     file?: string;
     // HTML non elaborato da utilizzare al posto dell'immagine.
     // Potrebbe essere un tag personalizzato `<img>` o `<svg>` in linea.
