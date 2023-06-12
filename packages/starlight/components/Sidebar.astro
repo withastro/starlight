@@ -28,13 +28,15 @@ const { sidebar, locale } = Astro.props;
     gap: 1rem;
   }
 
-  .sidebar > :global(:last-child) {
-    padding-bottom: 1rem;
-  }
-
   .mobile-preferences {
     justify-content: space-between;
     border-top: 1px solid var(--sl-color-gray-6);
     padding: 0.5rem 0;
+  }
+
+  @media (min-width: 50rem) {
+    .sidebar > :global(:nth-last-child(2)) {
+      padding-bottom: 1rem;
+    }
   }
 </style>
