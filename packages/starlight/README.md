@@ -24,7 +24,7 @@ MIT
 
 Copyright (c) 2023–present [Starlight contributors][contributors]
 
-[astro]: https://astro.build/
+[astro]: https://docs.astro.build/
 [docs]: https://starlight.astro.build/
 [contributing]: https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md
 [coc]: https://github.com/withastro/.github/blob/main/CODE_OF_CONDUCT.md
