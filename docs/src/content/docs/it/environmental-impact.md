@@ -12,10 +12,10 @@ Secondo il Website Carbon Calculator, questo sito è [più pulito del 99% delle 
 ## Peso per pagina
 
 Più dati una pagina web trasferisce, più risorse energetiche sono necessarie.
-Nell'aprile 2023, la pagina web media richiede all'utente di scaricare più di 2.000 KB secondo i [dati dell'archivio HTTP][http].
+Nell'aprile 2023, la pagina web media richiede all'utente di scaricare più di 2.000 KB secondo i [dati dell'HTTP Archive][http].
 
 Starlight costruisce le pagine nel modo più leggero possibile.
-Per esempio, alla prima visita, l'utente scaricherà meno di 50 KB di dati compressi — soltanto il 2,5 % della media degli archivi HTTP.
+Per esempio, alla prima visita, l'utente scaricherà meno di 50 KB di dati compressi — soltanto il 2,5 % della media dell'HTTP Archive.
 Inoltre, con una strategia appropriata di cache, successive visite potranno richiedere solamente 10 KB.
 
 ### Immagini
@@ -65,7 +65,7 @@ Pacchetti come [`astro-embed`][embed] possono aiutare per servizi comuni.
 
 :::tip[Lo sapevi ?]
 L'analisi e la compilazione di JavaScript è una delle operazioni più costose che il browser deve fare.
-Per riferimento la visualizzazione di un'immagine JPEG dello stesso peso, [JavaScript può richiedere anche più di 30 volte il tempo necessario per essere processato][cost-of-js].
+Se si confronta con la visualizzazione di un'immagine JPEG dello stesso peso, [JavaScript può richiedere anche più di 30 volte il tempo necessario per essere processato][cost-of-js].
 :::
 
 [cabin]: https://withcabin.com/
@@ -77,7 +77,7 @@ Per riferimento la visualizzazione di un'immagine JPEG dello stesso peso, [JavaS
 
 ## Hosting
 
-La posizione della piattaforma utilizzata per hostare può avere un impatto significativo per l'impronta ecologica.
+La piattaforma utilizzata per hostare un sito può avere un impatto significativo per l'impronta ecologica.
 I data center e server farm possono impattare di molto l'ambiente, usando grandi quantità di energia elettrica e d'acqua.
 
 Scegliere un host che usi energia da fonti rinnovabili significa ridurre le emissioni di gas serra per il tuo sito. Il [Green Web Directory][gwb] è uno degli strumenti che si possono utilizzare per trovare host di questo tipo.
@@ -91,16 +91,16 @@ Questi test eseguiti con [Website Carbon Calculator][wcc] confrontano pagine sim
 
 | Framework                   | CO₂ per visita |
 | --------------------------- | -------------------- |
-| [Starlight][sl-carbon]      | 0.01g                |
-| [VitePress][vp-carbon]      | 0.05g                |
-| [Docus][dc-carbon]          | 0.05g                |
-| [Sphinx][sx-carbon]         | 0.07g                |
-| [MkDocs][mk-carbon]         | 0.10g                |
-| [Nextra][nx-carbon]         | 0.11g                |
-| [docsify][dy-carbon]        | 0.11g                |
-| [Docusaurus][ds-carbon]     | 0.24g                |
-| [Read the Docs][rtd-carbon] | 0.24g                |
-| [GitBook][gb-carbon]        | 0.71g                |
+| [Starlight][sl-carbon]      | 0,01 g               |
+| [VitePress][vp-carbon]      | 0,05 g               |
+| [Docus][dc-carbon]          | 0,05 g               |
+| [Sphinx][sx-carbon]         | 0,07 g               |
+| [MkDocs][mk-carbon]         | 0,10 g               |
+| [Nextra][nx-carbon]         | 0,11 g               |
+| [docsify][dy-carbon]        | 0,11 g               |
+| [Docusaurus][ds-carbon]     | 0,24 g               |
+| [Read the Docs][rtd-carbon] | 0,24 g               |
+| [GitBook][gb-carbon]        | 0,71 g               |
 
 <small>Dati collezionati il 14 Maggio 2023. Clicca i link per vedere i dati aggiornati.</small>
 

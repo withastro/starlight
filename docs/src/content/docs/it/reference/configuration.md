@@ -94,7 +94,7 @@ Puoi manualmente impostare i contenuti di un gruppo con `items`, che è un array
 ```js
 starlight({
   sidebar: [
-    // Un gruppo intitolato"Inizia qui" contenente due link.
+    // Un gruppo intitolato "Inizia qui" contenente due link.
     {
       label: 'Inizia qui',
       items: [
