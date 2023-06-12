@@ -7,7 +7,7 @@ Le stime dell'impatto ambientale del web si aggirano tra il [2%][sf] e il [4% de
 Ci sono molti complessi fattori per calcolare l'impatto ambientale di un sito web, ma questa guida include dei consigli per ridurre l'impronta ecologica del tuo sito.
 
 La buona notizia è che scegliere Starlight è un ottimo punto di partenza.
-Secondo il Website Carbon Calculator, questo sito è [più pulito del 99 % delle pagine web testate][sl-carbon], producendo 0,01 g di CO₂ per pagina visitata.
+Secondo il Website Carbon Calculator, questo sito è [più pulito del 99% delle pagine web testate][sl-carbon], producendo 0,01 g di CO₂ per pagina visitata.
 
 ## Peso per pagina
 
