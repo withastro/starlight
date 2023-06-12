@@ -15,10 +15,10 @@ Il testo può essere **grassetto**, _corsivo_, o ~~barrato~~.
 Il testo può essere **grassetto**, _corsivo_, o ~~barrato~~.
 ```
 
-Puoi [aggiungere un link ad un'altra pagina](/fr/getting-started/).
+Puoi [aggiungere un link ad un'altra pagina](/it/getting-started/).
 
 ```md
-Puoi [aggiungere un link ad un'altra pagina](/fr/getting-started/).
+Puoi [aggiungere un link ad un'altra pagina](/it/getting-started/).
 ```
 
 Puoi evidenziare `codice in linea` con apici inversi.
@@ -53,7 +53,7 @@ Puoi strutturare i contenuti utilizzando dei titoli. In Markdown sono indicati d
 
 ### Come strutturare i contenuti della pagina in Starlight
 
-Starlight è configurato per utilizzare automaticamente il titolo della pagina come intestazione e includono una "Panoramica" in alto per ogni tabella dei contenuti. Si raccomanda di iniziare ogni pagina con un paragrafo e di usare titoli a partire da `<h2>` :
+Starlight è configurato per utilizzare automaticamente il titolo della pagina come intestazione e includerà una "Panoramica" in alto per ogni tabella dei contenuti. Si raccomanda di iniziare ogni pagina con un paragrafo e di usare titoli a partire da `<h2>`:
 
 ```md
 ---
@@ -61,7 +61,7 @@ title: Guida Markdown
 description:  Come utilizzare Markdown in Starlight
 ---
 
-Questa pagina descrive come utilizzare MArkdown in Starlight.
+Questa pagina descrive come utilizzare Markdown in Starlight.
 
 ## Stili in linea
 
@@ -95,7 +95,7 @@ Gli aside (conosciuti anche come "richiami") sono utili per indicare contenuti s
 
 Starlight fornisce una sintassi Markdown personalizzata per indicarli. I blocchi aside sono indicati da `:::` per racchiudere i contenuti e possono essere di tipo `note`, `tip`, `caution` o `danger`.
 
-Puoi inserirne uno dentro l'altro ma sono più indicati per racchiudere poche informazioni.
+Dentro un "aside" puoi inserire qualsiasi altro contenuto Markdown anche se sono più indicati per contenere poche informazioni.
 
 ### Note aside
 
@@ -125,12 +125,12 @@ npm run create astro@latest --template starlight
 Si può specificare un titolo personalizzato per gli aside in parentesi quadre dopo aver specificato il tipo di aside, per esempio `:::tip[Lo sapevi?]`.
 
 :::tip[Lo sapevi?]
-Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https://docs.astro.build/fr/concepts/islands/).
+Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https://docs.astro.build/en/concepts/islands/).
 :::
 
 ```md
 :::tip[Lo sapevi?]
-Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https://docs.astro.build/fr/concepts/islands/).
+Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https://docs.astro.build/en/concepts/islands/).
 :::
 ```
 
@@ -140,11 +140,11 @@ Gli aside caution e danger sono d'aiuto per richiamare l'attenzione dell'utente 
 Se ti ritrovi ad usarli spesso, potrebbe essere segno che quelo che stai documentando potrebbe trarre beneficio da una riprogettazione.
 
 :::caution
-Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte perima di usare [Starlight](../../../).
+Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte prima di usare [Starlight](../../../).
 :::
 
 :::danger
-Gli utenti potrebbero beneficiarne e riuscire a trovare più facilmente grazie alle funzionalità Starlight.
+Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più facile da usare grazie alle utili funzioni di Starlight.
 
 - Navigazione chiara
 - Temi configurabili dall'utente
@@ -154,11 +154,11 @@ Gli utenti potrebbero beneficiarne e riuscire a trovare più facilmente grazie a
 
 ```md
 :::caution
-Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte perima di usare [Starlight](../../../).
+Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte prima di usare [Starlight](../../../).
 :::
 
 :::danger
-Gli utenti potrebbero beneficiarne e riuscire a trovare più facilmente grazie alle funzionalità Starlight.
+Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più facile da usare grazie alle utili funzioni di Starlight.
 
 - Navigazione chiara
 - Temi configurabili dall'utente

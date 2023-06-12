@@ -257,7 +257,7 @@ Per esempio, questo ti permette di fornire `/getting-started/` come un percorso 
 
 Definisce la lingua predefinita del sito.
 Il valore deve corrispondere ad una chiave di [`locales`](#locales).
-(Se la chiave è gia in [root](#root-locale), non è necessario).
+(Se la lingua predefinita è il [root](#lingua-principale), non è necessario).
 
 Verrà utilizzato come fallback per le pagine non tradotte.
 

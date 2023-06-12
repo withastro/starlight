@@ -32,7 +32,7 @@ La descrizione è utilizzata nei metadati e sarà utilizzata dai motori di ricer
 
 **type:** `string | boolean`
 
-Sovrascrive la [configurazione globale `editLink`](/it/reference/configuration/#editlink). Metti a `false` per disabilitare "Modifica la pagina" per quella specifica oppure fornisci un link alternativo.
+Sovrascrive la [configurazione globale `editLink`](/it/reference/configuration/#editlink). Metti a `false` per disabilitare "Modifica la pagina" per quella pagina specifica oppure fornisci un link alternativo.
 
 ### `head`
 
@@ -70,7 +70,7 @@ Se valorizzato a `'splash'` viene utilizzato un layout senza barre laterali otti
 
 **type:** [`HeroConfig`](#heroconfig)
 
-Aggiunge un componente hero all'inizio della pagina. Funziona bene con `template : splash`.
+Aggiunge un componente hero all'inizio della pagina. Funziona bene con `template: splash`.
 
 Per esempio, questa configurazione illustra comuni opzioni, incluso il caricamento di un'immagine.
 
@@ -103,10 +103,10 @@ interface HeroConfig {
   tagline?: string;
   image?: {
     alt?: string;
-    // Chemin relatif vers une image dans votre référentiel.
+    // Percorso relativo ad un’immagine dentro tuo progetto.
     file?: string;
-    // HTML brut à utiliser dans l'emplacement de l'image.
-    // Il peut s'agir d'une balise `<img>` personnalisée ou d'une balise `<svg>` en ligne.
+    // HTML non elaborato da utilizzare al posto dell'immagine.
+    // Potrebbe essere un tag personalizzato `<img>` o `<svg>` in linea.
     html?: string;
   };
   actions?: Array<{
