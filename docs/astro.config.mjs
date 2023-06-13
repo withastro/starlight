@@ -79,6 +79,16 @@ export default defineConfig({
                 it: 'Impatto ambientale',
               },
             },
+            {
+              label: 'Showcase',
+              link: 'showcase',
+              // translations: {
+              //   es: '',
+              //   ja: '',
+              //   fr: '',
+              //   it: '',
+              // },
+            },
           ],
         },
         {
