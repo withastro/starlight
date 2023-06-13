@@ -62,6 +62,9 @@ importers:
       astro:
         specifier: ^2.5.0
         version: 2.5.0(sharp@0.32.1)
+      sharp:
+        specifier: ^0.32.1
+        version: 0.32.1
 
   packages/starlight:
     dependencies:
