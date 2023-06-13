@@ -5,6 +5,7 @@ description: See sites built with Starlight around the web!
 Starlight is already being used in production around the web. See some examples below, and PR your own link if you have built your documentation site with Starlight!
 
 - [PubIndexAPI Docs](https://docs.pubindexapi.com/)
+- [har.fyi](https://har.fyi/)
 - [QBCore Docs](https://brycerussell.github.io/qbcore-docs/)
 - [Astro Error Pages](https://astro-error-page-documentation.vercel.app/)
 - [MES Docs](https://docs.muslimeng.org/)
