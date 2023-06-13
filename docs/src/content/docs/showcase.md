@@ -8,7 +8,8 @@ Starlight is already being used in production around the web. See some examples 
 - [har.fyi](https://har.fyi/)
 - [QBCore Docs](https://brycerussell.github.io/qbcore-docs/)
 - [Astro Error Pages](https://astro-error-page-documentation.vercel.app/)
-- [MES Docs](https://docs.muslimeng.org/)
+- [Felicity](https://felicity.pages.dev/)
+- [NgxEditor](https://sibiraj-s.github.io/ngx-editor/)
 - [Starwoof](https://starwoof.vercel.app/) - Watch Ben and Chris of Astro build this Starlight site showcasing the pets of Astro in real time! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
 
 
