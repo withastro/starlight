@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.1.4
+
+### Patch Changes
+
+- [#190](https://github.com/withastro/starlight/pull/190) [`a3809e4`](https://github.com/withastro/starlight/commit/a3809e4f1e14f3949e9e25f7ffbdea2920408edb) Thanks [@gabrielemercolino](https://github.com/gabrielemercolino)! - Added Italian language support
+
+- [#193](https://github.com/withastro/starlight/pull/193) [`c9ca4eb`](https://github.com/withastro/starlight/commit/c9ca4ebe10f4776999e3fff4ac4c19ac0a714bac) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Fix bottom padding for sidebar on larger screen sizes
+
 ## 0.1.3
 
 ### Patch Changes
