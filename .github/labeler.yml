@@ -4,4 +4,8 @@
 - .github/workflows/**
 
 i18n:
-- any: ['src/content/docs/**/*.mdx', '!src/content/docs/en/**/*']
+  - src/content/docs/de/**/*
+  - src/content/docs/es/**/*
+  - src/content/docs/fr/**/*
+  - src/content/docs/it/**/*
+  - src/content/docs/ja/**/*
