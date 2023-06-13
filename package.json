@@ -3,7 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "version": "pnpm changeset version && pnpm i --no-frozen-lockfile"
+  },
   "license": "MIT",
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
