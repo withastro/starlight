@@ -31,8 +31,7 @@
 			--color-base-orange: 22, 100%;
 			--color-gray-90: var(--color-base-gray), 90%;
 			--color-orange: var(--color-base-orange), 60%;
-			--theme-accent: #539bf5;
-			--theme-accent-secondary: hsla(var(--color-orange), 1);
+			--theme-accent: #bdc3ff;
 			--theme-bg: hsl(256, 27%, 19%);
 			--theme-bg-gradient-top: var(--theme-bg);
 			--theme-bg-gradient-bottom: hsl(251, 29%, 11%);
@@ -64,7 +63,7 @@
 			line-height: 1.5;
 			margin-block: 2rem;
 			margin-inline: 1rem;
-			background-color: #1e2127 !important;
+			background-color: #16181d !important;
 			background: linear-gradient(215deg, var(--overlay-blurple), transparent 40%), radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh, radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) / 60rem 30rem;
 		}
 
@@ -129,7 +128,7 @@
 		}
 
 		p a {
-			color: var(--theme-accent-secondary);
+			color: var(--theme-accent);
 			text-decoration: underline;
 		}
 
@@ -244,27 +243,11 @@
 		.main-container {
 			position: relative;
 		}
-
-		.bg-img {
-			width: 350px;
-			position: absolute;
-			right: 0;
-			opacity: 0.3;
-			top: 300px;
-		}
-
-		@media (max-width: 700px) {
-			.bg-img {
-				display: none;
-			}
-		}
 	</style>
 </head>
 
 <body>
 	<main class="main-container">
-		<img src="https://starlight.astro.build/_astro/hero-star.81c1bfde_kyCK2.webp" alt="Starlight logo"
-			class="bg-img">
 		<div class="limit-to-viewport">
 			<h1>Starlight Docs Translation Status</h1>
 

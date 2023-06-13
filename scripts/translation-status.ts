@@ -1,5 +1,13 @@
-import { allLanguages } from '../src/i18n/languages';
 import { TranslationStatusBuilder } from './lib/translation-status/builder';
+
+const allLanguages = {
+	en: 'English',
+	de: 'Deutsch',
+	es: 'Español',
+	fr: 'Français',
+	ja: '日本語',
+	it: 'Italiano',
+} as const;
 
 const translationStatusBuilder = new TranslationStatusBuilder({
 	pageSourceDir: './docs/src/content/docs',
