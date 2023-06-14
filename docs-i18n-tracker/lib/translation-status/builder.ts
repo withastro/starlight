@@ -480,7 +480,7 @@ export class TranslationStatusBuilder {
     return (
       '<span class="progress-bar" aria-hidden="true">' +
       [
-        [doneLength, '🟪'],
+        [doneLength, '🟦'],
         [outdatedLength, '🟧'],
         [missingLength, '⬜'],
       ]
