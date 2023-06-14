@@ -1,0 +1,20 @@
+{
+  "name": "docs-i18n-tracker",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A single-page dashboard that tracks translation status across Starlight docs pages",
+  "scripts": {
+    "build": "tsm --require=./lib/filter-warnings.cjs ./build.ts"
+  },
+  "devDependencies": {
+    "@types/html-escaper": "^3.0.0",
+    "dedent-js": "^1.0.1",
+    "fast-glob": "^3.2.12",
+    "html-escaper": "^3.0.3",
+    "kleur": "^4.1.5",
+    "node-fetch": "^3.3.1",
+    "p-retry": "^5.1.2",
+    "simple-git": "^3.19.0",
+    "tsm": "^2.3.0"
+  }
+}
