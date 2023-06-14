@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import { githubGet } from '../github-get.mjs';
 import output from '../output.mjs';
 import type { PageData, PageIndex, PageTranslationStatus } from './types';
-import { toUtcString, tryGetFrontMatterBlock } from './utils.js';
+import { toUtcString } from './utils.js';
 
 export const COMMIT_IGNORE = /(en-only|typo|broken link|i18nReady|i18nIgnore)/i;
 
@@ -174,12 +174,7 @@ export class TranslationStatusBuilder {
     // Retrieve git history for the current page
     const gitHistory = await this.getGitHistory(fullFilePath);
 
-    // Retrieve i18nReady flag from frontmatter
-    const frontMatterBlock = tryGetFrontMatterBlock(fullFilePath);
-    const i18nReady = /^\s*i18nReady:\s*true\s*$/m.test(frontMatterBlock!);
-
     return {
-      ...(i18nReady ? { i18nReady: true } : {}),
       lastChange: gitHistory.lastCommitDate,
       lastCommitMsg: gitHistory.lastCommitMessage,
       lastMajorChange: gitHistory.lastMajorCommitDate,

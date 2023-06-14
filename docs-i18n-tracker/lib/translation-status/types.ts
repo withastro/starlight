@@ -5,7 +5,6 @@ export type PageIndex = {
 };
 
 export type PageData = {
-	i18nReady?: boolean;
 	lastChange: string;
 	lastCommitMsg: string;
 	lastMajorChange: string;
