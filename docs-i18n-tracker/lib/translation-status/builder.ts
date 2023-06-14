@@ -259,7 +259,7 @@ export class TranslationStatusBuilder {
     subpath: string;
     query?: string;
   }) {
-    const noDotSrcDir = this.pageSourceDir.replace(/^.\//, '');
+    const noDotSrcDir = this.pageSourceDir.replace(/^.+\//, '');
     const isSrcLang = lang === this.sourceLanguage;
     return `https://github.com/${
       this.githubRepo
