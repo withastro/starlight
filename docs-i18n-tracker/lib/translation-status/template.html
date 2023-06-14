@@ -26,13 +26,12 @@
 			--font-body: system-ui, var(--font-fallback);
 			--theme-accent: hsl(234, 100%, 87%);
 			--theme-bg: hsl(223, 13%, 10%);
-			--theme-table-header: hsl(252, 34%, 25%);
-			--theme-table-border: 1px solid hsl(252, 34%, 37%);
-			--theme-table-hover: hsla(252, 34%, 25%, 0.5);
+			--theme-table-header: hsl(222, 13%, 16%);
+			--theme-table-border: 1px solid hsl(222, 13%, 16%);
+			--theme-table-hover: hsl(222, 13%, 16%);
 			--theme-text: hsl(228, 8%, 77%);
 			--theme-text-bright: hsl(0, 0%, 100%);
-			--purple-hsl: 255, 60%, 60%;
-			--overlay-blurple: hsla(var(--purple-hsl), .2);
+			--overlay-blurple: hsla(255, 60%, 60%, .2);
 		}
 
 		* {
@@ -50,8 +49,7 @@
 			line-height: 1.5;
 			margin-block: 2rem;
 			margin-inline: 1rem;
-			background-color: var(--theme-bg);
-			background: linear-gradient(215deg, var(--overlay-blurple), transparent 40%), radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh, radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) / 60rem 30rem;
+			background: linear-gradient(215deg, var(--overlay-blurple), transparent 40%), radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh, radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) / 60rem 30rem, var(--theme-bg);
 		}
 
 		:is(h1, h2, h3, h4, h5, h6) {
