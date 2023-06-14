@@ -1,27 +1,30 @@
-import core from '@actions/core';
 import dedent from 'dedent-js';
 import kleur from 'kleur';
 
 export const isCi = process.env.CI;
 
+/**
+ * @param {any} [message]
+ * @param  {...any} params
+ */
 export function debug(message, ...params) {
-	console.log(message, ...params);
+  console.log(message, ...params);
 }
 
+/**
+ * @param {any} [message]
+ * @param  {...any} params
+ */
 export function warning(message, ...params) {
-	if (isCi) {
-		core.warning(message, ...params);
-	} else {
-		console.warn(kleur.yellow().bold(`*** WARNING: ${message}`), ...params);
-	}
+  console.warn(kleur.yellow().bold(`*** WARNING: ${message}`), ...params);
 }
 
+/**
+ * @param {any} [message]
+ * @param  {...any} params
+ */
 export function error(message, ...params) {
-	if (isCi) {
-		core.error(message, ...params);
-	} else {
-		console.error(kleur.red().bold(`*** ERROR: ${message}`), ...params);
-	}
+  console.error(kleur.red().bold(`*** ERROR: ${message}`), ...params);
 }
 
 /**
@@ -29,7 +32,7 @@ export function error(message, ...params) {
  * while leaving new paragraphs intact.
  */
 export function dedentMd(...markdown) {
-	return dedent(...markdown).replace(/(\S)\n(?!\n)/g, '$1 ');
+  return dedent(...markdown).replace(/(\S)\n(?!\n)/g, '$1 ');
 }
 
 /**
@@ -44,28 +47,33 @@ export function dedentMd(...markdown) {
  * Supported template syntax:
  * - Use `(s)` to add a plural-only "s", e.g. "broken link(s)"
  * - Use `|` to provide separate templates, e.g. "issue was|issues were"
+ *
+ * @param {number} count
+ * @param {string} template
  */
 export function formatCount(count, template) {
-	const wrapWithCount = (text) => {
-		// If no count was given, we're outputting a single issue in annotations,
-		// so omit count and capitalize the first letter of the issue type description
-		if (count === undefined) return text[0].toUpperCase() + text.slice(1);
+  /** @param {string} text */
+  const wrapWithCount = (text) => {
+    // If no count was given, we're outputting a single issue in annotations,
+    // so omit count and capitalize the first letter of the issue type description
+    if (count === undefined) return text[0].toUpperCase() + text.slice(1);
 
-		// Otherwise, prefix the issue type description with count
-		return `${count} ${text}`;
-	};
+    // Otherwise, prefix the issue type description with count
+    return `${count} ${text}`;
+  };
 
-	const usePlural = count !== undefined && count !== 1;
-	const templateParts = template.split('|');
-	const usedTemplate = templateParts.length === 2 ? templateParts[usePlural ? 1 : 0] : template;
-	return wrapWithCount(usedTemplate.replace(/\(s\)/g, usePlural ? 's' : ''));
+  const usePlural = count !== undefined && count !== 1;
+  const templateParts = template.split('|');
+  const usedTemplate =
+    templateParts.length === 2 ? templateParts[usePlural ? 1 : 0] : template;
+  return wrapWithCount(usedTemplate.replace(/\(s\)/g, usePlural ? 's' : ''));
 }
 
 export default {
-	debug,
-	warning,
-	error,
-	dedentMd,
-	formatCount,
-	isCi,
+  debug,
+  warning,
+  error,
+  dedentMd,
+  formatCount,
+  isCi,
 };
