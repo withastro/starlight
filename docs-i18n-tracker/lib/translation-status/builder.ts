@@ -9,7 +9,6 @@ import { fileURLToPath } from 'url';
 import { githubGet } from '../github-get.mjs';
 import output from '../output.mjs';
 import type { PageData, PageIndex, PageTranslationStatus } from './types';
-import { toUtcString } from './utils.js';
 
 export const COMMIT_IGNORE = /(en-only|typo|broken link|i18nReady|i18nIgnore)/i;
 
@@ -491,4 +490,8 @@ export class TranslationStatusBuilder {
       className
     )}" target="_blank" rel="noopener noreferrer">${escape(text)}</a>`;
   }
+}
+
+function toUtcString(date: string) {
+  return new Date(date).toISOString();
 }
