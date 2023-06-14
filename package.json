@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "translation-status": "tsm --require=./scripts/lib/filter-warnings.cjs ./scripts/translation-status.ts"
+    "translation-status": "tsm --require=./scripts/lib/filter-warnings.cjs ./scripts/translation-status.ts",
+    "version": "pnpm changeset version && pnpm i --no-frozen-lockfile"
   },
   "license": "MIT",
   "devDependencies": {

@@ -61,9 +61,9 @@ Starlight admite la creación de contenido en Markdown y MDX. (Puedes agregar co
 
 Agrega nuevas páginas a tu sitio automáticamente creando archivos `.md` o `.mdx` en `src/content/docs/`. Agrega subcarpetas para organizar tus archivos y crear segmentos de ruta múltiples.
 
-```js
-`src/content/docs/hello-world.md` -> `tu-sitio/hello-world`
-`src/content/docs/guides/faq.md` -> `tu-sitio/guides/faq`
+```
+src/content/docs/hello-world.md => tu-sitio.com/hello-world
+src/content/docs/guides/faq.md => tu-sitio.com/guides/faq
 ```
 
 ### Frontmatter con seguridad de tipos
@@ -84,3 +84,40 @@ Si olvidas algo importante, Starlight te lo hará saber.
 Una vez que hayas creado y personalizado tu sitio web de Starlight, puedes implementarlo en un servidor web o plataforma de alojamiento de tu elección, incluyendo Netlify, Vercel, GitHub Pages y muchos más.
 
 [Aprende sobre cómo desplegar un sitio Astro en la documentación de Astro.](https://docs.astro.build/es/guides/deploy/)
+
+## Actualizando Starlight
+
+:::tip
+Debido a que Starlight es un software beta, habrá actualizaciones y mejoras frecuentes. ¡Asegúrate de actualizar Starlight regularmente!
+:::
+
+Starlight es una integración Astro y se actualiza de la misma manera que cualquier otra integración `@astrojs/*`:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# actualizar Starlight con npm
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# actualizar Starlight con pnpm
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# actualizar Starlight con yarn
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+Puedes ver una lista completa de los cambios realizados en cada versión en [el registro de cambios de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).

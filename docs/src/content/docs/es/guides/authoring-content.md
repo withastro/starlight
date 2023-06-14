@@ -44,9 +44,8 @@ También se admiten rutas de imágenes relativas para imágenes almacenadas loca
 ```md
 // src/content/docs/page-1.md
 
-![Una nave espacial en el espacio.](../../assets/images/rocket.svg)
+![Una nave espacial en el espacio](../../assets/images/rocket.svg)
 ```
-
 
 ## Encabezados
 
@@ -67,7 +66,6 @@ Esta página describe cómo utilizar Markdown en Starlight.
 ## Estilos en línea
 
 ## Encabezados
-
 ```
 
 ### Enlaces de anclaje automáticos para encabezados.
@@ -79,6 +77,7 @@ Al utilizar encabezados en Markdown, se generan automáticamente enlaces de ancl
 title: Mi página de contenido
 description: Cómo utilizar los enlaces de anclaje integrados de Starlight.
 ---
+
 ## Introducción
 
 Puedo enlazar a [mi conclusión](#conclusión) más abajo en la misma página.
@@ -87,8 +86,8 @@ Puedo enlazar a [mi conclusión](#conclusión) más abajo en la misma página.
 
 `https://mi-sitio.com/page1/#introduction` navega directamente a mi Introducción.
 ```
-Los encabezados de nivel 2 (`<h2>`) y nivel 3 (`<h3>`) aparecerán automáticamente en la tabla de contenido de la página.
 
+Los encabezados de nivel 2 (`<h2>`) y nivel 3 (`<h3>`) aparecerán automáticamente en la tabla de contenido de la página.
 
 ## Apartados
 

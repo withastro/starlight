@@ -5,7 +5,7 @@ description: Une vue d'ensemble de toutes les options de configuration prises en
 
 ## Configuration de l'intégration `starlight`
 
-Starlight est une intégration construite sur le framework web [Astro](https://astro.build). Vous pouvez configurer votre projet dans le fichier de configuration Astro `astro.config.mjs` :
+Starlight est une intégration construite sur le framework web [Astro](https://astro.build). Vous pouvez configurer votre projet dans le fichier de configuration `astro.config.mjs` :
 
 ```js
 // astro.config.mjs
@@ -15,7 +15,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      title: "Mon délicieux site de docs",
+      title: 'Mon délicieux site de docs',
     }),
   ],
 });

@@ -57,6 +57,7 @@ export default defineConfig({
             es: 'Comienza aqui',
             ja: 'ここからはじめる',
             fr: 'Commencez ici',
+            it: 'Inizia qui',
           },
           items: [
             {
@@ -67,6 +68,7 @@ export default defineConfig({
                 es: 'Empezando',
                 ja: '入門',
                 fr: 'Mise en route',
+                it: 'Iniziamo',
               },
             },
             {
@@ -76,18 +78,24 @@ export default defineConfig({
                 es: 'Documentación ecológica',
                 ja: '環境への負荷',
                 fr: 'Impact environnemental',
+                it: 'Impatto ambientale',
               },
+            },
+            {
+              label: 'Showcase',
+              link: 'showcase',
+              // translations: {
+              //   es: '',
+              //   ja: '',
+              //   fr: '',
+              //   it: '',
+              // },
             },
           ],
         },
         {
           label: 'Guides',
-          translations: {
-            de: 'Anleitungen',
-            es: 'Guías',
-            ja: 'ガイド',
-            fr: 'Guides',
-          },
+          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides', it: "Guide", },
           autogenerate: { directory: 'guides' },
         },
         {
@@ -97,10 +105,12 @@ export default defineConfig({
             es: 'Referencias',
             ja: 'リファレンス',
             fr: 'Référence',
+            it: 'Riferimenti',
           },
           autogenerate: { directory: 'reference' },
         },
       ],
     }),
   ],
+  image: { service: { entrypoint: 'astro/assets/services/sharp' } },
 });
