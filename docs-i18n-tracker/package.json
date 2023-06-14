@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "A single-page dashboard that tracks translation status across Starlight docs pages",
   "scripts": {
-    "translation-status": "tsm --require=./scripts/lib/filter-warnings.cjs ./scripts/translation-status.ts"
+    "build": "tsm --require=./scripts/lib/filter-warnings.cjs ./scripts/translation-status.ts"
   },
   "devDependencies": {
     "@types/html-escaper": "^3.0.0",
