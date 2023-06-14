@@ -263,7 +263,7 @@ export class TranslationStatusBuilder {
     const isSrcLang = lang === this.sourceLanguage;
     return `https://github.com/${
       this.githubRepo
-    }/${type}/${refName}/${noDotSrcDir}${
+    }/${type}/main/${refName}/${noDotSrcDir}${
       isSrcLang ? '' : `/${lang}`
     }/${subpath}${query}`;
   }
