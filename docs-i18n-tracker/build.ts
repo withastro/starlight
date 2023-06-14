@@ -9,12 +9,9 @@ const translationStatusBuilder = new TranslationStatusBuilder({
     .map((el) => el.lang)
     .filter((lang) => lang !== 'en')
     .sort(),
-  languageLabels: Object.values(locales).reduce((acc, curr) => {
-    return {
-      [curr.lang]: curr.label,
-      ...acc,
-    };
-  }, {}),
+  languageLabels: Object.values(locales)
+    .filter((loc) => loc.lang !== 'en')
+    .reduce((acc, curr) => ({ [curr.lang]: curr.label, ...acc }), {}),
   githubRepo: process.env.GITHUB_REPOSITORY || 'withastro/starlight',
   githubToken: process.env.GITHUB_TOKEN,
 });
