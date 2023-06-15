@@ -3,7 +3,8 @@ declare module 'virtual:starlight/user-config' {
   export default Config;
 }
 declare module 'virtual:starlight/project-context' {
-  export default { root: string };
+  const Config: import('astro').AstroConfig;
+  export default Config;
 }
 
 declare module 'virtual:starlight/user-css' {}

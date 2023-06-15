@@ -85,13 +85,11 @@ function resolveVirtualModuleId(id: string) {
 /** Expose the Starlight user config object via a virtual module. */
 function vitePluginStarlightUserConfig(
   opts: StarlightConfig,
-  { root }: AstroConfig
+  astroConfig: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   const modules = {
     'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
-    'virtual:starlight/project-context': `export default ${JSON.stringify({
-      root,
-    })}`,
+    'virtual:starlight/project-context': `export default ${JSON.stringify(astroConfig)}`,
     'virtual:starlight/user-css': opts.customCss
       .map((id) => `import "${id}";`)
       .join(''),

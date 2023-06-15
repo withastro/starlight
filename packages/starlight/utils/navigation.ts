@@ -9,6 +9,7 @@ import type {
   SidebarItem,
   SidebarLinkItem,
 } from './user-config';
+import { ensureLeadingAndTrailingSlashes } from './url';
 
 export interface Link {
   type: 'link';
@@ -84,13 +85,6 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
-/** Ensure the passed path starts and ends with trailing slashes. */
-function ensureLeadingAndTrailingSlashes(href: string): string {
-  if (href[0] !== '/') href = '/' + href;
-  if (href[href.length - 1] !== '/') href += '/';
-  return href;
-}
-
 /** Create a link entry from a user config object. */
 function linkFromConfig(
   item: SidebarLinkItem,
@@ -99,8 +93,6 @@ function linkFromConfig(
 ) {
   let href = item.link;
   if (!isAbsolute(href)) {
-    href = ensureLeadingAndTrailingSlashes(href);
-    // Inject current locale into link.
     if (locale) href = '/' + locale + href;
   }
   const label = pickLang(item.translations, localeToLang(locale)) || item.label;
@@ -109,6 +101,7 @@ function linkFromConfig(
 
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
+  href = ensureLeadingAndTrailingSlashes(href)
   if (!isAbsolute(href)) href = pathWithBase(href);
   const isCurrent = href === currentPathname;
   return { type: 'link', label, href, isCurrent };
