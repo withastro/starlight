@@ -48,6 +48,6 @@
     "unified": "^10.1.2",
     "unist-util-remove": "^3.1.1",
     "unist-util-visit": "^4.1.2",
-    "vfile": "^5.3.7"
+    "vfile": "^6.0.0"
   }
 }
