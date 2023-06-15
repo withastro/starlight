@@ -1,14 +1,24 @@
 import { EOL } from 'node:os';
 
-const { COMMIT_AUTHOR, COMMIT_ID, COMMIT_MESSAGE } = process.env;
-setDiscordMessage(COMMIT_AUTHOR, COMMIT_ID, COMMIT_MESSAGE);
+const { COMMIT_AUTHOR, COMMIT_ID, COMMIT_MESSAGE, GITHUB_REPO } = process.env;
+if (!COMMIT_AUTHOR || !COMMIT_ID || !COMMIT_MESSAGE || !GITHUB_REPO) {
+  throw new Error(
+    'Missing input.\n' +
+      'Required environment variables: COMMIT_AUTHOR, COMMIT_ID, COMMIT_MESSAGE, GITHUB_REPO\n\n' +
+      'Available environment variables: ' +
+      Object.keys(process.env).join(', ') +
+      '\n'
+  );
+}
+setDiscordMessage(COMMIT_AUTHOR, COMMIT_ID, COMMIT_MESSAGE, GITHUB_REPO);
 
 /**
  * @param {string} author The name of the commit author
  * @param {string} id The commit ID
  * @param {string} commitMsg A full commit message
+ * @param {string} repo The full GitHub repo name to link to, e.g. `'withastro/starlight'`
  */
-function setDiscordMessage(author, id, commitMsg) {
+function setDiscordMessage(author, id, commitMsg, repo) {
   const commitMessage = commitMsg
     .split('\n')
     .shift()
@@ -47,7 +57,7 @@ function setDiscordMessage(author, id, commitMsg) {
   process.stdout.write(
     `::set-output name=DISCORD_MESSAGE::` +
       escapeData(
-        `${emoji} **Merged!** ${author}: [\`${commitMessage}\`](<https://github.com/withastro/starlight/commit/${id}>)${coAuthorThanks}`
+        `${emoji} **Merged!** ${author}: [\`${commitMessage}\`](<https://github.com/${repo}/commit/${id}>)${coAuthorThanks}`
       ) +
       EOL
   );
