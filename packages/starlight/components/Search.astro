@@ -8,9 +8,18 @@ interface Props {
 }
 
 const t = useTranslations(Astro.props.locale);
+const pagefindTranslations = {
+  placeholder: t('search.label'),
+  ...Object.fromEntries(
+    Object.entries(t.pick('pagefind.')).map(([key, value]) => [
+      key.replace('pagefind.', ''),
+      value,
+    ])
+  ),
+};
 ---
 
-<site-search>
+<site-search data-translations={JSON.stringify(pagefindTranslations)}>
   <button data-open-modal disabled>
     {
       /* The span is `aria-hidden` because it is not shown on small screens. Instead, the icon label is used for accessibility purposes. */
@@ -96,23 +105,31 @@ const t = useTranslations(Astro.props.locale);
           e.preventDefault();
         }
       });
+
+      let translations = {};
+      try {
+        translations = JSON.parse(this.dataset.translations || '{}');
+      } catch {}
+
+      window.addEventListener('DOMContentLoaded', () => {
+        if (import.meta.env.DEV) return;
+        const onIdle =
+          window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+        onIdle(async () => {
+          const { PagefindUI } = await import('@pagefind/default-ui');
+          new PagefindUI({
+            element: '#starlight__search',
+            baseUrl: import.meta.env.BASE_URL,
+            bundlePath:
+              import.meta.env.BASE_URL.replace(/\/$/, '') + '/_pagefind/',
+            showImages: false,
+            translations,
+          });
+        });
+      });
     }
   }
   customElements.define('site-search', SiteSearch);
-
-  window.addEventListener('DOMContentLoaded', () => {
-    if (import.meta.env.DEV) return;
-    const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-    onIdle(async () => {
-      const { PagefindUI } = await import('@pagefind/default-ui');
-      new PagefindUI({
-        element: '#starlight__search',
-        baseUrl: import.meta.env.BASE_URL,
-        bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/_pagefind/',
-        showImages: false,
-      });
-    });
-  });
 </script>
 
 <style>

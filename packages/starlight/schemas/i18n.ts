@@ -1,6 +1,14 @@
 import { z } from 'astro/zod';
 
 export function i18nSchema() {
+  return starlightI18nSchema().merge(pagefindI18nSchema());
+}
+
+export function builtinI18nSchema() {
+  return starlightI18nSchema().required().strict().merge(pagefindI18nSchema());
+}
+
+function starlightI18nSchema() {
   return z
     .object({
       'skipLink.label': z
@@ -85,6 +93,72 @@ export function i18nSchema() {
         .string()
         .describe(
           'Label shown on the “next page” pagination arrow in the page footer.'
+        ),
+    })
+    .partial();
+}
+
+function pagefindI18nSchema() {
+  return z
+    .object({
+      'pagefind.clear_search': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"Clear"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.load_more': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"Load more results"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.search_label': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"Search this site"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.filters_label': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"Filters"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.zero_results': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.many_results': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"[COUNT] results for [SEARCH_TERM]"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.one_result': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"[COUNT] result for [SEARCH_TERM]"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.alt_search': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.search_suggestion': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]. Try one of the following searches:"`. See https://pagefind.app/docs/ui/#translations'
+        ),
+
+      'pagefind.searching': z
+        .string()
+        .describe(
+          'Pagefind UI translation. English default value: `"Searching for [SEARCH_TERM]..."`. See https://pagefind.app/docs/ui/#translations'
         ),
     })
     .partial();

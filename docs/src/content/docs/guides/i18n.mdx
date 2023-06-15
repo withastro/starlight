@@ -59,7 +59,7 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
    </FileTree>
 
-3. You can now add content files in your language directories. Use the same file name to associate pages across languages and take advantage of Starlight’s full set of i18n features, including fallback content, translation notices, and more. 
+3. You can now add content files in your language directories. Use the same file name to associate pages across languages and take advantage of Starlight’s full set of i18n features, including fallback content, translation notices, and more.
 
    For example, create `ar/index.md` and `en/index.md` to represent the homepage for Arabic and English respectively.
 
@@ -141,7 +141,7 @@ If a translation is not yet available for a language, Starlight will show reader
 
 ## Translate Starlight's UI
 
-In addition to hosting translated content files, Starlight allows you to translate the default UI strings (e.g. the "On this page" heading in the table of contents) so that your readers can experience your site entirely in the selected language. 
+In addition to hosting translated content files, Starlight allows you to translate the default UI strings (e.g. the "On this page" heading in the table of contents) so that your readers can experience your site entirely in the selected language.
 
 English, French, German, Japanese, Portuguese, and Spanish translated UI strings are provided out of the box, and we welcome [contributions to add more default languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
@@ -173,9 +173,9 @@ You can provide translations for additional languages you support — or overrid
 
    </FileTree>
 
-3. Add translations for the keys you want to translate to the JSON files. Translate only the values, leaving the keys in English (e.g. `"search.label": "Buscar"`). 
+3. Add translations for the keys you want to translate to the JSON files. Translate only the values, leaving the keys in English (e.g. `"search.label": "Buscar"`).
 
-    These are the English defaults of the existing strings Starlight ships with:
+   These are the English defaults of the existing strings Starlight ships with:
 
    ```json
    {
@@ -197,5 +197,23 @@ You can provide translations for additional languages you support — or overrid
      "page.lastUpdated": "Last updated:",
      "page.previousLink": "Next",
      "page.nextLink": "Previous"
+   }
+   ```
+
+   Starlight’s search modal is powered by the [Pagefind](https://pagefind.app/) library.
+   You can set translations for Pagefind’s UI in the same JSON file using `pagefind` keys:
+
+   ```json
+   {
+     "pagefind.clear_search": "Clear",
+     "pagefind.load_more": "Load more results",
+     "pagefind.search_label": "Search this site",
+     "pagefind.filters_label": "Filters",
+     "pagefind.zero_results": "No results for [SEARCH_TERM]",
+     "pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+     "pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+     "pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+     "pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+     "pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
