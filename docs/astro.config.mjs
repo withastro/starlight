@@ -84,12 +84,12 @@ export default defineConfig({
             {
               label: 'Showcase',
               link: 'showcase',
-              // translations: {
-              //   es: '',
-              //   ja: '',
-              //   fr: '',
-              //   it: '',
-              // },
+              translations: {
+                es: '',
+                ja: 'ショーケース',
+                fr: '',
+                it: '',
+              },
             },
           ],
         },
