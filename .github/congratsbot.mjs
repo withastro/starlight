@@ -20,8 +20,7 @@ setDiscordMessage(COMMIT_AUTHOR, COMMIT_ID, COMMIT_MESSAGE, GITHUB_REPO);
  */
 function setDiscordMessage(author, id, commitMsg, repo) {
   const commitMessage = commitMsg
-    .split('\n')
-    .shift()
+    .split('\n')[0]
     .replaceAll('`', '')
     .replaceAll('-', '–');
 
