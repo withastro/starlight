@@ -27,7 +27,7 @@ jobs:
       - id: message
         name: Format Discord message
         env:
-          GITHUB_REPO: ${{ github.event.repository.name }}
+          GITHUB_REPO: ${{ github.repository }}
           COMMIT_AUTHOR: ${{ github.event.commits[0].author.name }}
           COMMIT_MESSAGE: ${{ github.event.commits[0].message }}
           COMMIT_ID: ${{ github.event.commits[0].id }}
