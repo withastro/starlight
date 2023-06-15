@@ -37,20 +37,7 @@ function setDiscordMessage(author, id, commitMsg, repo) {
     coAuthorThanks = '\n' + getCoAuthorsMessage(names);
   }
 
-  const emoji = pick([
-    '🎉',
-    '🎊',
-    '🧑‍🚀',
-    '🥳',
-    '🙌',
-    '🚀',
-    '🌟',
-    '✨',
-    '💖',
-    '🤩',
-    '☄️',
-    '💫',
-  ]);
+  const emoji = pick(['🎉', '🎊', '🧑‍🚀', '🥳', '🙌', '🚀', '🤩', '☄️', '💫']);
 
   process.stdout.write(EOL);
   process.stdout.write(
@@ -94,7 +81,7 @@ function getCoAuthorsMessage(names) {
     '_Thanks <names> for helping!_ ✨',
     '_<names> stepped up to lend a hand — thank you!_ 🙌',
     '_<names> with the assist!_ 💪',
-    '_Couldn’t have done this without <names>!_ 💜',
+    '_Couldn’t have done this without <names>!_ 💖',
     '_Made even better by <names>!_ 🚀',
     '_And the team effort award goes to… <names>!_ 🏆',
     '_Featuring contributions by <names>!_ 🌟',
