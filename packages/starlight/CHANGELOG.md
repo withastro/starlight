@@ -1,5 +1,35 @@
 # @astrojs/starlight
 
+## 0.1.4
+
+### Patch Changes
+
+- [#190](https://github.com/withastro/starlight/pull/190) [`a3809e4`](https://github.com/withastro/starlight/commit/a3809e4f1e14f3949e9e25f7ffbdea2920408edb) Thanks [@gabrielemercolino](https://github.com/gabrielemercolino)! - Added Italian language support
+
+- [#193](https://github.com/withastro/starlight/pull/193) [`c9ca4eb`](https://github.com/withastro/starlight/commit/c9ca4ebe10f4776999e3fff4ac4c19ac0a714bac) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Fix bottom padding for sidebar on larger screen sizes
+
+## 0.1.3
+
+### Patch Changes
+
+- [#183](https://github.com/withastro/starlight/pull/183) [`89e0a04`](https://github.com/withastro/starlight/commit/89e0a04c26639246f550957acda2285e50417729) Thanks [@delucis](https://github.com/delucis)! - Fix disclosure caret rotation in sidebar sub-groups
+
+- [#177](https://github.com/withastro/starlight/pull/177) [`bdafdb0`](https://github.com/withastro/starlight/commit/bdafdb050d9d4e2501485dff37b71a3175a3b0c8) Thanks [@rviscomi](https://github.com/rviscomi)! - Fix Markdown table overflow
+
+- [#185](https://github.com/withastro/starlight/pull/185) [`4844915`](https://github.com/withastro/starlight/commit/4844915c25c9cdfb852e41584d93abfd85b82d08) Thanks [@delucis](https://github.com/delucis)! - Support setting an SVG as the hero image file
+
+## 0.1.2
+
+### Patch Changes
+
+- [#174](https://github.com/withastro/starlight/pull/174) [`6ab31b4`](https://github.com/withastro/starlight/commit/6ab31b4900166f952c1ca5ec4e4a1ef66f31be97) Thanks [@rviscomi](https://github.com/rviscomi)! - Split `withBase` URL helper to fix use with files.
+
+- [#168](https://github.com/withastro/starlight/pull/168) [`cb18eef`](https://github.com/withastro/starlight/commit/cb18eef4fda8227a6c5ec73589526dd7fbb8f4a6) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Fix bottom padding on left sidebar
+
+- [#167](https://github.com/withastro/starlight/pull/167) [`990ec53`](https://github.com/withastro/starlight/commit/990ec53dee099fdb6d113a3be5ef375c73e6945a) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Add `bundlePath` option to Pagefind configuration
+
+- [`4f666ba`](https://github.com/withastro/starlight/commit/4f666ba4fad7118a31bae819eb6be068da9e4d94) Thanks [@delucis](https://github.com/delucis)! - Fix focus outline positioning in tabs
+
 ## 0.1.1
 
 ### Patch Changes

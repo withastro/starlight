@@ -1,0 +1,20 @@
+{
+	"skipLink.label": "Salta ai contenuti",
+	"search.label": "Cerca",
+	"search.shortcutLabel": "(Usa / per cercare)",
+	"search.cancelLabel": "Cancella",
+	"themeSelect.accessibleLabel": "Seleziona tema",
+	"themeSelect.dark": "Scuro",
+	"themeSelect.light": "Chiaro",
+	"themeSelect.auto": "Auto",
+	"languageSelect.accessibleLabel": "Seleziona lingua",
+	"menuButton.accessibleLabel": "Menu",
+	"sidebarNav.accessibleLabel": "Principale",
+	"tableOfContents.onThisPage": "In questa pagina",
+	"tableOfContents.overview": "Panoramica",
+	"i18n.untranslatedContent": "Questi contenuti non sono ancora disponibili nella tua lingua.",
+	"page.editLink": "Modifica pagina",
+	"page.lastUpdated": "Ultimo aggiornamento:",
+	"page.previousLink": "Indietro",
+	"page.nextLink": "Avanti"
+}

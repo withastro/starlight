@@ -24,4 +24,7 @@ export default defineConfig({
       ],
     }),
   ],
+
+  // Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp
+  image: { service: { entrypoint: 'astro/assets/services/sharp' } },
 });

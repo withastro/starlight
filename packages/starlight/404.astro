@@ -1,6 +1,6 @@
 ---
 import config from 'virtual:starlight/user-config';
-import { withBase } from './utils/base';
+import { pathWithBase } from './utils/base';
 
 // Built-in CSS styles.
 import './style/props.css';
@@ -40,7 +40,7 @@ const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
           <p>Houston, we have a problem.</p>
           <p>
             We couldn’t find that link. Check the address or
-            <a href={withBase('/')}>head back home</a>.
+            <a href={pathWithBase('/')}>head back home</a>.
           </p>
         </MarkdownContent>
       </main>
