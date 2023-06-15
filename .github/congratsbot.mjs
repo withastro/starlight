@@ -23,7 +23,7 @@ function setDiscordMessage(author, id, commitMsg, repo) {
     .split('\n')
     .shift()
     .replaceAll('`', '')
-    .replaceAll('--', '-​-');
+    .replaceAll('-', '–');
 
   const coAuthors = commitMsg
     .split('\n')
