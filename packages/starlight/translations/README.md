@@ -9,6 +9,6 @@ Each language has its own JSON file and follows the [translation structure descr
 
 2. Fill the file with translations for each UI string. You can base your translations on [`en.json`](./en.json). Translate only the values, leaving the keys in English (e.g. `"search.label": "Buscar"`).
 
-3. Add your file in [`index.ts`](./index.ts).
+3. Import your file in [`index.ts`](./index.ts) and add your language to the `Object.entries`.
 
 4. Open a pull request on GitHub to add your file to Starlight!
