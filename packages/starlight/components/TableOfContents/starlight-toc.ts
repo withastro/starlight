@@ -60,7 +60,7 @@ export class StarlightTOC extends HTMLElement {
         if (!isIntersecting) continue;
         const heading = getElementHeading(target);
         if (!heading) continue;
-        const link = links.find((link) => link.hash === '#' + heading.id);
+        const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
         if (link) {
           this.current = link;
           break;
