@@ -1,5 +1,23 @@
 # @astrojs/starlight
 
+## 0.1.4
+
+### Patch Changes
+
+- [#190](https://github.com/withastro/starlight/pull/190) [`a3809e4`](https://github.com/withastro/starlight/commit/a3809e4f1e14f3949e9e25f7ffbdea2920408edb) Thanks [@gabrielemercolino](https://github.com/gabrielemercolino)! - Added Italian language support
+
+- [#193](https://github.com/withastro/starlight/pull/193) [`c9ca4eb`](https://github.com/withastro/starlight/commit/c9ca4ebe10f4776999e3fff4ac4c19ac0a714bac) Thanks [@BryceRussell](https://github.com/BryceRussell)! - Fix bottom padding for sidebar on larger screen sizes
+
+## 0.1.3
+
+### Patch Changes
+
+- [#183](https://github.com/withastro/starlight/pull/183) [`89e0a04`](https://github.com/withastro/starlight/commit/89e0a04c26639246f550957acda2285e50417729) Thanks [@delucis](https://github.com/delucis)! - Fix disclosure caret rotation in sidebar sub-groups
+
+- [#177](https://github.com/withastro/starlight/pull/177) [`bdafdb0`](https://github.com/withastro/starlight/commit/bdafdb050d9d4e2501485dff37b71a3175a3b0c8) Thanks [@rviscomi](https://github.com/rviscomi)! - Fix Markdown table overflow
+
+- [#185](https://github.com/withastro/starlight/pull/185) [`4844915`](https://github.com/withastro/starlight/commit/4844915c25c9cdfb852e41584d93abfd85b82d08) Thanks [@delucis](https://github.com/delucis)! - Support setting an SVG as the hero image file
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,6 +1,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
+export const locales = {
+  root: { label: 'English', lang: 'en' },
+  de: { label: 'Deutsch', lang: 'de' },
+  es: { label: 'Español', lang: 'es' },
+  ja: { label: '日本語', lang: 'ja' },
+  fr: { label: 'Français', lang: 'fr' },
+  it: { label: 'Italiano', lang: 'it' },
+};
+
 const site = 'https://starlight.astro.build/';
 
 export default defineConfig({
@@ -39,13 +48,7 @@ export default defineConfig({
         },
       ],
       customCss: process.env.NO_GRADIENTS ? [] : ['/src/assets/landing.css'],
-      locales: {
-        root: { label: 'English', lang: 'en' },
-        de: { label: 'Deutsch', lang: 'de' },
-        es: { label: 'Español', lang: 'es' },
-        ja: { label: '日本語', lang: 'ja' },
-        fr: { label: 'Français', lang: 'fr' },
-      },
+      locales,
       sidebar: [
         {
           label: 'Start Here',
@@ -54,6 +57,7 @@ export default defineConfig({
             es: 'Comienza aqui',
             ja: 'ここからはじめる',
             fr: 'Commencez ici',
+            it: 'Inizia qui',
           },
           items: [
             {
@@ -63,7 +67,8 @@ export default defineConfig({
                 de: 'Erste Schritte',
                 es: 'Empezando',
                 ja: '入門',
-                fr: 'Mise en route'
+                fr: 'Mise en route',
+                it: 'Iniziamo',
               },
             },
             {
@@ -72,14 +77,25 @@ export default defineConfig({
               translations: {
                 es: 'Documentación ecológica',
                 ja: '環境への負荷',
-                fr: 'Impact environnemental'
+                fr: 'Impact environnemental',
+                it: 'Impatto ambientale',
               },
+            },
+            {
+              label: 'Showcase',
+              link: 'showcase',
+              // translations: {
+              //   es: '',
+              //   ja: '',
+              //   fr: '',
+              //   it: '',
+              // },
             },
           ],
         },
         {
           label: 'Guides',
-          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides' },
+          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides', it: "Guide", },
           autogenerate: { directory: 'guides' },
         },
         {
@@ -89,10 +105,12 @@ export default defineConfig({
             es: 'Referencias',
             ja: 'リファレンス',
             fr: 'Référence',
+            it: 'Riferimenti',
           },
           autogenerate: { directory: 'reference' },
         },
       ],
     }),
   ],
+  image: { service: { entrypoint: 'astro/assets/services/sharp' } },
 });

@@ -14,18 +14,24 @@ const {
   image,
   actions,
 } = Astro.props.hero;
+
+const imageAttrs = {
+  loading: 'eager' as const,
+  decoding: 'async' as const,
+  width: 400,
+  height: 400,
+  alt: image?.alt,
+};
 ---
 
 <div class="hero">
   {
     image?.file ? (
-      <Image
-        src={image.file}
-        loading="eager"
-        width={400}
-        height={400}
-        alt={image.alt}
-      />
+      image.file.format === 'svg' ? (
+        <img src={image.file.src} {...imageAttrs} />
+      ) : (
+        <Image src={image.file} {...imageAttrs} />
+      )
     ) : (
       image?.html && <div class="hero-html flex" set:html={image.html} />
     )
