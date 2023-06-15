@@ -51,6 +51,10 @@ export default defineConfig({
       locales,
       sidebar: [
         {
+          label: 'Home',
+          link: '/',
+        },
+        {
           label: 'Start Here',
           translations: {
             de: 'Beginne hier',
@@ -83,22 +87,28 @@ export default defineConfig({
               },
             },
             {
-              label: 'Showcase',
-              link: 'showcase',
+              label: 'Guides',
               translations: {
-                // de: '',
-                // es: '',
-                ja: 'ショーケース',
-                // fr: '',
-                // it: '',
+                de: 'Anleitungen',
+                es: 'Guías',
+                ja: 'ガイド',
+                fr: 'Guides',
+                it: 'Guide',
               },
+              autogenerate: { directory: 'guides' },
             },
           ],
         },
         {
-          label: 'Guides',
-          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides', it: "Guide", },
-          autogenerate: { directory: 'guides' },
+          label: 'Showcase',
+          link: 'showcase',
+          translations: {
+            // de: '',
+            // es: '',
+            ja: 'ショーケース',
+            // fr: '',
+            // it: '',
+          },
         },
         {
           label: 'Reference',
