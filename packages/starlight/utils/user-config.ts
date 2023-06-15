@@ -95,14 +95,6 @@ const SidebarItemSchema = z.union([
 ]);
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
 
-const SidebarGroupSchema: z.ZodType<
-  | z.output<typeof ManualSidebarGroupSchema>
-  | z.output<typeof AutoSidebarGroupSchema>,
-  z.ZodTypeDef,
-  | z.input<typeof ManualSidebarGroupSchema>
-  | z.input<typeof AutoSidebarGroupSchema>
-> = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
-
 const UserConfigSchema = z.object({
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: z
@@ -202,7 +194,7 @@ const UserConfigSchema = z.object({
   defaultLocale: z.string().optional(),
 
   /** Configure your site’s sidebar navigation items. */
-  sidebar: SidebarGroupSchema.array().optional(),
+  sidebar: SidebarItemSchema.array().optional(),
 
   /**
    * Add extra tags to your site’s `<head>`.
