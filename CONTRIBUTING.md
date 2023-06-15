@@ -30,6 +30,8 @@ We encourage you to:
 
 - [**Review existing PRs**][pulls] to help us merge contributions sooner.
 
+- [**Add or update translations**](#translations). We need help translating both Starlight’s UI and documentation.
+
 ## About this repo
 
 This repo is a “monorepo,” meaning it contains several projects in one. It contains the Starlight docs site in [`docs/`](./docs/) and the packages that make up Starlight in [`packages/`](./packages/).
@@ -87,7 +89,30 @@ pnpm dev
 
 You should then be able to open <http://localhost:3000> and see your changes.
 
-### Understanding Starlight
+## Translations
+
+Translations help make Starlight accessible to more people.
+
+### Translating Starlight’s UI
+
+Starlight’s UI comes with some built-in text elements. For example, the table of contents on a Starlight page has a heading of “On this page” and the theme picker shows “Light”, “Dark”, and “Auto” labels. Starlight aims to provide these in as many languages as possible.
+
+Help out by adding or updating translation files in [`packages/starlight/translations`](./packages/starlight/translations/).
+Each language’s JSON file follows the [translation structure described in Starlight’s docs](https://starlight.astro.build/guides/i18n/#translate-starlights-ui).
+
+### Translating Starlight’s docs
+
+Starlight’s documentation is also translated into multiple languages. You can find the source code for the site in [the `docs/` directory](./docs/) of this repository.
+
+Help out by:
+
+- Reviewing [open translation PRs][pulls]
+- Updating out-of-date translated pages
+- Adding an untranslated page
+
+Visit **<https://i18n.starlight.astro.build>** to track translation progress for the currently supported languages.
+
+## Understanding Starlight
 
 - Starlight is built as an Astro integration.
   Read the [Astro Integration API docs][api-docs] to learn more about how integrations work.
