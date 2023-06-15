@@ -1,0 +1,44 @@
+---
+title: Starlight 🌟 Costruire siti per documentazione con Astro
+description: Starlight ti aiuta a creare siti belli e performanti con Astro.
+template: splash
+hero:
+  title: Fai brillare la tua documentazione con Starlight
+  tagline: Tutto quello di cui hai bisogno per creare documentazione stellare. Veloce, accessibile e facile da usare.
+  image:
+    file: ../../../assets/hero-star.webp
+  actions:
+    - text: Inizia
+      icon: right-arrow
+      variant: primary
+      link: /it/getting-started/
+    - text: Vedi su GitHub
+      icon: external
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../../components/about-astro.astro';
+
+<CardGrid stagger>
+  <Card title="Documentazione che delizia" icon="open-book">
+    Include: Navigazione, ricerca, internazionalizzazione, ottimizzazione del motore di ricerca, caratteri facili da leggere, evidenziazione del codice, tema scuro e altro.
+  </Card>
+  <Card title="Basato su Astro" icon="rocket">
+    Sfrutta la potenza di Astro. Estendi Starlight con le tue integrazioni e librerie preferite.
+  </Card>
+  <Card title="Markdown, Markdoc, e MDX" icon="document">
+    Utilizza il tuo linguaggio markup preferito. Starlight fornisce validazione frontmatter con TypeScript.
+  </Card>
+  <Card title="Utilizza i tuoi componenti UI" icon="puzzle">
+    Starlight è una soluzione indipendente da framework. Estendi come vuoi con React, Vue, Svelte, Solid e altro.
+  </Card>
+</CardGrid>
+
+<AboutAstro title="Sviluppato da">
+Astro è il framework completo progettato per essere veloce.
+Prendi i tuoi contenuti da dove preferisci e pubblica dove vuoi, il tutto con i tuoi componenti UI e librerie preferite.
+
+[Impara Astro](https://astro.build/)
+
+</AboutAstro>

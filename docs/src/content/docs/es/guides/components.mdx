@@ -1,0 +1,103 @@
+---
+title: Componentes
+description: Utilizando componentes en MDX con Starlight.
+---
+
+Los componentes te permiten reutilizar fácilmente una parte de la interfaz de usuario o un estilo de manera consistente. Ejemplos podrían incluir una tarjeta de enlace o un incrustado de YouTube. Starlight admite el uso de componentes en archivos [MDX](https://mdxjs.com/) y proporciona algunos componentes comunes para que los utilices.
+
+[Aprende más sobre la construcción de componentes en los docs de Astro](https://docs.astro.build/en/core-concepts/astro-components/).
+
+## Usando un componente
+
+Puedes utilizar un componente importándolo en tu archivo MDX y luego renderizándolo como una etiqueta JSX. Estas etiquetas se ven como etiquetas HTML, pero comienzan con una letra mayúscula que coincide con el nombre en tu declaración de `import`:
+
+```mdx
+---
+# src/content/docs/index.mdx
+title: Bienvenido a mis docs
+---
+
+import UnComponente from '../../componentes/UnComponente.astro';
+import OtroComponente from '../../componentes/OtroComponente.astro';
+
+<UnComponente prop="algo" />
+
+<OtroComponente>
+  Los componentes también pueden contener **contenido anidado**.
+</OtroComponente>
+```
+
+Debido a que Starlight está impulsado por Astro, puedes agregar soporte para componentes construidos con cualquier [framework UI compatible (React, Preact, Svelte, Vue, Solid, Lit y Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) en tus archivos MDX.
+
+## Componentes integrados
+
+Starlight proporciona algunos componentes integrados para casos de uso comunes en la documentación. Estos componentes están disponibles en el paquete `@astrojs/starlight/components`.
+
+### Pestañas
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Puedes mostrar una interfaz con pestañas utilizando los componentes `<Tabs>` y `<TabItem>`. Cada `<TabItem>` debe tener una `label` que se mostrará a los usuarios.
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+</Tabs>
+```
+
+El código anterior genera las siguientes pestañas en la página:
+
+<Tabs>
+  <TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+  <TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+### Tarjetas
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Puedes mostrar contenido en una caja que coincida con los estilos de Starlight utilizando el componente `<Card>`. Envuelve varias tarjetas en el componente `<CardGrid>` para mostrar las tarjetas una al lado de la otra cuando hay suficiente espacio.
+
+El componente `<Card>` requiere un `title` y opcionalmente puede incluir un atributo `icon` establecido con el nombre de [uno de los iconos integrados de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="¡Echa un vistazo a esto!">Contenido interesante que quieres resaltar.</Card>
+
+<CardGrid>
+  <Card title="Estrellas" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Lunas" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+```
+
+El código anterior genera lo siguiente en la página:
+
+<Card title="¡Echa un vistazo a esto!">Contenido interesante que quieres resaltar.</Card>
+
+<CardGrid>
+  <Card title="Estrellas" icon="star">
+    Sirius, Vega, Betelgeuse
+  </Card>
+  <Card title="Lunas" icon="moon">
+    Io, Europa, Ganymede
+  </Card>
+</CardGrid>
+
+:::tip
+Utiliza una cuadrícula de tarjetas en tu página de inicio para mostrar las características clave de tu proyecto. Agrega el atributo `stagger` para desplazar verticalmente la segunda columna de tarjetas y agregar interés visual:
+
+```astro
+<CardGrid stagger>
+  <!-- tarjetas -->
+</CardGrid>
+```
+
+:::

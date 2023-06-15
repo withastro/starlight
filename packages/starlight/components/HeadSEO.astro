@@ -4,6 +4,7 @@ import config from 'virtual:starlight/user-config';
 import type { HeadConfigSchema } from '../schemas/head';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
+import { fileWithBase } from '../utils/base';
 
 interface Props {
   data: CollectionEntry<'docs'>['data'];
@@ -32,7 +33,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
     tag: 'link',
     attrs: {
       rel: 'shortcut icon',
-      href: import.meta.env.BASE_URL + 'favicon.svg',
+      href: fileWithBase('/favicon.svg'),
       type: 'image/svg+xml',
     },
   },
@@ -80,7 +81,7 @@ if (Astro.site) {
     tag: 'link',
     attrs: {
       rel: 'sitemap',
-      href: import.meta.env.BASE_URL + 'sitemap-index.xml',
+      href: fileWithBase('/sitemap-index.xml'),
     },
   });
 }

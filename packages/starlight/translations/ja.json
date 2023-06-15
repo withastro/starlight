@@ -1,0 +1,20 @@
+{
+  "skipLink.label": "コンテンツにスキップ",
+  "search.label": "検索",
+  "search.shortcutLabel": "（/を押して検索）",
+  "search.cancelLabel": "キャンセル",
+  "themeSelect.accessibleLabel": "テーマの選択",
+  "themeSelect.dark": "ダーク",
+  "themeSelect.light": "ライト",
+  "themeSelect.auto": "自動",
+  "languageSelect.accessibleLabel": "言語の選択",
+  "menuButton.accessibleLabel": "メニュー",
+  "sidebarNav.accessibleLabel": "メイン",
+  "tableOfContents.onThisPage": "目次",
+  "tableOfContents.overview": "概要",
+  "i18n.untranslatedContent": "このコンテンツはまだ日本語訳がありません。",
+  "page.editLink": "ページを編集",
+  "page.lastUpdated": "最終更新日:",
+  "page.previousLink": "前へ",
+  "page.nextLink": "次へ"
+}

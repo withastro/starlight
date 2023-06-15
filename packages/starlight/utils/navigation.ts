@@ -1,7 +1,9 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
-import { slugToPathname } from './slugs';
+import { pathWithBase } from './base';
+import { pickLang } from './i18n';
 import { Route, getLocaleRoutes, routes } from './routing';
+import { localeToLang, slugToPathname } from './slugs';
 import type {
   AutoSidebarGroup,
   SidebarItem,
@@ -47,7 +49,7 @@ function configItemToEntry(
   } else {
     return {
       type: 'group',
-      label: item.label,
+      label: pickLang(item.translations, localeToLang(locale)) || item.label,
       entries: item.items.map((i) =>
         configItemToEntry(i, currentPathname, locale, routes)
       ),
@@ -64,11 +66,17 @@ function groupFromAutogenerateConfig(
 ): Group {
   const { directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
-  const dirDocs = routes.filter((doc) => doc.slug.startsWith(localeDir));
+  const dirDocs = routes.filter(
+    (doc) =>
+      // Match against `foo.md` or `foo/index.md`.
+      doc.slug === localeDir ||
+      // Match against `foo/anything/else.md`.
+      doc.slug.startsWith(localeDir + '/')
+  );
   const tree = treeify(dirDocs, localeDir);
   return {
     type: 'group',
-    label: item.label,
+    label: pickLang(item.translations, localeToLang(locale)) || item.label,
     entries: sidebarFromDir(tree, currentPathname, locale),
   };
 }
@@ -95,23 +103,21 @@ function linkFromConfig(
     // Inject current locale into link.
     if (locale) href = '/' + locale + href;
   }
-  return makeLink(href, item.label, currentPathname);
+  const label = pickLang(item.translations, localeToLang(locale)) || item.label;
+  return makeLink(href, label, currentPathname);
 }
 
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
-  if (!isAbsolute(href)) {
-    href = ensureLeadingAndTrailingSlashes(href);
-    /** Base URL with trailing `/` stripped. */
-    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-    if (base) href = base + href;
-  }
+  if (!isAbsolute(href)) href = pathWithBase(href);
   const isCurrent = href === currentPathname;
   return { type: 'link', label, href, isCurrent };
 }
 
 /** Get the segments leading to a page. */
 function getBreadcrumbs(slug: string, baseDir: string): string[] {
+  // Index slugs will match `baseDir` and don’t include breadcrumbs.
+  if (slug === baseDir) return [];
   // Ensure base directory ends in a trailing slash.
   if (!baseDir.endsWith('/')) baseDir += '/';
   // Strip base directory from slug if present.
@@ -227,6 +233,6 @@ export function getPrevNextLinks(sidebar: SidebarEntry[]): {
   const entries = flattenSidebar(sidebar);
   const currentIndex = entries.findIndex((entry) => entry.isCurrent);
   const prev = entries[currentIndex - 1];
-  const next = entries[currentIndex + 1];
+  const next = currentIndex > -1 ? entries[currentIndex + 1] : undefined;
   return { prev, next };
 }

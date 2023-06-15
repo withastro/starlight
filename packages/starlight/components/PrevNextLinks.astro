@@ -1,24 +1,27 @@
 ---
 import type { Link } from '../utils/navigation';
+import { useTranslations } from '../utils/translations';
 import Icon from './Icon.astro';
 
 interface Props {
   prev: Link | undefined;
   next: Link | undefined;
   dir: 'ltr' | 'rtl';
+  locale: string | undefined;
 }
 
-const { prev, next, dir } = Astro.props;
+const { prev, next, dir, locale } = Astro.props;
 const isRtl = dir === 'rtl';
+const t = useTranslations(locale);
 ---
 
-<div class="pagination-links" dir={dir}>
+<div class="pagination-links flex" dir={dir}>
   {
     prev && (
       <a href={prev.href} rel="prev">
         <Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.5rem" />
         <span>
-          Previous
+          {t('page.previousLink')}
           <br />
           <span class="link-title">{prev.label}</span>
         </span>
@@ -30,7 +33,7 @@ const isRtl = dir === 'rtl';
       <a href={next.href} rel="next">
         <Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.5rem" />
         <span>
-          Next
+          {t('page.nextLink')}
           <br />
           <span class="link-title">{next.label}</span>
         </span>
@@ -41,7 +44,6 @@ const isRtl = dir === 'rtl';
 
 <style>
   .pagination-links {
-    display: flex;
     flex-wrap: wrap;
     gap: 1rem;
   }
@@ -49,7 +51,7 @@ const isRtl = dir === 'rtl';
   a {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 0.5rem;
     width: 100%;
     flex-basis: calc(50% - 0.5rem);
@@ -59,6 +61,7 @@ const isRtl = dir === 'rtl';
     padding: 1rem;
     text-decoration: none;
     color: var(--sl-color-gray-2);
+    box-shadow: var(--sl-shadow-md);
   }
   [rel='next'] {
     justify-content: end;

@@ -32,11 +32,13 @@ export function slugToLocaleData(slug: string): LocaleData {
  * Get the BCP-47 language tag for the given locale.
  * @param locale Locale string or `undefined` for the root locale.
  */
-function localeToLang(locale: string | undefined): string {
+export function localeToLang(locale: string | undefined): string {
   const lang = locale
     ? config.locales?.[locale]?.lang
     : config.locales?.root?.lang;
-  return lang || 'en';
+  const defaultLang =
+    config.defaultLocale?.lang || config.defaultLocale?.locale;
+  return lang || defaultLang || 'en';
 }
 
 /**
@@ -47,7 +49,7 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
   const dir = locale
     ? config.locales?.[locale]?.dir
     : config.locales?.root?.dir;
-  return dir || 'ltr';
+  return dir || config.defaultLocale.dir;
 }
 
 export function slugToParam(slug: string): string | undefined {
@@ -80,6 +82,7 @@ export function localizedSlug(
   const slugLocale = slugToLocale(slug);
   if (slugLocale === locale) return slug;
   locale = locale || '';
+  if (slugLocale === slug) return locale;
   if (slugLocale) {
     return slug
       .replace(slugLocale + '/', locale ? locale + '/' : '')

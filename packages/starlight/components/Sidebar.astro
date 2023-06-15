@@ -8,13 +8,15 @@ interface Props {
   sidebar: ReturnType<typeof getSidebar>;
   locale: string | undefined;
 }
+
+const { sidebar, locale } = Astro.props;
 ---
 
 <div class="sidebar flex">
-  <SidebarSublist sublist={Astro.props.sidebar} />
+  <SidebarSublist sublist={sidebar} />
   <div class="mobile-preferences flex md:hidden">
-    <ThemeSelect />
-    <LanguageSelect locale={Astro.props.locale} />
+    <ThemeSelect {locale} />
+    <LanguageSelect {locale} />
   </div>
 </div>
 
@@ -30,5 +32,11 @@ interface Props {
     justify-content: space-between;
     border-top: 1px solid var(--sl-color-gray-6);
     padding: 0.5rem 0;
+  }
+
+  @media (min-width: 50rem) {
+    .sidebar > :global(:nth-last-child(2)) {
+      padding-bottom: 1rem;
+    }
   }
 </style>

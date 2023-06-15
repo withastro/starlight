@@ -1,13 +1,20 @@
 ---
 import Icon from './Icon.astro';
+import { useTranslations } from '../utils/translations';
+
+interface Props {
+  locale: string | undefined;
+}
+
+const t = useTranslations(Astro.props.locale);
 ---
 
 <starlight-menu-button>
   <button
     aria-expanded="false"
-    aria-label="Menu"
+    aria-label={t('menuButton.accessibleLabel')}
     aria-controls="starlight__sidebar"
-    class="md:hidden"
+    class="flex md:hidden"
   >
     <Icon name="bars" />
   </button>
@@ -57,7 +64,6 @@ import Icon from './Icon.astro';
     z-index: var(--sl-z-index-navbar);
     border: 0;
     border-radius: 50%;
-    display: flex;
     width: var(--sl-menu-button-size);
     height: var(--sl-menu-button-size);
     padding: 0.5rem;

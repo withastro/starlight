@@ -1,0 +1,122 @@
+---
+title: 入門
+description: AstroのStarlightで新しいドキュメントサイトを作成する方法について学びます。
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+:::caution[作業中]
+Starlightはまだ開発の初期段階にあります。何か不具合を見つけた場合は、[GitHubでissueを開く](https://github.com/withastro/starlight/issues/new/choose)か、または[Discord](https://astro.build/chat)でお知らせください。
+:::
+
+## 新しいプロジェクトを作成する
+
+Starlightは、[Astro](https://astro.build)の上に構築された、フル機能のドキュメント向けテーマです。
+
+以下のコマンドにより、Astro + Starlightの新しいプロジェクトを作成できます。
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# npmで新しいプロジェクトを作成する
+npm create astro@latest -- --template starlight
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# pnpmで新しいプロジェクトを作成する
+pnpm create astro --template starlight
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# yarnで新しいプロジェクトを作成する
+yarn create astro --template starlight
+```
+
+</TabItem>
+</Tabs>
+
+これにより、サイトに必要なすべてのファイルと設定が含まれた、新しい[プロジェクトディレクトリ](/ja/guides/project-structure/)が作成されます。
+
+:::tip[試してみよう]
+Starlightをブラウザで試すには、[StackBlitzでテンプレートを開きます](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)。
+:::
+
+## Starlightでコンテンツを作成する
+
+以上で、Starlightに新しいコンテンツを追加したり、既存のファイルを持ち込んだりする準備ができました！
+
+### ファイルフォーマット
+
+Starlightでは、MarkdownとMDXでコンテンツを作成できます。（Markdocのサポートは、実験的な[AstroのMarkdocインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)をインストールして追加できます。）
+
+### ページの追加
+
+`src/content/docs/`に`.md`または`.mdx`ファイルを作成して、サイトに新しいページを自動で追加できます。ファイルを整理するためにサブフォルダを追加し、複数のパスセグメントを作成することもできます。
+
+```
+src/content/docs/hello-world.md => your-site.com/hello-world
+src/content/docs/guides/faq.md => your-site.com/guides/faq
+```
+
+### 型安全なフロントマター
+
+Starlightのページは、ページの表示方法を制御するための、カスタマイズ可能な[共通のフロントマタープロパティ](/ja/reference/frontmatter/)を認識します。
+
+```md
+---
+title: こんにちは、世界！
+description: これはStarlightで作成されたサイトのページです
+---
+```
+
+何か重要なことを忘れてしまっていても、Starlightが教えてくれます。
+
+## Starlightサイトをデプロイする
+
+Starlightサイトの作成とカスタマイズが完了したら、Netlify、Vercel、GitHub Pages、その他多くのお好みのウェブサーバーやホスティングプラットフォームにデプロイできます。
+
+[Astroサイトのデプロイについては、Astroのドキュメントを参照してください。](https://docs.astro.build/ja/guides/deploy/)
+
+## Starlightを更新する
+
+:::tip[ヒント]
+Starlightはベータ版のソフトウェアであるため、頻繁に更新や改善がおこなわれます。Starlightを定期的に更新してください！
+:::
+
+StarlightはAstroインテグレーションであり、他の`@astrojs/*`インテグレーションと同様に更新できます。
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# npmでStarlightをアップグレードする
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# pnpmでStarlightをアップグレードする
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# yarnでStarlightをアップグレードする
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+各リリースでおこなわれた変更の全リストは、[Starlightのチェンジログ](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md)で確認できます。

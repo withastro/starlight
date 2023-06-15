@@ -9,5 +9,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["starlight-docs"]
+  "ignore": ["starlight-docs", "@example/*", "docs-i18n-tracker"]
 }

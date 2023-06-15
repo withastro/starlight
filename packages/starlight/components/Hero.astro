@@ -1,0 +1,139 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import CallToAction from './CallToAction.astro';
+
+interface Props {
+  fallbackTitle: string;
+  hero: NonNullable<CollectionEntry<'docs'>['data']['hero']>;
+}
+
+const {
+  title = Astro.props.fallbackTitle,
+  tagline,
+  image,
+  actions,
+} = Astro.props.hero;
+
+const imageAttrs = {
+  loading: 'eager' as const,
+  decoding: 'async' as const,
+  width: 400,
+  height: 400,
+  alt: image?.alt,
+};
+---
+
+<div class="hero">
+  {
+    image?.file ? (
+      image.file.format === 'svg' ? (
+        <img src={image.file.src} {...imageAttrs} />
+      ) : (
+        <Image src={image.file} {...imageAttrs} />
+      )
+    ) : (
+      image?.html && <div class="hero-html flex" set:html={image.html} />
+    )
+  }
+  <div class="flex stack">
+    <div class="flex copy">
+      <h1 id="starlight__overview" set:html={title} />
+      {tagline && <div class="tagline" set:html={tagline} />}
+    </div>
+    {
+      actions.length > 0 && (
+        <div class="flex actions">
+          {actions.map(({ text, ...attrs }) => (
+            <CallToAction {...attrs} set:html={text} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .hero {
+    display: grid;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero > img,
+  .hero > .hero-html {
+    object-fit: contain;
+    width: min(70%, 20rem);
+    height: auto;
+    margin-inline: auto;
+  }
+
+  .stack {
+    flex-direction: column;
+    gap: clamp(1.5rem, calc(1.5rem + 1vw), 2rem);
+    text-align: center;
+  }
+
+  .copy {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .copy > * {
+    max-width: 50ch;
+  }
+
+  h1 {
+    font-size: clamp(
+      var(--sl-text-3xl),
+      calc(0.25rem + 5vw),
+      var(--sl-text-6xl)
+    );
+    line-height: var(--sl-line-height-headings);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+
+  .tagline {
+    font-size: clamp(
+      var(--sl-text-base),
+      calc(0.0625rem + 2vw),
+      var(--sl-text-xl)
+    );
+    color: var(--sl-color-gray-2);
+  }
+
+  .actions {
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (min-width: 50rem) {
+    .hero {
+      grid-template-columns: 7fr 4fr;
+      gap: 3%;
+      padding-block: clamp(2.5rem, calc(1rem + 10vmin), 10rem);
+    }
+
+    .hero > img,
+    .hero > .hero-html {
+      order: 2;
+      width: min(100%, 25rem);
+    }
+
+    .stack {
+      text-align: start;
+    }
+
+    .copy {
+      align-items: flex-start;
+    }
+
+    .actions {
+      justify-content: flex-start;
+    }
+  }
+</style>

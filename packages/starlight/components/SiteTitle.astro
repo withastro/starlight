@@ -1,6 +1,11 @@
 ---
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
+import { pathWithBase } from '../utils/base';
+
+interface Props {
+  locale: string | undefined;
+}
 
 if (config.logo) {
   let err: string | undefined;
@@ -17,9 +22,11 @@ if (config.logo) {
   }
   if (err) throw new Error(err);
 }
+
+const href = pathWithBase(Astro.props.locale || '/');
 ---
 
-<a href={import.meta.env.BASE_URL} class="site-title flex">
+<a {href} class="site-title flex">
   {
     config.logo && logos.dark && (
       <>
@@ -50,6 +57,7 @@ if (config.logo) {
 
 <style>
   .site-title {
+    justify-self: flex-start;
     align-items: center;
     gap: var(--sl-nav-gap);
     font-size: var(--sl-text-h4);

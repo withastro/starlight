@@ -1,0 +1,43 @@
+---
+title: Starlight 🌟 Astroでドキュメントサイトを作る
+description: Starlightは、Astroを使った美しく高性能なドキュメントサイトの構築を支援します。
+template: splash
+hero:
+  title: Starlightでドキュメントを輝かせる
+  tagline: 最高のドキュメントサイトを作るために必要なものがすべて揃っています。高速でアクセシブル、しかも使いやすさも備えます。
+  image:
+    file: ../../../assets/hero-star.webp
+  actions:
+    - text: はじめる
+      icon: right-arrow
+      variant: primary
+      link: /ja/getting-started/
+    - text: GitHubで見る
+      icon: external
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../../components/about-astro.astro';
+
+<CardGrid stagger>
+  <Card title="心躍るドキュメント" icon="open-book">
+    サイトナビゲーション、検索、国際化、SEO、読みやすいタイポグラフィ、コードハイライト、ダークモードなどを内蔵しています。
+  </Card>
+  <Card title="Astro製" icon="rocket">
+    Astroのパワーとパフォーマンスを最大限に活用できます。お気に入りのAstroインテグレーションやライブラリで、Starlightを拡張できます。
+  </Card>
+  <Card title="Markdown、Markdoc、MDX" icon="document">
+    お好みのマークアップ言語を使えます。Starlightは、TypeScriptの型安全性を活かしたフロントマターのバリデーションを組み込みで提供します。
+  </Card>
+  <Card title="独自のUIコンポーネントの利用" icon="puzzle">
+    Starlightは、特定のフレームワークに依存しない、ドキュメント向けの完全なソリューションとして提供されています。React、Vue、Svelte、Solidなどで拡張可能です。
+  </Card>
+</CardGrid>
+
+<AboutAstro title="提供:">
+Astroは、速度を重視して設計されたオールインワンのウェブフレームワークです。お気に入りのUIコンポーネントやライブラリを使って、どこからでもコンテンツを取得し、どこにでもデプロイできます。
+
+[Astroについて](https://astro.build/)
+
+</AboutAstro>

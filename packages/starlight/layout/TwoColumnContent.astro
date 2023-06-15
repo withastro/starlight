@@ -1,16 +1,24 @@
-<div class="container">
-  <aside class="right-sidebar-container hidden lg:block">
-    <div class="right-sidebar"><slot name="right-sidebar" /></div>
-  </aside>
+---
+interface Props {
+  hasToC: boolean;
+}
+---
+
+<div class="lg:flex">
+  {
+    Astro.props.hasToC && (
+      <aside class="right-sidebar-container">
+        <div class="right-sidebar">
+          <slot name="right-sidebar" />
+        </div>
+      </aside>
+    )
+  }
   <div class="main-pane"><slot /></div>
 </div>
 
 <style>
   @media (min-width: 72rem) {
-    .container {
-      display: flex;
-    }
-
     .right-sidebar-container {
       order: 2;
       position: relative;
@@ -32,6 +40,12 @@
     }
 
     .main-pane {
+      width: 100%;
+    }
+
+    :global([data-has-sidebar]) .main-pane {
+      --sl-content-margin-inline: auto 0;
+
       order: 1;
       width: calc(
         var(--sl-content-width) +

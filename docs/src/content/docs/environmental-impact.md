@@ -7,12 +7,12 @@ Estimates for the climate impact of the web industry range from between [2%][sf]
 There are many complex factors in calculating the ecological impact of a website, but this guide includes a few tips for reducing the environmental footprint of your docs site.
 
 The good news is, choosing Starlight is a great start.
-According to the Website Carbon Calculator, this site is [cleaner than 99% of web pages tested](https://www.websitecarbon.com/website/starlight-astro-build/), producing 0.01g of CO₂ per page visit.
+According to the Website Carbon Calculator, this site is [cleaner than 99% of web pages tested][sl-carbon], producing 0.01g of CO₂ per page visit.
 
 ## Page weight
 
 The more data a web page transfers, the more energy resources it requires.
-In April 2023, the median web page required a user to download more than 2,000 KB according to [data from the HTTP archive][http].
+In April 2023, the median web page required a user to download more than 2,000 KB according to [data from the HTTP Archive][http].
 
 Starlight builds pages that are as lightweight as possible.
 For example, on a first visit, a user will download less than 50 KB of compressed data — just 2.5% of the HTTP archive median.
@@ -93,9 +93,11 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 | --------------------------- | ------------------ |
 | [Starlight][sl-carbon]      | 0.01g              |
 | [VitePress][vp-carbon]      | 0.05g              |
+| [Docus][dc-carbon]          | 0.05g              |
 | [Sphinx][sx-carbon]         | 0.07g              |
 | [MkDocs][mk-carbon]         | 0.10g              |
 | [Nextra][nx-carbon]         | 0.11g              |
+| [docsify][dy-carbon]        | 0.11g              |
 | [Docusaurus][ds-carbon]     | 0.24g              |
 | [Read the Docs][rtd-carbon] | 0.24g              |
 | [GitBook][gb-carbon]        | 0.71g              |
@@ -104,9 +106,11 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
+[dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
@@ -116,6 +120,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 ### Tools
 
 - [Website Carbon Calculator][wcc]
+- [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
 - [WebPageTest Carbon Control](https://www.webpagetest.org/carbon-control/)
 - [Ecoping](https://ecoping.earth/)
@@ -125,7 +130,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 - [“Building a greener web”](https://youtu.be/EfPoOt7T5lg), talk by Michelle Barker
 - [“Sustainable Web Development Strategies Within An Organization”](https://www.smashingmagazine.com/2022/10/sustainable-web-development-strategies-organization/), article by Michelle Barker
 - [“A sustainable web for everyone”](https://2021.stateofthebrowser.com/speakers/tom-greenwood/), talk by Tom Greenwood
-- [How Web Content Can Affect Power Usage”](https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/), article by Benjamin Poulain and Simon Fraser
+- [“How Web Content Can Affect Power Usage”](https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/), article by Benjamin Poulain and Simon Fraser
 
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think

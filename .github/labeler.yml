@@ -1,0 +1,11 @@
+# See https://github.com/actions/labeler
+
+'🚨 action':
+- .github/workflows/**
+
+i18n:
+  - src/content/docs/de/**/*
+  - src/content/docs/es/**/*
+  - src/content/docs/fr/**/*
+  - src/content/docs/it/**/*
+  - src/content/docs/ja/**/*

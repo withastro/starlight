@@ -1,0 +1,87 @@
+---
+title: Mise en route
+description: Apprenez à créer votre prochain site de documentation avec Starlight by Astro.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+:::caution[Work in progress]
+Starlight est en début de développement.
+Si vous trouvez quelque chose qui ne fonctionne pas, [ouvrez une issue sur GitHub](https://github.com/withastro/starlight/issues/new/choose) ou faites-le nous savoir sur [Discord](https://astro.build/chat).
+:::
+
+## Créer un nouveau projet
+
+Starlight est un thème de documentation complet construit sur le framework [Astro](https://astro.build).
+
+Vous pouvez créer un nouveau projet Astro + Starlight en utilisant la commande suivante :
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# créer un nouveau projet avec npm
+npm create astro@latest -- --template starlight
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# créer un nouveau projet avec pnpm
+pnpm create astro --template starlight
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# créer un nouveau projet avec yarn
+yarn create astro --template starlight
+```
+
+</TabItem>
+</Tabs>
+
+Cela créera un nouveau [répertoire de projet](/fr/guides/projet-structure/) avec tous les fichiers et configurations nécessaires pour votre site.
+
+:::tip[Voir en action]
+Essayez Starlight dans votre navigateur :
+[ouvrir le modèle sur StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
+:::
+
+## Créer du contenu avec Starlight
+
+Starlight est conçu pour que vous puissiez ajouter du nouveau contenu, ou apporter vos fichiers existants !
+
+### Formats de fichiers
+
+Starlight prend en charge la création de contenu en Markdown et MDX. (Vous pouvez ajouter la prise en charge de Markdoc en installant l'intégration expérimentale [Astro Markdoc integration](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).)
+
+### Ajouter des pages
+
+Ajoutez automatiquement de nouvelles pages à votre site en créant des fichiers `.md` ou `.mdx` dans `src/content/docs/`. Ajoutez des sous-dossiers pour organiser vos fichiers, et pour créer plusieurs segments de chemin :
+
+```
+src/content/docs/hello-world.md => votre-site.com/hello-world
+src/content/docs/guides/faq.md => votre-site.com/guides/faq
+```
+
+### Type-safe frontmatter
+
+Toutes les pages Starlight partagent un [ensemble commun de propriétés de présentation](/fr/reference/frontmatter/) personnalisable pour contrôler l'apparence de la page :
+
+```md
+---
+title: Bonjour, le monde !
+description: Ceci est une page de mon site web propulsé par Starlight.
+---
+```
+
+Si vous oubliez quelque chose d'important, Starlight vous le fera savoir.
+
+## Déployer votre site web Starlight
+
+Une fois que vous avez créé et personnalisé votre site Web Starlight, vous pouvez le déployer sur un serveur Web ou une plateforme d'hébergement de votre choix, y compris Netlify, Vercel, GitHub Pages et bien d'autres.
+
+[Pour en savoir plus sur le déploiement d'un site Astro, consultez la documentation Astro](https://docs.astro.build/fr/guides/deploy/)

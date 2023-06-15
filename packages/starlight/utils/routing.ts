@@ -76,7 +76,10 @@ function getRoutes(): Route[] {
     }
   }
 
-  return routes;
+  // Sort alphabetically by page slug to guarantee order regardless of platform.
+  return routes.sort((a, b) =>
+    a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0
+  );
 }
 export const routes = getRoutes();
 

@@ -3,9 +3,25 @@ title: Konfigurations­referenz
 description: Ein Überblick über alle von Starlight unterstützten Konfigurationsoptionen.
 ---
 
-## Die Starlight-Integration konfigurieren
+## Konfiguriere die `starlight` Integration
 
-Du kannst die folgenden Optionen an die Starlight-Integration übergeben.
+Starlight ist eine Integration, die auf dem [Astro](https://astro.build) Web-Framework aufbaut. Du kannst dein Projekt innerhalb der Astro-Konfigurationsdatei `astro.config.mjs` anpassen:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My delightful docs site',
+    }),
+  ],
+});
+```
+
+Du kannst die folgenden Optionen an die `starlight` Integration übergeben.
 
 ### `title` (erforderlich)
 
@@ -44,7 +60,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**Typ:** `{ minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
 **Voreinstellung:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Konfiguriere das Inhaltsverzeichnis, das rechts auf jeder Seite angezeigt wird. Standardmäßig werden `<h2>` und `<h3>` Überschriften in dieses Inhaltsverzeichnis aufgenommen.
@@ -138,6 +154,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
+      title: 'My Docs',
       // Englisch als Standardsprache festlegen.
       defaultLocale: 'en',
       locales: {

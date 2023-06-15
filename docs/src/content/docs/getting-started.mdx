@@ -6,20 +6,22 @@ description: Learn how to start building your next documentation site with Starl
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 :::caution[Work in progress]
-Starlight is in early development so expect bugs and changes as we develop it.
+Starlight is in early development.
 If you find something that’s not working, [open an issue on GitHub](https://github.com/withastro/starlight/issues/new/choose) or let us know on [Discord](https://astro.build/chat).
 :::
 
 ## Creating a new project
 
-Starlight is built on top of the [Astro](https://astro.build) all-in-one framework. You can create a new Astro + Starlight project using the following command:
+Starlight is a full-featured documentation theme built on top of the [Astro](https://astro.build) framework.
+
+You can create a new Astro + Starlight project using the following command:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
 # create a new project with npm
-npm create astro --template starlight
+npm create astro@latest -- --template starlight
 ```
 
 </TabItem>
@@ -34,22 +36,40 @@ pnpm create astro --template starlight
 <TabItem label="Yarn">
 
 ```sh
-# create a new project with pnpm
+# create a new project with yarn
 yarn create astro --template starlight
 ```
 
 </TabItem>
 </Tabs>
 
-This will create a new project directory with all the necessary files and configurations for your site.
+This will create a new [project directory](/guides/project-structure/) with all the necessary files and configurations for your site.
+
+:::tip[See it in action]
+Try Starlight in your browser:
+[open the template on StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
+:::
 
 ## Creating content with Starlight
 
-Starlight supports authoring content in Markdown and MDX.
+Starlight is ready for you to add new content, or bring your existing files!
 
-Adding new pages is done by adding a new `.md` or `.mdx` file to `src/content/docs/`. For example, `src/content/docs/hello-world.md` will be available on your site at `/hello-world`.
+### File formats
 
-All Starlight pages share a common set of frontmatter properties you can set to control how the page appears:
+Starlight supports authoring content in Markdown and MDX. (You can add support for Markdoc by installing the experimental [Astro Markdoc integration](https://docs.astro.build/en/guides/integrations-guide/markdoc/).)
+
+### Add pages
+
+Add new pages to your site automatically by creating `.md` or `.mdx` files in `src/content/docs/`. Add sub-folders to organize your files, and to create multiple path segments:
+
+```
+src/content/docs/hello-world.md => your-site.com/hello-world
+src/content/docs/guides/faq.md => your-site.com/guides/faq
+```
+
+### Type-safe frontmatter
+
+All Starlight pages share a customizable [common set of frontmatter properties](/reference/frontmatter/) to control how the page appears:
 
 ```md
 ---
@@ -62,6 +82,43 @@ If you forget anything important, Starlight will let you know.
 
 ## Deploying your Starlight website
 
-Once you have created and customized your Starlight website, you can deploy it to a web server or hosting platform of your choice. Astro provides built-in support for several popular hosting platforms, including Netlify, Vercel, and GitHub Pages, which means you can deploy your website with just a few simple commands.
+Once you have created and customized your Starlight website, you can deploy it to a web server or hosting platform of your choice including Netlify, Vercel, GitHub Pages and many more.
 
 [Learn about deploying an Astro site in the Astro docs.](https://docs.astro.build/en/guides/deploy/)
+
+## Updating Starlight
+
+:::tip
+Because Starlight is beta software, there will be frequent updates and improvements. Be sure to update Starlight regularly!
+:::
+
+Starlight is an Astro integration, and is updated like any `@astrojs/*` integration:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# upgrade Starlight with npm
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# upgrade Starlight with pnpm
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# upgrade Starlight with yarn
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+You can see a full list of the changes made in each release in [the Starlight changelog](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).

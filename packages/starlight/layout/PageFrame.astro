@@ -1,15 +1,22 @@
 ---
 import MobileMenuToggle from '../components/MobileMenuToggle.astro';
+import { useTranslations } from '../utils/translations';
 
-const hasSidebar = Astro.slots.has('sidebar');
+interface Props {
+  hasSidebar: boolean;
+  locale: string | undefined;
+}
+
+const { hasSidebar, locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
-<div class:list={['page', { hasSidebar }]}>
+<div class="page flex">
   <header class="header"><slot name="header" /></header>
   {
     hasSidebar && (
-      <nav class="sidebar" aria-label="Main">
-        <MobileMenuToggle />
+      <nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
+        <MobileMenuToggle {locale} />
         <div id="starlight__sidebar" class="sidebar-pane">
           <div class="sidebar-content">
             <slot name="sidebar" />
@@ -23,7 +30,6 @@ const hasSidebar = Astro.slots.has('sidebar');
 
 <style>
   .page {
-    display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
@@ -41,7 +47,7 @@ const hasSidebar = Astro.slots.has('sidebar');
     background-color: var(--sl-color-bg-nav);
   }
 
-  .hasSidebar .header {
+  :global([data-has-sidebar]) .header {
     padding-inline-end: calc(
       var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
     );
@@ -69,10 +75,11 @@ const hasSidebar = Astro.slots.has('sidebar');
 
   .main-frame {
     padding-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height));
+    padding-inline-start: var(--sl-content-inline-start);
   }
 
   @media (min-width: 50rem) {
-    .hasSidebar .header {
+    :global([data-has-sidebar]) .header {
       padding-inline-end: var(--sl-nav-pad-x);
     }
     .sidebar-pane {
@@ -80,10 +87,6 @@ const hasSidebar = Astro.slots.has('sidebar');
       width: var(--sl-sidebar-width);
       background-color: var(--sl-color-bg-sidebar);
       border-inline-end: 1px solid var(--sl-color-hairline-shade);
-    }
-
-    .hasSidebar .main-frame {
-      padding-inline-start: var(--sl-sidebar-width);
     }
   }
 </style>

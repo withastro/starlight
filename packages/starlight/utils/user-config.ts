@@ -2,6 +2,7 @@ import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
+import { TableOfContentsSchema } from '../schemas/tableOfContents';
 
 const LocaleSchema = z.object({
   /** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -27,17 +28,20 @@ const LocaleSchema = z.object({
     ),
 });
 
-const SidebarLinkItemSchema = z.object({
+const SidebarBaseSchema = z.object({
   /** The visible label for this item in the sidebar. */
   label: z.string(),
+  /** Translations of the `label` for each supported language. */
+  translations: z.record(z.string()).default({}),
+});
+
+const SidebarLinkItemSchema = SidebarBaseSchema.extend({
   /** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
   link: z.string(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
-const AutoSidebarGroupSchema = z.object({
-  /** The visible label for this item in the sidebar. */
-  label: z.string(),
+const AutoSidebarGroupSchema = SidebarBaseSchema.extend({
   /** Enable autogenerating a sidebar category from a specific docs directory. */
   autogenerate: z.object({
     /** The directory to generate sidebar items for. */
@@ -49,20 +53,29 @@ const AutoSidebarGroupSchema = z.object({
 });
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
-type ManualSidebarGroup = {
-  /** The visible label for this item in the sidebar. */
-  label: string;
+type ManualSidebarGroupInput = z.input<typeof SidebarBaseSchema> & {
   /** Array of links and subcategories to display in this category. */
   items: Array<
-    | SidebarLinkItem
-    | z.infer<typeof AutoSidebarGroupSchema>
-    | ManualSidebarGroup
+    | z.input<typeof SidebarLinkItemSchema>
+    | z.input<typeof AutoSidebarGroupSchema>
+    | ManualSidebarGroupInput
   >;
 };
 
-const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroup> = z.object({
-  /** The visible label for this item in the sidebar. */
-  label: z.string(),
+type ManualSidebarGroupOutput = z.output<typeof SidebarBaseSchema> & {
+  /** Array of links and subcategories to display in this category. */
+  items: Array<
+    | z.output<typeof SidebarLinkItemSchema>
+    | z.output<typeof AutoSidebarGroupSchema>
+    | ManualSidebarGroupOutput
+  >;
+};
+
+const ManualSidebarGroupSchema: z.ZodType<
+  ManualSidebarGroupOutput,
+  z.ZodTypeDef,
+  ManualSidebarGroupInput
+> = SidebarBaseSchema.extend({
   /** Array of links and subcategories to display in this category. */
   items: z.lazy(() =>
     z
@@ -83,7 +96,11 @@ const SidebarItemSchema = z.union([
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
 
 const SidebarGroupSchema: z.ZodType<
-  ManualSidebarGroup | z.infer<typeof AutoSidebarGroupSchema>
+  | z.output<typeof ManualSidebarGroupSchema>
+  | z.output<typeof AutoSidebarGroupSchema>,
+  z.ZodTypeDef,
+  | z.input<typeof ManualSidebarGroupSchema>
+  | z.input<typeof AutoSidebarGroupSchema>
 > = z.union([ManualSidebarGroupSchema, AutoSidebarGroupSchema]);
 
 const UserConfigSchema = z.object({
@@ -123,18 +140,7 @@ const UserConfigSchema = z.object({
   tagline: z.string().optional().describe('The tagline for your website.'),
 
   /** Configure the defaults for the table of contents on each page. */
-  tableOfContents: z
-    .object({
-      /** The level to start including headings at in the table of contents. Default: 2. */
-      minHeadingLevel: z.number().int().min(1).max(6).optional().default(2),
-      /** The level to stop including headings at in the table of contents. Default: 3. */
-      maxHeadingLevel: z.number().int().min(1).max(6).optional().default(3),
-    })
-    .optional()
-    .default({ minHeadingLevel: 2, maxHeadingLevel: 3 })
-    .refine((toc) => toc.minHeadingLevel <= toc.maxHeadingLevel, {
-      message: 'minHeadingLevel must be less than or equal to maxHeadingLevel',
-    }),
+  tableOfContents: TableOfContentsSchema(),
 
   /** Enable and configure “Edit this page” links. */
   editLink: z
@@ -273,7 +279,13 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
       /** Flag indicating if this site has multiple locales set up. */
       isMultilingual: false,
       /** Full locale object for this site’s default language. */
-      defaultLocale: undefined,
+      defaultLocale: {
+        label: 'English',
+        lang: 'en',
+        dir: 'ltr',
+        locale: undefined,
+        ...locales?.root,
+      },
       locales: undefined,
     } as const;
   }

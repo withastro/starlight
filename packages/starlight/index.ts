@@ -15,11 +15,21 @@ import {
   StarlightConfig,
   StarlightConfigSchema,
 } from './utils/user-config';
+import { errorMap } from './utils/error-map';
 
 export default function StarlightIntegration(
   opts: StarlightUserConfig
 ): AstroIntegration[] {
-  const userConfig = StarlightConfigSchema.parse(opts);
+  const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
+
+  if (!parsedConfig.success) {
+    throw new Error(
+      'Invalid config passed to starlight integration\n' +
+        parsedConfig.error.issues.map((i) => i.message).join('\n')
+    );
+  }
+
+  const userConfig = parsedConfig.data;
 
   const Starlight: AstroIntegration = {
     name: '@astrojs/starlight',
@@ -45,7 +55,7 @@ export default function StarlightIntegration(
                 ? {}
                 : { theme: 'css-variables' },
           },
-          experimental: { assets: true },
+          experimental: { assets: true, inlineStylesheets: 'auto' },
         };
         updateConfig(newConfig);
       },

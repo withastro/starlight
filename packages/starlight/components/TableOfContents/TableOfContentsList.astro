@@ -1,8 +1,8 @@
 ---
-import type { generateToC } from './generateToC';
+import type { TocItem } from './generateToC';
 
 interface Props {
-  toc: ReturnType<typeof generateToC>;
+  toc: TocItem[];
   depth?: number;
   isMobile?: boolean;
 }

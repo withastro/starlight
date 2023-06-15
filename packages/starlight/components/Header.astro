@@ -8,21 +8,22 @@ import ThemeSelect from './ThemeSelect.astro';
 interface Props {
   locale: string | undefined;
 }
+
+const { locale } = Astro.props;
 ---
 
-<div class="header">
-  <SiteTitle />
-  <Search />
+<div class="header flex">
+  <SiteTitle {locale} />
+  <Search {locale} />
   <div class="hidden md:flex right-group">
     <SocialIcons />
-    <ThemeSelect />
-    <LanguageSelect locale={Astro.props.locale} />
+    <ThemeSelect {locale} />
+    <LanguageSelect {locale} />
   </div>
 </div>
 
 <style>
   .header {
-    display: flex;
     gap: var(--sl-nav-gap);
     justify-content: space-between;
     align-items: center;
@@ -35,17 +36,34 @@ interface Props {
   }
 
   @media (min-width: 50rem) {
+    :global(:root[data-has-sidebar]) {
+      --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+    }
+    :global(:root:not([data-has-toc])) {
+      --__toc-width: 0rem;
+    }
     .header {
-      --__sidebar-width: var(--sl-sidebar-width) - var(--sl-nav-pad-x);
+      --__sidebar-width: max(
+        0rem,
+        var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x)
+      );
       --__main-column-fr: calc(
-        (100% - var(--sl-content-width) - 2 * var(--sl-sidebar-width)) / 2
+        (
+            100% + var(--__sidebar-pad, 0rem) -
+              var(--__toc-width, var(--sl-sidebar-width)) -
+              (2 * var(--__toc-width, var(--sl-nav-pad-x))) -
+              var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
+          ) / 2
       );
       display: grid;
       grid-template-columns:
         /* 1 (site title): runs up until the main content column’s left edge.  */
-        calc(
-          var(--__sidebar-width) +
-            max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
+        max(
+          var(--sl-title-min-width),
+          calc(
+            var(--__sidebar-width) +
+              max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
+          )
         )
         /* 2 (search box): all free space that is available. */
         1fr

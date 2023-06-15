@@ -1,26 +1,26 @@
 ---
-import type { MarkdownHeading } from 'astro';
-import config from 'virtual:starlight/user-config';
-import { generateToC } from './generateToC';
-import TableOfContentsList from './TableOfContentsList.astro';
+import { useTranslations } from '../../utils/translations';
 import Icon from '../Icon.astro';
+import TableOfContentsList from './TableOfContentsList.astro';
+import type { TocItem } from './generateToC';
 
 interface Props {
-  headings: MarkdownHeading[];
+  toc: TocItem[];
+  locale: string | undefined;
+  maxHeadingLevel: number;
+  minHeadingLevel: number;
 }
 
-const toc = generateToC(Astro.props.headings, config.tableOfContents);
+const { locale, toc, maxHeadingLevel, minHeadingLevel } = Astro.props;
+const t = useTranslations(locale);
 ---
 
-<mobile-starlight-toc
-  data-min-h={config.tableOfContents.minHeadingLevel}
-  data-max-h={config.tableOfContents.maxHeadingLevel}
->
+<mobile-starlight-toc data-min-h={minHeadingLevel} data-max-h={maxHeadingLevel}>
   <nav aria-labelledby="starlight__on-this-page--mobile" class="lg:hidden">
     <details id="starlight__mobile-toc">
       <summary id="starlight__on-this-page--mobile" class="flex">
         <div class="toggle flex">
-          On this page
+          {t('tableOfContents.onThisPage')}
           <Icon name={'right-caret'} class="caret" size="1rem" />
         </div>
         <span class="display-current">{toc[0]?.text}</span>
@@ -42,7 +42,7 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
   }
   @media (min-width: 50rem) {
     nav {
-      inset-inline-start: var(--sl-sidebar-width);
+      inset-inline-start: var(--sl-content-inline-start, 0);
     }
   }
 
@@ -121,7 +121,7 @@ const toc = generateToC(Astro.props.headings, config.tableOfContents);
     }
 
     constructor() {
-      super();
+      super({ smallViewport: true });
       const details = this.querySelector('details');
       if (!details) return;
       const closeToC = () => {
