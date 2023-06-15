@@ -22,7 +22,7 @@ export class StarlightTOC extends HTMLElement {
     const isHeading = (el: Element): el is HTMLHeadingElement => {
       if (el instanceof HTMLHeadingElement) {
         // Special case for page title h1
-        if (el.id === 'starlight__overview') return true;
+        if ('pageTitle' in el.dataset) return true;
         // Check the heading level is within the user-configured limits for the ToC
         const level = el.tagName[1];
         if (level) {
