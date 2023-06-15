@@ -38,7 +38,12 @@ export function useTranslations(locale: string | undefined) {
     builtinTranslations[lang],
     userTranslations[lang]
   );
-  return (key: keyof typeof dictionary) => dictionary[key];
+  const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
+  t.pick = (startOfKey: string) =>
+    Object.fromEntries(
+      Object.entries(dictionary).filter(([k]) => k.startsWith(startOfKey))
+    );
+  return t;
 }
 
 /** Build a dictionary by layering preferred translation sources. */
