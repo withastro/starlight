@@ -7,7 +7,7 @@ Each language has its own JSON file and follows the [translation structure descr
 
 1. Create a JSON file named using the BCP-47 tag for the language, e.g. `en.json` or `ja.json`.
 
-2. Fill the file with translations for each UI string. You can base your translations on [`en.json`](./en.json).
+2. Fill the file with translations for each UI string. You can base your translations on [`en.json`](./en.json). Translate only the values, leaving the keys in English (e.g. `"search.label": "Buscar"`).
 
 3. Add your file in [`index.ts`](./index.ts).
 
