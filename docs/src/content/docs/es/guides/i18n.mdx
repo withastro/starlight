@@ -194,3 +194,22 @@ Estos son los valores predeterminados en inglés de las cadenas existentes que s
      "page.nextLink": "Previous"
    }
    ```
+
+
+   El modal de búsqueda de Starlight está impulsado por la biblioteca [Pagefind](https://pagefind.app/).
+   Puedes establecer traducciones para la UI de Pagefind en el mismo archivo JSON utilizando claves `pagefind`:
+
+   ```json
+   {
+     "pagefind.clear_search": "Clear",
+     "pagefind.load_more": "Load more results",
+     "pagefind.search_label": "Search this site",
+     "pagefind.filters_label": "Filters",
+     "pagefind.zero_results": "No results for [SEARCH_TERM]",
+     "pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+     "pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+     "pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+     "pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+     "pagefind.searching": "Searching for [SEARCH_TERM]..."
+   }
+   ```
