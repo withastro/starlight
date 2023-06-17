@@ -1,58 +1,40 @@
 ---
+import { getEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import { pathWithBase } from './utils/base';
-
-// Built-in CSS styles.
-import './style/props.css';
-import './style/reset.css';
-import './style/shiki.css';
-import './style/util.css';
-
-// Layout
-import PageFrame from './layout/PageFrame.astro';
-
-// Components
-import Header from './components/Header.astro';
-import MarkdownContent from './components/MarkdownContent.astro';
-import ThemeProvider from './components/ThemeProvider.astro';
-import SkipLink from './components/SkipLink.astro';
-
-// Important that this is the last import so it can override built-in styles.
-import 'virtual:starlight/user-css';
+import * as default404 from './components/Default404.md';
+import Page from './layout/Page.astro';
+import type { StarlightDocsEntry } from './utils/routing';
 
 const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
+const entryMeta = { dir, lang, locale };
+
+const fallbackEntry: StarlightDocsEntry = {
+  slug: '404',
+  id: '404.md' as StarlightDocsEntry['id'],
+  body: default404.rawContent(),
+  collection: 'docs',
+  data: {
+    title: 'Not found',
+    template: 'splash',
+    editUrl: false,
+    head: [],
+    hero: {
+      title: '404',
+      tagline: 'Houston we have a problem.',
+      actions: [],
+    },
+  },
+  render: async () => ({
+    Content: default404.Content,
+    headings: default404.getHeadings(),
+    remarkPluginFrontmatter: {},
+  }),
+};
+
+const entry = (await getEntry('docs', '404')) || fallbackEntry;
+const { Content, headings } = await entry.render();
 ---
 
-<html lang={lang} dir={dir}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Not found</title>
-  </head>
-  <body>
-    <ThemeProvider />
-    <SkipLink {locale} />
-    <PageFrame {locale} hasSidebar={false}>
-      <Header slot="header" {locale} />
-      <main>
-        <MarkdownContent>
-          <h1 id="_top" data-page-title>404</h1>
-          <p>Houston, we have a problem.</p>
-          <p>
-            We couldn’t find that link. Check the address or
-            <a href={pathWithBase('/')}>head back home</a>.
-          </p>
-        </MarkdownContent>
-      </main>
-    </PageFrame>
-
-    <style>
-      main {
-        margin: auto;
-        padding: clamp(2rem, 10vmin, 6rem) var(--sl-nav-pad-x);
-        max-width: var(--sl-content-width);
-        max-width: max-content;
-      }
-    </style>
-  </body>
-</html>
+<Page {headings} entry={entry} slug={entry.slug} {...entryMeta} {entryMeta}>
+  <Content />
+</Page>
