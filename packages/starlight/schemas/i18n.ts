@@ -94,6 +94,10 @@ function starlightI18nSchema() {
         .describe(
           'Label shown on the “next page” pagination arrow in the page footer.'
         ),
+
+      '404.text': z
+        .string()
+        .describe('Text shown on Starlight’s default 404 page'),
     })
     .partial();
 }

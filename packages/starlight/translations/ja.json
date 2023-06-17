@@ -16,5 +16,6 @@
   "page.editLink": "ページを編集",
   "page.lastUpdated": "最終更新日:",
   "page.previousLink": "前へ",
-  "page.nextLink": "次へ"
+  "page.nextLink": "次へ",
+  "404.text": "ページが見つかりません。 URL を確認するか、検索バーを使用してみてください。"
 }
