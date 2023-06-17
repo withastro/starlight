@@ -86,7 +86,7 @@ const hasHero = Boolean(entry.data.hero);
       {hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
       <TwoColumnContent {hasToC}>
         <RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
-        <main data-pagefind-body lang={entryMeta.lang} dir={entryMeta.dir}>
+        <main data-pagefind-body={entry.slug !== '404'} lang={entryMeta.lang} dir={entryMeta.dir}>
           {/* TODO: Revisit how this logic flows. */}
           {entry.data.hero ? (
             <ContentPanel>
