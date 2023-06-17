@@ -8,6 +8,8 @@ export const LogoConfigSchema = () =>
         src: z.string(),
         /** Alternative text description of the logo. */
         alt: z.string().default(''),
+        /** Translations of the `alt` text for each supported language. */
+        altTranslations: z.record(z.string()).default({}),
         /** Set to `true` to hide the site title text and only show the logo. */
         replacesTitle: z.boolean().default(false),
       }),
@@ -18,6 +20,8 @@ export const LogoConfigSchema = () =>
         light: z.string(),
         /** Alternative text description of the logo. */
         alt: z.string().default(''),
+        /** Translations of the `alt` text for each supported language. */
+        altTranslations: z.record(z.string()).default({}),
         /** Set to `true` to hide the site title text and only show the logo. */
         replacesTitle: z.boolean().default(false),
       }),

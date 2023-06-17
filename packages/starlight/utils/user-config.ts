@@ -103,6 +103,9 @@ const UserConfigSchema = z.object({
       'Title for your website. Will be used in metadata and as browser tab title.'
     ),
 
+  /** Translations of the website `title` for each supported language. */
+  titleTranslations: z.record(z.string()).default({}),
+
   /** Description metadata for your website. Can be used in page metadata. */
   description: z
     .string()
