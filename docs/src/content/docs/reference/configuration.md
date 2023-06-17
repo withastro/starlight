@@ -83,17 +83,24 @@ With this config, a `/introduction` page would have an edit link pointing to `ht
 
 ### `sidebar`
 
-**type:** [`SidebarGroup[]`](#sidebargroup)
+**type:** [`SidebarItem[]`](#sidebaritem)
 
 Configure your site’s sidebar navigation items.
 
-A sidebar is an array of groups, each with a `label` for the group and either an `items` array or an `autogenerate` configuration object.
+A sidebar is an array of links and groups of links.
+Each item must have a `label` and one of the following properties:
 
-You can manually set the contents of a group using `items`, which is an array that can include links and subgroups. You can also automatically generate the contents of a group from a specific directory of your docs, using `autogenerate`.
+- `link` — a single link to a specific URL, e.g. `'/home'` or `'https://example.com'`.
+
+- `items` — an array containing more sidebar links and subgroups.
+
+- `autogenerate` — an object specifying a directory of your docs to automatically generate a group of links from.
 
 ```js
 starlight({
   sidebar: [
+    // A single link item labelled “Home”.
+    { label: 'Home', link: '/' },
     // A group labelled “Start Here” containing two links.
     {
       label: 'Start Here',
@@ -142,31 +149,17 @@ sidebar: [
 ];
 ```
 
-#### `SidebarGroup`
+#### `SidebarItem`
 
 ```ts
-type SidebarGroup =
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      items: Array<LinkItem | SidebarGroup>;
-    }
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      autogenerate: {
-        directory: string;
-      };
-    };
-```
-
-#### `LinkItem`
-
-```ts
-interface LinkItem {
+type SidebarItem = {
   label: string;
-  link: string;
-}
+  translations?: Record<string, string>;
+} & (
+  | { link: string }
+  | { items: SidebarItem[] }
+  | { autogenerate: { directory: string } }
+);
 ```
 
 ### `locales`

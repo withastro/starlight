@@ -4,24 +4,29 @@ import Icon from './Icon.astro';
 
 interface Props {
   sublist: SidebarEntry[];
+  nested?: boolean;
 }
 ---
 
-<ul>
+<ul class:list={{ 'top-level': !Astro.props.nested }}>
   {
     Astro.props.sublist.map((entry) => (
-      <li class:list={{ 'sidebar-group': entry.type === 'group' }}>
+      <li>
         {entry.type === 'link' ? (
-          <a href={entry.href} aria-current={entry.isCurrent && 'page'}>
+          <a
+            href={entry.href}
+            aria-current={entry.isCurrent && 'page'}
+            class:list={{ large: !Astro.props.nested }}
+          >
             {entry.label}
           </a>
         ) : (
           <details open>
             <summary>
-              <h2>{entry.label}</h2>
+              <h2 class="large">{entry.label}</h2>
               <Icon name="right-caret" class="caret" size="1.25rem" />
             </summary>
-            <Astro.self sublist={entry.entries} />
+            <Astro.self sublist={entry.entries} nested />
           </details>
         )}
       </li>
@@ -36,13 +41,19 @@ interface Props {
     padding: 0;
   }
 
-  h2 {
+  ul ul li {
+    margin-inline-start: var(--sl-sidebar-item-padding-inline);
+    border-inline-start: 1px solid var(--sl-color-hairline-light);
+    padding-inline-start: var(--sl-sidebar-item-padding-inline);
+  }
+
+  .large {
     font-size: var(--sl-text-lg);
     font-weight: 600;
     color: var(--sl-color-white);
   }
 
-  .sidebar-group + .sidebar-group {
+  .top-level > li + li {
     margin-top: 0.75rem;
   }
 
@@ -91,10 +102,10 @@ interface Props {
   }
 
   @media (min-width: 50rem) {
-    .sidebar-group + .sidebar-group {
+    .top-level > li + li {
       margin-top: 0.5rem;
     }
-    h2 {
+    .large {
       font-size: var(--sl-text-base);
     }
     a {

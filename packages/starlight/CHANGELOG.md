@@ -1,5 +1,25 @@
 # @astrojs/starlight
 
+## 0.2.0
+
+### Minor Changes
+
+- [#171](https://github.com/withastro/starlight/pull/171) [`198c3f0`](https://github.com/withastro/starlight/commit/198c3f001410f259dab7d085136a37afe863cfa4) Thanks [@delucis](https://github.com/delucis)! - Add Starlight generator tag to HTML output
+
+- [#217](https://github.com/withastro/starlight/pull/217) [`490fd98`](https://github.com/withastro/starlight/commit/490fd98d4e7b38ec01c568eee0ab00844e59c53d) Thanks [@delucis](https://github.com/delucis)! - Updated sidebar styles. Sidebars now support top-level links and groups are styled with a subtle border and indentation to improve comprehension of nesting.
+
+- [#178](https://github.com/withastro/starlight/pull/178) [`d046c55`](https://github.com/withastro/starlight/commit/d046c55a62290c15f2e09faf4359f02df9492f6d) Thanks [@delucis](https://github.com/delucis)! - Add support for translating the Pagefind search modal
+
+- [#210](https://github.com/withastro/starlight/pull/210) [`cb5b121`](https://github.com/withastro/starlight/commit/cb5b1210e23548e2983865a4b38308b0f54dc7ce) Thanks [@delucis](https://github.com/delucis)! - Change page title ID to `_top` for cleaner hash URLs
+
+  ⚠️ Potentially breaking change if you were linking manually to `#starlight__overview` anywhere. If you were, update these links to use `#_top` instead.
+
+### Patch Changes
+
+- [#208](https://github.com/withastro/starlight/pull/208) [`09fc565`](https://github.com/withastro/starlight/commit/09fc565d44bd3abb4508541b458531de8624036f) Thanks [@delucis](https://github.com/delucis)! - Update `@astrojs/mdx` and `@astrojs/sitemap` to latest
+
+- [#216](https://github.com/withastro/starlight/pull/216) [`54905c5`](https://github.com/withastro/starlight/commit/54905c502c5e6de5516e36ddcd4969893572baa5) Thanks [@morinokami](https://github.com/morinokami)! - Encode heading id when finding current link
+
 ## 0.1.4
 
 ### Patch Changes
