@@ -2,14 +2,14 @@ const base = stripTrailingSlash(import.meta.env.BASE_URL);
 
 /** Get the a root-relative URL path with the site’s `base` prefixed. */
 export function pathWithBase(path: string) {
-  path = stripLeadingSlash(stripTrailingSlash(path));
-  return path ? base + '/' + path + '/' : base + '/';
+  let _path = stripLeadingSlash(stripTrailingSlash(path));
+  return _path ? base + '/' + _path + '/' : base + '/';
 }
 
 /** Get the a root-relative file URL path with the site’s `base` prefixed. */
 export function fileWithBase(path: string) {
-  path = stripLeadingSlash(stripTrailingSlash(path));
-  return path ? base + '/' + path : base;
+  let _path = stripLeadingSlash(stripTrailingSlash(path));
+  return _path ? base + '/' + _path : base;
 }
 
 function stripLeadingSlash(path: string) {
