@@ -17,15 +17,5 @@
   "page.editLink": "Editar página",
   "page.lastUpdated": "Última atualização:",
   "page.previousLink": "Anterior",
-  "page.nextLink": "Próximo",
-  "pagefind.clear_search": "Limpar",
-  "pagefind.load_more": "Carregar mais resultados",
-  "pagefind.search_label": "Pesquisar neste site",
-  "pagefind.filters_label": "Filtros",
-  "pagefind.zero_results": "Sem resultados para [SEARCH_TERM]",
-  "pagefind.many_results": "[COUNT] resultados para [SEARCH_TERM]",
-  "pagefind.one_result": "[COUNT] resultado para [SEARCH_TERM]",
-  "pagefind.alt_search": "Sem resultados para [SEARCH_TERM]. Mostrando resultados para [DIFFERENT_TERM] no lugar",
-  "pagefind.search_suggestion": "Sem resultados para [SEARCH_TERM]. Tente uma das pesquisas a seguir:",
-  "pagefind.searching": "Procurando por [SEARCH_TERM]..."
+  "page.nextLink": "Próximo"
 }
