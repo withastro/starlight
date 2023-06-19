@@ -14,5 +14,4 @@ jobs:
       COMMIT_MESSAGE: ${{ github.event.commits[0].message }}
       COMMIT_ID: ${{ github.event.commits[0].id }}
     secrets:
-      # expose secret under proper name
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_CONGRATS }}
