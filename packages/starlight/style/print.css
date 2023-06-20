@@ -1,5 +1,6 @@
-:root, ::backdrop {
-    /* Colours (light mode) */
+:root,
+::backdrop {
+  /* Colours (light mode) */
   --sl-color-white: hsl(223, 13%, 10%) !important;
   --sl-color-gray-1: hsl(222, 13%, 16%) !important;
   --sl-color-gray-2: hsl(222, 11%, 23%) !important;
@@ -48,4 +49,45 @@
   --sl-shadow-lg: 0px 25px 7px rgba(0, 0, 0, 0.01),
     0px 16px 6px hsla(0, 0%, 0%, 0.03), 0px 9px 5px hsla(223, 13%, 10%, 0.08),
     0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04) !important;
+}
+
+@media print {
+  .print\:hidden {
+    display: none !important;
   }
+  .print\:flex {
+    display: flex !important;
+  }
+  .print\:block {
+    display: block !important;
+  }
+
+  /* index.astro */
+  main {
+    padding-bottom: 0 !important;
+  }
+  main > .content-panel {
+    padding-block-start: 0 !important;
+  }
+
+  /* components/MarkdownContent.astro */
+  .content pre {
+    overflow-x: hidden !important;
+    white-space: pre-wrap !important;
+    page-break-inside: avoid;
+  }
+
+  /* layout/PageFrame.astro */
+  .page > header {
+    position: relative !important;
+  }
+  .page > .main-frame {
+    padding-inline-start: 0 !important;
+  }
+
+  /* layout/TwoColumnContent.astro */
+  .main-pane {
+    --sl-sidebar-width: 0px !important;
+    --sl-content-width: 100% !important;
+  }
+}

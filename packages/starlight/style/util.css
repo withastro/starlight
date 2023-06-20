@@ -41,14 +41,3 @@
     display: block;
   }
 }
-@media print {
-  .print\:hidden {
-    display: none !important;
-  }
-  .print\:flex {
-    display: flex !important;
-  }
-  .print\:block {
-    display: block !important;
-  }
-}
