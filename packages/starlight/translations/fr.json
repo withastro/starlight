@@ -3,6 +3,7 @@
     "search.label": "Rechercher",
     "search.shortcutLabel": "(Presser / pour rechercher)",
     "search.cancelLabel": "Annuler",
+    "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
     "themeSelect.accessibleLabel": "Selectionner le thème",
     "themeSelect.dark": "Dark",
     "themeSelect.light": "Light",
