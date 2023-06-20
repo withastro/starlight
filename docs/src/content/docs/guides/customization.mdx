@@ -108,7 +108,7 @@ template: splash
 Starlight displays a table of contents on each page to make it easier for readers to jump to the heading they are looking for.
 You can customize — or even disable — the table of contents globally in the Starlight integration or on a page-by-page basis in frontmatter.
 
-By default, `<h2>` and `<h3>` headings are included in the table of contents. Change which headings levels to include using the `minHeadingLevel` and `maxHeadingLevel` options:
+By default, `<h2>` and `<h3>` headings are included in the table of contents. Change which headings levels to include site-wide using the `minHeadingLevel` and `maxHeadingLevel` options in your [global `tableOfContents`](/reference/configuration/#tableofcontents). Override these defaults on an individual page by adding the corresponding [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents) properties:
 
 <Tabs>
   <TabItem label="Frontmatter">
