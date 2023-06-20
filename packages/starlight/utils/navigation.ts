@@ -69,9 +69,9 @@ function groupFromAutogenerateConfig(
   const dirDocs = routes.filter(
     (doc) =>
       // Match against `foo.md` or `foo/index.md`.
-      doc.slug === localeDir ||
+      stripSupportedExtension(doc.entry.id) === localeDir ||
       // Match against `foo/anything/else.md`.
-      doc.slug.startsWith(localeDir + '/')
+      doc.entry.id.startsWith(localeDir + '/')
   );
   const tree = treeify(dirDocs, localeDir);
   return {
@@ -115,16 +115,18 @@ function makeLink(href: string, label: string, currentPathname: string): Link {
 }
 
 /** Get the segments leading to a page. */
-function getBreadcrumbs(slug: string, baseDir: string): string[] {
-  // Index slugs will match `baseDir` and don’t include breadcrumbs.
-  if (slug === baseDir) return [];
+function getBreadcrumbs(path: string, baseDir: string): string[] {
+  // Strip extension from path.
+  const pathWithoutExt = stripSupportedExtension(path);
+  // Index paths will match `baseDir` and don’t include breadcrumbs.
+  if (pathWithoutExt === baseDir) return [];
   // Ensure base directory ends in a trailing slash.
   if (!baseDir.endsWith('/')) baseDir += '/';
-  // Strip base directory from slug if present.
-  const relativeSlug = slug.startsWith(baseDir)
-    ? slug.replace(baseDir, '')
-    : slug;
-  let dir = dirname(relativeSlug);
+  // Strip base directory from path if present.
+  const relativePath = pathWithoutExt.startsWith(baseDir)
+    ? pathWithoutExt.replace(baseDir, '')
+    : pathWithoutExt;
+  let dir = dirname(relativePath);
   // Return no breadcrumbs for items in the root directory.
   if (dir === '.') return [];
   return dir.split('/');
@@ -134,7 +136,7 @@ function getBreadcrumbs(slug: string, baseDir: string): string[] {
 function treeify(routes: Route[], baseDir: string): Dir {
   const treeRoot: Dir = {};
   routes.forEach((doc) => {
-    const breadcrumbs = getBreadcrumbs(doc.slug, baseDir);
+    const breadcrumbs = getBreadcrumbs(doc.entry.id, baseDir);
 
     // Walk down the route’s path to generate the tree.
     let currentDir = treeRoot;
@@ -236,3 +238,6 @@ export function getPrevNextLinks(sidebar: SidebarEntry[]): {
   const next = currentIndex > -1 ? entries[currentIndex + 1] : undefined;
   return { prev, next };
 }
+
+/** Remove an extension supported by Starlight from a path. */
+const stripSupportedExtension = (path: string) => path.replace(/\.mdx?$/, '');
