@@ -69,7 +69,7 @@ function groupFromAutogenerateConfig(
   const dirDocs = routes.filter(
     (doc) =>
       // Match against `foo.md` or `foo/index.md`.
-      stripSupportedExtension(doc.entry.id) === localeDir ||
+      stripExtension(doc.entry.id) === localeDir ||
       // Match against `foo/anything/else.md`.
       doc.entry.id.startsWith(localeDir + '/')
   );
@@ -117,7 +117,7 @@ function makeLink(href: string, label: string, currentPathname: string): Link {
 /** Get the segments leading to a page. */
 function getBreadcrumbs(path: string, baseDir: string): string[] {
   // Strip extension from path.
-  const pathWithoutExt = stripSupportedExtension(path);
+  const pathWithoutExt = stripExtension(path);
   // Index paths will match `baseDir` and don’t include breadcrumbs.
   if (pathWithoutExt === baseDir) return [];
   // Ensure base directory ends in a trailing slash.
@@ -239,5 +239,5 @@ export function getPrevNextLinks(sidebar: SidebarEntry[]): {
   return { prev, next };
 }
 
-/** Remove an extension supported by Starlight from a path. */
-const stripSupportedExtension = (path: string) => path.replace(/\.mdx?$/, '');
+/** Remove the extension from a path. */
+const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
