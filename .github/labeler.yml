@@ -1,11 +1,17 @@
 # See https://github.com/actions/labeler
 
 '🚨 action':
-- .github/workflows/**
+  - .github/workflows/**
 
 i18n:
-  - src/content/docs/de/**/*
-  - src/content/docs/es/**/*
-  - src/content/docs/fr/**/*
-  - src/content/docs/it/**/*
-  - src/content/docs/ja/**/*
+  - docs/src/content/docs/de/**/*
+  - docs/src/content/docs/es/**/*
+  - docs/src/content/docs/fr/**/*
+  - docs/src/content/docs/it/**/*
+  - docs/src/content/docs/ja/**/*
+
+'🌟 core':
+  - packages/starlight/**
+
+'📚 docs':
+  - docs/**

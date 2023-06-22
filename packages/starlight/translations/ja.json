@@ -3,6 +3,7 @@
   "search.label": "検索",
   "search.shortcutLabel": "（/を押して検索）",
   "search.cancelLabel": "キャンセル",
+  "search.devWarning": "検索はプロダクションビルドでのみ利用可能です。\nローカルでテストするには、サイトをビルドしてプレビューしてください。",
   "themeSelect.accessibleLabel": "テーマの選択",
   "themeSelect.dark": "ダーク",
   "themeSelect.light": "ライト",

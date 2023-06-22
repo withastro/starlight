@@ -82,17 +82,24 @@ Con esta configuración, una página `/introduction` tendría un enlace de edici
 
 ### `sidebar`
 
-**tipo:** [`SidebarGroup[]`](#sidebargroup)
+**tipo:** [`SidebarItem[]`](#sidebaritem)
 
 Configura los elementos de navegación de la barra lateral de tu sitio.
 
-Una barra lateral es una matriz de grupos, cada uno con una `label` para el grupo y una matriz de `items` o un objeto de configuración `autogenerate`.
+Una barra lateral es un conjunto de enlaces y grupos de enlaces.
+Cada elemento debe tener una propiedad `label` y una de las siguientes propiedades:
 
-Puedes establecer manualmente los contenidos de un grupo usando `items`, que es una matriz que puede incluir enlaces y subgrupos. También puedes generar automáticamente el contenido de un grupo a partir de un directorio específico de tu documentación, usando `autogenerate`.
+- `link` — Un solo enlace a una URL específica, p. ej. `'/home'` o `'https://example.com'`.
+
+- `items` — Un array que contiene más enlaces de la barra lateral y subgrupos.
+
+- `autogenerate` — Un objeto que especifica un directorio de tus documentos para generar automáticamente un grupo de enlaces.
 
 ```js
 starlight({
   sidebar: [
+    // Un solo elemento de enlace etiquetado como “Home”.
+    { label: 'Home', link: '/' },
     // Un grupo etiquetado como "Start Here" que contiene dos enlaces.
     {
       label: 'Start Here',
@@ -112,29 +119,17 @@ starlight({
 });
 ```
 
-#### `SidebarGroup`
+#### `SidebarItem`
 
 ```ts
-type SidebarGroup =
-  | {
-      label: string;
-      items: Array<LinkItem | SidebarGroup>;
-    }
-  | {
-      label: string;
-      autogenerate: {
-        directory: string;
-      };
-    };
-```
-
-#### `LinkItem`
-
-```ts
-interface LinkItem {
+type SidebarItem = {
   label: string;
-  link: string;
-}
+  translations?: Record<string, string>;
+} & (
+  | { link: string }
+  | { items: SidebarItem[] }
+  | { autogenerate: { directory: string } }
+);
 ```
 
 ### `locales`
