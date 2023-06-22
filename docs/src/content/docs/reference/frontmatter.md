@@ -57,6 +57,22 @@ head:
 Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
 Customize the heading levels to be included or set to `false` to hide the table of contents on this page.
 
+```md
+---
+title: Page with only H2s in the table of contents
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Page with no table of contents
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **type:** `'doc' | 'splash'`  
