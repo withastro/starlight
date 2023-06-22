@@ -236,6 +236,35 @@ export default defineConfig({
 });
 ```
 
+## Custom 404 page
+
+Starlight sites display a simple 404 page by default.
+You can customize this by adding a `404.md` (or `404.mdx`) file to your `src/content/docs/` directory:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **404.md**
+      - index.md
+- astro.config.mjs
+
+</FileTree>
+
+You can use all of Starlight’s page layout and customization techniques in your 404 page. For example, the default 404 page uses the [`splash` template](#page-layout) and [`hero`](/reference/frontmatter/#hero) component in frontmatter:
+
+```md
+---
+title: '404'
+template: splash
+editUrl: false
+hero:
+  title: '404'
+  tagline: Page not found. Check the URL or try using the search bar.
+---
+```
+
 ## Custom CSS styles
 
 Customize the styles applied to your Starlight site by providing additional CSS files to modify or extend Starlight’s default styles.
