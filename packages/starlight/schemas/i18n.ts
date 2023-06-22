@@ -29,6 +29,10 @@ function starlightI18nSchema() {
         .string()
         .describe('Text for the “Cancel” button that closes the search modal.'),
 
+      'search.devWarning': z
+        .string()
+        .describe('Warning displayed when opening the Search in a dev environment.'),
+
       'themeSelect.accessibleLabel': z
         .string()
         .describe('Accessible label for the theme selection dropdown.'),

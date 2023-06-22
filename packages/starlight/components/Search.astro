@@ -43,9 +43,8 @@ const pagefindTranslations = {
       </button>
       {
         import.meta.env.DEV ? (
-          <div style="margin: auto; text-align: center;" dir="ltr">
-            <p>Search is only available in production builds.</p>
-            <p>Try building and previewing the site to test it out locally.</p>
+          <div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
+            <p>{t("search.devWarning")}</p>
           </div>
         ) : (
           <div class="search-container">
