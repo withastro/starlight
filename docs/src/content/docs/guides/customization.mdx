@@ -207,8 +207,17 @@ Starlight can display an “Edit page” link in each page’s footer.
 This makes it easy for a reader to find the file to edit to improve your docs.
 For open-source projects in particular, this can help encourage contributions from your community.
 
-To enable edit links, set [`editLink`](/reference/configuration/#editlink) in the Starlight integration config.
+To enable edit links, set [`editLink.baseUrl`](/reference/configuration/#editlink) to the URL used to edit your repository in the Starlight integration config.
 The value of `editLink.baseUrl` will be prepended to the path to the current page to form the full edit link.
+
+Common patterns include:
+
+- GitHub: `https://github.com/USER_NAME/REPO_NAME/edit/BRANCH_NAME/`
+- GitLab: `https://gitlab.com/USER_NAME/REPO_NAME/-/edit/BRANCH_NAME/`
+
+If your Starlight project is not in the root of your repository, include the path to the project at the end of the base URL.
+
+This example shows the edit link configured for the Starlight docs, which live in the `docs/` subdirectory on the `main` branch of the `withastro/starlight` repository on GitHub:
 
 ```js
 // astro.config.mjs
@@ -220,7 +229,7 @@ export default defineConfig({
     starlight({
       title: 'Docs With Edit Links',
       editLink: {
-        baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+        baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
       },
     }),
   ],
