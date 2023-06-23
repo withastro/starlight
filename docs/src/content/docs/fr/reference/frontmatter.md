@@ -36,7 +36,7 @@ Remplace la [configuration globale `editLink`](/fr/reference/configuration/#edit
 
 ### `head`
 
-**type:** [`HeadConfig[]`](/fr-FR/reference/configuration/#headconfig)
+**type:** [`HeadConfig[]`](/fr/reference/configuration/#headconfig)
 
 Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr/reference/configuration/#head).
 

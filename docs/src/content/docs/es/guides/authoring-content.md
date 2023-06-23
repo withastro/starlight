@@ -15,10 +15,10 @@ El texto puede estar **en negrita**, _en cursiva_, o ~~tachado~~.
 El texto puede estar **en negrita**, _en cursiva_, o ~~tachado~~.
 ```
 
-Puedes [enlazar a otra página](/getting-started.md).
+Puedes [enlazar a otra página](/es/getting-started/).
 
 ```md
-Puedes [enlazar a otra página](/getting-started.md).
+Puedes [enlazar a otra página](/es/getting-started/).
 ```
 
 Puedes resaltar `código en línea` con comillas invertidas.
