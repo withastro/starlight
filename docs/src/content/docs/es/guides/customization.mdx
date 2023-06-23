@@ -24,7 +24,7 @@ Agregando un logo personalizado al encabezado del sitio es una forma rápida de 
 
    </FileTree>
 
-2. Agrega la ruta de tu logotipo como opción [`logo.src`](/reference/configuration/#logo) de Starlight en el archivo `astro.config.mjs`:
+2. Agrega la ruta de tu logotipo como opción [`logo.src`](/es/reference/configuration/#logo) de Starlight en el archivo `astro.config.mjs`:
 
    ```js
    // astro.config.mjs
@@ -90,7 +90,7 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
 
 De forma predeterminada, las páginas de Starlight utilizan un diseño con una barra lateral de navegación global y una tabla de contenidos que muestra los encabezados de la página actual.
 
-Puedes aplicar un diseño de página más amplio sin barras laterales estableciendo [`template: splash`](/reference/frontmatter/#template) en el frontmatter de una página. Esto funciona especialmente bien para páginas de inicio y puedes verlo en acción en la [página de inicio de este sitio](/).
+Puedes aplicar un diseño de página más amplio sin barras laterales estableciendo [`template: splash`](/es/reference/frontmatter/#template) en el frontmatter de una página. Esto funciona especialmente bien para páginas de inicio y puedes verlo en acción en la [página de inicio de este sitio](/es/).
 
 ```md
 ---
@@ -105,7 +105,7 @@ template: splash
 
 Starlight muestra una tabla de contenidos en cada página para facilitar que los lectores naveguen hasta el encabezado que están buscando. Puedes personalizar — e incluso desactivar — la tabla de contenidos de forma global en la integración de Starlight o de forma individual en el frontmatter de cada página.
 
-De forma predeterminada, los encabezados `<h2>` y `<h3>` se incluyen en la tabla de contenidos. Puedes cambiar qué niveles de encabezados se incluyen en toda la página utilizando las opciones `minHeadingLevel` y `maxHeadingLevel` en tu configuración [global de `tableOfContents`](/reference/configuration/#tableofcontents). Puedes anular estas configuraciones predeterminadas en una página individual agregando las propiedades correspondientes de [`tableOfContents` en el frontmatter](/reference/frontmatter/#tableofcontents):
+De forma predeterminada, los encabezados `<h2>` y `<h3>` se incluyen en la tabla de contenidos. Puedes cambiar qué niveles de encabezados se incluyen en toda la página utilizando las opciones `minHeadingLevel` y `maxHeadingLevel` en tu configuración [global de `tableOfContents`](/es/reference/configuration/#tableofcontents). Puedes anular estas configuraciones predeterminadas en una página individual agregando las propiedades correspondientes de [`tableOfContents` en el frontmatter](/es/reference/frontmatter/#tableofcontents):
 
 <Tabs>
   <TabItem label="Frontmatter">
@@ -173,7 +173,7 @@ defineConfig({
 
 ## Enlaces sociales
 
-Starlight cuenta con soporte incorporado para agregar enlaces a tus cuentas de redes sociales en el encabezado del sitio mediante la opción [`social`](/reference/configuration/#social) en la integración de Starlight.
+Starlight cuenta con soporte incorporado para agregar enlaces a tus cuentas de redes sociales en el encabezado del sitio mediante la opción [`social`](/es/reference/configuration/#social) en la integración de Starlight.
 
 Actualmente, se admiten enlaces a Discord, GitHub, Mastodon y Twitter. ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
 
@@ -201,7 +201,7 @@ export default defineConfig({
 
 Starlight puede mostrar un enlace ”Editar página” en el pie de cada página. Esto facilita que los lectores encuentren el archivo que deben editar para mejorar tus documentos. Para proyectos de código abierto en particular, esto puede ayudar a fomentar las contribuciones de tu comunidad.
 
-Para habilitar los enlaces de edición, establece [`editLink.baseUrl`](/reference/configuration/#editlink) en la URL utilizada para editar tu repositorio en la configuración de integración de Starlight. 
+Para habilitar los enlaces de edición, establece [`editLink.baseUrl`](/es/reference/configuration/#editlink) en la URL utilizada para editar tu repositorio en la configuración de integración de Starlight. 
 El valor de `editLink.baseUrl` se añadirá al inicio de la ruta de la página actual para formar el enlace de edición completo.
 
 Algunos patrones comunes incluyen:
@@ -247,7 +247,7 @@ Los sitios de Starlight muestran de forma predeterminada una página de error 40
 </FileTree>
 
 
-Puedes utilizar todas las técnicas de diseño y personalización de páginas de Starlight en tu página de error 404. Por ejemplo, la página de error 404 predeterminada utiliza la [plantilla `splash`](#diseño-de-página) y el componente [`hero`](/reference/frontmatter/#hero) en el frontmatter:
+Puedes utilizar todas las técnicas de diseño y personalización de páginas de Starlight en tu página de error 404. Por ejemplo, la página de error 404 predeterminada utiliza la [plantilla `splash`](#diseño-de-página) y el componente [`hero`](/es/reference/frontmatter/#hero) en el frontmatter:
 
 ```md
 ---
@@ -417,7 +417,7 @@ Puedes encontrar el nombre del paquete haciendo clic en “Install” en la pág
     });
     ```
 
-    Fontsource ships multiple CSS files for each font. See the [Fontsource documentation](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) on including different weights and styles to understand which to use.
+    Fontsource incluye varios archivos CSS para cada fuente. Consulta la [documentación de Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) sobre cómo incluir diferentes pesos y estilos para comprender cuál debes usar.
 
 ### Usar fuentes
 
