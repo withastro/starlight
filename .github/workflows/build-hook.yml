@@ -1,0 +1,11 @@
+name: "i18n redeploy"
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send webhook
+      run: curl -X POST -d '{}' ${{ secrets.NETLIFY_BUILD_HOOK }}
