@@ -257,7 +257,7 @@ Par exemple, cela vous permet de servir `/getting-started/` comme une route angl
 
 Définit la langue par défaut pour ce site.
 La valeur doit correspondre à l'une des clés de votre objet [`locales`](#locales).
-(Si votre langue par défaut est votre [root locale](#root-locale), vous pouvez sauter cette étape).
+(Si votre langue par défaut est votre [root locale](#locale-racine), vous pouvez sauter cette étape).
 
 La locale par défaut sera utilisée pour fournir un contenu de remplacement lorsque les traductions sont manquantes.
 
