@@ -1,0 +1,71 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+
+const icons = [
+  'up-caret',
+  'down-caret',
+  'right-caret',
+  'right-arrow',
+  'left-arrow',
+  'bars',
+  'translate',
+  'pencil',
+  'pen',
+  'document',
+  'add-document',
+  'setting',
+  'external',
+  'moon',
+  'sun',
+  'laptop',
+  'open-book',
+  'information',
+  'magnifier',
+  'forward-slash',
+  'close',
+  'error',
+  'warning',
+  'approve-check-circle',
+  'approve-check',
+  'rocket',
+  'star',
+  'puzzle',
+  'list-format',
+  'github',
+  'discord',
+  'twitter',
+  'mastodon',
+] as const;
+---
+
+<div class="icons-grid">
+  {
+    icons.map((icon) => {
+      return (
+        <div class="icon-preview">
+          <Icon name={icon} size="1.5rem" />
+          <span>{icon}</span>
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .icons-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  }
+
+  .icons-grid .icon-preview {
+    align-items: center;
+    border: 1px solid var(--sl-color-gray-5);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--sl-text-sm);
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.75rem;
+  }
+</style>
