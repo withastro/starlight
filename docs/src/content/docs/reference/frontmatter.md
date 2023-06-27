@@ -133,3 +133,18 @@ interface HeroConfig {
   }>;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `Date`
+
+The last update date of the current page that overrides the date generated from the Git history. The date should be a valid [YAML timestamp](https://yaml.org/type/timestamp.html).
+
+Only visible if the [global `showUpdateDate` option](/reference/configuration/#showupdatedate) is enabled.
+
+```md
+---
+title: Page with a custom last update date
+lastUpdated: 2022-08-09
+---
+```
