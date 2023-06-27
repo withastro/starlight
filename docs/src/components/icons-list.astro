@@ -1,41 +1,8 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
+import { Icons } from '../../../packages/starlight/components/Icons';
 
-const icons = [
-  'up-caret',
-  'down-caret',
-  'right-caret',
-  'right-arrow',
-  'left-arrow',
-  'bars',
-  'translate',
-  'pencil',
-  'pen',
-  'document',
-  'add-document',
-  'setting',
-  'external',
-  'moon',
-  'sun',
-  'laptop',
-  'open-book',
-  'information',
-  'magnifier',
-  'forward-slash',
-  'close',
-  'error',
-  'warning',
-  'approve-check-circle',
-  'approve-check',
-  'rocket',
-  'star',
-  'puzzle',
-  'list-format',
-  'github',
-  'discord',
-  'twitter',
-  'mastodon',
-] as const;
+const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 ---
 
 <div class="icons-grid">
