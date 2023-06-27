@@ -22,11 +22,13 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
   .icons-grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
   }
 
   .icons-grid .icon-preview {
     align-items: center;
+    justify-content: center;
+    text-align: center;
     border: 1px solid var(--sl-color-gray-5);
     display: flex;
     flex-direction: column;
