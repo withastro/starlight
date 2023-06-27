@@ -317,3 +317,12 @@ interface HeadConfig {
   content?: string;
 }
 ```
+
+### `showUpdateDate`
+
+**type:** `boolean`  
+**default:** `false`
+
+Define if the last update date should be visible in the page footer.
+
+This feature relies on the Git history and may not be accurate on some deployment platforms performing [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt).

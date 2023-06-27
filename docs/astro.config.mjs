@@ -112,6 +112,7 @@ export default defineConfig({
           autogenerate: { directory: 'reference' },
         },
       ],
+      showUpdateDate: true,
     }),
   ],
   image: { service: { entrypoint: 'astro/assets/services/sharp' } },
