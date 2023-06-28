@@ -21,6 +21,7 @@ interface Group {
   type: 'group';
   label: string;
   entries: (Link | Group)[];
+  collapsed: boolean;
 }
 
 export type SidebarEntry = Link | Group;
@@ -53,6 +54,7 @@ function configItemToEntry(
       entries: item.items.map((i) =>
         configItemToEntry(i, currentPathname, locale, routes)
       ),
+      collapsed: item.collapsed,
     };
   }
 }
@@ -64,7 +66,7 @@ function groupFromAutogenerateConfig(
   routes: Route[],
   currentPathname: string
 ): Group {
-  const { directory } = item.autogenerate;
+  const { collapsed: collapsedGeneratedEntries, directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
   const dirDocs = routes.filter(
     (doc) =>
@@ -77,7 +79,8 @@ function groupFromAutogenerateConfig(
   return {
     type: 'group',
     label: pickLang(item.translations, localeToLang(locale)) || item.label,
-    entries: sidebarFromDir(tree, currentPathname, locale),
+    entries: sidebarFromDir(tree, currentPathname, locale, collapsedGeneratedEntries ?? item.collapsed),
+    collapsed: item.collapsed,
   };
 }
 
@@ -168,15 +171,17 @@ function groupFromDir(
   fullPath: string,
   dirName: string,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ): Group {
   const entries = Object.entries(dir).map(([key, dirOrSlug]) =>
-    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale)
+    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
   );
   return {
     type: 'group',
     label: dirName,
     entries,
+    collapsed,
   };
 }
 
@@ -186,21 +191,23 @@ function dirToItem(
   fullPath: string,
   dirName: string,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ): SidebarEntry {
   return typeof dirOrSlug === 'string'
     ? linkFromSlug(dirOrSlug, currentPathname)
-    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale);
+    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale, collapsed);
 }
 
 /** Create a sidebar entry for a given content directory. */
 function sidebarFromDir(
   tree: Dir,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ) {
   return Object.entries(tree).map(([key, dirOrSlug]) =>
-    dirToItem(dirOrSlug, key, key, currentPathname, locale)
+    dirToItem(dirOrSlug, key, key, currentPathname, locale, collapsed)
   );
 }
 
@@ -216,7 +223,7 @@ export function getSidebar(
     );
   } else {
     const tree = treeify(routes, locale || '');
-    return sidebarFromDir(tree, pathname, locale);
+    return sidebarFromDir(tree, pathname, locale, false);
   }
 }
 

@@ -21,7 +21,7 @@ interface Props {
             {entry.label}
           </a>
         ) : (
-          <details open>
+          <details open={!entry.collapsed}>
             <summary>
               <h2 class="large">{entry.label}</h2>
               <Icon name="right-caret" class="caret" size="1.25rem" />
