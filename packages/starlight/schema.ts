@@ -116,10 +116,8 @@ export function docsSchema() {
       
       /**
        * The last update date of the current page.
-       * Overrides the date generated from the Git history.
+       * Overrides the `lastUpdated` global config or the date generated from the Git history.
        */
-      lastUpdated: z
-        .date()
-        .optional(),
+      lastUpdated: z.union([z.date(), z.boolean()]).optional(),
     });
 }

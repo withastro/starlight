@@ -25,8 +25,17 @@ const prevNextLinks = getPrevNextLinks(sidebar);
       )
     }
     {
-      config.showUpdateDate && (
-        <LastUpdated id={entry.id} {lang} lastUpdated={entry.data.lastUpdated} {locale} />
+      (entry.data.lastUpdated ?? config.lastUpdated) && (
+        <LastUpdated
+          id={entry.id}
+          {lang}
+          lastUpdated={
+            typeof entry.data.lastUpdated !== 'boolean'
+              ? entry.data.lastUpdated
+              : undefined
+          }
+          {locale}
+        />
       )
     }
   </div>

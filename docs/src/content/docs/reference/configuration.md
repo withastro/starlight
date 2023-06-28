@@ -318,11 +318,11 @@ interface HeadConfig {
 }
 ```
 
-### `showUpdateDate`
+### `lastUpdated`
 
 **type:** `boolean`  
 **default:** `false`
 
 Define if the last update date should be visible in the page footer.
 
-By default, this feature relies on the Git history and may not be accurate on some deployment platforms performing [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). A page’s frontmatter can override the generated date using the [`lastUpdated`](/reference/frontmatter/#lastupdated) field.
+By default, this feature relies on the Git history and may not be accurate on some deployment platforms performing [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). A page’s frontmatter can override this setting or the generated date using the [`lastUpdated`](/reference/frontmatter/#lastupdated) field.

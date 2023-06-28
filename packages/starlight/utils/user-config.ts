@@ -233,9 +233,8 @@ const UserConfigSchema = z.object({
   customCss: z.string().array().optional().default([]),
 
   /** Define if the last update date should be visible in the page footer. */
-  showUpdateDate: z
+  lastUpdated: z
     .boolean()
-    .optional()
     .default(false)
     .describe(
       'Define if the last update date should be visible in the page footer.'
