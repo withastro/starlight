@@ -7,11 +7,11 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 import FileTree from "../../../../components/file-tree.astro";
 
 Starlight propose par défaut un style et des fonctionnalités pragmatiques, vous pouvez donc démarrer rapidement sans configuration nécessaire.
-Lorsque vous souhaitez commencer à personnaliser l'apparence de votre site Starlight, ce guide vous accompagne.
+Lorsque vous souhaitez commencer à personnaliser l’apparence de votre site Starlight, ce guide vous accompagne.
 
 ## Ajouter votre logo
 
-L'ajout d'un logo personnalisé à l'en-tête du site est un moyen rapide d'ajouter votre image de marque personnelle à un site Starlight.
+L’ajout d’un logo personnalisé à l’en-tête du site est un moyen rapide d’ajouter votre image de marque personnelle à un site Starlight.
 
 1. Ajoutez votre fichier logo au répertoire `src/assets/` :
 
@@ -45,8 +45,8 @@ L'ajout d'un logo personnalisé à l'en-tête du site est un moyen rapide d'ajou
    ```
 
 Par défaut, le logo sera affiché à côté du nom de votre site (option `title` dans la configuration).
-Si l'image de votre logo inclut déjà le titre du site, vous pouvez masquer visuellement le texte du titre en définissant l'option `replacesTitle` à `true`.
-Le texte du titre (`title`) le texte sera toujours inclus pour les lecteurs d'écran afin que l'en-tête reste accessible.
+Si l’image de votre logo inclut déjà le titre du site, vous pouvez masquer visuellement le texte du titre en définissant l’option `replacesTitle` à `true`.
+Le texte du titre (`title`) le texte sera toujours inclus pour les lecteurs d’écran afin que l’en-tête reste accessible.
 
 ```js
 starlight({
@@ -75,7 +75,7 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
 
    </FileTree>
 
-2. Ajouter les chemins vers vos variantes de logo dans les options `light` (clair) et `dark` (sombre) en remplacement de l'option `src` dans `astro.config.mjs`:
+2. Ajouter les chemins vers vos variantes de logo dans les options `light` (clair) et `dark` (sombre) en remplacement de l’option `src` dans `astro.config.mjs`:
 
    ```js
    starlight({
@@ -92,7 +92,7 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
 Par défaut, les pages Starlight utilisent une mise en page avec une barre latérale de navigation globale et une table des matières qui affiche les titres de la page courante.
 
 Vous pouvez appliquer une mise en page plus large sans barres latérales en définissant [`template: splash`](/reference/frontmatter/#template) dans le frontmatter de votre page.
-Cela fonctionne particulièrement bien pour les pages d'atterissage et vous pouvez le voir en action sur la [page d'accueil de ce site](/).
+Cela fonctionne particulièrement bien pour les pages d’atterissage et vous pouvez le voir en action sur la [page d’accueil de ce site](/).
 
 ```md
 ---
@@ -105,10 +105,10 @@ template: splash
 
 ## Table des matières
 
-Starlight affiche une table des matières sur chaque page pour permettre aux lecteurs d'accéder plus facilement à la section qu'ils recherchent.
-Vous pouvez personnaliser - ou même désactiver - la table des matières globalement dans l'intégration Starlight ou page par page dans votre frontmatter.
+Starlight affiche une table des matières sur chaque page pour permettre aux lecteurs d’accéder plus facilement à la section qu’ils recherchent.
+Vous pouvez personnaliser - ou même désactiver - la table des matières globalement dans l’intégration Starlight ou page par page dans votre frontmatter.
 
-Par défaut, les titres `<h2>` et `<h3>` sont inclus dans la table des matières. Modifiez les niveaux de titres à inclure à l'échelle du site à l'aide des options `minHeadingLevel` et `maxHeadingLevel` dans votre option de configuration [globale `tableOfContents`](/reference/configuration/#tableofcontents). Remplacez ces valeurs par défaut sur une page individuelle en ajoutant les propriétés [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents) correspondantes :
+Par défaut, les titres `<h2>` et `<h3>` sont inclus dans la table des matières. Modifiez les niveaux de titres à inclure à l’échelle du site à l’aide des options `minHeadingLevel` et `maxHeadingLevel` dans votre option de configuration [globale `tableOfContents`](/reference/configuration/#tableofcontents). Remplacez ces valeurs par défaut sur une page individuelle en ajoutant les propriétés [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents) correspondantes :
 
 <Tabs>
   <TabItem label="Frontmatter">
@@ -176,7 +176,7 @@ defineConfig({
 
 ## Liens sociaux
 
-Starlight supporte par défaut l’ajout de liens vers vos comptes de médias sociaux dans l'en-tête du site via l'option [`social`](/reference/configuration/#social) dans l'intégration Starlight.
+Starlight supporte par défaut l’ajout de liens vers vos comptes de médias sociaux dans l’en-tête du site via l’option [`social`](/reference/configuration/#social) dans l’intégration Starlight.
 
 Actuellement, les liens vers Discord, GitHub, Mastodon et Twitter sont pris en charge.
 Faites-nous savoir sur GitHub ou Discord si vous avez besoin de la prise en charge d’un autre service !
@@ -201,23 +201,23 @@ export default defineConfig({
 });
 ```
 
-## Liens d'édition de page
+## Liens d’édition de page
 
 Starlight peut afficher un lien "Modifier la page" dans le pied de page de chaque page.
 Cela permet au lecteur de trouver facilement le fichier à modifier pour améliorer vos documents.
 Pour les projets open source en particulier, cela peut aider à encourager les contributions de votre communauté.
 
-Pour activer les liens de modification, définissez l'option de configuration [`editLink.baseUrl`](/reference/configuration/#editlink) en lui assignat l'URL utilisée pour modifier votre référentiel. Cela se passe dans la configuration de l'intégration Starlight.
-La valeur de `editLink.baseUrl` sera automatiquement ajoutée au chemin d'accès vers la page actuelle pour former le lien d'édition complet.
+Pour activer les liens de modification, définissez l’option de configuration [`editLink.baseUrl`](/reference/configuration/#editlink) en lui assignat l’URL utilisée pour modifier votre référentiel. Cela se passe dans la configuration de l’intégration Starlight.
+La valeur de `editLink.baseUrl` sera automatiquement ajoutée au chemin d’accès vers la page actuelle pour former le lien d’édition complet.
 
 Les motifs courants incluent:
 
 - GitHub: `https://github.com/NOM_UTILISATEUR/NOM_DU_DEPOT/edit/NOM_DE_LA_BRANCHE/`
 - GitLab: `https://gitlab.com/NOM_UTILISATEUR/NOM_DU_DEPOT/-/edit/NOM_DE_LA_BRANCHE/`
 
-Si votre projet Starlight ne se trouve pas à la racine de votre dépôt, incluez le chemin d'accès au projet à la fin de l'URL de base.
+Si votre projet Starlight ne se trouve pas à la racine de votre dépôt, incluez le chemin d’accès au projet à la fin de l’URL de base.
 
-Cet exemple montre le lien d'édition configuré pour les documents Starlight, qui se trouvent dans le sous-répertoire `docs/` sur la branche `main` du dépôt `withastro/starlight` sur GitHub :
+Cet exemple montre le lien d’édition configuré pour les documents Starlight, qui se trouvent dans le sous-répertoire `docs/` sur la branche `main` du dépôt `withastro/starlight` sur GitHub :
 
 ```js
 // astro.config.mjs
@@ -270,7 +270,7 @@ hero:
 Personnalisez les styles appliqués à votre site Starlight en créant des fichiers CSS complémentaires pour modifier ou étendre les styles par défaut de Starlight.
 
 1. Ajoutez un fichier CSS dans votre répertoire `src/`.
-   Par exemple, vous pouvez remplacer la teinte d'accentuation bleue par défaut de Starlight par du violet :
+   Par exemple, vous pouvez remplacer la teinte d’accentuation bleue par défaut de Starlight par du violet :
 
    ```css
    /* src/styles/custom.css */
@@ -364,8 +364,8 @@ Pour utiliser Google Fonts, suivez le [Guide de configuration de Fontsource](#se
 
 #### Configurer les polices avec Fontsource
 
-Le projet [Fontsource](https://fontsource.org/) simplifie l'utilisation des polices Google et d'autres polices open source.
-Il fournit des modules npm que vous pouvez installer pour les polices que vous souhaitez utiliser et inclut des fichiers CSS prêts à l'emploi à ajouter à votre projet.
+Le projet [Fontsource](https://fontsource.org/) simplifie l’utilisation des polices Google et d’autres polices open source.
+Il fournit des modules npm que vous pouvez installer pour les polices que vous souhaitez utiliser et inclut des fichiers CSS prêts à l’emploi à ajouter à votre projet.
 
 1. Trouvez la police que vous souhaitez utiliser dans le [catalogue de Fontsource](https://fontsource.org/). Cet exemple utilisera [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
 
@@ -409,7 +409,7 @@ Il fournit des modules npm que vous pouvez installer pour les polices que vous s
       ],
     });
     ```
-Fontsource fournit plusieurs fichiers CSS pour chaque police. Consultez la [documentation Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) sur l'inclusion de différentes graisses et styles pour comprendre lesquels utiliser.
+Fontsource fournit plusieurs fichiers CSS pour chaque police. Consultez la [documentation Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) sur l’inclusion de différentes graisses et styles pour comprendre lesquels utiliser.
 
 ### Utiliser vos polices personnalisées
 
