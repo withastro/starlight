@@ -69,9 +69,9 @@ function groupFromAutogenerateConfig(
   const dirDocs = routes.filter(
     (doc) =>
       // Match against `foo.md` or `foo/index.md`.
-      stripExtension(doc.entry.id) === localeDir ||
+      stripExtension(doc.id) === localeDir ||
       // Match against `foo/anything/else.md`.
-      doc.entry.id.startsWith(localeDir + '/')
+      doc.id.startsWith(localeDir + '/')
   );
   const tree = treeify(dirDocs, localeDir);
   return {
@@ -136,7 +136,7 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 function treeify(routes: Route[], baseDir: string): Dir {
   const treeRoot: Dir = {};
   routes.forEach((doc) => {
-    const breadcrumbs = getBreadcrumbs(doc.entry.id, baseDir);
+    const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
 
     // Walk down the route’s path to generate the tree.
     let currentDir = treeRoot;
