@@ -258,6 +258,7 @@ starlight({
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
