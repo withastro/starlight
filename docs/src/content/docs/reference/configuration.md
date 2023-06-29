@@ -256,7 +256,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
@@ -268,6 +268,7 @@ starlight({
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```
