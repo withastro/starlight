@@ -243,7 +243,6 @@ starlight({
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
     twitter: 'https://twitter.com/astrodotbuild',
-    codeberg: 'https://codeberg.org/knut/examples',
   },
 });
 ```
