@@ -228,7 +228,7 @@ export function getSidebar(
 }
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
-function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
+export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
   return sidebar.flatMap((entry) =>
     entry.type === 'group' ? flattenSidebar(entry.entries) : entry
   );
