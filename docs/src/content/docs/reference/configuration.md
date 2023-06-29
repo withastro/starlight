@@ -256,7 +256,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string }`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
