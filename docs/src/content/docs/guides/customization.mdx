@@ -178,7 +178,7 @@ defineConfig({
 
 Starlight has built-in support for adding links to your social media accounts to the site header via the [`social`](/reference/configuration/#social) option in the Starlight integration.
 
-Currently, links to Discord, GitHub, Mastodon, and Twitter are supported.
+Currently, links to Codeberg, Discord, GitHub, Mastodon, and Twitter are supported.
 Let us know on GitHub or Discord if you need support for another service!
 
 ```js
@@ -191,11 +191,11 @@ export default defineConfig({
     starlight({
       title: 'Docs With Social Links',
       social: {
+        codeberg: 'https://codeberg.org/knut/examples',
         discord: 'https://astro.build/chat',
         github: 'https://github.com/withastro/starlight',
         mastodon: 'https://m.webtoo.ls/@astro',
         twitter: 'https://twitter.com/astrodotbuild',
-        codeberg: 'https://codeberg.org/knut/examples',
       },
     }),
   ],
