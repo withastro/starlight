@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-feat: add i18n nl translations
+Add Dutch UI translations
