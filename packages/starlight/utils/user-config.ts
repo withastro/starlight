@@ -54,6 +54,7 @@ const AutoSidebarGroupSchema = SidebarBaseSchema.extend({
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
 type ManualSidebarGroupInput = z.input<typeof SidebarBaseSchema> & {
+  isOpen: boolean;
   /** Array of links and subcategories to display in this category. */
   items: Array<
     | z.input<typeof SidebarLinkItemSchema>
@@ -63,6 +64,7 @@ type ManualSidebarGroupInput = z.input<typeof SidebarBaseSchema> & {
 };
 
 type ManualSidebarGroupOutput = z.output<typeof SidebarBaseSchema> & {
+  isOpen: boolean;
   /** Array of links and subcategories to display in this category. */
   items: Array<
     | z.output<typeof SidebarLinkItemSchema>
@@ -76,6 +78,7 @@ const ManualSidebarGroupSchema: z.ZodType<
   z.ZodTypeDef,
   ManualSidebarGroupInput
 > = SidebarBaseSchema.extend({
+  isOpen: z.boolean().default(true).describe('Whether this group is open in the sidebar.'),
   /** Array of links and subcategories to display in this category. */
   items: z.lazy(() =>
     z

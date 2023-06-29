@@ -1,5 +1,5 @@
 ---
-import type { SidebarEntry } from '../utils/navigation';
+import type { SidebarEntry, Link } from '../utils/navigation';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 <ul class:list={{ 'top-level': !Astro.props.nested }}>
   {
-    Astro.props.sublist.map((entry) => (
+    Astro.props.sublist.map((entry : SidebarEntry) => (
       <li>
         {entry.type === 'link' ? (
           <a
@@ -21,7 +21,7 @@ interface Props {
             {entry.label}
           </a>
         ) : (
-          <details open>
+          <details open={entry.entries.filter((e): e is Link => e.type === 'link').some(e => e.isCurrent) || entry.isOpen}>
             <summary>
               <h2 class="large">{entry.label}</h2>
               <Icon name="right-caret" class="caret" size="1.25rem" />

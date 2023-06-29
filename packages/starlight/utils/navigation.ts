@@ -20,6 +20,7 @@ export interface Link {
 interface Group {
   type: 'group';
   label: string;
+  isOpen: boolean;
   entries: (Link | Group)[];
 }
 
@@ -50,6 +51,7 @@ function configItemToEntry(
     return {
       type: 'group',
       label: pickLang(item.translations, localeToLang(locale)) || item.label,
+      isOpen: item.isOpen,
       entries: item.items.map((i) =>
         configItemToEntry(i, currentPathname, locale, routes)
       ),
@@ -77,6 +79,7 @@ function groupFromAutogenerateConfig(
   return {
     type: 'group',
     label: pickLang(item.translations, localeToLang(locale)) || item.label,
+    isOpen: true,
     entries: sidebarFromDir(tree, currentPathname, locale),
   };
 }
