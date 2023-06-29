@@ -138,7 +138,7 @@ interface HeroConfig {
 
 **type:** `Date | boolean`
 
-Overrides either the [global `lastUpdated` option](/reference/configuration/#lastupdated) or the last update date of the current page generated from the Git history. If a date is specified, it should be a valid [YAML timestamp](https://yaml.org/type/timestamp.html).
+Overrides the [global `lastUpdated` option](/reference/configuration/#lastupdated). If a date is specified, it must be a valid [YAML timestamp](https://yaml.org/type/timestamp.html) and will override the date stored in Git history for this page.
 
 ```md
 ---
