@@ -3,6 +3,7 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import {
   LocaleData,
+  localizedId,
   localizedSlug,
   slugToLocaleData,
   slugToParam,
@@ -16,6 +17,7 @@ export interface Route extends LocaleData {
   entry: StarlightDocsEntry;
   entryMeta: LocaleData;
   slug: string;
+  id: string;
   isFallback?: true;
   [key: string]: unknown;
 }
@@ -41,6 +43,7 @@ function getRoutes(): Route[] {
   const routes: Route[] = docs.map((entry) => ({
     entry,
     slug: entry.slug,
+    id: entry.id,
     entryMeta: slugToLocaleData(entry.slug),
     ...slugToLocaleData(entry.slug),
   }));
@@ -61,11 +64,13 @@ function getRoutes(): Route[] {
       const localeDocs = getLocaleDocs(locale);
       for (const fallback of defaultLocaleDocs) {
         const slug = localizedSlug(fallback.slug, locale);
+        const id = localizedId(fallback.id, locale);
         const doesNotNeedFallback = localeDocs.some((doc) => doc.slug === slug);
         if (doesNotNeedFallback) continue;
         routes.push({
           entry: fallback,
           slug,
+          id,
           isFallback: true,
           lang: localeConfig.lang || 'en',
           locale,
