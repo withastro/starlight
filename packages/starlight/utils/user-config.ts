@@ -125,6 +125,8 @@ const UserConfigSchema = z.object({
       github: z.string().url().optional(),
       /** Link to the Discord server for this site, e.g. `'https://astro.build/chat'`. */
       discord: z.string().url().optional(),
+      /** Link to the Codeberg profile or repository for this site, e.g. `'https://codeberg.org/knut/examples'`. */
+      codeberg: z.string().url().optional(),
     })
     .optional(),
 
