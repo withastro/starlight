@@ -1,5 +1,5 @@
 {
-  "skipLink.label": "Naar content",
+  "skipLink.label": "Ga naar inhoud",
   "search.label": "Zoeken",
   "search.shortcutLabel": "(Druk op / om te zoeken)",
   "search.cancelLabel": "Annuleren",
@@ -10,13 +10,13 @@
   "themeSelect.auto": "Auto",
   "languageSelect.accessibleLabel": "Selecteer taal",
   "menuButton.accessibleLabel": "Menu",
-  "sidebarNav.accessibleLabel": "Main",
+  "sidebarNav.accessibleLabel": "Hoofdnavigatie",
   "tableOfContents.onThisPage": "Op deze pagina",
   "tableOfContents.overview": "Overzicht",
   "i18n.untranslatedContent": "Deze content is nog niet vertaald.",
   "page.editLink": "Bewerk pagina",
-  "page.lastUpdated": "Laats geupdated:",
+  "page.lastUpdated": "Laatst bewerkt:",
   "page.previousLink": "Laatste",
   "page.nextLink": "Volgende",
-  "404.text": "Pagina niet gevonden. Check de URL of probeer de zoekbalk."
+  "404.text": "Pagina niet gevonden. Controleer de URL of probeer de zoekbalk."
 }
