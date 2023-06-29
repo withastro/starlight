@@ -66,7 +66,7 @@ function groupFromAutogenerateConfig(
   routes: Route[],
   currentPathname: string
 ): Group {
-  const { collapsed: collapsedGeneratedEntries, directory } = item.autogenerate;
+  const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
   const dirDocs = routes.filter(
     (doc) =>
@@ -79,7 +79,7 @@ function groupFromAutogenerateConfig(
   return {
     type: 'group',
     label: pickLang(item.translations, localeToLang(locale)) || item.label,
-    entries: sidebarFromDir(tree, currentPathname, locale, collapsedGeneratedEntries ?? item.collapsed),
+    entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
     collapsed: item.collapsed,
   };
 }

@@ -35,7 +35,7 @@ const SidebarBaseSchema = z.object({
   translations: z.record(z.string()).default({}),
 });
 
-const SidebarCollapsibleItemSchema = z.object({
+const SidebarGroupSchema = SidebarBaseSchema.extend({
   /** Whether this item should be collapsed by default. */
   collapsed: z.boolean().default(false),
 });
@@ -46,7 +46,7 @@ const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
-const AutoSidebarGroupSchema = SidebarBaseSchema.extend({
+const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
   /** Enable autogenerating a sidebar category from a specific docs directory. */
   autogenerate: z.object({
     /** The directory to generate sidebar items for. */
@@ -61,10 +61,9 @@ const AutoSidebarGroupSchema = SidebarBaseSchema.extend({
     // depth: z.number().optional(),
   })
 })
-  .merge(SidebarCollapsibleItemSchema);
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
-type ManualSidebarGroupInput = z.input<typeof SidebarBaseSchema> & z.input<typeof SidebarCollapsibleItemSchema> & {
+type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
   /** Array of links and subcategories to display in this category. */
   items: Array<
     | z.input<typeof SidebarLinkItemSchema>
@@ -73,7 +72,7 @@ type ManualSidebarGroupInput = z.input<typeof SidebarBaseSchema> & z.input<typeo
   >;
 };
 
-type ManualSidebarGroupOutput = z.output<typeof SidebarBaseSchema> & z.output<typeof SidebarCollapsibleItemSchema> & {
+type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
   /** Array of links and subcategories to display in this category. */
   items: Array<
     | z.output<typeof SidebarLinkItemSchema>
@@ -86,7 +85,7 @@ const ManualSidebarGroupSchema: z.ZodType<
   ManualSidebarGroupOutput,
   z.ZodTypeDef,
   ManualSidebarGroupInput
-> = SidebarBaseSchema.extend({
+> = SidebarGroupSchema.extend({
   /** Array of links and subcategories to display in this category. */
   items: z.lazy(() =>
     z
@@ -98,7 +97,6 @@ const ManualSidebarGroupSchema: z.ZodType<
       .array()
   ),
 })
-  .merge(SidebarCollapsibleItemSchema);
 
 const SidebarItemSchema = z.union([
   SidebarLinkItemSchema,
