@@ -1,9 +1,9 @@
 ---
 title: Frontmatter Reference
-description: Une vue d'ensemble des champs frontmatter par défaut pris en charge par Starlight.
+description: Une vue d'ensemble des champs du frontmatter par défaut pris en charge par Starlight.
 ---
 
-Vous pouvez personnaliser des pages Markdown et MDX individuelles dans Starlight en définissant des valeurs dans leur page de garde. Par exemple, une page normale peut définir les champs `title` et `description` :
+Vous pouvez personnaliser des pages Markdown et MDX individuelles dans Starlight en définissant des valeurs dans leur frontmatter. Par exemple, une page normale peut définir les champs `title` et `description` :
 
 ```md
 ---
@@ -14,7 +14,7 @@ description: En savoir plus sur le projet sur lequel je travaille.
 Bienvenue sur la page "à propos" !
 ```
 
-## Champs de la page d'accueil
+## Champs du frontmatter
 
 ### `title` (obligatoire)
 
@@ -32,7 +32,7 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type:** `string | boolean`
 
-Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Editer la page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
+Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Modifier cette page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
@@ -56,6 +56,22 @@ head:
 
 Remplace la [configuration globale `tableOfContents`](/fr/reference/configuration/#tableofcontents).
 Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la table des matières sur cette page.
+
+```md
+---
+title: Pagee avec seulement des H2s dans la table des matières
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Page sans table des matières
+tableOfContents: false
+---
+```
 
 ### `template`
 
@@ -103,7 +119,7 @@ interface HeroConfig {
   tagline?: string;
   image?: {
     alt?: string;
-    // Chemin relatif vers une image dans votre référentiel.
+    // Chemin relatif vers une image dans votre dépôt.
     file?: string;
     // HTML brut à utiliser dans l'emplacement de l'image.
     // Il peut s'agir d'une balise `<img>` personnalisée ou d'une balise `<svg>` en ligne.
