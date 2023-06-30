@@ -83,26 +83,33 @@ Avec cette configuration, une page `/introduction` aurait un lien d'édition poi
 
 ### `sidebar`
 
-**type:** [`SidebarGroup[]`](#sidebargroup)
+**type:** [`SidebarItem[]`](#sidebarittem)
 
 Configure les éléments de navigation de la barre latérale de votre site.
 
-Une barre latérale est un tableau de groupes, chacun avec un `label` pour le groupe et un tableau `items` ou un objet de configuration `autogenerate`.
+Une barre latérale est un tableau de liens et de groupes de liens.
+Chaque élément doit comporter un `label` et l'une des propriétés suivantes :
 
-Vous pouvez définir manuellement le contenu d'un groupe en utilisant `items`, qui est un tableau pouvant inclure des liens et des sous-groupes. Vous pouvez aussi générer automatiquement le contenu d'un groupe à partir d'un répertoire spécifique de votre documentation, en utilisant `autogenerate`.
+- `link` — un lien uninque vers une URL spécifique, comme `'/home'` ou `'https://example.com'`.
+
+- `items` — un tableau contenant plus de liens et des sous-groupes.
+
+- `autogenerate` — un objet indiquant un répertoire de vos docs dpeuis lequel générer automatiquement un groupe de liens.
 
 ```js
 starlight({
   sidebar: [
-    // Un groupe intitulé "Commencer ici" contenant deux liens.
+    // Un lien unique étiqueté “Accueil”.
+    { label: 'Accueil', link: '/' },
+    // Un groupe étiqueté “Débuter ici” contenant deux liens.
     {
-      label: 'Commencer ici',
+      label: 'Débuter ici',
       items: [
         { label: 'Introduction', link: '/intro' },
-        { label: 'Etapes', link: '/next-steps' },
+        { label: 'Prochaines étapes', link: '/next-steps' },
       ],
     },
-    // Un groupe qui renvoie à toutes les pages du répertoire de référence.
+    // Un groupe liant toutes les pages présentes dans le répertoire reference.
     {
       label: 'Référence',
       autogenerate: { directory: 'reference' },
@@ -142,31 +149,17 @@ sidebar: [
 ];
 ```
 
-#### `SidebarGroup`
+#### `SidebarItem`
 
 ```ts
-type SidebarGroup =
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      items: Array<LinkItem | SidebarGroup>;
-    }
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      autogenerate: {
-        directory: string;
-      };
-    };
-```
-
-#### `LinkItem`
-
-```ts
-interface LinkItem {
+type SidebarItem = {
   label: string;
-  link: string;
-}
+  translations?: Record<string, string>;
+} & (
+  | { link: string }
+  | { items: SidebarItem[] }
+  | { autogenerate: { directory: string } }
+);
 ```
 
 ### `locales`
@@ -263,17 +256,19 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```

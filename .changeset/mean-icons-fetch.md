@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Add Czech language support
+Add YouTube social link support

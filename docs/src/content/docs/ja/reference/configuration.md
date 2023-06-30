@@ -251,13 +251,14 @@ starlight({
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string }`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
