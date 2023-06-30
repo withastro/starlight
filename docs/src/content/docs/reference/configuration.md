@@ -58,11 +58,10 @@ starlight({
 #### `LogoConfig`
 
 ```ts
-type LogoConfig = {
-  alt?: string;
-  altTranslations?: Record<string, string>;
-  replacesTitle?: boolean;
-} & ({ src: string } | { light: string; dark: string });
+type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
+  | { src: string }
+  | { light: string; dark: string }
+);
 ```
 
 ### `tableOfContents`
