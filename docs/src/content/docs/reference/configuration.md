@@ -350,3 +350,12 @@ interface HeadConfig {
   content?: string;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+Control whether the footer shows when the page was last updated.
+
+By default, this feature relies on your repository’s Git history and may not be accurate on some deployment platforms performing [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). A page can override this setting or the Git-based date using the [`lastUpdated` frontmatter field](/reference/frontmatter/#lastupdated).

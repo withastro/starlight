@@ -24,7 +24,20 @@ const prevNextLinks = getPrevNextLinks(sidebar);
         <EditLink data={entry.data} id={entry.id} {locale} />
       )
     }
-    <LastUpdated id={entry.id} {lang} {locale} />
+    {
+      (entry.data.lastUpdated ?? config.lastUpdated) && (
+        <LastUpdated
+          id={entry.id}
+          {lang}
+          lastUpdated={
+            typeof entry.data.lastUpdated !== 'boolean'
+              ? entry.data.lastUpdated
+              : undefined
+          }
+          {locale}
+        />
+      )
+    }
   </div>
   <PrevNextLinks {...prevNextLinks} {dir} {locale} />
 </footer>
