@@ -6,18 +6,20 @@ import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
 import { fileWithBase } from '../utils/base';
 import { version } from '../package.json';
+import { getSiteTitle } from '../utils/translations';
 
 interface Props {
   data: CollectionEntry<'docs'>['data'];
   lang: string;
+  locale: string | undefined;
 }
 
-const { data, lang } = Astro.props;
+const { data, lang, locale } = Astro.props;
 
 const canonical = Astro.site
   ? new URL(Astro.url.pathname, Astro.site)
   : undefined;
-const title = data.title || config.title;
+const title = data.title || getSiteTitle(locale);
 const description = data.description || config.description;
 
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
