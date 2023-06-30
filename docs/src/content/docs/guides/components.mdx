@@ -68,7 +68,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 You can display content in a box matching Starlight’s styles using the `<Card>` component.
 Wrap multiple cards in the `<CardGrid>` component to display cards side-by-side when there’s enough space.
 
-A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](#all-icons).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -109,3 +109,28 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 ```
 
 :::
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../components/icons-list.astro';
+
+Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
+
+Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+The code above generates the following on the page:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### All icons
+
+A list of all available icons is shown below with their associated names.
+
+<IconsList />
