@@ -22,20 +22,37 @@ const imageAttrs = {
   height: 400,
   alt: image?.alt,
 };
+// darkImage is the default and uses either file, dark or raw html
+const darkImage = image?.file ? image.file : image?.dark ? image.dark : null;
+// lightImage is only used if darkImage is also used
+const lightImage = image?.file ? null : (image?.dark && image?.light) ? image.light : null;
+// rawHtml is only used if darkImage is not used
+const rawHtml = !darkImage && image?.html ? image.html : null;
 ---
 
 <div class="hero">
+
   {
-    image?.file ? (
-      image.file.format === 'svg' ? (
-        <img src={image.file.src} {...imageAttrs} />
+    darkImage && (
+    darkImage.format === 'svg' ? (
+        <img src={darkImage.src} {...imageAttrs} class:list={{ 'dark-only': Boolean(lightImage) }}/>
       ) : (
-        <Image src={image.file} {...imageAttrs} />
+        <Image src={darkImage} {...imageAttrs} class:list={{ 'dark-only': Boolean(lightImage) }}/>
       )
-    ) : (
-      image?.html && <div class="hero-html flex" set:html={image.html} />
-    )
+    ) 
   }
+  {
+    lightImage && (
+    lightImage.format === 'svg' ? (
+        <img src={lightImage.src} {...imageAttrs} class="light-only"/>
+      ) : (
+        <Image src={lightImage} {...imageAttrs} class="light-only"/>
+      )
+    ) 
+  }
+{
+  rawHtml && <div class="hero-html flex" set:html={rawHtml} />
+}
   <div class="flex stack">
     <div class="flex copy">
       <h1 id="_top" data-page-title set:html={title} />
@@ -67,6 +84,13 @@ const imageAttrs = {
     width: min(70%, 20rem);
     height: auto;
     margin-inline: auto;
+  }
+
+  :global([data-theme='light']) .dark-only {
+    display: none;
+  }
+  :global([data-theme='dark']) .light-only {
+    display: none;
   }
 
   .stack {

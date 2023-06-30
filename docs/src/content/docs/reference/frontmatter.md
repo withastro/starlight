@@ -111,6 +111,18 @@ hero:
 ---
 ```
 
+To add support for a dark / light responsive hero image, modify the `hero.image` object like this, leaving other properties untouched.
+
+```md
+---
+hero:
+  image:
+    alt: A glittering, brightly colored logo
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
@@ -121,8 +133,15 @@ interface HeroConfig {
     alt?: string;
     // Relative path to an image in your repository.
     file?: string;
+    // Relative path to an image in your repository to be used for dark mode.
+    // This will be used only if `file` is not set.
+    dark?: string;
+    // Relative path to an image in your repository to be used for light mode.
+    // This will be used only if `dark` is also set.
+    light?: string;
     // Raw HTML to use in the image slot.
     // Could be a custom `<img>` tag or inline `<svg>`.
+    // This will be used only if `file` and `dark` are not set.
     html?: string;
   };
   actions?: Array<{
