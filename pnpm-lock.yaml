@@ -138,8 +138,8 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2
       vfile:
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^5.3.7
+        version: 5.3.7
     devDependencies:
       '@types/node':
         specifier: ^18.15.11
@@ -5687,13 +5687,6 @@ packages:
       '@types/unist': 2.0.6
       unist-util-stringify-position: 3.0.3
 
-  /vfile-message@4.0.1:
-    resolution: {integrity: sha512-Z1WqUoIK6T6LLoyO64ncUapmjlA84JqKRQFjcG0kZnnyysfq2rMyg5NvKhkQ16GH9FRCRT+Rk4G0aMxgKYS16g==}
-    dependencies:
-      '@types/unist': 2.0.6
-      unist-util-stringify-position: 3.0.3
-    dev: false
-
   /vfile@5.3.7:
     resolution: {integrity: sha512-r7qlzkgErKjobAmyNIkkSpizsFPYiUPuJb5pNW1RB4JcYVZhs4lIbVqk8XPk033CV/1z8ss5pkax8SuhGpcG8g==}
     dependencies:
@@ -5701,14 +5694,6 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
-
-  /vfile@6.0.0:
-    resolution: {integrity: sha512-wx7bOMmEl8bY5WPaXTGsK8YxPLoFiUiDg+m+lBACA1QGcagj3sUyxkX0F+W/Nmn4MHH7G4sXBekpYWRxQE2eHg==}
-    dependencies:
-      '@types/unist': 2.0.6
-      unist-util-stringify-position: 3.0.3
-      vfile-message: 4.0.1
-    dev: false
 
   /vite@4.3.5(@types/node@18.15.11):
     resolution: {integrity: sha512-0gEnL9wiRFxgz40o/i/eTBwm+NEbpUeTWhzKrZDSdKm6nplj+z4lKz8ANDgildxHm47Vg8EUia0aicKbawUVVA==}
