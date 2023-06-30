@@ -57,6 +57,22 @@ head:
 Reemplaza la [configuración global `tableOfContents`](/reference/configuration/#tableofcontents).
 Personaliza los niveles de encabezado que se incluirán o establece en `false` para ocultar la tabla de contenidos en esta página.
 
+```md
+---
+title: Página con solo encabezados H2 en la tabla de contenidos
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Página sin tabla de contenidos
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **tipo:** `'doc' | 'splash'`  

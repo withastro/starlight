@@ -82,17 +82,23 @@ starlight({
 
 ### `sidebar`
 
-**type:** [`SidebarGroup[]`](#sidebargroup)
+**type:** [`SidebarItem[]`](#sidebaritem)
 
 サイトのサイドバーのナビゲーション項目を設定します。
 
-サイドバーはグループごとに`label`をもつ配列で、`items`配列または`autogenerate`設定オブジェクトのいずれかを含みます。
+サイドバーはリンクとリンクのグループの配列です。各項目は、`label`と以下のプロパティのいずれかが必要です。
 
-リンクとサブグループを含む配列である`items`により、グループの内容を手動で設定できます。また、`autogenerate`を使用して、ドキュメントの特定のディレクトリからグループの内容を自動的に生成することも可能です。
+- `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。
+
+- `items` — サイドバーの複数のリンクとサブグループを含む配列。
+
+- `autogenerate` — リンクのグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。
 
 ```js
 starlight({
   sidebar: [
+    // 「ホーム」というラベルのついた単一のリンク。
+    { label: 'ホーム', link: '/' },
     // 2つのリンクを含む、「ここから始める」というラベルのついたグループ。
     {
       label: 'ここから始める',
@@ -101,7 +107,7 @@ starlight({
         { label: '次のステップ', link: '/next-steps' },
       ],
     },
-    // 参照先のディレクトリのすべてのページにリンクするグループ。
+    // referenceディレクトリのすべてのページにリンクするグループ。
     {
       label: 'リファレンス',
       autogenerate: { directory: 'reference' },
@@ -140,31 +146,17 @@ sidebar: [
 ];
 ```
 
-#### `SidebarGroup`
+#### `SidebarItem`
 
 ```ts
-type SidebarGroup =
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      items: Array<LinkItem | SidebarGroup>;
-    }
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      autogenerate: {
-        directory: string;
-      };
-    };
-```
-
-#### `LinkItem`
-
-```ts
-interface LinkItem {
+type SidebarItem = {
   label: string;
-  link: string;
-}
+  translations?: Record<string, string>;
+} & (
+  | { link: string }
+  | { items: SidebarItem[] }
+  | { autogenerate: { directory: string } }
+);
 ```
 
 ### `locales`
@@ -253,19 +245,20 @@ starlight({
 
 **type:** `string`
 
-このサイトのデフォルト言語を設定します。この値は、[`locales`](#locales)オブジェクトのキーのいずれかと一致する必要があります。（デフォルト言語が[ルートロケール](#root-locale)の場合は、この設定をスキップできます。）
+このサイトのデフォルト言語を設定します。この値は、[`locales`](#locales)オブジェクトのキーのいずれかと一致する必要があります。（デフォルト言語が[ルートロケール](#ルートロケール)の場合は、この設定をスキップできます。）
 
 翻訳がない場合には、デフォルトロケールがフォールバックコンテンツとして使用されます。
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string }`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',

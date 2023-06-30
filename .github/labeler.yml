@@ -1,7 +1,7 @@
 # See https://github.com/actions/labeler
 
 '🚨 action':
-- .github/workflows/**
+  - .github/workflows/**
 
 i18n:
   - docs/src/content/docs/de/**/*
@@ -9,3 +9,9 @@ i18n:
   - docs/src/content/docs/fr/**/*
   - docs/src/content/docs/it/**/*
   - docs/src/content/docs/ja/**/*
+
+'🌟 core':
+  - packages/starlight/**
+
+'📚 docs':
+  - docs/**

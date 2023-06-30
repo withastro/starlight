@@ -3,6 +3,7 @@
 	"search.label": "Cerca",
 	"search.shortcutLabel": "(Usa / per cercare)",
 	"search.cancelLabel": "Cancella",
+	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
 	"themeSelect.accessibleLabel": "Seleziona tema",
 	"themeSelect.dark": "Scuro",
 	"themeSelect.light": "Chiaro",
@@ -16,5 +17,6 @@
 	"page.editLink": "Modifica pagina",
 	"page.lastUpdated": "Ultimo aggiornamento:",
 	"page.previousLink": "Indietro",
-	"page.nextLink": "Avanti"
+	"page.nextLink": "Avanti",
+	"404.text": "Pagina non trovata. Verifica l'URL o prova a utilizzare la barra di ricerca."
 }

@@ -3,6 +3,7 @@
   "search.label": "検索",
   "search.shortcutLabel": "（/を押して検索）",
   "search.cancelLabel": "キャンセル",
+  "search.devWarning": "検索はプロダクションビルドでのみ利用可能です。\nローカルでテストするには、サイトをビルドしてプレビューしてください。",
   "themeSelect.accessibleLabel": "テーマの選択",
   "themeSelect.dark": "ダーク",
   "themeSelect.light": "ライト",
@@ -16,5 +17,6 @@
   "page.editLink": "ページを編集",
   "page.lastUpdated": "最終更新日:",
   "page.previousLink": "前へ",
-  "page.nextLink": "次へ"
+  "page.nextLink": "次へ",
+  "404.text": "ページが見つかりません。 URL を確認するか、検索バーを使用してみてください。"
 }

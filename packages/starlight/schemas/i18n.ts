@@ -29,6 +29,10 @@ function starlightI18nSchema() {
         .string()
         .describe('Text for the “Cancel” button that closes the search modal.'),
 
+      'search.devWarning': z
+        .string()
+        .describe('Warning displayed when opening the Search in a dev environment.'),
+
       'themeSelect.accessibleLabel': z
         .string()
         .describe('Accessible label for the theme selection dropdown.'),
@@ -94,6 +98,10 @@ function starlightI18nSchema() {
         .describe(
           'Label shown on the “next page” pagination arrow in the page footer.'
         ),
+
+      '404.text': z
+        .string()
+        .describe('Text shown on Starlight’s default 404 page'),
     })
     .partial();
 }

@@ -3,6 +3,7 @@
   "search.label": "Suchen",
   "search.shortcutLabel": "(Drücke / zum Suchen)",
   "search.cancelLabel": "Abbrechen",
+  "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
   "themeSelect.accessibleLabel": "Farbschema wählen",
   "themeSelect.dark": "Dunkel",
   "themeSelect.light": "Hell",
@@ -16,5 +17,6 @@
   "page.editLink": "Seite bearbeiten",
   "page.lastUpdated": "Zuletzt bearbeitet:",
   "page.previousLink": "Vorherige Seite",
-  "page.nextLink": "Nächste Seite"
+  "page.nextLink": "Nächste Seite",
+  "404.text": "Seite nicht gefunden. Überprüfe die URL oder nutze die Suchleiste."
 }

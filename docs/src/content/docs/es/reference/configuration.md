@@ -233,6 +233,7 @@ Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
