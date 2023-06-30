@@ -56,6 +56,22 @@ head:
 
 [グローバルの`tableOfContents`設定](/ja/reference/configuration/#tableofcontents)を上書きします。表示したい見出しのレベルをカスタマイズするか、あるいは`false`に設定して目次を非表示とします。
 
+```md
+---
+title: 目次にH2のみを表示するページ
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: 目次のないページ
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **type:** `'doc' | 'splash'`  
