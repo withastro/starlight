@@ -449,3 +449,28 @@ main {
   font-family: 'IBM Plex Serif', serif;
 }
 ```
+
+Finally, add your custom CSS file to Starlight’s `customCss` array in `astro.config.mjs` after the CSS file containing your `@font-face` declarations:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'Docs With a Custom Typeface',
+      customCss: [
+        // Path to your @font-face CSS file (if using local fonts)
+        '/src/fonts/font-face.css',
+        // Path to your @font-face CSS file (if using Fontsource)
+        '@fontsource/ibm-plex-serif/400.css',
+        '@fontsource/ibm-plex-serif/600.css',
+        // Path to your custom CSS file
+        '/src/styles/custom.css'
+      ],
+    }),
+  ],
+});
+```
