@@ -20,7 +20,7 @@ const links = Object.entries(config.social || {}).filter(([, url]) =>
   links.length > 0 && (
     <>
       {links.map(([platform, url]) => (
-        <a href={url} rel="me">
+        <a href={url} target="_blank" rel="me noopener">
           <span class="sr-only">{labels[platform]}</span>
           <Icon name={platform} />
         </a>
