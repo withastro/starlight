@@ -135,7 +135,7 @@ interface HeroConfig {
 
 **type:** `Date | boolean`
 
-[グローバルの`lastUpdate`オプション](/ja/reference/configuration/#lastupdated)を上書きします。日付を指定する場合は有効な[YAMLタイムスタンプ](https://yaml.org/type/timestamp.html)である必要があり、このページのGit履歴に保存されている日付を上書きします。
+[グローバルの`lastUpdated`オプション](/ja/reference/configuration/#lastupdated)を上書きします。日付を指定する場合は有効な[YAMLタイムスタンプ](https://yaml.org/type/timestamp.html)である必要があり、ページのGit履歴に保存されている日付を上書きします。
 
 ```md
 ---
