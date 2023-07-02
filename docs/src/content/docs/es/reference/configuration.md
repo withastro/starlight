@@ -357,4 +357,4 @@ interface HeadConfig {
 
 Controla si se muestra el pie de página que indica cuándo se actualizó por última vez la página.
 
-De forma predeterminada, esta función se basa en el historial Git de tu repositorio y puede no ser precisa en algunas plataformas de implementación que realizan [clonaciones superficiales](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una página puede anular esta configuración o la fecha basada en Git utilizando el campo [`lastUpdated`](/reference/frontmatter/#lastupdated) en el frontmatter.
+De forma predeterminada, esta función se basa en el historial Git de tu repositorio y puede no ser precisa en algunas plataformas de implementación que realizan [copias superficiales](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una página puede anular esta configuración o la fecha basada en Git utilizando el campo [`lastUpdated`](/reference/frontmatter/#lastupdated) en el frontmatter.
