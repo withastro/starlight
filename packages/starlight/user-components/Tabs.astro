@@ -101,23 +101,16 @@ const { html, panels } = processPanels(panelHtml);
           const index = this.tabs.indexOf(e.currentTarget as any);
           // Work out which key the user is pressing and
           // Calculate the new tab's index where appropriate
-          const dir =
+          const nextIndex =
             e.key === 'ArrowLeft'
               ? index - 1
               : e.key === 'ArrowRight'
               ? index + 1
-              : e.key === 'ArrowDown'
-              ? 'down'
               : null;
-          if (dir === null) return;
-          // If the down key is pressed, move focus to the open panel,
-          // otherwise switch to the adjacent tab
-          if (dir === 'down') {
+          if (nextIndex === null) return;
+          if (this.tabs[nextIndex]) {
             e.preventDefault();
-            this.panels[i]?.focus();
-          } else if (this.tabs[dir]) {
-            e.preventDefault();
-            this.switchTab(this.tabs[dir], dir);
+            this.switchTab(this.tabs[nextIndex], nextIndex);
           }
         });
       });
