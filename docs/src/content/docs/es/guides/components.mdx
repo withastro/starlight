@@ -61,7 +61,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 Puedes mostrar contenido en una caja que coincida con los estilos de Starlight utilizando el componente `<Card>`. Envuelve varias tarjetas en el componente `<CardGrid>` para mostrar las tarjetas una al lado de la otra cuando hay suficiente espacio.
 
-El componente `<Card>` requiere un `title` y opcionalmente puede incluir un atributo `icon` establecido con el nombre de [uno de los iconos integrados de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+El componente `<Card>` requiere un `title` y opcionalmente puede incluir un atributo `icon` establecido con el nombre de [uno de los iconos integrados de Starlight](#todos-los-iconos).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -101,3 +101,28 @@ Utiliza una cuadrícula de tarjetas en tu página de inicio para mostrar las car
 ```
 
 :::
+
+### Iconos
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight proporciona un conjunto de iconos comunes que puedes mostrar en tu contenido utilizando el componente `<Icon>`.
+
+Cada `<Icon>` requiere un atributo `name` que se puede encontrar en la lista de [todos los iconos](#all-icons), y opcionalmente puede incluir atributos como `label`, `size` y `color`.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+El código anterior genera lo siguiente en la página:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### Todos los iconos
+
+A continuación se muestra una lista de todos los iconos disponibles con sus nombres asociados.
+
+<IconsList />
