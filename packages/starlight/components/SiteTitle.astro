@@ -23,7 +23,8 @@ if (config.logo) {
   if (err) throw new Error(err);
 }
 
-const href = pathWithBase(Astro.props.locale || '/');
+const locale =  Astro.props.locale === 'root' ? '' : Astro.props.locale;
+const href = pathWithBase(locale || '/');
 ---
 
 <a {href} class="site-title flex">
