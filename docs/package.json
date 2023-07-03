@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
-    "astro": "^2.5.0",
+    "astro": "^2.7.3",
     "sharp": "^0.32.1"
   },
   "devDependencies": {
