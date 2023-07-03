@@ -178,7 +178,7 @@ defineConfig({
 
 Starlight supporte par défaut l’ajout de liens vers vos comptes de médias sociaux dans l’en-tête du site via l’option [`social`](/reference/configuration/#social) dans l’intégration Starlight.
 
-Actuellement, les liens vers Discord, GitHub, Mastodon et Twitter sont pris en charge.
+Actuellement, les liens vers Codeberg, Discord, GitHub, Mastodon, Twitter et Youtube sont pris en charge.
 Faites-nous savoir sur GitHub ou Discord si vous avez besoin de la prise en charge d’un autre service !
 
 ```js
@@ -191,10 +191,12 @@ export default defineConfig({
     starlight({
       title: "Site avec des liens sociaux",
       social: {
-        discord: "https://astro.build/chat",
-        github: "https://github.com/withastro/starlight",
-        mastodon: "https://m.webtoo.ls/@astro",
-        twitter: "https://twitter.com/astrodotbuild",
+        codeberg: 'https://codeberg.org/knut/examples',
+        discord: 'https://astro.build/chat',
+        github: 'https://github.com/withastro/starlight',
+        mastodon: 'https://m.webtoo.ls/@astro',
+        twitter: 'https://twitter.com/astrodotbuild',
+        youtube: 'https://youtube.com/@astrodotbuild',
       },
     }),
   ],

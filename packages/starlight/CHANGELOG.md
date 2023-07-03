@@ -1,5 +1,39 @@
 # @astrojs/starlight
 
+## 0.4.0
+
+### Minor Changes
+
+- [#259](https://github.com/withastro/starlight/pull/259) [`8102389`](https://github.com/withastro/starlight/commit/810238934ae1a95c53042ca2875bb4033aad0114) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add support for collapsed sidebar groups
+
+- [#254](https://github.com/withastro/starlight/pull/254) [`faa70de`](https://github.com/withastro/starlight/commit/faa70de584bf596fdd7184c4a8622d67d1410ecf) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Expose `<Icon>` component
+
+- [#256](https://github.com/withastro/starlight/pull/256) [`048e948`](https://github.com/withastro/starlight/commit/048e948bce650d559517850c73d827733b8164c4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add new global `lastUpdated` option defaulting to `false` to define whether or not the last updated date is shown in the footer. A page can override this setting or the generated date using the new `lastUpdated` frontmatter field.
+
+  ⚠️ Breaking change. Starlight will no longer show this date by default. To keep the previous behavior, you must explicitly set `lastUpdated` to `true` in your configuration.
+
+  ```diff
+  starlight({
+  + lastUpdated: true,
+  }),
+  ```
+
+### Patch Changes
+
+- [#264](https://github.com/withastro/starlight/pull/264) [`ed1e46b`](https://github.com/withastro/starlight/commit/ed1e46beb1bc054ecdba36ecfe566ecaeaf8799b) Thanks [@astridx](https://github.com/astridx)! - Add new icon for displaying codeberg.org in social links.
+
+- [#260](https://github.com/withastro/starlight/pull/260) [`01b65b1`](https://github.com/withastro/starlight/commit/01b65b1adf012474daf5678b4a709e3a7a484814) Thanks [@ElianCodes](https://github.com/ElianCodes)! - Add Dutch UI translations
+
+- [#269](https://github.com/withastro/starlight/pull/269) [`fdc18b5`](https://github.com/withastro/starlight/commit/fdc18b5476957f8017a0fa1489c6fed89d5a9480) Thanks [@baspinarenes](https://github.com/baspinarenes)! - Add Turkish UI translations
+
+- [#270](https://github.com/withastro/starlight/pull/270) [`1d3e705`](https://github.com/withastro/starlight/commit/1d3e705256fa0668db73b01c898e7e3b3b505c49) Thanks [@cbontems](https://github.com/cbontems)! - Improve French UI translations
+
+- [#272](https://github.com/withastro/starlight/pull/272) [`6b23ebc`](https://github.com/withastro/starlight/commit/6b23ebc9974828837a2de9175297664e5d28a999) Thanks [@cbontems](https://github.com/cbontems)! - Add YouTube social link support
+
+- [#267](https://github.com/withastro/starlight/pull/267) [`af2e43c`](https://github.com/withastro/starlight/commit/af2e43c7325a8f7fa6c9f867a3ec864daae39e96) Thanks [@nikcio](https://github.com/nikcio)! - Add Danish UI translations
+
+- [#273](https://github.com/withastro/starlight/pull/273) [`d4f5134`](https://github.com/withastro/starlight/commit/d4f5134c91b393ac448efc3f44849fc886a05551) Thanks [@Waxer59](https://github.com/Waxer59)! - Fix typo in Spanish UI translations
+
 ## 0.3.1
 
 ### Patch Changes
