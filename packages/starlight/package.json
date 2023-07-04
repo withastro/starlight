@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "astro": "^2.7.3"
+    "astro": "2.7.0"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
