@@ -39,7 +39,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
       )
     }
   </div>
-  <PrevNextLinks {...prevNextLinks} {dir} {locale} />
+  {config.pagination && <PrevNextLinks {...prevNextLinks} {dir} {locale} />}
 </footer>
 
 <style>

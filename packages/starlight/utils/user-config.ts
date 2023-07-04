@@ -252,6 +252,14 @@ const UserConfigSchema = z.object({
     .default(false)
     .describe(
       'Define if the last update date should be visible in the page footer.'
+  ),
+  
+  /** Define if the previous and next page links should be visible in the page footer. */
+  pagination: z
+    .boolean()
+    .default(true)
+    .describe(
+      'Define if the previous and next page links should be visible in the page footer.'
     ),
 });
 
