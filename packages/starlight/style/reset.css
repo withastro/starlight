@@ -41,3 +41,7 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
+code {
+  font-family: var(--__sb-font-mono);
+}
