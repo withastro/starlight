@@ -14,7 +14,10 @@ interface Props extends LocaleData {
 }
 
 const { entry, dir, lang, locale, sidebar } = Astro.props;
-const prevNextLinks = getPrevNextLinks(sidebar);
+const prevNextLinks = getPrevNextLinks(sidebar, config.pagination, {
+  prev: entry.data.prev,
+  next: entry.data.next
+});
 ---
 
 <footer>
@@ -39,7 +42,7 @@ const prevNextLinks = getPrevNextLinks(sidebar);
       )
     }
   </div>
-  {config.pagination && <PrevNextLinks {...prevNextLinks} {dir} {locale} />}
+  <PrevNextLinks {...prevNextLinks} {dir} {locale} />
 </footer>
 
 <style>

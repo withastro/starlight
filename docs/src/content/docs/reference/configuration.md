@@ -366,3 +366,5 @@ By default, this feature relies on your repository’s Git history and may not b
 **default:** `true`
 
 Define if the footer should include previous and next page links.
+
+A page can override this setting or the link text and/or URL using the [`prev`](/reference/frontmatter/#prev) and [`next`](/reference/frontmatter/#next) frontmatter fields.

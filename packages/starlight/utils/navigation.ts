@@ -9,6 +9,7 @@ import type {
   SidebarItem,
   SidebarLinkItem,
 } from './user-config';
+import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 
 export interface Link {
   type: 'link';
@@ -234,16 +235,62 @@ export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
   );
 }
 
-/** Get previous/next pages in the sidebar if there are any. */
-export function getPrevNextLinks(sidebar: SidebarEntry[]): {
+/** Get previous/next pages in the sidebar or the ones from the frontmatter if any. */
+export function getPrevNextLinks(
+  sidebar: SidebarEntry[],
+  paginationEnabled: boolean,
+  config: {
+    prev?: PrevNextLinkConfig;
+    next?: PrevNextLinkConfig;
+  }
+): {
   prev: Link | undefined;
   next: Link | undefined;
 } {
   const entries = flattenSidebar(sidebar);
   const currentIndex = entries.findIndex((entry) => entry.isCurrent);
-  const prev = entries[currentIndex - 1];
-  const next = currentIndex > -1 ? entries[currentIndex + 1] : undefined;
+  const prev = applyPrevNextLinkConfig(
+    entries[currentIndex - 1],
+    paginationEnabled,
+    config.prev
+  );
+  const next = applyPrevNextLinkConfig(
+    currentIndex > -1 ? entries[currentIndex + 1] : undefined,
+    paginationEnabled,
+    config.next
+  );
   return { prev, next };
+}
+
+/** Apply a prev/next link config to a navigation link. */
+function applyPrevNextLinkConfig(
+  link: Link | undefined,
+  paginationEnabled: boolean,
+  config: PrevNextLinkConfig | undefined
+): Link | undefined {
+  // Explicitly remove the link.
+  if (config === false) return undefined;
+  // Use the generated link if any.
+  else if (config === true) return link;
+  // If a link exists, update its label if needed.
+  else if (typeof config === 'string' && link) {
+    return { ...link, label: config };
+  } else if (typeof config === 'object') {
+    if (link) {
+      // If a link exists, update both its label and href if needed.
+      return {
+        ...link,
+        label: config.label ?? link.label,
+        href: config.href ?? link.href,
+      }
+    } else if (config.href && config.label) {
+      // If there is no link and the frontmatter contains both a href and a label,
+      // create a new link.
+      return makeLink(config.href, config.label, config.href);
+    }
+  }
+  // Otherwise, if the global config is enabled, return the generated link if any.
+  return paginationEnabled ? link : undefined;
 }
 
 /** Remove the extension from a path. */
