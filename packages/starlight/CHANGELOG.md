@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.4.1
+
+### Patch Changes
+
+- [#300](https://github.com/withastro/starlight/pull/300) [`377a25d`](https://github.com/withastro/starlight/commit/377a25dc4c51c060e751aeba4d3f946a41de907a) Thanks [@cbontems](https://github.com/cbontems)! - Fix broken link on 404 page when `defaultLocale: 'root'` is set in `astro.config.mjs`
+
+- [#289](https://github.com/withastro/starlight/pull/289) [`dffca46`](https://github.com/withastro/starlight/commit/dffca461633940847e9177913053885c5e8b5f29) Thanks [@RyanRBrown](https://github.com/RyanRBrown)! - Fix saturation of purple text in light theme
+
+- [#301](https://github.com/withastro/starlight/pull/301) [`d47639d`](https://github.com/withastro/starlight/commit/d47639d50b53fa691c1d9b0f30f82ebf7f6ddf7e) Thanks [@delucis](https://github.com/delucis)! - Enable inline stylesheets for Astro versions ≥2.6.0
+
 ## 0.4.0
 
 ### Minor Changes

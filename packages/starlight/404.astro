@@ -6,7 +6,10 @@ import Page from './layout/Page.astro';
 import type { StarlightDocsEntry } from './utils/routing';
 import { useTranslations } from './utils/translations';
 
-const { lang = 'en', dir = 'ltr', locale } = config.defaultLocale || {};
+const { lang = 'en', dir = 'ltr' } = config.defaultLocale || {};
+let locale = config.defaultLocale?.locale;
+if (locale === 'root') locale = undefined;
+
 const entryMeta = { dir, lang, locale };
 const t = useTranslations(locale);
 
@@ -34,6 +37,6 @@ const entry = userEntry || fallbackEntry;
 const { Content, headings } = await entry.render();
 ---
 
-<Page {headings} entry={entry} slug={entry.slug} {...entryMeta} {entryMeta}>
+<Page {headings} entry={entry} id={entry.id} slug={entry.slug} {...entryMeta} {entryMeta}>
   <Content />
 </Page>
