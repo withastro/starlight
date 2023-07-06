@@ -77,6 +77,10 @@
     background-color: var(--sl-color-bg-inline-code);
     margin-block: -0.125rem;
     padding: 0.125rem 0.375rem;
+    font-size: var(--sl-text-code-sm);
+  }
+  .content :global(:is(h1, h2, h3, h4, h5, h6) code) {
+    font-size: inherit;
   }
 
   .content :global(pre) {
@@ -87,6 +91,7 @@
 
   .content :global(pre code) {
     all: unset;
+    font-family: var(--__sl-font-mono);
   }
 
   .content :global(blockquote) {
