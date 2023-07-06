@@ -195,7 +195,7 @@ type SidebarItem = {
 
 ### `locales`
 
-**tipo:** `{ [dir: string]: LocaleConfig }`
+**tipo:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 Configura la internacionalización (i18n) para tu sitio estableciendo qué `locales` se admiten.
 
@@ -233,7 +233,15 @@ export default defineConfig({
 });
 ```
 
-#### Opciones de configuración de idioma
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Puedes establecer las siguientes opciones para cada idioma:
 

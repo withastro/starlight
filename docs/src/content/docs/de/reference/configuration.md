@@ -140,7 +140,7 @@ interface LinkItem {
 
 ### `locales`
 
-**Typ:** `{ [dir: string]: LocaleConfig }`
+**Typ:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 Konfiguriere die Internationalisierung (i18n) für Ihre Website, indem du festlegst, welche `Locales` unterstützt werden.
 
@@ -178,7 +178,15 @@ export default defineConfig({
 });
 ```
 
-#### Locale-Optionen
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Du kannst die folgenden Optionen für jedes Locale-Schema festlegen:
 

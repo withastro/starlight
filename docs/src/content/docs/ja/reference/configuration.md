@@ -192,7 +192,7 @@ type SidebarItem = {
 
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 サイトの国際化（i18n）をおこなうには、サポート対象の`locales`を設定します。
 
@@ -230,7 +230,15 @@ export default defineConfig({
 });
 ```
 
-#### ロケールオプション
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 各ロケールに対し以下のオプションを設定できます。
 

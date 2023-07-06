@@ -195,7 +195,7 @@ type SidebarItem = {
 
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 Configure internationalization (i18n) for your site by setting which `locales` are supported.
 
@@ -233,7 +233,15 @@ export default defineConfig({
 });
 ```
 
-#### Locale options
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 You can set the following options for each locale:
 
