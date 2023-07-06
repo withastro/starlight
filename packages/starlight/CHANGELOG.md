@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.4.2
+
+### Patch Changes
+
+- [#308](https://github.com/withastro/starlight/pull/308) [`c3aa4c6`](https://github.com/withastro/starlight/commit/c3aa4c6aa18f7f6859ad1c0acc28f0da59a84760) Thanks [@delucis](https://github.com/delucis)! - Fix use of default monospace font stack
+
+- [#286](https://github.com/withastro/starlight/pull/286) [`a2aedfc`](https://github.com/withastro/starlight/commit/a2aedfc7f9555b44f5f33aad7f4a98b207a11b47) Thanks [@mzaien](https://github.com/mzaien)! - Add Arabic UI translations
+
 ## 0.4.1
 
 ### Patch Changes
