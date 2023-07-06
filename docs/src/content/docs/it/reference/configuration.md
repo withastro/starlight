@@ -173,7 +173,7 @@ interface LinkItem {
 
 **type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Configura l'internazionalizzazione (i18n) del sito impostando quali `locales` sono supportati.
+[Configura l'internazionalizzazione (i18n)](/it/guides/i18n/) del sito impostando quali `locales` sono supportati.
 
 Ogni elemento deve utilizzare come chiave la cartella dove i file della lingua associata si trovano.
 

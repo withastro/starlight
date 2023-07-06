@@ -142,7 +142,7 @@ interface LinkItem {
 
 **Typ:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Konfiguriere die Internationalisierung (i18n) für Ihre Website, indem du festlegst, welche `Locales` unterstützt werden.
+[Konfiguriere die Internationalisierung (i18n)](/de/guides/i18n/) für Ihre Website, indem du festlegst, welche `Locales` unterstützt werden.
 
 Jeder Eintrag sollte das Verzeichnis, in dem die Dateien der jeweiligen Sprache gespeichert sind, als Schlüssel verwenden.
 

@@ -166,7 +166,7 @@ type SidebarItem = {
 
 **type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Configurez l'internationalisation (i18n) de votre site en définissant les `locales` supportées.
+[Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` supportées.
 
 Chaque entrée doit utiliser comme clé le répertoire dans lequel les fichiers de cette langue sont sauvegardés.
 
