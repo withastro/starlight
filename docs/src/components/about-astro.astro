@@ -6,7 +6,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<article class="flex" aria-labelledby="about-astro-heading">
+<article class="flex not-content" aria-labelledby="about-astro-heading">
   <small id="about-astro-heading">
     {title}
     <span class="sr-only">Astro</span>
@@ -36,7 +36,6 @@ const { title } = Astro.props;
     gap: 0.5rem;
   }
   article > :global(*) {
-    margin-top: 0 !important;
     max-width: 50ch;
   }
   small {
