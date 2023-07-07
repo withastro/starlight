@@ -21,6 +21,7 @@ interface Group {
   type: 'group';
   label: string;
   entries: (Link | Group)[];
+  collapsed: boolean;
 }
 
 export type SidebarEntry = Link | Group;
@@ -53,6 +54,7 @@ function configItemToEntry(
       entries: item.items.map((i) =>
         configItemToEntry(i, currentPathname, locale, routes)
       ),
+      collapsed: item.collapsed,
     };
   }
 }
@@ -64,20 +66,21 @@ function groupFromAutogenerateConfig(
   routes: Route[],
   currentPathname: string
 ): Group {
-  const { directory } = item.autogenerate;
+  const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
   const dirDocs = routes.filter(
     (doc) =>
       // Match against `foo.md` or `foo/index.md`.
-      doc.slug === localeDir ||
+      stripExtension(doc.id) === localeDir ||
       // Match against `foo/anything/else.md`.
-      doc.slug.startsWith(localeDir + '/')
+      doc.id.startsWith(localeDir + '/')
   );
   const tree = treeify(dirDocs, localeDir);
   return {
     type: 'group',
     label: pickLang(item.translations, localeToLang(locale)) || item.label,
-    entries: sidebarFromDir(tree, currentPathname, locale),
+    entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
+    collapsed: item.collapsed,
   };
 }
 
@@ -115,16 +118,18 @@ function makeLink(href: string, label: string, currentPathname: string): Link {
 }
 
 /** Get the segments leading to a page. */
-function getBreadcrumbs(slug: string, baseDir: string): string[] {
-  // Index slugs will match `baseDir` and don’t include breadcrumbs.
-  if (slug === baseDir) return [];
+function getBreadcrumbs(path: string, baseDir: string): string[] {
+  // Strip extension from path.
+  const pathWithoutExt = stripExtension(path);
+  // Index paths will match `baseDir` and don’t include breadcrumbs.
+  if (pathWithoutExt === baseDir) return [];
   // Ensure base directory ends in a trailing slash.
   if (!baseDir.endsWith('/')) baseDir += '/';
-  // Strip base directory from slug if present.
-  const relativeSlug = slug.startsWith(baseDir)
-    ? slug.replace(baseDir, '')
-    : slug;
-  let dir = dirname(relativeSlug);
+  // Strip base directory from path if present.
+  const relativePath = pathWithoutExt.startsWith(baseDir)
+    ? pathWithoutExt.replace(baseDir, '')
+    : pathWithoutExt;
+  let dir = dirname(relativePath);
   // Return no breadcrumbs for items in the root directory.
   if (dir === '.') return [];
   return dir.split('/');
@@ -134,7 +139,7 @@ function getBreadcrumbs(slug: string, baseDir: string): string[] {
 function treeify(routes: Route[], baseDir: string): Dir {
   const treeRoot: Dir = {};
   routes.forEach((doc) => {
-    const breadcrumbs = getBreadcrumbs(doc.slug, baseDir);
+    const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
 
     // Walk down the route’s path to generate the tree.
     let currentDir = treeRoot;
@@ -166,15 +171,17 @@ function groupFromDir(
   fullPath: string,
   dirName: string,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ): Group {
   const entries = Object.entries(dir).map(([key, dirOrSlug]) =>
-    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale)
+    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
   );
   return {
     type: 'group',
     label: dirName,
     entries,
+    collapsed,
   };
 }
 
@@ -184,21 +191,23 @@ function dirToItem(
   fullPath: string,
   dirName: string,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ): SidebarEntry {
   return typeof dirOrSlug === 'string'
     ? linkFromSlug(dirOrSlug, currentPathname)
-    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale);
+    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale, collapsed);
 }
 
 /** Create a sidebar entry for a given content directory. */
 function sidebarFromDir(
   tree: Dir,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ) {
   return Object.entries(tree).map(([key, dirOrSlug]) =>
-    dirToItem(dirOrSlug, key, key, currentPathname, locale)
+    dirToItem(dirOrSlug, key, key, currentPathname, locale, collapsed)
   );
 }
 
@@ -214,12 +223,12 @@ export function getSidebar(
     );
   } else {
     const tree = treeify(routes, locale || '');
-    return sidebarFromDir(tree, pathname, locale);
+    return sidebarFromDir(tree, pathname, locale, false);
   }
 }
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
-function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
+export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
   return sidebar.flatMap((entry) =>
     entry.type === 'group' ? flattenSidebar(entry.entries) : entry
   );
@@ -236,3 +245,6 @@ export function getPrevNextLinks(sidebar: SidebarEntry[]): {
   const next = currentIndex > -1 ? entries[currentIndex + 1] : undefined;
   return { prev, next };
 }
+
+/** Remove the extension from a path. */
+const stripExtension = (path: string) => path.replace(/\.\w+$/, '');

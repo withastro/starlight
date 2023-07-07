@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.2.0",
+  "version": "0.4.2",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {},
   "keywords": [
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "astro": "^2.5.0"
+    "astro": "2.7.0"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
@@ -48,6 +48,6 @@
     "unified": "^10.1.2",
     "unist-util-remove": "^3.1.1",
     "unist-util-visit": "^4.1.2",
-    "vfile": "^6.0.0"
+    "vfile": "^5.3.7"
   }
 }

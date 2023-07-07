@@ -3,7 +3,7 @@
   "search.label": "Buscar",
   "search.shortcutLabel": "(Presiona / para buscar)",
   "search.cancelLabel": "Interrumpir",
-  "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
+  "search.devWarning": "La búsqueda solo está disponible en las versiones de producción.  \nIntenta construir y previsualizar el sitio para probarlo localmente.",
   "themeSelect.accessibleLabel": "Seleccionar tema",
   "themeSelect.dark": "Oscuro",
   "themeSelect.light": "Claro",
@@ -17,5 +17,6 @@
   "page.editLink": "Edita esta página",
   "page.lastUpdated": "Última actualización:",
   "page.previousLink": "Página anterior",
-  "page.nextLink": "Siguiente página"
+  "page.nextLink": "Siguiente página",
+  "404.text": "Página no encontrada. Verifica la URL o intenta usar la barra de búsqueda."
 }
