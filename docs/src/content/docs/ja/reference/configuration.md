@@ -192,9 +192,9 @@ type SidebarItem = {
 
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-サイトの国際化（i18n）をおこなうには、サポート対象の`locales`を設定します。
+[サイトの国際化（i18n）をおこなうには](/ja/guides/i18n/)、サポート対象の`locales`を設定します。
 
 各エントリは、その言語のファイルが保存されているディレクトリ名をキーとして使用する必要があります。
 
@@ -230,7 +230,15 @@ export default defineConfig({
 });
 ```
 
-#### ロケールオプション
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 各ロケールに対し以下のオプションを設定できます。
 
