@@ -281,12 +281,12 @@ function applyPrevNextLinkConfig(
       return {
         ...link,
         label: config.label ?? link.label,
-        href: config.href ?? link.href,
+        href: config.link ?? link.href,
       }
-    } else if (config.href && config.label) {
-      // If there is no link and the frontmatter contains both a href and a label,
+    } else if (config.link && config.label) {
+      // If there is no link and the frontmatter contains both a URL and a label,
       // create a new link.
-      return makeLink(config.href, config.label, config.href);
+      return makeLink(config.link, config.label, config.link);
     }
   }
   // Otherwise, if the global config is enabled, return the generated link if any.

@@ -8,7 +8,7 @@ export const PrevNextLinkConfigSchema = () =>
       z
         .object({
           /** The navigation link URL. */
-          href: z.string().optional(),
+          link: z.string().optional(),
           /** The navigation link text. */
           label: z.string().optional(),
         })

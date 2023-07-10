@@ -149,7 +149,7 @@ lastUpdated: 2022-08-09
 
 ### `prev`
 
-**type:** `boolean | string | { href?: string; label?: string }`
+**type:** `boolean | string | { link?: string; label?: string }`
 
 Overrides the [global `pagination` option](/reference/configuration/#pagination). If a string is specified, the generated link text will be replaced and if an object is specified, both the link and the text will can be overridden.
 
@@ -171,14 +171,14 @@ prev: Continue the tutorial
 ---
 # Override both the previous page link and text
 prev: 
-  href: /unrelated-page/
+  link: /unrelated-page/
   label: Check out this other page
 ---
 ```
 
 ### `next`
 
-**type:** `boolean | string | { href?: string; label?: string }`
+**type:** `boolean | string | { link?: string; label?: string }`
 
 Same as [`prev`](#prev) but for the next page link.
 
