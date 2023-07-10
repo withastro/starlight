@@ -133,3 +133,16 @@ interface HeroConfig {
   }>;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Sobrescribe la [opción global `lastUpdated`](/reference/configuration/#lastupdated). Si se especifica una fecha, debe ser una [marca de tiempo YAML](https://yaml.org/type/timestamp.html) válida y sobrescribirá la fecha almacenada en el historial de Git para esta página.
+
+```md
+---
+title: Página con una fecha de última actualización personalizada
+lastUpdated: 2022-08-09
+---
+```

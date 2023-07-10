@@ -119,6 +119,64 @@ starlight({
 });
 ```
 
+#### Ordenación
+
+Los grupos de la barra lateral generados automáticamente se ordenan alfabéticamente por el nombre del archivo.
+Por ejemplo, una página generada a partir de `astro.md` aparecería por encima de la página `starlight.md`.
+
+#### Colapsando grupos
+
+Los grupos de enlaces se expanden de forma predeterminada. Puedes cambiar este comportamiento estableciendo la propiedad `collapsed` de un grupo como `true`.
+
+Los subgrupos generados automáticamente respetan por defecto la propiedad `collapsed` de su grupo padre. Puedes establecer la propiedad `autogenerate.collapsed` para anular esto.
+
+```js
+sidebar: [
+  // Un grupo colapsado de enlaces.
+  {
+    label: 'Collapsed Links',
+    collapsed: true,
+    items: [
+      { label: 'Introduction', link: '/intro' },
+      { label: 'Next Steps', link: '/next-steps' },
+    ],
+  },
+  // Un grupo expandido que contiene subgrupos generados automáticamente colapsados.
+  {
+    label: 'Reference',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
+#### Traduciendo etiquetas
+
+Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
+```js
+sidebar: [
+  // Un ejemplo de barra lateral con etiquetas traducidas al francés.
+  {
+    label: 'Start Here',
+    translations: { fr: 'Commencez ici' },
+    items: [
+      {
+        label: 'Getting Started',
+        translations: { fr: 'Bien démarrer' },
+        link: '/getting-started',
+      },
+      {
+        label: 'Project Structure',
+        translations: { fr: 'Structure du projet' },
+        link: '/structure',
+      },
+    ],
+  },
+],
+```
+
 #### `SidebarItem`
 
 ```ts
@@ -127,16 +185,19 @@ type SidebarItem = {
   translations?: Record<string, string>;
 } & (
   | { link: string }
-  | { items: SidebarItem[] }
-  | { autogenerate: { directory: string } }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
 );
 ```
 
 ### `locales`
 
-**tipo:** `{ [dir: string]: LocaleConfig }`
+**tipo:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Configura la internacionalización (i18n) para tu sitio estableciendo qué `locales` se admiten.
+[Configura la internacionalización (i18n)](/es/guides/i18n/) para tu sitio estableciendo qué `locales` se admiten.
 
 Cada entrada debe usar el directorio donde se guardan los archivos de ese idioma como clave.
 
@@ -172,7 +233,15 @@ export default defineConfig({
 });
 ```
 
-#### Opciones de configuración de idioma
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Puedes establecer las siguientes opciones para cada idioma:
 
@@ -289,3 +358,12 @@ interface HeadConfig {
   content?: string;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+Controla si se muestra el pie de página que indica cuándo se actualizó por última vez la página.
+
+De forma predeterminada, esta función se basa en el historial Git de tu repositorio y puede no ser precisa en algunas plataformas de implementación que realizan [copias superficiales](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una página puede anular esta configuración o la fecha basada en Git utilizando el campo [`lastUpdated`](/reference/frontmatter/#lastupdated) en el frontmatter.
