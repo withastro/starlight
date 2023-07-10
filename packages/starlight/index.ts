@@ -88,13 +88,15 @@ function vitePluginStarlightUserConfig(
   opts: StarlightConfig,
   { root }: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
+  const resolveRelativeId = (id: string) =>
+    id.startsWith('.') ? '/' + id : id;
   const modules = {
     'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
     'virtual:starlight/project-context': `export default ${JSON.stringify({
       root,
     })}`,
     'virtual:starlight/user-css': opts.customCss
-      .map((id) => `import "${id}";`)
+      .map((id) => `import "${resolveRelativeId(id)}";`)
       .join(''),
     'virtual:starlight/user-images': opts.logo
       ? 'src' in opts.logo
