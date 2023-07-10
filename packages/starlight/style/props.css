@@ -89,8 +89,8 @@
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --sl-font-system-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  --__sb-font: var(--sl-font, ''), var(--sl-font-system);
-  --__sb-font-mono: var(--sl-font-mono, ''), var(--sl-font-system-mono);
+  --__sl-font: var(--sl-font, ''), var(--sl-font-system);
+  --__sl-font-mono: var(--sl-font-mono, ''), var(--sl-font-system-mono);
 
   /** Key layout values */
   --sl-nav-height: 3.5rem;
