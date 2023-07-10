@@ -57,6 +57,22 @@ head:
 Reemplaza la [configuración global `tableOfContents`](/reference/configuration/#tableofcontents).
 Personaliza los niveles de encabezado que se incluirán o establece en `false` para ocultar la tabla de contenidos en esta página.
 
+```md
+---
+title: Página con solo encabezados H2 en la tabla de contenidos
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Página sin tabla de contenidos
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **tipo:** `'doc' | 'splash'`  
@@ -116,4 +132,17 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Sobrescribe la [opción global `lastUpdated`](/reference/configuration/#lastupdated). Si se especifica una fecha, debe ser una [marca de tiempo YAML](https://yaml.org/type/timestamp.html) válida y sobrescribirá la fecha almacenada en el historial de Git para esta página.
+
+```md
+---
+title: Página con una fecha de última actualización personalizada
+lastUpdated: 2022-08-09
+---
 ```

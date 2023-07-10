@@ -18,7 +18,7 @@ html[data-theme='light'] {
 }
 
 body {
-  font-family: var(--__sb-font);
+  font-family: var(--__sl-font);
   line-height: var(--sl-line-height);
   -webkit-font-smoothing: antialiased;
   color: var(--sl-color-text);
@@ -40,4 +40,8 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+code {
+  font-family: var(--__sl-font-mono);
 }

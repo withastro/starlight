@@ -17,5 +17,6 @@
 	"page.editLink": "Modifica pagina",
 	"page.lastUpdated": "Ultimo aggiornamento:",
 	"page.previousLink": "Indietro",
-	"page.nextLink": "Avanti"
+	"page.nextLink": "Avanti",
+	"404.text": "Pagina non trovata. Verifica l'URL o prova a utilizzare la barra di ricerca."
 }

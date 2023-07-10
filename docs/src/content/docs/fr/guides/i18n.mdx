@@ -9,7 +9,7 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
 
 ## Configurer i18n
 
-1. Indiquez à Starlight les langues que vous prenez en charge en passant `locales` et `defaultLocale` à l'intégration Starlight :
+1. Indiquez à Starlight les langues que vous prenez en charge en passant [`locales`](/fr/reference/configuration/#locales) et [`defaultLocale`](/fr/reference/configuration/#defaultlocale) à l'intégration Starlight :
 
    ```js
    // astro.config.mjs
@@ -27,12 +27,12 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
            en: {
              label: 'English',
            },
-           // Documentation en chinois simplifié dans `src/content/docs/zh/`
+           // Docs en chinois simplifié dans `src/content/docs/zh/`
            zh: {
              label: '简体中文',
              lang: 'zh-CN',
            },
-           // docs en arabe dans `src/content/docs/ar/`
+           // Docs en arabe dans `src/content/docs/ar/`
            ar: {
              label: 'العربية',
              dir: 'rtl',
@@ -65,7 +65,7 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
 
 ### Utiliser une racine locale
 
-Vous pouvez utiliser une racine locale pour servir une langue sans aucun préfixe i18n dans son chemin. Par exemple, si l'anglais est votre racine locale, le chemin d'une page en anglais ressemblera à `/about` au lieu de `/en/about`.
+Vous pouvez utiliser une “racine” locale pour servir une langue sans aucun préfixe i18n dans son chemin. Par exemple, si l'anglais est votre racine locale, le chemin d'une page en anglais ressemblera à `/about` au lieu de `/en/about`.
 
 Pour définir une racine locale, utilisez la clé `root` dans votre configuration `locales`. Si la racine locale est aussi la locale par défaut de votre contenu, supprimez `defaultLocale` ou donnez-lui la valeur `'root''.
 
@@ -133,9 +133,9 @@ export default defineConfig({
 
 Cela vous permet de remplacer la langue par défaut de Starlight sans activer d'autres fonctions d'internationalisation pour les sites multilingues, telles que le sélecteur de langue.
 
-## Contenu de remplacement
+## Contenu de repli
 
-Starlight s'attend à ce que vous créiez des pages équivalentes dans toutes vos langues. Par exemple, si vous avez un fichier `en/about.md`, créez un `about.md` pour chaque autre langue que vous supportez. Cela permet à Starlight de fournir un contenu de remplacement automatique pour les pages qui n'ont pas encore été traduites.
+Starlight s'attend à ce que vous créiez des pages équivalentes dans toutes vos langues. Par exemple, si vous avez un fichier `en/about.md`, créez un `about.md` pour chaque autre langue que vous supportez. Cela permet à Starlight de fournir un contenu de repli automatique pour les pages qui n'ont pas encore été traduites.
 
 Si une traduction n'est pas encore disponible pour une langue, Starlight affichera aux lecteurs le contenu de cette page dans la langue par défaut (définie via `defaultLocale`). Par exemple, si vous n'avez pas encore créé de version française de votre page À propos et que votre langue par défaut est l'anglais, les visiteurs de `/fr/about` verront le contenu anglais de `/en/about` avec un avis indiquant que cette page n'a pas encore été traduite. Cela vous permet d'ajouter du contenu dans votre langue par défaut et de le traduire progressivement lorsque vos traducteurs en ont le temps.
 
@@ -143,9 +143,9 @@ Si une traduction n'est pas encore disponible pour une langue, Starlight affiche
 
 En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de traduire les chaînes de l'interface utilisateur par défaut (par exemple, l'en-tête "Sur cette page" dans la table des matières) afin que vos lecteurs puissent découvrir votre site entièrement dans la langue sélectionnée.
 
-Les chaînes d'interface utilisateur traduites en anglais, allemand, japonais, portugais et espagnol sont fournies d'office, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Les chaînes d'interface utilisateur traduites en anglais, allemand, danois, espagnol, français, italien, japonais, néerlandais, portugais et tchèque sont fournies d'entrée, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collecte de données `i18n`.
+Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de données `i18n`.
 
 1. Configurez la collection de données `i18n` dans `src/content/config.ts` si elle n'est pas déjà configurée :
 
@@ -179,23 +179,44 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
 
    ```json
    {
-     "skipLink.label": "Aller au contenu",
-     "search.label": "rechercher",
-     "search.shortcutLabel": "(Presser / pour rechercher)",
-     "search.cancelLabel": "Annuler",
-     "themeSelect.accessibleLabel": "Selectionner le thème",
-     "themeSelect.dark": "Dark",
-     "themeSelect.light": "Light",
-     "themeSelect.auto": "Auto",
-     "languageSelect.accessibleLabel": "Selectionner la langue",
-     "menuButton.accessibleLabel": "Menu",
-     "sidebarNav.accessibleLabel": "Main",
-     "tableOfContents.onThisPage": "Sur cette page",
-     "tableOfContents.overview": "Vue d'ensemble",
-     "i18n.untranslatedContent": "Ce contenu n'est pas encore disponible dans votre langue.",
-     "page.editLink": "Editer la page",
-     "page.lastUpdated": "Dernière mise à jour :",
-     "page.previousLink": "Précédent",
-     "page.nextLink": "Suivant"
+    "skipLink.label": "Aller au contenu",
+    "search.label": "Rechercher",
+    "search.shortcutLabel": "(Presser / pour rechercher)",
+    "search.cancelLabel": "Annuler",
+    "search.devWarning": "La recherche est disponible uniquement en mode production. \nEssayez de construire puis de prévisualiser votre site pour tester la recherche localement.",
+    "themeSelect.accessibleLabel": "Selectionner le thème",
+    "themeSelect.dark": "Sombre",
+    "themeSelect.light": "Clair",
+    "themeSelect.auto": "Auto",
+    "languageSelect.accessibleLabel": "Selectionner la langue",
+    "menuButton.accessibleLabel": "Menu",
+    "sidebarNav.accessibleLabel": "principale",
+    "tableOfContents.onThisPage": "Sur cette page",
+    "tableOfContents.overview": "Vue d’ensemble",
+    "i18n.untranslatedContent": "Ce contenu n’est pas encore disponible dans votre langue.",
+    "page.editLink": "Modifier cette page",
+    "page.lastUpdated": "Dernière mise à jour :",
+    "page.previousLink": "Précédent",
+    "page.nextLink": "Suivant",
+    "404.text": "Page non trouvée. Vérifiez l’URL ou essayez d’utiliser la barre de recherche."
    }
    ```
+
+   La module de recherche de Starlight’s est propulsé par la librairie [Pagefind](https://pagefind.app/).
+   Vous pouvez défiinr les tradctions pour l'interface de Pagefinddans le même fichier JSON file en utilisant les propriétés `pagefind` :
+
+   ```json
+   {
+     "pagefind.clear_search": "Effacer",
+     "pagefind.load_more": "Charger plus de résultats",
+     "pagefind.search_label": "Rechercher sur ce site",
+     "pagefind.filters_label": "Filtres",
+     "pagefind.zero_results": "Pas de résultat pour [SEARCH_TERM]",
+     "pagefind.many_results": "[COUNT] resultats pour [SEARCH_TERM]",
+     "pagefind.one_result": "[COUNT] resultat pour [SEARCH_TERM]",
+     "pagefind.alt_search": "Pas de résultats pour [SEARCH_TERM]. Voici à la place des résultats pour [DIFFERENT_TERM].",
+     "pagefind.search_suggestion": "Pas de résultats pour [SEARCH_TERM]. Essayez l'une de ces recherches :",
+     "pagefind.searching": "Recherche en cours pour [SEARCH_TERM]..."
+   }
+   ```
+

@@ -17,5 +17,6 @@
   "page.editLink": "Seite bearbeiten",
   "page.lastUpdated": "Zuletzt bearbeitet:",
   "page.previousLink": "Vorherige Seite",
-  "page.nextLink": "Nächste Seite"
+  "page.nextLink": "Nächste Seite",
+  "404.text": "Seite nicht gefunden. Überprüfe die URL oder nutze die Suchleiste."
 }

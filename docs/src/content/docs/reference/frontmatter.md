@@ -57,6 +57,22 @@ head:
 Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
 Customize the heading levels to be included or set to `false` to hide the table of contents on this page.
 
+```md
+---
+title: Page with only H2s in the table of contents
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Page with no table of contents
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **type:** `'doc' | 'splash'`  
@@ -116,4 +132,17 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Overrides the [global `lastUpdated` option](/reference/configuration/#lastupdated). If a date is specified, it must be a valid [YAML timestamp](https://yaml.org/type/timestamp.html) and will override the date stored in Git history for this page.
+
+```md
+---
+title: Page with a custom last update date
+lastUpdated: 2022-08-09
+---
 ```
