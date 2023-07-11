@@ -1,6 +1,6 @@
 ---
-import type { SidebarEntry } from '../utils/navigation';
-import Icon from './Icon.astro';
+import { flattenSidebar, type SidebarEntry } from '../utils/navigation';
+import Icon from '../user-components/Icon.astro';
 
 interface Props {
   sublist: SidebarEntry[];
@@ -21,7 +21,9 @@ interface Props {
             {entry.label}
           </a>
         ) : (
-          <details open>
+          <details
+            open={flattenSidebar(entry.entries).some(i => i.isCurrent) || !entry.collapsed}
+          >
             <summary>
               <h2 class="large">{entry.label}</h2>
               <Icon name="right-caret" class="caret" size="1.25rem" />

@@ -37,7 +37,7 @@ Adding a custom logo to the site header is a quick way to add your individual br
        starlight({
          title: 'Docs With My Logo',
          logo: {
-           src: '/src/assets/my-logo.svg',
+           src: './src/assets/my-logo.svg',
          },
        }),
      ],
@@ -52,7 +52,7 @@ The `title` text will still be included for screen readers so that the header re
 starlight({
   title: 'Docs With My Logo',
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -81,8 +81,8 @@ You can display different versions of your logo in light and dark modes.
    starlight({
      title: 'Docs With My Logo',
      logo: {
-       light: '/src/assets/light-logo.svg',
-       dark: '/src/assets/dark-logo.svg',
+       light: './src/assets/light-logo.svg',
+       dark: './src/assets/dark-logo.svg',
      },
    }),
    ```
@@ -178,7 +178,7 @@ defineConfig({
 
 Starlight has built-in support for adding links to your social media accounts to the site header via the [`social`](/reference/configuration/#social) option in the Starlight integration.
 
-Currently, links to Codeberg, Discord, GitHub, Mastodon, and Twitter are supported.
+Currently, links to Codeberg, Discord, GitHub, Mastodon, Twitter, and Youtube are supported.
 Let us know on GitHub or Discord if you need support for another service!
 
 ```js
@@ -196,6 +196,7 @@ export default defineConfig({
         github: 'https://github.com/withastro/starlight',
         mastodon: 'https://m.webtoo.ls/@astro',
         twitter: 'https://twitter.com/astrodotbuild',
+        youtube: 'https://youtube.com/@astrodotbuild',
       },
     }),
   ],
@@ -292,8 +293,8 @@ Customize the styles applied to your Starlight site by providing additional CSS 
        starlight({
          title: 'Docs With Custom CSS',
          customCss: [
-           // Path to your custom CSS file, starting with /
-           '/src/styles/custom.css',
+           // Relative path to your custom CSS file
+           './src/styles/custom.css',
          ],
        }),
      ],
@@ -355,8 +356,8 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
        starlight({
          title: 'Docs With a Custom Typeface',
          customCss: [
-           // Path to your @font-face CSS file.
-           '/src/fonts/font-face.css',
+           // Relative path to your @font-face CSS file.
+           './src/fonts/font-face.css',
          ],
        }),
      ],
@@ -448,3 +449,5 @@ main {
   font-family: 'IBM Plex Serif', serif;
 }
 ```
+
+Follow the [custom CSS instructions](#custom-css-styles) to add your styles to your site.

@@ -164,9 +164,9 @@ type SidebarItem = {
 
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Configurez l'internationalisation (i18n) de votre site en définissant les `locales` supportées.
+[Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` supportées.
 
 Chaque entrée doit utiliser comme clé le répertoire dans lequel les fichiers de cette langue sont sauvegardés.
 
@@ -202,7 +202,15 @@ export default defineConfig({
 });
 ```
 
-#### Options des paramètres linguistiques
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Vous pouvez définir les options suivantes pour chaque locale :
 
@@ -256,7 +264,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
@@ -268,6 +276,7 @@ starlight({
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```

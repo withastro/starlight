@@ -33,6 +33,20 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 Because Starlight is powered by Astro, you can add support for components built with any [supported UI framework (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) in your MDX files.
 Learn more about [using components in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) in the Astro docs.
 
+### Compatibility with Starlight’s styles
+
+Starlight applies default styling to your Markdown content, for example adding margin between elements.
+If these styles conflict with your component’s appearance, set the `not-content` class on your component to disable them.
+
+```astro
+---
+// src/components/Example.astro
+---
+<div class="not-content">
+  <p>Not impacted by Starlight’s default content styling.</p>
+</div>
+```
+
 ## Built-in components
 
 Starlight provides some built-in components for common documentation use cases.
@@ -68,7 +82,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 You can display content in a box matching Starlight’s styles using the `<Card>` component.
 Wrap multiple cards in the `<CardGrid>` component to display cards side-by-side when there’s enough space.
 
-A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](#all-icons).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -109,3 +123,28 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 ```
 
 :::
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../components/icons-list.astro';
+
+Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
+
+Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+The code above generates the following on the page:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### All icons
+
+A list of all available icons is shown below with their associated names.
+
+<IconsList />

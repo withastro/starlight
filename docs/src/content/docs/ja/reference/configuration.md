@@ -120,13 +120,41 @@ starlight({
 
 自動生成されたサイドバーグループは、ファイル名のアルファベット順に並べ替えられます。たとえば、`astro.md`から生成されたページは、`starlight.md`というページの上に表示されます。
 
+#### グループの折りたたみ
+
+リンクのグループはデフォルトで展開されます。`collapsed`プロパティを`true`に設定して、この動作を変更できます。
+
+自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
+
+```js
+sidebar: [
+  // 折りたたまれたリンクのグループ。
+  {
+    label: '折りたたまれたリンク',
+    collapsed: true,
+    items: [
+      { label: 'はじめに', link: '/intro' },
+      { label: '次のステップ', link: '/next-steps' },
+    ],
+  },
+  // 自動生成される折りたたまれたサブグループを含む展開されたグループ。
+  {
+    label: '参照',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
 #### ラベルの翻訳
 
 多言語対応が必要なサイトの場合、各項目の`label`はデフォルトのロケールのものとみなされます。サポート対象の言語のラベルを提供するには、`translations`プロパティを設定します。
 
 ```js
 sidebar: [
-  // An example sidebar with labels translated to French. フランス語に翻訳されたラベルをもつサイドバーの例。
+  // フランス語に翻訳されたラベルをもつサイドバーの例。
   {
     label: 'ここから始める',
     translations: { fr: 'Commencez ici' },
@@ -143,7 +171,7 @@ sidebar: [
       },
     ],
   },
-];
+],
 ```
 
 #### `SidebarItem`
@@ -154,16 +182,19 @@ type SidebarItem = {
   translations?: Record<string, string>;
 } & (
   | { link: string }
-  | { items: SidebarItem[] }
-  | { autogenerate: { directory: string } }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
 );
 ```
 
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-サイトの国際化（i18n）をおこなうには、サポート対象の`locales`を設定します。
+[サイトの国際化（i18n）をおこなうには](/ja/guides/i18n/)、サポート対象の`locales`を設定します。
 
 各エントリは、その言語のファイルが保存されているディレクトリ名をキーとして使用する必要があります。
 
@@ -199,7 +230,15 @@ export default defineConfig({
 });
 ```
 
-#### ロケールオプション
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 各ロケールに対し以下のオプションを設定できます。
 
@@ -251,7 +290,7 @@ starlight({
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
@@ -263,6 +302,7 @@ starlight({
     github: 'https://github.com/withastro/starlight',
     mastodon: 'https://m.webtoo.ls/@astro',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```
@@ -312,3 +352,12 @@ interface HeadConfig {
   content?: string;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+フッターにページの最終更新日を表示するかどうかを制御します。
+
+デフォルトでは、この機能はリポジトリのGit履歴に依存しており、[浅いクローン](https://git-scm.com/docs/git-clone/ja#git-clone---depthltdepthgt)を実行する一部のデプロイプラットフォームでは正確にならない場合があります。[フロントマターの`lastUpdated`フィールド](/ja/reference/frontmatter/#lastupdated)を使用して、各ページでこの設定またはGitを基準とした日付を上書きできます。
