@@ -1,3 +1,4 @@
+import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 
@@ -14,6 +15,26 @@ declare module 'vfile' {
 }
 
 export const TabItemTagname = 'starlight-tab-item';
+
+// https://github.com/adobe/react-spectrum/blob/99ca82e87ba2d7fdd54f5b49326fd242320b4b51/packages/%40react-aria/focus/src/FocusScope.tsx#L256-L275
+const focusableElementSelectors = [
+  'input:not([disabled]):not([type=hidden])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  'button:not([disabled])',
+  'a[href]',
+  'area[href]',
+  'summary',
+  'iframe',
+  'object',
+  'embed',
+  'audio[controls]',
+  'video[controls]',
+  '[contenteditable]',
+  '[tabindex]:not([disabled])',
+]
+  .map((selector) => `${selector}:not([hidden]):not([tabindex="-1"])`)
+  .join(',');
 
 let count = 0;
 const getIDs = () => {
@@ -51,7 +72,14 @@ const tabsProcessor = rehype()
         node.properties.id = ids.panelId;
         node.properties['aria-labelledby'] = ids.tabId;
         node.properties.role = 'tabpanel';
-        node.properties.tabindex = -1;
+
+        const focusableChild = select(focusableElementSelectors, node);
+        // If the panel does not contain any focusable elements, include it in
+        // the tab sequence of the page.
+        if (!focusableChild) {
+          node.properties.tabindex = 0;
+        }
+        
         // Hide all panels except the first
         // TODO: make initially visible tab configurable
         if (isFirst) {
