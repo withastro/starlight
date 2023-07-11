@@ -146,3 +146,45 @@ title: Page with a custom last update date
 lastUpdated: 2022-08-09
 ---
 ```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Overrides the [global `pagination` option](/reference/configuration/#pagination). If a string is specified, the generated link text will be replaced and if an object is specified, both the link and the text will can be overridden.
+
+```md
+---
+# Hide the previous page link
+prev: false
+---
+```
+
+```md
+---
+# Override the previous page link text
+prev: Continue the tutorial
+---
+```
+
+```md
+---
+# Override both the previous page link and text
+prev: 
+  link: /unrelated-page/
+  label: Check out this other page
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Same as [`prev`](#prev) but for the next page link.
+
+```md
+---
+# Hide the next page link
+next: false
+---
+```
