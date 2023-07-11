@@ -100,8 +100,8 @@ function vitePluginStarlightUserConfig(
       .join(''),
     'virtual:starlight/user-images': opts.logo
       ? 'src' in opts.logo
-        ? `import src from "${opts.logo.src}"; export const logos = { dark: src, light: src };`
-        : `import dark from "${opts.logo.dark}"; import light from "${opts.logo.light}"; export const logos = { dark, light };`
+        ? `import src from "${resolveRelativeId(opts.logo.src)}"; export const logos = { dark: src, light: src };`
+        : `import dark from "${resolveRelativeId(opts.logo.dark)}"; import light from "${resolveRelativeId(opts.logo.light)}"; export const logos = { dark, light };`
       : 'export const logos = {};',
   };
   const resolutionMap = Object.fromEntries(
