@@ -143,3 +143,45 @@ title: 最終更新日をカスタマイズしたページ
 lastUpdated: 2022-08-09
 ---
 ```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+[グローバルの`pagination`オプション](/ja/reference/configuration/#pagination)を上書きします。文字列を指定すると生成されるリンクテキストが置き換えられ、オブジェクトを指定するとリンクとテキストの両方を上書きできます。
+
+```md
+---
+# 前のページへのリンクを非表示にする
+prev: false
+---
+```
+
+```md
+---
+# 前のページへのリンクテキストを上書きする
+prev: チュートリアルを続ける
+---
+```
+
+```md
+---
+# 前のページへのリンクとテキストを上書きする
+prev: 
+  link: /unrelated-page/
+  label: その他のページをチェックする
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+次のページへのリンクに対して、[`prev`](#prev)と同様の設定ができます。
+
+```md
+---
+# 次のページへのリンクを非表示にする
+next: false
+---
+```
