@@ -43,7 +43,7 @@ export default defineConfig({
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -313,11 +313,11 @@ starlight({
 
 Starlightサイトの見た目をカスタマイズするためのCSSファイルを設定します。
 
-プロジェクトのルートからの相対パスで指定したローカルのCSSファイル（`'/src/custom.css'`など）と、npmモジュールとしてインストールしたCSS（`'@fontsource/roboto'`など）に対応しています。
+プロジェクトのルートからの相対パスで指定したローカルのCSSファイル（`'./src/custom.css'`など）と、npmモジュールとしてインストールしたCSS（`'@fontsource/roboto'`など）に対応しています。
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
