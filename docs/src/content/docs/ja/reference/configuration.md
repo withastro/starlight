@@ -43,7 +43,7 @@ export default defineConfig({
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -313,11 +313,11 @@ starlight({
 
 Starlightサイトの見た目をカスタマイズするためのCSSファイルを設定します。
 
-プロジェクトのルートからの相対パスで指定したローカルのCSSファイル（`'/src/custom.css'`など）と、npmモジュールとしてインストールしたCSS（`'@fontsource/roboto'`など）に対応しています。
+プロジェクトのルートからの相対パスで指定したローカルのCSSファイル（`'./src/custom.css'`など）と、npmモジュールとしてインストールしたCSS（`'@fontsource/roboto'`など）に対応しています。
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -361,3 +361,12 @@ interface HeadConfig {
 フッターにページの最終更新日を表示するかどうかを制御します。
 
 デフォルトでは、この機能はリポジトリのGit履歴に依存しており、[浅いクローン](https://git-scm.com/docs/git-clone/ja#git-clone---depthltdepthgt)を実行する一部のデプロイプラットフォームでは正確にならない場合があります。[フロントマターの`lastUpdated`フィールド](/ja/reference/frontmatter/#lastupdated)を使用して、各ページでこの設定またはGitを基準とした日付を上書きできます。
+
+### `pagination`
+
+**type:** `boolean`  
+**default:** `true`
+
+フッターに前のページと次のページへのリンクを含めるかどうかを定義します。
+
+[`prev`](/ja/reference/frontmatter/#prev)と[`next`](/ja/reference/frontmatter/#next)フロントマターフィールドを使用して、この設定、またはリンクテキストとURLをページごとに上書きできます。
