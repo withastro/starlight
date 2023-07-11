@@ -151,7 +151,7 @@ lastUpdated: 2022-08-09
 
 **type:** `boolean | string | { link?: string; label?: string }`
 
-Overrides the [global `pagination` option](/reference/configuration/#pagination). If a string is specified, the generated link text will be replaced and if an object is specified, both the link and the text will can be overridden.
+Overrides the [global `pagination` option](/reference/configuration/#pagination). If a string is specified, the generated link text will be replaced and if an object is specified, both the link and the text will be overridden.
 
 ```md
 ---
