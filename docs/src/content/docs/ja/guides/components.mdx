@@ -29,6 +29,19 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 
 StarlightはAstro製であるため、[サポート対象のUIフレームワーク（React、Preact、Svelte、Vue、Solid、Lit、Alpine）](https://docs.astro.build/ja/core-concepts/framework-components/)で作成されたコンポーネントであればMDXファイルで使用できます。[MDXでのコンポーネントの使用](https://docs.astro.build/ja/guides/markdown-content/#using-components-in-mdx)について、詳しくはAstroドキュメントを参照してください。
 
+### Starlightのスタイルとの互換性
+
+Starlightは、Markdownコンテンツにデフォルトのスタイルを適用します。たとえば、要素間にマージンを追加します。これらのスタイルがコンポーネントの見た目と競合する場合は、`not-content`クラスをコンポーネントに設定してスタイルを無効化してください。
+
+```astro
+---
+// src/components/Example.astro
+---
+<div class="not-content">
+  <p>Starlightのデフォルトのコンテンツスタイルに影響を受けません。</p>
+</div>
+```
+
 ## 組み込みのコンポーネント
 
 Starlightは、一般的なドキュメントのユースケースに対して組み込みのコンポーネントをいくつか提供しています。これらのコンポーネントは、`@astrojs/starlight/components`パッケージから利用できます。
