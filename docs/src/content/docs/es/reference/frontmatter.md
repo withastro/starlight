@@ -133,3 +133,45 @@ interface HeroConfig {
   }>;
 }
 ```
+
+### `prev`
+
+**tipo:** `boolean | string | { link?: string; label?: string }`
+
+Anula la [opción global de `pagination`](/reference/configuration/#pagination). Si se especifica un string, el texto del enlace generado se reemplazará, y si se especifica un objeto, tanto el enlace como el texto pueden ser anulados.
+
+```md
+---
+# Ocultar el enlace de la página anterior
+prev: false
+---
+```
+
+```md
+---
+# Sobrescribir el texto del enlace de la página anterior
+prev: Continuar con el tutorial
+---
+```
+
+```md
+---
+# Sobrescribir tanto el enlace de la página anterior como el texto
+prev: 
+  link: /página-no-relacionada/
+  label: Echa un vistazo a esta otra página
+---
+```
+
+### `next`
+
+**tipo:** `boolean | string | { link?: string; label?: string }`
+
+Lo mismo que [`prev`](#prev), pero para el enlace de la página siguiente.
+
+```md
+---
+# Ocultar el enlace de la página siguiente
+next: false
+---
+```
