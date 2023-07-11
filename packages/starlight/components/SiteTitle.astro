@@ -2,6 +2,7 @@
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import { pathWithBase } from '../utils/base';
+import { getSiteTitle } from '../utils/translations';
 
 interface Props {
   locale: string | undefined;
@@ -51,7 +52,7 @@ const href = pathWithBase(Astro.props.locale || '/');
     )
   }
   <span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
-    {config.title}
+    {getSiteTitle(Astro.props.locale)}
   </span>
 </a>
 

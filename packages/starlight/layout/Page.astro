@@ -48,7 +48,7 @@ const hasHero = Boolean(entry.data.hero);
 
 <html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar} data-has-hero={hasHero}>
   <head>
-    <HeadSEO data={entry.data} lang={lang} />
+    <HeadSEO data={entry.data} lang={lang} locale={locale} />
     <style>
       html:not([data-has-toc]) {
         --sl-mobile-toc-height: 0rem;

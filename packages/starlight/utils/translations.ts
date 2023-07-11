@@ -61,3 +61,9 @@ function buildDictionary(
   }
   return dictionary;
 }
+
+/** Get the site title for the given locale, using `titleTranslations` in the user config if set. */
+export function getSiteTitle(locale: string | undefined) {
+  const lang = localeToLang(locale);
+  return config.titleTranslations?.[lang] || config.title;
+}

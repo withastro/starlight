@@ -29,6 +29,12 @@ You can pass the following options to the `starlight` integration.
 
 Set the title for your website. Will be used in metadata and in the browser tab title.
 
+### `titleTranslations`
+
+**type:** `Record<string, string>`
+
+Set translations of your website title for supported languages. If set, values will be used to override `title`.
+
 ### `description`
 
 **type:** `string`
