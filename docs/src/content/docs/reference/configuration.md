@@ -44,7 +44,7 @@ Set a logo image to show in the navigation bar alongside or instead of the site 
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -318,11 +318,11 @@ starlight({
 
 Provide CSS files to customize the look and feel of your Starlight site.
 
-Supports local CSS files relative to the root of your project, e.g. `'/src/custom.css'`, and CSS you installed as an npm module, e.g. `'@fontsource/roboto'`.
+Supports local CSS files relative to the root of your project, e.g. `'./src/custom.css'`, and CSS you installed as an npm module, e.g. `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
