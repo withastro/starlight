@@ -8,7 +8,7 @@ const { html, panels } = processPanels(panelHtml);
 <starlight-tabs>
   {
     panels && (
-      <div class="tablist-wrapper">
+      <div class="tablist-wrapper not-content">
         <ul role="tablist">
           {panels.map(({ label, panelId, tabId }, idx) => (
             <li role="presentation" class="tab">
@@ -46,9 +46,6 @@ const { html, panels } = processPanels(panelHtml);
     padding: 0;
   }
 
-  [role='tablist'] .tab + .tab {
-    margin-top: 0;
-  }
   .tab {
     margin-bottom: -2px;
   }
