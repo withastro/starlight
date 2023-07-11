@@ -36,7 +36,7 @@ Agregando un logo personalizado al encabezado del sitio es una forma rápida de 
        starlight({
          title: 'Docs Con Mi Logo',
          logo: {
-           src: '/src/assets/mi-logo.svg',
+           src: './src/assets/mi-logo.svg',
          },
        }),
      ],
@@ -51,7 +51,7 @@ El texto del título seguirá estando disponible para lectores de pantalla para 
 starlight({
   title: 'Docs Con Mi Logo',
   logo: {
-    src: '/src/assets/mi-logo.svg',
+    src: './src/assets/mi-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -80,8 +80,8 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
    starlight({
      title: 'Docs Con Mi Logo',
      logo: {
-       light: '/src/assets/logo-claro.svg',
-       dark: '/src/assets/logo-oscuro.svg',
+       light: './src/assets/logo-claro.svg',
+       dark: './src/assets/logo-oscuro.svg',
      },
    }),
    ```
@@ -287,8 +287,8 @@ Personaliza los estilos aplicados a tu sitio de Starlight proporcionando archivo
        starlight({
          title: 'Docs Con Un CSS Personalizado',
          customCss: [
-           // Ruta hacia tu archivo CSS personalizado, comenzando con /
-           '/src/styles/custom.css',
+           // Ruta relativa hacia tu archivo CSS personalizado
+           './src/styles/custom.css',
          ],
        }),
      ],
@@ -350,8 +350,8 @@ Utiliza una ruta relativa al archivo de fuente dentro de la función `url()`.
        starlight({
          title: 'Docs Con Un Tipo De Letra Personalizado',
          customCss: [
-           // Ruta al archivo CSS de `@font-face`.
-           '/src/fonts/font-face.css',
+           // Ruta relativa al archivo CSS de `@font-face`.
+           './src/fonts/font-face.css',
          ],
        }),
      ],
@@ -443,3 +443,5 @@ main {
   font-family: 'IBM Plex Serif', serif;
 }
 ```
+
+Sigue las instrucciones de [CSS personalizado](#estilos-css-personalizados) para agregar tus estilos a tu sitio.
