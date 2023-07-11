@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.5.0
+
+### Minor Changes
+
+- [#313](https://github.com/withastro/starlight/pull/313) [`dc42569`](https://github.com/withastro/starlight/commit/dc42569bddfae2c48ea60c0dd5cc70643a129a68) Thanks [@delucis](https://github.com/delucis)! - Add a `not-content` CSS class that allows users to opt out of Starlight’s default content styling
+
+- [#297](https://github.com/withastro/starlight/pull/297) [`fb15a9b`](https://github.com/withastro/starlight/commit/fb15a9b65252ac5fa32304096fbdb49ecdd6009b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improve `<Tabs>` component keyboard interactions
+
+- [#303](https://github.com/withastro/starlight/pull/303) [`69b7d4c`](https://github.com/withastro/starlight/commit/69b7d4c23761a45dc2b9ea75c6c9c904a885ba5d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add new global `pagination` option defaulting to `true` to define whether or not the previous and next page links are shown in the footer. A page can override this setting or the link text and/or URL using the new `prev` and `next` frontmatter fields.
+
+### Patch Changes
+
+- [#318](https://github.com/withastro/starlight/pull/318) [`5db3e6e`](https://github.com/withastro/starlight/commit/5db3e6ea2e5cb7d9552fc54567811358851fb533) Thanks [@delucis](https://github.com/delucis)! - Support relative paths in Starlight config for `customCSS` and `logo` paths
+
 ## 0.4.2
 
 ### Patch Changes
