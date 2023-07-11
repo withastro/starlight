@@ -43,7 +43,7 @@ Establece un logotipo para mostrarlo en la barra de navegación junto al título
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -318,11 +318,11 @@ starlight({
 
 Proporciona archivos CSS para personalizar el aspecto y la sensación de tu sitio Starlight.
 
-Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'/src/custom.css'`, y CSS que instalaste como un módulo npm, por ejemplo, `'@fontsource/roboto'`.
+Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'./src/custom.css'`, y CSS que instalaste como un módulo npm, por ejemplo, `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -367,3 +367,13 @@ interface HeadConfig {
 Controla si se muestra el pie de página que indica cuándo se actualizó por última vez la página.
 
 De forma predeterminada, esta función se basa en el historial Git de tu repositorio y puede no ser precisa en algunas plataformas de implementación que realizan [copias superficiales](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una página puede anular esta configuración o la fecha basada en Git utilizando el campo [`lastUpdated`](/reference/frontmatter/#lastupdated) en el frontmatter.
+
+### `pagination`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si el pie de página debe incluir enlaces a la página anterior y siguiente.
+
+Una página puede anular esta configuración o el texto del enlace y/o la URL utilizando los campos de metadatos [`prev`](/reference/frontmatter/#prev) y [`next`](/reference/frontmatter/#next).
+
