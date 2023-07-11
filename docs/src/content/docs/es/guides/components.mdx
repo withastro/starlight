@@ -29,6 +29,20 @@ import OtroComponente from '../../componentes/OtroComponente.astro';
 
 Debido a que Starlight está impulsado por Astro, puedes agregar soporte para componentes construidos con cualquier [framework UI compatible (React, Preact, Svelte, Vue, Solid, Lit y Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) en tus archivos MDX.
 
+### "Compatibilidad con los estilos de Starlight"
+
+Starlight aplica estilos predeterminados a tu contenido de Markdown, por ejemplo, agregando márgenes entre elementos.
+Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para desactivarlos.
+
+```astro
+---
+// src/components/Example.astro
+---
+<div class="not-content">
+  <p>No se ve afectado por los estilos predeterminados de contenido de Starlight.</p>
+</div>
+```
+
 ## Componentes integrados
 
 Starlight proporciona algunos componentes integrados para casos de uso comunes en la documentación. Estos componentes están disponibles en el paquete `@astrojs/starlight/components`.
