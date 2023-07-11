@@ -8,19 +8,22 @@ import { useTranslations } from '../utils/translations';
 interface Props {
   id: CollectionEntry<'docs'>['id'];
   lang: string;
+  lastUpdated: Date | undefined;
   locale: string | undefined;
 }
 
-const { id, lang, locale } = Astro.props;
+const { id, lang, lastUpdated, locale } = Astro.props;
 const t = useTranslations(locale);
 
 const currentFilePath = fileURLToPath(
   new URL('src/content/docs/' + id, project.root)
 );
 
-let date: Date | undefined;
+let date = lastUpdated;
 try {
-  ({ date } = getFileCommitDate(currentFilePath, 'newest'));
+  if (!date) {
+    ({ date } = getFileCommitDate(currentFilePath, 'newest'));
+  }
 } catch {}
 ---
 

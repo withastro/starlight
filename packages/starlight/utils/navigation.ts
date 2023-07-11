@@ -9,6 +9,7 @@ import type {
   SidebarItem,
   SidebarLinkItem,
 } from './user-config';
+import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 
 export interface Link {
   type: 'link';
@@ -21,6 +22,7 @@ interface Group {
   type: 'group';
   label: string;
   entries: (Link | Group)[];
+  collapsed: boolean;
 }
 
 export type SidebarEntry = Link | Group;
@@ -53,6 +55,7 @@ function configItemToEntry(
       entries: item.items.map((i) =>
         configItemToEntry(i, currentPathname, locale, routes)
       ),
+      collapsed: item.collapsed,
     };
   }
 }
@@ -64,7 +67,7 @@ function groupFromAutogenerateConfig(
   routes: Route[],
   currentPathname: string
 ): Group {
-  const { directory } = item.autogenerate;
+  const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
   const localeDir = locale ? locale + '/' + directory : directory;
   const dirDocs = routes.filter(
     (doc) =>
@@ -77,7 +80,8 @@ function groupFromAutogenerateConfig(
   return {
     type: 'group',
     label: pickLang(item.translations, localeToLang(locale)) || item.label,
-    entries: sidebarFromDir(tree, currentPathname, locale),
+    entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
+    collapsed: item.collapsed,
   };
 }
 
@@ -168,15 +172,17 @@ function groupFromDir(
   fullPath: string,
   dirName: string,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ): Group {
   const entries = Object.entries(dir).map(([key, dirOrSlug]) =>
-    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale)
+    dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
   );
   return {
     type: 'group',
     label: dirName,
     entries,
+    collapsed,
   };
 }
 
@@ -186,21 +192,23 @@ function dirToItem(
   fullPath: string,
   dirName: string,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ): SidebarEntry {
   return typeof dirOrSlug === 'string'
     ? linkFromSlug(dirOrSlug, currentPathname)
-    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale);
+    : groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale, collapsed);
 }
 
 /** Create a sidebar entry for a given content directory. */
 function sidebarFromDir(
   tree: Dir,
   currentPathname: string,
-  locale: string | undefined
+  locale: string | undefined,
+  collapsed: boolean
 ) {
   return Object.entries(tree).map(([key, dirOrSlug]) =>
-    dirToItem(dirOrSlug, key, key, currentPathname, locale)
+    dirToItem(dirOrSlug, key, key, currentPathname, locale, collapsed)
   );
 }
 
@@ -216,27 +224,73 @@ export function getSidebar(
     );
   } else {
     const tree = treeify(routes, locale || '');
-    return sidebarFromDir(tree, pathname, locale);
+    return sidebarFromDir(tree, pathname, locale, false);
   }
 }
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
-function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
+export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
   return sidebar.flatMap((entry) =>
     entry.type === 'group' ? flattenSidebar(entry.entries) : entry
   );
 }
 
-/** Get previous/next pages in the sidebar if there are any. */
-export function getPrevNextLinks(sidebar: SidebarEntry[]): {
+/** Get previous/next pages in the sidebar or the ones from the frontmatter if any. */
+export function getPrevNextLinks(
+  sidebar: SidebarEntry[],
+  paginationEnabled: boolean,
+  config: {
+    prev?: PrevNextLinkConfig;
+    next?: PrevNextLinkConfig;
+  }
+): {
   prev: Link | undefined;
   next: Link | undefined;
 } {
   const entries = flattenSidebar(sidebar);
   const currentIndex = entries.findIndex((entry) => entry.isCurrent);
-  const prev = entries[currentIndex - 1];
-  const next = currentIndex > -1 ? entries[currentIndex + 1] : undefined;
+  const prev = applyPrevNextLinkConfig(
+    entries[currentIndex - 1],
+    paginationEnabled,
+    config.prev
+  );
+  const next = applyPrevNextLinkConfig(
+    currentIndex > -1 ? entries[currentIndex + 1] : undefined,
+    paginationEnabled,
+    config.next
+  );
   return { prev, next };
+}
+
+/** Apply a prev/next link config to a navigation link. */
+function applyPrevNextLinkConfig(
+  link: Link | undefined,
+  paginationEnabled: boolean,
+  config: PrevNextLinkConfig | undefined
+): Link | undefined {
+  // Explicitly remove the link.
+  if (config === false) return undefined;
+  // Use the generated link if any.
+  else if (config === true) return link;
+  // If a link exists, update its label if needed.
+  else if (typeof config === 'string' && link) {
+    return { ...link, label: config };
+  } else if (typeof config === 'object') {
+    if (link) {
+      // If a link exists, update both its label and href if needed.
+      return {
+        ...link,
+        label: config.label ?? link.label,
+        href: config.link ?? link.href,
+      }
+    } else if (config.link && config.label) {
+      // If there is no link and the frontmatter contains both a URL and a label,
+      // create a new link.
+      return makeLink(config.link, config.label, config.link);
+    }
+  }
+  // Otherwise, if the global config is enabled, return the generated link if any.
+  return paginationEnabled ? link : undefined;
 }
 
 /** Remove the extension from a path. */

@@ -17,7 +17,11 @@ const processedContent = await fileTreeProcessor.process({
 });
 ---
 
-<file-tree set:html={processedContent} data-pagefind-ignore />
+<file-tree
+  set:html={processedContent}
+  class="not-content"
+  data-pagefind-ignore
+/>
 
 <style is:global>
   file-tree {
@@ -29,14 +33,13 @@ const processedContent = await fileTreeProcessor.process({
     padding: 1rem;
     background-color: var(--sl-color-gray-6);
     font-size: var(--sl-text-xs);
-    font-family: var(--__sb-font-mono);
+    font-family: var(--__sl-font-mono);
     overflow-x: auto;
   }
 
   file-tree .directory > details,
   file-tree .directory > details:hover,
   file-tree .directory > details[open] {
-    margin: 0 !important;
     border: 0;
     padding: 0;
     padding-inline-start: var(--x-space);
@@ -65,9 +68,8 @@ const processedContent = await fileTreeProcessor.process({
     fill: var(--sl-color-text-accent);
   }
 
-  file-tree ul:is(ul),
-  file-tree .directory > details ul:is(ul) {
-    margin: 0;
+  file-tree ul,
+  file-tree .directory > details ul {
     margin-inline-start: 0.6875rem;
     border-inline-start: 1px solid var(--sl-color-gray-5);
     padding: 0;
@@ -79,14 +81,13 @@ const processedContent = await fileTreeProcessor.process({
     border-color: var(--sl-color-gray-4);
   }
 
-  file-tree > ul:is(ul) {
+  file-tree > ul {
     margin: 0;
     border: 0;
     padding: 0;
   }
 
-  file-tree li:is(li) {
-    margin: 0;
+  file-tree li {
     padding: var(--y-pad) 0;
   }
 

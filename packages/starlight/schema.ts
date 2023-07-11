@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { HeadConfigSchema } from './schemas/head';
+import { PrevNextLinkConfigSchema } from './schemas/prevNextLink';
 import { TableOfContentsSchema } from './schemas/tableOfContents';
 import { Icons } from './components/Icons';
 export { i18nSchema } from './schemas/i18n';
@@ -113,5 +114,22 @@ export function docsSchema() {
             .default([]),
         })
         .optional(),
+      
+      /**
+       * The last update date of the current page.
+       * Overrides the `lastUpdated` global config or the date generated from the Git history.
+       */
+      lastUpdated: z.union([z.date(), z.boolean()]).optional(),
+
+      /**
+       * The previous navigation link configuration.
+       * Overrides the `pagination` global config or the link text and/or URL.
+       */
+      prev: PrevNextLinkConfigSchema(),
+      /**
+       * The next navigation link configuration.
+       * Overrides the `pagination` global config or the link text and/or URL.
+       */
+      next: PrevNextLinkConfigSchema(),
     });
 }

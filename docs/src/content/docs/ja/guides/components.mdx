@@ -61,7 +61,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 `<Card>`コンポーネントを使用すると、Starlightのスタイルに合わせたボックス内にコンテンツを表示できます。十分なスペースがある場合は、複数のカードを`<CardGrid>`コンポーネントで囲むことで、カードを並べて表示できます。
 
-`<Card>`は`title`を必須とし、また任意で[Starlightの組み込みアイコンの1つ](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts)を名前に設定した`icon`属性を含められます。
+`<Card>`は`title`を必須とし、また任意で[Starlightの組み込みアイコンの1つ](#すべてのアイコン)を名前に設定した`icon`属性を含められます。
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -100,3 +100,28 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 :::
+
+### アイコン
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlightは、`<Icon>`コンポーネントを通じてコンテンツ内に表示可能な、一般的なアイコンのセットを提供しています。
+
+`<Icon>`は[`name`](#すべてのアイコン)を必須とし、任意で`label`、`size`、`color`属性を含められます。
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### すべてのアイコン
+
+以下に、利用可能なすべてのアイコンと各アイコンの名前を示します。
+
+<IconsList />

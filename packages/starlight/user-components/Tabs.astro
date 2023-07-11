@@ -8,7 +8,7 @@ const { html, panels } = processPanels(panelHtml);
 <starlight-tabs>
   {
     panels && (
-      <div class="tablist-wrapper">
+      <div class="tablist-wrapper not-content">
         <ul role="tablist">
           {panels.map(({ label, panelId, tabId }, idx) => (
             <li role="presentation" class="tab">
@@ -46,9 +46,6 @@ const { html, panels } = processPanels(panelHtml);
     padding: 0;
   }
 
-  [role='tablist'] .tab + .tab {
-    margin-top: 0;
-  }
   .tab {
     margin-bottom: -2px;
   }
@@ -101,23 +98,20 @@ const { html, panels } = processPanels(panelHtml);
           const index = this.tabs.indexOf(e.currentTarget as any);
           // Work out which key the user is pressing and
           // Calculate the new tab's index where appropriate
-          const dir =
+          const nextIndex =
             e.key === 'ArrowLeft'
               ? index - 1
               : e.key === 'ArrowRight'
               ? index + 1
-              : e.key === 'ArrowDown'
-              ? 'down'
+              : e.key === 'Home'
+              ? 0
+              : e.key === 'End'
+              ? this.tabs.length - 1
               : null;
-          if (dir === null) return;
-          // If the down key is pressed, move focus to the open panel,
-          // otherwise switch to the adjacent tab
-          if (dir === 'down') {
+          if (nextIndex === null) return;
+          if (this.tabs[nextIndex]) {
             e.preventDefault();
-            this.panels[i]?.focus();
-          } else if (this.tabs[dir]) {
-            e.preventDefault();
-            this.switchTab(this.tabs[dir], dir);
+            this.switchTab(this.tabs[nextIndex], nextIndex);
           }
         });
       });

@@ -1,5 +1,71 @@
 # @astrojs/starlight
 
+## 0.5.0
+
+### Minor Changes
+
+- [#313](https://github.com/withastro/starlight/pull/313) [`dc42569`](https://github.com/withastro/starlight/commit/dc42569bddfae2c48ea60c0dd5cc70643a129a68) Thanks [@delucis](https://github.com/delucis)! - Add a `not-content` CSS class that allows users to opt out of Starlight’s default content styling
+
+- [#297](https://github.com/withastro/starlight/pull/297) [`fb15a9b`](https://github.com/withastro/starlight/commit/fb15a9b65252ac5fa32304096fbdb49ecdd6009b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improve `<Tabs>` component keyboard interactions
+
+- [#303](https://github.com/withastro/starlight/pull/303) [`69b7d4c`](https://github.com/withastro/starlight/commit/69b7d4c23761a45dc2b9ea75c6c9c904a885ba5d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add new global `pagination` option defaulting to `true` to define whether or not the previous and next page links are shown in the footer. A page can override this setting or the link text and/or URL using the new `prev` and `next` frontmatter fields.
+
+### Patch Changes
+
+- [#318](https://github.com/withastro/starlight/pull/318) [`5db3e6e`](https://github.com/withastro/starlight/commit/5db3e6ea2e5cb7d9552fc54567811358851fb533) Thanks [@delucis](https://github.com/delucis)! - Support relative paths in Starlight config for `customCSS` and `logo` paths
+
+## 0.4.2
+
+### Patch Changes
+
+- [#308](https://github.com/withastro/starlight/pull/308) [`c3aa4c6`](https://github.com/withastro/starlight/commit/c3aa4c6aa18f7f6859ad1c0acc28f0da59a84760) Thanks [@delucis](https://github.com/delucis)! - Fix use of default monospace font stack
+
+- [#286](https://github.com/withastro/starlight/pull/286) [`a2aedfc`](https://github.com/withastro/starlight/commit/a2aedfc7f9555b44f5f33aad7f4a98b207a11b47) Thanks [@mzaien](https://github.com/mzaien)! - Add Arabic UI translations
+
+## 0.4.1
+
+### Patch Changes
+
+- [#300](https://github.com/withastro/starlight/pull/300) [`377a25d`](https://github.com/withastro/starlight/commit/377a25dc4c51c060e751aeba4d3f946a41de907a) Thanks [@cbontems](https://github.com/cbontems)! - Fix broken link on 404 page when `defaultLocale: 'root'` is set in `astro.config.mjs`
+
+- [#289](https://github.com/withastro/starlight/pull/289) [`dffca46`](https://github.com/withastro/starlight/commit/dffca461633940847e9177913053885c5e8b5f29) Thanks [@RyanRBrown](https://github.com/RyanRBrown)! - Fix saturation of purple text in light theme
+
+- [#301](https://github.com/withastro/starlight/pull/301) [`d47639d`](https://github.com/withastro/starlight/commit/d47639d50b53fa691c1d9b0f30f82ebf7f6ddf7e) Thanks [@delucis](https://github.com/delucis)! - Enable inline stylesheets for Astro versions ≥2.6.0
+
+## 0.4.0
+
+### Minor Changes
+
+- [#259](https://github.com/withastro/starlight/pull/259) [`8102389`](https://github.com/withastro/starlight/commit/810238934ae1a95c53042ca2875bb4033aad0114) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add support for collapsed sidebar groups
+
+- [#254](https://github.com/withastro/starlight/pull/254) [`faa70de`](https://github.com/withastro/starlight/commit/faa70de584bf596fdd7184c4a8622d67d1410ecf) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Expose `<Icon>` component
+
+- [#256](https://github.com/withastro/starlight/pull/256) [`048e948`](https://github.com/withastro/starlight/commit/048e948bce650d559517850c73d827733b8164c4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add new global `lastUpdated` option defaulting to `false` to define whether or not the last updated date is shown in the footer. A page can override this setting or the generated date using the new `lastUpdated` frontmatter field.
+
+  ⚠️ Breaking change. Starlight will no longer show this date by default. To keep the previous behavior, you must explicitly set `lastUpdated` to `true` in your configuration.
+
+  ```diff
+  starlight({
+  + lastUpdated: true,
+  }),
+  ```
+
+### Patch Changes
+
+- [#264](https://github.com/withastro/starlight/pull/264) [`ed1e46b`](https://github.com/withastro/starlight/commit/ed1e46beb1bc054ecdba36ecfe566ecaeaf8799b) Thanks [@astridx](https://github.com/astridx)! - Add new icon for displaying codeberg.org in social links.
+
+- [#260](https://github.com/withastro/starlight/pull/260) [`01b65b1`](https://github.com/withastro/starlight/commit/01b65b1adf012474daf5678b4a709e3a7a484814) Thanks [@ElianCodes](https://github.com/ElianCodes)! - Add Dutch UI translations
+
+- [#269](https://github.com/withastro/starlight/pull/269) [`fdc18b5`](https://github.com/withastro/starlight/commit/fdc18b5476957f8017a0fa1489c6fed89d5a9480) Thanks [@baspinarenes](https://github.com/baspinarenes)! - Add Turkish UI translations
+
+- [#270](https://github.com/withastro/starlight/pull/270) [`1d3e705`](https://github.com/withastro/starlight/commit/1d3e705256fa0668db73b01c898e7e3b3b505c49) Thanks [@cbontems](https://github.com/cbontems)! - Improve French UI translations
+
+- [#272](https://github.com/withastro/starlight/pull/272) [`6b23ebc`](https://github.com/withastro/starlight/commit/6b23ebc9974828837a2de9175297664e5d28a999) Thanks [@cbontems](https://github.com/cbontems)! - Add YouTube social link support
+
+- [#267](https://github.com/withastro/starlight/pull/267) [`af2e43c`](https://github.com/withastro/starlight/commit/af2e43c7325a8f7fa6c9f867a3ec864daae39e96) Thanks [@nikcio](https://github.com/nikcio)! - Add Danish UI translations
+
+- [#273](https://github.com/withastro/starlight/pull/273) [`d4f5134`](https://github.com/withastro/starlight/commit/d4f5134c91b393ac448efc3f44849fc886a05551) Thanks [@Waxer59](https://github.com/Waxer59)! - Fix typo in Spanish UI translations
+
 ## 0.3.1
 
 ### Patch Changes
