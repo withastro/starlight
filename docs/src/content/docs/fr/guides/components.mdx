@@ -33,6 +33,20 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 Starlight étant alimenté par Astro, vous pouvez ajouter la prise en charge des composants construits avec n'importe quel [cadre d'interface utilisateur pris en charge (React, Preact, Svelte, Vue, Solid, Lit et Alpine)](https://docs.astro.build/fr/core-concepts/framework-components/) dans vos fichiers MDX.
 Pour en savoir plus sur [l'utilisation de composants dans MDX](https://docs.astro.build/fr/guides/markdown-content/#using-components-in-mdx), consultez la documentation Astro.
 
+### Compatibilité avec les styles de Starlight
+
+Starlight applique des styles par défaut à votre contenu Markdown, par exemple en ajoutant une marge entre les éléments.
+Si ces styles entrent en conflit avec l'apparence de votre composant, définissez la classe `not-content` sur votre composant pour les désactiver.
+
+```astro
+---
+// src/components/Example.astro
+---
+<div class="not-content">
+  <p>Not impacted by Starlight’s default content styling.</p>
+</div>
+```
+
 ## Composants intégrés
 
 Starlight fournit quelques composants intégrés pour les cas d'utilisation courants de la documentation.
@@ -68,7 +82,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 Vous pouvez afficher du contenu dans une boîte correspondant aux styles de Starlight en utilisant le composant `<Card>`.
 Enveloppez plusieurs cartes dans le composant `<CardGrid>` pour afficher les cartes côte à côte lorsqu'il y a suffisamment d'espace.
 
-Une `<Card>` nécessite un `titre` et peut éventuellement inclure un attribut `icon` fixé au nom de [l'une des icônes intégrées de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+Une `<Card>` nécessite un `title` et peut optionellement inclure un attribut `icon` fixé au nom de [l'une des icônes intégrées de Starlight](#all-icons).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -109,3 +123,28 @@ Ajoutez l'attribut `stagger` pour décaler verticalement la deuxième colonne de
 ```
 
 :::
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../components/icons-list.astro';
+
+Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
+
+Chaque `<Icon>` nécessite un [`name`](#all-icons) et peut optionellement inclure un attribut `label`, `size` et `color`.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### Toutes les icônes
+
+Une liste de toutes les icônes disponibles est affichée ci-dessous avec leurs noms associés.
+
+<IconsList />
