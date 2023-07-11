@@ -36,7 +36,7 @@ Starlightには標準的なスタイルと機能がデフォルトで用意さ�
        starlight({
          title: 'ロゴを設定したドキュメント',
          logo: {
-           src: '/src/assets/my-logo.svg',
+           src: './src/assets/my-logo.svg',
          },
        }),
      ],
@@ -49,7 +49,7 @@ Starlightには標準的なスタイルと機能がデフォルトで用意さ�
 starlight({
   title: 'ロゴを設定したドキュメント',
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -78,8 +78,8 @@ starlight({
    starlight({
      title: 'ロゴを設定したドキュメント',
      logo: {
-       light: '/src/assets/light-logo.svg',
-       dark: '/src/assets/dark-logo.svg',
+       light: './src/assets/light-logo.svg',
+       dark: './src/assets/dark-logo.svg',
      },
    }),
    ```
@@ -282,8 +282,8 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
        starlight({
          title: 'カスタムCSSを設定したドキュメント',
          customCss: [
-           // '/'から始まるカスタムCSSファイルへのパス
-           '/src/styles/custom.css',
+           // カスタムCSSファイルへの相対パス
+           './src/styles/custom.css',
          ],
        }),
      ],
@@ -342,8 +342,8 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
        starlight({
          title: 'カスタムフォントを設定したドキュメント',
          customCss: [
-           // @font-face CSSファイルへのパス
-           '/src/fonts/font-face.css',
+           // @font-face CSSファイルへの相対パス
+           './src/fonts/font-face.css',
          ],
        }),
      ],
