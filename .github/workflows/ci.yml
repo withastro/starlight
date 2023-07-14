@@ -41,3 +41,18 @@ jobs:
       - name: Run accessibility audit
         working-directory: ./docs
         run: pnpm t
+
+  windows-smoke:
+    name: Docs site builds on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Build docs site
+        working-directory: ./docs
+        run: pnpm build
