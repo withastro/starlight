@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.5.1
+
+### Patch Changes
+
+- [#336](https://github.com/withastro/starlight/pull/336) [`2b3302b`](https://github.com/withastro/starlight/commit/2b3302b80451f318fb05a5e8a7284feb28999e66) Thanks [@delucis](https://github.com/delucis)! - Add support for LinkedIn, Threads, and Twitch social icon links
+
+- [#335](https://github.com/withastro/starlight/pull/335) [`757c65f`](https://github.com/withastro/starlight/commit/757c65ffc468fd2c782312b476fa7659d0cfd198) Thanks [@delucis](https://github.com/delucis)! - Fix relative path resolution on Windows
+
+- [#332](https://github.com/withastro/starlight/pull/332) [`0600c1a`](https://github.com/withastro/starlight/commit/0600c1a917bf86efa6b2d053aa47e3a4b17e8049) Thanks [@sasoria](https://github.com/sasoria)! - Add Norwegian UI translations
+
+- [#328](https://github.com/withastro/starlight/pull/328) [`e478848`](https://github.com/withastro/starlight/commit/e478848de1c41a46f58d0ac0d62d7b7272cf1241) Thanks [@astridx](https://github.com/astridx)! - Add missing accessible labels for Codeberg and YouTube social links
+
 ## 0.5.0
 
 ### Minor Changes
