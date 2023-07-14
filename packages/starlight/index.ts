@@ -6,7 +6,7 @@ import type {
   ViteUserConfig,
 } from 'astro';
 import { spawn } from 'node:child_process';
-import { dirname, relative } from 'node:path';
+import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
@@ -89,19 +89,19 @@ function vitePluginStarlightUserConfig(
   { root }: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   const resolveRelativeId = (id: string) =>
-    id.startsWith('.') ? '/' + id : id;
+    id.startsWith('.') ? JSON.stringify(resolve(fileURLToPath(root), id)) : id;
   const modules = {
     'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
     'virtual:starlight/project-context': `export default ${JSON.stringify({
       root,
     })}`,
     'virtual:starlight/user-css': opts.customCss
-      .map((id) => `import "${resolveRelativeId(id)}";`)
+      .map((id) => `import ${resolveRelativeId(id)};`)
       .join(''),
     'virtual:starlight/user-images': opts.logo
       ? 'src' in opts.logo
-        ? `import src from "${resolveRelativeId(opts.logo.src)}"; export const logos = { dark: src, light: src };`
-        : `import dark from "${resolveRelativeId(opts.logo.dark)}"; import light from "${resolveRelativeId(opts.logo.light)}"; export const logos = { dark, light };`
+        ? `import src from ${resolveRelativeId(opts.logo.src)}; export const logos = { dark: src, light: src };`
+        : `import dark from ${resolveRelativeId(opts.logo.dark)}; import light from ${resolveRelativeId(opts.logo.light)}; export const logos = { dark, light };`
       : 'export const logos = {};',
   };
   const resolutionMap = Object.fromEntries(
