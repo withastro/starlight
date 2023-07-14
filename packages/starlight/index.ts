@@ -89,7 +89,7 @@ function vitePluginStarlightUserConfig(
   { root }: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   const resolveRelativeId = (id: string) =>
-    id.startsWith('.') ? fileURLToPath(new URL(id, root)) : id;
+    id.startsWith('.') ? '/' + id : id;
   const modules = {
     'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
     'virtual:starlight/project-context': `export default ${JSON.stringify({
