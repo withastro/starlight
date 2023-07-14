@@ -1,0 +1,4 @@
+/* TODO: Remove this file once https://github.com/withastro/astro/issues/7563 is fixed. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
