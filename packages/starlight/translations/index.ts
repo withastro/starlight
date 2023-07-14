@@ -11,11 +11,12 @@ import nl from './nl.json';
 import da from './da.json';
 import tr from './tr.json';
 import ar from './ar.json';
+import nb from './nb.json';
 
 const { parse } = builtinI18nSchema();
 
 export default Object.fromEntries(
-  Object.entries({ cs, en, es, de, ja, pt, fr, it, nl, da, tr, ar }).map(([key, dict]) => [
+  Object.entries({ cs, en, es, de, ja, pt, fr, it, nl, da, tr, ar, nb }).map(([key, dict]) => [
     key,
     parse(dict),
   ])
