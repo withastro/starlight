@@ -6,7 +6,7 @@ import type {
   ViteUserConfig,
 } from 'astro';
 import { spawn } from 'node:child_process';
-import { dirname, relative, resolve } from 'node:path';
+import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
@@ -89,7 +89,7 @@ function vitePluginStarlightUserConfig(
   { root }: AstroConfig
 ): NonNullable<ViteUserConfig['plugins']>[number] {
   const resolveRelativeId = (id: string) =>
-    id.startsWith('.') ? resolve(fileURLToPath(root), id) : id;
+    id.startsWith('.') ? fileURLToPath(new URL(id, root)) : id;
   const modules = {
     'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
     'virtual:starlight/project-context': `export default ${JSON.stringify({
