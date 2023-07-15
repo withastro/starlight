@@ -16,9 +16,11 @@ const labels: Record<Platform, string> = {
   twitch: 'Twitch',
 };
 
-const links = Object.entries(config.social || {}).filter(([, url]) =>
-  Boolean(url)
+const links = Object.entries(config.social || {}).filter(
+  ([key, url]) => Boolean(url) && key != 'additional'
 ) as [platform: Platform, url: string][];
+
+const additionalLinks = config.social?.additional;
 ---
 
 {
@@ -30,6 +32,19 @@ const links = Object.entries(config.social || {}).filter(([, url]) =>
           <Icon name={platform} />
         </a>
       ))}
+      {additionalLinks &&
+        additionalLinks.map((link) => (
+          <a href={link.url} rel="me">
+            <span class="sr-only">{link.displayName}</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              set:html={link.icon}
+            />
+          </a>
+        ))}
       <div class="divider" />
     </>
   )

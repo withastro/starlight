@@ -9,14 +9,14 @@ const LocaleSchema = z.object({
   label: z
     .string()
     .describe(
-      'The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`.'
+      'The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`.',
     ),
   /** The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. */
   lang: z
     .string()
     .optional()
     .describe(
-      'The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`.'
+      'The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`.',
     ),
   /** The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left. */
   dir: z
@@ -24,7 +24,7 @@ const LocaleSchema = z.object({
     .optional()
     .default('ltr')
     .describe(
-      'The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.'
+      'The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.',
     ),
 });
 
@@ -94,7 +94,7 @@ const ManualSidebarGroupSchema: z.ZodType<
         ManualSidebarGroupSchema,
         AutoSidebarGroupSchema,
       ])
-      .array()
+      .array(),
   ),
 });
 
@@ -110,7 +110,7 @@ const UserConfigSchema = z.object({
   title: z
     .string()
     .describe(
-      'Title for your website. Will be used in metadata and as browser tab title.'
+      'Title for your website. Will be used in metadata and as browser tab title.',
     ),
 
   /** Description metadata for your website. Can be used in page metadata. */
@@ -118,7 +118,7 @@ const UserConfigSchema = z.object({
     .string()
     .optional()
     .describe(
-      'Description metadata for your website. Can be used in page metadata.'
+      'Description metadata for your website. Can be used in page metadata.',
     ),
 
   /** Set a logo image to show in the navigation bar alongside or instead of the site title. */
@@ -145,6 +145,15 @@ const UserConfigSchema = z.object({
       linkedin: z.string().url().optional(),
       /** Link to the Twitch profile or repository for this site, e.g. `'https://www.twitch.tv/bholmesdev'`. */
       twitch: z.string().url().optional(),
+      /** Custom */
+      additional: z
+        .object({
+          displayName: z.string(),
+          url: z.string().url(),
+          icon: z.string(),
+        })
+        .array()
+        .optional(),
     })
     .optional(),
 
@@ -193,7 +202,7 @@ const UserConfigSchema = z.object({
         // Let users know we’re modifying their configured `lang`.
         if (normalizedLang !== lang) {
           console.warn(
-            `Warning: using "${normalizedLang}" language tag for locales.${key}.lang instead of "${lang}".`
+            `Warning: using "${normalizedLang}" language tag for locales.${key}.lang instead of "${lang}".`,
           );
           lang = normalizedLang;
         }
@@ -257,7 +266,7 @@ const UserConfigSchema = z.object({
     .boolean()
     .default(false)
     .describe(
-      'Define if the last update date should be visible in the page footer.'
+      'Define if the last update date should be visible in the page footer.',
     ),
 
   /** Define if the previous and next page links should be visible in the page footer. */
@@ -265,7 +274,7 @@ const UserConfigSchema = z.object({
     .boolean()
     .default(true)
     .describe(
-      'Define if the previous and next page links should be visible in the page footer.'
+      'Define if the previous and next page links should be visible in the page footer.',
     ),
 });
 
@@ -316,7 +325,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
       },
       locales: undefined,
     } as const;
-  }
+  },
 );
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
