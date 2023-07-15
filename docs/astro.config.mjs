@@ -18,8 +18,8 @@ export default defineConfig({
     starlight({
       title: 'Starlight',
       logo: {
-        light: './src/assets/logo-light.svg',
-        dark: './src/assets/logo-dark.svg',
+        light: '/src/assets/logo-light.svg',
+        dark: '/src/assets/logo-dark.svg',
         replacesTitle: true,
       },
       editLink: {
