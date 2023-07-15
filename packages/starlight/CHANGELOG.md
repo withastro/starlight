@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.5.2
+
+### Patch Changes
+
+- [#343](https://github.com/withastro/starlight/pull/343) [`d618678`](https://github.com/withastro/starlight/commit/d618678b1901c621e1c8d2dc1a34ee299582b14e) Thanks [@delucis](https://github.com/delucis)! - Fix escaping of non-relative user config file paths for custom CSS and logos
+
 ## 0.5.1
 
 ### Patch Changes
