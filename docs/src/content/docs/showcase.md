@@ -13,6 +13,7 @@ Starlight is already being used in production around the web. See some examples 
 - [Terrateam Docs](https://terrateam.io/docs)
 - [xs-dev docs](https://xs-dev.js.org)
 - [Starwoof](https://starwoof.vercel.app/) - Watch Ben and Chris of Astro build this Starlight site showcasing the pets of Astro in real time! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
+- [Athena OS](https://www.athenaos.org)
 
 
 See all the [public project repos using Starlight on GitHub](https://github.com/withastro/starlight/network/dependents).
