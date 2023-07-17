@@ -92,4 +92,10 @@ const t = useTranslations(Astro.props.locale);
   [data-mobile-menu-expanded] {
     overflow: hidden;
   }
+
+  @media (min-width: 50rem) {
+    [data-mobile-menu-expanded] {
+      overflow: auto;
+    }
+  }
 </style>
