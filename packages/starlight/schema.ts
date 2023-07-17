@@ -61,6 +61,8 @@ export function docsSchema() {
        */
       template: z.enum(['doc', 'splash']).default('doc'),
 
+      showSearch: z.boolean().default(true).describe('Define if the search component should be visible in current doc'),
+
       /** Display a hero section on this page. */
       hero: z
         .object({

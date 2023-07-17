@@ -44,6 +44,7 @@ const tocConfig = !hasSidebar
   : config.tableOfContents;
 const hasToC = Boolean(tocConfig);
 const hasHero = Boolean(entry.data.hero);
+const showSearch = Boolean(entry.data.showSearch);
 ---
 
 <html lang={lang} dir={dir} data-has-toc={hasToC} data-has-sidebar={hasSidebar} data-has-hero={hasHero}>
@@ -82,7 +83,7 @@ const hasHero = Boolean(entry.data.hero);
     <ThemeProvider />
     <SkipLink {locale} />
     <PageFrame {locale} {hasSidebar}>
-      <Header slot="header" {locale} />
+      <Header slot="header" {locale} {showSearch} />
       {hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
       <TwoColumnContent {hasToC}>
         <RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />

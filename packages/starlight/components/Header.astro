@@ -7,18 +7,21 @@ import ThemeSelect from './ThemeSelect.astro';
 
 interface Props {
   locale: string | undefined;
+  showSearch: boolean | undefined
 }
 
-const { locale } = Astro.props;
+const { locale, showSearch } = Astro.props;
 ---
 
 <div class="header flex">
   <SiteTitle {locale} />
-  <Search {locale} />
-  <div class="hidden md:flex right-group">
-    <SocialIcons />
-    <ThemeSelect {locale} />
-    <LanguageSelect {locale} />
+  <div class="subheader">
+    {showSearch && <Search {locale} />}
+    <div class="hidden md:flex right-group" >
+      <SocialIcons />
+      <ThemeSelect {locale} />
+      <LanguageSelect {locale} />
+    </div>
   </div>
 </div>
 
@@ -42,6 +45,7 @@ const { locale } = Astro.props;
     :global(:root:not([data-has-toc])) {
       --__toc-width: 0rem;
     }
+
     .header {
       --__sidebar-width: max(
         0rem,
@@ -55,7 +59,16 @@ const { locale } = Astro.props;
               var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
           ) / 2
       );
+
+      --__sitetitle-width:  max(
+        var(--sl-title-min-width),
+        calc(
+          var(--__sidebar-width) +
+            max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
+        )
+      );
       display: grid;
+
       grid-template-columns:
         /* 1 (site title): runs up until the main content column’s left edge.  */
         max(
@@ -65,11 +78,25 @@ const { locale } = Astro.props;
               max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
           )
         )
-        /* 2 (search box): all free space that is available. */
-        1fr
-        /* 3 (right items): use the space that these need. */
-        auto;
+        
+        1fr;
+
       align-content: center;
     }
+
+    .subheader {
+      display: grid;
+
+      grid-template-columns: 
+      /* 2 (search box): all free space that is available. */
+      1fr 
+      /* 3 (right items): use the space that these need. */
+      auto;
+    }
+
+    .subheader > div:only-child {
+      justify-self: self-end;
+    }
+    
   }
 </style>
