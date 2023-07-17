@@ -8,7 +8,6 @@ export const locales = {
   ja: { label: '日本語', lang: 'ja' },
   fr: { label: 'Français', lang: 'fr' },
   it: { label: 'Italiano', lang: 'it' },
-  zh: { label: '简体中文', lang: 'zh' },
 };
 
 const site = 'https://starlight.astro.build/';
