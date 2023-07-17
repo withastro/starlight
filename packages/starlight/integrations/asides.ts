@@ -5,6 +5,7 @@ import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
+import codeTitle from 'remark-code-title';
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: any[] = []): P {
@@ -160,5 +161,5 @@ type RemarkPlugins = NonNullable<
 >;
 
 export function starlightAsides(): RemarkPlugins {
-  return [remarkDirective, remarkAsides()];
+  return [remarkDirective, remarkAsides(), codeTitle];
 }

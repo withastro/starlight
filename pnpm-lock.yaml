@@ -128,6 +128,9 @@ importers:
       rehype:
         specifier: ^12.0.1
         version: 12.0.1
+      remark-code-title:
+        specifier: ^0.2.5
+        version: 0.2.5
       remark-directive:
         specifier: ^2.0.1
         version: 2.0.1
@@ -190,7 +193,7 @@ packages:
       astro: ^2.5.0
     dependencies:
       '@astrojs/prism': 2.1.2
-      astro: 2.7.0(sharp@0.32.1)
+      astro: 2.7.0(@types/node@18.15.11)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -1463,7 +1466,6 @@ packages:
       - sugarss
       - supports-color
       - terser
-    dev: true
 
   /astro@2.7.0(sharp@0.32.1):
     resolution: {integrity: sha512-gUYx2R0V7fpZtFRN9f4nE0We95qYhJyAr+VW0nVFqlMMF1of9MzrjjJ+8rIGJ/6RooFK8XAaXWTQMGTok3ZzEA==}
@@ -4909,6 +4911,12 @@ packages:
       rehype-parse: 8.0.4
       rehype-stringify: 9.0.3
       unified: 10.1.2
+
+  /remark-code-title@0.2.5:
+    resolution: {integrity: sha512-6tIhdZdECMM0EQk3eDFxUQn/97VKKmo7JkCwfg/mkJaZZBwH+cbP0UDRslOqqzLcueakPZ8q7Gtj5KtGB/jufw==}
+    dependencies:
+      unist-util-visit: 4.1.2
+    dev: false
 
   /remark-directive@2.0.1:
     resolution: {integrity: sha512-oosbsUAkU/qmUE78anLaJePnPis4ihsE7Agp0T/oqTzvTea8pOiaYEtfInU/+xMOVTS9PN5AhGOiaIVe4GD8gw==}

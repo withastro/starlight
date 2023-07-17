@@ -47,3 +47,29 @@
 .starlight-aside__content a {
   color: var(--sl-color-asides-text-accent);
 }
+
+div[data-remark-code-title] {
+  background-color: var(--sl-color-gray-6);
+  border-color: white;
+  border-top-left-radius: 0.4rem;
+  border-top-right-radius: 0.4rem;
+  border: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-white);
+  padding: 0.2rem 0.5rem;
+  margin-bottom: -4px;
+  padding-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-style: italic;
+  font-family: monospace;
+  width: fit-content;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+div[data-remark-code-title] + pre {
+  margin-top: 0;
+  border-bottom-right-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
+}
