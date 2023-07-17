@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.5.3
+
+### Patch Changes
+
+- [#352](https://github.com/withastro/starlight/pull/352) [`a2e23be`](https://github.com/withastro/starlight/commit/a2e23be71d9f3592a9ac615981233bf4e9f3af6b) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Fix page scrolling when the window resizes, while the mobile nav is open
+
+- [#353](https://github.com/withastro/starlight/pull/353) [`65b2b75`](https://github.com/withastro/starlight/commit/65b2b7561a185be29ff7f773bf9432dc3c4da2e4) Thanks [@liruifengv](https://github.com/liruifengv)! - Add Simplified Chinese language support
+
 ## 0.5.2
 
 ### Patch Changes
