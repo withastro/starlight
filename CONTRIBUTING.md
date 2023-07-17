@@ -100,6 +100,8 @@ Starlight’s UI comes with some built-in text elements. For example, the table 
 Help out by adding or updating translation files in [`packages/starlight/translations`](./packages/starlight/translations/).
 Each language’s JSON file follows the [translation structure described in Starlight’s docs](https://starlight.astro.build/guides/i18n/#translate-starlights-ui).
 
+📺 **Prefer a visual walkthrough?** [Watch an introduction to Starlight’s translation files.](https://scrimba.com/scrim/cpb44bt3)
+
 ### Translating Starlight’s docs
 
 Starlight’s documentation is also translated into multiple languages. You can find the source code for the site in [the `docs/` directory](./docs/) of this repository.
