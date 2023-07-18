@@ -67,6 +67,7 @@ function getRoutes(): Route[] {
       for (const fallback of defaultLocaleDocs) {
         const slug = localizedSlug(fallback.slug, locale);
         const id = localizedId(fallback.id, locale);
+        const order = fallback.data.order;
         const doesNotNeedFallback = localeDocs.some((doc) => doc.slug === slug);
         if (doesNotNeedFallback) continue;
         routes.push({
