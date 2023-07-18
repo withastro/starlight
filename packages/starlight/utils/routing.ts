@@ -17,6 +17,7 @@ export interface Route extends LocaleData {
   entry: StarlightDocsEntry;
   entryMeta: LocaleData;
   slug: string;
+  order: number | undefined;
   id: string;
   isFallback?: true;
   [key: string]: unknown;
@@ -44,6 +45,7 @@ function getRoutes(): Route[] {
     entry,
     slug: entry.slug,
     id: entry.id,
+    order: entry.data.order,
     entryMeta: slugToLocaleData(entry.slug),
     ...slugToLocaleData(entry.slug),
   }));
@@ -71,6 +73,7 @@ function getRoutes(): Route[] {
           entry: fallback,
           slug,
           id,
+          order,
           isFallback: true,
           lang: localeConfig.lang || 'en',
           locale,
