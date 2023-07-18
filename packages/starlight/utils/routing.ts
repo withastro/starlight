@@ -92,7 +92,7 @@ function getRoutes(): Route[] {
     const bOrder = b.order ? b.order : Number.MAX_SAFE_INTEGER
 
     if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1 // Pages are sorted by order in ascending order.
-    return a.slug < b.slug ? -1 : 1 // If two pages have the same order value they will be sorted by their slug.
+    return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0 // If two pages have the same order value they will be sorted by their slug.
   });
 }
 export const routes = getRoutes();
