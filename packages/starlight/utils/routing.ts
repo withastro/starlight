@@ -81,10 +81,15 @@ function getRoutes(): Route[] {
     }
   }
 
-  // Sort alphabetically by page slug to guarantee order regardless of platform.
-  return routes.sort((a, b) =>
-    a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0
-  );
+  // Sort alphabetically by order then page slug to guarantee order regardless of platform.
+  return routes.sort((a, b) => {
+    // If no order value is found, set it to the largest number possible.
+    const aOrder = a.order ? a.order : Number.MAX_SAFE_INTEGER 
+    const bOrder = b.order ? b.order : Number.MAX_SAFE_INTEGER
+
+    if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1 // Pages are sorted by order in ascending order.
+    return a.slug < b.slug ? -1 : 1 // If two pages have the same order value they will be sorted by their slug.
+  });
 }
 export const routes = getRoutes();
 
