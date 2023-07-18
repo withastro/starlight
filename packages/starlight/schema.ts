@@ -39,6 +39,14 @@ export function docsSchema() {
       description: z.string().optional(),
 
       /**
+       * The order of this page in the navigation.
+       * Pages are sorted by this value in ascending order. Then by slug.
+       * If not provided, pages will be sorted alphabetically by slug.
+       * If two pages have the same order value, they will be sorted alphabetically by slug.
+       */
+      order: z.number().optional(),
+      
+      /**
        * Custom URL where a reader can edit this page.
        * Overrides the `editLink.baseUrl` global config if set.
        *
