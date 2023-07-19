@@ -72,6 +72,17 @@ export default defineConfig({
               },
             },
             {
+              label: 'Manual Setup',
+              link: 'manual-setup',
+              translations: {
+                // de: 'Manual Setup',
+                // es: 'Manual Setup',
+                // ja: 'Manual Setup',
+                // fr: 'Manual Setup',
+                // it: 'Manual Setup',
+              },
+            },
+            {
               label: 'Environmental Impact',
               link: 'environmental-impact',
               translations: {
