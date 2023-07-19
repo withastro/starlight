@@ -149,11 +149,11 @@ importers:
         version: 5.3.7
     devDependencies:
       '@types/node':
-        specifier: ^18.15.11
-        version: 18.15.11
+        specifier: ^18.16.19
+        version: 18.16.19
       astro:
         specifier: ^2.8.5
-        version: 2.8.5(@types/node@18.15.11)
+        version: 2.8.5(@types/node@18.16.19)
 
 packages:
 
@@ -194,7 +194,7 @@ packages:
       astro: ^2.5.0
     dependencies:
       '@astrojs/prism': 2.1.2
-      astro: 2.8.5(sharp@0.32.3)
+      astro: 2.8.5(@types/node@18.16.19)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -1202,8 +1202,13 @@ packages:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: false
 
-  /@types/node@18.15.11:
-    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
+  /@types/node@18.16.19:
+    resolution: {integrity: sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==}
+
+  /@types/node@20.4.2:
+    resolution: {integrity: sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==}
+    dev: true
+    optional: true
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -1222,7 +1227,7 @@ packages:
   /@types/sax@1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 18.15.11
+      '@types/node': 18.16.19
     dev: false
 
   /@types/semver@6.2.3:
@@ -1239,7 +1244,7 @@ packages:
     resolution: {integrity: sha512-Cn6WYCm0tXv8p6k+A8PvbDG763EDpBoTzHdA+Q/MF6H3sapGjCm9NzoaJncJS9tUKSuCoDs9XHxYYsQDgxR6kw==}
     requiresBuild: true
     dependencies:
-      '@types/node': 18.15.11
+      '@types/node': 20.4.2
     dev: true
     optional: true
 
@@ -1383,7 +1388,7 @@ packages:
     hasBin: true
     dev: false
 
-  /astro@2.8.5(@types/node@18.15.11):
+  /astro@2.8.5(@types/node@18.16.19):
     resolution: {integrity: sha512-qfPUKLpZ9lVi5Hc5MrzyekUUx54AyrEphW5eetNQj/+d0iodHEneZXFDzZxTEsk3rL8Y2Y9pYFXJPmQB3eahUA==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
@@ -1444,7 +1449,7 @@ packages:
       typescript: 4.9.5
       unist-util-visit: 4.1.2
       vfile: 5.3.7
-      vite: 4.3.9(@types/node@18.15.11)
+      vite: 4.3.9(@types/node@18.16.19)
       vitefu: 0.2.4(vite@4.3.9)
       which-pm: 2.0.0
       yargs-parser: 21.1.1
@@ -1457,7 +1462,6 @@ packages:
       - sugarss
       - supports-color
       - terser
-    dev: true
 
   /astro@2.8.5(sharp@0.32.3):
     resolution: {integrity: sha512-qfPUKLpZ9lVi5Hc5MrzyekUUx54AyrEphW5eetNQj/+d0iodHEneZXFDzZxTEsk3rL8Y2Y9pYFXJPmQB3eahUA==}
@@ -1521,7 +1525,7 @@ packages:
       typescript: 4.9.5
       unist-util-visit: 4.1.2
       vfile: 5.3.7
-      vite: 4.3.9(@types/node@18.15.11)
+      vite: 4.3.9(@types/node@18.16.19)
       vitefu: 0.2.4(vite@4.3.9)
       which-pm: 2.0.0
       yargs-parser: 21.1.1
@@ -5797,7 +5801,7 @@ packages:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
-  /vite@4.3.9(@types/node@18.15.11):
+  /vite@4.3.9(@types/node@18.16.19):
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -5822,7 +5826,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.15.11
+      '@types/node': 18.16.19
       esbuild: 0.17.19
       postcss: 8.4.23
       rollup: 3.21.5
@@ -5837,7 +5841,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.3.9(@types/node@18.15.11)
+      vite: 4.3.9(@types/node@18.16.19)
 
   /vscode-css-languageservice@6.2.5:
     resolution: {integrity: sha512-/1oyBZK3jfx6A0cA46FCUpy6OlqEsMT47LUIldCIP1YMKRYezJ9No+aNj9IM0AqhRZ92DxZ1DmU5lJ+biuiacA==}
