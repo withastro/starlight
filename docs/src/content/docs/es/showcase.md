@@ -12,6 +12,8 @@ Starlight está siendo utilizado en producción en la web. ¡Ve algunos ejemplos
 - [NgxEditor](https://sibiraj-s.github.io/ngx-editor/)
 - [Terrateam Docs](https://terrateam.io/docs)
 - [xs-dev docs](https://xs-dev.js.org)
+- [Athena OS](https://www.athenaos.org)
+- [simple-fm](https://simple.arciniega.one)
 - [Starwoof](https://starwoof.vercel.app/) - ¡Mira a Ben y Chris de Astro construir este sitio de Starlight mostrando las mascotas de Astro en tiempo real! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
 
 

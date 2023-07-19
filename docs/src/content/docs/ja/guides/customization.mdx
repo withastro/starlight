@@ -36,7 +36,7 @@ Starlightには標準的なスタイルと機能がデフォルトで用意さ�
        starlight({
          title: 'ロゴを設定したドキュメント',
          logo: {
-           src: '/src/assets/my-logo.svg',
+           src: './src/assets/my-logo.svg',
          },
        }),
      ],
@@ -49,7 +49,7 @@ Starlightには標準的なスタイルと機能がデフォルトで用意さ�
 starlight({
   title: 'ロゴを設定したドキュメント',
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -78,8 +78,8 @@ starlight({
    starlight({
      title: 'ロゴを設定したドキュメント',
      logo: {
-       light: '/src/assets/light-logo.svg',
-       dark: '/src/assets/dark-logo.svg',
+       light: './src/assets/light-logo.svg',
+       dark: './src/assets/dark-logo.svg',
      },
    }),
    ```
@@ -173,7 +173,7 @@ defineConfig({
 
 Starlightは、Starlightインテグレーションの[`social`](/ja/reference/configuration/#social)オプションを使用して、サイトヘッダーにソーシャルメディアアカウントへのリンクを追加する機能を備えています。
 
-現在、Codeberg、Discord、GitHub、Mastodon、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
+現在、Codeberg、Discord、GitHub、LinkedIn、Mastodon、Threads、Twitch、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
 
 ```js
 // astro.config.mjs
@@ -185,12 +185,8 @@ export default defineConfig({
     starlight({
       title: 'ソーシャルリンクを設定したドキュメント',
       social: {
-        codeberg: 'https://codeberg.org/knut/examples',
         discord: 'https://astro.build/chat',
         github: 'https://github.com/withastro/starlight',
-        mastodon: 'https://m.webtoo.ls/@astro',
-        twitter: 'https://twitter.com/astrodotbuild',
-        youtube: 'https://youtube.com/@astrodotbuild',
       },
     }),
   ],
@@ -282,8 +278,8 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
        starlight({
          title: 'カスタムCSSを設定したドキュメント',
          customCss: [
-           // '/'から始まるカスタムCSSファイルへのパス
-           '/src/styles/custom.css',
+           // カスタムCSSファイルへの相対パス
+           './src/styles/custom.css',
          ],
        }),
      ],
@@ -342,8 +338,8 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
        starlight({
          title: 'カスタムフォントを設定したドキュメント',
          customCss: [
-           // @font-face CSSファイルへのパス
-           '/src/fonts/font-face.css',
+           // @font-face CSSファイルへの相対パス
+           './src/fonts/font-face.css',
          ],
        }),
      ],

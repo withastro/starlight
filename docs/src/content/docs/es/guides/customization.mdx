@@ -36,7 +36,7 @@ Agregando un logo personalizado al encabezado del sitio es una forma rápida de 
        starlight({
          title: 'Docs Con Mi Logo',
          logo: {
-           src: '/src/assets/mi-logo.svg',
+           src: './src/assets/mi-logo.svg',
          },
        }),
      ],
@@ -51,7 +51,7 @@ El texto del título seguirá estando disponible para lectores de pantalla para 
 starlight({
   title: 'Docs Con Mi Logo',
   logo: {
-    src: '/src/assets/mi-logo.svg',
+    src: './src/assets/mi-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -80,8 +80,8 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
    starlight({
      title: 'Docs Con Mi Logo',
      logo: {
-       light: '/src/assets/logo-claro.svg',
-       dark: '/src/assets/logo-oscuro.svg',
+       light: './src/assets/logo-claro.svg',
+       dark: './src/assets/logo-oscuro.svg',
      },
    }),
    ```
@@ -175,7 +175,7 @@ defineConfig({
 
 Starlight cuenta con soporte incorporado para agregar enlaces a tus cuentas de redes sociales en el encabezado del sitio mediante la opción [`social`](/es/reference/configuration/#social) en la integración de Starlight.
 
-Actualmente, se admiten enlaces a Codeberg, Discord, GitHub, Mastodon, Twitter y Youtube. ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
+Actualmente, se admiten enlaces a Codeberg, Discord, GitHub, LinkedIn, Mastodon, Threads, Twitch, Twitter y Youtube. ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
 
 ```js
 // astro.config.mjs
@@ -187,12 +187,8 @@ export default defineConfig({
     starlight({
       title: 'Docs Con Mis Enlaces Sociales',
       social: {
-        codeberg: 'https://codeberg.org/knut/examples',
         discord: 'https://astro.build/chat',
         github: 'https://github.com/withastro/starlight',
-        mastodon: 'https://m.webtoo.ls/@astro',
-        twitter: 'https://twitter.com/astrodotbuild',
-        youtube: 'https://youtube.com/@astrodotbuild',
       },
     }),
   ],
@@ -288,8 +284,8 @@ Personaliza los estilos aplicados a tu sitio de Starlight proporcionando archivo
        starlight({
          title: 'Docs Con Un CSS Personalizado',
          customCss: [
-           // Ruta hacia tu archivo CSS personalizado, comenzando con /
-           '/src/styles/custom.css',
+           // Ruta relativa hacia tu archivo CSS personalizado
+           './src/styles/custom.css',
          ],
        }),
      ],
@@ -351,8 +347,8 @@ Utiliza una ruta relativa al archivo de fuente dentro de la función `url()`.
        starlight({
          title: 'Docs Con Un Tipo De Letra Personalizado',
          customCss: [
-           // Ruta al archivo CSS de `@font-face`.
-           '/src/fonts/font-face.css',
+           // Ruta relativa al archivo CSS de `@font-face`.
+           './src/fonts/font-face.css',
          ],
        }),
      ],

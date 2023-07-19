@@ -1,5 +1,45 @@
 # @astrojs/starlight
 
+## 0.5.3
+
+### Patch Changes
+
+- [#352](https://github.com/withastro/starlight/pull/352) [`a2e23be`](https://github.com/withastro/starlight/commit/a2e23be71d9f3592a9ac615981233bf4e9f3af6b) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Fix page scrolling when the window resizes, while the mobile nav is open
+
+- [#353](https://github.com/withastro/starlight/pull/353) [`65b2b75`](https://github.com/withastro/starlight/commit/65b2b7561a185be29ff7f773bf9432dc3c4da2e4) Thanks [@liruifengv](https://github.com/liruifengv)! - Add Simplified Chinese language support
+
+## 0.5.2
+
+### Patch Changes
+
+- [#343](https://github.com/withastro/starlight/pull/343) [`d618678`](https://github.com/withastro/starlight/commit/d618678b1901c621e1c8d2dc1a34ee299582b14e) Thanks [@delucis](https://github.com/delucis)! - Fix escaping of non-relative user config file paths for custom CSS and logos
+
+## 0.5.1
+
+### Patch Changes
+
+- [#336](https://github.com/withastro/starlight/pull/336) [`2b3302b`](https://github.com/withastro/starlight/commit/2b3302b80451f318fb05a5e8a7284feb28999e66) Thanks [@delucis](https://github.com/delucis)! - Add support for LinkedIn, Threads, and Twitch social icon links
+
+- [#335](https://github.com/withastro/starlight/pull/335) [`757c65f`](https://github.com/withastro/starlight/commit/757c65ffc468fd2c782312b476fa7659d0cfd198) Thanks [@delucis](https://github.com/delucis)! - Fix relative path resolution on Windows
+
+- [#332](https://github.com/withastro/starlight/pull/332) [`0600c1a`](https://github.com/withastro/starlight/commit/0600c1a917bf86efa6b2d053aa47e3a4b17e8049) Thanks [@sasoria](https://github.com/sasoria)! - Add Norwegian UI translations
+
+- [#328](https://github.com/withastro/starlight/pull/328) [`e478848`](https://github.com/withastro/starlight/commit/e478848de1c41a46f58d0ac0d62d7b7272cf1241) Thanks [@astridx](https://github.com/astridx)! - Add missing accessible labels for Codeberg and YouTube social links
+
+## 0.5.0
+
+### Minor Changes
+
+- [#313](https://github.com/withastro/starlight/pull/313) [`dc42569`](https://github.com/withastro/starlight/commit/dc42569bddfae2c48ea60c0dd5cc70643a129a68) Thanks [@delucis](https://github.com/delucis)! - Add a `not-content` CSS class that allows users to opt out of Starlight’s default content styling
+
+- [#297](https://github.com/withastro/starlight/pull/297) [`fb15a9b`](https://github.com/withastro/starlight/commit/fb15a9b65252ac5fa32304096fbdb49ecdd6009b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improve `<Tabs>` component keyboard interactions
+
+- [#303](https://github.com/withastro/starlight/pull/303) [`69b7d4c`](https://github.com/withastro/starlight/commit/69b7d4c23761a45dc2b9ea75c6c9c904a885ba5d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add new global `pagination` option defaulting to `true` to define whether or not the previous and next page links are shown in the footer. A page can override this setting or the link text and/or URL using the new `prev` and `next` frontmatter fields.
+
+### Patch Changes
+
+- [#318](https://github.com/withastro/starlight/pull/318) [`5db3e6e`](https://github.com/withastro/starlight/commit/5db3e6ea2e5cb7d9552fc54567811358851fb533) Thanks [@delucis](https://github.com/delucis)! - Support relative paths in Starlight config for `customCSS` and `logo` paths
+
 ## 0.4.2
 
 ### Patch Changes

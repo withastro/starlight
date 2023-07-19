@@ -1,6 +1,6 @@
 ---
 import config from 'virtual:starlight/user-config';
-import { SidebarEntry, getPrevNextLinks } from '../utils/navigation';
+import { type SidebarEntry, getPrevNextLinks } from '../utils/navigation';
 import type { StarlightDocsEntry } from '../utils/routing';
 import type { LocaleData } from '../utils/slugs';
 
@@ -14,7 +14,10 @@ interface Props extends LocaleData {
 }
 
 const { entry, dir, lang, locale, sidebar } = Astro.props;
-const prevNextLinks = getPrevNextLinks(sidebar);
+const prevNextLinks = getPrevNextLinks(sidebar, config.pagination, {
+  prev: entry.data.prev,
+  next: entry.data.next
+});
 ---
 
 <footer>

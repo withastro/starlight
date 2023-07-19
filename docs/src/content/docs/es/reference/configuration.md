@@ -14,7 +14,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My delightful docs site',
+      title: 'Mi encantador sitio de documentación',
     }),
   ],
 });
@@ -43,7 +43,7 @@ Establece un logotipo para mostrarlo en la barra de navegación junto al título
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/mi-logo.svg',
   },
 });
 ```
@@ -295,7 +295,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
+**tipo:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
@@ -305,7 +305,10 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
@@ -318,11 +321,11 @@ starlight({
 
 Proporciona archivos CSS para personalizar el aspecto y la sensación de tu sitio Starlight.
 
-Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'/src/custom.css'`, y CSS que instalaste como un módulo npm, por ejemplo, `'@fontsource/roboto'`.
+Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'./src/custom.css'`, y CSS que instalaste como un módulo npm, por ejemplo, `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -367,3 +370,13 @@ interface HeadConfig {
 Controla si se muestra el pie de página que indica cuándo se actualizó por última vez la página.
 
 De forma predeterminada, esta función se basa en el historial Git de tu repositorio y puede no ser precisa en algunas plataformas de implementación que realizan [copias superficiales](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una página puede anular esta configuración o la fecha basada en Git utilizando el campo [`lastUpdated`](/reference/frontmatter/#lastupdated) en el frontmatter.
+
+### `pagination`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si el pie de página debe incluir enlaces a la página anterior y siguiente.
+
+Una página puede anular esta configuración o el texto del enlace y/o la URL utilizando los campos de metadatos [`prev`](/reference/frontmatter/#prev) y [`next`](/reference/frontmatter/#next).
+

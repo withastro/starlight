@@ -1,4 +1,4 @@
-import { CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import builtinTranslations from '../translations';
 import { localeToLang } from './slugs';
