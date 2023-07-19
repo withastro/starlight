@@ -2,7 +2,7 @@ import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
 import { pathWithBase } from './base';
 import { pickLang } from './i18n';
-import { Route, getLocaleRoutes, routes } from './routing';
+import { type Route, getLocaleRoutes, routes } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type {
   AutoSidebarGroup,
