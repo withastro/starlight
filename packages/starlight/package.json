@@ -31,8 +31,8 @@
     "astro": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
-    "astro": "2.7.0"
+    "@types/node": "^18.16.19",
+    "astro": "^2.8.5"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
