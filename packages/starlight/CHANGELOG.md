@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.5.4
+
+### Patch Changes
+
+- [#360](https://github.com/withastro/starlight/pull/360) [`8415df6`](https://github.com/withastro/starlight/commit/8415df63e502d517b68d7665d9257726e3dde246) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fix build warnings when using the TypeScript [`verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax) compiler option
+
 ## 0.5.3
 
 ### Patch Changes
