@@ -1,4 +1,4 @@
-import { HeadConfig, HeadConfigSchema, HeadUserConfig } from '../schemas/head';
+import { type HeadConfig, HeadConfigSchema, type HeadUserConfig } from '../schemas/head';
 
 const HeadSchema = HeadConfigSchema();
 
