@@ -7,7 +7,8 @@
     "docs",
     "documentation",
     "astro",
-    "withastro"
+    "withastro",
+    "astro-integration"
   ],
   "author": "Chris Swithinbank <swithinbank@gmail.com>",
   "license": "MIT",
