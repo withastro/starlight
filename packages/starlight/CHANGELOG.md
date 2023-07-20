@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.5.5
+
+### Patch Changes
+
+- [`a161c05`](https://github.com/withastro/starlight/commit/a161c05b74d2300c1fe49bfd8e111cc45c9a5bff) Thanks [@delucis](https://github.com/delucis)! - Fix missing metadata required for `astro add` support
+
 ## 0.5.4
 
 ### Patch Changes
