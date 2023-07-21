@@ -57,14 +57,11 @@ const { locale } = Astro.props;
       );
       display: grid;
       grid-template-columns:
-        /* 1 (site title): runs up until the main content column’s left edge.  */
-        max(
-          var(--sl-title-min-width),
-          calc(
+        /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
+        minmax(calc(
             var(--__sidebar-width) +
               max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
-          )
-        )
+          ), auto)
         /* 2 (search box): all free space that is available. */
         1fr
         /* 3 (right items): use the space that these need. */
