@@ -2,7 +2,9 @@
   "name": "@astrojs/starlight",
   "version": "0.5.5",
   "description": "Build beautiful, high-performance documentation websites with Astro",
-  "scripts": {},
+  "scripts": {
+    "test": "vitest"
+  },
   "keywords": [
     "docs",
     "documentation",
@@ -33,7 +35,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.16.19",
-    "astro": "^2.8.5"
+    "astro": "^2.8.5",
+    "vitest": "^0.33.0"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.7",
