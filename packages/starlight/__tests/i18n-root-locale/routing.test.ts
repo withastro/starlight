@@ -57,5 +57,5 @@ test('fallback routes use their own locale data', () => {
   const enGuide = routes.find((route) => route.id === 'en/guides/authoring-content.md');
   if (!enGuide) throw new Error('Expected to find English fallback route for authoring-content.md');
   expect(enGuide.locale).toBe('en');
-  expect(enGuide.lang).toBe('en');
+  expect(enGuide.lang).toBe('en-US');
 });
