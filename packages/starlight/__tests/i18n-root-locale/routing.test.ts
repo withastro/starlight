@@ -27,7 +27,7 @@ test('routes includes fallback entries for untranslated pages', () => {
 test('routes have locale data added', () => {
   for (const { id, lang, dir, locale } of routes) {
     if (id.startsWith('en')) {
-      expect(lang).toBe('en');
+      expect(lang).toBe('en-US');
       expect(dir).toBe('ltr');
       expect(locale).toBe('en');
     } else if (id.startsWith('ar')) {
