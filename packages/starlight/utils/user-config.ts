@@ -126,26 +126,21 @@ const UserConfigSchema = z.object({
 
   /** Optional details about the social media accounts for this site. */
   social: z
-    .object({
-      /** Link to the main Twitter profile for this site, e.g. `'https://twitter.com/astrodotbuild'`. */
-      twitter: z.string().url().optional(),
-      /** Link to the main Mastodon profile for this site, e.g. `'https://m.webtoo.ls/@astro'`. */
-      mastodon: z.string().url().optional(),
-      /** Link to the main GitHub org or repo for this site, e.g. `'https://github.com/withastro/starlight'`. */
-      github: z.string().url().optional(),
-      /** Link to the Discord server for this site, e.g. `'https://astro.build/chat'`. */
-      discord: z.string().url().optional(),
-      /** Link to the Codeberg profile or repository for this site, e.g. `'https://codeberg.org/knut/examples'`. */
-      codeberg: z.string().url().optional(),
-      /** Link to the Youtube channel for this site, e.g. `'https://www.youtube.com/@astrodotbuild'`. */
-      youtube: z.string().url().optional(),
-      /** Link to the Threads profile for this site, e.g. `'https://www.threads.net/@nmoodev'`. */
-      threads: z.string().url().optional(),
-      /** Link to the LinkedIn page for this site, e.g. `'https://www.linkedin.com/company/astroinc'`. */
-      linkedin: z.string().url().optional(),
-      /** Link to the Twitch profile or repository for this site, e.g. `'https://www.twitch.tv/bholmesdev'`. */
-      twitch: z.string().url().optional(),
-    })
+    .record(
+      z.enum([
+        'twitter',
+        'mastodon',
+        'github',
+        'discord',
+        'codeberg',
+        'youtube',
+        'threads',
+        'linkedin',
+        'twitch',
+      ]),
+      // Link to the respective social profile for this site
+      z.string().url()
+    )
     .optional(),
 
   /** The tagline for your website. */
