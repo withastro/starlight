@@ -1,21 +1,16 @@
 import mdx from '@astrojs/mdx';
-import type {
-  AstroConfig,
-  AstroIntegration,
-  AstroUserConfig,
-  ViteUserConfig,
-} from 'astro';
+import type { AstroIntegration, AstroUserConfig } from 'astro';
 import { spawn } from 'node:child_process';
-import { dirname, relative, resolve } from 'node:path';
+import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
-import {
-  StarlightUserConfig,
-  StarlightConfig,
-  StarlightConfigSchema,
-} from './utils/user-config';
+import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
+import {
+  StarlightConfigSchema,
+  StarlightUserConfig,
+} from './utils/user-config';
 
 export default function StarlightIntegration(
   opts: StarlightUserConfig
@@ -77,48 +72,4 @@ export default function StarlightIntegration(
   };
 
   return [starlightSitemap(userConfig), Starlight, mdx()];
-}
-
-function resolveVirtualModuleId(id: string) {
-  return '\0' + id;
-}
-
-/** Expose the Starlight user config object via a virtual module. */
-function vitePluginStarlightUserConfig(
-  opts: StarlightConfig,
-  { root }: AstroConfig
-): NonNullable<ViteUserConfig['plugins']>[number] {
-  const resolveRelativeId = (id: string) =>
-    JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
-  const modules = {
-    'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
-    'virtual:starlight/project-context': `export default ${JSON.stringify({
-      root,
-    })}`,
-    'virtual:starlight/user-css': opts.customCss
-      .map((id) => `import ${resolveRelativeId(id)};`)
-      .join(''),
-    'virtual:starlight/user-images': opts.logo
-      ? 'src' in opts.logo
-        ? `import src from ${resolveRelativeId(opts.logo.src)}; export const logos = { dark: src, light: src };`
-        : `import dark from ${resolveRelativeId(opts.logo.dark)}; import light from ${resolveRelativeId(opts.logo.light)}; export const logos = { dark, light };`
-      : 'export const logos = {};',
-  };
-  const resolutionMap = Object.fromEntries(
-    (Object.keys(modules) as (keyof typeof modules)[]).map((key) => [
-      resolveVirtualModuleId(key),
-      key,
-    ])
-  );
-
-  return {
-    name: 'vite-plugin-starlight-user-config',
-    resolveId(id): string | void {
-      if (id in modules) return resolveVirtualModuleId(id);
-    },
-    load(id): string | void {
-      const resolution = resolutionMap[id];
-      if (resolution) return modules[resolution];
-    },
-  };
 }
