@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import { docsSchema } from '../schema';
 import type { StarlightDocsEntry } from '../utils/routing';
+import { vi } from 'vitest';
 
 const frontmatterSchema = docsSchema()({
   image: () =>
@@ -33,4 +34,9 @@ export function mockDoc(
     data: frontmatterSchema.parse(data),
     render: (() => {}) as StarlightDocsEntry['render'],
   };
+}
+
+export async function mockedAstroContent(docs: Parameters<typeof mockDoc>[] = []) {
+  const mod = await vi.importActual<typeof import('astro:content')>('astro:content');
+  return { ...mod, getCollection: () => docs.map((doc) => mockDoc(...doc)) };
 }
