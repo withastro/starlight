@@ -1,1 +1,1 @@
-export default ['__tests/*'];
+export default ['__tests__/*'];

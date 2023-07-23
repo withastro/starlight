@@ -1,2 +1,3 @@
-/__tests
+__coverage__/
+__tests__/
 vitest.*
