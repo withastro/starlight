@@ -159,10 +159,23 @@ describe('getPrevNextLinks', () => {
     expect(getPrevNextLinks(sidebar, true, { next: false }).next).toBeUndefined();
   });
 
-  test('final parameter can set custom link label', () => {
+  test('final parameter can set custom link label with string', () => {
     const sidebar = getSidebar('/environmental-impact/', undefined);
     const withDefaultLabels = getPrevNextLinks(sidebar, true, {});
     const withCustomLabels = getPrevNextLinks(sidebar, true, { prev: 'x', next: 'y' });
+    expect(withCustomLabels.prev?.label).toBe('x');
+    expect(withCustomLabels.prev?.label).not.toBe(withDefaultLabels.prev?.label);
+    expect(withCustomLabels.next?.label).toBe('y');
+    expect(withCustomLabels.next?.label).not.toBe(withDefaultLabels.next?.label);
+  });
+
+  test('final parameter can set custom link label with object', () => {
+    const sidebar = getSidebar('/environmental-impact/', undefined);
+    const withDefaultLabels = getPrevNextLinks(sidebar, true, {});
+    const withCustomLabels = getPrevNextLinks(sidebar, true, {
+      prev: { label: 'x' },
+      next: { label: 'y' },
+    });
     expect(withCustomLabels.prev?.label).toBe('x');
     expect(withCustomLabels.prev?.label).not.toBe(withDefaultLabels.prev?.label);
     expect(withCustomLabels.next?.label).toBe('y');
@@ -182,6 +195,21 @@ describe('getPrevNextLinks', () => {
     expect(withCustomLinks.next?.href).toBe('/y');
     expect(withCustomLinks.next?.href).not.toBe(withDefaults.next?.href);
     expect(withCustomLinks.next?.label).toBe(withDefaults.next?.label);
+  });
+
+  test('final parameter can set custom link even if no default link existed', () => {
+    const sidebar = getSidebar('/', undefined);
+    const withDefaults = getPrevNextLinks(sidebar, true, {});
+    const withCustomLinks = getPrevNextLinks(sidebar, true, {
+      prev: { link: 'x', label: 'X' },
+    });
+    expect(withDefaults.prev).toBeUndefined();
+    expect(withCustomLinks.prev).toEqual({
+      type: 'link',
+      href: '/x/',
+      label: 'X',
+      isCurrent: false,
+    });
   });
 
   test('final parameter can override global pagination toggle', () => {
