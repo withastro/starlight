@@ -95,11 +95,16 @@ const pagefindTranslations = {
       closeBtn.addEventListener('click', closeModal);
 
       // Listen for `/` and `cmd + k` keyboard shortcuts.
+      const inputs = ["input", "select", "textarea"];
+      const isInput =
+        document.activeElement &&
+        inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1;
+      
       window.addEventListener('keydown', (e) => {
         if (e.metaKey === true && e.key === 'k') {
           dialog.open ? closeModal() : openModal();
           e.preventDefault();
-        } else if (e.key === '/' && !dialog.open) {
+        } else if (e.key === '/' && !dialog.open && !isInput) {
           openModal();
           e.preventDefault();
         }
