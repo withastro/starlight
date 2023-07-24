@@ -2,16 +2,16 @@
 import { TabItemTagname } from './rehype-tabs';
 
 interface Props {
-  label: string;
+	label: string;
 }
 
 const { label } = Astro.props;
 
 if (!label) {
-  throw new Error('Missing prop `label` on `<TabItem>` component.');
+	throw new Error('Missing prop `label` on `<TabItem>` component.');
 }
 ---
 
 <TabItemTagname data-label={label}>
-  <slot />
+	<slot />
 </TabItemTagname>

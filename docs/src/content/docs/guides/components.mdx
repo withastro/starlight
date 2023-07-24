@@ -26,7 +26,7 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 <SomeComponent prop="something" />
 
 <AnotherComponent>
-  Components can also contain **nested content**.
+	Components can also contain **nested content**.
 </AnotherComponent>
 ```
 
@@ -42,8 +42,9 @@ If these styles conflict with your component’s appearance, set the `not-conten
 ---
 // src/components/Example.astro
 ---
+
 <div class="not-content">
-  <p>Not impacted by Starlight’s default content styling.</p>
+	<p>Not impacted by Starlight’s default content styling.</p>
 </div>
 ```
 
@@ -63,16 +64,16 @@ Each `<TabItem>` must have a `label` to display to users.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 The code above generates the following tabs on the page:
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Cards
@@ -90,12 +91,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Card title="Check this out">Interesting content you want to highlight.</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 ```
 
@@ -104,12 +105,12 @@ The code above generates the following on the page:
 <Card title="Check this out">Interesting content you want to highlight.</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 
 :::tip
@@ -118,7 +119,7 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 
 ```astro
 <CardGrid stagger>
-  <!-- cards -->
+	<!-- cards -->
 </CardGrid>
 ```
 
