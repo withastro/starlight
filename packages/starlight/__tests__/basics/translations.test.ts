@@ -21,4 +21,12 @@ describe('useTranslations()', () => {
     const t = useTranslations(locale);
     expect(t('page.editLink')).toBe(translations.en?.['page.editLink']);
   });
+
+  test('returns a pick method for filtering by key', () => {
+    const t = useTranslations('en');
+    expect(t.pick('tableOfContents.')).toEqual({
+      'tableOfContents.onThisPage': 'On this page',
+      'tableOfContents.overview': 'Overview',
+    });
+  });
 });
