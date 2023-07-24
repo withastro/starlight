@@ -96,7 +96,7 @@ You should then be able to open <http://localhost:3000> and see your changes.
 
 ### Unit tests
 
-The Starlight package includes unit tests in [`packages/starlight/__tests/`](./packages/starlight/__tests/), which are run using [Vitest][vitest].
+The Starlight package includes unit tests in [`packages/starlight/__tests__/`](./packages/starlight/__tests__/), which are run using [Vitest][vitest].
 
 To run tests, move into the Starlight package and then run `pnpm test`:
 
@@ -109,7 +109,7 @@ This will run tests and then listen for changes, re-running tests when files cha
 
 #### Test environments
 
-A lot of Starlight code relies on Vite virtual modules provided either by Astro or by Starlight itself. Each subdirectory of `packages/starlight/__tests/` should contain a `vitest.config.ts` file that uses the `defineVitestConfig()` helper to define a valid test environment for tests in that directory. This helper takes a single argument, which provides a Starlight user config object:
+A lot of Starlight code relies on Vite virtual modules provided either by Astro or by Starlight itself. Each subdirectory of `packages/starlight/__tests__/` should contain a `vitest.config.ts` file that uses the `defineVitestConfig()` helper to define a valid test environment for tests in that directory. This helper takes a single argument, which provides a Starlight user config object:
 
 ```ts
 // packages/starlight/__tests/basics/vitest.config.ts
