@@ -29,7 +29,7 @@ jobs:
       - run: pnpm i
       - name: Test packages/starlight
         working-directory: ./packages/starlight
-        run: pnpm t
+        run: pnpm test:coverage
 
   pa11y:
     name: Check for accessibility issues
