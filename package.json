@@ -10,7 +10,9 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
-    "astro": "^2.8.5"
+    "astro": "^2.8.5",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.11.0"
   },
   "packageManager": "pnpm@8.2.0"
 }
