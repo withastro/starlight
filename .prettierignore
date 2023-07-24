@@ -1,6 +1,10 @@
 # Deep Directories
-**/dist
 **/node_modules
+
+# generated directories
+**/dist
+**/.astro
+**/__coverage__
 
 # Directories
 .github
