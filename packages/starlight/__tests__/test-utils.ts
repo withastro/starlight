@@ -1,5 +1,5 @@
 import { z } from 'astro/zod';
-import { docsSchema } from '../schema';
+import { docsSchema, i18nSchema } from '../schema';
 import type { StarlightDocsEntry } from '../utils/routing';
 import { vi } from 'vitest';
 
@@ -36,7 +36,22 @@ export function mockDoc(
   };
 }
 
-export async function mockedAstroContent(docs: Parameters<typeof mockDoc>[] = []) {
+function mockDict(id: string, data: z.input<ReturnType<typeof i18nSchema>>) {
+  return { id, data: i18nSchema().parse(data) };
+}
+
+export async function mockedAstroContent({
+  docs = [],
+  i18n = [],
+}: {
+  docs?: Parameters<typeof mockDoc>[];
+  i18n?: Parameters<typeof mockDict>[];
+}) {
   const mod = await vi.importActual<typeof import('astro:content')>('astro:content');
-  return { ...mod, getCollection: () => docs.map((doc) => mockDoc(...doc)) };
+  const mockDocs = docs.map((doc) => mockDoc(...doc));
+  const mockDicts = i18n.map((dict) => mockDict(...dict));
+  return {
+    ...mod,
+    getCollection: (collection: 'docs' | 'i18n') => (collection === 'i18n' ? mockDicts : mockDocs),
+  };
 }

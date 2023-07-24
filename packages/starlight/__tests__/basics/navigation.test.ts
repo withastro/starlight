@@ -2,12 +2,14 @@ import { describe, expect, test, vi } from 'vitest';
 import { flattenSidebar, getPrevNextLinks, getSidebar } from '../../utils/navigation';
 
 vi.mock('astro:content', async () =>
-  (await import('../test-utils')).mockedAstroContent([
-    ['index.mdx', { title: 'Home Page' }],
-    ['environmental-impact.md', { title: 'Eco-friendly docs' }],
-    ['guides/authoring-content.md', { title: 'Authoring Markdown' }],
-    ['guides/components.mdx', { title: 'Components' }],
-  ])
+  (await import('../test-utils')).mockedAstroContent({
+    docs: [
+      ['index.mdx', { title: 'Home Page' }],
+      ['environmental-impact.md', { title: 'Eco-friendly docs' }],
+      ['guides/authoring-content.md', { title: 'Authoring Markdown' }],
+      ['guides/components.mdx', { title: 'Components' }],
+    ],
+  })
 );
 
 describe('getSidebar', () => {
