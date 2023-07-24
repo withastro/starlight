@@ -4,7 +4,7 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
-    "test:coverage": "vitest run --coverage.enabled --coverage.all --coverage.reportsDirectory=./__coverage__"
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "docs",
