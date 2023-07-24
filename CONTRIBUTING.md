@@ -122,6 +122,17 @@ export default defineVitestConfig({
 
 This allows you to run tests of Starlight code against different combinations of Starlight configuration options.
 
+#### Test coverage
+
+To see how much of Starlight’s code is currently being tested, run `pnpm test:coverage` from the Starlight package:
+
+```sh
+cd packages/starlight
+pnpm test:coverage
+```
+
+This will print a table to your terminal and also generate an HTML report you can load in a web browser by opening [`packages/starlight/__coverage__/index.html`](./packages/starlight/__coverage__/index.html).
+
 ## Translations
 
 Translations help make Starlight accessible to more people.
