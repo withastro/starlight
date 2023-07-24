@@ -76,7 +76,9 @@ Instead of working locally on your machine, you can also contribute using an onl
    pnpm i
    ```
 
-### Testing changes while you work
+## Testing
+
+### Testing visual changes while you work
 
 Run the Astro dev server on the docs site to see how changes you make impact a project using Starlight.
 
@@ -88,6 +90,66 @@ pnpm dev
 ```
 
 You should then be able to open <http://localhost:3000> and see your changes.
+
+> **Note**
+> Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
+
+### Unit tests
+
+The Starlight package includes unit tests in [`packages/starlight/__tests__/`](./packages/starlight/__tests__/), which are run using [Vitest][vitest].
+
+To run tests, move into the Starlight package and then run `pnpm test`:
+
+```sh
+cd packages/starlight
+pnpm test
+```
+
+This will run tests and then listen for changes, re-running tests when files change.
+
+#### Test environments
+
+A lot of Starlight code relies on Vite virtual modules provided either by Astro or by Starlight itself. Each subdirectory of `packages/starlight/__tests__/` should contain a `vitest.config.ts` file that uses the `defineVitestConfig()` helper to define a valid test environment for tests in that directory. This helper takes a single argument, which provides a Starlight user config object:
+
+```ts
+// packages/starlight/__tests/basics/vitest.config.ts
+import { defineVitestConfig } from '../test-config';
+
+export default defineVitestConfig({
+  title: 'Basics',
+});
+```
+
+This allows you to run tests of Starlight code against different combinations of Starlight configuration options.
+
+#### Mocking content collections
+
+Starlight relies on a user’s `docs` and (optional) `i18n` content collections, which aren’t available during testing. You can use a top-level `vi.mock()` call and the `mockedAstroContent` helper to set up fake collection entries for the current test file:
+
+```js
+import { describe, expect, test, vi } from 'vitest';
+
+vi.mock('astro:content', async () =>
+  (await import('../test-utils')).mockedAstroContent({
+    docs: [
+      ['index.mdx', { title: 'Home Page' }],
+      ['environmental-impact.md', { title: 'Eco-friendly docs' }],
+    ],
+    i18n: [['en', { 'page.editLink': 'Modify this doc!' }]],
+  })
+);
+```
+
+#### Test coverage
+
+To see how much of Starlight’s code is currently being tested, run `pnpm test:coverage` from the Starlight package:
+
+```sh
+cd packages/starlight
+pnpm test:coverage
+```
+
+This will print a table to your terminal and also generate an HTML report you can load in a web browser by opening [`packages/starlight/__coverage__/index.html`](./packages/starlight/__coverage__/index.html).
 
 ## Translations
 
@@ -139,3 +201,4 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 [pr-docs]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request
 [gfi]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+
 [api-docs]: https://docs.astro.build/en/reference/integrations-reference/
+[vitest]: https://vitest.dev/
