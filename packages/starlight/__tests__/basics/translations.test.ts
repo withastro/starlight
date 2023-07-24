@@ -1,6 +1,24 @@
-import { expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import translations from '../../translations';
+import { useTranslations } from '../../utils/translations';
 
-test('it includes English', () => {
-  expect(translations).toHaveProperty('en');
+describe('built-in translations', () => {
+  test('includes English', () => {
+    expect(translations).toHaveProperty('en');
+  });
+});
+
+describe('useTranslations()', () => {
+  test('works when no i18n collection is available', () => {
+    const t = useTranslations(undefined);
+    expect(t).toBeTypeOf('function');
+    expect(t('page.editLink')).toBe(translations.en?.['page.editLink']);
+  });
+
+  test('returns default locale for unknown language', () => {
+    const locale = 'xx';
+    expect(translations).not.toHaveProperty(locale);
+    const t = useTranslations(locale);
+    expect(t('page.editLink')).toBe(translations.en?.['page.editLink']);
+  });
 });
