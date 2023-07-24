@@ -12,7 +12,25 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
   cancel-in-progress: true
 
+env:
+  NODE_VERSION: 16
+
 jobs:
+  unit-test:
+    name: Run unit tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Test packages/starlight
+        working-directory: ./packages/starlight
+        run: pnpm test:coverage
+
   pa11y:
     name: Check for accessibility issues
     runs-on: ubuntu-20.04
@@ -26,7 +44,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Install Dependencies
@@ -50,7 +68,7 @@ jobs:
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm i
       - name: Build docs site
