@@ -69,6 +69,12 @@ describe('getSidebar', () => {
     // @ts-expect-error — TypeScript doesn’t know we know we’re in a group.
     expect(guides.entries).toHaveLength(2);
   });
+
+  test('uses page title as label when autogenerating', () => {
+    const sidebar = getSidebar('/', undefined);
+    const homeLink = sidebar.find((item) => item.type === 'link' && item.href === '/');
+    expect(homeLink?.label).toBe('Home Page');
+  });
 });
 
 describe('flattenSidebar', () => {
