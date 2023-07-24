@@ -37,7 +37,7 @@ L’ajout d’un logo personnalisé à l’en-tête du site est un moyen rapide 
        starlight({
          title: "Docs Avec Mon Logo",
          logo: {
-           src: "/src/assets/mon-logo.svg",
+           src: "./src/assets/mon-logo.svg",
          },
        }),
      ],
@@ -52,7 +52,7 @@ Le texte du titre (`title`) le texte sera toujours inclus pour les lecteurs d’
 starlight({
   title: 'Docs Avec Mon Logo',
   logo: {
-    src: '/src/assets/mon-logo.svg',
+    src: './src/assets/mon-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -81,8 +81,8 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
    starlight({
      title: 'Docs Avec Mon Logo',
      logo: {
-       light: '/src/assets/logo-clair.svg',
-       dark: '/src/assets/logo-sombre.svg',
+       light: './src/assets/logo-clair.svg',
+       dark: './src/assets/logo-sombre.svg',
      },
    }),
    ```
@@ -178,7 +178,7 @@ defineConfig({
 
 Starlight supporte par défaut l’ajout de liens vers vos comptes de médias sociaux dans l’en-tête du site via l’option [`social`](/reference/configuration/#social) dans l’intégration Starlight.
 
-Actuellement, les liens vers Codeberg, Discord, GitHub, Mastodon, Twitter et Youtube sont pris en charge.
+Actuellement, les liens vers Codeberg, Discord, GitHub, LinkedIn, Mastodon, Threads, Twitch, Twitter et Youtube sont pris en charge.
 Faites-nous savoir sur GitHub ou Discord si vous avez besoin de la prise en charge d’un autre service !
 
 ```js
@@ -191,12 +191,8 @@ export default defineConfig({
     starlight({
       title: "Site avec des liens sociaux",
       social: {
-        codeberg: 'https://codeberg.org/knut/examples',
         discord: 'https://astro.build/chat',
         github: 'https://github.com/withastro/starlight',
-        mastodon: 'https://m.webtoo.ls/@astro',
-        twitter: 'https://twitter.com/astrodotbuild',
-        youtube: 'https://youtube.com/@astrodotbuild',
       },
     }),
   ],
@@ -293,7 +289,7 @@ Personnalisez les styles appliqués à votre site Starlight en créant des fichi
        starlight({
          title: "Site avec CSS personnalisé",
          customCss: [
-           // Chemin vers votre fichier CSS personnalisé, Commence par /
+           // Chemin relatif vers votre fichier CSS personnalisé, Commence par /
            "/src/styles/custom.css",
          ],
        }),
@@ -356,7 +352,7 @@ Pour utiliser Google Fonts, suivez le [Guide de configuration de Fontsource](#co
        starlight({
          title: "Site avec polices personnalisées",
          customCss: [
-           // Chemin vers votre fichier CSS @font-face.
+           // Chemin relatif vers votre fichier CSS @font-face.
            "/src/fonts/font-face.css",
          ],
        }),
@@ -436,3 +432,5 @@ main {
   font-family: "IBM Plex Serif", serif;
 }
 ```
+
+Suivez les [instructions de CSS personnalisé](#styles-css-personnalises) pour ajouter vos styles à votre site.
