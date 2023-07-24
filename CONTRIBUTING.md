@@ -122,6 +122,24 @@ export default defineVitestConfig({
 
 This allows you to run tests of Starlight code against different combinations of Starlight configuration options.
 
+#### Mocking content collections
+
+Starlight relies on a user’s `docs` and (optional) `i18n` content collections, which aren’t available during testing. You can use a top-level `vi.mock()` call and the `mockedAstroContent` helper to set up fake collection entries for the current test file:
+
+```js
+import { describe, expect, test, vi } from 'vitest';
+
+vi.mock('astro:content', async () =>
+  (await import('../test-utils')).mockedAstroContent({
+    docs: [
+      ['index.mdx', { title: 'Home Page' }],
+      ['environmental-impact.md', { title: 'Eco-friendly docs' }],
+    ],
+    i18n: [['en', { 'page.editLink': 'Modify this doc!' }]],
+  })
+);
+```
+
 #### Test coverage
 
 To see how much of Starlight’s code is currently being tested, run `pnpm test:coverage` from the Starlight package:
