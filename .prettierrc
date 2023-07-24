@@ -14,9 +14,9 @@
       }
     },
     {
-      "files": ["**/*.astro"],
+      "files": ["*.md", "*.mdx"],
       "options": {
-        "parser": "astro"
+        "printWidth": 80
       }
     }
   ]
