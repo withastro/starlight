@@ -21,7 +21,7 @@ const frontmatterSchema = docsSchema()({
     }),
 });
 
-export function mockDoc(
+function mockDoc(
   id: StarlightDocsEntry['id'],
   data: z.input<typeof frontmatterSchema>,
   body = ''

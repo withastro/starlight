@@ -1,22 +1,24 @@
 import config from 'virtual:starlight/user-config';
-import { expect, test } from 'vitest';
-import { getRoutes } from '../../utils/routing-internals';
-import { mockDoc } from '../test-utils';
+import { expect, test, vi } from 'vitest';
+import { routes } from '../../utils/routing';
+
+vi.mock('astro:content', async () =>
+  (await import('../test-utils')).mockedAstroContent({
+    docs: [
+      ['404.md', { title: 'Page introuvable' }],
+      ['index.mdx', { title: 'Accueil' }],
+      // @ts-expect-error — Using a slug not present in Starlight docs site
+      ['en/index.mdx', { title: 'Home page' }],
+      // @ts-expect-error — Using a slug not present in Starlight docs site
+      ['ar/index.mdx', { title: 'الصفحة الرئيسية' }],
+      ['guides/authoring-content.md', { title: 'Création de contenu en Markdown' }],
+    ],
+  })
+);
 
 test('test suite is using correct env', () => {
   expect(config.title).toBe('i18n with root locale');
 });
-
-const docs = [
-  mockDoc('404.md', { title: 'Page introuvable' }),
-  mockDoc('index.mdx', { title: 'Accueil' }),
-  // @ts-expect-error — Using a slug not present in Starlight docs site
-  mockDoc('en/index.mdx', { title: 'Home page' }),
-  // @ts-expect-error — Using a slug not present in Starlight docs site
-  mockDoc('ar/index.mdx', { title: 'الصفحة الرئيسية' }),
-  mockDoc('guides/authoring-content.md', { title: 'Création de contenu en Markdown' }),
-];
-const routes = getRoutes(docs);
 
 test('routes includes fallback entries for untranslated pages', () => {
   const numLocales = config.isMultilingual ? Object.keys(config.locales).length : 1;
