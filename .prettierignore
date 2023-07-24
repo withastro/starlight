@@ -1,7 +1,7 @@
 # Deep Directories
 **/node_modules
 
-# generated directories
+# Generated Directories
 **/dist
 **/.astro
 **/__coverage__
