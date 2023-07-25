@@ -101,6 +101,9 @@ const pagefindTranslations = {
         inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1;
       
       window.addEventListener('keydown', (e) => {
+        const isInput =
+          document.activeElement &&
+          ['input', 'select', 'textarea'].includes(document.activeElement.tagName.toLowerCase());
         if (e.metaKey === true && e.key === 'k') {
           dialog.open ? closeModal() : openModal();
           e.preventDefault();
