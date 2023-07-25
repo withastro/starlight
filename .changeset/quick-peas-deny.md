@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Prevent keydown event from firing on input elements
+Prevent search keyboard shortcuts from triggering when input elements are focused
