@@ -140,7 +140,12 @@ import { LinkCard } from '@astrojs/starlight/components';
     heading="Title with description"
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
   />
-  <LinkCard link="#link-cards" heading="Title Only" />
+  <LinkCard href="#link-cards" heading="Title Only" />
+  <LinkCard
+    href="#link-cards"
+    heading="Card with a long title that wraps plus a description"
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  />
 </CardGrid>
 
 ### Icon
