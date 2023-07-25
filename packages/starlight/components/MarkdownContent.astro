@@ -5,6 +5,11 @@
     :global(
       :not(a, strong, em, del, span, input)
         + :not(a, strong, em, del, span, input, :where(.not-content *))
+    ),
+  .content
+    :global(
+      .content
+        + :not(a, strong, em, del, span, input, :where(.not-content *))
     ) {
     margin-top: 1.5rem;
   }
