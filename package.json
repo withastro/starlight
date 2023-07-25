@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
-    "format": "pnpm prettier -w --cache --plugin prettier-plugin-astro ."
+    "format": "prettier -w --cache --plugin prettier-plugin-astro ."
   },
   "license": "MIT",
   "devDependencies": {
