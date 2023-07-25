@@ -20,3 +20,12 @@ test('default locale is set when no locales configured', () => {
 test('lastUpdated defaults to false', () => {
   expect(config.lastUpdated).toBe(false);
 });
+
+test('preserve social config order', () => {
+  expect(config.social).toMatchInlineSnapshot(`
+    {
+      "github": "https://github.com/withastro/starlight",
+      "discord": "https://astro.build/chat",
+    }
+  `);
+});
