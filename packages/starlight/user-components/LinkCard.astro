@@ -1,21 +1,18 @@
 ---
-import Icon from "./Icon.astro";
-import type { Icons } from "../components/Icons";
+import Icon from './Icon.astro';
 
 interface Props {
-  icon?: keyof typeof Icons;
   link: string;
   title: string;
   description?: string;
 }
 
-const { icon, link, title, description } = Astro.props;
+const { link, title, description } = Astro.props;
 ---
 
 <a href={link} class="content">
   <span class="flex leading">
     <p class="flex title">
-      {icon && <Icon name={icon} class="title-icon" size="1.333em" />}
       <span set:html={title} />
     </p>
     {
@@ -31,8 +28,6 @@ const { icon, link, title, description } = Astro.props;
 
 <style>
   a {
-    --sl-card-border: var(--sl-color-purple);
-    --sl-card-bg: var(--sl-color-purple-low);
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -45,22 +40,6 @@ const { icon, link, title, description } = Astro.props;
     color: var(--sl-color-gray-2);
     box-shadow: var(--sl-shadow-md);
     margin-top: 1.25em;
-  }
-  a:nth-child(4n + 1) {
-    --sl-card-border: var(--sl-color-orange);
-    --sl-card-bg: var(--sl-color-orange-low);
-  }
-  a:nth-child(4n + 3) {
-    --sl-card-border: var(--sl-color-green);
-    --sl-card-bg: var(--sl-color-green-low);
-  }
-  a:nth-child(4n + 4) {
-    --sl-card-border: var(--sl-color-red);
-    --sl-card-bg: var(--sl-color-red-low);
-  }
-  a:nth-child(4n + 5) {
-    --sl-card-border: var(--sl-color-blue);
-    --sl-card-bg: var(--sl-color-blue-low);
   }
 
   a:hover {
@@ -84,13 +63,6 @@ const { icon, link, title, description } = Astro.props;
     line-height: 120%;
     gap: 1rem;
     align-items: center;
-  }
-
-  .title-icon {
-    border: 1px solid var(--sl-card-border);
-    background-color: var(--sl-card-bg);
-    padding: 0.2em;
-    border-radius: 0.25rem;
   }
 
   .description {
