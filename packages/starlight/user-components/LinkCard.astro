@@ -1,24 +1,24 @@
 ---
 import Icon from './Icon.astro';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
-  link: string;
-  title: string;
+interface Props extends HTMLAttributes<'a'> {
+  heading: string;
   description?: string;
 }
 
-const { link, title, description } = Astro.props;
+const { heading, description, ...attributes } = Astro.props;
 ---
 
-<a href={link} class="content">
+<a {...attributes} class="content">
   <span class="flex leading">
     <p class="flex title">
-      <span set:html={title} />
+      <span set:html={heading} />
     </p>
     {
       description && (
         <p class="description">
-          <span set:html={title} />
+          <span set:html={description} />
         </p>
       )
     }
