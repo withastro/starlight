@@ -124,7 +124,22 @@ const UserConfigSchema = z.object({
   /** Set a logo image to show in the navigation bar alongside or instead of the site title. */
   logo: LogoConfigSchema(),
 
-  /** Optional details about the social media accounts for this site. */
+  /**
+   * Optional details about the social media accounts for this site.
+   *
+   * @example
+   * social: {
+   *   codeberg: 'https://codeberg.org/knut/examples',
+   *   discord: 'https://astro.build/chat',
+   *   github: 'https://github.com/withastro/starlight',
+   *   linkedin: 'https://www.linkedin.com/company/astroinc',
+   *   mastodon: 'https://m.webtoo.ls/@astro',
+   *   threads: 'https://www.threads.net/@nmoodev',
+   *   twitch: 'https://www.twitch.tv/bholmesdev',
+   *   twitter: 'https://twitter.com/astrodotbuild',
+   *   youtube: 'https://youtube.com/@astrodotbuild',
+   * }
+   */
   social: z
     .record(
       z.enum([
