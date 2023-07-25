@@ -12,7 +12,7 @@ const { heading, description, ...attributes } = Astro.props;
 
 <a {...attributes} class="content">
   <span class="flex leading">
-    <p class="flex title">
+    <p class="title">
       <span set:html={heading} />
     </p>
     {
@@ -23,14 +23,14 @@ const { heading, description, ...attributes } = Astro.props;
       )
     }
   </span>
-  <Icon name="right-arrow" size="1.333em" />
+  <!-- TODO: Does this need adjust for rtl? -->
+  <Icon name="right-arrow" size="1.333em" class="icon" />
 </a>
 
 <style>
   a {
     display: grid;
     grid-template-columns: 1fr auto;
-    align-items: center;
     gap: 0.5rem;
     width: 100%;
     border: 1px solid var(--sl-color-gray-5);
@@ -42,15 +42,6 @@ const { heading, description, ...attributes } = Astro.props;
     margin-top: 1.25em;
   }
 
-  a:hover {
-    background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-accent-high);
-  }
-
-  a :global(*) {
-    color: var(--sl-color-gray-2);
-  }
-
   .leading {
     flex-direction: column;
     gap: 0.5rem;
@@ -60,12 +51,26 @@ const { heading, description, ...attributes } = Astro.props;
     color: var(--sl-color-white);
     font-weight: 600;
     font-size: var(--sl-text-lg);
-    line-height: 120%;
-    gap: 1rem;
-    align-items: center;
+    line-height: var(--sl-line-height-headings);
   }
 
   .description {
     margin-top: 0 !important;
+    color: var(--sl-color-gray-3);
+    line-height: 150%;
+  }
+
+  a .icon {
+    color: var(--sl-color-gray-3);
+  }
+
+  /* Hover state */
+  a:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-accent-high);
+  }
+
+  a:hover .icon {
+    color: var(--sl-color-accent-high);
   }
 </style>
