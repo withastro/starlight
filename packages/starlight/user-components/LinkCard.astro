@@ -23,7 +23,8 @@ const { heading, description, ...attributes } = Astro.props;
       )
     }
   </span>
-  <!-- TODO: Does this need adjust for rtl? -->
+  <!-- TODO: Adjust for rtl, but are we able to get access to this for the
+    current locale without the user passing it through? -->
   <Icon name="right-arrow" size="1.333em" class="icon" />
 </a>
 
@@ -38,7 +39,7 @@ const { heading, description, ...attributes } = Astro.props;
     padding: 1rem;
     text-decoration: none;
     color: var(--sl-color-gray-2);
-    box-shadow: var(--sl-shadow-md);
+    box-shadow: var(--sl-shadow-sm);
     margin-top: 1.25em;
   }
 
