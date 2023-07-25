@@ -385,7 +385,7 @@ A page can override this setting or the link text and/or URL using the [`prev`](
 **type:** `string`  
 **default:** `'/favicon.svg'`
 
-Set the path of the default favicon for your website.
+Set the path of the default favicon for your website which should be located in the `public` directory and be a valid (`.ico`, `.gif`, `.jpg`, `.png`, or `.svg`) icon file.
 
 Additional icons can be specified using the [`head` option](#head) and adding tags for each icon you want to support.
 
