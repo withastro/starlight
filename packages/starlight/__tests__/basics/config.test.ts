@@ -1,22 +1,31 @@
-import config from 'virtual:starlight/user-config';
-import { expect, test } from 'vitest';
+import config from "virtual:starlight/user-config";
+import { expect, test } from "vitest";
 
-test('test suite is using correct env', () => {
-  expect(config.title).toBe('Basics');
+test("test suite is using correct env", () => {
+  expect(config.title).toBe("Basics");
 });
 
-test('isMultilingual is false when no locales configured ', () => {
+test("isMultilingual is false when no locales configured ", () => {
   expect(config.locales).toBeUndefined();
   expect(config.isMultilingual).toBe(false);
 });
 
-test('default locale is set when no locales configured', () => {
+test("default locale is set when no locales configured", () => {
   expect(config.defaultLocale).not.toBeUndefined();
-  expect(config.defaultLocale.lang).toBe('en');
-  expect(config.defaultLocale.label).toBe('English');
-  expect(config.defaultLocale.dir).toBe('ltr');
+  expect(config.defaultLocale.lang).toBe("en");
+  expect(config.defaultLocale.label).toBe("English");
+  expect(config.defaultLocale.dir).toBe("ltr");
 });
 
-test('lastUpdated defaults to false', () => {
+test("lastUpdated defaults to false", () => {
   expect(config.lastUpdated).toBe(false);
+});
+
+test("social config preserves order", () => {
+  expect(config.social).toMatchInlineSnapshot(`
+    {
+      "github": "https://github.com/withastro/starlight",
+      "discord": "https://astro.build/chat",
+    }
+  `);
 });
