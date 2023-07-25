@@ -20,3 +20,8 @@ test('default locale is set when no locales configured', () => {
 test('lastUpdated defaults to false', () => {
   expect(config.lastUpdated).toBe(false);
 });
+
+test('favicon defaults to the provided SVG icon', () => {
+  expect(config.favicon.href).toBe('/favicon.svg');
+  expect(config.favicon.type).toBe('image/svg+xml');
+});

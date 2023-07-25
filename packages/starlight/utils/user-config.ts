@@ -3,6 +3,7 @@ import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { FaviconSchema } from '../schemas/favicon';
 
 const LocaleSchema = z.object({
   /** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -267,6 +268,9 @@ const UserConfigSchema = z.object({
     .describe(
       'Define if the previous and next page links should be visible in the page footer.'
     ),
+
+  /** The default favicon for your site which should be a path to an image in the `public` directory. */
+  favicon: FaviconSchema(),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

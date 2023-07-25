@@ -89,7 +89,19 @@ function getImportance(entry: HeadConfig[number]) {
   // 2. Page title
   if (entry.tag === 'title') return 90;
   // 3. Anything that isn’t an SEO meta tag.
-  if (entry.tag !== 'meta') return 80;
+  if (entry.tag !== 'meta') {
+    // The default favicon should be below any extra icons that the user may have set
+    // because if several icons are equally appropriate, the last one is used and we
+    // want to use the SVG icon when supported.
+    if (
+      entry.tag === 'link' &&
+      'rel' in entry.attrs &&
+      entry.attrs.rel === 'shortcut icon'
+    ) {
+      return 70;
+    }
+    return 80;
+  };
   // 4. SEO meta tags.
   return 0;
 }

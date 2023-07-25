@@ -379,3 +379,29 @@ By default, this feature relies on your repository’s Git history and may not b
 Define if the footer should include previous and next page links.
 
 A page can override this setting or the link text and/or URL using the [`prev`](/reference/frontmatter/#prev) and [`next`](/reference/frontmatter/#next) frontmatter fields.
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+Set the path of the default favicon for your website.
+
+Additional icons can be specified using the [`head` option](#head) and adding tags for each icon you want to support.
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Add ICO favicon fallback for Safari.
+    {
+      tag: 'link',
+      attrs: { 
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```
