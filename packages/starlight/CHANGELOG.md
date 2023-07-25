@@ -1,5 +1,29 @@
 # @astrojs/starlight
 
+## 0.5.6
+
+### Patch Changes
+
+- [#383](https://github.com/withastro/starlight/pull/383) [`0ebc47e`](https://github.com/withastro/starlight/commit/0ebc47e52dc420240c8cb724c01f98dc22bdfc60) Thanks [@delucis](https://github.com/delucis)! - Fix edge case where index files in an index directory would end up with the wrong slug
+
+- [#373](https://github.com/withastro/starlight/pull/373) [`308b3aa`](https://github.com/withastro/starlight/commit/308b3aaeb0122af81a12514a81e160910f93d7a7) Thanks [@lorenzolewis](https://github.com/lorenzolewis)! - Fix visual overflow for wide logos
+
+- [#385](https://github.com/withastro/starlight/pull/385) [`fb35397`](https://github.com/withastro/starlight/commit/fb35397f107f7bbb2cb4929b7837f105f565a659) Thanks [@lorenzolewis](https://github.com/lorenzolewis)! - Fix nested elements in markdown content
+
+- [#386](https://github.com/withastro/starlight/pull/386) [`e6f6f30`](https://github.com/withastro/starlight/commit/e6f6f304437203d5ee6770092ac79063448b821f) Thanks [@huijing](https://github.com/huijing)! - Prevent search keyboard shortcuts from triggering when input elements are focused
+
+## 0.5.5
+
+### Patch Changes
+
+- [`a161c05`](https://github.com/withastro/starlight/commit/a161c05b74d2300c1fe49bfd8e111cc45c9a5bff) Thanks [@delucis](https://github.com/delucis)! - Fix missing metadata required for `astro add` support
+
+## 0.5.4
+
+### Patch Changes
+
+- [#360](https://github.com/withastro/starlight/pull/360) [`8415df6`](https://github.com/withastro/starlight/commit/8415df63e502d517b68d7665d9257726e3dde246) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fix build warnings when using the TypeScript [`verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax) compiler option
+
 ## 0.5.3
 
 ### Patch Changes

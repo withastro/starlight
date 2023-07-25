@@ -9,7 +9,7 @@ jobs:
     if: ${{ github.repository_owner == 'withastro' }}
     uses: withastro/automation/.github/workflows/congratsbot.yml@main
     with:
-      EMOJIS: '🎉,🎊,🧑‍🚀,🥳,🙌,🚀,🤩,☄️,💫,<:starlight:1107431075543797802>,<:houston_pride:1048276366518390814>'
+      EMOJIS: '🎉,🎊,🧑‍🚀,🥳,🙌,🚀,🤩,☄️,💫,<:starlight:1107431075543797802>,<:houston_pride:1130504824673284107>'
       COAUTHOR_TEMPLATES: >
         [
           "Thanks <names> for helping! ✨",

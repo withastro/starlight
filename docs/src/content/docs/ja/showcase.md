@@ -13,6 +13,8 @@ Starlightは、すでにWeb上の本番環境で使用されています。 以�
 - [NgxEditor](https://sibiraj-s.github.io/ngx-editor/)
 - [Terrateam Docs](https://terrateam.io/docs)
 - [xs-dev docs](https://xs-dev.js.org)
+- [Athena OS](https://www.athenaos.org)
+- [simple-fm](https://simple.arciniega.one)
 - [Starwoof](https://starwoof.vercel.app/) - AstroのBenとChrisが、Astroのペットたちを紹介するStarlightサイトをリアルタイムで作成する様子をご覧ください！ [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
 
 [Starlightを使用しているGitHub上のすべてのパブリックプロジェクトのリポジトリ](https://github.com/withastro/starlight/network/dependents)も確認してください。

@@ -8,6 +8,7 @@ export const locales = {
   ja: { label: '日本語', lang: 'ja' },
   fr: { label: 'Français', lang: 'fr' },
   it: { label: 'Italiano', lang: 'it' },
+  zh: { label: '简体中文', lang: 'zh' },
 };
 
 const site = 'https://starlight.astro.build/';
@@ -58,6 +59,7 @@ export default defineConfig({
             ja: 'ここからはじめる',
             fr: 'Commencez ici',
             it: 'Inizia qui',
+            zh: '从这里开始',
           },
           items: [
             {
@@ -69,6 +71,19 @@ export default defineConfig({
                 ja: '入門',
                 fr: 'Mise en route',
                 it: 'Iniziamo',
+                zh: '开始使用',
+              },
+            },
+            {
+              label: 'Manual Setup',
+              link: 'manual-setup',
+              translations: {
+                // de: 'Manual Setup',
+                es: 'Configuración Manual',
+                ja: '手動セットアップ',
+                // fr: 'Manual Setup',
+                // it: 'Manual Setup',
+                zh: '手动配置',
               },
             },
             {
@@ -80,6 +95,7 @@ export default defineConfig({
                 ja: '環境への負荷',
                 fr: 'Impact environnemental',
                 it: 'Impatto ambientale',
+                zh: '环境影响',
               },
             },
             {
@@ -97,7 +113,7 @@ export default defineConfig({
         },
         {
           label: 'Guides',
-          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides', it: "Guide", },
+          translations: { de: 'Anleitungen', es: 'Guías', ja: 'ガイド', fr: 'Guides', it: "Guide", zh: '指南' },
           autogenerate: { directory: 'guides' },
         },
         {
@@ -108,6 +124,7 @@ export default defineConfig({
             ja: 'リファレンス',
             fr: 'Référence',
             it: 'Riferimenti',
+            zh: '参考',
           },
           autogenerate: { directory: 'reference' },
         },
