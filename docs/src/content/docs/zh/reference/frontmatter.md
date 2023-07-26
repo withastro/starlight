@@ -85,7 +85,6 @@ tableOfContents: false
 
 **类型：** [`HeroConfig`](#heroconfig)
 
-
 添加一个 hero 组件到页面顶部。与 `template: splash` 配合使用效果更佳。
 
 例如，此配置显示了一些常见选项，包括从你的仓库加载图像。
@@ -171,7 +170,7 @@ prev: 继续教程
 ```md
 ---
 # 同时覆盖上一页的链接和文本
-prev: 
+prev:
   link: /unrelated-page/
   label: 一个不相关的页面
 ---

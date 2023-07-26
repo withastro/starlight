@@ -9,8 +9,8 @@
  * pickLang({ en: 'Hello', fr: 'Bonjour' }, 'en'); // => 'Hello'
  */
 export function pickLang<T extends Record<string, string>>(
-  dictionary: T,
-  lang: keyof T
+	dictionary: T,
+	lang: keyof T
 ): string | undefined {
-  return dictionary[lang];
+	return dictionary[lang];
 }

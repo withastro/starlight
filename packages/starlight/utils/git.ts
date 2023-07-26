@@ -28,69 +28,69 @@ class FileNotTrackedError extends Error {}
  * unexpected text.
  */
 export function getFileCommitDate(
-  file: string,
-  age: 'oldest' | 'newest' = 'oldest'
+	file: string,
+	age: 'oldest' | 'newest' = 'oldest'
 ): {
-  date: Date;
-  timestamp: number;
+	date: Date;
+	timestamp: number;
 } {
-  try {
-    const { stdout } = execaSync('which', ['git']);
-    if (!stdout) {
-      throw new GitNotFoundError(
-        `Failed to retrieve git history for "${file}" because git is not installed.`
-      );
-    }
-  } catch {}
+	try {
+		const { stdout } = execaSync('which', ['git']);
+		if (!stdout) {
+			throw new GitNotFoundError(
+				`Failed to retrieve git history for "${file}" because git is not installed.`
+			);
+		}
+	} catch {}
 
-  try {
-    const { stdout } = execaSync('test', ['-f', file]);
-    if (!stdout) {
-      throw new Error(
-        `Failed to retrieve git history for "${file}" because the file does not exist.`
-      );
-    }
-  } catch {}
+	try {
+		const { stdout } = execaSync('test', ['-f', file]);
+		if (!stdout) {
+			throw new Error(
+				`Failed to retrieve git history for "${file}" because the file does not exist.`
+			);
+		}
+	} catch {}
 
-  const result = execaSync(
-    'git',
-    [
-      'log',
-      `--format=%ct`,
-      '--max-count=1',
-      ...(age === 'oldest' ? ['--follow', '--diff-filter=A'] : []),
-      '--',
-      path.basename(file),
-    ],
-    {
-      cwd: path.dirname(file),
-    }
-  );
-  if (result.exitCode !== 0) {
-    throw new Error(
-      `Failed to retrieve the git history for file "${file}" with exit code ${result.exitCode}: ${result.stderr}`
-    );
-  }
-  let regex = /^(?<timestamp>\d+)$/;
+	const result = execaSync(
+		'git',
+		[
+			'log',
+			`--format=%ct`,
+			'--max-count=1',
+			...(age === 'oldest' ? ['--follow', '--diff-filter=A'] : []),
+			'--',
+			path.basename(file),
+		],
+		{
+			cwd: path.dirname(file),
+		}
+	);
+	if (result.exitCode !== 0) {
+		throw new Error(
+			`Failed to retrieve the git history for file "${file}" with exit code ${result.exitCode}: ${result.stderr}`
+		);
+	}
+	let regex = /^(?<timestamp>\d+)$/;
 
-  const output = result.stdout.trim();
+	const output = result.stdout.trim();
 
-  if (!output) {
-    throw new FileNotTrackedError(
-      `Failed to retrieve the git history for file "${file}" because the file is not tracked by git.`
-    );
-  }
+	if (!output) {
+		throw new FileNotTrackedError(
+			`Failed to retrieve the git history for file "${file}" because the file is not tracked by git.`
+		);
+	}
 
-  const match = output.match(regex);
+	const match = output.match(regex);
 
-  if (!match) {
-    throw new Error(
-      `Failed to retrieve the git history for file "${file}" with unexpected output: ${output}`
-    );
-  }
+	if (!match) {
+		throw new Error(
+			`Failed to retrieve the git history for file "${file}" with unexpected output: ${output}`
+		);
+	}
 
-  const timestamp = Number(match.groups!.timestamp);
-  const date = new Date(timestamp * 1000);
+	const timestamp = Number(match.groups!.timestamp);
+	const date = new Date(timestamp * 1000);
 
-  return { date, timestamp };
+	return { date, timestamp };
 }
