@@ -167,7 +167,7 @@ prev: チュートリアルを続ける
 ```md
 ---
 # 前のページへのリンクとテキストを上書きする
-prev: 
+prev:
   link: /unrelated-page/
   label: その他のページをチェックする
 ---

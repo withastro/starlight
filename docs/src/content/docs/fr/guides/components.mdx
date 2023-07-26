@@ -26,7 +26,7 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 <SomeComponent prop="something" />
 
 <AnotherComponent>
-  Les composants peuvent également contenir du **contenu imbriqué**.
+	Les composants peuvent également contenir du **contenu imbriqué**.
 </AnotherComponent>
 ```
 
@@ -42,8 +42,9 @@ Si ces styles entrent en conflit avec l'apparence de votre composant, définisse
 ---
 // src/components/Example.astro
 ---
+
 <div class="not-content">
-  <p>Contenu non affecté par les styles par défaut de Starlight.</p>
+	<p>Contenu non affecté par les styles par défaut de Starlight.</p>
 </div>
 ```
 
@@ -63,16 +64,16 @@ Chaque `<TabItem>` doit avoir un `label` à afficher aux utilisateurs.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 Le code ci-dessus génère les onglets suivants sur la page :
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Cards
@@ -87,29 +88,33 @@ Une `<Card>` nécessite un `title` et peut optionellement inclure un attribut `i
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<Card title="Check this out">Contenu intéressant que vous souhaitez mettre en évidence.</Card>
+<Card title="Check this out">
+	Contenu intéressant que vous souhaitez mettre en évidence.
+</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 ```
 
 Le code ci-dessus génère ce qui suit sur la page :
 
-<Card title="Check this out">Contenu intéressant que vous souhaitez mettre en évidence.</Card>
+<Card title="Check this out">
+	Contenu intéressant que vous souhaitez mettre en évidence.
+</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 
 :::tip
@@ -118,7 +123,7 @@ Ajoutez l'attribut `stagger` pour décaler verticalement la deuxième colonne de
 
 ```astro
 <CardGrid stagger>
-  <!-- cards -->
+	<!-- cards -->
 </CardGrid>
 ```
 

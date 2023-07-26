@@ -3,8 +3,8 @@ import MobileMenuToggle from '../components/MobileMenuToggle.astro';
 import { useTranslations } from '../utils/translations';
 
 interface Props {
-  hasSidebar: boolean;
-  locale: string | undefined;
+	hasSidebar: boolean;
+	locale: string | undefined;
 }
 
 const { hasSidebar, locale } = Astro.props;
@@ -12,81 +12,79 @@ const t = useTranslations(locale);
 ---
 
 <div class="page flex">
-  <header class="header"><slot name="header" /></header>
-  {
-    hasSidebar && (
-      <nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
-        <MobileMenuToggle {locale} />
-        <div id="starlight__sidebar" class="sidebar-pane">
-          <div class="sidebar-content">
-            <slot name="sidebar" />
-          </div>
-        </div>
-      </nav>
-    )
-  }
-  <div class="main-frame"><slot /></div>
+	<header class="header"><slot name="header" /></header>
+	{
+		hasSidebar && (
+			<nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
+				<MobileMenuToggle {locale} />
+				<div id="starlight__sidebar" class="sidebar-pane">
+					<div class="sidebar-content">
+						<slot name="sidebar" />
+					</div>
+				</div>
+			</nav>
+		)
+	}
+	<div class="main-frame"><slot /></div>
 </div>
 
 <style>
-  .page {
-    flex-direction: column;
-    min-height: 100vh;
-  }
+	.page {
+		flex-direction: column;
+		min-height: 100vh;
+	}
 
-  .header {
-    z-index: var(--sl-z-index-navbar);
-    position: fixed;
-    inset-inline-start: 0;
-    inset-block-start: 0;
-    width: 100%;
-    height: var(--sl-nav-height);
-    border-bottom: 1px solid var(--sl-color-hairline-shade);
-    padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
-    padding-inline-end: var(--sl-nav-pad-x);
-    background-color: var(--sl-color-bg-nav);
-  }
+	.header {
+		z-index: var(--sl-z-index-navbar);
+		position: fixed;
+		inset-inline-start: 0;
+		inset-block-start: 0;
+		width: 100%;
+		height: var(--sl-nav-height);
+		border-bottom: 1px solid var(--sl-color-hairline-shade);
+		padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+		padding-inline-end: var(--sl-nav-pad-x);
+		background-color: var(--sl-color-bg-nav);
+	}
 
-  :global([data-has-sidebar]) .header {
-    padding-inline-end: calc(
-      var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
-    );
-  }
+	:global([data-has-sidebar]) .header {
+		padding-inline-end: calc(var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size));
+	}
 
-  .sidebar-pane {
-    visibility: var(--sl-sidebar-visibility, hidden);
-    position: fixed;
-    z-index: var(--sl-z-index-menu);
-    inset-block: 0;
-    inset-inline-start: 0;
-    padding-top: var(--sl-nav-height);
-    width: 100%;
-    background-color: var(--sl-color-black);
-  }
+	.sidebar-pane {
+		visibility: var(--sl-sidebar-visibility, hidden);
+		position: fixed;
+		z-index: var(--sl-z-index-menu);
+		inset-block: 0;
+		inset-inline-start: 0;
+		padding-top: var(--sl-nav-height);
+		width: 100%;
+		background-color: var(--sl-color-black);
+	}
 
-  :global([aria-expanded='true']) ~ .sidebar-pane {
-    --sl-sidebar-visibility: visible;
-  }
+	:global([aria-expanded='true']) ~ .sidebar-pane {
+		--sl-sidebar-visibility: visible;
+	}
 
-  .sidebar-content {
-    height: 100%;
-    overflow-y: auto;
-  }
+	.sidebar-content {
+		height: 100%;
+		overflow-y: auto;
+	}
 
-  .main-frame {
-    padding-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height));
-    padding-inline-start: var(--sl-content-inline-start);
-  }
+	.main-frame {
+		padding-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height));
+		padding-inline-start: var(--sl-content-inline-start);
+	}
 
-  @media (min-width: 50rem) {
-    :global([data-has-sidebar]) .header {
-      padding-inline-end: var(--sl-nav-pad-x);
-    }
-    .sidebar-pane {
-      --sl-sidebar-visibility: visible;
-      width: var(--sl-sidebar-width);
-      background-color: var(--sl-color-bg-sidebar);
-      border-inline-end: 1px solid var(--sl-color-hairline-shade);
-    }
-  }
+	@media (min-width: 50rem) {
+		:global([data-has-sidebar]) .header {
+			padding-inline-end: var(--sl-nav-pad-x);
+		}
+		.sidebar-pane {
+			--sl-sidebar-visibility: visible;
+			width: var(--sl-sidebar-width);
+			background-color: var(--sl-color-bg-sidebar);
+			border-inline-end: 1px solid var(--sl-color-hairline-shade);
+		}
+	}
 </style>
