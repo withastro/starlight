@@ -23,7 +23,7 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 <SomeComponent prop="何か" />
 
 <AnotherComponent>
-  コンポーネントには**ネストされたコンテンツ**を含められます。
+	コンポーネントには**ネストされたコンテンツ**を含められます。
 </AnotherComponent>
 ```
 
@@ -37,8 +37,9 @@ Starlightは、Markdownコンテンツにデフォルトのスタイルを適用
 ---
 // src/components/Example.astro
 ---
+
 <div class="not-content">
-  <p>Starlightのデフォルトのコンテンツスタイルに影響を受けません。</p>
+	<p>Starlightのデフォルトのコンテンツスタイルに影響を受けません。</p>
 </div>
 ```
 
@@ -56,16 +57,16 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
-  <TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 ```
 
 上のコードは、ページに以下のタブを生成します。
 
 <Tabs>
-  <TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
-  <TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 
 ### カード
@@ -82,12 +83,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Card title="確認しよう">強調したい興味深いコンテンツ。</Card>
 
 <CardGrid>
-  <Card title="恒星" icon="star">
-    シリウス、ベガ、ペテルギウス
-  </Card>
-  <Card title="衛星" icon="moon">
-    イオ、エウロパ、ガニメデ
-  </Card>
+	<Card title="恒星" icon="star">
+		シリウス、ベガ、ペテルギウス
+	</Card>
+	<Card title="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</Card>
 </CardGrid>
 ```
 
@@ -96,12 +97,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Card title="確認しよう">強調したい興味深いコンテンツ。</Card>
 
 <CardGrid>
-  <Card title="恒星" icon="star">
-    シリウス、ベガ、ペテルギウス
-  </Card>
-  <Card title="衛星" icon="moon">
-    イオ、エウロパ、ガニメデ
-  </Card>
+	<Card title="恒星" icon="star">
+		シリウス、ベガ、ペテルギウス
+	</Card>
+	<Card title="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</Card>
 </CardGrid>
 
 :::tip[ヒント]
@@ -109,9 +110,10 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ```astro
 <CardGrid stagger>
-  <!-- カード -->
+	<!-- カード -->
 </CardGrid>
 ```
+
 :::
 
 ### アイコン

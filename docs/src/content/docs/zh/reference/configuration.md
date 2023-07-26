@@ -24,6 +24,7 @@ export default defineConfig({
 你可以将以下选项传递给`starlight`集成。
 
 ### `title` (必填)
+
 **类型：** `string`
 
 设置你的网站标题。将用于元数据和浏览器标签标题。
@@ -39,7 +40,6 @@ export default defineConfig({
 **类型：** [`LogoConfig`](#logoconfig)
 
 在导航栏中设置一个 logo 图片，与网站标题一起显示或替代网站标题。你可以设置单个 `src` 属性，也可以为 `light` 和 `dark` 设置单独的图像源。
-
 
 ```js
 starlight({
@@ -70,7 +70,6 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 **类型：** `{ baseUrl: string }`
 
 通过设置你要使用的 base URL 来启用 “编辑此页” 链接。最终链接将是`editLink.baseUrl` +当前页面路径。例如，要启用在 GitHub 上编辑`withastro/starlight` 仓库中的页面：
-
 
 ```js
 starlight({
@@ -121,7 +120,6 @@ starlight({
 #### 排序
 
 自动生成的侧边栏组按文档名字母顺序排序。例如，从 `astro.md` 生成的页面将显示在 `starlight.md`页面上方。
-
 
 #### 折叠组
 
@@ -266,7 +264,6 @@ interface LocaleConfig {
 #### root locale
 
 你可以通过设置 `root` locale 来提供不带 `/lang/` 目录的默认语言：
-
 
 ```js
 starlight({

@@ -6,11 +6,11 @@ import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-conf
 import { StarlightConfigSchema } from '../utils/user-config';
 
 export function defineVitestConfig(config: z.input<typeof StarlightConfigSchema>) {
-  return getViteConfig({
-    plugins: [
-      vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), {
-        root: new URL(import.meta.url),
-      }),
-    ],
-  });
+	return getViteConfig({
+		plugins: [
+			vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), {
+				root: new URL(import.meta.url),
+			}),
+		],
+	});
 }
