@@ -170,7 +170,7 @@ prev: Continue the tutorial
 ```md
 ---
 # Override both the previous page link and text
-prev: 
+prev:
   link: /unrelated-page/
   label: Check out this other page
 ---

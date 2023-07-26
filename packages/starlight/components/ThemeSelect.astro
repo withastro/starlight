@@ -3,96 +3,91 @@ import { useTranslations } from '../utils/translations';
 import Select from './Select.astro';
 
 interface Props {
-  locale: string | undefined;
+	locale: string | undefined;
 }
 
 const t = useTranslations(Astro.props.locale);
 ---
 
 <starlight-theme-select>
-  {
-    /* TODO: Can we give this select a width that works well for each language’s strings? */
-  }
-  <Select
-    icon="laptop"
-    label={t('themeSelect.accessibleLabel')}
-    value="auto"
-    options={[
-      { label: t('themeSelect.dark'), selected: false, value: 'dark' },
-      { label: t('themeSelect.light'), selected: false, value: 'light' },
-      { label: t('themeSelect.auto'), selected: true, value: 'auto' },
-    ]}
-    width="6.25em"
-  />
+	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
+	<Select
+		icon="laptop"
+		label={t('themeSelect.accessibleLabel')}
+		value="auto"
+		options={[
+			{ label: t('themeSelect.dark'), selected: false, value: 'dark' },
+			{ label: t('themeSelect.light'), selected: false, value: 'light' },
+			{ label: t('themeSelect.auto'), selected: true, value: 'auto' },
+		]}
+		width="6.25em"
+	/>
 </starlight-theme-select>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
-  StarlightThemeProvider.updatePickers();
+	StarlightThemeProvider.updatePickers();
 </script>
 
 <script>
-  type Theme = 'auto' | 'dark' | 'light';
+	type Theme = 'auto' | 'dark' | 'light';
 
-  class StarlightThemeSelect extends HTMLElement {
-    /** Key in `localStorage` to store color theme preference at. */
-    #key = 'starlight-theme';
+	class StarlightThemeSelect extends HTMLElement {
+		/** Key in `localStorage` to store color theme preference at. */
+		#key = 'starlight-theme';
 
-    constructor() {
-      super();
-      this.#onThemeChange(this.#loadTheme());
-      const select = this.querySelector('select');
-      if (select) {
-        select.addEventListener('change', (e) => {
-          if (e.currentTarget instanceof HTMLSelectElement) {
-            this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
-          }
-        });
-      }
-    }
+		constructor() {
+			super();
+			this.#onThemeChange(this.#loadTheme());
+			const select = this.querySelector('select');
+			if (select) {
+				select.addEventListener('change', (e) => {
+					if (e.currentTarget instanceof HTMLSelectElement) {
+						this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
+					}
+				});
+			}
+		}
 
-    /** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
-    #parseTheme(theme: unknown): Theme {
-      if (theme === 'auto' || theme === 'dark' || theme === 'light') {
-        return theme;
-      } else {
-        return 'auto';
-      }
-    }
+		/** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
+		#parseTheme(theme: unknown): Theme {
+			if (theme === 'auto' || theme === 'dark' || theme === 'light') {
+				return theme;
+			} else {
+				return 'auto';
+			}
+		}
 
-    /** Get the preferred system color scheme. */
-    #getPreferredColorScheme(): Theme {
-      return matchMedia('(prefers-color-scheme: light)').matches
-        ? 'light'
-        : 'dark';
-    }
+		/** Get the preferred system color scheme. */
+		#getPreferredColorScheme(): Theme {
+			return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+		}
 
-    /** Update select menu UI, document theme, and local storage state. */
-    #onThemeChange(theme: Theme): void {
-      StarlightThemeProvider.updatePickers(theme);
-      document.documentElement.dataset.theme =
-        theme === 'auto' ? this.#getPreferredColorScheme() : theme;
-      this.#storeTheme(theme);
-    }
+		/** Update select menu UI, document theme, and local storage state. */
+		#onThemeChange(theme: Theme): void {
+			StarlightThemeProvider.updatePickers(theme);
+			document.documentElement.dataset.theme =
+				theme === 'auto' ? this.#getPreferredColorScheme() : theme;
+			this.#storeTheme(theme);
+		}
 
-    /** Store the user’s preference in `localStorage`. */
-    #storeTheme(theme: Theme): void {
-      if (typeof localStorage !== 'undefined') {
-        if (theme === 'light' || theme === 'dark') {
-          localStorage.setItem(this.#key, theme);
-        } else {
-          localStorage.removeItem(this.#key);
-        }
-      }
-    }
+		/** Store the user’s preference in `localStorage`. */
+		#storeTheme(theme: Theme): void {
+			if (typeof localStorage !== 'undefined') {
+				if (theme === 'light' || theme === 'dark') {
+					localStorage.setItem(this.#key, theme);
+				} else {
+					localStorage.removeItem(this.#key);
+				}
+			}
+		}
 
-    /** Load the user’s preference from `localStorage`. */
-    #loadTheme(): Theme {
-      const theme =
-        typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
-      return this.#parseTheme(theme);
-    }
-  }
+		/** Load the user’s preference from `localStorage`. */
+		#loadTheme(): Theme {
+			const theme = typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
+			return this.#parseTheme(theme);
+		}
+	}
 
-  customElements.define('starlight-theme-select', StarlightThemeSelect);
+	customElements.define('starlight-theme-select', StarlightThemeSelect);
 </script>
