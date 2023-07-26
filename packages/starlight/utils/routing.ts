@@ -17,7 +17,6 @@ export interface Route extends LocaleData {
 	entry: StarlightDocsEntry;
 	entryMeta: LocaleData;
 	slug: string;
-	sidebarOrder: number | undefined;
 	id: string;
 	isFallback?: true;
 	[key: string]: unknown;
@@ -46,7 +45,6 @@ function getRoutes(): Route[] {
 		entry,
 		slug: entry.slug,
 		id: entry.id,
-		sidebarOrder: entry.data.sidebar?.order,
 		entryMeta: slugToLocaleData(entry.slug),
 		...slugToLocaleData(entry.slug),
 	}));
@@ -66,14 +64,12 @@ function getRoutes(): Route[] {
 			for (const fallback of defaultLocaleDocs) {
 				const slug = localizedSlug(fallback.slug, locale);
 				const id = localizedId(fallback.id, locale);
-				const sidebarOrder = fallback.data.sidebar?.order;
 				const doesNotNeedFallback = localeDocs.some((doc) => doc.slug === slug);
 				if (doesNotNeedFallback) continue;
 				routes.push({
 					entry: fallback,
 					slug,
 					id,
-					sidebarOrder,
 					isFallback: true,
 					lang: localeConfig.lang || 'en',
 					locale,
@@ -87,8 +83,8 @@ function getRoutes(): Route[] {
 	// Sort alphabetically by order then page slug to guarantee order regardless of platform.
 	return routes.sort((a, b) => {
 		// If no order value is found, set it to the largest number possible.
-		const aOrder = a.sidebarOrder ? a.sidebarOrder : Number.MAX_VALUE;
-		const bOrder = b.sidebarOrder ? b.sidebarOrder : Number.MAX_VALUE;
+		const aOrder = a.entry.data.sidebar.order ?? Number.MAX_VALUE;
+		const bOrder = b.entry.data.sidebar.order ?? Number.MAX_VALUE;
 
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1; // Pages are sorted by order in ascending order.
 		return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0; // If two pages have the same order value they will be sorted by their slug.
