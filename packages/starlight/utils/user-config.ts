@@ -112,29 +112,39 @@ const UserConfigSchema = z.object({
 	/** Set a logo image to show in the navigation bar alongside or instead of the site title. */
 	logo: LogoConfigSchema(),
 
-	/** Optional details about the social media accounts for this site. */
-	social: z
-		.object({
-			/** Link to the main Twitter profile for this site, e.g. `'https://twitter.com/astrodotbuild'`. */
-			twitter: z.string().url().optional(),
-			/** Link to the main Mastodon profile for this site, e.g. `'https://m.webtoo.ls/@astro'`. */
-			mastodon: z.string().url().optional(),
-			/** Link to the main GitHub org or repo for this site, e.g. `'https://github.com/withastro/starlight'`. */
-			github: z.string().url().optional(),
-			/** Link to the Discord server for this site, e.g. `'https://astro.build/chat'`. */
-			discord: z.string().url().optional(),
-			/** Link to the Codeberg profile or repository for this site, e.g. `'https://codeberg.org/knut/examples'`. */
-			codeberg: z.string().url().optional(),
-			/** Link to the Youtube channel for this site, e.g. `'https://www.youtube.com/@astrodotbuild'`. */
-			youtube: z.string().url().optional(),
-			/** Link to the Threads profile for this site, e.g. `'https://www.threads.net/@nmoodev'`. */
-			threads: z.string().url().optional(),
-			/** Link to the LinkedIn page for this site, e.g. `'https://www.linkedin.com/company/astroinc'`. */
-			linkedin: z.string().url().optional(),
-			/** Link to the Twitch profile or repository for this site, e.g. `'https://www.twitch.tv/bholmesdev'`. */
-			twitch: z.string().url().optional(),
-		})
-		.optional(),
+  /**
+   * Optional details about the social media accounts for this site.
+   *
+   * @example
+   * social: {
+   *   codeberg: 'https://codeberg.org/knut/examples',
+   *   discord: 'https://astro.build/chat',
+   *   github: 'https://github.com/withastro/starlight',
+   *   linkedin: 'https://www.linkedin.com/company/astroinc',
+   *   mastodon: 'https://m.webtoo.ls/@astro',
+   *   threads: 'https://www.threads.net/@nmoodev',
+   *   twitch: 'https://www.twitch.tv/bholmesdev',
+   *   twitter: 'https://twitter.com/astrodotbuild',
+   *   youtube: 'https://youtube.com/@astrodotbuild',
+   * }
+   */
+  social: z
+    .record(
+      z.enum([
+        'twitter',
+        'mastodon',
+        'github',
+        'discord',
+        'codeberg',
+        'youtube',
+        'threads',
+        'linkedin',
+        'twitch',
+      ]),
+      // Link to the respective social profile for this site
+      z.string().url()
+    )
+    .optional(),
 
 	/** The tagline for your website. */
 	tagline: z.string().optional().describe('The tagline for your website.'),
