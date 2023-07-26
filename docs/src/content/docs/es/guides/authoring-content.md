@@ -29,7 +29,7 @@ Puedes resaltar `código en línea` con comillas invertidas.
 
 ## Imágenes
 
-Las imágenes en Starlight utilizan el soporte de assets optimizados incorporado en Astro.
+Las imágenes en Starlight utilizan el [soporte de assets optimizados incorporado en Astro](https://docs.astro.build/en/guides/assets/).
 
 Markdown y MDX admiten la sintaxis Markdown para mostrar imágenes, que incluye alt-text para lectores de pantalla y tecnología de asistencia.
 
