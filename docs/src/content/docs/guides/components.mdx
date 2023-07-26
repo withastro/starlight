@@ -126,26 +126,74 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 
 ### Link Cards
 
-import { LinkCard } from '@astrojs/starlight/components';
+A more minimal `<LinkCard>` component can be used link to different parts of your project or to outline a section (such as a table of contents).
 
-<LinkCard
-  href="#link-cards"
-  heading="A single card by itself"
-  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-/>
+A `<LinkCard>` requires a `heading` and can optionally include a `description`. You can [`<a>` HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes) attributes such as `href` to specify the link or `target` to set where the linked URL is opened.
+
+You can also use `<CardGrid>` with `<LinkCard>`.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
-  <LinkCard
-    href="#link-cards"
-    heading="Title with description"
-    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  />
-  <LinkCard href="#link-cards" heading="Title Only" />
-  <LinkCard
-    href="#link-cards"
-    heading="Card with a long title that wraps plus a description"
-    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  />
+    <LinkCard
+        heading="Authoring Content in Markdown"
+        description="An overview of the Markdown syntax Starlight supports."
+        href="/guides/authoring-content/"
+    />
+    <LinkCard
+        heading="Components"
+        description="Using components in MDX with Starlight."
+        href="/guides/components/"
+    />
+    <LinkCard
+        heading="Customizing Starlight"
+        description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+        href="/guides/customization/"
+    />
+    <LinkCard
+        heading="Internationalization (i18n)"
+        description="Learn how to configure your Starlight site to support multiple languages."
+        href="/guides/i18n/"
+    />
+    <LinkCard
+        heading="Project Structure"
+        description="Learn how to organize files in your Starlight project."
+        href="/guides/project-structure/"
+    />
+</CardGrid>
+```
+
+The above code generates the following on the page:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<CardGrid>
+    <LinkCard
+        heading="Authoring Content in Markdown"
+        description="An overview of the Markdown syntax Starlight supports."
+        href="/guides/authoring-content/"
+    />
+    <LinkCard
+        heading="Components"
+        description="Using components in MDX with Starlight."
+        href="/guides/components/"
+    />
+    <LinkCard
+        heading="Customizing Starlight"
+        description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+        href="/guides/customization/"
+    />
+    <LinkCard
+        heading="Internationalization (i18n)"
+        description="Learn how to configure your Starlight site to support multiple languages."
+        href="/guides/i18n/"
+    />
+    <LinkCard
+        heading="Project Structure"
+        description="Learn how to organize files in your Starlight project."
+        href="/guides/project-structure/"
+    />
 </CardGrid>
 
 ### Icon
