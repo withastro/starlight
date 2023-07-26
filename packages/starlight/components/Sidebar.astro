@@ -5,38 +5,38 @@ import SidebarSublist from './SidebarSublist.astro';
 import ThemeSelect from './ThemeSelect.astro';
 
 interface Props {
-  sidebar: ReturnType<typeof getSidebar>;
-  locale: string | undefined;
+	sidebar: ReturnType<typeof getSidebar>;
+	locale: string | undefined;
 }
 
 const { sidebar, locale } = Astro.props;
 ---
 
 <div class="sidebar flex">
-  <SidebarSublist sublist={sidebar} />
-  <div class="mobile-preferences flex md:hidden">
-    <ThemeSelect {locale} />
-    <LanguageSelect {locale} />
-  </div>
+	<SidebarSublist sublist={sidebar} />
+	<div class="mobile-preferences flex md:hidden">
+		<ThemeSelect {locale} />
+		<LanguageSelect {locale} />
+	</div>
 </div>
 
 <style>
-  .sidebar {
-    height: 100%;
-    padding: 1rem var(--sl-sidebar-pad-x);
-    flex-direction: column;
-    gap: 1rem;
-  }
+	.sidebar {
+		height: 100%;
+		padding: 1rem var(--sl-sidebar-pad-x);
+		flex-direction: column;
+		gap: 1rem;
+	}
 
-  .mobile-preferences {
-    justify-content: space-between;
-    border-top: 1px solid var(--sl-color-gray-6);
-    padding: 0.5rem 0;
-  }
+	.mobile-preferences {
+		justify-content: space-between;
+		border-top: 1px solid var(--sl-color-gray-6);
+		padding: 0.5rem 0;
+	}
 
-  @media (min-width: 50rem) {
-    .sidebar > :global(:nth-last-child(2)) {
-      padding-bottom: 1rem;
-    }
-  }
+	@media (min-width: 50rem) {
+		.sidebar > :global(:nth-last-child(2)) {
+			padding-bottom: 1rem;
+		}
+	}
 </style>

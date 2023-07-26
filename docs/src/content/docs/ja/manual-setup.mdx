@@ -49,11 +49,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '私の楽しいドキュメントサイト',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '私の楽しいドキュメントサイト',
+		}),
+	],
 });
 ```
 
@@ -71,7 +71,7 @@ import { defineCollection } from 'astro:content';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ schema: docsSchema() }),
 };
 ```
 
