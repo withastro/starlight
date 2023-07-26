@@ -385,9 +385,15 @@ A page can override this setting or the link text and/or URL using the [`prev`](
 **type:** `string`  
 **default:** `'/favicon.svg'`
 
-Set the path of the default favicon for your website which should be located in the `public` directory and be a valid (`.ico`, `.gif`, `.jpg`, `.png`, or `.svg`) icon file.
+Set the path of the default favicon for your website which should be located in the `public/` directory and be a valid (`.ico`, `.gif`, `.jpg`, `.png`, or `.svg`) icon file.
 
-Additional icons can be specified using the [`head` option](#head) and adding tags for each icon you want to support.
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+If you need to set additional variants or fallback favicons, you can add tags using the [`head` option](#head):
 
 ```js
 starlight({
@@ -396,7 +402,7 @@ starlight({
     // Add ICO favicon fallback for Safari.
     {
       tag: 'link',
-      attrs: { 
+      attrs: {
         rel: 'icon',
         href:'/images/favicon.ico',
         sizes: '32x32',
