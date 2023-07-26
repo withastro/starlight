@@ -29,7 +29,7 @@ You can highlight `inline code` with backticks.
 
 ## Images
 
-Images in Starlight use Astro's built-in optimized asset support.
+Images in Starlight use [Astro’s built-in optimized asset support](https://docs.astro.build/en/guides/assets/).
 
 Markdown and MDX support the Markdown syntax for displaying images that includes alt-text for screen readers and assistive technology.
 
