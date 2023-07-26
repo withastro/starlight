@@ -2,6 +2,7 @@
 title: Starlight Showcase
 description: See sites built with Starlight around the web!
 ---
+
 Starlight is already being used in production around the web. See some examples below, and PR your own link if you have built your documentation site with Starlight!
 
 - [PubIndexAPI Docs](https://docs.pubindexapi.com/)
@@ -15,6 +16,5 @@ Starlight is already being used in production around the web. See some examples 
 - [Athena OS](https://www.athenaos.org)
 - [simple-fm](https://simple.arciniega.one)
 - [Starwoof](https://starwoof.vercel.app/) - Watch Ben and Chris of Astro build this Starlight site showcasing the pets of Astro in real time! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
-
 
 See all the [public project repos using Starlight on GitHub](https://github.com/withastro/starlight/network/dependents).

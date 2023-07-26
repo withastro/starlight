@@ -1,25 +1,25 @@
 <div class="content-panel">
-  <div class="container"><slot /></div>
+	<div class="container"><slot /></div>
 </div>
 
 <style>
-  .content-panel {
-    padding: 1.5rem var(--sl-content-pad-x);
-  }
-  .content-panel + .content-panel {
-    border-top: 1px solid var(--sl-color-hairline);
-  }
-  .container {
-    max-width: var(--sl-content-width);
-  }
+	.content-panel {
+		padding: 1.5rem var(--sl-content-pad-x);
+	}
+	.content-panel + .content-panel {
+		border-top: 1px solid var(--sl-color-hairline);
+	}
+	.container {
+		max-width: var(--sl-content-width);
+	}
 
-  .container > :global(* + *) {
-    margin-top: 1.5rem;
-  }
+	.container > :global(* + *) {
+		margin-top: 1.5rem;
+	}
 
-  @media (min-width: 72rem) {
-    .container {
-      margin-inline: var(--sl-content-margin-inline, auto);
-    }
-  }
+	@media (min-width: 72rem) {
+		.container {
+			margin-inline: var(--sl-content-margin-inline, auto);
+		}
+	}
 </style>

@@ -170,7 +170,7 @@ prev: Continuar con el tutorial
 ```md
 ---
 # Sobrescribir tanto el enlace de la página anterior como el texto
-prev: 
+prev:
   link: /página-no-relacionada/
   label: Echa un vistazo a esta otra página
 ---
@@ -184,5 +184,8 @@ Lo mismo que [`prev`](#prev), pero para el enlace de la página siguiente.
 
 ```md
 ---
+
 # Ocultar el enlace de la página siguiente
+
 next: false
+```

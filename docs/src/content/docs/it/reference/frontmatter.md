@@ -1,5 +1,5 @@
 ---
-title: Riferimenti frontmatter 
+title: Riferimenti frontmatter
 description: Una panoramica sui campi predefiniti del frontmatter Starlight.
 ---
 
@@ -55,7 +55,7 @@ head:
 **type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
 Sovrascrive la [configurazione globale `tableOfContents`](/it/reference/configuration/#tableofcontents).
-Cambia i livelli di titoli inclusi o, se messo a  `false`, nasconde la tabella dei contenuti della pagina.
+Cambia i livelli di titoli inclusi o, se messo a `false`, nasconde la tabella dei contenuti della pagina.
 
 ### `template`
 

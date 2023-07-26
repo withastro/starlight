@@ -155,6 +155,7 @@ sidebar: [
 #### Traduciendo etiquetas
 
 Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
+
 ```js
 sidebar: [
   // Un ejemplo de barra lateral con etiquetas traducidas al francés.
@@ -379,4 +380,3 @@ De forma predeterminada, esta función se basa en el historial Git de tu reposit
 Define si el pie de página debe incluir enlaces a la página anterior y siguiente.
 
 Una página puede anular esta configuración o el texto del enlace y/o la URL utilizando los campos de metadatos [`prev`](/reference/frontmatter/#prev) y [`next`](/reference/frontmatter/#next).
-

@@ -90,17 +90,17 @@ Curioso di come altri framework per documentazioni si comparano?
 Questi test eseguiti con [Website Carbon Calculator][wcc] confrontano pagine simili costruite con diversi framework.
 
 | Framework                   | CO₂ per visita |
-| --------------------------- | -------------------- |
-| [Starlight][sl-carbon]      | 0,01 g               |
-| [VitePress][vp-carbon]      | 0,05 g               |
-| [Docus][dc-carbon]          | 0,05 g               |
-| [Sphinx][sx-carbon]         | 0,07 g               |
-| [MkDocs][mk-carbon]         | 0,10 g               |
-| [Nextra][nx-carbon]         | 0,11 g               |
-| [docsify][dy-carbon]        | 0,11 g               |
-| [Docusaurus][ds-carbon]     | 0,24 g               |
-| [Read the Docs][rtd-carbon] | 0,24 g               |
-| [GitBook][gb-carbon]        | 0,71 g               |
+| --------------------------- | -------------- |
+| [Starlight][sl-carbon]      | 0,01 g         |
+| [VitePress][vp-carbon]      | 0,05 g         |
+| [Docus][dc-carbon]          | 0,05 g         |
+| [Sphinx][sx-carbon]         | 0,07 g         |
+| [MkDocs][mk-carbon]         | 0,10 g         |
+| [Nextra][nx-carbon]         | 0,11 g         |
+| [docsify][dy-carbon]        | 0,11 g         |
+| [Docusaurus][ds-carbon]     | 0,24 g         |
+| [Read the Docs][rtd-carbon] | 0,24 g         |
+| [GitBook][gb-carbon]        | 0,71 g         |
 
 <small>Dati collezionati il 14 Maggio 2023. Clicca i link per vedere i dati aggiornati.</small>
 
