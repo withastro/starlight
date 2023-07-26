@@ -22,10 +22,5 @@ test('lastUpdated defaults to false', () => {
 });
 
 test('preserve social config order', () => {
-  expect(config.social).toMatchInlineSnapshot(`
-    {
-      "github": "https://github.com/withastro/starlight",
-      "discord": "https://astro.build/chat",
-    }
-  `);
+  expect(Object.keys(config.social || {})).toEqual(['github', 'discord']);
 });
