@@ -98,6 +98,12 @@ const SidebarItemSchema = z.union([
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
 
 const UserConfigSchema = z.object({
+	/** In case of your doc be under a custom path you can use it to add a pre-fix */
+	basePath:z
+		.string()
+		.optional()
+		.describe('In case of your doc be under a custom path you can use it to add a pre-fix.'),
+
 	/** Title for your website. Will be used in metadata and as browser tab title. */
 	title: z
 		.string()

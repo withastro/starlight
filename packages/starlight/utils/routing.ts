@@ -9,6 +9,22 @@ import {
 	slugToParam,
 } from './slugs';
 
+const formatPathBasedOnConfig = (path: string) => {
+	if (!config.basePath) {
+		return path;
+	}
+
+	let prefix = config.basePath.startsWith("/") ?
+		config.basePath.substring(1) :
+		config.basePath;
+
+	if (prefix[prefix.length - 1] != "/" && !path.startsWith("/")) {
+		prefix += "/"
+	}
+
+	return prefix + path
+}
+
 export type StarlightDocsEntry = Omit<CollectionEntry<'docs'>, 'slug'> & {
 	slug: string;
 };
@@ -43,7 +59,7 @@ const docs: StarlightDocsEntry[] = (await getCollection('docs')).map(({ slug, ..
 function getRoutes(): Route[] {
 	const routes: Route[] = docs.map((entry) => ({
 		entry,
-		slug: entry.slug,
+		slug: formatPathBasedOnConfig(entry.slug),
 		id: entry.id,
 		entryMeta: slugToLocaleData(entry.slug),
 		...slugToLocaleData(entry.slug),
@@ -68,7 +84,7 @@ function getRoutes(): Route[] {
 				if (doesNotNeedFallback) continue;
 				routes.push({
 					entry: fallback,
-					slug,
+					slug: formatPathBasedOnConfig("") + slug),
 					id,
 					isFallback: true,
 					lang: localeConfig.lang || 'en',
