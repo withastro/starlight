@@ -1,0 +1,13 @@
+# Deep Directories
+**/node_modules
+
+# Generated Directories
+**/dist
+**/.astro
+**/__coverage__
+
+# Directories
+.changeset
+
+# Files
+pnpm-lock.yaml
