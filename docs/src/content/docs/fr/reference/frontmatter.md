@@ -133,3 +133,58 @@ interface HeroConfig {
   }>;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Remplace la [configuration globale `lastUpdated`](/fr/reference/configuration/#lastupdated). Si une date est spécifiée, elle doit être un [horodatage YAML](https://yaml.org/type/timestamp.html) valide et remplacera la date stockée dans l'historique Git pour cette page.
+
+```md
+---
+title: Page avec une date de dernière mise à jour personnalisée
+lastUpdated: 2022-08-09
+---
+```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si un string est spécifié, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
+
+```md
+---
+# Masquer le lien de la page précédente
+prev: false
+---
+```
+
+```md
+---
+# Remplacer le texte du lien de la page
+prev: Poursuivre the tutorial
+---
+```
+
+```md
+---
+# Remplacer le lien et le texte de la page
+prev:
+  link: /unrelated-page/
+  label: Consultez cette autre page
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+La même chose que [`prev`](#prev) mais pour le lien de la page suivante.
+
+```md
+---
+# Masquer le lien de la page suivante
+next: false
+---
+```

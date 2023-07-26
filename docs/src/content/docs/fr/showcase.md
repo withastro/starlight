@@ -13,6 +13,8 @@ Starlight est déjà utilisé en production sur le web. Voyez quelques exemples 
 - [NgxEditor](https://sibiraj-s.github.io/ngx-editor/)
 - [Terrateam Docs](https://terrateam.io/docs)
 - [xs-dev docs](https://xs-dev.js.org)
+- [Athena OS](https://www.athenaos.org)
+- [simple-fm](https://simple.arciniega.one)
 - [Starwoof](https://starwoof.vercel.app/) - Regardez Ben et Chris d'Astro construire ce site Starlight présentant les animaux de compagnie d'Astro en temps réel ! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
 
 Voir [les dépôts de projets publics utilisant Starlight sur GitHub](https://github.com/withastro/starlight/network/dependents).
