@@ -125,7 +125,7 @@ Par exemple, une page générée à partir de `astro.md` apparaîtrait au-dessus
 
 #### Groupes rétractables
 
-Les groupes de liens sont étendu par défaut. Vous pouvez modifier ce comportement en définissant la propriété `collapsed` d'un groupe sur `true`.
+Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comportement en définissant la propriété `collapsed` d'un groupe sur `true`.
 
 Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
 
