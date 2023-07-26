@@ -9,14 +9,39 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 	{
 		icons.map((icon) => {
 			return (
-				<div class="icon-preview">
+				<div class="icon-preview" id={icon}>
 					<Icon name={icon} size="1.5rem" />
 					<span>{icon}</span>
+					<span class="copied">copied!</span>
 				</div>
 			);
 		})
 	}
 </div>
+
+<script>
+  const icons = document.querySelectorAll('.icon-preview');
+  icons.forEach((icon) => {
+		let intervalId;
+    icon.addEventListener('click', () => {
+			const iconName = icon.id;
+			const copiedValue = `<Icon name="${iconName}" size="2rem" />`;
+			navigator.clipboard.writeText(copiedValue);
+			
+			const iconText = icon.children[1];
+			const confirm = icon.children[2];
+			confirm?.classList.toggle('copied');
+			iconText?.classList.toggle('icon-name');
+
+			intervalId = setTimeout(() => {
+				confirm?.classList.toggle('copied');
+				iconText?.classList.toggle('icon-name');
+			}, 1000)
+			
+    });
+		clearInterval(intervalId);
+  });
+</script>
 
 <style>
 	.icons-grid {
@@ -36,5 +61,19 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 		gap: 0.25rem;
 		margin: 0;
 		padding: 0.75rem;
+	}
+
+	.icon-preview:hover {
+		cursor: pointer;
+		border: 1px solid var(--sl-color-gray-4);
+		background: var(--sl-color-gray-5);
+	}
+
+	.copied {
+		display: none;
+	}
+
+	.icon-name {
+		display: none;
 	}
 </style>
