@@ -31,23 +31,20 @@ export function docsSchema() {
 			/** The title of the current page. Required. */
 			title: z.string(),
 
-      /**
-       * A short description of the current page’s content. Optional, but recommended.
-       * A good description is 150–160 characters long and outlines the key content
-       * of the page in a clear and engaging way.
-       */
-      description: z.string().optional(),
+			/**
+			 * A short description of the current page’s content. Optional, but recommended.
+			 * A good description is 150–160 characters long and outlines the key content
+			 * of the page in a clear and engaging way.
+			 */
+			description: z.string().optional(),
 
-      /**
-       * Custom URL where a reader can edit this page.
-       * Overrides the `editLink.baseUrl` global config if set.
-       *
-       * Can also be set to `false` to disable showing an edit link on this page.
-       */
-      editUrl: z
-        .union([z.string().url(), z.boolean()])
-        .optional()
-        .default(true),
+			/**
+			 * Custom URL where a reader can edit this page.
+			 * Overrides the `editLink.baseUrl` global config if set.
+			 *
+			 * Can also be set to `false` to disable showing an edit link on this page.
+			 */
+			editUrl: z.union([z.string().url(), z.boolean()]).optional().default(true),
 
 			/** Set custom `<head>` tags just for this page. */
 			head: HeadConfigSchema(),
@@ -119,27 +116,25 @@ export function docsSchema() {
 			 */
 			lastUpdated: z.union([z.date(), z.boolean()]).optional(),
 
-      /**
-       * The previous navigation link configuration.
-       * Overrides the `pagination` global config or the link text and/or URL.
-       */
-      prev: PrevNextLinkConfigSchema(),
-      /**
-       * The next navigation link configuration.
-       * Overrides the `pagination` global config or the link text and/or URL.
-       */
-      next: PrevNextLinkConfigSchema(),
+			/**
+			 * The previous navigation link configuration.
+			 * Overrides the `pagination` global config or the link text and/or URL.
+			 */
+			prev: PrevNextLinkConfigSchema(),
+			/**
+			 * The next navigation link configuration.
+			 * Overrides the `pagination` global config or the link text and/or URL.
+			 */
+			next: PrevNextLinkConfigSchema(),
 
-      sidebar: z
-        .object({
-
-          /**
-           * The order of this page in the navigation.
-           * Pages are sorted by this value in ascending order. Then by slug.
-           * If not provided, pages will be sorted alphabetically by slug.
-           * If two pages have the same order value, they will be sorted alphabetically by slug.
-           */
-          order: z.number().optional()
-        })
-    });
+			sidebar: z.object({
+				/**
+				 * The order of this page in the navigation.
+				 * Pages are sorted by this value in ascending order. Then by slug.
+				 * If not provided, pages will be sorted alphabetically by slug.
+				 * If two pages have the same order value, they will be sorted alphabetically by slug.
+				 */
+				order: z.number().optional(),
+			}),
+		});
 }
