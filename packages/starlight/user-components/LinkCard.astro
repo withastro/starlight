@@ -1,81 +1,81 @@
 ---
-import Icon from "./Icon.astro";
-import type { HTMLAttributes } from "astro/types";
+import Icon from './Icon.astro';
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props extends HTMLAttributes<"a"> {
-  heading: string;
-  description?: string;
+interface Props extends HTMLAttributes<'a'> {
+	heading: string;
+	description?: string;
 }
 
 const { heading, description, ...attributes } = Astro.props;
 ---
 
 <a {...attributes} class="content">
-  <span class="flex leading">
-    <p class="title">
-      <span set:html={heading} />
-    </p>
-    {
-      description && (
-        <p class="description">
-          <span set:html={description} />
-        </p>
-      )
-    }
-  </span>
-  <Icon name="right-arrow" size="1.333em" class="icon" />
+	<span class="flex leading">
+		<p class="title">
+			<span set:html={heading} />
+		</p>
+		{
+			description && (
+				<p class="description">
+					<span set:html={description} />
+				</p>
+			)
+		}
+	</span>
+	<Icon name="right-arrow" size="1.333em" class="icon" />
 </a>
 
 <style>
-  a {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.5rem;
-    width: 100%;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    text-decoration: none;
-    color: var(--sl-color-gray-2);
-    box-shadow: var(--sl-shadow-sm);
-    margin-top: 1.25em;
-  }
+	a {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 0.5rem;
+		width: 100%;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		text-decoration: none;
+		color: var(--sl-color-gray-2);
+		box-shadow: var(--sl-shadow-sm);
+		margin-top: 1.25em;
+	}
 
-  .leading {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+	.leading {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
 
-  .title {
-    color: var(--sl-color-white);
-    font-weight: 600;
-    font-size: var(--sl-text-lg);
-    line-height: var(--sl-line-height-headings);
-  }
+	.title {
+		color: var(--sl-color-white);
+		font-weight: 600;
+		font-size: var(--sl-text-lg);
+		line-height: var(--sl-line-height-headings);
+	}
 
-  .description {
-    margin-top: 0 !important;
-    color: var(--sl-color-gray-3);
-    line-height: 150%;
-  }
+	.description {
+		margin-top: 0 !important;
+		color: var(--sl-color-gray-3);
+		line-height: 150%;
+	}
 
-  .icon {
-    color: var(--sl-color-gray-3);
-  }
+	.icon {
+		color: var(--sl-color-gray-3);
+	}
 
-  /* Handles rotating the arrow for rtl languages since there currently isn't a way to read
+	/* Handles rotating the arrow for rtl languages since there currently isn't a way to read
   direction without it being passed through a prop */
-  :global([dir="rtl"]) .icon:not(:where([dir="rtl"] [dir="ltr"] *)) {
-    transform: rotate(180deg);
-  }
+	:global([dir='rtl']) .icon:not(:where([dir='rtl'] [dir='ltr'] *)) {
+		transform: rotate(180deg);
+	}
 
-  /* Hover state */
-  a:hover {
-    background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-accent-high);
-  }
+	/* Hover state */
+	a:hover {
+		background: var(--sl-color-gray-6);
+		border-color: var(--sl-color-accent-high);
+	}
 
-  a:hover .icon {
-    color: var(--sl-color-accent-high);
-  }
+	a:hover .icon {
+		color: var(--sl-color-accent-high);
+	}
 </style>
