@@ -170,7 +170,7 @@ prev: Poursuivre the tutorial
 ```md
 ---
 # Remplacer le lien et le texte de la page
-prev: 
+prev:
   link: /unrelated-page/
   label: Consultez cette autre page
 ---
