@@ -44,7 +44,7 @@ Définit une image de logo à afficher dans la barre de navigation à côté ou 
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -122,6 +122,34 @@ starlight({
 
 Les groupes de barres latérales générées automatiquement sont triés par nom de fichier et par ordre alphabétique.
 Par exemple, une page générée à partir de `astro.md` apparaîtrait au-dessus de la page de `starlight.md`.
+
+#### Groupes rétractables
+
+Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comportement en définissant la propriété `collapsed` d'un groupe sur `true`.
+
+Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
+
+```js
+sidebar: [
+  // Un groupe rétractable de liens.
+  {
+    label: 'Collapsed Links',
+    collapsed: true,
+    items: [
+      { label: 'Introduction', link: '/intro' },
+      { label: 'Next Steps', link: '/next-steps' },
+    ],
+  },
+  // Un groupe développé contenant des sous-groupes générés automatiquement rétractés.
+  {
+    label: 'Reference',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
 
 #### Traduire les étiquettes
 
@@ -264,7 +292,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
+**type:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
@@ -274,7 +302,10 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
@@ -287,11 +318,11 @@ starlight({
 
 Fournit des fichiers CSS pour personnaliser l'aspect et la convivialité de votre site Starlight.
 
-Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, par exemple `'/src/custom.css'`, et les CSS que vous avez installés en tant que module npm, par exemple `'@fontsource/roboto'`.
+Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, par exemple `'./src/custom.css'`, et les CSS que vous avez installés en tant que module npm, par exemple `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -327,3 +358,23 @@ interface HeadConfig {
   content?: string;
 }
 ```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+Contrôlez si le pied de page affiche la date de la dernière mise à jour de la page.
+
+Par défaut, cette fonctionnalité s'appuie sur l'historique Git de votre dépôt et peut ne pas être précise sur certaines plateformes de déploiement effectuant des
+[clonages superficiels](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Une page peut remplacer ce paramètre ou
+la date basée sur Git en utilisant [le champ `lastUpdated` du frontmatter](/fr/reference/frontmatter/#lastupdated).
+
+### `pagination`
+
+**type:** `boolean`  
+**default:** `true`
+
+Définnissez si le pied de page doit inclure des liens vers les pages précédentes et suivantes.
+
+Une page peut remplacer ce paramètre ou le texte du lien et/ou l'URL en utilisant les champs de frontmatter [`prev`](/fr/reference/frontmatter/#prev) et [`next`](/fr/reference/frontmatter/#next).
