@@ -1,8 +1,8 @@
 ---
-import Icon from './Icon.astro';
-import type { HTMLAttributes } from 'astro/types';
+import Icon from "./Icon.astro";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'a'> {
+interface Props extends HTMLAttributes<"a"> {
   heading: string;
   description?: string;
 }
@@ -23,8 +23,6 @@ const { heading, description, ...attributes } = Astro.props;
       )
     }
   </span>
-  <!-- TODO: Adjust for rtl, but are we able to get access to this for the
-    current locale without the user passing it through? -->
   <Icon name="right-arrow" size="1.333em" class="icon" />
 </a>
 
@@ -61,8 +59,14 @@ const { heading, description, ...attributes } = Astro.props;
     line-height: 150%;
   }
 
-  a .icon {
+  .icon {
     color: var(--sl-color-gray-3);
+  }
+
+  /* Handles rotating the arrow for rtl languages since there currently isn't a way to read
+  direction without it being passed through a prop */
+  :global([dir="rtl"]) .icon:not(:where([dir="rtl"] [dir="ltr"] *)) {
+    transform: rotate(180deg);
   }
 
   /* Hover state */
