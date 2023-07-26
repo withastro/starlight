@@ -22,6 +22,6 @@ test('lastUpdated defaults to false', () => {
 });
 
 test('favicon defaults to the provided SVG icon', () => {
-  expect(config.favicon.href).toBe('/favicon.svg');
-  expect(config.favicon.type).toBe('image/svg+xml');
+	expect(config.favicon.href).toBe('/favicon.svg');
+	expect(config.favicon.type).toBe('image/svg+xml');
 });
