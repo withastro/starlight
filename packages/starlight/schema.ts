@@ -127,14 +127,16 @@ export function docsSchema() {
 			 */
 			next: PrevNextLinkConfigSchema(),
 
-			sidebar: z.object({
-				/**
-				 * The order of this page in the navigation.
-				 * Pages are sorted by this value in ascending order. Then by slug.
-				 * If not provided, pages will be sorted alphabetically by slug.
-				 * If two pages have the same order value, they will be sorted alphabetically by slug.
-				 */
-				order: z.number().optional(),
-			}),
+			sidebar: z
+				.object({
+					/**
+					 * The order of this page in the navigation.
+					 * Pages are sorted by this value in ascending order. Then by slug.
+					 * If not provided, pages will be sorted alphabetically by slug.
+					 * If two pages have the same order value, they will be sorted alphabetically by slug.
+					 */
+					order: z.number().optional(),
+				})
+				.default({}),
 		});
 }
