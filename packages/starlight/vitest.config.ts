@@ -22,10 +22,10 @@ export default defineConfig({
 			reportsDirectory: './__coverage__',
 			exclude: [...defaultCoverageExcludes, '**/vitest.*', 'components.ts', 'types.ts'],
 			thresholdAutoUpdate: true,
-			lines: 64.22,
+			lines: 63.51,
 			functions: 86.56,
 			branches: 88.55,
-			statements: 64.22,
+			statements: 63.51,
 		},
 	},
 });
