@@ -16,16 +16,16 @@ const defaultCoverageExcludes = [
 ];
 
 export default defineConfig({
-  test: {
-    coverage: {
-      all: true,
-      reportsDirectory: './__coverage__',
-      exclude: [...defaultCoverageExcludes, '**/vitest.*', 'components.ts', 'types.ts'],
-      thresholdAutoUpdate: true,
-      lines: 64.22,
-      functions: 86.56,
-      branches: 88.55,
-      statements: 64.22,
-    },
-  },
+	test: {
+		coverage: {
+			all: true,
+			reportsDirectory: './__coverage__',
+			exclude: [...defaultCoverageExcludes, '**/vitest.*', 'components.ts', 'types.ts'],
+			thresholdAutoUpdate: true,
+			lines: 64.22,
+			functions: 86.56,
+			branches: 88.55,
+			statements: 64.22,
+		},
+	},
 });
