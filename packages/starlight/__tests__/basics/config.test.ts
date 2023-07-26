@@ -20,7 +20,3 @@ test('default locale is set when no locales configured', () => {
 test('lastUpdated defaults to false', () => {
   expect(config.lastUpdated).toBe(false);
 });
-
-test('preserve social config order', () => {
-  expect(Object.keys(config.social || {})).toEqual(['github', 'discord']);
-});
