@@ -84,7 +84,7 @@ function getRoutes(): Route[] {
 				if (doesNotNeedFallback) continue;
 				routes.push({
 					entry: fallback,
-					slug: formatPathBasedOnConfig("") + slug),
+					slug: formatPathBasedOnConfig("") + slug,
 					id,
 					isFallback: true,
 					lang: localeConfig.lang || 'en',
