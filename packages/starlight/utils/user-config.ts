@@ -263,7 +263,7 @@ const UserConfigSchema = z.object({
 		.default(true)
 		.describe('Define if the previous and next page links should be visible in the page footer.'),
 
-	/** The default favicon for your site which should be a path to an image in the `public` directory. */
+	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
 	favicon: FaviconSchema(),
 });
 
