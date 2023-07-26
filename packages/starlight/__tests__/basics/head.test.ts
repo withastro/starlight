@@ -63,4 +63,30 @@ describe('createHead', () => {
 			{ tag: 'meta', attrs: { name: 'x' }, content: '' },
 		]);
 	});
+
+	test('places the default favicon below any user provided icons', () => {
+		const defaultFavicon = {
+			tag: 'link',
+			attrs: {
+				rel: 'shortcut icon',
+				href: '/favicon.svg',
+				type: 'image/svg+xml',
+			},
+		} as const;
+
+		const userFavicon = {
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/favicon.ico',
+				sizes: '32x32',
+			},
+			content: '',
+		} as const;
+
+		expect(createHead([defaultFavicon], [userFavicon])).toMatchObject([
+			userFavicon,
+			defaultFavicon,
+		]);
+	});
 });
