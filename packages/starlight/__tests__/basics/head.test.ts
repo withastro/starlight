@@ -81,8 +81,12 @@ describe('createHead', () => {
 				href: '/favicon.ico',
 				sizes: '32x32',
 			},
+			content: '',
 		} as const;
 
-		expect(createHead([defaultFavicon, userFavicon])).toMatchObject([userFavicon, defaultFavicon]);
+		expect(createHead([defaultFavicon], [userFavicon])).toMatchObject([
+			userFavicon,
+			defaultFavicon,
+		]);
 	});
 });
