@@ -22,7 +22,7 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
   const icons = document.querySelectorAll('.icon-preview');
   icons.forEach((icon) => {
     icon.addEventListener('click', () => {
-      const iconName = icon.id;
+      const iconName = icon.dataset.name;
       const copiedValue = `<Icon name="${iconName}" />`;
       navigator.clipboard.writeText(copiedValue);
 
