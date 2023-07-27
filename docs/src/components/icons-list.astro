@@ -26,12 +26,13 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
       const copiedValue = `<Icon name="${iconName}" />`;
       navigator.clipboard.writeText(copiedValue);
 
-      const iconLabel = document.querySelector(`#${iconName} span`);
-      iconLabel!.textContent = 'Copied!';
-
-      setTimeout(() => {
-        iconLabel!.textContent= iconName;
-      }, 1000);
+      const iconLabel = icon.querySelector('[aria-live]');
+      if (iconLabel) {
+        iconLabel.textContent = 'Copied!';
+        setTimeout(() => {
+          iconLabel.textContent = iconName;
+        }, 1000);
+      }
     });
   });
 </script>
