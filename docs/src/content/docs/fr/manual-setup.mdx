@@ -52,7 +52,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-      title: 'Mon ravissant site de documentation'
+			title: 'Mon ravissant site de documentation',
 		}),
 	],
 });
@@ -65,7 +65,6 @@ Retrouvez toutes les options disponibles dans la [référence de configuration S
 Starlight s'appuie sur les [collections de contenu d'Astro](https://docs.astro.build/fr/guides/content-collections/), qui sont configurées dans le fichier `src/content/config.ts`.
 
 Créez ou mettez à jour le fichier de configuration du contenu, en ajoutant une collection `docs` qui utilise le schéma `docsSchema` de Starlight :
-
 
 ```js ins={3,6}
 // src/content/config.ts
