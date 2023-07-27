@@ -57,17 +57,9 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 		background: none;
 	}
 
-	.icon-preview:hover {
+	.icon-preview:hover, .icon-preview:focus {
 		cursor: pointer;
 		border: 1px solid var(--sl-color-gray-4);
 		background: var(--sl-color-gray-5);
-	}
-
-	.copied {
-		display: none;
-	}
-
-	.icon-name {
-		display: none;
 	}
 </style>
