@@ -21,24 +21,18 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 <script>
   const icons = document.querySelectorAll('.icon-preview');
   icons.forEach((icon) => {
-		let intervalId;
     icon.addEventListener('click', () => {
-			const iconName = icon.id;
-			const copiedValue = `<Icon name="${iconName}" size="2rem" />`;
-			navigator.clipboard.writeText(copiedValue);
-			
-			const iconText = icon.children[1];
-			const confirm = icon.children[2];
-			confirm?.classList.toggle('copied');
-			iconText?.classList.toggle('icon-name');
+      const iconName = icon.id;
+      const copiedValue = `<Icon name="${iconName}" size="2rem" />`;
+      navigator.clipboard.writeText(copiedValue);
 
-			intervalId = setTimeout(() => {
-				confirm?.classList.toggle('copied');
-				iconText?.classList.toggle('icon-name');
-			}, 1000)
-			
+      const iconLabel = document.querySelector(`#${iconName} span`);
+      iconLabel!.textContent = 'Copied!';
+
+      setTimeout(() => {
+        iconLabel!.textContent= iconName;
+      }, 1000);
     });
-		clearInterval(intervalId);
   });
 </script>
 
