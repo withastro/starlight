@@ -9,11 +9,10 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 	{
 		icons.map((icon) => {
 			return (
-				<div class="icon-preview" id={icon}>
+				<button class="icon-preview" aria-label={`Copy ${icon} icon to clipboard`} id={icon}>
 					<Icon name={icon} size="1.5rem" />
-					<span>{icon}</span>
-					<span class="copied">copied!</span>
-				</div>
+					<span aria-live="polite">{icon}</span>
+				</button>
 			);
 		})
 	}
