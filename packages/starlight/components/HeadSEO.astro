@@ -36,8 +36,8 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 		tag: 'link',
 		attrs: {
 			rel: 'shortcut icon',
-			href: fileWithBase('/favicon.svg'),
-			type: 'image/svg+xml',
+			href: fileWithBase(config.favicon.href),
+			type: config.favicon.type,
 		},
 	},
 	// OpenGraph Tags
