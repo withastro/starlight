@@ -393,13 +393,13 @@ starlight({
 }),
 ```
 
-Si vous avez besoin de définir des variantes supplémentaires ou des favicons de secours, vous pouvez ajouter des balises en utilisant l'option [`head`](#head) :
+Si vous avez besoin de définir des variantes supplémentaires ou des icônes de secours, vous pouvez ajouter des balises en utilisant l'option [`head`](#head) :
 
 ```js
 starlight({
   favicon: '/images/favicon.svg'.
   head: [
-    // Ajouter un favicon ICO de secours pour Safari.
+    // Ajouter une icône ICO de secours pour Safari.
     {
       tag: 'link',
       attrs: {
