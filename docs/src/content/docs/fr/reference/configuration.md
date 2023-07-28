@@ -302,6 +302,7 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
     linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
     threads: 'https://www.threads.net/@nmoodev',
@@ -378,3 +379,35 @@ la date basée sur Git en utilisant [le champ `lastUpdated` du frontmatter](/fr/
 Définnissez si le pied de page doit inclure des liens vers les pages précédentes et suivantes.
 
 Une page peut remplacer ce paramètre ou le texte du lien et/ou l'URL en utilisant les champs de frontmatter [`prev`](/fr/reference/frontmatter/#prev) et [`next`](/fr/reference/frontmatter/#next).
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+Définnissez le chemin de l'icône par défaut pour votre site Web qui doit être situé dans le répertoire `public/` et être un fichier d'icône valide (`.ico`, `.gif`, `.jpg`, `.png` ou `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Si vous avez besoin de définir des variantes supplémentaires ou des favicons de secours, vous pouvez ajouter des balises en utilisant l'option [`head`](#head) :
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Ajouter un favicon ICO de secours pour Safari.
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```
