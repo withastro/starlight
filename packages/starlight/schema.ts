@@ -136,6 +136,12 @@ export function docsSchema() {
 					 * If two pages have the same order value, they will be sorted alphabetically by slug.
 					 */
 					order: z.number().optional(),
+
+					/**
+					 * The label for this page in the navigation.
+					 * Defaults to the page `title` if not set.
+					 */
+					label: z.string().optional(),
 				})
 				.default({}),
 		});
