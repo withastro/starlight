@@ -168,7 +168,11 @@ function treeify(routes: Route[], baseDir: string): Dir {
 
 /** Create a link entry for a given content collection entry. */
 function linkFromRoute(route: Route, currentPathname: string): Link {
-	return makeLink(slugToPathname(route.slug), route.entry.data.title, currentPathname);
+	return makeLink(
+		slugToPathname(route.slug),
+		route.entry.data.sidebar.label || route.entry.data.title,
+		currentPathname
+	);
 }
 
 /**
