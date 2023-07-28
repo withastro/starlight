@@ -80,15 +80,7 @@ function getRoutes(): Route[] {
 		}
 	}
 
-	// Sort alphabetically by order then page slug to guarantee order regardless of platform.
-	return routes.sort((a, b) => {
-		// If no order value is found, set it to the largest number possible.
-		const aOrder = a.entry.data.sidebar.order ?? Number.MAX_VALUE;
-		const bOrder = b.entry.data.sidebar.order ?? Number.MAX_VALUE;
-
-		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1; // Pages are sorted by order in ascending order.
-		return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0; // If two pages have the same order value they will be sorted by their slug.
-	});
+	return routes;
 }
 export const routes = getRoutes();
 
