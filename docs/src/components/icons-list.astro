@@ -19,22 +19,22 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 </div>
 
 <script>
-  const icons = document.querySelectorAll('.icon-preview');
-  icons.forEach((icon) => {
-    icon.addEventListener('click', () => {
-      const iconName = icon.dataset.name;
-      const copiedValue = `<Icon name="${iconName}" />`;
-      navigator.clipboard.writeText(copiedValue);
+	const icons = document.querySelectorAll('.icon-preview');
+	icons.forEach((icon) => {
+		icon.addEventListener('click', () => {
+			const iconName = icon.dataset.name;
+			const copiedValue = `<Icon name="${iconName}" />`;
+			navigator.clipboard.writeText(copiedValue);
 
-      const iconLabel = icon.querySelector('[aria-live]');
-      if (iconLabel) {
-        iconLabel.textContent = 'Copied!';
-        setTimeout(() => {
-          iconLabel.textContent = iconName;
-        }, 1000);
-      }
-    });
-  });
+			const iconLabel = icon.querySelector('[aria-live]');
+			if (iconLabel) {
+				iconLabel.textContent = 'Copied!';
+				setTimeout(() => {
+					iconLabel.textContent = iconName;
+				}, 1000);
+			}
+		});
+	});
 </script>
 
 <style>
@@ -58,7 +58,8 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 		background: none;
 	}
 
-	.icon-preview:hover, .icon-preview:focus {
+	.icon-preview:hover,
+	.icon-preview:focus {
 		cursor: pointer;
 		border: 1px solid var(--sl-color-gray-3);
 		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
