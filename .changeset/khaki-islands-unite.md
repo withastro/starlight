@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Fix wrapped sidebar entry line indention
+Improve styling of sidebar entries that wrap onto multiple lines
