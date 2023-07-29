@@ -373,3 +373,35 @@ interface HeadConfig {
 フッターに前のページと次のページへのリンクを含めるかどうかを定義します。
 
 [`prev`](/ja/reference/frontmatter/#prev)と[`next`](/ja/reference/frontmatter/#next)フロントマターフィールドを使用して、この設定、またはリンクテキストとURLをページごとに上書きできます。
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+サイトのデフォルトファビコンのパスを設定します。ファビコンは`public/`ディレクトリに配置され、また有効なアイコンファイル（`.ico`、`.gif`、`.jpg`、`.png`、または`.svg`）である必要があります。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+追加のバリアントやフォールバック用のファビコンを設定する必要がある場合は、[`head`オプション](#head)を使用してタグを追加できます。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Safari用にICOファビコンのフォールバックを追加します。
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```
