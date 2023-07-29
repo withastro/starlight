@@ -185,3 +185,23 @@ prev:
 next: false
 ---
 ```
+
+### `sidebar`
+
+**type:** `{ order?: number }`
+
+自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
+
+#### `order`
+
+**type:** `number`
+
+自動生成されるリンクのグループをソートする際の、このページの順番を設定します。小さな数値ほどリンクグループの上部に表示されます。
+
+```md
+---
+title: 最初に表示するページ
+sidebar:
+  order: 1
+---
+```
