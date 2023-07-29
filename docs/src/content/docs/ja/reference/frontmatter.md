@@ -188,9 +188,24 @@ next: false
 
 ### `sidebar`
 
-**type:** `{ order?: number }`
+**type:** `{ label?: string; order?: number }`
 
 自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
+
+#### `label`
+
+**type:** `string`  
+**default:** ページの[`title`](#title必須)
+
+自動生成されるリンクのグループ内に表示される、ページのサイドバー上でのラベルを設定します。
+
+```md
+---
+title: このプロジェクトについて
+sidebar:
+  label: 概要
+---
+```
 
 #### `order`
 
