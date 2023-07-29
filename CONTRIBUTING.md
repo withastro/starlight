@@ -38,9 +38,16 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
+You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) or [Gitpod](#developing-using-gitpod) to get started quickly.
+
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/). Make sure you have these installed before following these steps.
+**Prerequisites:** Make sure you have these installed before continuing.
+
+```shell
+node: "^>=16.12.0"
+pnpm: "^8.2.0"
+```
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
@@ -62,9 +69,18 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
    pnpm i
    ```
 
-#### Developing using Gitpod
+#### Developing using GitHub Codespaces
 
-Instead of working locally on your machine, you can also contribute using an online coding development environment like Gitpod.
+To get started, create a codespace for this repository by clicking this 👇
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/starlight)
+
+Your new codespace will open in a web-based version of Visual Studio Code. All development dependencies will be preinstalled.
+
+> **Note**
+> Dev containers is now an open spec which is supported by [GitHub Codespaces](https://github.com/codespaces) and [other supporting tools](https://containers.dev/supporting).
+
+#### Developing using Gitpod
 
 **Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
 
