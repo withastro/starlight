@@ -188,3 +188,40 @@ La même chose que [`prev`](#prev) mais pour le lien de la page suivante.
 next: false
 ---
 ```
+
+### `sidebar`
+
+**type:** `{ label?: string; order?: number }`
+
+Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
+
+#### `label`
+
+**type:** `string`  
+**default:** the page [`title`](#title-required)
+
+Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement. 
+
+```md
+---
+title: About this project
+sidebar:
+  label: About
+---
+```
+
+#### `order`
+
+**type:** `number`
+
+Contrôler l'ordre de cette page lors du tri d'un groupe de liens généré automatiquement.
+Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
+
+
+```md
+---
+title: Page à afficher en premier
+sidebar:
+  order: 1
+---
+```
