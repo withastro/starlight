@@ -1,9 +1,16 @@
 ---
 title: Mostrador de Starlight
-description: ¡Ve los sitios construidos con Starlight en la web!
+description: ¡Descubre sitios construidos con Starlight y herramientas comunitarias que amplían Starlight!
 ---
 
-Starlight está siendo utilizado en producción en la web. ¡Ve algunos ejemplos a continuación y envía una PR con un enlace propio si has construido tu sitio de documentación con Starlight!
+:::tip[¡Agrega el tuyo!]
+¿Has construido un sitio de Starlight o una herramienta para Starlight?
+¡Abre un PR agregando un enlace a esta página!
+:::
+
+## Sitios
+
+Starlight ya está siendo utilizado en producción. Estos son algunos de los sitios en la web:
 
 - [PubIndexAPI Docs](https://docs.pubindexapi.com/)
 - [har.fyi](https://har.fyi/)
@@ -11,10 +18,25 @@ Starlight está siendo utilizado en producción en la web. ¡Ve algunos ejemplos
 - [Astro Error Pages](https://astro-error-page-documentation.vercel.app/)
 - [Felicity](https://felicity.pages.dev/)
 - [NgxEditor](https://sibiraj-s.github.io/ngx-editor/)
+- [pls](https://dhruvkb.github.io/pls)
 - [Terrateam Docs](https://terrateam.io/docs)
 - [xs-dev docs](https://xs-dev.js.org)
 - [Athena OS](https://www.athenaos.org)
 - [simple-fm](https://simple.arciniega.one)
-- [Starwoof](https://starwoof.vercel.app/) - ¡Mira a Ben y Chris de Astro construir este sitio de Starlight mostrando las mascotas de Astro en tiempo real! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
 
 Consulta todos los [repositorios de proyectos públicos que utilizan Starlight en GitHub](https://github.com/withastro/starlight/network/dependents).
+
+## Plugins de la comunidad
+
+Estas herramientas de la comunidad, plugins e integraciones funcionan junto a Starlight para ampliar su funcionalidad.
+
+- [FeelBack](https://www.feelback.dev/blog/new-astro-starlight-integration/) — agrega un sistema de opinión de usuarios a tu sitio.
+- [starlight-blog](https://github.com/HiDeoo/starlight-blog) — agrega un blog a tu sitio de documentación.
+- [starlight-links-validator](https://github.com/HiDeoo/starlight-links-validator) — valida enlaces internos.
+- [starlight-typedoc](https://github.com/HiDeoo/starlight-typedoc) — genera páginas de Starlight a partir de TypeScript utilizando TypeDoc.
+
+## Videos
+
+- Watch Ben and Chris of Astro build [Starwoof](https://starwoof.vercel.app/) with Starlight in real time! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
+
+- ¡Observa a Ben y Chris de Astro construir [Starwoof](https://starwoof.vercel.app/) con Starlight en tiempo real! [Twitch stream: Astro x Starlight - Documentación RÁPIDA, ECOLÓGICA, NON-GMO Y ORGÁNICA](https://www.twitch.tv/videos/1841159960)
