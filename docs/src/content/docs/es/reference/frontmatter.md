@@ -196,7 +196,6 @@ next: false
 
 Controla cómo se muestra esta página en el [sidebar](/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
 
-
 #### `label`
 
 **tipo:** `string`  
