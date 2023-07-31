@@ -64,20 +64,6 @@ You can [develop locally](#developing-locally) or use an online coding developme
    pnpm i
    ```
 
-#### Developing using GitHub Codespaces
-
-To get started, create a codespace for this repository by clicking this 👇
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/starlight)
-
-Your new codespace will open in a web-based version of Visual Studio Code. All development dependencies will be preinstalled in the dev container.
-
-> [!IMPORTANT]
-> You need to use the `--host` option with `pnpm dev` or `pnpm preview` in GitHub Codespaces. Without it you will receive 502 Bad Gateway when accessing the preview URLs.
-
-> [!NOTE]
-> Dev containers is an open spec which is supported by [GitHub Codespaces](https://github.com/codespaces) and [other supporting tools](https://containers.dev/supporting).
-
 #### Developing using Gitpod
 
 **Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
@@ -89,6 +75,19 @@ Your new codespace will open in a web-based version of Visual Studio Code. All d
    ```sh
    pnpm i
    ```
+
+#### Developing using GitHub Codespaces
+
+1. **Create a new codespace** via https://codespaces.new/withastro/starlight
+
+2. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
+
+   ```sh
+   cd docs
+   pnpm dev --host
+   ```
+
+The dev container used for GitHub Codespaces can also be used with [other supporting tools](https://containers.dev/supporting), including VS Code.
 
 ## Testing
 
