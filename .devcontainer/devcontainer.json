@@ -7,7 +7,7 @@
   "waitFor": "postCreateCommand",
   "customizations": {
     "codespaces": {
-      "openFiles": ["README.md", "CONTRIBUTING.md"]
+      "openFiles": ["CONTRIBUTING.md"]
     },
     "vscode": {
       "extensions": ["astro-build.astro-vscode", "esbenp.prettier-vscode"]
