@@ -78,7 +78,7 @@ To get started, create a codespace for this repository by clicking this 👇
 Your new codespace will open in a web-based version of Visual Studio Code. All development dependencies will be preinstalled in the dev container.
 
 > [!IMPORTANT]
-> You need to use the `--host` option with `pnpm dev` or `pnpm preview` in GitHub Codespaces. Without it you will receive 502 Bad Gateway when accessing the l.
+> You need to use the `--host` option with `pnpm dev` or `pnpm preview` in GitHub Codespaces. Without it you will receive 502 Bad Gateway when accessing the preview URLs.
 
 > [!NOTE]
 > Dev containers is an open spec which is supported by [GitHub Codespaces](https://github.com/codespaces) and [other supporting tools](https://containers.dev/supporting).
