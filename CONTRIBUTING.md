@@ -75,10 +75,13 @@ To get started, create a codespace for this repository by clicking this 👇
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/starlight)
 
-Your new codespace will open in a web-based version of Visual Studio Code. All development dependencies will be preinstalled.
+Your new codespace will open in a web-based version of Visual Studio Code. All development dependencies will be preinstalled in the dev container.
 
-> **Note**
-> Dev containers is now an open spec which is supported by [GitHub Codespaces](https://github.com/codespaces) and [other supporting tools](https://containers.dev/supporting).
+> [!IMPORTANT]
+> You need to use the `--host` option with `pnpm dev` or `pnpm preview` in GitHub Codespaces. Without it you will receive 502 Bad Gateway when accessing the l.
+
+> [!NOTE]
+> Dev containers is an open spec which is supported by [GitHub Codespaces](https://github.com/codespaces) and [other supporting tools](https://containers.dev/supporting).
 
 #### Developing using Gitpod
 
@@ -107,7 +110,7 @@ pnpm dev
 
 You should then be able to open <http://localhost:3000> and see your changes.
 
-> **Note**
+> [!NOTE]
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
 
 ### Unit tests
