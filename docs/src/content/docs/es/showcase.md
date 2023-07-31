@@ -37,6 +37,4 @@ Estas herramientas de la comunidad, plugins e integraciones funcionan junto a St
 
 ## Videos
 
-- Watch Ben and Chris of Astro build [Starwoof](https://starwoof.vercel.app/) with Starlight in real time! [Twitch stream: Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
-
-- ¡Observa a Ben y Chris de Astro construir [Starwoof](https://starwoof.vercel.app/) con Starlight en tiempo real! [Twitch stream: Astro x Starlight - Documentación RÁPIDA, ECOLÓGICA, NON-GMO Y ORGÁNICA](https://www.twitch.tv/videos/1841159960)
+- ¡Observa a Ben y Chris de Astro construir [Starwoof](https://starwoof.vercel.app/) con Starlight en tiempo real! [Directo de Twitch: Astro x Starlight - Astro x Starlight - BLAZING FAST ECO-FRIENDLY NON-GMO ORGANIC docs](https://www.twitch.tv/videos/1841159960)
