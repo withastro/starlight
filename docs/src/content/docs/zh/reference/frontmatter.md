@@ -188,3 +188,39 @@ prev:
 next: false
 ---
 ```
+
+### `sidebar`
+
+**类型：** `{ label?: string; order?: number }`
+
+在使用自动生成的链接组时，控制如何在[侧边栏](/zh/reference/configuration/#sidebar)中显示此页面。
+
+#### `label`
+
+**类型：** `string`  
+**默认值：** 页面 [`title`](#title-必填)
+
+在自动生成的链接组中显示时，设置侧边栏中此页面的标签。
+
+```md
+---
+title: 关于此项目
+sidebar:
+  label: About
+---
+```
+
+#### `order`
+
+**类型：** `number`
+
+当对链接组进行自动生成排序时，控制此页面的顺序。
+数字越小，链接组中显示的越高。
+
+```md
+---
+title: 要首先显示的页面
+sidebar:
+  order: 1
+---
+```

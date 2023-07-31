@@ -296,7 +296,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**tipo:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'gitlab' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
@@ -380,3 +380,35 @@ De forma predeterminada, esta función se basa en el historial Git de tu reposit
 Define si el pie de página debe incluir enlaces a la página anterior y siguiente.
 
 Una página puede anular esta configuración o el texto del enlace y/o la URL utilizando los campos de metadatos [`prev`](/reference/frontmatter/#prev) y [`next`](/reference/frontmatter/#next).
+
+### `favicon`
+
+**tipo:** `string`  
+**por defecto:** `'/favicon.svg'`
+
+Establece la ruta del favicon predeterminado para tu sitio web, el cual debería ubicarse en el directorio `public/` y ser un archivo de icono válido (`.ico`, `.gif`, `.jpg`, `.png` o `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Si necesitas establecer variantes adicionales o favicons de respaldo, puedes agregar etiquetas utilizando la opción [`head`](#head):
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Agregar un favicon ICO de respaldo para Safari.
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```

@@ -151,7 +151,7 @@ lastUpdated: 2022-08-09
 
 **tipo:** `boolean | string | { link?: string; label?: string }`
 
-Anula la [opción global de `pagination`](/reference/configuration/#pagination). Si se especifica un string, el texto del enlace generado se reemplazará, y si se especifica un objeto, tanto el enlace como el texto pueden ser anulados.
+Anula la [opción global de `pagination`](/reference/configuration/#pagination). Si se especifica un string, el texto del enlace generado se reemplazará, y si se especifica un objeto, tanto el enlace como el texto serán anulados.
 
 ```md
 ---
@@ -188,4 +188,40 @@ Lo mismo que [`prev`](#prev), pero para el enlace de la página siguiente.
 # Ocultar el enlace de la página siguiente
 
 next: false
+```
+
+### `sidebar`
+
+**tipo:** `{ label?: string; order?: number }`
+
+Controla cómo se muestra esta página en el [sidebar](/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
+
+#### `label`
+
+**tipo:** `string`  
+**por defecto:** El [`title`](#title-requerido) de la página
+
+Establece la etiqueta para esta página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
+
+```md
+---
+title: Acerca de este proyecto
+sidebar:
+  label: Acerca de
+---
+```
+
+#### `order`
+
+**tipo:** `number`
+
+Controla el orden de esta página al ordenar un grupo de enlaces generado automáticamente.
+Los números más bajos se muestran más arriba en el grupo de enlaces.
+
+```md
+---
+title: Página para mostrar primero
+sidebar:
+  order: 1
+---
 ```
