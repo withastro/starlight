@@ -1,6 +1,6 @@
 ---
 title: Mostrador de Starlight
-description: ¡Descubre sitios construidos con Starlight y herramientas comunitarias que amplían Starlight!
+description: ¡Descubre los sitios construidos con Starlight y herramientas comunitarias que amplían Starlight!
 ---
 
 :::tip[¡Agrega el tuyo!]
