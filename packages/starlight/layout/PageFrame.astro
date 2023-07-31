@@ -46,6 +46,13 @@ const t = useTranslations(locale);
 		padding-inline-end: var(--sl-nav-pad-x);
 		background-color: var(--sl-color-bg-nav);
 	}
+	@supports (padding: max(0px)) {
+		.header {
+			padding: max(var(--sl-nav-pad-y), env(safe-area-inset-top))
+				max(var(--sl-nav-pad-x), env(safe-area-inset-right)) var(--sl-nav-pad-y)
+				max(var(--sl-nav-pad-x), env(safe-area-inset-left));
+		}
+	}
 
 	:global([data-has-sidebar]) .header {
 		padding-inline-end: calc(var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size));
@@ -79,6 +86,14 @@ const t = useTranslations(locale);
 	@media (min-width: 50rem) {
 		:global([data-has-sidebar]) .header {
 			padding-inline-end: var(--sl-nav-pad-x);
+		}
+		@supports (padding: max(0px)) {
+			:global([dir='ltr'][data-has-sidebar]) .header {
+				padding-right: max(var(--sl-nav-pad-x), env(safe-area-inset-right));
+			}
+			:global([dir='rtl'][data-has-sidebar]) .header {
+				padding-left: max(var(--sl-nav-pad-x), env(safe-area-inset-left));
+			}
 		}
 		.sidebar-pane {
 			--sl-sidebar-visibility: visible;

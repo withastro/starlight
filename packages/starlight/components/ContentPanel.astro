@@ -9,6 +9,23 @@
 	.content-panel + .content-panel {
 		border-top: 1px solid var(--sl-color-hairline);
 	}
+	@supports (padding: max(0px)) {
+		.content-panel {
+			padding-left: max(var(--sl-content-pad-x), env(safe-area-inset-left));
+			padding-right: max(var(--sl-content-pad-x), env(safe-area-inset-right));
+		}
+		@media (min-width: 50rem) {
+			:global([dir='ltr'][data-has-sidebar]) .content-panel {
+				padding-left: var(--sl-content-pad-x);
+			}
+			:global([dir='rtl'][data-has-sidebar]) .content-panel {
+				padding-right: var(--sl-content-pad-x);
+			}
+		}
+		.content-panel:last-child {
+			padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+		}
+	}
 	.container {
 		max-width: var(--sl-content-width);
 	}

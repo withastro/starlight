@@ -59,6 +59,21 @@ const t = useTranslations(locale);
 	summary::-webkit-details-marker {
 		display: none;
 	}
+	@supports (padding: max(0px)) {
+		summary {
+			padding-left: max(1rem, env(safe-area-inset-left));
+			padding-right: max(1rem, env(safe-area-inset-right));
+		}
+
+		@media (min-width: 50rem) {
+			:global([dir='ltr']) summary {
+				padding-left: 1rem;
+			}
+			:global([dir='rtl']) summary {
+				padding-right: 1rem;
+			}
+		}
+	}
 
 	.toggle {
 		flex-shrink: 0;

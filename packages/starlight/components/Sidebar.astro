@@ -27,6 +27,14 @@ const { sidebar, locale } = Astro.props;
 		flex-direction: column;
 		gap: 1rem;
 	}
+	@supports (padding: max(0px)) {
+		:global([dir='ltr']) .sidebar {
+			padding-left: max(var(--sl-sidebar-pad-x), env(safe-area-inset-left));
+		}
+		:global([dir='rtl']) .sidebar {
+			padding-right: max(var(--sl-sidebar-pad-x), env(safe-area-inset-right));
+		}
+	}
 
 	.mobile-preferences {
 		justify-content: space-between;
@@ -37,6 +45,11 @@ const { sidebar, locale } = Astro.props;
 	@media (min-width: 50rem) {
 		.sidebar > :global(:nth-last-child(2)) {
 			padding-bottom: 1rem;
+		}
+		@supports (padding: max(0px)) {
+			.sidebar > :global(:nth-last-child(2)) {
+				padding-bottom: max(1rem, env(safe-area-inset-bottom));
+			}
 		}
 	}
 </style>
