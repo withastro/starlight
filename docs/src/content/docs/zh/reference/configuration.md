@@ -379,7 +379,6 @@ interface HeadConfig {
 
 页面可以使用 [`prev`](/zh/reference/frontmatter/#prev) 和 [`next`](/zh/reference/frontmatter/#next) frontmatter 字段覆盖此设置或链接文本和/或 URL。
 
-
 ### `favicon`
 
 **类型：** `string`  
