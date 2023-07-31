@@ -5,7 +5,7 @@ description: ¡Descubre los sitios construidos con Starlight y herramientas comu
 
 :::tip[¡Agrega el tuyo!]
 ¿Has construido un sitio de Starlight o una herramienta para Starlight?
-¡Abre un PR agregando un enlace a esta página!
+¡Abre una PR agregando un enlace a esta página!
 :::
 
 ## Sitios
