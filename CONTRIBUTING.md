@@ -105,7 +105,7 @@ pnpm dev
 
 You should then be able to open <http://localhost:3000> and see your changes.
 
-> [!NOTE]
+> **Note**
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
 
 ### Unit tests
