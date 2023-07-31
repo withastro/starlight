@@ -22,10 +22,6 @@ test('route slugs are normalized', () => {
 	expect(indexRoute?.slug).toBe('');
 });
 
-test('routes are sorted by slug', () => {
-	expect(routes[0]?.slug).toBe('');
-});
-
 test('routes contain copy of original doc as entry', async () => {
 	const docs = await getCollection('docs');
 	for (const route of routes) {

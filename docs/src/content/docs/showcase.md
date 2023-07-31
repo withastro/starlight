@@ -11,6 +11,7 @@ Starlight is already being used in production around the web. See some examples 
 - [Astro Error Pages](https://astro-error-page-documentation.vercel.app/)
 - [Felicity](https://felicity.pages.dev/)
 - [NgxEditor](https://sibiraj-s.github.io/ngx-editor/)
+- [pls](https://dhruvkb.github.io/pls)
 - [Terrateam Docs](https://terrateam.io/docs)
 - [xs-dev docs](https://xs-dev.js.org)
 - [Athena OS](https://www.athenaos.org)
