@@ -29,7 +29,7 @@ MDXやMarkdocを使用する場合、サポートされるMarkdownの機能や�
 
 ## 画像
 
-Starlightは、Astro組み込みのアセット最適化機能を使用して画像を表示します。
+Starlightは、[Astro組み込みのアセット最適化機能](https://docs.astro.build/ja/guides/assets/)を使用して画像を表示します。
 
 MarkdownとMDXは、スクリーンリーダーや支援技術のための代替テキストを含む画像を表示するためのMarkdown構文をサポートしています。
 
