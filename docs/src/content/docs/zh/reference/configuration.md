@@ -293,7 +293,7 @@ starlight({
 
 ### `social`
 
-**类型：** `Partial<Record<'codeberg' | 'discord' | 'github' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**类型：** `Partial<Record<'codeberg' | 'discord' | 'github' | 'gitlab' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
 
@@ -303,6 +303,7 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
     linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
     threads: 'https://www.threads.net/@nmoodev',
@@ -377,3 +378,36 @@ interface HeadConfig {
 定义页脚是否应包含上一页和下一页的链接。
 
 页面可以使用 [`prev`](/zh/reference/frontmatter/#prev) 和 [`next`](/zh/reference/frontmatter/#next) frontmatter 字段覆盖此设置或链接文本和/或 URL。
+
+
+### `favicon`
+
+**类型：** `string`  
+**默认值：** `'/favicon.svg'`
+
+设置网站的默认 favicon 的路径，它应该位于 `public/` 目录中，并且是一个有效的（`.ico`，`.gif`，`.jpg`，`.png` 或 `.svg`）图标文件。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+如果你需要设置其他变体或回退的 favicon，你可以使用 [`head` 选项](#head)添加标签：
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // 为 Safari 添加 ICO favicon 回退。
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```
