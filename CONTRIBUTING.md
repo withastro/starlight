@@ -38,9 +38,11 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
+You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) or [Gitpod](#developing-using-gitpod) to get started quickly.
+
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/). Make sure you have these installed before following these steps.
+**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v16 or higher) and [pnpm](https://pnpm.io/) (v8.2 or higher). Make sure you have these installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
@@ -64,8 +66,6 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 #### Developing using Gitpod
 
-Instead of working locally on your machine, you can also contribute using an online coding development environment like Gitpod.
-
 **Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
 
 1. **Open the Gitpod URL** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
@@ -75,6 +75,19 @@ Instead of working locally on your machine, you can also contribute using an onl
    ```sh
    pnpm i
    ```
+
+#### Developing using GitHub Codespaces
+
+1. **Create a new codespace** via https://codespaces.new/withastro/starlight
+
+2. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
+
+   ```sh
+   cd docs
+   pnpm dev --host
+   ```
+
+The dev container used for GitHub Codespaces can also be used with [other supporting tools](https://containers.dev/supporting), including VS Code.
 
 ## Testing
 
