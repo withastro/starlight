@@ -137,12 +137,16 @@ const UserConfigSchema = z.object({
 				'mastodon',
 				'github',
 				'gitlab',
+				'bitbucket',
 				'discord',
+				'gitter',
 				'codeberg',
+				'codePen',
 				'youtube',
 				'threads',
 				'linkedin',
 				'twitch',
+				'microsoftTeams',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
