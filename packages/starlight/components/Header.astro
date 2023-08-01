@@ -42,8 +42,17 @@ const { locale } = Astro.props;
 		:global(:root:not([data-has-toc])) {
 			--__toc-width: 0rem;
 		}
+		:global([dir='ltr']) .header {
+			--__sl-safe-nav-pad-x: var(--sl-safe-nav-pad-left);
+		}
+		:global([dir='rtl']) .header {
+			--__sl-safe-nav-pad-x: var(--sl-safe-nav-pad-right);
+		}
 		.header {
-			--__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
+			--__sidebar-width: max(
+				0rem,
+				var(--sl-content-inline-start, 0rem) - var(--__sl-safe-nav-pad-x)
+			);
 			--__main-column-fr: calc(
 				(
 						100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) -

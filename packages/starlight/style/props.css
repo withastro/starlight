@@ -108,6 +108,11 @@
 	--sl-z-index-menu: 5;
 	--sl-z-index-navbar: 10;
 	--sl-z-index-skiplink: 20;
+
+	/* Safe areas values */
+	--sl-safe-nav-pad-left: var(--sl-nav-pad-x);
+	--sl-safe-nav-pad-right: var(--sl-nav-pad-x);
+	--sl-safe-nav-pad-top: var(--sl-nav-pad-y);
 }
 
 :root[data-theme='light'],
@@ -177,5 +182,13 @@
 	:root {
 		--sl-content-pad-x: 1.5rem;
 		--sl-mobile-toc-height: 0rem;
+	}
+}
+
+@supports (padding: max(0px)) {
+	:root {
+		--sl-safe-nav-pad-left: max(var(--sl-nav-pad-x), env(safe-area-inset-left));
+		--sl-safe-nav-pad-right: max(var(--sl-nav-pad-x), env(safe-area-inset-right));
+		--sl-safe-nav-pad-top: max(var(--sl-nav-pad-y), env(safe-area-inset-top));
 	}
 }
