@@ -200,7 +200,7 @@ Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/con
 **type:** `string`  
 **default:** the page [`title`](#title-required)
 
-Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement. 
+Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 
 ```md
 ---
@@ -216,7 +216,6 @@ sidebar:
 
 Contrôler l'ordre de cette page lors du tri d'un groupe de liens généré automatiquement.
 Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
-
 
 ```md
 ---
