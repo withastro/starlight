@@ -79,16 +79,15 @@ function groupFromAutogenerateConfig(
 ): Group {
 	const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
-	const dirDocs = routes
-		.filter(
-			(doc) =>
-				// Match against `foo.md` or `foo/index.md`.
-				stripExtension(doc.id) === localeDir ||
+	const dirDocs = routes.filter(
+		(doc) =>
+			// Match against `foo.md` or `foo/index.md`.
+			(stripExtension(doc.id) === localeDir ||
 				// Match against `foo/anything/else.md`.
-				doc.id.startsWith(localeDir + '/')
-		)
-		// Remove any entries that should be hidden
-		.filter((doc) => !doc.entry.data.sidebar.hidden);
+				doc.id.startsWith(localeDir + '/')) &&
+			// Remove any entries that should be hidden
+			!doc.entry.data.sidebar.hidden
+	);
 	const tree = treeify(dirDocs, localeDir);
 	return {
 		type: 'group',
