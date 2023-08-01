@@ -14,7 +14,7 @@ vi.mock('astro:content', async () =>
 );
 
 describe('getSidebar', () => {
-	test('returns sidebar entries sorted by frontmatter order', () => {
+	test('excludes sidebar entries with hidden: true in frontmatter', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
     [
       {
