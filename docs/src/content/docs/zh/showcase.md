@@ -7,7 +7,7 @@ description: 查看使用 Starlight 构建的网站！
 你是否构建过 Starlight 网站或 Starlight 工具？创建一个 PR 来添加链接到此页面！
 :::
 
-## Sites
+## 网站
 
 Starlight 已投入生产。 这些是网络上的一些网站：
 
@@ -25,7 +25,7 @@ Starlight 已投入生产。 这些是网络上的一些网站：
 
 查看所有[在 GitHub 上使用 Starlight 的公共项目仓库](https://github.com/withastro/starlight/network/dependents)。
 
-## Community plugins
+## 社区插件
 
 这些社区工具、插件和集成与 Starlight 一起扩展其功能。
 
@@ -34,7 +34,7 @@ Starlight 已投入生产。 这些是网络上的一些网站：
 - [starlight-links-validator](https://github.com/HiDeoo/starlight-links-validator) — 验证内部链接。
 - [starlight-typedoc](https://github.com/HiDeoo/starlight-typedoc) — 使用 TypeDoc 从 TypeScript 生成 Starlight 页面。
 
-## Videos
+## 视频
 
 - 观看 Astro 的 Ben 和 Chris 用 Starlight 实时构建 [Starwoof](https://starwoof.vercel.app/)！ [Twitch stream: Astro x Starlight - 超快的环保非转基因有机文档](https://www.twitch.tv/videos/1841159960)
 
