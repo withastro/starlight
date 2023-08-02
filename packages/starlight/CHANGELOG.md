@@ -361,8 +361,8 @@
 
   ```json
   {
-  	"search.label": "Suchen",
-  	"search.shortcutLabel": "(Drücke / zum Suchen)"
+    "search.label": "Suchen",
+    "search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
