@@ -37,4 +37,3 @@ Starlight 已投入生产。 这些是网络上的一些网站：
 ## 视频
 
 - 观看 Astro 的 Ben 和 Chris 用 Starlight 实时构建 [Starwoof](https://starwoof.vercel.app/)！ [Twitch stream: Astro x Starlight - 超快的环保非转基因有机文档](https://www.twitch.tv/videos/1841159960)
-
