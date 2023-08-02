@@ -1,6 +1,6 @@
 ---
 title: Starlight Showcase
-description: 查看使用 Starlight 构建的网站！
+description: 发现使用 Starlight 构建的网站和扩展 Starlight 的社区工具！
 ---
 
 :::tip[添加你自己的！]
