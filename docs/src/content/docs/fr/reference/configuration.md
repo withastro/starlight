@@ -292,7 +292,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
