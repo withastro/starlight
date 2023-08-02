@@ -19,7 +19,6 @@ Starlight 支持在 `.md` 文件中使用完整的 [Markdown](https://daringfire
 
 ```md
 你可以 [链接到另一个页面](/zh/getting-started/)。
-
 ```
 
 你可以使用反引号高亮 `内联代码`。
@@ -35,7 +34,6 @@ Starlight 中的图片使用 [Astro 的内置优化资源支持](https://docs.as
 Markdown 和 MDX 支持用于显示图片的 Markdown 语法，其中包括屏幕阅读器和辅助技术的 alt-text。
 
 ![一个星球和星星的插图，上面写着“astro”](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
-
 
 ```md
 ![一个星球和星星的插图，上面写着“astro”](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
