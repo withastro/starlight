@@ -293,7 +293,7 @@ starlight({
 
 ### `social`
 
-**类型：** `Partial<Record<'codeberg' | 'discord' | 'github' | 'gitlab' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
 
