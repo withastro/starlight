@@ -93,7 +93,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.6.0
+        specifier: ^0.6.1
         version: link:../../packages/starlight
       astro:
         specifier: ^2.9.3

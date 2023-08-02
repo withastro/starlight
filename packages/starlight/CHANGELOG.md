@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.6.1
+
+### Patch Changes
+
+- [#442](https://github.com/withastro/starlight/pull/442) [`42c0abd`](https://github.com/withastro/starlight/commit/42c0abdd245f2f6595d67e203965f463829ef870) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Increase Markdown table border contrast
+
+- [#443](https://github.com/withastro/starlight/pull/443) [`cb8bcec`](https://github.com/withastro/starlight/commit/cb8bcec533c9a7849eda01a4a4157b4726c9902c) Thanks [@delucis](https://github.com/delucis)! - Add icons for Bitbucket, Gitter, CodePen, and Microsoft Teams
+
+- [#445](https://github.com/withastro/starlight/pull/445) [`a80e180`](https://github.com/withastro/starlight/commit/a80e180ca5abb85aa0c9db111ef5ae8e0c1bb539) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Prevent repeated table of contents mark on mobile
+
 ## 0.6.0
 
 ### Minor Changes
@@ -351,8 +361,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
