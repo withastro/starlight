@@ -20,19 +20,19 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
    	integrations: [
    		starlight({
    			title: '我的文档',
-        // 为此网站设置英语为默认语言。
+   			// 为此网站设置英语为默认语言。
    			defaultLocale: 'en',
    			locales: {
-          // 英文文档在 `src/content/docs/en/` 中。
+   				// 英文文档在 `src/content/docs/en/` 中。
    				en: {
    					label: 'English',
    				},
-          // 简体中文文档在 `src/content/docs/zh/` 中。
+   				// 简体中文文档在 `src/content/docs/zh/` 中。
    				zh: {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
-          // 阿拉伯文档在 `src/content/docs/ar/` 中。
+   				// 阿拉伯文档在 `src/content/docs/ar/` 中。
    				ar: {
    					label: 'العربية',
    					dir: 'rtl',
@@ -43,7 +43,7 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
    });
    ```
 
-    你的 `defaultLocale` 将用于回退内容和 UI 标签，所以选择你最有可能开始编写内容的语言，或者已经有内容的语言。
+   你的 `defaultLocale` 将用于回退内容和 UI 标签，所以选择你最有可能开始编写内容的语言，或者已经有内容的语言。
 
 2. 在 `src/content/docs/` 中为每种语言创建一个目录。例如，对于上面显示的配置，创建以下文件夹：
 
@@ -199,7 +199,7 @@ Starlight 期望你在所有语言中创建等效的页面。例如，如果你�
    }
    ```
 
-    Starlight 的搜索模式由  [Pagefind](https://pagefind.app/) 库提供支持。 你可以使用 pagefind 键在同一 JSON 文件中设置 Pagefind UI 的翻译：
+   Starlight 的搜索模式由 [Pagefind](https://pagefind.app/) 库提供支持。 你可以使用 pagefind 键在同一 JSON 文件中设置 Pagefind UI 的翻译：
 
    ```json
    {
