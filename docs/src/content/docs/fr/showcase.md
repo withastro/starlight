@@ -10,7 +10,7 @@ Ouvrez une PR en ajoutant un lien vers cette page !
 
 ## Sites
 
-Starlight is already being used in production. These are some of the sites around the web:
+Starlight est déjà utilisé en production. Voici quelques sites sur le web :
 
 - [PubIndexAPI Docs](https://docs.pubindexapi.com/)
 - [har.fyi](https://har.fyi/)
@@ -28,7 +28,7 @@ Voir [les dépôts de projets publics utilisant Starlight sur GitHub](https://gi
 
 ## Plugins de la communauté
 
-Ces outils communautaires, plugins et intégrations fonctionnent avec Starlight pour étendre ses fonctionnalités.
+Ces outils, plugins et intégrations communautaires fonctionnent avec Starlight pour étendre ses fonctionnalités.
 
 
 - [FeelBack](https://www.feelback.dev/blog/new-astro-starlight-integration/) — ajouter un système de feedback utilisateur à votre site.
