@@ -98,10 +98,16 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
+/** Ensure the passed path ends with a trailing slash. */
+function ensureTrailingSlash(href: string): string {
+	if (href[href.length - 1] !== '/') href += '/';
+	return href;
+}
+
 /** Ensure the passed path starts and ends with trailing slashes. */
 function ensureLeadingAndTrailingSlashes(href: string): string {
 	if (href[0] !== '/') href = '/' + href;
-	if (href[href.length - 1] !== '/') href += '/';
+	href = ensureTrailingSlash(href);
 	return href;
 }
 
@@ -124,7 +130,7 @@ function linkFromConfig(
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === currentPathname;
+	const isCurrent = href === ensureTrailingSlash(currentPathname);
 	return { type: 'link', label, href, isCurrent };
 }
 
