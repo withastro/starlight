@@ -14,5 +14,8 @@ i18n:
 '🌟 core':
   - packages/starlight/**
 
+'🌟 tailwind':
+  - packages/tailwind/**
+
 '📚 docs':
   - docs/**
