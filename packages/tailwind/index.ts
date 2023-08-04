@@ -30,8 +30,8 @@ import plugin from 'tailwindcss/plugin';
  *   },
  * }
  */
-const StarlightTailwindPlugin = plugin.withOptions<{}>(
-	() =>
+const StarlightTailwindPlugin = () =>
+	plugin(
 		({ addBase, theme }) => {
 			/** Utility to apply accent colors based on a user’s theme config. */
 			const themeAccent = (
@@ -87,14 +87,14 @@ const StarlightTailwindPlugin = plugin.withOptions<{}>(
 				},
 			});
 		},
-	() => ({
-		// Starlight uses a `data-theme` attribute to power its dark mode.
-		darkMode: ['class', '[data-theme="dark"]'],
-		corePlugins: {
-			// Disable Tailwind’s default reset styles which conflict with Starlight.
-			preflight: false,
-		},
-	})
-);
+		{
+			// Starlight uses a `data-theme` attribute to power its dark mode.
+			darkMode: ['class', '[data-theme="dark"]'],
+			corePlugins: {
+				// Disable Tailwind’s default reset styles which conflict with Starlight.
+				preflight: false,
+			},
+		}
+	);
 
 export default StarlightTailwindPlugin;
