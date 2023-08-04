@@ -200,9 +200,15 @@ importers:
         specifier: ^3.0.24
         version: 3.3.2
     devDependencies:
+      '@vitest/coverage-v8':
+        specifier: ^0.33.0
+        version: 0.33.0(vitest@0.33.0)
       postcss:
         specifier: ^8.4.27
         version: 8.4.27
+      vitest:
+        specifier: ^0.33.0
+        version: 0.33.0
 
 packages:
 
