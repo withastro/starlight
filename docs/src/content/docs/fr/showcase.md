@@ -30,7 +30,6 @@ Voir [les dépôts de projets publics utilisant Starlight sur GitHub](https://gi
 
 Ces outils, plugins et intégrations communautaires fonctionnent avec Starlight pour étendre ses fonctionnalités.
 
-
 - [FeelBack](https://www.feelback.dev/blog/new-astro-starlight-integration/) — ajouter un système de feedback utilisateur à votre site.
 - [starlight-blog](https://github.com/HiDeoo/starlight-blog) — ajouter un blog à votre site de documentation.
 - [starlight-links-validator](https://github.com/HiDeoo/starlight-links-validator) - valider les liens internes.
