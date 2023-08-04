@@ -38,9 +38,11 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
+You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) or [Gitpod](#developing-using-gitpod) to get started quickly.
+
 #### Developing locally
 
-**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/). Make sure you have these installed before following these steps.
+**Prerequisites:** Developing Starlight requires [Node.js](https://nodejs.org/en) (v16 or higher) and [pnpm](https://pnpm.io/) (v8.2 or higher). Make sure you have these installed before following these steps.
 
 1. **Fork Starlight** to your personal GitHub account by clicking <kbd>Fork</kbd> on the [main Starlight repo page][sl].
 
@@ -64,8 +66,6 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 #### Developing using Gitpod
 
-Instead of working locally on your machine, you can also contribute using an online coding development environment like Gitpod.
-
 **Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
 
 1. **Open the Gitpod URL** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
@@ -76,7 +76,22 @@ Instead of working locally on your machine, you can also contribute using an onl
    pnpm i
    ```
 
-### Testing changes while you work
+#### Developing using GitHub Codespaces
+
+1. **Create a new codespace** via https://codespaces.new/withastro/starlight
+
+2. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
+
+   ```sh
+   cd docs
+   pnpm dev --host
+   ```
+
+The dev container used for GitHub Codespaces can also be used with [other supporting tools](https://containers.dev/supporting), including VS Code.
+
+## Testing
+
+### Testing visual changes while you work
 
 Run the Astro dev server on the docs site to see how changes you make impact a project using Starlight.
 
@@ -89,6 +104,66 @@ pnpm dev
 
 You should then be able to open <http://localhost:3000> and see your changes.
 
+> **Note**
+> Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
+
+### Unit tests
+
+The Starlight package includes unit tests in [`packages/starlight/__tests__/`](./packages/starlight/__tests__/), which are run using [Vitest][vitest].
+
+To run tests, move into the Starlight package and then run `pnpm test`:
+
+```sh
+cd packages/starlight
+pnpm test
+```
+
+This will run tests and then listen for changes, re-running tests when files change.
+
+#### Test environments
+
+A lot of Starlight code relies on Vite virtual modules provided either by Astro or by Starlight itself. Each subdirectory of `packages/starlight/__tests__/` should contain a `vitest.config.ts` file that uses the `defineVitestConfig()` helper to define a valid test environment for tests in that directory. This helper takes a single argument, which provides a Starlight user config object:
+
+```ts
+// packages/starlight/__tests/basics/vitest.config.ts
+import { defineVitestConfig } from '../test-config';
+
+export default defineVitestConfig({
+  title: 'Basics',
+});
+```
+
+This allows you to run tests of Starlight code against different combinations of Starlight configuration options.
+
+#### Mocking content collections
+
+Starlight relies on a user’s `docs` and (optional) `i18n` content collections, which aren’t available during testing. You can use a top-level `vi.mock()` call and the `mockedAstroContent` helper to set up fake collection entries for the current test file:
+
+```js
+import { describe, expect, test, vi } from 'vitest';
+
+vi.mock('astro:content', async () =>
+  (await import('../test-utils')).mockedAstroContent({
+    docs: [
+      ['index.mdx', { title: 'Home Page' }],
+      ['environmental-impact.md', { title: 'Eco-friendly docs' }],
+    ],
+    i18n: [['en', { 'page.editLink': 'Modify this doc!' }]],
+  })
+);
+```
+
+#### Test coverage
+
+To see how much of Starlight’s code is currently being tested, run `pnpm test:coverage` from the Starlight package:
+
+```sh
+cd packages/starlight
+pnpm test:coverage
+```
+
+This will print a table to your terminal and also generate an HTML report you can load in a web browser by opening [`packages/starlight/__coverage__/index.html`](./packages/starlight/__coverage__/index.html).
+
 ## Translations
 
 Translations help make Starlight accessible to more people.
@@ -99,6 +174,8 @@ Starlight’s UI comes with some built-in text elements. For example, the table 
 
 Help out by adding or updating translation files in [`packages/starlight/translations`](./packages/starlight/translations/).
 Each language’s JSON file follows the [translation structure described in Starlight’s docs](https://starlight.astro.build/guides/i18n/#translate-starlights-ui).
+
+📺 **Prefer a visual walkthrough?** [Watch an introduction to Starlight’s translation files.](https://scrimba.com/scrim/cpb44bt3)
 
 ### Translating Starlight’s docs
 
@@ -137,3 +214,4 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 [pr-docs]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request
 [gfi]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+
 [api-docs]: https://docs.astro.build/en/reference/integrations-reference/
+[vitest]: https://vitest.dev/

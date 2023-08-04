@@ -290,7 +290,7 @@ starlight({
 
 ### `social`
 
-**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
+**type:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'gitlab' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
@@ -300,7 +300,11 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
@@ -370,3 +374,35 @@ interface HeadConfig {
 フッターに前のページと次のページへのリンクを含めるかどうかを定義します。
 
 [`prev`](/ja/reference/frontmatter/#prev)と[`next`](/ja/reference/frontmatter/#next)フロントマターフィールドを使用して、この設定、またはリンクテキストとURLをページごとに上書きできます。
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+サイトのデフォルトファビコンのパスを設定します。ファビコンは`public/`ディレクトリに配置され、また有効なアイコンファイル（`.ico`、`.gif`、`.jpg`、`.png`、または`.svg`）である必要があります。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+追加のバリアントやフォールバック用のファビコンを設定する必要がある場合は、[`head`オプション](#head)を使用してタグを追加できます。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Safari用にICOファビコンのフォールバックを追加します。
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```

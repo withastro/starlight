@@ -32,14 +32,14 @@ Starlightには標準的なスタイルと機能がデフォルトで用意さ�
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'ロゴを設定したドキュメント',
-         logo: {
-           src: './src/assets/my-logo.svg',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'ロゴを設定したドキュメント',
+   			logo: {
+   				src: './src/assets/my-logo.svg',
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -125,12 +125,12 @@ tableOfContents:
 // astro.config.mjs
 
 defineConfig({
-  integrations: [
-    starlight({
-      title: '',
-      tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '',
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
+		}),
+	],
 });
 ```
 
@@ -157,12 +157,12 @@ tableOfContents: false
 // astro.config.mjs
 
 defineConfig({
-  integrations: [
-    starlight({
-      title: '目次をグローバルに無効にしたドキュメント',
-      tableOfContents: false,
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '目次をグローバルに無効にしたドキュメント',
+			tableOfContents: false,
+		}),
+	],
 });
 ```
 
@@ -173,7 +173,7 @@ defineConfig({
 
 Starlightは、Starlightインテグレーションの[`social`](/ja/reference/configuration/#social)オプションを使用して、サイトヘッダーにソーシャルメディアアカウントへのリンクを追加する機能を備えています。
 
-現在、Codeberg、Discord、GitHub、Mastodon、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
+現在、Codeberg、Discord、GitHub、LinkedIn、Mastodon、Threads、Twitch、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
 
 ```js
 // astro.config.mjs
@@ -181,19 +181,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'ソーシャルリンクを設定したドキュメント',
-      social: {
-        codeberg: 'https://codeberg.org/knut/examples',
-        discord: 'https://astro.build/chat',
-        github: 'https://github.com/withastro/starlight',
-        mastodon: 'https://m.webtoo.ls/@astro',
-        twitter: 'https://twitter.com/astrodotbuild',
-        youtube: 'https://youtube.com/@astrodotbuild',
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'ソーシャルリンクを設定したドキュメント',
+			social: {
+				discord: 'https://astro.build/chat',
+				github: 'https://github.com/withastro/starlight',
+			},
+		}),
+	],
 });
 ```
 
@@ -218,14 +214,14 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '編集リンクを設定したドキュメント',
-      editLink: {
-        baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '編集リンクを設定したドキュメント',
+			editLink: {
+				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+			},
+		}),
+	],
 });
 ```
 
@@ -266,7 +262,7 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
    ```css
    /* src/styles/custom.css */
    :root {
-     --sl-hue-accent: 270;
+   	--sl-hue-accent: 270;
    }
    ```
 
@@ -278,17 +274,19 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'カスタムCSSを設定したドキュメント',
-         customCss: [
-           // カスタムCSSファイルへの相対パス
-           './src/styles/custom.css',
-         ],
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'カスタムCSSを設定したドキュメント',
+   			customCss: [
+   				// カスタムCSSファイルへの相対パス
+   				'./src/styles/custom.css',
+   			],
+   		}),
+   	],
    });
    ```
+
+[GitHub上の`props.css`ファイル](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)で、サイトをカスタマイズするために設定可能な、Starlightが使用しているすべてのカスタムCSSプロパティを確認できます。
 
 ## カスタムフォント
 
@@ -321,12 +319,12 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
    /* src/fonts/font-face.css */
 
    @font-face {
-     font-family: 'カスタムフォント';
-     /* ローカルフォントファイルへの相対パスを`url()`で指定します。 */
-     src: url('./CustomFont.woff2') format('woff2');
-     font-weight: normal;
-     font-style: normal;
-     font-display: swap;
+   	font-family: 'カスタムフォント';
+   	/* ローカルフォントファイルへの相対パスを`url()`で指定します。 */
+   	src: url('./CustomFont.woff2') format('woff2');
+   	font-weight: normal;
+   	font-style: normal;
+   	font-display: swap;
    }
    ```
 
@@ -338,15 +336,15 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'カスタムフォントを設定したドキュメント',
-         customCss: [
-           // @font-face CSSファイルへの相対パス
-           './src/fonts/font-face.css',
-         ],
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'カスタムフォントを設定したドキュメント',
+   			customCss: [
+   				// @font-face CSSファイルへの相対パス
+   				'./src/fonts/font-face.css',
+   			],
+   		}),
+   	],
    });
    ```
 
@@ -354,9 +352,9 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 
 [Fontsource](https://fontsource.org/)プロジェクトは、Google Fontsやその他のオープンソースフォントの使用を容易にします。使いたいフォントのnpmモジュールをインストールすることができ、プロジェクトに追加するためのCSSファイルも用意されています。
 
-1. [Fontsourceのカタログ](https://fontsource.org/)で使用したいフォントを見つけます。この例では、[IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif)を使用します。
+1.  [Fontsourceのカタログ](https://fontsource.org/)で使用したいフォントを見つけます。この例では、[IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif)を使用します。
 
-2. 使いたいフォントのパッケージをインストールします。Fontsourceのフォントページで「Install」をクリックすると、パッケージ名が表示されます。
+2.  使いたいフォントのパッケージをインストールします。Fontsourceのフォントページで「Install」をクリックすると、パッケージ名が表示されます。
 
          <Tabs>
 
@@ -386,7 +384,7 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 
       </Tabs>
 
-3. `astro.config.mjs`で、FontsourceのCSSファイルをStarlightの`customCss`配列に追加します。
+3.  `astro.config.mjs`で、FontsourceのCSSファイルをStarlightの`customCss`配列に追加します。
 
     ```js
     // astro.config.mjs
@@ -394,16 +392,16 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
     import starlight from '@astrojs/starlight';
 
     export default defineConfig({
-      integrations: [
-        starlight({
-          title: 'カスタムフォントを設定したドキュメント',
-          customCss: [
-            // 標準とセミボールドのフォントウェイト用のFontsourceファイル。
-            '@fontsource/ibm-plex-serif/400.css',
-            '@fontsource/ibm-plex-serif/600.css',
-          ],
-        }),
-      ],
+    	integrations: [
+    		starlight({
+    			title: 'カスタムフォントを設定したドキュメント',
+    			customCss: [
+    				// 標準とセミボールドのフォントウェイト用のFontsourceファイル。
+    				'@fontsource/ibm-plex-serif/400.css',
+    				'@fontsource/ibm-plex-serif/600.css',
+    			],
+    		}),
+    	],
     });
     ```
 
@@ -417,7 +415,7 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 /* src/styles/custom.css */
 
 :root {
-  --sl-font: 'IBM Plex Serif', serif;
+	--sl-font: 'IBM Plex Serif', serif;
 }
 ```
 
@@ -427,7 +425,7 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 /* src/styles/custom.css */
 
 main {
-  font-family: 'IBM Plex Serif', serif;
+	font-family: 'IBM Plex Serif', serif;
 }
 ```
 

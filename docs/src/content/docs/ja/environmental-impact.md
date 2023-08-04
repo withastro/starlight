@@ -73,17 +73,17 @@ JavaScriptの解析とコンパイルは、ブラウザが実行する最も高�
 他のドキュメントフレームワークとの比較に興味がありますか？[Website Carbon Calculator][wcc]を用いた以下のテストでは、異なるツールで作成された類似のページを比較しています。
 
 | フレームー枠                | ページ訪問ごとのCO₂ |
-| --------------------------- | ------------------ |
-| [Starlight][sl-carbon]      | 0.01g              |
-| [VitePress][vp-carbon]      | 0.05g              |
-| [Docus][dc-carbon]          | 0.05g              |
-| [Sphinx][sx-carbon]         | 0.07g              |
-| [MkDocs][mk-carbon]         | 0.10g              |
-| [Nextra][nx-carbon]         | 0.11g              |
-| [docsify][dy-carbon]        | 0.11g              |
-| [Docusaurus][ds-carbon]     | 0.24g              |
-| [Read the Docs][rtd-carbon] | 0.24g              |
-| [GitBook][gb-carbon]        | 0.71g              |
+| --------------------------- | ------------------- |
+| [Starlight][sl-carbon]      | 0.01g               |
+| [VitePress][vp-carbon]      | 0.05g               |
+| [Docus][dc-carbon]          | 0.05g               |
+| [Sphinx][sx-carbon]         | 0.07g               |
+| [MkDocs][mk-carbon]         | 0.10g               |
+| [Nextra][nx-carbon]         | 0.11g               |
+| [docsify][dy-carbon]        | 0.11g               |
+| [Docusaurus][ds-carbon]     | 0.24g               |
+| [Read the Docs][rtd-carbon] | 0.24g               |
+| [GitBook][gb-carbon]        | 0.71g               |
 
 <small>データは2023年5月14日に収集されたものです。リンクをクリックすると、最新の数値が表示されます。</small>
 

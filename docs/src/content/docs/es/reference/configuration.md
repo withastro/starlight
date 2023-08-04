@@ -14,7 +14,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My delightful docs site',
+      title: 'Mi encantador sitio de documentación',
     }),
   ],
 });
@@ -43,7 +43,7 @@ Establece un logotipo para mostrarlo en la barra de navegación junto al título
 ```js
 starlight({
   logo: {
-    src: './src/assets/my-logo.svg',
+    src: './src/assets/mi-logo.svg',
   },
 });
 ```
@@ -155,6 +155,7 @@ sidebar: [
 #### Traduciendo etiquetas
 
 Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
+
 ```js
 sidebar: [
   // Un ejemplo de barra lateral con etiquetas traducidas al francés.
@@ -295,7 +296,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string; youtube?: string }`
+**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
@@ -305,7 +306,10 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
@@ -377,3 +381,34 @@ Define si el pie de página debe incluir enlaces a la página anterior y siguien
 
 Una página puede anular esta configuración o el texto del enlace y/o la URL utilizando los campos de metadatos [`prev`](/reference/frontmatter/#prev) y [`next`](/reference/frontmatter/#next).
 
+### `favicon`
+
+**tipo:** `string`  
+**por defecto:** `'/favicon.svg'`
+
+Establece la ruta del favicon predeterminado para tu sitio web, el cual debería ubicarse en el directorio `public/` y ser un archivo de icono válido (`.ico`, `.gif`, `.jpg`, `.png` o `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Si necesitas establecer variantes adicionales o favicons de respaldo, puedes agregar etiquetas utilizando la opción [`head`](#head):
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Agregar un favicon ICO de respaldo para Safari.
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```

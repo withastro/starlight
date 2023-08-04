@@ -4,79 +4,81 @@ import config from 'virtual:starlight/user-config';
 import { pathWithBase } from '../utils/base';
 
 interface Props {
-  locale: string | undefined;
+	locale: string | undefined;
 }
 
 if (config.logo) {
-  let err: string | undefined;
-  if ('src' in config.logo) {
-    if (!logos.dark || !logos.light) {
-      err = `Could not resolve logo import for "${config.logo.src}" (logo.src)`;
-    }
-  } else {
-    if (!logos.dark) {
-      err = `Could not resolve logo import for "${config.logo.dark}" (logo.dark)`;
-    } else if (!logos.light) {
-      err = `Could not resolve logo import for "${config.logo.light}" (logo.light)`;
-    }
-  }
-  if (err) throw new Error(err);
+	let err: string | undefined;
+	if ('src' in config.logo) {
+		if (!logos.dark || !logos.light) {
+			err = `Could not resolve logo import for "${config.logo.src}" (logo.src)`;
+		}
+	} else {
+		if (!logos.dark) {
+			err = `Could not resolve logo import for "${config.logo.dark}" (logo.dark)`;
+		} else if (!logos.light) {
+			err = `Could not resolve logo import for "${config.logo.light}" (logo.light)`;
+		}
+	}
+	if (err) throw new Error(err);
 }
 
 const href = pathWithBase(Astro.props.locale || '/');
 ---
 
 <a {href} class="site-title flex">
-  {
-    config.logo && logos.dark && (
-      <>
-        <img
-          class:list={{ 'dark-only': !('src' in config.logo) }}
-          alt={config.logo.alt}
-          src={logos.dark.src}
-          width={logos.dark.width}
-          height={logos.dark.height}
-        />
-        {/* Show light alternate if a user configure both light and dark logos. */}
-        {!('src' in config.logo) && (
-          <img
-            class="light-only"
-            alt={config.logo.alt}
-            src={logos.light?.src}
-            width={logos.light?.width}
-            height={logos.light?.height}
-          />
-        )}
-      </>
-    )
-  }
-  <span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
-    {config.title}
-  </span>
+	{
+		config.logo && logos.dark && (
+			<>
+				<img
+					class:list={{ 'dark-only': !('src' in config.logo) }}
+					alt={config.logo.alt}
+					src={logos.dark.src}
+					width={logos.dark.width}
+					height={logos.dark.height}
+				/>
+				{/* Show light alternate if a user configure both light and dark logos. */}
+				{!('src' in config.logo) && (
+					<img
+						class="light-only"
+						alt={config.logo.alt}
+						src={logos.light?.src}
+						width={logos.light?.width}
+						height={logos.light?.height}
+					/>
+				)}
+			</>
+		)
+	}
+	<span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
+		{config.title}
+	</span>
 </a>
 
 <style>
-  .site-title {
-    justify-self: flex-start;
-    align-items: center;
-    gap: var(--sl-nav-gap);
-    font-size: var(--sl-text-h4);
-    font-weight: 600;
-    color: var(--sl-color-text-accent);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  img {
-    height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    object-position: 0 50%;
-  }
-  :global([data-theme='light']) .dark-only {
-    display: none;
-  }
-  :global([data-theme='dark']) .light-only {
-    display: none;
-  }
+	.site-title {
+		justify-self: flex-start;
+		max-width: 100%;
+		overflow: hidden;
+		align-items: center;
+		gap: var(--sl-nav-gap);
+		font-size: var(--sl-text-h4);
+		font-weight: 600;
+		color: var(--sl-color-text-accent);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+	img {
+		height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+		width: auto;
+		max-width: 100%;
+		object-fit: contain;
+		object-position: 0 50%;
+	}
+	:global([data-theme='light']) .dark-only {
+		display: none;
+	}
+	:global([data-theme='dark']) .light-only {
+		display: none;
+	}
 </style>

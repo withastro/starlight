@@ -29,7 +29,7 @@ Vous pouvez mettre en évidence le `code en ligne` à l'aide de barres de défil
 
 ## Images
 
-Les images dans Starlight utilisent la prise en charge intégrée des ressources optimisées d'Astro.
+Les images dans Starlight utilisent [la prise en charge intégrée des ressources optimisées d'Astro](https://docs.astro.build/en/guides/assets/).
 
 Markdown et MDX supportent la syntaxe Markdown pour l'affichage des images qui inclut le texte alt pour les lecteurs d'écran et les technologies d'assistance.
 
@@ -58,7 +58,7 @@ Starlight est configuré pour utiliser automatiquement le titre de votre page co
 ```md
 ---
 title: Guide Markdown
-description:  Comment utiliser Markdown dans Starlight
+description: Comment utiliser Markdown dans Starlight
 ---
 
 Cette page décrit comment utiliser Markdown dans Starlight.
@@ -66,7 +66,6 @@ Cette page décrit comment utiliser Markdown dans Starlight.
 ## Styles en ligne
 
 ## Titres
-
 ```
 
 ### Liens d'ancrage automatiques pour les titres
@@ -78,13 +77,14 @@ L'utilisation de titres en Markdown vous donnera automatiquement des liens d'anc
 title: Ma page de contenu
 description: Comment utiliser les liens d'ancrage intégrés de Starlight
 ---
+
 ## Introduction
 
 Je peux faire un lien vers [ma conclusion](#conclusion) plus bas sur la même page.
 
 ## Conclusion
 
-`https://my-site.com/page1/#introduction` renvoie directement à mon Introduction. 
+`https://my-site.com/page1/#introduction` renvoie directement à mon Introduction.
 ```
 
 Les titres de niveau 2 (`<h2>`) et de niveau 3 (`<h3>`) apparaissent automatiquement dans la table des matières de la page.
