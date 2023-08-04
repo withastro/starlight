@@ -28,7 +28,6 @@
     "./components": "./components.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
-    "./tailwind": "./tailwind.ts",
     "./index.astro": "./index.astro",
     "./404.astro": "./404.astro"
   },
