@@ -6,7 +6,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Docs',
+			title: 'Docs with Tailwind',
 			social: {
 				github: 'https://github.com/withastro/starlight',
 			},
