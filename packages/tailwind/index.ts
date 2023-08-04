@@ -1,3 +1,5 @@
+import plugin from 'tailwindcss/plugin';
+
 /**
  * Starlight Tailwind Plugin
  *
@@ -28,25 +30,9 @@
  *   },
  * }
  */
-export default function StarlightTailwindPlugin() {
-	return {
-		// Tailwind config required for Starlight compatibility.
-		config: {
-			// Starlight uses a `data-theme` attribute to power its dark mode.
-			darkMode: ['class', '[data-theme="dark"]'],
-			corePlugins: {
-				// Disable Tailwind’s default reset styles which conflict with Starlight.
-				preflight: false,
-			},
-		},
-
-		handler: ({
-			addBase,
-			theme,
-		}: {
-			addBase: (base: any) => void;
-			theme: (path?: string, defaultValue?: string) => string;
-		}) => {
+const StarlightTailwindPlugin = plugin.withOptions<{}>(
+	() =>
+		({ addBase, theme }) => {
 			/** Utility to apply accent colors based on a user’s theme config. */
 			const themeAccent = (
 				shade: 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950,
@@ -60,7 +46,7 @@ export default function StarlightTailwindPlugin() {
 				// Restore crucial styles from Tailwind Preflight: https://tailwindcss.com/docs/preflight
 				// Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 				'*, ::before, ::after': {
-					borderWidth: 0,
+					borderWidth: '0',
 					borderStyle: 'solid',
 					borderColor: theme('borderColor.DEFAULT', 'currentColor'),
 				},
@@ -101,5 +87,14 @@ export default function StarlightTailwindPlugin() {
 				},
 			});
 		},
-	};
-}
+	() => ({
+		// Starlight uses a `data-theme` attribute to power its dark mode.
+		darkMode: ['class', '[data-theme="dark"]'],
+		corePlugins: {
+			// Disable Tailwind’s default reset styles which conflict with Starlight.
+			preflight: false,
+		},
+	})
+);
+
+export default StarlightTailwindPlugin;
