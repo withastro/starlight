@@ -77,7 +77,7 @@ const t = useTranslations(locale);
 	}
 
 	@media (min-width: 50rem) {
-		:global([dir='ltr'][data-has-sidebar]) .header {
+		:global([data-has-sidebar]) .header {
 			padding-right: var(--sl-safe-nav-pad-right);
 		}
 		:global([dir='rtl'][data-has-sidebar]) .header {
