@@ -99,6 +99,7 @@
 	--sl-sidebar-pad-x: 1rem;
 	--sl-content-width: 45rem;
 	--sl-content-pad-x: 1rem;
+	--sl-content-pad-y: 1.5rem;
 	--sl-menu-button-size: 2rem;
 	--sl-nav-gap: var(--sl-content-pad-x);
 	/* Offset required to show outline inside an element instead of round the outside */
@@ -113,6 +114,9 @@
 	--sl-safe-nav-pad-left: var(--sl-nav-pad-x);
 	--sl-safe-nav-pad-right: var(--sl-nav-pad-x);
 	--sl-safe-nav-pad-top: var(--sl-nav-pad-y);
+	--sl-safe-content-pad-left: var(--sl-content-pad-x);
+	--sl-safe-content-pad-right: var(--sl-content-pad-x);
+	--sl-safe-content-pad-bottom: var(--sl-content-pad-y);
 }
 
 :root[data-theme='light'],
@@ -190,5 +194,17 @@
 		--sl-safe-nav-pad-left: max(var(--sl-nav-pad-x), env(safe-area-inset-left));
 		--sl-safe-nav-pad-right: max(var(--sl-nav-pad-x), env(safe-area-inset-right));
 		--sl-safe-nav-pad-top: max(var(--sl-nav-pad-y), env(safe-area-inset-top));
+		--sl-safe-content-pad-left: max(var(--sl-content-pad-x), env(safe-area-inset-left));
+		--sl-safe-content-pad-right: max(var(--sl-content-pad-x), env(safe-area-inset-right));
+		--sl-safe-content-pad-bottom: max(var(--sl-content-pad-y), env(safe-area-inset-bottom));
+	}
+
+	@media (min-width: 50rem) {
+		:root[dir='ltr'][data-has-sidebar] {
+			--sl-safe-content-pad-left: var(--sl-content-pad-x);
+		}
+		:root[dir='rtl'][data-has-sidebar] {
+			--sl-safe-content-pad-right: var(--sl-content-pad-x);
+		}
 	}
 }
