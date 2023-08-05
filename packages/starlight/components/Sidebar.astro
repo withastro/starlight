@@ -23,17 +23,9 @@ const { sidebar, locale } = Astro.props;
 <style>
 	.sidebar {
 		height: 100%;
-		padding: 1rem var(--sl-sidebar-pad-x);
+		padding: 1rem var(--sl-safe-sidebar-pad-right) 1rem var(--sl-safe-sidebar-pad-left);
 		flex-direction: column;
 		gap: 1rem;
-	}
-	@supports (padding: max(0px)) {
-		:global([dir='ltr']) .sidebar {
-			padding-left: max(var(--sl-sidebar-pad-x), env(safe-area-inset-left));
-		}
-		:global([dir='rtl']) .sidebar {
-			padding-right: max(var(--sl-sidebar-pad-x), env(safe-area-inset-right));
-		}
 	}
 
 	.mobile-preferences {
@@ -44,12 +36,7 @@ const { sidebar, locale } = Astro.props;
 
 	@media (min-width: 50rem) {
 		.sidebar > :global(:nth-last-child(2)) {
-			padding-bottom: 1rem;
-		}
-		@supports (padding: max(0px)) {
-			.sidebar > :global(:nth-last-child(2)) {
-				padding-bottom: max(1rem, env(safe-area-inset-bottom));
-			}
+			padding-bottom: var(--sl-safe-sidebar-pad-bottom);
 		}
 	}
 </style>

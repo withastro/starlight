@@ -99,6 +99,7 @@
 	--sl-mobile-toc-list-pad-x: 1rem;
 	--sl-sidebar-width: 18.75rem;
 	--sl-sidebar-pad-x: 1rem;
+	--sl-sidebar-pad-bottom: 1rem;
 	--sl-content-width: 45rem;
 	--sl-content-pad-x: 1rem;
 	--sl-content-pad-y: 1.5rem;
@@ -116,6 +117,9 @@
 	--sl-safe-nav-pad-left: var(--sl-nav-pad-x);
 	--sl-safe-nav-pad-right: var(--sl-nav-pad-x);
 	--sl-safe-nav-pad-top: var(--sl-nav-pad-y);
+	--sl-safe-sidebar-pad-left: var(--sl-sidebar-pad-x);
+	--sl-safe-sidebar-pad-right: var(--sl-sidebar-pad-x);
+	--sl-safe-sidebar-pad-bottom: var(--sl-sidebar-pad-bottom);
 	--sl-safe-content-pad-left: var(--sl-content-pad-x);
 	--sl-safe-content-pad-right: var(--sl-content-pad-x);
 	--sl-safe-content-pad-bottom: var(--sl-content-pad-y);
@@ -200,6 +204,9 @@
 		--sl-safe-nav-pad-left: max(var(--sl-nav-pad-x), env(safe-area-inset-left));
 		--sl-safe-nav-pad-right: max(var(--sl-nav-pad-x), env(safe-area-inset-right));
 		--sl-safe-nav-pad-top: max(var(--sl-nav-pad-y), env(safe-area-inset-top));
+		--sl-safe-sidebar-pad-left: max(var(--sl-sidebar-pad-x), env(safe-area-inset-left));
+		--sl-safe-sidebar-pad-right: max(var(--sl-sidebar-pad-x), env(safe-area-inset-right));
+		--sl-safe-sidebar-pad-bottom: max(var(--sl-sidebar-pad-bottom), env(safe-area-inset-bottom));
 		--sl-safe-content-pad-left: max(var(--sl-content-pad-x), env(safe-area-inset-left));
 		--sl-safe-content-pad-right: max(var(--sl-content-pad-x), env(safe-area-inset-right));
 		--sl-safe-content-pad-bottom: max(var(--sl-content-pad-y), env(safe-area-inset-bottom));
@@ -216,11 +223,13 @@
 	}
 
 	@media (min-width: 50rem) {
-		:root[dir='ltr'][data-has-sidebar] {
+		:root[data-has-sidebar] {
+			--sl-safe-sidebar-pad-right: var(--sl-sidebar-pad-x);
 			--sl-safe-content-pad-left: var(--sl-content-pad-x);
 			--sl-safe-mobile-toc-pad-left: var(--sl-mobile-toc-pad-x);
 		}
 		:root[dir='rtl'][data-has-sidebar] {
+			--sl-safe-sidebar-pad-left: var(--sl-sidebar-pad-x);
 			--sl-safe-content-pad-right: var(--sl-content-pad-x);
 			--sl-safe-mobile-toc-pad-right: var(--sl-mobile-toc-pad-x);
 		}
