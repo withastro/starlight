@@ -96,6 +96,7 @@
 	--sl-nav-pad-y: 0.75rem;
 	--sl-mobile-toc-height: 3rem;
 	--sl-mobile-toc-pad-x: 1rem;
+	--sl-mobile-toc-list-pad-x: 1rem;
 	--sl-sidebar-width: 18.75rem;
 	--sl-sidebar-pad-x: 1rem;
 	--sl-content-width: 45rem;
@@ -120,6 +121,8 @@
 	--sl-safe-content-pad-bottom: var(--sl-content-pad-y);
 	--sl-safe-mobile-toc-pad-left: var(--sl-mobile-toc-pad-x);
 	--sl-safe-mobile-toc-pad-right: var(--sl-mobile-toc-pad-x);
+	--sl-safe-mobile-toc-list-pad-left: var(--sl-mobile-toc-list-pad-x);
+	--sl-safe-mobile-toc-list-pad-right: var(--sl-mobile-toc-list-pad-x);
 }
 
 :root[data-theme='light'],
@@ -202,6 +205,14 @@
 		--sl-safe-content-pad-bottom: max(var(--sl-content-pad-y), env(safe-area-inset-bottom));
 		--sl-safe-mobile-toc-pad-left: max(var(--sl-mobile-toc-pad-x), env(safe-area-inset-left));
 		--sl-safe-mobile-toc-pad-right: max(var(--sl-mobile-toc-pad-x), env(safe-area-inset-right));
+		--sl-safe-mobile-toc-list-pad-left: max(
+			var(--sl-mobile-toc-list-pad-x),
+			env(safe-area-inset-left)
+		);
+		--sl-safe-mobile-toc-list-pad-right: max(
+			var(--sl-mobile-toc-list-pad-x),
+			env(safe-area-inset-right)
+		);
 	}
 
 	@media (min-width: 50rem) {

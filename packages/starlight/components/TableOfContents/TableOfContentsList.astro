@@ -46,25 +46,21 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 		background-color: var(--sl-color-text-accent);
 	}
 	.isMobile a {
-		--pad-inline: 1rem;
+		--pad-inline: var(--sl-mobile-toc-list-pad-x);
 		display: flex;
 		justify-content: space-between;
 		gap: var(--pad-inline);
 		border-top: 1px solid var(--sl-color-gray-6);
 		border-radius: 0;
 		padding-block: 0.5rem;
+		padding-right: var(--sl-safe-mobile-toc-list-pad-right);
 		color: var(--sl-color-text);
 		font-size: var(--sl-text-sm);
 		text-decoration: none;
 		outline-offset: var(--sl-outline-offset-inside);
 	}
-	@supports (padding: max(0px)) {
-		:global([dir='ltr']) .isMobile a {
-			padding-right: max(var(--pad-inline), env(safe-area-inset-right));
-		}
-		:global([dir='rtl']) .isMobile a {
-			padding-left: max(var(--pad-inline), env(safe-area-inset-left));
-		}
+	:global([dir='rtl']) .isMobile a {
+		padding-left: var(--sl-safe-mobile-toc-list-pad-left);
 	}
 	.isMobile:first-child > li:first-child > a {
 		border-top: 0;
