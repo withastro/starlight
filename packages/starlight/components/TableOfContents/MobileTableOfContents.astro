@@ -47,33 +47,17 @@ const t = useTranslations(locale);
 	}
 
 	summary {
-		--pad-x: 1rem;
 		gap: 0.5rem;
 		align-items: center;
 		height: var(--sl-mobile-toc-height);
 		border-bottom: 1px solid var(--sl-color-hairline-shade);
-		padding: 0.5rem var(--pad-x);
+		padding: 0.5rem var(--sl-safe-mobile-toc-pad-right) 0.5rem var(--sl-safe-mobile-toc-pad-left);
 		font-size: var(--sl-text-xs);
 		outline-offset: var(--sl-outline-offset-inside);
 	}
 	summary::marker,
 	summary::-webkit-details-marker {
 		display: none;
-	}
-	@supports (padding: max(0px)) {
-		summary {
-			padding-left: max(var(--pad-x), env(safe-area-inset-left));
-			padding-right: max(var(--pad-x), env(safe-area-inset-right));
-		}
-
-		@media (min-width: 50rem) {
-			:global([dir='ltr']) summary {
-				padding-left: var(--pad-x);
-			}
-			:global([dir='rtl']) summary {
-				padding-right: var(--pad-x);
-			}
-		}
 	}
 
 	.toggle {
