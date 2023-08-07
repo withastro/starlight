@@ -6,6 +6,7 @@ import { pickLang } from './i18n';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
+import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
 
 const DirKey = Symbol('DirKey');
 
@@ -97,19 +98,6 @@ function groupFromAutogenerateConfig(
 
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
-
-/** Ensure the passed path ends with a trailing slash. */
-function ensureTrailingSlash(href: string): string {
-	if (href[href.length - 1] !== '/') href += '/';
-	return href;
-}
-
-/** Ensure the passed path starts and ends with trailing slashes. */
-function ensureLeadingAndTrailingSlashes(href: string): string {
-	if (href[0] !== '/') href = '/' + href;
-	href = ensureTrailingSlash(href);
-	return href;
-}
 
 /** Create a link entry from a user config object. */
 function linkFromConfig(
