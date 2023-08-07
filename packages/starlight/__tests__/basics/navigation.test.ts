@@ -63,6 +63,13 @@ describe('getSidebar', () => {
 		}
 	});
 
+	test('ignore trailing slashes when marking current path with isCurrent', () => {
+		const pathWithoutTrailingSlash = '/environmental-impact';
+		const items = flattenSidebar(getSidebar(pathWithoutTrailingSlash, undefined));
+		const currentItems = items.filter((item) => item.type === 'link' && item.isCurrent);
+		expect(currentItems).toMatchObject([{ href: `${pathWithoutTrailingSlash}/`, type: 'link' }]);
+	});
+
 	test('nests files in subdirectory in group when autogenerating', () => {
 		const sidebar = getSidebar('/', undefined);
 		expect(sidebar.every((item) => item.type === 'group' || !item.href.startsWith('/guides/')));
