@@ -23,11 +23,8 @@ export default defineConfig({
 					autogenerate: { directory: 'reference' },
 				},
 			],
-			/* TODO: Remove custom CSS once https://github.com/withastro/astro/issues/7563 is fixed. */
-			customCss: ['./src/tailwind.css'],
 		}),
-		/* TODO: Unset `applyBaseStyles` once https://github.com/withastro/astro/issues/7563 is fixed. */
-		tailwind({ applyBaseStyles: false }),
+		tailwind(),
 	],
 	// Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp
 	image: {
