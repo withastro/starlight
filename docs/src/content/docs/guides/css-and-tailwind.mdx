@@ -140,7 +140,41 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
     </Tabs>
 
-3.  Add the Starlight Tailwind plugin to `tailwind.config.cjs`:
+3.  Create a CSS file for Tailwind’s base styles, for example at `src/tailwind.css`:
+
+    ```css
+    /* src/tailwind.css */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    ```
+
+4.  Update your Astro config file to use your Tailwind base styles and disable the default base styles:
+
+    ```js {11-12,16-17}
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+    import tailwind from '@astrojs/tailwind';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Docs with Tailwind',
+    			customCss: [
+    				// Path to your Tailwind base styles:
+    				'./src/tailwind.css',
+    			],
+    		}),
+    		tailwind({
+    			// Disable the default base styles:
+    			applyBaseStyles: false,
+    		}),
+    	],
+    });
+    ```
+
+5.  Add the Starlight Tailwind plugin to `tailwind.config.cjs`:
 
     ```js ins={2,7}
     // tailwind.config.cjs
