@@ -23,8 +23,9 @@ export default defineConfig({
 					autogenerate: { directory: 'reference' },
 				},
 			],
+			customCss: ['./src/tailwind.css'],
 		}),
-		tailwind(),
+		tailwind({ applyBaseStyles: false }),
 	],
 	// Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp
 	image: {
