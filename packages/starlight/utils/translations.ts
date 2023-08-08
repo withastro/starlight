@@ -19,9 +19,19 @@ try {
 const defaults = buildDictionary(
 	builtinTranslations.en!,
 	userTranslations.en,
-	builtinTranslations[defaultLocale],
+	builtinTranslations[stripLangRegion(defaultLocale)],
 	userTranslations[defaultLocale]
 );
+
+/**
+ * Strips the region subtag from a BCP-47 lang string.
+ * @param {string | undefined} [lang]
+ * @example
+ * const lang = stripLangRegion('en-GB'); // => 'en'
+ */
+export function stripLangRegion(lang: string) {
+	return lang.replace(/-[a-zA-Z]{2}/, '');
+}
 
 /**
  * Generate a utility function that returns UI strings for the given `locale`.
@@ -33,7 +43,11 @@ const defaults = buildDictionary(
 export function useTranslations(locale: string | undefined) {
 	// TODO: Use better mapping, e.g. so that `en-GB` matches `en`.
 	const lang = localeToLang(locale);
-	const dictionary = buildDictionary(defaults, builtinTranslations[lang], userTranslations[lang]);
+	const dictionary = buildDictionary(
+		defaults,
+		builtinTranslations[stripLangRegion(lang)],
+		userTranslations[lang]
+	);
 	const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
 	t.pick = (startOfKey: string) =>
 		Object.fromEntries(Object.entries(dictionary).filter(([k]) => k.startsWith(startOfKey)));
