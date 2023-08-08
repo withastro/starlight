@@ -65,11 +65,11 @@ const { heading, description, ...attributes } = Astro.props;
 
 	/* Hover state */
 	a:hover {
-		background: var(--sl-color-gray-6);
-		border-color: var(--sl-color-accent-high);
+		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+		border-color: var(--sl-color-gray-2);
 	}
 
 	a:hover .icon {
-		color: var(--sl-color-accent-high);
+		color: var(--sl-color-white);
 	}
 </style>
