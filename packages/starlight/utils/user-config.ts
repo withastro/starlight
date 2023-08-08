@@ -3,6 +3,7 @@ import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { FaviconSchema } from '../schemas/favicon';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -120,6 +121,7 @@ const UserConfigSchema = z.object({
 	 *   codeberg: 'https://codeberg.org/knut/examples',
 	 *   discord: 'https://astro.build/chat',
 	 *   github: 'https://github.com/withastro/starlight',
+	 *   gitlab: 'https://gitlab.com/delucis',
 	 *   linkedin: 'https://www.linkedin.com/company/astroinc',
 	 *   mastodon: 'https://m.webtoo.ls/@astro',
 	 *   threads: 'https://www.threads.net/@nmoodev',
@@ -134,12 +136,17 @@ const UserConfigSchema = z.object({
 				'twitter',
 				'mastodon',
 				'github',
+				'gitlab',
+				'bitbucket',
 				'discord',
+				'gitter',
 				'codeberg',
+				'codePen',
 				'youtube',
 				'threads',
 				'linkedin',
 				'twitch',
+				'microsoftTeams',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
@@ -261,6 +268,9 @@ const UserConfigSchema = z.object({
 		.boolean()
 		.default(true)
 		.describe('Define if the previous and next page links should be visible in the page footer.'),
+
+	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
+	favicon: FaviconSchema(),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

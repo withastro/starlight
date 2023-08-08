@@ -295,7 +295,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
@@ -305,6 +305,7 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
     linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
     threads: 'https://www.threads.net/@nmoodev',
@@ -379,3 +380,35 @@ By default, this feature relies on your repository’s Git history and may not b
 Define if the footer should include previous and next page links.
 
 A page can override this setting or the link text and/or URL using the [`prev`](/reference/frontmatter/#prev) and [`next`](/reference/frontmatter/#next) frontmatter fields.
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+Set the path of the default favicon for your website which should be located in the `public/` directory and be a valid (`.ico`, `.gif`, `.jpg`, `.png`, or `.svg`) icon file.
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+If you need to set additional variants or fallback favicons, you can add tags using the [`head` option](#head):
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Add ICO favicon fallback for Safari.
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
+```

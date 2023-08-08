@@ -1,11 +1,14 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
+import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import { pathWithBase } from './base';
 import { pickLang } from './i18n';
-import { type Route, getLocaleRoutes, routes } from './routing';
+import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
-import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
+import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
+
+const DirKey = Symbol('DirKey');
 
 export interface Link {
 	type: 'link';
@@ -27,10 +30,24 @@ export type SidebarEntry = Link | Group;
  * A representation of the route structure. For each object entry:
  * if it’s a folder, the key is the directory name, and value is the directory
  * content; if it’s a route entry, the key is the last segment of the route, and value
- * is the entry’s full slug.
+ * is the full entry.
  */
 interface Dir {
-	[item: string]: Dir | string;
+	[DirKey]: undefined;
+	[item: string]: Dir | Route;
+}
+
+/** Create a new directory object. */
+function makeDir(): Dir {
+	const dir = {} as Dir;
+	// Add DirKey as a non-enumerable property so that `Object.entries(dir)` ignores it.
+	Object.defineProperty(dir, DirKey, { enumerable: false });
+	return dir;
+}
+
+/** Test if the passed object is a directory record.  */
+function isDir(data: Record<string, unknown>): data is Dir {
+	return DirKey in data;
 }
 
 /** Convert an item in a user’s sidebar config to a sidebar entry. */
@@ -82,13 +99,6 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
-/** Ensure the passed path starts and ends with trailing slashes. */
-function ensureLeadingAndTrailingSlashes(href: string): string {
-	if (href[0] !== '/') href = '/' + href;
-	if (href[href.length - 1] !== '/') href += '/';
-	return href;
-}
-
 /** Create a link entry from a user config object. */
 function linkFromConfig(
 	item: SidebarLinkItem,
@@ -108,7 +118,7 @@ function linkFromConfig(
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === currentPathname;
+	const isCurrent = href === ensureTrailingSlash(currentPathname);
 	return { type: 'link', label, href, isCurrent };
 }
 
@@ -132,7 +142,7 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 
 /** Turn a flat array of routes into a tree structure. */
 function treeify(routes: Route[], baseDir: string): Dir {
-	const treeRoot: Dir = {};
+	const treeRoot: Dir = makeDir();
 	routes.forEach((doc) => {
 		const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
 
@@ -140,20 +150,45 @@ function treeify(routes: Route[], baseDir: string): Dir {
 		let currentDir = treeRoot;
 		breadcrumbs.forEach((dir) => {
 			// Create new folder if needed.
-			if (typeof currentDir[dir] === 'undefined') currentDir[dir] = {};
+			if (typeof currentDir[dir] === 'undefined') currentDir[dir] = makeDir();
 			// Go into the subdirectory.
 			currentDir = currentDir[dir] as Dir;
 		});
 		// We’ve walked through the path. Register the route in this directory.
-		currentDir[basename(doc.slug)] = doc.slug;
+		currentDir[basename(doc.slug)] = doc;
 	});
 	return treeRoot;
 }
 
 /** Create a link entry for a given content collection entry. */
-function linkFromSlug(slug: string, currentPathname: string): Link {
-	const doc = routes.find((doc) => doc.slug === slug)!;
-	return makeLink(slugToPathname(doc.slug), doc.entry.data.title, currentPathname);
+function linkFromRoute(route: Route, currentPathname: string): Link {
+	return makeLink(
+		slugToPathname(route.slug),
+		route.entry.data.sidebar.label || route.entry.data.title,
+		currentPathname
+	);
+}
+
+/**
+ * Get the sort weight for a given route or directory. Lower numbers rank higher.
+ * Directories have the weight of the lowest weighted route they contain.
+ */
+function getOrder(routeOrDir: Route | Dir): number {
+	return isDir(routeOrDir)
+		? Math.min(...Object.values(routeOrDir).flatMap(getOrder))
+		: // If no order value is found, set it to the largest number possible.
+		  routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE;
+}
+
+/** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
+function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
+	return dir.sort(([, a], [, b]) => {
+		const [aOrder, bOrder] = [getOrder(a), getOrder(b)];
+		// Pages are sorted by order in ascending order.
+		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
+		// If two pages have the same order value they will be sorted by their slug.
+		return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0;
+	});
 }
 
 /** Create a group entry for a given content collection directory. */
@@ -165,8 +200,8 @@ function groupFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ): Group {
-	const entries = Object.entries(dir).map(([key, dirOrSlug]) =>
-		dirToItem(dirOrSlug, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
+	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
+		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
 	);
 	return {
 		type: 'group',
@@ -176,18 +211,18 @@ function groupFromDir(
 	};
 }
 
-/** Create a sidebar entry for a directory or content slug. */
+/** Create a sidebar entry for a directory or content entry. */
 function dirToItem(
-	dirOrSlug: Dir[string],
+	dirOrRoute: Dir[string],
 	fullPath: string,
 	dirName: string,
 	currentPathname: string,
 	locale: string | undefined,
 	collapsed: boolean
 ): SidebarEntry {
-	return typeof dirOrSlug === 'string'
-		? linkFromSlug(dirOrSlug, currentPathname)
-		: groupFromDir(dirOrSlug, fullPath, dirName, currentPathname, locale, collapsed);
+	return isDir(dirOrRoute)
+		? groupFromDir(dirOrRoute, fullPath, dirName, currentPathname, locale, collapsed)
+		: linkFromRoute(dirOrRoute, currentPathname);
 }
 
 /** Create a sidebar entry for a given content directory. */
@@ -197,8 +232,8 @@ function sidebarFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ) {
-	return Object.entries(tree).map(([key, dirOrSlug]) =>
-		dirToItem(dirOrSlug, key, key, currentPathname, locale, collapsed)
+	return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
+		dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed)
 	);
 }
 

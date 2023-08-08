@@ -6,14 +6,19 @@ type Platform = keyof NonNullable<typeof config.social>;
 
 const labels: Record<Platform, string> = {
 	github: 'GitHub',
+	gitlab: 'GitLab',
+	bitbucket: 'Bitbucket',
 	discord: 'Discord',
+	gitter: 'Gitter',
 	twitter: 'Twitter',
 	mastodon: 'Mastodon',
 	codeberg: 'Codeberg',
+	codePen: 'CodePen',
 	youtube: 'YouTube',
 	threads: 'Threads',
 	linkedin: 'LinkedIn',
 	twitch: 'Twitch',
+	microsoftTeams: 'Microsoft Teams',
 };
 
 const links = Object.entries(config.social || {}).filter(([, url]) => Boolean(url)) as [
