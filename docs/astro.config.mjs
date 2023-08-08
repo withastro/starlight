@@ -61,7 +61,7 @@ export default defineConfig({
 						fr: 'Commencez ici',
 						it: 'Inizia qui',
 						zh: '从这里开始',
-						'pt-br': 'Comece Aqui',
+						'pt-BR': 'Comece Aqui',
 					},
 					items: [
 						{
@@ -74,7 +74,7 @@ export default defineConfig({
 								fr: 'Mise en route',
 								it: 'Iniziamo',
 								zh: '开始使用',
-								'pt-br': 'Introdução',
+								'pt-BR': 'Introdução',
 							},
 						},
 						{
@@ -87,7 +87,7 @@ export default defineConfig({
 								// fr: 'Manual Setup',
 								// it: 'Manual Setup',
 								zh: '手动配置',
-								'pt-br': 'Instalação Manual',
+								'pt-BR': 'Instalação Manual',
 							},
 						},
 						{
@@ -100,7 +100,7 @@ export default defineConfig({
 								fr: 'Impact environnemental',
 								it: 'Impatto ambientale',
 								zh: '环境影响',
-								'pt-br': 'Impacto Ambiental',
+								'pt-BR': 'Impacto Ambiental',
 							},
 						},
 						{
@@ -125,7 +125,7 @@ export default defineConfig({
 						fr: 'Guides',
 						it: 'Guide',
 						zh: '指南',
-						'pt-br': 'Guias',
+						'pt-BR': 'Guias',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -138,7 +138,7 @@ export default defineConfig({
 						fr: 'Référence',
 						it: 'Riferimenti',
 						zh: '参考',
-						'pt-br': 'Referência',
+						'pt-BR': 'Referência',
 					},
 					autogenerate: { directory: 'reference' },
 				},
