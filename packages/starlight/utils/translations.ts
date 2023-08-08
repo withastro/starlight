@@ -25,7 +25,7 @@ const defaults = buildDictionary(
 
 /**
  * Strips the region subtag from a BCP-47 lang string.
- * @param {string | undefined} [lang]
+ * @param {string} [lang]
  * @example
  * const lang = stripLangRegion('en-GB'); // => 'en'
  */
