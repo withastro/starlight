@@ -16,7 +16,7 @@ const { heading, description, ...attributes } = Astro.props;
 			<span class="title" set:html={heading} />
 			{description && <span class="description" set:html={description} />}
 		</span>
-		<Icon name="right-arrow" size="1.333em" class="icon rtl-flip" />
+		<Icon name="right-arrow" size="1.333em" class="icon rtl:flip" />
 	</a>
 </div>
 
