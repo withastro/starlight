@@ -41,7 +41,6 @@ export function stripLangRegion(lang: string) {
  * const label = t('search.label'); // => 'Search'
  */
 export function useTranslations(locale: string | undefined) {
-	// TODO: Use better mapping, e.g. so that `en-GB` matches `en`.
 	const lang = localeToLang(locale);
 	const dictionary = buildDictionary(
 		defaults,
