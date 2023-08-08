@@ -23,7 +23,7 @@ const { heading, description, ...attributes } = Astro.props;
 			)
 		}
 	</span>
-	<Icon name="right-arrow" size="1.333em" class="icon" />
+	<Icon name="right-arrow" size="1.333em" class="icon rtl-flip" />
 </a>
 
 <style>
@@ -61,12 +61,6 @@ const { heading, description, ...attributes } = Astro.props;
 
 	.icon {
 		color: var(--sl-color-gray-3);
-	}
-
-	/* Handles rotating the arrow for rtl languages since there currently isn't a way to read
-  direction without it being passed through a prop */
-	:global([dir='rtl']) .icon:not(:where([dir='rtl'] [dir='ltr'] *)) {
-		transform: rotate(180deg);
 	}
 
 	/* Hover state */
