@@ -22,6 +22,7 @@ Starlight 已投入生产。 这些是网络上的一些网站：
 - [xs-dev docs](https://xs-dev.js.org)
 - [Athena OS](https://www.athenaos.org)
 - [simple-fm](https://simple.arciniega.one)
+- [CommandKit](https://commandkit.underctrl.io)
 
 查看所有[在 GitHub 上使用 Starlight 的公共项目仓库](https://github.com/withastro/starlight/network/dependents)。
 
