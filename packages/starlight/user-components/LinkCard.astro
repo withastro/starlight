@@ -11,7 +11,7 @@ const { heading, description, ...attributes } = Astro.props;
 ---
 
 <div>
-	<a {...attributes} class="content">
+	<a {...attributes}>
 		<span class="flex stack">
 			<span class="title" set:html={heading} />
 			{description && <span class="description" set:html={description} />}
