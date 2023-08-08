@@ -49,7 +49,7 @@ Primarily useful for things where we can’t rely on writing direction like icon
 <Icon name="right-arrow" class="rtl:flip" />
 
 In a LTR context:					In a RTL context:
-→      										←
+→													←
 */
 [dir='rtl'] .rtl\:flip:not(:where([dir='rtl'] [dir='ltr'] *)) {
 	transform: matrix(-1, 0, 0, 1, 0, 0);
