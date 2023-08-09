@@ -59,16 +59,16 @@ const {
 			document.adoptedStyleSheets = [...document.adoptedStyleSheets, this.#stylesheet];
 			// Update theme palettes on user input.
 			const onInput = () => this.#update();
-			store.accent.subscribe(onInput);
-			store.gray.subscribe(onInput);
+			store.accent.listen(onInput);
+			store.gray.listen(onInput);
 			// Initialise page and preview styles.
-			this.#update();
+			this.#update(false);
 		}
 
-		#update() {
+		#update(page?: boolean) {
 			const palettes = getPalettes({ accent: store.accent.get(), gray: store.gray.get() });
 			this.#updatePreview(palettes);
-			this.#updateStylesheet(palettes);
+			this.#updateStylesheet(palettes, page);
 			this.#updateTailwindConfig(palettes);
 		}
 
@@ -91,12 +91,12 @@ const {
 		}
 
 		/** Update the CSS stylesheet applied to the current page and offered to users to copy. */
-		#updateStylesheet({ dark, light }: ReturnType<typeof getPalettes>) {
+		#updateStylesheet({ dark, light }: ReturnType<typeof getPalettes>, page = true) {
 			const styles = `/* Dark mode colors. */
 :root {\n\t${this.#paletteToRules(dark)}\n}
 /* Light mode colors. */
 :root[data-theme='light'] {\n\t${this.#paletteToRules(light)}\n}`;
-			this.#stylesheet.replaceSync(styles);
+			if (page) this.#stylesheet.replaceSync(styles);
 			const codePreview = this.querySelector('[data-theme-css]');
 			if (codePreview) codePreview.innerHTML = styles;
 		}
