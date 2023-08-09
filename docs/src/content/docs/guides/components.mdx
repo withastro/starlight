@@ -129,7 +129,7 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 
 Use the `<LinkCard>` component to link prominently to different pages.
 
-A `<LinkCard>` requires a `heading` and an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) attribute. You can optionally include a short `description` or other link attributes such as `target`.
+A `<LinkCard>` requires a `title` and an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) attribute. You can optionally include a short `description` or other link attributes such as `target`.
 
 Group multiple `<LinkCard>` components in `<CardGrid>` to display cards side-by-side when there’s enough space.
 
@@ -137,14 +137,14 @@ Group multiple `<LinkCard>` components in `<CardGrid>` to display cards side-by-
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
-	heading="Customizing Starlight"
+	title="Customizing Starlight"
 	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
 	href="/guides/customization/"
 />
 
 <CardGrid>
-	<LinkCard heading="Authoring Markdown" href="/guides/authoring-content/" />
-	<LinkCard heading="Components" href="/guides/components/" />
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/guides/components/" />
 </CardGrid>
 ```
 
@@ -153,14 +153,14 @@ The above code generates the following on the page:
 import { LinkCard } from '@astrojs/starlight/components';
 
 <LinkCard
-	heading="Customizing Starlight"
+	title="Customizing Starlight"
 	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
 	href="/guides/customization/"
 />
 
 <CardGrid>
-	<LinkCard heading="Authoring Markdown" href="/guides/authoring-content/" />
-	<LinkCard heading="Components" href="/guides/components/" />
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/guides/components/" />
 </CardGrid>
 
 ### Icon
