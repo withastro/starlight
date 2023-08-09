@@ -19,7 +19,7 @@ try {
 const defaults = buildDictionary(
 	builtinTranslations.en!,
 	userTranslations.en,
-	builtinTranslations[stripLangRegion(defaultLocale)],
+	builtinTranslations[defaultLocale] || builtinTranslations[stripLangRegion(defaultLocale)],
 	userTranslations[defaultLocale]
 );
 
@@ -44,7 +44,7 @@ export function useTranslations(locale: string | undefined) {
 	const lang = localeToLang(locale);
 	const dictionary = buildDictionary(
 		defaults,
-		builtinTranslations[stripLangRegion(lang)],
+		builtinTranslations[lang] || builtinTranslations[stripLangRegion(lang)],
 		userTranslations[lang]
 	);
 	const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
