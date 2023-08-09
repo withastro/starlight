@@ -1,64 +1,36 @@
 ---
 import { TabItem, Tabs } from '@astrojs/starlight/components';
-import ColorEditor from './theme-designer/color-editor.astro';
-import Palette from './theme-designer/palette.astro';
+import ColorEditor, { Props as EditorProps } from './theme-designer/color-editor.astro';
 import Presets, { Props as PresetsProps } from './theme-designer/presets.astro';
+import Preview from './theme-designer/preview.astro';
 
 interface Props {
-  labels: Record<
-    | 'hue'
-    | 'chroma'
-    | 'pickColor'
-    | 'accentColor'
-    | 'grayColor'
-    | 'darkMode'
-    | 'lightMode'
-    | 'bodyText'
-    | 'linkText'
-    | 'dimText'
-    | 'inlineCode',
-    string
-  > & {
+  labels: {
     presets: PresetsProps['labels'];
+    editor: EditorProps['labels'] & { accentColor: string; grayColor: string };
+    preview: Record<
+      'darkMode' | 'lightMode' | 'bodyText' | 'linkText' | 'dimText' | 'inlineCode',
+      string
+    >;
   };
 }
-const { labels } = Astro.props;
+const {
+  labels: { presets, editor, preview },
+} = Astro.props;
 ---
 
-<Presets labels={labels.presets} />
+<Presets labels={presets} />
 
 <div>
   <theme-designer>
     <div class="flex controls not-content">
-      <ColorEditor key="accent" legend={labels.accentColor} {labels} />
-      <ColorEditor key="gray" legend={labels.grayColor} {labels} />
+      <ColorEditor key="accent" legend={editor.accentColor} labels={editor} />
+      <ColorEditor key="gray" legend={editor.grayColor} labels={editor} />
     </div>
 
     <div class="preview" data-accent-preview>
-      <div data-dark>
-        <h4 style="color:var(--sl-color-white); font-weight:600;">
-          {labels.darkMode}
-        </h4>
-        <p style="margin-top:0.5em;">
-          {labels.bodyText}
-          <span class="link" style="color:var(--sl-color-accent-high)">{labels.linkText}</span>
-          <span style="color:var(--sl-color-gray-3)">{labels.dimText}</span>
-          <code style="--sl-color-bg-inline-code:var(--sl-color-gray-5)">{labels.inlineCode}</code>
-        </p>
-        <Palette />
-      </div>
-      <div style="margin:0;" data-light>
-        <h4 style="color:var(--sl-color-white); font-weight:600;">
-          {labels.lightMode || 'Light mode'}
-        </h4>
-        <p style="margin-top:0.5em;">
-          {labels.bodyText}
-          <span class="link" style="color:var(--sl-color-accent)">{labels.linkText}</span>
-          <span style="color:var(--sl-color-gray-3)">{labels.dimText}</span>
-          <code style="--sl-color-bg-inline-code:var(--sl-color-gray-6)">{labels.inlineCode}</code>
-        </p>
-        <Palette light />
-      </div>
+      <Preview labels={preview} data-dark />
+      <Preview labels={preview} data-light />
     </div>
 
     <Tabs>
@@ -167,16 +139,7 @@ module.exports = {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  .preview > * {
-    border: 1px solid var(--sl-color-gray-5);
-    padding: 1rem;
-    color: var(--sl-color-gray-2);
-    background-color: var(--sl-color-black);
-    font-size: var(--sl-text-sm);
-  }
-  .link {
-    text-decoration: underline;
-  }
+
   .generated-code {
     height: 16rem;
     background-color: var(--astro-code-color-background);

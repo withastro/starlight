@@ -3,7 +3,7 @@ import { oklchToHex } from './color-lib';
 import { store } from './store';
 import ValueSlider from './value-slider.astro';
 
-interface Props {
+export interface Props {
   key: keyof typeof store;
   legend: string;
   labels: Record<'pickColor' | 'hue' | 'chroma', string>;

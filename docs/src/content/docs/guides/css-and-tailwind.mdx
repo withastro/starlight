@@ -217,18 +217,22 @@ import ThemeDesigner from '../../../components/theme-designer.astro';
 			default: 'Default',
 			random: 'Random',
 		},
-		hue: 'Hue',
-		chroma: 'Chroma',
-		pickColor: 'Pick color',
-		accentColor: 'Accent palette',
-		grayColor: 'Gray palette',
-		darkMode: 'Dark mode',
-		lightMode: 'Light mode',
-		bodyText:
-			'Body text is displayed in a gray shade with a high contrast with the background.',
-		linkText: 'Links are colored.',
-		dimText: 'Some text, like the table of contents, has a lower contrast.',
-		inlineCode: 'Inline code has a distinct background.',
+		editor: {
+			accentColor: 'Accent',
+			grayColor: 'Gray',
+			hue: 'Hue',
+			chroma: 'Chroma',
+			pickColor: 'Pick color',
+		},
+		preview: {
+			darkMode: 'Dark mode',
+			lightMode: 'Light mode',
+			bodyText:
+				'Body text is displayed in a gray shade with a high contrast with the background.',
+			linkText: 'Links are colored.',
+			dimText: 'Some text, like the table of contents, has a lower contrast.',
+			inlineCode: 'Inline code has a distinct background.',
+		},
 	}}
 >
 	<Fragment slot="css-docs">
