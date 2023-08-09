@@ -5,12 +5,15 @@ interface Props {
 ---
 
 <div class="not-content">
-  <div class="palette flex">
-    <div style="--bg:var(--sl-color-accent-low)"></div>
-    <div style="--bg:var(--sl-color-accent)"></div>
-    <div style="--bg:var(--sl-color-accent-high)"></div>
-  </div>
-  <div class="palette flex">
+  <div class="palette">
+    {
+      Astro.props.light ? (
+        <div class="circle" style="--bg:var(--sl-color-accent)" />
+      ) : (
+        <div class="circle" style="--bg:var(--sl-color-accent-high)" />
+      )
+    }
+    <div style="--bg:var(--sl-color-black)"></div>
     <div style="--bg:var(--sl-color-white)"></div>
     <div style="--bg:var(--sl-color-gray-1)"></div>
     <div style="--bg:var(--sl-color-gray-2)"></div>
@@ -18,21 +21,21 @@ interface Props {
     <div style="--bg:var(--sl-color-gray-4)"></div>
     <div style="--bg:var(--sl-color-gray-5)"></div>
     <div style="--bg:var(--sl-color-gray-6)"></div>
-    {
-      Astro.props.light ? (
-        <div style="--bg:var(--sl-color-gray-7)" />
-      ) : (
-        <div style="--bg:var(--sl-color-black)" />
-      )
-    }
-    <div style="--bg:var(--sl-color-black)"></div>
+    {Astro.props.light && <div style="--bg:var(--sl-color-gray-7)" />}
   </div>
 </div>
 
 <style>
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+  }
   .palette > * {
     aspect-ratio: 1;
-    flex-grow: 1;
     background-color: var(--bg);
+  }
+
+  .circle {
+    border-radius: 50%;
   }
 </style>

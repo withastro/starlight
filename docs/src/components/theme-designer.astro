@@ -34,25 +34,25 @@ const { labels } = Astro.props;
         <h4 style="color:var(--sl-color-white); font-weight:600;">
           {labels.darkMode}
         </h4>
-        <Palette />
-        <p>
+        <p style="margin-top:0.5em;">
           {labels.bodyText}
           <span class="link" style="color:var(--sl-color-accent-high)">{labels.linkText}</span>
           <span style="color:var(--sl-color-gray-3)">{labels.dimText}</span>
           <code style="--sl-color-bg-inline-code:var(--sl-color-gray-5)">{labels.inlineCode}</code>
         </p>
+        <Palette />
       </div>
       <div style="margin:0;" data-light>
         <h4 style="color:var(--sl-color-white); font-weight:600;">
           {labels.lightMode || 'Light mode'}
         </h4>
-        <Palette light />
-        <p>
+        <p style="margin-top:0.5em;">
           {labels.bodyText}
           <span class="link" style="color:var(--sl-color-accent)">{labels.linkText}</span>
           <span style="color:var(--sl-color-gray-3)">{labels.dimText}</span>
           <code style="--sl-color-bg-inline-code:var(--sl-color-gray-6)">{labels.inlineCode}</code>
         </p>
+        <Palette light />
       </div>
     </div>
 
