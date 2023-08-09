@@ -2,6 +2,7 @@
 import { TabItem, Tabs } from '@astrojs/starlight/components';
 import ColorEditor from './theme-designer/color-editor.astro';
 import Palette from './theme-designer/palette.astro';
+import Presets from './theme-designer/presets.astro';
 
 interface Props {
   labels: Record<
@@ -21,6 +22,8 @@ interface Props {
 }
 const { labels } = Astro.props;
 ---
+
+<Presets />
 
 <div>
   <theme-designer>
