@@ -17,7 +17,7 @@ You must now set accent colors directly. If you relied on setting `--sl-hue-acce
 }
 
 :root[data-theme="light"] {
-  --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
 	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
 	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
 }
