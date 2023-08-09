@@ -5,6 +5,63 @@ import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
+import builtinTranslations from '../translations';
+import type { StarlightConfig } from '../types';
+
+
+/** Build a dictionary by layering preferred translation sources. */
+function buildDictionary(
+	base: (typeof builtinTranslations)[string],
+	...dictionaries: (CollectionEntry<'i18n'>['data'] | undefined)[]
+) {
+	const dictionary = { ...base };
+	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
+	for (const dict of dictionaries) {
+		for (const key in dict) {
+			const value = dict[key as keyof typeof dict];
+			if (value) dictionary[key as keyof typeof dict] = value;
+		}
+	}
+	return dictionary;
+}
+
+// TODO get defaultLocale
+const defaultLocale = 'root';
+
+/** All translation data from the i18n collection, keyed by `id`, which matches locale. */
+let userTranslations = {};
+try {
+    // Load the user’s i18n collection and ignore the error if it doesn’t exist.
+    // TODO How to get user i18n collection
+} catch {}
+
+/** Default map of UI strings based on Starlight and user-configured defaults. */
+const defaults = buildDictionary(
+	builtinTranslations.en!,
+	userTranslations.en,
+	builtinTranslations[defaultLocale],
+	userTranslations[defaultLocale]
+);
+
+function localeToLang(locale: string | undefined): string {
+	return 'zh';
+}
+
+/**
+ * Generate a utility function that returns UI strings for the given `locale`.
+ * @param {string | undefined} [locale]
+ * @example
+ * const t = useTranslations('en');
+ * const label = t('search.label'); // => 'Search'
+ */
+export function useTranslations(locale: string | undefined) {
+	const lang = localeToLang(locale);
+	const dictionary = buildDictionary(defaults, builtinTranslations[lang], userTranslations[lang]);
+	const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
+	t.pick = (startOfKey: string) =>
+		Object.fromEntries(Object.entries(dictionary).filter(([k]) => k.startsWith(startOfKey)));
+	return t;
+}
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: any[] = []): P {
@@ -54,14 +111,9 @@ function remarkAsides(): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
-
-	// TODO: hook these up for i18n once the design for translating strings is ready
-	const defaultTitles = {
-		note: 'Note',
-		tip: 'Tip',
-		caution: 'Caution',
-		danger: 'Danger',
-	};
+  // TODO how to get current locale
+  const locale = 'en';
+  const t = useTranslations(locale);
 
 	const iconPaths = {
 		// Information icon
@@ -96,18 +148,19 @@ function remarkAsides(): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree) => {
+
+    // console.log('Astro.props',  Astro.props);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
 				return;
 			}
 			const variant = node.name;
 			if (!isAsideVariant(variant)) return;
-
 			// remark-directive converts a container’s “label” to a paragraph in
 			// its children, but we want to pass it as the title prop to <Aside>, so
 			// we iterate over the children, find a directive label, store it for the
 			// title prop, and remove the paragraph from children.
-			let title = defaultTitles[variant];
+			let title = t(`aside.${variant}`) || 'error';
 			remove(node, (child): boolean | void => {
 				if (child.data?.directiveLabel) {
 					if (

@@ -88,6 +88,10 @@ function starlightI18nSchema() {
 				.describe('Label shown on the “next page” pagination arrow in the page footer.'),
 
 			'404.text': z.string().describe('Text shown on Starlight’s default 404 page'),
+      'aside.tip': z.string().describe('Text shown on the aside tip'),
+      'aside.note': z.string().describe('Text shown on the aside note'),
+      'aside.caution': z.string().describe('Text shown on the aside warning'),
+      'aside.danger': z.string().describe('Text shown on the aside danger'),
 		})
 		.partial();
 }
