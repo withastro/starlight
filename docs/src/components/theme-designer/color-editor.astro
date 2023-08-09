@@ -77,17 +77,17 @@ const initialColor = oklchToHex(52, chroma, hue);
 		height: 2em;
 		width: 3rem;
 		cursor: pointer;
+		--swatch-border: var(--sl-color-gray-3);
 	}
 	input[type='color']:hover {
-		border-radius: 0.75rem;
-		background-color: var(--sl-color-gray-5);
+		--swatch-border: var(--sl-color-gray-1);
 	}
 	input[type='color']::-webkit-color-swatch {
-		border: 1px solid var(--sl-color-gray-5);
+		border: 1px solid var(--swatch-border);
 		border-radius: 0.5rem;
 	}
 	input[type='color']::-moz-color-swatch {
-		border: 1px solid var(--sl-color-gray-5);
+		border: 1px solid var(--swatch-border);
 		border-radius: 0.5rem;
 	}
 </style>
