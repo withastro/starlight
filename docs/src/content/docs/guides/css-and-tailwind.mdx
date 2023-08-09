@@ -46,6 +46,12 @@ You can see all the CSS custom properties used by Starlight that you can set to 
 Tailwind CSS support in Astro projects is provided by the [Astro Tailwind integration](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
 Starlight provides a complementary Tailwind plugin to help configure Tailwind for compatibility with Starlight’s styles.
 
+The Starlight Tailwind plugin applies the following configuration:
+
+- Configures Tailwind’s `dark:` variants to work with Starlight’s dark mode.
+- Uses Tailwind [theme colors and fonts](#styling-starlight-with-tailwind) in Starlight’s UI.
+- Disables Tailwind’s [Preflight](https://tailwindcss.com/docs/preflight) reset styles while selectively restoring essential parts of Preflight required for Tailwind’s border utility classes.
+
 ### Create a new project with Tailwind
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
