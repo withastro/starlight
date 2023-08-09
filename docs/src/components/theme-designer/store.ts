@@ -1,6 +1,6 @@
 import { map } from './atom';
 
 export const store = {
-	accent: map({ hue: 268.7, chroma: 0.266 }),
-	gray: map({ hue: 268.7, chroma: 0.021 }),
+	accent: map({ hue: 270, chroma: 0.27 }),
+	gray: map({ hue: 270, chroma: 0.02 }),
 } as const;
