@@ -1,3 +1,9 @@
+---
+interface Props {
+  light?: boolean;
+}
+---
+
 <div class="not-content">
   <div class="palette flex">
     <div style="--bg:var(--sl-color-accent-low)"></div>
@@ -12,7 +18,13 @@
     <div style="--bg:var(--sl-color-gray-4)"></div>
     <div style="--bg:var(--sl-color-gray-5)"></div>
     <div style="--bg:var(--sl-color-gray-6)"></div>
-    <div style="--bg:var(--sl-color-gray-7)"></div>
+    {
+      Astro.props.light ? (
+        <div style="--bg:var(--sl-color-gray-7)" />
+      ) : (
+        <div style="--bg:var(--sl-color-black)" />
+      )
+    }
     <div style="--bg:var(--sl-color-black)"></div>
   </div>
 </div>
