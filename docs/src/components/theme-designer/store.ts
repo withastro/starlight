@@ -2,27 +2,22 @@ import { map } from './atom';
 
 export const presets = {
 	ocean: {
-		label: 'Ocean',
 		accent: { hue: 240, chroma: 0.27 },
 		gray: { hue: 220, chroma: 0.025 },
 	},
 	forest: {
-		label: 'Forest',
 		accent: { hue: 140, chroma: 0.27 },
 		gray: { hue: 140, chroma: 0.03 },
 	},
 	oxide: {
-		label: 'Oxide',
 		accent: { hue: 30, chroma: 0.27 },
 		gray: { hue: 30, chroma: 0.02 },
 	},
 	nebula: {
-		label: 'Nebula',
 		accent: { hue: 320, chroma: 0.27 },
 		gray: { hue: 305, chroma: 0.07 },
 	},
 	default: {
-		label: 'Default',
 		accent: { hue: 270, chroma: 0.27 },
 		gray: { hue: 270, chroma: 0.02 },
 	},

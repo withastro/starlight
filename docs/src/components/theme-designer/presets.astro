@@ -3,14 +3,23 @@ import { Icon } from '@astrojs/starlight/components';
 import { getPalettes } from './color-lib';
 import { presets } from './store';
 
-const resolvedPresets = Object.entries(presets).map(([key, { label, ...preset }]) => {
+export interface Props {
+  labels: Record<keyof typeof presets, string> & {
+    label: string;
+    random: string;
+  };
+}
+const { labels } = Astro.props;
+
+const resolvedPresets = Object.entries(presets).map(([key, preset]) => {
   const palette = getPalettes(preset);
+  const label = labels[key as keyof typeof presets];
   return [key, { ...palette, label }] as const;
 });
 ---
 
 <preset-picker class="flex not-content">
-  <span class="label">Presets</span>
+  <span class="label">{labels.label}</span>
   {
     resolvedPresets.map(([key, { label, dark, light }]) => (
       <button
@@ -26,7 +35,7 @@ const resolvedPresets = Object.entries(presets).map(([key, { label, ...preset }]
       </button>
     ))
   }
-  <button data-random>Random<Icon name="random" size="1rem" /></button>
+  <button data-random>{labels.random}<Icon name="random" size="1rem" /></button>
 </preset-picker>
 
 <style>
