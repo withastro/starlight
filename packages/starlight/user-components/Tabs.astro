@@ -77,7 +77,7 @@ const { html, panels } = processPanels(panelHtml);
 			super();
 			const tablist = this.querySelector<HTMLUListElement>('[role="tablist"]')!;
 			this.tabs = [...tablist.querySelectorAll<HTMLAnchorElement>('[role="tab"]')];
-			this.panels = [...this.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+			this.panels = [...this.querySelectorAll<HTMLElement>(':scope > [role="tabpanel"]')];
 
 			this.tabs.forEach((tab, i) => {
 				// Handle clicks for mouse users

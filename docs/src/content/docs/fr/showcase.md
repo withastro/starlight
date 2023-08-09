@@ -23,6 +23,7 @@ Starlight est déjà utilisé en production. Voici quelques sites sur le web :
 - [xs-dev docs](https://xs-dev.js.org)
 - [Athena OS](https://www.athenaos.org)
 - [simple-fm](https://simple.arciniega.one)
+- [CommandKit](https://commandkit.underctrl.io)
 
 Voir [les dépôts de projets publics utilisant Starlight sur GitHub](https://github.com/withastro/starlight/network/dependents).
 
