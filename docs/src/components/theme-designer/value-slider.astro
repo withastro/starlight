@@ -8,7 +8,7 @@ interface Props {
 }
 const { label, storeKey, type } = Astro.props;
 
-const { max, step } = { hue: { max: 360, step: 1 }, chroma: { max: 0.27, step: 0.01 } }[type];
+const { max, step } = { hue: { max: 360, step: 1 }, chroma: { max: 0.27, step: 0.001 } }[type];
 const value = store[storeKey].get()[type];
 ---
 
@@ -38,7 +38,7 @@ const value = store[storeKey].get()[type];
         const newValue = v[this.#type].toString();
         this.#input.value = newValue;
         // HACK: slice excess digits in case of rounding errors.
-        this.#output.innerText = newValue.slice(0, 4);
+        this.#output.innerText = newValue.slice(0, 5);
       });
     }
   }
