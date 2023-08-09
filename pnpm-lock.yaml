@@ -14,6 +14,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.26.1
         version: 2.26.1
+      '@size-limit/file':
+        specifier: ^8.2.4
+        version: 8.2.4(size-limit@8.2.4)
       astro:
         specifier: ^2.10.1
         version: 2.10.1(sharp@0.32.3)
@@ -23,6 +26,9 @@ importers:
       prettier-plugin-astro:
         specifier: ^0.11.0
         version: 0.11.0
+      size-limit:
+        specifier: ^8.2.4
+        version: 8.2.4
 
   docs:
     dependencies:
@@ -36,9 +42,6 @@ importers:
         specifier: ^0.32.3
         version: 0.32.3
     devDependencies:
-      '@size-limit/file':
-        specifier: ^8.2.4
-        version: 8.2.4(size-limit@8.2.4)
       hast-util-from-html:
         specifier: ^1.0.2
         version: 1.0.2
@@ -54,9 +57,6 @@ importers:
       rehype:
         specifier: ^12.0.1
         version: 12.0.1
-      size-limit:
-        specifier: ^8.2.4
-        version: 8.2.4
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
