@@ -18,8 +18,8 @@ export const presets = {
 		gray: { hue: 305, chroma: 0.07 },
 	},
 	default: {
-		accent: { hue: 270, chroma: 0.27 },
-		gray: { hue: 270, chroma: 0.02 },
+		accent: { hue: 269, chroma: 0.27 },
+		gray: { hue: 270, chroma: 0.016 },
 	},
 };
 
