@@ -192,7 +192,7 @@ next: false
 
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number }`
+**tipo:** `{ label?: string; order?: number; hidden?: boolean }`
 
 Controla cómo se muestra esta página en el [sidebar](/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
 
@@ -223,5 +223,20 @@ Los números más bajos se muestran más arriba en el grupo de enlaces.
 title: Página para mostrar primero
 sidebar:
   order: 1
+---
+```
+
+#### `hidden`
+
+**tipo:** `boolean`
+**por defecto:** `false`
+
+Previene que esta página se incluya en un grupo de enlaces generado automáticamente en la barra lateral.
+
+```md
+---
+title: Página para ocultar de la barra lateral autogenerada
+sidebar:
+  hidden: true
 ---
 ```

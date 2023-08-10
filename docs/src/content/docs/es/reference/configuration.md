@@ -256,7 +256,7 @@ La etiqueta para este idioma que se muestra a los usuarios, por ejemplo, en el s
 
 **tipo:** `string`
 
-La etiqueta BCP-47 para este lenguaje, por ejemplo, `"en"`, `"ar"` o `"zh-CN"`. Si no se establece, se utilizará el nombre del directorio del idioma de forma predeterminada.
+La etiqueta BCP-47 para este lenguaje, por ejemplo, `"en"`, `"ar"` o `"zh-CN"`. Si no se establece, se utilizará el nombre del directorio del idioma de forma predeterminada. Las etiquetas de idioma con subetiquetas regionales (por ejemplo, `"pt-BR"` o `"en-US"`) utilizarán las traducciones de la interfaz de usuario integradas para su idioma base si no se encuentran traducciones específicas de la región.
 
 ##### `dir`
 
