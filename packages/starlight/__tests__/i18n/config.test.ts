@@ -7,7 +7,7 @@ test('test suite is using correct env', () => {
 
 test('config.isMultilingual is true with multiple locales', () => {
 	expect(config.isMultilingual).toBe(true);
-	expect(config.locales).keys('fr', 'en', 'ar');
+	expect(config.locales).keys('fr', 'en', 'ar', 'pt-br');
 });
 
 test('config.defaultLocale is populated from the user’s chosen default', () => {
