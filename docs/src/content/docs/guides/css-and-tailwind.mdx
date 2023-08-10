@@ -47,6 +47,12 @@ You can see all the CSS custom properties used by Starlight that you can set to 
 Tailwind CSS support in Astro projects is provided by the [Astro Tailwind integration](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
 Starlight provides a complementary Tailwind plugin to help configure Tailwind for compatibility with Starlight’s styles.
 
+The Starlight Tailwind plugin applies the following configuration:
+
+- Configures Tailwind’s `dark:` variants to work with Starlight’s dark mode.
+- Uses Tailwind [theme colors and fonts](#styling-starlight-with-tailwind) in Starlight’s UI.
+- Disables Tailwind’s [Preflight](https://tailwindcss.com/docs/preflight) reset styles while selectively restoring essential parts of Preflight required for Tailwind’s border utility classes.
+
 ### Create a new project with Tailwind
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -141,7 +147,41 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
     </Tabs>
 
-3.  Add the Starlight Tailwind plugin to `tailwind.config.cjs`:
+3.  Create a CSS file for Tailwind’s base styles, for example at `src/tailwind.css`:
+
+    ```css
+    /* src/tailwind.css */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    ```
+
+4.  Update your Astro config file to use your Tailwind base styles and disable the default base styles:
+
+    ```js {11-12,16-17}
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+    import tailwind from '@astrojs/tailwind';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Docs with Tailwind',
+    			customCss: [
+    				// Path to your Tailwind base styles:
+    				'./src/tailwind.css',
+    			],
+    		}),
+    		tailwind({
+    			// Disable the default base styles:
+    			applyBaseStyles: false,
+    		}),
+    	],
+    });
+    ```
+
+5.  Add the Starlight Tailwind plugin to `tailwind.config.cjs`:
 
     ```js ins={2,7}
     // tailwind.config.cjs
