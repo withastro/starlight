@@ -140,6 +140,50 @@ Utiliza una cuadrícula de tarjetas en tu página de inicio para mostrar las car
 
 :::
 
+### Tarjetas de enlace
+
+Usa el componente `<LinkCard>` para vincular de forma prominente a diferentes páginas.
+
+Un `<LinkCard>` requiere un `title` y un atributo [`href`](https://developer.mozilla.org/es/docs/Web/HTML/Element/a#href). Opcionalmente puedes incluir una breve `description` u otros atributos de enlace como `target`.
+
+Agrupa varios componentes `<LinkCard>` en `<CardGrid>` para mostrar las tarjetas una al lado de la otra cuando hay suficiente espacio.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personalizando Starlight"
+	description="Aprende a hacer que tu sitio Starlight sea único con estilos personalizados, fuentes y más."
+	href="/es/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Creación de contenido en Markdown"
+		href="/es/guides/authoring-content/"
+	/>
+	<LinkCard title="Componentes" href="/es/guides/components/" />
+</CardGrid>
+```
+
+El código anterior genera lo siguiente en la página:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personalizando Starlight"
+	description="Aprende a hacer que tu sitio Starlight sea único con estilos personalizados, fuentes y más."
+	href="/es/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Creación de contenido en Markdown"
+		href="/es/guides/authoring-content/"
+	/>
+	<LinkCard title="Componentes" href="/es/guides/components/" />
+</CardGrid>
+
 ### Iconos
 
 import { Icon } from '@astrojs/starlight/components';
