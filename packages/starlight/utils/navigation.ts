@@ -83,11 +83,9 @@ function groupFromAutogenerateConfig(
 	const dirDocs = routes.filter(
 		(doc) =>
 			// Match against `foo.md` or `foo/index.md`.
-			(stripExtension(doc.id) === localeDir ||
-				// Match against `foo/anything/else.md`.
-				doc.id.startsWith(localeDir + '/')) &&
-			// Remove any entries that should be hidden
-			!doc.entry.data.sidebar.hidden
+			stripExtension(doc.id) === localeDir ||
+			// Match against `foo/anything/else.md`.
+			doc.id.startsWith(localeDir + '/')
 	);
 	const tree = treeify(dirDocs, localeDir);
 	return {
@@ -145,20 +143,23 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 /** Turn a flat array of routes into a tree structure. */
 function treeify(routes: Route[], baseDir: string): Dir {
 	const treeRoot: Dir = makeDir();
-	routes.forEach((doc) => {
-		const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
+	routes
+		// Remove any entries that should be hidden
+		.filter((doc) => !doc.entry.data.sidebar.hidden)
+		.forEach((doc) => {
+			const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
 
-		// Walk down the route’s path to generate the tree.
-		let currentDir = treeRoot;
-		breadcrumbs.forEach((dir) => {
-			// Create new folder if needed.
-			if (typeof currentDir[dir] === 'undefined') currentDir[dir] = makeDir();
-			// Go into the subdirectory.
-			currentDir = currentDir[dir] as Dir;
+			// Walk down the route’s path to generate the tree.
+			let currentDir = treeRoot;
+			breadcrumbs.forEach((dir) => {
+				// Create new folder if needed.
+				if (typeof currentDir[dir] === 'undefined') currentDir[dir] = makeDir();
+				// Go into the subdirectory.
+				currentDir = currentDir[dir] as Dir;
+			});
+			// We’ve walked through the path. Register the route in this directory.
+			currentDir[basename(doc.slug)] = doc;
 		});
-		// We’ve walked through the path. Register the route in this directory.
-		currentDir[basename(doc.slug)] = doc;
-	});
 	return treeRoot;
 }
 
