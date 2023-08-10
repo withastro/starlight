@@ -25,5 +25,5 @@ jobs:
         uses: andresz1/size-limit-action@dd31dce7dcc72a041fd3e49abf0502b13fc4ce05
         with:
           github_token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
-          directory: docs/
+          build_script: 'build:examples'
           package_manager: pnpm

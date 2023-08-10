@@ -44,7 +44,11 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
 					build: { inlineStylesheets: 'auto' },
-					experimental: { assets: true, inlineStylesheets: 'auto' },
+					experimental: {
+						assets: true,
+						// @ts-ignore - Needed for older versions of Astro, but an error since astro@2.6.0
+						inlineStylesheets: 'auto',
+					},
 				};
 				updateConfig(newConfig);
 			},
