@@ -14,9 +14,6 @@ class Atom<T> {
 	}
 	subscribe(cb: (v: T) => void): () => boolean {
 		cb(this.#v);
-		return this.listen(cb);
-	}
-	listen(cb: (v: T) => void): () => boolean {
 		this.#subscribers.set(cb, cb);
 		return () => this.#subscribers.delete(cb);
 	}
