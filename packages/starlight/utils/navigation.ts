@@ -6,6 +6,7 @@ import { pickLang } from './i18n';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
+import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
 
 const DirKey = Symbol('DirKey');
 
@@ -82,9 +83,11 @@ function groupFromAutogenerateConfig(
 	const dirDocs = routes.filter(
 		(doc) =>
 			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(doc.id) === localeDir ||
-			// Match against `foo/anything/else.md`.
-			doc.id.startsWith(localeDir + '/')
+			(stripExtension(doc.id) === localeDir ||
+				// Match against `foo/anything/else.md`.
+				doc.id.startsWith(localeDir + '/')) &&
+			// Remove any entries that should be hidden
+			!doc.entry.data.sidebar.hidden
 	);
 	const tree = treeify(dirDocs, localeDir);
 	return {
@@ -97,13 +100,6 @@ function groupFromAutogenerateConfig(
 
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
-
-/** Ensure the passed path starts and ends with trailing slashes. */
-function ensureLeadingAndTrailingSlashes(href: string): string {
-	if (href[0] !== '/') href = '/' + href;
-	if (href[href.length - 1] !== '/') href += '/';
-	return href;
-}
 
 /** Create a link entry from a user config object. */
 function linkFromConfig(
@@ -124,7 +120,7 @@ function linkFromConfig(
 /** Create a link entry. */
 function makeLink(href: string, label: string, currentPathname: string): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === currentPathname;
+	const isCurrent = href === ensureTrailingSlash(currentPathname);
 	return { type: 'link', label, href, isCurrent };
 }
 

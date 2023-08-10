@@ -730,14 +730,12 @@ const icons = rawIcons as unknown as {
 };
 
 const getDetails = (fileName: string): IconDetails => {
-	if (definitions.files[fileName]) {
-		return definitions.files[fileName];
-	}
+	const details = definitions.files[fileName];
+	if (details) return details;
 	let extension = fileName.slice(fileName.indexOf('.'));
 	while (extension !== '') {
-		if (definitions.extensions[extension]) {
-			return definitions.extensions[extension];
-		}
+		const details = definitions.extensions[extension];
+		if (details) return details;
 		// look for next "."
 		extension = extension.slice(1);
 		extension = extension.slice(extension.indexOf('.'));

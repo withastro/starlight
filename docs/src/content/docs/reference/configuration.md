@@ -255,7 +255,7 @@ The label for this language to show to users, for example in the language switch
 
 **type:** `string`
 
-The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. If not set, the language’s directory name will be used by default.
+The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. If not set, the language’s directory name will be used by default. Language tags with regional subtags (e.g. `"pt-BR"` or `"en-US"`) will use built-in UI translations for their base language if no region-specific translations are found.
 
 ##### `dir`
 
