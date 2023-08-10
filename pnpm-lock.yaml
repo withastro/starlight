@@ -35,9 +35,15 @@ importers:
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
+      '@types/culori':
+        specifier: ^2.0.0
+        version: 2.0.0
       astro:
         specifier: ^2.10.4
         version: 2.10.4(sharp@0.32.3)
+      culori:
+        specifier: ^3.2.0
+        version: 3.2.0
       sharp:
         specifier: ^0.32.3
         version: 0.32.3
@@ -1396,6 +1402,10 @@ packages:
     resolution: {integrity: sha512-mEo1sAde+UCE6b2hxn332f1g1E8WfYRu6p5SvTKr2ZKC1f7gFJXk4h5PyGP9Dt6gCaG8y8XhwnXWC6Iy2cmBng==}
     dev: true
 
+  /@types/culori@2.0.0:
+    resolution: {integrity: sha512-bKpEra39sQS9UZ+1JoWhuGJEzwKS0dUkNCohVYmn6CAEBkqyIXimKiPDRZWtiOB7sKgkWMaTUpHFimygRoGIlg==}
+    dev: false
+
   /@types/debug@4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -2373,6 +2383,11 @@ packages:
       csv-stringify: 5.6.5
       stream-transform: 2.1.3
     dev: true
+
+  /culori@3.2.0:
+    resolution: {integrity: sha512-HIEbTSP7vs1mPq/2P9In6QyFE0Tkpevh0k9a+FkjhD+cwsYm9WRSbn4uMdW9O0yXlNYC3ppxL3gWWPOcvEl57w==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dev: false
 
   /data-uri-to-buffer@4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
