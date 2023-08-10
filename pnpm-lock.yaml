@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -103,7 +99,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.6.1
+        specifier: ^0.7.0
         version: link:../../packages/starlight
       astro:
         specifier: ^2.10.4
@@ -115,10 +111,10 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.6.1
+        specifier: ^0.7.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
-        specifier: ^0.0.1
+        specifier: ^1.0.0
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
         specifier: ^4.0.0
@@ -197,7 +193,7 @@ importers:
   packages/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.6.1
+        specifier: ^0.7.0
         version: link:../starlight
       '@astrojs/tailwind':
         specifier: ^4.0.0
@@ -7028,3 +7024,7 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
