@@ -36,11 +36,17 @@ const {
 		<Tabs>
 			<TabItem label="CSS">
 				<slot name="css-docs" />
-				<pre class="generated-code" tabindex="0"><code data-theme-css /></pre>
+				<pre
+					class="astro-code"
+					tabindex="0"
+					style="background-color: var(--astro-code-color-background)"><code data-theme-css /></pre>
 			</TabItem>
 			<TabItem label="Tailwind">
 				<slot name="tailwind-docs" />
-				<pre class="generated-code" tabindex="0"><code data-theme-tailwind /></pre>
+				<pre
+					class="astro-code"
+					tabindex="0"
+					style="background-color: var(--astro-code-color-background)"><code data-theme-tailwind /></pre>
 			</TabItem>
 		</Tabs>
 	</theme-designer>
@@ -138,9 +144,8 @@ module.exports = {
 		gap: 1.5rem;
 	}
 
-	.generated-code {
+	.astro-code {
 		height: 16rem;
-		background-color: var(--astro-code-color-background);
 		overflow: auto scroll;
 		user-select: all;
 	}
