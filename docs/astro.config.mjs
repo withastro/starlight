@@ -9,7 +9,7 @@ export const locales = {
 	fr: { label: 'Français', lang: 'fr' },
 	it: { label: 'Italiano', lang: 'it' },
 	zh: { label: '简体中文', lang: 'zh' },
-	'pt-br': { label: 'Português do Brasil', lang: 'pt'}
+	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' }
 };
 
 const site = 'https://starlight.astro.build/';
