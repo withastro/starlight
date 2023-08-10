@@ -58,7 +58,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				const cwd = dirname(fileURLToPath(import.meta.url));
 				const relativeDir = relative(cwd, targetDir);
 				return new Promise<void>((resolve) => {
-					spawn('npx', ['pagefind', '--source', relativeDir], {
+					spawn('npx', ['pagefind@latest', '--source', `"${relativeDir}"`], {
 						stdio: 'inherit',
 						shell: true,
 						cwd,
