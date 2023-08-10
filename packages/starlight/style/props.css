@@ -19,8 +19,8 @@
 	--sl-color-green: hsl(var(--sl-hue-green), 82%, 63%);
 	--sl-color-green-high: hsl(var(--sl-hue-green), 82%, 80%);
 	--sl-hue-blue: 234;
-	--sl-color-blue-low: hsl(var(--sl-hue-blue), 54%, 20%);
-	--sl-color-blue: hsl(var(--sl-hue-blue), 100%, 60%);
+	--sl-color-blue-low: hsl(var(--sl-hue-blue), 45%, 20%);
+	--sl-color-blue: hsl(var(--sl-hue-blue), 70%, 60%);
 	--sl-color-blue-high: hsl(var(--sl-hue-blue), 100%, 87%);
 	--sl-hue-purple: 281;
 	--sl-color-purple-low: hsl(var(--sl-hue-purple), 39%, 22%);
