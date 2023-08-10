@@ -49,9 +49,9 @@ Starlight proporciona un complemento de Tailwind para ayudar a configurar Tailwi
 
 El plugin Starlight Tailwind aplica la siguiente configuración:
 
-- Configura las vairantes de Tailwind `dark:` para que funcionen con el modo oscuro de Starlight.
+- Configura las variantes de Tailwind `dark:` para que funcionen con el modo oscuro de Starlight.
 - Usa los [colores y fuentes del tema](#estilando-starlight-con-tailwind) de Tailwind en la UI de Starlight.
-- Desactiva la [comprobación preliminar](https://tailwindcss.com/docs/preflight) de Tailwind mientras restaura selectivamente las partes esenciales de la comprobación preliminar requeridas para las clases de utilidad de borde de Tailwind.
+- Desactiva la [comprobación preliminar “Preflight”](https://tailwindcss.com/docs/preflight) de Tailwind mientras restaura selectivamente las partes esenciales de la comprobación preliminar requeridas para las clases de utilidad de borde de Tailwind.
 
 ### Crea un nuevo proyecto con Tailwind
 
@@ -167,7 +167,7 @@ Si ya tienes un sitio Starlight y quieres agregar Tailwind CSS, sigue estos paso
     export default defineConfig({
     	integrations: [
     		starlight({
-    			title: 'Docs with Tailwind',
+    			title: 'Documentación con Tailwind',
     			customCss: [
     				// Ruta a tus estilos base de Tailwind:
     				'./src/tailwind.css',
@@ -269,20 +269,23 @@ import ThemeDesigner from '../../../../components/theme-designer.astro';
 			darkMode: 'Dark mode',
 			lightMode: 'Light mode',
 			bodyText:
-				'Body text is displayed in a gray shade with a high contrast with the background.',
-			linkText: 'Links are colored.',
-			dimText: 'Some text, like the table of contents, has a lower contrast.',
-			inlineCode: 'Inline code has a distinct background.',
+				'El texto del cuerpo se muestra en un tono gris con un alto contraste con el fondo.',
+			linkText: 'Los enlaces están coloreados.',
+			dimText:
+				'Algunos textos, como la tabla de contenidos, tienen un contraste más bajo.',
+			inlineCode: 'El código en línea tiene un fondo distinto.',
 		},
 	}}
 >
 	<Fragment slot="css-docs">
-		Add the following CSS to your project in a [custom CSS
-		file](#custom-css-styles) to apply this theme to your site.
+		Agrega el siguiente CSS a tu proyecto en un [archivo CSS
+		personalizado](#estilos-css-personalizados) para aplicar este tema a tu
+		sitio.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		The example [Tailwind config file](#estilando-starlight-con-tailwind) below
-		includes generated `accent` and `gray` color palettes to use in the
-		`theme.extend.colors` configuration object.
+		El ejemplo de [archivo de configuración de
+		Tailwind](#estilando-starlight-con-tailwind) a continuación incluye paletas
+		de colores `accent` y `gray` generadas para usar en el objeto de
+		configuración `theme.extend.colors`.
 	</Fragment>
 </ThemeDesigner>
