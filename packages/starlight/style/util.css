@@ -41,3 +41,15 @@
 		display: block;
 	}
 }
+
+/*
+Flip an element around the y-axis when in an RTL context.
+Primarily useful for things where we can’t rely on writing direction like icons.
+
+<Icon name="right-arrow" class="rtl:flip" />
+
+In a LTR context: →					In a RTL context: ←
+*/
+[dir='rtl'] .rtl\:flip:not(:where([dir='rtl'] [dir='ltr'] *)) {
+	transform: matrix(-1, 0, 0, 1, 0, 0);
+}
