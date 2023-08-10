@@ -10,12 +10,13 @@ You can style your Starlight site with custom CSS files or use the Starlight Tai
 Customize the styles applied to your Starlight site by providing additional CSS files to modify or extend Starlight’s default styles.
 
 1. Add a CSS file to your `src/` directory.
-   For example, you could override Starlight’s default blue accent hue to purple:
+   For example, you could set a wider default column width and larger text size for page titles:
 
    ```css
    /* src/styles/custom.css */
    :root {
-   	--sl-hue-accent: 270;
+   	--sl-content-width: 50rem;
+   	--sl-text-5xl: 3.5rem;
    }
    ```
 
