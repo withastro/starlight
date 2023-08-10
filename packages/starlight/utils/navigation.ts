@@ -83,9 +83,11 @@ function groupFromAutogenerateConfig(
 	const dirDocs = routes.filter(
 		(doc) =>
 			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(doc.id) === localeDir ||
-			// Match against `foo/anything/else.md`.
-			doc.id.startsWith(localeDir + '/')
+			(stripExtension(doc.id) === localeDir ||
+				// Match against `foo/anything/else.md`.
+				doc.id.startsWith(localeDir + '/')) &&
+			// Remove any entries that should be hidden
+			!doc.entry.data.sidebar.hidden
 	);
 	const tree = treeify(dirDocs, localeDir);
 	return {

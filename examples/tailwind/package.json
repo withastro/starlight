@@ -1,5 +1,5 @@
 {
-  "name": "@example/starlight-basics",
+  "name": "@example/starlight-tailwind",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.6.1",
-    "astro": "^2.10.4",
-    "sharp": "^0.32.3"
+    "@astrojs/starlight-tailwind": "^0.0.1",
+    "@astrojs/tailwind": "^4.0.0",
+    "astro": "^2.10.3",
+    "sharp": "^0.32.3",
+    "tailwindcss": "^3.3.3"
   }
 }
