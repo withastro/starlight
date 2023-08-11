@@ -17,6 +17,8 @@ interface Props {
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
 						class:list={{ large: !Astro.props.nested }}
+						target={entry.target}
+						rel={entry.target === '_blank' ? 'noopener noreferrer' : undefined}
 					>
 						{entry.label}
 					</a>

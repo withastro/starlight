@@ -15,6 +15,7 @@ export interface Link {
 	label: string;
 	href: string;
 	isCurrent: boolean;
+	target?: '_blank' | '_self';
 }
 
 interface Group {
@@ -112,14 +113,20 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname);
+	const target = item.target || '_self';
+	return makeLink(href, label, currentPathname, target);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string): Link {
+function makeLink(
+	href: string,
+	label: string,
+	currentPathname: string,
+	target: '_self' | '_blank'
+): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent };
+	return { type: 'link', label, href, isCurrent, target };
 }
 
 /** Get the segments leading to a page. */
