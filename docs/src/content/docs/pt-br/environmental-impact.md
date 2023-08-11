@@ -12,7 +12,7 @@ De acordo com o "Website Carbon Calculator", este site é [mais limpo que 99% da
 ## Peso da página
 
 Quanto mais dados uma página web transfere, mais recursos energéticos são necessários.
-Em Abril de 2023, uma página web mediana necessitava que o usuário baixasse mais que 2,000 KB de acordo com com [dados do HTTP Archive][http].
+Em Abril de 2023, uma página web mediana necessitava que o usuário baixasse mais que 2,000 KB de acordo com [dados do HTTP Archive][http].
 
 Starlight constrói páginas que são o mais leve possível.
 Por exemplo, em uma primeira visita, um usuário vai baixar menos do que 50 KB de dados comprimidos — apenas 2.5% da mediana do HTTP Archive.
@@ -41,7 +41,7 @@ Esse diretório contém CSS, JavaScript e outros assets em bundle que podem ser 
 Cache-Control: public, max-age=604800, immutable
 ```
 
-Como configurar cacheamento depende da sua hospedagem web. Por exemplo, a Vercel aplica essa estratégia de cacheamento para você sem nenhuma configuração necessária, enquanto você pode definir [cabeçalhos customizados para Netlify][ntl-headers] ao adicionar um arquivo `public/_headers` ao seu your project:
+Como configurar cacheamento depende da sua hospedagem web. Por exemplo, a Vercel aplica essa estratégia de cacheamento para você sem nenhuma configuração necessária, enquanto você pode definir [cabeçalhos customizados para Netlify][ntl-headers] ao adicionar um arquivo `public/_headers` ao seu projeto:
 
 ```
 /_astro/*
