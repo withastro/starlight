@@ -6,7 +6,8 @@ const translationStatusBuilder = new TranslationStatusBuilder({
 	htmlOutputFilePath: './dist/index.html',
 	sourceLanguage: 'en',
 	targetLanguages: Object.values(locales)
-		.reduce((acc, { lang }) => lang !== "en" ? [lang, ...acc] : acc, []),
+		.reduce((acc, { lang }) => lang !== "en" ? [lang, ...acc] : acc, [])
+		.sort(),
 	languageLabels: Object.values(locales)
 		.filter((loc) => loc.lang !== 'en')
 		.reduce((acc, curr) => ({ [curr.lang]: curr.label, ...acc }), {}),
