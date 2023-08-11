@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.7.1
+
+### Patch Changes
+
+- [#488](https://github.com/withastro/starlight/pull/488) [`da35556`](https://github.com/withastro/starlight/commit/da35556eb95f2d397dfce03cc4acfacb0dcf1e89) Thanks [@mayank99](https://github.com/mayank99)! - Improved accessibility of LinkCard by only including the title as part of the link text, and using a pseudo-element to keep the card clickable.
+
+- [#489](https://github.com/withastro/starlight/pull/489) [`35cd82e`](https://github.com/withastro/starlight/commit/35cd82e7f8622772a5155add99ad8baf61ae08a1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Respect `hidden` sidebar frontmatter property when no sidebar configuration is provided
+
 ## 0.7.0
 
 ### Minor Changes

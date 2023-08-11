@@ -256,42 +256,6 @@ hero:
 ---
 ```
 
-## Estilos CSS personalizados
-
-Personaliza los estilos aplicados a tu sitio de Starlight proporcionando archivos CSS adicionales para modificar o extender los estilos predeterminados de Starlight.
-
-1. Agrega un archivo CSS al directorio `src/`.
-   Por ejemplo, podrías anular el tono de acento azul predeterminado de Starlight y establecerlo en púrpura:
-
-   ```css
-   /* src/styles/custom.css */
-   :root {
-   	--sl-hue-accent: 270;
-   }
-   ```
-
-2. Agrega la ruta de tu archivo CSS al array `customCss` de Starlight en el archivo `astro.config.mjs`:
-
-   ```js
-   // astro.config.mjs
-   import { defineConfig } from 'astro/config';
-   import starlight from '@astrojs/starlight';
-
-   export default defineConfig({
-   	integrations: [
-   		starlight({
-   			title: 'Docs Con Un CSS Personalizado',
-   			customCss: [
-   				// Ruta relativa hacia tu archivo CSS personalizado
-   				'./src/styles/custom.css',
-   			],
-   		}),
-   	],
-   });
-   ```
-
-Puedes ver todas las propiedades CSS personalizadas utilizadas por Starlight que puedes configurar para personalizar tu sitio en el archivo [`props.css` en GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
-
 ## Fuentes personalizadas
 
 De forma predeterminada, Starlight utiliza fuentes sans-serif disponibles en el dispositivo local del usuario para todo el texto.
@@ -419,7 +383,7 @@ Proporciona módulos npm que puedes instalar para las fuentes que deseas utiliza
 
 ### Usar fuentes
 
-Para aplicar la fuente que configuraste a tu sitio, utiliza el nombre de la fuente elegida en un archivo CSS personalizado.
+Para aplicar la fuente que configuraste a tu sitio, utiliza el nombre de la fuente elegida en un [archivo CSS personalizado](/es/guides/css-and-tailwind/#custom-css-styles).
 Por ejemplo, para anular la fuente predeterminada de Starlight en todas partes, establece la propiedad personalizada `--sl-font`:
 
 ```css
@@ -441,4 +405,4 @@ main {
 }
 ```
 
-Sigue las [instrucciones de CSS personalizado](#estilos-css-personalizados) para agregar tus estilos a tu sitio.
+Sigue las [instrucciones de CSS personalizado](/guides/css-and-tailwind/#estilos-css-personalizados) para agregar tus estilos a tu sitio.
