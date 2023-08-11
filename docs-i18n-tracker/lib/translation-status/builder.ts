@@ -123,7 +123,6 @@ export class TranslationStatusBuilder {
 			[this.sourceLanguage]: {},
 		};
 		this.targetLanguages.forEach((lang) => (pages[lang.toLowerCase()] = {}));
-		
 		// Enumerate all markdown pages with supported languages in pageSourceDir,
 		// retrieve their page data and update them
 		const pagePaths = await glob(`**/*.{md,mdx}`, {
