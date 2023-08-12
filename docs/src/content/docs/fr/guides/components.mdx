@@ -129,6 +129,50 @@ Ajoutez l'attribut `stagger` pour décaler verticalement la deuxième colonne de
 
 :::
 
+### Link Cards
+
+Utilisez le composant `<LinkCard>` pour créer un lien vers différentes pages.
+
+Une `<LinkCard>` nécessite un `title` et un attribut [`href`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/a#href). Vous pouvez optionellement inclure une courte `description` ou d'autres attributs de lien tels que `target`.
+
+Regroupez plusieurs composants `<LinkCard>` dans `<CardGrid>` pour afficher les cartes côte à côte lorsqu'il y a suffisamment d'espace.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personnalisation de Starlight"
+	description="Apprenez à personnaliser votre site Starlight avec vos propres styles, vos polices et bien plus encore."
+	href="/fr/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Création de contenu en Markdown"
+		href="/fr/guides/authoring-content/"
+	/>
+	<LinkCard title="Composants" href="/fr/guides/components/" />
+</CardGrid>
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personnaliser Starlight"
+	description="Apprenez à personnaliser votre site Starlight avec vos propres styles, vos polices et bien plus encore."
+	href="/fr/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Création de contenu en Markdown"
+		href="/fr/guides/authoring-content/"
+	/>
+	<LinkCard title="Composants" href="/fr/guides/components/" />
+</CardGrid>
+
 ### Icônes
 
 import { Icon } from '@astrojs/starlight/components';
