@@ -5,8 +5,8 @@ const translationStatusBuilder = new TranslationStatusBuilder({
 	pageSourceDir: '../docs/src/content/docs',
 	htmlOutputFilePath: './dist/index.html',
 	sourceLanguage: 'en',
-	targetLanguages: Object.keys(locales)
-		.filter((lang) => lang !== 'en')
+	targetLanguages: Object.values(locales)
+		.reduce((acc, { lang }) => lang !== "en" ? [lang, ...acc] : acc, [])
 		.sort(),
 	languageLabels: Object.values(locales)
 		.filter((loc) => loc.lang !== 'en')
