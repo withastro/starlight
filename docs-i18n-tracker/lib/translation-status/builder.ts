@@ -131,7 +131,9 @@ export class TranslationStatusBuilder {
 		const updatedPages = await Promise.all(
 			pagePaths.sort().map(async (pagePath) => {
 				const pathParts = pagePath.split('/');
-				const isLanguageSubpathIncluded = this.targetLanguages.map(el=>el.toLowerCase()).includes(pathParts[0]!);
+				const isLanguageSubpathIncluded = this.targetLanguages
+					.map((el) => el.toLowerCase())
+					.includes(pathParts[0]!);
 
 				// If the first path of a file does not belong to a language, it will be by default a page of the original language set.
 				const lang = isLanguageSubpathIncluded ? pathParts[0] : this.sourceLanguage;
