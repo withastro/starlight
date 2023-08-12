@@ -33,19 +33,19 @@ const t = useTranslations(locale);
 </mobile-starlight-toc>
 
 <style>
-  nav {
-    position: fixed;
-    z-index: 1;
-    top: calc(var(--sl-nav-height) - 1px);
-    inset-inline: 0;
-    border-top: 1px solid var(--sl-color-gray-5);
-    background-color: var(--sl-color-bg-nav);
-  }
-  @media (min-width: 50rem) {
-    nav {
-      inset-inline-start: var(--sl-content-inline-start, 0);
-    }
-  }
+	nav {
+		position: fixed;
+		z-index: 1;
+		top: calc(var(--sl-nav-height) - 1px);
+		inset-inline: 0;
+		border-top: 1px solid var(--sl-color-gray-5);
+		background-color: var(--sl-color-bg-nav);
+	}
+	@media (min-width: 50rem) {
+		nav {
+			inset-inline-start: var(--sl-content-inline-start, 0);
+		}
+	}
 
 	summary {
 		gap: 0.5rem;
