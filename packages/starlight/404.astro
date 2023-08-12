@@ -14,22 +14,22 @@ const entryMeta = { dir, lang, locale };
 const t = useTranslations(locale);
 
 const fallbackEntry: StarlightDocsEntry = {
-  slug: '404',
-  id: '404.md' as StarlightDocsEntry['id'],
-  body: '',
-  collection: 'docs',
-  data: {
-    title: '404',
-    template: 'splash',
-    editUrl: false,
-    head: [],
-    hero: { tagline: t('404.text'), actions: [] },
-  },
-  render: async () => ({
-    Content: EmptyContent,
-    headings: [],
-    remarkPluginFrontmatter: {},
-  }),
+	slug: '404',
+	id: '404.md' as StarlightDocsEntry['id'],
+	body: '',
+	collection: 'docs',
+	data: {
+		title: '404',
+		template: 'splash',
+		editUrl: false,
+		head: [],
+		hero: { tagline: t('404.text'), actions: [] },
+	},
+	render: async () => ({
+		Content: EmptyContent,
+		headings: [],
+		remarkPluginFrontmatter: {},
+	}),
 };
 
 const userEntry = await getEntry('docs', '404');
@@ -38,5 +38,5 @@ const { Content, headings } = await entry.render();
 ---
 
 <Page {headings} entry={entry} id={entry.id} slug={entry.slug} {...entryMeta} {entryMeta}>
-  <Content />
+	<Content />
 </Page>

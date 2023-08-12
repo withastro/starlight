@@ -1,43 +1,55 @@
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
 .flex {
-  display: flex;
+	display: flex;
 }
 .block {
-  display: block;
+	display: block;
 }
 @media (min-width: 50rem) {
-  .md\:hidden {
-    display: none;
-  }
-  .md\:flex {
-    display: flex;
-  }
-  .md\:block {
-    display: block;
-  }
+	.md\:hidden {
+		display: none;
+	}
+	.md\:flex {
+		display: flex;
+	}
+	.md\:block {
+		display: block;
+	}
 }
 @media (min-width: 72rem) {
-  .lg\:hidden {
-    display: none;
-  }
-  .lg\:flex {
-    display: flex;
-  }
-  .lg\:block {
-    display: block;
-  }
+	.lg\:hidden {
+		display: none;
+	}
+	.lg\:flex {
+		display: flex;
+	}
+	.lg\:block {
+		display: block;
+	}
+}
+
+/*
+Flip an element around the y-axis when in an RTL context.
+Primarily useful for things where we can’t rely on writing direction like icons.
+
+<Icon name="right-arrow" class="rtl:flip" />
+
+In a LTR context: →					In a RTL context: ←
+*/
+[dir='rtl'] .rtl\:flip:not(:where([dir='rtl'] [dir='ltr'] *)) {
+	transform: matrix(-1, 0, 0, 1, 0, 0);
 }

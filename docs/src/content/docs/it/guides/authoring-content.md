@@ -58,7 +58,7 @@ Starlight è configurato per utilizzare automaticamente il titolo della pagina c
 ```md
 ---
 title: Guida Markdown
-description:  Come utilizzare Markdown in Starlight
+description: Come utilizzare Markdown in Starlight
 ---
 
 Questa pagina descrive come utilizzare Markdown in Starlight.
@@ -66,7 +66,6 @@ Questa pagina descrive come utilizzare Markdown in Starlight.
 ## Stili in linea
 
 ## Titoli
-
 ```
 
 ### Link titoli automatici
@@ -78,13 +77,14 @@ Utilizzando titoli in Markdown verranno generati automaticamente i rispettivi li
 title: La mia pagina dei contenuti
 description: Come utilizzare i link automatici di Starlight
 ---
+
 ## Introduzione
 
 Posso collegarmi alla [conclusione](#conclusione) che si trova più in basso.
 
 ## Conclusione
 
-`https://my-site.com/page1/#introduzione` porta direttamente all'introduzione. 
+`https://my-site.com/page1/#introduzione` porta direttamente all'introduzione.
 ```
 
 Titoli di livello 2 (`<h2>`) e di livello 3 (`<h3>`) verranno inclusi automaticamente nella tabella dei contenuti.
@@ -136,7 +136,7 @@ Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https:/
 
 ### Altri tipi di aside
 
-Gli aside caution e danger sono d'aiuto per richiamare l'attenzione dell'utente a dettagli che potrebbero sorprenderli. 
+Gli aside caution e danger sono d'aiuto per richiamare l'attenzione dell'utente a dettagli che potrebbero sorprenderli.
 Se ti ritrovi ad usarli spesso, potrebbe essere segno che quelo che stai documentando potrebbe trarre beneficio da una riprogettazione.
 
 :::caution

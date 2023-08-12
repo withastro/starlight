@@ -1,5 +1,2 @@
-# Vitest
-__coverage__/
-
 # Astro generates this during tests, but we want to ignore it.
 src/env.d.ts

@@ -1,6 +1,6 @@
 ---
 title: Customizing Starlight
-description: Learn how to make your Starlight site your own with custom styles, fonts, and more.
+description: Learn how to make your Starlight site your own with your logo, custom fonts, landing page design and more.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -33,14 +33,14 @@ Adding a custom logo to the site header is a quick way to add your individual br
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Docs With My Logo',
-         logo: {
-           src: './src/assets/my-logo.svg',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Docs With My Logo',
+   			logo: {
+   				src: './src/assets/my-logo.svg',
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -130,12 +130,12 @@ tableOfContents:
 // astro.config.mjs
 
 defineConfig({
-  integrations: [
-    starlight({
-      title: '',
-      tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '',
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
+		}),
+	],
 });
 ```
 
@@ -162,12 +162,12 @@ tableOfContents: false
 // astro.config.mjs
 
 defineConfig({
-  integrations: [
-    starlight({
-      title: 'Docs with table of contents disabled globally',
-      tableOfContents: false,
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Docs with table of contents disabled globally',
+			tableOfContents: false,
+		}),
+	],
 });
 ```
 
@@ -178,7 +178,7 @@ defineConfig({
 
 Starlight has built-in support for adding links to your social media accounts to the site header via the [`social`](/reference/configuration/#social) option in the Starlight integration.
 
-Currently, links to Codeberg, Discord, GitHub, LinkedIn, Mastodon, Threads, Twitch, Twitter, and Youtube are supported.
+Currently, links to Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, LinkedIn, Mastodon, Microsoft Teams, Threads, Twitch, Twitter, and Youtube are supported.
 Let us know on GitHub or Discord if you need support for another service!
 
 ```js
@@ -187,15 +187,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Docs With Social Links',
-      social: {
-        discord: 'https://astro.build/chat',
-        github: 'https://github.com/withastro/starlight',
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Docs With Social Links',
+			social: {
+				discord: 'https://astro.build/chat',
+				github: 'https://github.com/withastro/starlight',
+			},
+		}),
+	],
 });
 ```
 
@@ -223,14 +223,14 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Docs With Edit Links',
-      editLink: {
-        baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Docs With Edit Links',
+			editLink: {
+				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+			},
+		}),
+	],
 });
 ```
 
@@ -262,40 +262,6 @@ hero:
   tagline: Page not found. Check the URL or try using the search bar.
 ---
 ```
-
-## Custom CSS styles
-
-Customize the styles applied to your Starlight site by providing additional CSS files to modify or extend Starlight’s default styles.
-
-1. Add a CSS file to your `src/` directory.
-   For example, you could override Starlight’s default blue accent hue to purple:
-
-   ```css
-   /* src/styles/custom.css */
-   :root {
-     --sl-hue-accent: 270;
-   }
-   ```
-
-2. Add the path to your CSS file to Starlight’s `customCss` array in `astro.config.mjs`:
-
-   ```js
-   // astro.config.mjs
-   import { defineConfig } from 'astro/config';
-   import starlight from '@astrojs/starlight';
-
-   export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Docs With Custom CSS',
-         customCss: [
-           // Relative path to your custom CSS file
-           './src/styles/custom.css',
-         ],
-       }),
-     ],
-   });
-   ```
 
 ## Custom fonts
 
@@ -331,12 +297,12 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    /* src/fonts/font-face.css */
 
    @font-face {
-     font-family: 'Custom Font';
-     /* Use a relative path to the local font file in `url()`. */
-     src: url('./CustomFont.woff2') format('woff2');
-     font-weight: normal;
-     font-style: normal;
-     font-display: swap;
+   	font-family: 'Custom Font';
+   	/* Use a relative path to the local font file in `url()`. */
+   	src: url('./CustomFont.woff2') format('woff2');
+   	font-weight: normal;
+   	font-style: normal;
+   	font-display: swap;
    }
    ```
 
@@ -348,15 +314,15 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Docs With a Custom Typeface',
-         customCss: [
-           // Relative path to your @font-face CSS file.
-           './src/fonts/font-face.css',
-         ],
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Docs With a Custom Typeface',
+   			customCss: [
+   				// Relative path to your @font-face CSS file.
+   				'./src/fonts/font-face.css',
+   			],
+   		}),
+   	],
    });
    ```
 
@@ -407,16 +373,16 @@ It provides npm modules you can install for the fonts you want to use and includ
     import starlight from '@astrojs/starlight';
 
     export default defineConfig({
-      integrations: [
-        starlight({
-          title: 'Docs With a Custom Typeface',
-          customCss: [
-            // Fontsource files for to regular and semi-bold font weights.
-            '@fontsource/ibm-plex-serif/400.css',
-            '@fontsource/ibm-plex-serif/600.css',
-          ],
-        }),
-      ],
+    	integrations: [
+    		starlight({
+    			title: 'Docs With a Custom Typeface',
+    			customCss: [
+    				// Fontsource files for to regular and semi-bold font weights.
+    				'@fontsource/ibm-plex-serif/400.css',
+    				'@fontsource/ibm-plex-serif/600.css',
+    			],
+    		}),
+    	],
     });
     ```
 
@@ -424,14 +390,14 @@ It provides npm modules you can install for the fonts you want to use and includ
 
 ### Use fonts
 
-To apply the font you set up to your site, use your chosen font’s name in a custom CSS file.
+To apply the font you set up to your site, use your chosen font’s name in a [custom CSS file](/guides/css-and-tailwind/#custom-css-styles).
 For example, to override Starlight’s default font everywhere, set the `--sl-font` custom property:
 
 ```css
 /* src/styles/custom.css */
 
 :root {
-  --sl-font: 'IBM Plex Serif', serif;
+	--sl-font: 'IBM Plex Serif', serif;
 }
 ```
 
@@ -442,8 +408,8 @@ For example, to only set a font on the main content, but not the sidebars:
 /* src/styles/custom.css */
 
 main {
-  font-family: 'IBM Plex Serif', serif;
+	font-family: 'IBM Plex Serif', serif;
 }
 ```
 
-Follow the [custom CSS instructions](#custom-css-styles) to add your styles to your site.
+Follow the [custom CSS instructions](/guides/css-and-tailwind/#custom-css-styles) to add your styles to your site.

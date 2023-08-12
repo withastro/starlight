@@ -167,7 +167,7 @@ prev: チュートリアルを続ける
 ```md
 ---
 # 前のページへのリンクとテキストを上書きする
-prev: 
+prev:
   link: /unrelated-page/
   label: その他のページをチェックする
 ---
@@ -183,5 +183,40 @@ prev:
 ---
 # 次のページへのリンクを非表示にする
 next: false
+---
+```
+
+### `sidebar`
+
+**type:** `{ label?: string; order?: number }`
+
+自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
+
+#### `label`
+
+**type:** `string`  
+**default:** ページの[`title`](#title必須)
+
+自動生成されるリンクのグループ内に表示される、ページのサイドバー上でのラベルを設定します。
+
+```md
+---
+title: このプロジェクトについて
+sidebar:
+  label: 概要
+---
+```
+
+#### `order`
+
+**type:** `number`
+
+自動生成されるリンクのグループをソートする際の、このページの順番を設定します。小さな数値ほどリンクグループの上部に表示されます。
+
+```md
+---
+title: 最初に表示するページ
+sidebar:
+  order: 1
 ---
 ```
