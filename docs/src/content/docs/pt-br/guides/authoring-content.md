@@ -5,7 +5,7 @@ description: Uma visão geral da sintaxe Markdown suportada pelo Starlight.
 
 Starlight suporta completamente a sintaxe [Markdown](https://daringfireball.net/projects/markdown/) em arquivos `.md` assim como frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) para definir metadados como o título e a descrição.
 
-Por favor verifique a [documentação do MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) ou a [documentação do Markdoc](https://markdoc.dev/docs/syntax) se estiver utilizando esses formatos de arquivo, já que o suporte a Markdown e uso podem variar.
+Por favor verifique a [documentação do MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) ou a [documentação do Markdoc](https://markdoc.dev/docs/syntax) se estiver utilizando esses formatos de arquivo, já que o suporte e uso do Markdown podem variar.
 
 ## Estilos Inline
 
