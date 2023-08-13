@@ -65,7 +65,7 @@ Starlight providencia suporte integrado para sites multilíngue, incluindo rotea
 
 ### Use um local raiz
 
-Você pode usar um local raiz” para servir uma linguagem language sem nenhum prefixo de i18n no seu caminho. Por exemplo, se Português é seu local raiz, um caminho de página em Português se pareceria com `/sobre` ao invés de `/pt/sobre`.
+Você pode usar um local “raiz” para servir uma linguagem sem nenhum prefixo de i18n no seu caminho. Por exemplo, se Português é seu local raiz, um caminho de página em Português se pareceria com `/sobre` ao invés de `/pt/sobre`.
 
 Para definir um local raiz, use a chave `root` na sua configuração de `locales`. Se o local raiz também for o local padrão do seu conteúdo, remova `defaultLocale` ou defina-o como `'root'`.
 
@@ -135,9 +135,9 @@ Isso te permite sobrescrever a linguagem padrão do Starlight sem habilitar outr
 
 ## Conteúdo de Fallback
 
-Starlight espera que você crie páginas equivalentes em todas as suas linguagens. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outra linguagem que você suporta. Isso permite que Starlight providencie conteúdo de fallback automático para páginas que você ainda não foram traduzidas.
+Starlight espera que você crie páginas equivalentes em todas as suas linguagens. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outra linguagem que você suporta. Isso permite que Starlight providencie conteúdo de fallback automático para páginas que você ainda não tenha traduzidas.
 
-Se uma tradução ainda não está disponível para uma linguagem, Starlight irá mostrar aos leitores o conteúdo dessa página na linguagem padrão (definida através de `defaultLocale`). Por exemplo, se você ainda não criou uma versão em Francês da sua página "Sobre" e sua linguagem padrão é Inglês, visitantes de `/fr/about` irão ver o conteúdo em Inglês de `/en/about` com um aviso de que esta página ainda não foi traduzida. Isso te ajuda adicionar conteúdo na sua linguagem padrão e então progressivamente traduzí-la quando seus tradutores tiverem tempo.
+Se uma tradução ainda não está disponível para uma linguagem, Starlight irá mostrar aos leitores o conteúdo dessa página na linguagem padrão (definida através de `defaultLocale`). Por exemplo, se você ainda não criou uma versão em Francês da sua página "Sobre" e sua linguagem padrão é Inglês, visitantes de `/fr/about` irão ver o conteúdo em Inglês de `/en/about` com um aviso de que esta página ainda não foi traduzida. Isso te ajuda a adicionar conteúdo na sua linguagem padrão e então progressivamente traduzí-la quando seus tradutores tiverem tempo.
 
 ## Traduza a UI do Starlight
 
