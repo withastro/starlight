@@ -2,7 +2,7 @@
   "name": "pa11y-runner",
   "private": true,
   "version": "0.1.0",
-  "description": "A Pa11y runner supporting multiple color schemes",
+  "description": "A Pa11y runner supporting running against a specific color scheme",
   "bin": {
     "pa11y-runner": "./bin.mjs"
   },

@@ -5,7 +5,6 @@ import Sitemapper from 'sitemapper';
 import wrap from 'word-wrap';
 
 const config: Config = {
-	colorSchemes: ['dark', 'light'],
 	sitemap: {
 		url: 'http://localhost:3000/sitemap-index.xml',
 		exclude: /\/(de|zh|fr|es|pt-br|it)\/.*/,
@@ -18,38 +17,44 @@ const config: Config = {
 };
 
 /**
- * A simplified re-implementation of the `pa11y-ci` CLI utility to run Pa11y on a list of URLs on
- * multiple color schemes.
+ * A simplified re-implementation of the `pa11y-ci` CLI utility to run Pa11y on a list of URLs for
+ * a specific color scheme.
+ * The color scheme to use is specified via the `COLOR_SCHEME` environment variable.
  * @see https://github.com/pa11y/pa11y-ci
  */
 async function main() {
+	if (process.env.COLOR_SCHEME !== 'dark' && process.env.COLOR_SCHEME !== 'light') {
+		console.info(red('The COLOR_SCHEME environment variable must be set to "dark" or "light".'));
+		process.exit(1);
+	}
+
 	const urls = await getUrls();
 
-	await runPa11yOnUrls(urls);
+	await runPa11yOnUrls(urls, process.env.COLOR_SCHEME);
 }
 
 /** Runs Pa11y on a list of URLs. */
-async function runPa11yOnUrls(urls: string[]) {
-	console.info(cyan(`Running Pa11y on ${urls.length} URLs:\n`));
+async function runPa11yOnUrls(urls: string[], colorScheme: ColorScheme) {
+	console.info(cyan(`Running Pa11y on ${urls.length} URLs - ${colorScheme} color scheme:\n`));
 
 	let browser: Pa11yBrowser | undefined;
-	let results: ResultsByColorScheme = new Map();
-	let totalIssues = 0;
+	let results: Results = new Map();
+	let issueCount = 0;
 
 	try {
-		browser = await getPa11yBrowser();
+		browser = await getPa11yBrowser(colorScheme);
 
 		for (const url of urls) {
-			const { issues, results: urlResults } = await runPa11yOnUrl(url, browser);
+			const { count, result } = await runPa11yOnUrl(url, browser);
 
-			results.set(url, urlResults);
-			totalIssues += issues;
+			results.set(url, result);
+			issueCount += count;
 		}
 
-		if (totalIssues === 0) {
+		if (issueCount === 0) {
 			console.info(green(bold('\nNo issues found.')));
 		} else {
-			reportResults(totalIssues, results);
+			reportErrors(issueCount, results, colorScheme);
 
 			process.exit(1);
 		}
@@ -60,60 +65,40 @@ async function runPa11yOnUrls(urls: string[]) {
 
 /** Runs Pa11y on a specific URL. */
 async function runPa11yOnUrl(url: string, browser: Pa11yBrowser) {
-	const results: ResultByColorScheme = new Map();
-	let issues = 0;
+	const result = await pa11y(url, { ...browser, runners: ['axe'] });
+	const count = result.issues.length;
 
-	for (const scheme of config.colorSchemes) {
-		const result = await runPa11yOnUrlWithColorScheme(url, browser, scheme);
+	const color = count === 0 ? green : red;
+	console.info(` ${cyan('>')} ${url} - ${color(`${count} errors`)}`);
 
-		issues += result.issues.length;
-		results.set(scheme, result);
-	}
-
-	const color = issues === 0 ? green : red;
-	console.info(` ${cyan('>')} ${url} - ${color(`${issues} errors`)}`);
-
-	return { issues, results };
-}
-
-/** Runs Pa11y on a specific URL with a specific color scheme. */
-async function runPa11yOnUrlWithColorScheme(
-	url: string,
-	{ browser, page }: Pa11yBrowser,
-	scheme: ColorScheme
-) {
-	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: scheme }]);
-
-	return pa11y(url, { browser, page, runners: ['axe'] });
+	return { count, result };
 }
 
 /** Reports Pa11y test results to the console. */
-function reportResults(issues: number, results: ResultsByColorScheme) {
+function reportErrors(issues: number, results: Results, colorScheme: ColorScheme) {
 	console.info(red(`\nFound ${issues} issues in ${results.size} URLs.`));
 
-	for (const [url, resultsByColorScheme] of results) {
-		for (const [scheme, result] of resultsByColorScheme) {
-			if (result.issues.length === 0) {
-				continue;
-			}
+	for (const [url, result] of results) {
+		if (result.issues.length === 0) {
+			continue;
+		}
 
+		console.error(
+			underline(
+				`\nFound ${result.issues.length} issues in ${url} - ${bold(`${colorScheme} color scheme:`)}`
+			)
+		);
+
+		for (const issue of result.issues) {
 			console.error(
-				underline(
-					`\nFound ${result.issues.length} issues in ${url} - ${bold(`${scheme} color scheme:`)}`
-				)
+				[
+					`\n ${red('•')} ${wrapText(issue.message).trim()}`,
+					`\n${wrapText(dim(`(${issue.selector})`))}`,
+					`\n${wrapText(
+						dim(issue.context ? issue.context.replaceAll(/\s+/g, ' ') : 'No context available')
+					)}`,
+				].join('\n')
 			);
-
-			for (const issue of result.issues) {
-				console.error(
-					[
-						`\n ${red('•')} ${wrapText(issue.message).trim()}`,
-						`\n${wrapText(dim(`(${issue.selector})`))}`,
-						`\n${wrapText(
-							dim(issue.context ? issue.context.replaceAll(/\s+/g, ' ') : 'No context available')
-						)}`,
-					].join('\n')
-				);
-			}
 		}
 	}
 }
@@ -123,11 +108,12 @@ function wrapText(text: string) {
 	return wrap(text, { indent: '   ', width: config.wrapWidth });
 }
 
-/** Returns an incognito browser browser and page to run Pa11y on. */
-async function getPa11yBrowser(): Promise<Pa11yBrowser> {
+/** Returns an incognito browser browser and page to run Pa11y using the specified color scheme. */
+async function getPa11yBrowser(colorScheme: ColorScheme): Promise<Pa11yBrowser> {
 	const browser = await puppeteer.launch();
 	const context = await browser.createIncognitoBrowserContext();
 	const page = await context.newPage();
+	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: colorScheme }]);
 
 	// @ts-expect-error - @types/pa11y community types are using @types/puppeteer v5.4.X which does
 	// not match pa11y requirements.
@@ -153,7 +139,6 @@ async function getUrls() {
 main();
 
 interface Config {
-	colorSchemes: ColorScheme[];
 	sitemap: {
 		url: string;
 		exclude: RegExp;
@@ -166,8 +151,7 @@ interface Config {
 }
 
 type ColorScheme = 'dark' | 'light';
-type ResultByColorScheme = Map<ColorScheme, Pa11yResults>;
-type ResultsByColorScheme = Map<string, ResultByColorScheme>;
+type Results = Map<string, Pa11yResults>;
 
 type Pa11yOptions = NonNullable<Parameters<typeof pa11y>[1]>;
 type Pa11yBrowser = {

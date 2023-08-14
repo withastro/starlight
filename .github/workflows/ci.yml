@@ -33,6 +33,9 @@ jobs:
   pa11y:
     name: Check for accessibility issues
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        scheme: [dark, light]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -58,6 +61,8 @@ jobs:
       - name: Run accessibility audit
         working-directory: ./docs
         run: pnpm t
+        env:
+          COLOR_SCHEME: ${{ matrix.scheme }}
 
   windows-smoke:
     name: Docs site builds on Windows
