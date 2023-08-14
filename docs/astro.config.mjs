@@ -49,7 +49,7 @@ export default defineConfig({
 					attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
 				},
 			],
-			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
+			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
 				{

@@ -63,9 +63,7 @@ async function runPa11yOnUrls(urls: string[], colorScheme: ColorScheme) {
 
 /** Runs Pa11y on a specific URL using a specific color scheme. */
 async function runPa11yOnUrl(url: string, browser: Pa11yBrowser, colorScheme: ColorScheme) {
-	const page = await browser.newPage();
-	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: colorScheme }]);
-
+	const page = await getPa11yBrowserPage(browser, colorScheme);
 	const result = await pa11y(url, { browser, page, runners: ['axe'] });
 	const count = result.issues.length;
 
@@ -119,6 +117,17 @@ async function getPa11yBrowser(): Promise<Pa11yBrowser> {
 	// @ts-expect-error - @types/pa11y community types are using @types/puppeteer v5.4.X which does
 	// not match pa11y requirements.
 	return context;
+}
+
+async function getPa11yBrowserPage(browser: Pa11yBrowser, colorScheme: ColorScheme) {
+	const page = await browser.newPage();
+	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: colorScheme }]);
+
+	page.on('load', async () => {
+		await page.addStyleTag({ content: '[data-has-hero] .page { background-image: unset; }' });
+	});
+
+	return page;
 }
 
 /** Returns a list of URLs to run Pa11y on based on a sitemap. */

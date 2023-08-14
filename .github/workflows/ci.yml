@@ -55,8 +55,6 @@ jobs:
       - name: Build docs site
         working-directory: ./docs
         run: pnpm build
-        env:
-          NO_GRADIENTS: true
 
       - name: Run accessibility audit
         working-directory: ./docs
