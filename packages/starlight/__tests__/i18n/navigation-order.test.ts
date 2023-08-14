@@ -25,12 +25,14 @@ describe('getSidebar', () => {
 			    "href": "/en/",
 			    "isCurrent": true,
 			    "label": "Home page",
+			    "target": "_self",
 			    "type": "link",
 			  },
 			  {
 			    "href": "/en/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
+			    "target": "_self",
 			    "type": "link",
 			  },
 			  {
@@ -40,6 +42,7 @@ describe('getSidebar', () => {
 			        "href": "/en/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
+			        "target": "_self",
 			        "type": "link",
 			      },
 			    ],
