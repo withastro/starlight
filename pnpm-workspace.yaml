@@ -3,3 +3,4 @@ packages:
   - 'examples/**/*'
   - 'docs'
   - 'docs-i18n-tracker'
+  - 'pa11y-runner'
