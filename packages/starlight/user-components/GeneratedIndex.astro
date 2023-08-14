@@ -1,0 +1,22 @@
+---
+import { CardGrid, LinkCard } from '../components';
+import { getSidebar, flattenSidebar } from '../utils/navigation';
+interface Props {
+  directory: string;
+  locale?: string;
+}
+
+const { directory, locale } = Astro.props;
+
+const entries = flattenSidebar(getSidebar(directory, locale)).filter((entry) =>
+  entry.href.startsWith(`/${directory}`)
+);
+
+// TODO: Only go the depth of the current directory
+// TODO: How should the description logic be handled?
+// TODO: Handle locale automatically?
+---
+
+<CardGrid>
+  {entries.map((entry) => <LinkCard title={entry.label} href={entry.href} />)}
+</CardGrid>

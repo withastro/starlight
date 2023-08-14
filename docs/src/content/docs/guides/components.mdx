@@ -163,6 +163,14 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Components" href="/guides/components/" />
 </CardGrid>
 
+### Generated Index
+
+import { GeneratedIndex } from '@astrojs/starlight/components';
+
+Use the `GeneratedIndex` component to build an list `LinkCards` for the pages in a specified directory. This respects the properties specified in the `sidebar` frontmatter of the pages in that directory such as `label`, `order`, and `hidden`.
+
+<GeneratedIndex directory="guides" />
+
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
