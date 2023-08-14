@@ -7,14 +7,14 @@
     "pa11y-runner": "./bin.mjs"
   },
   "dependencies": {
-    "jiti": "1.19.1",
+    "jiti": "^1.19.1",
     "kleur": "^4.1.5",
     "pa11y": "6.2.3",
     "puppeteer": "~9.1.1",
-    "sitemapper": "3.2.6",
-    "word-wrap": "1.2.5"
+    "sitemapper": "^3.2.6",
+    "word-wrap": "^1.2.5"
   },
   "devDependencies": {
-    "@types/pa11y": "5.3.5"
+    "@types/pa11y": "^5.3.5"
   }
 }

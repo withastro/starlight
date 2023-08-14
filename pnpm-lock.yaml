@@ -132,7 +132,7 @@ importers:
   pa11y-runner:
     dependencies:
       jiti:
-        specifier: 1.19.1
+        specifier: ^1.19.1
         version: 1.19.1
       kleur:
         specifier: ^4.1.5
@@ -144,14 +144,14 @@ importers:
         specifier: ~9.1.1
         version: 9.1.1
       sitemapper:
-        specifier: 3.2.6
+        specifier: ^3.2.6
         version: 3.2.6
       word-wrap:
-        specifier: 1.2.5
+        specifier: ^1.2.5
         version: 1.2.5
     devDependencies:
       '@types/pa11y':
-        specifier: 5.3.5
+        specifier: ^5.3.5
         version: 5.3.5
 
   packages/starlight:
@@ -1930,7 +1930,7 @@ packages:
       typescript: 4.9.5
       unist-util-visit: 4.1.2
       vfile: 5.3.7
-      vite: 4.4.7
+      vite: 4.4.7(@types/node@18.16.19)
       vitefu: 0.2.4(vite@4.4.7)
       which-pm: 2.0.0
       yargs-parser: 21.1.1
@@ -6615,40 +6615,6 @@ packages:
       - terser
     dev: true
 
-  /vite@4.4.7:
-    resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.18.17
-      postcss: 8.4.27
-      rollup: 3.26.3
-    optionalDependencies:
-      fsevents: 2.3.2
-
   /vite@4.4.7(@types/node@18.16.19):
     resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -6683,7 +6649,6 @@ packages:
       rollup: 3.26.3
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /vitefu@0.2.4(vite@4.4.7):
     resolution: {integrity: sha512-fanAXjSaf9xXtOOeno8wZXIhgia+CZury481LsDaV++lSvcU2R9Ch2bPh3PYFyoHW+w9LqAeYRISVQjUIew14g==}
@@ -6693,7 +6658,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.7
+      vite: 4.4.7(@types/node@18.16.19)
 
   /vitest@0.33.0:
     resolution: {integrity: sha512-1CxaugJ50xskkQ0e969R/hW47za4YXDUfWJDxip1hwbnhUjYolpfUn2AMOulqG/Dtd9WYAtkHmM/m3yKVrEejQ==}

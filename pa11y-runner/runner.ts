@@ -37,36 +37,39 @@ async function main() {
 async function runPa11yOnUrls(urls: string[], colorScheme: ColorScheme) {
 	console.info(cyan(`Running Pa11y on ${urls.length} URLs - ${colorScheme} color scheme:\n`));
 
-	let browser: Pa11yBrowser | undefined;
-	let results: Results = new Map();
+	const browser = await getPa11yBrowser();
+	const results: Results = new Map();
 	let issueCount = 0;
 
-	try {
-		browser = await getPa11yBrowser(colorScheme);
+	for (const url of urls) {
+		const { count, result } = await runPa11yOnUrl(url, browser, colorScheme);
 
-		for (const url of urls) {
-			const { count, result } = await runPa11yOnUrl(url, browser);
+		results.set(url, result);
+		issueCount += count;
+	}
 
-			results.set(url, result);
-			issueCount += count;
-		}
+	await browser?.close();
 
-		if (issueCount === 0) {
-			console.info(green(bold('\nNo issues found.')));
-		} else {
-			reportErrors(issueCount, results, colorScheme);
+	if (issueCount === 0) {
+		console.info(green(bold('\nNo issues found.')));
 
-			process.exit(1);
-		}
-	} finally {
-		await browser?.browser?.close();
+		process.exit(0);
+	} else {
+		reportErrors(issueCount, results, colorScheme);
+
+		process.exit(1);
 	}
 }
 
-/** Runs Pa11y on a specific URL. */
-async function runPa11yOnUrl(url: string, browser: Pa11yBrowser) {
-	const result = await pa11y(url, { ...browser, runners: ['axe'] });
+/** Runs Pa11y on a specific URL using a specific color scheme. */
+async function runPa11yOnUrl(url: string, browser: Pa11yBrowser, colorScheme: ColorScheme) {
+	const page = await browser.newPage();
+	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: colorScheme }]);
+
+	const result = await pa11y(url, { browser, page, runners: ['axe'] });
 	const count = result.issues.length;
+
+	await page.close();
 
 	const color = count === 0 ? green : red;
 	console.info(` ${cyan('>')} ${url} - ${color(`${count} errors`)}`);
@@ -108,16 +111,14 @@ function wrapText(text: string) {
 	return wrap(text, { indent: '   ', width: config.wrapWidth });
 }
 
-/** Returns an incognito browser browser and page to run Pa11y using the specified color scheme. */
-async function getPa11yBrowser(colorScheme: ColorScheme): Promise<Pa11yBrowser> {
+/** Returns an incognito browser browser to run Pa11y. */
+async function getPa11yBrowser(): Promise<Pa11yBrowser> {
 	const browser = await puppeteer.launch();
 	const context = await browser.createIncognitoBrowserContext();
-	const page = await context.newPage();
-	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: colorScheme }]);
 
 	// @ts-expect-error - @types/pa11y community types are using @types/puppeteer v5.4.X which does
 	// not match pa11y requirements.
-	return { browser, page };
+	return context;
 }
 
 /** Returns a list of URLs to run Pa11y on based on a sitemap. */
@@ -154,8 +155,5 @@ type ColorScheme = 'dark' | 'light';
 type Results = Map<string, Pa11yResults>;
 
 type Pa11yOptions = NonNullable<Parameters<typeof pa11y>[1]>;
-type Pa11yBrowser = {
-	browser: NonNullable<Pa11yOptions['browser']>;
-	page: NonNullable<Pa11yOptions['page']>;
-};
+type Pa11yBrowser = NonNullable<Pa11yOptions['browser']>;
 type Pa11yResults = Awaited<ReturnType<typeof pa11y>>;
