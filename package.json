@@ -36,5 +36,10 @@
       "path": "examples/basics/dist/_astro/*.css",
       "limit": "10 kB"
     }
-  ]
+  ],
+  "pnpm": {
+    "overrides": {
+      "axe-core": "^4.7.2"
+    }
+  }
 }

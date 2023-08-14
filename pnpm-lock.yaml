@@ -1,5 +1,8 @@
 lockfileVersion: '6.0'
 
+overrides:
+  axe-core: ^4.7.2
+
 importers:
 
   .:
@@ -1970,8 +1973,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axe-core@4.2.4:
-    resolution: {integrity: sha512-9AiDKFKUCWEQm1Kj4lcq7KFavLqSXdf2m/zJo+NVh4VXlW5iwXRJ6alkKmipCyYorsRnqsICH9XLubP1jBF+Og==}
+  /axe-core@4.7.2:
+    resolution: {integrity: sha512-zIURGIS1E1Q4pcrMjp+nnEh+16G56eG/MUllJH8yEvw7asDo7Ac9uhC9KIH5jzpITueEZolfYglnCGIuSBz39g==}
     engines: {node: '>=4'}
     dev: false
 
@@ -5078,7 +5081,7 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
-      axe-core: 4.2.4
+      axe-core: 4.7.2
       bfj: 7.0.2
       commander: 8.0.0
       envinfo: 7.8.1
