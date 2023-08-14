@@ -1,7 +1,0 @@
-{
-  "defaults": {
-    "runners": [
-      "axe"
-    ]
-  }
-}
