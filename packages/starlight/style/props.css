@@ -104,6 +104,7 @@
 	--sl-outline-offset-inside: -0.1875rem;
 
 	/* Global z-index values */
+	--sl-z-index-toc: 4;
 	--sl-z-index-menu: 5;
 	--sl-z-index-navbar: 10;
 	--sl-z-index-skiplink: 20;
