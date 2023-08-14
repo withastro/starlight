@@ -15,6 +15,7 @@ export interface Link {
 	label: string;
 	href: string;
 	isCurrent: boolean;
+	tag?: string; // TODO: MVP this may change
 }
 
 interface Group {
@@ -112,13 +113,16 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname);
+	return makeLink(href, label, currentPathname, item.tag);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string): Link {
+function makeLink(href: string, label: string, currentPathname: string, tag?: string): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
+	if (tag) {
+		return { type: 'link', label, href, isCurrent, tag };
+	}
 	return { type: 'link', label, href, isCurrent };
 }
 

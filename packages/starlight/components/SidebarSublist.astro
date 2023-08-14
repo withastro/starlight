@@ -19,6 +19,8 @@ interface Props {
 						class:list={{ large: !Astro.props.nested }}
 					>
 						{entry.label}
+						// TODO: MVP - add tag to sidebar
+						{entry.tag && <span>{entry.tag}</span>}
 					</a>
 				) : (
 					<details
@@ -114,5 +116,12 @@ interface Props {
 		a {
 			font-size: var(--sl-text-sm);
 		}
+	}
+
+	span {
+		color: red;
+		background-color: aqua;
+		padding-inline: 0.25rem;
+		font-weight: bold;
 	}
 </style>

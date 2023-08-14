@@ -42,6 +42,8 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
 	link: z.string(),
+	/** TODO: MVP user API this may change */
+	tag: z.string().optional(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
