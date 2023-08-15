@@ -19,7 +19,6 @@ interface Props {
 						class:list={{ large: !Astro.props.nested }}
 					>
 						{entry.label}
-						// TODO: MVP - add tag to sidebar
 						{entry.tag && <span>{entry.tag}</span>}
 					</a>
 				) : (
