@@ -1,15 +1,15 @@
 ---
 title: Internacionalização (i18n)
-description: Aprenda como configurar seu site Starlight para suportar várias linguagens.
+description: Aprenda como configurar seu site Starlight para suportar várias línguas.
 ---
 
 import FileTree from '../../../../components/file-tree.astro';
 
-Starlight providencia suporte integrado para sites multilíngue, incluindo roteamento, conteúdo de fallback e suporte completo para linguagens right-to-left (RTL).
+Starlight providencia suporte integrado para sites multilíngue, incluindo roteamento, conteúdo de fallback e suporte completo para línguas right-to-left (RTL).
 
 ## Configure i18n
 
-1. Diga ao Starlight as linguagens que você suporta passando [`locales`](/pt-br/reference/configuration/#locales) e [`defaultLocale`](/pt-br/reference/configuration/#defaultlocale) para a integração Starlight:
+1. Diga ao Starlight as línguas que você suporta passando [`locales`](/pt-br/reference/configuration/#locales) e [`defaultLocale`](/pt-br/reference/configuration/#defaultlocale) para a integração Starlight:
 
    ```js
    // astro.config.mjs
@@ -20,7 +20,7 @@ Starlight providencia suporte integrado para sites multilíngue, incluindo rotea
    	integrations: [
    		starlight({
    			title: 'Minha Documentação',
-   			// Define Português como a linguagem padrão deste site.
+   			// Define Português como a língua padrão deste site.
    			defaultLocale: 'pt',
    			locales: {
    				// Documentação em Português em `src/content/docs/pt/`
@@ -43,9 +43,9 @@ Starlight providencia suporte integrado para sites multilíngue, incluindo rotea
    });
    ```
 
-   Seu `defaultLocale` será utilizado para o conteúdo de fallback e rótulos da UI, então escolha a linguagem que é a mais provável para você começar a escrever conteúdo em, ou já tem conteúdo para ela.
+   Seu `defaultLocale` será utilizado para o conteúdo de fallback e rótulos da UI, então escolha a língua que é a mais provável para você começar a escrever conteúdo em, ou já tem conteúdo para ela.
 
-2. Crie um diretório para cada linguagem em `src/content/docs/`.
+2. Crie um diretório para cada língua em `src/content/docs/`.
    Por exemplo, para a configuração mostrada acima, crie as seguintes pastas:
 
    <FileTree>
@@ -59,13 +59,13 @@ Starlight providencia suporte integrado para sites multilíngue, incluindo rotea
 
    </FileTree>
 
-3. Você agora pode adicionar arquivos de conteúdo em seus diretórios da linguagem. Use o mesmo nome de arquivo para associar páginas entre linguagens e se aproveite do conjunto completo de funcionalidades de i18n do Starlight, incluindo conteúdo de fallback, avisos de tradução e mais.
+3. Você agora pode adicionar arquivos de conteúdo em seus diretórios da língua. Use o mesmo nome de arquivo para associar páginas entre línguas e se aproveite do conjunto completo de funcionalidades de i18n do Starlight, incluindo conteúdo de fallback, avisos de tradução e mais.
 
    Por exemplo, crie `ar/index.md` e `pt/index.md` para representar a página inicial em Árabe e Português respectivamente.
 
 ### Use um local raiz
 
-Você pode usar um local “raiz” para servir uma linguagem sem nenhum prefixo de i18n no seu caminho. Por exemplo, se Português é seu local raiz, um caminho de página em Português se pareceria com `/sobre` ao invés de `/pt/sobre`.
+Você pode usar um local “raiz” para servir uma língua sem nenhum prefixo de i18n no seu caminho. Por exemplo, se Português é seu local raiz, um caminho de página em Português se pareceria com `/sobre` ao invés de `/pt/sobre`.
 
 Para definir um local raiz, use a chave `root` na sua configuração de `locales`. Se o local raiz também for o local padrão do seu conteúdo, remova `defaultLocale` ou defina-o como `'root'`.
 
@@ -94,7 +94,7 @@ export default defineConfig({
 });
 ```
 
-Ao utilizar um local `root`, mantenha as páginas para aquela linguagem diretamente em `src/content/docs/` ao invés de em uma pasta dedicada para a linguagem. Por exemplo, aqui está os arquivos para a página inicial em Português e Chinês ao utilizar a configuração acima:
+Ao utilizar um local `root`, mantenha as páginas para aquela língua diretamente em `src/content/docs/` ao invés de em uma pasta dedicada para a língua. Por exemplo, aqui está os arquivos para a página inicial em Português e Chinês ao utilizar a configuração acima:
 
 <FileTree>
 
@@ -109,7 +109,7 @@ Ao utilizar um local `root`, mantenha as páginas para aquela linguagem diretame
 
 #### Sites monolíngue
 
-Por padrão, Starlight é um site (Inglês) monolíngue. Para criar um site de linguagem única em outra língua, a defina como o `root` na sua configuração de `locales`:
+Por padrão, Starlight é um site (Inglês) monolíngue. Para criar um site de língua única em outra língua, a defina como o `root` na sua configuração de `locales`:
 
 ```js
 // astro.config.mjs
@@ -131,21 +131,21 @@ export default defineConfig({
 });
 ```
 
-Isso te permite sobrescrever a linguagem padrão do Starlight sem habilitar outras funcionalidades de internacionalização para sites multilíngue, como o seletor de linguagem.
+Isso te permite sobrescrever a língua padrão do Starlight sem habilitar outras funcionalidades de internacionalização para sites multilíngue, como o seletor de língua.
 
 ## Conteúdo de Fallback
 
-Starlight espera que você crie páginas equivalentes em todas as suas linguagens. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outra linguagem que você suporta. Isso permite que Starlight providencie conteúdo de fallback automático para páginas que você ainda não tenha traduzidas.
+Starlight espera que você crie páginas equivalentes em todas as suas línguas. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outra língua que você suporta. Isso permite que Starlight providencie conteúdo de fallback automático para páginas que você ainda não tenha traduzidas.
 
-Se uma tradução ainda não está disponível para uma linguagem, Starlight irá mostrar aos leitores o conteúdo dessa página na linguagem padrão (definida através de `defaultLocale`). Por exemplo, se você ainda não criou uma versão em Francês da sua página "Sobre" e sua linguagem padrão é Inglês, visitantes de `/fr/about` irão ver o conteúdo em Inglês de `/en/about` com um aviso de que esta página ainda não foi traduzida. Isso te ajuda a adicionar conteúdo na sua linguagem padrão e então progressivamente traduzí-la quando seus tradutores tiverem tempo.
+Se uma tradução ainda não está disponível para uma língua, Starlight irá mostrar aos leitores o conteúdo dessa página na língua padrão (definida através de `defaultLocale`). Por exemplo, se você ainda não criou uma versão em Francês da sua página "Sobre" e sua língua padrão é Inglês, visitantes de `/fr/about` irão ver o conteúdo em Inglês de `/en/about` com um aviso de que esta página ainda não foi traduzida. Isso te ajuda a adicionar conteúdo na sua língua padrão e então progressivamente traduzí-la quando seus tradutores tiverem tempo.
 
 ## Traduza a UI do Starlight
 
-Em adição a hospedar arquivos de conteúdo traduzido, Starlight te permite traduzir as strings padrões da UI (e.x. o cabeçalho "Nesta página" no índice) para que seus leitores possam experienciar seu site inteiramente na linguagem selecionada.
+Em adição a hospedar arquivos de conteúdo traduzido, Starlight te permite traduzir as strings padrões da UI (e.x. o cabeçalho "Nesta página" no índice) para que seus leitores possam experienciar seu site inteiramente na língua selecionada.
 
-Strings da UI são providenciadas para Inglês, Tcheco, Francês, Alemão, Italiano, Japonês, Português, Holandês, Dinarmaquês, Espanhol, Turco, Árabe, Norueguês e Chinês Simplificado por padrão, e nós aceitamos [contribuições para adicionar mais linguagens padrões](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Strings da UI são providenciadas para Inglês, Tcheco, Francês, Alemão, Italiano, Japonês, Português, Holandês, Dinarmaquês, Espanhol, Turco, Árabe, Norueguês e Chinês Simplificado por padrão, e nós aceitamos [contribuições para adicionar mais línguas padrões](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Você pode fornecer traduções para linguagens adicionais que você suporta — ou sobrescrever nossos rótulos padrões — através da coleção de dados `i18n`.
+Você pode fornecer traduções para línguas adicionais que você suporta — ou sobrescrever nossos rótulos padrões — através da coleção de dados `i18n`.
 
 1. Configure a coleção de dados `i18n` em `src/content/config.ts` se já não estiver configurado:
 
