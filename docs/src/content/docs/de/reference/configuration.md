@@ -362,6 +362,7 @@ interface HeadConfig {
   content?: string;
 }
 ```
+
 ### `lastUpdated`
 
 **Typ:** `boolean`  
