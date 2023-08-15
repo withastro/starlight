@@ -149,5 +149,9 @@ export function docsSchema() {
 					hidden: z.boolean().default(false),
 				})
 				.default({}),
+				
+			/** TODO: tag MVP */
+			tag: z.string().optional(),
+
 		});
 }

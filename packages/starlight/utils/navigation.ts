@@ -172,7 +172,8 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 	return makeLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
-		currentPathname
+		currentPathname,
+		route.entry.data.tag
 	);
 }
 
