@@ -124,6 +124,44 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 :::
 
+### 链接卡片
+
+使用 `<LinkCard>` 组件来突出显示链接到不同页面的内容。
+
+`<LinkCard>` 需要一个 `title` 和一个 [`href`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#href) 属性。你可以选择包含一个简短的 `description` 或其他链接属性，例如 `target`。
+
+当有足够的空间时，将多个 `<LinkCard>` 组件组合在 `<CardGrid>` 中，以便并排显示卡片。
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="自定义 Starlight"
+	description="了解如何使用自定义样式、字体等打造你自己的 Starlight 网站。"
+	href="/zh/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="创作 Markdown" href="/zh/guides/authoring-content/" />
+	<LinkCard title="组件" href="/zh/guides/components/" />
+</CardGrid>
+```
+
+以上代码在页面上生成了以下内容：
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="自定义 Starlight"
+	description="了解如何使用自定义样式、字体等打造你自己的 Starlight 网站。"
+	href="/zh/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="创作 Markdown" href="/zh/guides/authoring-content/" />
+	<LinkCard title="组件" href="/zh/guides/components/" />
+</CardGrid>
+
 ### 图标
 
 import { Icon } from '@astrojs/starlight/components';
