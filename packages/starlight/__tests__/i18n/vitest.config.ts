@@ -7,5 +7,6 @@ export default defineVitestConfig({
 		fr: { label: 'French' },
 		en: { label: 'English', lang: 'en-US' },
 		ar: { label: 'Arabic', dir: 'rtl' },
+		'pt-br': { label: 'Brazilian Portuguese', lang: 'pt-BR' },
 	},
 });

@@ -27,9 +27,8 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm i
-      - name: Test packages/starlight
-        working-directory: ./packages/starlight
-        run: pnpm test:coverage
+      - name: Test packages
+        run: pnpm -r test:coverage
 
   pa11y:
     name: Check for accessibility issues
