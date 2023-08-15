@@ -257,41 +257,6 @@ hero:
 ---
 ```
 
-## 自定义 CSS 样式
-
-通过提供附加的 CSS 文件来自定义应用于你的 Starlight 网站的样式，从而自定义 Starlight 站点中应用的样式。
-
-1. 将 CSS 文件添加到 `src/` 目录中。例如，你可以将 Starlight 的默认蓝色强调色改为紫色：
-
-   ```css
-   /* src/styles/custom.css */
-   :root {
-   	--sl-hue-accent: 270;
-   }
-   ```
-
-2. 在 `astro.config.mjs` 中的 Starlight 的 `customCss` 数组中添加 CSS 文件的路径：
-
-   ```js
-   // astro.config.mjs
-   import { defineConfig } from 'astro/config';
-   import starlight from '@astrojs/starlight';
-
-   export default defineConfig({
-   	integrations: [
-   		starlight({
-   			title: '带有自定义CSS的页面',
-   			customCss: [
-   				// 你的自定义CSS文件的相对路径
-   				'./src/styles/custom.css',
-   			],
-   		}),
-   	],
-   });
-   ```
-
-你可以在 GitHub 上的 [`props.css`文件](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) 中查看 Starlight 使用的所有自定义 CSS 属性，以便根据需要进行修改。
-
 ## 自定义字体
 
 默认情况下，Starlight 使用用户本地设备上可用的无衬线字体来显示所有文本。这样可以确保文档在加载时以每个用户熟悉的字体快速显示，而不需要额外的带宽下载大型字体文件。
@@ -413,7 +378,7 @@ hero:
 
 ### 使用字体
 
-要将设置好的字体应用于你的站点，请在自定义 CSS 文件中使用所选字体的名称。例如，要在整个站点上覆盖 Starlight 的默认字体，请设置`--sl-font`自定义属性：
+要将设置好的字体应用于你的站点，请在[自定义 CSS 文件](/zh/guides/css-and-tailwind/#custom-css-styles)中使用所选字体的名称。例如，要在整个站点上覆盖 Starlight 的默认字体，请设置`--sl-font`自定义属性：
 
 ```css
 /* src/styles/custom.css */
@@ -433,4 +398,4 @@ main {
 }
 ```
 
-按照[自定义 CSS](#自定义-css-样式)将样式添加到你的站点。
+按照[自定义 CSS](/zh/guides/css-and-tailwind/#custom-css-styles)将样式添加到你的站点。
