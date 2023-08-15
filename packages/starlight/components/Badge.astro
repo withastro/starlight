@@ -1,0 +1,49 @@
+---
+interface Props {
+	theme?: 'cyan' | 'pink' | 'yellow' | 'purple';
+}
+const { theme = 'pink' } = Astro.props;
+---
+
+<span class={theme}>
+	<slot />
+</span>
+<style>
+	span {
+		padding-inline: 0.5rem;
+		padding-block: 0.125rem;
+		border-radius: 0.25rem;
+		font-family: var(--__sl-font-mono);
+		margin-left: 0.125rem;
+		font-size: var(--sl-text-xs);
+		border: 1px solid;
+	}
+
+	:global([data-theme='dark']) span {
+		color: white;
+	}
+
+	.cyan {
+		background-color: hsla(165, 87%, 62%, 0.33);
+		border-color: hsla(165, 87%, 62%, 1);
+		color: hsl(165, 87%, 22%, 1);
+	}
+
+	.yellow {
+		background-color: hsla(54, 93%, 58%, 0.33);
+		border-color: hsla(54, 93%, 58%, 1);
+		color: hsl(54, 93%, 22%, 1);
+	}
+
+	.purple {
+		background-color: hsla(281, 82%, 63%, 0.33);
+		border-color: hsla(281, 82%, 63%, 1);
+		color: hsl(281, 82%, 22%, 1);
+	}
+
+	.pink {
+		background-color: hsla(295, 100%, 63%, 0.33);
+		border-color: hsla(295, 100%, 63%, 1);
+		color: hsl(295, 100%, 22%, 1);
+	}
+</style>
