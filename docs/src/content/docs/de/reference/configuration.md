@@ -88,7 +88,7 @@ Mit dieser Konfiguration würde eine `/einfuehrung` einen Bearbeitungslink haben
 Konfiguriere die Navigationselemente der Seitenleiste deiner Website.
 
 Eine Seitenleiste ist eine Array von Links und Linkgruppen.
-Jedes Element muss ein "Label" und eine der folgenden Eigenschaften haben:
+Jedes Element muss ein `label` und eine der folgenden Eigenschaften haben:
 
 - `link` - ein einzelner Link zu einer bestimmten URL, z.B. `'/home'` oder `'https://example.com'`.
 - `items` - ein Array, das weitere Links und Untergruppen enthält.
@@ -127,7 +127,7 @@ Zum Beispiel würde eine Seite, die aus der Datei `astro.md` erzeugt wurde, übe
 
 Gruppen von Links sind standardmäßig aufgeklappt. Du kannst dieses Verhalten ändern, indem du die Eigenschaft `collapsed` einer Gruppe auf `true` setzt.
 
-Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collapsed` ihrer übergeordneten Gruppe. Dies kannst du mit der Eigenschaft `autogenerate.collapsed` außer Kraft zu setzen.
+Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collapsed` ihrer übergeordneten Gruppe. Dies kannst du mit der Eigenschaft `autogenerate.collapsed` außer Kraft setzen.
 
 ```js
 sidebar: [
@@ -295,7 +295,7 @@ Das `defaultLocale` wird verwendet, um Ersatzinhalte bereitzustellen, wenn Über
 
 ### `social`
 
-**Typ:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**Typ:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Optionale Angaben zu den Social-Media-Konten für diese Site. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
 
