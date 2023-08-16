@@ -13,13 +13,15 @@ const { theme = 'pink' } = Astro.props;
 		padding-inline: 0.5rem;
 		padding-block: 0.125rem;
 		border-radius: 0.25rem;
-		font-family: var(--__sl-font-mono);
+		font-family: var(--sl-font-system-mono);
 		margin-left: 0.125rem;
 		font-size: var(--sl-text-xs);
 		border: 1px solid;
+		font-weight: normal;
 	}
 
-	:global([data-theme='dark']) span {
+	:global([data-theme='dark']) span,
+	:global([aria-current='page']) span {
 		color: white;
 	}
 
