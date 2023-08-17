@@ -1,8 +1,8 @@
 ---
 interface Props {
-	theme?: 'cyan' | 'pink' | 'yellow' | 'purple';
+	theme?: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
 }
-const { theme = 'pink' } = Astro.props;
+const { theme = 'blue' } = Astro.props;
 ---
 
 <span class={theme}>
@@ -11,41 +11,76 @@ const { theme = 'pink' } = Astro.props;
 <style>
 	span {
 		padding-inline: 0.5rem;
-		padding-block: 0.125rem;
+		padding-block: 0.0625rem;
 		border-radius: 0.25rem;
 		font-family: var(--sl-font-system-mono);
 		margin-left: 0.125rem;
 		font-size: var(--sl-text-xs);
 		border: 1px solid;
 		font-weight: normal;
+		color: #fff;
+		background-color: var(--sl-color-bg-badge);
+		border-color: var(--sl-color-border-badge);
 	}
 
-	:global([data-theme='dark']) span,
 	:global([aria-current='page']) span {
-		color: white;
+		background-color: var(--sl-color-text-accent);
+		border-color: var(--sl-color-text-invert);
+		color: var(--sl-color-text-invert);
 	}
 
-	.cyan {
-		background-color: hsla(165, 87%, 62%, 0.33);
-		border-color: hsla(165, 87%, 62%, 1);
-		color: hsl(165, 87%, 22%, 1);
+	:global([data-theme='dark']) span {
+		--sl-color-bg-badge: hsla(234, 54%, 20%, 1);
+		--sl-color-border-badge: hsla(234, 100%, 60%, 1);
 	}
 
-	.yellow {
-		background-color: hsla(54, 93%, 58%, 0.33);
-		border-color: hsla(54, 93%, 58%, 1);
-		color: hsl(54, 93%, 22%, 1);
+	span.blue {
+		--sl-color-bg-badge: hsla(234, 80%, 30%, 1);
+		--sl-color-border-badge: hsla(234, 90%, 60%, 1);
 	}
 
-	.purple {
-		background-color: hsla(281, 82%, 63%, 0.33);
-		border-color: hsla(281, 82%, 63%, 1);
-		color: hsl(281, 82%, 22%, 1);
+	span.pink {
+		--sl-color-bg-badge: hsla(339, 80%, 30%, 1);
+		--sl-color-border-badge: hsla(339, 90%, 60%, 1);
 	}
 
-	.pink {
-		background-color: hsla(295, 100%, 63%, 0.33);
-		border-color: hsla(295, 100%, 63%, 1);
-		color: hsl(295, 100%, 22%, 1);
+	span.green {
+		--sl-color-bg-badge: hsla(102, 80%, 22%, 1);
+		--sl-color-border-badge: hsla(101, 90%, 46%, 1);
+	}
+
+	span.yellow {
+		--sl-color-bg-badge: hsla(40, 80%, 25%, 1);
+		--sl-color-border-badge: hsla(41, 90%, 60%, 1);
+	}
+
+	span.purple {
+		--sl-color-bg-badge: hsla(280, 90%, 30%, 1);
+		--sl-color-border-badge: hsla(281, 90%, 60%, 1);
+	}
+
+	::global([data-theme='dark']) span.blue {
+		--sl-color-bg-badge: hsla(234, 54%, 20%, 1);
+		--sl-color-border-badge: hsla(234, 100%, 60%, 1);
+	}
+
+	::global([data-theme='dark']) span.pink {
+		--sl-color-bg-badge: hsla(339, 39%, 22%, 1);
+		--sl-color-border-badge: hsla(339, 82%, 63%, 1);
+	}
+
+	::global([data-theme='dark']) span.green {
+		--sl-color-bg-badge: hsla(102, 39%, 22%, 1);
+		--sl-color-border-badge: hsla(101, 82%, 63%, 1);
+	}
+
+	::global([data-theme='dark']) span.yellow {
+		--sl-color-bg-badge: hsla(40, 39%, 22%, 1);
+		--sl-color-border-badge: hsla(41, 82%, 63%, 1);
+	}
+
+	::global([data-theme='dark']) span.purple {
+		--sl-color-bg-badge: hsla(280, 39%, 22%, 1);
+		--sl-color-border-badge: hsla(281, 82%, 63%, 1);
 	}
 </style>
