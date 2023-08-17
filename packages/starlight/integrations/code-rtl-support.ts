@@ -19,7 +19,7 @@ export function rehypeRtlCodeSupport() {
 	return () => (root: Root) => {
 		visit(root, 'element', (el) => {
 			if (el.tagName === 'pre' || el.tagName === 'code') {
-				el.properties = el.properties || {};
+				el.properties ||= {};
 				if (!('dir' in el.properties)) {
 					el.properties.dir = { pre: 'ltr', code: 'auto' }[el.tagName];
 				}
