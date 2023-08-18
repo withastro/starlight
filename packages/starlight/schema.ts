@@ -150,8 +150,17 @@ export function docsSchema() {
 				})
 				.default({}),
 				
-			/** TODO: tag MVP */
-			tag: z.string().optional(),
-
+			/**
+			 * Adds a sidebar badge.
+			 * 
+			 * Can be a string or an object with a theme and content.
+			 * Prebuild themes include 'blue', 'pink', 'green', 'yellow' and 'purple'.
+			 * 
+			 * Passing only a string defaults to the blue theme
+			 */
+			tag: z.union([z.string(), z.object({
+				theme: z.enum(['blue', 'pink', 'green', 'yellow', 'purple']).default('blue'),
+				content: z.string(),
+			})]).optional(),
 		});
 }

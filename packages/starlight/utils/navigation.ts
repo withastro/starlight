@@ -15,7 +15,10 @@ export interface Link {
 	label: string;
 	href: string;
 	isCurrent: boolean;
-	tag?: string; // TODO: MVP this may change
+	tag?: {
+		content: string;
+		theme: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
+	};
 }
 
 interface Group {
@@ -117,11 +120,28 @@ function linkFromConfig(
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string, tag?: string): Link {
+function makeLink(
+	href: string,
+	label: string,
+	currentPathname: string,
+	tag?: string | {
+		content: string;
+		theme: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
+	}
+): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
 	if (tag) {
-		return { type: 'link', label, href, isCurrent, tag };
+		return {
+			type: 'link',
+			label,
+			href,
+			isCurrent,
+			tag: {
+				content: typeof tag === 'string' ? tag : tag.content,
+				theme: typeof tag === 'string' ? 'blue' : tag.theme,
+			},
+		};
 	}
 	return { type: 'link', label, href, isCurrent };
 }

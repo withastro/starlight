@@ -20,7 +20,7 @@ interface Props {
 						class:list={{ large: !Astro.props.nested }}
 					>
 						{entry.label}
-						{entry.tag && <Badge>{entry.tag}</Badge>}
+						{entry.tag && <Badge theme={entry.tag.theme}>{entry.tag.content}</Badge>}
 					</a>
 				) : (
 					<details
