@@ -10,15 +10,17 @@ import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
 
 const DirKey = Symbol('DirKey');
 
+type Badge = {
+	text: string;
+	variant: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
+}
+
 export interface Link {
 	type: 'link';
 	label: string;
 	href: string;
 	isCurrent: boolean;
-	tag?: {
-		content: string;
-		theme: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
-	};
+	badge?: Badge;
 }
 
 interface Group {
@@ -116,7 +118,7 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.tag);
+	return makeLink(href, label, currentPathname, item.badge);
 }
 
 /** Create a link entry. */
@@ -124,22 +126,19 @@ function makeLink(
 	href: string,
 	label: string,
 	currentPathname: string,
-	tag?: string | {
-		content: string;
-		theme: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
-	}
+	badge?: string | Badge
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	if (tag) {
+	if (badge) {
 		return {
 			type: 'link',
 			label,
 			href,
 			isCurrent,
-			tag: {
-				content: typeof tag === 'string' ? tag : tag.content,
-				theme: typeof tag === 'string' ? 'blue' : tag.theme,
+			badge: {
+				text: typeof badge === 'string' ? badge : badge.text,
+				variant: typeof badge === 'string' ? 'blue' : badge.variant,
 			},
 		};
 	}
@@ -193,7 +192,7 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
-		route.entry.data.tag
+		route.entry.data.sidebar.badge
 	);
 }
 

@@ -1,12 +1,13 @@
 ---
 interface Props {
 	theme?: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
+	text: string;
 }
-const { theme = 'blue' } = Astro.props;
+const { theme = 'blue', text } = Astro.props;
 ---
 
 <span class={theme}>
-	<slot />
+	{text}
 </span>
 <style>
 	span {

@@ -42,10 +42,10 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
 	link: z.string(),
-	/** Adds a sidebar badge to the link item */
-	tag: z.union([z.string(), z.object({
-		theme: z.enum(['blue', 'pink', 'green', 'yellow', 'purple']).default('blue'),
-		content: z.string(),
+	/** Adds a badge to the link item */
+	badge: z.union([z.string(), z.object({
+		variant: z.enum(['blue', 'pink', 'green', 'yellow', 'purple']).default('blue'),
+		text: z.string(),
 	})]).optional(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
