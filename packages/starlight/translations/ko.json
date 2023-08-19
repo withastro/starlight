@@ -3,7 +3,7 @@
   "search.label": "검색",
   "search.shortcutLabel": "(검색을 위해 / 키를 누르세요)",
   "search.cancelLabel": "취소",
-  "search.devWarning": "검색 기능은 배포 환경에서만 사용할 수 있습니다.\n사이트를 로컬 환경에서 테스트하기 위해 빌드하고 미리보기(Preview) 하세요.",
+  "search.devWarning": "검색 기능은 프로덕션 환경에서만 사용할 수 있습니다.\n사이트를 로컬 환경에서 테스트하기 위해 빌드하고 미리보기(Preview) 하세요.",
   "themeSelect.accessibleLabel": "테마 선택",
   "themeSelect.dark": "어두움",
   "themeSelect.light": "밝음",
