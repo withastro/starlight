@@ -81,7 +81,7 @@ export default defineConfig({
 							label: 'Manual Setup',
 							link: 'manual-setup',
 							translations: {
-								// de: 'Manual Setup',
+								de: 'Manuelle Einrichtung',
 								es: 'Configuración Manual',
 								ja: '手動セットアップ',
 								// fr: 'Manual Setup',
