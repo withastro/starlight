@@ -116,6 +116,50 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 :::
 
+### リンクカード
+
+`<LinkCard>`を使用すると、他のページへのリンクを目立たせることができます。
+
+`<LinkCard>`は`title`と[`href`](https://developer.mozilla.org/ja/docs/Web/HTML/Element/a#href)属性を必須とします。短い`description`や、`target`など他のリンク属性も指定できます。
+
+十分なスペースがある場合、`<CardGrid>`により複数の`<LinkCard>`をグループ化して、カードを並べて表示できます。
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Starlightのカスタマイズ"
+	description="Starlightサイトをカスタマイズして、独自のスタイル、フォントなどを追加する方法について学びます。"
+	href="/ja/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Markdownでのコンテンツ作成"
+		href="/ja/guides/authoring-content/"
+	/>
+	<LinkCard title="コンポーネント" href="/ja/guides/components/" />
+</CardGrid>
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Starlightのカスタマイズ"
+	description="Starlightサイトをカスタマイズして、独自のスタイル、フォントなどを追加する方法について学びます。"
+	href="/ja/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Markdownでのコンテンツ作成"
+		href="/ja/guides/authoring-content/"
+	/>
+	<LinkCard title="コンポーネント" href="/ja/guides/components/" />
+</CardGrid>
+
 ### アイコン
 
 import { Icon } from '@astrojs/starlight/components';

@@ -1,5 +1,14 @@
 # @astrojs/starlight-tailwind
 
+## 1.0.1
+
+### Patch Changes
+
+- [#503](https://github.com/withastro/starlight/pull/503) [`c81b158`](https://github.com/withastro/starlight/commit/c81b158e5f832b88f4bb03586b61f887c1982db1) Thanks [@delucis](https://github.com/delucis)! - Loosen `@astrojs/starlight` peer dependency range to allow higher minor versions.
+
+- Updated dependencies [[`5e3133c`](https://github.com/withastro/starlight/commit/5e3133c42232b201b981cf4b3bc1c3dd56b09fa5), [`fcff49e`](https://github.com/withastro/starlight/commit/fcff49ee4260ad68e80833712e161cbb978a2562), [`3c87a16`](https://github.com/withastro/starlight/commit/3c87a16de3c867ad89294a0ea84d63eca2e74d7a), [`cd28392`](https://github.com/withastro/starlight/commit/cd28392ac73ac0ba1a441328fcd1d65d7d441366), [`d8669b8`](https://github.com/withastro/starlight/commit/d8669b869761ac15d1d611eda7dd94a62ce0fd7a)]:
+  - @astrojs/starlight@0.7.2
+
 ## 1.0.0
 
 ### Minor Changes

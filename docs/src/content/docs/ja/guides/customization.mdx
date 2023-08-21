@@ -1,6 +1,6 @@
 ---
 title: Starlightのカスタマイズ
-description: Starlightサイトをカスタマイズして、独自のスタイル、フォントなどを追加する方法について学びます。
+description: Starlightサイトをカスタマイズして、ロゴ、カスタムフォント、ランディングページのデザインなどを追加する方法について学びます。
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -173,7 +173,7 @@ defineConfig({
 
 Starlightは、Starlightインテグレーションの[`social`](/ja/reference/configuration/#social)オプションを使用して、サイトヘッダーにソーシャルメディアアカウントへのリンクを追加する機能を備えています。
 
-現在、Bitbucket、Codeberg、CodePen、Discord、GitHub、GitLab、Gitter、LinkedIn、Mastodon、Microsoft Teams、Threads、Twitch、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
+現在、Bitbucket、Codeberg、CodePen、Discord、GitHub、GitLab、Gitter、Instagram、LinkedIn、Mastodon、Microsoft Teams、Threads、Twitch、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
 
 ```js
 // astro.config.mjs
@@ -252,41 +252,6 @@ hero:
   tagline: ページが見つかりませんでした。URLを確認するか、検索バーを使用してみてください。
 ---
 ```
-
-## カスタムCSSスタイル
-
-Starlightサイトに適用されるスタイルをカスタマイズするには、追加のCSSファイルを作成し、Starlightのデフォルトスタイルを変更または拡張します。
-
-1. `src`ディレクトリにCSSファイルを追加します。たとえば、以下ではStarlightのデフォルトの青いアクセント色を紫に変更しています。
-
-   ```css
-   /* src/styles/custom.css */
-   :root {
-   	--sl-hue-accent: 270;
-   }
-   ```
-
-2. `astro.config.mjs`で、Starlightの`customCss`配列にCSSファイルへのパスを追加します。
-
-   ```js
-   // astro.config.mjs
-   import { defineConfig } from 'astro/config';
-   import starlight from '@astrojs/starlight';
-
-   export default defineConfig({
-   	integrations: [
-   		starlight({
-   			title: 'カスタムCSSを設定したドキュメント',
-   			customCss: [
-   				// カスタムCSSファイルへの相対パス
-   				'./src/styles/custom.css',
-   			],
-   		}),
-   	],
-   });
-   ```
-
-[GitHub上の`props.css`ファイル](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)で、サイトをカスタマイズするために設定可能な、Starlightが使用しているすべてのカスタムCSSプロパティを確認できます。
 
 ## カスタムフォント
 
@@ -409,7 +374,7 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 
 ### フォントを使う
 
-設定したフォントをサイトに適用するには、選択したフォントの名前をカスタムCSSファイルで指定します。たとえば、Starlightのデフォルトフォントをすべての場所で上書きするには、`--sl-font`カスタムプロパティを設定します。
+設定したフォントをサイトに適用するには、選択したフォントの名前を[カスタムCSSファイル](/ja/guides/css-and-tailwind/#カスタムcssスタイル)で指定します。たとえば、Starlightのデフォルトフォントをすべての場所で上書きするには、`--sl-font`カスタムプロパティを設定します。
 
 ```css
 /* src/styles/custom.css */
@@ -429,4 +394,4 @@ main {
 }
 ```
 
-サイトにスタイルを追加するには、[カスタムCSSの導入手順](#カスタムcssスタイル)に従ってください。
+サイトにスタイルを追加するには、[カスタムCSSの導入手順](/ja/guides/css-and-tailwind/#カスタムcssスタイル)に従ってください。
