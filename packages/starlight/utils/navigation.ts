@@ -7,13 +7,9 @@ import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
 import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
+import type { Badge } from '../schemas/badge';
 
 const DirKey = Symbol('DirKey');
-
-type Badge = {
-	text: string;
-	variant: 'blue' | 'pink' | 'green' | 'yellow' | 'purple';
-}
 
 export interface Link {
 	type: 'link';

@@ -3,6 +3,7 @@ import { HeadConfigSchema } from './schemas/head';
 import { PrevNextLinkConfigSchema } from './schemas/prevNextLink';
 import { TableOfContentsSchema } from './schemas/tableOfContents';
 import { Icons } from './components/Icons';
+import { BadgeConfigSchema } from './schemas/badge';
 export { i18nSchema } from './schemas/i18n';
 
 type IconName = keyof typeof Icons;
@@ -153,15 +154,7 @@ export function docsSchema() {
 					 * Variants include 'blue', 'pink', 'green', 'yellow' and 'purple'.
 					 * Passing only a string defaults to the 'blue' variant
 					 */
-					badge: z
-						.union([
-							z.string(),
-							z.object({
-								variant: z.enum(['blue', 'pink', 'green', 'yellow', 'purple']).default('blue'),
-								text: z.string(),
-							}),
-						])
-						.optional(),
+					badge: BadgeConfigSchema(),
 				})
 				.default({}),
 		});
