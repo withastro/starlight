@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Add icons for Instagram
+Add Swedish UI translations.

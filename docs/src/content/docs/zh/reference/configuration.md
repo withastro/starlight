@@ -253,7 +253,7 @@ interface LocaleConfig {
 
 **类型：** `string`
 
-此语言的 BCP-47 标签，例如`"en"`，`"ar"`，或者 `"zh-CN"`。如果未设置，则默认使用该语言的目录名称。
+此语言的 BCP-47 标签，例如`"en"`，`"ar"`，或者 `"zh-CN"`。如果未设置，则默认使用该语言的目录名称。 如果没有找到特定于区域的翻译，带有区域子标签的语言标签（例如`pt-BR`或`en-US`）将使用内置的 UI 翻译作为其基本语言。
 
 ##### `dir`
 
@@ -293,7 +293,7 @@ starlight({
 
 ### `social`
 
-**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
 
