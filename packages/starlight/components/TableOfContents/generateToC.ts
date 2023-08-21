@@ -2,7 +2,6 @@ import type { MarkdownHeading } from 'astro';
 
 export interface TocItem extends MarkdownHeading {
 	children: TocItem[];
-	current?: boolean;
 }
 
 function diveChildren(item: TocItem, depth: number): TocItem[] {
@@ -34,7 +33,7 @@ export function generateToC(
 
 	for (const heading of headings) {
 		if (toc.length === 0) {
-			toc.push({ ...heading, children: [], current: true });
+			toc.push({ ...heading, children: [] });
 		} else {
 			const lastItemInToc = toc.at(-1)!;
 			if (heading.depth < lastItemInToc.depth) {

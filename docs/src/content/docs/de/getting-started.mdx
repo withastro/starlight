@@ -85,3 +85,50 @@ Wenn du etwas Wichtiges vergisst, wird Starlight dich daran erinnern.
 Sobald du deine Starlight Webseite erstellt und angepasst hast, kannst du sie auf einen Webserver oder Hosting-Plattform deiner Wahl veröffentlichen, einschließlich Netlify, Vercel, GitHub Pages und vielen mehr.
 
 [Lerne mehr über die Veröffentlichung einer Astro Webseite in der Astro Dokumentation.](https://docs.astro.build/de/guides/deploy/)
+
+## Starlight aktualisieren
+
+:::tip
+Da es sich bei Starlight um eine Beta-Software handelt, wird es regelmäßig Updates und Verbesserungen geben. Achte darauf Starlight regelmäßig zu aktualisieren!
+:::
+
+Starlight ist eine Astro-Integration und wird wie jede `@astrojs/*`-Integration aktualisiert:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# Starlight mit npm aktualisieren
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# Starlight mit pnpm aktualisieren
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# Starlight mit yarn aktualisieren
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+Eine vollständige Liste der Änderungen findest du im [Starlight Changelog](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+
+## Fehlerbehebung
+
+Sowohl die Starlight [Projektkonfiguration](/reference/configuration/) als auch die [Konfiguration einzelner Seiten](/reference/frontmatter/) findest du im Referenzbereich dieser Website. Nutze diese Seiten, um sicherzustellen, dass deine Starlight-Site richtig konfiguriert ist und funktioniert.
+
+In der wachsenden Liste der Anleitungen in der Seitenleiste findest du Hilfe beim Hinzufügen von Inhalten und beim Anpassen deiner Starlight-Website.
+
+Wenn du keine Antwort in dieser Dokumentation finden kannst, besuche bitte die [Astro Docs](https://docs.astro.build) für die vollständige Astro-Dokumentation. Deine Frage kann vielleicht beantwortet werden, wenn du verstehst, wie Astro im Allgemeinen funktioniert.
+
+Du kannst auch im [Astro Discord](https://astro.build/chat/) Hilfe von unserer aktiven, freundlichen Community bekommen. Du kannst Fragen in unserem `#Support`-Forum stellen oder unseren speziellen `#starlight`-Channel besuchen, um aktuelle Entwicklungen und mehr zu diskutieren.
