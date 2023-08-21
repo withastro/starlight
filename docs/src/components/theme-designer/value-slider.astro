@@ -28,6 +28,7 @@ const value = store[storeKey].get()[type];
 		#output = this.querySelector<HTMLSpanElement>('.value')!;
 		#store = store[this.dataset.store as keyof typeof store];
 		#type = this.dataset.type as 'hue' | 'chroma';
+		#formatter = new Intl.NumberFormat(document.documentElement.lang || 'en');
 
 		constructor() {
 			super();
@@ -35,10 +36,9 @@ const value = store[storeKey].get()[type];
 				this.#store.setKey(this.#type, this.#input.valueAsNumber)
 			);
 			this.#store.subscribe((v) => {
-				const newValue = v[this.#type].toString();
-				this.#input.value = newValue;
-				// HACK: slice excess digits in case of rounding errors.
-				this.#output.innerText = newValue.slice(0, 5);
+				const newValue = v[this.#type];
+				this.#input.value = String(newValue);
+				this.#output.innerText = this.#formatter.format(newValue);
 			});
 		}
 	}
