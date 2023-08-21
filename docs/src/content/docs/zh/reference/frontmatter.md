@@ -191,7 +191,7 @@ next: false
 
 ### `sidebar`
 
-**类型：** `{ label?: string; order?: number }`
+**类型：** `{ label?: string; order?: number; hidden?: boolean }`
 
 在使用自动生成的链接组时，控制如何在[侧边栏](/zh/reference/configuration/#sidebar)中显示此页面。
 
@@ -222,5 +222,20 @@ sidebar:
 title: 要首先显示的页面
 sidebar:
   order: 1
+---
+```
+
+#### `hidden`
+
+**类型：** `boolean`
+**默认值：** `false`
+
+防止此页面包含在自动生成的侧边栏组中。
+
+```md
+---
+title: 从自动生成的侧边栏中隐藏的页面
+sidebar:
+  hidden: true
 ---
 ```

@@ -22,6 +22,7 @@ Starlightはすでに本番環境で使用されています。以下はウェ�
 - [xs-dev docs](https://xs-dev.js.org)
 - [Athena OS](https://www.athenaos.org)
 - [simple-fm](https://simple.arciniega.one)
+- [CommandKit](https://commandkit.underctrl.io)
 
 [Starlightを使用しているGitHub上のすべてのパブリックプロジェクトのリポジトリ](https://github.com/withastro/starlight/network/dependents)も確認してください。
 
