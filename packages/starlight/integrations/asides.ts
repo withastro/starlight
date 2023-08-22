@@ -8,6 +8,21 @@ import { visit } from 'unist-util-visit';
 import builtinTranslations from '../translations';
 import type { StarlightConfig } from '../types';
 
+/** get current lang from file full path */
+function getLanguageFromPath(path: string): string {
+  const parts = path.split('/');
+  const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
+  if (langIndex !== -1) {
+    const langCode = parts[langIndex];
+    if (langCode.includes('-')) {
+      return langCode.split('-')[0];
+    } else {
+      return langCode;
+    }
+  } else {
+    return 'en';
+  }
+}
 
 /** Build a dictionary by layering preferred translation sources. */
 function buildDictionary(
@@ -44,7 +59,7 @@ const defaults = buildDictionary(
 );
 
 function localeToLang(locale: string | undefined): string {
-	return 'zh';
+  return locale || 'en';
 }
 
 /**
@@ -111,9 +126,6 @@ function remarkAsides(): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
-  // TODO how to get current locale
-  const locale = 'en';
-  const t = useTranslations(locale);
 
 	const iconPaths = {
 		// Information icon
@@ -147,9 +159,10 @@ function remarkAsides(): Plugin<[], Root> {
 		],
 	};
 
-	const transformer: Transformer<Root> = (tree) => {
+	const transformer: Transformer<Root> = (tree, file) => {
 
-    // console.log('Astro.props',  Astro.props);
+    const lang = getLanguageFromPath(file.history[0]);
+    const t = useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
 				return;
