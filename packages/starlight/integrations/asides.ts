@@ -7,6 +7,8 @@ import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
 import builtinTranslations from '../translations';
 import type { StarlightConfig } from '../types';
+import fs from 'fs/promises';
+import path from 'path';
 
 /** get current lang from file full path */
 function getLanguageFromPath(path: string, config: StarlightConfig): string {
@@ -41,12 +43,32 @@ function buildDictionary(
 	return dictionary;
 }
 
+interface Translations {
+  [key: string]: { [key: string]: string };
+}
+
+async function readUserTranslations(): Promise<Translations> {
+  const dirPath = path.join(process.cwd(), 'src', 'content', 'i18n');
+  const files = await fs.readdir(dirPath);
+  const translations: Translations = {};
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      const langCode = file.slice(0, -5);
+      const filePath = path.join(dirPath, file);
+      const data = await fs.readFile(filePath, 'utf8');
+      translations[langCode] = JSON.parse(data);
+    }
+  }
+  return translations;
+}
+
 /** All translation data from the i18n collection, keyed by `id`, which matches locale. */
 let userTranslations = {};
 try {
 	// Load the user’s i18n collection and ignore the error if it doesn’t exist.
-	// TODO How to get user i18n collection
-} catch {}
+  userTranslations = await readUserTranslations();
+} catch {
+}
 
 /** Default map of UI strings based on Starlight and user-configured defaults. */
 function getDefaults(defaultLocale: string) {
@@ -159,7 +181,6 @@ function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
 
 	const transformer: Transformer<Root> = (tree, file) => {
 		const lang = getLanguageFromPath(file.history[0], config);
-		console.log('lang', lang);
 		const t = useTranslations(lang, config);
 
 		visit(tree, (node, index, parent) => {
