@@ -39,7 +39,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
 					},
 					markdown: {
-						remarkPlugins: [...starlightAsides()],
+						remarkPlugins: [...starlightAsides(userConfig)],
 						rehypePlugins: [rehypeRtlCodeSupport()],
 						shikiConfig:
 							// Configure Shiki theme if the user is using the default github-dark theme.

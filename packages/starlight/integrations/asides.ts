@@ -9,7 +9,7 @@ import builtinTranslations from '../translations';
 import type { StarlightConfig } from '../types';
 
 /** get current lang from file full path */
-function getLanguageFromPath(path: string): string {
+function getLanguageFromPath(path: string, config: StarlightConfig): string {
   const parts = path.split('/');
   const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
   if (langIndex !== -1) {
@@ -20,7 +20,8 @@ function getLanguageFromPath(path: string): string {
       return langCode;
     }
   } else {
-    return 'en';
+    const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
+    return defaultLang || 'en';
   }
 }
 
@@ -40,9 +41,6 @@ function buildDictionary(
 	return dictionary;
 }
 
-// TODO get defaultLocale
-const defaultLocale = 'root';
-
 /** All translation data from the i18n collection, keyed by `id`, which matches locale. */
 let userTranslations = {};
 try {
@@ -51,26 +49,27 @@ try {
 } catch {}
 
 /** Default map of UI strings based on Starlight and user-configured defaults. */
-const defaults = buildDictionary(
-	builtinTranslations.en!,
-	userTranslations.en,
-	builtinTranslations[defaultLocale],
-	userTranslations[defaultLocale]
-);
-
-function localeToLang(locale: string | undefined): string {
-  return locale || 'en';
+function getDefaults (defaultLocale: string) {
+  return buildDictionary(
+    builtinTranslations.en!,
+    userTranslations.en,
+    builtinTranslations[defaultLocale],
+    userTranslations[defaultLocale]
+  );
 }
 
+
 /**
- * Generate a utility function that returns UI strings for the given `locale`.
- * @param {string | undefined} [locale]
+ * Generate a utility function that returns UI strings for the given `lang`.
+ * @param {string} [lang]
+ * @param {StarlightConfig} [config]
  * @example
- * const t = useTranslations('en');
+ * const t = useTranslations('en', config);
  * const label = t('search.label'); // => 'Search'
  */
-export function useTranslations(locale: string | undefined) {
-	const lang = localeToLang(locale);
+export function useTranslations(lang: string, config: StarlightConfig) {
+  const defaultLocale = config.defaultLocale?.locale || 'root';
+  const defaults = getDefaults(defaultLocale);
 	const dictionary = buildDictionary(defaults, builtinTranslations[lang], userTranslations[lang]);
 	const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
 	t.pick = (startOfKey: string) =>
@@ -122,7 +121,7 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * </Aside>
  * ```
  */
-function remarkAsides(): Plugin<[], Root> {
+function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
@@ -160,9 +159,10 @@ function remarkAsides(): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
+    const lang = getLanguageFromPath(file.history[0], config);
+    console.log('lang', lang)
+    const t = useTranslations(lang, config);
 
-    const lang = getLanguageFromPath(file.history[0]);
-    const t = useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
 				return;
@@ -173,7 +173,7 @@ function remarkAsides(): Plugin<[], Root> {
 			// its children, but we want to pass it as the title prop to <Aside>, so
 			// we iterate over the children, find a directive label, store it for the
 			// title prop, and remove the paragraph from children.
-			let title = t(`aside.${variant}`) || 'error';
+			let title = t(`aside.${variant}`);
 			remove(node, (child): boolean | void => {
 				if (child.data?.directiveLabel) {
 					if (
@@ -223,6 +223,6 @@ function remarkAsides(): Plugin<[], Root> {
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
 
-export function starlightAsides(): RemarkPlugins {
-	return [remarkDirective, remarkAsides()];
+export function starlightAsides(opts: StarlightConfig): RemarkPlugins {
+	return [remarkDirective, remarkAsides(opts)];
 }
