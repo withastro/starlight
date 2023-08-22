@@ -184,7 +184,10 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | { link: string, badge?: string | {
+    text: string;
+    variant: "blue" | "yellow" | "purple" | "green";
+  } }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
       autogenerate: { directory: string; collapsed?: boolean };
