@@ -10,19 +10,19 @@ import type { StarlightConfig } from '../types';
 
 /** get current lang from file full path */
 function getLanguageFromPath(path: string, config: StarlightConfig): string {
-  const parts = path.split('/');
-  const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
-  if (langIndex !== -1) {
-    const langCode = parts[langIndex];
-    if (langCode.includes('-')) {
-      return langCode.split('-')[0];
-    } else {
-      return langCode;
-    }
-  } else {
-    const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
-    return defaultLang || 'en';
-  }
+	const parts = path.split('/');
+	const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
+	if (langIndex !== -1) {
+		const langCode = parts[langIndex];
+		if (langCode.includes('-')) {
+			return langCode.split('-')[0];
+		} else {
+			return langCode;
+		}
+	} else {
+		const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
+		return defaultLang || 'en';
+	}
 }
 
 /** Build a dictionary by layering preferred translation sources. */
@@ -44,20 +44,19 @@ function buildDictionary(
 /** All translation data from the i18n collection, keyed by `id`, which matches locale. */
 let userTranslations = {};
 try {
-    // Load the user’s i18n collection and ignore the error if it doesn’t exist.
-    // TODO How to get user i18n collection
+	// Load the user’s i18n collection and ignore the error if it doesn’t exist.
+	// TODO How to get user i18n collection
 } catch {}
 
 /** Default map of UI strings based on Starlight and user-configured defaults. */
-function getDefaults (defaultLocale: string) {
-  return buildDictionary(
-    builtinTranslations.en!,
-    userTranslations.en,
-    builtinTranslations[defaultLocale],
-    userTranslations[defaultLocale]
-  );
+function getDefaults(defaultLocale: string) {
+	return buildDictionary(
+		builtinTranslations.en!,
+		userTranslations.en,
+		builtinTranslations[defaultLocale],
+		userTranslations[defaultLocale]
+	);
 }
-
 
 /**
  * Generate a utility function that returns UI strings for the given `lang`.
@@ -68,8 +67,8 @@ function getDefaults (defaultLocale: string) {
  * const label = t('search.label'); // => 'Search'
  */
 export function useTranslations(lang: string, config: StarlightConfig) {
-  const defaultLocale = config.defaultLocale?.locale || 'root';
-  const defaults = getDefaults(defaultLocale);
+	const defaultLocale = config.defaultLocale?.locale || 'root';
+	const defaults = getDefaults(defaultLocale);
 	const dictionary = buildDictionary(defaults, builtinTranslations[lang], userTranslations[lang]);
 	const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
 	t.pick = (startOfKey: string) =>
@@ -159,9 +158,9 @@ function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-    const lang = getLanguageFromPath(file.history[0], config);
-    console.log('lang', lang)
-    const t = useTranslations(lang, config);
+		const lang = getLanguageFromPath(file.history[0], config);
+		console.log('lang', lang);
+		const t = useTranslations(lang, config);
 
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
