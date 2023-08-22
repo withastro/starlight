@@ -188,7 +188,7 @@ next: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number }`
+**type:** `{ label?: string; order?: number; hidden?: boolean }`
 
 自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
 
@@ -218,5 +218,20 @@ sidebar:
 title: 最初に表示するページ
 sidebar:
   order: 1
+---
+```
+
+#### `hidden`
+
+**type:** `boolean`
+**default:** `false`
+
+自動生成されるサイドバーのグループにこのページを含めないようにします。
+
+```md
+---
+title: 自動生成されるサイドバーで非表示にするページ
+sidebar:
+  hidden: true
 ---
 ```

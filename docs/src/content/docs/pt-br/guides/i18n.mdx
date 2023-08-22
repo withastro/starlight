@@ -1,0 +1,220 @@
+---
+title: Internacionalização (i18n)
+description: Aprenda como configurar seu site Starlight para suportar várias línguas.
+---
+
+import FileTree from '../../../../components/file-tree.astro';
+
+Starlight providencia suporte integrado para sites multilíngue, incluindo roteamento, conteúdo de fallback e suporte completo para línguas right-to-left (RTL).
+
+## Configure i18n
+
+1. Diga ao Starlight as línguas que você suporta passando [`locales`](/pt-br/reference/configuration/#locales) e [`defaultLocale`](/pt-br/reference/configuration/#defaultlocale) para a integração Starlight:
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Minha Documentação',
+   			// Define Português como a língua padrão deste site.
+   			defaultLocale: 'pt',
+   			locales: {
+   				// Documentação em Português em `src/content/docs/pt/`
+   				pt: {
+   					label: 'Português',
+   				},
+   				// Documentação em Chinês Simplificado em `src/content/docs/zh/`
+   				zh: {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// Documentação em Árabe docs in `src/content/docs/ar/`
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
+   });
+   ```
+
+   Seu `defaultLocale` será utilizado para o conteúdo de fallback e rótulos da UI, então escolha a língua que é a mais provável para você começar a escrever conteúdo em, ou já tem conteúdo para ela.
+
+2. Crie um diretório para cada língua em `src/content/docs/`.
+   Por exemplo, para a configuração mostrada acima, crie as seguintes pastas:
+
+   <FileTree>
+
+   - src/
+     - content/
+       - docs/
+         - ar/
+         - pt/
+         - zh/
+
+   </FileTree>
+
+3. Você agora pode adicionar arquivos de conteúdo em seus diretórios da língua. Use o mesmo nome de arquivo para associar páginas entre línguas e se aproveite do conjunto completo de funcionalidades de i18n do Starlight, incluindo conteúdo de fallback, avisos de tradução e mais.
+
+   Por exemplo, crie `ar/index.md` e `pt/index.md` para representar a página inicial em Árabe e Português respectivamente.
+
+### Use um local raiz
+
+Você pode usar um local “raiz” para servir uma língua sem nenhum prefixo de i18n no seu caminho. Por exemplo, se Português é seu local raiz, um caminho de página em Português se pareceria com `/sobre` ao invés de `/pt/sobre`.
+
+Para definir um local raiz, use a chave `root` na sua configuração de `locales`. Se o local raiz também for o local padrão do seu conteúdo, remova `defaultLocale` ou defina-o como `'root'`.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Minha Documentação',
+			defaultLocale: 'root', // opcional
+			locales: {
+				root: {
+					label: 'Português',
+					lang: 'pt', // lang é obrigatório para locais raiz
+				},
+				zh: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
+});
+```
+
+Ao utilizar um local `root`, mantenha as páginas para aquela língua diretamente em `src/content/docs/` ao invés de em uma pasta dedicada para a língua. Por exemplo, aqui está os arquivos para a página inicial em Português e Chinês ao utilizar a configuração acima:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **index.md**
+      - zh/
+        - **index.md**
+
+</FileTree>
+
+#### Sites monolíngue
+
+Por padrão, Starlight é um site (Inglês) monolíngue. Para criar um site de língua única em outra língua, a defina como o `root` na sua configuração de `locales`:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Minha Documentação',
+			locales: {
+				root: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
+});
+```
+
+Isso te permite sobrescrever a língua padrão do Starlight sem habilitar outras funcionalidades de internacionalização para sites multilíngue, como o seletor de língua.
+
+## Conteúdo de Fallback
+
+Starlight espera que você crie páginas equivalentes em todas as suas línguas. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outra língua que você suporta. Isso permite que Starlight providencie conteúdo de fallback automático para páginas que você ainda não tenha traduzidas.
+
+Se uma tradução ainda não está disponível para uma língua, Starlight irá mostrar aos leitores o conteúdo dessa página na língua padrão (definida através de `defaultLocale`). Por exemplo, se você ainda não criou uma versão em Francês da sua página "Sobre" e sua língua padrão é Inglês, visitantes de `/fr/about` irão ver o conteúdo em Inglês de `/en/about` com um aviso de que esta página ainda não foi traduzida. Isso te ajuda a adicionar conteúdo na sua língua padrão e então progressivamente traduzí-la quando seus tradutores tiverem tempo.
+
+## Traduza a UI do Starlight
+
+Em adição a hospedar arquivos de conteúdo traduzido, Starlight te permite traduzir as strings padrões da UI (e.x. o cabeçalho "Nesta página" no índice) para que seus leitores possam experienciar seu site inteiramente na língua selecionada.
+
+Strings da UI são providenciadas para Inglês, Tcheco, Francês, Alemão, Italiano, Japonês, Português, Holandês, Dinarmaquês, Espanhol, Turco, Árabe, Norueguês, Persa, Chinês Simplificado, Coreano e Sueco por padrão, e nós aceitamos [contribuições para adicionar mais línguas padrões](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+
+Você pode fornecer traduções para línguas adicionais que você suporta — ou sobrescrever nossos rótulos padrões — através da coleção de dados `i18n`.
+
+1. Configure a coleção de dados `i18n` em `src/content/config.ts` se já não estiver configurado:
+
+   ```js
+   // src/content/config.ts
+   import { defineCollection } from 'astro:content';
+   import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+   export const collections = {
+   	docs: defineCollection({ schema: docsSchema() }),
+   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   };
+   ```
+
+2. Crie um arquivo JSON em `src/content/i18n/` para cada local adicional que você quer providenciar tradução de strings da UI.
+   Por exemplo, isso adicionaria arquivos de tradução para Árabe e Chinês Simplificado:
+
+   <FileTree>
+
+   - src/
+     - content/
+       - i18n/
+         - ar.json
+         - zh-CN.json
+
+   </FileTree>
+
+3. Adicione traduções para as chaves que você quer traduzir para os arquivos JSON. Traduza apenas os valores, deixando as chaves em Inglês (e.x. `"search.label": "Buscar"`).
+
+   Essas são as strings padrões existentes em Inglês que vem com o Starlight:
+
+   ```json
+   {
+   	"skipLink.label": "Skip to content",
+   	"search.label": "Search",
+   	"search.shortcutLabel": "(Press / to Search)",
+   	"search.cancelLabel": "Cancel",
+   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
+   	"themeSelect.accessibleLabel": "Select theme",
+   	"themeSelect.dark": "Dark",
+   	"themeSelect.light": "Light",
+   	"themeSelect.auto": "Auto",
+   	"languageSelect.accessibleLabel": "Select language",
+   	"menuButton.accessibleLabel": "Menu",
+   	"sidebarNav.accessibleLabel": "Main",
+   	"tableOfContents.onThisPage": "On this page",
+   	"tableOfContents.overview": "Overview",
+   	"i18n.untranslatedContent": "This content is not available in your language yet.",
+   	"page.editLink": "Edit page",
+   	"page.lastUpdated": "Last updated:",
+   	"page.previousLink": "Next",
+   	"page.nextLink": "Previous"
+   }
+   ```
+
+   O modal de pesquisa do Starlight é fornecido pela biblioteca [Pagefind](https://pagefind.app/).
+   Você pode definir traduções para a UI do Pagefind no mesmo arquivo JSON utilizando chaves com `pagefind`:
+
+   ```json
+   {
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
+   }
+   ```

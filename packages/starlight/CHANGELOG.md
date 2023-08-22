@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.7.3
+
+### Patch Changes
+
+- [#525](https://github.com/withastro/starlight/pull/525) [`87caf21`](https://github.com/withastro/starlight/commit/87caf21adaac98cf8342dac4db97ace327849616) Thanks [@delucis](https://github.com/delucis)! - Improve inline code and code block support in RTL languages
+
+- [#537](https://github.com/withastro/starlight/pull/537) [`56c19bc`](https://github.com/withastro/starlight/commit/56c19bc871f2a4f205d4b0bb833fd81a3ed2e0f0) Thanks [@carlgleisner](https://github.com/carlgleisner)! - Add Swedish UI translations.
+
+- [#528](https://github.com/withastro/starlight/pull/528) [`f5e5503`](https://github.com/withastro/starlight/commit/f5e55036987db98dbd0be7a84eb7819a48234a2f) Thanks [@jsparkdev](https://github.com/jsparkdev)! - add Korean language support
+
 ## 0.7.2
 
 ### Patch Changes
