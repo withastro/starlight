@@ -19,7 +19,7 @@ Join us as a Starlight contributor! These links will help you get started:
 - [Contributor Manual][contributing]
 - [Code of Conduct][coc]
 - [Community Guide][community]
-- [Join the #starlight channel on Discord](discord)
+- [Join the `#starlight` channel on Discord](discord)
 
 ## License
 
