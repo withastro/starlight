@@ -4,11 +4,11 @@ interface Props {
 }
 ---
 
-<div class="sl-banner" set:html={Astro.props.content} />
+<div class="sl-banner" role="banner" set:html={Astro.props.content} />
 
 <style>
   .sl-banner {
-    padding: 0.75rem var(--sl-nav-pad-x);
+    padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
     background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
     color: var(--sl-color-text-invert);
     line-height: var(--sl-line-height-headings);
