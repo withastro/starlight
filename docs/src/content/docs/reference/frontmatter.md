@@ -134,6 +134,25 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**type:** `{ content: string }`
+
+Displays an announcement banner at the top of this page.
+
+The `content` value can include HTML for links or other content.
+For example, this page displays a banner including a link to `example.com`.
+
+```md
+---
+title: Page with a banner
+banner:
+  content: |
+    We just launched something cool!
+    <a href="https://example.com">Check it out</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
