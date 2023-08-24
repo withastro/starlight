@@ -71,13 +71,13 @@ const { variant, text } = Astro.props;
 	}
 
 	:global([data-theme='dark']) .blue {
-		--sl-color-bg-badge: hsla(234, 54%, 20%, 1);
-		--sl-color-border-badge: hsla(234, 100%, 60%, 1);
+		--sl-color-bg-badge: var(--sl-color-blue-low);
+		--sl-color-border-badge: var(--sl-color-blue);
 	}
 
 	:global([data-theme='dark']) .pink {
-		--sl-color-bg-badge: hsla(339, 39%, 22%, 1);
-		--sl-color-border-badge: hsla(339, 82%, 63%, 1);
+		--sl-color-bg-badge: var(--sl-color-red-low);
+		--sl-color-border-badge: var(--sl-color-red));
 	}
 
 	:global([data-theme='dark']) .green {
@@ -86,12 +86,12 @@ const { variant, text } = Astro.props;
 	}
 
 	:global([data-theme='dark']) .yellow {
-		--sl-color-bg-badge: hsla(40, 39%, 22%, 1);
-		--sl-color-border-badge: hsla(41, 82%, 63%, 1);
+		--sl-color-bg-badge: var(--sl-color-orange-low);
+		--sl-color-border-badge: var(--sl-color-orange);
 	}
 
 	:global([data-theme='dark']) .purple {
-		--sl-color-bg-badge: hsla(280, 39%, 22%, 1);
-		--sl-color-border-badge: hsla(281, 82%, 63%, 1);
+		--sl-color-bg-badge: var(--sl-color-purple-low);
+		--sl-color-border-badge: var(--sl-color-purple);
 	}
 </style>
