@@ -10,6 +10,7 @@ export const locales = {
 	it: { label: 'Italiano', lang: 'it' },
 	zh: { label: '简体中文', lang: 'zh' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
+	ko: { label: '한국어', lang: 'ko' },
 };
 
 const site = 'https://starlight.astro.build/';
@@ -62,6 +63,7 @@ export default defineConfig({
 						it: 'Inizia qui',
 						zh: '从这里开始',
 						'pt-BR': 'Comece Aqui',
+						ko: '여기서부터',
 					},
 					items: [
 						{
@@ -75,19 +77,21 @@ export default defineConfig({
 								it: 'Iniziamo',
 								zh: '开始使用',
 								'pt-BR': 'Introdução',
+								ko: '시작하기',
 							},
 						},
 						{
 							label: 'Manual Setup',
 							link: 'manual-setup',
 							translations: {
-								// de: 'Manual Setup',
+								de: 'Manuelle Einrichtung',
 								es: 'Configuración Manual',
 								ja: '手動セットアップ',
 								// fr: 'Manual Setup',
 								// it: 'Manual Setup',
 								zh: '手动配置',
 								'pt-BR': 'Instalação Manual',
+								ko: '수동으로 설정하기',
 							},
 						},
 						{
@@ -101,6 +105,7 @@ export default defineConfig({
 								it: 'Impatto ambientale',
 								zh: '环境影响',
 								'pt-BR': 'Impacto Ambiental',
+								ko: '환경적 영향',
 							},
 						},
 						{
@@ -110,8 +115,9 @@ export default defineConfig({
 								// de: '',
 								// es: '',
 								ja: 'ショーケース',
-								// fr: '',
+								fr: 'Vitrine',
 								// it: '',
+								ko: '쇼케이스',
 							},
 						},
 					],
@@ -126,6 +132,7 @@ export default defineConfig({
 						it: 'Guide',
 						zh: '指南',
 						'pt-BR': 'Guias',
+						ko: '가이드',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -139,6 +146,7 @@ export default defineConfig({
 						it: 'Riferimenti',
 						zh: '参考',
 						'pt-BR': 'Referência',
+						ko: '참조',
 					},
 					autogenerate: { directory: 'reference' },
 				},
