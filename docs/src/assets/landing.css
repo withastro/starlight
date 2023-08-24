@@ -25,3 +25,21 @@
 [data-has-hero] .hero > img {
 	filter: drop-shadow(0 0 3rem var(--overlay-blurple));
 }
+
+[data-has-hero] .sl-banner {
+	--sl-color-banner-bg: #f5574a;
+	--sl-color-banner-text: #fff;
+	border-block: 1px solid #fff6;
+	font-size: 1.125rem;
+}
+
+[data-has-hero] .sl-banner a {
+	text-decoration: 1px underline;
+	text-underline-offset: .1em;
+}
+
+@media (min-width: 50em) {
+	[data-has-hero] .sl-banner {
+		font-size: 1.5rem;
+	}
+}
