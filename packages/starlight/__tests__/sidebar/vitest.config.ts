@@ -9,8 +9,11 @@ export default defineVitestConfig({
 		{
 			label: 'Start Here',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Next Steps', link: '/next-steps' },
+				{ label: 'Introduction', link: '/intro', badge: {
+					variant: 'green',
+					text: 'New',
+				} },
+				{ label: 'Next Steps', link: '/next-steps', badge: 'Deprecated' },
 			],
 		},
 		// A group linking to all pages in the reference directory.

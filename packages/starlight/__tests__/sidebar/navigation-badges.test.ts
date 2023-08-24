@@ -23,6 +23,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home",
@@ -32,12 +33,20 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": {
+			          "text": "New",
+			          "variant": "green",
+			        },
 			        "href": "/intro/",
 			        "isCurrent": false,
 			        "label": "Introduction",
 			        "type": "link",
 			      },
 			      {
+			        "badge": {
+			          "text": "Deprecated",
+			          "variant": "default",
+			        },
 			        "href": "/next-steps/",
 			        "isCurrent": false,
 			        "label": "Next Steps",
@@ -63,7 +72,7 @@ describe('getSidebar', () => {
 			      {
 			        "badge": {
 			          "text": "New",
-			          "variant": "blue",
+			          "variant": "default",
 			        },
 			        "href": "/reference/frontmatter/",
 			        "isCurrent": false,

@@ -22,12 +22,14 @@ describe('getSidebar', () => {
 		expect(getSidebar('/en/', 'en')).toMatchInlineSnapshot(`
 			[
 			  {
+			    "badge": undefined,
 			    "href": "/en/",
 			    "isCurrent": true,
 			    "label": "Home page",
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "href": "/en/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
@@ -37,6 +39,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/en/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",

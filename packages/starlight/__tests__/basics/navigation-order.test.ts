@@ -20,12 +20,14 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/guides/components/",
 			        "isCurrent": false,
 			        "label": "Components",
 			        "type": "link",
 			      },
 			      {
+			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
@@ -36,12 +38,14 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home Page",
