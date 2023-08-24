@@ -115,7 +115,7 @@ export default defineConfig({
 								// de: '',
 								// es: '',
 								ja: 'ショーケース',
-								// fr: '',
+								fr: 'Vitrine',
 								// it: '',
 								ko: '쇼케이스',
 							},
