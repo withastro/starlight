@@ -16,7 +16,7 @@ export interface Link {
 	label: string;
 	href: string;
 	isCurrent: boolean;
-	badge?: Badge;
+	badge: Badge | undefined;
 }
 
 interface Group {
@@ -122,23 +122,11 @@ function makeLink(
 	href: string,
 	label: string,
 	currentPathname: string,
-	badge?: string | Badge
+	badge?: Badge 
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	if (badge) {
-		return {
-			type: 'link',
-			label,
-			href,
-			isCurrent,
-			badge: {
-				text: typeof badge === 'string' ? badge : badge.text,
-				variant: typeof badge === 'string' ? 'blue' : badge.variant,
-			},
-		};
-	}
-	return { type: 'link', label, href, isCurrent };
+	return { type: 'link', label, href, isCurrent, badge };
 }
 
 /** Get the segments leading to a page. */
