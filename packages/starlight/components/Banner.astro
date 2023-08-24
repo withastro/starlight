@@ -4,17 +4,17 @@ interface Props {
 }
 ---
 
-<div class="announcement-banner" set:html={Astro.props.content} />
+<div class="sl-banner" set:html={Astro.props.content} />
 
 <style>
-  .announcement-banner {
+  .sl-banner {
     padding: 0.75rem var(--sl-nav-pad-x);
     background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
     color: var(--sl-color-text-invert);
     line-height: var(--sl-line-height-headings);
     text-align: center;
   }
-  .announcement-banner :global(a) {
+  .sl-banner :global(a) {
     color: var(--sl-color-text-invert);
   }
 </style>
