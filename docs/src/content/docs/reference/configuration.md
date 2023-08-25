@@ -186,7 +186,7 @@ type SidebarItem = {
 } & (
   | { link: string, badge?: string | {
     text: string;
-    variant: "blue" | "yellow" | "purple" | "green";
+    variant: "blue" | "yellow" | "purple" | "green" | "default" ;
   } }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
