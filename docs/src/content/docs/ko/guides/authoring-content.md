@@ -126,12 +126,12 @@ npm create astro@latest -- --template starlight
 
 :::tip[알고 계셨나요?]
 
-Astro는 ["Islands Architecture"](https://docs.astro.build/en/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 
 ```md
 :::tip[알고 계셨나요?]
-Astro는 ["Islands Architecture"](https://docs.astro.build/en/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 ```
 
