@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" viewBox="0 0 75 75">
+  <defs>
+    <path id="e" fill="#79E399" fill-opacity=".8" d="M20.2 37.63h10.24v3.88a.7.7 0 0 1-.7.7H20.2v-4.58Z"/>
+  </defs>
+  <circle cx="37.66" cy="37.78" r="31.76" fill="url(#a)" fill-opacity=".25"/>
+  <circle cx="37.66" cy="37.78" r="36.42" stroke="url(#b)" stroke-opacity=".25" stroke-width=".85"/>
+  <path fill="#7F7F7F" d="m30.09 43.3-14.22-6.25-2.2 5.13 14.15 6.28 2.27-5.17Zm15.88-1.44 14.36-6.31.91 2.07-14.36 6.3z"/>
+  <clipPath id="c">
+    <path d="M14.91 26.71c0-3.33 2.7-6.02 6.03-6.02h33.12c3.33 0 6.03 2.7 6.03 6.02v21.83c0 3.33-2.7 6.03-6.03 6.03H20.94a6.02 6.02 0 0 1-6.03-6.03V26.71Z"/>
+  </clipPath>
+  <foreignObject width="100%" height="100%" clip-path="url(#c)">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;background:conic-gradient(from 0deg at 50% 50%,#3245ff 0deg,#bc52ee 103.12500357627869deg,#4af2c8 149.1623318195343deg,#4af2c8 199.67810153961182deg,#3245ff 360deg)"/>
+  </foreignObject>
+  <path fill="url(#d)" d="M16.68 27.26a4.82 4.82 0 0 1 4.83-4.8H53.5a4.82 4.82 0 0 1 4.83 4.8V48a4.82 4.82 0 0 1-4.83 4.81h-32a4.82 4.82 0 0 1-4.83-4.8V27.25Z"/>
+  <path fill="#fff" d="M29.13 41.16a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Zm8.25 2.24c1.24 0 2.24-1 2.24-2.24h1.5a3.75 3.75 0 1 1-7.5 0h1.5a2.26 2.26 0 0 0 2.26 2.25Zm15.74-2.24a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
+  <mask id="f" width="11" height="6" x="20" y="37" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <use xlink:href="#e" fill-opacity=".8"/>
+  </mask>
+  <g mask="url(#f)">
+    <g filter="url(#g)">
+      <mask id="h" fill="#fff">
+        <path d="M20.2 37.63h10.24v3.88a.7.7 0 0 1-.7.7H20.2v-4.58Z"/>
+      </mask>
+      <use xlink:href="#e" fill-opacity=".8"/>
+      <path fill="#000" fill-opacity=".6" d="M20.2 37.63h10.24-10.23Zm10.6 3.88c0 .58-.48 1.06-1.06 1.06h-9.89l.71-.7h9.18c.2 0 .35-.17.35-.36h.7Zm-10.95 1.06v-4.94h.71v4.23l-.7.7Zm10.94-4.94v3.88c0 .58-.47 1.06-1.05 1.06v-.7c.2 0 .35-.17.35-.36v-3.88h.7Z" mask="url(#h)" style="mix-blend-mode:overlay"/>
+    </g>
+    <g filter="url(#i)" opacity=".6" style="mix-blend-mode:overlay">
+      <path fill="#fff" d="m30.72 31.26 1.5 1.5-15.47 15.47-1.5-1.5z"/>
+    </g>
+    <g filter="url(#j)" opacity=".6" style="mix-blend-mode:overlay">
+      <path fill="#fff" d="m36.37 31.26.75.75-15.47 15.47-.75-.75z"/>
+    </g>
+  </g>
+  <mask id="k" width="49" height="8" x="13" y="35" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <path fill="#D9D9D9" d="M13.86 35.16a.7.7 0 0 0-.71.7v5.65c0 .39.32.7.7.7h6.71v-4.58h40.59a.7.7 0 0 0 .7-.7v-1.07a.7.7 0 0 0-.7-.7h-47.3Z"/>
+  </mask>
+  <g mask="url(#k)">
+    <path fill="#D9D9D9" d="M13.15 35.16a.7.7 0 0 0-.7.7v5.65c0 .39.3.7.7.7h8.12v-4.58h40.58a.7.7 0 0 0 .7-.7v-1.07a.7.7 0 0 0-.7-.7h-48.7Z"/>
+    <path fill="url(#l)" fill-opacity=".2" d="M13.15 35.16a.7.7 0 0 0-.7.7v5.65c0 .39.3.7.7.7h8.12v-4.58h40.58a.7.7 0 0 0 .7-.7v-1.07a.7.7 0 0 0-.7-.7h-48.7Z" style="mix-blend-mode:overlay"/>
+    <path fill="#7F7F7F" d="M13.86 34.1h.35v10.23h-.35zm6.7 3.53v-.35h44.11v.35z"/>
+    <path fill="#7F7F7F" d="M12.09 42.22v-.35h43.4v.35z"/>
+    <path fill="#fff" d="M8.91 32.69h55.76v2.82H8.91z" style="mix-blend-mode:overlay"/>
+  </g>
+  <circle cx="17.74" cy="39.04" r="1.41" fill="#373941"/>
+  <circle cx="17.74" cy="39.04" r="1.06" fill="#0F1119"/>
+  <circle cx="17.74" cy="39.04" r=".64" fill="url(#m)"/>
+  <circle cx="17.74" cy="39.04" r=".64" stroke="#fff" stroke-width=".14" style="mix-blend-mode:overlay"/>
+  <defs>
+    <linearGradient id="a" x1="37.66" x2="37.66" y1="6.02" y2="69.55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12101E"/>
+      <stop offset="1" stop-color="#12101E" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="b" x1="37.66" x2="37.66" y1=".94" y2="74.63" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12101E"/>
+      <stop offset="1" stop-color="#12101E" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="l" x1="37.5" x2="37.5" y1="35.16" y2="42.21" gradientUnits="userSpaceOnUse">
+      <stop/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="m" x1="17.74" x2="18.09" y1="38.33" y2="39.74" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BBE970" stop-opacity="0"/>
+      <stop offset="1" stop-color="#E9B170"/>
+    </linearGradient>
+    <filter id="g" width="10.94" height="5.29" x="19.85" y="37.27" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="BackgroundImageFix" stdDeviation=".18"/>
+      <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1518_22944"/>
+      <feBlend in="SourceGraphic" in2="effect1_backgroundBlur_1518_22944" result="shape"/>
+    </filter>
+    <filter id="i" width="19.09" height="19.09" x="14.19" y="30.2" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_1518_22944" stdDeviation=".53"/>
+    </filter>
+    <filter id="j" width="18.34" height="18.34" x="19.84" y="30.2" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_1518_22944" stdDeviation=".53"/>
+    </filter>
+    <radialGradient id="d" cx="0" cy="0" r="1" gradientTransform="matrix(0 25 -34 0 37.5 33.83)" gradientUnits="userSpaceOnUse">
+      <stop offset=".37" stop-color="#191C24"/>
+      <stop offset=".66" stop-color="#111218"/>
+      <stop offset="1" stop-color="#040506"/>
+    </radialGradient>
+  </defs>
+</svg>
