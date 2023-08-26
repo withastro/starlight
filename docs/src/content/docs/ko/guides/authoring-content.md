@@ -29,7 +29,7 @@ Starlight는 `.md` 파일에서 제목 및 설명과 같은 메타데이터를 �
 
 ## 이미지
 
-Starlight의 이미지는 [Astro에 내장된 최적화된 자산 지원](https://docs.astro.build/en/guides/assets/)을 사용합니다.
+Starlight의 이미지는 [Astro에 내장된 최적화된 자산 지원](https://docs.astro.build/ko/guides/assets/)을 사용합니다.
 
 Markdown 및 MDX는 스크린 리더 및 보조 기술에서 사용되는 대체 텍스트가 포함된 이미지를 표시하기 위한 Markdown 구문을 지원합니다.
 
