@@ -28,17 +28,17 @@ const imageAttrs = {
 				<Image src={image.file} {...imageAttrs} />
 			)
 		) : (
-			image?.html && <div class="hero-html flex" set:html={image.html} />
+			image?.html && <div class="hero-html sl-flex" set:html={image.html} />
 		)
 	}
-	<div class="flex stack">
-		<div class="flex copy">
+	<div class="sl-flex stack">
+		<div class="sl-flex copy">
 			<h1 id="_top" data-page-title set:html={title} />
 			{tagline && <div class="tagline" set:html={tagline} />}
 		</div>
 		{
 			actions.length > 0 && (
-				<div class="flex actions">
+				<div class="sl-flex actions">
 					{actions.map(({ text, ...attrs }) => (
 						<CallToAction {...attrs} set:html={text} />
 					))}

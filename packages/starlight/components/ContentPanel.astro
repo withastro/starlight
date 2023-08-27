@@ -1,5 +1,5 @@
 <div class="content-panel">
-	<div class="container"><slot /></div>
+	<div class="sl-container"><slot /></div>
 </div>
 
 <style>
@@ -9,16 +9,16 @@
 	.content-panel + .content-panel {
 		border-top: 1px solid var(--sl-color-hairline);
 	}
-	.container {
+	.sl-container {
 		max-width: var(--sl-content-width);
 	}
 
-	.container > :global(* + *) {
+	.sl-container > :global(* + *) {
 		margin-top: 1.5rem;
 	}
 
 	@media (min-width: 72rem) {
-		.container {
+		.sl-container {
 			margin-inline: var(--sl-content-margin-inline, auto);
 		}
 	}
