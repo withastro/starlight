@@ -32,7 +32,14 @@ import plugin from 'tailwindcss/plugin';
  */
 const StarlightTailwindPlugin = () =>
 	plugin(
-		({ addBase, theme }) => {
+		({ addBase, theme, config }) => {
+			if (config<string>('prefix') === 'sl-') {
+				console.warn(
+					'A Tailwind prefix of "sl-" will clash with Starlight’s built-in styles.\n' +
+						'Please set a different prefix in your Tailwind config file.'
+				);
+			}
+
 			/** Utility to apply accent colors based on a user’s theme config. */
 			const themeAccent = (
 				shade: 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950,

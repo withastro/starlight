@@ -1,5 +1,5 @@
-<div class="right-sidebar-panel hidden lg:block">
-	<div class="container">
+<div class="right-sidebar-panel sl-hidden lg:sl-block">
+	<div class="sl-container">
 		<slot />
 	</div>
 </div>
@@ -11,7 +11,7 @@
 	.right-sidebar-panel + .right-sidebar-panel {
 		border-top: 1px solid var(--sl-color-hairline);
 	}
-	.container {
+	.sl-container {
 		width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));
 	}
 	.right-sidebar-panel :global(h2) {
@@ -32,7 +32,7 @@
 		color: var(--sl-color-white);
 	}
 	@media (min-width: 72rem) {
-		.container {
+		.sl-container {
 			max-width: calc(
 				(
 					(

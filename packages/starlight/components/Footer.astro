@@ -21,7 +21,7 @@ const prevNextLinks = getPrevNextLinks(sidebar, config.pagination, {
 ---
 
 <footer>
-	<div class="meta flex">
+	<div class="meta sl-flex">
 		{config.editLink.baseUrl && <EditLink data={entry.data} id={entry.id} {locale} />}
 		{
 			(entry.data.lastUpdated ?? config.lastUpdated) && (
