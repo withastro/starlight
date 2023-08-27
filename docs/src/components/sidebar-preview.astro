@@ -15,7 +15,13 @@ const { config } = Astro.props;
 function makeEntries(items: SidebarConfig): SidebarEntry[] {
 	return items.map((item) => {
 		if ('link' in item) {
-			return { type: 'link', label: item.label, href: item.link, isCurrent: false };
+			return {
+				type: 'link',
+				label: item.label,
+				href: item.link,
+				isCurrent: false,
+				badge: item.badge,
+			};
 		}
 
 		item;
@@ -30,7 +36,7 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 }
 ---
 
-<div class="sidebar-preview not-content">
+<div class="sidebar-preview not-content" id="starlight__sidebar">
 	<SidebarSublist sublist={makeEntries(config)} />
 </div>
 
