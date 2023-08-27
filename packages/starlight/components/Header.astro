@@ -12,10 +12,10 @@ interface Props {
 const { locale } = Astro.props;
 ---
 
-<div class="header flex">
+<div class="header sl-flex">
 	<SiteTitle {locale} />
 	<Search {locale} />
-	<div class="hidden md:flex right-group">
+	<div class="sl-hidden md:sl-flex right-group">
 		<SocialIcons />
 		<ThemeSelect {locale} />
 		<LanguageSelect {locale} />

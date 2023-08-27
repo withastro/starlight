@@ -11,7 +11,7 @@ interface Props {
 const { link, variant, icon } = Astro.props;
 ---
 
-<a class:list={['flex action', variant]} href={link}>
+<a class:list={['sl-flex action', variant]} href={link}>
 	<slot />
 	{icon?.type === 'icon' && <Icon name={icon.name} size="1.5rem" />}
 	{icon?.type === 'raw' && <Fragment set:html={icon.html} />}
