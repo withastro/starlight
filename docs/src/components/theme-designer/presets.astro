@@ -18,7 +18,7 @@ const resolvedPresets = Object.entries(presets).map(([key, preset]) => {
 });
 ---
 
-<preset-picker class="flex not-content">
+<preset-picker class="sl-flex not-content">
 	<span class="label">{labels.label}</span>
 	{
 		resolvedPresets.map(([key, { label, dark, light }]) => (
