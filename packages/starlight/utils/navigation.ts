@@ -118,12 +118,7 @@ function linkFromConfig(
 }
 
 /** Create a link entry. */
-function makeLink(
-	href: string,
-	label: string,
-	currentPathname: string,
-	badge?: Badge 
-): Link {
+function makeLink(href: string, label: string, currentPathname: string, badge?: Badge): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
 	return { type: 'link', label, href, isCurrent, badge };

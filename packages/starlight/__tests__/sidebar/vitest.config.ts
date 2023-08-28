@@ -9,10 +9,14 @@ export default defineVitestConfig({
 		{
 			label: 'Start Here',
 			items: [
-				{ label: 'Introduction', link: '/intro', badge: {
-					variant: 'green',
-					text: 'New',
-				} },
+				{
+					label: 'Introduction',
+					link: '/intro',
+					badge: {
+						variant: 'green',
+						text: 'New',
+					},
+				},
 				{ label: 'Next Steps', link: '/next-steps', badge: 'Deprecated' },
 			],
 		},

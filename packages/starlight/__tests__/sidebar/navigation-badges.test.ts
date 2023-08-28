@@ -6,13 +6,19 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
-			['reference/configuration.md', { title: 'Config Reference', sidebar: {
-        badge: {
-          text: 'Experimental',
-          variant: 'purple',
-        }
-      } }],
-			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: "New" } }],
+			[
+				'reference/configuration.md',
+				{
+					title: 'Config Reference',
+					sidebar: {
+						badge: {
+							text: 'Experimental',
+							variant: 'purple',
+						},
+					},
+				},
+			],
+			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: 'New' } }],
 			['guides/components.mdx', { title: 'Components' }],
 		],
 	})
@@ -84,4 +90,6 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			]
-		`)})});
+		`);
+	});
+});

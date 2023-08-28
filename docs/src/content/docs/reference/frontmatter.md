@@ -261,7 +261,7 @@ sidebar:
 ---
 title: Page with a badge
 sidebar:
-  badge: 
+  badge:
     text: Experimental
     variant: purple
 ---
