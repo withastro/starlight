@@ -20,7 +20,12 @@ interface Props {
 						class:list={{ large: !Astro.props.nested }}
 					>
 						<span>{entry.label}</span>
-						{entry.badge && <Badge {...entry.badge} />}
+						{entry.badge && (
+							<Badge
+								text={entry.badge.text}
+								variant={entry.isCurrent ? 'outline' : entry.badge.variant}
+							/>
+						)}
 					</a>
 				) : (
 					<details

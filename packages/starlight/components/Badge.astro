@@ -2,7 +2,7 @@
 import type { Badge } from '../schemas/badge';
 
 interface Props {
-	variant?: Badge['variant'];
+	variant?: Badge['variant'] | 'outline';
 	text?: string;
 }
 const { variant = 'default', text } = Astro.props;
@@ -24,9 +24,9 @@ const { variant = 'default', text } = Astro.props;
 		background-color: var(--sl-color-bg-badge);
 	}
 
-	:global([aria-current='page']) .sl-badge {
-		background-color: transparent;
-		border-color: currentColor;
+	.outline {
+		--sl-color-bg-badge: transparent;
+		--sl-color-border-badge: currentColor;
 		color: inherit;
 	}
 
