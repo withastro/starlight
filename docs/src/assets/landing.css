@@ -28,7 +28,7 @@
 
 /* Product Hunt launch banner — can be removed on 30 August 2023. */
 [data-has-hero] .sl-banner {
-	--sl-color-banner-bg: #f5574a;
+	--sl-color-banner-bg: #d73f37;
 	--sl-color-banner-text: #fff;
 	border-block: 1px solid #fff8;
 	padding-block: 0;
