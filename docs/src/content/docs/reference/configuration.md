@@ -186,12 +186,7 @@ type SidebarItem = {
 } & (
   | {
       link: string;
-      badge?:
-        | string
-        | {
-            text: string;
-            variant: 'blue' | 'yellow' | 'purple' | 'green' | 'default';
-          };
+      badge?: string | BadgeConfig;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -199,6 +194,15 @@ type SidebarItem = {
       collapsed?: boolean;
     }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
