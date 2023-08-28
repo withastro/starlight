@@ -30,7 +30,7 @@ describe('getSidebar', () => {
 			      {
 			        "badge": {
 			          "text": "New",
-			          "variant": "green",
+			          "variant": "success",
 			        },
 			        "href": "/intro/",
 			        "isCurrent": false,

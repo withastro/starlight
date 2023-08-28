@@ -151,8 +151,8 @@ export function docsSchema() {
 					/**
 					 * Adds a badge to the sidebar link.
 					 * Can be a string or an object with a variant and text.
-					 * Variants include 'blue', 'pink', 'green', 'yellow' and 'purple'.
-					 * Passing only a string defaults to the 'blue' variant
+					 * Variants include 'note', 'tip', 'caution', 'danger', 'success', and 'default'.
+					 * Passing only a string defaults to the 'default' variant which uses the site accent color.
 					 */
 					badge: BadgeConfigSchema(),
 				})

@@ -13,7 +13,7 @@ vi.mock('astro:content', async () =>
 					sidebar: {
 						badge: {
 							text: 'Experimental',
-							variant: 'purple',
+							variant: 'tip',
 						},
 					},
 				},
@@ -41,7 +41,7 @@ describe('getSidebar', () => {
 			      {
 			        "badge": {
 			          "text": "New",
-			          "variant": "green",
+			          "variant": "success",
 			        },
 			        "href": "/intro/",
 			        "isCurrent": false,
@@ -68,7 +68,7 @@ describe('getSidebar', () => {
 			      {
 			        "badge": {
 			          "text": "Experimental",
-			          "variant": "purple",
+			          "variant": "tip",
 			        },
 			        "href": "/reference/configuration/",
 			        "isCurrent": false,

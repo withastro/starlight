@@ -2,7 +2,7 @@ import { z } from 'astro/zod';
 
 const badgeSchema = () =>
 	z.object({
-		variant: z.enum(['blue', 'pink', 'green', 'yellow', 'purple', 'default']).default('default'),
+		variant: z.enum(['note', 'danger', 'success', 'caution', 'tip', 'default']).default('default'),
 		text: z.string(),
 	});
 

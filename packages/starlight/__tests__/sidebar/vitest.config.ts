@@ -13,7 +13,7 @@ export default defineVitestConfig({
 					label: 'Introduction',
 					link: '/intro',
 					badge: {
-						variant: 'green',
+						variant: 'success',
 						text: 'New',
 					},
 				},

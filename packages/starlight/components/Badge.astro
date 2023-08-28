@@ -35,27 +35,27 @@ const { variant = 'default', text } = Astro.props;
 		--sl-color-border-badge: var(--sl-color-accent);
 	}
 
-	.blue {
+	.note {
 		--sl-color-bg-badge: var(--sl-color-blue-low);
 		--sl-color-border-badge: var(--sl-color-blue);
 	}
 
-	.pink {
+	.danger {
 		--sl-color-bg-badge: var(--sl-color-red-low);
 		--sl-color-border-badge: var(--sl-color-red);
 	}
 
-	.green {
+	.success {
 		--sl-color-bg-badge: var(--sl-color-green-low);
 		--sl-color-border-badge: var(--sl-color-green);
 	}
 
-	.yellow {
+	.caution {
 		--sl-color-bg-badge: var(--sl-color-orange-low);
 		--sl-color-border-badge: var(--sl-color-orange);
 	}
 
-	.purple {
+	.tip {
 		--sl-color-bg-badge: var(--sl-color-purple-low);
 		--sl-color-border-badge: var(--sl-color-purple);
 	}
@@ -64,23 +64,23 @@ const { variant = 'default', text } = Astro.props;
 		--sl-color-bg-badge: var(--sl-color-accent-high);
 	}
 
-	:global([data-theme='light']) .blue {
+	:global([data-theme='light']) .note {
 		--sl-color-bg-badge: var(--sl-color-blue-high);
 	}
 
-	:global([data-theme='light']) .pink {
+	:global([data-theme='light']) .danger {
 		--sl-color-bg-badge: var(--sl-color-red-high);
 	}
 
-	:global([data-theme='light']) .green {
+	:global([data-theme='light']) .success {
 		--sl-color-bg-badge: var(--sl-color-green-high);
 	}
 
-	:global([data-theme='light']) .yellow {
+	:global([data-theme='light']) .caution {
 		--sl-color-bg-badge: var(--sl-color-orange-high);
 	}
 
-	:global([data-theme='light']) .purple {
+	:global([data-theme='light']) .tip {
 		--sl-color-bg-badge: var(--sl-color-purple-high);
 	}
 </style>
