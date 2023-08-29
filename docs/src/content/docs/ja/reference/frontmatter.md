@@ -131,6 +131,24 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**type:** `{ content: string }`
+
+ページの上部にお知らせ用のバナーを表示します。
+
+`content`の値には、リンクやその他のコンテンツ用のHTMLを含められます。たとえば以下のページでは、`example.com`へのリンクを含むバナーを表示しています。
+
+```md
+---
+title: バナーを含むページ
+banner:
+  content: |
+    素晴らしいサイトをリリースしました！
+    <a href="https://example.com">確認してみてください</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
