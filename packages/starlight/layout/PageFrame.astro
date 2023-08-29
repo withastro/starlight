@@ -11,7 +11,7 @@ const { hasSidebar, locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<div class="page flex">
+<div class="page sl-flex">
 	<header class="header"><slot name="header" /></header>
 	{
 		hasSidebar && (

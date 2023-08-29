@@ -20,6 +20,7 @@ const labels: Record<Platform, string> = {
 	twitch: 'Twitch',
 	microsoftTeams: 'Microsoft Teams',
 	instagram: 'Instagram',
+	stackOverflow: 'Stack Overflow',
 };
 
 const links = Object.entries(config.social || {}).filter(([, url]) => Boolean(url)) as [
@@ -32,7 +33,7 @@ const links = Object.entries(config.social || {}).filter(([, url]) => Boolean(ur
 	links.length > 0 && (
 		<>
 			{links.map(([platform, url]) => (
-				<a href={url} rel="me">
+				<a href={url} rel="me" class="sl-flex">
 					<span class="sr-only">{labels[platform]}</span>
 					<Icon name={platform} />
 				</a>
@@ -44,7 +45,6 @@ const links = Object.entries(config.social || {}).filter(([, url]) => Boolean(ur
 
 <style>
 	a {
-		display: flex;
 		color: var(--sl-color-text-accent);
 	}
 	a:hover {

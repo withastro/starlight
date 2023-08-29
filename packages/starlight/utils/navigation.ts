@@ -7,6 +7,7 @@ import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
 import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
+import type { Badge } from '../schemas/badge';
 
 const DirKey = Symbol('DirKey');
 
@@ -15,6 +16,7 @@ export interface Link {
 	label: string;
 	href: string;
 	isCurrent: boolean;
+	badge: Badge | undefined;
 }
 
 interface Group {
@@ -112,14 +114,14 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname);
+	return makeLink(href, label, currentPathname, item.badge);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string): Link {
+function makeLink(href: string, label: string, currentPathname: string, badge?: Badge): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent };
+	return { type: 'link', label, href, isCurrent, badge };
 }
 
 /** Get the segments leading to a page. */
@@ -168,7 +170,8 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 	return makeLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
-		currentPathname
+		currentPathname,
+		route.entry.data.sidebar.badge
 	);
 }
 
@@ -184,13 +187,17 @@ function getOrder(routeOrDir: Route | Dir): number {
 }
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
-function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
-	return dir.sort(([, a], [, b]) => {
+function sortDirEntries(
+	dir: [string, Dir | Route][],
+	locale: string | undefined
+): [string, Dir | Route][] {
+	const collator = new Intl.Collator(localeToLang(locale));
+	return dir.sort(([keyA, a], [keyB, b]) => {
 		const [aOrder, bOrder] = [getOrder(a), getOrder(b)];
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0;
+		return collator.compare(isDir(a) ? keyA : a.slug, isDir(b) ? keyB : b.slug);
 	});
 }
 
@@ -203,7 +210,7 @@ function groupFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ): Group {
-	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
+	const entries = sortDirEntries(Object.entries(dir), locale).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
 	);
 	return {
@@ -235,7 +242,7 @@ function sidebarFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ) {
-	return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
+	return sortDirEntries(Object.entries(tree), locale).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed)
 	);
 }
