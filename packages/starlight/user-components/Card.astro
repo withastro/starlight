@@ -10,8 +10,8 @@ interface Props {
 const { icon, title } = Astro.props;
 ---
 
-<article class="card flex">
-	<p class="title flex">
+<article class="card sl-flex">
+	<p class="title sl-flex">
 		{icon && <Icon name={icon} class="icon" size="1.333em" />}
 		<span set:html={title} />
 	</p>
