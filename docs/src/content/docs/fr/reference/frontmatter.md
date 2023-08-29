@@ -134,6 +134,25 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**type:** `{ content: string }`
+
+Montrera une bannière d'annonce en haut de cette page.
+
+La valeur `content` peut inclure du HTML pour les liens ou d'autres contenus.
+Par exemple, cette page affiche une bannière comprenant un lien vers `example.com`.
+
+```md
+---
+title: Page avec une bannière
+banner:
+  content: |
+    On a lancé quelque chose de cool !
+    <a href="https://example.com">Allez-y</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
