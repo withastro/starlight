@@ -148,7 +148,6 @@ Por ejemplo, esta página muestra un banner que incluye un enlace a `example.com
 title: Página con un banner
 banner:
   content: |
-    We just launched something cool!
     ¡Acabamos de lanzar algo genial!
     <a href="https://example.com">Checalo</a>
 ---
