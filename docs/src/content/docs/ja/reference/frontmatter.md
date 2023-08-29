@@ -206,7 +206,7 @@ next: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean }`
+**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
 自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
 
@@ -251,5 +251,30 @@ sidebar:
 title: 自動生成されるサイドバーで非表示にするページ
 sidebar:
   hidden: true
+---
+```
+
+#### `badge`
+
+**type:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+自動生成されるリンクのグループに表示されたとき、サイドバーのページにバッジを追加します。文字列を使用すると、バッジはデフォルトのアクセントカラーで表示されます。オプションで、`text`と`variant`フィールドをもつ[`BadgeConfig`オブジェクト](/reference/configuration/#badgeconfig)を渡してバッジをカスタマイズできます。
+
+```md
+---
+title: バッジを含むページ
+sidebar:
+  # サイトのアクセントカラーに合わせたデフォルトのバリアントを使用します
+  badge: New
+---
+```
+
+```md
+---
+title: バッジを含むページ
+sidebar:
+  badge:
+    text: 実験的
+    variant: caution
 ---
 ```
