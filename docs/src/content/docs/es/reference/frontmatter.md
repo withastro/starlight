@@ -136,7 +136,7 @@ interface HeroConfig {
 
 ### `banner`
 
-**type:** `{ content: string }`
+**tipo:** `{ content: string }`
 
 Muestra un banner de anuncio en la parte superior de esta página.
 
