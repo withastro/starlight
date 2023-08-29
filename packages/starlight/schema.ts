@@ -157,5 +157,13 @@ export function docsSchema() {
 					badge: BadgeConfigSchema(),
 				})
 				.default({}),
+
+			/** Display an announcement banner at the top of this page. */
+			banner: z
+				.object({
+					/** The content of the banner. Supports HTML syntax. */
+					content: z.string(),
+				})
+				.optional(),
 		});
 }
