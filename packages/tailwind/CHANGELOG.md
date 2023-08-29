@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 1.0.2
+
+### Patch Changes
+
+- [#529](https://github.com/withastro/starlight/pull/529) [`c2d0e7f`](https://github.com/withastro/starlight/commit/c2d0e7f2699e60a48a3a9074eee6439dee8624a1) Thanks [@delucis](https://github.com/delucis)! - Log warning if Tailwind prefix is set to "sl-"
+
 ## 1.0.1
 
 ### Patch Changes
