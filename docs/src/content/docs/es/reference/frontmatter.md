@@ -134,6 +134,26 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**type:** `{ content: string }`
+
+Muestra un banner de anuncio en la parte superior de esta página.
+
+El valor `content` puede incluir HTML para enlaces u otro contenido.
+Por ejemplo, esta página muestra un banner que incluye un enlace a `example.com`.
+
+```md
+---
+title: Página con un banner
+banner:
+  content: |
+    We just launched something cool!
+    ¡Acabamos de lanzar algo genial!
+    <a href="https://example.com">Checalo</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
