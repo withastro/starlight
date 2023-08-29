@@ -184,13 +184,25 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
       autogenerate: { directory: string; collapsed?: boolean };
       collapsed?: boolean;
     }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
@@ -295,7 +307,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
