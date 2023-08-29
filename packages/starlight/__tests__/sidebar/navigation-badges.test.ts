@@ -6,15 +6,26 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
-			['reference/configuration.md', { title: 'Config Reference' }],
-			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
+			[
+				'reference/configuration.md',
+				{
+					title: 'Config Reference',
+					sidebar: {
+						badge: {
+							text: 'Experimental',
+							variant: 'tip',
+						},
+					},
+				},
+			],
+			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: 'New' } }],
 			['guides/components.mdx', { title: 'Components' }],
 		],
 	})
 );
 
 describe('getSidebar', () => {
-	test('returns an array of sidebar entries', () => {
+	test('adds a badge object to the sidebar when using a "string" or "object"', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
@@ -55,14 +66,20 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "badge": undefined,
+			        "badge": {
+			          "text": "Experimental",
+			          "variant": "tip",
+			        },
 			        "href": "/reference/configuration/",
 			        "isCurrent": false,
 			        "label": "Config Reference",
 			        "type": "link",
 			      },
 			      {
-			        "badge": undefined,
+			        "badge": {
+			          "text": "New",
+			          "variant": "default",
+			        },
 			        "href": "/reference/frontmatter/",
 			        "isCurrent": false,
 			        "label": "Frontmatter Reference",
