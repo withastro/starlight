@@ -7,6 +7,7 @@ import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
 import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
+import type { Badge } from '../schemas/badge';
 
 const DirKey = Symbol('DirKey');
 
@@ -15,6 +16,7 @@ export interface Link {
 	label: string;
 	href: string;
 	isCurrent: boolean;
+	badge: Badge | undefined;
 }
 
 interface Group {
@@ -112,14 +114,14 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname);
+	return makeLink(href, label, currentPathname, item.badge);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string): Link {
+function makeLink(href: string, label: string, currentPathname: string, badge?: Badge): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent };
+	return { type: 'link', label, href, isCurrent, badge };
 }
 
 /** Get the segments leading to a page. */
@@ -168,7 +170,8 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 	return makeLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
-		currentPathname
+		currentPathname,
+		route.entry.data.sidebar.badge
 	);
 }
 

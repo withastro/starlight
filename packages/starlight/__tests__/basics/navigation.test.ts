@@ -16,40 +16,44 @@ vi.mock('astro:content', async () =>
 describe('getSidebar', () => {
 	test('returns an array of sidebar entries', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
-      [
-        {
-          "href": "/",
-          "isCurrent": true,
-          "label": "Home Page",
-          "type": "link",
-        },
-        {
-          "href": "/environmental-impact/",
-          "isCurrent": false,
-          "label": "Eco-friendly docs",
-          "type": "link",
-        },
-        {
-          "collapsed": false,
-          "entries": [
-            {
-              "href": "/guides/authoring-content/",
-              "isCurrent": false,
-              "label": "Authoring Markdown",
-              "type": "link",
-            },
-            {
-              "href": "/guides/components/",
-              "isCurrent": false,
-              "label": "Components",
-              "type": "link",
-            },
-          ],
-          "label": "guides",
-          "type": "group",
-        },
-      ]
-    `);
+			[
+			  {
+			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": true,
+			    "label": "Home Page",
+			    "type": "link",
+			  },
+			  {
+			    "badge": undefined,
+			    "href": "/environmental-impact/",
+			    "isCurrent": false,
+			    "label": "Eco-friendly docs",
+			    "type": "link",
+			  },
+			  {
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "badge": undefined,
+			        "href": "/guides/authoring-content/",
+			        "isCurrent": false,
+			        "label": "Authoring Markdown",
+			        "type": "link",
+			      },
+			      {
+			        "badge": undefined,
+			        "href": "/guides/components/",
+			        "isCurrent": false,
+			        "label": "Components",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "guides",
+			    "type": "group",
+			  },
+			]
+		`);
 	});
 
 	test('marks current path with isCurrent', () => {
@@ -97,33 +101,37 @@ describe('flattenSidebar', () => {
 		expect(flattened.every((item) => item.type === 'link')).toBe(true);
 
 		expect(flattened).toMatchInlineSnapshot(`
-      [
-        {
-          "href": "/",
-          "isCurrent": true,
-          "label": "Home Page",
-          "type": "link",
-        },
-        {
-          "href": "/environmental-impact/",
-          "isCurrent": false,
-          "label": "Eco-friendly docs",
-          "type": "link",
-        },
-        {
-          "href": "/guides/authoring-content/",
-          "isCurrent": false,
-          "label": "Authoring Markdown",
-          "type": "link",
-        },
-        {
-          "href": "/guides/components/",
-          "isCurrent": false,
-          "label": "Components",
-          "type": "link",
-        },
-      ]
-    `);
+			[
+			  {
+			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": true,
+			    "label": "Home Page",
+			    "type": "link",
+			  },
+			  {
+			    "badge": undefined,
+			    "href": "/environmental-impact/",
+			    "isCurrent": false,
+			    "label": "Eco-friendly docs",
+			    "type": "link",
+			  },
+			  {
+			    "badge": undefined,
+			    "href": "/guides/authoring-content/",
+			    "isCurrent": false,
+			    "label": "Authoring Markdown",
+			    "type": "link",
+			  },
+			  {
+			    "badge": undefined,
+			    "href": "/guides/components/",
+			    "isCurrent": false,
+			    "label": "Components",
+			    "type": "link",
+			  },
+			]
+		`);
 	});
 });
 
@@ -132,21 +140,23 @@ describe('getPrevNextLinks', () => {
 		const sidebar = getSidebar('/environmental-impact/', undefined);
 		const links = getPrevNextLinks(sidebar, true, {});
 		expect(links).toMatchInlineSnapshot(`
-      {
-        "next": {
-          "href": "/guides/authoring-content/",
-          "isCurrent": false,
-          "label": "Authoring Markdown",
-          "type": "link",
-        },
-        "prev": {
-          "href": "/",
-          "isCurrent": false,
-          "label": "Home Page",
-          "type": "link",
-        },
-      }
-    `);
+			{
+			  "next": {
+			    "badge": undefined,
+			    "href": "/guides/authoring-content/",
+			    "isCurrent": false,
+			    "label": "Authoring Markdown",
+			    "type": "link",
+			  },
+			  "prev": {
+			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": false,
+			    "label": "Home Page",
+			    "type": "link",
+			  },
+			}
+		`);
 	});
 
 	test('returns no links when pagination is disabled', () => {

@@ -30,12 +30,14 @@ describe('getSidebar', () => {
 		expect(getSidebar('/en/', 'en')).toMatchInlineSnapshot(`
 			[
 			  {
+			    "badge": undefined,
 			    "href": "/en/",
 			    "isCurrent": true,
 			    "label": "Home page",
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "href": "/en/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
@@ -45,6 +47,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/en/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
@@ -62,12 +65,14 @@ describe('getSidebar', () => {
 		expect(getSidebar('/fr/', 'fr')).toMatchInlineSnapshot(`
 			[
 			  {
+			    "badge": undefined,
 			    "href": "/fr/",
 			    "isCurrent": true,
 			    "label": "Accueil",
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "href": "/fr/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
@@ -77,6 +82,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/fr/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
@@ -90,12 +96,14 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/fr/référence/bénéfice/",
 			        "isCurrent": false,
 			        "label": "Bénéfice",
 			        "type": "link",
 			      },
 			      {
+			        "badge": undefined,
 			        "href": "/fr/référence/bricolage/",
 			        "isCurrent": false,
 			        "label": "Bricolage",
@@ -109,12 +117,14 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/fr/route/décoder/",
 			        "isCurrent": false,
 			        "label": "Décoder",
 			        "type": "link",
 			      },
 			      {
+			        "badge": undefined,
 			        "href": "/fr/route/distribuer/",
 			        "isCurrent": false,
 			        "label": "Distribuer",
