@@ -20,12 +20,14 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home Page",
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Environmental impact",
@@ -35,12 +37,14 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
 			        "type": "link",
 			      },
 			      {
+			        "badge": undefined,
 			        "href": "/guides/components/",
 			        "isCurrent": false,
 			        "label": "Components",

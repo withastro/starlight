@@ -24,6 +24,7 @@ import SkipLink from '../components/SkipLink.astro';
 import ThemeProvider from '../components/ThemeProvider.astro';
 import PageFrame from '../layout/PageFrame.astro';
 import TwoColumnContent from '../layout/TwoColumnContent.astro';
+import Banner from '../components/Banner.astro';
 
 // Remark component CSS (needs to override `MarkdownContent.astro`)
 import '../style/asides.css';
@@ -92,6 +93,7 @@ const hasHero = Boolean(entry.data.hero);
 				<RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
 				<main data-pagefind-body={entry.slug !== '404'} lang={entryMeta.lang} dir={entryMeta.dir}>
 					{/* TODO: Revisit how this logic flows. */}
+					{entry.data.banner && <Banner {...entry.data.banner} />}
 					{
 						entry.data.hero ? (
 							<ContentPanel>
