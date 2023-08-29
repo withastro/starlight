@@ -290,7 +290,7 @@ starlight({
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
