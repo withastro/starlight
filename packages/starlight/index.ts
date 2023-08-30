@@ -45,6 +45,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 							// Configure Shiki theme if the user is using the default github-dark theme.
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
+					scopedStyleStrategy: 'where',
 				};
 				updateConfig(newConfig);
 			},
