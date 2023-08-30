@@ -15,9 +15,9 @@
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
     "@types/culori": "^2.0.0",
-    "astro": "^2.10.5",
+    "astro": "^3.0.2",
     "culori": "^3.2.0",
-    "sharp": "^0.32.3"
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
     "hast-util-from-html": "^1.0.2",
