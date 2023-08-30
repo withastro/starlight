@@ -4,6 +4,7 @@ import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
 import { FaviconSchema } from '../schemas/favicon';
+import { BadgeConfigSchema } from '../schemas/badge';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -42,6 +43,8 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
 	link: z.string(),
+	/** Adds a badge to the link item */
+	badge: BadgeConfigSchema(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
@@ -148,6 +151,7 @@ const UserConfigSchema = z.object({
 				'twitch',
 				'microsoftTeams',
 				'instagram',
+				'stackOverflow',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
