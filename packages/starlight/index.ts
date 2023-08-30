@@ -7,7 +7,7 @@ import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema, StarlightUserConfig } from './utils/user-config';
+import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 
 export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration[] {
