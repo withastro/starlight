@@ -4,8 +4,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "test": "start-server-and-test preview http://localhost:3000 pa11y",
-    "pa11y": "pa11y-ci --sitemap 'http://localhost:3000/sitemap-index.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:3000' --sitemap-exclude '/(de|zh|fr|es|pt-br|it)/.*'",
+    "test": "start-server-and-test preview http://localhost:4321 pa11y",
+    "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-index.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(de|zh|fr|es|pt-br|it)/.*'",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
