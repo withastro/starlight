@@ -87,7 +87,7 @@ export default defineConfig({
 								de: 'Manuelle Einrichtung',
 								es: 'Configuración Manual',
 								ja: '手動セットアップ',
-								// fr: 'Manual Setup',
+								fr: 'Installation manuelle',
 								// it: 'Manual Setup',
 								zh: '手动配置',
 								'pt-BR': 'Instalação Manual',
