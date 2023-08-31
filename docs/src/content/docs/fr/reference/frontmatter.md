@@ -1,5 +1,5 @@
 ---
-title: Frontmatter Reference
+title: Référence du frontmatter
 description: Une vue d'ensemble des champs du frontmatter par défaut pris en charge par Starlight.
 ---
 
