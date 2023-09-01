@@ -1,6 +1,7 @@
 ---
 import { flattenSidebar, type SidebarEntry } from '../utils/navigation';
 import Icon from '../user-components/Icon.astro';
+import Badge from './Badge.astro';
 
 interface Props {
 	sublist: SidebarEntry[];
@@ -18,7 +19,16 @@ interface Props {
 						aria-current={entry.isCurrent && 'page'}
 						class:list={{ large: !Astro.props.nested }}
 					>
-						{entry.label}
+						<span>{entry.label}</span>
+						{entry.badge && (
+							<>
+								{' '}
+								<Badge
+									text={entry.badge.text}
+									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
+								/>
+							</>
+						)}
 					</a>
 				) : (
 					<details
@@ -102,6 +112,10 @@ interface Props {
 		font-weight: 600;
 		color: var(--sl-color-text-invert);
 		background-color: var(--sl-color-text-accent);
+	}
+
+	a > *:not(:last-child) {
+		margin-inline-end: 0.25em;
 	}
 
 	@media (min-width: 50rem) {
