@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.9.0
+
+### Minor Changes
+
+- [#626](https://github.com/withastro/starlight/pull/626) [`5dd22b8`](https://github.com/withastro/starlight/commit/5dd22b875dc19a32c48692082fbd934e2b70da63) Thanks [@delucis](https://github.com/delucis)! - Throw an error for duplicate MDX or sitemap integrations
+
+- [#615](https://github.com/withastro/starlight/pull/615) [`7b75b3e`](https://github.com/withastro/starlight/commit/7b75b3eb7e6f7870a0adef2d6534ff48309fdb0e) Thanks [@delucis](https://github.com/delucis)! - Bump minimum required Astro version to 3.0
+
+  ⚠️ **BREAKING CHANGE** Astro v2 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v3/) and any other integrations at the same time as updating Starlight.
+
+## 0.8.1
+
+### Patch Changes
+
+- [#612](https://github.com/withastro/starlight/pull/612) [`1b367e3`](https://github.com/withastro/starlight/commit/1b367e3f65e3736b5f91c9853a487f7f5d174a6f) Thanks [@KubaJastrz](https://github.com/KubaJastrz)! - Avoid applying hovered `<select>` text color to its `<options>`
+
 ## 0.8.0
 
 ### Minor Changes
