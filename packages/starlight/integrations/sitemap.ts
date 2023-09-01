@@ -1,4 +1,4 @@
-import sitemap, { SitemapOptions } from '@astrojs/sitemap';
+import sitemap, { type SitemapOptions } from '@astrojs/sitemap';
 import type { StarlightConfig } from '../types';
 
 /**
