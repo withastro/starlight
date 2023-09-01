@@ -7,7 +7,7 @@ import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema, StarlightUserConfig } from './utils/user-config';
+import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 
 export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration[] {
@@ -45,14 +45,22 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 							// Configure Shiki theme if the user is using the default github-dark theme.
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
-					build: { inlineStylesheets: 'auto' },
-					experimental: {
-						assets: true,
-						// @ts-ignore - Needed for older versions of Astro, but an error since astro@2.6.0
-						inlineStylesheets: 'auto',
-					},
+					scopedStyleStrategy: 'where',
 				};
 				updateConfig(newConfig);
+			},
+
+			'astro:config:done': ({ config }) => {
+				const integrations = config.integrations.map(({ name }) => name);
+				for (const builtin of ['@astrojs/mdx', '@astrojs/sitemap']) {
+					if (integrations.filter((name) => name === builtin).length > 1) {
+						throw new Error(
+							`Found more than one instance of ${builtin}.\n` +
+								`Starlight includes ${builtin} by default.\n` +
+								'Please remove it from your integrations array in astro.config.mjs'
+						);
+					}
+				}
 			},
 
 			'astro:build:done': ({ dir }) => {
