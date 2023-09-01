@@ -255,9 +255,8 @@ export class TranslationStatusBuilder {
 	}) {
 		const noDotSrcDir = this.pageSourceDir.replace(/^\.+\//, '');
 		const isSrcLang = lang === this.sourceLanguage;
-		return `https://github.com/${this.githubRepo}/${type}/${refName}/${noDotSrcDir}${
-			isSrcLang ? '' : `/${lang}`
-		}/${subpath}${query}`;
+		return `https://github.com/${this.githubRepo}/${type}/${refName}/${noDotSrcDir}${isSrcLang ? '' : `/${lang}`
+			}/${subpath}${query}`;
 	}
 
 	/**
@@ -295,16 +294,16 @@ export class TranslationStatusBuilder {
 			lines.push('<details>');
 			lines.push(
 				`<summary><strong>` +
-					`${this.languageLabels[lang]} (${lang})` +
-					`</strong><br>` +
-					`<span class="progress-summary">` +
-					`${statusByPage.length - outdated.length - missing.length} done, ` +
-					`${outdated.length} need${outdated.length === 1 ? 's' : ''} updating, ` +
-					`${missing.length} missing` +
-					`</span>` +
-					'<br>' +
-					this.renderProgressBar(statusByPage.length, outdated.length, missing.length) +
-					`</summary>`
+				`${this.languageLabels[lang]} (${lang})` +
+				`</strong><br>` +
+				`<span class="progress-summary">` +
+				`${statusByPage.length - outdated.length - missing.length} done, ` +
+				`${outdated.length} need${outdated.length === 1 ? 's' : ''} updating, ` +
+				`${missing.length} missing` +
+				`</span>` +
+				'<br>' +
+				this.renderProgressBar(statusByPage.length, outdated.length, missing.length) +
+				`</summary>`
 			);
 			lines.push(``);
 			if (outdated.length > 0) {
@@ -417,7 +416,7 @@ export class TranslationStatusBuilder {
 	 */
 	renderCreatePageButton(lang: string, filename: string): string {
 		// We include `lang` twice because GitHub eats the last path segment when setting filename.
-		const createUrl = new URL(`https://github.com/${this.githubRepo}/new/main/src/content/docs`);
+		const createUrl = new URL(`https://github.com/${this.githubRepo}/new/main/docs/src/content/docs`);
 		createUrl.searchParams.set('filename', lang + '/' + filename);
 		createUrl.searchParams.set('value', '---\ntitle:\ndescription:\n---\n');
 		return this.renderLink(createUrl.href, `Create\xa0page\xa0+`, 'create-button');
