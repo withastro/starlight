@@ -28,7 +28,7 @@ try {
 {
 	date && (
 		<p>
-			{t('page.lastUpdated')}
+			{t('page.lastUpdated')}{' '}
 			<time datetime={date.toISOString()}>
 				{date.toLocaleDateString(lang, { dateStyle: 'medium' })}
 			</time>
