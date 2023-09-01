@@ -52,4 +52,9 @@ const src = (await thumbnail()).default;
 	.image {
 		border-bottom: 1px solid var(--sl-color-gray-5);
 	}
+
+	.image img {
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
 </style>
