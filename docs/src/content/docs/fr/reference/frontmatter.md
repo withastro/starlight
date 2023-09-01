@@ -1,5 +1,5 @@
 ---
-title: Frontmatter Reference
+title: Référence du frontmatter
 description: Une vue d'ensemble des champs du frontmatter par défaut pris en charge par Starlight.
 ---
 
@@ -132,6 +132,25 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `banner`
+
+**type:** `{ content: string }`
+
+Montrera une bannière d'annonce en haut de cette page.
+
+La valeur `content` peut inclure du HTML pour les liens ou d'autres contenus.
+Par exemple, cette page affiche une bannière comprenant un lien vers `example.com`.
+
+```md
+---
+title: Page avec une bannière
+banner:
+  content: |
+    On a lancé quelque chose de cool !
+    <a href="https://example.com">Allez-y</a>
+---
 ```
 
 ### `lastUpdated`

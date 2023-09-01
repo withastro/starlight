@@ -10,9 +10,9 @@ interface Props {
 const { href, title } = Astro.props;
 
 const thumbnails = import.meta.glob<{ default: ImageMetadata }>(
-	'~/assets/showcase/*{.png,.jpg,.jpeg,.webp,.avif}'
+	'../assets/showcase/*{.png,.jpg,.jpeg,.webp,.avif}'
 );
-const thumbnail = thumbnails[`/src/assets/showcase/${Astro.props.thumbnail}`];
+const thumbnail = thumbnails[`../assets/showcase/${Astro.props.thumbnail}`];
 if (!thumbnail) {
 	throw new Error(`Could not resolve showcase thumbnail: ${Astro.props.thumbnail}`);
 }
