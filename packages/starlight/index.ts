@@ -50,6 +50,19 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				updateConfig(newConfig);
 			},
 
+			'astro:config:done': ({ config }) => {
+				const integrations = config.integrations.map(({ name }) => name);
+				for (const builtin of ['@astrojs/mdx', '@astrojs/sitemap']) {
+					if (integrations.filter((name) => name === builtin).length > 1) {
+						throw new Error(
+							`Found more than one instance of ${builtin}.\n` +
+								`Starlight includes ${builtin} by default.\n` +
+								'Please remove it from your integrations array in astro.config.mjs'
+						);
+					}
+				}
+			},
+
 			'astro:build:done': ({ dir }) => {
 				const targetDir = fileURLToPath(dir);
 				const cwd = dirname(fileURLToPath(import.meta.url));
