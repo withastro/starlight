@@ -186,8 +186,8 @@ type SidebarItem = {
   translations?: Record<string, string>;
 } & (
   | {
-    link: string;
-    badge?: string | BadgeConfig;
+      link: string;
+      badge?: string | BadgeConfig;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
