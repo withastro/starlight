@@ -21,10 +21,13 @@ interface Props {
 					>
 						<span>{entry.label}</span>
 						{entry.badge && (
-							<Badge
-								text={entry.badge.text}
-								variant={entry.isCurrent ? 'outline' : entry.badge.variant}
-							/>
+							<>
+								{' '}
+								<Badge
+									text={entry.badge.text}
+									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
+								/>
+							</>
 						)}
 					</a>
 				) : (
