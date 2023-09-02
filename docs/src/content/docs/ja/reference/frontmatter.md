@@ -256,9 +256,9 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**type:** <code>string | <a href="/ja/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
-自動生成されるリンクのグループに表示されたとき、サイドバーのページにバッジを追加します。文字列を使用すると、バッジはデフォルトのアクセントカラーで表示されます。オプションで、`text`と`variant`フィールドをもつ[`BadgeConfig`オブジェクト](/reference/configuration/#badgeconfig)を渡してバッジをカスタマイズできます。
+自動生成されるリンクのグループに表示されたとき、サイドバーのページにバッジを追加します。文字列を使用すると、バッジはデフォルトのアクセントカラーで表示されます。オプションで、`text`と`variant`フィールドをもつ[`BadgeConfig`オブジェクト](/ja/reference/configuration/#badgeconfig)を渡してバッジをカスタマイズできます。
 
 ```md
 ---
