@@ -7,9 +7,9 @@ description: 맞춤형 CSS로 Starlight 사이트의 스타일을 지정하거�
 
 ## 사용자 정의 CSS 스타일
 
-Starlight의 기본 스타일을 수정하거나 확장하기 위한 추가 CSS 파일을 제공하여 Starlight 사이트에 적용된 스타일을 사용자 정의하세요.
+Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일을 제공하여 사이트에 적용된 스타일을 원하는대로 변경할 수 있습니다.
 
-1. `src/` 디렉토리에 CSS 파일을 추가합니다. 예를 들어, 페이지 제목에 대해 더 넓은 기본 열의 너비와 더 큰 텍스트 크기를 설정할 수 있습니다.
+1. `src/` 디렉토리에 CSS 파일을 추가합니다. 예를 들어, 아래 코드를 통해 페이지 제목을 더 넓게 만들고, 더 큰 텍스트를 사용할 수 있습니다.
 
    ```css
    /* src/styles/custom.css */
@@ -39,7 +39,7 @@ Starlight의 기본 스타일을 수정하거나 확장하기 위한 추가 CSS 
    });
    ```
 
-[Github에 있는 `props.css` 파일](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)에서 사이트를 사용자 정의하기 위해 Starlight에서 사용되는 모든 CSS 사용자 정의 속성을 확인할 수 있습니다.
+사이트를 스타일링하기 위해 Starlight에서 사용되는 모든 CSS 속성을 [`props.css` 파일](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)에서 확인할 수 있습니다.
 
 ## Tailwind CSS
 
@@ -48,11 +48,11 @@ Starlight는 Starlight 스타일과 호환되도록 Tailwind를 구성하는 데
 
 Starlight Tailwind 플러그인은 다음 구성을 적용합니다.
 
-- Starlight의 어두운 모드와 작동하도록 Tailwind의 `dark:` 변형을 구성합니다.
-- Starlight UI에서 Tailwind [테마 색상 및 글꼴](#tailwind로-starlight-스타일링하기)를 사용합니다.
+- Starlight의 다크 모드와 작동하도록 Tailwind의 `dark:` 변형을 구성합니다.
+- Starlight UI에서 Tailwind [테마 색상 및 글꼴](#tailwind로-starlight-스타일링하기)을 사용합니다.
 - Tailwind의 [Preflight](https://tailwindcss.com/docs/preflight) 초기화 스타일을 비활성화하는 동시에 Tailwind의 테두리 유틸리티 클래스에 필요한 Preflight의 필수 부분을 선택적으로 복원합니다.
 
-### Tailwind로 새 프로젝트 만들기
+### Tailwind가 포함된 새 프로젝트 만들기
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -84,7 +84,7 @@ yarn create astro --template starlight/tailwind
 
 ### 기존 프로젝트에 Tailwind 추가
 
-이미 Starlight 사이트가 있고 Tailwind CSS를 추가하려면 다음 단계를 따르세요.
+이미 Starlight 사이트가 존재할때, Tailwind CSS를 추가하려면 다음 단계를 따르세요.
 
 1.  Astro의 Tailwind 통합 추가
 
@@ -234,12 +234,12 @@ module.exports = {
 
 ## 테마
 
-Starlight의 색상 테마는 기본 사용자 정의 속성을 재정의하여 제어할 수 있습니다.
+기본 사용자 정의 속성을 변경하여 Starlight의 색상 테마를 제어할 수 있습니다.
 이러한 변수는 텍스트 및 배경색에 사용되는 다양한 회색 음영과 링크에 사용되는 강조 색상 및 탐색에서 현재 항목을 강조 표시하는 UI 전체에서 사용됩니다.
 
 ### 색상 테마 편집기
 
-아래 슬라이더를 사용하여 Starlight의 강조 및 회색 색상 팔레트를 수정하세요. 어둡고 밝은 미리보기 영역에는 결과 색상이 표시되며 전체 페이지도 업데이트되어 변경 사항을 미리 볼 수 있습니다.
+아래 슬라이더를 사용하여 Starlight의 강조 및 회색 색상 팔레트를 수정하세요. 어둡고 밝은 미리보기 영역에는 결과 색상이 표시되며 전체 페이지도 업데이트되어 변경 사항을 미리 확인할 수 있습니다.
 
 변경 사항이 만족스러우면 아래 CSS 또는 Tailwind 코드를 복사하여 프로젝트에 사용하세요.
 
@@ -274,8 +274,7 @@ import ThemeDesigner from '../../../../components/theme-designer.astro';
 	}}
 >
 	<Fragment slot="css-docs">
-		이 테마를 사이트에 적용하려면 프로젝트의 [사용자 정의 CSS
-		파일](#사용자-정의-css-스타일)에 다음 CSS를 추가하세요.
+		[사용자 정의 CSS파일](#사용자-정의-css-스타일)에 아래 코드를 추가하여 현재 테마를 프로젝트에 적용하세요.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
 		아래 [Tailwind 구성 파일](#tailwind로-starlight-스타일링하기)의 예시는 `theme.extend.colors`에서 사용할 `accent` 및 `gray` 색상 팔레트를 포함합니다.
