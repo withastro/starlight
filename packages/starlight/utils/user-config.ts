@@ -262,6 +262,18 @@ const UserConfigSchema = z.object({
 	 */
 	customCss: z.string().array().optional().default([]),
 
+  /**
+   * Define custom components overrides for internal Starlight components.
+   * 
+   * @example
+   * starlight({
+   *  components: {
+   *    Badge: './src/components/Badge.astro'
+   *  }
+   * })
+   */
+  components: z.record(z.string()).optional(),
+
 	/** Define if the last update date should be visible in the page footer. */
 	lastUpdated: z
 		.boolean()

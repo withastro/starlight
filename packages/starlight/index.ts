@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
+import { vitePluginStarlightOverrides } from './integrations/component-overrides';
 import { errorMap } from './utils/error-map';
 import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
@@ -36,7 +37,10 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				});
 				const newConfig: AstroUserConfig = {
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
+						plugins: [
+              vitePluginStarlightUserConfig(userConfig, config),
+              vitePluginStarlightOverrides(userConfig, config)
+            ],
 					},
 					markdown: {
 						remarkPlugins: [...starlightAsides()],
