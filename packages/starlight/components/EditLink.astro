@@ -4,7 +4,7 @@ import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
 
-interface Props {
+export interface Props {
 	data: CollectionEntry<'docs'>['data'];
 	id: CollectionEntry<'docs'>['id'];
 	locale: string | undefined;

@@ -3,7 +3,7 @@ import { useTranslations } from '../utils/translations';
 import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
 import type { TocItem } from './TableOfContents/generateToC';
 
-interface Props {
+export interface Props {
 	toc: TocItem[];
 	locale: string | undefined;
 	maxHeadingLevel: number;

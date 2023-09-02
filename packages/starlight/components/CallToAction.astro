@@ -2,7 +2,7 @@
 import Icon from '../user-components/Icon.astro';
 import type { Icons } from './Icons';
 
-interface Props {
+export interface Props {
 	variant: 'primary' | 'secondary' | 'minimal';
 	link: string;
 	icon?: undefined | { type: 'icon'; name: keyof typeof Icons } | { type: 'raw'; html: string };

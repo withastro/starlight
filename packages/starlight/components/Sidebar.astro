@@ -4,7 +4,7 @@ import LanguageSelect from './LanguageSelect.astro';
 import SidebarSublist from './SidebarSublist.astro';
 import ThemeSelect from './ThemeSelect.astro';
 
-interface Props {
+export interface Props {
 	sidebar: ReturnType<typeof getSidebar>;
 	locale: string | undefined;
 }
