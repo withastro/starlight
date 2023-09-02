@@ -413,3 +413,15 @@ main {
 ```
 
 Follow the [custom CSS instructions](/guides/css-and-tailwind/#custom-css-styles) to add your styles to your site.
+
+## Sitemap
+
+Starlight has built-in support for Astro Sitemaps. You can use the sitemap by adding `site` to `astro.config.mjs`:
+
+   ```js
+   // astro.config.mjs
+
+   export default defineConfig({
+	  site: 'https://stargazers.club',
+   });
+   ```
