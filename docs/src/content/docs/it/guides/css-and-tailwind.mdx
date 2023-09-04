@@ -50,7 +50,7 @@ Starlight fornisce un plug-in Tailwind complementare per aiutare a configurare T
 Il plugin Starlight Tailwind applica la seguente configurazione:
 
 - Configura le varianti `dark:` di Tailwind per funzionare con la modalità dark di Starlight.
-- Utilizza Tailwind [colori e caratteri del tema](#swtyling-di-starlight-con-tailwind) nell'interfaccia utente di Starlight.
+- Utilizza Tailwind [colori e caratteri del tema](#styling-di-starlight-con-tailwind) nell'interfaccia utente di Starlight.
 - Disabilita gli stili di ripristino [Preflight](https://tailwindcss.com/docs/preflight) di Tailwind ripristinando selettivamente le parti essenziali di Preflight richieste per le classi di utilità sui bordi di Tailwind.
 
 ### Crea un nuovo progetto con Tailwind
@@ -279,11 +279,11 @@ import ThemeDesigner from '../../../../components/theme-designer.astro';
 >
 	<Fragment slot="css-docs">
 		Aggiungi il seguente CSS al tuo progetto in un file [custom CSS
-		file](#custom-css-styles) per applicare questo tema al tuo sito.
+		file](#stili-css-personalizzati) per applicare questo tema al tuo sito.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		L'esempio [file di configurazione di Tailwind](#styling-starlight-with-tailwind) di seguito
-		include tavolozze di colori "accento" e "grigio" generate da utilizzare in
+		L'esempio [file di configurazione di Tailwind](#styling-di-starlight-con-tailwind) di seguito
+		include tavolozze di colori `accent` e `gray` generate da utilizzare in
 		Oggetto di configurazione `theme.extend.colors`.
 	</Fragment>
 </ThemeDesigner>
