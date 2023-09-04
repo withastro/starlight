@@ -149,20 +149,21 @@ const { html, panels } = processPanels(panelHtml);
 			newTab.setAttribute('aria-selected', 'true');
 			if (shouldSync) {
 				newTab.focus();
-				StarlightTabs.#syncTabs(this, index);
+				StarlightTabs.#syncTabs(this, newTab.textContent);
 			}
 		}
 
-		static #syncTabs(emitter: StarlightTabs, index: number) {
+		static #syncTabs(emitter: StarlightTabs, label: string | null) {
 			const syncKey = emitter.#syncKey;
-			if (!syncKey) return;
+			if (!syncKey || !label) return;
 			const syncedTabs = StarlightTabs.#syncedTabs.get(syncKey);
 			if (!syncedTabs) return;
 
-			for (const tabs of syncedTabs) {
-				if (tabs !== emitter) {
-					tabs.switchTab(tabs.tabs[index], index, false);
-				}
+			for (const receiver of syncedTabs) {
+				if (receiver === emitter) continue;
+				const labelIndex = receiver.tabs.findIndex((tab) => tab.textContent === label);
+				if (labelIndex === -1) continue;
+				receiver.switchTab(receiver.tabs[labelIndex], labelIndex, false);
 			}
 		}
 	}
