@@ -165,5 +165,8 @@ export function docsSchema() {
 					content: z.string(),
 				})
 				.optional(),
+
+			/** Pagefind indexing for this page - set to false to disable. */
+			pagefind: z.boolean().optional().default(true),
 		});
 }
