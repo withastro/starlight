@@ -11,7 +11,8 @@ const defaultCoverageExcludes = [
 	'test?(-*).?(c|m)[jt]s?(x)',
 	'**/*{.,-}{test,spec}.?(c|m)[jt]s?(x)',
 	'**/__tests__/**',
-	'**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
+	'**/__e2e__/**',
+	'**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,playwright}.config.*',
 	'**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
 ];
 
@@ -22,10 +23,10 @@ export default defineConfig({
 			reportsDirectory: './__coverage__',
 			exclude: [...defaultCoverageExcludes, '**/vitest.*', 'components.ts', 'types.ts'],
 			thresholdAutoUpdate: true,
-			lines: 66.57,
-			functions: 88.46,
-			branches: 90.14,
-			statements: 66.57,
+			lines: 66.95,
+			functions: 88.75,
+			branches: 90.28,
+			statements: 66.95,
 		},
 	},
 });
