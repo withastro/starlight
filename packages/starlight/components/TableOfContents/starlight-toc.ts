@@ -68,8 +68,12 @@ export class StarlightTOC extends HTMLElement {
 		// Also observe direct children of `.content` to include elements before
 		// the first heading.
 		const toObserve = document.querySelectorAll('main [id], main [id] ~ *, main .content > *');
+		const getNavHeight = (nav, summary) => nav?.getBoundingClientRect().height + (smallViewport ? summary?.getBoundingClientRect().height : 0) || 0;
+		const nav = document.querySelector('header');
+		const summary = document.getElementById('starlight__on-this-page--mobile');
+		let navHeight = getNavHeight(nav, summary);
 		/** Start intersections at nav height + 2rem padding. */
-		const top = (smallViewport ? 104 : 64) + 32;
+		const top = navHeight + 32;
 		/** End intersections 1.5rem later. */
 		const bottom = top + 24;
 
@@ -90,6 +94,7 @@ export class StarlightTOC extends HTMLElement {
 			if (observer) observer.disconnect();
 			clearTimeout(timeout);
 			timeout = setTimeout(() => onIdle(observe), 200);
+			navHeight = getNavHeight(nav, summary);
 		});
 	}
 }
