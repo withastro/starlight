@@ -157,7 +157,7 @@ banner:
 
 **type:** `Date | boolean`
 
-Sostituisce l'[opzione globale `lastUpdated`](/reference/configuration/#lastupdated). Se viene specificata una data, deve essere un [timestamp YAML](https://yaml.org/type/timestamp.html) valido e sovrascriverà la data archiviata nella cronologia Git per questa pagina.
+Sostituisce l'[opzione globale `lastUpdated`](/it/reference/configuration/#lastupdated). Se viene specificata una data, deve essere un [timestamp YAML](https://yaml.org/type/timestamp.html) valido e sovrascriverà la data archiviata nella cronologia Git per questa pagina.
 
 ```md
 ---
@@ -170,7 +170,7 @@ lastUpdated: 2022-08-09
 
 **type:** `boolean | string | { link?: string; label?: string }`
 
-Sostituisce l'[opzione globale `paginazione`](/reference/configuration/#pagination). Se viene specificata una stringa, il testo del collegamento generato verrà sostituito e se viene specificato un oggetto, sia il collegamento che il testo verranno sovrascritti.
+Sostituisce l'[opzione globale `paginazione`](/it/reference/configuration/#pagination). Se viene specificata una stringa, il testo del collegamento generato verrà sostituito e se viene specificato un oggetto, sia il collegamento che il testo verranno sovrascritti.
 
 ```md
 ---
@@ -212,7 +212,7 @@ next: false
 
 **type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
-Controlla il modo in cui questa pagina viene visualizzata nella [barra laterale](/reference/configuration/#sidebar), quando si utilizza un gruppo di collegamenti generato automaticamente.
+Controlla il modo in cui questa pagina viene visualizzata nella [barra laterale](/it/reference/configuration/#sidebar), quando si utilizza un gruppo di collegamenti generato automaticamente.
 
 #### `label`
 
@@ -265,7 +265,7 @@ sidebar:
 
 Aggiungi un badge alla pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 Quando si utilizza una stringa, il badge verrà visualizzato con un colore in risalto predefinito.
-Facoltativamente, passa un [oggetto `BadgeConfig`](/reference/configuration/#badgeconfig) con i campi `text` e `variant` per personalizzare il badge.
+Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#badgeconfig) con i campi `text` e `variant` per personalizzare il badge.
 
 ```md
 ---
@@ -277,5 +277,11 @@ sidebar:
 ```
 
 ```md
-
+---
+title: Pagina con un badge
+sidebar:
+  badge:
+    text: Esperimentale
+    variant: caution
+---
 ```
