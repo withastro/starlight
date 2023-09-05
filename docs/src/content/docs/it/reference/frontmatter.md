@@ -281,7 +281,7 @@ sidebar:
 title: Pagina con un badge
 sidebar:
   badge:
-    text: Esperimentale
+    text: Sperimentale
     variant: caution
 ---
 ```
