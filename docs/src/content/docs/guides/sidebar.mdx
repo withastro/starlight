@@ -255,7 +255,7 @@ starlight({
 });
 ```
 
-The above configuration will generate the following sidebar:
+The configuration above generates the following sidebar:
 
 <SidebarPreview
 	config={[
@@ -272,11 +272,12 @@ The above configuration will generate the following sidebar:
 	]}
 />
 
-The `badge` property includes a `text` property (the content to display in the badge) and optionally a `variant` property (to define the type of badge shown).
+### Badge variants
 
-`badge.text` - a string representing the content to display. (e.g. "New")
+Customize the badge styling using an object with `text` and `variant` properties.
 
-`badge.variant` - to override the `default` styling setting, set to one of the following properties for custom styling: `note`, `tip`, `danger`, `caution` or `success`.
+The `text` represents the content to display (e.g. "New").
+Override the `default` styling, which uses the accent color of your site, by setting the `variant` property to one of the following values: `note`, `tip`, `danger`, `caution` or `success`.
 
 ```js
 starlight({
@@ -284,7 +285,7 @@ starlight({
 		{
 			label: 'Guides',
 			items: [
-				// A link with a green "New" badge.
+				// A link with a yellow "Experimental" badge.
 				{
 					label: 'Components',
 					link: '/guides/components/',
@@ -296,7 +297,7 @@ starlight({
 });
 ```
 
-The above configuration will generate the following sidebar:
+The configuration above generates the following sidebar:
 
 <SidebarPreview
 	config={[
