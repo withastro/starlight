@@ -87,6 +87,19 @@ Puoi visualizzare diverse versioni del tuo logo in modalità chiara e scura.
    }),
    ```
 
+## Enable sitemap
+
+Starlight ha il supporto integrato per la generazione di una mappa del sito. Abilita la generazione della mappa del sito impostando il tuo URL come `site` in `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club/',
+	integrations: [starlight({ title: 'Sito con mappa del sito' })],
+});
+```
+
 ## Layout della pagina
 
 Per impostazione predefinita, le pagine Starlight utilizzano un layout con una barra laterale di navigazione globale e un sommario che mostra le intestazioni della pagina corrente.
@@ -103,7 +116,7 @@ template: splash
 ---
 ```
 
-## Sommario
+## Indice dei contenuti
 
 Starlight visualizza un sommario su ogni pagina per consentire ai lettori di passare più facilmente all'intestazione che stanno cercando.
 Puoi personalizzare, o addirittura disabilitare, il sommario a livello globale nell'integrazione Starlight o pagina per pagina in Frontmatter.
