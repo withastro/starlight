@@ -1,6 +1,5 @@
 ---
-import type { AutoSidebarGroup, SidebarItem } from '@astrojs/starlight/utils/user-config';
-
+import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/utils/user-config';
 import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
 import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
 
@@ -36,7 +35,7 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 }
 ---
 
-<div class="sidebar-preview not-content" id="starlight__sidebar">
+<div class="sidebar-preview not-content">
 	<SidebarSublist sublist={makeEntries(config)} />
 </div>
 
