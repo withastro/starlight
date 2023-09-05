@@ -25,7 +25,7 @@ L'aggiunta di un logo personalizzato all'intestazione del sito è un modo rapido
 
    </FileTree>
 
-2. Aggiungi il percorso del tuo logo come opzione [`logo.src`](/reference/configuration/#logo) di Starlight in `astro.config.mjs`:
+2. Aggiungi il percorso del tuo logo come opzione [`logo.src`](/it/reference/configuration/#logo) di Starlight in `astro.config.mjs`:
 
    ```js
    // astro.config.mjs
@@ -91,8 +91,8 @@ Puoi visualizzare diverse versioni del tuo logo in modalità chiara e scura.
 
 Per impostazione predefinita, le pagine Starlight utilizzano un layout con una barra laterale di navigazione globale e un sommario che mostra le intestazioni della pagina corrente.
 
-Puoi applicare un layout di pagina più ampio senza barre laterali impostando [`template: splash`](/reference/frontmatter/#template) nel frontmatter di una pagina.
-Funziona particolarmente bene per le pagine di destinazione e puoi vederlo in azione sulla [home page di questo sito](/).
+Puoi applicare un layout di pagina più ampio senza barre laterali impostando [`template: splash`](/it/reference/frontmatter/#template) nel frontmatter di una pagina.
+Funziona particolarmente bene per le pagine di destinazione e puoi vederlo in azione sulla [home page di questo sito](/it/).
 
 ```md
 ---
@@ -108,7 +108,7 @@ template: spruzzo
 Starlight visualizza un sommario su ogni pagina per consentire ai lettori di passare più facilmente all'intestazione che stanno cercando.
 Puoi personalizzare, o addirittura disabilitare, il sommario a livello globale nell'integrazione Starlight o pagina per pagina in Frontmatter.
 
-Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nel sommario. Modifica i livelli delle intestazioni da includere in tutto il sito utilizzando le opzioni `minHeadingLevel` e `maxHeadingLevel` nel tuo [global `tableOfContents`](/reference/configuration/#tableofcontents). Sostituisci queste impostazioni predefinite su una singola pagina aggiungendo le proprietà [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents) corrispondenti:
+Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nel sommario. Modifica i livelli delle intestazioni da includere in tutto il sito utilizzando le opzioni `minHeadingLevel` e `maxHeadingLevel` nel tuo [global `tableOfContents`](/it/reference/configuration/#tableofcontents). Sostituisci queste impostazioni predefinite su una singola pagina aggiungendo le proprietà [frontmatter `tableOfContents`](/it/reference/frontmatter/#tableofcontents) corrispondenti:
 
 <Tabs>
   <TabItem label="Frontmatter">
@@ -176,7 +176,7 @@ defineConfig({
 
 ## Collegamenti social
 
-Starlight dispone del supporto integrato per aggiungere collegamenti ai tuoi account di social media all'intestazione del sito tramite l'opzione [`social`](/reference/configuration/#social) nell'integrazione Starlight.
+Starlight dispone del supporto integrato per aggiungere collegamenti ai tuoi account di social media all'intestazione del sito tramite l'opzione [`social`](/it/reference/configuration/#social) nell'integrazione Starlight.
 
 Attualmente sono supportati i collegamenti a Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter e Youtube.
 Facci sapere su GitHub o Discord se hai bisogno di supporto per un altro servizio!
@@ -205,7 +205,7 @@ Starlight può visualizzare un collegamento "Modifica pagina" nel piè di pagina
 Ciò rende più semplice per il lettore trovare il file da modificare per migliorare i tuoi documenti.
 Per i progetti open source in particolare, questo può aiutare a incoraggiare i contributi della tua comunità.
 
-Per abilitare i collegamenti di modifica, imposta [`editLink.baseUrl`](/reference/configuration/#editlink) sull'URL utilizzato per modificare il tuo repository nella configurazione dell'integrazione Starlight.
+Per abilitare i collegamenti di modifica, imposta [`editLink.baseUrl`](/it/reference/configuration/#editlink) sull'URL utilizzato per modificare il tuo repository nella configurazione dell'integrazione Starlight.
 Il valore di `editLink.baseUrl` verrà anteposto al percorso della pagina corrente per formare il collegamento di modifica completo.
 
 I modelli comuni includono:
@@ -250,7 +250,7 @@ Puoi personalizzarlo aggiungendo un file `404.md` (o `404.mdx`) alla tua directo
 
 </FileTree>
 
-Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#page-layout) e [`hero`](/reference/frontmatter/#hero) in frontmatter:
+Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#page-layout) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
 
 ```md
 ---
@@ -390,7 +390,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
 ### Usa i caratteri
 
-Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/guides/css-and-tailwind/#custom-css-styles).
+Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#custom-css-styles).
 Ad esempio, per sovrascrivere ovunque il font predefinito di Starlight, imposta la proprietà personalizzata `--sl-font`:
 
 ```css
@@ -412,4 +412,4 @@ main {
 }
 ```
 
-Segui le [istruzioni CSS personalizzate](/guides/css-and-tailwind/#custom-css-styles) per aggiungere i tuoi stili al tuo sito.
+Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#custom-css-styles) per aggiungere i tuoi stili al tuo sito.
