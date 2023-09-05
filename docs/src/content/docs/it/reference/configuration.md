@@ -382,7 +382,7 @@ interface HeadConfig {
 
 Controlla se il piè di pagina mostra quando è stata aggiornata l'ultima volta la pagina.
 
-Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git del repository e potrebbe non essere accurata su alcune piattaforme di distribuzione che eseguono [cloni superficiali](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una pagina può sovrascrivere questa impostazione o la data basata su Git utilizzando il [campo frontmatter `lastUpdated`](/reference/frontmatter/#lastupdated).
+Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git del repository e potrebbe non essere accurata su alcune piattaforme di distribuzione che eseguono [cloni superficiali](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una pagina può sovrascrivere questa impostazione o la data basata su Git utilizzando il [campo frontmatter `lastUpdated`](/it/reference/frontmatter/#lastupdated).
 
 ### `pagination`
 
@@ -391,7 +391,7 @@ Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git 
 
 Definisci se il piè di pagina deve includere i collegamenti alla pagina precedente e successiva.
 
-Una pagina può sovrascrivere questa impostazione o il testo del collegamento e/o l'URL utilizzando i campi frontmatter [`prev`](/reference/frontmatter/#prev) e [`next`](/reference/frontmatter/#next).
+Una pagina può sovrascrivere questa impostazione o il testo del collegamento e/o l'URL utilizzando i campi frontmatter [`prev`](/it/reference/frontmatter/#prev) e [`next`](/it/reference/frontmatter/#next).
 
 ### `favicon`
 
