@@ -102,7 +102,7 @@ export default defineConfig({
 
 ## Layout della pagina
 
-Per impostazione predefinita, le pagine Starlight utilizzano un layout con una barra laterale di navigazione globale e un sommario che mostra le intestazioni della pagina corrente.
+Per impostazione predefinita, le pagine Starlight utilizzano un layout con una barra laterale di navigazione globale e un indice dei contenuti che mostra le intestazioni della pagina corrente.
 
 Puoi applicare un layout di pagina più ampio senza barre laterali impostando [`template: splash`](/it/reference/frontmatter/#template) nel frontmatter di una pagina.
 Funziona particolarmente bene per le pagine di destinazione e puoi vederlo in azione sulla [home page di questo sito](/it/).
@@ -118,10 +118,10 @@ template: splash
 
 ## Indice dei contenuti
 
-Starlight visualizza un sommario su ogni pagina per consentire ai lettori di passare più facilmente all'intestazione che stanno cercando.
-Puoi personalizzare, o addirittura disabilitare, il sommario a livello globale nell'integrazione Starlight o pagina per pagina in Frontmatter.
+Starlight visualizza un indice dei contenuti su ogni pagina per consentire ai lettori di passare più facilmente all'intestazione che stanno cercando.
+Puoi personalizzare, o addirittura disabilitare, l'indice dei contenuti a livello globale nell'integrazione Starlight o pagina per pagina in Frontmatter.
 
-Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nel sommario. Modifica i livelli delle intestazioni da includere in tutto il sito utilizzando le opzioni `minHeadingLevel` e `maxHeadingLevel` nel tuo [global `tableOfContents`](/it/reference/configuration/#tableofcontents). Sostituisci queste impostazioni predefinite su una singola pagina aggiungendo le proprietà [frontmatter `tableOfContents`](/it/reference/frontmatter/#tableofcontents) corrispondenti:
+Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nell'indice dei contenuti. Modifica i livelli delle intestazioni da includere in tutto il sito utilizzando le opzioni `minHeadingLevel` e `maxHeadingLevel` nel tuo [global `tableOfContents`](/it/reference/configuration/#tableofcontents). Sostituisci queste impostazioni predefinite su una singola pagina aggiungendo le proprietà [frontmatter `tableOfContents`](/it/reference/frontmatter/#tableofcontents) corrispondenti:
 
 <Tabs>
   <TabItem label="Frontmatter">
@@ -129,7 +129,7 @@ Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nel s
 ```md
 ---
 # src/content/docs/example.md
-title: pagina con solo H2 nel sommario
+title: Pagina con solo H2 nell'indice dei contenuti
 summary:
   minHeadingLevel: 2
   maxHeadingLevel: 2
@@ -155,7 +155,7 @@ defineConfig({
    </TabItem>
 </Tabs>
 
-Disabilita completamente il sommario impostando l'opzione `tableOfContents` su `false`:
+Disabilita completamente l'indice dei contenuti impostando l'opzione `tableOfContents` su `false`:
 
 <Tabs>
    <TabItem label="Frontmatter">
@@ -163,8 +163,8 @@ Disabilita completamente il sommario impostando l'opzione `tableOfContents` su `
 ```md
 ---
 # src/content/docs/esempio.md
-title: pagina senza sommario
-tableOfContents: falso
+title: Pagina senza indice dei contenuti
+tableOfContents: false
 ---
 ```
 
@@ -177,7 +177,7 @@ tableOfContents: falso
 defineConfig({
 	integrations: [
 		starlight({
-			title: 'Documenti con sommario disabilitato a livello globale',
+			title: 'Documentazione con indice dei contenuti disabilitato a livello globale',
 			tableOfContents: false,
 		}),
 	],
