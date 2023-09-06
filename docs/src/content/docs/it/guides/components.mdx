@@ -105,3 +105,66 @@ Aggiungi l'attributo `stagger` per rappresentare la seconda colonna più in bass
 ```
 
 :::
+
+### LinkCard
+
+Utilizza il componente `<LinkCard>` per collegare in modo visibile pagine diverse.
+
+Una `<LinkCard>` richiede un `title` e un attributo [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). Facoltativamente puoi includere una breve `description` o altri attributi del collegamento come `target`.
+
+Raggruppa più componenti `<LinkCard>` in `<CardGrid>` per visualizzare le schede una accanto all'altra quando c'è spazio sufficiente.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Customizing Starlight"
+	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+	href="/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/guides/components/" />
+</CardGrid>
+```
+
+Il codice precedente genera quanto segue nella pagina:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Customizing Starlight"
+	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+	href="/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/guides/components/" />
+</CardGrid>
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight fornisce una serie di icone comuni che puoi visualizzare nei tuoi contenuti utilizzando il componente `<Icon>`.
+
+Ogni `<Icon>` richiede un [`name`](#all-icons) e può facoltativamente includere un attributo `label`, `size` e `color`.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+Il codice sopra genera quanto segue nella pagina:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### All icons
+
+Di seguito è riportato un elenco di tutte le icone disponibili con i nomi associati. Fare clic su un'icona per copiarne il codice componente.
+
+<IconsList />
