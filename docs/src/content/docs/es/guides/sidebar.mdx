@@ -12,7 +12,7 @@ Una barra lateral bien organizada es clave para una buena documentación, ya que
 
 ## Barra lateral predeterminada
 
-Por defecto, Starlight generará automáticamente una barra lateral basada en la estructura del sistema de archivos de su documentación, utilizando la propiedad `title` de cada archivo como entrada de la barra lateral.
+Por defecto, Starlight generará automáticamente una barra lateral basada en la estructura del sistema de archivos de tu documentación, utilizando la propiedad `title` de cada archivo como entrada de la barra lateral.
 
 Por ejemplo, dada la siguiente estructura de archivos:
 
@@ -56,9 +56,9 @@ Aprende más sobre las barras laterales generadas automáticamente en la secció
 
 ## Agregar enlaces y grupos de enlaces
 
-Para configurar los enlaces de tu barra lateral [enlaces](#enlaces) y [grupos de enlaces](#grupos) (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
+Para configurar los [enlaces](#enlaces) de tu barra lateral y [grupos de enlaces](#grupos) (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
 
-By combining links and groups, you can create a wide variety of sidebar layouts.
+Combinando enlaces y grupos, puedes crear una amplia variedad de diseños de barra lateral.
 
 ### Enlaces
 
@@ -67,7 +67,7 @@ Agrega un enlace a una página interna o externa usando un objeto con las propie
 ```js
 starlight({
 	sidebar: [
-		// Un enlace a la guía CSS & Styling.
+		// Un enlace a la guía CSS y Estilos.
 		{ label: 'CSS y Estilos', link: '/guides/css-and-tailwind/' },
 		// Un enlace externo al sitio web de Astro.
 		{ label: 'Astro', link: 'https://astro.build/' },
@@ -104,7 +104,7 @@ starlight({
 				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
 				// Un grupo anidado de enlaces.
 				{
-					label: 'Styling',
+					label: 'Estilando',
 					items: [
 						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
 						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
@@ -184,7 +184,7 @@ The following sidebar will be generated:
 				{ label: 'Componentes', link: '/guides/components/' },
 				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
 				{
-					label: 'advanced',
+					label: 'avanzado',
 					items: [
 						{
 							label: 'Estructura de Proyecto',
@@ -201,7 +201,7 @@ The following sidebar will be generated:
 
 Usa el campo [`sidebar`](/es/reference/frontmatter/#sidebar) en las páginas individuales para personalizar los enlaces autogenerados.
 
-Las opciones del frontmatter de la barra lateral te permiten establecer un [etiqueta personalizada](/es/reference/frontmatter/#label) o agregar una [insignia](/es/reference/frontmatter/#badge), [esconder](/es/reference/frontmatter/#hidden) un enlace de la barra lateral o definir un [peso de ordenación personalizado](/es/reference/frontmatter/#order).
+Las opciones del frontmatter de la barra lateral te permiten establecer un [etiqueta personalizada](/es/reference/frontmatter/#label) o agregar una [insignia](/es/reference/frontmatter/#badge) a un enlace, [ocultar](/es/reference/frontmatter/#hidden) un enlace de la barra lateral o definir un [peso de ordenación personalizado](/es/reference/frontmatter/#order).
 
 ```md
 ---
