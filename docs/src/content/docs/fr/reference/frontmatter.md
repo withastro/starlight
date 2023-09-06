@@ -210,7 +210,7 @@ next: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean }`
+**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
 Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
 
@@ -256,5 +256,32 @@ Empêche cette page d'être incluse dans un groupe de liens généré automatiqu
 title: Page à masquer de la barre latérale générée automatiquement
 sidebar:
   hidden: true
+---
+```
+
+#### `badge`
+
+**type:** <code>string | <a href="/fr/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+Ajoute un badge à la page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
+Lors de l'utilisation d'une chaîne de caractères, le badge sera affiché avec une couleur d'accentuation par défaut.
+Passez éventuellement un [objet `BadgeConfig`](/fr/reference/configuration/#badgeconfig) avec les propriétés `text` et `variant` pour personnaliser le badge.
+
+```md
+---
+title: Page avec un badge
+sidebar:
+  # Utilise la variante par défaut correspondant à la couleur d'accentuation de votre site
+  badge: Nouveau
+---
+```
+
+```md
+---
+title: Page avec un badge
+sidebar:
+  badge:
+    text: Expérimental
+    variant: caution
 ---
 ```
