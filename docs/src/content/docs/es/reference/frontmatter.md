@@ -271,7 +271,7 @@ Opcionalmente, pasa un objeto [`BadgeConfig`](/es/reference/configuration/#badge
 title: Página con una insignia
 sidebar:
   # Usa la variante predeterminada que coincide con el color de acento de tu sitio
-  badge: New
+  badge: Nuevo
 ---
 ```
 
