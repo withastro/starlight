@@ -1,0 +1,131 @@
+---
+title: Starlight Showcase
+description: Discover sites built with Starlight and community tools that extend Starlight!
+---
+
+:::tip[Add your own!]
+Have you built a Starlight site or a tool for Starlight?
+Open a PR adding a link to this page!
+:::
+
+## Sites
+
+import Card from '../../components/showcase-card.astro';
+import FluidGrid from '../../components/fluid-grid.astro';
+
+Starlight is already being used in production. These are some of the sites around the web:
+
+<FluidGrid>
+	<Card
+		title="Athena OS"
+		href="https://athenaos.org"
+		thumbnail="www.athenaos.org.png"
+	/>
+	<Card
+		title="PubIndexAPI Docs"
+		href="https://docs.pubindexapi.com/"
+		thumbnail="docs.pubindexapi.com.png"
+	/>
+	<Card
+		title="pls"
+		href="https://dhruvkb.github.io/pls"
+		thumbnail="dhruvkb.github.io-pls.png"
+	/>
+	<Card
+		title="capo.js"
+		href="https://rviscomi.github.io/capo.js/"
+		thumbnail="capo.js.png"
+	/>
+	<Card
+		title="Web Monetization API"
+		href="https://webmonetization.org/"
+		thumbnail="webmonetization.org.png"
+	/>
+	<Card
+		title="QBCore Docs"
+		href="https://brycerussell.github.io/qbcore-docs/"
+		thumbnail="brycerussell.github.io-qbcore-docs.png"
+	/>
+	<Card title="har.fyi" href="https://har.fyi/" thumbnail="har.fyi.png" />
+	<Card
+		title="xs-dev docs"
+		href="https://xs-dev.js.org"
+		thumbnail="xs-dev.js.org.png"
+	/>
+	<Card
+		title="Felicity"
+		href="https://felicity.pages.dev/"
+		thumbnail="felicity.pages.dev.png"
+	/>
+	<Card
+		title="NgxEditor"
+		href="https://sibiraj-s.github.io/ngx-editor/"
+		thumbnail="sibiraj-s.github.io-ngx-editor.png"
+	/>
+	<Card
+		title="Astro Error Pages"
+		href="https://astro-error-page-documentation.vercel.app/"
+		thumbnail="astro-error-page-documentation.vercel.app.png"
+	/>
+	<Card
+		title="Terrateam Docs"
+		href="https://terrateam.io/docs"
+		thumbnail="terrateam.io-docs.png"
+	/>
+	<Card
+		title="simple-fm"
+		href="https://simple.arciniega.one"
+		thumbnail="simple.arciniega.one.png"
+	/>
+	<Card
+		title="CommandKit"
+		href="https://commandkit.underctrl.io"
+		thumbnail="commandkit.underctrl.io.png"
+	/>
+	<Card
+		title="Obytes Starter"
+		href="https://starter.obytes.com"
+		thumbnail="starter.obytes.com.jpg"
+	/>
+	<Card
+		title="Kanri"
+		href="https://kanriapp.com"
+		thumbnail="kanriapp.com.png"
+	/>
+</FluidGrid>
+
+See all the [public project repos using Starlight on GitHub](https://github.com/withastro/starlight/network/dependents).
+
+## Community plugins
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+These community tools, plugins, and integrations work alongside Starlight to extend its functionality.
+
+<CardGrid>
+	<LinkCard
+		href="https://www.feelback.dev/blog/new-astro-starlight-integration/"
+		title="FeelBack"
+		description="Add a user feedback system to your docs pages."
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-blog"
+		title="starlight-blog"
+		description="Add a blog to your documentation site."
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links-validator"
+		title="starlight-links-validator"
+		description="Check for broken links in your Starlight pages."
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description="Generate Starlight pages from TypeScript using TypeDoc."
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-openapi"
+		title="starlight-openapi"
+		description="Create documentation pages from OpenAPI/Swagger specifications."
+	/>
+</CardGrid>

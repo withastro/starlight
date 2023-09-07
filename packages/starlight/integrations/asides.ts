@@ -1,5 +1,5 @@
 import type { AstroUserConfig } from 'astro';
-import { h as _h, s as _s, Properties } from 'hastscript';
+import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Paragraph as P, Root } from 'mdast';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';

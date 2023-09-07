@@ -87,7 +87,7 @@ export default defineConfig({
 								de: 'Manuelle Einrichtung',
 								es: 'Configuración Manual',
 								ja: '手動セットアップ',
-								// fr: 'Manual Setup',
+								fr: 'Installation manuelle',
 								// it: 'Manual Setup',
 								zh: '手动配置',
 								'pt-BR': 'Instalação Manual',
@@ -115,7 +115,7 @@ export default defineConfig({
 								// de: '',
 								// es: '',
 								ja: 'ショーケース',
-								// fr: '',
+								fr: 'Vitrine',
 								// it: '',
 								ko: '쇼케이스',
 							},
@@ -154,5 +154,4 @@ export default defineConfig({
 			lastUpdated: true,
 		}),
 	],
-	image: { service: { entrypoint: 'astro/assets/services/sharp' } },
 });

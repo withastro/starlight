@@ -1,7 +1,7 @@
 import tailwindcss, { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 import postcss from 'postcss';
-import { test, expect, describe } from 'vitest';
+import { test, expect, describe, vi } from 'vitest';
 import StarlightTailwindPlugin from '..';
 
 /** Generate a CSS string based on the passed CSS and HTML content. */
@@ -251,4 +251,15 @@ describe('@tailwind utilities;', () => {
 			}"
 		`);
 	});
+});
+
+test('warns when a prefix of "sl-" is set', async () => {
+	const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+	await generatePluginCss({ config: { prefix: 'sl-' } });
+	expect(warn).toBeCalledTimes(1);
+	expect(warn.mock.lastCall?.[0]).toMatchInlineSnapshot(`
+		"A Tailwind prefix of \\"sl-\\" will clash with Starlight’s built-in styles.
+		Please set a different prefix in your Tailwind config file."
+	`);
+	warn.mockRestore();
 });

@@ -1,5 +1,19 @@
 # @astrojs/starlight-tailwind
 
+## 2.0.0
+
+### Major Changes
+
+- [#615](https://github.com/withastro/starlight/pull/615) [`7b75b3e`](https://github.com/withastro/starlight/commit/7b75b3eb7e6f7870a0adef2d6534ff48309fdb0e) Thanks [@delucis](https://github.com/delucis)! - Bump minimum required Astro version to 3.0
+
+  ⚠️ **BREAKING CHANGE** Astro v2 is no longer supported. Make sure you update [Astro](https://docs.astro.build/en/guides/upgrade-to/v3/), [Starlight](https://starlight.astro.build/getting-started/#updating-starlight), and any other integrations at the same time as updating the Tailwind plugin.
+
+## 1.0.2
+
+### Patch Changes
+
+- [#529](https://github.com/withastro/starlight/pull/529) [`c2d0e7f`](https://github.com/withastro/starlight/commit/c2d0e7f2699e60a48a3a9074eee6439dee8624a1) Thanks [@delucis](https://github.com/delucis)! - Log warning if Tailwind prefix is set to "sl-"
+
 ## 1.0.1
 
 ### Patch Changes

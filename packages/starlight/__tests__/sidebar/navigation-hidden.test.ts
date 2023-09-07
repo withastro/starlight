@@ -16,46 +16,56 @@ vi.mock('astro:content', async () =>
 describe('getSidebar', () => {
 	test('excludes sidebar entries with hidden: true in frontmatter', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
-    [
-      {
-        "href": "/",
-        "isCurrent": true,
-        "label": "Home",
-        "type": "link",
-      },
-      {
-        "collapsed": false,
-        "entries": [
-          {
-            "href": "/intro/",
-            "isCurrent": false,
-            "label": "Introduction",
-            "type": "link",
-          },
-          {
-            "href": "/next-steps/",
-            "isCurrent": false,
-            "label": "Next Steps",
-            "type": "link",
-          },
-        ],
-        "label": "Start Here",
-        "type": "group",
-      },
-      {
-        "collapsed": false,
-        "entries": [
-          {
-            "href": "/reference/configuration/",
-            "isCurrent": false,
-            "label": "Config Reference",
-            "type": "link",
-          },
-        ],
-        "label": "Reference",
-        "type": "group",
-      },
-    ]
-  `);
+			[
+			  {
+			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": true,
+			    "label": "Home",
+			    "type": "link",
+			  },
+			  {
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "badge": {
+			          "text": "New",
+			          "variant": "success",
+			        },
+			        "href": "/intro/",
+			        "isCurrent": false,
+			        "label": "Introduction",
+			        "type": "link",
+			      },
+			      {
+			        "badge": {
+			          "text": "Deprecated",
+			          "variant": "default",
+			        },
+			        "href": "/next-steps/",
+			        "isCurrent": false,
+			        "label": "Next Steps",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "Start Here",
+			    "type": "group",
+			  },
+			  {
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "badge": undefined,
+			        "href": "/reference/configuration/",
+			        "isCurrent": false,
+			        "label": "Config Reference",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "Reference",
+			    "type": "group",
+			  },
+			]
+		`);
 	});
 });

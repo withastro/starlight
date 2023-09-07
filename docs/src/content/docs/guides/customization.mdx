@@ -87,6 +87,19 @@ You can display different versions of your logo in light and dark modes.
    }),
    ```
 
+## Enable sitemap
+
+Starlight has built-in support for generating a sitemap. Enable sitemap generation by setting your URL as `site` in `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site with sitemap' })],
+});
+```
+
 ## Page layout
 
 By default, Starlight pages use a layout with a global navigation sidebar and a table of contents that shows the current page headings.
@@ -178,7 +191,7 @@ defineConfig({
 
 Starlight has built-in support for adding links to your social media accounts to the site header via the [`social`](/reference/configuration/#social) option in the Starlight integration.
 
-Currently, links to Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Threads, Twitch, Twitter, and Youtube are supported.
+Currently, links to Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter, and Youtube are supported.
 Let us know on GitHub or Discord if you need support for another service!
 
 ```js

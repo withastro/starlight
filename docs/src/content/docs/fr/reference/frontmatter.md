@@ -1,5 +1,5 @@
 ---
-title: Frontmatter Reference
+title: Référence du frontmatter
 description: Une vue d'ensemble des champs du frontmatter par défaut pris en charge par Starlight.
 ---
 
@@ -134,6 +134,25 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**type:** `{ content: string }`
+
+Montrera une bannière d'annonce en haut de cette page.
+
+La valeur `content` peut inclure du HTML pour les liens ou d'autres contenus.
+Par exemple, cette page affiche une bannière comprenant un lien vers `example.com`.
+
+```md
+---
+title: Page avec une bannière
+banner:
+  content: |
+    On a lancé quelque chose de cool !
+    <a href="https://example.com">Allez-y</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
@@ -191,7 +210,7 @@ next: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number }`
+**type:** `{ label?: string; order?: number; hidden?: boolean }`
 
 Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
 
@@ -222,5 +241,20 @@ Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
 title: Page à afficher en premier
 sidebar:
   order: 1
+---
+```
+
+#### `hidden`
+
+**type:** `boolean`  
+**default:** `false`
+
+Empêche cette page d'être incluse dans un groupe de liens généré automatiquement.
+
+```md
+---
+title: Page à masquer de la barre latérale générée automatiquement
+sidebar:
+  hidden: true
 ---
 ```
