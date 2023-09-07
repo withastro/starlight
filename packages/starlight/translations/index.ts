@@ -16,7 +16,7 @@ import nb from './nb.json';
 import zh from './zh.json';
 import ko from './ko.json';
 import sv from './sv.json';
-import sv from './ru.json';
+import ru from './ru.json';
 
 const { parse } = builtinI18nSchema();
 
