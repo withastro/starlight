@@ -16,11 +16,12 @@ import nb from './nb.json';
 import zh from './zh.json';
 import ko from './ko.json';
 import sv from './sv.json';
+import sv from './ru.json';
 
 const { parse } = builtinI18nSchema();
 
 export default Object.fromEntries(
-	Object.entries({ cs, en, es, de, ja, pt, fa, fr, it, nl, da, tr, ar, nb, zh, ko, sv }).map(
+	Object.entries({ cs, en, es, de, ja, pt, fa, fr, it, nl, da, tr, ar, nb, zh, ko, sv, ru }).map(
 		([key, dict]) => [key, parse(dict)]
 	)
 );
