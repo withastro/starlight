@@ -87,6 +87,20 @@ starlight({
    }),
    ```
 
+## 启用 sitemap
+
+Starlight 内置了生成站点地图（sitemap）的支持。通过在 `astro.config.mjs` 中把 `site` 字段设置为你的 URL 来启用站点地图生成：
+
+```js
+// astro.config.mjs
+export default defineConfig({
+  site: 'https://stargazers.club',
+  integrations: [
+    starlight({ title: 'Site with sitemap' }),
+  ],
+});
+```
+
 ## 页面布局
 
 默认情况下，Starlight 页面使用带有全局导航侧边栏和显示当前页面标题的目录的布局。
