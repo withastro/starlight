@@ -142,7 +142,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@pagefind/default-ui':
-        specifier: ^1.0.0-beta.2
+        specifier: 1.0.0-beta.2
         version: 1.0.0-beta.2
       '@types/mdast':
         specifier: ^3.0.11
@@ -160,7 +160,7 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       pagefind:
-        specifier: ^1.0.0-beta.2
+        specifier: 1.0.0-beta.2
         version: 1.0.0-beta.2
       rehype:
         specifier: ^12.0.1
