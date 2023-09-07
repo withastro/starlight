@@ -10,7 +10,7 @@ export class StarlightTOC extends HTMLElement {
 		this._current = link;
 	}
 
-	constructor({ smallViewport = false } = {}) {
+	constructor() {
 		super();
 
 		/** All the links in the table of contents. */
@@ -68,19 +68,13 @@ export class StarlightTOC extends HTMLElement {
 		// Also observe direct children of `.content` to include elements before
 		// the first heading.
 		const toObserve = document.querySelectorAll('main [id], main [id] ~ *, main .content > *');
-		/** Start intersections at nav height + 2rem padding. */
-		const top = (smallViewport ? 104 : 64) + 32;
-		/** End intersections 1.5rem later. */
-		const bottom = top + 24;
 
 		let observer: IntersectionObserver | undefined;
-		function observe() {
+		const observe = () => {
 			if (observer) observer.disconnect();
-			const height = document.documentElement.clientHeight;
-			const rootMargin = `-${top}px 0% ${bottom - height}px`;
-			observer = new IntersectionObserver(setCurrent, { rootMargin });
+			observer = new IntersectionObserver(setCurrent, { rootMargin: this.getRootMargin() });
 			toObserve.forEach((h) => observer!.observe(h));
-		}
+		};
 		observe();
 
 		const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
@@ -91,6 +85,18 @@ export class StarlightTOC extends HTMLElement {
 			clearTimeout(timeout);
 			timeout = setTimeout(() => onIdle(observe), 200);
 		});
+	}
+
+	private getRootMargin(): `-${number}px 0% ${number}px` {
+		const navBarHeight = document.querySelector('header')?.getBoundingClientRect().height || 0;
+		// `<summary>` only exists in mobile ToC, so will fall back to 0 in large viewport component.
+		const mobileTocHeight = this.querySelector('summary')?.getBoundingClientRect().height || 0;
+		/** Start intersections at nav height + 2rem padding. */
+		const top = navBarHeight + mobileTocHeight + 32;
+		/** End intersections 1.5rem later. */
+		const bottom = top + 24;
+		const height = document.documentElement.clientHeight;
+		return `-${top}px 0% ${bottom - height}px`;
 	}
 }
 
