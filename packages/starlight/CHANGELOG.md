@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.9.1
+
+### Patch Changes
+
+- [#647](https://github.com/withastro/starlight/pull/647) [`ea57726`](https://github.com/withastro/starlight/commit/ea5772655274a3900310cb700836fdd2f6dba7cd) Thanks [@bgmort](https://github.com/bgmort)! - Fix translated 404 pages not being excluded from search results
+
+- [#667](https://github.com/withastro/starlight/pull/667) [`9828f73`](https://github.com/withastro/starlight/commit/9828f739b73e2f377c1450b9e11f0914722ee440) Thanks [@delucis](https://github.com/delucis)! - Break inline `<code>` across lines to avoid overflow
+
+- [#642](https://github.com/withastro/starlight/pull/642) [`e623d92`](https://github.com/withastro/starlight/commit/e623d92c2fddc0ff5fe83d2554266885d683a906) Thanks [@fk](https://github.com/fk)! - Don't hard-code nav height in table of contents highlighting script
+
+- [#676](https://github.com/withastro/starlight/pull/676) [`6419006`](https://github.com/withastro/starlight/commit/641900615aa9a9a128d6934e65a57ba89e503cfd) Thanks [@vedmalex](https://github.com/vedmalex)! - Upgrade and pin Pagefind to latest beta release.
+
+- [#647](https://github.com/withastro/starlight/pull/647) [`ea57726`](https://github.com/withastro/starlight/commit/ea5772655274a3900310cb700836fdd2f6dba7cd) Thanks [@bgmort](https://github.com/bgmort)! - Add frontmatter option to exclude a page from Pagefind search results
+
 ## 0.9.0
 
 ### Minor Changes
@@ -91,16 +105,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -479,8 +493,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
