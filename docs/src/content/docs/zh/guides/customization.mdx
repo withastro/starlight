@@ -94,10 +94,8 @@ Starlight 内置了生成站点地图（sitemap）的支持。通过在 `astro.c
 ```js
 // astro.config.mjs
 export default defineConfig({
-  site: 'https://stargazers.club',
-  integrations: [
-    starlight({ title: 'Site with sitemap' }),
-  ],
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site with sitemap' })],
 });
 ```
 
