@@ -45,7 +45,8 @@ const tocConfig = !hasSidebar
 	: config.tableOfContents;
 const hasToC = Boolean(tocConfig);
 const hasHero = Boolean(entry.data.hero);
-const pagefindEnabled = entry.slug !== '404' && !entry.slug.endsWith('/404') && entry.data.pagefind !== false;
+const pagefindEnabled =
+	entry.slug !== '404' && !entry.slug.endsWith('/404') && entry.data.pagefind !== false;
 ---
 
 <html
