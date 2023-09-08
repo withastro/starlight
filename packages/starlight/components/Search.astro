@@ -113,6 +113,7 @@ const pagefindTranslations = {
 						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
 						showImages: false,
 						translations,
+						showSubResults: true,
 					});
 				});
 			});
@@ -263,19 +264,34 @@ const pagefindTranslations = {
 		margin-top: 0.5rem;
 	}
 	#starlight__search .pagefind-ui__result {
-		position: relative;
 		border: 0;
-		border-radius: 0.25rem;
-		padding: 1rem;
-		background-color: var(--sl-color-black);
+		padding: 0;
 	}
 
-	#starlight__search .pagefind-ui__result:hover,
-	#starlight__search .pagefind-ui__result:focus-within {
+	#starlight__search .pagefind-ui__result-nested {
+		position: relative;
+		padding: 0.75rem 1rem;
+		padding-inline-start: 3rem;
+	}
+
+	#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
+	#starlight__search .pagefind-ui__result-nested {
+		position: relative;
+		background-color: var(--sl-color-black);
+		border-radius: 0.25rem;
+	}
+
+	#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
+	#starlight__search
+		.pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):focus-within,
+	#starlight__search .pagefind-ui__result-nested:hover,
+	#starlight__search .pagefind-ui__result-nested:focus-within {
 		outline: 1px solid var(--sl-color-accent-high);
 	}
 
-	#starlight__search .pagefind-ui__result:focus-within {
+	#starlight__search
+		.pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):focus-within,
+	#starlight__search .pagefind-ui__result-nested:focus-within {
 		background-color: var(--sl-color-accent-low);
 	}
 
@@ -284,13 +300,38 @@ const pagefindTranslations = {
 		margin-top: 0;
 	}
 
+	#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title {
+		padding: 0.75rem 1rem;
+	}
+
+	#starlight__search .pagefind-ui__result-inner {
+		align-items: stretch;
+		gap: 0.5rem;
+	}
+
 	#starlight__search .pagefind-ui__result-link {
+		position: unset;
 		--pagefind-ui-text: var(--sl-color-white);
 		font-weight: 600;
 	}
 
 	#starlight__search .pagefind-ui__result-link:hover {
 		text-decoration: none;
+	}
+
+	#starlight__search .pagefind-ui__result-nested .pagefind-ui__result-link::before {
+		/* position: static; */
+		content: unset;
+	}
+
+	#starlight__search .pagefind-ui__result-nested::before {
+		content: '↪︎';
+		position: absolute;
+		inset-inline-start: 1rem;
+		top: 0.5rem;
+		font-size: 1.3rem;
+		font-weight: 100;
+		color: var(--sl-color-gray-3);
 	}
 
 	#starlight__search .pagefind-ui__result-link::after {
