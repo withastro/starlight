@@ -1,12 +1,12 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { pathWithBase } from './base';
+import { pathWithBase, pathWithoutBase } from './base';
 import { pickLang } from './i18n';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
-import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
+import type { AutoSidebarGroup, Navbar, SidebarItem, SidebarLinkItem } from './user-config';
+import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash, stripTrailingSlash } from './path';
 import type { Badge } from '../schemas/badge';
 
 const DirKey = Symbol('DirKey');
@@ -99,7 +99,7 @@ function groupFromAutogenerateConfig(
 }
 
 /** Check if a string starts with one of `http://` or `https://`. */
-const isAbsolute = (link: string) => /^https?:\/\//.test(link);
+export const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
 /** Create a link entry from a user config object. */
 function linkFromConfig(
@@ -247,15 +247,62 @@ function sidebarFromDir(
 	);
 }
 
+function sidebarFromNavbar(
+	navbar: Navbar | undefined,
+	pathname: string,
+	locale: string | undefined
+): SidebarItem[] {
+	if (!navbar) return [];
+
+	const pathWithoutLocale = locale ? pathname.replace(`/${locale}`, '') : pathname;
+	const prefix = ensureLeadingAndTrailingSlashes(pathWithoutBase(pathWithoutLocale));
+
+	const sidebars = Object.entries(navbar).filter(([key]) =>
+		prefix.startsWith(ensureLeadingAndTrailingSlashes(key))
+	);
+	// toSorted is not supported until node 20
+	sidebars.sort(([a], [b]) => b.length - a.length);
+
+	const [longestMatch] = sidebars;
+	if (!longestMatch) return [];
+
+	const [, sidebar] = longestMatch;
+	return sidebar.items ?? [];
+}
+
 /** Get the sidebar for the current page. */
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
 	const routes = getLocaleRoutes(locale);
-	if (config.sidebar) {
-		return config.sidebar.map((group) => configItemToEntry(group, pathname, locale, routes));
-	} else {
+
+	if (!config.sidebar && !config.navbar) {
 		const tree = treeify(routes, locale || '');
 		return sidebarFromDir(tree, pathname, locale, false);
 	}
+
+	const sidebar = config.sidebar ?? [];
+	const sidebarFromNav = sidebarFromNavbar(config.navbar, pathname, locale);
+
+	return sidebar
+		.concat(sidebarFromNav)
+		.map((group) => configItemToEntry(group, pathname, locale, routes));
+}
+
+function navLinkFrom(href: string, locale: string | undefined) {
+  href = ensureLeadingAndTrailingSlashes(locale ? `/${locale}${href}` : href);
+
+	if (!isAbsolute(href)) href = pathWithBase(href);
+  return ensureLeadingAndTrailingSlashes(href);
+}
+
+export function getNavbar(locale: string | undefined) {
+	if (!config.navbar) {
+		return null;
+	}
+
+	return Object.values(config.navbar).map(({ link, label, translations }) => ({
+		href: navLinkFrom(link, locale),
+		label: pickLang(translations, localeToLang(locale)) || label,
+	}));
 }
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */

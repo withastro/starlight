@@ -101,6 +101,18 @@ const SidebarItemSchema = z.union([
 ]);
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
 
+const NavbarItemSchema = SidebarBaseSchema.extend({
+	/** The link to this sidebar’s content. Can be a relative link to local files or the full URL of an external page. */
+	link: z.string(),
+
+	/** Array of links and subcategories to display in this navbar. */
+	items: SidebarItemSchema.array().optional(),
+});
+export type NavbarItem = z.infer<typeof NavbarItemSchema>;
+
+const NavbarSchema = z.record(z.string(), NavbarItemSchema);
+export type Navbar = z.infer<typeof NavbarSchema>;
+
 const UserConfigSchema = z.object({
 	/** Title for your website. Will be used in metadata and as browser tab title. */
 	title: z
@@ -225,6 +237,9 @@ const UserConfigSchema = z.object({
 
 	/** Configure your site’s sidebar navigation items. */
 	sidebar: SidebarItemSchema.array().optional(),
+
+	/** Configure your site’s navbar and associated sidebars. */
+	navbar: NavbarSchema.optional(),
 
 	/**
 	 * Add extra tags to your site’s `<head>`.

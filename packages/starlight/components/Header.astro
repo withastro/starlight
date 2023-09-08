@@ -1,5 +1,7 @@
 ---
+import { getNavbar } from '../utils/navigation';
 import LanguageSelect from './LanguageSelect.astro';
+import Navbar from './Navbar.astro';
 import Search from './Search.astro';
 import SiteTitle from './SiteTitle.astro';
 import SocialIcons from './SocialIcons.astro';
@@ -10,11 +12,13 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const navbar = getNavbar(locale);
 ---
 
 <div class="header sl-flex">
 	<SiteTitle {locale} />
 	<Search {locale} />
+	{navbar && <Navbar {locale} {navbar} />}
 	<div class="sl-hidden md:sl-flex right-group">
 		<SocialIcons />
 		<ThemeSelect {locale} />
@@ -60,7 +64,9 @@ const { locale } = Astro.props;
 				)
 				/* 2 (search box): all free space that is available. */
 				1fr
-				/* 3 (right items): use the space that these need. */
+				/* 3 (nav group): all free space that is available. */
+				1fr
+				/* 4 (right items): use the space that these need. */
 				auto;
 			align-content: center;
 		}

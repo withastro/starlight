@@ -1,0 +1,32 @@
+---
+import { getNavbar } from '../utils/navigation';
+
+interface Props {
+	navbar: NonNullable<ReturnType<typeof getNavbar>>;
+	locale: string | undefined;
+}
+
+const navbar = Astro.props.navbar;
+---
+
+<nav>
+	{
+		navbar.map(({ href, label }) => (
+			<a {href}>
+				<h4>{label}</h4>
+			</a>
+		))
+	}
+</nav>
+
+<style>
+	nav {
+		display: flex;
+		gap: 1rem;
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--sl-text-color);
+	}
+</style>
