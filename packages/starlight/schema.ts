@@ -59,6 +59,12 @@ export function docsSchema() {
 			 */
 			template: z.enum(['doc', 'splash']).default('doc'),
 
+			/**
+			 * Set ViewTransitions Astro component for this page.
+			 * 
+			 */
+			viewTransitions: z.boolean().optional().default(false),
+
 			/** Display a hero section on this page. */
 			hero: z
 				.object({
