@@ -223,6 +223,12 @@ const UserConfigSchema = z.object({
 	 */
 	defaultLocale: z.string().optional(),
 
+	/**
+	 * Set ViewTransitions Astro component for this page.
+	 * 
+	 */
+	viewTransitions: z.boolean().optional().default(false),
+
 	/** Configure your site’s sidebar navigation items. */
 	sidebar: SidebarItemSchema.array().optional(),
 
