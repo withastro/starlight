@@ -58,25 +58,28 @@ const pagefindTranslations = {
 			const dialog = this.querySelector('dialog')!;
 			const dialogFrame = this.querySelector('.dialog-frame')!;
 
-			/** Close the modal if a user clicks outside of the modal. */
-			const onWindowClick = (event: MouseEvent) => {
+			/** Close the modal if a user clicks on a link or outside of the modal. */
+			const onClick = (event: MouseEvent) => {
+				const isLink = 'href' in (event.target || {});
 				if (
-					document.body.contains(event.target as Node) &&
-					!dialogFrame.contains(event.target as Node)
-				)
+					isLink ||
+					(document.body.contains(event.target as Node) &&
+						!dialogFrame.contains(event.target as Node))
+				) {
 					closeModal();
+				}
 			};
 
 			const openModal = (event?: MouseEvent) => {
 				dialog.showModal();
 				this.querySelector('input')?.focus();
 				event?.stopPropagation();
-				window.addEventListener('click', onWindowClick);
+				window.addEventListener('click', onClick);
 			};
 
 			const closeModal = () => {
 				dialog.close();
-				window.removeEventListener('click', onWindowClick);
+				window.removeEventListener('click', onClick);
 			};
 
 			openBtn.addEventListener('click', openModal);
