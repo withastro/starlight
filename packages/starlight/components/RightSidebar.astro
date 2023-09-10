@@ -1,35 +1,18 @@
 ---
-import type { MarkdownHeading } from 'astro';
 import RightSidebarPanel from './RightSidebarPanel.astro';
 import MobileTableOfContents from './TableOfContents/MobileTableOfContents.astro';
 import TableOfContents from './TableOfContents.astro';
-import { generateToC } from './TableOfContents/generateToC';
-import { useTranslations } from '../utils/translations';
+import type { StarlightRouteData as Props } from '../utils/route-data'
 
-interface Props {
-	headings: MarkdownHeading[];
-	locale: string | undefined;
-	tocConfig: { maxHeadingLevel: number; minHeadingLevel: number } | false;
-}
-
-const { headings, locale, tocConfig } = Astro.props;
-const t = useTranslations(locale);
-const tocProps = tocConfig && {
-	...tocConfig,
-	locale,
-	toc: generateToC(headings, {
-		...tocConfig,
-		title: t('tableOfContents.overview'),
-	}),
-};
+const { toc, ...rest } = Astro.props;
 ---
 
 {
-	tocProps && (
+	toc && (
 		<>
-			<MobileTableOfContents {...tocProps} />
+			<MobileTableOfContents {...{toc, ...rest}} />
 			<RightSidebarPanel>
-				<TableOfContents {...tocProps} />
+				<TableOfContents {...{toc,...rest}} />
 			</RightSidebarPanel>
 		</>
 	)

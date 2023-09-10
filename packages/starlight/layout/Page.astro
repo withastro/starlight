@@ -1,8 +1,5 @@
 ---
-import config from 'virtual:starlight/user-config';
-import type { MarkdownHeading } from 'astro';
-import { getSidebar } from '../utils/navigation';
-import type { Route } from '../utils/routing';
+import { generateRouteData, type PageProps as Props } from '../utils/route-data';
 
 // Built-in CSS styles.
 import '../style/props.css';
@@ -32,32 +29,22 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
-type Props = Route & { headings: MarkdownHeading[] };
-
-const { dir, entry, entryMeta, headings, isFallback, lang, locale } = Astro.props;
-const sidebar = getSidebar(Astro.url.pathname, locale);
-
-const hasSidebar = entry.data.template !== 'splash';
-const tocConfig = !hasSidebar
-	? false
-	: entry.data.tableOfContents !== undefined
-	? entry.data.tableOfContents
-	: config.tableOfContents;
-const hasToC = Boolean(tocConfig);
-const hasHero = Boolean(entry.data.hero);
+const route = generateRouteData(Astro);
 const pagefindEnabled =
-	entry.slug !== '404' && !entry.slug.endsWith('/404') && entry.data.pagefind !== false;
+	route.entry.slug !== '404' &&
+	!route.entry.slug.endsWith('/404') &&
+	route.entry.data.pagefind !== false;
 ---
 
 <html
-	lang={lang}
-	dir={dir}
-	data-has-toc={hasToC}
-	data-has-sidebar={hasSidebar}
-	data-has-hero={hasHero}
+	lang={route.lang}
+	dir={route.dir}
+	data-has-toc={Boolean(route.toc)}
+	data-has-sidebar={route.hasSidebar}
+	data-has-hero={Boolean(route.entry.data.hero)}
 >
 	<head>
-		<HeadSEO data={entry.data} lang={lang} />
+		<HeadSEO {...route} />
 		<style>
 			html:not([data-has-toc]) {
 				--sl-mobile-toc-height: 0rem;
@@ -87,19 +74,23 @@ const pagefindEnabled =
 	</head>
 	<body>
 		<ThemeProvider />
-		<SkipLink {locale} />
-		<PageFrame {locale} {hasSidebar}>
-			<Header slot="header" {locale} />
-			{hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
-			<TwoColumnContent {hasToC}>
-				<RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
-				<main data-pagefind-body={pagefindEnabled} lang={entryMeta.lang} dir={entryMeta.dir}>
+		<SkipLink {...route} />
+		<PageFrame {...route}>
+			<Header slot="header" {...route} />
+			{route.hasSidebar && <Sidebar slot="sidebar" {...route} />}
+			<TwoColumnContent {...route}>
+				<RightSidebar slot="right-sidebar" {...route} />
+				<main
+					data-pagefind-body={pagefindEnabled}
+					lang={route.entryMeta.lang}
+					dir={route.entryMeta.dir}
+				>
 					{/* TODO: Revisit how this logic flows. */}
-					{entry.data.banner && <Banner {...entry.data.banner} />}
+					<Banner {...route} />
 					{
-						entry.data.hero ? (
+						route.entry.data.hero ? (
 							<ContentPanel>
-								<Hero hero={entry.data.hero} fallbackTitle={entry.data.title} />
+								<Hero {...route} />
 								<MarkdownContent>
 									<slot />
 								</MarkdownContent>
@@ -112,15 +103,15 @@ const pagefindEnabled =
 										data-page-title
 										style="font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); margin-top: 1rem;"
 									>
-										{entry.data.title}
+										{route.entry.data.title}
 									</h1>
-									{isFallback && <FallbackContentNotice {locale} />}
+									{route.isFallback && <FallbackContentNotice {...route} />}
 								</ContentPanel>
 								<ContentPanel>
 									<MarkdownContent>
 										<slot />
 									</MarkdownContent>
-									<Footer {...{ entry, dir, lang, locale, sidebar }} />
+									<Footer {...route} />
 								</ContentPanel>
 							</>
 						)

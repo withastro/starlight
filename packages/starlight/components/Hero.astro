@@ -1,21 +1,17 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import CallToAction from './CallToAction.astro';
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
-interface Props {
-	fallbackTitle: string;
-	hero: NonNullable<CollectionEntry<'docs'>['data']['hero']>;
-}
-
-const { title = Astro.props.fallbackTitle, tagline, image, actions } = Astro.props.hero;
+const { data } = Astro.props.entry;
+const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 
 const imageAttrs = {
 	loading: 'eager' as const,
 	decoding: 'async' as const,
 	width: 400,
 	height: 400,
-	alt: image?.alt,
+	alt: image?.alt || '',
 };
 ---
 

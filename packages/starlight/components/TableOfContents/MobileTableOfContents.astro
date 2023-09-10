@@ -2,35 +2,32 @@
 import { useTranslations } from '../../utils/translations';
 import Icon from '../../user-components/Icon.astro';
 import TableOfContentsList from './TableOfContentsList.astro';
-import type { TocItem } from './generateToC';
+import type { StarlightRouteData as Props } from '../../utils/route-data';
 
-interface Props {
-	toc: TocItem[];
-	locale: string | undefined;
-	maxHeadingLevel: number;
-	minHeadingLevel: number;
-}
-
-const { locale, toc, maxHeadingLevel, minHeadingLevel } = Astro.props;
+const { locale, toc } = Astro.props;
 const t = useTranslations(locale);
 ---
 
-<mobile-starlight-toc data-min-h={minHeadingLevel} data-max-h={maxHeadingLevel}>
-	<nav aria-labelledby="starlight__on-this-page--mobile" class="lg:sl-hidden">
-		<details id="starlight__mobile-toc">
-			<summary id="starlight__on-this-page--mobile" class="sl-flex">
-				<div class="toggle sl-flex">
-					{t('tableOfContents.onThisPage')}
-					<Icon name={'right-caret'} class="caret" size="1rem" />
-				</div>
-				<span class="display-current">{toc[0]?.text}</span>
-			</summary>
-			<div class="dropdown">
-				<TableOfContentsList toc={toc} isMobile />
-			</div>
-		</details>
-	</nav>
-</mobile-starlight-toc>
+{
+	toc && (
+		<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+			<nav aria-labelledby="starlight__on-this-page--mobile" class="lg:sl-hidden">
+				<details id="starlight__mobile-toc">
+					<summary id="starlight__on-this-page--mobile" class="sl-flex">
+						<div class="toggle sl-flex">
+							{t('tableOfContents.onThisPage')}
+							<Icon name={'right-caret'} class="caret" size="1rem" />
+						</div>
+						<span class="display-current" />
+					</summary>
+					<div class="dropdown">
+						<TableOfContentsList toc={toc.items} isMobile />
+					</div>
+				</details>
+			</nav>
+		</mobile-starlight-toc>
+	)
+}
 
 <style>
 	nav {
