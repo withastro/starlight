@@ -14,11 +14,11 @@ const t = useTranslations(Astro.props.locale);
 	<Select
 		icon="laptop"
 		label={t('themeSelect.accessibleLabel')}
-		value="auto"
+		value="dark"
 		options={[
-			{ label: t('themeSelect.dark'), selected: false, value: 'dark' },
+			{ label: t('themeSelect.dark'), selected: true, value: 'dark' },
 			{ label: t('themeSelect.light'), selected: false, value: 'light' },
-			{ label: t('themeSelect.auto'), selected: true, value: 'auto' },
+			// { label: t('themeSelect.auto'), selected: true, value: 'auto' },
 		]}
 		width="6.25em"
 	/>
@@ -30,7 +30,7 @@ const t = useTranslations(Astro.props.locale);
 </script>
 
 <script>
-	type Theme = 'auto' | 'dark' | 'light';
+	type Theme = 'dark' | 'light';
 
 	class StarlightThemeSelect extends HTMLElement {
 		/** Key in `localStorage` to store color theme preference at. */
@@ -51,16 +51,16 @@ const t = useTranslations(Astro.props.locale);
 
 		/** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
 		#parseTheme(theme: unknown): Theme {
-			if (theme === 'auto' || theme === 'dark' || theme === 'light') {
+			if ( theme === 'dark' || theme === 'light') {
 				return theme;
 			} else {
-				return 'auto';
+				return 'dark';
 			}
 		}
 
 		/** Get the preferred system color scheme. */
 		#getPreferredColorScheme(): Theme {
-			return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+			return matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'dark';
 		}
 
 		/** Update select menu UI, document theme, and local storage state. */
@@ -74,7 +74,7 @@ const t = useTranslations(Astro.props.locale);
 		/** Store the user’s preference in `localStorage`. */
 		#storeTheme(theme: Theme): void {
 			if (typeof localStorage !== 'undefined') {
-				if (theme === 'light' || theme === 'dark') {
+				if ( theme === 'dark' || theme === 'light' ) {
 					localStorage.setItem(this.#key, theme);
 				} else {
 					localStorage.removeItem(this.#key);

@@ -47,3 +47,30 @@ https://www.oxygenxml.com/dita/1.3/specs/archSpec/technicalContent/dita-task-top
 /Users/mawentowski/Repos/docsgeek/node_modules/@astrojs/starlight/components/ThemeProvider.astro
 
 /Users/mawentowski/Repos/docsgeek/node_modules/@astrojs/starlight/components/ThemeSelect.astro
+
+/Users/mawentowski/Repos/docsgeek/docs/node_modules/@astrojs/starlight/components/ThemeProvider.astro
+
+# setup
+
+Install pnpm for lubrary
+cd into docs
+pnpm update
+pnpm update --dev
+pnpm install
+pnpm dev
+
+#
+
+FOr:
+
+```json "dependencies": {
+    "@astrojs/starlight": "workspace:*",
+```
+
+Try to make the custom theme a library located on github instead
+
+```json
+"dependencies": {
+  "@astrojs/starlight": "github:githubusername/reponame#branch-or-tag-name"
+}
+```
