@@ -1,20 +1,36 @@
 ---
 import Icon from './Icon.astro';
+import Badge from '../components/Badge.astro';
+import type { Badge as BadgeType } from '../schemas/badge';
+import { BadgeConfigSchema } from '../schemas/badge';
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
+	badge: BadgeType | undefined;
 	description?: string;
 }
 
-const { title, description, ...attributes } = Astro.props;
+const { title, badge, description, ...attributes } = Astro.props;
+
+const badgeData = BadgeConfigSchema().parse(badge);
 ---
 
 <div>
 	<span class="sl-flex stack">
-		<a {...attributes}>
-			<span class="title" set:html={title} />
-		</a>
+		<span>
+			<a {...attributes}>
+				<span class="title" set:html={title} />
+			</a>
+			{
+				badge && (
+					<>
+						{' '}
+						<Badge {...badgeData} />
+					</>
+				)
+			}
+		</span>
 		{description && <span class="description" set:html={description} />}
 	</span>
 	<Icon name="right-arrow" size="1.333em" class="icon rtl:flip" />
