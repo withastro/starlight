@@ -154,5 +154,4 @@ export default defineConfig({
 			lastUpdated: true,
 		}),
 	],
-	image: { service: { entrypoint: 'astro/assets/services/sharp' } },
 });
