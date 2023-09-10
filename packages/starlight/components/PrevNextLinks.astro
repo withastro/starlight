@@ -3,7 +3,7 @@ import type { Link } from '../utils/navigation';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
 
-export interface Props {
+interface Props {
 	prev: Link | undefined;
 	next: Link | undefined;
 	dir: 'ltr' | 'rtl';

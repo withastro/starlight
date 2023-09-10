@@ -5,7 +5,7 @@ import project from 'virtual:starlight/project-context';
 import { getFileCommitDate } from '../utils/git';
 import { useTranslations } from '../utils/translations';
 
-export interface Props {
+interface Props {
 	id: CollectionEntry<'docs'>['id'];
 	lang: string;
 	lastUpdated: Date | undefined;

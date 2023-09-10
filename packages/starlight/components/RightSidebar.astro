@@ -6,7 +6,7 @@ import TableOfContents from './TableOfContents.astro';
 import { generateToC } from './TableOfContents/generateToC';
 import { useTranslations } from '../utils/translations';
 
-export interface Props {
+interface Props {
 	headings: MarkdownHeading[];
 	locale: string | undefined;
 	tocConfig: { maxHeadingLevel: number; minHeadingLevel: number } | false;
