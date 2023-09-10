@@ -4,21 +4,16 @@ import Search from './Search.astro';
 import SiteTitle from './SiteTitle.astro';
 import SocialIcons from './SocialIcons.astro';
 import ThemeSelect from './ThemeSelect.astro';
-
-interface Props {
-	locale: string | undefined;
-}
-
-const { locale } = Astro.props;
+import type { StarlightRouteData as Props } from '../utils/route-data';
 ---
 
 <div class="header sl-flex">
-	<SiteTitle {locale} />
-	<Search {locale} />
+	<SiteTitle {...Astro.props} />
+	<Search {...Astro.props} />
 	<div class="sl-hidden md:sl-flex right-group">
-		<SocialIcons />
-		<ThemeSelect {locale} />
-		<LanguageSelect {locale} />
+		<SocialIcons {...Astro.props} />
+		<ThemeSelect {...Astro.props} />
+		<LanguageSelect {...Astro.props} />
 	</div>
 </div>
 

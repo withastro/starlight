@@ -1,9 +1,6 @@
 ---
 import { useTranslations } from '../utils/translations';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
 const t = useTranslations(Astro.props.locale);
 ---

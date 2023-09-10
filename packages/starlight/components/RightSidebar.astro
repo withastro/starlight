@@ -2,17 +2,15 @@
 import RightSidebarPanel from './RightSidebarPanel.astro';
 import MobileTableOfContents from './TableOfContents/MobileTableOfContents.astro';
 import TableOfContents from './TableOfContents.astro';
-import type { StarlightRouteData as Props } from '../utils/route-data'
-
-const { toc, ...rest } = Astro.props;
+import type { StarlightRouteData as Props } from '../utils/route-data';
 ---
 
 {
-	toc && (
+	Astro.props.toc && (
 		<>
-			<MobileTableOfContents {...{toc, ...rest}} />
+			<MobileTableOfContents {...Astro.props} />
 			<RightSidebarPanel>
-				<TableOfContents {...{toc,...rest}} />
+				<TableOfContents {...Astro.props} />
 			</RightSidebarPanel>
 		</>
 	)

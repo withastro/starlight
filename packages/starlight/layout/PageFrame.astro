@@ -1,11 +1,7 @@
 ---
 import MobileMenuToggle from '../components/MobileMenuToggle.astro';
 import { useTranslations } from '../utils/translations';
-
-interface Props {
-	hasSidebar: boolean;
-	locale: string | undefined;
-}
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
 const { hasSidebar, locale } = Astro.props;
 const t = useTranslations(locale);

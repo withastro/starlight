@@ -1,6 +1,7 @@
 ---
 import config from 'virtual:starlight/user-config';
 import Icon from '../user-components/Icon.astro';
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
 type Platform = keyof NonNullable<typeof config.social>;
 

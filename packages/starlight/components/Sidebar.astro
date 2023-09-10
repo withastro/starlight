@@ -1,22 +1,17 @@
 ---
-import type { getSidebar } from '../utils/navigation';
 import LanguageSelect from './LanguageSelect.astro';
 import SidebarSublist from './SidebarSublist.astro';
 import ThemeSelect from './ThemeSelect.astro';
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
-interface Props {
-	sidebar: ReturnType<typeof getSidebar>;
-	locale: string | undefined;
-}
-
-const { sidebar, locale } = Astro.props;
+const { sidebar } = Astro.props;
 ---
 
 <div class="sidebar sl-flex">
 	<SidebarSublist sublist={sidebar} />
 	<div class="mobile-preferences sl-flex md:sl-hidden">
-		<ThemeSelect {locale} />
-		<LanguageSelect {locale} />
+		<ThemeSelect {...Astro.props} />
+		<LanguageSelect {...Astro.props} />
 	</div>
 </div>
 

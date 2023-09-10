@@ -2,10 +2,7 @@
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import { pathWithBase } from '../utils/base';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
 if (config.logo) {
 	let err: string | undefined;

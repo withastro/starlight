@@ -1,16 +1,10 @@
 ---
-import type { Link } from '../utils/navigation';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
-interface Props {
-	prev: Link | undefined;
-	next: Link | undefined;
-	dir: 'ltr' | 'rtl';
-	locale: string | undefined;
-}
-
-const { prev, next, dir, locale } = Astro.props;
+const { dir, locale, pagination } = Astro.props;
+const { prev, next } = pagination;
 const isRtl = dir === 'rtl';
 const t = useTranslations(locale);
 ---

@@ -1,17 +1,11 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
-
-interface Props {
-	data: CollectionEntry<'docs'>['data'];
-	id: CollectionEntry<'docs'>['id'];
-	locale: string | undefined;
-}
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
 const t = useTranslations(Astro.props.locale);
-const { editUrl } = Astro.props.data;
+const { editUrl } = Astro.props.entry.data;
 
 let { baseUrl } = config.editLink;
 if (baseUrl && baseUrl.at(-1) !== '/') baseUrl += '/';
