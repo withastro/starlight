@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
-    "@types/culori": "^2.0.0",
-    "astro": "^3.0.6",
+    "@types/culori": "^2.0.1",
+    "astro": "^3.0.12",
     "culori": "^3.2.0",
     "sharp": "^0.32.5"
   },
