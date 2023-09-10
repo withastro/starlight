@@ -22,37 +22,37 @@ export interface StarlightRouteData extends Route {
 	/** Links to the previous and next page in the sidebar if enabled. */
 	pagination: ReturnType<typeof getPrevNextLinks>;
 	/** Table of contents for this page if enabled. */
-	toc?: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] };
+	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
 	/** JS Date object representing when this page was last updated if enabled. */
 	lastUpdated: Date | undefined;
 }
 
 export function generateRouteData({ props, url }: AstroGlobal<PageProps>): StarlightRouteData {
-	const { entry, headings, locale } = props;
+	const { entry, locale } = props;
 	const sidebar = getSidebar(url.pathname, locale);
-
-	const routeData: StarlightRouteData = {
+	return {
 		...props,
 		sidebar,
 		hasSidebar: entry.data.template !== 'splash',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
+		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 	};
+}
 
+function getToC({ entry, locale, headings }: PageProps) {
 	const tocConfig =
 		entry.data.template === 'splash'
 			? false
 			: entry.data.tableOfContents !== undefined
 			? entry.data.tableOfContents
 			: config.tableOfContents;
-	if (tocConfig) {
-		const t = useTranslations(locale);
-		routeData.toc = {
-			...tocConfig,
-			items: generateToC(headings, { ...tocConfig, title: t('tableOfContents.overview') }),
-		};
-	}
-	return routeData;
+	if (!tocConfig) return;
+	const t = useTranslations(locale);
+	return {
+		...tocConfig,
+		items: generateToC(headings, { ...tocConfig, title: t('tableOfContents.overview') }),
+	};
 }
 
 function getLastUpdated({ entry, id }: PageProps): Date | undefined {
