@@ -124,7 +124,7 @@ npm create astro@latest -- --template starlight
 
 주석 타입 다음에 대괄호를 사용해 주석의 제목을 지정할 수 있습니다. `:::tip[알고 계셨나요?]`
 
-:::tip[알고 계셨나요?]
+:::tip{title="알고 계셨나요?"}
 
 Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
@@ -132,6 +132,18 @@ Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)
 ```md
 :::tip[알고 계셨나요?]
 Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+:::
+```
+
+대괄호가 마크다운의 링크 문법과 [충돌을][충돌-1] [일으킨다면][충돌-2] [`title` 속성][속성]을 지정하는 문법을 대신 쓸 수도 있습니다.
+
+[충돌-1]: https://github.com/microsoft/vscode-markdown-languageservice/issues/7
+[충돌-2]: https://github.com/microsoft/vscode-markdown-languageservice/issues/14
+[속성]: https://talk.commonmark.org/t/generic-directives-plugins-syntax/444
+
+```md
+:::tip{title="알고 계셨나요?"}
+Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
 :::
 ```
 
