@@ -123,12 +123,25 @@ npm create astro@latest -- --template starlight
 
 You can specify a custom title for the aside in square brackets following the aside type, e.g. `:::tip[Did you know?]`.
 
-:::tip[Did you know?]
+:::tip{title="Did you know?"}
 Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
 :::
 
 ```md
 :::tip[Did you know?]
+Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
+:::
+```
+
+You can also use [attribute syntax][attribute] using `title` attribute to avoid [syntax][conflict-1] [conflicts][conflict-2] with markdown link syntax.
+
+[conflict-1]: https://github.com/microsoft/vscode-markdown-languageservice/issues/7
+[conflict-2]: https://github.com/microsoft/vscode-markdown-languageservice/issues/14
+[attribute]: https://talk.commonmark.org/t/generic-directives-plugins-syntax/444
+
+
+```md
+:::tip{title="Did you know?"}
 Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
 :::
 ```
