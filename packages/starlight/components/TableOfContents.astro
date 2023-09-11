@@ -4,10 +4,10 @@ import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
 import type { TocItem } from './TableOfContents/generateToC';
 
 interface Props {
-  toc: TocItem[];
-  locale: string | undefined;
-  maxHeadingLevel: number;
-  minHeadingLevel: number;
+	toc: TocItem[];
+	locale: string | undefined;
+	maxHeadingLevel: number;
+	minHeadingLevel: number;
 }
 
 const { locale, toc, maxHeadingLevel, minHeadingLevel } = Astro.props;
@@ -15,10 +15,10 @@ const t = useTranslations(locale);
 ---
 
 <starlight-toc data-min-h={minHeadingLevel} data-max-h={maxHeadingLevel}>
-  <nav aria-labelledby="starlight__on-this-page">
-    <h2 id="starlight__on-this-page">{t('tableOfContents.onThisPage')}</h2>
-    <TableOfContentsList {toc} />
-  </nav>
+	<nav aria-labelledby="starlight__on-this-page">
+		<h2 id="starlight__on-this-page">{t('tableOfContents.onThisPage')}</h2>
+		<TableOfContentsList {toc} />
+	</nav>
 </starlight-toc>
 
 <script src="./TableOfContents/starlight-toc"></script>

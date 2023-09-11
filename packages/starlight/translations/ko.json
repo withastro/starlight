@@ -1,0 +1,22 @@
+{
+  "skipLink.label": "컨텐츠로 이동",
+  "search.label": "검색",
+  "search.shortcutLabel": "(검색을 위해 / 키를 누르세요)",
+  "search.cancelLabel": "취소",
+  "search.devWarning": "검색 기능은 프로덕션 환경에서만 사용할 수 있습니다.\n사이트를 로컬 환경에서 테스트하기 위해 빌드하고 미리보기(Preview) 하세요.",
+  "themeSelect.accessibleLabel": "테마 선택",
+  "themeSelect.dark": "어두움",
+  "themeSelect.light": "밝음",
+  "themeSelect.auto": "자동",
+  "languageSelect.accessibleLabel": "언어 선택",
+  "menuButton.accessibleLabel": "메뉴",
+  "sidebarNav.accessibleLabel": "메인",
+  "tableOfContents.onThisPage": "목차",
+  "tableOfContents.overview": "개요",
+  "i18n.untranslatedContent": "이 컨텐츠는 아직 번역되지 않았습니다.",
+  "page.editLink": "페이지 수정",
+  "page.lastUpdated": "최종 수정:",
+  "page.previousLink": "이전 페이지",
+  "page.nextLink": "다음 페이지",
+  "404.text": "페이지를 찾을 수 없습니다. URL을 확인하거나 검색창을 사용해보세요."
+}

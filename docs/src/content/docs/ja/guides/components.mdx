@@ -23,11 +23,25 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 <SomeComponent prop="何か" />
 
 <AnotherComponent>
-  コンポーネントには**ネストされたコンテンツ**を含められます。
+	コンポーネントには**ネストされたコンテンツ**を含められます。
 </AnotherComponent>
 ```
 
 StarlightはAstro製であるため、[サポート対象のUIフレームワーク（React、Preact、Svelte、Vue、Solid、Lit、Alpine）](https://docs.astro.build/ja/core-concepts/framework-components/)で作成されたコンポーネントであればMDXファイルで使用できます。[MDXでのコンポーネントの使用](https://docs.astro.build/ja/guides/markdown-content/#using-components-in-mdx)について、詳しくはAstroドキュメントを参照してください。
+
+### Starlightのスタイルとの互換性
+
+Starlightは、Markdownコンテンツにデフォルトのスタイルを適用します。たとえば、要素間にマージンを追加します。これらのスタイルがコンポーネントの見た目と競合する場合は、`not-content`クラスをコンポーネントに設定してスタイルを無効化してください。
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Starlightのデフォルトのコンテンツスタイルに影響を受けません。</p>
+</div>
+```
 
 ## 組み込みのコンポーネント
 
@@ -43,16 +57,16 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
-  <TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 ```
 
 上のコードは、ページに以下のタブを生成します。
 
 <Tabs>
-  <TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
-  <TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 
 ### カード
@@ -61,7 +75,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 `<Card>`コンポーネントを使用すると、Starlightのスタイルに合わせたボックス内にコンテンツを表示できます。十分なスペースがある場合は、複数のカードを`<CardGrid>`コンポーネントで囲むことで、カードを並べて表示できます。
 
-`<Card>`は`title`を必須とし、また任意で[Starlightの組み込みアイコンの1つ](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts)を名前に設定した`icon`属性を含められます。
+`<Card>`は`title`を必須とし、また任意で[Starlightの組み込みアイコンの1つ](#すべてのアイコン)を名前に設定した`icon`属性を含められます。
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -69,12 +83,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Card title="確認しよう">強調したい興味深いコンテンツ。</Card>
 
 <CardGrid>
-  <Card title="恒星" icon="star">
-    シリウス、ベガ、ペテルギウス
-  </Card>
-  <Card title="衛星" icon="moon">
-    イオ、エウロパ、ガニメデ
-  </Card>
+	<Card title="恒星" icon="star">
+		シリウス、ベガ、ペテルギウス
+	</Card>
+	<Card title="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</Card>
 </CardGrid>
 ```
 
@@ -83,12 +97,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Card title="確認しよう">強調したい興味深いコンテンツ。</Card>
 
 <CardGrid>
-  <Card title="恒星" icon="star">
-    シリウス、ベガ、ペテルギウス
-  </Card>
-  <Card title="衛星" icon="moon">
-    イオ、エウロパ、ガニメデ
-  </Card>
+	<Card title="恒星" icon="star">
+		シリウス、ベガ、ペテルギウス
+	</Card>
+	<Card title="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</Card>
 </CardGrid>
 
 :::tip[ヒント]
@@ -96,7 +110,77 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ```astro
 <CardGrid stagger>
-  <!-- カード -->
+	<!-- カード -->
 </CardGrid>
 ```
+
 :::
+
+### リンクカード
+
+`<LinkCard>`を使用すると、他のページへのリンクを目立たせることができます。
+
+`<LinkCard>`は`title`と[`href`](https://developer.mozilla.org/ja/docs/Web/HTML/Element/a#href)属性を必須とします。短い`description`や、`target`など他のリンク属性も指定できます。
+
+十分なスペースがある場合、`<CardGrid>`により複数の`<LinkCard>`をグループ化して、カードを並べて表示できます。
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Starlightのカスタマイズ"
+	description="Starlightサイトをカスタマイズして、独自のスタイル、フォントなどを追加する方法について学びます。"
+	href="/ja/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Markdownでのコンテンツ作成"
+		href="/ja/guides/authoring-content/"
+	/>
+	<LinkCard title="コンポーネント" href="/ja/guides/components/" />
+</CardGrid>
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Starlightのカスタマイズ"
+	description="Starlightサイトをカスタマイズして、独自のスタイル、フォントなどを追加する方法について学びます。"
+	href="/ja/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Markdownでのコンテンツ作成"
+		href="/ja/guides/authoring-content/"
+	/>
+	<LinkCard title="コンポーネント" href="/ja/guides/components/" />
+</CardGrid>
+
+### アイコン
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlightは、`<Icon>`コンポーネントを通じてコンテンツ内に表示可能な、一般的なアイコンのセットを提供しています。
+
+`<Icon>`は[`name`](#すべてのアイコン)を必須とし、任意で`label`、`size`、`color`属性を含められます。
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### すべてのアイコン
+
+以下に、利用可能なすべてのアイコンとその名前を示します。アイコンをクリックすると、対応するコンポーネントのコードをコピーできます。
+
+<IconsList />

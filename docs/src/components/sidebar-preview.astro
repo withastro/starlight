@@ -1,0 +1,49 @@
+---
+import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/utils/user-config';
+import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
+import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
+
+interface Props {
+	config: SidebarConfig;
+}
+
+type SidebarConfig = Exclude<SidebarItem, AutoSidebarGroup>[];
+
+const { config } = Astro.props;
+
+function makeEntries(items: SidebarConfig): SidebarEntry[] {
+	return items.map((item) => {
+		if ('link' in item) {
+			return {
+				type: 'link',
+				label: item.label,
+				href: item.link,
+				isCurrent: false,
+				badge: item.badge,
+			};
+		}
+
+		item;
+
+		return {
+			type: 'group',
+			label: item.label,
+			entries: makeEntries(item.items as SidebarConfig),
+			collapsed: item.collapsed,
+		};
+	});
+}
+---
+
+<div class="sidebar-preview not-content">
+	<SidebarSublist sublist={makeEntries(config)} />
+</div>
+
+<style>
+	.sidebar-preview {
+		background-color: var(--sl-color-bg-sidebar);
+		border: 1px solid var(--sl-color-gray-5);
+		padding: 1rem var(--sl-sidebar-pad-x);
+		max-width: var(--sl-sidebar-width);
+	}
+</style>

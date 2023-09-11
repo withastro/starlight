@@ -44,7 +44,7 @@ Définit une image de logo à afficher dans la barre de navigation à côté ou 
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -123,6 +123,34 @@ starlight({
 Les groupes de barres latérales générées automatiquement sont triés par nom de fichier et par ordre alphabétique.
 Par exemple, une page générée à partir de `astro.md` apparaîtrait au-dessus de la page de `starlight.md`.
 
+#### Groupes rétractables
+
+Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comportement en définissant la propriété `collapsed` d'un groupe sur `true`.
+
+Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
+
+```js
+sidebar: [
+  // Un groupe rétractable de liens.
+  {
+    label: 'Collapsed Links',
+    collapsed: true,
+    items: [
+      { label: 'Introduction', link: '/intro' },
+      { label: 'Next Steps', link: '/next-steps' },
+    ],
+  },
+  // Un groupe développé contenant des sous-groupes générés automatiquement rétractés.
+  {
+    label: 'Reference',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
 #### Traduire les étiquettes
 
 Si votre site est multilingue, le `label` de chaque élément est considéré comme étant dans la locale par défaut. Vous pouvez définir une propriété `translations` pour fournir des étiquettes pour les autres langues supportées :
@@ -156,17 +184,29 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[] }
   | { autogenerate: { directory: string } }
 );
 ```
 
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
+```
+
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Configurez l'internationalisation (i18n) de votre site en définissant les `locales` supportées.
+[Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` supportées.
 
 Chaque entrée doit utiliser comme clé le répertoire dans lequel les fichiers de cette langue sont sauvegardés.
 
@@ -202,7 +242,15 @@ export default defineConfig({
 });
 ```
 
-#### Options des paramètres linguistiques
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Vous pouvez définir les options suivantes pour chaque locale :
 
@@ -216,7 +264,7 @@ L'étiquette de cette langue à afficher aux utilisateurs, par exemple dans le s
 
 **type:** `string`
 
-La balise BCP-47 pour cette langue, par exemple `"en"`, `"ar"`, ou `"zh-CN"`. S'il n'est pas défini, le nom du répertoire de la langue sera utilisé par défaut.
+L'étiquette d’identification BCP-47 pour cette langue, par exemple `"en"`, `"ar"`, ou `"zh-CN"`. Si elle n'est pas définie, le nom du répertoire de la langue sera utilisé par défaut. Les étiquettes de langue avec des sous-étiquettes régionales (par exemple `"pt-BR"` ou `"en-US"`) utiliseront les traductions de l'interface utilisateur intégrées pour leur langue de base si aucune traduction spécifique à la région n'est trouvée.
 
 ##### `dir`
 
@@ -256,7 +304,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `{ codeberg?: string; discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
@@ -266,8 +314,13 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```
@@ -278,11 +331,11 @@ starlight({
 
 Fournit des fichiers CSS pour personnaliser l'aspect et la convivialité de votre site Starlight.
 
-Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, par exemple `'/src/custom.css'`, et les CSS que vous avez installés en tant que module npm, par exemple `'@fontsource/roboto'`.
+Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, par exemple `'./src/custom.css'`, et les CSS que vous avez installés en tant que module npm, par exemple `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -317,4 +370,56 @@ interface HeadConfig {
   attrs?: Record<string, string | boolean | undefined>;
   content?: string;
 }
+```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+Contrôlez si le pied de page affiche la date de la dernière mise à jour de la page.
+
+Par défaut, cette fonctionnalité s'appuie sur l'historique Git de votre dépôt et peut ne pas être précise sur certaines plateformes de déploiement effectuant des
+[clonages superficiels](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Une page peut remplacer ce paramètre ou
+la date basée sur Git en utilisant [le champ `lastUpdated` du frontmatter](/fr/reference/frontmatter/#lastupdated).
+
+### `pagination`
+
+**type:** `boolean`  
+**default:** `true`
+
+Définnissez si le pied de page doit inclure des liens vers les pages précédentes et suivantes.
+
+Une page peut remplacer ce paramètre ou le texte du lien et/ou l'URL en utilisant les champs de frontmatter [`prev`](/fr/reference/frontmatter/#prev) et [`next`](/fr/reference/frontmatter/#next).
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+Définnissez le chemin de l'icône par défaut pour votre site Web qui doit être situé dans le répertoire `public/` et être un fichier d'icône valide (`.ico`, `.gif`, `.jpg`, `.png` ou `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Si vous avez besoin de définir des variantes supplémentaires ou des icônes de secours, vous pouvez ajouter des balises en utilisant l'option [`head`](#head) :
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Ajouter une icône ICO de secours pour Safari.
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
 ```

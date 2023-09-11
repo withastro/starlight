@@ -44,7 +44,7 @@ Legt ein Logobild fest, das in der Navigationsleiste neben oder anstelle des Sei
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -83,17 +83,22 @@ Mit dieser Konfiguration würde eine `/einfuehrung` einen Bearbeitungslink haben
 
 ### `sidebar`
 
-**Typ:** [`SidebarGroup[]`](#sidebargroup)
+**Typ:** [`SidebarItem[]`](#sidebaritem)
 
 Konfiguriere die Navigationselemente der Seitenleiste deiner Website.
 
-Ein Sidebar ist ein Array von Gruppen, jede mit einem `Label` für die Gruppe und entweder einem `items`-Array oder einem `autogenerate` Konfigurationsobjekt.
+Eine Seitenleiste ist eine Array von Links und Linkgruppen.
+Jedes Element muss ein `label` und eine der folgenden Eigenschaften haben:
 
-Du kannst den Inhalt einer Gruppe manuell festlegen, indem du `items` verwendest, welches ein Array ist, das Links und Untergruppen enthalten kann. Du kannst den Inhalt einer Gruppe auch automatisch aus einem bestimmten Verzeichnis erzeugen, indem du `autogenerate` verwendest.
+- `link` - ein einzelner Link zu einer bestimmten URL, z.B. `'/home'` oder `'https://example.com'`.
+- `items` - ein Array, das weitere Links und Untergruppen enthält.
+- `autogenerate` - ein Objekt, das ein Verzeichnis deiner Dokumentation angibt, aus dem automatisch eine Gruppe von Links erzeugt werden soll.
 
 ```js
 starlight({
   sidebar: [
+    // Ein einzelner Link mit der Bezeichnung "Startseite".
+    { label: 'Startseite', link: '/' },
     // Eine Gruppe mit der Bezeichnung "Hier anfangen", die zwei Links enthält.
     {
       label: 'Hier anfangen',
@@ -113,36 +118,86 @@ starlight({
 });
 ```
 
-#### `SidebarGroup`
+#### Sortierung
 
-```ts
-type SidebarGroup =
-  | {
-      label: string;
-      items: Array<LinkItem | SidebarGroup>;
-    }
-  | {
-      label: string;
-      autogenerate: {
-        directory: string;
-      };
-    };
+Die automatisch erstellten Seitenleisten-Gruppen werden alphabetisch nach dem Dateinamen sortiert.
+Zum Beispiel würde eine Seite, die aus der Datei `astro.md` erzeugt wurde, über der Seite für `starlight.md` erscheinen.
+
+#### Zusammenklappbare Gruppen
+
+Gruppen von Links sind standardmäßig aufgeklappt. Du kannst dieses Verhalten ändern, indem du die Eigenschaft `collapsed` einer Gruppe auf `true` setzt.
+
+Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collapsed` ihrer übergeordneten Gruppe. Dies kannst du mit der Eigenschaft `autogenerate.collapsed` außer Kraft setzen.
+
+```js
+sidebar: [
+  // Eine zusammengefasste Gruppe von Links
+  {
+    label: 'Collapsed Links',
+    collapsed: true,
+    items: [
+        { label: 'Einleitung', link: '/intro' },
+        { label: 'Nächste Schritte', link: '/next-steps' },
+    ],
+  },
+  // Eine aufgeklappte Gruppe, die automatisch generierte Untergruppen enthält, welche standardmäßig eingeklappt sind.
+  {
+    label: 'Referenz',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
 ```
 
-#### `LinkItem`
+#### Labels übersetzen
+
+Wenn deine Website mehrsprachig ist, wird das `label` jedes Elements als in der Standard-Sprache verfasst betrachtet. Du kannst die Eigenschaft `translations` verwenden, um die Labels für andere unterstützte Sprachen festzulegen:
+
+```js
+sidebar: [
+  // Ein Beispiel für eine Seitenleiste mit ins Französische übersetzten Beschriftungen
+  {
+    label: 'Hier anfangen',
+    translations: { fr: 'Commencez ici' },
+    items: [
+      {
+        label: 'Erste Schritte',
+        translations: { fr: 'Bien démarrer' },
+        link: '/getting-started',
+      },
+      {
+        label: 'Projektstruktur',
+        translations: { fr: 'Structure du projet' },
+        link: '/structure',
+      },
+    ],
+  },
+],
+```
+
+#### `SidebarItem`
 
 ```ts
-interface LinkItem {
+type SidebarItem = {
   label: string;
-  link: string;
-}
+  translations?: Record<string, string>;
+} & (
+  | { link: string }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
+);
 ```
 
 ### `locales`
 
-**Typ:** `{ [dir: string]: LocaleConfig }`
+**Typ:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Konfiguriere die Internationalisierung (i18n) für Ihre Website, indem du festlegst, welche `Locales` unterstützt werden.
+[Konfiguriere die Internationalisierung (i18n)](/de/guides/i18n/) für Ihre Website, indem du festlegst, welche `Locales` unterstützt werden.
 
 Jeder Eintrag sollte das Verzeichnis, in dem die Dateien der jeweiligen Sprache gespeichert sind, als Schlüssel verwenden.
 
@@ -178,7 +233,15 @@ export default defineConfig({
 });
 ```
 
-#### Locale-Optionen
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Du kannst die folgenden Optionen für jedes Locale-Schema festlegen:
 
@@ -192,7 +255,7 @@ Die Bezeichnung für diese Sprache, die den Benutzern angezeigt werden soll, z. 
 
 **Typ:** `string`
 
-Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet.
+Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für ihre Basissprache, wenn keine regionalspezifischen Übersetzungen gefunden werden.
 
 ##### `dir`
 
@@ -232,17 +295,23 @@ Das `defaultLocale` wird verwendet, um Ersatzinhalte bereitzustellen, wenn Über
 
 ### `social`
 
-**Typ:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**Typ:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Optionale Angaben zu den Social-Media-Konten für diese Site. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
 
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```
@@ -253,11 +322,11 @@ starlight({
 
 Stellen CSS-Dateien zur Verfügung, um das Aussehen deines Starlight-Projekts anzupassen.
 
-Unterstützt lokale CSS-Dateien relativ zum Stammverzeichnis deines Projekts, z.B. `'/src/custom.css'`, und CSS, die du als npm-Modul installiert hast, z.B. `'@fontsource/roboto'`.
+Unterstützt lokale CSS-Dateien relativ zum Stammverzeichnis deines Projekts, z.B. `'./src/custom.css'`, und CSS, die du als npm-Modul installiert hast, z.B. `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -292,4 +361,54 @@ interface HeadConfig {
   attrs?: Record<string, string | boolean | undefined>;
   content?: string;
 }
+```
+
+### `lastUpdated`
+
+**Typ:** `boolean`  
+**Standard:** `false`
+
+Legt fest, ob in der Fußzeile angezeigt werden soll, wann die Seite zuletzt aktualisiert wurde.
+
+Standardmäßig verwendet diese Funktion die Git-Historie Ihres Repositorys und kann auf einigen Bereitstellungsplattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
+
+### `pagination`
+
+**Typ:** `boolean`  
+**Standard:** `true`
+
+Legt fest, ob die Fußzeile Links zur vorherigen und nächsten Seite enthalten soll.
+
+Eine Seite kann diese Einstellung oder den Linktext und/oder die URL mit Hilfe der Frontmatter-Felder [`prev`](/de/reference/frontmatter/#prev) und [`next`](/de/reference/frontmatter/#next) überschreiben.
+
+### `favicon`
+
+**Typ:** `string`  
+**Standard:** `'/favicon.svg'`
+
+Legt den Pfad des Standard-Favicons für deine Website fest. Dieses sollte sich im Verzeichnis `public/` befinden und eine gültige Icon-Datei (`.ico`, `.gif`, `.jpg`, `.png` oder `.svg`) sein.
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Wenn du zusätzliche Varianten oder Fallback-Favicons festlegen musst, kannst du diese mit der Option [`head`](#head) Tags hinzufügen:
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // ICO-Favicon als Fallback für Safari hinzufügen
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
 ```

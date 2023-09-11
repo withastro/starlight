@@ -5,7 +5,7 @@ import { paths } from './utils/routing';
 import Page from './layout/Page.astro';
 
 export async function getStaticPaths() {
-  return paths;
+	return paths;
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

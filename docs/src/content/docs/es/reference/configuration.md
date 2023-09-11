@@ -14,7 +14,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My delightful docs site',
+      title: 'Mi encantador sitio de documentación',
     }),
   ],
 });
@@ -43,7 +43,7 @@ Establece un logotipo para mostrarlo en la barra de navegación junto al título
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/mi-logo.svg',
   },
 });
 ```
@@ -119,6 +119,65 @@ starlight({
 });
 ```
 
+#### Ordenación
+
+Los grupos de la barra lateral generados automáticamente se ordenan alfabéticamente por el nombre del archivo.
+Por ejemplo, una página generada a partir de `astro.md` aparecería por encima de la página `starlight.md`.
+
+#### Colapsando grupos
+
+Los grupos de enlaces se expanden de forma predeterminada. Puedes cambiar este comportamiento estableciendo la propiedad `collapsed` de un grupo como `true`.
+
+Los subgrupos generados automáticamente respetan por defecto la propiedad `collapsed` de su grupo padre. Puedes establecer la propiedad `autogenerate.collapsed` para anular esto.
+
+```js
+sidebar: [
+  // Un grupo colapsado de enlaces.
+  {
+    label: 'Collapsed Links',
+    collapsed: true,
+    items: [
+      { label: 'Introduction', link: '/intro' },
+      { label: 'Next Steps', link: '/next-steps' },
+    ],
+  },
+  // Un grupo expandido que contiene subgrupos generados automáticamente colapsados.
+  {
+    label: 'Reference',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
+#### Traduciendo etiquetas
+
+Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
+
+```js
+sidebar: [
+  // Un ejemplo de barra lateral con etiquetas traducidas al francés.
+  {
+    label: 'Start Here',
+    translations: { fr: 'Commencez ici' },
+    items: [
+      {
+        label: 'Getting Started',
+        translations: { fr: 'Bien démarrer' },
+        link: '/getting-started',
+      },
+      {
+        label: 'Project Structure',
+        translations: { fr: 'Structure du projet' },
+        link: '/structure',
+      },
+    ],
+  },
+],
+```
+
 #### `SidebarItem`
 
 ```ts
@@ -126,17 +185,32 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
-  | { items: SidebarItem[] }
-  | { autogenerate: { directory: string } }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
 
-**tipo:** `{ [dir: string]: LocaleConfig }`
+**tipo:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-Configura la internacionalización (i18n) para tu sitio estableciendo qué `locales` se admiten.
+[Configura la internacionalización (i18n)](/es/guides/i18n/) para tu sitio estableciendo qué `locales` se admiten.
 
 Cada entrada debe usar el directorio donde se guardan los archivos de ese idioma como clave.
 
@@ -172,7 +246,15 @@ export default defineConfig({
 });
 ```
 
-#### Opciones de configuración de idioma
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 Puedes establecer las siguientes opciones para cada idioma:
 
@@ -186,7 +268,7 @@ La etiqueta para este idioma que se muestra a los usuarios, por ejemplo, en el s
 
 **tipo:** `string`
 
-La etiqueta BCP-47 para este lenguaje, por ejemplo, `"en"`, `"ar"` o `"zh-CN"`. Si no se establece, se utilizará el nombre del directorio del idioma de forma predeterminada.
+La etiqueta BCP-47 para este lenguaje, por ejemplo, `"en"`, `"ar"` o `"zh-CN"`. Si no se establece, se utilizará el nombre del directorio del idioma de forma predeterminada. Las etiquetas de idioma con subetiquetas regionales (por ejemplo, `"pt-BR"` o `"en-US"`) utilizarán las traducciones de la interfaz de usuario integradas para su idioma base si no se encuentran traducciones específicas de la región.
 
 ##### `dir`
 
@@ -226,7 +308,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
@@ -236,8 +318,12 @@ starlight({
     codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```
@@ -248,11 +334,11 @@ starlight({
 
 Proporciona archivos CSS para personalizar el aspecto y la sensación de tu sitio Starlight.
 
-Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'/src/custom.css'`, y CSS que instalaste como un módulo npm, por ejemplo, `'@fontsource/roboto'`.
+Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'./src/custom.css'`, y CSS que instalaste como un módulo npm, por ejemplo, `'@fontsource/roboto'`.
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -287,4 +373,54 @@ interface HeadConfig {
   attrs?: Record<string, string | boolean | undefined>;
   content?: string;
 }
+```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+Controla si se muestra el pie de página que indica cuándo se actualizó por última vez la página.
+
+De forma predeterminada, esta función se basa en el historial Git de tu repositorio y puede no ser precisa en algunas plataformas de implementación que realizan [copias superficiales](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una página puede anular esta configuración o la fecha basada en Git utilizando el campo [`lastUpdated`](/reference/frontmatter/#lastupdated) en el frontmatter.
+
+### `pagination`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si el pie de página debe incluir enlaces a la página anterior y siguiente.
+
+Una página puede anular esta configuración o el texto del enlace y/o la URL utilizando los campos de metadatos [`prev`](/reference/frontmatter/#prev) y [`next`](/reference/frontmatter/#next).
+
+### `favicon`
+
+**tipo:** `string`  
+**por defecto:** `'/favicon.svg'`
+
+Establece la ruta del favicon predeterminado para tu sitio web, el cual debería ubicarse en el directorio `public/` y ser un archivo de icono válido (`.ico`, `.gif`, `.jpg`, `.png` o `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Si necesitas establecer variantes adicionales o favicons de respaldo, puedes agregar etiquetas utilizando la opción [`head`](#head):
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Agregar un favicon ICO de respaldo para Safari.
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
 ```

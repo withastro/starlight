@@ -26,12 +26,27 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 <SomeComponent prop="something" />
 
 <AnotherComponent>
-  Les composants peuvent également contenir du **contenu imbriqué**.
+	Les composants peuvent également contenir du **contenu imbriqué**.
 </AnotherComponent>
 ```
 
 Starlight étant alimenté par Astro, vous pouvez ajouter la prise en charge des composants construits avec n'importe quel [cadre d'interface utilisateur pris en charge (React, Preact, Svelte, Vue, Solid, Lit et Alpine)](https://docs.astro.build/fr/core-concepts/framework-components/) dans vos fichiers MDX.
 Pour en savoir plus sur [l'utilisation de composants dans MDX](https://docs.astro.build/fr/guides/markdown-content/#using-components-in-mdx), consultez la documentation Astro.
+
+### Compatibilité avec les styles de Starlight
+
+Starlight applique des styles par défaut à votre contenu Markdown, par exemple en ajoutant une marge entre les éléments.
+Si ces styles entrent en conflit avec l'apparence de votre composant, définissez la classe `not-content` sur votre composant pour les désactiver.
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Contenu non affecté par les styles par défaut de Starlight.</p>
+</div>
+```
 
 ## Composants intégrés
 
@@ -49,53 +64,57 @@ Chaque `<TabItem>` doit avoir un `label` à afficher aux utilisateurs.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 Le code ci-dessus génère les onglets suivants sur la page :
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
-### Cards
+### Cartes
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 Vous pouvez afficher du contenu dans une boîte correspondant aux styles de Starlight en utilisant le composant `<Card>`.
 Enveloppez plusieurs cartes dans le composant `<CardGrid>` pour afficher les cartes côte à côte lorsqu'il y a suffisamment d'espace.
 
-Une `<Card>` nécessite un `titre` et peut éventuellement inclure un attribut `icon` fixé au nom de [l'une des icônes intégrées de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+Une `<Card>` nécessite un `title` et peut optionellement inclure un attribut `icon` fixé au nom de [l'une des icônes intégrées de Starlight](#toutes-les-icônes).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<Card title="Check this out">Contenu intéressant que vous souhaitez mettre en évidence.</Card>
+<Card title="Check this out">
+	Contenu intéressant que vous souhaitez mettre en évidence.
+</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 ```
 
 Le code ci-dessus génère ce qui suit sur la page :
 
-<Card title="Check this out">Contenu intéressant que vous souhaitez mettre en évidence.</Card>
+<Card title="Check this out">
+	Contenu intéressant que vous souhaitez mettre en évidence.
+</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 
 :::tip
@@ -104,8 +123,77 @@ Ajoutez l'attribut `stagger` pour décaler verticalement la deuxième colonne de
 
 ```astro
 <CardGrid stagger>
-  <!-- cards -->
+	<!-- cards -->
 </CardGrid>
 ```
 
 :::
+
+### Cartes de Liaison
+
+Utilisez le composant `<LinkCard>` pour créer un lien bien visible vers différentes pages.
+
+Une `<LinkCard>` nécessite les attributs `title` et [`href`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/a#href). Vous pouvez optionellement inclure une courte `description` ou d'autres attributs de lien tels que `target`.
+
+Regroupez plusieurs composants `<LinkCard>` dans `<CardGrid>` pour afficher les cartes côte à côte lorsqu'il y a suffisamment d'espace.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personnalisation de Starlight"
+	description="Apprenez à personnaliser votre site Starlight avec vos propres styles, vos polices et bien plus encore."
+	href="/fr/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Création de contenu en Markdown"
+		href="/fr/guides/authoring-content/"
+	/>
+	<LinkCard title="Composants" href="/fr/guides/components/" />
+</CardGrid>
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personnaliser Starlight"
+	description="Apprenez à personnaliser votre site Starlight avec vos propres styles, vos polices et bien plus encore."
+	href="/fr/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Création de contenu en Markdown"
+		href="/fr/guides/authoring-content/"
+	/>
+	<LinkCard title="Composants" href="/fr/guides/components/" />
+</CardGrid>
+
+### Icônes
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
+
+Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionellement inclure un attribut `label`, `size` et `color`.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### Toutes les icônes
+
+Une liste de toutes les icônes disponibles est affichée ci-dessous avec leurs noms associés. Cliquez sur une icône pour copier le code du composant.
+
+<IconsList />

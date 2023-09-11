@@ -1,0 +1,130 @@
+---
+title: Starlight Showcase
+description: 发现使用 Starlight 构建的网站和扩展 Starlight 的社区工具！
+---
+
+:::tip[添加你自己的！]
+你是否构建过 Starlight 网站或 Starlight 工具？创建一个 PR 来添加链接到此页面！
+:::
+
+## 网站
+
+import Card from '../../../components/showcase-card.astro';
+import FluidGrid from '../../../components/fluid-grid.astro';
+
+Starlight 已投入生产。 这些是网络上的一些网站：
+
+<FluidGrid>
+	<Card
+		title="Athena OS"
+		href="https://athenaos.org"
+		thumbnail="www.athenaos.org.png"
+	/>
+	<Card
+		title="PubIndexAPI Docs"
+		href="https://docs.pubindexapi.com/"
+		thumbnail="docs.pubindexapi.com.png"
+	/>
+	<Card
+		title="pls"
+		href="https://dhruvkb.github.io/pls"
+		thumbnail="dhruvkb.github.io-pls.png"
+	/>
+	<Card
+		title="capo.js"
+		href="https://rviscomi.github.io/capo.js/"
+		thumbnail="capo.js.png"
+	/>
+	<Card
+		title="Web Monetization API"
+		href="https://webmonetization.org/"
+		thumbnail="webmonetization.org.png"
+	/>
+	<Card
+		title="QBCore Docs"
+		href="https://brycerussell.github.io/qbcore-docs/"
+		thumbnail="brycerussell.github.io-qbcore-docs.png"
+	/>
+	<Card title="har.fyi" href="https://har.fyi/" thumbnail="har.fyi.png" />
+	<Card
+		title="xs-dev docs"
+		href="https://xs-dev.js.org"
+		thumbnail="xs-dev.js.org.png"
+	/>
+	<Card
+		title="Felicity"
+		href="https://felicity.pages.dev/"
+		thumbnail="felicity.pages.dev.png"
+	/>
+	<Card
+		title="NgxEditor"
+		href="https://sibiraj-s.github.io/ngx-editor/"
+		thumbnail="sibiraj-s.github.io-ngx-editor.png"
+	/>
+	<Card
+		title="Astro Error Pages"
+		href="https://astro-error-page-documentation.vercel.app/"
+		thumbnail="astro-error-page-documentation.vercel.app.png"
+	/>
+	<Card
+		title="Terrateam Docs"
+		href="https://terrateam.io/docs"
+		thumbnail="terrateam.io-docs.png"
+	/>
+	<Card
+		title="simple-fm"
+		href="https://simple.arciniega.one"
+		thumbnail="simple.arciniega.one.png"
+	/>
+	<Card
+		title="CommandKit"
+		href="https://commandkit.underctrl.io"
+		thumbnail="commandkit.underctrl.io.png"
+	/>
+	<Card
+		title="Obytes Starter"
+		href="https://starter.obytes.com"
+		thumbnail="starter.obytes.com.jpg"
+	/>
+	<Card
+		title="Kanri"
+		href="https://kanriapp.com"
+		thumbnail="kanriapp.com.png"
+	/>
+</FluidGrid>
+
+查看所有[在 GitHub 上使用 Starlight 的公共项目仓库](https://github.com/withastro/starlight/network/dependents)。
+
+## 社区插件
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+这些社区工具、插件和集成与 Starlight 一起扩展其功能。
+
+<CardGrid>
+	<LinkCard
+		href="https://www.feelback.dev/blog/new-astro-starlight-integration/"
+		title="FeelBack"
+		description="在文档页面中添加用户反馈系统。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-blog"
+		title="starlight-blog"
+		description="添加一个博客到你的文档网站。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links-validator"
+		title="starlight-links-validator"
+		description="在你的 Starlight 页面中检查损坏的链接"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description=" 使用 TypeDoc 从 TypeScript 生成 Starlight 页面。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-openapi"
+		title="starlight-openapi"
+		description="从 OpenAPI/Swagger 规范创建文档页面。"
+	/>
+</CardGrid>

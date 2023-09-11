@@ -9,7 +9,7 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
 
 ## Configurare i18n
 
-1. Indicare a Starlight le lingue che si vuole supportare passando `locales` e `defaultLocale` all'integrazione Starlight:
+1. Indicare a Starlight le lingue che si vuole supportare passando [`locales`](/it/reference/configuration/#locales) e [`defaultLocale`](/it/reference/configuration/#defaultlocale) all'integrazione Starlight:
 
    ```js
    // astro.config.mjs
@@ -17,29 +17,29 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My Docs',
-         // Indica l'inglese come lingua predefinita.
-         defaultLocale: 'en',
-         locales: {
-           // La documentazione in inglese si trova in `src/content/docs/en/`
-           en: {
-             label: 'English',
-           },
-           // La documentazione in cinese semplificato si trova in `src/content/docs/zh/`
-           zh: {
-             label: '简体中文',
-             lang: 'zh-CN',
-           },
-           // La documentazione in arabo si trova in `src/content/docs/ar/`
-           ar: {
-             label: 'العربية',
-             dir: 'rtl',
-           },
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My Docs',
+   			// Indica l'inglese come lingua predefinita.
+   			defaultLocale: 'en',
+   			locales: {
+   				// La documentazione in inglese si trova in `src/content/docs/en/`
+   				en: {
+   					label: 'English',
+   				},
+   				// La documentazione in cinese semplificato si trova in `src/content/docs/zh/`
+   				zh: {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// La documentazione in arabo si trova in `src/content/docs/ar/`
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -75,22 +75,22 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Docs',
-      defaultLocale: 'root', // opzionale
-      locales: {
-        root: {
-          label: 'English',
-          lang: 'en', // necessario per root
-        },
-        zh: {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			defaultLocale: 'root', // opzionale
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en', // necessario per root
+				},
+				zh: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -117,17 +117,17 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Docs',
-      locales: {
-        root: {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			locales: {
+				root: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -143,7 +143,7 @@ Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà 
 
 In aggiunta alla possibilità di avere pagine multilingua, Starlight permette di tradurre le scritte dell'interfaccia (per esempio l'intestazione "In questa pagina" nella tabella dei contenuti) in modo che i lettori possano vedere il sito interamente nella lingua selezionata.
 
-Inglese, francese, tedesco, giapponese, portoghese, spagnolo e italiano sono disponibili di default, e sono benvenute [contribuzioni per aggiungere altre lingue](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Le stringhe dell'interfaccia utente tradotte in inglese, ceco, francese, tedesco, italiano, giapponese, portoghese, olandese, danese, spagnolo, turco, arabo, norvegese, farsi, cinese semplificato, coreano e svedese sono disponibili di default e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
 
@@ -155,8 +155,8 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-     docs: defineCollection({ schema: docsSchema() }),
-     i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ schema: docsSchema() }),
+   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
@@ -175,27 +175,27 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 
 3. Aggiungere traduzioni per le chiavi che vuoi tradurre. Traduci solo i valori, le chiavi non devono essere modificate (per esempio `"search.label": "Buscar"`).
 
-    Queste sono le traduzioni di default per l'inglese:
+   Queste sono le traduzioni di default per l'inglese:
 
    ```json
    {
-     "skipLink.label": "Skip to content",
-     "search.label": "Search",
-     "search.shortcutLabel": "(Press / to Search)",
-     "search.cancelLabel": "Cancel",
-     "themeSelect.accessibleLabel": "Select theme",
-     "themeSelect.dark": "Dark",
-     "themeSelect.light": "Light",
-     "themeSelect.auto": "Auto",
-     "languageSelect.accessibleLabel": "Select language",
-     "menuButton.accessibleLabel": "Menu",
-     "sidebarNav.accessibleLabel": "Main",
-     "tableOfContents.onThisPage": "On this page",
-     "tableOfContents.overview": "Overview",
-     "i18n.untranslatedContent": "This content is not available in your language yet.",
-     "page.editLink": "Edit page",
-     "page.lastUpdated": "Last updated:",
-     "page.previousLink": "Next",
-     "page.nextLink": "Previous"
+   	"skipLink.label": "Skip to content",
+   	"search.label": "Search",
+   	"search.shortcutLabel": "(Press / to Search)",
+   	"search.cancelLabel": "Cancel",
+   	"themeSelect.accessibleLabel": "Select theme",
+   	"themeSelect.dark": "Dark",
+   	"themeSelect.light": "Light",
+   	"themeSelect.auto": "Auto",
+   	"languageSelect.accessibleLabel": "Select language",
+   	"menuButton.accessibleLabel": "Menu",
+   	"sidebarNav.accessibleLabel": "Main",
+   	"tableOfContents.onThisPage": "On this page",
+   	"tableOfContents.overview": "Overview",
+   	"i18n.untranslatedContent": "This content is not available in your language yet.",
+   	"page.editLink": "Edit page",
+   	"page.lastUpdated": "Last updated:",
+   	"page.previousLink": "Next",
+   	"page.nextLink": "Previous"
    }
    ```

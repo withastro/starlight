@@ -29,7 +29,7 @@ MDXやMarkdocを使用する場合、サポートされるMarkdownの機能や�
 
 ## 画像
 
-Starlightは、Astro組み込みのアセット最適化機能を使用して画像を表示します。
+Starlightは、[Astro組み込みのアセット最適化機能](https://docs.astro.build/ja/guides/assets/)を使用して画像を表示します。
 
 MarkdownとMDXは、スクリーンリーダーや支援技術のための代替テキストを含む画像を表示するためのMarkdown構文をサポートしています。
 
@@ -46,7 +46,6 @@ MarkdownとMDXは、スクリーンリーダーや支援技術のための代替
 
 ![宇宙空間に浮かぶロケット](../../assets/images/rocket.svg)
 ```
-
 
 ## 見出し
 
@@ -67,7 +66,6 @@ description: StarlightでのMarkdownの使い方
 ## インラインスタイル
 
 ## 見出し
-
 ```
 
 ### 見出しの自動アンカーリンク
@@ -79,6 +77,7 @@ Markdownで見出しを使用するとアンカーリンクが自動的に付与
 title: 私のページコンテンツ
 description: Starlightの組み込みアンカーリンクの使い方
 ---
+
 ## はじめに
 
 同じページの下部にある[結論](#結論)にリンクできます。
@@ -89,7 +88,6 @@ description: Starlightの組み込みアンカーリンクの使い方
 ```
 
 レベル2（`<h2>`）とレベル3（`<h3>`）の見出しは、ページの目次に自動的に表示されます。
-
 
 ## 補足情報
 
@@ -208,4 +206,3 @@ var fun = function lang(l) {
 ## その他のMarkdown機能
 
 Starlightは、リストやテーブルなど、その他のMarkdown記法をすべてサポートしています。Markdownのすべての構文要素の概要については、[The Markdown GuideのMarkdownチートシート](https://www.markdownguide.org/cheat-sheet/)を参照してください。
-

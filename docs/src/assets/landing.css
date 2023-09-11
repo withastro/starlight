@@ -1,27 +1,87 @@
 :root {
-  --purple-hsl: 255, 60%, 60%;
-  --overlay-blurple: hsla(var(--purple-hsl), 0.2);
+	--purple-hsl: 255, 60%, 60%;
+	--overlay-blurple: hsla(var(--purple-hsl), 0.2);
 }
 
 :root[data-theme='light'] {
-  --purple-hsl: 255, 85%, 65%;
+	--purple-hsl: 255, 85%, 65%;
 }
 
 [data-has-hero] .page {
-  background: linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
-    radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh /
-      105vw 200vh,
-    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50%
-      calc(100% + 20rem) / 60rem 30rem;
+	background:
+		linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
+		radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
+		radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) /
+			60rem 30rem;
 }
 
 [data-has-hero] header {
-  border-bottom: 1px solid transparent;
-  background-color: transparent;
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+	border-bottom: 1px solid transparent;
+	background-color: transparent;
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
 }
 
 [data-has-hero] .hero > img {
-  filter: drop-shadow(0 0 3rem var(--overlay-blurple));
+	filter: drop-shadow(0 0 3rem var(--overlay-blurple));
+}
+
+/* Product Hunt launch banner — can be removed on 30 August 2023. */
+[data-has-hero] .sl-banner {
+	--sl-color-banner-bg: #d73f37;
+	--sl-color-banner-text: #fff;
+	border-block: 1px solid #fff8;
+	padding-block: 0;
+	overflow: hidden;
+}
+
+[data-has-hero] .sl-banner a {
+	text-decoration: 1px underline;
+	text-underline-offset: 0.1em;
+}
+
+.ph-banner {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: clamp(1rem, calc(0.75rem + 1vw), 1.65rem);
+}
+.ph-houston {
+	padding-block: 0.25rem;
+}
+.ph-text {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem 1rem;
+	text-align: start;
+	padding-block: var(--sl-nav-pad-y);
+}
+.ph-text strong {
+	font-weight: 600;
+}
+
+@media (min-width: 23em) {
+	.ph-banner {
+		justify-content: center;
+	}
+
+	.ph-houston img {
+		vertical-align: middle;
+	}
+}
+
+@media (min-width: 40em) {
+	.ph-banner {
+		gap: 3.5rem;
+	}
+	.ph-houston {
+		padding: 0;
+	}
+	.ph-houston img {
+		scale: 1.75;
+	}
+	.ph-text {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
 }

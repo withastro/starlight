@@ -1,5 +1,5 @@
 ---
-title: Frontmatter Reference
+title: Référence du frontmatter
 description: Une vue d'ensemble des champs du frontmatter par défaut pris en charge par Starlight.
 ---
 
@@ -132,4 +132,170 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `banner`
+
+**type:** `{ content: string }`
+
+Montrera une bannière d'annonce en haut de cette page.
+
+La valeur `content` peut inclure du HTML pour les liens ou d'autres contenus.
+Par exemple, cette page affiche une bannière comprenant un lien vers `example.com`.
+
+```md
+---
+title: Page avec une bannière
+banner:
+  content: |
+    On a lancé quelque chose de cool !
+    <a href="https://example.com">Allez-y</a>
+---
+```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Remplace la [configuration globale `lastUpdated`](/fr/reference/configuration/#lastupdated). Si une date est spécifiée, elle doit être un [horodatage YAML](https://yaml.org/type/timestamp.html) valide et remplacera la date stockée dans l'historique Git pour cette page.
+
+```md
+---
+title: Page avec une date de dernière mise à jour personnalisée
+lastUpdated: 2022-08-09
+---
+```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si un string est spécifié, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
+
+```md
+---
+# Masquer le lien de la page précédente
+prev: false
+---
+```
+
+```md
+---
+# Remplacer le texte du lien de la page
+prev: Poursuivre the tutorial
+---
+```
+
+```md
+---
+# Remplacer le lien et le texte de la page
+prev:
+  link: /unrelated-page/
+  label: Consultez cette autre page
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+La même chose que [`prev`](#prev) mais pour le lien de la page suivante.
+
+```md
+---
+# Masquer le lien de la page suivante
+next: false
+---
+```
+
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Définit si cette page doit être incluse dans l'index de recherche de [Pagefind](https://pagefind.app/). Définissez la valeur à `false` pour exclure une page des résultats de recherche :
+
+```md
+---
+# Exclut cette page de l'index de recherche
+pagefind: false
+---
+```
+
+### `sidebar`
+
+**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+
+Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
+
+#### `label`
+
+**type:** `string`  
+**default:** the page [`title`](#title-required)
+
+Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
+
+```md
+---
+title: About this project
+sidebar:
+  label: About
+---
+```
+
+#### `order`
+
+**type:** `number`
+
+Contrôler l'ordre de cette page lors du tri d'un groupe de liens généré automatiquement.
+Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
+
+```md
+---
+title: Page à afficher en premier
+sidebar:
+  order: 1
+---
+```
+
+#### `hidden`
+
+**type:** `boolean`  
+**default:** `false`
+
+Empêche cette page d'être incluse dans un groupe de liens généré automatiquement.
+
+```md
+---
+title: Page à masquer de la barre latérale générée automatiquement
+sidebar:
+  hidden: true
+---
+```
+
+#### `badge`
+
+**type:** <code>string | <a href="/fr/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+Ajoute un badge à la page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
+Lors de l'utilisation d'une chaîne de caractères, le badge sera affiché avec une couleur d'accentuation par défaut.
+Passez éventuellement un [objet `BadgeConfig`](/fr/reference/configuration/#badgeconfig) avec les propriétés `text` et `variant` pour personnaliser le badge.
+
+```md
+---
+title: Page avec un badge
+sidebar:
+  # Utilise la variante par défaut correspondant à la couleur d'accentuation de votre site
+  badge: Nouveau
+---
+```
+
+```md
+---
+title: Page avec un badge
+sidebar:
+  badge:
+    text: Expérimental
+    variant: caution
+---
 ```

@@ -6,144 +6,134 @@ const { html, panels } = processPanels(panelHtml);
 ---
 
 <starlight-tabs>
-  {
-    panels && (
-      <div class="tablist-wrapper">
-        <ul role="tablist">
-          {panels.map(({ label, panelId, tabId }, idx) => (
-            <li role="presentation" class="tab">
-              <a
-                role="tab"
-                href={'#' + panelId}
-                id={tabId}
-                aria-selected={idx === 0 && 'true'}
-                tabindex={idx !== 0 ? -1 : 0}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
-  <Fragment set:html={html} />
+	{
+		panels && (
+			<div class="tablist-wrapper not-content">
+				<ul role="tablist">
+					{panels.map(({ label, panelId, tabId }, idx) => (
+						<li role="presentation" class="tab">
+							<a
+								role="tab"
+								href={'#' + panelId}
+								id={tabId}
+								aria-selected={idx === 0 && 'true'}
+								tabindex={idx !== 0 ? -1 : 0}
+							>
+								{label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		)
+	}
+	<Fragment set:html={html} />
 </starlight-tabs>
 
 <style>
-  starlight-tabs {
-    display: block;
-  }
+	starlight-tabs {
+		display: block;
+	}
 
-  .tablist-wrapper {
-    overflow-x: auto;
-  }
+	.tablist-wrapper {
+		overflow-x: auto;
+	}
 
-  [role='tablist'] {
-    display: flex;
-    list-style: none;
-    border-bottom: 2px solid var(--sl-color-gray-5);
-    padding: 0;
-  }
+	[role='tablist'] {
+		display: flex;
+		list-style: none;
+		border-bottom: 2px solid var(--sl-color-gray-5);
+		padding: 0;
+	}
 
-  [role='tablist'] .tab + .tab {
-    margin-top: 0;
-  }
-  .tab {
-    margin-bottom: -2px;
-  }
-  .tab > [role='tab'] {
-    display: block;
-    padding: 0 1.25rem;
-    text-decoration: none;
-    border-bottom: 2px solid var(--sl-color-gray-5);
-    color: var(--sl-color-gray-3);
-    outline-offset: var(--sl-outline-offset-inside);
-  }
-  .tab [role='tab'][aria-selected] {
-    color: var(--sl-color-white);
-    border-color: var(--sl-color-text-accent);
-    font-weight: 600;
-  }
+	.tab {
+		margin-bottom: -2px;
+	}
+	.tab > [role='tab'] {
+		display: block;
+		padding: 0 1.25rem;
+		text-decoration: none;
+		border-bottom: 2px solid var(--sl-color-gray-5);
+		color: var(--sl-color-gray-3);
+		outline-offset: var(--sl-outline-offset-inside);
+	}
+	.tab [role='tab'][aria-selected] {
+		color: var(--sl-color-white);
+		border-color: var(--sl-color-text-accent);
+		font-weight: 600;
+	}
 
-  .tablist-wrapper ~ :global([role='tabpanel']) {
-    margin-top: 1rem;
-  }
+	.tablist-wrapper ~ :global([role='tabpanel']) {
+		margin-top: 1rem;
+	}
 </style>
 
 <script>
-  class StarlightTabs extends HTMLElement {
-    tabs: HTMLAnchorElement[];
-    panels: HTMLElement[];
+	class StarlightTabs extends HTMLElement {
+		tabs: HTMLAnchorElement[];
+		panels: HTMLElement[];
 
-    constructor() {
-      super();
-      const tablist = this.querySelector<HTMLUListElement>('[role="tablist"]')!;
-      this.tabs = [
-        ...tablist.querySelectorAll<HTMLAnchorElement>('[role="tab"]'),
-      ];
-      this.panels = [
-        ...this.querySelectorAll<HTMLElement>('[role="tabpanel"]'),
-      ];
+		constructor() {
+			super();
+			const tablist = this.querySelector<HTMLUListElement>('[role="tablist"]')!;
+			this.tabs = [...tablist.querySelectorAll<HTMLAnchorElement>('[role="tab"]')];
+			this.panels = [...this.querySelectorAll<HTMLElement>(':scope > [role="tabpanel"]')];
 
-      this.tabs.forEach((tab, i) => {
-        // Handle clicks for mouse users
-        tab.addEventListener('click', (e) => {
-          e.preventDefault();
-          const currentTab = tablist.querySelector('[aria-selected]');
-          if (e.currentTarget !== currentTab) {
-            this.switchTab(e.currentTarget as HTMLAnchorElement, i);
-          }
-        });
+			this.tabs.forEach((tab, i) => {
+				// Handle clicks for mouse users
+				tab.addEventListener('click', (e) => {
+					e.preventDefault();
+					const currentTab = tablist.querySelector('[aria-selected]');
+					if (e.currentTarget !== currentTab) {
+						this.switchTab(e.currentTarget as HTMLAnchorElement, i);
+					}
+				});
 
-        // Handle keyboard input
-        tab.addEventListener('keydown', (e) => {
-          const index = this.tabs.indexOf(e.currentTarget as any);
-          // Work out which key the user is pressing and
-          // Calculate the new tab's index where appropriate
-          const dir =
-            e.key === 'ArrowLeft'
-              ? index - 1
-              : e.key === 'ArrowRight'
-              ? index + 1
-              : e.key === 'ArrowDown'
-              ? 'down'
-              : null;
-          if (dir === null) return;
-          // If the down key is pressed, move focus to the open panel,
-          // otherwise switch to the adjacent tab
-          if (dir === 'down') {
-            e.preventDefault();
-            this.panels[i]?.focus();
-          } else if (this.tabs[dir]) {
-            e.preventDefault();
-            this.switchTab(this.tabs[dir], dir);
-          }
-        });
-      });
-    }
+				// Handle keyboard input
+				tab.addEventListener('keydown', (e) => {
+					const index = this.tabs.indexOf(e.currentTarget as any);
+					// Work out which key the user is pressing and
+					// Calculate the new tab's index where appropriate
+					const nextIndex =
+						e.key === 'ArrowLeft'
+							? index - 1
+							: e.key === 'ArrowRight'
+							? index + 1
+							: e.key === 'Home'
+							? 0
+							: e.key === 'End'
+							? this.tabs.length - 1
+							: null;
+					if (nextIndex === null) return;
+					if (this.tabs[nextIndex]) {
+						e.preventDefault();
+						this.switchTab(this.tabs[nextIndex], nextIndex);
+					}
+				});
+			});
+		}
 
-    switchTab(newTab: HTMLAnchorElement | null | undefined, index: number) {
-      if (!newTab) return;
+		switchTab(newTab: HTMLAnchorElement | null | undefined, index: number) {
+			if (!newTab) return;
 
-      // Mark all tabs as unselected and hide all tab panels.
-      this.tabs.forEach((tab) => {
-        tab.removeAttribute('aria-selected');
-        tab.setAttribute('tabindex', '-1');
-      });
-      this.panels.forEach((oldPanel) => {
-        oldPanel.hidden = true;
-      });
+			// Mark all tabs as unselected and hide all tab panels.
+			this.tabs.forEach((tab) => {
+				tab.removeAttribute('aria-selected');
+				tab.setAttribute('tabindex', '-1');
+			});
+			this.panels.forEach((oldPanel) => {
+				oldPanel.hidden = true;
+			});
 
-      // Show new panel and mark new tab as selected.
-      const newPanel = this.panels[index];
-      if (newPanel) newPanel.hidden = false;
-      // Restore active tab to the default tab order.
-      newTab.removeAttribute('tabindex');
-      newTab.setAttribute('aria-selected', 'true');
-      newTab.focus();
-    }
-  }
+			// Show new panel and mark new tab as selected.
+			const newPanel = this.panels[index];
+			if (newPanel) newPanel.hidden = false;
+			// Restore active tab to the default tab order.
+			newTab.removeAttribute('tabindex');
+			newTab.setAttribute('aria-selected', 'true');
+			newTab.focus();
+		}
+	}
 
-  customElements.define('starlight-tabs', StarlightTabs);
+	customElements.define('starlight-tabs', StarlightTabs);
 </script>

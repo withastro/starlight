@@ -32,14 +32,14 @@ Agregando un logo personalizado al encabezado del sitio es una forma rápida de 
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Docs Con Mi Logo',
-         logo: {
-           src: '/src/assets/mi-logo.svg',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Docs Con Mi Logo',
+   			logo: {
+   				src: './src/assets/mi-logo.svg',
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -51,7 +51,7 @@ El texto del título seguirá estando disponible para lectores de pantalla para 
 starlight({
   title: 'Docs Con Mi Logo',
   logo: {
-    src: '/src/assets/mi-logo.svg',
+    src: './src/assets/mi-logo.svg',
     replacesTitle: true,
   },
 }),
@@ -80,8 +80,8 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
    starlight({
      title: 'Docs Con Mi Logo',
      logo: {
-       light: '/src/assets/logo-claro.svg',
-       dark: '/src/assets/logo-oscuro.svg',
+       light: './src/assets/logo-claro.svg',
+       dark: './src/assets/logo-oscuro.svg',
      },
    }),
    ```
@@ -127,12 +127,12 @@ tableOfContents:
 // astro.config.mjs
 
 defineConfig({
-  integrations: [
-    starlight({
-      title: '',
-      tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '',
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
+		}),
+	],
 });
 ```
 
@@ -159,12 +159,12 @@ tableOfContents: false
 // astro.config.mjs
 
 defineConfig({
-  integrations: [
-    starlight({
-      title: 'Docs con la tabla de contenidos desactivada globalmente',
-      tableOfContents: false,
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Docs con la tabla de contenidos desactivada globalmente',
+			tableOfContents: false,
+		}),
+	],
 });
 ```
 
@@ -175,7 +175,7 @@ defineConfig({
 
 Starlight cuenta con soporte incorporado para agregar enlaces a tus cuentas de redes sociales en el encabezado del sitio mediante la opción [`social`](/es/reference/configuration/#social) en la integración de Starlight.
 
-Actualmente, se admiten enlaces a Codeberg, Discord, GitHub, Mastodon y Twitter. ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
+Actualmente, se admiten enlaces a Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter, y Youtube ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
 
 ```js
 // astro.config.mjs
@@ -183,18 +183,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Docs Con Mis Enlaces Sociales',
-      social: {
-        codeberg: 'https://codeberg.org/knut/examples',
-        discord: 'https://astro.build/chat',
-        github: 'https://github.com/withastro/starlight',
-        mastodon: 'https://m.webtoo.ls/@astro',
-        twitter: 'https://twitter.com/astrodotbuild',
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Docs Con Mis Enlaces Sociales',
+			social: {
+				discord: 'https://astro.build/chat',
+				github: 'https://github.com/withastro/starlight',
+			},
+		}),
+	],
 });
 ```
 
@@ -202,7 +199,7 @@ export default defineConfig({
 
 Starlight puede mostrar un enlace ”Editar página” en el pie de cada página. Esto facilita que los lectores encuentren el archivo que deben editar para mejorar tus documentos. Para proyectos de código abierto en particular, esto puede ayudar a fomentar las contribuciones de tu comunidad.
 
-Para habilitar los enlaces de edición, establece [`editLink.baseUrl`](/es/reference/configuration/#editlink) en la URL utilizada para editar tu repositorio en la configuración de integración de Starlight. 
+Para habilitar los enlaces de edición, establece [`editLink.baseUrl`](/es/reference/configuration/#editlink) en la URL utilizada para editar tu repositorio en la configuración de integración de Starlight.
 El valor de `editLink.baseUrl` se añadirá al inicio de la ruta de la página actual para formar el enlace de edición completo.
 
 Algunos patrones comunes incluyen:
@@ -214,21 +211,20 @@ Si tu proyecto de Starlight no se encuentra en la raíz de tu repositorio, inclu
 
 Este ejemplo muestra el enlace de edición configurado para la documentación de Starlight, que se encuentra en el subdirectorio `docs/` en la rama `main` del repositorio `withastro/starlight` en GitHub:
 
-
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Docs Con Enlaces De Edición',
-      editLink: {
-        baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Docs Con Enlaces De Edición',
+			editLink: {
+				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+			},
+		}),
+	],
 });
 ```
 
@@ -247,7 +243,6 @@ Los sitios de Starlight muestran de forma predeterminada una página de error 40
 
 </FileTree>
 
-
 Puedes utilizar todas las técnicas de diseño y personalización de páginas de Starlight en tu página de error 404. Por ejemplo, la página de error 404 predeterminada utiliza la [plantilla `splash`](#diseño-de-página) y el componente [`hero`](/es/reference/frontmatter/#hero) en el frontmatter:
 
 ```md
@@ -260,40 +255,6 @@ hero:
   tagline: Página no encontrada. Verifica la URL o intenta usar la barra de búsqueda.
 ---
 ```
-
-## Estilos CSS personalizados
-
-Personaliza los estilos aplicados a tu sitio de Starlight proporcionando archivos CSS adicionales para modificar o extender los estilos predeterminados de Starlight.
-
-1. Agrega un archivo CSS al directorio `src/`.
-   Por ejemplo, podrías anular el tono de acento azul predeterminado de Starlight y establecerlo en púrpura:
-
-   ```css
-   /* src/styles/custom.css */
-   :root {
-     --sl-hue-accent: 270;
-   }
-   ```
-
-2. Agrega la ruta de tu archivo CSS al array `customCss` de Starlight en el archivo `astro.config.mjs`:
-
-   ```js
-   // astro.config.mjs
-   import { defineConfig } from 'astro/config';
-   import starlight from '@astrojs/starlight';
-
-   export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Docs Con Un CSS Personalizado',
-         customCss: [
-           // Ruta hacia tu archivo CSS personalizado, comenzando con /
-           '/src/styles/custom.css',
-         ],
-       }),
-     ],
-   });
-   ```
 
 ## Fuentes personalizadas
 
@@ -323,18 +284,18 @@ Para utilizar Google Fonts, sigue la [guía de configuración de Fontsource](#co
    </FileTree>
 
 2. Agrega una declaración [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) para cada una de tus fuentes en `src/fonts/font-face.css`.
-Utiliza una ruta relativa al archivo de fuente dentro de la función `url()`.
+   Utiliza una ruta relativa al archivo de fuente dentro de la función `url()`.
 
    ```css
    /* src/fonts/font-face.css */
 
    @font-face {
-     font-family: 'Fuente Personalizada';
-     /* Utiliza una ruta relativa al archivo de fuente local dentro de la función `url()`. */
-     src: url('./FuentePersonalizada.woff2') format('woff2');
-     font-weight: normal;
-     font-style: normal;
-     font-display: swap;
+   	font-family: 'Fuente Personalizada';
+   	/* Utiliza una ruta relativa al archivo de fuente local dentro de la función `url()`. */
+   	src: url('./FuentePersonalizada.woff2') format('woff2');
+   	font-weight: normal;
+   	font-style: normal;
+   	font-display: swap;
    }
    ```
 
@@ -346,56 +307,56 @@ Utiliza una ruta relativa al archivo de fuente dentro de la función `url()`.
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Docs Con Un Tipo De Letra Personalizado',
-         customCss: [
-           // Ruta al archivo CSS de `@font-face`.
-           '/src/fonts/font-face.css',
-         ],
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Docs Con Un Tipo De Letra Personalizado',
+   			customCss: [
+   				// Ruta relativa al archivo CSS de `@font-face`.
+   				'./src/fonts/font-face.css',
+   			],
+   		}),
+   	],
    });
    ```
 
 #### Configurar una fuente de Fontsource
 
-El proyecto [Fontsource](https://fontsource.org/) simplifica el uso de fuentes de Google Fonts y otras fuentes de código abierto. 
+El proyecto [Fontsource](https://fontsource.org/) simplifica el uso de fuentes de Google Fonts y otras fuentes de código abierto.
 Proporciona módulos npm que puedes instalar para las fuentes que deseas utilizar e incluye archivos CSS listos para usar que puedes agregar a tu proyecto.
 
 1.  Encuentra la fuente que deseas utilizar en el catálogo de [Fontsource](https://fontsource.org/).
-En este ejemplo, se utilizará [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
+    En este ejemplo, se utilizará [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
 
 2.  Instala el paquete para la fuente que has elegido.
-Puedes encontrar el nombre del paquete haciendo clic en “Install” en la página de la fuente de Fontsource.
+    Puedes encontrar el nombre del paquete haciendo clic en “Install” en la página de la fuente de Fontsource.
 
-         <Tabs>
+             <Tabs>
 
-    <TabItem label="npm">
+        <TabItem label="npm">
 
-    ```sh
-    npm install @fontsource/ibm-plex-serif
-    ```
+        ```sh
+        npm install @fontsource/ibm-plex-serif
+        ```
 
-           </TabItem>
+               </TabItem>
 
-        <TabItem label="pnpm">
+            <TabItem label="pnpm">
 
-    ```sh
-    pnpm install @fontsource/ibm-plex-serif
-    ```
+        ```sh
+        pnpm install @fontsource/ibm-plex-serif
+        ```
 
-           </TabItem>
+               </TabItem>
 
-        <TabItem label="Yarn">
+            <TabItem label="Yarn">
 
-    ```sh
-    yarn add @fontsource/ibm-plex-serif
-    ```
+        ```sh
+        yarn add @fontsource/ibm-plex-serif
+        ```
 
-           </TabItem>
+               </TabItem>
 
-      </Tabs>
+          </Tabs>
 
 3.  Agrega los archivos CSS de Fontsource al arreglo `customCss` de Starlight en `astro.config.mjs`.
 
@@ -405,16 +366,16 @@ Puedes encontrar el nombre del paquete haciendo clic en “Install” en la pág
     import starlight from '@astrojs/starlight';
 
     export default defineConfig({
-      integrations: [
-        starlight({
-          title: 'Docs Con Un Tipo De Letra Personalizado',
-          customCss: [
-            // Archivos de Fontsource para las variantes de fuente regular y semi-bold.
-            '@fontsource/ibm-plex-serif/400.css',
-            '@fontsource/ibm-plex-serif/600.css',
-          ],
-        }),
-      ],
+    	integrations: [
+    		starlight({
+    			title: 'Docs Con Un Tipo De Letra Personalizado',
+    			customCss: [
+    				// Archivos de Fontsource para las variantes de fuente regular y semi-bold.
+    				'@fontsource/ibm-plex-serif/400.css',
+    				'@fontsource/ibm-plex-serif/600.css',
+    			],
+    		}),
+    	],
     });
     ```
 
@@ -422,14 +383,14 @@ Puedes encontrar el nombre del paquete haciendo clic en “Install” en la pág
 
 ### Usar fuentes
 
-Para aplicar la fuente que configuraste a tu sitio, utiliza el nombre de la fuente elegida en un archivo CSS personalizado.
+Para aplicar la fuente que configuraste a tu sitio, utiliza el nombre de la fuente elegida en un [archivo CSS personalizado](/es/guides/css-and-tailwind/#custom-css-styles).
 Por ejemplo, para anular la fuente predeterminada de Starlight en todas partes, establece la propiedad personalizada `--sl-font`:
 
 ```css
 /* src/styles/custom.css */
 
 :root {
-  --sl-font: 'IBM Plex Serif', serif;
+	--sl-font: 'IBM Plex Serif', serif;
 }
 ```
 
@@ -440,6 +401,8 @@ Por ejemplo, para establecer una fuente solo en el contenido principal, pero no 
 /* src/styles/custom.css */
 
 main {
-  font-family: 'IBM Plex Serif', serif;
+	font-family: 'IBM Plex Serif', serif;
 }
 ```
+
+Sigue las [instrucciones de CSS personalizado](/guides/css-and-tailwind/#estilos-css-personalizados) para agregar tus estilos a tu sitio.

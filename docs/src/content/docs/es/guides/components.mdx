@@ -23,11 +23,45 @@ import OtroComponente from '../../componentes/OtroComponente.astro';
 <UnComponente prop="algo" />
 
 <OtroComponente>
-  Los componentes también pueden contener **contenido anidado**.
+	Los componentes también pueden contener **contenido anidado**.
 </OtroComponente>
 ```
 
 Debido a que Starlight está impulsado por Astro, puedes agregar soporte para componentes construidos con cualquier [framework UI compatible (React, Preact, Svelte, Vue, Solid, Lit y Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) en tus archivos MDX.
+
+### Compatibilidad con los estilos de Starlight
+
+Starlight aplica estilos predeterminados a tu contenido de Markdown, por ejemplo, agregando márgenes entre elementos.
+Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para desactivarlos.
+
+```astro
+---
+// src/components/Ejemplo.astro
+---
+
+<div class="not-content">
+	<p>
+		No se ve afectado por los estilos predeterminados de contenido de Starlight.
+	</p>
+</div>
+```
+
+### Compatibilidad con los estilos de Starlight
+
+Starlight aplica estilos predeterminados a tu contenido en Markdown, por ejemplo, añadiendo margen entre elementos.
+Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para deshabilitarlos.
+
+```astro
+---
+// src/components/Ejemplo.astro
+---
+
+<div class="not-content">
+	<p>
+		No se ve afectado por el estilo de contenido predeterminado de Starlight.
+	</p>
+</div>
+```
 
 ## Componentes integrados
 
@@ -43,16 +77,16 @@ Puedes mostrar una interfaz con pestañas utilizando los componentes `<Tabs>` y 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 El código anterior genera las siguientes pestañas en la página:
 
 <Tabs>
-  <TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Estrellas">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lunas">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Tarjetas
@@ -61,34 +95,38 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 Puedes mostrar contenido en una caja que coincida con los estilos de Starlight utilizando el componente `<Card>`. Envuelve varias tarjetas en el componente `<CardGrid>` para mostrar las tarjetas una al lado de la otra cuando hay suficiente espacio.
 
-El componente `<Card>` requiere un `title` y opcionalmente puede incluir un atributo `icon` establecido con el nombre de [uno de los iconos integrados de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+El componente `<Card>` requiere un `title` y opcionalmente puede incluir un atributo `icon` establecido con el nombre de [uno de los iconos integrados de Starlight](#todos-los-iconos).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<Card title="¡Echa un vistazo a esto!">Contenido interesante que quieres resaltar.</Card>
+<Card title="¡Echa un vistazo a esto!">
+	Contenido interesante que quieres resaltar.
+</Card>
 
 <CardGrid>
-  <Card title="Estrellas" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Lunas" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Estrellas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Lunas" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 ```
 
 El código anterior genera lo siguiente en la página:
 
-<Card title="¡Echa un vistazo a esto!">Contenido interesante que quieres resaltar.</Card>
+<Card title="¡Echa un vistazo a esto!">
+	Contenido interesante que quieres resaltar.
+</Card>
 
 <CardGrid>
-  <Card title="Estrellas" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Lunas" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Estrellas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Lunas" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 
 :::tip
@@ -96,8 +134,77 @@ Utiliza una cuadrícula de tarjetas en tu página de inicio para mostrar las car
 
 ```astro
 <CardGrid stagger>
-  <!-- tarjetas -->
+	<!-- tarjetas -->
 </CardGrid>
 ```
 
 :::
+
+### Tarjetas de enlace
+
+Usa el componente `<LinkCard>` para vincular de forma prominente a diferentes páginas.
+
+Un `<LinkCard>` requiere un `title` y un atributo [`href`](https://developer.mozilla.org/es/docs/Web/HTML/Element/a#href). Opcionalmente puedes incluir una breve `description` u otros atributos de enlace como `target`.
+
+Agrupa varios componentes `<LinkCard>` en `<CardGrid>` para mostrar las tarjetas una al lado de la otra cuando hay suficiente espacio.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personalizando Starlight"
+	description="Aprende a hacer que tu sitio Starlight sea único con estilos personalizados, fuentes y más."
+	href="/es/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Creación de contenido en Markdown"
+		href="/es/guides/authoring-content/"
+	/>
+	<LinkCard title="Componentes" href="/es/guides/components/" />
+</CardGrid>
+```
+
+El código anterior genera lo siguiente en la página:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Personalizando Starlight"
+	description="Aprende a hacer que tu sitio Starlight sea único con estilos personalizados, fuentes y más."
+	href="/es/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Creación de contenido en Markdown"
+		href="/es/guides/authoring-content/"
+	/>
+	<LinkCard title="Componentes" href="/es/guides/components/" />
+</CardGrid>
+
+### Iconos
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight proporciona un conjunto de iconos comunes que puedes mostrar en tu contenido utilizando el componente `<Icon>`.
+
+Cada `<Icon>` requiere un atributo `name` que se puede encontrar en la lista de [todos los iconos](#all-icons), y opcionalmente puede incluir atributos como `label`, `size` y `color`.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+El código anterior genera lo siguiente en la página:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### Todos los iconos
+
+A continuación se muestra una lista de todos los iconos disponibles con sus nombres asociados. Haz clic en un ícono para copiar el código del componente correspondiente.
+
+<IconsList />

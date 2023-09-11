@@ -1,0 +1,56 @@
+---
+title: Starlight 🌟 使用 Astro 构建文档站点
+description: Starlight 帮助你使用 Astro 构建漂亮、高性能的文档网站。
+template: splash
+banner:
+  content: |
+    <span class="ph-banner">
+      <span class="ph-houston"><img src="/ph-houston.svg" alt="" width="72" height="72"/></span>
+      <span class="ph-text">
+        <strong>欢迎 Product Hunters&nbsp;👋</strong>
+        <a href="https://www.producthunt.com/posts/starlight-by-astro">我们现在已上线！</a>
+      </span>
+    </span>
+hero:
+  title: Starlight <br/> 使你的文档闪耀夺目
+  tagline: 快速、易用、易于访问 —— 构建卓越文档网站所需的一切。
+  image:
+    file: ../../../assets/hero-star.webp
+  actions:
+    - text: 开始使用
+      icon: right-arrow
+      variant: primary
+      link: /zh/getting-started/
+    - text: 在 GitHub 上查看
+      icon: external
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../../components/about-astro.astro';
+
+<CardGrid stagger>
+	<Card title="令人愉悦的文档" icon="open-book">
+		包括：网站导航、搜索、国际化、SEO、易于阅读的排版、代码高亮、深色模式等等。
+	</Card>
+	<Card title="由 Astro 提供支持" icon="rocket">
+		充分利用 Astro 的全部功能和性能。使用你最喜欢的 Astro 集成和库扩展
+		Starlight。
+	</Card>
+	<Card title="Markdown、Markdoc 和 MDX" icon="document">
+		带上你最喜欢的标记语言。Starlight 为你提供了内置的 frontmatter 验证和
+		TypeScript 类型安全。
+	</Card>
+	<Card title="带上你自己的 UI 组件" icon="puzzle">
+		Starlight 作为一个不依赖于框架的完整文档解决方案。可以使用
+		React、Vue、Svelte、Solid 等进行扩展。
+	</Card>
+</CardGrid>
+
+<AboutAstro title="由以下提供支持">
+Astro 是专为速度而设计的全能 Web 框架。
+从任何地方获取你的内容并在任何地方部署，所有这些都由你喜欢的 UI 组件和库提供支持。
+
+[了解 Astro](https://astro.build/)
+
+</AboutAstro>

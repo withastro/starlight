@@ -26,12 +26,27 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 <SomeComponent prop="something" />
 
 <AnotherComponent>
-  Components can also contain **nested content**.
+	Components can also contain **nested content**.
 </AnotherComponent>
 ```
 
 Because Starlight is powered by Astro, you can add support for components built with any [supported UI framework (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) in your MDX files.
 Learn more about [using components in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) in the Astro docs.
+
+### Compatibility with Starlight’s styles
+
+Starlight applies default styling to your Markdown content, for example adding margin between elements.
+If these styles conflict with your component’s appearance, set the `not-content` class on your component to disable them.
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Not impacted by Starlight’s default content styling.</p>
+</div>
+```
 
 ## Built-in components
 
@@ -49,16 +64,16 @@ Each `<TabItem>` must have a `label` to display to users.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 The code above generates the following tabs on the page:
 
 <Tabs>
-  <TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-  <TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Cards
@@ -68,7 +83,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 You can display content in a box matching Starlight’s styles using the `<Card>` component.
 Wrap multiple cards in the `<CardGrid>` component to display cards side-by-side when there’s enough space.
 
-A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](#all-icons).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -76,12 +91,12 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Card title="Check this out">Interesting content you want to highlight.</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 ```
 
@@ -90,12 +105,12 @@ The code above generates the following on the page:
 <Card title="Check this out">Interesting content you want to highlight.</Card>
 
 <CardGrid>
-  <Card title="Stars" icon="star">
-    Sirius, Vega, Betelgeuse
-  </Card>
-  <Card title="Moons" icon="moon">
-    Io, Europa, Ganymede
-  </Card>
+	<Card title="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
 </CardGrid>
 
 :::tip
@@ -104,8 +119,71 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 
 ```astro
 <CardGrid stagger>
-  <!-- cards -->
+	<!-- cards -->
 </CardGrid>
 ```
 
 :::
+
+### Link Cards
+
+Use the `<LinkCard>` component to link prominently to different pages.
+
+A `<LinkCard>` requires a `title` and an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) attribute. You can optionally include a short `description` or other link attributes such as `target`.
+
+Group multiple `<LinkCard>` components in `<CardGrid>` to display cards side-by-side when there’s enough space.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Customizing Starlight"
+	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+	href="/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/guides/components/" />
+</CardGrid>
+```
+
+The above code generates the following on the page:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Customizing Starlight"
+	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+	href="/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+	<LinkCard title="Components" href="/guides/components/" />
+</CardGrid>
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../components/icons-list.astro';
+
+Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
+
+Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+The code above generates the following on the page:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### All icons
+
+A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
+
+<IconsList />

@@ -1,0 +1,21 @@
+{
+  "name": "@example/starlight-tailwind",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.9.1",
+    "@astrojs/starlight-tailwind": "^2.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "astro": "^3.0.6",
+    "sharp": "^0.32.5",
+    "tailwindcss": "^3.3.3"
+  }
+}
