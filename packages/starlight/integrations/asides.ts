@@ -39,6 +39,14 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * :::
  * ```
  *
+ * Or this alternative syntax
+ *
+ * ```
+ * :::tip{title="Did you know?"}
+ * Astro helps you build faster websites with “Islands Architecture”.
+ * :::
+ * ```
+ *
  * will produce this output
  *
  * ```astro
@@ -97,7 +105,11 @@ function remarkAsides(): Plugin<[], Root> {
 
 	const transformer: Transformer<Root> = (tree) => {
 		visit(tree, (node, index, parent) => {
-			if (!parent || index === null || node.type !== 'containerDirective') {
+			if (
+				!parent ||
+				index === null ||
+				(node.type !== 'textDirective' && node.type !== 'containerDirective')
+			) {
 				return;
 			}
 			const variant = node.name;
@@ -107,7 +119,8 @@ function remarkAsides(): Plugin<[], Root> {
 			// its children, but we want to pass it as the title prop to <Aside>, so
 			// we iterate over the children, find a directive label, store it for the
 			// title prop, and remove the paragraph from children.
-			let title = defaultTitles[variant];
+			let title = node.attributes?.title || defaultTitles[variant];
+
 			remove(node, (child): boolean | void => {
 				if (child.data?.directiveLabel) {
 					if (
