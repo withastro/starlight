@@ -71,7 +71,7 @@ const pagefindEnabled =
 				}
 			}
 		</style>
-		<ThemeProvider />
+		<ThemeProvider {...route} />
 	</head>
 	<body>
 		<SkipLink {...route} />
@@ -89,15 +89,15 @@ const pagefindEnabled =
 					<Banner {...route} />
 					{
 						route.entry.data.hero ? (
-							<ContentPanel>
+							<ContentPanel {...route}>
 								<Hero {...route} />
-								<MarkdownContent>
+								<MarkdownContent {...route}>
 									<slot />
 								</MarkdownContent>
 							</ContentPanel>
 						) : (
 							<>
-								<ContentPanel>
+								<ContentPanel {...route}>
 									<h1
 										id="_top"
 										data-page-title
@@ -107,8 +107,8 @@ const pagefindEnabled =
 									</h1>
 									{route.isFallback && <FallbackContentNotice {...route} />}
 								</ContentPanel>
-								<ContentPanel>
-									<MarkdownContent>
+								<ContentPanel {...route}>
+									<MarkdownContent {...route}>
 										<slot />
 									</MarkdownContent>
 									<Footer {...route} />
