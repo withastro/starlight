@@ -342,6 +342,23 @@ starlight({
 });
 ```
 
+### `components`
+
+**type:** `Record<string, string>`
+
+Define custom components overrides for internal Starlight components.
+
+Use the path of the component relative to [Starlight's component folder](https://github.com/withastro/starlight/tree/main/packages/starlight/components) as the key, and the path from your project root to your custom component as the value.
+
+```js
+starlight({
+  components: {
+    Badge: './src/components/Badge.astro',
+    'TableOfContents/MobileTableOfContents.astro': './src/components/MobileTOC.astro'
+  }
+})
+```
+
 ### `head`
 
 **type:** [`HeadConfig[]`](#headconfig)
