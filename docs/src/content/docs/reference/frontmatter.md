@@ -111,7 +111,7 @@ hero:
 ---
 ```
 
-To add support for a dark / light responsive hero image, modify the `hero.image` object like this, leaving other properties untouched.
+You can display different versions of the hero image in light and dark modes.
 
 ```md
 ---
