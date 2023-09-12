@@ -4,6 +4,7 @@ import Badge from '../components/Badge.astro';
 import { BadgeConfigSchema, type BadgeUserConfig } from '../schemas/badge';
 import { errorMap } from '../utils/error-map';
 import type { HTMLAttributes } from 'astro/types';
+import { AstroError } from 'astro/errors';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
@@ -13,7 +14,17 @@ interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 
 const { title, badge, description, ...attributes } = Astro.props;
 
-const badgeData = BadgeConfigSchema().parse(badge, { errorMap });
+const badgeData = BadgeConfigSchema().safeParse(badge, { errorMap });
+
+if (!badgeData.success) {
+	throw new AstroError(
+		'Invalid `badge` prop passed to `<LinkCard>` for route `' +
+			Astro.url.pathname +
+			'`.\n\n' +
+			badgeData.error.issues.map((i) => i.message).join('\n'),
+		'Find out more at https://starlight.astro.build/reference/frontmatter/#badge'
+	);
+}
 ---
 
 <div>
@@ -26,7 +37,7 @@ const badgeData = BadgeConfigSchema().parse(badge, { errorMap });
 				badge && (
 					<>
 						{' '}
-						<Badge {...badgeData} />
+						<Badge {...badgeData.data} />
 					</>
 				)
 			}
