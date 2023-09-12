@@ -1,19 +1,19 @@
 ---
 import Icon from './Icon.astro';
 import Badge from '../components/Badge.astro';
-import type { Badge as BadgeType } from '../schemas/badge';
-import { BadgeConfigSchema } from '../schemas/badge';
+import { BadgeConfigSchema, type BadgeUserConfig } from '../schemas/badge';
+import { errorMap } from '../utils/error-map';
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
-	badge: BadgeType | undefined;
+	badge?: BadgeUserConfig;
 	description?: string;
 }
 
 const { title, badge, description, ...attributes } = Astro.props;
 
-const badgeData = BadgeConfigSchema().parse(badge);
+const badgeData = BadgeConfigSchema().parse(badge, { errorMap });
 ---
 
 <div>
