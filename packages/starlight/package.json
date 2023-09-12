@@ -26,6 +26,8 @@
   "exports": {
     ".": "./index.ts",
     "./components": "./components.ts",
+    "./components/*": "./components/*",
+    "./layout/*": "./layout/*",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
     "./index.astro": "./index.astro",

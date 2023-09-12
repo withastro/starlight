@@ -29,6 +29,9 @@ export function vitePluginStarlightUserConfig(
 						opts.logo.light
 				  )}; export const logos = { dark, light };`
 			: 'export const logos = {};',
+		'virtual:starlight/components': Object.entries(opts.components)
+			.map(([name, path]) => `export { default as ${name} } from ${resolveId(path)};`)
+			.join(''),
 	} satisfies Record<string, string>;
 
 	/** Mapping names prefixed with `\0` to their original form. */
