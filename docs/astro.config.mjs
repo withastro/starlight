@@ -51,6 +51,10 @@ export default defineConfig({
 				},
 			],
 			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
+			themeSelection: {
+				showDropdown: true,
+				defaultTheme: 'auto',
+			},
 			locales,
 			sidebar: [
 				{

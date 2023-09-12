@@ -173,6 +173,15 @@ const UserConfigSchema = z.object({
 		.optional()
 		.default({}),
 
+	/** Control theme selection dropdown. */
+	themeSelection: z
+		.object({
+			defaultTheme: z.enum(['auto', 'dark', 'light']).default('auto'),
+			showDropdown: z.boolean().optional().default(true),
+		})
+		.optional()
+		.default({ defaultTheme: 'auto', showDropdown: true }),
+
 	/** Configure locales for internationalization (i18n). */
 	locales: z
 		.object({

@@ -212,6 +212,30 @@ export default defineConfig({
 });
 ```
 
+## Theme control
+
+Starlight provides three options for dark/light theme choise: `dark`, `light` and `auto`. `auto` uses users default environment settings to detect dark or ligh useage.
+
+There are cases, when a fixed `dark` or `light` default theme should be loaded by default, also in some cases it's required to make that option fixed.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Docs With fixed light theme',
+			themeSelection: {
+				showDropdown: false,
+				defaultTheme: 'light',
+			},
+		}),
+	],
+});
+```
+
 ## Edit links
 
 Starlight can display an “Edit page” link in each page’s footer.

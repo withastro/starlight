@@ -1,4 +1,5 @@
 ---
+import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../utils/translations';
 import Select from './Select.astro';
 
@@ -9,20 +10,26 @@ interface Props {
 const t = useTranslations(Astro.props.locale);
 ---
 
-<starlight-theme-select>
-	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
-	<Select
-		icon="laptop"
-		label={t('themeSelect.accessibleLabel')}
-		value="auto"
-		options={[
-			{ label: t('themeSelect.dark'), selected: false, value: 'dark' },
-			{ label: t('themeSelect.light'), selected: false, value: 'light' },
-			{ label: t('themeSelect.auto'), selected: true, value: 'auto' },
-		]}
-		width="6.25em"
-	/>
-</starlight-theme-select>
+{
+	config.themeSelection.showDropdown ? (
+		<starlight-theme-select>
+			{/* TODO: Can we give this select a width that works well for each language’s strings? */}
+			<Select
+				icon="laptop"
+				label={t('themeSelect.accessibleLabel')}
+				value="auto"
+				options={[
+					{ label: t('themeSelect.dark'), selected: false, value: 'dark' },
+					{ label: t('themeSelect.light'), selected: false, value: 'light' },
+					{ label: t('themeSelect.auto'), selected: true, value: 'auto' },
+				]}
+				width="6.25em"
+			/>
+		</starlight-theme-select>
+	) : (
+		<starlight-theme-select />
+	)
+}
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
@@ -30,6 +37,8 @@ const t = useTranslations(Astro.props.locale);
 </script>
 
 <script>
+	import config from 'virtual:starlight/user-config';
+
 	type Theme = 'auto' | 'dark' | 'light';
 
 	class StarlightThemeSelect extends HTMLElement {
@@ -38,12 +47,13 @@ const t = useTranslations(Astro.props.locale);
 
 		constructor() {
 			super();
-			this.#onThemeChange(this.#loadTheme());
+			this.#onThemeChange(this.#predefinedTheme());
 			const select = this.querySelector('select');
 			if (select) {
 				select.addEventListener('change', (e) => {
 					if (e.currentTarget instanceof HTMLSelectElement) {
 						this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
+						this.#storeTheme(this.#parseTheme(e.currentTarget.value));
 					}
 				});
 			}
@@ -68,13 +78,12 @@ const t = useTranslations(Astro.props.locale);
 			StarlightThemeProvider.updatePickers(theme);
 			document.documentElement.dataset.theme =
 				theme === 'auto' ? this.#getPreferredColorScheme() : theme;
-			this.#storeTheme(theme);
 		}
 
 		/** Store the user’s preference in `localStorage`. */
 		#storeTheme(theme: Theme): void {
 			if (typeof localStorage !== 'undefined') {
-				if (theme === 'light' || theme === 'dark') {
+				if (theme === 'auto' || theme === 'light' || theme === 'dark') {
 					localStorage.setItem(this.#key, theme);
 				} else {
 					localStorage.removeItem(this.#key);
@@ -82,10 +91,13 @@ const t = useTranslations(Astro.props.locale);
 			}
 		}
 
-		/** Load the user’s preference from `localStorage`. */
-		#loadTheme(): Theme {
+		/** Load the user’s preference from `localStorage` or use default config value. */
+		#predefinedTheme(): Theme {
 			const theme = typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
-			return this.#parseTheme(theme);
+
+			const predefinedTheme = theme || config.themeSelection.defaultTheme;
+
+			return this.#parseTheme(predefinedTheme);
 		}
 	}
 
