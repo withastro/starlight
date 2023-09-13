@@ -142,8 +142,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@pagefind/default-ui':
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: ^1.0.0
+        version: 1.0.0
       '@types/mdast':
         specifier: ^3.0.11
         version: 3.0.11
@@ -160,8 +160,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       pagefind:
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: ^1.0.0
+        version: 1.0.0
       rehype:
         specifier: ^12.0.1
         version: 12.0.1
@@ -1244,44 +1244,44 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@pagefind/darwin-arm64@1.0.0-beta.3:
-    resolution: {integrity: sha512-GbcPuFv2uWq54cIVOR+6D+tDo+RaZn7lsnhumOGCr5+CzfWwwrdclyEqX+FBxM+EJGgQHRJYJ0zKoeD/8pn4sA==}
+  /@pagefind/darwin-arm64@1.0.0:
+    resolution: {integrity: sha512-SLfl8p9fVxCzGzK22c+ypmeQxulDwWLowkqXWi/DkQ522vwRjg9vI6fIBV+yTZrbbwFI8sOwQSsnL/SqSw82og==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/darwin-x64@1.0.0-beta.3:
-    resolution: {integrity: sha512-5SqPFWsbXAH7dfazxWKiaRTpH1R3ZeXSL8aeUliQkGBQ+Lpqvo+EGe6xtR241RnfFSMM8USJgmWjpFeTkX0f/w==}
+  /@pagefind/darwin-x64@1.0.0:
+    resolution: {integrity: sha512-RLDT2AgiNjTgNjNxaKb7Dj5xC0kU/F380zD50ANE/Xwofr7m/XIBIG/0ULnCjW3r7F/BhDvnMlGp8gMD5xAWAQ==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/default-ui@1.0.0-beta.3:
-    resolution: {integrity: sha512-8YsrybxxbxkxN+hUM5UUaj+NfwKMsXRPydGcDJMzpUD6vispdxHT5Z0HftcCennC5DDtlVNM+pGfS69LH9kqrg==}
+  /@pagefind/default-ui@1.0.0:
+    resolution: {integrity: sha512-aYpzmraaMSXD61sBMsHhXwDvfa38JleVn51ZdUUzmkw0jb1hlMXnJBaUiSm0e5+op5yfoQsH/+VSD5v18rLEnw==}
     dev: false
 
-  /@pagefind/linux-arm64@1.0.0-beta.3:
-    resolution: {integrity: sha512-FvAq7+lKj4mz9Zt+FJiCmEcstePiqgbLu535wWtM6O18CTCiM2SdsUPPcysETLUk53nP82bxRiFFYu83B+jgew==}
+  /@pagefind/linux-arm64@1.0.0:
+    resolution: {integrity: sha512-TGhpwlrUR1QPBIezKN///OBLP5Vs4PFyTgiVrswrEiDcvc1yQUdQGwUsch+gU2s3aqFo4Ae5nTjiQQzVmxyzOQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/linux-x64@1.0.0-beta.3:
-    resolution: {integrity: sha512-QNDN+GoPdWEj6s4KKyWEUy/59T9waQAEp/o3gNTlOpTlaGpz7rfJmp1njy1FWnVtvCQoO+WOcL7SPQJSqX7O8g==}
+  /@pagefind/linux-x64@1.0.0:
+    resolution: {integrity: sha512-zqZ9/S0mL2Pt6+leVgpdgqDPCTAX2hWz2CSShW1p/59alKIRYEK2JgwkHKBK8UnSC2VJWVtLBiv6K4QzJQ6hww==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/windows-x64@1.0.0-beta.3:
-    resolution: {integrity: sha512-wy6i+6ZG8L8NHlFymrUBvUZD95hN4HXc1j1QDQctEsvtgz0chVCSToggy78DOucsGTXbJxEOC7HzJIoJE+VZvg==}
+  /@pagefind/windows-x64@1.0.0:
+    resolution: {integrity: sha512-WuBvlEhpvR9fabQ4zr8nsTHNAxX7apffz1hLR2w1ROJKKNf7MQ5Qjqi8o/lztX9bBdxJ/JM8gJJXbBd8gfRtlA==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -4903,15 +4903,15 @@ packages:
       - utf-8-validate
     dev: true
 
-  /pagefind@1.0.0-beta.3:
-    resolution: {integrity: sha512-LcajHZGuTsIRwCeazv4hvtMErfLghUIWQ47XBT8QXOU99QLk1iisypR1cDrYIBUTYH+0zTHcHRECkLjLQYI7pw==}
+  /pagefind@1.0.0:
+    resolution: {integrity: sha512-shtV2GEPbn3gjwlgsfv4Q8J30RZzwi3EYD284M6xLOf2oHD2de5qnbwBD4woYP58tt+euDTLzO/c7pwLeKgsGg==}
     hasBin: true
     optionalDependencies:
-      '@pagefind/darwin-arm64': 1.0.0-beta.3
-      '@pagefind/darwin-x64': 1.0.0-beta.3
-      '@pagefind/linux-arm64': 1.0.0-beta.3
-      '@pagefind/linux-x64': 1.0.0-beta.3
-      '@pagefind/windows-x64': 1.0.0-beta.3
+      '@pagefind/darwin-arm64': 1.0.0
+      '@pagefind/darwin-x64': 1.0.0
+      '@pagefind/linux-arm64': 1.0.0
+      '@pagefind/linux-x64': 1.0.0
+      '@pagefind/windows-x64': 1.0.0
     dev: false
 
   /parse-entities@4.0.1:
