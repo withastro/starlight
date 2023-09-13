@@ -264,7 +264,7 @@ sidebar:
 **tipo:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 Agrega una insignia a la página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
-Cuando se usa una string, la insignia se mostrará con el color de acento predeterminado.
+Cuando se usa un string, la insignia se mostrará con el color de acento predeterminado.
 Opcionalmente, pasa un objeto [`BadgeConfig`](/es/reference/configuration/#badgeconfig) con los campos `text` y `variant` para personalizar la insignia.
 ```md
 ---
