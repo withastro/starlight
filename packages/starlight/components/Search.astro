@@ -268,7 +268,7 @@ const pagefindTranslations = {
 	}
 
 	#starlight__search .pagefind-ui__results > * + * {
-		margin-top: 0.5rem;
+		margin-top: 1rem;
 	}
 	#starlight__search .pagefind-ui__result {
 		border: 0;
@@ -277,7 +277,7 @@ const pagefindTranslations = {
 
 	#starlight__search .pagefind-ui__result-nested {
 		position: relative;
-		padding: 0.75rem 1rem;
+		padding: 0.5rem 1rem;
 		padding-inline-start: 3rem;
 	}
 
@@ -285,7 +285,6 @@ const pagefindTranslations = {
 	#starlight__search .pagefind-ui__result-nested {
 		position: relative;
 		background-color: var(--sl-color-black);
-		border-radius: 0.25rem;
 	}
 
 	#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
@@ -307,13 +306,33 @@ const pagefindTranslations = {
 		margin-top: 0;
 	}
 
+	#starlight__search .pagefind-ui__result-inner > :first-child {
+		border-radius: 0.25rem 0.25rem 0 0;
+	}
+	#starlight__search .pagefind-ui__result-inner > :last-child {
+		border-radius: 0 0 0.25rem 0.25rem;
+	}
+
 	#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title {
 		padding: 0.75rem 1rem;
+		padding-inline-start: 3rem;
+	}
+	#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title::before {
+		content: '';
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 0.75rem;
+		width: 1.5rem;
+		background: var(--sl-color-gray-3);
+		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+			center no-repeat;
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+			center no-repeat;
 	}
 
 	#starlight__search .pagefind-ui__result-inner {
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: 1px;
 	}
 
 	#starlight__search .pagefind-ui__result-link {
@@ -327,18 +346,24 @@ const pagefindTranslations = {
 	}
 
 	#starlight__search .pagefind-ui__result-nested .pagefind-ui__result-link::before {
-		/* position: static; */
 		content: unset;
 	}
 
 	#starlight__search .pagefind-ui__result-nested::before {
-		content: '↪︎';
+		content: '';
 		position: absolute;
-		inset-inline-start: 1rem;
-		top: 0.5rem;
-		font-size: 1.3rem;
-		font-weight: 100;
-		color: var(--sl-color-gray-3);
+		inset-block: 0;
+		inset-inline-start: 1.3rem;
+		width: 1.25rem;
+		background: var(--sl-color-gray-4);
+		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 10 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M1 0v1000m0-988H8'/%3E%3C/svg%3E")
+			0% 0% / 100% no-repeat;
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 10 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M1 0v1000m0-988H8'/%3E%3C/svg%3E")
+			0% 0% / 100% no-repeat;
+	}
+	#starlight__search .pagefind-ui__result-nested:last-child::before {
+		-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 10 16'%3E%3Cpath d='M1 0v12m0 0H8'/%3E%3C/svg%3E");
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 10 16'%3E%3Cpath d='M1 0v12m0 0H8'/%3E%3C/svg%3E");
 	}
 
 	#starlight__search .pagefind-ui__result-link::after {
@@ -353,13 +378,8 @@ const pagefindTranslations = {
 	}
 
 	#starlight__search mark {
-		color: var(--sl-color-white);
-		background-color: var(--sl-color-accent-low);
-		font-weight: 500;
-		padding: 0.1em 0.2em;
-	}
-
-	#starlight__search .pagefind-ui__result:focus-within mark {
-		text-decoration: underline;
+		color: var(--sl-color-gray-2);
+		background-color: transparent;
+		font-weight: 600;
 	}
 </style>
