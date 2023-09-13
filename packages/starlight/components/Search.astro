@@ -230,6 +230,23 @@ const pagefindTranslations = {
 </style>
 
 <style is:global>
+	#starlight__search {
+		--sl-search-result-spacing: calc(1.25rem * var(--pagefind-ui-scale));
+		--sl-search-result-pad-inline-start: calc(3.75rem * var(--pagefind-ui-scale));
+		--sl-search-result-pad-inline-end: calc(1.25rem * var(--pagefind-ui-scale));
+		--sl-search-result-pad-block: calc(0.9375rem * var(--pagefind-ui-scale));
+		--sl-search-result-nested-pad-block: calc(0.625rem * var(--pagefind-ui-scale));
+		--sl-search-corners: calc(0.3125rem * var(--pagefind-ui-scale));
+		--sl-search-page-icon-size: calc(1.875rem * var(--pagefind-ui-scale));
+		--sl-search-page-icon-inline-start: calc(
+			(var(--sl-search-result-pad-inline-start) - var(--sl-search-page-icon-size)) / 2
+		);
+		--sl-search-tree-diagram-size: calc(2.5rem * var(--pagefind-ui-scale));
+		--sl-search-tree-diagram-inline-start: calc(
+			(var(--sl-search-result-pad-inline-start) - var(--sl-search-tree-diagram-size)) / 2
+		);
+	}
+
 	#starlight__search .pagefind-ui__form::before {
 		--pagefind-ui-text: var(--sl-color-gray-1);
 		opacity: 1;
@@ -268,7 +285,7 @@ const pagefindTranslations = {
 	}
 
 	#starlight__search .pagefind-ui__results > * + * {
-		margin-top: 1rem;
+		margin-top: var(--sl-search-result-spacing);
 	}
 	#starlight__search .pagefind-ui__result {
 		border: 0;
@@ -277,8 +294,8 @@ const pagefindTranslations = {
 
 	#starlight__search .pagefind-ui__result-nested {
 		position: relative;
-		padding: 0.5rem 1rem;
-		padding-inline-start: 3rem;
+		padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
+		padding-inline-start: var(--sl-search-result-pad-inline-start);
 	}
 
 	#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
@@ -307,22 +324,22 @@ const pagefindTranslations = {
 	}
 
 	#starlight__search .pagefind-ui__result-inner > :first-child {
-		border-radius: 0.25rem 0.25rem 0 0;
+		border-radius: var(--sl-search-corners) var(--sl-search-corners) 0 0;
 	}
 	#starlight__search .pagefind-ui__result-inner > :last-child {
-		border-radius: 0 0 0.25rem 0.25rem;
+		border-radius: 0 0 var(--sl-search-corners) var(--sl-search-corners);
 	}
 
 	#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title {
-		padding: 0.75rem 1rem;
-		padding-inline-start: 3rem;
+		padding: var(--sl-search-result-pad-block) var(--sl-search-result-pad-inline-end);
+		padding-inline-start: var(--sl-search-result-pad-inline-start);
 	}
 	#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title::before {
 		content: '';
 		position: absolute;
 		inset-block: 0;
-		inset-inline-start: 0.75rem;
-		width: 1.5rem;
+		inset-inline-start: var(--sl-search-page-icon-inline-start);
+		width: var(--sl-search-page-icon-size);
 		background: var(--sl-color-gray-3);
 		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
 			center no-repeat;
@@ -353,17 +370,17 @@ const pagefindTranslations = {
 		content: '';
 		position: absolute;
 		inset-block: 0;
-		inset-inline-start: 1.3rem;
-		width: 1.25rem;
+		inset-inline-start: var(--sl-search-tree-diagram-inline-start);
+		width: var(--sl-search-tree-diagram-size);
 		background: var(--sl-color-gray-4);
-		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 10 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M1 0v1000m0-988H8'/%3E%3C/svg%3E")
+		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
 			0% 0% / 100% no-repeat;
-		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 10 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M1 0v1000m0-988H8'/%3E%3C/svg%3E")
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
 			0% 0% / 100% no-repeat;
 	}
 	#starlight__search .pagefind-ui__result-nested:last-child::before {
-		-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 10 16'%3E%3Cpath d='M1 0v12m0 0H8'/%3E%3C/svg%3E");
-		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 10 16'%3E%3Cpath d='M1 0v12m0 0H8'/%3E%3C/svg%3E");
+		-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 	}
 
 	#starlight__search .pagefind-ui__result-link::after {
@@ -373,7 +390,7 @@ const pagefindTranslations = {
 	}
 
 	#starlight__search .pagefind-ui__result-excerpt {
-		font-size: var(--sl-text-body-sm);
+		font-size: calc(1rem * var(--pagefind-ui-scale));
 		word-break: break-word;
 	}
 
