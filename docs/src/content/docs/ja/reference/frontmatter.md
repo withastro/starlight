@@ -204,6 +204,20 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+ページを[Pagefind](https://pagefind.app/)の検索インデックスに含めるかどうかを設定します。ページを検索結果から除外するには、`false`に設定します。
+
+```md
+---
+# このページを検索インデックスから外す
+pagefind: false
+---
+```
+
 ### `sidebar`
 
 **type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`

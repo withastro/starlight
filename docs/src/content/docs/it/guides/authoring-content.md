@@ -29,7 +29,7 @@ Puoi evidenziare `codice in linea` con apici inversi.
 
 ## Immagini
 
-Le immagini in Starlight utilizzano l'ottimizzazione degli asset di Astro.
+Le immagini in Starlight utilizzano [l'ottimizzazione degli asset di Astro](https://docs.astro.build/it/guides/assets/).
 
 Markdown e MDX supportano la sintassi Markdown per rappresentare immagini che includono testo alternativo per le tecnologie assistive.
 
@@ -80,7 +80,7 @@ description: Come utilizzare i link automatici di Starlight
 
 ## Introduzione
 
-Posso collegarmi alla [conclusione](#conclusione) che si trova più in basso.
+Posso collegarmi alla [mia conclusione](#conclusione) che si trova più in basso.
 
 ## Conclusione
 
@@ -89,9 +89,9 @@ Posso collegarmi alla [conclusione](#conclusione) che si trova più in basso.
 
 Titoli di livello 2 (`<h2>`) e di livello 3 (`<h3>`) verranno inclusi automaticamente nella tabella dei contenuti.
 
-## Asides
+## Aside
 
-Gli aside (conosciuti anche come "richiami") sono utili per indicare contenuti secondari insieme ai contenuti principali.
+Gli aside (conosciuti anche come "ammonizioni" o "richiami") sono utili per indicare contenuti secondari insieme ai contenuti principali.
 
 Starlight fornisce una sintassi Markdown personalizzata per indicarli. I blocchi aside sono indicati da `:::` per racchiudere i contenuti e possono essere di tipo `note`, `tip`, `caution` o `danger`.
 
@@ -103,7 +103,7 @@ Dentro un "aside" puoi inserire qualsiasi altro contenuto Markdown anche se sono
 Starlight è uno strumento per siti da documentazione con [Astro](https://astro.build/). Puoi iniziare con questo comando:
 
 ```sh
-npm run create astro@latest --template starlight
+npm run create astro@latest -- --template starlight
 ```
 
 :::
@@ -114,7 +114,7 @@ Starlight è uno strumento per siti da documentazione con [Astro](https://astro.
 Puoi iniziare con questo comando:
 
 ```sh
-npm run create astro@latest --template starlight
+npm run create astro@latest -- --template starlight
 ```
 
 :::
