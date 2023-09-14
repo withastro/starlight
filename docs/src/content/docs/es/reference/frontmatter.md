@@ -258,6 +258,7 @@ title: Página para ocultar de la barra lateral autogenerada
 sidebar:
   hidden: true
 ---
+```
 
 #### `badge`
 
