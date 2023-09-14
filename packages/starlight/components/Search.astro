@@ -72,6 +72,7 @@ const pagefindTranslations = {
 
 			const openModal = (event?: MouseEvent) => {
 				dialog.showModal();
+				document.body.toggleAttribute('data-search-modal-open', true);
 				this.querySelector('input')?.focus();
 				event?.stopPropagation();
 				window.addEventListener('click', onClick);
@@ -79,6 +80,7 @@ const pagefindTranslations = {
 
 			const closeModal = () => {
 				dialog.close();
+				document.body.toggleAttribute('data-search-modal-open', false);
 				window.removeEventListener('click', onClick);
 			};
 
@@ -230,6 +232,10 @@ const pagefindTranslations = {
 </style>
 
 <style is:global>
+	[data-search-modal-open] {
+		overflow: hidden;
+	}
+
 	#starlight__search {
 		--sl-search-result-spacing: calc(1.25rem * var(--pagefind-ui-scale));
 		--sl-search-result-pad-inline-start: calc(3.75rem * var(--pagefind-ui-scale));
