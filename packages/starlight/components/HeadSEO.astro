@@ -17,7 +17,7 @@ const { data, lang } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
 const title = config.title;
 const pageTitle = data.title;
-const titleDelimiter = config.titleDelimiter || '-';
+const titleDelimiter = config.titleDelimiter;
 const description = data.description || config.description;
 
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
