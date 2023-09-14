@@ -29,7 +29,7 @@ Puoi evidenziare `codice in linea` con apici inversi.
 
 ## Immagini
 
-Le immagini in Starlight utilizzano l'ottimizzazione degli asset di Astro.
+Le immagini in Starlight utilizzano [l'ottimizzazione degli asset di Astro](https://docs.astro.build/en/guides/assets/).
 
 Markdown e MDX supportano la sintassi Markdown per rappresentare immagini che includono testo alternativo per le tecnologie assistive.
 
