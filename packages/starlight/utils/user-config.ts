@@ -275,7 +275,7 @@ const UserConfigSchema = z.object({
 	/** Will be used as title delimiter in the generated `<title>` tag. */
 	titleDelimiter: z
 		.string()
-		.optional()
+		.default('|')
 		.describe("Will be used as title delimiter in the generated `<title>` tag."),
 
 });
