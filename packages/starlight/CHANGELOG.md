@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.10.0
+
+### Minor Changes
+
+- [#692](https://github.com/withastro/starlight/pull/692) [`2a58e1a`](https://github.com/withastro/starlight/commit/2a58e1aa068d01833a0ab9e74e4b46cccaee1775) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1 and display page headings in search results
+
+### Patch Changes
+
+- [#708](https://github.com/withastro/starlight/pull/708) [`136cfb1`](https://github.com/withastro/starlight/commit/136cfb180f22db116cfdb62fd93d21daff596946) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Fix main content column width for pages without a table of contents
+
+- [#682](https://github.com/withastro/starlight/pull/682) [`660a5f5`](https://github.com/withastro/starlight/commit/660a5f57adf0340de21df3e364aada38255bb06c) Thanks [@vedmalex](https://github.com/vedmalex)! - Add Russian language support
+
 ## 0.9.1
 
 ### Patch Changes
@@ -105,16 +117,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -493,8 +505,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
