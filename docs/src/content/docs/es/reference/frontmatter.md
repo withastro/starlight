@@ -209,6 +209,20 @@ Lo mismo que [`prev`](#prev), pero para el enlace de la página siguiente.
 next: false
 ```
 
+### `pagefind`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Establece si esta página debe incluirse en el índice de búsqueda de [Pagefind](https://pagefind.app/). Establece en `false` para excluir una página de los resultados de búsqueda:
+
+```md
+---
+# Ocultar esta página del índice de búsqueda
+pagefind: false
+---
+```
+
 ### `sidebar`
 
 **tipo:** `{ label?: string; order?: number; hidden?: boolean }`
