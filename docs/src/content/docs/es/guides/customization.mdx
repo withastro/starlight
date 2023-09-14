@@ -86,6 +86,19 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
    }),
    ```
 
+## Habilitar el mapa del sitio
+
+Starlight tiene soporte incorporado para generar un mapa del sitio. Habilita la generación del mapa del sitio estableciendo tu URL como `site` en `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Sitio con mapa del sitio' })],
+});
+```
+
 ## Diseño de página
 
 De forma predeterminada, las páginas de Starlight utilizan un diseño con una barra lateral de navegación global y una tabla de contenidos que muestra los encabezados de la página actual.

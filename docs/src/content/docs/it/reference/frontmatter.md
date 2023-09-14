@@ -208,6 +208,20 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Imposta se questa pagina deve essere inclusa nell'indice di ricerca [Pagefind](https://pagefind.app/). Imposta su `false` per escludere una pagina dai risultati di ricerca:
+
+```md
+---
+# Nascondi questa pagina dai risultati di ricerca
+pagefind: false
+---
+```
+
 ### `sidebar`
 
 **type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
