@@ -87,6 +87,12 @@ const pagefindTranslations = {
 			openBtn.addEventListener('click', openModal);
 			openBtn.disabled = false;
 			closeBtn.addEventListener('click', closeModal);
+			window.addEventListener('keypress', (e) => {
+				if (e.key === 'Escape' && dialog.open) {
+					e.preventDefault();
+					closeModal();
+				}
+			});
 
 			// Listen for `/` and `cmd + k` keyboard shortcuts.
 			window.addEventListener('keydown', (e) => {
