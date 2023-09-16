@@ -103,7 +103,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.9.0
+        specifier: ^0.10.0
         version: link:../../packages/starlight
       astro:
         specifier: ^3.0.6
@@ -115,7 +115,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.9.0
+        specifier: ^0.10.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.0
@@ -142,8 +142,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@pagefind/default-ui':
-        specifier: ^1.0.0-alpha.5
-        version: 1.0.0-alpha.5
+        specifier: ^1.0.2
+        version: 1.0.2
       '@types/mdast':
         specifier: ^3.0.11
         version: 3.0.11
@@ -160,8 +160,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       pagefind:
-        specifier: ^1.0.0-alpha.5
-        version: 1.0.0-alpha.5
+        specifier: ^1.0.2
+        version: 1.0.2
       rehype:
         specifier: ^12.0.1
         version: 12.0.1
@@ -1244,44 +1244,44 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@pagefind/darwin-arm64@1.0.0-alpha.5:
-    resolution: {integrity: sha512-peZTl2+ndCupYkJ2qg16UDMKijosAU4BBFhpDv1ckjW49BE0Lh4vXHY12DxTvKaHrEu2XvC5blSjC+fkMe64vg==}
+  /@pagefind/darwin-arm64@1.0.2:
+    resolution: {integrity: sha512-saHinnIbchShIeT7+fFe77k3cbtXxbLcK4m+MjZA8VM/lrLeTaS+UYUYCzpKmV4U+APeELnquL4fhDquFAcScQ==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/darwin-x64@1.0.0-alpha.5:
-    resolution: {integrity: sha512-3M35um77sLndK+nBS0eyYf9FvdzwFQ0BPhVu5Gs6pP7vPAtayzBkwtLsdrbRBeHpCODwF8Eg4zvxTQBc2+nhAg==}
+  /@pagefind/darwin-x64@1.0.2:
+    resolution: {integrity: sha512-CAyPARt41lHPpHD8O7O2zv8MJa06iPa6nrGt+o9puY47OcNM6x8GxCAKPR1OTfEsiuwPovAdi7rvwJ35z3tnrA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/default-ui@1.0.0-alpha.5:
-    resolution: {integrity: sha512-swifkGRaPijH7mwMfQ7eNUxPh9Uvxzhi2sgmA9ipcc3Kcptu/O8em0jdCOwynyBIb5gJC6Paq3Hr+i2hJ5o1Hw==}
+  /@pagefind/default-ui@1.0.2:
+    resolution: {integrity: sha512-KrzZi7hNQ+BoxREeA5TD502M8RSjJWhYRyGa70RVIIPgw1MVZbTKr4Kmk6YdmKNPlBmPWXtv9IHC+e3IPUcVSg==}
     dev: false
 
-  /@pagefind/linux-arm64@1.0.0-alpha.5:
-    resolution: {integrity: sha512-LkOCsyhw15X87eJLHiHPcZmhM7QON4Au/68j0e7y6zCnXhzqjvs/26GqSfUdXhVIdGydxiKiPbSp9scbu15mKQ==}
+  /@pagefind/linux-arm64@1.0.2:
+    resolution: {integrity: sha512-bGpLKV2WLkLH/Qn/ibHJj7oTPvMcpJMwcjdPWk+tWqBl5xoBK1l4k45Gi70deCdIjKom5TcXuS8mgcXY8tSJ0A==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/linux-x64@1.0.0-alpha.5:
-    resolution: {integrity: sha512-k4k5hDX1zVejCby+f58/Ymx2ftQ/Misb31T0Zje0aO7n41GeWAimfZVetHOpHmBsyXBXm+afHwXdpWHL5vUkuA==}
+  /@pagefind/linux-x64@1.0.2:
+    resolution: {integrity: sha512-59beym/0riPCTjNeT91ksqlBToW0FFeFAHKxvM0nmvzEeNYurgoZY+8fJz9Xvz8icXhi2NxLirDgclAMsahWWQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/windows-x64@1.0.0-alpha.5:
-    resolution: {integrity: sha512-lXvE/4hsfF0tRkvPV+RkmAdysFcqlfGCTh/326E5NMtaQr9zILf9skuX3/1GwkmeojBAZssIQm2w+MdtULIzMA==}
+  /@pagefind/windows-x64@1.0.2:
+    resolution: {integrity: sha512-lwae3p7xOVihaTv6D8gJJLl05U4lDvkyMN9azlpjlWbfhBJXJnvD2CQTDwzZxK+u6ZDJUR1Qcz2oVeedyQpMjQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -4903,15 +4903,15 @@ packages:
       - utf-8-validate
     dev: true
 
-  /pagefind@1.0.0-alpha.5:
-    resolution: {integrity: sha512-uf0AMnxoAwiyn5a8mfaCk7skeXCRoZEh6E8JeX4NX3aUOoVyQNA2hJ2VGGbtM85mYT2AdiaG89zh7EqzakeDIw==}
+  /pagefind@1.0.2:
+    resolution: {integrity: sha512-UxZgvmknPrH25qXZL7aK5fUOj1GrZxEQb2Mdd4l2m/PtdKJfrszxOR2EI1349bCYZ+OxiPn7wz2NCRNzb3QPpA==}
     hasBin: true
     optionalDependencies:
-      '@pagefind/darwin-arm64': 1.0.0-alpha.5
-      '@pagefind/darwin-x64': 1.0.0-alpha.5
-      '@pagefind/linux-arm64': 1.0.0-alpha.5
-      '@pagefind/linux-x64': 1.0.0-alpha.5
-      '@pagefind/windows-x64': 1.0.0-alpha.5
+      '@pagefind/darwin-arm64': 1.0.2
+      '@pagefind/darwin-x64': 1.0.2
+      '@pagefind/linux-arm64': 1.0.2
+      '@pagefind/linux-x64': 1.0.2
+      '@pagefind/windows-x64': 1.0.2
     dev: false
 
   /parse-entities@4.0.1:
