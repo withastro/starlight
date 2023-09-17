@@ -1,8 +1,8 @@
 ---
-import LanguageSelect from './LanguageSelect.astro';
-import SidebarSublist from './SidebarSublist.astro';
-import ThemeSelect from './ThemeSelect.astro';
 import type { StarlightRouteData as Props } from '../utils/route-data';
+
+import { LanguageSelect, ThemeSelect } from 'virtual:starlight/components';
+import SidebarSublist from './SidebarSublist.astro';
 
 const { sidebar } = Astro.props;
 ---

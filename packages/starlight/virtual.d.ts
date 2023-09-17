@@ -20,8 +20,19 @@ declare module 'virtual:starlight/components' {
 	export const Banner: typeof import('./components/Banner.astro').default;
 	export const ContentPanel: typeof import('./components/ContentPanel.astro').default;
 	export const FallbackContentNotice: typeof import('./components/FallbackContentNotice.astro').default;
+
 	export const Footer: typeof import('./components/Footer.astro').default;
+	export const LastUpdated: typeof import('./components/LastUpdated.astro').default;
+	export const PrevNextLinks: typeof import('./components/PrevNextLinks.astro').default;
+	export const EditLink: typeof import('./components/EditLink.astro').default;
+
 	export const Header: typeof import('./components/Header.astro').default;
+	export const LanguageSelect: typeof import('./components/LanguageSelect.astro').default;
+	export const Search: typeof import('./components/Search.astro').default;
+	export const SiteTitle: typeof import('./components/SiteTitle.astro').default;
+	export const SocialIcons: typeof import('./components/SocialIcons.astro').default;
+	export const ThemeSelect: typeof import('./components/ThemeSelect.astro').default;
+
 	export const HeadSEO: typeof import('./components/HeadSEO.astro').default;
 	export const Hero: typeof import('./components/Hero.astro').default;
 	export const MarkdownContent: typeof import('./components/MarkdownContent.astro').default;
