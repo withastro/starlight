@@ -33,11 +33,23 @@ export function ComponentConfigSchema() {
 			HeadSEO: z.string().default('@astrojs/starlight/components/HeadSEO.astro'),
 			Hero: z.string().default('@astrojs/starlight/components/Hero.astro'),
 			MarkdownContent: z.string().default('@astrojs/starlight/components/MarkdownContent.astro'),
+
 			RightSidebar: z.string().default('@astrojs/starlight/components/RightSidebar.astro'),
+			RightSidebarPanel: z
+				.string()
+				.default('@astrojs/starlight/components/RightSidebarPanel.astro'),
+			TableOfContents: z.string().default('@astrojs/starlight/components/TableOfContents.astro'),
+			MobileTableOfContents: z
+				.string()
+				.default('@astrojs/starlight/components/TableOfContents/MobileTableOfContents.astro'),
+
 			Sidebar: z.string().default('@astrojs/starlight/components/Sidebar.astro'),
 			SkipLink: z.string().default('@astrojs/starlight/components/SkipLink.astro'),
 			ThemeProvider: z.string().default('@astrojs/starlight/components/ThemeProvider.astro'),
+
 			PageFrame: z.string().default('@astrojs/starlight/layout/PageFrame.astro'),
+			MobileMenuToggle: z.string().default('@astrojs/starlight/components/MobileMenuToggle.astro'),
+
 			TwoColumnContent: z.string().default('@astrojs/starlight/layout/TwoColumnContent.astro'),
 		})
 		.default({});

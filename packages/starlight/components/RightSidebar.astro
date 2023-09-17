@@ -1,15 +1,18 @@
 ---
-import RightSidebarPanel from './RightSidebarPanel.astro';
-import MobileTableOfContents from './TableOfContents/MobileTableOfContents.astro';
-import TableOfContents from './TableOfContents.astro';
 import type { StarlightRouteData as Props } from '../utils/route-data';
+
+import {
+	RightSidebarPanel,
+	TableOfContents,
+	MobileTableOfContents,
+} from 'virtual:starlight/components';
 ---
 
 {
 	Astro.props.toc && (
 		<>
 			<MobileTableOfContents {...Astro.props} />
-			<RightSidebarPanel>
+			<RightSidebarPanel {...Astro.props}>
 				<TableOfContents {...Astro.props} />
 			</RightSidebarPanel>
 		</>

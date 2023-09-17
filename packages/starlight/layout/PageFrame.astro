@@ -1,7 +1,8 @@
 ---
-import MobileMenuToggle from '../components/MobileMenuToggle.astro';
-import { useTranslations } from '../utils/translations';
 import type { StarlightRouteData as Props } from '../utils/route-data';
+import { useTranslations } from '../utils/translations';
+
+import { MobileMenuToggle } from 'virtual:starlight/components';
 
 const { hasSidebar, locale } = Astro.props;
 const t = useTranslations(locale);
@@ -12,7 +13,7 @@ const t = useTranslations(locale);
 	{
 		hasSidebar && (
 			<nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
-				<MobileMenuToggle {locale} />
+				<MobileMenuToggle {...Astro.props} />
 				<div id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content">
 						<slot name="sidebar" />

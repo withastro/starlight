@@ -36,10 +36,18 @@ declare module 'virtual:starlight/components' {
 	export const HeadSEO: typeof import('./components/HeadSEO.astro').default;
 	export const Hero: typeof import('./components/Hero.astro').default;
 	export const MarkdownContent: typeof import('./components/MarkdownContent.astro').default;
+
 	export const RightSidebar: typeof import('./components/RightSidebar.astro').default;
+	export const RightSidebarPanel: typeof import('./components/RightSidebarPanel.astro').default;
+	export const TableOfContents: typeof import('./components/TableOfContents.astro').default;
+	export const MobileTableOfContents: typeof import('./components/TableOfContents/MobileTableOfContents.astro').default;
+
 	export const Sidebar: typeof import('./components/Sidebar.astro').default;
 	export const SkipLink: typeof import('./components/SkipLink.astro').default;
 	export const ThemeProvider: typeof import('./components/ThemeProvider.astro').default;
+
 	export const PageFrame: typeof import('./layout/PageFrame.astro').default;
+	export const MobileMenuToggle: typeof import('./components/MobileMenuToggle.astro').default;
+
 	export const TwoColumnContent: typeof import('./layout/TwoColumnContent.astro').default;
 }
