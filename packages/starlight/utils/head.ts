@@ -6,7 +6,9 @@ const HeadSchema = HeadConfigSchema();
 export function createHead(defaults: HeadUserConfig, ...heads: HeadConfig[]) {
 	let head = HeadSchema.parse(defaults);
 	for (const next of heads) {
-		head = mergeHead(head, next);
+		if(next) {
+			head = mergeHead(head, next);
+		}
 	}
 	return sortHead(head);
 }
