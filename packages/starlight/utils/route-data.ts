@@ -2,11 +2,11 @@ import type { MarkdownHeading } from 'astro';
 import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { generateToC, type TocItem } from '../components/TableOfContents/generateToC';
+import { generateToC, type TocItem } from './generateToC';
+import { getFileCommitDate } from './git';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import type { Route } from './routing';
 import { useTranslations } from './translations';
-import { getFileCommitDate } from './git';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
