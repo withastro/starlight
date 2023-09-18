@@ -11,6 +11,7 @@ import '../style/util.css';
 import {
 	Banner,
 	ContentPanel,
+	PageTitle,
 	FallbackContentNotice,
 	Footer,
 	Header,
@@ -100,13 +101,7 @@ const pagefindEnabled =
 						) : (
 							<>
 								<ContentPanel {...route}>
-									<h1
-										id="_top"
-										data-page-title
-										style="font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); margin-top: 1rem;"
-									>
-										{route.entry.data.title}
-									</h1>
+									<PageTitle {...route} />
 									{route.isFallback && <FallbackContentNotice {...route} />}
 								</ContentPanel>
 								<ContentPanel {...route}>

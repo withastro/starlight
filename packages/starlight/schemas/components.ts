@@ -5,6 +5,7 @@ export function ComponentConfigSchema() {
 		.object({
 			Banner: z.string().default('@astrojs/starlight/components/Banner.astro'),
 			ContentPanel: z.string().default('@astrojs/starlight/components/ContentPanel.astro'),
+			PageTitle: z.string().default('@astrojs/starlight/components/PageTitle.astro'),
 			FallbackContentNotice: z
 				.string()
 				.default('@astrojs/starlight/components/FallbackContentNotice.astro'),

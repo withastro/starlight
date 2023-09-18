@@ -1,0 +1,15 @@
+---
+import type { StarlightRouteData as Props } from '../utils/route-data';
+---
+
+<h1 id="_top" data-page-title>{Astro.props.entry.data.title}</h1>
+
+<style>
+	h1 {
+		margin-top: 1rem;
+		font-size: var(--sl-text-h1);
+		line-height: var(--sl-line-height-headings);
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+</style>

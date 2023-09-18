@@ -19,6 +19,7 @@ declare module 'virtual:starlight/user-images' {
 declare module 'virtual:starlight/components' {
 	export const Banner: typeof import('./components/Banner.astro').default;
 	export const ContentPanel: typeof import('./components/ContentPanel.astro').default;
+	export const PageTitle: typeof import('./components/PageTitle.astro').default;
 	export const FallbackContentNotice: typeof import('./components/FallbackContentNotice.astro').default;
 
 	export const Footer: typeof import('./components/Footer.astro').default;
