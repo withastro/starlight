@@ -1,4 +1,4 @@
-import type { AstroGlobal, MarkdownHeading } from 'astro';
+import type { MarkdownHeading } from 'astro';
 import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
@@ -27,7 +27,13 @@ export interface StarlightRouteData extends Route {
 	lastUpdated: Date | undefined;
 }
 
-export function generateRouteData({ props, url }: AstroGlobal<PageProps>): StarlightRouteData {
+export function generateRouteData({
+	props,
+	url,
+}: {
+	props: PageProps;
+	url: URL;
+}): StarlightRouteData {
 	const { entry, locale } = props;
 	const sidebar = getSidebar(url.pathname, locale);
 	return {
