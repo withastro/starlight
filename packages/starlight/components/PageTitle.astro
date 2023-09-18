@@ -1,8 +1,9 @@
 ---
+import { PAGE_TITLE_ID } from '../constants';
 import type { StarlightRouteData as Props } from '../utils/route-data';
 ---
 
-<h1 id="_top" data-page-title>{Astro.props.entry.data.title}</h1>
+<h1 id={PAGE_TITLE_ID} data-page-title>{Astro.props.entry.data.title}</h1>
 
 <style>
 	h1 {

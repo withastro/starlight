@@ -1,4 +1,5 @@
 import type { MarkdownHeading } from 'astro';
+import { PAGE_TITLE_ID } from '../constants';
 
 export interface TocItem extends MarkdownHeading {
 	children: TocItem[];
@@ -24,7 +25,7 @@ export function generateToC(
 	headings: MarkdownHeading[],
 	{ minHeadingLevel, maxHeadingLevel, title = 'Overview' }: TocOpts
 ) {
-	const overview = { depth: 2, slug: '_top', text: title };
+	const overview = { depth: 2, slug: PAGE_TITLE_ID, text: title };
 	headings = [
 		overview,
 		...headings.filter(({ depth }) => depth >= minHeadingLevel && depth <= maxHeadingLevel),
