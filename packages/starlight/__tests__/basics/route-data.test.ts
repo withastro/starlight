@@ -4,7 +4,12 @@ import { routes } from '../../utils/routing';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
-		docs: [['index.mdx', { title: 'Home Page' }]],
+		docs: [
+			['index.mdx', { title: 'Home Page' }],
+			['getting-started.mdx', { title: 'Splash', template: 'splash' }],
+			['showcase.mdx', { title: 'ToC Disabled', tableOfContents: false }],
+			['environmental-impact.md', { title: 'Explicit update date', lastUpdated: new Date() }],
+		],
 	})
 );
 
@@ -31,20 +36,51 @@ test('adds data to route shape', () => {
 		}
 	`);
 	expect(data.pagination).toMatchInlineSnapshot(`
-    {
-      "next": undefined,
-      "prev": undefined,
-    }
-  `);
-	expect(data.sidebar).toMatchInlineSnapshot(`
-		[
-		  {
+		{
+		  "next": {
 		    "badge": undefined,
-		    "href": "/",
-		    "isCurrent": true,
-		    "label": "Home Page",
+		    "href": "/environmental-impact/",
+		    "isCurrent": false,
+		    "label": "Explicit update date",
 		    "type": "link",
 		  },
+		  "prev": undefined,
+		}
+	`);
+	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
+		[
+		  "Home Page",
+		  "Explicit update date",
+		  "Splash",
+		  "ToC Disabled",
 		]
 	`);
+});
+
+test('disables table of contents for splash template', () => {
+	const route = routes[1]!;
+	const data = generateRouteData({
+		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
+		url: new URL('https://example.com/getting-started/'),
+	});
+	expect(data.toc).toBeUndefined();
+});
+
+test('disables table of contents if frontmatter includes `tableOfContents: false`', () => {
+	const route = routes[2]!;
+	const data = generateRouteData({
+		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
+		url: new URL('https://example.com/showcase/'),
+	});
+	expect(data.toc).toBeUndefined();
+});
+
+test('uses explicit last updated date from frontmatter', () => {
+	const route = routes[3]!;
+	const data = generateRouteData({
+		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
+		url: new URL('https://example.com/showcase/'),
+	});
+	expect(data.lastUpdated).toBeInstanceOf(Date);
+	expect(data.lastUpdated).toEqual(route.entry.data.lastUpdated);
 });
