@@ -80,18 +80,16 @@ const pagefindTranslations = {
 
 			const closeModal = () => {
 				dialog.close();
-				document.body.toggleAttribute('data-search-modal-open', false);
 				window.removeEventListener('click', onClick);
 			};
 
 			openBtn.addEventListener('click', openModal);
 			openBtn.disabled = false;
 			closeBtn.addEventListener('click', closeModal);
-			window.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape' && dialog.open) {
-					e.preventDefault();
-					closeModal();
-				}
+
+			dialog.addEventListener('close', () => {
+				closeModal();
+				document.body.toggleAttribute('data-search-modal-open', false);
 			});
 
 			// Listen for `/` and `cmd + k` keyboard shortcuts.
