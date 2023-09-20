@@ -78,10 +78,7 @@ const pagefindTranslations = {
 				window.addEventListener('click', onClick);
 			};
 
-			const closeModal = () => {
-				dialog.close();
-				window.removeEventListener('click', onClick);
-			};
+			const closeModal = () => dialog.close();
 
 			openBtn.addEventListener('click', openModal);
 			openBtn.disabled = false;
@@ -89,6 +86,7 @@ const pagefindTranslations = {
 
 			dialog.addEventListener('close', () => {
 				document.body.toggleAttribute('data-search-modal-open', false);
+				window.removeEventListener('click', onClick);
 			});
 
 			// Listen for `/` and `cmd + k` keyboard shortcuts.
