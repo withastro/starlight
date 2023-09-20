@@ -391,6 +391,12 @@ const pagefindTranslations = {
 		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 	}
 
+	/* Flip page and tree icons around the vertical axis when in an RTL layout. */
+	[dir='rtl'] .pagefind-ui__result-title::before,
+	[dir='rtl'] .pagefind-ui__result-nested::before {
+		transform: matrix(-1, 0, 0, 1, 0, 0);
+	}
+
 	#starlight__search .pagefind-ui__result-link::after {
 		content: '';
 		position: absolute;
