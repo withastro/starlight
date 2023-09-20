@@ -127,16 +127,16 @@
 
   ```css
   :root {
-  	--sl-hue-accent: 234;
-  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+    --sl-hue-accent: 234;
+    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -515,8 +515,8 @@
 
   ```json
   {
-  	"search.label": "Suchen",
-  	"search.shortcutLabel": "(Drücke / zum Suchen)"
+    "search.label": "Suchen",
+    "search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
