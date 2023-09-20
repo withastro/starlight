@@ -69,19 +69,22 @@ const pagefindTranslations = {
 
 			const openModal = (event?: MouseEvent) => {
 				dialog.showModal();
+				document.body.toggleAttribute('data-search-modal-open', true);
 				this.querySelector('input')?.focus();
 				event?.stopPropagation();
 				window.addEventListener('click', onClick);
 			};
 
-			const closeModal = () => {
-				dialog.close();
-				window.removeEventListener('click', onClick);
-			};
+			const closeModal = () => dialog.close();
 
 			openBtn.addEventListener('click', openModal);
 			openBtn.disabled = false;
 			closeBtn.addEventListener('click', closeModal);
+
+			dialog.addEventListener('close', () => {
+				document.body.toggleAttribute('data-search-modal-open', false);
+				window.removeEventListener('click', onClick);
+			});
 
 			// Listen for `/` and `cmd + k` keyboard shortcuts.
 			window.addEventListener('keydown', (e) => {
@@ -227,6 +230,10 @@ const pagefindTranslations = {
 </style>
 
 <style is:global>
+	[data-search-modal-open] {
+		overflow: hidden;
+	}
+
 	#starlight__search {
 		--sl-search-result-spacing: calc(1.25rem * var(--pagefind-ui-scale));
 		--sl-search-result-pad-inline-start: calc(3.75rem * var(--pagefind-ui-scale));
