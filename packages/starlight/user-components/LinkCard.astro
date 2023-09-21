@@ -1,27 +1,34 @@
 ---
 import Icon from './Icon.astro';
 import type { HTMLAttributes } from 'astro/types';
+import type { Icons } from '../components/Icons';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
+	icon?: keyof typeof Icons;
 	title: string;
 	description?: string;
 }
 
-const { title, description, ...attributes } = Astro.props;
+const { icon, title, description, ...attributes } = Astro.props;
 ---
 
-<div>
+<div class="link-card">
 	<span class="sl-flex stack">
-		<a {...attributes}>
-			<span class="title" set:html={title} />
-		</a>
+		<p class="sl-flex">
+			<a {...attributes} class="sl-flex">
+				{icon && <Icon name={icon} class="icon" size="1.333em" />}
+				<span class="title" set:html={title} />
+			</a>
+		</p>
 		{description && <span class="description" set:html={description} />}
 	</span>
 	<Icon name="right-arrow" size="1.333em" class="icon rtl:flip" />
 </div>
 
 <style>
-	div {
+	.link-card {
+		--sl-card-border: var(--sl-color-purple);
+		--sl-card-bg: var(--sl-color-purple-low);
 		display: grid;
 		grid-template-columns: 1fr auto;
 		gap: 0.5rem;
@@ -32,8 +39,30 @@ const { title, description, ...attributes } = Astro.props;
 		position: relative;
 	}
 
+	.link-card:nth-child(4n + 1) {
+		--sl-card-border: var(--sl-color-orange);
+		--sl-card-bg: var(--sl-color-orange-low);
+	}
+
+	.link-card:nth-child(4n + 3) {
+		--sl-card-border: var(--sl-color-green);
+		--sl-card-bg: var(--sl-color-green-low);
+	}
+
+	.link-card:nth-child(4n + 4) {
+		--sl-card-border: var(--sl-color-red);
+		--sl-card-bg: var(--sl-color-red-low);
+	}
+
+	.link-card:nth-child(4n + 5) {
+		--sl-card-border: var(--sl-color-blue);
+		--sl-card-bg: var(--sl-color-blue-low);
+	}
+
 	a {
 		text-decoration: none;
+		display: flex;
+		gap: 0.5rem;
 	}
 
 	/* a11y fix for https://github.com/withastro/starlight/issues/487 */
@@ -60,17 +89,24 @@ const { title, description, ...attributes } = Astro.props;
 		line-height: 1.5;
 	}
 
-	.icon {
+	.icon:first-child {
+		border: 1px solid var(--sl-card-border);
+		background-color: var(--sl-card-bg);
+		padding: 0.2em;
+		border-radius: 0.25rem;
+	}
+
+	.icon:last-child {
 		color: var(--sl-color-gray-3);
 	}
 
 	/* Hover state */
-	div:hover {
+	.link-card:hover {
 		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
 		border-color: var(--sl-color-gray-2);
 	}
 
-	div:hover .icon {
+	.link-card:hover .icon:last-child {
 		color: var(--sl-color-white);
 	}
 </style>
