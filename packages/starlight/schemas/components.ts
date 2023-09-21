@@ -48,10 +48,10 @@ export function ComponentConfigSchema() {
 			SkipLink: z.string().default('@astrojs/starlight/components/SkipLink.astro'),
 			ThemeProvider: z.string().default('@astrojs/starlight/components/ThemeProvider.astro'),
 
-			PageFrame: z.string().default('@astrojs/starlight/layout/PageFrame.astro'),
+			PageFrame: z.string().default('@astrojs/starlight/components/PageFrame.astro'),
 			MobileMenuToggle: z.string().default('@astrojs/starlight/components/MobileMenuToggle.astro'),
 
-			TwoColumnContent: z.string().default('@astrojs/starlight/layout/TwoColumnContent.astro'),
+			TwoColumnContent: z.string().default('@astrojs/starlight/components/TwoColumnContent.astro'),
 		})
 		.default({});
 }

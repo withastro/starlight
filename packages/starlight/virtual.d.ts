@@ -47,8 +47,8 @@ declare module 'virtual:starlight/components' {
 	export const SkipLink: typeof import('./components/SkipLink.astro').default;
 	export const ThemeProvider: typeof import('./components/ThemeProvider.astro').default;
 
-	export const PageFrame: typeof import('./layout/PageFrame.astro').default;
+	export const PageFrame: typeof import('./components/PageFrame.astro').default;
 	export const MobileMenuToggle: typeof import('./components/MobileMenuToggle.astro').default;
 
-	export const TwoColumnContent: typeof import('./layout/TwoColumnContent.astro').default;
+	export const TwoColumnContent: typeof import('./components/TwoColumnContent.astro').default;
 }
