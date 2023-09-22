@@ -65,6 +65,36 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 Configure the table of contents shown on the right of each page. By default, `<h2>` and `<h3>` headings will be included in this table of contents.
 
+### `expressiveCode`
+
+**type:** `StarlightExpressiveCodeOptions | boolean`
+
+Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code) to render code blocks on your site. The integration is enabled by default and can be disabled by passing `false` to this option.
+
+You can customize your code blocks by passing an object with any of the following properties:
+
+- `theme` — the color theme(s) that should be used to render code blocks. Supported values:
+  - any theme name bundled with Shiki (e.g. `dracula`)
+  - any theme object compatible with VS Code or Shiki (e.g. imported from an NPM theme package)
+  - any ExpressiveCodeTheme instance (e.g. using `ExpressiveCodeTheme.fromJSONString(...)` to load a custom JSON/JSONC theme file yourself)
+  - any combination of the above in an array
+
+  Defaults to the `['github-dark', 'github-light']` themes bundled with Shiki.
+
+  **Note**: If you pass an array of themes to this option, each code block in your markdown/MDX documents will be rendered using all themes. If you pass one dark and one light theme, Starlight will by default automatically add CSS to show only the theme that matches the current dark mode switch state. See the `useStarlightDarkModeSwitch` option to configure this behavior. If you turn it off, you will need to add your own CSS code to the site to ensure that only one theme is visible at any time.
+
+  To allow targeting all code blocks of a given theme through CSS, the theme property `name` is used to generate kebap-cased class names in the format `ec-theme-${name}`. For example, `theme: ['monokai', 'slack-ochin']` will render every code block twice, once with the class `ec-theme-monokai`, and once with `ec-theme-slack-ochin`.
+
+- `useStarlightDarkModeSwitch` — determines if CSS code should be added that automatically displays dark or light code blocks depending on Starlight's dark mode switch state.
+
+  Defaults to `true` if the `theme` option is not set or contains one dark and one light theme, and `false` otherwise.
+
+- `useStarlightUiThemeColors` — determines if Starlight's CSS variables should be used for the colors of UI elements (backgrounds, buttons, shadows etc.) instead of the colors provided by themes.
+
+  Defaults to `true` if the `theme` option is not set (= you are using the default themes), and `false` otherwise.
+
+- See the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) to learn about all the other options.
+
 ### `editLink`
 
 **type:** `{ baseUrl: string }`

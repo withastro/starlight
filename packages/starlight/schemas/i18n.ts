@@ -1,11 +1,15 @@
 import { z } from 'astro/zod';
 
 export function i18nSchema() {
-	return starlightI18nSchema().merge(pagefindI18nSchema());
+	return starlightI18nSchema().merge(pagefindI18nSchema()).merge(expressiveCodeI18nSchema());
 }
 
 export function builtinI18nSchema() {
-	return starlightI18nSchema().required().strict().merge(pagefindI18nSchema());
+	return starlightI18nSchema()
+		.required()
+		.strict()
+		.merge(pagefindI18nSchema())
+		.merge(expressiveCodeI18nSchema());
 }
 
 function starlightI18nSchema() {
@@ -154,6 +158,24 @@ function pagefindI18nSchema() {
 				.describe(
 					'Pagefind UI translation. English default value: `"Searching for [SEARCH_TERM]..."`. See https://pagefind.app/docs/ui/#translations'
 				),
+		})
+		.partial();
+}
+
+function expressiveCodeI18nSchema() {
+	return z
+		.object({
+			'expressiveCode.copyButtonCopied': z
+				.string()
+				.describe('Expressive Code UI translation. English default value: `"Copied!"`'),
+
+			'expressiveCode.copyButtonTooltip': z
+				.string()
+				.describe('Expressive Code UI translation. English default value: `"Copy to clipboard"`'),
+
+			'expressiveCode.terminalWindowFallbackTitle': z
+				.string()
+				.describe('Expressive Code UI translation. English default value: `"Terminal window"`'),
 		})
 		.partial();
 }

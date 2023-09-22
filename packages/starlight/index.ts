@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
+import { starlightExpressiveCode } from './integrations/expressive-code';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
@@ -52,7 +53,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 
 			'astro:config:done': ({ config }) => {
 				const integrations = config.integrations.map(({ name }) => name);
-				for (const builtin of ['@astrojs/mdx', '@astrojs/sitemap']) {
+				for (const builtin of ['@astrojs/mdx', '@astrojs/sitemap', 'astro-expressive-code']) {
 					if (integrations.filter((name) => name === builtin).length > 1) {
 						throw new Error(
 							`Found more than one instance of ${builtin}.\n` +
@@ -78,5 +79,5 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 		},
 	};
 
-	return [starlightSitemap(userConfig), Starlight, mdx()];
+	return [...starlightExpressiveCode(userConfig), starlightSitemap(userConfig), Starlight, mdx()];
 }

@@ -5,6 +5,7 @@ import { LogoConfigSchema } from '../schemas/logo';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
 import { FaviconSchema } from '../schemas/favicon';
 import { BadgeConfigSchema } from '../schemas/badge';
+import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -276,6 +277,12 @@ const UserConfigSchema = z.object({
 
 	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
 	favicon: FaviconSchema(),
+
+	/**
+	 * Define how code blocks are rendered by passing options to Expressive Code,
+	 * or disable the integration by passing `false`.
+	 */
+	expressiveCode: ExpressiveCodeSchema(),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

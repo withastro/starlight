@@ -1,0 +1,215 @@
+import path from 'node:path';
+import fs from 'node:fs';
+import {
+	astroExpressiveCode,
+	ExpressiveCodeTheme,
+	type AstroExpressiveCodeOptions,
+	pluginFramesTexts,
+	PluginTexts,
+	type ThemeObjectOrShikiThemeName,
+} from 'astro-expressive-code';
+import type { AstroIntegration } from 'astro';
+import type { StarlightConfig } from '../types';
+import translations from '../translations';
+
+export * from 'astro-expressive-code';
+
+export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 'theme'> & {
+	/**
+	 * The color theme(s) that Starlight should use to render code blocks. Supported value types:
+	 * - any theme name bundled with Shiki (e.g. `dracula`)
+	 * - any theme object compatible with VS Code or Shiki (e.g. imported from an NPM theme package)
+	 * - any ExpressiveCodeTheme instance (e.g. using `ExpressiveCodeTheme.fromJSONString(...)`
+	 *   to load a custom JSON/JSONC theme file yourself)
+	 * - any combination of the above in an array
+	 *
+	 * Defaults to the `['github-dark', 'github-light']` themes bundled with Shiki.
+	 *
+	 * **Note**: If you pass an array of themes to this option, each code block in your
+	 * markdown/MDX documents will be rendered using all themes. If you pass one dark and one light
+	 * theme, Starlight will by default automatically add CSS to show only the theme that matches
+	 * the current dark mode switch state. See the `useStarlightDarkModeSwitch` option to configure
+	 * this behavior. If you turn it off, you will need to add your own CSS code to the site
+	 * to ensure that only one theme is visible at any time.
+	 *
+	 * To allow targeting all code blocks of a given theme through CSS, the theme property `name`
+	 * is used to generate kebap-cased class names in the format `ec-theme-${name}`.
+	 * For example, `theme: ['monokai', 'slack-ochin']` will render every code block twice,
+	 * once with the class `ec-theme-monokai`, and once with `ec-theme-slack-ochin`.
+	 */
+	theme?: ThemeObjectOrShikiThemeName | ThemeObjectOrShikiThemeName[] | undefined;
+	/**
+	 * Determines if CSS code should be added to the site that automatically displays
+	 * dark or light code blocks depending on Starlight's dark mode switch state.
+	 *
+	 * Defaults to `true` if the `theme` option is not set or contains one dark and one light theme,
+	 * and `false` otherwise.
+	 */
+	useStarlightDarkModeSwitch?: boolean | undefined;
+	/**
+	 * Determines if Starlight's CSS variables should be used for the colors of UI elements
+	 * (backgrounds, buttons, shadows etc.) instead of the colors provided by themes.
+	 *
+	 * Defaults to `true` if the `theme` option is not set (= you are using the default themes),
+	 * and `false` otherwise.
+	 */
+	useStarlightUiThemeColors?: boolean | undefined;
+};
+
+export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration[] => {
+	const { locales, defaultLocale, expressiveCode } = opts;
+	if (expressiveCode === false) return [];
+	const config = typeof expressiveCode === 'object' ? expressiveCode : {};
+
+	const {
+		theme = ['github-dark', 'github-light'],
+		customizeTheme,
+		styleOverrides,
+		useStarlightDarkModeSwitch,
+		useStarlightUiThemeColors = config.theme === undefined,
+		plugins = [],
+		...rest
+	} = config;
+
+	const configuredThemesCount = (Array.isArray(theme) && theme.length) || 1;
+	if (useStarlightDarkModeSwitch !== false) {
+		const loadedThemes: ExpressiveCodeTheme[] = [];
+		const darkModeSwitchCss: string[] = [];
+		plugins.push({
+			name: 'Starlight Dark Mode Switch',
+			baseStyles: ({ theme, themeClassName }) => {
+				loadedThemes.push(theme);
+				darkModeSwitchCss.push(`
+					:root:not([data-theme='${theme.type}']) .${themeClassName} {
+						display: none;
+					}
+				`);
+				if (loadedThemes.length !== configuredThemesCount) return '';
+				const foundDarkThemes = loadedThemes.filter((t) => t.type === 'dark').length;
+				const foundLightThemes = loadedThemes.filter((t) => t.type === 'light').length;
+				const configuredThemesSupportDarkModeSwitch =
+					foundDarkThemes === 1 && foundLightThemes === 1;
+				if (!configuredThemesSupportDarkModeSwitch) {
+					if (useStarlightDarkModeSwitch === true)
+						console.warn(
+							`*** Warning: To support the config option "useStarlightDarkModeSwitch: true", please provide 1 dark and 1 light theme (found ${foundDarkThemes} and ${foundLightThemes}).\n`
+						);
+					return '';
+				}
+				return darkModeSwitchCss.join('\n');
+			},
+		});
+	}
+
+	if (useStarlightUiThemeColors === true && configuredThemesCount < 2)
+		console.warn(`*** Warning: Using the config option "useStarlightUiThemeColors: true" with only one theme is not recommended. For better color contrast, please provide 1 dark and 1 light theme.\n`);
+
+	// Add Expressive Code UI translations (if any) for all defined locales
+	if (locales) {
+		for (const locale in locales) {
+			const lang = locales[locale]?.lang;
+			if (!lang) continue;
+
+			addTranslations(lang, pluginFramesTexts, [
+				'expressiveCode.copyButtonCopied',
+				'expressiveCode.copyButtonTooltip',
+				'expressiveCode.terminalWindowFallbackTitle',
+			]);
+		}
+	}
+
+	return [
+		astroExpressiveCode({
+			theme,
+			customizeTheme: (theme) => {
+				if (useStarlightUiThemeColors) {
+					applyStarlightUiThemeColors(theme);
+				}
+				if (customizeTheme) {
+					theme = customizeTheme(theme) ?? theme;
+				}
+				return theme;
+			},
+			styleOverrides: {
+				textMarkers: {
+					defaultChroma: '45',
+					backgroundOpacity: '60%',
+				},
+				...styleOverrides,
+			},
+			getBlockLocale: ({ file }) => {
+				// Root path:    `src/content/docs/getting-started.mdx`
+				// Locale path:  `src/content/docs/fr/getting-started.mdx`
+				// Part indices:  0     1      2   3         4
+				const pathParts = path.relative(file.cwd, file.path).split(/[\\/]/);
+				const localeOrFolder = pathParts[3];
+				const lang = localeOrFolder ? locales?.[localeOrFolder]?.lang : locales?.root?.lang;
+				const defaultLang = defaultLocale?.lang || defaultLocale?.locale;
+				const result = lang || defaultLang || 'en';
+
+				return result;
+			},
+			plugins,
+			...rest,
+		}),
+	];
+};
+
+function addTranslations<T extends PluginTexts<any>>(
+	lang: string,
+	target: T,
+	ids: (keyof (typeof translations)['en'])[]
+) {
+	const builtinTexts = translations[lang];
+	let userTexts: Partial<(typeof translations)['en']> = {};
+	try {
+		// As Astro has not been initialized yet, we cannot use content collections directly
+		// and have to manually load any user-provided translations from the file system
+		userTexts = JSON.parse(fs.readFileSync(`src/content/i18n/${lang}.json`, 'utf8'));
+	} catch (error) {
+		// We can safely ignore loading errors here as they will be reported by Starlight later
+		// if the JSON file exists and is invalid
+	}
+	ids.forEach((id) => {
+		const translation = userTexts[id] || builtinTexts?.[id];
+		if (!translation) return;
+		const ecId = (id as string).replace(/^expressiveCode\./, '');
+		target.overrideTexts(lang, { [ecId]: translation });
+	});
+}
+
+export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
+	// Make borders slightly transparent
+	const borderColor = 'color-mix(in srgb, var(--sl-color-gray-5), transparent 25%)';
+	theme.colors['titleBar.border'] = borderColor;
+	theme.colors['editorGroupHeader.tabsBorder'] = borderColor;
+
+	// Use the same color for terminal title bar background and editor tab bar background
+	const backgroundColor =
+		theme.type === 'dark' ? 'var(--sl-color-black)' : 'var(--sl-color-gray-6)';
+	theme.colors['titleBar.activeBackground'] = backgroundColor;
+	theme.colors['editorGroupHeader.tabsBackground'] = backgroundColor;
+
+	// Use the same color for terminal titles and tab titles
+	theme.colors['titleBar.activeForeground'] = 'var(--sl-color-text)';
+	theme.colors['tab.activeForeground'] = 'var(--sl-color-text)';
+
+	// Set tab border colors
+	const activeBorderColor =
+		theme.type === 'dark' ? 'var(--sl-color-accent-high)' : 'var(--sl-color-accent)';
+	theme.colors['tab.activeBorder'] = 'transparent';
+	theme.colors['tab.activeBorderTop'] = activeBorderColor;
+
+	const editorBackgroundColor =
+		theme.type === 'dark' ? 'var(--sl-color-gray-6)' : 'var(--sl-color-gray-7)';
+	theme.styleOverrides.frames = {
+		// Use the same color for editor background, terminal background and active tab background
+		editorBackground: editorBackgroundColor,
+		terminalBackground: editorBackgroundColor,
+		editorActiveTabBackground: editorBackgroundColor,
+		terminalTitlebarDotsForeground: borderColor,
+		terminalTitlebarDotsOpacity: '0.75',
+		inlineButtonForeground: 'var(--sl-color-text)',
+		frameBoxShadowCssValue: 'var(--sl-shadow-sm)',
+	};
+}
