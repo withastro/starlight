@@ -49,13 +49,13 @@ import SidebarPreview from '../../../../components/sidebar-preview.astro';
 	]}
 />
 
-在 [自动生成的组合](#自动生成的组合) 章节了解更多关于自动生成侧边栏的内容。
+在 [自动生成的分组](#自动生成的分组) 章节了解更多关于自动生成侧边栏的内容。
 
-## 添加链接和链接组合
+## 添加链接和链接分组
 
-要配置侧边栏 [链接](#链接) 和 [链接组合](#组合)（在可折叠的标题中），请在 `astro.config.mjs` 中使用 [`starlight.sidebar`](/zh/reference/configuration/#sidebar) 属性。
+要配置侧边栏 [链接](#链接) 和 [链接分组](#分组)（在可折叠的标题中），请在 `astro.config.mjs` 中使用 [`starlight.sidebar`](/zh/reference/configuration/#sidebar) 属性。
 
-结合使用链接和链接组合，你可以创建各种侧边栏布局。
+结合使用链接和链接分组，你可以创建各种侧边栏布局。
 
 ### 链接
 
@@ -81,25 +81,25 @@ starlight({
 	]}
 />
 
-### 组合
+### 分组
 
 你可以通过在可折叠的标题下将相关链接组合在一起来为侧边栏添加结构。
-组合可以包含链接和其他子组。
+分组可以包含链接和其他子组。
 
-使用具有 `label` 和 `items` 属性的对象添加一个组合。
-`label` 将用作组合的标题。
+使用具有 `label` 和 `items` 属性的对象添加一个分组。
+`label` 将用作分组的标题。
 将链接或子组添加到 `items` 数组中。
 
 ```js
 starlight({
 	sidebar: [
-    // 一个名为 "Guides" 的链接组合
+    // 一个名为 "Guides" 的链接分组
 		{
 			label: 'Guides',
 			items: [
 				{ label: 'Components', link: '/guides/components/' },
 				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
-        // 一个嵌套的链接组合
+        // 一个嵌套的链接分组
 				{
 					label: 'Styling',
 					items: [
@@ -136,11 +136,11 @@ starlight({
 	]}
 />
 
-### 自动生成的组合
+### 自动生成的分组
 
-Starlight 可以根据文档目录在侧边栏中自动生成一个组合。当你不想手动输入组合中的每个侧边栏项目时，这很有用。默认情况下，页面将按文档名的字母顺序排序。
+Starlight 可以根据文档目录在侧边栏中自动生成一个分组。当你不想手动输入分组中的每个侧边栏项目时，这很有用。默认情况下，页面将按文档名的字母顺序排序。
 
-使用具有 `label` 和 `autogenerate` 属性的对象添加自动生成的组合。`autogenerate` 的配置必须指定用于侧边栏条目的 `directory` 。例如，使用以下配置：
+使用具有 `label` 和 `autogenerate` 属性的对象添加自动生成的分组。`autogenerate` 的配置必须指定用于侧边栏条目的 `directory` 。例如，使用以下配置：
 
 
 ```js
@@ -148,7 +148,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 自动生成一个链接组合，用于 'guides' 目录。
+      // 自动生成一个链接分组，用于 'guides' 目录。
 			autogenerate: { directory: 'guides' },
 		},
 	],
@@ -211,7 +211,7 @@ sidebar:
 ---
 ```
 
-一个包含上面 frontmatter 的页面的自动生成组合将会生成以下侧边栏：
+一个包含上面 frontmatter 的页面的自动生成分组将会生成以下侧边栏：
 
 <SidebarPreview
 	config={[
@@ -317,7 +317,7 @@ starlight({
 
 ## 国际化
 
-使用链接和组合条目上的 `translations` 属性为每种支持的语言翻译链接或组合标签。
+使用链接和分组条目上的 `translations` 属性为每种支持的语言翻译链接或分组标签。
 `label` 属性将用于默认语言和没有翻译的语言。
 
 ```js
@@ -363,16 +363,16 @@ starlight({
 	]}
 />
 
-## 折叠组合
+## 折叠分组
 
-链接组合可以通过将 `collapsed` 属性设置为 `true` 来默认折叠。
+链接分组可以通过将 `collapsed` 属性设置为 `true` 来默认折叠。
 
 ```js
 starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 默认折叠组合
+      // 默认折叠分组
 			collapsed: true,
 			items: [
 				{ label: 'Components', link: '/guides/components/' },
@@ -398,14 +398,14 @@ starlight({
 	]}
 />
 
-[自动生成的组合](#自动生成的组合) 遵循其父组合的 `collapsed` 值：
+[自动生成的分组](#自动生成的分组) 遵循其父级分组的 `collapsed` 值：
 
 ```js
 starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 默认折叠组合及其自动生成的子组合。
+      // 默认折叠分组及其自动生成的子组。
 			collapsed: true,
 			autogenerate: { directory: 'guides' },
 		},
@@ -442,7 +442,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 不折叠 "Guides" 组合，但折叠其自动生成的子组合。
+      // 不折叠 "Guides" 分组，但折叠其自动生成的子组。
 			collapsed: false,
 			autogenerate: { directory: 'guides', collapsed: true },
 		},
