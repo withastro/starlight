@@ -35,7 +35,7 @@ interface Path extends GetStaticPathsItem {
 const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
 
 /** All entries in the docs content collection. */
-const docs: StarlightDocsEntry[] = (await getCollection('docs')).map(({ slug, ...entry }) => ({
+const docs: StarlightDocsEntry[] = (await getCollection('docs'))?.map(({ slug, ...entry }) => ({
 	...entry,
 	slug: normalizeIndexSlug(slug),
 }));
