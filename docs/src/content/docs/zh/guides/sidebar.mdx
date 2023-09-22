@@ -64,9 +64,9 @@ import SidebarPreview from '../../../../components/sidebar-preview.astro';
 ```js
 starlight({
 	sidebar: [
-    // 指向 CSS & Styling 指南的链接
+		// 指向 CSS & Styling 指南的链接
 		{ label: 'CSS & Styling', link: '/zh/guides/css-and-tailwind/' },
-    // 指向 Astro 官网的外部链接
+		// 指向 Astro 官网的外部链接
 		{ label: 'Astro', link: 'https://astro.build/' },
 	],
 });
@@ -93,13 +93,13 @@ starlight({
 ```js
 starlight({
 	sidebar: [
-    // 一个名为 "Guides" 的链接分组
+		// 一个名为 "Guides" 的链接分组
 		{
 			label: 'Guides',
 			items: [
 				{ label: 'Components', link: '/guides/components/' },
 				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
-        // 一个嵌套的链接分组
+				// 一个嵌套的链接分组
 				{
 					label: 'Styling',
 					items: [
@@ -142,13 +142,12 @@ Starlight 可以根据文档目录在侧边栏中自动生成一个分组。当�
 
 使用具有 `label` 和 `autogenerate` 属性的对象添加自动生成的分组。`autogenerate` 的配置必须指定用于侧边栏条目的 `directory` 。例如，使用以下配置：
 
-
 ```js
 starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 自动生成一个链接分组，用于 'guides' 目录。
+			// 自动生成一个链接分组，用于 'guides' 目录。
 			autogenerate: { directory: 'guides' },
 		},
 	],
@@ -201,7 +200,7 @@ starlight({
 title: 我的页面
 sidebar:
   # 为链接设置自定义标签
-  label: 自定义侧边栏 label 
+  label: 自定义侧边栏 label
   # 为链接设置自定义顺序（数字越小显示在上方）
   order: 2
   # 为链接添加徽章
@@ -286,7 +285,7 @@ starlight({
 		{
 			label: 'Guides',
 			items: [
-        // 一个带有黄色 "Experimental" 徽章的链接。
+				// 一个带有黄色 "Experimental" 徽章的链接。
 				{
 					label: 'Components',
 					link: '/guides/components/',
@@ -372,7 +371,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 默认折叠分组
+			// 默认折叠分组
 			collapsed: true,
 			items: [
 				{ label: 'Components', link: '/guides/components/' },
@@ -405,7 +404,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 默认折叠分组及其自动生成的子组。
+			// 默认折叠分组及其自动生成的子组。
 			collapsed: true,
 			autogenerate: { directory: 'guides' },
 		},
@@ -442,7 +441,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-      // 不折叠 "Guides" 分组，但折叠其自动生成的子组。
+			// 不折叠 "Guides" 分组，但折叠其自动生成的子组。
 			collapsed: false,
 			autogenerate: { directory: 'guides', collapsed: true },
 		},
