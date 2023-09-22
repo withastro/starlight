@@ -4,6 +4,7 @@ import {
 	astroExpressiveCode,
 	ExpressiveCodeTheme,
 	type AstroExpressiveCodeOptions,
+	ensureColorContrastOnBackground,
 	pluginFramesTexts,
 	PluginTexts,
 	type ThemeObjectOrShikiThemeName,
@@ -14,7 +15,7 @@ import translations from '../translations';
 
 export * from 'astro-expressive-code';
 
-export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 'theme'> & {
+export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 'theme' | 'useThemedSelectionColors'> & {
 	/**
 	 * The color theme(s) that Starlight should use to render code blocks. Supported value types:
 	 * - any theme name bundled with Shiki (e.g. `dracula`)
@@ -38,6 +39,15 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	 * once with the class `ec-theme-monokai`, and once with `ec-theme-slack-ochin`.
 	 */
 	theme?: ThemeObjectOrShikiThemeName | ThemeObjectOrShikiThemeName[] | undefined;
+    /**
+     * By default, Starlight renders selected text in code blocks using the browser's
+	 * default style to maximize accessibility. If you want your selections to be more colorful,
+	 * you can set this option to `true` to allow using theme selection colors instead.
+     *
+     * Note that you can override the individual selection colors defined by the theme
+     * using the `styleOverrides` option.
+     */
+    useThemedSelectionColors?: boolean | undefined;
 	/**
 	 * Determines if CSS code should be added to the site that automatically displays
 	 * dark or light code blocks depending on Starlight's dark mode switch state.
@@ -54,6 +64,15 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	 * and `false` otherwise.
 	 */
 	useStarlightUiThemeColors?: boolean | undefined;
+	/**
+	 * Determines if Starlight should process the syntax highlighting colors of all themes
+	 * to ensure an accessible minimum contrast ratio between foreground and background colors.
+	 *
+	 * Defaults to `5.5`, which ensures a contrast ratio of at least 5.5:1.
+	 * You can change the desired contrast ratio by providing another value,
+	 * or turn the feature off by setting this option to `0`.
+	 */
+	minSyntaxHighlightingColorContrast?: number | undefined;
 };
 
 export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration[] => {
@@ -64,9 +83,14 @@ export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration
 	const {
 		theme = ['github-dark', 'github-light'],
 		customizeTheme,
-		styleOverrides,
+		useThemedSelectionColors = false,
+		styleOverrides: {
+			textMarkers: textMarkersStyleOverrides,
+			...otherStyleOverrides
+		} = {},
 		useStarlightDarkModeSwitch,
 		useStarlightUiThemeColors = config.theme === undefined,
+		minSyntaxHighlightingColorContrast = 5.5,
 		plugins = [],
 		...rest
 	} = config;
@@ -128,14 +152,23 @@ export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration
 				if (customizeTheme) {
 					theme = customizeTheme(theme) ?? theme;
 				}
+				if (minSyntaxHighlightingColorContrast > 0) {
+					ensureMinTokenColorContrast(theme, minSyntaxHighlightingColorContrast);
+				}
 				return theme;
 			},
+			useThemedSelectionColors,
 			styleOverrides: {
+				codeFontFamily: 'var(--__sl-font-mono)',
+				codeFontSize: 'var(--sl-text-code)',
+				codeLineHeight: 'var(--sl-line-height)',
+				uiFontFamily: 'var(--__sl-font)',
 				textMarkers: {
 					defaultChroma: '45',
 					backgroundOpacity: '60%',
+					...textMarkersStyleOverrides,
 				},
-				...styleOverrides,
+				...otherStyleOverrides,
 			},
 			getBlockLocale: ({ file }) => {
 				// Root path:    `src/content/docs/getting-started.mdx`
@@ -200,8 +233,12 @@ export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
 	theme.colors['tab.activeBorder'] = 'transparent';
 	theme.colors['tab.activeBorderTop'] = activeBorderColor;
 
+	// Set theme `bg` color property for contrast calculations
+	theme.bg = theme.type === 'dark' ? '#23262f' : '#f6f7f9'
+	// Set actual background color to the appropriate Starlight CSS variable
 	const editorBackgroundColor =
 		theme.type === 'dark' ? 'var(--sl-color-gray-6)' : 'var(--sl-color-gray-7)';
+
 	theme.styleOverrides.frames = {
 		// Use the same color for editor background, terminal background and active tab background
 		editorBackground: editorBackgroundColor,
@@ -212,4 +249,17 @@ export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
 		inlineButtonForeground: 'var(--sl-color-text)',
 		frameBoxShadowCssValue: 'var(--sl-shadow-sm)',
 	};
+
+	return theme;
+}
+
+export function ensureMinTokenColorContrast(theme: ExpressiveCodeTheme, minContrast: number) {
+	theme.settings.forEach((s) => {
+		if (!s.settings.foreground) return
+		const newColor = ensureColorContrastOnBackground(s.settings.foreground, theme.bg, minContrast);
+		if (newColor === s.settings.foreground) return
+		s.settings.foreground = newColor
+	})
+
+	return theme;
 }

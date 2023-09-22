@@ -93,6 +93,10 @@ You can customize your code blocks by passing an object with any of the followin
 
   Defaults to `true` if the `theme` option is not set (= you are using the default themes), and `false` otherwise.
 
+- `minSyntaxHighlightingColorContrast` — determines if Starlight should process the syntax highlighting colors of all themes to ensure an accessible minimum contrast ratio between foreground and background colors.
+
+  Defaults to `5.5`, which ensures a contrast ratio of at least 5.5:1. You can change the desired contrast ratio by providing another value, or turn the feature off by setting this option to `0`.
+
 - See the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) to learn about all the other options.
 
 ### `editLink`
