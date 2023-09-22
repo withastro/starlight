@@ -1,6 +1,6 @@
 ---
 title: Personnaliser Starlight
-description: Apprenez à personnaliser votre site Starlight avec vos propres styles, vos polices et bien plus encore.
+description: Apprenez à vous approprier votre site Starlight avec votre logo, polices personnalisées et bien plus encore.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -86,6 +86,19 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
      },
    }),
    ```
+
+## Activer un plan de site
+
+Starlight possède une prise en charge intégrée pour la génération d’un plan de site. Activez la génération du plan de site en définissant votre URL comme `site` dans `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site avec un plan de site' })],
+});
+```
 
 ## Mise en Page
 
@@ -178,7 +191,7 @@ defineConfig({
 
 Starlight supporte par défaut l’ajout de liens vers vos comptes de médias sociaux dans l’en-tête du site via l’option [`social`](/reference/configuration/#social) dans l’intégration Starlight.
 
-Actuellement, les liens vers Bitbucket, Codeberg, Codepen, Discord, GitHub, GitLab, Gitter, LinkedIn, Mastodon, Microsoft Teams, Threads, Twitch, Twitter et Youtube sont pris en charge.
+Actuellement, les liens vers Bitbucket, Codeberg, Codepen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter et Youtube sont pris en charge.
 Faites-nous savoir sur GitHub ou Discord si vous avez besoin de la prise en charge d’un autre service !
 
 ```js
@@ -262,42 +275,6 @@ hero:
   tagline: Page introuvable. Vérifiez l’URL ou essayez la barre de recherche.
 ---
 ```
-
-## Styles CSS personnalisés
-
-Personnalisez les styles appliqués à votre site Starlight en créant des fichiers CSS complémentaires pour modifier ou étendre les styles par défaut de Starlight.
-
-1. Ajoutez un fichier CSS dans votre répertoire `src/`.
-   Par exemple, vous pouvez remplacer la teinte d’accentuation bleue par défaut de Starlight par du violet :
-
-   ```css
-   /* src/styles/custom.css */
-   :root {
-   	--sl-hue-accent: 270;
-   }
-   ```
-
-2. Ajoutez le chemin vers votre fichier CSS au tableau `customCss` de Starlight dans `astro.config.mjs` :
-
-   ```js
-   // astro.config.mjs
-   import { defineConfig } from 'astro/config';
-   import starlight from '@astrojs/starlight';
-
-   export default defineConfig({
-   	integrations: [
-   		starlight({
-   			title: 'Site avec CSS personnalisé',
-   			customCss: [
-   				// Chemin relatif vers votre fichier CSS personnalisé, Commence par /
-   				'/src/styles/custom.css',
-   			],
-   		}),
-   	],
-   });
-   ```
-
-Vous pouvez voir toutes les propriétés CSS personnalisées utilisées par Starlight que vous pouvez définir pour personnaliser votre site dans le [fichier `props.css` sur GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## Polices personnalisées
 
@@ -406,7 +383,7 @@ Il fournit des modules npm que vous pouvez installer pour les polices que vous s
 
 ### Utiliser vos polices personnalisées
 
-Une fois configurée, pour appliquer votre police personnalisée à votre site, utilisez le nom de la police que vous avez choisie dans un fichier CSS personnalisé.
+Une fois configurée, pour appliquer votre police personnalisée à votre site, utilisez le nom de la police que vous avez choisie dans un [fichier CSS personnalisé](/fr/guides/css-and-tailwind/#styles-css-personnalisés).
 Par exemple, pour remplacer la police par défaut de Starlight partout, définissez la propriété personnalisée `--sl-font` :
 
 ```css
@@ -428,4 +405,4 @@ main {
 }
 ```
 
-Suivez les [instructions de CSS personnalisé](#styles-css-personnalises) pour ajouter vos styles à votre site.
+Suivez les [instructions de CSS personnalisé](/fr/guides/css-and-tailwind/#styles-css-personnalisés) pour ajouter vos styles à votre site.

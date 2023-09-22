@@ -14,12 +14,12 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
     "@size-limit/file": "^8.2.4",
-    "astro": "^2.10.5",
+    "astro": "^3.0.6",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.11.0",
     "size-limit": "^8.2.4"
   },
-  "packageManager": "pnpm@8.2.0",
+  "packageManager": "pnpm@8.7.4",
   "size-limit": [
     {
       "name": "/index.html",

@@ -9,79 +9,11 @@ StarlightサイトやStarlightのツールを作成しましたか？このペ�
 
 ## サイト
 
-import Card from '../../../components/showcase-card.astro';
-import FluidGrid from '../../../components/fluid-grid.astro';
+import ShowcaseSites from '../../../components/showcase-sites.astro';
 
 Starlightはすでに本番環境で使用されています。以下はウェブ上のサイトの一部です。
 
-<FluidGrid>
-	<Card
-		title="Athena OS"
-		href="https://www.athenaos.org"
-		thumbnail="www.athenaos.org.png"
-	/>
-	<Card
-		title="PubIndexAPI Docs"
-		href="https://docs.pubindexapi.com/"
-		thumbnail="docs.pubindexapi.com.png"
-	/>
-	<Card
-		title="pls"
-		href="https://dhruvkb.github.io/pls"
-		thumbnail="dhruvkb.github.io-pls.png"
-	/>
-	<Card
-		title="capo.js"
-		href="https://rviscomi.github.io/capo.js/"
-		thumbnail="capo.js.png"
-	/>
-	<Card
-		title="Web Monetization API"
-		href="https://webmonetization.org/"
-		thumbnail="webmonetization.org.png"
-	/>
-	<Card
-		title="QBCore Docs"
-		href="https://brycerussell.github.io/qbcore-docs/"
-		thumbnail="brycerussell.github.io-qbcore-docs.png"
-	/>
-	<Card title="har.fyi" href="https://har.fyi/" thumbnail="har.fyi.png" />
-	<Card
-		title="xs-dev docs"
-		href="https://xs-dev.js.org"
-		thumbnail="xs-dev.js.org.png"
-	/>
-	<Card
-		title="Felicity"
-		href="https://felicity.pages.dev/"
-		thumbnail="felicity.pages.dev.png"
-	/>
-	<Card
-		title="NgxEditor"
-		href="https://sibiraj-s.github.io/ngx-editor/"
-		thumbnail="sibiraj-s.github.io-ngx-editor.png"
-	/>
-	<Card
-		title="Astro Error Pages"
-		href="https://astro-error-page-documentation.vercel.app/"
-		thumbnail="astro-error-page-documentation.vercel.app.png"
-	/>
-	<Card
-		title="Terrateam Docs"
-		href="https://terrateam.io/docs"
-		thumbnail="terrateam.io-docs.png"
-	/>
-	<Card
-		title="simple-fm"
-		href="https://simple.arciniega.one"
-		thumbnail="simple.arciniega.one.png"
-	/>
-	<Card
-		title="CommandKit"
-		href="https://commandkit.underctrl.io"
-		thumbnail="commandkit.underctrl.io.png"
-	/>
-</FluidGrid>
+<ShowcaseSites />
 
 [Starlightを使用しているGitHub上のすべてのパブリックプロジェクトのリポジトリ](https://github.com/withastro/starlight/network/dependents)も確認してください。
 
@@ -111,5 +43,10 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		href="https://github.com/HiDeoo/starlight-typedoc"
 		title="starlight-typedoc"
 		description="TypeDocを使用してTypeScriptからStarlightページを生成します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-openapi"
+		title="starlight-openapi"
+		description="OpenAPI/Swagger specificationからドキュメントページを作成します。"
 	/>
 </CardGrid>

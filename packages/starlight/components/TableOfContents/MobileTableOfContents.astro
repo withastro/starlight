@@ -16,10 +16,10 @@ const t = useTranslations(locale);
 ---
 
 <mobile-starlight-toc data-min-h={minHeadingLevel} data-max-h={maxHeadingLevel}>
-	<nav aria-labelledby="starlight__on-this-page--mobile" class="lg:hidden">
+	<nav aria-labelledby="starlight__on-this-page--mobile" class="lg:sl-hidden">
 		<details id="starlight__mobile-toc">
-			<summary id="starlight__on-this-page--mobile" class="flex">
-				<div class="toggle flex">
+			<summary id="starlight__on-this-page--mobile" class="sl-flex">
+				<div class="toggle sl-flex">
 					{t('tableOfContents.onThisPage')}
 					<Icon name={'right-caret'} class="caret" size="1rem" />
 				</div>
@@ -122,7 +122,7 @@ const t = useTranslations(locale);
 		}
 
 		constructor() {
-			super({ smallViewport: true });
+			super();
 			const details = this.querySelector('details');
 			if (!details) return;
 			const closeToC = () => {

@@ -4,7 +4,7 @@ interface Props {
 }
 ---
 
-<div class="lg:flex">
+<div class="lg:sl-flex">
 	{
 		Astro.props.hasToC && (
 			<aside class="right-sidebar-container">
@@ -46,7 +46,7 @@ interface Props {
 			width: 100%;
 		}
 
-		:global([data-has-sidebar]) .main-pane {
+		:global([data-has-sidebar][data-has-toc]) .main-pane {
 			--sl-content-margin-inline: auto 0;
 
 			order: 1;

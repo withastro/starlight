@@ -87,6 +87,18 @@ starlight({
    }),
    ```
 
+## 启用 sitemap
+
+Starlight 内置了生成站点地图（sitemap）的支持。通过在 `astro.config.mjs` 中把 `site` 字段设置为你的 URL 来启用站点地图生成：
+
+```js
+// astro.config.mjs
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site with sitemap' })],
+});
+```
+
 ## 页面布局
 
 默认情况下，Starlight 页面使用带有全局导航侧边栏和显示当前页面标题的目录的布局。
@@ -177,7 +189,7 @@ defineConfig({
 
 Starlight 内置了对通过 Starlight 集成中的 [`social`](/zh/reference/configuration/#social) 选项将链接添加到网站标题的社交媒体帐户的支持。
 
-目前，支持链接到 Bitbucket、Codeberg、CodePen、Discord、GitHub、GitLab、Gitter、Instagram、LinkedIn、Mastodon、Microsoft Teams、Threads、Twitch、Twitter 和 YouTube。如果你需要支持其他服务，请在 GitHub 或 Discord 上告诉我们！
+目前，支持链接到 Bitbucket、Codeberg、CodePen、Discord、GitHub、GitLab、Gitter、Instagram、LinkedIn、Mastodon、Microsoft Teams、Stack Overflow、Threads、Twitch、Twitter 和 YouTube。如果你需要支持其他服务，请在 GitHub 或 Discord 上告诉我们！
 
 ```js
 // astro.config.mjs

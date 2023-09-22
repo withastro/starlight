@@ -8,9 +8,9 @@ Starlight is a documentation website framework for [Astro][astro].
 
 ## Support
 
-Get help in the [Astro Discord](discord). Post questions in our `#support` forum with the “starlight” tag, or visit our dedicated `#starlight` channel to discuss current development and more!
+Get help in the [Astro Discord][discord]. Post questions in our `#support` forum with the “starlight” tag, or visit our dedicated `#starlight` channel to discuss current development and more!
 
-You can also submit bug reports and feature requests as [GitHub issues](issues).
+You can also submit bug reports and feature requests as [GitHub issues][issues].
 
 ## Contributing
 
@@ -19,7 +19,7 @@ Join us as a Starlight contributor! These links will help you get started:
 - [Contributor Manual][contributing]
 - [Code of Conduct][coc]
 - [Community Guide][community]
-- [Join the `#starlight` channel on Discord](discord)
+- [Join the `#starlight` channel on Discord][discord]
 
 ## License
 

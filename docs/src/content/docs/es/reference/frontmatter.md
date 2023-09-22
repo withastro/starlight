@@ -134,6 +134,25 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**tipo:** `{ content: string }`
+
+Muestra un banner de anuncio en la parte superior de esta página.
+
+El valor `content` puede incluir HTML para enlaces u otro contenido.
+Por ejemplo, esta página muestra un banner que incluye un enlace a `example.com`.
+
+```md
+---
+title: Página con un banner
+banner:
+  content: |
+    ¡Acabamos de lanzar algo genial!
+    <a href="https://example.com">Checalo</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
@@ -190,9 +209,23 @@ Lo mismo que [`prev`](#prev), pero para el enlace de la página siguiente.
 next: false
 ```
 
+### `pagefind`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Establece si esta página debe incluirse en el índice de búsqueda de [Pagefind](https://pagefind.app/). Establece en `false` para excluir una página de los resultados de búsqueda:
+
+```md
+---
+# Ocultar esta página del índice de búsqueda
+pagefind: false
+---
+```
+
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number; hidden?: boolean }`
+**tipo:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
 Controla cómo se muestra esta página en el [sidebar](/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
 
@@ -238,5 +271,32 @@ Previene que esta página se incluya en un grupo de enlaces generado automática
 title: Página para ocultar de la barra lateral autogenerada
 sidebar:
   hidden: true
+---
+```
+
+#### `badge`
+
+**tipo:** <code>string | <a href="/es/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+Agrega una insignia a la página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
+Cuando se usa un string, la insignia se mostrará con el color de acento predeterminado.
+Opcionalmente, pasa un objeto [`BadgeConfig`](/es/reference/configuration/#badgeconfig) con los campos `text` y `variant` para personalizar la insignia.
+
+```md
+---
+title: Página con una insignia
+sidebar:
+  # Usa la variante predeterminada que coincide con el color de acento de tu sitio
+  badge: Nuevo
+---
+```
+
+```md
+---
+title: Página con una insignia
+sidebar:
+  badge:
+    text: Experimental
+    variant: caution
 ---
 ```

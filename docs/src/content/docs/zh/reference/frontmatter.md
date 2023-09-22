@@ -134,6 +134,25 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**类型：** `{ content: string }`
+
+在此页面顶部显示公告横幅。
+
+`content` 的值可以包含链接或其他内容的 HTML。
+例如，此页面显示了一个横幅，其中包含指向 `example.com` 的链接。
+
+```md
+---
+title: 带有横幅的页面
+banner:
+  content: |
+    我们刚刚发布了一下非常酷的东西！
+    <a href="https://example.com">点击查看！</a>
+---
+```
+
 ### `lastUpdated`
 
 **类型：** `Date | boolean`
@@ -189,9 +208,23 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+设置此页面是否应包含在 [Pagefind](https://pagefind.app/) 搜索索引中。设置为 `false` 以从搜索结果中排除页面：
+
+```md
+---
+# 在搜索索引中隐藏此页面
+pagefind: false
+---
+```
+
 ### `sidebar`
 
-**类型：** `{ label?: string; order?: number; hidden?: boolean }`
+**类型：** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
 在使用自动生成的链接组时，控制如何在[侧边栏](/zh/reference/configuration/#sidebar)中显示此页面。
 
@@ -237,5 +270,32 @@ sidebar:
 title: 从自动生成的侧边栏中隐藏的页面
 sidebar:
   hidden: true
+---
+```
+
+#### `badge`
+
+**类型：** <code>string | <a href="/zh/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+当在自动生成的链接组中显示时，在侧边栏中为页面添加徽章。
+
+当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh/reference/configuration/#badgeconfig) ，其中包含 `text` 和 `variant` 字段，可以自定义徽章。
+
+```md
+---
+title: 带有徽章的页面
+sidebar:
+  # 使用与你的网站的强调色相匹配的默认类型
+  badge: 新增
+---
+```
+
+```md
+---
+title: 带有徽章的页面
+sidebar:
+  badge:
+    text: 实验性
+    variant: caution
 ---
 ```

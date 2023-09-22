@@ -134,6 +134,25 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**tipo:** `{ content: string }`
+
+Exibe um banner de anúncio no topo desta página.
+
+O valor de `conteúdo` pode incluir HTML para links ou outro conteúdo.
+Por exemplo, esta página exibe um banner que inclui um link para `example.com`.
+
+```md
+---
+title: Página com um banner
+banner:
+  content: |
+    Acabamos de lançar algo legal!
+    <a href="https://example.com">Confira</a>
+---
+```
+
 ### `lastUpdated`
 
 **tipo:** `Date | boolean`
@@ -191,7 +210,7 @@ next: false
 
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number; hidden?: boolean }`
+**tipo:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
 Controla como essa página é mostrada na [barra lateral](/pt-br/reference/configuration/#sidebar), quando se utiliza um grupo de links gerados automaticamente.
 
@@ -237,5 +256,32 @@ Previne essa página de ser incluída no no grupo gerado automaticamente da barr
 title: Página para esconder da barra lateral gerada automaticamente
 sidebar:
   hidden: true
+---
+```
+
+#### `badge`
+
+**type:** <code>string | <a href="/pt-br/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+Adicione um emblema a página na barra lateral ao ser mostrada em um grupo gerado automaticamente de links.
+Ao utilizar uma string, o emblema será mostrado com uma cor de destaque padrão.
+Opcionalmente, passe um [objeto `BadgeConfig`](/pt-br/reference/configuration/#badgeconfig) com os campos `text` e `variant` para customizar o emblema.
+
+```md
+---
+title: Página com um emblema
+sidebar:
+  # Utiliza a variante padrão correspondente a cor de destaque do seu site
+  badge: New
+---
+```
+
+```md
+---
+title: Página com um emblema
+sidebar:
+  badge:
+    text: Experimental
+    variant: caution
 ---
 ```

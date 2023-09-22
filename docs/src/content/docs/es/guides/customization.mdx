@@ -86,6 +86,19 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
    }),
    ```
 
+## Habilitar el mapa del sitio
+
+Starlight tiene soporte incorporado para generar un mapa del sitio. Habilita la generación del mapa del sitio estableciendo tu URL como `site` en `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Sitio con mapa del sitio' })],
+});
+```
+
 ## Diseño de página
 
 De forma predeterminada, las páginas de Starlight utilizan un diseño con una barra lateral de navegación global y una tabla de contenidos que muestra los encabezados de la página actual.
@@ -175,7 +188,7 @@ defineConfig({
 
 Starlight cuenta con soporte incorporado para agregar enlaces a tus cuentas de redes sociales en el encabezado del sitio mediante la opción [`social`](/es/reference/configuration/#social) en la integración de Starlight.
 
-Actualmente, se admiten enlaces a Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Threads, Twitch, Twitter, y Youtube ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
+Actualmente, se admiten enlaces a Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter, y Youtube ¡Háznoslo saber en GitHub o Discord si necesitas soporte para otro servicio!
 
 ```js
 // astro.config.mjs

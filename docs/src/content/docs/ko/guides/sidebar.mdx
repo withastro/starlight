@@ -1,0 +1,473 @@
+---
+title: 사이드바 탐색
+description: Starlight 사이트의 사이드바 탐색 링크를 설정하고 사용자 정의하는 방법을 알아보세요.
+sidebar:
+  badge: New
+---
+
+import FileTree from '../../../../components/file-tree.astro';
+import SidebarPreview from '../../../../components/sidebar-preview.astro';
+
+잘 구성된 사이드바는 사용자가 사이트를 탐색하는 주요 방법 중 하나이므로 좋은 문서의 핵심입니다. Starlight는 사이드바 레이아웃과 콘텐츠를 변경할 수 있는 완전한 옵션 세트를 제공합니다.
+
+## 기본 사이드바
+
+기본적으로 Starlight는 각 파일의 `title` 속성을 사이드바 항목으로 사용하여 자동으로 문서의 파일 시스템 구조 기반의 사이드바를 생성합니다.
+
+예를 들어, 다음과 같은 파일 구조가 있다고 가정합니다.
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+      - reference/
+        - configuration.md
+
+</FileTree>
+
+다음 사이드바가 자동으로 생성됩니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: 'guides',
+			items: [
+				{ label: 'Components', link: '/guides/components/' },
+				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+			],
+		},
+		{
+			label: 'reference',
+			items: [
+				{ label: 'Configuration Reference', link: '/reference/configuration/' },
+			],
+		},
+	]}
+/>
+
+[자동 생성 그룹](#자동-생성-그룹) 섹션에서 자동으로 생성된 사이드바에 대해 자세히 알아보세요.
+
+## 링크 및 링크 그룹 추가
+
+`astro.config.mjs` 파일의 [`starlight.sidebar`](/ko/reference/configuration/#sidebar) 속성을 사용하여 사이드바 [링크](#링크) 및 [링크 그룹](#그룹) (접이식 헤더 및 하위 항목들)을 구성할 수 있습니다.
+
+링크와 그룹을 결합하여 다양한 사이드바 레이아웃을 만들 수 있습니다.
+
+### 링크
+
+`label` 및 `link` 속성이 있는 객체를 사용하여 내부 또는 외부 페이지에 대한 링크를 추가할 수 있습니다.
+
+```js
+starlight({
+	sidebar: [
+		// CSS 및 스타일링 가이드 링크
+		{ label: 'CSS & 스타일링', link: '/ko/guides/css-and-tailwind/' },
+		// Astro 웹사이트로 연결되는 외부 링크
+		{ label: 'Astro', link: 'https://astro.build/' },
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{ label: 'CSS & 스타일링', link: '/ko/guides/css-and-tailwind/' },
+		{ label: 'Astro', link: 'https://astro.build/' },
+	]}
+/>
+
+### 그룹
+
+접을 수 있는 제목 아래 관련 링크를 그룹화하여 사이드바에 구조를 추가할 수 있습니다. 그룹에는 링크와 기타 하위 그룹이 모두 포함될 수 있습니다.
+
+`label` 및 `items` 속성이 있는 객체를 사용하여 그룹을 추가합니다. `label`은 그룹의 제목으로 사용됩니다. `items` 배열에 링크나 하위 그룹을 추가할 수 있습니다.
+
+```js
+starlight({
+	sidebar: [
+		// "가이드" 라벨이 붙은 링크 그룹
+		{
+			label: '가이드',
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				// 중첩된 링크 그룹
+				{
+					label: '스타일링',
+					items: [
+						{ label: 'CSS', link: '/ko/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/ko/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/ko/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				// 중첩된 링크 그룹
+				{
+					label: '스타일링',
+					items: [
+						{ label: 'CSS', link: '/ko/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/ko/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/ko/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### 자동 생성 그룹
+
+Starlight는 문서 디렉토리를 기반해서 자동으로 사이드바에 그룹을 생성할 수 있습니다. 이는 그룹의 각 사이드바 항목을 수동으로 입력하고 싶지 않을 때 유용합니다. 기본적으로 페이지는 파일 이름을 알파벳순으로 정렬하여 사이드바에 표시합니다.
+
+`label` 및 `autogenerate` 속성이 있는 객체를 사용하여 자동 생성 그룹을 추가합니다. `autogenerate` 구성은 사이드바 항목에 사용할 디렉토리를 지정해야 합니다. 예를 들어, 다음 구성을 사용할 수 있습니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			// 'guides' 디렉토리에 대한 링크 그룹을 자동으로 생성
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+파일 구조는 다음과 같습니다.
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+        - advanced/
+          - project-structure.md
+
+</FileTree>
+
+다음 사이드바가 생성됩니다:
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{
+					label: '고급',
+					items: [
+						{
+							label: '프로젝트 구조',
+							link: '/ko/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+#### Frontmatter에서 자동으로 생성된 링크 변경하기
+
+자동으로 생성된 링크를 변경하려면 개별 페이지의 [`sidebar` frontmatter 필드](/ko/reference/frontmatter/#sidebar)를 사용하세요.
+
+frontmatter에서 sidebar 옵션을 사용하면 [사용자 정의 라벨](/ko/reference/frontmatter/#label)을 설정하거나 링크에 [배지](/ko/reference/frontmatter/#badge)를 추가하거나 사이드바에서 링크를 [숨기거나](/ko/reference/frontmatter/#hidden) [사용자 정의 정렬 기준](/ko/reference/frontmatter/#order)을 설정할 수 있습니다.
+
+```md
+---
+title: 나의 페이지
+sidebar:
+  # 링크에 대한 사용자 정의 라벨 설정
+  label: 사용자 정의 사이드바 라벨
+  # 링크에 대한 사용자 정의 순서 설정 (숫자가 낮을수록 더 위에 표시됩니다.)
+  order: 2
+  # 링크에 배지 추가
+  badge:
+    text: New
+    variant: tip
+---
+```
+
+위 frontmatter가 있는 페이지를 포함하는 자동 생성 그룹은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{ label: '홈페이지', link: '#' },
+				{
+					label: '사용자 정의 사이드바 라벨',
+					link: '#',
+					badge: { text: 'New', variant: 'tip' },
+				},
+				{ label: '다른 페이지', link: '#' },
+			],
+		},
+	]}
+/>
+
+:::note
+
+`sidebar` frontmatter 구성은 자동으로 생성된 링크에만 사용되며 수동으로 정의된 링크에서는 무시됩니다.
+
+:::
+
+## 배지
+
+링크 라벨 옆에 배지를 표시하기 위해 링크에는 `badge` 속성이 포함될 수도 있습니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			items: [
+				// "New" 배지가 포함된 링크
+				{
+					label: '컴포넌트',
+					link: '/ko/guides/components/',
+					badge: 'New',
+				},
+			],
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{
+					label: '컴포넌트',
+					link: '/ko/guides/components/',
+					badge: { text: 'New', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
+### 배지 변형
+
+`text` 및 `variant` 속성이 있는 객체를 사용하여 배지 스타일을 변경할 수 있습니다.
+
+`text`는 표시할 콘텐츠를 나타냅니다(예: "New"). `variant` 속성의 값을 `note`, `tip`, `danger`, `caution`, `success` 중 하나로 설정하여 사이트의 강조 색상을 사용하는 `default` 스타일을 변경하세요.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			items: [
+				// 노란색 "실험적 기능" 배지가 포함된 링크
+				{
+					label: '컴포넌트',
+					link: '/ko/guides/components/',
+					badge: { text: '실험적 기능', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{
+					label: '컴포넌트',
+					link: '/ko/guides/components/',
+					badge: { text: '실험적 기능', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## 국제화
+
+링크 또는 그룹의 라벨을 지원되는 각 언어로 번역하기 위해 링크 및 그룹 항목에 `translations` 속성을 사용할 수 있습니다.
+`label` 속성은 기본 언어 및 번역이 제공되지 않는 언어를 위해 사용될 것입니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			translations: {
+				es: 'Guías',
+			},
+			items: [
+				{
+					label: '컴포넌트',
+					translations: {
+						es: 'Componentes',
+					},
+					link: '/ko/guides/components/',
+				},
+				{
+					label: '국제화 (i18n)',
+					translations: {
+						es: 'Internacionalización (i18n)',
+					},
+					link: '/ko/guides/i18n/',
+				},
+			],
+		},
+	],
+});
+```
+
+스페인어로 문서를 검색하면 다음 사이드바가 생성됩니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/ko/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/ko/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+## 그룹 축소
+
+`collapsed` 속성을 `true`로 설정하면 링크 그룹의 기본 상태를 접힌 상태로 만들 수 있습니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			// 접힌 상태를 기본 상태로 설정
+			collapsed: true,
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+			],
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			collapsed: true,
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+[자동 생성 그룹](#자동-생성-그룹)은 상위 그룹의 `collapsed` 값을 따릅니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			// 그룹 및 자동으로 생성된 하위 그룹의 기본 상태가 접힌 상태가 됩니다.
+			collapsed: true,
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			collapsed: true,
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{
+					label: '고급',
+					collapsed: true,
+					items: [
+						{ label: '프로젝트 구조', link: '/ko/guides/project-structure/' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+`autogenerate.collapsed` 속성을 정의하여 이 동작을 변경할 수 있습니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			// "가이드" 그룹은 축소하지 않고, 자동 생성된 하위 그룹을 축소합니다.
+			collapsed: false,
+			autogenerate: { directory: 'guides', collapsed: true },
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{ label: '컴포넌트', link: '/ko/guides/components/' },
+				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{
+					label: '고급',
+					collapsed: true,
+					items: [
+						{ label: '프로젝트 구조', link: '/ko/guides/project-structure/' },
+					],
+				},
+			],
+		},
+	]}
+/>

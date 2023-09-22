@@ -84,6 +84,19 @@ starlight({
    }),
    ```
 
+## サイトマップを有効化する
+
+Starlightにはサイトマップ生成機能が組み込まれています。`astro.config.mjs`の`site`にURLを設定すると、サイトマップの生成が有効になります。
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'サイトマップを設定したサイト' })],
+});
+```
+
 ## ページレイアウト
 
 Starlightのページはデフォルトで、グローバルなナビゲーションサイドバーと、現在のページの見出しを表示する目次を配置したレイアウトを使用します。
@@ -173,7 +186,7 @@ defineConfig({
 
 Starlightは、Starlightインテグレーションの[`social`](/ja/reference/configuration/#social)オプションを使用して、サイトヘッダーにソーシャルメディアアカウントへのリンクを追加する機能を備えています。
 
-現在、Bitbucket、Codeberg、CodePen、Discord、GitHub、GitLab、Gitter、Instagram、LinkedIn、Mastodon、Microsoft Teams、Threads、Twitch、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
+現在、Bitbucket、Codeberg、CodePen、Discord、GitHub、GitLab、Gitter、Instagram、LinkedIn、Mastodon、Microsoft Teams、Stack Overflow、Threads、Twitch、Twitter、YouTubeへのリンクがサポートされています。他のサービスのサポートが必要な場合は、GitHubまたはDiscordでお知らせください！
 
 ```js
 // astro.config.mjs

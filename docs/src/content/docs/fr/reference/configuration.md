@@ -184,10 +184,22 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[] }
   | { autogenerate: { directory: string } }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
@@ -252,7 +264,7 @@ L'étiquette de cette langue à afficher aux utilisateurs, par exemple dans le s
 
 **type:** `string`
 
-La balise BCP-47 pour cette langue, par exemple `"en"`, `"ar"`, ou `"zh-CN"`. S'il n'est pas défini, le nom du répertoire de la langue sera utilisé par défaut.
+L'étiquette d’identification BCP-47 pour cette langue, par exemple `"en"`, `"ar"`, ou `"zh-CN"`. Si elle n'est pas définie, le nom du répertoire de la langue sera utilisé par défaut. Les étiquettes de langue avec des sous-étiquettes régionales (par exemple `"pt-BR"` ou `"en-US"`) utiliseront les traductions de l'interface utilisateur intégrées pour leur langue de base si aucune traduction spécifique à la région n'est trouvée.
 
 ##### `dir`
 
@@ -292,7 +304,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
