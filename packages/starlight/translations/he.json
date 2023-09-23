@@ -1,0 +1,22 @@
+{
+  "skipLink.label": "מעבר לתוכן",
+  "search.label": "חיפוש",
+  "search.shortcutLabel": "(לחצו / כדי לחפש)",
+  "search.cancelLabel": "ביטול",
+  "search.devWarning": "חיפוש זמין בסביבת ייצור בלבד. \nנסו לבנות ולהציג את האתר כדי לבדוק אותו מקומית.",
+  "themeSelect.accessibleLabel": "בחירת ערכת נושא",
+  "themeSelect.dark": "כהה",
+  "themeSelect.light": "בהיר",
+  "themeSelect.auto": "אוטומטי",
+  "languageSelect.accessibleLabel": "בחירת שפה",
+  "menuButton.accessibleLabel": "תפריט",
+  "sidebarNav.accessibleLabel": "ראשי",
+  "tableOfContents.onThisPage": "בעמוד זה",
+  "tableOfContents.overview": "סקירה כללית",
+  "i18n.untranslatedContent": "התוכן אינו זמין בשפה שלך עדיין.",
+  "page.editLink": "עריכת דף",
+  "page.lastUpdated": "עדכון אחרון:",
+  "page.previousLink": "הקודם",
+  "page.nextLink": "הבא",
+  "404.text": "עמוד לא נמצא. בדקו את כתובת האינטרנט שלכם או נסו להשתמש בשורת הכתובות"
+}
