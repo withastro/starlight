@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "test": "start-server-and-test preview http://localhost:4321 pa11y",
+    "test": "start-server-and-test 'pnpm preview' http://localhost:4321 'pnpm pa11y'",
     "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-0.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(de|zh|fr|es|pt-br|it|ko)/.*'",
     "dev": "astro dev",
     "start": "astro dev",
