@@ -7,6 +7,7 @@ import { getFileCommitDate } from './git';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import type { Route } from './routing';
 import { useTranslations } from './translations';
+import { ensureTrailingSlash } from './path';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -25,6 +26,8 @@ export interface StarlightRouteData extends Route {
 	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
 	/** JS Date object representing when this page was last updated if enabled. */
 	lastUpdated: Date | undefined;
+	/** URL object for the address where this page can be edited if enabled. */
+	editUrl: URL | undefined;
 }
 
 export function generateRouteData({
@@ -43,6 +46,7 @@ export function generateRouteData({
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
+		editUrl: getEditUrl(props),
 	};
 }
 
@@ -73,4 +77,20 @@ function getLastUpdated({ entry, id }: PageProps): Date | undefined {
 		return date;
 	}
 	return;
+}
+
+function getEditUrl({ entry, id }: PageProps): URL | undefined {
+	const { editUrl } = entry.data;
+	// If frontmatter value is false, editing is disabled for this page.
+	if (editUrl === false) return;
+
+	let url: string | undefined;
+	if (typeof editUrl === 'string') {
+		// If a URL was provided in frontmatter, use that.
+		url = editUrl;
+	} else if (config.editLink.baseUrl) {
+		// If a base URL was added in Starlight config, synthesize the edit URL from it.
+		url = ensureTrailingSlash(config.editLink.baseUrl) + 'src/content/docs/' + id;
+	}
+	return url ? new URL(url) : undefined;
 }
