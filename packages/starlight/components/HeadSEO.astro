@@ -92,7 +92,7 @@ if (config.social?.twitter) {
 		tag: 'meta',
 		attrs: {
 			name: 'twitter:site',
-			content: new URL(config.social.twitter).pathname,
+			content: new URL(config.social.twitter.url).pathname,
 		},
 	});
 }

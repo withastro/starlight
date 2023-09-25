@@ -1,11 +1,12 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
-import { HeadConfigSchema } from '../schemas/head';
-import { LogoConfigSchema } from '../schemas/logo';
-import { TableOfContentsSchema } from '../schemas/tableOfContents';
-import { FaviconSchema } from '../schemas/favicon';
 import { BadgeConfigSchema } from '../schemas/badge';
 import { ComponentConfigSchema } from '../schemas/components';
+import { FaviconSchema } from '../schemas/favicon';
+import { HeadConfigSchema } from '../schemas/head';
+import { LogoConfigSchema } from '../schemas/logo';
+import { SocialLinksSchema } from '../schemas/social';
+import { TableOfContentsSchema } from '../schemas/tableOfContents';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -134,30 +135,7 @@ const UserConfigSchema = z.object({
 	 *   youtube: 'https://youtube.com/@astrodotbuild',
 	 * }
 	 */
-	social: z
-		.record(
-			z.enum([
-				'twitter',
-				'mastodon',
-				'github',
-				'gitlab',
-				'bitbucket',
-				'discord',
-				'gitter',
-				'codeberg',
-				'codePen',
-				'youtube',
-				'threads',
-				'linkedin',
-				'twitch',
-				'microsoftTeams',
-				'instagram',
-				'stackOverflow',
-			]),
-			// Link to the respective social profile for this site
-			z.string().url()
-		)
-		.optional(),
+	social: SocialLinksSchema(),
 
 	/** The tagline for your website. */
 	tagline: z.string().optional().describe('The tagline for your website.'),
