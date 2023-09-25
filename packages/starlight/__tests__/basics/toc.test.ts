@@ -96,8 +96,6 @@ test('adds higher-level headings sequentially h6 => h4 => h2', () => {
 		],
 		{ ...defaultOpts, maxHeadingLevel: 6 }
 	);
-	console.log(toc);
-
 	expect(toc).toHaveLength(2);
 	expect(toc).toMatchInlineSnapshot(`
 		[
