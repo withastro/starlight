@@ -20,7 +20,14 @@ export default defineConfig({
 		coverage: {
 			all: true,
 			reportsDirectory: './__coverage__',
-			exclude: [...defaultCoverageExcludes, '**/vitest.*', 'components.ts', 'types.ts'],
+			exclude: [
+				...defaultCoverageExcludes,
+				'**/vitest.*',
+				'components.ts',
+				'types.ts',
+				// We use this to set up test environments so it isn‘t picked up, but we are testing it downstream.
+				'integrations/virtual-user-config.ts',
+			],
 			thresholdAutoUpdate: true,
 			lines: 66.57,
 			functions: 88.46,
