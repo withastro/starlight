@@ -31,7 +31,7 @@ export function ComponentConfigSchema() {
 			ThemeSelect: z.string().default('@astrojs/starlight/components/ThemeSelect.astro'),
 			LanguageSelect: z.string().default('@astrojs/starlight/components/LanguageSelect.astro'),
 
-			HeadSEO: z.string().default('@astrojs/starlight/components/HeadSEO.astro'),
+			Head: z.string().default('@astrojs/starlight/components/Head.astro'),
 			Hero: z.string().default('@astrojs/starlight/components/Hero.astro'),
 			MarkdownContent: z.string().default('@astrojs/starlight/components/MarkdownContent.astro'),
 

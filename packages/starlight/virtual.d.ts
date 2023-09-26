@@ -34,7 +34,7 @@ declare module 'virtual:starlight/components' {
 	export const SocialIcons: typeof import('./components/SocialIcons.astro').default;
 	export const ThemeSelect: typeof import('./components/ThemeSelect.astro').default;
 
-	export const HeadSEO: typeof import('./components/HeadSEO.astro').default;
+	export const Head: typeof import('./components/Head.astro').default;
 	export const Hero: typeof import('./components/Hero.astro').default;
 	export const MarkdownContent: typeof import('./components/MarkdownContent.astro').default;
 
