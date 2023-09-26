@@ -3,52 +3,64 @@ import { z } from 'astro/zod';
 export function ComponentConfigSchema() {
 	return z
 		.object({
-			/**
-			 * Banner component rendered at the top of each page. The default implementation uses the
-			 * page’s `banner` frontmatter value to decide whether or not to render.
-			 */
-			Banner: z.string().default('@astrojs/starlight/components/Banner.astro'),
-
-			/** Layout component used to wrap sections of the main content column. */
-			ContentPanel: z.string().default('@astrojs/starlight/components/ContentPanel.astro'),
+			/*
+			HEAD ----------------------------------------------------------------------------------------
+			*/
 
 			/**
-			 * Component containing the `<h1>` element for the current page.
+			 * Component rendered inside each page’s `<head>`.
+			 * Includes important tags including `<title>`, and `<meta charset="utf-8">`.
 			 *
-			 * Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default
-			 * implementation.
+			 * Override this component as a last resort. Prefer the `head` option Starlight config if possible.
 			 */
-			PageTitle: z.string().default('@astrojs/starlight/components/PageTitle.astro'),
+			Head: z.string().default('@astrojs/starlight/components/Head.astro'),
 
 			/**
-			 * Notice displayed to users on pages where a translation for the current language is not
-			 * available. Only used on multilingual sites.
+			 * Component rendered inside `<head>` that sets up dark/light theme support.
+			 * The default implementation includes an inline script and a `<template>` used by the
+			 * script in `ThemeSelect.astro`.
 			 */
-			FallbackContentNotice: z
-				.string()
-				.default('@astrojs/starlight/components/FallbackContentNotice.astro'),
+			ThemeProvider: z.string().default('@astrojs/starlight/components/ThemeProvider.astro'),
 
-			// ------------------------------------------------------------------------------------------
+			/*
+			BODY ----------------------------------------------------------------------------------------
+			*/
 
 			/**
-			 * Footer component displayed at the bottom of each documentation page.
-			 * The default implementation displays `<LastUpdated />`, `<Pagination />`, and `<EditLink />`.
+			 * Component rendered as the first element inside `<body>` which links to the main page
+			 * content for accessibility. The default implementation is hidden until a user focuses it
+			 * by tabbing with their keyboard.
 			 */
-			Footer: z.string().default('@astrojs/starlight/components/Footer.astro'),
-			/**
-			 * Component rendered in the page footer to display the last-updated date.
-			 */
-			LastUpdated: z.string().default('@astrojs/starlight/components/LastUpdated.astro'),
-			/**
-			 * Component rendered in the page footer to display navigation arrows between previous/next pages.
-			 */
-			Pagination: z.string().default('@astrojs/starlight/components/Pagination.astro'),
-			/**
-			 * Component rendered in the page footer to display a link to where the page can be edited.
-			 */
-			EditLink: z.string().default('@astrojs/starlight/components/EditLink.astro'),
+			SkipLink: z.string().default('@astrojs/starlight/components/SkipLink.astro'),
 
-			// ------------------------------------------------------------------------------------------
+			/*
+			LAYOUT --------------------------------------------------------------------------------------
+			*/
+
+			/**
+			 * Layout component wrapped around most of the page content.
+			 * The default implementation sets up the header–sidebar–main layout and includes
+			 * `header` and `sidebar` named slots along with a default slot for the main content.
+			 * It also renders `<MobileMenuToggle />` to support toggling the sidebar navigation
+			 * on small (mobile) viewports.
+			 */
+			PageFrame: z.string().default('@astrojs/starlight/components/PageFrame.astro'),
+			/**
+			 * Component rendered inside `<PageFrame>` that is responsible for toggling the
+			 * sidebar navigation on small (mobile) viewports.
+			 */
+			MobileMenuToggle: z.string().default('@astrojs/starlight/components/MobileMenuToggle.astro'),
+
+			/**
+			 * Layout component wrapped around the main content column and right sidebar (table of contents).
+			 * The default implementation handles the switch between a single-column, small-viewport layout
+			 * and a two-column, larger-viewport layout.
+			 */
+			TwoColumnContent: z.string().default('@astrojs/starlight/components/TwoColumnContent.astro'),
+
+			/*
+			HEADER --------------------------------------------------------------------------------------
+			*/
 
 			/**
 			 * Header component displayed at the top of every page.
@@ -80,29 +92,21 @@ export function ComponentConfigSchema() {
 			 */
 			LanguageSelect: z.string().default('@astrojs/starlight/components/LanguageSelect.astro'),
 
-			// ------------------------------------------------------------------------------------------
+			/*
+			SIDEBAR -------------------------------------------------------------------------------------
+			*/
 
 			/**
-			 * Component rendered inside each page’s `<head>`.
-			 * Includes important tags including `<title>`, and `<meta charset="utf-8">`.
-			 *
-			 * Override this component as a last resort. Prefer the `head` option Starlight config if possible.
+			 * Component rendered before page content that contains global navigation.
+			 * The default implementation displays as a sidebar on wide enough viewports and inside a
+			 * drop-down menu on small (mobile) viewports. It also renders `<ThemeSelect />` and
+			 * `<LanguageSelect />` inside the mobile menu.
 			 */
-			Head: z.string().default('@astrojs/starlight/components/Head.astro'),
+			Sidebar: z.string().default('@astrojs/starlight/components/Sidebar.astro'),
 
-			/**
-			 * Component rendered at the top of the page when `hero` is set in frontmatter. The default
-			 * implementation shows a large title, tagline, and call-to-action links alongside an optional image.
-			 */
-			Hero: z.string().default('@astrojs/starlight/components/Hero.astro'),
-
-			/**
-			 * Component rendered around each page’s main content.
-			 * The default implementation sets up basic styles to apply to Markdown content.
-			 */
-			MarkdownContent: z.string().default('@astrojs/starlight/components/MarkdownContent.astro'),
-
-			// ------------------------------------------------------------------------------------------
+			/*
+			TOC -----------------------------------------------------------------------------------------
+			*/
 
 			/**
 			 * Component rendered before the main page’s content to display a table of contents.
@@ -128,52 +132,72 @@ export function ComponentConfigSchema() {
 				.string()
 				.default('@astrojs/starlight/components/TableOfContents/MobileTableOfContents.astro'),
 
-			// ------------------------------------------------------------------------------------------
+			/*
+			CONTENT HEADER ------------------------------------------------------------------------------
+			*/
 
 			/**
-			 * Component rendered before page content that contains global navigation.
-			 * The default implementation displays as a sidebar on wide enough viewports and inside a
-			 * drop-down menu on small (mobile) viewports. It also renders `<ThemeSelect />` and
-			 * `<LanguageSelect />` inside the mobile menu.
+			 * Banner component rendered at the top of each page. The default implementation uses the
+			 * page’s `banner` frontmatter value to decide whether or not to render.
 			 */
-			Sidebar: z.string().default('@astrojs/starlight/components/Sidebar.astro'),
+			Banner: z.string().default('@astrojs/starlight/components/Banner.astro'),
+
+			/** Layout component used to wrap sections of the main content column. */
+			ContentPanel: z.string().default('@astrojs/starlight/components/ContentPanel.astro'),
 
 			/**
-			 * Component rendered as the first element inside `<body>` which links to the main page
-			 * content for accessibility. The default implementation is hidden until a user focuses it
-			 * by tabbing with their keyboard.
+			 * Component containing the `<h1>` element for the current page.
+			 *
+			 * Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default
+			 * implementation.
 			 */
-			SkipLink: z.string().default('@astrojs/starlight/components/SkipLink.astro'),
+			PageTitle: z.string().default('@astrojs/starlight/components/PageTitle.astro'),
 
 			/**
-			 * Component rendered inside `<head>` that sets up dark/light theme support.
-			 * The default implementation includes an inline script and a `<template>` used by the
-			 * script in `ThemeSelect.astro`.
+			 * Notice displayed to users on pages where a translation for the current language is not
+			 * available. Only used on multilingual sites.
 			 */
-			ThemeProvider: z.string().default('@astrojs/starlight/components/ThemeProvider.astro'),
-
-			// ------------------------------------------------------------------------------------------
-
-			/**
-			 * Layout component wrapped around most of the page content.
-			 * The default implementation sets up the header–sidebar–main layout and includes
-			 * `header` and `sidebar` named slots along with a default slot for the main content.
-			 * It also renders `<MobileMenuToggle />` to support toggling the sidebar navigation
-			 * on small (mobile) viewports.
-			 */
-			PageFrame: z.string().default('@astrojs/starlight/components/PageFrame.astro'),
-			/**
-			 * Component rendered inside `<PageFrame>` that is responsible for toggling the
-			 * sidebar navigation on small (mobile) viewports.
-			 */
-			MobileMenuToggle: z.string().default('@astrojs/starlight/components/MobileMenuToggle.astro'),
+			FallbackContentNotice: z
+				.string()
+				.default('@astrojs/starlight/components/FallbackContentNotice.astro'),
 
 			/**
-			 * Layout component wrapped around the main content column and right sidebar (table of contents).
-			 * The default implementation handles the switch between a single-column, small-viewport layout
-			 * and a two-column, larger-viewport layout.
+			 * Component rendered at the top of the page when `hero` is set in frontmatter. The default
+			 * implementation shows a large title, tagline, and call-to-action links alongside an optional image.
 			 */
-			TwoColumnContent: z.string().default('@astrojs/starlight/components/TwoColumnContent.astro'),
+			Hero: z.string().default('@astrojs/starlight/components/Hero.astro'),
+
+			/*
+			CONTENT -------------------------------------------------------------------------------------
+			*/
+
+			/**
+			 * Component rendered around each page’s main content.
+			 * The default implementation sets up basic styles to apply to Markdown content.
+			 */
+			MarkdownContent: z.string().default('@astrojs/starlight/components/MarkdownContent.astro'),
+
+			/*
+			CONTENT FOOTER ------------------------------------------------------------------------------
+			*/
+
+			/**
+			 * Footer component displayed at the bottom of each documentation page.
+			 * The default implementation displays `<LastUpdated />`, `<Pagination />`, and `<EditLink />`.
+			 */
+			Footer: z.string().default('@astrojs/starlight/components/Footer.astro'),
+			/**
+			 * Component rendered in the page footer to display the last-updated date.
+			 */
+			LastUpdated: z.string().default('@astrojs/starlight/components/LastUpdated.astro'),
+			/**
+			 * Component rendered in the page footer to display navigation arrows between previous/next pages.
+			 */
+			Pagination: z.string().default('@astrojs/starlight/components/Pagination.astro'),
+			/**
+			 * Component rendered in the page footer to display a link to where the page can be edited.
+			 */
+			EditLink: z.string().default('@astrojs/starlight/components/EditLink.astro'),
 		})
 		.default({});
 }
