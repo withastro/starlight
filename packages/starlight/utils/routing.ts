@@ -8,6 +8,11 @@ import {
 	slugToLocaleData,
 	slugToParam,
 } from './slugs';
+import { validateLogoImports } from './validateLogoImports';
+
+// Validate any user-provided logos imported correctly.
+// We do this here so all pages trigger it and at the top level so it runs just once.
+validateLogoImports();
 
 export type StarlightDocsEntry = Omit<CollectionEntry<'docs'>, 'slug'> & {
 	slug: string;
