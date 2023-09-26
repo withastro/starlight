@@ -24,7 +24,7 @@ declare module 'virtual:starlight/components' {
 
 	export const Footer: typeof import('./components/Footer.astro').default;
 	export const LastUpdated: typeof import('./components/LastUpdated.astro').default;
-	export const PrevNextLinks: typeof import('./components/PrevNextLinks.astro').default;
+	export const Pagination: typeof import('./components/Pagination.astro').default;
 	export const EditLink: typeof import('./components/EditLink.astro').default;
 
 	export const Header: typeof import('./components/Header.astro').default;

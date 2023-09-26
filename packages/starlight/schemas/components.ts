@@ -12,11 +12,11 @@ export function ComponentConfigSchema() {
 
 			/**
 			 * Footer component displayed at the bottom of each documentation page.
-			 * The default implementation displays `<LastUpdated />`, `<PrevNextLinks />`, and `<EditLink />`.
+			 * The default implementation displays `<LastUpdated />`, `<Pagination />`, and `<EditLink />`.
 			 */
 			Footer: z.string().default('@astrojs/starlight/components/Footer.astro'),
 			LastUpdated: z.string().default('@astrojs/starlight/components/LastUpdated.astro'),
-			PrevNextLinks: z.string().default('@astrojs/starlight/components/PrevNextLinks.astro'),
+			Pagination: z.string().default('@astrojs/starlight/components/Pagination.astro'),
 			EditLink: z.string().default('@astrojs/starlight/components/EditLink.astro'),
 
 			/**

@@ -1,7 +1,7 @@
 ---
 import type { StarlightRouteData as Props } from '../utils/route-data';
 
-import { EditLink, LastUpdated, PrevNextLinks } from 'virtual:starlight/components';
+import { EditLink, LastUpdated, Pagination } from 'virtual:starlight/components';
 ---
 
 <footer>
@@ -9,7 +9,7 @@ import { EditLink, LastUpdated, PrevNextLinks } from 'virtual:starlight/componen
 		<EditLink {...Astro.props} />
 		<LastUpdated {...Astro.props} />
 	</div>
-	<PrevNextLinks {...Astro.props} />
+	<Pagination {...Astro.props} />
 </footer>
 
 <style>
