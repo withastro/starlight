@@ -89,18 +89,18 @@ Wenn du dich für einen Hoster entscheiden, der erneuerbare Energien einsetzt, w
 Bist du neugierig, wie andere Doku-Frameworks im Vergleich abschneiden?
 Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seiten, die mit verschiedenen Tools erstellt wurden.
 
-| Framework                   | CO₂ per page visit |
-| --------------------------- | ------------------ |
-| [Starlight][sl-carbon]      | 0.01g              |
-| [VitePress][vp-carbon]      | 0.05g              |
-| [Docus][dc-carbon]          | 0.05g              |
-| [Sphinx][sx-carbon]         | 0.07g              |
-| [MkDocs][mk-carbon]         | 0.10g              |
-| [Nextra][nx-carbon]         | 0.11g              |
-| [docsify][dy-carbon]        | 0.11g              |
-| [Docusaurus][ds-carbon]     | 0.24g              |
-| [Read the Docs][rtd-carbon] | 0.24g              |
-| [GitBook][gb-carbon]        | 0.71g              |
+| Framework                   | CO₂ pro Seitenaufruf |
+| --------------------------- | -------------------- |
+| [Starlight][sl-carbon]      | 0.01g                |
+| [VitePress][vp-carbon]      | 0.05g                |
+| [Docus][dc-carbon]          | 0.05g                |
+| [Sphinx][sx-carbon]         | 0.07g                |
+| [MkDocs][mk-carbon]         | 0.10g                |
+| [Nextra][nx-carbon]         | 0.11g                |
+| [docsify][dy-carbon]        | 0.11g                |
+| [Docusaurus][ds-carbon]     | 0.24g                |
+| [Read the Docs][rtd-carbon] | 0.24g                |
+| [GitBook][gb-carbon]        | 0.71g                |
 
 <small>Daten erhoben am 14. Mai 2023. Klicke auf einen Link, um aktuelle Zahlen zu sehen.</small>
 
