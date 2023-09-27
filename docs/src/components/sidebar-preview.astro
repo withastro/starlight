@@ -62,8 +62,7 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 		mask-repeat: no-repeat;
 	}
 
-	:global(.sidebar-preview-external-link:hover::after),
-	:global(.sidebar-preview-external-link:focus::after) {
+	:global(.sidebar-preview-external-link:is(:hover, :focus)::after) {
 		background-color: var(--sl-color-white);
 	}
 </style>
