@@ -316,6 +316,47 @@ The configuration above generates the following sidebar:
 	]}
 />
 
+## Custom HTML attributes
+
+Links can also include an `attrs` property to add custom HTML attributes to the link element.
+
+An example use case could be to add a `target="_blank"` attribute to external links to open them in a new tab and also a `class="external-link"` attribute to display a custom icon after the link label.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// An external link to the Astro docs opening in a new tab.
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', class: 'external-link' },
+				},
+			],
+		},
+	],
+});
+```
+
+Depending on your site's CSS, the configuration above generates the following sidebar:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', class: 'sidebar-preview-external-link' },
+				},
+			],
+		},
+	]}
+/>
+
 ## Internationalization
 
 Use the `translations` property on link and group entries to translate the link or group label for each supported language.

@@ -1,5 +1,5 @@
 ---
-import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/utils/user-config';
+import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/schemas/sidebar';
 import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
 import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
 
@@ -20,6 +20,7 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 				href: item.link,
 				isCurrent: false,
 				badge: item.badge,
+				attrs: item.attrs,
 			};
 		}
 
@@ -45,5 +46,24 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 		border: 1px solid var(--sl-color-gray-5);
 		padding: 1rem var(--sl-sidebar-pad-x);
 		max-width: var(--sl-sidebar-width);
+	}
+
+	:global(.sidebar-preview-external-link::after) {
+		background-color: var(--sl-color-gray-2);
+		content: '';
+		display: inline-block;
+		margin-left: 0.5rem;
+		height: 1rem;
+		vertical-align: text-top;
+		width: 1rem;
+		-webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE4IDEwLjgyYTEgMSAwIDAgMC0xIDFWMTlhMSAxIDAgMCAxLTEgMUg1YTEgMSAwIDAgMS0xLTFWOGExIDEgMCAwIDEgMS0xaDcuMThhMSAxIDAgMCAwIDAtMkg1YTMgMyAwIDAgMC0zIDN2MTFhMyAzIDAgMCAwIDMgM2gxMWEzIDMgMCAwIDAgMy0zdi03LjE4YTEgMSAwIDAgMC0xLTFabTMuOTItOC4yYTEgMSAwIDAgMC0uNTQtLjU0QTEgMSAwIDAgMCAyMSAyaC02YTEgMSAwIDAgMCAwIDJoMy41OUw4LjI5IDE0LjI5YTEgMSAwIDAgMCAwIDEuNDIgMSAxIDAgMCAwIDEuNDIgMEwyMCA1LjQxVjlhMSAxIDAgMCAwIDIgMFYzYTEgMSAwIDAgMC0uMDgtLjM4WiIvPjwvc3ZnPg==');
+		mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE4IDEwLjgyYTEgMSAwIDAgMC0xIDFWMTlhMSAxIDAgMCAxLTEgMUg1YTEgMSAwIDAgMS0xLTFWOGExIDEgMCAwIDEgMS0xaDcuMThhMSAxIDAgMCAwIDAtMkg1YTMgMyAwIDAgMC0zIDN2MTFhMyAzIDAgMCAwIDMgM2gxMWEzIDMgMCAwIDAgMy0zdi03LjE4YTEgMSAwIDAgMC0xLTFabTMuOTItOC4yYTEgMSAwIDAgMC0uNTQtLjU0QTEgMSAwIDAgMCAyMSAyaC02YTEgMSAwIDAgMCAwIDJoMy41OUw4LjI5IDE0LjI5YTEgMSAwIDAgMCAwIDEuNDIgMSAxIDAgMCAwIDEuNDIgMEwyMCA1LjQxVjlhMSAxIDAgMCAwIDIgMFYzYTEgMSAwIDAgMC0uMDgtLjM4WiIvPjwvc3ZnPg==');
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+	}
+
+	:global(.sidebar-preview-external-link:hover::after),
+	:global(.sidebar-preview-external-link:focus::after) {
+		background-color: var(--sl-color-white);
 	}
 </style>
