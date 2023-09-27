@@ -30,7 +30,7 @@ const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** Adds a badge to the link item */
 	badge: BadgeConfigSchema(),
 	/** HTML attributes to add to the link item. */
-	attributes: SidebarLinkItemHTMLAttributesSchema(),
+	attrs: SidebarLinkItemHTMLAttributesSchema(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 

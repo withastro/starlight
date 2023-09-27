@@ -22,7 +22,7 @@ export interface Link {
 	href: string;
 	isCurrent: boolean;
 	badge: Badge | undefined;
-	attributes: LinkHTMLAttributes | undefined;
+	attrs: LinkHTMLAttributes | undefined;
 }
 
 interface Group {
@@ -120,7 +120,7 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.badge, item.attributes);
+	return makeLink(href, label, currentPathname, item.badge, item.attrs);
 }
 
 /** Create a link entry. */
@@ -129,11 +129,11 @@ function makeLink(
 	label: string,
 	currentPathname: string,
 	badge?: Badge,
-	attributes?: LinkHTMLAttributes
+	attrs?: LinkHTMLAttributes
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent, badge, attributes };
+	return { type: 'link', label, href, isCurrent, badge, attrs };
 }
 
 /** Get the segments leading to a page. */
@@ -184,7 +184,7 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
 		route.entry.data.sidebar.badge,
-		route.entry.data.sidebar.attributes
+		route.entry.data.sidebar.attrs
 	);
 }
 
@@ -322,7 +322,7 @@ function applyPrevNextLinkConfig(
 				label: config.label ?? link.label,
 				href: config.link ?? link.href,
 				// Explicitly remove sidebar link attributes for prev/next links.
-				attributes: undefined,
+				attrs: undefined,
 			};
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,

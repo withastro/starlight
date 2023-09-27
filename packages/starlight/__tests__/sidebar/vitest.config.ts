@@ -21,7 +21,7 @@ export default defineVitestConfig({
 				{
 					label: 'Showcase',
 					link: '/showcase',
-					attributes: { class: 'showcase-link', target: '_blank' },
+					attrs: { class: 'showcase-link', target: '_blank' },
 				},
 			],
 		},

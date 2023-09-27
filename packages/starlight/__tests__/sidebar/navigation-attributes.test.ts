@@ -10,7 +10,7 @@ vi.mock('astro:content', async () =>
 				'reference/frontmatter.md',
 				{
 					title: 'Frontmatter Reference',
-					sidebar: { attributes: { class: 'advanced', ping: 'https://example.com' } },
+					sidebar: { attrs: { class: 'advanced', ping: 'https://example.com' } },
 				},
 			],
 		],
@@ -22,7 +22,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
-			    "attributes": undefined,
+			    "attrs": undefined,
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -33,7 +33,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attributes": undefined,
+			        "attrs": undefined,
 			        "badge": {
 			          "text": "New",
 			          "variant": "success",
@@ -44,7 +44,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
-			        "attributes": undefined,
+			        "attrs": undefined,
 			        "badge": {
 			          "text": "Deprecated",
 			          "variant": "default",
@@ -55,7 +55,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
-			        "attributes": {
+			        "attrs": {
 			          "class": "showcase-link",
 			          "target": "_blank",
 			        },
@@ -73,7 +73,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attributes": {
+			        "attrs": {
 			          "class": "advanced",
 			          "ping": "https://example.com",
 			        },

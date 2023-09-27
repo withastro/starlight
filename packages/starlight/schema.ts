@@ -157,7 +157,7 @@ export function docsSchema() {
 					 */
 					badge: BadgeConfigSchema(),
 					/** HTML attributes to add to the sidebar link. */
-					attributes: SidebarLinkItemHTMLAttributesSchema(),
+					attrs: SidebarLinkItemHTMLAttributesSchema(),
 				})
 				.default({}),
 
