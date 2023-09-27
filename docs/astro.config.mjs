@@ -102,7 +102,7 @@ export default defineConfig({
 							label: 'Environmental Impact',
 							link: 'environmental-impact',
 							translations: {
-								// de: '',
+								de: 'Umweltbelastung',
 								es: 'Documentación ecológica',
 								ja: '環境への負荷',
 								fr: 'Impact environnemental',
@@ -117,7 +117,7 @@ export default defineConfig({
 							label: 'Showcase',
 							link: 'showcase',
 							translations: {
-								// de: '',
+								de: 'Schaufenster',
 								// es: '',
 								ja: 'ショーケース',
 								fr: 'Vitrine',
