@@ -18,6 +18,11 @@ export default defineVitestConfig({
 					},
 				},
 				{ label: 'Next Steps', link: '/next-steps', badge: 'Deprecated' },
+				{
+					label: 'Showcase',
+					link: '/showcase',
+					attributes: { class: 'showcase-link', target: '_blank' },
+				},
 			],
 		},
 		// A group linking to all pages in the reference directory.

@@ -20,6 +20,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attributes": undefined,
 			        "badge": undefined,
 			        "href": "/guides/components/",
 			        "isCurrent": false,
@@ -27,6 +28,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "attributes": undefined,
 			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
@@ -38,6 +40,7 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "attributes": undefined,
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -45,6 +48,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attributes": undefined,
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,

@@ -6,15 +6,19 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
-			['reference/configuration.md', { title: 'Config Reference' }],
-			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { hidden: true } }],
-			['guides/components.mdx', { title: 'Components' }],
+			[
+				'reference/frontmatter.md',
+				{
+					title: 'Frontmatter Reference',
+					sidebar: { attributes: { class: 'advanced', ping: 'https://example.com' } },
+				},
+			],
 		],
 	})
 );
 
 describe('getSidebar', () => {
-	test('excludes sidebar entries with hidden: true in frontmatter', () => {
+	test('passes down custom HTML link attributes', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
@@ -69,11 +73,14 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attributes": undefined,
+			        "attributes": {
+			          "class": "advanced",
+			          "ping": "https://example.com",
+			        },
 			        "badge": undefined,
-			        "href": "/reference/configuration/",
+			        "href": "/reference/frontmatter/",
 			        "isCurrent": false,
-			        "label": "Config Reference",
+			        "label": "Frontmatter Reference",
 			        "type": "link",
 			      },
 			    ],
