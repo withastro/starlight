@@ -5,9 +5,14 @@ import { pathWithBase } from './base';
 import { pickLang } from './i18n';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
 import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
 import type { Badge } from '../schemas/badge';
+import type {
+	AutoSidebarGroup,
+	LinkHTMLAttributes,
+	SidebarItem,
+	SidebarLinkItem,
+} from '../schemas/sidebar';
 
 const DirKey = Symbol('DirKey');
 
@@ -17,6 +22,7 @@ export interface Link {
 	href: string;
 	isCurrent: boolean;
 	badge: Badge | undefined;
+	attributes: LinkHTMLAttributes | undefined;
 }
 
 interface Group {
@@ -114,14 +120,20 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.badge);
+	return makeLink(href, label, currentPathname, item.badge, item.attributes);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string, badge?: Badge): Link {
+function makeLink(
+	href: string,
+	label: string,
+	currentPathname: string,
+	badge?: Badge,
+	attributes?: LinkHTMLAttributes
+): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent, badge };
+	return { type: 'link', label, href, isCurrent, badge, attributes };
 }
 
 /** Get the segments leading to a page. */
@@ -171,7 +183,8 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
-		route.entry.data.sidebar.badge
+		route.entry.data.sidebar.badge,
+		route.entry.data.sidebar.attributes
 	);
 }
 
@@ -308,6 +321,8 @@ function applyPrevNextLinkConfig(
 				...link,
 				label: config.label ?? link.label,
 				href: config.link ?? link.href,
+				// Explicitly remove sidebar link attributes for prev/next links.
+				attributes: undefined,
 			};
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
