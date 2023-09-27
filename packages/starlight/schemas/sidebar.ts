@@ -15,10 +15,11 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 	collapsed: z.boolean().default(false),
 });
 
-// HTML attributes that can be added to an anchor element, validated as `Record<string, string | number | boolean>`
-// but typed as `HTMLAttributes<'a'>` for user convenience.
+// HTML attributes that can be added to an anchor element, validated as
+// `Record<string, string | number | boolean | undefined>` but typed as `HTMLAttributes<'a'>`
+// for user convenience.
 const linkHTMLAttributesSchema = z.record(
-	z.union([z.string(), z.number(), z.boolean()])
+	z.union([z.string(), z.number(), z.boolean(), z.undefined()])
 ) as z.Schema<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>;
 export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
 
