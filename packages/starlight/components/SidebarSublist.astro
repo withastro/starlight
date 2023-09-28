@@ -17,7 +17,7 @@ interface Props {
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
-						class:list={[{ large: !Astro.props.nested }, entry.attrs?.['class']]}
+						class:list={[{ large: !Astro.props.nested }, entry.attrs.class]}
 						{...entry.attrs}
 					>
 						<span>{entry.label}</span>

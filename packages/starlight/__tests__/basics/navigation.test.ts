@@ -18,7 +18,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -26,7 +26,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -37,7 +37,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": undefined,
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
@@ -45,7 +45,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
-			        "attrs": undefined,
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/guides/components/",
 			        "isCurrent": false,
@@ -107,7 +107,7 @@ describe('flattenSidebar', () => {
 		expect(flattened).toMatchInlineSnapshot(`
 			[
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -115,7 +115,7 @@ describe('flattenSidebar', () => {
 			    "type": "link",
 			  },
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -123,7 +123,7 @@ describe('flattenSidebar', () => {
 			    "type": "link",
 			  },
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
@@ -131,7 +131,7 @@ describe('flattenSidebar', () => {
 			    "type": "link",
 			  },
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/guides/components/",
 			    "isCurrent": false,
@@ -150,7 +150,7 @@ describe('getPrevNextLinks', () => {
 		expect(links).toMatchInlineSnapshot(`
 			{
 			  "next": {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
@@ -158,7 +158,7 @@ describe('getPrevNextLinks', () => {
 			    "type": "link",
 			  },
 			  "prev": {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": false,
@@ -245,6 +245,7 @@ describe('getPrevNextLinks', () => {
 			href: '/x/',
 			label: 'X',
 			isCurrent: false,
+			attrs: {},
 		});
 	});
 

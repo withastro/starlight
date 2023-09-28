@@ -20,11 +20,9 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 				href: item.link,
 				isCurrent: false,
 				badge: item.badge,
-				attrs: item.attrs,
+				attrs: item.attrs ?? {},
 			};
 		}
-
-		item;
 
 		return {
 			type: 'group',

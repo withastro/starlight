@@ -22,7 +22,7 @@ export interface Link {
 	href: string;
 	isCurrent: boolean;
 	badge: Badge | undefined;
-	attrs: LinkHTMLAttributes | undefined;
+	attrs: LinkHTMLAttributes;
 }
 
 interface Group {
@@ -133,7 +133,7 @@ function makeLink(
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent, badge, attrs };
+	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
 
 /** Get the segments leading to a page. */
@@ -322,7 +322,7 @@ function applyPrevNextLinkConfig(
 				label: config.label ?? link.label,
 				href: config.link ?? link.href,
 				// Explicitly remove sidebar link attributes for prev/next links.
-				attrs: undefined,
+				attrs: {},
 			};
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,

@@ -23,7 +23,7 @@ const linkHTMLAttributesSchema = z.record(
 ) as z.Schema<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>;
 export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
 
-export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchema.optional();
+export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchema.default({});
 
 const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */

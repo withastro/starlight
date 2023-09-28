@@ -29,7 +29,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
-			    "attrs": undefined,
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -40,7 +40,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": undefined,
+			        "attrs": {},
 			        "badge": {
 			          "text": "New",
 			          "variant": "success",
@@ -51,7 +51,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
-			        "attrs": undefined,
+			        "attrs": {},
 			        "badge": {
 			          "text": "Deprecated",
 			          "variant": "default",
@@ -80,7 +80,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": undefined,
+			        "attrs": {},
 			        "badge": {
 			          "text": "Experimental",
 			          "variant": "tip",
@@ -91,7 +91,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
-			        "attrs": undefined,
+			        "attrs": {},
 			        "badge": {
 			          "text": "New",
 			          "variant": "default",
