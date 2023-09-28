@@ -49,6 +49,7 @@ declare module 'virtual:starlight/components' {
 
 	export const PageFrame: typeof import('./components/PageFrame.astro').default;
 	export const MobileMenuToggle: typeof import('./components/MobileMenuToggle.astro').default;
+	export const MobileMenuFooter: typeof import('./components/MobileMenuFooter.astro').default;
 
 	export const TwoColumnContent: typeof import('./components/TwoColumnContent.astro').default;
 }

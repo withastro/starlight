@@ -99,10 +99,15 @@ export function ComponentConfigSchema() {
 			/**
 			 * Component rendered before page content that contains global navigation.
 			 * The default implementation displays as a sidebar on wide enough viewports and inside a
-			 * drop-down menu on small (mobile) viewports. It also renders `<ThemeSelect />` and
-			 * `<LanguageSelect />` inside the mobile menu.
+			 * drop-down menu on small (mobile) viewports. It also renders `<MobileMenuFooter />` to
+			 * show additional items inside the mobile menu.
 			 */
 			Sidebar: z.string().default('@astrojs/starlight/components/Sidebar.astro'),
+			/**
+			 * Component rendered at the bottom of the mobile drop-down menu.
+			 * The default implementation renders `<ThemeSelect />` and `<LanguageSelect />`.
+			 */
+			MobileMenuFooter: z.string().default('@astrojs/starlight/components/MobileMenuFooter.astro'),
 
 			/*
 			TOC -----------------------------------------------------------------------------------------
