@@ -208,6 +208,20 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+设置此页面是否应包含在 [Pagefind](https://pagefind.app/) 搜索索引中。设置为 `false` 以从搜索结果中排除页面：
+
+```md
+---
+# 在搜索索引中隐藏此页面
+pagefind: false
+---
+```
+
 ### `sidebar`
 
 **类型：** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`

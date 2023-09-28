@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build:examples": "pnpm --filter @example/* build",
+    "build:examples": "pnpm --filter '@example/*' build",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro ."
@@ -19,7 +19,7 @@
     "prettier-plugin-astro": "^0.11.0",
     "size-limit": "^8.2.4"
   },
-  "packageManager": "pnpm@8.2.0",
+  "packageManager": "pnpm@8.7.4",
   "size-limit": [
     {
       "name": "/index.html",

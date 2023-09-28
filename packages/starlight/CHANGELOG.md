@@ -1,5 +1,53 @@
 # @astrojs/starlight
 
+## 0.10.2
+
+### Patch Changes
+
+- [#735](https://github.com/withastro/starlight/pull/735) [`2da8692`](https://github.com/withastro/starlight/commit/2da86929c8041f6585790c3baf1cba42220650cc) Thanks [@delucis](https://github.com/delucis)! - Use Starlight font custom property in Pagefind modal
+
+- [#735](https://github.com/withastro/starlight/pull/735) [`2da8692`](https://github.com/withastro/starlight/commit/2da86929c8041f6585790c3baf1cba42220650cc) Thanks [@delucis](https://github.com/delucis)! - Fix RTL styling in Pagefind modal
+
+- [#739](https://github.com/withastro/starlight/pull/739) [`a9de4a7`](https://github.com/withastro/starlight/commit/a9de4a7dcf9ec8c5c801e8a6cbb0d7faf2c34db7) Thanks [@radenpioneer](https://github.com/radenpioneer)! - Add Indonesian UI translation
+
+- [#747](https://github.com/withastro/starlight/pull/747) [`7589515`](https://github.com/withastro/starlight/commit/75895154b11cf9368d4d6b45647b156ce32a88f0) Thanks [@nirtamir2](https://github.com/nirtamir2)! - Add Hebrew UI translations
+
+## 0.10.1
+
+### Patch Changes
+
+- [#726](https://github.com/withastro/starlight/pull/726) [`f3157c6`](https://github.com/withastro/starlight/commit/f3157c6065943af39995b6dbae5f63cf424bd9a3) Thanks [@delucis](https://github.com/delucis)! - Fix a rare bug in table of contents when handling headings that increase by more than one level on a page.
+
+- [#729](https://github.com/withastro/starlight/pull/729) [`80c6ab1`](https://github.com/withastro/starlight/commit/80c6ab1c1ec48805e74c53b615a78d65127eeacb) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1.0.3
+
+- [#715](https://github.com/withastro/starlight/pull/715) [`e726155`](https://github.com/withastro/starlight/commit/e7261559f2539a0ceefd36a28e4fbbc17f5970b8) Thanks [@itsmatteomanf](https://github.com/itsmatteomanf)! - feat: prevent scroll on body when search is open
+
+## 0.10.0
+
+### Minor Changes
+
+- [#692](https://github.com/withastro/starlight/pull/692) [`2a58e1a`](https://github.com/withastro/starlight/commit/2a58e1aa068d01833a0ab9e74e4b46cccaee1775) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1 and display page headings in search results
+
+### Patch Changes
+
+- [#708](https://github.com/withastro/starlight/pull/708) [`136cfb1`](https://github.com/withastro/starlight/commit/136cfb180f22db116cfdb62fd93d21daff596946) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Fix main content column width for pages without a table of contents
+
+- [#682](https://github.com/withastro/starlight/pull/682) [`660a5f5`](https://github.com/withastro/starlight/commit/660a5f57adf0340de21df3e364aada38255bb06c) Thanks [@vedmalex](https://github.com/vedmalex)! - Add Russian language support
+
+## 0.9.1
+
+### Patch Changes
+
+- [#647](https://github.com/withastro/starlight/pull/647) [`ea57726`](https://github.com/withastro/starlight/commit/ea5772655274a3900310cb700836fdd2f6dba7cd) Thanks [@bgmort](https://github.com/bgmort)! - Fix translated 404 pages not being excluded from search results
+
+- [#667](https://github.com/withastro/starlight/pull/667) [`9828f73`](https://github.com/withastro/starlight/commit/9828f739b73e2f377c1450b9e11f0914722ee440) Thanks [@delucis](https://github.com/delucis)! - Break inline `<code>` across lines to avoid overflow
+
+- [#642](https://github.com/withastro/starlight/pull/642) [`e623d92`](https://github.com/withastro/starlight/commit/e623d92c2fddc0ff5fe83d2554266885d683a906) Thanks [@fk](https://github.com/fk)! - Don't hard-code nav height in table of contents highlighting script
+
+- [#676](https://github.com/withastro/starlight/pull/676) [`6419006`](https://github.com/withastro/starlight/commit/641900615aa9a9a128d6934e65a57ba89e503cfd) Thanks [@vedmalex](https://github.com/vedmalex)! - Upgrade and pin Pagefind to latest beta release.
+
+- [#647](https://github.com/withastro/starlight/pull/647) [`ea57726`](https://github.com/withastro/starlight/commit/ea5772655274a3900310cb700836fdd2f6dba7cd) Thanks [@bgmort](https://github.com/bgmort)! - Add frontmatter option to exclude a page from Pagefind search results
+
 ## 0.9.0
 
 ### Minor Changes

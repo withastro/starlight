@@ -57,6 +57,22 @@ head:
 Sovrascrive la [configurazione globale `tableOfContents`](/it/reference/configuration/#tableofcontents).
 Cambia i livelli di titoli inclusi o, se messo a `false`, nasconde la tabella dei contenuti della pagina.
 
+```md
+---
+title: Pagina con solo H2 nella tabella dei contenuti della pagina
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Pagina senza tabella dei contenuti della pagina
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **type:** `'doc' | 'splash'`  
@@ -116,4 +132,170 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `banner`
+
+**type:** `{ content: string }`
+
+Visualizza un banner di annuncio nella parte superiore di questa pagina.
+
+Il valore `content` può includere HTML per collegamenti o altri contenuti.
+Ad esempio, questa pagina visualizza un banner che include un collegamento a `example.com`.
+
+```md
+---
+title: Pagina con un banner
+banner:
+  content: |
+    Abbiamo appena lanciato qualcosa di interessante!
+    <a href="https://example.com">Dai un'occhiata</a>
+---
+```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Sostituisce l'[opzione globale `lastUpdated`](/it/reference/configuration/#lastupdated). Se viene specificata una data, deve essere un [timestamp YAML](https://yaml.org/type/timestamp.html) valido e sovrascriverà la data archiviata nella cronologia Git per questa pagina.
+
+```md
+---
+title: Pagina con una data di ultimo aggiornamento personalizzata
+lastUpdated: 2022-08-09
+---
+```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Sostituisce l'[opzione globale `paginazione`](/it/reference/configuration/#pagination). Se viene specificata una stringa, il testo del collegamento generato verrà sostituito e se viene specificato un oggetto, sia il collegamento che il testo verranno sovrascritti.
+
+```md
+---
+# Nascondi il collegamento alla pagina precedente
+prev: false
+---
+```
+
+```md
+---
+# Sostituisci il testo del collegamento della pagina precedente
+prev: Continua il tutorial
+---
+```
+
+```md
+---
+# Sostituisci sia il collegamento che il testo della pagina precedente
+prev:
+  link: /pagina-non-correlata/
+  label: Dai un'occhiata a quest'altra pagina
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Uguale a [`prev`](#prev) ma per il collegamento alla pagina successiva.
+
+```md
+---
+# Nascondi il collegamento alla pagina successiva
+next: false
+---
+```
+
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Imposta se questa pagina deve essere inclusa nell'indice di ricerca [Pagefind](https://pagefind.app/). Imposta su `false` per escludere una pagina dai risultati di ricerca:
+
+```md
+---
+# Nascondi questa pagina dai risultati di ricerca
+pagefind: false
+---
+```
+
+### `sidebar`
+
+**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+
+Controlla il modo in cui questa pagina viene visualizzata nella [barra laterale](/it/reference/configuration/#sidebar), quando si utilizza un gruppo di collegamenti generato automaticamente.
+
+#### `label`
+
+**type:** `string`  
+**default:** the page [`title`](#title-required)
+
+Imposta l'etichetta per questa pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
+
+```md
+---
+title: Informazioni su questo progetto
+sidebar:
+  label: Informazioni
+---
+```
+
+#### `order`
+
+**type:** `number`
+
+Controlla l'ordine di questa pagina quando ordini un gruppo di collegamenti generato automaticamente.
+I numeri più bassi vengono visualizzati più in alto nel gruppo di collegamenti.
+
+```md
+---
+title: Pagina da visualizzare per prima
+sidebar:
+  order: 1
+---
+```
+
+#### `hidden`
+
+**type:** `boolean`
+**default:** `false`
+
+Impedisce che questa pagina venga inclusa in un gruppo della barra laterale generato automaticamente.
+
+```md
+---
+title: Pagina da nascondere dalla barra laterale generata automaticamente
+sidebar:
+  hidden: vero
+---
+```
+
+#### `badge`
+
+**type:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+Aggiungi un badge alla pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
+Quando si utilizza una stringa, il badge verrà visualizzato con un colore in risalto predefinito.
+Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#badgeconfig) con i campi `text` e `variant` per personalizzare il badge.
+
+```md
+---
+title: Pagina con un badge
+sidebar:
+  # Utilizza la variante predefinita corrispondente al colore principale del tuo sito
+  badge: nuovo
+---
+```
+
+```md
+---
+title: Pagina con un badge
+sidebar:
+  badge:
+    text: Sperimentale
+    variant: caution
+---
 ```
