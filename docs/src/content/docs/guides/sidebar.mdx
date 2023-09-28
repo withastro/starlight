@@ -320,7 +320,7 @@ The configuration above generates the following sidebar:
 
 Links can also include an `attrs` property to add custom HTML attributes to the link element.
 
-An example use case could be to add a `target="_blank"` attribute to external links to open them in a new tab and also a `class="external-link"` attribute to display a custom icon after the link label.
+An example use case could be to add a `target="_blank"` attribute to external links to open them in a new tab and also apply a custom `style` attribute to italicize the link label.
 
 ```js
 starlight({
@@ -332,7 +332,7 @@ starlight({
 				{
 					label: 'Astro Docs',
 					link: 'https://docs.astro.build/',
-					attrs: { target: '_blank', class: 'external-link' },
+					attrs: { target: '_blank', style: 'font-style: italic' },
 				},
 			],
 		},
@@ -340,7 +340,7 @@ starlight({
 });
 ```
 
-Depending on your site's CSS, the configuration above generates the following sidebar:
+The configuration above generates the following sidebar:
 
 <SidebarPreview
 	config={[
@@ -350,7 +350,10 @@ Depending on your site's CSS, the configuration above generates the following si
 				{
 					label: 'Astro Docs',
 					link: 'https://docs.astro.build/',
-					attrs: { target: '_blank', class: 'sidebar-preview-external-link' },
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
 				},
 			],
 		},
