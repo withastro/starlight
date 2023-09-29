@@ -4,7 +4,7 @@ import type { StarlightRouteData as Props } from '../utils/route-data';
 const { banner } = Astro.props.entry.data;
 ---
 
-{banner && <div class="sl-banner" role="banner" set:html={banner.content} />}
+{banner && <div class="sl-banner" set:html={banner.content} />}
 
 <style>
 	.sl-banner {
