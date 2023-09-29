@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -99,7 +103,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.9.1
+        specifier: ^0.10.2
         version: link:../../packages/starlight
       astro:
         specifier: ^3.0.6
@@ -111,7 +115,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.9.1
+        specifier: ^0.10.2
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.0
@@ -138,8 +142,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@pagefind/default-ui':
-        specifier: 1.0.0-beta.2
-        version: 1.0.0-beta.2
+        specifier: ^1.0.3
+        version: 1.0.3
       '@types/mdast':
         specifier: ^3.0.11
         version: 3.0.11
@@ -156,8 +160,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       pagefind:
-        specifier: 1.0.0-beta.2
-        version: 1.0.0-beta.2
+        specifier: ^1.0.3
+        version: 1.0.3
       rehype:
         specifier: ^12.0.1
         version: 12.0.1
@@ -1240,44 +1244,44 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@pagefind/darwin-arm64@1.0.0-beta.2:
-    resolution: {integrity: sha512-r9aSd1PreWJeGwrdK92udvySHfJSSvKyV6T+4YONh9lGKS3K2+YbX8K584IotFKB/60XLkdzmFIFLoK3CjOZ7w==}
+  /@pagefind/darwin-arm64@1.0.3:
+    resolution: {integrity: sha512-vsHDtvao3W4iFCxVc4S0BVhpj3E2MAoIVM7RmuQfGp1Ng22nGLRaMP6FguLO8TMabRJdvp4SVr227hL4WGKOHA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/darwin-x64@1.0.0-beta.2:
-    resolution: {integrity: sha512-1YjlJu75oScva4PPDH2Q/FWAzfvP15XAxCmfqsMl6dtwfaZ4oqZ0Vx2jQ5CAxX2/FeDzqGQg7xkdngLekGiQwA==}
+  /@pagefind/darwin-x64@1.0.3:
+    resolution: {integrity: sha512-NhEXHHYmB/hT6lx5rCcmnVTxH+uIkMAd43bzEqMwHQosqTZEIQfwihmV39H+m8yo7jFvz3zRbJNzhAh7G4PiwA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/default-ui@1.0.0-beta.2:
-    resolution: {integrity: sha512-x75qS7ywD8iG95CLyCTmfn07tMIfAhWTuu6mT56WGpl9Ci3Z4PTfqMRhzhRDTinHEAIKO3aAtQ5TrXuCCnXVoQ==}
+  /@pagefind/default-ui@1.0.3:
+    resolution: {integrity: sha512-WieFJXvezyvjZh49I8j7a7Kz3LsXYY2Uep3IWvG5NG05mmiurURXjXc+KyrpIp/iAycSnjrC1TDJ8CdES/ee3A==}
     dev: false
 
-  /@pagefind/linux-arm64@1.0.0-beta.2:
-    resolution: {integrity: sha512-vPBFjWsmI9CBsZctmXSGc2qT7O8OPv9iLoXlQcmUrXSirwY4kESmi2W/t2Cpq6Theatyb+D7zMd0KZc6u0bX3w==}
+  /@pagefind/linux-arm64@1.0.3:
+    resolution: {integrity: sha512-RGsMt4AmGT8WxCSeP09arU7Za6Vf/We4TWHVSbY7vDMuwWql9Ngoib/q1cP9dIAIMdkXh9ePG/S3mGnJYsdzuQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/linux-x64@1.0.0-beta.2:
-    resolution: {integrity: sha512-jUyS6+OH8x8q8Sn4OPi1Br7DkTlUqeaiDBAqGmfcQARonD5lf/JpNidTSM+YYa/1cRgTijOyX1RbrwQE749LUg==}
+  /@pagefind/linux-x64@1.0.3:
+    resolution: {integrity: sha512-o+VCKaqImL42scSH1n5gUfppYSNyu3BuGTvtKKgWHmycbL+A3fkFH+ZOFbaLeN7LVTvJqJIOYbk4j2yaq9784Q==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /@pagefind/windows-x64@1.0.0-beta.2:
-    resolution: {integrity: sha512-I7vrQQswID6+9MdjSwnugqY9xBrSaCDdVJ9YCQMobsv5PONzdVXRjDUwDR72MAli0y/KxDYWGzBpDfKMSsvz6g==}
+  /@pagefind/windows-x64@1.0.3:
+    resolution: {integrity: sha512-S+Yq4FyvXJm4F+iN/wRiLvEEF8Xs9lTKGtQGaRHXJslQyl65dytDDPIULXJXIadrDbnMrnTt4C2YHmEUIyUIHg==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -4899,15 +4903,15 @@ packages:
       - utf-8-validate
     dev: true
 
-  /pagefind@1.0.0-beta.2:
-    resolution: {integrity: sha512-YwtoH63JRdh4ZoEeo4aPEKXyUyNR8l/wgH9up4HVB0xaGEz4R0BgefHC2MAvkIAX1sq4TgITgInqunL0wQWumA==}
+  /pagefind@1.0.3:
+    resolution: {integrity: sha512-ws7kmMxW6OuxzsOjj3YAx6TYq/54MiE3wfyBM3J5CInbZyBBvM2Z8c8IYvnMkBcb5v2EoB9DewXEekOEiDRu5g==}
     hasBin: true
     optionalDependencies:
-      '@pagefind/darwin-arm64': 1.0.0-beta.2
-      '@pagefind/darwin-x64': 1.0.0-beta.2
-      '@pagefind/linux-arm64': 1.0.0-beta.2
-      '@pagefind/linux-x64': 1.0.0-beta.2
-      '@pagefind/windows-x64': 1.0.0-beta.2
+      '@pagefind/darwin-arm64': 1.0.3
+      '@pagefind/darwin-x64': 1.0.3
+      '@pagefind/linux-arm64': 1.0.3
+      '@pagefind/linux-x64': 1.0.3
+      '@pagefind/windows-x64': 1.0.3
     dev: false
 
   /parse-entities@4.0.1:
@@ -6771,7 +6775,3 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

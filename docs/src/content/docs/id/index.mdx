@@ -1,0 +1,58 @@
+---
+title: Starlight 🌟 Wujudkan situs dokumentasi dengan Astro
+description: Starlight membantu mewujudkan situs web dokumentasi yang menawan dan berperforma tinggi dengan Astro.
+template: splash
+banner:
+  content: |
+    <span class="ph-banner">
+      <span class="ph-houston"><img src="/ph-houston.svg" alt="" width="72" height="72"/></span>
+      <span class="ph-text">
+        <strong>Halo Product Hunters&nbsp;👋</strong>
+        <a href="https://www.producthunt.com/posts/starlight-by-astro">Kami sedang live sekarang!</a>
+      </span>
+    </span>
+hero:
+  title: Buat dokumentasi yang bersinar dengan Starlight
+  tagline: Semua yang Anda butuhkan untuk mewujudkan situs dokumentasi yang luar biasa. Cepat, ramah pengguna, dan sangat mudah digunakan.
+  image:
+    file: ../../../assets/hero-star.webp
+  actions:
+    - text: Memulai
+      icon: right-arrow
+      variant: primary
+      link: /id/getting-started/
+    - text: Lihat di GitHub
+      icon: external
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../../components/about-astro.astro';
+
+<CardGrid stagger>
+	<Card title="Dokumentasi yang menawan" icon="open-book">
+		Sudah termasuk: Navigasi situs, pencarian, terjemahan, SEO, tipografi yang
+		mudah dibaca, _code highlighting_, mode gelap, dan masih banyak lagi.
+	</Card>
+	<Card title="Ditenagai oleh Astro" icon="rocket">
+		Manfaatkan kekuatan penuh dan performa Astro. Kembangkan Starlight dengan
+		pustaka dan integrasi Astro favorit Anda.
+	</Card>
+	<Card title="Markdown, Markdoc, and MDX" icon="document">
+		Gunakan bahasa markup favorit Anda. Starlight menyediakan validasi
+		_frontmatter_ bawaan dengan TypeScript _type-safety_.
+	</Card>
+	<Card title="Gunakan komponen UI pilihan Anda" icon="puzzle">
+		Starlight adalah solusi dokumentasi yang lengkap dan _framework-agnostic_.
+		Kembangkan lebih jauh dengan React, Vue, Svelte, Solid, dan lain-lain.
+	</Card>
+</CardGrid>
+
+<AboutAstro title="Dipersembahkan oleh">
+Astro adalah _framework_ web serbaguna didesain untuk web yang cepat.
+Gunakan konten Anda dari sumber mana saja dan _deploy_ di mana saja, 
+semua ditenagai dengan pustaka dan komponen UI favorit Anda.
+
+[Pelajari tentang Astro](https://astro.build/)
+
+</AboutAstro>

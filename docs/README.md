@@ -1,5 +1,7 @@
 # Starlight Docs
 
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+
 This directory contains the Starlight documentation website (built with Starlight!)
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/docs)
