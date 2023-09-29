@@ -7,22 +7,5 @@ import SidebarSublist from './SidebarSublist.astro';
 const { sidebar } = Astro.props;
 ---
 
-<div class="sidebar sl-flex">
-	<SidebarSublist sublist={sidebar} />
-	<MobileMenuFooter {...Astro.props} />
-</div>
-
-<style>
-	.sidebar {
-		height: 100%;
-		padding: 1rem var(--sl-sidebar-pad-x);
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	@media (min-width: 50rem) {
-		.sidebar > :global(:nth-last-child(2)) {
-			padding-bottom: 1rem;
-		}
-	}
-</style>
+<SidebarSublist sublist={sidebar} />
+<MobileMenuFooter {...Astro.props} />

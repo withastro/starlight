@@ -15,7 +15,7 @@ const t = useTranslations(locale);
 			<nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle {...Astro.props} />
 				<div id="starlight__sidebar" class="sidebar-pane">
-					<div class="sidebar-content">
+					<div class="sidebar-content sl-flex">
 						<slot name="sidebar" />
 					</div>
 				</div>
@@ -57,6 +57,7 @@ const t = useTranslations(locale);
 		padding-top: var(--sl-nav-height);
 		width: 100%;
 		background-color: var(--sl-color-black);
+		overflow-y: auto;
 	}
 
 	:global([aria-expanded='true']) ~ .sidebar-pane {
@@ -65,7 +66,17 @@ const t = useTranslations(locale);
 
 	.sidebar-content {
 		height: 100%;
-		overflow-y: auto;
+		min-height: max-content;
+		padding: 1rem var(--sl-sidebar-pad-x) 0;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	@media (min-width: 50rem) {
+		.sidebar-content::after {
+			content: '';
+			padding-bottom: 1px;
+		}
 	}
 
 	.main-frame {
