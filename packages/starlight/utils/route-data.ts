@@ -89,8 +89,9 @@ function getEditUrl({ entry, id }: PageProps): URL | undefined {
 		// If a URL was provided in frontmatter, use that.
 		url = editUrl;
 	} else if (config.editLink.baseUrl) {
+		const srcPath = project.srcDir.replace(project.root, '');
 		// If a base URL was added in Starlight config, synthesize the edit URL from it.
-		url = ensureTrailingSlash(config.editLink.baseUrl) + 'src/content/docs/' + id;
+		url = ensureTrailingSlash(config.editLink.baseUrl) + srcPath + 'content/docs/' + id;
 	}
 	return url ? new URL(url) : undefined;
 }
