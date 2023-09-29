@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.10.3
+
+### Patch Changes
+
+- [#783](https://github.com/withastro/starlight/pull/783) [`f94727e`](https://github.com/withastro/starlight/commit/f94727e7d286a6910f913a572b27eb17c42f1729) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fix GitHub edit link to include src path from project config
+
+- [#781](https://github.com/withastro/starlight/pull/781) [`a293ef9`](https://github.com/withastro/starlight/commit/a293ef9ebb10a07db456156d8bdacc4ff6a2ca38) Thanks [@dreyfus92](https://github.com/dreyfus92)! - Removed role from Banner component to avoid duplication in header.
+
+- [#745](https://github.com/withastro/starlight/pull/745) [`006d606`](https://github.com/withastro/starlight/commit/006d60695761ec10e5c4e715ed2212cd1fbedda0) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Prevent Starlight crashing when the content folder doesn't exist, or is empty
+
+- [#775](https://github.com/withastro/starlight/pull/775) [`2ef3036`](https://github.com/withastro/starlight/commit/2ef303649a0b66a6ec6a216815e05d41bf22b594) Thanks [@delucis](https://github.com/delucis)! - Fix content collection schema compatibility with Astro 3.1 and higher
+
+- [#773](https://github.com/withastro/starlight/pull/773) [`423d575`](https://github.com/withastro/starlight/commit/423d575cc8227e4db86a85c70c45c0f3f7a184d2) Thanks [@tlandmangh](https://github.com/tlandmangh)! - Fix Dutch UI translation for “Previous page” links
+
 ## 0.10.2
 
 ### Patch Changes
@@ -139,16 +153,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -527,8 +541,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
