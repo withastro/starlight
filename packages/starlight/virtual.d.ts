@@ -3,7 +3,7 @@ declare module 'virtual:starlight/user-config' {
 	export default Config;
 }
 declare module 'virtual:starlight/project-context' {
-	export default { root: string };
+	export default { root: string, srcDir: string };
 }
 
 declare module 'virtual:starlight/user-css' {}
