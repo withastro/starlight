@@ -307,7 +307,7 @@ O local padrãoserá utilizado para providenciar conteúdo de fallback onde est�
 
 ### `social`
 
-**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'x' | 'youtube', string>>`
+**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 Detalhes opcionais sobre as contas de redes sociais para esse site. Adicionar qualquer um desses irá os mostrar como links de ícone no cabeçalho do site.
 
@@ -323,7 +323,6 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
-    x: 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
