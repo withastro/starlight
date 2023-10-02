@@ -52,6 +52,14 @@ export function getFileCommitDate(
 		}
 	} catch {}
 
+	const isShallowRepo = handleShallowRepository(file);
+	const shallowRepoPath = path.join(
+		process.cwd(),
+		'.astro',
+		'starlight-history',
+		path.dirname(file).replace(process.cwd(), '').replace('src', '')
+	);
+
 	const result = execaSync(
 		'git',
 		[
@@ -63,9 +71,21 @@ export function getFileCommitDate(
 			path.basename(file),
 		],
 		{
-			cwd: path.dirname(file),
+			cwd: isShallowRepo ? shallowRepoPath : path.dirname(file),
 		}
 	);
+
+	// Comparision between the normal dirname and the shallow repo one
+	console.log(
+		path.dirname(file),
+		path.join(
+			process.cwd(),
+			'.astro',
+			'starlight-history',
+			path.dirname(file).replace(process.cwd(), '')
+		)
+	);
+
 	if (result.exitCode !== 0) {
 		throw new Error(
 			`Failed to retrieve the git history for file "${file}" with exit code ${result.exitCode}: ${result.stderr}`
@@ -93,4 +113,33 @@ export function getFileCommitDate(
 	const date = new Date(timestamp * 1000);
 
 	return { date, timestamp };
+}
+
+function handleShallowRepository(file: string) {
+	const { stdout: isShallowRepo } = execaSync('git', ['rev-parse', `--is-shallow-repository`], {
+		cwd: path.dirname(file),
+	});
+
+	if (isShallowRepo === 'true') {
+		const { stdout: cloneAddress } = execaSync('git', ['config', '--get', 'remote.origin.url'], {
+			cwd: path.dirname(file),
+		});
+
+		try {
+			const result = execaSync(
+				'git',
+				['clone', cloneAddress, '--bare', '--filter=blob:none', '--', './.astro/starlight-history'],
+				{
+					cwd: process.cwd(),
+				}
+			);
+			if (result.exitCode !== 0) {
+				throw new Error(
+					`Failed to retrieve the git history of shallow repository: ${result.stderr}`
+				);
+			}
+		} catch {}
+	}
+
+	return isShallowRepo === 'true' ? true : false;
 }
