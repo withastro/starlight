@@ -152,6 +152,7 @@ const UserConfigSchema = z.object({
 				'microsoftTeams',
 				'instagram',
 				'stackOverflow',
+				'telegram',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
