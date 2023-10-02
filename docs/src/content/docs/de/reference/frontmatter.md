@@ -8,7 +8,7 @@ Du kannst einzelne Markdown- und MDX-Seiten in Starlight anpassen, indem du Wert
 ```md
 ---
 title: Über dieses Projekt
-description: Erfahren Sie mehr über das Projekt, an dem ich gerade arbeite.
+description: Erfahre mehr über das Projekt, an dem ich gerade arbeite.
 ---
 
 Willkommen auf der Info-Seite!
