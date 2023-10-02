@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:lang/(.*)",
+      "destination": "/:lang/404/",
+      "statusCode": 404
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/ph/:path*/",
+      "destination": "https://astro-houston-ph.pages.dev/ph/:path*/"
+    }
+  ]
+}
