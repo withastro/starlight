@@ -152,6 +152,7 @@ const UserConfigSchema = z.object({
 				'microsoftTeams',
 				'instagram',
 				'stackOverflow',
+				'x.com',
 				'telegram',
 				'rss',
 			]),
