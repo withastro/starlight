@@ -38,7 +38,7 @@ Die Seitenbeschreibung wird für die Metadaten der Seite verwendet und wird von 
 
 **type:** [`HeadConfig[]`](/de/reference/configuration/#headconfig)
 
-Du kannst zusätzliche Tags zum `<head>` deiner Seite hinzufügen, indem du das Feld `head` frontmatter verwendest. Dies bedeutet, dass du benutzerdefinierte Stile, Metadaten oder andere Tags zu einer einzelnen Seite hinzufügen kannst. Ähnlich wie bei der [globalen `head` Option](/de/reference/configuration/#head).
+Du kannst zusätzliche Tags zum `<head>` deiner Seite hinzufügen, indem du das Feld `head` Frontmatter verwendest. Dies bedeutet, dass du benutzerdefinierte Stile, Metadaten oder andere Tags zu einer einzelnen Seite hinzufügen kannst. Ähnlich wie bei der [globalen `head` Option](/de/reference/configuration/#head).
 
 ```md
 ---
@@ -92,7 +92,7 @@ Zum Beispiel zeigt diese Konfiguration einige übliche Optionen, einschließlich
 
 ```md
 ---
-title: Meine Webseite
+title: Meine Website
 template: splash
 hero:
   title: 'Mein Projekt: Schnell ins All'

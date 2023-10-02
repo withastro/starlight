@@ -7,12 +7,12 @@ Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwisch
 Es gibt viele komplexe Faktoren bei der Berechnung der ökologischen Auswirkungen einer Website, aber dieser Leitfaden enthält einige Tipps, wie du den ökologischen Fußabdruck deiner Docs-Website verringern kannst.
 
 Die gute Nachricht ist, dass die Wahl von Starlight ein guter Anfang ist.
-Laut dem Website Carbon Calculator ist diese Website [sauberer als 99 % der getesteten Webseiten][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
+Laut dem Website Carbon Calculator ist diese Website [sauberer als 99 % der getesteten Websiten][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
 
 ## Seitengewicht
 
-Je mehr Daten eine Webseite überträgt, desto mehr Energieressourcen benötigt sie.
-Im April 2023 musste ein Nutzer laut [Daten aus dem HTTP-Archiv][http] für die durchschnittliche Webseite mehr als 2.000 KB herunterladen.
+Je mehr Daten eine Website überträgt, desto mehr Energieressourcen benötigt sie.
+Im April 2023 musste ein Nutzer laut [Daten aus dem HTTP-Archiv][http] für die durchschnittliche Website mehr als 2.000 KB herunterladen.
 
 Starlight erstellt Seiten, die so leicht wie möglich sind.
 So lädt ein Benutzer beim ersten Besuch weniger als 50 KB an komprimierten Daten herunter - nur 2,5 % des Medianwerts des HTTP-Archivs.
@@ -55,7 +55,7 @@ Wie du das Caching konfigurierst, hängt von deinem Webhost ab. Zum Beispiel wen
 
 ## Stromverbrauch
 
-Die Art und Weise, wie eine Webseite aufgebaut ist, kann sich auf den Stromverbrauch auswirken, den sie auf dem Gerät des Benutzers benötigt.
+Die Art und Weise, wie eine Website aufgebaut ist, kann sich auf den Stromverbrauch auswirken, den sie auf dem Gerät des Benutzers benötigt.
 Durch die Verwendung von minimalem JavaScript reduziert Starlight die Rechenleistung, die das Telefon, Tablet oder der Computer eines Nutzers zum Laden und Rendern von Seiten benötigt.
 
 Sei jedoch vorsichtig, wenn du Funktionen wie analytische Tracking-Skripte oder JavaScript-lastige Inhalte wie Videoeinbettungen hinzufügen, da diese den Stromverbrauch der Seite erhöhen können.
@@ -77,7 +77,7 @@ Verglichen mit dem Rendern eines JPEG-Bildes derselben Größe kann die [Verarbe
 
 ## Hosting
 
-Wo eine Webseite gehostet wird, kann einen großen Einfluss darauf haben, wie umweltfreundlich deine Dokumentationsseite ist.
+Wo eine Website gehostet wird, kann einen großen Einfluss darauf haben, wie umweltfreundlich deine Dokumentationsseite ist.
 Rechenzentren und Serveranlagen können große ökologische Auswirkungen haben, einschließlich eines hohen Stromverbrauchs und eines intensiven Wasserverbrauchs.
 
 Wenn du dich für einen Hoster entscheiden, der erneuerbare Energien einsetzt, wird deine Website weniger Kohlenstoffemissionen verursachen. Das [Green Web Directory][gwb] ist ein Tool, das dir helfen kann, Hosting-Unternehmen zu finden.

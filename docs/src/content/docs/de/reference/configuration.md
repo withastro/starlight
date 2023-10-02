@@ -299,7 +299,7 @@ So kannst du zum Beispiel `/getting-started/` als englische Seite und `/fr/getti
 
 **Typ:** `string`
 
-Legt die Sprache fest, die als Standard für diese Webseite gilt.
+Legt die Sprache fest, die als Standard für diese Website gilt.
 Der Wert sollte mit einem der Schlüssel deines [`locales`](#locales)-Objekts übereinstimmen.
 (Wenn deine Standardsprache deiner [Root-Locale](#root-locale) ist, kannst du dies überspringen).
 
