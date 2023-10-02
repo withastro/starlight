@@ -12,7 +12,7 @@ Bitte prüfe die [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) oder [
 Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
 
 ```md
-Text kann **fett**, \_italic\_, oder ~~durchgestrichen~~ sein.
+Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
 ```
 
 Sie können [auf eine andere Seite](/de/getting-started/) verlinken.
