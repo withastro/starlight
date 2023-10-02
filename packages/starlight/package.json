@@ -27,6 +27,7 @@
     ".": "./index.ts",
     "./components": "./components.ts",
     "./components/*": "./components/*",
+    "./props": "./props.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
     "./index.astro": "./index.astro",
