@@ -15,10 +15,10 @@ Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
 Text kann **fett**, _italic_, oder ~~durchgestrichen~~ sein.
 ```
 
-Sie können [auf eine andere Seite](/de/getting-started/) verlinken.
+Du kannst [auf eine andere Seite](/de/getting-started/) verlinken.
 
 ```md
-Sie können [auf eine andere Seite](/de/getting-started/) verlinken.
+Du kannst [auf eine andere Seite](/de/getting-started/) verlinken.
 ```
 
 Du kannst `inline code` mit Backticks hervorheben.
