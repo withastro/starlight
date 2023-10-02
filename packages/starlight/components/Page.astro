@@ -1,5 +1,5 @@
 ---
-import { generateRouteData, type PageProps as Props } from '../utils/route-data';
+import { type StarlightRouteData as Props } from '../utils/route-data';
 
 // Built-in CSS styles.
 import '../style/props.css';
@@ -32,22 +32,21 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
-const route = generateRouteData(Astro);
 const pagefindEnabled =
-	route.entry.slug !== '404' &&
-	!route.entry.slug.endsWith('/404') &&
-	route.entry.data.pagefind !== false;
+	Astro.props.entry.slug !== '404' &&
+	!Astro.props.entry.slug.endsWith('/404') &&
+	Astro.props.entry.data.pagefind !== false;
 ---
 
 <html
-	lang={route.lang}
-	dir={route.dir}
-	data-has-toc={Boolean(route.toc)}
-	data-has-sidebar={route.hasSidebar}
-	data-has-hero={Boolean(route.entry.data.hero)}
+	lang={Astro.props.lang}
+	dir={Astro.props.dir}
+	data-has-toc={Boolean(Astro.props.toc)}
+	data-has-sidebar={Astro.props.hasSidebar}
+	data-has-hero={Boolean(Astro.props.entry.data.hero)}
 >
 	<head>
-		<Head {...route} />
+		<Head {...Astro.props} />
 		<style>
 			html:not([data-has-toc]) {
 				--sl-mobile-toc-height: 0rem;
@@ -74,41 +73,41 @@ const pagefindEnabled =
 				}
 			}
 		</style>
-		<ThemeProvider {...route} />
+		<ThemeProvider {...Astro.props} />
 	</head>
 	<body>
-		<SkipLink {...route} />
-		<PageFrame {...route}>
-			<Header slot="header" {...route} />
-			{route.hasSidebar && <Sidebar slot="sidebar" {...route} />}
-			<TwoColumnContent {...route}>
-				<RightSidebar slot="right-sidebar" {...route} />
+		<SkipLink {...Astro.props} />
+		<PageFrame {...Astro.props}>
+			<Header slot="header" {...Astro.props} />
+			{Astro.props.hasSidebar && <Sidebar slot="sidebar" {...Astro.props} />}
+			<TwoColumnContent {...Astro.props}>
+				<RightSidebar slot="right-sidebar" {...Astro.props} />
 				<main
 					data-pagefind-body={pagefindEnabled}
-					lang={route.entryMeta.lang}
-					dir={route.entryMeta.dir}
+					lang={Astro.props.entryMeta.lang}
+					dir={Astro.props.entryMeta.dir}
 				>
 					{/* TODO: Revisit how this logic flows. */}
-					<Banner {...route} />
+					<Banner {...Astro.props} />
 					{
-						route.entry.data.hero ? (
-							<ContentPanel {...route}>
-								<Hero {...route} />
-								<MarkdownContent {...route}>
+						Astro.props.entry.data.hero ? (
+							<ContentPanel {...Astro.props}>
+								<Hero {...Astro.props} />
+								<MarkdownContent {...Astro.props}>
 									<slot />
 								</MarkdownContent>
 							</ContentPanel>
 						) : (
 							<>
-								<ContentPanel {...route}>
-									<PageTitle {...route} />
-									{route.isFallback && <FallbackContentNotice {...route} />}
+								<ContentPanel {...Astro.props}>
+									<PageTitle {...Astro.props} />
+									{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
 								</ContentPanel>
-								<ContentPanel {...route}>
-									<MarkdownContent {...route}>
+								<ContentPanel {...Astro.props}>
+									<MarkdownContent {...Astro.props}>
 										<slot />
 									</MarkdownContent>
-									<Footer {...route} />
+									<Footer {...Astro.props} />
 								</ContentPanel>
 							</>
 						)
