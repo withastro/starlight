@@ -57,7 +57,7 @@ export function getFileCommitDate(
 		process.cwd(),
 		'.astro',
 		'starlight-history',
-		path.dirname(file).replace(process.cwd(), '').replace('src', '')
+		path.dirname(file).replace(process.cwd(), '')
 	);
 
 	const result = execaSync(
