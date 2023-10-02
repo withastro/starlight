@@ -153,6 +153,7 @@ const UserConfigSchema = z.object({
 				'instagram',
 				'stackOverflow',
 				'telegram',
+				'rss',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
