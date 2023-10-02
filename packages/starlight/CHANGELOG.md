@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.10.4
+
+### Patch Changes
+
+- [#752](https://github.com/withastro/starlight/pull/752) [`6833ee1`](https://github.com/withastro/starlight/commit/6833ee12159ea5be23885c41da80569a89aafa33) Thanks [@apinet](https://github.com/apinet)! - Add X social link logo
+
+- [#789](https://github.com/withastro/starlight/pull/789) [`2528fb0`](https://github.com/withastro/starlight/commit/2528fb011a388f3920af9994012bd7db2b1654c3) Thanks [@delucis](https://github.com/delucis)! - Update bundled version of `@astrojs/mdx` to v1.1.0
+
+- [#794](https://github.com/withastro/starlight/pull/794) [`a0de12d`](https://github.com/withastro/starlight/commit/a0de12d596ab2b1c0d79d6d63d2d6cb9fe6d2644) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add Telegram icon
+
+- [#792](https://github.com/withastro/starlight/pull/792) [`a8358df`](https://github.com/withastro/starlight/commit/a8358df7849b342de342a4a2e88e019c39d5bbe8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add RSS icon
+
+- [#778](https://github.com/withastro/starlight/pull/778) [`957d2c3`](https://github.com/withastro/starlight/commit/957d2c32123ab0c223fcef03f91ce3ad7be7aa21) Thanks [@jermanuts](https://github.com/jermanuts)! - Improve Arabic UI translations
+
 ## 0.10.3
 
 ### Patch Changes
@@ -153,16 +167,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -541,8 +555,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
