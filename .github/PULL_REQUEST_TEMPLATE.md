@@ -15,6 +15,9 @@
 - What does this PR change? Give us a brief description.
 - Did you change something visual? A before/after screenshot can be helpful.
 
+<!-- TAKING PART IN HACKTOBERFEST? LET US KNOW! -->
+<!-- See https://github.com/withastro/docs/blob/main/.github/hacktoberfest.md for more details. -->
+
 <!--
 Here’s what will happen next:
 One or more of our maintainers will take a look and may ask you to make changes.
