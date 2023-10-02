@@ -4,7 +4,7 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/:lang/(.*)",
+      "source": "/:lang/(.*)/",
       "destination": "/:lang/404/",
       "statusCode": 404
     }
