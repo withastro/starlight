@@ -9,7 +9,7 @@ import type { Route } from './routing';
 import { useTranslations } from './translations';
 import { ensureTrailingSlash } from './path';
 
-export interface PageProps extends Route {
+interface PageProps extends Route {
 	headings: MarkdownHeading[];
 }
 
