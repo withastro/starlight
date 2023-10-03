@@ -34,13 +34,15 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
+				const integrations: AstroIntegration[] = [];
+				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
+					integrations.push(starlightSitemap(userConfig));
+				}
+				if (!config.integrations.find(({ name }) => name === '@astrojs/mdx')) {
+					integrations.push(mdx());
+				}
 				const newConfig: AstroUserConfig = {
-					integrations: [
-						...(!config.integrations.find(({ name }) => name === '@astrojs/sitemap')
-							? [starlightSitemap(userConfig)]
-							: []),
-						...(!config.integrations.find(({ name }) => name === '@astrojs/mdx') ? [mdx()] : []),
-					],
+					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
 					},
