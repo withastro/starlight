@@ -8,4 +8,6 @@ const { sidebar } = Astro.props;
 ---
 
 <SidebarSublist sublist={sidebar} />
-<MobileMenuFooter {...Astro.props} />
+<div class="md:sl-hidden">
+  <MobileMenuFooter {...Astro.props} />
+</div>
