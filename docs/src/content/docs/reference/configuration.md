@@ -425,3 +425,19 @@ starlight({
   ],
 });
 ```
+
+### `components`
+
+**type:** `Record<string, string>`
+
+Provide the paths to components to override Starlight’s default implementations.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+See the [Overrides Reference](/reference/overrides/) for details of all the components that you can override.
