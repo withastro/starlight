@@ -11,10 +11,16 @@ import {
 ---
 
 <div class="header sl-flex">
-	<SiteTitle {...Astro.props} />
-	<Search {...Astro.props} />
+	<div class="sl-flex">
+		<SiteTitle {...Astro.props} />
+	</div>
+	<div class="sl-flex">
+		<Search {...Astro.props} />
+	</div>
 	<div class="sl-hidden md:sl-flex right-group">
-		<SocialIcons {...Astro.props} />
+		<div class="sl-flex social-icons">
+			<SocialIcons {...Astro.props} />
+		</div>
 		<ThemeSelect {...Astro.props} />
 		<LanguageSelect {...Astro.props} />
 	</div>
@@ -28,9 +34,15 @@ import {
 		height: 100%;
 	}
 
-	.right-group {
+	.right-group,
+	.social-icons {
 		gap: 1rem;
 		align-items: center;
+	}
+	.social-icons::after {
+		content: '';
+		height: 2rem;
+		border-inline-end: 1px solid var(--sl-color-gray-5);
 	}
 
 	@media (min-width: 50rem) {

@@ -17,7 +17,6 @@ const links = Object.entries(config.social || {}) as [Platform, SocialConfig][];
 					<Icon name={platform} />
 				</a>
 			))}
-			<div class="divider" />
 		</>
 	)
 }
@@ -28,9 +27,5 @@ const links = Object.entries(config.social || {}) as [Platform, SocialConfig][];
 	}
 	a:hover {
 		opacity: 0.66;
-	}
-	.divider {
-		height: 2rem;
-		border-inline-end: 1px solid var(--sl-color-gray-5);
 	}
 </style>
