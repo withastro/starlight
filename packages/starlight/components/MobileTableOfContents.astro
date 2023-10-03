@@ -1,8 +1,8 @@
 ---
-import { useTranslations } from '../../utils/translations';
-import Icon from '../../user-components/Icon.astro';
-import TableOfContentsList from './TableOfContentsList.astro';
-import type { StarlightRouteData as Props } from '../../utils/route-data';
+import { useTranslations } from '../utils/translations';
+import Icon from '../user-components/Icon.astro';
+import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
+import type { StarlightRouteData as Props } from '../utils/route-data';
 
 const { locale, toc } = Astro.props;
 const t = useTranslations(locale);
@@ -109,7 +109,7 @@ const t = useTranslations(locale);
 </style>
 
 <script>
-	import { StarlightTOC } from './starlight-toc';
+	import { StarlightTOC } from './TableOfContents/starlight-toc';
 
 	class MobileStarlightTOC extends StarlightTOC {
 		override set current(link: HTMLAnchorElement) {

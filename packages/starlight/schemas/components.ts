@@ -135,7 +135,7 @@ export function ComponentConfigSchema() {
 			 */
 			MobileTableOfContents: z
 				.string()
-				.default('@astrojs/starlight/components/TableOfContents/MobileTableOfContents.astro'),
+				.default('@astrojs/starlight/components/MobileTableOfContents.astro'),
 
 			/*
 			CONTENT HEADER ------------------------------------------------------------------------------
