@@ -20,6 +20,9 @@ export const SocialLinksSchema = () =>
 				'microsoftTeams',
 				'instagram',
 				'stackOverflow',
+				'x.com',
+				'telegram',
+				'rss',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
@@ -47,6 +50,9 @@ export const SocialLinksSchema = () =>
 					microsoftTeams: 'Microsoft Teams',
 					instagram: 'Instagram',
 					stackOverflow: 'Stack Overflow',
+					'x.com': 'X',
+					telegram: 'Telegram',
+					rss: 'RSS',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
