@@ -102,26 +102,17 @@ If you have an existing Astro project, you can use Starlight to quickly add a do
 
 ### Use Starlight at a subpath
 
-To add all Starlight pages at a subpath, place all your docs content inside a subdirectory of `src/content/docs/`.
+To add all Starlight pages at a subpath, you could relay on top of Astro.js configurations. `base` and `assetPrefix`
 
-For example, if Starlight pages should all start with `/guides/`, add your content in the `src/content/docs/guides/` directory:
+**Base [astro docs](https://docs.astro.build/en/reference/configuration-reference/#base)**
+As the documentation suggests, this will allow you to add basically a `basePath` on your Astro + Startlight project.
 
-import FileTree from '../../components/file-tree.astro';
+**AssetPrefix [astro docs](https://docs.astro.build/en/reference/configuration-reference/#buildassetsprefix)**
+In case your subpath also be the root of your project (in case of micro-frontends or github pages), this property allow you to add a prefix in front of your assets, helping you delivery your astro assets!
 
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - **guides/**
-        - guide.md
-        - index.md
-  - pages/
-- astro.config.mjs
-
-</FileTree>
-
-In the future, we plan to support this use case better to avoid the need for the extra nested directory in `src/content/docs/`.
+:::caution
+If you are using Startlight in a subpath, but your assets are being uploaded in the `/`, you don't need to set `assetPrefix`!
+:::
 
 ### Use Starlight with SSR
 
