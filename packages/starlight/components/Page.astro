@@ -18,7 +18,7 @@ import {
 	Head,
 	Hero,
 	MarkdownContent,
-	RightSidebar,
+	PageSidebar,
 	Sidebar,
 	SkipLink,
 	ThemeProvider,
@@ -81,7 +81,7 @@ const pagefindEnabled =
 			<Header slot="header" {...Astro.props} />
 			{Astro.props.hasSidebar && <Sidebar slot="sidebar" {...Astro.props} />}
 			<TwoColumnContent {...Astro.props}>
-				<RightSidebar slot="right-sidebar" {...Astro.props} />
+				<PageSidebar slot="right-sidebar" {...Astro.props} />
 				<main
 					data-pagefind-body={pagefindEnabled}
 					lang={Astro.props.entryMeta.lang}
