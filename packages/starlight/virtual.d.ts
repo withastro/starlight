@@ -39,7 +39,6 @@ declare module 'virtual:starlight/components' {
 	export const MarkdownContent: typeof import('./components/MarkdownContent.astro').default;
 
 	export const RightSidebar: typeof import('./components/RightSidebar.astro').default;
-	export const RightSidebarPanel: typeof import('./components/RightSidebarPanel.astro').default;
 	export const TableOfContents: typeof import('./components/TableOfContents.astro').default;
 	export const MobileTableOfContents: typeof import('./components/MobileTableOfContents.astro').default;
 

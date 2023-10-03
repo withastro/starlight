@@ -115,17 +115,9 @@ export function ComponentConfigSchema() {
 
 			/**
 			 * Component rendered before the main page’s content to display a table of contents.
-			 * The default implementation renders `<TableOfContents />` (wrapped in `<RightSidebarPanel />`)
-			 * and `<MobileTableOfContents />`.
+			 * The default implementation renders `<TableOfContents />` and `<MobileTableOfContents />`.
 			 */
 			RightSidebar: z.string().default('@astrojs/starlight/components/RightSidebar.astro'),
-			/**
-			 * Component rendered around the table of contents for wider viewports.
-			 * The default implementation includes styles so it is hidden on small (mobile) viewports.
-			 */
-			RightSidebarPanel: z
-				.string()
-				.default('@astrojs/starlight/components/RightSidebarPanel.astro'),
 			/**
 			 * Component that renders the current page’s table of contents on wider viewports.
 			 */
