@@ -125,7 +125,7 @@ This will run tests and then listen for changes, re-running tests when files cha
 A lot of Starlight code relies on Vite virtual modules provided either by Astro or by Starlight itself. Each subdirectory of `packages/starlight/__tests__/` should contain a `vitest.config.ts` file that uses the `defineVitestConfig()` helper to define a valid test environment for tests in that directory. This helper takes a single argument, which provides a Starlight user config object:
 
 ```ts
-// packages/starlight/__tests/basics/vitest.config.ts
+// packages/starlight/__tests__/basics/vitest.config.ts
 import { defineVitestConfig } from '../test-config';
 
 export default defineVitestConfig({
