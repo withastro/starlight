@@ -106,9 +106,9 @@ Learn more about all the available props in the [Overrides Reference](/reference
 
 ### Only override on specific pages
 
-Component overrides apply to all pages. However, you can use `Astro.props` to determine when to show your custom UI and when to show Starlight’s default UI.
+Component overrides apply to all pages. However, you can conditionally render using values from `Astro.props` to determine when to show your custom UI,  when to show Starlight’s default UI, or even when to show something entirely different.
 
-In the following example, a component overriding the [`Footer`](/reference/overrides/#footer-1) renders a custom footer on the homepage and shows the default footer on all other pages:
+In the following example, a component overriding Starlight's [`Footer`](/reference/overrides/#footer-1) displays "Built with Starlight 🌟" on the homepage only, and otherwise shows the default footer on all other pages:
 
 ```astro
 ---
