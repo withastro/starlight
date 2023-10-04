@@ -25,73 +25,114 @@ const { hasSidebar } = Astro.props;
 
 This will give you autocomplete and types when accessing `Astro.props`.
 
-### `Props`
+## Props
+
+Starlight will pass the following props to your custom components.
+
+### `dir`
+
+**Type:** `'ltr' | 'rtl'`
+
+Page writing direction.
+
+### `lang`
+
+**Type:** `string`
+
+BCP-47 language tag for this page’s locale, e.g. `en`, `zh`, or `pt-BR`.
+
+### `locale`
+
+**Type:** `string | undefined`
+
+The base path at which a language is served. `undefined` for root locale slugs.
+
+### `slug`
+
+**Type:** `string`
+
+The slug, a.k.a. permalink, for this page.
+
+### `id`
+
+**Type:** `string`
+
+The unique ID for this page based on the content filename.
+
+### `isFallback`
+
+**Type:** `true | undefined`
+
+`true` if this page is untranslated in the current language and using fallback content from the default locale.
+Only used in multilingual sites.
+
+### `entryMeta`
+
+**Type:** `{ dir: 'ltr' | 'rtl'; lang: string }`
+
+Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content.
+
+### `entry`
+
+The Astro content collection entry for the current page.
+Includes frontmatter values for the current page at `entry.data`.
 
 ```ts
-interface Props {
-  /** Page writing direction. */
-  dir: 'ltr' | 'rtl';
-
-  /** BCP-47 language tag for this page’s locale. */
-  lang: string;
-
-  /** The base path at which a language is served. `undefined` for root locale slugs. */
-  locale: string | undefined;
-
-  /** The slug, a.k.a. permalink, for this page. */
-  slug: string;
-
-  /** The unique ID for this page. */
-  id: string;
-
-  /** True if this page is untranslated in the current language and using fallback content from the default locale. */
-  isFallback?: true;
-
-  /** Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content. */
-  entryMeta: {
-    /** Content writing direction. */
-    dir: 'ltr' | 'rtl';
-    /** BCP-47 language tag for this page’s content. */
-    lang: string;
-  };
-
-  /** Content collection entry for the current page. */
-  entry: {
-    /** Frontmatter values for the current page. */
-    data: {
-      title: string;
-      description: string | undefined;
-      // etc.
-    };
-  };
-
-  /** Site navigation sidebar entries for this page. */
-  sidebar: SidebarEntry[];
-
-  /** Whether or not the sidebar should be displayed on this page. */
-  hasSidebar: boolean;
-
-  /** Links to the previous and next page in the sidebar if enabled. */
-  pagination: {
-    prev: Link | undefined;
-    next: Link | undefined;
-  };
-
-  /** Array of Markdown headings extracted from the current page. */
-  headings: { depth: number; slug: string; text: string }[];
-
-  /** Table of contents for this page if enabled. */
-  toc:
-    | { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] }
-    | undefined;
-
-  /** JS Date object representing when this page was last updated if enabled. */
-  lastUpdated: Date | undefined;
-
-  /** URL object for the address where this page can be edited if enabled. */
-  editUrl: URL | undefined;
+entry: {
+  data: {
+    title: string;
+    description: string | undefined;
+    // etc.
+  }
 }
 ```
+
+Learn more about the shape of this object in [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/api-reference/#collection-entry-type) reference.
+
+### `sidebar`
+
+**Type:** `SidebarEntry[]`
+
+Site navigation sidebar entries for this page.
+
+### `hasSidebar`
+
+**Type:** `boolean`
+
+Whether or not the sidebar should be displayed on this page.
+
+### `pagination`
+
+**Type:** `{ prev?: Link; next?: Link }`
+
+Links to the previous and next page in the sidebar if enabled.
+
+### `toc`
+
+**Type:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+
+Table of contents for this page if enabled.
+
+### `headings`
+
+**Type:** `{ depth: number; slug: string; text: string }[]`
+
+Array of all Markdown headings extracted from the current page.
+Use [`toc`](#toc) instead if you want to build a table of contents that respects Starlight’s configuration options.
+
+### `lastUpdated`
+
+**Type:** `Date | undefined`
+
+JavaScript `Date` object representing when this page was last updated if enabled.
+
+### `editUrl`
+
+**Type:** `URL | undefined`
+
+`URL` object for the address where this page can be edited if enabled.
+
+---
 
 ## Head
 
@@ -115,6 +156,8 @@ Prefer the [`head`](/reference/configuration#head) option Starlight config if po
 Component rendered inside `<head>` that sets up dark/light theme support.
 The default implementation includes an inline script and a `<template>` used by the script in [`<ThemeSelect />`](#themeselect).
 
+---
+
 ## Accessibility
 
 ### `SkipLink`
@@ -123,6 +166,8 @@ The default implementation includes an inline script and a `<template>` used by 
 
 Component rendered as the first element inside `<body>` which links to the main page content for accessibility.
 The default implementation is hidden until a user focuses it by tabbing with their keyboard.
+
+---
 
 ## Layout
 
@@ -150,6 +195,8 @@ Component rendered inside [`<PageFrame>`](#pageframe) that is responsible for to
 
 Layout component wrapped around the main content column and right sidebar (table of contents).
 The default implementation handles the switch between a single-column, small-viewport layout and a two-column, larger-viewport layout.
+
+---
 
 ## Header
 
@@ -195,6 +242,8 @@ Component rendered in the site header that allows users to select their preferre
 
 Component rendered in the site header that allows users to switch to a different language.
 
+---
+
 ## Global Sidebar
 
 Starlight’s global sidebar includes the main site navigation.
@@ -214,6 +263,8 @@ It also renders [`<MobileMenuFooter />`](#mobilemenufooter) to show additional i
 
 Component rendered at the bottom of the mobile drop-down menu.
 The default implementation renders [`<ThemeSelect />`](#themeselect) and [`<LanguageSelect />`](#languageselect).
+
+---
 
 ## Page Sidebar
 
@@ -238,6 +289,8 @@ Component that renders the current page’s table of contents on wider viewports
 **Default component:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
 
 Component that renders the current page’s table of contents on small (mobile) viewports.
+
+---
 
 ## Content
 
@@ -284,6 +337,8 @@ The default implementation shows a large title, tagline, and call-to-action link
 
 Component rendered around each page’s main content.
 The default implementation sets up basic styles to apply to Markdown content.
+
+---
 
 ## Footer
 
