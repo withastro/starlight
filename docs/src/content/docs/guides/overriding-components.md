@@ -36,7 +36,7 @@ Overriding Starlight’s default components can be useful when:
    <a href="mailto:houston@example.com">E-mail Me</a>
    ```
 
-3. Tell Starlight to use your custom implementation in the [`components`](/reference/configuration/#components) configuration option in `astro.config.mjs`:
+3. Tell Starlight to use your custom component in the [`components`](/reference/configuration/#components) configuration option in `astro.config.mjs`:
 
    ```js {9-12}
    // astro.config.mjs
@@ -73,10 +73,10 @@ import Default from '@astrojs/starlight/SocialIcons.astro';
 <Default {...Astro.props}><slot /></Default>
 ```
 
-When rendering a built-in component:
+When rendering a built-in component inside a custom component:
 
 - Spread `Astro.props` into it. This makes sure that it receives all the data it needs to render.
-- Add a `<slot />` inside the component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
+- Add a `<slot />` inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
 
 ## Use page data
 
@@ -112,7 +112,7 @@ In the following example, a component overriding the [`Footer`](/reference/overr
 
 ```astro
 ---
-// src/components/Footer.astro
+// src/components/ConditionalFooter.astro
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/Footer.astro';
 
