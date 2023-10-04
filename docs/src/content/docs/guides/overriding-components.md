@@ -58,9 +58,9 @@ Overriding Starlight’s default components can be useful when:
 
 ## Extend a built-in component
 
-You can add some UI to your site without completely replacing Starlight’s default UI by extending a built-in component.
+You can build with Starlight’s default UI components just as you would with your own: importing and rendering them in your own custom components. This allows you to keep all of Starlight's basic UI within your design, while adding extra UI alongside them.
 
-To extend a built-in component, import and render it in your custom component. In this example, we render a custom e-mail link and then also render the default `SocialLinks` component:
+The example below shows a custom component that renders an e-mail link along with the default `SocialLinks` component:
 
 ```astro {4,8}
 ---
