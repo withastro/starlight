@@ -4,10 +4,12 @@
 
 <style>
 	.content-panel {
-		padding: 1.5rem var(--sl-content-pad-x);
+		padding: var(--sl-content-pad-y) var(--sl-safe-content-pad-right) var(--sl-content-pad-y)
+			var(--sl-safe-content-pad-left);
 	}
 	.content-panel + .content-panel {
 		border-top: 1px solid var(--sl-color-hairline);
+		padding-bottom: var(--sl-safe-content-pad-bottom);
 	}
 	.sl-container {
 		max-width: var(--sl-content-width);

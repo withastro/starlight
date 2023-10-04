@@ -23,7 +23,7 @@ const { sidebar, locale } = Astro.props;
 <style>
 	.sidebar {
 		height: 100%;
-		padding: 1rem var(--sl-sidebar-pad-x);
+		padding: 1rem var(--sl-safe-sidebar-pad-right) 1rem var(--sl-safe-sidebar-pad-left);
 		flex-direction: column;
 		gap: 1rem;
 	}
@@ -36,7 +36,7 @@ const { sidebar, locale } = Astro.props;
 
 	@media (min-width: 50rem) {
 		.sidebar > :global(:nth-last-child(2)) {
-			padding-bottom: 1rem;
+			padding-bottom: var(--sl-safe-sidebar-pad-bottom);
 		}
 	}
 </style>
