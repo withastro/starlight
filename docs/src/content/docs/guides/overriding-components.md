@@ -1,6 +1,8 @@
 ---
 title: Overriding Components
 description: Learn how to override Starlight’s built-in components to add custom elements to your documentation site’s UI.
+sidebar:
+  badge: New
 ---
 
 Starlight’s default UI and configuration options are designed to be flexible and work for a range of content.
