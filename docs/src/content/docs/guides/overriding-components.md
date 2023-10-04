@@ -5,8 +5,9 @@ sidebar:
   badge: New
 ---
 
-Starlight’s default UI and configuration options are designed to be flexible and work for a range of content.
-When you need to customize what’s possible out of the box, Starlight supports overriding its default components.
+Starlight’s default UI and configuration options are designed to be flexible and work for a range of content. Much of [Starlight's default appearance can be customized](/guides/customization/) with CSS and configuration options.
+
+When you need more than what’s possible out of the box, Starlight supports building your own custom components to extend or override (completely replace) its default components.
 
 ## When to override
 
