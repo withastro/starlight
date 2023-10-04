@@ -21,7 +21,7 @@ Overriding Starlight’s default components can be useful when:
 
    This example will override Starlight’s [`SocialIcons`](/reference/overrides/#socialicons) component in the page nav bar.
 
-2. Create an Astro component that will replace the Starlight component.
+2. Create an Astro component to replace the Starlight component with.
    This example renders a contact link.
 
    ```astro
