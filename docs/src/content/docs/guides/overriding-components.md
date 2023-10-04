@@ -53,7 +53,7 @@ Overriding Starlight’s default components can be useful when:
    });
    ```
 
-## Extending a built-in component
+## Extend a built-in component
 
 You can add some UI to your site without completely replacing Starlight’s default UI by extending a built-in component.
 
@@ -74,3 +74,57 @@ When rendering a built-in component:
 
 - Spread `Astro.props` into it. This makes sure that it receives all the data it needs to render.
 - Add a `<slot />` inside the component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
+
+## Use page data
+
+When overriding a Starlight component, your custom implementation receives a standard `Astro.props` object.
+This object contains all the data for the current page to help you decide what to render.
+
+For example, you can read the page’s frontmatter values as `Astro.props.entry.data`. In the following example, a replacement [`PageTitle`](/reference/overrides/#pagetitle) component uses this to display the current page’s title:
+
+```astro {5} "{title}"
+---
+// src/components/Title.astro
+import type { Props } from '@astrojs/starlight/props';
+
+const { title } = Astro.props.entry.data;
+---
+
+<h1 id="_top">{title}</h1>
+
+<style>
+  h1 {
+    font-family: 'Comic Sans';
+  }
+</style>
+```
+
+Learn more about all the available props in the [Overrides Reference](/reference/overrides/#prop-types).
+
+### Only override on specific pages
+
+Component overrides apply to all pages. However, you can use `Astro.props` to determine when to show your custom UI and when to show Starlight’s default UI.
+
+In the following example, a component overriding the [`Footer`](/reference/overrides/#footer-1) renders a custom footer on the homepage and shows the default footer on all other pages:
+
+```astro
+---
+// src/components/Footer.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/Footer.astro';
+
+const isHomepage = Astro.props.slug === '';
+---
+
+{
+  isHomepage ? (
+    <footer>Built with Starlight 🌟</footer>
+  ) : (
+    <Default {...Astro.props}>
+      <slot />
+    </Default>
+  )
+}
+```
+
+Learn more about conditional rendering in [Astro’s Template Syntax guide](https://docs.astro.build/en/core-concepts/astro-syntax/#dynamic-html).
