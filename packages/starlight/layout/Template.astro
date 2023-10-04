@@ -1,0 +1,36 @@
+---
+import config from 'virtual:starlight/user-config';
+import Page from './Page.astro';
+import type { StarlightDocsEntry } from '../utils/routing';
+
+interface Props {
+	title: string;
+	template?: 'splash' | 'doc';
+}
+
+const { title, template } = Astro.props;
+const { pathname } = Astro.url;
+
+const { lang = 'en', dir = 'ltr' } = config.defaultLocale || {};
+let locale = config.defaultLocale?.locale;
+if (locale === 'root') locale = undefined;
+
+const entryMeta = { dir, lang, locale };
+
+const entry: StarlightDocsEntry = {
+	slug: pathname,
+	id: pathname as StarlightDocsEntry['id'],
+	body: '',
+	collection: 'docs',
+	data: {
+		title,
+		template: template ?? 'doc',
+		head: [],
+	},
+};
+---
+
+<Page headings={[]} entry={entry} id={entry.id} slug={entry.slug} {...entryMeta} {entryMeta}>
+	<slot slot="right-sidebar" name="right-sidebar" />
+	<slot />
+</Page>

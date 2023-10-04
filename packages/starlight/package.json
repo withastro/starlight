@@ -28,6 +28,7 @@
     "./components": "./components.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
+    "./layout": "./layout.ts",
     "./index.astro": "./index.astro",
     "./404.astro": "./404.astro"
   },

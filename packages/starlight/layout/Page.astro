@@ -19,6 +19,7 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import MarkdownContent from '../components/MarkdownContent.astro';
 import RightSidebar from '../components/RightSidebar.astro';
+import RightSidebarPanel from '../components/RightSidebarPanel.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SkipLink from '../components/SkipLink.astro';
 import ThemeProvider from '../components/ThemeProvider.astro';
@@ -92,7 +93,15 @@ const pagefindEnabled =
 			<Header slot="header" {locale} />
 			{hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
 			<TwoColumnContent {hasToC}>
-				<RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
+				{
+					Astro.slots.has('right-sidebar') ? (
+						<RightSidebarPanel slot="right-sidebar">
+							<slot name="right-sidebar" />
+						</RightSidebarPanel>
+					) : (
+						<RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
+					)
+				}
 				<main data-pagefind-body={pagefindEnabled} lang={entryMeta.lang} dir={entryMeta.dir}>
 					{/* TODO: Revisit how this logic flows. */}
 					{entry.data.banner && <Banner {...entry.data.banner} />}
