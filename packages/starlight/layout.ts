@@ -1,1 +1,1 @@
-export { default as Template } from "./layout/Template.astro";
+export { default as StarlightTemplate } from "./layout/Template.astro";
