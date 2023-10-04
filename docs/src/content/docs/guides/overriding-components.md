@@ -80,8 +80,8 @@ When rendering a built-in component inside a custom component:
 
 ## Use page data
 
-When overriding a Starlight component, your custom implementation receives a standard `Astro.props` object.
-This object contains all the data for the current page to help you decide what to render.
+When overriding a Starlight component, your custom implementation receives a standard `Astro.props` object containing all the data for the current page.
+This allows you to use these values to control how your component template renders.
 
 For example, you can read the page’s frontmatter values as `Astro.props.entry.data`. In the following example, a replacement [`PageTitle`](/reference/overrides/#pagetitle) component uses this to display the current page’s title:
 
