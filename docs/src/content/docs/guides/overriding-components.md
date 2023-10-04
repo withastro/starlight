@@ -5,7 +5,7 @@ sidebar:
   badge: New
 ---
 
-Starlight’s default UI and configuration options are designed to be flexible and work for a range of content. Much of [Starlight's default appearance can be customized](/guides/customization/) with CSS and configuration options.
+Starlight’s default UI and configuration options are designed to be flexible and work for a range of content. Much of Starlight's default appearance can be customized with [CSS](/guides/css-and-tailwind/) and [configuration options](/guides/customization/).
 
 When you need more than what’s possible out of the box, Starlight supports building your own custom components to extend or override (completely replace) its default components.
 
@@ -20,7 +20,7 @@ Overriding Starlight’s default components can be useful when:
 ## How to override
 
 1. Choose the Starlight component you want to override.
-   You can find a full list of components in the [Overrides Reference](/reference/overrides/)
+   You can find a full list of components in the [Overrides Reference](/reference/overrides/).
 
    This example will override Starlight’s [`SocialIcons`](/reference/overrides/#socialicons) component in the page nav bar.
 
@@ -76,7 +76,7 @@ import Default from '@astrojs/starlight/SocialIcons.astro';
 When rendering a built-in component inside a custom component:
 
 - Spread `Astro.props` into it. This makes sure that it receives all the data it needs to render.
-- Add a `<slot />` inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
+- Add a [`<slot />`](https://docs.astro.build/en/core-concepts/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
 
 ## Use page data
 
