@@ -56,7 +56,7 @@ Overriding Starlight’s default components can be useful when:
    });
    ```
 
-## Extend a built-in component
+## Reuse a built-in component
 
 You can build with Starlight’s default UI components just as you would with your own: importing and rendering them in your own custom components. This allows you to keep all of Starlight's basic UI within your design, while adding extra UI alongside them.
 
