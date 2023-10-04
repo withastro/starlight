@@ -53,7 +53,7 @@ The base path at which a language is served. `undefined` for root locale slugs.
 
 **Type:** `string`
 
-The slug, a.k.a. permalink, for this page.
+The slug for this page generated from the content filename.
 
 #### `id`
 
