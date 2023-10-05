@@ -26,43 +26,42 @@ const rawHtml = !darkImage && image?.html ? image.html : null;
 ---
 
 <div class="hero">
-
-  {
-    darkImage && (
-    darkImage.format === 'svg' ? (
-        <img src={darkImage.src} {...imageAttrs} class:list={{ 'dark-only': Boolean(lightImage) }}/>
-      ) : (
-        <Image src={darkImage} {...imageAttrs} class:list={{ 'dark-only': Boolean(lightImage) }}/>
-      )
-    ) 
-  }
-  {
-    lightImage && (
-    lightImage.format === 'svg' ? (
-        <img src={lightImage.src} {...imageAttrs} class="light-only"/>
-      ) : (
-        <Image src={lightImage} {...imageAttrs} class="light-only"/>
-      )
-    ) 
-  }
-{
-  rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />
-}
-  <div class="sl-flex stack">
-    <div class="sl-flex copy">
-      <h1 id="_top" data-page-title set:html={title} />
-      {tagline && <div class="tagline" set:html={tagline} />}
-    </div>
-    {
-      actions.length > 0 && (
-        <div class="sl-flex actions">
-          {actions.map(({ text, ...attrs }) => (
-            <CallToAction {...attrs} set:html={text} />
-          ))}
-        </div>
-      )
-    }
-  </div>
+	{
+		darkImage &&
+			(darkImage.format === 'svg' ? (
+				<img
+					src={darkImage.src}
+					{...imageAttrs}
+					class:list={{ 'dark-only': Boolean(lightImage) }}
+				/>
+			) : (
+				<Image src={darkImage} {...imageAttrs} class:list={{ 'dark-only': Boolean(lightImage) }} />
+			))
+	}
+	{
+		lightImage &&
+			(lightImage.format === 'svg' ? (
+				<img src={lightImage.src} {...imageAttrs} class="light-only" />
+			) : (
+				<Image src={lightImage} {...imageAttrs} class="light-only" />
+			))
+	}
+	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
+	<div class="sl-flex stack">
+		<div class="sl-flex copy">
+			<h1 id="_top" data-page-title set:html={title} />
+			{tagline && <div class="tagline" set:html={tagline} />}
+		</div>
+		{
+			actions.length > 0 && (
+				<div class="sl-flex actions">
+					{actions.map(({ text, ...attrs }) => (
+						<CallToAction {...attrs} set:html={text} />
+					))}
+				</div>
+			)
+		}
+	</div>
 </div>
 
 <style>
@@ -73,20 +72,20 @@ const rawHtml = !darkImage && image?.html ? image.html : null;
 		padding-bottom: 1rem;
 	}
 
-  .hero > img,
-  .hero > .hero-html {
-    object-fit: contain;
-    width: min(70%, 20rem);
-    height: auto;
-    margin-inline: auto;
-  }
+	.hero > img,
+	.hero > .hero-html {
+		object-fit: contain;
+		width: min(70%, 20rem);
+		height: auto;
+		margin-inline: auto;
+	}
 
-  :global([data-theme='light']) .dark-only {
-    display: none;
-  }
-  :global([data-theme='dark']) .light-only {
-    display: none;
-  }
+	:global([data-theme='light']) .dark-only {
+		display: none;
+	}
+	:global([data-theme='dark']) .light-only {
+		display: none;
+	}
 
 	.stack {
 		flex-direction: column;

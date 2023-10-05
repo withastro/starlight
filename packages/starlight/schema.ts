@@ -58,19 +58,19 @@ export function docsSchema() {
 					tagline: z.string().optional(),
 					/** The image to use in the hero. You can provide either a relative `file` path or raw `html`. */
 					image: z
-  						.object({
-  							/** Alt text for screenreaders and other assistive technologies describing your hero image. */
-  							alt: z.string().default(''),
-  							/** Relative path to an image file in your repo, e.g. `../../assets/hero.png`. */
-  							file: image().optional(),
+						.object({
+							/** Alt text for screenreaders and other assistive technologies describing your hero image. */
+							alt: z.string().default(''),
+							/** Relative path to an image file in your repo, e.g. `../../assets/hero.png`. */
+							file: image().optional(),
 							/** Relative path to an image file in your repo to use in dark mode, e.g. `../../assets/hero-dark.png`. */
 							dark: image().optional(),
 							/** Relative path to an image file in your repo to use in light mode, e.g. `../../assets/hero-light.png`. */
 							light: image().optional(),
-  							/** Raw HTML string instead of an image file. Useful for inline SVGs or more complex hero content. */
-  							html: z.string().optional(),
-  						})
-  						.optional(),
+							/** Raw HTML string instead of an image file. Useful for inline SVGs or more complex hero content. */
+							html: z.string().optional(),
+						})
+						.optional(),
 					/** An array of call-to-action links displayed at the bottom of the hero. */
 					actions: z
 						.object({
@@ -79,18 +79,18 @@ export function docsSchema() {
 							/** Value for the link’s `href` attribute, e.g. `/page` or `https://mysite.com`. */
 							link: z.string(),
 							/** Button style to use. One of `primary`, `secondary`, or `minimal` (the default). */
-							variant: z.enum(["primary", "secondary", "minimal"]).default("minimal"),
+							variant: z.enum(['primary', 'secondary', 'minimal']).default('minimal'),
 							/**
 							 * An optional icon to display alongside the link text.
 							 * Can be an inline `<svg>` or the name of one of Starlight’s built-in icons.
 							 */
 							icon: z
-								.union([z.enum(iconNames), z.string().startsWith("<svg")])
+								.union([z.enum(iconNames), z.string().startsWith('<svg')])
 								.transform((icon) => {
 									const parsedIcon = z.enum(iconNames).safeParse(icon);
 									return parsedIcon.success
-										? ({ type: "icon", name: parsedIcon.data } as const)
-										: ({ type: "raw", html: icon } as const);
+										? ({ type: 'icon', name: parsedIcon.data } as const)
+										: ({ type: 'raw', html: icon } as const);
 								})
 								.optional(),
 						})
