@@ -7,6 +7,8 @@ import ja from './ja.json';
 import pt from './pt.json';
 import fa from './fa.json';
 import fr from './fr.json';
+import he from './he.json';
+import id from './id.json';
 import it from './it.json';
 import nl from './nl.json';
 import da from './da.json';
@@ -16,11 +18,31 @@ import nb from './nb.json';
 import zh from './zh.json';
 import ko from './ko.json';
 import sv from './sv.json';
+import ru from './ru.json';
 
 const { parse } = builtinI18nSchema();
 
 export default Object.fromEntries(
-	Object.entries({ cs, en, es, de, ja, pt, fa, fr, it, nl, da, tr, ar, nb, zh, ko, sv }).map(
-		([key, dict]) => [key, parse(dict)]
-	)
+	Object.entries({
+		cs,
+		en,
+		es,
+		de,
+		ja,
+		pt,
+		fa,
+		fr,
+		he,
+		id,
+		it,
+		nl,
+		da,
+		tr,
+		ar,
+		nb,
+		zh,
+		ko,
+		sv,
+		ru,
+	}).map(([key, dict]) => [key, parse(dict)])
 );

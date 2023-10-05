@@ -1,5 +1,67 @@
 # @astrojs/starlight
 
+## 0.10.4
+
+### Patch Changes
+
+- [#752](https://github.com/withastro/starlight/pull/752) [`6833ee1`](https://github.com/withastro/starlight/commit/6833ee12159ea5be23885c41da80569a89aafa33) Thanks [@apinet](https://github.com/apinet)! - Add X social link logo
+
+- [#789](https://github.com/withastro/starlight/pull/789) [`2528fb0`](https://github.com/withastro/starlight/commit/2528fb011a388f3920af9994012bd7db2b1654c3) Thanks [@delucis](https://github.com/delucis)! - Update bundled version of `@astrojs/mdx` to v1.1.0
+
+- [#794](https://github.com/withastro/starlight/pull/794) [`a0de12d`](https://github.com/withastro/starlight/commit/a0de12d596ab2b1c0d79d6d63d2d6cb9fe6d2644) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add Telegram icon
+
+- [#792](https://github.com/withastro/starlight/pull/792) [`a8358df`](https://github.com/withastro/starlight/commit/a8358df7849b342de342a4a2e88e019c39d5bbe8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add RSS icon
+
+- [#778](https://github.com/withastro/starlight/pull/778) [`957d2c3`](https://github.com/withastro/starlight/commit/957d2c32123ab0c223fcef03f91ce3ad7be7aa21) Thanks [@jermanuts](https://github.com/jermanuts)! - Improve Arabic UI translations
+
+## 0.10.3
+
+### Patch Changes
+
+- [#783](https://github.com/withastro/starlight/pull/783) [`f94727e`](https://github.com/withastro/starlight/commit/f94727e7d286a6910f913a572b27eb17c42f1729) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fix GitHub edit link to include src path from project config
+
+- [#781](https://github.com/withastro/starlight/pull/781) [`a293ef9`](https://github.com/withastro/starlight/commit/a293ef9ebb10a07db456156d8bdacc4ff6a2ca38) Thanks [@dreyfus92](https://github.com/dreyfus92)! - Removed role from Banner component to avoid duplication in header.
+
+- [#745](https://github.com/withastro/starlight/pull/745) [`006d606`](https://github.com/withastro/starlight/commit/006d60695761ec10e5c4e715ed2212cd1fbedda0) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Prevent Starlight crashing when the content folder doesn't exist, or is empty
+
+- [#775](https://github.com/withastro/starlight/pull/775) [`2ef3036`](https://github.com/withastro/starlight/commit/2ef303649a0b66a6ec6a216815e05d41bf22b594) Thanks [@delucis](https://github.com/delucis)! - Fix content collection schema compatibility with Astro 3.1 and higher
+
+- [#773](https://github.com/withastro/starlight/pull/773) [`423d575`](https://github.com/withastro/starlight/commit/423d575cc8227e4db86a85c70c45c0f3f7a184d2) Thanks [@tlandmangh](https://github.com/tlandmangh)! - Fix Dutch UI translation for “Previous page” links
+
+## 0.10.2
+
+### Patch Changes
+
+- [#735](https://github.com/withastro/starlight/pull/735) [`2da8692`](https://github.com/withastro/starlight/commit/2da86929c8041f6585790c3baf1cba42220650cc) Thanks [@delucis](https://github.com/delucis)! - Use Starlight font custom property in Pagefind modal
+
+- [#735](https://github.com/withastro/starlight/pull/735) [`2da8692`](https://github.com/withastro/starlight/commit/2da86929c8041f6585790c3baf1cba42220650cc) Thanks [@delucis](https://github.com/delucis)! - Fix RTL styling in Pagefind modal
+
+- [#739](https://github.com/withastro/starlight/pull/739) [`a9de4a7`](https://github.com/withastro/starlight/commit/a9de4a7dcf9ec8c5c801e8a6cbb0d7faf2c34db7) Thanks [@radenpioneer](https://github.com/radenpioneer)! - Add Indonesian UI translation
+
+- [#747](https://github.com/withastro/starlight/pull/747) [`7589515`](https://github.com/withastro/starlight/commit/75895154b11cf9368d4d6b45647b156ce32a88f0) Thanks [@nirtamir2](https://github.com/nirtamir2)! - Add Hebrew UI translations
+
+## 0.10.1
+
+### Patch Changes
+
+- [#726](https://github.com/withastro/starlight/pull/726) [`f3157c6`](https://github.com/withastro/starlight/commit/f3157c6065943af39995b6dbae5f63cf424bd9a3) Thanks [@delucis](https://github.com/delucis)! - Fix a rare bug in table of contents when handling headings that increase by more than one level on a page.
+
+- [#729](https://github.com/withastro/starlight/pull/729) [`80c6ab1`](https://github.com/withastro/starlight/commit/80c6ab1c1ec48805e74c53b615a78d65127eeacb) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1.0.3
+
+- [#715](https://github.com/withastro/starlight/pull/715) [`e726155`](https://github.com/withastro/starlight/commit/e7261559f2539a0ceefd36a28e4fbbc17f5970b8) Thanks [@itsmatteomanf](https://github.com/itsmatteomanf)! - feat: prevent scroll on body when search is open
+
+## 0.10.0
+
+### Minor Changes
+
+- [#692](https://github.com/withastro/starlight/pull/692) [`2a58e1a`](https://github.com/withastro/starlight/commit/2a58e1aa068d01833a0ab9e74e4b46cccaee1775) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1 and display page headings in search results
+
+### Patch Changes
+
+- [#708](https://github.com/withastro/starlight/pull/708) [`136cfb1`](https://github.com/withastro/starlight/commit/136cfb180f22db116cfdb62fd93d21daff596946) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Fix main content column width for pages without a table of contents
+
+- [#682](https://github.com/withastro/starlight/pull/682) [`660a5f5`](https://github.com/withastro/starlight/commit/660a5f57adf0340de21df3e364aada38255bb06c) Thanks [@vedmalex](https://github.com/vedmalex)! - Add Russian language support
+
 ## 0.9.1
 
 ### Patch Changes
