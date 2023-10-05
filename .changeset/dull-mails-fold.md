@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-transform sidebar headings into content span elements
+Use `<span>` instead of `<h2>` in sidebar group headings
