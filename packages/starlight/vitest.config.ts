@@ -27,6 +27,10 @@ export default defineConfig({
 				'types.ts',
 				// We use this to set up test environments so it isn‘t picked up, but we are testing it downstream.
 				'integrations/virtual-user-config.ts',
+				// Types-only export.
+				'props.ts',
+				// Main integration entrypoint — don’t think we’re able to test this directly currently.
+				'index.ts',
 			],
 			thresholdAutoUpdate: true,
 			lines: 66.57,
