@@ -15,7 +15,6 @@ interface Props {
 const { data, lang } = Astro.props;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
-const title = data.title || config.title;
 const description = data.description || config.description;
 
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
@@ -24,7 +23,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 		tag: 'meta',
 		attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 	},
-	{ tag: 'title', content: title },
+	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${config.title}` },
 	{ tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
 	{ tag: 'meta', attrs: { name: 'generator', content: Astro.generator } },
 	{
@@ -41,7 +40,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 		},
 	},
 	// OpenGraph Tags
-	{ tag: 'meta', attrs: { property: 'og:title', content: title } },
+	{ tag: 'meta', attrs: { property: 'og:title', content: data.title } },
 	{ tag: 'meta', attrs: { property: 'og:type', content: 'article' } },
 	{ tag: 'meta', attrs: { property: 'og:url', content: canonical?.href } },
 	{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
@@ -52,7 +51,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 		tag: 'meta',
 		attrs: { name: 'twitter:card', content: 'summary_large_image' },
 	},
-	{ tag: 'meta', attrs: { name: 'twitter:title', content: title } },
+	{ tag: 'meta', attrs: { name: 'twitter:title', content: data.title } },
 	{ tag: 'meta', attrs: { name: 'twitter:description', content: description } },
 ];
 
