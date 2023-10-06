@@ -17,12 +17,20 @@ const imageAttrs = {
 	height: 400,
 	alt: image?.alt,
 };
-// darkImage is the default and uses either file, dark or raw html
-const darkImage = image?.file ? image.file : image?.dark ? image.dark : null;
-// lightImage is only used if darkImage is also used
-const lightImage = image?.file ? null : image?.dark && image?.light ? image.light : null;
-// rawHtml is only used if darkImage is not used
-const rawHtml = !darkImage && image?.html ? image.html : null;
+
+let darkImage: ImageMetadata | undefined;
+let lightImage: ImageMetadata | undefined;
+let rawHtml: string | undefined;
+if (image) {
+	if ('file' in image) {
+		darkImage = image.file;
+	} else if ('dark' in image) {
+		darkImage = image.dark;
+		lightImage = image.light;
+	} else {
+		rawHtml = image.html;
+	}
+}
 ---
 
 <div class="hero">
@@ -32,18 +40,22 @@ const rawHtml = !darkImage && image?.html ? image.html : null;
 				<img
 					src={darkImage.src}
 					{...imageAttrs}
-					class:list={{ 'dark-only': Boolean(lightImage) }}
+					class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
 				/>
 			) : (
-				<Image src={darkImage} {...imageAttrs} class:list={{ 'dark-only': Boolean(lightImage) }} />
+				<Image
+					src={darkImage}
+					{...imageAttrs}
+					class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
+				/>
 			))
 	}
 	{
 		lightImage &&
 			(lightImage.format === 'svg' ? (
-				<img src={lightImage.src} {...imageAttrs} class="light-only" />
+				<img src={lightImage.src} {...imageAttrs} class="dark:sl-hidden" />
 			) : (
-				<Image src={lightImage} {...imageAttrs} class="light-only" />
+				<Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />
 			))
 	}
 	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
@@ -78,13 +90,6 @@ const rawHtml = !darkImage && image?.html ? image.html : null;
 		width: min(70%, 20rem);
 		height: auto;
 		margin-inline: auto;
-	}
-
-	:global([data-theme='light']) .dark-only {
-		display: none;
-	}
-	:global([data-theme='dark']) .light-only {
-		display: none;
 	}
 
 	.stack {

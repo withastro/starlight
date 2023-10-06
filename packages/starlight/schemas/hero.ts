@@ -19,18 +19,28 @@ export const HeroSchema = ({ image }: SchemaContext) =>
 		tagline: z.string().optional(),
 		/** The image to use in the hero. You can provide either a relative `file` path or raw `html`. */
 		image: z
-			.object({
-				/** Alt text for screenreaders and other assistive technologies describing your hero image. */
-				alt: z.string().default(''),
-				/** Relative path to an image file in your repo, e.g. `../../assets/hero.png`. */
-				file: image().optional(),
-				/** Relative path to an image file in your repo to use in dark mode, e.g. `../../assets/hero-dark.png`. */
-				dark: image().optional(),
-				/** Relative path to an image file in your repo to use in light mode, e.g. `../../assets/hero-light.png`. */
-				light: image().optional(),
-				/** Raw HTML string instead of an image file. Useful for inline SVGs or more complex hero content. */
-				html: z.string().optional(),
-			})
+			.union([
+				z.object({
+					/** Alt text for screenreaders and other assistive technologies describing your hero image. */
+					alt: z.string().default(''),
+					/** Relative path to an image file in your repo, e.g. `../../assets/hero.png`. */
+					file: image(),
+				}),
+				z.object({
+					/** Alt text for screenreaders and other assistive technologies describing your hero image. */
+					alt: z.string().default(''),
+					/** Relative path to an image file in your repo to use in dark mode, e.g. `../../assets/hero-dark.png`. */
+					dark: image(),
+					/** Relative path to an image file in your repo to use in light mode, e.g. `../../assets/hero-light.png`. */
+					light: image(),
+				}),
+				z
+					.object({
+						/** Raw HTML string instead of an image file. Useful for inline SVGs or more complex hero content. */
+						html: z.string(),
+					})
+					.transform(({ html }) => ({ html, alt: '' })),
+			])
 			.optional(),
 		/** An array of call-to-action links displayed at the bottom of the hero. */
 		actions: z
