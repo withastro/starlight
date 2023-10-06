@@ -9,7 +9,7 @@ const isRtl = dir === 'rtl';
 const t = useTranslations(locale);
 ---
 
-<div class="pagination-links sl-flex" dir={dir}>
+<div class="pagination-links" dir={dir}>
 	{
 		prev && (
 			<a href={prev.href} rel="prev">
@@ -38,7 +38,8 @@ const t = useTranslations(locale);
 
 <style>
 	.pagination-links {
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
 		gap: 1rem;
 	}
 
@@ -56,6 +57,7 @@ const t = useTranslations(locale);
 		text-decoration: none;
 		color: var(--sl-color-gray-2);
 		box-shadow: var(--sl-shadow-md);
+		overflow-wrap: anywhere;
 	}
 	[rel='next'] {
 		justify-content: end;
@@ -70,5 +72,9 @@ const t = useTranslations(locale);
 		color: var(--sl-color-white);
 		font-size: var(--sl-text-2xl);
 		line-height: var(--sl-line-height-headings);
+	}
+
+	svg {
+		flex-shrink: 0;
 	}
 </style>
