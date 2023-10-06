@@ -23,6 +23,8 @@ export const SocialLinksSchema = () =>
 				'x.com',
 				'telegram',
 				'rss',
+				'facebook',
+				'email',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
@@ -53,6 +55,8 @@ export const SocialLinksSchema = () =>
 					'x.com': 'X',
 					telegram: 'Telegram',
 					rss: 'RSS',
+					facebook: 'Facebook',
+					email: 'Email',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
