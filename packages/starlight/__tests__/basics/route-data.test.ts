@@ -38,6 +38,7 @@ test('adds data to route shape', () => {
 	expect(data.pagination).toMatchInlineSnapshot(`
 		{
 		  "next": {
+		    "attrs": {},
 		    "badge": undefined,
 		    "href": "/environmental-impact/",
 		    "isCurrent": false,
