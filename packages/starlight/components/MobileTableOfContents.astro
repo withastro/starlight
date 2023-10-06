@@ -2,7 +2,7 @@
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
 import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
-import type { StarlightRouteData as Props } from '../utils/route-data';
+import type { Props } from '../props';
 
 const { locale, toc } = Astro.props;
 const t = useTranslations(locale);
