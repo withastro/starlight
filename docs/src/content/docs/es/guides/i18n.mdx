@@ -19,7 +19,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'My Docs',
+   			title: 'Mis Docs',
    			// Establece el inglés como el idioma predeterminado para este sitio.
    			defaultLocale: 'en',
    			locales: {
@@ -140,7 +140,7 @@ Si no hay una traducción disponible para un idioma, Starlight mostrará a los l
 
 ## Traduce la UI de Starlight
 
-Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, checo, francés, alemán, italiano, japonés, holandés, portugués, danés, español, turco, árabe, noruego y chino simplificado. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, checo, francés, alemán, italiano, japonés, holandés, portugués, danés, español, turco, árabe, noruego, farsi, hebreo, chino simplificado, coreano, indonesio, ruso y sueco. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 
@@ -192,7 +192,8 @@ Estos son los valores predeterminados en inglés de las cadenas existentes que s
 	"page.editLink": "Edit page",
 	"page.lastUpdated": "Last updated:",
 	"page.previousLink": "Next",
-	"page.nextLink": "Previous"
+	"page.nextLink": "Previous",
+	"404.text": "Page not found. Check the URL or try using the search bar."
 }
 ```
 

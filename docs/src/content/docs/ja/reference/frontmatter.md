@@ -131,6 +131,24 @@ interface HeroConfig {
 }
 ```
 
+### `banner`
+
+**type:** `{ content: string }`
+
+ページの上部にお知らせ用のバナーを表示します。
+
+`content`の値には、リンクやその他のコンテンツ用のHTMLを含められます。たとえば以下のページでは、`example.com`へのリンクを含むバナーを表示しています。
+
+```md
+---
+title: バナーを含むページ
+banner:
+  content: |
+    素晴らしいサイトをリリースしました！
+    <a href="https://example.com">確認してみてください</a>
+---
+```
+
 ### `lastUpdated`
 
 **type:** `Date | boolean`
@@ -186,9 +204,23 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+ページを[Pagefind](https://pagefind.app/)の検索インデックスに含めるかどうかを設定します。ページを検索結果から除外するには、`false`に設定します。
+
+```md
+---
+# このページを検索インデックスから外す
+pagefind: false
+---
+```
+
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number }`
+**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
 
 自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
 
@@ -218,5 +250,45 @@ sidebar:
 title: 最初に表示するページ
 sidebar:
   order: 1
+---
+```
+
+#### `hidden`
+
+**type:** `boolean`
+**default:** `false`
+
+自動生成されるサイドバーのグループにこのページを含めないようにします。
+
+```md
+---
+title: 自動生成されるサイドバーで非表示にするページ
+sidebar:
+  hidden: true
+---
+```
+
+#### `badge`
+
+**type:** <code>string | <a href="/ja/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+
+自動生成されるリンクのグループに表示されたとき、サイドバーのページにバッジを追加します。文字列を使用すると、バッジはデフォルトのアクセントカラーで表示されます。オプションで、`text`と`variant`フィールドをもつ[`BadgeConfig`オブジェクト](/ja/reference/configuration/#badgeconfig)を渡してバッジをカスタマイズできます。
+
+```md
+---
+title: バッジを含むページ
+sidebar:
+  # サイトのアクセントカラーに合わせたデフォルトのバリアントを使用します
+  badge: New
+---
+```
+
+```md
+---
+title: バッジを含むページ
+sidebar:
+  badge:
+    text: 実験的
+    variant: caution
 ---
 ```

@@ -185,13 +185,25 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
       autogenerate: { directory: string; collapsed?: boolean };
       collapsed?: boolean;
     }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
@@ -256,7 +268,7 @@ La etiqueta para este idioma que se muestra a los usuarios, por ejemplo, en el s
 
 **tipo:** `string`
 
-La etiqueta BCP-47 para este lenguaje, por ejemplo, `"en"`, `"ar"` o `"zh-CN"`. Si no se establece, se utilizará el nombre del directorio del idioma de forma predeterminada.
+La etiqueta BCP-47 para este lenguaje, por ejemplo, `"en"`, `"ar"` o `"zh-CN"`. Si no se establece, se utilizará el nombre del directorio del idioma de forma predeterminada. Las etiquetas de idioma con subetiquetas regionales (por ejemplo, `"pt-BR"` o `"en-US"`) utilizarán las traducciones de la interfaz de usuario integradas para su idioma base si no se encuentran traducciones específicas de la región.
 
 ##### `dir`
 
@@ -296,7 +308,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'gitlab' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
@@ -311,6 +323,7 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    'x.com': 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });

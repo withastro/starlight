@@ -1,0 +1,32 @@
+name: WelcomeBot
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  welcome:
+    name: Welcome First-Time Contributors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
+          pr-message: |
+            Hello! Thank you for opening your **first PR** to Starlight! ✨
+
+            Here’s what will happen next:
+
+            1. Our GitHub bots will run to check your changes.
+               If they spot any issues you will see some error messages on this PR.
+               Don’t hesitate to ask any questions if you’re not sure what these mean!
+
+            2. In a few minutes, you’ll be able to see a preview of your changes on Netlify 🤩
+
+            3. One or more of our maintainers will take a look and may ask you to make changes.
+               We try to be responsive, but don’t worry if this takes a few days.

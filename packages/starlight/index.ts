@@ -7,9 +7,10 @@ import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema, StarlightUserConfig } from './utils/user-config';
+import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
+import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 
-export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration[] {
+export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration {
 	const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
 
 	if (!parsedConfig.success) {
@@ -33,18 +34,26 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
+				const integrations: AstroIntegration[] = [];
+				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
+					integrations.push(starlightSitemap(userConfig));
+				}
+				if (!config.integrations.find(({ name }) => name === '@astrojs/mdx')) {
+					integrations.push(mdx());
+				}
 				const newConfig: AstroUserConfig = {
+					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
 					},
 					markdown: {
 						remarkPlugins: [...starlightAsides()],
+						rehypePlugins: [rehypeRtlCodeSupport()],
 						shikiConfig:
 							// Configure Shiki theme if the user is using the default github-dark theme.
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
-					build: { inlineStylesheets: 'auto' },
-					experimental: { assets: true, inlineStylesheets: 'auto' },
+					scopedStyleStrategy: 'where',
 				};
 				updateConfig(newConfig);
 			},
@@ -54,7 +63,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				const cwd = dirname(fileURLToPath(import.meta.url));
 				const relativeDir = relative(cwd, targetDir);
 				return new Promise<void>((resolve) => {
-					spawn('npx', ['-y', 'pagefind', '--source', relativeDir], {
+					spawn('npx', ['-y', 'pagefind', '--site', relativeDir], {
 						stdio: 'inherit',
 						shell: true,
 						cwd,
@@ -64,5 +73,5 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 		},
 	};
 
-	return [starlightSitemap(userConfig), Starlight, mdx()];
+	return Starlight;
 }

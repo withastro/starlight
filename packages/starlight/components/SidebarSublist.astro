@@ -1,6 +1,7 @@
 ---
 import { flattenSidebar, type SidebarEntry } from '../utils/navigation';
 import Icon from '../user-components/Icon.astro';
+import Badge from './Badge.astro';
 
 interface Props {
 	sublist: SidebarEntry[];
@@ -18,14 +19,23 @@ interface Props {
 						aria-current={entry.isCurrent && 'page'}
 						class:list={{ large: !Astro.props.nested }}
 					>
-						{entry.label}
+						<span>{entry.label}</span>
+						{entry.badge && (
+							<>
+								{' '}
+								<Badge
+									text={entry.badge.text}
+									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
+								/>
+							</>
+						)}
 					</a>
 				) : (
 					<details
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
 						<summary>
-							<h2 class="large">{entry.label}</h2>
+							<span class="large">{entry.label}</span>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<Astro.self sublist={entry.entries} nested />
@@ -41,6 +51,10 @@ interface Props {
 		--sl-sidebar-item-padding-inline: 0.5rem;
 		list-style: none;
 		padding: 0;
+	}
+
+	li {
+		overflow-wrap: anywhere;
 	}
 
 	ul ul li {
@@ -74,6 +88,7 @@ interface Props {
 
 	.caret {
 		transition: transform 0.2s ease-in-out;
+		flex-shrink: 0;
 	}
 	:global([dir='rtl']) .caret {
 		transform: rotateZ(180deg);
@@ -102,6 +117,10 @@ interface Props {
 		font-weight: 600;
 		color: var(--sl-color-text-invert);
 		background-color: var(--sl-color-text-accent);
+	}
+
+	a > *:not(:last-child) {
+		margin-inline-end: 0.25em;
 	}
 
 	@media (min-width: 50rem) {

@@ -10,34 +10,46 @@
 	border-width: 0;
 }
 
-.hidden {
+.sl-hidden {
 	display: none;
 }
-.flex {
+.sl-flex {
 	display: flex;
 }
-.block {
+.sl-block {
 	display: block;
 }
 @media (min-width: 50rem) {
-	.md\:hidden {
+	.md\:sl-hidden {
 		display: none;
 	}
-	.md\:flex {
+	.md\:sl-flex {
 		display: flex;
 	}
-	.md\:block {
+	.md\:sl-block {
 		display: block;
 	}
 }
 @media (min-width: 72rem) {
-	.lg\:hidden {
+	.lg\:sl-hidden {
 		display: none;
 	}
-	.lg\:flex {
+	.lg\:sl-flex {
 		display: flex;
 	}
-	.lg\:block {
+	.lg\:sl-block {
 		display: block;
 	}
+}
+
+/*
+Flip an element around the y-axis when in an RTL context.
+Primarily useful for things where we can’t rely on writing direction like icons.
+
+<Icon name="right-arrow" class="rtl:flip" />
+
+In a LTR context: →					In a RTL context: ←
+*/
+[dir='rtl'] .rtl\:flip:not(:where([dir='rtl'] [dir='ltr'] *)) {
+	transform: matrix(-1, 0, 0, 1, 0, 0);
 }

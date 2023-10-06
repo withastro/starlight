@@ -181,13 +181,25 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
       autogenerate: { directory: string; collapsed?: boolean };
       collapsed?: boolean;
     }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
@@ -252,7 +264,7 @@ interface LocaleConfig {
 
 **type:** `string`
 
-この言語のBCP-47タグです。たとえば`"en"`、`"ar"`、`"zh-CN"`などです。設定されていない場合、デフォルトでは言語のディレクトリ名が使用されます。
+この言語のBCP-47タグです。たとえば`"en"`、`"ar"`、`"zh-CN"`などです。設定されていない場合、デフォルトでは言語のディレクトリ名が使用されます。`"pt-BR"`や`"en-US"`のように地域タグが含まれる言語タグは、その地域専用の翻訳が見つからない場合、ベース言語の組み込みUI翻訳が使用されます。
 
 ##### `dir`
 
@@ -290,7 +302,7 @@ starlight({
 
 ### `social`
 
-**type:** `Partial<Record<'codeberg' | 'discord' | 'github' | 'gitlab' | 'linkedin' | 'mastodon' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 

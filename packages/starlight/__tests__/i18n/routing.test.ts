@@ -38,7 +38,7 @@ test('routes have locale data added', () => {
 			expect(lang).toBe('ar');
 			expect(dir).toBe('rtl');
 			expect(locale).toBe('ar');
-		} else {
+		} else if (id.startsWith('fr')) {
 			expect(lang).toBe('fr');
 			expect(dir).toBe('ltr');
 			expect(locale).toBe('fr');

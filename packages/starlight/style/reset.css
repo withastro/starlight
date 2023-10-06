@@ -38,8 +38,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-	overflow-wrap: break-word;
+h6,
+code {
+	overflow-wrap: anywhere;
 }
 
 code {

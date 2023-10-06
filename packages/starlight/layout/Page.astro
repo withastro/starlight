@@ -24,6 +24,7 @@ import SkipLink from '../components/SkipLink.astro';
 import ThemeProvider from '../components/ThemeProvider.astro';
 import PageFrame from '../layout/PageFrame.astro';
 import TwoColumnContent from '../layout/TwoColumnContent.astro';
+import Banner from '../components/Banner.astro';
 
 // Remark component CSS (needs to override `MarkdownContent.astro`)
 import '../style/asides.css';
@@ -44,6 +45,8 @@ const tocConfig = !hasSidebar
 	: config.tableOfContents;
 const hasToC = Boolean(tocConfig);
 const hasHero = Boolean(entry.data.hero);
+const pagefindEnabled =
+	entry.slug !== '404' && !entry.slug.endsWith('/404') && entry.data.pagefind !== false;
 ---
 
 <html
@@ -90,8 +93,9 @@ const hasHero = Boolean(entry.data.hero);
 			{hasSidebar && <Sidebar slot="sidebar" {sidebar} {locale} />}
 			<TwoColumnContent {hasToC}>
 				<RightSidebar slot="right-sidebar" {headings} {locale} {tocConfig} />
-				<main data-pagefind-body={entry.slug !== '404'} lang={entryMeta.lang} dir={entryMeta.dir}>
+				<main data-pagefind-body={pagefindEnabled} lang={entryMeta.lang} dir={entryMeta.dir}>
 					{/* TODO: Revisit how this logic flows. */}
+					{entry.data.banner && <Banner {...entry.data.banner} />}
 					{
 						entry.data.hero ? (
 							<ContentPanel>

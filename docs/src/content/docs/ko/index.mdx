@@ -1,0 +1,57 @@
+---
+title: Starlight 🌟를 이용해 Astro로 문서 웹 사이트를 만드세요!
+description: Starlight는 Astro를 이용해 고성능의 아름다운  문서 웹 사이트를 구축할 수 있도록 도와줍니다.
+template: splash
+banner:
+  content: |
+    <span class="ph-banner">
+      <span class="ph-houston"><img src="/ph-houston.svg" alt="" width="72" height="72"/></span>
+      <span class="ph-text">
+        <strong>Product Hunters 분들을 모두 환영합니다!&nbsp;👋</strong>
+        <a href="https://www.producthunt.com/posts/starlight-by-astro">현재 라이브 중입니다!</a>
+      </span>
+    </span>
+hero:
+  title: Starlight로 더 빛나는 문서를 만들어보세요
+  tagline: 아름다운 문서 웹 사이트를 만드는데 필요한 모든 것. 빠르고, 접근성이 좋으며 사용하기 쉽습니다.
+  image:
+    file: ../../../assets/hero-star.webp
+  actions:
+    - text: 시작하기
+      icon: right-arrow
+      variant: primary
+      link: /ko/getting-started/
+    - text: GitHub에서 보기
+      icon: external
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '../../../components/about-astro.astro';
+
+<CardGrid stagger>
+	<Card title="아름다운 문서" icon="open-book">
+		사이트 네비게이션, 검색창, 국제화, SEO, 읽기 쉬운 타이포그래피, 코드
+		하이라이팅, 다크 모드 등이 포함되어 있습니다.
+	</Card>
+	<Card title="Astro 기반" icon="rocket">
+		Astro의 모든 기능과 성능을 활용하세요. 선호하는 Astro 통합 및 라이브러리로
+		Starlight를 확장하세요.
+	</Card>
+	<Card title="Markdown, Markdoc, MDX" icon="document">
+		선호하는 마크업 언어를 사용하세요. Starlight는 TypeScript 타입 안정성을 갖춘
+		내장 frontmatter 유효성 검사를 제공합니다.
+	</Card>
+	<Card title="선호하는 UI 컴포넌트 사용" icon="puzzle">
+    	Starlight는 프레임워크에 구애받지 않는 완벽한 문서 솔루션으로 제공됩니다. React, Vue, Svelte, Solid 등으로 확장하세요.
+	</Card>
+
+</CardGrid>
+
+<AboutAstro title="제공">
+
+Astro는 빠른 속도를 위해 설계된 올인원 웹 프레임워크입니다. 선호하는 UI 컴포넌트와 라이브러리를 이용해 어디서든 컨텐츠를 가져와 배포하세요.
+
+[Astro에 대해 알아보기](https://astro.build/)
+
+</AboutAstro>

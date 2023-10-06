@@ -1,0 +1,196 @@
+---
+title: 컴포넌트
+description: Starlight를 이용해 MDX에서 컴포넌트 사용하기.
+---
+
+컴포넌트를 사용하면 쉽고 일관되게 UI 조각이나 스타일을 재사용할 수 있습니다.
+링크 카드나 YouTube 삽입 등을 예로 들 수 있습니다.
+Starlight는 [MDX](https://mdxjs.com/) 파일에서 컴포넌트 사용을 지원하며 사용할 수 있는 몇 가지 공통 컴포넌트를 제공합니다.
+
+[Astro 문서에서 컴포넌트 구축에 대해 자세히 알아보세요](https://docs.astro.build/ko/core-concepts/astro-components/).
+
+## 컴포넌트 사용
+
+MDX 파일에서 컴포넌트를 가져온 다음 JSX 태그로 렌더링하여 사용할 수 있습니다.
+이는 HTML 태그처럼 보이지만 `import` 문에 있는 이름과 일치하는 대문자로 시작합니다.
+
+```mdx
+---
+# src/content/docs/index.mdx
+title: 내 문서에 오신 것을 환영합니다
+---
+
+import SomeComponent from '../../../components/SomeComponent.astro';
+import AnotherComponent from '../../../components/AnotherComponent.astro';
+
+<SomeComponent prop="어떤 값" />
+
+<AnotherComponent>
+	컴포넌트에는 **중첩된 콘텐츠**가 포함될 수도 있습니다.
+</AnotherComponent>
+```
+
+Starlight는 Astro로 구동되므로 [지원되는 UI 프레임워크(React, Preact, Svelte, Vue, Solid, Lit 및 Alpine)](https://docs.astro.build/ko/core-concepts/framework-components/)로 빌드된 컴포넌트를 MDX 파일에 추가할 수 있습니다.
+Astro 문서에서 [MDX에서 컴포넌트 사용](https://docs.astro.build/ko/guides/markdown-content/#using-comComponents-in-mdx)에 대해 자세히 알아보세요.
+
+### Starlight 스타일과의 호환성
+
+Starlight는 요소 사이에 여백을 추가하는 등 Markdown 콘텐츠에 기본 스타일을 적용합니다.
+이러한 스타일이 컴포넌트의 모양과 충돌하는 경우 컴포넌트에 `not-content` 클래스를 추가하여 비활성화하세요.
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Starlight의 기본 콘텐츠 스타일에 영향을 받지 않습니다.</p>
+</div>
+```
+
+## 내장된 컴포넌트
+
+Starlight는 일반적인 문서 사용 사례를 위한 몇 가지 내장 컴포넌트를 제공합니다.
+이러한 컴포넌트는 `@astrojs/starlight/components` 패키지를 통해 사용할 수 있습니다.
+
+### 탭
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+`<Tabs>` 및 `<TabItem>` 컴포넌트를 사용하여 탭 인터페이스를 표시할 수 있습니다.
+각 `<TabItem>`은 사용자에게 보여줄 `label`을 반드시 포함해야합니다.
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="별">시리우스, 베가, 베텔게우스</TabItem>
+	<TabItem label="달">이오, 유로파, 가니메데</TabItem>
+</Tabs>
+```
+
+위 코드는 페이지에 아래와 같은 탭을 생성합니다.
+
+<Tabs>
+	<TabItem label="별">시리우스, 베가, 베텔게우스</TabItem>
+	<TabItem label="달">이오, 유로파, 가니메데</TabItem>
+</Tabs>
+
+### 카드
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`<Card>` 컴포넌트를 사용하면 Starlight 스타일의 상자에 콘텐츠를 표시할 수 있습니다.
+공간이 충분할 때 카드를 나란히 표시하려면 `<CardGrid>` 컴포넌트로 여러 카드를 감싸세요.
+
+`<Card>` 컴포넌트에는 `title` 속성이 반드시 필요하며 선택적으로 [Starlight 내장 아이콘 중 하나](#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.
+
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="확인">강조하고 싶은 흥미로운 콘텐츠.</Card>
+
+<CardGrid>
+	<Card title="별" icon="star">
+		시리우스, 베가, 베텔게우스
+	</Card>
+	<Card title="달" icon="moon">
+		이오, 유로파, 가니메데
+	</Card>
+</CardGrid>
+```
+
+위 코드는 페이지에 아래와 같은 요소들을 생성합니다.
+
+<Card title="확인">강조하고 싶은 흥미로운 콘텐츠.</Card>
+
+<CardGrid>
+	<Card title="별" icon="star">
+		시리우스, 베가, 베텔게우스
+	</Card>
+	<Card title="달" icon="moon">
+		이오, 유로파, 가니메데
+	</Card>
+</CardGrid>
+
+:::tip
+
+홈 페이지에서 프로젝트의 주요 기능을 보여주기 위해 카드 그리드를 사용하세요.
+카드의 두 번째 열을 수직으로 이동시켜 시각적 흥미를 더하려면 `stagger` 속성을 추가하세요.
+
+```astro
+<CardGrid stagger>
+	<!-- 카드 -->
+</CardGrid>
+```
+
+:::
+
+### 링크 카드
+
+다른 페이지로 이동하는 눈에 띄는 링크를 만들기 위해 `<LinkCard>` 컴포넌트를 사용하세요.
+
+`<LinkCard>` 컴포넌트에는 `title`과 [`href`](https://developer.mozilla.org/ko/docs/Web/HTML/Element/a#attr-href) 속성이 필요합니다. 짧은 `description`이나 `target`과 같은 기타 링크 속성을 선택적으로 포함할 수 있습니다.
+
+공간이 충분할 때, 카드를 나란히 표시하기 위해 여러 `<LinkCard>` 컴포넌트를 `<CardGrid>`에 그룹화하세요.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Starlight 사용자 정의"
+	description="사용자 정의 스타일, 글꼴 등을 사용하여 나만의 Starlight 사이트를 만드는 방법을 알아보세요."
+	href="/ko/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="마크다운으로 콘텐츠 작성"
+		href="/ko/guides/authoring-content/"
+	/>
+	<LinkCard title="컴포넌트" href="/ko/guides/components/" />
+</CardGrid>
+```
+
+위 코드는 페이지에 아래와 같은 요소들을 생성합니다.
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Starlight 사용자 정의"
+	description="사용자 정의 스타일, 글꼴 등을 사용하여 나만의 Starlight 사이트를 만드는 방법을 알아보세요."
+	href="/ko/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="마크다운으로 콘텐츠 작성"
+		href="/ko/guides/authoring-content/"
+	/>
+	<LinkCard title="컴포넌트" href="/ko/guides/components/" />
+</CardGrid>
+
+### 아이콘
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
+
+각 `<Icon>` 컴포넌트에는 [`name`](#모든-아이콘) 속성이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+위 코드는 페이지에 아래와 같은 아이콘을 생성합니다.
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### 모든 아이콘
+
+사용 가능한 모든 아이콘 목록이 관련 이름과 함께 아래에 표시됩니다. 아이콘을 클릭하면 해당 아이콘 컴포넌트의 코드를 복사할 수 있습니다.
+
+<IconsList />

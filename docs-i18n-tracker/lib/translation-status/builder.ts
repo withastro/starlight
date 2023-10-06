@@ -122,8 +122,7 @@ export class TranslationStatusBuilder {
 		const pages: PageIndex = {
 			[this.sourceLanguage]: {},
 		};
-		this.targetLanguages.forEach((lang) => (pages[lang] = {}));
-
+		this.targetLanguages.forEach((lang) => (pages[lang.toLowerCase()] = {}));
 		// Enumerate all markdown pages with supported languages in pageSourceDir,
 		// retrieve their page data and update them
 		const pagePaths = await glob(`**/*.{md,mdx}`, {
@@ -132,7 +131,9 @@ export class TranslationStatusBuilder {
 		const updatedPages = await Promise.all(
 			pagePaths.sort().map(async (pagePath) => {
 				const pathParts = pagePath.split('/');
-				const isLanguageSubpathIncluded = this.targetLanguages.includes(pathParts[0]!);
+				const isLanguageSubpathIncluded = this.targetLanguages
+					.map((el) => el.toLowerCase())
+					.includes(pathParts[0]!);
 
 				// If the first path of a file does not belong to a language, it will be by default a page of the original language set.
 				const lang = isLanguageSubpathIncluded ? pathParts[0] : this.sourceLanguage;
@@ -218,7 +219,7 @@ export class TranslationStatusBuilder {
 			};
 
 			this.targetLanguages.forEach((lang) => {
-				const i18nPage = pages[lang]![subpath]!;
+				const i18nPage = pages[lang.toLowerCase()]![subpath]!;
 				content.translations[lang] = {
 					page: i18nPage,
 					isMissing: !i18nPage,
@@ -416,7 +417,9 @@ export class TranslationStatusBuilder {
 	 */
 	renderCreatePageButton(lang: string, filename: string): string {
 		// We include `lang` twice because GitHub eats the last path segment when setting filename.
-		const createUrl = new URL(`https://github.com/${this.githubRepo}/new/main/src/content/docs`);
+		const createUrl = new URL(
+			`https://github.com/${this.githubRepo}/new/main/docs/src/content/docs`
+		);
 		createUrl.searchParams.set('filename', lang + '/' + filename);
 		createUrl.searchParams.set('value', '---\ntitle:\ndescription:\n---\n');
 		return this.renderLink(createUrl.href, `Create\xa0page\xa0+`, 'create-button');

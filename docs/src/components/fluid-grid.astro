@@ -1,0 +1,14 @@
+<ul class="fluid-grid"><slot /></ul>
+
+<style>
+	.fluid-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+	}
+	.fluid-grid > :global(*) {
+		margin-top: 0 !important;
+	}
+</style>

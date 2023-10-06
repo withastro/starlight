@@ -1,0 +1,188 @@
+---
+title: 组件
+description: 使用 Starlight 在 MDX 中使用组件
+---
+
+组件让你可以轻松地重用 UI 或样式。
+例如，链接卡片或 YouTube 嵌入。
+Starlight 支持在 [MDX](https://mdxjs.com/) 文件中使用组件，并提供了一些常用组件供你使用。
+
+[在 Astro 文档中了解更多关于构建组件的内容](https://docs.astro.build/zh-cn/core-concepts/astro-components/).
+
+## 使用组件
+
+你可以通过在 MDX 文件中导入组件，然后像渲染 JSX 标签一样来使用组件。
+这些看起来像 HTML 标签，但是以大写字母开头，与你的 `import` 语句中的名称匹配：
+
+```mdx
+---
+# src/content/docs/index.mdx
+title: 欢迎来到我的文档
+---
+
+import SomeComponent from '../../../components/SomeComponent.astro';
+import AnotherComponent from '../../../components/AnotherComponent.astro';
+
+<SomeComponent prop="something" />
+
+<AnotherComponent>组件也可以包含**嵌套内容**。</AnotherComponent>
+```
+
+因为 Starlight 是由 Astro 提供支持的，所以你可以在 MDX 文件中添加对任何 [支持的 UI 框架（React、Preact、Svelte、Vue、Solid、Lit 和 Alpine）](https://docs.astro.build/zh-cn/core-concepts/framework-components/) 构建的组件的支持。
+在 Astro 文档中了解更多关于 [在 MDX 中使用组件](https://docs.astro.build/zh-cn/guides/markdown-content/#在-mdx-中使用组件) 的内容。
+
+### 与 Starlight 样式的兼容
+
+Starlight 为你的 Markdown 内容应用了默认样式，例如在元素之间添加边距。
+
+如果这些样式与你的组件的外观冲突，请在组件上设置 `not-content` 类来禁用它们。
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>不受 Starlight 默认内容样式的影响。</p>
+</div>
+```
+
+## 内置组件
+
+Starlight 为常见的文档用例提供了一些内置组件。
+这些组件可以从 `@astrojs/starlight/components` 包中获取。
+
+### 选项卡
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+你可以使用 `<Tabs>` 和 `<TabItem>` 组件显示一个选项卡界面。
+每个 `<TabItem>` 必须有一个 `label` 来显示给用户。
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="恒星">天狼星、织女星、参宿四</TabItem>
+	<TabItem label="卫星">木卫一、木卫二、木卫三</TabItem>
+</Tabs>
+```
+
+以上代码在页面上生成了以下选项卡：
+
+<Tabs>
+	<TabItem label="恒星">天狼星、织女星、参宿四</TabItem>
+	<TabItem label="卫星">木卫一、木卫二、木卫三</TabItem>
+</Tabs>
+
+### 卡片
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+你可以使用 `<Card>` 组件在与 Starlight 样式匹配的盒子中显示内容。
+当有足够的空间时，可以使用 `<CardGrid>` 组件将多个卡片封装在一起，以便并排显示卡片。
+
+`<Card>` 需要一个 `title`，并且可以选择包含一个 `icon` 属性，该属性设置为 [Starlight 内置图标](#所有图标) 之一的名称。
+
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="看看这个">你想要突出显示的有趣内容。</Card>
+
+<CardGrid>
+	<Card title="恒星" icon="star">
+		天狼星、织女星、参宿四
+	</Card>
+	<Card title="卫星" icon="moon">
+		木卫一、木卫二、木卫三
+	</Card>
+</CardGrid>
+```
+
+以上代码在页面上生成了以下内容：
+
+<Card title="看看这个">你想要突出显示的有趣内容。</Card>
+
+<CardGrid>
+	<Card title="恒星" icon="star">
+		天狼星、织女星、参宿四
+	</Card>
+	<Card title="卫星" icon="moon">
+		木卫一、木卫二、木卫三
+	</Card>
+</CardGrid>
+
+:::tip[提示]
+在主页上使用卡片网格来显示项目的关键特性。
+添加 `stagger` 属性来垂直移动第二列的卡片，并增加视觉效果：
+
+```astro
+<CardGrid stagger>
+	<!-- 卡片组件 -->
+</CardGrid>
+```
+
+:::
+
+### 链接卡片
+
+使用 `<LinkCard>` 组件来突出显示链接到不同页面的内容。
+
+`<LinkCard>` 需要一个 `title` 和一个 [`href`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#href) 属性。你可以选择包含一个简短的 `description` 或其他链接属性，例如 `target`。
+
+当有足够的空间时，将多个 `<LinkCard>` 组件组合在 `<CardGrid>` 中，以便并排显示卡片。
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="自定义 Starlight"
+	description="了解如何使用自定义样式、字体等打造你自己的 Starlight 网站。"
+	href="/zh/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="创作 Markdown" href="/zh/guides/authoring-content/" />
+	<LinkCard title="组件" href="/zh/guides/components/" />
+</CardGrid>
+```
+
+以上代码在页面上生成了以下内容：
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="自定义 Starlight"
+	description="了解如何使用自定义样式、字体等打造你自己的 Starlight 网站。"
+	href="/zh/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="创作 Markdown" href="/zh/guides/authoring-content/" />
+	<LinkCard title="组件" href="/zh/guides/components/" />
+</CardGrid>
+
+### 图标
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你的内容中显示。
+
+每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择包含 `label`、`size` 和 `color` 属性。
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+以上代码在页面上生成了以下内容：
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### 所有图标
+
+下面显示了所有可用图标的列表及其关联的名称。点击图标以复制其组件代码。
+
+<IconsList />

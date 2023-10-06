@@ -184,13 +184,25 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
       autogenerate: { directory: string; collapsed?: boolean };
       collapsed?: boolean;
     }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
@@ -255,7 +267,7 @@ The label for this language to show to users, for example in the language switch
 
 **type:** `string`
 
-The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. If not set, the language’s directory name will be used by default.
+The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. If not set, the language’s directory name will be used by default. Language tags with regional subtags (e.g. `"pt-BR"` or `"en-US"`) will use built-in UI translations for their base language if no region-specific translations are found.
 
 ##### `dir`
 
@@ -295,7 +307,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
@@ -311,6 +323,7 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    'x.com': 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });

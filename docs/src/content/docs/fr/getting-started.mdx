@@ -5,11 +5,6 @@ description: Apprenez à créer votre prochain site de documentation avec Starli
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-:::caution[Work in progress]
-Starlight est en début de développement.
-Si vous trouvez quelque chose qui ne fonctionne pas, [ouvrez une issue sur GitHub](https://github.com/withastro/starlight/issues/new/choose) ou faites-le nous savoir sur [Discord](https://astro.build/chat).
-:::
-
 ## Créer un nouveau projet
 
 Starlight est un thème de documentation complet construit sur le framework [Astro](https://astro.build).
@@ -86,6 +81,43 @@ Une fois que vous avez créé et personnalisé votre site Web Starlight, vous po
 
 [Pour en savoir plus sur le déploiement d'un site Astro, consultez la documentation Astro](https://docs.astro.build/fr/guides/deploy/)
 
+## Mettre à jour Starlight
+
+:::tip
+Comme Starlight est un logiciel bêta, il y aura des mises à jour et des améliorations fréquentes. Assurez-vous de mettre à jour Starlight régulièrement !
+:::
+
+Starlight est une intégration Astro, et est mis à jour comme toute intégration `@astrojs/*` :
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
+# mettre à jour Starlight avec npm
+npm install @astrojs/starlight@latest
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+# mettre à jour Starlight avec pnpm
+pnpm upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+# mettre à jour Starlight avec yarn
+yarn upgrade @astrojs/starlight --latest
+```
+
+</TabItem>
+</Tabs>
+
+Vous pouvez voir une liste complète des modifications apportées à chaque version dans [le journal des modifications de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+
 ## Dépannage de Starlight
 
 Les informations [configuration de projet](/fr/reference/configuration/) et [configuration du frontmatter de la page individuelle](/fr/reference/frontmatter/) pour Starlight sont disponibles dans la section Référence de ce site. Utilisez ces pages pour vous assurer que votre site Starlight est configuré et fonctionne correctement.
@@ -94,4 +126,4 @@ Utilisez la liste croissante de guides dans la barre latérale pour vous aider �
 
 Si vous ne trouvez pas votre réponse dans cette documentation, veuillez consulter la [documentation complète d'Astro](https://docs.astro.build). Votre question peut être résolue en comprenant comment Astro fonctionne en général, sous ce thème Starlight.
 
-Vous pouvez également obtenir de l'aide dans le [Discord Astro](https://astro.build/chat/) de notre communauté active et sympathique ! Vous pouvez poster des questions dans notre forum `#support` ou visiter notre canal dédié `#starlight` pour discuter des développements en cours et plus encore !
+Vous pouvez également vérifier [tous les problèmes connus de Starlight sur GitHub](https://github.com/withastro/starlight/issues) et obtenir de l'aide dans le [Discord Astro](https://astro.build/chat/) de notre communauté active et sympathique ! Publiez des questions dans notre forum `#support` avec le tag "starlight" ou visiter notre canal dédié `#starlight` pour discuter des développements en cours et plus encore !

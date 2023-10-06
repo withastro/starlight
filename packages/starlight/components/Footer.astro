@@ -21,7 +21,7 @@ const prevNextLinks = getPrevNextLinks(sidebar, config.pagination, {
 ---
 
 <footer>
-	<div class="meta flex">
+	<div class="meta sl-flex">
 		{config.editLink.baseUrl && <EditLink data={entry.data} id={entry.id} {locale} />}
 		{
 			(entry.data.lastUpdated ?? config.lastUpdated) && (
@@ -47,5 +47,8 @@ const prevNextLinks = getPrevNextLinks(sidebar, config.pagination, {
 		margin-block: 3rem 1.5rem;
 		font-size: var(--sl-text-sm);
 		color: var(--sl-color-gray-3);
+	}
+	.meta > :global(p:only-child) {
+		margin-inline-start: auto;
 	}
 </style>
