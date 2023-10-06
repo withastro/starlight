@@ -257,6 +257,12 @@ const UserConfigSchema = z.object({
 	favicon: FaviconSchema(),
 
 	components: ComponentConfigSchema(),
+
+	/** Will be used as title delimiter in the generated `<title>` tag. */
+	titleDelimiter: z
+		.string()
+		.default('|')
+		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

@@ -426,6 +426,16 @@ starlight({
 });
 ```
 
+### `titleDelimiter`
+
+**type:** `string`  
+**default:** `'|'`
+
+Sets the delimiter between page title and site title in the page’s `<title>` tag, which is displayed on browser tabs.
+
+By default, every page has a `<title>` of `Page Title | Site Title`.
+For example, this page is titled “Configuration Reference” and this site is titled “Starlight”, so the `<title>` for this page is “Configuration Reference | Starlight”.
+
 ### `components`
 
 **type:** `Record<string, string>`
