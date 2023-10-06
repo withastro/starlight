@@ -187,6 +187,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {

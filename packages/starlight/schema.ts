@@ -5,6 +5,7 @@ import { PrevNextLinkConfigSchema } from './schemas/prevNextLink';
 import { TableOfContentsSchema } from './schemas/tableOfContents';
 import { Icons } from './components/Icons';
 import { BadgeConfigSchema } from './schemas/badge';
+import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
 export { i18nSchema } from './schemas/i18n';
 
 type IconName = keyof typeof Icons;
@@ -139,6 +140,8 @@ export function docsSchema() {
 					 * Passing only a string defaults to the 'default' variant which uses the site accent color.
 					 */
 					badge: BadgeConfigSchema(),
+					/** HTML attributes to add to the sidebar link. */
+					attrs: SidebarLinkItemHTMLAttributesSchema(),
 				})
 				.default({}),
 
