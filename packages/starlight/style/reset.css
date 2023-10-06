@@ -40,7 +40,7 @@ h4,
 h5,
 h6,
 code {
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 }
 
 code {
