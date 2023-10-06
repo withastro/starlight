@@ -1,6 +1,6 @@
 ---
 title: Overrides Reference
-description: Learn
+description: An overview of the components and component props supported by Starlight overrides.
 tableOfContents:
   maxHeadingLevel: 4
 ---
