@@ -140,7 +140,7 @@ interface HeroConfig {
 
 Zeigt ein Ankündigungsbanner oben auf dieser Seite an.
 
-Der Wert `Inhalt` kann HTML für Links oder andere Inhalte enthalten.
+Der Wert `content` kann HTML für Links oder andere Inhalte enthalten.
 Auf dieser Seite wird beispielsweise ein Banner mit einem Link zu `example.com`` angezeigt.
 
 ```md
