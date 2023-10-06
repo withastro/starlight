@@ -307,7 +307,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
@@ -323,6 +323,7 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    'x.com': 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });

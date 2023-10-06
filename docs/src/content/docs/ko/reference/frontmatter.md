@@ -187,6 +187,20 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+이 페이지를 [Pagefind](https://pagefind.app/) 검색 색인에 포함할지 여부를 설정합니다. 검색 결과에서 페이지를 제외하려면 값을 `false`로 설정하세요.
+
+```md
+---
+# 검색 색인에서 이 페이지 숨기기
+pagefind: false
+---
+```
+
 ### `sidebar`
 
 **타입:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`

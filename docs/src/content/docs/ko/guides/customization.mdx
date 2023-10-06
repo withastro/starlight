@@ -84,6 +84,19 @@ starlight({
    }),
    ```
 
+## 사이트맵 활성화
+
+Starlight에는 사이트맵 생성 기능이 내장되어 있습니다. `astro.config.mjs` 파일에 있는 `site` 속성의 값을 URL로 설정하여 사이트맵 생성을 활성화할 수 있습니다.
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: '사이트맵을 사용하는 웹 사이트' })],
+});
+```
+
 ## 페이지 레이아웃
 
 기본적으로 Starlight 페이지는 전역 탐색 사이드바와 현재 페이지 제목의 목차가 포함된 레이아웃을 사용합니다.
@@ -173,7 +186,7 @@ defineConfig({
 
 Starlight에는 [`social`](/ko/reference/configuration/#social) 옵션을 사용하여 사이트 헤더에 소셜 미디어 계정을 링크하는 기능이 내장되어 있습니다.
 
-현재 Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter 및 Youtube에 대한 링크가 지원됩니다. 다른 서비스에 대한 지원이 필요하면 GitHub나 Discord를 통해 알려주세요!
+현재 Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, RSS 피드, Stack Overflow, Telegram, Threads, Twitch, Twitter, X 및 Youtube에 대한 링크가 지원됩니다. 다른 서비스에 대한 지원이 필요하면 GitHub나 Discord를 통해 알려주세요!
 
 ```js
 // astro.config.mjs

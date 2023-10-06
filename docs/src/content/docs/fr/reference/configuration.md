@@ -184,10 +184,22 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+    }
   | { items: SidebarItem[] }
   | { autogenerate: { directory: string } }
 );
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+  text: string;
+  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
 ```
 
 ### `locales`
@@ -292,7 +304,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
@@ -308,6 +320,7 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    'x.com': 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });

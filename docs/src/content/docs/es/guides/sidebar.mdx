@@ -1,0 +1,487 @@
+---
+title: Barra Lateral de Navegación
+description: Aprende a configurar y personalizar los enlaces de navegación de la barra lateral de tu sitio Starlight.
+sidebar:
+  badge: Nuevo
+---
+
+import FileTree from '../../../../components/file-tree.astro';
+import SidebarPreview from '../../../../components/sidebar-preview.astro';
+
+Una barra lateral bien organizada es clave para una buena documentación, ya que es una de las principales formas en que los usuarios navegarán por su sitio. Starlight proporciona un conjunto completo de opciones para personalizar el diseño y el contenido de tu barra lateral.
+
+## Barra lateral predeterminada
+
+Por defecto, Starlight generará automáticamente una barra lateral basada en la estructura del sistema de archivos de tu documentación, utilizando la propiedad `title` de cada archivo como entrada de la barra lateral.
+
+Por ejemplo, dada la siguiente estructura de archivos:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+      - reference/
+        - configuration.md
+
+</FileTree>
+
+La siguiente barra lateral se generará automáticamente:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'guides',
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+			],
+		},
+		{
+			label: 'referencia',
+			items: [
+				{
+					label: 'Referencia de configuración',
+					link: '/reference/configuration/',
+				},
+			],
+		},
+	]}
+/>
+
+Aprende más sobre las barras laterales generadas automáticamente en la sección [grupos autogenerados](#grupos-autogenerados).
+
+## Agregar enlaces y grupos de enlaces
+
+Para configurar los [enlaces](#enlaces) de tu barra lateral y [grupos de enlaces](#grupos) (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
+
+Combinando enlaces y grupos, puedes crear una amplia variedad de diseños de barra lateral.
+
+### Enlaces
+
+Agrega un enlace a una página interna o externa usando un objeto con las propiedades `label` y `link`.
+
+```js
+starlight({
+	sidebar: [
+		// Un enlace a la guía CSS y Estilos.
+		{ label: 'CSS y Estilos', link: '/guides/css-and-tailwind/' },
+		// Un enlace externo al sitio web de Astro.
+		{ label: 'Astro', link: 'https://astro.build/' },
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{ label: 'CSS y Estilos', link: '/guides/css-and-tailwind/' },
+		{ label: 'Astro', link: 'https://astro.build/' },
+	]}
+/>
+
+### Grupos
+
+Puedes agregar una estructura a tu barra lateral agrupando enlaces relacionados bajo un encabezado plegable.
+Los Grupos pueden contener tanto enlaces como otros subgrupos.
+
+Agrega un grupo usando un objeto con las propiedades `label` y `items`.
+La `label` se utilizará como encabezado del grupo.
+Agrega enlaces o subgrupos al arreglo `items`.
+
+```js
+starlight({
+	sidebar: [
+		// Un grupo de enlaces etiquetados como "Guides"
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				// Un grupo anidado de enlaces.
+				{
+					label: 'Estilando',
+					items: [
+						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'Estilando',
+					items: [
+						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### Grupos autogenerados
+
+Starlight puede generar automáticamente un grupo en tu barra lateral basado en un directorio de tu documentación.
+Esto es útil cuando no deseas ingresar manualmente cada elemento de la barra lateral en un grupo.
+Las páginas serán ordenadas alfabéticamente por nombre de archivo de forma predeterminada.
+
+Agrega un grupo autogenerado usando un objeto con las propiedades `label` y `autogenerate`. Tu configuración `autogenerate` debe especificar el `directory` para usar en las entradas de la barra lateral. Por ejemplo, con la siguiente configuración:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guías',
+			// Autogenera un grupo de enlaces para el directorio 'guides'.
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+Y la siguiente estructura de archivos:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+        - advanced/
+          - project-structure.md
+
+</FileTree>
+
+La siguiente barra lateral se generará automáticamente:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'avanzado',
+					items: [
+						{
+							label: 'Estructura de Proyecto',
+							link: '/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+#### Personalización de enlaces autogenerados en el frontmatter
+
+Usa el campo [`sidebar`](/es/reference/frontmatter/#sidebar) en las páginas individuales para personalizar los enlaces autogenerados.
+
+Las opciones del frontmatter de la barra lateral te permiten establecer un [etiqueta personalizada](/es/reference/frontmatter/#label) o agregar una [insignia](/es/reference/frontmatter/#badge) a un enlace, [ocultar](/es/reference/frontmatter/#hidden) un enlace de la barra lateral o definir un [peso de ordenación personalizado](/es/reference/frontmatter/#order).
+
+```md
+---
+title: Mi página
+sidebar:
+  # Configura una etiqueta personalizada para el enlace
+  label: Etiqueta personalizada de la barra lateral
+  # Establece un orden personalizado para el enlace (los números más bajos se muestran más arriba)
+  order: 2
+  # Agrega una insignia al enlace
+  badge:
+    text: Nuevo
+    variant: tip
+---
+```
+
+Un grupo autogenerado que incluye una página con el frontmatter anterior generará la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Una página', link: '#' },
+				{
+					label: 'Etiqueta personalizada de la barra lateral',
+					link: '#',
+					badge: { text: 'Nuevo', variant: 'tip' },
+				},
+				{ label: 'Otra página', link: '#' },
+			],
+		},
+	]}
+/>
+
+:::note
+La configuración `sidebar` del frontmatter solo se usa para enlaces autogenerados y se ignorará para enlaces definidos manualmente.
+:::
+
+## Insignias
+
+Los enlaces también pueden incluir una propiedad `badge` para mostrar una insignia junto a la etiqueta del enlace.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guías',
+			items: [
+				// Un enlace con una insignia "Nuevo".
+				{
+					label: 'Componentes',
+					link: '/guides/components/',
+					badge: 'Nuevo',
+				},
+			],
+		},
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{
+					label: 'Componentes',
+					link: '/guides/components/',
+					badge: { text: 'Nuevo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
+### Variantes de insignia
+
+Personaliza el estilo de la insignia usando un objeto con las propiedades `text` y `variant`.
+
+La propiedad `text` representa el contenido a mostrar (por ejemplo, "Nuevo").
+Remplaza el estilo `default`, que usa el color de acento de tu sitio, estableciendo la propiedad `variant` a uno de los siguientes valores: `note`, `tip`, `danger`, `caution` o `success`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guías',
+			items: [
+				// Un enlace con una insignia "Experimental" amarilla.
+				{
+					label: 'Componentes',
+					link: '/guides/components/',
+					badge: { text: 'Experimental', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{
+					label: 'Componentes',
+					link: '/guides/components/',
+					badge: { text: 'Experimental', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## Internacionalización
+
+Usa la propiedad `translations` en las entradas de enlace y grupo para traducir la etiqueta del enlace o grupo para cada idioma compatible.
+
+La propiedad `label` se utilizará para el idioma predeterminado y para los idiomas sin traducción.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			translations: {
+				es: 'Guías',
+			},
+			items: [
+				{
+					label: 'Components',
+					translations: {
+						es: 'Componentes',
+					},
+					link: '/guides/components/',
+				},
+				{
+					label: 'Internationalization (i18n)',
+					translations: {
+						es: 'Internacionalización (i18n)',
+					},
+					link: '/guides/i18n/',
+				},
+			],
+		},
+	],
+});
+```
+
+Navegar por la documentación en español generará la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+## Grupos colapsables
+
+Los grupos de enlaces pueden colapsarse por defecto estableciendo la propiedad `collapsed` en `true`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guías',
+			// Collapsa el grupo de forma predeterminada.
+			collapsed: true,
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+			],
+		},
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			collapsed: true,
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+[Grupos autogenerados](#grupos-autogenerados) respetan el valor `collapsed` de su grupo padre:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guías',
+			// Colapsa el grupo y sus subgrupos autogenerados de forma predeterminada.
+			collapsed: true,
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			collapsed: true,
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'advanced',
+					collapsed: true,
+					items: [
+						{
+							label: 'Estructura de Proyecto',
+							link: '/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+Este comportamiento puede remplazarse definiendo la propiedad `autogenerate.collapsed`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guías',
+			// No colapsa el grupo "Guides" pero colapsa sus
+			// subgrupos autogenerados.
+			collapsed: false,
+			autogenerate: { directory: 'guides', collapsed: true },
+		},
+	],
+});
+```
+
+La configuración anterior genera la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'advanced',
+					collapsed: true,
+					items: [
+						{
+							label: 'Estructura de Proyecto',
+							link: '/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
