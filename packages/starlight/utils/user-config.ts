@@ -284,8 +284,7 @@ const UserConfigSchema = z.object({
 	titleDelimiter: z
 		.string()
 		.default('|')
-		.describe("Will be used as title delimiter in the generated `<title>` tag."),
-
+		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(
