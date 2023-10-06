@@ -213,7 +213,7 @@ next: false
 **type:** `boolean`  
 **default:** `true`
 
-Legt fest, ob diese Seite in den [Pagefind](https://pagefind.app/) Suchindex aufgenommen werden soll. Setze das Feld auf `false`, um eine Seite von den Suchergebnissen auszuschließen:
+Legt fest, ob diese Seite in den [Pagefind](https://pagefind.app/)-Suchindex aufgenommen werden soll. Setze das Feld auf `false`, um eine Seite von den Suchergebnissen auszuschließen:
 
 ```md
 ---
