@@ -256,6 +256,7 @@ const UserConfigSchema = z.object({
 	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
 	favicon: FaviconSchema(),
 
+	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
 
 	/** Will be used as title delimiter in the generated `<title>` tag. */
