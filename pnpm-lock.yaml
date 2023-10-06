@@ -18,7 +18,7 @@ importers:
         specifier: ^8.2.4
         version: 8.2.4(size-limit@8.2.4)
       astro:
-        specifier: ^3.2.1
+        specifier: ^3.2.3
         version: 3.2.3(@types/node@18.16.19)
       prettier:
         specifier: ^3.0.0
@@ -39,7 +39,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       astro:
-        specifier: ^3.2.1
+        specifier: ^3.2.3
         version: 3.2.3(@types/node@18.16.19)
       culori:
         specifier: ^3.2.0
@@ -106,7 +106,7 @@ importers:
         specifier: ^0.10.4
         version: link:../../packages/starlight
       astro:
-        specifier: ^3.2.1
+        specifier: ^3.2.3
         version: 3.2.3(@types/node@18.16.19)
       sharp:
         specifier: ^0.32.5
@@ -124,7 +124,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(astro@3.2.3)(tailwindcss@3.3.3)
       astro:
-        specifier: ^3.2.1
+        specifier: ^3.2.3
         version: 3.2.3(@types/node@18.16.19)
       sharp:
         specifier: ^0.32.5
@@ -188,7 +188,7 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0(vitest@0.33.0)
       astro:
-        specifier: ^3.2.1
+        specifier: ^3.2.3
         version: 3.2.3(@types/node@18.16.19)
       vitest:
         specifier: ^0.33.0
