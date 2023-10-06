@@ -155,6 +155,8 @@ const UserConfigSchema = z.object({
 				'x.com',
 				'telegram',
 				'rss',
+				'facebook',
+				'email',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
