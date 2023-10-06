@@ -175,47 +175,47 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
 
 3. Ajoutez des traductions pour les clés que vous souhaitez traduire dans les fichiers JSON. Traduire uniquement les valeurs, en laissant les clés en anglais (e.g. `"search.label": "Buscar"`).
 
-   Il s'agit des valeurs anglaises par défaut des chaînes de caractères existantes avec lesquelles Starlight est livré :
+   Voici les valeurs anglaises par défaut des chaînes de caractères existantes avec lesquelles Starlight est livré :
 
    ```json
    {
-   	"skipLink.label": "Aller au contenu",
-   	"search.label": "Rechercher",
-   	"search.shortcutLabel": "(Presser / pour rechercher)",
-   	"search.cancelLabel": "Annuler",
-   	"search.devWarning": "La recherche est disponible uniquement en mode production. \nEssayez de construire puis de prévisualiser votre site pour tester la recherche localement.",
-   	"themeSelect.accessibleLabel": "Selectionner le thème",
-   	"themeSelect.dark": "Sombre",
-   	"themeSelect.light": "Clair",
+   	"skipLink.label": "Skip to content",
+   	"search.label": "Search",
+   	"search.shortcutLabel": "(Press / to Search)",
+   	"search.cancelLabel": "Cancel",
+   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
+   	"themeSelect.accessibleLabel": "Select theme",
+   	"themeSelect.dark": "Dark",
+   	"themeSelect.light": "Light",
    	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Selectionner la langue",
+   	"languageSelect.accessibleLabel": "Select language",
    	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "principale",
-   	"tableOfContents.onThisPage": "Sur cette page",
-   	"tableOfContents.overview": "Vue d’ensemble",
-   	"i18n.untranslatedContent": "Ce contenu n’est pas encore disponible dans votre langue.",
-   	"page.editLink": "Modifier cette page",
-   	"page.lastUpdated": "Dernière mise à jour :",
-   	"page.previousLink": "Précédent",
-   	"page.nextLink": "Suivant",
-   	"404.text": "Page non trouvée. Vérifiez l’URL ou essayez d’utiliser la barre de recherche."
+   	"sidebarNav.accessibleLabel": "Main",
+   	"tableOfContents.onThisPage": "On this page",
+   	"tableOfContents.overview": "Overview",
+   	"i18n.untranslatedContent": "This content is not available in your language yet.",
+   	"page.editLink": "Edit page",
+   	"page.lastUpdated": "Last updated:",
+   	"page.previousLink": "Next",
+   	"page.nextLink": "Previous",
+   	"404.text": "Page not found. Check the URL or try using the search bar."
    }
    ```
 
-   La module de recherche de Starlight’s est propulsé par la librairie [Pagefind](https://pagefind.app/).
-   Vous pouvez défiinr les tradctions pour l'interface de Pagefinddans le même fichier JSON file en utilisant les propriétés `pagefind` :
+   La module de recherche de Starlight’s s’appuie sur la librairie [Pagefind](https://pagefind.app/).
+   Vous pouvez définir des traductions pour l’interface utilisateur de Pagefind dans le même fichier JSON en utilisant les clés `pagefind` :
 
    ```json
    {
-   	"pagefind.clear_search": "Effacer",
-   	"pagefind.load_more": "Charger plus de résultats",
-   	"pagefind.search_label": "Rechercher sur ce site",
-   	"pagefind.filters_label": "Filtres",
-   	"pagefind.zero_results": "Pas de résultat pour [SEARCH_TERM]",
-   	"pagefind.many_results": "[COUNT] resultats pour [SEARCH_TERM]",
-   	"pagefind.one_result": "[COUNT] resultat pour [SEARCH_TERM]",
-   	"pagefind.alt_search": "Pas de résultats pour [SEARCH_TERM]. Voici à la place des résultats pour [DIFFERENT_TERM].",
-   	"pagefind.search_suggestion": "Pas de résultats pour [SEARCH_TERM]. Essayez l'une de ces recherches :",
-   	"pagefind.searching": "Recherche en cours pour [SEARCH_TERM]..."
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
