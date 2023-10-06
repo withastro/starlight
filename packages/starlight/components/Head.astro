@@ -1,18 +1,15 @@
 ---
-import type { CollectionEntry, z } from 'astro:content';
+import type { z } from 'astro/zod';
 import config from 'virtual:starlight/user-config';
+import { version } from '../package.json';
 import type { HeadConfigSchema } from '../schemas/head';
+import { fileWithBase } from '../utils/base';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
-import { fileWithBase } from '../utils/base';
-import { version } from '../package.json';
+import type { Props } from '../props';
 
-interface Props {
-	data: CollectionEntry<'docs'>['data'];
-	lang: string;
-}
-
-const { data, lang } = Astro.props;
+const { entry, lang } = Astro.props;
+const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
 const description = data.description || config.description;
@@ -94,7 +91,7 @@ if (config.social?.twitter) {
 		tag: 'meta',
 		attrs: {
 			name: 'twitter:site',
-			content: new URL(config.social.twitter).pathname,
+			content: new URL(config.social.twitter.url).pathname,
 		},
 	});
 }

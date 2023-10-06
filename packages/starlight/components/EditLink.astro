@@ -1,34 +1,15 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import config from 'virtual:starlight/user-config';
-import project from 'virtual:starlight/project-context';
-import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
-
-interface Props {
-	data: CollectionEntry<'docs'>['data'];
-	id: CollectionEntry<'docs'>['id'];
-	locale: string | undefined;
-}
+import type { Props } from '../props';
+import { useTranslations } from '../utils/translations';
 
 const t = useTranslations(Astro.props.locale);
-const { editUrl } = Astro.props.data;
-const srcPath = project.srcDir.replace(project.root, '');
-
-let { baseUrl } = config.editLink;
-if (baseUrl && baseUrl.at(-1) !== '/') baseUrl += '/';
-
-const url =
-	typeof editUrl === 'string'
-		? editUrl
-		: baseUrl
-		? baseUrl + srcPath + 'content/docs/' + Astro.props.id
-		: undefined;
+const { editUrl } = Astro.props;
 ---
 
 {
-	editUrl !== false && url && (
-		<a href={url} class="sl-flex">
+	editUrl && (
+		<a href={editUrl} class="sl-flex">
 			<Icon name="pencil" size="1.2em" />
 			{t('page.editLink')}
 		</a>

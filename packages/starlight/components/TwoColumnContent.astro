@@ -1,12 +1,10 @@
 ---
-interface Props {
-	hasToC: boolean;
-}
+import type { Props } from '../props';
 ---
 
 <div class="lg:sl-flex">
 	{
-		Astro.props.hasToC && (
+		Astro.props.toc && (
 			<aside class="right-sidebar-container">
 				<div class="right-sidebar">
 					<slot name="right-sidebar" />

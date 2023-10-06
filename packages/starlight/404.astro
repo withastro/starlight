@@ -2,7 +2,8 @@
 import { getEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import EmptyContent from './components/EmptyMarkdown.md';
-import Page from './layout/Page.astro';
+import Page from './components/Page.astro';
+import { generateRouteData } from './utils/route-data';
 import type { StarlightDocsEntry } from './utils/routing';
 import { useTranslations } from './utils/translations';
 
@@ -24,6 +25,8 @@ const fallbackEntry: StarlightDocsEntry = {
 		editUrl: false,
 		head: [],
 		hero: { tagline: t('404.text'), actions: [] },
+		pagefind: false,
+		sidebar: { hidden: false },
 	},
 	render: async () => ({
 		Content: EmptyContent,
@@ -35,8 +38,10 @@ const fallbackEntry: StarlightDocsEntry = {
 const userEntry = await getEntry('docs', '404');
 const entry = userEntry || fallbackEntry;
 const { Content, headings } = await entry.render();
+const route = generateRouteData({
+	props: { ...entryMeta, entryMeta, headings, entry, id: entry.id, slug: entry.slug },
+	url: Astro.url,
+});
 ---
 
-<Page {headings} entry={entry} id={entry.id} slug={entry.slug} {...entryMeta} {entryMeta}>
-	<Content />
-</Page>
+<Page {...route}><Content /></Page>

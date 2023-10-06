@@ -1,15 +1,27 @@
-<div class="right-sidebar-panel sl-hidden lg:sl-block">
-	<div class="sl-container">
-		<slot />
-	</div>
-</div>
+---
+import type { Props } from '../props';
+
+import { TableOfContents, MobileTableOfContents } from 'virtual:starlight/components';
+---
+
+{
+	Astro.props.toc && (
+		<>
+			<div class="lg:sl-hidden">
+				<MobileTableOfContents {...Astro.props} />
+			</div>
+			<div class="right-sidebar-panel sl-hidden lg:sl-block">
+				<div class="sl-container">
+					<TableOfContents {...Astro.props} />
+				</div>
+			</div>
+		</>
+	)
+}
 
 <style>
 	.right-sidebar-panel {
 		padding: 1rem var(--sl-sidebar-pad-x);
-	}
-	.right-sidebar-panel + .right-sidebar-panel {
-		border-top: 1px solid var(--sl-color-hairline);
 	}
 	.sl-container {
 		width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));

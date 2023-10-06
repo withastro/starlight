@@ -436,3 +436,19 @@ Sets the delimiter between page title and site title in the page’s `<title>` t
 
 By default, every page has a `<title>` of `Page Title | Site Title`.
 For example, this page is titled “Configuration Reference” and this site is titled “Starlight”, so the `<title>` for this page is “Configuration Reference | Starlight”.
+
+### `components`
+
+**type:** `Record<string, string>`
+
+Provide the paths to components to override Starlight’s default implementations.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+See the [Overrides Reference](/reference/overrides/) for details of all the components that you can override.

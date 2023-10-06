@@ -1,10 +1,7 @@
 ---
 import { useTranslations } from '../utils/translations';
 import Select from './Select.astro';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { Props } from '../props';
 
 const t = useTranslations(Astro.props.locale);
 ---

@@ -287,7 +287,9 @@ export function getPrevNextLinks(
 		next?: PrevNextLinkConfig;
 	}
 ): {
+	/** Link to previous page in the sidebar. */
 	prev: Link | undefined;
+	/** Link to next page in the sidebar. */
 	next: Link | undefined;
 } {
 	const entries = flattenSidebar(sidebar);
