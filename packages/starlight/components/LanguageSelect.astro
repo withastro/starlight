@@ -3,10 +3,7 @@ import config from 'virtual:starlight/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
 import { useTranslations } from '../utils/translations';
 import Select from './Select.astro';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { Props } from '../props';
 
 /**
  * Get the equivalent of the current page path for the passed locale.

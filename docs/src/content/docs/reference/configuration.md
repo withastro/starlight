@@ -187,6 +187,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -307,7 +308,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
@@ -425,3 +426,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**type:** `string`  
+**default:** `'|'`
+
+Sets the delimiter between page title and site title in the page’s `<title>` tag, which is displayed on browser tabs.
+
+By default, every page has a `<title>` of `Page Title | Site Title`.
+For example, this page is titled “Configuration Reference” and this site is titled “Starlight”, so the `<title>` for this page is “Configuration Reference | Starlight”.
+
+### `components`
+
+**type:** `Record<string, string>`
+
+Provide the paths to components to override Starlight’s default implementations.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+See the [Overrides Reference](/reference/overrides/) for details of all the components that you can override.

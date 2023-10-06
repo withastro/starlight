@@ -17,7 +17,8 @@ interface Props {
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
-						class:list={{ large: !Astro.props.nested }}
+						class:list={[{ large: !Astro.props.nested }, entry.attrs.class]}
+						{...entry.attrs}
 					>
 						<span>{entry.label}</span>
 						{entry.badge && (
@@ -35,7 +36,7 @@ interface Props {
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
 						<summary>
-							<h2 class="large">{entry.label}</h2>
+							<span class="large">{entry.label}</span>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<Astro.self sublist={entry.entries} nested />
@@ -51,6 +52,10 @@ interface Props {
 		--sl-sidebar-item-padding-inline: 0.5rem;
 		list-style: none;
 		padding: 0;
+	}
+
+	li {
+		overflow-wrap: anywhere;
 	}
 
 	ul ul li {
@@ -84,6 +89,7 @@ interface Props {
 
 	.caret {
 		transition: transform 0.2s ease-in-out;
+		flex-shrink: 0;
 	}
 	:global([dir='rtl']) .caret {
 		transform: rotateZ(180deg);

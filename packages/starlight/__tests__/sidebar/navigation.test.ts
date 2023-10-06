@@ -18,6 +18,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -28,6 +29,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
 			        "badge": {
 			          "text": "New",
 			          "variant": "success",
@@ -38,6 +40,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "attrs": {},
 			        "badge": {
 			          "text": "Deprecated",
 			          "variant": "default",
@@ -45,6 +48,17 @@ describe('getSidebar', () => {
 			        "href": "/next-steps/",
 			        "isCurrent": false,
 			        "label": "Next Steps",
+			        "type": "link",
+			      },
+			      {
+			        "attrs": {
+			          "class": "showcase-link",
+			          "target": "_blank",
+			        },
+			        "badge": undefined,
+			        "href": "/showcase/",
+			        "isCurrent": false,
+			        "label": "Showcase",
 			        "type": "link",
 			      },
 			    ],
@@ -55,6 +69,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/reference/configuration/",
 			        "isCurrent": false,
@@ -62,6 +77,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/reference/frontmatter/",
 			        "isCurrent": false,

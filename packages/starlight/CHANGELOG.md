@@ -1,5 +1,64 @@
 # @astrojs/starlight
 
+## 0.11.0
+
+### Minor Changes
+
+- [#774](https://github.com/withastro/starlight/pull/774) [`903a579`](https://github.com/withastro/starlight/commit/903a57942ceb99b68672c3fa54622b39cc5d76f8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Support adding HTML attributes to sidebar links from config and frontmatter
+
+- [#796](https://github.com/withastro/starlight/pull/796) [`372ec96`](https://github.com/withastro/starlight/commit/372ec96d31d0c1a9aa8bc1605de2b424bf9bd5af) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add the `@astrojs/sitemap` and `@astrojs/mdx` integrations only if they are not detected in the Astro configuration.
+
+  ⚠️ **BREAKING CHANGE** The minimum supported version of Astro is now v3.2.0. Make sure you update Astro at the same time as updating Starlight:
+
+  ```sh
+  npm install astro@latest
+  ```
+
+- [#447](https://github.com/withastro/starlight/pull/447) [`b45719b`](https://github.com/withastro/starlight/commit/b45719b581353f8d8f0ce0a9b5c89132e902377b) Thanks [@andremralves](https://github.com/andremralves)! - Add `titleDelimiter` configuration option and include site title in page `<title>` tags
+
+  ⚠️ **BREAKING CHANGE** — Previously, every page’s `<title>` only included its individual frontmatter title.
+  Now, `<title>` tags include the page title, a delimiter character (`|` by default), and the site title.
+  For example, in the Startlight docs, `<title>Configuration Reference</title>` is now `<title>Configuration Reference | Starlight</title>`.
+
+  If you have a page where you need to override this new behaviour, set a custom title using the `head` frontmatter property:
+
+  ```md
+  ---
+  title: My Page
+  head:
+    - tag: title
+      content: Custom Title
+  ---
+  ```
+
+- [#709](https://github.com/withastro/starlight/pull/709) [`140e729`](https://github.com/withastro/starlight/commit/140e729a8bf12f805ae0b7e2b5ad959cf68d8e22) Thanks [@delucis](https://github.com/delucis)! - Add support for overriding Starlight’s built-in components
+
+  ⚠️ **BREAKING CHANGE** — The page footer is now included on pages with `template: splash` in their frontmatter. Previously, this was not the case. If you are using `template: splash` and want to continue to hide footer elements, disable them in your frontmatter:
+
+  ```md
+  ---
+  title: Landing page
+  template: splash
+  # Disable unwanted footer elements as needed
+  editUrl: false
+  lastUpdated: false
+  prev: false
+  next: false
+  ---
+  ```
+
+  ⚠️ **BREAKING CHANGE** — This change involved refactoring the structure of some of Starlight’s built-in components slightly. If you were previously overriding these using other techniques, you may need to adjust your code.
+
+### Patch Changes
+
+- [#815](https://github.com/withastro/starlight/pull/815) [`b7b23a2`](https://github.com/withastro/starlight/commit/b7b23a2c90a25fe8ea08338379b83d19c74d9037) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Add Facebook and email icons
+
+- [#810](https://github.com/withastro/starlight/pull/810) [`dbe977b`](https://github.com/withastro/starlight/commit/dbe977b6ce3efcffefab850eca08bef316b41e53) Thanks [@hasham-qaiser](https://github.com/hasham-qaiser)! - Use `<span>` instead of `<h2>` in sidebar group headings
+
+- [#807](https://github.com/withastro/starlight/pull/807) [`7c73dd1`](https://github.com/withastro/starlight/commit/7c73dd146ee294f9092346a0b0041990cc648a13) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Add Vietnamese translations for Starlight UI
+
+- [#756](https://github.com/withastro/starlight/pull/756) [`f55a8f0`](https://github.com/withastro/starlight/commit/f55a8f014a7addc46e971dd6b7148f4545acd16c) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Prevent text from overflowing in several cases
+
 ## 0.10.4
 
 ### Patch Changes

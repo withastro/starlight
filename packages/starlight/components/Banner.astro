@@ -1,10 +1,10 @@
 ---
-interface Props {
-	content: string;
-}
+import type { Props } from '../props';
+
+const { banner } = Astro.props.entry.data;
 ---
 
-<div class="sl-banner" set:html={Astro.props.content} />
+{banner && <div class="sl-banner" set:html={banner.content} />}
 
 <style>
 	.sl-banner {

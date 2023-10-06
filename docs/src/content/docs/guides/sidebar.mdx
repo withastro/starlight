@@ -1,8 +1,6 @@
 ---
 title: Sidebar Navigation
 description: Learn how to set up and customize your Starlight site’s sidebar navigation links.
-sidebar:
-  badge: New
 ---
 
 import FileTree from '../../../components/file-tree.astro';
@@ -316,6 +314,50 @@ The configuration above generates the following sidebar:
 	]}
 />
 
+## Custom HTML attributes
+
+Links can also include an `attrs` property to add custom HTML attributes to the link element.
+
+In the following example, `attrs` is used to add a `target="_blank"` attribute, so that the link opens in a new tab, and to apply a custom `style` attribute to italicize the link label:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// An external link to the Astro docs opening in a new tab.
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+The configuration above generates the following sidebar:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## Internationalization
 
 Use the `translations` property on link and group entries to translate the link or group label for each supported language.
@@ -357,8 +399,8 @@ Browsing the documentation in Spanish will generate the following sidebar:
 		{
 			label: 'Guías',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componentes', link: '/es/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
 			],
 		},
 	]}

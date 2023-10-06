@@ -1,10 +1,7 @@
 ---
-import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { Props } from '../props';
+import { useTranslations } from '../utils/translations';
 
 const t = useTranslations(Astro.props.locale);
 ---
