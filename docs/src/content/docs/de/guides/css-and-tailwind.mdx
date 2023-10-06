@@ -5,9 +5,9 @@ description: Lerne, wie du deine Starlight-Seite mit benutzerdefiniertem CSS ges
 
 Du kannst deine Starlight-Website mit benutzerdefinierten CSS-Dateien gestalten oder das Starlight Tailwind-Plugin verwenden.
 
-## Benutzerdefinierte CSS-Stile
+## Benutzerdefinierte CSS-Styles (Stile)
 
-Passe die Stile deiner Starlight-Seite an, indem du zusätzliche CSS-Dateien bereitstellst, um die Standard-Stile von Starlight zu verändern oder zu erweitern.
+Passe die Styles deiner Starlight-Seite an, indem du zusätzliche CSS-Dateien bereitstellst, um die Standard-Styles von Starlight zu verändern oder zu erweitern.
 
 1. Füge eine CSS-Datei zu deinem `src/`-Verzeichnis hinzu.
    Du kannst zum Beispiel eine größere Standard-Spaltenbreite und eine größere Textgröße für den Seitentitel festlegen:
@@ -45,13 +45,13 @@ Du kannst dir alle CSS-Eigenschaften, die von Starlight verwendet werden und die
 ## Tailwind CSS
 
 Tailwind CSS-Unterstützung in Astro-Projekten wird durch die [Astro Tailwind-Integration](https://docs.astro.build/de/guides/integrations-guide/tailwind/) bereitgestellt.
-Starlight bietet ein komplementäres Tailwind-Plugin, um Tailwind für die Kompatibilität mit den Stilen von Starlight zu konfigurieren.
+Starlight bietet ein komplementäres Tailwind-Plugin, um Tailwind für die Kompatibilität mit den Styles von Starlight zu konfigurieren.
 
 Das Starlight Tailwind-Plugin wendet die folgende Konfiguration an:
 
 - Konfiguriert Tailwinds `dark:`-Varianten so, dass sie mit Starlights Dark Mode funktionieren.
 - Verwendet Tailwind [Themenfarben und Schriftarten](#starlight-mit-tailwind-designen) in Starlights UI.
-- Deaktiviert Tailwinds [Preflight](https://tailwindcss.com/docs/preflight) Zurücksetzungs-Stile, während selektiv wesentliche Teile von Preflight wiederhergestellt werden, die für die border-Klassen von Tailwind benötigt werden.
+- Deaktiviert Tailwinds [Preflight](https://tailwindcss.com/docs/preflight) Zurücksetzungs-Style, während selektiv wesentliche Teile von Preflight wiederhergestellt werden, die für die border-Klassen von Tailwind benötigt werden.
 
 ### Erstelle ein neues Projekt mit Tailwind
 
@@ -147,7 +147,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
 
     </Tabs>
 
-3.  Erstelle eine CSS-Datei für die Basisstile von Tailwind, zum Beispiel unter `src/tailwind.css`:
+3.  Erstelle eine CSS-Datei für die grundlegenden Styles von Tailwind, zum Beispiel unter `src/tailwind.css`:
 
     ```css
     /* src/tailwind.css */
@@ -156,7 +156,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     @tailwind utilities;
     ```
 
-4.  Aktualisiere deine Astro-Konfigurationsdatei, um deine Tailwind-Basisstile zu verwenden und deaktiviere die Standard-Basisstile:
+4.  Aktualisiere deine Astro-Konfigurationsdatei, um deine Tailwind-Styles zu verwenden und deaktiviere die Standard-Styles:
 
     ```js {11-12,16-17}
     // astro.config.mjs
@@ -169,12 +169,12 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     		starlight({
     			title: 'Docs with Tailwind',
     			customCss: [
-    				// Pfad zu deinen Tailwind-Basisstilen
+    				// Pfad zu deinen grundlegenden Tailwind-Styles
     				'./src/tailwind.css',
     			],
     		}),
     		tailwind({
-    			// Deaktiviere die Basisstile
+    			// Deaktiviere die grundlegenden Styles
     			applyBaseStyles: false,
     		}),
     	],
@@ -198,7 +198,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
 
 Starlight verwendet Werte aus deiner [Tailwind-Theme-Konfiguration](https://tailwindcss.com/docs/theme) in der Benutzeroberfläche.
 
-Falls gesetzt, überschreiben die folgenden Optionen die Standard-Stile von Starlight:
+Falls gesetzt, überschreiben die folgenden Optionen die Standard-Styles von Starlight:
 
 - `colors.accent` - wird für Links und die Hervorhebung des aktuellen Elements verwendet
 - `colors.gray` - wird für Hintergrundfarben und Rahmen verwendet

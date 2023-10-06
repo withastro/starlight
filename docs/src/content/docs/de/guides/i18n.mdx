@@ -67,7 +67,7 @@ Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschlie�
 
 Du kannst ein Root-Verzeichnis verwenden, um eine Sprache ohne i18n-Präfix in ihrem Pfad anzubieten. Wenn zum Beispiel Englisch dein Stammverzeichnis ist, würde ein englischer Seitenpfad unter `/about` anstelle von `/en/about` zu finden sein.
 
-Um ein Stammverzeichnis festzulegen, verwende den Schlüssel `root` in deiner `locales`-Konfiguration. Wenn das Root-Verzeichnis auch das Standard-Verzeichnis für deinen Inhalt ist, entferne `defaultLocale` oder setze es auf `'root'`.
+Um ein Stammverzeichnis festzulegen, verwende den Key `root` in deiner `locales`-Konfiguration. Wenn das Root-Verzeichnis auch das Standard-Verzeichnis für deinen Inhalt ist, entferne `defaultLocale` oder setze es auf `'root'`.
 
 ```js
 // astro.config.mjs
@@ -173,7 +173,7 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
 
    </FileTree>
 
-3. Füge Übersetzungen für die Schlüssel hinzu, die du in die JSON-Dateien übersetzen möchtest. Übersetze nur die Werte und lasse die Schlüssel in Englisch (z.B. `"search.label": "Buscar"`).
+3. Füge Übersetzungen für die Schlüssel hinzu, die in den JSON-Dateien übersetzt werden sollen. Übersetze nur die Werte und belasse die Schlüssel auf Englisch (z.B. `"search.label": "Buscar"`).
 
    Dies sind die englischen Standardwerte der vorhandenen Strings, mit denen Starlight ausgeliefert wird:
 
