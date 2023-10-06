@@ -18,6 +18,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -25,6 +26,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -35,6 +37,7 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
@@ -42,6 +45,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/guides/components/",
 			        "isCurrent": false,
@@ -103,6 +107,7 @@ describe('flattenSidebar', () => {
 		expect(flattened).toMatchInlineSnapshot(`
 			[
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -110,6 +115,7 @@ describe('flattenSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -117,6 +123,7 @@ describe('flattenSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
@@ -124,6 +131,7 @@ describe('flattenSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/guides/components/",
 			    "isCurrent": false,
@@ -142,6 +150,7 @@ describe('getPrevNextLinks', () => {
 		expect(links).toMatchInlineSnapshot(`
 			{
 			  "next": {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
@@ -149,6 +158,7 @@ describe('getPrevNextLinks', () => {
 			    "type": "link",
 			  },
 			  "prev": {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": false,
@@ -235,6 +245,7 @@ describe('getPrevNextLinks', () => {
 			href: '/x/',
 			label: 'X',
 			isCurrent: false,
+			attrs: {},
 		});
 	});
 
