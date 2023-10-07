@@ -62,7 +62,7 @@ Analitik takip script'ine ihtiyacınız varsa, [Cabin][cabin], [Fathom][fathom],
 Youtube ve Vimeo gibi gömülü videolar [kullanıcı etkileşimi ile videoyu yükleme][lazy-video]. yöntemiyle geliştirilebilir.
 [`astro-embed`][embed] gibi paketler ortak hizmetler için yardımcı olabilir.
 
-:::ipucu[Bunu biliyor musun?]
+:::tip[Bunu biliyor musun?]
 Javascript'in ayrıştırılması ve derlenmesi tarayıcıların yapması gereken en maliyetli görevlerden biri.
 Aynı boyutta JPEG görsel çizimi ile kıyaslandığında, [JavaScript 30 kez daha uzun işleme süresi alabilir][cost-of-js].
 :::
