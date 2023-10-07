@@ -432,16 +432,16 @@ starlight({
 **tipo:** `string`  
 **por defecto:** `'|'`
 
-Establece el delimitador entre el título de la página y el título del sitio en la etiqueta `<title>` de la página, que se muestra en las pestañas del navegador.
+Establece un delimitador entre el título de la página y el título del sitio web en la etiqueta `<title>`, que se muestra en las pestañas del navegador.
 
-Por defecto, cada página tiene un `<title>` de `Título de la página | Título del sitio`.
-Por ejemplo, esta página es titulada "Referencia de Configuración" y este sitio es titulado "Starlight", por lo que el `<title>` de esta página es "Referencia de Configuración | Starlight".
+Por defecto, cada página tiene un `<title>` de `Título de la página | Título del sitio web`.
+Por ejemplo, esta página es titulada "Referencia de Configuración" y este sitio web es titulado "Starlight", por lo que el `<title>` de esta página es "Referencia de Configuración | Starlight".
 
 ### `components`
 
 **tipo:** `Record<string, string>`
 
-Proporciona las rutas a los componentes para anular las implementaciones predeterminadas de Starlight.
+Proporciona las rutas a los componentes para sobreescribir las implementaciones predeterminadas de Starlight.
 
 ```js
 starlight({
