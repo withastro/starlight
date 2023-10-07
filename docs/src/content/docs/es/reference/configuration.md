@@ -188,6 +188,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -308,7 +309,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
@@ -425,3 +426,30 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**tipo:** `string`  
+**por defecto:** `'|'`
+
+Establece el delimitador entre el título de la página y el título del sitio en la etiqueta `<title>` de la página, que se muestra en las pestañas del navegador.
+
+Por defecto, cada página tiene un `<title>` de `Título de la página | Título del sitio`.
+Por ejemplo, esta página es titulada "Referencia de Configuración" y este sitio es titulado "Starlight", por lo que el `<title>` de esta página es "Referencia de Configuración | Starlight".
+
+### `components`
+
+**tipo:** `Record<string, string>`
+
+Proporciona las rutas a los componentes para anular las implementaciones predeterminadas de Starlight.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+See the [Overrides Reference](/reference/overrides/) for details of all the components that you can override.
+Consulta la [Referencia de Reemplazo](/es/reference/overrides/) para obtener detalles de todos los componentes que puedes anular.
