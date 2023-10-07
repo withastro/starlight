@@ -1,5 +1,4 @@
 ---
-title: Overrides Reference
 title: Referencia de Reemplazos
 description: Una descripción general de los componentes y props de componentes compatibles con los reemplazos de Starlight.
 tableOfContents:
