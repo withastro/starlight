@@ -6,7 +6,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a los componentes de reemplazo en la opción de configuración [`components`](/reference/configuration#components) de Starlight.
+Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a los componentes de reemplazo en la opción de configuración [`components`](/es/reference/configuration#components) de Starlight.
 
 Esta página enumera todos los componentes disponibles para reemplazar y enlaces a sus implementaciones predeterminadas en GitHub.
 
