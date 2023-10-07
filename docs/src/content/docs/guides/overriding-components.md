@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Learn more about all the available props in the [Overrides Reference](/reference/overrides/#prop-types).
+Learn more about all the available props in the [Overrides Reference](/reference/overrides/#component-props).
 
 ### Only override on specific pages
 
