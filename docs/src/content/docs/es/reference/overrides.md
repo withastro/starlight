@@ -1,7 +1,7 @@
 ---
 title: Overrides Reference
 title: Referencia de Reemplazos
-description: An overview of the components and component props supported by Starlight overrides.
+description: Una descripción general de los componentes y props de componentes compatibles con los reemplazos de Starlight.
 tableOfContents:
   maxHeadingLevel: 4
 ---
