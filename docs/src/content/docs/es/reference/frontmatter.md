@@ -312,3 +312,19 @@ sidebar:
     variant: caution
 ---
 ```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+Atributos HTML para agregar al enlace de la página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
+
+```md
+---
+title: Página que se abre en una nueva pestaña
+sidebar:
+  # Abre la página en una nueva pestaña
+  attrs:
+    target: _blank
+---
+```
