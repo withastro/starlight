@@ -451,4 +451,4 @@ starlight({
 });
 ```
 
-Consulta la [Referencia de Reemplazos](/es/reference/overrides/) para obtener detalles de todos los componentes que puedes anular.
+Consulta la [Referencia de Personalización de Componentes](/es/reference/overrides/) para obtener detalles de todos los componentes que puedes anular.
