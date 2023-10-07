@@ -90,7 +90,7 @@ entry: {
 }
 ```
 
-Aprende más sobre la forma de este objeto en la referencia de [Tipo de Entrada de Colección de Astro](https://docs.astro.build/es/reference/api-reference/#colección-de-tipo-entrada).
+Aprende más sobre la forma de este objeto en la referencia de [Tipo de Entrada de la Colección de Astro](https://docs.astro.build/es/reference/api-reference/#tipo-de-entrada-de-la-colección).
 
 #### `sidebar`
 
