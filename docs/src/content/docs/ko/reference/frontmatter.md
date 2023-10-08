@@ -203,9 +203,21 @@ pagefind: false
 
 ### `sidebar`
 
-**타입:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**타입:** [`SidebarConfig`](#sidebarconfig)
 
 자동 생성된 링크 그룹을 사용할 때 이 페이지가 [사이드바](/ko/reference/configuration/#sidebar)에 표시되는 방식을 제어합니다.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -253,7 +265,7 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/ko/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**타입:** <code>string | <a href="/ko/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 자동 생성된 링크 그룹에 표시될 때 사이드바의 페이지에 배지를 추가합니다. 문자열을 사용하면 배지가 기본 강조 색상으로 표시됩니다. 선택적으로, `text` 및 `variant`필드가 포함된 [BadgeConfig 객체](/ko/reference/configuration/#badgeconfig)를 전달하여 배지를 사용자가 원하는대로 변경할 수 있습니다.
 
@@ -273,5 +285,21 @@ sidebar:
   badge:
     text: 실험적 기능
     variant: caution
+---
+```
+
+#### `attrs`
+
+**타입:** `Record<string, string | number | boolean | undefined>`
+
+사이드바에서 자동 생성된 링크 그룹을 사용할 때, 이 페이지의 링크에 추가할 HTML 속성을 설정합니다.
+
+```md
+---
+title: 새 탭에서 열리는 페이지
+sidebar:
+  # 새 탭에서 페이지를 엽니다.
+  attrs:
+    target: _blank
 ---
 ```
