@@ -9,11 +9,11 @@ Markdown desteği ve kullanımı farklılık gösterebileceğinden dolayı, bu d
 
 ## Satır İçi Stiller
 
-Metin **kalın**, _italik__ ya da ~~üstü çizili~~ olabilir.
+Metin **kalın**, _italik_ ya da ~~üstü çizili~~ olabilir.
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 ```md
-Metin **kalın**, _italik__ ya da ~~üstü çizili~~ olabilir.
+Metin **kalın**, _italik_ ya da ~~üstü çizili~~ olabilir.
 ```
 
 Başka bir sayfaya [bağlantı ekleyebilirsiniz](/getting-started/).
@@ -138,11 +138,11 @@ Astro [Ada Mimarisi”](https://docs.astro.build/en/concepts/islands/) ile daha 
 Uyarı ve tehlike ara bölümleri, kullanıcıların dikkatini gözden kaçabilecek detaylara çekmek için kullanışlıdır.
 Bunları çok kullandığınızı farkederseniz, dokümanınızın yeniden oluşturulmasına gerek kalmayacağının işareti olabilir.
 
-:::caution
+:::caution[Uyarı]
 Harika bir dokümantasyon sitesi istediğine emin değilsen, [Starlight](../../) kullanmadan önce iki kez düşün.
 :::
 
-:::danger
+:::danger[Tehlike]
 Yardımcı Starlight özellikleri sayesinde kullanıcılarınız daha kolay ürün bulabilir ve daha üretken olabilir.
 
 - Yönlendirmeyi temizle
@@ -201,7 +201,7 @@ var fun = function lang(l) {
 ````
 
 ```md
-Uzun, tek satırlı kod bloğu alt satıra geçmemelidir. Çok uzunsa yatay kaydırma olmalıdır. Bu satır bunu gösterim olması için yeterince uzun olmalıdır.
+Uzun, tek satırlı kod bloğu alt satıra geçmemelidir. Çok uzunsa yatay kaydırma olmalıdır. Bu satır, yatay kaydırma çubuğunun görünmesi için yeterince uzun olmalıdır.
 ```
 
 ## Diğer ortak Markdown Özellikleri
