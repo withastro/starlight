@@ -1,5 +1,5 @@
 ---
-title: Referencia de Reemplazos
+title: Referencia de Personalización de Componentes
 description: Una descripción general de los componentes y props de componentes compatibles con los reemplazos de Starlight.
 tableOfContents:
   maxHeadingLevel: 4
@@ -9,7 +9,7 @@ Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a
 
 Esta página enumera todos los componentes disponibles para reemplazar y enlaces a sus implementaciones predeterminadas en GitHub.
 
-Aprenda más en la [Guía para Reemplazar Componentes](/es/guides/reemplazando-componentes/).
+Aprenda más en la [Guía para Sobreescribir Componentes](/es/guides/overriding-components/).
 
 ## Props de Componentes
 
