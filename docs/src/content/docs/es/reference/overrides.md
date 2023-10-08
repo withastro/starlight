@@ -9,7 +9,7 @@ Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a
 
 Esta página enumera todos los componentes disponibles para reemplazar y enlaces a sus implementaciones predeterminadas en GitHub.
 
-Aprenda más en la [Guía para Sobreescribir Componentes](/es/guides/overriding-components/).
+Aprende más en la [Guía para Sobreescribir Componentes](/es/guides/overriding-components/).
 
 ## Props de Componentes
 
