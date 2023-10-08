@@ -15,14 +15,14 @@ Aprenda más en la [Guía para Sobreescribir Componentes](/es/guides/overriding-
 
 Todos los componentes pueden acceder a un objeto estándar `Astro.props` que contiene información sobre la página actual.
 
-Para escribir los tipos de tus componentes personalizados, importe el tipo `Props` de Starlight:
+Para escribir los tipos de tus componentes personalizados, importa el tipo `Props` de Starlight:
 
 ```astro
 ---
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
-//      ^ type: boolean
+//      ^ tipo: boolean
 ---
 ```
 
@@ -178,7 +178,7 @@ La implementación predeterminada está oculta hasta que un usuario la enfoca al
 
 Estos componentes son responsables de la disposición de los componentes de Starlight y de la gestión de las vistas en diferentes puntos de rotura.
 Reemplazar estos componentes viene con una complejidad significativa.
-Cuando sea posible, prefiere reemplazar un componente de nivel inferior.
+Cuando sea posible, es preferible reemplazar un componente de nivel inferior.
 
 #### `PageFrame`
 
@@ -249,7 +249,7 @@ Componente renderizado en el encabezado del sitio que permite a los usuarios cam
 
 ---
 
-### Global Sidebar
+### Barra lateral global
 
 La barra lateral global de Starlight incluye la navegación principal del sitio.
 En los viewports estrechos esto está oculto detrás de un menú desplegable.
