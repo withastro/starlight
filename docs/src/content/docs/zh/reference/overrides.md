@@ -8,7 +8,7 @@ tableOfContents:
 你可以通过在 Starlight 的 [`components`](/zh/reference/configuration/#components) 配置选项中提供替代组件的路径来替换掉 (即重写) Starlight 的内置组件。
 本页面列出了所有可被重写的组件和它们默认实现的 GitHub 链接。
 
-在 [重写组件指南](/zh/guides/overriding-components/) 中了解更多。
+在[重写组件指南](/zh/guides/overriding-components/)中了解更多。
 
 ## 组件参数
 
