@@ -1,6 +1,6 @@
 ---
 title: 重写参考
-description: Starlight 支持重写的组件以及组件的概述。
+description: Starlight 支持重写的组件以及组件参数的概述。
 tableOfContents:
   maxHeadingLevel: 4
 ---
