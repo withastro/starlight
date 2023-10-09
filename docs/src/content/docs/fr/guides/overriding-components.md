@@ -66,7 +66,7 @@ L'exemple ci-dessous montre un composant personnalisé qui affiche un lien de co
 ---
 // src/components/EmailLink.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/SocialIcons.astro';
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Me contacter par courriel</a>
@@ -114,7 +114,7 @@ Dans l'exemple suivant, un composant redéfinissant le composant [`Footer`](/fr/
 ---
 // src/components/ConditionalFooter.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/Footer.astro';
+import Default from '@astrojs/starlight/components/Footer.astro';
 
 const isHomepage = Astro.props.slug === '';
 ---
