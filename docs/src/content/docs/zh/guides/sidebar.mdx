@@ -314,6 +314,50 @@ starlight({
 	]}
 />
 
+## 自定义 HTML 属性
+
+可以通过在链接对象里添加 `attrs` 属性来自定义链接元素的 HTML 属性。
+
+在下面的例子中，通过 `attrs` 添加了一个 `target="_blank"` 属性，使得链接在新标签页中打开，并应用了一个自定义的 `style` 属性使链接标签变为斜体：
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// 一个指向 Astro 文档的在新标签页打开的外部链接。
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+以上配置将生成以下侧边栏：
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## 国际化
 
 使用链接和分组条目上的 `translations` 属性为每种支持的语言翻译链接或分组标签。
@@ -348,7 +392,7 @@ starlight({
 });
 ```
 
-浏览简体中文文档将生成以下侧边栏:
+浏览简体中文文档将生成以下侧边栏：
 
 <SidebarPreview
 	config={[
