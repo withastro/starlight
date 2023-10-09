@@ -185,6 +185,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -305,7 +306,7 @@ starlight({
 
 ### `social`
 
-**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
 
@@ -423,3 +424,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**类型：** `string`  
+**默认值：** `'|'`
+
+设置在页面的 `<title>` 标签里页面标题和网站标题之间的分隔符，它会显示在浏览器标签上。
+
+默认情况下，每个页面的 `<title>` 都是 `页面标题 | 网站标题`。
+举例，本页面的标题是“配置参考”，本站点的标题是“Starlight”，所以本页面的 `<title>` 是“配置参考 | Starlight”。
+
+### `components`
+
+**类型：** `Record<string, string>`
+
+提供组件的路径来覆盖 Starlight 的默认实现。
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+要查阅所有可覆盖的组件，请参阅 [组件参考](/zh/reference/components/)。
