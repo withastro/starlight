@@ -2,7 +2,7 @@
 title: Sobreescribiendo Componentes
 description: Aprende como sobreescribir los componentes integrados de Starlight para agregar elementos personalizados a la interfaz de tu sitio de documentación.
 sidebar:
-  badge: New
+  badge: Nuevo
 ---
 
 La UI por defecto de Starlight y las opciones de configuración están diseñadas para ser flexibles y funcionar para una variedad de contenidos. Gran parte de la apariencia predeterminada de Starlight se puede personalizar con [CSS](/es/guides/css-and-tailwind/) y [opciones de configuración](/es/guides/customization/).
@@ -130,4 +130,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-Aprende más sobre el renderizado condicional en la [Guía de Sintaxis de Astro](https://docs.astro.build/es/core-concepts/astro-syntax/#dynamic-html).
+Aprende más sobre el renderizado condicional en la [Guía de Sintaxis de Astro](https://docs.astro.build/es/core-concepts/astro-syntax/#html-dinamico).
