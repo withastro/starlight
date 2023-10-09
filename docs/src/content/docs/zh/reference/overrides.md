@@ -77,7 +77,7 @@ Starlight 会将以下参数传递给你的自定义组件。
 #### `entry`
 
 当前页面所对应的 Astro 内容集合条目。
-在 `entry.data` 中包含当前页面的 frontmatter 值。
+在 `entry.data` 中包含当前页面的 frontmatter 内容。
 
 ```ts
 entry: {
