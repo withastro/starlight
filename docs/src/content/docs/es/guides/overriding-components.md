@@ -66,7 +66,7 @@ El ejemplo a continuación muestra un componente personalizado que renderiza un 
 ---
 // src/components/EmailLink.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/SocialIcons.astro';
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">Escríbeme</a>
@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Aprende más sobre todas las props disponibles en la [Referencia de Sobreescripciones](/es/reference/overrides/#prop-types).
+Aprende más sobre todas las props disponibles en la [Referencia de Sobreescripciones](/es/reference/overrides/#props-de-componentes).
 
 ### Solo sobreescribe en páginas específicas
 
@@ -114,7 +114,7 @@ En el siguiente ejemplo, un componente que sobreescribe el [`Footer`](/es/refere
 ---
 // src/components/ConditionalFooter.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/Footer.astro';
+import Default from '@astrojs/starlight/components/Footer.astro';
 
 const isHomepage = Astro.props.slug === '';
 ---
