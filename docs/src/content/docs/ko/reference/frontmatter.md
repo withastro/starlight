@@ -138,9 +138,6 @@ interface HeroConfig {
 
 이 페이지 상단에 공지 배너를 표시합니다.
 
-The `content` value can include HTML for links or other content.
-For example, this page displays a banner including a link to `example.com`.
-
 `content` 값에는 링크나 다른 콘텐츠에 대한 HTML이 포함될 수 있습니다.
 예를 들어, 이 페이지에서는 `example.com`으로 이동하는 링크가 포함된 배너가 표시됩니다.
 
