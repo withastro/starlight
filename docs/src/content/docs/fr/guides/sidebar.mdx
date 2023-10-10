@@ -1,8 +1,6 @@
 ---
 title: Barre latérale de navigation
 description: Apprendre à configurer et personnaliser les liens de la barre latérale de navigation de votre site Starlight.
-sidebar:
-  badge: Nouveau
 ---
 
 import FileTree from '../../../../components/file-tree.astro';
@@ -317,6 +315,50 @@ La configuration ci-dessus génère la barre latérale suivante :
 					label: 'Composants',
 					link: '/fr/guides/components/',
 					badge: { text: 'Expérimental', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## Attributs HTML personnalisés
+
+Les liens peuvent aussi inclure une propriété `attrs` pour ajouter des attributs HTML personnalisés à l'élément du lien.
+
+Dans l'exemple suivant, `attrs` est utilisé pour ajouter un attribut `target="_blank"`, afin que le lien s'ouvre dans un nouvel onglet, et pour appliquer un attribut `style` personnalisé pour mettre en italique l'étiquette du lien :
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// Un lien externe vers la doc de Astro s'ouvrant dans un nouvel onglet.
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
 				},
 			],
 		},
