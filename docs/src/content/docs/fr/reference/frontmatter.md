@@ -224,9 +224,21 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**type:** [`SidebarConfig`](#sidebarconfig)
 
 Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -297,5 +309,21 @@ sidebar:
   badge:
     text: Expérimental
     variant: caution
+---
+```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+Attributs HTML à ajouter au lien de la page dans la barre latérale lorsqu'il est affiché dans un groupe de liens généré automatiquement.
+
+```md
+---
+title: Page s'ouvrant dans un nouvel onglet
+sidebar:
+  # Ouvre la page dans un nouvel onglet
+  attrs:
+    target: _blank
 ---
 ```
