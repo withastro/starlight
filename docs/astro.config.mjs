@@ -9,7 +9,7 @@ export const locales = {
 	fr: { label: 'Français', lang: 'fr' },
 	it: { label: 'Italiano', lang: 'it' },
 	id: { label: 'Bahasa Indonesia', lang: 'id' },
-	zh: { label: '简体中文', lang: 'zh' },
+	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
 	ko: { label: '한국어', lang: 'ko' },
 };
