@@ -130,4 +130,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-了解更多关于条件渲染的内容，请参阅 [Astro 模板语法指南](https://docs.astro.build/zh-cn/core-concepts/astro-syntax/#%E5%8A%A8%E6%80%81-html)。
+了解更多关于条件渲染的内容，请参阅 [Astro 模板语法指南](https://docs.astro.build/zh-cn/core-concepts/astro-syntax/#动态-html)。

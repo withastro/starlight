@@ -89,7 +89,7 @@ entry: {
 }
 ```
 
-在 [Astro 的集合条目类型](https://docs.astro.build/zh-cn/reference/api-reference/#%E9%9B%86%E5%90%88%E6%9D%A1%E7%9B%AE%E7%B1%BB%E5%9E%8B)参考中了解更多关于此对象的信息。
+在 [Astro 的集合条目类型](https://docs.astro.build/zh-cn/reference/api-reference/#集合条目类型)参考中了解更多关于此对象的信息。
 
 #### `sidebar`
 
@@ -141,7 +141,7 @@ entry: {
 ### 头部
 
 这些组件在每个页面的 `<head>` 元素内渲染。
-它们应只包含[允许在 `<head>` 中使用的元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/head#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5)。
+它们应只包含[允许在 `<head>` 中使用的元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/head#相关链接)。
 
 #### `Head`
 
@@ -162,13 +162,13 @@ entry: {
 
 ---
 
-### 可访问性
+### 无障碍
 
 #### `SkipLink`
 
 **默认组件：** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
 
-在 `<body>` 内渲染的第一个元素，它链接到主页面内容以实现可访问性。
+在 `<body>` 内渲染的第一个元素，它链接到主页面内容以实现无障碍访问。
 默认实现默认为隐藏状态，只有在用户使用键盘通过 tab 键聚焦到它时才会显示。
 
 ---
@@ -176,7 +176,7 @@ entry: {
 ### 布局
 
 这些组件负责在不同的断点 (breakpoints) 上布局 Starlight 的组件、管理视图。
-重载这些组件会有很大的复杂性。
+重写这些组件会有很大的复杂性。
 如果可能，请优先重写较低级别的组件。
 
 #### `PageFrame`
@@ -281,8 +281,6 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 
 在页面内容之前渲染的包含目录的组件。
 默认实现渲染了 [`<TableOfContents />`](#tableofcontents) 和 [`<MobileTableOfContents />`](#mobiletableofcontents)。
-Component rendered before the main page’s content to display a table of contents.
-The default implementation renders [`<TableOfContents />`](#tableofcontents) and [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
 
