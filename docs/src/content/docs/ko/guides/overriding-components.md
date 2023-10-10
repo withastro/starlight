@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-[재정의 참조](/ko/reference/overrides/#prop-types)에서 사용 가능한 모든 속성에 대해 자세히 알아보세요.
+[재정의 참조](/ko/reference/overrides/#컴포넌트-속성)에서 사용 가능한 모든 속성에 대해 자세히 알아보세요.
 
 ### 특정 페이지 재정의
 
