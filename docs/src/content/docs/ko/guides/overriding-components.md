@@ -66,7 +66,7 @@ Starlight의 기본 UI 컴포넌트를 사용하여 나만의 컴포넌트를 �
 ---
 // src/components/EmailLink.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/SocialIcons.astro';
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">메일 보내기</a>
@@ -114,7 +114,7 @@ const { title } = Astro.props.entry.data;
 ---
 // src/components/ConditionalFooter.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/Footer.astro';
+import Default from '@astrojs/starlight/components/Footer.astro';
 
 const isHomepage = Astro.props.slug === '';
 ---
