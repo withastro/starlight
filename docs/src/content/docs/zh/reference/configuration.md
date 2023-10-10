@@ -449,4 +449,4 @@ starlight({
 });
 ```
 
-要查阅所有可覆盖的组件，请参阅 [组件参考](/zh/reference/components/)。
+要查阅所有可覆盖的组件，请参阅[组件参考](/zh/reference/overrides/)。
