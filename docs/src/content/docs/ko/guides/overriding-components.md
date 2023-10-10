@@ -108,7 +108,7 @@ const { title } = Astro.props.entry.data;
 
 컴포넌트 재정의는 모든 페이지에 적용됩니다. 하지만, 사용자 정의 UI, Starlight의 기본 UI, 또는 완전히 다른 무언가가 나타나는 시기를 결정하기 위해 `Astro.props`의 값을 사용하여 조건부 렌더링이 가능합니다.
 
-다음 예시에서 Starlight의 [`Footer`](/ko/reference/overrides/#footer-1)를 재정의하는 컴포넌트는 "Starlight 🌟 를 사용하여 구축"을 홈페이지에만 표시하고, 다른 모든 페이지에는 기본 바닥글만 표시합니다.
+다음 예시에서 Starlight의 [`Footer`](/ko/reference/overrides/#footer)를 재정의하는 컴포넌트는 "Starlight 🌟 를 사용하여 구축"을 홈페이지에만 표시하고, 다른 모든 페이지에는 기본 바닥글만 표시합니다.
 
 ```astro
 ---
