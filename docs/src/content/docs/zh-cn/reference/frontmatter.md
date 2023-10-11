@@ -224,9 +224,21 @@ pagefind: false
 
 ### `sidebar`
 
-**类型：** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**类型：** [`SidebarConfig`](#sidebarconfig)
 
-在使用自动生成的链接组时，控制如何在[侧边栏](/zh/reference/configuration/#sidebar)中显示此页面。
+在使用自动生成的链接分组时，控制如何在[侧边栏](/zh/reference/configuration/#sidebar)中显示此页面。
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -297,5 +309,21 @@ sidebar:
   badge:
     text: 实验性
     variant: caution
+---
+```
+
+#### `attrs`
+
+**类型：** `Record<string, string | number | boolean | undefined>`
+
+给自动生成的侧边栏分组的链接添加的 HTML 属性。
+
+```md
+---
+title: 新标签页中打开页面
+sidebar:
+  # 在新标签页中打开页面
+  attrs:
+    target: _blank
 ---
 ```
