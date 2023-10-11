@@ -108,7 +108,7 @@ Pour en savoir plus sur les props disponibles, consultez la [référence des red
 
 Les redéfinitions de composants s'appliquent à toutes les pages. Cependant, vous pouvez les utiliser conditionnellement grâce aux valeurs de `Astro.props` pour déterminer quand afficher votre interface utilisateur personnalisée, quand afficher l'interface utilisateur par défaut de Starlight, ou même quand afficher quelque chose de complètement différent.
 
-Dans l'exemple suivant, un composant redéfinissant le composant [`Footer`](/fr/reference/overrides/#footer-1) de Starlight affiche "Construit avec Starlight 🌟" sur la page d'accueil uniquement, et affiche sinon le pied de page par défaut sur toutes les autres pages :
+Dans l'exemple suivant, un composant redéfinissant le composant [`Footer`](/fr/reference/overrides/#footer) de Starlight affiche "Construit avec Starlight 🌟" sur la page d'accueil uniquement, et affiche sinon le pied de page par défaut sur toutes les autres pages :
 
 ```astro
 ---
