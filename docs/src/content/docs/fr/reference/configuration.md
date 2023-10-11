@@ -230,8 +230,8 @@ export default defineConfig({
         en: {
           label: 'English',
         },
-        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh/`
-        zh: {
+        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh-cn/`
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
