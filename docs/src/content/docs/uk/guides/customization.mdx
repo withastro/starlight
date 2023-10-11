@@ -1,0 +1,427 @@
+---
+title: Налаштування Starlight
+description: Дізнайтеся, як зробити свій сайт Starlight власним за допомогою свого логотипу, спеціальних шрифтів, дизайну цільової сторінки тощо.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import FileTree from '../../../components/file-tree.astro';
+
+Starlight забезпечує розумний стиль і функції за замовчуванням, тож ви можете швидко розпочати роботу без необхідності налаштування.
+Якщо ви хочете почати налаштовувати зовнішній вигляд свого сайту Starlight, цей посібник допоможе вам.
+
+## Додайте свій логотип
+
+Додавання спеціального логотипу до заголовка сайту – це швидкий спосіб додати свій індивідуальний бренд на сайт Starlight.
+
+1. Додайте файл із зображенням вашого логотипу до каталогу `src/assets/`:
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **my-logo.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+2. Додайте шлях до свого логотипу як параметр Starlight [`logo.src`](/reference/configuration/#logo) у `astro.config.mjs`:
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Docs With My Logo',
+   			logo: {
+   				src: './src/assets/my-logo.svg',
+   			},
+   		}),
+   	],
+   });
+   ```
+
+За замовчуванням логотип відображатиметься поруч із `назвою` вашого сайту.
+Якщо ваше зображення логотипу вже містить назву сайту, ви можете візуально приховати текст заголовка, встановивши опцію `replacesTitle`.
+Текст `title` все одно буде включено для програм зчитування з екрана, щоб заголовок залишався доступним.
+
+```js
+starlight({
+  title: 'Docs With My Logo',
+  logo: {
+    src: './src/assets/my-logo.svg',
+    replacesTitle: true,
+  },
+}),
+```
+
+### Світлий і темний варіанти логотипу
+
+Ви можете відображати різні версії вашого логотипу в світлому та темному режимах.
+
+1. Додайте файл зображення для кожного варіанту в `src/assets/`:
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **light-logo.svg**
+       - **dark-logo.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+2. Додайте шлях до ваших варіантів логотипу як параметри `light` і `dark` замість `src` в `astro.config.mjs`:
+
+   ```js
+   starlight({
+     title: 'Docs With My Logo',
+     logo: {
+       light: './src/assets/light-logo.svg',
+       dark: './src/assets/dark-logo.svg',
+     },
+   }),
+   ```
+
+## Увімкнути карту сайту
+
+Starlight має вбудовану підтримку для створення карти сайту. Увімкніть створення карти сайту, встановивши свою URL-адресу як `site` в `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site with sitemap' })],
+});
+```
+
+## Макет сторінки
+
+За замовчуванням сторінки Starlight використовують макет із глобальною боковою панеллю навігації та змістом, який показує поточні заголовки сторінок.
+
+Ви можете застосувати ширший макет сторінки без бічних панелей, встановивши [`template: splash`](/reference/frontmatter/#template) у передній частині сторінки.
+Це особливо добре працює для цільових сторінок, і ви можете побачити його в дії на [домашній сторінці цього сайту](/).
+
+```md
+---
+# src/content/docs/index.md
+
+title: My Landing Page
+template: splash
+---
+```
+
+## Зміст
+
+Starlight відображає зміст на кожній сторінці, щоб читачам було легше переходити до потрібного заголовка.
+Ви можете налаштувати — або навіть вимкнути — зміст глобально в інтеграції Starlight або сторінку за сторінкою у frontmatter.
+
+За замовчуванням заголовки `<h2>` і `<h3>` включені до змісту. Змініть, які рівні заголовків включити на весь сайт, використовуючи параметри `minHeadingLevel` і `maxHeadingLevel` у вашому [глобальному `tableOfContents`](/reference/configuration/#tableofcontents). Перевизначте ці значення за замовчуванням на окремій сторінці, додавши відповідні властивості [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents):
+
+<Tabs>
+  <TabItem label="Frontmatter">
+
+```md
+---
+# src/content/docs/example.md
+title: Page with only H2s in the table of contents
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+  </TabItem>
+  <TabItem label="Global config">
+
+```js
+// astro.config.mjs
+
+defineConfig({
+	integrations: [
+		starlight({
+			title: '',
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
+		}),
+	],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+Повністю вимкніть зміст, встановивши для параметра `tableOfContents` значення `false`:
+
+<Tabs>
+  <TabItem label="Frontmatter">
+
+```md
+---
+# src/content/docs/example.md
+title: Page without a table of contents
+tableOfContents: false
+---
+```
+
+  </TabItem>
+  <TabItem label="Global config">
+
+```js
+// astro.config.mjs
+
+defineConfig({
+	integrations: [
+		starlight({
+			title: 'Docs with table of contents disabled globally',
+			tableOfContents: false,
+		}),
+	],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+## Соціальні посилання
+
+Starlight має вбудовану підтримку для додавання посилань на ваші облікові записи соціальних мереж до заголовка сайту за допомогою параметра [`social`](/reference/configuration/#social) в інтеграції Starlight.
+
+Наразі доступні посилання на Bitbucket, Codeberg, CodePen, Discord, Email, Facebook, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, канал RSS, Stack Overflow, Telegram, Threads, Twitch, Twitter, X і Youtube підтримуються.
+Повідомте нас на GitHub або Discord, якщо вам потрібна підтримка для іншого сервісу!
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Docs With Social Links',
+			social: {
+				discord: 'https://astro.build/chat',
+				github: 'https://github.com/withastro/starlight',
+			},
+		}),
+	],
+});
+```
+
+## Редагувати посилання
+
+Starlight може відображати посилання «Редагувати сторінку» у нижньому колонтитулі кожної сторінки.
+Це полегшує читачеві пошук файлу для редагування, щоб покращити ваші документи.
+Зокрема, для проектів з відкритим кодом це може допомогти заохотити внески вашої спільноти.
+
+Щоб увімкнути посилання для редагування, установіть [`editLink.baseUrl`](/reference/configuration/#editlink) на URL-адресу, яка використовується для редагування вашого сховища в конфігурації інтеграції Starlight.
+Значення `editLink.baseUrl` буде додано до шляху до поточної сторінки для формування повного посилання редагування.
+
+Загальні шаблони включають:
+
+- GitHub: `https://github.com/USER_NAME/REPO_NAME/edit/BRANCH_NAME/`
+- GitLab: `https://gitlab.com/USER_NAME/REPO_NAME/-/edit/BRANCH_NAME/`
+
+Якщо ваш проект Starlight не знаходиться в корені вашого сховища, додайте шлях до проекту в кінці основної URL-адреси.
+
+У цьому прикладі показано посилання для редагування, налаштоване для документів Starlight, які знаходяться в підкаталозі `docs/` у гілці `main` репозиторію `withastro/starlight` на GitHub:
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Docs With Edit Links',
+			editLink: {
+				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+			},
+		}),
+	],
+});
+```
+
+## Спеціальна сторінка 404
+
+Сайти Starlight за умовчанням відображають просту сторінку 404.
+Ви можете налаштувати це, додавши файл `404.md` (або `404.mdx`) до вашого каталогу `src/content/docs/`:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **404.md**
+      - index.md
+- astro.config.mjs
+
+</FileTree>
+
+Ви можете використовувати всі методи компонування та налаштування Starlight на своїй сторінці 404. Наприклад, стандартна сторінка 404 використовує компонент [`splash` template](#page-layout) і [`hero`](/reference/frontmatter/#hero) у frontmatter:
+
+```md
+---
+title: '404'
+template: splash
+editUrl: false
+hero:
+  title: '404'
+  tagline: Page not found. Check the URL or try using the search bar.
+---
+```
+
+## Спеціальні шрифти
+
+За замовчуванням Starlight використовує шрифти без засічок, доступні на локальному пристрої користувача для всього тексту.
+Це забезпечує швидке завантаження документації зі шрифтом, який знайомий кожному користувачеві, без додаткової пропускної здатності для завантаження великих файлів шрифтів.
+
+Якщо вам потрібно додати спеціальний шрифт на свій сайт Starlight, ви можете налаштувати шрифти для використання в спеціальних файлах CSS або з будь-якою іншою [технікою стилю Astro](https://docs.astro.build/en/guides/styling/) .
+
+### Налаштувати шрифти
+
+Якщо у вас уже є файли шрифтів, дотримуйтеся [локального посібника з налаштування](#set-up-local-font-files).
+Щоб використовувати шрифти Google, дотримуйтеся [посібника з налаштування джерела шрифтів](#set-up-a-fontsource-font).
+
+#### Налаштувати локальні файли шрифтів
+
+1. Додайте ваші файли шрифтів до каталогу `src/fonts/` і створіть порожній файл `font-face.css`:
+
+   <FileTree>
+
+   - src/
+     - content/
+     - fonts/
+       - **CustomFont.woff2**
+       - **font-face.css**
+   - astro.config.mjs
+
+   </FileTree>
+
+2. Додайте [`@font-face` декларацію](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) для кожного зі своїх шрифтів у `src/fonts/ font-face.css`.
+    Використовуйте відносний шлях до файлу шрифту у функції `url()`.
+
+   ```css
+   /* src/fonts/font-face.css */
+
+   @font-face {
+   	font-family: 'Custom Font';
+   	/* Use a relative path to the local font file in `url()`. */
+   	src: url('./CustomFont.woff2') format('woff2');
+   	font-weight: normal;
+   	font-style: normal;
+   	font-display: swap;
+   }
+   ```
+
+3. Додайте шлях до вашого файлу `font-face.css` до масиву `customCss` Starlight в `astro.config.mjs`:
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Docs With a Custom Typeface',
+   			customCss: [
+   				// Relative path to your @font-face CSS file.
+   				'./src/fonts/font-face.css',
+   			],
+   		}),
+   	],
+   });
+   ```
+
+#### Налаштувати шрифт Fontsource
+
+Проект [Fontsource](https://fontsource.org/) спрощує використання Google Fonts та інших шрифтів із відкритим кодом.
+Він надає модулі npm, які можна встановити для шрифтів, які ви хочете використовувати, і містить готові файли CSS для додавання до вашого проекту.
+
+1. Знайдіть потрібний шрифт у [каталозі Fontsource](https://fontsource.org/).
+     У цьому прикладі використовуватиметься [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
+
+2. Встановіть пакет для вибраного шрифту.
+     Ви можете знайти назву пакета, натиснувши «Встановити» на сторінці шрифтів Fontsource.
+
+         <Tabs>
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+        <TabItem label="pnpm">
+
+    ```sh
+    pnpm install @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+        <TabItem label="Yarn">
+
+    ```sh
+    yarn add @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+      </Tabs>
+
+3.  Додайте файли CSS Fontsource до масиву `customCss` Starlight у `astro.config.mjs`:
+
+    ```js
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Docs With a Custom Typeface',
+    			customCss: [
+    				// Fontsource files for to regular and semi-bold font weights.
+    				'@fontsource/ibm-plex-serif/400.css',
+    				'@fontsource/ibm-plex-serif/600.css',
+    			],
+    		}),
+    	],
+    });
+    ```
+
+    Fontsource надсилає кілька файлів CSS для кожного шрифту. Перегляньте [документацію Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) про включення різних щільностей і стилів, щоб зрозуміти, які використовувати.
+
+### Використовуйте шрифти
+
+Щоб застосувати шрифт, який ви налаштували, до свого сайту, використовуйте назву вибраного шрифту в [спеціальному файлі CSS](/guides/css-and-tailwind/#custom-css-styles).
+Наприклад, щоб скрізь замінити типовий шрифт Starlight, установіть спеціальну властивість `--sl-font`:
+
+```css
+/* src/styles/custom.css */
+
+:root {
+	--sl-font: 'IBM Plex Serif', serif;
+}
+```
+
+Ви також можете написати більш націлений CSS, якщо хочете застосовувати свій шрифт більш вибірково.
+Наприклад, щоб встановити шрифт лише для основного вмісту, але не для бічних панелей:
+
+```css
+/* src/styles/custom.css */
+
+main {
+	font-family: 'IBM Plex Serif', serif;
+}
+```
+
+Дотримуйтеся [користувацьких інструкцій CSS](/guides/css-and-tailwind/#custom-css-styles), щоб додати свої стилі на свій сайт.

@@ -1,0 +1,136 @@
+---
+title: Встановлення вручну
+description: Дізнайтеся, як налаштувати Starlight вручну, щоб додати його до існуючого проекту Astro.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Найшвидший спосіб створити новий сайт на Starlight - використовувати `create astro`,
+як показано у [введенні](/ua/getting-started/#creating-a-new-project).
+Якщо ви хочете додати Starlight до існуючого проекту Astro, цей посібник розповість, як це зробити.
+
+## Налаштування Starlight
+
+Для цього керівництва вам знадобиться існуючий проект на Astro.
+
+### Інтеграція Starlight
+
+Starlight є [інтеграцією Astro](https://docs.astro.build/ru/guides/integrations-guide/).
+Додайте його на ваш сайт, запустивши команду `astro add` у кореневій директорії вашого проекту:
+
+<Tabs>
+     <TabItem label="npm">
+         ```sh
+         npx astro add starlight
+         ````
+
+     </TabItem>
+     <TabItem label="pnpm">
+         ```sh
+         pnpm astro add starlight
+         ````
+     </TabItem>
+     <TabItem label="Yarn">
+         ```sh
+         yarn astro add starlight
+         ````
+     </TabItem>
+
+</Tabs>
+
+Це встановить необхідні залежності і додасть Starlight масив `integrations` в конфігураційному файлі Astro.
+
+### Налаштування інтеграції
+
+Інтеграція Starlight налаштовується у файлі `astro.config.mjs`.
+
+Додати `title`, щоб почати:
+
+``js {7-9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+integrations: [
+starlight({
+title: 'Мій чудовий сайт із документацією.',
+}),
+],
+});
+````
+
+Знайдіть усі доступні параметри в [довіднику конфігурації Starlight](/uk/reference/configuration/).
+
+### Налаштування колекцій контенту
+
+Starlight створено на основі [колекцій контенту](https://docs.astro.build/ru/guides/content-collections/) Astro,
+які настроюються у файлі `src/content/config.ts`.
+
+Створіть або оновіть файл конфігурації контенту, додавши колекцію `docs`, яка використовує схему `docsSchema` від Starlight:
+
+```js ins={3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+docs: defineCollection({ schema: docsSchema() }),
+};
+````
+
+### Додавання контенту
+
+Starlight тепер налаштований, і настав час додати контент!
+
+Створіть директорію `src/content/docs/` та почніть з додавання файлу `index.md`.
+Це буде головною сторінкою вашого нового сайту:
+
+```md
+---
+# src/content/docs/index.md
+title: Моя документація
+description: Дізнайтеся більше про мій проект на цьому сайті з документацією, створеною за допомогою Starlight.
+---
+
+Ласкаво просимо до мого проекту!
+````
+
+Starlight використовує роутинг на основі файлів, що означає, що кожен файл Markdown, MDX або Markdoc в `src/content/docs/`
+стає сторінкою на вашому сайті. Метадані на початку файлу (наприклад, поля `title` та `description` у наведеному вище прикладі)
+можуть змінити відображення сторінок.
+
+Перегляньте всі доступні параметри в [довіднику метаданих](/uk/reference/frontmatter/).
+
+## Поради для існуючих сайтів
+
+Якщо ви вже маєте існуючий проект Astro, ви можете використовувати Starlight, щоб швидко додати розділ з документацією на ваш сайт.
+
+### Starlight на вкладеному шляху
+
+Щоб додати всі сторінки Starlight були доступні нестандартним шляхом, помістіть весь контент всередину піддиректорії в `src/content/docs/`.
+
+Наприклад, якщо всі сторінки Starlight повинні починатися з `/guides/`, додайте свій контент до директорії `src/content/docs/guides/`:
+
+import FileTree from '../../../components/file-tree.astro';
+
+<FileTree>
+
+- src/
+   - content/
+     - docs/
+       - **guides/**
+         - guide.md
+         - index.md
+   - pages/
+- astro.config.mjs
+
+</FileTree>
+
+У майбутньому ми плануємо покращити такий варіант використання шляхів,
+щоб уникнути необхідності в зайвому вкладеному каталозі в `src/content/docs/`.
+
+### Використання Starlight з SSR
+
+На даний момент Starlight не підтримує [розгортання з SSR] (https://docs.astro.build/ru/guides/server-side-rendering/)
+через серверні адаптери Astro. Ми сподіваємося, що зможемо реалізувати це у найближчому майбутньому.
