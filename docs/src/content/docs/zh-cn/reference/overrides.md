@@ -5,10 +5,10 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-你可以通过在 Starlight 的 [`components`](/zh/reference/configuration/#components) 配置选项中提供替代组件的路径来替换掉 (即重写) Starlight 的内置组件。
+你可以通过在 Starlight 的 [`components`](/zh-cn/reference/configuration/#components) 配置选项中提供替代组件的路径来替换掉 (即重写) Starlight 的内置组件。
 本页面列出了所有可被重写的组件和它们默认实现的 GitHub 链接。
 
-在[重写组件指南](/zh/guides/overriding-components/)中了解更多。
+在[重写组件指南](/zh-cn/guides/overriding-components/)中了解更多。
 
 ## 组件参数
 
@@ -41,7 +41,7 @@ Starlight 会将以下参数传递给你的自定义组件。
 
 **类型：** `string`
 
-当前页面的 BCP-47 语言标签，例如 `en`、`zh` 或 `pt-BR`。
+当前页面的 BCP-47 语言标签，例如 `en`、`zh-CN` 或 `pt-BR`。
 
 #### `locale`
 
@@ -151,7 +151,7 @@ entry: {
 包含 `<title>` 和 `<meta charset="utf-8">` 等重要标签。
 
 重写此组件应作为最后手段。
-如果可能，请优先使用 Starlight 配置中的 [`head`](/zh/reference/configuration/#head) 选项。
+如果可能，请优先使用 Starlight 配置中的 [`head`](/zh-cn/reference/configuration/#head) 选项。
 
 #### `ThemeProvider`
 
@@ -232,7 +232,7 @@ entry: {
 **默认组件：** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 在导航栏中渲染的组件，用于渲染社交图标链接。
-默认实现使用 Starlight 配置中的 [`social`](/zh/reference/configuration/#social) 选项来渲染图标和链接。
+默认实现使用 Starlight 配置中的 [`social`](/zh-cn/reference/configuration/#social) 选项来渲染图标和链接。
 
 #### `ThemeSelect`
 
@@ -305,7 +305,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 **默认组件：** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 横幅 (Banner) 组件在每个页面的顶部渲染。
-默认实现使用页面的 [`banner`](/zh/reference/frontmatter#banner) frontmatter 值来决定是否渲染。
+默认实现使用页面的 [`banner`](/zh-cn/reference/frontmatter#banner) frontmatter 值来决定是否渲染。
 
 #### `ContentPanel`
 
@@ -332,7 +332,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 
 **默认组件：** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-当设置了 frontmatter 中的 [`hero`](/zh/reference/frontmatter#hero) 时在页面顶部渲染的组件。
+当设置了 frontmatter 中的 [`hero`](/zh-cn/reference/frontmatter#hero) 时在页面顶部渲染的组件。
 默认实现显示了一个大标题、标语、动作链接 (call-to-action links) 和可选的图片。
 
 #### `MarkdownContent`

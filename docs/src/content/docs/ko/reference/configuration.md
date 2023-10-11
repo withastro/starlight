@@ -233,8 +233,8 @@ export default defineConfig({
           label: 'English',
           lang: 'en',
         },
-        // 중국어 간체 문서는 `src/content/docs/zh/`에 있습니다.
-        zh: {
+        // 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },

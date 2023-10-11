@@ -9,7 +9,7 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
 
 ## 配置 i18n
 
-1. 通过将 [`locales`](/reference/configuration/#locales) 和 [`defaultLocale`](/reference/configuration/#defaultlocale) 传递给 Starlight 集成，告诉 Starlight 你支持的语言：
+1. 通过将 [`locales`](/zh-cn/reference/configuration/#locales) 和 [`defaultLocale`](/zh-cn/reference/configuration/#defaultlocale) 传递给 Starlight 集成，告诉 Starlight 你支持的语言：
 
    ```js
    // astro.config.mjs
@@ -27,8 +27,8 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
    				en: {
    					label: 'English',
    				},
-   				// 简体中文文档在 `src/content/docs/zh/` 中。
-   				zh: {
+   				// 简体中文文档在 `src/content/docs/zh-cn/` 中。
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -54,7 +54,7 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -83,7 +83,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // lang 是 root 语言必须的
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -101,7 +101,7 @@ export default defineConfig({
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
