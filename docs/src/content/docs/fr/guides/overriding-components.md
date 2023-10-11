@@ -48,7 +48,7 @@ Redéfinir les composants par défaut de Starlight peut être utile lorsque :
        starlight({
          title: 'Ma documentation avec redéfinitions',
          components: {
-           // Redéfinit le composant par défaut `SocialLinks`.
+           // Redéfinit le composant par défaut `SocialIcons`.
            SocialIcons: './src/components/EmailLink.astro',
          },
        }),
@@ -60,7 +60,7 @@ Redéfinir les composants par défaut de Starlight peut être utile lorsque :
 
 Vous pouvez utiliser avec les composants par défaut de Starlight comme vous le feriez avec les vôtres : en les important et en les affichant dans vos propres composants personnalisés. Cela vous permet de conserver toute l'interface utilisateur de base de Starlight dans votre design, tout en ajoutant des éléments supplémentaires à côté.
 
-L'exemple ci-dessous montre un composant personnalisé qui affiche un lien de courriel suivi du composant `SocialLinks` par défaut :
+L'exemple ci-dessous montre un composant personnalisé qui affiche un lien de courriel suivi du composant `SocialIcons` par défaut :
 
 ```astro {4,8}
 ---
