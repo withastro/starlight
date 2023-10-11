@@ -48,7 +48,7 @@ Sobreescribir los componentes por defecto de Starlight puede ser útil cuando:
        starlight({
          title: 'My Docs with Overrides',
          components: {
-           // Sobreescribe el componente `SocialLinks` por defecto.
+           // Sobreescribe el componente `SocialIcons` por defecto.
            SocialIcons: './src/components/EmailLink.astro',
          },
        }),
@@ -60,7 +60,7 @@ Sobreescribir los componentes por defecto de Starlight puede ser útil cuando:
 
 Puedes construir con los componentes de UI por defecto de Starlight de la misma manera que lo harías con los tuyos: importándolos y renderizándolos en tus propios componentes personalizados. Esto te permite mantener toda la UI básica de Starlight dentro de tu diseño, mientras agregas UI adicional junto a ellos.
 
-El ejemplo a continuación muestra un componente personalizado que renderiza un enlace de correo electrónico junto con el componente `SocialLinks` por defecto:
+El ejemplo a continuación muestra un componente personalizado que renderiza un enlace de correo electrónico junto con el componente `SocialIcons` por defecto:
 
 ```astro {4,8}
 ---
