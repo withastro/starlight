@@ -13,6 +13,7 @@ i18n:
   - docs/src/content/docs/pt-br/**/*
   - docs/src/content/docs/ko/**/*
   - docs/src/content/docs/ru/**/*
+  - docs/src/content/docs/id/**/*
 
 '🌟 core':
   - packages/starlight/**
