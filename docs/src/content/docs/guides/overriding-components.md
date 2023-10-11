@@ -13,7 +13,7 @@ When you need more than what’s possible out of the box, Starlight supports bui
 
 Overriding Starlight’s default components can be useful when:
 
-- You want to change how a part of Starlight’s UI looks in a way not possible with [custom CSS](/css-and-tailwind/).
+- You want to change how a part of Starlight’s UI looks in a way not possible with [custom CSS](/guides/css-and-tailwind/).
 - You want to change how a part of Starlight’s UI behaves.
 - You want to add some additional UI alongside Starlight’s existing UI.
 
@@ -66,7 +66,7 @@ The example below shows a custom component that renders an e-mail link along wit
 ---
 // src/components/EmailLink.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/SocialIcons.astro';
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">E-mail Me</a>
@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Learn more about all the available props in the [Overrides Reference](/reference/overrides/#prop-types).
+Learn more about all the available props in the [Overrides Reference](/reference/overrides/#component-props).
 
 ### Only override on specific pages
 
@@ -114,7 +114,7 @@ In the following example, a component overriding Starlight's [`Footer`](/referen
 ---
 // src/components/ConditionalFooter.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/Footer.astro';
+import Default from '@astrojs/starlight/components/Footer.astro';
 
 const isHomepage = Astro.props.slug === '';
 ---
