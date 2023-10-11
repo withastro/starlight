@@ -208,7 +208,7 @@ interface BadgeConfig {
 
 ### `locales`
 
-**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**type:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [Configure internationalization (i18n)](/guides/i18n/) for your site by setting which `locales` are supported.
 
@@ -308,7 +308,9 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+import SocialLinksType from '../../../components/social-links-type.astro';
+
+**type:** <SocialLinksType />
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
