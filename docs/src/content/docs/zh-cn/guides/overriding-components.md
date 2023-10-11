@@ -76,7 +76,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 在自定义组件中渲染内置组件时：
 
 - 展开传入 `Astro.props`。这样可以确保它接收到渲染所需的所有数据。
-- 在默认组件内部添加一个 [`<slot />`](https://docs.astro.build/en/core-concepts/astro-components/#slots)。这样，如果组件传入了任何子元素，Astro 就知道在哪里渲染它们。
+- 在默认组件内部添加一个 [`<slot />`](https://docs.astro.build/zh-cn/core-concepts/astro-components/#插槽)。这样，如果组件传入了任何子元素，Astro 就知道在哪里渲染它们。
 
 ## 使用页面数据
 
