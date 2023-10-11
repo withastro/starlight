@@ -112,7 +112,7 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 
 ## Sumber Tambahan
 
-### _Tools_
+### Tools
 
 - [Website Carbon Calculator][wcc]
 - [GreenFrame](https://greenframe.io/)
