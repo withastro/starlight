@@ -31,7 +31,7 @@ Starlight поддерживает весь синтаксис [Markdown](https:
 
 ## Изображения
 
-Изображения в Starlight используют [встроенную оптимизацию ресурсов в Astro](https://docs.astro.build/en/guides/assets/).
+Изображения в Starlight используют [встроенную оптимизацию ресурсов в Astro](https://docs.astro.build/ru/guides/assets/).
 
 Markdown и MDX поддерживают синтаксис Markdown для отображения изображений,
 который включает альтернативный текст для экранных читателей и вспомогательных технологий.
@@ -134,12 +134,12 @@ npm create astro@latest -- --template starlight
 Вы можете указать свой заголовок вставки в квадратных скобках после типа вставки, например, `:::tip[Знали ли вы?]`.
 
 :::tip[Знали ли вы?]
-Astro позволяет создавать быстрые сайты с помощью ["архитектуры островов"](https://docs.astro.build/en/concepts/islands/)
+Astro позволяет создавать быстрые сайты с помощью ["архитектуры островов"](https://docs.astro.build/ru/concepts/islands/)
 :::
 
 ```md
 :::tip[Знали ли вы?]
-Astro позволяет создавать быстрые сайты с помощью ["архитектуры островов"](https://docs.astro.build/en/concepts/islands/)
+Astro позволяет создавать быстрые сайты с помощью ["архитектуры островов"](https://docs.astro.build/ru/concepts/islands/)
 :::
 ```
 
