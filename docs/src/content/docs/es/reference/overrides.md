@@ -5,11 +5,11 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a los componentes de reemplazo en la opción de configuración [`components`](/es/reference/configuration#components) de Starlight.
+Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a los componentes en la opción de configuración [`components`](/es/reference/configuration#components) de Starlight.
 
 Esta página enumera todos los componentes disponibles para reemplazar y enlaces a sus implementaciones predeterminadas en GitHub.
 
-Aprende más en la [Guía para Sobreescribir Componentes](/es/guides/overriding-components/).
+Aprende más en la [Guía para Personalizar Componentes](/es/guides/overriding-components/).
 
 ## Props de Componentes
 
@@ -120,7 +120,7 @@ Tabla de contenidos para esta página si está habilitada.
 
 **Tipo:** `{ depth: number; slug: string; text: string }[]`
 
-Arreglo de todos los encabezados Markdown extraídos de la página actual.
+Array de todos los encabezados Markdown extraídos de la página actual.
 Usa [`toc`](#toc) en su lugar si deseas construir una tabla de contenidos que respete las opciones de configuración de Starlight.
 
 #### `lastUpdated`
@@ -176,7 +176,7 @@ La implementación predeterminada está oculta hasta que un usuario la enfoca al
 
 ### Plantilla
 
-Estos componentes son responsables de la disposición de los componentes de Starlight y de la gestión de las vistas en diferentes puntos de rotura.
+Estos componentes son responsables de la ubicación de los componentes de Starlight y de la gestión de las vistas en diferentes tamaños de pantalla.
 Reemplazar estos componentes viene con una complejidad significativa.
 Cuando sea posible, es preferible reemplazar un componente de nivel inferior.
 
@@ -186,20 +186,20 @@ Cuando sea posible, es preferible reemplazar un componente de nivel inferior.
 
 El componente plantilla que envuelve la mayor parte del contenido de la página.
 La implementación predeterminada configura la plantilla header-sidebar-main e incluye slots nombrados `header` y `sidebar` con un slot predeterminado para el contenido principal.
-También renderiza [`<MobileMenuToggle />`](#mobilemenutoggle) para admitir la alternancia de la navegación de la barra lateral en pequeños (móviles) viewports.
+También renderiza [`<MobileMenuToggle />`](#mobilemenutoggle) para alternar el renderizado de la navegación de la barra lateral en pantallas estrechas (móviles).
 
 #### `MobileMenuToggle`
 
 **Componente por defecto:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
 
-Componente renderizado dentro de [`<PageFrame>`](#pageframe) que es responsable de alternar la navegación de la barra lateral en pequeños (móviles) viewports.
+Componente renderizado dentro de [`<PageFrame>`](#pageframe) que es responsable de alternar la navegación de la barra lateral en pantallas estrechas (móviles).
 
 #### `TwoColumnContent`
 
 **Componente por defecto:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
 
 Componente plantilla que envuelve la columna de contenido principal y la barra lateral derecha (tabla de contenidos).
-La implementación predeterminada maneja el cambio entre un diseño de una sola columna, pequeño viewport y un diseño de dos columnas, viewport más grande.
+La implementación predeterminada maneja el cambio entre un diseño de una sola columna, en pantallas estrechas y un diseño de dos columnas en pantallas más grande.
 
 ---
 
@@ -218,7 +218,7 @@ La implementación predeterminada muestra [`<SiteTitle />`](#sitetitle), [`<Sear
 
 **Componente por defecto:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
 
-Componente renderizado al comienzo del encabezado del sitio para renderizar el título del sitio.
+Componente renderizado al comienzo del encabezado para renderizar el título de la web.
 La implementación predeterminada incluye lógica para renderizar logotipos definidos en la configuración de Starlight.
 
 #### `Search`
@@ -252,14 +252,14 @@ Componente renderizado en el encabezado del sitio que permite a los usuarios cam
 ### Barra lateral global
 
 La barra lateral global de Starlight incluye la navegación principal del sitio.
-En los viewports estrechos esto está oculto detrás de un menú desplegable.
+En los pantallas estrechas esto está oculto detrás de un menú desplegable.
 
 #### `Sidebar`
 
 **Componente por defecto:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro)
 
 Componente renderizado antes del contenido de la página que contiene la navegación global.
-La implementación predeterminada muestra una barra lateral lo suficientemente ancha y dentro de un menú desplegable en pequeños (móviles) viewports.
+La implementación predeterminada muestra una barra lateral lo suficientemente ancha y dentro de un menú desplegable en pantallas estrechas (móviles).
 También renderiza [`<MobileMenuFooter />`](#mobilemenufooter) para mostrar elementos adicionales dentro del menú móvil.
 
 #### `MobileMenuFooter`
@@ -274,7 +274,7 @@ La implementación por defecto renderiza [`<ThemeSelect />`](#themeselect) y [`<
 ### Barra lateral de la página
 
 La barra lateral de la página de Starlight es responsable de mostrar una tabla de contenidos que describe los subtítulos de la página actual.
-En los viewports estrechos esto se colapsa en un menú desplegable fijado.
+En pantallas estrechas esto se colapsa en un menú desplegable fijado.
 
 #### `PageSidebar`
 
@@ -287,13 +287,13 @@ La implementación renderiza [`<TableOfContents />`](#tableofcontents) y [`<Mobi
 
 **Componente por defecto:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
 
-Componente que renderiza la tabla de contenidos de la página actual en viewports más anchos.
+Componente que renderiza la tabla de contenidos de la página actual en pantallas más anchas.
 
 #### `MobileTableOfContents`
 
 **Componente por defecto:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
 
-Componente que renderiza la tabla de contenidos de la página actual en viewports más pequeños (móviles).
+Componente que renderiza la tabla de contenidos de la página actual en viewports más estrechos (móviles).
 
 ---
 
@@ -318,7 +318,7 @@ Componente plantilla utilizado para envolver secciones de la columna de contenid
 
 **Componente por defecto:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)
 
-Componente que contiene el elemento `<h1>` para la página actual.
+Componente que contiene el elemento `<h1>` de la página actual.
 
 Las implementaciones deben asegurarse de establecer `id="_top"` en el elemento `<h1>` como en la implementación predeterminada.
 
