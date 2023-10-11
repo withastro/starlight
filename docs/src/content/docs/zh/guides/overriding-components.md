@@ -48,7 +48,7 @@ Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内
        starlight({
          title: 'My Docs with Overrides',
          components: {
-           // 重写默认的 `SocialLinks` 组件。
+           // 重写默认的 `SocialIcons` 组件。
            SocialIcons: './src/components/EmailLink.astro',
          },
        }),
@@ -60,7 +60,7 @@ Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内
 
 你可以像使用自己的组件一样使用 Starlight 的默认 UI 组件：导入并在你自己的自定义组件中渲染它们。这样你就可以在你的设计中保留 Starlight 的基本 UI，同时在它们旁边添加额外的 UI。
 
-下面的示例是一个自定义组件，它渲染了一个电子邮件链接以及默认的 `SocialLinks` 组件：
+下面的示例是一个自定义组件，它渲染了一个电子邮件链接以及默认的 `SocialIcons` 组件：
 
 ```astro {4,8}
 ---
@@ -108,7 +108,7 @@ const { title } = Astro.props.entry.data;
 
 组件重写在所有页面上生效。但是，你可以使用 `Astro.props` 中的值来条件性渲染，决定何时显示你的自定义 UI，何时显示 Starlight 的默认 UI，甚至何时显示完全不同的内容。
 
-在下面的示例中，一个重写 [`Footer`](/zh/reference/overrides/#footer-1) 的组件只在首页上显示“Built with Starlight 🌟”，在其他页面上显示默认的页脚：
+在下面的示例中，一个重写 [`Footer`](/zh/reference/overrides/#footer) 的组件只在首页上显示“Built with Starlight 🌟”，在其他页面上显示默认的页脚：
 
 ```astro
 ---
