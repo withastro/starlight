@@ -41,7 +41,7 @@ export default Object.fromEntries(
 		tr,
 		ar,
 		nb,
-		"zh-CN": zhCN,
+		zh,
 		ko,
 		sv,
 		ru,
