@@ -173,7 +173,7 @@ Pengguna Anda mungkin lebih produktif dan menemukan produk Anda lebih mudah digu
 > Blockquotes ditandai dengan tanda `>` di awal setiap barisnya.
 
 ```md
-> Ini blockquote, yang biasanya digunakan saat mengutip orang atau dokumen lain.
+> Ini adalah blockquote, yang biasanya digunakan saat mengutip orang lain atau dokumen lain.
 >
 > Blockquotes ditandai dengan tanda `>` di awal setiap barisnya.
 ```
