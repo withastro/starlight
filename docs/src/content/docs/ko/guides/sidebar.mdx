@@ -1,8 +1,6 @@
 ---
 title: 사이드바 탐색
 description: Starlight 사이트의 사이드바 탐색 링크를 설정하고 사용자 정의하는 방법을 알아보세요.
-sidebar:
-  badge: New
 ---
 
 import FileTree from '../../../../components/file-tree.astro';
@@ -310,6 +308,52 @@ starlight({
 					label: '컴포넌트',
 					link: '/ko/guides/components/',
 					badge: { text: '실험적 기능', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## 사용자 정의 HTML 속성
+
+링크에는 사용자 정의 HTML 속성을 추가하기 위한 `attrs` 속성이 포함될 수도 있습니다.
+
+다음 예에서는 `attrs`를 사용하여 링크가 새 탭에서 열리도록 `target="_blank"` 속성을 추가하고 사용자 정의 스타일 속성을 적용하여 링크 레이블을 기울임꼴로 표시합니다.
+
+다음 예에서는 링크가 새 탭에서 열리도록 `target="_blank` 속성을 추가하고, 사용자 정의 `style` 속성을 적용하여 링크 레이블을 기울임꼴로 표시하기 위해 `attrs`를 사용합니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			items: [
+				// 새 탭에서 열리는 Astro 문서에 대한 외부 링크입니다.
+				{
+					label: 'Astro 문서',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{
+					label: 'Astro 문서',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
 				},
 			],
 		},

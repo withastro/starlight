@@ -182,7 +182,11 @@ type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
 } & (
-  | { link: string; badge?: string | BadgeConfig }
+  | {
+      link: string;
+      badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
+    }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
       autogenerate: { directory: string; collapsed?: boolean };
@@ -229,8 +233,8 @@ export default defineConfig({
           label: 'English',
           lang: 'en',
         },
-        // 중국어 간체 문서는 `src/content/docs/zh/`에 있습니다.
-        zh: {
+        // 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
@@ -307,7 +311,7 @@ starlight({
 
 ### `social`
 
-**타입:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**타입:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다. 이 중 하나를 추가하면 사이트 헤더에 아이콘 링크로 표시됩니다.
 
@@ -424,3 +428,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**타입:** `string`  
+**기본값:** `'|'`
+
+브라우저 탭에 표시되는 페이지의 `<title>` 태그에서 페이지 제목과 사이트 제목 사이의 구분 기호를 설정합니다.
+
+기본적으로 모든 페이지에 설정된 `<title>` 태그의 내용은 `페이지 제목 | 사이트 제목`입니다.
+예를 들어, 이 페이지의 제목이 "구성 참조"이고, 이 사이트의 제목이 "Starlight"라면, 이 페이지의 `<title>`의 내용은 `구성 참조 | Starlight`가 됩니다.
+
+### `components`
+
+**타입:** `Record<string, string>`
+
+Starlight의 기본 구현을 재정의하기 위해 컴포넌트에 대한 경로를 제공합니다.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+재정의할 수 있는 모든 컴포넌트에 대한 자세한 내용은 [재정의 참조](/ko/reference/overrides/)를 확인하세요.
