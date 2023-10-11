@@ -41,7 +41,7 @@ Page writing direction.
 
 **Type:** `string`
 
-BCP-47 language tag for this page’s locale, e.g. `en`, `zh`, or `pt-BR`.
+BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
 
 #### `locale`
 

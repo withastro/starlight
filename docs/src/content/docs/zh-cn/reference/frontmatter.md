@@ -32,13 +32,13 @@ description: 了解更多关于此项目的信息。
 
 **类型：** `string | boolean`
 
-覆盖[全局 `editLink` 配置](/zh/reference/configuration/#editlink)。设置为 false 可禁用特定页面的 “编辑页面” 链接，或提供此页面内容可编辑的备用 URL。
+覆盖[全局 `editLink` 配置](/zh-cn/reference/configuration/#editlink)。设置为 false 可禁用特定页面的 “编辑页面” 链接，或提供此页面内容可编辑的备用 URL。
 
 ### `head`
 
-**类型：** [`HeadConfig[]`](/zh/reference/configuration/#headconfig)
+**类型：** [`HeadConfig[]`](/zh-cn/reference/configuration/#headconfig)
 
-你可以使用 `<head>` frontmatter 字段向页面的`<head>`添加其他标签。这意味着你可以将自定义样式、元数据或其他标签添加到单个页面。类似于[全局 `head` 选项](/zh/reference/configuration/#head)。
+你可以使用 `<head>` frontmatter 字段向页面的`<head>`添加其他标签。这意味着你可以将自定义样式、元数据或其他标签添加到单个页面。类似于[全局 `head` 选项](/zh-cn/reference/configuration/#head)。
 
 ```md
 ---
@@ -54,7 +54,7 @@ head:
 
 **类型：** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-覆盖[全局 `tableOfContents` 配置](/zh/reference/configuration/#tableofcontents)。自定义要包含的标题级别，或设置为 `false` 以在此页面上隐藏目录。
+覆盖[全局 `tableOfContents` 配置](/zh-cn/reference/configuration/#tableofcontents)。自定义要包含的标题级别，或设置为 `false` 以在此页面上隐藏目录。
 
 ```md
 ---
@@ -157,7 +157,7 @@ banner:
 
 **类型：** `Date | boolean`
 
-覆盖[全局 `lastUpdated` 配置](/zh/reference/configuration/#lastupdated)。如果指定了日期，它必须是有效的 [YAML 时间戳](https://yaml.org/type/timestamp.html)，并将覆盖存储在 Git 历史记录中的此页面的日期。
+覆盖[全局 `lastUpdated` 配置](/zh-cn/reference/configuration/#lastupdated)。如果指定了日期，它必须是有效的 [YAML 时间戳](https://yaml.org/type/timestamp.html)，并将覆盖存储在 Git 历史记录中的此页面的日期。
 
 ```md
 ---
@@ -170,7 +170,7 @@ lastUpdated: 2022-08-09
 
 **类型：** `boolean | string | { link?: string; label?: string }`
 
-覆盖[全局 `pagination` 配置](/zh/reference/configuration/#pagination)。如果指定了字符串，则将替换生成的链接文本；如果指定了对象，则将同时覆盖链接和文本。
+覆盖[全局 `pagination` 配置](/zh-cn/reference/configuration/#pagination)。如果指定了字符串，则将替换生成的链接文本；如果指定了对象，则将同时覆盖链接和文本。
 
 ```md
 ---
@@ -226,7 +226,7 @@ pagefind: false
 
 **类型：** [`SidebarConfig`](#sidebarconfig)
 
-在使用自动生成的链接分组时，控制如何在[侧边栏](/zh/reference/configuration/#sidebar)中显示此页面。
+在使用自动生成的链接分组时，控制如何在[侧边栏](/zh-cn/reference/configuration/#sidebar)中显示此页面。
 
 #### `SidebarConfig`
 
@@ -287,11 +287,11 @@ sidebar:
 
 #### `badge`
 
-**类型：** <code>string | <a href="/zh/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**类型：** <code>string | <a href="/zh-cn/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 当在自动生成的链接组中显示时，在侧边栏中为页面添加徽章。
 
-当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh/reference/configuration/#badgeconfig) ，其中包含 `text` 和 `variant` 字段，可以自定义徽章。
+当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh-cn/reference/configuration/#badgeconfig) ，其中包含 `text` 和 `variant` 字段，可以自定义徽章。
 
 ```md
 ---
