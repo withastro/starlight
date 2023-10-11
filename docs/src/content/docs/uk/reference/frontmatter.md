@@ -1,52 +1,52 @@
 ---
 title: Frontmatter Reference
-description: An overview of the default frontmatter fields Starlight supports.
+description: Огляд стандартних полів переднього матеріалу, які підтримує Starlight.
 ---
 
-You can customize individual Markdown and MDX pages in Starlight by setting values in their frontmatter. For example, a regular page might set `title` and `description` fields:
+Ви можете налаштувати окремі сторінки Markdown і MDX у Starlight, встановивши значення в їхній передній частині. Наприклад, звичайна сторінка може встановити поля `title` і `description`:
 
 ```md
 ---
-title: About this project
-description: Learn more about the project I’m working on.
+title: Про цей проект
+description: Дізнайтеся більше про проект, над яким я працюю.
 ---
 
-Welcome to the about page!
+Вітаємо на сторінці про нас!
 ```
 
-## Frontmatter fields
+## Поля Frontmatter
 
 ### `title` (required)
 
 **type:** `string`
 
-You must provide a title for every page. This will be displayed at the top of the page, in browser tabs, and in page metadata.
+Ви повинні вказати назву для кожної сторінки. Це відображатиметься у верхній частині сторінки, на вкладках веб-переглядача та в метаданих сторінки.
 
 ### `description`
 
 **type:** `string`
 
-The page description is used for page metadata and will be picked up by search engines and in social media previews.
+Опис сторінки використовується для метаданих сторінки та буде підібрано пошуковими системами та в попередніх переглядах соціальних мереж.
 
 ### `editUrl`
 
 **type:** `string | boolean`
 
-Overrides the [global `editLink` config](/reference/configuration/#editlink). Set to `false` to disable the “Edit page” link for a specific page or provide an alternative URL where the content of this page is editable.
+Перевизначає [глобальну конфігурацію `editLink`](/reference/configuration/#editlink). Встановіть значення `false`, щоб вимкнути посилання «Редагувати сторінку» для певної сторінки або надати альтернативну URL-адресу, де можна редагувати вміст цієї сторінки.
 
 ### `head`
 
 **type:** [`HeadConfig[]`](/reference/configuration/#headconfig)
 
-You can add additional tags to your page’s `<head>` using the `head` frontmatter field. This means you can add custom styles, metadata or other tags to a single page. Similar to the [global `head` option](/reference/configuration/#head).
+Ви можете додати додаткові теги до `<head>` вашої сторінки за допомогою поля `head` frontmatter. Це означає, що ви можете додавати власні стилі, метадані чи інші теги до однієї сторінки. Подібно до [глобального параметра `head`](/reference/configuration/#head).
 
 ```md
 ---
-title: About us
+title: Про нас
 head:
-  # Use a custom <title> tag
-  - tag: title
-    content: Custom about title
+   # Використовуйте спеціальний тег <title>
+   - tag: заголовок
+     content: Користувацька назва
 ---
 ```
 
@@ -54,21 +54,21 @@ head:
 
 **type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
-Customize the heading levels to be included or set to `false` to hide the table of contents on this page.
+Перевизначає [глобальну конфігурацію `tableOfContents`](/reference/configuration/#tableofcontents).
+Налаштуйте рівні заголовків, які потрібно включити, або встановіть значення `false`, щоб приховати зміст на цій сторінці.
 
 ```md
 ---
-title: Page with only H2s in the table of contents
-tableOfContents:
-  minHeadingLevel: 2
-  maxHeadingLevel: 2
+title: Сторінка лише з H2 у змісті
+content:
+   minHeadingLevel: 2
+   maxHeadingLevel: 2
 ---
 ```
 
 ```md
 ---
-title: Page with no table of contents
+title: Сторінка без змісту
 tableOfContents: false
 ---
 ```
@@ -78,25 +78,25 @@ tableOfContents: false
 **type:** `'doc' | 'splash'`  
 **default:** `'doc'`
 
-Set the layout template for this page.
-Pages use the `'doc'` layout by default.
-Set to `'splash'` to use a wider layout without any sidebars designed for landing pages.
+Встановіть шаблон макета для цієї сторінки.
+Сторінки за замовчуванням використовують макет `'doc'`.
+Установіть значення «splash», щоб використовувати ширший макет без бічних панелей, призначених для цільових сторінок.
 
-### `hero`
+### `HeroConfig`
 
 **type:** [`HeroConfig`](#heroconfig)
 
-Add a hero component to the top of this page. Works well with `template: splash`.
+Додайте компонент героя вгору цієї сторінки. Добре працює з `template: splash`.
 
-For example, this config shows some common options, including loading an image from your repository.
+Наприклад, ця конфігурація показує деякі загальні параметри, включаючи завантаження зображення з вашого сховища.
 
 ```md
 ---
-title: My Home Page
+title: Моя Домашня Сторінка
 template: splash
 hero:
-  title: 'My Project: Stellar Stuff Sooner'
-  tagline: Take your stuff to the moon and back in the blink of an eye.
+  title: "Мій проект: Stellar Stuff Sooner"
+  tagline: доставте свої речі на місяць і назад миттєво.
   image:
     alt: A glittering, brightly colored logo
     file: ../../assets/logo.png
@@ -138,18 +138,18 @@ interface HeroConfig {
 
 **type:** `{ content: string }`
 
-Displays an announcement banner at the top of this page.
+Відображає банер оголошення у верхній частині цієї сторінки.
 
-The `content` value can include HTML for links or other content.
-For example, this page displays a banner including a link to `example.com`.
+Значення `content` може містити HTML для посилань або іншого вмісту.
+Наприклад, на цій сторінці відображається банер із посиланням на `example.com`.
 
 ```md
 ---
-title: Page with a banner
+title: Сторінка з банером
 banner:
   content: |
-    We just launched something cool!
-    <a href="https://example.com">Check it out</a>
+   Ми щойно запустили щось круте!
+    <a href="https://example.com"> Перевір </a>
 ---
 ```
 
@@ -157,12 +157,12 @@ banner:
 
 **type:** `Date | boolean`
 
-Overrides the [global `lastUpdated` option](/reference/configuration/#lastupdated). If a date is specified, it must be a valid [YAML timestamp](https://yaml.org/type/timestamp.html) and will override the date stored in Git history for this page.
+Перевизначає [глобальний параметр `lastUpdated`](/reference/configuration/#lastupdated). Якщо вказано дату, вона має бути дійсною [міткою часу YAML](https://yaml.org/type/timestamp.html) і замінить дату, збережену в історії Git для цієї сторінки.
 
 ```md
 ---
-title: Page with a custom last update date
-lastUpdated: 2022-08-09
+title: Сторінка зі спеціальною датою останнього оновлення
+останнє оновлення: 2022-08-09
 ---
 ```
 
@@ -170,25 +170,25 @@ lastUpdated: 2022-08-09
 
 **type:** `boolean | string | { link?: string; label?: string }`
 
-Overrides the [global `pagination` option](/reference/configuration/#pagination). If a string is specified, the generated link text will be replaced and if an object is specified, both the link and the text will be overridden.
+Замінює [глобальний параметр `pagination`](/reference/configuration/#pagination). Якщо вказано рядок, згенерований текст посилання буде замінено, а якщо вказано об’єкт, і посилання, і текст буде замінено.
 
 ```md
 ---
-# Hide the previous page link
+# Приховати посилання на попередню сторінку
 prev: false
 ---
 ```
 
 ```md
 ---
-# Override the previous page link text
-prev: Continue the tutorial
+# Заміна тексту посилання на попередню сторінку
+prev: Продовжити 
 ---
 ```
 
 ```md
 ---
-# Override both the previous page link and text
+# Замінити посилання на попередню сторінку та текст
 prev:
   link: /unrelated-page/
   label: Check out this other page
@@ -199,11 +199,11 @@ prev:
 
 **type:** `boolean | string | { link?: string; label?: string }`
 
-Same as [`prev`](#prev) but for the next page link.
+Те саме, що [`prev`](#prev), але для посилання на наступну сторінку.
 
 ```md
 ---
-# Hide the next page link
+# Приховати посилання на наступну сторінку
 next: false
 ---
 ```
@@ -213,11 +213,11 @@ next: false
 **type:** `boolean`  
 **default:** `true`
 
-Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index. Set to `false` to exclude a page from search results:
+Укажіть, чи включати цю сторінку в пошуковий індекс [Pagefind](https://pagefind.app/). Установіть значення `false`, щоб виключити сторінку з результатів пошуку:
 
 ```md
 ---
-# Hide this page from the search index
+# Приховати цю сторінку з індексу пошуку
 pagefind: false
 ---
 ```
@@ -226,7 +226,7 @@ pagefind: false
 
 **type:** [`SidebarConfig`](#sidebarconfig)
 
-Control how this page is displayed in the [sidebar](/reference/configuration/#sidebar), when using an autogenerated link group.
+Контролюйте, як ця сторінка відображається на [бічній панелі](/reference/configuration/#sidebar), якщо використовується автоматично створена група посилань.
 
 #### `SidebarConfig`
 
@@ -245,11 +245,11 @@ interface SidebarConfig {
 **type:** `string`  
 **default:** the page [`title`](#title-required)
 
-Set the label for this page in the sidebar when displayed in an autogenerated group of links.
+Установіть мітку для цієї сторінки на бічній панелі, коли вона відображається в автоматично згенерованій групі посилань.
 
 ```md
 ---
-title: About this project
+title: Про цей проект
 sidebar:
   label: About
 ---
@@ -259,12 +259,12 @@ sidebar:
 
 **type:** `number`
 
-Control the order of this page when sorting an autogenerated group of links.
-Lower numbers are displayed higher up in the link group.
+Керуйте порядком цієї сторінки під час сортування автоматично згенерованої групи посилань.
+Нижні числа відображаються вище в групі посилань.
 
 ```md
 ---
-title: Page to display first
+title: Cторінка для відображення першою
 sidebar:
   order: 1
 ---
@@ -275,11 +275,11 @@ sidebar:
 **type:** `boolean`  
 **default:** `false`
 
-Prevents this page from being included in an autogenerated sidebar group.
+Запобігає включенню цієї сторінки до автоматично створеної групи бічної панелі.
 
 ```md
 ---
-title: Page to hide from autogenerated sidebar
+title: Сторінка, яку потрібно приховати від автоматично створеної бічної панелі
 sidebar:
   hidden: true
 ---
@@ -289,22 +289,23 @@ sidebar:
 
 **type:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
-Add a badge to the page in the sidebar when displayed in an autogenerated group of links.
-When using a string, the badge will be displayed with a default accent color.
-Optionally, pass a [`BadgeConfig` object](/reference/configuration/#badgeconfig) with `text` and `variant` fields to customize the badge.
+Додайте значок до сторінки на бічній панелі, коли вона відображається в автоматично згенерованій групі посилань.
+Якщо використовується рядок, значок відображатиметься кольором акценту за замовчуванням.
+За бажанням передайте [об’єкт BadgeConfig](/reference/configuration/#badgeconfig) із полями text і variant, щоб налаштувати значок.
+
 
 ```md
 ---
-title: Page with a badge
+title: Сторінка зі значком
 sidebar:
-  # Uses the default variant matching your site’s accent color
+  # Використовує варіант за замовчуванням, що відповідає акцентному кольору вашого сайту
   badge: New
 ---
 ```
 
 ```md
 ---
-title: Page with a badge
+title: Сторінка зі значком
 sidebar:
   badge:
     text: Experimental
@@ -316,13 +317,13 @@ sidebar:
 
 **type:** `Record<string, string | number | boolean | undefined>`
 
-HTML attributes to add to the page link in the sidebar when displayed in an autogenerated group of links.
+Атрибути HTML для додавання до посилання сторінки на бічній панелі під час відображення в автоматично згенерованій групі посилань.
 
 ```md
 ---
-title: Page opening in a new tab
+title: сторінка відкривається в новій вкладці
 sidebar:
-  # Opens the page in a new tab
+   # Відкриває сторінку в новій вкладці
   attrs:
     target: _blank
 ---

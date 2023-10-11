@@ -1,11 +1,11 @@
 ---
-title: Configuration Reference
-description: An overview of all the configuration options Starlight supports.
+title:  Довідник з конфігурації
+description: Огляд усіх параметрів конфігурації, які підтримує Starlight.
 ---
 
-## Configure the `starlight` integration
+## Налаштування інтеграції `starlight
 
-Starlight is an integration built on top the [Astro](https://astro.build) web framework. You can configure your project inside the `astro.config.mjs` configuration file:
+Starlight - це інтеграція, побудована на основі веб-фреймворку [Astro](https://astro.build). Ви можете налаштувати свій проект у файлі конфігурації `astro.config.mjs`:
 
 ```js
 // astro.config.mjs
@@ -13,33 +13,33 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
+  integration: [
     starlight({
-      title: 'My delightful docs site',
+      title: 'Мій чудовий сайт з документацією',
     }),
   ],
 });
 ```
 
-You can pass the following options to the `starlight` integration.
+Ви можете передати наступні параметри до інтеграції `starlight`.
 
 ### `title` (required)
 
 **type:** `string`
 
-Set the title for your website. Will be used in metadata and in the browser tab title.
+Задайте заголовок для вашого сайту. Буде використовуватися в метаданих і в заголовку вкладки браузера.
 
-### `description`
+### `description` (required)
 
-**type:** `string`
+**type:** `string` (required)
 
-Set the description for your website. Used in metadata shared with search engines in the `<meta name="description">` tag if `description` is not set in a page’s frontmatter.
+Задайте опис вашого сайту. Використовується в метаданих, що передаються пошуковим системам у тезі `<meta name="description">`, якщо `description` не задано в заголовку сторінки.
 
 ### `logo`
 
 **type:** [`LogoConfig`](#logoconfig)
 
-Set a logo image to show in the navigation bar alongside or instead of the site title. You can either set a single `src` property or set separate image sources for `light` and `dark`.
+Задає зображення логотипу, яке буде відображатися в навігаційній панелі поряд з назвою сайту або замість неї. Ви можете задати одну властивість `rc` або встановити окремі джерела зображень для `light` і `dark`.
 
 ```js
 starlight({
@@ -58,18 +58,14 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 );
 ```
 
-### `tableOfContents`
 
-**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
-
-Configure the table of contents shown on the right of each page. By default, `<h2>` and `<h3>` headings will be included in this table of contents.
+Налаштуйте зміст, що відображається праворуч на кожній сторінці. За замовчуванням, заголовки `<h2>` і `<h3>` буде включено до цього змісту.
 
 ### `editLink`
 
 **type:** `{ baseUrl: string }`
 
-Enable “Edit this page” links by setting the base URL these should use. The final link will be `editLink.baseUrl` + the current page path. For example, to enable editing pages in the `withastro/starlight` repo on GitHub:
+Увімкніть посилання "Редагувати цю сторінку", задавши базову URL-адресу, яку вони мають використовувати. Кінцевим посиланням буде `editLink.baseUrl` + шлях до поточної сторінки. Наприклад, щоб увімкнути редагування сторінок у репозиторії `withastro/starlight` на GitHub:
 
 ```js
 starlight({
@@ -79,37 +75,37 @@ starlight({
 });
 ```
 
-With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
+З таким налаштуванням сторінка `/introduction` матиме посилання для редагування, що вказуватиме на `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
 
 ### `sidebar`
 
 **type:** [`SidebarItem[]`](#sidebaritem)
 
-Configure your site’s sidebar navigation items.
+Налаштуйте елементи навігації бічної панелі вашого сайту.
 
-A sidebar is an array of links and groups of links.
-Each item must have a `label` and one of the following properties:
+Бічна панель - це масив посилань і груп посилань.
+Кожен елемент повинен мати `label` і одну з наступних властивостей:
 
-- `link` — a single link to a specific URL, e.g. `'/home'` or `'https://example.com'`.
+- `link` - одне посилання на певну URL-адресу, наприклад, `'/home'` або `'https://example.com'`.
 
-- `items` — an array containing more sidebar links and subgroups.
+- `items` - масив, що містить більше посилань та підгруп бічної панелі.
 
-- `autogenerate` — an object specifying a directory of your docs to automatically generate a group of links from.
+- `autogenerate` - об'єкт, що вказує каталог ваших документів для автоматичної генерації групи посилань.
 
 ```js
 starlight({
   sidebar: [
-    // A single link item labelled “Home”.
+    // Єдиний елемент посилання з міткою "Home".
     { label: 'Home', link: '/' },
-    // A group labelled “Start Here” containing two links.
+    // Група з назвою "Start Here", що містить два посилання.
     {
       label: 'Start Here',
       items: [
-        { label: 'Introduction', link: '/intro' },
-        { label: 'Next Steps', link: '/next-steps' },
+        { label: 'Вступ', link: '/intro' },
+        { label: 'Наступні кроки', link: '/next-steps' },
       ],
     },
-    // A group linking to all pages in the reference directory.
+    // Групове посилання на всі сторінки довідника.
     {
       label: 'Reference',
       autogenerate: { directory: 'reference' },
@@ -118,29 +114,29 @@ starlight({
 });
 ```
 
-#### Sorting
+#### Сортування
 
-Autogenerated sidebar groups are sorted by filename alphabetically.
-For example, a page generated from `astro.md` would appear above the page for `starlight.md`.
+Автоматично згенеровані групи бічних панелей сортуються за алфавітом назв файлів.
+Наприклад, сторінка, згенерована з `astro.md`, з'явиться над сторінкою для `starlight.md`.
 
-#### Collapsing groups
+#### Згортання груп
 
-Groups of links are expanded by default. You can change this behavior by setting a group’s `collapsed` property to `true`.
+Групи посилань за замовчуванням розгортаються. Ви можете змінити цю поведінку, встановивши властивість `collapsed` групи у значення `true`.
 
-Autogenerated subgroups respect the `collapsed` property of their parent group by default. Set the `autogenerate.collapsed` property to override this.
+Автогенеровані підгрупи за замовчуванням поважають властивість `collapsed` своєї батьківської групи. Встановіть властивість `autogenerate.collapsed`, щоб перевизначити її.
 
 ```js
 sidebar: [
-  // A collapsed group of links.
+  // Згорнута група посилань.
   {
-    label: 'Collapsed Links',
+    label: 'Згорнуті посилання',
     collapsed: true,
     items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
+      { label: 'Вступ', link: '/intro' },
+      { label: 'Наступні кроки', link: '/next-steps' },
     ],
   },
-  // An expanded group containing collapsed autogenerated subgroups.
+  // Розширена група, що містить згорнуті автогенеровані підгрупи.
   {
     label: 'Reference',
     autogenerate: {
@@ -151,24 +147,24 @@ sidebar: [
 ],
 ```
 
-#### Translating labels
+#### Переклад міток
 
-If your site is multilingual, each item’s `label` is considered to be in the default locale. You can set a `translations` property to provide labels for your other supported languages:
+Якщо ваш сайт багатомовний, `label` кожного елемента вважається локаллю за замовчуванням. Ви можете встановити властивість `translations`, щоб надати мітки для інших підтримуваних мов:
 
 ```js
 sidebar: [
-  // An example sidebar with labels translated to French.
+  // Приклад бічної панелі з мітками, перекладеними французькою мовою.
   {
     label: 'Start Here',
     translations: { fr: 'Commencez ici' },
     items: [
       {
-        label: 'Getting Started',
+        label: 'Початок роботи',
         translations: { fr: 'Bien démarrer' },
         link: '/getting-started',
       },
       {
-        label: 'Project Structure',
+        label: 'Структура проекту',
         translations: { fr: 'Structure du projet' },
         link: '/structure',
       },
@@ -205,7 +201,6 @@ interface BadgeConfig {
   variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
-
 ### `locales`
 
 **type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
@@ -257,28 +252,29 @@ interface LocaleConfig {
 ```
 
 You can set the following options for each locale:
+Ви можете задати наступні параметри для кожної локалі:
 
-##### `label` (required)
+##### `label` (обов'язково)
 
-**type:** `string`
+**type:** `string` (обов'язково)
 
-The label for this language to show to users, for example in the language switcher. Most often you will want this to be the language’s name as a user of that language would expect to read it, e.g. `"English"`, `"العربية"`, or `"简体中文"`.
+Мітка для цієї мови, яку буде показано користувачам, наприклад, у перемикачі мови. Найчастіше ви хочете, щоб це була назва мови так, як користувач цієї мови очікує її прочитати, наприклад, `"English"`, `"العربية"` або `"简体中文"`.
 
 ##### `lang`
 
-**type:** `string`
+**type:** `string
 
-The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. If not set, the language’s directory name will be used by default. Language tags with regional subtags (e.g. `"pt-BR"` or `"en-US"`) will use built-in UI translations for their base language if no region-specific translations are found.
+Тег BCP-47 для цієї мови, наприклад `"en"`, `"ar"` або `"zh-CN"`. Якщо його не встановлено, за замовчуванням буде використано назву каталогу мови. Мовні теги з регіональними підтегами (наприклад, `"pt-BR"` або `"en-US"`) використовуватимуть вбудований переклад інтерфейсу для базової мови, якщо не буде знайдено перекладу для конкретного регіону.
 
 ##### `dir`
 
 **type:** `'ltr' | 'rtl'`
 
-The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.
+Напрямок запису цієї мови; `'ltr'` для зліва направо (за замовчуванням) або `'rtl'` для справа наліво.
 
-#### Root locale
+#### Коренева локаль
 
-You can serve the default language without a `/lang/` directory by setting a `root` locale:
+Ви можете використовувати мову за замовчуванням без каталогу `/lang/`, встановивши локаль `root`:
 
 ```js
 starlight({
@@ -294,23 +290,21 @@ starlight({
 });
 ```
 
-For example, this allows you to serve `/getting-started/` as an English route and use `/fr/getting-started/` as the equivalent French page.
+Наприклад, це дозволяє використовувати `/getting-started/` як англійський маршрут, а `/fr/getting-started/` як еквівалентну французьку сторінку.
 
 ### `defaultLocale`
 
 **type:** `string`
 
-Set the language which is the default for this site.
-The value should match one of the keys of your [`locales`](#locales) object.
-(If your default language is your [root locale](#root-locale), you can skip this.)
+Задає мову, яка використовується за замовчуванням для цього сайту.
+Значення має відповідати одному з ключів вашого об'єкта [`locales`](#locales).
+(Якщо мовою за замовчуванням є ваша [коренева локаль](#root-locale), ви можете пропустити цей параметр).
 
-The default locale will be used to provide fallback content where translations are missing.
-
-### `social`
+Локалізацію за замовчуванням буде використано для забезпечення резервного вмісту у разі відсутності перекладу.
 
 **type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
-Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
+Необов'язкові дані про акаунти соціальних мереж для цього сайту. Додавання будь-якого з них відобразить їх у вигляді іконок-посилань у шапці сайту.
 
 ```js
 starlight({
@@ -334,9 +328,9 @@ starlight({
 
 **type:** `string[]`
 
-Provide CSS files to customize the look and feel of your Starlight site.
+Надайте файли CSS, щоб налаштувати зовнішній вигляд вашого сайту на Starlight.
 
-Supports local CSS files relative to the root of your project, e.g. `'./src/custom.css'`, and CSS you installed as an npm module, e.g. `'@fontsource/roboto'`.
+Підтримуються локальні файли CSS відносно кореня вашого проекту, наприклад, `'./src/custom.css'`, а також CSS, встановлені як npm-модуль, наприклад, `''@fontsource/roboto'``.
 
 ```js
 starlight({
@@ -348,13 +342,14 @@ starlight({
 
 **type:** [`HeadConfig[]`](#headconfig)
 
-Add custom tags to the `<head>` of your Starlight site.
-Can be useful for adding analytics and other third-party scripts and resources.
+
+Додайте кастомні теги до `<head>` вашого сайту Starlight.
+Може бути корисним для додавання аналітики та інших сторонніх скриптів і ресурсів.
 
 ```js
 starlight({
   head: [
-    // Example: add Fathom analytics script tag.
+    // Приклад: додати тег скрипта аналітики Fathom.
     {
       tag: 'script',
       attrs: {
@@ -382,25 +377,25 @@ interface HeadConfig {
 **type:** `boolean`  
 **default:** `false`
 
-Control whether the footer shows when the page was last updated.
+Керування тим, чи показувати у нижньому колонтитулі дату останнього оновлення сторінки.
 
-By default, this feature relies on your repository’s Git history and may not be accurate on some deployment platforms performing [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). A page can override this setting or the Git-based date using the [`lastUpdated` frontmatter field](/reference/frontmatter/#lastupdated).
+За замовчуванням ця функція покладається на історію Git'а вашого сховища і може бути неточною на деяких платформах розгортання, що виконують [неглибокі клони](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Сторінка може замінити цей параметр або дату на основі Git'а за допомогою поля [`lastUpdated` frontmatter](/reference/frontmatter/#lastupdated).
 
 ### `pagination`
 
 **type:** `boolean`  
 **default:** `true`
 
-Define if the footer should include previous and next page links.
+Визначає, чи має нижній колонтитул містити посилання на попередню та наступну сторінки.
 
-A page can override this setting or the link text and/or URL using the [`prev`](/reference/frontmatter/#prev) and [`next`](/reference/frontmatter/#next) frontmatter fields.
+Сторінка може замінити цей параметр або текст посилання та/або URL за допомогою полів [`prev`](/reference/frontmatter/#prev) та [`next`](/reference/frontmatter/#next) переднього колонтитулу.
 
 ### `favicon`
 
 **type:** `string`  
 **default:** `'/favicon.svg'`
 
-Set the path of the default favicon for your website which should be located in the `public/` directory and be a valid (`.ico`, `.gif`, `.jpg`, `.png`, or `.svg`) icon file.
+Вказує шлях до іконки за замовчуванням для вашого сайту, яка повинна знаходитися в каталозі `public/` і бути допустимим файлом іконки (.ico`, `.gif`, `.jpg`, `.png` або `.svg`).
 
 ```js
 starlight({
@@ -408,13 +403,13 @@ starlight({
 }),
 ```
 
-If you need to set additional variants or fallback favicons, you can add tags using the [`head` option](#head):
+Якщо вам потрібно встановити додаткові варіанти або запасні іконки, ви можете додати теги за допомогою опції [`head`](#head):
 
 ```js
 starlight({
   favicon: '/images/favicon.svg'.
   head: [
-    // Add ICO favicon fallback for Safari.
+    // Додайте запасний варіант іконки ICO для Safari.
     {
       tag: 'link',
       attrs: {
@@ -432,16 +427,16 @@ starlight({
 **type:** `string`  
 **default:** `'|'`
 
-Sets the delimiter between page title and site title in the page’s `<title>` tag, which is displayed on browser tabs.
+Задає роздільник між заголовком сторінки і заголовком сайту в тезі `<title>` сторінки, який відображається у вкладках браузера.
 
-By default, every page has a `<title>` of `Page Title | Site Title`.
-For example, this page is titled “Configuration Reference” and this site is titled “Starlight”, so the `<title>` for this page is “Configuration Reference | Starlight”.
+За замовчуванням, кожна сторінка має `<title>` з `Назва сторінки | Назва сайту`.
+Наприклад, ця сторінка має назву "Довідник з конфігурації", а цей сайт має назву "Starlight", тому `<title>` для цієї сторінки буде "Довідник з конфігурації | Starlight".
 
 ### `components`
 
 **type:** `Record<string, string>`
 
-Provide the paths to components to override Starlight’s default implementations.
+Вкажіть шляхи до компонентів для заміни реалізацій Starlight за замовчуванням.
 
 ```js
 starlight({
@@ -451,4 +446,4 @@ starlight({
 });
 ```
 
-See the [Overrides Reference](/reference/overrides/) for details of all the components that you can override.
+Дивіться [Посилання на перевизначення](/reference/oversides/) для отримання детальної інформації про всі компоненти, які ви можете перевизначити.

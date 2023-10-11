@@ -1,20 +1,20 @@
 ---
-title: Overrides Reference
-description: An overview of the components and component props supported by Starlight overrides.
+title: Перевизначає посилання
+description: Огляд компонентів і атрибутів компонентів, які підтримуються перевизначеннями Starlight.
 tableOfContents:
   maxHeadingLevel: 4
 ---
 
-You can override Starlight’s built-in components by providing paths to replacement components in Starlight’s [`components`](/reference/configuration#components) configuration option.
-This page lists all components available to override and links to their default implementations on GitHub.
+Ви можете замінити вбудовані компоненти Starlight, надавши шляхи до компонентів заміни в параметрі конфігурації Starlight [`components`](/reference/configuration#components).
+На цій сторінці перераховано всі компоненти, доступні для перевизначення, і посилання на їх реалізацію за замовчуванням на GitHub.
 
-Learn more in the [Guide to Overriding Components](/guides/overriding-components/).
+Дізнайтеся більше в [Посібнику із заміни компонентів](/guides/overriding-components/).
 
-## Component props
+## Реквізити компонентів
 
-All components can access a standard `Astro.props` object that contains information about the current page.
+Усі компоненти мають доступ до стандартного об’єкта `Astro.props`, який містить інформацію про поточну сторінку.
 
-To type your custom components, import the `Props` type from Starlight:
+Щоб ввести власні компоненти, імпортуйте тип `Props` із Starlight:
 
 ```astro
 ---
@@ -25,59 +25,59 @@ const { hasSidebar } = Astro.props;
 ---
 ```
 
-This will give you autocomplete and types when accessing `Astro.props`.
+Це забезпечить вам автозаповнення та типи під час доступу до `Astro.props`.
 
-### Props
+### Реквізит
 
-Starlight will pass the following props to your custom components.
+Starlight передасть наведені нижче атрибути вашим спеціальним компонентам.
 
 #### `dir`
 
 **Type:** `'ltr' | 'rtl'`
 
-Page writing direction.
+Напрямок написання сторінки.
 
 #### `lang`
 
 **Type:** `string`
 
-BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
+Мовний тег BCP-47 для локалі цієї сторінки, напр. `en`, `zh-CN` або `pt-BR`.
 
 #### `locale`
 
 **Type:** `string | undefined`
 
-The base path at which a language is served. `undefined` for root locale slugs.
+Базовий шлях, на якому обслуговується мова. `undefined` для кореневих сликів локалі.
 
 #### `slug`
 
 **Type:** `string`
 
-The slug for this page generated from the content filename.
+Слаг для цієї сторінки, згенерований з імені файлу вмісту.
 
 #### `id`
 
 **Type:** `string`
 
-The unique ID for this page based on the content filename.
+Унікальний ідентифікатор цієї сторінки на основі назви файлу вмісту.
 
 #### `isFallback`
 
 **Type:** `true | undefined`
 
-`true` if this page is untranslated in the current language and using fallback content from the default locale.
-Only used in multilingual sites.
+`true`, якщо ця сторінка не перекладена поточною мовою та використовує запасний вміст із мови за умовчанням.
+Використовується лише на багатомовних сайтах.
 
 #### `entryMeta`
 
 **Type:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
-Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content.
+Метадані мови для вмісту сторінки. Може відрізнятися від значень локалі верхнього рівня, якщо на сторінці використовується резервний вміст.
 
 #### `entry`
 
-The Astro content collection entry for the current page.
-Includes frontmatter values for the current page at `entry.data`.
+Запис колекції вмісту Astro для поточної сторінки.
+Включає значення frontmatter для поточної сторінки в `entry.data`.
 
 ```ts
 entry: {
@@ -89,286 +89,285 @@ entry: {
 }
 ```
 
-Learn more about the shape of this object in [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/api-reference/#collection-entry-type) reference.
+Дізнайтеся більше про форму цього об’єкта в [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/api-reference/#collection-entry-type).
 
 #### `sidebar`
 
 **Type:** `SidebarEntry[]`
 
-Site navigation sidebar entries for this page.
+Записи бічної панелі навігації по сайту для цієї сторінки.
 
 #### `hasSidebar`
 
 **Type:** `boolean`
 
-Whether or not the sidebar should be displayed on this page.
+Чи повинна відображатися бічна панель на цій сторінці.
 
 #### `pagination`
 
 **Type:** `{ prev?: Link; next?: Link }`
 
-Links to the previous and next page in the sidebar if enabled.
+Посилання на попередню та наступну сторінки на бічній панелі, якщо ввімкнено.
 
 #### `toc`
 
 **Type:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
 
-Table of contents for this page if enabled.
+Зміст цієї сторінки, якщо ввімкнено.
 
 #### `headings`
 
 **Type:** `{ depth: number; slug: string; text: string }[]`
 
-Array of all Markdown headings extracted from the current page.
-Use [`toc`](#toc) instead if you want to build a table of contents that respects Starlight’s configuration options.
+Масив усіх заголовків Markdown, отриманих із поточної сторінки.
+Натомість використовуйте [`toc`](#toc), якщо ви хочете створити зміст, який поважає параметри конфігурації Starlight.
 
 #### `lastUpdated`
 
 **Type:** `Date | undefined`
 
-JavaScript `Date` object representing when this page was last updated if enabled.
+Об’єкт JavaScript `Date`, що вказує час останнього оновлення цієї сторінки, якщо ввімкнено.
 
 #### `editUrl`
 
-**Type:** `URL | undefined`
+**Type:** `URL | невизначений`
 
-`URL` object for the address where this page can be edited if enabled.
+Об’єкт `URL` для адреси, де цю сторінку можна редагувати, якщо ввімкнено.
 
 ---
 
-## Components
+## Компоненти
 
-### Head
+### Голова
 
-These components are rendered inside each page’s `<head>` element.
-They should only include [elements permitted inside `<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also).
+Ці компоненти відображаються всередині елемента `<head>` кожної сторінки.
+Вони мають містити лише [елементи, дозволені всередині `<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also).
 
 #### `Head`
 
-**Default component:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
+**Компонент за замовчуванням:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
-Component rendered inside each page’s `<head>`.
-Includes important tags including `<title>`, and `<meta charset="utf-8">`.
+Компонент відображається всередині `<head>` кожної сторінки.
+Містить важливі теги, зокрема `<title>` і `<meta charset="utf-8">`.
 
-Override this component as a last resort.
-Prefer the [`head`](/reference/configuration#head) option Starlight config if possible.
+Перевизначте цей компонент як крайній засіб.
+Віддавайте перевагу [`head`](/reference/configuration#head) параметру Starlight config, якщо це можливо.
 
 #### `ThemeProvider`
 
-**Default component:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
+**Компонент за замовчуванням:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
 
-Component rendered inside `<head>` that sets up dark/light theme support.
-The default implementation includes an inline script and a `<template>` used by the script in [`<ThemeSelect />`](#themeselect).
+Компонент, відображений усередині <head>, який налаштовує підтримку темної/світлої теми.
+Реалізація за замовчуванням включає вбудований сценарій і `<template>`, який використовується сценарієм у [`<ThemeSelect />`](#themeselect).
 
 ---
-
-### Accessibility
+### Доступність
 
 #### `SkipLink`
 
-**Default component:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
+**Компонент за замовчуванням:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
 
-Component rendered as the first element inside `<body>` which links to the main page content for accessibility.
-The default implementation is hidden until a user focuses it by tabbing with their keyboard.
+Компонент відображається як перший елемент усередині <body>, який посилається на вміст головної сторінки для доступності.
+Реалізація за замовчуванням прихована, доки користувач не сфокусує її за допомогою клавіші табуляції на клавіатурі.
 
 ---
 
-### Layout
+### Макет
 
-These components are responsible for laying out Starlight’s components and managing views across different breakpoints.
-Overriding these comes with significant complexity.
-When possible, prefer overriding a lower-level component.
+Ці компоненти відповідають за розміщення компонентів Starlight і керування переглядами в різних точках зупинки.
+Перевизначити це пов’язано зі значною складністю.
+Якщо можливо, віддавайте перевагу заміні компонента нижчого рівня.
 
 #### `PageFrame`
 
-**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Компонент за замовчуванням:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
 
-Layout component wrapped around most of the page content.
-The default implementation sets up the header–sidebar–main layout and includes `header` and `sidebar` named slots along with a default slot for the main content.
-It also renders [`<MobileMenuToggle />`](#mobilemenutoggle) to support toggling the sidebar navigation on small (mobile) viewports.
+Компонент макета обгорнув більшу частину вмісту сторінки.
+Реалізація за замовчуванням налаштовує макет заголовок–бічна панель–основний і включає слоти з іменами `header` і `sidebar` разом із слотом за замовчуванням для основного вмісту.
+Він також відображає [`<MobileMenuToggle />`](#mobilemenutoggle) для підтримки перемикання навігації бічної панелі на малих (мобільних) вікнах перегляду.
 
 #### `MobileMenuToggle`
 
-**Default component:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
+**Компонент за замовчуванням:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
 
-Component rendered inside [`<PageFrame>`](#pageframe) that is responsible for toggling the sidebar navigation on small (mobile) viewports.
+Компонент, відтворений усередині [`<PageFrame>`](#pageframe), який відповідає за перемикання навігації бічної панелі на малих (мобільних) вікнах перегляду.
 
 #### `TwoColumnContent`
 
-**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Компонент за замовчуванням:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
 
-Layout component wrapped around the main content column and right sidebar (table of contents).
-The default implementation handles the switch between a single-column, small-viewport layout and a two-column, larger-viewport layout.
+Компонент макета, обернутий навколо стовпця основного вмісту та правої бічної панелі (зміст).
+Реалізація за замовчуванням обробляє перемикання між макетом з одним стовпцем і малим вікном перегляду та макетом з двома стовпцями з великим вікном перегляду.
 
 ---
 
-### Header
+### Title
 
-These components render Starlight’s top navigation bar.
-
-#### `Header`
-
-**Default component:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
-
-Header component displayed at the top of every page.
-The default implementation displays [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
+Ці компоненти відображають верхню панель навігації Starlight.
 
 #### `SiteTitle`
 
-**Default component:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
+**Компонент за замовчуванням:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
-Component rendered at the start of the site header to render the site title.
-The default implementation includes logic for rendering logos defined in Starlight config.
+Компонент заголовка відображається у верхній частині кожної сторінки.
+Стандартна реалізація відображає [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />` ](#themeselect) і [`<LanguageSelect />`](#languageselect).
+
+#### `SiteTitle`
+
+**Компонент за замовчуванням:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
+
+Компонент, який відображається на початку заголовка сайту для відтворення заголовка сайту.
+Стандартна реалізація включає логіку відтворення логотипів, визначену в конфігурації Starlight.
 
 #### `Search`
 
-**Default component:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
+**Компонент за замовчуванням:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
 
-Component used to render Starlight’s search UI.
-The default implementation includes the button in the header and the code for displaying a search modal when it is clicked and loading [Pagefind’s UI](https://pagefind.app/).
+Компонент, який використовується для відтворення інтерфейсу пошуку Starlight.
+Реалізація за замовчуванням включає кнопку в заголовку та код для відображення модального пошуку, коли його натискають, і завантаження [інтерфейсу користувача Pagefind](https://pagefind.app/).
 
 #### `SocialIcons`
 
-**Default component:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
+**Компонент за замовчуванням:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
-Component rendered in the site header including social icon links.
-The default implementation uses the [`social`](/reference/configuration#social) option in Starlight config to render icons and links.
+Компонент, відображений у заголовку сайту, включаючи посилання на піктограми соціальних мереж.
+Стандартна реалізація використовує опцію [`social`](/reference/configuration#social) у конфігурації Starlight для візуалізації піктограм і посилань.
 
 #### `ThemeSelect`
 
-**Default component:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro)
+**Компонент за замовчуванням:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro)
 
-Component rendered in the site header that allows users to select their preferred color scheme.
+Компонент, відображений у заголовку сайту, який дозволяє користувачам вибрати бажану колірну схему.
 
 #### `LanguageSelect`
 
-**Default component:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LanguageSelect.astro)
+**Компонент за замовчуванням:** [`LanguageSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LanguageSelect.astro)
 
-Component rendered in the site header that allows users to switch to a different language.
+Компонент, відображений у заголовку сайту, який дозволяє користувачам перемикатися на іншу мову.
 
 ---
 
-### Global Sidebar
+### Глобальна бічна панель
 
-Starlight’s global sidebar includes the main site navigation.
-On narrow viewports this is hidden behind a drop-down menu.
+Глобальна бічна панель Starlight містить основну навігацію сайту.
+У вузьких вікнах перегляду це приховано за спадним меню.
 
 #### `Sidebar`
 
-**Default component:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro)
+**Компонент за замовчуванням:** [`Sidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro)
 
-Component rendered before page content that contains global navigation.
-The default implementation displays as a sidebar on wide enough viewports and inside a drop-down menu on small (mobile) viewports.
-It also renders [`<MobileMenuFooter />`](#mobilemenufooter) to show additional items inside the mobile menu.
+Компонент відтворюється перед вмістом сторінки, що містить глобальну навігацію.
+Реалізація за замовчуванням відображається як бічна панель на досить широких вікнах перегляду та всередині спадного меню на малих (мобільних) вікнах перегляду.
+Він також відображає [`<MobileMenuFooter />`](#mobilemenufooter), щоб показати додаткові елементи в меню мобільного пристрою.
 
 #### `MobileMenuFooter`
 
-**Default component:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuFooter.astro)
+**Компонент за замовчуванням:** [`MobileMenuFooter.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuFooter.astro)
 
-Component rendered at the bottom of the mobile drop-down menu.
-The default implementation renders [`<ThemeSelect />`](#themeselect) and [`<LanguageSelect />`](#languageselect).
+Компонент відображається в нижній частині спадного меню мобільного пристрою.
+Стандартна реалізація відображає [`<ThemeSelect />`](#themeselect) і [`<LanguageSelect />`](#languageselect).
 
 ---
 
-### Page Sidebar
+### Бічна панель сторінки
 
-Starlight’s page sidebar is responsible for displaying a table of contents outlining the current page’s subheadings.
-On narrow viewports this collapse into a sticky, drop-down menu.
+Бічна панель сторінки Starlight відповідає за відображення змісту підзаголовків поточної сторінки.
+У вузьких вікнах перегляду це згортається в липке спадне меню.
 
 #### `PageSidebar`
 
-**Default component:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
+**Компонент за замовчуванням:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
 
-Component rendered before the main page’s content to display a table of contents.
-The default implementation renders [`<TableOfContents />`](#tableofcontents) and [`<MobileTableOfContents />`](#mobiletableofcontents).
+Компонент відтворюється перед вмістом головної сторінки для відображення змісту.
+Реалізація за замовчуванням відображає [`<TableOfContents />`](#tableofcontents) і [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
 
-**Default component:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
+**Компонент за замовчуванням:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
 
-Component that renders the current page’s table of contents on wider viewports.
+Компонент, який відображає зміст поточної сторінки в ширших вікнах перегляду.
 
 #### `MobileTableOfContents`
 
-**Default component:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
+**Компонент за замовчуванням:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
 
-Component that renders the current page’s table of contents on small (mobile) viewports.
+Компонент, який відображає зміст поточної сторінки на малих (мобільних) вікнах перегляду.
 
 ---
 
-### Content
+### Вміст
 
-These components are rendered in the main column of page content.
+Ці компоненти відображаються в головному стовпці вмісту сторінки.
 
-#### `Banner`
+#### `Банер`
 
-**Default component:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
+**Компонент за замовчуванням:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
-Banner component rendered at the top of each page.
-The default implementation uses the page’s [`banner`](/reference/frontmatter#banner) frontmatter value to decide whether or not to render.
+Компонент банера відображається у верхній частині кожної сторінки.
+Реалізація за замовчуванням використовує значення frontmatter [`banner`](/reference/frontmatter#banner) сторінки, щоб вирішити, відображати чи ні.
 
 #### `ContentPanel`
 
-**Default component:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro)
+**Компонент за замовчуванням:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro)
 
-Layout component used to wrap sections of the main content column.
+Компонент макета, який використовується для обтікання розділів стовпця основного вмісту.
 
 #### `PageTitle`
 
-**Default component:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)
+**Компонент за замовчуванням:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)
 
-Component containing the `<h1>` element for the current page.
+Компонент, що містить елемент <h1> для поточної сторінки.
 
-Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default implementation.
+Реалізації мають переконатися, що вони встановлюють `id="_top"` для елемента `<h1>`, як у реалізації за умовчанням.
 
 #### `FallbackContentNotice`
 
-**Default component:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
+**Компонент за замовчуванням:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
 
-Notice displayed to users on pages where a translation for the current language is not available.
-Only used on multilingual sites.
+Сповіщення, що відображається користувачам на сторінках, де переклад поточною мовою недоступний.
+Використовується лише на багатомовних сайтах.
 
 #### `Hero`
 
-**Default component:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
+**Компонент за замовчуванням:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Component rendered at the top of the page when [`hero`](/reference/frontmatter#hero) is set in frontmatter.
-The default implementation shows a large title, tagline, and call-to-action links alongside an optional image.
+Компонент відображається у верхній частині сторінки, коли [`hero`](/reference/frontmatter#hero) встановлено у frontmatter.
+Стандартна реалізація показує великий заголовок, слоган і посилання із закликом до дії поряд із необов’язковим зображенням.
 
 #### `MarkdownContent`
 
-**Default component:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MarkdownContent.astro)
+**Компонент за замовчуванням:** [`MarkdownContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MarkdownContent.astro)
 
-Component rendered around each page’s main content.
-The default implementation sets up basic styles to apply to Markdown content.
+Компонент відображається навколо основного вмісту кожної сторінки.
+Стандартна реалізація встановлює базові стилі для застосування до вмісту Markdown.
 
 ---
 
-### Footer
+### Нижній колонтитул
 
-These components are rendered at the bottom of the main column of page content.
+Ці компоненти відображаються внизу головного стовпця вмісту сторінки.
 
 #### `Footer`
 
-**Default component:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro)
+**Компонент за замовчуванням:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro)
 
-Footer component displayed at the bottom of each page.
-The default implementation displays [`<LastUpdated />`](#lastupdated), [`<Pagination />`](#pagination), and [`<EditLink />`](#editlink).
+Компонент нижнього колонтитула, що відображається внизу кожної сторінки.
+Стандартна реалізація відображає [`<LastUpdated />`](#lastupdated), [`<Pagination />`](#pagination) і [`<EditLink />`](#editlink).
 
 #### `LastUpdated`
 
-**Default component:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro)
+**Компонент за замовчуванням:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro)
 
-Component rendered in the page footer to display the last-updated date.
+Компонент відтворюється в нижньому колонтитулі сторінки для відображення дати останнього оновлення.
 
 #### `EditLink`
 
-**Default component:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/EditLink.astro)
+**Компонент за замовчуванням:** [`EditLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/EditLink.astro)
 
-Component rendered in the page footer to display a link to where the page can be edited.
+Компонент відображається в нижньому колонтитулі сторінки для відображення посилання на сторінку, де можна редагувати її.
 
 #### `Pagination`
 
-**Default component:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro)
+**Компонент за замовчуванням:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro)
 
-Component rendered in the page footer to display navigation arrows between previous/next pages.
+Компонент, відображений у нижньому колонтитулі сторінки для відображення стрілок навігації між попередніми та наступними сторінками.
