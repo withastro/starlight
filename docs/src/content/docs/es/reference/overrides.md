@@ -293,7 +293,7 @@ Componente que renderiza la tabla de contenidos de la página actual en pantalla
 
 **Componente por defecto:** [`MobileTableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro)
 
-Componente que renderiza la tabla de contenidos de la página actual en viewports más estrechos (móviles).
+Componente que renderiza la tabla de contenidos de la página actual en pantallas más estrechas (móviles).
 
 ---
 
