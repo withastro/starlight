@@ -27,8 +27,8 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
    				en: {
    					label: 'English',
    				},
-   				// Docs en chinois simplifié dans `src/content/docs/zh/`
-   				zh: {
+   				// Docs en chinois simplifié dans `src/content/docs/zh-cn/`
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -55,7 +55,7 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -84,7 +84,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // lang est nécessaire pour les locales de la racine
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -102,7 +102,7 @@ Lorsque vous utilisez une locale `root`, gardez les pages pour cette langue dire
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -143,7 +143,7 @@ Si une traduction n'est pas encore disponible pour une langue, Starlight affiche
 
 En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de traduire les chaînes de l'interface utilisateur par défaut (par exemple, l'en-tête "Sur cette page" dans la table des matières) afin que vos lecteurs puissent découvrir votre site entièrement dans la langue sélectionnée.
 
-Les textes de l'interface utilisateur traduits en anglais, arabe, allemand, chinois simplifié, danois, espagnol, français, italien, japonais, néerlandais, norvégien, farsi, hébreu, portugais, tchèque, turc, coréen, indonésien, russe et suédois sont disponibles prêts à l'emploi, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Les textes de l'interface utilisateur traduits en anglais, arabe, allemand, chinois simplifié, danois, espagnol, français, italien, japonais, néerlandais, norvégien, farsi, hébreu, portugais, tchèque, turc, coréen, indonésien, russe, suédois et vietnamien sont disponibles prêts à l'emploi, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de données `i18n`.
 

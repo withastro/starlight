@@ -9,9 +9,12 @@ i18n:
   - docs/src/content/docs/fr/**/*
   - docs/src/content/docs/it/**/*
   - docs/src/content/docs/ja/**/*
-  - docs/src/content/docs/zh/**/*
+  - docs/src/content/docs/zh-cn/**/*
   - docs/src/content/docs/pt-br/**/*
   - docs/src/content/docs/ko/**/*
+  - docs/src/content/docs/ru/**/*
+  - docs/src/content/docs/id/**/*
+  - docs/src/content/docs/tr/**/*
 
 '🌟 core':
   - packages/starlight/**

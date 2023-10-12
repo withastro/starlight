@@ -25,19 +25,19 @@ Vous pouvez passer les options suivantes à l'intégration `starlight`.
 
 ### `title` (obligatoire)
 
-**type:** `string`
+**Type :** `string`
 
 Définissez le titre de votre site web. Il sera utilisé dans les métadonnées et dans le titre de l'onglet du navigateur.
 
 ### `description`
 
-**type:** `string`
+**Type :** `string`
 
 Définissez la description de votre site web. Utilisée dans les métadonnées partagées avec les moteurs de recherche dans la balise `<meta name="description">` si `description` n'est pas définie dans le frontmatter d'une page.
 
 ### `logo`
 
-**type:** [`LogoConfig`](#logoconfig)
+**Type :** [`LogoConfig`](#logoconfig)
 
 Définit une image de logo à afficher dans la barre de navigation à côté ou à la place du titre du site. Vous pouvez soit définir une seule propriété `src`, soit définir des sources d'images séparées pour `light` et `dark`.
 
@@ -60,14 +60,14 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**Par défaut :** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Configurez la table des matières affichée à droite de chaque page. Par défaut, les titres `<h2>` et `<h3>` seront inclus dans cette table des matières.
 
 ### `editLink`
 
-**type:** `{ baseUrl: string }`
+**Type :** `{ baseUrl: string }`
 
 Permet d'activer les liens "Modifier cette page" en définissant l'URL de base qu'ils doivent utiliser. Le lien final sera `editLink.baseUrl` + le chemin de la page actuelle. Par exemple, pour permettre l'édition de pages dans le repo `withastro/starlight` sur GitHub :
 
@@ -83,7 +83,7 @@ Avec cette configuration, une page `/introduction` aurait un lien d'édition poi
 
 ### `sidebar`
 
-**type:** [`SidebarItem[]`](#sidebarittem)
+**Type :** [`SidebarItem[]`](#sidebaritem)
 
 Configure les éléments de navigation de la barre latérale de votre site.
 
@@ -187,9 +187,13 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
-  | { items: SidebarItem[] }
-  | { autogenerate: { directory: string } }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
 );
 ```
 
@@ -204,7 +208,7 @@ interface BadgeConfig {
 
 ### `locales`
 
-**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**Type :** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 [Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` supportées.
 
@@ -226,8 +230,8 @@ export default defineConfig({
         en: {
           label: 'English',
         },
-        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh/`
-        zh: {
+        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh-cn/`
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
@@ -256,19 +260,19 @@ Vous pouvez définir les options suivantes pour chaque locale :
 
 ##### `label` (obligatoire)
 
-**type:** `string`
+**Type :** `string`
 
 L'étiquette de cette langue à afficher aux utilisateurs, par exemple dans le sélecteur de langue. Le plus souvent, il s'agit du nom de la langue tel qu'un utilisateur de cette langue s'attendrait à le lire, par exemple `"English"`, `"العربية"`, ou `"简体中文"`.
 
 ##### `lang`
 
-**type:** `string`
+**Type :** `string`
 
 L'étiquette d’identification BCP-47 pour cette langue, par exemple `"en"`, `"ar"`, ou `"zh-CN"`. Si elle n'est pas définie, le nom du répertoire de la langue sera utilisé par défaut. Les étiquettes de langue avec des sous-étiquettes régionales (par exemple `"pt-BR"` ou `"en-US"`) utiliseront les traductions de l'interface utilisateur intégrées pour leur langue de base si aucune traduction spécifique à la région n'est trouvée.
 
 ##### `dir`
 
-**type:** `'ltr' | 'rtl'`
+**Type :** `'ltr' | 'rtl'`
 
 Le sens d'écriture de cette langue ; `"ltr"` pour gauche à droite (par défaut) ou `"rtl"` pour droite à gauche.
 
@@ -294,7 +298,7 @@ Par exemple, cela vous permet de servir `/getting-started/` comme une route angl
 
 ### `defaultLocale`
 
-**type:** `string`
+**Type :** `string`
 
 Définit la langue par défaut pour ce site.
 La valeur doit correspondre à l'une des clés de votre objet [`locales`](#locales).
@@ -304,7 +308,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**Type :** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
@@ -328,7 +332,7 @@ starlight({
 
 ### `customCss`
 
-**type:** `string[]`
+**Type :** `string[]`
 
 Fournit des fichiers CSS pour personnaliser l'aspect et la convivialité de votre site Starlight.
 
@@ -342,7 +346,7 @@ starlight({
 
 ### `head`
 
-**type:** [`HeadConfig[]`](#headconfig)
+**Type :** [`HeadConfig[]`](#headconfig)
 
 Ajoute des balises personnalisées au `<head>` de votre site Starlight.
 Cela peut être utile pour ajouter des analyses et d'autres scripts et ressources tiers.
@@ -375,8 +379,8 @@ interface HeadConfig {
 
 ### `lastUpdated`
 
-**type:** `boolean`  
-**default:** `false`
+**Type :** `boolean`  
+**Par défaut :** `false`
 
 Contrôlez si le pied de page affiche la date de la dernière mise à jour de la page.
 
@@ -386,8 +390,8 @@ la date basée sur Git en utilisant [le champ `lastUpdated` du frontmatter](/fr/
 
 ### `pagination`
 
-**type:** `boolean`  
-**default:** `true`
+**Type :** `boolean`  
+**Par défaut :** `true`
 
 Définnissez si le pied de page doit inclure des liens vers les pages précédentes et suivantes.
 
@@ -395,8 +399,8 @@ Une page peut remplacer ce paramètre ou le texte du lien et/ou l'URL en utilisa
 
 ### `favicon`
 
-**type:** `string`  
-**default:** `'/favicon.svg'`
+**Type :** `string`  
+**Par défaut :** `'/favicon.svg'`
 
 Définnissez le chemin de l'icône par défaut pour votre site Web qui doit être situé dans le répertoire `public/` et être un fichier d'icône valide (`.ico`, `.gif`, `.jpg`, `.png` ou `.svg`).
 
@@ -424,3 +428,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**Type :** `string`  
+**Par défaut :** `'|'`
+
+Définit le délimiteur entre le titre de la page et le titre du site dans la balise `<title>` de la page, qui s'affiche dans les onglets du navigateur.
+
+Par défaut, chaque page a une balise `<title>` contenant `Titre de la page | Titre du site`.
+Par example, cette page a pour titre « Référence de configuration » et ce site a pour titre « Starlight », donc la balise `<title>` de cette page contient « Référence de configuration | Starlight ».
+
+### `components`
+
+**Type :** `Record<string, string>`
+
+Fournit les chemins vers les composants pour redéfinir les implémentations par défaut de Starlight.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+Consultez la [référence des redéfinitions](/fr/reference/overrides/) pour plus de détails sur tous les composants que vous pouvez redéfinir.
