@@ -141,7 +141,7 @@ Oggetto `URL` per l'indirizzo in cui questa pagina può essere modificata se abi
 ### Head
 
 Questi componenti vengono renderizzati all'interno dell'elemento `<head>` di ciascuna pagina.
-Dovrebbero includere solo [elementi consentiti all'interno di `<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_ also).
+Dovrebbero includere solo [elementi consentiti all'interno di `<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also).
 
 #### `Head`
 
@@ -169,7 +169,7 @@ L'implementazione predefinita include uno script in linea e un `<template>` util
 **Componente standard:** [`SkipLink.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro)
 
 Componente renderizzato come primo elemento all'interno di `<body>` che si collega al contenuto della pagina principale per l'accessibilità.
-L'implementazione predefinita è nascosta finché un utente non la focalizza premento il tasto tab con la tastiera.
+L'implementazione predefinita è nascosta finché un utente non la focalizza premendo il tasto tab con la tastiera.
 
 ---
 
