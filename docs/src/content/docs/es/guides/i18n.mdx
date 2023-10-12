@@ -27,8 +27,8 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
    				en: {
    					label: 'English',
    				},
-   				// Chino simplificado en `src/content/docs/zh/`
-   				zh: {
+   				// Chino simplificado en `src/content/docs/zh-cn/`
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -55,7 +55,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -84,7 +84,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // lang es obligatorio para los locales raíz
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -102,7 +102,7 @@ Cuando uses una `root` locale, mantén las páginas para ese idioma directamente
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -140,7 +140,7 @@ Si no hay una traducción disponible para un idioma, Starlight mostrará a los l
 
 ## Traduce la UI de Starlight
 
-Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, checo, francés, alemán, italiano, japonés, holandés, portugués, danés, español, turco, árabe, noruego, farsi, hebreo, chino simplificado, coreano, indonesio, ruso y sueco. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, checo, francés, alemán, italiano, japonés, holandés, portugués, danés, español, turco, árabe, noruego, farsi, hebreo, chino simplificado, coreano, indonesio, ruso, sueco, y vietnamita. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 

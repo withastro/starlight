@@ -5,7 +5,7 @@ description: Var olan Astro projesine Starlight'ı eklemek için nasıl yapılan
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Yeni bir Starlight sitesi yapmanın en hızlı yolu, [Başlangıç Rehberi](/getting-started/#creating-a-new-project)'nde gösterildiği gibi `create astro` komutunu kullanmak.
+Yeni bir Starlight sitesi yapmanın en hızlı yolu, [Başlangıç Rehberi](/tr/getting-started/#creating-a-new-project)'nde gösterildiği gibi `create astro` komutunu kullanmak.
 Mevcut Astro projesine Starlight eklemek istersen, bu rehber nasıl yapılacağını açıklar.
 
 ## Starlight Kurulumu
@@ -57,7 +57,8 @@ export default defineConfig({
 	],
 });
 ```
-Geçerli olan tüm ayarları [Starlight Yapılandırma Referansı](/reference/configuration/)'nda bulabilirsin.
+
+Geçerli olan tüm ayarları [Starlight Yapılandırma Referansı](/tr/reference/configuration/)'nda bulabilirsin.
 
 ### İçerik Koleksiyonlarının Yapılandırılması
 
@@ -91,8 +92,9 @@ description: Starlight ile yapılmış bu dokümantasyon sitesinde projem ile il
 
 Projeme hoşgeldin!
 ```
+
 Starlight dosya bazlı yönlendirme kullanır, bu da `src/content/docs/` dizini altındaki her Markdown, MDX ya da Markdoc dosyasını sitende bir sayfaya dönüştüreceği anlamına gelir. Frontmatter metadata (yukarıdaki örnekte yer alan `title` ve `description` alanları) görüntülenen her sayfada değişebilir.
-Geçerli olan tüm ayarları [frontmatter referansı](/reference/frontmatter/)'nda görebilirsin.
+Geçerli olan tüm ayarları [frontmatter referansı](/tr/reference/frontmatter/)'nda görebilirsin.
 
 ## Var olan siteler için ipuçları
 
@@ -100,7 +102,7 @@ Hazır Astro projen varsa, Starlight'ı sitende dokümantasyon bölümü oluştu
 
 ### Starlight'ın Alt Kırılımda Kullanımı
 
-Tüm Starlight sayfalarını alt kırılımda eklemek için  `src/content/docs/` içinde alt dizin olarak tüm dokümanlarını ekle.
+Tüm Starlight sayfalarını alt kırılımda eklemek için `src/content/docs/` içinde alt dizin olarak tüm dokümanlarını ekle.
 
 Örneğin, Starlight sayfaların `/guides/` kırılımıyla başlaması gerekiyorsa, içeriklerini `src/content/docs/guides/` dizininde ekle:
 
@@ -124,4 +126,3 @@ Bu kullanımı, `src/content/docs/` dizini içinde ekstra alt dizin ihtiyacını
 ### Starliht'ın SSR ile Kullanımı
 
 Mevcut olarak Starlight Astro'nun sunucu adaptörlerini kullanarak [SSR dağıtımı](https://docs.astro.build/en/guides/server-side-rendering/)'nı desteklememektedir. Yakın zamanda desteklemeyi planlıyoruz.
-

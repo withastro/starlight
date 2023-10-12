@@ -2,6 +2,7 @@
 title: Doğa Dostu Dokümanlar
 description: Starlight'ın daha çevreci dokümantasyon sitesi oluşturmanda nasıl yardımcı olacağını ve karbon ayakizini nasıl düşüreceğini öğren.
 ---
+
 Web endüstrisinin iklime etkisinin [%2][sf] ila [4% arasında küresel karbon emisyonu][bbc]'na sahip olduğu tahmin ediliyor; kabaca havayolları endüstrisindeki emisyon oranında.
 Bir websitesinin ekolojik etkisini hesaplamada çok fazla karmaşık etken var, ancak bu rehber dokümantasyon sitenizin çevresel ayakizini düşürmek için birkaç ipucu içerir.
 
@@ -40,7 +41,7 @@ Bu dizin CSS, Javascript ve diğer paketlenmiş dosyaları içerir ve güvenle s
 Cache-Control: public, max-age=604800, immutable
 ```
 
-Ön belleklemenin nasıl yapılandırılacağı web sunucunuza bağlıdır. Örneğin; Vercel önbellekleme stratejisini herhangi bir yapılandırmaya gerek kalmadan uygularken, Netlify'da `public/_headers` altına  [Netlify için özel header'lar][ntl-headers] ile ayarlayabilirsiniz:
+Ön belleklemenin nasıl yapılandırılacağı web sunucunuza bağlıdır. Örneğin; Vercel önbellekleme stratejisini herhangi bir yapılandırmaya gerek kalmadan uygularken, Netlify'da `public/_headers` altına [Netlify için özel header'lar][ntl-headers] ile ayarlayabilirsiniz:
 
 ```
 /_astro/*
@@ -89,17 +90,17 @@ Diğer dokümantasyon çerçeveleri ile nasıl kıyaslandığını merak ediyor 
 [Website Carbon Calculator][wcc] ile yapılan testlerle, farklı araçlarla oluşturulmuş benzer sayfaları karşılaştırın.
 
 | Çerçeve                     | sayfa başına ziyarette CO₂ |
-| --------------------------- | ------------------         |
-| [Starlight][sl-carbon]      | 0.01gr                      |
-| [VitePress][vp-carbon]      | 0.05gr                      |
-| [Docus][dc-carbon]          | 0.05gr                      |
-| [Sphinx][sx-carbon]         | 0.07gr                      |
-| [MkDocs][mk-carbon]         | 0.10gr                      |
-| [Nextra][nx-carbon]         | 0.11gr                      |
-| [docsify][dy-carbon]        | 0.11gr                      |
-| [Docusaurus][ds-carbon]     | 0.24gr                      |
-| [Read the Docs][rtd-carbon] | 0.24gr                      |
-| [GitBook][gb-carbon]        | 0.71gr                      |
+| --------------------------- | -------------------------- |
+| [Starlight][sl-carbon]      | 0.01gr                     |
+| [VitePress][vp-carbon]      | 0.05gr                     |
+| [Docus][dc-carbon]          | 0.05gr                     |
+| [Sphinx][sx-carbon]         | 0.07gr                     |
+| [MkDocs][mk-carbon]         | 0.10gr                     |
+| [Nextra][nx-carbon]         | 0.11gr                     |
+| [docsify][dy-carbon]        | 0.11gr                     |
+| [Docusaurus][ds-carbon]     | 0.24gr                     |
+| [Read the Docs][rtd-carbon] | 0.24gr                     |
+| [GitBook][gb-carbon]        | 0.71gr                     |
 
 <small>14 Mayıs 2023 tarihli veriler. Güncel bilgileri görmek için linke tıkla.</small>
 
