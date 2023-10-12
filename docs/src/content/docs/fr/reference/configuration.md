@@ -83,7 +83,7 @@ Avec cette configuration, une page `/introduction` aurait un lien d'édition poi
 
 ### `sidebar`
 
-**type:** [`SidebarItem[]`](#sidebarittem)
+**type:** [`SidebarItem[]`](#sidebaritem)
 
 Configure les éléments de navigation de la barre latérale de votre site.
 
@@ -187,9 +187,13 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
-  | { items: SidebarItem[] }
-  | { autogenerate: { directory: string } }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
 );
 ```
 
@@ -226,8 +230,8 @@ export default defineConfig({
         en: {
           label: 'English',
         },
-        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh/`
-        zh: {
+        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh-cn/`
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
@@ -304,7 +308,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
@@ -424,3 +428,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**type:** `string`  
+**default:** `'|'`
+
+Définit le délimiteur entre le titre de la page et le titre du site dans la balise `<title>` de la page, qui s'affiche dans les onglets du navigateur.
+
+Par défaut, chaque page a une balise `<title>` contenant `Titre de la page | Titre du site`.
+Par example, cette page a pour titre « Référence de configuration » et ce site a pour titre « Starlight », donc la balise `<title>` de cette page contient « Référence de configuration | Starlight ».
+
+### `components`
+
+**type:** `Record<string, string>`
+
+Fournit les chemins vers les composants pour redéfinir les implémentations par défaut de Starlight.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+Consultez la [référence des redéfinitions](/fr/reference/overrides/) pour plus de détails sur tous les composants que vous pouvez redéfinir.

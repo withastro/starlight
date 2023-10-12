@@ -27,8 +27,8 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
    				en: {
    					label: 'English',
    				},
-   				// 簡体字中国語のドキュメントは`src/content/docs/zh/`に置きます。
-   				zh: {
+   				// 簡体字中国語のドキュメントは`src/content/docs/zh-cn/`に置きます。
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -54,7 +54,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -83,7 +83,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // langはルートロケールに必要です
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -101,7 +101,7 @@ export default defineConfig({
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>

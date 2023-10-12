@@ -1,8 +1,6 @@
 ---
 title: 侧边栏导航
 description: 了解如何设置和自定义 Starlight 站点的侧边栏导航链接。
-sidebar:
-  badge: New
 ---
 
 import FileTree from '../../../../components/file-tree.astro';
@@ -53,7 +51,7 @@ import SidebarPreview from '../../../../components/sidebar-preview.astro';
 
 ## 添加链接和链接分组
 
-要配置侧边栏 [链接](#链接) 和 [链接分组](#分组)（在可折叠的标题中），请在 `astro.config.mjs` 中使用 [`starlight.sidebar`](/zh/reference/configuration/#sidebar) 属性。
+要配置侧边栏 [链接](#链接) 和 [链接分组](#分组)（在可折叠的标题中），请在 `astro.config.mjs` 中使用 [`starlight.sidebar`](/zh-cn/reference/configuration/#sidebar) 属性。
 
 结合使用链接和链接分组，你可以创建各种侧边栏布局。
 
@@ -65,7 +63,7 @@ import SidebarPreview from '../../../../components/sidebar-preview.astro';
 starlight({
 	sidebar: [
 		// 指向 CSS & Styling 指南的链接
-		{ label: 'CSS & Styling', link: '/zh/guides/css-and-tailwind/' },
+		{ label: 'CSS & Styling', link: '/zh-cn/guides/css-and-tailwind/' },
 		// 指向 Astro 官网的外部链接
 		{ label: 'Astro', link: 'https://astro.build/' },
 	],
@@ -76,7 +74,7 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS & Styling', link: '/zh/guides/css-and-tailwind/' },
+		{ label: 'CSS & Styling', link: '/zh-cn/guides/css-and-tailwind/' },
 		{ label: 'Astro', link: 'https://astro.build/' },
 	]}
 />
@@ -191,9 +189,9 @@ starlight({
 
 #### 在 frontmatter 中自定义自动生成的链接
 
-在单个页面中使用 [`sidebar` frontmatter 字段](/zh/reference/frontmatter/#sidebar) 来自定义自动生成的链接。
+在单个页面中使用 [`sidebar` frontmatter 字段](/zh-cn/reference/frontmatter/#sidebar) 来自定义自动生成的链接。
 
-侧边栏 frontmatter 选项允许你设置 [自定义标签](/zh/reference/frontmatter/#label) 或者为链接添加 [徽章](/zh/reference/frontmatter/#badge)，[隐藏](/zh/reference/frontmatter/#hidden) 侧边栏中的链接，或者定义 [自定义排序权重](/zh/reference/frontmatter/#order)。
+侧边栏 frontmatter 选项允许你设置 [自定义标签](/zh-cn/reference/frontmatter/#label) 或者为链接添加 [徽章](/zh-cn/reference/frontmatter/#badge)，[隐藏](/zh-cn/reference/frontmatter/#hidden) 侧边栏中的链接，或者定义 [自定义排序权重](/zh-cn/reference/frontmatter/#order)。
 
 ```md
 ---
@@ -314,6 +312,50 @@ starlight({
 	]}
 />
 
+## 自定义 HTML 属性
+
+可以通过在链接对象里添加 `attrs` 属性来自定义链接元素的 HTML 属性。
+
+在下面的例子中，通过 `attrs` 添加了一个 `target="_blank"` 属性，使得链接在新标签页中打开，并应用了一个自定义的 `style` 属性使链接标签变为斜体：
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// 一个指向 Astro 文档的在新标签页打开的外部链接。
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+以上配置将生成以下侧边栏：
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## 国际化
 
 使用链接和分组条目上的 `translations` 属性为每种支持的语言翻译链接或分组标签。
@@ -325,22 +367,22 @@ starlight({
 		{
 			label: 'Guides',
 			translations: {
-				zh: '指南',
+				'zh-cn': '指南',
 			},
 			items: [
 				{
 					label: 'Components',
 					translations: {
-						zh: '组件',
+						'zh-cn': '组件',
 					},
-					link: '/zh/guides/components/',
+					link: '/zh-cn/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
-						zh: '国际化 (i18n)',
+						'zh-cn': '国际化 (i18n)',
 					},
-					link: '/zh/guides/i18n/',
+					link: '/zh-cn/guides/i18n/',
 				},
 			],
 		},
@@ -348,15 +390,15 @@ starlight({
 });
 ```
 
-浏览简体中文文档将生成以下侧边栏:
+浏览简体中文文档将生成以下侧边栏：
 
 <SidebarPreview
 	config={[
 		{
 			label: '指南',
 			items: [
-				{ label: '组件', link: '/zh/guides/components/' },
-				{ label: '国际化 (i18n)', link: '/zh/guides/i18n/' },
+				{ label: '组件', link: '/zh-cn/guides/components/' },
+				{ label: '国际化 (i18n)', link: '/zh-cn/guides/i18n/' },
 			],
 		},
 	]}

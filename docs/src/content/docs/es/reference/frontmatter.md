@@ -225,9 +225,21 @@ pagefind: false
 
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**tipo:** [`SidebarConfig`](#sidebarconfig)
 
 Controla cómo se muestra esta página en el [sidebar](/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -298,5 +310,21 @@ sidebar:
   badge:
     text: Experimental
     variant: caution
+---
+```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+Atributos HTML para agregar al enlace de la página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
+
+```md
+---
+title: Página que se abre en una nueva pestaña
+sidebar:
+  # Abre la página en una nueva pestaña
+  attrs:
+    target: _blank
 ---
 ```
