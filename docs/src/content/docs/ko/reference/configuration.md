@@ -33,7 +33,7 @@ export default defineConfig({
 
 **타입:** `string`
 
-웹사이트에 대한 설명을 설정합니다. 페이지의 frontmatter에 `description`이 설정되지 않은 경우, `<meta name="description">` 태그에서 검색 엔진과 공유되는 메타데이터로 사용됩니다.
+웹사이트에 대한 설명을 설정합니다. 페이지의 프론트매터에 `description`이 설정되지 않은 경우, `<meta name="description">` 태그에서 검색 엔진과 공유되는 메타데이터로 사용됩니다.
 
 ### `logo`
 
@@ -386,7 +386,7 @@ interface HeadConfig {
 
 페이지 하단에 최종 업데이트 날짜를 표시할지 여부를 제어합니다.
 
-기본적으로 이 기능은 저장소의 Git 기록에 의존하며 [얕은 복제](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt)를 수행하는 일부 배포 플랫폼에서는 정확하지 않을 수 있습니다. 페이지는 [`lastUpdated` frontmatter 필드](/ko/reference/frontmatter/#lastupdated)를 사용하여 이 설정이나 Git 기반 날짜를 변경할 수 있습니다.
+기본적으로 이 기능은 저장소의 Git 기록에 의존하며 [얕은 복제](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt)를 수행하는 일부 배포 플랫폼에서는 정확하지 않을 수 있습니다. 페이지는 [`lastUpdated` 프론트매터 필드](/ko/reference/frontmatter/#lastupdated)를 사용하여 이 설정이나 Git 기반 날짜를 변경할 수 있습니다.
 
 ### `pagination`
 
@@ -395,7 +395,7 @@ interface HeadConfig {
 
 페이지 하단에 이전 페이지 링크와 다음 페이지 링크가 포함되어야 하는지 정의합니다.
 
-페이지는 [`prev`](/ko/reference/frontmatter/#prev)와 [`next`](/ko/reference/frontmatter/#next) frontmatter 필드를 통해 이 설정이나 링크 텍스트, URL을 변경할 수 있습니다.
+페이지는 [`prev`](/ko/reference/frontmatter/#prev)와 [`next`](/ko/reference/frontmatter/#next) 프론트매터 필드를 통해 이 설정이나 링크 텍스트, URL을 변경할 수 있습니다.
 
 ### `favicon`
 
