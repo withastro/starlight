@@ -12,7 +12,7 @@ export const locales = {
 	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
 	ko: { label: '한국어', lang: 'ko' },
-	tr: { label: 'Türkçe', lang: 'tr'},
+	tr: { label: 'Türkçe', lang: 'tr' },
 	ru: { label: 'Русский', lang: 'ru' },
 };
 
