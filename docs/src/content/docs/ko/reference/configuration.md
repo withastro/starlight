@@ -93,7 +93,7 @@ starlight({
 
 - `items` — 더 많은 사이드바 링크와 하위 그룹을 포함하는 배열
 
-- `autogenerate` — 링크 그룹을 자동으로 생성하기 위해 문서의 디렉토리를 지정하는 객체
+- `autogenerate` — 링크 그룹을 자동으로 생성하기 위해 문서의 디렉터리를 지정하는 객체
 
 ```js
 starlight({
@@ -108,7 +108,7 @@ starlight({
         { label: '다음 단계', link: '/next-steps' },
       ],
     },
-    // 'reference' 디렉토리의 모든 페이지에 연결되는 그룹
+    // 'reference' 디렉터리의 모든 페이지에 연결되는 그룹
     {
       label: '참조',
       autogenerate: { directory: 'reference' },
@@ -210,7 +210,7 @@ interface BadgeConfig {
 
 지원되는 `locales`를 설정하여 사이트의 [국제화(i18n)를 구성](/ko/guides/i18n/)하세요.
 
-각 항목은 언어 파일이 저장된 디렉토리를 키로 사용해야 합니다.
+각 항목은 언어 파일이 저장된 디렉터리를 키로 사용해야 합니다.
 
 ```js
 // astro.config.mjs
@@ -271,7 +271,7 @@ interface LocaleConfig {
 
 **타입:** `string`
 
-`"en"`, `"ar"` 또는 `"zh-CN"`와 같은 언어의 BCP-47 태그입니다. 설정하지 않으면 기본적으로 해당 언어의 디렉토리 이름이 사용됩니다. 지역 하위 태그가 있는 언어 태그(예: `"pt-BR"` 또는 `"en-US"`)는 지역별 번역이 없는 경우에 내장된 기본 언어 UI 번역을 사용합니다.
+`"en"`, `"ar"` 또는 `"zh-CN"`와 같은 언어의 BCP-47 태그입니다. 설정하지 않으면 기본적으로 해당 언어의 디렉터리 이름이 사용됩니다. 지역 하위 태그가 있는 언어 태그(예: `"pt-BR"` 또는 `"en-US"`)는 지역별 번역이 없는 경우에 내장된 기본 언어 UI 번역을 사용합니다.
 
 ##### `dir`
 
@@ -281,7 +281,7 @@ interface LocaleConfig {
 
 #### 루트 로케일
 
-`root` 로케일을 설정하면 `/lang/` 디렉토리 없이 기본 언어를 제공할 수 있습니다.
+`root` 로케일을 설정하면 `/lang/` 디렉터리 없이 기본 언어를 제공할 수 있습니다.
 
 ```js
 starlight({
@@ -402,7 +402,7 @@ interface HeadConfig {
 **타입:** `string`  
 **기본값:** `'/favicon.svg'`
 
-`public/` 디렉토리에 포함되어 있으며 유효한 아이콘 파일인 (`.ico`, `.gif`, `.jpg`, `.png`, 또는 `.svg`) 웹 사이트의 기본 파비콘 경로를 설정합니다.
+`public/` 디렉터리에 포함되어 있으며 유효한 아이콘 파일인 (`.ico`, `.gif`, `.jpg`, `.png`, 또는 `.svg`) 웹 사이트의 기본 파비콘 경로를 설정합니다.
 
 ```js
 starlight({
