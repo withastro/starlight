@@ -185,6 +185,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -207,7 +208,7 @@ interface BadgeConfig {
 
 **类型：** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-为你的网站设置支持的 `locales` 来[配置国际化（i18n）](/zh/guides/i18n/)。
+为你的网站设置支持的 `locales` 来[配置国际化（i18n）](/zh-cn/guides/i18n/)。
 
 每个条目都应该使用该语言文件保存的目录作为 key。
 
@@ -227,8 +228,8 @@ export default defineConfig({
         en: {
           label: 'English',
         },
-        // 简体中文文档在 `src/content/docs/zh/`
-        zh: {
+        // 简体中文文档在 `src/content/docs/zh-cn/`
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
@@ -305,7 +306,7 @@ starlight({
 
 ### `social`
 
-**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
 
@@ -381,7 +382,7 @@ interface HeadConfig {
 
 控制页脚是否显示页面上次更新的时间。
 
-默认情况下，此功能依赖于你的存储库的 Git 历史记录，并且在某些执行[浅克隆](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt)的部署平台上可能不准确。页面可以使用 [`lastUpdated` frontmatter 字段](/zh/reference/frontmatter/#lastupdated)覆盖此设置或基于 Git 的日期。
+默认情况下，此功能依赖于你的存储库的 Git 历史记录，并且在某些执行[浅克隆](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt)的部署平台上可能不准确。页面可以使用 [`lastUpdated` frontmatter 字段](/zh-cn/reference/frontmatter/#lastupdated)覆盖此设置或基于 Git 的日期。
 
 ### `pagination`
 
@@ -390,7 +391,7 @@ interface HeadConfig {
 
 定义页脚是否应包含上一页和下一页的链接。
 
-页面可以使用 [`prev`](/zh/reference/frontmatter/#prev) 和 [`next`](/zh/reference/frontmatter/#next) frontmatter 字段覆盖此设置或链接文本和/或 URL。
+页面可以使用 [`prev`](/zh-cn/reference/frontmatter/#prev) 和 [`next`](/zh-cn/reference/frontmatter/#next) frontmatter 字段覆盖此设置或链接文本和/或 URL。
 
 ### `favicon`
 
@@ -423,3 +424,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**类型：** `string`  
+**默认值：** `'|'`
+
+设置在页面的 `<title>` 标签里页面标题和网站标题之间的分隔符，它会显示在浏览器标签上。
+
+默认情况下，每个页面的 `<title>` 都是 `页面标题 | 网站标题`。
+举例，本页面的标题是“配置参考”，本站点的标题是“Starlight”，所以本页面的 `<title>` 是“配置参考 | Starlight”。
+
+### `components`
+
+**类型：** `Record<string, string>`
+
+提供组件的路径来覆盖 Starlight 的默认实现。
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+要查阅所有可覆盖的组件，请参阅[覆盖参考](/zh-cn/reference/overrides/)。

@@ -13,7 +13,7 @@ When you need more than what’s possible out of the box, Starlight supports bui
 
 Overriding Starlight’s default components can be useful when:
 
-- You want to change how a part of Starlight’s UI looks in a way not possible with [custom CSS](/css-and-tailwind/).
+- You want to change how a part of Starlight’s UI looks in a way not possible with [custom CSS](/guides/css-and-tailwind/).
 - You want to change how a part of Starlight’s UI behaves.
 - You want to add some additional UI alongside Starlight’s existing UI.
 
@@ -48,7 +48,7 @@ Overriding Starlight’s default components can be useful when:
        starlight({
          title: 'My Docs with Overrides',
          components: {
-           // Override the default `SocialLinks` component.
+           // Override the default `SocialIcons` component.
            SocialIcons: './src/components/EmailLink.astro',
          },
        }),
@@ -60,13 +60,13 @@ Overriding Starlight’s default components can be useful when:
 
 You can build with Starlight’s default UI components just as you would with your own: importing and rendering them in your own custom components. This allows you to keep all of Starlight's basic UI within your design, while adding extra UI alongside them.
 
-The example below shows a custom component that renders an e-mail link along with the default `SocialLinks` component:
+The example below shows a custom component that renders an e-mail link along with the default `SocialIcons` component:
 
 ```astro {4,8}
 ---
 // src/components/EmailLink.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/SocialIcons.astro';
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">E-mail Me</a>
@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Learn more about all the available props in the [Overrides Reference](/reference/overrides/#prop-types).
+Learn more about all the available props in the [Overrides Reference](/reference/overrides/#component-props).
 
 ### Only override on specific pages
 
@@ -114,7 +114,7 @@ In the following example, a component overriding Starlight's [`Footer`](/referen
 ---
 // src/components/ConditionalFooter.astro
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/Footer.astro';
+import Default from '@astrojs/starlight/components/Footer.astro';
 
 const isHomepage = Astro.props.slug === '';
 ---
