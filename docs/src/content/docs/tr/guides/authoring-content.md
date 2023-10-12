@@ -10,16 +10,15 @@ Markdown desteği ve kullanımı farklılık gösterebileceğinden dolayı, bu d
 ## Satır İçi Stiller
 
 Metin **kalın**, _italik_ ya da ~~üstü çizili~~ olabilir.
-Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 ```md
 Metin **kalın**, _italik_ ya da ~~üstü çizili~~ olabilir.
 ```
 
-Başka bir sayfaya [bağlantı ekleyebilirsiniz](/getting-started/).
+Başka bir sayfaya [bağlantı ekleyebilirsiniz](/tr/getting-started/).
 
 ```md
-Başka bir sayfaya [bağlantı ekleyebilirsiniz](/getting-started/).
+Başka bir sayfaya [bağlantı ekleyebilirsiniz](/tr/getting-started/).
 ```
 Kesme işaretleri ile `satır için kodu` vurgulayabilirsiniz.
 
@@ -80,7 +79,7 @@ description: Starlight'ın kurulu bağlantıları nasıl kullanılır
 
 ## Giriş
 
-[Görüşümü](#conclusion) aynı sayfanın aşağısına iliştirebilirim.
+[Görüşümü](#görüş) aynı sayfanın aşağısına iliştirebilirim.
 
 ## Görüş
 
@@ -147,7 +146,7 @@ Yardımcı Starlight özellikleri sayesinde kullanıcılarınız daha kolay ür�
 
 - Yönlendirmeyi temizle
 - Kullanıcı-yapılandırmalı renk teması
-- [i18n desteği](/guides/i18n)
+- [i18n desteği](/tr/guides/i18n)
 
 :::
 
@@ -161,7 +160,7 @@ Yardımcı Starlight özellikleri sayesinde kullanıcılarınız daha kolay ür�
 
 - Yönlendirmeyi temizle
 - Kullanıcı-yapılandırmalı renk teması
-- [i18n desteği](/guides/i18n)
+- [i18n desteği](/tr/guides/i18n)
 
 :::
 ```
