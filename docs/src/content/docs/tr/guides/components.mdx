@@ -29,6 +29,7 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 	Bileşenler ayrıca **içe yerleştirilmiş içerik** barındırabilir.
 </AnotherComponent>
 ```
+
 Starlight'ın Astro'dan aldığı güç sayesinde, MDX dosyalarınız içerisinde [desteklenen herhangi bir arayüz çerçevesi ile (React, Preact, Svelte, Vue, Solid, Lit, ve Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) oluşturulmış bileşenlerinizi destekleyebilirsiniz.
 Astro dokümantasyonunda [MDX içerisinde bileşen kullanmak](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) hakkında daha fazlasını öğrenin.
 
@@ -68,6 +69,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 	<TabItem label="Uydular">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
+
 Yukarıdaki kod, sayfa üzerinde aşağıdaki gibi sekmeler oluşturur:
 
 <Tabs>
@@ -83,6 +85,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 Birden fazla kartı `<CardGrid>` bileşeni içinde, yeteri kadar boşluk olduğu zaman kartları yan yana sıralı olarak göstermek için sarmalayın.
 
 `<Card>` bileşeni `title` değerine ihtiyaç duyar ve opsiyonel olarak [Starlight'ın kurulu ikonlarından birinin](#all-icons) ismini taşıyan `icon` özelliğini içerebilir.
+
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
@@ -97,6 +100,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 </CardGrid>
 ```
+
 Yukarıdaki kod, sayfa üzerinde aşağıdaki gibi çıktı oluşturur:
 
 <Card title="Buna bir bakın.">Vurgulamak istediğin ilgi çekici içerik</Card>
@@ -123,9 +127,10 @@ Projenizin kilit özelliklerini göstermek için anasayfanızda kart kılavuzunu
 :::
 
 ### Bağlantı kartları
+
 Belirgin olarak farklı sayfalara bağlantı eklemek için `<LinkCard>` bileşenini kullanın.
 
-`<LinkCard>` `title` değerine ve [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) özelliğine ihtiyaç duyar. İsteğe bağlı olarak  `description` ya da `target` gibi bağlantı özelliklerini ekleyebilirsiniz.
+`<LinkCard>` `title` değerine ve [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) özelliğine ihtiyaç duyar. İsteğe bağlı olarak `description` ya da `target` gibi bağlantı özelliklerini ekleyebilirsiniz.
 
 Birden fazla `<LinkCard>` bileşeninizi, yeterince boşluk olduğunda yan yana olacak şekilde göstermek için `<CardGrid>` içerisinde gruplayın.
 
@@ -172,6 +177,7 @@ import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
 ```
+
 Yukarıdaki kod, aşağıdaki gibi çıktı oluşturur:
 
 <Icon name="star" color="goldenrod" size="2rem" />
