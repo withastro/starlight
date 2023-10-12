@@ -18,25 +18,25 @@ Bienvenue sur la page "à propos" !
 
 ### `title` (obligatoire)
 
-**type:** `string`
+**Type :** `string`
 
 Vous devez fournir un titre pour chaque page. Il sera affiché en haut de la page, dans les onglets du navigateur et dans les métadonnées de la page.
 
 ### `description`
 
-**type:** `string`
+**Type :** `string`
 
 La description de la page est utilisée pour les métadonnées de la page et sera reprise par les moteurs de recherche et dans les aperçus des médias sociaux.
 
 ### `editUrl`
 
-**type:** `string | boolean`
+**Type :** `string | boolean`
 
 Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Modifier cette page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
-**type:** [`HeadConfig[]`](/fr/reference/configuration/#headconfig)
+**Type :** [`HeadConfig[]`](/fr/reference/configuration/#headconfig)
 
 Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr/reference/configuration/#head).
 
@@ -52,7 +52,7 @@ head:
 
 ### `tableOfContents`
 
-**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
+**Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
 Remplace la [configuration globale `tableOfContents`](/fr/reference/configuration/#tableofcontents).
 Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la table des matières sur cette page.
@@ -75,8 +75,8 @@ tableOfContents: false
 
 ### `template`
 
-**type:** `'doc' | 'splash'`  
-**default:** `'doc'`
+**Type :** `'doc' | 'splash'`  
+**Par défaut :** `'doc'`
 
 Définit le modèle de mise en page pour cette page.
 Les pages utilisent la mise en page `'doc'`' par défaut.
@@ -84,7 +84,7 @@ La valeur `'splash''` permet d'utiliser une mise en page plus large, sans barres
 
 ### `hero`
 
-**type:** [`HeroConfig`](#heroconfig)
+**Type :** [`HeroConfig`](#heroconfig)
 
 Ajoute un composant héros en haut de la page. Fonctionne bien avec `template : splash`.
 
@@ -136,7 +136,7 @@ interface HeroConfig {
 
 ### `banner`
 
-**type:** `{ content: string }`
+**Type :** `{ content: string }`
 
 Montrera une bannière d'annonce en haut de cette page.
 
@@ -155,7 +155,7 @@ banner:
 
 ### `lastUpdated`
 
-**type:** `Date | boolean`
+**Type :** `Date | boolean`
 
 Remplace la [configuration globale `lastUpdated`](/fr/reference/configuration/#lastupdated). Si une date est spécifiée, elle doit être un [horodatage YAML](https://yaml.org/type/timestamp.html) valide et remplacera la date stockée dans l'historique Git pour cette page.
 
@@ -168,7 +168,7 @@ lastUpdated: 2022-08-09
 
 ### `prev`
 
-**type:** `boolean | string | { link?: string; label?: string }`
+**Type :** `boolean | string | { link?: string; label?: string }`
 
 Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si un string est spécifié, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
 
@@ -197,7 +197,7 @@ prev:
 
 ### `next`
 
-**type:** `boolean | string | { link?: string; label?: string }`
+**Type :** `boolean | string | { link?: string; label?: string }`
 
 La même chose que [`prev`](#prev) mais pour le lien de la page suivante.
 
@@ -210,8 +210,8 @@ next: false
 
 ### `pagefind`
 
-**type:** `boolean`  
-**default:** `true`
+**Type :** `boolean`  
+**Par défaut :** `true`
 
 Définit si cette page doit être incluse dans l'index de recherche de [Pagefind](https://pagefind.app/). Définissez la valeur à `false` pour exclure une page des résultats de recherche :
 
@@ -224,7 +224,7 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** [`SidebarConfig`](#sidebarconfig)
+**Type :** [`SidebarConfig`](#sidebarconfig)
 
 Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
 
@@ -242,8 +242,8 @@ interface SidebarConfig {
 
 #### `label`
 
-**type:** `string`  
-**default:** the page [`title`](#title-required)
+**Type :** `string`  
+**Par défaut :** the page [`title`](#title-required)
 
 Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 
@@ -257,7 +257,7 @@ sidebar:
 
 #### `order`
 
-**type:** `number`
+**Type :** `number`
 
 Contrôler l'ordre de cette page lors du tri d'un groupe de liens généré automatiquement.
 Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
@@ -272,8 +272,8 @@ sidebar:
 
 #### `hidden`
 
-**type:** `boolean`  
-**default:** `false`
+**Type :** `boolean`  
+**Par défaut :** `false`
 
 Empêche cette page d'être incluse dans un groupe de liens généré automatiquement.
 
@@ -287,7 +287,7 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/fr/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**Type :** <code>string | <a href="/fr/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 Ajoute un badge à la page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 Lors de l'utilisation d'une chaîne de caractères, le badge sera affiché avec une couleur d'accentuation par défaut.
@@ -314,7 +314,7 @@ sidebar:
 
 #### `attrs`
 
-**type:** `Record<string, string | number | boolean | undefined>`
+**Type :** `Record<string, string | number | boolean | undefined>`
 
 Attributs HTML à ajouter au lien de la page dans la barre latérale lorsqu'il est affiché dans un groupe de liens généré automatiquement.
 
