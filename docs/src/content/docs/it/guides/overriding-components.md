@@ -9,7 +9,7 @@ L'interfaccia utente predefinita e le opzioni di configurazione di Starlight son
 
 Quando hai bisogno di più di ciò che è possibile fare di base, Starlight supporta la creazione di componenti personalizzati per estendere o sovrascrivere (sostituire completamente) i suoi componenti predefiniti.
 
-## Quando eseguire l'override
+## Quando eseguire una sostituzione
 
 Sostituire i componenti predefiniti di Starlight può essere utile quando:
 
@@ -17,7 +17,7 @@ Sostituire i componenti predefiniti di Starlight può essere utile quando:
 - Vuoi cambiare il comportamento di una parte dell'interfaccia utente di Starlight.
 - Vuoi aggiungere qualche interfaccia utente aggiuntiva accanto all'interfaccia utente esistente di Starlight.
 
-## Come eseguire l'override
+## Come eseguire una sostituzione
 
 1. Scegli il componente Starlight che desideri sovrascrivere.
    È possibile trovare un elenco completo dei componenti nel [Riferimento alle sostituzioni](/it/reference/overrides/).
