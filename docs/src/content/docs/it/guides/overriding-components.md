@@ -108,7 +108,7 @@ Scopri di più su tutti gli oggetti di scena disponibili nel [Riferimento agli o
 
 Le sostituzioni dei componenti si applicano a tutte le pagine. Tuttavia, puoi eseguire il rendering in modo condizionale utilizzando i valori di `Astro.props` per determinare quando mostrare la tua interfaccia utente personalizzata, quando mostrare l'interfaccia utente predefinita di Starlight o anche quando mostrare qualcosa di completamente diverso.
 
-Nell'esempio seguente, un componente che sovrascrive il [`Footer`](/it/reference/overrides/#footer-1) di Starlight visualizza "Costruito con Starlight 🌟" solo sulla home page e altrimenti mostra il piè di pagina predefinito su tutte le altre pagine:
+Nell'esempio seguente, un componente che sovrascrive il [`Footer`](/it/reference/overrides/#footer) di Starlight visualizza "Costruito con Starlight 🌟" solo sulla home page e altrimenti mostra il piè di pagina predefinito su tutte le altre pagine:
 
 ```astro
 ---
