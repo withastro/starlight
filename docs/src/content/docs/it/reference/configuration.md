@@ -435,7 +435,7 @@ starlight({
 Imposta il delimitatore tra il titolo della pagina e il titolo del sito nel tag `<title>` della pagina, visualizzato nelle schede del browser.
 
 Per impostazione predefinita, ogni pagina ha un `<title>` di `Titolo della pagina | Titolo del sito`.
-Ad esempio, questa pagina è intitolata "Riferimenti configurazione" e questo sito è intitolato "Starlight", quindi il `<title>` per questa pagina è "Riferimenti configurazione | Starlight.
+Ad esempio, questa pagina è intitolata "Riferimenti configurazione" e questo sito è intitolato "Starlight", quindi il `<title>` per questa pagina è "Riferimenti configurazione | Starlight".
 
 ### `components`
 
