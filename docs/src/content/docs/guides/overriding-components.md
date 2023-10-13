@@ -48,7 +48,7 @@ Overriding Starlight’s default components can be useful when:
        starlight({
          title: 'My Docs with Overrides',
          components: {
-           // Override the default `SocialLinks` component.
+           // Override the default `SocialIcons` component.
            SocialIcons: './src/components/EmailLink.astro',
          },
        }),
@@ -60,7 +60,7 @@ Overriding Starlight’s default components can be useful when:
 
 You can build with Starlight’s default UI components just as you would with your own: importing and rendering them in your own custom components. This allows you to keep all of Starlight's basic UI within your design, while adding extra UI alongside them.
 
-The example below shows a custom component that renders an e-mail link along with the default `SocialLinks` component:
+The example below shows a custom component that renders an e-mail link along with the default `SocialIcons` component:
 
 ```astro {4,8}
 ---

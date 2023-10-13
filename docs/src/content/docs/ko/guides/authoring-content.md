@@ -3,7 +3,7 @@ title: 마크다운으로 콘텐츠 작성
 description: Starlight가 지원하는 Markdown 구문의 개요입니다.
 ---
 
-Starlight는 `.md` 파일에서 제목 및 설명과 같은 메타데이터를 정의하기 위해 [Markdown](https://daringfireball.net/projects/markdown/)의 모든 구문과 frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f)을 지원합니다.
+Starlight는 `.md` 파일에서 제목 및 설명과 같은 메타데이터를 정의하기 위해 [Markdown](https://daringfireball.net/projects/markdown/)의 모든 구문과 프론트매터 [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f)을 지원합니다.
 
 해당 파일 형식을 사용하는 경우 Markdown 지원 및 사용법이 다를 수 있으므로 [MDX 문서](https://mdxjs.com/docs/what-is-mdx/#markdown) 또는 [Markdoc 문서](https://markdoc.dev/docs/syntax)를 확인하세요.
 

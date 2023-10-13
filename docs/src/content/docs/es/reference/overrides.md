@@ -42,7 +42,7 @@ La dirección de escritura de la página.
 
 **Tipo:** `string`
 
-Etiqueta de idioma BCP-47 para la configuración regional de esta página, por ejemplo, `en`, `zh` o `pt-BR`.
+Etiqueta de idioma BCP-47 para la configuración regional de esta página, por ejemplo, `en`, `zh-CN` o `pt-BR`.
 
 #### `locale`
 

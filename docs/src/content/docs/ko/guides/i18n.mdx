@@ -27,8 +27,8 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
    				en: {
    					label: 'English',
    				},
-   				// 중국어 간체 문서는 `src/content/docs/zh/`에 있습니다.
-   				zh: {
+   				// 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -45,7 +45,7 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 
    `defaultLocale`은 대체 콘텐츠 및 UI 라벨에 사용되므로 콘텐츠 작성을 시작할 가능성이 가장 높거나 이미 콘텐츠가 있는 언어로 선택하세요.
 
-2. `src/content/docs/`에 각 언어에 대한 디렉토리를 만듭니다. 예를 들어 위에서 사용한 구성의 경우 다음과 같이 디렉토리를 생성할 수 있습니다.
+2. `src/content/docs/`에 각 언어에 대한 디렉터리를 만듭니다. 예를 들어 위에서 사용한 구성의 경우 다음과 같이 디렉터리를 생성할 수 있습니다.
 
    <FileTree>
 
@@ -54,11 +54,11 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
-3. 이제 언어 디렉토리에 콘텐츠 파일을 추가할 수 있습니다. 여러 언어로 작성된 페이지를 연결하기 위해 같은 이름의 파일을 사용하면 Starlight의 모든 i18n 기능(대체 콘텐츠, 번역 알림 등)을 활용할 수 있습니다.
+3. 이제 언어 디렉터리에 콘텐츠 파일을 추가할 수 있습니다. 여러 언어로 작성된 페이지를 연결하기 위해 같은 이름의 파일을 사용하면 Starlight의 모든 i18n 기능(대체 콘텐츠, 번역 알림 등)을 활용할 수 있습니다.
 
    예를 들어, 아랍어와 영어 홈페이지를 각각 나타내려면 `ar/index.md` 및 `en/index.md`를 만듭니다.
 
@@ -83,7 +83,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // 루트 로케일은 lang이 반드시 필요합니다.
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -101,7 +101,7 @@ export default defineConfig({
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
