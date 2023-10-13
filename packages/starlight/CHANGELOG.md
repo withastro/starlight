@@ -1,5 +1,23 @@
 # @astrojs/starlight
 
+## 0.11.1
+
+### Patch Changes
+
+- [#892](https://github.com/withastro/starlight/pull/892) [`2b30321`](https://github.com/withastro/starlight/commit/2b30321bde801bb9945d73dc954e25b40f4324fa) Thanks [@delucis](https://github.com/delucis)! - Add Patreon social link icon
+
+- [#854](https://github.com/withastro/starlight/pull/854) [`71a52a1`](https://github.com/withastro/starlight/commit/71a52a16c44e3568128c83070541235133c44436) Thanks [@mehalter](https://github.com/mehalter)! - Add Reddit icon
+
+- [#852](https://github.com/withastro/starlight/pull/852) [`344c92e`](https://github.com/withastro/starlight/commit/344c92e1b8bca5f92ec087df6cccf5c611eefdff) Thanks [@Lootjs](https://github.com/Lootjs)! - Improve Russian language support
+
+- [#891](https://github.com/withastro/starlight/pull/891) [`395920c`](https://github.com/withastro/starlight/commit/395920c46e7b24cfff31800b3426ab375078e5c1) Thanks [@Frikadellios](https://github.com/Frikadellios)! - Add Ukrainian language support
+
+- [#890](https://github.com/withastro/starlight/pull/890) [`63ea8e8`](https://github.com/withastro/starlight/commit/63ea8e86643b050c6be6f9a6167f6642b039c709) Thanks [@delucis](https://github.com/delucis)! - Update `execa` dependency to v8
+
+- [#859](https://github.com/withastro/starlight/pull/859) [`eaa7a90`](https://github.com/withastro/starlight/commit/eaa7a902c7b7638b326709fd5203d932b20ed3fa) Thanks [@oggnimodd](https://github.com/oggnimodd)! - Improve Indonesian language support
+
+- [#864](https://github.com/withastro/starlight/pull/864) [`b84aff2`](https://github.com/withastro/starlight/commit/b84aff2b9cccbc35c8619763c7f36841abe6344b) Thanks [@mehalter](https://github.com/mehalter)! - Optimize UI icon SVG paths
+
 ## 0.11.0
 
 ### Minor Changes
@@ -226,16 +244,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -614,8 +632,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
