@@ -48,7 +48,7 @@ Starlight의 기본 컴포넌트를 재정의하는 것은 다음과 같은 경�
        starlight({
          title: '재정의된 문서',
          components: {
-           // 기존 `SocialLinks` 컴포넌트를 재정의합니다.
+           // 기존 `SocialIcons` 컴포넌트를 재정의합니다.
            SocialIcons: './src/components/EmailLink.astro',
          },
        }),
@@ -60,7 +60,7 @@ Starlight의 기본 컴포넌트를 재정의하는 것은 다음과 같은 경�
 
 Starlight의 기본 UI 컴포넌트를 사용하여 나만의 컴포넌트를 구축할 수 있습니다. 즉, 사용자 정의 컴포넌트에 Starlight UI 컴포넌트를 가져와 렌더링할 수 있습니다. 이를 통해 기존 Starlight UI를 유지하면서 새로운 UI를 추가할 수 있습니다.
 
-아래 예시는 기존 `SocialLinks` 컴포넌트와 함께 이메일 링크를 렌더링하는 사용자 정의 컴포넌트를 나타냅니다.
+아래 예시는 기존 `SocialIcons` 컴포넌트와 함께 이메일 링크를 렌더링하는 사용자 정의 컴포넌트를 나타냅니다.
 
 ```astro {4,8}
 ---
@@ -83,7 +83,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 Starlight 컴포넌트를 재정의할 때, 사용자 정의 구현은 현재 페이지의 모든 데이터가 포함된 표준 `Astro.props` 객체를 전달받습니다.
 전달받은 값을 사용하여 컴포넌트 템플릿이 렌더링되는 방식을 제어할 수 있습니다.
 
-예를 들어, `Astro.props.entry.data`를 통해 페이지의 모든 frontmatter 속성을 읽을 수 있습니다. 다음 예시에서 대체 [`PageTitle`](/ko/reference/overrides/#pagetitle) 컴포넌트는 이를 사용하여 현재 페이지의 제목을 표시합니다.
+예를 들어, `Astro.props.entry.data`를 통해 페이지의 모든 프론트매터 속성을 읽을 수 있습니다. 다음 예시에서 대체 [`PageTitle`](/ko/reference/overrides/#pagetitle) 컴포넌트는 이를 사용하여 현재 페이지의 제목을 표시합니다.
 
 ```astro {5} "{title}"
 ---

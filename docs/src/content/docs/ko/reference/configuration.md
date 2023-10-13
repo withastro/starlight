@@ -33,7 +33,7 @@ export default defineConfig({
 
 **타입:** `string`
 
-웹사이트에 대한 설명을 설정합니다. 페이지의 frontmatter에 `description`이 설정되지 않은 경우, `<meta name="description">` 태그에서 검색 엔진과 공유되는 메타데이터로 사용됩니다.
+웹사이트에 대한 설명을 설정합니다. 페이지의 프론트매터에 `description`이 설정되지 않은 경우, `<meta name="description">` 태그에서 검색 엔진과 공유되는 메타데이터로 사용됩니다.
 
 ### `logo`
 
@@ -93,7 +93,7 @@ starlight({
 
 - `items` — 더 많은 사이드바 링크와 하위 그룹을 포함하는 배열
 
-- `autogenerate` — 링크 그룹을 자동으로 생성하기 위해 문서의 디렉토리를 지정하는 객체
+- `autogenerate` — 링크 그룹을 자동으로 생성하기 위해 문서의 디렉터리를 지정하는 객체
 
 ```js
 starlight({
@@ -108,7 +108,7 @@ starlight({
         { label: '다음 단계', link: '/next-steps' },
       ],
     },
-    // 'reference' 디렉토리의 모든 페이지에 연결되는 그룹
+    // 'reference' 디렉터리의 모든 페이지에 연결되는 그룹
     {
       label: '참조',
       autogenerate: { directory: 'reference' },
@@ -210,7 +210,7 @@ interface BadgeConfig {
 
 지원되는 `locales`를 설정하여 사이트의 [국제화(i18n)를 구성](/ko/guides/i18n/)하세요.
 
-각 항목은 언어 파일이 저장된 디렉토리를 키로 사용해야 합니다.
+각 항목은 언어 파일이 저장된 디렉터리를 키로 사용해야 합니다.
 
 ```js
 // astro.config.mjs
@@ -233,8 +233,8 @@ export default defineConfig({
           label: 'English',
           lang: 'en',
         },
-        // 중국어 간체 문서는 `src/content/docs/zh/`에 있습니다.
-        zh: {
+        // 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
@@ -271,7 +271,7 @@ interface LocaleConfig {
 
 **타입:** `string`
 
-`"en"`, `"ar"` 또는 `"zh-CN"`와 같은 언어의 BCP-47 태그입니다. 설정하지 않으면 기본적으로 해당 언어의 디렉토리 이름이 사용됩니다. 지역 하위 태그가 있는 언어 태그(예: `"pt-BR"` 또는 `"en-US"`)는 지역별 번역이 없는 경우에 내장된 기본 언어 UI 번역을 사용합니다.
+`"en"`, `"ar"` 또는 `"zh-CN"`와 같은 언어의 BCP-47 태그입니다. 설정하지 않으면 기본적으로 해당 언어의 디렉터리 이름이 사용됩니다. 지역 하위 태그가 있는 언어 태그(예: `"pt-BR"` 또는 `"en-US"`)는 지역별 번역이 없는 경우에 내장된 기본 언어 UI 번역을 사용합니다.
 
 ##### `dir`
 
@@ -281,7 +281,7 @@ interface LocaleConfig {
 
 #### 루트 로케일
 
-`root` 로케일을 설정하면 `/lang/` 디렉토리 없이 기본 언어를 제공할 수 있습니다.
+`root` 로케일을 설정하면 `/lang/` 디렉터리 없이 기본 언어를 제공할 수 있습니다.
 
 ```js
 starlight({
@@ -386,7 +386,7 @@ interface HeadConfig {
 
 페이지 하단에 최종 업데이트 날짜를 표시할지 여부를 제어합니다.
 
-기본적으로 이 기능은 저장소의 Git 기록에 의존하며 [얕은 복제](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt)를 수행하는 일부 배포 플랫폼에서는 정확하지 않을 수 있습니다. 페이지는 [`lastUpdated` frontmatter 필드](/ko/reference/frontmatter/#lastupdated)를 사용하여 이 설정이나 Git 기반 날짜를 변경할 수 있습니다.
+기본적으로 이 기능은 저장소의 Git 기록에 의존하며 [얕은 복제](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt)를 수행하는 일부 배포 플랫폼에서는 정확하지 않을 수 있습니다. 페이지는 [`lastUpdated` 프론트매터 필드](/ko/reference/frontmatter/#lastupdated)를 사용하여 이 설정이나 Git 기반 날짜를 변경할 수 있습니다.
 
 ### `pagination`
 
@@ -395,14 +395,14 @@ interface HeadConfig {
 
 페이지 하단에 이전 페이지 링크와 다음 페이지 링크가 포함되어야 하는지 정의합니다.
 
-페이지는 [`prev`](/ko/reference/frontmatter/#prev)와 [`next`](/ko/reference/frontmatter/#next) frontmatter 필드를 통해 이 설정이나 링크 텍스트, URL을 변경할 수 있습니다.
+페이지는 [`prev`](/ko/reference/frontmatter/#prev)와 [`next`](/ko/reference/frontmatter/#next) 프론트매터 필드를 통해 이 설정이나 링크 텍스트, URL을 변경할 수 있습니다.
 
 ### `favicon`
 
 **타입:** `string`  
 **기본값:** `'/favicon.svg'`
 
-`public/` 디렉토리에 포함되어 있으며 유효한 아이콘 파일인 (`.ico`, `.gif`, `.jpg`, `.png`, 또는 `.svg`) 웹 사이트의 기본 파비콘 경로를 설정합니다.
+`public/` 디렉터리에 포함되어 있으며 유효한 아이콘 파일인 (`.ico`, `.gif`, `.jpg`, `.png`, 또는 `.svg`) 웹 사이트의 기본 파비콘 경로를 설정합니다.
 
 ```js
 starlight({
