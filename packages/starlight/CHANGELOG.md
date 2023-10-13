@@ -10,7 +10,7 @@
 
 - [`f33be7f`](https://github.com/withastro/starlight/commit/f33be7f37f37afb2a5ec927e2f5b52caeb57412b) Thanks [@delucis](https://github.com/delucis)! - Improve Russian language support
 
-- [#891](https://github.com/withastro/starlight/pull/891) [`395920c`](https://github.com/withastro/starlight/commit/395920c46e7b24cfff31800b3426ab375078e5c1) Thanks [@delucis](https://github.com/delucis)! - Add Ukrainian language support
+- [#891](https://github.com/withastro/starlight/pull/891) [`395920c`](https://github.com/withastro/starlight/commit/395920c46e7b24cfff31800b3426ab375078e5c1) Thanks [@Frikadellios](https://github.com/Frikadellios)! - Add Ukrainian language support
 
 - [#890](https://github.com/withastro/starlight/pull/890) [`63ea8e8`](https://github.com/withastro/starlight/commit/63ea8e86643b050c6be6f9a6167f6642b039c709) Thanks [@delucis](https://github.com/delucis)! - Update `execa` dependency to v8
 
