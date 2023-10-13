@@ -8,7 +8,7 @@
 
 - [#854](https://github.com/withastro/starlight/pull/854) [`71a52a1`](https://github.com/withastro/starlight/commit/71a52a16c44e3568128c83070541235133c44436) Thanks [@mehalter](https://github.com/mehalter)! - Add Reddit icon
 
-- [`f33be7f`](https://github.com/withastro/starlight/commit/f33be7f37f37afb2a5ec927e2f5b52caeb57412b) Thanks [@delucis](https://github.com/delucis)! - Improve Russian language support
+- [#852](https://github.com/withastro/starlight/pull/852) [`344c92e`](https://github.com/withastro/starlight/commit/344c92e1b8bca5f92ec087df6cccf5c611eefdff) Thanks [@Lootjs](https://github.com/Lootjs)! - Improve Russian language support
 
 - [#891](https://github.com/withastro/starlight/pull/891) [`395920c`](https://github.com/withastro/starlight/commit/395920c46e7b24cfff31800b3426ab375078e5c1) Thanks [@Frikadellios](https://github.com/Frikadellios)! - Add Ukrainian language support
 
