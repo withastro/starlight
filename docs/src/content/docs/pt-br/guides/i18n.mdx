@@ -27,8 +27,8 @@ Starlight providencia suporte integrado para sites multilíngue, incluindo rotea
    				pt: {
    					label: 'Português',
    				},
-   				// Documentação em Chinês Simplificado em `src/content/docs/zh/`
-   				zh: {
+   				// Documentação em Chinês Simplificado em `src/content/docs/zh-cn/`
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -55,7 +55,7 @@ Starlight providencia suporte integrado para sites multilíngue, incluindo rotea
        - docs/
          - ar/
          - pt/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -84,7 +84,7 @@ export default defineConfig({
 					label: 'Português',
 					lang: 'pt', // lang é obrigatório para locais raiz
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -102,7 +102,7 @@ Ao utilizar um local `root`, mantenha as páginas para aquela língua diretament
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>

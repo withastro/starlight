@@ -25,7 +25,7 @@ Starlight 提供了合理的默认样式和功能，因此你可以快速开始�
 
    </FileTree>
 
-2. 在 `astro.config.mjs` 中，将 logo 的路径添加到 Starlight 的 [`logo.src`](/zh/reference/configuration/#logo) 选项：
+2. 在 `astro.config.mjs` 中，将 logo 的路径添加到 Starlight 的 [`logo.src`](/zh-cn/reference/configuration/#logo) 选项：
 
    ```js
    // astro.config.mjs
@@ -103,8 +103,8 @@ export default defineConfig({
 
 默认情况下，Starlight 页面使用带有全局导航侧边栏和显示当前页面标题的目录的布局。
 
-你可以通过在页面的正文中设置 [`template: splash`](/zh/reference/frontmatter/#template) 来应用更宽的页面布局，而去除侧边栏。
-这对于主页面特别有效，你可以在本站点的[主页](/zh/)上看到它的效果。
+你可以通过在页面的正文中设置 [`template: splash`](/zh-cn/reference/frontmatter/#template) 来应用更宽的页面布局，而去除侧边栏。
+这对于主页面特别有效，你可以在本站点的[主页](/zh-cn/)上看到它的效果。
 
 ```md
 ---
@@ -187,7 +187,7 @@ defineConfig({
 
 ## 社交链接
 
-Starlight 内置了对通过 Starlight 集成中的 [`social`](/zh/reference/configuration/#social) 选项将链接添加到网站标题的社交媒体帐户的支持。
+Starlight 内置了对通过 Starlight 集成中的 [`social`](/zh-cn/reference/configuration/#social) 选项将链接添加到网站标题的社交媒体帐户的支持。
 
 目前，支持链接到 Bitbucket、Codeberg、CodePen、Discord、Email、Facebook、GitHub、GitLab、Gitter、Instagram、LinkedIn、Mastodon、Microsoft Teams、RSS、Stack Overflow、Telegram、Threads、Twitch、Twitter、X 和 YouTube。如果你需要支持其他服务，请在 GitHub 或 Discord 上告诉我们！
 
@@ -213,7 +213,7 @@ export default defineConfig({
 
 Starlight 可以在每个页面的页脚中显示“编辑此页”链接。这样读者就可以找到要编辑以改进你的文档的文件。特别是对于开源项目，这有助于鼓励社区的贡献。
 
-要启用编辑链接，请将 Starlight 集成配置中的 [`editLink.baseUrl`](/zh/reference/configuration/#editlink) 设置为用于编辑存储库的URL。`editLink.baseUrl` 的值将附加到当前页面的路径前面，形成完整的编辑链接。
+要启用编辑链接，请将 Starlight 集成配置中的 [`editLink.baseUrl`](/zh-cn/reference/configuration/#editlink) 设置为用于编辑存储库的URL。`editLink.baseUrl` 的值将附加到当前页面的路径前面，形成完整的编辑链接。
 
 常见的模式包括：
 
@@ -256,7 +256,7 @@ Starlight 网站默认显示一个简单的 404 页面。你可以通过向 `src
 
 </FileTree>
 
-你可以在 404 页面中使用 Starlight 的所有页面布局和自定义技术。例如，默认的404页面在 frontmatter 中使用 [`splash`](#页面布局) 模板和 [`hero`](/zh/reference/frontmatter/#hero) 组件：
+你可以在 404 页面中使用 Starlight 的所有页面布局和自定义技术。例如，默认的404页面在 frontmatter 中使用 [`splash`](#页面布局) 模板和 [`hero`](/zh-cn/reference/frontmatter/#hero) 组件：
 
 ```md
 ---
@@ -390,7 +390,7 @@ hero:
 
 ### 使用字体
 
-要将设置好的字体应用于你的站点，请在[自定义 CSS 文件](/zh/guides/css-and-tailwind/#custom-css-styles)中使用所选字体的名称。例如，要在整个站点上覆盖 Starlight 的默认字体，请设置`--sl-font`自定义属性：
+要将设置好的字体应用于你的站点，请在[自定义 CSS 文件](/zh-cn/guides/css-and-tailwind/#custom-css-styles)中使用所选字体的名称。例如，要在整个站点上覆盖 Starlight 的默认字体，请设置`--sl-font`自定义属性：
 
 ```css
 /* src/styles/custom.css */
@@ -410,4 +410,4 @@ main {
 }
 ```
 
-按照[自定义 CSS](/zh/guides/css-and-tailwind/#custom-css-styles)将样式添加到你的站点。
+按照[自定义 CSS](/zh-cn/guides/css-and-tailwind/#custom-css-styles)将样式添加到你的站点。
