@@ -108,7 +108,7 @@ Aprende más sobre todas las props disponibles en la [Referencia de Sobreescripc
 
 Los cambios de componentes se aplican a todas las páginas. Sin embargo, puedes renderizar condicionalmente usando los valores de `Astro.props` para determinar cuando mostrar tu UI personalizada, cuando mostrar la UI por defecto de Starlight, o incluso cuando mostrar algo completamente diferente.
 
-En el siguiente ejemplo, un componente que sobreescribe el [`Footer`](/es/reference/overrides/#footer-1) de Starlight muestra "Construido con Starlight 🌟" solo en la página de inicio, y de otra manera muestra el footer por defecto en todas las otras páginas:
+En el siguiente ejemplo, un componente que sobreescribe el [`Footer`](/es/reference/overrides/#footer) de Starlight muestra "Construido con Starlight 🌟" solo en la página de inicio, y de otra manera muestra el footer por defecto en todas las otras páginas:
 
 ```astro
 ---
