@@ -26,6 +26,7 @@ export const SocialLinksSchema = () =>
 				'facebook',
 				'email',
 				'reddit',
+				'patreon',
 			]),
 			// Link to the respective social profile for this site
 			z.string().url()
@@ -59,6 +60,7 @@ export const SocialLinksSchema = () =>
 					facebook: 'Facebook',
 					email: 'Email',
 					reddit: 'Reddit',
+					patreon: 'Patreon',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
