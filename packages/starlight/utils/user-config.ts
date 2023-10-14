@@ -32,6 +32,10 @@ const LocaleSchema = z.object({
 });
 
 const UserConfigSchema = z.object({
+
+	/** View Transitions for your website. */
+	viewTransitions: z.boolean().optional().default(false),
+
 	/** Title for your website. Will be used in metadata and as browser tab title. */
 	title: z
 		.string()
