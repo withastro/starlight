@@ -5,16 +5,16 @@ description: Pelajari cara mengkonfigurasi Starlight secara manual untuk menamba
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Cara tercepat untuk membuat situs Starlight adalah dengan menjalankan perintah `create astro` sebagaimana tercantum di [panduan memulai](/id/getting-started/#creating-a-new-project).
+Cara tercepat untuk membuat website Starlight adalah dengan menjalankan perintah `create astro` sebagaimana dijelaskan di [panduan memulai](/id/getting-started/#creating-a-new-project).
 Jika Anda ingin menambahkan Starlight ke proyek Astro yang sudah ada, berikut ini adalah cara melakukannya.
 
 ## Memasang Starlight
 
 Untuk mengikuti panduan ini, Anda membutuhkan proyek Astro yang sudah berjalan.
 
-### Add the Starlight integration
+### Menambahkan Starlight integration
 
-Starlight adalah sebuah [integrasi Astro](https://docs.astro.build/en/guides/integrations-guide/). Tambahkan ke situs Anda dengan cara menjalankan perintah `astro add` di direktori _root_ proyek:
+Starlight adalah sebuah [integrasi Astro](https://docs.astro.build/en/guides/integrations-guide/). Tambahkan ke website Anda dengan cara menjalankan perintah `astro add` di _root directory_ proyek Anda:
 
 <Tabs>
     <TabItem label="npm">
@@ -36,7 +36,7 @@ Starlight adalah sebuah [integrasi Astro](https://docs.astro.build/en/guides/int
 
 </Tabs>
 
-Perintah tersebut akan menginstal semua dependensi yang dibutuhkan dan menambahkan Starlight ke dalam _array_ `integrations` di dalam file konfigurasi Astro.
+Perintah tersebut akan menginstal semua dependensi yang dibutuhkan dan menambahkan Starlight ke dalam _array_ `integrations` di dalam file konfigurasi Astro Anda.
 
 ### Mengkonfigurasi integrasi
 
@@ -60,11 +60,11 @@ export default defineConfig({
 
 Untuk opsi lengkapnya tersedia di [referensi pengaturan Starlight](/id/reference/configuration/).
 
-### Mengatur kumpulan konten
+### Mengatur koleksi konten
 
-Starlight dibangun berdasarkan fitur [kumpulan konten](https://docs.astro.build/en/guides/content-collections/) oleh Astro, yang dapat dikonfigurasi di file `src/content/config.ts`.
+Starlight dibangun berdasarkan fitur [koleksi konten](https://docs.astro.build/en/guides/content-collections/) oleh Astro, yang dapat dikonfigurasi di file `src/content/config.ts`.
 
-Buat baru atau _update_ file konfigurasi kumpulan konten Anda, dengan menambahkan koleksi bernama `docs` yang menggunakan skema kumpulan `docsSchema` oleh Starlight:
+Buat baru atau _update_ file konfigurasi koleksi konten Anda, menambahkan koleksi bernama `docs` yang menggunakan skema `docsSchema` dari Starlight:
 
 ```js ins={3,6}
 // src/content/config.ts
@@ -76,29 +76,29 @@ export const collections = {
 };
 ```
 
-### Menambah konten
+### Menambahkan konten
 
 Starlight sekarang sudah terkonfigurasi. Sekarang adalah waktunya menambahkan konten Anda!
 
 Buatlah folder `src/content/docs/` dan tambahkan file `index.md`.
-Halaman ini adalah beranda situs Anda:
+Halaman ini adalah beranda dari website baru Anda:
 
 ```md
 ---
 # src/content/docs/index.md
-title: Proyek tugas kuliah
-description: Pelajari tentang proyek tugas kuliah saya di situs dokumentasi ini yang dibuat dengan Starlight!
+title: Dokumentasi proyek saya
+description: Pelajari tentang proyek saya di website dokumentasi ini yang dibuat dengan Starlight!
 ---
 
-Selamat datang di proyek tugas kuliah saya!
+Selamat datang di proyek saya!
 ```
 
-Starlight menggunakan _file-based routing_, yang artinya setiap file Markdown, MDX, atau Markdoc dalam folder `src/content/docs/` akan dirubah menjadi sebuah halaman di situs Anda. _Metadata frontmatter_ (kolom `title` dan `description` pada contoh di atas) dapat juga mempengaruhi tampilan halaman tersebut.
-Untuk melihat semua opsi yang tersedia, rujuklah halaman [referensi _frontmatter_](/id/reference/frontmatter/).
+Starlight menggunakan _file-based routing_, yang artinya setiap file Markdown, MDX, atau Markdoc dalam folder `src/content/docs/` akan dirubah menjadi sebuah halaman di website Anda. _Metadata frontmatter_ (kolom `title` dan `description` pada contoh di atas) dapat mempengaruhi tampilan halaman tersebut.
+Untuk melihat semua opsi yang tersedia bisa dilihat di [referensi _frontmatter_](/id/reference/frontmatter/).
 
-## Tips untuk situs yang sudah ada
+## Tips untuk website yang sudah ada
 
-Jika anda memiliki sebuah proyek Astro yang sudah berjalan, Anda dapat menggunakan Starlight untuk menambahkan bagian dokumentasi secara cepat.
+Jika Anda memiliki sebuah proyek Astro yang sudah berjalan, Anda dapat menggunakan Starlight untuk menambahkan bagian dokumentasi secara cepat.
 
 ### Menggunakan Starlight di dalam _subpath_
 
@@ -121,8 +121,8 @@ import FileTree from '../../../components/file-tree.astro';
 
 </FileTree>
 
-Di masa depan, kami berencana mendukung skenario penggunaan semacam ini dengan lebih baik, sehingga Anda tidak perlu lagi menambahkan folder berjenjang di `src/content/docs/`.
+Di masa yang akan datang, kami berencana mendukung skenario penggunaan semacam ini dengan lebih baik, sehingga Anda tidak perlu lagi menambahkan folder bertingkat di `src/content/docs/`.
 
-### Dukungan Starlight untuk SSR
+### Menggunakan Starlight dengan SSR
 
-Saat ini, Starlight tidak mendukung _deployment_ [SSR](https://docs.astro.build/en/guides/server-side-rendering/) menggunakan adapter server Astro. Semoga kami dapat mendukung skenario ini di masa depan.
+Saat ini, Starlight tidak mendukung _deployment_ [SSR](https://docs.astro.build/en/guides/server-side-rendering/) menggunakan adapter server Astro. Kami berharap untuk dapat men-_support_ fitur ini segera.

@@ -20,6 +20,7 @@ import ko from './ko.json';
 import sv from './sv.json';
 import ru from './ru.json';
 import vi from './vi.json';
+import uk from './uk.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -46,5 +47,6 @@ export default Object.fromEntries(
 		sv,
 		ru,
 		vi,
+		uk,
 	}).map(([key, dict]) => [key, parse(dict)])
 );
