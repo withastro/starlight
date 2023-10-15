@@ -10,8 +10,8 @@ import plugin from 'tailwindcss/plugin';
  *
  * @example
  * // tailwind.config.mjs
- * const colors = require('tailwindcss/colors');
- * const starlightPlugin = require('@astrojs/starlight/tailwind');
+ * import colors from 'tailwindcss/colors';
+ * import starlightPlugin from '@astrojs/starlight-tailwind';
  *
  * export default {
  *   plugins: [
