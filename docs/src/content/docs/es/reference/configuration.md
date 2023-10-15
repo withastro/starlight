@@ -158,19 +158,19 @@ Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está
 
 ```js
 sidebar: [
-  // Un ejemplo de barra lateral con etiquetas traducidas al francés.
+  // Un ejemplo de barra lateral con etiquetas traducidas al portugués de Brasil.
   {
     label: 'Start Here',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
         label: 'Getting Started',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
         label: 'Project Structure',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
