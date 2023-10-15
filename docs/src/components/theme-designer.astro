@@ -104,7 +104,7 @@ const {
 		}
 
 		#updateTailwindConfig({ dark, light }: ReturnType<typeof getPalettes>) {
-			const config = `const starlightPlugin = require('@astrojs/starlight-tailwind');
+			const config = `import starlightPlugin from '@astrojs/starlight-tailwind';
 
 // Generated color palettes
 const accent = { 200: '${dark['accent-high']}', 600: '${light.accent}', 900: '${light['accent-high']}', 950: '${dark['accent-low']}' };
