@@ -207,8 +207,8 @@ If set, the following options will override Starlight’s default styles:
 
 ```js {12,14,18,20}
 // tailwind.config.mjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 export default {
