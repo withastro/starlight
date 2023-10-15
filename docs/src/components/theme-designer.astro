@@ -111,7 +111,7 @@ const accent = { 200: '${dark['accent-high']}', 600: '${light.accent}', 900: '${
 const gray = { 100: '${light['gray-7']}', 200: '${light['gray-6']}', 300: '${light['gray-5']}', 400: '${light['gray-4']}', 500: '${light['gray-3']}', 700: '${light['gray-2']}', 800: '${light['gray-1']}', 900: '${light.white}' };
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
