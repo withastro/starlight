@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My delightful docs site',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My delightful docs site',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ Set a logo image to show in the navigation bar alongside or instead of the site 
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ Enable “Edit this page” links by setting the base URL these should use. The 
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -98,23 +98,23 @@ Each item must have a `label` and one of the following properties:
 
 ```js
 starlight({
-  sidebar: [
-    // A single link item labelled “Home”.
-    { label: 'Home', link: '/' },
-    // A group labelled “Start Here” containing two links.
-    {
-      label: 'Start Here',
-      items: [
-        { label: 'Introduction', link: '/intro' },
-        { label: 'Next Steps', link: '/next-steps' },
-      ],
-    },
-    // A group linking to all pages in the reference directory.
-    {
-      label: 'Reference',
-      autogenerate: { directory: 'reference' },
-    },
-  ],
+	sidebar: [
+		// A single link item labelled “Home”.
+		{ label: 'Home', link: '/' },
+		// A group labelled “Start Here” containing two links.
+		{
+			label: 'Start Here',
+			items: [
+				{ label: 'Introduction', link: '/intro' },
+				{ label: 'Next Steps', link: '/next-steps' },
+			],
+		},
+		// A group linking to all pages in the reference directory.
+		{
+			label: 'Reference',
+			autogenerate: { directory: 'reference' },
+		},
+	],
 });
 ```
 
@@ -157,19 +157,19 @@ If your site is multilingual, each item’s `label` is considered to be in the d
 
 ```js
 sidebar: [
-  // An example sidebar with labels translated to French.
+  // An example sidebar with labels translated to Brazilian Portuguese.
   {
     label: 'Start Here',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
         label: 'Getting Started',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
         label: 'Project Structure',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
@@ -181,19 +181,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			badge?: string | BadgeConfig;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -201,14 +201,14 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
 ### `locales`
 
-**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**type:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [Configure internationalization (i18n)](/guides/i18n/) for your site by setting which `locales` are supported.
 
@@ -220,29 +220,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Site',
-      // Set English as the default language for this site.
-      defaultLocale: 'en',
-      locales: {
-        // English docs in `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // Simplified Chinese docs in `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // Arabic docs in `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Site',
+			// Set English as the default language for this site.
+			defaultLocale: 'en',
+			locales: {
+				// English docs in `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Simplified Chinese docs in `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Arabic docs in `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -250,9 +250,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -282,15 +282,15 @@ You can serve the default language without a `/lang/` directory by setting a `ro
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -308,25 +308,27 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'patreon' | 'reddit' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+import SocialLinksType from '../../../components/social-links-type.astro';
+
+**type:** <SocialLinksType />
 
 Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -340,7 +342,7 @@ Supports local CSS files relative to the root of your project, e.g. `'./src/cust
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -353,17 +355,17 @@ Can be useful for adding analytics and other third-party scripts and resources.
 
 ```js
 starlight({
-  head: [
-    // Example: add Fathom analytics script tag.
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Example: add Fathom analytics script tag.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -371,9 +373,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -445,9 +447,9 @@ Provide the paths to components to override Starlight’s default implementation
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 
