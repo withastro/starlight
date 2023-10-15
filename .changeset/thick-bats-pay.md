@@ -1,5 +1,5 @@
 ---
-"starlight-docs": patch
+'@astrojs/starlight-tailwind': patch
 ---
 
-docs: update guide for tailwind css
+use `tailwind.config.mjs` file by default config
