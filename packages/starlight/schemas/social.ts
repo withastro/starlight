@@ -22,6 +22,8 @@ export const socialLinks = [
 	'rss',
 	'facebook',
 	'email',
+	'reddit',
+	'patreon',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -59,6 +61,8 @@ export const SocialLinksSchema = () =>
 					rss: 'RSS',
 					facebook: 'Facebook',
 					email: 'Email',
+					reddit: 'Reddit',
+					patreon: 'Patreon',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}

@@ -1,0 +1,22 @@
+{
+  "skipLink.label": "Перейти до вмісту",
+  "search.label": "Пошук",
+  "search.shortcutLabel": "(Натисніть / для Пошуку)",
+  "search.cancelLabel": "Скасувати",
+  "search.devWarning": "Пошук доступний лише у виробничих зборках. \nСпробуйте виконати збірку та переглянути сайт, щоб протестувати його локально",
+  "themeSelect.accessibleLabel": "Вибрати Тему",
+  "themeSelect.dark": "Темна",
+  "themeSelect.light": "Світла",
+  "themeSelect.auto": "Авто",
+  "languageSelect.accessibleLabel": "Оберіть мову",
+  "menuButton.accessibleLabel": "Меню",
+  "sidebarNav.accessibleLabel": "Головне",
+  "tableOfContents.onThisPage": "На цій сторінці",
+  "tableOfContents.overview": "Огляд",
+  "i18n.untranslatedContent": "Цей контент ще не доступний на Вашій мові.",
+  "page.editLink": "Редагувати сторінку",
+  "page.lastUpdated": "Останнє оновлення:",
+  "page.previousLink": "Попередня",
+  "page.nextLink": "Наступна",
+  "404.text": "Сторінку не знайдено. Перевірте URL-адресу або спробуйте скористатися рядком пошуку."
+}

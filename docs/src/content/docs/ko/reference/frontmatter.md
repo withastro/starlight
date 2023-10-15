@@ -1,9 +1,9 @@
 ---
-title: Frontmatter 참조
-description: Starlight가 지원하는 기본 frontmatter 필드에 대한 개요입니다.
+title: 프론트매터 참조
+description: Starlight가 지원하는 기본 프론트매터 필드에 대한 개요입니다.
 ---
 
-Frontmatter의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
+프론트매터의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
 
 ```md
 ---
@@ -14,7 +14,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 나를 소개하는 페이지에 오신 것을 환영합니다!
 ```
 
-## Frontmatter 필드
+## 프론트매터 필드
 
 ### `title` (필수)
 
@@ -38,7 +38,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 **타입:** [`HeadConfig[]`](/ko/reference/configuration/#headconfig)
 
-`head` frontmatter 필드를 사용하여 페이지의 `<head>`에 태그를 추가할 수 있습니다. 이는 사용자 정의 스타일, 메타데이터 또는 기타 태그를 단일 페이지에 추가할 수 있음을 의미합니다. [전역 `head` 옵션](/ko/reference/configuration/#head)과 유사합니다.
+`head` 프론트매터 필드를 사용하여 페이지의 `<head>`에 태그를 추가할 수 있습니다. 이는 사용자 정의 스타일, 메타데이터 또는 기타 태그를 단일 페이지에 추가할 수 있음을 의미합니다. [전역 `head` 옵션](/ko/reference/configuration/#head)과 유사합니다.
 
 ```md
 ---

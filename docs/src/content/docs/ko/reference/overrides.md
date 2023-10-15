@@ -75,7 +75,7 @@ Starlight는 사용자 정의 컴포넌트에 다음 속성들을 전달합니�
 #### `entry`
 
 현재 페이지에 대한 Astro 콘텐츠 컬렉션 항목입니다.
-`entry.data`는 현재 페이지에 대한 frontmatter 값을 포함합니다.
+`entry.data`는 현재 페이지에 대한 프론트매터 값을 포함합니다.
 
 ```ts
 entry: {
@@ -301,7 +301,7 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 **기본 컴포넌트:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 각 페이지 상단에 렌더링되는 배너 컴포넌트입니다.
-기본적으로 페이지의 [`banner`](/ko/reference/frontmatter#banner) frontmatter 속성을 사용하여 렌더링 여부를 결정합니다.
+기본적으로 페이지의 [`banner`](/ko/reference/frontmatter#banner) 프론트매터 속성을 사용하여 렌더링 여부를 결정합니다.
 
 #### `ContentPanel`
 
@@ -327,7 +327,7 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 
 **기본 컴포넌트:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-frontmatter에서 [`hero`](/ko/reference/frontmatter#hero)를 설정했을 때, 페이지 상단에 렌더링되는 컴포넌트입니다.
+프론트매터에서 [`hero`](/ko/reference/frontmatter#hero)를 설정했을 때, 페이지 상단에 렌더링되는 컴포넌트입니다.
 기본적으로 큰 제목, 태그라인, 클릭 유도 문구 링크와 선택적 이미지를 표시합니다.
 
 #### `MarkdownContent`
