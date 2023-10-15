@@ -157,19 +157,19 @@ If your site is multilingual, each item’s `label` is considered to be in the d
 
 ```js
 sidebar: [
-  // An example sidebar with labels translated to French.
+  // An example sidebar with labels translated to Brazilian Portuguese.
   {
     label: 'Start Here',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
         label: 'Getting Started',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
         label: 'Project Structure',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
