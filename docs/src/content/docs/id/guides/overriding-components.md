@@ -9,7 +9,7 @@ UI dan konfigurasi bawaan Starlight dirancang agar fleksibel dan dapat digunakan
 
 Ketika Anda membutuhkan lebih dari apa yang telah disediakan, Starlight mendukung pembuatan komponen custom Anda sendiri untuk memperluas atau mengganti (sepenuhnya) komponen bawaannya.
 
-## Kapan Harus Mengganti Komponen
+## Kapan harus mengganti komponen
 
 Mengganti komponen bawaan Starlight dapat berguna ketika:
 
@@ -17,7 +17,7 @@ Mengganti komponen bawaan Starlight dapat berguna ketika:
 - Anda ingin mengubah bagaimana sebagian UI Starlight bekerja.
 - Anda ingin menambahkan UI tambahan disamping UI Starlight yang sudah ada.
 
-## Cara Mengganti Komponen
+## Cara mengganti komponen
 
 1. Pilih komponen Starlight yang ingin Anda ganti.
    Anda dapat menemukan daftar lengkap komponen di [Referensi Penggantian](/id/reference/overrides/).
@@ -56,7 +56,7 @@ Mengganti komponen bawaan Starlight dapat berguna ketika:
    });
    ```
 
-## Menggunakan Ulang Komponen Bawaan
+## Menggunakan ulang komponen bawaan
 
 Anda dapat menggunakan komponen UI bawaan Starlight seperti yang Anda lakukan dengan komponen custom Anda sendiri: mengimpor dan merendernya dalam komponen custom Anda sendiri. Hal ini memungkinkan Anda mempertahankan semua elemen UI dasar Starlight dalam desain Anda, sambil menambahkan elemen UI tambahan bersama mereka.
 
@@ -78,7 +78,7 @@ Saat merender komponen bawaan dalam komponen custom:
 - _Spread_ `Astro.props` ke dalamnya. Hal ini memastikan bahwa komponen tersebut menerima semua data yang diperlukan untuk merendernya.
 - Tambahkan [`<slot />`](https://docs.astro.build/en/core-concepts/astro-components/#slots) di dalam komponen bawaan tersebut. Hal ini memastikan bahwa jika komponen tersebut menerima _child elements_, Astro tahu di mana merendernya.
 
-## Menggunakan Data Halaman
+## Menggunakan data halaman
 
 Ketika mengganti komponen Starlight, implementasi custom Anda menerima objek standar `Astro.props` yang berisi semua data untuk halaman saat ini. Ini memungkinkan Anda menggunakan nilai-nilai ini untuk mengontrol bagaimana template komponen Anda merender.
 
@@ -103,7 +103,7 @@ const { title } = Astro.props.entry.data;
 
 Pelajari lebih lanjut tentang semua prop yang tersedia di [Referensi Penggantian](/id/reference/overrides/#component-props).
 
-### Mengganti Komponen Hanya pada Halaman Tertentu
+### Mengganti komponen hanya pada halaman tertentu
 
 Penggantian komponen berlaku untuk semua halaman. Namun, Anda dapat merender secara kondisional menggunakan nilai dari `Astro.props` untuk menentukan kapan menampilkan UI custom Anda, kapan menampilkan UI bawaan Starlight, atau bahkan kapan menampilkan sesuatu yang benar-benar berbeda.
 
