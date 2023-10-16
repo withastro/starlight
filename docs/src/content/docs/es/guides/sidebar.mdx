@@ -366,7 +366,7 @@ La configuración anterior genera la siguiente barra lateral:
 
 ## Internacionalización
 
-Usa la propiedad `translations` en las entradas de enlace y grupo para traducir la etiqueta del enlace o grupo para cada idioma compatible.
+Usa la propiedad `translations` en las entradas de enlace y grupo para traducir la etiqueta del enlace o grupo para cada idioma compatible especificando una etiqueta de idioma [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), p. ej. `"en"`, `"ar"`, o `"zh-CN"`, como clave, y la etiqueta traducida como valor.
 
 La propiedad `label` se utilizará para el idioma predeterminado y para los idiomas sin traducción.
 
@@ -376,20 +376,20 @@ starlight({
 		{
 			label: 'Guides',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: 'Components',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -399,15 +399,15 @@ starlight({
 });
 ```
 
-Navegar por la documentación en español generará la siguiente barra lateral:
+Navegar por la documentación en portugués de Brasil generará la siguiente barra lateral:
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/es/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}
