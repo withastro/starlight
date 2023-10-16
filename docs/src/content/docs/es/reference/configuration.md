@@ -158,19 +158,19 @@ Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está
 
 ```js
 sidebar: [
-  // Un ejemplo de barra lateral con etiquetas traducidas al francés.
+  // Un ejemplo de barra lateral con etiquetas traducidas al portugués de Brasil.
   {
     label: 'Start Here',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
         label: 'Getting Started',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
         label: 'Project Structure',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
@@ -309,7 +309,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'patreon' | 'reddit' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar cualquiera de estos los mostrará como enlaces de iconos en el encabezado del sitio.
 
