@@ -50,7 +50,7 @@ Starlight поддерживает создание собственных ко�
    export default defineConfig({
      integrations: [
        starlight({
-         title: 'My Docs with Overrides',
+         title: 'Моя документация, с переопределением',
          components: {
            // Переопределение компонента `SocialIcons`.
            SocialIcons: './src/components/EmailLink.astro',

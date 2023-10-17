@@ -211,7 +211,7 @@ sidebar:
   order: 2
   # Добавить значок к ссылке
   badge:
-    text: New
+    text: Новое
     variant: tip
 ---
 ```
@@ -227,7 +227,7 @@ sidebar:
 				{
 					label: 'Текст в боковой панели',
 					link: '#',
-					badge: { text: 'New', variant: 'tip' },
+					badge: { text: 'Новое', variant: 'tip' },
 				},
 				{ label: 'Другая страница', link: '#' },
 			],
@@ -249,11 +249,11 @@ starlight({
 		{
 			label: 'Руководства',
 			items: [
-				// Ссылка со значком "New".
+				// Ссылка со значком "Новое".
 				{
 					label: 'Компоненты',
 					link: '/ru/guides/components/',
-					badge: 'New',
+					badge: 'Новое',
 				},
 			],
 		},
@@ -271,7 +271,7 @@ starlight({
 				{
 					label: 'Компоненты',
 					link: '/ru/guides/components/',
-					badge: { text: 'New', variant: 'default' },
+					badge: { text: 'Новое', variant: 'default' },
 				},
 			],
 		},
@@ -282,7 +282,7 @@ starlight({
 
 Настройте стиль значка, используя объект с свойствами `text` и `variant`.
 
-`text` представляет содержимое для отображения (например, "New").
+`text` представляет содержимое для отображения (например, "Новое").
 Переопределите стиль `default`, который использует акцентный цвет вашего сайта,
 установив свойство `variant` в одно из следующих значений: `note`, `tip`, `danger`, `caution` или `success`.
 
@@ -368,7 +368,9 @@ starlight({
 
 ## Интернационализация
 
-Используйте свойство `translations` для ссылок и групп, чтобы перевести текст ссылки или группы на каждый поддерживаемый язык.
+Используйте свойство `translations` для ссылок и групп, чтобы перевести текст ссылки или группы на каждый поддерживаемый язык,
+указав языковой тег [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), например,
+`"en"`, `"ar"` или `"zh-CN"`, в качестве ключа и переведенной метки в качестве значения.
 Свойство `label` будет использоваться для языка по умолчанию и для языков без перевода.
 
 ```js
@@ -377,20 +379,20 @@ starlight({
 		{
 			label: 'Руководства',
 			translations: {
-				es: 'Guías',
+                'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: 'Компоненты',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
 					label: 'Интернационализация (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -493,8 +495,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Руководства',
-			// Не сворачивать группу "Руководства", но свернуть
-            // её автоматически сгенерированные подгруппы.
+			// Не сворачивать группу "Руководства", но свернуть её автоматически сгенерированные подгруппы.
 			collapsed: false,
 			autogenerate: { directory: 'guides', collapsed: true },
 		},
