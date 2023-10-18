@@ -20,6 +20,7 @@ Başka bir sayfaya [bağlantı ekleyebilirsiniz](/tr/getting-started/).
 ```md
 Başka bir sayfaya [bağlantı ekleyebilirsiniz](/tr/getting-started/).
 ```
+
 Kesme işaretleri ile `satır için kodu` vurgulayabilirsiniz.
 
 ```md
