@@ -95,6 +95,7 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 | [docsify][dy-carbon]        | 0.11g                     |
 | [Docusaurus][ds-carbon]     | 0.24g                     |
 | [Read the Docs][rtd-carbon] | 0.24g                     |
+| [Rspress][rp-carbon]        | 0.58g                     |
 | [GitBook][gb-carbon]        | 0.71g                     |
 
 <small>Data dikumpulkan pada 14 Mei 2023. Klik link untuk melihat angka terkini.</small>
@@ -108,6 +109,7 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
+[rp-carbon]: https://www.websitecarbon.com/website/rspress-dev-guide-start-introduction-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
 
 ## Sumber Tambahan

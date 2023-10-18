@@ -101,6 +101,7 @@ JavaScript를 분석하고 컴파일하는 것은 브라우저가 수행해야 �
 | [docsify][dy-carbon]        | 0.11g             |
 | [Docusaurus][ds-carbon]     | 0.24g             |
 | [Read the Docs][rtd-carbon] | 0.24g             |
+| [Rspress][rp-carbon]        | 0.58g             |
 | [GitBook][gb-carbon]        | 0.71g             |
 
 <small>2023년 5월 14일에 수집된 데이터. 최신 수치를 보려면 링크를 클릭하세요.</small>
@@ -114,6 +115,7 @@ JavaScript를 분석하고 컴파일하는 것은 브라우저가 수행해야 �
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
+[rp-carbon]: https://www.websitecarbon.com/website/rspress-dev-guide-start-introduction-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
 
 ## 더 많은 자료

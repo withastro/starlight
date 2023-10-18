@@ -100,6 +100,7 @@ Diğer dokümantasyon çerçeveleri ile nasıl kıyaslandığını merak ediyor 
 | [docsify][dy-carbon]        | 0.11gr                     |
 | [Docusaurus][ds-carbon]     | 0.24gr                     |
 | [Read the Docs][rtd-carbon] | 0.24gr                     |
+| [Rspress][rp-carbon]        | 0.58gr                     |
 | [GitBook][gb-carbon]        | 0.71gr                     |
 
 <small>14 Mayıs 2023 tarihli veriler. Güncel bilgileri görmek için linke tıkla.</small>
@@ -113,6 +114,7 @@ Diğer dokümantasyon çerçeveleri ile nasıl kıyaslandığını merak ediyor 
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
+[rp-carbon]: https://www.websitecarbon.com/website/rspress-dev-guide-start-introduction-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
 
 ## Diğer Kaynaklar

@@ -100,6 +100,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 | [docsify][dy-carbon]        | 0.11g              |
 | [Docusaurus][ds-carbon]     | 0.24g              |
 | [Read the Docs][rtd-carbon] | 0.24g              |
+| [Rspress][rp-carbon]        | 0.58g              |
 | [GitBook][gb-carbon]        | 0.71g              |
 
 <small>Data collected on 14 May 2023. Click a link to see up-to-date figures.</small>
@@ -113,6 +114,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
+[rp-carbon]: https://www.websitecarbon.com/website/rspress-dev-guide-start-introduction-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
 
 ## More resources
