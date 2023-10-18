@@ -354,7 +354,7 @@ Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 ## Uluslararasılaştırma
 
-`translations` değerini bağlantının dilini ya da grup etiketini her bir desteklenen dil için değiştirmekte kullanın.
+`translations` değerini bağlantının dilini ya da grup etiketini; [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) dil etiketini (örneğin `"en"`,`"ar` ya da `"zh-CN"`) anahtar ve çevirilmiş ismi değer olarak tanımlayarak her bir desteklenen dil için değiştirmekte kullanın.
 `label` değeri varsayılan yer ve çevirisi olmayan diller için kullanılır.
 
 
@@ -364,20 +364,20 @@ starlight({
 		{
 			label: 'Rehber',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: 'Bileşenler',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
 					label: 'Uluslararasılaştırma (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -386,15 +386,15 @@ starlight({
 	],
 });
 ```
-Dokümantasyon İspanyolca gezinmek aşağıdaki kenar çubuğunu oluşturacaktır:
+Dokümantasyonu Brezilya Portekizcesinde gezinmek aşağıdaki kenar çubuğunu oluşturacaktır:
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/es/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}
