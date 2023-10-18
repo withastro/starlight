@@ -12,11 +12,11 @@ Starlight es una integración construida sobre el framework [Astro](https://astr
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Mi encantador sitio de documentación',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Mi encantador sitio de documentación',
+		}),
+	],
 });
 ```
 
@@ -42,9 +42,9 @@ Establece un logotipo para mostrarlo en la barra de navegación junto al título
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/mi-logo.svg',
-  },
+	logo: {
+		src: './src/assets/mi-logo.svg',
+	},
 });
 ```
 
@@ -52,8 +52,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -72,9 +72,9 @@ Hablita "Editar los enlaces" de está página estableciendo la URL base que se d
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -97,25 +97,25 @@ Cada elemento debe tener una propiedad `label` y una de las siguientes propiedad
 
 ```js
 starlight({
-  sidebar: [
-    // Un solo elemento de enlace etiquetado como “Home”.
-    { label: 'Home', link: '/' },
-    // Un grupo etiquetado como "Start Here" que contiene dos enlaces.
-    {
-      label: 'Start Here',
-      items: [
-        { label: 'Introduction', link: '/intro' },
-        { label: 'Next Steps', link: '/next-steps' },
-      ],
-    },
-    // Un grupo que enlaza a todas las páginas del directorio de referencia.
-    {
-      label: 'Reference',
-      autogenerate: {
-        directory: 'reference',
-      },
-    },
-  ],
+	sidebar: [
+		// Un solo elemento de enlace etiquetado como “Home”.
+		{ label: 'Home', link: '/' },
+		// Un grupo etiquetado como "Start Here" que contiene dos enlaces.
+		{
+			label: 'Start Here',
+			items: [
+				{ label: 'Introduction', link: '/intro' },
+				{ label: 'Next Steps', link: '/next-steps' },
+			],
+		},
+		// Un grupo que enlaza a todas las páginas del directorio de referencia.
+		{
+			label: 'Reference',
+			autogenerate: {
+				directory: 'reference',
+			},
+		},
+	],
 });
 ```
 
@@ -182,19 +182,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			badge?: string | BadgeConfig;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -202,8 +202,8 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
@@ -221,29 +221,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Docs',
-      // Establece el inglés como el idioma predeterminado para este sitio.
-      defaultLocale: 'en',
-      locales: {
-        // Los documentos en inglés en `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // Los documentos en chino simplificado en `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // Los documentos en árabe en `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			// Establece el inglés como el idioma predeterminado para este sitio.
+			defaultLocale: 'en',
+			locales: {
+				// Los documentos en inglés en `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Los documentos en chino simplificado en `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Los documentos en árabe en `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -251,9 +251,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -283,15 +283,15 @@ Puedes servir el idioma predeterminado sin un directorio `/lang/` estableciendo 
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -317,18 +317,18 @@ Detalles opcionales sobre las cuentas de redes sociales para este sitio. Agregar
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -342,7 +342,7 @@ Admite archivos CSS locales relativos a la raíz de tu proyecto, por ejemplo, `'
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -355,17 +355,17 @@ Puede ser útil para agregar análisis y otros scripts y recursos de terceros.
 
 ```js
 starlight({
-  head: [
-    // Ejemplo: agregar etiqueta de script de análisis de Fathom.
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Ejemplo: agregar etiqueta de script de análisis de Fathom.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -373,9 +373,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -447,9 +447,9 @@ Proporciona las rutas a los componentes para sobreescribir las implementaciones 
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 
