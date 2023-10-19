@@ -41,7 +41,7 @@ Le sens d'écriture de la page.
 
 **Type :** `string`
 
-L’étiquette d’identification BCP-47 pour la langue de la page, par exemple `en`, `zh` ou `pt-BR`.
+L’étiquette d’identification BCP-47 pour la langue de la page, par exemple `en`, `zh-CN` ou `pt-BR`.
 
 #### `locale`
 
