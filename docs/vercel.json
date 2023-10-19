@@ -1,8 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  
+
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/de/(.*)", "status": 404, "dest": "/de/404.html" }
+    {
+      "src": "^/_astro/(.*)$",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(?<lang>[^/]*)/(.*)",
+      "dest": "/$lang/404"
+    }
   ]
 }
