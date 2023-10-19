@@ -7,8 +7,8 @@ import type { Props } from '../props';
 <style>
 	.content
 		:global(
-			:not(a, strong, em, del, span, input)
-				+ :not(a, strong, em, del, span, input, :where(.not-content *))
+			:not(a, strong, em, del, span, input, code)
+				+ :not(a, strong, em, del, span, input, code, :where(.not-content *))
 		) {
 		margin-top: 1.5rem;
 	}
