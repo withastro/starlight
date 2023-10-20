@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My delightful docs site',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My delightful docs site',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ Legt ein Logobild fest, das in der Navigationsleiste neben oder anstelle des Sei
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ Aktiviere "Diese Seite bearbeiten"-Links, indem du die Basis-URL für diese fest
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -96,25 +96,23 @@ Jedes Element muss ein `label` und eine der folgenden Eigenschaften haben:
 
 ```js
 starlight({
-  sidebar: [
-    // Ein einzelner Link mit der Bezeichnung "Startseite".
-    { label: 'Startseite', link: '/' },
-    // Eine Gruppe mit der Bezeichnung "Hier anfangen", die zwei Links enthält.
-    {
-      label: 'Hier anfangen',
-      items: [
-        { label: 'Einleitung', link: '/intro' },
-        { label: 'Nächste Schritte', link: '/next-steps' },
-      ],
-    },
-    // Eine Gruppe, die auf alle Seiten im Referenzverzeichnis verweist.
-    {
-      label: 'Referenz',
-      autogenerate: {
-        directory: 'referenz',
-      },
-    },
-  ],
+	sidebar: [
+		// Ein einzelner Link mit der Bezeichnung "Startseite".
+		{ label: 'Startseite', link: '/' },
+		// Eine Gruppe mit der Bezeichnung "Hier anfangen", die zwei Links enthält.
+		{
+			label: 'Hier anfangen',
+			items: [
+				{ label: 'Einleitung', link: '/intro' },
+				{ label: 'Nächste Schritte', link: '/next-steps' },
+			],
+		},
+		// Eine Gruppe, die auf alle Seiten im Referenzverzeichnis verweist.
+		{
+			label: 'Referenz',
+			autogenerate: { directory: 'referenz' },
+		},
+	],
 });
 ```
 
@@ -181,18 +179,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			badge?: string | BadgeConfig;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -200,8 +199,8 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
@@ -219,29 +218,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Docs',
-      // Englisch als Standardsprache festlegen.
-      defaultLocale: 'en',
-      locales: {
-        // Englische Seiten in `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // Chinesische Seiten in `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // Arabische Seiten in `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			// Englisch als Standardsprache festlegen.
+			defaultLocale: 'en',
+			locales: {
+				// Englische Seiten in `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Chinesische Seiten in `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Arabische Seiten in `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -249,9 +248,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -281,15 +280,15 @@ Du kannst die Standardsprache ohne ein `/lang/`-Verzeichnis anbieten, indem du e
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: 'Englisch',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'Englisch',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -307,24 +306,27 @@ Das `defaultLocale` wird verwendet, um Ersatzinhalte bereitzustellen, wenn Über
 
 ### `social`
 
-**Typ:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+import SocialLinksType from '../../../components/social-links-type.astro';
+
+**Typ:** <SocialLinksType />
 
 Optionale Angaben zu den Social-Media-Konten für diese Site. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -338,7 +340,7 @@ Unterstützt lokale CSS-Dateien relativ zum Stammverzeichnis deines Projekts, z.
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -351,17 +353,17 @@ Kann nützlich sein, um Analytics und andere Skripte und Ressourcen von Drittanb
 
 ```js
 starlight({
-  head: [
-    // Beispiel: Fathom Analytics Skript-Tag hinzufügen.
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Beispiel: Fathom Analytics Skript-Tag hinzufügen.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -369,9 +371,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -424,3 +426,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**Typ:** `string`  
+**Standard:** `'|'`
+
+Legt das Trennzeichen zwischen Seitentitel und dem Titel der Website im `<title>`-Tag der Website fest, welches in den Browser-Tabs angezeigt wird.
+
+Standardmäßig hat jede Seite einen `<title>` von `Seiten Überschrift | Webseitenname`.
+Zum Beispiel heißt diese Seite "Konfigurationsreferenz" und diese Website heißt "Starlight", also ist der `<titel>` für diese Seite "Konfigurationsreferenz | Starlight".
+
+### `components`
+
+**Typ:** `Record<string, string>`
+
+Gib die Pfade zu den Komponenten an, um die Standardimplementierungen von Starlight zu ersetzen.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
+});
+```
+
+Siehe die [Komponenten-Ersetzung Referenz](/de/reference/overrides/) für Details zu allen Komponenten, die du überschreiben kannst.
