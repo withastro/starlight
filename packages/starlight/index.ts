@@ -7,25 +7,29 @@ import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
+import { StarlightConfigSchema } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
+import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 
-export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration {
-	const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
-
-	if (!parsedConfig.success) {
-		throw new Error(
-			'Invalid config passed to starlight integration\n' +
-				parsedConfig.error.issues.map((i) => i.message).join('\n')
-		);
-	}
-
-	const userConfig = parsedConfig.data;
-
-	const Starlight: AstroIntegration = {
+export default function StarlightIntegration(
+	opts: StarlightUserConfigWithPlugins
+): AstroIntegration {
+	return {
 		name: '@astrojs/starlight',
 		hooks: {
-			'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
+			'astro:config:setup': async ({ config, injectRoute, updateConfig }) => {
+				const { userConfig } = await runPlugins(opts);
+				const parsedConfig = StarlightConfigSchema.safeParse(userConfig, { errorMap });
+
+				if (!parsedConfig.success) {
+					throw new Error(
+						'Invalid config passed to starlight integration\n' +
+							parsedConfig.error.issues.map((i) => i.message).join('\n')
+					);
+				}
+
+				const starlightConfig = parsedConfig.data;
+
 				injectRoute({
 					pattern: '404',
 					entryPoint: '@astrojs/starlight/404.astro',
@@ -36,7 +40,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				});
 				const integrations: AstroIntegration[] = [];
 				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
-					integrations.push(starlightSitemap(userConfig));
+					integrations.push(starlightSitemap(starlightConfig));
 				}
 				if (!config.integrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
@@ -44,7 +48,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				const newConfig: AstroUserConfig = {
 					integrations,
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
+						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
 					},
 					markdown: {
 						remarkPlugins: [...starlightAsides()],
@@ -72,6 +76,4 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 			},
 		},
 	};
-
-	return Starlight;
 }
