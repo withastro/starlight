@@ -5,8 +5,8 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Você pode substituir os componentes padrões do Starlight fornecendo o caminho do componente a ser substituido no campo [`componentes`](/pt-br/reference/configuration#components) as configurações do Starlight.
-Essa página lista todos os componentes disponíveis para substituição e links do GitHub para a implementação padrão.
+Você pode substituir os componentes padrões do Starlight fornecendo o caminho do componente a ser substituido no campo [`components`](/pt-br/reference/configuration#components) nas configurações do Starlight.
+Esta página lista todos os componentes disponíveis para substituição e links do GitHub para a implementação padrão.
 
 Leia mais em [Guia de Substituição](/pt-br/guides/overriding-components/).
 
@@ -41,13 +41,13 @@ Direção de escrita da página.
 
 **Tipos:** `string`
 
-Etiqueta BCP-47 para o local da página atual, ex: `en`, `zh-CN`, ou `pt-BR`.
+Etiqueta BCP-47 do local da página atual, ex: `en`, `zh-CN`, ou `pt-BR`.
 
-#### `local`
+#### `locale`
 
 **Tipos:** `string | undefined`
 
-O caminho base de onde o idioma é servido. `undefined` para slugs do local raiz.
+O caminho base de onde o idioma é servido. `undefined` para slugs do locale raiz.
 
 #### `slug`
 
@@ -65,22 +65,19 @@ ID único para a página, baseado no nome do arquivo.
 
 **Tipos:** `true | undefined`
 
-Será `true` se a página não tiver tradução no idioma atual e estiver utilizando conteúdo de contingencia do idioma padrão.
+Será `true` se a página não tiver tradução no idioma atual e estiver utilizando conteúdo de fallback do local raiz.
 Usado apenas em site multilíngues.
 
 #### `entryMeta`
 
 **Tipos:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
-Metadata do local do conteúdo da página. Pode ser diferente do local previsto quando a página estiver utilizando conteúdo de contigência.
-local metadata for the page content. Can be different from top-level local values when a page is using fallback content.
+Metadados do local do conteúdo da página. Pode ser diferente do local atual quando a página estiver utilizando conteúdo de fallback.
 
 #### `entry`
 
-A entrada do content collection do Astro para a página atual
-Isso inclui valores do frontmatter para a página atual em `entry.data`.
-The Astro content collection entry for the current page.
-Includes frontmatter values for the current page at `entry.data`.
+A entrada da coleção de conteúdo do Astro para a página atual.
+Inclui valores do frontmatter para a página atual em `entry.data`.
 
 ```ts
 entry: {
@@ -91,19 +88,20 @@ entry: {
   }
 }
 ```
-Veja mais sobre o objeto na referência de [Coleção de Conteúdo Astro](https://docs.astro.build/pt-br/reference/api-reference/#tipo-da-entrada-da-cole%C3%A7%C3%A3o)
+
+Leia mais sobre as propriedades desse objeto na referência de [Coleção de Conteúdo Astro](https://docs.astro.build/pt-br/reference/api-reference/#tipo-da-entrada-da-cole%C3%A7%C3%A3o)
 
 #### `sidebar`
 
 **Tipos:** `SidebarEntry[]`
 
-Entradas de navegação da barra lateral desta página.
+Entradas de navegação da barra lateral na página.
 
 #### `hasSidebar`
 
 **Tipos:** `boolean`
 
-Se a barra lateral será ou não exibida nesta página.
+Se a barra lateral será ou não exibida na página.
 
 #### `pagination`
 
@@ -115,7 +113,7 @@ Links para a próxima página e a anterior na barra lateral, se ativado.
 
 **Tipos:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
 
-Sumário dessa página, se ativado.
+Sumário da página, se ativado.
 
 #### `headings`
 
@@ -123,7 +121,6 @@ Sumário dessa página, se ativado.
 
 Arranjo de todos os títulos Markdown extraídos da página atual.
 Utilize [`toc`](#toc) ao invés se você deseja construir um sumário que respeita as configurações do Starlight.
-
 
 #### `lastUpdated`
 
@@ -143,7 +140,7 @@ Objeto `URL` para o endereço onde a página poderá ser editada, se ativado.
 
 ### Head
 
-Esses componentes são renderizados dentro do `<head>` de cada página.
+Estes componentes são renderizados dentro do `<head>` de cada página.
 Deve-se apenas incluir [elementos permitidos dentro do `<head>`](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/head#see_also)
 
 #### `Head`
@@ -179,7 +176,7 @@ A implementação padrão fica invisível até o usuário focar nela utilizando 
 
 ### Layout
 
-Esses componentes são responsáveis por dispor os componentes do Starlight e gerenciar a visualização através dos breakpoints.
+Estes componentes são responsáveis por dispor os componentes do Starlight e gerenciar a visualização através dos breakpoints.
 Substituí-los gera uma complexidade significativa.
 Se possível, prefira substituir componentes mais específicos.
 
@@ -189,19 +186,18 @@ Se possível, prefira substituir componentes mais específicos.
 **Componente padrão:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
 
 Componente de layout que amarra a maioria do conteúdo da página.
-A implementação padrão monta o layout header–sidebar–main. Nele há slots chamados `header` e `sidebar`, além do slot padrão para o conteúdo principal.
-Também renderiza o [`<MobileMenuToggle />`](#mobilemenutoggle) que suporta o botão de abrir ou fechar a barra lateral em viewports menores (mobile).
+A implementação padrão monta o layout header–sidebar–main. Nele há slots nomeados `header` e `sidebar`, além do slot padrão para o conteúdo principal.
+Também renderiza o [`<MobileMenuToggle />`](#mobilemenutoggle) para dar suporte ao abrir/fechar a barra lateral em viewports menores (mobile).
 
 #### `MobileMenuToggle`
 
 **Componente padrão:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
 
-Componente renderizado dentro do [`<PageFrame>`](#pageframe) responsável por abrir ou fechar a barra lateral em viewports menores (mobile).
+Componente renderizado dentro do [`<PageFrame>`](#pageframe), responsável por abrir ou fechar a barra lateral em viewports menores (mobile).
 
 #### `TwoColumnContent`
 
 **Componente padrão:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
-
 
 Componente de layout que amarra a coluna central e a barra da direita (sumário). 
 A implementação padrão alterna o layout entre uma coluna, em viewport estreitas; e duas colunas, em viewports maiores.
@@ -210,7 +206,7 @@ A implementação padrão alterna o layout entre uma coluna, em viewport estreit
 
 ### Header
 
-Esses componentes renderizam a barra superior do Starlight
+Estes componentes renderizam a barra de navegação superior do Starlight
 
 #### `Header`
 
@@ -223,7 +219,7 @@ A implementação padrão exibe [`<SiteTitle />`](#sitetitle), [`<Search />`](#s
 
 **Componente padrão:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
 
-Componente renderizado no início do Header para renderizar o título do site.
+Componente renderizado no início do Header que exibe o título do site.
 A implementação padrão inclui a lógica para renderizar os logos definidos nas configurações do Starlight.
 
 #### `Search`
@@ -231,7 +227,7 @@ A implementação padrão inclui a lógica para renderizar os logos definidos na
 **Componente padrão:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
 
 Componente utilizado para renderizar a interface de busca.
-A implementação padrão inclui um botão no cabeçalho e o código para exibir um modal de busca quando for clicado e carregar a [interface do Pagefind](https://pagefind.app/).
+A implementação padrão inclui o botão no cabeçalho e o código para exibir o modal de busca quando for clicado e carregar a [interface do Pagefind](https://pagefind.app/).
 
 #### `SocialIcons`
 
@@ -279,14 +275,14 @@ A implementação padrão renderiza [`<ThemeSelect />`](#themeselect) e [`<Langu
 ### Page Sidebar
 
 A barra lateral do Starlight é responsável por exibir o sumário delineando os subtítulos da página atual.
-Em viewports estreitas, fica sob um menu dropdown fixado.
+Em viewports estreitas, fica sob um menu dropdown fixo.
 
 
 #### `PageSidebar`
 
 **Componente padrão:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
 
-Componente para exibir o sumário, renderizado ao lado do conteúdo da página principal, para
+Componente renderizado ao lado do conteúdo da página principal para exibir o sumário.
 A implementação padrão renderiza [`<TableOfContents />`](#tableofcontents) e [`<MobileTableOfContents />`](#mobiletableofcontents).
 
 #### `TableOfContents`
@@ -311,8 +307,8 @@ Componentes renderizados na coluna central da página.
 
 **Componente padrão:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
-Componente de Banner renderizado no início de cada página.
-A implementação padrão utiliza o valor do frontmatter [`banner`](/pt-br/reference/frontmatter#banner) para decidir se renderiza ou não 
+Componente banner renderizado no início de cada página.
+A implementação padrão utiliza o valor do frontmatter [`banner`](/pt-br/reference/frontmatter#banner) para decidir se renderiza o banner ou não.
 
 
 #### `ContentPanel`
@@ -368,7 +364,7 @@ A implementação padrão exibe [`<LastUpdated />`](#lastupdated), [`<Pagination
 
 **Componente padrão:** [`LastUpdated.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro)
 
-Componente renderizado no rodapé da página que a data de última atualização
+Componente renderizado no rodapé da página que a data de última atualização.
 
 #### `EditLink`
 
