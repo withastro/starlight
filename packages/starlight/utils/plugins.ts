@@ -1,3 +1,4 @@
+import type { AstroIntegrationLogger } from 'astro';
 import { z } from 'astro/zod';
 import type { StarlightUserConfig } from '../utils/user-config';
 import { errorMap } from '../utils/error-map';
@@ -7,7 +8,10 @@ import { errorMap } from '../utils/error-map';
  * and returns the final user config that may have been updated by the plugins.
  * Note that the returned config is not validated and should still be validated by the caller.
  */
-export async function runPlugins({ plugins, ...config }: StarlightUserConfigWithPlugins) {
+export async function runPlugins(
+	{ plugins, ...config }: StarlightUserConfigWithPlugins,
+	logger: AstroIntegrationLogger
+) {
 	const parsedPluginsConfig = starlightPluginsConfigSchema.safeParse({ plugins }, { errorMap });
 
 	if (!parsedPluginsConfig.success) {
@@ -19,9 +23,10 @@ export async function runPlugins({ plugins, ...config }: StarlightUserConfigWith
 
 	let userConfig = config;
 
-	for (const { plugin } of parsedPluginsConfig.data.plugins) {
+	for (const { name, plugin } of parsedPluginsConfig.data.plugins) {
 		await plugin({
 			config: userConfig,
+			logger: logger.fork(name),
 			updateConfig(newConfig) {
 				userConfig = { ...userConfig, ...newConfig };
 			},
@@ -88,6 +93,12 @@ const starlightPluginsConfigSchema = z.object({
 								z.tuple([z.record(z.any()) as z.Schema<Partial<StarlightUserConfig>>]),
 								z.void()
 							),
+							/**
+							 * An instance of the Astro logger with all logged messages prefixed with the plugin name.
+							 *
+							 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
+							 */
+							logger: z.any() as z.Schema<AstroIntegrationLogger>,
 						}),
 					]),
 					z.union([z.void(), z.promise(z.void())])

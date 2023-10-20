@@ -17,8 +17,8 @@ export default function StarlightIntegration(
 	return {
 		name: '@astrojs/starlight',
 		hooks: {
-			'astro:config:setup': async ({ config, injectRoute, updateConfig }) => {
-				const { userConfig } = await runPlugins(opts);
+			'astro:config:setup': async ({ config, injectRoute, logger, updateConfig }) => {
+				const { userConfig } = await runPlugins(opts, logger);
 				const parsedConfig = StarlightConfigSchema.safeParse(userConfig, { errorMap });
 
 				if (!parsedConfig.success) {
