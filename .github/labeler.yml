@@ -14,6 +14,7 @@ i18n:
   - docs/src/content/docs/ko/**/*
   - docs/src/content/docs/ru/**/*
   - docs/src/content/docs/id/**/*
+  - docs/src/content/docs/tr/**/*
 
 '🌟 core':
   - packages/starlight/**

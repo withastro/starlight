@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -175,7 +175,7 @@
     "@pagefind/default-ui": "^1.0.3",
     "@types/mdast": "^3.0.11",
     "bcp-47": "^2.1.0",
-    "execa": "^7.1.1",
+    "execa": "^8.0.1",
     "hast-util-select": "^5.0.5",
     "hastscript": "^7.2.0",
     "pagefind": "^1.0.3",
