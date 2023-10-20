@@ -13,3 +13,12 @@ test('overwrites a configuration option', () => {
 test('runs plugins in the order that they are configured and always passes down the latest user config', () => {
 	expect(config.description).toBe('plugin 1 - plugin 2 - plugin 3');
 });
+
+test.only('receives the user provided configuration without any Zod `transform`s applied', () => {
+	/**
+	 * If the `transform` associated to the favicon schema was applied, the favicon `href` would be
+	 * `invalid.svg`.
+	 * @see {@link file://./vitest.config.ts} for more details in the `test-plugin-1` plugin.
+	 */
+	expect(config.favicon.href).toBe('valid.svg');
+});
