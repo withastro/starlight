@@ -51,6 +51,12 @@ import type { Props } from '../props';
 	.content :global(:is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *))) {
 		display: block;
 		max-width: 100%;
+	}
+
+	.content
+		:global(:is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *))):not(
+			[height]
+		) {
 		height: auto;
 	}
 
