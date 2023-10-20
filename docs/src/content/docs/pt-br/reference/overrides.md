@@ -1,11 +1,11 @@
 ---
 title: Referência de Substituição
-description: Visão geral dos componentes e props de componentes que o Starlight dá suporte à substituição
+description: Visão geral dos componentes e props de componentes que o Starlight dá suporte a substituição
 tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Você pode substituir os componentes padrão do Starlight fornecendo o caminho do componente a ser substituido no campo [`componentes`](/pt-br/reference/configuration#components) as configurações do Starlight.
+Você pode substituir os componentes padrões do Starlight fornecendo o caminho do componente a ser substituido no campo [`componentes`](/pt-br/reference/configuration#components) as configurações do Starlight.
 Essa página lista todos os componentes disponíveis para substituição e links do GitHub para a implementação padrão.
 
 Leia mais em [Guia de Substituição](/pt-br/guides/overriding-components/).
@@ -24,7 +24,7 @@ const { hasSidebar } = Astro.props;
 //      ^ tipo: boolean
 ---
 ```
-Assim você terá autocompletar e tipos quando acessar `Astro.props`.
+Assim você terá autocomplete e tipos quando acessar `Astro.props`.
 
 
 ### Props
@@ -47,7 +47,7 @@ Etiqueta BCP-47 para o local da página atual, ex: `en`, `zh-CN`, ou `pt-BR`.
 
 **Tipos:** `string | undefined`
 
-O caminho base de onde o idioma é servido. `undefined` para slugs do local raíz.
+O caminho base de onde o idioma é servido. `undefined` para slugs do local raiz.
 
 #### `slug`
 
@@ -65,7 +65,7 @@ ID único para a página, baseado no nome do arquivo.
 
 **Tipos:** `true | undefined`
 
-Será `true` se a página não tiver tradução no idioma atual e estiver utilizando conteúdo de contigência do idioma padrão.
+Será `true` se a página não tiver tradução no idioma atual e estiver utilizando conteúdo de contingencia do idioma padrão.
 Usado apenas em site multilíngues.
 
 #### `entryMeta`
@@ -91,7 +91,7 @@ entry: {
   }
 }
 ```
-Veja mais sobre o objeto na referencia de [Coleção de Conteúdo Astro](https://docs.astro.build/pt-br/reference/api-reference/#collection-entry-types)
+Veja mais sobre o objeto na referência de [Coleção de Conteúdo Astro](https://docs.astro.build/pt-br/reference/api-reference/#tipo-da-entrada-da-cole%C3%A7%C3%A3o)
 
 #### `sidebar`
 
@@ -109,7 +109,7 @@ Se a barra lateral será ou não exibida nesta página.
 
 **Tipos:** `{ prev?: Link; next?: Link }`
 
-Links para para a próxima página e a anterior na barra lateral, se ativado.
+Links para a próxima página e a anterior na barra lateral, se ativado.
 
 #### `toc`
 
@@ -154,7 +154,7 @@ Componente renderizado dentro do `<head>` de cada página.
 Contém tags importantes como `<title>`, e `<meta charset="utf-8">`.
 
 Substitua esse componente em último caso.
-Se possível, dê preferência às opções [`head`](/pt-br/reference/configuration#head) de configuração do Starlight.
+Se possível, dê preferência as opções [`head`](/pt-br/reference/configuration#head) de configuração do Starlight.
 
 #### `ThemeProvider`
 
@@ -180,7 +180,7 @@ A implementação padrão fica invisível até o usuário focar nela utilizando 
 ### Layout
 
 Esses componentes são responsáveis por dispor os componentes do Starlight e gerenciar a visualização através dos breakpoints.
-Substitui-los gera uma complexidade significativa.
+Substituí-los gera uma complexidade significativa.
 Se possível, prefira substituir componentes mais específicos.
 
 
@@ -188,7 +188,7 @@ Se possível, prefira substituir componentes mais específicos.
 
 **Componente padrão:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
 
-Componente de layout que amarra a maioria do conteúda da página.
+Componente de layout que amarra a maioria do conteúdo da página.
 A implementação padrão monta o layout header–sidebar–main. Nele há slots chamados `header` e `sidebar`, além do slot padrão para o conteúdo principal.
 Também renderiza o [`<MobileMenuToggle />`](#mobilemenutoggle) que suporta o botão de abrir ou fechar a barra lateral em viewports menores (mobile).
 
@@ -196,7 +196,7 @@ Também renderiza o [`<MobileMenuToggle />`](#mobilemenutoggle) que suporta o bo
 
 **Componente padrão:** [`MobileMenuToggle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro)
 
-Componente renderizado dentro do [`<PageFrame>`](#pageframe) que é responsável por abrir ou fechar a barra lateral em viewports menores (mobile).
+Componente renderizado dentro do [`<PageFrame>`](#pageframe) responsável por abrir ou fechar a barra lateral em viewports menores (mobile).
 
 #### `TwoColumnContent`
 
@@ -216,7 +216,7 @@ Esses componentes renderizam a barra superior do Starlight
 
 **Componente padrão:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
-O componente Header é exibito no início de cada página.
+O componente Header é exibido no início de cada página.
 A implementação padrão exibe [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), e [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
@@ -224,7 +224,7 @@ A implementação padrão exibe [`<SiteTitle />`](#sitetitle), [`<Search />`](#s
 **Componente padrão:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
 
 Componente renderizado no início do Header para renderizar o título do site.
-A implementação padrão inclui a lógica para rendezir os logos definidos nas configurações do Starlight.
+A implementação padrão inclui a lógica para renderizar os logos definidos nas configurações do Starlight.
 
 #### `Search`
 
@@ -232,9 +232,6 @@ A implementação padrão inclui a lógica para rendezir os logos definidos nas 
 
 Componente utilizado para renderizar a interface de busca.
 A implementação padrão inclui um botão no cabeçalho e o código para exibir um modal de busca quando for clicado e carregar a [interface do Pagefind](https://pagefind.app/).
-
-Component used to render Starlight’s search UI.
-The default implementation includes the button in the header and the code for displaying a search modal when it is clicked and loading [Pagefind’s UI](https://pagefind.app/).
 
 #### `SocialIcons`
 
@@ -247,7 +244,7 @@ A implementação padrão utiliza a opção [`social`](/pt-br/reference/configur
 
 **Componente padrão:** [`ThemeSelect.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro)
 
-Componente renderizado no cabeçalho da página que permite aos usuários selecior o tema preferido.
+Componente renderizado no cabeçalho da página que permite aos usuários selecionar o tema preferido.
 
 #### `LanguageSelect`
 
@@ -296,7 +293,7 @@ A implementação padrão renderiza [`<TableOfContents />`](#tableofcontents) e 
 
 **Componente padrão:** [`TableOfContents.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro)
 
-Componente que renderiza o sumário da pagina atual em viewports largas.
+Componente que renderiza o sumário da página atual em viewports largas.
 
 #### `MobileTableOfContents`
 
@@ -315,7 +312,7 @@ Componentes renderizados na coluna central da página.
 **Componente padrão:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Componente de Banner renderizado no início de cada página.
-A implmentação padrão utiliza o valor do frontmatter [`banner`](/pt-br/reference/frontmatter#banner) para decidir se renderiza ou não 
+A implementação padrão utiliza o valor do frontmatter [`banner`](/pt-br/reference/frontmatter#banner) para decidir se renderiza ou não 
 
 
 #### `ContentPanel`
@@ -330,22 +327,22 @@ Componente de layout que amarra as seções da coluna central.
 
 Componente contendo o elemento `<h1>` da página atual.
 
-As implmentações devem adicionar `id="_top"` no elemento `<h1>` assim como é na implementação padrão.
+Certifique-se de adicionar `id="_top"` ao elemento `<h1>` assim como implementação padrão.
 
 #### `FallbackContentNotice`
 
 **Componente padrão:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
 
 Aviso exibido aos visitantes da página quando a tradução para o idioma atual não estiver disponível.
-Apenas utilizado em sites multilíngue.
+Apenas utilizado em site multilíngue.
 
 
 #### `Hero`
 
 **Componente padrão:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Componente rendezirado no início da página quando [`hero`](/pt-br/reference/frontmatter#hero) tiver configurado no frontmatter.
-A implementação padrão exibite um título grande, tagline, links de chamada de ação, e opcionalmente, uma imagem junto.
+Componente renderizado no início da página quando [`hero`](/pt-br/reference/frontmatter#hero) tiver configurado no frontmatter.
+A implementação padrão exibe um título grande, tagline, links de chamada de ação, e opcionalmente, uma imagem junto.
 
 #### `MarkdownContent`
 
