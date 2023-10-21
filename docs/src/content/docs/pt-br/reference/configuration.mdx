@@ -187,6 +187,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -307,7 +308,7 @@ O local padrãoserá utilizado para providenciar conteúdo de fallback onde est�
 
 ### `social`
 
-import SocialLinksType from '../../../components/social-links-type.astro';
+import SocialLinksType from '../../../../components/social-links-type.astro';
 
 **tipo:** <SocialLinksType />
 
@@ -426,3 +427,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**tipo:** `string`  
+**padrão:** `'|'`
+
+Define o delimitador entre o título da página e o título do site na tag `<title>`, o qual é exibido na aba do navegador.
+
+Por padrão toda página tem o `<title>` no formato `Título da Página | Título do Site`.
+Por exemplo, o título da página atual é "Referência da Configuração" e o título do site "Starlight", então o `<title>` é "Referência da Configuração | Starlight”.
+
+### `components`
+
+**tipo:** `Record<string, string>`
+
+Fornece os caminhos para os componentes que substituirão os componentes padrões do Starlight.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MeusLinksSociais.astro',
+	},
+});
+```
+
+Consulte a [Referencia de Substituição](/pt-br/reference/overrides/) para ver os detalhes de todos os componentes que você pode substituir.
