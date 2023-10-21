@@ -16,7 +16,7 @@ test('returns all integrations added by plugins without deduping them', async ()
 
 	const { integrations } = await runPlugins(
 		{
-			title: '',
+			title: 'Test Docs',
 			plugins: [
 				{
 					name: 'test-plugin-1',
