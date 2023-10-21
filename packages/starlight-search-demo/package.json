@@ -1,0 +1,23 @@
+{
+  "name": "@astrojs/starlight-search-demo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Demo Starlight Plugin adding a 3rd party search engine to Starlight",
+  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/withastro/starlight",
+    "directory": "packages/starlight-search-demo"
+  },
+  "bugs": "https://github.com/withastro/starlight/issues",
+  "homepage": "https://starlight.astro.build",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./overrides/Search.astro": "./overrides/Search.astro"
+  },
+  "peerDependencies": {
+    "@astrojs/starlight": ">=0.11.1"
+  }
+}

@@ -35,6 +35,9 @@ importers:
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
+      '@astrojs/starlight-search-demo':
+        specifier: workspace:*
+        version: link:../packages/starlight-search-demo
       '@types/culori':
         specifier: ^2.0.0
         version: 2.0.0
@@ -193,6 +196,12 @@ importers:
       vitest:
         specifier: ^0.33.0
         version: 0.33.0
+
+  packages/starlight-search-demo:
+    dependencies:
+      '@astrojs/starlight':
+        specifier: '>=0.11.1'
+        version: link:../starlight
 
   packages/tailwind:
     dependencies:

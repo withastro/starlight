@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightSearchDemo from '@astrojs/starlight-search-demo';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -23,6 +24,8 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Starlight',
+			// TODO(HiDeoo) - Remove this once the search demo is no longer needed.
+			plugins: [starlightSearchDemo({ apiKey: '123456' })],
 			logo: {
 				light: '/src/assets/logo-light.svg',
 				dark: '/src/assets/logo-dark.svg',

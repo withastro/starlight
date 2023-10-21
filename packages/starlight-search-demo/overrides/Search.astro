@@ -1,0 +1,23 @@
+---
+import config from 'virtual:starlight-search-demo-config';
+---
+
+<input
+	autocapitalize="none"
+	enterkeyhint="search"
+	placeholder={`Search Demo with API Key '${config.apiKey}'`}
+	type="text"
+/>
+
+<style>
+	input {
+		background-color: crimson;
+		border: 2px solid darkred;
+		color: floralwhite;
+		width: 100%;
+	}
+
+	input::placeholder {
+		color: salmon;
+	}
+</style>
