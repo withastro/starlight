@@ -1,2 +1,2 @@
 export type { StarlightConfig } from './utils/user-config';
-export type { StarlightUserConfigWithPlugins } from './utils/plugins';
+export type { StarlightPlugin } from './utils/plugins';
