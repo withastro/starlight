@@ -5,7 +5,7 @@ description: Uma visão geral de todas as opções de configuração que o Starl
 
 ## Configure a integração `starlight`
 
-Starlight é uma integração construída acima do framework web [Astro](https://astro.build). Você pode configurar o seu projeto dentro do arquivo de configuração `astro.config.mjs`:
+Starlight é uma integração construída em cima do framework web [Astro](https://astro.build). Você pode configurar o seu projeto dentro do arquivo de configuração `astro.config.mjs`:
 
 ```js
 // astro.config.mjs
@@ -207,7 +207,7 @@ interface BadgeConfig {
 
 ### `locales`
 
-**tipo:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**tipo:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [Configure internacionalização (i18n)](/pt-br/guides/i18n/) para o seu site definindo quais `locales` são suportados.
 
@@ -307,7 +307,9 @@ O local padrãoserá utilizado para providenciar conteúdo de fallback onde est�
 
 ### `social`
 
-**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+import SocialLinksType from '../../../components/social-links-type.astro';
+
+**tipo:** <SocialLinksType />
 
 Detalhes opcionais sobre as contas de redes sociais para esse site. Adicionar qualquer um desses irá os mostrar como links de ícone no cabeçalho do site.
 
