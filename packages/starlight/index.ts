@@ -18,7 +18,7 @@ export default function StarlightIntegration(
 		name: '@astrojs/starlight',
 		hooks: {
 			'astro:config:setup': async ({ config, injectRoute, logger, updateConfig }) => {
-				const { userConfig } = await runPlugins(opts, logger);
+				const { integrations, userConfig } = await runPlugins(opts, logger);
 				const parsedConfig = StarlightConfigSchema.safeParse(userConfig, { errorMap });
 
 				if (!parsedConfig.success) {
@@ -38,7 +38,6 @@ export default function StarlightIntegration(
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
-				const integrations: AstroIntegration[] = [];
 				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
 				}

@@ -17,7 +17,7 @@ export async function defineVitestConfig(config: StarlightUserConfigWithPlugins)
 	});
 }
 
-class TestAstroIntegrationLogger {
+export class TestAstroIntegrationLogger {
 	options = {} as AstroIntegrationLogger['options'];
 	constructor(public label = 'test-integration-logger') {}
 	fork = (label: string) => new TestAstroIntegrationLogger(label);
