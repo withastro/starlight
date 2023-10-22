@@ -73,8 +73,8 @@ const starlightPluginSchema = z.object({
 				/**
 				 * A callback function to update the user-supplied Starlight configuration.
 				 *
-				 * The provided configuration will be merged with the existing one so you only need
-				 * to provide the values you want to update.
+				 * You only need to provide the configuration values that you want to update but no deep
+				 * merge is performed.
 				 *
 				 * @example
 				 * {
@@ -91,13 +91,14 @@ const starlightPluginSchema = z.object({
 					z.void()
 				),
 				/**
-				 * An instance of the Astro logger with all logged messages prefixed with the plugin name.
+				 * An instance of the Astro integration logger with all logged messages prefixed with the
+				 * plugin name.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
 				 */
 				logger: z.any() as z.Schema<AstroIntegrationLogger>,
 				/**
-				 * A callback function to add an Astro integration related to this plugin.
+				 * A callback function to add an Astro integration required by this plugin.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/
 				 *
