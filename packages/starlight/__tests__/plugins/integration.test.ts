@@ -20,7 +20,8 @@ test('returns all integrations added by plugins without deduping them', async ()
 			plugins: [
 				{
 					name: 'test-plugin-1',
-					plugin({ addIntegration }) {
+					plugin({ addIntegration, updateConfig }) {
+						updateConfig({ description: 'test' });
 						addIntegration(integration1);
 					},
 				},

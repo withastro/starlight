@@ -1,6 +1,8 @@
 import { expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { getSidebar } from '../../utils/navigation';
+import { runPlugins } from '../../utils/plugins';
+import { TestAstroIntegrationLogger } from '../test-config';
 
 test('reads and updates a configuration option', () => {
 	expect(config.title).toBe('Plugins - Custom');
@@ -24,6 +26,20 @@ test('receives the user provided configuration without any Zod `transform`s appl
 });
 
 test('does not expose plugins to the config virtual module', () => {
-	// @ts-expect-error - plugins are not serializable and thus not in the config virtual module
+	// @ts-expect-error - plugins are not serializable and thus not in the config virtual module.
 	expect(config.plugins).not.toBeDefined();
+});
+
+test('validates plugins configuration before running them', async () => {
+	expect(
+		async () =>
+			await runPlugins(
+				{
+					title: 'Test Docs',
+					// @ts-expect-error - invalid integration with no `plugin` callback.
+					plugins: [{ name: 'plugin-with-invalid-integration' }],
+				},
+				new TestAstroIntegrationLogger()
+			)
+	).rejects.toThrowError(/Invalid plugins config/);
 });
