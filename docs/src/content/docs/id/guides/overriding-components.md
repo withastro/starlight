@@ -22,7 +22,7 @@ Mengganti komponen bawaan Starlight dapat berguna ketika:
 1. Pilih komponen Starlight yang ingin Anda ganti.
    Anda dapat menemukan daftar lengkap komponen di [Referensi Penggantian](/id/reference/overrides/).
 
-    Contoh ini akan mengganti komponen [`SocialIcons`](/id/reference/overrides/#socialicons) Starlight pada bilah navigasi halaman.
+   Contoh ini akan mengganti komponen [`SocialIcons`](/id/reference/overrides/#socialicons) Starlight pada bilah navigasi halaman.
 
 2. Buat komponen Astro untuk menggantikan komponen Starlight tersebut.
    Contoh ini membuat tautan kontak.
