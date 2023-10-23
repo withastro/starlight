@@ -1,7 +1,3 @@
-name: Feature Request
-description: Suggest an improvement you’d like to see added to Starlight
-labels: []
-assignees: []
 body:
   - type: markdown
     attributes:
