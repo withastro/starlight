@@ -41,22 +41,27 @@ Aşdağıdaki gibi kenar çubuğu otomatik olarak oluşturulacaktır:
 		{
 			label: 'reference',
 			items: [
-				{ label: 'Yapılandırma Referansı', link: 'tr/reference/configuration/' },
+				{
+					label: 'Yapılandırma Referansı',
+					link: 'tr/reference/configuration/',
+				},
 			],
 		},
 	]}
 />
-Otomatik oluşturulan kenar çubukları ile ilgili daha fazla bilgiye [otomatik oluşturulan gruplar](#otomatik-oluşturulan-gruplar) bölümünden ulaşabilirsiniz.
+Otomatik oluşturulan kenar çubukları ile ilgili daha fazla bilgiye [otomatik oluşturulan
+gruplar](#otomatik-oluşturulan-gruplar) bölümünden ulaşabilirsiniz.
 
 ## Bağlantı ve Bağlantı Grupları Ekleme
 
 Kenar çubuğu [bağlantıları](#bağlantılar) ve [link grupları](#gruplar) (toplanabilen başlıkla birlikle) yapılandırmak için `astro.config.mjs` içindeki [`starlight.sidebar`](/tr/reference/configuration/#sidebar) değerini kullanın.
 
-Bağlantıları ve grupları birleştirereki çok çeşitli kenar çubuğu taslakları oluşturabilirsiniz. 
+Bağlantıları ve grupları birleştirereki çok çeşitli kenar çubuğu taslakları oluşturabilirsiniz.
 
 ### Bağlantılar
 
 Dahili ya da harici sayfaya `label` ve `link` değerlerine sahip bir nesneyi kullanarak bağlantı ekleyin.
+
 ```js
 starlight({
 	sidebar: [
@@ -67,6 +72,7 @@ starlight({
 	],
 });
 ```
+
 Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 <SidebarPreview
@@ -131,7 +137,7 @@ Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 	]}
 />
 
-### Otomatik Oluşturulmuş Gruplar 
+### Otomatik Oluşturulmuş Gruplar
 
 Starlight dokümantasyonunuzun dizinini baz alarak kenar çubuğunuzda otomatik olarak grup oluşturabilir.
 Elle her kenar çubuğu elemanını bir grup içerisine eklemek istemediğinizde yardımcı olur.
@@ -150,6 +156,7 @@ starlight({
 	],
 });
 ```
+
 Ve aşağıdaki dosya yapısıyla:
 
 <FileTree>
@@ -197,7 +204,7 @@ title: Sayfam
 sidebar:
   # Bağlantı için özel isim ayarlar
   label: Özel Kenar Çubuğu İsmi
-	 # Bağlantı için özel sıralama ayarlar (küçük sayılar üst sıralarda görünür)
+  # Bağlantı için özel sıralama ayarlar (küçük sayılar üst sıralarda görünür)
   order: 2
   # Bağlantıya etiket ekler
   badge:
@@ -205,6 +212,7 @@ sidebar:
     variant: tip
 ---
 ```
+
 Yukarıdaki gibi önbölümlü sayfa içeren otomatik oluşturulan grup, aşağıdaki gibi kenar çubuğu oluşturacaktır:
 
 <SidebarPreview
@@ -249,6 +257,7 @@ starlight({
 	],
 });
 ```
+
 Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 <SidebarPreview
@@ -272,7 +281,7 @@ Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 `text` görüntülenecek içeriği temsil eder (örneğin "Yeni").
 
-`variant` özelliğini bu değerlerden (`note`, `tip`, `danger`, `caution` ya da `success`) biri ile değiştirdiğinizde,  sitenizin ara rengini kullanan `default` stillendirmenizin üzerine yazar.
+`variant` özelliğini bu değerlerden (`note`, `tip`, `danger`, `caution` ya da `success`) biri ile değiştirdiğinizde, sitenizin ara rengini kullanan `default` stillendirmenizin üzerine yazar.
 
 ```js
 starlight({
@@ -357,7 +366,6 @@ Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 `translations` değerini bağlantının dilini ya da grup etiketini; [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) dil etiketini (örneğin `"en"`,`"ar` ya da `"zh-CN"`) anahtar ve çevirilmiş ismi değer olarak tanımlayarak her bir desteklenen dil için değiştirmekte kullanın.
 `label` değeri varsayılan yer ve çevirisi olmayan diller için kullanılır.
 
-
 ```js
 starlight({
 	sidebar: [
@@ -386,6 +394,7 @@ starlight({
 	],
 });
 ```
+
 Dokümantasyonu Brezilya Portekizcesinde gezinmek aşağıdaki kenar çubuğunu oluşturacaktır:
 
 <SidebarPreview
@@ -402,7 +411,7 @@ Dokümantasyonu Brezilya Portekizcesinde gezinmek aşağıdaki kenar çubuğunu 
 
 ## Toplanabilen Gruplar
 
-Bağlantı grupları varsayılan olarak `collapsed` değerinin  `true` olarak ayarlanmasıyla toplanabilir olur.
+Bağlantı grupları varsayılan olarak `collapsed` değerinin `true` olarak ayarlanmasıyla toplanabilir olur.
 
 ```js
 starlight({
@@ -419,6 +428,7 @@ starlight({
 	],
 });
 ```
+
 Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 <SidebarPreview
@@ -448,6 +458,7 @@ starlight({
 	],
 });
 ```
+
 Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 <SidebarPreview
@@ -485,6 +496,7 @@ starlight({
 	],
 });
 ```
+
 Yukarıdaki yapılandırma aşağıdaki gibi kenar çubuğu oluşturur:
 
 <SidebarPreview
