@@ -42,5 +42,5 @@ body:
       label: Participation
       description: Let us know if your interested in contributing this feature yourself.
       options:
-        - label: I am willing to submit a pull request for this issue.
+        - label: I am willing to submit a pull request for this feature.
           required: false
