@@ -155,19 +155,19 @@ sidebar: [
 
 ```js
 sidebar: [
-  // 한국어로 번역된 라벨을 사용하는 사이드바 예시
+  // 브라질 포르투갈어로 번역된 라벨이 있는 예시 사이드바입니다.
   {
-    label: 'Start Here',
-    translations: { ko: '여기서부터' },
+    label: '여기서부터',
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
-        label: 'Getting Started',
-        translations: { ko: '시작하기' },
+        label: '시작하기',
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
-        label: 'Project Structure',
-        translations: { ko: '프로젝트 구조' },
+        label: '프로젝트 구조',
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
@@ -206,7 +206,7 @@ interface BadgeConfig {
 
 ### `locales`
 
-**타입:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**타입:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 지원되는 `locales`를 설정하여 사이트의 [국제화(i18n)를 구성](/ko/guides/i18n/)하세요.
 
@@ -311,7 +311,9 @@ starlight({
 
 ### `social`
 
-**타입:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'patreon' | 'reddit' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**타입:** <SocialLinksType />
 
 이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다. 이 중 하나를 추가하면 사이트 헤더에 아이콘 링크로 표시됩니다.
 
