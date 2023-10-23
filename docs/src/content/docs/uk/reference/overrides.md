@@ -5,10 +5,10 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Ви можете замінити вбудовані компоненти Starlight, надавши шляхи до компонентів заміни в параметрі конфігурації Starlight [`components`](/reference/configuration#components).
+Ви можете замінити вбудовані компоненти Starlight, надавши шляхи до компонентів заміни в параметрі конфігурації Starlight [`components`](/uk/reference/configuration#components).
 На цій сторінці перераховано всі компоненти, доступні для перевизначення, і посилання на їх реалізацію за замовчуванням на GitHub.
 
-Дізнайтеся більше в [Посібнику із заміни компонентів](/guides/overriding-components/).
+Дізнайтеся більше в [Посібнику із заміни компонентів](/uk/guides/overriding-components/).
 
 ## Реквізити компонентів
 
@@ -151,7 +151,7 @@ entry: {
 Містить важливі теги, зокрема `<title>` і `<meta charset="utf-8">`.
 
 Перевизначте цей компонент як крайній засіб.
-Віддавайте перевагу [`head`](/reference/configuration#head) параметру Starlight config, якщо це можливо.
+Віддавайте перевагу [`head`](/uk/reference/configuration#head) параметру Starlight config, якщо це можливо.
 
 #### `ThemeProvider`
 
@@ -231,7 +231,7 @@ entry: {
 **Компонент за замовчуванням:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 Компонент, відображений у заголовку сайту, включаючи посилання на піктограми соціальних мереж.
-Стандартна реалізація використовує опцію [`social`](/reference/configuration#social) у конфігурації Starlight для візуалізації піктограм і посилань.
+Стандартна реалізація використовує опцію [`social`](/uk/reference/configuration#social) у конфігурації Starlight для візуалізації піктограм і посилань.
 
 #### `ThemeSelect`
 
@@ -304,7 +304,7 @@ entry: {
 **Компонент за замовчуванням:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Компонент банера відображається у верхній частині кожної сторінки.
-Реалізація за замовчуванням використовує значення frontmatter [`banner`](/reference/frontmatter#banner) сторінки, щоб вирішити, відображати чи ні.
+Реалізація за замовчуванням використовує значення frontmatter [`banner`](/uk/reference/frontmatter#banner) сторінки, щоб вирішити, відображати чи ні.
 
 #### `ContentPanel`
 
@@ -331,7 +331,7 @@ entry: {
 
 **Компонент за замовчуванням:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Компонент відображається у верхній частині сторінки, коли [`hero`](/reference/frontmatter#hero) встановлено у frontmatter.
+Компонент відображається у верхній частині сторінки, коли [`hero`](/uk/reference/frontmatter#hero) встановлено у frontmatter.
 Стандартна реалізація показує великий заголовок, слоган і посилання із закликом до дії поряд із необов’язковим зображенням.
 
 #### `MarkdownContent`
