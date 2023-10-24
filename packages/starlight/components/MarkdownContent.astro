@@ -51,12 +51,6 @@ import type { Props } from '../props';
 	.content :global(:is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *))) {
 		display: block;
 		max-width: 100%;
-	}
-
-	.content
-		:global(:is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *))):not(
-			[height]
-		) {
 		height: auto;
 	}
 
@@ -131,3 +125,15 @@ import type { Props } from '../props';
 		border-bottom: 1px solid var(--sl-color-hairline);
 	}
 </style>
+<script>
+	const elements = document.querySelectorAll('iframe');
+	elements.forEach((element) => {
+		if (!element.hasAttribute('width') || !element.hasAttribute('height')) {
+			return;
+		}
+
+		const width = parseInt(element.getAttribute('width') ?? '1');
+		const height = parseInt(element.getAttribute('height') ?? '1');
+		element.style.aspectRatio = `${width} / ${height}`;
+	});
+</script>
