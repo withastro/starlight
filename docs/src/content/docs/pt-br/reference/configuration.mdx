@@ -5,7 +5,7 @@ description: Uma visão geral de todas as opções de configuração que o Starl
 
 ## Configure a integração `starlight`
 
-Starlight é uma integração construída acima do framework web [Astro](https://astro.build). Você pode configurar o seu projeto dentro do arquivo de configuração `astro.config.mjs`:
+Starlight é uma integração construída em cima do framework web [Astro](https://astro.build). Você pode configurar o seu projeto dentro do arquivo de configuração `astro.config.mjs`:
 
 ```js
 // astro.config.mjs
@@ -157,19 +157,19 @@ Se o seu site é multilíngue, a `label` de cada item é considerada como estand
 
 ```js
 sidebar: [
-  // um exemplo de barra lateral com rótulos traduzidos para o Francês.
+  // um exemplo de barra lateral com rótulos traduzidos para o Chinês Simplificado.
   {
     label: 'Comece Aqui',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'zh-CN': '从这里开始' },
     items: [
       {
         label: 'Introdução',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'zh-CN': '开始使用' },
         link: '/introducao',
       },
       {
         label: 'Estrutura de Projetos',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'zh-CN': '项目结构' },
         link: '/estrutura',
       },
     ],
@@ -187,6 +187,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -207,7 +208,7 @@ interface BadgeConfig {
 
 ### `locales`
 
-**tipo:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**tipo:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [Configure internacionalização (i18n)](/pt-br/guides/i18n/) para o seu site definindo quais `locales` são suportados.
 
@@ -307,7 +308,9 @@ O local padrãoserá utilizado para providenciar conteúdo de fallback onde est�
 
 ### `social`
 
-**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**tipo:** <SocialLinksType />
 
 Detalhes opcionais sobre as contas de redes sociais para esse site. Adicionar qualquer um desses irá os mostrar como links de ícone no cabeçalho do site.
 
@@ -424,3 +427,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**tipo:** `string`  
+**padrão:** `'|'`
+
+Define o delimitador entre o título da página e o título do site na tag `<title>`, o qual é exibido na aba do navegador.
+
+Por padrão toda página tem o `<title>` no formato `Título da Página | Título do Site`.
+Por exemplo, o título da página atual é "Referência da Configuração" e o título do site "Starlight", então o `<title>` é "Referência da Configuração | Starlight”.
+
+### `components`
+
+**tipo:** `Record<string, string>`
+
+Fornece os caminhos para os componentes que substituirão os componentes padrões do Starlight.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MeusLinksSociais.astro',
+	},
+});
+```
+
+Consulte a [Referencia de Substituição](/pt-br/reference/overrides/) para ver os detalhes de todos os componentes que você pode substituir.
