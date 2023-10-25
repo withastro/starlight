@@ -1,14 +1,21 @@
 ---
-import { LanguageSelect, ThemeSelect } from 'virtual:starlight/components';
+import { LanguageSelect, ThemeSelect, SocialIcons } from 'virtual:starlight/components';
 import type { Props } from '../props';
 ---
 
 <div class="mobile-preferences sl-flex">
+	<div class="sl-flex social-icons">
+		<SocialIcons {...Astro.props} />
+	</div>
 	<ThemeSelect {...Astro.props} />
 	<LanguageSelect {...Astro.props} />
 </div>
 
 <style>
+	.social-icons {
+		gap: 1rem;
+		align-items: center;
+	}
 	.mobile-preferences {
 		justify-content: space-between;
 		border-top: 1px solid var(--sl-color-gray-6);
