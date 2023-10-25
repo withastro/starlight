@@ -1,6 +1,5 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
-import { BadgeConfigSchema } from '../schemas/badge';
 import { ComponentConfigSchema } from '../schemas/components';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';

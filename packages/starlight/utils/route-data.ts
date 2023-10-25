@@ -5,9 +5,10 @@ import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
 import { getFileCommitDate } from './git';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
-import type { Route } from './routing';
-import { useTranslations } from './translations';
 import { ensureTrailingSlash } from './path';
+import type { Route } from './routing';
+import { localizedId } from './slugs';
+import { useTranslations } from './translations';
 
 interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -79,7 +80,7 @@ function getLastUpdated({ entry, id }: PageProps): Date | undefined {
 	return;
 }
 
-function getEditUrl({ entry, id }: PageProps): URL | undefined {
+function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
 	const { editUrl } = entry.data;
 	// If frontmatter value is false, editing is disabled for this page.
 	if (editUrl === false) return;
@@ -90,8 +91,9 @@ function getEditUrl({ entry, id }: PageProps): URL | undefined {
 		url = editUrl;
 	} else if (config.editLink.baseUrl) {
 		const srcPath = project.srcDir.replace(project.root, '');
+		const filePath = isFallback ? localizedId(id, config.defaultLocale.locale) : id;
 		// If a base URL was added in Starlight config, synthesize the edit URL from it.
-		url = ensureTrailingSlash(config.editLink.baseUrl) + srcPath + 'content/docs/' + id;
+		url = ensureTrailingSlash(config.editLink.baseUrl) + srcPath + 'content/docs/' + filePath;
 	}
 	return url ? new URL(url) : undefined;
 }
