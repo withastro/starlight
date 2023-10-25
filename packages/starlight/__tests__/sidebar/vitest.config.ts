@@ -30,5 +30,10 @@ export default defineVitestConfig({
 			label: 'Reference',
 			autogenerate: { directory: 'reference' },
 		},
+		// A group linking to all pages in the api/v1 directory.
+		{
+			label: 'API v1',
+			autogenerate: { directory: '/api/v1/' },
+		},
 	],
 });

@@ -148,7 +148,7 @@ export default defineConfig({
 						ja: 'ガイド',
 						fr: 'Guides',
 						it: 'Guide',
-						id: 'Petunjuk Penggunaan',
+						id: 'Panduan',
 						'zh-CN': '指南',
 						'pt-BR': 'Guias',
 						ko: '가이드',

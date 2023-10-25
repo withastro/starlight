@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: 💡 Feature Request
+    url: https://github.com/withastro/starlight/discussions/new?category=feature-requests
+    about: Suggest an improvement you’d like to see added to Starlight
   - name: 👾 Chat
     url: https://astro.build/chat
     about: Our Discord server is active, come join us!

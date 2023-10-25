@@ -253,10 +253,13 @@ export class TranslationStatusBuilder {
 		subpath: string;
 		query?: string;
 	}) {
+		// this is a hack to get the correct URL for the docs repo
+		// like zh-CN -> zh-cn pt-BR -> pt-br
+		const lowerLang = lang.toLowerCase();
 		const noDotSrcDir = this.pageSourceDir.replace(/^\.+\//, '');
 		const isSrcLang = lang === this.sourceLanguage;
 		return `https://github.com/${this.githubRepo}/${type}/${refName}/${noDotSrcDir}${
-			isSrcLang ? '' : `/${lang}`
+			isSrcLang ? '' : `/${lowerLang}`
 		}/${subpath}${query}`;
 	}
 
