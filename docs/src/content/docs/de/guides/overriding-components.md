@@ -13,9 +13,9 @@ Wenn du mehr brauchst als das, was von Haus aus möglich ist, unterstützt Starl
 
 Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wenn:
 
-- Du möchtest das Aussehen eines Teils der Starlight-Benutzeroberfläche auf eine Weise ändern, die mit [eigenem CSS](/de/guides/css-and-tailwind/) nicht möglich ist.
-- Du möchtest das Verhalten eines Teils der Starlight-Benutzeroberfläche ändern.
-- Du willst zusätzliche UI neben Starlights bestehender UI hinzufügen.
+- Du das Aussehen eines Teils der Starlight-Benutzeroberfläche auf eine Weise ändern möchest, was mit [eigenem CSS](/de/guides/css-and-tailwind/) nicht möglich ist.
+- Du das Verhalten eines Teils der Starlight-Benutzeroberfläche ändern möchtest.
+- Du zusätzliche UI neben Starlights bestehender UI hinzufügen willst.
 
 ## Wie kann man das ersetzen
 
@@ -108,7 +108,7 @@ Erfahre mehr über alle verfügbaren Requisiten in der [Komponenten-Ersetzung Re
 
 Komponentenüberschreibungen gelten für alle Seiten. Du kannst jedoch bedingt mit Werten aus „Astro.props“ rendern, um zu bestimmen, wann deine benutzerdefinierte Benutzeroberfläche, wann die Standardbenutzeroberfläche von Starlight oder sogar etwas völlig anderes angezeigt werden soll.
 
-Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/reference/overrides/#fußzeile) überschreibt, nur auf der Startseite „Built with Starlight 🌟“ an und zeigt ansonsten auf allen anderen Seiten die Standardfußzeile an:
+Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/reference/overrides/#fußzeile) überschreibt, nur auf der Startseite „Verwendet Starlight 🌟“ an und zeigt ansonsten auf allen anderen Seiten die Standardfußzeile an:
 
 ```astro
 ---
@@ -121,7 +121,7 @@ const isHomepage = Astro.props.slug === '';
 
 {
   isHomepage ? (
-    <footer>Built with Starlight 🌟</footer>
+    <footer>Verwendet Starlight 🌟</footer>
   ) : (
     <Default {...Astro.props}>
       <slot />
