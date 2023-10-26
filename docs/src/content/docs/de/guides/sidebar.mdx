@@ -360,8 +360,8 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 
 ## Internationalisierung
 
-Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um den Link oder die Gruppenbezeichnung für jede unterstützte Sprache zu übersetzen.
-Die Eigenschaft `label` wird für das Standardverzeichnis und für Sprachen ohne Übersetzung verwendet.
+Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um die Link- oder Gruppenbeschriftung für jede unterstützte Sprache zu übersetzen, indem du ein [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Sprach-Tag, z.B. `"en"`, `"ar"`, oder `"zh-CN"`, als Schlüssel und die übersetzte Beschriftung als Wert angibst.
+Die Eigenschaft `label` wird für das Standardgebietsschema und für Sprachen ohne Übersetzung verwendet.
 
 ```js
 starlight({
@@ -369,20 +369,20 @@ starlight({
 		{
 			label: 'Guides',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: 'Components',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -392,15 +392,15 @@ starlight({
 });
 ```
 
-Das Durchsuchen der Dokumentation auf Spanisch erzeugt die folgende Seitenleiste:
+Wenn du die Dokumentation in brasilianischem Portugiesisch durchsuchst, wird die folgende Seitenleiste angezeigt:
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}
