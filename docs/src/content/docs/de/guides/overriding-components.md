@@ -80,7 +80,7 @@ Beim Rendern einer integrierten Komponente innerhalb einer benutzerdefinierten K
 
 ## Seitendaten verwenden
 
-Beim Überschreiben einer Starlight-Komponente erhält deine benutzerdefinierte Implementierung ein Standardobjekt „Astro.props“, das alle Daten für die aktuelle Seite enthält.
+Beim Überschreiben einer Starlight-Komponente erhält deine benutzerdefinierte Implementierung ein Standardobjekt `Astro.props`, das alle Daten für die aktuelle Seite enthält.
 Dadurch kannst du diese Werte verwenden, um zu steuern, wie deine Komponentenvorlage gerendert wird.
 
 Beispielsweise kannst du die Frontmatter-Werte der Seite als `Astro.props.entry.data` lesen. Im folgenden Beispiel verwendet eine Ersatzkomponente [`PageTitle`](/de/reference/overrides/#pagetitle) dies, um den Titel der aktuellen Seite anzuzeigen:
