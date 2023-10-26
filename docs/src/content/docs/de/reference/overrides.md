@@ -348,7 +348,7 @@ Die Standardimplementierung richtet grundlegende Stile ein, die auf Markdown-Inh
 
 Diese Komponenten werden am unteren Ende der Hauptspalte des Seiteninhalts dargestellt.
 
-#### `Fußzeile`
+#### `Footer`
 
 **Standardkomponente:** [`Footer.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro)
 
