@@ -80,7 +80,7 @@ description: Wie man Starlight's eingebaute Ankerlinks benutzt
 
 ## Einleitung
 
-Ich kann auf [meine Schlussfolgerung](#Schlussfolgerung) weiter unten auf derselben Seite verlinken.
+Ich kann auf [meine Schlussfolgerung](#schlussfolgerung) weiter unten auf derselben Seite verlinken.
 
 ## Schlussfolgerung
 
