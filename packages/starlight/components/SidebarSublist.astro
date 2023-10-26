@@ -36,7 +36,15 @@ interface Props {
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
 						<summary>
-							<span class="large">{entry.label}</span>
+							<div class="group-label">
+								<span class="large">{entry.label}</span>
+								{entry.badge && (
+									<>
+										{' '}
+										<Badge text={entry.badge.text} variant={entry.badge.variant} />
+									</>
+								)}
+							</div>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<Astro.self sublist={entry.entries} nested />
@@ -122,6 +130,12 @@ interface Props {
 
 	a > *:not(:last-child) {
 		margin-inline-end: 0.25em;
+	}
+
+	summary > div.group-label {
+		display: flex;
+		align-items: baseline;
+		gap: 0.25em;
 	}
 
 	@media (min-width: 50rem) {
