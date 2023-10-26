@@ -206,7 +206,7 @@ Die Standardimplementierung behandelt den Wechsel zwischen einem einspaltigen La
 
 Diese Komponenten stellen die obere Navigationsleiste von Starlight dar.
 
-#### `Kopfzeile`
+#### `Header`
 
 **Standardkomponente:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
