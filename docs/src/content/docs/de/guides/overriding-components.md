@@ -60,7 +60,7 @@ Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wen
 
 Du kannst mit den Standard-UI-Komponenten von Starlight genauso arbeiten, wie du es mit deinen eigenen tun würdest: Importieren und Rendern in deinen eigenen benutzerdefinierten Komponenten. Dadurch kannst du die gesamte grundlegende Benutzeroberfläche von Starlight in deinem Design beibehalten und gleichzeitig zusätzliche Benutzeroberflächen hinzufügen.
 
-Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die einen E-Mail-Link zusammen mit der Standardkomponente „SocialIcons“ rendert:
+Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die einen E-Mail-Link zusammen mit der Standardkomponente `SocialIcons` rendert:
 
 ```astro {4,8}
 ---
