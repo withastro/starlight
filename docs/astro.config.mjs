@@ -159,6 +159,10 @@ export default defineConfig({
 				},
 				{
 					label: 'Reference',
+					badge: {
+						text: "Experimental",
+						variant: "caution"
+					},
 					translations: {
 						de: 'Referenz',
 						es: 'Referencias',
