@@ -16,7 +16,7 @@ Alle Komponenten können auf ein Standardobjekt `Astro.props` zugreifen, welches
 
 Um deine eigenen Komponenten zu schreiben, importiere den `Props`-Typ von Starlight:
 
-```Astro
+```astro
 ---
 import Typ { Props } from '@astrojs/starlight/props';
 
