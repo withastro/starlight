@@ -89,7 +89,7 @@ entry: {
 }
 ```
 
-Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/api-reference/#collection-entry-type) Referenz.
+Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/api-reference/#collection-eintragstyp) Referenz.
 
 #### `sidebar`
 
