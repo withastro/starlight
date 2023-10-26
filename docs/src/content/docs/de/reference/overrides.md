@@ -141,7 +141,7 @@ JavaScript `Date` Objekt, welches angibt, wann diese Seite zuletzt aktualisiert 
 ### Head
 
 Diese Komponenten werden innerhalb des `<head>`-Elements jeder Seite gerendert.
-Sie sollten nur [innerhalb von `<head>` erlaubte Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also) enthalten .
+Sie sollten nur [innerhalb von `<head>` erlaubte Elemente](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also) enthalten.
 
 #### `Head`
 
