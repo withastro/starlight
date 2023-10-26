@@ -89,6 +89,15 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 The dev container used for GitHub Codespaces can also be used with [other supporting tools](https://containers.dev/supporting), including VS Code.
 
+### Making a Pull Request
+
+When making a pull request containing changes impacting users to Starlight or any related packages (`packages/*`), be sure to [add a changeset](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo) that will describe the changes to users.
+Documentation-only (`docs/*`) and non-package (`examples/*`) changes do not need changesets.
+
+```sh
+pnpm exec changeset
+```
+
 ## Testing
 
 ### Testing visual changes while you work

@@ -1,21 +1,18 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
+import { PAGE_TITLE_ID } from '../constants';
+import type { Props } from '../props';
 import CallToAction from './CallToAction.astro';
 
-interface Props {
-	fallbackTitle: string;
-	hero: NonNullable<CollectionEntry<'docs'>['data']['hero']>;
-}
-
-const { title = Astro.props.fallbackTitle, tagline, image, actions } = Astro.props.hero;
+const { data } = Astro.props.entry;
+const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 
 const imageAttrs = {
 	loading: 'eager' as const,
 	decoding: 'async' as const,
 	width: 400,
 	height: 400,
-	alt: image?.alt,
+	alt: image?.alt || '',
 };
 
 let darkImage: ImageMetadata | undefined;
@@ -61,7 +58,7 @@ if (image) {
 	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
 	<div class="sl-flex stack">
 		<div class="sl-flex copy">
-			<h1 id="_top" data-page-title set:html={title} />
+			<h1 id={PAGE_TITLE_ID} data-page-title set:html={title} />
 			{tagline && <div class="tagline" set:html={tagline} />}
 		</div>
 		{

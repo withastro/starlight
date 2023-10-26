@@ -15,10 +15,12 @@ import da from './da.json';
 import tr from './tr.json';
 import ar from './ar.json';
 import nb from './nb.json';
-import zh from './zh.json';
+import zh from './zh-CN.json';
 import ko from './ko.json';
 import sv from './sv.json';
 import ru from './ru.json';
+import vi from './vi.json';
+import uk from './uk.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -44,5 +46,7 @@ export default Object.fromEntries(
 		ko,
 		sv,
 		ru,
+		vi,
+		uk,
 	}).map(([key, dict]) => [key, parse(dict)])
 );

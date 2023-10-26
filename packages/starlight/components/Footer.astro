@@ -1,42 +1,15 @@
 ---
-import config from 'virtual:starlight/user-config';
-import { type SidebarEntry, getPrevNextLinks } from '../utils/navigation';
-import type { StarlightDocsEntry } from '../utils/routing';
-import type { LocaleData } from '../utils/slugs';
+import type { Props } from '../props';
 
-import LastUpdated from '../components/LastUpdated.astro';
-import PrevNextLinks from '../components/PrevNextLinks.astro';
-import EditLink from './EditLink.astro';
-
-interface Props extends LocaleData {
-	entry: StarlightDocsEntry;
-	sidebar: SidebarEntry[];
-}
-
-const { entry, dir, lang, locale, sidebar } = Astro.props;
-const prevNextLinks = getPrevNextLinks(sidebar, config.pagination, {
-	prev: entry.data.prev,
-	next: entry.data.next,
-});
+import { EditLink, LastUpdated, Pagination } from 'virtual:starlight/components';
 ---
 
 <footer>
 	<div class="meta sl-flex">
-		{config.editLink.baseUrl && <EditLink data={entry.data} id={entry.id} {locale} />}
-		{
-			(entry.data.lastUpdated ?? config.lastUpdated) && (
-				<LastUpdated
-					id={entry.id}
-					{lang}
-					lastUpdated={
-						typeof entry.data.lastUpdated !== 'boolean' ? entry.data.lastUpdated : undefined
-					}
-					{locale}
-				/>
-			)
-		}
+		<EditLink {...Astro.props} />
+		<LastUpdated {...Astro.props} />
 	</div>
-	<PrevNextLinks {...prevNextLinks} {dir} {locale} />
+	<Pagination {...Astro.props} />
 </footer>
 
 <style>

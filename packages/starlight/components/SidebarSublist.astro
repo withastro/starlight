@@ -17,7 +17,8 @@ interface Props {
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
-						class:list={{ large: !Astro.props.nested }}
+						class:list={[{ large: !Astro.props.nested }, entry.attrs.class]}
+						{...entry.attrs}
 					>
 						<span>{entry.label}</span>
 						{entry.badge && (
@@ -53,6 +54,10 @@ interface Props {
 		padding: 0;
 	}
 
+	li {
+		overflow-wrap: anywhere;
+	}
+
 	ul ul li {
 		margin-inline-start: var(--sl-sidebar-item-padding-inline);
 		border-inline-start: 1px solid var(--sl-color-hairline-light);
@@ -84,6 +89,7 @@ interface Props {
 
 	.caret {
 		transition: transform 0.2s ease-in-out;
+		flex-shrink: 0;
 	}
 	:global([dir='rtl']) .caret {
 		transform: rotateZ(180deg);
