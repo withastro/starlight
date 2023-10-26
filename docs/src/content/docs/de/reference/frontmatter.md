@@ -224,9 +224,21 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**type:** [`SidebarConfig`](#sidebarconfig)
 
 Steuert, wie diese Seite in der [Seitenleiste](/de/reference/configuration/#sidebar) angezeigt wird, wenn eine automatisch generierte Linkgruppe verwendet wird.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
