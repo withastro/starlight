@@ -129,21 +129,26 @@ hero:
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Relative path to an image in your repository.
-    file?: string;
-    // Relative path to an image in your repository to be used for dark mode.
-    // This will be used only if `file` is not set.
-    dark?: string;
-    // Relative path to an image in your repository to be used for light mode.
-    // This will be used only if `dark` is also set.
-    light?: string;
-    // Raw HTML to use in the image slot.
-    // Could be a custom `<img>` tag or inline `<svg>`.
-    // This will be used only if `file` and `dark` are not set.
-    html?: string;
-  };
+  image?:
+    | {
+        // Relative path to an image in your repository.
+        file: string;
+        // Alt text to make the image accessible to assistive technology
+        alt?: string;
+      }
+    | {
+        // Relative path to an image in your repository to be used for dark mode.
+        dark: string;
+        // Relative path to an image in your repository to be used for light mode.
+        light: string;
+        // Alt text to make the image accessible to assistive technology
+        alt?: string;
+      }
+    | {
+        // Raw HTML to use in the image slot.
+        // Could be a custom `<img>` tag or inline `<svg>`.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
