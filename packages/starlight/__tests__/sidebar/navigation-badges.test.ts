@@ -39,6 +39,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
@@ -79,6 +80,7 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
@@ -108,6 +110,7 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {

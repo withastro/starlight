@@ -17,6 +17,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
