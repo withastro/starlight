@@ -358,7 +358,8 @@ starlight({
 
 ## 国际化
 
-使用链接和分组条目上的 `translations` 属性为每种支持的语言翻译链接或分组标签。
+你可以使用链接和分组条目上的 `translations` 属性，通过指定 [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 语言标签，为每种支持的语言翻译链接或分组标签，例如用 `"en"`、`"ar"` 或 `"zh-CN"` 作为键，翻译后的标签作为值。
+
 `label` 属性将用于默认语言和没有翻译的语言。
 
 ```js
@@ -367,20 +368,20 @@ starlight({
 		{
 			label: 'Guides',
 			translations: {
-				'zh-cn': '指南',
+				'zh-CN': '指南',
 			},
 			items: [
 				{
 					label: 'Components',
 					translations: {
-						'zh-cn': '组件',
+						'zh-CN': '组件',
 					},
 					link: '/zh-cn/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
-						'zh-cn': '国际化 (i18n)',
+						'zh-CN': '国际化 (i18n)',
 					},
 					link: '/zh-cn/guides/i18n/',
 				},

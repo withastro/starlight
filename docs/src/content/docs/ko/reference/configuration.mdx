@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '즐거운 문서 사이트',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '즐거운 문서 사이트',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ export default defineConfig({
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -97,23 +97,23 @@ starlight({
 
 ```js
 starlight({
-  sidebar: [
-    // '홈'이라는 라벨이 붙은 단일 링크 항목
-    { label: '홈', link: '/' },
-    // 두 개의 링크가 포함된 '여기서부터' 라는 라벨이 붙은 그룹
-    {
-      label: '여기서부터',
-      items: [
-        { label: '소개', link: '/intro' },
-        { label: '다음 단계', link: '/next-steps' },
-      ],
-    },
-    // 'reference' 디렉터리의 모든 페이지에 연결되는 그룹
-    {
-      label: '참조',
-      autogenerate: { directory: 'reference' },
-    },
-  ],
+	sidebar: [
+		// '홈'이라는 라벨이 붙은 단일 링크 항목
+		{ label: '홈', link: '/' },
+		// 두 개의 링크가 포함된 '여기서부터' 라는 라벨이 붙은 그룹
+		{
+			label: '여기서부터',
+			items: [
+				{ label: '소개', link: '/intro' },
+				{ label: '다음 단계', link: '/next-steps' },
+			],
+		},
+		// 'reference' 디렉터리의 모든 페이지에 연결되는 그룹
+		{
+			label: '참조',
+			autogenerate: { directory: 'reference' },
+		},
+	],
 });
 ```
 
@@ -155,19 +155,19 @@ sidebar: [
 
 ```js
 sidebar: [
-  // 한국어로 번역된 라벨을 사용하는 사이드바 예시
+  // 브라질 포르투갈어로 번역된 라벨이 있는 예시 사이드바입니다.
   {
-    label: 'Start Here',
-    translations: { ko: '여기서부터' },
+    label: '여기서부터',
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
-        label: 'Getting Started',
-        translations: { ko: '시작하기' },
+        label: '시작하기',
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
-        label: 'Project Structure',
-        translations: { ko: '프로젝트 구조' },
+        label: '프로젝트 구조',
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
@@ -179,19 +179,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			badge?: string | BadgeConfig;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -199,14 +199,14 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
 ### `locales`
 
-**타입:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**타입:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
 지원되는 `locales`를 설정하여 사이트의 [국제화(i18n)를 구성](/ko/guides/i18n/)하세요.
 
@@ -218,34 +218,34 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '나의 사이트',
-      // 이 사이트의 기본 언어를 한국어로 설정합니다.
-      defaultLocale: 'ko',
-      locales: {
-        // 한국어 문서는 `src/content/docs/ko/`에 있습니다.
-        ko: {
-          label: '한국어',
-        },
-        // 영어 문서는 `src/content/docs/en/`에 있습니다.
-        en: {
-          label: 'English',
-          lang: 'en',
-        },
-        // 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // 아랍어 문서는 `src/content/docs/ar/`에 있습니다.
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '나의 사이트',
+			// 이 사이트의 기본 언어를 한국어로 설정합니다.
+			defaultLocale: 'ko',
+			locales: {
+				// 한국어 문서는 `src/content/docs/ko/`에 있습니다.
+				ko: {
+					label: '한국어',
+				},
+				// 영어 문서는 `src/content/docs/en/`에 있습니다.
+				en: {
+					label: 'English',
+					lang: 'en',
+				},
+				// 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// 아랍어 문서는 `src/content/docs/ar/`에 있습니다.
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -253,9 +253,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -285,15 +285,15 @@ interface LocaleConfig {
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: '한국어',
-      lang: 'ko',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: '한국어',
+			lang: 'ko',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -311,25 +311,27 @@ starlight({
 
 ### `social`
 
-**타입:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'patreon' | 'reddit' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**타입:** <SocialLinksType />
 
 이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다. 이 중 하나를 추가하면 사이트 헤더에 아이콘 링크로 표시됩니다.
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -343,7 +345,7 @@ Starlight 사이트의 모양과 느낌을 변경하려면 CSS 파일을 제공�
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -355,17 +357,17 @@ Starlight 사이트의 `<head>`에 사용자 정의 태그를 추가합니다. �
 
 ```js
 starlight({
-  head: [
-    // Fathom 분석 스크립트 태그를 추가하는 예시
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Fathom 분석 스크립트 태그를 추가하는 예시
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -373,9 +375,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -447,9 +449,9 @@ Starlight의 기본 구현을 재정의하기 위해 컴포넌트에 대한 경�
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 

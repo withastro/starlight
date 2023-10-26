@@ -7,7 +7,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			[
-				'reference/configuration.md',
+				'reference/configuration.mdx',
 				{
 					title: 'Config Reference',
 					sidebar: {
@@ -19,6 +19,8 @@ vi.mock('astro:content', async () =>
 				},
 			],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: 'New' } }],
+			// @ts-expect-error — Using a slug not present in Starlight docs site
+			['api/v1/users.md', { title: 'Users API' }],
 			['guides/components.mdx', { title: 'Components' }],
 		],
 	})
@@ -103,6 +105,21 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "Reference",
+			    "type": "group",
+			  },
+			  {
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/api/v1/users/",
+			        "isCurrent": false,
+			        "label": "Users API",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API v1",
 			    "type": "group",
 			  },
 			]
