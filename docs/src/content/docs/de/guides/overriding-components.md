@@ -106,7 +106,7 @@ Erfahre mehr über alle verfügbaren Requisiten in der [Komponenten-Ersetzung Re
 
 ### Nur auf bestimmten Seiten überschreiben
 
-Komponentenüberschreibungen gelten für alle Seiten. Du kannst jedoch bedingt mit Werten aus „Astro.props“ rendern, um zu bestimmen, wann deine benutzerdefinierte Benutzeroberfläche, wann die Standardbenutzeroberfläche von Starlight oder sogar etwas völlig anderes angezeigt werden soll.
+Komponentenüberschreibungen gelten für alle Seiten. Du kannst jedoch bedingt mit Werten aus `Astro.props` rendern, um zu bestimmen, wann deine benutzerdefinierte Benutzeroberfläche, wann die Standardbenutzeroberfläche von Starlight oder sogar etwas völlig anderes angezeigt werden soll.
 
 Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/reference/overrides/#fußzeile) überschreibt, nur auf der Startseite „Verwendet Starlight 🌟“ an und zeigt ansonsten auf allen anderen Seiten die Standardfußzeile an:
 
