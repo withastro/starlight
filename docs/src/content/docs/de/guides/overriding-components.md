@@ -75,7 +75,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 
 Beim Rendern einer integrierten Komponente innerhalb einer benutzerdefinierten Komponente:
 
-- Verbreite „Astro.props“ darin. Dadurch wird sichergestellt, dass es alle Daten erhält, die es zum Rendern benötigt.
+- Verbreite `Astro.props` darin. Dadurch wird sichergestellt, dass es alle Daten erhält, die es zum Rendern benötigt.
 - Füge einen [`<slot />`](https://docs.astro.build/de/core-concepts/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden muss, wenn der Komponente untergeordnete Elemente übergeben werden.
 
 ## Seitendaten verwenden
