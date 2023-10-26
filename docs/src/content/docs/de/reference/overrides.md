@@ -18,7 +18,7 @@ Um deine eigenen Komponenten zu schreiben, importiere den `Props`-Typ von Starli
 
 ```astro
 ---
-import Typ { Props } from '@astrojs/starlight/props';
+import type { Props } from '@astrojs/starlight/props';
 
 const { hatSeitennavigation } = Astro.props;
 //      ^ Typ: boolean
