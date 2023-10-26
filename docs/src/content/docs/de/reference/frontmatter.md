@@ -311,3 +311,19 @@ sidebar:
     variant: caution
 ---
 ```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+HTML-Attribute, die dem Seitenlink in der Seitenleiste hinzugefügt werden, wenn er in einer automatisch generierten Gruppe von Links angezeigt wird.
+
+```md
+---
+title: Seite im neuen Tab öffnen
+sidebar:
+  # Dies öffnet den Link in einem neuen Tab
+  attrs:
+    target: _blank
+---
+```
