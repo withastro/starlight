@@ -27,8 +27,8 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
    				en: {
    					label: 'English',
    				},
-   				// La documentazione in cinese semplificato si trova in `src/content/docs/zh/`
-   				zh: {
+   				// La documentazione in cinese semplificato si trova in `src/content/docs/zh-cn/`
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -55,7 +55,7 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -84,7 +84,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // necessario per root
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -102,7 +102,7 @@ Quando si usa una lingua `root`, metti le pagine direttamente in `src/content/do
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -143,7 +143,7 @@ Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà 
 
 In aggiunta alla possibilità di avere pagine multilingua, Starlight permette di tradurre le scritte dell'interfaccia (per esempio l'intestazione "In questa pagina" nella tabella dei contenuti) in modo che i lettori possano vedere il sito interamente nella lingua selezionata.
 
-Le stringhe dell'interfaccia utente tradotte in inglese, ceco, francese, tedesco, italiano, giapponese, portoghese, olandese, danese, spagnolo, turco, arabo, norvegese, farsi, cinese semplificato, coreano, russo e svedese sono disponibili di default e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Le stringhe dell'interfaccia utente tradotte in inglese, ceco, francese, tedesco, italiano, giapponese, portoghese, olandese, danese, spagnolo, turco, arabo, norvegese, farsi, ebraico, cinese semplificato, coreano, indonesiano, russo, svedese e vietnamese sono disponibili di default e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
 
@@ -196,6 +196,25 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
    	"page.previousLink": "Next",
-   	"page.nextLink": "Previous"
+   	"page.nextLink": "Previous",
+   	"404.text": "Page not found. Check the URL or try using the search bar."
+   }
+   ```
+
+   Il pannello di ricerca di Starlight è basato sulla libreria [Pagefind](https://pagefind.app/).
+   Puoi impostare le traduzioni per l'interfaccia utente di Pagefind nello stesso file JSON utilizzando le chiavi pagefind":
+
+   ```json
+   {
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```

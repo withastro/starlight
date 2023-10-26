@@ -1,33 +1,18 @@
 import { z } from 'astro/zod';
+import type { SchemaContext } from 'astro:content';
 import { HeadConfigSchema } from './schemas/head';
 import { PrevNextLinkConfigSchema } from './schemas/prevNextLink';
 import { TableOfContentsSchema } from './schemas/tableOfContents';
 import { Icons } from './components/Icons';
 import { BadgeConfigSchema } from './schemas/badge';
+import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
 export { i18nSchema } from './schemas/i18n';
 
 type IconName = keyof typeof Icons;
 const iconNames = Object.keys(Icons) as [IconName, ...IconName[]];
 
-type ImageFunction = () => z.ZodObject<{
-	src: z.ZodString;
-	width: z.ZodNumber;
-	height: z.ZodNumber;
-	format: z.ZodUnion<
-		[
-			z.ZodLiteral<'png'>,
-			z.ZodLiteral<'jpg'>,
-			z.ZodLiteral<'jpeg'>,
-			z.ZodLiteral<'tiff'>,
-			z.ZodLiteral<'webp'>,
-			z.ZodLiteral<'gif'>,
-			z.ZodLiteral<'svg'>,
-		]
-	>;
-}>;
-
 export function docsSchema() {
-	return ({ image }: { image: ImageFunction }) =>
+	return ({ image }: SchemaContext) =>
 		z.object({
 			/** The title of the current page. Required. */
 			title: z.string(),
@@ -155,6 +140,8 @@ export function docsSchema() {
 					 * Passing only a string defaults to the 'default' variant which uses the site accent color.
 					 */
 					badge: BadgeConfigSchema(),
+					/** HTML attributes to add to the sidebar link. */
+					attrs: SidebarLinkItemHTMLAttributesSchema(),
 				})
 				.default({}),
 

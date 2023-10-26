@@ -1,24 +1,28 @@
 ---
-import LanguageSelect from './LanguageSelect.astro';
-import Search from './Search.astro';
-import SiteTitle from './SiteTitle.astro';
-import SocialIcons from './SocialIcons.astro';
-import ThemeSelect from './ThemeSelect.astro';
+import type { Props } from '../props';
 
-interface Props {
-	locale: string | undefined;
-}
-
-const { locale } = Astro.props;
+import {
+	LanguageSelect,
+	Search,
+	SiteTitle,
+	SocialIcons,
+	ThemeSelect,
+} from 'virtual:starlight/components';
 ---
 
 <div class="header sl-flex">
-	<SiteTitle {locale} />
-	<Search {locale} />
+	<div class="sl-flex">
+		<SiteTitle {...Astro.props} />
+	</div>
+	<div class="sl-flex">
+		<Search {...Astro.props} />
+	</div>
 	<div class="sl-hidden md:sl-flex right-group">
-		<SocialIcons />
-		<ThemeSelect {locale} />
-		<LanguageSelect {locale} />
+		<div class="sl-flex social-icons">
+			<SocialIcons {...Astro.props} />
+		</div>
+		<ThemeSelect {...Astro.props} />
+		<LanguageSelect {...Astro.props} />
 	</div>
 </div>
 
@@ -30,9 +34,15 @@ const { locale } = Astro.props;
 		height: 100%;
 	}
 
-	.right-group {
+	.right-group,
+	.social-icons {
 		gap: 1rem;
 		align-items: center;
+	}
+	.social-icons::after {
+		content: '';
+		height: 2rem;
+		border-inline-end: 1px solid var(--sl-color-gray-5);
 	}
 
 	@media (min-width: 50rem) {

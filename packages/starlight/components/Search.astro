@@ -2,10 +2,7 @@
 import '@pagefind/default-ui/css/ui.css';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { Props } from '../props';
 
 const t = useTranslations(Astro.props.locale);
 const pagefindTranslations = {
@@ -129,6 +126,9 @@ const pagefindTranslations = {
 </script>
 
 <style>
+	site-search {
+		display: contents;
+	}
 	button[data-open-modal] {
 		display: flex;
 		align-items: center;
@@ -205,6 +205,7 @@ const pagefindTranslations = {
 	#starlight__search {
 		--pagefind-ui-primary: var(--sl-color-accent-light);
 		--pagefind-ui-text: var(--sl-color-gray-2);
+		--pagefind-ui-font: var(--__sl-font);
 		--pagefind-ui-background: var(--sl-color-black);
 		--pagefind-ui-border: var(--sl-color-gray-5);
 		--pagefind-ui-border-width: 1px;
@@ -390,6 +391,12 @@ const pagefindTranslations = {
 		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 	}
 
+	/* Flip page and tree icons around the vertical axis when in an RTL layout. */
+	[dir='rtl'] .pagefind-ui__result-title::before,
+	[dir='rtl'] .pagefind-ui__result-nested::before {
+		transform: matrix(-1, 0, 0, 1, 0, 0);
+	}
+
 	#starlight__search .pagefind-ui__result-link::after {
 		content: '';
 		position: absolute;
@@ -398,7 +405,7 @@ const pagefindTranslations = {
 
 	#starlight__search .pagefind-ui__result-excerpt {
 		font-size: calc(1rem * var(--pagefind-ui-scale));
-		word-break: break-word;
+		overflow-wrap: anywhere;
 	}
 
 	#starlight__search mark {

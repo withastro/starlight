@@ -1,44 +1,22 @@
 ---
 import config from 'virtual:starlight/user-config';
 import Icon from '../user-components/Icon.astro';
+import type { Props } from '../props';
 
 type Platform = keyof NonNullable<typeof config.social>;
-
-const labels: Record<Platform, string> = {
-	github: 'GitHub',
-	gitlab: 'GitLab',
-	bitbucket: 'Bitbucket',
-	discord: 'Discord',
-	gitter: 'Gitter',
-	twitter: 'Twitter',
-	mastodon: 'Mastodon',
-	codeberg: 'Codeberg',
-	codePen: 'CodePen',
-	youtube: 'YouTube',
-	threads: 'Threads',
-	linkedin: 'LinkedIn',
-	twitch: 'Twitch',
-	microsoftTeams: 'Microsoft Teams',
-	instagram: 'Instagram',
-	stackOverflow: 'Stack Overflow',
-};
-
-const links = Object.entries(config.social || {}).filter(([, url]) => Boolean(url)) as [
-	platform: Platform,
-	url: string,
-][];
+type SocialConfig = NonNullable<NonNullable<typeof config.social>[Platform]>;
+const links = Object.entries(config.social || {}) as [Platform, SocialConfig][];
 ---
 
 {
 	links.length > 0 && (
 		<>
-			{links.map(([platform, url]) => (
+			{links.map(([platform, { label, url }]) => (
 				<a href={url} rel="me" class="sl-flex">
-					<span class="sr-only">{labels[platform]}</span>
+					<span class="sr-only">{label}</span>
 					<Icon name={platform} />
 				</a>
 			))}
-			<div class="divider" />
 		</>
 	)
 }
@@ -49,9 +27,5 @@ const links = Object.entries(config.social || {}).filter(([, url]) => Boolean(ur
 	}
 	a:hover {
 		opacity: 0.66;
-	}
-	.divider {
-		height: 2rem;
-		border-inline-end: 1px solid var(--sl-color-gray-5);
 	}
 </style>

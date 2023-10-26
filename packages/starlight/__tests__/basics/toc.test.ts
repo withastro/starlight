@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { generateToC } from '../../components/TableOfContents/generateToC';
+import { generateToC } from '../../utils/generateToC';
 
 const defaultOpts = { minHeadingLevel: 2, maxHeadingLevel: 3, title: 'Overview' };
 
@@ -96,8 +96,6 @@ test('adds higher-level headings sequentially h6 => h4 => h2', () => {
 		],
 		{ ...defaultOpts, maxHeadingLevel: 6 }
 	);
-	console.log(toc);
-
 	expect(toc).toHaveLength(2);
 	expect(toc).toMatchInlineSnapshot(`
 		[
