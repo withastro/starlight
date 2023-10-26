@@ -18,14 +18,14 @@ Para tipar seus componentes personalizados, importe o tipo `Props` do Starlight:
 
 ```astro
 ---
-import Tipos { Props } from '@astrojs/starlight/props';
+import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
 //      ^ tipo: boolean
 ---
 ```
-Assim você terá autocomplete e tipos quando acessar `Astro.props`.
 
+Assim você terá autocomplete e tipos quando acessar `Astro.props`.
 
 ### Props
 
@@ -157,7 +157,6 @@ Se possível, dê preferência as opções [`head`](/pt-br/reference/configurati
 
 **Componente padrão:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
 
-
 Componente renderizado dentro do `<head>` que configura o suporte para o tema claro/escuro.
 A implementação padrão embute um script e um `<template>` utilizado pelo script em [`<ThemeSelect />`](#themeselect).
 
@@ -180,7 +179,6 @@ Estes componentes são responsáveis por dispor os componentes do Starlight e ge
 Substituí-los gera uma complexidade significativa.
 Se possível, prefira substituir componentes mais específicos.
 
-
 #### `PageFrame`
 
 **Componente padrão:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
@@ -199,7 +197,7 @@ Componente renderizado dentro do [`<PageFrame>`](#pageframe), responsável por a
 
 **Componente padrão:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
 
-Componente de layout que amarra a coluna central e a barra da direita (sumário). 
+Componente de layout que amarra a coluna central e a barra da direita (sumário).
 A implementação padrão alterna o layout entre uma coluna, em viewport estreitas; e duas colunas, em viewports maiores.
 
 ---
@@ -277,7 +275,6 @@ A implementação padrão renderiza [`<ThemeSelect />`](#themeselect) e [`<Langu
 A barra lateral do Starlight é responsável por exibir o sumário delineando os subtítulos da página atual.
 Em viewports estreitas, fica sob um menu dropdown fixo.
 
-
 #### `PageSidebar`
 
 **Componente padrão:** [`PageSidebar.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro)
@@ -310,7 +307,6 @@ Componentes renderizados na coluna central da página.
 Componente banner renderizado no início de cada página.
 A implementação padrão utiliza o valor do frontmatter [`banner`](/pt-br/reference/frontmatter#banner) para decidir se renderiza o banner ou não.
 
-
 #### `ContentPanel`
 
 **Componente padrão:** [`ContentPanel.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro)
@@ -331,7 +327,6 @@ Certifique-se de adicionar `id="_top"` ao elemento `<h1>` assim como implementa�
 
 Aviso exibido aos visitantes da página quando a tradução para o idioma atual não estiver disponível.
 Apenas utilizado em site multilíngue.
-
 
 #### `Hero`
 
@@ -375,6 +370,5 @@ Componente renderizado no rodapé da página que exibe o link de onde a página 
 #### `Pagination`
 
 **Componente padrão:** [`Pagination.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro)
-
 
 Componente renderizado no rodapé da página que exibe setas de navegação entre a próxima página e a anterior.

@@ -23,15 +23,15 @@ Substituir os componentes padrões do Starlight pode ser útil nos seguintes cas
 
 ## Como substituir
 
-1. Escolha qual componente você deseja substituir. 
+1. Escolha qual componente você deseja substituir.
    Você pode encontrar uma lista completa de componentes na [Referência de Substituições](/pt-br/reference/overrides/).
-   
+
    Neste exemplo, substituiremos o componente do Starlight [`SocialIcons`](/pt-br/reference/overrides/#socialicons) que fica na barra de navegação.
 
-2. Crie um componente Astro para substituir os componentes Starlight. 
+2. Crie um componente Astro para substituir os componentes Starlight.
    O exemplo abaixo é de um link de contato.
 
-   ```astro 
+   ```astro
    ---
    // src/components/LinkDeEmail.astro
    import type { Props } from '@astrojs/starlight/props';
