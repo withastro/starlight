@@ -314,6 +314,50 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 	]}
 />
 
+## Benutzerdefinierte HTML-Attribute
+
+Links können auch eine Eigenschaft `attrs` enthalten, um dem Link-Element benutzerdefinierte HTML-Attribute hinzuzufügen.
+
+Im folgenden Beispiel wird `attrs` verwendet, um ein `target="_blank"`-Attribut hinzuzufügen, so dass der Link in einem neuen Tab geöffnet wird, und um ein benutzerdefiniertes `style`-Attribut anzuwenden, um die Linkbeschriftung kursiv zu machen:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Anleitungen',
+			items: [
+				// Ein externer Link zu den Astro-Dokumenten, der in einem neuen Tab geöffnet wird.
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/de/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Anleitungen',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/de/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## Internationalisierung
 
 Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um den Link oder die Gruppenbezeichnung für jede unterstützte Sprache zu übersetzen.
