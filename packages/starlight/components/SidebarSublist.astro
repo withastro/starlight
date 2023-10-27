@@ -23,7 +23,6 @@ interface Props {
 						<span>{entry.label}</span>
 						{entry.badge && (
 							<>
-								{' '}
 								<Badge
 									text={entry.badge.text}
 									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
@@ -40,7 +39,6 @@ interface Props {
 								<span class="large">{entry.label}</span>
 								{entry.badge && (
 									<>
-										{' '}
 										<Badge text={entry.badge.text} variant={entry.badge.variant} />
 									</>
 								)}
@@ -128,14 +126,9 @@ interface Props {
 		background-color: var(--sl-color-text-accent);
 	}
 
-	a > *:not(:last-child) {
-		margin-inline-end: 0.25em;
-	}
-
-	summary > div.group-label {
-		display: flex;
-		align-items: baseline;
-		gap: 0.25em;
+	a > *:not(:last-child),
+	summary > div.group-label > *:not(:last-child) {
+		margin-inline-end: 0.5em;
 	}
 
 	@media (min-width: 50rem) {

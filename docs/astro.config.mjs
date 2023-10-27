@@ -158,7 +158,7 @@ export default defineConfig({
 					autogenerate: { directory: 'guides' },
 				},
 				{
-					label: 'Reference',
+					label: 'ReferenceReferenceRefence',
 					badge: {
 						text: "Experimental",
 						variant: "caution"
