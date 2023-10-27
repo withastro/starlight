@@ -73,7 +73,10 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
-			    "badge": undefined,
+			    "badge": {
+			      "text": "Experimental",
+			      "variant": "default",
+			    },
 			    "collapsed": false,
 			    "entries": [
 			      {
