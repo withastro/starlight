@@ -5,7 +5,7 @@ description: Uma visão geral de todas as opções de configuração que o Starl
 
 ## Configure a integração `starlight`
 
-Starlight é uma integração construída acima do framework web [Astro](https://astro.build). Você pode configurar o seu projeto dentro do arquivo de configuração `astro.config.mjs`:
+Starlight é uma integração construída em cima do framework web [Astro](https://astro.build). Você pode configurar o seu projeto dentro do arquivo de configuração `astro.config.mjs`:
 
 ```js
 // astro.config.mjs
@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Minha documentação de iluminar os olhos',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Minha documentação de iluminar os olhos',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ Define a imagem da logo a ser mostrada na barra de navegação ao lado ou no lug
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/minha-logo.svg',
-  },
+	logo: {
+		src: './src/assets/minha-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ Habilita links “Editar página” definindo a URL base que deve ser utilizada.
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -98,23 +98,23 @@ Cada item deve ter um `label` e uma das seguintes propriedades:
 
 ```js
 starlight({
-  sidebar: [
-    // Um único link rotulado como "Início”.
-    { label: 'Início', link: '/' },
-    // Um grupo rotulado "Comece Aqui" contendo dois links.
-    {
-      label: 'Comece Aqui',
-      items: [
-        { label: 'Introdução', link: '/intro' },
-        { label: 'Próximos Passos', link: '/proximos-passos' },
-      ],
-    },
-    // Um grupo com links para todas as páginas no diretório referencia.
-    {
-      label: 'Referência',
-      autogenerate: { directory: 'referencia' },
-    },
-  ],
+	sidebar: [
+		// Um único link rotulado como "Início”.
+		{ label: 'Início', link: '/' },
+		// Um grupo rotulado "Comece Aqui" contendo dois links.
+		{
+			label: 'Comece Aqui',
+			items: [
+				{ label: 'Introdução', link: '/intro' },
+				{ label: 'Próximos Passos', link: '/proximos-passos' },
+			],
+		},
+		// Um grupo com links para todas as páginas no diretório referencia.
+		{
+			label: 'Referência',
+			autogenerate: { directory: 'referencia' },
+		},
+	],
 });
 ```
 
@@ -157,19 +157,19 @@ Se o seu site é multilíngue, a `label` de cada item é considerada como estand
 
 ```js
 sidebar: [
-  // um exemplo de barra lateral com rótulos traduzidos para o Francês.
+  // um exemplo de barra lateral com rótulos traduzidos para o Chinês Simplificado.
   {
     label: 'Comece Aqui',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'zh-CN': '从这里开始' },
     items: [
       {
         label: 'Introdução',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'zh-CN': '开始使用' },
         link: '/introducao',
       },
       {
         label: 'Estrutura de Projetos',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'zh-CN': '项目结构' },
         link: '/estrutura',
       },
     ],
@@ -181,18 +181,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			badge?: string | BadgeConfig;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -200,14 +201,14 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
 ### `locales`
 
-**tipo:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**tipo:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [Configure internacionalização (i18n)](/pt-br/guides/i18n/) para o seu site definindo quais `locales` são suportados.
 
@@ -219,29 +220,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Meu Site',
-      // Define Inglês como a língua padrão para esse site.
-      defaultLocale: 'en',
-      locales: {
-        // Documentação em Inglês em `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // Documentação em Chinês Simplificado em `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // Documentação em Árabe em `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Meu Site',
+			// Define Inglês como a língua padrão para esse site.
+			defaultLocale: 'en',
+			locales: {
+				// Documentação em Inglês em `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Documentação em Chinês Simplificado em `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Documentação em Árabe em `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -249,9 +250,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -281,15 +282,15 @@ Você pode definir a língua padrão sem um diretório `/lingua/` definindo um l
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -307,24 +308,26 @@ O local padrãoserá utilizado para providenciar conteúdo de fallback onde est�
 
 ### `social`
 
-**tipo:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**tipo:** <SocialLinksType />
 
 Detalhes opcionais sobre as contas de redes sociais para esse site. Adicionar qualquer um desses irá os mostrar como links de ícone no cabeçalho do site.
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -338,7 +341,7 @@ Suporta arquivos CSS locais relativos a raiz do seu projeto, e.x. `'./src/custom
 
 ```js
 starlight({
-  customCss: ['./src/estilos-customizados.css', '@fontsource/roboto'],
+	customCss: ['./src/estilos-customizados.css', '@fontsource/roboto'],
 });
 ```
 
@@ -351,17 +354,17 @@ Pode ser útil para adicionar rastreamento de analytics e outros scripts e recur
 
 ```js
 starlight({
-  head: [
-    // Exemplo: adiciona a tag de script de analytics do Fathom.
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MEU-ID-FATHOM',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Exemplo: adiciona a tag de script de analytics do Fathom.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MEU-ID-FATHOM',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -369,9 +372,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -424,3 +427,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**tipo:** `string`  
+**padrão:** `'|'`
+
+Define o delimitador entre o título da página e o título do site na tag `<title>`, o qual é exibido na aba do navegador.
+
+Por padrão toda página tem o `<title>` no formato `Título da Página | Título do Site`.
+Por exemplo, o título da página atual é "Referência da Configuração" e o título do site "Starlight", então o `<title>` é "Referência da Configuração | Starlight”.
+
+### `components`
+
+**tipo:** `Record<string, string>`
+
+Fornece os caminhos para os componentes que substituirão os componentes padrões do Starlight.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MeusLinksSociais.astro',
+	},
+});
+```
+
+Consulte a [Referencia de Substituição](/pt-br/reference/overrides/) para ver os detalhes de todos os componentes que você pode substituir.

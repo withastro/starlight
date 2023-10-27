@@ -118,7 +118,7 @@ entry: {
 **타입:** `{ depth: number; slug: string; text: string }[]`
 
 현재 페이지에서 추출된 모든 Markdown 제목의 배열입니다.
-Starlight의 구성 옵션을 준수하는 콘텐츠의 목차를 생성하기 위해서는 [`toc`](#toc)를 사용하세요.
+Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생성하기 위해서는 [`toc`](#toc)를 사용하세요.
 
 #### `lastUpdated`
 

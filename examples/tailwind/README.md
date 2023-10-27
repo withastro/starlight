@@ -26,7 +26,7 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 │   └── env.d.ts
 ├── astro.config.mjs
 ├── package.json
-├── tailwind.config.cjs
+├── tailwind.config.mjs
 └── tsconfig.json
 ```
 
