@@ -181,14 +181,14 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
     });
     ```
 
-5.  Ajoutez le module d'extension Tailwind de Starlight au fichier `tailwind.config.cjs` :
+5.  Ajoutez le module d'extension Tailwind de Starlight au fichier `tailwind.config.mjs` :
 
     ```js ins={2,7}
-    // tailwind.config.cjs
-    const starlightPlugin = require('@astrojs/starlight-tailwind');
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
     /** @type {import('tailwindcss').Config} */
-    module.exports = {
+    export default {
     	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     	plugins: [starlightPlugin()],
     };
@@ -206,12 +206,12 @@ Si définies, les options suivantes remplaceront les styles par défaut de Starl
 - `fontFamily.mono` — utilisé pour les exemples de code
 
 ```js {13,16,21,24}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
