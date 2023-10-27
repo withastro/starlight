@@ -120,7 +120,7 @@ Inhaltsverzeichnis für diese Seite, falls aktiviert.
 **Type:** `{ depth: number; slug: string; text: string }[]`
 
 Array aller Markdown-Überschriften, die aus der aktuellen Seite extrahiert wurden.
-Verwende stattdessen [`toc`](#toc), wenn du ein Inhaltsverzeichnis erstellen willst, welches die Konfigurationsoptionen von Starlight berücksichtigt.
+Verwende stattdessen [`toc`](#toc), wenn du einen Inhaltsverzeichnis-Komponenten erstellen willst, welches die Konfigurationsoptionen von Starlight berücksichtigt.
 
 #### `lastUpdated`
 
