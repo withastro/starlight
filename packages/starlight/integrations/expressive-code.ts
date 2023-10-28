@@ -1,17 +1,15 @@
 import path from 'node:path';
-import fs from 'node:fs';
 import {
 	astroExpressiveCode,
 	ExpressiveCodeTheme,
 	type AstroExpressiveCodeOptions,
 	ensureColorContrastOnBackground,
 	pluginFramesTexts,
-	PluginTexts,
 	type ThemeObjectOrShikiThemeName,
 } from 'astro-expressive-code';
 import type { AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../types';
-import translations from '../translations';
+import type { createTranslationSystemFromFs } from '../utils/translations-fs';
 
 export * from 'astro-expressive-code';
 
@@ -75,7 +73,10 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	minSyntaxHighlightingColorContrast?: number | undefined;
 };
 
-export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration[] => {
+export const starlightExpressiveCode = (
+	opts: StarlightConfig,
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
+): AstroIntegration[] => {
 	const { locales, defaultLocale, expressiveCode } = opts;
 	if (expressiveCode === false) return [];
 	const config = typeof expressiveCode === 'object' ? expressiveCode : {};
@@ -129,18 +130,7 @@ export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration
 		console.warn(`*** Warning: Using the config option "useStarlightUiThemeColors: true" with only one theme is not recommended. For better color contrast, please provide 1 dark and 1 light theme.\n`);
 
 	// Add Expressive Code UI translations (if any) for all defined locales
-	if (locales) {
-		for (const locale in locales) {
-			const lang = locales[locale]?.lang;
-			if (!lang) continue;
-
-			addTranslations(lang, pluginFramesTexts, [
-				'expressiveCode.copyButtonCopied',
-				'expressiveCode.copyButtonTooltip',
-				'expressiveCode.terminalWindowFallbackTitle',
-			]);
-		}
-	}
+	addTranslations(locales, useTranslations);
 
 	return [
 		astroExpressiveCode({
@@ -188,27 +178,27 @@ export const starlightExpressiveCode = (opts: StarlightConfig): AstroIntegration
 	];
 };
 
-function addTranslations<T extends PluginTexts<any>>(
-	lang: string,
-	target: T,
-	ids: (keyof (typeof translations)['en'])[]
+function addTranslations(
+	locales: StarlightConfig['locales'],
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ) {
-	const builtinTexts = translations[lang];
-	let userTexts: Partial<(typeof translations)['en']> = {};
-	try {
-		// As Astro has not been initialized yet, we cannot use content collections directly
-		// and have to manually load any user-provided translations from the file system
-		userTexts = JSON.parse(fs.readFileSync(`src/content/i18n/${lang}.json`, 'utf8'));
-	} catch (error) {
-		// We can safely ignore loading errors here as they will be reported by Starlight later
-		// if the JSON file exists and is invalid
+	for (const locale in locales) {
+		const lang = locales[locale]?.lang;
+		if (!lang) continue;
+
+		const t = useTranslations(locale);
+		const translationKeys = [
+			'expressiveCode.copyButtonCopied',
+			'expressiveCode.copyButtonTooltip',
+			'expressiveCode.terminalWindowFallbackTitle',
+		] as const;
+		translationKeys.forEach((key) => {
+			const translation = t(key);
+			if (!translation) return;
+			const ecId = key.replace(/^expressiveCode\./, '');
+			pluginFramesTexts.overrideTexts(lang, { [ecId]: translation });
+		});
 	}
-	ids.forEach((id) => {
-		const translation = userTexts[id] || builtinTexts?.[id];
-		if (!translation) return;
-		const ecId = (id as string).replace(/^expressiveCode\./, '');
-		target.overrideTexts(lang, { [ecId]: translation });
-	});
 }
 
 export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
