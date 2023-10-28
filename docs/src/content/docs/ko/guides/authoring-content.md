@@ -208,3 +208,8 @@ var fun = function lang(l) {
 ## 기타 일반적인 Markdown 기능
 
 Starlight는 목록 및 테이블과 같은 다른 모든 Markdown 작성 구문을 지원합니다. 모든 Markdown 구문 요소에 대한 간략한 개요는 [Markdown Guide의 Markdown 치트 시트](https://www.markdownguide.org/cheat-sheet/)를 참조하세요.
+
+## 고급 Markdown 및 MDX 구성
+
+Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 및 MDX 구성](https://docs.astro.build/ko/guides/markdown-content/#configuring-markdown-and-mdx)을 참조하세요.
+
