@@ -23,6 +23,7 @@ interface Props {
 						<span>{entry.label}</span>
 						{entry.badge && (
 							<>
+								{' '}
 								<Badge
 									text={entry.badge.text}
 									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
@@ -39,6 +40,7 @@ interface Props {
 								<span class="large">{entry.label}</span>
 								{entry.badge && (
 									<>
+										{' '}
 										<Badge text={entry.badge.text} variant={entry.badge.variant} />
 									</>
 								)}
@@ -129,7 +131,7 @@ interface Props {
 
 	a > *:not(:last-child),
 	.group-label > *:not(:last-child) {
-		margin-inline-end: 0.5em;
+		margin-inline-end: 0.25em;
 	}
 
 	@media (min-width: 50rem) {
