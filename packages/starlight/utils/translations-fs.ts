@@ -31,7 +31,14 @@ export function createTranslationSystemFromFs(
 					return [id, data] as const;
 				})
 		);
-	} catch {}
+	} catch (e: unknown) {
+		if (e instanceof Error && 'code' in e && e.code === 'ENOENT') {
+			// i18nDir doesn’t exist, so we ignore the error.
+		} else {
+			// Other errors may be meaningful, e.g. JSON syntax errors, so should be thrown.
+			throw e;
+		}
+	}
 
 	return createTranslationSystem(userTranslations, opts);
 }
