@@ -90,9 +90,9 @@ I can link to [my conclusion](#conclusion) lower on the same page.
 Level 2 (`<h2>`) and Level 3 (`<h3>`) headings will automatically appear in the page table of contents.
 
 :::note
-**Convert to Lowercase:** Ensure that all characters in the heading titles used for anchor links are in lowercase.
+**Convert to Lowercase:** Even if your title has uppercase characters, write them in the anchor link with lowercase. `Title` > `title`
 <br/>
-**No Spaces in Titles:** Titles with spaces cannot be used as anchor links. Consider using hyphens to separate words (my-section instead of My Section) for better compatibility.
+**No Spaces in Titles:** If your title has spaces, replace spaces with hyphens(-). `My Title` > `my-title`
 :::
 
 ## Asides
