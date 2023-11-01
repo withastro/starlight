@@ -89,6 +89,12 @@ I can link to [my conclusion](#conclusion) lower on the same page.
 
 Level 2 (`<h2>`) and Level 3 (`<h3>`) headings will automatically appear in the page table of contents.
 
+:::note
+**Convert to Lowercase:** Ensure that all characters in the heading titles used for anchor links are in lowercase.
+<br/>
+**No Spaces in Titles:** Titles with spaces cannot be used as anchor links. Consider using hyphens to separate words (my-section instead of My Section) for better compatibility.
+:::
+
 ## Asides
 
 Asides (also known as “admonitions” or “callouts”) are useful for displaying secondary information alongside a page’s main content.
