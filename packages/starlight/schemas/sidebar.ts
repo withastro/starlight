@@ -9,6 +9,8 @@ const SidebarBaseSchema = z.object({
 	label: z.string(),
 	/** Translations of the `label` for each supported language. */
 	translations: z.record(z.string()).default({}),
+	/** Adds a badge to the link item */
+	badge: BadgeConfigSchema(),
 });
 
 const SidebarGroupSchema = SidebarBaseSchema.extend({
@@ -29,8 +31,6 @@ export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchem
 const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
 	link: z.string(),
-	/** Adds a badge to the link item */
-	badge: BadgeConfigSchema(),
 	/** HTML attributes to add to the link item. */
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
 });
