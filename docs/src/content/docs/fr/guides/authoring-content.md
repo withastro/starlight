@@ -206,3 +206,7 @@ Les longs blocs de code d'une seule ligne ne doivent pas être enveloppés. Ils 
 ## Autres fonctionnalités courantes de Markdown
 
 Starlight prend en charge toutes les autres syntaxes de rédaction Markdown, telles que les listes et les tableaux. Voir [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) pour un aperçu rapide de tous les éléments de la syntaxe Markdown.
+
+## Configuration avancée de Markdown et MDX
+
+Starlight utilise le moteur de rendu Markdown et MDX d'Astro basé sur remark et rehype. Vous pouvez ajouter la prise en charge de syntaxe et comportement personnalisés en ajoutant `remarkPlugins` ou `rehypePlugins` dans votre fichier de configuration Astro. Pour en savoir plus, consultez [« Configuration de Markdown et MDX »](https://docs.astro.build/fr/guides/markdown-content/#configuration-de-markdown-et-mdx) dans la documentation d'Astro.

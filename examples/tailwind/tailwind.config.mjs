@@ -1,8 +1,8 @@
-const colors = require('tailwindcss/colors');
-const starlightPlugin = require('@astrojs/starlight-tailwind');
+import colors from 'tailwindcss/colors';
+import starlightPlugin from '@astrojs/starlight-tailwind';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
