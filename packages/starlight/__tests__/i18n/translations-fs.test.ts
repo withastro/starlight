@@ -68,7 +68,7 @@ describe('createTranslationSystemFromFs', () => {
 		expect(() =>
 			createTranslationSystemFromFs(
 				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
-				// Using `empty-src/` to emulate empty `src/content/i18n/` directory.
+				// Using `malformed-src/` to trigger syntax error in bad JSON file.
 				{ srcDir: new URL('./malformed-src/', import.meta.url) }
 			)
 		).toThrow(SyntaxError);
