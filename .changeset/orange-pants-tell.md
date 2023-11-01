@@ -2,4 +2,4 @@
 '@astrojs/starlight': minor
 ---
 
-Extend badges to be available for group links
+Adds support for adding sidebar badges to group headings
