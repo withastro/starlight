@@ -28,6 +28,7 @@ export default defineVitestConfig({
 		// A group linking to all pages in the reference directory.
 		{
 			label: 'Reference',
+			badge: 'Experimental',
 			autogenerate: { directory: 'reference' },
 		},
 		// A group linking to all pages in the api/v1 directory.

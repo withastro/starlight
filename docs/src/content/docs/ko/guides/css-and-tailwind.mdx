@@ -180,14 +180,14 @@ yarn create astro --template starlight/tailwind
     });
     ```
 
-5.  `tailwind.config.cjs` 파일에 Starlight Tailwind 플러그인을 추가하세요.
+5.  `tailwind.config.mjs` 파일에 Starlight Tailwind 플러그인을 추가하세요.
 
     ```js ins={2,7}
-    // tailwind.config.cjs
-    const starlightPlugin = require('@astrojs/starlight-tailwind');
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
     /** @type {import('tailwindcss').Config} */
-    module.exports = {
+    export default {
     	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     	plugins: [starlightPlugin()],
     };
@@ -205,12 +205,12 @@ Starlight는 UI에서 [Tailwind 테마 구성](https://tailwindcss.com/docs/them
 - `fontFamily.mono` — 코드 예제에 사용됩니다.
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
