@@ -103,7 +103,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.11.2
+        specifier: ^0.12.0
         version: link:../../packages/starlight
       astro:
         specifier: ^3.2.3
@@ -115,10 +115,10 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.11.2
+        specifier: ^0.12.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
-        specifier: ^2.0.0
+        specifier: ^2.0.1
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
         specifier: ^5.0.0
