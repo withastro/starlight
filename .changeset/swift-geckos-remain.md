@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': patch
+'@astrojs/starlight': minor
 ---
 
-Add social icons to MobileMenuFooter
+Include social icon links in mobile menu
