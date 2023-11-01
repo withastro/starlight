@@ -53,4 +53,24 @@ describe('createTranslationSystemFromFs', () => {
 		const t = useTranslations('fr');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
 	});
+
+	test('handles empty i18n directory', () => {
+		const useTranslations = createTranslationSystemFromFs(
+			{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
+			// Using `empty-src/` to emulate empty `src/content/i18n/` directory.
+			{ srcDir: new URL('./empty-src/', import.meta.url) }
+		);
+		const t = useTranslations('en');
+		expect(t('page.editLink')).toMatchInlineSnapshot('"Edit page"');
+	});
+
+	test('throws on malformed i18n JSON', () => {
+		expect(() =>
+			createTranslationSystemFromFs(
+				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
+				// Using `empty-src/` to emulate empty `src/content/i18n/` directory.
+				{ srcDir: new URL('./malformed-src/', import.meta.url) }
+			)
+		).toThrow(SyntaxError);
+	});
 });
