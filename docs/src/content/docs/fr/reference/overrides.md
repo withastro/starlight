@@ -120,7 +120,7 @@ Table des matières de la page courante si celle-ci est activée.
 **Type :** `{ depth: number; slug: string; text: string }[]`
 
 Un tableau de toutes les en-têtes Markdown extraites de la page courante.
-Utilisez [`toc`](#toc) à la place si vous souhaitez construire une table des matières qui respecte les options de configuration de Starlight.
+Utilisez [`toc`](#toc) à la place si vous souhaitez construire un composant de table des matières qui respecte les options de configuration de Starlight.
 
 #### `lastUpdated`
 

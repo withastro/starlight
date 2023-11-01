@@ -207,3 +207,7 @@ Long, single-line code blocks should not wrap. They should horizontally scroll i
 ## Other common Markdown features
 
 Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) for a quick overview of all the Markdown syntax elements.
+
+## Advanced Markdown and MDX configuration
+
+Starlight uses Astro’s Markdown and MDX renderer built on remark and rehype. You can add support for custom syntax and behavior by adding `remarkPlugins` or `rehypePlugins` in your Astro config file. See [“Configuring Markdown and MDX”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) in the Astro docs to learn more.
