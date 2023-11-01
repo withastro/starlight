@@ -210,4 +210,4 @@ Starlight suporta todo o resto da sintaxe de escrita do Markdown, como listas e 
 
 ## Markdown Avançado e Configurando MDX 
 
-O Starlight utiliza o mesmo rendizador Markdown e MDX do Astro, que suporta plugins remark e rehype. Você pode adicionar sintaxe personalizada e _behavior_ adicionando `remarkPlugins` ou `rehypePlugins` no seu arquivo de configuração Astro. Visite [Configurando Markdown e MDX](https://docs.astro.build/pt-br/guides/markdown-content/#configurando-markdown-e-mdx) na documentação do Astro para saber mais.
+O Starlight utiliza o mesmo rendizador Markdown e MDX do Astro, que suporta remark e rehype. Você pode adicionar sintaxe personalizada e _behavior_ adicionando `remarkPlugins` ou `rehypePlugins` no seu arquivo de configuração Astro. Visite [Configurando Markdown e MDX](https://docs.astro.build/pt-br/guides/markdown-content/#configurando-markdown-e-mdx) na documentação do Astro para saber mais.
