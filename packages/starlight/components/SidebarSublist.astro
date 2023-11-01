@@ -84,8 +84,7 @@ interface Props {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-inline: var(--sl-sidebar-item-padding-inline);
-		padding-block: 0.2em;
+		padding: 0.2em var(--sl-sidebar-item-padding-inline);
 		line-height: 1.4;
 		cursor: pointer;
 		user-select: none;
@@ -129,7 +128,7 @@ interface Props {
 	}
 
 	a > *:not(:last-child),
-	summary > div.group-label > *:not(:last-child) {
+	.group-label > *:not(:last-child) {
 		margin-inline-end: 0.5em;
 	}
 
