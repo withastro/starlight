@@ -138,7 +138,7 @@ function makeLink(
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(stripExtension(currentPathname));
 	
-	if (project.buildFormat === 'file') {
+	if (!isAbsolute(href) && project.buildFormat === 'file') {
 		// edge case for index.html
 		if (href === '/') href = '/index/';
 		href = stripTrailingSlash(href) + '.html';

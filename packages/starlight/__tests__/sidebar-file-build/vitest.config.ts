@@ -23,6 +23,10 @@ export default defineVitestConfigBuildFormatFile({
 					link: '/showcase',
 					attrs: { class: 'showcase-link', target: '_blank' },
 				},
+				{
+					label: 'Astro',
+					link: 'https://astro.build/',
+				},
 			],
 		},
 		// A group linking to all pages in the reference directory.
