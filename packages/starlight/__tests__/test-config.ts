@@ -16,3 +16,14 @@ export function defineVitestConfig(config: z.input<typeof StarlightConfigSchema>
 		plugins: [vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), { root, srcDir, build })],
 	});
 }
+
+export function defineVitestConfigFormatFile(config: z.input<typeof StarlightConfigSchema>) {
+	const root = new URL('./', import.meta.url);
+	const srcDir = new URL('./src/', root);
+	const build = {
+		format: "file"
+	} as AstroConfig['build']
+	return getViteConfig({
+		plugins: [vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), { root, srcDir, build })],
+	});
+}

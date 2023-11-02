@@ -137,8 +137,12 @@ function makeLink(
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(stripExtension(currentPathname));
-	// Add '.html' extension to file links.
-	href = project.buildFormat === 'file' ? `${stripTrailingSlash(href)}.html` : href ;
+	
+	if (project.buildFormat === 'file') {
+		// edge case for index.html
+		if (href === '/') href = '/index/';
+		href = stripTrailingSlash(href) + '.html';
+	}
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
 
