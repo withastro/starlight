@@ -111,6 +111,18 @@ hero:
 ---
 ```
 
+Puedes mostrar diferentes versiones de la imagen hero en los modos claro y oscuro.
+
+```md
+---
+hero:
+  image:
+    alt: Un logotipo brillante, de colores brillantes
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
