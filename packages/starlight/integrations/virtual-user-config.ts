@@ -18,7 +18,7 @@ export function vitePluginStarlightUserConfig(
 	/** Map of virtual module names to their code contents as strings. */
 	const modules = {
 		'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
-		'virtual:starlight/project-context': `export default ${JSON.stringify({ root, srcDir, buildFormat: build.format })}`,
+		'virtual:starlight/project-context': `export default ${JSON.stringify({ root, srcDir, build: { format: build.format } })}`,
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
 		'virtual:starlight/user-images': opts.logo
 			? 'src' in opts.logo
