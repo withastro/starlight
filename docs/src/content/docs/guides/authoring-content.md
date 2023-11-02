@@ -91,8 +91,12 @@ Level 2 (`<h2>`) and Level 3 (`<h3>`) headings will automatically appear in the 
 
 :::note
 **Convert to Lowercase:** Even if your title has uppercase characters, write them in the anchor link with lowercase. `Title` > `title`
-<br/>
-**No Spaces in Titles:** If your title has spaces, replace spaces with hyphens(-). `My Title` > `my-title`
+
+**No Spaces in Titles:** If your title has spaces, replace spaces with hyphens(-).
+`My Title` > `my-title`
+
+Starlight uses the same [Heading IDS logic](https://github.com/Flet/github-slugger?tab=readme-ov-file)
+as Astro which is based on [ github-slugger ](https://github.com/Flet/github-slugger?tab=readme-ov-file).
 :::
 
 ## Asides
