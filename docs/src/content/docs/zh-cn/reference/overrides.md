@@ -120,7 +120,7 @@ entry: {
 **类型：** `{ depth: number; slug: string; text: string }[]`
 
 从当前页面提取的所有 Markdown 标题的数组。
-如果你想要构建一个遵循 Starlight 配置选项的目录，请使用 [`toc`](#toc)。
+如果你想要构建一个遵循 Starlight 配置选项的目录组件，请使用 [`toc`](#toc)。
 
 #### `lastUpdated`
 
