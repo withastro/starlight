@@ -129,25 +129,25 @@ interface HeroConfig {
   title?: string;
   tagline?: string;
   image?:
-  | {
-      // 你的仓库中的图像的相对路径。
-      file: string;
-      // 使图像对辅助技术可访问的 Alt 文本
-      alt?: string;
-    }
-  | {
-      // 使用深色模式的图像的相对路径。
-      dark: string;
-      // 使用浅色模式的图像的相对路径。
-      light: string;
-      // 使图像对辅助技术可访问的 Alt 文本
-      alt?: string;
-    }
-  | {
-      // 用于图像插槽的原始 HTML 。
-      // 可以是自定义的 `<img>` 标签或内联的 `<svg>`。
-      html: string;
-    };
+    | {
+        // 你的仓库中的图像的相对路径。
+        file: string;
+        // 使图像对辅助技术可访问的 Alt 文本
+        alt?: string;
+      }
+    | {
+        // 使用深色模式的图像的相对路径。
+        dark: string;
+        // 使用浅色模式的图像的相对路径。
+        light: string;
+        // 使图像对辅助技术可访问的 Alt 文本
+        alt?: string;
+      }
+    | {
+        // 用于图像插槽的原始 HTML 。
+        // 可以是自定义的 `<img>` 标签或内联的 `<svg>`。
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
