@@ -10,8 +10,8 @@ export function defineVitestConfig(
 	config: z.input<typeof StarlightConfigSchema>,
 	opts?: { build: Pick<AstroConfig['build'], 'format'> }
 ) {
-	const root = opts?.root ?? new URL('./', import.meta.url);
-	const srcDir = opts?.srcDir ?? new URL('./src/', root);
+	const root = new URL('./', import.meta.url);
+	const srcDir = new URL('./src/', root);
 	const build = opts?.build ?? { format: 'directory' };
 
 	return getViteConfig({
