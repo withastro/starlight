@@ -233,7 +233,7 @@ sidebar:
 
 ## 徽章
 
-链接也可以包含一个 `badge` 属性，以在链接标签旁边显示徽章。
+链接、分组、自动生成的分组都可以包含一个 `badge` 属性，以在它们的标签旁边显示徽章。
 
 ```js
 starlight({
@@ -248,6 +248,12 @@ starlight({
 					badge: 'New',
 				},
 			],
+		},
+    // 一个带有 "Deprecated" 徽章的自动生成分组。
+		{
+			label: 'Reference',
+			badge: 'Deprecated',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -264,6 +270,24 @@ starlight({
 					label: 'Components',
 					link: '/guides/components/',
 					badge: { text: 'New', variant: 'default' },
+				},
+			],
+		},
+    {
+			label: 'Reference',
+			badge: { text: 'Deprecated', variant: 'default' },
+			items: [
+				{
+					label: 'Configuration Reference',
+					link: '/reference/configuration/',
+				},
+				{
+					label: 'Frontmatter Reference',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: 'Overrides Reference',
+					link: '/reference/overrides/',
 				},
 			],
 		},
