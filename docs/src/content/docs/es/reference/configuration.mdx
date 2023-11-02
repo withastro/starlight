@@ -184,10 +184,10 @@ sidebar: [
 type SidebarItem = {
 	label: string;
 	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
 	| {
 			link: string;
-			badge?: string | BadgeConfig;
 			attrs?: Record<string, string | number | boolean | undefined>;
 	  }
 	| { items: SidebarItem[]; collapsed?: boolean }
