@@ -1,11 +1,12 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
+import project from 'virtual:starlight/project-context';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import { pathWithBase } from './base';
 import { pickLang } from './i18n';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
+import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash, stripTrailingSlash } from './path';
 import type { Badge } from '../schemas/badge';
 import type {
 	AutoSidebarGroup,
@@ -135,7 +136,9 @@ function makeLink(
 	attrs?: LinkHTMLAttributes
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === ensureTrailingSlash(currentPathname);
+	const isCurrent = href === ensureTrailingSlash(stripExtension(currentPathname));
+	// Add '.html' extension to file links.
+	href = project.buildFormat === 'file' ? `${stripTrailingSlash(href)}.html` : href ;
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
 
