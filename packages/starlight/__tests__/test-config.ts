@@ -17,7 +17,7 @@ export function defineVitestConfig(config: z.input<typeof StarlightConfigSchema>
 	});
 }
 
-export function defineVitestConfigFormatFile(config: z.input<typeof StarlightConfigSchema>) {
+export function defineVitestConfigBuildFormatFile(config: z.input<typeof StarlightConfigSchema>) {
 	const root = new URL('./', import.meta.url);
 	const srcDir = new URL('./src/', root);
 	const build = {
