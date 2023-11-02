@@ -20,6 +20,9 @@ const site = 'https://starlight.astro.build/';
 
 export default defineConfig({
 	site,
+	build: {
+		format: "file"
+	},
 	integrations: [
 		starlight({
 			title: 'Starlight',
