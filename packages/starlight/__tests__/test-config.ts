@@ -6,24 +6,17 @@ import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-conf
 import { StarlightConfigSchema } from '../utils/user-config';
 import type { AstroConfig } from 'astro';
 
-export function defineVitestConfig(config: z.input<typeof StarlightConfigSchema>) {
-	const root = new URL('./', import.meta.url);
-	const srcDir = new URL('./src/', root);
-	const build = {
-		format: "directory"
-	} as AstroConfig['build']
-	return getViteConfig({
-		plugins: [vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), { root, srcDir, build })],
-	});
-}
+export function defineVitestConfig(
+	config: z.input<typeof StarlightConfigSchema>,
+	opts?: Partial<AstroConfig>
+) {
+	const root = opts?.root ?? new URL('./', import.meta.url);
+	const srcDir = opts?.srcDir ?? new URL('./src/', root);
+	const build = opts?.build ?? ({ format: 'directory' } as AstroConfig['build']);
 
-export function defineVitestConfigBuildFormatFile(config: z.input<typeof StarlightConfigSchema>) {
-	const root = new URL('./', import.meta.url);
-	const srcDir = new URL('./src/', root);
-	const build = {
-		format: "file"
-	} as AstroConfig['build']
 	return getViteConfig({
-		plugins: [vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), { root, srcDir, build })],
+		plugins: [
+			vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), { root, srcDir, build }),
+		],
 	});
 }
