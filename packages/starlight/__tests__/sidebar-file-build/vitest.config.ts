@@ -47,6 +47,6 @@ export default defineVitestConfig(
 	{
 		build: {
 			format: 'file',
-		} as AstroConfig['build'],
+		},
 	}
 );

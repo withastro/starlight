@@ -10,7 +10,7 @@ function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 /** Vite plugin that exposes Starlight user config and project context via virtual modules. */
 export function vitePluginStarlightUserConfig(
 	opts: StarlightConfig,
-	{ root, srcDir, build }: Pick<AstroConfig, 'root' | 'srcDir' | 'build' >
+	{ root, srcDir, build }: Pick<AstroConfig, 'root' | 'srcDir'> & { build: Pick<AstroConfig['build'], 'format'> }
 ): NonNullable<ViteUserConfig['plugins']>[number] {
 	const resolveId = (id: string) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);

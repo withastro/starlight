@@ -8,11 +8,11 @@ import type { AstroConfig } from 'astro';
 
 export function defineVitestConfig(
 	config: z.input<typeof StarlightConfigSchema>,
-	opts?: Partial<AstroConfig>
+	opts?: { build: Pick<AstroConfig['build'], 'format'> }
 ) {
 	const root = opts?.root ?? new URL('./', import.meta.url);
 	const srcDir = opts?.srcDir ?? new URL('./src/', root);
-	const build = opts?.build ?? ({ format: 'directory' } as AstroConfig['build']);
+	const build = opts?.build ?? { format: 'directory' };
 
 	return getViteConfig({
 		plugins: [
