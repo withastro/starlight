@@ -184,6 +184,7 @@ sidebar: [
 type SidebarItem = {
 	label: string;
 	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
 	| {
 			link: string;
