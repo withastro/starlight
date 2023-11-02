@@ -110,7 +110,6 @@ hero:
 ---
 ```
 
-You can display different versions of the hero image in light and dark modes.
 你可以在浅色和深色模式下显示不同版本的 hero 图像。
 
 ```md
