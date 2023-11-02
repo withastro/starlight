@@ -128,25 +128,25 @@ interface HeroConfig {
   title?: string;
   tagline?: string;
   image?:
-      | {
-          // 저장소에 있는 이미지의 상대 경로입니다.
-          file: string;
-          // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
-          alt?: string;
-        }
-      | {
-          // 어두운 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
-          dark: string;
-          // 밝은 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
-          light: string;
-          // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
-          alt?: string;
-        }
-      | {
-          // 이미지 슬롯에 사용할 원시 HTML입니다.
-          // 사용자 정의 `<img>` 태그 또는 인라인 `<svg>` 태그일 수 있습니다.
-          html: string;
-        };
+    | {
+        // 저장소에 있는 이미지의 상대 경로입니다.
+        file: string;
+        // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
+        alt?: string;
+      }
+    | {
+        // 어두운 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
+        dark: string;
+        // 밝은 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
+        light: string;
+        // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
+        alt?: string;
+      }
+    | {
+        // 이미지 슬롯에 사용할 원시 HTML입니다.
+        // 사용자 정의 `<img>` 태그 또는 인라인 `<svg>` 태그일 수 있습니다.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
