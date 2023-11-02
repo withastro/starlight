@@ -3,6 +3,10 @@ import { getEntry } from 'astro:content';
 import translations from '../../../packages/starlight/translations';
 import { slugToLocaleData } from '../../../packages/starlight/utils/slugs';
 
+interface Props {
+	startsSentence?: boolean;
+}
+
 // The current page's slug.
 const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
 // The docs entry for the current page, or `undefined` if the page is using fallback content.
@@ -30,4 +34,8 @@ const langList = new Intl.ListFormat(pageLang, {
 }).format(supportedLangNames);
 ---
 
-{langList}
+{
+	Astro.props.startsSentence
+		? langList[0]?.toLocaleUpperCase(pageLang) + langList.slice(1)
+		: langList
+}
