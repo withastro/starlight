@@ -135,14 +135,19 @@ function makeLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): Link {
-	if (!isAbsolute(href)) href = pathWithBase(href);
+
+	if (isAbsolute(href))
+		return { type: 'link', label, href, isCurrent: false, badge, attrs: attrs ?? {} };
+
+	href = pathWithBase(href);
 	const isCurrent = href === ensureTrailingSlash(stripExtension(currentPathname));
-	
-	if (!isAbsolute(href) && project.buildFormat === 'file') {
+
+	if (project.buildFormat === 'file') {
 		// edge case for index.html
 		if (href === '/') href = '/index/';
 		href = stripTrailingSlash(href) + '.html';
 	}
+
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
 
