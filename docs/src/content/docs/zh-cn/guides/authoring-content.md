@@ -206,3 +206,7 @@ var fun = function lang(l) {
 ## 其它通用 Markdown 语法
 
 Starlight 支持所有其他 Markdown 语法，例如列表和表格。 请参阅 [Markdown 指南的 Markdown 速查表](https://www.markdownguide.org/cheat-sheet/) 以快速了解所有 Markdown 语法元素。
+
+## 高级 Markdown 和 MDX 配置
+
+Starlight 使用 Astro 的 Markdown 和 MDX 渲染器，该渲染器构建在 remark 和 rehype 之上。 你可以通过在 Astro 配置文件中添加 `remarkPlugins` 或 `rehypePlugins` 来添加对自定义语法和行为的支持。 请参阅 Astro 文档中的 [“配置 Markdown 和 MDX”](https://docs.astro.build/zh-cn/guides/markdown-content/#配置-markdown) 以了解更多信息。
