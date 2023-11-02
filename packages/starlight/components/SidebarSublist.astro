@@ -17,7 +17,8 @@ interface Props {
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
-						class:list={{ large: !Astro.props.nested }}
+						class:list={[{ large: !Astro.props.nested }, entry.attrs.class]}
+						{...entry.attrs}
 					>
 						<span>{entry.label}</span>
 						{entry.badge && (
@@ -35,7 +36,15 @@ interface Props {
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
 						<summary>
-							<h2 class="large">{entry.label}</h2>
+							<div class="group-label">
+								<span class="large">{entry.label}</span>
+								{entry.badge && (
+									<>
+										{' '}
+										<Badge text={entry.badge.text} variant={entry.badge.variant} />
+									</>
+								)}
+							</div>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<Astro.self sublist={entry.entries} nested />
@@ -51,6 +60,10 @@ interface Props {
 		--sl-sidebar-item-padding-inline: 0.5rem;
 		list-style: none;
 		padding: 0;
+	}
+
+	li {
+		overflow-wrap: anywhere;
 	}
 
 	ul ul li {
@@ -73,7 +86,8 @@ interface Props {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-inline: var(--sl-sidebar-item-padding-inline);
+		padding: 0.2em var(--sl-sidebar-item-padding-inline);
+		line-height: 1.4;
 		cursor: pointer;
 		user-select: none;
 	}
@@ -84,6 +98,7 @@ interface Props {
 
 	.caret {
 		transition: transform 0.2s ease-in-out;
+		flex-shrink: 0;
 	}
 	:global([dir='rtl']) .caret {
 		transform: rotateZ(180deg);
@@ -114,7 +129,8 @@ interface Props {
 		background-color: var(--sl-color-text-accent);
 	}
 
-	a > *:not(:last-child) {
+	a > *:not(:last-child),
+	.group-label > *:not(:last-child) {
 		margin-inline-end: 0.25em;
 	}
 

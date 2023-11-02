@@ -3,6 +3,7 @@ import { z } from 'astro/zod';
 export function i18nSchema() {
 	return starlightI18nSchema().merge(pagefindI18nSchema());
 }
+export type i18nSchemaOutput = z.output<ReturnType<typeof i18nSchema>>;
 
 export function builtinI18nSchema() {
 	return starlightI18nSchema().required().strict().merge(pagefindI18nSchema());

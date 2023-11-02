@@ -2,26 +2,7 @@
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import { pathWithBase } from '../utils/base';
-
-interface Props {
-	locale: string | undefined;
-}
-
-if (config.logo) {
-	let err: string | undefined;
-	if ('src' in config.logo) {
-		if (!logos.dark || !logos.light) {
-			err = `Could not resolve logo import for "${config.logo.src}" (logo.src)`;
-		}
-	} else {
-		if (!logos.dark) {
-			err = `Could not resolve logo import for "${config.logo.dark}" (logo.dark)`;
-		} else if (!logos.light) {
-			err = `Could not resolve logo import for "${config.logo.light}" (logo.light)`;
-		}
-	}
-	if (err) throw new Error(err);
-}
+import type { Props } from '../props';
 
 const href = pathWithBase(Astro.props.locale || '/');
 ---
@@ -31,7 +12,7 @@ const href = pathWithBase(Astro.props.locale || '/');
 		config.logo && logos.dark && (
 			<>
 				<img
-					class:list={{ 'dark-only': !('src' in config.logo) }}
+					class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
 					alt={config.logo.alt}
 					src={logos.dark.src}
 					width={logos.dark.width}
@@ -40,7 +21,7 @@ const href = pathWithBase(Astro.props.locale || '/');
 				{/* Show light alternate if a user configure both light and dark logos. */}
 				{!('src' in config.logo) && (
 					<img
-						class="light-only"
+						class="dark:sl-hidden"
 						alt={config.logo.alt}
 						src={logos.light?.src}
 						width={logos.light?.width}
@@ -74,11 +55,5 @@ const href = pathWithBase(Astro.props.locale || '/');
 		max-width: 100%;
 		object-fit: contain;
 		object-position: 0 50%;
-	}
-	:global([data-theme='light']) .dark-only {
-		display: none;
-	}
-	:global([data-theme='dark']) .light-only {
-		display: none;
 	}
 </style>

@@ -20,6 +20,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -27,6 +28,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
@@ -34,9 +36,11 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
@@ -44,6 +48,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "attrs": {},
 			        "badge": undefined,
 			        "href": "/guides/components/",
 			        "isCurrent": false,

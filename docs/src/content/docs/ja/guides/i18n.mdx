@@ -27,8 +27,8 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
    				en: {
    					label: 'English',
    				},
-   				// 簡体字中国語のドキュメントは`src/content/docs/zh/`に置きます。
-   				zh: {
+   				// 簡体字中国語のドキュメントは`src/content/docs/zh-cn/`に置きます。
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -54,7 +54,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -83,7 +83,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // langはルートロケールに必要です
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -101,7 +101,7 @@ export default defineConfig({
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -141,7 +141,7 @@ Starlightは、すべての言語で同等のページが作成されること�
 
 Starlightでは、読者が選択した言語でサイト全体を体験できるように、翻訳されたコンテンツファイルをホストするだけでなく、デフォルトUIの文字列（たとえば目次に表示されている「目次」という見出し）も翻訳できるようになっています。
 
-英語、チェコ語、フランス語、ドイツ語、イタリア語、日本語、ポルトガル語、オランダ語、デンマーク語、スペイン語、トルコ語、アラビア語、ノルウェー語、ペルシア語、簡体字中国語、韓国語、スウェーデン語の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
+英語、チェコ語、フランス語、ドイツ語、イタリア語、日本語、ポルトガル語、オランダ語、デンマーク語、スペイン語、トルコ語、アラビア語、ノルウェー語、ペルシア語、ヘブライ語、簡体字中国語、韓国語、インドネシア語、ロシア語、スウェーデン語の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
 
 `18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
 
