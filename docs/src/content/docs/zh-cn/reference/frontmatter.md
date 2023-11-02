@@ -110,21 +110,44 @@ hero:
 ---
 ```
 
+你可以在浅色和深色模式下显示不同版本的 hero 图像。
+
+```md
+---
+hero:
+  image:
+    alt: 一个闪闪发光、色彩鲜艳的 logo
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Relative path to an image in your repository.
-    // 你的仓库中的图像的相对路径。
-    file?: string;
-    // 原始的 HTML 用于图像插槽。
-    // 可以是自定义的 `<img>` 标签或内联的 `<svg>`。
-    html?: string;
-  };
+  image?:
+  | {
+      // 你的仓库中的图像的相对路径。
+      file: string;
+      // 使图像对辅助技术可访问的 Alt 文本
+      alt?: string;
+    }
+  | {
+      // 使用深色模式的图像的相对路径。
+      dark: string;
+      // 使用浅色模式的图像的相对路径。
+      light: string;
+      // 使图像对辅助技术可访问的 Alt 文本
+      alt?: string;
+    }
+  | {
+      // 用于图像插槽的原始 HTML 。
+      // 可以是自定义的 `<img>` 标签或内联的 `<svg>`。
+      html: string;
+    };
   actions?: Array<{
     text: string;
     link: string;
