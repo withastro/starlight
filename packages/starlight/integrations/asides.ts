@@ -169,6 +169,9 @@ function remarkAsides(
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
 
-export function starlightAsides(opts: StarlightConfig, useTranslations: any): RemarkPlugins {
+export function starlightAsides(
+	opts: StarlightConfig,
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
+): RemarkPlugins {
 	return [remarkDirective, remarkAsides(opts, useTranslations)];
 }
