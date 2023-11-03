@@ -2,11 +2,17 @@ import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { pathWithBase } from './base';
+import { fileWithBase, pathWithBase } from './base';
 import { pickLang } from './i18n';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash, stripTrailingSlash } from './path';
+import {
+	ensureLeadingAndTrailingSlashes,
+	ensureLeadingSlash,
+	ensureTrailingSlash,
+	stripLeadingAndTrailingSlashes,
+	stripTrailingSlash,
+} from './path';
 import type { Badge } from '../schemas/badge';
 import type {
 	AutoSidebarGroup,
@@ -135,18 +141,12 @@ function makeLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): Link {
-
-	if (isAbsolute(href))
-		return { type: 'link', label, href, isCurrent: false, badge, attrs: attrs ?? {} };
-
-	href = pathWithBase(href);
-	const isCurrent = href === ensureTrailingSlash(stripExtension(currentPathname));
-
-	if (project.build.format === 'file') {
-		// edge case for index.html
-		if (href === '/') href = '/index/';
-		href = stripTrailingSlash(href) + '.html';
-	}
+	href = formatPathFromConfig(href);
+	currentPathname =
+		project.build.format === 'file'
+			? stripTrailingSlash(currentPathname)
+			: ensureTrailingSlash(currentPathname);
+	const isCurrent = isAbsolute(href) ? false : href === currentPathname;
 
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
@@ -354,3 +354,21 @@ function applyPrevNextLinkConfig(
 
 /** Remove the extension from a path. */
 const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
+
+/** Add `.html` extension to a path. */
+export function ensureHtmlExtension(path: string) {
+	if (path.endsWith('.html')) return ensureLeadingSlash(path);
+
+	path = stripLeadingAndTrailingSlashes(path);
+	return path ? ensureLeadingSlash(path) + '.html' : '/index.html';
+}
+
+export function formatPathFromConfig(href: string) {
+	// atach base
+	href = project.build.format === 'file' ? fileWithBase(href) : pathWithBase(href);
+
+	// add html extension
+	href = project.build.format === 'file' ? ensureHtmlExtension(href) : stripExtension(href);
+
+	return href;
+}

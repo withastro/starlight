@@ -15,8 +15,8 @@ vi.mock('astro:content', async () =>
 	})
 );
 
-describe('getSidebar', () => {
-	test('returns an array of sidebar entries', () => {
+describe('getSidebar with build.format = "file"', () => {
+	test('returns an array of sidebar entries with its file extension', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
