@@ -1,0 +1,427 @@
+---
+title: Starlight'ı Özelleştirme
+description: Starlight sitenizi logonuz, özel yazı tipleri, giriş sayfası tasarımı ve daha fazlası ile özelleştirmeyi öğrenin.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import FileTree from '../../../components/file-tree.astro';
+
+Starlight, hızlı bir başlangıç yapmak için yapılandırmaya ihtiyaç duymadan mantıklı varsayılan stiller ve özellikler sunar. Starlight sitesinin görünümünü ve hissini özelleştirmeye başlamak istediğinizde bu rehber size yardımcı olur.
+
+## Logonuzu Ekleyin
+
+Özel bir logo eklemek, site başlığına kendi markanızı eklemenin hızlı bir yoludur.
+
+1. Logo resminizi `src/assets/` dizinine ekleyin:
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **my-logo.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+2. Logonuzun yolunu, `astro.config.mjs` dosyasındaki Starlight [`logo.src`](/reference/configuration/#logo) seçeneği olarak ekleyin:
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Logomu İçeren Belgeler',
+   			logo: {
+   				src: './src/assets/my-logo.svg',
+   			},
+   		}),
+   	],
+   });
+   ```
+
+Varsayılan olarak logo, sitenizin `title` ile birlikte görüntülenir. 
+Eğer logo resminiz zaten site başlığını içeriyorsa, `replacesTitle` seçeneğini ayarlayarak başlık metni görsel olarak gizleyebilirsiniz. 
+`title` metni, ekran okuyucuları için hala erişilebilir kalsın diye dahil edilir.
+
+```js
+starlight({
+  title: 'Logomu İçeren Belgeler',
+  logo: {
+    src: './src/assets/my-logo.svg',
+    replacesTitle: true,
+  },
+}),
+```
+
+### Açık ve karanlık logo varyasyonları
+
+Işıklı ve karanlık modlarda farklı sürümlerinizin logolarını gösterebilirsiniz.
+
+1. Her varyasyon için bir resim dosyası ekleyin:  `src/assets/`
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **light-logo.svg**
+       - **dark-logo.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+2. Logolarınızın yolunu `astro.config.mjs` dosyasında `src` yerine `light` ve `dark` seçenekleri olarak ekleyin:
+
+   ```js
+   starlight({
+     title: 'Logomu İçeren Belgeler',
+     logo: {
+       light: './src/assets/light-logo.svg',
+       dark: './src/assets/dark-logo.svg',
+     },
+   }),
+   ```
+
+## Site Haritasını (Sitemap) Etkinleştirin
+
+Starlight, site haritası oluşturmayı destekleyen yerleşik bir özelliğe sahiptir. Site haritası oluşturmayı etkinleştirmek için `astro.config.mjs` dosyasındaki URL'nizi `site` olarak ayarlayın:
+
+```js
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site Haritalı Site' })],
+});
+```
+
+## Sayfa Düzeni
+
+Varsayılan olarak, Starlight sayfaları genel bir gezinme kenarı çubuğu ve mevcut sayfa başlıklarını gösteren bir tablo içeren bir düzen kullanır.
+
+Sayfa ön bilgilerinde [`template: splash`](/reference/frontmatter/#template) olarak ayarlayarak kenar çubuksuz daha geniş bir sayfa düzeni uygulayabilirsiniz. 
+Bu özellikle giriş sayfaları için uygun bir seçenektir ve bu site'nin [anasayfasında](/) görmekte olduğunuz gibi çalışır.
+
+```md
+---
+# src/content/docs/index.md
+
+title: Benim Giriş Sayfam
+template: splash
+---
+```
+
+## İçindekiler
+
+Starlight her sayfada bir içindekiler tablosu gösterir, böylece okuyucuların aradıkları başlığa atlamaları daha kolay olur.
+İçindekileri global olarak Starlight entegrasyonunda veya sayfa başlığına göre ön bilgide özelleştirebilir veya tamamen devre dışı bırakabilirsiniz.
+
+Varsayılan olarak, tablo `<h2>` ve `<h3>` başlıklarını içerir. Site genelinde hangi başlık seviyelerini dahil etmek istediğinizi belirlemek için `minHeadingLevel` ve `axHeadingLevel` seçeneklerini kullanarak bu varsayılanları değiştirin. İlgili ön bilgi `tableOfContents` özelliklerini ekleyerek bu varsayılanları belirli sayfalar için geçersiz kılabilirsiniz:
+
+<Tabs>
+  <TabItem label="Ön bilgi">
+
+```md
+---
+# src/content/docs/example.md
+title: Sadece tablo içeriğinde H2'ler olan sayfa
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+  </TabItem>
+  <TabItem label="Küresel konfigürasyon">
+
+```js
+// astro.config.mjs
+
+defineConfig({
+	integrations: [
+		starlight({
+			title: '',
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
+		}),
+	],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+`tableOfContents` seçeneğini `false` olarak ayarlayarak tablo içeriğini tamamen devre dışı bırakabilirsiniz:
+
+<Tabs>
+  <TabItem label="Ön bilgi">
+
+```md
+---
+# src/content/docs/example.md
+title: Tablo içeriği olmayan sayfa
+tableOfContents: false
+---
+```
+
+  </TabItem>
+  <TabItem label="Küresel konfigürasyon">
+
+```js
+// astro.config.mjs
+
+defineConfig({
+	integrations: [
+		starlight({
+			title: 'Tablo içeriği küresel olarak devre dışı bırakılmış belgeler',
+			tableOfContents: false,
+		}),
+	],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+## Sosyal Medya Bağlantıları
+
+Starlight, Starlight entegrasyonu içindeki [`social`](/reference/configuration/#social) seçeneği aracılığıyla site başlığına sosyal medya hesaplarınıza bağlantılar eklemeyi destekler.
+
+Desteklenen bağlantı simgelerinin tam listesini [Yapılandırma Referansı]((/reference/configuration/#social)) sayfasında bulabilirsiniz. 
+Başka bir hizmet için destek gerekiyorsa bize GitHub veya Discord üzerinden bildirin!
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Sosyal medya bağlantıları olan belgeler',
+			social: {
+				discord: 'https://astro.build/chat',
+				github: 'https://github.com/withastro/starlight',
+			},
+		}),
+	],
+});
+```
+
+## Düzenleme bağlantıları
+
+Starlight, her sayfanın altbilgisinde bir "Sayfayı düzenle" bağlantısı görüntüleyebilir.
+Bu, bir okuyucunun belgelerinizi iyileştirmek için düzenlenecek dosyayı bulmasını kolaylaştırır.
+Özellikle açık kaynaklı projelerde, bu topluluğunuzdan katkılar almaya teşvik etmenize yardımcı olabilir.
+
+Düzenleme bağlantılarını etkinleştirmek için, Starlight entegrasyon konfigürasyonunda [`editLink.baseUrl`](/reference/configuration/#editlink)'yı deponuzdaki dosyaları düzenlemek için kullanılan URL'ye ayarlayın.
+`editLink.baseUrl`'nın değeri, tam düzenleme bağlantısını oluşturmak için geçerli sayfanın yoluna eklenir.
+
+Ortak kalıplar şunları içerir:
+
+- GitHub: `https://github.com/KULLANICI_İSMİ/REPO_ADI/edit/BRANCH_İSMİ/`
+- GitLab: `https://gitlab.com/KULLANICI_İSMİ/REPO_ADI/-/edit/BRANCH_İSMİ/`
+
+Starlight projeniz deponuzun kökünde değilse, temel URL'nin sonuna projenin yolunu ekleyin.
+
+Bu örnek, `withastro/starlight` deposunun `main` dalındaki `docs/` alt dizininde bulunan Starlight belgeleri için yapılandırılmış düzenleme bağlantısını göstermektedir:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Düzenleme bağlantıları olan belgeler',
+			editLink: {
+				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+			},
+		}),
+	],
+});
+```
+
+## Özelleştirlebilen 404 Sayfası
+
+Starlight siteleri varsayılan olarak basit bir 404 sayfası görüntüler. 
+Bunu, `src/content/docs/` dizinine bir `404.md` (veya `404.mdx`) dosyası ekleyerek özelleştirebilirsiniz:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **404.md**
+      - index.md
+- astro.config.mjs
+
+</FileTree>
+
+Starlight'ın sayfa düzeni ve özelleştirme tekniklerini 404 sayfanızda kullanabilirsiniz. Örneğin, varsayılan 404 sayfası [`splash` şablonunu](#page-layout) ve ön bilgide [`hero`](/reference/frontmatter/#hero) bileşenini kullanır:
+
+```md
+---
+title: '404'
+template: splash
+editUrl: false
+hero:
+  title: '404'
+  tagline: Sayfa bulunamadı. URL'yi kontrol edin veya arama çubuğunu kullanmayı deneyin.
+---
+```
+
+## Özel yazı tipleri
+
+Varsayılan olarak, Starlight, tüm metinler için kullanıcının yerel cihazında bulunan sans-serif yazı tiplerini kullanır. 
+Bu, belgelerin büyük yazı tipi dosyalarını indirmek için ekstra bant genişliği gerektirmeden her kullanıcının bildiği bir yazı tipiyle hızlı bir şekilde yüklenmesini sağlar.
+Starlight web sitenize özel bir yazı tipi eklemeniz gerekiyorsa, özel CSS dosyalarında veya diğer [Astro stil teknikleri](https://docs.astro.build/en/guides/styling/) ile kullanabileceğiniz yazı tiplerini ayarlayabilirsiniz.
+
+### Yazı tiplerini ayarlama
+
+Eğer zaten yazı tipi dosyalarınız varsa, [yerel kurulum kılavuzunu](#set-up-local-font-files) izleyin. 
+Google Yazı Tipleri kullanmak istiyorsanız, [Fontsource kurulum kılavuzunu](#set-up-a-fontsource-font) takip edin.
+
+#### Yerel yazı tipi dosyalarını ayarlama
+
+1. Yazı tipi dosyalarınızı `src/fonts/` dizinine ekleyin ve boş bir `font-face.css` dosyası oluşturun:
+
+   <FileTree>
+
+   - src/
+     - content/
+     - fonts/
+       - **CustomFont.woff2**
+       - **font-face.css**
+   - astro.config.mjs
+
+   </FileTree>
+
+2. Her bir yazı tipi için `src/fonts/font-face.css` dosyasına bir [`@font-face` deklarasyonu](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) ekleyin. `url()` fonksiyonunda yazı tipi dosyasına göreceli bir yol kullanın.
+
+   ```css
+   /* src/fonts/font-face.css */
+
+    @font-face {
+    font-family: 'Özel Yazı Tipi';
+    /* `url()` içinde yerel yazı tipi dosyasına göreceli bir yol kullanın. */
+    src: url('./CustomFont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    }
+
+   ```
+
+3. `astro.config.mjs` dosyasındaki Starlight'ın `customCss` dizisine `font-face.css` dosyasının yolunu ekleyin:
+
+   ```js
+    // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      import starlight from '@astrojs/starlight';
+
+      export default defineConfig({
+        integrations: [
+          starlight({
+            title: 'Özel Yazı Tipine Sahip Belgeler',
+            customCss: [
+              // @font-face CSS dosyanızın göreceli yolunu ekleyin.
+              './src/fonts/font-face.css',
+            ],
+          }),
+        ],
+      });
+
+   ```
+
+#### Fontsource yazı tipi kurulumunu ayarlama
+
+[Fontsource](https://fontsource.org/) projesi, Google Yazı Tipleri ve diğer açık kaynak yazı tiplerini kullanımını basit hale getirir.
+Bu, kullanmak istediğiniz yazı tipleri için kurabileceğiniz npm modüllerini sağlar ve projenize ekleyebileceğiniz hazır CSS dosyalarını içerir.
+
+1.  [Fontsource kataloğunda](https://fontsource.org/) kullanmak istediğiniz yazı tipini bulun. 
+    Bu örnekte [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif) kullanılacaktır.
+
+2.  Seçtiğiniz yazı tipi için paketi kurun.
+    Paket adını Fontsource yazı tipi sayfasındaki "Kurulum" seçeneğine tıklayarak bulabilirsiniz.
+
+         <Tabs>
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+        <TabItem label="pnpm">
+
+    ```sh
+    pnpm install @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+        <TabItem label="Yarn">
+
+    ```sh
+    yarn add @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+      </Tabs>
+
+3.  Fontsource CSS dosyalarını `astro.config.mjs` dosyasındaki Starlight'ın `customCss` dizisine ekleyin:
+
+    ```js
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+
+    export default defineConfig({
+      integrations: [
+        starlight({
+          title: 'Özel Yazı Tipine Sahip Belgeler',
+          customCss: [
+            // Normal ve yarı kalın yazı tipi kalınlıkları için Fontsource dosyaları.
+            '@fontsource/ibm-plex-serif/400.css',
+            '@fontsource/ibm-plex-serif/600.css',
+          ],
+        }),
+      ],
+    });
+
+    ```
+
+    Fontsource, her yazı tipi için birden fazla CSS dosyası sağlar. Hangi dosyaları kullanmanız gerektiğini anlamak için kullanılacak farklı kalınlıklar ve stilleri içeren [Fontsource belgelerine](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) başvurabilirsiniz.
+
+### Yazı Tiplerini (Fontları) Kullanma:
+
+Ayarladığınız yazı tipini sitenize uygulamak için, tercih ettiğiniz yazı tipinin adını bir [özel CSS dosyasında]((/guides/css-and-tailwind/#custom-css-styles)) kullanın. Örneğin, Starlight'ın varsayılan yazı tipini her yerde geçersiz kılmak için `--sl-font` özel özelliğini ayarlayın:
+
+```css
+/* src/styles/custom.css */
+
+:root {
+	--sl-font: 'IBM Plex Serif', serif;
+}
+```
+
+Yazı tipinizi daha seçici bir şekilde uygulamak isterseniz, sadece ana içerikte yazı tipi ayarlamak için, kenar çubuklarına uygulamamak için daha hedeflenmiş CSS yazabilirsiniz. 
+Örneğin, yalnızca ana içeriğe yazı tipi uygulamak için:
+
+```css
+/* src/styles/custom.css */
+
+main {
+	font-family: 'IBM Plex Serif', serif;
+}
+```
+
+Sitenize stillerinizi eklemek için [özel CSS talimatlarını](/guides/css-and-tailwind/#custom-css-styles) takip edebilirsiniz.

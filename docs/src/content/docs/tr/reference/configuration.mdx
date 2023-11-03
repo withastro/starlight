@@ -1,0 +1,457 @@
+---
+title: Yapılandırma Referansı
+description: Starlight'ın desteklediği tüm yapılandırma seçeneklerinin genel bir bakışı.
+---
+
+## `starlight` entegrasyonunu yapılandırın
+
+Starlight, [Astro](https://astro.build) web çerçevesi üzerine inşa edilmiş bir entegrasyondur. Projeyi `astro.config.mjs` yapılandırma dosyası içinde yapılandırabilirsiniz:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Harika belge sitem',
+		}),
+	],
+});
+```
+
+Aşağıdaki seçenekleri `starlight` entegrasyonuna iletebilirsiniz.
+
+### `title` (gerekli)
+
+**Tür:** `string`
+
+Web siteniz için başlığı ayarlayın. Metadata ve tarayıcı sekmesi başlığında kullanılacaktır.
+
+### `description`
+
+**Tür:** `string`
+
+Web siteniz için açıklamayı ayarlayın. Eğer `description` bir sayfanın frontmatter'ında ayarlanmamışsa, bu açıklama, arama motorlarıyla paylaşılan metadata içinde `<meta name="description">` etiketi olarak kullanılır.
+
+### `logo`
+
+**Tür:** [`LogoConfig`](#logoconfig)
+
+Site başlığı yanında veya yerine gösterilecek bir logo resmini ayarlayın. Tek bir `src` özelliğini ayarlayabilirsiniz veya `light` ve `dark` için ayrı görüntü kaynakları ayarlayabilirsiniz.
+
+```js
+starlight({
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
+});
+```
+
+#### `LogoConfig`
+
+```ts
+type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
+	| { src: string }
+	| { light: string; dark: string }
+);
+```
+
+### `tableOfContents`
+
+**Tür:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**Varsayılan:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+
+Her sayfanın sağında gösterilen içerik tablosunu yapılandırın. Varsayılan olarak, bu içerik tablosunda `<h2>` ve `<h3>` başlıkları bulunacaktır.
+
+### `editLink`
+
+**Tür:** `{ baseUrl: string }`
+
+“Bu sayfayı düzenle” bağlantılarını etkinleştirmek için kullanılacak temel URL'yi ayarlayarak. Son bağlantı, `editLink.baseUrl` + mevcut sayfa yolunu kullanacaktır. Örneğin, GitHub'daki `withastro/starlight` deposundaki sayfaları düzenlemeyi etkinleştirmek için:
+
+```js
+starlight({
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
+});
+```
+
+Bu yapılandırmayla, `/introduction` sayfasının düzenleme bağlantısı, `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`'ye işaret edecektir.
+
+### `sidebar`
+
+**Tür:** [`SidebarItem[]`](#sidebaritem)
+
+Sitenizin yan çubuk gezinme öğelerini yapılandırın.
+
+Bir yan çubuk, bağlantıların ve bağlantı alt gruplarının bir dizisidir. 
+Her öğe bir `label` ve aşağıdaki özelliklerden birini içermelidir:
+
+- `link` — belirli bir URL'ye işaret eden tek bir bağlantı, ör. `'/home'` veya `'https://example.com'`.
+
+- `items` — daha fazla yan çubuk bağlantısı ve alt grup içeren bir dizi.
+
+- `autogenerate` —  belgelerinizden bir grup bağlantıyı otomatik olarak oluşturmak için bir dizini belirten bir nesne.
+
+```js
+starlight({
+	sidebar: [
+		// "Ana Sayfa" olarak etiketlenmiş tek bir bağlantı öğesi.
+		{ label: 'Ana Sayfa', link: '/' },
+		// İki bağlantı içeren "Buradan Başlayın" olarak etiketlenmiş bir grup.
+		{
+			label: 'Buradan Başlayın',
+			items: [
+				{ label: 'Giriş', link: '/intro' },
+				{ label: 'Sonraki Adımlar', link: '/next-steps' },
+			],
+		},
+		// Referans dizinindeki tüm sayfalara işaret eden bir grup.
+		{
+			label: 'Referans',
+			autogenerate: { directory: 'reference' },
+		},
+	],
+});
+```
+
+#### Sıralama
+
+Otomatik olarak oluşturulan yan çubuk grupları dosya adlarına göre alfabetik sıralanır.
+Örneğin, `astro.md` dosyasından oluşturulan bir sayfa, `starlight.md` sayfasının üzerinde görünecektir.
+
+#### Grupların Daraltılması
+
+Bağlantı grupları varsayılan olarak genişletilir. Bu davranışı bir grubun `collapsed` özelliğini `true` olarak ayarlayarak değiştirebilirsiniz.
+
+Otomatik olarak oluşturulan alt gruplar, varsayılan olarak ana gruplarının `collapsed` özelliğini dikkate alır. Bu davranışı geçersiz kılmak için `autogenerate.collapsed` özelliğini ayarlayın.
+
+```js
+sidebar: [
+  // Daraltılmış bağlantı grubu.
+  {
+    label: 'Daraltılmış Bağlantılar',
+    collapsed: true,
+    items: [
+      { label: 'Giriş', link: '/intro' },
+      { label: 'Sonraki Adımlar', link: '/next-steps' },
+    ],
+  },
+  // Daraltılmış otomatik olarak oluşturulan alt grupları içeren genişletilmiş bir grup.
+  {
+    label: 'Referans',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
+#### Etiketlerin Çevirilmesi
+
+Siteniz çok dilli ise, her öğenin `label` özelliği varsayılan dilde kabul edilir. Diğer desteklenen diller için etiketler sağlamak için bir `translations` özelliği ayarlamak için kullanabilirsiniz:
+
+```js
+sidebar: [
+  // Brezilya Portekizcesine çevrilen etiketlere sahip bir örnek yan çubuk.
+  {
+    label: 'Buradan Başlayın',
+    translations: { 'pt-BR': 'Comece Aqui' },
+    items: [
+      {
+        label: 'Başlarken',
+        translations: { 'pt-BR': 'Introdução' },
+        link: '/getting-started',
+      },
+      {
+        label: 'Proje Yapısı',
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
+        link: '/structure',
+      },
+    ],
+  },
+],
+```
+
+#### `SidebarItem`
+
+```ts
+type SidebarItem = {
+	label: string;
+	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
+} & (
+	| {
+			link: string;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
+);
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+}
+```
+
+### `locales`
+
+**Tür:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
+
+[Siteniz için uluslararasılaştırmayı (i18n)](/guides/i18n/) yapılandırarak hangi `locales`'in desteklendiğini belirleyin.
+
+Her giriş, o dilin dosyalarının kaydedildiği dizini anahtar olarak kullanmalıdır.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Sitem',
+			// Bu site için varsayılan dil olarak İngilizce'yi ayarlayın.
+			defaultLocale: 'en',
+			locales: {
+				// İngilizce belgeleri `src/content/docs/en/` içindedir.
+				en: {
+					label: 'English',
+				},
+				// Basitleştirilmiş Çince belgeleri `src/content/docs/zh-cn/` içindedir.
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Arapça belgeleri `src/content/docs/ar/` içindedir.
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
+});
+```
+
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
+}
+```
+
+Her dil için aşağıdaki seçenekleri ayarlayabilirsiniz:
+
+##### `label` (gerekli)
+
+**Tür:** `string`
+
+Kullanıcılara gösterilecek bu dil için etiket, örneğin dil değiştiricisinde. Genellikle bu, bir dilin kullanıcısının okumayı beklediği bir dilin adı olmasını isteyeceksiniz, örneğin `"English"`, `"العربية"`, veya `"简体中文"`.
+
+##### `lang`
+
+**Tür:** `string`
+
+Bu dil için BCP-47 etiketi, örneğin `"en"`, `"ar"`, veya `"zh-CN"`. Ayarlanmamışsa, dilin dizin adı varsayılan olarak kullanılacaktır. Bölgesel alt etiketlere sahip diller (örneğin `"pt-BR"` veya `"en-US"`) için, bölgeye özgü çeviriler bulunamazsa ana dil için yerleşik UI çevirileri kullanılacaktır.
+
+##### `dir`
+
+**Tür:** `'ltr' | 'rtl'`
+
+Bu dilin yazı yönü; `"ltr"` soldan sağa (varsayılan) veya `"rtl"` sağdan sola.
+
+#### Kök dil
+
+`/lang/` dizin olmadan varsayılan dili sunabilirsiniz, bir `root` dilini ayarlayarak:
+
+```js
+starlight({
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
+});
+```
+
+Örneğin, bu, İngilizce bir yol olarak `/getting-started/` sunmanıza ve eşdeğer Fransız sayfası olarak `/fr/getting-started/` kullanmanıza olanak tanır.
+
+### `defaultLocale`
+
+**Tür:** `string`
+
+Bu site için varsayılan dilin belirlendiği yerdir.
+Değer, [`locales`](#locales) nesnesinin anahtarlarından biriyle eşleşmelidir.
+(Varsayılan diliniz [root locale](#root-locale) ise bu adımı atlayabilirsiniz.)
+
+Varsayılan yerel dil, çeviriler eksik olduğunda yedek içerik sağlamak için kullanılır.
+
+### `social`
+
+import SocialLinksType from '../../../components/social-links-type.astro';
+
+**Tür:** <SocialLinksType />
+
+Bu site için sosyal medya hesapları hakkında isteğe bağlı ayrıntılar. Bunlardan herhangi birini eklerseniz, bunlar site başlığında simge bağlantıları olarak görüntülenir.
+
+```js
+starlight({
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
+});
+```
+
+### `customCss`
+
+**Tür:** `string[]`
+
+Starlight sitesinin görünümünü özelleştirmek için CSS dosyalarını sağlayın.
+
+Projektiğinizin kök dizinine göre yerel CSS dosyalarını destekler, örneğin `'./src/custom.css'`, ve npm modülü olarak yüklediğiniz CSS dosyalarını destekler, örneğin `'@fontsource/roboto'`.
+
+```js
+starlight({
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+});
+```
+
+### `head`
+
+**Tür:** [`HeadConfig[]`](#headconfig)
+
+Starlight sitesinin `<head>` etiketine özel etiketler ekleyin.
+Analiz ve diğer üçüncü taraf betikleri ve kaynakları eklemek için kullanışlı olabilir.
+
+```js
+starlight({
+	head: [
+		// Örnek: Fathom analiz betik etiketi ekleyin.
+		{
+			etiket: 'betik',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
+});
+```
+
+#### `HeadConfig`
+
+```ts
+interface HeadConfig {
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
+}
+```
+
+### `lastUpdated`
+
+**Tür:** `boolean`  
+**Varsayılan:** `false`
+
+Sayfanın en son ne zaman güncellendiğini kontrol edin.
+
+Varsayılan olarak, bu özellik, depo Git geçmişinize dayanır ve [yüzeysel klonlar](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) gerçekleştiren bazı dağıtım platformlarında doğru olmayabilir. Bir sayfa bu ayarı veya Git tabanlı tarihi [`lastUpdated` sahasını](/reference/frontmatter/#lastupdated) kullanarak geçersiz kılabilir.
+
+### `pagination`
+
+**Tür:** `boolean`  
+**Varsayılan:** `true`
+
+Altbilginin önceki ve sonraki sayfa bağlantılarını içerip içermediğini tanımlar.
+
+Bir sayfa bu ayarı veya bağlantı metni ve/veya URL'sini [`prev`](/reference/frontmatter/#prev) ve [`next`](/reference/frontmatter/#next) önemli alanları kullanarak geçersiz kılabilir.
+
+### `favicon`
+
+**Tür:** `string`  
+**Varsayılan:** `'/favicon.svg'`
+
+Websitesi için varsayılan favicon'un yolunu belirler; bu favicon `public/` dizininde bulunmalıdır ve geçerli (`.ico`, `.gif`, `.jpg`, `.png`, veya `.svg`) bir simge dosyası olmalıdır..
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Ek varyantlar veya yedek faviconlar belirtmeniz gerekiyorsa, bunları [`head` seçeneği](#head) kullanarak ekleyebilirsiniz:
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Safari için ICO favicon yedekleme ekleyin.
+    {
+      etiket: 'link',
+      attrs: {
+        rel: 'ikon',
+        href:'/images/favicon.ico',
+        boyutlar: '32x32',
+      },
+    },
+  ],
+});
+```
+
+### `titleDelimiter | başlıkAyırıcı`
+
+**Tür:** `string`  
+**Varsayılan:** `'|'`
+
+Sayfa başlığı ile site başlığı arasındaki ayırıcıyı ayarlar. Bu, tarayıcı sekmesinde görüntülenen `<title>` etiketinde kullanılır.
+
+Varsayılan olarak, her sayfanın bir `<title>`'ı vardır ve bu `<title>`'ın biçimi şu şekildedir: `Sayfa Başlığı | Site Başlığı`.
+Örneğin, bu sayfa "Yapılandırma Referansı" başlığına sahip ve bu site "Starlight" başlığına sahipse, bu sayfanın `<title>`'ı "Yapılandırma Referansı | Starlight" olarak ayarlanır.
+
+
+### `components`
+
+**Tür:** `Record<string, string>`
+
+Starlight'ın varsayılan uygulamalarını geçersiz kılmak için bileşen yollarını sağlar.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
+});
+```
+
+Tüm geçersiz kılınabilecek bileşenlerin ayrıntıları için [Geçersiz Kılmalar Referansına](/reference/overrides/) göz atın.

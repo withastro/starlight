@@ -1,0 +1,221 @@
+---
+title: Uluslararasılaştırma (i18n)
+description: Starlight sitesinin çoklu dil desteğini etkinleştirmek için nasıl yapılandırılacağını öğrenin.
+---
+
+import FileTree from '../../../components/file-tree.astro';
+
+Starlight, çoklu dil destekli siteler için dahili destek sunar, bu da yönlendirme, geriye dönük içerik ve tam sağdan sola (RTL) dil desteği içerir.
+
+## i18n'i Yapılandırın
+
+1. Starlight'a, [`locales`](/reference/configuration/#locales) ve [`defaultLocale`](/reference/configuration/#defaultlocale) bilgilerini aktararak desteklediğiniz dilleri bildirin:
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Benim Belgelerim',
+   			// Bu site için varsayılan dil olarak İngilizce'yi ayarlayın.
+   			defaultLocale: 'en',
+   			locales: {
+   				// İngilizce belgeleri `src/content/docs/en/` içinde.
+   				en: {
+   					label: 'English',
+   				},
+   				// Basitleştirilmiş Çince belgeleri `src/content/docs/zh-cn/` içinde.
+   				'zh-cn': {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// Arapça belgeleri `src/content/docs/ar/` içinde.
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
+   });
+   ```
+
+   `defaultLocale` seçeceğiniz dil, geriye dönük içerik ve UI etiketleri için kullanılacaktır, bu nedenle içerik yazmaya veya zaten içeriğiniz varsa muhtemelen en çok kullanmayı düşündüğünüz dili seçin.
+
+2. Her dil için `src/content/docs/` içinde bir dizin oluşturun. 
+   Yukarıda gösterilen yapılandırmada, aşağıdaki klasörleri oluşturun:
+
+   <FileTree>
+
+   - src/
+     - content/
+       - docs/
+         - ar/
+         - en/
+         - zh-cn/
+
+   </FileTree>
+
+3. Şimdi dil klasörlerinizde içerik dosyaları ekleyebilirsiniz. Aynı sayfaları farklı diller arasında ilişkilendirmek ve Starlight'ın tam set i18n özelliklerinden yararlanmak için aynı dosya adını kullanın, bu da geriye dönük içerik, çeviri uyarıları ve daha fazlasını içerir.
+
+   Örneğin, Arapça ve İngilizce ana sayfasını temsil etmek için `ar/index.md` ve `en/index.md` oluşturabilirsiniz.
+
+### Kök Dil Kullanımı
+
+Bir "kök" dil kullanarak, yolundaki i18n ön eki olmadan bir dil sunabilirsiniz. Örneğin, İngilizce kök dili ise, bir İngilizce sayfa yolu `/about` yerine `/en/about` gibi görünecektir.
+
+Kök dili ayarlamak için, `locales` yapılandırmanızdaki `root` anahtarını kullanın. Kök dil ayrıca içeriğinizin varsayılan dili ise, `defaultLocale`'yi kaldırın veya `'root'` olarak ayarlayın.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Dökümanım',
+			defaultLocale: 'root', // opsiyonel
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en', // kök dil için dil belirlemeniz gerekiyor
+				},
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
+});
+```
+
+`root` dili kullanırken, o dil için sayfaları ayrı bir dil klasöründe değil, doğrudan `src/content/docs/` içinde tutun. Yukarıda verilen yapılandırmayı kullandığınızda, İngilizce ve Çince için ana sayfa dosyaları aşağıdaki gibi olacaktır:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **index.md**
+      - zh-cn/
+        - **index.md**
+
+</FileTree>
+
+#### Tekdilli Siteler
+
+Varsayılan olarak, Starlight tek dilli (İngilizce) bir sitedir. Başka bir dilde tek dilde bir site oluşturmak için, bu dili `root` olarak `locales` yapılandırmanıza ayarlayın:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			locales: {
+				root: {
+					label: 'Türkçe',
+        			lang: 'tr-TR'
+				},
+			},
+		}),
+	],
+});
+```
+
+Bu, çoklu dil siteleri için diğer uluslararasılaştırma özelliklerini etkinleştirmadan Starlight'ın varsayılan dilini geçersiz kılamanıza olanak tanır, örneğin dil seçici gibi.
+
+## Geriye Dönük İçerik
+
+Starlight, tüm dillerinizde eşdeğer sayfalar oluşturmanızı bekler. Örneğin, `en/about.md` adında bir dosyanız varsa, desteklediğiniz diğer diller için her biri için bir `about.md` oluşturun. Bu, henüz çevrilmemiş sayfalar için otomatik geriye dönük içerik sunmasına olanak tanır.
+
+Bir dil için çeviri henüz mevcut değilse, Starlight, bu sayfanın içeriğini varsayılan dil için ( `defaultLocale` aracılığıyla ayarlanır) gösterir. Örneğin, About sayfasının Fransızca versiyonunu henüz oluşturmadıysanız ve varsayılan diliniz İngilizce ise, `/fr/about` adresine gelen ziyaretçiler, henüz çevrilmediği yönünde bir bildirimle birlikte `/en/about` adresindeki İngilizce içeriği görecekler. Bu, içeriği varsayılan dilinizde eklemenize ve çevirmenlerinizin zamanı olduğunda aşamalı olarak çevirmenize yardımcı olur.
+
+## Starlight'ın UI'sini Çevirin
+
+Starlight, çevrilen içerik dosyalarına ek olarak, varsayılan UI dizesini (örneğin, "Bu sayfada" içeriği) çevirmenize olanak tanır, böylece okuyucularınız seçilen dilde siteyi tamamen deneyimleyebilirler.
+
+Varsayılan olarak, Starlight İngilizce, Çekçe, Fransızca, Almanca, İtalyanca, Japonca, Portekizce, Felemenkçe, Danca, İspanyolca, Türkçe, Arapça, Norveççe, Farsça, İbranice, Basitleştirilmiş Çince, Korece, Endonezya, Rusça, İsveççe, Ukrayna, Vietnamca ve Galiçyaca çevrilen UI dizelerini içerir ve daha fazla varsayılan dil eklemek için [katkıda bulunmalara](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md) açıktır.
+
+Desteklediğiniz ek diller için çevirileri sağlayabilir veya varsayılan etiketlerimizi `i18n` veri koleksiyonu aracılığıyla geçersiz kılabilirsiniz.
+
+1. Eğer zaten yapılandırılmamışsa `src/content/config.ts` içinde `i18n` veri koleksiyonunu yapılandırın:
+
+   ```js
+   // src/content/config.ts
+   import { defineCollection } from 'astro:content';
+   import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+   export const collections = {
+   	docs: defineCollection({ schema: docsSchema() }),
+   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   };
+   ```
+
+2. Her ek dil için `src/content/i18n/` içinde bir JSON dosyası oluşturun. Örneğin, bu Arapça ve Basitleştirilmiş Çince için çeviri dosyalarını ekler:
+
+   <FileTree>
+
+   - src/
+     - content/
+       - i18n/
+         - ar.json
+         - zh-CN.json
+
+   </FileTree>
+
+3. Çevirmek istediğiniz anahtarlar için JSON dosyalarına çeviriler ekleyin. Sadece değerleri çevirin ve anahtarları İngilizce olarak bırakın (örneğin, "search.label": "Arama").
+
+   İşte Starlight'ın varsayılan İngilizce değerleri:
+
+   ```json
+   {
+   	"skipLink.label": "İçeriğe Git",
+   	"search.label": "Ara",
+   	"search.shortcutLabel": "(Aramak için / tuşuna basın)",
+   	"search.cancelLabel": "İptal",
+   	"search.devWarning": "Arama yalnızca üretim sürümlerinde kullanılabilir. \nYerel olarak test etmek için siteyi oluşturup önizlemeyi deneyin.",
+   	"themeSelect.accessibleLabel": "Tema seçin",
+   	"themeSelect.dark": "Koyu",
+   	"themeSelect.light": "Açık",
+   	"themeSelect.auto": "Açık",
+   	"languageSelect.accessibleLabel": "Dil seçin",
+   	"menuButton.accessibleLabel": "Menü",
+   	"sidebarNav.accessibleLabel": "Ana",
+   	"tableOfContents.onThisPage": "Bu sayfada",
+   	"tableOfContents.overview": "Genel Bakış",
+   	"i18n.untranslatedContent": "Bu içerik dilinizde henüz mevcut değil.",
+   	"page.editLink": "Sayfayı düzenle",
+   	"page.lastUpdated": "Son Güncelleme:",
+   	"page.previousLink": "Sonraki",
+   	"page.nextLink": "Önceki",
+   	"404.text": "Sayfa bulunamadı. URL yi kontrol edin veya arama çubuğunu deneyin."
+   }
+   ```
+
+	Starlight'ın arama penceresi [Pagefind](https://pagefind.app/) kütüphanesi tarafından desteklenmektedir.
+	Aynı JSON dosyasını kullanarak Pagefind'in kullanıcı arayüzü için çevirileri ayarlayabilirsiniz. `pagefind` anahtarları kullanılarak:
+
+   ```json
+	{
+	"pagefind.clear_search": "Temizle",
+	"pagefind.load_more": "Daha fazla sonuç yükle",
+	"pagefind.search_label": "Bu siteyi ara",
+	"pagefind.filters_label": "Filtreler",
+	"pagefind.zero_results": "[ARAMA_TERIMI] için sonuç bulunamadı",
+	"pagefind.many_results": "[ARAMA_TERIMI] için [SAYI] sonuç",
+	"pagefind.one_result": "[ARAMA_TERIMI] için [SAYI] sonuç",
+	"pagefind.alt_search": "[ARAMA_TERIMI] için sonuç bulunamadı. Bunun yerine [FARKLI_TERIM] sonuçları gösteriliyor",
+	"pagefind.search_suggestion": "[ARAMA_TERIMI] için sonuç bulunamadı. Aşağıdaki aramalardan birini deneyin:",
+	"pagefind.searching": "[ARAMA_TERIMI] aranıyor..."
+	}
+
+   ```
