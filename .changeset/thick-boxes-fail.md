@@ -1,5 +1,5 @@
 ---
-"@astrojs/starlight": patch
+"@astrojs/starlight": minor
 ---
 
-Make aside's title can be translated.
+Add i18n support for default aside labels
