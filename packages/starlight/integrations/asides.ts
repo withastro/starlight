@@ -36,8 +36,8 @@ function getLocaleFromPath(
 		// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
 		.replace(docsDir.pathname, '');
 	const locale = pathToLocale(path, starlightConfig);
-  return locale || 'en';
-  // maybe don't need this
+	return locale || 'en';
+	// maybe don't need this
 	// return localeToLang(locale, starlightConfig);
 }
 
@@ -87,7 +87,7 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  */
 function remarkAsides(
 	starlightConfig: StarlightConfig,
-  astroConfig: AstroConfig,
+	astroConfig: AstroConfig,
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
@@ -127,7 +127,7 @@ function remarkAsides(
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = getLocaleFromPath(file.history[0],starlightConfig, astroConfig);
+		const locale = getLocaleFromPath(file.history[0], starlightConfig, astroConfig);
 		const t = useTranslations(locale);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
@@ -192,7 +192,7 @@ type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remar
 
 export function starlightAsides(
 	starlightConfig: StarlightConfig,
-  astroConfig: AstroConfig,
+	astroConfig: AstroConfig,
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ): RemarkPlugins {
 	return [remarkDirective, remarkAsides(starlightConfig, astroConfig, useTranslations)];
