@@ -65,7 +65,10 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * </Aside>
  * ```
  */
-function remarkAsides(config: StarlightConfig, useTranslations: any): Plugin<[], Root> {
+function remarkAsides(
+	config: StarlightConfig,
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
+): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
