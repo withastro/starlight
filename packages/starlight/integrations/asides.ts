@@ -1,4 +1,4 @@
-import type { AstroUserConfig } from 'astro';
+import type { AstroConfig, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Paragraph as P, Root } from 'mdast';
 import remarkDirective from 'remark-directive';
@@ -6,19 +6,39 @@ import type { Plugin, Transformer } from 'unified';
 import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
 import type { StarlightConfig } from '../types';
+import type { createTranslationSystemFromFs } from '../utils/translations-fs';
+
+function pathToLocale(slug: string, config: StarlightConfig): string | undefined {
+	const locales = Object.keys(config.locales || {});
+	const baseSegment = slug.split('/')[0];
+	if (baseSegment && locales.includes(baseSegment)) return baseSegment;
+	return undefined;
+}
+
+function localeToLang(locale: string | undefined, config: StarlightConfig): string {
+	const lang = locale ? config.locales?.[locale]?.lang : config.locales?.root?.lang;
+	const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
+	return lang || defaultLang || 'en';
+}
 
 /** get current lang from file full path */
-function getLocaleFromPath(path: string, config: StarlightConfig): string {
-  // format path to unix style path
-  const formatPath = path.replace(/\\/g, '/');
-	const parts = formatPath.split('/');
-	const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
-	if (langIndex !== -1) {
-		return parts[langIndex] || 'en';
-	} else {
-		const defaultLocale = config.defaultLocale?.lang || config.defaultLocale?.locale;
-		return defaultLocale || 'en';
-	}
+function getLocaleFromPath(
+	unformattedPath: string,
+	starlightConfig: StarlightConfig,
+	astroConfig: AstroConfig
+): string {
+	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
+	const docsDir = new URL('content/docs/', srcDir);
+	const path = unformattedPath
+		// Format path to unix style path.
+		.replace(/\\/g, '/')
+		// Strip docs path leaving only content collection file ID.
+		// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
+		.replace(docsDir.pathname, '');
+	const locale = pathToLocale(path, starlightConfig);
+  return locale || 'en';
+  // maybe don't need this
+	// return localeToLang(locale, starlightConfig);
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -66,7 +86,8 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * ```
  */
 function remarkAsides(
-	config: StarlightConfig,
+	starlightConfig: StarlightConfig,
+  astroConfig: AstroConfig,
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
@@ -106,7 +127,7 @@ function remarkAsides(
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = getLocaleFromPath(file.history[0], config);
+		const locale = getLocaleFromPath(file.history[0],starlightConfig, astroConfig);
 		const t = useTranslations(locale);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
@@ -170,8 +191,9 @@ function remarkAsides(
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
 
 export function starlightAsides(
-	opts: StarlightConfig,
+	starlightConfig: StarlightConfig,
+  astroConfig: AstroConfig,
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ): RemarkPlugins {
-	return [remarkDirective, remarkAsides(opts, useTranslations)];
+	return [remarkDirective, remarkAsides(starlightConfig, astroConfig, useTranslations)];
 }
