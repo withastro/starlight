@@ -12,7 +12,7 @@ function getLocaleFromPath(path: string, config: StarlightConfig): string {
 	const parts = path.split('/');
 	const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
 	if (langIndex !== -1) {
-    return parts[langIndex] || 'en';
+		return parts[langIndex] || 'en';
 	} else {
 		const defaultLocale = config.defaultLocale?.lang || config.defaultLocale?.locale;
 		return defaultLocale || 'en';
@@ -101,7 +101,7 @@ function remarkAsides(config: StarlightConfig, useTranslations: any): Plugin<[],
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-    const locale = getLocaleFromPath(file.history[0], config);
+		const locale = getLocaleFromPath(file.history[0], config);
 		const t = useTranslations(locale);
 
 		visit(tree, (node, index, parent) => {
