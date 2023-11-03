@@ -26,7 +26,7 @@ function getLocaleFromPath(
 	unformattedPath: string,
 	starlightConfig: StarlightConfig,
 	astroConfig: AstroConfig
-): string {
+): string | undefined {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
 	const docsDir = new URL('content/docs/', srcDir);
 	const path = unformattedPath
@@ -36,7 +36,7 @@ function getLocaleFromPath(
 		// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
 		.replace(docsDir.pathname, '');
 	const locale = pathToLocale(path, starlightConfig);
-	return locale || 'en';
+	return locale;
 	// maybe don't need this
 	// return localeToLang(locale, starlightConfig);
 }
