@@ -5,96 +5,18 @@ import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
-import builtinTranslations from '../translations';
 import type { StarlightConfig } from '../types';
-import fs from 'fs/promises';
-import path from 'path';
 
 /** get current lang from file full path */
-function getLanguageFromPath(path: string, config: StarlightConfig): string {
+function getLocaleFromPath(path: string, config: StarlightConfig): string {
 	const parts = path.split('/');
 	const langIndex = parts.findIndex((part) => /^[a-z]{2}(-[a-z]{2})?$/.test(part));
 	if (langIndex !== -1) {
-		const langCode = parts[langIndex];
-		if (langCode.includes('-')) {
-			return langCode.split('-')[0];
-		} else {
-			return langCode;
-		}
+    return parts[langIndex] || 'en';
 	} else {
-		const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
-		return defaultLang || 'en';
+		const defaultLocale = config.defaultLocale?.lang || config.defaultLocale?.locale;
+		return defaultLocale || 'en';
 	}
-}
-
-/** Build a dictionary by layering preferred translation sources. */
-function buildDictionary(
-	base: (typeof builtinTranslations)[string],
-	...dictionaries: (CollectionEntry<'i18n'>['data'] | undefined)[]
-) {
-	const dictionary = { ...base };
-	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
-	for (const dict of dictionaries) {
-		for (const key in dict) {
-			const value = dict[key as keyof typeof dict];
-			if (value) dictionary[key as keyof typeof dict] = value;
-		}
-	}
-	return dictionary;
-}
-
-interface Translations {
-	[key: string]: { [key: string]: string };
-}
-
-async function readUserTranslations(): Promise<Translations> {
-	const dirPath = path.join(process.cwd(), 'src', 'content', 'i18n');
-	const files = await fs.readdir(dirPath);
-	const translations: Translations = {};
-	for (const file of files) {
-		if (file.endsWith('.json')) {
-			const langCode = file.slice(0, -5);
-			const filePath = path.join(dirPath, file);
-			const data = await fs.readFile(filePath, 'utf8');
-			translations[langCode] = JSON.parse(data);
-		}
-	}
-	return translations;
-}
-
-/** All translation data from the i18n collection, keyed by `id`, which matches locale. */
-let userTranslations = {};
-try {
-	// Load the user’s i18n collection and ignore the error if it doesn’t exist.
-	userTranslations = await readUserTranslations();
-} catch {}
-
-/** Default map of UI strings based on Starlight and user-configured defaults. */
-function getDefaults(defaultLocale: string) {
-	return buildDictionary(
-		builtinTranslations.en!,
-		userTranslations.en,
-		builtinTranslations[defaultLocale],
-		userTranslations[defaultLocale]
-	);
-}
-
-/**
- * Generate a utility function that returns UI strings for the given `lang`.
- * @param {string} [lang]
- * @param {StarlightConfig} [config]
- * @example
- * const t = useTranslations('en', config);
- * const label = t('search.label'); // => 'Search'
- */
-export function useTranslations(lang: string, config: StarlightConfig) {
-	const defaultLocale = config.defaultLocale?.locale || 'root';
-	const defaults = getDefaults(defaultLocale);
-	const dictionary = buildDictionary(defaults, builtinTranslations[lang], userTranslations[lang]);
-	const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
-	t.pick = (startOfKey: string) =>
-		Object.fromEntries(Object.entries(dictionary).filter(([k]) => k.startsWith(startOfKey)));
-	return t;
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -141,7 +63,7 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * </Aside>
  * ```
  */
-function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
+function remarkAsides(config: StarlightConfig, useTranslations: any): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
@@ -179,8 +101,8 @@ function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const lang = getLanguageFromPath(file.history[0], config);
-		const t = useTranslations(lang, config);
+    const locale = getLocaleFromPath(file.history[0], config);
+		const t = useTranslations(locale);
 
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
@@ -188,6 +110,7 @@ function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
 			}
 			const variant = node.name;
 			if (!isAsideVariant(variant)) return;
+
 			// remark-directive converts a container’s “label” to a paragraph in
 			// its children, but we want to pass it as the title prop to <Aside>, so
 			// we iterate over the children, find a directive label, store it for the
@@ -242,6 +165,6 @@ function remarkAsides(config: StarlightConfig): Plugin<[], Root> {
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
 
-export function starlightAsides(opts: StarlightConfig): RemarkPlugins {
-	return [remarkDirective, remarkAsides(opts)];
+export function starlightAsides(opts: StarlightConfig, useTranslations: any): RemarkPlugins {
+	return [remarkDirective, remarkAsides(opts, useTranslations)];
 }

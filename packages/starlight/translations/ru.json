@@ -18,5 +18,9 @@
   "page.lastUpdated": "Последнее обновление:",
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
-  "404.text": "Страница не найдена. Проверьтье  URL или используйте поиск по сайту"
+  "404.text": "Страница не найдена. Проверьтье  URL или используйте поиск по сайту",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }
