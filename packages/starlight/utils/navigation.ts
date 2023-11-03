@@ -2,8 +2,8 @@ import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { fileWithBase, pathWithBase } from './base';
 import { pickLang } from './i18n';
+import { formatPath } from './format';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import {
@@ -141,7 +141,9 @@ function makeLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): Link {
-	href = formatPathFromConfig(href);
+	href = formatPath(href, {
+		format: project.build.format,
+	});
 	currentPathname =
 		project.build.format === 'file'
 			? stripTrailingSlash(currentPathname)
@@ -353,22 +355,16 @@ function applyPrevNextLinkConfig(
 }
 
 /** Remove the extension from a path. */
-const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
+export function stripExtension(path: string) {
+	path = stripTrailingSlash(path);
+	return path.replace(/\.\w+$/, '');
+}
 
-/** Add `.html` extension to a path. */
+/** Add '.html' extension to a path. */
 export function ensureHtmlExtension(path: string) {
+	path = stripTrailingSlash(path);
 	if (path.endsWith('.html')) return ensureLeadingSlash(path);
 
 	path = stripLeadingAndTrailingSlashes(path);
 	return path ? ensureLeadingSlash(path) + '.html' : '/index.html';
-}
-
-export function formatPathFromConfig(href: string) {
-	// atach base
-	href = project.build.format === 'file' ? fileWithBase(href) : pathWithBase(href);
-
-	// add html extension
-	href = project.build.format === 'file' ? ensureHtmlExtension(href) : stripExtension(href);
-
-	return href;
 }
