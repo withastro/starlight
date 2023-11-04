@@ -22,6 +22,7 @@ const processedContent = await fileTreeProcessor.process({
 <style is:global>
 	file-tree {
 		--x-space: 1.5rem;
+		--y-space: 0.125rem;
 		--y-pad: 0;
 
 		display: block;
@@ -88,6 +89,7 @@ const processedContent = await fileTreeProcessor.process({
 	}
 
 	file-tree li {
+		margin: var(--y-space) 0;
 		padding: var(--y-pad) 0;
 	}
 
