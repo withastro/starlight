@@ -15,12 +15,6 @@ function pathToLocale(slug: string, config: StarlightConfig): string | undefined
 	return undefined;
 }
 
-function localeToLang(locale: string | undefined, config: StarlightConfig): string {
-	const lang = locale ? config.locales?.[locale]?.lang : config.locales?.root?.lang;
-	const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
-	return lang || defaultLang || 'en';
-}
-
 /** get current lang from file full path */
 function getLocaleFromPath(
 	unformattedPath: string,
@@ -37,8 +31,6 @@ function getLocaleFromPath(
 		.replace(docsDir.pathname, '');
 	const locale = pathToLocale(path, starlightConfig);
 	return locale;
-	// maybe don't need this
-	// return localeToLang(locale, starlightConfig);
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
