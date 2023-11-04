@@ -25,8 +25,11 @@ export async function runPlugins(
 	let userConfig = config;
 	const integrations: AstroIntegration[] = [];
 
-	for (const { name, plugin } of parsedPluginsConfig.data.plugins) {
-		await plugin({
+	for (const {
+		name,
+		hooks: { setup },
+	} of parsedPluginsConfig.data.plugins) {
+		await setup({
 			config: userConfig,
 			logger: logger.fork(name),
 			updateConfig(newConfig) {
@@ -56,72 +59,79 @@ const astroIntegrationSchema = z.object({
 const starlightPluginSchema = z.object({
 	/** Name of the Starlight plugin. */
 	name: z.string(),
-	/**
-	 * Plugin function called with an object containing various values that can be used by the
-	 * plugin to interact with Starlight.
-	 */
-	plugin: z.function(
-		z.tuple([
-			z.object({
-				/**
-				 * A read-only copy of the user-supplied Starlight configuration.
-				 *
-				 * Note that this configuration may have been updated by other plugins configured
-				 * before this one.
-				 */
-				config: z.any() as z.Schema<StarlightUserConfig>,
-				/**
-				 * A callback function to update the user-supplied Starlight configuration.
-				 *
-				 * You only need to provide the configuration values that you want to update but no deep
-				 * merge is performed.
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 * 	plugin({ updateConfig }) {
-				 * 		updateConfig({
-				 * 			description: 'Custom description',
-				 * 		});
-				 * 	}
-				 * }
-				 */
-				updateConfig: z.function(
-					z.tuple([z.record(z.any()) as z.Schema<Partial<StarlightUserConfig>>]),
-					z.void()
-				),
-				/**
-				 * An instance of the Astro integration logger with all logged messages prefixed with the
-				 * plugin name.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
-				 */
-				logger: z.any() as z.Schema<AstroIntegrationLogger>,
-				/**
-				 * A callback function to add an Astro integration required by this plugin.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 * 	plugin({ addIntegration }) {
-				 * 		addIntegration({
-				 * 			name: 'My Plugin Astro Integration',
-				 * 			hooks: {
-				 * 				'astro:config:setup': () => {
-				 * 					// …
-				 * 				},
-				 * 			},
-				 * 		});
-				 * 	}
-				 * }
-				 */
-				addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
-			}),
-		]),
-		z.union([z.void(), z.promise(z.void())])
-	),
+	/** The different hooks available to the plugin. */
+	hooks: z.object({
+		/**
+		 * Plugin setup function called with an object containing various values that can be used by
+		 * the plugin to interact with Starlight.
+		 */
+		setup: z.function(
+			z.tuple([
+				z.object({
+					/**
+					 * A read-only copy of the user-supplied Starlight configuration.
+					 *
+					 * Note that this configuration may have been updated by other plugins configured
+					 * before this one.
+					 */
+					config: z.any() as z.Schema<StarlightUserConfig>,
+					/**
+					 * A callback function to update the user-supplied Starlight configuration.
+					 *
+					 * You only need to provide the configuration values that you want to update but no deep
+					 * merge is performed.
+					 *
+					 * @example
+					 * {
+					 * 	name: 'My Starlight Plugin',
+					 *	hooks: {
+					 * 		setup({ updateConfig }) {
+					 * 			updateConfig({
+					 * 				description: 'Custom description',
+					 * 			});
+					 * 		}
+					 *	}
+					 * }
+					 */
+					updateConfig: z.function(
+						z.tuple([z.record(z.any()) as z.Schema<Partial<StarlightUserConfig>>]),
+						z.void()
+					),
+					/**
+					 * An instance of the Astro integration logger with all logged messages prefixed with the
+					 * plugin name.
+					 *
+					 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
+					 */
+					logger: z.any() as z.Schema<AstroIntegrationLogger>,
+					/**
+					 * A callback function to add an Astro integration required by this plugin.
+					 *
+					 * @see https://docs.astro.build/en/reference/integrations-reference/
+					 *
+					 * @example
+					 * {
+					 * 	name: 'My Starlight Plugin',
+					 * 	hooks: {
+					 * 		setup({ addIntegration }) {
+					 * 			addIntegration({
+					 * 				name: 'My Plugin Astro Integration',
+					 * 				hooks: {
+					 * 					'astro:config:setup': () => {
+					 * 						// …
+					 * 					},
+					 * 				},
+					 * 			});
+					 * 		}
+					 * 	}
+					 * }
+					 */
+					addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
+				}),
+			]),
+			z.union([z.void(), z.promise(z.void())])
+		),
+	}),
 });
 
 const starlightPluginsConfigSchema = z.object({

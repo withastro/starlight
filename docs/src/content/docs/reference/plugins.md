@@ -13,16 +13,23 @@ Lean more about using a Starlight plugin in the [Configuration Reference](/refer
 ```ts
 interface StarlightPlugin {
   name: string;
-  plugin: (options: {
-    config: StarlightUserConfig;
-    updateConfig: (newConfig: StarlightUserConfig) => void;
-    addIntegration: (integration: AstroIntegration) => void;
-    logger: AstroIntegrationLogger;
-  }) => void | Promise<void>;
+  hooks: {
+    setup: (options: {
+      config: StarlightUserConfig;
+      updateConfig: (newConfig: StarlightUserConfig) => void;
+      addIntegration: (integration: AstroIntegration) => void;
+      logger: AstroIntegrationLogger;
+    }) => void | Promise<void>;
+  };
 }
 ```
 
-## Options
+## `setup`
+
+Plugin setup function called when the Starlight integration is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
+The `setup` hook can be used to update the Starlight configuration or add Astro integrations.
+
+This hook provides the following options:
 
 ### `config`
 
