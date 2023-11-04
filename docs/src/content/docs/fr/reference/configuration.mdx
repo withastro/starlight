@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Mon délicieux site de docs',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Mon délicieux site de docs',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ Définit une image de logo à afficher dans la barre de navigation à côté ou 
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ Permet d'activer les liens "Modifier cette page" en définissant l'URL de base q
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -98,23 +98,23 @@ Chaque élément doit comporter un `label` et l'une des propriétés suivantes :
 
 ```js
 starlight({
-  sidebar: [
-    // Un lien unique étiqueté “Accueil”.
-    { label: 'Accueil', link: '/' },
-    // Un groupe étiqueté “Débuter ici” contenant deux liens.
-    {
-      label: 'Débuter ici',
-      items: [
-        { label: 'Introduction', link: '/intro' },
-        { label: 'Prochaines étapes', link: '/next-steps' },
-      ],
-    },
-    // Un groupe liant toutes les pages présentes dans le répertoire reference.
-    {
-      label: 'Référence',
-      autogenerate: { directory: 'reference' },
-    },
-  ],
+	sidebar: [
+		// Un lien unique étiqueté “Accueil”.
+		{ label: 'Accueil', link: '/' },
+		// Un groupe étiqueté “Débuter ici” contenant deux liens.
+		{
+			label: 'Débuter ici',
+			items: [
+				{ label: 'Introduction', link: '/intro' },
+				{ label: 'Prochaines étapes', link: '/next-steps' },
+			],
+		},
+		// Un groupe liant toutes les pages présentes dans le répertoire reference.
+		{
+			label: 'Référence',
+			autogenerate: { directory: 'reference' },
+		},
+	],
 });
 ```
 
@@ -157,23 +157,23 @@ Si votre site est multilingue, le `label` de chaque élément est considéré co
 
 ```js
 sidebar: [
-  // Un exemple de barre latérale avec des étiquettes traduites en anglais.
-  {
-    label: 'Commencer ici',
-    translations: { en: 'Start here' },
-    items: [
-      {
-        label: 'Bien démarrer',
-        translations: { en: 'Getting Started' },
-        link: '/getting-started',
-      },
-      {
-        label: 'Structure du projet',
-        translations: { en: 'Project Structure' },
-        link: '/structure',
-      },
-    ],
-  },
+	// Un exemple de barre latérale avec des étiquettes traduites en portugais brésilien.
+	{
+		label: 'Commencer ici',
+		translations: { 'pt-BR': 'Comece Aqui' },
+		items: [
+			{
+				label: 'Bien démarrer',
+				translations: { 'pt-BR': 'Introdução' },
+				link: '/getting-started',
+			},
+			{
+				label: 'Structure du projet',
+				translations: { 'pt-BR': 'Estrutura de Projetos' },
+				link: '/structure',
+			},
+		],
+	},
 ];
 ```
 
@@ -181,19 +181,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -201,14 +201,14 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
 ### `locales`
 
-**Type :** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**Type :** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` supportées.
 
@@ -220,29 +220,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Site',
-      // Définit l'anglais comme langue par défaut pour ce site.
-      defaultLocale: 'en',
-      locales: {
-        // Documentations en anglais danse trouve dans `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // Documentations en Chinois simplifié se trouve dans `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // Documentations en Arabe se trouve dans `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Site',
+			// Définit l'anglais comme langue par défaut pour ce site.
+			defaultLocale: 'en',
+			locales: {
+				// Documentations en anglais danse trouve dans `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Documentations en Chinois simplifié se trouve dans `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Documentations en Arabe se trouve dans `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -250,9 +250,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -282,15 +282,15 @@ Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissa
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -308,25 +308,27 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-**Type :** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**Type :** <SocialLinksType />
 
 Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -340,7 +342,7 @@ Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, p
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -353,17 +355,17 @@ Cela peut être utile pour ajouter des analyses et d'autres scripts et ressource
 
 ```js
 starlight({
-  head: [
-    // Exemple : ajouter un script d'analyse Fathom tag.
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Exemple : ajouter un script d'analyse Fathom tag.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -371,9 +373,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -447,9 +449,9 @@ Fournit les chemins vers les composants pour redéfinir les implémentations par
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 

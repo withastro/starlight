@@ -30,6 +30,7 @@ interface Group {
 	label: string;
 	entries: (Link | Group)[];
 	collapsed: boolean;
+	badge: Badge | undefined;
 }
 
 export type SidebarEntry = Link | Group;
@@ -75,6 +76,7 @@ function configItemToEntry(
 			label: pickLang(item.translations, localeToLang(locale)) || item.label,
 			entries: item.items.map((i) => configItemToEntry(i, currentPathname, locale, routes)),
 			collapsed: item.collapsed,
+			badge: item.badge,
 		};
 	}
 }
@@ -101,6 +103,7 @@ function groupFromAutogenerateConfig(
 		label: pickLang(item.translations, localeToLang(locale)) || item.label,
 		entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
 		collapsed: item.collapsed,
+		badge: item.badge,
 	};
 }
 
@@ -231,6 +234,7 @@ function groupFromDir(
 		label: dirName,
 		entries,
 		collapsed,
+		badge: undefined,
 	};
 }
 

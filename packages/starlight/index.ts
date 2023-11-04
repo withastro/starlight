@@ -9,6 +9,7 @@ import { vitePluginStarlightUserConfig } from './integrations/virtual-user-confi
 import { errorMap } from './utils/error-map';
 import { StarlightConfigSchema } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
+import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 
 export default function StarlightIntegration(
@@ -29,6 +30,8 @@ export default function StarlightIntegration(
 				}
 
 				const starlightConfig = parsedConfig.data;
+
+				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
 				injectRoute({
 					pattern: '404',

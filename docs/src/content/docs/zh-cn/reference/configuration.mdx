@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '我的令人愉快的文档网站',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '我的令人愉快的文档网站',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ export default defineConfig({
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -97,23 +97,23 @@ starlight({
 
 ```js
 starlight({
-  sidebar: [
-    // 标记为“Home”的单个链接项。
-    { label: 'Home', link: '/' },
-    // 一个标记为“Start Here”的组，其中包含两个链接。
-    {
-      label: 'Start Here',
-      items: [
-        { label: 'Introduction', link: '/intro' },
-        { label: 'Next Steps', link: '/next-steps' },
-      ],
-    },
-    // 一个链接到参考目录中所有页面的组。
-    {
-      label: 'Reference',
-      autogenerate: { directory: 'reference' },
-    },
-  ],
+	sidebar: [
+		// 标记为“Home”的单个链接项。
+		{ label: 'Home', link: '/' },
+		// 一个标记为“Start Here”的组，其中包含两个链接。
+		{
+			label: 'Start Here',
+			items: [
+				{ label: 'Introduction', link: '/intro' },
+				{ label: 'Next Steps', link: '/next-steps' },
+			],
+		},
+		// 一个链接到参考目录中所有页面的组。
+		{
+			label: 'Reference',
+			autogenerate: { directory: 'reference' },
+		},
+	],
 });
 ```
 
@@ -155,19 +155,19 @@ sidebar: [
 
 ```js
 sidebar: [
-  // 一个侧边栏示例，其中的标签被翻译成法语。
+  // 一个侧边栏示例，其中的标签被翻译成简体中文。
   {
     label: 'Start Here',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'zh-CN': '从这里开始' },
     items: [
       {
         label: 'Getting Started',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'zh-CN': '开始使用' },
         link: '/getting-started',
       },
       {
         label: 'Project Structure',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'zh-CN': '项目结构' },
         link: '/structure',
       },
     ],
@@ -179,19 +179,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -199,14 +199,14 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
 ### `locales`
 
-**类型：** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**类型：** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 为你的网站设置支持的 `locales` 来[配置国际化（i18n）](/zh-cn/guides/i18n/)。
 
@@ -218,29 +218,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Site',
-      // 为这个网站设置英语作为默认语言。
-      defaultLocale: 'en',
-      locales: {
-        // 英文文档在 `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // 简体中文文档在 `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // 阿拉伯文档在 `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Site',
+			// 为这个网站设置英语作为默认语言。
+			defaultLocale: 'en',
+			locales: {
+				// 英文文档在 `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// 简体中文文档在 `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// 阿拉伯文档在 `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -248,9 +248,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -280,15 +280,15 @@ interface LocaleConfig {
 
 ```js
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -306,25 +306,27 @@ starlight({
 
 ### `social`
 
-**类型：** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**类型：** <SocialLinksType />
 
 可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -338,7 +340,7 @@ starlight({
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -351,17 +353,17 @@ starlight({
 
 ```js
 starlight({
-  head: [
-    // 示例：添加 Fathom 分析脚本标签。
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// 示例：添加 Fathom 分析脚本标签。
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -369,9 +371,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -443,9 +445,9 @@ starlight({
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 

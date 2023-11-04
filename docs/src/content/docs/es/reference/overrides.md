@@ -121,7 +121,7 @@ Tabla de contenidos para esta página si está habilitada.
 **Tipo:** `{ depth: number; slug: string; text: string }[]`
 
 Array de todos los encabezados Markdown extraídos de la página actual.
-Usa [`toc`](#toc) en su lugar si deseas construir una tabla de contenidos que respete las opciones de configuración de Starlight.
+Usa [`toc`](#toc) en su lugar si deseas construir un componente de tabla de contenidos que respete las opciones de configuración de Starlight.
 
 #### `lastUpdated`
 

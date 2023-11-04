@@ -120,7 +120,7 @@ Table of contents for this page if enabled.
 **Type:** `{ depth: number; slug: string; text: string }[]`
 
 Array of all Markdown headings extracted from the current page.
-Use [`toc`](#toc) instead if you want to build a table of contents that respects Starlight’s configuration options.
+Use [`toc`](#toc) instead if you want to build a table of contents component that respects Starlight’s configuration options.
 
 #### `lastUpdated`
 

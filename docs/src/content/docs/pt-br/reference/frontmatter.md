@@ -208,11 +208,38 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**tipo:** `boolean`  
+**padrão:** `true`
+
+Configura se essa página deve ou não ser inclusa no índice de busca do [Pagefind](https://pagefind.app/).
+Defina como `false` para excluir a página do resultado de buscas.
+
+```md
+---
+# Não exibir essa página nas buscas
+pagefind: false
+---
+```
+
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**tipo:** [`SidebarConfig`](#sidebarconfig)
 
 Controla como essa página é mostrada na [barra lateral](/pt-br/reference/configuration/#sidebar), quando se utiliza um grupo de links gerados automaticamente.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -283,5 +310,21 @@ sidebar:
   badge:
     text: Experimental
     variant: caution
+---
+```
+
+#### `attrs`
+
+**tipo:** `Record<string, string | number | boolean | undefined>`
+
+Atributos HTML que será adicionado ao link da barra lateral da página quando exibido em um grupo de link gerados automaticamente.
+
+```md
+---
+title: Abrir em nova aba
+sidebar:
+  # Abre a página em uma nova aba
+  attrs:
+    target: _blank
 ---
 ```

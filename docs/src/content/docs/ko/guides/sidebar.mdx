@@ -236,7 +236,7 @@ sidebar:
 
 ## 배지
 
-링크 라벨 옆에 배지를 표시하기 위해 링크에는 `badge` 속성이 포함될 수도 있습니다.
+링크, 그룹, 자동 생성된 그룹은 라벨 옆에 배지를 표시하기 위해 `badge` 속성을 포함할 수도 있습니다.
 
 ```js
 starlight({
@@ -251,6 +251,12 @@ starlight({
 					badge: 'New',
 				},
 			],
+		},
+		// "Deprecated" 배지가 포함된 자동 생성된 그룹
+		{
+			label: '참조',
+			badge: 'Deprecated',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -267,6 +273,24 @@ starlight({
 					label: '컴포넌트',
 					link: '/ko/guides/components/',
 					badge: { text: 'New', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: '참조',
+			badge: { text: 'Deprecated', variant: 'default' },
+			items: [
+				{
+					label: '구성 참조',
+					link: '/reference/configuration/',
+				},
+				{
+					label: '프론트매터 참조',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: '재정의 참조',
+					link: '/reference/overrides/',
 				},
 			],
 		},
@@ -362,7 +386,7 @@ starlight({
 
 ## 국제화
 
-링크 또는 그룹의 라벨을 지원되는 각 언어로 번역하기 위해 링크 및 그룹 항목에 `translations` 속성을 사용할 수 있습니다.
+[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 언어 태그를 지정하여 지원되는 각 언어에 대한 링크 또는 그룹 라벨을 번역하려면 링크 및 그룹 항목의 `translations` 속성을 사용하세요. `"en"`, `"ar"` 또는 `"zh-CN"`을 키로, 번역된 라벨을 값으로 사용합니다.
 `label` 속성은 기본 언어 및 번역이 제공되지 않는 언어를 위해 사용될 것입니다.
 
 ```js
@@ -371,20 +395,20 @@ starlight({
 		{
 			label: '가이드',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: '컴포넌트',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/ko/guides/components/',
 				},
 				{
 					label: '국제화 (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/ko/guides/i18n/',
 				},
@@ -394,15 +418,15 @@ starlight({
 });
 ```
 
-스페인어로 문서를 검색하면 다음 사이드바가 생성됩니다.
+브라질 포르투갈어로 문서를 검색하면 다음 사이드바가 생성됩니다.
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/es/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br//guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}

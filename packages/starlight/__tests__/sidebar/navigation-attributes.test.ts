@@ -13,6 +13,8 @@ vi.mock('astro:content', async () =>
 					sidebar: { attrs: { class: 'advanced', ping: 'https://example.com' } },
 				},
 			],
+			// @ts-expect-error — Using a slug not present in Starlight docs site
+			['api/v1/users.md', { title: 'Users API' }],
 		],
 	})
 );
@@ -30,6 +32,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
@@ -70,6 +73,10 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": {
+			      "text": "Experimental",
+			      "variant": "default",
+			    },
 			    "collapsed": false,
 			    "entries": [
 			      {
@@ -85,6 +92,22 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "Reference",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/api/v1/users/",
+			        "isCurrent": false,
+			        "label": "Users API",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API v1",
 			    "type": "group",
 			  },
 			]
