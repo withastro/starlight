@@ -1,50 +1,86 @@
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
 import { z } from 'astro/zod';
-import type { StarlightUserConfig } from '../utils/user-config';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { errorMap } from '../utils/error-map';
 
 /**
- * Runs Starlight plugins in the order that they are configured after validating the plugins config
- * and returns the final user config that may have been updated by the plugins and a list of any
- * integrations added by the plugins.
- * Note that the returned config is not validated and should still be validated by the caller.
+ * Runs Starlight plugins in the order that they are configured after validating the user-provided
+ * configuration and returns the final validated user config that may have been updated by the
+ * plugins and a list of any integrations added by the plugins.
  */
 export async function runPlugins(
-	{ plugins, ...config }: StarlightUserConfigWithPlugins,
+	starlightUserConfig: StarlightUserConfig,
+	pluginsUserConfig: StarlightPluginsUserConfig,
 	logger: AstroIntegrationLogger
 ) {
-	const parsedPluginsConfig = starlightPluginsConfigSchema.safeParse({ plugins }, { errorMap });
+	// Validate the user-provided configuration.
+	let userConfig = starlightUserConfig;
+	let starlightConfig = StarlightConfigSchema.safeParse(userConfig, { errorMap });
 
-	if (!parsedPluginsConfig.success) {
-		throw new Error(
-			'Invalid plugins config passed to starlight integration\n' +
-				parsedPluginsConfig.error.issues.map((i) => i.message).join('\n')
+	if (!starlightConfig.success) {
+		throwValidationError(starlightConfig.error, 'Invalid config passed to starlight integration');
+	}
+
+	// Validate the user-provided plugins configuration.
+	const pluginsConfig = starlightPluginsConfigSchema.safeParse(pluginsUserConfig, {
+		errorMap,
+	});
+
+	if (!pluginsConfig.success) {
+		throwValidationError(
+			pluginsConfig.error,
+			'Invalid plugins config passed to starlight integration'
 		);
 	}
 
-	let userConfig = config;
+	// A list of Astro integrations added by the various plugins.
 	const integrations: AstroIntegration[] = [];
 
 	for (const {
 		name,
 		hooks: { setup },
-	} of parsedPluginsConfig.data.plugins) {
+	} of pluginsConfig.data) {
 		await setup({
 			config: userConfig,
 			logger: logger.fork(name),
 			updateConfig(newConfig) {
-				userConfig = { ...userConfig, ...newConfig };
+				// Ensure that plugins do not update the `plugins` config key.
+				if ('plugins' in newConfig) {
+					throw new Error(
+						`The '${name}' plugin tried to update the 'plugins' config key which is not supported.`
+					);
+				}
+
+				// If the plugin is updating the user config, re-validate it.
+				const mergedUserConfig = { ...userConfig, ...newConfig };
+				const mergedConfig = StarlightConfigSchema.safeParse(mergedUserConfig, { errorMap });
+
+				if (!mergedConfig.success) {
+					throwValidationError(
+						mergedConfig.error,
+						`Invalid config update provided by the '${name}' plugin`
+					);
+				}
+
+				// If the updated config is valid, keep track of both the user config and parsed config.
+				userConfig = mergedUserConfig;
+				starlightConfig = mergedConfig;
 			},
 			addIntegration(integration) {
+				// Collect any Astro integrations added by the plugin.
 				integrations.push(integration);
 			},
 		});
 	}
 
-	return { integrations, userConfig };
+	return { integrations, starlightConfig: starlightConfig.data };
 }
 
-// https://github.com/withastro/astro/blob/144815c6ff295fe54eef3c641ad929e3c7b2b2fd/packages/astro/src/core/config/schema.ts#L101
+function throwValidationError(error: z.ZodError, message: string): never {
+	throw new Error(`${message}\n${error.issues.map((i) => i.message).join('\n')}`);
+}
+
+// https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113
 const astroIntegrationSchema = z.object({
 	name: z.string(),
 	hooks: z.object({}).passthrough().default({}),
@@ -134,7 +170,13 @@ const starlightPluginSchema = z.object({
 	}),
 });
 
-const starlightPluginsConfigSchema = z.object({
+const starlightPluginsConfigSchema = z.array(starlightPluginSchema).default([]);
+
+type StarlightPluginsUserConfig = z.input<typeof starlightPluginsConfigSchema>;
+
+export type StarlightPlugin = z.input<typeof starlightPluginSchema>;
+
+export type StarlightUserConfigWithPlugins = StarlightUserConfig & {
 	/**
 	 * A list of plugins to extend Starlight with.
 	 *
@@ -144,10 +186,5 @@ const starlightPluginsConfigSchema = z.object({
 	 * 	plugins: [starlightAlgolia({ … })],
 	 * })
 	 */
-	plugins: z.array(starlightPluginSchema).default([]),
-});
-
-type StarlightPluginsUserConfig = z.input<typeof starlightPluginsConfigSchema>;
-
-export type StarlightPlugin = z.input<typeof starlightPluginSchema>;
-export type StarlightUserConfigWithPlugins = StarlightUserConfig & StarlightPluginsUserConfig;
+	plugins?: StarlightPluginsUserConfig;
+};

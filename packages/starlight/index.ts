@@ -6,30 +6,20 @@ import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 
-export default function StarlightIntegration(
-	opts: StarlightUserConfigWithPlugins
-): AstroIntegration {
+export default function StarlightIntegration({
+	plugins,
+	...opts
+}: StarlightUserConfigWithPlugins): AstroIntegration {
 	return {
 		name: '@astrojs/starlight',
 		hooks: {
 			'astro:config:setup': async ({ config, injectRoute, logger, updateConfig }) => {
-				const { integrations, userConfig } = await runPlugins(opts, logger);
-				const parsedConfig = StarlightConfigSchema.safeParse(userConfig, { errorMap });
-
-				if (!parsedConfig.success) {
-					throw new Error(
-						'Invalid config passed to starlight integration\n' +
-							parsedConfig.error.issues.map((i) => i.message).join('\n')
-					);
-				}
-
-				const starlightConfig = parsedConfig.data;
+				// Run plugins to get the final configuration and any extra Astro integrations to load.
+				const { integrations, starlightConfig } = await runPlugins(opts, plugins, logger);
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 

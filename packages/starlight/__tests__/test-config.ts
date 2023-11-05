@@ -3,17 +3,14 @@
 import type { AstroIntegrationLogger } from 'astro';
 import { getViteConfig } from 'astro/config';
 import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
-import { StarlightConfigSchema } from '../utils/user-config';
 import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
 
-export async function defineVitestConfig(config: StarlightUserConfigWithPlugins) {
+export async function defineVitestConfig({ plugins, ...opts }: StarlightUserConfigWithPlugins) {
 	const root = new URL('./', import.meta.url);
 	const srcDir = new URL('./src/', root);
-	const { userConfig } = await runPlugins(config, new TestAstroIntegrationLogger());
+	const { starlightConfig } = await runPlugins(opts, plugins, new TestAstroIntegrationLogger());
 	return getViteConfig({
-		plugins: [
-			vitePluginStarlightUserConfig(StarlightConfigSchema.parse(userConfig), { root, srcDir }),
-		],
+		plugins: [vitePluginStarlightUserConfig(starlightConfig, { root, srcDir })],
 	});
 }
 

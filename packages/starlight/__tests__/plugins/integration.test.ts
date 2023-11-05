@@ -15,29 +15,27 @@ test('returns all integrations added by plugins without deduping them', async ()
 	};
 
 	const { integrations } = await runPlugins(
-		{
-			title: 'Test Docs',
-			plugins: [
-				{
-					name: 'test-plugin-1',
-					hooks: {
-						setup({ addIntegration, updateConfig }) {
-							updateConfig({ description: 'test' });
-							addIntegration(integration1);
-						},
+		{ title: 'Test Docs' },
+		[
+			{
+				name: 'test-plugin-1',
+				hooks: {
+					setup({ addIntegration, updateConfig }) {
+						updateConfig({ description: 'test' });
+						addIntegration(integration1);
 					},
 				},
-				{
-					name: 'test-plugin-1',
-					hooks: {
-						setup({ addIntegration }) {
-							addIntegration(integration1);
-							addIntegration(integration2);
-						},
+			},
+			{
+				name: 'test-plugin-2',
+				hooks: {
+					setup({ addIntegration }) {
+						addIntegration(integration1);
+						addIntegration(integration2);
 					},
 				},
-			],
-		},
+			},
+		],
 		new TestAstroIntegrationLogger()
 	);
 

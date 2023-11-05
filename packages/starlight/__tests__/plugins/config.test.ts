@@ -1,4 +1,4 @@
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { getSidebar } from '../../utils/navigation';
 import { runPlugins } from '../../utils/plugins';
@@ -25,21 +25,54 @@ test('receives the user provided configuration without any Zod `transform`s appl
 	expect(config.favicon.href).toBe('valid.svg');
 });
 
+describe('validation', () => {
+	test('validates starlight configuration before running plugins', async () => {
+		expect(
+			async () =>
+				await runPlugins(
+					// @ts-expect-error - invalid sidebar config.
+					{ title: 'Test Docs', sidebar: true },
+					[],
+					new TestAstroIntegrationLogger()
+				)
+		).rejects.toThrowError(/Invalid config passed to starlight integration/);
+	});
+
+	test('validates plugins configuration before running them', async () => {
+		expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					// @ts-expect-error - invalid plugin with no `hooks` defined.
+					[{ name: 'invalid-plugin' }],
+					new TestAstroIntegrationLogger()
+				)
+		).rejects.toThrowError(/Invalid plugins config passed to starlight integration/);
+	});
+
+	test('validates configuration updates from plugins', async () => {
+		expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					[
+						{
+							name: 'test-plugin',
+							hooks: {
+								setup: ({ updateConfig }) => {
+									// @ts-expect-error - invalid sidebar config update.
+									updateConfig({ description: true });
+								},
+							},
+						},
+					],
+					new TestAstroIntegrationLogger()
+				)
+		).rejects.toThrowError(/Invalid config update provided by the 'test-plugin' plugin/);
+	});
+});
+
 test('does not expose plugins to the config virtual module', () => {
 	// @ts-expect-error - plugins are not serializable and thus not in the config virtual module.
 	expect(config.plugins).not.toBeDefined();
-});
-
-test('validates plugins configuration before running them', async () => {
-	expect(
-		async () =>
-			await runPlugins(
-				{
-					title: 'Test Docs',
-					// @ts-expect-error - invalid integration with no `plugin` callback.
-					plugins: [{ name: 'plugin-with-invalid-integration' }],
-				},
-				new TestAstroIntegrationLogger()
-			)
-	).rejects.toThrowError(/Invalid plugins config/);
 });
