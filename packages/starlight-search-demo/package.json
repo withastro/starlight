@@ -18,6 +18,8 @@
     "./overrides/Search.astro": "./overrides/Search.astro"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.11.1"
+    "@astrojs/preact": ">=3",
+    "@astrojs/starlight": ">=0.11.1",
+    "preact": ">=10"
   }
 }

@@ -1,3 +1,4 @@
+import preact from '@astrojs/preact';
 import type { StarlightPlugin } from '@astrojs/starlight/types';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
 
@@ -6,7 +7,7 @@ export default function starlightSearchDemo(opts: StarlightSearchDemoConfig): St
 	return {
 		name: 'starlight-search-demo',
 		hooks: {
-			setup({ addIntegration, config, logger, updateConfig }) {
+			setup({ addIntegration, astroConfig, config, logger, updateConfig }) {
 				// If the user has already has a custom override for the Search component, don't override it.
 				if (config.components?.Search) {
 					if (!opts.ignoreComponentOverridesWarning) {
@@ -24,6 +25,11 @@ export default function starlightSearchDemo(opts: StarlightSearchDemoConfig): St
 							Search: '@astrojs/starlight-search-demo/overrides/Search.astro',
 						},
 					});
+				}
+
+				// Add the Preact integration only if it's not already added.
+				if (!astroConfig.integrations.find(({ name }) => name === '@astrojs/preact')) {
+					addIntegration(preact({ compat: true }));
 				}
 
 				// Add a custom Astro integration that will inject a Vite plugin to expose the Starlight

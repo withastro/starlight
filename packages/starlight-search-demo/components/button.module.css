@@ -1,0 +1,6 @@
+.button {
+	background-color: oklch(46.47% 0.183 148.76);
+	border: 2px solid oklch(38.24% 0.165 145.58);
+	color: oklch(100% 0 0);
+	white-space: nowrap;
+}
