@@ -25,6 +25,31 @@ test('receives the user provided configuration without any Zod `transform`s appl
 	expect(config.favicon.href).toBe('valid.svg');
 });
 
+test.only('receives the user provided configuration including the plugins list', async () => {
+	expect.assertions(1);
+
+	await runPlugins(
+		{ title: 'Test Docs' },
+		[
+			{ name: 'test-plugin-1', hooks: { setup: () => {} } },
+			{ name: 'test-plugin-2', hooks: { setup: () => {} } },
+			{
+				name: 'test-plugin-3',
+				hooks: {
+					setup: ({ config }) => {
+						expect(config.plugins?.map(({ name }) => name)).toMatchObject([
+							'test-plugin-1',
+							'test-plugin-2',
+							'test-plugin-3',
+						]);
+					},
+				},
+			},
+		],
+		new TestAstroIntegrationLogger()
+	);
+});
+
 describe('validation', () => {
 	test('validates starlight configuration before running plugins', async () => {
 		expect(
@@ -48,6 +73,29 @@ describe('validation', () => {
 					new TestAstroIntegrationLogger()
 				)
 		).rejects.toThrowError(/Invalid plugins config passed to starlight integration/);
+	});
+
+	test('validates configuration updates from plugins do not update the `plugins` config key', async () => {
+		expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					[
+						{
+							name: 'test-plugin',
+							hooks: {
+								setup: ({ updateConfig }) => {
+									// @ts-expect-error - plugins cannot update the `plugins` config key.
+									updateConfig({ plugins: [{ name: 'invalid-plugin' }] });
+								},
+							},
+						},
+					],
+					new TestAstroIntegrationLogger()
+				)
+		).rejects.toThrowError(
+			/The 'test-plugin' plugin tried to update the 'plugins' config key which is not supported./
+		);
 	});
 
 	test('validates configuration updates from plugins', async () => {

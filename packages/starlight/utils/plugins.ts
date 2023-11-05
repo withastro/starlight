@@ -41,7 +41,7 @@ export async function runPlugins(
 		hooks: { setup },
 	} of pluginsConfig.data) {
 		await setup({
-			config: userConfig,
+			config: pluginsUserConfig ? { ...userConfig, plugins: pluginsUserConfig } : userConfig,
 			logger: logger.fork(name),
 			updateConfig(newConfig) {
 				// Ensure that plugins do not update the `plugins` config key.
@@ -86,15 +86,17 @@ const astroIntegrationSchema = z.object({
 	hooks: z.object({}).passthrough().default({}),
 }) as z.Schema<AstroIntegration>;
 
+const baseStarlightPluginSchema = z.object({
+	/** Name of the Starlight plugin. */
+	name: z.string(),
+});
+
 /**
  * A plugin `config` and `updateConfig` argument are purposely not validated using the Starlight
  * user config schema but properly typed for user convenience because we do not want to run any of
  * the Zod `transform`s used in the user config schema when running plugins.
- * The final user config should be validated by the caller after running all the plugins.
  */
-const starlightPluginSchema = z.object({
-	/** Name of the Starlight plugin. */
-	name: z.string(),
+const starlightPluginSchema = baseStarlightPluginSchema.extend({
 	/** The different hooks available to the plugin. */
 	hooks: z.object({
 		/**
@@ -110,7 +112,10 @@ const starlightPluginSchema = z.object({
 					 * Note that this configuration may have been updated by other plugins configured
 					 * before this one.
 					 */
-					config: z.any() as z.Schema<StarlightUserConfig>,
+					config: z.any() as z.Schema<
+						// The configuration passed to plugins should contains the list of plugins.
+						StarlightUserConfig & { plugins?: z.input<typeof baseStarlightPluginSchema>[] }
+					>,
 					/**
 					 * A callback function to update the user-supplied Starlight configuration.
 					 *
