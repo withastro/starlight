@@ -1,4 +1,4 @@
-import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
+import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { errorMap } from '../utils/error-map';
@@ -11,7 +11,7 @@ import { errorMap } from '../utils/error-map';
 export async function runPlugins(
 	starlightUserConfig: StarlightUserConfig,
 	pluginsUserConfig: StarlightPluginsUserConfig,
-	logger: AstroIntegrationLogger
+	context: StarlightPluginContext
 ) {
 	// Validate the user-provided configuration.
 	let userConfig = starlightUserConfig;
@@ -42,7 +42,6 @@ export async function runPlugins(
 	} of pluginsConfig.data) {
 		await setup({
 			config: pluginsUserConfig ? { ...userConfig, plugins: pluginsUserConfig } : userConfig,
-			logger: logger.fork(name),
 			updateConfig(newConfig) {
 				// Ensure that plugins do not update the `plugins` config key.
 				if ('plugins' in newConfig) {
@@ -70,6 +69,10 @@ export async function runPlugins(
 				// Collect any Astro integrations added by the plugin.
 				integrations.push(integration);
 			},
+			astroConfig: context.config,
+			command: context.command,
+			isRestart: context.isRestart,
+			logger: context.logger.fork(name),
 		});
 	}
 
@@ -139,13 +142,6 @@ const starlightPluginSchema = baseStarlightPluginSchema.extend({
 						z.void()
 					),
 					/**
-					 * An instance of the Astro integration logger with all logged messages prefixed with the
-					 * plugin name.
-					 *
-					 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
-					 */
-					logger: z.any() as z.Schema<AstroIntegrationLogger>,
-					/**
 					 * A callback function to add an Astro integration required by this plugin.
 					 *
 					 * @see https://docs.astro.build/en/reference/integrations-reference/
@@ -168,6 +164,33 @@ const starlightPluginSchema = baseStarlightPluginSchema.extend({
 					 * }
 					 */
 					addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
+					/**
+					 * A read-only copy of the user-supplied Astro configuration.
+					 *
+					 * Note that this configuration is resolved before any other integrations have run.
+					 *
+					 * @see https://docs.astro.build/en/reference/integrations-reference/#config-option
+					 */
+					astroConfig: z.any() as z.Schema<StarlightPluginContext['config']>,
+					/**
+					 * The command used to run Starlight.
+					 *
+					 * @see https://docs.astro.build/en/reference/integrations-reference/#command-option
+					 */
+					command: z.any() as z.Schema<StarlightPluginContext['command']>,
+					/**
+					 * `false` when the dev server starts, `true` when a reload is triggered.
+					 *
+					 * @see https://docs.astro.build/en/reference/integrations-reference/#isrestart-option
+					 */
+					isRestart: z.any() as z.Schema<StarlightPluginContext['isRestart']>,
+					/**
+					 * An instance of the Astro integration logger with all logged messages prefixed with the
+					 * plugin name.
+					 *
+					 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
+					 */
+					logger: z.any() as z.Schema<StarlightPluginContext['logger']>,
 				}),
 			]),
 			z.union([z.void(), z.promise(z.void())])
@@ -193,3 +216,8 @@ export type StarlightUserConfigWithPlugins = StarlightUserConfig & {
 	 */
 	plugins?: StarlightPluginsUserConfig;
 };
+
+export type StarlightPluginContext = Pick<
+	Parameters<NonNullable<AstroIntegration['hooks']['astro:config:setup']>>[0],
+	'command' | 'config' | 'isRestart' | 'logger'
+>;

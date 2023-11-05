@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { getSidebar } from '../../utils/navigation';
 import { runPlugins } from '../../utils/plugins';
-import { TestAstroIntegrationLogger } from '../test-config';
+import { createTestPluginContext } from '../test-config';
 
 test('reads and updates a configuration option', () => {
 	expect(config.title).toBe('Plugins - Custom');
@@ -25,7 +25,7 @@ test('receives the user provided configuration without any Zod `transform`s appl
 	expect(config.favicon.href).toBe('valid.svg');
 });
 
-test.only('receives the user provided configuration including the plugins list', async () => {
+test('receives the user provided configuration including the plugins list', async () => {
 	expect.assertions(1);
 
 	await runPlugins(
@@ -46,7 +46,7 @@ test.only('receives the user provided configuration including the plugins list',
 				},
 			},
 		],
-		new TestAstroIntegrationLogger()
+		createTestPluginContext()
 	);
 });
 
@@ -58,7 +58,7 @@ describe('validation', () => {
 					// @ts-expect-error - invalid sidebar config.
 					{ title: 'Test Docs', sidebar: true },
 					[],
-					new TestAstroIntegrationLogger()
+					createTestPluginContext()
 				)
 		).rejects.toThrowError(/Invalid config passed to starlight integration/);
 	});
@@ -70,7 +70,7 @@ describe('validation', () => {
 					{ title: 'Test Docs' },
 					// @ts-expect-error - invalid plugin with no `hooks` defined.
 					[{ name: 'invalid-plugin' }],
-					new TestAstroIntegrationLogger()
+					createTestPluginContext()
 				)
 		).rejects.toThrowError(/Invalid plugins config passed to starlight integration/);
 	});
@@ -91,7 +91,7 @@ describe('validation', () => {
 							},
 						},
 					],
-					new TestAstroIntegrationLogger()
+					createTestPluginContext()
 				)
 		).rejects.toThrowError(
 			/The 'test-plugin' plugin tried to update the 'plugins' config key which is not supported./
@@ -114,7 +114,7 @@ describe('validation', () => {
 							},
 						},
 					],
-					new TestAstroIntegrationLogger()
+					createTestPluginContext()
 				)
 		).rejects.toThrowError(/Invalid config update provided by the 'test-plugin' plugin/);
 	});

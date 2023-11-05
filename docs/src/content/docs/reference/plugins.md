@@ -18,6 +18,9 @@ interface StarlightPlugin {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
+      astroConfig: AstroConfig;
+      command: 'dev' | 'build' | 'preview';
+      isRestart: boolean;
       logger: AstroIntegrationLogger;
     }) => void | Promise<void>;
   };
@@ -75,11 +78,41 @@ import react from '@astrojs/react';
 
 export default {
   name: 'plugin-using-react',
-  plugin({ addIntegration }) {
-    addIntegration(react());
+  plugin({ addIntegration, astroConfig }) {
+    const isReactLoaded = astroConfig.integrations.find(
+      ({ name }) => name === '@astrojs/react'
+    );
+
+    // Only add the React integration if it's not already loaded.
+    if (!isReactLoaded) {
+      addIntegration(react());
+    }
   },
 };
 ```
+
+### `astroConfig`
+
+**type:** `AstroConfig`
+
+A read-only copy of the user-supplied [Astro configuration](https://docs.astro.build/en/reference/configuration-reference/).
+This configuration is resolved before any other integrations have run.
+
+### `command`
+
+**type:** `'dev' | 'build' | 'preview'`
+
+The command used to run Starlight:
+
+- `dev` - Project is executed with `astro dev`
+- `build` - Project is executed with `astro build`
+- `preview` - Project is executed with `astro preview`
+
+### `isRestart`
+
+**type:** `boolean`
+
+`false` when the dev server starts, `true` when a reload is triggered.
 
 ### `logger`
 

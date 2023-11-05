@@ -17,9 +17,21 @@ export default function StarlightIntegration({
 	return {
 		name: '@astrojs/starlight',
 		hooks: {
-			'astro:config:setup': async ({ config, injectRoute, logger, updateConfig }) => {
+			'astro:config:setup': async ({
+				command,
+				config,
+				injectRoute,
+				isRestart,
+				logger,
+				updateConfig,
+			}) => {
 				// Run plugins to get the final configuration and any extra Astro integrations to load.
-				const { integrations, starlightConfig } = await runPlugins(opts, plugins, logger);
+				const { integrations, starlightConfig } = await runPlugins(opts, plugins, {
+					command,
+					config,
+					isRestart,
+					logger,
+				});
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 

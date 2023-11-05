@@ -1,7 +1,7 @@
 import type { AstroIntegration } from 'astro';
 import { expect, test } from 'vitest';
 import { runPlugins } from '../../utils/plugins';
-import { TestAstroIntegrationLogger } from '../test-config';
+import { createTestPluginContext } from '../test-config';
 
 test('returns all integrations added by plugins without deduping them', async () => {
 	const integration1: AstroIntegration = {
@@ -36,7 +36,7 @@ test('returns all integrations added by plugins without deduping them', async ()
 				},
 			},
 		],
-		new TestAstroIntegrationLogger()
+		createTestPluginContext()
 	);
 
 	expect(integrations).toMatchObject([
