@@ -243,7 +243,7 @@ interface SidebarConfig {
 #### `label`
 
 **type:** `string`  
-**default:** the page [`title`](#title-required)
+**default:** the page [`title`](#title-obbligatorio)
 
 Imposta l'etichetta per questa pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 
