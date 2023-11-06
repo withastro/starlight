@@ -7,6 +7,7 @@ import ja from './ja.json';
 import pt from './pt.json';
 import fa from './fa.json';
 import fr from './fr.json';
+import gl from './gl.json';
 import he from './he.json';
 import id from './id.json';
 import it from './it.json';
@@ -34,6 +35,7 @@ export default Object.fromEntries(
 		pt,
 		fa,
 		fr,
+		gl,
 		he,
 		id,
 		it,

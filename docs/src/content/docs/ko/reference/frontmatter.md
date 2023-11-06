@@ -109,20 +109,44 @@ hero:
 ---
 ```
 
+밝은 모드와 어두운 모드에서 다양한 버전의 hero 이미지를 표시할 수 있습니다.
+
+```md
+---
+hero:
+  image:
+    alt: 반짝이는 밝은 색상의 로고
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // 저장소에 있는 이미지의 상대 경로입니다.
-    file?: string;
-    // 이미지 슬롯에 사용할 Raw HTML입니다.
-    // 사용자 정의 `<img>` 태그 또는 인라인 `<svg>`일 수 있습니다.
-    html?: string;
-  };
+  image?:
+    | {
+        // 저장소에 있는 이미지의 상대 경로입니다.
+        file: string;
+        // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
+        alt?: string;
+      }
+    | {
+        // 어두운 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
+        dark: string;
+        // 밝은 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
+        light: string;
+        // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
+        alt?: string;
+      }
+    | {
+        // 이미지 슬롯에 사용할 원시 HTML입니다.
+        // 사용자 정의 `<img>` 태그 또는 인라인 `<svg>` 태그일 수 있습니다.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;

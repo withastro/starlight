@@ -1,5 +1,28 @@
 # @astrojs/starlight
 
+## 0.12.0
+
+### Minor Changes
+
+- [#995](https://github.com/withastro/starlight/pull/995) [`5bf4457`](https://github.com/withastro/starlight/commit/5bf44577634935b9fa6d50b040abcd680035075f) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Adds support for adding sidebar badges to group headings
+
+- [#988](https://github.com/withastro/starlight/pull/988) [`977fe13`](https://github.com/withastro/starlight/commit/977fe135a74661300589898abe98aec73cad9ed3) Thanks [@magicDGS](https://github.com/magicDGS)! - Include social icon links in mobile menu
+
+- [#280](https://github.com/withastro/starlight/pull/280) [`72cca2d`](https://github.com/withastro/starlight/commit/72cca2d07644f00595da6ebf7d603adb282f359d) Thanks [@cbontems](https://github.com/cbontems)! - Support light & dark variants of the hero image.
+
+  ⚠️ **Potentially breaking change:** The `hero.image` schema is now slightly stricter than previously.
+
+  The `hero.image.html` property can no longer be used alongside the `hero.image.alt` or `hero.image.file` properties.
+  Previously, `html` was ignored when used with `file` and `alt` was ignored when used with `html`.
+  Now, those combinations will throw errors.
+  If you encounter errors, remove the `image.hero` property that is not in use.
+
+### Patch Changes
+
+- [#1004](https://github.com/withastro/starlight/pull/1004) [`7f92213`](https://github.com/withastro/starlight/commit/7f92213a0b93de5a844816841a6bc9cdd371de0c) Thanks [@nunhes](https://github.com/nunhes)! - Add Galician language support
+
+- [#1003](https://github.com/withastro/starlight/pull/1003) [`f1fdb50`](https://github.com/withastro/starlight/commit/f1fdb50daebe79548c7789d3f7dd968b261d2da7) Thanks [@delucis](https://github.com/delucis)! - Internal: refactor translation string loading to make translations available to Starlight integration code
+
 ## 0.11.2
 
 ### Patch Changes
