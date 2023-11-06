@@ -26,22 +26,22 @@ const trailingSlashStrategies = {
 };
 
 export function formatPath(href: string, opts?: FormatPathOptions) {
-  const options = {
-    format: opts?.format ?? 'directory',
-    trailingSlash: opts?.trailingSlash ?? 'ignore',
-  };
+	const options = {
+		format: opts?.format ?? 'directory',
+		trailingSlash: opts?.trailingSlash ?? 'ignore',
+	};
 
-  const formatStrategy = formatStrategies[options.format];
+	const formatStrategy = formatStrategies[options.format];
 	const trailingSlashStrategy = trailingSlashStrategies[options.trailingSlash];
 
-  // Add base
-  href = formatStrategy.addBase(href);
+	// Add base
+	href = formatStrategy.addBase(href);
 
-  // Handle extension
-  href = formatStrategy.handleExtension(href);
+	// Handle extension
+	href = formatStrategy.handleExtension(href);
 
-  // Handle trailing slash
-  href = href ? trailingSlashStrategy(href) : '/';
+	// Handle trailing slash
+	href = href === '/' ? href : trailingSlashStrategy(href);
 
-  return href;
+	return href;
 }

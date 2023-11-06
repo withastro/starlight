@@ -1,8 +1,7 @@
 import { describe, expect, test } from 'vitest';
-import { formatPath } from '../../utils/format';
+import { formatPath } from '../../utils/format-path';
 
 describe('formatPath() - { format: "file" - trailingSlash: "ignore" }', () => {
-
 	const opts = {
 		format: 'file',
 		trailingSlash: 'ignore',
@@ -44,7 +43,6 @@ describe('formatPath() - { format: "file" - trailingSlash: "ignore" }', () => {
 });
 
 describe('formatPath() - { format: "file" , trailingSlash: "always" }', () => {
-
 	const opts = {
 		format: 'file',
 		trailingSlash: 'always',
@@ -85,9 +83,7 @@ describe('formatPath() - { format: "file" , trailingSlash: "always" }', () => {
 	});
 });
 
-
 describe('formatPath() - { format: "file" , trailingSlash: "never" }', () => {
-
 	const opts = {
 		format: 'file',
 		trailingSlash: 'never',
@@ -129,7 +125,6 @@ describe('formatPath() - { format: "file" , trailingSlash: "never" }', () => {
 });
 
 describe('formatPath() - { format: "directory" , trailingSlash: "always" }', () => {
-
 	const opts = {
 		format: 'directory',
 		trailingSlash: 'always',
@@ -171,7 +166,6 @@ describe('formatPath() - { format: "directory" , trailingSlash: "always" }', () 
 });
 
 describe('formatPath() - { format: "directory" , trailingSlash: "never" }', () => {
-
 	const opts = {
 		format: 'directory',
 		trailingSlash: 'never',
@@ -213,7 +207,6 @@ describe('formatPath() - { format: "directory" , trailingSlash: "never" }', () =
 });
 
 describe('formatPath() - { format: "directory" , trailingSlash: "ignore" }', () => {
-
 	const opts = {
 		format: 'directory',
 		trailingSlash: 'ignore',
@@ -228,22 +221,22 @@ describe('formatPath() - { format: "directory" , trailingSlash: "ignore" }', () 
 		{
 			// with trailing slash
 			path: '/reference/configuration/',
-			expected: '/reference/configuration',
+			expected: '/reference/configuration/',
 		},
 		{
 			// without trailing slash
 			path: '/api/v1/users',
-			expected: '/api/v1/users',
+			expected: '/api/v1/users/',
 		},
 		{
 			// with file extension
 			path: '/guides/components.html',
-			expected: '/guides/components',
+			expected: '/guides/components/',
 		},
 		{
 			// with file extension and trailing slash
 			path: '/guides/components.html/',
-			expected: '/guides/components',
+			expected: '/guides/components/',
 		},
 	];
 

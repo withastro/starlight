@@ -3,7 +3,7 @@ import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import { pickLang } from './i18n';
-import { formatPath } from './format';
+import { formatPath } from './format-path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import {
@@ -357,7 +357,7 @@ function applyPrevNextLinkConfig(
 /** Remove the extension from a path. */
 export function stripExtension(path: string) {
 	path = stripTrailingSlash(path);
-	return path.replace(/\.\w+$/, '');
+	return path ? path.replace(/\.\w+$/, '') + '/' : '/';
 }
 
 /** Add '.html' extension to a path. */
