@@ -66,9 +66,10 @@ function getToC({ entry, locale, headings }: PageProps) {
 	};
 }
 
-function getLastUpdated({ entry, id }: PageProps): Date | undefined {
+function getLastUpdated({ entry, id, isFallback }: PageProps): Date | undefined {
 	if (entry.data.lastUpdated ?? config.lastUpdated) {
-		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + id, project.root));
+		const currentId = isFallback ? localizedId(id, config.defaultLocale.locale) : id;
+		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + currentId, project.root));
 		let date = typeof entry.data.lastUpdated !== 'boolean' ? entry.data.lastUpdated : undefined;
 		if (!date) {
 			try {
