@@ -6,13 +6,8 @@ import { pickLang } from './i18n';
 import { formatPath } from './format-path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import {
-	ensureLeadingAndTrailingSlashes,
-	ensureLeadingSlash,
-	ensureTrailingSlash,
-	stripLeadingAndTrailingSlashes,
-	stripTrailingSlash,
-} from './path';
+import { ensureLeadingAndTrailingSlashes } from './path';
+import { stripExtension } from './format-path';
 import type { Badge } from '../schemas/badge';
 import type {
 	AutoSidebarGroup,
@@ -141,14 +136,16 @@ function makeLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): Link {
-	href = formatPath(href, {
-		format: project.build.format,
-	});
-	currentPathname =
-		project.build.format === 'file'
-			? stripTrailingSlash(currentPathname)
-			: ensureTrailingSlash(currentPathname);
-	const isCurrent = isAbsolute(href) ? false : href === currentPathname;
+	if (!isAbsolute(href)) {
+		const options = {
+			format: project.build.format,
+		};
+
+		href = formatPath(href, options);
+		currentPathname = formatPath(currentPathname, options);
+	}
+
+	const isCurrent = href === currentPathname;
 
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
@@ -352,19 +349,4 @@ function applyPrevNextLinkConfig(
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.
 	return paginationEnabled ? link : undefined;
-}
-
-/** Remove the extension from a path. */
-export function stripExtension(path: string) {
-	path = stripTrailingSlash(path);
-	return path ? path.replace(/\.\w+$/, '') + '/' : '/';
-}
-
-/** Add '.html' extension to a path. */
-export function ensureHtmlExtension(path: string) {
-	path = stripTrailingSlash(path);
-	if (path.endsWith('.html')) return ensureLeadingSlash(path);
-
-	path = stripLeadingAndTrailingSlashes(path);
-	return path ? ensureLeadingSlash(path) + '.html' : '/index.html';
 }

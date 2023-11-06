@@ -1,7 +1,11 @@
-import type { AstroConfig } from 'astro';
 import { fileWithBase, pathWithBase } from './base';
-import { stripExtension, ensureHtmlExtension } from './navigation';
-import { ensureTrailingSlash, stripTrailingSlash } from './path';
+import {
+	ensureTrailingSlash,
+	stripTrailingSlash,
+	ensureLeadingSlash,
+	stripLeadingAndTrailingSlashes,
+} from './path';
+import type { AstroConfig } from 'astro';
 
 interface FormatPathOptions {
 	format?: AstroConfig['build']['format'];
@@ -25,14 +29,13 @@ const trailingSlashStrategies = {
 	ignore: (href: string) => href,
 };
 
-export function formatPath(href: string, opts?: FormatPathOptions) {
-	const options = {
-		format: opts?.format ?? 'directory',
-		trailingSlash: opts?.trailingSlash ?? 'ignore',
-	};
-
-	const formatStrategy = formatStrategies[options.format];
-	const trailingSlashStrategy = trailingSlashStrategies[options.trailingSlash];
+/** Format a path based on the project config. */
+export function formatPath(
+	href: string,
+	{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions = {}
+) {
+	const formatStrategy = formatStrategies[format];
+	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 
 	// Add base
 	href = formatStrategy.addBase(href);
@@ -44,4 +47,19 @@ export function formatPath(href: string, opts?: FormatPathOptions) {
 	href = href === '/' ? href : trailingSlashStrategy(href);
 
 	return href;
+}
+
+/** Remove the extension from a path. */
+export function stripExtension(path: string) {
+	path = stripTrailingSlash(path);
+	return path ? path.replace(/\.\w+$/, '') + '/' : '/';
+}
+
+/** Add '.html' extension to a path. */
+export function ensureHtmlExtension(path: string) {
+	path = stripTrailingSlash(path);
+	if (path.endsWith('.html')) return ensureLeadingSlash(path);
+
+	path = stripLeadingAndTrailingSlashes(path);
+	return path ? ensureLeadingSlash(path) + '.html' : '/index.html';
 }
