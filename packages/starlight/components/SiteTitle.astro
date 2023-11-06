@@ -3,8 +3,11 @@ import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 import { formatPath } from '../utils/format-path';
+import project from 'virtual:starlight/project-context';
 
-const href = formatPath(Astro.props.locale || '/');
+const href = formatPath(Astro.props.locale || '/', {
+	format: project.build.format,
+});
 ---
 
 <a {href} class="site-title sl-flex">
