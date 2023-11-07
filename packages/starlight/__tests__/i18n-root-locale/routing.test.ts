@@ -1,5 +1,5 @@
 import config from 'virtual:starlight/user-config';
-import { expect, test, vi } from 'vitest';
+import { assert, expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
 import { generateRouteData } from '../../utils/route-data';
 import * as git from '../../utils/git';
@@ -10,10 +10,13 @@ vi.mock('astro:content', async () =>
 			['404.md', { title: 'Page introuvable' }],
 			['index.mdx', { title: 'Accueil' }],
 			// @ts-expect-error — Using a slug not present in Starlight docs site
-			['en/index.mdx', { title: 'Home page', lastUpdated: true }],
+			['en/index.mdx', { title: 'Home page' }],
 			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['ar/index.mdx', { title: 'الصفحة الرئيسية' }],
-			['guides/authoring-content.md', { title: 'Création de contenu en Markdown' }],
+			[
+				'guides/authoring-content.md',
+				{ title: 'Création de contenu en Markdown', lastUpdated: true },
+			],
 		],
 	})
 );
@@ -66,20 +69,22 @@ test('fallback routes use their own locale data', () => {
 
 test('fallback routes use fallback last updated dates', () => {
 	const getFileCommitDate = vi.spyOn(git, 'getFileCommitDate');
-	const route = routes[2]!;
+	const route = routes.find((route) => route.entry.id === routes[4]!.id && route.locale === 'en');
+	assert(route, 'Expected to find English fallback route for `guides/authoring-content.md`.');
 
 	generateRouteData({
 		props: {
 			...route,
-			isFallback: true,
 			headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }],
 		},
 		url: new URL('https://example.com/en'),
 	});
 
 	expect(getFileCommitDate).toHaveBeenCalledOnce();
-	expect(getFileCommitDate.mock.lastCall?.[0]).toMatch(/src\/content\/docs\/index.mdx$/);
-	//                                                                       ^ no `en/` prefix
+	expect(getFileCommitDate.mock.lastCall?.[0]).toMatch(
+		/src\/content\/docs\/guides\/authoring-content.md$/
+		//                          ^ no `en/` prefix
+	);
 
 	getFileCommitDate.mockRestore();
 });
