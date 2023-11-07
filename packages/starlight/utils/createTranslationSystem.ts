@@ -1,5 +1,5 @@
 import type { i18nSchemaOutput } from '../schemas/i18n';
-import builtinTranslations from '../translations';
+import builtinTranslations from '../translations/index';
 import type { StarlightConfig } from './user-config';
 
 export function createTranslationSystem(

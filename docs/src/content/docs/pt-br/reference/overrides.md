@@ -120,7 +120,7 @@ Sumário da página, se ativado.
 **Tipos:** `{ depth: number; slug: string; text: string }[]`
 
 Arranjo de todos os títulos Markdown extraídos da página atual.
-Utilize [`toc`](#toc) ao invés se você deseja construir um sumário que respeita as configurações do Starlight.
+Utilize [`toc`](#toc) em vez disso se você deseja construir um componente de sumário que respeita as configurações do Starlight.
 
 #### `lastUpdated`
 

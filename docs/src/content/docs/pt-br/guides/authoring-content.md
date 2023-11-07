@@ -207,3 +207,7 @@ Longos blocos de código de linha única não devem quebrar linha. Eles devem ro
 ## Outras funcionalidades comuns do Markdown
 
 Starlight suporta todo o resto da sintaxe de escrita do Markdown, como listas e tabelas. Veja a [Cheat Sheet de Markdown do The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) para uma visão geral rápida de todos os elementos da sintaxe do Markdown.
+
+## Markdown Avançado e Configurando MDX
+
+O Starlight utiliza o mesmo rendizador Markdown e MDX do Astro, que suporta remark e rehype. Você pode adicionar sintaxe e comportamento personalizado adicionando `remarkPlugins` ou `rehypePlugins` no seu arquivo de configuração Astro. Visite [Configurando Markdown e MDX](https://docs.astro.build/pt-br/guides/markdown-content/#configurando-markdown-e-mdx) na documentação do Astro para saber mais.

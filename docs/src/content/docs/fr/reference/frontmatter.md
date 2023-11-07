@@ -111,20 +111,44 @@ hero:
 ---
 ```
 
+Vous pouvez afficher différentes versions de l'image de premier plan en mode clair et sombre.
+
+```md
+---
+hero:
+  image:
+    alt: Un logo scintillant aux couleurs vives
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Chemin relatif vers une image dans votre dépôt.
-    file?: string;
-    // HTML brut à utiliser dans l'emplacement de l'image.
-    // Il peut s'agir d'une balise `<img>` personnalisée ou d'une balise `<svg>` en ligne.
-    html?: string;
-  };
+  image?:
+    | {
+        // Chemin relatif vers une image dans votre dépôt.
+        file: string;
+        // Alternative textuelle pour rendre l'image accessible aux technologies d'assistance.
+        alt?: string;
+      }
+    | {
+        // Chemin relatif vers une image dans votre dépôt à utiliser pour le mode sombre.
+        dark: string;
+        // Chemin relatif vers une image dans votre dépôt à utiliser pour le mode clair.
+        light: string;
+        // Alternative textuelle pour rendre l'image accessible aux technologies d'assistance.
+        alt?: string;
+      }
+    | {
+        // HTML brut à utiliser dans l'emplacement (slot) de l'image.
+        // Peut être une balise `<img>` personnalisée ou une balise `<svg>` en ligne.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
@@ -243,7 +267,7 @@ interface SidebarConfig {
 #### `label`
 
 **Type :** `string`  
-**Par défaut :** the page [`title`](#title-required)
+**Par défaut :** the page [`title`](#title-obligatoire)
 
 Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 
