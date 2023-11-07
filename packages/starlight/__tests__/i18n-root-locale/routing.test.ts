@@ -67,7 +67,7 @@ test('fallback routes use their own locale data', () => {
 	expect(enGuide.lang).toBe('en-US');
 });
 
-test('fallback routes use fallback last updated dates', () => {
+test('fallback routes use fallback entry last updated dates', () => {
 	const getFileCommitDate = vi.spyOn(git, 'getFileCommitDate');
 	const route = routes.find((route) => route.entry.id === routes[4]!.id && route.locale === 'en');
 	assert(route, 'Expected to find English fallback route for `guides/authoring-content.md`.');
