@@ -158,7 +158,8 @@
     "./schema": "./schema.ts",
     "./types": "./types.ts",
     "./index.astro": "./index.astro",
-    "./404.astro": "./404.astro"
+    "./404.astro": "./404.astro",
+    "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
     "astro": "^3.2.0"
