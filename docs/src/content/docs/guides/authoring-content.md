@@ -204,6 +204,132 @@ var fun = function lang(l) {
 Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 ```
 
+### Text markers
+
+You can highlight specific lines or parts of your code blocks by using the text markers plugin of Expressive Code, which is enabled by default in Starlight. The following features are available:
+
+- [Marking entire lines & line ranges](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+
+  ```js {2-3}
+  function demo() {
+    // This line (#2) and the next one are highlighted
+    return 'This is line #3 of this snippet';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // This line (#2) and the next one are highlighted
+    return 'This is line #3 of this snippet';
+  }
+  ```
+  ````
+
+- [Marking individual text inside lines](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+
+  ```js "Individual terms" /Even.*supported/
+  // Individual terms can be highlighted, too
+  function demo() {
+    return 'Even regular expressions are supported';
+  }
+  ```
+
+  ````md
+  ```js "Individual terms" /Even.*supported/
+  // Individual terms can be highlighted, too
+  function demo() {
+    return 'Even regular expressions are supported';
+  }
+  ```
+  ````
+
+- [Selecting marker types `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del)
+
+  ```js "return true;" ins="inserted" del="deleted"
+  function demo() {
+    console.log('Words can be marked as inserted or deleted');
+    // The return statement uses the default marker type
+    return true;
+  };
+  ```
+
+  ````md
+  ```js "return true;" ins="inserted" del="deleted"
+  function demo() {
+    console.log('Words can be marked as inserted or deleted');
+    // The return statement uses the default marker type
+    return true;
+  };
+  ```
+  ````
+
+- [Combining syntax highlighting with `diff`-like syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax)
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // This entire block gets highlighted as JavaScript,
+      // and we can still add diff markers to it!
+  -   console.log('Old code to be removed')
+  +   console.log('New and shiny code!')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // This entire block gets highlighted as JavaScript,
+      // and we can still add diff markers to it!
+  -   console.log('Old code to be removed')
+  +   console.log('New and shiny code!')
+    }
+  ```
+  ````
+
+### Window frames
+
+By default, every code block that has a language identifier is rendered inside a window frame. This is done by the frames plugin of Expressive Code, which is enabled by default in Starlight. Depending on the code's language identifier, the frame can look like a code editor (similar to VS Code), or like a terminal window.
+
+Frames can have optional titles, which are either taken from a `title="..."` attribute following the code block's opening backticks and language identifier, or from a file name comment in the first lines of the code.
+
+- [Code editor with optional file name tab title](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames)
+
+  ```js
+  // my-test-file.js
+  console.log('Hello World!')
+  ```
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!')
+  ```
+  ````
+
+- [Terminal with optional window title](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames)
+
+  ```bash title="Installing dependencies"
+  npm install
+  ```
+
+  ````md
+  ```bash title="Installing dependencies"
+  npm install
+  ```
+  ````
+
+- [Disabling window frames for individual blocks](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "This is not rendered as a terminal despite using the bash language"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "This is not rendered as a terminal despite using the bash language"
+  ```
+  ````
+
 ## Other common Markdown features
 
 Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) for a quick overview of all the Markdown syntax elements.
