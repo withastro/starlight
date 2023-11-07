@@ -129,14 +129,26 @@ hero:
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Ruta relativa a una imagen en tu repositorio.
-    file?: string;
-    // HTML crudo para usar en el espacio de la imagen.
-    // Podría ser una etiqueta `<img>` personalizada o un `<svg>` en línea.
-    html?: string;
-  };
+  image?:
+    | {
+        // Ruta relativa a una imagen en tu repositorio.
+        file: string;
+        // Texto alternativo para hacer que la imagen sea accesible a la tecnología de asistencia
+        alt?: string;
+      }
+    | {
+        // Ruta relativa a una imagen en tu repositorio para usar en el modo oscuro.
+        dark: string;
+        // Ruta relativa a una imagen en tu repositorio para usar en el modo claro.
+        light: string;
+        // Texto alternativo para hacer que la imagen sea accesible a la tecnología de asistencia
+        alt?: string;
+      }
+    | {
+        // HTML crudo para usar en el espacio de la imagen.
+        // Podría ser una etiqueta `<img>` personalizada o un `<svg>` en línea.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
