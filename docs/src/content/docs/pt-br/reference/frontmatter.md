@@ -145,7 +145,7 @@ interface HeroConfig {
         alt?: string;
       }
     | {
-        // HTML bruto para o slot de imagem.
+        // HTML bruto para usar no slot de imagem.
         // Pode ser uma tag `<img>` personalizada ou `<svg>` inline.
         html: string;
       };
