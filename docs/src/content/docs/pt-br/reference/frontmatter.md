@@ -111,7 +111,7 @@ hero:
 ---
 ```
 
-Você pode exibir diferentes versões da imagem hero nos modo claro e escuro.
+Você pode exibir diferentes versões da imagem hero no modo claro e escuro.
 
 ```md
 ---
@@ -131,22 +131,22 @@ interface HeroConfig {
   tagline?: string;
   image?:
     | {
-        // Caminho relativo para uma imagem no seu repositório.
+        // Caminho relativo de uma imagem no seu repositório.
         file: string;
         // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
         alt?: string;
       }
     | {
-        // Caminho relativo para uma imagem em seu repositório para ser usada no modo escuro.
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo escuro.
         dark: string;
-        // Caminho relativo para uma imagem em seu repositório para ser usada no modo claro.
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo claro.
         light: string;
         // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
         alt?: string;
       }
     | {
-        // HTML bruto para usar no slot de imagem.
-        // Pode ser uma tag `<img>` personalizada ou `<svg>` inline.
+        // HTML bruto para utilizar no slot de imagem.
+        // Pode ser uma tag `<img>` personalizada ou um `<svg>` inline.
         html: string;
       };
   actions?: Array<{
