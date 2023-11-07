@@ -28,6 +28,7 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
@@ -68,6 +69,10 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": {
+			      "text": "Experimental",
+			      "variant": "default",
+			    },
 			    "collapsed": false,
 			    "entries": [
 			      {
@@ -91,6 +96,7 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {

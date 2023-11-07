@@ -9,6 +9,7 @@ import { vitePluginStarlightUserConfig } from './integrations/virtual-user-confi
 import { errorMap } from './utils/error-map';
 import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
+import { createTranslationSystemFromFs } from './utils/translations-fs';
 
 export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration {
 	const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
@@ -26,6 +27,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 		name: '@astrojs/starlight',
 		hooks: {
 			'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
+				const useTranslations = createTranslationSystemFromFs(userConfig, config);
 				injectRoute({
 					pattern: '404',
 					entryPoint: '@astrojs/starlight/404.astro',
