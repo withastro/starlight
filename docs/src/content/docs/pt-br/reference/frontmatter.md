@@ -111,7 +111,7 @@ hero:
 ---
 ```
 
-Você pode exibir diferentes versões da imagem hero nos modos claro e escuro.
+Você pode exibir diferentes versões da imagem hero nos modo claro e escuro.
 
 ```md
 ---
