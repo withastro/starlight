@@ -241,9 +241,9 @@ Links, Gruppen und automatisch generierte Gruppen können auch eine `badge`-Eige
 starlight({
 	sidebar: [
 		{
-			label: 'Anleitungen',
+			label: 'Guides',
 			items: [
-				// Ein Link mit einem "Neu"-Abzeichen.
+				// Ein Link mit einem "Neu"-Abzeichen
 				{
 					label: 'Komponenten',
 					link: '/guides/components/',
@@ -251,6 +251,12 @@ starlight({
 				},
 			],
 		},
+		// Eine automatisch generierte Gruppe mit dem "Veraltet"-Abzeichen
+	   	{
+		    	label: 'Referenz',
+		    	badge: 'Veraltet',
+		    	autogenerate: { directory: 'reference' },
+	  	},
 	],
 });
 ```
@@ -260,7 +266,7 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 <SidebarPreview
 	config={[
 		{
-			label: 'Anleitungen',
+			label: 'Guides',
 			items: [
 				{
 					label: 'Komponenten',
@@ -269,6 +275,24 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 				},
 			],
 		},
+		{
+		    	label: 'Referenz',
+		    	badge: { text: 'Veraltet', variant: 'default'},
+		    	items: [
+				{
+					label: 'Konfigurationsreferenz',
+					link: '/reference/configuration/',
+				},
+				{
+					label: 'Frontmatter Referenz',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: 'Komponenten-Ersetzung Referenz',
+					link: '/reference/overrides/',
+				},
+			],
+  		},
 	]}
 />
 
