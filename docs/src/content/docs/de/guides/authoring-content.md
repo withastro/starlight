@@ -207,3 +207,7 @@ Lange, einzeilige Codeblöcke sollten nicht umgebrochen werden. Sie sollten hori
 ## Andere allgemeine Markdown-Funktionen
 
 Starlight unterstützt alle anderen Markdown-Autorensyntaxen, wie Listen und Tabellen. Einen schnellen Überblick über alle Markdown-Syntaxelemente findest du im [Markdown Cheat Sheet von The Markdown Guide](https://www.markdownguide.org/cheat-sheet/).
+
+## Erweiterte Markdown- und MDX-Konfiguration
+
+Starlight verwendet Astros Markdown- und MDX-Renderer, der auf remark und rehype aufbaut. DU kannst eine Unterstützung für eigene Syntax und Verhalten hinzufügen, indem du `remarkPlugins` oder `rehypePlugins` in deiner Astro-Konfigurationsdatei hinzufügst. Weitere Informationen findest du unter ["Markdown konfigurieren"] (https://docs.astro.build/de/guides/markdown-content/#markdown-konfigurieren) in der Astro-Dokumentation.
