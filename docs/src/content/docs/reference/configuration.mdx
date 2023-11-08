@@ -78,7 +78,7 @@ You can customize your code blocks by passing an object with any of the followin
   - any theme object compatible with VS Code or Shiki (e.g. imported from an NPM theme package)
   - any ExpressiveCodeTheme instance (e.g. using `ExpressiveCodeTheme.fromJSONString(...)` to load a custom JSON/JSONC theme file yourself)
 
-  Defaults to the `['github-dark', 'github-light']` themes bundled with Shiki.
+  Defaults to the dark and light variants of the "Night Owl" theme by Sarah Drasner, which are also exported from `@astrojs/starlight/expressive-code` as `getStarlightDefaultThemes`.
 
   **Note**: If you pass at least one dark and one light theme to this option, Starlight will automatically ensure that the displayed theme matches the current dark mode switch state. See the `useStarlightDarkModeSwitch` option to configure this behavior. If you turn it off, you will need to add your own CSS code to the site to allow manual switching between themes.
 

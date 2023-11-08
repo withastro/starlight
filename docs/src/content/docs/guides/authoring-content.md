@@ -248,7 +248,7 @@ You can highlight specific lines or parts of your code blocks by using the text 
 
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
-    console.log('Words can be marked as inserted or deleted');
+    console.log('These are inserted and deleted marker types');
     // The return statement uses the default marker type
     return true;
   };
@@ -257,7 +257,7 @@ You can highlight specific lines or parts of your code blocks by using the text 
   ````md
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
-    console.log('Words can be marked as inserted or deleted');
+    console.log('These are inserted and deleted marker types');
     // The return statement uses the default marker type
     return true;
   };
