@@ -18,6 +18,11 @@
       "status": 301
     },
     {
+      "src": "/ph/(.*)",
+      "dest": "https://astro-houston-ph.pages.dev/ph/$1",
+      "status": 200
+    },
+    {
       "src": "/(?<lang>[^/]*)/(.*)",
       "dest": "/$lang/404",
       "status": 404
