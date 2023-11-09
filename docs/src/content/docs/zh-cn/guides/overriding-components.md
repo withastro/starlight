@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-要了解更多关于可用的参数的信息，请参阅[重写参考](/zh-cn/reference/overrides/#%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0)。
+要了解更多关于可用的参数的信息，请参阅[重写参考](/zh-cn/reference/overrides/#组件参数)。
 
 ### 仅在特定页面上重写
 
