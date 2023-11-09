@@ -10,6 +10,6 @@
     { "src": "/(ph$|ph/)(.*)", "dest": "https://astro-houston-ph.pages.dev/ph/$2" },
     { "handle": "filesystem" },
     { "src": "/zh/(.*)", "dest": "/zh-cn/$1", "status": 301 },
-    { "src": "/(?<lang>[^/]*)/(.*)", "dest": "/$lang/404", "status": 404 }
+    { "src": "/(?<lang>[^/]*)/(.*)", "dest": "/$lang/404/", "status": 404 }
   ]
 }
