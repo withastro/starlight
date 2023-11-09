@@ -8,7 +8,7 @@
       "continue": true
     },
     { "src": "/(ph$|ph/)(.*)", "dest": "https://astro-houston-ph.pages.dev/ph/$2" },
-    { "src": "(.*)/([^./]+)$", "dest": "$1/$2/", "continue": true },
+    { "src": "(.*)/([^./]+)$", "dest": "$1/$2/", "status": 301 },
     { "handle": "filesystem" },
     { "src": "/zh/(.*)", "dest": "/zh-cn/$1", "status": 301 },
     { "src": "/(?<lang>[^/]*)/(.*)", "dest": "/$lang/404/", "status": 404 }
