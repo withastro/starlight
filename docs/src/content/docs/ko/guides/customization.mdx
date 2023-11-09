@@ -12,7 +12,7 @@ Starlight는 합리적인 기본 스타일과 기능을 제공하므로 구성 �
 
 사이트 헤더에 로고를 추가하는 것은 Starlight 사이트에 브랜드를 추가하는 빠른 방법입니다.
 
-1. `src/assets/` 디렉토리에 로고 이미지 파일을 추가합니다.
+1. `src/assets/` 디렉터리에 로고 이미지 파일을 추가합니다.
 
    <FileTree>
 
@@ -59,7 +59,7 @@ starlight({
 
 라이트 모드와 다크 모드에서 다른 버전의 로고를 표시할 수 있습니다.
 
-1. `src/assets/`에 각 변형에 대한 이미지 파일을 추가합니다.
+1. `src/assets/` 디렉터리에 각 변형에 대한 이미지 파일을 추가합니다.
 
    <FileTree>
 
@@ -101,7 +101,7 @@ export default defineConfig({
 
 기본적으로 Starlight 페이지는 전역 탐색 사이드바와 현재 페이지 제목의 목차가 포함된 레이아웃을 사용합니다.
 
-frontmatter에 [`template: splash`](/ko/reference/frontmatter/#template)를 설정하여 사이드바 없이 더 넓은 페이지 레이아웃을 적용할 수 있습니다. 주로 랜딩 페이지에서 사용되며, [이 사이트의 홈페이지](/ko)에서 실제로 작동하는 것을 확인할 수 있습니다.
+프론트매터에 [`template: splash`](/ko/reference/frontmatter/#template)를 설정하여 사이드바 없이 더 넓은 페이지 레이아웃을 적용할 수 있습니다. 주로 랜딩 페이지에서 사용되며, [이 사이트의 홈페이지](/ko)에서 실제로 작동하는 것을 확인할 수 있습니다.
 
 ```md
 ---
@@ -114,9 +114,9 @@ template: splash
 
 ## 목차
 
-Starlight는 독자가 원하는 제목으로 쉽게 이동할 수 있도록 각 페이지에 목차를 표시합니다. Starlight 통합을 통해 모든 페이지의 목차를 변경하거나 비활성화할 수 있습니다. 또한, frontmatter를 수정하여 각 페이지의 목차를 변경할 수도 있습니다.
+Starlight는 독자가 원하는 제목으로 쉽게 이동할 수 있도록 각 페이지에 목차를 표시합니다. Starlight 통합을 통해 모든 페이지의 목차를 변경하거나 비활성화할 수 있습니다. 또한, 프론트매터를 수정하여 각 페이지의 목차를 변경할 수도 있습니다.
 
-기본적으로 `<h2>` 및 `<h3>` 제목이 목차에 포함됩니다. [`tableOfContents`](/ko/reference/configuration/#tableofcontents) 의 `minHeadingLevel` 및 `maxHeadingLevel` 옵션을 사용하여 모든 페이지의 목차를 변경할 수 있습니다. 개별 페이지의 기본 목차를 변경하기 위해서는 [frontmatter에 `tableOfContents`](/ko/reference/frontmatter/#tableofcontents) 속성을 추가하세요.
+기본적으로 `<h2>` 및 `<h3>` 제목이 목차에 포함됩니다. [`tableOfContents`](/ko/reference/configuration/#tableofcontents) 의 `minHeadingLevel` 및 `maxHeadingLevel` 옵션을 사용하여 모든 페이지의 목차를 변경할 수 있습니다. 개별 페이지의 기본 목차를 변경하기 위해서는 [프론트매터에 `tableOfContents`](/ko/reference/frontmatter/#tableofcontents) 속성을 추가하세요.
 
 <Tabs>
   <TabItem label="개별 페이지 설정">
@@ -186,7 +186,8 @@ defineConfig({
 
 Starlight에는 [`social`](/ko/reference/configuration/#social) 옵션을 사용하여 사이트 헤더에 소셜 미디어 계정을 링크하는 기능이 내장되어 있습니다.
 
-현재 Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter 및 Youtube에 대한 링크가 지원됩니다. 다른 서비스에 대한 지원이 필요하면 GitHub나 Discord를 통해 알려주세요!
+[구성 참조](/ko/reference/configuration/#social)에서 지원되는 링크 아이콘의 전체 목록을 확인할 수 있습니다.
+다른 서비스에 대한 지원이 필요하면 GitHub나 Discord를 통해 알려주세요!
 
 ```js
 // astro.config.mjs
@@ -219,7 +220,7 @@ Starlight는 각 페이지의 아래에 "페이지 편집" 링크를 표시할 �
 
 Starlight 프로젝트가 저장소의 루트에 없는 경우 기본 URL 끝에 프로젝트 경로를 포함합니다.
 
-아래 예시는 GitHub `withastro/starlight` 저장소의 `main` 브랜치에 있는 `docs/` 하위 디렉토리에 있는 Starlight 문서에 대해 구성된 편집 링크를 보여줍니다.
+아래 예시는 GitHub `withastro/starlight` 저장소의 `main` 브랜치에 있는 `docs/` 디렉터리에 있는 Starlight 문서에 대해 구성된 편집 링크를 보여줍니다.
 
 ```js
 // astro.config.mjs
@@ -240,7 +241,7 @@ export default defineConfig({
 
 ## 사용자 정의 404 페이지
 
-Starlight 사이트는 기본적으로 간단한 404 페이지를 표시합니다. `src/content/docs/` 디렉토리에 `404.md`(또는 `404.mdx`) 파일을 추가하여 이를 변경할 수 있습니다:
+Starlight 사이트는 기본적으로 간단한 404 페이지를 표시합니다. `src/content/docs/` 디렉터리에 `404.md`(또는 `404.mdx`) 파일을 추가하여 이를 변경할 수 있습니다:
 
 <FileTree>
 
@@ -253,7 +254,7 @@ Starlight 사이트는 기본적으로 간단한 404 페이지를 표시합니�
 
 </FileTree>
 
-404 페이지에서 Starlight의 모든 페이지 레이아웃과 사용자 정의 기술을 사용할 수 있습니다. 예를 들어 기본 404 페이지는 frontmatter에서 [`splash` 템플릿](#페이지-레이아웃)과 [`hero`](/ko/reference/frontmatter/#hero) 컴포넌트를 사용합니다.
+404 페이지에서 Starlight의 모든 페이지 레이아웃과 사용자 정의 기술을 사용할 수 있습니다. 예를 들어 기본 404 페이지는 프론트매터에서 [`splash` 템플릿](#페이지-레이아웃)과 [`hero`](/ko/reference/frontmatter/#hero) 컴포넌트를 사용합니다.
 
 ```md
 ---
@@ -278,7 +279,7 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
 
 #### 로컬 글꼴 파일 설정
 
-1. `src/fonts/` 디렉토리에 글꼴 파일을 추가하고 빈 `font-face.css` 파일을 만드세요.
+1. `src/fonts/` 디렉터리에 글꼴 파일을 추가하고 빈 `font-face.css` 파일을 만드세요.
 
    <FileTree>
 
@@ -291,7 +292,7 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
 
    </FileTree>
 
-2. `src/fonts/font-face.css`에 각 글꼴에 대한 [`@font-face` 선언](https://developer.mozilla.org/ko/docs/Web/CSS/@font-face)을 추가하세요. `url()` 함수에서 글꼴 파일의 상대 경로를 사용하세요.
+2. `src/fonts/font-face.css` 파일에 각 글꼴에 대한 [`@font-face` 선언](https://developer.mozilla.org/ko/docs/Web/CSS/@font-face)을 추가하세요. `url()` 함수에서 글꼴 파일의 상대 경로를 사용하세요.
 
    ```css
    /* src/fonts/font-face.css */
@@ -306,7 +307,7 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
    }
    ```
 
-3. `astro.config.mjs`에 있는 Starlight의 `customCss` 배열에 `font-face.css` 파일의 경로를 추가하세요.
+3. `astro.config.mjs` 파일에 있는 Starlight의 `customCss` 배열에 `font-face.css` 파일의 경로를 추가하세요.
 
    ```js
    // astro.config.mjs

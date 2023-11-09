@@ -1,8 +1,6 @@
 ---
 title: 사이드바 탐색
 description: Starlight 사이트의 사이드바 탐색 링크를 설정하고 사용자 정의하는 방법을 알아보세요.
-sidebar:
-  badge: New
 ---
 
 import FileTree from '../../../../components/file-tree.astro';
@@ -136,16 +134,16 @@ starlight({
 
 ### 자동 생성 그룹
 
-Starlight는 문서 디렉토리를 기반해서 자동으로 사이드바에 그룹을 생성할 수 있습니다. 이는 그룹의 각 사이드바 항목을 수동으로 입력하고 싶지 않을 때 유용합니다. 기본적으로 페이지는 파일 이름을 알파벳순으로 정렬하여 사이드바에 표시합니다.
+Starlight는 문서 디렉터리를 기반해서 자동으로 사이드바에 그룹을 생성할 수 있습니다. 이는 그룹의 각 사이드바 항목을 수동으로 입력하고 싶지 않을 때 유용합니다. 기본적으로 페이지는 파일 이름을 알파벳순으로 정렬하여 사이드바에 표시합니다.
 
-`label` 및 `autogenerate` 속성이 있는 객체를 사용하여 자동 생성 그룹을 추가합니다. `autogenerate` 구성은 사이드바 항목에 사용할 디렉토리를 지정해야 합니다. 예를 들어, 다음 구성을 사용할 수 있습니다.
+`label` 및 `autogenerate` 속성이 있는 객체를 사용하여 자동 생성 그룹을 추가합니다. `autogenerate` 구성은 사이드바 항목에 사용할 디렉터리를 지정해야 합니다. 예를 들어, 다음 구성을 사용할 수 있습니다.
 
 ```js
 starlight({
 	sidebar: [
 		{
 			label: '가이드',
-			// 'guides' 디렉토리에 대한 링크 그룹을 자동으로 생성
+			// 'guides' 디렉터리에 대한 링크 그룹을 자동으로 생성
 			autogenerate: { directory: 'guides' },
 		},
 	],
@@ -190,11 +188,11 @@ starlight({
 	]}
 />
 
-#### Frontmatter에서 자동으로 생성된 링크 변경하기
+#### 프론트매터에서 자동으로 생성된 링크 변경하기
 
-자동으로 생성된 링크를 변경하려면 개별 페이지의 [`sidebar` frontmatter 필드](/ko/reference/frontmatter/#sidebar)를 사용하세요.
+자동으로 생성된 링크를 변경하려면 개별 페이지의 [`sidebar` 프론트매터 필드](/ko/reference/frontmatter/#sidebar)를 사용하세요.
 
-frontmatter에서 sidebar 옵션을 사용하면 [사용자 정의 라벨](/ko/reference/frontmatter/#label)을 설정하거나 링크에 [배지](/ko/reference/frontmatter/#badge)를 추가하거나 사이드바에서 링크를 [숨기거나](/ko/reference/frontmatter/#hidden) [사용자 정의 정렬 기준](/ko/reference/frontmatter/#order)을 설정할 수 있습니다.
+프론트매터에서 sidebar 옵션을 사용하면 [사용자 정의 라벨](/ko/reference/frontmatter/#label)을 설정하거나 링크에 [배지](/ko/reference/frontmatter/#badge)를 추가하거나 사이드바에서 링크를 [숨기거나](/ko/reference/frontmatter/#hidden) [사용자 정의 정렬 기준](/ko/reference/frontmatter/#order)을 설정할 수 있습니다.
 
 ```md
 ---
@@ -211,7 +209,7 @@ sidebar:
 ---
 ```
 
-위 frontmatter가 있는 페이지를 포함하는 자동 생성 그룹은 다음 사이드바를 생성합니다.
+위 프론트매터가 있는 페이지를 포함하는 자동 생성 그룹은 다음 사이드바를 생성합니다.
 
 <SidebarPreview
 	config={[
@@ -232,13 +230,13 @@ sidebar:
 
 :::note
 
-`sidebar` frontmatter 구성은 자동으로 생성된 링크에만 사용되며 수동으로 정의된 링크에서는 무시됩니다.
+`sidebar` 프론트매터 구성은 자동으로 생성된 링크에만 사용되며 수동으로 정의된 링크에서는 무시됩니다.
 
 :::
 
 ## 배지
 
-링크 라벨 옆에 배지를 표시하기 위해 링크에는 `badge` 속성이 포함될 수도 있습니다.
+링크, 그룹, 자동 생성된 그룹은 라벨 옆에 배지를 표시하기 위해 `badge` 속성을 포함할 수도 있습니다.
 
 ```js
 starlight({
@@ -253,6 +251,12 @@ starlight({
 					badge: 'New',
 				},
 			],
+		},
+		// "Deprecated" 배지가 포함된 자동 생성된 그룹
+		{
+			label: '참조',
+			badge: 'Deprecated',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -269,6 +273,24 @@ starlight({
 					label: '컴포넌트',
 					link: '/ko/guides/components/',
 					badge: { text: 'New', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: '참조',
+			badge: { text: 'Deprecated', variant: 'default' },
+			items: [
+				{
+					label: '구성 참조',
+					link: '/reference/configuration/',
+				},
+				{
+					label: '프론트매터 참조',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: '재정의 참조',
+					link: '/reference/overrides/',
 				},
 			],
 		},
@@ -316,9 +338,55 @@ starlight({
 	]}
 />
 
+## 사용자 정의 HTML 속성
+
+링크에는 사용자 정의 HTML 속성을 추가하기 위한 `attrs` 속성이 포함될 수도 있습니다.
+
+다음 예에서는 `attrs`를 사용하여 링크가 새 탭에서 열리도록 `target="_blank"` 속성을 추가하고 사용자 정의 스타일 속성을 적용하여 링크 레이블을 기울임꼴로 표시합니다.
+
+다음 예에서는 링크가 새 탭에서 열리도록 `target="_blank` 속성을 추가하고, 사용자 정의 `style` 속성을 적용하여 링크 레이블을 기울임꼴로 표시하기 위해 `attrs`를 사용합니다.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: '가이드',
+			items: [
+				// 새 탭에서 열리는 Astro 문서에 대한 외부 링크입니다.
+				{
+					label: 'Astro 문서',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+위 구성은 다음 사이드바를 생성합니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '가이드',
+			items: [
+				{
+					label: 'Astro 문서',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## 국제화
 
-링크 또는 그룹의 라벨을 지원되는 각 언어로 번역하기 위해 링크 및 그룹 항목에 `translations` 속성을 사용할 수 있습니다.
+[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 언어 태그를 지정하여 지원되는 각 언어에 대한 링크 또는 그룹 라벨을 번역하려면 링크 및 그룹 항목의 `translations` 속성을 사용하세요. `"en"`, `"ar"` 또는 `"zh-CN"`을 키로, 번역된 라벨을 값으로 사용합니다.
 `label` 속성은 기본 언어 및 번역이 제공되지 않는 언어를 위해 사용될 것입니다.
 
 ```js
@@ -327,20 +395,20 @@ starlight({
 		{
 			label: '가이드',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: '컴포넌트',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/ko/guides/components/',
 				},
 				{
 					label: '국제화 (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/ko/guides/i18n/',
 				},
@@ -350,15 +418,15 @@ starlight({
 });
 ```
 
-스페인어로 문서를 검색하면 다음 사이드바가 생성됩니다.
+브라질 포르투갈어로 문서를 검색하면 다음 사이드바가 생성됩니다.
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/ko/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/ko/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br//guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}

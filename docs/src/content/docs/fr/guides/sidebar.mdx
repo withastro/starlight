@@ -1,0 +1,554 @@
+---
+title: Barre latérale de navigation
+description: Apprendre à configurer et personnaliser les liens de la barre latérale de navigation de votre site Starlight.
+---
+
+import FileTree from '../../../../components/file-tree.astro';
+import SidebarPreview from '../../../../components/sidebar-preview.astro';
+
+Une barre latérale bien organisée est une des clés d'une bonne documentation, car c'est l'une des principales méthodes de navigation qui sera utilisée par les utilisateurs de votre site. Starlight fournit un ensemble complet d'options pour personnaliser la structure et le contenu de votre barre latérale.
+
+## Barre latérale par défaut
+
+Par défaut, Starlight générera automatiquement une barre latérale basée sur la structure du système de fichiers de votre documentation, en utilisant la propriété `title` de chaque fichier comme entrée de la barre latérale.
+
+Par exemple, pour la structure de fichiers suivante :
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+      - reference/
+        - configuration.md
+
+</FileTree>
+
+La barre latérale suivante sera automatiquement générée :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'guides',
+			items: [
+				{ label: 'Composants', link: '/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/guides/i18n/' },
+			],
+		},
+		{
+			label: 'reference',
+			items: [
+				{
+					label: 'Référence de configuration',
+					link: '/reference/configuration/',
+				},
+			],
+		},
+	]}
+/>
+
+Pour en savoir plus sur les barres latérales générées automatiquement, consultez la section sur les [groupes générés automatiquement](#groupes-générés-automatiquement).
+
+## Ajouter des liens et des groupes de liens
+
+Pour configurer les [liens](#liens) et les [groupes de liens](#groupes) (dans un en-tête rétractable) de votre barre latérale, utilisez la propriété [`starlight.sidebar`](/fr/reference/configuration/#sidebar) dans le fichier `astro.config.mjs`.
+
+En combinant les liens et les groupes, vous pouvez créer une grande variété de structures de barre latérale.
+
+### Liens
+
+Ajoutez un lien vers une page interne ou externe en utilisant un objet avec les propriétés `label` et `link`.
+
+```js
+starlight({
+	sidebar: [
+		// Un lien vers le guide CSS et mise en forme.
+		{ label: 'CSS et mise en forme', link: '/fr/guides/css-and-tailwind/' },
+		// Un lien externe vers le site Astro.
+		{ label: 'Astro', link: 'https://astro.build/' },
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{ label: 'CSS et mise en forme', link: '/fr/guides/css-and-tailwind/' },
+		{ label: 'Astro', link: 'https://astro.build/' },
+	]}
+/>
+
+### Groupes
+
+Vous pouvez donner de la structure à votre barre latérale en regroupant des liens connexes sous un en-tête rétractable.
+Les groupes peuvent contenir à la fois des liens et d'autres sous-groupes.
+
+Ajoutez un groupe en utilisant un objet avec les propriétés `label` et `items`.
+Le `label` sera utilisé comme en-tête pour le groupe.
+Ajoutez des liens ou des sous-groupes au tableau `items`.
+
+```js
+starlight({
+	sidebar: [
+		// Un groupe de liens avec le label "Guides".
+		{
+			label: 'Guides',
+			items: [
+				{ label: 'Composants', link: '/fr/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/fr/guides/i18n/' },
+				// Un groupe de liens imbriqué.
+				{
+					label: 'Mise en forme',
+					items: [
+						{ label: 'CSS', link: '/fr/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/fr/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/fr/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{ label: 'Composants', link: '/fr/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/fr/guides/i18n/' },
+				{
+					label: 'Mise en forme',
+					items: [
+						{ label: 'CSS', link: '/fr/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/fr/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/fr/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### Groupes générés automatiquement
+
+Starlight peut générer automatiquement un groupe dans votre barre latérale en fonction d'un répertoire de votre documentation.
+Cela est utile lorsque vous ne souhaitez pas entrer manuellement chaque élément de la barre latérale dans un groupe.
+Les pages seront triées par ordre alphabétique en fonction du nom de fichier par défaut.
+
+Ajoutez un groupe généré automatiquement en utilisant un objet avec les propriétés `label` et `autogenerate`. La configuration de `autogenerate` doit spécifier le répertoire à utiliser pour les entrées de la barre latérale avec la propriété `directory`. Par exemple, avec la configuration suivante :
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			// Génère automatiquement un groupe de liens pour le répertoire "guides".
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+Et la structure de fichiers suivante :
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+        - advanced/
+          - project-structure.md
+
+</FileTree>
+
+La barre latérale suivante sera générée :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{ label: 'Composants', link: '/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'advanced',
+					items: [
+						{
+							label: 'Structure du projet',
+							link: '/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+#### Personnaliser les liens générés automatiquement dans le frontmatter
+
+Utilisez le [champ `sidebar` du frontmatter](/fr/reference/frontmatter/#sidebar) dans différentes pages pour personnaliser les liens générés automatiquement.
+
+Les options du frontmatter pour la barre latérale vous permettent de définir une [étiquette personnalisée](/fr/reference/frontmatter/#label) ou d'ajouter un [badge](/fr/reference/frontmatter/#badge) à un lien, de [masquer](/fr/reference/frontmatter/#hidden) un lien de la barre latérale, ou de définir une [pondération de tri personnalisée](/fr/reference/frontmatter/#order).
+
+```md
+---
+title: Ma page
+sidebar:
+  # Définit une étiquette personnalisée pour le lien dans la barre latérale
+  label: Étiquette personnalisée
+  # Définit un ordre personnalisé pour le lien (les nombres plus petits
+  # sont affichés plus haut)
+  order: 2
+  # Ajoute un badge au lien
+  badge:
+    text: Nouveau
+    variant: tip
+---
+```
+
+Un groupe généré automatiquement incluant une page avec le frontmatter ci-dessus générera la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{ label: 'Une page', link: '#' },
+				{
+					label: 'Étiquette personnalisée',
+					link: '#',
+					badge: { text: 'Nouveau', variant: 'tip' },
+				},
+				{ label: 'Une autre page', link: '#' },
+			],
+		},
+	]}
+/>
+
+:::note
+La configuration du frontmatter `sidebar` n'est utilisée que pour les liens générés automatiquement et sera ignorée pour les liens définis manuellement.
+:::
+
+## Badges
+
+Les liens, groupes et groupes générés automatiquement peuvent inclure une propriété `badge` pour afficher un badge à côté de leurs étiquettes.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// Un lien avec un badge "Nouveau".
+				{
+					label: 'Composants',
+					link: '/fr/guides/components/',
+					badge: 'Nouveau',
+				},
+			],
+		},
+		// Un groupe généré automatiquement avec un badge "Déprécié".
+		{
+			label: 'Référence',
+			badge: 'Déprécié',
+			autogenerate: { directory: 'reference' },
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Composants',
+					link: '/fr/guides/components/',
+					badge: { text: 'Nouveau', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'Référence',
+			badge: { text: 'Déprécié', variant: 'default' },
+			items: [
+				{
+					label: 'Référence de configuration',
+					link: '/fr/reference/configuration/',
+				},
+				{
+					label: 'Référence du frontmatter',
+					link: '/fr/reference/frontmatter/',
+				},
+				{
+					label: 'Référence des redéfinitions',
+					link: '/fr/reference/overrides/',
+				},
+			],
+		},
+	]}
+/>
+
+### Variantes de badges
+
+Personnalisez le style du badge en utilisant un objet avec les propriétés `text` et `variant`.
+
+La propriété `text` représente le contenu à afficher (par exemple, "Nouveau").
+Remplacez le style `default`, qui utilise la couleur d'accentuation de votre site, en définissant la propriété `variant` avec l'une des valeurs suivantes : `note`, `tip`, `danger`, `caution` ou `success`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// Un lien avec un badge "Expérimental" jaune.
+				{
+					label: 'Composants',
+					link: '/fr/guides/components/',
+					badge: { text: 'Expérimental', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Composants',
+					link: '/fr/guides/components/',
+					badge: { text: 'Expérimental', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## Attributs HTML personnalisés
+
+Les liens peuvent aussi inclure une propriété `attrs` pour ajouter des attributs HTML personnalisés à l'élément du lien.
+
+Dans l'exemple suivant, `attrs` est utilisé pour ajouter un attribut `target="_blank"`, afin que le lien s'ouvre dans un nouvel onglet, et pour appliquer un attribut `style` personnalisé pour mettre en italique l'étiquette du lien :
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			items: [
+				// Un lien externe vers la doc de Astro s'ouvrant dans un nouvel onglet.
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
+## Internationalisation
+
+Utilisez la propriété `translations` sur les liens et les groupes pour traduire l'étiquette du lien ou du groupe pour chaque langue prise en charge en spécifiant une étiquette d'identification de langue [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), par exemple `"en"`, `"ar"` ou `"zh-CN"`, comme clé et l'étiquette traduite comme valeur.
+La propriété `label` sera utilisée pour la langue par défaut et pour les langues sans traduction.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			translations: {
+				'pt-BR': 'Guias',
+			},
+			items: [
+				{
+					label: 'Composants',
+					translations: {
+						'pt-BR': 'Componentes',
+					},
+					link: '/guides/components/',
+				},
+				{
+					label: 'Internationalisation (i18n)',
+					translations: {
+						'pt-BR': 'Internacionalização (i18n)',
+					},
+					link: '/guides/i18n/',
+				},
+			],
+		},
+	],
+});
+```
+
+Parcourir la documentation en portugais brésilien générera la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guias',
+			items: [
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+## Groupes rétractables
+
+Les groupes de liens peuvent être rétractés par défaut en définissant la propriété `collapsed` à `true`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			// Rétracte le groupe par défaut.
+			collapsed: true,
+			items: [
+				{ label: 'Composants', link: '/fr/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/fr/guides/i18n/' },
+			],
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			collapsed: true,
+			items: [
+				{ label: 'Composants', link: '/fr/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/fr/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+Les [groupes générés automatiquement](#groupes-générés-automatiquement) respectent la valeur `collapsed` de leur groupe parent :
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			// Rétracte le groupe et ses sous-groupes générés automatiquement
+			// par défaut.
+			collapsed: true,
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			collapsed: true,
+			items: [
+				{ label: 'Composants', link: '/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'advanced',
+					collapsed: true,
+					items: [
+						{
+							label: 'Structure du projet',
+							link: '/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+Ce comportement peut être remplacé en définissant la propriété `autogenerate.collapsed`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guides',
+			// Ne rétracte pas le groupe "Guides" mais rétracte ses
+			// sous-groupes générés automatiquement.
+			collapsed: false,
+			autogenerate: { directory: 'guides', collapsed: true },
+		},
+	],
+});
+```
+
+La configuration ci-dessus génère la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guides',
+			items: [
+				{ label: 'Composants', link: '/guides/components/' },
+				{ label: 'Internationalisation (i18n)', link: '/guides/i18n/' },
+				{
+					label: 'advanced',
+					collapsed: true,
+					items: [
+						{
+							label: 'Structure du projet',
+							link: '/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>

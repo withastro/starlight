@@ -3,7 +3,7 @@ title: 마크다운으로 콘텐츠 작성
 description: Starlight가 지원하는 Markdown 구문의 개요입니다.
 ---
 
-Starlight는 `.md` 파일에서 제목 및 설명과 같은 메타데이터를 정의하기 위해 [Markdown](https://daringfireball.net/projects/markdown/)의 모든 구문과 frontmatter [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f)을 지원합니다.
+Starlight는 `.md` 파일에서 제목 및 설명과 같은 메타데이터를 정의하기 위해 [Markdown](https://daringfireball.net/projects/markdown/)의 모든 구문과 프론트매터 [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f)을 지원합니다.
 
 해당 파일 형식을 사용하는 경우 Markdown 지원 및 사용법이 다를 수 있으므로 [MDX 문서](https://mdxjs.com/docs/what-is-mdx/#markdown) 또는 [Markdoc 문서](https://markdoc.dev/docs/syntax)를 확인하세요.
 
@@ -208,3 +208,7 @@ var fun = function lang(l) {
 ## 기타 일반적인 Markdown 기능
 
 Starlight는 목록 및 테이블과 같은 다른 모든 Markdown 작성 구문을 지원합니다. 모든 Markdown 구문 요소에 대한 간략한 개요는 [Markdown Guide의 Markdown 치트 시트](https://www.markdownguide.org/cheat-sheet/)를 참조하세요.
+
+## 고급 Markdown 및 MDX 구성
+
+Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 및 MDX 구성](https://docs.astro.build/ko/guides/markdown-content/#configuring-markdown-and-mdx)을 참조하세요.

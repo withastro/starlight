@@ -146,7 +146,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 - Navegación clara
 - Tema de color configurable por el usuario
-- [Soporte de i18n](/guides/i18n)
+- [Soporte de i18n](/es/guides/i18n)
 
 :::
 
@@ -160,7 +160,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 - Navegación clara
 - Tema de color configurable por el usuario
-- [Soporte de i18n](/guides/i18n)
+- [Soporte de i18n](/es/guides/i18n)
 
 :::
 ```
@@ -206,3 +206,7 @@ Los bloques de código largos de una sola línea no deben ajustarse automáticam
 ## Otras características comunes de Markdown
 
 Starlight admite todas las demás sintaxis de autoría de Markdown, como listas y tablas. Puedes consultar la [Guía de referencia de Markdown](https://www.markdownguide.org/cheat-sheet/) para obtener una descripción general rápida de todos los elementos de sintaxis de Markdown.
+
+## Configuración avanzada de Markdown y MDX
+
+Starlight utiliza el motor de renderizado de Markdown y MDX de Astro, construido sobre remark y rehype. Puedes añadir soporte para sintaxis y comportamientos personalizados añadiendo `remarkPlugins` o `rehypePlugins` en tu archivo de configuración de Astro. Consulta la sección ["Configuración de Markdown y MDX"](https://docs.astro.build/es/guides/markdown-content/#configuraci%C3%B3n-de-markdown-y-mdx) en la documentación de Astro para obtener más información.

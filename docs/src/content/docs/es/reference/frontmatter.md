@@ -32,13 +32,13 @@ La descripción de la página es usada para los metadatos de la página y será 
 
 **tipo:** `string | boolean`
 
-Reemplaza la [configuración global `editLink`](/reference/configuration/#editlink). Establece a `false` para deshabilitar el enlace "Editar página" para una página específica o proporciona una URL alternativa donde el contenido de esta página es editable.
+Reemplaza la [configuración global `editLink`](/es/reference/configuration/#editlink). Establece a `false` para deshabilitar el enlace "Editar página" para una página específica o proporciona una URL alternativa donde el contenido de esta página es editable.
 
 ### `head`
 
-**tipo:** [`HeadConfig[]`](/reference/configuration/#headconfig)
+**tipo:** [`HeadConfig[]`](/es/reference/configuration/#headconfig)
 
-Puedes agregar etiquetas adicionales a la etiqueta `<head>` de tu página usando el campo `head` del frontmatter. Esto significa que puedes agregar estilos personalizados, metadatos u otras etiquetas a una sola página. Similar a la [opción global `head`](/reference/configuration/#head).
+Puedes agregar etiquetas adicionales a la etiqueta `<head>` de tu página usando el campo `head` del frontmatter. Esto significa que puedes agregar estilos personalizados, metadatos u otras etiquetas a una sola página. Similar a la [opción global `head`](/es/reference/configuration/#head).
 
 ```md
 ---
@@ -54,7 +54,7 @@ head:
 
 **tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-Reemplaza la [configuración global `tableOfContents`](/reference/configuration/#tableofcontents).
+Reemplaza la [configuración global `tableOfContents`](/es/reference/configuration/#tableofcontents).
 Personaliza los niveles de encabezado que se incluirán o establece en `false` para ocultar la tabla de contenidos en esta página.
 
 ```md
@@ -111,20 +111,44 @@ hero:
 ---
 ```
 
+Puedes mostrar diferentes versiones de la imagen hero en los modos claro y oscuro.
+
+```md
+---
+hero:
+  image:
+    alt: Un logotipo brillante, de colores brillantes
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Ruta relativa a una imagen en tu repositorio.
-    file?: string;
-    // HTML crudo para usar en el espacio de la imagen.
-    // Podría ser una etiqueta `<img>` personalizada o un `<svg>` en línea.
-    html?: string;
-  };
+  image?:
+    | {
+        // Ruta relativa a una imagen en tu repositorio.
+        file: string;
+        // Texto alternativo para hacer que la imagen sea accesible a la tecnología de asistencia
+        alt?: string;
+      }
+    | {
+        // Ruta relativa a una imagen en tu repositorio para usar en el modo oscuro.
+        dark: string;
+        // Ruta relativa a una imagen en tu repositorio para usar en el modo claro.
+        light: string;
+        // Texto alternativo para hacer que la imagen sea accesible a la tecnología de asistencia
+        alt?: string;
+      }
+    | {
+        // HTML crudo para usar en el espacio de la imagen.
+        // Podría ser una etiqueta `<img>` personalizada o un `<svg>` en línea.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
@@ -157,7 +181,7 @@ banner:
 
 **type:** `Date | boolean`
 
-Sobrescribe la [opción global `lastUpdated`](/reference/configuration/#lastupdated). Si se especifica una fecha, debe ser una [marca de tiempo YAML](https://yaml.org/type/timestamp.html) válida y sobrescribirá la fecha almacenada en el historial de Git para esta página.
+Sobrescribe la [opción global `lastUpdated`](/es/reference/configuration/#lastupdated). Si se especifica una fecha, debe ser una [marca de tiempo YAML](https://yaml.org/type/timestamp.html) válida y sobrescribirá la fecha almacenada en el historial de Git para esta página.
 
 ```md
 ---
@@ -170,7 +194,7 @@ lastUpdated: 2022-08-09
 
 **tipo:** `boolean | string | { link?: string; label?: string }`
 
-Anula la [opción global de `pagination`](/reference/configuration/#pagination). Si se especifica un string, el texto del enlace generado se reemplazará, y si se especifica un objeto, tanto el enlace como el texto serán anulados.
+Anula la [opción global de `pagination`](/es/reference/configuration/#pagination). Si se especifica un string, el texto del enlace generado se reemplazará, y si se especifica un objeto, tanto el enlace como el texto serán anulados.
 
 ```md
 ---
@@ -225,9 +249,21 @@ pagefind: false
 
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**tipo:** [`SidebarConfig`](#sidebarconfig)
 
-Controla cómo se muestra esta página en el [sidebar](/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
+Controla cómo se muestra esta página en el [sidebar](/es/reference/configuration/#sidebar) al utilizar un grupo de enlaces generado automáticamente.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -298,5 +334,21 @@ sidebar:
   badge:
     text: Experimental
     variant: caution
+---
+```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+Atributos HTML para agregar al enlace de la página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
+
+```md
+---
+title: Página que se abre en una nueva pestaña
+sidebar:
+  # Abre la página en una nueva pestaña
+  attrs:
+    target: _blank
 ---
 ```

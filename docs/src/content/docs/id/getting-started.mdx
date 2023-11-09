@@ -1,13 +1,13 @@
 ---
 title: Memulai
-description: Pelajari cara membuat situs dokumentasi baru Anda dengan Starlight oleh Astro.
+description: Pelajari cara membuat website dokumentasi baru Anda dengan Starlight oleh Astro.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Membuat Proyek Baru
 
-Starlight adalah tema dokumentasi berfitur lengkap berbasis [Astro](https://astro.build).
+Starlight adalah tema website dokumentasi berfitur lengkap berbasis [Astro](https://astro.build).
 
 Anda dapat membuat proyek Astro + Starlight baru menggunakan perintah berikut ini:
 
@@ -38,9 +38,9 @@ yarn create astro --template starlight
 </TabItem>
 </Tabs>
 
-Perintah tersebut akan membuat [direktori proyek](/guides/project-structure/) baru beserta seluruh file dan konfigurasi untuk situs Anda.
+Perintah tersebut akan membuat [direktori proyek](/id/guides/project-structure/) baru berisikan seluruh file dan konfigurasi untuk website Anda.
 
-:::tip[Coba dulu]
+:::tip[Lihat contohnya]
 Cobalah Starlight di browser:
 [buka dengan StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
 :::
@@ -51,20 +51,20 @@ Starlight sudah siap untuk ditambahkan konten baru, atau pindahkan konten lama A
 
 ### Format file
 
-Starlight mendukung pembuatan konten dalam Markdown and MDX. (Tambahkan dukungan Markdoc dengan menginstall integrasi eksperimental [Astro Markdoc](https://docs.astro.build/en/guides/integrations-guide/markdoc/).)
+Starlight mendukung pembuatan konten dalam bentuk Markdown and MDX. (Anda dapat menambahkan support untuk Markdoc dengan menginstall integrasi eksperimental [Astro Markdoc](https://docs.astro.build/en/guides/integrations-guide/markdoc/).)
 
 ### Tambah halaman baru
 
-Tambah halaman baru dengan cara membuat file `.md` or `.mdx` di `src/content/docs/`. Tambahkan folder untuk mengorganisasikan konten Anda, dan membuat segmen _path_ bertingkat:
+Tambah halaman baru secara otomatis dengan cara membuat file `.md` or `.mdx` di `src/content/docs/`. Tambahkan folder untuk mengatur konten Anda, dan membuat beberapa segmen _path_ bertingkat:
 
 ```
 src/content/docs/hello-world.md => your-site.com/hello-world
 src/content/docs/guides/faq.md => your-site.com/guides/faq
 ```
 
-### _Frontmatter_ dengan _type-safety_ yang aman
+### Frontmatter yang type-safe
 
-Semua halaman Starlight terdiri dari [properti _frontmatter_ umum](/id/reference/frontmatter/) yang dapat dikostumisasi untuk mengontrol tampilan setiap halaman:
+Semua halaman Starlight berbagi [properti _frontmatter_ umum](/id/reference/frontmatter/) yang dapat dikostumisasi untuk mengontrol tampilan setiap halaman:
 
 ```md
 ---
@@ -75,11 +75,11 @@ description: This is a page in my Starlight-powered site
 
 Jika ada properti yang terlewat, Starlight akan memberitahu Anda.
 
-## _Deploy_ situs Starlight Anda
+## Deploy website Starlight Anda
 
-Setelah Anda membuat dan mengkostumisasi situs Starlight anda, anda dapat men-_deploy_ situs anda ke web server atau platform hosting pilihan Anda, termasuk Netlify, Vercel, GitHub Pages dan lain sebagainya.
+Setelah Anda selesai membuat dan mengkostumisasi website Starlight anda, anda dapat men-_deploy_ website Anda ke web server atau platform hosting pilihan Anda, termasuk Netlify, Vercel, GitHub Pages, dan lain sebagainya.
 
-[Pelajari cara men-_deploy_ situs Astro di dokumentasi Astro.](https://docs.astro.build/en/guides/deploy/)
+[Pelajari cara men-_deploy_ website Astro di dokumentasi Astro.](https://docs.astro.build/en/guides/deploy/)
 
 ## Memperbaharui Starlight
 
@@ -116,14 +116,14 @@ yarn upgrade @astrojs/starlight --latest
 </TabItem>
 </Tabs>
 
-Anda dapat membaca semua histori pembaruan Starlight dalam setiap rilis di [_changelog_](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+Anda dapat melihat daftar lengkap perubahan-perubahan yang dilakukan dalam setiap rilis di [_changelog_](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
 
-## Menyelesaikan masalah pada Starlight
+## Troubleshooting Starlight
 
-[Konfigurasi proyek](/id/reference/configuration/) dan [konfigurasi _frontmatter_](/id/reference/frontmatter/) tersedia di bagian Referensi pada situs ini. Rujuklah halaman tersebut untuk memastikan situs Starlight anda terkonfigurasi dengan benar dan berfungsi dengan baik.
+[Konfigurasi proyek](/id/reference/configuration/) dan [konfigurasi _frontmatter_](/id/reference/frontmatter/) tersedia di bagian Referensi pada website ini. Gunakan halaman-halaman tersebut untuk memastikan website Starlight Anda terkonfigurasi dengan benar dan berfungsi dengan baik.
 
-Anda juga dapat merujuk kepada panduan di _sidebar_ untuk membantu Anda dalam menambah konten dan mengkustomisasi situs Starlight anda.
+Anda juga dapat merujuk kepada panduan di _sidebar_ untuk membantu Anda dalam menambah konten dan mengkustomisasi website Starlight Anda.
 
-Jika Anda tidak menemukan jawaban di dokumentasi ini, silahkan merujuk kepada [dokumentasi lengkap Astro](https://docs.astro.build). Pertanyaan Anda biasanya akan terjawab dengan memahami bagaimana umumnya Astro bekerja, sebagai basis dari Starlight.
+Jika Anda tidak menemukan jawaban di dokumentasi ini, silahkan merujuk kepada [dokumentasi lengkap Astro](https://docs.astro.build). Pertanyaan Anda biasanya akan terjawab dengan memahami bagaimana Astro bekerja secara umum, sebagai basis dari Starlight.
 
-Anda juga dapat merujuk kepada [isu-isu yang diketahui di GitHub](https://github.com/withastro/starlight/issues), dan mendapatka bantuan melalui [Astro Discord](https://astro.build/chat/) oleh komunitas kami yang ramah dan sangat aktif! Silahkan bertanya di forum `#support` menggunakan tag "starlight" tag, atau kunjungi channel `#starlight` untuk mendiskusikan pengembangan Starlight, dan lain-lain!
+Anda juga dapat merujuk kepada [isu-isu di GitHub](https://github.com/withastro/starlight/issues), dan mendapatkan bantuan di [Astro Discord](https://astro.build/chat/) dari komunitas kami yang ramah dan sangat aktif! Silahkan bertanya di forum `#support` menggunakan tag "starlight" tag, atau kunjungi channel `#starlight` untuk mendiskusikan pengembangan Starlight, dan lain-lain!

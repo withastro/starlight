@@ -27,8 +27,8 @@ Starlight provides built-in support for multilingual sites, including routing, f
    				en: {
    					label: 'English',
    				},
-   				// Simplified Chinese docs in `src/content/docs/zh/`
-   				zh: {
+   				// Simplified Chinese docs in `src/content/docs/zh-cn/`
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -55,7 +55,7 @@ Starlight provides built-in support for multilingual sites, including routing, f
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -84,7 +84,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // lang is required for root locales
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -102,7 +102,7 @@ When using a `root` locale, keep pages for that language directly in `src/conten
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -143,7 +143,7 @@ If a translation is not yet available for a language, Starlight will show reader
 
 In addition to hosting translated content files, Starlight allows you to translate the default UI strings (e.g. the "On this page" heading in the table of contents) so that your readers can experience your site entirely in the selected language.
 
-English, Czech, French, German, Italian, Japanese, Portuguese, Dutch, Danish, Spanish, Turkish, Arabic, Norwegian, Farsi, Hebrew, Simplified Chinese, Korean, Indonesian, Russian, and Swedish translated UI strings are provided out of the box, and we welcome [contributions to add more default languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+English, Czech, French, German, Italian, Japanese, Portuguese, Dutch, Danish, Spanish, Turkish, Arabic, Norwegian, Farsi, Hebrew, Simplified Chinese, Korean, Indonesian, Russian, Swedish, Ukrainian, Vietnamese, and Galician translated UI strings are provided out of the box, and we welcome [contributions to add more default languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 You can provide translations for additional languages you support — or override our default labels — via the `i18n` data collection.
 
@@ -197,7 +197,8 @@ You can provide translations for additional languages you support — or overrid
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
    	"page.previousLink": "Next",
-   	"page.nextLink": "Previous"
+   	"page.nextLink": "Previous",
+   	"404.text": "Page not found. Check the URL or try using the search bar."
    }
    ```
 

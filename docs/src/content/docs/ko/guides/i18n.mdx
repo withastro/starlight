@@ -27,8 +27,8 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
    				en: {
    					label: 'English',
    				},
-   				// 중국어 간체 문서는 `src/content/docs/zh/`에 있습니다.
-   				zh: {
+   				// 중국어 간체 문서는 `src/content/docs/zh-cn/`에 있습니다.
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -45,7 +45,7 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 
    `defaultLocale`은 대체 콘텐츠 및 UI 라벨에 사용되므로 콘텐츠 작성을 시작할 가능성이 가장 높거나 이미 콘텐츠가 있는 언어로 선택하세요.
 
-2. `src/content/docs/`에 각 언어에 대한 디렉토리를 만듭니다. 예를 들어 위에서 사용한 구성의 경우 다음과 같이 디렉토리를 생성할 수 있습니다.
+2. `src/content/docs/`에 각 언어에 대한 디렉터리를 만듭니다. 예를 들어 위에서 사용한 구성의 경우 다음과 같이 디렉터리를 생성할 수 있습니다.
 
    <FileTree>
 
@@ -54,11 +54,11 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
-3. 이제 언어 디렉토리에 콘텐츠 파일을 추가할 수 있습니다. 여러 언어로 작성된 페이지를 연결하기 위해 같은 이름의 파일을 사용하면 Starlight의 모든 i18n 기능(대체 콘텐츠, 번역 알림 등)을 활용할 수 있습니다.
+3. 이제 언어 디렉터리에 콘텐츠 파일을 추가할 수 있습니다. 여러 언어로 작성된 페이지를 연결하기 위해 같은 이름의 파일을 사용하면 Starlight의 모든 i18n 기능(대체 콘텐츠, 번역 알림 등)을 활용할 수 있습니다.
 
    예를 들어, 아랍어와 영어 홈페이지를 각각 나타내려면 `ar/index.md` 및 `en/index.md`를 만듭니다.
 
@@ -83,7 +83,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // 루트 로케일은 lang이 반드시 필요합니다.
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -101,7 +101,7 @@ export default defineConfig({
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -143,7 +143,7 @@ Starlight는 귀하가 모든 언어로 같은 페이지를 생성할 것을 기
 
 Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외에도 독자가 선택한 언어로 사이트 전체를 경험할 수 있도록 기본 UI 문자열(예를 들어, 목차의 제목인 "목차")을 번역할 수 있습니다.
 
-영어, 체코어, 프랑스어, 독일어, 이탈리아어, 일본어, 포르투갈어, 네덜란드어, 덴마크어, 스페인어, 터키어, 아랍어, 노르웨이어, 페르시아어, 히브리어, 중국어 간체, 한국어, 인도네시아어, 러시아어 및 스웨덴어로 번역된 UI 문자열이 기본적으로 제공됩니다. 그리고 우리는 [더 많은 기본 언어를 추가하는 데 기여](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)하는걸 환영합니다.
+영어, 체코어, 프랑스어, 독일어, 이탈리아어, 일본어, 포르투갈어, 네덜란드어, 덴마크어, 스페인어, 터키어, 아랍어, 노르웨이어, 페르시아어, 히브리어, 중국어 간체, 한국어, 인도네시아어, 러시아어, 스웨덴어, 우크라이나어, 베트남어 및 갈리시아어로 번역된 UI 문자열이 기본적으로 제공됩니다. 그리고 우리는 [더 많은 기본 언어를 추가하는 데 기여](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)하는걸 환영합니다.
 
 `i18n` 데이터 컬렉션을 통해 지원하는 추가 언어에 대한 번역을 제공하거나 기본 라벨을 변경할 수 있습니다.
 
@@ -196,7 +196,8 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
    	"page.previousLink": "Next",
-   	"page.nextLink": "Previous"
+   	"page.nextLink": "Previous",
+   	"404.text": "Page not found. Check the URL or try using the search bar."
    }
    ```
 

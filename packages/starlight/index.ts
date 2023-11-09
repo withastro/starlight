@@ -9,8 +9,9 @@ import { vitePluginStarlightUserConfig } from './integrations/virtual-user-confi
 import { errorMap } from './utils/error-map';
 import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
+import { createTranslationSystemFromFs } from './utils/translations-fs';
 
-export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration[] {
+export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration {
 	const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
 
 	if (!parsedConfig.success) {
@@ -26,6 +27,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 		name: '@astrojs/starlight',
 		hooks: {
 			'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
+				const useTranslations = createTranslationSystemFromFs(userConfig, config);
 				injectRoute({
 					pattern: '404',
 					entryPoint: '@astrojs/starlight/404.astro',
@@ -34,7 +36,15 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
+				const integrations: AstroIntegration[] = [];
+				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
+					integrations.push(starlightSitemap(userConfig));
+				}
+				if (!config.integrations.find(({ name }) => name === '@astrojs/mdx')) {
+					integrations.push(mdx());
+				}
 				const newConfig: AstroUserConfig = {
+					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
 					},
@@ -48,19 +58,6 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 					scopedStyleStrategy: 'where',
 				};
 				updateConfig(newConfig);
-			},
-
-			'astro:config:done': ({ config }) => {
-				const integrations = config.integrations.map(({ name }) => name);
-				for (const builtin of ['@astrojs/mdx', '@astrojs/sitemap']) {
-					if (integrations.filter((name) => name === builtin).length > 1) {
-						throw new Error(
-							`Found more than one instance of ${builtin}.\n` +
-								`Starlight includes ${builtin} by default.\n` +
-								'Please remove it from your integrations array in astro.config.mjs'
-						);
-					}
-				}
 			},
 
 			'astro:build:done': ({ dir }) => {
@@ -78,5 +75,5 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 		},
 	};
 
-	return [starlightSitemap(userConfig), Starlight, mdx()];
+	return Starlight;
 }

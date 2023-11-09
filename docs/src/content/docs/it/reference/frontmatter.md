@@ -224,14 +224,26 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**type:** [`SidebarConfig`](#sidebarconfig)
 
 Controlla il modo in cui questa pagina viene visualizzata nella [barra laterale](/it/reference/configuration/#sidebar), quando si utilizza un gruppo di collegamenti generato automaticamente.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
 **type:** `string`  
-**default:** the page [`title`](#title-required)
+**default:** the page [`title`](#title-obbligatorio)
 
 Imposta l'etichetta per questa pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 
@@ -297,5 +309,21 @@ sidebar:
   badge:
     text: Sperimentale
     variant: caution
+---
+```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+Attributi HTML da aggiungere al collegamento della pagina nella barra laterale quando viene visualizzato in un gruppo di collegamenti generato automaticamente.
+
+```md
+---
+title: Pagina che si aprirà in una nuova scheda
+sidebar:
+  # Apre la pagina in una nuova scheda
+  attrs:
+    target: _blank
 ---
 ```

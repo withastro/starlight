@@ -111,20 +111,44 @@ hero:
 ---
 ```
 
+Você pode exibir diferentes versões da imagem hero no modo claro e escuro.
+
+```md
+---
+hero:
+  image:
+    alt: Um logo brilhante e colorido
+    dark: ../../assets/logo-escuro.png
+    light: ../../assets/logo-claro.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Caminho relativo a uma imagem no seu repositório.
-    file?: string;
-    // HTML bruto para utilizar no slot de imagem.
-    // Pode ser uma tag `<img>` customizada ou um `<svg>` inline.
-    html?: string;
-  };
+  image?:
+    | {
+        // Caminho relativo de uma imagem no seu repositório.
+        file: string;
+        // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
+        alt?: string;
+      }
+    | {
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo escuro.
+        dark: string;
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo claro.
+        light: string;
+        // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
+        alt?: string;
+      }
+    | {
+        // HTML bruto para utilizar no slot de imagem.
+        // Pode ser uma tag `<img>` personalizada ou um `<svg>` inline.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
@@ -208,11 +232,38 @@ next: false
 ---
 ```
 
+### `pagefind`
+
+**tipo:** `boolean`  
+**padrão:** `true`
+
+Configura se essa página deve ou não ser inclusa no índice de busca do [Pagefind](https://pagefind.app/).
+Defina como `false` para excluir a página do resultado de buscas.
+
+```md
+---
+# Não exibir essa página nas buscas
+pagefind: false
+---
+```
+
 ### `sidebar`
 
-**tipo:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**tipo:** [`SidebarConfig`](#sidebarconfig)
 
 Controla como essa página é mostrada na [barra lateral](/pt-br/reference/configuration/#sidebar), quando se utiliza um grupo de links gerados automaticamente.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -283,5 +334,21 @@ sidebar:
   badge:
     text: Experimental
     variant: caution
+---
+```
+
+#### `attrs`
+
+**tipo:** `Record<string, string | number | boolean | undefined>`
+
+Atributos HTML que será adicionado ao link da barra lateral da página quando exibido em um grupo de link gerados automaticamente.
+
+```md
+---
+title: Abrir em nova aba
+sidebar:
+  # Abre a página em uma nova aba
+  attrs:
+    target: _blank
 ---
 ```

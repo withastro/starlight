@@ -1,0 +1,537 @@
+---
+title: Боковая панель
+description: Узнайте, как настроить и настроить ссылки боковой панели навигации вашего сайта Starlight.
+---
+
+import FileTree from '../../../../components/file-tree.astro';
+import SidebarPreview from '../../../../components/sidebar-preview.astro';
+
+Хорошо организованная боковая панель ключевой параметр хорошей документации, поскольку это один из основных способов,
+которыми пользователи будут перемещаться по вашему сайту. Starlight предоставляет полный набор опций для настройки макета и содержимого вашей боковой панели.
+
+## Стандартная боковая панель
+
+По умолчанию, Starlight автоматически создаст боковую панель на основе файловой системы вашей документации, используя свойство `title` каждого файла как элемент боковой панели.
+
+Например, учитывая следующую структуру файлов:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+      - reference/
+        - configuration.md
+
+</FileTree>
+
+Следующая боковая панель будет сгенерирована автоматически:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+			],
+		},
+		{
+			label: 'Справочник',
+			items: [
+				{
+					label: 'Справочник по конфигурации',
+					link: '/ru/reference/configuration/',
+				},
+			],
+		},
+	]}
+/>
+
+Узнайте больше о автоматически генерируемых боковых панелях в разделе [Автоматически Генерируемые Группы](#автогенерируемые-группы).
+
+## Добавление ссылок и групп ссылок
+
+Чтобы настроить свои [ссылки](#ссылки) и [группы ссылок](#группировка) (внутри сворачиваемого заголовка) в боковой панели,
+используйте свойство [`starlight.sidebar`](/ru/reference/configuration/#sidebar) в `astro.config.mjs`.
+
+Сочетая ссылки и группы, вы можете создавать разнообразные макеты боковой панели.
+
+### Ссылки
+
+Добавьте ссылку на внутреннюю или внешнюю страницу, используя объект со свойствами `label` и `link`.
+
+```js
+starlight({
+	sidebar: [
+		// Ссылка на руководство по CSS и стилизации.
+		{ label: 'CSS & стилизация', link: '/ru/guides/css-and-tailwind/' },
+		// Внешняя ссылка на веб-сайт Astro.
+		{ label: 'Astro', link: 'https://astro.build/' },
+	],
+});
+```
+
+Конфигурация выше создает следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{ label: 'CSS & стилизация', link: '/ru/guides/css-and-tailwind/' },
+		{ label: 'Astro', link: 'https://astro.build/' },
+	]}
+/>
+
+### Группировка
+
+Вы можете структурировать вашу боковую панель, группируя связанные ссылки вместе под раскрывающимся заголовком.
+Группы могут содержать как ссылки, так и другие подгруппы.
+
+Добавьте группу, используя объект с свойствами `label` и `items`.
+`label` будет использован как заголовок для группы.
+Добавляйте ссылки или подгруппы в массив `items`.
+
+```js
+starlight({
+	sidebar: [
+		// Группа ссылок с названием "Руководства".
+		{
+			label: 'Руководства',
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				// Вложенная группа ссылок.
+				{
+					label: 'Стилизация',
+					items: [
+						{ label: 'CSS', link: '/ru/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/ru/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/ru/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+Вышеуказанная конфигурация генерирует следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{
+					label: 'Стилизация',
+					items: [
+						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### Автогенерируемые группы
+
+Starlight может автоматически генерировать группу в вашей боковой панели, основываясь на директориях в вашей документации.
+Это полезно, когда вы не хотите вручную вводить каждый элемент боковой панели в группе.
+Страницы по умолчанию будут отсортированы по алфавиту по имени файла.
+
+Добавьте автогенерируемую группу, используя объект с свойствами `label` и `autogenerate`.
+Ваша конфигурация `autogenerate` должна указывать `directory`, который будет использоваться для записей боковой панели.
+Например, со следующей конфигурацией:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			// Автоматически генерировать группу ссылок для директории "руководства".
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+И следующей структурой файлов:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - components.md
+        - i18n.md
+        - advanced/
+          - project-structure.md
+
+</FileTree>
+
+Следующая боковая панель будет сгенерирована:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{
+					label: 'дополнительно',
+					items: [
+						{
+							label: 'Структура проекта',
+							link: '/ru/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+#### Настройка сгенерированных ссылок через метаданные
+
+Используйте [поле `sidebar`](/ru/reference/frontmatter/#sidebar) в метаданных страниц для настройки автоматически генерируемых ссылок.
+
+Параметры в метаданных для боковой панели позволяют [установить метку](/ru/reference/frontmatter/#label)
+или добавить [значок](/ru/reference/frontmatter/#badge) к ссылке, [скрыть](/ru/reference/frontmatter/#hidden)
+ссылку из боковой панели или определить [вес сортировки](/ru/reference/frontmatter/#order).
+
+```md
+---
+title: Моя страница
+sidebar:
+  # Установить текст для ссылки
+  label: Текст в боковой панели
+  # Установить порядок для ссылки (меньшие числа отображаются выше)
+  order: 2
+  # Добавить значок к ссылке
+  badge:
+    text: Новое
+    variant: tip
+---
+```
+
+Автоматически созданная группа, включающая страницу с вышеуказанными метаданными, сгенерирует следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{ label: 'Страница', link: '#' },
+				{
+					label: 'Текст в боковой панели',
+					link: '#',
+					badge: { text: 'Новое', variant: 'tip' },
+				},
+				{ label: 'Другая страница', link: '#' },
+			],
+		},
+	]}
+/>
+
+:::note[Заметка]
+Конфигурация `sidebar` в метаданных используется только для автоматически генерируемых ссылок и будет проигнорирована для вручную определенных ссылок.
+:::
+
+## Значки
+
+Ссылки также могут включать свойство `badge` для отображения значка рядом с текстом ссылки.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			items: [
+				// Ссылка со значком "Новое".
+				{
+					label: 'Компоненты',
+					link: '/ru/guides/components/',
+					badge: 'Новое',
+				},
+			],
+		},
+	],
+});
+```
+
+Конфигурация выше создаст следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{
+					label: 'Компоненты',
+					link: '/ru/guides/components/',
+					badge: { text: 'Новое', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
+### Варианты значков
+
+Настройте стиль значка, используя объект с свойствами `text` и `variant`.
+
+`text` представляет содержимое для отображения (например, "Новое").
+Переопределите стиль `default`, который использует акцентный цвет вашего сайта,
+установив свойство `variant` в одно из следующих значений: `note`, `tip`, `danger`, `caution` или `success`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			items: [
+				// Ссылка с желтым значком "Экспериментально".
+				{
+					label: 'Компоненты',
+					link: '/ru/guides/components/',
+					badge: { text: 'Экспериментально', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+Конфигурация выше создаст следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{
+					label: 'Компоненты',
+					link: '/ru/guides/components/',
+					badge: { text: 'Экспериментально', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## Пользовательские HTML-атрибуты
+
+Ссылки также могут включать свойство `attrs` для добавления пользовательских HTML-атрибутов к элементу ссылки.
+
+В следующем примере `attrs` используется для добавления атрибута `target="_blank"`, чтобы ссылка открывалась в новой вкладке,
+а также для применения атрибута `style`, чтобы курсивом выделить метку ссылки:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			items: [
+				// Внешняя ссылка на документацию Astro, открывающаяся в новой вкладке.
+				{
+					label: 'Документация Astro',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+Конфигурация выше создаст следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{
+					label: 'Документация Astro',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
+## Интернационализация
+
+Используйте свойство `translations` для ссылок и групп, чтобы перевести текст ссылки или группы на каждый поддерживаемый язык,
+указав языковой тег [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), например,
+`"en"`, `"ar"` или `"zh-CN"`, в качестве ключа и переведенной метки в качестве значения.
+Свойство `label` будет использоваться для языка по умолчанию и для языков без перевода.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			translations: {
+				'pt-BR': 'Guias',
+			},
+			items: [
+				{
+					label: 'Компоненты',
+					translations: {
+						'pt-BR': 'Componentes',
+					},
+					link: '/guides/components/',
+				},
+				{
+					label: 'Интернационализация (i18n)',
+					translations: {
+						'pt-BR': 'Internacionalização (i18n)',
+					},
+					link: '/guides/i18n/',
+				},
+			],
+		},
+	],
+});
+```
+
+При просмотре документации на бразильском португальском языке будет сгенерирована следующая боковая панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guías',
+			items: [
+				{ label: 'Componentes', link: '/es/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+## Сворачиваемые группы
+
+Группы ссылок могут быть свернуты по умолчанию, если установить свойство `collapsed` в `true`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			// Collapse the group by default.
+			collapsed: true,
+			items: [
+				{ label: 'Components', link: '/guides/components/' },
+				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+			],
+		},
+	],
+});
+```
+
+Конфигурация выше создает следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			collapsed: true,
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+			],
+		},
+	]}
+/>
+
+[Автогенерируемые группы](#автогенерируемые-группы) учитывают значение `collapsed` родительской группы:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			// Свернуть группу и её автогенерируемые подгруппы по умолчанию.
+			collapsed: true,
+			autogenerate: { directory: 'guides' },
+		},
+	],
+});
+```
+
+Конфигурация выше создает следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			collapsed: true,
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{
+					label: 'дополнительно',
+					collapsed: true,
+					items: [
+						{
+							label: 'Структура проекта',
+							link: '/ru/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
+Это поведение может быть переопределено путем установки свойства `autogenerate.collapsed`.
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Руководства',
+			// Не сворачивать группу "Руководства", но свернуть её автоматически сгенерированные подгруппы.
+			collapsed: false,
+			autogenerate: { directory: 'guides', collapsed: true },
+		},
+	],
+});
+```
+
+Конфигурация выше создает следующую боковую панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Руководства',
+			items: [
+				{ label: 'Компоненты', link: '/ru/guides/components/' },
+				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{
+					label: 'дополнительно',
+					collapsed: true,
+					items: [
+						{
+							label: 'Структура проекта',
+							link: '/ru/guides/project-structure/',
+						},
+					],
+				},
+			],
+		},
+	]}
+/>

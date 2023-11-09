@@ -1,14 +1,12 @@
 ---
+import { PAGE_TITLE_ID } from '../constants';
 import { useTranslations } from '../utils/translations';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { Props } from '../props';
 
 const t = useTranslations(Astro.props.locale);
 ---
 
-<a href="#_top">{t('skipLink.label')}</a>
+<a href={`#${PAGE_TITLE_ID}`}>{t('skipLink.label')}</a>
 
 <style>
 	a {

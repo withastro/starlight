@@ -2,10 +2,7 @@
 import '@pagefind/default-ui/css/ui.css';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
-
-interface Props {
-	locale: string | undefined;
-}
+import type { Props } from '../props';
 
 const t = useTranslations(Astro.props.locale);
 const pagefindTranslations = {
@@ -129,6 +126,9 @@ const pagefindTranslations = {
 </script>
 
 <style>
+	site-search {
+		display: contents;
+	}
 	button[data-open-modal] {
 		display: flex;
 		align-items: center;
@@ -405,7 +405,7 @@ const pagefindTranslations = {
 
 	#starlight__search .pagefind-ui__result-excerpt {
 		font-size: calc(1rem * var(--pagefind-ui-scale));
-		word-break: break-word;
+		overflow-wrap: anywhere;
 	}
 
 	#starlight__search mark {

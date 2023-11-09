@@ -3,15 +3,13 @@ import type { SchemaContext } from 'astro:content';
 import { HeadConfigSchema } from './schemas/head';
 import { PrevNextLinkConfigSchema } from './schemas/prevNextLink';
 import { TableOfContentsSchema } from './schemas/tableOfContents';
-import { Icons } from './components/Icons';
 import { BadgeConfigSchema } from './schemas/badge';
+import { HeroSchema } from './schemas/hero';
+import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
 export { i18nSchema } from './schemas/i18n';
 
-type IconName = keyof typeof Icons;
-const iconNames = Object.keys(Icons) as [IconName, ...IconName[]];
-
 export function docsSchema() {
-	return ({ image }: SchemaContext) =>
+	return (context: SchemaContext) =>
 		z.object({
 			/** The title of the current page. Required. */
 			title: z.string(),
@@ -44,56 +42,7 @@ export function docsSchema() {
 			template: z.enum(['doc', 'splash']).default('doc'),
 
 			/** Display a hero section on this page. */
-			hero: z
-				.object({
-					/**
-					 * The large title text to show. If not provided, will default to the top-level `title`.
-					 * Can include HTML.
-					 */
-					title: z.string().optional(),
-					/**
-					 * A short bit of text about your project.
-					 * Will be displayed in a smaller size below the title.
-					 */
-					tagline: z.string().optional(),
-					/** The image to use in the hero. You can provide either a relative `file` path or raw `html`. */
-					image: z
-						.object({
-							/** Alt text for screenreaders and other assistive technologies describing your hero image. */
-							alt: z.string().default(''),
-							/** Relative path to an image file in your repo, e.g. `../../assets/hero.png`. */
-							file: image().optional(),
-							/** Raw HTML string instead of an image file. Useful for inline SVGs or more complex hero content. */
-							html: z.string().optional(),
-						})
-						.optional(),
-					/** An array of call-to-action links displayed at the bottom of the hero. */
-					actions: z
-						.object({
-							/** Text label displayed in the link. */
-							text: z.string(),
-							/** Value for the link’s `href` attribute, e.g. `/page` or `https://mysite.com`. */
-							link: z.string(),
-							/** Button style to use. One of `primary`, `secondary`, or `minimal` (the default). */
-							variant: z.enum(['primary', 'secondary', 'minimal']).default('minimal'),
-							/**
-							 * An optional icon to display alongside the link text.
-							 * Can be an inline `<svg>` or the name of one of Starlight’s built-in icons.
-							 */
-							icon: z
-								.union([z.enum(iconNames), z.string().startsWith('<svg')])
-								.transform((icon) => {
-									const parsedIcon = z.enum(iconNames).safeParse(icon);
-									return parsedIcon.success
-										? ({ type: 'icon', name: parsedIcon.data } as const)
-										: ({ type: 'raw', html: icon } as const);
-								})
-								.optional(),
-						})
-						.array()
-						.default([]),
-				})
-				.optional(),
+			hero: HeroSchema(context).optional(),
 
 			/**
 			 * The last update date of the current page.
@@ -139,6 +88,8 @@ export function docsSchema() {
 					 * Passing only a string defaults to the 'default' variant which uses the site accent color.
 					 */
 					badge: BadgeConfigSchema(),
+					/** HTML attributes to add to the sidebar link. */
+					attrs: SidebarLinkItemHTMLAttributesSchema(),
 				})
 				.default({}),
 

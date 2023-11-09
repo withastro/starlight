@@ -83,7 +83,7 @@ Con questa configurazione, una pagina `/introduction` avrà un link di modifica 
 
 ### `sidebar`
 
-**type:** [`SidebarGroup[]`](#sidebargroup)
+**type:** [`SidebarItem[]`](#sidebaritem)
 
 Configura la barra laterale di navigazione del tuo sito.
 
@@ -187,6 +187,7 @@ type SidebarItem = {
   | {
       link: string;
       badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -229,8 +230,8 @@ export default defineConfig({
         en: {
           label: 'English',
         },
-        // La documentazione in cinese semplificato si trova in `src/content/docs/zh/`
-        zh: {
+        // La documentazione in cinese semplificato si trova in `src/content/docs/zh-cn/`
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },
@@ -307,7 +308,7 @@ Verrà utilizzato come fallback per le pagine non tradotte.
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'email' | 'facebook' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'rss' | 'stackOverflow' | 'telegram' | 'threads' | 'twitch' | 'twitter' | 'x.com' | 'youtube', string>>`
 
 Dettagli opzionali per gli account social del sito. Se vengono aggiunti apparirà l'icona corrispondente nella barra superiore.
 
@@ -323,6 +324,7 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    'x.com': 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
@@ -424,3 +426,29 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**type:** `string`  
+**default:** `'|'`
+
+Imposta il delimitatore tra il titolo della pagina e il titolo del sito nel tag `<title>` della pagina, visualizzato nelle schede del browser.
+
+Per impostazione predefinita, ogni pagina ha un `<title>` di `Titolo della pagina | Titolo del sito`.
+Ad esempio, questa pagina è intitolata "Riferimenti configurazione" e questo sito è intitolato "Starlight", quindi il `<title>` per questa pagina è "Riferimenti configurazione | Starlight".
+
+### `components`
+
+**type:** `Record<string, string>`
+
+Fornisci i percorsi ai componenti per sovrascrivere le implementazioni predefinite di Starlight.
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+Consulta il [Riferimento alle sostituzioni](/it/reference/overrides/) per i dettagli di tutti i componenti che puoi sovrascrivere.

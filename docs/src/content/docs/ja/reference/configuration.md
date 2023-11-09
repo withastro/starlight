@@ -226,8 +226,8 @@ export default defineConfig({
         en: {
           label: 'English',
         },
-        // 簡体字中国語のドキュメントは`src/content/docs/zh/`にあります。
-        zh: {
+        // 簡体字中国語のドキュメントは`src/content/docs/zh-cn/`にあります。
+        'zh-cn': {
           label: '简体中文',
           lang: 'zh-CN',
         },

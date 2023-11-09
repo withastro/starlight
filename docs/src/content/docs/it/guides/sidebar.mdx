@@ -1,8 +1,6 @@
 ---
 title: Navigazione nella barra laterale
 description: Scopri come impostare e personalizzare i collegamenti di navigazione della barra laterale del tuo sito Starlight.
-sidebar:
-  badge: Nuovo
 ---
 
 import FileTree from '../../../../components/file-tree.astro';
@@ -53,7 +51,7 @@ Scopri di più sulle barre laterali generate automaticamente nella sezione [grup
 
 ## Aggiungi collegamenti e gruppi di collegamenti
 
-Per configurare i [link](#link) e i [gruppi di link](#gruppi) della barra laterale (all'interno di un'intestazione comprimibile), utilizza la proprietà [`starlight.sidebar`](/it/reference/configuration/#sidebar) in `astro.config.mjs`.
+Per configurare i [link](#collegamenti) e i [gruppi di link](#gruppi) della barra laterale (all'interno di un'intestazione comprimibile), utilizza la proprietà [`starlight.sidebar`](/it/reference/configuration/#sidebar) in `astro.config.mjs`.
 
 Combinando collegamenti e gruppi, puoi creare un'ampia varietà di layout della barra laterale.
 
@@ -316,6 +314,50 @@ La configurazione sopra genera la seguente barra laterale:
 	]}
 />
 
+## Attributi HTML personalizzati
+
+I collegamenti possono anche includere una proprietà `attrs` per aggiungere attributi HTML personalizzati all'elemento collegamento.
+
+Nell'esempio seguente, `attrs` viene utilizzato per aggiungere un attributo `target="_blank"`, in modo che il collegamento si apra in una nuova scheda e per applicare un attributo personalizzato `style` per scrivere in corsivo l'etichetta del collegamento:
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'Guide',
+			items: [
+				// Un collegamento esterno alla documentazione di Astro che si apre in una nuova scheda.
+				{
+					label: 'Documentazione di Astro',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guide',
+			items: [
+				{
+					label: 'Documentazione di Astro',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## Internazionalizzazione
 
 Utilizza la proprietà `translations` sulle voci dei collegamenti e dei gruppi per tradurre il collegamento o l'etichetta del gruppo per ciascuna lingua supportata.
@@ -357,8 +399,8 @@ La navigazione della documentazione in spagnolo genererà la seguente barra late
 		{
 			label: 'Guías',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componentes', link: '/es/guides/components/' },
+				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
 			],
 		},
 	]}

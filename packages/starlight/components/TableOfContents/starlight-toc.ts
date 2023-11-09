@@ -1,3 +1,5 @@
+import { PAGE_TITLE_ID } from '../../constants';
+
 export class StarlightTOC extends HTMLElement {
 	private _current = this.querySelector('a[aria-current="true"]') as HTMLAnchorElement | null;
 	private minH = parseInt(this.dataset.minH || '2', 10);
@@ -20,7 +22,7 @@ export class StarlightTOC extends HTMLElement {
 		const isHeading = (el: Element): el is HTMLHeadingElement => {
 			if (el instanceof HTMLHeadingElement) {
 				// Special case for page title h1
-				if ('pageTitle' in el.dataset) return true;
+				if (el.id === PAGE_TITLE_ID) return true;
 				// Check the heading level is within the user-configured limits for the ToC
 				const level = el.tagName[1];
 				if (level) {

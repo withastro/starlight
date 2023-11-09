@@ -9,7 +9,7 @@ description: 맞춤형 CSS로 Starlight 사이트의 스타일을 지정하거�
 
 Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일을 제공하여 사이트에 적용된 스타일을 원하는대로 변경할 수 있습니다.
 
-1. `src/` 디렉토리에 CSS 파일을 추가합니다. 예를 들어, 아래 코드를 통해 페이지 제목을 더 넓게 만들고, 더 큰 텍스트를 사용할 수 있습니다.
+1. `src/` 디렉터리에 CSS 파일을 추가합니다. 예를 들어, 아래 코드를 통해 페이지 제목을 더 넓게 만들고, 더 큰 텍스트를 사용할 수 있습니다.
 
    ```css
    /* src/styles/custom.css */
@@ -19,7 +19,7 @@ Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일�
    }
    ```
 
-2. `astro.config.mjs`에 있는 Starlight의 `customCss` 배열에 CSS 파일 경로를 추가하세요.
+2. `astro.config.mjs` 파일에 있는 Starlight의 `customCss` 배열에 CSS 파일 경로를 추가하세요.
 
    ```js
    // astro.config.mjs
@@ -146,7 +146,7 @@ yarn create astro --template starlight/tailwind
 
     </Tabs>
 
-3.  `src/tailwind.css`와 같은 Tailwind의 기본 스타일에 대한 CSS 파일을 만드세요.
+3.  `src/tailwind.css` 파일과 같은 Tailwind의 기본 스타일에 대한 CSS 파일을 만드세요.
 
     ```css
     /* src/tailwind.css */
@@ -180,14 +180,14 @@ yarn create astro --template starlight/tailwind
     });
     ```
 
-5.  `tailwind.config.cjs`에 Starlight Tailwind 플러그인을 추가하세요.
+5.  `tailwind.config.mjs` 파일에 Starlight Tailwind 플러그인을 추가하세요.
 
     ```js ins={2,7}
-    // tailwind.config.cjs
-    const starlightPlugin = require('@astrojs/starlight-tailwind');
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
     /** @type {import('tailwindcss').Config} */
-    module.exports = {
+    export default {
     	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     	plugins: [starlightPlugin()],
     };
@@ -205,12 +205,12 @@ Starlight는 UI에서 [Tailwind 테마 구성](https://tailwindcss.com/docs/them
 - `fontFamily.mono` — 코드 예제에 사용됩니다.
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {

@@ -1,5 +1,5 @@
 ---
-import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/utils/user-config';
+import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/schemas/sidebar';
 import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
 import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
 
@@ -20,16 +20,16 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 				href: item.link,
 				isCurrent: false,
 				badge: item.badge,
+				attrs: item.attrs ?? {},
 			};
 		}
-
-		item;
 
 		return {
 			type: 'group',
 			label: item.label,
 			entries: makeEntries(item.items as SidebarConfig),
 			collapsed: item.collapsed,
+			badge: item.badge,
 		};
 	});
 }

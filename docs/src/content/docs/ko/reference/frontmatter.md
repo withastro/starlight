@@ -1,9 +1,9 @@
 ---
-title: Frontmatter 참조
-description: Starlight가 지원하는 기본 frontmatter 필드에 대한 개요입니다.
+title: 프론트매터 참조
+description: Starlight가 지원하는 기본 프론트매터 필드에 대한 개요입니다.
 ---
 
-Frontmatter의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
+프론트매터의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
 
 ```md
 ---
@@ -14,7 +14,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 나를 소개하는 페이지에 오신 것을 환영합니다!
 ```
 
-## Frontmatter 필드
+## 프론트매터 필드
 
 ### `title` (필수)
 
@@ -38,7 +38,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 **타입:** [`HeadConfig[]`](/ko/reference/configuration/#headconfig)
 
-`head` frontmatter 필드를 사용하여 페이지의 `<head>`에 태그를 추가할 수 있습니다. 이는 사용자 정의 스타일, 메타데이터 또는 기타 태그를 단일 페이지에 추가할 수 있음을 의미합니다. [전역 `head` 옵션](/ko/reference/configuration/#head)과 유사합니다.
+`head` 프론트매터 필드를 사용하여 페이지의 `<head>`에 태그를 추가할 수 있습니다. 이는 사용자 정의 스타일, 메타데이터 또는 기타 태그를 단일 페이지에 추가할 수 있음을 의미합니다. [전역 `head` 옵션](/ko/reference/configuration/#head)과 유사합니다.
 
 ```md
 ---
@@ -109,20 +109,44 @@ hero:
 ---
 ```
 
+밝은 모드와 어두운 모드에서 다양한 버전의 hero 이미지를 표시할 수 있습니다.
+
+```md
+---
+hero:
+  image:
+    alt: 반짝이는 밝은 색상의 로고
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // 저장소에 있는 이미지의 상대 경로입니다.
-    file?: string;
-    // 이미지 슬롯에 사용할 Raw HTML입니다.
-    // 사용자 정의 `<img>` 태그 또는 인라인 `<svg>`일 수 있습니다.
-    html?: string;
-  };
+  image?:
+    | {
+        // 저장소에 있는 이미지의 상대 경로입니다.
+        file: string;
+        // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
+        alt?: string;
+      }
+    | {
+        // 어두운 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
+        dark: string;
+        // 밝은 모드에 사용할 저장소의 이미지에 대한 상대 경로입니다.
+        light: string;
+        // 보조 기술이 이미지에 접근할 수 있도록 하는 대체 텍스트입니다.
+        alt?: string;
+      }
+    | {
+        // 이미지 슬롯에 사용할 원시 HTML입니다.
+        // 사용자 정의 `<img>` 태그 또는 인라인 `<svg>` 태그일 수 있습니다.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
@@ -130,6 +154,25 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `banner`
+
+**타입:** `{ content: string }`
+
+이 페이지 상단에 공지 배너를 표시합니다.
+
+`content` 값에는 링크나 다른 콘텐츠에 대한 HTML이 포함될 수 있습니다.
+예를 들어, 이 페이지에서는 `example.com`으로 이동하는 링크가 포함된 배너가 표시됩니다.
+
+```md
+---
+title: 배너가 포함된 페이지
+banner:
+  content: |
+    방금 멋진 것을 출시했습니다!
+    <a href="https://example.com">확인하러 가기</a>
+---
 ```
 
 ### `lastUpdated`
@@ -203,9 +246,21 @@ pagefind: false
 
 ### `sidebar`
 
-**타입:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**타입:** [`SidebarConfig`](#sidebarconfig)
 
 자동 생성된 링크 그룹을 사용할 때 이 페이지가 [사이드바](/ko/reference/configuration/#sidebar)에 표시되는 방식을 제어합니다.
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -253,7 +308,7 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/ko/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**타입:** <code>string | <a href="/ko/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 자동 생성된 링크 그룹에 표시될 때 사이드바의 페이지에 배지를 추가합니다. 문자열을 사용하면 배지가 기본 강조 색상으로 표시됩니다. 선택적으로, `text` 및 `variant`필드가 포함된 [BadgeConfig 객체](/ko/reference/configuration/#badgeconfig)를 전달하여 배지를 사용자가 원하는대로 변경할 수 있습니다.
 
@@ -273,5 +328,21 @@ sidebar:
   badge:
     text: 실험적 기능
     variant: caution
+---
+```
+
+#### `attrs`
+
+**타입:** `Record<string, string | number | boolean | undefined>`
+
+사이드바에서 자동 생성된 링크 그룹을 사용할 때, 이 페이지의 링크에 추가할 HTML 속성을 설정합니다.
+
+```md
+---
+title: 새 탭에서 열리는 페이지
+sidebar:
+  # 새 탭에서 페이지를 엽니다.
+  attrs:
+    target: _blank
 ---
 ```
