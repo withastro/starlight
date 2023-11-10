@@ -48,7 +48,7 @@ Experimente Starlight no seu navegador:
 
 ### Inicie o servidor de desenvolvimento
 
-Quando estiver trabalhando localmente, o [servidor de desenvolvimento do Astro](https://docs.astro.build/pt-br/reference/cli-reference/#astro-dev) permite visualizar seu trabalho e atualizar automaticamente seu navegador quando ao fazer alterações.
+Quando estiver trabalhando localmente, o [servidor de desenvolvimento do Astro](https://docs.astro.build/pt-br/reference/cli-reference/#astro-dev) permite visualizar seu trabalho e atualizar automaticamente seu navegador ao fazer alterações.
 
 Dentro do diretório do seu projeto, execute o seguinte comando para iniciar o servidor de desenvolvimento:
 
@@ -79,22 +79,23 @@ yarn dev
 Será exibida uma mensagem em seu terminal com a URL para visualização local.
 Abra esta URL para começar a navegar no seu site.
 
-## Criando conteúdo com Starlight
+### Crie conteúdo
 
 Starlight está pronto para você adicionar novo conteúdo, ou trazer seus arquivos existentes!
 
-### Formatos de arquivo
+#### Formatos de arquivo
 
-Starlight suporta escrever conteúdo em Markdown e MDX. (Você pode adicionar suporte para Markdoc instalando a [integração experimental Astro Markdoc](https://docs.astro.build/pt-br/guides/integrations-guide/markdoc/).)
+O Starlight suporta a escrita de conteúdo em Markdown e MDX sem nenhuma configuração extra.
+Você pode adicionar suporte para Markdoc instalando a [integração experimental Astro Markdoc](https://docs.astro.build/pt-br/guides/integrations-guide/markdoc/).
 
-### Adicione páginas
+#### Adicione páginas
 
 Adicione novas páginas ao seu site criando arquivos `.md` ou `.mdx` em `src/content/docs/`. 
 Utilize subdiretórios para organizar seus arquivos, e para criar múltiplos segmentos de caminho.
 
 Por exemplo, a seguinte estrutura de arquivos vai gerar páginas `example.com/ola-mundo` e `example.com/guides/faq`:
 
-import FileTree from '../../components/file-tree.astro';
+import FileTree from '../../../components/file-tree.astro';
 
 <FileTree>
 
@@ -107,9 +108,9 @@ import FileTree from '../../components/file-tree.astro';
 
 </FileTree>
 
-### Frontmatter com segurança de tipos
+#### Frontmatter com segurança de tipos
 
-Todas as páginas do Starlight compartilham um [conjunto comum de propriedades frontmatter](/pt-br/reference/frontmatter/) para controlar como a página aparece:
+Todas as páginas do Starlight compartilham um [conjunto comum de propriedades frontmatter](/pt-br/reference/frontmatter/) para controlar como a aparência da página:
 
 ```md
 ---
@@ -122,15 +123,15 @@ Se você esquecer de algo importante, Starlight vai te informar.
 
 ### Próximos passos
 
-- **Configurar:** Descubra opções comuns em [“Personalizar Starlight”](/pt-br/guides/customization/).
-- **Navegar:** Configure a barra lateral com o guia [“Barra lateral de navegação”](/pt-br/guides/sidebar/) guide.
+- **Configurar:** Descubra opções comuns em ["Customizando Starlight"](/pt-br/guides/customization/).
+- **Navegar:** Configure a barra lateral com o guia [“Barra lateral de navegação”](/pt-br/guides/sidebar/).
 - **Componentes:** Conheça os cartões, abas e outros componentes integrados no guia [“Componentes”](/pt-br/guides/components/).
-- **Deploy:** Publique seu trabalho com o guia [“Deploy do seu site Astro”](https://docs.astro.build/pt-br/guides/deploy/) na documentação do Astro.
+- **Deploy:** Publique seu projeto com o guia [“Deploy do seu site Astro”](https://docs.astro.build/pt-br/guides/deploy/) na documentação do Astro.
 
 ## Atualizando Starlight
 
 :::tip
-Como o Starlight é um software em beta, haverá frequentes atualizações e melhorias. 
+Como o Starlight é um software em beta, haverá frequentes atualizações e melhorias.
 Certifique-se de atualizar Starlight constantemente!
 :::
 
@@ -171,6 +172,3 @@ Se a sua resposta não pôde ser encontrada nessa documentação, por favor visi
 Sua pergunta pode ser respondida ao entender como o Astro funciona no geral, por debaixo do tema Starlight.
 
 Você também pode checar por quaisquer [problemas conhecidos do Starlight no GitHub](https://github.com/withastro/starlight/issues), e conseguir ajuda no [Discord do Astro](https://astro.build/chat/) da nossa ativa e amigável comunidade! Envie perguntas em nosso fórum `#support` com a tag "starlight", ou visite nosso canal dedicado `#starlight` para discutir o desenvolvimento atual e mais!
-
-
-
