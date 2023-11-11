@@ -111,20 +111,44 @@ hero:
 ---
 ```
 
+Você pode exibir diferentes versões da imagem hero no modo claro e escuro.
+
+```md
+---
+hero:
+  image:
+    alt: Um logo brilhante e colorido
+    dark: ../../assets/logo-escuro.png
+    light: ../../assets/logo-claro.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Caminho relativo a uma imagem no seu repositório.
-    file?: string;
-    // HTML bruto para utilizar no slot de imagem.
-    // Pode ser uma tag `<img>` customizada ou um `<svg>` inline.
-    html?: string;
-  };
+  image?:
+    | {
+        // Caminho relativo de uma imagem no seu repositório.
+        file: string;
+        // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
+        alt?: string;
+      }
+    | {
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo escuro.
+        dark: string;
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo claro.
+        light: string;
+        // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
+        alt?: string;
+      }
+    | {
+        // HTML bruto para utilizar no slot de imagem.
+        // Pode ser uma tag `<img>` personalizada ou um `<svg>` inline.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
