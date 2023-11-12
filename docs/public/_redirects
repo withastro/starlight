@@ -1,3 +1,0 @@
-/ph/*        https://astro-houston-ph.pages.dev/ph/:splat  200
-/zh/*       /zh-cn/:splat
-/:lang/*    /:lang/404/   404
