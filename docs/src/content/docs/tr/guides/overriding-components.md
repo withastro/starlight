@@ -27,18 +27,18 @@ Starlight'ın varsayılan bileşenlerini geçersiz kılmak, aşağıdaki durumla
 2. Starlight bileşenini değiştirmek için kullanılacak bir Astro bileşeni oluşturun.
    Bu örnek bir iletişim bağlantısı oluşturur. 
 
-   ```astro
+```astro
   ---
   // src/components/EmailLink.astro
   import type { Props } from '@astrojs/starlight/props';
   ---
 
   <a href="mailto:houston@example.com">Bana E-posta Gönder</a>
-   ```
+```
 
 3. Starlight'ın özel bileşeninizi kullanmasını sağlamak için, `astro.config.mjs` dosyasındaki [`components`](/reference/configuration/#components) yapılandırma seçeneğinde özel bileşeninizi belirtin:
 
-   ```js {9-12}
+```js {9-12}
   // astro.config.mjs
   import { defineConfig } from 'astro/config';
   import starlight from '@astrojs/starlight';
@@ -54,7 +54,7 @@ Starlight'ın varsayılan bileşenlerini geçersiz kılmak, aşağıdaki durumla
       }),
     ],
   });
-   ```
+```
 
 ## Dahili Bir Bileşeni Yeniden Kullanın
 
