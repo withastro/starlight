@@ -9,10 +9,10 @@ Pastikan untuk mengecek [dokumentasi MDX](https://mdxjs.com/docs/what-is-mdx/#ma
 
 ## Inline styles
 
-Text bisa **bold**, _italic_, atau ~~strikethrough~~.
+Teks bisa **bold**, _italic_, atau ~~strikethrough~~.
 
 ```md
-Text bisa **bold**, _italic_, atau ~~strikethrough~~.
+Teks bisa **bold**, _italic_, atau ~~strikethrough~~.
 ```
 
 Anda dapat [menautkan ke halaman lain](/id/getting-started/).
