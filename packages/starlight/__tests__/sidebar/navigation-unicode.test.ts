@@ -16,7 +16,7 @@ vi.mock('astro:content', async () =>
 );
 
 describe('getSidebar', () => {
-	test('returns an array of sidebar entries', () => {
+	test('matches current page when path contains non-ascii characters', () => {
 		expect(getSidebar('/api/v1/%E7%94%A8%E6%88%B7', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
