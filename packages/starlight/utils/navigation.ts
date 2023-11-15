@@ -135,7 +135,7 @@ function makeLink(
 	attrs?: LinkHTMLAttributes
 ): Link {
 	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === ensureTrailingSlash(currentPathname);
+	const isCurrent = new URL(href, 'http://example.com').pathname === ensureTrailingSlash(currentPathname);
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
 
