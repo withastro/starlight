@@ -23,7 +23,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/guides/components/",
+			        "href": "/guides/components",
 			        "isCurrent": false,
 			        "label": "Components",
 			        "type": "link",
@@ -31,7 +31,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/guides/authoring-content/",
+			        "href": "/guides/authoring-content",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
 			        "type": "link",
@@ -43,7 +43,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/environmental-impact/",
+			    "href": "/environmental-impact",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
 			    "type": "link",
