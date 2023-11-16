@@ -105,3 +105,23 @@ Nested tip.
 `);
 	expect(res.code).toMatchFileSnapshot('./asides/nested-asides.html');
 });
+
+describe('translated labels in French', () => {
+	test.each([
+		['note', 'Note'],
+		['tip', 'Astuce'],
+		['caution', 'Attention'],
+		['danger', 'Danger'],
+	])('%s has label %s', async (type, label) => {
+		const res = await processor.render(
+			`
+:::${type}
+Some text
+:::
+`,
+			{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
+		);
+		expect(res.code).includes(`aria-label="${label}"`);
+		expect(res.code).includes(`</svg>${label}</p>`);
+	});
+});
