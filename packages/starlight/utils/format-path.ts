@@ -47,6 +47,7 @@ export function formatPath(
 	if (format === 'file') return href;
 
 	// Handle trailing slash
+	href ||= '/';
 	href = href === '/' ? href : trailingSlashStrategy(href);
 
 	return href;
