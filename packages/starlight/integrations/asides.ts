@@ -14,23 +14,26 @@ interface AsidesOptions {
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
 }
 
-function pathToLocale(slug: string, config: AsidesOptions['starlightConfig']): string | undefined {
+function pathToLocale(
+	slug: string | undefined,
+	config: AsidesOptions['starlightConfig']
+): string | undefined {
 	const locales = Object.keys(config.locales || {});
-	const baseSegment = slug.split('/')[0];
+	const baseSegment = slug?.split('/')[0];
 	if (baseSegment && locales.includes(baseSegment)) return baseSegment;
 	return undefined;
 }
 
 /** get current lang from file full path */
 function getLocaleFromPath(
-	unformattedPath: string,
+	unformattedPath: string | undefined,
 	{ starlightConfig, astroConfig }: AsidesOptions
 ): string | undefined {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
 	const docsDir = new URL('content/docs/', srcDir);
 	const path = unformattedPath
 		// Format path to unix style path.
-		.replace(/\\/g, '/')
+		?.replace(/\\/g, '/')
 		// Strip docs path leaving only content collection file ID.
 		// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
 		.replace(docsDir.pathname, '');
