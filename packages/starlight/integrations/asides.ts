@@ -8,7 +8,13 @@ import { visit } from 'unist-util-visit';
 import type { StarlightConfig } from '../types';
 import type { createTranslationSystemFromFs } from '../utils/translations-fs';
 
-function pathToLocale(slug: string, config: StarlightConfig): string | undefined {
+interface AsidesOptions {
+	starlightConfig: { locales: StarlightConfig['locales'] };
+	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
+}
+
+function pathToLocale(slug: string, config: AsidesOptions['starlightConfig']): string | undefined {
 	const locales = Object.keys(config.locales || {});
 	const baseSegment = slug.split('/')[0];
 	if (baseSegment && locales.includes(baseSegment)) return baseSegment;
@@ -18,8 +24,7 @@ function pathToLocale(slug: string, config: StarlightConfig): string | undefined
 /** get current lang from file full path */
 function getLocaleFromPath(
 	unformattedPath: string,
-	starlightConfig: StarlightConfig,
-	astroConfig: AstroConfig
+	{ starlightConfig, astroConfig }: AsidesOptions
 ): string | undefined {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
 	const docsDir = new URL('content/docs/', srcDir);
@@ -77,11 +82,7 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * </Aside>
  * ```
  */
-function remarkAsides(
-	starlightConfig: StarlightConfig,
-	astroConfig: AstroConfig,
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
-): Plugin<[], Root> {
+function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
@@ -119,8 +120,8 @@ function remarkAsides(
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = getLocaleFromPath(file.history[0], starlightConfig, astroConfig);
-		const t = useTranslations(locale);
+		const locale = getLocaleFromPath(file.history[0], options);
+		const t = options.useTranslations(locale);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
 				return;
@@ -182,10 +183,6 @@ function remarkAsides(
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
 
-export function starlightAsides(
-	starlightConfig: StarlightConfig,
-	astroConfig: AstroConfig,
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
-): RemarkPlugins {
-	return [remarkDirective, remarkAsides(starlightConfig, astroConfig, useTranslations)];
+export function starlightAsides(options: AsidesOptions): RemarkPlugins {
+	return [remarkDirective, remarkAsides(options)];
 }
