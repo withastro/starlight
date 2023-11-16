@@ -2,12 +2,16 @@ import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { describe, expect, test } from 'vitest';
 import { starlightAsides } from '../../integrations/asides';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+
+const starlightConfig = StarlightConfigSchema.parse({
+	title: 'Asides Tests',
+	locales: { en: { label: 'English' }, fr: { label: 'French' } },
+	defaultLocale: 'en',
+} satisfies StarlightUserConfig);
 
 const useTranslations = createTranslationSystemFromFs(
-	{
-		locales: { en: { label: 'English', dir: 'ltr' } },
-		defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
-	},
+	starlightConfig,
 	// Using non-existent `_src/` to ignore custom files in this test fixture.
 	{ srcDir: new URL('./_src/', import.meta.url) }
 );
@@ -15,7 +19,7 @@ const useTranslations = createTranslationSystemFromFs(
 const processor = await createMarkdownProcessor({
 	remarkPlugins: [
 		...starlightAsides({
-			starlightConfig: { locales: {} },
+			starlightConfig,
 			astroConfig: { root: new URL(import.meta.url), srcDir: new URL('./_src/', import.meta.url) },
 			useTranslations,
 		}),
