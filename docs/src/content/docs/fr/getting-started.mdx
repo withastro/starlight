@@ -5,17 +5,20 @@ description: Apprenez à créer votre prochain site de documentation avec Starli
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Créer un nouveau projet
+Starlight est un thème de documentation complet construit sur la base du framework [Astro](https://astro.build).
+Ce guide vous aidera à démarrer un nouveau projet.
+Consultez les [instructions d'installation manuelle](/fr/manual-setup/) pour ajouter Starlight à un projet Astro existant.
 
-Starlight est un thème de documentation complet construit sur le framework [Astro](https://astro.build).
+## Démarrage rapide
 
-Vous pouvez créer un nouveau projet Astro + Starlight en utilisant la commande suivante :
+### Créer un nouveau projet
+
+Créez un nouveau projet Astro + Starlight en lançant la commande suivante dans votre terminal :
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-# créer un nouveau projet avec npm
 npm create astro@latest -- --template starlight
 ```
 
@@ -23,7 +26,6 @@ npm create astro@latest -- --template starlight
 <TabItem label="pnpm">
 
 ```sh
-# créer un nouveau projet avec pnpm
 pnpm create astro --template starlight
 ```
 
@@ -31,7 +33,6 @@ pnpm create astro --template starlight
 <TabItem label="Yarn">
 
 ```sh
-# créer un nouveau projet avec yarn
 yarn create astro --template starlight
 ```
 
@@ -45,26 +46,71 @@ Essayez Starlight dans votre navigateur :
 [ouvrir le modèle sur StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
 :::
 
-## Créer du contenu avec Starlight
+### Démarrer le serveur de développement
 
-Starlight est conçu pour que vous puissiez ajouter du nouveau contenu, ou apporter vos fichiers existants !
+Lorsque vous travaillez localement, [le serveur de développement d'Astro](https://docs.astro.build/fr/reference/cli-reference/#astro-dev) vous permet de prévisualiser votre travail et actualise automatiquement votre navigateur lorsque vous apportez des modifications.
 
-### Formats de fichiers
+À l'intérieur du répertoire de votre projet, exécutez la commande suivante pour démarrer le serveur de développement :
 
-Starlight prend en charge la création de contenu en Markdown et MDX. (Vous pouvez ajouter la prise en charge de Markdoc en installant l'intégration expérimentale [Astro Markdoc integration](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).)
+<Tabs>
+<TabItem label="npm">
 
-### Ajouter des pages
-
-Ajoutez automatiquement de nouvelles pages à votre site en créant des fichiers `.md` ou `.mdx` dans `src/content/docs/`. Ajoutez des sous-dossiers pour organiser vos fichiers, et pour créer plusieurs segments de chemin :
-
-```
-src/content/docs/hello-world.md => votre-site.com/hello-world
-src/content/docs/guides/faq.md => votre-site.com/guides/faq
+```sh
+npm run dev
 ```
 
-### Type-safe frontmatter
+</TabItem>
+<TabItem label="pnpm">
 
-Toutes les pages Starlight partagent un [ensemble commun de propriétés de présentation](/fr/reference/frontmatter/) personnalisable pour contrôler l'apparence de la page :
+```sh
+pnpm dev
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn dev
+```
+
+</TabItem>
+</Tabs>
+
+Un message indiquant l'URL de votre aperçu local s'affichera dans votre terminal.
+Ouvrez cette URL pour commencer à naviguer sur votre site.
+
+### Ajouter du contenu
+
+Starlight est prêt pour que vous puissiez ajouter du nouveau contenu, ou apporter vos fichiers existants !
+
+#### Formats de fichiers
+
+Starlight prend en charge la création de contenu en Markdown et MDX sans aucune configuration requise.
+Vous pouvez ajouter la prise en charge de Markdoc en installant [l'intégration Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) expérimentale.
+
+#### Ajouter des pages
+
+Ajoutez de nouvelles pages à votre site en créant des fichiers `.md` ou `.mdx` dans `src/content/docs/`.
+Utilisez des sous-dossiers pour organiser vos fichiers et créer plusieurs segments de chemin.
+
+Par exemple, la structure de fichiers suivante génére des pages à `example.com/hello-world` et `example.com/guides/faq` :
+
+import FileTree from '../../../components/file-tree.astro';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - faq.md
+      - hello-world.md
+
+</FileTree>
+
+#### Frontmatter avec sûreté du typage
+
+Toutes les pages Starlight partagent un [ensemble commun de propriétés du frontmatter](/fr/reference/frontmatter/) personnalisable pour contrôler l'apparence de la page :
 
 ```md
 ---
@@ -75,16 +121,18 @@ description: Ceci est une page de mon site web propulsé par Starlight.
 
 Si vous oubliez quelque chose d'important, Starlight vous le fera savoir.
 
-## Déployer votre site web Starlight
+### Prochaines étapes
 
-Une fois que vous avez créé et personnalisé votre site Web Starlight, vous pouvez le déployer sur un serveur Web ou une plateforme d'hébergement de votre choix, y compris Netlify, Vercel, GitHub Pages et bien d'autres.
-
-[Pour en savoir plus sur le déploiement d'un site Astro, consultez la documentation Astro](https://docs.astro.build/fr/guides/deploy/)
+- **Configurer:** Découvrez les options courantes dans [« Personnaliser Starlight »](/fr/guides/customization/).
+- **Naviguer:** Configurez votre barre latérale avec le guide [« Barre latérale de navigation »](/fr/guides/sidebar/).
+- **Composants:** Découvrez les cartes, les onglets et d'autres composants intégrés dans le guide [« Composants »](/fr/guides/components/).
+- **Déployer:** Publiez votre travail avec le guide [« Déployer votre site »](https://docs.astro.build/fr/guides/deploy/) dans la documentation d'Astro.
 
 ## Mettre à jour Starlight
 
 :::tip
-Comme Starlight est un logiciel bêta, il y aura des mises à jour et des améliorations fréquentes. Assurez-vous de mettre à jour Starlight régulièrement !
+Comme Starlight est un logiciel en version bêta, il y aura des mises à jour et des améliorations fréquentes.
+Assurez-vous de mettre à jour Starlight régulièrement !
 :::
 
 Starlight est une intégration Astro, et est mis à jour comme toute intégration `@astrojs/*` :
@@ -93,7 +141,6 @@ Starlight est une intégration Astro, et est mis à jour comme toute intégratio
 <TabItem label="npm">
 
 ```sh
-# mettre à jour Starlight avec npm
 npm install @astrojs/starlight@latest
 ```
 
@@ -101,7 +148,6 @@ npm install @astrojs/starlight@latest
 <TabItem label="pnpm">
 
 ```sh
-# mettre à jour Starlight avec pnpm
 pnpm upgrade @astrojs/starlight --latest
 ```
 
@@ -109,21 +155,20 @@ pnpm upgrade @astrojs/starlight --latest
 <TabItem label="Yarn">
 
 ```sh
-# mettre à jour Starlight avec yarn
 yarn upgrade @astrojs/starlight --latest
 ```
 
 </TabItem>
 </Tabs>
 
-Vous pouvez voir une liste complète des modifications apportées à chaque version dans [le journal des modifications de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+Consultez le [journal des modifications de Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md) pour une liste complète des modifications apportées à chaque version.
 
 ## Dépannage de Starlight
 
-Les informations [configuration de projet](/fr/reference/configuration/) et [configuration du frontmatter de la page individuelle](/fr/reference/frontmatter/) pour Starlight sont disponibles dans la section Référence de ce site. Utilisez ces pages pour vous assurer que votre site Starlight est configuré et fonctionne correctement.
+Utilisez les pages de référence de [configuration de projet](/fr/reference/configuration/) et de [configuration du frontmatter pour chaque page](/fr/reference/frontmatter/) pour vous assurer que votre site Starlight est configuré et fonctionne correctement.
+Consultez les guides de la barre latérale pour vous aider à ajouter du contenu et à personnaliser votre site Starlight.
 
-Utilisez la liste croissante de guides dans la barre latérale pour vous aider à ajouter du contenu et à personnaliser votre site Starlight.
-
-Si vous ne trouvez pas votre réponse dans cette documentation, veuillez consulter la [documentation complète d'Astro](https://docs.astro.build). Votre question peut être résolue en comprenant comment Astro fonctionne en général, sous ce thème Starlight.
+Si vous ne trouvez pas votre réponse dans cette documentation, merci de consulter la [documentation d'Astro](https://docs.astro.build/fr/) pour la documentation complète d'Astro.
+Votre question peut être résolue en comprenant comment Astro fonctionne de manière générale, sous ce thème Starlight.
 
 Vous pouvez également vérifier [tous les problèmes connus de Starlight sur GitHub](https://github.com/withastro/starlight/issues) et obtenir de l'aide dans le [Discord Astro](https://astro.build/chat/) de notre communauté active et sympathique ! Publiez des questions dans notre forum `#support` avec le tag "starlight" ou visiter notre canal dédié `#starlight` pour discuter des développements en cours et plus encore !
