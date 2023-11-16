@@ -165,6 +165,7 @@
     "astro": "^3.2.0"
   },
   "devDependencies": {
+    "@astrojs/markdown-remark": "^3.2.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^0.33.0",
     "astro": "^3.2.3",
