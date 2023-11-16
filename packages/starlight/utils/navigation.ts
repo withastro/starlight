@@ -344,7 +344,7 @@ function applyPrevNextLinkConfig(
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
 			// create a new link.
-			return makeLink(config.link, config.label, config.link);
+			return makeLink(config.link, config.label, '');
 		}
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.
