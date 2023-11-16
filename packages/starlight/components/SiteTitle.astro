@@ -7,6 +7,7 @@ import project from 'virtual:starlight/project-context';
 
 const href = formatPath(Astro.props.locale || '/', {
 	format: project.build.format,
+	trailingSlash: project.trailingSlash,
 });
 ---
 

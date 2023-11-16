@@ -138,6 +138,7 @@ function makeLink(
 	if (!isAbsolute(href)) {
 		const options = {
 			format: project.build.format,
+			trailingSlash: project.trailingSlash,
 		};
 
 		href = formatPath(href, options);
