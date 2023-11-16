@@ -236,7 +236,7 @@ sidebar:
 
 ## 배지
 
-링크 라벨 옆에 배지를 표시하기 위해 링크에는 `badge` 속성이 포함될 수도 있습니다.
+링크, 그룹, 자동 생성된 그룹은 라벨 옆에 배지를 표시하기 위해 `badge` 속성을 포함할 수도 있습니다.
 
 ```js
 starlight({
@@ -251,6 +251,12 @@ starlight({
 					badge: 'New',
 				},
 			],
+		},
+		// "Deprecated" 배지가 포함된 자동 생성된 그룹
+		{
+			label: '참조',
+			badge: 'Deprecated',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -267,6 +273,24 @@ starlight({
 					label: '컴포넌트',
 					link: '/ko/guides/components/',
 					badge: { text: 'New', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: '참조',
+			badge: { text: 'Deprecated', variant: 'default' },
+			items: [
+				{
+					label: '구성 참조',
+					link: '/reference/configuration/',
+				},
+				{
+					label: '프론트매터 참조',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: '재정의 참조',
+					link: '/reference/overrides/',
 				},
 			],
 		},

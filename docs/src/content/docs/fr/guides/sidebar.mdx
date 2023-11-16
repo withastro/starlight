@@ -242,7 +242,7 @@ La configuration du frontmatter `sidebar` n'est utilisée que pour les liens gé
 
 ## Badges
 
-Les liens peuvent inclure une propriété `badge` pour afficher un badge à côté de l'étiquette d'un lien.
+Les liens, groupes et groupes générés automatiquement peuvent inclure une propriété `badge` pour afficher un badge à côté de leurs étiquettes.
 
 ```js
 starlight({
@@ -257,6 +257,12 @@ starlight({
 					badge: 'Nouveau',
 				},
 			],
+		},
+		// Un groupe généré automatiquement avec un badge "Déprécié".
+		{
+			label: 'Référence',
+			badge: 'Déprécié',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -273,6 +279,24 @@ La configuration ci-dessus génère la barre latérale suivante :
 					label: 'Composants',
 					link: '/fr/guides/components/',
 					badge: { text: 'Nouveau', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'Référence',
+			badge: { text: 'Déprécié', variant: 'default' },
+			items: [
+				{
+					label: 'Référence de configuration',
+					link: '/fr/reference/configuration/',
+				},
+				{
+					label: 'Référence du frontmatter',
+					link: '/fr/reference/frontmatter/',
+				},
+				{
+					label: 'Référence des redéfinitions',
+					link: '/fr/reference/overrides/',
 				},
 			],
 		},
