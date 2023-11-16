@@ -61,7 +61,7 @@ describe('getSidebar', () => {
 		`);
 	});
 
-	test.each(['/', '/environmental-impact', '/guides/authoring-content'])(
+	test.each(['/', '/environmental-impact/', '/guides/authoring-content/'])(
 		'marks current path with isCurrent: %s',
 		(currentPath) => {
 			const items = flattenSidebar(getSidebar(currentPath, undefined));
