@@ -3,7 +3,7 @@ import { fileWithBase, pathWithBase } from './base';
 import {
 	ensureHtmlExtension,
 	ensureTrailingSlash,
-	stripExtension,
+	stripHtmlExtension,
 	stripTrailingSlash,
 } from './path';
 
@@ -19,7 +19,7 @@ const formatStrategies = {
 	},
 	directory: {
 		addBase: pathWithBase,
-		handleExtension: (href: string) => stripExtension(href),
+		handleExtension: (href: string) => stripHtmlExtension(href),
 	},
 };
 

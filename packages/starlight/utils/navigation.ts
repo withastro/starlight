@@ -6,7 +6,7 @@ import { pickLang } from './i18n';
 import { formatPath } from './format-path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { ensureLeadingAndTrailingSlashes, stripExtension } from './path';
+import { ensureLeadingAndTrailingSlashes } from './path';
 import type { Badge } from '../schemas/badge';
 import type {
 	AutoSidebarGroup,
@@ -349,3 +349,6 @@ function applyPrevNextLinkConfig(
 	// Otherwise, if the global config is enabled, return the generated link if any.
 	return paginationEnabled ? link : undefined;
 }
+
+/** Remove the extension from a path. */
+const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
