@@ -40,7 +40,7 @@ test('adds data to route shape', () => {
 		  "next": {
 		    "attrs": {},
 		    "badge": undefined,
-		    "href": "/environmental-impact",
+		    "href": "/environmental-impact/",
 		    "isCurrent": false,
 		    "label": "Explicit update date",
 		    "type": "link",

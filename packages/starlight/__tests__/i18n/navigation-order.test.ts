@@ -32,7 +32,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/en",
+			    "href": "/en/",
 			    "isCurrent": true,
 			    "label": "Home page",
 			    "type": "link",
@@ -40,7 +40,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/en/404",
+			    "href": "/en/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
 			    "type": "link",
@@ -52,7 +52,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/en/guides/authoring-content",
+			        "href": "/en/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
 			        "type": "link",
@@ -71,7 +71,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr",
+			    "href": "/fr/",
 			    "isCurrent": true,
 			    "label": "Accueil",
 			    "type": "link",
@@ -79,7 +79,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr/404",
+			    "href": "/fr/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
 			    "type": "link",
@@ -91,7 +91,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/guides/authoring-content",
+			        "href": "/fr/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
 			        "type": "link",
@@ -107,7 +107,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/référence/bénéfice",
+			        "href": "/fr/référence/bénéfice/",
 			        "isCurrent": false,
 			        "label": "Bénéfice",
 			        "type": "link",
@@ -115,7 +115,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/référence/bricolage",
+			        "href": "/fr/référence/bricolage/",
 			        "isCurrent": false,
 			        "label": "Bricolage",
 			        "type": "link",
@@ -131,7 +131,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/route/décoder",
+			        "href": "/fr/route/décoder/",
 			        "isCurrent": false,
 			        "label": "Décoder",
 			        "type": "link",
@@ -139,7 +139,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/route/distribuer",
+			        "href": "/fr/route/distribuer/",
 			        "isCurrent": false,
 			        "label": "Distribuer",
 			        "type": "link",
