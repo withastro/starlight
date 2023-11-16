@@ -44,9 +44,9 @@ export function stripExtension(path: string) {
 
 /** Add '.html' extension to a path. */
 export function ensureHtmlExtension(path: string) {
-	path = stripTrailingSlash(path);
-	if (path.endsWith('.html')) return ensureLeadingSlash(path);
-
 	path = stripLeadingAndTrailingSlashes(path);
-	return path ? ensureLeadingSlash(path) + '.html' : '/index.html';
+	if (!path.endsWith('.html')) {
+		path = path ? path + '.html' : '/index.html';
+	}
+	return ensureLeadingSlash(path);
 }
