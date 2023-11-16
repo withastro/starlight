@@ -145,9 +145,15 @@ function makeLink(
 		currentPathname = formatPath(currentPathname, options);
 	}
 
-	const isCurrent = href === currentPathname;
+	const isCurrent = pathsMatch(href, currentPathname);
 
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
+}
+
+/** Test if two paths are equivalent even if formatted differently. */
+function pathsMatch(pathA: string, pathB: string) {
+	const opts = { trailingSlash: 'never' as const };
+	return formatPath(pathA, opts) == formatPath(pathB, opts);
 }
 
 /** Get the segments leading to a page. */
