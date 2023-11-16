@@ -6,7 +6,6 @@ import { pickLang } from './i18n';
 import { formatPath } from './format-path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { ensureLeadingAndTrailingSlashes } from './path';
 import type { Badge } from '../schemas/badge';
 import type {
 	AutoSidebarGroup,
@@ -111,6 +110,11 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
+const pathFormattingOptions = {
+	format: project.build.format,
+	trailingSlash: project.trailingSlash,
+};
+
 /** Create a link entry from a user config object. */
 function linkFromConfig(
 	item: SidebarLinkItem,
@@ -119,7 +123,7 @@ function linkFromConfig(
 ) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
-		href = ensureLeadingAndTrailingSlashes(href);
+		href = formatPath(href, pathFormattingOptions);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
 	}
@@ -136,13 +140,7 @@ function makeLink(
 	attrs?: LinkHTMLAttributes
 ): Link {
 	if (!isAbsolute(href)) {
-		const options = {
-			format: project.build.format,
-			trailingSlash: project.trailingSlash,
-		};
-
-		href = formatPath(href, options);
-		currentPathname = formatPath(currentPathname, options);
+		href = formatPath(href, pathFormattingOptions);
 	}
 
 	const isCurrent = pathsMatch(href, currentPathname);
