@@ -1,54 +1,7 @@
-import type { AstroConfig } from 'astro';
-import { fileWithBase, pathWithBase } from './base';
-import {
-	ensureHtmlExtension,
-	ensureTrailingSlash,
-	stripHtmlExtension,
-	stripTrailingSlash,
-} from './path';
+import project from 'virtual:starlight/project-context';
+import { createPathFormatter } from './createPathFormatter';
 
-interface FormatPathOptions {
-	format?: AstroConfig['build']['format'];
-	trailingSlash?: AstroConfig['trailingSlash'];
-}
-
-const formatStrategies = {
-	file: {
-		addBase: fileWithBase,
-		handleExtension: (href: string) => ensureHtmlExtension(href),
-	},
-	directory: {
-		addBase: pathWithBase,
-		handleExtension: (href: string) => stripHtmlExtension(href),
-	},
-};
-
-const trailingSlashStrategies = {
-	always: ensureTrailingSlash,
-	never: stripTrailingSlash,
-	ignore: (href: string) => href,
-};
-
-/** Format a path based on the project config. */
-export function formatPath(
-	href: string,
-	{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions = {}
-) {
-	const formatStrategy = formatStrategies[format];
-	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
-
-	// Add base
-	href = formatStrategy.addBase(href);
-
-	// Handle extension
-	href = formatStrategy.handleExtension(href);
-
-	// Skip trailing slash handling for `build.format: 'file'`
-	if (format === 'file') return href;
-
-	// Handle trailing slash
-	href ||= '/';
-	href = href === '/' ? href : trailingSlashStrategy(href);
-
-	return href;
-}
+export const formatPath = createPathFormatter({
+	format: project.build.format,
+	trailingSlash: project.trailingSlash,
+});

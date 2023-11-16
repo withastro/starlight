@@ -1,18 +1,18 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
-import project from 'virtual:starlight/project-context';
-import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { pickLang } from './i18n';
-import { formatPath } from './format-path';
-import { getLocaleRoutes, type Route } from './routing';
-import { localeToLang, slugToPathname } from './slugs';
 import type { Badge } from '../schemas/badge';
+import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
 	LinkHTMLAttributes,
 	SidebarItem,
 	SidebarLinkItem,
 } from '../schemas/sidebar';
+import { createPathFormatter } from './createPathFormatter';
+import { formatPath } from './format-path';
+import { pickLang } from './i18n';
+import { getLocaleRoutes, type Route } from './routing';
+import { localeToLang, slugToPathname } from './slugs';
 
 const DirKey = Symbol('DirKey');
 
@@ -110,11 +110,6 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
-const pathFormattingOptions = {
-	format: project.build.format,
-	trailingSlash: project.trailingSlash,
-};
-
 /** Create a link entry from a user config object. */
 function linkFromConfig(
 	item: SidebarLinkItem,
@@ -123,7 +118,7 @@ function linkFromConfig(
 ) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
-		href = formatPath(href, pathFormattingOptions);
+		href = formatPath(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
 	}
@@ -140,7 +135,7 @@ function makeLink(
 	attrs?: LinkHTMLAttributes
 ): Link {
 	if (!isAbsolute(href)) {
-		href = formatPath(href, pathFormattingOptions);
+		href = formatPath(href);
 	}
 
 	const isCurrent = pathsMatch(href, currentPathname);
@@ -150,8 +145,8 @@ function makeLink(
 
 /** Test if two paths are equivalent even if formatted differently. */
 function pathsMatch(pathA: string, pathB: string) {
-	const opts = { trailingSlash: 'never' as const };
-	return formatPath(pathA, opts) == formatPath(pathB, opts);
+	const format = createPathFormatter({ trailingSlash: 'never' });
+	return format(pathA) === format(pathB);
 }
 
 /** Get the segments leading to a page. */

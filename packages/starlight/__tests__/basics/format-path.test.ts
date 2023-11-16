@@ -1,5 +1,8 @@
 import { describe, expect, test } from 'vitest';
-import { formatPath } from '../../utils/format-path';
+import { createPathFormatter } from '../../utils/createPathFormatter';
+
+const formatPath = (href: string, ...args: Parameters<typeof createPathFormatter>) =>
+	createPathFormatter(...args)(href);
 
 describe.each([
 	{
