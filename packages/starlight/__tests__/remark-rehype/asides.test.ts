@@ -125,3 +125,20 @@ Some text
 		expect(res.code).includes(`</svg>${label}</p>`);
 	});
 });
+
+test('runs without locales config', async () => {
+	const processor = await createMarkdownProcessor({
+		remarkPlugins: [
+			...starlightAsides({
+				starlightConfig: { locales: undefined },
+				astroConfig: {
+					root: new URL(import.meta.url),
+					srcDir: new URL('./_src/', import.meta.url),
+				},
+				useTranslations,
+			}),
+		],
+	});
+	const res = await processor.render(':::note\nTest\n::');
+	expect(res.code.includes('aria-label=Note"'));
+});
