@@ -11,6 +11,7 @@ import type {
 import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { pickLang } from './i18n';
+import { ensureLeadingSlash } from './path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 
@@ -118,7 +119,7 @@ function linkFromConfig(
 ) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
-		href = formatPath(href);
+		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
 	}
