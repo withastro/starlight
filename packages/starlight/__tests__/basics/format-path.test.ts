@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 import { createPathFormatter } from '../../utils/createPathFormatter';
 
-const formatPath = (href: string, ...args: Parameters<typeof createPathFormatter>) =>
-	createPathFormatter(...args)(href);
+type FormatPathOptions = Parameters<typeof createPathFormatter>[0];
+const formatPath = (href: string, opts: FormatPathOptions) => createPathFormatter(opts)(href);
 
-describe.each([
+describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expected: string }> }>([
 	{
-		options: { format: 'file' as const, trailingSlash: 'ignore' as const },
+		options: { format: 'file', trailingSlash: 'ignore' },
 		tests: [
 			// index page
 			{ path: '/', expected: '/index.html' },
@@ -21,7 +21,7 @@ describe.each([
 		],
 	},
 	{
-		options: { format: 'file' as const, trailingSlash: 'always' as const },
+		options: { format: 'file', trailingSlash: 'always' },
 		tests: [
 			// index page
 			{ path: '/', expected: '/index.html' },
@@ -36,7 +36,7 @@ describe.each([
 		],
 	},
 	{
-		options: { format: 'file' as const, trailingSlash: 'never' as const },
+		options: { format: 'file', trailingSlash: 'never' },
 		tests: [
 			// index page
 			{ path: '/', expected: '/index.html' },
@@ -51,7 +51,7 @@ describe.each([
 		],
 	},
 	{
-		options: { format: 'directory' as const, trailingSlash: 'always' as const },
+		options: { format: 'directory', trailingSlash: 'always' },
 		tests: [
 			// index page
 			{ path: '/', expected: '/' },
@@ -66,7 +66,7 @@ describe.each([
 		],
 	},
 	{
-		options: { format: 'directory' as const, trailingSlash: 'never' as const },
+		options: { format: 'directory', trailingSlash: 'never' },
 		tests: [
 			// index page
 			{ path: '/', expected: '/' },
@@ -81,7 +81,7 @@ describe.each([
 		],
 	},
 	{
-		options: { format: 'directory' as const, trailingSlash: 'ignore' as const },
+		options: { format: 'directory', trailingSlash: 'ignore' },
 		tests: [
 			// index page
 			{ path: '/', expected: '/' },
