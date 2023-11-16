@@ -39,7 +39,7 @@ describe('default labels', () => {
 		['danger', 'Danger'],
 	])('%s has label %s', async (type, label) => {
 		const res = await processor.render(`
-:::${type}[${label}]
+:::${type}
 Some text
 :::
 `);
