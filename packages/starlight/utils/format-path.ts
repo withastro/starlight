@@ -43,6 +43,9 @@ export function formatPath(
 	// Handle extension
 	href = formatStrategy.handleExtension(href);
 
+	// Skip trailing slash handling for `build.format: 'file'`
+	if (format === 'file') return href;
+
 	// Handle trailing slash
 	href = href === '/' ? href : trailingSlashStrategy(href);
 
