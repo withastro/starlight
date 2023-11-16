@@ -20,6 +20,7 @@ const site = 'https://starlight.astro.build/';
 
 export default defineConfig({
 	site,
+	trailingSlash: 'always',
 	integrations: [
 		starlight({
 			title: 'Starlight',
