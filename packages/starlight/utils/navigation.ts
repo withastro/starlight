@@ -3,10 +3,10 @@ import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import { pickLang } from './i18n';
-import { formatPath, stripExtension } from './format-path';
+import { formatPath } from './format-path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { ensureLeadingAndTrailingSlashes } from './path';
+import { ensureLeadingAndTrailingSlashes, stripExtension } from './path';
 import type { Badge } from '../schemas/badge';
 import type {
 	AutoSidebarGroup,

@@ -1,11 +1,11 @@
+import type { AstroConfig } from 'astro';
 import { fileWithBase, pathWithBase } from './base';
 import {
+	ensureHtmlExtension,
 	ensureTrailingSlash,
+	stripExtension,
 	stripTrailingSlash,
-	ensureLeadingSlash,
-	stripLeadingAndTrailingSlashes,
 } from './path';
-import type { AstroConfig } from 'astro';
 
 interface FormatPathOptions {
 	format?: AstroConfig['build']['format'];
@@ -47,19 +47,4 @@ export function formatPath(
 	href = href === '/' ? href : trailingSlashStrategy(href);
 
 	return href;
-}
-
-/** Remove the extension from a path. */
-export function stripExtension(path: string) {
-	path = stripTrailingSlash(path);
-	return path ? path.replace(/\.\w+$/, '') + '/' : '/';
-}
-
-/** Add '.html' extension to a path. */
-export function ensureHtmlExtension(path: string) {
-	path = stripTrailingSlash(path);
-	if (path.endsWith('.html')) return ensureLeadingSlash(path);
-
-	path = stripLeadingAndTrailingSlashes(path);
-	return path ? ensureLeadingSlash(path) + '.html' : '/index.html';
 }
