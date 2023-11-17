@@ -9,7 +9,7 @@ Anda dapat menggunakan custom CSS atau menggunakan plugin Tailwind Starlight unt
 
 Sesuaikan style yang diterapkan pada website Starlight Anda dengan memberikan file CSS tambahan untuk memodifikasi atau menambahkan style ke style default dari Starlight.
 
-1. Tambakan file CSS ke direktori `src/` Anda.
+1. Tambakan sebuah file CSS ke direktori `src/` Anda.
    Sebagai contoh, Anda dapat mengatur lebar kolom default yang lebih lebar dan ukuran teks yang lebih besar untuk judul halaman:
 
    ```css
@@ -147,7 +147,7 @@ Jika Anda sudah memiliki website Starlight dan ingin menambahkan Tailwind CSS, i
 
     </Tabs>
 
-3.  Buat file CSS untuk base styles Tailwind, misalnya di `src/tailwind.css`:
+3.  Buat file CSS untuk _base styles_ Tailwind, misalnya di `src/tailwind.css`:
 
     ```css
     /* src/tailwind.css */
@@ -181,14 +181,14 @@ Jika Anda sudah memiliki website Starlight dan ingin menambahkan Tailwind CSS, i
     });
     ```
 
-5.  Tambahkan plugin Tailwind Starlight ke `tailwind.config.cjs`:
+5.  Tambahkan plugin Tailwind Starlight ke `tailwind.config.mjs`:
 
     ```js ins={2,7}
-    // tailwind.config.cjs
-    const starlightPlugin = require('@astrojs/starlight-tailwind');
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
     /** @type {import('tailwindcss').Config} */
-    module.exports = {
+    export default {
     	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     	plugins: [starlightPlugin()],
     };
@@ -206,12 +206,12 @@ Jika diatur, opsi berikut akan menggantikan style bawaan Starlight:
 - `fontFamily.mono` — digunakan untuk contoh kode
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
@@ -278,8 +278,7 @@ import ThemeDesigner from '../../../../components/theme-designer.astro';
 	}}
 >
 	<Fragment slot="css-docs">
-		Tambahkan CSS berikut ke proyek Anda dalam [file CSS
-		custom](#custom-css-styles) untuk menerapkan tema ini ke website Anda.
+		Tambahkan CSS berikut ke proyek Anda dalam [file CSS custom](#custom-css-styles) untuk menerapkan tema ini ke website Anda.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
 		Contoh [file konfigurasi Tailwind ](#styling-starlight-dengan-tailwind) di
