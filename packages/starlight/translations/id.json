@@ -19,8 +19,8 @@
   "page.previousLink": "Sebelumnya",
   "page.nextLink": "Selanjutnya",
   "404.text": "Halaman tidak ditemukan. Cek kembali kolom URL atau gunakan fitur pencarian.",
-  "aside.note": "Note",
-  "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger"
+  "aside.note": "Catatan",
+  "aside.tip": "Tips",
+  "aside.caution": "Perhatian",
+  "aside.danger": "Bahaya"
 }

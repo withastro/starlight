@@ -19,6 +19,7 @@ import nb from './nb.json';
 import zh from './zh-CN.json';
 import ko from './ko.json';
 import sv from './sv.json';
+import ro from './ro.json';
 import ru from './ru.json';
 import vi from './vi.json';
 import uk from './uk.json';
@@ -48,6 +49,7 @@ export default Object.fromEntries(
 		zh,
 		ko,
 		sv,
+		ro,
 		ru,
 		vi,
 		uk,
