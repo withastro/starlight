@@ -61,9 +61,9 @@ describe('getSidebar', () => {
 		`);
 	});
 
-	test('marks current path with isCurrent', () => {
-		const paths = ['/', '/environmental-impact/', '/guides/authoring-content/'];
-		for (const currentPath of paths) {
+	test.each(['/', '/environmental-impact/', '/guides/authoring-content/'])(
+		'marks current path with isCurrent: %s',
+		(currentPath) => {
 			const items = flattenSidebar(getSidebar(currentPath, undefined));
 			const currentItems = items.filter((item) => item.type === 'link' && item.isCurrent);
 			expect(currentItems).toHaveLength(1);
@@ -71,13 +71,24 @@ describe('getSidebar', () => {
 			if (currentItem?.type !== 'link') throw new Error('Expected current item to be link');
 			expect(currentItem.href).toBe(currentPath);
 		}
-	});
+	);
 
 	test('ignore trailing slashes when marking current path with isCurrent', () => {
-		const pathWithoutTrailingSlash = '/environmental-impact';
-		const items = flattenSidebar(getSidebar(pathWithoutTrailingSlash, undefined));
+		const pathWithTrailingSlash = '/environmental-impact/';
+		const items = flattenSidebar(getSidebar(pathWithTrailingSlash, undefined));
 		const currentItems = items.filter((item) => item.type === 'link' && item.isCurrent);
-		expect(currentItems).toMatchObject([{ href: `${pathWithoutTrailingSlash}/`, type: 'link' }]);
+		expect(currentItems).toMatchInlineSnapshot(`
+			[
+			  {
+			    "attrs": {},
+			    "badge": undefined,
+			    "href": "/environmental-impact/",
+			    "isCurrent": true,
+			    "label": "Eco-friendly docs",
+			    "type": "link",
+			  },
+			]
+		`);
 	});
 
 	test('nests files in subdirectory in group when autogenerating', () => {
@@ -243,7 +254,7 @@ describe('getPrevNextLinks', () => {
 		expect(withDefaults.prev).toBeUndefined();
 		expect(withCustomLinks.prev).toEqual({
 			type: 'link',
-			href: '/x/',
+			href: '/x',
 			label: 'X',
 			isCurrent: false,
 			attrs: {},

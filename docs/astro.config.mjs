@@ -26,6 +26,7 @@ const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
 
 export default defineConfig({
 	site,
+	trailingSlash: 'always',
 	integrations: [
 		starlight({
 			title: 'Starlight',
