@@ -19,8 +19,8 @@
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
   "404.text": "Страница не найдена. Проверьтье  URL или используйте поиск по сайту",
-  "aside.note": "Note",
-  "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger"
+  "aside.note": "Заметка",
+  "aside.tip": "Знали ли вы?",
+  "aside.caution": "Осторожно",
+  "aside.danger": "Опасно"
 }
