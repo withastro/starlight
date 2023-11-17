@@ -89,16 +89,7 @@ I can link to [my conclusion](#conclusion) lower on the same page.
 
 Level 2 (`<h2>`) and Level 3 (`<h3>`) headings will automatically appear in the page table of contents.
 
-:::note
-**Convert to Lowercase:** Even if your title has uppercase characters, write them in the anchor link with lowercase. `Title` > `title`
-
-**No Spaces in Titles:** If your title has spaces, replace spaces with hyphens(-).
-`My Title` > `my-title`
-
-Starlight uses the same [Heading IDS logic](https://github.com/Flet/github-slugger?tab=readme-ov-file)
-as Astro which is based on [ github-slugger ](https://github.com/Flet/github-slugger?tab=readme-ov-file).
-:::
-
+Learn more about how Astro processes heading `id`s in [the Astro Documentation](https://docs.astro.build/en/guides/markdown-content/#heading-ids)
 ## Asides
 
 Asides (also known as “admonitions” or “callouts”) are useful for displaying secondary information alongside a page’s main content.
