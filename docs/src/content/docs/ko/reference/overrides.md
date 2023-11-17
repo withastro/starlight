@@ -337,6 +337,8 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 각 페이지의 메인 콘텐츠 주위에 렌더링되는 컴포넌트입니다.
 기본적으로 마크다운 콘텐츠에 적용할 기본 스타일을 설정합니다.
 
+Markdown 콘텐츠 스타일은 `@astrojs/starlight/style/markdown.css`에도 노출되며 `.sl-markdown-content` CSS 클래스로 범위가 지정됩니다.
+
 ---
 
 ### 바닥글
