@@ -18,5 +18,9 @@
   "page.lastUpdated": "Останнє оновлення:",
   "page.previousLink": "Попередня",
   "page.nextLink": "Наступна",
-  "404.text": "Сторінку не знайдено. Перевірте URL-адресу або спробуйте скористатися рядком пошуку."
+  "404.text": "Сторінку не знайдено. Перевірте URL-адресу або спробуйте скористатися рядком пошуку.",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }

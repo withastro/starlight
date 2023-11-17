@@ -24,6 +24,7 @@ export const socialLinks = [
 	'email',
 	'reddit',
 	'patreon',
+	'slack',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -63,6 +64,7 @@ export const SocialLinksSchema = () =>
 					email: 'Email',
 					reddit: 'Reddit',
 					patreon: 'Patreon',
+					slack: 'Slack',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
