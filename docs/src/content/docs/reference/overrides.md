@@ -342,6 +342,8 @@ The default implementation shows a large title, tagline, and call-to-action link
 Component rendered around each page’s main content.
 The default implementation sets up basic styles to apply to Markdown content.
 
+The Markdown content styles are also exposed in `@astrojs/starlight/style/markdown.css` and scoped to the `.sl-markdown-content` CSS class.
+
 ---
 
 ### Footer

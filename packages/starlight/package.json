@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -158,7 +158,8 @@
     "./schema": "./schema.ts",
     "./types": "./types.ts",
     "./index.astro": "./index.astro",
-    "./404.astro": "./404.astro"
+    "./404.astro": "./404.astro",
+    "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
     "astro": "^3.2.0"
