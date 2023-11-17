@@ -344,6 +344,8 @@ La implementación predeterminada muestra un título grande, un lema y enlaces d
 Componente renderizado alrededor del contenido principal de cada página.
 La implementación predeterminada configura estilos básicos para aplicar al contenido de Markdown.
 
+Los estilos de contenido Markdown también están expuestos en `@astrojs/starlight/style/markdown.css` y están limitados al ámbito de la clase CSS `.sl-markdown-content`.
+
 ---
 
 ### Pie de página
