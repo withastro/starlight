@@ -14,6 +14,7 @@ export const locales = {
 	ko: { label: '한국어', lang: 'ko' },
 	tr: { label: 'Türkçe', lang: 'tr' },
 	ru: { label: 'Русский', lang: 'ru' },
+	hi: { label: 'हिंदी', lang: 'hi' },
 };
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
@@ -76,6 +77,7 @@ export default defineConfig({
 						ko: '여기서부터',
 						tr: 'Buradan Başlayın',
 						ru: 'Начать отсюда',
+						hi: 'यहाँ से शुरू',
 					},
 					items: [
 						{
@@ -93,6 +95,7 @@ export default defineConfig({
 								ko: '시작하기',
 								tr: 'Başlarken',
 								ru: 'Введение',
+								hi: 'शुरू करना',
 							},
 						},
 						{
@@ -110,6 +113,7 @@ export default defineConfig({
 								ko: '수동으로 설정하기',
 								tr: 'Elle Kurulum',
 								ru: 'Установка вручную',
+								hi: 'मैनुअल सेटअप',
 							},
 						},
 						{
@@ -127,6 +131,7 @@ export default defineConfig({
 								ko: '환경적 영향',
 								tr: 'Çevre Etkisi',
 								ru: 'Влияние на окружающую среду',
+								hi: 'पर्यावरणीय प्रभाव',
 							},
 						},
 						{
@@ -142,6 +147,7 @@ export default defineConfig({
 								ko: '쇼케이스',
 								tr: 'Vitrin',
 								ru: 'Примеры',
+								hi: 'प्रदर्शन',
 							},
 						},
 					],
@@ -160,6 +166,7 @@ export default defineConfig({
 						ko: '가이드',
 						tr: 'Rehber',
 						ru: 'Руководства',
+						hi: 'गाइड',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -177,6 +184,7 @@ export default defineConfig({
 						ko: '참조',
 						tr: 'Referanslar',
 						ru: 'Справочник',
+						hi: 'संदर्भ',
 					},
 					autogenerate: { directory: 'reference' },
 				},
