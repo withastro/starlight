@@ -139,7 +139,7 @@ function makeLink(
 		href = formatPath(href);
 	}
 
-	const isCurrent = pathsMatch(href, currentPathname);
+	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
 
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
 }
