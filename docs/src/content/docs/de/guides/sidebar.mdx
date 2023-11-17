@@ -252,11 +252,11 @@ starlight({
 			],
 		},
 		// Eine automatisch generierte Gruppe mit dem "Veraltet"-Abzeichen.
-	   	{
-		    	label: 'Referenz',
-		    	badge: 'Veraltet',
-		    	autogenerate: { directory: 'reference' },
-	  	},
+		{
+			label: 'Referenz',
+			badge: 'Veraltet',
+			autogenerate: { directory: 'reference' },
+		},
 	],
 });
 ```
@@ -276,9 +276,9 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 			],
 		},
 		{
-		    	label: 'Referenz',
-		    	badge: { text: 'Veraltet', variant: 'default'},
-		    	items: [
+			label: 'Referenz',
+			badge: { text: 'Veraltet', variant: 'default' },
+			items: [
 				{
 					label: 'Konfigurationsreferenz',
 					link: '/reference/configuration/',
@@ -292,7 +292,7 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 					link: '/reference/overrides/',
 				},
 			],
-  		},
+		},
 	]}
 />
 
