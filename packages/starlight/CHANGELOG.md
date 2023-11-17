@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.12.1
+
+### Patch Changes
+
+- [#1069](https://github.com/withastro/starlight/pull/1069) [`b86f360`](https://github.com/withastro/starlight/commit/b86f3608f03be9455ec1d5ba11820c9bf601ad1e) Thanks [@Genteure](https://github.com/Genteure)! - Fix sidebar highlighting and navigation buttons for pages with path containing non-ASCII characters
+
+- [#1025](https://github.com/withastro/starlight/pull/1025) [`0d1e75e`](https://github.com/withastro/starlight/commit/0d1e75e17269ddac3eb15b7dfb4480da1bb01c6c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Internal: fix import issue in translation string loading mechanism
+
+- [#1044](https://github.com/withastro/starlight/pull/1044) [`a5a9754`](https://github.com/withastro/starlight/commit/a5a9754f111b97abfd277d99759e9857aa0fb22b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fix last updated dates for pages displaying fallback content
+
+- [#1049](https://github.com/withastro/starlight/pull/1049) [`c27495d`](https://github.com/withastro/starlight/commit/c27495da61f9376236519ed3f08a169f245a189c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Expose Markdown content styles in `@astrojs/starlight/style/markdown.css`
+
 ## 0.12.0
 
 ### Minor Changes
