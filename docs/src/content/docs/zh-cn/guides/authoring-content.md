@@ -89,6 +89,8 @@ description: 如何使用 Starlight 内置的锚点链接
 
 二级标题 (`<h2>`) 和 三级标题 (`<h3>`) 将自动出现在页面目录中。
 
+在 [Astro 文档](https://docs.astro.build/zh-cn/guides/markdown-content/#标题-id)中了解 Astro 是如何处理标题 `id` 的。
+
 ## 旁白
 
 旁白（也称为“警告”或“标注”）对于在页面的主要内容旁边显示辅助信息很有用。

@@ -140,9 +140,11 @@ Starlight 期望你在所有语言中创建等效的页面。例如，如果你�
 
 ## 翻译 Starlight 的 UI
 
+import LanguagesList from '../../../../components/languages-list.astro';
+
 除了托管翻译的内容文件之外，Starlight 还允许你翻译默认的 UI 字符串（例如，目录中的“本页”标题），以便你的读者可以完全使用所选的语言体验你的网站。
 
-默认提供了英语、捷克语、法语、德语、意大利语、日语、葡萄牙语、荷兰语、丹麦语、西班牙语、土耳其语、阿拉伯语、挪威语、波斯语、希伯来语、简体中文、韩语、印度尼西亚语、俄罗斯语、瑞典语、乌克兰语、越南语和加利西亚语的翻译 UI 字符串，我们欢迎[贡献添加更多默认语言](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)。
+默认提供了<LanguagesList/>的翻译 UI 字符串，我们欢迎[贡献添加更多默认语言](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)。
 
 你可以通过 `i18n` 数据集合提供你支持的其他语言的翻译 - 或覆盖我们的默认标签。
 
