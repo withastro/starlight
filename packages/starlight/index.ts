@@ -39,7 +39,13 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 				});
 				const integrations: AstroIntegration[] = [];
 				if (!config.integrations.find(({ name }) => name === 'astro-expressive-code')) {
-					integrations.push(...starlightExpressiveCode(userConfig, useTranslations));
+					integrations.push(
+						...starlightExpressiveCode({
+							starlightConfig: userConfig,
+							astroConfig: config,
+							useTranslations,
+						})
+					);
 				}
 				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(userConfig));

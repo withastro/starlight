@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import {
 	astroExpressiveCode,
 	ExpressiveCodeTheme,
@@ -7,9 +6,10 @@ import {
 	pluginFramesTexts,
 	addClassName,
 } from 'astro-expressive-code';
-import type { AstroIntegration } from 'astro';
+import type { AstroConfig, AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { pathToLocale } from '../shared/pathToLocale';
 
 export * from 'astro-expressive-code';
 
@@ -51,11 +51,16 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	useStarlightUiThemeColors?: boolean | undefined;
 };
 
-export const starlightExpressiveCode = (
-	opts: StarlightConfig,
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
-): AstroIntegration[] => {
-	const { locales, defaultLocale, expressiveCode } = opts;
+export const starlightExpressiveCode = ({
+	astroConfig,
+	starlightConfig,
+	useTranslations,
+}: {
+	astroConfig: Pick<AstroConfig, 'root' | 'srcDir'>;
+	starlightConfig: StarlightConfig;
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
+}): AstroIntegration[] => {
+	const { locales, expressiveCode } = starlightConfig;
 	if (expressiveCode === false) return [];
 	const config: StarlightExpressiveCodeOptions =
 		typeof expressiveCode === 'object' ? expressiveCode : {};
@@ -140,18 +145,7 @@ export const starlightExpressiveCode = (
 				},
 				...otherStyleOverrides,
 			},
-			getBlockLocale: ({ file }) => {
-				// Root path:    `src/content/docs/getting-started.mdx`
-				// Locale path:  `src/content/docs/fr/getting-started.mdx`
-				// Part indices:  0     1      2   3         4
-				const pathParts = path.relative(file.cwd, file.path).split(/[\\/]/);
-				const localeOrFolder = pathParts[3];
-				const lang = localeOrFolder ? locales?.[localeOrFolder]?.lang : locales?.root?.lang;
-				const defaultLang = defaultLocale?.lang || defaultLocale?.locale;
-				const result = lang || defaultLang || 'en';
-
-				return result;
-			},
+			getBlockLocale: ({ file }) => pathToLocale(file.path, { starlightConfig, astroConfig }),
 			plugins,
 			...rest,
 		}),
