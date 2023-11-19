@@ -65,33 +65,6 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 Configure the table of contents shown on the right of each page. By default, `<h2>` and `<h3>` headings will be included in this table of contents.
 
-### `expressiveCode`
-
-**type:** `StarlightExpressiveCodeOptions | boolean`
-
-Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to render code blocks on your site. The integration is enabled by default and can be disabled by passing `false` to this option.
-
-You can customize your code blocks by passing an object with any of the following properties:
-
-- `themes` — an array of themes that should be used to render code blocks. The following item types are supported in this array:
-  - any theme name bundled with Shiki (e.g. `dracula`)
-  - any theme object compatible with VS Code or Shiki (e.g. imported from an NPM theme package)
-  - any ExpressiveCodeTheme instance (e.g. using `ExpressiveCodeTheme.fromJSONString(...)` to load a custom JSON/JSONC theme file yourself)
-
-  Defaults to the dark and light variants of the "Night Owl" theme by Sarah Drasner, which are also exported from `@astrojs/starlight/expressive-code` as `getStarlightDefaultThemes`.
-
-  **Note**: If you pass at least one dark and one light theme to this option, Starlight will automatically ensure that the displayed theme matches the current dark mode switch state. See the `useStarlightDarkModeSwitch` option to configure this behavior. If you turn it off, you will need to add your own CSS code to the site to allow manual switching between themes.
-
-- `useStarlightDarkModeSwitch` — determines if CSS code should be added that automatically displays dark or light code blocks depending on Starlight's dark mode switch state.
-
-  Defaults to `true` if the `themes` option is not set or contains at least one dark and one light theme, and `false` otherwise.
-
-- `useStarlightUiThemeColors` — determines if Starlight's CSS variables should be used for the colors of UI elements (backgrounds, buttons, shadows etc.) instead of the colors provided by themes.
-
-  Defaults to `true` if the `themes` option is not set (= you are using the default themes), and `false` otherwise.
-
-- See the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) to learn about all the other options.
-
 ### `editLink`
 
 **type:** `{ baseUrl: string }`
@@ -372,6 +345,68 @@ starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
+
+### `expressiveCode`
+
+**type:** `StarlightExpressiveCodeOptions | boolean`  
+**default:** `true`
+
+Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
+See the [“Code blocks” guide](/guides/authoring-content/#code-blocks) to learn how to use Expressive Code syntax in your Markdown and MDX content.
+
+You can use any of the standard [Expressive Code configuration options](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) by setting them in Starlight’s `expressiveCode` option.
+For example, to give your code blocks rounded corners, set the `styleOverrides.borderRadius` option:
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+If you want to disable Expressive Code, set `expressiveCode: false` in your Starlight config:
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+In addition to the standard Expressive Code options, you can customize your code blocks with the following Starlight-specific properties:
+
+#### `themes`
+
+**type:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**default:** `['starlight-dark', 'starlight-light']`
+
+Set the themes used to style code blocks.
+See the [Expressive Code `themes` documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) for details of the supported theme formats.
+
+Starlight uses the dark and light variants of Sarah Drasner’s [Night Owl theme](https://github.com/sdras/night-owl-vscode-theme) by default.
+
+If you provide at least one dark and one light theme, Starlight will automatically keep the active code block theme in sync with the current site theme.
+Configure this behavior with the [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch) option.
+
+#### `useStarlightDarkModeSwitch`
+
+**type:** `boolean`  
+**default:** `true`
+
+When `true`, code blocks automatically switch between light and dark themes when the site theme changes.
+When `false`, you must manually add CSS to handle switching between multiple themes.
+
+:::note
+When setting `themes`, you must provide at least one dark and one light theme for the Starlight dark mode switch to work.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**type:** `boolean`  
+**default:** `true`
+
+When `true`, Starlight's CSS variables are used for the colors of code block UI elements (backgrounds, buttons, shadows etc.), matching the [site color theme](/guides/css-and-tailwind/#theming).
+When `false`, the colors provided by the active syntax highlighting theme are used for these elements.
 
 ### `head`
 

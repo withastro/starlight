@@ -202,15 +202,18 @@ var fun = function lang(l) {
 ```
 ````
 
-```md
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
+### Expressive Code features
 
-### Text markers
+Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to extend formatting possibilities for code blocks.
+Expressive Code’s text markers and window frames plugins are enabled by default.
+Code block rendering can be configured using Starlight’s [`expressiveCode` configuration option](/reference/configuration/#expressivecode).
 
-You can highlight specific lines or parts of your code blocks by using the text markers plugin of Expressive Code, which is enabled by default in Starlight. The following features are available:
+#### Text markers
 
-- [Marking entire lines & line ranges](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+You can highlight specific lines or parts of your code blocks using text markers.
+There are three styles of marker: a default neutral colored highlight, a green highlight indicating code that was inserted, and a red highlight indicating code that was deleted.
+
+- [Mark entire lines & line ranges](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -228,7 +231,7 @@ You can highlight specific lines or parts of your code blocks by using the text 
   ```
   ````
 
-- [Marking individual text inside lines](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+- [Mark selections of text](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
 
   ```js "Individual terms" /Even.*supported/
   // Individual terms can be highlighted, too
@@ -246,14 +249,14 @@ You can highlight specific lines or parts of your code blocks by using the text 
   ```
   ````
 
-- [Selecting marker types `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del)
+- [Mark text as inserted or deleted with `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
 
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
     console.log('These are inserted and deleted marker types');
     // The return statement uses the default marker type
     return true;
-  };
+  }
   ```
 
   ````md
@@ -262,11 +265,11 @@ You can highlight specific lines or parts of your code blocks by using the text 
     console.log('These are inserted and deleted marker types');
     // The return statement uses the default marker type
     return true;
-  };
+  }
   ```
   ````
 
-- [Combining syntax highlighting with `diff`-like syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax)
+- [Combine syntax highlighting with `diff`-like syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -288,39 +291,41 @@ You can highlight specific lines or parts of your code blocks by using the text 
   ```
   ````
 
-### Window frames
+#### Frames and titles
 
-By default, every code block that has a language identifier is rendered inside a window frame. This is done by the frames plugin of Expressive Code, which is enabled by default in Starlight. Depending on the code's language identifier, the frame can look like a code editor (similar to VS Code), or like a terminal window.
+Code blocks can be rendered inside a window-like frame.
+A frame that looks like a terminal window will be used for shell scripting languages (e.g. `bash` or `sh`).
+Other languages display inside a code editor-style frame if they include a title.
 
-Frames can have optional titles, which are either taken from a `title="..."` attribute following the code block's opening backticks and language identifier, or from a file name comment in the first lines of the code.
+A code block’s optional title can be set either with a `title="..."` attribute following the code block's opening backticks and language identifier, or with a file name comment in the first lines of the code.
 
-- [Code editor with optional file name tab title](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames)
+- [Add a file name tab with a comment](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames)
 
   ```js
   // my-test-file.js
-  console.log('Hello World!')
+  console.log('Hello World!');
   ```
 
   ````md
   ```js
   // my-test-file.js
-  console.log('Hello World!')
+  console.log('Hello World!');
   ```
   ````
 
-- [Terminal with optional window title](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames)
+- [Add a title to a Terminal window](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames)
 
-  ```bash title="Installing dependencies"
+  ```bash title="Installing dependencies…"
   npm install
   ```
 
   ````md
-  ```bash title="Installing dependencies"
+  ```bash title="Installing dependencies…"
   npm install
   ```
   ````
 
-- [Disabling window frames for individual blocks](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+- [Disable window frames with `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
 
   ```bash frame="none"
   echo "This is not rendered as a terminal despite using the bash language"
