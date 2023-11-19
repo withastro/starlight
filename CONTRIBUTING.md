@@ -198,6 +198,17 @@ Help out by:
 
 Visit **<https://i18n.starlight.astro.build>** to track translation progress for the currently supported languages.
 
+#### How to add a new language to Starlight’s docs
+
+- Add your language to the `locales` config in `docs/astro.config.mjs`
+- Add your language’s subtag to the i18n label config in `.github/labeler.yml`
+- Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
+- Create your first translated page under the language just included:
+  
+  ➤ `docs/src/content/docs/{language}/{page-slug}.mdx` covers all the pages coming under `Start Here` section. Our primary suggestion would be to start the `index.mdx` but your free to translate your preferred page.
+
+> Note: For pages under `Guides` & `Reference` section, the path will go 1 level deep that is `docs/src/content/docs/{language}/{folder}/{page-slug}.mdx`
+      
 ## Understanding Starlight
 
 - Starlight is built as an Astro integration.
