@@ -210,10 +210,18 @@ Code block rendering can be configured using Starlight’s [`expressiveCode` con
 
 #### Text markers
 
-You can highlight specific lines or parts of your code blocks using text markers.
-There are three styles of marker: a default neutral colored highlight, a green highlight indicating code that was inserted, and a red highlight indicating code that was deleted.
+You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) on the opening line of your code block.
+Use curly braces (`{ }`)  to highlight entire lines, and quotation marks to highlight strings of text.
 
-- [Mark entire lines & line ranges](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+There are three highlighting styles: neutral for calling attention to code, green for indicating inserted code, and red for indicating deleted code.
+Both text and entire lines can be marked using the default marker, or in combination with `ins=` and `del=` to produce the desired highlighting.
+
+Expressive Code provides several options for customizing the visual appearance of your code samples. 
+Many of these can be combined, for highly illustrative code samples.
+Please explore the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) for the extensive options available.
+Some of the most common examples are shown below: 
+
+- [Mark entire lines & line ranges using the `{ }` marker](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -231,7 +239,7 @@ There are three styles of marker: a default neutral colored highlight, a green h
   ```
   ````
 
-- [Mark selections of text](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Mark selections of text using the `" "` marker or regular expressions](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
 
   ```js "Individual terms" /Even.*supported/
   // Individual terms can be highlighted, too
@@ -249,7 +257,7 @@ There are three styles of marker: a default neutral colored highlight, a green h
   ```
   ````
 
-- [Mark text as inserted or deleted with `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+- [Mark text or lines as inserted or deleted with `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
 
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
