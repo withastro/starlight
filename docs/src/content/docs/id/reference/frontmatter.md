@@ -1,6 +1,6 @@
 ---
 title: Referensi Frontmatter
-description: Ikhtisar bidang frontmatter default yang didukung Starlight.
+description: Ikhtisar bidang frontmatter bawaan yang didukung Starlight.
 ---
 
 Anda dapat menyesuaikan masing-masing halaman Markdown dan MDX di Starlight dengan menetapkan nilai di frontmatter. Sebagai contoh, halaman biasa dapat mengatur bidang `title` dan `description`:
@@ -18,25 +18,25 @@ Selamat datang di halaman Tentang!
 
 ### `title` (diperlukan)
 
-**type:** `string`
+**tipe:** `string`
 
 Anda harus memberikan judul untuk setiap halaman. Ini akan ditampilkan di bagian atas halaman, di tab browser, dan di metadata halaman.
 
 ### `description`
 
-**type:** `string`
+**tipe:** `string`
 
 Deskripsi halaman digunakan untuk metadata halaman dan akan diambil oleh mesin pencari dan dalam pratinjau media sosial.
 
 ### `editUrl`
 
-**type:** `string | boolean`
+**tipe:** `string | boolean`
 
 Mengesampingkan [konfigurasi `editLink` global](/id/reference/configuration/#editlink). Atur ke `false` untuk menonaktifkan tautan "Edit halaman" untuk halaman tertentu atau memberikan URL alternatif di mana konten halaman ini dapat diedit.
 
 ### `head`
 
-**type:** [`HeadConfig[]`](/id/reference/configuration/#headconfig)
+**tipe:** [`HeadConfig[]`](/id/reference/configuration/#headconfig)
 
 Anda dapat menambahkan tag tambahan ke `<head>` halaman Anda menggunakan bidang `head` frontmatter. Ini berarti Anda dapat menambahkan gaya khusus, metadata, atau tag lain ke satu halaman. Mirip dengan [opsi `head` global](/id/reference/configuration/#head).
 
@@ -52,7 +52,7 @@ head:
 
 ### `tableOfContents`
 
-**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
+**tipe:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
 Mengesampingkan [konfigurasi `tableOfContents` global](/id/reference/configuration/#tableofcontents).
 Sesuaikan tingkat judul yang akan disertakan atau atur ke `false` untuk menyembunyikan daftar isi pada halaman ini.
@@ -75,16 +75,16 @@ tableOfContents: false
 
 ### `template`
 
-**type:** `'doc' | 'splash'`  
-**default:** `'doc'`
+**tipe:** `'doc' | 'splash'`  
+**bawaan:** `'doc'`
 
 Atur templat tata letak untuk halaman ini.
-Halaman menggunakan tata letak `'doc'` secara default.
+Halaman menggunakan tata letak `'doc'` secara _default_.
 Atur ke `'splash'` untuk menggunakan tata letak yang lebih lebar tanpa _sidebar_ yang dirancang untuk _landing pages_.
 
 ### `hero`
 
-**type:** [`HeroConfig`](#heroconfig)
+**tipe:** [`HeroConfig`](#heroconfig)
 
 Tambahkan komponen _hero_ ke bagian atas halaman ini. Berfungsi dengan baik dengan `template: splash`.
 
@@ -160,7 +160,7 @@ interface HeroConfig {
 
 ### `banner`
 
-**type:** `{ content: string }`
+**tipe:** `{ content: string }`
 
 Menampilkan _banner_  pengumuman di bagian atas halaman ini.
 
@@ -179,7 +179,7 @@ banner:
 
 ### `lastUpdated`
 
-**type:** `Date | boolean`
+**tipe:** `Date | boolean`
 
 Mengesampingkan [opsi `lastUpdated` global](/id/reference/configuration/#lastupdated). Jika tanggal ditentukan, tanggal tersebut harus berupa [stempel waktu YAML](https://yaml.org/type/timestamp.html) yang valid dan akan menimpa tanggal yang tersimpan dalam riwayat Git untuk halaman ini.
 
@@ -192,7 +192,7 @@ lastUpdated: 2022-08-09
 
 ### `prev`
 
-**type:** `boolean | string | { link?: string; label?: string }`
+**tipe:** `boolean | string | { link?: string; label?: string }`
 
 Mengesampingkan [opsi `pagination` global](/id/reference/configuration/#pagination). Jika string ditentukan, teks tautan yang dihasilkan akan diganti dan jika objek ditentukan, tautan dan teks akan ditimpa.
 
@@ -214,14 +214,14 @@ prev: lanjutkan tutorial
 ---
 # Mengabaikan tautan dan teks halaman sebelumnya
 prev:
-  link: /unrelated-page/
+  link: /halaman-yang-tidak-berkaitkan/
   label: Lihat halaman lainnya
 ---
 ```
 
 ### `next`
 
-**type:** `boolean | string | { link?: string; label?: string }`
+**tipe:** `boolean | string | { link?: string; label?: string }`
 
 Sama seperti [`prev`](#prev) tetapi untuk tautan halaman berikutnya.
 
@@ -234,8 +234,8 @@ next: false
 
 ### `pagefind`
 
-**type:** `boolean`  
-**default:** `true`
+**tipe:** `boolean`  
+**bawaan:** `true`
 
 Mengatur apakah halaman ini harus disertakan dalam indeks pencarian [Pagefind](https://Pagefind.app). Atur ke `false` untuk mengecualikan halaman dari hasil pencarian:
 
@@ -248,7 +248,7 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** [`SidebarConfig`](#sidebarconfig)
+**tipe:** [`SidebarConfig`](#sidebarconfig)
 
 Mengontrol bagaimana halaman ini ditampilkan di [_sidebar_](/id/reference/configuration/#sidebar), saat menggunakan grup tautan yang dibuat secara otomatis.
 
@@ -266,8 +266,8 @@ interface SidebarConfig {
 
 #### `label`
 
-**type:** `string`  
-**default:** [`title`](#title-required) halaman
+**tipe:** `string`  
+**bawaan:** [`title`](#title-diperlukan) halaman
 
 Atur label untuk halaman ini di _sidebar_ saat ditampilkan dalam grup tautan yang dibuat secara otomatis.
 
@@ -275,13 +275,13 @@ Atur label untuk halaman ini di _sidebar_ saat ditampilkan dalam grup tautan yan
 ---
 title: Tentang proyek ini
 sidebar:
-  label: About
+  label: Tentang
 ---
 ```
 
 #### `order`
 
-**type:** `number`
+**tipe:** `number`
 
 Mengontrol urutan halaman ini saat mengurutkan grup tautan yang dibuat secara otomatis.
 Nomor yang lebih rendah ditampilkan lebih tinggi dalam grup tautan.
@@ -296,8 +296,8 @@ sidebar:
 
 #### `hidden`
 
-**type:** `boolean`  
-**default:** `false`
+**tipe:** `boolean`  
+**bawaan:** `false`
 
 Mencegah halaman ini disertakan dalam grup _sidebar_ yang dibuat secara otomatis.
 
@@ -311,18 +311,18 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/id/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**tipe:** <code>string | <a href="/id/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 Menambahkan _badge_ ke halaman di _sidebar_ saat ditampilkan dalam grup tautan yang dibuat secara otomatis.
-Saat menggunakan string, _badge_ akan ditampilkan dengan warna aksen default.
+Saat menggunakan string, _badge_ akan ditampilkan dengan warna aksen bawaan.
 Secara opsional, berikan [objek `BadgeConfig`](/id/reference/configuration/#badgeconfig) dengan bidang `text` dan `variant` untuk menyesuaikan _badge_.
 
 ```md
 ---
 title: Halaman dengan badge
 sidebar:
-  # Menggunakan varian default yang sesuai dengan warna aksen situs Anda
-  badge: New
+  # Menggunakan varian bawaan yang sesuai dengan warna aksen situs Anda
+  badge: Baru
 ---
 ```
 
@@ -338,7 +338,7 @@ sidebar:
 
 #### `attrs`
 
-**type:** `Record<string, string | number | boolean | undefined>`
+**tipe:** `Record<string, string | number | boolean | undefined>`
 
 Atribut HTML untuk ditambahkan ke tautan halaman di _sidebar_ saat ditampilkan dalam grup tautan yang dibuat secara otomatis.
 
