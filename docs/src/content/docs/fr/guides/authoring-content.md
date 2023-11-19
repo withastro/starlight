@@ -89,6 +89,8 @@ Je peux faire un lien vers [ma conclusion](#conclusion) plus bas sur la même pa
 
 Les titres de niveau 2 (`<h2>`) et de niveau 3 (`<h3>`) apparaissent automatiquement dans la table des matières de la page.
 
+Pour en apprendre davantage sur la façon dont Astro traite les attributs `id` des titres de section, consultez la [documentation d'Astro](https://docs.astro.build/fr/guides/markdown-content/#identifiants-den-t%C3%AAte).
+
 ## Asides
 
 Les Asides (également connus sous le nom de "callouts") sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
