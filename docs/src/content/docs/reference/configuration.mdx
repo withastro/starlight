@@ -354,8 +354,8 @@ starlight({
 Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
 See the [“Code blocks” guide](/guides/authoring-content/#code-blocks) to learn how to use Expressive Code syntax in your Markdown and MDX content.
 
-You can use any of the standard [Expressive Code configuration options](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) by setting them in Starlight’s `expressiveCode` option.
-For example, to give your code blocks rounded corners, set the `styleOverrides.borderRadius` option:
+You can use any of the standard [Expressive Code configuration options](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) as well as some Starlight-specific properties, by setting them in Starlight’s `expressiveCode` option.
+For example, set Expressive Code’s `styleOverrides` option to override the default CSS. This enables customizations like giving your code blocks rounded corners:
 
 ```js ins={2-4}
 starlight({
