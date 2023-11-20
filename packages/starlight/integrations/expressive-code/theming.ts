@@ -1,8 +1,5 @@
 import fs from 'node:fs';
-import {
-	ExpressiveCodeTheme,
-	type ThemeObjectOrShikiThemeName,
-} from 'astro-expressive-code';
+import { ExpressiveCodeTheme, type ThemeObjectOrShikiThemeName } from 'astro-expressive-code';
 
 export type BundledThemeName = 'starlight-dark' | 'starlight-light';
 
@@ -25,9 +22,11 @@ export function preprocessThemes(
 		if (theme === 'starlight-dark' || theme === 'starlight-light') {
 			const bundledThemeFile =
 				theme === 'starlight-dark' ? 'night-owl-dark.jsonc' : 'night-owl-light.jsonc';
-			return customizeBundledTheme(ExpressiveCodeTheme.fromJSONString(
-				fs.readFileSync(new URL(`./themes/${bundledThemeFile}`, import.meta.url), 'utf-8')
-			));
+			return customizeBundledTheme(
+				ExpressiveCodeTheme.fromJSONString(
+					fs.readFileSync(new URL(`./themes/${bundledThemeFile}`, import.meta.url), 'utf-8')
+				)
+			);
 		}
 		// Otherwise, just pass it through
 		return theme;

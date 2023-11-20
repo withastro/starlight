@@ -7,5 +7,7 @@ export const ExpressiveCodeSchema = () =>
 			z.custom<StarlightExpressiveCodeOptions>((value) => typeof value === 'object' && value),
 			z.boolean(),
 		])
-		.describe('Define how code blocks are rendered by passing options to Expressive Code, or disable the integration by passing `false`.')
+		.describe(
+			'Define how code blocks are rendered by passing options to Expressive Code, or disable the integration by passing `false`.'
+		)
 		.optional();

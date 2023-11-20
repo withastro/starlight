@@ -7,7 +7,11 @@ import type { AstroConfig, AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { pathToLocale } from '../shared/pathToLocale';
-import { applyStarlightUiThemeColors, preprocessThemes, type ThemeObjectOrBundledThemeName } from './theming';
+import {
+	applyStarlightUiThemeColors,
+	preprocessThemes,
+	type ThemeObjectOrBundledThemeName,
+} from './theming';
 import { addTranslations } from './translations';
 
 export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 'themes'> & {
@@ -26,7 +30,7 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	 *
 	 * Defaults to `['starlight-dark', 'starlight-light']`.
 	 */
-	themes?: ThemeObjectOrBundledThemeName[] | undefined
+	themes?: ThemeObjectOrBundledThemeName[] | undefined;
 	/**
 	 * When `true`, code blocks automatically switch between light and dark themes when the
 	 * site theme changes.
@@ -85,8 +89,8 @@ export const starlightExpressiveCode = ({
 	if (useStarlightUiThemeColors === true && themes.length < 2) {
 		console.warn(
 			`*** Warning: Using the config option "useStarlightUiThemeColors: true" ` +
-			`with a single theme is not recommended. For better color contrast, ` +
-			`please provide at least one dark and one light theme.\n`
+				`with a single theme is not recommended. For better color contrast, ` +
+				`please provide at least one dark and one light theme.\n`
 		);
 	}
 

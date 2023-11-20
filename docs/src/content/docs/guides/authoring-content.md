@@ -211,15 +211,15 @@ Code block rendering can be configured using Starlight’s [`expressiveCode` con
 #### Text markers
 
 You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) on the opening line of your code block.
-Use curly braces (`{ }`)  to highlight entire lines, and quotation marks to highlight strings of text.
+Use curly braces (`{ }`) to highlight entire lines, and quotation marks to highlight strings of text.
 
 There are three highlighting styles: neutral for calling attention to code, green for indicating inserted code, and red for indicating deleted code.
 Both text and entire lines can be marked using the default marker, or in combination with `ins=` and `del=` to produce the desired highlighting.
 
-Expressive Code provides several options for customizing the visual appearance of your code samples. 
+Expressive Code provides several options for customizing the visual appearance of your code samples.
 Many of these can be combined, for highly illustrative code samples.
 Please explore the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) for the extensive options available.
-Some of the most common examples are shown below: 
+Some of the most common examples are shown below:
 
 - [Mark entire lines & line ranges using the `{ }` marker](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
 
