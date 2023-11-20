@@ -141,9 +141,11 @@ Bir dil için çeviri henüz mevcut değilse, Starlight, bu sayfanın içeriğin
 
 ## Starlight'ın UI'sini Çevirin
 
+import LanguagesList from '../../../../components/languages-list.astro';
+
 Starlight, çevrilen içerik dosyalarına ek olarak, varsayılan UI dizesini (örneğin, "Bu sayfada" içeriği) çevirmenize olanak tanır, böylece okuyucularınız seçilen dilde siteyi tamamen deneyimleyebilirler.
 
-Varsayılan olarak, Starlight İngilizce, Çekçe, Fransızca, Almanca, İtalyanca, Japonca, Portekizce, Felemenkçe, Danca, İspanyolca, Türkçe, Arapça, Norveççe, Farsça, İbranice, Basitleştirilmiş Çince, Korece, Endonezya, Rusça, İsveççe, Ukrayna, Vietnamca ve Galiçyaca çevrilen UI dizelerini içerir ve daha fazla varsayılan dil eklemek için [katkıda bulunmalara](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md) açıktır.
+Varsayılan olarak, Starlight <LanguagesList startsSentence /> çevrilen UI dizelerini içerir ve daha fazla varsayılan dil eklemek için [katkıda bulunmalara](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md) açıktır.
 
 Desteklediğiniz ek diller için çevirileri sağlayabilir veya varsayılan etiketlerimizi `i18n` veri koleksiyonu aracılığıyla geçersiz kılabilirsiniz.
 
