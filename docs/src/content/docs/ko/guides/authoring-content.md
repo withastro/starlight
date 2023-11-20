@@ -89,6 +89,8 @@ description: Starlight에 내장된 링크를 사용하는 방법
 
 레벨 2 (`<h2>`) 및 레벨 3 (`<h3>`) 제목이 페이지 목차에 자동으로 나타납니다.
 
+[Astro 공식 문서](https://docs.astro.build/ko/guides/markdown-content/#heading-ids)에서 Astro가 제목의 `id`를 처리하는 방법에 대해 자세히 알아보세요.
+
 ## 주석
 
 주석은 "admonitions" 또는 "callouts" 라고도 하며, 페이지의 기본 콘텐츠 주변에 보조 정보를 표시하는 데 유용합니다.
