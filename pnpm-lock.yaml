@@ -148,8 +148,8 @@ importers:
         specifier: ^3.0.11
         version: 3.0.11
       astro-expressive-code:
-        specifier: ^0.28.2
-        version: 0.28.2(astro@3.2.3)
+        specifier: ^0.29.0
+        version: 0.29.0(astro@3.2.3)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1152,8 +1152,8 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@expressive-code/core@0.28.2:
-    resolution: {integrity: sha512-SZASDZb6quhRqYylN6NeCy+ahhGadrOSVRXfmZOJnpoXGpVkYCXCFl2e5b5rHNUZflRK00qHbtkk6CGudNPLQg==}
+  /@expressive-code/core@0.29.0:
+    resolution: {integrity: sha512-AGFPSKMEA3J6gdFOuuN+7AESmRESSMypC9twqe+hq2nYWXXtp95Nv6pK+qV3o7doYqEWgWBJ9Mivb19CK+HW0Q==}
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       hast-util-to-html: 8.0.4
@@ -1162,24 +1162,24 @@ packages:
       postcss-nested: 6.0.1(postcss@8.4.29)
     dev: false
 
-  /@expressive-code/plugin-frames@0.28.2:
-    resolution: {integrity: sha512-fYNE0aivB1mBJuZkfesT7L3YQz6PLw0BEBN1xHUWmcm28EvHCx2e7TOj/ozMEvcteVNvTKW8ktfK4nxupGCwdw==}
+  /@expressive-code/plugin-frames@0.29.0:
+    resolution: {integrity: sha512-4wgua53ah9nBDKjHyhW8bDNEsXWjm5WvqznARmahn58CwTqjOdn44stc/56x0haL98wHpZTyksgyuiOdPzJ5eg==}
     dependencies:
-      '@expressive-code/core': 0.28.2
+      '@expressive-code/core': 0.29.0
       hastscript: 7.2.0
     dev: false
 
-  /@expressive-code/plugin-shiki@0.28.2:
-    resolution: {integrity: sha512-HrEARCIGcrnmX5tQiGimxjSTkqGkeZxXKl14GgNQ8UjXBgk3H2lynMC70IJgjWlKm3SyWjvFs5ehxfGNKqBYXg==}
+  /@expressive-code/plugin-shiki@0.29.0:
+    resolution: {integrity: sha512-+mS1rkW1E5yhUUMBxOQB8HJbFlf3lWen0Hm7mi14K0Q+PQru/G5PqKaa5Du9Ut+/bWSevTNc1up5UiF8fhS/9A==}
     dependencies:
-      '@expressive-code/core': 0.28.2
+      '@expressive-code/core': 0.29.0
       shiki: 0.14.4
     dev: false
 
-  /@expressive-code/plugin-text-markers@0.28.2:
-    resolution: {integrity: sha512-KgBEK2VffFxna55KDikZneJ268RAu69UgtR0dSAON14mjlzB+7Ue7WpaMMXJ0NnJ9imkni0MbvO8HiuwMHvdGQ==}
+  /@expressive-code/plugin-text-markers@0.29.0:
+    resolution: {integrity: sha512-9TwA91Zcjw3lyiVvsuh5MfcP9QRcg4/GJ2tZgLnNAmsCwPzbFM6iP1ZZJfigeeSD8bBqhfxyws7rydI2lGEVFA==}
     dependencies:
-      '@expressive-code/core': 0.28.2
+      '@expressive-code/core': 0.29.0
       hastscript: 7.2.0
       unist-util-visit-parents: 5.1.3
     dev: false
@@ -1739,13 +1739,13 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-expressive-code@0.28.2(astro@3.2.3):
-    resolution: {integrity: sha512-ohiQ/ADJVMDcV4zc+45M9cMXQPLZRneWDbpcs+VY7WCx0mwi8ML3+8VnlaOBlVARw0FxEELe5yHhQzQCZMEDXQ==}
+  /astro-expressive-code@0.29.0(astro@3.2.3):
+    resolution: {integrity: sha512-14DINm8EJYrusewcJumO3IsmTeqQYESCYZ3tVn0Wxup8hehYqy4I7HzT3XNKufRIo883ikDmTljbpAVhj8ls+g==}
     peerDependencies:
       astro: ^3.0.0-beta
     dependencies:
       astro: 3.2.3(@types/node@18.16.19)
-      remark-expressive-code: 0.28.2
+      remark-expressive-code: 0.29.0
     dev: false
 
   /astro@3.2.3(@types/node@18.16.19):
@@ -2987,13 +2987,13 @@ packages:
     resolution: {integrity: sha512-XYfuKMvj4O35f/pOXLObndIRvyQ+/+6AhODh+OKWj9S9498pHHn/IMszH+gt0fBCRWMNfk1ZSp5x3AifmnI2vg==}
     engines: {node: '>=6'}
 
-  /expressive-code@0.28.2:
-    resolution: {integrity: sha512-YexyhdVkow63/dP7/6uU2nLl3NqrTa+nABW/V3dP9owZIZf3M8wWoIy9k2F/BI1dGpPtCXFs6HYlQBIZG26VLQ==}
+  /expressive-code@0.29.0:
+    resolution: {integrity: sha512-Gl27zUVizrzjp1sLPDMJwyVQ4mws7JRkxQOiFjCWiUv2jvugM0Jhjr56337docIk7oZaKbL1IPdCq1yDNfMm5A==}
     dependencies:
-      '@expressive-code/core': 0.28.2
-      '@expressive-code/plugin-frames': 0.28.2
-      '@expressive-code/plugin-shiki': 0.28.2
-      '@expressive-code/plugin-text-markers': 0.28.2
+      '@expressive-code/core': 0.29.0
+      '@expressive-code/plugin-frames': 0.29.0
+      '@expressive-code/plugin-shiki': 0.29.0
+      '@expressive-code/plugin-text-markers': 0.29.0
     dev: false
 
   /extend-shallow@2.0.1:
@@ -5497,10 +5497,10 @@ packages:
       - supports-color
     dev: false
 
-  /remark-expressive-code@0.28.2:
-    resolution: {integrity: sha512-nbQEcPCkEmt30tbbKHUAp+ufW2XQG72r9F/sKk9bnBXn/xK2PRQPxAtr9oCTBANAU2uTcROwKbMk+5P8Eobeow==}
+  /remark-expressive-code@0.29.0:
+    resolution: {integrity: sha512-T36DPLBalqFDwIcExs2WCgy0SSCf99RNtuCQunrHQT0NE4aKiD4k8X+tPWDeCmI6dy4lX+yJO1xgV3IG54pnnA==}
     dependencies:
-      expressive-code: 0.28.2
+      expressive-code: 0.29.0
       hast-util-to-html: 8.0.4
       unist-util-visit: 4.1.2
     dev: false
