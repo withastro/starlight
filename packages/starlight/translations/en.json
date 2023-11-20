@@ -18,5 +18,9 @@
   "page.lastUpdated": "Last updated:",
   "page.previousLink": "Previous",
   "page.nextLink": "Next",
-  "404.text": "Page not found. Check the URL or try using the search bar."
+  "404.text": "Page not found. Check the URL or try using the search bar.",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }

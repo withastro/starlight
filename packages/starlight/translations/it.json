@@ -18,5 +18,9 @@
   "page.lastUpdated": "Ultimo aggiornamento:",
   "page.previousLink": "Indietro",
   "page.nextLink": "Avanti",
-  "404.text": "Pagina non trovata. Verifica l'URL o prova a utilizzare la barra di ricerca."
+  "404.text": "Pagina non trovata. Verifica l'URL o prova a utilizzare la barra di ricerca.",
+  "aside.note": "Nota",
+  "aside.tip": "Consiglio",
+  "aside.caution": "Attenzione",
+  "aside.danger": "Pericolo"
 }
