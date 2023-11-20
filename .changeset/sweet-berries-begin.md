@@ -5,7 +5,7 @@
 Adds Expressive Code as Starlight’s default code block renderer
 
 ⚠️ **Potentially breaking change:**
-This addition changes how Markdown code blocks are rendered to use [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code).
+This addition changes how Markdown code blocks are rendered. By default, Starlight will now use [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code).
 If you were already customizing how code blocks are rendered and don't want to use the [features provided by Expressive Code](https://starlight.astro.build/guides/authoring-content/#expressive-code-features), you can preserve the previous behavior by setting the new config option `expressiveCode` to `false`.
 
 If you had previously added Expressive Code manually to your Starlight project, you can now remove the manual set-up in `astro.config.mjs`:
