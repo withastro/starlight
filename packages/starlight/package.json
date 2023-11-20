@@ -157,7 +157,7 @@
     "./props": "./props.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
-    "./expressive-code": "./integrations/expressive-code/index.ts",
+    "./expressive-code": "./integrations/expressive-code/exports.ts",
     "./index.astro": "./index.astro",
     "./404.astro": "./404.astro",
     "./style/markdown.css": "./style/markdown.css"
