@@ -403,13 +403,13 @@ When setting `themes`, you must provide at least one dark and one light theme fo
 #### `useStarlightUiThemeColors`
 
 **type:** `boolean`  
-**default:** `true` if the `themes` option is not set (= you are using Starlight's default themes), and `false` otherwise
+**default:** `true` if `themes` is not set, otherwise `false`
 
 When `true`, Starlight's CSS variables are used for the colors of code block UI elements (backgrounds, buttons, shadows etc.), matching the [site color theme](/guides/css-and-tailwind/#theming).
 When `false`, the colors provided by the active syntax highlighting theme are used for these elements.
 
 :::note
-When manually setting this to `true` with your custom set of `themes`, you must provide at least one dark and one light theme to ensure proper color contrast.
+When using custom themes and setting this to `true`, you must provide at least one dark and one light theme to ensure proper color contrast.
 :::
 
 ### `head`
