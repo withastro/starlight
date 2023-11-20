@@ -84,11 +84,9 @@ export const starlightExpressiveCode = ({
 	const themes = preprocessThemes(themesInput);
 	if (useStarlightUiThemeColors === true && themes.length < 2) {
 		console.warn(
-			[
-				`*** Warning: Using the config option "useStarlightUiThemeColors: true" `,
-				`with a single theme is not recommended. For better color contrast, `,
-				`please provide at least one dark and one light theme.\n`,
-			].join('')
+			`*** Warning: Using the config option "useStarlightUiThemeColors: true" ` +
+			`with a single theme is not recommended. For better color contrast, ` +
+			`please provide at least one dark and one light theme.\n`
 		);
 	}
 
