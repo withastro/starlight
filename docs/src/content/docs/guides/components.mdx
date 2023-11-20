@@ -61,6 +61,7 @@ You can display a tabbed interface using the `<Tabs>` and `<TabItem>` components
 Each `<TabItem>` must have a `label` to display to users.
 
 ```mdx
+# src/content/docs/index.mdx
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -86,6 +87,7 @@ Wrap multiple cards in the `<CardGrid>` component to display cards side-by-side 
 A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](#all-icons).
 
 ```mdx
+# src/content/docs/index.mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="Check this out">Interesting content you want to highlight.</Card>
@@ -134,6 +136,7 @@ A `<LinkCard>` requires a `title` and an [`href`](https://developer.mozilla.org/
 Group multiple `<LinkCard>` components in `<CardGrid>` to display cards side-by-side when there’s enough space.
 
 ```mdx
+# src/content/docs/index.mdx
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -173,6 +176,7 @@ Starlight provides a set of common icons that you can display in your content us
 Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
 
 ```mdx
+# src/content/docs/index.mdx
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
