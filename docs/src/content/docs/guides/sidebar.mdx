@@ -89,7 +89,7 @@ Add a group using an object with `label` and `items` properties.
 The `label` will be used as the heading for the group.
 Add links or subgroups to the `items` array.
 
-```js /(label:) 'G/ /(label:) 'St/ "items:"
+```js /^\s*(label:|items:)/
 // astro.config.mjs
 starlight({
 	sidebar: [
