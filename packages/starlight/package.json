@@ -157,6 +157,7 @@
     "./props": "./props.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
+    "./expressive-code": "./integrations/expressive-code/exports.ts",
     "./index.astro": "./index.astro",
     "./404.astro": "./404.astro",
     "./style/markdown.css": "./style/markdown.css"
@@ -176,6 +177,7 @@
     "@astrojs/sitemap": "^3.0.0",
     "@pagefind/default-ui": "^1.0.3",
     "@types/mdast": "^3.0.11",
+    "astro-expressive-code": "^0.29.0",
     "bcp-47": "^2.1.0",
     "execa": "^8.0.1",
     "hast-util-select": "^5.0.5",
