@@ -33,6 +33,8 @@ hero:
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
 import AboutAstro from '../../components/about-astro.astro';
+import TestimonialGrid from '../../components/testimonial-grid.astro';
+import Testimonial from '../../components/testimonial.astro';
 
 <CardGrid stagger>
 	<Card title="Documentation that delights" icon="open-book">
@@ -52,6 +54,15 @@ import AboutAstro from '../../components/about-astro.astro';
 		React, Vue, Svelte, Solid, and more.
 	</Card>
 </CardGrid>
+
+<TestimonialGrid title="Testimonials">
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="What is Starlight?" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content="I use Starlight for everything." />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/494699?v=4" name="HiDeoo" handle="HiDeoo">
+    <p>So what's the deal with Starlight?</p>
+  </Testimonial>
+</TestimonialGrid>
 
 <AboutAstro title="Brought to you by">
 Astro is the all-in-one web framework designed for speed.

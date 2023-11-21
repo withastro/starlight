@@ -192,4 +192,7 @@ export default defineConfig({
 			],
 		}),
 	],
+	image: {
+		domains: ['avatars.githubusercontent.com'],
+	},
 });

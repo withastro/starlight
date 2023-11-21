@@ -1,0 +1,44 @@
+---
+interface Props {
+	title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="testimonial-wrapper">
+	{title ? <p class="testimonial-grid-title">{title}</p> : null}
+	<section class="testimonial-grid">
+		<slot />
+	</section>
+</div>
+
+<style>
+	.testimonial-wrapper:not(.testimonial-grid-title) {
+		margin-top: 7rem;
+	}
+	.testimonial-wrapper:has(.testimonial-grid-title) {
+		margin-top: 2rem;
+	}
+	.testimonial-grid-title {
+		font-weight: 600;
+		font-size: var(--sl-text-h2);
+		color: var(--sl-color-white);
+		line-height: var(--sl-line-height-headings);
+	}
+	.testimonial-grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.testimonial-grid > :global(*) {
+		margin-top: 0 !important;
+	}
+
+	@media (min-width: 50rem) {
+		.testimonial-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 1.5rem;
+		}
+	}
+</style>
