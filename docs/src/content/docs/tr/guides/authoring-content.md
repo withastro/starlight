@@ -139,7 +139,7 @@ Uyarı ve tehlike ara bölümleri, kullanıcıların dikkatini gözden kaçabile
 Bunları çok kullandığınızı farkederseniz, dokümanınızın yeniden oluşturulmasına gerek kalmayacağının işareti olabilir.
 
 :::caution[Uyarı]
-Harika bir dokümantasyon sitesi istediğine emin değilsen, [Starlight](../../../) kullanmadan önce iki kez düşün.
+Harika bir dokümantasyon sitesi istediğine emin değilsen, [Starlight](../../) kullanmadan önce iki kez düşün.
 :::
 
 :::danger[Tehlike]
