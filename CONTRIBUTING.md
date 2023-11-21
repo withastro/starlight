@@ -198,7 +198,7 @@ Help out by:
 
 Visit **<https://i18n.starlight.astro.build>** to track translation progress for the currently supported languages.
 
-#### How to add a new language to Starlight’s docs
+#### Adding a new language to Starlight’s docs
 
 To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://github.com/withastro/docs/blob/main/contributor-guides/translating-astro-docs.md#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
 
