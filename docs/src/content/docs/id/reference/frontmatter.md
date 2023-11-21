@@ -162,7 +162,7 @@ interface HeroConfig {
 
 **tipe:** `{ content: string }`
 
-Menampilkan _banner_  pengumuman di bagian atas halaman ini.
+Menampilkan _banner_ pengumuman di bagian atas halaman ini.
 
 Nilai `content` dapat berupa HTML untuk tautan atau konten lainnya.
 Sebagai contoh, halaman ini menampilkan spanduk yang menyertakan tautan ke `example.com`.
