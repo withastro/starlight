@@ -89,6 +89,8 @@ Puedo enlazar a [mi conclusión](#conclusión) más abajo en la misma página.
 
 Los encabezados de nivel 2 (`<h2>`) y nivel 3 (`<h3>`) aparecerán automáticamente en la tabla de contenido de la página.
 
+Aprende más sobre cómo Astro procesa los `id`s de los encabezados en [la documentación de Astro](https://docs.astro.build/es/guides/markdown-content/#ids-de-encabezado)
+
 ## Apartados
 
 Los apartados (también conocidos como “apartados” o ”contenido destacado”) son útiles para mostrar información secundaria junto al contenido principal de una página.

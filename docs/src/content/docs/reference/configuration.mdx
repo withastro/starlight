@@ -346,6 +346,72 @@ starlight({
 });
 ```
 
+### `expressiveCode`
+
+**type:** `StarlightExpressiveCodeOptions | boolean`  
+**default:** `true`
+
+Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
+See the [“Code blocks” guide](/guides/authoring-content/#code-blocks) to learn how to use Expressive Code syntax in your Markdown and MDX content.
+
+You can use any of the standard [Expressive Code configuration options](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) as well as some Starlight-specific properties, by setting them in Starlight’s `expressiveCode` option.
+For example, set Expressive Code’s `styleOverrides` option to override the default CSS. This enables customizations like giving your code blocks rounded corners:
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+If you want to disable Expressive Code, set `expressiveCode: false` in your Starlight config:
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+In addition to the standard Expressive Code options, you can also set the following Starlight-specific properties in your `expressiveCode` config to further customize theme behavior for your code blocks :
+
+#### `themes`
+
+**type:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**default:** `['starlight-dark', 'starlight-light']`
+
+Set the themes used to style code blocks.
+See the [Expressive Code `themes` documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) for details of the supported theme formats.
+
+Starlight uses the dark and light variants of Sarah Drasner’s [Night Owl theme](https://github.com/sdras/night-owl-vscode-theme) by default.
+
+If you provide at least one dark and one light theme, Starlight will automatically keep the active code block theme in sync with the current site theme.
+Configure this behavior with the [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch) option.
+
+#### `useStarlightDarkModeSwitch`
+
+**type:** `boolean`  
+**default:** `true`
+
+When `true`, code blocks automatically switch between light and dark themes when the site theme changes.
+When `false`, you must manually add CSS to handle switching between multiple themes.
+
+:::note
+When setting `themes`, you must provide at least one dark and one light theme for the Starlight dark mode switch to work.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**type:** `boolean`  
+**default:** `true` if `themes` is not set, otherwise `false`
+
+When `true`, Starlight's CSS variables are used for the colors of code block UI elements (backgrounds, buttons, shadows etc.), matching the [site color theme](/guides/css-and-tailwind/#theming).
+When `false`, the colors provided by the active syntax highlighting theme are used for these elements.
+
+:::note
+When using custom themes and setting this to `true`, you must provide at least one dark and one light theme to ensure proper color contrast.
+:::
+
 ### `head`
 
 **type:** [`HeadConfig[]`](#headconfig)
