@@ -7,38 +7,12 @@ import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
 import type { StarlightConfig } from '../types';
 import type { createTranslationSystemFromFs } from '../utils/translations-fs';
+import { pathToLocale } from './shared/pathToLocale';
 
 interface AsidesOptions {
 	starlightConfig: { locales: StarlightConfig['locales'] };
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
-}
-
-function pathToLocale(
-	slug: string | undefined,
-	config: AsidesOptions['starlightConfig']
-): string | undefined {
-	const locales = Object.keys(config.locales || {});
-	const baseSegment = slug?.split('/')[0];
-	if (baseSegment && locales.includes(baseSegment)) return baseSegment;
-	return undefined;
-}
-
-/** get current lang from file full path */
-function getLocaleFromPath(
-	unformattedPath: string | undefined,
-	{ starlightConfig, astroConfig }: AsidesOptions
-): string | undefined {
-	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
-	const docsDir = new URL('content/docs/', srcDir);
-	const path = unformattedPath
-		// Format path to unix style path.
-		?.replace(/\\/g, '/')
-		// Strip docs path leaving only content collection file ID.
-		// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
-		.replace(docsDir.pathname, '');
-	const locale = pathToLocale(path, starlightConfig);
-	return locale;
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -123,7 +97,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = getLocaleFromPath(file.history[0], options);
+		const locale = pathToLocale(file.history[0], options);
 		const t = options.useTranslations(locale);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {

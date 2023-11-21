@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
+import { starlightExpressiveCode } from './integrations/expressive-code';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { errorMap } from './utils/error-map';
@@ -37,6 +38,15 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
 				const integrations: AstroIntegration[] = [];
+				if (!config.integrations.find(({ name }) => name === 'astro-expressive-code')) {
+					integrations.push(
+						...starlightExpressiveCode({
+							starlightConfig: userConfig,
+							astroConfig: config,
+							useTranslations,
+						})
+					);
+				}
 				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(userConfig));
 				}
