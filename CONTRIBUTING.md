@@ -186,8 +186,6 @@ Each language’s JSON file follows the [translation structure described in Star
 
 📺 **Prefer a visual walkthrough?** [Watch an introduction to Starlight’s translation files.](https://scrimba.com/scrim/cpb44bt3)
 
-Prior to adding translation files, we highly recommend you reading through [Choosing proper Subtag for the Language](https://github.com/withastro/docs/blob/main/contributor-guides/translating-astro-docs.md#adding-a-new-language).
-
 ### Translating Starlight’s docs
 
 Starlight’s documentation is also translated into multiple languages. You can find the source code for the site in [the `docs/` directory](./docs/) of this repository.
