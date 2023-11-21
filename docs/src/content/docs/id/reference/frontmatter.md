@@ -237,7 +237,7 @@ next: false
 **tipe:** `boolean`  
 **bawaan:** `true`
 
-Mengatur apakah halaman ini harus disertakan dalam indeks pencarian [Pagefind](https://Pagefind.app). Atur ke `false` untuk mengecualikan halaman dari hasil pencarian:
+Mengatur apakah halaman ini harus disertakan dalam indeks pencarian [Pagefind](https://pagefind.app). Atur ke `false` untuk mengecualikan halaman dari hasil pencarian:
 
 ```md
 ---
