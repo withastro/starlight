@@ -8,9 +8,9 @@ const { title } = Astro.props;
 
 <div class="testimonial-wrapper">
 	{title ? <p class="testimonial-grid-title">{title}</p> : null}
-	<section class="testimonial-grid">
+	<ul class="testimonial-grid">
 		<slot />
-	</section>
+	</ul>
 </div>
 
 <style>
@@ -27,6 +27,7 @@ const { title } = Astro.props;
 		line-height: var(--sl-line-height-headings);
 	}
 	.testimonial-grid {
+		list-style: none;
 		display: grid;
 		gap: 1rem;
 	}

@@ -56,11 +56,12 @@ import Testimonial from '../../components/testimonial.astro';
 </CardGrid>
 
 <TestimonialGrid title="Testimonials">
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
+  <Testimonial date={new Date('10-10-23')} link={new URL('https://x.com/eliancodes')} avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
   <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="What is Starlight?" />
   <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content="I use Starlight for everything." />
   <Testimonial avatar="https://avatars.githubusercontent.com/u/494699?v=4" name="HiDeoo" handle="HiDeoo">
     <p>So what's the deal with Starlight?</p>
+    <button>I just wanted a button</button>
   </Testimonial>
 </TestimonialGrid>
 

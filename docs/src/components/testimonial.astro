@@ -6,41 +6,52 @@ interface Props {
 	name: string;
 	content?: string;
 	avatar: string;
+	date?: Date;
+	link?: URL;
 }
 
-const { content, name, handle, avatar } = Astro.props;
+const { content, name, handle, avatar, date, link } = Astro.props;
 ---
 
-<article class="testimonial">
+<li class="testimonial">
 	<div class="testimonial-heading">
 		<Image class="avatar" height="50" width="50" src={avatar} alt="image" />
 		<div class="testimonial-title">
 			<p class="title">
 				{name}
 			</p>
-			<span class="handle">
-				@{handle}
-			</span>
+			{
+				link ? (
+					<a href={link} target="_blank" class="handle">
+						@{handle}
+					</a>
+				) : (
+					<span class="handle">@{handle}</span>
+				)
+			}
 		</div>
 	</div>
 	<div class="testimonial-body">
-		{content}
+		{content ? <blockquote>{content}</blockquote> : null}
 		<slot />
+		{date ? <span>posted on {date?.toLocaleDateString()}</span> : null}
 	</div>
-</article>
+</li>
 
 <style>
 	.testimonial-heading {
 		display: flex;
 		gap: 1rem;
 		flex-direction: row;
-		align-items: start;
+		align-items: center;
 		justify-items: start;
 	}
 	.avatar {
 		border-radius: 9999px;
 	}
 	.testimonial .testimonial-title {
+		display: flex;
+		flex-direction: column;
 		margin-top: 0;
 	}
 	.title {
@@ -68,8 +79,11 @@ const { content, name, handle, avatar } = Astro.props;
 		padding: 0.2em;
 		border-radius: 0.25rem;
 	} */
-	.testimonial .body {
-		margin: 0;
+	.testimonial-body {
+		margin-bottom: 0 !important;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 		font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
 	}
 </style>
