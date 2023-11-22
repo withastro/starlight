@@ -147,7 +147,7 @@ tableOfContents:
 defineConfig({
 	integrations: [
 		starlight({
-			title: '',
+			title: 'Docs with custom table of contents config',
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 		}),
 	],
@@ -409,7 +409,7 @@ It provides npm modules you can install for the fonts you want to use and includ
 To apply the font you set up to your site, use your chosen font’s name in a [custom CSS file](/guides/css-and-tailwind/#custom-css-styles).
 For example, to override Starlight’s default font everywhere, set the `--sl-font` custom property:
 
-```css {4}
+```css
 /* src/styles/custom.css */
 
 :root {
