@@ -152,7 +152,7 @@ You can provide translations for additional languages you support — or overrid
 
 1. Configure the `i18n` data collection in `src/content/config.ts` if it isn’t configured already:
 
-   ```diff lang="js" ins=", i18nSchema"
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
