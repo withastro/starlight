@@ -48,8 +48,7 @@ By default, the logo will be displayed alongside your site’s `title`.
 If your logo image already includes the site title, you can visually hide the title text by setting the `replacesTitle` option.
 The `title` text will still be included for screen readers so that the header remains accessible.
 
-```js {6}
-// astro.config.mjs
+```js {5}
 starlight({
   title: 'Docs With My Logo',
   logo: {
@@ -79,7 +78,6 @@ You can display different versions of your logo in light and dark modes.
 2. Add the path to your logo variants as the `light` and `dark` options instead of `src` in `astro.config.mjs`:
 
    ```diff lang="js"
-   // astro.config.mjs
    starlight({
      title: 'Docs With My Logo',
      logo: {
