@@ -15,6 +15,7 @@
   "files": [
     "index.ts",
     "DocSearch.astro",
+    "variables.css",
     "virtual.d.ts"
   ],
   "exports": {
