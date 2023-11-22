@@ -1,10 +1,19 @@
-import type { AstroUserConfig } from 'astro';
+import type { AstroConfig, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Paragraph as P, Root } from 'mdast';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
+import type { StarlightConfig } from '../types';
+import type { createTranslationSystemFromFs } from '../utils/translations-fs';
+import { pathToLocale } from './shared/pathToLocale';
+
+interface AsidesOptions {
+	starlightConfig: { locales: StarlightConfig['locales'] };
+	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
+	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
+}
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: any[] = []): P {
@@ -50,18 +59,10 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
  * </Aside>
  * ```
  */
-function remarkAsides(): Plugin<[], Root> {
+function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
-
-	// TODO: hook these up for i18n once the design for translating strings is ready
-	const defaultTitles = {
-		note: 'Note',
-		tip: 'Tip',
-		caution: 'Caution',
-		danger: 'Danger',
-	};
 
 	const iconPaths = {
 		// Information icon
@@ -95,7 +96,9 @@ function remarkAsides(): Plugin<[], Root> {
 		],
 	};
 
-	const transformer: Transformer<Root> = (tree) => {
+	const transformer: Transformer<Root> = (tree, file) => {
+		const locale = pathToLocale(file.history[0], options);
+		const t = options.useTranslations(locale);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === null || node.type !== 'containerDirective') {
 				return;
@@ -107,7 +110,7 @@ function remarkAsides(): Plugin<[], Root> {
 			// its children, but we want to pass it as the title prop to <Aside>, so
 			// we iterate over the children, find a directive label, store it for the
 			// title prop, and remove the paragraph from children.
-			let title = defaultTitles[variant];
+			let title = t(`aside.${variant}`);
 			remove(node, (child): boolean | void => {
 				if (child.data?.directiveLabel) {
 					if (
@@ -157,6 +160,6 @@ function remarkAsides(): Plugin<[], Root> {
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
 
-export function starlightAsides(): RemarkPlugins {
-	return [remarkDirective, remarkAsides()];
+export function starlightAsides(options: AsidesOptions): RemarkPlugins {
+	return [remarkDirective, remarkAsides(options)];
 }

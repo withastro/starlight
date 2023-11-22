@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
+import { starlightExpressiveCode } from './integrations/expressive-code';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
@@ -43,6 +44,11 @@ export default function StarlightIntegration({
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
+				if (!config.integrations.find(({ name }) => name === 'astro-expressive-code')) {
+					integrations.push(
+						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations })
+					);
+				}
 				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
 				}
@@ -55,7 +61,9 @@ export default function StarlightIntegration({
 						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
 					},
 					markdown: {
-						remarkPlugins: [...starlightAsides()],
+						remarkPlugins: [
+							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
+						],
 						rehypePlugins: [rehypeRtlCodeSupport()],
 						shikiConfig:
 							// Configure Shiki theme if the user is using the default github-dark theme.

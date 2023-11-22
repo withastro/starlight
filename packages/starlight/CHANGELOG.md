@@ -1,5 +1,94 @@
 # @astrojs/starlight
 
+## 0.13.0
+
+### Minor Changes
+
+- [#1023](https://github.com/withastro/starlight/pull/1023) [`a3b80f7`](https://github.com/withastro/starlight/commit/a3b80f71037504f2b8d7f1a641924215091122bb) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Respect the `trailingSlash` and `build.format` Astro options when creating Starlight navigation links.
+
+  ⚠️ **Potentially breaking change:**
+  This change will cause small changes in link formatting for most sites.
+  These are unlikely to break anything, but if you care about link formatting, you may want to change some Astro settings.
+
+  If you want to preserve Starlight’s previous behavior, set `trailingSlash: 'always'` in your `astro.config.mjs`:
+
+  ```js
+  import { defineConfig } from 'astro/config';
+  import starlight from '@astrojs/starlight';
+
+  export default defineConfig({
+    trailingSlash: 'always',
+    integrations: [
+      starlight({
+        // ...
+      }),
+    ],
+  });
+  ```
+
+- [#742](https://github.com/withastro/starlight/pull/742) [`c6a4bcb`](https://github.com/withastro/starlight/commit/c6a4bcb7982c54c513f20c96a9b2aaf9ac09094b) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds Expressive Code as Starlight’s default code block renderer
+
+  ⚠️ **Potentially breaking change:**
+  This addition changes how Markdown code blocks are rendered. By default, Starlight will now use [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code).
+  If you were already customizing how code blocks are rendered and don't want to use the [features provided by Expressive Code](https://starlight.astro.build/guides/authoring-content/#expressive-code-features), you can preserve the previous behavior by setting the new config option `expressiveCode` to `false`.
+
+  If you had previously added Expressive Code manually to your Starlight project, you can now remove the manual set-up in `astro.config.mjs`:
+
+  - Move your configuration to Starlight’s new `expressiveCode` option.
+  - Remove the `astro-expressive-code` integration.
+
+  For example:
+
+  ```diff
+  import starlight from '@astrojs/starlight';
+  import { defineConfig } from 'astro/config';
+  - import expressiveCode from 'astro-expressive-code';
+
+  export default defineConfig({
+    integrations: [
+  -   expressiveCode({
+  -     themes: ['rose-pine'],
+  -   }),
+      starlight({
+        title: 'My docs',
+  +     expressiveCode: {
+  +       themes: ['rose-pine'],
+  +     },
+      }),
+    ],
+  });
+  ```
+
+  Note that the built-in Starlight version of Expressive Code sets some opinionated defaults that are different from the `astro-expressive-code` defaults. You may need to set some `styleOverrides` if you wish to keep styles exactly the same.
+
+- [#517](https://github.com/withastro/starlight/pull/517) [`5b549cb`](https://github.com/withastro/starlight/commit/5b549cb634f51d28bf9a7f92ad0d82c1671e788a) Thanks [@liruifengv](https://github.com/liruifengv)! - Add i18n support for default aside labels
+
+### Patch Changes
+
+- [#1088](https://github.com/withastro/starlight/pull/1088) [`4fe5537`](https://github.com/withastro/starlight/commit/4fe553749a6708fdb119b12a2dbc6b10a980bde1) Thanks [@Lootjs](https://github.com/Lootjs)! - i18n(ru): added Russian aside labels translation
+
+- [#1083](https://github.com/withastro/starlight/pull/1083) [`e03a653`](https://github.com/withastro/starlight/commit/e03a65313365b7dbe6095727b28b4e639c446f68) Thanks [@at-the-vr](https://github.com/at-the-vr)! - i18n(hi): Add Hindi language support
+
+- [#1075](https://github.com/withastro/starlight/pull/1075) [`2f2adf2`](https://github.com/withastro/starlight/commit/2f2adf29f2a13d5ff0f1577207210745a5ae7405) Thanks [@russbiggs](https://github.com/russbiggs)! - Add Slack social link icon
+
+- [#1065](https://github.com/withastro/starlight/pull/1065) [`2d72ed6`](https://github.com/withastro/starlight/commit/2d72ed67c666b26eae44649e70aecef3db815d19) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Ignore search keyboard shortcuts for elements with contents that are editable
+
+- [#1081](https://github.com/withastro/starlight/pull/1081) [`f27f781`](https://github.com/withastro/starlight/commit/f27f781556d37e73d0b1d902de745b67f8e4f24d) Thanks [@farisphp](https://github.com/farisphp)! - i18n(id): Add Indonesian aside labels translation
+
+- [#1082](https://github.com/withastro/starlight/pull/1082) [`ce27486`](https://github.com/withastro/starlight/commit/ce27486fabd3884ed4bca9372ebd72a0597ab765) Thanks [@bogdaaamn](https://github.com/bogdaaamn)! - i18n(ro): Add Romanian UI translations
+
+## 0.12.1
+
+### Patch Changes
+
+- [#1069](https://github.com/withastro/starlight/pull/1069) [`b86f360`](https://github.com/withastro/starlight/commit/b86f3608f03be9455ec1d5ba11820c9bf601ad1e) Thanks [@Genteure](https://github.com/Genteure)! - Fix sidebar highlighting and navigation buttons for pages with path containing non-ASCII characters
+
+- [#1025](https://github.com/withastro/starlight/pull/1025) [`0d1e75e`](https://github.com/withastro/starlight/commit/0d1e75e17269ddac3eb15b7dfb4480da1bb01c6c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Internal: fix import issue in translation string loading mechanism
+
+- [#1044](https://github.com/withastro/starlight/pull/1044) [`a5a9754`](https://github.com/withastro/starlight/commit/a5a9754f111b97abfd277d99759e9857aa0fb22b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fix last updated dates for pages displaying fallback content
+
+- [#1049](https://github.com/withastro/starlight/pull/1049) [`c27495d`](https://github.com/withastro/starlight/commit/c27495da61f9376236519ed3f08a169f245a189c) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Expose Markdown content styles in `@astrojs/starlight/style/markdown.css`
+
 ## 0.12.0
 
 ### Minor Changes

@@ -140,7 +140,15 @@ Si no hay una traducción disponible para un idioma, Starlight mostrará a los l
 
 ## Traduce la UI de Starlight
 
-Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, checo, francés, alemán, italiano, japonés, holandés, portugués, danés, español, turco, árabe, noruego, farsi, hebreo, chino simplificado, coreano, indonesio, ruso, sueco, ucraniano y vietnamita. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+import LanguagesList from '../../../../components/languages-list.astro';
+
+Además de alojar archivos de contenido traducidos, Starlight te permite traducir las etiquetas de UI predeterminadas (p. ej. el encabezado "En esta página" en la tabla de contenidos) para que tus lectores puedan experimentar tu sitio completamente en el idioma seleccionado.
+
+<LanguagesList startsSentence /> los strings de UI traducidos se proporcionan de
+forma predeterminada, y damos la bienvenida a [contribuciones para agregar más idiomas
+predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+
+Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
 
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 
