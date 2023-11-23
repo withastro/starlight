@@ -179,12 +179,12 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 > Les guillemets sont indiqués par un `>` au début de chaque ligne.
 ```
 
-## Code blocks
+## Blocs de code
 
-Un bloc de code est indiqué par un bloc avec trois crochets <code>```</code> au début et à la fin. Vous pouvez indiquer le langage de programmation utilisé après les premiers crochets.
+Un bloc de code est indiqué par un bloc avec trois accents graves <code>```</code> au début et à la fin. Vous pouvez indiquer le langage de programmation utilisé après les premiers accents graves.
 
 ```js
-// Code Javascript avec mise en évidence de la syntaxe.
+// Code Javascript avec coloration syntaxique.
 var fun = function lang(l) {
   dateformat.i18n = require('./lang/' + l);
   return true;
@@ -193,7 +193,7 @@ var fun = function lang(l) {
 
 ````md
 ```js
-// Code Javascript avec mise en évidence de la syntaxe.
+// Code Javascript avec coloration syntaxique.
 var fun = function lang(l) {
   dateformat.i18n = require('./lang/' + l);
   return true;
@@ -201,9 +201,148 @@ var fun = function lang(l) {
 ```
 ````
 
-```md
-Les longs blocs de code d'une seule ligne ne doivent pas être enveloppés. Ils doivent défiler horizontalement s'ils sont trop longs. Cette ligne devrait être suffisamment longue pour le démontrer.
-```
+### Fonctionnalités d'Expressive Code
+
+Starlight utilise [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) pour étendre les possibilités de formatage des blocs de code.
+Les plugins Expressive Code de marqueurs de texte et de cadres de fenêtre sont activés par défaut.
+L'affichage des blocs de code peut être configuré à l'aide de [l'option de configuration `expressiveCode`](/fr/reference/configuration/#expressivecode) de Starlight.
+
+#### Marqueurs de texte
+
+Vous pouvez mettre en évidence des lignes ou des portions spécifiques de vos blocs de code à l'aide des [marqueurs de texte d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) sur la première ligne de votre bloc de code.
+Utilisez des accolades (`{ }`) pour mettre en évidence des lignes entières, et des guillemets pour mettre en évidence des chaînes de texte.
+
+Il existe trois styles de mise en évidence : neutre pour attirer l'attention sur le code, vert pour indiquer du code inséré, et rouge pour indiquer du code supprimé.
+Du texte et des lignes entières peuvent être marqués à l'aide du marqueur par défaut, ou en combinaison avec `ins=` et `del=` pour produire la mise en évidence souhaitée.
+
+Expressive Code fournit plusieurs options pour personnaliser l'apparence visuelle de vos exemples de code.
+Beaucoup d'entre elles peuvent être combinées pour obtenir des exemples de code très illustratifs.
+Merci d'explorer la [documentation d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) pour obtenir une liste complète des options disponibles.
+Certaines des options les plus courantes sont présentées ci-dessous :
+
+- [Marquer des lignes entières et des plages de lignes à l'aide du marqueur `{ }`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges) :
+
+  ```js {2-3}
+  function demo() {
+    // Cette ligne (#2) et la suivante sont mises en évidence
+    return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // Cette ligne (#2) et la suivante sont mises en évidence
+    return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+  ````
+
+- [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges) :
+
+  ```js "termes individuels" /Même.*charge/
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+    return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+
+  ````md
+  ```js "termes individuels" /Même.*charge/
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+    return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+  ````
+
+- [Marquer du texte ou des lignes comme insérés ou supprimés avec `ins` ou `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del) :
+
+  ```js "return true;" ins="insertion" del="suppression"
+  function demo() {
+    console.log("Voici des marqueurs d'insertion et de suppression");
+    // La déclaration return utilise le type de marqueur par défaut
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="insertion" del="suppression"
+  function demo() {
+    console.log("Voici des marqueurs d'insertion et de suppression");
+    // La déclaration return utilise le type de marqueur par défaut
+    return true;
+  }
+  ```
+  ````
+
+- [Combiner coloration syntaxique et syntaxe de type `diff`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax) :
+
+  ```diff lang="js"
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+  ````
+
+#### Cadres et titres
+
+Les blocs de code peuvent être affichés dans un cadre ressemblant à une fenêtre.
+Un cadre ressemblant à une fenêtre de terminal sera utilisé pour les langages de script shell (par exemple `bash` ou `sh`).
+Les autres langages s'affichent dans un cadre de style éditeur de code s'ils incluent un titre.
+
+Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `title="..."` après les accents graves d'ouverture et l'identifiant de langage, ou avec un nom de fichier en commentaire sur la première ligne du bloc de code.
+
+- [Ajouter un nom de fichier avec un commentaire](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames) :
+
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+
+  ````md
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+  ````
+
+- [Ajouer un title à une fenêtre de terminal](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames) :
+
+  ```bash title="Installation des dépendances…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="Installation des dépendances…"
+  npm install
+  ```
+  ````
+
+- [Désactiver les cadres de fenêtre avec `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types) :
+
+  ```bash frame="none"
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+  ````
 
 ## Autres fonctionnalités courantes de Markdown
 
