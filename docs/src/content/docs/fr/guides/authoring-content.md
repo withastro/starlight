@@ -238,7 +238,7 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   ```
   ````
 
-- [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges) :
+- [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines) :
 
   ```js "termes individuels" /Même.*charge/
   // Des termes individuels peuvent également être mis en évidence
@@ -306,7 +306,7 @@ Les autres langages s'affichent dans un cadre de style éditeur de code s'ils in
 
 Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `title="..."` après les accents graves d'ouverture et l'identifiant de langage, ou avec un nom de fichier en commentaire sur la première ligne du bloc de code.
 
-- [Ajouter un nom de fichier avec un commentaire](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames) :
+- [Ajouter un nom de fichier avec un commentaire](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title) :
 
   ```js
   // mon-fichier-de-test.js
@@ -320,7 +320,7 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   ```
   ````
 
-- [Ajouer un title à une fenêtre de terminal](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames) :
+- [Ajouer un title à une fenêtre de terminal](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title) :
 
   ```bash title="Installation des dépendances…"
   npm install
