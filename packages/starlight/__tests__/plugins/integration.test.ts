@@ -45,3 +45,33 @@ test('returns all integrations added by plugins without deduping them', async ()
 		{ name: 'test-integration-2' },
 	]);
 });
+
+test('receives the Astro config with a list of integrations including the ones added by previous plugins', async () => {
+	expect.assertions(1);
+
+	await runPlugins(
+		{ title: 'Test Docs' },
+		[
+			{
+				name: 'test-plugin-1',
+				hooks: {
+					setup({ addIntegration }) {
+						addIntegration({
+							name: 'test-integration',
+							hooks: {},
+						});
+					},
+				},
+			},
+			{
+				name: 'test-plugin-2',
+				hooks: {
+					setup({ astroConfig }) {
+						expect(astroConfig.integrations).toMatchObject([{ name: 'test-integration' }]);
+					},
+				},
+			},
+		],
+		createTestPluginContext()
+	);
+});

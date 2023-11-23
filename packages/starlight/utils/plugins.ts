@@ -69,7 +69,10 @@ export async function runPlugins(
 				// Collect any Astro integrations added by the plugin.
 				integrations.push(integration);
 			},
-			astroConfig: context.config,
+			astroConfig: {
+				...context.config,
+				integrations: [...context.config.integrations, ...integrations],
+			},
 			command: context.command,
 			isRestart: context.isRestart,
 			logger: context.logger.fork(name),

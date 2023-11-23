@@ -32,7 +32,9 @@ export async function defineVitestConfig(
 export function createTestPluginContext(): StarlightPluginContext {
 	return {
 		command: 'dev',
-		config: {} as StarlightPluginContext['config'],
+		// @ts-expect-error - we don't provide a full Astro config but only what is needed for the
+		// plugins to run.
+		config: { integrations: [] },
 		isRestart: false,
 		logger: new TestAstroIntegrationLogger(),
 	};
