@@ -9,7 +9,7 @@ test('reads and updates a configuration option', () => {
 });
 
 test('overwrites a configuration option', () => {
-	expect(getSidebar('/', undefined)).toMatchObject([{ href: '/showcase/', label: 'Showcase' }]);
+	expect(getSidebar('/', undefined)).toMatchObject([{ href: '/showcase', label: 'Showcase' }]);
 });
 
 test('runs plugins in the order that they are configured and always passes down the latest user config', () => {
