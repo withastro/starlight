@@ -44,15 +44,18 @@ export default function StarlightIntegration({
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
-				if (!config.integrations.find(({ name }) => name === 'astro-expressive-code')) {
+				// Add built-in integrations only if they are not already added by the user through the
+				// config or by a plugin.
+				const allIntegrations = [...config.integrations, ...integrations];
+				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
 					integrations.push(
 						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations })
 					);
 				}
-				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
 				}
-				if (!config.integrations.find(({ name }) => name === '@astrojs/mdx')) {
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
 				}
 				const newConfig: AstroUserConfig = {
