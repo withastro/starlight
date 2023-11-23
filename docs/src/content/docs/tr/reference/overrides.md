@@ -5,10 +5,10 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Starlight'ın yerleşik bileşenlerini, Starlight'ın [`components`](/reference/configuration#components) yapılandırma seçeneğinde yer değiştirme bileşenlerinin yolunu sağlayarak geçersiz kılabilirsiniz.
+Starlight'ın yerleşik bileşenlerini, Starlight'ın [`components`](/tr/reference/configuration#components) yapılandırma seçeneğinde yer değiştirme bileşenlerinin yolunu sağlayarak geçersiz kılabilirsiniz.
 Bu sayfa, geçersiz kılınabilecek tüm bileşenleri listeler ve bunların GitHub'daki varsayılan uygulamalarına bağlantılar sunar.
 
-Daha fazla bilgi için [Bileşenleri Geçersiz Kılma Kılavuzu](/guides/overriding-components/)ne göz atın.
+Daha fazla bilgi için [Bileşenleri Geçersiz Kılma Kılavuzu](/tr/guides/overriding-components/)ne göz atın.
 
 ## Bileşen Özellikleri
 
@@ -152,7 +152,7 @@ Her sayfanın `<head>` etiketi içinde oluşturulan bileşen.
 `<title>` ve `<meta charset="utf-8">` gibi önemli etiketleri içerir.
 
 Bu bileşeni son çare olarak geçersiz kılın. 
-Mümkünse Starlight yapılandırma seçeneği olan [`head`](/reference/configuration#head) seçeneğini tercih edin.
+Mümkünse Starlight yapılandırma seçeneği olan [`head`](/tr/reference/configuration#head) seçeneğini tercih edin.
 
 #### `ThemeProvider`
 
@@ -305,7 +305,7 @@ Bu bileşenler sayfa içeriğinin ana sütununda görüntülenir.
 
 **Varsayılan component:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
-Her sayfanın üstünde görüntülenen [`banner`](/reference/frontmatter#banner) bileşeni. 
+Her sayfanın üstünde görüntülenen [`banner`](/tr/reference/frontmatter#banner) bileşeni. 
 Varsayılan uygulama, sayfanın banner ön bilgisinin değerine bağlı olarak görüntülenip görüntülenmeyeceğini belirler.
 
 #### `ContentPanel`
@@ -333,7 +333,7 @@ Yalnızca çok dilli sitelerde kullanılır.
 
 **Varsayılan component:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Frontmatter’da [`hero`](/reference/frontmatter#hero) ayarlandığında sayfanın üstünde görüntülenen bir bileşen. 
+Frontmatter’da [`hero`](/tr/reference/frontmatter#hero) ayarlandığında sayfanın üstünde görüntülenen bir bileşen. 
 Varsayılan uygulama büyük bir başlık, slogan ve isteğe bağlı bir resim ile yanı sıra çağrıya yönlendiren bağlantıları gösterir.
 
 #### `MarkdownContent`
