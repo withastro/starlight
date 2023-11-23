@@ -33,13 +33,13 @@ Sayfa açıklaması, sayfa meta verileri için kullanılır ve arama motorları 
 
 **Tür:** `string | boolean`
 
-[global `editLink` yapılandırmasını](/reference/configuration/#editlink) geçersiz kılar. Belirli bir sayfa için "Sayfayı Düzenle" bağlantısını devre dışı bırakmak için `false` olarak ayarlayın veya bu sayfanın içeriğinin düzenlenebileceği alternatif bir URL sağlayın.
+[global `editLink` yapılandırmasını](/tr/reference/configuration/#editlink) geçersiz kılar. Belirli bir sayfa için "Sayfayı Düzenle" bağlantısını devre dışı bırakmak için `false` olarak ayarlayın veya bu sayfanın içeriğinin düzenlenebileceği alternatif bir URL sağlayın.
 
 ### `head`
 
-**Tür:** [`HeadConfig[]`](/reference/configuration/#headconfig)
+**Tür:** [`HeadConfig[]`](/tr/reference/configuration/#headconfig)
 
-`head` frontmatter alanını kullanarak sayfanızın `<head>` etiketine ek etiketler ekleyebilirsiniz. Bu, özel stiller, meta verileri veya diğer etiketleri tek bir sayfaya eklemenizi sağlar. [global `head` seçeneği](/reference/configuration/#head) gibi çalışır.
+`head` frontmatter alanını kullanarak sayfanızın `<head>` etiketine ek etiketler ekleyebilirsiniz. Bu, özel stiller, meta verileri veya diğer etiketleri tek bir sayfaya eklemenizi sağlar. [global `head` seçeneği](/tr/reference/configuration/#head) gibi çalışır.
 
 ```md
 ---
@@ -55,7 +55,7 @@ head:
 
 **Tür:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
-[global `tableOfContents` yapılandırmasını](/reference/configuration/#tableofcontents) geçersiz kılar. Eklenen başlık seviyelerini özelleştirebilir veya bu sayfada içerik tablosunu gizlemek için `false` olarak ayarlayabilirsiniz.
+[global `tableOfContents` yapılandırmasını](/tr/reference/configuration/#tableofcontents) geçersiz kılar. Eklenen başlık seviyelerini özelleştirebilir veya bu sayfada içerik tablosunu gizlemek için `false` olarak ayarlayabilirsiniz.
 
 ```md
 ---
@@ -181,7 +181,7 @@ banner:
 
 **Tür:** `Date | boolean`
 
-[global `lastUpdated` seçeneğini](/reference/configuration/#lastupdated) geçersiz kılar. Belirli bir tarih belirtilirse, bu sayfa için Git geçmişinde saklanan tarihi geçersiz kılmalı ve geçerli bir [YAML zaman damgası](https://yaml.org/type/timestamp.html) olmalıdır.
+[global `lastUpdated` seçeneğini](/tr/reference/configuration/#lastupdated) geçersiz kılar. Belirli bir tarih belirtilirse, bu sayfa için Git geçmişinde saklanan tarihi geçersiz kılmalı ve geçerli bir [YAML zaman damgası](https://yaml.org/type/timestamp.html) olmalıdır.
 
 ```md
 ---
@@ -194,7 +194,7 @@ lastUpdated: 2022-08-09
 
 **Tür:** `boolean | string | { link?: string; label?: string }`
 
-[global `pagination` seçeneğini](/reference/configuration/#pagination) geçersiz kılar. Bir dize belirtilirse, oluşturulan bağlantı metni değiştirilecektir ve bir nesne belirtilirse, hem bağlantı hem de metin geçersiz kılınacaktır.
+[global `pagination` seçeneğini](/tr/reference/configuration/#pagination) geçersiz kılar. Bir dize belirtilirse, oluşturulan bağlantı metni değiştirilecektir ve bir nesne belirtilirse, hem bağlantı hem de metin geçersiz kılınacaktır.
 
 ```md
 ---
@@ -250,7 +250,7 @@ pagefind: false
 
 **Tür:** [`SidebarConfig`](#sidebarconfig)
 
-Bu sayfanın otomatik olarak oluşturulan bir bağlantı grubunda nasıl görüntülendiğini kontrol ederken [kenar çubuğu](/reference/configuration/#sidebar)'nda nasıl görüntüleneceğini kontrol eder.
+Bu sayfanın otomatik olarak oluşturulan bir bağlantı grubunda nasıl görüntülendiğini kontrol ederken [kenar çubuğu](/tr/reference/configuration/#sidebar)'nda nasıl görüntüleneceğini kontrol eder.
 
 #### `SidebarConfig`
 
@@ -311,11 +311,11 @@ sidebar:
 
 #### `badge`
 
-**Tür:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**Tür:** <code>string | <a href="/tr/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 Otomatik olarak oluşturulan bir bağlantı grubunda sayfaya bir rozet ekler. 
 Dize kullanırken, rozet varsayılan vurgu rengiyle görüntülenir. 
-İsteğe bağlı olarak, bir [`BadgeConfig` nesnesi](/reference/configuration/#badgeconfig) ile `text` ve `variant` alanlarını özelleştirmek için kullanabilirsiniz.
+İsteğe bağlı olarak, bir [`BadgeConfig` nesnesi](/tr/reference/configuration/#badgeconfig) ile `text` ve `variant` alanlarını özelleştirmek için kullanabilirsiniz.
 
 ```md
 ---
