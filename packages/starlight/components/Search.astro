@@ -3,6 +3,7 @@ import '@pagefind/default-ui/css/ui.css';
 import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
 import type { Props } from '../props';
+import config from 'virtual:starlight/user-config';
 
 const t = useTranslations(Astro.props.locale);
 const pagefindTranslations = {
@@ -13,6 +14,8 @@ const pagefindTranslations = {
 };
 ---
 
+{
+	config.pagefind && (
 <site-search data-translations={JSON.stringify(pagefindTranslations)}>
 	<button data-open-modal disabled>
 		{
@@ -45,6 +48,8 @@ const pagefindTranslations = {
 		</div>
 	</dialog>
 </site-search>
+	)
+}
 
 <script>
 	class SiteSearch extends HTMLElement {
