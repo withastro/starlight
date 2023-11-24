@@ -1,14 +1,18 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
+import { z } from 'astro/zod';
 
-export interface DocSearchConfig {
-	appId: string;
-	apiKey: string;
-	indexName: string;
-}
+/** Config options users must provide for DocSearch to work. */
+const DocSearchConfigSchema = z.object({
+	appId: z.string(),
+	apiKey: z.string(),
+	indexName: z.string(),
+});
+export type DocSearchConfig = z.input<typeof DocSearchConfigSchema>;
 
 /** Starlight DocSearch plugin. */
-export default function starlightDocSearch(opts: DocSearchConfig): StarlightPlugin {
+export default function starlightDocSearch(userConfig: DocSearchConfig): StarlightPlugin {
+	const opts = DocSearchConfigSchema.parse(userConfig);
 	return {
 		name: 'starlight-docsearch',
 		hooks: {
