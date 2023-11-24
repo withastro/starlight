@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
+      - run: pnpm i
       - run: 'pnpm build:examples'
       - run: pnpm size
 
