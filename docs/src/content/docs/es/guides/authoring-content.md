@@ -240,7 +240,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
 
 - [Marca selecciones de texto usando el marcador `" "` o expresiones regulares](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
 
-  ```js "Términos individuales" /Even.*supported/
+  ```js "Términos individuales" /También.*compatibles/
   // Términos individuales también pueden ser resaltados
   function demo() {
     return 'También las expresiones regulares son compatibles'
@@ -248,7 +248,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```
 
   ````md
-  ```js "Términos individuales" /Even.*supported/
+  ```js "Términos individuales" /También.*compatibles/
   // Términos individuales también pueden ser resaltados
   function demo() {
     return 'También las expresiones regulares son compatibles'
@@ -258,7 +258,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
 
 - [Marca texto o líneas como insertadas o eliminadas con `ins` o `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
 
-  ```js "return true;" ins="inserted" del="deleted"
+  ```js "return true;" ins="insertados" del="eliminados"
   function demo() {
     console.log('Estos son tipos de marcadores insertados y eliminados');
     // La declaración de retorno utiliza el tipo de marcador predeterminado
@@ -267,7 +267,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```
 
   ````md
-  ```js "return true;" ins="inserted" del="deleted"
+  ```js "return true;" ins="insertados" del="eliminados"
   function demo() {
     console.log('Estos son tipos de marcadores insertados y eliminados');
     // La declaración de retorno utiliza el tipo de marcador predeterminado
