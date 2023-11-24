@@ -233,7 +233,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```js {2-3}
   function demo() {
     // Esta línea (#2) y la siguiente están resaltadas
-    return 'Esta es la línea #3 de este fragmento'
+    return 'Esta es la línea #3 de este fragmento';
   }
   ```
   ````
@@ -243,7 +243,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```js "Términos individuales" /También.*compatibles/
   // Términos individuales también pueden ser resaltados
   function demo() {
-    return 'También las expresiones regulares son compatibles'
+    return 'También las expresiones regulares son compatibles';
   }
   ```
 
@@ -251,7 +251,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
   ```js "Términos individuales" /También.*compatibles/
   // Términos individuales también pueden ser resaltados
   function demo() {
-    return 'También las expresiones regulares son compatibles'
+    return 'También las expresiones regulares son compatibles';
   }
   ```
   ````
