@@ -62,17 +62,19 @@ You only need to provide the root-level configuration keys that you want to upda
 
 For example, to add a new [`social`](/reference/configuration/#social) media account to the configuration without overriding the existing ones:
 
-```ts {5-10}
+```ts {6-11}
 // plugin.ts
 export default {
   name: 'add-twitter-plugin',
-  plugin({ config, updateConfig }) {
-    updateConfig({
-      social: {
-        ...config.social,
-        twitter: 'astrodotbuild',
-      },
-    });
+  hooks: {
+    setup({ config, updateConfig }) {
+      updateConfig({
+        social: {
+          ...config.social,
+          twitter: 'astrodotbuild',
+        },
+      });
+    },
   },
 };
 ```
@@ -84,21 +86,23 @@ export default {
 A callback function to add an [Astro integration](https://docs.astro.build/en/reference/integrations-reference/) required by the plugin.
 For example, to add the [React Astro integration](https://docs.astro.build/en/guides/integrations-guide/react/):
 
-```ts {13}
+```ts {14}
 // plugin.ts
 import react from '@astrojs/react';
 
 export default {
   name: 'plugin-using-react',
-  plugin({ addIntegration, astroConfig }) {
-    const isReactLoaded = astroConfig.integrations.find(
-      ({ name }) => name === '@astrojs/react'
-    );
+  hooks: {
+    plugin({ addIntegration, astroConfig }) {
+      const isReactLoaded = astroConfig.integrations.find(
+        ({ name }) => name === '@astrojs/react'
+      );
 
-    // Only add the React integration if it's not already loaded.
-    if (!isReactLoaded) {
-      addIntegration(react());
-    }
+      // Only add the React integration if it's not already loaded.
+      if (!isReactLoaded) {
+        addIntegration(react());
+      }
+    },
   },
 };
 ```
@@ -134,13 +138,15 @@ Common reasons for a restart include a user editing their `astro.config.mjs` whi
 An instance of the [Astro integration logger](https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger) that you can use to write logs.
 All logged messages will be prefixed with the plugin name.
 
-```ts {5}
+```ts {6}
 // plugin.ts
 export default {
   name: 'long-process-plugin',
-  plugin({ logger }) {
-    logger.info('Starting long process…');
-    // Some long process…
+  hooks: {
+    plugin({ logger }) {
+      logger.info('Starting long process…');
+      // Some long process…
+    },
   },
 };
 ```
