@@ -203,9 +203,145 @@ var fun = function lang(l) {
 ```
 ````
 
-```md
-한 줄의 긴 코드 블록은 줄바꿈되어서는 안됩니다. 너무 길면 가로로 스크롤해야 합니다. 이 줄은 이를 설명할 수 있을 만큼 길어야 합니다.
-```
+### Expressive Code 기능
+
+Starlight는 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)를 사용하여 코드 블록의 형식 지정 가능성을 확장합니다.
+기본적으로 Expressive Code의 텍스트 마커와 창 프레임 플러그인은 활성화되어 있습니다.
+코드 블록 렌더링은 Starlight의 [`expressiveCode` 구성 옵션](/ko/reference/configuration/#expressivecode)을 사용하여 구성할 수 있습니다.
+
+#### 텍스트 마커
+
+코드 블록의 시작 줄에 [Expressive Code 텍스트 마커](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents)를 사용하여 코드 블록의 특정 줄이나 부분을 강조 표시할 수 있습니다. 전체 줄을 강조 표시하려면 중괄호(`{ }`)를 사용하고, 텍스트 문자열을 강조 표시하려면 따옴표를 사용하세요.
+
+세 가지 강조 스타일이 있습니다. 코드에 주의를 환기시키는 중립, 삽입된 코드를 나타내는 녹색, 삭제된 코드를 나타내는 빨간색입니다.
+텍스트와 전체 줄 모두 기본 마커를 사용하거나 `ins=` 및 `del=`과 함께 표시하여 원하는 강조 표시를 생성할 수 있습니다.
+
+Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 위한 여러 옵션을 제공합니다. 이들 중 다수는 예시적인 코드 샘플을 위해 결합될 수 있습니다. 사용 가능한 광범위한 옵션을 보려면 [Expressive Code 문서](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md)를 살펴보세요. 가장 일반적인 예시 중 일부는 다음과 같습니다.
+
+- [`{ }` 마커를 사용하여 전체 줄과 줄 범위를 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+
+  ```js {2-3}
+  function demo() {
+    // 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+    return '이 줄은 이 스니펫의 라인 #3입니다.';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+    return '이 줄은 이 스니펫의 라인 #3입니다.';
+  }
+  ```
+  ````
+
+- [`" "` 마커 또는 정규 표현식을 사용하여 텍스트 선택 항목을 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines)
+
+  ```js "Individual terms" /정규.*지원됩니다./
+  // 개별 용어도 강조 표시할 수 있습니다.
+  function demo() {
+    return '정규 표현식도 지원됩니다.';
+  }
+  ```
+
+  ````md
+  ```js "Individual terms" /정규.*지원됩니다./
+  // 개별 용어도 강조 표시할 수 있습니다.
+  function demo() {
+    return '정규 표현식도 지원됩니다.';
+  }
+  ```
+  ````
+
+- [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del)
+
+
+  ```js "return true;" ins="삽입" del="삭제된"
+  function demo() {
+    console.log('삽입 및 삭제된 마커 타입입니다.');
+    // return 문은 기본 마커 타입을 사용합니다.
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="삽입" del="삭제된"
+  function demo() {
+    console.log('삽입 및 삭제된 마커 타입입니다.');
+    // return 문은 기본 마커 타입을 사용합니다.
+    return true;
+  }
+  ```
+  ````
+
+- [구문 강조와 `diff` 유사 구문을 결합합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax)
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // 이 전체 블록은 JavaScript로 강조표시됩니다.
+      // 그리고 여전히 diff 마커를 추가할 수 있습니다!
+  -   console.log('제거할 이전 코드')
+  +   console.log('새롭고 빛나는 코드!')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // 이 전체 블록은 JavaScript로 강조표시됩니다.
+      // 그리고 여전히 diff 마커를 추가할 수 있습니다!
+  -   console.log('제거할 이전 코드')
+  +   console.log('새롭고 빛나는 코드!')
+    }
+  ```
+  ````
+
+#### Frames 및 titles
+
+코드 블록은 창과 같은 프레임 내부에서 렌더링될 수 있습니다.
+터미널 창처럼 보이는 프레임은 쉘 스크립팅 언어(예: `bash` 또는 `sh`)에 사용됩니다.
+title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 표시됩니다.
+
+코드 블록의 선택적 제목은 코드 블록을 여는 백틱 및 언어 식별자 뒤에 `title="..."` 속성을 추가하거나 코드 첫 번째 줄에 파일 이름 주석을 추가하여 설정할 수 있습니다.
+
+- [설명과 함께 파일 이름 탭 추가](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```js
+  // my-test-file.js
+  console.log('안녕하세요!');
+  ```
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('안녕하세요!');
+  ```
+  ````
+
+- [터미널 창에 제목 추가](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```bash title="종속성 설치 중…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="종속성 설치 중…"
+  npm install
+  ```
+  ````
+
+- [`frame="none"`으로 창 프레임 비활성화](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
+  ```
+  ````
 
 ## 기타 일반적인 Markdown 기능
 
