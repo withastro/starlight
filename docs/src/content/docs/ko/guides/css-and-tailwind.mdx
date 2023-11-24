@@ -21,7 +21,7 @@ Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일�
 
 2. `astro.config.mjs` 파일에 있는 Starlight의 `customCss` 배열에 CSS 파일 경로를 추가하세요.
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -31,8 +31,8 @@ Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일�
    		starlight({
    			title: '사용자 정의 CSS를 사용한 문서',
    			customCss: [
-   				// 사용자 정의 CSS 파일의 상대 경로
-   				'./src/styles/custom.css',
+   +				// 사용자 정의 CSS 파일의 상대 경로
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
