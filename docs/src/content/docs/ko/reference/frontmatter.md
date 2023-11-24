@@ -5,8 +5,9 @@ description: Starlight가 지원하는 기본 프론트매터 필드에 대한 �
 
 프론트매터의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
 
-```md
+```md {3-4}
 ---
+# src/content/docs/example.md
 title: 이 프로젝트에 대하여
 description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세요.
 ---
@@ -42,6 +43,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 ```md
 ---
+# src/content/docs/example.md
 title: 회사 소개
 head:
   # 사용자 정의 <title> 태그 사용
@@ -59,6 +61,7 @@ head:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 목차에 H2만 있는 페이지
 tableOfContents:
   minHeadingLevel: 2
@@ -68,6 +71,7 @@ tableOfContents:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 목차가 없는 페이지
 tableOfContents: false
 ---
@@ -90,6 +94,7 @@ tableOfContents: false
 
 ```md
 ---
+# src/content/docs/example.md
 title: 나의 홈페이지
 template: splash
 hero:
@@ -113,6 +118,7 @@ hero:
 
 ```md
 ---
+# src/content/docs/example.md
 hero:
   image:
     alt: 반짝이는 밝은 색상의 로고
@@ -167,6 +173,7 @@ interface HeroConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: 배너가 포함된 페이지
 banner:
   content: |
@@ -183,6 +190,7 @@ banner:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 수정된 최종 업데이트 날짜가 포함된 페이지
 lastUpdated: 2022-08-09
 ---
@@ -196,6 +204,7 @@ lastUpdated: 2022-08-09
 
 ```md
 ---
+# src/content/docs/example.md
 # 이전 페이지 링크 숨기기
 prev: false
 ---
@@ -203,6 +212,7 @@ prev: false
 
 ```md
 ---
+# src/content/docs/example.md
 # 이전 페이지 링크의 텍스트 변경
 prev: 튜토리얼 계속하기
 ---
@@ -210,6 +220,7 @@ prev: 튜토리얼 계속하기
 
 ```md
 ---
+# src/content/docs/example.md
 # 이전 페이지 링크와 텍스트 모두 변경
 prev:
   link: /unrelated-page/
@@ -225,6 +236,7 @@ prev:
 
 ```md
 ---
+# src/content/docs/example.md
 # 다음 페이지 링크 숨기기
 next: false
 ---
@@ -239,6 +251,7 @@ next: false
 
 ```md
 ---
+# src/content/docs/example.md
 # 검색 색인에서 이 페이지 숨기기
 pagefind: false
 ---
@@ -271,6 +284,7 @@ interface SidebarConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: 이 프로젝트에 대하여
 sidebar:
   label: 소개
@@ -285,6 +299,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 첫 번째로 표시될 페이지
 sidebar:
   order: 1
@@ -300,6 +315,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 자동 생성된 사이드바에서 숨길 페이지
 sidebar:
   hidden: true
@@ -314,6 +330,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 배지를 사용하는 페이지
 sidebar:
   # 사이트의 강조 색상과 일치하는 기본 변형을 사용합니다.
@@ -323,6 +340,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 배지를 사용하는 페이지
 sidebar:
   badge:
@@ -339,6 +357,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 새 탭에서 열리는 페이지
 sidebar:
   # 새 탭에서 페이지를 엽니다.
