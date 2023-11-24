@@ -28,6 +28,7 @@ export default function starlightDocSearch(userConfig: DocSearchConfig): Starlig
 				} else {
 					// Otherwise, add the Search component override to the user's configuration.
 					updateConfig({
+						pagefind: false,
 						components: {
 							...config.components,
 							Search: '@astrojs/starlight-docsearch/DocSearch.astro',
