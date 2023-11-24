@@ -206,6 +206,17 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    }
    ```
 
+   Starlight의 코드 블록은 [Expressive Code](https://github.com/expressive-code/expressive-code) 라이브러리에 의해 구동됩니다.
+	 `expressiveCode` 키를 사용하여 동일한 JSON 파일에서 UI 문자열에 대한 번역을 설정할 수 있습니다.
+
+   ```json
+   {
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
+   }
+   ```
+
    Starlight의 검색 모달은 [Pagefind](https://pagefind.app/) 라이브러리에 의해 구동됩니다. 동일한 JSON 파일에서 `pagefind` 키를 사용하여 Pagefind의 UI에 대한 번역을 설정할 수 있습니다.
 
    ```json
