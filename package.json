@@ -24,17 +24,17 @@
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "14 kB"
+      "limit": "10 kB"
     },
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "20 kB"
+      "limit": "21 kB"
     },
     {
       "name": "/_astro/*.css",
       "path": "examples/basics/dist/_astro/*.css",
-      "limit": "10 kB"
+      "limit": "14 kB"
     }
   ]
 }
