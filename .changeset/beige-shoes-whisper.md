@@ -2,4 +2,4 @@
 '@astrojs/starlight': minor
 ---
 
-Add configuration option to disable Pagefind
+Adds a configuration option to disable site indexing with Pagefind and the default search UI
