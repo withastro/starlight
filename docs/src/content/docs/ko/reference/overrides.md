@@ -12,10 +12,13 @@ Starlight의 [`components`](/ko/reference/configuration#components) 구성 옵�
 
 ## 컴포넌트 속성
 
+모든 컴포넌트는 현재 페이지의 정보가 포함된 표준 `Astro.props` 객체를 사용할 수 있습니다.
+
 사용자 정의 컴포넌트의 타입을 설정하기 위해 Starlight로부터 `Props` 타입을 가져옵니다.
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
