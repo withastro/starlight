@@ -77,6 +77,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 			},
 
 			'astro:build:done': ({ dir }) => {
+				if (!userConfig.pagefind) return;
 				const targetDir = fileURLToPath(dir);
 				const cwd = dirname(fileURLToPath(import.meta.url));
 				const relativeDir = relative(cwd, targetDir);
