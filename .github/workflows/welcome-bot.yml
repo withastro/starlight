@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/first-interaction@v1
+      - uses: zephyrproject-rtos/action-first-interaction@7e6446f8439d8b4399169880c36a3a12b5747699
         with:
           repo-token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
-          pr-message: |
+          pr-opened-message: |
             Hello! Thank you for opening your **first PR** to Starlight! ✨
 
             Here’s what will happen next:

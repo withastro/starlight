@@ -10,17 +10,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # This basic check runs size-limit for the current branch.
+  # It will fail if the branch pushes the size over the specified budget.
+  size-limit-basic:
+    if: ${{ github.event.pull_request.head.repo.full_name != 'withastro/starlight' }}
+    name: Check build output is within performance budget (forks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+      - run: pnpm i
+      - run: 'pnpm build:examples'
+      - run: pnpm size
+
+  # This check cannot run in forks, so is only run for PRs from this repo.
+  # It will run size-limit for both `main` and the PR branch and comment in the PR with changes.
   size-limit:
     if: ${{ github.event.pull_request.head.repo.full_name == 'withastro/starlight' }}
     name: Check build output is within performance budget
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
-
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
       - name: Run size-limit
         uses: andresz1/size-limit-action@dd31dce7dcc72a041fd3e49abf0502b13fc4ce05
         with:
