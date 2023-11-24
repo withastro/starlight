@@ -238,8 +238,11 @@ Lo mismo que [`prev`](#prev), pero para el enlace de la página siguiente.
 
 ```md
 ---
+
 # src/content/docs/example.md
+
 # Ocultar el enlace de la página siguiente
+
 next: false
 ```
 
