@@ -203,7 +203,7 @@ var fun = function lang(l) {
 
 ### Características de Expressive Code
 
-Starlight usa  [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para ampliar las posibilidades de formato de los bloques de código.
+Starlight usa [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para ampliar las posibilidades de formato de los bloques de código.
 Los marcadores de texto de Expressive Code y los plugins de marcos de ventana están habilitados de forma predeterminada.
 El renderizado de los bloques de código se puede configurar utilizando la opción de configuración [`expressiveCode`](/es/reference/configuration/#expressivecode) de Starlight.
 
