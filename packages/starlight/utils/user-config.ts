@@ -191,7 +191,7 @@ const UserConfigSchema = z.object({
 	expressiveCode: ExpressiveCodeSchema(),
 
 	/**
-	 * Define if Starlight’s default site search provider Pagefind is enabled.
+	 * Define whether Starlight’s default site search provider Pagefind is enabled.
 	 * Set to `false` to disable indexing your site with Pagefind.
 	 * This will also hide the default search UI if in use.
 	 */
