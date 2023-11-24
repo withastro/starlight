@@ -351,7 +351,7 @@ starlight({
 **por defecto:** `true`
 
 Starlight usa [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para renderizar bloques de código y agregar soporte para resaltar partes de ejemplos de código, agregar nombres de archivo a bloques de código y más.
-Vee la [guía de “Bloques de código”](/es/guides/authoring-content/#bloques-de-código) para aprender a usar la sintaxis de Expressive Code en tu contenido Markdown y MDX.
+Consulta la [guía de “Bloques de código”](/es/guides/authoring-content/#bloques-de-código) para aprender a usar la sintaxis de Expressive Code en tu contenido Markdown y MDX.
 
 Puedes usar cualquier de las [opciones de configuración estándar de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) así como algunas propiedades específicas de Starlight, estableciéndolas en la opción `expressiveCode` de Starlight.
 Por ejemplo, establece la opción `styleOverrides` de Expressive Code para anular el CSS predeterminado. Esto permite personalizaciones como darle a tus bloques de código esquinas redondeadas:
@@ -380,9 +380,9 @@ Adicionalmente a las opciones estándar de Expressive Code, también puedes esta
 **por defecto:** `['starlight-dark', 'starlight-light']`
 
 Establece los temas utilizados para dar estilo a los bloques de código.
-Vee la [documentación de temas de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) para obtener detalles de los formatos de tema admitidos.
+Consulta la [documentación de temas de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) para obtener detalles de los formatos de tema admitidos.
 
-Starlight usa las variantes oscura y clara del [tema Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner por defecto.
+Starlight usa por defecto las variantes oscura y clara del [tema Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner.
 
 Si proporcionas por lo menos un tema oscuro y uno claro, Starlight mantendrá automáticamente el tema de bloque de código activo sincronizado con el tema actual del sitio.
 Configura este comportamiento con la opción [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
@@ -404,7 +404,7 @@ Cuando estableces `themes`, debes proporcionar por lo menos un tema oscuro y uno
 **tipo:** `boolean`  
 **por defecto:** `true` si `themes` no está establecido, de lo contrario `false`
 
-Cuando sea `true`, se utilizan las variables CSS de Starlight para los colores de los elementos de la interfaz de usuario del bloque de código (fondos, botones, sombras, etc.), coincidiendo con el [tema de color del sitio](/es/guides/css-and-tailwind/#temas).
+Cuando sea `true`, se utilizan las variables CSS de Starlight para los colores de los elementos de la UI del bloque de código (fondos, botones, sombras, etc.), coincidiendo con el [tema de color del sitio](/es/guides/css-and-tailwind/#temas).
 Cuando sea `false`, se utilizan los colores proporcionados por el tema de resaltado de sintaxis activo para estos elementos.
 
 :::note
