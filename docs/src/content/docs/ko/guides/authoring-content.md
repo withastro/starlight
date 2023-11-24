@@ -256,7 +256,6 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
 
 - [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del)
 
-
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
     console.log('삽입 및 삭제된 마커 타입입니다.');
