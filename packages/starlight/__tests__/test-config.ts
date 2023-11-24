@@ -1,13 +1,10 @@
 /// <reference types="vitest" />
 
-import type { AstroConfig, AstroIntegrationLogger } from 'astro';
+import type { AstroConfig } from 'astro';
 import { getViteConfig } from 'astro/config';
 import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
-import {
-	runPlugins,
-	type StarlightPluginContext,
-	type StarlightUserConfigWithPlugins,
-} from '../utils/plugins';
+import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
+import { createTestPluginContext } from './test-plugin-utils';
 
 export async function defineVitestConfig(
 	{ plugins, ...config }: StarlightUserConfigWithPlugins,
@@ -27,25 +24,4 @@ export async function defineVitestConfig(
 			vitePluginStarlightUserConfig(starlightConfig, { root, srcDir, build, trailingSlash }),
 		],
 	});
-}
-
-export function createTestPluginContext(): StarlightPluginContext {
-	return {
-		command: 'dev',
-		// @ts-expect-error - we don't provide a full Astro config but only what is needed for the
-		// plugins to run.
-		config: { integrations: [] },
-		isRestart: false,
-		logger: new TestAstroIntegrationLogger(),
-	};
-}
-
-class TestAstroIntegrationLogger {
-	options = {} as AstroIntegrationLogger['options'];
-	constructor(public label = 'test-integration-logger') {}
-	fork = (label: string) => new TestAstroIntegrationLogger(label);
-	info = () => undefined;
-	warn = () => undefined;
-	error = () => undefined;
-	debug = () => undefined;
 }

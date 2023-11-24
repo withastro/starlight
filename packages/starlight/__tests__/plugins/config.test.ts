@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { getSidebar } from '../../utils/navigation';
 import { runPlugins } from '../../utils/plugins';
-import { createTestPluginContext } from '../test-config';
+import { createTestPluginContext } from '../test-plugin-utils';
 
 test('reads and updates a configuration option', () => {
 	expect(config.title).toBe('Plugins - Custom');
