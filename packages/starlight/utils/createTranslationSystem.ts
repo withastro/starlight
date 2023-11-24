@@ -19,10 +19,19 @@ export function createTranslationSystem(
 
 	/**
 	 * Generate a utility function that returns UI strings for the given `locale`.
+	 *
+	 * Also includes `all()` and `pick()` methods for getting the entire dictionary
+	 * or a partial slice of it filtered by key.
+	 *
 	 * @param {string | undefined} [locale]
 	 * @example
 	 * const t = useTranslations('en');
-	 * const label = t('search.label'); // => 'Search'
+	 * const label = t('search.label');
+	 * // => 'Search'
+	 * const searchLabels = t.pick('search.');
+	 * // => { 'search.label': 'Search', 'search.cancelLabel': 'Cancel', ... }
+	 * const dictionary = t.all();
+	 * // => { 'skipLink.label': 'Skip to content', 'search.label': 'Search', ... }
 	 */
 	return function useTranslations(locale: string | undefined) {
 		const lang = localeToLang(locale, config.locales, config.defaultLocale);
@@ -32,6 +41,7 @@ export function createTranslationSystem(
 			userTranslations[lang]
 		);
 		const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
+		t.all = () => dictionary;
 		t.pick = (startOfKey: string) =>
 			Object.fromEntries(Object.entries(dictionary).filter(([k]) => k.startsWith(startOfKey)));
 		return t;
