@@ -57,7 +57,12 @@ function makeDir(): Dir {
 
 /** Test if the passed object is a directory record.  */
 function isDir(data: Record<string, unknown>): data is Dir {
-	return DirKey in data;
+	// return DirKey in data;
+	// TODO: Remove this hack
+	if (data.hasOwnProperty('id')) {
+		return false;
+	}
+	return true;
 }
 
 /** Convert an item in a user’s sidebar config to a sidebar entry. */
@@ -91,13 +96,17 @@ function groupFromAutogenerateConfig(
 ): Group {
 	const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
-	const dirDocs = routes.filter(
-		(doc) =>
-			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(doc.id) === localeDir ||
-			// Match against `foo/anything/else.md`.
-			doc.id.startsWith(localeDir + '/')
-	);
+	const dirDocs = routes
+		.filter(
+			(doc) =>
+				// Match against `foo.md` or `foo/index.md`.
+				stripExtension(doc.id) === localeDir ||
+				// Match against `foo/anything/else.md`.
+				doc.id.startsWith(localeDir + '/')
+		)
+		// Sort by depth, so that the deepest paths are first.
+		// Hack to make sure that the tree is built depth first
+		.sort((a, b) => b.id.split('/').length - a.id.split('/').length);
 	const tree = treeify(dirDocs, localeDir);
 	return {
 		type: 'group',
@@ -174,20 +183,55 @@ function treeify(routes: Route[], baseDir: string): Dir {
 	routes
 		// Remove any entries that should be hidden
 		.filter((doc) => !doc.entry.data.sidebar.hidden)
-		.forEach((doc) => {
-			const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
+		
+	routes.forEach((doc) => {
+		const pathwoext = stripExtension(doc.id);
+		const parts = pathwoext.split('/').filter(Boolean);
 
-			// Walk down the route’s path to generate the tree.
-			let currentDir = treeRoot;
-			breadcrumbs.forEach((dir) => {
-				// Create new folder if needed.
-				if (typeof currentDir[dir] === 'undefined') currentDir[dir] = makeDir();
-				// Go into the subdirectory.
-				currentDir = currentDir[dir] as Dir;
-			});
-			// We’ve walked through the path. Register the route in this directory.
-			currentDir[basename(doc.slug)] = doc;
+		let currentNode = treeRoot;
+
+		parts.forEach((part, index) => {
+			const isLeaf = index === parts.length - 1;
+			const fileIsPresentInParent = Object.keys(currentNode).includes(part)
+			/* 
+			* If the file is has the same name as a parent directory, 
+			* it should be placed in the parent directory with the name "index"
+			*
+			* For example:
+			* Routes: ["/docs/one.md", "/docs/one/two.md"]
+			* The tree should be:
+			* {
+			* 	docs: {
+			* 		one: {
+			* 			index: {}
+			* 			two: {}
+			* 		},
+			* 	}
+			*/
+
+			if (isLeaf && fileIsPresentInParent) {
+				currentNode = currentNode[part] as Dir;
+				part = 'index';
+			}
+
+			if (!currentNode[part]) {
+				currentNode[part] = makeDir();
+			}
+
+			// Traverse the tree
+			currentNode = currentNode[part] as Dir;
 		});
+
+		// Set the node's properties
+		Object.assign(currentNode, {
+			id : doc.id,
+			slug : doc.slug,
+			isFallback : doc.isFallback,
+			entry : doc.entry,
+			entryMeta : doc.entryMeta
+		});
+	});
+
 	return treeRoot;
 }
 
