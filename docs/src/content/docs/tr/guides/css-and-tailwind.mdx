@@ -22,7 +22,7 @@ Starlight sitesine uygulanan stilleri özelleştirmek için, Starlight'ın varsa
 
 2. CSS dosyanızın yolunu `astro.config.mjs` içindeki Starlight'ın `customCss` dizisine ekleyin:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,8 +32,8 @@ Starlight sitesine uygulanan stilleri özelleştirmek için, Starlight'ın varsa
    		starlight({
    			title: 'Docs With Custom CSS',
    			customCss: [
-   				// Özel CSS dosyanızın göreli yolunu.
-   				'./src/styles/custom.css',
+   +				// Özel CSS dosyanızın göreli yolunu.
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
