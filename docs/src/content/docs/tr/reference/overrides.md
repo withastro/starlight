@@ -136,7 +136,7 @@ Eğer etkinse, bu sayfanın düzenlenebileceği adres için bir `URL` nesnesi.
 
 ---
 
-## Components
+## Bileşenler
 
 ### Head
 
