@@ -18,6 +18,7 @@ Tüm bileşenler, mevcut sayfa hakkında bilgi içeren standart bir `Astro.props
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
