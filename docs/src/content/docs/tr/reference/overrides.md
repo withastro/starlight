@@ -140,8 +140,6 @@ Eğer etkinse, bu sayfanın düzenlenebileceği adres için bir `URL` nesnesi.
 
 ### Head
 
-These components are rendered inside each page’s `<head>` element.
-They should only include [elements permitted inside `<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also).
 Bu bileşenler her sayfanın `<head>` etiketi içinde oluşturulur. 
 Yalnızca [`<head>` içine izin verilen öğeleri](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also) içermelidir.
 
@@ -164,7 +162,7 @@ Varsayılan uygulama, inline betik ve [`<ThemeSelect />`](#themeselect) için ku
 
 ---
 
-### Accessibility
+### Erişebilirlik
 
 #### `SkipLink`
 
@@ -343,6 +341,7 @@ Varsayılan uygulama büyük bir başlık, slogan ve isteğe bağlı bir resim i
 
 Her sayfanın ana içeriği etrafında görüntülenen bir bileşen. 
 Varsayılan uygulama, Markdown içeriğine uygulanacak temel stilleri ayarlar.
+Markdown içerik stilleri ayrıca `@astrojs/starlight/style/markdown.css` dosyasında da gösterilir ve `.sl-markdown-content` CSS sınıfını kapsar.
 
 ---
 
