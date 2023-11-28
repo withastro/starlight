@@ -18,6 +18,7 @@ To type your custom components, import the `Props` type from Starlight:
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
