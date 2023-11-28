@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.13.1
+
+### Patch Changes
+
+- [#1111](https://github.com/withastro/starlight/pull/1111) [`cb19d07`](https://github.com/withastro/starlight/commit/cb19d07d6192ffb732ac6fcf9df04d4f098bfc1f) Thanks [@at-the-vr](https://github.com/at-the-vr)! - Fix minor punctuation typo in Hindi UI string
+
+- [#1156](https://github.com/withastro/starlight/pull/1156) [`631c5ae`](https://github.com/withastro/starlight/commit/631c5aeccba60254ff649712f93ba30495775edf) Thanks [@votemike](https://github.com/votemike)! - Updates `@astrojs/sitemap` dependency to the latest version
+
+- [#1109](https://github.com/withastro/starlight/pull/1109) [`0c25c1f`](https://github.com/withastro/starlight/commit/0c25c1f33bbfe311724784530c30ada44eb5de19) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Internal: fix import issue with expressive-code
+
 ## 0.13.0
 
 ### Minor Changes
@@ -17,12 +27,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -370,16 +380,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -758,8 +768,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
