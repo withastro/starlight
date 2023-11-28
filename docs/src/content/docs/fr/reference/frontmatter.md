@@ -7,7 +7,7 @@ Vous pouvez personnaliser des pages Markdown et MDX individuelles dans Starlight
 
 ```md {3-4}
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: A propos de ce projet
 description: En savoir plus sur le projet sur lequel je travaille.
 ---
@@ -43,7 +43,7 @@ Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: A propos de nous
 head:
   # Utiliser une balise <title> personnalisée
@@ -61,7 +61,7 @@ Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Pagee avec seulement des H2s dans la table des matières
 tableOfContents:
   minHeadingLevel: 2
@@ -71,7 +71,7 @@ tableOfContents:
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page sans table des matières
 tableOfContents: false
 ---
@@ -96,7 +96,7 @@ Par exemple, cette configuration montre quelques options communes, y compris le 
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Ma page d'accueil
 template: splash
 hero:
@@ -120,7 +120,7 @@ Vous pouvez afficher différentes versions de l'image de premier plan en mode cl
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 hero:
   image:
     alt: Un logo scintillant aux couleurs vives
@@ -175,7 +175,7 @@ Par exemple, cette page affiche une bannière comprenant un lien vers `example.c
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page avec une bannière
 banner:
   content: |
@@ -192,7 +192,7 @@ Remplace la [configuration globale `lastUpdated`](/fr/reference/configuration/#l
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page avec une date de dernière mise à jour personnalisée
 lastUpdated: 2022-08-09
 ---
@@ -206,7 +206,7 @@ Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pa
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 # Masquer le lien de la page précédente
 prev: false
 ---
@@ -214,7 +214,7 @@ prev: false
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 # Remplacer le texte du lien de la page
 prev: Poursuivre the tutorial
 ---
@@ -222,7 +222,7 @@ prev: Poursuivre the tutorial
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 # Remplacer le lien et le texte de la page
 prev:
   link: /unrelated-page/
@@ -238,7 +238,7 @@ La même chose que [`prev`](#prev) mais pour le lien de la page suivante.
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 # Masquer le lien de la page suivante
 next: false
 ---
@@ -253,7 +253,7 @@ Définit si cette page doit être incluse dans l'index de recherche de [Pagefind
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 # Exclut cette page de l'index de recherche
 pagefind: false
 ---
@@ -286,7 +286,7 @@ Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affi
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: About this project
 sidebar:
   label: About
@@ -302,7 +302,7 @@ Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page à afficher en premier
 sidebar:
   order: 1
@@ -318,7 +318,7 @@ Empêche cette page d'être incluse dans un groupe de liens généré automatiqu
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page à masquer de la barre latérale générée automatiquement
 sidebar:
   hidden: true
@@ -335,7 +335,7 @@ Passez éventuellement un [objet `BadgeConfig`](/fr/reference/configuration/#bad
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page avec un badge
 sidebar:
   # Utilise la variante par défaut correspondant à la couleur d'accentuation de votre site
@@ -345,7 +345,7 @@ sidebar:
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page avec un badge
 sidebar:
   badge:
@@ -362,7 +362,7 @@ Attributs HTML à ajouter au lien de la page dans la barre latérale lorsqu'il e
 
 ```md
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page s'ouvrant dans un nouvel onglet
 sidebar:
   # Ouvre la page dans un nouvel onglet
