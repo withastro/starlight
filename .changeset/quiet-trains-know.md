@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Updated sitemap dependency to fix Zod security issue
+Updates `@astrojs/sitemap` dependency to the latest version
