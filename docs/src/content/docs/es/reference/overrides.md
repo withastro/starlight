@@ -19,6 +19,7 @@ Para escribir los tipos de tus componentes personalizados, importa el tipo `Prop
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
