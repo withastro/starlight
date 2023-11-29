@@ -2,6 +2,6 @@
 '@astrojs/starlight': minor
 ---
 
-Add support for Starlight plugins.
+Adds plugin API
 
-Check the [plugins](https://starlight.astro.build/reference/plugins/) reference page to learn more regarding creating plugins.
+See the [plugins reference](https://starlight.astro.build/reference/plugins/) to learn more about creating plugins for Starlight using this new API.

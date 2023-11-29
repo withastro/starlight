@@ -12,6 +12,9 @@ Lean more about using a Starlight plugin in the [Configuration Reference](/refer
 
 ## Quick API Reference
 
+A Starlight plugin has the following shape.
+See below for details of the different properties and hook parameters.
+
 ```ts
 interface StarlightPlugin {
   name: string;
@@ -58,9 +61,11 @@ This configuration may have been updated by other plugins configured before the 
 **type:** `(newConfig: StarlightUserConfig) => void`
 
 A callback function to update the user-supplied [Starlight configuration](/reference/configuration).
-You only need to provide the root-level configuration keys that you want to update but no deep merge is performed. In order to update nested configuration values, you must provide the entire nested object.
+Provide the root-level configuration keys you want to override.
+To update nested configuration values, you must provide the entire nested object.
 
-For example, to add a new [`social`](/reference/configuration/#social) media account to the configuration without overriding the existing ones:
+To extend an existing config option without overriding it, spread the existing value into your new value.
+In the following example, a new [`social`](/reference/configuration/#social) media account is added to the existing configuration by spreading `config.social` into the new `social` object:
 
 ```ts {6-11}
 // plugin.ts
@@ -71,7 +76,7 @@ export default {
       updateConfig({
         social: {
           ...config.social,
-          twitter: 'astrodotbuild',
+          twitter: 'https://twitter.com/astrodotbuild',
         },
       });
     },
@@ -84,9 +89,10 @@ export default {
 **type:** `(integration: AstroIntegration) => void`
 
 A callback function to add an [Astro integration](https://docs.astro.build/en/reference/integrations-reference/) required by the plugin.
-For example, to add the [React Astro integration](https://docs.astro.build/en/guides/integrations-guide/react/):
 
-```ts {14}
+In the following example, the plugin first checks if [Astro’s React integration](https://docs.astro.build/en/guides/integrations-guide/react/) is configured and, if it isn’t, uses `addIntegration()` to add it:
+
+```ts {14} "addIntegration,"
 // plugin.ts
 import react from '@astrojs/react';
 
