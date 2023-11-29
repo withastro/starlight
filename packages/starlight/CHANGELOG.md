@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.14.0
+
+### Minor Changes
+
+- [#1144](https://github.com/withastro/starlight/pull/1144) [`7c0b8cb`](https://github.com/withastro/starlight/commit/7c0b8cb334c501678f7ab87cce372cddfdde34ed) Thanks [@delucis](https://github.com/delucis)! - Adds a configuration option to disable site indexing with Pagefind and the default search UI
+
+- [#942](https://github.com/withastro/starlight/pull/942) [`efd7fdc`](https://github.com/withastro/starlight/commit/efd7fdcb55b39988f157c1a4b2c368c86a39520f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds plugin API
+
+  See the [plugins reference](https://starlight.astro.build/reference/plugins/) to learn more about creating plugins for Starlight using this new API.
+
+- [#1135](https://github.com/withastro/starlight/pull/1135) [`e5a863a`](https://github.com/withastro/starlight/commit/e5a863a98b2e5335e122ca440dcb84e9426939b4) Thanks [@delucis](https://github.com/delucis)! - Exposes localized UI strings in route data
+
+  Component overrides can now access a `labels` object in their props which includes all the localized UI strings for the current page.
+
+- [#1162](https://github.com/withastro/starlight/pull/1162) [`00d101b`](https://github.com/withastro/starlight/commit/00d101b159bfa4bb307a66ccae53dd417d9564e0) Thanks [@delucis](https://github.com/delucis)! - Adds support for extending Starlight’s content collection schemas
+
 ## 0.13.1
 
 ### Patch Changes
@@ -27,12 +43,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -380,16 +396,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -768,8 +784,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
