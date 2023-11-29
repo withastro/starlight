@@ -25,22 +25,3 @@ export async function defineVitestConfig(
 		],
 	});
 }
-
-export function createTestPluginContext(): StarlightPluginContext {
-	return {
-		command: 'dev',
-		config: {} as StarlightPluginContext['config'],
-		isRestart: false,
-		logger: new TestAstroIntegrationLogger(),
-	};
-}
-
-class TestAstroIntegrationLogger {
-	options = {} as AstroIntegrationLogger['options'];
-	constructor(public label = 'test-integration-logger') {}
-	fork = (label: string) => new TestAstroIntegrationLogger(label);
-	info = () => undefined;
-	warn = () => undefined;
-	error = () => undefined;
-	debug = () => undefined;
-}
