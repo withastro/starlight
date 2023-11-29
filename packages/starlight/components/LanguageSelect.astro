@@ -1,7 +1,6 @@
 ---
 import config from 'virtual:starlight/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
-import { useTranslations } from '../utils/translations';
 import Select from './Select.astro';
 import type { Props } from '../props';
 
@@ -12,7 +11,7 @@ function localizedPathname(locale: string | undefined): string {
 	return localizedUrl(Astro.url, locale).pathname;
 }
 
-const t = useTranslations(Astro.props.locale);
+const { labels } = Astro.props;
 ---
 
 {
@@ -20,7 +19,7 @@ const t = useTranslations(Astro.props.locale);
 		<starlight-lang-select>
 			<Select
 				icon="translate"
-				label={t('languageSelect.accessibleLabel')}
+				label={labels['languageSelect.accessibleLabel']}
 				value={localizedPathname(Astro.props.locale)}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
 					value: localizedPathname(code),
