@@ -15,12 +15,14 @@
   "files": [
     "index.ts",
     "DocSearch.astro",
+    "schema.ts",
     "variables.css",
     "virtual.d.ts"
   ],
   "exports": {
     ".": "./index.ts",
-    "./DocSearch.astro": "./DocSearch.astro"
+    "./DocSearch.astro": "./DocSearch.astro",
+    "./schema": "./schema.ts"
   },
   "peerDependencies": {
     "@astrojs/starlight": ">=0.9.0"
