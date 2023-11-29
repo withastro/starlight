@@ -38,9 +38,9 @@ importers:
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
-      '@astrojs/starlight-docsearch':
+      '@astrojs/starlight-search-demo':
         specifier: workspace:*
-        version: link:../packages/docsearch
+        version: link:../packages/starlight-search-demo
       '@types/culori':
         specifier: ^2.0.0
         version: 2.0.0
