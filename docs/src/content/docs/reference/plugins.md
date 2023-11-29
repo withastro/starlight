@@ -118,7 +118,6 @@ export default {
 **type:** `AstroConfig`
 
 A read-only copy of the user-supplied [Astro configuration](https://docs.astro.build/en/reference/configuration-reference/).
-This configuration is resolved before any other integrations have run.
 
 #### `command`
 
