@@ -1,18 +1,40 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
-import './variables.css';
 import '@docsearch/css/dist/modal.css';
+import type docsearch from '@docsearch/js';
+import './variables.css';
 
-// TODO: Actually load translations
-const t = (k: 'search.label' | 'search.shortcutLabel') =>
-	({
-		'search.label': 'Search',
-		'search.shortcutLabel': '(Press / to Search)',
-	})[k];
+const { labels } = Astro.props;
+
+type DocSearchTranslationProps = Pick<
+	Parameters<typeof docsearch>[0],
+	'placeholder' | 'translations'
+>;
+
+const pick = (keyStart: string) =>
+	Object.fromEntries(
+		Object.entries(labels)
+			.filter(([key]) => key.startsWith(keyStart))
+			.map(([key, value]) => [key.replace(keyStart, ''), value])
+	);
+
+const docsearchTranslations: DocSearchTranslationProps = {
+	placeholder: labels['search.label'],
+	translations: {
+		button: pick('docsearch.button.'),
+		modal: {
+			searchBox: pick('docsearch.modal.searchBox.'),
+			startScreen: pick('docsearch.modal.startScreen.'),
+			errorScreen: pick('docsearch.modal.errorScreen.'),
+			footer: pick('docsearch.modal.footer.'),
+			noResultsScreen: pick('docsearch.modal.noResultsScreen.'),
+		},
+	},
+};
 ---
 
-<div id="sl-search">
-	<button type="button" class="DocSearch DocSearch-Button" aria-label={t('search.label')}>
+<sl-doc-search data-translations={JSON.stringify(docsearchTranslations)}>
+	<button type="button" class="DocSearch DocSearch-Button" aria-label={labels['search.label']}>
 		<span class="DocSearch-Button-Container">
 			<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
 				<path
@@ -23,11 +45,11 @@ const t = (k: 'search.label' | 'search.shortcutLabel') =>
 					stroke-linecap="round"
 					stroke-linejoin="round"></path>
 			</svg>
-			<span class="DocSearch-Button-Placeholder">{t('search.label')}</span>
+			<span class="DocSearch-Button-Placeholder">{labels['search.label']}</span>
 		</span>
 		<span class="DocSearch-Button-Keys"></span>
 	</button>
-</div>
+</sl-doc-search>
 
 <style is:global>
 	.DocSearch-Button {
@@ -56,7 +78,7 @@ const t = (k: 'search.label' | 'search.shortcutLabel') =>
 	}
 
 	@media (min-width: 50rem) {
-		#sl-search {
+		sl-doc-search {
 			width: 100%;
 		}
 
@@ -98,6 +120,20 @@ const t = (k: 'search.label' | 'search.shortcutLabel') =>
 
 <script>
 	import config from 'virtual:starlight/docsearch-config';
-	import docsearch from '@docsearch/js';
-	docsearch({ ...config, container: '#sl-search' });
+
+	class StarlightDocSearch extends HTMLElement {
+		constructor() {
+			super();
+			window.addEventListener('DOMContentLoaded', async () => {
+				const { default: docsearch } = await import('@docsearch/js');
+				const options: Parameters<typeof docsearch>[0] = { ...config, container: 'sl-doc-search' };
+				try {
+					const translations = JSON.parse(this.dataset.translations || '{}');
+					Object.assign(options, translations);
+				} catch {}
+				docsearch(options);
+			});
+		}
+	}
+	customElements.define('sl-doc-search', StarlightDocSearch);
 </script>
