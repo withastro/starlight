@@ -7,6 +7,22 @@ Starlight supports the full range of [Markdown](https://daringfireball.net/proje
 
 Please be sure to check the [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) or [Markdoc docs](https://markdoc.dev/docs/syntax) if using those file formats, as Markdown support and usage can differ.
 
+## Frontmatter
+
+You can customize individual pages in Starlight by setting values in their frontmatter.
+Frontmatter is set at the top of your files between `---` separators:
+
+```md title="src/content/docs/example.md"
+---
+title: My page title
+---
+
+Page content follows the second `---`.
+```
+
+Every page must include at least a `title`.
+See the [frontmatter reference](/reference/frontmatter/) for all available fields and how to add custom fields.
+
 ## Inline styles
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.

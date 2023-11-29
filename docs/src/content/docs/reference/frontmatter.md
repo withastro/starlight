@@ -370,3 +370,71 @@ sidebar:
     target: _blank
 ---
 ```
+
+## Customize frontmatter schema
+
+The frontmatter schema for Starlight’s `docs` content collection is configured in `src/content/config.ts` using the `docsSchema()` helper:
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+
+`docsSchema()` takes the following options:
+
+### `extend`
+
+**type:** Zod schema or function that returns a Zod schema  
+**default:** `z.object({})`
+
+Extend Starlight’s schema with additional fields by setting `extend` in the `docsSchema()` options.
+The value should be a [Zod schema](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod).
+
+In the following example, we provide a stricter type for `description` to make it required and add a new optional `category` field:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // Make a built-in field required instead of optional.
+        description: z.string(),
+        // Add a new field to the schema.
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+To take advantage of the [Astro `image()` helper](https://docs.astro.build/en/guides/images/#images-in-content-collections), use a function that returns your schema extension:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // Add a field that must resolve to a local image.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
+```
