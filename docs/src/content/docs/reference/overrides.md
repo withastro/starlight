@@ -234,6 +234,10 @@ The default implementation includes logic for rendering logos defined in Starlig
 Component used to render Starlight’s search UI.
 The default implementation includes the button in the header and the code for displaying a search modal when it is clicked and loading [Pagefind’s UI](https://pagefind.app/).
 
+When [`pagefind`](/reference/configuration/#pagefind) is disabled, the default search component will not be rendered.
+However, if you override `Search`, your custom component will always be rendered even if the `pagefind` configuration option is `false`.
+This allows you to add UI for alternative search providers when disabling Pagefind.
+
 #### `SocialIcons`
 
 **Default component:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
