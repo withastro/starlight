@@ -10,11 +10,13 @@ import { vitePluginStarlightUserConfig } from './integrations/virtual-user-confi
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration({
 	plugins,
 	...opts
 }: StarlightUserConfigWithPlugins): AstroIntegration {
+	let userConfig: StarlightConfig;
 	return {
 		name: '@astrojs/starlight',
 		hooks: {
@@ -33,6 +35,7 @@ export default function StarlightIntegration({
 					isRestart,
 					logger,
 				});
+				userConfig = starlightConfig;
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
