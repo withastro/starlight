@@ -1,18 +1,15 @@
 ---
-import type { Props } from '../props';
-import { useTranslations } from '../utils/translations';
-
 import { MobileMenuToggle } from 'virtual:starlight/components';
+import type { Props } from '../props';
 
-const { hasSidebar, locale } = Astro.props;
-const t = useTranslations(locale);
+const { hasSidebar, labels } = Astro.props;
 ---
 
 <div class="page sl-flex">
 	<header class="header"><slot name="header" /></header>
 	{
 		hasSidebar && (
-			<nav class="sidebar" aria-label={t('sidebarNav.accessibleLabel')}>
+			<nav class="sidebar" aria-label={labels['sidebarNav.accessibleLabel']}>
 				<MobileMenuToggle {...Astro.props} />
 				<div id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">

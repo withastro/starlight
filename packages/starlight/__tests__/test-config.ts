@@ -1,13 +1,10 @@
 /// <reference types="vitest" />
 
-import type { AstroConfig, AstroIntegrationLogger } from 'astro';
+import type { AstroConfig } from 'astro';
 import { getViteConfig } from 'astro/config';
 import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
-import {
-	runPlugins,
-	type StarlightPluginContext,
-	type StarlightUserConfigWithPlugins,
-} from '../utils/plugins';
+import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
+import { createTestPluginContext } from './test-plugin-utils';
 
 export async function defineVitestConfig(
 	{ plugins, ...config }: StarlightUserConfigWithPlugins,

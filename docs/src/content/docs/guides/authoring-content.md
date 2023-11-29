@@ -7,6 +7,22 @@ Starlight supports the full range of [Markdown](https://daringfireball.net/proje
 
 Please be sure to check the [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) or [Markdoc docs](https://markdoc.dev/docs/syntax) if using those file formats, as Markdown support and usage can differ.
 
+## Frontmatter
+
+You can customize individual pages in Starlight by setting values in their frontmatter.
+Frontmatter is set at the top of your files between `---` separators:
+
+```md title="src/content/docs/example.md"
+---
+title: My page title
+---
+
+Page content follows the second `---`.
+```
+
+Every page must include at least a `title`.
+See the [frontmatter reference](/reference/frontmatter/) for all available fields and how to add custom fields.
+
 ## Inline styles
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
@@ -239,7 +255,7 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Mark selections of text using the `" "` marker or regular expressions](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Mark selections of text using the `" "` marker or regular expressions](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
 
   ```js "Individual terms" /Even.*supported/
   // Individual terms can be highlighted, too
@@ -307,7 +323,7 @@ Other languages display inside a code editor-style frame if they include a title
 
 A code block’s optional title can be set either with a `title="..."` attribute following the code block's opening backticks and language identifier, or with a file name comment in the first lines of the code.
 
-- [Add a file name tab with a comment](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames)
+- [Add a file name tab with a comment](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
 
   ```js
   // my-test-file.js
@@ -321,7 +337,7 @@ A code block’s optional title can be set either with a `title="..."` attribute
   ```
   ````
 
-- [Add a title to a Terminal window](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames)
+- [Add a title to a Terminal window](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
 
   ```bash title="Installing dependencies…"
   npm install

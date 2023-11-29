@@ -1,11 +1,9 @@
 ---
-import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
 import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
 import type { Props } from '../props';
 
-const { locale, toc } = Astro.props;
-const t = useTranslations(locale);
+const { labels, toc } = Astro.props;
 ---
 
 {
@@ -15,7 +13,7 @@ const t = useTranslations(locale);
 				<details id="starlight__mobile-toc">
 					<summary id="starlight__on-this-page--mobile" class="sl-flex">
 						<div class="toggle sl-flex">
-							{t('tableOfContents.onThisPage')}
+							{labels['tableOfContents.onThisPage']}
 							<Icon name={'right-caret'} class="caret" size="1rem" />
 						</div>
 						<span class="display-current" />

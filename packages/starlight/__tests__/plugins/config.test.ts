@@ -2,14 +2,14 @@ import { describe, expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { getSidebar } from '../../utils/navigation';
 import { runPlugins } from '../../utils/plugins';
-import { createTestPluginContext } from '../test-config';
+import { createTestPluginContext } from '../test-plugin-utils';
 
 test('reads and updates a configuration option', () => {
 	expect(config.title).toBe('Plugins - Custom');
 });
 
 test('overwrites a configuration option', () => {
-	expect(getSidebar('/', undefined)).toMatchObject([{ href: '/showcase/', label: 'Showcase' }]);
+	expect(getSidebar('/', undefined)).toMatchObject([{ href: '/showcase', label: 'Showcase' }]);
 });
 
 test('runs plugins in the order that they are configured and always passes down the latest user config', () => {
