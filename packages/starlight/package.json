@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -174,7 +174,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^1.1.0",
-    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.3",
     "@pagefind/default-ui": "^1.0.3",
     "@types/mdast": "^3.0.11",
     "astro-expressive-code": "^0.29.0",
