@@ -136,7 +136,7 @@ importers:
   packages/docsearch:
     dependencies:
       '@astrojs/starlight':
-        specifier: '>=0.9.0'
+        specifier: '>=0.14.0'
         version: link:../starlight
       '@docsearch/css':
         specifier: ^3.5.2
