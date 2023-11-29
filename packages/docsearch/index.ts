@@ -20,10 +20,10 @@ export default function starlightDocSearch(userConfig: DocSearchConfig): Starlig
 				// If the user has already has a custom override for the Search component, don't override it.
 				if (config.components?.Search) {
 					logger.warn(
-						`It looks like you already have a \`Search\` component override. To render \`@astrojs/starlight-docsearch\`, you can either:
-- Remove the existing override for the \`Search\` component from your configuration
-- Import and render \`@astrojs/starlight-docsearch/DocSearch.astro\` in your custom override
-`
+						'It looks like you already have a `Search` component override in your Starlight configuration.'
+					);
+					logger.warn(
+						'To render `@astrojs/starlight-docsearch`, remove the override for the `Search` component.\n'
 					);
 				} else {
 					// Otherwise, add the Search component override to the user's configuration.
