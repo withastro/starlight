@@ -21,13 +21,13 @@ const pick = (keyStart: string) =>
 const docsearchTranslations: DocSearchTranslationProps = {
 	placeholder: labels['search.label'],
 	translations: {
-		button: pick('docsearch.button.'),
+		button: { buttonText: labels['search.label'], buttonAriaLabel: labels['search.label'] },
 		modal: {
-			searchBox: pick('docsearch.modal.searchBox.'),
-			startScreen: pick('docsearch.modal.startScreen.'),
-			errorScreen: pick('docsearch.modal.errorScreen.'),
-			footer: pick('docsearch.modal.footer.'),
-			noResultsScreen: pick('docsearch.modal.noResultsScreen.'),
+			searchBox: pick('docsearch.searchBox.'),
+			startScreen: pick('docsearch.startScreen.'),
+			errorScreen: pick('docsearch.errorScreen.'),
+			footer: pick('docsearch.footer.'),
+			noResultsScreen: pick('docsearch.noResultsScreen.'),
 		},
 	},
 };
