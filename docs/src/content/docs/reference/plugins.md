@@ -161,3 +161,152 @@ The example above will log a message that includes the provided info message:
 ```shell
 [long-process-plugin] Starting long process…
 ```
+
+## Route injection
+
+Plugins [adding](#addintegration) an Astro integration can inject routes using the Integrations API [`injectRoute`](https://docs.astro.build/en/reference/integrations-reference/#injectroute-option) function to render dynamically generated content.
+By default, pages rendered on custom routes do not use the Starlight layout. To use the Starlight layout, pages must wrap their content with the `<VirtualPage />` component.
+
+```astro
+---
+// plugin/src/Example.astro
+import VirtualPage, {
+  type VirtualPageProps,
+} from '@astrojs/starlight/components/VirtualPage.astro';
+import CustomComponent from './CustomComponent.astro';
+
+const props = {
+  title: 'My custom page',
+  slug: 'custom-page/example',
+  template: 'doc',
+  hasSidebar: true,
+  headings: [{ depth: 2, slug: 'description', text: 'Description' }],
+  dir: 'ltr',
+  lang: 'en',
+  pagefind: true,
+  head: [],
+} satisfies VirtualPageProps;
+---
+
+<VirtualPage {...props}>
+  <h2 id="description">Description</h2>
+  <CustomComponent />
+</VirtualPage>
+```
+
+### Props
+
+#### Required props
+
+The `<VirtualPage />` component requires the following props:
+
+##### `title`
+
+**type:** `string`
+
+The page title displayed at the top of the page, in browser tabs, and in page metadata.
+
+##### `slug`
+
+**Type:** `string`
+
+The slug of the page.
+
+##### `headings`
+
+Type: `{ depth: number; slug: string; text: string }[]`
+
+Array of all headings of the page.
+
+##### `template`
+
+**type:** `'doc' | 'splash'`
+
+Set the layout template for this page.
+Use `'splash'` to use a wider layout without any sidebars.
+
+##### `pagefind`
+
+**type:** `boolean`
+
+Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index.
+
+##### `dir`
+
+**Type:** `'ltr' | 'rtl'`
+
+Page writing direction.
+
+##### `lang`
+
+**Type:** `string`
+
+BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
+
+##### `head`
+
+**Type:** `{ tag: string; attrs: Record<string, string | boolean | undefined>; content: string }[]`
+
+Additional tags to your page’s `<head>`. Similar to the [global `head` option](/reference/configuration/#head).
+
+##### `hasSidebar`
+
+**Type:** `boolean`
+
+Whether or not the sidebar should be displayed on this page.
+
+#### Optional props
+
+Additionaly, the following props can be provided to customize the page:
+
+##### `description`
+
+**type:** `string`
+
+The page description is used for page metadata and will be picked up by search engines and in social media previews.
+
+##### `sidebar`
+
+**type:** `SidebarEntry[] | undefined`  
+**default:** the sidebar generated based on the [global `sidebar` config](/reference/configuration/#sidebar)
+
+Site navigation sidebar entries for this page or fallback to the global `sidebar` option if not provided.
+
+##### `tableOfContents`
+
+**type:** `false | { minHeadingLevel: number; maxHeadingLevel: number; }`
+
+Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
+Customize the heading levels to be included or set to `false` to hide the table of contents on this page.
+
+##### `lastUpdated`
+
+**type:** `Date`
+
+A valid [YAML timestamp](https://yaml.org/type/timestamp.html) to display the last updated date of the page.
+
+##### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Overrides the [global `pagination` option](/reference/configuration/#pagination). If a string is specified, the generated link text will be replaced and if an object is specified, both the link and the text will be overridden.
+
+##### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Same as [`prev`](#prev) but for the next page link.
+
+##### `hero`
+
+**type:** [`HeroConfig`](/reference/frontmatter/#heroconfig)
+
+Add a hero component to the top of this page. Works well with `template: splash`. Similar to the [frontmatter `hero` option](/reference/frontmatter/#hero).
+
+##### `banner`
+
+**type:** `{ content: string }`
+
+Displays an announcement banner at the top of this page.
+
+The `content` value can include HTML for links or other content.

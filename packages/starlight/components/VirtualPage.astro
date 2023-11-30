@@ -1,0 +1,10 @@
+---
+import { generateVirtualRouteData, type VirtualPageProps as Props } from '../utils/route-data';
+import Page from './Page.astro';
+
+export type VirtualPageProps = Props;
+---
+
+<Page {...generateVirtualRouteData({ props: Astro.props, url: Astro.url })}>
+	<slot />
+</Page>

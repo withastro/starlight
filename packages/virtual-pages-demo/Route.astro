@@ -1,0 +1,80 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import VirtualPage, {
+	type VirtualPageProps,
+} from '@astrojs/starlight/components/VirtualPage.astro';
+import { getThings } from './things';
+
+export function getStaticPaths() {
+	return getThings().map((thing) => {
+		const slug = `virtual-pages-demo/${thing}`;
+		return {
+			params: {
+				// Generate the routes:
+				//  - /virtual-pages-demo/a/
+				//  - /virtual-pages-demo/b/
+				//  - /virtual-pages-demo/c/
+				virtualPagesDemoSlug: slug,
+			},
+			props: {
+				// Pass down the generated slug and the thing to the page
+				slug,
+				thing,
+			},
+		};
+	});
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { slug, thing } = Astro.props;
+
+// Generates the props for the virtual page
+function getVirtualPageProps() {
+	const isThingB = thing === 'b';
+	const isThingC = thing === 'c';
+
+	return {
+		dir: isThingB ? 'rtl' : 'ltr',
+		hasSidebar: !isThingB,
+		head: [],
+		headings: isThingC
+			? [
+					{ depth: 2, slug: 'thing-a', text: 'Hello 2' },
+					{ depth: 3, slug: 'thing-a', text: 'Hello 3' },
+					{ depth: 4, slug: 'thing-a', text: 'Hello 4' },
+			  ]
+			: [],
+		lang: 'en',
+		pagefind: true,
+		sidebar: isThingC
+			? [
+					{
+						type: 'group',
+						label: 'All the links',
+						entries: [
+							{
+								type: 'link',
+								label: 'Custom link 2',
+								href: '/getting-started/',
+								isCurrent: false,
+								badge: { text: 'Wow', variant: 'danger' },
+								attrs: {},
+							},
+						],
+						collapsed: false,
+						badge: undefined,
+					},
+			  ]
+			: undefined,
+		slug,
+		tableOfContents: isThingC ? { maxHeadingLevel: 4, minHeadingLevel: 2 } : false,
+		template: 'doc',
+		title: `Virtual Pages Demo: ${thing}`,
+	} satisfies VirtualPageProps;
+}
+---
+
+<VirtualPage {...getVirtualPageProps()}>
+	<div>some content from a plugin: {thing}</div>
+</VirtualPage>

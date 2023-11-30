@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { virtualPagesDemo } from 'virtual-pages-demo';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -30,6 +31,8 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
+			// TODO(HiDeoo) Remove me
+			plugins: [virtualPagesDemo()],
 			title: 'Starlight',
 			logo: {
 				light: '/src/assets/logo-light.svg',

@@ -5,22 +5,25 @@ import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
 import { getFileCommitDate } from './git';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
-import { ensureTrailingSlash } from './path';
-import type { Route } from './routing';
-import { localizedId } from './slugs';
+import { ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
+import type { Route, StarlightDocsEntry, VirtualDocsEntry, VirtualRoute } from './routing';
+import { localizedId, slugToLocaleData } from './slugs';
 import { useTranslations } from './translations';
 
 interface PageProps extends Route {
 	headings: MarkdownHeading[];
 }
 
-export interface StarlightRouteData extends Route {
+interface BaseRouteData {
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
-	/** Site navigation sidebar entries for this page. */
-	sidebar: SidebarEntry[];
 	/** Whether or not the sidebar should be displayed on this page. */
 	hasSidebar: boolean;
+}
+
+export interface StarlightRouteData extends BaseRouteData, Route {
+	/** Site navigation sidebar entries for this page. */
+	sidebar: SidebarEntry[];
 	/** Links to the previous and next page in the sidebar if enabled. */
 	pagination: ReturnType<typeof getPrevNextLinks>;
 	/** Table of contents for this page if enabled. */
@@ -31,6 +34,11 @@ export interface StarlightRouteData extends Route {
 	editUrl: URL | undefined;
 	/** Record of UI strings localized for the current page. */
 	labels: ReturnType<ReturnType<typeof useTranslations>['all']>;
+}
+
+export interface VirtualPageProps extends BaseRouteData, VirtualRoute {
+	/** Site navigation sidebar entries for this page or fallback to the generated sidebar. */
+	sidebar?: SidebarEntry[] | undefined;
 }
 
 export function generateRouteData({
@@ -51,6 +59,56 @@ export function generateRouteData({
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
 		labels: useTranslations(locale).all(),
+	};
+}
+
+export function generateVirtualRouteData({
+	props,
+	url,
+}: {
+	props: VirtualPageProps;
+	url: URL;
+}): StarlightRouteData {
+	const { dir, lastUpdated, lang, next, pagefind, prev, slug, tableOfContents, template, title } =
+		props;
+	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
+	const entryMeta = slugToLocaleData(slug);
+	const sidebar = props.sidebar ?? getSidebar(url.pathname, entryMeta.locale);
+	const virtualEntry: VirtualDocsEntry = {
+		id,
+		slug,
+		body: '',
+		collection: 'docs',
+		data: {
+			editUrl: false,
+			head: props.head,
+			lastUpdated,
+			next,
+			pagefind,
+			prev,
+			tableOfContents,
+			template,
+			title,
+			sidebar: {
+				attrs: {},
+				hidden: false,
+			},
+		},
+	};
+	const entry = virtualEntry as StarlightDocsEntry;
+	return {
+		...props,
+		...entryMeta,
+		id,
+		editUrl: undefined,
+		entry,
+		entryMeta: { dir: dir, lang: lang, locale: entryMeta.locale },
+		labels: useTranslations(entryMeta.locale).all(),
+		lastUpdated: lastUpdated instanceof Date ? lastUpdated : undefined,
+		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
+		sidebar,
+		slug,
+		toc: getToC({ ...props, entry, entryMeta, id, locale: entryMeta.locale }),
 	};
 }
 
