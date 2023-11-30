@@ -47,13 +47,22 @@ import Testimonial from '../../components/testimonial.astro';
 </CardGrid>
 
 <TestimonialGrid title="Testimonials">
-  <Testimonial date={new Date('10-10-23')} link={new URL('https://x.com/eliancodes')} avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="What is Starlight?" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content="I use Starlight for everything." />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/494699?v=4" name="HiDeoo" handle="HiDeoo">
+  <Testimonial dir="ltr" date={new Date('10-10-23')} link={new URL('https://x.com/eliancodes')} avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
+  <Testimonial name="HiDeoo" handle="HiDeoo">
     <p>So what's the deal with Starlight?</p>
     <button>I just wanted a button</button>
+    <button>I really like buttons 🤣</button>
   </Testimonial>
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="I prefer inputs" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content='I use <a href="https://starlight"astro.build>Starlight</a> for <em>everything</em>. 🌭' />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content="I use Starlight for everything. 🌭" >some <a href="https://twitter.com/sarah11918">content</a></Testimonial>
+  <Testimonial avatar="https://files.mastodon.social/accounts/avatars/000/011/967/original/f8789e7707cf523e.jpg" link="https://mastodon.social/@sarah11918" name="Sarah" handle="sarah11918" content="I also use Starlight for everything. 🌭" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="What is Starlight?" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure" handle="genteure" content="Starlight ✨ is much better than 🌕 moonlight!" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure" handle="genteure" content="Starlight ✨ is much better than 🌕 moonlight!"> <iframe src="https://www.example.com"></iframe> </Testimonial>
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure (Google translated)" handle="genteure" content="ضوء النجوم ✨ أفضل بكثير من 🌕 ضوء القمر!"/>
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure" handle="genteure" content="Starlight ✨ 是一个非常好用的文档网站！如果有一个特别长的中文句子会发生什么什么什么什么什么什么？ long length chinese char test" />
+  <Testimonial avatar="https://avatars.githubusercontent.com/u/88548999?v=4" name="Atharva" handle="itseobard" content="If i am building a documentation project, I will go with Starlight anyday" />
 </TestimonialGrid>
 
 <AboutAstro title="Brought to you by">

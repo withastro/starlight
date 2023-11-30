@@ -1,21 +1,30 @@
 ---
 import { Image } from 'astro:assets';
+import { slugToLocaleData } from '../../../packages/starlight/utils/slugs';
 
 interface Props {
 	handle: string;
 	name: string;
 	content?: string;
-	avatar: string;
+	avatar?: string;
 	date?: Date;
 	link?: URL;
+	dir?: 'rtl' | 'ltr';
 }
 
-const { content, name, handle, avatar, date, link } = Astro.props;
+const { content, name, handle, avatar, date, link, dir } = Astro.props;
+
+// The current page's slug.
+const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
+const pageDir = slugToLocaleData(slug).dir
 ---
 
 <li class="testimonial">
 	<div class="testimonial-heading">
-		<Image class="avatar" height="50" width="50" src={avatar} alt="image" />
+		{ avatar ? (
+			<Image class="avatar" height="50" width="50" src={avatar} alt="image" />
+			) : null
+		}
 		<div class="testimonial-title">
 			<p class="title">
 				{name}
@@ -31,8 +40,8 @@ const { content, name, handle, avatar, date, link } = Astro.props;
 			}
 		</div>
 	</div>
-	<div class="testimonial-body">
-		{content ? <blockquote>{content}</blockquote> : null}
+	<div class="testimonial-body" dir={dir ?? pageDir}>
+		{content ? <blockquote set:html={content}></blockquote> : null}
 		<slot />
 		{date ? <span>posted on {date?.toLocaleDateString()}</span> : null}
 	</div>
