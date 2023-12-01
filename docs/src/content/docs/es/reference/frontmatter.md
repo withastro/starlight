@@ -392,12 +392,11 @@ Aprende más sobre los esquemas de colección de contenido en [“Definir un esq
 `docsSchema()` toma las siguientes opciones:
 
 ### `extend`
- 
+
 **tipo:** esquema Zod o función que devuelve un esquema Zod
 **por defecto:** `z.object({})`
 
 Extiende el esquema de Starlight con campos adicionales estableciendo `extend` en las opciones de `docsSchema()`.
-The value should be a [Zod schema](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod).
 El valor debe ser un [esquema Zod](https://docs.astro.build/es/guides/content-collections/#definiendo-tipos-de-datos-con-zod).
 
 En el siguiente ejemplo, proporcionamos un tipo más estricto para `description` para hacerlo requerido y agregamos un nuevo campo opcional `category`:
