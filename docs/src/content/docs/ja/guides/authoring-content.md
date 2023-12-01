@@ -206,3 +206,7 @@ var fun = function lang(l) {
 ## その他のMarkdown機能
 
 Starlightは、リストやテーブルなど、その他のMarkdown記法をすべてサポートしています。Markdownのすべての構文要素の概要については、[The Markdown GuideのMarkdownチートシート](https://www.markdownguide.org/cheat-sheet/)を参照してください。
+
+## 高度なMarkdownとMDXの設定
+
+Starlightは、remarkとrehypeをベースとした、AstroのMarkdown・MDXレンダラーを使用しています。Astroの設定ファイルに`remarkPlugins`または`rehypePlugins`を追加することで、カスタム構文や動作をサポートできます。詳しくは、Astroドキュメントの[「MarkdownとMDXの設定」](https://docs.astro.build/ja/guides/markdown-content/#markdownとmdxの設定)を参照してください。
