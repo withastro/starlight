@@ -134,6 +134,7 @@ La commande utilisée pour exécuter Starlight :
 **Type :** `boolean`
 
 `false` lorsque le serveur de développement démarre, `true` lorsqu'un rechargement est déclenché.
+Les raisons courantes d'un redémarrage incluent un utilisateur qui modifie son fichier `astro.config.mjs` pendant que le serveur de développement est en cours d'exécution.
 
 #### `logger`
 
