@@ -11,7 +11,7 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
 
 1. 通过将 [`locales`](/zh-cn/reference/configuration/#locales) 和 [`defaultLocale`](/zh-cn/reference/configuration/#defaultlocale) 传递给 Starlight 集成，告诉 Starlight 你支持的语言：
 
-   ```js
+   ```js {9-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
