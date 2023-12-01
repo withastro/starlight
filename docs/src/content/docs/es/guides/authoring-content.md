@@ -7,6 +7,22 @@ Starlight admite la gama completa de la sintaxis [Markdown](https://daringfireba
 
 Por favor, asegúrate de consultar la documentación de [MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) o [Markdoc](https://markdoc.dev/docs/syntax) si estás utilizando esos formatos de archivo, ya que el soporte y el uso de Markdown pueden variar.
 
+## Frontmatter
+
+Puedes personalizar individualmente las páginas en Starlight estableciendo valores en su frontmatter.
+El frontmatter se establece en la parte superior de tus archivos entre separadores `---`:
+
+```md title="src/content/docs/example.md"
+---
+title: Mi título de página
+---
+
+El contenido de la página sigue el segundo `---`.
+```
+
+Cada página debe incluir al menos un `title`.
+Vee la [referencia de frontmatter](/es/reference/frontmatter/) para ver todos los campos disponibles y cómo añadir campos personalizados.
+
 ## Estilos en línea
 
 El texto puede estar **en negrita**, _en cursiva_, o ~~tachado~~.
