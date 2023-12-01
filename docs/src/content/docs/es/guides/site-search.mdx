@@ -15,7 +15,7 @@ No es necesaria ninguna configuración para habilitar la búsqueda. Construye e 
 
 ### Excluye una página
 
-Para excluir una página desde el índice de búsqueda, agrega [`pagefind: false`](/reference/frontmatter/#pagefind) al frontmatter de la página:
+Para excluir una página del índice de búsqueda, agrega [`pagefind: false`](/reference/frontmatter/#pagefind) al frontmatter de la página:
 
 ```md title="src/content/docs/not-indexed.md" ins={3}
 ---
@@ -44,7 +44,7 @@ Este texto estará oculto de la búsqueda.
 </div>
 ```
 
-## Alternativa de proveedores de búsqueda
+## Proveedores de búsqueda alternativos
 
 ### Algolia DocSearch
 
@@ -109,7 +109,7 @@ Con esta configuración actualizada, la barra de búsqueda de tu sitio ahora abr
 #### Traduciendo la UI de DocSearch
 
 DocSearch solo proporciona cadenas de UI en inglés de forma predeterminada.
-Agrega traducciones de la UI del modal para tu idioma usando el [sistema de internacionalización](/guides/i18n/#traduce-la-ui-de-starlight) incorporado de Starlight.
+Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de internacionalización](/guides/i18n/#traduce-la-ui-de-starlight) incorporado de Starlight.
 
 1. Extiende la definición de la colección de contenido `i18n` de Starlight con el esquema de DocSearch en `src/content/config.ts`:
 
