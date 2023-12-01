@@ -342,12 +342,12 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
 
 - [给终端窗口添加一个标题](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
 
-  ```bash title="Installing dependencies…"
+  ```bash title="安装依赖…"
   npm install
   ```
 
   ````md
-  ```bash title="Installing dependencies…"
+  ```bash title="安装依赖…"
   npm install
   ```
   ````
