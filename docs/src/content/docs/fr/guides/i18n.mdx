@@ -147,9 +147,9 @@ En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de t
 
 Les textes de l'interface utilisateur traduits en <LanguagesList /> sont disponibles prêts à l'emploi, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de données `i18n`.
+Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de contenus `i18n`.
 
-1. Configurez la collection de données `i18n` dans `src/content/config.ts` si elle n'est pas déjà configurée :
+1. Configurez la collection de contenus `i18n` dans `src/content/config.ts` si elle n'est pas déjà configurée :
 
    ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
@@ -256,4 +256,4 @@ export const collections = {
 };
 ```
 
-Consultez [« Définir un schéma de collection de données »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de données.
+Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
