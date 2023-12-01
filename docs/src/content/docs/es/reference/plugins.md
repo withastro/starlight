@@ -54,8 +54,8 @@ Este hook es llamado con las siguientes opciones:
 
 **tipo:** `StarlightUserConfig`
 
-A read-only copy of the user-supplied [Starlight configuration](/reference/configuration).
-This configuration may have been updated by other plugins configured before the current one.
+Una copia de lectura de la [configuración de Starlight](/es/reference/configuration) proporcionada por el usuario.
+Esta configuración puede haber sido actualizada por otros plugins configurados antes del actual.
 
 #### `updateConfig`
 
