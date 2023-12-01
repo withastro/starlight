@@ -232,3 +232,28 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+### Étendre le schéma de traduction
+
+Ajoutez des clés personnalisées aux dictionnaires de traduction de votre site en définissant `extend` dans les options de `i18nSchema()`.
+Dans l'exemple suivant, une nouvelle clé optionnelle `custom.label` est ajoutée aux clés par défaut :
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Consultez [« Définir un schéma de collection de données »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de données.
