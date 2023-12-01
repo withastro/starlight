@@ -373,7 +373,7 @@ sidebar:
 
 ## Personnaliser le schéma du frontmatter
 
-Le schéma du frontmatter de la collection de données `docs` de Starlight est configuré dans `src/content/config.ts` en utilisant l'utilitaire `docsSchema()` :
+Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content/config.ts` en utilisant l'utilitaire `docsSchema()` :
 
 ```ts {3,6}
 // src/content/config.ts
@@ -385,7 +385,7 @@ export const collections = {
 };
 ```
 
-Consultez [« Définir un schéma de collection de données »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de données.
+Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
 
 `docsSchema()` accepte les options suivantes :
 
