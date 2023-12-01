@@ -21,7 +21,7 @@ El contenido de la página sigue el segundo `---`.
 ```
 
 Cada página debe incluir al menos un `title`.
-Vee la [referencia de frontmatter](/es/reference/frontmatter/) para ver todos los campos disponibles y cómo añadir campos personalizados.
+Ver la [referencia de frontmatter](/es/reference/frontmatter/) para ver todos los campos disponibles y cómo añadir campos personalizados.
 
 ## Estilos en línea
 
