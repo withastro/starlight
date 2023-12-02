@@ -499,6 +499,22 @@ starlight({
 
 デフォルトでは、すべてのページの`<title>`は`ページタイトル | サイトタイトル`となります。たとえば、このページのタイトルは「設定方法」であり、このサイトのタイトルは「Starlight」なので、このページの`<title>`は「設定方法 | Starlight」となります。
 
+### `components`
+
+**type:** `Record<string, string>`
+
+コンポーネントへのパスを指定して、Starlightのデフォルトの実装をオーバーライドします。
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+オーバーライド可能なすべてのコンポーネントの詳細については、[オーバーライドリファレンス](/ja/reference/overrides/)を参照してください。
+
 ### `plugins`
 
 **type:** [`StarlightPlugin[]`](/reference/plugins/#quick-api-reference)
