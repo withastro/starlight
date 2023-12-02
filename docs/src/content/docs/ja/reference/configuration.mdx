@@ -126,7 +126,7 @@ starlight({
 
 自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
 
-```js
+```js {5,16}
 sidebar: [
   // 折りたたまれたリンクのグループ。
   {
@@ -152,7 +152,7 @@ sidebar: [
 
 多言語対応が必要なサイトの場合、各項目の`label`はデフォルトのロケールのものとみなされます。サポート対象の言語のラベルを提供するには、`translations`プロパティを設定します。
 
-```js
+```js {5,9,14}
 sidebar: [
   // フランス語に翻訳されたラベルをもつサイドバーの例。
   {
@@ -212,7 +212,6 @@ interface BadgeConfig {
 各エントリは、その言語のファイルが保存されているディレクトリ名をキーとして使用する必要があります。
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -277,7 +276,7 @@ interface LocaleConfig {
 
 `root`ロケールを設定することで、`/lang/`ディレクトリなしでデフォルト言語を提供できます。
 
-```js
+```js {3-6}
 starlight({
   locales: {
     root: {
