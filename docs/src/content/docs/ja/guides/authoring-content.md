@@ -231,7 +231,7 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
   ```
   ````
 
-- [`" "`マーカーまたは正規表現を使って選択されたテキストをマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [`" "`マーカーまたは正規表現を使って選択されたテキストをマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
 
   ```js "個別の用語" /正規表現.*います/
   // 個別の用語もハイライトできます
@@ -297,7 +297,7 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
 
 `title="..."`属性を、コードブロックの開始を表わすバックティックと言語識別子の後ろに続けて記述するか、コードの最初の行にファイル名コメントを記述することで、コードブロックにオプションでタイトルを設定できます。
 
-- [コメントによりファイル名タブを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames)
+- [コメントによりファイル名タブを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
 
   ```js
   // my-test-file.js
@@ -311,7 +311,7 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
   ```
   ````
 
-- [Terminalウィンドウにタイトルを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames)
+- [Terminalウィンドウにタイトルを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
 
   ```bash title="依存関係のインストール中…"
   npm install
