@@ -230,7 +230,7 @@ sidebar:
 
 ## バッジ
 
-リンクには、リンクラベルの横にバッジを表示するための`badge`プロパティも含められます。
+リンク、グループ、自動生成されるグループには、ラベルの横にバッジを表示するための`badge`プロパティも含められます。
 
 ```js
 starlight({
@@ -245,6 +245,12 @@ starlight({
 					badge: '新規',
 				},
 			],
+		},
+		// 「非推奨」バッジ付きの自動生成されるグループ。
+		{
+			label: 'リファレンス',
+			badge: '非推奨',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -261,6 +267,24 @@ starlight({
 					label: 'コンポーネント',
 					link: '/ja/guides/components/',
 					badge: { text: '新規', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'リファレンス',
+			badge: { text: '非推奨', variant: 'default'},
+			items: [
+				{
+					label: '設定方法',
+					link: '/ja/reference/configuration/',
+				},
+				{
+					label: 'フロントマター',
+					link: '/ja/reference/frontmatter/',
+				},
+				{
+					label: 'オーバーライド',
+					link: '/ja/reference/overrides/',
 				},
 			],
 		},
