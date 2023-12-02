@@ -363,3 +363,70 @@ sidebar:
     target: _blank
 ---
 ```
+
+## フロントマタースキーマをカスタマイズする
+
+Starlightの`docs`コンテンツコレクションのフロントマタースキーマは、`docsSchema()`ヘルパーを使用して`src/content/config.ts`で設定されています。
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
+
+`docsSchema()`は以下のオプションを受け取ります。
+
+### `extend`
+
+**type:** ZodスキーマまたはZodスキーマを返す関数  
+**default:** `z.object({})`
+
+`docsSchema()`のオプションで`extend`を設定すると、Starlightのスキーマを追加のフィールドで拡張できます。値は[Zodスキーマ](https://docs.astro.build/ja/guides/content-collections/#zodによるデータ型の定義)である必要があります。
+
+次の例では、`description`を必須にするために厳し目の型を指定し、さらにオプションの`category`フィールドを新規追加しています。
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // 組み込みのフィールドをオプションから必須に変更します。
+        description: z.string(),
+        // 新しいフィールドをスキーマに追加します。
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+[Astroの`image()`ヘルパー](https://docs.astro.build/ja/guides/images/#コンテンツコレクションと画像)を利用するには、拡張したスキーマを返す関数を使用します。
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // ローカルの画像へと解決されるフィールドを追加します。
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
+```
