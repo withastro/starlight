@@ -7,6 +7,20 @@ Starlightでは、`.md`ファイルにおいて[Markdown](https://daringfireball
 
 MDXやMarkdocを使用する場合、サポートされるMarkdownの機能や使用方法が異なることがあるため、[MDXドキュメント](https://mdxjs.com/docs/what-is-mdx/#markdown)や[Markdocドキュメント](https://markdoc.dev/docs/syntax)を必ず確認してください。
 
+## フロントマター
+
+フロントマターに値を設定して、Starlightの個々のページをカスタマイズできます。フロントマターは、ファイル先頭の`---`によって区切られた区間に設定します。
+
+```md title="src/content/docs/example.md"
+---
+title: ページのタイトル
+---
+
+ページのコンテンツは、2つ目の`---`の後に続きます。
+```
+
+すべてのページには、少なくとも`title`が必要です。利用可能なすべてのフィールドと、カスタムフィールドの追加方法については、[フロントマターのリファレンス](/ja/reference/frontmatter/)を参照してください。
+
 ## インラインスタイル
 
 テキストは**太字**、_斜体_、または~~取り消し線~~にできます。
