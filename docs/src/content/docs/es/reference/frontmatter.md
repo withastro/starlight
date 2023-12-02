@@ -372,3 +372,71 @@ sidebar:
     target: _blank
 ---
 ```
+
+## Personaliza el esquema del frontmatter
+
+El esquema del frontmatter para la colección de contenido `docs` de Starlight se configura en `src/content/config.ts` usando el auxiliar `docsSchema()`:
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Aprende más sobre los esquemas de colección de contenido en [“Definir un esquema de colección”](https://docs.astro.build/es/guides/content-collections/#definiendo-un-esquema-de-colección) en la documentación de Astro.
+
+`docsSchema()` toma las siguientes opciones:
+
+### `extend`
+
+**tipo:** esquema Zod o función que devuelve un esquema Zod
+**por defecto:** `z.object({})`
+
+Extiende el esquema de Starlight con campos adicionales estableciendo `extend` en las opciones de `docsSchema()`.
+El valor debe ser un [esquema Zod](https://docs.astro.build/es/guides/content-collections/#definiendo-tipos-de-datos-con-zod).
+
+En el siguiente ejemplo, proporcionamos un tipo más estricto para `description` para hacerlo requerido y agregamos un nuevo campo opcional `category`:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // Hacer un campo integrado requerido en lugar de opcional.
+        description: z.string(),
+        // Agrega un nuevo campo al esquema.
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+Para tomar ventaja del [auxiliar `image()` de Astro](https://docs.astro.build/es/guides/images/#imágenes-en-colecciones-de-contenido), usa una función que devuelva tu extensión de esquema:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // Agrega un campo que debe resolverse a una imagen local.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
+```
