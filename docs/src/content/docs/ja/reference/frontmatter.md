@@ -108,20 +108,44 @@ hero:
 ---
 ```
 
+ライトモードとダークモードで、異なるバージョンのヒーロー画像を表示できます。
+
+```md
+---
+hero:
+  image:
+    alt: キラリと光る、鮮やかなロゴ
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // リポジトリ内の画像への相対パス。
-    file?: string;
-    // 画像のスロットに使用する生のHTML。
-    // カスタムの`<img>`タグやインラインの`<svg>`などが使えます。
-    html?: string;
-  };
+  image?:
+    | {
+        // リポジトリ内の画像への相対パス。
+        file: string;
+        // この画像を支援技術からアクセス可能にするための代替テキスト。
+        alt?: string;
+      }
+    | {
+        // ダークモードで使用する、リポジトリ内の画像への相対パス。
+        dark: string;
+        // ライトモードで使用する、リポジトリ内の画像への相対パス。
+        light: string;
+        // この画像を支援技術からアクセス可能にするための代替テキスト。
+        alt?: string;
+      }
+    | {
+        // 画像のスロットに使用する生のHTML。
+        // カスタムの`<img>`タグやインラインの`<svg>`などが使えます。
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
