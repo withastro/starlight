@@ -11,7 +11,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 1. [`locales`](/ja/reference/configuration/#locales)と[`defaultLocale`](/ja/reference/configuration/#defaultlocale)をStarlightインテグレーションに渡すことで、サポートする言語についてStarlightに伝えます。
 
-   ```js
+   ```js {9-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -68,7 +68,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 ルートロケールを設定するには、`locales`の`root`キーを使用します。ルートロケールがコンテンツのデフォルトロケールでもある場合は、`defaultLocale`を削除するか、`'root'`に設定します。
 
-```js
+```js {9,11-14}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -110,10 +110,11 @@ export default defineConfig({
 
 デフォルトでは、Starlightは単一言語（英語）のサイトです。他の言語で単一言語のサイトを作成するには、その言語を`locales`において`root`に設定します。
 
-```js
+```diff lang="js" {10-13}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
 export default defineConfig({
 	integrations: [
 		starlight({
@@ -149,14 +150,14 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
 1. 設定がまだであれば、`src/content/config.ts`で`i18n`データコレクションを設定します。
 
-   ```js
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
    	docs: defineCollection({ schema: docsSchema() }),
-   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
