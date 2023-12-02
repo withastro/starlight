@@ -354,7 +354,7 @@ starlight({
 
 ## 国際化
 
-リンクやグループのラベルをサポート対象の言語向けに翻訳するには、リンクやグループのエントリに`translations`プロパティを使用します。`label`プロパティは、デフォルトのロケールと、翻訳がない言語に対して使用されます。
+リンクやグループのラベルをサポート対象の言語向けに翻訳するには、リンクやグループのエントリに`translations`プロパティを使用します。[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags)の言語タグ、たとえば`"en"`、`"ar"`、`"zh-CN"`をキーとして、翻訳されたラベルを値として指定します。`label`プロパティは、デフォルトのロケールと、翻訳がない言語に対して使用されます。
 
 ```js
 starlight({
@@ -362,20 +362,20 @@ starlight({
 		{
 			label: 'Guides',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: 'Components',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -385,15 +385,15 @@ starlight({
 });
 ```
 
-スペイン語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
+ブラジルポルトガル語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/es/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}
