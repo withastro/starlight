@@ -201,9 +201,139 @@ var fun = function lang(l) {
 ```
 ````
 
-```md
-長い1行のコードブロックは折り返されません。長すぎる場合は、水平方向にスクロールする必要があります。この行は、このことを示すのに十分な長さであるはずです。
-```
+### Expressive Code機能
+
+Starlightは、コードブロックのフォーマットを拡張するために[Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)を使用しています。Expressive Codeのテキストマーカーとウィンドウフレームプラグインはデフォルトで有効になっています。コードブロックのレンダリングは、Starlightの[`expressiveCode`設定オプション](/ja/reference/configuration/#expressivecode)により設定できます。
+
+#### テキストマーカー
+
+[Expressive Codeのテキストマーカー](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents)をコードブロックの先頭で使うことで、コードブロックの特定の行や部分をハイライトできます。波括弧（`{ }`）を使って行全体をハイライトし、引用符を使ってテキストの文字列をハイライトします。
+
+ハイライトのスタイルは3つあります。コードに注意を向けるための中立的なスタイル、挿入されたコードを示す緑色のスタイル、削除されたコードを示す赤色のスタイルです。テキストと行全体の両方を、デフォルトのマーカー、または`ins=`と`del=`を組み合わせてマークし、目的のハイライトを生成できます。
+
+Expressive Codeには、コードサンプルの外観をカスタマイズするためのさまざまなオプションが用意されています。これらの多くは組み合わせることができ、非常に明快なコードサンプルを作成できます。利用可能な多くのオプションについては、[Expressive Codeのドキュメント](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md)を確認してください。最も一般的な例をいくつか以下に示します。
+
+- [行全体と行の範囲を`{ }`マーカーを使ってマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+    // この行（2行目）と次の行はハイライトされます
+    return 'このスニペットの3行目です';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // この行（2行目）と次の行はハイライトされます
+    return 'このスニペットの3行目です';
+  }
+  ```
+  ````
+
+- [`" "`マーカーまたは正規表現を使って選択されたテキストをマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+
+  ```js "個別の用語" /正規表現.*います/
+  // 個別の用語もハイライトできます
+  function demo() {
+    return '正規表現もサポートされています';
+  }
+  ```
+
+  ````md
+  ```js "個別の用語" /正規表現.*います/
+  // 個別の用語もハイライトできます
+  function demo() {
+    return '正規表現もサポートされています';
+  }
+  ```
+  ````
+
+- [追加、削除されたテキストや行を、`ins`と`del`でマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="挿入" del="削除"
+  function demo() {
+    console.log('これらは挿入と削除のマーカーです');
+    // return文はデフォルトのマーカータイプを使用します
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="挿入" del="削除"
+  function demo() {
+    console.log('これらは挿入と削除のマーカーです');
+    // return文はデフォルトのマーカータイプを使用します
+    return true;
+  }
+  ```
+  ````
+
+- [構文ハイライトと`diff`風の構文を組み合わせる](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+  ````
+
+#### フレームとタイトル
+
+コードブロックをウィンドウのようなフレームの中にレンダリングできます。シェルスクリプト言語（`bash`や`sh`など）には、ターミナルウィンドウのようなフレームが使用されます。その他の言語は、タイトルを含んでいる場合、コードエディタスタイルのフレーム内に表示されます。
+
+`title="..."`属性を、コードブロックの開始を表わすバックティックと言語識別子の後ろに続けて記述するか、コードの最初の行にファイル名コメントを記述することで、コードブロックにオプションでタイトルを設定できます。
+
+- [コメントによりファイル名タブを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#code-editor-window-frames)
+
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+- [Terminalウィンドウにタイトルを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#terminal-window-frames)
+
+  ```bash title="依存関係のインストール中…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="依存関係のインストール中…"
+  npm install
+  ```
+  ````
+
+- [`frame="none"`によりウィンドウフレームを無効化する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+  ````
 
 ## その他のMarkdown機能
 
