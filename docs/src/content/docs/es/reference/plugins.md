@@ -44,7 +44,7 @@ Los hooks son funciones que Starlight llama para ejecutar código de plugin en m
 
 ### `hooks.setup`
 
-La función de configuración de plugin llamada cuando se inicializa Starlight (durante el hook de integración [`astro:config:setup`](https://docs.astro.build/es/reference/integrations-reference/#astroconfigsetup)).
+La función de configuración es llamada cuando se inicializa Starlight (durante el hook de integración [`astro:config:setup`](https://docs.astro.build/es/reference/integrations-reference/#astroconfigsetup)).
 
 El hook `setup` se puede utilizar para actualizar la configuración de Starlight o añadir integraciones de Astro.
 
@@ -66,7 +66,7 @@ Proporciona las claves de configuración de nivel raíz que deseas sobreescribir
 Para actualizar los valores de configuración anidados, debes proporcionar el objeto anidado completo.
 
 Para extender una opción de configuración existente sin sobreescribirla, extiende el valor existente en tu nuevo valor.
-En el siguiente ejemplo, una nueva cuenta de redes sociales se añade a la configuración existente de [`social`](/reference/configuration/#social) extendiendo `config.social` en el nuevo objeto `social`:
+En el siguiente ejemplo, se agrega una nueva cuenta en [`social`](/reference/configuration/#social) a la configuración existente extendiendo 'config.social' en el nuevo objeto social:
 
 ```ts {6-11}
 // plugin.ts
