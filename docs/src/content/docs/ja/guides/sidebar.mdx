@@ -310,6 +310,50 @@ starlight({
 	]}
 />
 
+## カスタムHTML属性
+
+リンク要素にカスタムのHTML属性を追加するには、`attrs`プロパティを使用します。
+
+以下の例では、リンクが新しいタブで開かれるよう、`attrs`を使用して`target="_blank"`属性を追加しています。また、リンクのラベルにカスタムの`style`属性を適用して斜体にします。
+
+```js
+starlight({
+	sidebar: [
+		{
+			label: 'ガイド',
+			items: [
+				// 新しいタブで開かれる、Astroドキュメントへの外部リンク。
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'ガイド',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## 国際化
 
 リンクやグループのラベルをサポート対象の言語向けに翻訳するには、リンクやグループのエントリに`translations`プロパティを使用します。`label`プロパティは、デフォルトのロケールと、翻訳がない言語に対して使用されます。
