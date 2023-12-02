@@ -411,6 +411,16 @@ Cuando sea `false`, se utilizan los colores proporcionados por el tema de resalt
 Cuando usas temas personalizados y estableces esto en `true`, debes proporcionar por lo menos un tema oscuro y uno claro para asegurar un contraste de color adecuado.
 :::
 
+### `pagefind`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https://pagefind.app/) está habilitado.
+
+Establece esta opción a `false` para excluir una página de los resultados de búsqueda.
+Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
+
 ### `head`
 
 **tipo:** [`HeadConfig[]`](#headconfig)
@@ -519,3 +529,18 @@ starlight({
 ```
 
 Consulta la [Referencia de Personalización de Componentes](/es/reference/overrides/) para obtener detalles de todos los componentes que puedes anular.
+
+### `plugins`
+
+**tipo:** [`StarlightPlugin[]`](/es/reference/plugins/#referencia-rápida-de-la-api)
+
+Extiende Starlight con plugins personalizados.
+Los plugins aplican cambios a tu proyecto para modificar o agregar a las funcionalidades a Starlight.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Vea la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.
