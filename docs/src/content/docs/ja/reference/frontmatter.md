@@ -220,9 +220,21 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**type:** [`SidebarConfig`](#sidebarconfig)
 
 自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -290,5 +302,21 @@ sidebar:
   badge:
     text: 実験的
     variant: caution
+---
+```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+自動生成されるリンクのグループ内に表示されるサイドバーのページリンクに追加するHTML属性。
+
+```md
+---
+title: 新しいタブで開くページ
+sidebar:
+  # 新しいタブでページを開きます
+  attrs:
+    target: _blank
 ---
 ```
