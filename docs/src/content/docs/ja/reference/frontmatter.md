@@ -5,8 +5,9 @@ description: Starlightがデフォルトでサポートするフロントマタ�
 
 Starlightでは、フロントマターに値を設定することで、MarkdownとMDXのページを個別にカスタマイズできます。たとえば通常のページでは、`title`と`description`フィールドを設定します。
 
-```md
+```md {3-4}
 ---
+# src/content/docs/example.md
 title: このプロジェクトについて
 description: 私が取り組んでいるプロジェクトについてもっと知る。
 ---
@@ -42,6 +43,7 @@ description: 私が取り組んでいるプロジェクトについてもっと�
 
 ```md
 ---
+# src/content/docs/example.md
 title: 私たちについて
 head:
   # カスタム<title>タグを使う
@@ -58,6 +60,7 @@ head:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 目次にH2のみを表示するページ
 tableOfContents:
   minHeadingLevel: 2
@@ -67,6 +70,7 @@ tableOfContents:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 目次のないページ
 tableOfContents: false
 ---
@@ -89,6 +93,7 @@ tableOfContents: false
 
 ```md
 ---
+# src/content/docs/example.md
 title: 私のホームページ
 template: splash
 hero:
@@ -112,6 +117,7 @@ hero:
 
 ```md
 ---
+# src/content/docs/example.md
 hero:
   image:
     alt: キラリと光る、鮮やかなロゴ
@@ -165,6 +171,7 @@ interface HeroConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: バナーを含むページ
 banner:
   content: |
@@ -181,6 +188,7 @@ banner:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 最終更新日をカスタマイズしたページ
 lastUpdated: 2022-08-09
 ---
@@ -194,6 +202,7 @@ lastUpdated: 2022-08-09
 
 ```md
 ---
+# src/content/docs/example.md
 # 前のページへのリンクを非表示にする
 prev: false
 ---
@@ -201,6 +210,7 @@ prev: false
 
 ```md
 ---
+# src/content/docs/example.md
 # 前のページへのリンクテキストを上書きする
 prev: チュートリアルを続ける
 ---
@@ -208,6 +218,7 @@ prev: チュートリアルを続ける
 
 ```md
 ---
+# src/content/docs/example.md
 # 前のページへのリンクとテキストを上書きする
 prev:
   link: /unrelated-page/
@@ -223,6 +234,7 @@ prev:
 
 ```md
 ---
+# src/content/docs/example.md
 # 次のページへのリンクを非表示にする
 next: false
 ---
@@ -237,6 +249,7 @@ next: false
 
 ```md
 ---
+# src/content/docs/example.md
 # このページを検索インデックスから外す
 pagefind: false
 ---
@@ -269,6 +282,7 @@ interface SidebarConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: このプロジェクトについて
 sidebar:
   label: 概要
@@ -283,6 +297,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 最初に表示するページ
 sidebar:
   order: 1
@@ -298,6 +313,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 自動生成されるサイドバーで非表示にするページ
 sidebar:
   hidden: true
@@ -312,6 +328,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: バッジを含むページ
 sidebar:
   # サイトのアクセントカラーに合わせたデフォルトのバリアントを使用します
@@ -321,6 +338,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: バッジを含むページ
 sidebar:
   badge:
@@ -337,6 +355,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 新しいタブで開くページ
 sidebar:
   # 新しいタブでページを開きます
