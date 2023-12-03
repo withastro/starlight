@@ -126,7 +126,7 @@ starlight({
 
 自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
 
-```js
+```js {5,16}
 sidebar: [
   // 折りたたまれたリンクのグループ。
   {
@@ -152,21 +152,21 @@ sidebar: [
 
 多言語対応が必要なサイトの場合、各項目の`label`はデフォルトのロケールのものとみなされます。サポート対象の言語のラベルを提供するには、`translations`プロパティを設定します。
 
-```js
+```js {5,9,14}
 sidebar: [
-  // フランス語に翻訳されたラベルをもつサイドバーの例。
+  // ブラジルポルトガル語に翻訳されたラベルをもつサイドバーの例。
   {
     label: 'ここから始める',
-    translations: { fr: 'Commencez ici' },
+    translations: { 'pt-BR': 'Comece Aqui' },
     items: [
       {
         label: '開始する',
-        translations: { fr: 'Bien démarrer' },
+        translations: { 'pt-BR': 'Introdução' },
         link: '/getting-started',
       },
       {
         label: 'プロジェクトの構造',
-        translations: { fr: 'Structure du projet' },
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
         link: '/structure',
       },
     ],
@@ -180,10 +180,11 @@ sidebar: [
 type SidebarItem = {
   label: string;
   translations?: Record<string, string>;
+  badge?: string | BadgeConfig;
 } & (
   | {
       link: string;
-      badge?: string | BadgeConfig;
+      attrs?: Record<string, string | number | boolean | undefined>;
     }
   | { items: SidebarItem[]; collapsed?: boolean }
   | {
@@ -204,14 +205,13 @@ interface BadgeConfig {
 
 ### `locales`
 
-**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
+**type:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
 [サイトの国際化（i18n）をおこなうには](/ja/guides/i18n/)、サポート対象の`locales`を設定します。
 
 各エントリは、その言語のファイルが保存されているディレクトリ名をキーとして使用する必要があります。
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -276,7 +276,7 @@ interface LocaleConfig {
 
 `root`ロケールを設定することで、`/lang/`ディレクトリなしでデフォルト言語を提供できます。
 
-```js
+```js {3-6}
 starlight({
   locales: {
     root: {
@@ -302,7 +302,9 @@ starlight({
 
 ### `social`
 
-**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'instagram' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'stackOverflow' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
+import SocialLinksType from '../../../../components/social-links-type.astro';
+
+**type:** <SocialLinksType />
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
@@ -318,6 +320,7 @@ starlight({
     threads: 'https://www.threads.net/@nmoodev',
     twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    'x.com': 'https://x.com/astrodotbuild',
     youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
@@ -336,6 +339,75 @@ starlight({
   customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
+
+### `expressiveCode`
+
+**type:** `StarlightExpressiveCodeOptions | boolean`  
+**default:** `true`
+
+Starlightは、[Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)を使用して、コードブロックのレンダリングやコード例の一部のハイライト、コードブロックへのファイル名の追加などをおこなっています。MarkdownやMDXのコンテンツでExpressive Code構文を使用する方法については、[「コードブロック」ガイド](/ja/guides/authoring-content/#コード)を参照してください。
+
+[Expressive Code標準の設定オプション](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration)はすべて使用できます。また、Starlightの`expressiveCode`オプションを設定することで、Starlight固有のプロパティも使用できます。たとえば、Expressive Codeの`styleOverrides`オプションを設定して、デフォルトのCSSを上書きできます。これにより、コードブロックに角丸を付けるなどのカスタマイズが可能になります。
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+Expressive Codeを無効にするには、Starlightの設定で`expressiveCode: false`を設定します。
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+標準のExpressive Codeオプションに加えて、`expressiveCode`の設定に以下のStarlight固有のプロパティを追加することで、コードブロックのテーマの動作をさらにカスタマイズできます。
+
+#### `themes`
+
+**type:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**default:** `['starlight-dark', 'starlight-light']`
+
+コードブロックのスタイルに使用するテーマを設定します。サポートされているテーマのフォーマットの詳細については、[Expressive Codeの`themes`ドキュメント](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)を参照してください。
+
+Starlightは、デフォルトでSarah Drasnerの[Night Owlテーマ](https://github.com/sdras/night-owl-vscode-theme)のダークとライトのバリアントを使用します。
+
+ダークテーマとライトテーマを少なくとも1つずつ提供すると、Starlightは自動的にアクティブなコードブロックのテーマを現在のサイトテーマと同期します。この動作は[`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch)オプションから設定できます。
+
+#### `useStarlightDarkModeSwitch`
+
+**type:** `boolean`  
+**default:** `true`
+
+`true`の場合、サイトテーマが変更されると、コードブロックは自動的にライトテーマとダークテーマを切り替えます。`false`の場合、複数のテーマの切り替えをおこなうために、手動でCSSを追加する必要があります。
+
+:::note
+`themes`を設定する場合、Starlightのダークモードスイッチが機能するように、ダークテーマとライトテーマを少なくとも1つずつ設定する必要があります。
+:::
+
+#### `useStarlightUiThemeColors`
+
+**type:** `boolean`  
+**default:** `themes`が設定されていない場合は`true`、それ以外の場合は`false`
+
+`true`の場合、コードブロックのUI要素（背景、ボタン、シャドウなど）の色にStarlightのCSS変数が使用され、[サイトのカラーテーマ](/ja/guides/css-and-tailwind/#テーマの設定)と一致させます。`false`の場合、これらの要素には、アクティブなシンタックスハイライトのテーマから提供される色が使用されます。
+
+:::note
+カスタムテーマを使用し、かつこの値を`true`に設定する場合、適切な色のコントラストを確保するために、ダークテーマとライトテーマを少なくとも1つずつ提供する必要があります。
+:::
+
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Starlightのデフォルトのサイト検索プロバイダである[Pagefind](https://pagefind.app/)を有効にするかどうかを定義します。
+
+`false`に設定すると、Pagefindによるサイトのインデックス作成はおこなわれません。また、デフォルトの検索UIを使用している場合は、これも非表示になります。
 
 ### `head`
 
@@ -418,3 +490,42 @@ starlight({
   ],
 });
 ```
+
+### `titleDelimiter`
+
+**type:** `string`  
+**default:** `'|'`
+
+ブラウザのタブに表示される、ページの`<title>`タグ内のページタイトルとサイトタイトルの間の区切り文字を設定します。
+
+デフォルトでは、すべてのページの`<title>`は`ページタイトル | サイトタイトル`となります。たとえば、このページのタイトルは「設定方法」であり、このサイトのタイトルは「Starlight」なので、このページの`<title>`は「設定方法 | Starlight」となります。
+
+### `components`
+
+**type:** `Record<string, string>`
+
+コンポーネントへのパスを指定して、Starlightのデフォルトの実装をオーバーライドします。
+
+```js
+starlight({
+  components: {
+    SocialLinks: './src/components/MySocialLinks.astro',
+  },
+});
+```
+
+オーバーライド可能なすべてのコンポーネントの詳細については、[オーバーライドリファレンス](/ja/reference/overrides/)を参照してください。
+
+### `plugins`
+
+**type:** [`StarlightPlugin[]`](/reference/plugins/#quick-api-reference)
+
+Starlightをカスタムプラグインにより拡張します。プラグインは、Starlightの機能を変更または追加するために、プロジェクトに変更を適用します。
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+独自のプラグインを作成する方法の詳細については、[プラグインリファレンス](/ja/reference/plugins/)を参照してください。
