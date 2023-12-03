@@ -12,11 +12,11 @@ Starlightは[Astro](https://astro.build)ウェブフレームワークの上に�
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '私の楽しいドキュメントサイト',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '私の楽しいドキュメントサイト',
+		}),
+	],
 });
 ```
 
@@ -42,9 +42,9 @@ export default defineConfig({
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -52,8 +52,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -72,9 +72,9 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -96,23 +96,23 @@ starlight({
 
 ```js
 starlight({
-  sidebar: [
-    // 「ホーム」というラベルのついた単一のリンク。
-    { label: 'ホーム', link: '/' },
-    // 2つのリンクを含む、「ここから始める」というラベルのついたグループ。
-    {
-      label: 'ここから始める',
-      items: [
-        { label: 'はじめに', link: '/intro' },
-        { label: '次のステップ', link: '/next-steps' },
-      ],
-    },
-    // referenceディレクトリのすべてのページにリンクするグループ。
-    {
-      label: 'リファレンス',
-      autogenerate: { directory: 'reference' },
-    },
-  ],
+	sidebar: [
+		// 「ホーム」というラベルのついた単一のリンク。
+		{ label: 'ホーム', link: '/' },
+		// 2つのリンクを含む、「ここから始める」というラベルのついたグループ。
+		{
+			label: 'ここから始める',
+			items: [
+				{ label: 'はじめに', link: '/intro' },
+				{ label: '次のステップ', link: '/next-steps' },
+			],
+		},
+		// referenceディレクトリのすべてのページにリンクするグループ。
+		{
+			label: 'リファレンス',
+			autogenerate: { directory: 'reference' },
+		},
+	],
 });
 ```
 
@@ -178,19 +178,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
-  badge?: string | BadgeConfig;
+	label: string;
+	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
-  | {
-      link: string;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -198,8 +198,8 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
@@ -216,29 +216,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Site',
-      // このサイトのデフォルト言語を英語に設定します。
-      defaultLocale: 'en',
-      locales: {
-        // 英語のドキュメントは`src/content/docs/en/`にあります。
-        en: {
-          label: 'English',
-        },
-        // 簡体字中国語のドキュメントは`src/content/docs/zh-cn/`にあります。
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // アラビア語のドキュメントは`src/content/docs/ar/`にあります。
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Site',
+			// このサイトのデフォルト言語を英語に設定します。
+			defaultLocale: 'en',
+			locales: {
+				// 英語のドキュメントは`src/content/docs/en/`にあります。
+				en: {
+					label: 'English',
+				},
+				// 簡体字中国語のドキュメントは`src/content/docs/zh-cn/`にあります。
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// アラビア語のドキュメントは`src/content/docs/ar/`にあります。
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -246,9 +246,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -278,15 +278,15 @@ interface LocaleConfig {
 
 ```js {3-6}
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    fr: {
-      label: 'Français',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
 });
 ```
 
@@ -310,19 +310,19 @@ import SocialLinksType from '../../../../components/social-links-type.astro';
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -336,7 +336,7 @@ Starlightサイトの見た目をカスタマイズするためのCSSファイ�
 
 ```js
 starlight({
-  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -417,17 +417,17 @@ Starlightサイトの`<head>`にカスタムタグを追加します。アナリ
 
 ```js
 starlight({
-  head: [
-    // Fathomのアナリティクススクリプトタグを追加する例。
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Fathomのアナリティクススクリプトタグを追加する例。
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -435,9 +435,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -508,9 +508,9 @@ starlight({
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 
