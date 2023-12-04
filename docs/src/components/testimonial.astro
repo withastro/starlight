@@ -45,8 +45,14 @@ const pageDir = slugToLocaleData(slug).dir;
 			) : null
 		}
 		<slot />
-		{date ? <span>posted on {date?.toLocaleDateString()}</span> : null}
 	</div>
+	{
+		date ? (
+			<div class="testimonial-date">
+				posted on <time datetime={date.toISOString()}>{date.toLocaleDateString()}</time>
+			</div>
+		) : null
+	}
 </li>
 
 <style>
@@ -96,5 +102,9 @@ const pageDir = slugToLocaleData(slug).dir;
 		flex-direction: column;
 		gap: 1rem;
 		font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+		text-align: start;
+	}
+	.testimonial-date {
+		margin-top: 1rem;
 	}
 </style>
