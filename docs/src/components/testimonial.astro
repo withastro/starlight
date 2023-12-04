@@ -10,9 +10,10 @@ interface Props {
 	date?: Date;
 	link?: URL;
 	dir?: 'rtl' | 'ltr';
+	lang?: string;
 }
 
-const { content, name, handle, avatar, date, link, dir } = Astro.props;
+const { content, name, handle, avatar, date, link, dir, lang } = Astro.props;
 
 // The current page's slug.
 const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
@@ -38,7 +39,11 @@ const pageDir = slugToLocaleData(slug).dir;
 		</div>
 	</div>
 	<div class="testimonial-body" dir={dir ?? pageDir}>
-		{content ? <blockquote cite={link ? link.toString() : ''} set:html={content} /> : null}
+		{
+			content ? (
+				<blockquote lang={lang ?? pageDir} cite={link ? link.toString() : ''} set:html={content} />
+			) : null
+		}
 		<slot />
 		{date ? <span>posted on {date?.toLocaleDateString()}</span> : null}
 	</div>

@@ -24,6 +24,8 @@ hero:
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
 import AboutAstro from '../../../components/about-astro.astro';
+import TestimonialGrid from '../../../components/testimonial-grid.astro';
+import Testimonial from '../../../components/testimonial.astro';
 
 <CardGrid stagger>
 	<Card title="दस्तावेज़ीकरण जो आनंदित करता है" icon="open-book">
@@ -43,6 +45,15 @@ import AboutAstro from '../../../components/about-astro.astro';
 		उपलब्ध है। React, Vue, Svelte, Solid और अन्य के साथ विस्तार करें।
 	</Card>
 </CardGrid>
+
+<TestimonialGrid title="Testimonials">
+  <Testimonial dir="ltr" lang="en" date={new Date('10-10-23')} link={new URL('https://x.com/eliancodes')} avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
+  <Testimonial lang="en" name="HiDeoo" handle="HiDeoo">
+    <p>So what's the deal with Starlight?</p>
+    <button>I just wanted a button</button>
+    <button>I really like buttons 🤣</button>
+  </Testimonial>
+</TestimonialGrid>
 
 <AboutAstro title="आप तक लाने वाले हैं">
 Astro गति के लिए डिज़ाइन किया गया ऑल-इन-वन वेब फ्रेमवर्क है।
