@@ -82,7 +82,7 @@ entry: {
   data: {
     title: string;
     description: string | undefined;
-    // etc.
+    // その他の値
   }
 }
 ```
