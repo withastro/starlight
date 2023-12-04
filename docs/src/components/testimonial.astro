@@ -16,15 +16,12 @@ const { content, name, handle, avatar, date, link, dir } = Astro.props;
 
 // The current page's slug.
 const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
-const pageDir = slugToLocaleData(slug).dir
+const pageDir = slugToLocaleData(slug).dir;
 ---
 
 <li class="testimonial">
 	<div class="testimonial-heading">
-		{ avatar ? (
-			<Image class="avatar" height="50" width="50" src={avatar} alt="image" />
-			) : null
-		}
+		{avatar ? <Image class="avatar" height="50" width="50" src={avatar} alt="image" /> : null}
 		<div class="testimonial-title">
 			<p class="title">
 				{name}
@@ -41,7 +38,7 @@ const pageDir = slugToLocaleData(slug).dir
 		</div>
 	</div>
 	<div class="testimonial-body" dir={dir ?? pageDir}>
-		{content ? <blockquote set:html={content}></blockquote> : null}
+		{content ? <blockquote cite={link ? link.toString() : ''} set:html={content} /> : null}
 		<slot />
 		{date ? <span>posted on {date?.toLocaleDateString()}</span> : null}
 	</div>
