@@ -7,6 +7,22 @@ Starlight는 `.md` 파일에서 제목 및 설명과 같은 메타데이터를 �
 
 해당 파일 형식을 사용하는 경우 Markdown 지원 및 사용법이 다를 수 있으므로 [MDX 문서](https://mdxjs.com/docs/what-is-mdx/#markdown) 또는 [Markdoc 문서](https://markdoc.dev/docs/syntax)를 확인하세요.
 
+## 프런트매터
+
+프런트매터의 값을 설정하여 Starlight의 개별 페이지를 사용자 정의할 수 있습니다.
+프런트매터는 다음과 같이 파일 상단에 `---` 구분 기호를 사용하여 설정합니다.
+
+```md title="src/content/docs/example.md"
+---
+title: 페이지 제목
+---
+
+페이지의 콘텐츠는 두 번째 `---` 뒤에 옵니다.
+```
+
+모든 페이지에는 최소 하나의 `title`이 포함되어야 합니다.
+사용 가능한 모든 필드를 확인하고 사용자 정의 필드를 추가하는 방법을 알아보기 위해 [프런트매터 참조](/ko/reference/frontmatter/)를 확인하세요.
+
 ## 인라인 스타일
 
 텍스트는 **굵게**, _기울임꼴_ 또는 ~~취소선~~으로 표시할 수 있습니다.
