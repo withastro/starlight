@@ -233,3 +233,28 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+### 번역 스키마 확장
+
+`i18nSchema()` 옵션에서 `extend`를 설정하여 사이트 번역 사전에 맞춤 키를 추가하세요.
+다음 예시에서는 기본 키에 새로운 선택적 `custom.label` 키가 추가됩니다.
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
