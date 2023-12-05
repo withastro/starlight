@@ -44,7 +44,7 @@ Hooks são funções que o Starlight chama para executar um código do plugin em
 
 ### `hooks.setup`
 
-Função de setup chamada quanto o Starlight é iniciado (durante a execução do hook de integração [`astro:config:setup`](https://docs.astro.build/pt-br/reference/integrations-reference/#astroconfigsetup)).
+Função de setup chamada quando o Starlight é iniciado (durante a execução do hook de integração [`astro:config:setup`](https://docs.astro.build/pt-br/reference/integrations-reference/#astroconfigsetup)).
 O hook `setup` pode ser utilizado para atualizar a configuração do Starlight ou adicionar integrações ao Astro.
 
 Este hook é chamado com as seguintes opções:
