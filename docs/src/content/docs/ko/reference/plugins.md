@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Starlight 플러그인은 Starlight 구성, UI, 동작을 사용자 정의할 수 있을 뿐만 아니라 공유 및 재사용하기도 쉽습니다. 
+Starlight 플러그인은 Starlight 구성, UI, 동작을 사용자 정의할 수 있을 뿐만 아니라 공유 및 재사용하기도 쉽습니다.
 이 참조 페이지에는 플러그인이 액세스할 수 있는 API가 문서화되어 있습니다.
 
 [구성 참조](/ko/reference/configuration/#plugins)에서 Starlight 플러그인 사용에 대해 자세히 알아보세요.
@@ -53,15 +53,15 @@ Starlight가 초기화될 때 호출되는 플러그인 설정 함수입니다 (
 
 **타입:** `StarlightUserConfig`
 
-사용자 제공 [Starlight 구성](/ko/reference/configuration)의 읽기 전용 복사본입니다. 
+사용자 제공 [Starlight 구성](/ko/reference/configuration)의 읽기 전용 복사본입니다.
 이 구성은 현재 플러그인 이전에 구성된 다른 플러그인에 의해 업데이트되었을 수 있습니다.
 
 #### `updateConfig`
 
 **타입:** `(newConfig: StarlightUserConfig) => void`
 
-사용자가 제공한 [Starlight 구성](/ko/reference/configuration)을 업데이트하는 콜백 함수입니다. 
-재정의하려는 루트 수준 구성 키를 제공합니다. 
+사용자가 제공한 [Starlight 구성](/ko/reference/configuration)을 업데이트하는 콜백 함수입니다.
+재정의하려는 루트 수준 구성 키를 제공합니다.
 중첩된 구성 값을 업데이트하려면 전체 중첩 객체를 제공해야 합니다.
 
 기존 구성 옵션을 재정의하지 않고 확장하려면 기존 값을 새 값에 전개하여 확장하세요.
@@ -133,14 +133,14 @@ Starlight를 실행하는 데 사용되는 명령:
 
 **타입:** `boolean`
 
-개발 서버가 시작되면 `false`, 서버가 다시 시작되면 `true`입니다. 
+개발 서버가 시작되면 `false`, 서버가 다시 시작되면 `true`입니다.
 개발 서버 재시작의 일반적인 이유에는 개발 서버가 실행되는 동안 사용자가 `astro.config.mjs`를 편집하는 경우가 포함됩니다.
 
 #### `logger`
 
 **타입:** `AstroIntegrationLogger`
 
-로그를 작성하는 데 사용할 수 있는 [Astro 통합 로거](https://docs.astro.build/ko/reference/integrations-reference/#astrointegrationlogger)의 인스턴스입니다. 
+로그를 작성하는 데 사용할 수 있는 [Astro 통합 로거](https://docs.astro.build/ko/reference/integrations-reference/#astrointegrationlogger)의 인스턴스입니다.
 기록된 모든 메시지에는 플러그인 이름이 앞에 추가됩니다.
 
 ```ts {6}
