@@ -5,11 +5,11 @@ description: Aprenda como configurar seu site Starlight para suportar vários id
 
 import FileTree from '../../../../components/file-tree.astro';
 
-O Starlight provê suporte integrado para sites multi-idioma, incluindo roteamento, conteúdo de fallback e suporte completo para idiomas direita para esquerda (RTL).
+O Starlight oferece suporte integrado para sites multi-idioma, incluindo roteamento, conteúdo de fallback e suporte completo para idiomas direita para esquerda (RTL).
 
 ## Configurar i18n
 
-1. Diga ao Starlight os idiomas suportados, passando [`locales`](/pt-br/reference/configuration/#locales) e [`defaultLocale`](/pt-br/reference/configuration/#defaultlocale) para a integração Starlight:
+1. Diga ao Starlight os idiomas que você suporta, passando [`locales`](/pt-br/reference/configuration/#locales) e [`defaultLocale`](/pt-br/reference/configuration/#defaultlocale) para a integração Starlight:
 
    ```js {9-26}
    // astro.config.mjs
@@ -43,7 +43,7 @@ O Starlight provê suporte integrado para sites multi-idioma, incluindo roteamen
    });
    ```
 
-   O `defaultLocale` será utilizado para o conteúdo de fallback e rótulos da UI, então escolha o idioma que é a mais provável que você começe a escrever conteúdo, ou já tem conteúdo escrito.
+   Seu `defaultLocale` será utilizado para o conteúdo de fallback e rótulos da UI, então escolha o idioma que é a mais provável que você começe a escrever conteúdo, ou já tem conteúdo escrito.
 
 2. Crie um diretório para cada idioma em `src/content/docs/`.
    Por exemplo, para a configuração mostrada acima, crie as seguintes pastas:
@@ -135,7 +135,7 @@ Isso te permite sobrescrever o idioma padrão do Starlight sem habilitar outras 
 
 ## Conteúdo de Fallback
 
-Starlight espera que você crie páginas equivalentes em todos os idiomas. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outro idioma que o site suporta. Isso permite ao Starlight prover conteúdo de fallback automático para páginas que você ainda não tenha traduzido.
+Starlight espera que você crie páginas equivalentes em todos os idiomas. Por exemplo, se você tem um arquivo `en/about.md` crie, um `about.md` para cada outro idioma que o site suporta. Isso permite ao Starlight oferecer conteúdo de fallback automático para páginas que você ainda não tenha traduzido.
 
 Se uma tradução ainda não está disponível para um idioma, Starlight irá mostrar aos leitores o conteúdo dessa página no idioma padrão (definido através de `defaultLocale`). Por exemplo, se você ainda não criou uma versão em Francês da sua página "Sobre" e seu idioma padrão é Português do Brasil, visitantes de `/fr/about` verão o conteúdo em Português do Brasil de `/pt-br/about` com um aviso de que esta página ainda não foi traduzida. Isso te ajuda a adicionar conteúdo no seu idioma padrão e então progressivamente traduzí-lo quando seus tradutores tiverem tempo.
 
@@ -162,7 +162,7 @@ Você pode fornecer traduções para idiomas adicionais que você suporta — ou
    };
    ```
 
-2. Crie um arquivo JSON em `src/content/i18n/` para cada localidade adicional que você quer prover tradução de strings da UI.
+2. Crie um arquivo JSON em `src/content/i18n/` para cada localidade adicional que você quer oferecer tradução de strings da UI.
    Por exemplo, isso adicionaria arquivos de tradução para Árabe e Chinês Simplificado:
 
    <FileTree>
