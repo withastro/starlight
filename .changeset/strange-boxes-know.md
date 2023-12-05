@@ -1,4 +1,4 @@
 ---
 '@astrojs/starlight': patch
 ---
-Add Matrix social link icon
+Adds Matrix social link icon
