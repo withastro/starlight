@@ -5,10 +5,10 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Os plugins do Starlight podem personalizar a configuração, UI, e comportamento, enquanto traz facilidade em compartilhar e reutilizar.
-Essa página documenta as referências da API que os plugins tem acesso.
+Os plugins do Starlight podem personalizar a configuração, UI, e comportamento, além de serem fáceis de compartilhar e reutilizar.
+Essa página de referência documenta a API que os plugins tem acesso.
 
-Aprenda mais sobre como usar um plugin do Starlight em [Referência da Configuração](/pt-br/reference/configuration/#plugins).
+Aprenda mais sobre como usar um plugin do Starlight na [Referência da Configuração](/pt-br/reference/configuration/#plugins).
 
 ## Referência rápida da API
 
@@ -40,7 +40,7 @@ Um plugin deve fornecer um nome único que o descreve. O nome é usado nas [mens
 
 ## `hooks`
 
-Hooks são funções que o Starlight chama para executar um código do plugin em um momento específico. Atualmente, o Starlight suporta apenas o hook `setup`.
+Hooks são funções que o Starlight chama para executar um código do plugin em momentos específicos. Atualmente, o Starlight suporta apenas o hook `setup`.
 
 ### `hooks.setup`
 
@@ -53,19 +53,19 @@ Este hook é chamado com as seguintes opções:
 
 **tipo:** `StarlightUserConfig`
 
-Um cópia somente-leitura da [Configuração do Starlight](/pt-br/reference/configuration/) fornecida pelo usuário.
+Uma cópia somente leitura da [configuração do Starlight](/pt-br/reference/configuration/) fornecida pelo usuário.
 Essa configuração pode ter sido atualizada por outros plugins configurados antes desse.
 
 #### `updateConfig`
 
 **tipo:** `(newConfig: StarlightUserConfig) => void`
 
-Uma função de callback para atualizar a [Configuração do Starlight](/pt-br/reference/configuration/) fornecida pelo usuário.
-Forceça as chaves de configuração no nível-raiz que você quer sobrescrever.
+Uma função de callback para atualizar a [configuração do Starlight](/pt-br/reference/configuration/) fornecida pelo usuário.
+Forneça as chaves de configuração no nível-raiz que você quer sobrescrever.
 Para atualizar valores de configuração aninhados, você precisa fornecer todo o objeto aninhado.
 
-Para extender uma configuração existênte sem sobrescrevê-la, distribua os valores existentes no novo valor.
-No seguinte exemplo, uma nova conta de mídia [`social`](/pt-br/reference/configuration/#social) é adicionada à configuração existente distribuindo o objeto `config.social` no novo objeto `social`:
+Para estender uma configuração existente sem sobrescrevê-la, espalhe os valores existentes no novo valor.
+No seguinte exemplo, uma nova conta de mídia [`social`](/pt-br/reference/configuration/#social) é adicionada à configuração existente espalhando o objeto `config.social` no novo objeto `social`:
 
 ```ts {6-11}
 // plugin.ts
@@ -89,6 +89,7 @@ export default {
 **tipo:** `(integration: AstroIntegration) => void`
 
 Uma função de callback para adicionar uma [Integração Astro](https://docs.astro.build/pt-br/reference/integrations-reference/) requerida pelo plugin.
+
 No seguinte exemplo, o plugin primeiro verifica se a [Integração de React do Astro](https://docs.astro.build/pt-br/guides/integrations-guide/react/) está configurada, caso não esteja, usa `addIntegration()` para adicioná-la:
 
 ```ts {14} "addIntegration,"
@@ -116,7 +117,7 @@ export default {
 
 **tipo:** `AstroConfig`
 
-Uma cópia somente-leitura da [Configuração do Astro](https://docs.astro.build/pt-br/reference/configuration-reference/) fornecida pelo usuário.
+Uma cópia somente leitura da [configuração do Astro](https://docs.astro.build/pt-br/reference/configuration-reference/) fornecida pelo usuário.
 
 #### `command`
 
@@ -132,15 +133,15 @@ O comando usado para executar o Starlight:
 
 **tipo:** `boolean`
 
-`false` quando o servidor dev é iniciado, `true` quando uma atualização é disparada.
-Razões comuns para um reinicio incluem um usuário edtitando o arquivo `astro.config.mjs` enquanto o servidor dev está sendo executado.
+`false` quando o servidor de desenvolvimento é iniciado, `true` quando uma atualização é disparada.
+Razões comuns para um reinicio incluem um usuário editando o arquivo `astro.config.mjs` enquanto o servidor de desenvolvimento está sendo executado.
 
 #### `logger`
 
 **tipo:** `AstroIntegrationLogger`
 
-Uma instância do [Astro Logger](https://docs.astro.build/pt-br/reference/integrations-reference/#astrointegrationlogger) que você pode usar para escrever logs.
-Todas as mensagens de log serão pré-fixadas com o nome do plugin.
+Uma instância do [Astro logger](https://docs.astro.build/pt-br/reference/integrations-reference/#astrointegrationlogger) que você pode usar para escrever logs.
+Todas as mensagens de log serão prefixadas com o nome do plugin.
 
 ```ts {6}
 // plugin.ts
@@ -149,13 +150,13 @@ export default {
   hooks: {
     plugin({ logger }) {
       logger.info('Iniciando um processo longo…');
-      // Algum processo long…
+      // Algum processo longo…
     },
   },
 };
 ```
 
-O exemplo acima, registrará uma mensagem de log que inclui a informação fornecida:
+O exemplo acima registrará um log que inclui a mensagem `info` fornecida:
 
 ```shell
 [long-process-plugin] Iniciando um processo longo…
