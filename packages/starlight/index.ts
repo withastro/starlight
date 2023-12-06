@@ -7,28 +7,38 @@ import { starlightAsides } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
+import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import type { StarlightConfig } from './types';
 
-export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration {
-	const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
-
-	if (!parsedConfig.success) {
-		throw new Error(
-			'Invalid config passed to starlight integration\n' +
-				parsedConfig.error.issues.map((i) => i.message).join('\n')
-		);
-	}
-
-	const userConfig = parsedConfig.data;
-
-	const Starlight: AstroIntegration = {
+export default function StarlightIntegration({
+	plugins,
+	...opts
+}: StarlightUserConfigWithPlugins): AstroIntegration {
+	let userConfig: StarlightConfig;
+	return {
 		name: '@astrojs/starlight',
 		hooks: {
-			'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
-				const useTranslations = createTranslationSystemFromFs(userConfig, config);
+			'astro:config:setup': async ({
+				command,
+				config,
+				injectRoute,
+				isRestart,
+				logger,
+				updateConfig,
+			}) => {
+				// Run plugins to get the final configuration and any extra Astro integrations to load.
+				const { integrations, starlightConfig } = await runPlugins(opts, plugins, {
+					command,
+					config,
+					isRestart,
+					logger,
+				});
+				userConfig = starlightConfig;
+
+				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
+
 				injectRoute({
 					pattern: '404',
 					entryPoint: '@astrojs/starlight/404.astro',
@@ -37,34 +47,28 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 					pattern: '[...slug]',
 					entryPoint: '@astrojs/starlight/index.astro',
 				});
-				const integrations: AstroIntegration[] = [];
-				if (!config.integrations.find(({ name }) => name === 'astro-expressive-code')) {
+				// Add built-in integrations only if they are not already added by the user through the
+				// config or by a plugin.
+				const allIntegrations = [...config.integrations, ...integrations];
+				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
 					integrations.push(
-						...starlightExpressiveCode({
-							starlightConfig: userConfig,
-							astroConfig: config,
-							useTranslations,
-						})
+						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations })
 					);
 				}
-				if (!config.integrations.find(({ name }) => name === '@astrojs/sitemap')) {
-					integrations.push(starlightSitemap(userConfig));
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
+					integrations.push(starlightSitemap(starlightConfig));
 				}
-				if (!config.integrations.find(({ name }) => name === '@astrojs/mdx')) {
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
 				}
 				const newConfig: AstroUserConfig = {
 					integrations,
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(userConfig, config)],
+						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
 					},
 					markdown: {
 						remarkPlugins: [
-							...starlightAsides({
-								starlightConfig: userConfig,
-								astroConfig: config,
-								useTranslations,
-							}),
+							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
 						],
 						rehypePlugins: [rehypeRtlCodeSupport()],
 						shikiConfig:
@@ -77,6 +81,7 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 			},
 
 			'astro:build:done': ({ dir }) => {
+				if (!userConfig.pagefind) return;
 				const targetDir = fileURLToPath(dir);
 				const cwd = dirname(fileURLToPath(import.meta.url));
 				const relativeDir = relative(cwd, targetDir);
@@ -90,6 +95,4 @@ export default function StarlightIntegration(opts: StarlightUserConfig): AstroIn
 			},
 		},
 	};
-
-	return Starlight;
 }
