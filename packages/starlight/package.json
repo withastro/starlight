@@ -176,18 +176,18 @@
     "@astrojs/mdx": "^2.0.0",
     "@astrojs/sitemap": "^3.0.3",
     "@pagefind/default-ui": "^1.0.3",
-    "@types/mdast": "^3.0.11",
+    "@types/mdast": "^4.0.3",
     "astro-expressive-code": "^0.29.3",
     "bcp-47": "^2.1.0",
     "execa": "^8.0.1",
-    "hast-util-select": "^5.0.5",
-    "hastscript": "^7.2.0",
+    "hast-util-select": "^6.0.2",
+    "hastscript": "^8.0.0",
     "pagefind": "^1.0.3",
-    "rehype": "^12.0.1",
-    "remark-directive": "^2.0.1",
-    "unified": "^10.1.2",
-    "unist-util-remove": "^3.1.1",
-    "unist-util-visit": "^4.1.2",
-    "vfile": "^5.3.7"
+    "rehype": "^13.0.1",
+    "remark-directive": "^3.0.0",
+    "unified": "^11.0.4",
+    "unist-util-remove": "^4.0.0",
+    "unist-util-visit": "^5.0.0",
+    "vfile": "^6.0.1"
   }
 }
