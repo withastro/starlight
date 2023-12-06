@@ -1,5 +1,51 @@
 # @astrojs/starlight
 
+## 0.15.0
+
+### Minor Changes
+
+- [#1238](https://github.com/withastro/starlight/pull/1238) [`02a808e`](https://github.com/withastro/starlight/commit/02a808e4a0b9ac2383576e3495f6a766b663d773) Thanks [@delucis](https://github.com/delucis)! - Add support for Astro v4, drop support for Astro v3
+
+  ⚠️ **BREAKING CHANGE** Astro v3 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v4/) and any other integrations at the same time as updating Starlight.
+
+  Use the new `@astrojs/upgrade` command to upgrade Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+- [#1242](https://github.com/withastro/starlight/pull/1242) [`d8fc9e1`](https://github.com/withastro/starlight/commit/d8fc9e15bd2ae4c945b5a3856a6ce3b5629e8b29) Thanks [@delucis](https://github.com/delucis)! - Enables link prefetching on hover by default
+
+  Astro v4’s [prefetch](https://docs.astro.build/en/guides/prefetch) support is now enabled by default. If `prefetch` is not set in `astro.config.mjs`, Starlight will use `prefetch: { prefetchAll: true, defaultStrategy: 'hover' }` by default.
+
+  If you want to preserve previous behaviour, disable link prefetching in `astro.config.mjs`:
+
+  ```js
+  import { defineConfig } from 'astro/config';
+  import starlight from '@astrojs/starlight';
+
+  export default defineConfig({
+  	// Disable link prefetching:
+  	prefetch: false,
+
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
+  });
+  ```
+
+### Patch Changes
+
+- [#1226](https://github.com/withastro/starlight/pull/1226) [`909afa2`](https://github.com/withastro/starlight/commit/909afa2d468099e237bfbd25eda56270b7b00082) Thanks [@tlandmangh](https://github.com/tlandmangh)! - Add Dutch translations of default aside labels
+
+- [#1243](https://github.com/withastro/starlight/pull/1243) [`ee234eb`](https://github.com/withastro/starlight/commit/ee234ebddcba8d07e2c879f33e38631c8955ffcf) Thanks [@khajimatov](https://github.com/khajimatov)! - Fix typo in Russian untranslated content notice
+
+- [#1170](https://github.com/withastro/starlight/pull/1170) [`bcc2301`](https://github.com/withastro/starlight/commit/bcc2301c06796edec3923c666078e82eaf5a1990) Thanks [@tmcw](https://github.com/tmcw)! - Fix timezone-reliance in LastUpdated
+
+- [#1203](https://github.com/withastro/starlight/pull/1203) [`4601449`](https://github.com/withastro/starlight/commit/4601449894bbbd619e4149788113090b67697fe1) Thanks [@orhun](https://github.com/orhun)! - Adds Matrix social link icon
+
 ## 0.14.0
 
 ### Minor Changes
@@ -43,12 +89,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -396,16 +442,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -784,8 +830,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
