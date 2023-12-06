@@ -1,7 +1,7 @@
 import { fromHtml } from 'hast-util-from-html';
 import { toString } from 'hast-util-to-string';
-import { h } from 'hastscript';
-import type { Element, HChild } from 'hastscript/lib/core';
+import { h, type Child } from 'hastscript';
+import type { Element } from 'hast';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 import { getIcon } from './file-tree-icons';
@@ -35,9 +35,10 @@ const FolderIcon = makeSVGIcon(
 	'<svg viewBox="0 0 20 20"><path d="M14.77 6.45H9.8v-.47A.97.97 0 0 0 8.83 5H3.75v10H15.7V7.42a.91.91 0 0 0-.93-.97Z"/></svg>'
 );
 
-export const fileTreeProcessor = rehype().use(() => (tree, file) => {
+export const fileTreeProcessor = rehype().use(() => (tree: Element, file) => {
 	const { directoryLabel } = file.data as { directoryLabel: string };
 	visit(tree, 'element', (node) => {
+		if (node.type !== 'element') return CONTINUE;
 		// Strip nodes that only contain newlines
 		node.children = node.children.filter(
 			(child) => child.type === 'comment' || child.type !== 'text' || !/^\n+$/.test(child.value)
@@ -50,7 +51,7 @@ export const fileTreeProcessor = rehype().use(() => (tree, file) => {
 
 		const [firstChild, ...otherChildren] = node.children;
 
-		const comment: HChild[] = [];
+		const comment: Child[] = [];
 		if (firstChild?.type === 'text') {
 			const [filename, ...fragments] = firstChild.value.split(' ');
 			firstChild.value = filename || '';
@@ -64,14 +65,14 @@ export const fileTreeProcessor = rehype().use(() => (tree, file) => {
 		otherChildren.splice(0, subTreeIndex > -1 ? subTreeIndex : otherChildren.length);
 		comment.push(...commentNodes);
 
-		const firstChildTextContent = toString(firstChild);
+		const firstChildTextContent = firstChild ? toString(firstChild) : '';
 
 		// Decide a node is a directory if it ends in a `/` or contains another list.
 		const isDirectory =
 			/\/\s*$/.test(firstChildTextContent) ||
 			otherChildren.some((child) => child.type === 'element' && child.tagName === 'ul');
 		const isPlaceholder = /^\s*(\.{3}|…)\s*$/.test(firstChildTextContent);
-		const isHighlighted = firstChild.type === 'element' && firstChild.tagName === 'strong';
+		const isHighlighted = firstChild?.type === 'element' && firstChild.tagName === 'strong';
 		const hasContents = otherChildren.length > 0;
 
 		const fileExtension = isDirectory ? 'dir' : firstChildTextContent.trim().split('.').pop() || '';
