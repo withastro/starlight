@@ -76,6 +76,8 @@ export default function StarlightIntegration({
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
 					scopedStyleStrategy: 'where',
+					// If not already conigured, default to prefetching all links on hover.
+					prefetch: config.prefetch ?? { prefetchAll: true },
 				});
 			},
 
