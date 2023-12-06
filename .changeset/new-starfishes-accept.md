@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': minor
+'@astrojs/starlight': patch
 ---
 
 Fix timezone-reliance in LastUpdated
