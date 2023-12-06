@@ -41,11 +41,13 @@ export default function StarlightIntegration({
 
 				injectRoute({
 					pattern: '404',
-					entryPoint: '@astrojs/starlight/404.astro',
+					entrypoint: '@astrojs/starlight/404.astro',
+					entryPoint: '@astrojs/starlight/404.astro', // deprecated in Astro v4
 				});
 				injectRoute({
 					pattern: '[...slug]',
-					entryPoint: '@astrojs/starlight/index.astro',
+					entrypoint: '@astrojs/starlight/404.astro',
+					entryPoint: '@astrojs/starlight/index.astro', // deprecated in Astro v4
 				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
