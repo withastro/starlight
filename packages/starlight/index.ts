@@ -1,5 +1,5 @@
 import mdx from '@astrojs/mdx';
-import type { AstroIntegration, AstroUserConfig } from 'astro';
+import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -61,7 +61,7 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
 				}
-				const newConfig: AstroUserConfig = {
+				updateConfig({
 					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
@@ -76,8 +76,7 @@ export default function StarlightIntegration({
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
 					scopedStyleStrategy: 'where',
-				};
-				updateConfig(newConfig);
+				});
 			},
 
 			'astro:build:done': ({ dir }) => {
