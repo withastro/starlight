@@ -156,6 +156,9 @@ importers:
       '@pagefind/default-ui':
         specifier: ^1.0.3
         version: 1.0.3
+      '@types/hast':
+        specifier: ^3.0.3
+        version: 3.0.3
       '@types/mdast':
         specifier: ^4.0.3
         version: 4.0.3
