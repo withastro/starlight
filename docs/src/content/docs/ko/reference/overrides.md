@@ -12,10 +12,13 @@ Starlight의 [`components`](/ko/reference/configuration#components) 구성 옵�
 
 ## 컴포넌트 속성
 
+모든 컴포넌트는 현재 페이지의 정보가 포함된 표준 `Astro.props` 객체를 사용할 수 있습니다.
+
 사용자 정의 컴포넌트의 타입을 설정하기 위해 Starlight로부터 `Props` 타입을 가져옵니다.
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -132,6 +135,12 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 
 활성화된 경우 이 페이지를 편집할 수 있는 주소를 나타내기 위해 `URL` 객체가 사용됩니다.
 
+#### `labels`
+
+**타입:** `Record<string, string>`
+
+현재 페이지에서 사용하는 현지화된 UI 문자열을 포함하는 객체입니다. 사용 가능한 모든 키 목록은 [“Starlight UI 번역”](/ko/guides/i18n/#starlight-ui-번역) 가이드를 참조하세요.
+
 ---
 
 ## 컴포넌트
@@ -222,6 +231,10 @@ Header 컴포넌트는 모든 페이지 상단에 표시됩니다.
 **기본 컴포넌트:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
 
 Starlight의 검색 UI를 렌더링하기 위해 사용되는 컴포넌트입니다. 기본적으로 헤더의 버튼과 클릭하면 [Pagefind의 UI](https://pagefind.app/)를 불러오는 검색 모달을 나타내는 코드가 포함되어 있습니다.
+
+[`pagefind`](/ko/reference/configuration/#pagefind)가 비활성화되면 기본 검색 컴포넌트가 렌더링되지 않습니다.
+그러나, `Search`를 재정의하면 `pagefind` 구성 옵션이 `false`인 경우에도 사용자 정의 컴포넌트가 항상 렌더링됩니다.
+이를 통해, Pagefind가 활성화되지 않았을 때 대체 검색 공급자에 대한 UI를 추가할 수 있습니다.
 
 #### `SocialIcons`
 
@@ -336,6 +349,8 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 
 각 페이지의 메인 콘텐츠 주위에 렌더링되는 컴포넌트입니다.
 기본적으로 마크다운 콘텐츠에 적용할 기본 스타일을 설정합니다.
+
+Markdown 콘텐츠 스타일은 `@astrojs/starlight/style/markdown.css`에도 노출되며 `.sl-markdown-content` CSS 클래스로 범위가 지정됩니다.
 
 ---
 

@@ -181,14 +181,14 @@ yarn create astro --template starlight/tailwind
    });
    ```
 
-5. 将 Starlight Tailwind 插件添加到 `tailwind.config.cjs`：
+5. 将 Starlight Tailwind 插件添加到 `tailwind.config.mjs`：
 
    ```js ins={2,7}
-   // tailwind.config.cjs
-   const starlightPlugin = require('@astrojs/starlight-tailwind');
+   // tailwind.config.mjs
+   import starlightPlugin from '@astrojs/starlight-tailwind';
 
    /** @type {import('tailwindcss').Config} */
-   module.exports = {
+   export default {
    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
    	plugins: [starlightPlugin()],
    };
@@ -206,12 +206,12 @@ Starlight 将使用你的 [Tailwind 主题配置](https://tailwindcss.com/docs/t
 - `fontFamily.mono` — 用于代码示例
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {

@@ -18,6 +18,7 @@ To type your custom components, import the `Props` type from Starlight:
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -134,6 +135,12 @@ JavaScript `Date` object representing when this page was last updated if enabled
 
 `URL` object for the address where this page can be edited if enabled.
 
+#### `labels`
+
+**Type:** `Record<string, string>`
+
+An object containing UI strings localized for the current page. See the [“Translate Starlight’s UI”](/guides/i18n/#translate-starlights-ui) guide for a list of all the available keys.
+
 ---
 
 ## Components
@@ -226,6 +233,10 @@ The default implementation includes logic for rendering logos defined in Starlig
 
 Component used to render Starlight’s search UI.
 The default implementation includes the button in the header and the code for displaying a search modal when it is clicked and loading [Pagefind’s UI](https://pagefind.app/).
+
+When [`pagefind`](/reference/configuration/#pagefind) is disabled, the default search component will not be rendered.
+However, if you override `Search`, your custom component will always be rendered even if the `pagefind` configuration option is `false`.
+This allows you to add UI for alternative search providers when disabling Pagefind.
 
 #### `SocialIcons`
 
@@ -341,6 +352,8 @@ The default implementation shows a large title, tagline, and call-to-action link
 
 Component rendered around each page’s main content.
 The default implementation sets up basic styles to apply to Markdown content.
+
+The Markdown content styles are also exposed in `@astrojs/starlight/style/markdown.css` and scoped to the `.sl-markdown-content` CSS class.
 
 ---
 

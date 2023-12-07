@@ -1,18 +1,19 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
-import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { pathWithBase } from './base';
-import { pickLang } from './i18n';
-import { getLocaleRoutes, type Route } from './routing';
-import { localeToLang, slugToPathname } from './slugs';
-import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
 import type { Badge } from '../schemas/badge';
+import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
 	LinkHTMLAttributes,
 	SidebarItem,
 	SidebarLinkItem,
 } from '../schemas/sidebar';
+import { createPathFormatter } from './createPathFormatter';
+import { formatPath } from './format-path';
+import { pickLang } from './i18n';
+import { ensureLeadingSlash } from './path';
+import { getLocaleRoutes, type Route } from './routing';
+import { localeToLang, slugToPathname } from './slugs';
 
 const DirKey = Symbol('DirKey');
 
@@ -30,6 +31,7 @@ interface Group {
 	label: string;
 	entries: (Link | Group)[];
 	collapsed: boolean;
+	badge: Badge | undefined;
 }
 
 export type SidebarEntry = Link | Group;
@@ -75,6 +77,7 @@ function configItemToEntry(
 			label: pickLang(item.translations, localeToLang(locale)) || item.label,
 			entries: item.items.map((i) => configItemToEntry(i, currentPathname, locale, routes)),
 			collapsed: item.collapsed,
+			badge: item.badge,
 		};
 	}
 }
@@ -101,6 +104,7 @@ function groupFromAutogenerateConfig(
 		label: pickLang(item.translations, localeToLang(locale)) || item.label,
 		entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
 		collapsed: item.collapsed,
+		badge: item.badge,
 	};
 }
 
@@ -115,7 +119,7 @@ function linkFromConfig(
 ) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
-		href = ensureLeadingAndTrailingSlashes(href);
+		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
 	}
@@ -131,9 +135,19 @@ function makeLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): Link {
-	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === ensureTrailingSlash(currentPathname);
+	if (!isAbsolute(href)) {
+		href = formatPath(href);
+	}
+
+	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
+
 	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
+}
+
+/** Test if two paths are equivalent even if formatted differently. */
+function pathsMatch(pathA: string, pathB: string) {
+	const format = createPathFormatter({ trailingSlash: 'never' });
+	return format(pathA) === format(pathB);
 }
 
 /** Get the segments leading to a page. */
@@ -231,6 +245,7 @@ function groupFromDir(
 		label: dirName,
 		entries,
 		collapsed,
+		badge: undefined,
 	};
 }
 
@@ -329,7 +344,7 @@ function applyPrevNextLinkConfig(
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
 			// create a new link.
-			return makeLink(config.link, config.label, config.link);
+			return makeLink(config.link, config.label, '');
 		}
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.

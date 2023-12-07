@@ -88,7 +88,7 @@ Setze den Typen auf `'splash'`, um ein breiteres Layout ohne Seitenleisten zu ve
 
 Fügt eine Hero-Komponente oben auf der Seite ein. Kann sehr gut mit `template: splash` kombiniert werden.
 
-Zum Beispiel zeigt diese Konfiguration einige übliche Optionen, einschließlich des Ladens eines Bildes aus Ihrem Repository.
+Zum Beispiel zeigt diese Konfiguration einige übliche Optionen, einschließlich des Ladens eines Bildes aus deinem Repository.
 
 ```md
 ---
@@ -111,20 +111,44 @@ hero:
 ---
 ```
 
+Du kannst verschiedene Versionen der Hero-Komponente im hellen und dunklen Modus anzeigen.
+
+```md
+---
+hero:
+  image:
+    alt: Ein glitzerndes, farbenfrohes Logo
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Relativer Pfad zu einem Bild in deinem Repository.
-    file?: string;
-    // HTML, welches im Bild-Slot verwendet werden soll.
-    // Dies kann ein benutzerdefinierter `<img>`-Tag oder ein Inline-`<svg>` sein.
-    html?: string;
-  };
+  image?:
+    | {
+        // Relativer Pfad zu einem Bild in deinem Repository.
+        file: string;
+        // Alt-Text, um das Bild für unterstützende Technologien zugänglich zu machen
+        alt?: string;
+      }
+    | {
+        // Relativer Pfad zu einem Bild in deinem Repository, das für den dunklen Modus verwendet werden soll.
+        dark: string;
+        // Relativer Pfad zu einem Bild in deinem Repository, das für den hellen Modus verwendet werden soll.
+        light: string;
+        // Alt-Text, um das Bild für unterstützende Technologien zugänglich zu machen
+        alt?: string;
+      }
+    | {
+        // HTML, welches im Bild-Slot verwendet werden soll.
+        // Dies kann ein benutzerdefinierter `<img>`-Tag oder ein Inline-`<svg>` sein.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;

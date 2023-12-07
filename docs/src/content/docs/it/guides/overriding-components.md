@@ -102,7 +102,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Scopri di più su tutti gli oggetti di scena disponibili nel [Riferimento agli override](/it/reference/overrides/#component-props).
+Scopri di più su tutti gli oggetti di scena disponibili nel [Riferimento agli override](/it/reference/overrides/#proprietà-dei-componenti).
 
 ### Sostituisci solo su pagine specifiche
 

@@ -3,7 +3,15 @@ declare module 'virtual:starlight/user-config' {
 	export default Config;
 }
 declare module 'virtual:starlight/project-context' {
-	export default { root: string, srcDir: string };
+	const ProjectContext: {
+		root: string;
+		srcDir: string;
+		trailingSlash: import('astro').AstroConfig['trailingSlash'];
+		build: {
+			format: import('astro').AstroConfig['build']['format'];
+		};
+	};
+	export default ProjectContext;
 }
 
 declare module 'virtual:starlight/user-css' {}

@@ -29,6 +29,8 @@ export interface StarlightRouteData extends Route {
 	lastUpdated: Date | undefined;
 	/** URL object for the address where this page can be edited if enabled. */
 	editUrl: URL | undefined;
+	/** Record of UI strings localized for the current page. */
+	labels: ReturnType<ReturnType<typeof useTranslations>['all']>;
 }
 
 export function generateRouteData({
@@ -48,6 +50,7 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
+		labels: useTranslations(locale).all(),
 	};
 }
 
@@ -66,9 +69,9 @@ function getToC({ entry, locale, headings }: PageProps) {
 	};
 }
 
-function getLastUpdated({ entry, id }: PageProps): Date | undefined {
+function getLastUpdated({ entry }: PageProps): Date | undefined {
 	if (entry.data.lastUpdated ?? config.lastUpdated) {
-		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + id, project.root));
+		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id, project.root));
 		let date = typeof entry.data.lastUpdated !== 'boolean' ? entry.data.lastUpdated : undefined;
 		if (!date) {
 			try {

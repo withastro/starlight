@@ -22,7 +22,7 @@ Customize the styles applied to your Starlight site by providing additional CSS 
 
 2. Add the path to your CSS file to Starlight’s `customCss` array in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,8 +32,8 @@ Customize the styles applied to your Starlight site by providing additional CSS 
    		starlight({
    			title: 'Docs With Custom CSS',
    			customCss: [
-   				// Relative path to your custom CSS file
-   				'./src/styles/custom.css',
+   +				// Relative path to your custom CSS file
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],

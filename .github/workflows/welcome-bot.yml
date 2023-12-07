@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/first-interaction@v1
+      - uses: zephyrproject-rtos/action-first-interaction@7e6446f8439d8b4399169880c36a3a12b5747699
         with:
           repo-token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
-          pr-message: |
+          pr-opened-message: |
             Hello! Thank you for opening your **first PR** to Starlight! ✨
 
             Here’s what will happen next:
@@ -26,7 +26,7 @@ jobs:
                If they spot any issues you will see some error messages on this PR.
                Don’t hesitate to ask any questions if you’re not sure what these mean!
 
-            2. In a few minutes, you’ll be able to see a preview of your changes on Netlify 🤩
+            2. In a few minutes, you’ll be able to see a preview of your changes on Vercel 🤩
 
             3. One or more of our maintainers will take a look and may ask you to make changes.
                We try to be responsive, but don’t worry if this takes a few days.
