@@ -11,17 +11,15 @@ Secara default, situs Starlight termasuk pencarian teks lengkap yang didukung ol
 
 Tidak diperlukan konfigurasi untuk mengaktifkan pencarian. Bangun dan terapkan situs Anda, kemudian gunakan bilah pencarian di header situs untuk menemukan konten.
 
-Kecualikan sebuah halaman
-
 ## Sembunyikan konten dalam hasil pencarian
 
 ### Kecualikan sebuah halaman
 
 Untuk mengecualikan sebuah halaman dari indeks pencarian Anda, tambahkan [`pagefind: false`](/id/reference/frontmatter/#pagefind) ke frontmatter halaman:
 
-```md title="src/content/docs/not-indexed.md" ins={3}
+```md title="src/content/docs/tidak-diindeks.md" ins={3}
 ---
-title: Content to hide from search
+title: Konten yang Disembunyikan dari Pencarian
 pagefind: false
 ---
 ```
@@ -32,9 +30,9 @@ Pagefind akan mengabaikan konten di dalam elemen dengan atribut [`data-pagefind-
 
 Dalam contoh berikut, paragraf pertama akan ditampilkan dalam hasil pencarian, tetapi isi dari `<div>` tidak akan:
 
-```md title="src/content/docs/partially-indexed.md" ins="data-pagefind-ignore"
+```md title="src/content/docs/sebagian-diindeks.md" ins="data-pagefind-ignore"
 ---
-title: Partially indexed page
+title: Halaman yang Diindeks Sebagian
 ---
 
 Teks ini akan ditemukan melalui pencarian.
@@ -56,33 +54,33 @@ Jika Anda memiliki akses ke [Algolia’s DocSearch program](https://docsearch.al
 
    <Tabs>
 
-   <TabItem label="npm">
+   			<TabItem label="npm">
 
-   ```sh
+			   ```sh
    npm install @astrojs/starlight-docsearch
    ```
 
-   </TabItem>
+   			</TabItem>
 
    <TabItem label="pnpm">
 
-   ```sh
+      ```sh
    pnpm install @astrojs/starlight-docsearch
    ```
 
-   </TabItem>
+   			</TabItem>
 
    <TabItem label="Yarn">
 
-   ```sh
+      ```sh
    yarn add @astrojs/starlight-docsearch
    ```
 
-   </TabItem>
+   			</TabItem>
 
-   </Tabs>
+					</Tabs>
 
-2. Tambahkan DocSearch ke konfigurasi [`plugins`](/id/reference/configuration/#plugins) Starlight Anda di astro.config.mjs dan taruh `appId`, `apiKey`, and `indexName` Algolia Anda:
+2. Tambahkan DocSearch ke konfigurasi [`plugins`](/id/reference/configuration/#plugins) Starlight Anda di `astro.config.mjs` dan taruh `appId`, `apiKey`, and `indexName` Algolia Anda:
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -111,7 +109,7 @@ Dengan konfigurasi yang diperbarui ini, bilah pencarian di situs Anda sekarang a
 #### Menerjemahkan UI DocSearch
 
 Secara default, DocSearch hanya menyediakan string UI dalam Bahasa Inggris.
-Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalization system](/id/guides/i18n/#translate-starlights-ui) bawaan Starlight.
+Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalization system](/id/guides/i18n/#terjemahkan-ui-starlight) bawaan Starlight.
 
 1. Perluas definisi koleksi konten `i18n` Starlight dengan skema DocSearch di `src/content/config.ts`:
 
@@ -132,7 +130,7 @@ Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalizatio
 
 2. Tambahkan terjemahan ke file JSON Anda di `src/content/i18n/`.
 
-Ini adalah default Bahasa Inggris yang digunakan oleh DocSearch:
+   Ini adalah default Bahasa Inggris yang digunakan oleh DocSearch:
 
    ```json title="src/content/i18n/en.json"
    {
