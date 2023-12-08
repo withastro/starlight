@@ -50,11 +50,13 @@ export default function StarlightIntegration({
 					entrypoint: prerender
 					  ? '@astrojs/starlight/index.astro'
 					  : '@astrojs/starlight/indexSSR.astro',
+					prerender: prerender,
 				});
 
 				injectRoute({
 					pattern: '404',
 					entrypoint: '@astrojs/starlight/404.astro',
+					prerender: prerender,
 				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
