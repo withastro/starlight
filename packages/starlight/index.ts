@@ -35,7 +35,6 @@ export default function StarlightIntegration({
 					isRestart,
 					logger,
 				});
-				userConfig = starlightConfig;
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
@@ -45,6 +44,11 @@ export default function StarlightIntegration({
 				// Defaults to not prerender on server mode
         const prerender = astroOutput === 'static' || (starlightConfig.prerender ?? (astroOutput === 'hybrid'));
 
+				userConfig = {
+					...starlightConfig,
+					prerender: prerender,
+				};
+
 				injectRoute({
 					pattern: '[...slug]',
 					entrypoint: prerender
@@ -52,6 +56,14 @@ export default function StarlightIntegration({
 					  : '@astrojs/starlight/indexSSR.astro',
 					prerender: prerender,
 				});
+
+				if (!prerender) {
+					injectRoute({
+						pattern: '/pagefind/[...path]',
+						entrypoint: '@astrojs/starlight/pagefind.ts',
+						prerender: false,
+					});
+				}
 
 				injectRoute({
 					pattern: '404',
@@ -93,7 +105,8 @@ export default function StarlightIntegration({
 			},
 
 			'astro:build:done': ({ dir }) => {
-				if (!userConfig.pagefind) return;
+				// Do not build static pagefind index if pagefind is disabled or if the content was not prerendered.
+				if (!userConfig.pagefind || !userConfig.prerender) return;
 				const targetDir = fileURLToPath(dir);
 				const cwd = dirname(fileURLToPath(import.meta.url));
 				const relativeDir = relative(cwd, targetDir);
