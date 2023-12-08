@@ -5,9 +5,9 @@ import { paths, getRouteBySlugParam } from './utils/routing';
 
 import Page from './components/Page.astro';
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+export const prerender = false;
 
-const route = getRouteBySlugParam(Astro.param.slug);
+const route = getRouteBySlugParam(Astro.params.slug);
 
 if (route === undefined) {
   return new Response(null, {status: 404});

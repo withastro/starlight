@@ -159,6 +159,7 @@
     "./types": "./types.ts",
     "./expressive-code": "./integrations/expressive-code/exports.ts",
     "./index.astro": "./index.astro",
+    "./indexSSR.astro": "./indexSSR.astro",
     "./404.astro": "./404.astro",
     "./style/markdown.css": "./style/markdown.css"
   },
