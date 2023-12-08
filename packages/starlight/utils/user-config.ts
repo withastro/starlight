@@ -205,6 +205,14 @@ const UserConfigSchema = z.object({
 		.string()
 		.default('|')
 		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
+
+	/**
+	 * Define whether Starlight pages should be prerendered or not.
+	 * Defaults to Astro's default behavior, prerender when "hybrid" and
+	 * not prerendering when "server".
+	 * Does nothing when Astro's output mode is undefined or set to "static".
+	 */
+	prerender: z.boolean().optional(),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

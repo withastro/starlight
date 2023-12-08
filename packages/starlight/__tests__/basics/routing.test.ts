@@ -1,7 +1,9 @@
+import { type GetStaticPathItems } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import { expect, test, vi } from 'vitest';
-import { routes } from '../../utils/routing';
+import { routes, paths, getRouteBySlugParam } from '../../utils/routing';
+import { slugToParam } from '../../utils/slugs';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -40,4 +42,32 @@ test('routes have locale data added', () => {
 		expect(route.dir).toBe('ltr');
 		expect(route.locale).toBeUndefined();
 	}
+});
+
+test('paths contain normalized slugs for path parameters', () => {
+  const expectedPaths: GetStaticPathItems = [
+    {
+      params: { slug: '404' },
+      props: routes[0],
+    },
+    {
+      params: { slug: undefined },
+      props: routes[1],
+    },
+    {
+      params: { slug: 'guides/authoring-content' },
+      props: routes[2],
+    },
+  ];
+
+  expect(paths).toEqual(expectedPaths);
+});
+
+test('routes can be retrieved from their path parameters', () => {
+  for (const route of routes) {
+    const params = slugToParam(route.slug);
+    const routeFromParams = getRouteBySlugParam(params);
+
+    expect(routeFromParams).toBe(route);
+  }
 });

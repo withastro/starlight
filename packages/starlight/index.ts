@@ -39,13 +39,22 @@ export default function StarlightIntegration({
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
+				const astroOutput = config.output ?? 'static';
+				// Always prerender on static mode
+				// Defaults to prerender on hybrid mode
+				// Defaults to not prerender on server mode
+        const prerender = astroOutput === 'static' || (starlightConfig.prerender ?? (astroOutput === 'hybrid'));
+
+				injectRoute({
+					pattern: '[...slug]',
+					entrypoint: prerender
+					  ? '@astrojs/starlight/index.astro'
+					  : '@astrojs/starlight/indexSSR.astro',
+				});
+
 				injectRoute({
 					pattern: '404',
 					entrypoint: '@astrojs/starlight/404.astro',
-				});
-				injectRoute({
-					pattern: '[...slug]',
-					entrypoint: '@astrojs/starlight/index.astro',
 				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.

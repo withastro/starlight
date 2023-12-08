@@ -96,6 +96,22 @@ function getRoutes(): Route[] {
 }
 export const routes = getRoutes();
 
+function getParamRouteMapping(): ReadonlyMap<string | typeof INDEX_SLUG_PARAM, Route> {
+	const map = new Map<string | typeof INDEX_SLUG_PARAM, Route>();
+
+	for (const route of routes) {
+		map.set(slugToParam(route.slug) ?? INDEX_SLUG_PARAM, route);
+	}
+
+	return map;
+}
+const INDEX_SLUG_PARAM = Symbol('index');
+const routesBySlugParam = getParamRouteMapping();
+
+export function getRouteBySlugParam(slugParam: string | undefined): Route | undefined {
+	return routesBySlugParam.get(slugParam?.replace(/\/$/, '') ?? INDEX_SLUG_PARAM);
+}
+
 function getPaths(): Path[] {
 	return routes.map((route) => ({
 		params: { slug: slugToParam(route.slug) },
