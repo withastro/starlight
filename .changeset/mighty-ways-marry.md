@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add Open Collective social icon
+Adds Open Collective social link icon
