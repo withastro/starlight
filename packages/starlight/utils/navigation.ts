@@ -57,12 +57,7 @@ function makeDir(): Dir {
 
 /** Test if the passed object is a directory record.  */
 function isDir(data: Record<string, unknown>): data is Dir {
-	// return DirKey in data;
-	// TODO: Remove this hack
-	if (data.hasOwnProperty('id')) {
-		return false;
-	}
-	return true;
+	return DirKey in data;
 }
 
 /** Convert an item in a user’s sidebar config to a sidebar entry. */
@@ -182,33 +177,20 @@ function treeify(routes: Route[], baseDir: string): Dir {
 	const treeRoot: Dir = makeDir();
 	routes
 		// Remove any entries that should be hidden
-		.filter((doc) => !doc.entry.data.sidebar.hidden)
-		
+		.filter((doc) => !doc.entry.data.sidebar.hidden);
+
 	routes.forEach((doc) => {
 		const pathwoext = stripExtension(doc.id);
-		const parts = pathwoext.split('/').filter(Boolean);
-
+		let parts = pathwoext.split('/').filter(Boolean);
+		let leaf = parts.at(-1);
+		parts = parts.slice(1);
+		
 		let currentNode = treeRoot;
+		let parent = treeRoot;
 
 		parts.forEach((part, index) => {
 			const isLeaf = index === parts.length - 1;
-			const fileIsPresentInParent = Object.keys(currentNode).includes(part)
-			/* 
-			* If the file is has the same name as a parent directory, 
-			* it should be placed in the parent directory with the name "index"
-			*
-			* For example:
-			* Routes: ["/docs/one.md", "/docs/one/two.md"]
-			* The tree should be:
-			* {
-			* 	docs: {
-			* 		one: {
-			* 			index: {}
-			* 			two: {}
-			* 		},
-			* 	}
-			*/
-
+			const fileIsPresentInParent = Object.keys(currentNode).includes(part);
 			if (isLeaf && fileIsPresentInParent) {
 				currentNode = currentNode[part] as Dir;
 				part = 'index';
@@ -219,17 +201,14 @@ function treeify(routes: Route[], baseDir: string): Dir {
 			}
 
 			// Traverse the tree
+			parent = currentNode;
+			leaf = part;
 			currentNode = currentNode[part] as Dir;
 		});
 
 		// Set the node's properties
-		Object.assign(currentNode, {
-			id : doc.id,
-			slug : doc.slug,
-			isFallback : doc.isFallback,
-			entry : doc.entry,
-			entryMeta : doc.entryMeta
-		});
+		parent[leaf!] = doc;
+		
 	});
 
 	return treeRoot;
