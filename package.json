@@ -36,5 +36,9 @@
       "path": "examples/basics/dist/_astro/*.css",
       "limit": "14 kB"
     }
-  ]
+  ],
+  "dependencies": {
+    "@astrojs/markdown-remark": "^4.0.0",
+    "rehype-autolink-headings": "^7.1.0"
+  }
 }

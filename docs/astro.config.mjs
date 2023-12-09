@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -28,6 +30,18 @@ const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
 export default defineConfig({
 	site,
 	trailingSlash: 'always',
+	markdown: {
+    rehypePlugins: [
+      rehypeHeadingIds,
+      [
+        rehypeAutolinkHeadings,
+        {
+          // Wrap the heading text in a link.
+          behavior: 'wrap',
+        },
+      ],
+    ],
+  },
 	integrations: [
 		starlight({
 			title: 'Starlight',
@@ -61,7 +75,7 @@ export default defineConfig({
 					attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
 				},
 			],
-			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
+			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css', './src/assets/headings.css'],
 			locales,
 			sidebar: [
 				{
