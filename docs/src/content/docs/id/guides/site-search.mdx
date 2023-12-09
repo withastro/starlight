@@ -50,65 +50,59 @@ Teks ini akan disembunyikan dari pencarian.
 
 Jika Anda memiliki akses ke [Algolia’s DocSearch program](https://docsearch.algolia.com/) dan ingin menggunakannya sebagai gantinya Pagefind, Anda dapat menggunakan plugin DocSearch Starlight resmi.
 
-1.  Install `@astrojs/starlight-docsearch`:
+1. Install `@astrojs/starlight-docsearch`:
 
-    <Tabs>
+   <Tabs>
 
-        		<TabItem label="npm">
+   <TabItem label="npm">
 
-        				   ```sh
+   ```sh
+   npm install @astrojs/starlight-docsearch
+   ```
 
-    npm install @astrojs/starlight-docsearch
+   </TabItem>
 
-    ````
+   <TabItem label="pnpm">
 
-    			</TabItem>
+   ```sh
+   pnpm install @astrojs/starlight-docsearch
+   ```
 
-    <TabItem label="pnpm">
+   </TabItem>
 
-          ```sh
-    pnpm install @astrojs/starlight-docsearch
-    ````
+   <TabItem label="Yarn">
 
-        		</TabItem>
+   ```sh
+   yarn add @astrojs/starlight-docsearch
+   ```
 
-    <TabItem label="Yarn">
+   </TabItem>
 
-          ```sh
+   </Tabs>
 
-    yarn add @astrojs/starlight-docsearch
+2. Tambahkan DocSearch ke konfigurasi [`plugins`](/id/reference/configuration/#plugins) Starlight Anda di `astro.config.mjs` dan taruh `appId`, `apiKey`, and `indexName` Algolia Anda:
 
-    ```
+   ```js ins={4,10-16}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
 
-    			</TabItem>
-
-    				</Tabs>
-
-    ```
-
-2.  Tambahkan DocSearch ke konfigurasi [`plugins`](/id/reference/configuration/#plugins) Starlight Anda di `astro.config.mjs` dan taruh `appId`, `apiKey`, and `indexName` Algolia Anda:
-
-    ```js ins={4,10-16}
-    // astro.config.mjs
-    import { defineConfig } from 'astro/config';
-    import starlight from '@astrojs/starlight';
-    import starlightDocSearch from '@astrojs/starlight-docsearch';
-
-    export default defineConfig({
-    	integrations: [
-    		starlight({
-    			title: 'Situs dengan DocSearch',
-    			plugins: [
-    				starlightDocSearch({
-    					appId: 'ID_APLIKASI_ANDA',
-    					apiKey: 'KUNCI_API_ANDA',
-    					indexName: 'NAMA_INDEX_ANDA',
-    				}),
-    			],
-    		}),
-    	],
-    });
-    ```
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Situs dengan DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					appId: 'ID_APLIKASI_ANDA',
+   					apiKey: 'KUNCI_API_ANDA',
+   					indexName: 'NAMA_INDEX_ANDA',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
 
 Dengan konfigurasi yang diperbarui ini, bilah pencarian di situs Anda sekarang akan membuka modal Algolia sebagai gantinya modal pencarian bawaan.
 
