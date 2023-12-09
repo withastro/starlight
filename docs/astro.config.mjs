@@ -78,7 +78,7 @@ export default defineConfig({
 						ko: '여기서부터',
 						tr: 'Buradan Başlayın',
 						ru: 'Начать отсюда',
-						hi: 'यहाँ से शुरू',
+						hi: 'यहाँ से शुरू करे',
 					},
 					items: [
 						{
@@ -96,7 +96,7 @@ export default defineConfig({
 								ko: '시작하기',
 								tr: 'Başlarken',
 								ru: 'Введение',
-								hi: 'शुरू करना',
+								hi: 'पहले कदम',
 							},
 						},
 						{

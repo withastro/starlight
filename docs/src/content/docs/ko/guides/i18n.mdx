@@ -11,7 +11,7 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 
 1. Starlight 통합에 [`locales`](/ko/reference/configuration/#locales) 및 [`defaultLocale`](/ko/reference/configuration/#defaultlocale)을 전달하여 사이트가 지원해야 할 언어에 대해 알려주세요.
 
-   ```js
+   ```js {9-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -68,7 +68,7 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 
 루트 로케일을 설정하려면 `locales` 구성에서 `root` 키를 사용하세요. 루트 로케일이 콘텐츠의 기본 로케일이기도 한 경우 `defaultLocale`을 제거하거나 값을 `root`로 설정하세요.
 
-```js
+```js {9,11-14}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -111,7 +111,7 @@ export default defineConfig({
 기본적으로 Starlight는 단일 언어(영어) 사이트입니다.
 다른 언어로 단일 언어 사이트를 만들려면 `locales` 구성에서 `root`를 해당 언어로 설정하세요.
 
-```js
+```diff lang="js" {10-13}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -154,14 +154,14 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
 1. 아직 구성되지 않은 경우 `src/content/config.ts`에서 `i18n` 데이터 컬렉션을 구성합니다.
 
-   ```js
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
    	docs: defineCollection({ schema: docsSchema() }),
-   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
@@ -206,6 +206,17 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    }
    ```
 
+   Starlight의 코드 블록은 [Expressive Code](https://github.com/expressive-code/expressive-code) 라이브러리에 의해 구동됩니다.
+   `expressiveCode` 키를 사용하여 동일한 JSON 파일에서 UI 문자열에 대한 번역을 설정할 수 있습니다.
+
+   ```json
+   {
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
+   }
+   ```
+
    Starlight의 검색 모달은 [Pagefind](https://pagefind.app/) 라이브러리에 의해 구동됩니다. 동일한 JSON 파일에서 `pagefind` 키를 사용하여 Pagefind의 UI에 대한 번역을 설정할 수 있습니다.
 
    ```json
@@ -222,3 +233,28 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+### 번역 스키마 확장
+
+`i18nSchema()` 옵션에서 `extend`를 설정하여 사이트 번역 사전에 맞춤 키를 추가하세요.
+다음 예시에서는 기본 키에 새로운 선택적 `custom.label` 키가 추가됩니다.
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.

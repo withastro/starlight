@@ -18,6 +18,7 @@ Pour typer vos composants personnalisés, importez le type `Props` depuis Starli
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -341,6 +342,8 @@ L'implémentation par défaut affiche un large titre, une accroche et des liens 
 
 Composant affiché autour du contenu principal de chaque page.
 L'implémentation par défaut définit les styles de base à appliquer au contenu Markdown.
+
+Les styles de contenu Markdown sont également exposés dans `@astrojs/starlight/style/markdown.css` avec une portée limitée à la classe CSS `.sl-markdown-content`.
 
 ---
 
