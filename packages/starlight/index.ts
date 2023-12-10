@@ -1,16 +1,17 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
-import { spawn } from 'node:child_process';
-import { dirname, relative } from 'node:path';
+import { rm } from 'node:fs/promises';
+import { join as pathJoin } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
+import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
-import { createTranslationSystemFromFs } from './utils/translations-fs';
-import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 import type { StarlightConfig } from './types';
+import { generatePagefindIndex } from './utils/pagefind.ts';
+import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import { createTranslationSystemFromFs } from './utils/translations-fs';
 
 export default function StarlightIntegration({
 	plugins,
@@ -42,7 +43,7 @@ export default function StarlightIntegration({
 				// Always prerender on static mode
 				// Defaults to prerender on hybrid mode
 				// Defaults to not prerender on server mode
-        const prerender = astroOutput === 'static' || (starlightConfig.prerender ?? (astroOutput === 'hybrid'));
+				const prerender = astroOutput === 'static' || (starlightConfig.prerender ?? (astroOutput === 'hybrid'));
 
 				userConfig = {
 					...starlightConfig,
@@ -52,16 +53,22 @@ export default function StarlightIntegration({
 				injectRoute({
 					pattern: '[...slug]',
 					entrypoint: prerender
-					  ? '@astrojs/starlight/index.astro'
-					  : '@astrojs/starlight/indexSSR.astro',
+						? '@astrojs/starlight/index.astro'
+						: '@astrojs/starlight/indexSSR.astro',
 					prerender: prerender,
 				});
 
-				if (!prerender) {
+				// Always pre-render for pagefind
+				if (!prerender && starlightConfig.pagefind) {
+					logger.warn(
+						'Pagefind cannot index SSR generated pages, the content will be pre-rendered for indexing but not included the final build.\n'
+						+ 'Build time may increase due to this extra work.'
+					);
+
 					injectRoute({
-						pattern: '/pagefind/[...path]',
-						entrypoint: '@astrojs/starlight/pagefind.ts',
-						prerender: false,
+						pattern: '/pagefind/source/[...slug]',
+						entrypoint: '@astrojs/starlight/index.astro',
+						prerender: true,
 					});
 				}
 
@@ -75,7 +82,7 @@ export default function StarlightIntegration({
 				const allIntegrations = [...config.integrations, ...integrations];
 				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
 					integrations.push(
-						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations })
+						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations }),
 					);
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
@@ -104,19 +111,28 @@ export default function StarlightIntegration({
 				});
 			},
 
-			'astro:build:done': ({ dir }) => {
-				// Do not build static pagefind index if pagefind is disabled or if the content was not prerendered.
-				if (!userConfig.pagefind || !userConfig.prerender) return;
-				const targetDir = fileURLToPath(dir);
-				const cwd = dirname(fileURLToPath(import.meta.url));
-				const relativeDir = relative(cwd, targetDir);
-				return new Promise<void>((resolve) => {
-					spawn('npx', ['-y', 'pagefind', '--site', relativeDir], {
-						stdio: 'inherit',
-						shell: true,
-						cwd,
-					}).on('close', () => resolve());
-				});
+			'astro:build:done': async ({ dir, logger }) => {
+				if (!userConfig.pagefind) return;
+
+				const buildFilesDir = fileURLToPath(dir);
+				const pagefindLogger = logger.fork('pagefind');
+
+				if (userConfig.prerender) {
+					await generatePagefindIndex({
+						inputDir: buildFilesDir,
+						outputDir: pathJoin(buildFilesDir, 'pagefind'),
+						logger: pagefindLogger,
+					});
+				} else {
+					await generatePagefindIndex({
+						inputDir: pathJoin(buildFilesDir, 'pagefind', 'source'),
+						outputDir: pathJoin(buildFilesDir, 'pagefind'),
+						logger: pagefindLogger,
+					});
+
+					// Remove the pre-rendered files
+					await rm(pathJoin(buildFilesDir, 'pagefind', 'source'), { recursive: true });
+				}
 			},
 		},
 	};
