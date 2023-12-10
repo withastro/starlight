@@ -29,6 +29,12 @@ You must provide a title for every page. This will be displayed at the top of th
 
 The page description is used for page metadata and will be picked up by search engines and in social media previews.
 
+### `slug`
+
+**type**: `string`
+
+Overrides the generated slug for the page.
+
 ### `editUrl`
 
 **type:** `string | boolean`
