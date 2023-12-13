@@ -92,6 +92,6 @@ test('persists the focus when syncing tabs', async ({ page, starlight }) => {
 });
 
 async function expectSelectedTab(tabs: Locator, label: string, panel: string) {
-	expect(await tabs.getByRole('tab', { selected: true }).textContent()).toBe(label);
-	expect(await tabs.getByRole('tabpanel').textContent()).toBe(panel);
+	expect((await tabs.getByRole('tab', { selected: true }).textContent())?.trim()).toBe(label);
+	expect((await tabs.getByRole('tabpanel').textContent())?.trim()).toBe(panel);
 }
