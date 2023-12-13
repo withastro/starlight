@@ -33,7 +33,7 @@ The page description is used for page metadata and will be picked up by search e
 
 **type**: `string`
 
-Overrides the generated slug for the page.
+Content collections reserved property to override the slug of the page, check [defining custom slugs](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) for more details.
 
 ### `editUrl`
 
