@@ -4,7 +4,7 @@ description: Discover sites built with Starlight and community tools that extend
 ---
 
 :::tip[Add your own!]
-Have you built a Starlight site or a tool for Starlight?
+Have you built a Starlight site, plugin, or a tool for Starlight?
 Open a PR adding a link to this page!
 :::
 
@@ -18,11 +18,34 @@ Starlight is already being used in production. These are some of the sites aroun
 
 See all the [public project repos using Starlight on GitHub](https://github.com/withastro/starlight/network/dependents).
 
-## Community plugins
+## Plugins
+
+Starlight [plugins](/reference/plugins/) can customize Starlight configuration, UI, and behavior, while also being easy to share and reuse.
+This section lists the official plugins supported by the Starlight team and also community plugins that are maintained by Starlight users.
+
+### Algolia DocSearch
+
+The official [Algolia DocSearch](https://docsearch.algolia.com/) plugin can be used to replace Pagefind, the default search provider, with Algolia DocSearch.
+
+To learn more about the Algolia DocSearch plugin, see the [plugin installation instructions](/guides/site-search/#algolia-docsearch).
+
+### Community plugins
+
+These community plugins can be used to customize your Starlight site.
+
+<CardGrid>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links-validator"
+		title="starlight-links-validator"
+		description="Check for broken links in your Starlight pages."
+	/>
+</CardGrid>
+
+## Community tools and integrations
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-These community tools, plugins, and integrations work alongside Starlight to extend its functionality.
+These community tools and integrations can be used to add features to your Starlight site.
 
 <CardGrid>
 	<LinkCard
@@ -34,11 +57,6 @@ These community tools, plugins, and integrations work alongside Starlight to ext
 		href="https://github.com/HiDeoo/starlight-blog"
 		title="starlight-blog"
 		description="Add a blog to your documentation site."
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-links-validator"
-		title="starlight-links-validator"
-		description="Check for broken links in your Starlight pages."
 	/>
 	<LinkCard
 		href="https://github.com/HiDeoo/starlight-typedoc"
