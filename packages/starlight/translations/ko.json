@@ -18,5 +18,9 @@
   "page.lastUpdated": "최종 수정:",
   "page.previousLink": "이전 페이지",
   "page.nextLink": "다음 페이지",
-  "404.text": "페이지를 찾을 수 없습니다. URL을 확인하거나 검색창을 사용해보세요."
+  "404.text": "페이지를 찾을 수 없습니다. URL을 확인하거나 검색창을 사용해보세요.",
+  "aside.note": "노트",
+  "aside.tip": "팁",
+  "aside.caution": "주의",
+  "aside.danger": "위험"
 }

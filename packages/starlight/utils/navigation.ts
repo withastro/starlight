@@ -1,13 +1,19 @@
 import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
+import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { pathWithBase } from './base';
+import type {
+	AutoSidebarGroup,
+	LinkHTMLAttributes,
+	SidebarItem,
+	SidebarLinkItem,
+} from '../schemas/sidebar';
+import { createPathFormatter } from './createPathFormatter';
+import { formatPath } from './format-path';
 import { pickLang } from './i18n';
+import { ensureLeadingSlash } from './path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
-import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
-import type { Badge } from '../schemas/badge';
 
 const DirKey = Symbol('DirKey');
 
@@ -17,6 +23,7 @@ export interface Link {
 	href: string;
 	isCurrent: boolean;
 	badge: Badge | undefined;
+	attrs: LinkHTMLAttributes;
 }
 
 interface Group {
@@ -24,6 +31,7 @@ interface Group {
 	label: string;
 	entries: (Link | Group)[];
 	collapsed: boolean;
+	badge: Badge | undefined;
 }
 
 export type SidebarEntry = Link | Group;
@@ -69,6 +77,7 @@ function configItemToEntry(
 			label: pickLang(item.translations, localeToLang(locale)) || item.label,
 			entries: item.items.map((i) => configItemToEntry(i, currentPathname, locale, routes)),
 			collapsed: item.collapsed,
+			badge: item.badge,
 		};
 	}
 }
@@ -95,6 +104,7 @@ function groupFromAutogenerateConfig(
 		label: pickLang(item.translations, localeToLang(locale)) || item.label,
 		entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
 		collapsed: item.collapsed,
+		badge: item.badge,
 	};
 }
 
@@ -109,19 +119,35 @@ function linkFromConfig(
 ) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
-		href = ensureLeadingAndTrailingSlashes(href);
+		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.badge);
+	return makeLink(href, label, currentPathname, item.badge, item.attrs);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string, badge?: Badge): Link {
-	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent, badge };
+function makeLink(
+	href: string,
+	label: string,
+	currentPathname: string,
+	badge?: Badge,
+	attrs?: LinkHTMLAttributes
+): Link {
+	if (!isAbsolute(href)) {
+		href = formatPath(href);
+	}
+
+	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
+
+	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
+}
+
+/** Test if two paths are equivalent even if formatted differently. */
+function pathsMatch(pathA: string, pathB: string) {
+	const format = createPathFormatter({ trailingSlash: 'never' });
+	return format(pathA) === format(pathB);
 }
 
 /** Get the segments leading to a page. */
@@ -171,7 +197,8 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
-		route.entry.data.sidebar.badge
+		route.entry.data.sidebar.badge,
+		route.entry.data.sidebar.attrs
 	);
 }
 
@@ -218,6 +245,7 @@ function groupFromDir(
 		label: dirName,
 		entries,
 		collapsed,
+		badge: undefined,
 	};
 }
 
@@ -274,7 +302,9 @@ export function getPrevNextLinks(
 		next?: PrevNextLinkConfig;
 	}
 ): {
+	/** Link to previous page in the sidebar. */
 	prev: Link | undefined;
+	/** Link to next page in the sidebar. */
 	next: Link | undefined;
 } {
 	const entries = flattenSidebar(sidebar);
@@ -308,11 +338,13 @@ function applyPrevNextLinkConfig(
 				...link,
 				label: config.label ?? link.label,
 				href: config.link ?? link.href,
+				// Explicitly remove sidebar link attributes for prev/next links.
+				attrs: {},
 			};
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
 			// create a new link.
-			return makeLink(config.link, config.label, config.link);
+			return makeLink(config.link, config.label, '');
 		}
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.

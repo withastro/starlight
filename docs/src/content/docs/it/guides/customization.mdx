@@ -192,7 +192,7 @@ defineConfig({
 
 Starlight dispone del supporto integrato per aggiungere collegamenti ai tuoi account di social media all'intestazione del sito tramite l'opzione [`social`](/it/reference/configuration/#social) nell'integrazione Starlight.
 
-Attualmente sono supportati i collegamenti a Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter e Youtube.
+Attualmente sono supportati i collegamenti a Bitbucket, Codeberg, CodePen, Discord, Email, Facebook, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter e Youtube.
 Facci sapere su GitHub o Discord se hai bisogno di supporto per un altro servizio!
 
 ```js
@@ -264,7 +264,7 @@ Puoi personalizzarlo aggiungendo un file `404.md` (o `404.mdx`) alla tua directo
 
 </FileTree>
 
-Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#page-layout) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
+Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#layout-della-pagina) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
 
 ```md
 ---
@@ -404,7 +404,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
 ### Usa i caratteri
 
-Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#custom-css-styles).
+Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#stili-css-personalizzati).
 Ad esempio, per sovrascrivere ovunque il font predefinito di Starlight, imposta la proprietà personalizzata `--sl-font`:
 
 ```css
@@ -426,4 +426,4 @@ main {
 }
 ```
 
-Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#custom-css-styles) per aggiungere i tuoi stili al tuo sito.
+Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#stili-css-personalizzati) per aggiungere i tuoi stili al tuo sito.

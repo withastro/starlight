@@ -18,12 +18,23 @@ export default defineVitestConfig({
 					},
 				},
 				{ label: 'Next Steps', link: '/next-steps', badge: 'Deprecated' },
+				{
+					label: 'Showcase',
+					link: '/showcase',
+					attrs: { class: 'showcase-link', target: '_blank' },
+				},
 			],
 		},
 		// A group linking to all pages in the reference directory.
 		{
 			label: 'Reference',
+			badge: 'Experimental',
 			autogenerate: { directory: 'reference' },
+		},
+		// A group linking to all pages in the api/v1 directory.
+		{
+			label: 'API v1',
+			autogenerate: { directory: '/api/v1/' },
 		},
 	],
 });

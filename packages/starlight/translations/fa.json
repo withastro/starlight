@@ -18,5 +18,9 @@
   "page.lastUpdated": "آخرین به روز رسانی:",
   "page.previousLink": "قبلی",
   "page.nextLink": "بعدی",
-  "404.text": "صفحه یافت نشد. لطفاً URL را بررسی کنید یا از جستجو استفاده نمایید."
+  "404.text": "صفحه یافت نشد. لطفاً URL را بررسی کنید یا از جستجو استفاده نمایید.",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }

@@ -9,15 +9,25 @@ export const locales = {
 	fr: { label: 'Français', lang: 'fr' },
 	it: { label: 'Italiano', lang: 'it' },
 	id: { label: 'Bahasa Indonesia', lang: 'id' },
-	zh: { label: '简体中文', lang: 'zh' },
+	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
 	ko: { label: '한국어', lang: 'ko' },
+	tr: { label: 'Türkçe', lang: 'tr' },
+	ru: { label: 'Русский', lang: 'ru' },
+	hi: { label: 'हिंदी', lang: 'hi' },
 };
 
-const site = 'https://starlight.astro.build/';
+/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
+const VERCEL_PREVIEW_SITE =
+	process.env.VERCEL_ENV !== 'production' &&
+	process.env.VERCEL_URL &&
+	`https://${process.env.VERCEL_URL}`;
+
+const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
 
 export default defineConfig({
 	site,
+	trailingSlash: 'always',
 	integrations: [
 		starlight({
 			title: 'Starlight',
@@ -63,9 +73,12 @@ export default defineConfig({
 						fr: 'Commencez ici',
 						it: 'Inizia qui',
 						id: 'Mulai dari sini',
-						zh: '从这里开始',
+						'zh-CN': '从这里开始',
 						'pt-BR': 'Comece Aqui',
 						ko: '여기서부터',
+						tr: 'Buradan Başlayın',
+						ru: 'Начать отсюда',
+						hi: 'यहाँ से शुरू करे',
 					},
 					items: [
 						{
@@ -78,9 +91,12 @@ export default defineConfig({
 								fr: 'Mise en route',
 								it: 'Iniziamo',
 								id: 'Memulai',
-								zh: '开始使用',
+								'zh-CN': '开始使用',
 								'pt-BR': 'Introdução',
 								ko: '시작하기',
+								tr: 'Başlarken',
+								ru: 'Введение',
+								hi: 'पहले कदम',
 							},
 						},
 						{
@@ -93,37 +109,46 @@ export default defineConfig({
 								fr: 'Installation manuelle',
 								// it: 'Manual Setup',
 								id: 'Instalasi Manual',
-								zh: '手动配置',
+								'zh-CN': '手动配置',
 								'pt-BR': 'Instalação Manual',
 								ko: '수동으로 설정하기',
+								tr: 'Elle Kurulum',
+								ru: 'Установка вручную',
+								hi: 'मैनुअल सेटअप',
 							},
 						},
 						{
 							label: 'Environmental Impact',
 							link: 'environmental-impact',
 							translations: {
-								// de: '',
+								de: 'Umweltbelastung',
 								es: 'Documentación ecológica',
 								ja: '環境への負荷',
 								fr: 'Impact environnemental',
 								it: 'Impatto ambientale',
 								id: 'Dampak terhadap lingkungan',
-								zh: '环境影响',
+								'zh-CN': '环境影响',
 								'pt-BR': 'Impacto Ambiental',
 								ko: '환경적 영향',
+								tr: 'Çevre Etkisi',
+								ru: 'Влияние на окружающую среду',
+								hi: 'पर्यावरणीय प्रभाव',
 							},
 						},
 						{
 							label: 'Showcase',
 							link: 'showcase',
 							translations: {
-								// de: '',
+								de: 'Schaufenster',
 								// es: '',
 								ja: 'ショーケース',
 								fr: 'Vitrine',
 								// it: '',
 								id: 'Galeri',
 								ko: '쇼케이스',
+								tr: 'Vitrin',
+								ru: 'Примеры',
+								hi: 'प्रदर्शन',
 							},
 						},
 					],
@@ -136,10 +161,13 @@ export default defineConfig({
 						ja: 'ガイド',
 						fr: 'Guides',
 						it: 'Guide',
-						id: 'Petunjuk Penggunaan',
-						zh: '指南',
+						id: 'Panduan',
+						'zh-CN': '指南',
 						'pt-BR': 'Guias',
 						ko: '가이드',
+						tr: 'Rehber',
+						ru: 'Руководства',
+						hi: 'गाइड',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -152,14 +180,16 @@ export default defineConfig({
 						fr: 'Référence',
 						it: 'Riferimenti',
 						id: 'Referensi',
-						zh: '参考',
+						'zh-CN': '参考',
 						'pt-BR': 'Referência',
 						ko: '참조',
+						tr: 'Referanslar',
+						ru: 'Справочник',
+						hi: 'संदर्भ',
 					},
 					autogenerate: { directory: 'reference' },
 				},
 			],
-			lastUpdated: true,
 		}),
 	],
 });

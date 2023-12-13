@@ -28,8 +28,8 @@ describe('pathWithBase()', () => {
 		test('does not prepend anything', () => {
 			expect(pathWithBase('/path/')).toBe('/path/');
 		});
-		test('adds leading and trailing slashes if needed', () => {
-			expect(pathWithBase('path')).toBe('/path/');
+		test('adds leading slash if needed', () => {
+			expect(pathWithBase('path')).toBe('/path');
 		});
 	});
 

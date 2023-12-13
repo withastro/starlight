@@ -1,0 +1,198 @@
+---
+title: Компоненты
+description: Использование компонентов в MDX со Starlight.
+---
+
+Компоненты позволяют вам легко повторно использовать фрагменты UI или стилизации.
+Примерами могут служить ссылочные карточки или встроенные видео YouTube.
+Starlight поддерживает использование компонентов в файлах [MDX](https://mdxjs.com/) и предоставляет некоторые общие компоненты для вашего использования.
+
+[Узнайте больше о создании компонентов в документации Astro](https://docs.astro.build/ru/core-concepts/astro-components/).
+
+## Использование компонент
+
+Вы можете использовать компонент, импортировав его в ваш файл MDX, а затем отобразив его как тег JSX.
+Они выглядят как HTML-теги, но начинаются с заглавной буквы, соответствующей имени в вашем операторе `import`:
+
+```mdx
+---
+# src/content/docs/index.mdx
+title: Добро пожаловать на мою документацию
+---
+
+import SomeComponent from '../../components/SomeComponent.astro';
+import AnotherComponent from '../../components/AnotherComponent.astro';
+
+<SomeComponent prop="something" />
+
+<AnotherComponent>
+	Компоненты могут содержать **вложенный контент**.
+</AnotherComponent>
+```
+
+Поскольку Starlight работает на базе Astro, вы можете использовать компоненты,
+созданные на любом [поддерживаемом UI-фреймворке (React, Preact, Svelte, Vue, Solid, Lit и Alpine)](https://docs.astro.build/en/core-concepts/framework-components/)
+в ваших файлах MDX.
+Узнайте больше о [использовании компонентов в MDX](https://docs.astro.build/ru/guides/markdown-content/#using-components-in-mdx) в документации Astro.
+
+### Совместимость со стилями Starlight
+
+Starlight применяет стандартные стили к вашему содержимому в формате Markdown, например, добавляет отступ между элементами.
+Если эти стили конфликтуют с внешним видом вашего компонента, установите класс `not-content` для вашего компонента, чтобы отключить их.
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Стандартные стили Starlight не применены.</p>
+</div>
+```
+
+## Встроенные компоненты
+
+Starlight предоставляет встроенные компоненты для частых случаев, нужных в документации.
+Эти компоненты доступны из пакета `@astrojs/starlight/components`.
+
+### Вкладки
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Вы можете отобразить интерфейс с вкладками, используя компоненты `<Tabs>` и `<TabItem>`.
+Каждый компонент `<TabItem>` должен иметь `label` для отображения пользователям.
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Звезды">Сириус, Вега, Бетельгейзе</TabItem>
+	<TabItem label="Луны">Ио, Европа, Ганимед</TabItem>
+</Tabs>
+```
+
+Вышеуказанный код генерирует следующие вкладки на странице:
+
+<Tabs>
+	<TabItem label="Звезды">Сириус, Вега, Бетельгейзе</TabItem>
+	<TabItem label="Луны">Ио, Европа, Ганимед</TabItem>
+</Tabs>
+
+### Карточки
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Вы можете отображать контент в блоке, со стилями Starlight, используя компонент `<Card>`.
+Оберните несколько карточек в компонент `<CardGrid>`, чтобы отображать карточки рядом, когда есть достаточно места.
+
+`<Card>` требует `title` и может дополнительно включать атрибут `icon`, установленный как название [одного из встроенных иконок Starlight](#все-иконки).
+
+```mdx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="Зацени">Интересный контент, который вы хотите подсветить.</Card>
+
+<CardGrid>
+	<Card title="Звезды" icon="star">
+		Сириус, Вега, Бетельгейзе
+	</Card>
+	<Card title="Луны" icon="moon">
+		Ио, Европа, Ганимед
+	</Card>
+</CardGrid>
+```
+
+Вышеуказанный код генерирует следующее на странице:
+
+<Card title="Зацени">Интересный контент, который вы хотите подсветить.</Card>
+
+<CardGrid>
+	<Card title="Звезды" icon="star">
+		Сириус, Вега, Бетельгейзе
+	</Card>
+	<Card title="Луны" icon="moon">
+		Ио, Европа, Ганимед
+	</Card>
+</CardGrid>
+
+:::tip
+Используйте сетку карточек на вашей домашней странице для отображения ключевых функций вашего проекта.
+Добавьте атрибут `stagger`, чтобы сдвинуть вторую колонку карточек по вертикали и добавить визуальный интерес:
+
+```astro
+<CardGrid stagger>
+	<!-- cards -->
+</CardGrid>
+```
+
+:::
+
+### Ссылочные карточки
+
+Используйте компонент `<LinkCard>` для создания заметных ссылок на разные страницы.
+
+`<LinkCard>` требует атрибута `title` и атрибута [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href).
+По желанию вы можете добавить краткое `description` или другие атрибуты ссылки, такие как `target`.
+
+Группируйте несколько компонентов `<LinkCard>` в `<CardGrid>`, чтобы отображать карточки рядом, когда есть достаточно места.
+
+```mdx
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Кастомизация Starlight"
+	description="Узнайте, как сделать ваш сайт на Starlight уникальным с вашим логотипом, шрифтами, дизайном главной страницы и многим другим"
+	href="/ru/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Создание контента в Markdown"
+		href="/ru/guides/authoring-content/"
+	/>
+	<LinkCard title="Компоненты" href="/ru/guides/components/" />
+</CardGrid>
+```
+
+Вышеуказанный код генерирует следующее на странице:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Кастомизация Starlight"
+	description="Узнайте, как сделать ваш сайт на Starlight уникальным с вашим логотипом, шрифтами, дизайном главной страницы и многим другим"
+	href="/ru/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard
+		title="Создание контента в Markdown"
+		href="/ru/guides/authoring-content/"
+	/>
+	<LinkCard title="Компоненты" href="/ru/guides/components/" />
+</CardGrid>
+
+### Иконки
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '../../../../components/icons-list.astro';
+
+Starlight предоставляет набор общих иконок, которые вы можете отображать в своем контенте, используя компонент `<Icon>`.
+
+Каждый `<Icon>` требует атрибут [`name`](#все-иконки) и по желанию может включать атрибуты `label`, `size` и `color`.
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+Вышеуказанный код генерирует следующее на странице:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### Все иконки
+
+Список всех доступных иконок показан ниже с их соответствующими именами. Кликните по значку, чтобы скопировать код компонента для него.
+
+<IconsList />

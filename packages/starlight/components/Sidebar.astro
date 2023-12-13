@@ -1,42 +1,13 @@
 ---
-import type { getSidebar } from '../utils/navigation';
-import LanguageSelect from './LanguageSelect.astro';
+import type { Props } from '../props';
+
+import { MobileMenuFooter } from 'virtual:starlight/components';
 import SidebarSublist from './SidebarSublist.astro';
-import ThemeSelect from './ThemeSelect.astro';
 
-interface Props {
-	sidebar: ReturnType<typeof getSidebar>;
-	locale: string | undefined;
-}
-
-const { sidebar, locale } = Astro.props;
+const { sidebar } = Astro.props;
 ---
 
-<div class="sidebar sl-flex">
-	<SidebarSublist sublist={sidebar} />
-	<div class="mobile-preferences sl-flex md:sl-hidden">
-		<ThemeSelect {locale} />
-		<LanguageSelect {locale} />
-	</div>
+<SidebarSublist sublist={sidebar} />
+<div class="md:sl-hidden">
+	<MobileMenuFooter {...Astro.props} />
 </div>
-
-<style>
-	.sidebar {
-		height: 100%;
-		padding: 1rem var(--sl-sidebar-pad-x);
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.mobile-preferences {
-		justify-content: space-between;
-		border-top: 1px solid var(--sl-color-gray-6);
-		padding: 0.5rem 0;
-	}
-
-	@media (min-width: 50rem) {
-		.sidebar > :global(:nth-last-child(2)) {
-			padding-bottom: 1rem;
-		}
-	}
-</style>
