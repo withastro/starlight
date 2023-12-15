@@ -9,7 +9,7 @@ const { labels, lang, lastUpdated } = Astro.props;
 		<p>
 			{labels['page.lastUpdated']}{' '}
 			<time datetime={lastUpdated.toISOString()}>
-				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium' })}
+				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
 			</time>
 		</p>
 	)
