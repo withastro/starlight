@@ -1,3 +1,5 @@
+/// <reference types="mdast-util-directive" />
+
 import type { AstroConfig, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Paragraph as P, Root } from 'mdast';
@@ -100,7 +102,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 		const locale = pathToLocale(file.history[0], options);
 		const t = options.useTranslations(locale);
 		visit(tree, (node, index, parent) => {
-			if (!parent || index === null || node.type !== 'containerDirective') {
+			if (!parent || index === undefined || node.type !== 'containerDirective') {
 				return;
 			}
 			const variant = node.name;
@@ -112,7 +114,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			// title prop, and remove the paragraph from children.
 			let title = t(`aside.${variant}`);
 			remove(node, (child): boolean | void => {
-				if (child.data?.directiveLabel) {
+				if (child.data && 'directiveLabel' in child.data && child.data.directiveLabel) {
 					if (
 						'children' in child &&
 						Array.isArray(child.children) &&

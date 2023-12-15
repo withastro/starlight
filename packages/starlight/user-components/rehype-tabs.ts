@@ -1,3 +1,4 @@
+import type { Element } from 'hast';
 import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
@@ -50,7 +51,7 @@ const getIDs = () => {
 const tabsProcessor = rehype()
 	.data('settings', { fragment: true })
 	.use(function tabs() {
-		return (tree, file) => {
+		return (tree: Element, file) => {
 			file.data.panels = [];
 			let isFirst = true;
 			visit(tree, 'element', (node) => {
