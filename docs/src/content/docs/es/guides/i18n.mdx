@@ -234,3 +234,28 @@ Puedes establecer traducciones para la UI de Pagefind en el mismo archivo JSON u
 	"pagefind.searching": "Searching for [SEARCH_TERM]..."
 }
 ```
+
+### Extiende el esquema de traducción
+
+Agrega claves personalizadas a los diccionarios de traducción de tu sitio estableciendo `extend` en las opciones de `i18nSchema()`.
+En el siguiente ejemplo, una clave nueva, opcional `custom.label` se agrega a las claves predeterminadas:
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Aprende más sobre los esquemas de colección de contenido en [“Definir un esquema de colección”](https://docs.astro.build/es/guides/content-collections/#definiendo-un-esquema-de-colección) en la documentación de Astro.
