@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add spanish translations for Expressive Code UI
+Adds Spanish translations for Expressive Code UI
