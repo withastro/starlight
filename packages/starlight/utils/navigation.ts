@@ -1,4 +1,3 @@
-import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
 import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
@@ -11,7 +10,7 @@ import type {
 import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { pickLang } from './i18n';
-import { ensureLeadingSlash } from './path';
+import { ensureLeadingSlash, ensureTrailingSlash } from './path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 
@@ -95,17 +94,13 @@ function groupFromAutogenerateConfig(
 ): Group {
 	const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
-	const dirDocs = routes
-		.filter(
-			(doc) =>
-				// Match against `foo.md` or `foo/index.md`.
-				stripExtension(doc.id) === localeDir ||
-				// Match against `foo/anything/else.md`.
-				doc.id.startsWith(localeDir + '/')
-		)
-		// Sort by depth, so that the deepest paths are first.
-		// Hack to make sure that the tree is built depth first
-		.sort((a, b) => b.id.split('/').length - a.id.split('/').length);
+	const dirDocs = routes.filter(
+		(doc) =>
+			// Match against `foo.md` or `foo/index.md`.
+			stripExtension(doc.id) === localeDir ||
+			// Match against `foo/anything/else.md`.
+			doc.id.startsWith(localeDir + '/')
+	);
 	const tree = treeify(dirDocs, localeDir);
 	return {
 		type: 'group',
@@ -165,15 +160,13 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 	// Index paths will match `baseDir` and don’t include breadcrumbs.
 	if (pathWithoutExt === baseDir) return [];
 	// Ensure base directory ends in a trailing slash.
-	if (!baseDir.endsWith('/')) baseDir += '/';
+	baseDir = ensureTrailingSlash(baseDir);
 	// Strip base directory from path if present.
 	const relativePath = pathWithoutExt.startsWith(baseDir)
 		? pathWithoutExt.replace(baseDir, '')
 		: pathWithoutExt;
-	let dir = dirname(relativePath);
-	// Return no breadcrumbs for items in the root directory.
-	if (dir === '.') return [];
-	return dir.split('/');
+
+	return relativePath.split('/');
 }
 
 /** Turn a flat array of routes into a tree structure. */
@@ -181,42 +174,37 @@ function treeify(routes: Route[], baseDir: string): Dir {
 	const treeRoot: Dir = makeDir();
 	routes
 		// Remove any entries that should be hidden
-		.filter((doc) => !doc.entry.data.sidebar.hidden).forEach((doc) => {
-		const pathwoext = stripExtension(doc.id);
-		let parts = pathwoext.split('/').filter(Boolean);
-		let leaf = parts.at(-1);
-		const baseDirParts = baseDir.split('/').filter(Boolean);
-		parts = parts.filter((part) => !baseDirParts.includes(part));
-		
-		let currentNode = treeRoot;
-		let parent = treeRoot;
+		.filter((doc) => !doc.entry.data.sidebar.hidden)
+		// Sort by depth, to build the tree depth first.
+		.sort((a, b) => b.id.split('/').length - a.id.split('/').length)
+		// Build the tree
+		.forEach((doc) => {
+			const parts = getBreadcrumbs(doc.id, baseDir);
+			let leaf = parts.at(-1);
+			let currentNode = treeRoot;
 
-		parts.forEach((part, index) => {
-			const isLeaf = index === parts.length - 1;
-			const fileIsPresentInParent = Object.keys(currentNode).includes(part);
-			if (isLeaf && fileIsPresentInParent) {
-				currentNode = currentNode[part] as Dir;
-				part = 'index';
-			}
+			parts.forEach((part, index) => {
+				const isLeaf = index === parts.length - 1;
 
-			if (!currentNode[part] && !isLeaf) {
-				currentNode[part] = makeDir();
-			} 
+				// Handle directory index pages by renaming them to `index`
+				if (isLeaf && currentNode.hasOwnProperty(part)) {
+					currentNode = currentNode[part] as Dir;
+					part = 'index';
+				}
 
-			if (!currentNode[part] && isLeaf) {
-				currentNode[part] = makeFile();
-			}
+				// Create the node if it doesn't exist
+				if (!currentNode[part]) {
+					currentNode[part] = isLeaf ? makeFile() : makeDir();
+				}
 
-			// Traverse the tree
-			parent = currentNode;
-			leaf = part;
-			currentNode = currentNode[part] as Dir;
+				// Skip the recursive step if we're at the leaf node
+				if (!isLeaf) currentNode = currentNode[part] as Dir;
+				leaf = part;
+			});
+
+			// Set the node's properties
+			if (leaf) currentNode[leaf] = doc;
 		});
-
-		// Set the node's properties
-		parent[leaf!] = doc;
-		
-	});
 
 	return treeRoot;
 }
