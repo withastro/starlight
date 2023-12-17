@@ -29,6 +29,12 @@ You must provide a title for every page. This will be displayed at the top of th
 
 The page description is used for page metadata and will be picked up by search engines and in social media previews.
 
+### `slug`
+
+**type**: `string`
+
+Override the slug of the page. See [“Defining custom slugs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) in the Astro docs for more details.
+
 ### `editUrl`
 
 **type:** `string | boolean`

@@ -287,7 +287,7 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**type:** <code>string | <a href="/it/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 Aggiungi un badge alla pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 Quando si utilizza una stringa, il badge verrà visualizzato con un colore in risalto predefinito.
