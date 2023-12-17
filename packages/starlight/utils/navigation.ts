@@ -55,6 +55,10 @@ function makeDir(): Dir {
 	return dir;
 }
 
+function makeFile(): Route {
+	return {} as Route;
+}
+
 /** Test if the passed object is a directory record.  */
 function isDir(data: Record<string, unknown>): data is Dir {
 	return DirKey in data;
@@ -177,13 +181,12 @@ function treeify(routes: Route[], baseDir: string): Dir {
 	const treeRoot: Dir = makeDir();
 	routes
 		// Remove any entries that should be hidden
-		.filter((doc) => !doc.entry.data.sidebar.hidden);
-
-	routes.forEach((doc) => {
+		.filter((doc) => !doc.entry.data.sidebar.hidden).forEach((doc) => {
 		const pathwoext = stripExtension(doc.id);
 		let parts = pathwoext.split('/').filter(Boolean);
 		let leaf = parts.at(-1);
-		parts = parts.slice(1);
+		const baseDirParts = baseDir.split('/').filter(Boolean);
+		parts = parts.filter((part) => !baseDirParts.includes(part));
 		
 		let currentNode = treeRoot;
 		let parent = treeRoot;
@@ -196,8 +199,12 @@ function treeify(routes: Route[], baseDir: string): Dir {
 				part = 'index';
 			}
 
-			if (!currentNode[part]) {
+			if (!currentNode[part] && !isLeaf) {
 				currentNode[part] = makeDir();
+			} 
+
+			if (!currentNode[part] && isLeaf) {
+				currentNode[part] = makeFile();
 			}
 
 			// Traverse the tree
