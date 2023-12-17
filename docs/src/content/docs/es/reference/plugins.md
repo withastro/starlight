@@ -66,7 +66,7 @@ Proporciona las claves de configuración de nivel raíz que deseas sobreescribir
 Para actualizar los valores de configuración anidados, debes proporcionar el objeto anidado completo.
 
 Para extender una opción de configuración existente sin sobreescribirla, extiende el valor existente en tu nuevo valor.
-En el siguiente ejemplo, se agrega una nueva cuenta en [`social`](/reference/configuration/#social) a la configuración existente extendiendo 'config.social' en el nuevo objeto social:
+En el siguiente ejemplo, se agrega una nueva cuenta en [`social`](/es/reference/configuration/#social) a la configuración existente extendiendo 'config.social' en el nuevo objeto social:
 
 ```ts {6-11}
 // plugin.ts

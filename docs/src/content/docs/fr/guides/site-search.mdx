@@ -1,56 +1,56 @@
 ---
-title: Búsqueda en el sitio
-description: Aprende sobre las funciones de búsqueda de sitios integradas de Starlight y cómo personalizarlas.
+title: Recherche
+description: Découvrez les fonctionnalités de recherche intégrées à Starlight et comment les personnaliser.
 sidebar:
-  badge: Nuevo
+  badge: Nouveau
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Por defecto, los sitios de Starlight incluyen una búsqueda de texto completo impulsada por [Pagefind](https://pagefind.app/), que es una herramienta de búsqueda rápida y de bajo ancho de banda para sitios estáticos.
+Par défaut, les sites utilisant Starlight incluent une recherche plein texte utilisant [Pagefind](https://pagefind.app/), un outil de recherche rapide et à faible bande passante pour sites statiques.
 
-No es necesaria ninguna configuración para habilitar la búsqueda. Construye e implementa tu sitio, luego usa la barra de búsqueda en el encabezado del sitio para encontrar contenido.
+Aucune configuration n'est requise pour activer la recherche. Créez et déployez votre site, puis utilisez la barre de recherche dans l'en-tête du site pour trouver du contenu.
 
-## Ocultar contenido en los resultados de búsqueda
+## Cacher du contenu dans les résultats de recherche
 
-### Excluye una página
+### Exclure une page
 
-Para excluir una página del índice de búsqueda, agrega [`pagefind: false`](/es/reference/frontmatter/#pagefind) al frontmatter de la página:
+Pour exclure une page de votre index de recherche, ajoutez [`pagefind: false`](/fr/reference/frontmatter/#pagefind) au frontmatter de la page :
 
-```md title="src/content/docs/not-indexed.md" ins={3}
+```md title="src/content/docs/sans-recherche.md" ins={3}
 ---
-title: Contenido para ocultar de la búsqueda
+title: Contenu à cacher de la recherche
 pagefind: false
 ---
 ```
 
-### Excluye parte de una página
+### Exclure une partie d'une page
 
-Pagefind ignorará el contenido dentro de un elemento con el atributo [`data-pagefind-ignore`](https://pagefind.app/docs/indexing/#removing-individual-elements-from-the-index).
+Pagefind ignorera le contenu à l'intérieur d'un élément avec l'attribut [`data-pagefind-ignore`](https://pagefind.app/docs/indexing/#removing-individual-elements-from-the-index).
 
-En el siguiente ejemplo, el primer párrafo se mostrará en los resultados de búsqueda, pero el contenido del `<div>` no:
+Dans l'exemple suivant, le premier paragraphe s'affichera dans les résultats de recherche, mais le contenu de la `<div>` ne s'affichera pas :
 
-```md title="src/content/docs/partially-indexed.md" ins="data-pagefind-ignore"
+```md title="src/content/docs/resultats-partiels.md" ins="data-pagefind-ignore"
 ---
-title: Página parcialmente indexada
+title: Page partiellement indexée
 ---
 
-Este texto será descubrible a través de la búsqueda.
+Ce texte sera trouvable via la recherche.
 
 <div data-pagefind-ignore>
 
-Este texto estará oculto de la búsqueda.
+Ce texte sera caché de la recherche.
 
 </div>
 ```
 
-## Proveedores de búsqueda alternativos
+## Système de recherche alternatif
 
 ### Algolia DocSearch
 
-Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.com/) y quieres usarlo en lugar de Pagefind, puedes usar el plugin oficial Starlight DocSearch.
+Si vous avez accès au [programme DocSearch d'Algolia](https://docsearch.algolia.com/) et que vous souhaitez l'utiliser à la place de Pagefind, vous pouvez utiliser le module d'extension officiel DocSearch de Starlight.
 
-1. Instala `@astrojs/starlight-docsearch`:
+1. Installez `@astrojs/starlight-docsearch` :
 
    <Tabs>
 
@@ -80,7 +80,7 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
 
    </Tabs>
 
-2. Agrega DocSearch a tu configuración de Starlight [`plugins`](/es/reference/configuration/#plugins) en `astro.config.mjs` y pásale tu `appId`, `apiKey` e `indexName` de Algolia:
+2. Ajouter DocSearch à votre configuration [`plugins`](/fr/reference/configuration/#plugins) de Starlight dans le fichier `astro.config.mjs` et spécifiez votre `appId`, `apiKey` et `indexName` d'Algolia :
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -91,12 +91,12 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
    export default defineConfig({
    	integrations: [
    		starlight({
-        title: 'Sitio con DocSearch',
+   			title: 'Site avec DocSearch',
    			plugins: [
    				starlightDocSearch({
-            appId: 'TU_ID_DE_APP'
-            apiKey: 'TU_LLAVE_DE_API_DE_BÚSQUEDA'
-            indexName: 'TU_NOMBRE_DE_ÍNDICE',
+   					appId: 'VOTRE_APP_ID',
+   					apiKey: 'VOTRE_CLE_API_DE_RECHERCHE',
+   					indexName: 'VOTRE_NOM_D_INDEX',
    				}),
    			],
    		}),
@@ -104,14 +104,14 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
    });
    ```
 
-Con esta configuración actualizada, la barra de búsqueda de tu sitio ahora abrirá un modal de Algolia en lugar del modal de búsqueda predeterminado.
+Avec cette configuration mise à jour, la barre de recherche de votre site ouvrira désormais une modale Algolia au lieu de celle par défaut.
 
-#### Traduciendo la UI de DocSearch
+#### Traduire l'interface utilisateur de DocSearch
 
-DocSearch solo proporciona cadenas de UI en inglés de forma predeterminada.
-Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de internacionalización](/es/guides/i18n/#traduce-la-ui-de-starlight) incorporado de Starlight.
+DocSearch fournit seulement des chaînes de l'interface utilisateur en anglais par défaut.
+Ajoutez des traductions de l'interface utilisateur de la modale pour votre langue en utilisant le [système d'internationalisation](/fr/guides/i18n/#traduire-linterface-utilisateur-de-starlight) intégré à Starlight.
 
-1. Extiende la definición de la colección de contenido `i18n` de Starlight con el esquema de DocSearch en `src/content/config.ts`:
+1. Étendez la définition de la collection de contenus `i18n` de Starlight avec le schéma DocSearch dans `src/content/config.ts` :
 
    ```js ins={4} ins=/{ extend: .+ }/
    // src/content/config.ts
@@ -128,9 +128,9 @@ Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de
    };
    ```
 
-2. Agrega traducciones a tus archivos JSON en `src/content/i18n/`.
+2. Ajoutez des traductions à vos fichiers JSON dans `src/content/i18n/`.
 
-   Estas son las predeterminadas en inglés que usa DocSearch:
+   Voici les valeurs par défaut en anglais utilisées par DocSearch :
 
    ```json title="src/content/i18n/en.json"
    {
