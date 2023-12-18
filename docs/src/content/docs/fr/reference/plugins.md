@@ -146,7 +146,7 @@ Tous les messages seront préfixés par le nom du module d'extension.
 ```ts {6}
 // module-extension.ts
 export default {
-  name: 'long-processus-plugin',
+  name: 'plugin-long-processus',
   hooks: {
     plugin({ logger }) {
       logger.info("Démarrage d'un long processus…");
@@ -159,5 +159,5 @@ export default {
 L'exemple ci-dessus affichera un message qui inclut le message d'information fourni :
 
 ```plaintext frame="terminal"
-[long-processus-plugin] Démarrage d'un long processus…
+[plugin-long-processus] Démarrage d'un long processus…
 ```
