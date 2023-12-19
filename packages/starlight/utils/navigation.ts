@@ -214,21 +214,22 @@ function getOrder(routeOrDir: Route | Dir): number {
 }
 /** Get the comparison ID for a given route to sort them alphabetically. */
 function getComparisonId(id: string) {
-  const filename = stripExtension(basename(id));
-  return filename === 'index' ? '' : filename;
+	const filename = stripExtension(basename(id));
+	return filename === 'index' ? '' : filename;
 }
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
-function sortDirEntries(
-	dir: [string, Dir | Route][],
-): [string, Dir | Route][] {
+function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
 	const collator = new Intl.Collator(localeToLang(undefined));
 	return dir.sort(([keyA, a], [keyB, b]) => {
 		const [aOrder, bOrder] = [getOrder(a), getOrder(b)];
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? keyA : getComparisonId(a.id), isDir(b) ? keyB : getComparisonId(b.id));
+		return collator.compare(
+			isDir(a) ? keyA : getComparisonId(a.id),
+			isDir(b) ? keyB : getComparisonId(b.id)
+		);
 	});
 }
 
