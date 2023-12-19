@@ -40,18 +40,25 @@ test('adds data to route shape', () => {
 		  "next": {
 		    "attrs": {},
 		    "badge": undefined,
+		    "href": "/getting-started/",
+		    "isCurrent": false,
+		    "label": "Splash",
+		    "type": "link",
+		  },
+		  "prev": {
+		    "attrs": {},
+		    "badge": undefined,
 		    "href": "/environmental-impact/",
 		    "isCurrent": false,
 		    "label": "Explicit update date",
 		    "type": "link",
 		  },
-		  "prev": undefined,
 		}
 	`);
 	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
 		[
-		  "Home Page",
 		  "Explicit update date",
+		  "Home Page",
 		  "Splash",
 		  "ToC Disabled",
 		]
