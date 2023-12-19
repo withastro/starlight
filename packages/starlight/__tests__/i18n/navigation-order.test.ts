@@ -38,6 +38,14 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
+			    "badge": undefined,
+			    "href": "/en/404/",
+			    "isCurrent": false,
+			    "label": "Not found",
+			    "type": "link",
+			  },
+			  {
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
@@ -52,14 +60,6 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "guides",
 			    "type": "group",
-			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/en/404/",
-			    "isCurrent": false,
-			    "label": "Not found",
-			    "type": "link",
 			  },
 			]
 		`);
@@ -77,6 +77,14 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "attrs": {},
+			    "badge": undefined,
+			    "href": "/fr/404/",
+			    "isCurrent": false,
+			    "label": "Not found",
+			    "type": "link",
+			  },
+			  {
 			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
@@ -91,14 +99,6 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "guides",
 			    "type": "group",
-			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/fr/404/",
-			    "isCurrent": false,
-			    "label": "Not found",
-			    "type": "link",
 			  },
 			  {
 			    "badge": undefined,

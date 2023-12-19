@@ -22,6 +22,14 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": true,
+			    "label": "Home Page",
+			    "type": "link",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Environmental impact",
@@ -50,14 +58,6 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "guides",
 			    "type": "group",
-			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/",
-			    "isCurrent": true,
-			    "label": "Home Page",
-			    "type": "link",
 			  },
 			]
 		`);
