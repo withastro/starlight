@@ -224,7 +224,7 @@ function sortDirEntries(
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? keyA : a.entry.data.title, isDir(b) ? keyB : b.entry.data.title);
+		return collator.compare(isDir(a) ? keyA : stripExtension(basename(a.entry.id)), isDir(b) ? keyB : stripExtension(basename(b.entry.id)));
 	});
 }
 
