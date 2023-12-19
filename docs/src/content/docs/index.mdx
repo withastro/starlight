@@ -47,21 +47,26 @@ import Testimonial from '../../components/testimonial.astro';
 </CardGrid>
 
 <TestimonialGrid title="Testimonials">
-  <Testimonial dir="ltr" date={new Date('10-10-23')} link={new URL('https://x.com/eliancodes')} avatar="https://avatars.githubusercontent.com/u/15145918?v=4" name="Elian" handle="eliancodes" content="I really really like Starlight!" />
-  <Testimonial name="HiDeoo" handle="HiDeoo">
-    <p>So what's the deal with Starlight?</p>
-    <button>I just wanted a button</button>
-    <button>I really like buttons 🤣</button>
-  </Testimonial>
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="I prefer inputs" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content='I use <a href="https://starlight"astro.build>Starlight</a> for <em>everything</em>. 🌭' />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/5098874?v=4" name="Sarah" handle="sarah11918" content="I use Starlight for everything. 🌭" >some <a href="https://twitter.com/sarah11918">content</a></Testimonial>
-  <Testimonial avatar="https://files.mastodon.social/accounts/avatars/000/011/967/original/f8789e7707cf523e.jpg" link="https://mastodon.social/@sarah11918" name="Sarah" handle="sarah11918" content="I also use Starlight for everything. 🌭" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/357379?v=4" name="Chris" handle="delucis" content="What is Starlight?" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure" handle="genteure" content="Starlight ✨ is much better than 🌕 moonlight!" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure (Google translated)" handle="genteure" content="ضوء النجوم ✨ أفضل بكثير من 🌕 ضوء القمر!"/>
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/11240579?v=4" name="Genteure" handle="genteure" content="Starlight ✨ 是一个非常好用的文档网站！如果有一个特别长的中文句子会发生什么什么什么什么什么什么？ long length chinese char test" />
-  <Testimonial avatar="https://avatars.githubusercontent.com/u/88548999?v=4" name="Atharva" handle="itseobard" content="If i am building a documentation project, I will go with Starlight anyday" />
+  <Testimonial
+    dir="ltr"
+    lang="en"
+    date={new Date('10-20-23')}
+    link={new URL('https://x.com/sylwiavargas')}
+    avatar="https://pbs.twimg.com/profile_images/1382705200125853702/Ji3F2dl3_400x400.jpg"
+    name="Sylwia"
+    handle="SylwiaVargas"
+    content="I used Starlight in my last job and loved it. Great components, intuitive design, and super-responsive community (whenever anyone needed something, they’d ship it soonish or tell you a workaround). Very pleasant experience."
+  />
+  <Testimonial
+    dir="ltr"
+    date={new Date('12-15-23')}
+    link={new URL('https://x.com/sulco')}
+    avatar="https://pbs.twimg.com/profile_images/1627613748818022401/SOy8wRn7_400x400.png"
+    name="Tomek"
+    handle="sulco"
+    content="Starlight is our go-to example of a great DX: the speed, convenience, and attention to details is inspiring. It takes care of the tech and the looks, so you can focus on your content 👏
+StackBlitz team absolutely loves it!"
+  />
 </TestimonialGrid>
 
 <AboutAstro title="Brought to you by">
