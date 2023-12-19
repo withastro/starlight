@@ -71,6 +71,14 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
+			    "href": "/fr/",
+			    "isCurrent": true,
+			    "label": "Accueil",
+			    "type": "link",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
 			    "href": "/fr/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
@@ -91,14 +99,6 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "guides",
 			    "type": "group",
-			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/fr/",
-			    "isCurrent": true,
-			    "label": "Accueil",
-			    "type": "link",
 			  },
 			  {
 			    "badge": undefined,

@@ -20,6 +20,14 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": true,
+			    "label": "Home Page",
+			    "type": "link",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
@@ -48,14 +56,6 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "guides",
 			    "type": "group",
-			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/",
-			    "isCurrent": true,
-			    "label": "Home Page",
-			    "type": "link",
 			  },
 			]
 		`);
@@ -121,6 +121,14 @@ describe('flattenSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
+			    "href": "/",
+			    "isCurrent": true,
+			    "label": "Home Page",
+			    "type": "link",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
@@ -142,14 +150,6 @@ describe('flattenSidebar', () => {
 			    "label": "Components",
 			    "type": "link",
 			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/",
-			    "isCurrent": true,
-			    "label": "Home Page",
-			    "type": "link",
-			  },
 			]
 		`);
 	});
@@ -157,24 +157,24 @@ describe('flattenSidebar', () => {
 
 describe('getPrevNextLinks', () => {
 	test('returns stable previous/next values', () => {
-		const sidebar = getSidebar('/guides/authoring-content/', undefined);
+		const sidebar = getSidebar('/environmental-impact/', undefined);
 		const links = getPrevNextLinks(sidebar, true, {});
 		expect(links).toMatchInlineSnapshot(`
 			{
 			  "next": {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/guides/components/",
+			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
-			    "label": "Components",
+			    "label": "Authoring Markdown",
 			    "type": "link",
 			  },
 			  "prev": {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/environmental-impact/",
+			    "href": "/",
 			    "isCurrent": false,
-			    "label": "Eco-friendly docs",
+			    "label": "Home Page",
 			    "type": "link",
 			  },
 			}
@@ -188,19 +188,19 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('returns no previous link for first item', () => {
-		const sidebar = getSidebar('/environmental-impact/', undefined);
+		const sidebar = getSidebar('/', undefined);
 		const links = getPrevNextLinks(sidebar, true, {});
 		expect(links.prev).toBeUndefined();
 	});
 
 	test('returns no next link for last item', () => {
-		const sidebar = getSidebar('/', undefined);
+		const sidebar = getSidebar('/guides/components/', undefined);
 		const links = getPrevNextLinks(sidebar, true, {});
 		expect(links.next).toBeUndefined();
 	});
 
 	test('final parameter can disable prev/next', () => {
-		const sidebar = getSidebar('/guides/authoring-content/', undefined);
+		const sidebar = getSidebar('/environmental-impact/', undefined);
 		expect(getPrevNextLinks(sidebar, true, { prev: true }).prev).toBeDefined();
 		expect(getPrevNextLinks(sidebar, true, { prev: false }).prev).toBeUndefined();
 		expect(getPrevNextLinks(sidebar, true, { next: true }).next).toBeDefined();
@@ -208,7 +208,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('final parameter can set custom link label with string', () => {
-		const sidebar = getSidebar('/guides/authoring-content/', undefined);
+		const sidebar = getSidebar('/environmental-impact/', undefined);
 		const withDefaultLabels = getPrevNextLinks(sidebar, true, {});
 		const withCustomLabels = getPrevNextLinks(sidebar, true, { prev: 'x', next: 'y' });
 		expect(withCustomLabels.prev?.label).toBe('x');
@@ -218,7 +218,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('final parameter can set custom link label with object', () => {
-		const sidebar = getSidebar('/guides/authoring-content/', undefined);
+		const sidebar = getSidebar('/environmental-impact/', undefined);
 		const withDefaultLabels = getPrevNextLinks(sidebar, true, {});
 		const withCustomLabels = getPrevNextLinks(sidebar, true, {
 			prev: { label: 'x' },
@@ -231,7 +231,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('final parameter can set custom link destination', () => {
-		const sidebar = getSidebar('/guides/authoring-content/', undefined);
+		const sidebar = getSidebar('/environmental-impact/', undefined);
 		const withDefaults = getPrevNextLinks(sidebar, true, {});
 		const withCustomLinks = getPrevNextLinks(sidebar, true, {
 			prev: { link: '/x' },
@@ -246,7 +246,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('final parameter can set custom link even if no default link existed', () => {
-		const sidebar = getSidebar('/environmental-impact/', undefined);
+		const sidebar = getSidebar('/', undefined);
 		const withDefaults = getPrevNextLinks(sidebar, true, {});
 		const withCustomLinks = getPrevNextLinks(sidebar, true, {
 			prev: { link: 'x', label: 'X' },
@@ -262,7 +262,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('final parameter can override global pagination toggle', () => {
-		const sidebar = getSidebar('/guides/authoring-content/', undefined);
+		const sidebar = getSidebar('/environmental-impact/', undefined);
 		const withDefaults = getPrevNextLinks(sidebar, true, {});
 		const withOverrides = getPrevNextLinks(sidebar, false, { prev: true, next: true });
 		expect(withOverrides).toEqual(withDefaults);
