@@ -182,6 +182,7 @@
     "bcp-47": "^2.1.0",
     "execa": "^8.0.1",
     "hast-util-select": "^6.0.2",
+    "hast-util-to-string": "^3.0.0",
     "hastscript": "^8.0.0",
     "mdast-util-directive": "^3.0.0",
     "pagefind": "^1.0.3",

@@ -1,0 +1,113 @@
+---
+import { processFileTree } from './rehype-file-tree';
+
+// TODO(HiDeoo) props
+// TODO(HiDeoo) title?
+// TODO(HiDeoo) pagefind ignore?
+
+const fileTreeHtml = await Astro.slots.render('default');
+
+// TODO(HiDeoo) error handling
+
+// TODO(HiDeoo) localized directory label
+const html = processFileTree(fileTreeHtml, 'Directory');
+
+// TODO(HiDeoo) rename component
+---
+
+<file-treeeeeeeee set:html={html} class="not-content" data-pagefind-ignore />
+
+<style>
+	file-treeeeeeeee {
+		--x-space: 1.5rem;
+		--y-space: 0.125rem;
+		--y-pad: 0;
+
+		display: block;
+		border: 1px solid var(--sl-color-gray-5);
+		padding: 1rem;
+		background-color: var(--sl-color-gray-6);
+		font-size: var(--sl-text-xs);
+		font-family: var(--__sl-font-mono);
+		overflow-x: auto;
+	}
+
+	file-treeeeeeeee :global(.directory > details) {
+		border: 0;
+		padding: 0;
+		padding-inline-start: var(--x-space);
+		background: transparent;
+	}
+
+	file-treeeeeeeee :global(.directory > details > summary) {
+		margin-inline-start: calc(-1 * var(--x-space));
+		border: 0;
+		padding: var(--y-pad) 0.625rem;
+		font-weight: normal;
+		color: var(--sl-color-white);
+		max-width: 100%;
+
+		&::marker,
+		&::-webkit-details-marker {
+			color: var(--sl-color-gray-3);
+		}
+
+		&:hover {
+			cursor: pointer;
+			color: var(--sl-color-text-accent);
+			fill: var(--sl-color-text-accent);
+
+			& ~ :global(ul) {
+				border-color: var(--sl-color-gray-4);
+			}
+		}
+	}
+
+	file-treeeeeeeee :global(ul) {
+		margin-inline-start: 0.6875rem;
+		border-inline-start: 1px solid var(--sl-color-gray-5);
+		padding: 0;
+		padding-inline-start: 0.125rem;
+		list-style: none;
+	}
+
+	file-treeeeeeeee > :global(ul) {
+		margin: 0;
+		border: 0;
+		padding: 0;
+	}
+
+	file-treeeeeeeee :global(li) {
+		margin: var(--y-space) 0;
+		padding: var(--y-pad) 0;
+	}
+
+	file-treeeeeeeee :global(.file) {
+		margin-inline-start: calc(var(--x-space) - 0.125rem);
+		color: var(--sl-color-white);
+	}
+
+	file-treeeeeeeee :global(.tree-entry) {
+		display: inline-flex;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		max-width: calc(100% - 1rem);
+
+		@media (min-width: 30em) {
+			& {
+				flex-wrap: nowrap;
+			}
+		}
+
+		& > :global(:first-child) {
+			flex-shrink: 0;
+		}
+	}
+
+	file-treeeeeeeee :global(.comment) {
+		color: var(--sl-color-gray-3);
+		padding-inline-start: 1.625rem;
+		max-width: 24rem;
+		min-width: 12rem;
+	}
+</style>

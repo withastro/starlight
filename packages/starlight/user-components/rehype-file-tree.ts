@@ -87,10 +87,8 @@ const fileTreeProcessor = rehype().use(function fileTree() {
 			}
 
 			// Add classes and data attributes to the list item node.
-			node.properties.class = [
-				isDirectory ? 'directory' : 'file',
-				isPlaceholder ? 'empty' : '',
-			].join(' ');
+			node.properties.class = isDirectory ? 'directory' : 'file';
+			if (isPlaceholder) node.properties.class += ' empty';
 			node.properties['data-filetype'] = fileExtension;
 
 			// Create the tree entry node that contains the icon, file name and comment which will end up
