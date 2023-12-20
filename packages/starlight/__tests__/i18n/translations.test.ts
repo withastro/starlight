@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import translations from '../../translations';
 import { useTranslations } from '../../utils/translations';
 

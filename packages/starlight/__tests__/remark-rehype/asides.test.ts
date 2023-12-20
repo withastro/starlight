@@ -118,9 +118,7 @@ describe('translated labels in French', () => {
 :::${type}
 Some text
 :::
-`,
-			{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
-		);
+`);
 		expect(res.code).includes(`aria-label="${label}"`);
 		expect(res.code).includes(`</svg>${label}</p>`);
 	});

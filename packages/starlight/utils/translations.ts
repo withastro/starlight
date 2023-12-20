@@ -8,6 +8,7 @@ let userTranslations: Record<string, i18nSchemaOutput> = {};
 try {
 	// Load the user’s i18n collection and ignore the error if it doesn’t exist.
 	userTranslations = Object.fromEntries(
+		// @ts-expect-error
 		(await getCollection('i18n')).map(({ id, data }) => [id, data] as const)
 	);
 } catch {}

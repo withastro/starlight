@@ -30,6 +30,7 @@ export function error(message, ...params) {
 /**
  * Dedents the given markdown and replaces single newlines with spaces,
  * while leaving new paragraphs intact.
+ * @param {[string | TemplateStringsArray, ...any[]]} markdown
  */
 export function dedentMd(...markdown) {
 	return dedent(...markdown).replace(/(\S)\n(?!\n)/g, '$1 ');
@@ -56,7 +57,7 @@ export function formatCount(count, template) {
 	const wrapWithCount = (text) => {
 		// If no count was given, we're outputting a single issue in annotations,
 		// so omit count and capitalize the first letter of the issue type description
-		if (count === undefined) return text[0].toUpperCase() + text.slice(1);
+		if (count === undefined) return text[0]?.toUpperCase() + text.slice(1);
 
 		// Otherwise, prefix the issue type description with count
 		return `${count} ${text}`;
@@ -65,7 +66,7 @@ export function formatCount(count, template) {
 	const usePlural = count !== undefined && count !== 1;
 	const templateParts = template.split('|');
 	const usedTemplate = templateParts.length === 2 ? templateParts[usePlural ? 1 : 0] : template;
-	return wrapWithCount(usedTemplate.replace(/\(s\)/g, usePlural ? 's' : ''));
+	return wrapWithCount(usedTemplate?.replace(/\(s\)/g, usePlural ? 's' : '') ?? '');
 }
 
 export default {

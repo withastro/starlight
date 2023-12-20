@@ -9,6 +9,7 @@ import pRetry, { AbortError } from 'p-retry';
 export async function githubGet({ url, githubToken = undefined }) {
 	return await pRetry(
 		async () => {
+			/** @type {Record<string, string>} */
 			const headers = {
 				Accept: 'application/vnd.github.v3+json',
 			};
