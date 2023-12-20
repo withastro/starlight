@@ -177,6 +177,9 @@ importers:
       hast-util-select:
         specifier: ^6.0.2
         version: 6.0.2
+      hast-util-to-string:
+        specifier: ^3.0.0
+        version: 3.0.0
       hastscript:
         specifier: ^8.0.0
         version: 8.0.0
