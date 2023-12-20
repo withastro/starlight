@@ -8,11 +8,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from 'node:path';
+import { basename, dirname } from 'node:path';
 import { execaSync } from 'execa';
-
-/** Custom error thrown when git is not found in `PATH`. */
-class GitNotFoundError extends Error {}
 
 /** Custom error thrown when the current file is not tracked by git. */
 class FileNotTrackedError extends Error {}
@@ -22,7 +19,6 @@ class FileNotTrackedError extends Error {}
  * It gets the commit date instead of author date so that amended commits
  * can have their dates updated.
  *
- * @throws {GitNotFoundError} If git is not found in `PATH`.
  * @throws {FileNotTrackedError} If the current file is not tracked by git.
  * @throws Also throws when `git log` exited with non-zero, or when it outputs
  * unexpected text.
@@ -34,24 +30,6 @@ export function getFileCommitDate(
 	date: Date;
 	timestamp: number;
 } {
-	try {
-		const { stdout } = execaSync('which', ['git']);
-		if (!stdout) {
-			throw new GitNotFoundError(
-				`Failed to retrieve git history for "${file}" because git is not installed.`
-			);
-		}
-	} catch {}
-
-	try {
-		const { stdout } = execaSync('test', ['-f', file]);
-		if (!stdout) {
-			throw new Error(
-				`Failed to retrieve git history for "${file}" because the file does not exist.`
-			);
-		}
-	} catch {}
-
 	const result = execaSync(
 		'git',
 		[
@@ -60,10 +38,10 @@ export function getFileCommitDate(
 			'--max-count=1',
 			...(age === 'oldest' ? ['--follow', '--diff-filter=A'] : []),
 			'--',
-			path.basename(file),
+			basename(file),
 		],
 		{
-			cwd: path.dirname(file),
+			cwd: dirname(file),
 		}
 	);
 	if (result.exitCode !== 0) {
@@ -71,7 +49,6 @@ export function getFileCommitDate(
 			`Failed to retrieve the git history for file "${file}" with exit code ${result.exitCode}: ${result.stderr}`
 		);
 	}
-	let regex = /^(?<timestamp>\d+)$/;
 
 	const output = result.stdout.trim();
 
@@ -81,6 +58,7 @@ export function getFileCommitDate(
 		);
 	}
 
+	const regex = /^(?<timestamp>\d+)$/;
 	const match = output.match(regex);
 
 	if (!match) {

@@ -1,56 +1,56 @@
 ---
-title: Búsqueda en el sitio
-description: Aprende sobre las funciones de búsqueda de sitios integradas de Starlight y cómo personalizarlas.
+title: Pencarian Situs
+description: Pelajari tentang fitur pencarian situs bawaan Starlight dan cara mengkustomisasinya.
 sidebar:
-  badge: Nuevo
+  badge: Baru
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Por defecto, los sitios de Starlight incluyen una búsqueda de texto completo impulsada por [Pagefind](https://pagefind.app/), que es una herramienta de búsqueda rápida y de bajo ancho de banda para sitios estáticos.
+Secara default, situs Starlight termasuk pencarian teks lengkap yang didukung oleh [Pagefind](https://pagefind.app/), yang merupakan alat pencarian cepat dan bandwidth rendah untuk situs statis.
 
-No es necesaria ninguna configuración para habilitar la búsqueda. Construye e implementa tu sitio, luego usa la barra de búsqueda en el encabezado del sitio para encontrar contenido.
+Tidak diperlukan konfigurasi untuk mengaktifkan pencarian. Bangun dan terapkan situs Anda, kemudian gunakan bilah pencarian di header situs untuk menemukan konten.
 
-## Ocultar contenido en los resultados de búsqueda
+## Sembunyikan konten dalam hasil pencarian
 
-### Excluye una página
+### Kecualikan sebuah halaman
 
-Para excluir una página del índice de búsqueda, agrega [`pagefind: false`](/es/reference/frontmatter/#pagefind) al frontmatter de la página:
+Untuk mengecualikan sebuah halaman dari indeks pencarian Anda, tambahkan [`pagefind: false`](/id/reference/frontmatter/#pagefind) ke frontmatter halaman:
 
-```md title="src/content/docs/not-indexed.md" ins={3}
+```md title="src/content/docs/tidak-diindeks.md" ins={3}
 ---
-title: Contenido para ocultar de la búsqueda
+title: Konten yang Disembunyikan dari Pencarian
 pagefind: false
 ---
 ```
 
-### Excluye parte de una página
+### Kecualikan bagian dari sebuah halaman
 
-Pagefind ignorará el contenido dentro de un elemento con el atributo [`data-pagefind-ignore`](https://pagefind.app/docs/indexing/#removing-individual-elements-from-the-index).
+Pagefind akan mengabaikan konten di dalam elemen dengan atribut [`data-pagefind-ignore`](https://pagefind.app/docs/indexing/#removing-individual-elements-from-the-index).
 
-En el siguiente ejemplo, el primer párrafo se mostrará en los resultados de búsqueda, pero el contenido del `<div>` no:
+Dalam contoh berikut, paragraf pertama akan ditampilkan dalam hasil pencarian, tetapi isi dari `<div>` tidak akan:
 
-```md title="src/content/docs/partially-indexed.md" ins="data-pagefind-ignore"
+```md title="src/content/docs/sebagian-diindeks.md" ins="data-pagefind-ignore"
 ---
-title: Página parcialmente indexada
+title: Halaman yang Diindeks Sebagian
 ---
 
-Este texto será descubrible a través de la búsqueda.
+Teks ini akan ditemukan melalui pencarian.
 
 <div data-pagefind-ignore>
 
-Este texto estará oculto de la búsqueda.
+Teks ini akan disembunyikan dari pencarian.
 
 </div>
 ```
 
-## Proveedores de búsqueda alternativos
+## Penyedia pencarian alternatif
 
 ### Algolia DocSearch
 
-Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.com/) y quieres usarlo en lugar de Pagefind, puedes usar el plugin oficial Starlight DocSearch.
+Jika Anda memiliki akses ke [Algolia’s DocSearch program](https://docsearch.algolia.com/) dan ingin menggunakannya sebagai gantinya Pagefind, Anda dapat menggunakan plugin DocSearch Starlight resmi.
 
-1. Instala `@astrojs/starlight-docsearch`:
+1. Install `@astrojs/starlight-docsearch`:
 
    <Tabs>
 
@@ -80,7 +80,7 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
 
    </Tabs>
 
-2. Agrega DocSearch a tu configuración de Starlight [`plugins`](/es/reference/configuration/#plugins) en `astro.config.mjs` y pásale tu `appId`, `apiKey` e `indexName` de Algolia:
+2. Tambahkan DocSearch ke konfigurasi [`plugins`](/id/reference/configuration/#plugins) Starlight Anda di `astro.config.mjs` dan taruh `appId`, `apiKey`, and `indexName` Algolia Anda:
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -91,12 +91,12 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
    export default defineConfig({
    	integrations: [
    		starlight({
-        title: 'Sitio con DocSearch',
+   			title: 'Situs dengan DocSearch',
    			plugins: [
    				starlightDocSearch({
-            appId: 'TU_ID_DE_APP'
-            apiKey: 'TU_LLAVE_DE_API_DE_BÚSQUEDA'
-            indexName: 'TU_NOMBRE_DE_ÍNDICE',
+   					appId: 'ID_APLIKASI_ANDA',
+   					apiKey: 'KUNCI_API_ANDA',
+   					indexName: 'NAMA_INDEX_ANDA',
    				}),
    			],
    		}),
@@ -104,14 +104,14 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
    });
    ```
 
-Con esta configuración actualizada, la barra de búsqueda de tu sitio ahora abrirá un modal de Algolia en lugar del modal de búsqueda predeterminado.
+Dengan konfigurasi yang diperbarui ini, bilah pencarian di situs Anda sekarang akan membuka modal Algolia sebagai gantinya modal pencarian bawaan.
 
-#### Traduciendo la UI de DocSearch
+#### Menerjemahkan UI DocSearch
 
-DocSearch solo proporciona cadenas de UI en inglés de forma predeterminada.
-Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de internacionalización](/es/guides/i18n/#traduce-la-ui-de-starlight) incorporado de Starlight.
+Secara default, DocSearch hanya menyediakan string UI dalam Bahasa Inggris.
+Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalization system](/id/guides/i18n/#terjemahkan-ui-starlight) bawaan Starlight.
 
-1. Extiende la definición de la colección de contenido `i18n` de Starlight con el esquema de DocSearch en `src/content/config.ts`:
+1. Perluas definisi koleksi konten `i18n` Starlight dengan skema DocSearch di `src/content/config.ts`:
 
    ```js ins={4} ins=/{ extend: .+ }/
    // src/content/config.ts
@@ -128,9 +128,9 @@ Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de
    };
    ```
 
-2. Agrega traducciones a tus archivos JSON en `src/content/i18n/`.
+2. Tambahkan terjemahan ke file JSON Anda di `src/content/i18n/`.
 
-   Estas son las predeterminadas en inglés que usa DocSearch:
+   Ini adalah default Bahasa Inggris yang digunakan oleh DocSearch:
 
    ```json title="src/content/i18n/en.json"
    {
