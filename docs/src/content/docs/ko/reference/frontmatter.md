@@ -29,6 +29,12 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 페이지 설명은 페이지 메타데이터에 사용되며 검색 엔진과 소셜 미디어 미리 보기에서 선택됩니다.
 
+### `slug`
+
+**타입**: `string`
+
+페이지의 슬러그를 재정의합니다. 자세한 내용은 Astro 공식문서의 [“사용자 정의 슬러그 정의”](https://docs.astro.build/ko/guides/content-collections/#defining-custom-slugs)를 참조하세요.
+
 ### `editUrl`
 
 **타입:** `string | boolean`
@@ -364,4 +370,72 @@ sidebar:
   attrs:
     target: _blank
 ---
+```
+
+## 프런트매터 스키마 맞춤설정
+
+Starlight의 `docs` 콘텐츠 컬렉션에 대한 프런트매터 스키마는 `docsSchema()` 도우미를 사용하여 `src/content/config.ts`에 구성됩니다.
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
+
+`docsSchema()`는 다음 옵션을 사용합니다:
+
+### `extend`
+
+**타입:** Zod 스키마 또는 Zod 스키마를 반환하는 함수  
+**기본값:** `z.object({})`
+
+`docsSchema()` 옵션에서 `extend`를 설정하여 추가 필드로 Starlight의 스키마를 확장하세요.
+값은 [Zod 스키마](https://docs.astro.build/ko/guides/content-collections/#defining-datatypes-with-zod)여야 합니다.
+
+다음 예시에서는 `description` 필드에 더 엄격한 타입을 제공하여 필수 항목으로 만들고, 새로운 선택적 필드인 `category`를 추가합니다.
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // 기본 제공 필드를 선택 사항이 아닌 필수 항목으로 변경합니다.
+        description: z.string(),
+        // 스키마에 새 필드를 추가합니다.
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+[Astro `image()` 도우미](https://docs.astro.build/ko/guides/images/#images-in-content-collections)를 활용하려면 스키마 확장을 반환하는 함수를 사용하세요.
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // 로컬 이미지로 확인되어야 하는 필드를 추가합니다.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```

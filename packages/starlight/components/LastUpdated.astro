@@ -1,17 +1,15 @@
 ---
 import type { Props } from '../props';
-import { useTranslations } from '../utils/translations';
 
-const { lang, lastUpdated, locale } = Astro.props;
-const t = useTranslations(locale);
+const { labels, lang, lastUpdated } = Astro.props;
 ---
 
 {
 	lastUpdated && (
 		<p>
-			{t('page.lastUpdated')}{' '}
+			{labels['page.lastUpdated']}{' '}
 			<time datetime={lastUpdated.toISOString()}>
-				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium' })}
+				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
 			</time>
 		</p>
 	)
