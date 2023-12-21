@@ -13,11 +13,7 @@ declare module 'vfile' {
 }
 
 const folderIcon = makeSVGIcon(Icons['folder']);
-
-// TODO(HiDeoo)
-const defaultFileIcon = makeSVGIcon(
-	'<path d="M14.77 6.45H9.8v-.47A.97.97 0 0 0 8.83 5H3.75v10H15.7V7.42a.91.91 0 0 0-.93-.97Z"/>'
-);
+const defaultFileIcon = makeSVGIcon(Icons['file']);
 
 /**
  * Process the HTML for a file tree to create the necessary markup for each file and directory
@@ -150,11 +146,8 @@ function makeSVGIcon(svgString: string) {
 
 function getFileIcon(fileName: string) {
 	const type = getFileIconType(fileName);
-	console.log('🚨 [rehype-file-tree.ts:156] fileName, type:', fileName, type);
 	if (!type) return defaultFileIcon;
-	// FIXME(HiDeoo)
-	// const iconName = `file-${type}`;
-	const iconName = `matrix`;
+	const iconName = `file-${type}`;
 	if (iconName in Icons) {
 		const path = Icons[iconName as keyof typeof Icons];
 		return makeSVGIcon(path);
