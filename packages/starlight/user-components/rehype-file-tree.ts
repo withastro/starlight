@@ -161,8 +161,8 @@ function getFileIconName(fileName: string) {
 	if (icon) return icon;
 	icon = getFileIconTypeFromExtension(fileName);
 	if (icon) return icon;
-	for (const partial of definitions.partials) {
-		if (fileName.includes(partial[0])) return partial[1];
+	for (const [partial, partialIcon] of Object.entries(definitions.partials)) {
+		if (fileName.includes(partial)) return partialIcon;
 	}
 	return icon;
 }
@@ -568,47 +568,46 @@ const definitions: Definitions = {
 		'.DS_Store': 'eye-slash',
 		'.cloudflared': 'cloudflare',
 	},
-	// TODO(HiDeoo) refactor to object
-	partials: [
-		['TODO.md', 'approve-check-square'],
-		['TODO.txt', 'approve-check-square'],
-		['TODO', 'approve-check-square'],
-		['Procfile', 'heroku'],
-		['CONTRIBUTING.md', 'approve-check-file'],
-		['CONTRIBUTING.txt', 'approve-check-file'],
-		['CONTRIBUTING', 'approve-check-file'],
-		['COMPILING.md', 'approve-check-file'],
-		['COMPILING.txt', 'approve-check-file'],
-		['COMPILING', 'approve-check-file'],
-		['COPYING.md', 'approve-check-file'],
-		['COPYING.txt', 'approve-check-file'],
-		['COPYING', 'approve-check-file'],
-		['LICENCE.md', 'approve-check-file'],
-		['LICENSE.md', 'approve-check-file'],
-		['LICENCE.txt', 'approve-check-file'],
-		['LICENSE.txt', 'approve-check-file'],
-		['LICENCE', 'approve-check-file'],
-		['LICENSE', 'approve-check-file'],
-		['gulpfile.js', 'gulp'],
-		['gulpfile', 'gulp'],
-		['Gulpfile', 'gulp'],
-		['GULPFILE', 'gulp'],
-		['docker-compose.override.yaml', 'docker'],
-		['docker-compose.override.yml', 'docker'],
-		['docker-compose.yaml', 'docker'],
-		['docker-compose.yml', 'docker'],
-		['docker-healthcheck', 'docker'],
-		['.dockerignore', 'docker'],
-		['DOCKERFILE', 'docker'],
-		['Dockerfile', 'docker'],
-		['dockerfile', 'docker'],
-		['gemfile', 'ruby'],
-		['Gemfile', 'ruby'],
-	],
+	partials: {
+		'TODO.md': 'approve-check-square',
+		'TODO.txt': 'approve-check-square',
+		TODO: 'approve-check-square',
+		Procfile: 'heroku',
+		'CONTRIBUTING.md': 'approve-check-file',
+		'CONTRIBUTING.txt': 'approve-check-file',
+		CONTRIBUTING: 'approve-check-file',
+		'COMPILING.md': 'approve-check-file',
+		'COMPILING.txt': 'approve-check-file',
+		COMPILING: 'approve-check-file',
+		'COPYING.md': 'approve-check-file',
+		'COPYING.txt': 'approve-check-file',
+		COPYING: 'approve-check-file',
+		'LICENCE.md': 'approve-check-file',
+		'LICENSE.md': 'approve-check-file',
+		'LICENCE.txt': 'approve-check-file',
+		'LICENSE.txt': 'approve-check-file',
+		LICENCE: 'approve-check-file',
+		LICENSE: 'approve-check-file',
+		'gulpfile.js': 'gulp',
+		gulpfile: 'gulp',
+		Gulpfile: 'gulp',
+		GULPFILE: 'gulp',
+		'docker-compose.override.yaml': 'docker',
+		'docker-compose.override.yml': 'docker',
+		'docker-compose.yaml': 'docker',
+		'docker-compose.yml': 'docker',
+		'docker-healthcheck': 'docker',
+		'.dockerignore': 'docker',
+		DOCKERFILE: 'docker',
+		Dockerfile: 'docker',
+		dockerfile: 'docker',
+		gemfile: 'ruby',
+		Gemfile: 'ruby',
+	},
 };
 
 interface Definitions {
 	files: Record<string, string>;
 	extensions: Record<string, string>;
-	partials: [string, string][];
+	partials: Record<string, string>;
 }
