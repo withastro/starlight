@@ -195,3 +195,52 @@ The code above generates the following on the page:
 A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
 
 <IconsList />
+
+### FileTree
+
+Use the `<FileTree>` component to display a file tree in your documentation representing the structure of a directory.
+
+A `<FileTree>` requires an [unordered Markdown list](https://www.markdownguide.org/basic-syntax/#unordered-lists) of files and directories.
+Directories can either end with a `/` or contain a nested list of files and directories.
+
+The following syntax can be used to customize the appearance of the file tree:
+
+- If a file or directory name is bolded, e.g. `**README.md**`, it will be highlighted in the file tree.
+- Comments can be appended after a file or directory name to provide additional information.
+- Placeholder files and directories can be added by using either `...` or `…` as the name.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+The above code generates the following on the page:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
