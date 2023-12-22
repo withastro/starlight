@@ -7,9 +7,6 @@ const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
 const t = useTranslations(slugToLocaleData(slug).locale);
 
 const fileTreeHtml = await Astro.slots.render('default');
-
-// TODO(HiDeoo) error handling
-
 const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
 
 // TODO(HiDeoo) rename component

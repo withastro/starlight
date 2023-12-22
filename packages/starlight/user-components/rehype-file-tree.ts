@@ -1,5 +1,7 @@
+import { AstroError } from 'astro/errors';
 import type { Element, Text } from 'hast';
 import { type Child, h, s } from 'hastscript';
+import { select, selectAll } from 'hast-util-select';
 import { fromHtml } from 'hast-util-from-html';
 import { toString } from 'hast-util-to-string';
 import { rehype } from 'rehype';
@@ -32,6 +34,8 @@ export function processFileTree(html: string, directoryLabel: string) {
 const fileTreeProcessor = rehype().use(function fileTree() {
 	return (tree: Element, file) => {
 		const { directoryLabel } = file.data;
+
+		validateFileTree(tree);
 
 		visit(tree, 'element', (node) => {
 			// Strip nodes that only contain newlines.
@@ -185,6 +189,48 @@ function getFileIconTypeFromExtension(fileName: string) {
 		extension = extension.slice(nextDotIndex);
 	}
 	return;
+}
+
+/** Validate that the user provided HTML for a file tree is valid. */
+function validateFileTree(tree: Element) {
+	const rootElements = selectAll('body > *', tree);
+	const [rootElement] = rootElements;
+
+	if (rootElements.length === 0) {
+		throwFileTreeValidationError(
+			`The <FileTree/> component expects its content to be a unique unordered list but found no elements.`
+		);
+	}
+
+	if (rootElements.length !== 1) {
+		throwFileTreeValidationError(
+			`The <FileTree/> component expects its content to be a unique unordered list but found the following elements: ${rootElements
+				.map((element) => `<${element.tagName}>`)
+				.join(' - ')}.`
+		);
+	}
+
+	if (!rootElement || rootElement.tagName !== 'ul') {
+		throwFileTreeValidationError(
+			`The <FileTree/> component expects its content to be a unordered list but found the following element: <${rootElement?.tagName}>.`
+		);
+	}
+
+	const listItemElement = select('li', rootElement);
+
+	if (!listItemElement) {
+		throwFileTreeValidationError(
+			`The <FileTree/> component expects its content to be a unordered list with at least one list item.`
+		);
+	}
+}
+
+/** Throw a validation error for a file tree linking to the documentation. */
+function throwFileTreeValidationError(message: string): never {
+	throw new AstroError(
+		message,
+		'To learn more about the <FileTree/> component, see https://starlight.astro.build/guides/components/#filetree'
+	);
 }
 
 /**
