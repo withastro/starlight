@@ -39,7 +39,6 @@ const fileTreeProcessor = rehype().use(function fileTree() {
 
 		visit(tree, 'element', (node) => {
 			// Strip nodes that only contain newlines.
-			// TODO(HiDeoo) Test empty lines not only containing a newline character.
 			node.children = node.children.filter(
 				(child) => child.type === 'comment' || child.type !== 'text' || !/^\n+$/.test(child.value)
 			);
@@ -56,7 +55,10 @@ const fileTreeProcessor = rehype().use(function fileTree() {
 			if (firstChild?.type === 'text') {
 				const [filename, ...fragments] = firstChild.value.split(' ');
 				firstChild.value = filename || '';
-				comment.push(fragments.join(' '));
+				const textComment = fragments.join(' ').trim();
+				if (textComment.length > 0) {
+					comment.push(fragments.join(' '));
+				}
 			}
 
 			// Comments may not always be entirely part of the first child text node,
@@ -95,16 +97,18 @@ const fileTreeProcessor = rehype().use(function fileTree() {
 
 			// Create the tree entry node that contains the icon, file name and comment which will end up
 			// as the list item’s children.
-			const treeEntry = h(
-				'span',
-				{ class: 'tree-entry' },
+			const treeEntryChildren: Child[] = [
 				h('span', { class: isHighlighted ? 'highlight' : '' }, [
 					isPlaceholder ? null : icon,
 					firstChild,
 				]),
-				makeText(comment.length > 0 ? ' ' : ''),
-				comment.length > 0 ? h('span', { class: 'comment' }, ...comment) : makeText()
-			);
+			];
+
+			if (comment.length > 0) {
+				treeEntryChildren.push(makeText(' '), h('span', { class: 'comment' }, ...comment));
+			}
+
+			const treeEntry = h('span', { class: 'tree-entry' }, ...treeEntryChildren);
 
 			if (isDirectory) {
 				const hasContents = otherChildren.length > 0;
