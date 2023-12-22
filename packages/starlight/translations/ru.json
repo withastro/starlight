@@ -22,5 +22,6 @@
   "aside.note": "Заметка",
   "aside.tip": "Знали ли вы?",
   "aside.caution": "Осторожно",
-  "aside.danger": "Опасно"
+  "aside.danger": "Опасно",
+  "fileTree.directory": "Directory"
 }

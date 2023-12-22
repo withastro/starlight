@@ -22,5 +22,6 @@
   "aside.note": "Note",
   "aside.tip": "Tip",
   "aside.caution": "Caution",
-  "aside.danger": "Danger"
+  "aside.danger": "Danger",
+  "fileTree.directory": "Directory"
 }

@@ -1,16 +1,16 @@
 ---
+import { slugToLocaleData } from '../utils/slugs';
+import { useTranslations } from '../utils/translations';
 import { processFileTree } from './rehype-file-tree';
 
-// TODO(HiDeoo) props
-// TODO(HiDeoo) title?
-// TODO(HiDeoo) pagefind ignore?
+const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
+const t = useTranslations(slugToLocaleData(slug).locale);
 
 const fileTreeHtml = await Astro.slots.render('default');
 
 // TODO(HiDeoo) error handling
 
-// TODO(HiDeoo) localized directory label
-const html = processFileTree(fileTreeHtml, 'Directory');
+const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
 
 // TODO(HiDeoo) rename component
 ---

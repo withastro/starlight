@@ -22,5 +22,6 @@
   "aside.note": "Catatan",
   "aside.tip": "Tips",
   "aside.caution": "Perhatian",
-  "aside.danger": "Bahaya"
+  "aside.danger": "Bahaya",
+  "fileTree.directory": "Directory"
 }
