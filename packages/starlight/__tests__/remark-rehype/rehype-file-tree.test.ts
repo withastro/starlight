@@ -5,7 +5,7 @@ import { Icons } from '../../components/Icons';
 describe('validation', () => {
 	test('throws an error with no content', () => {
 		expect(() => processTestFileTree('')).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree/> component expects its content to be a unique unordered list but found no elements."'
+			'"The <FileTree> component expects its content to be a unique unordered list but found no elements."'
 		);
 	});
 
@@ -13,19 +13,19 @@ describe('validation', () => {
 		expect(() =>
 			processTestFileTree('<p>test</p><ul><li>file</li></ul>')
 		).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree/> component expects its content to be a unique unordered list but found the following elements: <p> - <ul>."'
+			'"The <FileTree> component expects its content to be a unique unordered list but found the following elements: <p> - <ul>."'
 		);
 	});
 
 	test('throws an error with no root ordered list', () => {
 		expect(() => processTestFileTree('<ol><li>file</li></ol>')).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree/> component expects its content to be a unordered list but found the following element: <ol>."'
+			'"The <FileTree> component expects its content to be a unordered list but found the following element: <ol>."'
 		);
 	});
 
 	test('throws an error with no list item', () => {
 		expect(() => processTestFileTree('<ul></ul>')).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree/> component expects its content to be a unordered list with at least one list item."'
+			'"The <FileTree> component expects its content to be a unordered list with at least one list item."'
 		);
 	});
 });
