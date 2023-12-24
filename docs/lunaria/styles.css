@@ -36,6 +36,11 @@ p a {
 	text-decoration: underline;
 }
 
+.create-button {
+	background-color: hsl(213deg 89% 64% / 20%);
+	border-radius: 0.5em;
+}
+
 sup {
 	display: flex;
 	justify-content: center;
