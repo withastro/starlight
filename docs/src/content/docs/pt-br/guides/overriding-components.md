@@ -1,8 +1,6 @@
 ---
 title: Substituindo Componentes
 description: Aprenda como substituir os componentes nativos do Starlight para adicionar elementos personalizados a UI do seu site de documentação.
-sidebar:
-  badge: New
 ---
 
 <!---
