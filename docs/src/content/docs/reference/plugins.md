@@ -212,18 +212,6 @@ The page title displayed at the top of the page, in browser tabs, and in page me
 
 The slug of the page.
 
-##### `dir`
-
-**type:** `'ltr' | 'rtl'`
-
-Page writing direction.
-
-##### `lang`
-
-**type:** `string`
-
-BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
-
 #### Optional props
 
 Additionaly, the following props can be provided to customize the page:
@@ -307,6 +295,20 @@ Same as [`prev`](#prev) but for the next page link.
 **type:** [`HeroConfig`](/reference/frontmatter/#heroconfig)
 
 Add a hero component to the top of this page. Works well with `template: splash`. Similar to the [frontmatter `hero` option](/reference/frontmatter/#hero).
+
+##### `dir`
+
+**type:** `'ltr' | 'rtl'`  
+**default:** The page writing direction.
+
+Page content writing direction.
+
+##### `lang`
+
+**type:** `string`  
+**default:** The page language tag.
+
+BCP-47 language tag for this page’s content locale, e.g. `en`, `zh-CN`, or `pt-BR`.
 
 ##### `banner`
 

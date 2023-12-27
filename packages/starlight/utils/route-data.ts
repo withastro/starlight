@@ -67,11 +67,11 @@ export function generateVirtualRouteData({
 	props: VirtualPageProps;
 	url: URL;
 }): StarlightRouteData {
-	const { dir, lastUpdated, lang, slug } = props;
+	const { lastUpdated, slug } = props;
 	const virtualFrontmatter = StarlightVirtualFrontmatterSchema.parse(props);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
-	const entryMeta = slugToLocaleData(slug);
-	const sidebar = props.sidebar ?? getSidebar(url.pathname, entryMeta.locale);
+	const localeData = slugToLocaleData(slug);
+	const sidebar = props.sidebar ?? getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const virtualEntry: VirtualDocsEntry = {
 		id,
@@ -88,21 +88,34 @@ export function generateVirtualRouteData({
 		},
 	};
 	const entry = virtualEntry as StarlightDocsEntry;
+	const entryMeta: StarlightRouteData['entryMeta'] = {
+		dir: props.dir ?? localeData.dir,
+		lang: props.lang ?? localeData.lang,
+		locale: localeData.locale,
+	};
 	return {
 		...props,
-		...entryMeta,
+		...localeData,
 		id,
 		editUrl: undefined,
 		entry,
-		entryMeta: { dir: dir, lang: lang, locale: entryMeta.locale },
+		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: useTranslations(entryMeta.locale).all(),
+		labels: useTranslations(localeData.locale).all(),
 		lastUpdated: lastUpdated instanceof Date ? lastUpdated : undefined,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
 		slug,
-		toc: getToC({ ...props, entry, entryMeta, headings, id, locale: entryMeta.locale }),
+		toc: getToC({
+			...props,
+			...localeData,
+			entry,
+			entryMeta,
+			headings,
+			id,
+			locale: localeData.locale,
+		}),
 	};
 }
 

@@ -11,8 +11,6 @@ vi.mock('astro:content', async () =>
 );
 
 const virtualPageProps: VirtualPageProps = {
-	dir: 'rtl',
-	lang: 'ks',
 	slug: 'test-slug',
 	title: 'This is a test title',
 };
@@ -37,20 +35,32 @@ test('adds data to route shape', () => {
 	expect(data.entry.data.head).toEqual([]);
 	expect(data.entry.data.pagefind).toBe(true);
 	expect(data.entry.data.template).toBe('doc');
-	expect(data.hasSidebar).toBe(true);
-	expect(data.headings).toEqual([]);
 	// Virtual pages respect the passed data.
 	expect(data.entry.data.title).toBe(virtualPageProps.title);
-	// Virtual pages respect the entry meta.
-	expect(data.entryMeta.dir).toBe(virtualPageProps.dir);
-	expect(data.entryMeta.lang).toBe(virtualPageProps.lang);
+	// Virtual pages get expected defaults.
+	expect(data.hasSidebar).toBe(true);
+	expect(data.headings).toEqual([]);
+	expect(data.entryMeta.dir).toBe('ltr');
+	expect(data.entryMeta.lang).toBe('en');
+});
+
+test('adds custom data to route shape', () => {
+	const props: VirtualPageProps = {
+		...virtualPageProps,
+		hasSidebar: false,
+		dir: 'rtl',
+		lang: 'ks',
+	};
+	const data = generateVirtualRouteData({ props, url: new URL('https://example.com') });
+	expect(data.hasSidebar).toBe(props.hasSidebar);
+	expect(data.entryMeta.dir).toBe(props.dir);
+	expect(data.entryMeta.lang).toBe(props.lang);
 });
 
 test('adds custom virtual frontmatter data to route shape', () => {
 	const props: VirtualPageProps = {
 		...virtualPageProps,
 		head: [{ tag: 'meta', attrs: { name: 'og:test', content: 'test' } }],
-		hasSidebar: false,
 		lastUpdated: new Date(),
 		pagefind: false,
 		template: 'splash',
@@ -71,7 +81,6 @@ test('adds custom virtual frontmatter data to route shape', () => {
 	expect(data.entry.data.lastUpdated).toEqual(props.lastUpdated);
 	expect(data.entry.data.pagefind).toBe(props.pagefind);
 	expect(data.entry.data.template).toBe(props.template);
-	expect(data.hasSidebar).toBe(props.hasSidebar);
 });
 
 test('uses generated sidebar when no sidebar is provided', () => {
