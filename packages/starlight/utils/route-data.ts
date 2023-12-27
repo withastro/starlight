@@ -18,13 +18,13 @@ interface PageProps extends Route {
 interface BaseRouteData {
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
-	/** Whether or not the sidebar should be displayed on this page. */
-	hasSidebar: boolean;
 }
 
 export interface StarlightRouteData extends BaseRouteData, Route {
 	/** Site navigation sidebar entries for this page. */
 	sidebar: SidebarEntry[];
+	/** Whether or not the sidebar should be displayed on this page. */
+	hasSidebar: boolean;
 	/** Links to the previous and next page in the sidebar if enabled. */
 	pagination: ReturnType<typeof getPrevNextLinks>;
 	/** Table of contents for this page if enabled. */
@@ -40,6 +40,11 @@ export interface StarlightRouteData extends BaseRouteData, Route {
 export interface VirtualPageProps extends BaseRouteData, VirtualRoute {
 	/** Site navigation sidebar entries for this page or fallback to the generated sidebar. */
 	sidebar?: SidebarEntry[] | undefined;
+	/**
+	 * Whether or not the sidebar should be displayed on this page or disabled only when using the
+	 * `splash` template.
+	 */
+	hasSidebar?: boolean;
 }
 
 export function generateRouteData({

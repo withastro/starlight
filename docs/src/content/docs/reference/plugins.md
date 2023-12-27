@@ -230,12 +230,6 @@ Page writing direction.
 
 BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
 
-##### `hasSidebar`
-
-**type:** `boolean`
-
-Whether or not the sidebar should be displayed on this page.
-
 #### Optional props
 
 Additionaly, the following props can be provided to customize the page:
@@ -274,6 +268,13 @@ Additional tags to your page’s `<head>`. Similar to the [global `head` option]
 **default:** the sidebar generated based on the [global `sidebar` config](/reference/configuration/#sidebar)
 
 Site navigation sidebar entries for this page or fallback to the global `sidebar` option if not provided.
+
+##### `hasSidebar`
+
+**type:** `boolean`  
+**default:** `false` if [`template`](#template) is `'splash'`, otherwise `true`
+
+Whether or not the sidebar should be displayed on this page.
 
 ##### `tableOfContents`
 
