@@ -212,12 +212,6 @@ The page title displayed at the top of the page, in browser tabs, and in page me
 
 The slug of the page.
 
-##### `headings`
-
-**type:** `{ depth: number; slug: string; text: string }[]`
-
-Array of all headings of the page.
-
 ##### `dir`
 
 **type:** `'ltr' | 'rtl'`
@@ -261,6 +255,13 @@ Set whether this page should be included in the [Pagefind](https://pagefind.app/
 **default:** `[]`
 
 Additional tags to your page’s `<head>`. Similar to the [global `head` option](/reference/configuration/#head).
+
+##### `headings`
+
+**type:** `{ depth: number; slug: string; text: string }[]`  
+**default:** `[]`
+
+Array of all headings of the page.
 
 ##### `sidebar`
 

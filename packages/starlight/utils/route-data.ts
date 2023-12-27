@@ -18,13 +18,13 @@ interface PageProps extends Route {
 interface BaseRouteData {
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
+	/** Whether or not the sidebar should be displayed on this page. */
+	hasSidebar: boolean;
+	/** Site navigation sidebar entries for this page. */
+	sidebar: SidebarEntry[];
 }
 
 export interface StarlightRouteData extends BaseRouteData, Route {
-	/** Site navigation sidebar entries for this page. */
-	sidebar: SidebarEntry[];
-	/** Whether or not the sidebar should be displayed on this page. */
-	hasSidebar: boolean;
 	/** Links to the previous and next page in the sidebar if enabled. */
 	pagination: ReturnType<typeof getPrevNextLinks>;
 	/** Table of contents for this page if enabled. */
@@ -37,15 +37,7 @@ export interface StarlightRouteData extends BaseRouteData, Route {
 	labels: ReturnType<ReturnType<typeof useTranslations>['all']>;
 }
 
-export interface VirtualPageProps extends BaseRouteData, VirtualRoute {
-	/** Site navigation sidebar entries for this page or fallback to the generated sidebar. */
-	sidebar?: SidebarEntry[] | undefined;
-	/**
-	 * Whether or not the sidebar should be displayed on this page or disabled only when using the
-	 * `splash` template.
-	 */
-	hasSidebar?: boolean;
-}
+export type VirtualPageProps = Partial<BaseRouteData> & VirtualRoute;
 
 export function generateRouteData({
 	props,
@@ -80,6 +72,7 @@ export function generateVirtualRouteData({
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const entryMeta = slugToLocaleData(slug);
 	const sidebar = props.sidebar ?? getSidebar(url.pathname, entryMeta.locale);
+	const headings = props.headings ?? [];
 	const virtualEntry: VirtualDocsEntry = {
 		id,
 		slug,
@@ -103,12 +96,13 @@ export function generateVirtualRouteData({
 		entry,
 		entryMeta: { dir: dir, lang: lang, locale: entryMeta.locale },
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
+		headings,
 		labels: useTranslations(entryMeta.locale).all(),
 		lastUpdated: lastUpdated instanceof Date ? lastUpdated : undefined,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
 		slug,
-		toc: getToC({ ...props, entry, entryMeta, id, locale: entryMeta.locale }),
+		toc: getToC({ ...props, entry, entryMeta, headings, id, locale: entryMeta.locale }),
 	};
 }
 

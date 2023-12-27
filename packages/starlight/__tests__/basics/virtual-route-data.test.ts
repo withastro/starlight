@@ -12,7 +12,6 @@ vi.mock('astro:content', async () =>
 
 const virtualPageProps: VirtualPageProps = {
 	dir: 'rtl',
-	headings: [],
 	lang: 'ks',
 	slug: 'test-slug',
 	title: 'This is a test title',
@@ -39,6 +38,7 @@ test('adds data to route shape', () => {
 	expect(data.entry.data.pagefind).toBe(true);
 	expect(data.entry.data.template).toBe('doc');
 	expect(data.hasSidebar).toBe(true);
+	expect(data.headings).toEqual([]);
 	// Virtual pages respect the passed data.
 	expect(data.entry.data.title).toBe(virtualPageProps.title);
 	// Virtual pages respect the entry meta.
@@ -155,6 +155,18 @@ test('uses provided pagination if any', () => {
 		  },
 		}
 	`);
+});
+
+test('uses provided headings if any', () => {
+	const headings = [
+		{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
+		{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
+	];
+	const data = generateVirtualRouteData({
+		props: { ...virtualPageProps, headings },
+		url: new URL('https://example.com'),
+	});
+	expect(data.headings).toEqual(headings);
 });
 
 test('generates the table of contents for provided headings', () => {

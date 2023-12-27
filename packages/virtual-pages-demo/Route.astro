@@ -36,41 +36,42 @@ function getVirtualPageProps() {
 
 	// TODO(HiDeoo) Add an example with the minimal props required
 
-	return {
+	const props: VirtualPageProps = {
 		dir: isThingB ? 'rtl' : 'ltr',
 		hasSidebar: !isThingB,
-		headings: isThingC
-			? [
-					{ depth: 2, slug: 'thing-a', text: 'Hello 2' },
-					{ depth: 3, slug: 'thing-a', text: 'Hello 3' },
-					{ depth: 4, slug: 'thing-a', text: 'Hello 4' },
-			  ]
-			: [],
 		lang: 'en',
-		sidebar: isThingC
-			? [
-					{
-						type: 'group',
-						label: 'All the links',
-						entries: [
-							{
-								type: 'link',
-								label: 'Custom link 2',
-								href: '/getting-started/',
-								isCurrent: false,
-								badge: { text: 'Wow', variant: 'danger' },
-								attrs: {},
-							},
-						],
-						collapsed: false,
-						badge: undefined,
-					},
-			  ]
-			: undefined,
 		slug,
 		tableOfContents: isThingC ? { maxHeadingLevel: 4, minHeadingLevel: 2 } : false,
 		title: `Virtual Pages Demo: ${thing}`,
-	} satisfies VirtualPageProps;
+	};
+
+	if (isThingC) {
+		props.headings = [
+			{ depth: 2, slug: 'thing-a', text: 'Hello 2' },
+			{ depth: 3, slug: 'thing-a', text: 'Hello 3' },
+			{ depth: 4, slug: 'thing-a', text: 'Hello 4' },
+		];
+		props.sidebar = [
+			{
+				type: 'group',
+				label: 'All the links',
+				entries: [
+					{
+						type: 'link',
+						label: 'Custom link 2',
+						href: '/getting-started/',
+						isCurrent: false,
+						badge: { text: 'Wow', variant: 'danger' },
+						attrs: {},
+					},
+				],
+				collapsed: false,
+				badge: undefined,
+			},
+		];
+	}
+
+	return props;
 }
 ---
 
