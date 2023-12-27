@@ -9,6 +9,7 @@ import { ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import type { Route, StarlightDocsEntry, VirtualDocsEntry, VirtualRoute } from './routing';
 import { localizedId, slugToLocaleData } from './slugs';
 import { useTranslations } from './translations';
+import { StarlightVirtualFrontmatterSchema } from '../schema';
 
 interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -69,8 +70,8 @@ export function generateVirtualRouteData({
 	props: VirtualPageProps;
 	url: URL;
 }): StarlightRouteData {
-	const { dir, lastUpdated, lang, next, pagefind, prev, slug, tableOfContents, template, title } =
-		props;
+	const { dir, lastUpdated, lang, slug } = props;
+	const virtualFrontmatter = StarlightVirtualFrontmatterSchema.parse(props);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const entryMeta = slugToLocaleData(slug);
 	const sidebar = props.sidebar ?? getSidebar(url.pathname, entryMeta.locale);
@@ -80,15 +81,8 @@ export function generateVirtualRouteData({
 		body: '',
 		collection: 'docs',
 		data: {
+			...virtualFrontmatter,
 			editUrl: false,
-			head: props.head,
-			lastUpdated,
-			next,
-			pagefind,
-			prev,
-			tableOfContents,
-			template,
-			title,
 			sidebar: {
 				attrs: {},
 				hidden: false,
@@ -103,6 +97,7 @@ export function generateVirtualRouteData({
 		editUrl: undefined,
 		entry,
 		entryMeta: { dir: dir, lang: lang, locale: entryMeta.locale },
+		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		labels: useTranslations(entryMeta.locale).all(),
 		lastUpdated: lastUpdated instanceof Date ? lastUpdated : undefined,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),

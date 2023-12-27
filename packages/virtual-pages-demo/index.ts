@@ -11,7 +11,7 @@ export function virtualPagesDemo(): StarlightPlugin {
 					hooks: {
 						'astro:config:setup': ({ injectRoute }) => {
 							injectRoute({
-								entryPoint: 'virtual-pages-demo/route',
+								entrypoint: 'virtual-pages-demo/route',
 								pattern: '[...virtualPagesDemoSlug]',
 							});
 						},

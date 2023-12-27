@@ -208,50 +208,31 @@ The page title displayed at the top of the page, in browser tabs, and in page me
 
 ##### `slug`
 
-**Type:** `string`
+**type:** `string`
 
 The slug of the page.
 
 ##### `headings`
 
-Type: `{ depth: number; slug: string; text: string }[]`
+**type:** `{ depth: number; slug: string; text: string }[]`
 
 Array of all headings of the page.
 
-##### `template`
-
-**type:** `'doc' | 'splash'`
-
-Set the layout template for this page.
-Use `'splash'` to use a wider layout without any sidebars.
-
-##### `pagefind`
-
-**type:** `boolean`
-
-Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index.
-
 ##### `dir`
 
-**Type:** `'ltr' | 'rtl'`
+**type:** `'ltr' | 'rtl'`
 
 Page writing direction.
 
 ##### `lang`
 
-**Type:** `string`
+**type:** `string`
 
 BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
 
-##### `head`
-
-**Type:** `{ tag: string; attrs: Record<string, string | boolean | undefined>; content: string }[]`
-
-Additional tags to your page’s `<head>`. Similar to the [global `head` option](/reference/configuration/#head).
-
 ##### `hasSidebar`
 
-**Type:** `boolean`
+**type:** `boolean`
 
 Whether or not the sidebar should be displayed on this page.
 
@@ -264,6 +245,28 @@ Additionaly, the following props can be provided to customize the page:
 **type:** `string`
 
 The page description is used for page metadata and will be picked up by search engines and in social media previews.
+
+##### `template`
+
+**type:** `'doc' | 'splash'`  
+**default:** `'doc'`
+
+Set the layout template for this page.
+Use `'splash'` to use a wider layout without any sidebars (if defined, [`hasSidebar`](#hassidebar) takes precedence).
+
+##### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index.
+
+##### `head`
+
+**type:** `{ tag: string; attrs: Record<string, string | boolean | undefined>; content: string }[]`  
+**default:** `[]`
+
+Additional tags to your page’s `<head>`. Similar to the [global `head` option](/reference/configuration/#head).
 
 ##### `sidebar`
 

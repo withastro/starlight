@@ -13,13 +13,9 @@ vi.mock('astro:content', async () =>
 const virtualPageProps: VirtualPageProps = {
 	dir: 'rtl',
 	hasSidebar: true,
-	head: [],
 	headings: [],
 	lang: 'ks',
-	lastUpdated: new Date(),
-	pagefind: true,
 	slug: 'test-slug',
-	template: 'doc',
 	title: 'This is a test title',
 };
 
@@ -39,15 +35,42 @@ test('adds data to route shape', () => {
 	expect(data.entry.data.editUrl).toBe(false);
 	// Virtual pages are part of the docs collection.
 	expect(data.entry.collection).toBe('docs');
+	// Virtual pages get virtual frontmatter defaults.
+	expect(data.entry.data.head).toEqual([]);
+	expect(data.entry.data.pagefind).toBe(true);
+	expect(data.entry.data.template).toBe('doc');
 	// Virtual pages respect the passed data.
 	expect(data.hasSidebar).toBe(virtualPageProps.hasSidebar);
-	expect(data.entry.data.lastUpdated).toBe(virtualPageProps.lastUpdated);
-	expect(data.entry.data.pagefind).toBe(virtualPageProps.pagefind);
-	expect(data.entry.data.template).toBe(virtualPageProps.template);
 	expect(data.entry.data.title).toBe(virtualPageProps.title);
 	// Virtual pages respect the entry meta.
 	expect(data.entryMeta.dir).toBe(virtualPageProps.dir);
 	expect(data.entryMeta.lang).toBe(virtualPageProps.lang);
+});
+
+test('adds custom virtual frontmatter data to route shape', () => {
+	const props: VirtualPageProps = {
+		...virtualPageProps,
+		head: [{ tag: 'meta', attrs: { name: 'og:test', content: 'test' } }],
+		lastUpdated: new Date(),
+		pagefind: false,
+		template: 'splash',
+	};
+	const data = generateVirtualRouteData({ props, url: new URL('https://example.com') });
+	expect(data.entry.data.head).toMatchInlineSnapshot(`
+		[
+		  {
+		    "attrs": {
+		      "content": "test",
+		      "name": "og:test",
+		    },
+		    "content": "",
+		    "tag": "meta",
+		  },
+		]
+	`);
+	expect(data.entry.data.lastUpdated).toEqual(props.lastUpdated);
+	expect(data.entry.data.pagefind).toBe(props.pagefind);
+	expect(data.entry.data.template).toBe(props.template);
 });
 
 test('uses generated sidebar when no sidebar is provided', () => {
@@ -251,6 +274,11 @@ test('disables table of contents for splash template', () => {
 	});
 	expect(data.toc).toBeUndefined();
 });
+
+// TODO(HiDeoo)
+test.todo(
+	'hides the sidebar if the `hasSidebar` option is not specified and the splash template is used'
+);
 
 test('includes localized labels', () => {
 	const data = generateVirtualRouteData({

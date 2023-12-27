@@ -34,10 +34,11 @@ function getVirtualPageProps() {
 	const isThingB = thing === 'b';
 	const isThingC = thing === 'c';
 
+	// TODO(HiDeoo) Add an example with the minimal props required
+
 	return {
 		dir: isThingB ? 'rtl' : 'ltr',
 		hasSidebar: !isThingB,
-		head: [],
 		headings: isThingC
 			? [
 					{ depth: 2, slug: 'thing-a', text: 'Hello 2' },
@@ -46,7 +47,6 @@ function getVirtualPageProps() {
 			  ]
 			: [],
 		lang: 'en',
-		pagefind: true,
 		sidebar: isThingC
 			? [
 					{
@@ -69,7 +69,6 @@ function getVirtualPageProps() {
 			: undefined,
 		slug,
 		tableOfContents: isThingC ? { maxHeadingLevel: 4, minHeadingLevel: 2 } : false,
-		template: 'doc',
 		title: `Virtual Pages Demo: ${thing}`,
 	} satisfies VirtualPageProps;
 }
