@@ -1,5 +1,5 @@
 import mdx from '@astrojs/mdx';
-import type { AstroIntegration, AstroUserConfig } from 'astro';
+import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -41,11 +41,11 @@ export default function StarlightIntegration({
 
 				injectRoute({
 					pattern: '404',
-					entryPoint: '@astrojs/starlight/404.astro',
+					entrypoint: '@astrojs/starlight/404.astro',
 				});
 				injectRoute({
 					pattern: '[...slug]',
-					entryPoint: '@astrojs/starlight/index.astro',
+					entrypoint: '@astrojs/starlight/index.astro',
 				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
@@ -61,7 +61,7 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
 				}
-				const newConfig: AstroUserConfig = {
+				updateConfig({
 					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
@@ -76,8 +76,9 @@ export default function StarlightIntegration({
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
 					scopedStyleStrategy: 'where',
-				};
-				updateConfig(newConfig);
+					// If not already configured, default to prefetching all links on hover.
+					prefetch: config.prefetch ?? { prefetchAll: true },
+				});
 			},
 
 			'astro:build:done': ({ dir }) => {
