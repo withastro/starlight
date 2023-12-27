@@ -1,4 +1,5 @@
 import type { MarkdownHeading } from 'astro';
+import { z } from 'astro/zod';
 import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
@@ -68,7 +69,7 @@ export function generateVirtualRouteData({
 	url: URL;
 }): StarlightRouteData {
 	const { lastUpdated, slug } = props;
-	const virtualFrontmatter = StarlightVirtualFrontmatterSchema.parse(props);
+	const virtualFrontmatter = getVirtualFrontmatter(props);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar ?? getSidebar(url.pathname, localeData.locale);
@@ -117,6 +118,30 @@ export function generateVirtualRouteData({
 			locale: localeData.locale,
 		}),
 	};
+}
+
+/** Extract the virtual frontmatter properties from the props received by a virtual page. */
+function getVirtualFrontmatter(props: VirtualPageProps) {
+	// This needs to be in sync with ImageMetadata.
+	// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
+	return StarlightVirtualFrontmatterSchema({
+		image: () =>
+			z.object({
+				src: z.string(),
+				width: z.number(),
+				height: z.number(),
+				format: z.union([
+					z.literal('png'),
+					z.literal('jpg'),
+					z.literal('jpeg'),
+					z.literal('tiff'),
+					z.literal('webp'),
+					z.literal('gif'),
+					z.literal('svg'),
+					z.literal('avif'),
+				]),
+			}),
+	}).parse(props);
 }
 
 function getToC({ entry, locale, headings }: PageProps) {

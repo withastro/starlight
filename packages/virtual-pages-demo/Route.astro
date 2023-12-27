@@ -4,6 +4,7 @@ import VirtualPage, {
 	type VirtualPageProps,
 } from '@astrojs/starlight/components/VirtualPage.astro';
 import { getThings } from './things';
+import heroStar from './hero-star.webp';
 
 export function getStaticPaths() {
 	return getThings().map((thing) => {
@@ -14,6 +15,8 @@ export function getStaticPaths() {
 				//  - /virtual-pages-demo/a/
 				//  - /virtual-pages-demo/b/
 				//  - /virtual-pages-demo/c/
+				//  - /virtual-pages-demo/d/
+				//  - /virtual-pages-demo/e/
 				virtualPagesDemoSlug: slug,
 			},
 			props: {
@@ -34,11 +37,27 @@ function getVirtualPageProps(): VirtualPageProps {
 	const isThingB = thing === 'b';
 	const isThingC = thing === 'c';
 	const isThingD = thing === 'd';
+	const isThingE = thing === 'e';
 
 	const title = `Virtual Pages Demo: ${thing}`;
 
 	if (isThingD) {
+		// Page with minimal set of props.
 		return { slug, title };
+	} else if (isThingE) {
+		// Page with the `splash` template and a hero including an image.
+		return {
+			hero: {
+				title: 'Hello',
+				tagline: 'This is a tagline',
+				image: {
+					alt: 'A star from a plugin',
+					file: heroStar,
+				},
+			},
+			slug,
+			title,
+		};
 	}
 
 	const props: VirtualPageProps = {
