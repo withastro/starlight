@@ -30,11 +30,16 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { slug, thing } = Astro.props;
 
 // Generates the props for the virtual page
-function getVirtualPageProps() {
+function getVirtualPageProps(): VirtualPageProps {
 	const isThingB = thing === 'b';
 	const isThingC = thing === 'c';
+	const isThingD = thing === 'd';
 
-	// TODO(HiDeoo) Add an example with the minimal props required
+	const title = `Virtual Pages Demo: ${thing}`;
+
+	if (isThingD) {
+		return { slug, title };
+	}
 
 	const props: VirtualPageProps = {
 		dir: isThingB ? 'rtl' : 'ltr',
@@ -42,7 +47,7 @@ function getVirtualPageProps() {
 		lang: 'en',
 		slug,
 		tableOfContents: isThingC ? { maxHeadingLevel: 4, minHeadingLevel: 2 } : false,
-		title: `Virtual Pages Demo: ${thing}`,
+		title,
 	};
 
 	if (isThingC) {
