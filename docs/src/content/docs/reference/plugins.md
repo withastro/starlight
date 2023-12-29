@@ -184,18 +184,11 @@ import CustomComponent from './CustomComponent.astro';
 const props = {
   title: 'My custom page',
   slug: 'custom-page/example',
-  template: 'doc',
-  hasSidebar: true,
-  headings: [{ depth: 2, slug: 'description', text: 'Description' }],
-  dir: 'ltr',
-  lang: 'en',
-  pagefind: true,
-  head: [],
 } satisfies VirtualPageProps;
 ---
 
 <VirtualPage {...props}>
-  <h2 id="description">Description</h2>
+  <p>This is a custom page with a custom component:</p>
   <CustomComponent />
 </VirtualPage>
 ```
