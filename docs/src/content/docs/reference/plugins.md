@@ -204,17 +204,17 @@ const props = {
 
 The `<VirtualPage />` component requires the following props:
 
-##### `title`
-
-**type:** `string`
-
-The page title displayed at the top of the page, in browser tabs, and in page metadata.
-
 ##### `slug`
 
 **type:** `string`
 
 The slug of the page.
+
+##### `title`
+
+**type:** `string`
+
+The page title displayed at the top of the page, in browser tabs, and in page metadata.
 
 #### Optional props
 
@@ -226,34 +226,12 @@ Additionaly, the following props can be provided to customize the page:
 
 The page description is used for page metadata and will be picked up by search engines and in social media previews.
 
-##### `template`
-
-**type:** `'doc' | 'splash'`  
-**default:** `'doc'`
-
-Set the layout template for this page.
-Use `'splash'` to use a wider layout without any sidebars (if defined, [`hasSidebar`](#hassidebar) takes precedence).
-
-##### `pagefind`
-
-**type:** `boolean`  
-**default:** `true`
-
-Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index.
-
 ##### `head`
 
 **type:** `{ tag: string; attrs: Record<string, string | boolean | undefined>; content: string }[]`  
 **default:** `[]`
 
 Additional tags to your page’s `<head>`. Similar to the [global `head` option](/reference/configuration/#head).
-
-##### `headings`
-
-**type:** `{ depth: number; slug: string; text: string }[]`  
-**default:** `[]`
-
-Array of all headings of the page.
 
 ##### `sidebar`
 
@@ -269,6 +247,13 @@ Site navigation sidebar entries for this page or fallback to the global `sidebar
 
 Whether or not the sidebar should be displayed on this page.
 
+##### `headings`
+
+**type:** `{ depth: number; slug: string; text: string }[]`  
+**default:** `[]`
+
+Array of all headings of the page.
+
 ##### `tableOfContents`
 
 **type:** `false | { minHeadingLevel: number; maxHeadingLevel: number; }`
@@ -276,11 +261,39 @@ Whether or not the sidebar should be displayed on this page.
 Overrides the [global `tableOfContents` config](/reference/configuration/#tableofcontents).
 Customize the heading levels to be included or set to `false` to hide the table of contents on this page.
 
+##### `template`
+
+**type:** `'doc' | 'splash'`  
+**default:** `'doc'`
+
+Set the layout template for this page.
+Use `'splash'` to use a wider layout without any sidebars (if defined, [`hasSidebar`](#hassidebar) takes precedence).
+
 ##### `lastUpdated`
 
 **type:** `Date`
 
 A valid [YAML timestamp](https://yaml.org/type/timestamp.html) to display the last updated date of the page.
+
+##### `dir`
+
+**type:** `'ltr' | 'rtl'`  
+**default:** The page writing direction.
+
+Page content writing direction.
+
+##### `lang`
+
+**type:** `string`  
+**default:** The page language tag.
+
+BCP-47 language tag for this page’s content locale, e.g. `en`, `zh-CN`, or `pt-BR`.
+
+##### `isFallback`
+
+**type:** `boolean`
+
+Indicates if this page is untranslated in the current language and using [fallback content](/guides/i18n/#fallback-content).
 
 ##### `prev`
 
@@ -300,20 +313,6 @@ Same as [`prev`](#prev) but for the next page link.
 
 Add a hero component to the top of this page. Works well with `template: splash`. Similar to the [frontmatter `hero` option](/reference/frontmatter/#hero).
 
-##### `dir`
-
-**type:** `'ltr' | 'rtl'`  
-**default:** The page writing direction.
-
-Page content writing direction.
-
-##### `lang`
-
-**type:** `string`  
-**default:** The page language tag.
-
-BCP-47 language tag for this page’s content locale, e.g. `en`, `zh-CN`, or `pt-BR`.
-
 ##### `banner`
 
 **type:** `{ content: string }`
@@ -322,11 +321,12 @@ Displays an announcement banner at the top of this page.
 
 The `content` value can include HTML for links or other content.
 
-##### `isFallback`
+##### `pagefind`
 
-**type:** `boolean`
+**type:** `boolean`  
+**default:** `true`
 
-Indicates if this page is untranslated in the current language and using [fallback content](/guides/i18n/#fallback-content).
+Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index.
 
 ### `makeVirtualStaticPaths()`
 
