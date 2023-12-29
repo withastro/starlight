@@ -322,6 +322,12 @@ Displays an announcement banner at the top of this page.
 
 The `content` value can include HTML for links or other content.
 
+##### `isFallback`
+
+**type:** `boolean`
+
+Indicates if this page is untranslated in the current language and using [fallback content](/guides/i18n/#fallback-content).
+
 ### `makeVirtualStaticPaths()`
 
 [Dynamic routes](https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode) must exports a `getStaticPaths()` function that returns an array of objects with a `params` property. Each of these objects will generate a corresponding route.
