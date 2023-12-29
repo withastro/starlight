@@ -165,7 +165,13 @@ The example above will log a message that includes the provided info message:
 ## Route injection
 
 Plugins [adding](#addintegration) an Astro integration can inject routes using the Integrations API [`injectRoute`](https://docs.astro.build/en/reference/integrations-reference/#injectroute-option) function to render dynamically generated content.
-By default, pages rendered on custom routes do not use the Starlight layout. To use the Starlight layout, pages must wrap their content with the `<VirtualPage />` component.
+By default, pages rendered on custom routes do not use the Starlight layout.
+
+To do so, pages must wrap their content with the `<VirtualPage />` component and can use the [`makeVirtualStaticPaths()`](#makevirtualstaticpaths) helper function to generate localized routes for multilingual sites.
+
+### VirtualPage
+
+The `<VirtualPage />` component can be used to render a page on a custom route using the Starlight layout.
 
 ```astro
 ---
@@ -193,8 +199,6 @@ const props = {
   <CustomComponent />
 </VirtualPage>
 ```
-
-### Props
 
 #### Required props
 
@@ -317,3 +321,51 @@ BCP-47 language tag for this page’s content locale, e.g. `en`, `zh-CN`, or `pt
 Displays an announcement banner at the top of this page.
 
 The `content` value can include HTML for links or other content.
+
+### `makeVirtualStaticPaths()`
+
+[Dynamic routes](https://docs.astro.build/en/core-concepts/routing/#static-ssg-mode) must exports a `getStaticPaths()` function that returns an array of objects with a `params` property. Each of these objects will generate a corresponding route.
+
+The `makeVirtualStaticPaths()` helper function can be used to generate dynamic localized routes for multilingual sites, supporting multiple languages and marking some routes as [fallback routes](/guides/i18n/#fallback-content).
+
+This helper should be called with another function as its only argument and return an array of objects with a `params` property just like `getStaticPaths()`.
+This function will be called with an object containing the `getLocalizedSlugs()` function that takes a `slug` and returns an array of corresponding localized slugs and their associated BCP-47 language tag.
+
+```astro
+---
+// plugin/src/Example.astro
+import type { InferGetStaticPropsType } from 'astro';
+import VirtualPage, {
+  makeVirtualStaticPaths,
+} from '@astrojs/starlight/components/VirtualPage.astro';
+
+export const { getStaticPaths } = makeVirtualStaticPaths(
+  ({ getLocalizedSlugs }) => {
+    return getLocalizedSlugs('foo/bar').map(({ slug, lang }) => ({
+      params: { slug },
+      props: { slug, lang },
+    }));
+  }
+);
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { slug, lang } = Astro.props;
+
+// This plugin page only exists in English and French.
+// All other languages will be marked as fallback pages.
+const isFallback = lang !== 'en' && lang !== 'fr';
+---
+
+<VirtualPage title="Demo" {slug} {isFallback}>
+  {lang === 'fr' ? 'Ceci est un exemple' : 'This is an example'}
+</VirtualPage>
+```
+
+The above example will generate the following routes:
+
+- For a monolingual site, only the `foo/bar` route would be generated.
+- For a multilingual site configured with English, French, and no [root locale](/guides/i18n/#use-a-root-locale), the `en/foo/bar` and `fr/foo/bar` routes would be generated.
+- For a multilingual site configured with English as the root locale and French, the `foo/bar` and `fr/foo/bar` routes would be generated.
+
+Learn more about `getStaticPaths()` in the [Astro Documentation](https://docs.astro.build/en/reference/api-reference/#getstaticpaths).

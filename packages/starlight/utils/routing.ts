@@ -51,8 +51,10 @@ export interface Route extends BaseRoute, LocaleData {
  * The definition of a virtual route containing for convenience at the top level the frontmatter
  * data of the virtual page.
  */
-export type VirtualRoute = BaseRoute &
-	Partial<Omit<LocaleData, 'locale'>> &
+export type VirtualRoute = BaseRoute & {
+	/** Defines if this page is untranslated in the current language and using fallback content from the default locale. */
+	isFallback?: boolean;
+} & Partial<Omit<LocaleData, 'locale'>> &
 	StarlightVirtualFrontmatter;
 
 interface Path extends GetStaticPathsItem {

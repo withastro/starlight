@@ -68,7 +68,7 @@ export function generateVirtualRouteData({
 	props: VirtualPageProps;
 	url: URL;
 }): StarlightRouteData {
-	const { lastUpdated, slug } = props;
+	const { isFallback, lastUpdated, slug, ...routeProps } = props;
 	const virtualFrontmatter = getVirtualFrontmatter(props);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const localeData = slugToLocaleData(slug);
@@ -94,8 +94,8 @@ export function generateVirtualRouteData({
 		lang: props.lang ?? localeData.lang,
 		locale: localeData.locale,
 	};
-	return {
-		...props,
+	const routeData: StarlightRouteData = {
+		...routeProps,
 		...localeData,
 		id,
 		editUrl: undefined,
@@ -109,15 +109,20 @@ export function generateVirtualRouteData({
 		sidebar,
 		slug,
 		toc: getToC({
-			...props,
+			...routeProps,
 			...localeData,
 			entry,
 			entryMeta,
 			headings,
 			id,
 			locale: localeData.locale,
+			slug,
 		}),
 	};
+	if (isFallback) {
+		routeData.isFallback = true;
+	}
+	return routeData;
 }
 
 /** Extract the virtual frontmatter properties from the props received by a virtual page. */

@@ -1,36 +1,38 @@
 ---
 import type { InferGetStaticPropsType } from 'astro';
 import VirtualPage, {
+	makeVirtualStaticPaths,
 	type VirtualPageProps,
 } from '@astrojs/starlight/components/VirtualPage.astro';
+
 import { getThings } from './things';
 import heroStar from './hero-star.webp';
 
-export function getStaticPaths() {
-	return getThings().map((thing) => {
-		const slug = `virtual-pages-demo/${thing}`;
-		return {
-			params: {
-				// Generate the routes:
-				//  - /virtual-pages-demo/a/
-				//  - /virtual-pages-demo/b/
-				//  - /virtual-pages-demo/c/
-				//  - /virtual-pages-demo/d/
-				//  - /virtual-pages-demo/e/
-				virtualPagesDemoSlug: slug,
-			},
-			props: {
-				// Pass down the generated slug and the thing to the page
-				slug,
-				thing,
-			},
-		};
-	});
-}
+export const { getStaticPaths } = makeVirtualStaticPaths(async ({ getLocalizedSlugs }) => {
+	return getThings()
+		.map((thing) => {
+			// Generate all the localized routes for the page
+			return getLocalizedSlugs(`virtual-pages-demo/${thing}`).map(({ slug, lang }) => {
+				return {
+					params: {
+						virtualPagesDemoSlug: slug,
+					},
+					props: {
+						// Pass down the generated slug and the thing to the page
+						slug,
+						thing,
+						// Pass down the lang of the page
+						lang,
+					},
+				};
+			});
+		})
+		.flat();
+});
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { slug, thing } = Astro.props;
+const { slug, thing, lang } = Astro.props;
 
 // Generates the props for the virtual page
 function getVirtualPageProps(): VirtualPageProps {
@@ -61,6 +63,7 @@ function getVirtualPageProps(): VirtualPageProps {
 		};
 	}
 
+	// Other pages with some other props modified for testing.
 	const props: VirtualPageProps = {
 		dir: isThingB ? 'rtl' : 'ltr',
 		hasSidebar: !isThingB,
@@ -98,8 +101,14 @@ function getVirtualPageProps(): VirtualPageProps {
 
 	return props;
 }
+
+// This plugin is only available in English and French.
+const isFallback = lang !== 'en' && lang !== 'fr';
 ---
 
-<VirtualPage {...getVirtualPageProps()}>
-	<div>some content from a plugin: {thing}</div>
+<VirtualPage {...getVirtualPageProps()} {isFallback}>
+	<div>
+		{lang === 'fr' ? "Contenu provenant d'un plugin :" : 'some content from a plugin:'}
+		{thing}
+	</div>
 </VirtualPage>
