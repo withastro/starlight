@@ -16,7 +16,7 @@ export const locales = {
 	ru: { label: 'Русский', lang: 'ru' },
 	hi: { label: 'हिंदी', lang: 'hi' },
 	da: { label: 'Dansk', lang: 'da' },
-	uk: { label: 'Українська', lang: 'uk'},
+	uk: { label: 'Українська', lang: 'uk' },
 };
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
