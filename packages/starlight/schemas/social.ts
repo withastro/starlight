@@ -26,7 +26,7 @@ export const socialLinks = [
 	'patreon',
 	'slack',
 	'matrix',
-	'openCollective'
+	'openCollective',
 ] as const;
 
 export const SocialLinksSchema = () =>
