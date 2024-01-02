@@ -26,6 +26,7 @@ export const socialLinks = [
 	'patreon',
 	'slack',
 	'matrix',
+	'openCollective'
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -67,6 +68,7 @@ export const SocialLinksSchema = () =>
 					patreon: 'Patreon',
 					slack: 'Slack',
 					matrix: 'Matrix',
+					openCollective: 'Open Collective',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
