@@ -8,7 +8,7 @@ tableOfContents:
 Starlight plugins can customize Starlight configuration, UI, and behavior, while also being easy to share and reuse.
 This reference page documents the API that plugins have access to.
 
-Learn more about using a Starlight plugin in the [Configuration Reference](/reference/configuration/#plugins).
+Learn more about using a Starlight plugin in the [Configuration Reference](/reference/configuration/#plugins) or visit the [plugins showcase](/showcase/#plugins) to see a list of available plugins.
 
 ## Quick API Reference
 
