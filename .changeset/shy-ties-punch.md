@@ -1,7 +1,5 @@
 ---
-'@astrojs/starlight': minor
+'@astrojs/starlight': patch
 ---
 
-Adds Ukrainian translations
-
-Landing page, Getting Started & Showcase pages are now available in Ukrainian! 404 page as well.
+Improve Ukrainian UI translations
