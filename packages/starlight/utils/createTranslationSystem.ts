@@ -72,7 +72,7 @@ function buildDictionary(
 	base: (typeof builtinTranslations)[string],
 	...dictionaries: (i18nSchemaOutput | undefined)[]
 ) {
-	const dictionary: typeof base = { ...base };
+	const dictionary = { ...base };
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
 		for (const key in dict) {
