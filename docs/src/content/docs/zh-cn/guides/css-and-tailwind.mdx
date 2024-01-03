@@ -22,7 +22,7 @@ description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样
 
 2. 在 `astro.config.mjs` 中的 `customCss` 数组中添加你的 CSS 文件的路径：
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,8 +32,8 @@ description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样
    		starlight({
    			title: 'Docs With Custom CSS',
    			customCss: [
-   				// 你的自定义 CSS 文件的相对路径
-   				'./src/styles/custom.css',
+   +				// 你的自定义 CSS 文件的相对路径
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
