@@ -36,8 +36,8 @@ importers:
         specifier: workspace:*
         version: link:../packages/starlight
       '@lunariajs/core':
-        specifier: ^0.0.24
-        version: 0.0.24
+        specifier: ^0.0.25
+        version: 0.0.25
       '@types/culori':
         specifier: ^2.0.0
         version: 2.0.0
@@ -1475,9 +1475,9 @@ packages:
       '@lit-labs/ssr-dom-shim': 1.1.2
     dev: false
 
-  /@lunariajs/core@0.0.24:
-    resolution: {integrity: sha512-hwPe1aU5H3st89v03ZbFj/+1moUazB6AyyKJGp1WgOIO7mirD6Dbihx5re8XO5aYdgt31+OlPgNN4fFcbMRjaA==}
-    engines: {node: '>=18'}
+  /@lunariajs/core@0.0.25:
+    resolution: {integrity: sha512-rQY4qIQqmL2fanBTcmItaiTp++YDluX4QM7yv2Owmc3LCZiXRFBEUq8kjIXjtowpkb+ejraGq8wBcyHhaFlKug==}
+    engines: {node: '>=18.17.0'}
     hasBin: true
     dependencies:
       '@lit-labs/ssr': 3.2.0
@@ -1486,6 +1486,7 @@ packages:
       lit: 3.1.0
       micromatch: 4.0.5
       path-to-regexp: 6.2.1
+      picocolors: 1.0.0
       redent: 4.0.0
       rehype: 13.0.1
       rehype-format: 5.0.0

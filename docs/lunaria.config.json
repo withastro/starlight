@@ -80,7 +80,14 @@
       ]
     },
     "customCss": ["./lunaria/styles.css"],
-    "basesToHide": ["src/content/docs/"]
+    "basesToHide": ["src/content/docs/"],
+    "ui": {
+      "statusByLocale.heading": "Translation progress by locale",
+      "statusByLocale.incompleteLocalizationLink": "incomplete translation",
+      "statusByLocale.outdatedLocalizationLink": "outdated translation",
+      "statusByLocale.completeLocalization": "This translation is complete, amazing job! 🎉",
+      "statusByFile.heading": "Translation status by file"
+    }
   },
   "ignoreKeywords": ["lunaria-ignore", "typo", "en-only", "broken link", "i18nReady", "i18nIgnore"],
   "renderer": "./lunaria/renderer.config.ts"
