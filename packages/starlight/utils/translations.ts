@@ -8,6 +8,8 @@ let userTranslations: Record<string, i18nSchemaOutput> = {};
 try {
 	// Load the user’s i18n collection and ignore the error if it doesn’t exist.
 	userTranslations = Object.fromEntries(
+		// @ts-ignore — may be an error in projects without an i18n collection
+
 		(await getCollection('i18n')).map(({ id, data }) => [id, data] as const)
 	);
 } catch {}
