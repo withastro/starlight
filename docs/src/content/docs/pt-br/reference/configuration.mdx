@@ -129,7 +129,7 @@ Grupos de links são expandidos por padrão. Você pode modificar esse comportam
 
 Subgrupos gerados automaticamente respeitam a propriedade `collapsed` de seu grupo pai por padrão. Defina a propriedade `autogenerate.collapsed` para sobrescrever isso.
 
-```js
+```js {5,16}
 sidebar: [
   // Um grupo escondido de links.
   {
@@ -155,7 +155,7 @@ sidebar: [
 
 Se o seu site é multilíngue, a `label` de cada item é considerada como estando no seu local padrão. Você pode definir uma propriedade `translations` para providenciar rótulos para suas outras línguas suportadas:
 
-```js
+```js {5,9,14}
 sidebar: [
   // um exemplo de barra lateral com rótulos traduzidos para o Chinês Simplificado.
   {
@@ -215,7 +215,6 @@ interface BadgeConfig {
 Cada entrada deve usar o diretório onde os arquivos daquela língua estão salvos como a chave.
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -280,7 +279,7 @@ A direção de escrita dessa língua; `"ltr"` para esquerda-para-direita (o padr
 
 Você pode definir a língua padrão sem um diretório `/lingua/` definindo um local `root`:
 
-```js
+```js {3-6
 starlight({
 	locales: {
 		root: {
@@ -326,6 +325,7 @@ starlight({
 		threads: 'https://www.threads.net/@nmoodev',
 		twitch: 'https://www.twitch.tv/bholmesdev',
 		twitter: 'https://twitter.com/astrodotbuild',
+        'x.com': 'https://x.com/astrodotbuild',
 		youtube: 'https://youtube.com/@astrodotbuild',
 	},
 });
@@ -344,6 +344,82 @@ starlight({
 	customCss: ['./src/estilos-customizados.css', '@fontsource/roboto'],
 });
 ```
+
+### `expressiveCode`
+
+**tipo:** `StarlightExpressiveCodeOptions | boolean`  
+**padrão:**: `true`
+
+Starlight usa [`Expressive Code`](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para renderizar blocos de código e adicionar suporte para destacar partes de códigos de exemplo, adicionar nomes de arquivos aos blocos de código, e mais.
+Veja o [guia para “Blocos de Código”](http://localhost:4321/guides/authoring-content/#code-blocks) para aprender como usar a sintaxe do Expressive Code dentro de seu conteúdo Markdown e MDX.
+
+Você pode utilizar qualquer uma das [opções de configuração do Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) padrões, assim como alguma propriedades específicas do Starlight, configurando a opção `expressiveCode` do Starlight.
+Por exemplo, defina um valor para `styleOverrides` do Expressive Code para sobrescrever o CSS padrão. Isso permite customizações como adicionar cantos arredondados aos seus blocos de código:
+
+```js ins={2-4}
+starlight({
+    expressiveCode: {
+        styleOverrides: { borderRadius: '0.5rem' },
+    },
+});
+```
+
+Se você quiser desabilitar o Expressive Code, define `expressiveCode: false` em sua configuração do Starlight:
+
+```js ins={2}
+starlight({
+    expressiveCode: false,
+});
+```
+
+Além das opções padrões do Expressive Code, você também pode definir as seguintes propriedades específicas do Starlight na sua configuração `expressiveCode` para customizar o comportamento de tema dos seus blocos de código:
+
+#### `themes`
+
+**tipo:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**padrão:** `['starlight-dark', 'starlight-light']`
+
+Define os temas utilizados para estilizar blocos de código.
+Veja a [documentação do Expressive Code sobre `themes`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) para saber os formatos de temas suportados.
+
+Starlight usa as variantes “light” e “dark” do [tema Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner por padrão.
+
+Se você prover ao menos um tema claro e um escuro, Starlight vai automaticamente manter o tema de blocos de código ativo em sincronia com o tema atual do site.
+Configure este comportamento com a opção [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
+
+#### `useStarlightDarkModeSwitch`
+
+**tipo:** `boolean`  
+**padrão:** `true`
+
+Quando `true`, blocos de código alternam automaticamente entre temas claro e escuro quando o tema do site muda.
+Quando `false`, você deve adicionar manualmente o CSSS para trocar entre os múltiplos temas.
+
+:::note
+Ao configurar `themes`, você deve prover ao menos um tema claro e um escuro para a troca de modo escuro do Starlight funcionar.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**tipo:** `boolean`  
+**padrão:** `true` se `themes` não for definido, caso contrário `false`
+
+Quando `true`, as variáveis de CSS do Starlight são utilizadas para as cores dos elementos de UI dos blocos de código (fundo, botões, sombras, etc.), correspondendo ao [tema de cores do site](/pt-br/guides/css-and-tailwind/#tema).
+Quando `false`, as cores provenientes do tema de highlight de sintaxe ativo são utilizadas para estes elementos.
+
+:::note
+Ao utilizar temas customizados e definir esta opção para `true`, você deve prover ao menos um tema claro e um escuro para garantir o contraste apropriado.
+:::
+
+### `pagefind`
+
+**tipo:** `boolean`  
+**padrão:** `true`
+
+Define se o [Pagefind](https://pagefind.app/), provedor de busca dentro do site padrão do Starlight, está habilitado.
+
+Defina como `false` para desabilitar a indexação de seu site com Pagefind.
+Isso também vai ocultar a UI de busca padrão se utilizado.
 
 ### `head`
 
@@ -453,3 +529,20 @@ starlight({
 ```
 
 Consulte a [Referencia de Substituição](/pt-br/reference/overrides/) para ver os detalhes de todos os componentes que você pode substituir.
+
+### `plugins`
+
+**tipo:** [`StarlightPlugin[]`](/pt-br/reference/plugins/#referência-rápida-da-api)
+
+Estenda Starlight com plugins customizados.
+Plugins aplicam mudanças em seu projeto para modificar ou adicionar funcionalidades ao Starlight.
+
+Visite o [mostruário de plugins](/pt-br/showcase/#plugins) para ver a lista de plugins disponíveis.
+
+```js
+starlight({
+    plugins: [starlightPlugin()],
+});
+```
+
+Veja a [Referência de plugins](/pt-br/reference/plugins/) para mais detalhes sobre como criar seus próprios plugins.
