@@ -139,7 +139,7 @@ Asides de cuidado e perigo são úteis para chamar a atenção de um usuário a 
 Se você anda os utilizando muito, pode ser um sinal de que o que você está documentando se beneficiaria com uma mudança.
 
 :::caution
-Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](../../).
+Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](/pt-br/).
 :::
 
 :::danger
@@ -153,7 +153,7 @@ Seus usuários podem ser mais produtivos e considerar seu produto mais fácil de
 
 ```md
 :::caution
-Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](../../).
+Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](/pt-br/).
 :::
 
 :::danger
