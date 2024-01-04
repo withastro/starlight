@@ -1,8 +1,6 @@
 ---
 title: 重写组件
 description: 学习如何通过替换 Starlight 的内置组件来给你的文档站点 UI 添加自定义元素。
-sidebar:
-  badge: 新功能
 ---
 
 Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内容。大部分 Starlight 的默认外观可以通过 [CSS](/zh-cn/guides/css-and-tailwind/) 和 [配置选项](/zh-cn/guides/customization/) 进行自定义。
