@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLinksValidator from 'starlight-links-validator';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -199,6 +200,10 @@ export default defineConfig({
 					autogenerate: { directory: 'reference' },
 				},
 			],
+			plugins: [starlightLinksValidator({
+			  errorOnFallbackPages: false,
+			  errorOnInconsistentLocale: true,
+			})],
 		}),
 	],
 });
