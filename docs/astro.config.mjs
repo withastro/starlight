@@ -200,10 +200,10 @@ export default defineConfig({
 					autogenerate: { directory: 'reference' },
 				},
 			],
-			plugins: [starlightLinksValidator({
+			plugins: process.env.CHECK_LINKS ? [starlightLinksValidator({
 			  errorOnFallbackPages: false,
 			  errorOnInconsistentLocale: true,
-			})],
+			})] : [],
 		}),
 	],
 });
