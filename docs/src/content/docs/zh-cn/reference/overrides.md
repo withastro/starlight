@@ -18,6 +18,7 @@ tableOfContents:
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -134,6 +135,12 @@ entry: {
 
 如果启用了，表示可以编辑此页面的地址的 JavaScript `URL` 对象。
 
+#### `labels`
+
+**类型：** `Record<string, string>`
+
+一个包含为当前页面本地化的 UI 字符串的对象。请参阅 [“翻译 Starlight UI”](/zh-cn/guides/i18n/#翻译-starlight-的-ui) 指南以获取所有可用键的列表。
+
 ---
 
 ## 组件
@@ -226,6 +233,10 @@ entry: {
 
 用于渲染 Starlight 搜索 UI 的组件。
 默认实现包含在导航栏中的按钮和在点击时显示搜索模态框以及加载 [Pagefind UI](https://pagefind.app/) 的代码。
+
+当 [`pagefind`](/zh-cn/reference/configuration/#pagefind) 被禁用时，默认的搜索组件不会被渲染。
+然而，如果你重写了 `Search`，你的自定义组件将总是被渲染，即使 `pagefind` 配置选项是 `false`。
+这允许你在禁用 Pagefind 时为其他搜索提供商添加 UI。
 
 #### `SocialIcons`
 
@@ -341,6 +352,8 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 
 在页面主内容列中渲染 Markdown 内容的组件。
 默认实现为 Markdown 内容提供了基本的样式。
+
+Markdown 内容样式也暴露在 `@astrojs/starlight/style/markdown.css` 中，并且作用域限制在 `.sl-markdown-content` CSS 类中。
 
 ---
 
