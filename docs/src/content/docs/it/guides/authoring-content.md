@@ -140,7 +140,7 @@ Gli aside caution e danger sono d'aiuto per richiamare l'attenzione dell'utente 
 Se ti ritrovi ad usarli spesso, potrebbe essere segno che quelo che stai documentando potrebbe trarre beneficio da una riprogettazione.
 
 :::caution
-Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte prima di usare [Starlight](../../../).
+Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte prima di usare [Starlight](/it/).
 :::
 
 :::danger
@@ -154,7 +154,7 @@ Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più faci
 
 ```md
 :::caution
-Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte prima di usare [Starlight](../../../).
+Se non sei sicuro di voler un sito per documentazione fantastico, pensaci due volte prima di usare [Starlight](/it/).
 :::
 
 :::danger

@@ -69,6 +69,9 @@ importers:
       rehype:
         specifier: ^13.0.1
         version: 13.0.1
+      starlight-links-validator:
+        specifier: ^0.5.1
+        version: 0.5.1(@astrojs/starlight@packages+starlight)(astro@4.0.1)
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3583,7 +3586,6 @@ packages:
     resolution: {integrity: sha512-MNilsvEKLFpV604hwfhVStK0usFY/QmM5zX16bo7EjnAEGofr5YyI37kzopBlZJkHD4t887i+q/C8/tr5Q94cA==}
     dependencies:
       '@types/hast': 3.0.3
-    dev: false
 
   /hast-util-is-body-ok-link@3.0.0:
     resolution: {integrity: sha512-VFHY5bo2nY8HiV6nir2ynmEB1XkxzuUffhEGeVx7orbu/B1KaGyeGgMZldvMVx5xWrDlLLG/kQ6YkJAMkBEx0w==}
@@ -6334,6 +6336,23 @@ packages:
 
   /stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
+    dev: true
+
+  /starlight-links-validator@0.5.1(@astrojs/starlight@packages+starlight)(astro@4.0.1):
+    resolution: {integrity: sha512-6iNl/bTTFN65T3fx1oMdspZltlYyonmrnno4dWjMzJuFHO79ZGKyzrtuMD59kiM9Y85eSy3MOpU1wuPoY28fMg==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.15.0'
+      astro: '>=4.0.0'
+    dependencies:
+      '@astrojs/starlight': link:packages/starlight
+      astro: 4.0.1(@types/node@18.16.19)
+      github-slugger: 2.0.0
+      hast-util-from-html: 2.0.1
+      hast-util-has-property: 3.0.0
+      kleur: 4.1.5
+      mdast-util-to-string: 4.0.0
+      unist-util-visit: 5.0.0
     dev: true
 
   /start-server-and-test@2.0.0:
