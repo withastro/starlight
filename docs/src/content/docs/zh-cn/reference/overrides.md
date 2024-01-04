@@ -139,7 +139,7 @@ entry: {
 
 **类型：** `Record<string, string>`
 
-一个包含为当前页面本地化的 UI 字符串的对象。请参阅[“翻译 Starlight 的 UI”](/zh-cn/guides/i18n/#翻译-starlight-的-ui)指南以获取所有可用键的列表。
+一个包含为当前页面本地化的 UI 字符串的对象。请参阅 [“翻译 Starlight UI”](/zh-cn/guides/i18n/#翻译-starlight-的-ui) 指南以获取所有可用键的列表。
 
 ---
 
@@ -354,6 +354,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 默认实现为 Markdown 内容提供了基本的样式。
 
 Markdown 内容样式也暴露在 `@astrojs/starlight/style/markdown.css` 中，并且作用域限制在 `.sl-markdown-content` CSS 类中。
+
 ---
 
 ### 页脚
