@@ -127,7 +127,7 @@ starlight({
 
 自动生成的子组默认情况下会遵守其父组的 `collapsed` 属性。设置 `autogenerate.collapsed` 属性以覆盖此行为。
 
-```js
+```js {5,16}
 sidebar: [
   // 一个折叠的链接组。
   {
@@ -153,7 +153,7 @@ sidebar: [
 
 如果你的网站是多语言的，每个项目的 `label` 被认为是默认语言。你可以设置一个 `translations` 属性来为你支持的其他语言提供标签：
 
-```js
+```js {5,9,14}
 sidebar: [
   // 一个侧边栏示例，其中的标签被翻译成简体中文。
   {
@@ -213,7 +213,6 @@ interface BadgeConfig {
 每个条目都应该使用该语言文件保存的目录作为 key。
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -278,7 +277,7 @@ interface LocaleConfig {
 
 你可以通过设置 `root` locale 来提供不带 `/lang/` 目录的默认语言：
 
-```js
+```js {3-6}
 starlight({
 	locales: {
 		root: {
@@ -343,6 +342,79 @@ starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
+
+### `expressiveCode`
+
+**类型：** `StarlightExpressiveCodeOptions | boolean`  
+**默认值：** `true`
+
+Starlight 使用 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) 来渲染代码块，并添加对代码示例的高亮支持，向代码块添加文件名等。
+请参阅 [“代码块”指南](/zh-cn/guides/authoring-content/#代码块) 以了解如何在你的 Markdown 和 MDX 内容中使用 Expressive Code 语法。
+
+你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration)以及一些特定于 Starlight 的属性。比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+如果你想禁用 Expressive Code，请在 Starlight 配置中设置 `expressiveCode: false`：
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+除了标准的 Expressive Code 选项之外，你还可以在 `expressiveCode` 配置中设置以下 Starlight 特定属性，以进一步自定义代码块的主题行为：
+
+#### `themes`
+
+**类型：** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**默认值：** `['starlight-dark', 'starlight-light']`
+
+设置用于代码块样式的主题。有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)。
+
+Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/sdras/night-owl-vscode-theme) 的深色和浅色变体。
+
+如果你提供至少一个深色和一个浅色主题，Starlight 将自动将活动代码块主题与当前网站主题保持同步。
+使用 [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch) 选项配置此行为。
+
+#### `useStarlightDarkModeSwitch`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+当设置为 `true` 时，代码块会在网站主题更改时自动在浅色和深色主题之间切换。
+当设置为 `false` 时，你必须手动添加 CSS 来处理多个主题之间的切换。
+
+:::note
+当设置 `themes` 时，你必须为 Starlight 暗黑模式切换提供至少一个深色和一个浅色主题。
+:::
+
+#### `useStarlightUiThemeColors`
+
+**类型：** `boolean`  
+**默认值：** 如果未设置 `themes`，则为 `true`，否则为 `false`
+
+当设置为 `true` 时，Starlight 的 CSS 变量用于代码块 UI 元素的颜色（背景、按钮、阴影等），与[网站颜色主题](/zh-cn/guides/css-and-tailwind/#主题)相匹配。
+当设置为 `false` 时，这些元素使用活动语法高亮主题提供的颜色。
+
+:::note
+当使用自定义主题并将其设置为 `true` 时，你必须提供至少一个深色和一个浅色主题，以确保正确的颜色对比度。
+:::
+
+### `pagefind`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+定义 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/) 是否启用。
+
+将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
 
 ### `head`
 
@@ -452,3 +524,20 @@ starlight({
 ```
 
 要查阅所有可覆盖的组件，请参阅[覆盖参考](/zh-cn/reference/overrides/)。
+
+### `plugins`
+
+**类型：** [`StarlightPlugin[]`](/zh-cn/reference/plugins/#快速-api-参照)
+
+使用自定义插件扩展 Starlight。
+插件将更改应用到你的项目中，以修改或添加 Starlight 的功能。
+
+访问 [插件 showcase](/zh-cn/showcase/#插件) 查看可用插件列表。
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+有关创建自己的插件的详细信息，请参阅[插件参考](/zh-cn/reference/plugins/)。
