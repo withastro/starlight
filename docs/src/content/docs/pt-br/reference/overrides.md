@@ -139,7 +139,7 @@ Objeto `URL` para o endereço onde a página poderá ser editada, se ativado.
 
 **Tipos:** `Record<string, string>`
 
-Um objeto content as strings da UI localizados para a página atual. Veja o guia [“Traduza a UI do Starlight”](/pt-br/guides/i18n/#traduza-a-ui-do-starlight) para uma lista de todas as chaves disponíveis.
+Um objeto contendo as strings da UI localizados para a página atual. Veja o guia [“Traduza a UI do Starlight”](/pt-br/guides/i18n/#traduza-a-ui-do-starlight) para uma lista de todas as chaves disponíveis.
 
 ---
 
