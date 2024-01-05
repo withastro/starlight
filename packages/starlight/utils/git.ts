@@ -9,7 +9,7 @@
  */
 
 import { basename, dirname } from 'node:path';
-import { execaSync } from 'execa';
+import { execSync } from 'node:child_process';
 
 /** Custom error thrown when the current file is not tracked by git. */
 class FileNotTrackedError extends Error {}
@@ -30,29 +30,18 @@ export function getFileCommitDate(
 	date: Date;
 	timestamp: number;
 } {
-	const result = execaSync(
-		'git',
-		[
-			'log',
-			`--format=%ct`,
-			'--max-count=1',
-			...(age === 'oldest' ? ['--follow', '--diff-filter=A'] : []),
-			'--',
-			basename(file),
-		],
-		{
-			cwd: dirname(file),
-		}
-	);
-	if (result.exitCode !== 0) {
-		throw new Error(
-			`Failed to retrieve the git history for file "${file}" with exit code ${result.exitCode}: ${result.stderr}`
+	let output: string;
+	try {
+		const timestampBuffer = execSync(
+			`git log --format=%ct --max-count=1 ${
+				age === 'oldest' ? '--follow --diff-filter=A' : ''
+			} ${basename(file)}`,
+			{
+				cwd: dirname(file),
+			}
 		);
-	}
-
-	const output = result.stdout.trim();
-
-	if (!output) {
+		output = timestampBuffer.toString().trim();
+	} catch {
 		throw new FileNotTrackedError(
 			`Failed to retrieve the git history for file "${file}" because the file is not tracked by git.`
 		);
