@@ -116,6 +116,20 @@ You should then be able to open <http://localhost:4321> and see your changes.
 > **Note**
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
 
+### Check for broken links in the docs site
+
+When adding or translating content in the Starlight docs site, you can check all internal links are valid.
+All GitHub PRs are checked this way automatically, but testing locally can help if you want to confirm changes are correct before committing them.
+
+To do this, move into the `docs/` directory from the root of the repo and then build the site with the `CHECK_LINKS` environment variable:
+
+```sh
+cd docs
+CHECK_LINKS=true pnpm build
+```
+
+If there are any broken links, the build will fail and log which pages need to be fixed.
+
 ### Unit tests
 
 The Starlight package includes unit tests in [`packages/starlight/__tests__/`](./packages/starlight/__tests__/), which are run using [Vitest][vitest].
