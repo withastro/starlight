@@ -6,9 +6,11 @@ export function getNewestCommitDate(file: string) {
 		cwd: dirname(file),
 		encoding: 'utf-8',
 	});
-	
+
 	if (result.error) {
-		throw new Error(`Failed to retrieve the git history for file "${file}" with error: ${result.error.message}".`);
+		throw new Error(
+			`Failed to retrieve the git history for file "${file}" with error: ${result.error}`
+		);
 	}
 	const output = result.stdout.trim();
 	const regex = /^(?<timestamp>\d+)$/;
@@ -16,7 +18,7 @@ export function getNewestCommitDate(file: string) {
 
 	if (!match?.groups?.timestamp) {
 		throw new Error(
-			`Failed to retrieve the git history for file "${file}" with unexpected output: ${output}`
+			`Failed to retrieve the git history for file "${file}", unexpected output: ${output}`
 		);
 	}
 

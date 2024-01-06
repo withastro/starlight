@@ -74,11 +74,16 @@ function getLastUpdated({ entry }: PageProps): Date | undefined {
 	const { lastUpdated: configLastUpdated } = config;
 
 	if (frontmatterLastUpdated ?? configLastUpdated) {
-		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id,  project.root));
-		const date =
-			frontmatterLastUpdated instanceof Date
-				? frontmatterLastUpdated
-				: getNewestCommitDate(currentFilePath);
+		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id, project.root));
+		let date: Date | undefined;
+		try {
+			date =
+				frontmatterLastUpdated instanceof Date
+					? frontmatterLastUpdated
+					: getNewestCommitDate(currentFilePath);
+		} catch {
+			// If the git command fails, ignore the error and continue.
+		}
 		return date;
 	}
 
