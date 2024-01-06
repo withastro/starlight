@@ -8,18 +8,14 @@ export function getNewestCommitDate(file: string) {
 	});
 
 	if (result.error) {
-		throw new Error(
-			`Failed to retrieve the git history for file "${file}"`
-		);
+		throw new Error(`Failed to retrieve the git history for file "${file}"`);
 	}
 	const output = result.stdout.trim();
 	const regex = /^(?<timestamp>\d+)$/;
 	const match = output.match(regex);
 
 	if (!match?.groups?.timestamp) {
-		throw new Error(
-			`Failed to validate the timestamp for file "${file}"`
-		);
+		throw new Error(`Failed to validate the timestamp for file "${file}"`);
 	}
 
 	const timestamp = Number(match.groups.timestamp);
