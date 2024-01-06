@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
-import { getFileCommitDate } from './git';
+import { getNewestCommitDate } from './git';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
@@ -70,17 +70,19 @@ function getToC({ entry, locale, headings }: PageProps) {
 }
 
 function getLastUpdated({ entry }: PageProps): Date | undefined {
-	if (entry.data.lastUpdated ?? config.lastUpdated) {
-		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id, project.root));
-		let date = typeof entry.data.lastUpdated !== 'boolean' ? entry.data.lastUpdated : undefined;
-		if (!date) {
-			try {
-				({ date } = getFileCommitDate(currentFilePath, 'newest'));
-			} catch {}
-		}
+	const { lastUpdated: frontmatterLastUpdated } = entry.data;
+	const { lastUpdated: configLastUpdated } = config;
+
+	if (frontmatterLastUpdated ?? configLastUpdated) {
+		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id,  project.root));
+		const date =
+			frontmatterLastUpdated instanceof Date
+				? frontmatterLastUpdated
+				: getNewestCommitDate(currentFilePath);
 		return date;
 	}
-	return;
+
+	return undefined;
 }
 
 function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
