@@ -12,7 +12,7 @@ Starlight 사이트, 플러그인 또는 Starlight용 도구를 만드셨나요?
 
 ## 사이트
 
-import ShowcaseSites from '../../../components/showcase-sites.astro';
+import ShowcaseSites from '~/components/showcase-sites.astro';
 
 Starlight는 이미 프로덕션에 사용되고 있습니다. 다음은 웹사이트 중 일부입니다.
 
@@ -43,6 +43,11 @@ Starlight 팀이 지원하는 공식 플러그인과 Starlight 사용자가 관�
 		title="starlight-links-validator"
 		description="Starlight 페이지에 끊어진 링크가 있는지 확인합니다."
 	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description="TypeDoc을 사용하여 TypeScript에서 Starlight 페이지를 생성합니다."
+	/>
 </CardGrid>
 
 ## 커뮤니티 도구 및 통합
@@ -61,11 +66,6 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		href="https://github.com/HiDeoo/starlight-blog"
 		title="starlight-blog"
 		description="문서 사이트에 블로그를 추가합니다."
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-typedoc"
-		title="starlight-typedoc"
-		description="TypeDoc을 사용하여 TypeScript에서 Starlight 페이지를 생성합니다."
 	/>
 	<LinkCard
 		href="https://github.com/HiDeoo/starlight-openapi"

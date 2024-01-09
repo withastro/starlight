@@ -20,8 +20,8 @@ MDX 파일에서 컴포넌트를 가져온 다음 JSX 태그로 렌더링하여 
 title: 내 문서에 오신 것을 환영합니다
 ---
 
-import SomeComponent from '../../../components/SomeComponent.astro';
-import AnotherComponent from '../../../components/AnotherComponent.astro';
+import SomeComponent from '~/components/SomeComponent.astro';
+import AnotherComponent from '~/components/AnotherComponent.astro';
 
 <SomeComponent prop="어떤 값" />
 
@@ -179,7 +179,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### 아이콘
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
 

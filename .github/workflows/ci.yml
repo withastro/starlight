@@ -74,19 +74,27 @@ jobs:
         working-directory: ./docs
         run: pnpm build
 
-  docs-i18n-tracker-smoke:
-    name: Docs i18n tracker builds
+  links:
+    name: Check for broken links
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
-      - run: pnpm i
-      - name: Build docs i18n tracker
-        working-directory: ./docs-i18n-tracker
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build docs site and check links
+        working-directory: ./docs
         run: pnpm build
+        env:
+          CHECK_LINKS: true
