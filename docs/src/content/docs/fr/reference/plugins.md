@@ -8,7 +8,7 @@ tableOfContents:
 Les modules d'extension Starlight peuvent personnaliser la configuration, l'interface utilisateur et le comportement de Starlight, tout en étant faciles à partager et à réutiliser.
 Cette page de référence documente l'API à laquelle ces modules d'extension ont accès.
 
-Consultez la [référence de configuration](/fr/reference/configuration/#plugins) pour en savoir plus sur l'utilisation d'un module d'extension Starlight.
+Consultez la [référence de configuration](/fr/reference/configuration/#plugins) pour en savoir plus sur l'utilisation d'un module d'extension Starlight ou visitez la [vitrine des modules d'extension](/fr/showcase/#modules-dextension) pour voir une liste de modules d'extension disponibles.
 
 ## Référence rapide de l'API
 
@@ -146,7 +146,7 @@ Tous les messages seront préfixés par le nom du module d'extension.
 ```ts {6}
 // module-extension.ts
 export default {
-  name: 'long-processus-plugin',
+  name: 'plugin-long-processus',
   hooks: {
     plugin({ logger }) {
       logger.info("Démarrage d'un long processus…");
@@ -159,5 +159,5 @@ export default {
 L'exemple ci-dessus affichera un message qui inclut le message d'information fourni :
 
 ```plaintext frame="terminal"
-[long-processus-plugin] Démarrage d'un long processus…
+[plugin-long-processus] Démarrage d'un long processus…
 ```

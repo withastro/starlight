@@ -157,7 +157,7 @@ Caution and danger asides are helpful for drawing a user’s attention to detail
 If you find yourself using these a lot, it may also be a sign that the thing you are documenting could benefit from being redesigned.
 
 :::caution
-If you are not sure you want an awesome docs site, think twice before using [Starlight](../../).
+If you are not sure you want an awesome docs site, think twice before using [Starlight](/).
 :::
 
 :::danger
@@ -171,7 +171,7 @@ Your users may be more productive and find your product easier to use thanks to 
 
 ```md
 :::caution
-If you are not sure you want an awesome docs site, think twice before using [Starlight](../../).
+If you are not sure you want an awesome docs site, think twice before using [Starlight](/).
 :::
 
 :::danger

@@ -20,8 +20,8 @@ Diese sehen wie HTML-Tags aus, beginnen aber mit einem Großbuchstaben, der dem 
 title: Willkommen bei meiner Dokumentation
 ---
 
-import SomeComponent from '../../../components/SomeComponent.astro';
-import AnotherComponent from '../../../components/AnotherComponent.astro';
+import SomeComponent from '~/components/SomeComponent.astro';
+import AnotherComponent from '~/components/AnotherComponent.astro';
 
 <SomeComponent prop="something" />
 
@@ -176,7 +176,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight stellt eine Reihe von allgemeinen Icons zur Verfügung, die du mit der Komponente `<Icon>` in deinem Inhalt anzeigen kannst.
 

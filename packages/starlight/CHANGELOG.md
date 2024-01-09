@@ -1,5 +1,29 @@
 # @astrojs/starlight
 
+## 0.15.2
+
+### Patch Changes
+
+- [#1254](https://github.com/withastro/starlight/pull/1254) [`e9659e8`](https://github.com/withastro/starlight/commit/e9659e869cd0c9ad0b7388397b0fff8e2a9db27a) Thanks [@Pukimaa](https://github.com/Pukimaa)! - Adds Open Collective social link icon
+
+- [#1295](https://github.com/withastro/starlight/pull/1295) [`c3732a9`](https://github.com/withastro/starlight/commit/c3732a9bb5cb7907f00a3ed5e65534f48a5ff6b9) Thanks [@juchym](https://github.com/juchym)! - Improve Ukrainian UI translations
+
+## 0.15.1
+
+### Patch Changes
+
+- [#1273](https://github.com/withastro/starlight/pull/1273) [`ae53155`](https://github.com/withastro/starlight/commit/ae531557aa4d42bd27c15f8f08bb3ca8242c9beb) Thanks [@natemoo-re](https://github.com/natemoo-re)! - Updates `<SocialIcon />` styling for improved accessibility. Specifically, the component now meets the [Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) success criteria defined by [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/).
+
+- [#1289](https://github.com/withastro/starlight/pull/1289) [`9bd343f`](https://github.com/withastro/starlight/commit/9bd343fb1efab90a0aa03a95b1928a53c1674000) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds French translations for Expressive Code UI
+
+- [#1280](https://github.com/withastro/starlight/pull/1280) [`6b1693d`](https://github.com/withastro/starlight/commit/6b1693d55552a48316a31d986e1cbaf695f10a61) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Adds Spanish translations for Expressive Code UI
+
+- [#1276](https://github.com/withastro/starlight/pull/1276) [`667f23d`](https://github.com/withastro/starlight/commit/667f23d615742b44bb18ace39d981f8797b8ac55) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates `astro-expressive-code` dependency to the latest version
+
+- [#1266](https://github.com/withastro/starlight/pull/1266) [`c9edf30`](https://github.com/withastro/starlight/commit/c9edf30b16f66757797dcaa5161b4afc18027476) Thanks [@alex-way](https://github.com/alex-way)! - Removes redundant subprocess calls in git last-updated time utility to improve performance
+
+- [#1278](https://github.com/withastro/starlight/pull/1278) [`e88abb0`](https://github.com/withastro/starlight/commit/e88abb0cc8b329500c15bc77aaed3907ec7dc507) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightUserConfig` TypeScript type representing the user's Starlight configuration received by plugins.
+
 ## 0.15.0
 
 ### Minor Changes

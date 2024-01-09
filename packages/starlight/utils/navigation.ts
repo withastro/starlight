@@ -230,19 +230,24 @@ function getOrder(routeOrDir: Route | Dir): number {
 		: // If no order value is found, set it to the largest number possible.
 		  routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE;
 }
+/** Get the comparison ID for a given route to sort them alphabetically. */
+function getComparisonId(id: string) {
+	const filename = stripExtension(basename(id));
+	return filename === 'index' ? '' : filename;
+}
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
-function sortDirEntries(
-	dir: [string, Dir | Route][],
-	locale: string | undefined
-): [string, Dir | Route][] {
-	const collator = new Intl.Collator(localeToLang(locale));
+function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
+	const collator = new Intl.Collator(localeToLang(undefined));
 	return dir.sort(([keyA, a], [keyB, b]) => {
 		const [aOrder, bOrder] = [getOrder(a), getOrder(b)];
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? keyA : a.slug, isDir(b) ? keyB : b.slug);
+		return collator.compare(
+			isDir(a) ? keyA : getComparisonId(a.id),
+			isDir(b) ? keyB : getComparisonId(b.id)
+		);
 	});
 }
 
@@ -255,7 +260,7 @@ function groupFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ): Group {
-	const entries = sortDirEntries(Object.entries(dir), locale).map(([key, dirOrRoute]) =>
+	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
 	);
 	return {
@@ -288,7 +293,7 @@ function sidebarFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ) {
-	return sortDirEntries(Object.entries(tree), locale).map(([key, dirOrRoute]) =>
+	return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed)
 	);
 }

@@ -29,6 +29,12 @@ Vous devez fournir un titre pour chaque page. Il sera affiché en haut de la pag
 
 La description de la page est utilisée pour les métadonnées de la page et sera reprise par les moteurs de recherche et dans les aperçus des médias sociaux.
 
+### `slug`
+
+**type**: `string`
+
+Remplace le slug de la page. Consultez [« Définition d’un slug personnalisé »](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-slug-personnalis%C3%A9e) dans la documentation d'Astro pour plus de détails.
+
 ### `editUrl`
 
 **Type :** `string | boolean`
