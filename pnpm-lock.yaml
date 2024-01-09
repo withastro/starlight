@@ -147,9 +147,6 @@ importers:
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
-      execa:
-        specifier: ^8.0.1
-        version: 8.0.1
       hast-util-select:
         specifier: ^6.0.2
         version: 6.0.2
