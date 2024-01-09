@@ -78,17 +78,17 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/reference/configuration/",
+			        "isCurrent": false,
+			        "label": "Config Reference",
+			        "type": "link",
+			      },
+			      {
 			        "badge": undefined,
 			        "collapsed": false,
 			        "entries": [
-			          {
-			            "attrs": {},
-			            "badge": undefined,
-			            "href": "/reference/frontmatter/",
-			            "isCurrent": false,
-			            "label": "Frontmatter Reference",
-			            "type": "link",
-			          },
 			          {
 			            "attrs": {},
 			            "badge": undefined,
@@ -97,17 +97,17 @@ describe('getSidebar', () => {
 			            "label": "Foo",
 			            "type": "link",
 			          },
+			          {
+			            "attrs": {},
+			            "badge": undefined,
+			            "href": "/reference/frontmatter/",
+			            "isCurrent": false,
+			            "label": "Frontmatter Reference",
+			            "type": "link",
+			          },
 			        ],
 			        "label": "frontmatter",
 			        "type": "group",
-			      },
-			      {
-			        "attrs": {},
-			        "badge": undefined,
-			        "href": "/reference/configuration/",
-			        "isCurrent": false,
-			        "label": "Config Reference",
-			        "type": "link",
 			      },
 			    ],
 			    "label": "Reference",
