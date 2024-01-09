@@ -18,12 +18,12 @@ Por exemplo, dada a seguinte estrutura de arquivos:
 
 - src/
   - content/
-	- docs/
-	  - guides/
-		- components.md
-		- i18n.md
-	  - reference/
-		- configuration.md
+  - docs/
+    - guides/
+    - components.md
+    - i18n.md
+    - reference/
+    - configuration.md
 
 </FileTree>
 
@@ -41,7 +41,10 @@ Esta barra lateral será gerada automaticamente:
 		{
 			label: 'reference',
 			items: [
-				{ label: 'Referência de Configuração', link: '/pt-br/reference/configuration/' },
+				{
+					label: 'Referência de Configuração',
+					link: '/pt-br/reference/configuration/',
+				},
 			],
 		},
 	]}
@@ -160,12 +163,12 @@ E esta estrutura de arquivos:
 
 - src/
   - content/
-	- docs/
-	  - guides/
-		- components.md
-		- i18n.md
-		- advanced/
-		  - project-structure.md
+  - docs/
+    - guides/
+    - components.md
+    - i18n.md
+    - advanced/
+      - project-structure.md
 
 </FileTree>
 
@@ -181,7 +184,10 @@ A barra lateral gerada seria esta:
 				{
 					label: 'advanced',
 					items: [
-						{ label: 'Estrutura de Projetos', link: '/pt-br/guides/project-structure/' },
+						{
+							label: 'Estrutura de Projetos',
+							link: '/pt-br/guides/project-structure/',
+						},
 					],
 				},
 			],
@@ -495,7 +501,10 @@ A configração acima gera esta barra lateral:
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'Estrutura de Projetos', link: '/pt-br/guides/project-structure/' },
+						{
+							label: 'Estrutura de Projetos',
+							link: '/pt-br/guides/project-structure/',
+						},
 					],
 				},
 			],
@@ -532,7 +541,10 @@ The configuration above generates the following sidebar:
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'Estrutura de Projetos', link: '/pt-br/guides/project-structure/' },
+						{
+							label: 'Estrutura de Projetos',
+							link: '/pt-br/guides/project-structure/',
+						},
 					],
 				},
 			],
