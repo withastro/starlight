@@ -20,8 +20,8 @@ Starlight 支持在 [MDX](https://mdxjs.com/) 文件中使用组件，并提供�
 title: 欢迎来到我的文档
 ---
 
-import SomeComponent from '../../../components/SomeComponent.astro';
-import AnotherComponent from '../../../components/AnotherComponent.astro';
+import SomeComponent from '~/components/SomeComponent.astro';
+import AnotherComponent from '~/components/AnotherComponent.astro';
 
 <SomeComponent prop="something" />
 
@@ -171,7 +171,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### 图标
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你的内容中显示。
 
