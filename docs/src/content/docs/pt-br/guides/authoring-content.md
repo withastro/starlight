@@ -7,6 +7,23 @@ Starlight suporta completamente a sintaxe [Markdown](https://daringfireball.net/
 
 Por favor verifique a [documentação do MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) ou a [documentação do Markdoc](https://markdoc.dev/docs/syntax) se estiver utilizando esses formatos de arquivo, já que o suporte e uso do Markdown podem variar.
 
+## Frontmatter
+
+Você pode customizar páginas individualmente no Starlight passando parâmetros no frontmatter.
+
+Frontmatter é definido no topo de seus arquivos entre divisores `---`:
+
+```md title="src/content/docs/exemplo.md"
+---
+title: Meu título
+---
+
+Conteúdo da página vem depois do segundo `---`.
+```
+
+Toda página deve incluir ao menos o `title` (título).
+Veja a [referência do frontmatter](/pt-br/reference/frontmatter) para todos os campos disponíveis e como adicionar campos customizados.
+
 ## Estilos Inline
 
 Texto pode estar em **negrito**, _itálico_, ou ~~tachado~~.
@@ -89,6 +106,8 @@ Eu posso fazer um link para [minha conclusão](#conclusão) abaixo na mesma pág
 
 Cabeçalhos de Nível 2 (`<h2>`) e Nível 3 (`<h3>`) vão aparecer automaticamente no índice da página.
 
+Aprenda mais sobre como Astro processa `id`s de títulos na [documentação do Astro](https://docs.astro.build/pt-br/guides/markdown-content/#ids-de-t%C3%ADtulos)
+
 ## Asides
 
 Asides (também conhecidos como “advertências” ou “frases de destaque”) são úteis para mostrar informações secundárias ao lado do conteúdo principal de uma página.
@@ -139,7 +158,7 @@ Asides de cuidado e perigo são úteis para chamar a atenção de um usuário a 
 Se você anda os utilizando muito, pode ser um sinal de que o que você está documentando se beneficiaria com uma mudança.
 
 :::caution
-Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](../../).
+Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](/pt-br/).
 :::
 
 :::danger
@@ -153,7 +172,7 @@ Seus usuários podem ser mais produtivos e considerar seu produto mais fácil de
 
 ```md
 :::caution
-Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](../../).
+Se você não tem certeza de que você quer um site de documentação incrível, pense novamente antes de utilizar [Starlight](/pt-br/).
 :::
 
 :::danger
@@ -200,9 +219,148 @@ var divertido = function lingua(l) {
 ```
 ````
 
-```md
-Longos blocos de código de linha única não devem quebrar linha. Eles devem rolar horizontalmente se forem muito longos. Esta linha deve ser longa o suficiente para demonstrar isso.
-```
+### Funcionalidades do Expressive Code
+
+Starlight usa [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para aumentar as possibilidades de formatação em blocos de código.
+Os plugins de marcadores de texto e moldura de janela do Expressive Code são habilitados por padrão.
+A renderização de blocos de código pode ser configurada utilizando a [opção de configuração `expressiveCode`](/pt-br/reference/configuration/#expressivecode) do Starlight.
+
+#### Marcadores de texto
+
+Você pode destacar linhas ou partes específicas do seu bloco de código utilizando [marcadores de texto do Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) na linha de abertura do seu bloco de código.
+Use chaves (`{ }`) para destacar linhas inteiras, e aspas para destacar segmentos do texto.
+
+Existem três estilos de destaque: neutro para chamar a atenção para o código, verde para indicar código adicionado, e vermelho para indeicar código deletado.
+Tanto texto quanto linhas inteiras podem ser marcados com o marcador padrão, ou combinados com `ins=` e `del=` para produzir o destaque desejado.
+
+Expressive Code provê diversas opções para customizar a aparência visual dos seus exemplos de código.
+Muitas dessas podem ser combinadas para exemplos de código altamente ilustrativos.
+Explore a [documentação do Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) para a lista extensiva de opções disponíveis.
+Alguns dos exemplos mais comuns estão demonstrados abaixo:
+
+- [Marque linhas inteiras e blocos de linhas usando o marcador `{ }`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+    // Esta linha (#2) e a próxima estão destacadas
+    return 'Esta é a linha #3 do snippet';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // Esta linha (#2) e a próxima estão destacadas
+    return 'Esta é a linha #3 do snippet';
+  }
+  ```
+  ````
+
+- [Marque partes do texto usando o marcador `" "` or expressões regulares](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+
+  ```js "Termos individuais" /Até.*suportadas/
+  // Termos individuais também podem ser destacados
+  function demo() {
+    return 'Até expressões regulares são suportadas';
+  }
+  ```
+
+  ````md
+  ```js "Termos individuais" /Até.*suportadas/
+  // Termos individuais também podem ser destacados
+  function demo() {
+    return 'Até expressões regulares são suportadas';
+  }
+  ```
+  ````
+
+- [Marque texto ou linhas como inseridos ou deletados com `ins` ou `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="inserido" del="deletado"
+  function demo() {
+    console.log('Esses são os marcadores inserido e deletado');
+    // A expressão de retorno usa o marcador padrão
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="inserido" del="deletado"
+  function demo() {
+    console.log('Esses são os marcadores inserido e deletado');
+    // A expressão de retorno usa o marcador padrão
+    return true;
+  }
+  ```
+  ````
+
+- [Combine highlight de sintaxe com sintaxe de `diff`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // O bloco inteiro tem o highlight de JavaScript,
+      // e ainda podemos colocar marcadores de diff nele!
+  -   console.log('Código antigo a ser removido')
+  +   console.log('Código novo e brilhante!')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // O bloco inteiro tem o highlight de JavaScript,
+      // e ainda podemos colocar marcadores de diff nele!
+  -   console.log('Código antigo a ser removido')
+  +   console.log('Código novo e brilhante!')
+    }
+  ```
+  ````
+
+#### Molduras e títulos
+
+Blocos de código podem ser renderizados dentro de molduras como se fossem janelas.
+Uma moldura que parece com uma janela de terminal pode ser usada para linguagens de scripts em shell (e.g. `bash` e `sh`).
+Outras linguages são exibidas dentro de uma moldura similar a um editor de código caso incluam um título.
+
+O título opcional de um bloco de código pode ser definido tanto com um atributo `title="..."` seguindo as crases de abertura do bloco de código e o identificador da linguagem, ou com um comentário contendo o nome do arquivo na primeira linha do código.
+
+- [Adicione uma aba com o nome do arquivo com um comentário](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```js
+  // meu-arquivo-de-teste.js
+  console.log('Olá Mundo!');
+  ```
+
+  ````md
+  ```js
+  // meu-arquivo-de-teste.js
+  console.log('Olá Mundo!');
+  ```
+  ````
+
+- [Adicione um título a uma janela de Terminal](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```bash title="Instalando dependências…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="Instalando dependências…"
+  npm install
+  ```
+  ````
+
+- [Desabilite molduras de janela com `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "Isso não é exibido como um terminal apesar de usar a linguagem bash"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "Isso não é exibido como um terminal apesar de usar a linguagem bash"
+  ```
+  ````
 
 ## Outras funcionalidades comuns do Markdown
 

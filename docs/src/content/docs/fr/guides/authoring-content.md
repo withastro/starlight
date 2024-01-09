@@ -156,7 +156,7 @@ Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Arc
 Les apartés de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
 
 :::caution
-Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](../../../).
+Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
 :::
 
 :::danger
@@ -170,7 +170,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 ```md
 :::caution
-Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](../../../).
+Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
 :::
 
 :::danger

@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.15.2
+
+### Patch Changes
+
+- [#1254](https://github.com/withastro/starlight/pull/1254) [`e9659e8`](https://github.com/withastro/starlight/commit/e9659e869cd0c9ad0b7388397b0fff8e2a9db27a) Thanks [@Pukimaa](https://github.com/Pukimaa)! - Adds Open Collective social link icon
+
+- [#1295](https://github.com/withastro/starlight/pull/1295) [`c3732a9`](https://github.com/withastro/starlight/commit/c3732a9bb5cb7907f00a3ed5e65534f48a5ff6b9) Thanks [@juchym](https://github.com/juchym)! - Improve Ukrainian UI translations
+
 ## 0.15.1
 
 ### Patch Changes

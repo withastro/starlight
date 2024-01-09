@@ -139,7 +139,7 @@ _Asides_ berjenis _caution_ dan _danger_ berguna untuk menarik perhatian penggun
 Jika Anda sering menggunakan ini, mungkin juga pertanda bahwa hal yang Anda dokumentasikan sepertinya bisa di-desain ulang.
 
 :::caution
-Jika Anda tidak yakin ingin membuat situs dokumentasi yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](../../).
+Jika Anda tidak yakin ingin membuat situs dokumentasi yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](/id/).
 :::
 
 :::danger
@@ -153,7 +153,7 @@ Pengguna Anda mungkin lebih produktif dan menemukan produk Anda lebih mudah digu
 
 ```md
 :::caution
-Jika Anda tidak yakin ingin membuat situs dokumen yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](../../).
+Jika Anda tidak yakin ingin membuat situs dokumen yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](/id/).
 :::
 
 :::danger

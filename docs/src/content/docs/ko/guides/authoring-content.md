@@ -158,7 +158,7 @@ Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)
 Caution과 Danger 주석은 실수하기 쉬운 세부 사항에 대해 사용자를 집중시키는 데 도움이 됩니다. 이러한 기능을 많이 사용하고 있다면, 문서화중인 내용을 다시 디자인하는 것이 좋습니다.
 
 :::caution
-당신이 멋진 문서 사이트를 원하지 않는다면 [Starlight](../../)는 필요하지 않을 수도 있습니다.
+당신이 멋진 문서 사이트를 원하지 않는다면 [Starlight](/ko/)는 필요하지 않을 수도 있습니다.
 :::
 
 :::danger
@@ -172,7 +172,7 @@ Starlight의 유용한 기능 덕분에 사용자의 생산성이 향상되고 �
 
 ```md
 :::caution
-당신이 멋진 문서 사이트를 원하지 않는다면 [Starlight](../../)는 필요하지 않을 수도 있습니다.
+당신이 멋진 문서 사이트를 원하지 않는다면 [Starlight](/ko/)는 필요하지 않을 수도 있습니다.
 :::
 
 :::danger
