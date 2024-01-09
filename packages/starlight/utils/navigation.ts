@@ -13,6 +13,7 @@ import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash } from './path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
+import { basename } from "node:path"
 
 const DirKey = Symbol('DirKey');
 
