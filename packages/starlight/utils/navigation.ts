@@ -13,7 +13,7 @@ import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash } from './path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { basename } from "node:path"
+import { basename } from 'node:path';
 
 const DirKey = Symbol('DirKey');
 
@@ -177,7 +177,6 @@ function treeify(routes: Route[], baseDir: string): Dir {
 		// Build the tree
 		.forEach((doc) => {
 			const parts = getBreadcrumbs(doc.id, baseDir);
-			let leaf = parts.at(-1);
 			let currentNode = treeRoot;
 
 			parts.forEach((part, index) => {
@@ -193,12 +192,10 @@ function treeify(routes: Route[], baseDir: string): Dir {
 				if (!isLeaf) {
 					currentNode[part] ||= makeDir();
 					currentNode = currentNode[part] as Dir;
+				} else {
+					currentNode[part] = doc;
 				}
-				leaf = part;
 			});
-
-			// Set the node's properties
-			if (leaf) currentNode[leaf] = doc;
 		});
 
 	return treeRoot;
