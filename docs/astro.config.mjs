@@ -142,23 +142,6 @@ export default defineConfig({
 								uk: 'Вплив на довкілля',
 							},
 						},
-						{
-							label: 'Showcase',
-							link: '/community/showcase',
-							translations: {
-								de: 'Schaufenster',
-								// es: '',
-								ja: 'ショーケース',
-								fr: 'Vitrine',
-								// it: '',
-								id: 'Galeri',
-								ko: '쇼케이스',
-								tr: 'Vitrin',
-								ru: 'Примеры',
-								hi: 'प्रदर्शन',
-								uk: 'Вітрина',
-							},
-						},
 					],
 				},
 				{
