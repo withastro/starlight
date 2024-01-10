@@ -95,7 +95,7 @@ Use sub-folders to organize your files and to create multiple path segments.
 
 For example, the following file structure will generate pages at `example.com/hello-world` and `example.com/guides/faq`:
 
-import FileTree from '../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -135,27 +135,27 @@ Because Starlight is beta software, there will be frequent updates and improveme
 Be sure to update Starlight regularly!
 :::
 
-Starlight is an Astro integration, and is updated like any `@astrojs/*` integration:
+Starlight is an Astro integration. You can update it and other Astro packages by running the following command in your terminal:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-npm install @astrojs/starlight@latest
+npx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-pnpm upgrade @astrojs/starlight --latest
+pnpm dlx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-yarn upgrade @astrojs/starlight --latest
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>

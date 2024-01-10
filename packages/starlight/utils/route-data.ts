@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
-import { getFileCommitDate } from './git';
+import { getNewestCommitDate } from './git';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
@@ -29,6 +29,8 @@ export interface StarlightRouteData extends Route {
 	lastUpdated: Date | undefined;
 	/** URL object for the address where this page can be edited if enabled. */
 	editUrl: URL | undefined;
+	/** Record of UI strings localized for the current page. */
+	labels: ReturnType<ReturnType<typeof useTranslations>['all']>;
 }
 
 export function generateRouteData({
@@ -48,6 +50,7 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
+		labels: useTranslations(locale).all(),
 	};
 }
 
@@ -67,17 +70,22 @@ function getToC({ entry, locale, headings }: PageProps) {
 }
 
 function getLastUpdated({ entry }: PageProps): Date | undefined {
-	if (entry.data.lastUpdated ?? config.lastUpdated) {
+	const { lastUpdated: frontmatterLastUpdated } = entry.data;
+	const { lastUpdated: configLastUpdated } = config;
+
+	if (frontmatterLastUpdated ?? configLastUpdated) {
 		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id, project.root));
-		let date = typeof entry.data.lastUpdated !== 'boolean' ? entry.data.lastUpdated : undefined;
-		if (!date) {
-			try {
-				({ date } = getFileCommitDate(currentFilePath, 'newest'));
-			} catch {}
+		try {
+			return frontmatterLastUpdated instanceof Date
+				? frontmatterLastUpdated
+				: getNewestCommitDate(currentFilePath);
+		} catch {
+			// If the git command fails, ignore the error.
+			return undefined;
 		}
-		return date;
 	}
-	return;
+
+	return undefined;
 }
 
 function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {

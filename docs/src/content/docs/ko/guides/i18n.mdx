@@ -3,7 +3,7 @@ title: 국제화 (i18n)
 description: 여러 언어를 지원하도록 Starlight 사이트를 구성하는 방법을 알아보세요.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽으로) 언어 지원을 포함한 다국어 사이트에 대한 기본 지원을 제공합니다.
 
@@ -141,7 +141,7 @@ Starlight는 귀하가 모든 언어로 같은 페이지를 생성할 것을 기
 
 ## Starlight UI 번역
 
-import LanguagesList from '../../../../components/languages-list.astro';
+import LanguagesList from '~/components/languages-list.astro';
 
 Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외에도 독자가 선택한 언어로 사이트 전체를 경험할 수 있도록 기본 UI 문자열(예를 들어, 목차의 제목인 "목차")을 번역할 수 있습니다.
 
@@ -200,9 +200,13 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 
@@ -233,3 +237,28 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+### 번역 스키마 확장
+
+`i18nSchema()` 옵션에서 `extend`를 설정하여 사이트 번역 사전에 맞춤 키를 추가하세요.
+다음 예시에서는 기본 키에 새로운 선택적 `custom.label` 키가 추가됩니다.
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.

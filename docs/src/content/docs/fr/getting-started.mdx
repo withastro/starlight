@@ -95,7 +95,7 @@ Utilisez des sous-dossiers pour organiser vos fichiers et créer plusieurs segme
 
 Par exemple, la structure de fichiers suivante génére des pages à `example.com/hello-world` et `example.com/guides/faq` :
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -135,27 +135,28 @@ Comme Starlight est un logiciel en version bêta, il y aura des mises à jour et
 Assurez-vous de mettre à jour Starlight régulièrement !
 :::
 
-Starlight est une intégration Astro, et est mis à jour comme toute intégration `@astrojs/*` :
+Starlight est une intégration Astro.
+Vous pouvez la mettre à jour ainsi que tous autres packages Astro en exécutant la commande suivante dans votre terminal :
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-npm install @astrojs/starlight@latest
+npx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-pnpm upgrade @astrojs/starlight --latest
+pnpm dlx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-yarn upgrade @astrojs/starlight --latest
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>

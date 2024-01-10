@@ -311,7 +311,7 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **타입:** <SocialLinksType />
 
@@ -414,6 +414,16 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 :::note
 사용자 정의 테마를 사용하고 이를 `true`로 설정하는 경우, 적절한 색상 대비를 보장하기 위해 최소한 하나의 어두운 테마와 하나의 밝은 테마를 제공해야 합니다.
 :::
+
+### `pagefind`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)가 활성화되어 있는지 정의합니다.
+
+Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하세요.
+또한, 이는 기본 검색 UI도 숨깁니다.
 
 ### `head`
 
@@ -522,3 +532,20 @@ starlight({
 ```
 
 재정의할 수 있는 모든 컴포넌트에 대한 자세한 내용은 [재정의 참조](/ko/reference/overrides/)를 확인하세요.
+
+### `plugins`
+
+**타입:** [`StarlightPlugin[]`](/ko/reference/plugins/#빠른-api-참조)
+
+맞춤형 플러그인으로 Starlight를 확장하세요.
+플러그인은 프로젝트에 변경 사항을 적용하여 Starlight의 기능을 수정하거나 추가합니다.
+
+사용 가능한 플러그인 목록을 보려면 [플러그인 쇼케이스](/ko/showcase/#플러그인)를 방문하세요.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+나만의 플러그인을 만드는 방법에 대한 자세한 내용은 [플러그인 참조](/ko/reference/plugins/)를 확인하세요.

@@ -29,6 +29,12 @@ You must provide a title for every page. This will be displayed at the top of th
 
 The page description is used for page metadata and will be picked up by search engines and in social media previews.
 
+### `slug`
+
+**type**: `string`
+
+Override the slug of the page. See [“Defining custom slugs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) in the Astro docs for more details.
+
 ### `editUrl`
 
 **type:** `string | boolean`
@@ -104,7 +110,7 @@ hero:
   tagline: Take your stuff to the moon and back in the blink of an eye.
   image:
     alt: A glittering, brightly colored logo
-    file: ../../assets/logo.png
+    file: ~/assets/logo.png
   actions:
     - text: Tell me more
       link: /getting-started/
@@ -124,8 +130,8 @@ You can display different versions of the hero image in light and dark modes.
 hero:
   image:
     alt: A glittering, brightly colored logo
-    dark: ../../assets/logo-dark.png
-    light: ../../assets/logo-light.png
+    dark: ~/assets/logo-dark.png
+    light: ~/assets/logo-light.png
 ---
 ```
 
@@ -369,4 +375,72 @@ sidebar:
   attrs:
     target: _blank
 ---
+```
+
+## Customize frontmatter schema
+
+The frontmatter schema for Starlight’s `docs` content collection is configured in `src/content/config.ts` using the `docsSchema()` helper:
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+
+`docsSchema()` takes the following options:
+
+### `extend`
+
+**type:** Zod schema or function that returns a Zod schema  
+**default:** `z.object({})`
+
+Extend Starlight’s schema with additional fields by setting `extend` in the `docsSchema()` options.
+The value should be a [Zod schema](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod).
+
+In the following example, we provide a stricter type for `description` to make it required and add a new optional `category` field:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // Make a built-in field required instead of optional.
+        description: z.string(),
+        // Add a new field to the schema.
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+To take advantage of the [Astro `image()` helper](https://docs.astro.build/en/guides/images/#images-in-content-collections), use a function that returns your schema extension:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // Add a field that must resolve to a local image.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```

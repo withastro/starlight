@@ -7,6 +7,22 @@ Starlight admite la gama completa de la sintaxis [Markdown](https://daringfireba
 
 Por favor, asegúrate de consultar la documentación de [MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) o [Markdoc](https://markdoc.dev/docs/syntax) si estás utilizando esos formatos de archivo, ya que el soporte y el uso de Markdown pueden variar.
 
+## Frontmatter
+
+Puedes personalizar individualmente las páginas en Starlight estableciendo valores en el frontmatter.
+El frontmatter se establece en la parte superior de tus archivos entre separadores `---`:
+
+```md title="src/content/docs/example.md"
+---
+title: Mi título de página
+---
+
+El contenido de la página sigue luego de los `---`.
+```
+
+Cada página debe incluir al menos un `title`.
+Consulta la [referencia de frontmatter](/es/reference/frontmatter/) para ver todos los campos disponibles y cómo añadir campos personalizados.
+
 ## Estilos en línea
 
 El texto puede estar **en negrita**, _en cursiva_, o ~~tachado~~.
@@ -140,7 +156,7 @@ Astro te ayuda a construir sitios web más rápidos con la[“Arquitectura de Is
 Los apartados de caution y danger son útiles para llamar la atención del usuario sobre detalles que podrían generar problemas. Si te encuentras utilizando estos tipos de apartados con frecuencia, también puede ser una señal de que lo que estás documentando podría beneficiarse de una reestructuración o rediseño.
 
 :::caution
-Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](../../).
+Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](/es/).
 :::
 
 :::danger
@@ -154,7 +170,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 ```md
 :::caution
-Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](../../).
+Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](/es/).
 :::
 
 :::danger

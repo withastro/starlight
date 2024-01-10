@@ -97,7 +97,7 @@ Starlight는 별도의 구성 없이 Markdown 및 MDX에서 콘텐츠를 작성�
 
 예를 들어, 다음 파일 구조는 `example.com/hello-world` 및 `example.com/guides/faq`에 페이지를 생성합니다.
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -137,27 +137,27 @@ Starlight는 베타 소프트웨어이기 때문에 업데이트와 개선이 �
 정기적으로 Starlight를 업데이트하세요!
 :::
 
-Starlight는 Astro 통합이므로 `@astrojs/*`로 업데이트할 수 있습니다.
+Starlight는 Astro 통합입니다. 터미널에서 다음 명령을 실행하여 이 패키지와 다른 Astro 패키지를 업데이트할 수 있습니다.
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-npm install @astrojs/starlight@latest
+npx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-pnpm upgrade @astrojs/starlight --latest
+pnpm dlx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-yarn upgrade @astrojs/starlight --latest
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>

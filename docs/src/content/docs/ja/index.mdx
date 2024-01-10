@@ -1,12 +1,17 @@
 ---
 title: Starlight 🌟 Astroでドキュメントサイトを作る
+head:
+  - tag: title
+    content: Starlight 🌟 Astroでドキュメントサイトを作る
 description: Starlightは、Astroを使った美しく高性能なドキュメントサイトの構築を支援します。
 template: splash
+editUrl: false
+lastUpdated: false
 hero:
   title: Starlightでドキュメントを輝かせる
   tagline: 最高のドキュメントサイトを作るために必要なものがすべて揃っています。高速でアクセシブル、しかも使いやすさも備えます。
   image:
-    file: ../../../assets/hero-star.webp
+    file: ~/assets/hero-star.webp
   actions:
     - text: はじめる
       icon: right-arrow
@@ -18,7 +23,7 @@ hero:
 ---
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
-import AboutAstro from '../../../components/about-astro.astro';
+import AboutAstro from '~/components/about-astro.astro';
 
 <CardGrid stagger>
 	<Card title="心躍るドキュメント" icon="open-book">

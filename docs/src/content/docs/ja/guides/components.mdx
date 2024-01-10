@@ -13,7 +13,7 @@ description: StarlightにおけるMDXでのコンポーネントの利用。
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/example.mdx
 title: Welcome to my docs
 ---
 
@@ -33,7 +33,7 @@ StarlightはAstro製であるため、[サポート対象のUIフレームワー
 
 Starlightは、Markdownコンテンツにデフォルトのスタイルを適用します。たとえば、要素間にマージンを追加します。これらのスタイルがコンポーネントの見た目と競合する場合は、`not-content`クラスをコンポーネントに設定してスタイルを無効化してください。
 
-```astro
+```astro 'class="not-content"'
 ---
 // src/components/Example.astro
 ---
@@ -54,6 +54,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 `<Tabs>`と`<TabItem>`コンポーネントを使用して、タブインターフェースを表示できます。各`<TabItem>`は、ユーザーに表示する`label`を必要とします。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -78,6 +80,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 `<Card>`は`title`を必須とし、また任意で[Starlightの組み込みアイコンの1つ](#すべてのアイコン)を名前に設定した`icon`属性を含められます。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="確認しよう">強調したい興味深いコンテンツ。</Card>
@@ -125,6 +129,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 十分なスペースがある場合、`<CardGrid>`により複数の`<LinkCard>`をグループ化して、カードを並べて表示できます。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -163,13 +169,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### アイコン
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlightは、`<Icon>`コンポーネントを通じてコンテンツ内に表示可能な、一般的なアイコンのセットを提供しています。
 
 `<Icon>`は[`name`](#すべてのアイコン)を必須とし、任意で`label`、`size`、`color`属性を含められます。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />

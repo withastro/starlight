@@ -94,7 +94,7 @@ Utiliza subcarpetas para organizar tus archivos y crear múltiples segmentos de 
 
 Por ejemplo, la siguiente estructura de archivos generará páginas en `example.com/hello-world` y `example.com/guides/faq`:
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -134,27 +134,27 @@ Debido a que Starlight es un software beta, habrá actualizaciones y mejoras fre
 ¡Asegúrate de actualizar Starlight regularmente!
 :::
 
-Starlight es una integración Astro y se actualiza de la misma manera que cualquier otra integración `@astrojs/*`:
+Starlight es una integración Astro. Puedes actualizarlo y otros paquetes de Astro ejecutando el siguiente comando en tu terminal:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-npm install @astrojs/starlight@latest
+npx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-pnpm upgrade @astrojs/starlight --latest
+pnpm dlx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-yarn upgrade @astrojs/starlight --latest
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>

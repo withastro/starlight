@@ -308,7 +308,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **tipo:** <SocialLinksType />
 
@@ -410,6 +410,16 @@ Cuando sea `false`, se utilizan los colores proporcionados por el tema de resalt
 :::note
 Cuando usas temas personalizados y estableces esto en `true`, debes proporcionar por lo menos un tema oscuro y uno claro para asegurar un contraste de color adecuado.
 :::
+
+### `pagefind`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https://pagefind.app/) está habilitado.
+
+Establece esta opción a `false` para excluir una página de los resultados de búsqueda.
+Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
 
 ### `head`
 
@@ -519,3 +529,20 @@ starlight({
 ```
 
 Consulta la [Referencia de Personalización de Componentes](/es/reference/overrides/) para obtener detalles de todos los componentes que puedes anular.
+
+### `plugins`
+
+**tipo:** [`StarlightPlugin[]`](/es/reference/plugins/#referencia-rápida-de-la-api)
+
+Extiende Starlight con plugins personalizados.
+Los plugins aplican cambios a tu proyecto para modificar o agregar a las funcionalidades a Starlight.
+
+Visita la [exhibición de plugins](/es/showcase/#plugins) para ver una lista de los plugins disponibles.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Consulta la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.
