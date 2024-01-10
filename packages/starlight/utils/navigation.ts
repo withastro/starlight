@@ -55,10 +55,6 @@ function makeDir(): Dir {
 	return dir;
 }
 
-function makeFile(): Route {
-	return {} as Route;
-}
-
 /** Test if the passed object is a directory record.  */
 function isDir(data: Record<string, unknown>): data is Dir {
 	return DirKey in data;
@@ -193,13 +189,11 @@ function treeify(routes: Route[], baseDir: string): Dir {
 					part = 'index';
 				}
 
-				// Create the node if it doesn't exist
-				if (!currentNode[part]) {
-					currentNode[part] = isLeaf ? makeFile() : makeDir();
+				// Recurse down the tree if this isn’t the leaf node.
+				if (!isLeaf) {
+					currentNode[part] ||= makeDir();
+					currentNode = currentNode[part] as Dir;
 				}
-
-				// Skip the recursive step if we're at the leaf node
-				if (!isLeaf) currentNode = currentNode[part] as Dir;
 				leaf = part;
 			});
 
