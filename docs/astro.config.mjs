@@ -238,7 +238,7 @@ export default defineConfig({
 						// 		hi: 'मैनुअल सेटअप',
 						// 		uk: 'Ручне встановлення',
 						// 	},
-						// },
+						},
 						{
 							label: 'Site Showcase',
 							link: '/resources/showcase',
