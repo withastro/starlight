@@ -35,7 +35,12 @@ const src = (await avatar()).default;
 	.testimonial {
 		display: flex;
 		flex-direction: column;
-		gap: 2em;
+		gap: 1.5em;
+	}
+	@media (min-width: 50rem) {
+		.testimonial {
+			gap: 2em;
+		}
 	}
 	.quote {
 		position: relative;
