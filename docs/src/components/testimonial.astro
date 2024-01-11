@@ -1,90 +1,75 @@
 ---
 import { Image } from 'astro:assets';
-import { slugToLocaleData } from '../../../packages/starlight/utils/slugs';
 
 interface Props {
 	handle: string;
 	name: string;
-	content?: string;
-	avatar?: string;
-	link?: URL;
-	dir?: 'rtl' | 'ltr';
-	lang?: string;
+	avatar: string;
+	link: string;
 }
 
-const { content, name, handle, avatar, link, dir, lang } = Astro.props;
-
-// The current page's slug.
-const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
-const locale = slugToLocaleData(slug);
+const { name, handle, avatar, link } = Astro.props;
 ---
 
 <li class="testimonial">
-	<div class="testimonial-body" dir={dir ?? locale.dir} lang={lang ?? locale.lang}>
-		{content ? <blockquote cite={link ? link.toString() : ''} set:html={content} /> : null}
+	<blockquote class="quote" cite={link}>
 		<slot />
-	</div>
-	<div class="testimonial-heading">
-		{avatar ? <Image class="avatar" height="50" width="50" src={avatar} alt="image" /> : null}
-		<div class="testimonial-title">
-			<p class="title">
-				{name}
-			</p>
-			{
-				link ? (
-					<a href={link} target="_blank" class="handle">
-						@{handle}
-					</a>
-				) : (
-					<span class="handle">@{handle}</span>
-				)
-			}
+	</blockquote>
+	<div class="footer">
+		<Image class="avatar" height="64" width="64" src={avatar} alt="" />
+		<div>
+			<p class="name">{name}</p>
+			<a href={link} class="handle">@{handle}</a>
 		</div>
 	</div>
 </li>
 
 <style>
-	.testimonial-heading {
-		display: flex;
-		gap: 1rem;
-		flex-direction: row;
-		align-items: center;
-		justify-items: start;
-	}
-	.avatar {
-		border-radius: 9999px;
-	}
-	.testimonial .testimonial-title {
+	.testimonial {
 		display: flex;
 		flex-direction: column;
-		margin-top: 0;
+		gap: 2em;
 	}
-	.title {
+	.quote {
+		position: relative;
+		padding-inline-start: 1.5em;
+	}
+	.quote::before {
+		position: absolute;
+		content: '';
+		inset-block: 0.5em;
+		inset-inline-start: 0;
+		border-inline-start: 1px solid var(--sl-color-text-accent);
+	}
+	.quote > :global(* + *) {
+		margin-top: 0.75em;
+	}
+
+	.footer {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+	}
+	.avatar {
+		--outline-color: rgba(255, 255, 255, 0.33);
+		outline: 1px solid var(--outline-color);
+		outline-offset: -1px;
+		border-radius: 99rem;
+		width: 4em;
+		height: 4em;
+	}
+	:global([data-theme='light']) .avatar {
+		--outline-color: rgba(23, 25, 30, 0.33);
+	}
+
+	.name {
 		font-weight: 600;
 		font-size: var(--sl-text-h4);
 		color: var(--sl-color-white);
 		line-height: var(--sl-line-height-headings);
 	}
 	.handle {
-		gap: 0.1rem;
-		color: var(--sl-color-blue);
-		font-family: 'inter', sans-serif;
-		font-size: var(--sl-text-base);
 		text-underline-offset: 4px;
-	}
-	.testimonial {
-		flex-direction: column;
-		gap: clamp(0.5rem, calc(0.125rem + 1vw), 1rem);
-	}
-	.testimonial-body {
-		margin-bottom: 0 !important;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
-		text-align: start;
-	}
-	.testimonial-date {
-		margin-top: 1rem;
+		color: var(--sl-color-text-accent);
 	}
 </style>

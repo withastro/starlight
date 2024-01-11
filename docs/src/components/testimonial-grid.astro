@@ -1,13 +1,13 @@
 ---
 interface Props {
-	title?: string;
+	title: string;
 }
 
 const { title } = Astro.props;
 ---
 
-<div class="testimonial-wrapper">
-	{title ? <p class="testimonial-grid-title">{title}</p> : null}
+<div class="testimonial-wrapper not-content">
+	<h2 class="testimonial-grid-title">{title}</h2>
 	<ul class="testimonial-grid">
 		<slot />
 	</ul>
@@ -15,21 +15,22 @@ const { title } = Astro.props;
 
 <style>
 	.testimonial-wrapper:not(.testimonial-grid-title) {
-		margin-top: 7rem;
-	}
-	.testimonial-wrapper:has(.testimonial-grid-title) {
-		margin-top: 2rem;
+		margin-block: 7rem 2.5rem;
+		font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
 	}
 	.testimonial-grid-title {
+		text-align: center;
+		font-size: var(--sl-text-h3);
 		font-weight: 600;
-		font-size: var(--sl-text-h2);
 		color: var(--sl-color-white);
 		line-height: var(--sl-line-height-headings);
 	}
 	.testimonial-grid {
+		margin-top: 2.5rem;
 		list-style: none;
 		display: grid;
-		gap: 1rem;
+		grid-template-columns: auto;
+		gap: 5em;
 		padding-inline-start: 0;
 	}
 
@@ -40,7 +41,6 @@ const { title } = Astro.props;
 	@media (min-width: 50rem) {
 		.testimonial-grid {
 			grid-template-columns: 1fr 1fr;
-			gap: 1.5rem;
 		}
 	}
 </style>
