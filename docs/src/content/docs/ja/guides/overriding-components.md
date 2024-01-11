@@ -97,13 +97,13 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-利用可能なすべてのpropsについて、詳しくは[オーバーライドリファレンス](/ja/reference/overrides/#component-props)を参照してください。
+利用可能なすべてのpropsについて、詳しくは[オーバーライドリファレンス](/ja/reference/overrides/#コンポーネントprops)を参照してください。
 
 ### 特定ページのみでのオーバーライド
 
 コンポーネントのオーバーライドはすべてのページに適用されます。ただし、`Astro.props`の値を使用して条件に応じてレンダリングすることで、カスタムUIを表示するタイミング、StarlightのデフォルトUIを表示するタイミング、あるいはまったく別のものを表示するタイミングを決定することができます。
 
-以下は、Starlightの[`Footer`](/ja/reference/overrides/#footer-1)をオーバーライドするコンポーネントの例です。ホームページでのみ「Starlightで作成 🌟」と表示し、それ以外のすべてのページではデフォルトのフッターを表示します。
+以下は、Starlightの[`Footer`](/ja/reference/overrides/#footer)をオーバーライドするコンポーネントの例です。ホームページでのみ「Starlightで作成 🌟」と表示し、それ以外のすべてのページではデフォルトのフッターを表示します。
 
 ```astro
 ---

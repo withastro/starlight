@@ -4,12 +4,12 @@ description: Starlightで作成されたサイトや、Starlightを拡張した�
 ---
 
 :::tip[自分のものを追加しよう！]
-StarlightサイトやStarlightのツールを作成しましたか？このページにリンクを追加するPRを開いてみましょう！
+Starlightサイトやプラグイン、あるいはStarlightのツールを作成しましたか？このページにリンクを追加するPRを開いてみましょう！
 :::
 
 ## サイト
 
-import ShowcaseSites from '../../../components/showcase-sites.astro';
+import ShowcaseSites from '~/components/showcase-sites.astro';
 
 Starlightはすでに本番環境で使用されています。以下はウェブ上のサイトの一部です。
 
@@ -17,11 +17,40 @@ Starlightはすでに本番環境で使用されています。以下はウェ�
 
 [Starlightを使用しているGitHub上のすべてのパブリックプロジェクトのリポジトリ](https://github.com/withastro/starlight/network/dependents)も確認してください。
 
-## コミュニティプラグイン
+## プラグイン
+
+[プラグイン](/ja/reference/plugins/)により、Starlightの設定、UI、動作をカスタマイズできます。共有や再利用をおこなうことも簡単です。Starlightチームによってサポートされている公式プラグインと、Starlightユーザーによってメンテナンスされているコミュニティプラグインでサイトを拡張しましょう。
+
+### 公式プラグイン
+
+<CardGrid>
+	<LinkCard
+		href="/ja/guides/site-search/#algolia-docsearch"
+		title="Algolia DocSearch"
+		description="デフォルトの検索プロバイダーであるPagefindをAlgolia DocSearchに置き換えます。"
+	/>
+</CardGrid>
+
+### コミュニティプラグイン
+
+<CardGrid>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links-validator"
+		title="starlight-links-validator"
+		description="Starlightページに壊れたリンクがないか確認します。"
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description="TypeDocを使用してTypeScriptからStarlightページを生成します。"
+	/>
+</CardGrid>
+
+## コミュニティツールとインテグレーション
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-以下のコミュニティツール、プラグイン、およびインテグレーションは、Starlightと連携してその機能を拡張します。
+以下のコミュニティツールとインテグレーションにより、Starlightサイトに機能を追加できます。
 
 <CardGrid>
 	<LinkCard
@@ -33,16 +62,6 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		href="https://github.com/HiDeoo/starlight-blog"
 		title="starlight-blog"
 		description="ドキュメントサイトにブログを追加します。"
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-links-validator"
-		title="starlight-links-validator"
-		description="Starlightページに壊れたリンクがないか確認します。"
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-typedoc"
-		title="starlight-typedoc"
-		description="TypeDocを使用してTypeScriptからStarlightページを生成します。"
 	/>
 	<LinkCard
 		href="https://github.com/HiDeoo/starlight-openapi"

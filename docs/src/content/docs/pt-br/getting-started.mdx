@@ -95,7 +95,7 @@ Utilize subdiretórios para organizar seus arquivos, e para criar múltiplos seg
 
 Por exemplo, a seguinte estrutura de arquivos vai gerar páginas `example.com/ola-mundo` e `example.com/guides/faq`:
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -135,27 +135,27 @@ Como o Starlight é um software em beta, haverá frequentes atualizações e mel
 Certifique-se de atualizar Starlight constantemente!
 :::
 
-Starlight é uma integração Astro, e é atualizado como qualquer outra integração `@astrojs/*`:
+Starlight é uma integração Astro. Você pode atualiza-lo e outros pacotes Astro com o seguinte comando em seu terminal:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-npm install @astrojs/starlight@latest
+npx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-pnpm upgrade @astrojs/starlight --latest
+pnpm dlx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-yarn upgrade @astrojs/starlight --latest
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>

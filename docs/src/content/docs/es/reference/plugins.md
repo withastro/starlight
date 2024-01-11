@@ -8,7 +8,7 @@ tableOfContents:
 Los plugins de Starlight pueden personalizar la configuración, la UI y el comportamiento, mientras que son fáciles de compartir y reutilizar.
 Esta página de referencia documenta la API a la que tienen acceso los plugins.
 
-Aprende más sobre el uso de un plugin de Starlight en la [Referencia de Configuración](/es/reference/configuration/#plugins).
+Aprende más sobre el uso de un plugin de Starlight en la [Referencia de Configuración](/es/reference/configuration/#plugins) o visita la [exhibición de plugins](/es/showcase/#plugins) para ver una lista de los plugins disponibles.
 
 ## Referencia rápida de la API
 
@@ -66,7 +66,7 @@ Proporciona las claves de configuración de nivel raíz que deseas sobreescribir
 Para actualizar los valores de configuración anidados, debes proporcionar el objeto anidado completo.
 
 Para extender una opción de configuración existente sin sobreescribirla, extiende el valor existente en tu nuevo valor.
-En el siguiente ejemplo, se agrega una nueva cuenta en [`social`](/reference/configuration/#social) a la configuración existente extendiendo 'config.social' en el nuevo objeto social:
+En el siguiente ejemplo, se agrega una nueva cuenta en [`social`](/es/reference/configuration/#social) a la configuración existente extendiendo 'config.social' en el nuevo objeto social:
 
 ```ts {6-11}
 // plugin.ts

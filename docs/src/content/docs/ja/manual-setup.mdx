@@ -5,7 +5,7 @@ description: 既存のAstroプロジェクトにStarlightを追加するため�
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-[入門](/ja/getting-started/#新しいプロジェクトを作成する)で述べたように、新しいStarlightサイトを作成する最も簡単な方法は、`create astro`を使用することです。このガイドでは、既存のAstroプロジェクトにStarlightを追加する方法について説明します。
+[入門](/ja/getting-started/#新しいプロジェクトの作成)で述べたように、新しいStarlightサイトを作成する最も簡単な方法は、`create astro`を使用することです。このガイドでは、既存のAstroプロジェクトにStarlightを追加する方法について説明します。
 
 ## Starlightをセットアップする
 
@@ -103,7 +103,7 @@ Starlightのすべてのページをサブパスに追加するには、ドキ�
 
 たとえば、Starlightのページがすべて`/guides/`で始まる場合は、コンテンツを`src/content/docs/guides/`ディレクトリに追加します。
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

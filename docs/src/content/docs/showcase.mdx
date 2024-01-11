@@ -4,13 +4,13 @@ description: Discover sites built with Starlight and community tools that extend
 ---
 
 :::tip[Add your own!]
-Have you built a Starlight site or a tool for Starlight?
+Have you built a Starlight site, plugin, or a tool for Starlight?
 Open a PR adding a link to this page!
 :::
 
 ## Sites
 
-import ShowcaseSites from '../../components/showcase-sites.astro';
+import ShowcaseSites from '~/components/showcase-sites.astro';
 
 Starlight is already being used in production. These are some of the sites around the web:
 
@@ -18,11 +18,41 @@ Starlight is already being used in production. These are some of the sites aroun
 
 See all the [public project repos using Starlight on GitHub](https://github.com/withastro/starlight/network/dependents).
 
-## Community plugins
+## Plugins
+
+[Plugins](/reference/plugins/) can customize Starlight configuration, UI, and behavior, while also being easy to share and reuse.
+Extend your site with official plugins supported by the Starlight team and community plugins maintained by Starlight users.
+
+### Official plugins
+
+<CardGrid>
+	<LinkCard
+		href="/guides/site-search/#algolia-docsearch"
+		title="Algolia DocSearch"
+		description="Replace Pagefind, the default search provider, with Algolia DocSearch."
+	/>
+</CardGrid>
+
+### Community plugins
+
+<CardGrid>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-links-validator"
+		title="starlight-links-validator"
+		description="Check for broken links in your Starlight pages."
+	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description="Generate Starlight pages from TypeScript using TypeDoc."
+	/>
+</CardGrid>
+
+## Community tools and integrations
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-These community tools, plugins, and integrations work alongside Starlight to extend its functionality.
+These community tools and integrations can be used to add features to your Starlight site.
 
 <CardGrid>
 	<LinkCard
@@ -34,16 +64,6 @@ These community tools, plugins, and integrations work alongside Starlight to ext
 		href="https://github.com/HiDeoo/starlight-blog"
 		title="starlight-blog"
 		description="Add a blog to your documentation site."
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-links-validator"
-		title="starlight-links-validator"
-		description="Check for broken links in your Starlight pages."
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-typedoc"
-		title="starlight-typedoc"
-		description="Generate Starlight pages from TypeScript using TypeDoc."
 	/>
 	<LinkCard
 		href="https://github.com/HiDeoo/starlight-openapi"

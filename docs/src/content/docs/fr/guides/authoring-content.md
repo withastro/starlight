@@ -7,6 +7,22 @@ Starlight prend en charge l'ensemble de la syntaxe [Markdown](https://daringfire
 
 Veillez à consulter les [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) ou les [Markdoc docs](https://markdoc.dev/docs/syntax) si vous utilisez ces formats de fichiers, car la prise en charge et l'utilisation de Markdown peuvent varier.
 
+## Frontmatter
+
+Vous pouvez personnaliser chaque page individuellement en définissant des valeurs dans leur frontmatter.
+Le frontmatter se situe en haut de vos fichiers entre les séparateurs `---` :
+
+```md title="src/content/docs/exemple.md"
+---
+title: Le titre de ma page
+---
+
+Le contenu de la page suit le second `---`.
+```
+
+Chaque page doit inclure au moins un titre (`title`).
+Consultez la [référence du frontmatter](/fr/reference/frontmatter/) pour connaître tous les champs disponibles et comment ajouter des champs personnalisés.
+
 ## Styles en ligne
 
 Le texte peut être **gras**, _italique_, ou ~~barré~~.
@@ -140,7 +156,7 @@ Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Arc
 Les apartés de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
 
 :::caution
-Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](../../../).
+Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
 :::
 
 :::danger
@@ -154,7 +170,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 ```md
 :::caution
-Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](../../../).
+Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
 :::
 
 :::danger
