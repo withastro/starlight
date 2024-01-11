@@ -5,10 +5,10 @@ import { Image } from 'astro:assets';
 interface Props {
 	handle: string;
 	name: string;
-	link: string;
+	cite: string;
 }
 
-const { name, handle, link } = Astro.props;
+const { name, handle, cite } = Astro.props;
 
 const avatars = import.meta.glob<{ default: ImageMetadata }>('../assets/testimonials/*.jpg');
 const avatar = avatars[`../assets/testimonials/${handle}.jpg`];
@@ -19,14 +19,14 @@ const src = (await avatar()).default;
 ---
 
 <li class="testimonial">
-	<blockquote class="quote" cite={link}>
+	<blockquote class="quote" cite={cite}>
 		<slot />
 	</blockquote>
 	<div class="footer">
 		<Image class="avatar" height="96" width="96" {src} alt="" />
 		<div>
 			<p class="name">{name}</p>
-			<a href={link} class="handle">@{handle}</a>
+			<a href={cite} class="handle">@{handle}</a>
 		</div>
 	</div>
 </li>
