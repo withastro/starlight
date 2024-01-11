@@ -222,7 +222,7 @@ export default defineConfig({
 						},
 						{
 							label: 'Community Content',
-							link: '/resources/content',
+							link: '/resources/community-content',
 						// 	translations: {
 						// 		de: 'Manuelle Einrichtung',
 						// 		es: 'Configuración Manual',
