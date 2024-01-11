@@ -14,8 +14,8 @@ const { title } = Astro.props;
 </div>
 
 <style>
-	.testimonial-wrapper:not(.testimonial-grid-title) {
-		margin-block: 7rem 2.5rem;
+	.testimonial-wrapper {
+		margin-block: 7rem 2.5rem !important;
 		font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
 	}
 	.testimonial-grid-title {
@@ -27,17 +27,10 @@ const { title } = Astro.props;
 	}
 	.testimonial-grid {
 		margin-top: 2.5rem;
-		list-style: none;
 		display: grid;
-		grid-template-columns: auto;
 		gap: 5em;
 		padding-inline-start: 0;
 	}
-
-	.testimonial-grid > :global(*) {
-		margin-top: 0 !important;
-	}
-
 	@media (min-width: 50rem) {
 		.testimonial-grid {
 			grid-template-columns: 1fr 1fr;
