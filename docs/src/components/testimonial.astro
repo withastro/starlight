@@ -1,14 +1,21 @@
 ---
+import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
 interface Props {
 	handle: string;
 	name: string;
-	avatar: string;
 	link: string;
 }
 
-const { name, handle, avatar, link } = Astro.props;
+const { name, handle, link } = Astro.props;
+
+const avatars = import.meta.glob<{ default: ImageMetadata }>('../assets/testimonials/*.jpg');
+const avatar = avatars[`../assets/testimonials/${handle}.jpg`];
+if (!avatar) {
+	throw new Error(`Could not resolve testimonial avatar for @${handle}`);
+}
+const src = (await avatar()).default;
 ---
 
 <li class="testimonial">
@@ -16,7 +23,7 @@ const { name, handle, avatar, link } = Astro.props;
 		<slot />
 	</blockquote>
 	<div class="footer">
-		<Image class="avatar" height="64" width="64" src={avatar} alt="" />
+		<Image class="avatar" height="96" width="96" {src} alt="" />
 		<div>
 			<p class="name">{name}</p>
 			<a href={link} class="handle">@{handle}</a>
