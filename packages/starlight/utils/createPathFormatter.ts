@@ -10,6 +10,7 @@ import {
 interface FormatPathOptions {
 	format?: AstroConfig['build']['format'];
 	trailingSlash?: AstroConfig['trailingSlash'];
+	addBase?: boolean;
 }
 
 const formatStrategies = {
@@ -32,13 +33,13 @@ const trailingSlashStrategies = {
 /** Format a path based on the project config. */
 function formatPath(
 	href: string,
-	{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions
+	{ format = 'directory', trailingSlash = 'ignore', addBase = true }: FormatPathOptions
 ) {
 	const formatStrategy = formatStrategies[format];
 	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 
 	// Add base
-	href = formatStrategy.addBase(href);
+	href = addBase ? formatStrategy.addBase(href) : href;
 
 	// Handle extension
 	href = formatStrategy.handleExtension(href);
