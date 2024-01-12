@@ -2,7 +2,6 @@
 import '@pagefind/default-ui/css/ui.css';
 import Icon from '../user-components/Icon.astro';
 import type { Props } from '../props';
-import project from 'virtual:starlight/project-context';
 
 const { labels } = Astro.props;
 
@@ -14,18 +13,9 @@ const pagefindTranslations = {
 			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
 };
-
-const configOptions = {
-	format: project.build.format,
-	trailingSlash: project.trailingSlash,
-	addBase: false,
-};
 ---
 
-<site-search
-	data-translations={JSON.stringify(pagefindTranslations)}
-	data-config={JSON.stringify(configOptions)}
->
+<site-search data-translations={JSON.stringify(pagefindTranslations)}>
 	<button data-open-modal disabled>
 		{
 			/* The span is `aria-hidden` because it is not shown on small screens. Instead, the icon label is used for accessibility purposes. */
@@ -63,7 +53,8 @@ const configOptions = {
 </site-search>
 
 <script>
-	import { createPathFormatter } from '../utils/createPathFormatter';
+	import { formatPathNoBase } from '../utils/format-path';
+	
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super();
@@ -119,12 +110,9 @@ const configOptions = {
 			});
 
 			let translations = {};
-			let config = {};
 			try {
 				translations = JSON.parse(this.dataset.translations || '{}');
-				config = JSON.parse(this.dataset.config || '{}');
 			} catch {}
-			const formatPath = createPathFormatter(config);
 			window.addEventListener('DOMContentLoaded', () => {
 				if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
@@ -138,7 +126,7 @@ const configOptions = {
 						translations,
 						showSubResults: true,
 						processResult: (result: any) => {
-							result.url = formatPath(result.url);
+							result.url = formatPathNoBase(result.url);
 							return result;
 						},
 					});
