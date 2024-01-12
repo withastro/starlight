@@ -401,7 +401,6 @@ export const collections = {
 
 **默认值：** `z.object({})`
 
-Extend Starlight’s schema with additional fields by setting `extend` in the `docsSchema()` options.
 通过在 `docsSchema()` 选项中设置 `extend` 来使用其他字段扩展 Starlight 的 schema。
 值应该是一个 [Zod schema](https://docs.astro.build/zh-cn/guides/content-collections/#用-zod-定义数据类型)。
 
