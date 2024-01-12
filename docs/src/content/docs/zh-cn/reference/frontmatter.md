@@ -397,8 +397,7 @@ export const collections = {
 
 ### `extend`
 
-**类型：** Zod schema 或者返回 Zod schema 的函数
-
+**类型：** Zod schema 或者返回 Zod schema 的函数  
 **默认值：** `z.object({})`
 
 通过在 `docsSchema()` 选项中设置 `extend` 来使用其他字段扩展 Starlight 的 schema。
