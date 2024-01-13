@@ -184,6 +184,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Resources',
+					badge: 'New',
 					translations: {},
 					autogenerate: { directory: 'resources' },
 				},
