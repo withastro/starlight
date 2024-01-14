@@ -46,23 +46,6 @@ Si estos estilos entran en conflicto con la apariencia de tu componente, estable
 </div>
 ```
 
-### Compatibilidad con los estilos de Starlight
-
-Starlight aplica estilos predeterminados a tu contenido en Markdown, por ejemplo, añadiendo margen entre elementos.
-Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para deshabilitarlos.
-
-```astro 'class="not-content"'
----
-// src/components/Ejemplo.astro
----
-
-<div class="not-content">
-	<p>
-		No se ve afectado por el estilo de contenido predeterminado de Starlight.
-	</p>
-</div>
-```
-
 ## Componentes integrados
 
 Starlight proporciona algunos componentes integrados para casos de uso comunes en la documentación. Estos componentes están disponibles en el paquete `@astrojs/starlight/components`.
