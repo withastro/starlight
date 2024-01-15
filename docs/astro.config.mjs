@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLinksValidator from 'starlight-links-validator';
 import { virtualPagesDemo } from 'virtual-pages-demo';
 
 export const locales = {
@@ -17,6 +18,7 @@ export const locales = {
 	ru: { label: 'Русский', lang: 'ru' },
 	hi: { label: 'हिंदी', lang: 'hi' },
 	da: { label: 'Dansk', lang: 'da' },
+	uk: { label: 'Українська', lang: 'uk' },
 };
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
@@ -83,6 +85,7 @@ export default defineConfig({
 						tr: 'Buradan Başlayın',
 						ru: 'Начать отсюда',
 						hi: 'यहाँ से शुरू करे',
+						uk: 'Почніть звідси',
 					},
 					items: [
 						{
@@ -101,6 +104,7 @@ export default defineConfig({
 								tr: 'Başlarken',
 								ru: 'Введение',
 								hi: 'पहले कदम',
+								uk: 'Вступ',
 							},
 						},
 						{
@@ -119,6 +123,7 @@ export default defineConfig({
 								tr: 'Elle Kurulum',
 								ru: 'Установка вручную',
 								hi: 'मैनुअल सेटअप',
+								uk: 'Ручне встановлення',
 							},
 						},
 						{
@@ -137,6 +142,7 @@ export default defineConfig({
 								tr: 'Çevre Etkisi',
 								ru: 'Влияние на окружающую среду',
 								hi: 'पर्यावरणीय प्रभाव',
+								uk: 'Вплив на довкілля',
 							},
 						},
 						{
@@ -153,6 +159,7 @@ export default defineConfig({
 								tr: 'Vitrin',
 								ru: 'Примеры',
 								hi: 'प्रदर्शन',
+								uk: 'Вітрина',
 							},
 						},
 					],
@@ -172,6 +179,7 @@ export default defineConfig({
 						tr: 'Rehber',
 						ru: 'Руководства',
 						hi: 'गाइड',
+						uk: 'Ґайди',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -190,10 +198,19 @@ export default defineConfig({
 						tr: 'Referanslar',
 						ru: 'Справочник',
 						hi: 'संदर्भ',
+						uk: 'Довідник',
 					},
 					autogenerate: { directory: 'reference' },
 				},
 			],
+			plugins: process.env.CHECK_LINKS
+				? [
+						starlightLinksValidator({
+							errorOnFallbackPages: false,
+							errorOnInconsistentLocale: true,
+						}),
+				  ]
+				: [],
 		}),
 	],
 });

@@ -3,7 +3,7 @@ title: 국제화 (i18n)
 description: 여러 언어를 지원하도록 Starlight 사이트를 구성하는 방법을 알아보세요.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽으로) 언어 지원을 포함한 다국어 사이트에 대한 기본 지원을 제공합니다.
 
@@ -141,7 +141,7 @@ Starlight는 귀하가 모든 언어로 같은 페이지를 생성할 것을 기
 
 ## Starlight UI 번역
 
-import LanguagesList from '../../../../components/languages-list.astro';
+import LanguagesList from '~/components/languages-list.astro';
 
 Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외에도 독자가 선택한 언어로 사이트 전체를 경험할 수 있도록 기본 UI 문자열(예를 들어, 목차의 제목인 "목차")을 번역할 수 있습니다.
 
@@ -200,9 +200,13 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 

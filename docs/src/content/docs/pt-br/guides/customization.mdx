@@ -4,7 +4,7 @@ description: Aprenda como fazer seu site Starlight único com sua própria logo,
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight providencia uma estilização e funcionalidades sensíveis padrões, para que você inicie rapidamente sem nenhuma configuração necessária.
 
@@ -28,7 +28,7 @@ Adicionar uma logo customizada ao cabeçalho do site é uma forma rápida de adi
 
 2. Adicione o caminho para sua logo como a opção [`logo.src`](/pt-br/reference/configuration/#logo) do Starlight em `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -38,7 +38,7 @@ Adicionar uma logo customizada ao cabeçalho do site é uma forma rápida de adi
    		starlight({
    			title: 'Documentação com Minha Logo',
    			logo: {
-   				src: './src/assets/minha-logo.svg',
+   +				src: './src/assets/minha-logo.svg',
    			},
    		}),
    	],
@@ -49,7 +49,7 @@ Por padrão, a logo será mostrada ao lado do `title` do seu site.
 Se sua imagem da logo já inclui o título do site, você pode esconder o texto do título visualmente ao definir a opção `replacesTitle`.
 O texto do `title` ainda será incluido para leitores de tela para que o cabeçalho continue acessível.
 
-```js
+```js {5}
 starlight({
   title: 'Documentação com Minha Logo',
   logo: {
@@ -78,12 +78,12 @@ Você pode mostrar diferentes versões da sua logo no modo claro e escuro.
 
 2. Adicione o caminho para suas variantes da logo como as opções `light` e `dark` ao invés de `src` em `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    starlight({
      title: 'Documentação com Minha Logo',
      logo: {
-       light: './src/assets/logo-clara.svg',
-       dark: './src/assets/logo-escura.svg',
+   +    light: './src/assets/logo-clara.svg',
+   +    dark: './src/assets/logo-escura.svg',
      },
    }),
    ```
@@ -92,7 +92,7 @@ Você pode mostrar diferentes versões da sua logo no modo claro e escuro.
 
 O Starlight possui suporte integrado para a geração de um sitemap. Habilite a geração do sitemap definindo sua URL como `site` em `astro.config.mjs`:
 
-```js
+```js {4}
 // astro.config.mjs
 
 export default defineConfig({
@@ -108,7 +108,7 @@ Por padrão, páginas do Starlight usam um layout com uma barra de navegação l
 Você pode aplicar um layout de página maior sem barras laterais definindo [`template: splash`](/pt-br/reference/frontmatter/#template) no frontmatter de uma página.
 Isso funciona particularmente bem para páginas iniciais e você pode vê-lo em ação na [página inicial deste site](/pt-br/).
 
-```md
+```md {5}
 ---
 # src/content/docs/index.md
 
@@ -127,7 +127,7 @@ Por padrão, cabeçalhos `<h2>` e `<h3>` são inclusos no índice. Modifique qua
 <Tabs>
   <TabItem label="Frontmatter">
 
-```md
+```md {4-6}
 ---
 # src/content/docs/exemplo.md
 title: Página com apenas H2s no índice
@@ -140,13 +140,13 @@ tableOfContents:
   </TabItem>
   <TabItem label="Configuração global">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
 	integrations: [
 		starlight({
-			title: '',
+			title: 'Documentação com configuração de sumário personalizado',
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 		}),
 	],
@@ -161,7 +161,7 @@ Desabilite o índice completamente definindo a opção `tableOfContents` como `f
 <Tabs>
   <TabItem label="Frontmatter">
 
-```md
+```md {4}
 ---
 # src/content/docs/exemplo.md
 title: Página sem um índice
@@ -172,7 +172,7 @@ tableOfContents: false
   </TabItem>
   <TabItem label="Configuração global">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
@@ -195,7 +195,7 @@ Starlight tem suporte integrado para adicionar links de suas contas de redes soc
 Você pode encontrar uma lista completa de ícones suportados na [Referência de Configuração](/pt-br/reference/configuration/#social).
 Nos avise no GitHub ou Discord se você precisa de suporte para outro serviço!
 
-```js
+```js {9-12}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -231,7 +231,7 @@ Se o seu projeto Starlight não está na raiz do seu repositório, inclua o cami
 
 Este exemplo mostra o link de edição configurado para a documentação do Starlight, que vive no subdiretório `docs/` da branch `main` do repositório `withastro/starlight` no GitHub:
 
-```js
+```js {9-11}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -266,7 +266,7 @@ Você pode customizá-la adicionando um arquivo `404.md` (ou `404.mdx`) ao seu d
 
 Você pode utilizar todas as técnicas de customização e layout de página do Starlight em sua página 404. Por exemplo, a página 404 padrão utiliza o [template `splash`](#layout-da-página) e o componente [`hero`](/pt-br/reference/frontmatter/#hero) no frontmatter:
 
-```md
+```md {4,6-8}
 ---
 title: '404'
 template: splash
@@ -322,7 +322,7 @@ Para utilizar Google Fonts, siga o [guia de configuração do Fontsource](#confi
 
 3. Adicione o caminho para seu arquivo `font-face.css` ao array `customCss` do Starlight em `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -332,8 +332,8 @@ Para utilizar Google Fonts, siga o [guia de configuração do Fontsource](#confi
    		starlight({
    			title: 'Documentação Com Meu Tipo de Letra Customizado',
    			customCss: [
-   				// Caminho relativo para seu arquivo CSS @font-face.
-   				'./src/fonts/font-face.css',
+   +				// Caminho relativo para seu arquivo CSS @font-face.
+   +				'./src/fonts/font-face.css',
    			],
    		}),
    	],
@@ -364,7 +364,7 @@ Ele providencia módulos do npm que você pode isntalar para as fontes que você
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -381,7 +381,7 @@ Ele providencia módulos do npm que você pode isntalar para as fontes que você
 
 3.  Adicione os arquivos CSS do Fontsource ao array `customCss` do Starlight em `astro.config.mjs`:
 
-    ```js
+    ```diff lang="js"
     // astro.config.mjs
     import { defineConfig } from 'astro/config';
     import starlight from '@astrojs/starlight';
@@ -391,9 +391,9 @@ Ele providencia módulos do npm que você pode isntalar para as fontes que você
     		starlight({
     			title: 'Documentação Com Meu Tipo de Letra Customizado',
     			customCss: [
-    				// Arquivos do Fontsource para as espessuras de fonte regular e semi-negrito.
-    				'@fontsource/ibm-plex-serif/400.css',
-    				'@fontsource/ibm-plex-serif/600.css',
+    +				// Arquivos do Fontsource para as espessuras de fonte regular e semi-negrito.
+    +				'@fontsource/ibm-plex-serif/400.css',
+    +				'@fontsource/ibm-plex-serif/600.css',
     			],
     		}),
     	],
