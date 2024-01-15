@@ -34,8 +34,6 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
-			// TODO(HiDeoo) Remove me
-			plugins: [virtualPagesDemo()],
 			title: 'Starlight',
 			logo: {
 				light: '/src/assets/logo-light.svg',
@@ -210,7 +208,10 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 				  ]
-				: [],
+				: [
+						// TODO(HiDeoo) Remove me
+						virtualPagesDemo(),
+				  ],
 		}),
 	],
 });
