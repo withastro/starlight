@@ -1,4 +1,4 @@
-import tailwindcss, { Config } from 'tailwindcss';
+import tailwindcss, { type Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 import postcss from 'postcss';
 import { test, expect, describe, vi } from 'vitest';

@@ -119,6 +119,7 @@ describe('translated labels in French', () => {
 Some text
 :::
 `,
+			// @ts-expect-error fileURL is part of MarkdownProcessor's options
 			{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
 		);
 		expect(res.code).includes(`aria-label="${label}"`);

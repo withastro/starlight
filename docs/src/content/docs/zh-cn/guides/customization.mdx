@@ -4,7 +4,7 @@ description: 学习如何通过自定义样式、字体等使你的 Starlight �
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight 提供了合理的默认样式和功能，因此你可以快速开始，无需配置即可进行操作。
 当你想要开始自定义 Starlight 网站的外观时，本指南可以帮助你。
@@ -27,7 +27,7 @@ Starlight 提供了合理的默认样式和功能，因此你可以快速开始�
 
 2. 在 `astro.config.mjs` 中，将 logo 的路径添加到 Starlight 的 [`logo.src`](/zh-cn/reference/configuration/#logo) 选项：
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -37,7 +37,7 @@ Starlight 提供了合理的默认样式和功能，因此你可以快速开始�
    		starlight({
    			title: '带有我的标志的页面',
    			logo: {
-   				src: './src/assets/my-logo.svg',
+   +				src: './src/assets/my-logo.svg',
    			},
    		}),
    	],
@@ -48,7 +48,7 @@ Starlight 提供了合理的默认样式和功能，因此你可以快速开始�
 如果你的 logo 图像已经包含了网站标题，你可以通过设置 `replacesTitle` 选项来在视觉上隐藏标题文本。
 标题文本仍包含在屏幕阅读器中，以便标题保持可访问性。
 
-```js
+```js {5}
 starlight({
   title: '带有我的 logo 的页面',
   logo: {
@@ -77,12 +77,12 @@ starlight({
 
 2. 在 `astro.config.mjs` 中，将 logo 变体的路径添加为 `light` 和 `dark` 选项，而不是 `src`：
 
-   ```js
+   ```diff lang="js"
    starlight({
      title: '带有我的标志的页面',
      logo: {
-       light: './src/assets/light-logo.svg',
-       dark: './src/assets/dark-logo.svg',
+   +    light: './src/assets/light-logo.svg',
+   +    dark: './src/assets/dark-logo.svg',
      },
    }),
    ```
@@ -91,7 +91,7 @@ starlight({
 
 Starlight 内置了生成站点地图（sitemap）的支持。通过在 `astro.config.mjs` 中把 `site` 字段设置为你的 URL 来启用站点地图生成：
 
-```js
+```js {4}
 // astro.config.mjs
 export default defineConfig({
 	site: 'https://stargazers.club',
@@ -106,7 +106,7 @@ export default defineConfig({
 你可以通过在页面的正文中设置 [`template: splash`](/zh-cn/reference/frontmatter/#template) 来应用更宽的页面布局，而去除侧边栏。
 这对于主页面特别有效，你可以在本站点的[主页](/zh-cn/)上看到它的效果。
 
-```md
+```md {5}
 ---
 # src/content/docs/index.md
 
@@ -124,7 +124,7 @@ Starlight 在每个页面上显示目录，使读者更容易跳转到他们正�
 <Tabs>
   <TabItem label="Frontmatter">
 
-```md
+```md {4-6}
 ---
 # src/content/docs/example.md
 title: 只在目录中包含 H2 的页面
@@ -137,13 +137,13 @@ tableOfContents:
   </TabItem>
   <TabItem label="全局配置">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
 	integrations: [
 		starlight({
-			title: '',
+			title: '具有自定义目录配置的文档',
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 		}),
 	],
@@ -158,7 +158,7 @@ defineConfig({
 <Tabs>
   <TabItem label=" frontmatter ">
 
-```md
+```md {4}
 ---
 # src/content/docs/example.md
 title: 没有目录的页面
@@ -169,7 +169,7 @@ tableOfContents: false
   </TabItem>
   <TabItem label="全局配置">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
@@ -192,7 +192,7 @@ Starlight 内置了对通过 Starlight 集成中的 [`social`](/zh-cn/reference/
 你可以在 [配置参考](/zh-cn/reference/configuration/#social) 中找到完整的支持链接图标列表。
 如果你需要支持其他服务，请在 GitHub 或 Discord 上告诉我们！
 
-```js
+```js {9-12}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -225,7 +225,7 @@ Starlight 可以在每个页面的页脚中显示“编辑此页”链接。这�
 
 下面的示例显示了为 Starlight 文档配置的编辑链接，这些文档位于 GitHub 上名为 `withastro/starlight` 的存储库的 `main` 分支的 `docs/` 子目录中：
 
-```js
+```js {9-11}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -259,8 +259,9 @@ Starlight 网站默认显示一个简单的 404 页面。你可以通过向 `src
 
 你可以在 404 页面中使用 Starlight 的所有页面布局和自定义技术。例如，默认的404页面在 frontmatter 中使用 [`splash`](#页面布局) 模板和 [`hero`](/zh-cn/reference/frontmatter/#hero) 组件：
 
-```md
+```md {4,6-8}
 ---
+# src/content/docs/404.md
 title: '404'
 template: splash
 editUrl: false
@@ -312,7 +313,7 @@ hero:
 
 3. 将 `font-face.css` 文件的路径添加到 Starlight 的 `astro.config.mjs` 配置文件中的 `customCss` 数组中：
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -322,8 +323,8 @@ hero:
    		starlight({
    			title: '使用自定义字体的页面',
    			customCss: [
-   				// @font-face CSS文件的相对路径。
-   				'./src/fonts/font-face.css',
+   +			// @font-face CSS文件的相对路径。
+   +			'./src/fonts/font-face.css',
    			],
    		}),
    	],
@@ -351,7 +352,7 @@ hero:
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -368,7 +369,7 @@ hero:
 
 3.  将 Fontsource 的 CSS 文件添加到 Starlight 的 `astro.config.mjs` 配置文件中的 `customCss` 数组中：
 
-    ```js
+    ```diff lang="js"
     // astro.config.mjs
     import { defineConfig } from 'astro/config';
     import starlight from '@astrojs/starlight';
@@ -378,9 +379,9 @@ hero:
     		starlight({
     			title: '使用自定义字体的文档',
     			customCss: [
-    				// 用于普通和半粗字重的Fontsource文件。
-    				'@fontsource/ibm-plex-serif/400.css',
-    				'@fontsource/ibm-plex-serif/600.css',
+    +				// 用于普通和半粗字重的 Fontsource 文件。
+    +				'@fontsource/ibm-plex-serif/400.css',
+    +				'@fontsource/ibm-plex-serif/600.css',
     			],
     		}),
     	],

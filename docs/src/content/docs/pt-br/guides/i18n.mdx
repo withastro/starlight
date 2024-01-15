@@ -3,7 +3,7 @@ title: Internacionalização (i18n)
 description: Aprenda como configurar seu site Starlight para suportar vários idiomas.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 O Starlight oferece suporte integrado para sites multi-idioma, incluindo roteamento, conteúdo de fallback e suporte completo para idiomas direita para esquerda (RTL).
 
@@ -141,7 +141,7 @@ Se uma tradução ainda não está disponível para um idioma, Starlight irá mo
 
 ## Traduza a UI do Starlight
 
-import LanguagesList from '../../../../components/languages-list.astro';
+import LanguagesList from '~/components/languages-list.astro';
 
 Além de arquivos de conteúdo traduzido, o Starlight te permite traduzir as strings padrão da UI (e.x. o cabeçalho "Nesta página" no índice) para que seus leitores possam utilizar seu site inteiramente no idioma selecionado.
 
@@ -198,9 +198,13 @@ Você pode fornecer traduções para idiomas adicionais que você suporta — ou
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 

@@ -10,7 +10,7 @@ Ouvrez une PR en ajoutant un lien à cette page !
 
 ## Sites
 
-import ShowcaseSites from '../../../components/showcase-sites.astro';
+import ShowcaseSites from '~/components/showcase-sites.astro';
 
 Starlight est déjà utilisé en production. Voici quelques sites sur le web :
 
@@ -41,6 +41,11 @@ Les [modules d'extension](/fr/reference/plugins/) peuvent personnaliser la confi
 		title="starlight-links-validator"
 		description="Vérifier la validité des liens dans vos pages Starlight."
 	/>
+	<LinkCard
+		href="https://github.com/HiDeoo/starlight-typedoc"
+		title="starlight-typedoc"
+		description="Générer des pages Starlight à partir de TypeScript en utilisant TypeDoc."
+	/>
 </CardGrid>
 
 ## Outils et intégrations communautaires
@@ -59,11 +64,6 @@ Ces outils et intégrations communautaires peuvent être utilisés pour ajouter 
 		href="https://github.com/HiDeoo/starlight-blog"
 		title="starlight-blog"
 		description="Ajouter un blogue à votre site de documentation."
-	/>
-	<LinkCard
-		href="https://github.com/HiDeoo/starlight-typedoc"
-		title="starlight-typedoc"
-		description="Générer des pages Starlight à partir de TypeScript en utilisant TypeDoc."
 	/>
 	<LinkCard
 		href="https://github.com/HiDeoo/starlight-openapi"
