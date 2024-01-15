@@ -3,8 +3,8 @@ title: 侧边栏导航
 description: 了解如何设置和自定义 Starlight 站点的侧边栏导航链接。
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import FileTree from '~/components/file-tree.astro';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 一个组织良好的侧边栏是良好文档的关键，因为它是用户浏览你的站点的主要方式之一。Starlight 提供了一整套选项来自定义侧边栏布局和内容。
 
@@ -59,7 +59,7 @@ import SidebarPreview from '../../../../components/sidebar-preview.astro';
 
 使用具有 `label` 和 `link` 属性的对象添加一个指向内部或外部页面的链接。
 
-```js
+```js "label:" "link:"
 starlight({
 	sidebar: [
 		// 指向 CSS & Styling 指南的链接
@@ -88,7 +88,7 @@ starlight({
 `label` 将用作分组的标题。
 将链接或子组添加到 `items` 数组中。
 
-```js
+```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
 		// 一个名为 "Guides" 的链接分组
@@ -140,7 +140,7 @@ Starlight 可以根据文档目录在侧边栏中自动生成一个分组。当�
 
 使用具有 `label` 和 `autogenerate` 属性的对象添加自动生成的分组。`autogenerate` 的配置必须指定用于侧边栏条目的 `directory` 。例如，使用以下配置：
 
-```js
+```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
@@ -193,8 +193,9 @@ starlight({
 
 侧边栏 frontmatter 选项允许你设置 [自定义标签](/zh-cn/reference/frontmatter/#label) 或者为链接添加 [徽章](/zh-cn/reference/frontmatter/#badge)，[隐藏](/zh-cn/reference/frontmatter/#hidden) 侧边栏中的链接，或者定义 [自定义排序权重](/zh-cn/reference/frontmatter/#order)。
 
-```md
+```md "sidebar:"
 ---
+# src/content/docs/example.md
 title: 我的页面
 sidebar:
   # 为链接设置自定义标签
@@ -235,7 +236,7 @@ sidebar:
 
 链接、分组、自动生成的分组都可以包含一个 `badge` 属性，以在它们的标签旁边显示徽章。
 
-```js
+```js {10,17}
 starlight({
 	sidebar: [
 		{
@@ -301,7 +302,7 @@ starlight({
 `text` 属性表示要显示的内容（例如 "New"）。
 通过将 `variant` 属性设置为以下值之一：`note`、`tip`、`danger`、`caution` 或 `success`，可以覆盖 `default` 样式，默认样式使用你的网站的强调色。
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -342,7 +343,7 @@ starlight({
 
 在下面的例子中，通过 `attrs` 添加了一个 `target="_blank"` 属性，使得链接在新标签页中打开，并应用了一个自定义的 `style` 属性使链接标签变为斜体：
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -386,7 +387,7 @@ starlight({
 
 `label` 属性将用于默认语言和没有翻译的语言。
 
-```js
+```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
@@ -433,7 +434,7 @@ starlight({
 
 链接分组可以通过将 `collapsed` 属性设置为 `true` 来默认折叠。
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -466,7 +467,7 @@ starlight({
 
 [自动生成的分组](#自动生成的分组) 遵循其父级分组的 `collapsed` 值：
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -503,7 +504,7 @@ starlight({
 
 这个行为可以通过定义 `autogenerate.collapsed` 属性来覆盖。
 
-```js
+```js {5-7} "collapsed: true"
 starlight({
 	sidebar: [
 		{

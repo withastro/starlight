@@ -110,7 +110,7 @@ hero:
   tagline: Take your stuff to the moon and back in the blink of an eye.
   image:
     alt: A glittering, brightly colored logo
-    file: ../../assets/logo.png
+    file: ~/assets/logo.png
   actions:
     - text: Tell me more
       link: /getting-started/
@@ -130,8 +130,8 @@ You can display different versions of the hero image in light and dark modes.
 hero:
   image:
     alt: A glittering, brightly colored logo
-    dark: ../../assets/logo-dark.png
-    light: ../../assets/logo-light.png
+    dark: ~/assets/logo-dark.png
+    light: ~/assets/logo-light.png
 ---
 ```
 

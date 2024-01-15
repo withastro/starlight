@@ -17,7 +17,7 @@ Elas se parecem com tags HTML porém começam com uma letra maiúscula correspon
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/exemplo.mdx
 title: Bem-vindo a minha documentação
 ---
 
@@ -39,7 +39,7 @@ Aprenda mais sobre como [utilizar componentes no MDX](https://docs.astro.build/p
 Starlight aplica estilos padrões para seu conteúdo Markdown, como por exemplo, adicionando margem entre elementos.
 Se esses estilos conflitam com a aparência do seu componente, defina a classe `not-content` no seu componente para desabilitá-los.
 
-```astro
+```astro 'class="not-content"'
 ---
 // src/components/Exemplo.astro
 ---
@@ -62,6 +62,8 @@ Você pode mostrar uma interface com abas utilizando os componentes `<Tabs>` e `
 Cada `<TabItem>` tem que ter uma `label` para mostrar aos usuários.
 
 ```mdx
+# src/content/docs/exemplo.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -87,6 +89,8 @@ Coloque múltiplos cartões no componente `<CardGrid>` para mostrar cartões lad
 Um `<Card>` precisa de um `title` e pode opcionalmente incluir o atributo `icon` para definir o nome de um dos [ícones integrados do Starlight](#todos-os-ícones).
 
 ```mdx
+# src/content/docs/exemplo.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="Veja isso">Conteúdo interessante que você quer destacar.</Card>
@@ -135,6 +139,8 @@ Um `<LinkCard>` precisa de um `title` e um atributo [`href`](https://developer.m
 Agrupe múltiplos componentes `<LinkCard>` em `<CardGrid>` para mostrar cartões lado a lado quando houver espaço suficiente.
 
 ```mdx
+# src/content/docs/exemplo.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -173,13 +179,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Ícone
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight providencia um conjunto comum de ícones que você pode mostrar em seu conteúdo utilizando o componente `<Icon>`.
 
 Cada `<Icon>` requer um [`name`](#todos-os-ícones) e pode opcionalmente incluir um atributo `label`, `size` e `color`.
 
 ```mdx
+# src/content/docs/exemplo.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />

@@ -139,7 +139,7 @@ Vorsichts- und Gefahrenhinweise sind hilfreich, um die Aufmerksamkeit des Benutz
 Wenn du diese häufig verwenden, kann das auch ein Zeichen dafür sein, dass die Sache, die Sie dokumentieren, von einem neuen Design profitieren könnte.
 
 :::caution
-Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](../../../) verwendest.
+Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
 :::
 
 :::danger
@@ -153,7 +153,7 @@ Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein un
 
 ```md
 :::caution
-Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](../../) verwendest.
+Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
 :::
 
 :::danger
