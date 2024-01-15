@@ -35,7 +35,6 @@ description: 了解更多关于此项目的信息。
 
 覆盖页面的slug。有关更多详细信息，请参阅 Astro文档中的 [ "定义自定义slugs"](https://docs.astro.build/zh-cn/guides/content-collections/#定义自定义-slugs) 部分。
 
-
 ### `editUrl`
 
 **类型：** `string | boolean`
@@ -402,7 +401,6 @@ export const collections = {
 
 通过在 `docsSchema()` 选项中设置 `extend` 来使用其他字段扩展 Starlight 的 schema。
 值应该是一个 [Zod schema](https://docs.astro.build/zh-cn/guides/content-collections/#用-zod-定义数据类型)。
-
 
 在下面的示例中，我们为 `description` 提供了一个更严格的类型，使其成为必填项，并添加了一个新的可选的 `category` 字段：
 
