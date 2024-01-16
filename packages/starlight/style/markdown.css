@@ -1,7 +1,7 @@
 .sl-markdown-content
 	:not(a, strong, em, del, span, input, code)
 	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-	margin-top: 1.5rem;
+	margin-top: 1rem;
 }
 
 /* Headings after non-headings have more spacing. */
