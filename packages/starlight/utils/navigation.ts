@@ -15,6 +15,7 @@ import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 
 const DirKey = Symbol('DirKey');
+const SlugKey = Symbol('SlugKey');
 
 export interface Link {
 	type: 'link';
@@ -43,17 +44,16 @@ export type SidebarEntry = Link | Group;
  */
 interface Dir {
 	[DirKey]: undefined;
-	// help ts wizards!
-	_slug: string;
+	[SlugKey]: string;
 	[item: string]: Dir | Route;
 }
 
 /** Create a new directory object. */
-function makeDir(): Dir {
+function makeDir(slug: string): Dir {
 	const dir = {} as Dir;
-	// Add DirKey and _slug as a non-enumerable property so that `Object.entries(dir)` ignores it.
+	// Add DirKey and SlugKey as non-enumerable properties so that `Object.entries(dir)` ignores them.
 	Object.defineProperty(dir, DirKey, { enumerable: false });
-	Object.defineProperty(dir, '_slug', { value: '', enumerable: false, writable: true });
+	Object.defineProperty(dir, SlugKey, { value: slug, enumerable: false });
 	return dir;
 }
 
@@ -170,8 +170,7 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 
 /** Turn a flat array of routes into a tree structure. */
 function treeify(routes: Route[], baseDir: string): Dir {
-	const treeRoot: Dir = makeDir();
-	treeRoot._slug = baseDir;
+	const treeRoot: Dir = makeDir(baseDir);
 	routes
 		// Remove any entries that should be hidden
 		.filter((doc) => !doc.entry.data.sidebar.hidden)
@@ -193,10 +192,9 @@ function treeify(routes: Route[], baseDir: string): Dir {
 
 				// Recurse down the tree if this isn’t the leaf node.
 				if (!isLeaf) {
-					currentNode[part] ||= makeDir();
-					const path = currentNode._slug;
+					const path = currentNode[SlugKey];
+					currentNode[part] ||= makeDir(stripLeadingAndTrailingSlashes(path + '/' + part));
 					currentNode = currentNode[part] as Dir;
-					currentNode._slug = stripLeadingAndTrailingSlashes(path + '/' + part);
 				} else {
 					currentNode[part] = doc;
 				}
@@ -236,7 +234,7 @@ function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? a._slug : a.slug, isDir(b) ? b._slug : b.slug);
+		return collator.compare(isDir(a) ? a[SlugKey] : a.slug, isDir(b) ? b[SlugKey] : b.slug);
 	});
 }
 
