@@ -1,6 +1,7 @@
 ---
 import '@pagefind/default-ui/css/ui.css';
 import Icon from '../user-components/Icon.astro';
+import project from 'virtual:starlight/project-context';
 import type { Props } from '../props';
 
 const { labels } = Astro.props;
@@ -13,9 +14,17 @@ const pagefindTranslations = {
 			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
 };
+
+const projectConfig = {
+	format: project.build.format,
+	trailingSlash: project.trailingSlash,
+};
 ---
 
-<site-search data-translations={JSON.stringify(pagefindTranslations)}>
+<site-search
+	data-translations={JSON.stringify(pagefindTranslations)}
+	data-config={JSON.stringify(projectConfig)}
+>
 	<button data-open-modal disabled>
 		{
 			/* The span is `aria-hidden` because it is not shown on small screens. Instead, the icon label is used for accessibility purposes. */
@@ -53,8 +62,11 @@ const pagefindTranslations = {
 </site-search>
 
 <script>
-	import { formatPathNoBase } from '../utils/format-path';
-	
+	interface FormatPathOptions {
+		format?: 'file' | 'directory';
+		trailingSlash?: 'ignore' | 'always' | 'never';
+	}
+
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super();
@@ -73,6 +85,71 @@ const pagefindTranslations = {
 				) {
 					closeModal();
 				}
+			};
+
+			const formatPath = (
+				path: string,
+				{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions = {}
+			) => {
+				const stripTrailingSlash = (href: string): string => {
+					if (href[href.length - 1] === '/') href = href.slice(0, -1);
+					return href;
+				};
+
+				const stripLeadingSlash = (href: string): string => {
+					if (href[0] === '/') href = href.slice(1);
+					return href;
+				};
+
+				const stripLeadingAndTrailingSlashes = (href: string): string => {
+					href = stripLeadingSlash(href);
+					href = stripTrailingSlash(href);
+					return href;
+				};
+
+				const ensureLeadingSlash = (href: string): string => {
+					if (href[0] !== '/') href = '/' + href;
+					return href;
+				};
+
+				const ensureTrailingSlash = (href: string): string => {
+					if (href[href.length - 1] !== '/') href += '/';
+					return href;
+				};
+
+				const ensureHtmlExtension = (path: string) => {
+					path = stripLeadingAndTrailingSlashes(path);
+					if (!path.endsWith('.html')) {
+						path = path ? path + '.html' : '/index.html';
+					}
+					return ensureLeadingSlash(path);
+				};
+
+				const stripHtmlExtension = (path: string) => {
+					const pathWithoutTrailingSlash = stripTrailingSlash(path);
+					return pathWithoutTrailingSlash.endsWith('.html')
+						? pathWithoutTrailingSlash.slice(0, -5)
+						: path;
+				};
+
+				const trailingSlashStrategies = {
+					always: ensureTrailingSlash,
+					never: stripTrailingSlash,
+					ignore: (href: string) => href,
+				};
+
+				const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
+
+				// Handle `build.format:`
+				path = format === 'file' ? ensureHtmlExtension(path) : stripHtmlExtension(path);
+
+				// Skip trailing slash handling for `build.format: 'file'`
+				if (format === 'file') return path;
+
+				// Handle `build.trailingSlash:`
+				path = path === '/' ? path : trailingSlashStrategy(path);
+
+				return path;
 			};
 
 			const openModal = (event?: MouseEvent) => {
@@ -110,8 +187,10 @@ const pagefindTranslations = {
 			});
 
 			let translations = {};
+			let projectConfig = {};
 			try {
 				translations = JSON.parse(this.dataset.translations || '{}');
+				projectConfig = JSON.parse(this.dataset.config || '{}');
 			} catch {}
 			window.addEventListener('DOMContentLoaded', () => {
 				if (import.meta.env.DEV) return;
@@ -126,7 +205,7 @@ const pagefindTranslations = {
 						translations,
 						showSubResults: true,
 						processResult: (result: any) => {
-							result.url = formatPathNoBase(result.url);
+							result.url = formatPath(result.url, projectConfig);
 							return result;
 						},
 					});
