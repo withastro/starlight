@@ -29,7 +29,7 @@
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "23 kB"
+      "limit": "22 kB"
     },
     {
       "name": "/_astro/*.css",
