@@ -5,9 +5,3 @@ export const formatPath = createPathFormatter({
 	format: project.build.format,
 	trailingSlash: project.trailingSlash,
 });
-
-export const formatPathNoBase = createPathFormatter({
-	format: project.build.format,
-	trailingSlash: project.trailingSlash,
-	addBase: false,
-});
