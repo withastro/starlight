@@ -14,6 +14,7 @@
     "lunaria:build": "lunaria build"
   },
   "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.4.4",
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.0.25",
     "@types/culori": "^2.0.0",
