@@ -6,7 +6,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<div class="testimonial-wrapper not-content">
+<div class="testimonial-wrapper not-content" data-pagefind-ignore>
 	<h2 class="testimonial-grid-title">{title}</h2>
 	<ul class="testimonial-grid">
 		<slot />
