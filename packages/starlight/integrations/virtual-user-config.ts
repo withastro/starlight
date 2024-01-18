@@ -25,7 +25,7 @@ export function vitePluginStarlightUserConfig(
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
 			`virtual:starlight/components/${name}`,
-			`export { default as default } from ${resolveId(path)};`,
+			`export { default } from ${resolveId(path)};`,
 		])
 	);
 
