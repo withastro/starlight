@@ -169,7 +169,7 @@
     "@astrojs/markdown-remark": "^4.0.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^0.33.0",
-    "astro": "^4.0.1",
+    "astro": "^4.2.1",
     "vitest": "^0.33.0"
   },
   "dependencies": {
