@@ -34,6 +34,7 @@ const { title, description, ...attributes } = Astro.props;
 
 	a {
 		text-decoration: none;
+		line-height: var(--sl-line-height-headings);
 	}
 
 	/* a11y fix for https://github.com/withastro/starlight/issues/487 */
@@ -52,7 +53,6 @@ const { title, description, ...attributes } = Astro.props;
 		color: var(--sl-color-white);
 		font-weight: 600;
 		font-size: var(--sl-text-lg);
-		line-height: var(--sl-line-height-headings);
 	}
 
 	.description {
