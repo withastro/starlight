@@ -1,0 +1,15 @@
+---
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import MediaCard from './media-card.astro';
+
+interface Props {
+	href: string;
+	title: string;
+	description?: string;
+}
+const { href, title, description } = Astro.props;
+---
+
+<MediaCard {title} {description}>
+	<YouTube id={href} />
+</MediaCard>
