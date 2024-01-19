@@ -34,7 +34,7 @@ importers:
     dependencies:
       '@astro-community/astro-embed-youtube':
         specifier: ^0.4.4
-        version: 0.4.4(astro@4.0.1)
+        version: 0.4.4(astro@4.2.1)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
@@ -367,12 +367,12 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
 
-  /@astro-community/astro-embed-youtube@0.4.4(astro@4.0.1):
+  /@astro-community/astro-embed-youtube@0.4.4(astro@4.2.1):
     resolution: {integrity: sha512-fYlycLrJFNnibZ9VHPSJO766kO2IgqYQU4mBd4iaDMaicL0gGX9cVZ80QdnpzGrI6w0XOJOY7prx86eWEVBy8w==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta
     dependencies:
-      astro: 4.0.1(@types/node@18.16.19)
+      astro: 4.2.1(@types/node@18.16.19)
       lite-youtube-embed: 0.2.0
     dev: false
 
