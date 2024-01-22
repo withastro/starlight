@@ -1,20 +1,15 @@
 ---
 interface Props {
 	href?: string | undefined;
-	title: string;
-	description?: string | undefined;
 }
-const { href, title, description } = Astro.props;
+const { href } = Astro.props;
 const El = href ? 'a' : 'span';
 ---
 
 <li class="not-content sl-flex">
 	<El class="media-card sl-flex" {href}>
-		<div class="media"><slot /></div>
-		<div class="meta sl-flex">
-			<p class="title">{title}</p>
-			{description && <p class="description" set:html={description} />}
-		</div>
+		<div class="media"><slot name="media" /></div>
+		<slot />
 	</El>
 </li>
 
@@ -32,20 +27,7 @@ const El = href ? 'a' : 'span';
 		border-color: var(--sl-color-gray-2);
 		background-color: var(--sl-color-gray-7, var(--sl-color-gray-6));
 	}
-	.meta {
-		padding: 0.75rem 1rem;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-	.title {
-		color: var(--sl-color-white);
-		font-weight: 600;
-		line-height: var(--sl-line-height-headings);
-	}
-	.description {
-		color: var(--sl-color-gray-3);
-		line-height: 1.5;
-	}
+
 	.media {
 		border-bottom: 1px solid var(--sl-color-gray-5);
 	}
@@ -56,5 +38,11 @@ const El = href ? 'a' : 'span';
 		height: auto;
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
+	}
+
+	.media-card :global(.title) {
+		color: var(--sl-color-white);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
 	}
 </style>

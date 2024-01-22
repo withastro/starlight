@@ -20,6 +20,13 @@ if (!thumbnail) {
 const src = (await thumbnail()).default;
 ---
 
-<MediaCard {title} {href}>
-	<Image {src} alt="" width="560" />
+<MediaCard {href}>
+	<Image slot="media" {src} alt="" width="560" />
+	<p class="title">{title}</p>
 </MediaCard>
+
+<style>
+	.title {
+		padding: 0.75rem 1rem;
+	}
+</style>
