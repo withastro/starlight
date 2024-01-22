@@ -8,7 +8,7 @@ tableOfContents:
 Les modules d'extension Starlight peuvent personnaliser la configuration, l'interface utilisateur et le comportement de Starlight, tout en étant faciles à partager et à réutiliser.
 Cette page de référence documente l'API à laquelle ces modules d'extension ont accès.
 
-Consultez la [référence de configuration](/fr/reference/configuration/#plugins) pour en savoir plus sur l'utilisation d'un module d'extension Starlight ou visitez la [vitrine des modules d'extension](/fr/showcase/#modules-dextension) pour voir une liste de modules d'extension disponibles.
+Consultez la [référence de configuration](/fr/reference/configuration/#plugins) pour en savoir plus sur l'utilisation d'un module d'extension Starlight ou visitez la [vitrine des modules d'extension](/fr/resources/plugins/) pour voir une liste de modules d'extension disponibles.
 
 ## Référence rapide de l'API
 
