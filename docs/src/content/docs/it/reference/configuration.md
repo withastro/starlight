@@ -83,7 +83,7 @@ Con questa configurazione, una pagina `/introduction` avrà un link di modifica 
 
 ### `sidebar`
 
-**type:** [`SidebarGroup[]`](#sidebargroup)
+**type:** [`SidebarItem[]`](#sidebaritem)
 
 Configura la barra laterale di navigazione del tuo sito.
 

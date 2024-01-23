@@ -16,7 +16,7 @@ These look like HTML tags but start with an uppercase letter matching the name i
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/example.mdx
 title: Welcome to my docs
 ---
 
@@ -38,7 +38,7 @@ Learn more about [using components in MDX](https://docs.astro.build/en/guides/ma
 Starlight applies default styling to your Markdown content, for example adding margin between elements.
 If these styles conflict with your component’s appearance, set the `not-content` class on your component to disable them.
 
-```astro
+```astro 'class="not-content"'
 ---
 // src/components/Example.astro
 ---
@@ -61,6 +61,8 @@ You can display a tabbed interface using the `<Tabs>` and `<TabItem>` components
 Each `<TabItem>` must have a `label` to display to users.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -86,6 +88,8 @@ Wrap multiple cards in the `<CardGrid>` component to display cards side-by-side 
 A `<Card>` requires a `title` and can optionally include an `icon` attribute set to the name of [one of Starlight’s built-in icons](#all-icons).
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="Check this out">Interesting content you want to highlight.</Card>
@@ -134,6 +138,8 @@ A `<LinkCard>` requires a `title` and an [`href`](https://developer.mozilla.org/
 Group multiple `<LinkCard>` components in `<CardGrid>` to display cards side-by-side when there’s enough space.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -166,13 +172,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
 
 Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />

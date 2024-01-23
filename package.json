@@ -14,7 +14,7 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
     "@size-limit/file": "^8.2.4",
-    "astro": "^3.2.3",
+    "astro": "^4.2.1",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.11.0",
     "size-limit": "^8.2.4"
@@ -24,17 +24,17 @@
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "14 kB"
+      "limit": "10 kB"
     },
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "20 kB"
+      "limit": "22 kB"
     },
     {
       "name": "/_astro/*.css",
       "path": "examples/basics/dist/_astro/*.css",
-      "limit": "10 kB"
+      "limit": "14 kB"
     }
   ]
 }

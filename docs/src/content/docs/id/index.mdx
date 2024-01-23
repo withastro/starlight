@@ -2,20 +2,11 @@
 title: Starlight 🌟 Membangun website dokumentasi dengan Astro
 description: Starlight membantu membangun website dokumentasi yang menawan dan berperforma tinggi dengan Astro.
 template: splash
-banner:
-  content: |
-    <span class="ph-banner">
-      <span class="ph-houston"><img src="/ph-houston.svg" alt="" width="72" height="72"/></span>
-      <span class="ph-text">
-        <strong>Halo Product Hunters&nbsp;👋</strong>
-        <a href="https://www.producthunt.com/posts/starlight-by-astro">Kami sedang live sekarang!</a>
-      </span>
-    </span>
 hero:
   title: Buat dokumentasi yang bersinar dengan Starlight
   tagline: Semua yang Anda butuhkan untuk membangun website dokumentasi yang luar biasa. Cepat, ramah pengguna, dan sangat mudah digunakan.
   image:
-    file: ../../../assets/hero-star.webp
+    file: ~/assets/hero-star.webp
   actions:
     - text: Memulai
       icon: right-arrow
@@ -27,7 +18,7 @@ hero:
 ---
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
-import AboutAstro from '../../../components/about-astro.astro';
+import AboutAstro from '~/components/about-astro.astro';
 
 <CardGrid stagger>
 	<Card title="Dokumentasi yang menawan" icon="open-book">

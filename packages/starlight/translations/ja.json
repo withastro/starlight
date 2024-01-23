@@ -18,5 +18,9 @@
   "page.lastUpdated": "最終更新日:",
   "page.previousLink": "前へ",
   "page.nextLink": "次へ",
-  "404.text": "ページが見つかりません。 URL を確認するか、検索バーを使用してみてください。"
+  "404.text": "ページが見つかりません。 URL を確認するか、検索バーを使用してみてください。",
+  "aside.note": "ノート",
+  "aside.tip": "ヒント",
+  "aside.caution": "注意",
+  "aside.danger": "危険"
 }

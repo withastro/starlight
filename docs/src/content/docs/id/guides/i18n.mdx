@@ -3,7 +3,7 @@ title: Internasionalisasi (i18n)
 description: Pelajari cara mengonfigurasi website Starlight Anda untuk mendukung beberapa bahasa.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight menyediakan dukungan bawaan untuk website multibahasa, termasuk pengaturan rute, konten cadangan, dan dukungan bahasa dari kanan ke kiri (RTL) sepenuhnya.
 
@@ -109,7 +109,7 @@ Ketika menggunakan locale `root`, simpan halaman untuk bahasa tersebut langsung 
 
 #### Website monolingual
 
-Secara default, Starlight adalah website monolingual (Inggris). Untuk membuat website monolingual dalam bahasa lain, tetapkan bahasa tersebut sebagai `root` dalam konfigurasi `locales` Anda:
+Secara default, Starlight adalah website monolingual (Inggris). Untuk membuat situs bahasa tunggal dalam bahasa lain, tetapkan bahasa tersebut sebagai `root` dalam konfigurasi `locales` Anda:
 
 ```js
 // astro.config.mjs
@@ -141,9 +141,12 @@ Jika terjemahan belum tersedia untuk suatu bahasa, Starlight akan menampilkan ko
 
 ## Terjemahkan UI Starlight
 
+import LanguagesList from '~/components/languages-list.astro';
+
 Selain menyimpan file konten yang diterjemahkan, Starlight memungkinkan Anda menerjemahkan string UI default (misalnya, judul "Di halaman ini" dalam daftar isi) sehingga pembaca Anda dapat mengakses website Anda sepenuhnya dalam bahasa yang dipilih.
 
-String UI yang diterjemahkan dalam bahasa Inggris, Ceko, Prancis, Jerman, Italia, Jepang, Portugis, Belanda, Denmark, Spanyol, Turki, Arab, Norwegia, Farsi, Ibrani, Cina (yang disederhanakan), Korea, Indonesia, Rusia, Swedia, Ukraina, dan Vietnam sudah disediakan secara bawaan, dan kami menyambut [kontribusi untuk menambahkan lebih banyak bahasa default](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+String UI yang diterjemahkan dalam bahasa <LanguagesList /> sudah disediakan secara bawaan,
+dan kami menyambut [kontribusi untuk menambahkan lebih banyak bahasa default](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Anda dapat memberikan terjemahan untuk bahasa tambahan yang Anda dukung — atau mengganti label default kami — melalui koleksi data `i18n`.
 
@@ -196,13 +199,17 @@ Anda dapat memberikan terjemahan untuk bahasa tambahan yang Anda dukung — atau
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 
-   Modal pencarian Starlight didukung oleh library [Pagefind](https://pagefind.app/).
+   Modal pencarian Starlight didukung oleh pustaka [Pagefind](https://pagefind.app/).
    Anda dapat mengatur terjemahan untuk UI Pagefind di file JSON yang sama menggunakan properti-properti `pagefind`:
 
    ```json

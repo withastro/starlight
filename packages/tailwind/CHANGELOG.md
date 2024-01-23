@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 2.0.1
+
+### Patch Changes
+
+- [#903](https://github.com/withastro/starlight/pull/903) [`232f512`](https://github.com/withastro/starlight/commit/232f51207fe97880760fba25351cdc65b20f4c67) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Show `tailwind.config.mjs` file in docs
+
 ## 2.0.0
 
 ### Major Changes

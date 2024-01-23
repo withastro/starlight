@@ -6,7 +6,7 @@ description: Узнайте, как настроить Starlight вручную,
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Самый быстрый способ создать новый сайт на Starlight - использовать `create astro`,
-как показано во [введении](/ru/getting-started/#creating-a-new-project).
+как показано во [введении](/ru/getting-started/#создание-нового-проекта).
 Если вы хотите добавить Starlight к существующему проекту Astro, это руководство расскажет, как это сделать.
 
 ## Настройка Starlight
@@ -112,7 +112,7 @@ Starlight использует роутинг на основе файлов, ч
 
 Например, если все страницы Starlight должны начинаться с `/guides/`, добавьте свой контент в директорию `src/content/docs/guides/`:
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

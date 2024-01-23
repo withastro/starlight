@@ -7,20 +7,11 @@ description: Starlight ti aiuta a creare siti belli e performanti con Astro.
 template: splash
 editUrl: false
 lastUpdated: false
-banner:
-  content: |
-    <span class="ph-banner">
-      <span class="ph-houston"><img src="/ph-houston.svg" alt="" width="72" height="72"/></span>
-      <span class="ph-text">
-        <strong>Benvenuti Product Hunters&nbsp;👋</strong>
-        <a href="https://www.producthunt.com/posts/starlight-by-astro">Siamo live ora!</a>
-      </span>
-    </span>
 hero:
   title: Fai brillare la tua documentazione con Starlight
   tagline: Tutto quello di cui hai bisogno per creare documentazione stellare. Veloce, accessibile e facile da usare.
   image:
-    file: ../../../assets/hero-star.webp
+    file: ~/assets/hero-star.webp
   actions:
     - text: Inizia
       icon: right-arrow
@@ -32,7 +23,7 @@ hero:
 ---
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
-import AboutAstro from '../../../components/about-astro.astro';
+import AboutAstro from '~/components/about-astro.astro';
 
 <CardGrid stagger>
 	<Card title="Documentazione che delizia" icon="open-book">

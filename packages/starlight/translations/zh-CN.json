@@ -18,5 +18,9 @@
   "page.lastUpdated": "最近更新：",
   "page.previousLink": "上一页",
   "page.nextLink": "下一页",
-  "404.text": "页面未找到。检查 URL 或尝试使用搜索栏。"
+  "404.text": "页面未找到。检查 URL 或尝试使用搜索栏。",
+  "aside.note": "注意",
+  "aside.tip": "提示",
+  "aside.caution": "警告",
+  "aside.danger": "危险"
 }

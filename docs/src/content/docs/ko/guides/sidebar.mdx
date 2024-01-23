@@ -3,8 +3,8 @@ title: 사이드바 탐색
 description: Starlight 사이트의 사이드바 탐색 링크를 설정하고 사용자 정의하는 방법을 알아보세요.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import FileTree from '~/components/file-tree.astro';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 잘 구성된 사이드바는 사용자가 사이트를 탐색하는 주요 방법 중 하나이므로 좋은 문서의 핵심입니다. Starlight는 사이드바 레이아웃과 콘텐츠를 변경할 수 있는 완전한 옵션 세트를 제공합니다.
 
@@ -59,7 +59,7 @@ import SidebarPreview from '../../../../components/sidebar-preview.astro';
 
 `label` 및 `link` 속성이 있는 객체를 사용하여 내부 또는 외부 페이지에 대한 링크를 추가할 수 있습니다.
 
-```js
+```js "label:" "link:"
 starlight({
 	sidebar: [
 		// CSS 및 스타일링 가이드 링크
@@ -85,7 +85,7 @@ starlight({
 
 `label` 및 `items` 속성이 있는 객체를 사용하여 그룹을 추가합니다. `label`은 그룹의 제목으로 사용됩니다. `items` 배열에 링크나 하위 그룹을 추가할 수 있습니다.
 
-```js
+```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
 		// "가이드" 라벨이 붙은 링크 그룹
@@ -138,7 +138,7 @@ Starlight는 문서 디렉터리를 기반해서 자동으로 사이드바에 �
 
 `label` 및 `autogenerate` 속성이 있는 객체를 사용하여 자동 생성 그룹을 추가합니다. `autogenerate` 구성은 사이드바 항목에 사용할 디렉터리를 지정해야 합니다. 예를 들어, 다음 구성을 사용할 수 있습니다.
 
-```js
+```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
@@ -194,8 +194,9 @@ starlight({
 
 프론트매터에서 sidebar 옵션을 사용하면 [사용자 정의 라벨](/ko/reference/frontmatter/#label)을 설정하거나 링크에 [배지](/ko/reference/frontmatter/#badge)를 추가하거나 사이드바에서 링크를 [숨기거나](/ko/reference/frontmatter/#hidden) [사용자 정의 정렬 기준](/ko/reference/frontmatter/#order)을 설정할 수 있습니다.
 
-```md
+```md "sidebar:"
 ---
+# src/content/docs/example.md
 title: 나의 페이지
 sidebar:
   # 링크에 대한 사용자 정의 라벨 설정
@@ -236,9 +237,9 @@ sidebar:
 
 ## 배지
 
-링크 라벨 옆에 배지를 표시하기 위해 링크에는 `badge` 속성이 포함될 수도 있습니다.
+링크, 그룹, 자동 생성된 그룹은 라벨 옆에 배지를 표시하기 위해 `badge` 속성을 포함할 수도 있습니다.
 
-```js
+```js {10,17}
 starlight({
 	sidebar: [
 		{
@@ -251,6 +252,12 @@ starlight({
 					badge: 'New',
 				},
 			],
+		},
+		// "Deprecated" 배지가 포함된 자동 생성된 그룹
+		{
+			label: '참조',
+			badge: 'Deprecated',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -270,6 +277,24 @@ starlight({
 				},
 			],
 		},
+		{
+			label: '참조',
+			badge: { text: 'Deprecated', variant: 'default' },
+			items: [
+				{
+					label: '구성 참조',
+					link: '/reference/configuration/',
+				},
+				{
+					label: '프론트매터 참조',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: '재정의 참조',
+					link: '/reference/overrides/',
+				},
+			],
+		},
 	]}
 />
 
@@ -279,7 +304,7 @@ starlight({
 
 `text`는 표시할 콘텐츠를 나타냅니다(예: "New"). `variant` 속성의 값을 `note`, `tip`, `danger`, `caution`, `success` 중 하나로 설정하여 사이트의 강조 색상을 사용하는 `default` 스타일을 변경하세요.
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -322,7 +347,7 @@ starlight({
 
 다음 예에서는 링크가 새 탭에서 열리도록 `target="_blank` 속성을 추가하고, 사용자 정의 `style` 속성을 적용하여 링크 레이블을 기울임꼴로 표시하기 위해 `attrs`를 사용합니다.
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -365,7 +390,7 @@ starlight({
 [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 언어 태그를 지정하여 지원되는 각 언어에 대한 링크 또는 그룹 라벨을 번역하려면 링크 및 그룹 항목의 `translations` 속성을 사용하세요. `"en"`, `"ar"` 또는 `"zh-CN"`을 키로, 번역된 라벨을 값으로 사용합니다.
 `label` 속성은 기본 언어 및 번역이 제공되지 않는 언어를 위해 사용될 것입니다.
 
-```js
+```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
@@ -412,7 +437,7 @@ starlight({
 
 `collapsed` 속성을 `true`로 설정하면 링크 그룹의 기본 상태를 접힌 상태로 만들 수 있습니다.
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -445,7 +470,7 @@ starlight({
 
 [자동 생성 그룹](#자동-생성-그룹)은 상위 그룹의 `collapsed` 값을 따릅니다.
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -482,7 +507,7 @@ starlight({
 
 `autogenerate.collapsed` 속성을 정의하여 이 동작을 변경할 수 있습니다.
 
-```js
+```js {5-6} "collapsed: true"
 starlight({
 	sidebar: [
 		{

@@ -11,3 +11,6 @@
 
 # Files
 pnpm-lock.yaml
+
+# Test snapshots
+**/__tests__/**/snapshots

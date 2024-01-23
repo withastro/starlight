@@ -5,27 +5,32 @@
   "version": "0.0.1",
   "scripts": {
     "test": "start-server-and-test 'pnpm preview' http://localhost:4321 'pnpm pa11y'",
-    "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-0.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(de|zh-cn|fr|es|pt-br|it|id|ko|ru|tr)/.*'",
+    "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-0.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(de|zh-cn|fr|es|pt-br|it|id|ko|ru|tr|hi|da|uk)/.*'",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lunaria:build": "lunaria build"
   },
   "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.4.4",
     "@astrojs/starlight": "workspace:*",
+    "@lunariajs/core": "^0.0.25",
     "@types/culori": "^2.0.0",
-    "astro": "^3.2.3",
+    "astro": "^4.2.1",
     "culori": "^3.2.0",
     "sharp": "^0.32.5"
   },
   "devDependencies": {
-    "hast-util-from-html": "^1.0.2",
-    "hast-util-to-string": "^2.0.0",
-    "hastscript": "^7.2.0",
+    "@types/hast": "^3.0.3",
+    "hast-util-from-html": "^2.0.1",
+    "hast-util-to-string": "^3.0.0",
+    "hastscript": "^8.0.0",
     "pa11y-ci": "^3.0.1",
-    "rehype": "^12.0.1",
+    "rehype": "^13.0.1",
+    "starlight-links-validator": "^0.5.1",
     "start-server-and-test": "^2.0.0",
-    "unist-util-visit": "^4.1.2"
+    "unist-util-visit": "^5.0.0"
   }
 }

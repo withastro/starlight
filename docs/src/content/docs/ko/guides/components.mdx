@@ -16,12 +16,12 @@ MDX 파일에서 컴포넌트를 가져온 다음 JSX 태그로 렌더링하여 
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/example.mdx
 title: 내 문서에 오신 것을 환영합니다
 ---
 
-import SomeComponent from '../../../components/SomeComponent.astro';
-import AnotherComponent from '../../../components/AnotherComponent.astro';
+import SomeComponent from '~/components/SomeComponent.astro';
+import AnotherComponent from '~/components/AnotherComponent.astro';
 
 <SomeComponent prop="어떤 값" />
 
@@ -38,7 +38,7 @@ Astro 문서에서 [MDX에서 컴포넌트 사용](https://docs.astro.build/ko/g
 Starlight는 요소 사이에 여백을 추가하는 등 Markdown 콘텐츠에 기본 스타일을 적용합니다.
 이러한 스타일이 컴포넌트의 모양과 충돌하는 경우 컴포넌트에 `not-content` 클래스를 추가하여 비활성화하세요.
 
-```astro
+```astro 'class="not-content"'
 ---
 // src/components/Example.astro
 ---
@@ -61,6 +61,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 각 `<TabItem>`은 사용자에게 보여줄 `label`을 반드시 포함해야합니다.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -86,6 +88,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 `<Card>` 컴포넌트에는 `title` 속성이 반드시 필요하며 선택적으로 [Starlight 내장 아이콘 중 하나](#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="확인">강조하고 싶은 흥미로운 콘텐츠.</Card>
@@ -135,6 +139,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 공간이 충분할 때, 카드를 나란히 표시하기 위해 여러 `<LinkCard>` 컴포넌트를 `<CardGrid>`에 그룹화하세요.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -173,13 +179,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### 아이콘
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
 
 각 `<Icon>` 컴포넌트에는 [`name`](#모든-아이콘) 속성이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />

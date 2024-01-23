@@ -5,7 +5,7 @@ description: Aprende como configurar Starlight manualmente para agregarlo a un p
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-La manera más rápida de crear un nuevo sitio Starlight es usando `create astro` como se muestra en la [Guía de Inicio Rápido](/es/getting-started/#creando-un-nuevo-proyecto).
+La manera más rápida de crear un nuevo sitio Starlight es usando `create astro` como se muestra en la [Guía de Inicio Rápido](/es/getting-started/#crea-un-nuevo-proyecto).
 Si quieres agregar Starlight a un proyecto de Astro existente, esta guía te explicará como hacerlo.
 
 ## Configuración de Starlight
@@ -44,7 +44,7 @@ La integración de Starlight está configurada en tu archivo `astro.config.mjs`.
 
 Agrega un `title` para comenzar:
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -106,7 +106,7 @@ Para agregar todas las páginas de Starlight en una subruta, coloca todo tu cont
 
 Por ejemplo, si las páginas de Starlight deben comenzar con `/guides/`, agrega tu contenido en el directorio `src/content/docs/guides/`:
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

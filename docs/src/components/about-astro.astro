@@ -6,7 +6,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<article class="sl-flex not-content" aria-labelledby="about-astro-heading">
+<article class="sl-flex" aria-labelledby="about-astro-heading">
 	<small id="about-astro-heading">
 		{title}
 		<span class="sr-only">Astro</span>
@@ -37,6 +37,7 @@ const { title } = Astro.props;
 	}
 	article > :global(*) {
 		max-width: 50ch;
+		margin-top: 0 !important;
 	}
 	small {
 		color: var(--sl-color-gray-3);

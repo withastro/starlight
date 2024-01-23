@@ -18,5 +18,9 @@
   "page.lastUpdated": "Zuletzt bearbeitet:",
   "page.previousLink": "Vorherige Seite",
   "page.nextLink": "Nächste Seite",
-  "404.text": "Seite nicht gefunden. Überprüfe die URL oder nutze die Suchleiste."
+  "404.text": "Seite nicht gefunden. Überprüfe die URL oder nutze die Suchleiste.",
+  "aside.note": "Hinweis",
+  "aside.tip": "Tipp",
+  "aside.caution": "Achtung",
+  "aside.danger": "Gefahr"
 }
