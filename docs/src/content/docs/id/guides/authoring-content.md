@@ -9,10 +9,10 @@ Pastikan untuk mengecek [dokumentasi MDX](https://mdxjs.com/docs/what-is-mdx/#ma
 
 ## Inline styles
 
-Text bisa **bold**, _italic_, atau ~~strikethrough~~.
+Teks bisa **bold**, _italic_, atau ~~strikethrough~~.
 
 ```md
-Text bisa **bold**, _italic_, atau ~~strikethrough~~.
+Teks bisa **bold**, _italic_, atau ~~strikethrough~~.
 ```
 
 Anda dapat [menautkan ke halaman lain](/id/getting-started/).
@@ -84,20 +84,20 @@ Saya dapat menautkan ke [kesimpulan saya](#kesimpulan) di bagian bawah halaman y
 
 ## Kesimpulan
 
-`https://my-site.com/halaman1/#pengantar` langsung menuju ke Pengantar saya.
+`https://situs-saya.com/halaman1/#pengantar` langsung menuju ke Pengantar saya.
 ```
 
 Judul Level 2 (`<h2>`) dan Level 3 (`<h3>`) akan secara otomatis muncul di daftar isi halaman.
 
 ## Asides
 
-_Asides_ (juga sering disebut sebagai _“admonitions”_ atau “_callouts”_) berguna untuk menampilkan informasi sekunder bersama konten utama halaman.
+_Asides_ (juga sering disebut sebagai _“admonitions”_ atau “_callouts”_) berguna untuk menampilkan informasi sekunder di samping konten utama halaman.
 
 Starlight menyediakan sintaks Markdown kustom untuk merender _asides_. Blok _asides_ ditandai dengan sepasang tiga titik dua `:::` untuk melingkupi konten Anda, dan dapat berjenis `note`, `tip`, `caution`, atau `danger`.
 
 Anda dapat menyusun berbagai jenis konten Markdown lainnya di dalam sebuah _asides_, tetapi _asides_ lebih cocok untuk potongan konten yang pendek dan padat.
 
-### Catatan Sampingan
+### Catatan Asides
 
 :::note
 Starlight adalah toolkit website dokumentasi yang dibangun dengan [Astro](https://astro.build/). Anda dapat memulai dengan perintah ini:
@@ -124,12 +124,12 @@ npm create astro@latest -- --template starlight
 Anda dapat menentukan judul kustom untuk _asides_ dengan menambahkan tanda kurung siku setelah jenis _asides-nya_, misalnya `:::tip[Apakah Anda tahu?]`.
 
 :::tip[Apakah Anda tahu?]
-Astro membantu Anda membangun website lebih cepat dengan “Arsitektur Pulau”.
+Astro membantu Anda membangun website lebih cepat dengan [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
 :::
 
 ```md
 :::tip[Apakah Anda tahu?]
-Astro membantu Anda membangun website lebih cepat dengan “Arsitektur Pulau”.
+Astro membantu Anda membangun website lebih cepat dengan [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
 :::
 ```
 
@@ -139,7 +139,7 @@ _Asides_ berjenis _caution_ dan _danger_ berguna untuk menarik perhatian penggun
 Jika Anda sering menggunakan ini, mungkin juga pertanda bahwa hal yang Anda dokumentasikan sepertinya bisa di-desain ulang.
 
 :::caution
-Jika Anda tidak yakin ingin membuat situs dokumen yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](../../).
+Jika Anda tidak yakin ingin membuat situs dokumentasi yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](/id/).
 :::
 
 :::danger
@@ -147,13 +147,13 @@ Pengguna Anda mungkin lebih produktif dan menemukan produk Anda lebih mudah digu
 
 - Navigasi yang jelas
 - Tema warna yang dapat dikonfigurasi oleh pengguna
-- [i18n support](/id/guides/i18n)
+- [Dukungan i18n](/id/guides/i18n)
 
 :::
 
 ```md
 :::caution
-Jika Anda tidak yakin ingin membuat situs dokumen yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](../../).
+Jika Anda tidak yakin ingin membuat situs dokumen yang menakjubkan, pikirkan dua kali sebelum menggunakan [Starlight](/id/).
 :::
 
 :::danger
@@ -161,7 +161,7 @@ Pengguna Anda mungkin lebih produktif dan menemukan produk Anda lebih mudah digu
 
 - Navigasi yang jelas
 - Tema warna yang dapat dikonfigurasi oleh pengguna
-- [i18n support](/id/guides/i18n)
+- [Dukungan i18n](/id/guides/i18n)
 
 :::
 ```
@@ -206,4 +206,8 @@ Kode satu baris tunggal yang panjang sebaiknya tidak di-wrap. Kode tersebut haru
 
 ## Fitur Umum Markdown Lainnya
 
-Starlight mendukung penulisan semua sintaks Markdown lainnya, seperti daftar dan tabel. Lihat [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) untuk penjelasan singkat tentang semua sintaks elemen Markdown.
+Starlight mendukung penulisan semua sintaks Markdown lainnya, seperti daftar dan tabel. Lihat [Markdown Cheat Sheet dari The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) untuk penjelasan singkat tentang semua sintaks elemen Markdown.
+
+## Konfigurasi Markdown dan MDX Lanjutan
+
+Starlight menggunakan Markdown dan renderer MDX Astro yang dibangun berdasarkan remark dan rehype. Anda dapat menambahkan dukungan untuk sintaks dan perilaku khusus dengan menambahkan `remarkPlugins` atau `rehypePlugins` di file konfigurasi Astro Anda. Lihat [“Configuring Markdown and MDX”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) dalam dokumentasi Astro untuk mempelajari lebih lanjut.

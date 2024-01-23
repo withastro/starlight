@@ -5,14 +5,14 @@ description: Pelajari cara mengkonfigurasi Starlight secara manual untuk menamba
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Cara tercepat untuk membuat website Starlight adalah dengan menjalankan perintah `create astro` sebagaimana dijelaskan di [panduan memulai](/id/getting-started/#creating-a-new-project).
+Cara tercepat untuk membuat website Starlight adalah dengan menjalankan perintah `create astro` sebagaimana dijelaskan di [panduan memulai](/id/getting-started/#membuat-proyek-baru).
 Jika Anda ingin menambahkan Starlight ke proyek Astro yang sudah ada, berikut ini adalah cara melakukannya.
 
 ## Memasang Starlight
 
 Untuk mengikuti panduan ini, Anda membutuhkan proyek Astro yang sudah berjalan.
 
-### Menambahkan Starlight integration
+### Menambahkan integrasi Starlight
 
 Starlight adalah sebuah [integrasi Astro](https://docs.astro.build/en/guides/integrations-guide/). Tambahkan ke website Anda dengan cara menjalankan perintah `astro add` di _root directory_ proyek Anda:
 
@@ -64,7 +64,7 @@ Untuk opsi lengkapnya tersedia di [referensi pengaturan Starlight](/id/reference
 
 Starlight dibangun berdasarkan fitur [koleksi konten](https://docs.astro.build/en/guides/content-collections/) oleh Astro, yang dapat dikonfigurasi di file `src/content/config.ts`.
 
-Buat baru atau _update_ file konfigurasi koleksi konten Anda, menambahkan koleksi bernama `docs` yang menggunakan skema `docsSchema` dari Starlight:
+Buat baru atau perbarui file konfigurasi koleksi konten Anda, menambahkan koleksi bernama `docs` yang menggunakan skema `docsSchema` dari Starlight:
 
 ```js ins={3,6}
 // src/content/config.ts
@@ -106,7 +106,7 @@ Untuk menambahkan halaman Starlight di dalam _subpath_, letakkan konten dokument
 
 Contohnya, jika halaman Starlight berada pada rute `/panduan/`, letakkan konten dokumentasi Anda di folder `src/content/docs/panduan/`:
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

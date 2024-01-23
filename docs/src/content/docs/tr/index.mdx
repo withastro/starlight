@@ -7,20 +7,11 @@ description: Starlight, Astro ile güzel ve yüksek performanslı dokümantasyon
 template: splash
 editUrl: false
 lastUpdated: false
-banner:
-  content: |
-    <span class="ph-banner">
-      <span class="ph-houston"><img src="/ph-houston.svg" alt="" width="72" height="72"/></span>
-      <span class="ph-text">
-        <strong>Hoşgeldiniz Ürün Avcıları&nbsp;👋</strong>
-        <a href="https://www.producthunt.com/posts/starlight-by-astro">Şu an yayındayız!</a>
-      </span>
-    </span>
 hero:
   title: Starlight ile dokümanlarınız şıkır şıkır olsun
   tagline: Yıldız gibi dokümantasyon sitesi oluşturmanız için gereken her şey. Hızlı, erişilebilir ve kullanımı kolay.
   image:
-    file: ../../../assets/hero-star.webp
+    file: ~/assets/hero-star.webp
   actions:
     - text: Başla
       icon: right-arrow
@@ -32,7 +23,7 @@ hero:
 ---
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
-import AboutAstro from '../../../components/about-astro.astro';
+import AboutAstro from '~/components/about-astro.astro';
 
 <CardGrid stagger>
 	<Card title="Memnun eden dokümantasyon" icon="open-book">

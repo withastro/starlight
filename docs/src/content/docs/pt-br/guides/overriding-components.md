@@ -1,8 +1,6 @@
 ---
 title: Substituindo Componentes
 description: Aprenda como substituir os componentes nativos do Starlight para adicionar elementos personalizados a UI do seu site de documentação.
-sidebar:
-  badge: New
 ---
 
 <!---
@@ -106,14 +104,14 @@ const { titulo } = Astro.props.entry.data;
 </style>
 ```
 
-Aprenda mais sobre todos os props disponíveis na [Referência de Substituição](/pt-br/reference/overrides/#component-props).
+Aprenda mais sobre todos os props disponíveis na [Referência de Substituição](/pt-br/reference/overrides/#props-de-componentes).
 
 ### Substituindo apenas em páginas específicas
 
 A substituição de componentes aplica-se a todas as páginas. Porém, você pode fazer o componente
 renderizar condicionalmente utilizando `Astro.props` para determinar quando exibir a sua UI personaliza, ou a UI padrão do Starlight, ou até mesmo para exibir algo totalmente diferente.
 
-No exemplo a seguir, um componente está substituindo o [`Footer`](/pt-br/reference/overrides/#footer-1) padrão do Starlight para exibir "Feito com Starlight 🌟" exclusivamente na página principal, e nas outras exibir o rodapé padrão.
+No exemplo a seguir, um componente está substituindo o [`Footer`](/pt-br/reference/overrides/#footer) padrão do Starlight para exibir "Feito com Starlight 🌟" exclusivamente na página principal, e nas outras exibir o rodapé padrão.
 
 ```astro
 ---

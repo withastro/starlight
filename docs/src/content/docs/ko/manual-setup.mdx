@@ -5,7 +5,7 @@ description: Starlight를 기존 Astro 프로젝트에 추가하기 위해 수�
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-새로운 Starlight 사이트를 시작하는 가장 빠른 방법은 [시작하기](/ko/getting-started/#새-프로젝트-시작하기)에 나와있는 것처럼 `create astro`를 사용하는 것입니다. 이 가이드에서는 기존 Astro 프로젝트에 Starlight를 추가하는 방법을 설명합니다.
+새로운 Starlight 사이트를 시작하는 가장 빠른 방법은 [시작하기](/ko/getting-started/#새-프로젝트-생성)에 나와있는 것처럼 `create astro`를 사용하는 것입니다. 이 가이드에서는 기존 Astro 프로젝트에 Starlight를 추가하는 방법을 설명합니다.
 
 ## Starlight 설정
 
@@ -43,7 +43,7 @@ Starlight 통합은 `astro.config.mjs` 파일에서 구성됩니다.
 
 시작하려면 `title`을 추가하세요.
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -104,7 +104,7 @@ Starlight는 파일 기반 라우팅을 사용합니다. 즉, `src/content/docs/
 
 예를 들어, Starlight의 모든 페이지가 `/guides/`에서 시작해야 하는 경우 `src/content/docs/guides/` 디렉터리에 콘텐츠를 추가하세요.
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

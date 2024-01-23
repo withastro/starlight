@@ -18,5 +18,12 @@
   "page.lastUpdated": "Dernière mise à jour :",
   "page.previousLink": "Précédent",
   "page.nextLink": "Suivant",
-  "404.text": "Page non trouvée. Vérifiez l’URL ou essayez d’utiliser la barre de recherche."
+  "404.text": "Page non trouvée. Vérifiez l’URL ou essayez d’utiliser la barre de recherche.",
+  "aside.note": "Note",
+  "aside.tip": "Astuce",
+  "aside.caution": "Attention",
+  "aside.danger": "Danger",
+  "expressiveCode.copyButtonCopied": "Copié !",
+  "expressiveCode.copyButtonTooltip": "Copier dans le presse-papiers",
+  "expressiveCode.terminalWindowFallbackTitle": "Fenêtre de terminal"
 }

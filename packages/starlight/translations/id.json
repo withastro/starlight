@@ -18,5 +18,9 @@
   "page.lastUpdated": "Terakhir diperbaharui:",
   "page.previousLink": "Sebelumnya",
   "page.nextLink": "Selanjutnya",
-  "404.text": "Halaman tidak ditemukan. Cek kembali kolom URL atau gunakan fitur pencarian."
+  "404.text": "Halaman tidak ditemukan. Cek kembali kolom URL atau gunakan fitur pencarian.",
+  "aside.note": "Catatan",
+  "aside.tip": "Tips",
+  "aside.caution": "Perhatian",
+  "aside.danger": "Bahaya"
 }

@@ -29,6 +29,7 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 			label: item.label,
 			entries: makeEntries(item.items as SidebarConfig),
 			collapsed: item.collapsed,
+			badge: item.badge,
 		};
 	});
 }

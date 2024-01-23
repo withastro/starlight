@@ -116,6 +116,20 @@ You should then be able to open <http://localhost:4321> and see your changes.
 > **Note**
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
 
+### Check for broken links in the docs site
+
+When adding or translating content in the Starlight docs site, you can check all internal links are valid.
+All GitHub PRs are checked this way automatically, but testing locally can help if you want to confirm changes are correct before committing them.
+
+To do this, move into the `docs/` directory from the root of the repo and then build the site with the `CHECK_LINKS` environment variable:
+
+```sh
+cd docs
+CHECK_LINKS=true pnpm build
+```
+
+If there are any broken links, the build will fail and log which pages need to be fixed.
+
 ### Unit tests
 
 The Starlight package includes unit tests in [`packages/starlight/__tests__/`](./packages/starlight/__tests__/), which are run using [Vitest][vitest].
@@ -197,6 +211,18 @@ Help out by:
 - Adding an untranslated page
 
 Visit **<https://i18n.starlight.astro.build>** to track translation progress for the currently supported languages.
+
+#### Adding a new language to Starlight’s docs
+
+To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://github.com/withastro/docs/blob/main/contributor-guides/translating-astro-docs.md#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
+
+- Add your language to the `locales` config in `docs/astro.config.mjs`
+- Add your language to the `locales` config in `docs/lunaria.config.json`
+- Add your language’s subtag to the i18n label config in `.github/labeler.yml`
+- Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
+- Create the first translated page for your language.  
+   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
+- Open a pull request on GitHub to add your changes to Starlight!
 
 ## Understanding Starlight
 

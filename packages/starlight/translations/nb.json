@@ -18,5 +18,9 @@
   "page.lastUpdated": "Sist oppdatert:",
   "page.previousLink": "Forrige",
   "page.nextLink": "Neste",
-  "404.text": "Siden ble ikke funnet. Sjekk URL-en eller prøv å bruke søkefeltet."
+  "404.text": "Siden ble ikke funnet. Sjekk URL-en eller prøv å bruke søkefeltet.",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }

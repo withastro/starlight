@@ -14,20 +14,34 @@ const imageAttrs = {
 	height: 400,
 	alt: image?.alt || '',
 };
+
+let darkImage: ImageMetadata | undefined;
+let lightImage: ImageMetadata | undefined;
+let rawHtml: string | undefined;
+if (image) {
+	if ('file' in image) {
+		darkImage = image.file;
+	} else if ('dark' in image) {
+		darkImage = image.dark;
+		lightImage = image.light;
+	} else {
+		rawHtml = image.html;
+	}
+}
 ---
 
 <div class="hero">
 	{
-		image?.file ? (
-			image.file.format === 'svg' ? (
-				<img src={image.file.src} {...imageAttrs} />
-			) : (
-				<Image src={image.file} {...imageAttrs} />
-			)
-		) : (
-			image?.html && <div class="hero-html sl-flex" set:html={image.html} />
+		darkImage && (
+			<Image
+				src={darkImage}
+				{...imageAttrs}
+				class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
+			/>
 		)
 	}
+	{lightImage && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
+	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
 	<div class="sl-flex stack">
 		<div class="sl-flex copy">
 			<h1 id={PAGE_TITLE_ID} data-page-title set:html={title} />

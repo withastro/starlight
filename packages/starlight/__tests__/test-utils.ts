@@ -17,6 +17,7 @@ const frontmatterSchema = docsSchema()({
 				z.literal('webp'),
 				z.literal('gif'),
 				z.literal('svg'),
+				z.literal('avif'),
 			]),
 		}),
 });

@@ -4,7 +4,7 @@ description: Learn how to make your Starlight site your own with your logo, cust
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight provides sensible default styling and features, so you can get started quickly with no configuration needed.
 When you want to start customizing the look and feel of your Starlight site, this guide has you covered.
@@ -27,7 +27,7 @@ Adding a custom logo to the site header is a quick way to add your individual br
 
 2. Add the path to your logo as Starlight’s [`logo.src`](/reference/configuration/#logo) option in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -37,7 +37,7 @@ Adding a custom logo to the site header is a quick way to add your individual br
    		starlight({
    			title: 'Docs With My Logo',
    			logo: {
-   				src: './src/assets/my-logo.svg',
+   +				src: './src/assets/my-logo.svg',
    			},
    		}),
    	],
@@ -48,7 +48,7 @@ By default, the logo will be displayed alongside your site’s `title`.
 If your logo image already includes the site title, you can visually hide the title text by setting the `replacesTitle` option.
 The `title` text will still be included for screen readers so that the header remains accessible.
 
-```js
+```js {5}
 starlight({
   title: 'Docs With My Logo',
   logo: {
@@ -77,12 +77,12 @@ You can display different versions of your logo in light and dark modes.
 
 2. Add the path to your logo variants as the `light` and `dark` options instead of `src` in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    starlight({
      title: 'Docs With My Logo',
      logo: {
-       light: './src/assets/light-logo.svg',
-       dark: './src/assets/dark-logo.svg',
+   +    light: './src/assets/light-logo.svg',
+   +    dark: './src/assets/dark-logo.svg',
      },
    }),
    ```
@@ -91,7 +91,7 @@ You can display different versions of your logo in light and dark modes.
 
 Starlight has built-in support for generating a sitemap. Enable sitemap generation by setting your URL as `site` in `astro.config.mjs`:
 
-```js
+```js {4}
 // astro.config.mjs
 
 export default defineConfig({
@@ -107,7 +107,7 @@ By default, Starlight pages use a layout with a global navigation sidebar and a 
 You can apply a wider page layout without sidebars by setting [`template: splash`](/reference/frontmatter/#template) in a page’s frontmatter.
 This works particularly well for landing pages and you can see it in action on the [homepage of this site](/).
 
-```md
+```md {5}
 ---
 # src/content/docs/index.md
 
@@ -126,7 +126,7 @@ By default, `<h2>` and `<h3>` headings are included in the table of contents. Ch
 <Tabs>
   <TabItem label="Frontmatter">
 
-```md
+```md {4-6}
 ---
 # src/content/docs/example.md
 title: Page with only H2s in the table of contents
@@ -139,13 +139,13 @@ tableOfContents:
   </TabItem>
   <TabItem label="Global config">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
 	integrations: [
 		starlight({
-			title: '',
+			title: 'Docs with custom table of contents config',
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 		}),
 	],
@@ -160,7 +160,7 @@ Disable the table of contents entirely by setting the `tableOfContents` option t
 <Tabs>
   <TabItem label="Frontmatter">
 
-```md
+```md {4}
 ---
 # src/content/docs/example.md
 title: Page without a table of contents
@@ -171,7 +171,7 @@ tableOfContents: false
   </TabItem>
   <TabItem label="Global config">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
@@ -194,7 +194,7 @@ Starlight has built-in support for adding links to your social media accounts to
 You can find a full list of supported link icons in the [Configuration Reference](/reference/configuration/#social).
 Let us know on GitHub or Discord if you need support for another service!
 
-```js
+```js {9-12}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -230,7 +230,7 @@ If your Starlight project is not in the root of your repository, include the pat
 
 This example shows the edit link configured for the Starlight docs, which live in the `docs/` subdirectory on the `main` branch of the `withastro/starlight` repository on GitHub:
 
-```js
+```js {9-11}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -265,8 +265,9 @@ You can customize this by adding a `404.md` (or `404.mdx`) file to your `src/con
 
 You can use all of Starlight’s page layout and customization techniques in your 404 page. For example, the default 404 page uses the [`splash` template](#page-layout) and [`hero`](/reference/frontmatter/#hero) component in frontmatter:
 
-```md
+```md {4,6-8}
 ---
+# src/content/docs/404.md
 title: '404'
 template: splash
 editUrl: false
@@ -321,7 +322,7 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
 
 3. Add the path to your `font-face.css` file to Starlight’s `customCss` array in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -331,8 +332,8 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    		starlight({
    			title: 'Docs With a Custom Typeface',
    			customCss: [
-   				// Relative path to your @font-face CSS file.
-   				'./src/fonts/font-face.css',
+   +				// Relative path to your @font-face CSS file.
+   +				'./src/fonts/font-face.css',
    			],
    		}),
    	],
@@ -363,7 +364,7 @@ It provides npm modules you can install for the fonts you want to use and includ
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -380,7 +381,7 @@ It provides npm modules you can install for the fonts you want to use and includ
 
 3.  Add Fontsource CSS files to Starlight’s `customCss` array in `astro.config.mjs`:
 
-    ```js
+    ```diff lang="js"
     // astro.config.mjs
     import { defineConfig } from 'astro/config';
     import starlight from '@astrojs/starlight';
@@ -390,9 +391,9 @@ It provides npm modules you can install for the fonts you want to use and includ
     		starlight({
     			title: 'Docs With a Custom Typeface',
     			customCss: [
-    				// Fontsource files for to regular and semi-bold font weights.
-    				'@fontsource/ibm-plex-serif/400.css',
-    				'@fontsource/ibm-plex-serif/600.css',
+    +				// Fontsource files for to regular and semi-bold font weights.
+    +				'@fontsource/ibm-plex-serif/400.css',
+    +				'@fontsource/ibm-plex-serif/600.css',
     			],
     		}),
     	],

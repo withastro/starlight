@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import translations from '../../translations';
 import { useTranslations } from '../../utils/translations';
 
@@ -20,14 +20,6 @@ describe('useTranslations()', () => {
 		expect(translations).not.toHaveProperty(locale);
 		const t = useTranslations(locale);
 		expect(t('page.editLink')).toBe(translations.en?.['page.editLink']);
-	});
-
-	test('returns a pick method for filtering by key', () => {
-		const t = useTranslations('en');
-		expect(t.pick('tableOfContents.')).toEqual({
-			'tableOfContents.onThisPage': 'On this page',
-			'tableOfContents.overview': 'Overview',
-		});
 	});
 
 	test('uses built-in translations for regional variants', () => {

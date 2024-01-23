@@ -8,23 +8,21 @@ import '../style/shiki.css';
 import '../style/util.css';
 
 // Components — can override built-in CSS, but not user CSS.
-import {
-	Banner,
-	ContentPanel,
-	PageTitle,
-	FallbackContentNotice,
-	Footer,
-	Header,
-	Head,
-	Hero,
-	MarkdownContent,
-	PageSidebar,
-	Sidebar,
-	SkipLink,
-	ThemeProvider,
-	PageFrame,
-	TwoColumnContent,
-} from 'virtual:starlight/components';
+import Banner from 'virtual:starlight/components/Banner';
+import ContentPanel from 'virtual:starlight/components/ContentPanel';
+import FallbackContentNotice from 'virtual:starlight/components/FallbackContentNotice';
+import Footer from 'virtual:starlight/components/Footer';
+import Head from 'virtual:starlight/components/Head';
+import Header from 'virtual:starlight/components/Header';
+import Hero from 'virtual:starlight/components/Hero';
+import MarkdownContent from 'virtual:starlight/components/MarkdownContent';
+import PageFrame from 'virtual:starlight/components/PageFrame';
+import PageSidebar from 'virtual:starlight/components/PageSidebar';
+import PageTitle from 'virtual:starlight/components/PageTitle';
+import Sidebar from 'virtual:starlight/components/Sidebar';
+import SkipLink from 'virtual:starlight/components/SkipLink';
+import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
+import TwoColumnContent from 'virtual:starlight/components/TwoColumnContent';
 
 // Remark component CSS (needs to override `MarkdownContent.astro`)
 import '../style/asides.css';

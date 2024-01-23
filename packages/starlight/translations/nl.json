@@ -18,5 +18,9 @@
   "page.lastUpdated": "Laatst bewerkt:",
   "page.previousLink": "Vorige",
   "page.nextLink": "Volgende",
-  "404.text": "Pagina niet gevonden. Controleer de URL of probeer de zoekbalk."
+  "404.text": "Pagina niet gevonden. Controleer de URL of probeer de zoekbalk.",
+  "aside.note": "Opmerking",
+  "aside.tip": "Tip",
+  "aside.caution": "Opgepast",
+  "aside.danger": "Gevaar"
 }

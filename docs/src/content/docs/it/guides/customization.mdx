@@ -4,7 +4,7 @@ description: Scopri come personalizzare il tuo sito Starlight con il tuo logo, c
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight fornisce stili e funzionalità predefiniti sensati, così puoi iniziare rapidamente senza bisogno di configurazione.
 Se vuoi iniziare a personalizzare l'aspetto del tuo sito Starlight, questa guida fa al caso tuo.
@@ -264,7 +264,7 @@ Puoi personalizzarlo aggiungendo un file `404.md` (o `404.mdx`) alla tua directo
 
 </FileTree>
 
-Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#page-layout) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
+Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#layout-della-pagina) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
 
 ```md
 ---
@@ -364,7 +364,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -404,7 +404,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
 ### Usa i caratteri
 
-Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#custom-css-styles).
+Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#stili-css-personalizzati).
 Ad esempio, per sovrascrivere ovunque il font predefinito di Starlight, imposta la proprietà personalizzata `--sl-font`:
 
 ```css
@@ -426,4 +426,4 @@ main {
 }
 ```
 
-Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#custom-css-styles) per aggiungere i tuoi stili al tuo sito.
+Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#stili-css-personalizzati) per aggiungere i tuoi stili al tuo sito.

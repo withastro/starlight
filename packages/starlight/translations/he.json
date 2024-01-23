@@ -18,5 +18,9 @@
   "page.lastUpdated": "עדכון אחרון:",
   "page.previousLink": "הקודם",
   "page.nextLink": "הבא",
-  "404.text": "הדף לא נמצא. אנא בדקו את כתובת האתר או נסו להשתמש בסרגל החיפוש."
+  "404.text": "הדף לא נמצא. אנא בדקו את כתובת האתר או נסו להשתמש בסרגל החיפוש.",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }
