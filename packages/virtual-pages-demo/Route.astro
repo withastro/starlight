@@ -46,9 +46,10 @@ function getVirtualPageProps(): VirtualPageProps {
 		// Page with minimal set of props.
 		return { slug, title };
 	} else if (isThingE) {
-		// Page with the `splash` template, a hero including an image and a banner.
+		// Page with the `splash` template, a hero including an image, an edit URL and a banner.
 		return {
 			banner: { content: 'This is a banner' },
+			editUrl: 'https://starlight.astro.build/',
 			hero: {
 				title: 'Hello',
 				tagline: 'This is a tagline',

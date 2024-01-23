@@ -26,7 +26,7 @@ test('adds data to route shape', () => {
 	expect(data.id).toBeDefined();
 	// Virtual pages cannot be fallbacks.
 	expect(data.isFallback).toBeUndefined();
-	// Virtual pages cannot be edited.
+	// Virtual pages are not editable if no edit URL is passed.
 	expect(data.editUrl).toBeUndefined();
 	expect(data.entry.data.editUrl).toBe(false);
 	// Virtual pages are part of the docs collection.
@@ -316,4 +316,14 @@ test('includes localized labels', () => {
 	});
 	expect(data.labels).toBeDefined();
 	expect(data.labels['skipLink.label']).toBe('Skip to content');
+});
+
+test.only('uses provided edit URL if any', () => {
+	const editUrl = 'https://example.com/edit';
+	const data = generateVirtualRouteData({
+		props: { ...virtualPageProps, editUrl },
+		url: new URL('https://example.com'),
+	});
+	expect(data.editUrl).toEqual(new URL(editUrl));
+	expect(data.entry.data.editUrl).toEqual(editUrl);
 });
