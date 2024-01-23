@@ -1,8 +1,6 @@
 ---
 title: 重写组件
 description: 学习如何通过替换 Starlight 的内置组件来给你的文档站点 UI 添加自定义元素。
-sidebar:
-  badge: 新功能
 ---
 
 Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内容。大部分 Starlight 的默认外观可以通过 [CSS](/zh-cn/guides/css-and-tailwind/) 和 [配置选项](/zh-cn/guides/customization/) 进行自定义。
@@ -102,7 +100,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-要了解更多关于可用的参数的信息，请参阅[重写参考](/zh-cn/reference/overrides/#%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0)。
+要了解更多关于可用的参数的信息，请参阅[重写参考](/zh-cn/reference/overrides/#组件参数)。
 
 ### 仅在特定页面上重写
 

@@ -73,3 +73,28 @@ jobs:
       - name: Build docs site
         working-directory: ./docs
         run: pnpm build
+
+  links:
+    name: Check for broken links
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build docs site and check links
+        working-directory: ./docs
+        run: pnpm build
+        env:
+          CHECK_LINKS: true

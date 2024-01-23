@@ -94,7 +94,7 @@ Chaque élément doit comporter un `label` et l'une des propriétés suivantes :
 
 - `items` — un tableau contenant plus de liens et des sous-groupes.
 
-- `autogenerate` — un objet indiquant un répertoire de vos docs dpeuis lequel générer automatiquement un groupe de liens.
+- `autogenerate` — un objet indiquant un répertoire de vos docs depuis lequel générer automatiquement un groupe de liens.
 
 ```js
 starlight({
@@ -129,7 +129,7 @@ Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comp
 
 Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
 
-```js
+```js {5,16}
 sidebar: [
   // Un groupe rétractable de liens.
   {
@@ -155,7 +155,7 @@ sidebar: [
 
 Si votre site est multilingue, le `label` de chaque élément est considéré comme étant dans la locale par défaut. Vous pouvez définir une propriété `translations` pour fournir des étiquettes pour les autres langues supportées :
 
-```js
+```js {5,9,14}
 sidebar: [
 	// Un exemple de barre latérale avec des étiquettes traduites en portugais brésilien.
 	{
@@ -183,10 +183,10 @@ sidebar: [
 type SidebarItem = {
 	label: string;
 	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
 	| {
 			link: string;
-			badge?: string | BadgeConfig;
 			attrs?: Record<string, string | number | boolean | undefined>;
 	  }
 	| { items: SidebarItem[]; collapsed?: boolean }
@@ -215,7 +215,6 @@ interface BadgeConfig {
 Chaque entrée doit utiliser comme clé le répertoire dans lequel les fichiers de cette langue sont sauvegardés.
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -280,7 +279,7 @@ Le sens d'écriture de cette langue ; `"ltr"` pour gauche à droite (par défaut
 
 Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale `root` :
 
-```js
+```js {3-6}
 starlight({
 	locales: {
 		root: {
@@ -308,7 +307,7 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **Type :** <SocialLinksType />
 
@@ -345,6 +344,82 @@ starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
+
+### `expressiveCode`
+
+**Type :** `StarlightExpressiveCodeOptions | boolean`  
+**Par défaut :** `true`
+
+Starlight utilise [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
+Consultez le [guide « Blocs de code »](/fr/guides/authoring-content/#blocs-de-code) pour apprendre à utiliser la syntaxe d'Expressive Code dans votre contenu Markdown et MDX.
+
+Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
+Par exemple, définissez l'option `styleOverrides` d'Expressive Code pour remplacer le CSS par défaut. Cela permet des personnalisations comme donner à vos blocs de code des coins arrondis :
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+Si vous souhaitez désactiver Expressive Code, définissez `expressiveCode: false` dans votre configuration de Starlight :
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+En plus des options standard d'Expressive Code, vous pouvez également définir les propriétés suivantes spécifiques à Starlight dans votre configuration `expressiveCode` pour personnaliser davantage le comportement du thème pour vos blocs de code :
+
+#### `themes`
+
+**Type :** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**Par défaut :** `['starlight-dark', 'starlight-light']`
+
+Définit les thèmes utilisés pour styliser les blocs de code.
+Consultez la [documentation des `themes` d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) pour plus de détails sur les formats de thème pris en charge.
+
+Starlight utilise les variantes claires et sombres du [thème Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner par défaut.
+
+Si vous définissez au moins un thème clair et un thème sombre, Starlight gardera automatiquement le thème de bloc de code actif en phase avec le thème actuel du site.
+Configurez ce comportement avec l'option [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
+
+#### `useStarlightDarkModeSwitch`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Lorsque la valeur est `true`, les blocs de code basculent automatiquement entre les thèmes clairs et sombres lorsque le thème du site change.
+Lorsque la valeur est `false`, vous devez ajouter manuellement du CSS pour gérer le basculement entre plusieurs thèmes.
+
+:::note
+Quand `themes` est défini, vous devez fournir au moins un thème sombre et un thème clair pour que le changement en mode sombre de Starlight fonctionne.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**Type :** `boolean`  
+**Par défaut :** `true` si `themes` n'est pas défini, sinon `false`
+
+Lorsque la valeur est `true`, les variables CSS de Starlight sont utilisées pour les couleurs des éléments d'interface utilisateur des blocs de code (arrière-plans, boutons, ombres, etc.), uniformément avec le [thème de couleur du site](/fr/guides/css-and-tailwind/#personnalisation-du-thème).
+Lorsque la valeur est `false`, les couleurs fournies par le thème de coloration syntaxique actif sont utilisées pour ces éléments.
+
+:::note
+Lorsque des thèmes personnalisés sont utilisés et que cette option est définie à `true`, vous devez fournir au moins un thème sombre et un thème clair pour assurer un contraste de couleur approprié.
+:::
+
+### `pagefind`
+
+**Type :** `boolean`  
+**Par défaut :** `false`
+
+Définit si le système de recherche du site par défaut de Starlight, [Pagefind](https://pagefind.app/), est activé.
+
+Utilisez la valeur `false` pour désactiver l'indexation de votre site avec Pagefind.
+Cela désactivera également l'interface de recherche par défaut de Starlight si utilisée.
 
 ### `head`
 
@@ -456,3 +531,20 @@ starlight({
 ```
 
 Consultez la [référence des redéfinitions](/fr/reference/overrides/) pour plus de détails sur tous les composants que vous pouvez redéfinir.
+
+### `plugins`
+
+**type:** [`StarlightPlugin[]`](/fr/reference/plugins/#référence-rapide-de-lapi)
+
+Étendez Starlight avec des modules d'extension personnalisés.
+Les modules d'extension appliquent des changements à votre projet pour modifier ou ajouter des fonctionnalités à Starlight.
+
+Visitez la [vitrine des modules d'extension](/fr/resources/plugins/) pour voir une liste des modules d'extension disponibles.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus de détails pour créer vos propres modules d'extension.

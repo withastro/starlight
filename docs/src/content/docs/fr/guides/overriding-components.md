@@ -1,8 +1,6 @@
 ---
 title: Redéfinition de composants
 description: Apprenez à redéfinir les composants intégrés à Starlight pour ajouter des éléments personnalisés à l’interface utilisateur de votre site de documentation.
-sidebar:
-  badge: Nouveau
 ---
 
 L'interface utilisateur et les options de configuration par défaut de Starlight sont conçues pour être flexibles et fonctionner pour une variété de contenus. Une grande partie de l'apparence par défaut de Starlight peut être personnalisée grâce au [CSS](/fr/guides/css-and-tailwind/) et aux [options de configuration](/fr/guides/customization/).

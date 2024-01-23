@@ -1,13 +1,18 @@
 ---
+import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 
-import {
-	LanguageSelect,
-	Search,
-	SiteTitle,
-	SocialIcons,
-	ThemeSelect,
-} from 'virtual:starlight/components';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+/**
+ * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
+ */
+const shouldRenderSearch =
+	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <div class="header sl-flex">
@@ -15,7 +20,7 @@ import {
 		<SiteTitle {...Astro.props} />
 	</div>
 	<div class="sl-flex">
-		<Search {...Astro.props} />
+		{shouldRenderSearch && <Search {...Astro.props} />}
 	</div>
 	<div class="sl-hidden md:sl-flex right-group">
 		<div class="sl-flex social-icons">

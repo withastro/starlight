@@ -5,8 +5,9 @@ description: Starlightがデフォルトでサポートするフロントマタ�
 
 Starlightでは、フロントマターに値を設定することで、MarkdownとMDXのページを個別にカスタマイズできます。たとえば通常のページでは、`title`と`description`フィールドを設定します。
 
-```md
+```md {3-4}
 ---
+# src/content/docs/example.md
 title: このプロジェクトについて
 description: 私が取り組んでいるプロジェクトについてもっと知る。
 ---
@@ -28,6 +29,12 @@ description: 私が取り組んでいるプロジェクトについてもっと�
 
 ページに関する説明文はページのメタデータとして使用され、また検索エンジンやソーシャルメディアのプレビューでも使用されます。
 
+### `slug`
+
+**type**: `string`
+
+ページのスラグを上書きします。詳しくは、Astroドキュメントの[「カスタムスラグの定義」](https://docs.astro.build/ja/guides/content-collections/#カスタムスラグの定義)を参照してください。
+
 ### `editUrl`
 
 **type:** `string | boolean`
@@ -42,6 +49,7 @@ description: 私が取り組んでいるプロジェクトについてもっと�
 
 ```md
 ---
+# src/content/docs/example.md
 title: 私たちについて
 head:
   # カスタム<title>タグを使う
@@ -58,6 +66,7 @@ head:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 目次にH2のみを表示するページ
 tableOfContents:
   minHeadingLevel: 2
@@ -67,6 +76,7 @@ tableOfContents:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 目次のないページ
 tableOfContents: false
 ---
@@ -89,6 +99,7 @@ tableOfContents: false
 
 ```md
 ---
+# src/content/docs/example.md
 title: 私のホームページ
 template: splash
 hero:
@@ -108,20 +119,45 @@ hero:
 ---
 ```
 
+ライトモードとダークモードで、異なるバージョンのヒーロー画像を表示できます。
+
+```md
+---
+# src/content/docs/example.md
+hero:
+  image:
+    alt: キラリと光る、鮮やかなロゴ
+    dark: ../../assets/logo-dark.png
+    light: ../../assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // リポジトリ内の画像への相対パス。
-    file?: string;
-    // 画像のスロットに使用する生のHTML。
-    // カスタムの`<img>`タグやインラインの`<svg>`などが使えます。
-    html?: string;
-  };
+  image?:
+    | {
+        // リポジトリ内の画像への相対パス。
+        file: string;
+        // この画像を支援技術からアクセス可能にするための代替テキスト。
+        alt?: string;
+      }
+    | {
+        // ダークモードで使用する、リポジトリ内の画像への相対パス。
+        dark: string;
+        // ライトモードで使用する、リポジトリ内の画像への相対パス。
+        light: string;
+        // この画像を支援技術からアクセス可能にするための代替テキスト。
+        alt?: string;
+      }
+    | {
+        // 画像のスロットに使用する生のHTML。
+        // カスタムの`<img>`タグやインラインの`<svg>`などが使えます。
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
@@ -141,6 +177,7 @@ interface HeroConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: バナーを含むページ
 banner:
   content: |
@@ -157,6 +194,7 @@ banner:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 最終更新日をカスタマイズしたページ
 lastUpdated: 2022-08-09
 ---
@@ -170,6 +208,7 @@ lastUpdated: 2022-08-09
 
 ```md
 ---
+# src/content/docs/example.md
 # 前のページへのリンクを非表示にする
 prev: false
 ---
@@ -177,6 +216,7 @@ prev: false
 
 ```md
 ---
+# src/content/docs/example.md
 # 前のページへのリンクテキストを上書きする
 prev: チュートリアルを続ける
 ---
@@ -184,6 +224,7 @@ prev: チュートリアルを続ける
 
 ```md
 ---
+# src/content/docs/example.md
 # 前のページへのリンクとテキストを上書きする
 prev:
   link: /unrelated-page/
@@ -199,6 +240,7 @@ prev:
 
 ```md
 ---
+# src/content/docs/example.md
 # 次のページへのリンクを非表示にする
 next: false
 ---
@@ -213,6 +255,7 @@ next: false
 
 ```md
 ---
+# src/content/docs/example.md
 # このページを検索インデックスから外す
 pagefind: false
 ---
@@ -220,9 +263,21 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** `{ label?: string; order?: number; hidden?: boolean; badge?: string | BadgeConfig }`
+**type:** [`SidebarConfig`](#sidebarconfig)
 
 自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
+
+#### `SidebarConfig`
+
+```ts
+interface SidebarConfig {
+  label?: string;
+  order?: number;
+  hidden?: boolean;
+  badge?: string | BadgeConfig;
+  attrs?: Record<string, string | number | boolean | undefined>;
+}
+```
 
 #### `label`
 
@@ -233,6 +288,7 @@ pagefind: false
 
 ```md
 ---
+# src/content/docs/example.md
 title: このプロジェクトについて
 sidebar:
   label: 概要
@@ -247,6 +303,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 最初に表示するページ
 sidebar:
   order: 1
@@ -262,6 +319,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 自動生成されるサイドバーで非表示にするページ
 sidebar:
   hidden: true
@@ -276,6 +334,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: バッジを含むページ
 sidebar:
   # サイトのアクセントカラーに合わせたデフォルトのバリアントを使用します
@@ -285,10 +344,95 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: バッジを含むページ
 sidebar:
   badge:
     text: 実験的
     variant: caution
 ---
+```
+
+#### `attrs`
+
+**type:** `Record<string, string | number | boolean | undefined>`
+
+自動生成されるリンクのグループ内に表示されるサイドバーのページリンクに追加するHTML属性。
+
+```md
+---
+# src/content/docs/example.md
+title: 新しいタブで開くページ
+sidebar:
+  # 新しいタブでページを開きます
+  attrs:
+    target: _blank
+---
+```
+
+## フロントマタースキーマをカスタマイズする
+
+Starlightの`docs`コンテンツコレクションのフロントマタースキーマは、`docsSchema()`ヘルパーを使用して`src/content/config.ts`で設定されています。
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
+
+`docsSchema()`は以下のオプションを受け取ります。
+
+### `extend`
+
+**type:** ZodスキーマまたはZodスキーマを返す関数  
+**default:** `z.object({})`
+
+`docsSchema()`のオプションで`extend`を設定すると、Starlightのスキーマを追加のフィールドで拡張できます。値は[Zodスキーマ](https://docs.astro.build/ja/guides/content-collections/#zodによるデータ型の定義)である必要があります。
+
+次の例では、`description`を必須にするために厳し目の型を指定し、さらにオプションの`category`フィールドを新規追加しています。
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // 組み込みのフィールドをオプションから必須に変更します。
+        description: z.string(),
+        // 新しいフィールドをスキーマに追加します。
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+[Astroの`image()`ヘルパー](https://docs.astro.build/ja/guides/images/#コンテンツコレクションと画像)を利用するには、拡張したスキーマを返す関数を使用します。
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // ローカルの画像へと解決されるフィールドを追加します。
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```

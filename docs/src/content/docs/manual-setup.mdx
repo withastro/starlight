@@ -5,7 +5,7 @@ description: Learn how to configure Starlight manually to add it to an existing 
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-The quickest way to create a new Starlight site is using `create astro` as shown in the [Getting Started guide](/getting-started/#creating-a-new-project).
+The quickest way to create a new Starlight site is using `create astro` as shown in the [Getting Started guide](/getting-started/#create-a-new-project).
 If you want to add Starlight to an existing Astro project, this guide will explain how.
 
 ## Set up Starlight
@@ -44,7 +44,7 @@ The Starlight integration is configured in your `astro.config.mjs` file.
 
 Add a `title` to get started:
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -106,7 +106,7 @@ To add all Starlight pages at a subpath, place all your docs content inside a su
 
 For example, if Starlight pages should all start with `/guides/`, add your content in the `src/content/docs/guides/` directory:
 
-import FileTree from '../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

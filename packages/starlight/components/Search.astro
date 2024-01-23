@@ -1,14 +1,16 @@
 ---
 import '@pagefind/default-ui/css/ui.css';
-import { useTranslations } from '../utils/translations';
 import Icon from '../user-components/Icon.astro';
 import type { Props } from '../props';
 
-const t = useTranslations(Astro.props.locale);
+const { labels } = Astro.props;
+
 const pagefindTranslations = {
-	placeholder: t('search.label'),
+	placeholder: labels['search.label'],
 	...Object.fromEntries(
-		Object.entries(t.pick('pagefind.')).map(([key, value]) => [key.replace('pagefind.', ''), value])
+		Object.entries(labels)
+			.filter(([key]) => key.startsWith('pagefind.'))
+			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
 };
 ---
@@ -18,23 +20,27 @@ const pagefindTranslations = {
 		{
 			/* The span is `aria-hidden` because it is not shown on small screens. Instead, the icon label is used for accessibility purposes. */
 		}
-		<Icon name="magnifier" label={t('search.label')} />
-		<span class="sl-hidden md:sl-block" aria-hidden="true">{t('search.label')}</span>
-		<Icon name="forward-slash" class="sl-hidden md:sl-block" label={t('search.shortcutLabel')} />
+		<Icon name="magnifier" label={labels['search.label']} />
+		<span class="sl-hidden md:sl-block" aria-hidden="true">{labels['search.label']}</span>
+		<Icon
+			name="forward-slash"
+			class="sl-hidden md:sl-block"
+			label={labels['search.shortcutLabel']}
+		/>
 	</button>
 
-	<dialog style="padding:0" aria-label={t('search.label')}>
+	<dialog style="padding:0" aria-label={labels['search.label']}>
 		<div class="dialog-frame sl-flex">
 			{
 				/* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */
 			}
 			<button data-close-modal class="sl-flex md:sl-hidden">
-				{t('search.cancelLabel')}
+				{labels['search.cancelLabel']}
 			</button>
 			{
 				import.meta.env.DEV ? (
 					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
-						<p>{t('search.devWarning')}</p>
+						<p>{labels['search.devWarning']}</p>
 					</div>
 				) : (
 					<div class="search-container">
@@ -89,8 +95,9 @@ const pagefindTranslations = {
 			// Listen for `/` and `cmd + k` keyboard shortcuts.
 			window.addEventListener('keydown', (e) => {
 				const isInput =
-					document.activeElement &&
-					['input', 'select', 'textarea'].includes(document.activeElement.tagName.toLowerCase());
+					document.activeElement instanceof HTMLElement &&
+					(['input', 'select', 'textarea'].includes(document.activeElement.tagName.toLowerCase()) ||
+						document.activeElement.isContentEditable);
 				if (e.metaKey === true && e.key === 'k') {
 					dialog.open ? closeModal() : openModal();
 					e.preventDefault();

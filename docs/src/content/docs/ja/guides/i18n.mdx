@@ -3,7 +3,7 @@ title: 国際化（i18n）
 description: 複数言語をサポートするためにStarlightサイトを設定する方法について学びます。
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlightは、ルーティング、フォールバックコンテンツ、右横書き（right-to-left、RTL）言語へのフルサポートなど、複数言語サイトを構築するための機能を組み込みで提供します。
 
@@ -11,7 +11,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 1. [`locales`](/ja/reference/configuration/#locales)と[`defaultLocale`](/ja/reference/configuration/#defaultlocale)をStarlightインテグレーションに渡すことで、サポートする言語についてStarlightに伝えます。
 
-   ```js
+   ```js {9-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -68,7 +68,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 ルートロケールを設定するには、`locales`の`root`キーを使用します。ルートロケールがコンテンツのデフォルトロケールでもある場合は、`defaultLocale`を削除するか、`'root'`に設定します。
 
-```js
+```js {9,11-14}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -110,10 +110,11 @@ export default defineConfig({
 
 デフォルトでは、Starlightは単一言語（英語）のサイトです。他の言語で単一言語のサイトを作成するには、その言語を`locales`において`root`に設定します。
 
-```js
+```diff lang="js" {10-13}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
 export default defineConfig({
 	integrations: [
 		starlight({
@@ -139,22 +140,25 @@ Starlightは、すべての言語で同等のページが作成されること�
 
 ## StarlightのUIを翻訳する
 
+import LanguagesList from '~/components/languages-list.astro';
+
 Starlightでは、読者が選択した言語でサイト全体を体験できるように、翻訳されたコンテンツファイルをホストするだけでなく、デフォルトUIの文字列（たとえば目次に表示されている「目次」という見出し）も翻訳できるようになっています。
 
-英語、チェコ語、フランス語、ドイツ語、イタリア語、日本語、ポルトガル語、オランダ語、デンマーク語、スペイン語、トルコ語、アラビア語、ノルウェー語、ペルシア語、ヘブライ語、簡体字中国語、韓国語、インドネシア語、ロシア語、スウェーデン語の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
+{/* prettier-ignore */}
+<LanguagesList startsSentence />の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
 
 `18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
 
 1. 設定がまだであれば、`src/content/config.ts`で`i18n`データコレクションを設定します。
 
-   ```js
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
    	docs: defineCollection({ schema: docsSchema() }),
-   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
@@ -193,8 +197,23 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous"
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
+   }
+   ```
+
+   Starlightのコードブロックは、[Expressive Code](https://github.com/expressive-code/expressive-code)ライブラリによって動作しています。`expressiveCode`キーを使用して、同じJSONファイルでUI文字列の翻訳について設定できます。
+
+   ```json
+   {
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
    }
    ```
 
@@ -214,3 +233,27 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+### 翻訳スキーマを拡張する
+
+`i18nSchema()`オプションの`extend`を設定することで、サイトの翻訳辞書にカスタムキーを追加できます。以下の例では、オプションの`custom.label`キーが新たにデフォルトのキーに追加されています。
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。

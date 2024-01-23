@@ -3,8 +3,8 @@ title: Navigasi Sidebar
 description: Pelajari cara mengatur dan menyesuaikan tautan navigasi sidebar website Starlight Anda.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import FileTree from '~/components/file-tree.astro';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 Sidebar yang terorganisir dengan baik adalah kunci untuk dokumentasi yang baik karena ini adalah salah satu cara utama pengguna akan menjelajahi website Anda. Starlight menyediakan rangkaian opsi lengkap untuk menyesuaikan tata letak dan konten sidebar Anda.
 
@@ -234,7 +234,7 @@ Konfigurasi frontmatter `sidebar` hanya digunakan untuk tautan yang dihasilkan s
 
 ## Badges
 
-Tautan juga dapat menyertakan properti `badge` untuk menampilkan badge di sebelah label tautan.
+Tautan, grup, dan grup yang dibuat secara otomatis juga dapat menyertakan properti `badge` untuk menampilkan _badge_ di samping labelnya.
 
 ```js
 starlight({
@@ -242,13 +242,19 @@ starlight({
 		{
 			label: 'Panduan',
 			items: [
-				// Tautan dengan badge "Baru"
+				// Tautan dengan badge "Baru".
 				{
 					label: 'Komponen',
 					link: '/guides/components/',
 					badge: 'Baru',
 				},
 			],
+		},
+		// Grup yang dibuat secara otomatis dengan badge "Ditinggalkan"
+		{
+			label: 'Referensi',
+			badge: 'Ditinggalkan',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -265,6 +271,24 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 					label: 'Komponen',
 					link: '/id/guides/components/',
 					badge: { text: 'Baru', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'Referensi',
+			badge: { text: 'Ditinggalkan', variant: 'default' },
+			items: [
+				{
+					label: 'Referensi Konfigurasi',
+					link: '/id/reference/configuration/',
+				},
+				{
+					label: 'Referensi Frontmatter',
+					link: '/id/reference/frontmatter/',
+				},
+				{
+					label: 'Referensi Overrides',
+					link: '/id/reference/overrides/',
 				},
 			],
 		},

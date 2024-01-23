@@ -183,10 +183,10 @@ sidebar: [
 type SidebarItem = {
 	label: string;
 	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
 	| {
 			link: string;
-			badge?: string | BadgeConfig;
 			attrs?: Record<string, string | number | boolean | undefined>;
 	  }
 	| { items: SidebarItem[]; collapsed?: boolean }
@@ -308,7 +308,7 @@ Bahasa default akan digunakan untuk memberikan konten cadangan ketika terjemahan
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **type:** <SocialLinksType />
 
@@ -386,7 +386,7 @@ interface HeadConfig {
 
 Atur apakah footer menampilkan kapan halaman terakhir diperbarui.
 
-Secara default, fitur ini mengandalkan histori Git repositori Anda dan mungkin tidak akurat pada beberapa deployment platform yang melakukan [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Halaman dapat mengesampingkan pengaturan ini atau tanggal Git-based menggunakan kolom [`lastUpdated` pada frontmatter](/id/referensi/frontmatter/#lastupdated).
+Secara default, fitur ini mengandalkan histori Git repositori Anda dan mungkin tidak akurat pada beberapa deployment platform yang melakukan [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Halaman dapat mengesampingkan pengaturan ini atau tanggal Git-based menggunakan kolom [`lastUpdated` pada frontmatter](/id/reference/frontmatter/#lastupdated).
 
 ### `pagination`
 
@@ -395,7 +395,7 @@ Secara default, fitur ini mengandalkan histori Git repositori Anda dan mungkin t
 
 Tentukan apakah footer harus menampilkan tautan ke halaman sebelumnya dan halaman berikutnya.
 
-Halaman dapat mengesampingkan pengaturan ini atau teks tautan dan/atau URL menggunakan kolom [`prev`](/id/referensi/frontmatter/#prev) dan [`next`](/id/referensi/frontmatter/#next) pada frontmatter.
+Halaman dapat mengesampingkan pengaturan ini atau teks tautan dan/atau URL menggunakan kolom [`prev`](/id/reference/frontmatter/#prev) dan [`next`](/id/reference/frontmatter/#next) pada frontmatter.
 
 ### `favicon`
 

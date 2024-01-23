@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { ComponentConfigSchema } from '../schemas/components';
+import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
@@ -182,6 +183,19 @@ const UserConfigSchema = z.object({
 
 	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
 	favicon: FaviconSchema(),
+
+	/**
+	 * Define how code blocks are rendered by passing options to Expressive Code,
+	 * or disable the integration by passing `false`.
+	 */
+	expressiveCode: ExpressiveCodeSchema(),
+
+	/**
+	 * Define whether Starlight’s default site search provider Pagefind is enabled.
+	 * Set to `false` to disable indexing your site with Pagefind.
+	 * This will also hide the default search UI if in use.
+	 */
+	pagefind: z.boolean().default(true),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),

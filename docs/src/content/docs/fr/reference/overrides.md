@@ -18,6 +18,7 @@ Pour typer vos composants personnalisés, importez le type `Props` depuis Starli
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -134,6 +135,12 @@ Un objet JavaScript de type `Date` représentant la date de dernière mise à jo
 
 Un objet `URL` de l'adresse où cette page peut être modifiée si cette fonctionnalité est activée.
 
+#### `labels`
+
+**Type :** `Record<string, string>`
+
+Un objet contenant les chaînes de l’interface utilisateur localisées pour la page courante. Consultez le guide [« Traduire l’interface utilisateur de Starlight »](/fr/guides/i18n/#traduire-linterface-utilisateur-de-starlight) pour obtenir une liste de toutes les clés disponibles.
+
 ---
 
 ## Composants
@@ -226,6 +233,10 @@ L'implémentation par défaut inclut la logique pour afficher les logos définis
 
 Composant utilisé pour afficher l'interface de recherche de Starlight.
 L'implémentation par défaut inclut le bouton dans l'en-tête et le code pour afficher une fenêtre modale de recherche lorsqu'il est cliqué et charger [l'interface utilisateur de Pagefind](https://pagefind.app/).
+
+Lorsque [`pagefind`](/fr/reference/configuration/#pagefind) est désactivé, le composant de recherche par défaut ne sera pas affiché.
+Cependant, si vous redéfinissez `Search`, votre composant personnalisé sera toujours affiché même si l'option de configuration `pagefind` est `false`.
+Cela vous permet d'ajouter une interface de recherche alternative lorsque vous désactivez Pagefind.
 
 #### `SocialIcons`
 
@@ -341,6 +352,8 @@ L'implémentation par défaut affiche un large titre, une accroche et des liens 
 
 Composant affiché autour du contenu principal de chaque page.
 L'implémentation par défaut définit les styles de base à appliquer au contenu Markdown.
+
+Les styles de contenu Markdown sont également exposés dans `@astrojs/starlight/style/markdown.css` avec une portée limitée à la classe CSS `.sl-markdown-content`.
 
 ---
 

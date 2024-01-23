@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLinksValidator from 'starlight-links-validator';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -14,12 +15,22 @@ export const locales = {
 	ko: { label: '한국어', lang: 'ko' },
 	tr: { label: 'Türkçe', lang: 'tr' },
 	ru: { label: 'Русский', lang: 'ru' },
+	hi: { label: 'हिंदी', lang: 'hi' },
+	da: { label: 'Dansk', lang: 'da' },
+	uk: { label: 'Українська', lang: 'uk' },
 };
 
-const site = 'https://starlight.astro.build/';
+/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
+const VERCEL_PREVIEW_SITE =
+	process.env.VERCEL_ENV !== 'production' &&
+	process.env.VERCEL_URL &&
+	`https://${process.env.VERCEL_URL}`;
+
+const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
 
 export default defineConfig({
 	site,
+	trailingSlash: 'always',
 	integrations: [
 		starlight({
 			title: 'Starlight',
@@ -70,6 +81,8 @@ export default defineConfig({
 						ko: '여기서부터',
 						tr: 'Buradan Başlayın',
 						ru: 'Начать отсюда',
+						hi: 'यहाँ से शुरू करे',
+						uk: 'Почніть звідси',
 					},
 					items: [
 						{
@@ -87,6 +100,8 @@ export default defineConfig({
 								ko: '시작하기',
 								tr: 'Başlarken',
 								ru: 'Введение',
+								hi: 'पहले कदम',
+								uk: 'Вступ',
 							},
 						},
 						{
@@ -104,6 +119,8 @@ export default defineConfig({
 								ko: '수동으로 설정하기',
 								tr: 'Elle Kurulum',
 								ru: 'Установка вручную',
+								hi: 'मैनुअल सेटअप',
+								uk: 'Ручне встановлення',
 							},
 						},
 						{
@@ -121,21 +138,8 @@ export default defineConfig({
 								ko: '환경적 영향',
 								tr: 'Çevre Etkisi',
 								ru: 'Влияние на окружающую среду',
-							},
-						},
-						{
-							label: 'Showcase',
-							link: 'showcase',
-							translations: {
-								de: 'Schaufenster',
-								// es: '',
-								ja: 'ショーケース',
-								fr: 'Vitrine',
-								// it: '',
-								id: 'Galeri',
-								ko: '쇼케이스',
-								tr: 'Vitrin',
-								ru: 'Примеры',
+								hi: 'पर्यावरणीय प्रभाव',
+								uk: 'Вплив на довкілля',
 							},
 						},
 					],
@@ -154,6 +158,8 @@ export default defineConfig({
 						ko: '가이드',
 						tr: 'Rehber',
 						ru: 'Руководства',
+						hi: 'गाइड',
+						uk: 'Ґайди',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -171,11 +177,26 @@ export default defineConfig({
 						ko: '참조',
 						tr: 'Referanslar',
 						ru: 'Справочник',
+						hi: 'संदर्भ',
+						uk: 'Довідник',
 					},
 					autogenerate: { directory: 'reference' },
 				},
+				{
+					label: 'Resources',
+					badge: 'New',
+					translations: {},
+					autogenerate: { directory: 'resources' },
+				},
 			],
-			lastUpdated: true,
+			plugins: process.env.CHECK_LINKS
+				? [
+						starlightLinksValidator({
+							errorOnFallbackPages: false,
+							errorOnInconsistentLocale: true,
+						}),
+				  ]
+				: [],
 		}),
 	],
 });

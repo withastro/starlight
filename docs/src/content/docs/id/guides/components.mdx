@@ -83,7 +83,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 Anda dapat menampilkan konten di dalam kotak yang sesuai dengan _style_ Starlight menggunakan komponen `<Card>`.
 Bungkus beberapa _card_ dalam komponen `<CardGrid>` untuk menampilkan _card-card_ secara berdampingan ketika ada cukup ruang.
 
-`<Card>` memerlukan `title` dan secara opsional dapat ditambahkan atribut `icon` yang di-set dengan [nama salah satu icon bawaan Starlight](#all-icons).
+`<Card>` memerlukan `title` dan secara opsional dapat ditambahkan atribut `icon` yang di-set dengan [nama salah satu icon bawaan Starlight](#semua-icon).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -166,11 +166,11 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight menyediakan sejumlah icon umum yang dapat Anda tampilkan dalam konten Anda menggunakan komponen `<Icon>`.
 
-Setiap `<Icon>` membutuhkan atribut [`name`](#all-icons) dan dapat secara opsional menyertakan atribut `label`, `size`, dan `color`.
+Setiap `<Icon>` membutuhkan atribut [`name`](#semua-icon) dan dapat secara opsional menyertakan atribut `label`, `size`, dan `color`.
 
 ```mdx
 import { Icon } from '@astrojs/starlight/components';

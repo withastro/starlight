@@ -18,6 +18,7 @@ Para tipar seus componentes personalizados, importe o tipo `Props` do Starlight:
 
 ```astro
 ---
+// src/components/Customizado.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -120,7 +121,7 @@ Sumário da página, se ativado.
 **Tipos:** `{ depth: number; slug: string; text: string }[]`
 
 Arranjo de todos os títulos Markdown extraídos da página atual.
-Utilize [`toc`](#toc) ao invés se você deseja construir um sumário que respeita as configurações do Starlight.
+Utilize [`toc`](#toc) em vez disso se você deseja construir um componente de sumário que respeita as configurações do Starlight.
 
 #### `lastUpdated`
 
@@ -133,6 +134,12 @@ Objeto `Date` JavaScript que representa quando a página foi atualizada pela úl
 **Tipos:** `URL | undefined`
 
 Objeto `URL` para o endereço onde a página poderá ser editada, se ativado.
+
+#### `labels`
+
+**Tipos:** `Record<string, string>`
+
+Um objeto contendo as strings da UI localizados para a página atual. Veja o guia [“Traduza a UI do Starlight”](/pt-br/guides/i18n/#traduza-a-ui-do-starlight) para uma lista de todas as chaves disponíveis.
 
 ---
 
@@ -226,6 +233,10 @@ A implementação padrão inclui a lógica para renderizar os logos definidos na
 
 Componente utilizado para renderizar a interface de busca.
 A implementação padrão inclui o botão no cabeçalho e o código para exibir o modal de busca quando for clicado e carregar a [interface do Pagefind](https://pagefind.app/).
+
+Quando [`pagefind`](/pt-br/reference/configuration/#pagefind) está desabilitado, o componente de busca padrão não será renderizado.
+No entanto, se você substituir `Search`, seu componente customizado sempre será renderizado mesmo que a opção `pagefind` em sua configuração seja `false`.
+Isso lhe permite adicionar UI para provedores de busca alternativos ao desabilitar o Pagefind.
 
 #### `SocialIcons`
 
@@ -341,6 +352,8 @@ A implementação padrão exibe um título grande, tagline, links de chamada de 
 
 Componente renderizado ao redor do conteúdo principal de cada página.
 A implementação padrão adiciona estilos para o conteúdo Markdown.
+
+O estilo dos conteúdos Markdown também é disponibilizado em `@astrojs/starlight/style/markdown.css` e limitados ao o escopo da classe de CSS `.sl-markdown-content`.
 
 ---
 

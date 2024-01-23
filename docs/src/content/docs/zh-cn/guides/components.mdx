@@ -16,12 +16,12 @@ Starlight 支持在 [MDX](https://mdxjs.com/) 文件中使用组件，并提供�
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/example.mdx
 title: 欢迎来到我的文档
 ---
 
-import SomeComponent from '../../../components/SomeComponent.astro';
-import AnotherComponent from '../../../components/AnotherComponent.astro';
+import SomeComponent from '~/components/SomeComponent.astro';
+import AnotherComponent from '~/components/AnotherComponent.astro';
 
 <SomeComponent prop="something" />
 
@@ -37,7 +37,7 @@ Starlight 为你的 Markdown 内容应用了默认样式，例如在元素之间
 
 如果这些样式与你的组件的外观冲突，请在组件上设置 `not-content` 类来禁用它们。
 
-```astro
+```astro 'class="not-content"'
 ---
 // src/components/Example.astro
 ---
@@ -60,6 +60,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 每个 `<TabItem>` 必须有一个 `label` 来显示给用户。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -85,6 +87,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 `<Card>` 需要一个 `title`，并且可以选择包含一个 `icon` 属性，该属性设置为 [Starlight 内置图标](#所有图标) 之一的名称。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="看看这个">你想要突出显示的有趣内容。</Card>
@@ -133,6 +137,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 当有足够的空间时，将多个 `<LinkCard>` 组件组合在 `<CardGrid>` 中，以便并排显示卡片。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -165,13 +171,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### 图标
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你的内容中显示。
 
 每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择包含 `label`、`size` 和 `color` 属性。
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
