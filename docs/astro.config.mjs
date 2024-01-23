@@ -143,23 +143,6 @@ export default defineConfig({
 								uk: 'Вплив на довкілля',
 							},
 						},
-						{
-							label: 'Showcase',
-							link: 'showcase',
-							translations: {
-								de: 'Schaufenster',
-								// es: '',
-								ja: 'ショーケース',
-								fr: 'Vitrine',
-								// it: '',
-								id: 'Galeri',
-								ko: '쇼케이스',
-								tr: 'Vitrin',
-								ru: 'Примеры',
-								hi: 'प्रदर्शन',
-								uk: 'Вітрина',
-							},
-						},
 					],
 				},
 				{
@@ -199,6 +182,12 @@ export default defineConfig({
 						uk: 'Довідник',
 					},
 					autogenerate: { directory: 'reference' },
+				},
+				{
+					label: 'Resources',
+					badge: 'New',
+					translations: {},
+					autogenerate: { directory: 'resources' },
 				},
 			],
 			plugins: process.env.CHECK_LINKS

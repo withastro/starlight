@@ -9,7 +9,7 @@ Starlight 插件可以自定义 Starlight 的配置、UI 和行为，同时也�
 本参考页面记录了插件可以使用的 API。
 
 在 [配置参考](/zh-cn/reference/configuration/#plugins) 中了解更多关于使用 Starlight 插件的内容。
-或者访问 [插件 showcase](/zh-cn/showcase/#插件) 来查看可用插件的列表。
+或者访问 [插件 showcase](/zh-cn/resources/plugins/) 来查看可用插件的列表。
 
 ## 快速 API 参照
 
