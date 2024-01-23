@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { generateVirtualRouteData, type VirtualPageProps } from '../../utils/route-data';
+import { generateVirtualRouteData, type VirtualPageProps } from '../../utils/virtual-page';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({

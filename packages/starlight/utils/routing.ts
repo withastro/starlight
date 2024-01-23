@@ -9,7 +9,6 @@ import {
 	slugToParam,
 } from './slugs';
 import { validateLogoImports } from './validateLogoImports';
-import type { StarlightVirtualFrontmatter } from '../schema';
 
 // Validate any user-provided logos imported correctly.
 // We do this here so all pages trigger it and at the top level so it runs just once.
@@ -19,43 +18,19 @@ export type StarlightDocsEntry = Omit<CollectionEntry<'docs'>, 'slug'> & {
 	slug: string;
 };
 
-// A docs entry used for virtual pages meant to be rendered by plugins and which is safe to cast
-// to a`StarlightDocsEntry`.
-// A virtual docs entry cannot be rendered like a content collection entry.
-export type VirtualDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
-	/**
-	 * The unique ID for this virtual page which cannot be inferred from codegen like content
-	 * collection entries.
-	 */
-	id: string;
-};
-
-interface BaseRoute {
-	/** The slug, a.k.a. permalink, for this page. */
-	slug: string;
-}
-
-export interface Route extends BaseRoute, LocaleData {
+export interface Route extends LocaleData {
 	/** Content collection entry for the current page. Includes frontmatter at `data`. */
 	entry: StarlightDocsEntry;
 	/** Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content. */
 	entryMeta: LocaleData;
+	/** The slug, a.k.a. permalink, for this page. */
+	slug: string;
 	/** The unique ID for this page. */
 	id: string;
 	/** True if this page is untranslated in the current language and using fallback content from the default locale. */
 	isFallback?: true;
 	[key: string]: unknown;
 }
-
-/**
- * The definition of a virtual route containing for convenience at the top level the frontmatter
- * data of the virtual page.
- */
-export type VirtualRoute = BaseRoute & {
-	/** Defines if this page is untranslated in the current language and using fallback content from the default locale. */
-	isFallback?: boolean;
-} & Partial<Omit<LocaleData, 'locale'>> &
-	StarlightVirtualFrontmatter;
 
 interface Path extends GetStaticPathsItem {
 	params: { slug: string | undefined };
