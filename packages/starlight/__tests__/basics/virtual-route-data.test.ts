@@ -12,7 +12,7 @@ vi.mock('astro:content', async () =>
 
 const virtualPageProps: VirtualPageProps = {
 	slug: 'test-slug',
-	title: 'This is a test title',
+	frontmatter: { title: 'This is a test title' },
 };
 
 test('adds data to route shape', () => {
@@ -36,7 +36,7 @@ test('adds data to route shape', () => {
 	expect(data.entry.data.pagefind).toBe(true);
 	expect(data.entry.data.template).toBe('doc');
 	// Virtual pages respect the passed data.
-	expect(data.entry.data.title).toBe(virtualPageProps.title);
+	expect(data.entry.data.title).toBe(virtualPageProps.frontmatter.title);
 	// Virtual pages get expected defaults.
 	expect(data.hasSidebar).toBe(true);
 	expect(data.headings).toEqual([]);
@@ -60,10 +60,13 @@ test('adds custom data to route shape', () => {
 test('adds custom virtual frontmatter data to route shape', () => {
 	const props: VirtualPageProps = {
 		...virtualPageProps,
-		head: [{ tag: 'meta', attrs: { name: 'og:test', content: 'test' } }],
-		lastUpdated: new Date(),
-		pagefind: false,
-		template: 'splash',
+		frontmatter: {
+			...virtualPageProps.frontmatter,
+			head: [{ tag: 'meta', attrs: { name: 'og:test', content: 'test' } }],
+			lastUpdated: new Date(),
+			pagefind: false,
+			template: 'splash',
+		},
 	};
 	const data = generateVirtualRouteData({ props, url: new URL('https://example.com') });
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
@@ -78,9 +81,9 @@ test('adds custom virtual frontmatter data to route shape', () => {
 		  },
 		]
 	`);
-	expect(data.entry.data.lastUpdated).toEqual(props.lastUpdated);
-	expect(data.entry.data.pagefind).toBe(props.pagefind);
-	expect(data.entry.data.template).toBe(props.template);
+	expect(data.entry.data.lastUpdated).toEqual(props.frontmatter.lastUpdated);
+	expect(data.entry.data.pagefind).toBe(props.frontmatter.pagefind);
+	expect(data.entry.data.template).toBe(props.frontmatter.template);
 });
 
 test('uses generated sidebar when no sidebar is provided', () => {
@@ -133,13 +136,16 @@ test('uses provided pagination if any', () => {
 	const data = generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
-			prev: {
-				label: 'Previous link',
-				link: '/test/prev',
-			},
-			next: {
-				label: 'Next link',
-				link: '/test/next',
+			frontmatter: {
+				...virtualPageProps.frontmatter,
+				prev: {
+					label: 'Previous link',
+					link: '/test/prev',
+				},
+				next: {
+					label: 'Next link',
+					link: '/test/next',
+				},
 			},
 		},
 		url: new URL('https://example.com'),
@@ -230,9 +236,12 @@ test('respects the `tableOfContents` level configuration', () => {
 				{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 				{ depth: 4, slug: 'heading-3', text: 'Heading 3' },
 			],
-			tableOfContents: {
-				minHeadingLevel: 3,
-				maxHeadingLevel: 4,
+			frontmatter: {
+				...virtualPageProps.frontmatter,
+				tableOfContents: {
+					minHeadingLevel: 3,
+					maxHeadingLevel: 4,
+				},
 			},
 		},
 		url: new URL('https://example.com'),
@@ -275,7 +284,10 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 				{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 				{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 			],
-			tableOfContents: false,
+			frontmatter: {
+				...virtualPageProps.frontmatter,
+				tableOfContents: false,
+			},
 		},
 		url: new URL('https://example.com'),
 	});
@@ -290,7 +302,10 @@ test('disables table of contents for splash template', () => {
 				{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 				{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 			],
-			template: 'splash',
+			frontmatter: {
+				...virtualPageProps.frontmatter,
+				template: 'splash',
+			},
 		},
 		url: new URL('https://example.com'),
 	});
@@ -302,7 +317,10 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 	const data = generateVirtualRouteData({
 		props: {
 			...otherProps,
-			template: 'splash',
+			frontmatter: {
+				...otherProps.frontmatter,
+				template: 'splash',
+			},
 		},
 		url: new URL('https://example.com'),
 	});
@@ -318,10 +336,16 @@ test('includes localized labels', () => {
 	expect(data.labels['skipLink.label']).toBe('Skip to content');
 });
 
-test.only('uses provided edit URL if any', () => {
+test('uses provided edit URL if any', () => {
 	const editUrl = 'https://example.com/edit';
 	const data = generateVirtualRouteData({
-		props: { ...virtualPageProps, editUrl },
+		props: {
+			...virtualPageProps,
+			frontmatter: {
+				...virtualPageProps.frontmatter,
+				editUrl,
+			},
+		},
 		url: new URL('https://example.com'),
 	});
 	expect(data.editUrl).toEqual(new URL(editUrl));

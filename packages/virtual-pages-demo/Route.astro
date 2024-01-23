@@ -44,22 +44,24 @@ function getVirtualPageProps(): VirtualPageProps {
 
 	if (isThingD) {
 		// Page with minimal set of props.
-		return { slug, title };
+		return { slug, frontmatter: { title } };
 	} else if (isThingE) {
 		// Page with the `splash` template, a hero including an image, an edit URL and a banner.
 		return {
-			banner: { content: 'This is a banner' },
-			editUrl: 'https://starlight.astro.build/',
-			hero: {
-				title: 'Hello',
-				tagline: 'This is a tagline',
-				image: {
-					alt: 'A star from a plugin',
-					file: heroStar,
-				},
-			},
 			slug,
-			title,
+			frontmatter: {
+				banner: { content: 'This is a banner' },
+				editUrl: 'https://starlight.astro.build/',
+				hero: {
+					title: 'Hello',
+					tagline: 'This is a tagline',
+					image: {
+						alt: 'A star from a plugin',
+						file: heroStar,
+					},
+				},
+				title,
+			},
 		};
 	}
 
@@ -69,8 +71,10 @@ function getVirtualPageProps(): VirtualPageProps {
 		hasSidebar: !isThingB,
 		lang: 'en',
 		slug,
-		tableOfContents: isThingC ? { maxHeadingLevel: 4, minHeadingLevel: 2 } : false,
-		title,
+		frontmatter: {
+			title,
+			tableOfContents: isThingC ? { maxHeadingLevel: 4, minHeadingLevel: 2 } : false,
+		},
 	};
 
 	if (isThingC) {

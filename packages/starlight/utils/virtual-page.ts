@@ -43,9 +43,10 @@ export type VirtualPageProps = Prettify<
 		// Add back the mandatory slug property.
 		Pick<PageProps, 'slug'> &
 		// Add the sidebar definitions for a virtual page.
-		Partial<Pick<StarlightRouteData, 'hasSidebar' | 'sidebar'>> &
-		// And finally add the virtual frontmatter properties.
-		StarlightVirtualFrontmatter
+		Partial<Pick<StarlightRouteData, 'hasSidebar' | 'sidebar'>> & {
+			// And finally add the virtual frontmatter properties in a `frontmatter` property.
+			frontmatter: StarlightVirtualFrontmatter;
+		}
 >;
 
 /**
@@ -68,8 +69,8 @@ export function generateVirtualRouteData({
 	props: VirtualPageProps;
 	url: URL;
 }): StarlightRouteData {
-	const { isFallback, lastUpdated, slug, ...routeProps } = props;
-	const virtualFrontmatter = getVirtualFrontmatter(props);
+	const { isFallback, frontmatter, slug, ...routeProps } = props;
+	const virtualFrontmatter = getVirtualFrontmatter(frontmatter);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar ?? getSidebar(url.pathname, localeData.locale);
@@ -93,17 +94,20 @@ export function generateVirtualRouteData({
 		lang: props.lang ?? localeData.lang,
 		locale: localeData.locale,
 	};
+	const editUrl = virtualFrontmatter.editUrl ? new URL(virtualFrontmatter.editUrl) : undefined;
+	const lastUpdated =
+		virtualFrontmatter.lastUpdated instanceof Date ? virtualFrontmatter.lastUpdated : undefined;
 	const routeData: StarlightRouteData = {
 		...routeProps,
 		...localeData,
 		id,
-		editUrl: routeProps.editUrl ? new URL(routeProps.editUrl) : undefined,
+		editUrl,
 		entry,
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
 		labels: useTranslations(localeData.locale).all(),
-		lastUpdated: lastUpdated instanceof Date ? lastUpdated : undefined,
+		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
 		slug,
@@ -124,8 +128,8 @@ export function generateVirtualRouteData({
 	return routeData;
 }
 
-/** Extract the virtual frontmatter properties from the props received by a virtual page. */
-function getVirtualFrontmatter(props: VirtualPageProps) {
+/** Validates the virtual frontmatter properties from the props received by a virtual page. */
+function getVirtualFrontmatter(frontmatter: StarlightVirtualFrontmatter) {
 	// This needs to be in sync with ImageMetadata.
 	// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
 	return StarlightVirtualFrontmatterSchema({
@@ -145,7 +149,7 @@ function getVirtualFrontmatter(props: VirtualPageProps) {
 					z.literal('avif'),
 				]),
 			}),
-	}).parse(props);
+	}).parse(frontmatter);
 }
 
 // https://stackoverflow.com/a/66252656/1945960
