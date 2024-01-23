@@ -19,7 +19,6 @@
     "@lunariajs/core": "^0.0.25",
     "@types/culori": "^2.0.0",
     "astro": "^4.2.1",
-    "astro-expressive-code": "^0.32.0",
     "culori": "^3.2.0",
     "sharp": "^0.32.5"
   },
