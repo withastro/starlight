@@ -221,7 +221,7 @@ Site navigation sidebar entries for this page or fallback to the global `sidebar
 ##### `hasSidebar`
 
 **type:** `boolean`  
-**default:** `false` if [`template`](#template) is `'splash'`, otherwise `true`
+**default:** `false` if [`template`](/reference/frontmatter/#template) is `'splash'`, otherwise `true`
 
 Whether or not the sidebar should be displayed on this page.
 
