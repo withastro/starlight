@@ -195,3 +195,31 @@ The code above generates the following on the page:
 A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
 
 <IconsList />
+
+### Code
+
+Starlight uses [Expressive Code](https://expressive-code.com/) to render code blocks with extended formatting possibilities. In addition to fenced code blocks in markdown & MDX documents, Expressive Code can display syntax-highlighted code snippets using its [`<Code>` component](https://expressive-code.com/key-features/code-component/).
+
+The `<Code>` component provides props like `code`, `lang` or `meta` that allow you to dynamically define a code block's contents. Using this component, you can render code blocks from variables or data coming from external sources like files, databases or APIs.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ["file", "CMS"];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+The code above generates the following on the page:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ["file", "CMS"];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />

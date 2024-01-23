@@ -2,8 +2,9 @@ import {
 	astroExpressiveCode,
 	type AstroExpressiveCodeOptions,
 	addClassName,
+	type CustomConfigPreprocessors,
 } from 'astro-expressive-code';
-import type { AstroConfig, AstroIntegration } from 'astro';
+import type { AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { pathToLocale } from '../shared/pathToLocale';
@@ -60,56 +61,55 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	useStarlightUiThemeColors?: boolean | undefined;
 };
 
-export const starlightExpressiveCode = ({
-	astroConfig,
+type StarlightEcIntegrationOptions = {
+	starlightConfig: StarlightConfig;
+	useTranslations?: ReturnType<typeof createTranslationSystemFromFs> | undefined;
+};
+
+export function getStarlightEcConfigPreprocessor({
 	starlightConfig,
 	useTranslations,
-}: {
-	astroConfig: Pick<AstroConfig, 'root' | 'srcDir'>;
-	starlightConfig: StarlightConfig;
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
-}): AstroIntegration[] => {
-	const { locales, expressiveCode } = starlightConfig;
-	if (expressiveCode === false) return [];
-	const config: StarlightExpressiveCodeOptions =
-		typeof expressiveCode === 'object' ? expressiveCode : {};
+}: StarlightEcIntegrationOptions): CustomConfigPreprocessors['preprocessAstroIntegrationConfig'] {
+	return (input): AstroExpressiveCodeOptions => {
+		const astroConfig = input.astroConfig;
+		const ecConfig = input.ecConfig as StarlightExpressiveCodeOptions;
+		const { locales } = starlightConfig;
 
-	const {
-		themes: themesInput,
-		customizeTheme,
-		styleOverrides: { textMarkers: textMarkersStyleOverrides, ...otherStyleOverrides } = {},
-		useStarlightDarkModeSwitch,
-		useStarlightUiThemeColors = config.themes === undefined,
-		plugins = [],
-		...rest
-	} = config;
+		const {
+			themes: themesInput,
+			customizeTheme,
+			styleOverrides: { textMarkers: textMarkersStyleOverrides, ...otherStyleOverrides } = {},
+			useStarlightDarkModeSwitch,
+			useStarlightUiThemeColors = ecConfig.themes === undefined,
+			plugins = [],
+			...rest
+		} = ecConfig;
 
-	// Handle the `themes` option
-	const themes = preprocessThemes(themesInput);
-	if (useStarlightUiThemeColors === true && themes.length < 2) {
-		console.warn(
-			`*** Warning: Using the config option "useStarlightUiThemeColors: true" ` +
-				`with a single theme is not recommended. For better color contrast, ` +
-				`please provide at least one dark and one light theme.\n`
-		);
-	}
+		// Handle the `themes` option
+		const themes = preprocessThemes(themesInput);
+		if (useStarlightUiThemeColors === true && themes.length < 2) {
+			console.warn(
+				`*** Warning: Using the config option "useStarlightUiThemeColors: true" ` +
+					`with a single theme is not recommended. For better color contrast, ` +
+					`please provide at least one dark and one light theme.\n`
+			);
+		}
 
-	// Add the `not-content` class to all rendered blocks to prevent them from being affected
-	// by Starlight's default content styles
-	plugins.push({
-		name: 'Starlight Plugin',
-		hooks: {
-			postprocessRenderedBlock: ({ renderData }) => {
-				addClassName(renderData.blockAst, 'not-content');
+		// Add the `not-content` class to all rendered blocks to prevent them from being affected
+		// by Starlight's default content styles
+		plugins.push({
+			name: 'Starlight Plugin',
+			hooks: {
+				postprocessRenderedBlock: ({ renderData }) => {
+					addClassName(renderData.blockAst, 'not-content');
+				},
 			},
-		},
-	});
+		});
 
-	// Add Expressive Code UI translations (if any) for all defined locales
-	addTranslations(locales, useTranslations);
+		// Add Expressive Code UI translations (if any) for all defined locales
+		if (useTranslations) addTranslations(locales, useTranslations);
 
-	return [
-		astroExpressiveCode({
+		return {
 			themes,
 			customizeTheme: (theme) => {
 				if (useStarlightUiThemeColors) {
@@ -151,6 +151,36 @@ export const starlightExpressiveCode = ({
 			getBlockLocale: ({ file }) => pathToLocale(file.path, { starlightConfig, astroConfig }),
 			plugins,
 			...rest,
+		};
+	};
+}
+
+export const starlightExpressiveCode = ({
+	starlightConfig,
+	useTranslations,
+}: StarlightEcIntegrationOptions): AstroIntegration[] => {
+	if (starlightConfig.expressiveCode === false) return [];
+
+	const configArgs =
+		typeof starlightConfig.expressiveCode === 'object'
+			? (starlightConfig.expressiveCode as AstroExpressiveCodeOptions)
+			: {};
+	return [
+		astroExpressiveCode({
+			...configArgs,
+			customConfigPreprocessors: {
+				preprocessAstroIntegrationConfig: getStarlightEcConfigPreprocessor({
+					starlightConfig,
+					useTranslations,
+				}),
+				preprocessComponentConfig: `
+					import starlightConfig from 'virtual:starlight/user-config'
+					import { useTranslations } from '@astrojs/starlight/internal'
+					import { getStarlightEcConfigPreprocessor } from '@astrojs/starlight/expressive-code'
+
+					export default getStarlightEcConfigPreprocessor({ starlightConfig, useTranslations })
+				`,
+			},
 		}),
 	];
 };

@@ -22,11 +22,11 @@ export function pathToLocale(
 ): string | undefined {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
 	const docsDir = new URL('content/docs/', srcDir);
-	const slug = path
-		// Format path to unix style path.
-		?.replace(/\\/g, '/')
-		// Strip docs path leaving only content collection file ID.
-		// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
-		.replace(docsDir.pathname, '');
+	// Format path to unix style path.
+	path = path?.replace(/\\/g, '/')
+	if (path && !path.startsWith('/') && docsDir.pathname.startsWith('/')) path = '/' + path;
+	// Strip docs path leaving only content collection file ID.
+	// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
+	const slug = path?.replace(docsDir.pathname, '');
 	return slugToLocale(slug, starlightConfig.locales);
 }
