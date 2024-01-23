@@ -34,7 +34,7 @@ Starlight के डिफ़ॉल्ट अवयवों को ओवरर
    <a href="mailto:houston@example.com">मुझे E-mail करो</a>
    ```
 
-3. Starlight को `astro.config.mjs` में [`components`](/reference/configuration/#components) कॉन्फ़िगरेशन विकल्प में अपने कस्टम अवयव का उपयोग करने के लिए कहें:
+3. Starlight को `astro.config.mjs` में [`components`](/hi/reference/configuration/#components) कॉन्फ़िगरेशन विकल्प में अपने कस्टम अवयव का उपयोग करने के लिए कहें:
 
    ```js {9-12}
    // astro.config.mjs
