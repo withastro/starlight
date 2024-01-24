@@ -73,8 +73,8 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 
 किसी कस्टम अवयव के अंदर अंतर्निहित अवयव को प्रस्तुत करते समय:
 
-- Spread `Astro.props` into it. This makes sure that it receives all the data it needs to render.
-- Add a [`<slot />`](https://docs.astro.build/en/core-concepts/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
+- इसमें `Astro.props` फैलाएं। यह सुनिश्चित करता है कि इसे वह सभी डेटा प्राप्त हो जिसे इसे प्रस्तुत करने की आवश्यकता है।
+- डिफ़ॉल्ट अवयव के अंदर एक [`<slot />`](https://docs.astro.build/hi/core-concepts/astro-components/#slots) जोड़ें। यह सुनिश्चित करता है कि यदि यह अवयव किसी भी बाल तत्व को पारित करता है, तो Astro को पता रहे कि उन्हें कहां प्रस्तुत करना है।
 
 ## पेज डेटा का उपयोग करें
 
@@ -119,7 +119,7 @@ const isHomepage = Astro.props.slug === '';
 
 {
   isHomepage ? (
-    <footer> Starlight 🌟 द्वारा निर्मित </footer>
+    <footer>Starlight 🌟 द्वारा निर्मित</footer>
   ) : (
     <Default {...Astro.props}>
       <slot />
