@@ -185,7 +185,10 @@ export default defineConfig({
 				{
 					label: 'Resources',
 					badge: 'New',
-					translations: {},
+					translations: {
+						'zh-CN': '资源',
+						fr: 'Ressources',
+					},
 					autogenerate: { directory: 'resources' },
 				},
 			],
