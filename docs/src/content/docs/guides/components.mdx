@@ -198,9 +198,9 @@ A list of all available icons is shown below with their associated names. Click 
 
 ### Code
 
-Starlight uses [Expressive Code](https://expressive-code.com/) to render code blocks with extended formatting possibilities. In addition to fenced code blocks in markdown & MDX documents, Expressive Code can display syntax-highlighted code snippets using its [`<Code>` component](https://expressive-code.com/key-features/code-component/).
+Starlight uses Expressive Code to render [Markdown and MDX code blocks](/guides/authoring-content/#code-blocks). Use the `<Code>` component to render syntax highlighted code when using a Markdown code block is not possible, for example, to render data coming from external sources like files, databases, or APIs.
 
-The `<Code>` component provides props like `code`, `lang` or `meta` that allow you to dynamically define a code block's contents. Using this component, you can render code blocks from variables or data coming from external sources like files, databases or APIs.
+See the [Expressive Code “Code Component” docs](https://expressive-code.com/key-features/code-component/) for full details of the props `<Code>` supports.
 
 ```mdx
 # src/content/docs/example.mdx
