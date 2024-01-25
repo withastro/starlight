@@ -66,6 +66,10 @@ type StarlightEcIntegrationOptions = {
 	useTranslations?: ReturnType<typeof createTranslationSystemFromFs> | undefined;
 };
 
+/**
+ * Create an Expressive Code configuration preprocessor based on Starlight config.
+ * Used internally to set up Expressive Code and by the `<Code>` component.
+ */
 export function getStarlightEcConfigPreprocessor({
 	starlightConfig,
 	useTranslations,
