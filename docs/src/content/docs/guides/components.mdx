@@ -223,3 +223,21 @@ export const fileName = 'example.js';
 export const highlights = ["file", "CMS"];
 
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### Code transclusion
+
+Use [Vite’s `?raw` import suffix](https://vitejs.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
+You can then pass this imported string to the `<Code>` component to include it on your page.
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+The code above generates the following on the page:
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
