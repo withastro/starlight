@@ -34,3 +34,5 @@
  */
 
 export * from 'astro-expressive-code';
+
+export { getStarlightEcConfigPreprocessor } from './index'
