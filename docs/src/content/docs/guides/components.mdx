@@ -198,7 +198,7 @@ A list of all available icons is shown below with their associated names. Click 
 
 ### Code
 
-Starlight uses Expressive Code to render [Markdown and MDX code blocks](/guides/authoring-content/#code-blocks). Use the `<Code>` component to render syntax highlighted code when using a Markdown code block is not possible, for example, to render data coming from external sources like files, databases, or APIs.
+Use the `<Code>` component to render syntax highlighted code when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
 
 See the [Expressive Code “Code Component” docs](https://expressive-code.com/key-features/code-component/) for full details of the props `<Code>` supports.
 
@@ -224,7 +224,7 @@ export const highlights = ["file", "CMS"];
 
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 
-#### Code transclusion
+#### Imported Code
 
 Use [Vite’s `?raw` import suffix](https://vitejs.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
 You can then pass this imported string to the `<Code>` component to include it on your page.
