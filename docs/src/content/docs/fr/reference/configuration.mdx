@@ -461,16 +461,14 @@ interface HeadConfig {
 
 Contrôlez si le pied de page affiche la date de la dernière mise à jour de la page.
 
-Par défaut, cette fonctionnalité s'appuie sur l'historique Git de votre dépôt et peut ne pas être précise sur certaines plateformes de déploiement effectuant des
-[clonages superficiels](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Une page peut remplacer ce paramètre ou
-la date basée sur Git en utilisant [le champ `lastUpdated` du frontmatter](/fr/reference/frontmatter/#lastupdated).
+Par défaut, cette fonctionnalité s'appuie sur l'historique Git de votre dépôt et peut ne pas être précise sur certaines plateformes de déploiement effectuant des [clonages superficiels](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Une page peut remplacer ce paramètre ou la date basée sur Git en utilisant [le champ `lastUpdated` du frontmatter](/fr/reference/frontmatter/#lastupdated).
 
 ### `pagination`
 
 **Type :** `boolean`  
 **Par défaut :** `true`
 
-Définnissez si le pied de page doit inclure des liens vers les pages précédentes et suivantes.
+Définissez si le pied de page doit inclure des liens vers les pages précédentes et suivantes.
 
 Une page peut remplacer ce paramètre ou le texte du lien et/ou l'URL en utilisant les champs de frontmatter [`prev`](/fr/reference/frontmatter/#prev) et [`next`](/fr/reference/frontmatter/#next).
 
@@ -515,6 +513,13 @@ Définit le délimiteur entre le titre de la page et le titre du site dans la ba
 
 Par défaut, chaque page a une balise `<title>` contenant `Titre de la page | Titre du site`.
 Par example, cette page a pour titre « Référence de configuration » et ce site a pour titre « Starlight », donc la balise `<title>` de cette page contient « Référence de configuration | Starlight ».
+
+### `disable404Route`
+
+**Type :** `boolean`
+**Par défaut :** `'false'`
+
+Désactive l'injection de la [page 404](https://docs.astro.build/fr/core-concepts/astro-pages/#custom-404-error-page) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, mettez cette option à `false`.
 
 ### `components`
 
