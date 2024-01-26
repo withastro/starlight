@@ -8,7 +8,7 @@ tableOfContents:
 Starlight 플러그인은 Starlight 구성, UI, 동작을 사용자 정의할 수 있을 뿐만 아니라 공유 및 재사용하기도 쉽습니다.
 이 참조 페이지에는 플러그인이 액세스할 수 있는 API가 문서화되어 있습니다.
 
-[구성 참조](/ko/reference/configuration/#plugins)에서 Starlight 플러그인 사용에 대해 자세히 알아보거나 [플러그인 쇼케이스](/ko/showcase/#플러그인)를 방문하여 사용 가능한 플러그인 목록을 확인하세요.
+[구성 참조](/ko/reference/configuration/#plugins)에서 Starlight 플러그인 사용에 대해 자세히 알아보거나 [플러그인 쇼케이스](/ko/resources/plugins/)를 방문하여 사용 가능한 플러그인 목록을 확인하세요.
 
 ## 빠른 API 참조
 

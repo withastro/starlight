@@ -1,5 +1,84 @@
 # @astrojs/starlight
 
+## 0.17.0
+
+### Minor Changes
+
+- [#1389](https://github.com/withastro/starlight/pull/1389) [`21b3620`](https://github.com/withastro/starlight/commit/21b36201aa1e01c8395d0f24b2fa4e32b90550bb) Thanks [@connor-baer](https://github.com/connor-baer)! - Adds new `disable404Route` config option to disable injection of Astro’s default 404 route
+
+- [#1395](https://github.com/withastro/starlight/pull/1395) [`ce05dfb`](https://github.com/withastro/starlight/commit/ce05dfb4b1e9b90fad057d5d4328e4445f986b3b) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds a new [`<Code>` component](https://starlight.astro.build/guides/components/#code) to render dynamic code strings with Expressive Code
+
+## 0.16.0
+
+### Minor Changes
+
+- [#1383](https://github.com/withastro/starlight/pull/1383) [`490c6ef`](https://github.com/withastro/starlight/commit/490c6eff34ab408c4f55777b7b0caa16787dd3d4) Thanks [@delucis](https://github.com/delucis)! - Refactors Starlight’s internal virtual module system for components to avoid circular references
+
+  This is a change to an internal API.
+  If you were importing the internal `virtual:starlight/components` module, this no longer exists.
+  Update your imports to use the individual virtual modules now available for each component, for example `virtual:starlight/components/EditLink`.
+
+- [#1151](https://github.com/withastro/starlight/pull/1151) [`134292d`](https://github.com/withastro/starlight/commit/134292ddd89683007d7de25545d39738a82c626c) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fixes sidebar auto-generation issue when a file and a directory, located at the same level, have identical names.
+
+  For example, `src/content/docs/guides.md` and `src/content/docs/guides/example.md` will now both be included and `src/content/docs/guides.md` is treated in the same way a `src/content/docs/guides/index.md` file would be.
+
+- [#1386](https://github.com/withastro/starlight/pull/1386) [`0163634`](https://github.com/withastro/starlight/commit/0163634abb8578ce7a3d7ceea36432e98ea70e78) Thanks [@delucis](https://github.com/delucis)! - Tightens `line-height` on `<LinkCard>` titles to fix regression from original design
+
+  If you want to preserve the previous `line-height`, you can add the following custom CSS to your site:
+
+  ```css
+  .sl-link-card a {
+    line-height: 1.6;
+  }
+  ```
+
+- [#1376](https://github.com/withastro/starlight/pull/1376) [`8398432`](https://github.com/withastro/starlight/commit/8398432aa4a0f38e2dd4452dfcdf7033c5713334) Thanks [@delucis](https://github.com/delucis)! - Tweaks vertical spacing in Markdown content styles.
+
+  This is a subtle change to Starlight’s default content styling that should improve most sites:
+
+  - Default vertical spacing between content items is reduced from `1.5rem` to `1rem`.
+  - Spacing before headings is now relative to font size, meaning higher-level headings have slightly more spacing and lower-level headings slightly less.
+
+  The overall impact is to tighten up content that belongs together and improve the visual hierarchy of headings to break up sections.
+
+  Although this is a subtle change, we recommend visually inspecting your site in case this impacts layout of any custom CSS or components.
+
+  If you want to preserve the previous spacing, you can add the following custom CSS to your site:
+
+  ```css
+  /* Restore vertical spacing to match Starlight v0.15 and below. */
+  .sl-markdown-content
+    :not(a, strong, em, del, span, input, code)
+    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+    margin-top: 1.5rem;
+  }
+  .sl-markdown-content
+    :not(h1, h2, h3, h4, h5, h6)
+    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+    margin-top: 2.5rem;
+  }
+  ```
+
+- [#1372](https://github.com/withastro/starlight/pull/1372) [`773880d`](https://github.com/withastro/starlight/commit/773880de87b79bf3107dbc32df29a86dd11e4e6f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the table of contents highlighting styles to prevent UI shifts when scrolling through a page.
+
+  If you want to preserve the previous, buggy styling, you can add the following custom CSS to your site:
+
+  ```css
+  starlight-toc a[aria-current='true'],
+  starlight-toc a[aria-current='true']:hover,
+  starlight-toc a[aria-current='true']:focus {
+    font-weight: 600;
+    color: var(--sl-color-text-invert);
+    background-color: var(--sl-color-text-accent);
+  }
+  ```
+
+## 0.15.4
+
+### Patch Changes
+
+- [#1378](https://github.com/withastro/starlight/pull/1378) [`0f4a31d`](https://github.com/withastro/starlight/commit/0f4a31da4b6d384c569e8556dcc559dc8bfbfebd) Thanks [@delucis](https://github.com/delucis)! - Updates dependencies: `@astrojs/mdx`, `@astrojs/sitemap`, and `astro-expressive-code`
+
 ## 0.15.3
 
 ### Patch Changes
