@@ -205,6 +205,9 @@ const UserConfigSchema = z.object({
 		.string()
 		.default('|')
 		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
+
+	/** Disable Starlight's default 404 page. */
+	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(
