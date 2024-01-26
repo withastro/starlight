@@ -54,7 +54,7 @@ export default function StarlightIntegration({
 				const allIntegrations = [...config.integrations, ...integrations];
 				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
 					integrations.push(
-						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations })
+						...starlightExpressiveCode({ starlightConfig, useTranslations })
 					);
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {

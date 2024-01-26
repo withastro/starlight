@@ -1,21 +1,14 @@
 ---
-title: Starlight Showcase
-description: 发现使用 Starlight 构建的网站和扩展 Starlight 的社区工具！
+title: 插件和集成
+description: 发现扩展 Starlight 的插件和集成等社区工具！
+sidebar:
+  order: 1
 ---
 
 :::tip[添加你自己的！]
-你是否构建过 Starlight 网站、插件或 Starlight 工具？创建一个 PR 来添加链接到此页面！
+你是否构建过 Starlight 插件或 Starlight 工具？
+创建一个 PR 来添加链接到此页面！
 :::
-
-## 网站
-
-import ShowcaseSites from '~/components/showcase-sites.astro';
-
-Starlight 已投入生产。 这些是网络上的一些网站：
-
-<ShowcaseSites />
-
-查看所有[在 GitHub 上使用 Starlight 的公共项目仓库](https://github.com/withastro/starlight/network/dependents)。
 
 ## 插件
 
@@ -67,5 +60,15 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		href="https://github.com/HiDeoo/starlight-openapi"
 		title="starlight-openapi"
 		description="从 OpenAPI/Swagger 规范创建文档页面。"
+	/>
+	<LinkCard
+		href="https://github.com/val-town/notion-to-astro"
+		title="notion-to-astro"
+		description="将 Notion 输出转换为 Astro Starlight 文档"
+	/>
+	<LinkCard
+		href="https://github.com/mattjennings/astro-live-code"
+		title="astro-live-code"
+		description="将你的 MDX 代码块渲染为交互式组件"
 	/>
 </CardGrid>
