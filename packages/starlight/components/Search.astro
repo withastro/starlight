@@ -120,7 +120,7 @@ const pagefindTranslations = {
 			try {
 				translations = JSON.parse(this.dataset.translations || '{}');
 			} catch {}
-			const formatURL = (href: string) => shouldStrip ? stripTrailingSlash(href) : href;
+			const formatURL = (href: string) => (shouldStrip ? stripTrailingSlash(href) : href);
 			window.addEventListener('DOMContentLoaded', () => {
 				if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
