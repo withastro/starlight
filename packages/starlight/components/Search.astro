@@ -16,7 +16,6 @@ const pagefindTranslations = {
 };
 
 const projectConfig = {
-	format: project.build.format,
 	trailingSlash: project.trailingSlash,
 };
 ---
@@ -62,8 +61,7 @@ const projectConfig = {
 </site-search>
 
 <script>
-	interface FormatPathOptions {
-		format?: 'file' | 'directory';
+	interface ConfigOptions {
 		trailingSlash?: 'ignore' | 'always' | 'never';
 	}
 
@@ -75,6 +73,22 @@ const projectConfig = {
 			const dialog = this.querySelector('dialog')!;
 			const dialogFrame = this.querySelector('.dialog-frame')!;
 
+			const stripTrailingSlash = (path: string) => {
+				return path.replace(/\/(#.*)?$/, '$1');
+			};
+
+			const pagefindFormatURL = (
+				path: string,
+				{ trailingSlash = 'ignore' }: ConfigOptions = {}
+			) => {
+				if (trailingSlash !== 'never') return path;
+				return stripTrailingSlash(path);
+			};
+
+			const createURLFormatter = (opts: ConfigOptions) => {
+				return (href: string) => pagefindFormatURL(href, opts);
+			};
+
 			/** Close the modal if a user clicks on a link or outside of the modal. */
 			const onClick = (event: MouseEvent) => {
 				const isLink = 'href' in (event.target || {});
@@ -85,71 +99,6 @@ const projectConfig = {
 				) {
 					closeModal();
 				}
-			};
-
-			const formatPath = (
-				path: string,
-				{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions = {}
-			) => {
-				const stripTrailingSlash = (href: string): string => {
-					if (href[href.length - 1] === '/') href = href.slice(0, -1);
-					return href;
-				};
-
-				const stripLeadingSlash = (href: string): string => {
-					if (href[0] === '/') href = href.slice(1);
-					return href;
-				};
-
-				const stripLeadingAndTrailingSlashes = (href: string): string => {
-					href = stripLeadingSlash(href);
-					href = stripTrailingSlash(href);
-					return href;
-				};
-
-				const ensureLeadingSlash = (href: string): string => {
-					if (href[0] !== '/') href = '/' + href;
-					return href;
-				};
-
-				const ensureTrailingSlash = (href: string): string => {
-					if (href[href.length - 1] !== '/') href += '/';
-					return href;
-				};
-
-				const ensureHtmlExtension = (path: string) => {
-					path = stripLeadingAndTrailingSlashes(path);
-					if (!path.endsWith('.html')) {
-						path = path ? path + '.html' : '/index.html';
-					}
-					return ensureLeadingSlash(path);
-				};
-
-				const stripHtmlExtension = (path: string) => {
-					const pathWithoutTrailingSlash = stripTrailingSlash(path);
-					return pathWithoutTrailingSlash.endsWith('.html')
-						? pathWithoutTrailingSlash.slice(0, -5)
-						: path;
-				};
-
-				const trailingSlashStrategies = {
-					always: ensureTrailingSlash,
-					never: stripTrailingSlash,
-					ignore: (href: string) => href,
-				};
-
-				const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
-
-				// Handle `build.format:`
-				path = format === 'file' ? ensureHtmlExtension(path) : stripHtmlExtension(path);
-
-				// Skip trailing slash handling for `build.format: 'file'`
-				if (format === 'file') return path;
-
-				// Handle `build.trailingSlash:`
-				path = path === '/' ? path : trailingSlashStrategy(path);
-
-				return path;
 			};
 
 			const openModal = (event?: MouseEvent) => {
@@ -187,11 +136,12 @@ const projectConfig = {
 			});
 
 			let translations = {};
-			let projectConfig = {};
+			let config = {};
 			try {
 				translations = JSON.parse(this.dataset.translations || '{}');
-				projectConfig = JSON.parse(this.dataset.config || '{}');
+				config = JSON.parse(this.dataset.config || '{}');
 			} catch {}
+			const formatURL = createURLFormatter(config);
 			window.addEventListener('DOMContentLoaded', () => {
 				if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
@@ -205,8 +155,11 @@ const projectConfig = {
 						translations,
 						showSubResults: true,
 						processResult: (result: any) => {
-							result.url = formatPath(result.url, projectConfig);
-							return result;
+							result.url = formatURL(result.url);
+							result.sub_results = result.sub_results.map((result: any) => {
+								result.url = formatURL(result.url);
+								return result;
+							});
 						},
 					});
 				});
