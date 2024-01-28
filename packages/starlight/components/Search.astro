@@ -14,15 +14,11 @@ const pagefindTranslations = {
 			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
 };
-
-const projectConfig = {
-	trailingSlash: project.trailingSlash,
-};
 ---
 
 <site-search
 	data-translations={JSON.stringify(pagefindTranslations)}
-	data-config={JSON.stringify(projectConfig)}
+	data-strip-trailing-slash={project.trailingSlash === 'never'}
 >
 	<button data-open-modal disabled>
 		{
@@ -61,10 +57,6 @@ const projectConfig = {
 </site-search>
 
 <script>
-	interface ConfigOptions {
-		trailingSlash?: 'ignore' | 'always' | 'never';
-	}
-
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super();
@@ -75,18 +67,6 @@ const projectConfig = {
 
 			const stripTrailingSlash = (path: string) => {
 				return path.replace(/\/(#.*)?$/, '$1');
-			};
-
-			const pagefindFormatURL = (
-				path: string,
-				{ trailingSlash = 'ignore' }: ConfigOptions = {}
-			) => {
-				if (trailingSlash !== 'never') return path;
-				return stripTrailingSlash(path);
-			};
-
-			const createURLFormatter = (opts: ConfigOptions) => {
-				return (href: string) => pagefindFormatURL(href, opts);
 			};
 
 			/** Close the modal if a user clicks on a link or outside of the modal. */
@@ -136,12 +116,11 @@ const projectConfig = {
 			});
 
 			let translations = {};
-			let config = {};
+			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
 			try {
 				translations = JSON.parse(this.dataset.translations || '{}');
-				config = JSON.parse(this.dataset.config || '{}');
 			} catch {}
-			const formatURL = createURLFormatter(config);
+			const formatURL = (href: string) => shouldStrip ? stripTrailingSlash(href) : href;
 			window.addEventListener('DOMContentLoaded', () => {
 				if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
