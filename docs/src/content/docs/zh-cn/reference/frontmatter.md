@@ -5,8 +5,9 @@ description: Starlight 支持的默认 frontmatter 字段的概述。
 
 你可以通过设置 frontmatter 中的值来自定义 Starlight 中的单个 Markdown 和 MDX 页面。例如，一个常规页面可能会设置 `title` 和 `description` 字段：
 
-```md
+```md {3-4}
 ---
+# src/content/docs/example.md
 title: 关于此项目
 description: 了解更多关于此项目的信息。
 ---
@@ -28,6 +29,12 @@ description: 了解更多关于此项目的信息。
 
 页面描述用于页面元数据，将被搜索引擎和社交媒体预览捕获。
 
+### `slug`
+
+**类型：** `string`
+
+覆盖页面的slug。有关更多详细信息，请参阅 Astro文档中的 [ "定义自定义slugs"](https://docs.astro.build/zh-cn/guides/content-collections/#定义自定义-slugs) 部分。
+
 ### `editUrl`
 
 **类型：** `string | boolean`
@@ -42,6 +49,7 @@ description: 了解更多关于此项目的信息。
 
 ```md
 ---
+# src/content/docs/example.md
 title: 关于我们
 head:
   # 使用自定义 <title> 标签
@@ -58,6 +66,7 @@ head:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 目录中只有 H2 的页面
 tableOfContents:
   minHeadingLevel: 2
@@ -67,6 +76,7 @@ tableOfContents:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 没有目录的页面
 tableOfContents: false
 ---
@@ -91,6 +101,7 @@ tableOfContents: false
 
 ```md
 ---
+# src/content/docs/example.md
 title: 我的主页
 template: splash
 hero:
@@ -114,6 +125,7 @@ hero:
 
 ```md
 ---
+# src/content/docs/example.md
 hero:
   image:
     alt: 一个闪闪发光、色彩鲜艳的 logo
@@ -168,6 +180,7 @@ interface HeroConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: 带有横幅的页面
 banner:
   content: |
@@ -184,6 +197,7 @@ banner:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 带有自定义更新日期的页面
 lastUpdated: 2022-08-09
 ---
@@ -197,6 +211,7 @@ lastUpdated: 2022-08-09
 
 ```md
 ---
+# src/content/docs/example.md
 # 隐藏上一页链接
 prev: false
 ---
@@ -204,6 +219,7 @@ prev: false
 
 ```md
 ---
+# src/content/docs/example.md
 # 将上一页链接更改为“继续教程”
 prev: 继续教程
 ---
@@ -211,6 +227,7 @@ prev: 继续教程
 
 ```md
 ---
+# src/content/docs/example.md
 # 同时覆盖上一页的链接和文本
 prev:
   link: /unrelated-page/
@@ -226,6 +243,7 @@ prev:
 
 ```md
 ---
+# src/content/docs/example.md
 # 隐藏下一页链接
 next: false
 ---
@@ -240,6 +258,7 @@ next: false
 
 ```md
 ---
+# src/content/docs/example.md
 # 在搜索索引中隐藏此页面
 pagefind: false
 ---
@@ -272,6 +291,7 @@ interface SidebarConfig {
 
 ```md
 ---
+# src/content/docs/example.md
 title: 关于此项目
 sidebar:
   label: About
@@ -287,6 +307,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 要首先显示的页面
 sidebar:
   order: 1
@@ -302,6 +323,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 从自动生成的侧边栏中隐藏的页面
 sidebar:
   hidden: true
@@ -318,6 +340,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 带有徽章的页面
 sidebar:
   # 使用与你的网站的强调色相匹配的默认类型
@@ -327,6 +350,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 带有徽章的页面
 sidebar:
   badge:
@@ -343,10 +367,79 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: 新标签页中打开页面
 sidebar:
   # 在新标签页中打开页面
   attrs:
     target: _blank
 ---
+```
+
+## 自定义 frontmatter schema
+
+Starlight 的 `docs` 内容集合的 frontmatter schema 在 `src/content/config.ts` 中使用 `docsSchema()` 辅助函数进行配置：
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+了解更多关于内容集合模式的信息，请参阅 Astro 文档中的 [“定义集合模式”](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式) 部分。
+
+`docsSchema()` 采用以下选项：
+
+### `extend`
+
+**类型：** Zod schema 或者返回 Zod schema 的函数  
+**默认值：** `z.object({})`
+
+通过在 `docsSchema()` 选项中设置 `extend` 来使用其他字段扩展 Starlight 的 schema。
+值应该是一个 [Zod schema](https://docs.astro.build/zh-cn/guides/content-collections/#用-zod-定义数据类型)。
+
+在下面的示例中，我们为 `description` 提供了一个更严格的类型，使其成为必填项，并添加了一个新的可选的 `category` 字段：
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // 将内置字段设置为必填项。
+        description: z.string(),
+        // 将新字段添加到 schema 中。
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+要利用 [Astro `image()` 辅助函数](https://docs.astro.build/zh-cn/guides/images/#内容集合中的图像)，请使用返回 schema 扩展的函数：
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // 添加一个必须解析为本地图像的字段。
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```

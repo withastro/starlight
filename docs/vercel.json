@@ -16,6 +16,8 @@
     { "handle": "filesystem" },
 
     { "src": "/zh/(.*)", "dest": "/zh-cn/$1", "status": 301 },
+    { "src": "/showcase/", "dest": "/resources/showcase/", "status": 301 },
+    { "src": "/(?<lang>[^/]*)/showcase/", "dest": "/$lang/resources/showcase/", "status": 301 },
 
     { "src": "/(?<lang>[^/]*)/(.*)", "dest": "/$lang/404/", "status": 404 }
   ]
