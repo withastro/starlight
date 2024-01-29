@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Exposes project config to pagefind UI to correctly format search result links
+Correctly format Pagefind search result links when `trailingSlash: 'never'` is used
