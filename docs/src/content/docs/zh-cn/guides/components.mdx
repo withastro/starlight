@@ -7,7 +7,7 @@ description: 使用 Starlight 在 MDX 中使用组件
 例如，链接卡片或 YouTube 嵌入。
 Starlight 支持在 [MDX](https://mdxjs.com/) 文件中使用组件，并提供了一些常用组件供你使用。
 
-[在 Astro 文档中了解更多关于构建组件的内容](https://docs.astro.build/zh-cn/core-concepts/astro-components/).
+[在 Astro 文档中了解更多关于构建组件的内容](https://docs.astro.build/zh-cn/core-concepts/astro-components/)。 
 
 ## 使用组件
 
@@ -194,3 +194,49 @@ import { Icon } from '@astrojs/starlight/components';
 下面显示了所有可用图标的列表及其关联的名称。点击图标以复制其组件代码。
 
 <IconsList />
+
+### 代码块
+
+当使用 [Markdown 代码块](/zh-cn/guides/authoring-content/#代码块) 行不通时，可以使用 `<Code>` 组件来渲染语法高亮的代码。例如，渲染来自文件、数据库或 API 等外部来源的数据。
+
+有关 `<Code>` 支持的完整属性的详细信息，请参阅 [Expressive Code 的 “Code Component” 文档](https://expressive-code.com/key-features/code-component/)。
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('这可能来自一个文件或CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['文件', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+以上代码在页面上生成了以下内容：
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('这可能来自一个文件或CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['文件', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### 导入代码字符串
+
+使用 [Vite 的 `?raw` 导入后缀](https://cn.vitejs.dev/guide/assets#importing-asset-as-string) 来将任何代码文件导入为字符串。
+然后，你可以将此导入的字符串传递给 `<Code>` 组件，以便将其包含在页面上。
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+以上代码在页面上生成了以下内容：
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
