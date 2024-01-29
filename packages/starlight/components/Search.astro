@@ -117,7 +117,7 @@ const pagefindTranslations = {
 			} catch {}
 
 			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-			const stripTrailingSlash = (path: string) => path.replace(/\/(#.*)?$/, '$1');
+			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
 			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
 
 			window.addEventListener('DOMContentLoaded', () => {
