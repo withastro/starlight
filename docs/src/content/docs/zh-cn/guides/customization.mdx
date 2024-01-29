@@ -271,6 +271,25 @@ hero:
 ---
 ```
 
+### 禁用默认 404 页面
+
+如果你的项目需要完全自定义的 404 布局，你可以创建一个 `src/pages/404.astro` 路由，并设置 [`disable404Route`](/zh-cn/reference/configuration/#disable404route) 配置选项来禁用 Starlight 的默认路由：
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: '带有自定义 404 页面的文档',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
 ## 自定义字体
 
 默认情况下，Starlight 使用用户本地设备上可用的无衬线字体来显示所有文本。这样可以确保文档在加载时以每个用户熟悉的字体快速显示，而不需要额外的带宽下载大型字体文件。

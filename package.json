@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build:examples": "pnpm --filter '@example/*' build",
+    "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro ."
@@ -29,7 +29,7 @@
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "22 kB"
+      "limit": "22.5 kB"
     },
     {
       "name": "/_astro/*.css",
