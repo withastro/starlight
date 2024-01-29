@@ -65,10 +65,6 @@ const pagefindTranslations = {
 			const dialog = this.querySelector('dialog')!;
 			const dialogFrame = this.querySelector('.dialog-frame')!;
 
-			const stripTrailingSlash = (path: string) => {
-				return path.replace(/\/(#.*)?$/, '$1');
-			};
-
 			/** Close the modal if a user clicks on a link or outside of the modal. */
 			const onClick = (event: MouseEvent) => {
 				const isLink = 'href' in (event.target || {});
@@ -116,15 +112,19 @@ const pagefindTranslations = {
 			});
 
 			let translations = {};
-			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
 			try {
 				translations = JSON.parse(this.dataset.translations || '{}');
 			} catch {}
-			const formatURL = (href: string) => (shouldStrip ? stripTrailingSlash(href) : href);
+
+			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+			const stripTrailingSlash = (path: string) => path.replace(/\/(#.*)?$/, '$1');
+			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
+
 			window.addEventListener('DOMContentLoaded', () => {
 				if (import.meta.env.DEV) return;
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 				onIdle(async () => {
+					// @ts-expect-error — Missing types for @pagefind/default-ui package.
 					const { PagefindUI } = await import('@pagefind/default-ui');
 					new PagefindUI({
 						element: '#starlight__search',
@@ -133,11 +133,11 @@ const pagefindTranslations = {
 						showImages: false,
 						translations,
 						showSubResults: true,
-						processResult: (result: any) => {
+						processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
 							result.url = formatURL(result.url);
-							result.sub_results = result.sub_results.map((result: any) => {
-								result.url = formatURL(result.url);
-								return result;
+							result.sub_results = result.sub_results.map((sub_result) => {
+								sub_result.url = formatURL(sub_result.url);
+								return sub_result;
 							});
 						},
 					});
