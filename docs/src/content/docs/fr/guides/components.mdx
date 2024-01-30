@@ -182,7 +182,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Icônes
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
 
@@ -205,3 +205,49 @@ Le code ci-dessus génère ce qui suit sur la page :
 Une liste de toutes les icônes disponibles est affichée ci-dessous avec leurs noms associés. Cliquez sur une icône pour copier le code du composant.
 
 <IconsList />
+
+### Code
+
+Utilisez le composant `<Code>` pour afficher du code avec coloration syntaxique lorsque l'utilisation d'un [bloc de code Markdown](/fr/guides/authoring-content/#blocs-de-code) n'est pas possible, par exemple, pour afficher des données provenant de sources externes comme des fichiers, des bases de données ou des API.
+
+Consultez la documentation [du « composant Code » d'Expressive Code](https://expressive-code.com/key-features/code-component/) pour plus de détails sur les props que `<Code>` supporte.
+
+```mdx
+# src/content/docs/exemple.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log("Cela peut provenir d'un fichier ou d'un CMS !");`;
+export const fileName = 'exemple.js';
+export const highlights = ['fichier', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log("Cela peut provenir d'un fichier ou d'un CMS !");`;
+export const fileName = 'exemple.js';
+export const highlights = ['fichier', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### Code importé
+
+Utilisez [le suffixe d'import `?raw` de Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) pour importer n'importe quel fichier de code sous forme de chaîne de caractères.
+Vous pouvez ensuite passer cette chaîne importée au composant `<Code>` pour l'inclure dans votre page.
+
+```mdx title="src/content/docs/exemple.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />

@@ -68,7 +68,7 @@ test('fallback routes use their own locale data', () => {
 });
 
 test('fallback routes use fallback entry last updated dates', () => {
-	const getFileCommitDate = vi.spyOn(git, 'getFileCommitDate');
+	const getNewestCommitDate = vi.spyOn(git, 'getNewestCommitDate');
 	const route = routes.find((route) => route.entry.id === routes[4]!.id && route.locale === 'en');
 	assert(route, 'Expected to find English fallback route for `guides/authoring-content.md`.');
 
@@ -80,11 +80,11 @@ test('fallback routes use fallback entry last updated dates', () => {
 		url: new URL('https://example.com/en'),
 	});
 
-	expect(getFileCommitDate).toHaveBeenCalledOnce();
-	expect(getFileCommitDate.mock.lastCall?.[0]).toMatch(
+	expect(getNewestCommitDate).toHaveBeenCalledOnce();
+	expect(getNewestCommitDate.mock.lastCall?.[0]).toMatch(
 		/src\/content\/docs\/guides\/authoring-content.md$/
 		//                          ^ no `en/` prefix
 	);
 
-	getFileCommitDate.mockRestore();
+	getNewestCommitDate.mockRestore();
 });

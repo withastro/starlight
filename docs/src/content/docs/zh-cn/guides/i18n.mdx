@@ -3,7 +3,7 @@ title: 国际化 (i18n)
 description: 学习如何配置你的 Starlight 网站支持多种语言。
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight 提供了内置的多语言支持，包括路由、回退内容和完整的从右到左（RTL）语言支持。
 
@@ -141,7 +141,7 @@ Starlight 期望你在所有语言中创建等效的页面。例如，如果你�
 
 ## 翻译 Starlight 的 UI
 
-import LanguagesList from '../../../../components/languages-list.astro';
+import LanguagesList from '~/components/languages-list.astro';
 
 除了托管翻译的内容文件之外，Starlight 还允许你翻译默认的 UI 字符串（例如，目录中的“本页”标题），以便你的读者可以完全使用所选的语言体验你的网站。
 
@@ -199,9 +199,13 @@ import LanguagesList from '../../../../components/languages-list.astro';
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 

@@ -31,23 +31,6 @@ Debido a que Starlight está impulsado por Astro, puedes agregar soporte para co
 
 ### Compatibilidad con los estilos de Starlight
 
-Starlight aplica estilos predeterminados a tu contenido de Markdown, por ejemplo, agregando márgenes entre elementos.
-Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para desactivarlos.
-
-```astro
----
-// src/components/Ejemplo.astro
----
-
-<div class="not-content">
-	<p>
-		No se ve afectado por los estilos predeterminados de contenido de Starlight.
-	</p>
-</div>
-```
-
-### Compatibilidad con los estilos de Starlight
-
 Starlight aplica estilos predeterminados a tu contenido en Markdown, por ejemplo, añadiendo margen entre elementos.
 Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para deshabilitarlos.
 
@@ -193,7 +176,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Iconos
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight proporciona un conjunto de iconos comunes que puedes mostrar en tu contenido utilizando el componente `<Icon>`.
 

@@ -5,7 +5,7 @@ description: Pelajari cara mengkonfigurasi Starlight secara manual untuk menamba
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Cara tercepat untuk membuat website Starlight adalah dengan menjalankan perintah `create astro` sebagaimana dijelaskan di [panduan memulai](/id/getting-started/#creating-a-new-project).
+Cara tercepat untuk membuat website Starlight adalah dengan menjalankan perintah `create astro` sebagaimana dijelaskan di [panduan memulai](/id/getting-started/#membuat-proyek-baru).
 Jika Anda ingin menambahkan Starlight ke proyek Astro yang sudah ada, berikut ini adalah cara melakukannya.
 
 ## Memasang Starlight
@@ -106,7 +106,7 @@ Untuk menambahkan halaman Starlight di dalam _subpath_, letakkan konten dokument
 
 Contohnya, jika halaman Starlight berada pada rute `/panduan/`, letakkan konten dokumentasi Anda di folder `src/content/docs/panduan/`:
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 

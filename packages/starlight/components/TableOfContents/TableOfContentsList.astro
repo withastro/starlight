@@ -38,12 +38,8 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 		padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
 		line-height: 1.25;
 	}
-	a[aria-current='true'],
-	a[aria-current='true']:hover,
-	a[aria-current='true']:focus {
-		font-weight: 600;
-		color: var(--sl-color-text-invert);
-		background-color: var(--sl-color-text-accent);
+	a[aria-current='true'] {
+		color: var(--sl-color-text-accent);
 	}
 	.isMobile a {
 		--pad-inline: 1rem;

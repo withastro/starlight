@@ -2,10 +2,10 @@ import type { AstroIntegrationLogger } from 'astro';
 import * as pagefind from 'pagefind';
 
 type PagefindGenerationOptions = {
-	inputDir: string,
-	outputDir: string,
-	logger: AstroIntegrationLogger
-}
+	inputDir: string;
+	outputDir: string;
+	logger: AstroIntegrationLogger;
+};
 
 export async function generatePagefindIndex(options: PagefindGenerationOptions): Promise<void> {
 	const startTime = performance.now();
@@ -16,7 +16,7 @@ export async function generatePagefindIndex(options: PagefindGenerationOptions):
 		throw new Error('Failed to create pagefind index: \n-' + indexCreation.errors.join('\n-'));
 	}
 
-	const {index} = indexCreation;
+	const { index } = indexCreation;
 
 	options.logger.info('Indexing content...');
 
@@ -31,7 +31,9 @@ export async function generatePagefindIndex(options: PagefindGenerationOptions):
 	const indexSaveResult = await index.writeFiles({ outputPath: options.outputDir });
 
 	if (indexSaveResult.errors.length > 0) {
-		throw new Error('Failed to save pagefind index files: \n-' + indexSaveResult.errors.join('\n-'));
+		throw new Error(
+			'Failed to save pagefind index files: \n-' + indexSaveResult.errors.join('\n-')
+		);
 	}
 
 	const endTime = performance.now();

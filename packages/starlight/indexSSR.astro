@@ -10,7 +10,7 @@ export const prerender = false;
 const route = getRouteBySlugParam(Astro.params.slug);
 
 if (route === undefined) {
-  return new Response(null, {status: 404});
+	return new Response(null, { status: 404 });
 }
 
 const { Content, headings } = await route.entry.render();

@@ -1,5 +1,134 @@
 # @astrojs/starlight
 
+## 0.17.1
+
+### Patch Changes
+
+- [#1437](https://github.com/withastro/starlight/pull/1437) [`655aed4`](https://github.com/withastro/starlight/commit/655aed4840cae59e9abd64b4b585e60f1cfab209) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds Starlight-specific types to `defineEcConfig` function and exports `StarlightExpressiveCodeOptions`.
+
+  This provides Starlight types and IntelliSense support for your Expressive Code configuration options inside an `ec.config.mjs` file. See the [Expressive Code documentation](https://expressive-code.com/key-features/code-component/#using-an-ecconfigmjs-file) for more information.
+
+- [#1420](https://github.com/withastro/starlight/pull/1420) [`275f87f`](https://github.com/withastro/starlight/commit/275f87fd7fc676b9ab323354078c06894e0832c7) Thanks [@abdelhalimjean](https://github.com/abdelhalimjean)! - Fix rare `font-family` issue if users have a font installed with a name of `""`
+
+- [#1365](https://github.com/withastro/starlight/pull/1365) [`a0af7cc`](https://github.com/withastro/starlight/commit/a0af7cc696da987a76edab96cdd2329779e87724) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Correctly format Pagefind search result links when `trailingSlash: 'never'` is used
+
+## 0.17.0
+
+### Minor Changes
+
+- [#1389](https://github.com/withastro/starlight/pull/1389) [`21b3620`](https://github.com/withastro/starlight/commit/21b36201aa1e01c8395d0f24b2fa4e32b90550bb) Thanks [@connor-baer](https://github.com/connor-baer)! - Adds new `disable404Route` config option to disable injection of Astro’s default 404 route
+
+- [#1395](https://github.com/withastro/starlight/pull/1395) [`ce05dfb`](https://github.com/withastro/starlight/commit/ce05dfb4b1e9b90fad057d5d4328e4445f986b3b) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds a new [`<Code>` component](https://starlight.astro.build/guides/components/#code) to render dynamic code strings with Expressive Code
+
+## 0.16.0
+
+### Minor Changes
+
+- [#1383](https://github.com/withastro/starlight/pull/1383) [`490c6ef`](https://github.com/withastro/starlight/commit/490c6eff34ab408c4f55777b7b0caa16787dd3d4) Thanks [@delucis](https://github.com/delucis)! - Refactors Starlight’s internal virtual module system for components to avoid circular references
+
+  This is a change to an internal API.
+  If you were importing the internal `virtual:starlight/components` module, this no longer exists.
+  Update your imports to use the individual virtual modules now available for each component, for example `virtual:starlight/components/EditLink`.
+
+- [#1151](https://github.com/withastro/starlight/pull/1151) [`134292d`](https://github.com/withastro/starlight/commit/134292ddd89683007d7de25545d39738a82c626c) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fixes sidebar auto-generation issue when a file and a directory, located at the same level, have identical names.
+
+  For example, `src/content/docs/guides.md` and `src/content/docs/guides/example.md` will now both be included and `src/content/docs/guides.md` is treated in the same way a `src/content/docs/guides/index.md` file would be.
+
+- [#1386](https://github.com/withastro/starlight/pull/1386) [`0163634`](https://github.com/withastro/starlight/commit/0163634abb8578ce7a3d7ceea36432e98ea70e78) Thanks [@delucis](https://github.com/delucis)! - Tightens `line-height` on `<LinkCard>` titles to fix regression from original design
+
+  If you want to preserve the previous `line-height`, you can add the following custom CSS to your site:
+
+  ```css
+  .sl-link-card a {
+    line-height: 1.6;
+  }
+  ```
+
+- [#1376](https://github.com/withastro/starlight/pull/1376) [`8398432`](https://github.com/withastro/starlight/commit/8398432aa4a0f38e2dd4452dfcdf7033c5713334) Thanks [@delucis](https://github.com/delucis)! - Tweaks vertical spacing in Markdown content styles.
+
+  This is a subtle change to Starlight’s default content styling that should improve most sites:
+
+  - Default vertical spacing between content items is reduced from `1.5rem` to `1rem`.
+  - Spacing before headings is now relative to font size, meaning higher-level headings have slightly more spacing and lower-level headings slightly less.
+
+  The overall impact is to tighten up content that belongs together and improve the visual hierarchy of headings to break up sections.
+
+  Although this is a subtle change, we recommend visually inspecting your site in case this impacts layout of any custom CSS or components.
+
+  If you want to preserve the previous spacing, you can add the following custom CSS to your site:
+
+  ```css
+  /* Restore vertical spacing to match Starlight v0.15 and below. */
+  .sl-markdown-content
+    :not(a, strong, em, del, span, input, code)
+    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+    margin-top: 1.5rem;
+  }
+  .sl-markdown-content
+    :not(h1, h2, h3, h4, h5, h6)
+    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+    margin-top: 2.5rem;
+  }
+  ```
+
+- [#1372](https://github.com/withastro/starlight/pull/1372) [`773880d`](https://github.com/withastro/starlight/commit/773880de87b79bf3107dbc32df29a86dd11e4e6f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the table of contents highlighting styles to prevent UI shifts when scrolling through a page.
+
+  If you want to preserve the previous, buggy styling, you can add the following custom CSS to your site:
+
+  ```css
+  starlight-toc a[aria-current='true'],
+  starlight-toc a[aria-current='true']:hover,
+  starlight-toc a[aria-current='true']:focus {
+    font-weight: 600;
+    color: var(--sl-color-text-invert);
+    background-color: var(--sl-color-text-accent);
+  }
+  ```
+
+## 0.15.4
+
+### Patch Changes
+
+- [#1378](https://github.com/withastro/starlight/pull/1378) [`0f4a31d`](https://github.com/withastro/starlight/commit/0f4a31da4b6d384c569e8556dcc559dc8bfbfebd) Thanks [@delucis](https://github.com/delucis)! - Updates dependencies: `@astrojs/mdx`, `@astrojs/sitemap`, and `astro-expressive-code`
+
+## 0.15.3
+
+### Patch Changes
+
+- [#1303](https://github.com/withastro/starlight/pull/1303) [`3eefd21`](https://github.com/withastro/starlight/commit/3eefd21f2267648b17bc2d6874350fd5dd8bbcb2) Thanks [@lilnasy](https://github.com/lilnasy)! - chore: fix type errors in Starlight internals
+
+- [#1351](https://github.com/withastro/starlight/pull/1351) [`932c022`](https://github.com/withastro/starlight/commit/932c0229d7d8d55f30161ccc36c908140c1f252a) Thanks [@roberto-butti](https://github.com/roberto-butti)! - Adds Italian translation for `search.devWarning` UI
+
+- [#1298](https://github.com/withastro/starlight/pull/1298) [`c7e995c`](https://github.com/withastro/starlight/commit/c7e995cb018179789b5ee45bae5fdd9c20309945) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fixes incorrect sorting behavior for some autogenerated sidebars
+
+- [#1347](https://github.com/withastro/starlight/pull/1347) [`8994d00`](https://github.com/withastro/starlight/commit/8994d007266e0bd8e6116b306ccd9e24c9710411) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Refactor `getLastUpdated` to use `node:child_process` instead of `execa`.
+
+- [#1353](https://github.com/withastro/starlight/pull/1353) [`90fe8da`](https://github.com/withastro/starlight/commit/90fe8da15c8eb227817c2232345ac359aef6bab5) Thanks [@delucis](https://github.com/delucis)! - Fixes sidebar scrollbar hiding behind navbar
+
+## 0.15.2
+
+### Patch Changes
+
+- [#1254](https://github.com/withastro/starlight/pull/1254) [`e9659e8`](https://github.com/withastro/starlight/commit/e9659e869cd0c9ad0b7388397b0fff8e2a9db27a) Thanks [@Pukimaa](https://github.com/Pukimaa)! - Adds Open Collective social link icon
+
+- [#1295](https://github.com/withastro/starlight/pull/1295) [`c3732a9`](https://github.com/withastro/starlight/commit/c3732a9bb5cb7907f00a3ed5e65534f48a5ff6b9) Thanks [@juchym](https://github.com/juchym)! - Improve Ukrainian UI translations
+
+## 0.15.1
+
+### Patch Changes
+
+- [#1273](https://github.com/withastro/starlight/pull/1273) [`ae53155`](https://github.com/withastro/starlight/commit/ae531557aa4d42bd27c15f8f08bb3ca8242c9beb) Thanks [@natemoo-re](https://github.com/natemoo-re)! - Updates `<SocialIcon />` styling for improved accessibility. Specifically, the component now meets the [Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) success criteria defined by [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/).
+
+- [#1289](https://github.com/withastro/starlight/pull/1289) [`9bd343f`](https://github.com/withastro/starlight/commit/9bd343fb1efab90a0aa03a95b1928a53c1674000) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds French translations for Expressive Code UI
+
+- [#1280](https://github.com/withastro/starlight/pull/1280) [`6b1693d`](https://github.com/withastro/starlight/commit/6b1693d55552a48316a31d986e1cbaf695f10a61) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Adds Spanish translations for Expressive Code UI
+
+- [#1276](https://github.com/withastro/starlight/pull/1276) [`667f23d`](https://github.com/withastro/starlight/commit/667f23d615742b44bb18ace39d981f8797b8ac55) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates `astro-expressive-code` dependency to the latest version
+
+- [#1266](https://github.com/withastro/starlight/pull/1266) [`c9edf30`](https://github.com/withastro/starlight/commit/c9edf30b16f66757797dcaa5161b4afc18027476) Thanks [@alex-way](https://github.com/alex-way)! - Removes redundant subprocess calls in git last-updated time utility to improve performance
+
+- [#1278](https://github.com/withastro/starlight/pull/1278) [`e88abb0`](https://github.com/withastro/starlight/commit/e88abb0cc8b329500c15bc77aaed3907ec7dc507) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightUserConfig` TypeScript type representing the user's Starlight configuration received by plugins.
+
 ## 0.15.0
 
 ### Minor Changes

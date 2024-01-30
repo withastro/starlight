@@ -4,7 +4,7 @@ description: Узнайте, как сделать ваш сайт на Starligh
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight предоставляет осмысленные стили и функции по умолчанию, так что вы можете быстро начать работу без необходимости конфигурации.
 Когда вы захотите начать настройку внешнего вида вашего сайта на Starlight, этот руководство поможет вам в этом.
@@ -372,7 +372,7 @@ hero:
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -413,7 +413,7 @@ hero:
 
 ### Использование шрифтов
 
-Чтобы применить шрифт, который вы настроили для вашего сайта, используйте имя вашего выбранного шрифта в [CSS-файле](/ru/guides/css-and-tailwind/#custom-css-styles).
+Чтобы применить шрифт, который вы настроили для вашего сайта, используйте имя вашего выбранного шрифта в [CSS-файле](/ru/guides/css-and-tailwind/#ваши-css-стили).
 Например, чтобы заменить шрифт по умолчанию везде, установите пользовательское свойство `--sl-font`:
 
 ```css
@@ -435,4 +435,4 @@ main {
 }
 ```
 
-Следуйте [инструкциям по настройке пользовательских стилей CSS](/ru/guides/css-and-tailwind/#custom-css-styles), чтобы добавить свои стили на ваш сайт.
+Следуйте [инструкциям по настройке пользовательских стилей CSS](/ru/guides/css-and-tailwind/#ваши-css-стили), чтобы добавить свои стили на ваш сайт.

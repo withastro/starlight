@@ -3,8 +3,8 @@ title: Barra Lateral de Navegación
 description: Aprende a configurar y personalizar los enlaces de navegación de la barra lateral de tu sitio Starlight.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import FileTree from '~/components/file-tree.astro';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 Una barra lateral bien organizada es clave para una buena documentación, ya que es una de las principales formas en que los usuarios navegarán por su sitio. Starlight proporciona un conjunto completo de opciones para personalizar el diseño y el contenido de tu barra lateral.
 
@@ -141,7 +141,8 @@ La configuración anterior genera la siguiente barra lateral:
 
 Starlight puede generar automáticamente un grupo en tu barra lateral basado en un directorio de tu documentación.
 Esto es útil cuando no deseas ingresar manualmente cada elemento de la barra lateral en un grupo.
-Las páginas serán ordenadas alfabéticamente por nombre de archivo de forma predeterminada.
+
+Por defecto, las páginas se ordenan en orden alfabético según el [`slug`](/es/reference/overrides/#slug) del archivo.
 
 Agrega un grupo autogenerado usando un objeto con las propiedades `label` y `autogenerate`. Tu configuración `autogenerate` debe especificar el `directory` para usar en las entradas de la barra lateral. Por ejemplo, con la siguiente configuración:
 

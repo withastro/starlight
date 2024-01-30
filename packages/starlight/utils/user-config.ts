@@ -206,6 +206,9 @@ const UserConfigSchema = z.object({
 		.default('|')
 		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
 
+	/** Disable Starlight's default 404 page. */
+	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
+
 	/**
 	 * Define whether Starlight pages should be prerendered or not.
 	 * Defaults to Astro's default behavior, prerender when "hybrid" and

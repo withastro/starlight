@@ -308,7 +308,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **tipo:** <SocialLinksType />
 
@@ -514,6 +514,13 @@ Establece un delimitador entre el título de la página y el título del sitio w
 Por defecto, cada página tiene un `<title>` de `Título de la página | Título del sitio web`.
 Por ejemplo, esta página es titulada "Referencia de Configuración" y este sitio web es titulado "Starlight", por lo que el `<title>` de esta página es "Referencia de Configuración | Starlight".
 
+### `disable404Route`
+
+**tipo:** `boolean`  
+**por defecto:** `false`
+
+Deshabilita la inyección de la [página 404](https://docs.astro.build/es/core-concepts/astro-pages/#página-de-error-404-personalizada) predeterminada de Starlight. Para usar una ruta `src/pages/404.astro` personalizada en tu proyecto, establece esta opción en `true`.
+
 ### `components`
 
 **tipo:** `Record<string, string>`
@@ -537,10 +544,12 @@ Consulta la [Referencia de Personalización de Componentes](/es/reference/overri
 Extiende Starlight con plugins personalizados.
 Los plugins aplican cambios a tu proyecto para modificar o agregar a las funcionalidades a Starlight.
 
+Visita la [exhibición de plugins](/es/resources/plugins/#plugins) para ver una lista de los plugins disponibles.
+
 ```js
 starlight({
 	plugins: [starlightPlugin()],
 });
 ```
 
-Vea la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.
+Consulta la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.

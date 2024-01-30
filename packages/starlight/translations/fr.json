@@ -22,5 +22,8 @@
   "aside.note": "Note",
   "aside.tip": "Astuce",
   "aside.caution": "Attention",
-  "aside.danger": "Danger"
+  "aside.danger": "Danger",
+  "expressiveCode.copyButtonCopied": "Copié !",
+  "expressiveCode.copyButtonTooltip": "Copier dans le presse-papiers",
+  "expressiveCode.terminalWindowFallbackTitle": "Fenêtre de terminal"
 }

@@ -4,7 +4,7 @@ description: 로고, 사용자 정의 글꼴, 랜딩 페이지 디자인 등을 
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight는 합리적인 기본 스타일과 기능을 제공하므로 구성 없이 빠르게 시작할 수 있습니다. Starlight 사이트의 모양과 느낌을 바꾸고 싶다면 이 가이드를 참조하세요.
 
@@ -268,6 +268,25 @@ hero:
 ---
 ```
 
+### 기본 404 페이지 비활성화
+
+프로젝트에 완전히 사용자 정의된 404 레이아웃이 필요한 경우 `src/pages/404.astro` 경로를 생성하고 [`disable404Route`](/ko/reference/configuration/#disable404route) 구성 옵션을 설정하여 Starlight의 기본 경로를 비활성화할 수 있습니다.
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: '사용자 정의 404가 포함된 문서',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
 ## 사용자 정의 글꼴
 
 기본적으로 Starlight는 모든 텍스트에 대해 사용자의 로컬 장치에서 사용할 수 있는 sans-serif 글꼴을 사용합니다. 이를 통해 대용량 글꼴 파일을 다운로드하기 위한 추가 대역폭 없이 각 사용자에게 친숙한 글꼴로 문서를 빠르게 로드할 수 있습니다.
@@ -349,7 +368,7 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>

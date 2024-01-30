@@ -43,7 +43,8 @@ export default function StarlightIntegration({
 				// Always prerender on static mode
 				// Defaults to prerender on hybrid mode
 				// Defaults to not prerender on server mode
-				const prerender = astroOutput === 'static' || (starlightConfig.prerender ?? (astroOutput === 'hybrid'));
+				const prerender =
+					astroOutput === 'static' || (starlightConfig.prerender ?? astroOutput === 'hybrid');
 
 				userConfig = {
 					...starlightConfig,
@@ -61,8 +62,8 @@ export default function StarlightIntegration({
 				// Always pre-render for pagefind
 				if (!prerender && starlightConfig.pagefind) {
 					logger.warn(
-						'Pagefind cannot index SSR generated pages, the content will be pre-rendered for indexing but not included the final build.\n'
-						+ 'Build time may increase due to this extra work.'
+						'Pagefind cannot index SSR generated pages, the content will be pre-rendered for indexing but not included the final build.\n' +
+							'Build time may increase due to this extra work.'
 					);
 
 					injectRoute({
@@ -72,18 +73,18 @@ export default function StarlightIntegration({
 					});
 				}
 
-				injectRoute({
-					pattern: '404',
-					entrypoint: '@astrojs/starlight/404.astro',
-					prerender: prerender,
-				});
+				if (!userConfig.disable404Route) {
+					injectRoute({
+						pattern: '404',
+						entrypoint: '@astrojs/starlight/404.astro',
+						prerender: prerender,
+					});
+				}
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
 				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
-					integrations.push(
-						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations }),
-					);
+					integrations.push(...starlightExpressiveCode({ starlightConfig, useTranslations }));
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
