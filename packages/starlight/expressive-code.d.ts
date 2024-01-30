@@ -32,4 +32,6 @@ export type { StarlightExpressiveCodeOptions };
  * })
  * ```
  */
-export function defineEcConfig(config: StarlightExpressiveCodeOptions): StarlightExpressiveCodeOptions;
+export function defineEcConfig(
+	config: StarlightExpressiveCodeOptions
+): StarlightExpressiveCodeOptions;
