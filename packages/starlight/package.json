@@ -158,7 +158,10 @@
     "./props": "./props.ts",
     "./schema": "./schema.ts",
     "./types": "./types.ts",
-    "./expressive-code": "./integrations/expressive-code/exports.ts",
+    "./expressive-code": {
+      "types": "./expressive-code.d.ts",
+      "default": "./expressive-code.mjs"
+    },
     "./index.astro": "./index.astro",
     "./404.astro": "./404.astro",
     "./style/markdown.css": "./style/markdown.css"
