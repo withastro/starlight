@@ -41,7 +41,10 @@ La barre latérale suivante sera automatiquement générée :
 		{
 			label: 'reference',
 			items: [
-				{ label: 'Référence de configuration', link: '/reference/configuration/', },
+				{
+					label: 'Référence de configuration',
+					link: '/reference/configuration/',
+				},
 			],
 		},
 	]}
@@ -182,7 +185,10 @@ La barre latérale suivante sera générée :
 				{
 					label: 'advanced',
 					items: [
-						{ label: 'Structure du projet', link: '/guides/project-structure/', },
+						{
+							label: 'Structure du projet',
+							link: '/guides/project-structure/',
+						},
 					],
 				},
 			],
@@ -203,7 +209,7 @@ title: Ma page
 sidebar:
   # Définit une étiquette personnalisée pour le lien dans la barre latérale
   label: Étiquette personnalisée
-  # Définit un ordre personnalisé pour le lien 
+  # Définit un ordre personnalisé pour le lien
   # (les nombres plus petits sont affichés plus haut)
   order: 2
   # Ajoute un badge au lien
@@ -475,7 +481,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'Guides',
-			// Rétracte le groupe et ses sous-groupes générés automatiquement 
+			// Rétracte le groupe et ses sous-groupes générés automatiquement
 			// par défaut.
 			collapsed: true,
 			autogenerate: { directory: 'guides' },
@@ -498,7 +504,10 @@ La configuration ci-dessus génère la barre latérale suivante :
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'Structure du projet', link: '/guides/project-structure/', },
+						{
+							label: 'Structure du projet',
+							link: '/guides/project-structure/',
+						},
 					],
 				},
 			],
@@ -514,7 +523,7 @@ starlight({
 		{
 			label: 'Guides',
 			// Ne rétracte pas le groupe "Guides" mais rétracte ses
-      // sous-groupes générés automatiquement.
+			// sous-groupes générés automatiquement.
 			collapsed: false,
 			autogenerate: { directory: 'guides', collapsed: true },
 		},
@@ -535,7 +544,10 @@ La configuration ci-dessus génère la barre latérale suivante :
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'Structure du projet', link: '/guides/project-structure/', },
+						{
+							label: 'Structure du projet',
+							link: '/guides/project-structure/',
+						},
 					],
 				},
 			],
