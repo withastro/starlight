@@ -10,7 +10,7 @@ test('applies `dir="auto"` to inline code', async () => {
 	expect(output).not.toEqual(input);
 	expect(output).includes('dir="auto"');
 	expect(output).toMatchInlineSnapshot(
-		'"<p>Some text with <code dir=\\"auto\\">inline code</code>.</p>"'
+		`"<p>Some text with <code dir="auto">inline code</code>.</p>"`
 	);
 });
 
@@ -20,6 +20,6 @@ test('applies `dir="ltr"` to code blocks', async () => {
 	expect(output).not.toEqual(input);
 	expect(output).includes('dir="ltr"');
 	expect(output).toMatchInlineSnapshot(
-		'"<p>Some text in a paragraph:</p><pre dir=\\"ltr\\"><code>console.log(\'test\')</code></pre>"'
+		`"<p>Some text in a paragraph:</p><pre dir="ltr"><code>console.log('test')</code></pre>"`
 	);
 });

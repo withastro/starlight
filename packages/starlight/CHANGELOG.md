@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.17.1
+
+### Patch Changes
+
+- [#1437](https://github.com/withastro/starlight/pull/1437) [`655aed4`](https://github.com/withastro/starlight/commit/655aed4840cae59e9abd64b4b585e60f1cfab209) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds Starlight-specific types to `defineEcConfig` function and exports `StarlightExpressiveCodeOptions`.
+
+  This provides Starlight types and IntelliSense support for your Expressive Code configuration options inside an `ec.config.mjs` file. See the [Expressive Code documentation](https://expressive-code.com/key-features/code-component/#using-an-ecconfigmjs-file) for more information.
+
+- [#1420](https://github.com/withastro/starlight/pull/1420) [`275f87f`](https://github.com/withastro/starlight/commit/275f87fd7fc676b9ab323354078c06894e0832c7) Thanks [@abdelhalimjean](https://github.com/abdelhalimjean)! - Fix rare `font-family` issue if users have a font installed with a name of `""`
+
+- [#1365](https://github.com/withastro/starlight/pull/1365) [`a0af7cc`](https://github.com/withastro/starlight/commit/a0af7cc696da987a76edab96cdd2329779e87724) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Correctly format Pagefind search result links when `trailingSlash: 'never'` is used
+
 ## 0.17.0
 
 ### Minor Changes
