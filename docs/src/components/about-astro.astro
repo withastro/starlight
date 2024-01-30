@@ -1,4 +1,10 @@
 ---
+// TODO(HiDeoo) Remove this, only for testing purposes
+import type { StarlightVirtualFrontmatter } from '@astrojs/starlight/props';
+
+type Testing = StarlightVirtualFrontmatter;
+// FIXME(HiDeoo)     ^ This is `any` :(
+
 interface Props {
 	title: string;
 }

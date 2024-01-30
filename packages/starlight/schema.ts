@@ -9,7 +9,7 @@ import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
 export { i18nSchema } from './schemas/i18n';
 
 /** Default content collection schema for Starlight’s `docs` collection. */
-export const StarlightFrontmatterSchema = (context: SchemaContext) =>
+const StarlightFrontmatterSchema = (context: SchemaContext) =>
 	z.object({
 		/** The title of the current page. Required. */
 		title: z.string(),
