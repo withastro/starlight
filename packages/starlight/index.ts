@@ -62,8 +62,9 @@ export default function StarlightIntegration({
 				// Always pre-render for pagefind
 				if (!prerender && starlightConfig.pagefind) {
 					logger.warn(
-						'Pagefind cannot index SSR generated pages, the content will be pre-rendered for indexing but not included the final build.\n' +
-							'Build time may increase due to this extra work.'
+						'Pagefind can only index statically generated pages but it is enabled with prerendering disabled on Starlight.\n' +
+						'Starlight content will be prerenderd for indexing but not included in the output.\n' +
+						'If your Starlight pages will not produce the right content to index when prerendering, you should disable Pagefind.'
 					);
 
 					injectRoute({
