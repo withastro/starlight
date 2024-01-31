@@ -34,14 +34,14 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 		{
 			label: 'guides',
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 			],
 		},
 		{
 			label: 'reference',
 			items: [
-				{ label: 'कॉन्फ़िगरेशन संदर्भ', link: '/reference/configuration/' },
+				{ label: 'कॉन्फ़िगरेशन संदर्भ', link: '/hi/reference/configuration/' },
 			],
 		},
 	]}
@@ -63,7 +63,7 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 starlight({
 	sidebar: [
 		// CSS और स्टाइलिंग मार्गदर्शिका का लिंक।
-		{ label: 'CSS और स्टाइलिंग', link: '/guides/css-and-tailwind/' },
+		{ label: 'CSS और स्टाइलिंग', link: '/hi/guides/css-and-tailwind/' },
 		// Astro वेबसाइट का एक बाहरी लिंक।
 		{ label: 'Astro', link: 'https://astro.build/' },
 	],
@@ -74,7 +74,7 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS और स्टाइलिंग', link: '/guides/css-and-tailwind/' },
+		{ label: 'CSS और स्टाइलिंग', link: '/hi/guides/css-and-tailwind/' },
 		{ label: 'Astro', link: 'https://astro.build/' },
 	]}
 />
@@ -95,15 +95,15 @@ starlight({
 		{
 			label: 'मार्गदर्शिका',
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 				// लिंक का एक नेस्टेड समूह।
 				{
 					label: 'स्टाइलिंग',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: 'CSS', link: '/hi/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/hi/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/hi/guides/css-and-tailwind/' },
 					],
 				},
 			],
@@ -119,14 +119,14 @@ starlight({
 		{
 			label: 'मार्गदर्शिका',
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 				{
 					label: 'स्टाइलिंग',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: 'CSS', link: '/hi/guides/css-and-tailwind/' },
+						{ label: 'Tailwind', link: '/hi/guides/css-and-tailwind/' },
+						{ label: 'Shiki', link: '/hi/guides/css-and-tailwind/' },
 					],
 				},
 			],
@@ -177,12 +177,12 @@ starlight({
 		{
 			label: 'मार्गदर्शिका',
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 				{
 					label: 'advanced',
 					items: [
-						{ label: 'परियोजना संरचना', link: '/guides/project-structure/' },
+						{ label: 'परियोजना संरचना', link: '/hi/guides/project-structure/' },
 					],
 				},
 			],
@@ -245,18 +245,18 @@ starlight({
 		{
 			label: 'मार्गदर्शिका',
 			items: [
-				// "New" बैज वाला एक लिंक.
+				// "नया" बैज वाला एक लिंक.
 				{
 					label: 'अवयवों',
-					link: '/guides/components/',
-					badge: 'New',
+					link: '/hi/guides/components/',
+					badge: 'नया',
 				},
 			],
 		},
-		// "Deprecated" बैज वाला एक स्वतः निर्मित समूह।
+		// "पदावनत" बैज वाला एक स्वतः निर्मित समूह।
 		{
 			label: 'संदर्भ',
-			badge: 'Deprecated',
+			badge: 'पदावनत',
 			autogenerate: { directory: 'reference' },
 		},
 	],
@@ -272,7 +272,7 @@ starlight({
 			items: [
 				{
 					label: 'अवयवों',
-					link: '/guides/components/',
+					link: '/hi/guides/components/',
 					badge: { text: 'नया', variant: 'default' },
 				},
 			],
@@ -283,15 +283,15 @@ starlight({
 			items: [
 				{
 					label: 'कॉन्फ़िगरेशन संदर्भ',
-					link: '/reference/configuration/',
+					link: '/hi/reference/configuration/',
 				},
 				{
 					label: 'फ्रंटमैटर संदर्भ',
-					link: '/reference/frontmatter/',
+					link: '/hi/reference/frontmatter/',
 				},
 				{
 					label: 'ओवरराइड संदर्भ',
-					link: '/reference/overrides/',
+					link: '/hi/reference/overrides/',
 				},
 			],
 		},
@@ -311,11 +311,11 @@ starlight({
 		{
 			label: 'मार्गदर्शिका',
 			items: [
-				// पीले "Experimental" बैज वाला एक लिंक।
+				// पीले "प्रयोगात्मक" बैज वाला एक लिंक।
 				{
 					label: 'अवयवों',
-					link: '/guides/components/',
-					badge: { text: 'Experimental', variant: 'caution' },
+					link: '/hi/guides/components/',
+					badge: { text: 'प्रयोगात्मक', variant: 'caution' },
 				},
 			],
 		},
@@ -332,8 +332,8 @@ starlight({
 			items: [
 				{
 					label: 'अवयवों',
-					link: '/guides/components/',
-					badge: { text: 'Experimental', variant: 'caution' },
+					link: '/hi/guides/components/',
+					badge: { text: 'प्रयोगात्मक', variant: 'caution' },
 				},
 			],
 		},
@@ -402,14 +402,14 @@ starlight({
 					translations: {
 						'pt-BR': 'Componentes',
 					},
-					link: '/guides/components/',
+					link: '/hi/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
 						'pt-BR': 'Internacionalização (i18n)',
 					},
-					link: '/guides/i18n/',
+					link: '/hi/guides/i18n/',
 				},
 			],
 		},
@@ -443,8 +443,8 @@ starlight({
 			// Collapse the group by default.
 			collapsed: true,
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 			],
 		},
 	],
@@ -459,8 +459,8 @@ starlight({
 			label: 'मार्गदर्शिका',
 			collapsed: true,
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 			],
 		},
 	]}
@@ -489,13 +489,13 @@ starlight({
 			label: 'मार्गदर्शिका',
 			collapsed: true,
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 				{
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'परियोजना संरचना', link: '/guides/project-structure/' },
+						{ label: 'परियोजना संरचना', link: '/hi/guides/project-structure/' },
 					],
 				},
 			],
@@ -526,13 +526,13 @@ starlight({
 		{
 			label: 'मार्गदर्शिका',
 			items: [
-				{ label: 'अवयवों', link: '/guides/components/' },
-				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/guides/i18n/' },
+				{ label: 'अवयवों', link: '/hi/guides/components/' },
+				{ label: 'अंतर्राष्ट्रीयकरण (i18n)', link: '/hi/guides/i18n/' },
 				{
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'परियोजना संरचना', link: '/guides/project-structure/' },
+						{ label: 'परियोजना संरचना', link: '/hi/guides/project-structure/' },
 					],
 				},
 			],
