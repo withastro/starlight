@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.17.2
+
+### Patch Changes
+
+- [#1442](https://github.com/withastro/starlight/pull/1442) [`1a642e4`](https://github.com/withastro/starlight/commit/1a642e4d74ee4c30e85bce37b41888b1eae0544a) Thanks [@delucis](https://github.com/delucis)! - Fixes URLs in language picker for sites with `build.format: 'file'`
+
+- [#1440](https://github.com/withastro/starlight/pull/1440) [`2ea1e88`](https://github.com/withastro/starlight/commit/2ea1e883186660b48f0ea8c4da7fead5fb74e313) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds JS support to the `@astrojs/starlight/expressive-code` export to allow importing from non-TS environments.
+
 ## 0.17.1
 
 ### Patch Changes
@@ -40,7 +48,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -60,14 +68,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -79,9 +87,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -154,14 +162,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -218,12 +226,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -571,16 +579,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -959,8 +967,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
