@@ -29,23 +29,29 @@ export function vitePluginStarlightUserConfig(
 		])
 	);
 
-	// TODO(HiDeoo) WIP: Move or inline this somewhere else when things are working.
-	const collectionConfig = `import { defineCollection } from 'astro:content';
-import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+	// TODO(HiDeoo) Clean this
+	const collectionConfigPath = '/src/content/config.ts';
+	// const collectionConfigPath = resolve(fileURLToPath(root), 'src/content/test.ts');
 
-let userCollections;
-try {
-	// TODO(HiDeoo) Comment why this works and relies on Vite behavior.
-	userCollections = (await import('/src/content/config.ts')).collections;
-} catch {}
-if (!userCollections) {
-	userCollections = {
-		docs: defineCollection({ schema: docsSchema() }),
-		i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
-	};
-}
-export const collections = userCollections;
-`;
+	// TODO(HiDeoo) Comment this when this is working
+	const collectionConfigModule = `import { defineCollection } from 'astro:content';
+		import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+		let userCollections;
+		try {
+			userCollections = (await import('${collectionConfigPath}')).collections;
+			// TODO(HiDeoo) Remove this
+			console.log('🚨 [virtual-user-config.ts:41] userCollections:', userCollections)
+		} catch (error) {
+			// TODO(HiDeoo) Remove this
+			console.log('🚨 [virtual-user-config.ts:43] error:', error)
+		}
+		if (!userCollections) {
+			userCollections = {
+				docs: defineCollection({ schema: docsSchema() }),
+				i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+			};
+		}
+		export const collections = userCollections;`;
 
 	/** Map of virtual module names to their code contents as strings. */
 	const modules = {
@@ -66,7 +72,7 @@ export const collections = userCollections;
 						opts.logo.light
 				  )}; export const logos = { dark, light };`
 			: 'export const logos = {};',
-		'virtual:starlight/collection-config': collectionConfig,
+		'virtual:starlight/collection-config': collectionConfigModule,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 

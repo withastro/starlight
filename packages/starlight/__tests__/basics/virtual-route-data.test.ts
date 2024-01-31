@@ -1,6 +1,10 @@
 import { expect, test, vi } from 'vitest';
 import { generateVirtualRouteData, type VirtualPageProps } from '../../utils/virtual-page';
 
+vi.mock('virtual:starlight/collection-config', async () =>
+	(await import('../test-utils')).mockedCollectionConfig()
+);
+
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
 		docs: [
@@ -350,4 +354,19 @@ test('uses provided edit URL if any', () => {
 	});
 	expect(data.editUrl).toEqual(new URL(editUrl));
 	expect(data.entry.data.editUrl).toEqual(editUrl);
+});
+
+test('strips unknown frontmatter properties', () => {
+	const data = generateVirtualRouteData({
+		props: {
+			...virtualPageProps,
+			frontmatter: {
+				...virtualPageProps.frontmatter,
+				// @ts-expect-error - This is an unknown property.
+				unknown: 'test',
+			},
+		},
+		url: new URL('https://example.com'),
+	});
+	expect('unknown' in data.entry.data).toBe(false);
 });
