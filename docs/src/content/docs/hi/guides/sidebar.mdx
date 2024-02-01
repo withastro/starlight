@@ -302,7 +302,7 @@ starlight({
 
 `text` और `variant` गुणों वाले ऑब्जेक्ट का उपयोग करके बैज स्टाइल को अनुकूलित करें।
 
-`text` प्रदर्शित की जाने वाली कंटेंट का प्रतिनिधित्व करता है (उदाहरण के लिए "New")।
+`text` प्रदर्शित की जाने वाली कंटेंट का प्रतिनिधित्व करता है (उदाहरण के लिए "नया")।
 `variant` गुण को निम्नलिखित मानों में से किसी एक पर सेट करके `default` स्टाइल को ओवरराइड करें, जो आपकी साइट के उच्चारण रंग का उपयोग करता है: `note`, `tip`, `danger`, `caution` या `success`।
 
 ```js {10}
@@ -386,26 +386,26 @@ starlight({
 
 ## अंतर्राष्ट्रीयकरण
 
-[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) भाषा टैग निर्दिष्ट करके प्रत्येक समर्थित भाषा के लिए लिंक या समूह लेबल का अनुवाद करने के लिए लिंक और समूह प्रविष्टियों पर अनुवाद संपत्ति का उपयोग करें, उदाहरण के लिए "en", "ar", या "zh-CN", कुंजी के रूप में और अनुवादित लेबल मान के रूप में। `label` गुण का उपयोग डिफ़ॉल्ट लोकेल और बिना अनुवाद वाली भाषाओं के लिए किया जाएगा।
+[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) भाषा टैग निर्दिष्ट करके प्रत्येक समर्थित भाषा के लिए लिंक या समूह लेबल का अनुवाद करने के लिए लिंक और समूह प्रविष्टियों पर `अनुवाद` संपत्ति का उपयोग करें, उदाहरण के लिए `"en"`, `"ar"`, या `"zh-CN"`, कुंजी के रूप में और अनुवादित लेबल मान के रूप में। `label` गुण का उपयोग डिफ़ॉल्ट लोकेल और बिना अनुवाद वाली भाषाओं के लिए किया जाएगा।
 
 ```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: 'मार्गदर्शिका',
 			translations: {
 				'pt-BR': 'Guias',
 			},
 			items: [
 				{
-					label: 'Components',
+					label: 'अवयवों',
 					translations: {
 						'pt-BR': 'Componentes',
 					},
 					link: '/hi/guides/components/',
 				},
 				{
-					label: 'Internationalization (i18n)',
+					label: 'अंतर्राष्ट्रीयकरण (i18n)',
 					translations: {
 						'pt-BR': 'Internacionalização (i18n)',
 					},
@@ -440,7 +440,7 @@ starlight({
 	sidebar: [
 		{
 			label: 'मार्गदर्शिका',
-			// Collapse the group by default.
+			// डिफ़ॉल्ट रूप से समूह को संक्षिप्त करें।
 			collapsed: true,
 			items: [
 				{ label: 'अवयवों', link: '/hi/guides/components/' },
