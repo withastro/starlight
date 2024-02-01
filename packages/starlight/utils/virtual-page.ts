@@ -184,17 +184,17 @@ async function getUserDocsSchema(): Promise<
 }
 
 // https://stackoverflow.com/a/66252656/1945960
-type RemoveIndexSignature<TType> = {
-	[Tkey in keyof TType as string extends Tkey
+type RemoveIndexSignature<T> = {
+	[K in keyof T as string extends K
 		? never
-		: number extends Tkey
+		: number extends K
 		? never
-		: symbol extends Tkey
+		: symbol extends K
 		? never
-		: Tkey]: TType[Tkey];
+		: K]: T[K];
 };
 
 // https://www.totaltypescript.com/concepts/the-prettify-helper
-type Prettify<TType> = {
-	[TKey in keyof TType]: TType[TKey];
+type Prettify<T> = {
+	[K in keyof T]: T[K];
 } & {};
