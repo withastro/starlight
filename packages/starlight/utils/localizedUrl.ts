@@ -17,14 +17,26 @@ export function localizedUrl(url: URL, locale: string | undefined): URL {
 	// Temporarily remove base to simplify
 	if (hasBase) url.pathname = url.pathname.replace(base, '');
 	const [_leadingSlash, baseSegment] = url.pathname.split('/');
-	if (baseSegment && baseSegment in config.locales) {
+	// Strip .html extension to handle file output builds where URL might be e.g. `/en.html`
+	const htmlExt = '.html';
+	const isRootHtml = baseSegment?.endsWith(htmlExt);
+	const baseSlug = isRootHtml ? baseSegment?.slice(0, -1 * htmlExt.length) : baseSegment;
+	if (baseSlug && baseSlug in config.locales) {
 		// We’re in a localized route, substitute the new locale (or strip for root lang).
-		url.pathname = locale
-			? url.pathname.replace(baseSegment, locale)
-			: url.pathname.replace('/' + baseSegment, '');
+		if (locale) {
+			url.pathname = url.pathname.replace(baseSlug, locale);
+		} else if (isRootHtml) {
+			url.pathname = '/index.html';
+		} else {
+			url.pathname = url.pathname.replace('/' + baseSlug, '');
+		}
 	} else if (locale) {
 		// We’re in the root language. Inject the new locale if we have one.
-		url.pathname = '/' + locale + url.pathname;
+		if (baseSegment === 'index.html') {
+			url.pathname = '/' + locale + '.html';
+		} else {
+			url.pathname = '/' + locale + url.pathname;
+		}
 	}
 	// Restore base
 	if (hasBase) url.pathname = base + url.pathname;

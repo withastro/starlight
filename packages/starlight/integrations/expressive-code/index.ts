@@ -179,8 +179,7 @@ export const starlightExpressiveCode = ({
 				}),
 				preprocessComponentConfig: `
 					import starlightConfig from 'virtual:starlight/user-config'
-					import { useTranslations } from '@astrojs/starlight/internal'
-					import { getStarlightEcConfigPreprocessor } from '@astrojs/starlight/expressive-code'
+					import { useTranslations, getStarlightEcConfigPreprocessor } from '@astrojs/starlight/internal'
 
 					export default getStarlightEcConfigPreprocessor({ starlightConfig, useTranslations })
 				`,
