@@ -19,8 +19,8 @@ const virtualPageProps: VirtualPageProps = {
 	frontmatter: { title: 'This is a test title' },
 };
 
-test('adds data to route shape', () => {
-	const data = generateVirtualRouteData({
+test('adds data to route shape', async () => {
+	const data = await generateVirtualRouteData({
 		props: virtualPageProps,
 		url: new URL('https://example.com'),
 	});
@@ -48,20 +48,20 @@ test('adds data to route shape', () => {
 	expect(data.entryMeta.lang).toBe('en');
 });
 
-test('adds custom data to route shape', () => {
+test('adds custom data to route shape', async () => {
 	const props: VirtualPageProps = {
 		...virtualPageProps,
 		hasSidebar: false,
 		dir: 'rtl',
 		lang: 'ks',
 	};
-	const data = generateVirtualRouteData({ props, url: new URL('https://example.com') });
+	const data = await generateVirtualRouteData({ props, url: new URL('https://example.com') });
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
 });
 
-test('adds custom virtual frontmatter data to route shape', () => {
+test('adds custom virtual frontmatter data to route shape', async () => {
 	const props: VirtualPageProps = {
 		...virtualPageProps,
 		frontmatter: {
@@ -72,7 +72,7 @@ test('adds custom virtual frontmatter data to route shape', () => {
 			template: 'splash',
 		},
 	};
-	const data = generateVirtualRouteData({ props, url: new URL('https://example.com') });
+	const data = await generateVirtualRouteData({ props, url: new URL('https://example.com') });
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
 		[
 		  {
@@ -90,8 +90,8 @@ test('adds custom virtual frontmatter data to route shape', () => {
 	expect(data.entry.data.template).toBe(props.frontmatter.template);
 });
 
-test('uses generated sidebar when no sidebar is provided', () => {
-	const data = generateVirtualRouteData({
+test('uses generated sidebar when no sidebar is provided', async () => {
+	const data = await generateVirtualRouteData({
 		props: virtualPageProps,
 		url: new URL('https://example.com'),
 	});
@@ -103,8 +103,8 @@ test('uses generated sidebar when no sidebar is provided', () => {
 	`);
 });
 
-test('uses provided sidebar if any', () => {
-	const data = generateVirtualRouteData({
+test('uses provided sidebar if any', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			sidebar: [
@@ -136,8 +136,8 @@ test('uses provided sidebar if any', () => {
 	`);
 });
 
-test('uses provided pagination if any', () => {
-	const data = generateVirtualRouteData({
+test('uses provided pagination if any', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			frontmatter: {
@@ -176,20 +176,20 @@ test('uses provided pagination if any', () => {
 	`);
 });
 
-test('uses provided headings if any', () => {
+test('uses provided headings if any', async () => {
 	const headings = [
 		{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 		{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 	];
-	const data = generateVirtualRouteData({
+	const data = await generateVirtualRouteData({
 		props: { ...virtualPageProps, headings },
 		url: new URL('https://example.com'),
 	});
 	expect(data.headings).toEqual(headings);
 });
 
-test('generates the table of contents for provided headings', () => {
-	const data = generateVirtualRouteData({
+test('generates the table of contents for provided headings', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			headings: [
@@ -230,8 +230,8 @@ test('generates the table of contents for provided headings', () => {
 	`);
 });
 
-test('respects the `tableOfContents` level configuration', () => {
-	const data = generateVirtualRouteData({
+test('respects the `tableOfContents` level configuration', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			headings: [
@@ -280,8 +280,8 @@ test('respects the `tableOfContents` level configuration', () => {
 	`);
 });
 
-test('disables table of contents if frontmatter includes `tableOfContents: false`', () => {
-	const data = generateVirtualRouteData({
+test('disables table of contents if frontmatter includes `tableOfContents: false`', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			headings: [
@@ -298,8 +298,8 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 	expect(data.toc).toBeUndefined();
 });
 
-test('disables table of contents for splash template', () => {
-	const data = generateVirtualRouteData({
+test('disables table of contents for splash template', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			headings: [
@@ -316,9 +316,9 @@ test('disables table of contents for splash template', () => {
 	expect(data.toc).toBeUndefined();
 });
 
-test('hides the sidebar if the `hasSidebar` option is not specified and the splash template is used', () => {
+test('hides the sidebar if the `hasSidebar` option is not specified and the splash template is used', async () => {
 	const { hasSidebar, ...otherProps } = virtualPageProps;
-	const data = generateVirtualRouteData({
+	const data = await generateVirtualRouteData({
 		props: {
 			...otherProps,
 			frontmatter: {
@@ -331,8 +331,8 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 	expect(data.hasSidebar).toBe(false);
 });
 
-test('includes localized labels', () => {
-	const data = generateVirtualRouteData({
+test('includes localized labels', async () => {
+	const data = await generateVirtualRouteData({
 		props: virtualPageProps,
 		url: new URL('https://example.com'),
 	});
@@ -340,9 +340,9 @@ test('includes localized labels', () => {
 	expect(data.labels['skipLink.label']).toBe('Skip to content');
 });
 
-test('uses provided edit URL if any', () => {
+test('uses provided edit URL if any', async () => {
 	const editUrl = 'https://example.com/edit';
-	const data = generateVirtualRouteData({
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			frontmatter: {
@@ -356,8 +356,8 @@ test('uses provided edit URL if any', () => {
 	expect(data.entry.data.editUrl).toEqual(editUrl);
 });
 
-test('strips unknown frontmatter properties', () => {
-	const data = generateVirtualRouteData({
+test('strips unknown frontmatter properties', async () => {
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			frontmatter: {

@@ -1,13 +1,13 @@
 import { z } from 'astro/zod';
-import type { SchemaContext, ContentConfig } from 'astro:content';
+import { type ContentConfig, type SchemaContext } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import { collections } from 'virtual:starlight/collection-config';
 import { stripLeadingAndTrailingSlashes } from './path';
 import { getToC, type PageProps, type StarlightRouteData } from './route-data';
 import type { StarlightDocsEntry } from './routing';
 import { slugToLocaleData } from './slugs';
 import { getPrevNextLinks, getSidebar } from './navigation';
 import { useTranslations } from './translations';
+import { docsSchema } from '../schema';
 
 /**
  * The frontmatter schema for virtual pages derived from the default schema for Starlight’s `docs`
@@ -15,12 +15,9 @@ import { useTranslations } from './translations';
  * The frontmatter schema for virtual pages cannot include some properties which will be omitted
  * and some others needs to be refined to a stricter type.
  */
-const StarlightVirtualFrontmatterSchema = (context: SchemaContext) => {
-	// We manually cast the schema to its own type directly imported from `astro:content` even though
-	// the virtual module definition is using this same type otherwise the type will fail to be
-	// resolved by consumers and fall back to `any`.
-	const docsSchema = (collections.docs.schema as ContentConfig['collections']['docs']['schema'])!;
-	const schema = typeof docsSchema === 'function' ? docsSchema(context) : docsSchema;
+const StarlightVirtualFrontmatterSchema = async (context: SchemaContext) => {
+	const userDocsSchema = await getUserDocsSchema();
+	const schema = typeof userDocsSchema === 'function' ? userDocsSchema(context) : userDocsSchema;
 
 	return schema.transform((frontmatter) => {
 		/**
@@ -54,7 +51,7 @@ const StarlightVirtualFrontmatterSchema = (context: SchemaContext) => {
  * @see StarlightVirtualFrontmatterSchema
  */
 type StarlightVirtualFrontmatter = Omit<
-	z.input<ReturnType<typeof StarlightVirtualFrontmatterSchema>>,
+	z.input<Awaited<ReturnType<typeof StarlightVirtualFrontmatterSchema>>>,
 	'editUrl' | 'sidebar'
 > & { editUrl?: string | false };
 
@@ -86,15 +83,15 @@ type VirtualDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 	id: string;
 };
 
-export function generateVirtualRouteData({
+export async function generateVirtualRouteData({
 	props,
 	url,
 }: {
 	props: VirtualPageProps;
 	url: URL;
-}): StarlightRouteData {
+}): Promise<StarlightRouteData> {
 	const { isFallback, frontmatter, slug, ...routeProps } = props;
-	const virtualFrontmatter = getVirtualFrontmatter(frontmatter);
+	const virtualFrontmatter = await getVirtualFrontmatter(frontmatter);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar ?? getSidebar(url.pathname, localeData.locale);
@@ -153,10 +150,10 @@ export function generateVirtualRouteData({
 }
 
 /** Validates the virtual frontmatter properties from the props received by a virtual page. */
-function getVirtualFrontmatter(frontmatter: StarlightVirtualFrontmatter) {
+async function getVirtualFrontmatter(frontmatter: StarlightVirtualFrontmatter) {
 	// This needs to be in sync with ImageMetadata.
 	// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
-	return StarlightVirtualFrontmatterSchema({
+	const schema = await StarlightVirtualFrontmatterSchema({
 		image: () =>
 			z.object({
 				src: z.string(),
@@ -173,7 +170,17 @@ function getVirtualFrontmatter(frontmatter: StarlightVirtualFrontmatter) {
 					z.literal('avif'),
 				]),
 			}),
-	}).parse(frontmatter);
+	});
+
+	return schema.parse(frontmatter);
+}
+
+/** Returns the user docs schema and falls back to the default schema if needed. */
+async function getUserDocsSchema(): Promise<
+	NonNullable<ContentConfig['collections']['docs']['schema']>
+> {
+	const userCollections = (await import('virtual:starlight/collection-config')).collections;
+	return userCollections?.docs.schema ?? docsSchema();
 }
 
 // https://stackoverflow.com/a/66252656/1945960

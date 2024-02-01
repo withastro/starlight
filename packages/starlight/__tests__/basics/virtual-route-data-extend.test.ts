@@ -19,11 +19,11 @@ const virtualPageProps: VirtualPageProps = {
 	frontmatter: { title: 'This is a test title' },
 };
 
-test('throws a validation error if a built-in field required by the user schema is not passed down', () => {
+test('throws a validation error if a built-in field required by the user schema is not passed down', async () => {
 	expect.assertions(3);
 
 	try {
-		generateVirtualRouteData({
+		await generateVirtualRouteData({
 			props: virtualPageProps,
 			url: new URL('https://example.com'),
 		});
@@ -35,9 +35,9 @@ test('throws a validation error if a built-in field required by the user schema 
 	}
 });
 
-test('returns new field defined in the user schema', () => {
+test('returns new field defined in the user schema', async () => {
 	const category = 'test category';
-	const data = generateVirtualRouteData({
+	const data = await generateVirtualRouteData({
 		props: {
 			...virtualPageProps,
 			frontmatter: {

@@ -29,30 +29,6 @@ export function vitePluginStarlightUserConfig(
 		])
 	);
 
-	// TODO(HiDeoo) Clean this
-	const collectionConfigPath = '/src/content/config.ts';
-	// const collectionConfigPath = resolve(fileURLToPath(root), 'src/content/test.ts');
-
-	// TODO(HiDeoo) Comment this when this is working
-	const collectionConfigModule = `import { defineCollection } from 'astro:content';
-		import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
-		let userCollections;
-		try {
-			userCollections = (await import('${collectionConfigPath}')).collections;
-			// TODO(HiDeoo) Remove this
-			console.log('🚨 [virtual-user-config.ts:41] userCollections:', userCollections)
-		} catch (error) {
-			// TODO(HiDeoo) Remove this
-			console.log('🚨 [virtual-user-config.ts:43] error:', error)
-		}
-		if (!userCollections) {
-			userCollections = {
-				docs: defineCollection({ schema: docsSchema() }),
-				i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
-			};
-		}
-		export const collections = userCollections;`;
-
 	/** Map of virtual module names to their code contents as strings. */
 	const modules = {
 		'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
@@ -72,7 +48,11 @@ export function vitePluginStarlightUserConfig(
 						opts.logo.light
 				  )}; export const logos = { dark, light };`
 			: 'export const logos = {};',
-		'virtual:starlight/collection-config': collectionConfigModule,
+		'virtual:starlight/collection-config': `let userCollections;
+			try {
+				userCollections = (await import('/src/content/config.ts')).collections;
+			} catch {}
+			export const collections = userCollections;`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 

@@ -25,7 +25,7 @@ declare module 'virtual:starlight/user-images' {
 }
 
 declare module 'virtual:starlight/collection-config' {
-	export const collections: import('astro:content').ContentConfig['collections'];
+	export const collections: import('astro:content').ContentConfig['collections'] | undefined;
 }
 
 declare module 'virtual:starlight/components/Banner' {
