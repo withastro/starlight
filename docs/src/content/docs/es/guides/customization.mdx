@@ -270,6 +270,25 @@ hero:
 ---
 ```
 
+### Desactivar la página 404 predeterminada
+
+Si tu proyecto requiere un diseño 404 completamente personalizado, puedes crear una ruta `src/pages/404.astro` y establecer la opción de configuración [`disable404Route`](/es/reference/configuration/#disable404route) para desactivar la ruta predeterminada de Starlight:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Docs With Custom 404',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
 ## Fuentes personalizadas
 
 De forma predeterminada, Starlight utiliza fuentes sans-serif disponibles en el dispositivo local del usuario para todo el texto.
