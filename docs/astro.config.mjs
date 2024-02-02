@@ -188,6 +188,7 @@ export default defineConfig({
 					translations: {
 						'zh-CN': '资源',
 						fr: 'Ressources',
+						'pt-BR': 'Recursos',
 					},
 					autogenerate: { directory: 'resources' },
 				},
