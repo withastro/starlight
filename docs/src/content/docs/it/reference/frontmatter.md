@@ -5,8 +5,9 @@ description: Una panoramica sui campi predefiniti del frontmatter Starlight.
 
 Puoi personalizzare pagine Markdown e MDX in Starlight definendo i valori nel frontmatter. Per esempio, una pagina potrebbe definire `title` e `description` :
 
-```md
+```md {3-4}
 ---
+# src/content/docs/example.md
 title: A proposito del progetto
 description: Scopri di più sul progetto a cui sto lavorando.
 ---
@@ -28,6 +29,12 @@ Devi fornire un titolo ad ogni pagina. Questo sarà usato in testa alla pagina, 
 
 La descrizione è utilizzata nei metadati e sarà utilizzata dai motori di ricerca e nelle anteprime nei social.
 
+### `slug`
+
+**type**: `string`
+
+Override the slug of the page. See [“Defining custom slugs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) in the Astro docs for more details.
+
 ### `editUrl`
 
 **type:** `string | boolean`
@@ -42,6 +49,7 @@ Puoi aggiungere tag aggiuntivi nell'`<head>` della pagina utilizzando la chiave 
 
 ```md
 ---
+# src/content/docs/example.md
 title: Chi siamo
 head:
   # Utilizza un <title> personalizzato
@@ -59,6 +67,7 @@ Cambia i livelli di titoli inclusi o, se messo a `false`, nasconde la tabella de
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina con solo H2 nella tabella dei contenuti della pagina
 tableOfContents:
   minHeadingLevel: 2
@@ -68,6 +77,7 @@ tableOfContents:
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina senza tabella dei contenuti della pagina
 tableOfContents: false
 ---
@@ -92,6 +102,7 @@ Per esempio, questa configurazione illustra comuni opzioni, incluso il caricamen
 
 ```md
 ---
+# src/content/docs/example.md
 title: La mia pagina principale
 template: splash
 hero:
@@ -111,20 +122,45 @@ hero:
 ---
 ```
 
+You can display different versions of the hero image in light and dark modes.
+
+```md
+---
+# src/content/docs/example.md
+hero:
+  image:
+    alt: A glittering, brightly colored logo
+    dark: ~/assets/logo-dark.png
+    light: ~/assets/logo-light.png
+---
+```
+
 #### `HeroConfig`
 
 ```ts
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Percorso relativo ad un’immagine dentro il tuo progetto.
-    file?: string;
-    // HTML non elaborato da utilizzare al posto dell'immagine.
-    // Potrebbe essere un tag personalizzato `<img>` o `<svg>` in linea.
-    html?: string;
-  };
+  image?:
+    | {
+        // Relative path to an image in your repository.
+        file: string;
+        // Alt text to make the image accessible to assistive technology
+        alt?: string;
+      }
+    | {
+        // Relative path to an image in your repository to be used for dark mode.
+        dark: string;
+        // Relative path to an image in your repository to be used for light mode.
+        light: string;
+        // Alt text to make the image accessible to assistive technology
+        alt?: string;
+      }
+    | {
+        // Raw HTML to use in the image slot.
+        // Could be a custom `<img>` tag or inline `<svg>`.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
@@ -145,6 +181,7 @@ Ad esempio, questa pagina visualizza un banner che include un collegamento a `ex
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina con un banner
 banner:
   content: |
@@ -161,6 +198,7 @@ Sostituisce l'[opzione globale `lastUpdated`](/it/reference/configuration/#lastu
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina con una data di ultimo aggiornamento personalizzata
 lastUpdated: 2022-08-09
 ---
@@ -174,6 +212,7 @@ Sostituisce l'[opzione globale `paginazione`](/it/reference/configuration/#pagin
 
 ```md
 ---
+# src/content/docs/example.md
 # Nascondi il collegamento alla pagina precedente
 prev: false
 ---
@@ -181,6 +220,7 @@ prev: false
 
 ```md
 ---
+# src/content/docs/example.md
 # Sostituisci il testo del collegamento della pagina precedente
 prev: Continua il tutorial
 ---
@@ -188,6 +228,7 @@ prev: Continua il tutorial
 
 ```md
 ---
+# src/content/docs/example.md
 # Sostituisci sia il collegamento che il testo della pagina precedente
 prev:
   link: /pagina-non-correlata/
@@ -203,6 +244,7 @@ Uguale a [`prev`](#prev) ma per il collegamento alla pagina successiva.
 
 ```md
 ---
+# src/content/docs/example.md
 # Nascondi il collegamento alla pagina successiva
 next: false
 ---
@@ -217,6 +259,7 @@ Imposta se questa pagina deve essere inclusa nell'indice di ricerca [Pagefind](h
 
 ```md
 ---
+# src/content/docs/example.md
 # Nascondi questa pagina dai risultati di ricerca
 pagefind: false
 ---
@@ -249,6 +292,7 @@ Imposta l'etichetta per questa pagina nella barra laterale quando viene visualiz
 
 ```md
 ---
+# src/content/docs/example.md
 title: Informazioni su questo progetto
 sidebar:
   label: Informazioni
@@ -264,6 +308,7 @@ I numeri più bassi vengono visualizzati più in alto nel gruppo di collegamenti
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina da visualizzare per prima
 sidebar:
   order: 1
@@ -279,6 +324,7 @@ Impedisce che questa pagina venga inclusa in un gruppo della barra laterale gene
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina da nascondere dalla barra laterale generata automaticamente
 sidebar:
   hidden: vero
@@ -295,6 +341,7 @@ Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina con un badge
 sidebar:
   # Utilizza la variante predefinita corrispondente al colore principale del tuo sito
@@ -304,6 +351,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina con un badge
 sidebar:
   badge:
@@ -320,10 +368,79 @@ Attributi HTML da aggiungere al collegamento della pagina nella barra laterale q
 
 ```md
 ---
+# src/content/docs/example.md
 title: Pagina che si aprirà in una nuova scheda
 sidebar:
   # Apre la pagina in una nuova scheda
   attrs:
     target: _blank
 ---
+```
+
+## Customize frontmatter schema
+
+The frontmatter schema for Starlight’s `docs` content collection is configured in `src/content/config.ts` using the `docsSchema()` helper:
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+
+`docsSchema()` takes the following options:
+
+### `extend`
+
+**type:** Zod schema or function that returns a Zod schema  
+**default:** `z.object({})`
+
+Extend Starlight’s schema with additional fields by setting `extend` in the `docsSchema()` options.
+The value should be a [Zod schema](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod).
+
+In the following example, we provide a stricter type for `description` to make it required and add a new optional `category` field:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // Make a built-in field required instead of optional.
+        description: z.string(),
+        // Add a new field to the schema.
+        category: z.enum(['tutorial', 'guide', 'reference']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+To take advantage of the [Astro `image()` helper](https://docs.astro.build/en/guides/images/#images-in-content-collections), use a function that returns your schema extension:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // Add a field that must resolve to a local image.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```
