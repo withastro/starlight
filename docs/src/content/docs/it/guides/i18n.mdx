@@ -141,9 +141,12 @@ Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà 
 
 ## Tradurre l'interfaccia Starlight
 
+import LanguagesList from '~/components/languages-list.astro';
+
 In aggiunta alla possibilità di avere pagine multilingua, Starlight permette di tradurre le scritte dell'interfaccia (per esempio l'intestazione "In questa pagina" nella tabella dei contenuti) in modo che i lettori possano vedere il sito interamente nella lingua selezionata.
 
-Le stringhe dell'interfaccia utente tradotte in inglese, ceco, francese, tedesco, italiano, giapponese, portoghese, olandese, danese, spagnolo, turco, arabo, norvegese, farsi, ebraico, cinese semplificato, coreano, indonesiano, russo, svedese e vietnamese sono disponibili di default e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Le stringhe dell'interfaccia utente tradotte in <LanguagesList /> sono disponibili di default
+e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
 
@@ -206,8 +209,19 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    }
    ```
 
-   Il pannello di ricerca di Starlight è basato sulla libreria [Pagefind](https://pagefind.app/).
-   Puoi impostare le traduzioni per l'interfaccia utente di Pagefind nello stesso file JSON utilizzando le chiavi pagefind":
+	 I blocchi di codice di Starlight sono gestiti dalla libreria [Expressive Code](https://github.com/expressive-code/expressive-code).
+	 Puoi impostare le traduzioni per le stringhe dell'interfaccia utente nella stessa file JSON utilizzando le chiavi `expressiveCode`:
+
+	 ```json
+	 {
+		"expressiveCode.copyButtonCopied": "Copiato!",
+		"expressiveCode.copyButtonTooltip": "Copia negli appunti",
+		"expressiveCode.terminalWindowFallbackTitle": "Finestra del terminale"
+	 }
+    ```
+
+   Il modulo di ricerca di Starlight è gestito dalla libreria [Pagefind](https://pagefind.app/).
+   Puoi impostare le traduzioni per l'interfaccia utente di Pagefind nel medesimo file JSON utilizzando le chiavi `pagefind`:
 
    ```json
    {
@@ -223,3 +237,28 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+### Estendere lo schema di traduzione
+
+Aggiungi chiavi personalizzate ai dizionari di traduzione del tuo sito impostando `extend` nelle opzioni di `i18nSchema()`.
+Nell'esempio seguente, viene aggiunta una nuova chiave opzionale `custom.label` alle chiavi predefinite:
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Per saperne di più sugli schemi di raccolta dei contenuti, consulta [ "Definire uno schema di raccolta"](https://docs.astro.build/it/guides/content-collections/#defining-a-collection-schema) nella documentazione di Astro.
