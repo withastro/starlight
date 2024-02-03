@@ -18,6 +18,7 @@ Per aggiungere i tipi di dato ai tuoi componenti personalizzati, importa il tipo
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -134,6 +135,12 @@ Oggetto JavaScript `Date` che rappresenta l'ultimo aggiornamento di questa pagin
 
 Oggetto `URL` per l'indirizzo in cui questa pagina può essere modificata se abilitata.
 
+#### `labels`
+
+**Type:** `Record<string, string>`
+
+An object containing UI strings localized for the current page. See the [“Translate Starlight’s UI”](/guides/i18n/#translate-starlights-ui) guide for a list of all the available keys.
+
 ---
 
 ## Componenti
@@ -226,6 +233,10 @@ L'implementazione predefinita include la logica per il rendering dei loghi defin
 
 Componente utilizzato per eseguire il rendering dell'interfaccia utente di ricerca di Starlight.
 L'implementazione predefinita include il pulsante nell'intestazione e il codice per visualizzare una schermata di ricerca quando viene cliccata e caricare l'[interfaccia utente di Pagefind](https://pagefind.app/).
+
+When [`pagefind`](/reference/configuration/#pagefind) is disabled, the default search component will not be rendered.
+However, if you override `Search`, your custom component will always be rendered even if the `pagefind` configuration option is `false`.
+This allows you to add UI for alternative search providers when disabling Pagefind.
 
 #### `SocialIcons`
 
@@ -341,6 +352,8 @@ L'implementazione predefinita mostra un titolo di grandi dimensioni, uno slogan 
 
 Componente renderizzato attorno al contenuto principale di ogni pagina.
 L'implementazione predefinita imposta gli stili di base da applicare al contenuto Markdown.
+
+The Markdown content styles are also exposed in `@astrojs/starlight/style/markdown.css` and scoped to the `.sl-markdown-content` CSS class.
 
 ---
 
