@@ -43,11 +43,15 @@ export default function StarlightIntegration({
 					injectRoute({
 						pattern: '404',
 						entrypoint: '@astrojs/starlight/404.astro',
+						// Ensure page is pre-rendered even when project is on server output mode
+						prerender: true,
 					});
 				}
 				injectRoute({
 					pattern: '[...slug]',
 					entrypoint: '@astrojs/starlight/index.astro',
+					// Ensure page is pre-rendered even when project is on server output mode
+					prerender: true,
 				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
@@ -78,6 +82,13 @@ export default function StarlightIntegration({
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
+					experimental: {
+						// For projects in server mode enable global route priority to allow custom
+						// routes to customize any path.
+						...(config.output === 'server' && {
+							globalRoutePriority: true,
+						}),
+					}
 				});
 			},
 
