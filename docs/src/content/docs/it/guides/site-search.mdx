@@ -5,15 +5,15 @@ description: Scopri le funzionalità di ricerca nel sito integrate in Starlight 
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Di default, i siti Starlight includono la ricerca a testo intero potenziata da [Pagefind](https://pagefind.app/), che è uno strumento di ricerca veloce e a bassa larghezza di banda per i siti statici. Non è richiesta alcuna configurazione per abilitare la ricerca. Compila e distribuisci il tuo sito, quindi usa la barra di ricerca nell'intestazione del sito per trovare i contenuti.
+Di default, i siti Starlight includono la ricerca a testo intero potenziata da [Pagefind](https://pagefind.app/), che è uno strumento di ricerca veloce e a bassa larghezza di banda per i siti statici.
 
-Per escludere una pagina dall'indice di ricerca, aggiungi [`pagefind: false`](/it/reference/frontmatter/#pagefind) al frontmatter della pagina:
+Non è richiesta alcuna configurazione per abilitare la ricerca. Compila e distribuisci il tuo sito, quindi usa la barra di ricerca nell'intestazione del sito per trovare i contenuti.
 
 ## Nascondere contenuti dai risultati di ricerca
 
 ### Escludere una pagina
 
-Per escludere una pagina dall'indice di ricerca, aggiungi [`pagefind: false`](/reference/frontmatter/#pagefind) nel frontmatter della pagina:
+Per escludere una pagina dall'indice di ricerca, aggiungi [`pagefind: false`](/it/reference/frontmatter/#pagefind) nel frontmatter della pagina:
 
 ```md title="src/content/docs/not-indexed.md" ins={3}
 ---
@@ -37,7 +37,7 @@ Questo testo sarà ricercabile.
 
 <div data-pagefind-ignore>
 
-  Questo testo sarà nascosto dalla ricerca. 
+Questo testo sarà nascosto dalla ricerca. 
 
 </div>
 ```
@@ -107,7 +107,7 @@ Con questa configurazione aggiornata, la barra di ricerca nel tuo sito aprirà o
 #### Traduzione dell'interfaccia utente di DocSearch
 
 DocSearch fornisce solo stringhe dell'interfaccia utente in inglese di default.
-Aggiungi traduzioni della UI della schermata per la tua lingua utilizzando il sistema di internazionalizzazione integrato in Starlight.
+Aggiungi traduzioni della UI della schermata per la tua lingua utilizzando il [sistema di internazionalizzazione](/it/guides/i18n/#tradurre-linterfaccia-starlight) integrato in Starlight.
 
 1. Estendi la definizione della collezione di contenuti `i18n` di Starlight con lo schema DocSearch in `src/content/config.ts`:
 
