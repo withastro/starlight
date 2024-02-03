@@ -33,6 +33,21 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/en/core-concepts/framework-components/).
 Vedi di più su come [usare componenti in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) nella documentazione Astro.
 
+### Compatibility with Starlight’s styles
+
+Starlight applies default styling to your Markdown content, for example adding margin between elements.
+If these styles conflict with your component’s appearance, set the `not-content` class on your component to disable them.
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Not impacted by Starlight’s default content styling.</p>
+</div>
+```
+
 ## Componenti integrati
 
 Starlight fornisce dei componenti per casi comuni in una documentazione.
@@ -46,17 +61,21 @@ Puoi rappresentare contenuti con un'interfaccia a schede con i componenti `<Tabs
 Ogni `<TabItem>` deve avere un `label` per indicare la scheda corrispondente.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Lune">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
+The code above generates the following tabs on the page:
+
 <Tabs>
-	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Lune">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Card
@@ -69,6 +88,8 @@ Racchiudi più card in `<CardGrid>` per visualizzarle fianco a fianco se c'è ab
 Una `<Card>` necessita di `title` e può avere eventualmente un attributo `icon` impostato ad [una delle icone Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="Guarda qui">Contenuti interessanti da evidenziare.</Card>
@@ -82,6 +103,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 </CardGrid>
 ```
+
+The code above generates the following on the page:
 
 <Card title="Guarda qui">Contenuti interessanti da evidenziare.</Card>
 
@@ -115,6 +138,8 @@ Una `<LinkCard>` richiede un `title` e un attributo [`href`](https://developer.m
 Raggruppa più componenti `<LinkCard>` in `<CardGrid>` per visualizzare le schede una accanto all'altra quando c'è spazio sufficiente.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -154,6 +179,8 @@ Starlight fornisce una serie di icone comuni che puoi visualizzare nei tuoi cont
 Ogni `<Icon>` richiede un [`name`](#all-icons) e può facoltativamente includere un attributo `label`, `size` e `color`.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
@@ -168,3 +195,49 @@ Il codice sopra genera quanto segue nella pagina:
 Di seguito è riportato un elenco di tutte le icone disponibili con i nomi associati. Fare clic su un'icona per copiarne il codice componente.
 
 <IconsList />
+
+### Code
+
+Use the `<Code>` component to render syntax highlighted code when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
+
+See the [Expressive Code “Code Component” docs](https://expressive-code.com/key-features/code-component/) for full details of the props `<Code>` supports.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+The code above generates the following on the page:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### Imported Code
+
+Use [Vite’s `?raw` import suffix](https://vitejs.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
+You can then pass this imported string to the `<Code>` component to include it on your page.
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+The code above generates the following on the page:
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
