@@ -7,6 +7,22 @@ Starlight supporta l'intera sintassi [Markdown](https://daringfireball.net/proje
 
 Assicurarsi di guardare la [documentazione MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) o la [documentazione Markdoc](https://markdoc.dev/docs/syntax) se si vogliono usare questi formati, dato che il supporto Markdown può variare.
 
+## Frontmatter
+
+You can customize individual pages in Starlight by setting values in their frontmatter.
+Frontmatter is set at the top of your files between `---` separators:
+
+```md title="src/content/docs/example.md"
+---
+title: My page title
+---
+
+Page content follows the second `---`.
+```
+
+Every page must include at least a `title`.
+See the [frontmatter reference](/reference/frontmatter/) for all available fields and how to add custom fields.
+
 ## Stili in linea
 
 Il testo può essere **grassetto**, _corsivo_, o ~~barrato~~.
@@ -89,6 +105,8 @@ Posso collegarmi alla [mia conclusione](#conclusione) che si trova più in basso
 
 Titoli di livello 2 (`<h2>`) e di livello 3 (`<h3>`) verranno inclusi automaticamente nella tabella dei contenuti.
 
+Learn more about how Astro processes heading `id`s in [the Astro Documentation](https://docs.astro.build/it/guides/markdown-content/#heading-ids)
+
 ## Aside
 
 Gli aside (conosciuti anche come "ammonizioni" o "richiami") sono utili per indicare contenuti secondari insieme ai contenuti principali.
@@ -110,8 +128,7 @@ npm run create astro@latest -- --template starlight
 
 ````md
 :::note
-Starlight è uno strumento per siti da documentazione con [Astro](https://astro.build/).
-Puoi iniziare con questo comando:
+Starlight è uno strumento per siti da documentazione con [Astro](https://astro.build/). Puoi iniziare con questo comando:
 
 ```sh
 npm run create astro@latest -- --template starlight
@@ -201,10 +218,153 @@ var fun = function lang(l) {
 ```
 ````
 
-```md
-I blocchi lunghi su una linea sola non vanno a capo. Se sono troppo lunghi si può scrollare orizzontalmente. Questo dovrebbe essere abbastanza lungo per dimostrarlo.
-```
+### Expressive Code features
+
+Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to extend formatting possibilities for code blocks.
+Expressive Code’s text markers and window frames plugins are enabled by default.
+Code block rendering can be configured using Starlight’s [`expressiveCode` configuration option](/reference/configuration/#expressivecode).
+
+#### Text markers
+
+You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) on the opening line of your code block.
+Use curly braces (`{ }`) to highlight entire lines, and quotation marks to highlight strings of text.
+
+There are three highlighting styles: neutral for calling attention to code, green for indicating inserted code, and red for indicating deleted code.
+Both text and entire lines can be marked using the default marker, or in combination with `ins=` and `del=` to produce the desired highlighting.
+
+Expressive Code provides several options for customizing the visual appearance of your code samples.
+Many of these can be combined, for highly illustrative code samples.
+Please explore the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) for the extensive options available.
+Some of the most common examples are shown below:
+
+- [Mark entire lines & line ranges using the `{ }` marker](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+    // This line (#2) and the next one are highlighted
+    return 'This is line #3 of this snippet';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // This line (#2) and the next one are highlighted
+    return 'This is line #3 of this snippet';
+  }
+  ```
+  ````
+
+- [Mark selections of text using the `" "` marker or regular expressions](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+
+  ```js "Individual terms" /Even.*supported/
+  // Individual terms can be highlighted, too
+  function demo() {
+    return 'Even regular expressions are supported';
+  }
+  ```
+
+  ````md
+  ```js "Individual terms" /Even.*supported/
+  // Individual terms can be highlighted, too
+  function demo() {
+    return 'Even regular expressions are supported';
+  }
+  ```
+  ````
+
+- [Mark text or lines as inserted or deleted with `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="inserted" del="deleted"
+  function demo() {
+    console.log('These are inserted and deleted marker types');
+    // The return statement uses the default marker type
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="inserted" del="deleted"
+  function demo() {
+    console.log('These are inserted and deleted marker types');
+    // The return statement uses the default marker type
+    return true;
+  }
+  ```
+  ````
+
+- [Combine syntax highlighting with `diff`-like syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // This entire block gets highlighted as JavaScript,
+      // and we can still add diff markers to it!
+  -   console.log('Old code to be removed')
+  +   console.log('New and shiny code!')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // This entire block gets highlighted as JavaScript,
+      // and we can still add diff markers to it!
+  -   console.log('Old code to be removed')
+  +   console.log('New and shiny code!')
+    }
+  ```
+  ````
+
+#### Frames and titles
+
+Code blocks can be rendered inside a window-like frame.
+A frame that looks like a terminal window will be used for shell scripting languages (e.g. `bash` or `sh`).
+Other languages display inside a code editor-style frame if they include a title.
+
+A code block’s optional title can be set either with a `title="..."` attribute following the code block's opening backticks and language identifier, or with a file name comment in the first lines of the code.
+
+- [Add a file name tab with a comment](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+- [Add a title to a Terminal window](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```bash title="Installing dependencies…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="Installing dependencies…"
+  npm install
+  ```
+  ````
+
+- [Disable window frames with `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "This is not rendered as a terminal despite using the bash language"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "This is not rendered as a terminal despite using the bash language"
+  ```
+  ````
 
 ## Altre funzionalità Markdown utili
 
 Starlight supporta tutte le altre funzionalità Markdown, come liste e tabelle. Guarda la [Markdown Cheat Sheet da The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) per una panoramica veloce su tutte le funzionalità Markdown.
+
+## Advanced Markdown and MDX configuration
+
+Starlight uses Astro’s Markdown and MDX renderer built on remark and rehype. You can add support for custom syntax and behavior by adding `remarkPlugins` or `rehypePlugins` in your Astro config file. See [“Configuring Markdown and MDX”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) in the Astro docs to learn more.
