@@ -44,7 +44,7 @@ Puoi vedere tutte le proprietà personalizzate CSS utilizzate da Starlight che p
 
 ## CSS Tailwind
 
-Il supporto CSS Tailwind nei progetti Astro è fornito dall'[integrazione Astro Tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
+Il supporto CSS Tailwind nei progetti Astro è fornito dall'[integrazione Astro Tailwind](https://docs.astro.build/it/guides/integrations-guide/tailwind/).
 Starlight fornisce un plug-in Tailwind complementare per aiutare a configurare Tailwind per la compatibilità con gli stili di Starlight.
 
 Il plugin Starlight Tailwind applica la seguente configurazione:
@@ -183,16 +183,16 @@ Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi p
 
 5. Aggiungi il plugin Starlight Tailwind a `tailwind.config.cjs`:
 
-   ```js ins={2,7}
-   // tailwind.config.cjs
-   const starlightPlugin = require('@astrojs/starlight-tailwind');
+    ```js ins={2,7}
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
-   /** @type {import('tailwindcss').Config} */
-   module.exports = {
-   	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-   	plugins: [starlightPlugin()],
-   };
-   ```
+    /** @type {import('tailwindcss').Config} */
+    export default {
+    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    	plugins: [starlightPlugin()],
+    };
+    ```
 
 ### Styling di Starlight con Tailwind
 
@@ -206,26 +206,25 @@ Se impostate, le seguenti opzioni sovrascriveranno gli stili predefiniti di Star
 - `fontFamily.mono` — utilizzato per esempi di codice
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
 			colors: {
-				// Il tuo colore preferito. Indigo è il più vicino alle impostazioni predefinite di Starlight.
+				// Your preferred accent color. Indigo is closest to Starlight’s defaults.
 				accent: colors.indigo,
-				// La tua scala di grigi preferita. Lo zinco è il più vicino ai valori predefiniti di Starlight.
+				// Your preferred gray scale. Zinc is closest to Starlight’s defaults.
 				gray: colors.zinc,
 			},
 			fontFamily: {
+				// Your preferred text font. Starlight uses a system font stack by default.
 				sans: ['"Atkinson Hyperlegible"'],
-				// Il tuo carattere di testo preferito. Starlight utilizza uno stack di caratteri di sistema per impostazione predefinita.
-				sans: ['"Atkinson Hyperlegible"'],
-				// Il tuo carattere di codice preferito. Starlight utilizza i caratteri di sistema a spaziatura fissa per impostazione predefinita.
+				// Your preferred code font. Starlight uses system monospace fonts by default.
 				mono: ['"IBM Plex Mono"'],
 			},
 		},
@@ -282,9 +281,8 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 		CSS](#stili-css-personalizzati) per applicare questo tema al tuo sito.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		L'esempio [file di configurazione di
-		Tailwind](#styling-di-starlight-con-tailwind) di seguito include tavolozze
-		di colori `accent` e `gray` generate da utilizzare in Oggetto di
-		configurazione `theme.extend.colors`.
+		L'esempio [file di configurazione di Tailwind](#styling-di-starlight-con-tailwind) di seguito
+		include tavolozze di colori `accent` e `gray` generate da utilizzare in
+		Oggetto di configurazione `theme.extend.colors`.
 	</Fragment>
 </ThemeDesigner>
