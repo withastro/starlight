@@ -105,7 +105,7 @@ Posso collegarmi alla [mia conclusione](#conclusione) che si trova più in basso
 
 Titoli di livello 2 (`<h2>`) e di livello 3 (`<h3>`) verranno inclusi automaticamente nella tabella dei contenuti.
 
-Learn more about how Astro processes heading `id`s in [the Astro Documentation](https://docs.astro.build/it/guides/markdown-content/#heading-ids)
+Scopri come Astro processa gli `id` di heading nella [documentazione di Astro](https://docs.astro.build/it/guides/markdown-content/#heading-ids)
 
 ## Aside
 
