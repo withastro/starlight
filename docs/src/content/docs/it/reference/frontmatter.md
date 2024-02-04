@@ -19,31 +19,31 @@ Benvenuto alla pagina "a proposito del progetto"!
 
 ### `title` (obbligatorio)
 
-**type:** `string`
+**tipo:** `string`
 
 Devi fornire un titolo ad ogni pagina. Questo sarà usato in testa alla pagina, nelle finestre del browser e nei metadati della pagina.
 
 ### `description`
 
-**type:** `string`
+**tipo:** `string`
 
 La descrizione è utilizzata nei metadati e sarà utilizzata dai motori di ricerca e nelle anteprime nei social.
 
 ### `slug`
 
-**type**: `string`
+**tipo:**: `string`
 
-Override the slug of the page. See [“Defining custom slugs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) in the Astro docs for more details.
+Sovrascrivi lo slug della pagina. Vedi [“Definizione degli slug personalizzati”](https://docs.astro.build/it/guides/content-collections/#defining-custom-slugs) nella documentazione di Astro per ulteriori dettagli.
 
 ### `editUrl`
 
-**type:** `string | boolean`
+**tipo:** `string | boolean`
 
 Sovrascrive la [configurazione globale `editLink`](/it/reference/configuration/#editlink). Metti a `false` per disabilitare "Modifica la pagina" per quella pagina specifica oppure fornisci un link alternativo.
 
 ### `head`
 
-**type:** [`HeadConfig[]`](/it/reference/configuration/#headconfig)
+**tipo:** [`HeadConfig[]`](/it/reference/configuration/#headconfig)
 
 Puoi aggiungere tag aggiuntivi nell'`<head>` della pagina utilizzando la chiave `head` nel frontmatter. Questo significa che puoi aggiungere stili personalizzati, metadati o altri tag in una pagina. Il funzionamento è simile [all'opzione globale `head`](/it/reference/configuration/#head).
 
@@ -60,7 +60,7 @@ head:
 
 ### `tableOfContents`
 
-**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
+**tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 
 Sovrascrive la [configurazione globale `tableOfContents`](/it/reference/configuration/#tableofcontents).
 Cambia i livelli di titoli inclusi o, se messo a `false`, nasconde la tabella dei contenuti della pagina.
@@ -85,8 +85,8 @@ tableOfContents: false
 
 ### `template`
 
-**type:** `'doc' | 'splash'`  
-**default:** `'doc'`
+**tipo:** `'doc' | 'splash'`  
+**predefinito:** `'doc'`
 
 Definisce il layout per la pagina.
 Le pagine utilizzano `'doc'` come predefinita.
@@ -94,7 +94,7 @@ Se valorizzato a `'splash'` viene utilizzato un layout senza barre laterali otti
 
 ### `hero`
 
-**type:** [`HeroConfig`](#heroconfig)
+**tipo:** [`HeroConfig`](#heroconfig)
 
 Aggiunge un componente hero all'inizio della pagina. Funziona bene con `template: splash`.
 
@@ -122,14 +122,14 @@ hero:
 ---
 ```
 
-You can display different versions of the hero image in light and dark modes.
+Puoi mostrare diverse versioni dell'immagine in base alla modalità chiara o scura.
 
 ```md
 ---
 # src/content/docs/example.md
 hero:
   image:
-    alt: A glittering, brightly colored logo
+    alt: Un logo brillante e luminoso
     dark: ~/assets/logo-dark.png
     light: ~/assets/logo-light.png
 ---
@@ -143,22 +143,22 @@ interface HeroConfig {
   tagline?: string;
   image?:
     | {
-        // Relative path to an image in your repository.
+        // Percorso relativo a un'immagine nella tua repository.
         file: string;
-        // Alt text to make the image accessible to assistive technology
+        // Testo alternativo per rendere l'immagine accessibile alla tecnologia assistiva
         alt?: string;
       }
     | {
-        // Relative path to an image in your repository to be used for dark mode.
+        // Percorso relativo a un'immagine nella tua repository da utilizzare per la modalità scura.
         dark: string;
-        // Relative path to an image in your repository to be used for light mode.
+        // Percorso relativo a un'immagine nella tua repository da utilizzare per la modalità chiara.
         light: string;
-        // Alt text to make the image accessible to assistive technology
+        // Testo alternativo per rendere l'immagine accessibile alla tecnologia assistiva
         alt?: string;
       }
     | {
-        // Raw HTML to use in the image slot.
-        // Could be a custom `<img>` tag or inline `<svg>`.
+        // HTML grezzo da utilizzare nello slot dell'immagine.
+        // Potrebbe essere un tag `<img>` personalizzato o `<svg>` inline.
         html: string;
       };
   actions?: Array<{
@@ -172,7 +172,7 @@ interface HeroConfig {
 
 ### `banner`
 
-**type:** `{ content: string }`
+**tipo:** `{ content: string }`
 
 Visualizza un banner di annuncio nella parte superiore di questa pagina.
 
@@ -192,7 +192,7 @@ banner:
 
 ### `lastUpdated`
 
-**type:** `Date | boolean`
+**tipo:** `Date | boolean`
 
 Sostituisce l'[opzione globale `lastUpdated`](/it/reference/configuration/#lastupdated). Se viene specificata una data, deve essere un [timestamp YAML](https://yaml.org/type/timestamp.html) valido e sovrascriverà la data archiviata nella cronologia Git per questa pagina.
 
@@ -206,7 +206,7 @@ lastUpdated: 2022-08-09
 
 ### `prev`
 
-**type:** `boolean | string | { link?: string; label?: string }`
+**tipo:** `boolean | string | { link?: string; label?: string }`
 
 Sostituisce l'[opzione globale `paginazione`](/it/reference/configuration/#pagination). Se viene specificata una stringa, il testo del collegamento generato verrà sostituito e se viene specificato un oggetto, sia il collegamento che il testo verranno sovrascritti.
 
@@ -238,7 +238,7 @@ prev:
 
 ### `next`
 
-**type:** `boolean | string | { link?: string; label?: string }`
+**tipo:** `boolean | string | { link?: string; label?: string }`
 
 Uguale a [`prev`](#prev) ma per il collegamento alla pagina successiva.
 
@@ -252,8 +252,8 @@ next: false
 
 ### `pagefind`
 
-**type:** `boolean`  
-**default:** `true`
+**tipo:** `boolean`  
+**predefinito:** `true`
 
 Imposta se questa pagina deve essere inclusa nell'indice di ricerca [Pagefind](https://pagefind.app/). Imposta su `false` per escludere una pagina dai risultati di ricerca:
 
@@ -267,7 +267,7 @@ pagefind: false
 
 ### `sidebar`
 
-**type:** [`SidebarConfig`](#sidebarconfig)
+**tipo:** [`SidebarConfig`](#sidebarconfig)
 
 Controlla il modo in cui questa pagina viene visualizzata nella [barra laterale](/it/reference/configuration/#sidebar), quando si utilizza un gruppo di collegamenti generato automaticamente.
 
@@ -285,8 +285,8 @@ interface SidebarConfig {
 
 #### `label`
 
-**type:** `string`  
-**default:** the page [`title`](#title-obbligatorio)
+**tipo:** `string`  
+**predefinito:** la pagina [`title`](#title-obbligatorio)
 
 Imposta l'etichetta per questa pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 
@@ -301,7 +301,7 @@ sidebar:
 
 #### `order`
 
-**type:** `number`
+**tipo:** `number`
 
 Controlla l'ordine di questa pagina quando ordini un gruppo di collegamenti generato automaticamente.
 I numeri più bassi vengono visualizzati più in alto nel gruppo di collegamenti.
@@ -317,8 +317,8 @@ sidebar:
 
 #### `hidden`
 
-**type:** `boolean`
-**default:** `false`
+**tipo:** `boolean`
+**predefinito:** `false`
 
 Impedisce che questa pagina venga inclusa in un gruppo della barra laterale generato automaticamente.
 
@@ -333,7 +333,7 @@ sidebar:
 
 #### `badge`
 
-**type:** <code>string | <a href="/it/reference/configuration/#badgeconfig">BadgeConfig</a></code>
+**tipo:** <code>string | <a href="/it/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
 Aggiungi un badge alla pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 Quando si utilizza una stringa, il badge verrà visualizzato con un colore in risalto predefinito.
@@ -362,7 +362,7 @@ sidebar:
 
 #### `attrs`
 
-**type:** `Record<string, string | number | boolean | undefined>`
+**tipo:** `Record<string, string | number | boolean | undefined>`
 
 Attributi HTML da aggiungere al collegamento della pagina nella barra laterale quando viene visualizzato in un gruppo di collegamenti generato automaticamente.
 
@@ -377,9 +377,9 @@ sidebar:
 ---
 ```
 
-## Customize frontmatter schema
+## Personalizza lo schema del frontmatter
 
-The frontmatter schema for Starlight’s `docs` content collection is configured in `src/content/config.ts` using the `docsSchema()` helper:
+Lo schema del frontmatter per la raccolta di contenuti `docs` di Starlight è configurato in `src/content/config.ts` utilizzando l'helper `docsSchema()`:
 
 ```ts {3,6}
 // src/content/config.ts
@@ -391,19 +391,19 @@ export const collections = {
 };
 ```
 
-Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+Per saperne di più sugli schemi di raccolta dei contenuti, consulta [“Definizione di uno schema di raccolta”](https://docs.astro.build/it/guides/content-collections/#defining-a-collection-schema) nella documentazione di Astro.
 
-`docsSchema()` takes the following options:
+`docsSchema()` accetta le seguenti opzioni:
 
 ### `extend`
 
-**type:** Zod schema or function that returns a Zod schema  
-**default:** `z.object({})`
+**tipo:** Schema Zod o funzione che restituisce uno schema Zod
+**predefinito:** `z.object({})`
 
-Extend Starlight’s schema with additional fields by setting `extend` in the `docsSchema()` options.
-The value should be a [Zod schema](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod).
+Estendi lo schema di Starlight con campi aggiuntivi impostando `extend` nelle opzioni di `docsSchema()`.
+Il valore dovrebbe essere uno [schema Zod](https://docs.astro.build/it/guides/content-collections/#defining-datatypes-with-zod).
 
-In the following example, we provide a stricter type for `description` to make it required and add a new optional `category` field:
+Nell'esempio seguente, forniamo un tipo più restrittivo per `description` per renderlo obbligatorio e aggiungiamo un nuovo campo opzionale `category`:
 
 ```ts {8-13}
 // src/content/config.ts
@@ -414,9 +414,9 @@ export const collections = {
   docs: defineCollection({
     schema: docsSchema({
       extend: z.object({
-        // Make a built-in field required instead of optional.
+        // Rendi un campo built-in obbligatorio anziché opzionale.
         description: z.string(),
-        // Add a new field to the schema.
+        // Aggiungi un nuovo campo allo schema.
         category: z.enum(['tutorial', 'guide', 'reference']).optional(),
       }),
     }),
@@ -424,7 +424,7 @@ export const collections = {
 };
 ```
 
-To take advantage of the [Astro `image()` helper](https://docs.astro.build/en/guides/images/#images-in-content-collections), use a function that returns your schema extension:
+Per sfruttare l'[helper `image()` di Astro,](https://docs.astro.build/it/guides/images/#images-in-content-collections), utilizza una funzione che restituisce l'estensione dello schema:
 
 ```ts {8-13}
 // src/content/config.ts
@@ -436,7 +436,7 @@ export const collections = {
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({
-          // Add a field that must resolve to a local image.
+          // Aggiungi un campo che deve risolvere in un'immagine locale.
           cover: image(),
         });
       },
