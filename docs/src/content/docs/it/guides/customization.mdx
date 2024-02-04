@@ -152,24 +152,24 @@ defineConfig({
 });
 ```
 
-   </TabItem>
+  </TabItem>
 </Tabs>
 
 Disabilita completamente l'indice dei contenuti impostando l'opzione `tableOfContents` su `false`:
 
 <Tabs>
-   <TabItem label="Frontmatter">
+  <TabItem label="Frontmatter">
 
-```md
+```md {4}
 ---
-# src/content/docs/esempio.md
+# src/content/docs/example.md
 title: Pagina senza indice dei contenuti
 tableOfContents: false
 ---
 ```
 
-   </TabItem>
-   <TabItem label="Configurazione globale">
+  </TabItem>
+  <TabItem label="Configurazione globale">
 
 ```js {7}
 // astro.config.mjs
@@ -184,7 +184,7 @@ defineConfig({
 });
 ```
 
-   </TabItem>
+  </TabItem>
 </Tabs>
 
 ## Collegamenti social
@@ -349,7 +349,7 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Docs With a Custom Typeface',
+   			title: 'Docs con un font personalizzato',
    			customCss: [
    +				// Percorso relativo al file CSS @font-face.
    +				'./src/fonts/font-face.css',
@@ -408,7 +408,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
     export default defineConfig({
     	integrations: [
     		starlight({
-    			title: 'Docs With a Custom Typeface',
+    			title: 'Docs con un font personalizzato',
     			customCss: [
     +				// File Fontsource per font regolari e semi-grassetto.
     +				'@fontsource/ibm-plex-serif/400.css',

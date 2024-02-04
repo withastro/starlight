@@ -386,29 +386,29 @@ La configurazione sopra genera la seguente barra laterale:
 
 ## Internazionalizzazione
 
-Utilizza la proprietà `translations` sulle voci dei collegamenti e dei gruppi per tradurre il collegamento o l'etichetta del gruppo per ciascuna lingua supportata.
-La proprietà `label` verrà utilizzata per la locale predefinita e per le lingue senza traduzione.
+Utilizza la proprietà `translations` su voci di link e gruppi per tradurre l'etichetta del link o del gruppo per ogni lingua supportata specificando un tag di lingua [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), ad esempio `"en"`, `"ar"`, o `"zh-CN"`, come chiave e l'etichetta tradotta come valore.
+La proprietà `label` sarà utilizzata per la lingua predefinita e per le lingue senza traduzione.
 
 ```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
-			label: 'Guide',
+			label: 'Guides',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
-					label: 'Componenti',
+					label: 'Components',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
-					label: 'Internazionalizzazione (i18n)',
+					label: 'Internationalization (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -423,16 +423,16 @@ La navigazione della documentazione in spagnolo genererà la seguente barra late
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/es/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}
 />
 
-## Gruppi che si riducono
+## Gruppi compressi
 
 I gruppi di collegamenti possono essere compressi per impostazione predefinita impostando la proprietà `collapsed` su `true`.
 
@@ -525,7 +525,7 @@ La configurazione sopra genera la seguente barra laterale:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: 'Guide',
 			items: [
 				{ label: 'Components', link: '/guides/components/' },
 				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },

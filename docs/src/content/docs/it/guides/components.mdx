@@ -7,7 +7,7 @@ I componenti permettono di riutilizzare un elemento UI o altro ripetutamente.
 Degli esempi potrebbero essere delle sezioni di link o un video YouTube integrato.
 Starlight supporta l'utilizzo di questi nei file [MDX](https://mdxjs.com/) e fornisce dei componenti per te già pronti.
 
-[Vedi di più sulla costruzione di componenti nella documentazione Astro](https://docs.astro.build/en/core-concepts/astro-components/).
+[Vedi di più sulla costruzione di componenti nella documentazione Astro](https://docs.astro.build/it/core-concepts/astro-components/).
 
 ## Utilizzare un componente
 
@@ -16,27 +16,27 @@ Questi possono ricordare dei tag HTML ma iniziano con una maiuscola:
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/example.mdx
 title: Benvenuto nella mia documentazione
 ---
 
 import SomeComponent from '../../components/SomeComponent.astro';
 import AnotherComponent from '../../components/AnotherComponent.astro';
 
-<SomeComponent prop="something" />
+<SomeComponent prop="qualcosa" />
 
 <AnotherComponent>
 	I componenti possono avere **contenuti interni**.
 </AnotherComponent>
 ```
 
-Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/en/core-concepts/framework-components/).
-Vedi di più su come [usare componenti in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) nella documentazione Astro.
+Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/it/core-concepts/framework-components/).
+Vedi di più su come [usare componenti in MDX](https://docs.astro.build/it/guides/markdown-content/#using-components-in-mdx) nella documentazione Astro.
 
-### Compatibility with Starlight’s styles
+### Compatibilità con gli stili di Starlight
 
-Starlight applies default styling to your Markdown content, for example adding margin between elements.
-If these styles conflict with your component’s appearance, set the `not-content` class on your component to disable them.
+Starlight applica stili predefiniti al tuo contenuto Markdown, ad esempio aggiungendo margini tra gli elementi.
+Se questi stili entrano in conflitto con l'aspetto del tuo componente, imposta la classe `not-content` sul tuo componente per disabilitarli.
 
 ```astro 'class="not-content"'
 ---
@@ -44,7 +44,7 @@ If these styles conflict with your component’s appearance, set the `not-conten
 ---
 
 <div class="not-content">
-	<p>Not impacted by Starlight’s default content styling.</p>
+	<p>Non influenzato dallo stile predefinito del contenuto di Starlight.</p>
 </div>
 ```
 
@@ -71,7 +71,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Tabs>
 ```
 
-The code above generates the following tabs on the page:
+Il codice precedente genera quanto segue nella pagina:
 
 <Tabs>
 	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
@@ -104,7 +104,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 
-The code above generates the following on the page:
+Il codice precedente genera quanto segue nella pagina:
 
 <Card title="Guarda qui">Contenuti interessanti da evidenziare.</Card>
 
@@ -117,7 +117,7 @@ The code above generates the following on the page:
 	</Card>
 </CardGrid>
 
-:::tip[Suggerimento]
+:::tip
 Usa la griglia nella pagina principale per evidenziare le funzionalità chiave del progetto.
 Aggiungi l'attributo `stagger` per rappresentare la seconda colonna più in basso per rendere il tutto più interessante:
 
@@ -133,7 +133,7 @@ Aggiungi l'attributo `stagger` per rappresentare la seconda colonna più in bass
 
 Utilizza il componente `<LinkCard>` per collegare in modo visibile pagine diverse.
 
-Una `<LinkCard>` richiede un `title` e un attributo [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). Facoltativamente puoi includere una breve `description` o altri attributi del collegamento come `target`.
+Una `<LinkCard>` richiede un `title` e un attributo [`href`](https://developer.mozilla.org/it/docs/Web/HTML/Element/a#href). Facoltativamente puoi includere una breve `description` o altri attributi del collegamento come `target`.
 
 Raggruppa più componenti `<LinkCard>` in `<CardGrid>` per visualizzare le schede una accanto all'altra quando c'è spazio sufficiente.
 
@@ -143,14 +143,14 @@ Raggruppa più componenti `<LinkCard>` in `<CardGrid>` per visualizzare le sched
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
-	title="Customizing Starlight"
-	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
-	href="/guides/customization/"
+	title="Personalizzazione di Starlight"
+	description="Scopri come rendere il tuo sito Starlight unico con stili personalizzati, caratteri e altro."
+	href="/it/guides/customization/"
 />
 
 <CardGrid>
-	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
-	<LinkCard title="Components" href="/guides/components/" />
+	<LinkCard title="Creazione di Markdown" href="/it/guides/authoring-content/" />
+	<LinkCard title="Componenti" href="/it/guides/components/" />
 </CardGrid>
 ```
 
@@ -159,17 +159,17 @@ Il codice precedente genera quanto segue nella pagina:
 import { LinkCard } from '@astrojs/starlight/components';
 
 <LinkCard
-	title="Customizing Starlight"
-	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
-	href="/guides/customization/"
+	title="Personalizzazione di Starlight"
+	description="Scopri come rendere il tuo sito Starlight unico con stili personalizzati, caratteri e altro."
+	href="/it/guides/customization/"
 />
 
 <CardGrid>
-	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
-	<LinkCard title="Components" href="/guides/components/" />
+	<LinkCard title="Creazione di Markdown" href="/it/guides/authoring-content/" />
+	<LinkCard title="Componenti" href="/it/guides/components/" />
 </CardGrid>
 
-### Icon
+### Icone
 
 import { Icon } from '@astrojs/starlight/components';
 import IconsList from '~/components/icons-list.astro';
@@ -186,48 +186,48 @@ import { Icon } from '@astrojs/starlight/components';
 <Icon name="star" color="goldenrod" size="2rem" />
 ```
 
-Il codice sopra genera quanto segue nella pagina:
+Il codice precedente genera quanto segue nella pagina:
 
 <Icon name="star" color="goldenrod" size="2rem" />
 
-#### All icons
+#### Tutte le icone
 
 Di seguito è riportato un elenco di tutte le icone disponibili con i nomi associati. Fare clic su un'icona per copiarne il codice componente.
 
 <IconsList />
 
-### Code
+### Codice
 
-Use the `<Code>` component to render syntax highlighted code when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
+Utilizza il componente `<Code>` per visualizzare il codice sintatticamente evidenziato quando l'utilizzo di un blocco di codice Markdown non è possibile, ad esempio, per visualizzare dati provenienti da fonti esterne come file, database o API.
 
-See the [Expressive Code “Code Component” docs](https://expressive-code.com/key-features/code-component/) for full details of the props `<Code>` supports.
+Consulta la documentazione completa del componente ["Code Component" di Expressive Code](https://expressive-code.com/key-features/code-component/) per maggiori informazioni sulle proprietà supportate da `<Code>`.
 
 ```mdx
 # src/content/docs/example.mdx
 
 import { Code } from '@astrojs/starlight/components';
 
-export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const exampleCode = `console.log('Questo potrebbe provenire da un file o da un CMS!');`;
 export const fileName = 'example.js';
 export const highlights = ['file', 'CMS'];
 
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 ```
 
-The code above generates the following on the page:
+Il codice sopra genera quanto segue nella pagina:
 
 import { Code } from '@astrojs/starlight/components';
 
-export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const exampleCode = `console.log('Questo potrebbe provenire da un file o da un CMS!');`;
 export const fileName = 'example.js';
 export const highlights = ['file', 'CMS'];
 
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 
-#### Imported Code
+#### Codice Importato
 
-Use [Vite’s `?raw` import suffix](https://vitejs.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
-You can then pass this imported string to the `<Code>` component to include it on your page.
+Utilizza il [suffisso ?raw dell'importazione con Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) per importare qualsiasi file di codice come stringa.
+Poi puoi passare questa stringa importata al componente `<Code>` per includerla nella tua pagina.
 
 ```mdx title="src/content/docs/example.mdx" "?raw"
 import { Code } from '@astrojs/starlight/components';
@@ -236,7 +236,7 @@ import importedCode from '/src/env.d.ts?raw';
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
 ```
 
-The code above generates the following on the page:
+Il codice sopra genera quanto segue nella pagina:
 
 import importedCode from '/src/env.d.ts?raw';
 

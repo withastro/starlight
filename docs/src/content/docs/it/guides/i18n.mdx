@@ -82,7 +82,7 @@ export default defineConfig({
 			locales: {
 				root: {
 					label: 'English',
-					lang: 'en', // necessario per root
+					lang: 'en', // necessario per la lingua principale
 				},
 				'zh-cn': {
 					label: '简体中文',
@@ -111,7 +111,7 @@ Quando si usa una lingua `root`, metti le pagine direttamente in `src/content/do
 
 Per default, Starlight è un sito monolingua (inglese). Per creare un sito monolingua in un'altra, impostala come `root` in `locales`:
 
-```js
+```diff lang="js" {10-13}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -152,14 +152,14 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 
 1. Configura la collezione `i18n` in `src/content/config.ts` se non lo è già:
 
-   ```js
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
    	docs: defineCollection({ schema: docsSchema() }),
-   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
@@ -212,13 +212,13 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 	 I blocchi di codice di Starlight sono gestiti dalla libreria [Expressive Code](https://github.com/expressive-code/expressive-code).
 	 Puoi impostare le traduzioni per le stringhe dell'interfaccia utente nella stessa file JSON utilizzando le chiavi `expressiveCode`:
 
-	 ```json
-	 {
+   ```json
+   {
 		"expressiveCode.copyButtonCopied": "Copiato!",
 		"expressiveCode.copyButtonTooltip": "Copia negli appunti",
 		"expressiveCode.terminalWindowFallbackTitle": "Finestra del terminale"
-	 }
-    ```
+   }
+   ```
 
    Il modulo di ricerca di Starlight è gestito dalla libreria [Pagefind](https://pagefind.app/).
    Puoi impostare le traduzioni per l'interfaccia utente di Pagefind nel medesimo file JSON utilizzando le chiavi `pagefind`:

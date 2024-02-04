@@ -44,7 +44,7 @@ Sostituire i componenti predefiniti di Starlight può essere utile quando:
    export default defineConfig({
      integrations: [
        starlight({
-         title: 'La Mia Documentazione con Sostituzioni',
+         title: 'La Mia Documentazione con le sostituzioni',
          components: {
            // Sostituisce il componente `SocialIcons` predefinito.
            SocialIcons: './src/components/EmailLink.astro',
