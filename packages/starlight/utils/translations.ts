@@ -5,14 +5,18 @@ import { createTranslationSystem } from './createTranslationSystem';
 
 /** All translation data from the i18n collection, keyed by `id`, which matches locale. */
 let userTranslations: Record<string, i18nSchemaOutput> = {};
+// Briefly override `console.warn()` to silence logging when a project has no i18n collection.
+const warn = console.warn;
+console.warn = () => {};
 try {
 	// Load the user’s i18n collection and ignore the error if it doesn’t exist.
 	userTranslations = Object.fromEntries(
 		// @ts-ignore — may be an error in projects without an i18n collection
-
 		(await getCollection('i18n')).map(({ id, data }) => [id, data] as const)
 	);
 } catch {}
+// Restore the original warn implementation.
+console.warn = warn;
 
 /**
  * Generate a utility function that returns UI strings for the given `locale`.
