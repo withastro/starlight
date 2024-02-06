@@ -1,7 +1,7 @@
 ---
-title: Riferimento ai plugin  
+title: Riferimento ai plugin
 description: Panoramica dell'API dei plugin di Starlight.
-tableOfContents: 
+tableOfContents:
   maxHeadingLevel: 4
 ---
 
@@ -23,10 +23,10 @@ interface StarlightPlugin {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
-      astroConfig: AstroConfig; 
+      astroConfig: AstroConfig;
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
-      logger: AstroIntegrationLogger;  
+      logger: AstroIntegrationLogger;
     }) => void | Promise<void>;
   };
 }
@@ -64,7 +64,7 @@ Una funzione di callback per aggiornare la [configurazione Starlight](/it/refere
 Fornisci le chiavi di configurazione di livello root che vuoi sovrascrivere.
 Per aggiornare valori di configurazione annidati, devi fornire l'intero oggetto annidato.
 
-Per estendere un'opzione di configurazione esistente senza sovrascriverla, unisci il valore esistente nel tuo nuovo valore. 
+Per estendere un'opzione di configurazione esistente senza sovrascriverla, unisci il valore esistente nel tuo nuovo valore.
 Nel seguente esempio, un nuovo account [`social`](/it/reference/configuration/#social) viene aggiunto alla configurazione esistente unendo `config.social` nel nuovo oggetto `social`:
 
 ```ts {6-11}
@@ -126,7 +126,7 @@ Una copia di sola lettura della [configurazione Astro](https://docs.astro.build/
 Il comando utilizzato per eseguire Starlight:
 
 - `dev` - Il progetto viene eseguito con `astro dev`
-- `build` - Il progetto viene eseguito con `astro build`  
+- `build` - Il progetto viene eseguito con `astro build`
 - `preview` - Il progetto viene eseguito con `astro preview`
 
 #### `isRestart`
@@ -134,7 +134,7 @@ Il comando utilizzato per eseguire Starlight:
 **type:** `boolean`
 
 `false` quando il server di sviluppo viene avviato, `true` quando viene attivato un riavvio.
-Le ragioni comuni per un riavvio includono la modifica di `astro.config.mjs` da parte dell'utente mentre il server di sviluppo è in esecuzione.  
+Le ragioni comuni per un riavvio includono la modifica di `astro.config.mjs` da parte dell'utente mentre il server di sviluppo è in esecuzione.
 
 #### `logger`
 
@@ -150,7 +150,7 @@ export default {
   hooks: {
     plugin({ logger }) {
       logger.info('Inizio di un processo lungo...');
-      // Un processo lungo... 
+      // Un processo lungo...
     },
   },
 };
