@@ -65,7 +65,7 @@ Fornisci le chiavi di configurazione di livello root che vuoi sovrascrivere.
 Per aggiornare valori di configurazione annidati, devi fornire l'intero oggetto annidato.
 
 Per estendere un'opzione di configurazione esistente senza sovrascriverla, unisci il valore esistente nel tuo nuovo valore. 
-Nel seguente esempio, un nuovo account [`social`](/reference/configuration/#social) viene aggiunto alla configurazione esistente unendo `config.social` nel nuovo oggetto `social`:
+Nel seguente esempio, un nuovo account [`social`](/it/reference/configuration/#social) viene aggiunto alla configurazione esistente unendo `config.social` nel nuovo oggetto `social`:
 
 ```ts {6-11}
 // plugin.ts
