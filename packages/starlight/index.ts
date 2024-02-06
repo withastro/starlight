@@ -83,11 +83,7 @@ export default function StarlightIntegration({
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
 					experimental: {
-						// For projects in server mode enable global route priority to allow custom
-						// routes to customize any path.
-						...(config.output === 'server' && {
-							globalRoutePriority: true,
-						}),
+						globalRoutePriority: true,
 					}
 				});
 			},
