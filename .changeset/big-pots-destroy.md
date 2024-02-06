@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-i18n(zh-cn): Improve the toc title translation
+Improves the table of contents title translation in Simplified Chinese
