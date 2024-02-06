@@ -16,7 +16,7 @@ const shouldRenderSearch =
 ---
 
 <div class="header sl-flex">
-	<div class="sl-flex">
+	<div class="title-wrapper sl-flex">
 		<SiteTitle {...Astro.props} />
 	</div>
 	<div class="sl-flex">
@@ -37,6 +37,11 @@ const shouldRenderSearch =
 		justify-content: space-between;
 		align-items: center;
 		height: 100%;
+	}
+
+	.title-wrapper {
+		/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
+		overflow: hidden;
 	}
 
 	.right-group,
