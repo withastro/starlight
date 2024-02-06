@@ -37,7 +37,7 @@ Questo testo sarà ricercabile.
 
 <div data-pagefind-ignore>
 
-Questo testo sarà nascosto dalla ricerca. 
+Questo testo sarà nascosto dalla ricerca.
 
 </div>
 ```
@@ -50,58 +50,58 @@ Se hai accesso al programma [Algolia's DocSearch](https://docsearch.algolia.com/
 
 1. Installa `@astrojs/starlight-docsearch`:
 
-    <Tabs>
+   <Tabs>
 
-    <TabItem label="npm">
+   <TabItem label="npm">
 
-    ```sh
-    npm install @astrojs/starlight-docsearch
-    ```
+   ```sh
+   npm install @astrojs/starlight-docsearch
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="pnpm">
+   <TabItem label="pnpm">
 
-    ```sh 
-    pnpm add @astrojs/starlight-docsearch
-    ```
+   ```sh
+   pnpm add @astrojs/starlight-docsearch
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="Yarn">
+   <TabItem label="Yarn">
 
-    ```sh
-    yarn add @astrojs/starlight-docsearch
-    ```
+   ```sh
+   yarn add @astrojs/starlight-docsearch
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    </Tabs>
+   </Tabs>
 
 2. Aggiungi DocSearch alla configurazione [`plugins`](/it/reference/configuration/#plugins) di Starlight in `astro.config.mjs` e passagli il tuo `appId`, `apiKey` e `indexName` di Algolia:
 
-   ```js ins={4,10-16} 
+   ```js ins={4,10-16}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
    import starlightDocSearch from '@astrojs/starlight-docsearch';
-   
+
    export default defineConfig({
-     integrations: [
-       starlight({ 
-         title: 'Sito con DocSearch',
-         plugins: [
-           starlightDocSearch({
-             appId: 'TUO_APP_ID',
-             apiKey: 'TUA_API_KEY_DI_RICERCA', 
-             indexName: 'TUO_NOME_INDICE'
-           }),
-         ],  
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Sito con DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					appId: 'TUO_APP_ID',
+   					apiKey: 'TUA_API_KEY_DI_RICERCA',
+   					indexName: 'TUO_NOME_INDICE',
+   				}),
+   			],
+   		}),
+   	],
    });
    ```
-   
+
 Con questa configurazione aggiornata, la barra di ricerca nel tuo sito aprirà ora una schermata Algolia invece della schermata di ricerca predefinita.
 
 #### Traduzione dell'interfaccia utente di DocSearch
@@ -162,4 +162,3 @@ Aggiungi traduzioni della UI della schermata per la tua lingua utilizzando il [s
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
-  
