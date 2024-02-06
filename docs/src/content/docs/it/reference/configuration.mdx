@@ -13,11 +13,11 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Il mio bellissimo sito per la documentazione',
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Il mio bellissimo sito per la documentazione',
+		}),
+	],
 });
 ```
 
@@ -43,9 +43,9 @@ Definisce il logo da rappresentare nella barra di navigazione con o al posto del
 
 ```js
 starlight({
-  logo: {
-    src: './src/assets/my-logo.svg',
-  },
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
 });
 ```
 
@@ -53,8 +53,8 @@ starlight({
 
 ```ts
 type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
-  | { src: string }
-  | { light: string; dark: string }
+	| { src: string }
+	| { light: string; dark: string }
 );
 ```
 
@@ -73,9 +73,9 @@ Abilita il link "Modifica questa pagina" definendo l'URL base da usare. Il link 
 
 ```js
 starlight({
-  editLink: {
-    baseUrl: 'https://github.com/withastro/starlight/edit/main/',
-  },
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
 });
 ```
 
@@ -98,23 +98,23 @@ Ogni elemento avente un `label` e una delle seguenti proprietà:
 
 ```js
 starlight({
-  sidebar: [
-    // Un singolo elemento chiamato “Home”.
-    { label: 'Home', link: '/' },
-    // Un gruppo intitolato "Inizia qui" contenente due link.
-    {
-      label: 'Inizia qui',
-      items: [
-        { label: 'Introduzione', link: '/intro' },
-        { label: 'Prossimi passi', link: '/next-steps' },
-      ],
-    },
-    // Un gruppo che si riferisce a tutte le pagine nella cartella reference.
-    {
-      label: 'Riferimenti',
-      autogenerate: { directory: 'reference' },
-    },
-  ],
+	sidebar: [
+		// Un singolo elemento chiamato “Home”.
+		{ label: 'Home', link: '/' },
+		// Un gruppo intitolato "Inizia qui" contenente due link.
+		{
+			label: 'Inizia qui',
+			items: [
+				{ label: 'Introduzione', link: '/intro' },
+				{ label: 'Prossimi passi', link: '/next-steps' },
+			],
+		},
+		// Un gruppo che si riferisce a tutte le pagine nella cartella reference.
+		{
+			label: 'Riferimenti',
+			autogenerate: { directory: 'reference' },
+		},
+	],
 });
 ```
 
@@ -181,19 +181,19 @@ sidebar: [
 
 ```ts
 type SidebarItem = {
-  label: string;
-  translations?: Record<string, string>;
+	label: string;
+	translations?: Record<string, string>;
 } & (
-  | {
-      link: string;
-      badge?: string | BadgeConfig;
-      attrs?: Record<string, string | number | boolean | undefined>;
-    }
-  | { items: SidebarItem[]; collapsed?: boolean }
-  | {
-      autogenerate: { directory: string; collapsed?: boolean };
-      collapsed?: boolean;
-    }
+	| {
+			link: string;
+			badge?: string | BadgeConfig;
+			attrs?: Record<string, string | number | boolean | undefined>;
+	  }
+	| { items: SidebarItem[]; collapsed?: boolean }
+	| {
+			autogenerate: { directory: string; collapsed?: boolean };
+			collapsed?: boolean;
+	  }
 );
 ```
 
@@ -201,8 +201,8 @@ type SidebarItem = {
 
 ```ts
 interface BadgeConfig {
-  text: string;
-  variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	text: string;
+	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
 }
 ```
 
@@ -219,29 +219,29 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Site',
-      // Imposta inglese come il linguaggio predefinito.
-      defaultLocale: 'en',
-      locales: {
-        // La documentazione in inglese si trova in `src/content/docs/en/`
-        en: {
-          label: 'English',
-        },
-        // La documentazione in cinese semplificato si trova in `src/content/docs/zh-cn/`
-        'zh-cn': {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-        // La documentazione in arabo si trova in `src/content/docs/ar/`
-        ar: {
-          label: 'العربية',
-          dir: 'rtl',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Site',
+			// Imposta inglese come il linguaggio predefinito.
+			defaultLocale: 'en',
+			locales: {
+				// La documentazione in inglese si trova in `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// La documentazione in cinese semplificato si trova in `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// La documentazione in arabo si trova in `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -249,9 +249,9 @@ export default defineConfig({
 
 ```ts
 interface LocaleConfig {
-  label: string;
-  lang?: string;
-  dir?: 'ltr' | 'rtl';
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
 }
 ```
 
@@ -281,15 +281,15 @@ Puoi definire un linguaggio principale senza una cartella `/lang/` definendo `ro
 
 ```js {3-6}
 starlight({
-  locales: {
-    root: {
-      label: 'English',
-      lang: 'en',
-    },
-    it: {
-      label: 'Italiano',
-    },
-  },
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		it: {
+			label: 'Italiano',
+		},
+	},
 });
 ```
 
@@ -315,19 +315,19 @@ Dettagli opzionali per gli account social del sito. Se vengono aggiunti apparir�
 
 ```js
 starlight({
-  social: {
-    codeberg: 'https://codeberg.org/knut/examples',
-    discord: 'https://astro.build/chat',
-    github: 'https://github.com/withastro/starlight',
-    gitlab: 'https://gitlab.com/delucis',
-    linkedin: 'https://www.linkedin.com/company/astroinc',
-    mastodon: 'https://m.webtoo.ls/@astro',
-    threads: 'https://www.threads.net/@nmoodev',
-    twitch: 'https://www.twitch.tv/bholmesdev',
-    twitter: 'https://twitter.com/astrodotbuild',
-    'x.com': 'https://x.com/astrodotbuild',
-    youtube: 'https://youtube.com/@astrodotbuild',
-  },
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
 });
 ```
 
@@ -341,7 +341,7 @@ Supporta file CSS locali relativi alla cartella principale del progetto, ad esem
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+	customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -356,18 +356,18 @@ Consulta la guida ["Blocchi codice"](/it/guides/authoring-content/#blocchi-codic
 Puoi utilizzare tutte le opzioni di configurazione standard di [Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) nonché alcune proprietà specifiche di Starlight, impostandole nell'opzione `expressiveCode` di Starlight.
 Ad esempio, imposta l'opzione `styleOverrides` di Expressive Code per sovrascrivere il CSS predefinito. Ciò consente personalizzazioni come dare ai tuoi blocchi di codice angoli arrotondati:
 
-```js ins={2-4} 
+```js ins={2-4}
 starlight({
 	expressiveCode: {
 		styleOverrides: { borderRadius: '0.5rem' },
-	},  
+	},
 });
 ```
 
-Se vuoi disabilitare Expressive Code, imposta `expressiveCode: false` nella configurazione di Starlight: 
+Se vuoi disabilitare Expressive Code, imposta `expressiveCode: false` nella configurazione di Starlight:
 
 ```js ins={2}
-starlight({  
+starlight({
 	expressiveCode: false,
 });
 ```
@@ -377,7 +377,7 @@ In aggiunta alle opzioni standard di Expressive Code, puoi anche impostare le se
 #### `themes`
 
 **tipo:** `Array<string | ThemeObject | ExpressiveCodeTheme>`
-**predefinito:** `['starlight-dark', 'starlight-light']`  
+**predefinito:** `['starlight-dark', 'starlight-light']`
 
 Imposta i temi utilizzati per dare stile ai blocchi di codice.
 Consulta la [documentazione `themes` di Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) per i dettagli dei formati di tema supportati.
@@ -387,25 +387,25 @@ Per impostazione predefinita, Starlight utilizza le varianti chiara e scura del 
 Se fornisci almeno un tema chiaro e uno scuro, Starlight sincronizzerà automaticamente il tema del blocco di codice attivo con il tema corrente del sito.
 Configura questo comportamento con l'opzione [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
 
-#### `useStarlightDarkModeSwitch`  
+#### `useStarlightDarkModeSwitch`
 
 **tipo:** `boolean`
-**predefinito:** `true`  
+**predefinito:** `true`
 
 Quando è impostato su `true`, i blocchi di codice passano automaticamente tra temi chiari e scuri quando cambia il tema del sito.  
-Quando è impostato su `false`, devi aggiungere manualmente CSS per gestire il passaggio tra più temi.  
+Quando è impostato su `false`, devi aggiungere manualmente CSS per gestire il passaggio tra più temi.
 
 :::note
 Quando imposti `themes`, devi fornire almeno un tema chiaro e uno scuro affinché il cambio di tema in modalità scura di Starlight funzioni.
 :::
 
-#### `useStarlightUiThemeColors`  
+#### `useStarlightUiThemeColors`
 
 **tipo:** `boolean`
-**predefinito:** `true` se `themes` non è impostato, altrimenti `false`   
+**predefinito:** `true` se `themes` non è impostato, altrimenti `false`
 
 Quando è impostato su `true`, le variabili CSS di Starlight vengono utilizzate per i colori degli elementi dell'interfaccia utente dei blocchi di codice (sfondi, pulsanti, ombre ecc.), in linea con il [tema di colore del sito](/it/guides/css-and-tailwind/#temi).  
-Quando è impostato su `false`, vengono utilizzati i colori forniti dal tema di evidenziazione della sintassi attivo per questi elementi.  
+Quando è impostato su `false`, vengono utilizzati i colori forniti dal tema di evidenziazione della sintassi attivo per questi elementi.
 
 :::note  
 Quando si utilizzano temi personalizzati e si imposta su `true`, è necessario fornire almeno un tema chiaro e uno scuro per garantire un contrasto di colore adeguato.
@@ -414,7 +414,7 @@ Quando si utilizzano temi personalizzati e si imposta su `true`, è necessario f
 ### `pagefind`
 
 **tipo:** `boolean`
-**predefinito:** `true`  
+**predefinito:** `true`
 
 Definisce se il provider di ricerca predefinito di Starlight [Pagefind](https://pagefind.app/) è abilitato.
 
@@ -430,17 +430,17 @@ Può essere utile per aggiungere script e risorse di terze parti.
 
 ```js
 starlight({
-  head: [
-    // Esempio : aggiunge Fathom analytics.
-    {
-      tag: 'script',
-      attrs: {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'MY-FATHOM-ID',
-        defer: true,
-      },
-    },
-  ],
+	head: [
+		// Esempio : aggiunge Fathom analytics.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
 });
 ```
 
@@ -448,9 +448,9 @@ starlight({
 
 ```ts
 interface HeadConfig {
-  tag: string;
-  attrs?: Record<string, string | boolean | undefined>;
-  content?: string;
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
 }
 ```
 
@@ -514,7 +514,7 @@ Imposta il delimitatore tra il titolo della pagina e il titolo del sito nel tag 
 Per impostazione predefinita, ogni pagina ha un `<title>` di `Titolo della pagina | Titolo del sito`.
 Ad esempio, questa pagina è intitolata "Riferimenti configurazione" e questo sito è intitolato "Starlight", quindi il `<title>` per questa pagina è "Riferimenti configurazione | Starlight".
 
-### `disable404Route`  
+### `disable404Route`
 
 **tipo:** `boolean`
 **predefinito:** `false`
@@ -529,9 +529,9 @@ Fornisci i percorsi ai componenti per sovrascrivere le implementazioni predefini
 
 ```js
 starlight({
-  components: {
-    SocialLinks: './src/components/MySocialLinks.astro',
-  },
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
 });
 ```
 
@@ -539,16 +539,16 @@ Consulta il [Riferimento alle sostituzioni](/it/reference/overrides/) per i dett
 
 ### `plugins`
 
-**tipo:** [`StarlightPlugin[]`](/it/reference/plugins/#riferimento-rapido-per-le-API)  
+**tipo:** [`StarlightPlugin[]`](/it/reference/plugins/#riferimento-rapido-per-le-API)
 
 Estendi Starlight con plugin personalizzati.
 I plugin applicano modifiche al tuo progetto per modificare o aggiungere funzionalità a Starlight.
 
-Visita la [vetrina dei plugin](/it/resources/plugins/#plugins) per vedere un elenco dei plugin disponibili.  
+Visita la [vetrina dei plugin](/it/resources/plugins/#plugins) per vedere un elenco dei plugin disponibili.
 
 ```js
-starlight({  
-	plugins: [starlightPlugin()],  
+starlight({
+	plugins: [starlightPlugin()],
 });
 ```
 
