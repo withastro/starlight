@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.17.3
+
+### Patch Changes
+
+- [#1461](https://github.com/withastro/starlight/pull/1461) [`2e17880`](https://github.com/withastro/starlight/commit/2e17880957d1aae2a84c77500afa9b66e5292a6a) Thanks [@liruifengv](https://github.com/liruifengv)! - Improves the table of contents title translation in Simplified Chinese
+
+- [#1462](https://github.com/withastro/starlight/pull/1462) [`4741ccc`](https://github.com/withastro/starlight/commit/4741cccc8adbef500bcaf95416a1c61a90761c06) Thanks [@delucis](https://github.com/delucis)! - Fixes overflow of very long site titles on narrow viewports
+
+- [#1459](https://github.com/withastro/starlight/pull/1459) [`9a8e0ec`](https://github.com/withastro/starlight/commit/9a8e0ec59cba0e088512ea9b6d17224085f3a178) Thanks [@delucis](https://github.com/delucis)! - Fixes a bug where table of contents highlighting could break given very specific combinations of content and viewport size
+
+- [#1458](https://github.com/withastro/starlight/pull/1458) [`8c88642`](https://github.com/withastro/starlight/commit/8c88642875e8344396074a780e28fb0860b249f8) Thanks [@delucis](https://github.com/delucis)! - Silences i18n content collection warnings for projects without custom translations.
+
 ## 0.17.2
 
 ### Patch Changes
