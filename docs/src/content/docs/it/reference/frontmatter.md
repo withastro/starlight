@@ -317,7 +317,7 @@ sidebar:
 
 #### `hidden`
 
-**tipo:** `boolean`
+**tipo:** `boolean`  
 **predefinito:** `false`
 
 Impedisce che questa pagina venga inclusa in un gruppo della barra laterale generato automaticamente.
@@ -327,7 +327,7 @@ Impedisce che questa pagina venga inclusa in un gruppo della barra laterale gene
 # src/content/docs/example.md
 title: Pagina da nascondere dalla barra laterale generata automaticamente
 sidebar:
-  hidden: vero
+  hidden: true
 ---
 ```
 
@@ -397,7 +397,7 @@ Per saperne di più sugli schemi di raccolta dei contenuti, consulta [“Definiz
 
 ### `extend`
 
-**tipo:** Schema Zod o funzione che restituisce uno schema Zod
+**tipo:** Schema Zod o funzione che restituisce uno schema Zod  
 **predefinito:** `z.object({})`
 
 Estendi lo schema di Starlight con campi aggiuntivi impostando `extend` nelle opzioni di `docsSchema()`.
