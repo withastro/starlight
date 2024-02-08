@@ -42,6 +42,52 @@ Customize the styles applied to your Starlight site by providing additional CSS 
 
 You can see all the CSS custom properties used by Starlight that you can set to customize your site in the [`props.css` file on GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
+### Examples
+**Auto-numbering for headings:**
+```css
+body {
+/* Count from -1 because page title is also a h1 element */
+    counter-reset: h1 -1;
+}
+
+h1 {
+    counter-increment: h1;
+    counter-reset: h2;
+}
+
+h2 {
+    counter-increment: h2;
+    counter-reset: h3
+}
+
+h3 {
+    counter-increment: h3;
+    counter-reset: h4
+}
+
+h4 {
+    counter-increment: h4;
+}
+
+/* Exclude the page title which id is "_top" */
+h1:not(#_top):before {
+    content: counter(h1) ". "
+}
+
+/* Exclude the right-sidebar title which id is "starlight__on-this-page" */
+h2:not(#starlight__on-this-page):before {
+    content: counter(h1) "." counter(h2) ". "
+}
+
+h3:before {
+    content: counter(h1) "." counter(h2) "." counter(h3) ". "
+}
+
+h4:before {
+    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "
+}
+```
+
 ## Tailwind CSS
 
 Tailwind CSS support in Astro projects is provided by the [Astro Tailwind integration](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
