@@ -2,8 +2,10 @@
 '@astrojs/starlight': minor
 ---
 
-Enable `globalRoutePriority` and bump minimal Astro version.
+Enables Astro’s [`experimental.globalRoutePriority`](https://docs.astro.build/en/reference/configuration-reference/#experimentalglobalroutepriority) option and bumps the minimum required Astro version.
 
-Starlight now enables the new [`globalRoutePriority`](https://docs.astro.build/en/reference/configuration-reference/#experimentalglobalroutepriority) to ensure consistency between priorities of Starlight routes and non-Starlight routes.
+⚠️ **BREAKING CHANGE** The minimum supported Astro version is now 4.2. Upgrade Astro and Starlight together:
 
-Minimal Astro version bumped to `v4.2`.
+```sh
+npx @astrojs/upgrade
+```
