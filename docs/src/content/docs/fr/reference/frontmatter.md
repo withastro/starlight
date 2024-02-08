@@ -286,7 +286,7 @@ interface SidebarConfig {
 #### `label`
 
 **Type :** `string`  
-**Par défaut :** the page [`title`](#title-obligatoire)
+**Par défaut :** [`title`](#title-obligatoire) de la page
 
 Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 
