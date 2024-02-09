@@ -22,7 +22,7 @@ Personalizza gli stili applicati al tuo sito Starlight fornendo file CSS aggiunt
 
 2. Aggiungi il percorso del tuo file CSS all'array `customCss` di Starlight in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -30,10 +30,10 @@ Personalizza gli stili applicati al tuo sito Starlight fornendo file CSS aggiunt
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Docs With Custom CSS',
+   			title: 'Docs con CSS personalizzato',
    			customCss: [
-   				// Percorso relativo al tuo file CSS personalizzato
-   				'./src/styles/custom.css',
+   +				// Percorso relativo al tuo file CSS personalizzato
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
@@ -44,7 +44,7 @@ Puoi vedere tutte le proprietà personalizzate CSS utilizzate da Starlight che p
 
 ## CSS Tailwind
 
-Il supporto CSS Tailwind nei progetti Astro è fornito dall'[integrazione Astro Tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
+Il supporto CSS Tailwind nei progetti Astro è fornito dall'[integrazione Astro Tailwind](https://docs.astro.build/it/guides/integrations-guide/tailwind/).
 Starlight fornisce un plug-in Tailwind complementare per aiutare a configurare Tailwind per la compatibilità con gli stili di Starlight.
 
 Il plugin Starlight Tailwind applica la seguente configurazione:
@@ -167,7 +167,7 @@ Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi p
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Docs with Tailwind',
+   			title: 'Docs con Tailwind',
    			customCss: [
    				// Percorso per gli stili di base di Tailwind
    				'./src/tailwind.css',
@@ -184,11 +184,11 @@ Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi p
 5. Aggiungi il plugin Starlight Tailwind a `tailwind.config.cjs`:
 
    ```js ins={2,7}
-   // tailwind.config.cjs
-   const starlightPlugin = require('@astrojs/starlight-tailwind');
+   // tailwind.config.mjs
+   import starlightPlugin from '@astrojs/starlight-tailwind';
 
    /** @type {import('tailwindcss').Config} */
-   module.exports = {
+   export default {
    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
    	plugins: [starlightPlugin()],
    };
@@ -206,26 +206,25 @@ Se impostate, le seguenti opzioni sovrascriveranno gli stili predefiniti di Star
 - `fontFamily.mono` — utilizzato per esempi di codice
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
 			colors: {
-				// Il tuo colore preferito. Indigo è il più vicino alle impostazioni predefinite di Starlight.
+				// Il tuo colore accent preferito. Indigo è il più vicino ai valori predefiniti di Starlight.
 				accent: colors.indigo,
-				// La tua scala di grigi preferita. Lo zinco è il più vicino ai valori predefiniti di Starlight.
+				// La tua scala di grigi preferita. Zinc è la più vicina ai valori predefiniti di Starlight.
 				gray: colors.zinc,
 			},
 			fontFamily: {
+				// Il tuo font di testo preferito. Starlight utilizza di default una pila di font di sistema.
 				sans: ['"Atkinson Hyperlegible"'],
-				// Il tuo carattere di testo preferito. Starlight utilizza uno stack di caratteri di sistema per impostazione predefinita.
-				sans: ['"Atkinson Hyperlegible"'],
-				// Il tuo carattere di codice preferito. Starlight utilizza i caratteri di sistema a spaziatura fissa per impostazione predefinita.
+				// Il tuo font di codice preferito. Starlight utilizza di default font monospace di sistema.
 				mono: ['"IBM Plex Mono"'],
 			},
 		},
