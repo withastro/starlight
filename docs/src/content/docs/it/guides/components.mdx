@@ -85,7 +85,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 Puoi rappresentare i contenuti in un riquadro che rispecchia il tema Starlight usando il componente `<Card>`.
 Racchiudi più card in `<CardGrid>` per visualizzarle fianco a fianco se c'è abbastanza spazio.
 
-Una `<Card>` necessita di `title` e può avere eventualmente un attributo `icon` impostato ad [una delle icone Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Icons.ts).
+Una `<Card>` necessita di `title` e può avere eventualmente un attributo `icon` impostato ad [una delle icone Starlight](#tutte-le-icone).
 
 ```mdx
 # src/content/docs/example.mdx
@@ -226,7 +226,7 @@ export const highlights = ['file', 'CMS'];
 
 #### Codice Importato
 
-Utilizza il [suffisso ?raw dell'importazione con Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) per importare qualsiasi file di codice come stringa.
+Utilizza il [suffisso `?raw` dell'importazione con Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) per importare qualsiasi file di codice come stringa.
 Poi puoi passare questa stringa importata al componente `<Code>` per includerla nella tua pagina.
 
 ```mdx title="src/content/docs/example.mdx" "?raw"

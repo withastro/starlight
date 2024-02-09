@@ -297,8 +297,8 @@ Di seguito sono mostrati alcuni degli esempi più comuni:
 
   ```diff lang="js"
     function thisIsJavaScript() {
-      // Questo intero blocco viene evidenziato come JavaScript,
-      // e possiamo comunque aggiungere marcatori diff ad esso!
+      // Questo intero blocco viene evidenziato come JavaScript,
+      // e possiamo comunque aggiungere marcatori diff ad esso!
   -   console.log('Vecchio codice da rimuovere')
   +   console.log('Nuovo e splendido codice!')
     }
@@ -307,8 +307,8 @@ Di seguito sono mostrati alcuni degli esempi più comuni:
   ````md
   ```diff lang="js"
     function thisIsJavaScript() {
-      // Questo intero blocco viene evidenziato come JavaScript,
-      // e possiamo comunque aggiungere marcatori diff ad esso!
+      // Questo intero blocco viene evidenziato come JavaScript,
+      // e possiamo comunque aggiungere marcatori diff ad esso!
   -   console.log('Vecchio codice da rimuovere')
   +   console.log('Nuovo e splendido codice!')
     }
@@ -361,7 +361,7 @@ Il titolo opzionale di un blocco di codice può essere impostato sia con un attr
   ```
   ````
 
-  ## Altre funzionalità Markdown utili
+## Altre funzionalità Markdown utili
 
 Starlight supporta tutte le altre funzionalità Markdown, come liste e tabelle. Guarda la [Markdown Cheat Sheet da The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) per una panoramica veloce su tutte le funzionalità Markdown.
 
