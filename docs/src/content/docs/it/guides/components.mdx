@@ -53,7 +53,7 @@ Se questi stili entrano in conflitto con l'aspetto del tuo componente, imposta l
 Starlight fornisce dei componenti per casi comuni in una documentazione.
 Questi sono disponibili nel pacchetto `@astrojs/starlight/components`.
 
-### Tabs
+### Schede
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -66,16 +66,16 @@ Ogni `<TabItem>` deve avere un `label` per indicare la scheda corrispondente.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lune">Io, Europa, Ganymede</TabItem>
 </Tabs>
 ```
 
 Il codice precedente genera quanto segue nella pagina:
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Lune">Io, Europa, Ganymede</TabItem>
 </Tabs>
 
 ### Card
@@ -129,7 +129,7 @@ Aggiungi l'attributo `stagger` per rappresentare la seconda colonna più in bass
 
 :::
 
-### LinkCard
+### Card con link
 
 Utilizza il componente `<LinkCard>` per collegare in modo visibile pagine diverse.
 
@@ -198,7 +198,7 @@ Di seguito è riportato un elenco di tutte le icone disponibili con i nomi assoc
 
 ### Codice
 
-Utilizza il componente `<Code>` per visualizzare il codice sintatticamente evidenziato quando l'utilizzo di un blocco di codice Markdown non è possibile, ad esempio, per visualizzare dati provenienti da fonti esterne come file, database o API.
+Utilizza il componente `<Code>` per visualizzare il codice sintatticamente evidenziato quando l'utilizzo di un [blocco di codice Markdown]((/it/guides/authoring-content/#blocco-di-codice)) non è possibile, ad esempio, per visualizzare dati provenienti da fonti esterne come file, database o API.
 
 Consulta la documentazione completa del componente ["Code Component" di Expressive Code](https://expressive-code.com/key-features/code-component/) per maggiori informazioni sulle proprietà supportate da `<Code>`.
 

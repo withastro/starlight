@@ -107,15 +107,15 @@ Titoli di livello 2 (`<h2>`) e di livello 3 (`<h3>`) verranno inclusi automatica
 
 Scopri come Astro processa gli `id` di heading nella [documentazione di Astro](https://docs.astro.build/it/guides/markdown-content/#heading-ids)
 
-## Aside
+## Avvisi
 
-Gli aside (conosciuti anche come "ammonizioni" o "richiami") sono utili per indicare contenuti secondari insieme ai contenuti principali.
+Gli avvisi sono utili per indicare contenuti secondari insieme ai contenuti principali.
 
-Starlight fornisce una sintassi Markdown personalizzata per indicarli. I blocchi aside sono indicati da `:::` per racchiudere i contenuti e possono essere di tipo `note`, `tip`, `caution` o `danger`.
+Starlight fornisce una sintassi Markdown personalizzata per indicarli. Gli avvisi sono indicati da `:::` per racchiudere i contenuti e possono essere di tipo `note`, `tip`, `caution` o `danger`.
 
-Dentro un "aside" puoi inserire qualsiasi altro contenuto Markdown anche se sono più indicati per contenere poche informazioni.
+Dentro un avviso puoi inserire qualsiasi altro contenuto Markdown anche se sono più indicati per contenere poche informazioni.
 
-### Note aside
+### Avviso come nota
 
 :::note
 Starlight è uno strumento per siti da documentazione con [Astro](https://astro.build/). Puoi iniziare con questo comando:
@@ -137,9 +137,9 @@ npm create astro@latest -- --template starlight
 :::
 ````
 
-### Titoli aside personalizzati
+### Avvisi con titoli personalizzati
 
-Si può specificare un titolo personalizzato per gli aside in parentesi quadre dopo aver specificato il tipo di aside, per esempio `:::tip[Lo sapevi?]`.
+Si può specificare un titolo personalizzato per gli avvisi in parentesi quadre dopo aver specificato il tipo di avviso, per esempio `:::tip[Lo sapevi?]`.
 
 :::tip[Lo sapevi?]
 Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https://docs.astro.build/it/concepts/islands/).
@@ -151,9 +151,9 @@ Astro ti aiuta a costruire siti più veloci con ["Islands Architecture"](https:/
 :::
 ```
 
-### Altri tipi di aside
+### Altri tipi di avvisi
 
-Gli aside caution e danger sono d'aiuto per richiamare l'attenzione dell'utente a dettagli che potrebbero sorprenderli.
+Gli avvisi `caution` e `danger` sono d'aiuto per richiamare l'attenzione dell'utente a dettagli che potrebbero sorprenderli.
 Se ti ritrovi ad usarli spesso, potrebbe essere segno che quelo che stai documentando potrebbe trarre beneficio da una riprogettazione.
 
 :::caution
@@ -196,7 +196,7 @@ Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più faci
 > I blockquote sono indicati da `>` all'inizio di ogni riga.
 ```
 
-## Blocchi codice
+## Bloccho di codice
 
 Un blocco di codice è indicato da tre backtick <code>```</code> all'inizio e alla fine. Puoi indicare il linguaggio di programmazione dopo i primi backtick.
 
@@ -218,11 +218,11 @@ var fun = function lang(l) {
 ```
 ````
 
-### Funzionalità del codice espressivo
+### Funzionalità di Expressive Code
 
 Starlight utilizza [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) per estendere le possibilità di formattazione dei blocchi di codice.
 I plugin di marcatori di testo e cornici per finestre di Expressive Code sono abilitati per impostazione predefinita.
-La resa dei blocchi di codice può essere configurata utilizzando l'opzione di configurazione [`expressiveCode`](/it/reference/configuration/#expressivecode) di Starlight.
+La resa dei blocchi di codice può essere configurata utilizzando [l'opzione di configurazione `expressiveCode`](/it/reference/configuration/#expressivecode) di Starlight.
 
 #### Marcatori di testo
 
@@ -257,7 +257,7 @@ Di seguito sono mostrati alcuni degli esempi più comuni:
 
 - [Contrassegnare selezioni di testo utilizzando il marcatore `" "` o espressioni regolari](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
 
-  ```js "Termini individuali" /Anche.*supportate/
+  ```js "termini individuali" /Anche.*supportate/
   // Anche i termini individuali possono essere evidenziati
   function demo() {
     return 'Anche le espressioni regolari sono supportate';
@@ -265,7 +265,7 @@ Di seguito sono mostrati alcuni degli esempi più comuni:
   ```
 
   ````md
-  ```js "Termini individuali" /Anche.*supportate/
+  ```js "termini individuali" /Anche.*supportate/
   // Anche i termini individuali possono essere evidenziati
   function demo() {
     return 'Anche le espressioni regolari sono supportate';
@@ -367,4 +367,4 @@ Starlight supporta tutte le altre funzionalità Markdown, come liste e tabelle. 
 
 ## Configurazione avanzata di Markdown e MDX
 
-Starlight utilizza il renderer Markdown e MDX di Astro costruito su remark e rehype. Puoi aggiungere supporto per la sintassi e il comportamento personalizzati aggiungendo `remarkPlugins` o `rehypePlugins` nel file di configurazione di Astro. Vedi [“Configuring Markdown and MDX”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) nella documentazione di Astro per saperne di più.
+Starlight utilizza il renderer Markdown e MDX di Astro costruito su remark e rehype. Puoi aggiungere supporto per la sintassi e il comportamento personalizzati aggiungendo `remarkPlugins` o `rehypePlugins` nel file di configurazione di Astro. Vedi [“Configuring Markdown and MDX”](https://docs.astro.build/it/guides/markdown-content/#configuring-markdown-and-mdx) nella documentazione di Astro per saperne di più.

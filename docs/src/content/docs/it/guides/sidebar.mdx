@@ -237,26 +237,26 @@ La configurazione del frontmatter `sidebar` viene utilizzata solo per i collegam
 
 ## Badge
 
-I collegamenti possono anche includere una proprietà `badge` per visualizzare un badge accanto all'etichetta del collegamento.
+I collegamenti, i gruppi e i gruppi generati automaticamente possono anche includere una proprietà `badge` per visualizzare un badge accanto all'etichetta del collegamento.
 
 ```js {10,17}
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: 'Guide',
 			items: [
 				// Un link con il badge "Nuovo".
 				{
-					label: 'Components',
+					label: 'Componenti',
 					link: '/guides/components/',
-					badge: 'New',
+					badge: 'Nuovo',
 				},
 			],
 		},
-		// Un gruppo autogenerato con il badge "Deprecated".
+		// Un gruppo autogenerato con il badge "Deprecato".
 		{
-			label: 'Reference',
-			badge: 'Deprecated',
+			label: 'Riferimento',
+			badge: 'Deprecato',
 			autogenerate: { directory: 'reference' },
 		},
 	],
@@ -268,29 +268,29 @@ La configurazione sopra genera la seguente barra laterale:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: 'Guide',
 			items: [
 				{
-					label: 'Components',
+					label: 'Componenti',
 					link: '/guides/components/',
-					badge: { text: 'New', variant: 'default' },
+					badge: { text: 'Nuovo', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Reference',
-			badge: { text: 'Deprecated', variant: 'default' },
+			label: 'Riferimento',
+			badge: { text: 'Deprecato', variant: 'default' },
 			items: [
 				{
-					label: 'Configuration Reference',
+					label: 'Riferimento Configurazione',
 					link: '/reference/configuration/',
 				},
 				{
-					label: 'Frontmatter Reference',
+					label: 'Riferimento Frontmatter',
 					link: '/reference/frontmatter/',
 				},
 				{
-					label: 'Overrides Reference',
+					label: 'Riferimento Overrides',
 					link: '/reference/overrides/',
 				},
 			],
@@ -418,7 +418,7 @@ starlight({
 });
 ```
 
-La navigazione della documentazione in spagnolo genererà la seguente barra laterale:
+La navigazione della documentazione in Portoghese (Brasile) genererà la seguente barra laterale:
 
 <SidebarPreview
 	config={[
@@ -432,6 +432,12 @@ La navigazione della documentazione in spagnolo genererà la seguente barra late
 	]}
 />
 
+
+
+
+
+
+
 ## Gruppi compressi
 
 I gruppi di collegamenti possono essere compressi per impostazione predefinita impostando la proprietà `collapsed` su `true`.
@@ -444,8 +450,8 @@ starlight({
 			// Comprimi il gruppo per impostazione predefinita.
 			collapsed: true,
 			items: [
-				{ label: 'Componenti', link: '/guides/components/' },
-				{ label: 'Internazionalizzazione (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componenti', link: '/it/guides/components/' },
+				{ label: 'Internazionalizzazione (i18n)', link: '/it/guides/i18n/' },
 			],
 		},
 	],
@@ -460,8 +466,8 @@ La configurazione sopra genera la seguente barra laterale:
 			label: 'Guide',
 			collapsed: true,
 			items: [
-				{ label: 'Componenti', link: '/guides/components/' },
-				{ label: 'Internazionalizzazione (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componenti', link: '/it/guides/components/' },
+				{ label: 'Internazionalizzazione (i18n)', link: '/it/guides/i18n/' },
 			],
 		},
 	]}
@@ -487,16 +493,16 @@ La configurazione sopra genera la seguente barra laterale:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: 'Guide',
 			collapsed: true,
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componenti', link: '/guides/components/' },
+				{ label: 'Internazionalizzazione (i18n)', link: '/it/guides/i18n/' },
 				{
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'Project Structure', link: '/guides/project-structure/' },
+						{ label: 'Struttura del progetto', link: '/it/guides/project-structure/' },
 					],
 				},
 			],
@@ -527,13 +533,13 @@ La configurazione sopra genera la seguente barra laterale:
 		{
 			label: 'Guide',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: 'Componenti', link: '/guides/components/' },
+				{ label: 'Internazionalizzazione (i18n)', link: '/it/guides/i18n/' },
 				{
 					label: 'advanced',
 					collapsed: true,
 					items: [
-						{ label: 'Project Structure', link: '/guides/project-structure/' },
+						{ label: 'Struttura del progetto', link: '/it/guides/project-structure/' },
 					],
 				},
 			],
