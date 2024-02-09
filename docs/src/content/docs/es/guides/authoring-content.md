@@ -298,7 +298,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     function thisIsJavaScript() {
       // ¡El bloque completo se resalta como JavaScript,
       // y aún podemos añadir marcadores de diferencias a él!
-  -   console.log('Código antiguo a eliminar'')
+  -   console.log('Código antiguo a eliminar')
   +   console.log('¡Nuevo y brillante código!')
     }
   ```
@@ -308,8 +308,8 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     function thisIsJavaScript() {
       // ¡El bloque completo se resalta como JavaScript,
       // y aún podemos añadir marcadores de diferencias a él!
-  -   console.log('Old code to be removed')
-  +   console.log('New and shiny code!')
+  -   console.log('Código antiguo a eliminar')
+  +   console.log('¡Nuevo y brillante código!')
     }
   ```
   ````
