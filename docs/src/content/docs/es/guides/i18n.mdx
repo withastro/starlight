@@ -3,7 +3,7 @@ title: Internacionalización (i18n)
 description: Aprende a configurar tu sitio Starlight para admitir varios idiomas.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight proporciona soporte incorporado para sitios multilingües, incluidas las rutas, el contenido de respaldo y el soporte completo de idiomas de derecha a izquierda (RTL).
 
@@ -11,7 +11,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 
 1. Indícale a Starlight los idiomas que admites pasando [`locales`](/es/reference/configuration/#locales) y [`defaultLocale`](/es/reference/configuration/#defaultlocale) a la integración de Starlight:
 
-   ```js
+   ```js {9-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -27,8 +27,8 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
    				en: {
    					label: 'English',
    				},
-   				// Chino simplificado en `src/content/docs/zh/`
-   				zh: {
+   				// Chino simplificado en `src/content/docs/zh-cn/`
+   				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
@@ -55,7 +55,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -69,7 +69,7 @@ Puedes usar una raíz de configuración regional para servir un idioma sin ning�
 
 Para establecer una configuración regional, usa la clave `root` en tu configuración de `locales`. Si la configuración regional raíz también es la configuración regional predeterminada para tu contenido, elimina `defaultLocale` o configúralo en `'root'`.
 
-```js
+```js {9,11-14}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -84,7 +84,7 @@ export default defineConfig({
 					label: 'English',
 					lang: 'en', // lang es obligatorio para los locales raíz
 				},
-				zh: {
+				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
@@ -102,7 +102,7 @@ Cuando uses una `root` locale, mantén las páginas para ese idioma directamente
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -111,7 +111,7 @@ Cuando uses una `root` locale, mantén las páginas para ese idioma directamente
 
 De forma predeterminada, Starlight es un sitio monolingüe (en inglés). Para crear un sitio de un solo idioma en otro idioma, configúralo como el `root` en tu configuración de `locales`:
 
-```js
+```diff lang="js" {10-13}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -140,11 +140,19 @@ Si no hay una traducción disponible para un idioma, Starlight mostrará a los l
 
 ## Traduce la UI de Starlight
 
-Starlight proporciona de forma predeterminada traducciones para los textos utilizados en la UI al inglés, checo, francés, alemán, italiano, japonés, holandés, portugués, danés, español, turco, árabe, noruego, farsi, chino simplificado, coreano y sueco. También damos la bienvenida a [contribuciones para agregar más idiomas predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+import LanguagesList from '~/components/languages-list.astro';
+
+Además de alojar archivos de contenido traducidos, Starlight te permite traducir las etiquetas de UI predeterminadas (p. ej. el encabezado "En esta página" en la tabla de contenidos) para que tus lectores puedan experimentar tu sitio completamente en el idioma seleccionado.
+
+<LanguagesList startsSentence /> los strings de UI traducidos se proporcionan de
+forma predeterminada, y damos la bienvenida a [contribuciones para agregar más idiomas
+predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+
+Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
 
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 
-   ```js
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
@@ -152,6 +160,7 @@ Starlight proporciona de forma predeterminada traducciones para los textos utili
    export const collections = {
    	docs: defineCollection({ schema: docsSchema() }),
    	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
@@ -170,46 +179,87 @@ Starlight proporciona de forma predeterminada traducciones para los textos utili
 
 3. Agrega traducciones para las claves que deseas traducir en los archivos JSON. Traduce solo los valores, dejando las claves en inglés (p. ej. `"search.label": "Buscar"`).
 
-Estos son los valores predeterminados en inglés de las cadenas existentes que se incluyen en Starlight:
+   Estos son los valores predeterminados en inglés de las cadenas existentes que se incluyen en Starlight:
 
-```json
-{
-	"skipLink.label": "Skip to content",
-	"search.label": "Search",
-	"search.shortcutLabel": "(Press / to Search)",
-	"search.cancelLabel": "Cancel",
-	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-	"themeSelect.accessibleLabel": "Select theme",
-	"themeSelect.dark": "Dark",
-	"themeSelect.light": "Light",
-	"themeSelect.auto": "Auto",
-	"languageSelect.accessibleLabel": "Select language",
-	"menuButton.accessibleLabel": "Menu",
-	"sidebarNav.accessibleLabel": "Main",
-	"tableOfContents.onThisPage": "On this page",
-	"tableOfContents.overview": "Overview",
-	"i18n.untranslatedContent": "This content is not available in your language yet.",
-	"page.editLink": "Edit page",
-	"page.lastUpdated": "Last updated:",
-	"page.previousLink": "Next",
-	"page.nextLink": "Previous"
-}
+   ```json
+   {
+   	"skipLink.label": "Skip to content",
+   	"search.label": "Search",
+   	"search.shortcutLabel": "(Press / to Search)",
+   	"search.cancelLabel": "Cancel",
+   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
+   	"themeSelect.accessibleLabel": "Select theme",
+   	"themeSelect.dark": "Dark",
+   	"themeSelect.light": "Light",
+   	"themeSelect.auto": "Auto",
+   	"languageSelect.accessibleLabel": "Select language",
+   	"menuButton.accessibleLabel": "Menu",
+   	"sidebarNav.accessibleLabel": "Main",
+   	"tableOfContents.onThisPage": "On this page",
+   	"tableOfContents.overview": "Overview",
+   	"i18n.untranslatedContent": "This content is not available in your language yet.",
+   	"page.editLink": "Edit page",
+   	"page.lastUpdated": "Last updated:",
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
+   }
+   ```
+
+   Los bloques de código de Starlight están impulsados por la biblioteca [Expressive Code](https://github.com/expressive-code/expressive-code).
+   Puedes establecer traducciones para las cadenas de UI en el mismo archivo JSON utilizando las llaves `expressiveCode`:
+
+   ```json
+   {
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
+   }
+   ```
+
+   El modal de búsqueda de Starlight está impulsado por la biblioteca [Pagefind](https://pagefind.app/).
+   Puedes establecer traducciones para la UI de Pagefind en el mismo archivo JSON utilizando claves `pagefind`:
+
+   ```json
+   {
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
+   }
+   ```
+
+### Extiende el esquema de traducción
+
+Agrega claves personalizadas a los diccionarios de traducción de tu sitio estableciendo `extend` en las opciones de `i18nSchema()`.
+En el siguiente ejemplo, una clave nueva, opcional `custom.label` se agrega a las claves predeterminadas:
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
 ```
 
-El modal de búsqueda de Starlight está impulsado por la biblioteca [Pagefind](https://pagefind.app/).
-Puedes establecer traducciones para la UI de Pagefind en el mismo archivo JSON utilizando claves `pagefind`:
-
-```json
-{
-	"pagefind.clear_search": "Clear",
-	"pagefind.load_more": "Load more results",
-	"pagefind.search_label": "Search this site",
-	"pagefind.filters_label": "Filters",
-	"pagefind.zero_results": "No results for [SEARCH_TERM]",
-	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
-	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
-	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
-	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
-	"pagefind.searching": "Searching for [SEARCH_TERM]..."
-}
-```
+Aprende más sobre los esquemas de colección de contenido en [“Definir un esquema de colección”](https://docs.astro.build/es/guides/content-collections/#definiendo-un-esquema-de-colección) en la documentación de Astro.

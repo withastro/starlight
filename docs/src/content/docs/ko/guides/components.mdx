@@ -16,12 +16,12 @@ MDX 파일에서 컴포넌트를 가져온 다음 JSX 태그로 렌더링하여 
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/example.mdx
 title: 내 문서에 오신 것을 환영합니다
 ---
 
-import SomeComponent from '../../../components/SomeComponent.astro';
-import AnotherComponent from '../../../components/AnotherComponent.astro';
+import SomeComponent from '~/components/SomeComponent.astro';
+import AnotherComponent from '~/components/AnotherComponent.astro';
 
 <SomeComponent prop="어떤 값" />
 
@@ -38,7 +38,7 @@ Astro 문서에서 [MDX에서 컴포넌트 사용](https://docs.astro.build/ko/g
 Starlight는 요소 사이에 여백을 추가하는 등 Markdown 콘텐츠에 기본 스타일을 적용합니다.
 이러한 스타일이 컴포넌트의 모양과 충돌하는 경우 컴포넌트에 `not-content` 클래스를 추가하여 비활성화하세요.
 
-```astro
+```astro 'class="not-content"'
 ---
 // src/components/Example.astro
 ---
@@ -61,6 +61,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 각 `<TabItem>`은 사용자에게 보여줄 `label`을 반드시 포함해야합니다.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -86,6 +88,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 `<Card>` 컴포넌트에는 `title` 속성이 반드시 필요하며 선택적으로 [Starlight 내장 아이콘 중 하나](#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="확인">강조하고 싶은 흥미로운 콘텐츠.</Card>
@@ -135,6 +139,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 공간이 충분할 때, 카드를 나란히 표시하기 위해 여러 `<LinkCard>` 컴포넌트를 `<CardGrid>`에 그룹화하세요.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -173,13 +179,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### 아이콘
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
 
 각 `<Icon>` 컴포넌트에는 [`name`](#모든-아이콘) 속성이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
 
 ```mdx
+# src/content/docs/example.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
@@ -194,3 +202,48 @@ import { Icon } from '@astrojs/starlight/components';
 사용 가능한 모든 아이콘 목록이 관련 이름과 함께 아래에 표시됩니다. 아이콘을 클릭하면 해당 아이콘 컴포넌트의 코드를 복사할 수 있습니다.
 
 <IconsList />
+
+### 코드
+
+예를 들어 파일, 데이터베이스 또는 API와 같은 외부 소스에서 오는 데이터를 렌더링하기 위해 [Markdown 코드 블록](/ko/guides/authoring-content/#코드-블록)을 사용할 수 없는 경우 `<Code>` 컴포넌트를 사용하여 구문 강조 코드를 렌더링합니다.
+
+`<Code>`가 지원하는 props에 대한 자세한 내용은 [Expressive Code “Code Component” 문서](https://expressive-code.com/key-features/code-component/)를 참조하세요.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+위 코드는 페이지에 다음을 생성합니다.
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### 가져온 코드
+
+[Vite의 `?raw` 가져오기 접미사](https://vitejs.dev/guide/assets#importing-asset-as-string)를 사용하여 코드 파일을 문자열로 가져옵니다. 그런 다음 가져온 문자열을 `<Code>` 컴포넌트에 전달하여 페이지에 포함할 수 있습니다.
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+위 코드는 페이지에 다음을 생성합니다.
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />

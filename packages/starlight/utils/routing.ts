@@ -8,16 +8,26 @@ import {
 	slugToLocaleData,
 	slugToParam,
 } from './slugs';
+import { validateLogoImports } from './validateLogoImports';
+
+// Validate any user-provided logos imported correctly.
+// We do this here so all pages trigger it and at the top level so it runs just once.
+validateLogoImports();
 
 export type StarlightDocsEntry = Omit<CollectionEntry<'docs'>, 'slug'> & {
 	slug: string;
 };
 
 export interface Route extends LocaleData {
+	/** Content collection entry for the current page. Includes frontmatter at `data`. */
 	entry: StarlightDocsEntry;
+	/** Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content. */
 	entryMeta: LocaleData;
+	/** The slug, a.k.a. permalink, for this page. */
 	slug: string;
+	/** The unique ID for this page. */
 	id: string;
+	/** True if this page is untranslated in the current language and using fallback content from the default locale. */
 	isFallback?: true;
 	[key: string]: unknown;
 }
@@ -35,10 +45,12 @@ interface Path extends GetStaticPathsItem {
 const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
 
 /** All entries in the docs content collection. */
-const docs: StarlightDocsEntry[] = (await getCollection('docs')).map(({ slug, ...entry }) => ({
-	...entry,
-	slug: normalizeIndexSlug(slug),
-}));
+const docs: StarlightDocsEntry[] = ((await getCollection('docs')) ?? []).map(
+	({ slug, ...entry }) => ({
+		...entry,
+		slug: normalizeIndexSlug(slug),
+	})
+);
 
 function getRoutes(): Route[] {
 	const routes: Route[] = docs.map((entry) => ({

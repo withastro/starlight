@@ -1,4 +1,4 @@
-import type { Root } from 'hastscript/lib/core';
+import type { Root } from 'hast';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
 
 /**

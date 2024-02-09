@@ -7,6 +7,20 @@ Starlightでは、`.md`ファイルにおいて[Markdown](https://daringfireball
 
 MDXやMarkdocを使用する場合、サポートされるMarkdownの機能や使用方法が異なることがあるため、[MDXドキュメント](https://mdxjs.com/docs/what-is-mdx/#markdown)や[Markdocドキュメント](https://markdoc.dev/docs/syntax)を必ず確認してください。
 
+## フロントマター
+
+フロントマターに値を設定して、Starlightの個々のページをカスタマイズできます。フロントマターは、ファイル先頭の`---`によって区切られた区間に設定します。
+
+```md title="src/content/docs/example.md"
+---
+title: ページのタイトル
+---
+
+ページのコンテンツは、2つ目の`---`の後に続きます。
+```
+
+すべてのページには、少なくとも`title`が必要です。利用可能なすべてのフィールドと、カスタムフィールドの追加方法については、[フロントマターのリファレンス](/ja/reference/frontmatter/)を参照してください。
+
 ## インラインスタイル
 
 テキストは**太字**、_斜体_、または~~取り消し線~~にできます。
@@ -89,6 +103,8 @@ description: Starlightの組み込みアンカーリンクの使い方
 
 レベル2（`<h2>`）とレベル3（`<h3>`）の見出しは、ページの目次に自動的に表示されます。
 
+Astroが見出しの`id`をどのように処理するかについて、詳しくは[Astroドキュメント](https://docs.astro.build/ja/guides/markdown-content/#見出しid)を参照してください。
+
 ## 補足情報
 
 補足情報（「警告」や「吹き出し」とも呼ばれます）は、ページのメインコンテンツと並べて補助的な情報を表示するのに便利です。
@@ -138,7 +154,7 @@ Astroでは[「アイランドアーキテクチャ」](https://docs.astro.build
 注意（Caution）と危険（Danger）の補足は、ユーザーがつまずく可能性のある細かい点に注意を向けさせるのに役立ちます。もしこれらを多用しているとすれば、それはあなたがドキュメントを書いている対象の設計を見直す余地があることのサインかもしれません。
 
 :::caution
-もしあなたが素晴らしいドキュメントサイトを望んでいないのであれば、[Starlight](../../)は不要かもしれません。
+もしあなたが素晴らしいドキュメントサイトを望んでいないのであれば、[Starlight](/ja/)は不要かもしれません。
 :::
 
 :::danger
@@ -152,7 +168,7 @@ Starlightの便利な機能のおかげで、ユーザーはより生産的に�
 
 ```md
 :::caution
-もしあなたが素晴らしいドキュメントサイトを望んでいないのであれば、[Starlight](../../)は不要かもしれません。
+もしあなたが素晴らしいドキュメントサイトを望んでいないのであれば、[Starlight](/ja/)は不要かもしれません。
 :::
 
 :::danger
@@ -199,10 +215,144 @@ var fun = function lang(l) {
 ```
 ````
 
-```md
-長い1行のコードブロックは折り返されません。長すぎる場合は、水平方向にスクロールする必要があります。この行は、このことを示すのに十分な長さであるはずです。
-```
+### Expressive Code機能
+
+Starlightは、コードブロックのフォーマットを拡張するために[Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)を使用しています。Expressive Codeのテキストマーカーとウィンドウフレームプラグインはデフォルトで有効になっています。コードブロックのレンダリングは、Starlightの[`expressiveCode`設定オプション](/ja/reference/configuration/#expressivecode)により設定できます。
+
+#### テキストマーカー
+
+[Expressive Codeのテキストマーカー](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents)をコードブロックの先頭で使うことで、コードブロックの特定の行や部分をハイライトできます。波括弧（`{ }`）を使って行全体をハイライトし、引用符を使ってテキストの文字列をハイライトします。
+
+ハイライトのスタイルは3つあります。コードに注意を向けるための中立的なスタイル、挿入されたコードを示す緑色のスタイル、削除されたコードを示す赤色のスタイルです。テキストと行全体の両方を、デフォルトのマーカー、または`ins=`と`del=`を組み合わせてマークし、目的のハイライトを生成できます。
+
+Expressive Codeには、コードサンプルの外観をカスタマイズするためのさまざまなオプションが用意されています。これらの多くは組み合わせることができ、非常に明快なコードサンプルを作成できます。利用可能な多くのオプションについては、[Expressive Codeのドキュメント](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md)を確認してください。最も一般的な例をいくつか以下に示します。
+
+- [行全体と行の範囲を`{ }`マーカーを使ってマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+    // この行（2行目）と次の行はハイライトされます
+    return 'このスニペットの3行目です';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+    // この行（2行目）と次の行はハイライトされます
+    return 'このスニペットの3行目です';
+  }
+  ```
+  ````
+
+- [`" "`マーカーまたは正規表現を使って選択されたテキストをマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+
+  ```js "個別の用語" /正規表現.*います/
+  // 個別の用語もハイライトできます
+  function demo() {
+    return '正規表現もサポートされています';
+  }
+  ```
+
+  ````md
+  ```js "個別の用語" /正規表現.*います/
+  // 個別の用語もハイライトできます
+  function demo() {
+    return '正規表現もサポートされています';
+  }
+  ```
+  ````
+
+- [追加、削除されたテキストや行を、`ins`と`del`でマークする](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="挿入" del="削除"
+  function demo() {
+    console.log('これらは挿入と削除のマーカーです');
+    // return文はデフォルトのマーカータイプを使用します
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="挿入" del="削除"
+  function demo() {
+    console.log('これらは挿入と削除のマーカーです');
+    // return文はデフォルトのマーカータイプを使用します
+    return true;
+  }
+  ```
+  ````
+
+- [構文ハイライトと`diff`風の構文を組み合わせる](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // このブロック全体はJavaScriptとしてハイライトされますが、
+      // diffマーカーの追加も可能です！
+  -   console.log('削除される古いコード')
+  +   console.log('新しいキラキラコード！')
+    }
+  ```
+  ````
+
+#### フレームとタイトル
+
+コードブロックをウィンドウのようなフレームの中にレンダリングできます。シェルスクリプト言語（`bash`や`sh`など）には、ターミナルウィンドウのようなフレームが使用されます。その他の言語は、タイトルを含んでいる場合、コードエディタスタイルのフレーム内に表示されます。
+
+`title="..."`属性を、コードブロックの開始を表わすバックティックと言語識別子の後ろに続けて記述するか、コードの最初の行にファイル名コメントを記述することで、コードブロックにオプションでタイトルを設定できます。
+
+- [コメントによりファイル名タブを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+- [Terminalウィンドウにタイトルを追加する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```bash title="依存関係のインストール中…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="依存関係のインストール中…"
+  npm install
+  ```
+  ````
+
+- [`frame="none"`によりウィンドウフレームを無効化する](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "bash言語を使用していますが、これはターミナルとしてレンダリングされません"
+  ```
+  ````
 
 ## その他のMarkdown機能
 
 Starlightは、リストやテーブルなど、その他のMarkdown記法をすべてサポートしています。Markdownのすべての構文要素の概要については、[The Markdown GuideのMarkdownチートシート](https://www.markdownguide.org/cheat-sheet/)を参照してください。
+
+## 高度なMarkdownとMDXの設定
+
+Starlightは、remarkとrehypeをベースとした、AstroのMarkdown・MDXレンダラーを使用しています。Astroの設定ファイルに`remarkPlugins`または`rehypePlugins`を追加することで、カスタム構文や動作をサポートできます。詳しくは、Astroドキュメントの[「MarkdownとMDXの設定」](https://docs.astro.build/ja/guides/markdown-content/#markdownとmdxの設定)を参照してください。

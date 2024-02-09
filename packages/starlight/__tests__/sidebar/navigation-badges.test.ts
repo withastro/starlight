@@ -7,7 +7,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			[
-				'reference/configuration.md',
+				'reference/configuration.mdx',
 				{
 					title: 'Config Reference',
 					sidebar: {
@@ -19,6 +19,8 @@ vi.mock('astro:content', async () =>
 				},
 			],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: 'New' } }],
+			// @ts-expect-error — Using a slug not present in Starlight docs site
+			['api/v1/users.md', { title: 'Users API' }],
 			['guides/components.mdx', { title: 'Components' }],
 		],
 	})
@@ -29,6 +31,7 @@ describe('getSidebar', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
+			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/",
 			    "isCurrent": true,
@@ -36,26 +39,40 @@ describe('getSidebar', () => {
 			    "type": "link",
 			  },
 			  {
+			    "badge": undefined,
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
 			        "badge": {
 			          "text": "New",
 			          "variant": "success",
 			        },
-			        "href": "/intro/",
+			        "href": "/intro",
 			        "isCurrent": false,
 			        "label": "Introduction",
 			        "type": "link",
 			      },
 			      {
+			        "attrs": {},
 			        "badge": {
 			          "text": "Deprecated",
 			          "variant": "default",
 			        },
-			        "href": "/next-steps/",
+			        "href": "/next-steps",
 			        "isCurrent": false,
 			        "label": "Next Steps",
+			        "type": "link",
+			      },
+			      {
+			        "attrs": {
+			          "class": "showcase-link",
+			          "target": "_blank",
+			        },
+			        "badge": undefined,
+			        "href": "/showcase",
+			        "isCurrent": false,
+			        "label": "Showcase",
 			        "type": "link",
 			      },
 			    ],
@@ -63,9 +80,14 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": {
+			      "text": "Experimental",
+			      "variant": "default",
+			    },
 			    "collapsed": false,
 			    "entries": [
 			      {
+			        "attrs": {},
 			        "badge": {
 			          "text": "Experimental",
 			          "variant": "tip",
@@ -76,6 +98,7 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
+			        "attrs": {},
 			        "badge": {
 			          "text": "New",
 			          "variant": "default",
@@ -87,6 +110,22 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "Reference",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/api/v1/users/",
+			        "isCurrent": false,
+			        "label": "Users API",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API v1",
 			    "type": "group",
 			  },
 			]

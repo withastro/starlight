@@ -5,7 +5,7 @@ description: Starlight를 기존 Astro 프로젝트에 추가하기 위해 수�
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-새로운 Starlight 사이트를 시작하는 가장 빠른 방법은 [시작하기](/ko/getting-started/#새-프로젝트-시작하기)에 나와있는 것처럼 `create astro`를 사용하는 것입니다. 이 가이드에서는 기존 Astro 프로젝트에 Starlight를 추가하는 방법을 설명합니다.
+새로운 Starlight 사이트를 시작하는 가장 빠른 방법은 [시작하기](/ko/getting-started/#새-프로젝트-생성)에 나와있는 것처럼 `create astro`를 사용하는 것입니다. 이 가이드에서는 기존 Astro 프로젝트에 Starlight를 추가하는 방법을 설명합니다.
 
 ## Starlight 설정
 
@@ -13,7 +13,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Starlight 통합 추가
 
-Starlight는 [Astro 통합](https://docs.astro.build/ko/guides/integrations-guide/)입니다. 사이트에 이를 추가하기 위해 프로젝트의 루트 디렉토리에서 `astro add` 명령을 실행하세요.
+Starlight는 [Astro 통합](https://docs.astro.build/ko/guides/integrations-guide/)입니다. 사이트에 이를 추가하기 위해 프로젝트의 루트 디렉터리에서 `astro add` 명령을 실행하세요.
 
 <Tabs>
     <TabItem label="npm">
@@ -43,7 +43,7 @@ Starlight 통합은 `astro.config.mjs` 파일에서 구성됩니다.
 
 시작하려면 `title`을 추가하세요.
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -79,7 +79,7 @@ export const collections = {
 
 이제 Starlight가 구성되었으며 콘텐츠를 추가할 시간입니다!
 
-`src/content/docs/` 디렉토리를 생성한 후 `index.md` 파일을 추가하여 시작하세요.
+`src/content/docs/` 디렉터리를 생성한 후 `index.md` 파일을 추가하여 시작하세요.
 이것은 웹 사이트의 홈페이지가 됩니다.
 
 ```md
@@ -100,11 +100,11 @@ Starlight는 파일 기반 라우팅을 사용합니다. 즉, `src/content/docs/
 
 ### 하위 경로에서 Starlight 사용
 
-모든 Starlight 페이지를 하위 경로에 추가하려면 모든 문서 콘텐츠를 `src/content/docs/`의 하위 디렉토리에 배치하세요.
+모든 Starlight 페이지를 하위 경로에 추가하려면 모든 문서 콘텐츠를 `src/content/docs/`의 하위 디렉터리에 배치하세요.
 
-예를 들어, Starlight의 모든 페이지가 `/guides/`에서 시작해야 하는 경우 `src/content/docs/guides/` 디렉토리에 콘텐츠를 추가하세요.
+예를 들어, Starlight의 모든 페이지가 `/guides/`에서 시작해야 하는 경우 `src/content/docs/guides/` 디렉터리에 콘텐츠를 추가하세요.
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -119,7 +119,7 @@ import FileTree from '../../../components/file-tree.astro';
 
 </FileTree>
 
-앞으로 우리는 `src/content/docs/`에 추가로 중첩된 디렉토리가 필요하지 않도록 이 사용 사례에 대한 지원을 더 늘릴 예정입니다.
+앞으로 우리는 `src/content/docs/`에 추가로 중첩된 디렉터리가 필요하지 않도록 이 사용 사례에 대한 지원을 더 늘릴 예정입니다.
 
 ### SSR과 함께 Starlight 사용
 

@@ -1,15 +1,21 @@
-import { basename, dirname } from 'node:path';
 import config from 'virtual:starlight/user-config';
+import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
-import { pathWithBase } from './base';
+import type {
+	AutoSidebarGroup,
+	LinkHTMLAttributes,
+	SidebarItem,
+	SidebarLinkItem,
+} from '../schemas/sidebar';
+import { createPathFormatter } from './createPathFormatter';
+import { formatPath } from './format-path';
 import { pickLang } from './i18n';
+import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import type { AutoSidebarGroup, SidebarItem, SidebarLinkItem } from './user-config';
-import { ensureLeadingAndTrailingSlashes, ensureTrailingSlash } from './path';
-import type { Badge } from '../schemas/badge';
 
 const DirKey = Symbol('DirKey');
+const SlugKey = Symbol('SlugKey');
 
 export interface Link {
 	type: 'link';
@@ -17,6 +23,7 @@ export interface Link {
 	href: string;
 	isCurrent: boolean;
 	badge: Badge | undefined;
+	attrs: LinkHTMLAttributes;
 }
 
 interface Group {
@@ -24,6 +31,7 @@ interface Group {
 	label: string;
 	entries: (Link | Group)[];
 	collapsed: boolean;
+	badge: Badge | undefined;
 }
 
 export type SidebarEntry = Link | Group;
@@ -36,14 +44,16 @@ export type SidebarEntry = Link | Group;
  */
 interface Dir {
 	[DirKey]: undefined;
+	[SlugKey]: string;
 	[item: string]: Dir | Route;
 }
 
 /** Create a new directory object. */
-function makeDir(): Dir {
+function makeDir(slug: string): Dir {
 	const dir = {} as Dir;
-	// Add DirKey as a non-enumerable property so that `Object.entries(dir)` ignores it.
+	// Add DirKey and SlugKey as non-enumerable properties so that `Object.entries(dir)` ignores them.
 	Object.defineProperty(dir, DirKey, { enumerable: false });
+	Object.defineProperty(dir, SlugKey, { value: slug, enumerable: false });
 	return dir;
 }
 
@@ -69,6 +79,7 @@ function configItemToEntry(
 			label: pickLang(item.translations, localeToLang(locale)) || item.label,
 			entries: item.items.map((i) => configItemToEntry(i, currentPathname, locale, routes)),
 			collapsed: item.collapsed,
+			badge: item.badge,
 		};
 	}
 }
@@ -95,6 +106,7 @@ function groupFromAutogenerateConfig(
 		label: pickLang(item.translations, localeToLang(locale)) || item.label,
 		entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
 		collapsed: item.collapsed,
+		badge: item.badge,
 	};
 }
 
@@ -109,19 +121,35 @@ function linkFromConfig(
 ) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
-		href = ensureLeadingAndTrailingSlashes(href);
+		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.badge);
+	return makeLink(href, label, currentPathname, item.badge, item.attrs);
 }
 
 /** Create a link entry. */
-function makeLink(href: string, label: string, currentPathname: string, badge?: Badge): Link {
-	if (!isAbsolute(href)) href = pathWithBase(href);
-	const isCurrent = href === ensureTrailingSlash(currentPathname);
-	return { type: 'link', label, href, isCurrent, badge };
+function makeLink(
+	href: string,
+	label: string,
+	currentPathname: string,
+	badge?: Badge,
+	attrs?: LinkHTMLAttributes
+): Link {
+	if (!isAbsolute(href)) {
+		href = formatPath(href);
+	}
+
+	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
+
+	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
+}
+
+/** Test if two paths are equivalent even if formatted differently. */
+function pathsMatch(pathA: string, pathB: string) {
+	const format = createPathFormatter({ trailingSlash: 'never' });
+	return format(pathA) === format(pathB);
 }
 
 /** Get the segments leading to a page. */
@@ -131,37 +159,48 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 	// Index paths will match `baseDir` and don’t include breadcrumbs.
 	if (pathWithoutExt === baseDir) return [];
 	// Ensure base directory ends in a trailing slash.
-	if (!baseDir.endsWith('/')) baseDir += '/';
+	baseDir = ensureTrailingSlash(baseDir);
 	// Strip base directory from path if present.
 	const relativePath = pathWithoutExt.startsWith(baseDir)
 		? pathWithoutExt.replace(baseDir, '')
 		: pathWithoutExt;
-	let dir = dirname(relativePath);
-	// Return no breadcrumbs for items in the root directory.
-	if (dir === '.') return [];
-	return dir.split('/');
+
+	return relativePath.split('/');
 }
 
 /** Turn a flat array of routes into a tree structure. */
 function treeify(routes: Route[], baseDir: string): Dir {
-	const treeRoot: Dir = makeDir();
+	const treeRoot: Dir = makeDir(baseDir);
 	routes
 		// Remove any entries that should be hidden
 		.filter((doc) => !doc.entry.data.sidebar.hidden)
+		// Sort by depth, to build the tree depth first.
+		.sort((a, b) => b.id.split('/').length - a.id.split('/').length)
+		// Build the tree
 		.forEach((doc) => {
-			const breadcrumbs = getBreadcrumbs(doc.id, baseDir);
+			const parts = getBreadcrumbs(doc.id, baseDir);
+			let currentNode = treeRoot;
 
-			// Walk down the route’s path to generate the tree.
-			let currentDir = treeRoot;
-			breadcrumbs.forEach((dir) => {
-				// Create new folder if needed.
-				if (typeof currentDir[dir] === 'undefined') currentDir[dir] = makeDir();
-				// Go into the subdirectory.
-				currentDir = currentDir[dir] as Dir;
+			parts.forEach((part, index) => {
+				const isLeaf = index === parts.length - 1;
+
+				// Handle directory index pages by renaming them to `index`
+				if (isLeaf && currentNode.hasOwnProperty(part)) {
+					currentNode = currentNode[part] as Dir;
+					part = 'index';
+				}
+
+				// Recurse down the tree if this isn’t the leaf node.
+				if (!isLeaf) {
+					const path = currentNode[SlugKey];
+					currentNode[part] ||= makeDir(stripLeadingAndTrailingSlashes(path + '/' + part));
+					currentNode = currentNode[part] as Dir;
+				} else {
+					currentNode[part] = doc;
+				}
 			});
-			// We’ve walked through the path. Register the route in this directory.
-			currentDir[basename(doc.slug)] = doc;
 		});
+
 	return treeRoot;
 }
 
@@ -171,7 +210,8 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
-		route.entry.data.sidebar.badge
+		route.entry.data.sidebar.badge,
+		route.entry.data.sidebar.attrs
 	);
 }
 
@@ -187,17 +227,14 @@ function getOrder(routeOrDir: Route | Dir): number {
 }
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
-function sortDirEntries(
-	dir: [string, Dir | Route][],
-	locale: string | undefined
-): [string, Dir | Route][] {
-	const collator = new Intl.Collator(localeToLang(locale));
-	return dir.sort(([keyA, a], [keyB, b]) => {
+function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
+	const collator = new Intl.Collator(localeToLang(undefined));
+	return dir.sort(([_keyA, a], [_keyB, b]) => {
 		const [aOrder, bOrder] = [getOrder(a), getOrder(b)];
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? keyA : a.slug, isDir(b) ? keyB : b.slug);
+		return collator.compare(isDir(a) ? a[SlugKey] : a.slug, isDir(b) ? b[SlugKey] : b.slug);
 	});
 }
 
@@ -210,7 +247,7 @@ function groupFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ): Group {
-	const entries = sortDirEntries(Object.entries(dir), locale).map(([key, dirOrRoute]) =>
+	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
 	);
 	return {
@@ -218,6 +255,7 @@ function groupFromDir(
 		label: dirName,
 		entries,
 		collapsed,
+		badge: undefined,
 	};
 }
 
@@ -242,7 +280,7 @@ function sidebarFromDir(
 	locale: string | undefined,
 	collapsed: boolean
 ) {
-	return sortDirEntries(Object.entries(tree), locale).map(([key, dirOrRoute]) =>
+	return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed)
 	);
 }
@@ -274,7 +312,9 @@ export function getPrevNextLinks(
 		next?: PrevNextLinkConfig;
 	}
 ): {
+	/** Link to previous page in the sidebar. */
 	prev: Link | undefined;
+	/** Link to next page in the sidebar. */
 	next: Link | undefined;
 } {
 	const entries = flattenSidebar(sidebar);
@@ -308,11 +348,13 @@ function applyPrevNextLinkConfig(
 				...link,
 				label: config.label ?? link.label,
 				href: config.link ?? link.href,
+				// Explicitly remove sidebar link attributes for prev/next links.
+				attrs: {},
 			};
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
 			// create a new link.
-			return makeLink(config.link, config.label, config.link);
+			return makeLink(config.link, config.label, '');
 		}
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.

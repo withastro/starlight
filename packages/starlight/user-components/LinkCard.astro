@@ -27,7 +27,7 @@ if (!badgeData.success) {
 }
 ---
 
-<div>
+<div class="sl-link-card">
 	<span class="sl-flex stack">
 		<span>
 			<a {...attributes}>
@@ -48,7 +48,7 @@ if (!badgeData.success) {
 </div>
 
 <style>
-	div {
+	.sl-link-card {
 		display: grid;
 		grid-template-columns: 1fr auto;
 		gap: 0.5rem;
@@ -61,6 +61,7 @@ if (!badgeData.success) {
 
 	a {
 		text-decoration: none;
+		line-height: var(--sl-line-height-headings);
 	}
 
 	/* a11y fix for https://github.com/withastro/starlight/issues/487 */
@@ -79,7 +80,6 @@ if (!badgeData.success) {
 		color: var(--sl-color-white);
 		font-weight: 600;
 		font-size: var(--sl-text-lg);
-		line-height: var(--sl-line-height-headings);
 	}
 
 	.description {
@@ -92,12 +92,12 @@ if (!badgeData.success) {
 	}
 
 	/* Hover state */
-	div:hover {
+	.sl-link-card:hover {
 		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
 		border-color: var(--sl-color-gray-2);
 	}
 
-	div:hover .icon {
+	.sl-link-card:hover .icon {
 		color: var(--sl-color-white);
 	}
 </style>

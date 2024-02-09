@@ -1,3 +1,5 @@
+import { PAGE_TITLE_ID } from '../../constants';
+
 export class StarlightTOC extends HTMLElement {
 	private _current = this.querySelector('a[aria-current="true"]') as HTMLAnchorElement | null;
 	private minH = parseInt(this.dataset.minH || '2', 10);
@@ -20,7 +22,7 @@ export class StarlightTOC extends HTMLElement {
 		const isHeading = (el: Element): el is HTMLHeadingElement => {
 			if (el instanceof HTMLHeadingElement) {
 				// Special case for page title h1
-				if ('pageTitle' in el.dataset) return true;
+				if (el.id === PAGE_TITLE_ID) return true;
 				// Check the heading level is within the user-configured limits for the ToC
 				const level = el.tagName[1];
 				if (level) {
@@ -93,8 +95,8 @@ export class StarlightTOC extends HTMLElement {
 		const mobileTocHeight = this.querySelector('summary')?.getBoundingClientRect().height || 0;
 		/** Start intersections at nav height + 2rem padding. */
 		const top = navBarHeight + mobileTocHeight + 32;
-		/** End intersections 1.5rem later. */
-		const bottom = top + 24;
+		/** End intersections `53px` later. This is slightly more than the maximum `margin-top` in Markdown content. */
+		const bottom = top + 53;
 		const height = document.documentElement.clientHeight;
 		return `-${top}px 0% ${bottom - height}px`;
 	}

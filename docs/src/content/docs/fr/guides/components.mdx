@@ -16,7 +16,7 @@ Ces balises ressemblent à des balises HTML mais commencent par une lettre majus
 
 ```mdx
 ---
-# src/content/docs/index.mdx
+# src/content/docs/exemple.mdx
 title: Bienvenue dans ma documentation
 ---
 
@@ -38,9 +38,9 @@ Pour en savoir plus sur [l'utilisation de composants dans MDX](https://docs.astr
 Starlight applique des styles par défaut à votre contenu Markdown, par exemple en ajoutant une marge entre les éléments.
 Si ces styles entrent en conflit avec l'apparence de votre composant, définissez la classe `not-content` sur votre composant pour les désactiver.
 
-```astro
+```astro 'class="not-content"'
 ---
-// src/components/Example.astro
+// src/components/Exemple.astro
 ---
 
 <div class="not-content">
@@ -61,6 +61,8 @@ Vous pouvez afficher une interface à onglets en utilisant les composants `<Tabs
 Chaque `<TabItem>` doit avoir un `label` à afficher aux utilisateurs.
 
 ```mdx
+# src/content/docs/exemple.mdx
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
@@ -86,6 +88,8 @@ Enveloppez plusieurs cartes dans le composant `<CardGrid>` pour afficher les car
 Une `<Card>` nécessite un `title` et peut optionellement inclure un attribut `icon` fixé au nom de [l'une des icônes intégrées de Starlight](#toutes-les-icônes).
 
 ```mdx
+# src/content/docs/exemple.mdx
+
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Card title="Check this out">
@@ -138,6 +142,8 @@ Une `<LinkCard>` nécessite les attributs `title` et [`href`](https://developer.
 Regroupez plusieurs composants `<LinkCard>` dans `<CardGrid>` pour afficher les cartes côte à côte lorsqu'il y a suffisamment d'espace.
 
 ```mdx
+# src/content/docs/exemple.mdx
+
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -176,13 +182,15 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Icônes
 
 import { Icon } from '@astrojs/starlight/components';
-import IconsList from '../../../../components/icons-list.astro';
+import IconsList from '~/components/icons-list.astro';
 
 Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
 
 Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionellement inclure un attribut `label`, `size` et `color`.
 
 ```mdx
+# src/content/docs/exemple.mdx
+
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
@@ -197,3 +205,49 @@ Le code ci-dessus génère ce qui suit sur la page :
 Une liste de toutes les icônes disponibles est affichée ci-dessous avec leurs noms associés. Cliquez sur une icône pour copier le code du composant.
 
 <IconsList />
+
+### Code
+
+Utilisez le composant `<Code>` pour afficher du code avec coloration syntaxique lorsque l'utilisation d'un [bloc de code Markdown](/fr/guides/authoring-content/#blocs-de-code) n'est pas possible, par exemple, pour afficher des données provenant de sources externes comme des fichiers, des bases de données ou des API.
+
+Consultez la documentation [du « composant Code » d'Expressive Code](https://expressive-code.com/key-features/code-component/) pour plus de détails sur les props que `<Code>` supporte.
+
+```mdx
+# src/content/docs/exemple.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log("Cela peut provenir d'un fichier ou d'un CMS !");`;
+export const fileName = 'exemple.js';
+export const highlights = ['fichier', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log("Cela peut provenir d'un fichier ou d'un CMS !");`;
+export const fileName = 'exemple.js';
+export const highlights = ['fichier', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### Code importé
+
+Utilisez [le suffixe d'import `?raw` de Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) pour importer n'importe quel fichier de code sous forme de chaîne de caractères.
+Vous pouvez ensuite passer cette chaîne importée au composant `<Code>` pour l'inclure dans votre page.
+
+```mdx title="src/content/docs/exemple.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />

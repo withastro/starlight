@@ -20,12 +20,25 @@ export default defineConfig({
 		coverage: {
 			all: true,
 			reportsDirectory: './__coverage__',
-			exclude: [...defaultCoverageExcludes, '**/vitest.*', 'components.ts', 'types.ts'],
-			thresholdAutoUpdate: true,
-			lines: 66.57,
-			functions: 88.46,
-			branches: 90.14,
-			statements: 66.57,
+			exclude: [
+				...defaultCoverageExcludes,
+				'**/vitest.*',
+				'components.ts',
+				'types.ts',
+				// We use this to set up test environments so it isn‘t picked up, but we are testing it downstream.
+				'integrations/virtual-user-config.ts',
+				// Types-only export.
+				'props.ts',
+				// Main integration entrypoint — don’t think we’re able to test this directly currently.
+				'index.ts',
+			],
+			thresholds: {
+				autoUpdate: true,
+				lines: 80.11,
+				functions: 93.61,
+				branches: 91.23,
+				statements: 80.11,
+			},
 		},
 	},
 });

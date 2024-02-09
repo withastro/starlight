@@ -4,7 +4,7 @@ description: Scopri come personalizzare il tuo sito Starlight con il tuo logo, c
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight fornisce stili e funzionalità predefiniti sensati, così puoi iniziare rapidamente senza bisogno di configurazione.
 Se vuoi iniziare a personalizzare l'aspetto del tuo sito Starlight, questa guida fa al caso tuo.
@@ -27,7 +27,7 @@ L'aggiunta di un logo personalizzato all'intestazione del sito è un modo rapido
 
 2. Aggiungi il percorso del tuo logo come opzione [`logo.src`](/it/reference/configuration/#logo) di Starlight in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -37,7 +37,7 @@ L'aggiunta di un logo personalizzato all'intestazione del sito è un modo rapido
    		starlight({
    			title: 'Documentazione con il mio logo',
    			logo: {
-   				src: './src/assets/my-logo.svg',
+   +				src: './src/assets/my-logo.svg',
    			},
    		}),
    	],
@@ -48,7 +48,7 @@ Per impostazione predefinita, il logo verrà visualizzato accanto al `title` del
 Se l'immagine del tuo logo include già il titolo del sito, puoi nascondere visivamente il testo del titolo impostando l'opzione `replacesTitle`.
 Il testo del `title` verrà comunque incluso per gli screen reader in modo che l'intestazione rimanga accessibile.
 
-```js
+```js {5}
 starlight({
   title: 'Documentazione con il mio logo',
   logo: {
@@ -77,21 +77,21 @@ Puoi visualizzare diverse versioni del tuo logo in modalità chiara e scura.
 
 2. Aggiungi il percorso alle varianti del tuo logo come opzioni `light` e `dark` invece di `src` in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    starlight({
      title: 'Documentazione con il mio logo',
      logo: {
-       light: './src/assets/light-logo.svg',
-       dark: './src/assets/dark-logo.svg',
+   +    light: './src/assets/light-logo.svg',
+   +    dark: './src/assets/dark-logo.svg',
      },
    }),
    ```
 
-## Enable sitemap
+## Abilita la mappa del sito
 
 Starlight ha il supporto integrato per la generazione di una mappa del sito. Abilita la generazione della mappa del sito impostando il tuo URL come `site` in `astro.config.mjs`:
 
-```js
+```js {4}
 // astro.config.mjs
 
 export default defineConfig({
@@ -107,7 +107,7 @@ Per impostazione predefinita, le pagine Starlight utilizzano un layout con una b
 Puoi applicare un layout di pagina più ampio senza barre laterali impostando [`template: splash`](/it/reference/frontmatter/#template) nel frontmatter di una pagina.
 Funziona particolarmente bene per le pagine di destinazione e puoi vederlo in azione sulla [home page di questo sito](/it/).
 
-```md
+```md {5}
 ---
 # src/content/docs/index.md
 
@@ -126,7 +126,7 @@ Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nell'
 <Tabs>
   <TabItem label="Frontmatter">
 
-```md
+```md {4-6}
 ---
 # src/content/docs/example.md
 title: Pagina con solo H2 nell'indice dei contenuti
@@ -139,39 +139,39 @@ summary:
   </TabItem>
   <TabItem label="Configurazione globale">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
 	integrations: [
 		starlight({
-			title: '',
+			title: "Documentazione con configurazione personalizzata dell'indice",
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 		}),
 	],
 });
 ```
 
-   </TabItem>
+  </TabItem>
 </Tabs>
 
 Disabilita completamente l'indice dei contenuti impostando l'opzione `tableOfContents` su `false`:
 
 <Tabs>
-   <TabItem label="Frontmatter">
+  <TabItem label="Frontmatter">
 
-```md
+```md {4}
 ---
-# src/content/docs/esempio.md
+# src/content/docs/example.md
 title: Pagina senza indice dei contenuti
 tableOfContents: false
 ---
 ```
 
-   </TabItem>
-   <TabItem label="Configurazione globale">
+  </TabItem>
+  <TabItem label="Configurazione globale">
 
-```js
+```js {7}
 // astro.config.mjs
 
 defineConfig({
@@ -185,17 +185,17 @@ defineConfig({
 });
 ```
 
-   </TabItem>
+  </TabItem>
 </Tabs>
 
 ## Collegamenti social
 
 Starlight dispone del supporto integrato per aggiungere collegamenti ai tuoi account di social media all'intestazione del sito tramite l'opzione [`social`](/it/reference/configuration/#social) nell'integrazione Starlight.
 
-Attualmente sono supportati i collegamenti a Bitbucket, Codeberg, CodePen, Discord, GitHub, GitLab, Gitter, Instagram, LinkedIn, Mastodon, Microsoft Teams, Stack Overflow, Threads, Twitch, Twitter e Youtube.
+Puoi trovare un elenco completo delle icone dei link supportate nella [Referenza della Configurazione](/it/reference/configuration/#social).
 Facci sapere su GitHub o Discord se hai bisogno di supporto per un altro servizio!
 
-```js
+```js {9-12}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -231,7 +231,7 @@ Se il tuo progetto Starlight non è nella radice del tuo repository, includi il 
 
 Questo esempio mostra il collegamento di modifica configurato per i documenti Starlight, che si trovano nella sottodirectory `docs/` sul ramo `main` del repository `withastro/starlight` su GitHub:
 
-```js
+```js {9-11}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -264,10 +264,11 @@ Puoi personalizzarlo aggiungendo un file `404.md` (o `404.mdx`) alla tua directo
 
 </FileTree>
 
-Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#page-layout) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
+Puoi utilizzare tutto il layout di pagina e le tecniche di personalizzazione di Starlight nella tua pagina 404. Ad esempio, la pagina 404 predefinita utilizza il componente [`splash` template](#layout-della-pagina) e [`hero`](/it/reference/frontmatter/#hero) in frontmatter:
 
-```md
+```md {4,6-8}
 ---
+# src/content/docs/404.md
 title: '404'
 template: splash
 editUrl: false
@@ -275,6 +276,25 @@ hero:
   title: '404'
 	tagline: Pagina non trovata. Controlla l'URL o prova a utilizzare la barra di ricerca.
 ---
+```
+
+### Disabilitare la pagina 404 predefinita
+
+Se il tuo progetto richiede un layout della pagina 404 completamente personalizzato, puoi creare `src/pages/404.astro` e impostare l'opzione di configurazione [`disable404Route`](/it/reference/configuration/#disable404route) per disabilitare la route predefinita di Starlight:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Documentazione con una pagina 404 personalizzata',
+			disable404Route: true,
+		}),
+	],
+});
 ```
 
 ## Caratteri personalizzati
@@ -304,7 +324,7 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
 
    </FileTree>
 
-2. Aggiungi una [dichiarazione `@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) per ciascuno dei tuoi caratteri in `src/fonts/font-face.css`.
+2. Aggiungi una [dichiarazione `@font-face`](https://developer.mozilla.org/it/docs/Web/CSS/@font-face) per ciascuno dei tuoi caratteri in `src/fonts/font-face.css`.
    Utilizza un percorso relativo al file del font nella funzione `url()`.
 
    ```css
@@ -322,7 +342,7 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
 
 3. Aggiungi il percorso del tuo file `font-face.css` all'array `customCss` di Starlight in `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -330,10 +350,10 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Documentazione con font personalizzato',
+   			title: 'Docs con un font personalizzato',
    			customCss: [
-   				// Percorso relativo al file CSS @font-face.
-   				'./src/fonts/font-face.css',
+   +				// Percorso relativo al file CSS @font-face.
+   +				'./src/fonts/font-face.css',
    			],
    		}),
    	],
@@ -364,7 +384,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -381,7 +401,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
 3.  Aggiungi i file CSS Fontsource all'array `customCss` di Starlight in `astro.config.mjs`:
 
-    ```js
+    ```diff lang="js"
     // astro.config.mjs
     import { defineConfig } from 'astro/config';
     import starlight from '@astrojs/starlight';
@@ -389,11 +409,11 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
     export default defineConfig({
     	integrations: [
     		starlight({
-    			title: 'Docs With a Custom Typeface',
+    			title: 'Docs con un font personalizzato',
     			customCss: [
-    				// File Fontsource per pesi di font regolari e semi-grassetto.
-    				'@fontsource/ibm-plex-serif/400.css',
-    				'@fontsource/ibm-plex-serif/600.css',
+    +				// File Fontsource per font regolari e semi-grassetto.
+    +				'@fontsource/ibm-plex-serif/400.css',
+    +				'@fontsource/ibm-plex-serif/600.css',
     			],
     		}),
     	],
@@ -404,7 +424,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
 ### Usa i caratteri
 
-Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#custom-css-styles).
+Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#stili-css-personalizzati).
 Ad esempio, per sovrascrivere ovunque il font predefinito di Starlight, imposta la proprietà personalizzata `--sl-font`:
 
 ```css
@@ -426,4 +446,4 @@ main {
 }
 ```
 
-Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#custom-css-styles) per aggiungere i tuoi stili al tuo sito.
+Segui le [istruzioni CSS personalizzate](/it/guides/css-and-tailwind/#stili-css-personalizzati) per aggiungere i tuoi stili al tuo sito.

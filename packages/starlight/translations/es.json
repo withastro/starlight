@@ -18,5 +18,12 @@
   "page.lastUpdated": "Última actualización:",
   "page.previousLink": "Página anterior",
   "page.nextLink": "Siguiente página",
-  "404.text": "Página no encontrada. Verifica la URL o intenta usar la barra de búsqueda."
+  "404.text": "Página no encontrada. Verifica la URL o intenta usar la barra de búsqueda.",
+  "aside.note": "Nota",
+  "aside.tip": "Consejo",
+  "aside.caution": "Precaución",
+  "aside.danger": "Peligro",
+  "expressiveCode.copyButtonCopied": "¡Copiado!",
+  "expressiveCode.copyButtonTooltip": "Copiar al portapapeles",
+  "expressiveCode.terminalWindowFallbackTitle": "Ventana de terminal"
 }

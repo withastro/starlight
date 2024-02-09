@@ -41,6 +41,12 @@
 		display: block;
 	}
 }
+[data-theme='light'] .light\:sl-hidden {
+	display: none;
+}
+[data-theme='dark'] .dark\:sl-hidden {
+	display: none;
+}
 
 /*
 Flip an element around the y-axis when in an RTL context.

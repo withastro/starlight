@@ -1,24 +1,33 @@
 ---
-import LanguageSelect from './LanguageSelect.astro';
-import Search from './Search.astro';
-import SiteTitle from './SiteTitle.astro';
-import SocialIcons from './SocialIcons.astro';
-import ThemeSelect from './ThemeSelect.astro';
+import config from 'virtual:starlight/user-config';
+import type { Props } from '../props';
 
-interface Props {
-	locale: string | undefined;
-}
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 
-const { locale } = Astro.props;
+/**
+ * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
+ */
+const shouldRenderSearch =
+	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <div class="header sl-flex">
-	<SiteTitle {locale} />
-	<Search {locale} />
+	<div class="title-wrapper sl-flex">
+		<SiteTitle {...Astro.props} />
+	</div>
+	<div class="sl-flex">
+		{shouldRenderSearch && <Search {...Astro.props} />}
+	</div>
 	<div class="sl-hidden md:sl-flex right-group">
-		<SocialIcons />
-		<ThemeSelect {locale} />
-		<LanguageSelect {locale} />
+		<div class="sl-flex social-icons">
+			<SocialIcons {...Astro.props} />
+		</div>
+		<ThemeSelect {...Astro.props} />
+		<LanguageSelect {...Astro.props} />
 	</div>
 </div>
 
@@ -30,9 +39,20 @@ const { locale } = Astro.props;
 		height: 100%;
 	}
 
-	.right-group {
+	.title-wrapper {
+		/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
+		overflow: hidden;
+	}
+
+	.right-group,
+	.social-icons {
 		gap: 1rem;
 		align-items: center;
+	}
+	.social-icons::after {
+		content: '';
+		height: 2rem;
+		border-inline-end: 1px solid var(--sl-color-gray-5);
 	}
 
 	@media (min-width: 50rem) {

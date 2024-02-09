@@ -89,6 +89,15 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 The dev container used for GitHub Codespaces can also be used with [other supporting tools](https://containers.dev/supporting), including VS Code.
 
+### Making a Pull Request
+
+When making a pull request containing changes impacting users to Starlight or any related packages (`packages/*`), be sure to [add a changeset](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo) that will describe the changes to users.
+Documentation-only (`docs/*`) and non-package (`examples/*`) changes do not need changesets.
+
+```sh
+pnpm exec changeset
+```
+
 ## Testing
 
 ### Testing visual changes while you work
@@ -106,6 +115,20 @@ You should then be able to open <http://localhost:4321> and see your changes.
 
 > **Note**
 > Changes to the Starlight integration will require you to quit and restart the dev server to take effect.
+
+### Check for broken links in the docs site
+
+When adding or translating content in the Starlight docs site, you can check all internal links are valid.
+All GitHub PRs are checked this way automatically, but testing locally can help if you want to confirm changes are correct before committing them.
+
+To do this, move into the `docs/` directory from the root of the repo and then build the site with the `CHECK_LINKS` environment variable:
+
+```sh
+cd docs
+CHECK_LINKS=true pnpm build
+```
+
+If there are any broken links, the build will fail and log which pages need to be fixed.
 
 ### Unit tests
 
@@ -125,7 +148,7 @@ This will run tests and then listen for changes, re-running tests when files cha
 A lot of Starlight code relies on Vite virtual modules provided either by Astro or by Starlight itself. Each subdirectory of `packages/starlight/__tests__/` should contain a `vitest.config.ts` file that uses the `defineVitestConfig()` helper to define a valid test environment for tests in that directory. This helper takes a single argument, which provides a Starlight user config object:
 
 ```ts
-// packages/starlight/__tests/basics/vitest.config.ts
+// packages/starlight/__tests__/basics/vitest.config.ts
 import { defineVitestConfig } from '../test-config';
 
 export default defineVitestConfig({
@@ -189,6 +212,18 @@ Help out by:
 
 Visit **<https://i18n.starlight.astro.build>** to track translation progress for the currently supported languages.
 
+#### Adding a new language to Starlight’s docs
+
+To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://github.com/withastro/docs/blob/main/contributor-guides/translating-astro-docs.md#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
+
+- Add your language to the `locales` config in `docs/astro.config.mjs`
+- Add your language to the `locales` config in `docs/lunaria.config.json`
+- Add your language’s subtag to the i18n label config in `.github/labeler.yml`
+- Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
+- Create the first translated page for your language.  
+   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
+- Open a pull request on GitHub to add your changes to Starlight!
+
 ## Understanding Starlight
 
 - Starlight is built as an Astro integration.
@@ -205,6 +240,10 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 
 - Components that require JavaScript for their functionality are all written without a UI framework, most often as custom elements.
   This helps keep Starlight lightweight and makes it easier for a user to choose to add components from a framework of their choice to their project.
+
+- Components that require client-side JavaScript or CSS should use JavaScript/CSS features that are well-supported by browsers.
+
+  You can find a list of supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+88%2C+Edge+%3E%3D+88%2C+Firefox+%3E%3D+98%2C+Safari+%3E%3D+15.4%2C+iOS+%3E%3D+15.4%2C+not+op_mini+all). To check whether or not a feature is supported, you can visit the [Can I use](https://caniuse.com) website and search for the feature.
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues
