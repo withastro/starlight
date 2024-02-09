@@ -196,7 +196,7 @@ Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più faci
 > I blockquote sono indicati da `>` all'inizio di ogni riga.
 ```
 
-## Bloccho di codice
+## Blocco di codice
 
 Un blocco di codice è indicato da tre backtick <code>```</code> all'inizio e alla fine. Puoi indicare il linguaggio di programmazione dopo i primi backtick.
 
