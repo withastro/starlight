@@ -84,7 +84,7 @@ export default function StarlightIntegration({
 					prefetch: config.prefetch ?? { prefetchAll: true },
 					experimental: {
 						globalRoutePriority: true,
-					}
+					},
 				});
 			},
 
