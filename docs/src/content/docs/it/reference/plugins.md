@@ -51,14 +51,14 @@ Questo hook viene chiamato con le seguenti opzioni:
 
 #### `config`
 
-**type:** `StarlightUserConfig`
+**tipo:** `StarlightUserConfig`
 
 Una copia di sola lettura della [configurazione Starlight](/it/reference/configuration) fornita all'utente.
 Questa configurazione potrebbe essere stata aggiornata da altri plugin configurati prima di quello corrente.
 
 #### `updateConfig`
 
-**type:** `(newConfig: StarlightUserConfig) => void`
+**tipo:** `(newConfig: StarlightUserConfig) => void`
 
 Una funzione di callback per aggiornare la [configurazione Starlight](/it/reference/configuration) fornita all'utente.
 Fornisci le chiavi di configurazione di livello root che vuoi sovrascrivere.
@@ -86,7 +86,7 @@ export default {
 
 #### `addIntegration`
 
-**type:** `(integration: AstroIntegration) => void`
+**tipo:** `(integration: AstroIntegration) => void`
 
 Una funzione di callback per aggiungere un'[integrazione Astro](https://docs.astro.build/it/reference/integrations-reference/) richiesta dal plugin.
 
@@ -115,13 +115,13 @@ export default {
 
 #### `astroConfig`
 
-**type:** `AstroConfig`
+**tipo:** `AstroConfig`
 
 Una copia di sola lettura della [configurazione Astro](https://docs.astro.build/it/reference/configuration-reference/) fornita all'utente.
 
 #### `command`
 
-**type:** `'dev' | 'build' | 'preview'`
+**tipo:** `'dev' | 'build' | 'preview'`
 
 Il comando utilizzato per eseguire Starlight:
 
@@ -131,14 +131,14 @@ Il comando utilizzato per eseguire Starlight:
 
 #### `isRestart`
 
-**type:** `boolean`
+**tipo:** `boolean`
 
 `false` quando il server di sviluppo viene avviato, `true` quando viene attivato un riavvio.
 Le ragioni comuni per un riavvio includono la modifica di `astro.config.mjs` da parte dell'utente mentre il server di sviluppo è in esecuzione.
 
 #### `logger`
 
-**type:** `AstroIntegrationLogger`
+**tipo:** `AstroIntegrationLogger`
 
 Un'istanza del [logger di integrazione Astro](https://docs.astro.build/it/reference/integrations-reference/#astrointegrationlogger) che puoi utilizzare per scrivere log.
 Tutti i messaggi registrati saranno prefissati con il nome del plugin.
