@@ -53,9 +53,6 @@ importers:
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
-      virtual-pages-demo:
-        specifier: workspace:*
-        version: link:../packages/virtual-pages-demo
     devDependencies:
       '@types/hast':
         specifier: ^3.0.3
@@ -221,12 +218,6 @@ importers:
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@18.16.19)
-
-  packages/virtual-pages-demo:
-    dependencies:
-      '@astrojs/starlight':
-        specifier: '>=0.14.0'
-        version: link:../starlight
 
 packages:
 

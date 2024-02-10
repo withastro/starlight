@@ -20,8 +20,7 @@
     "@types/culori": "^2.0.0",
     "astro": "^4.3.5",
     "culori": "^3.2.0",
-    "sharp": "^0.32.5",
-    "virtual-pages-demo": "workspace:*"
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
     "@types/hast": "^3.0.3",

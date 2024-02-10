@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
-import { virtualPagesDemo } from 'virtual-pages-demo';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -201,10 +200,7 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 				  ]
-				: [
-						// TODO(HiDeoo) Remove me
-						virtualPagesDemo(),
-				  ],
+				: [],
 		}),
 	],
 });
