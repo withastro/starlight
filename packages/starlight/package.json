@@ -102,9 +102,9 @@
       "types": "./components/Page.astro.tsx",
       "import": "./components/Page.astro"
     },
-    "./components/VirtualPage.astro": {
-      "types": "./components/VirtualPage.astro.tsx",
-      "import": "./components/VirtualPage.astro"
+    "./components/StarlightPage.astro": {
+      "types": "./components/StarlightPage.astro.tsx",
+      "import": "./components/StarlightPage.astro"
     },
     "./components/Footer.astro": {
       "types": "./components/Footer.astro.tsx",

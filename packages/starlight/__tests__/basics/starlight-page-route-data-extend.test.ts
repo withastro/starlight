@@ -1,6 +1,9 @@
 import { z } from 'astro:content';
 import { assert, expect, test, vi } from 'vitest';
-import { generateVirtualRouteData, type VirtualPageProps } from '../../utils/virtual-page';
+import {
+	generateStarlightPageRouteData,
+	type StarlightPageProps,
+} from '../../utils/starlight-page';
 
 vi.mock('virtual:starlight/collection-config', async () => {
 	const { z } = await vi.importActual<typeof import('astro:content')>('astro:content');
@@ -14,7 +17,7 @@ vi.mock('virtual:starlight/collection-config', async () => {
 	});
 });
 
-const virtualPageProps: VirtualPageProps = {
+const starlightPageProps: StarlightPageProps = {
 	slug: 'test-slug',
 	frontmatter: { title: 'This is a test title' },
 };
@@ -23,8 +26,8 @@ test('throws a validation error if a built-in field required by the user schema 
 	expect.assertions(3);
 
 	try {
-		await generateVirtualRouteData({
-			props: virtualPageProps,
+		await generateStarlightPageRouteData({
+			props: starlightPageProps,
 			url: new URL('https://example.com'),
 		});
 	} catch (error) {
@@ -37,11 +40,11 @@ test('throws a validation error if a built-in field required by the user schema 
 
 test('returns new field defined in the user schema', async () => {
 	const category = 'test category';
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				description: 'test description',
 				// @ts-expect-error - Custom field defined in the user schema.
 				category,

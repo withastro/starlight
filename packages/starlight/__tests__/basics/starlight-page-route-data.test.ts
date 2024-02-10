@@ -1,5 +1,8 @@
 import { expect, test, vi } from 'vitest';
-import { generateVirtualRouteData, type VirtualPageProps } from '../../utils/virtual-page';
+import {
+	generateStarlightPageRouteData,
+	type StarlightPageProps,
+} from '../../utils/starlight-page';
 
 vi.mock('virtual:starlight/collection-config', async () =>
 	(await import('../test-utils')).mockedCollectionConfig()
@@ -14,34 +17,34 @@ vi.mock('astro:content', async () =>
 	})
 );
 
-const virtualPageProps: VirtualPageProps = {
+const starlightPageProps: StarlightPageProps = {
 	slug: 'test-slug',
 	frontmatter: { title: 'This is a test title' },
 };
 
 test('adds data to route shape', async () => {
-	const data = await generateVirtualRouteData({
-		props: virtualPageProps,
+	const data = await generateStarlightPageRouteData({
+		props: starlightPageProps,
 		url: new URL('https://example.com'),
 	});
-	// Virtual pages respect the slug passed in props.
-	expect(data.slug).toBe(virtualPageProps.slug);
-	// Virtual pages generate an ID based on their slug.
+	// Starlight pages respect the slug passed in props.
+	expect(data.slug).toBe(starlightPageProps.slug);
+	// Starlight pages generate an ID based on their slug.
 	expect(data.id).toBeDefined();
-	// Virtual pages cannot be fallbacks.
+	// Starlight pages cannot be fallbacks.
 	expect(data.isFallback).toBeUndefined();
-	// Virtual pages are not editable if no edit URL is passed.
+	// Starlight pages are not editable if no edit URL is passed.
 	expect(data.editUrl).toBeUndefined();
 	expect(data.entry.data.editUrl).toBe(false);
-	// Virtual pages are part of the docs collection.
+	// Starlight pages are part of the docs collection.
 	expect(data.entry.collection).toBe('docs');
-	// Virtual pages get virtual frontmatter defaults.
+	// Starlight pages get dedicated frontmatter defaults.
 	expect(data.entry.data.head).toEqual([]);
 	expect(data.entry.data.pagefind).toBe(true);
 	expect(data.entry.data.template).toBe('doc');
-	// Virtual pages respect the passed data.
-	expect(data.entry.data.title).toBe(virtualPageProps.frontmatter.title);
-	// Virtual pages get expected defaults.
+	// Starlight pages respect the passed data.
+	expect(data.entry.data.title).toBe(starlightPageProps.frontmatter.title);
+	// Starlight pages get expected defaults.
 	expect(data.hasSidebar).toBe(true);
 	expect(data.headings).toEqual([]);
 	expect(data.entryMeta.dir).toBe('ltr');
@@ -49,30 +52,30 @@ test('adds data to route shape', async () => {
 });
 
 test('adds custom data to route shape', async () => {
-	const props: VirtualPageProps = {
-		...virtualPageProps,
+	const props: StarlightPageProps = {
+		...starlightPageProps,
 		hasSidebar: false,
 		dir: 'rtl',
 		lang: 'ks',
 	};
-	const data = await generateVirtualRouteData({ props, url: new URL('https://example.com') });
+	const data = await generateStarlightPageRouteData({ props, url: new URL('https://example.com') });
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
 });
 
-test('adds custom virtual frontmatter data to route shape', async () => {
-	const props: VirtualPageProps = {
-		...virtualPageProps,
+test('adds custom frontmatter data to route shape', async () => {
+	const props: StarlightPageProps = {
+		...starlightPageProps,
 		frontmatter: {
-			...virtualPageProps.frontmatter,
+			...starlightPageProps.frontmatter,
 			head: [{ tag: 'meta', attrs: { name: 'og:test', content: 'test' } }],
 			lastUpdated: new Date(),
 			pagefind: false,
 			template: 'splash',
 		},
 	};
-	const data = await generateVirtualRouteData({ props, url: new URL('https://example.com') });
+	const data = await generateStarlightPageRouteData({ props, url: new URL('https://example.com') });
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
 		[
 		  {
@@ -91,8 +94,8 @@ test('adds custom virtual frontmatter data to route shape', async () => {
 });
 
 test('uses generated sidebar when no sidebar is provided', async () => {
-	const data = await generateVirtualRouteData({
-		props: virtualPageProps,
+	const data = await generateStarlightPageRouteData({
+		props: starlightPageProps,
 		url: new URL('https://example.com'),
 	});
 	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
@@ -104,9 +107,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 });
 
 test('uses provided sidebar if any', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			sidebar: [
 				{
 					type: 'link',
@@ -137,11 +140,11 @@ test('uses provided sidebar if any', async () => {
 });
 
 test('uses provided pagination if any', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				prev: {
 					label: 'Previous link',
 					link: '/test/prev',
@@ -181,17 +184,17 @@ test('uses provided headings if any', async () => {
 		{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 		{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 	];
-	const data = await generateVirtualRouteData({
-		props: { ...virtualPageProps, headings },
+	const data = await generateStarlightPageRouteData({
+		props: { ...starlightPageProps, headings },
 		url: new URL('https://example.com'),
 	});
 	expect(data.headings).toEqual(headings);
 });
 
 test('generates the table of contents for provided headings', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			headings: [
 				{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 				{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
@@ -231,9 +234,9 @@ test('generates the table of contents for provided headings', async () => {
 });
 
 test('respects the `tableOfContents` level configuration', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			headings: [
 				// Should be ignored as it's not deep enough.
 				{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
@@ -241,7 +244,7 @@ test('respects the `tableOfContents` level configuration', async () => {
 				{ depth: 4, slug: 'heading-3', text: 'Heading 3' },
 			],
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				tableOfContents: {
 					minHeadingLevel: 3,
 					maxHeadingLevel: 4,
@@ -281,15 +284,15 @@ test('respects the `tableOfContents` level configuration', async () => {
 });
 
 test('disables table of contents if frontmatter includes `tableOfContents: false`', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			headings: [
 				{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 				{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 			],
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				tableOfContents: false,
 			},
 		},
@@ -299,15 +302,15 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 });
 
 test('disables table of contents for splash template', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			headings: [
 				{ depth: 2, slug: 'heading-1', text: 'Heading 1' },
 				{ depth: 3, slug: 'heading-2', text: 'Heading 2' },
 			],
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				template: 'splash',
 			},
 		},
@@ -317,8 +320,8 @@ test('disables table of contents for splash template', async () => {
 });
 
 test('hides the sidebar if the `hasSidebar` option is not specified and the splash template is used', async () => {
-	const { hasSidebar, ...otherProps } = virtualPageProps;
-	const data = await generateVirtualRouteData({
+	const { hasSidebar, ...otherProps } = starlightPageProps;
+	const data = await generateStarlightPageRouteData({
 		props: {
 			...otherProps,
 			frontmatter: {
@@ -332,8 +335,8 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 });
 
 test('includes localized labels', async () => {
-	const data = await generateVirtualRouteData({
-		props: virtualPageProps,
+	const data = await generateStarlightPageRouteData({
+		props: starlightPageProps,
 		url: new URL('https://example.com'),
 	});
 	expect(data.labels).toBeDefined();
@@ -342,11 +345,11 @@ test('includes localized labels', async () => {
 
 test('uses provided edit URL if any', async () => {
 	const editUrl = 'https://example.com/edit';
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				editUrl,
 			},
 		},
@@ -357,11 +360,11 @@ test('uses provided edit URL if any', async () => {
 });
 
 test('strips unknown frontmatter properties', async () => {
-	const data = await generateVirtualRouteData({
+	const data = await generateStarlightPageRouteData({
 		props: {
-			...virtualPageProps,
+			...starlightPageProps,
 			frontmatter: {
-				...virtualPageProps.frontmatter,
+				...starlightPageProps.frontmatter,
 				// @ts-expect-error - This is an unknown property.
 				unknown: 'test',
 			},
