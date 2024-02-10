@@ -31,10 +31,16 @@ test('throws a validation error if a built-in field required by the user schema 
 			url: new URL('https://example.com'),
 		});
 	} catch (error) {
-		assert(error instanceof z.ZodError);
-		expect(error.errors).toHaveLength(1);
-		expect(error.errors.at(0)?.path).toEqual(['description']);
-		expect(error.errors.at(0)?.code).toBe('invalid_type');
+		assert(error instanceof Error);
+		const lines = error.message.split('\n');
+		// The first line should be a user-friendly error message describing the exact issue and the second line should be
+		// the missing description field.
+		expect(lines).toHaveLength(2);
+		const [message, missingField] = lines;
+		expect(message).toMatchInlineSnapshot(
+			`"Invalid frontmatter props passed to the \`<StarlightPage/>\` component."`
+		);
+		expect(missingField).toMatchInlineSnapshot(`"**description**: Required"`);
 	}
 });
 

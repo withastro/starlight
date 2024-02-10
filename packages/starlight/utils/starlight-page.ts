@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import { errorMap, throwValidationError } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import { getToC, type PageProps, type StarlightRouteData } from './route-data';
 import type { StarlightDocsEntry } from './routing';
@@ -172,7 +173,16 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			}),
 	});
 
-	return schema.parse(frontmatter);
+	const pageFrontmatter = schema.safeParse(frontmatter, { errorMap });
+
+	if (!pageFrontmatter.success) {
+		throwValidationError(
+			pageFrontmatter.error,
+			'Invalid frontmatter props passed to the `<StarlightPage/>` component.'
+		);
+	}
+
+	return pageFrontmatter.data;
 }
 
 /** Returns the user docs schema and falls back to the default schema if needed. */
