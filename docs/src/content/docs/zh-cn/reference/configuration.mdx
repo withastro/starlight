@@ -79,7 +79,7 @@ starlight({
 });
 ```
 
-使用此配置，`/introduction` 页面将具有指向 `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md` 的编辑链接。
+使用此配置，`/introduction` 页面将具有指向 `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md` 的编辑链接。
 
 ### `sidebar`
 
@@ -509,6 +509,13 @@ starlight({
 默认情况下，每个页面的 `<title>` 都是 `页面标题 | 网站标题`。
 举例，本页面的标题是“配置参考”，本站点的标题是“Starlight”，所以本页面的 `<title>` 是“配置参考 | Starlight”。
 
+### `disable404Route`
+
+**类型：** `boolean`  
+**默认值：** `false`
+
+禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/core-concepts/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
+
 ### `components`
 
 **类型：** `Record<string, string>`
@@ -532,7 +539,7 @@ starlight({
 使用自定义插件扩展 Starlight。
 插件将更改应用到你的项目中，以修改或添加 Starlight 的功能。
 
-访问 [插件 showcase](/zh-cn/resources/plugins/) 查看可用插件列表。
+访问 [插件 showcase](/zh-cn/resources/plugins/#插件) 查看可用插件列表。
 
 ```js
 starlight({

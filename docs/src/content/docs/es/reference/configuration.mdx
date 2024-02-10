@@ -78,7 +78,7 @@ starlight({
 });
 ```
 
-Con esta configuración, una página `/introduction` tendría un enlace de edición que apunta a `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
+Con esta configuración, una página `/introduction` tendría un enlace de edición que apunta a `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`.
 
 ### `sidebar`
 
@@ -513,6 +513,13 @@ Establece un delimitador entre el título de la página y el título del sitio w
 
 Por defecto, cada página tiene un `<title>` de `Título de la página | Título del sitio web`.
 Por ejemplo, esta página es titulada "Referencia de Configuración" y este sitio web es titulado "Starlight", por lo que el `<title>` de esta página es "Referencia de Configuración | Starlight".
+
+### `disable404Route`
+
+**tipo:** `boolean`  
+**por defecto:** `false`
+
+Deshabilita la inyección de la [página 404](https://docs.astro.build/es/core-concepts/astro-pages/#página-de-error-404-personalizada) predeterminada de Starlight. Para usar una ruta `src/pages/404.astro` personalizada en tu proyecto, establece esta opción en `true`.
 
 ### `components`
 

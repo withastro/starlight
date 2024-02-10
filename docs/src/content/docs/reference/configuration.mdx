@@ -79,7 +79,7 @@ starlight({
 });
 ```
 
-With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
+With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`.
 
 ### `sidebar`
 
@@ -513,6 +513,13 @@ Sets the delimiter between page title and site title in the page’s `<title>` t
 
 By default, every page has a `<title>` of `Page Title | Site Title`.
 For example, this page is titled “Configuration Reference” and this site is titled “Starlight”, so the `<title>` for this page is “Configuration Reference | Starlight”.
+
+### `disable404Route`
+
+**type:** `boolean`  
+**default:** `false`
+
+Disables injecting Starlight's default [404 page](https://docs.astro.build/en/core-concepts/astro-pages/#custom-404-error-page). To use a custom `src/pages/404.astro` route in your project, set this option to `true`.
 
 ### `components`
 

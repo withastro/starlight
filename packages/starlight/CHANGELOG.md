@@ -1,5 +1,69 @@
 # @astrojs/starlight
 
+## 0.18.0
+
+### Minor Changes
+
+- [#1454](https://github.com/withastro/starlight/pull/1454) [`1d9ef56`](https://github.com/withastro/starlight/commit/1d9ef567907bed7210e75ab3460f536c0768a87f) Thanks [@Fryuni](https://github.com/Fryuni)! - Makes Starlight compatible with [on-demand server rendering](https://docs.astro.build/en/guides/server-side-rendering/) (sometimes referred to as server-side rendering or SSR).
+
+  Starlight pages are always prerendered, even when using `output: 'server'`.
+
+- [#1454](https://github.com/withastro/starlight/pull/1454) [`1d9ef56`](https://github.com/withastro/starlight/commit/1d9ef567907bed7210e75ab3460f536c0768a87f) Thanks [@Fryuni](https://github.com/Fryuni)! - Enables Astro’s [`experimental.globalRoutePriority`](https://docs.astro.build/en/reference/configuration-reference/#experimentalglobalroutepriority) option and bumps the minimum required Astro version.
+
+  ⚠️ **BREAKING CHANGE** The minimum supported Astro version is now 4.2.7. Upgrade Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.17.4
+
+### Patch Changes
+
+- [#1473](https://github.com/withastro/starlight/pull/1473) [`29da505`](https://github.com/withastro/starlight/commit/29da505474174fefaec4e27a2c2c3e90e3f68a31) Thanks [@delucis](https://github.com/delucis)! - Fixes a CSS bug for users with JavaScript disabled
+
+- [#1465](https://github.com/withastro/starlight/pull/1465) [`ce3108c`](https://github.com/withastro/starlight/commit/ce3108cf6ecb77d12db973485d21e0fc7fd63ca6) Thanks [@delucis](https://github.com/delucis)! - Updates internal MDX, sitemap, and Expressive Code dependencies to the latest versions
+
+## 0.17.3
+
+### Patch Changes
+
+- [#1461](https://github.com/withastro/starlight/pull/1461) [`2e17880`](https://github.com/withastro/starlight/commit/2e17880957d1aae2a84c77500afa9b66e5292a6a) Thanks [@liruifengv](https://github.com/liruifengv)! - Improves the table of contents title translation in Simplified Chinese
+
+- [#1462](https://github.com/withastro/starlight/pull/1462) [`4741ccc`](https://github.com/withastro/starlight/commit/4741cccc8adbef500bcaf95416a1c61a90761c06) Thanks [@delucis](https://github.com/delucis)! - Fixes overflow of very long site titles on narrow viewports
+
+- [#1459](https://github.com/withastro/starlight/pull/1459) [`9a8e0ec`](https://github.com/withastro/starlight/commit/9a8e0ec59cba0e088512ea9b6d17224085f3a178) Thanks [@delucis](https://github.com/delucis)! - Fixes a bug where table of contents highlighting could break given very specific combinations of content and viewport size
+
+- [#1458](https://github.com/withastro/starlight/pull/1458) [`8c88642`](https://github.com/withastro/starlight/commit/8c88642875e8344396074a780e28fb0860b249f8) Thanks [@delucis](https://github.com/delucis)! - Silences i18n content collection warnings for projects without custom translations.
+
+## 0.17.2
+
+### Patch Changes
+
+- [#1442](https://github.com/withastro/starlight/pull/1442) [`1a642e4`](https://github.com/withastro/starlight/commit/1a642e4d74ee4c30e85bce37b41888b1eae0544a) Thanks [@delucis](https://github.com/delucis)! - Fixes URLs in language picker for sites with `build.format: 'file'`
+
+- [#1440](https://github.com/withastro/starlight/pull/1440) [`2ea1e88`](https://github.com/withastro/starlight/commit/2ea1e883186660b48f0ea8c4da7fead5fb74e313) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds JS support to the `@astrojs/starlight/expressive-code` export to allow importing from non-TS environments.
+
+## 0.17.1
+
+### Patch Changes
+
+- [#1437](https://github.com/withastro/starlight/pull/1437) [`655aed4`](https://github.com/withastro/starlight/commit/655aed4840cae59e9abd64b4b585e60f1cfab209) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds Starlight-specific types to `defineEcConfig` function and exports `StarlightExpressiveCodeOptions`.
+
+  This provides Starlight types and IntelliSense support for your Expressive Code configuration options inside an `ec.config.mjs` file. See the [Expressive Code documentation](https://expressive-code.com/key-features/code-component/#using-an-ecconfigmjs-file) for more information.
+
+- [#1420](https://github.com/withastro/starlight/pull/1420) [`275f87f`](https://github.com/withastro/starlight/commit/275f87fd7fc676b9ab323354078c06894e0832c7) Thanks [@abdelhalimjean](https://github.com/abdelhalimjean)! - Fix rare `font-family` issue if users have a font installed with a name of `""`
+
+- [#1365](https://github.com/withastro/starlight/pull/1365) [`a0af7cc`](https://github.com/withastro/starlight/commit/a0af7cc696da987a76edab96cdd2329779e87724) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Correctly format Pagefind search result links when `trailingSlash: 'never'` is used
+
+## 0.17.0
+
+### Minor Changes
+
+- [#1389](https://github.com/withastro/starlight/pull/1389) [`21b3620`](https://github.com/withastro/starlight/commit/21b36201aa1e01c8395d0f24b2fa4e32b90550bb) Thanks [@connor-baer](https://github.com/connor-baer)! - Adds new `disable404Route` config option to disable injection of Astro’s default 404 route
+
+- [#1395](https://github.com/withastro/starlight/pull/1395) [`ce05dfb`](https://github.com/withastro/starlight/commit/ce05dfb4b1e9b90fad057d5d4328e4445f986b3b) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds a new [`<Code>` component](https://starlight.astro.build/guides/components/#code) to render dynamic code strings with Expressive Code
+
 ## 0.16.0
 
 ### Minor Changes

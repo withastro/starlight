@@ -32,11 +32,13 @@ export default defineConfig({
 				// Main integration entrypoint — don’t think we’re able to test this directly currently.
 				'index.ts',
 			],
-			thresholdAutoUpdate: true,
-			lines: 80.11,
-			functions: 93.61,
-			branches: 91.23,
-			statements: 80.11,
+			thresholds: {
+				autoUpdate: true,
+				lines: 80.11,
+				functions: 93.61,
+				branches: 91.23,
+				statements: 80.11,
+			},
 		},
 	},
 });
