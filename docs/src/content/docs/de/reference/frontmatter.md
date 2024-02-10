@@ -108,6 +108,9 @@ hero:
     - text: Schau mal auf GitHub vorbei
       link: https://github.com/astronaut/mein-projekt
       icon: external
+      attrs:
+        target: _blank
+        rel: noopener
 ---
 ```
 
@@ -154,6 +157,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: HTMLAttributes<"a">;
   }>;
 }
 ```

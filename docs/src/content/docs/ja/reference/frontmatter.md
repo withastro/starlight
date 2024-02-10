@@ -116,6 +116,9 @@ hero:
     - text: GitHubで見る
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        target: _blank
+        rel: noopener
 ---
 ```
 
@@ -163,6 +166,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: HTMLAttributes<"a">;
   }>;
 }
 ```
