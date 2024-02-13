@@ -1,4 +1,3 @@
-import { z } from 'astro:content';
 import { assert, expect, test, vi } from 'vitest';
 import {
 	generateStarlightPageRouteData,
