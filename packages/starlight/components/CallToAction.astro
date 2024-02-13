@@ -7,13 +7,14 @@ interface Props {
 	variant: 'primary' | 'secondary' | 'minimal';
 	link: string;
 	icon?: undefined | { type: 'icon'; name: keyof typeof Icons } | { type: 'raw'; html: string };
-	attrs?: HTMLAttributes<"a">;
+	attrs?: Omit<HTMLAttributes<'a'>, 'href'>;
 }
 
-const { link, variant, icon, attrs } = Astro.props;
+const { link, variant, icon } = Astro.props;
+const { class: customClass, ...attrs } = Astro.props.attrs || {};
 ---
 
-<a class:list={['sl-flex action', variant]} href={link} {...attrs}>
+<a class:list={['sl-flex action', variant, customClass]} href={link} {...attrs}>
 	<slot />
 	{icon?.type === 'icon' && <Icon name={icon.name} size="1.5rem" />}
 	{icon?.type === 'raw' && <Fragment set:html={icon.html} />}
