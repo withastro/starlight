@@ -18,17 +18,18 @@ vi.mock('astro:content', async () =>
 );
 
 const starlightPageProps: StarlightPageProps = {
-	slug: 'test-slug',
 	frontmatter: { title: 'This is a test title' },
 };
+
+const starlightPageUrl = new URL('https://example.com/test-slug');
 
 test('adds data to route shape', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
-	// Starlight pages respect the slug passed in props.
-	expect(data.slug).toBe(starlightPageProps.slug);
+	// Starlight pages infer the slug from the URL.
+	expect(data.slug).toBe('test-slug');
 	// Starlight pages generate an ID based on their slug.
 	expect(data.id).toBeDefined();
 	// Starlight pages cannot be fallbacks.
@@ -58,7 +59,7 @@ test('adds custom data to route shape', async () => {
 		dir: 'rtl',
 		lang: 'ks',
 	};
-	const data = await generateStarlightPageRouteData({ props, url: new URL('https://example.com') });
+	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
@@ -75,7 +76,7 @@ test('adds custom frontmatter data to route shape', async () => {
 			template: 'splash',
 		},
 	};
-	const data = await generateStarlightPageRouteData({ props, url: new URL('https://example.com') });
+	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
 		[
 		  {
@@ -96,7 +97,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
 		[
@@ -129,7 +130,7 @@ test('uses provided sidebar if any', async () => {
 				},
 			],
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
 		[
@@ -155,7 +156,7 @@ test('uses provided pagination if any', async () => {
 				},
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.pagination).toMatchInlineSnapshot(`
 		{
@@ -186,7 +187,7 @@ test('uses provided headings if any', async () => {
 	];
 	const data = await generateStarlightPageRouteData({
 		props: { ...starlightPageProps, headings },
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.headings).toEqual(headings);
 });
@@ -202,7 +203,7 @@ test('generates the table of contents for provided headings', async () => {
 				{ depth: 4, slug: 'heading-3', text: 'Heading 3' },
 			],
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -251,7 +252,7 @@ test('respects the `tableOfContents` level configuration', async () => {
 				},
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -296,7 +297,7 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 				tableOfContents: false,
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -314,7 +315,7 @@ test('disables table of contents for splash template', async () => {
 				template: 'splash',
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -329,7 +330,7 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 				template: 'splash',
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.hasSidebar).toBe(false);
 });
@@ -337,7 +338,7 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 test('includes localized labels', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.labels).toBeDefined();
 	expect(data.labels['skipLink.label']).toBe('Skip to content');
@@ -353,7 +354,7 @@ test('uses provided edit URL if any', async () => {
 				editUrl,
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect(data.editUrl).toEqual(new URL(editUrl));
 	expect(data.entry.data.editUrl).toEqual(editUrl);
@@ -369,7 +370,7 @@ test('strips unknown frontmatter properties', async () => {
 				unknown: 'test',
 			},
 		},
-		url: new URL('https://example.com'),
+		url: starlightPageUrl,
 	});
 	expect('unknown' in data.entry.data).toBe(false);
 });

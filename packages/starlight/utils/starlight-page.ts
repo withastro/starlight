@@ -5,7 +5,7 @@ import { errorMap, throwValidationError } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import { getToC, type PageProps, type StarlightRouteData } from './route-data';
 import type { StarlightDocsEntry } from './routing';
-import { slugToLocaleData } from './slugs';
+import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar } from './navigation';
 import { useTranslations } from './translations';
 import { docsSchema } from '../schema';
@@ -62,8 +62,6 @@ type StarlightPageFrontmatter = Omit<
 export type StarlightPageProps = Prettify<
 	// Remove the index signature from `Route`, omit undesired properties and make the rest optional.
 	Partial<Omit<RemoveIndexSignature<PageProps>, 'entry' | 'entryMeta' | 'id' | 'locale' | 'slug'>> &
-		// Add back the mandatory slug property.
-		Pick<PageProps, 'slug'> &
 		// Add the sidebar definitions for a Starlight page.
 		Partial<Pick<StarlightRouteData, 'hasSidebar' | 'sidebar'>> & {
 			// And finally add the Starlight page frontmatter properties in a `frontmatter` property.
@@ -91,7 +89,8 @@ export async function generateStarlightPageRouteData({
 	props: StarlightPageProps;
 	url: URL;
 }): Promise<StarlightRouteData> {
-	const { isFallback, frontmatter, slug, ...routeProps } = props;
+	const { isFallback, frontmatter, ...routeProps } = props;
+	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const localeData = slugToLocaleData(slug);

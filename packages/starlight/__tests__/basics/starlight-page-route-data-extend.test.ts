@@ -17,7 +17,6 @@ vi.mock('virtual:starlight/collection-config', async () => {
 });
 
 const starlightPageProps: StarlightPageProps = {
-	slug: 'test-slug',
 	frontmatter: { title: 'This is a test title' },
 };
 
@@ -27,7 +26,7 @@ test('throws a validation error if a built-in field required by the user schema 
 	try {
 		await generateStarlightPageRouteData({
 			props: starlightPageProps,
-			url: new URL('https://example.com'),
+			url: new URL('https://example.com/test-slug'),
 		});
 	} catch (error) {
 		assert(error instanceof Error);
@@ -55,7 +54,7 @@ test('returns new field defined in the user schema', async () => {
 				category,
 			},
 		},
-		url: new URL('https://example.com'),
+		url: new URL('https://example.com/test-slug'),
 	});
 	// @ts-expect-error - Custom field defined in the user schema.
 	expect(data.entry.data.category).toBe(category);
