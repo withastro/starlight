@@ -159,6 +159,9 @@ importers:
       mdast-util-directive:
         specifier: ^3.0.0
         version: 3.0.0
+      mdast-util-to-markdown:
+        specifier: ^2.1.0
+        version: 2.1.0
       pagefind:
         specifier: ^1.0.3
         version: 1.0.3

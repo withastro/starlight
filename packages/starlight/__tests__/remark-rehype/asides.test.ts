@@ -143,3 +143,22 @@ test('runs without locales config', async () => {
 	const res = await processor.render(':::note\nTest\n::');
 	expect(res.code.includes('aria-label=Note"'));
 });
+
+test('tranforms back unhandled text directives', async () => {
+	const res = await processor.render(
+		`This is a:test of a sentence with a text:name[content]{key=val} directive.`
+	);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>This is a:test
+		 of a sentence with a text:name[content]{key="val"}
+		 directive.</p>"
+	`);
+});
+
+test('tranforms back unhandled leaf directives', async () => {
+	const res = await processor.render(`::video[Title]{v=xxxxxxxxxxx}`);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>::video[Title]{v="xxxxxxxxxxx"}
+		</p>"
+	`);
+});
