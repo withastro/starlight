@@ -80,12 +80,14 @@ describe('localizedSlug', () => {
 
 describe('urlToSlug', () => {
 	test('returns slugs with `build.output: "directory"`', () => {
+		expect(urlToSlug(new URL('https://example.com'))).toBe('');
 		expect(urlToSlug(new URL('https://example.com/slug'))).toBe('slug');
 		expect(urlToSlug(new URL('https://example.com/dir/page/'))).toBe('dir/page');
 		expect(urlToSlug(new URL('https://example.com/dir/sub-dir/page/'))).toBe('dir/sub-dir/page');
 	});
 
 	test('returns slugs with `build.output: "file"`', () => {
+		expect(urlToSlug(new URL('https://example.com/index.html'))).toBe('');
 		expect(urlToSlug(new URL('https://example.com/slug.html'))).toBe('slug');
 		expect(urlToSlug(new URL('https://example.com/dir/page/index.html'))).toBe('dir/page');
 		expect(urlToSlug(new URL('https://example.com/dir/sub-dir/page.html'))).toBe(
@@ -98,6 +100,7 @@ describe('urlToSlug', () => {
 	// `getViteConfig()` from `astro/config`.
 	test.todo('returns slugs with a custom `base` option', () => {
 		vi.stubEnv('BASE_URL', '/base/');
+		expect(urlToSlug(new URL('https://example.com/base'))).toBe('');
 		expect(urlToSlug(new URL('https://example.com/base/slug'))).toBe('slug');
 		expect(urlToSlug(new URL('https://example.com/base/dir/page/'))).toBe('dir/page');
 		expect(urlToSlug(new URL('https://example.com/base/dir/sub-dir/page/'))).toBe(
