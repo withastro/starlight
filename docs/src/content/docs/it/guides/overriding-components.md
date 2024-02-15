@@ -1,8 +1,6 @@
 ---
 title: Sostituzione dei componenti
 description: Scopri come sovrascrivere i componenti integrati di Starlight per aggiungere elementi personalizzati all'interfaccia utente del tuo sito di documentazione.
-sidebar:
-  badge: Nuovo
 ---
 
 L'interfaccia utente predefinita e le opzioni di configurazione di Starlight sono progettate per essere flessibili e funzionare con una vasta gamma di contenuti. Gran parte dell'aspetto predefinito di Starlight può essere personalizzato con [CSS](/it/guides/css-and-tailwind/) e [opzioni di configurazione](/it/guides/customization/).
@@ -46,7 +44,7 @@ Sostituire i componenti predefiniti di Starlight può essere utile quando:
    export default defineConfig({
      integrations: [
        starlight({
-         title: 'La Mia Documentazione con Sostituzioni',
+         title: 'La Mia Documentazione con le sostituzioni',
          components: {
            // Sostituisce il componente `SocialIcons` predefinito.
            SocialIcons: './src/components/EmailLink.astro',

@@ -5,3 +5,4 @@ export { default as Tabs } from './user-components/Tabs.astro';
 export { default as TabItem } from './user-components/TabItem.astro';
 export { default as LinkCard } from './user-components/LinkCard.astro';
 export { default as FileTree } from './user-components/FileTree.astro';
+export { Code } from 'astro-expressive-code/components';

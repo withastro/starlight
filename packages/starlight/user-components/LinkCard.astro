@@ -10,7 +10,7 @@ interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 const { title, description, ...attributes } = Astro.props;
 ---
 
-<div>
+<div class="sl-link-card">
 	<span class="sl-flex stack">
 		<a {...attributes}>
 			<span class="title" set:html={title} />
@@ -21,7 +21,7 @@ const { title, description, ...attributes } = Astro.props;
 </div>
 
 <style>
-	div {
+	.sl-link-card {
 		display: grid;
 		grid-template-columns: 1fr auto;
 		gap: 0.5rem;
@@ -34,6 +34,7 @@ const { title, description, ...attributes } = Astro.props;
 
 	a {
 		text-decoration: none;
+		line-height: var(--sl-line-height-headings);
 	}
 
 	/* a11y fix for https://github.com/withastro/starlight/issues/487 */
@@ -52,7 +53,6 @@ const { title, description, ...attributes } = Astro.props;
 		color: var(--sl-color-white);
 		font-weight: 600;
 		font-size: var(--sl-text-lg);
-		line-height: var(--sl-line-height-headings);
 	}
 
 	.description {
@@ -65,12 +65,12 @@ const { title, description, ...attributes } = Astro.props;
 	}
 
 	/* Hover state */
-	div:hover {
+	.sl-link-card:hover {
 		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
 		border-color: var(--sl-color-gray-2);
 	}
 
-	div:hover .icon {
+	.sl-link-card:hover .icon {
 		color: var(--sl-color-white);
 	}
 </style>

@@ -199,3 +199,49 @@ El código anterior genera lo siguiente en la página:
 A continuación se muestra una lista de todos los iconos disponibles con sus nombres asociados. Haz clic en un ícono para copiar el código del componente correspondiente.
 
 <IconsList />
+
+### Código
+
+Usa el componente `<Code>` para renderizar código con resaltado de sintaxis cuando no sea posible usar un [bloque de código Markdown](/es/guides/authoring-content/#bloques-de-código), por ejemplo, para renderizar datos provenientes de fuentes externas como archivos, bases de datos o APIs.
+
+Consulta el [componente de código de Expressive Code](https://expressive-code.com/key-features/code-component/) para obtener detalles completos de las props que admite `<Code>`.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('¡Esto podría venir de un archivo o CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+El código anterior genera lo siguiente en la página:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('¡Esto podría venir de un archivo o CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### Código importado
+
+Usa [el sufijo de importación `?raw` de Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) para importar cualquier archivo de código como un string.
+Puedes pasar luego este string importado al componente `<Code>` para incluirlo en tu página.
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+El código anterior genera lo siguiente en la página:
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />

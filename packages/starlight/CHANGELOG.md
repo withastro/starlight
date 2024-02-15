@@ -1,5 +1,148 @@
 # @astrojs/starlight
 
+## 0.18.1
+
+### Patch Changes
+
+- [#1487](https://github.com/withastro/starlight/pull/1487) [`6a72bda`](https://github.com/withastro/starlight/commit/6a72bda8c5569e2eda68fdf258ae9b1dc8b320d6) Thanks [@NavyStack](https://github.com/NavyStack)! - Improves Korean UI translations
+
+- [#1489](https://github.com/withastro/starlight/pull/1489) [`b0d36de`](https://github.com/withastro/starlight/commit/b0d36de3398d4895603a787b612b1f0747defbdc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential text rendering issue with text containing colons.
+
+## 0.18.0
+
+### Minor Changes
+
+- [#1454](https://github.com/withastro/starlight/pull/1454) [`1d9ef56`](https://github.com/withastro/starlight/commit/1d9ef567907bed7210e75ab3460f536c0768a87f) Thanks [@Fryuni](https://github.com/Fryuni)! - Makes Starlight compatible with [on-demand server rendering](https://docs.astro.build/en/guides/server-side-rendering/) (sometimes referred to as server-side rendering or SSR).
+
+  Starlight pages are always prerendered, even when using `output: 'server'`.
+
+- [#1454](https://github.com/withastro/starlight/pull/1454) [`1d9ef56`](https://github.com/withastro/starlight/commit/1d9ef567907bed7210e75ab3460f536c0768a87f) Thanks [@Fryuni](https://github.com/Fryuni)! - Enables Astro’s [`experimental.globalRoutePriority`](https://docs.astro.build/en/reference/configuration-reference/#experimentalglobalroutepriority) option and bumps the minimum required Astro version.
+
+  ⚠️ **BREAKING CHANGE** The minimum supported Astro version is now 4.2.7. Upgrade Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.17.4
+
+### Patch Changes
+
+- [#1473](https://github.com/withastro/starlight/pull/1473) [`29da505`](https://github.com/withastro/starlight/commit/29da505474174fefaec4e27a2c2c3e90e3f68a31) Thanks [@delucis](https://github.com/delucis)! - Fixes a CSS bug for users with JavaScript disabled
+
+- [#1465](https://github.com/withastro/starlight/pull/1465) [`ce3108c`](https://github.com/withastro/starlight/commit/ce3108cf6ecb77d12db973485d21e0fc7fd63ca6) Thanks [@delucis](https://github.com/delucis)! - Updates internal MDX, sitemap, and Expressive Code dependencies to the latest versions
+
+## 0.17.3
+
+### Patch Changes
+
+- [#1461](https://github.com/withastro/starlight/pull/1461) [`2e17880`](https://github.com/withastro/starlight/commit/2e17880957d1aae2a84c77500afa9b66e5292a6a) Thanks [@liruifengv](https://github.com/liruifengv)! - Improves the table of contents title translation in Simplified Chinese
+
+- [#1462](https://github.com/withastro/starlight/pull/1462) [`4741ccc`](https://github.com/withastro/starlight/commit/4741cccc8adbef500bcaf95416a1c61a90761c06) Thanks [@delucis](https://github.com/delucis)! - Fixes overflow of very long site titles on narrow viewports
+
+- [#1459](https://github.com/withastro/starlight/pull/1459) [`9a8e0ec`](https://github.com/withastro/starlight/commit/9a8e0ec59cba0e088512ea9b6d17224085f3a178) Thanks [@delucis](https://github.com/delucis)! - Fixes a bug where table of contents highlighting could break given very specific combinations of content and viewport size
+
+- [#1458](https://github.com/withastro/starlight/pull/1458) [`8c88642`](https://github.com/withastro/starlight/commit/8c88642875e8344396074a780e28fb0860b249f8) Thanks [@delucis](https://github.com/delucis)! - Silences i18n content collection warnings for projects without custom translations.
+
+## 0.17.2
+
+### Patch Changes
+
+- [#1442](https://github.com/withastro/starlight/pull/1442) [`1a642e4`](https://github.com/withastro/starlight/commit/1a642e4d74ee4c30e85bce37b41888b1eae0544a) Thanks [@delucis](https://github.com/delucis)! - Fixes URLs in language picker for sites with `build.format: 'file'`
+
+- [#1440](https://github.com/withastro/starlight/pull/1440) [`2ea1e88`](https://github.com/withastro/starlight/commit/2ea1e883186660b48f0ea8c4da7fead5fb74e313) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds JS support to the `@astrojs/starlight/expressive-code` export to allow importing from non-TS environments.
+
+## 0.17.1
+
+### Patch Changes
+
+- [#1437](https://github.com/withastro/starlight/pull/1437) [`655aed4`](https://github.com/withastro/starlight/commit/655aed4840cae59e9abd64b4b585e60f1cfab209) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds Starlight-specific types to `defineEcConfig` function and exports `StarlightExpressiveCodeOptions`.
+
+  This provides Starlight types and IntelliSense support for your Expressive Code configuration options inside an `ec.config.mjs` file. See the [Expressive Code documentation](https://expressive-code.com/key-features/code-component/#using-an-ecconfigmjs-file) for more information.
+
+- [#1420](https://github.com/withastro/starlight/pull/1420) [`275f87f`](https://github.com/withastro/starlight/commit/275f87fd7fc676b9ab323354078c06894e0832c7) Thanks [@abdelhalimjean](https://github.com/abdelhalimjean)! - Fix rare `font-family` issue if users have a font installed with a name of `""`
+
+- [#1365](https://github.com/withastro/starlight/pull/1365) [`a0af7cc`](https://github.com/withastro/starlight/commit/a0af7cc696da987a76edab96cdd2329779e87724) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Correctly format Pagefind search result links when `trailingSlash: 'never'` is used
+
+## 0.17.0
+
+### Minor Changes
+
+- [#1389](https://github.com/withastro/starlight/pull/1389) [`21b3620`](https://github.com/withastro/starlight/commit/21b36201aa1e01c8395d0f24b2fa4e32b90550bb) Thanks [@connor-baer](https://github.com/connor-baer)! - Adds new `disable404Route` config option to disable injection of Astro’s default 404 route
+
+- [#1395](https://github.com/withastro/starlight/pull/1395) [`ce05dfb`](https://github.com/withastro/starlight/commit/ce05dfb4b1e9b90fad057d5d4328e4445f986b3b) Thanks [@hippotastic](https://github.com/hippotastic)! - Adds a new [`<Code>` component](https://starlight.astro.build/guides/components/#code) to render dynamic code strings with Expressive Code
+
+## 0.16.0
+
+### Minor Changes
+
+- [#1383](https://github.com/withastro/starlight/pull/1383) [`490c6ef`](https://github.com/withastro/starlight/commit/490c6eff34ab408c4f55777b7b0caa16787dd3d4) Thanks [@delucis](https://github.com/delucis)! - Refactors Starlight’s internal virtual module system for components to avoid circular references
+
+  This is a change to an internal API.
+  If you were importing the internal `virtual:starlight/components` module, this no longer exists.
+  Update your imports to use the individual virtual modules now available for each component, for example `virtual:starlight/components/EditLink`.
+
+- [#1151](https://github.com/withastro/starlight/pull/1151) [`134292d`](https://github.com/withastro/starlight/commit/134292ddd89683007d7de25545d39738a82c626c) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fixes sidebar auto-generation issue when a file and a directory, located at the same level, have identical names.
+
+  For example, `src/content/docs/guides.md` and `src/content/docs/guides/example.md` will now both be included and `src/content/docs/guides.md` is treated in the same way a `src/content/docs/guides/index.md` file would be.
+
+- [#1386](https://github.com/withastro/starlight/pull/1386) [`0163634`](https://github.com/withastro/starlight/commit/0163634abb8578ce7a3d7ceea36432e98ea70e78) Thanks [@delucis](https://github.com/delucis)! - Tightens `line-height` on `<LinkCard>` titles to fix regression from original design
+
+  If you want to preserve the previous `line-height`, you can add the following custom CSS to your site:
+
+  ```css
+  .sl-link-card a {
+    line-height: 1.6;
+  }
+  ```
+
+- [#1376](https://github.com/withastro/starlight/pull/1376) [`8398432`](https://github.com/withastro/starlight/commit/8398432aa4a0f38e2dd4452dfcdf7033c5713334) Thanks [@delucis](https://github.com/delucis)! - Tweaks vertical spacing in Markdown content styles.
+
+  This is a subtle change to Starlight’s default content styling that should improve most sites:
+
+  - Default vertical spacing between content items is reduced from `1.5rem` to `1rem`.
+  - Spacing before headings is now relative to font size, meaning higher-level headings have slightly more spacing and lower-level headings slightly less.
+
+  The overall impact is to tighten up content that belongs together and improve the visual hierarchy of headings to break up sections.
+
+  Although this is a subtle change, we recommend visually inspecting your site in case this impacts layout of any custom CSS or components.
+
+  If you want to preserve the previous spacing, you can add the following custom CSS to your site:
+
+  ```css
+  /* Restore vertical spacing to match Starlight v0.15 and below. */
+  .sl-markdown-content
+    :not(a, strong, em, del, span, input, code)
+    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+    margin-top: 1.5rem;
+  }
+  .sl-markdown-content
+    :not(h1, h2, h3, h4, h5, h6)
+    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+    margin-top: 2.5rem;
+  }
+  ```
+
+- [#1372](https://github.com/withastro/starlight/pull/1372) [`773880d`](https://github.com/withastro/starlight/commit/773880de87b79bf3107dbc32df29a86dd11e4e6f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the table of contents highlighting styles to prevent UI shifts when scrolling through a page.
+
+  If you want to preserve the previous, buggy styling, you can add the following custom CSS to your site:
+
+  ```css
+  starlight-toc a[aria-current='true'],
+  starlight-toc a[aria-current='true']:hover,
+  starlight-toc a[aria-current='true']:focus {
+    font-weight: 600;
+    color: var(--sl-color-text-invert);
+    background-color: var(--sl-color-text-accent);
+  }
+  ```
+
+## 0.15.4
+
+### Patch Changes
+
+- [#1378](https://github.com/withastro/starlight/pull/1378) [`0f4a31d`](https://github.com/withastro/starlight/commit/0f4a31da4b6d384c569e8556dcc559dc8bfbfebd) Thanks [@delucis](https://github.com/delucis)! - Updates dependencies: `@astrojs/mdx`, `@astrojs/sitemap`, and `astro-expressive-code`
+
 ## 0.15.3
 
 ### Patch Changes

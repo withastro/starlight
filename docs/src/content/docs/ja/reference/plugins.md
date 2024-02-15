@@ -7,7 +7,7 @@ tableOfContents:
 
 Starlightのプラグインにより、Starlightの設定、UI、および動作をカスタマイズできます。このリファレンスページでは、プラグインがアクセス可能なAPIについて説明します。
 
-Starlightのプラグインを使用する方法について、詳しくは[設定方法のリファレンス](/ja/reference/configuration/#plugins)を参照してください。また、利用可能なプラグインの一覧については、[プラグインショーケース](/ja/showcase/#プラグイン)を確認してください。
+Starlightのプラグインを使用する方法について、詳しくは[設定方法のリファレンス](/ja/reference/configuration/#plugins)を参照してください。また、利用可能なプラグインの一覧については、[プラグインショーケース](/ja/resources/plugins/)を確認してください。
 
 ## API早見表
 
