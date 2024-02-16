@@ -10,7 +10,7 @@ import type { Route } from './routing';
 import { localizedId } from './slugs';
 import { useTranslations } from './translations';
 
-interface PageProps extends Route {
+export interface PageProps extends Route {
 	headings: MarkdownHeading[];
 }
 
@@ -54,7 +54,7 @@ export function generateRouteData({
 	};
 }
 
-function getToC({ entry, locale, headings }: PageProps) {
+export function getToC({ entry, locale, headings }: PageProps) {
 	const tocConfig =
 		entry.data.template === 'splash'
 			? false

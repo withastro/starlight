@@ -18,8 +18,8 @@ importers:
         specifier: ^8.2.4
         version: 8.2.4(size-limit@8.2.4)
       astro:
-        specifier: ^4.3.4
-        version: 4.3.4(@types/node@18.16.19)
+        specifier: ^4.3.5
+        version: 4.3.5(@types/node@18.16.19)
       prettier:
         specifier: ^3.0.0
         version: 3.0.0
@@ -34,7 +34,7 @@ importers:
     dependencies:
       '@astro-community/astro-embed-youtube':
         specifier: ^0.4.4
-        version: 0.4.4(astro@4.3.4)
+        version: 0.4.4(astro@4.3.5)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       astro:
-        specifier: ^4.3.4
-        version: 4.3.4(@types/node@18.16.19)
+        specifier: ^4.3.5
+        version: 4.3.5(@types/node@18.16.19)
       culori:
         specifier: ^3.2.0
         version: 3.2.0
@@ -74,7 +74,7 @@ importers:
         version: 13.0.1
       starlight-links-validator:
         specifier: ^0.5.3
-        version: 0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.4)
+        version: 0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.5)
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
@@ -88,8 +88,8 @@ importers:
         specifier: ^0.18.1
         version: link:../../packages/starlight
       astro:
-        specifier: ^4.3.4
-        version: 4.3.4(@types/node@18.16.19)
+        specifier: ^4.3.5
+        version: 4.3.5(@types/node@18.16.19)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -104,10 +104,10 @@ importers:
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
         specifier: ^5.1.0
-        version: 5.1.0(astro@4.3.4)(tailwindcss@3.4.1)
+        version: 5.1.0(astro@4.3.5)(tailwindcss@3.4.1)
       astro:
-        specifier: ^4.3.4
-        version: 4.3.4(@types/node@18.16.19)
+        specifier: ^4.3.5
+        version: 4.3.5(@types/node@18.16.19)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -131,7 +131,7 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^2.1.1
-        version: 2.1.1(astro@4.3.4)
+        version: 2.1.1(astro@4.3.5)
       '@astrojs/sitemap':
         specifier: ^3.0.5
         version: 3.0.5
@@ -146,7 +146,7 @@ importers:
         version: 4.0.3
       astro-expressive-code:
         specifier: ^0.32.4
-        version: 0.32.4(astro@4.3.4)
+        version: 0.32.4(astro@4.3.5)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -194,8 +194,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2(vitest@1.2.2)
       astro:
-        specifier: ^4.3.4
-        version: 4.3.4(@types/node@18.16.19)
+        specifier: ^4.3.5
+        version: 4.3.5(@types/node@18.16.19)
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@18.16.19)
@@ -207,7 +207,7 @@ importers:
         version: link:../starlight
       '@astrojs/tailwind':
         specifier: ^5.0.0
-        version: 5.1.0(astro@4.3.4)(tailwindcss@3.4.1)
+        version: 5.1.0(astro@4.3.5)(tailwindcss@3.4.1)
       tailwindcss:
         specifier: ^3.3.3
         version: 3.4.1
@@ -370,12 +370,12 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
 
-  /@astro-community/astro-embed-youtube@0.4.4(astro@4.3.4):
+  /@astro-community/astro-embed-youtube@0.4.4(astro@4.3.5):
     resolution: {integrity: sha512-fYlycLrJFNnibZ9VHPSJO766kO2IgqYQU4mBd4iaDMaicL0gGX9cVZ80QdnpzGrI6w0XOJOY7prx86eWEVBy8w==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta
     dependencies:
-      astro: 4.3.4(@types/node@18.16.19)
+      astro: 4.3.5(@types/node@18.16.19)
       lite-youtube-embed: 0.2.0
     dev: false
 
@@ -409,7 +409,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@2.1.1(astro@4.3.4):
+  /@astrojs/mdx@2.1.1(astro@4.3.5):
     resolution: {integrity: sha512-AgGFdE7HOGmoFooGvMSatkA9FiSKwyVW7ImHot/bXJ6uAbFfu6iG2ht18Cf1pT22Hda/6iSCGWusFvBv0/EnKQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -418,7 +418,7 @@ packages:
       '@astrojs/markdown-remark': 4.2.1
       '@mdx-js/mdx': 3.0.0
       acorn: 8.11.3
-      astro: 4.3.4(@types/node@18.16.19)
+      astro: 4.3.5(@types/node@18.16.19)
       es-module-lexer: 1.4.1
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
@@ -448,13 +448,13 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@astrojs/tailwind@5.1.0(astro@4.3.4)(tailwindcss@3.4.1):
+  /@astrojs/tailwind@5.1.0(astro@4.3.5)(tailwindcss@3.4.1):
     resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.3.4(@types/node@18.16.19)
+      astro: 4.3.5(@types/node@18.16.19)
       autoprefixer: 10.4.15(postcss@8.4.33)
       postcss: 8.4.33
       postcss-load-config: 4.0.2(postcss@8.4.33)
@@ -1873,18 +1873,18 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-expressive-code@0.32.4(astro@4.3.4):
+  /astro-expressive-code@0.32.4(astro@4.3.5):
     resolution: {integrity: sha512-/Kq8wLMz0X2gbLWGmPryqEdFV/om/GROsoLtPFqLrLCRD5CpwxXAW185BIGZKf4iYsyJim1vvcpQm5Y9hV5B1g==}
     peerDependencies:
       astro: ^3.3.0 || ^4.0.0-beta
     dependencies:
-      astro: 4.3.4(@types/node@18.16.19)
+      astro: 4.3.5(@types/node@18.16.19)
       hast-util-to-html: 8.0.4
       remark-expressive-code: 0.32.4
     dev: false
 
-  /astro@4.3.4(@types/node@18.16.19):
-    resolution: {integrity: sha512-BWzGGn/PuwmT0DWX+yXa/jUq99e85AGh9/C5IFAKIfp22Nk88dOfX89RoqKBWPPp2BrK2vsdCFd0WUv8XJh80w==}
+  /astro@4.3.5(@types/node@18.16.19):
+    resolution: {integrity: sha512-7jPffNlcmDO94NlkWe/hUWta/pIjlx1LVD/DZb/fyjT1Jv+7mGhKZBIjkDfeVpequW70mep8cAS5RM7Pxa0Gdg==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -6125,7 +6125,7 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.4):
+  /starlight-links-validator@0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.5):
     resolution: {integrity: sha512-v79rwmzjQlEMVL8sZ4dalD/jhFOUvGZ2/f4CvxCySZ9KbEN9nDmgV8zJgfpmTzhbcYQ35wzyUinF4QNxgKVA4g==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -6133,7 +6133,7 @@ packages:
       astro: '>=4.0.0'
     dependencies:
       '@astrojs/starlight': link:packages/starlight
-      astro: 4.3.4(@types/node@18.16.19)
+      astro: 4.3.5(@types/node@18.16.19)
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.1
       hast-util-has-property: 3.0.0
