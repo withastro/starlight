@@ -221,7 +221,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
 - Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
 - Create the first translated page for your language.
-   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
+  This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
 - Open a pull request on GitHub to add your changes to Starlight!
 
 ## Understanding Starlight
