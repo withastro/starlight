@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.19.0
+
+### Minor Changes
+
+- [#1485](https://github.com/withastro/starlight/pull/1485) [`2cb3578`](https://github.com/withastro/starlight/commit/2cb35782dace67c7c418a31005419fa95493b3d3) Thanks [@timokoessler](https://github.com/timokoessler)! - Add support for setting html attributes of hero action links
+
+- [#1175](https://github.com/withastro/starlight/pull/1175) [`dd11b95`](https://github.com/withastro/starlight/commit/dd11b9538abdf4b5ba2ef70e07c0edda03e95add) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `<StarlightPage>` component to use the Starlight layout in custom pages.
+
+  To learn more about this new feature, check out the new [“Using Starlight’s design in custom pages” guide](https://starlight.astro.build/guides/pages/#using-starlights-design-in-custom-pages).
+
+- [#1499](https://github.com/withastro/starlight/pull/1499) [`97bf523`](https://github.com/withastro/starlight/commit/97bf523923fb9678c12f58fcdbe36757f0e56ceb) Thanks [@delucis](https://github.com/delucis)! - Adds a new `<Aside>` component
+
+  The new component is in addition to the existing custom Markdown syntax.
+
 ## 0.18.1
 
 ### Patch Changes
@@ -92,7 +106,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -112,14 +126,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -131,9 +145,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -206,14 +220,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -270,12 +284,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -623,16 +637,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1011,8 +1025,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
