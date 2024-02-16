@@ -1,0 +1,62 @@
+<div
+	class="sl-steps"
+	set:html={(await Astro.slots.render('default')).replace(/^\s*<ol /, '<ol role="list" ')}
+/>
+
+<style>
+	.sl-steps {
+		--bullet-size: calc(var(--sl-line-height) * 1rem);
+	}
+	.sl-steps > :global(ol) {
+		list-style: none;
+		padding-inline-start: calc(var(--bullet-size) / 2);
+	}
+	.sl-steps > :global(ol > li) {
+		position: relative;
+		/* border-inline-start: 1px solid var(--sl-color-hairline); */
+		box-shadow: inset 1px 0 var(--sl-color-hairline);
+		/* -0.5px 0 var(--sl-color-hairline); */
+		padding-inline-start: calc(1rem + var(--bullet-size) / 2);
+		padding-bottom: 1px;
+	}
+	.sl-steps > :global(ol > li:last-of-type) {
+		/* border-color: transparent; */
+		box-shadow: none;
+	}
+	.sl-steps > :global(ol > li + li) {
+		margin-top: 0;
+	}
+
+	.sl-steps > :global(ol > li::before) {
+		content: counter(list-item) '.';
+
+		position: absolute;
+		inset-inline-start: calc(-1 * var(--bullet-size) / 2);
+		top: 0;
+
+		width: var(--bullet-size);
+		height: var(--bullet-size);
+		line-height: var(--bullet-size);
+
+		font-size: var(--sl-text-sm);
+		font-weight: 600;
+		text-align: center;
+		color: var(--sl-color-white);
+		background-color: var(--sl-color-black);
+		border-radius: 99rem;
+	}
+
+	.sl-steps > :global(ol > li:has(p, h1, h2, h3, h4, h5, h6, ul, ol)::before) {
+		content: counter(list-item);
+		background: var(--sl-color-gray-6);
+		box-shadow:
+			/* inset 0 -1px var(--sl-color-text-accent), */ inset 0 0 0 1px
+			var(--sl-color-gray-5);
+		font-size: var(--sl-text-xs);
+	}
+
+	/* .sl-steps > :global(ol > li > p:first-child) {
+		color: var(--sl-color-white);
+		font-weight: 600;
+	} */
+</style>
