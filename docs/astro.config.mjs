@@ -12,6 +12,7 @@ export const locales = {
 	id: { label: 'Bahasa Indonesia', lang: 'id' },
 	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
+	pt: { label: 'Português', lang: 'pt-PT' },
 	ko: { label: '한국어', lang: 'ko' },
 	tr: { label: 'Türkçe', lang: 'tr' },
 	ru: { label: 'Русский', lang: 'ru' },
@@ -196,11 +197,11 @@ export default defineConfig({
 			],
 			plugins: process.env.CHECK_LINKS
 				? [
-						starlightLinksValidator({
-							errorOnFallbackPages: false,
-							errorOnInconsistentLocale: true,
-						}),
-				  ]
+					starlightLinksValidator({
+						errorOnFallbackPages: false,
+						errorOnInconsistentLocale: true,
+					}),
+				]
 				: [],
 		}),
 	],
