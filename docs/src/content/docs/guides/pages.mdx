@@ -51,9 +51,23 @@ If you forget anything important, Starlight will let you know.
 
 ## Custom pages
 
-For advanced use cases, you can create custom pages in Astro’s `src/pages/` directory.
+For advanced use cases, you can add custom pages by creating a `src/pages/` directory.
+The `src/pages/` directory uses [Astro's file-based routing](https://docs.astro.build/en/basics/astro-pages/#file-based-routing) and includes support for `.astro` files amongst other page formats.
 This is helpful if you need to build pages with a completely custom layout or generate a page from an alternative data source.
-The `src/pages/` directory uses [Astro's file-based routing](https://docs.astro.build/en/basics/astro-pages/#file-based-routing) and includes support for `.astro` files.
+
+For example, this project mixes Markdown content in `src/content/docs/` with Astro and HTML routes in `src/pages/`:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - hello-world.md
+  - pages/
+    - custom.astro
+    - archived.html
+
+</FileTree>
 
 Read more in the [“Pages” guide in the Astro docs](https://docs.astro.build/en/basics/astro-pages/).
 

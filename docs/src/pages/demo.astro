@@ -1,0 +1,26 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage
+	frontmatter={{ title: 'Demo Page' }}
+	sidebar={[
+		{ type: 'link', href: '/', label: 'Home', isCurrent: false, badge: undefined, attrs: {} },
+		{
+			type: 'group',
+			label: 'Pages',
+			entries: [
+				{
+					type: 'link',
+					href: '/demo/',
+					label: 'Demo',
+					isCurrent: true,
+					badge: undefined,
+					attrs: {},
+				},
+			],
+			badge: undefined,
+			collapsed: false,
+		},
+	]}
+/>
