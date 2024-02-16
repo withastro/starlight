@@ -169,6 +169,59 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Components" href="/guides/components/" />
 </CardGrid>
 
+### Asides
+
+Asides (also known as “admonitions” or “callouts”) are useful for displaying secondary information alongside a page’s main content.
+
+An `<Aside>` can have an optional `type` of `note` (the default), `tip`, `caution` or `danger`. Setting a `title` attribute overrides the default aside title.
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>A default aside without a custom title.</Aside>
+
+<Aside type="caution" title="Watch out!">
+	A warning aside *with* a custom title.
+</Aside>
+
+<Aside type="tip">
+    Other content is also supported in asides.
+
+    ```js
+    // A code snippet, for example.
+    ```
+
+</Aside>
+
+<Aside type="danger">Do not give your password to anyone.</Aside>
+````
+
+The above code generates the following on the page:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>A default aside without a custom title.</Aside>
+
+<Aside type="caution" title="Watch out!">
+	A warning aside *with* a custom title.
+</Aside>
+
+<Aside type="tip">
+    Other content is also supported in asides.
+
+    ```js
+    // A code snippet, for example.
+    ```
+
+</Aside>
+
+<Aside type="danger">Do not give your password to anyone.</Aside>
+
+Starlight also provides a custom syntax for rendering asides in Markdown and MDX as an alternative to the `<Aside>` component.
+See the [“Authoring Content in Markdown”](/guides/authoring-content/#asides) guide for details of the custom syntax.
+
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
