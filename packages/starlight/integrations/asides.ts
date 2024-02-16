@@ -2,7 +2,14 @@
 
 import type { AstroConfig, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
-import type { Paragraph as P, Root } from 'mdast';
+import type { Node, Paragraph as P, Parent, Root } from 'mdast';
+import {
+	type Directives,
+	directiveToMarkdown,
+	type TextDirective,
+	type LeafDirective,
+} from 'mdast-util-directive';
+import { toMarkdown } from 'mdast-util-to-markdown';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { remove } from 'unist-util-remove';
@@ -35,6 +42,40 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
 		data: { hName: tagName, hProperties: properties },
 		children,
 	};
+}
+
+/** Checks if a node is a directive. */
+function isNodeDirective(node: Node): node is Directives {
+	return (
+		node.type === 'textDirective' ||
+		node.type === 'leafDirective' ||
+		node.type === 'containerDirective'
+	);
+}
+
+/**
+ * Transforms back directives not handled by Starlight to avoid breaking user content.
+ * For example, a user might write `x:y` in the middle of a sentence, where `:y` would be
+ * identified as a text directive, which are not used by Starlight, and we definitely want that
+ * text to be rendered verbatim in the output.
+ */
+function transformUnhandledDirective(
+	node: TextDirective | LeafDirective,
+	index: number,
+	parent: Parent
+) {
+	const textNode = {
+		type: 'text',
+		value: toMarkdown(node, { extensions: [directiveToMarkdown()] }),
+	} as const;
+	if (node.type === 'textDirective') {
+		parent.children[index] = textNode;
+	} else {
+		parent.children[index] = {
+			type: 'paragraph',
+			children: [textNode],
+		};
+	}
 }
 
 /**
@@ -102,7 +143,11 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 		const locale = pathToLocale(file.history[0], options);
 		const t = options.useTranslations(locale);
 		visit(tree, (node, index, parent) => {
-			if (!parent || index === undefined || node.type !== 'containerDirective') {
+			if (!parent || index === undefined || !isNodeDirective(node)) {
+				return;
+			}
+			if (node.type === 'textDirective' || node.type === 'leafDirective') {
+				transformUnhandledDirective(node, index, parent);
 				return;
 			}
 			const variant = node.name;

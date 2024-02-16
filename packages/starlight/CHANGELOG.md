@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.18.1
+
+### Patch Changes
+
+- [#1487](https://github.com/withastro/starlight/pull/1487) [`6a72bda`](https://github.com/withastro/starlight/commit/6a72bda8c5569e2eda68fdf258ae9b1dc8b320d6) Thanks [@NavyStack](https://github.com/NavyStack)! - Improves Korean UI translations
+
+- [#1489](https://github.com/withastro/starlight/pull/1489) [`b0d36de`](https://github.com/withastro/starlight/commit/b0d36de3398d4895603a787b612b1f0747defbdc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential text rendering issue with text containing colons.
+
 ## 0.18.0
 
 ### Minor Changes
