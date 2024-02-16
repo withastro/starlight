@@ -6,7 +6,7 @@
 
 - [#1485](https://github.com/withastro/starlight/pull/1485) [`2cb3578`](https://github.com/withastro/starlight/commit/2cb35782dace67c7c418a31005419fa95493b3d3) Thanks [@timokoessler](https://github.com/timokoessler)! - Add support for setting html attributes of hero action links
 
-- [#1502](https://github.com/withastro/starlight/pull/1502) [`887d6a0`](https://github.com/withastro/starlight/commit/887d6a0c13c78d74c019785610d0c6113cba9f33) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `<StarlightPage>` component to use the Starlight layout in custom pages.
+- [#1175](https://github.com/withastro/starlight/pull/1175) [`dd11b95`](https://github.com/withastro/starlight/commit/dd11b9538abdf4b5ba2ef70e07c0edda03e95add) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `<StarlightPage>` component to use the Starlight layout in custom pages.
 
   To learn more about this new feature, check out the new [“Using Starlight’s design in custom pages” guide](https://starlight.astro.build/guides/pages/#using-starlights-design-in-custom-pages).
 
