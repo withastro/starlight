@@ -166,6 +166,60 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="コンポーネント" href="/ja/guides/components/" />
 </CardGrid>
 
+### 補足情報
+
+「警告」や「吹き出し」とも呼ばれる補足情報（Asides）は、ページのメインコンテンツと並べて補助的な情報を表示するのに便利です。
+
+`<Aside>`には、`note`（デフォルト）、`tip`、`caution`、`danger`のいずれかの`type`を任意で指定できます。`title`属性を設定すると、補足情報のデフォルトのタイトルが上書きされます。
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>カスタムタイトルなしのデフォルトの補足情報。</Aside>
+
+<Aside type="caution" title="気を付けて！">
+	カスタムタイトルを指定した警告用の補足情報。
+</Aside>
+
+<Aside type="tip">
+
+その他のコンテンツも補足情報に含められます。
+
+```js
+// たとえばコードスニペット。
+```
+
+</Aside>
+
+<Aside type="danger">パスワードは誰にも教えないでください。</Aside>
+````
+
+上のコードにより、ページに以下が生成されます。
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>カスタムタイトルなしのデフォルトの補足情報。</Aside>
+
+<Aside type="caution" title="気を付けて！">
+	カスタムタイトルを指定した警告用の補足情報。
+</Aside>
+
+<Aside type="tip">
+
+その他のコンテンツも補足情報に含められます。
+
+```js
+// たとえばコードスニペット。
+```
+
+</Aside>
+
+<Aside type="danger">パスワードは誰にも教えないでください。</Aside>
+
+Starlightは、`<Aside>`コンポーネントの代わりとして、MarkdownやMDXで補足情報をレンダリングするためのカスタム構文も提供しています。カスタム構文の詳細については、「[Markdownでのコンテンツ作成](/ja/guides/authoring-content/#補足情報)」ガイドを参照してください。
+
 ### アイコン
 
 import { Icon } from '@astrojs/starlight/components';
