@@ -192,3 +192,48 @@ import { Icon } from '@astrojs/starlight/components';
 以下に、利用可能なすべてのアイコンとその名前を示します。アイコンをクリックすると、対応するコンポーネントのコードをコピーできます。
 
 <IconsList />
+
+### コード
+
+ファイルやデータベース、APIなど、外部ソースからのデータをレンダリングするため[Markdownのコードブロック](/ja/guides/authoring-content/#コード)を使用できない場合に、`<Code>`コンポーネントを使用してシンタックスハイライトされたコードをレンダリングできます。
+
+`<Code>`がサポートするプロパティの詳細については、[Expressive Codeの「Code Component」ドキュメント](https://expressive-code.com/key-features/code-component/)を参照してください。
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('これはファイルやCMSから来た文字列!');`;
+export const fileName = 'example.js';
+export const highlights = ['ファイル', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('これはファイルやCMSから来た文字列!');`;
+export const fileName = 'example.js';
+export const highlights = ['ファイル', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### インポートされたコード
+
+[Viteの`?raw`インポートサフィックス](https://ja.vitejs.dev/guide/assets.html#importing-asset-as-string)を使用して、任意のコードファイルを文字列としてインポートできます。
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
