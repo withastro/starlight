@@ -1,17 +1,16 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
-import { rm } from 'node:fs/promises';
-import { join as pathJoin } from 'node:path';
+import { spawn } from 'node:child_process';
+import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
-import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import type { StarlightConfig } from './types';
-import { generatePagefindIndex } from './utils/pagefind.ts';
-import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
+import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration({
 	plugins,
@@ -36,49 +35,24 @@ export default function StarlightIntegration({
 					isRestart,
 					logger,
 				});
+				userConfig = starlightConfig;
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
-				const astroOutput = config.output ?? 'static';
-				// Always prerender on static mode
-				// Defaults to prerender on hybrid mode
-				// Defaults to not prerender on server mode
-				const prerender =
-					astroOutput === 'static' || (starlightConfig.prerender ?? astroOutput === 'hybrid');
-
-				userConfig = {
-					...starlightConfig,
-					prerender: prerender,
-				};
-
 				injectRoute({
 					pattern: '[...slug]',
-					entrypoint: prerender
+					entrypoint: starlightConfig.prerender
 						? '@astrojs/starlight/index.astro'
 						: '@astrojs/starlight/indexSSR.astro',
-					prerender: prerender,
+					prerender: starlightConfig.prerender,
 				});
 
-				// Always pre-render for pagefind
-				if (!prerender && starlightConfig.pagefind) {
-					logger.warn(
-						'Pagefind can only index statically generated pages but it is enabled with prerendering disabled on Starlight.\n' +
-						'Starlight content will be prerenderd for indexing but not included in the output.\n' +
-						'If your Starlight pages will not produce the right content to index when prerendering, you should disable Pagefind.'
-					);
-
-					injectRoute({
-						pattern: '/pagefind/source/[...slug]',
-						entrypoint: '@astrojs/starlight/index.astro',
-						prerender: true,
-					});
-				}
 
 				if (!userConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
 						entrypoint: '@astrojs/starlight/404.astro',
-						prerender: prerender,
+						prerender: starlightConfig.prerender,
 					});
 				}
 				// Add built-in integrations only if they are not already added by the user through the
@@ -116,28 +90,18 @@ export default function StarlightIntegration({
 				});
 			},
 
-			'astro:build:done': async ({ dir, logger }) => {
+			'astro:build:done': ({ dir }) => {
 				if (!userConfig.pagefind) return;
-
-				const buildFilesDir = fileURLToPath(dir);
-				const pagefindLogger = logger.fork('pagefind');
-
-				if (userConfig.prerender) {
-					await generatePagefindIndex({
-						inputDir: buildFilesDir,
-						outputDir: pathJoin(buildFilesDir, 'pagefind'),
-						logger: pagefindLogger,
-					});
-				} else {
-					await generatePagefindIndex({
-						inputDir: pathJoin(buildFilesDir, 'pagefind', 'source'),
-						outputDir: pathJoin(buildFilesDir, 'pagefind'),
-						logger: pagefindLogger,
-					});
-
-					// Remove the pre-rendered files
-					await rm(pathJoin(buildFilesDir, 'pagefind', 'source'), { recursive: true });
-				}
+				const targetDir = fileURLToPath(dir);
+				const cwd = dirname(fileURLToPath(import.meta.url));
+				const relativeDir = relative(cwd, targetDir);
+				return new Promise<void>((resolve) => {
+					spawn('npx', ['-y', 'pagefind', '--site', relativeDir], {
+						stdio: 'inherit',
+						shell: true,
+						cwd,
+					}).on('close', () => resolve());
+				});
 			},
 		},
 	};

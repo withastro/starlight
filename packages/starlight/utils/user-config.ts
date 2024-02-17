@@ -195,7 +195,7 @@ const UserConfigSchema = z.object({
 	 * Set to `false` to disable indexing your site with Pagefind.
 	 * This will also hide the default search UI if in use.
 	 */
-	pagefind: z.boolean().default(true),
+	pagefind: z.boolean().optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
@@ -215,7 +215,7 @@ const UserConfigSchema = z.object({
 	 * not prerendering when "server".
 	 * Does nothing when Astro's output mode is undefined or set to "static".
 	 */
-	prerender: z.boolean().optional(),
+	prerender: z.boolean().default(true),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(
@@ -242,6 +242,8 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 
 			return {
 				...config,
+				// Pagefind only defaults to true if prerender is also true.
+				pagefind: config.pagefind ?? config.prerender,
 				/** Flag indicating if this site has multiple locales set up. */
 				isMultilingual: true,
 				/** Full locale object for this site’s default language. */
