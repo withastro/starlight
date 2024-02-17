@@ -12,6 +12,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'My Docs',
+			prerender: true,
 			social: {
 				github: 'https://github.com/withastro/starlight',
 			},

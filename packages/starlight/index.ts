@@ -47,11 +47,12 @@ export default function StarlightIntegration({
 					prerender: starlightConfig.prerender,
 				});
 
-
 				if (!userConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
-						entrypoint: '@astrojs/starlight/404.astro',
+						entrypoint: starlightConfig.prerender
+							? '@astrojs/starlight/404.astro'
+							: '@astrojs/starlight/404SSR.astro',
 						prerender: starlightConfig.prerender,
 					});
 				}

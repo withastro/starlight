@@ -169,6 +169,7 @@
     "./index.astro": "./index.astro",
     "./indexSSR.astro": "./indexSSR.astro",
     "./404.astro": "./404.astro",
+    "./404SSR.astro": "./404SSR.astro",
     "./pagefind.ts": "./pagefind.ts",
     "./style/markdown.css": "./style/markdown.css"
   },
