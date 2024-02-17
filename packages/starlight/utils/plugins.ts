@@ -1,7 +1,7 @@
 import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
-import { errorMap } from '../utils/error-map';
+import { errorMap, throwValidationError } from '../utils/error-map';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -80,10 +80,6 @@ export async function runPlugins(
 	}
 
 	return { integrations, starlightConfig: starlightConfig.data };
-}
-
-function throwValidationError(error: z.ZodError, message: string): never {
-	throw new Error(`${message}\n${error.issues.map((i) => i.message).join('\n')}`);
 }
 
 // https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113

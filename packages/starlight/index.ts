@@ -111,12 +111,8 @@ export default function StarlightIntegration({
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
 					experimental: {
-						// Using Starlight in non-static mode requires global routing priority.
-						// Without this new feature Starlight will override all other routes in project.
-						...(astroOutput !== 'static' && {
-							globalRoutePriority: true,
-						})
-					}
+						globalRoutePriority: true,
+					},
 				});
 			},
 

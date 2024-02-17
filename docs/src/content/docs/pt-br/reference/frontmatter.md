@@ -119,6 +119,8 @@ hero:
     - text: Veja no GitHub
       link: https://github.com/astronaut/meu-projeto
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -166,6 +168,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```
