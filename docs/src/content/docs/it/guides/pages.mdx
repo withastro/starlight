@@ -98,13 +98,13 @@ Il componente `<StarlightPage />` accetta le seguenti props.
 **tipo:** `StarlightPageFrontmatter`
 
 Imposta le [proprietà del frontmatter](/it/reference/frontmatter/) per questa pagina, simili al frontmatter nelle pagine Markdown.
-La proprietà [`title`](/it/reference/frontmatter/#title-required) è obbligatoria e tutte le altre proprietà sono opzionali.
+La proprietà [`title`](/it/reference/frontmatter/#title-obbligatorio) è obbligatoria e tutte le altre proprietà sono opzionali.
 
 Le seguenti proprietà differiscono dal frontmatter di Markdown:
 
-- La proprietà [`slug`](it/reference/frontmatter/#slug) non è supportata e viene impostata automaticamente in base all'URL della pagina personalizzata.
-- L'opzione [`editUrl`](it/reference/frontmatter/#editurl) richiede un URL per visualizzare un link di modifica.
-- La proprietà [`sidebar`](it/reference/frontmatter/#sidebar) non è supportata. Nel frontmatter di Markdown, questa opzione consente la personalizzazione dei [gruppi di link generati automaticamente](it/reference/configuration/#sidebar), che non è applicabile alle pagine che utilizzano il componente `<StarlightPage />`.
+- La proprietà [`slug`](/it/reference/frontmatter/#slug) non è supportata e viene impostata automaticamente in base all'URL della pagina personalizzata.
+- L'opzione [`editUrl`](/it/reference/frontmatter/#editurl) richiede un URL per visualizzare un link di modifica.
+- La proprietà [`sidebar`](/it/reference/frontmatter/#sidebar) non è supportata. Nel frontmatter di Markdown, questa opzione consente la personalizzazione dei [gruppi di link generati automaticamente](/it/reference/configuration/#sidebar), che non è applicabile alle pagine che utilizzano il componente `<StarlightPage />`.
 
 {/* ##### `sidebar` */}
 
@@ -117,7 +117,7 @@ Le seguenti proprietà differiscono dal frontmatter di Markdown:
 ##### `hasSidebar`
 
 **tipo:** `boolean`  
-**predefinito:** `false` se [`frontmatter.template`](it/reference/frontmatter/#template) è `'splash'`, altrimenti `true`
+**predefinito:** `false` se [`frontmatter.template`](/it/reference/frontmatter/#template) è `'splash'`, altrimenti `true`
 
 Controlla se la barra laterale viene essere visualizzata su questa pagina.
 
@@ -148,6 +148,6 @@ Imposta il tag di lingua BCP-47 per il contenuto di questa pagina, ad es. `en`, 
 **tipo:** `boolean`  
 **predefinito:** `false`
 
-Indica se questa pagina sta utilizzando [contenuti di riserva](it/guides/i18n/#contenuti-di-riserva) perché non c'è una traduzione per la lingua corrente.
+Indica se questa pagina sta utilizzando [contenuti di riserva](/it/guides/i18n/#contenuti-di-riserva) perché non c'è una traduzione per la lingua corrente.
 
 
