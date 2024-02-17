@@ -14,7 +14,7 @@ Ce guide montre comment fonctionne la génération de pages dans Starlight.
 ### Formats de fichiers
 
 Starlight prend en charge la création de contenu en Markdown et MDX sans aucune configuration requise.
-Vous pouvez ajouter la prise en charge de Markdoc en installant l'intégration expérimentale [Astro Markdoc integration](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).
+Vous pouvez ajouter la prise en charge de Markdoc en installant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).
 
 ### Ajouter des pages
 
@@ -98,7 +98,7 @@ Le composant `<StarlightPage />` accepte les éléments suivants.
 **type :** `StarlightPageFrontmatter`
 
 Définit les [propriétés de la page d'accueil](/fr/reference/frontmatter/) pour cette page, similaire à la page d'accueil dans les pages Markdown.
-La propriété [`title`](/fr/reference/frontmatter/#title-required) est obligatoire et toutes les autres propriétés sont optionnelles.
+La propriété [`title`](/fr/reference/frontmatter/#title-obligatoire) est obligatoire et toutes les autres propriétés sont optionnelles.
 
 Les propriétés suivantes diffèrent du frontmatter en Markdown :
 
@@ -148,4 +148,4 @@ Définir la balise de langue BCP-47 pour le contenu de cette page, par exemple `
 **Type :** `boolean`
 **Par défaut :** `false`
 
-Indiquer si cette page utilise [contenu en fallback](/fr/guides/i18n/#fallback-content) parce qu'il n'y a pas de traduction pour la langue actuelle.
+Indiquer si cette page utilise [contenu en fallback](/fr/guides/i18n/#contenu-de-repli) parce qu'il n'y a pas de traduction pour la langue actuelle.
