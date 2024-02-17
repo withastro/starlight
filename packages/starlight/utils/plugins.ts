@@ -25,7 +25,7 @@ export async function runPlugins(
 	if (!starlightConfig.data.prerender && context.config.output === 'static') {
 		throw new AstroError(
 			'Disabling prerendering is not supported when using the `static` output mode.',
-			'Set `prerender: true` in your Astro config to enable prerendering or use the `dynamic` output mode\n' +
+			'Set `prerender: true` in your Astro config to enable prerendering\n' +
 				'or add an SSR adapter and set your `output` to either "hybrid" or "server".'
 		);
 	}
