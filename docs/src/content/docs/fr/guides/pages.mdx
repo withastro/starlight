@@ -91,13 +91,13 @@ import CustomComponent from './CustomComponent.astro';
 
 #### Props
 
-Le composant `<StarlightPage />` accepte les éléments suivants.
+Le composant `<StarlightPage />` accepte les props suivantes.
 
-##### `frontmatter` (required)
+##### `frontmatter` (obligatoire)
 
-**type :** `StarlightPageFrontmatter`
+**Type :** `StarlightPageFrontmatter`  
 
-Définit les [propriétés de la page d'accueil](/fr/reference/frontmatter/) pour cette page, similaire à la page d'accueil dans les pages Markdown.
+Définit les [propriétés du frontmatter](/fr/reference/frontmatter/) pour cette page, similaire au frontmatter dans les pages Markdown.
 La propriété [`title`](/fr/reference/frontmatter/#title-obligatoire) est obligatoire et toutes les autres propriétés sont optionnelles.
 
 Les propriétés suivantes diffèrent du frontmatter en Markdown :
@@ -116,22 +116,22 @@ Les propriétés suivantes diffèrent du frontmatter en Markdown :
 
 ##### `hasSidebar`
 
-**Type :** `boolean`
+**Type :** `boolean`  
 **Par défaut :** `false` si [`frontmatter.template`](/fr/reference/frontmatter/#template) est `'splash'`, autrement `true`
 
 Contrôle l'affichage ou non de la barre latérale sur cette page.
 
 ##### `headings`
 
-**Type :** `{ depth: number; slug: string; text: string }[]`
+**Type :** `{ depth: number; slug: string; text: string }[]`  
 **Par défaut :** `[]`
 
-Fournir un tableau de tous les titres de cette page.
+Fournit un tableau de tous les titres de cette page.
 Starlight générera la table des matières de la page à partir de ces titres s'ils sont fournis.
 
 ##### `dir`
 
-**Type :** `'ltr' | 'rtl'`
+**Type :** `'ltr' | 'rtl'`  
 **Par défaut :** le sens d'écriture pour la locale actuelle
 
 Définit le sens d’écriture pour le contenu de la page.
