@@ -115,7 +115,7 @@ Starlight fournit une syntaxe Markdown personnalisée pour le rendu des encarts.
 
 Vous pouvez imbriquer n'importe quel autre type de contenu Markdown à l'intérieur d'un aparté, mais les aparté sont mieux adaptés à des morceaux de contenu courts et concis.
 
-### Note d'encart
+### Encart de type note
 
 :::note
 Starlight est une boîte à outils pour sites web de documentation construite avec [Astro](https://astro.build/). Vous pouvez démarrer avec cette commande :
