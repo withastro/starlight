@@ -83,50 +83,16 @@ Ouvrez cette URL pour commencer à naviguer sur votre site.
 
 Starlight est prêt pour que vous puissiez ajouter du nouveau contenu, ou apporter vos fichiers existants !
 
-#### Formats de fichiers
+Ajoutez de nouvelles pages à votre site en créant des fichiers Markdown dans le répertoire `src/content/docs/`.
 
-Starlight prend en charge la création de contenu en Markdown et MDX sans aucune configuration requise.
-Vous pouvez ajouter la prise en charge de Markdoc en installant [l'intégration Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) expérimentale.
-
-#### Ajouter des pages
-
-Ajoutez de nouvelles pages à votre site en créant des fichiers `.md` ou `.mdx` dans `src/content/docs/`.
-Utilisez des sous-dossiers pour organiser vos fichiers et créer plusieurs segments de chemin.
-
-Par exemple, la structure de fichiers suivante génére des pages à `example.com/hello-world` et `example.com/guides/faq` :
-
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - hello-world.md
-
-</FileTree>
-
-#### Frontmatter avec sûreté du typage
-
-Toutes les pages Starlight partagent un [ensemble commun de propriétés du frontmatter](/fr/reference/frontmatter/) personnalisable pour contrôler l'apparence de la page :
-
-```md
----
-title: Bonjour, le monde !
-description: Ceci est une page de mon site web propulsé par Starlight.
----
-```
-
-Si vous oubliez quelque chose d'important, Starlight vous le fera savoir.
+Pour en savoir plus sur le routage par fichier et la prise en charge des fichiers MDX et Markdoc, consultez le guide [« Pages »](/fr/guides/pages/).
 
 ### Prochaines étapes
 
-- **Configurer:** Découvrez les options courantes dans [« Personnaliser Starlight »](/fr/guides/customization/).
-- **Naviguer:** Configurez votre barre latérale avec le guide [« Barre latérale de navigation »](/fr/guides/sidebar/).
-- **Composants:** Découvrez les cartes, les onglets et d'autres composants intégrés dans le guide [« Composants »](/fr/guides/components/).
-- **Déployer:** Publiez votre travail avec le guide [« Déployer votre site »](https://docs.astro.build/fr/guides/deploy/) dans la documentation d'Astro.
+- **Configurer :** Découvrez les options courantes dans [« Personnaliser Starlight »](/fr/guides/customization/).
+- **Naviguer :** Configurez votre barre latérale avec le guide [« Barre latérale de navigation »](/fr/guides/sidebar/).
+- **Composants :** Découvrez les cartes, les onglets et d'autres composants intégrés dans le guide [« Composants »](/fr/guides/components/).
+- **Déployer :** Publiez votre travail avec le guide [« Déployer votre site »](https://docs.astro.build/fr/guides/deploy/) dans la documentation d'Astro.
 
 ## Mettre à jour Starlight
 
@@ -135,8 +101,7 @@ Comme Starlight est un logiciel en version bêta, il y aura des mises à jour et
 Assurez-vous de mettre à jour Starlight régulièrement !
 :::
 
-Starlight est une intégration Astro.
-Vous pouvez la mettre à jour ainsi que tous autres packages Astro en exécutant la commande suivante dans votre terminal :
+Starlight est une intégration Astro. Vous pouvez la mettre à jour ainsi que tous autres packages Astro en exécutant la commande suivante dans votre terminal :
 
 <Tabs>
 <TabItem label="npm">
