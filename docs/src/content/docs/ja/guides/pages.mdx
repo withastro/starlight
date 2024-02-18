@@ -5,31 +5,19 @@ sidebar:
   order: 1
 ---
 
-Starlight generates your site’s HTML pages based on your content, with flexible options provided via Markdown frontmatter.
-In addition, Starlight projects have full access to [Astro’s powerful page generation tools](https://docs.astro.build/en/basics/astro-pages/).
-This guide shows how page generation works in Starlight.
-
-Starligtは、Markdownのフロントマターにより柔軟なオプションを提供することで、コンテンツに基づいてサイトのHTMLページを生成します。さらにStarlightプロジェクトは、[Astroの強力なページ生成ツール](https://docs.astro.build/ja/basics/astro-pages/)に完全にアクセスできます。このガイドでは、Starlightでのページ生成の仕組みについて説明します。
+Starlightは、Markdownのフロントマターにより提供される柔軟なオプションを使用して、コンテンツに基づいてサイトのHTMLページを生成します。さらにStarlightプロジェクトは、[Astroの強力なページ生成ツール](https://docs.astro.build/ja/basics/astro-pages/)に完全にアクセスできます。このガイドでは、Starlightのページ生成の仕組みについて説明します。
 
 ## コンテンツページ
 
 ### ファイルフォーマット
 
-Starlight supports authoring content in Markdown and MDX with no configuration required.
-You can add support for Markdoc by installing the experimental [Astro Markdoc integration](https://docs.astro.build/en/guides/integrations-guide/markdoc/).
-
 Starlightは、設定なしでMarkdownとMDXによってコンテンツを作成できます。Markdocのサポートを追加するには、実験的な[AstroのMarkdocインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)をインストールします。
 
 ### ページの追加
 
-Add new pages to your site by creating `.md` or `.mdx` files in `src/content/docs/`.
-Use sub-folders to organize your files and to create multiple path segments.
-
 `.md`または`.mdx`ファイルを`src/content/docs/`に作成することで、サイトに新しいページを追加できます。サブフォルダを使用してファイルを整理し、複数のパスセグメントを作成できます。
 
-For example, the following file structure will generate pages at `example.com/hello-world` and `example.com/reference/faq`:
-
-たとえば、次のファイル構造は、`example.com/hello-world`と`example.com/reference/faq`にページを生成します。
+たとえば次のファイル構造は、`example.com/hello-world`と`example.com/reference/faq`にページを生成します。
 
 import FileTree from '~/components/file-tree.astro';
 
@@ -46,8 +34,6 @@ import FileTree from '~/components/file-tree.astro';
 
 ### 型安全なフロントマター
 
-All Starlight pages share a customizable [common set of frontmatter properties](/reference/frontmatter/) to control how the page appears:
-
 すべてのStarlightページは、ページの表示方法を制御するためのカスタマイズ可能な[共通のフロントマタープロパティ](/ja/reference/frontmatter/)を共有しています。
 
 ```md
@@ -57,19 +43,11 @@ description: これは私のStarlight製サイトのページです
 ---
 ```
 
-If you forget anything important, Starlight will let you know.
-
 何か重要なことを忘れてしまっていても、Starlightがあなたに教えてくれるでしょう。
 
 ## カスタムページ
 
-For advanced use cases, you can add custom pages by creating a `src/pages/` directory.
-The `src/pages/` directory uses [Astro's file-based routing](https://docs.astro.build/en/basics/astro-pages/#file-based-routing) and includes support for `.astro` files amongst other page formats.
-This is helpful if you need to build pages with a completely custom layout or generate a page from an alternative data source.
-
-高度なユースケースとしては、`src/pages/`ディレクトリを作成しておこなうカスタムページの追加があります。`src/pages/`ディレクトリは[Astroのファイルベースルーティング](https://docs.astro.build/ja/basics/astro-pages/#ファイルベースルーティング)を使用しており、他のページフォーマットに加えて`.astro`ファイルをサポートしています。これは、完全にカスタムのレイアウトでページを作成したり、異なるデータソースからページを生成する必要がある場合に役立ちます。
-
-For example, this project mixes Markdown content in `src/content/docs/` with Astro and HTML routes in `src/pages/`:
+発展的なユースケースとしては、`src/pages/`ディレクトリを作成しておこなうカスタムページの追加があります。`src/pages/`ディレクトリは[Astroのファイルベースルーティング](https://docs.astro.build/ja/basics/astro-pages/#ファイルベースルーティング)を使用しており、他のページフォーマットに加えて`.astro`ファイルをサポートしています。これは、完全にカスタムのレイアウトでページを作成したり、異なるデータソースからページを生成する必要がある場合に役立ちます。
 
 たとえば以下のプロジェクトは、`src/content/docs/`のMarkdownコンテンツと、`src/pages/`のAstroとHTMLルートを混在させています。
 
@@ -85,16 +63,11 @@ For example, this project mixes Markdown content in `src/content/docs/` with Ast
 
 </FileTree>
 
-Read more in the [“Pages” guide in the Astro docs](https://docs.astro.build/en/basics/astro-pages/).
-
 詳しくは[Astroドキュメントの「ページ」ガイド](https://docs.astro.build/ja/basics/astro-pages/)を参照してください。
 
 ### カスタムページでStarlightのデザインを使用する
 
-To use the Starlight layout in custom pages, wrap your page content with the `<StarlightPage />` component.
-This can be helpful if you are generating content dynamically but still want to use Starlight’s design.
-
-カスタムページでStarlightのデザインを使用するには、ページコンテンツを`<StarlightPage />`コンポーネントでラップします。これは、コンテンツを動的に生成したいが、Starlightのデザインを使用したい場合に役立ちます。
+カスタムページでStarlightのデザインを使用するには、ページコンテンツを`<StarlightPage />`コンポーネントでラップします。これは、コンテンツを動的に生成したいものの、Starlightのデザインも使用したいような場合に役立ちます。
 
 ```astro
 ---
@@ -111,20 +84,13 @@ import CustomComponent from './CustomComponent.astro';
 
 #### Props
 
-The `<StarlightPage />` component accepts the following props.
-
 `<StarlightPage />`コンポーネントは以下のpropsを受け付けます。
 
 ##### `frontmatter`（必須）
 
 **type:** `StarlightPageFrontmatter`
 
-Set the [frontmatter properties](/reference/frontmatter/) for this page, similar to frontmatter in Markdown pages.
-The [`title`](/reference/frontmatter/#title-required) property is required and all other properties are optional.
-
-このページの[フロントマタープロパティ](/ja/reference/frontmatter/)を設定します。これは、Markdownページのフロントマターと同様です。[`title`](/ja/reference/frontmatter/#title必須)プロパティは必須ですが、その他のプロパティは任意です。
-
-The following properties differ from Markdown frontmatter:
+ページの[フロントマタープロパティ](/ja/reference/frontmatter/)を設定します。これは、Markdownページのフロントマターと同様です。[`title`](/ja/reference/frontmatter/#title必須)プロパティは必須ですが、その他のプロパティは任意です。
 
 以下のプロパティはMarkdownのフロントマターと異なります。
 
@@ -145,43 +111,32 @@ The following properties differ from Markdown frontmatter:
 **type:** `boolean`  
 **default:** [`frontmatter.template`](/ja/reference/frontmatter/#template)が`'splash'`の場合は`false`、それ以外の場合は`true`
 
-Control whether or not the sidebar should be displayed on this page.
-
-このページでサイドバーを表示するかどうかを制御します。
+ページにサイドバーを表示するかどうかを制御します。
 
 ##### `headings`
 
 **type:** `{ depth: number; slug: string; text: string }[]`  
 **default:** `[]`
 
-Provide an array of all the headings on this page.
-Starlight will generate the page table of contents from these headings if provided.
-
-このページのすべての見出しの配列を指定します。指定された場合、Starlightはこれらの見出しからページの目次を生成します。
+ページのすべての見出しの配列を指定します。指定された場合、Starlightはこれらの見出しからページの目次を生成します。
 
 ##### `dir`
 
 **type:** `'ltr' | 'rtl'`  
 **default:** 現在のロケールの記述方向
 
-Set the writing direction for this page’s content.
-
-このページのコンテンツを記述する方向を設定します。
+ページのコンテンツを記述する方向を設定します。
 
 ##### `lang`
 
 **type:** `string`  
 **default:** 現在のロケールの言語
 
-Set the BCP-47 language tag for this page’s content, e.g. `en`, `zh-CN`, or `pt-BR`.
-
-`en`や`zh-CN`、`pt-BR`など、このページのBCP-47言語タグを設定します。
+`en`や`zh-CN`、`pt-BR`など、ページのBCP-47言語タグを設定します。
 
 ##### `isFallback`
 
 **type:** `boolean`  
 **default:** `false`
 
-Indicate if this page is using [fallback content](/guides/i18n/#fallback-content) because there is no translation for the current language.
-
-現在の言語に対する翻訳がないため、このページが[フォールバックコンテンツ](/ja/guides/i18n/#フォールバックコンテンツ)を使用しているかどうかを示します。
+現在の言語に対する翻訳がない結果、ページが[フォールバックコンテンツ](/ja/guides/i18n/#フォールバックコンテンツ)を使用しているかどうかを示します。
