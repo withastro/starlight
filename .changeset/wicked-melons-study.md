@@ -3,4 +3,4 @@
 ---
 
 Adds the `<Badge>` component
-```
+
