@@ -14,6 +14,10 @@ declare module 'virtual:starlight/project-context' {
 	export default ProjectContext;
 }
 
+declare module 'virtual:starlight/git-info' {
+	export function getNewestCommitDate(file: string): Date;
+}
+
 declare module 'virtual:starlight/user-css' {}
 
 declare module 'virtual:starlight/user-images' {

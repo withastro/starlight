@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
-import { getNewestCommitDate } from './git';
+import { getNewestCommitDate } from 'virtual:starlight/git-info';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';

@@ -13,6 +13,7 @@ export default defineConfig({
 		starlight({
 			title: 'My Docs',
 			prerender: false,
+			lastUpdated: true,
 			social: {
 				github: 'https://github.com/withastro/starlight',
 			},
