@@ -109,7 +109,7 @@ Pour en apprendre davantage sur la façon dont Astro traite les attributs `id` d
 
 ## Encarts
 
-Les encarts (également connus sous le nom de "asides") sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
+Les encarts (également connus sous le nom de « admonitions » ou « asides » en anglais) sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
 
 Starlight fournit une syntaxe Markdown personnalisée pour le rendu des encarts. Les blocs d'encarts sont indiqués en utilisant une paire de triples points `:::` pour envelopper votre contenu, et peuvent être de type `note`, `tip`, `caution` ou `danger`.
 
