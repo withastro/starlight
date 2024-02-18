@@ -151,7 +151,7 @@ Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Arc
 :::
 ```
 
-### Plus de types pour l'encart
+### Plus de types d'encarts
 
 Les encarts de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
 
