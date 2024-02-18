@@ -1,11 +1,20 @@
 ---
-import type { Badge } from '../schemas/badge';
+import { AstroError } from 'astro/errors';
+import { type Badge, badgeVariants } from '../schemas/badge';
 
 interface Props {
-	variant?: Badge['variant'] | 'outline';
+	variant?: Badge['variant']
 	text?: string;
 }
+
 const { variant = 'default', text } = Astro.props;
+
+if (!badgeVariants.includes(variant)) {
+	throw new AstroError('Invalid `variant` prop passed to the `<Badge>` component.\n',
+		`Received: ${JSON.stringify(variant)}\n` +
+		`Expected: ${badgeVariants.slice(0,-1).map((i) => JSON.stringify(i)).join(', ')} or "${badgeVariants.at(-1)}".`
+	);
+}
 ---
 
 <span class:list={['sl-badge', variant]} set:html={text} />
@@ -16,21 +25,19 @@ const { variant = 'default', text } = Astro.props;
 		border: 1px solid var(--sl-color-border-badge);
 		border-radius: 0.25rem;
 		font-family: var(--sl-font-system-mono);
-		font-size: var(--sl-text-xs);
-		font-weight: 400;
 		padding: 0.125rem 0.375rem;
-		line-height: 1;
+		line-height: normal;
 		color: #fff;
 		background-color: var(--sl-color-bg-badge);
 		overflow-wrap: anywhere;
 	}
 
-	.outline {
-		--sl-color-bg-badge: transparent;
-		--sl-color-border-badge: currentColor;
-		color: inherit;
+	:global(#starlight__sidebar) .sl-badge {
+		line-height: 1;
+		font-size: var(--sl-text-xs);
 	}
 
+	/* Color variants */
 	.default {
 		--sl-color-bg-badge: var(--sl-color-accent-low);
 		--sl-color-border-badge: var(--sl-color-accent);
@@ -83,5 +90,11 @@ const { variant = 'default', text } = Astro.props;
 
 	:global([data-theme='light']) .tip {
 		--sl-color-bg-badge: var(--sl-color-purple-high);
+	}
+
+	:global(a[aria-current="page"]) > .sl-badge {
+		--sl-color-bg-badge: transparent;
+		--sl-color-border-badge: currentColor;
+		color: inherit;
 	}
 </style>

@@ -1,4 +1,5 @@
 export { default as Aside } from './user-components/Aside.astro';
+export { default as Badge } from './user-components/Badge.astro';
 export { default as Card } from './user-components/Card.astro';
 export { default as CardGrid } from './user-components/CardGrid.astro';
 export { default as Icon } from './user-components/Icon.astro';
