@@ -1,0 +1,69 @@
+---
+title: Testing badges
+description: Learn how to start building your next documentation site with Starlight by Astro.
+sidebar:
+  badge: Test
+---
+
+import { Tabs, TabItem, Badge } from '@astrojs/starlight/components';
+
+## APIs
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+### <Badge text="POST" variant="success" /> `/api/users`
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+#### <Badge text="PUT" variant="tip" /> `/api/users`
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+##### <Badge text="DELETE" variant="danger" /> `/api/users`
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+### Lists
+
+- *Italic <Badge text="caution" variant="caution" />* lorem ipsum
+- **Bold <Badge text="tip" variant="tip" />** lorem ipsum
+- ***Bold Italic <Badge text="note" variant="note" />*** lorem ipsum
+
+### Asides
+
+:::danger
+Using this is <Badge text="deprecated" variant="caution" /> and should be avoided.
+:::
+
+:::note
+This is a <Badge text="danger" variant="danger" /> message.
+:::
+
+### Tabs
+
+<Tabs>
+  <TabItem label="Tab 1">
+    This API is <Badge text="deprecated" variant="caution" /> and should be avoided.
+
+    ```js
+    const foo = 'bar';
+    ```
+
+  </TabItem>
+  <TabItem label="Tab 2">
+    This API is <Badge text="deprecated" variant="danger" /> and should be avoided.
+
+    ```js
+    const foo = 'bar';
+    ```
+  </TabItem>
+</Tabs>
+
+### Tables
+
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| <Badge text="GET" variant="success" /> | `/api/users` | Get all users |
+| <Badge text="POST" variant="tip" /> | `/api/users` | Create a new user |
+| <Badge text="PUT" variant="note" /> | `/api/users` | Update a user |
+| <Badge text="DELETE" variant="danger" /> | `/api/users` | Delete a user |
