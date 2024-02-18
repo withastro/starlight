@@ -83,43 +83,9 @@ yarn dev
 
 Starlight 已经准备好让你添加新内容或导入你现有的文件！
 
-#### 文件格式
+通过在 `src/content/docs/` 目录中创建 Markdown 文件来为你的网站添加新页面。
 
-Starlight 支持使用 Markdown 和 MDX 编写内容，无需进行任何配置。
-你可以通过安装实验性的 [Astro Markdoc 集成](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/)来添加对 Markdoc 的支持。
-
-#### 添加页面
-
-通过在 `src/content/docs/` 中创建 `.md` 或 `.mdx` 文件来为你的站点添加新页面。
-使用子文件夹来组织你的文件并创建多个路径段。
-
-例如，以下文件结构将在 `example.com/hello-world` 和 `example.com/guides/faq` 生成页面：
-
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - hello-world.md
-
-</FileTree>
-
-#### 类型安全的 frontmatter
-
-所有 Starlight 页面都共享一个可自定义的 [frontmatter 属性集](/zh-cn/reference/frontmatter/)，用于控制页面的外观：
-
-```md
----
-title: Hello, World!
-description: This is a page in my Starlight-powered site
----
-```
-
-如果你忘记了任何重要的东西，Starlight 会提醒你。
+在 [“页面”](/zh-cn/guides/pages/) 指南中了解有关基于文件的路由和对 MDX 和 Markdoc 文件的支持的更多信息。
 
 ### 下一步
 
