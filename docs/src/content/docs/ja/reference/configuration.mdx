@@ -500,6 +500,13 @@ starlight({
 
 デフォルトでは、すべてのページの`<title>`は`ページタイトル | サイトタイトル`となります。たとえば、このページのタイトルは「設定方法」であり、このサイトのタイトルは「Starlight」なので、このページの`<title>`は「設定方法 | Starlight」となります。
 
+### `disable404Route`
+
+**type:** `boolean`  
+**default:** `false`
+
+Starlightのデフォルトの[404ページ](https://docs.astro.build/ja/core-concepts/astro-pages/#カスタム404エラーページ)を無効にします。プロジェクトでカスタムの`src/pages/404.astro`ルートを使用するには、このオプションを`true`に設定します。
+
 ### `components`
 
 **type:** `Record<string, string>`
