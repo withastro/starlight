@@ -79,41 +79,9 @@ yarn dev
 
 Starlightに新しいコンテンツを追加したり、既存のファイルを追加したりする準備ができました！
 
-#### ファイルフォーマット
+`src/content/docs/`ディレクトリにMarkdownファイルを作成することで、サイトに新しいページを追加できます。
 
-Starlightでは、設定なしでMarkdownとMDXを用いてコンテンツを作成できます。Markdocをサポートするには、実験的な[Astro Markdocインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)をインストールします。
-
-#### ページの追加
-
-`src/content/docs/`に`.md`または`.mdx`ファイルを作成して、サイトに新しいページを追加できます。サブフォルダを追加してファイルを整理したり、複数のパスセグメントを作成することもできます。
-
-たとえば、以下のファイル構造は、`example.com/hello-world`と`example.com/guides/faq`にページを生成します。
-
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - hello-world.md
-
-</FileTree>
-
-#### 型安全なフロントマター
-
-Starlightのページは、ページの表示方法を制御するための、カスタマイズ可能な[共通のフロントマタープロパティ](/ja/reference/frontmatter/)を認識します。
-
-```md
----
-title: こんにちは、世界！
-description: これはStarlightで作成されたサイトのページです
----
-```
-
-何か重要なことを忘れてしまっていても、Starlightが教えてくれるはずです。
+ファイルベースのルーティングや、MDXとMarkdocファイルのサポートについて、詳しくは[「ページ」](/ja/guides/pages/)ガイドを参照してください。
 
 ### 次のステップ
 
