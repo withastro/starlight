@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.17.3",
+  "version": "0.19.0",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -102,6 +102,10 @@
       "types": "./components/Page.astro.tsx",
       "import": "./components/Page.astro"
     },
+    "./components/StarlightPage.astro": {
+      "types": "./components/StarlightPage.astro.tsx",
+      "import": "./components/StarlightPage.astro"
+    },
     "./components/Footer.astro": {
       "types": "./components/Footer.astro.tsx",
       "import": "./components/Footer.astro"
@@ -167,26 +171,27 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^4.0.0"
+    "astro": "^4.2.7"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^4.0.1",
+    "@astrojs/markdown-remark": "^4.2.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.2.2",
-    "astro": "^4.2.1",
+    "astro": "^4.3.5",
     "vitest": "^1.2.2"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.4",
-    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/sitemap": "^3.0.5",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.3",
     "@types/mdast": "^4.0.3",
-    "astro-expressive-code": "^0.32.2",
+    "astro-expressive-code": "^0.32.4",
     "bcp-47": "^2.1.0",
     "hast-util-select": "^6.0.2",
     "hastscript": "^8.0.0",
     "mdast-util-directive": "^3.0.0",
+    "mdast-util-to-markdown": "^2.1.0",
     "pagefind": "^1.0.3",
     "rehype": "^13.0.1",
     "remark-directive": "^3.0.0",

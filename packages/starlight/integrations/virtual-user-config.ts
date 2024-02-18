@@ -48,6 +48,11 @@ export function vitePluginStarlightUserConfig(
 						opts.logo.light
 				  )}; export const logos = { dark, light };`
 			: 'export const logos = {};',
+		'virtual:starlight/collection-config': `let userCollections;
+			try {
+				userCollections = (await import('/src/content/config.ts')).collections;
+			} catch {}
+			export const collections = userCollections;`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 

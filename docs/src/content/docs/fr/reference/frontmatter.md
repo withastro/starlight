@@ -119,6 +119,8 @@ hero:
     - text: Voir sur GitHub
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -166,6 +168,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```
@@ -286,7 +289,7 @@ interface SidebarConfig {
 #### `label`
 
 **Type :** `string`  
-**Par défaut :** the page [`title`](#title-obligatoire)
+**Par défaut :** [`title`](#title-obligatoire) de la page
 
 Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 
