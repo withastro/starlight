@@ -124,4 +124,6 @@ import FileTree from '~/components/file-tree.astro';
 
 ### 结合 SSR 使用 Starlight
 
-目前，Starlight 不支持使用 Astro 的服务器适配器进行 [SSR 部署](https://docs.astro.build/zh-cn/guides/server-side-rendering/) 。我们希望能够尽快支持这一点。
+你可以通过按照 Astro 文档中的 [“按需渲染适配器”](https://docs.astro.build/zh-cn/guides/server-side-rendering/) 指南，在你的项目中使用 Starlight 与自定义的按需渲染页面一起工作。
+
+目前，Starlight 生成的文档页面始终是预渲染的，无论你的项目的输出模式如何。我们希望能够尽快支持 Starlight 页面的按需渲染。
