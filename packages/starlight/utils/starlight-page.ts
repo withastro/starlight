@@ -114,7 +114,7 @@ type LinkGroupSchemaType = z.ZodType<ManualLinkGroupOutput, z.ZodTypeDef, Manual
  * Link group configuration schema for `<StarlightPage>`.
  * Sets default values where possible to be more user friendly than raw `SidebarEntry` type.
  */
-const linkGroupSchema: LinkGroupSchemaType = z.preprocess(
+const LinkGroupSchema: LinkGroupSchemaType = z.preprocess(
 	// Map `items` to `entries` as expected by the `SidebarEntry` type.
 	(arg) => {
 		if (arg && typeof arg === 'object' && 'items' in arg) {
@@ -124,14 +124,14 @@ const linkGroupSchema: LinkGroupSchemaType = z.preprocess(
 		return arg;
 	},
 	LinkGroupBase.extend({
-		entries: z.lazy(() => z.union([LinkSchema, linkGroupSchema]).array()),
+		entries: z.lazy(() => z.union([LinkSchema, LinkGroupSchema]).array()),
 	})
 		// Make sure badge is in the object even if undefined.
 		.transform((item) => ({ badge: undefined, ...item }))
 ) as LinkGroupSchemaType;
 
 /** Sidebar configuration schema for `<StarlightPage>` */
-const StarlightPageSidebarSchema = z.union([LinkSchema, linkGroupSchema]).array();
+const StarlightPageSidebarSchema = z.union([LinkSchema, LinkGroupSchema]).array();
 type StarlightPageSidebarUserConfig = z.input<typeof StarlightPageSidebarSchema>;
 
 /** Parse sidebar prop to ensure all required defaults are in place. */
