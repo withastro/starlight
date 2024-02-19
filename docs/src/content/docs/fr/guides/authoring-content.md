@@ -107,15 +107,15 @@ Les titres de niveau 2 (`<h2>`) et de niveau 3 (`<h3>`) apparaissent automatique
 
 Pour en apprendre davantage sur la façon dont Astro traite les attributs `id` des titres de section, consultez la [documentation d'Astro](https://docs.astro.build/fr/guides/markdown-content/#identifiants-den-t%C3%AAte).
 
-## Asides
+## Encarts
 
-Les Asides (également connus sous le nom de "callouts") sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
+Les encarts (également connus sous le nom de « admonitions » ou « asides » en anglais) sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
 
-Starlight fournit une syntaxe Markdown personnalisée pour le rendu des apartés. Les blocs d'apartés sont indiqués en utilisant une paire de triples points `:::` pour envelopper votre contenu, et peuvent être de type `note`, `tip`, `caution` ou `danger`.
+Starlight fournit une syntaxe Markdown personnalisée pour le rendu des encarts. Les blocs d'encarts sont indiqués en utilisant une paire de triples points `:::` pour envelopper votre contenu, et peuvent être de type `note`, `tip`, `caution` ou `danger`.
 
 Vous pouvez imbriquer n'importe quel autre type de contenu Markdown à l'intérieur d'un aparté, mais les aparté sont mieux adaptés à des morceaux de contenu courts et concis.
 
-### Note aside
+### Encart de type note
 
 :::note
 Starlight est une boîte à outils pour sites web de documentation construite avec [Astro](https://astro.build/). Vous pouvez démarrer avec cette commande :
@@ -137,9 +137,9 @@ npm run create astro@latest --template starlight
 :::
 ````
 
-### Titres personnalisés dans les asides
+### Titres personnalisés dans les encarts
 
-Vous pouvez spécifier un titre personnalisé pour l'aparté entre crochets après le type d'aparté, par exemple `:::tip[Le saviez-vous ?]`.
+Vous pouvez spécifier un titre personnalisé pour l'encart entre crochets après le type d'encarts, par exemple `:::tip[Le saviez-vous ?]`.
 
 :::tip[Le saviez-vous ?]
 Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Architecture"](https://docs.astro.build/fr/concepts/islands/).
@@ -151,9 +151,9 @@ Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Arc
 :::
 ```
 
-### Plus de types pour l'aside
+### Plus de types d'encarts
 
-Les apartés de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
+Les encarts de type Attention et Danger sont utiles pour attirer l'attention de l'utilisateur sur des détails qui pourraient le perturber. Si vous vous retrouvez à utiliser ces derniers fréquemment, cela pourrait aussi être un signe que ce que vous documentez pourrait bénéficier d'une refonte.
 
 :::caution
 Si vous n'êtes pas sûr de vouloir un site de documentation génial, réfléchissez à deux fois avant d'utiliser [Starlight](/fr/).
