@@ -178,9 +178,11 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
+    "@astrojs/node": "^7.0.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.2.2",
     "astro": "^4.3.5",
+    "cheerio": "1.0.0-rc.12",
     "vitest": "^1.2.2"
   },
   "dependencies": {

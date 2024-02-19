@@ -24,7 +24,7 @@ export function vitePluginStarlightUserConfig(
 	const resolveId = (id: string) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
 
-	const srcDirectory = resolve(fileURLToPath(root), './src/content/docs');
+	const srcDirectory = resolve(fileURLToPath(root), 'src/content/docs');
 
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
