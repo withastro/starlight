@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.19.1
+
+### Patch Changes
+
+- [#1527](https://github.com/withastro/starlight/pull/1527) [`163bc84`](https://github.com/withastro/starlight/commit/163bc848e173eecca92d1cb034045fdb42aa4ff1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightPageProps` TypeScript type representing the props expected by the `<StarlightPage />` component.
+
+- [#1504](https://github.com/withastro/starlight/pull/1504) [`fc83a05`](https://github.com/withastro/starlight/commit/fc83a05235b74be2bfe6ba8e7f95a8a5a618ead3) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Adds Traditional Chinese UI translations
+
+- [#1534](https://github.com/withastro/starlight/pull/1534) [`aada680`](https://github.com/withastro/starlight/commit/aada6805abc0068f07393585b86978ef5200439c) Thanks [@delucis](https://github.com/delucis)! - Improves DX of the `sidebar` prop used by the new `<StarlightPage>` component.
+
 ## 0.19.0
 
 ### Minor Changes
@@ -106,7 +116,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -126,14 +136,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -145,9 +155,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -220,14 +230,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -284,12 +294,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -637,16 +647,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1025,8 +1035,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
