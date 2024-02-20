@@ -63,16 +63,12 @@ afterEach(async () => {
 	await Promise.all(currentCleanup.map((cleanup) => cleanup()));
 });
 
-if (process.env.KEEP_TEST_PROJECTS !== 'true') {
-	afterAll(async () => {
-		rmdirSync(join(fileURLToPath(import.meta.url), '..', 'tmp'), { recursive: true });
-	});
-}
-
 export function makeTestProject(options: ProjectOptions) {
 	const prefix = join(fileURLToPath(import.meta.url), '..', 'tmp', 'test-');
 	mkdirSync(prefix, { recursive: true });
 	const projectPath = resolve(mkdtempSync(prefix));
+
+	resourceCleanup.push(() => rmdirSync(projectPath, { recursive: true }));
 
 	function runInRepo(command: string, args: string[], env: NodeJS.ProcessEnv = {}) {
 		const result = spawnSync(command, args, {
