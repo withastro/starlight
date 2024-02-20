@@ -7,7 +7,7 @@ import { version as astroVersion } from 'astro/package.json';
 import { afterEach, afterAll } from 'vitest';
 
 // Receive a file tree instead of a flattened list of files so it better works on Windows.
-type FileTree = { [name in string]: TreeEntry };
+export type FileTree = { [name in string]: TreeEntry };
 type TreeEntry = string | FileTree;
 
 const defaultFileTree: FileTree = {
@@ -63,19 +63,16 @@ afterEach(async () => {
 	await Promise.all(currentCleanup.map((cleanup) => cleanup()));
 });
 
-afterAll(async () => {
-	rmdirSync(join(fileURLToPath(import.meta.url), '..', 'tmp'), { recursive: true });
-});
+if (process.env.KEEP_TEST_PROJECTS !== 'true') {
+	afterAll(async () => {
+		rmdirSync(join(fileURLToPath(import.meta.url), '..', 'tmp'), { recursive: true });
+	});
+}
 
 export function makeTestProject(options: ProjectOptions) {
 	const prefix = join(fileURLToPath(import.meta.url), '..', 'tmp', 'test-');
 	mkdirSync(prefix, { recursive: true });
-	resourceCleanup.push(() => {
-		rmdirSync(prefix, { recursive: true });
-	});
-
-	const tmpPath = mkdtempSync(prefix);
-	const projectPath = resolve(tmpPath);
+	const projectPath = resolve(mkdtempSync(prefix));
 
 	function runInRepo(command: string, args: string[], env: NodeJS.ProcessEnv = {}) {
 		const result = spawnSync(command, args, {
@@ -103,7 +100,6 @@ export function makeTestProject(options: ProjectOptions) {
 	const astroConfig: AstroInlineConfig = {
 		...options.config,
 		root: projectPath,
-		configFile: false,
 	};
 	let serverAddress: string | null = null;
 
