@@ -5,7 +5,7 @@ import { Icons } from '../../components/Icons';
 describe('validation', () => {
 	test('throws an error with no content', () => {
 		expect(() => processTestFileTree('')).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree> component expects its content to be a unique unordered list but found no elements."'
+			`[AstroUserError: The <FileTree> component expects its content to be a unique unordered list but found no elements.]`
 		);
 	});
 
@@ -13,19 +13,19 @@ describe('validation', () => {
 		expect(() =>
 			processTestFileTree('<p>test</p><ul><li>file</li></ul>')
 		).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree> component expects its content to be a unique unordered list but found the following elements: <p> - <ul>."'
+			`[AstroUserError: The <FileTree> component expects its content to be a unique unordered list but found the following elements: <p> - <ul>.]`
 		);
 	});
 
 	test('throws an error with no root ordered list', () => {
 		expect(() => processTestFileTree('<ol><li>file</li></ol>')).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree> component expects its content to be a unordered list but found the following element: <ol>."'
+			`[AstroUserError: The <FileTree> component expects its content to be a unordered list but found the following element: <ol>.]`
 		);
 	});
 
 	test('throws an error with no list item', () => {
 		expect(() => processTestFileTree('<ul></ul>')).toThrowErrorMatchingInlineSnapshot(
-			'"The <FileTree> component expects its content to be a unordered list with at least one list item."'
+			`[AstroUserError: The <FileTree> component expects its content to be a unordered list with at least one list item.]`
 		);
 	});
 });
@@ -107,7 +107,7 @@ describe('icons', () => {
 	test('adds a default file icon to unknown files', () => {
 		const html = processTestFileTree(`<ul><li>test_file</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.file);
+		expectHtmlToIncludeIcon(html, Icons.document);
 	});
 
 	test('adds an icon to known files', () => {
@@ -123,16 +123,16 @@ describe('icons', () => {
 	});
 
 	test('adds an icon to known file partials', () => {
-		const html = processTestFileTree(`<ul><li>TODO.txt</li></ul>`);
+		const html = processTestFileTree(`<ul><li>TODO</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons['approve-check-square']);
+		expectHtmlToIncludeIcon(html, Icons.todo);
 	});
 
 	test('does not add a special icon to file based on the last letter of the file name', () => {
 		// The last letter of the file name is "c" and should not be matched to the icon for C files.
 		const html = processTestFileTree(`<ul><li>testc</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.file);
+		expectHtmlToIncludeIcon(html, Icons.document);
 	});
 });
 
