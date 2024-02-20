@@ -34,27 +34,41 @@ export const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 				}
 			}
 		}
-		let messages: string[] = [
-			prefix(
-				baseErrorPath,
-				typeOrLiteralErrByPath.size ? 'Did not match union:' : 'Did not match union.'
-			),
-		];
+		const messages: string[] = [prefix(baseErrorPath, 'Did not match union.')];
+		const details: string[] = [...typeOrLiteralErrByPath.entries()]
+			// If type or literal error isn't common to ALL union types,
+			// filter it out. Can lead to confusing noise.
+			.filter(([, error]) => error.expected.length === baseError.unionErrors.length)
+			.map(([key, error]) =>
+				key === baseErrorPath
+					? // Avoid printing the key again if it's a base error
+					  `> ${getTypeOrLiteralMsg(error)}`
+					: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
+			);
+
+		if (details.length === 0) {
+			const expectedShapes = baseError.unionErrors.map((unionError) => {
+				const props = unionError.issues
+					.map((issue) => {
+						const relativePath = flattenErrorPath(issue.path)
+							.replace(baseErrorPath, '')
+							.replace(/^\./, '');
+						if ('expected' in issue) {
+							return relativePath ? `${relativePath}: ${issue.expected}` : issue.expected;
+						}
+						return relativePath;
+					})
+					.join('; ');
+				return `{ ${props} }`;
+			});
+			if (expectedShapes.length) {
+				details.push('> Expected type `' + expectedShapes.join(' | ') + '`');
+				details.push('> Received ' + JSON.stringify(ctx.data));
+			}
+		}
+
 		return {
-			message: messages
-				.concat(
-					[...typeOrLiteralErrByPath.entries()]
-						// If type or literal error isn't common to ALL union types,
-						// filter it out. Can lead to confusing noise.
-						.filter(([, error]) => error.expected.length === baseError.unionErrors.length)
-						.map(([key, error]) =>
-							key === baseErrorPath
-								? // Avoid printing the key again if it's a base error
-								  `> ${getTypeOrLiteralMsg(error)}`
-								: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
-						)
-				)
-				.join('\n'),
+			message: messages.concat(details).join('\n'),
 		};
 	}
 	if (baseError.code === 'invalid_literal' || baseError.code === 'invalid_type') {
@@ -93,12 +107,6 @@ const getTypeOrLiteralMsg = (error: TypeOrLiteralErrByPathEntry): string => {
 const prefix = (key: string, msg: string) => (key.length ? `**${key}**: ${msg}` : msg);
 
 const unionExpectedVals = (expectedVals: Set<unknown>) =>
-	[...expectedVals]
-		.map((expectedVal, idx) => {
-			if (idx === 0) return JSON.stringify(expectedVal);
-			const sep = ' | ';
-			return `${sep}${JSON.stringify(expectedVal)}`;
-		})
-		.join('');
+	[...expectedVals].map((expectedVal) => JSON.stringify(expectedVal)).join(' | ');
 
 const flattenErrorPath = (errorPath: (string | number)[]) => errorPath.join('.');

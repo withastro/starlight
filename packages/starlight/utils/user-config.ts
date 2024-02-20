@@ -7,6 +7,7 @@ import { LogoConfigSchema } from '../schemas/logo';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { errorMap } from './error-map';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -245,3 +246,16 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
 export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;
+
+export function parseStarlightConfigWithFriendlyErrors(
+	config: StarlightUserConfig
+): StarlightConfig {
+	const parsedConfig = StarlightConfigSchema.safeParse(config, { errorMap });
+	if (!parsedConfig.success) {
+		throw new Error(
+			'Invalid config passed to starlight integration\n' +
+				parsedConfig.error.issues.map((i) => i.message).join('\n')
+		);
+	}
+	return parsedConfig.data;
+}

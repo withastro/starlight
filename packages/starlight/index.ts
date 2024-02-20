@@ -6,22 +6,15 @@ import { fileURLToPath } from 'node:url';
 import { starlightAsides } from './integrations/asides';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import { errorMap } from './utils/error-map';
-import { StarlightConfigSchema, type StarlightUserConfig } from './utils/user-config';
+import {
+	parseStarlightConfigWithFriendlyErrors,
+	type StarlightUserConfig,
+} from './utils/user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 
 export default function StarlightIntegration(opts: StarlightUserConfig): AstroIntegration {
-	const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
-
-	if (!parsedConfig.success) {
-		throw new Error(
-			'Invalid config passed to starlight integration\n' +
-				parsedConfig.error.issues.map((i) => i.message).join('\n')
-		);
-	}
-
-	const userConfig = parsedConfig.data;
+	const userConfig = parseStarlightConfigWithFriendlyErrors(opts);
 
 	const Starlight: AstroIntegration = {
 		name: '@astrojs/starlight',
