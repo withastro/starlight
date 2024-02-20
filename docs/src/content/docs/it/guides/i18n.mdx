@@ -5,7 +5,7 @@ description: Impara come configurare il tuo sito Starlight per supportare più l
 
 import FileTree from '~/components/file-tree.astro';
 
-Starlight offre il supporto per siti multilingua, compreso di indirizzamento, contenuti fallback e completo supporto per lingue scritte da destra a sinistra (RTL).
+Starlight offre il supporto per siti multilingua, compreso di indirizzamento, contenuti di riserva e completo supporto per lingue scritte da destra a sinistra (RTL).
 
 ## Configurare i18n
 
@@ -43,7 +43,7 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
    });
    ```
 
-   Il `defaultLocale` sarà utilizzato come fallback per contenuti ed interfaccia, quindi scegli il linguaggio per cui c'è più probabilità di iniziare a scrivere o già hai contenuti.
+   Il `defaultLocale` sarà utilizzato come riserva per contenuti ed interfaccia, quindi scegli il linguaggio per cui c'è più probabilità di iniziare a scrivere o già hai contenuti.
 
 2. Creare una cartella per ogni lingua in `src/content/docs/`.
    Per esempio, per la configurazione di sopra:
@@ -59,7 +59,7 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
 
    </FileTree>
 
-3. Puoi ora aggiungere file nelle cartelle. Usa file con lo stesso nome per associare pagine tra i linguaggi e sfruttare le funzionalità di Starlight per i18n, compresi i contenuti di fallback, avvisi di traduzione e altro.
+3. Puoi ora aggiungere file nelle cartelle. Usa file con lo stesso nome per associare pagine tra i linguaggi e sfruttare le funzionalità di Starlight per i18n, compresi i contenuti di riserva, avvisi di traduzione e altro.
 
    Per esempio, crea `ar/index.md` e `en/index.md` per rappresentare la homepage rispettivamente in arabo e inglese.
 
@@ -133,11 +133,11 @@ export default defineConfig({
 
 Questo ti permette di sovrascrivere le impostazione predefinite di Starlight per la lingua senza abilitare l'internazionalizzazione.
 
-## Contenuti fallback
+## Contenuti di riserva
 
-Starlight si aspetta che crei pagine equivalenti per tutte le lingue impostate. Per esempio, se hai un file `en/about.md`, crea un `about.md` per ogni altra lingua impostata. Questo permette a Starlight di avere contenuti fallback per le pagine che non hai ancora tradotto.
+Starlight si aspetta che crei pagine equivalenti per tutte le lingue impostate. Per esempio, se hai un file `en/about.md`, crea un `about.md` per ogni altra lingua impostata. Questo permette a Starlight di avere contenuti di riserva per le pagine che non hai ancora tradotto.
 
-Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà ai lettori i contenuti per quella pagina nel linguaggio predefinito (impostato da `defaultLocale`). Per esempio, se non hai ancora creato una versione italiana della pagina About e la lingua predefinita è inglese, gli utenti per `/it/about` vedranno i contenuti in inglese di `/en/about` con un avviso che la pagina non è stata ancora tradotta.
+Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà ai lettori i contenuti per quella pagina nel linguaggio predefinito (impostato da `defaultLocale`). Per esempio, se non hai ancora creato una versione italiana della pagina About e la lingua predefinita è inglese, gli utenti che visiteranno `/it/about` vedranno i contenuti in inglese di `/en/about` con un avviso che la pagina non è stata ancora tradotta.
 
 ## Tradurre l'interfaccia Starlight
 
@@ -262,3 +262,4 @@ export const collections = {
 ```
 
 Per saperne di più sugli schemi di raccolta dei contenuti, consulta [ "Definire uno schema di raccolta"](https://docs.astro.build/it/guides/content-collections/#defining-a-collection-schema) nella documentazione di Astro.
+
