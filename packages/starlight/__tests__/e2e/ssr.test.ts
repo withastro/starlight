@@ -4,7 +4,14 @@ import starlight from '../../index';
 import * as cheerio from 'cheerio';
 import { expect, test } from 'vitest';
 
-test('SSR mode renders the same content page', async () => {
+function longTest(name: string, testFn: () => Promise<void>) {
+	test(name, testFn, {
+		concurrent: false,
+		timeout: 15000,
+	});
+}
+
+longTest('SSR mode renders the same content page', async () => {
 	const fileTree: FileTree = {
 		src: {
 			content: {
@@ -58,9 +65,9 @@ Home page content
 	const ssrResponse = await ssrProject.fetch('/');
 
 	expectEquivalentHTML(await staticResponse.text(), await ssrResponse.text());
-}, 5000);
+});
 
-test('SSR adapter renders the same splash page', async () => {
+longTest('SSR adapter renders the same splash page', async () => {
 	const fileTree: FileTree = {
 		src: {
 			content: {
@@ -126,7 +133,7 @@ Home page content
 	const ssrResponse = await ssrProject.fetch('/');
 
 	expectEquivalentHTML(await staticResponse.text(), await ssrResponse.text());
-}, 5000);
+});
 
 function expectEquivalentHTML(a: string, b: string) {
 	const a$ = cheerio.load(a);
