@@ -1,7 +1,7 @@
 ---
 title: Pagine
 description: Scopri come creare e gestire le pagine del tuo sito di documentazione con Starlight.
-sidebar: 
+sidebar:
   order: 1
 ---
 
@@ -36,7 +36,7 @@ import FileTree from '~/components/file-tree.astro';
 
 </FileTree>
 
-### Frontmatter type-safe 
+### Frontmatter type-safe
 
 Tutte le pagine Starlight condividono un [insieme comune di proprietà frontmatter](/it/reference/frontmatter/) personalizzabili per controllare come appare la pagina:
 
@@ -53,7 +53,7 @@ Se dimentichi qualcosa di importante, Starlight te lo farà sapere.
 
 Per casi d'uso avanzati, puoi aggiungere pagine personalizzate creando una directory `src/pages/`.
 La directory `src/pages/` utilizza il [routing basato su file di Astro](https://docs.astro.build/it/basics/astro-pages/#file-based-routing) e include il supporto per file `.astro` tra gli altri formati di pagina.
-Questo è utile se hai bisogno di costruire pagine con un layout completamente personalizzato o generare una pagina da una fonte di dati alternativa. 
+Questo è utile se hai bisogno di costruire pagine con un layout completamente personalizzato o generare una pagina da una fonte di dati alternativa.
 
 Per esempio, questo progetto mischia contenuti Markdown in `src/content/docs/` con route Astro e HTML in `src/pages/`:
 
@@ -149,5 +149,3 @@ Imposta il tag di lingua BCP-47 per il contenuto di questa pagina, ad es. `en`, 
 **predefinito:** `false`
 
 Indica se questa pagina sta utilizzando [contenuti di riserva](/it/guides/i18n/#contenuti-di-riserva) perché non c'è una traduzione per la lingua corrente.
-
-
