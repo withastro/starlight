@@ -1,5 +1,14 @@
 import { expect, test } from 'vitest';
-import { parseStarlightConfigWithFriendlyErrors } from '../../utils/user-config';
+import { parseWithFriendlyErrors } from '../../utils/error-map';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+
+function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
+	return parseWithFriendlyErrors(
+		StarlightConfigSchema,
+		config,
+		'Invalid config passed to starlight integration'
+	);
+}
 
 test('parses valid config successfully', () => {
 	const data = parseStarlightConfigWithFriendlyErrors({ title: '' });
@@ -41,6 +50,7 @@ test('parses valid config successfully', () => {
 		    "lang": "en",
 		    "locale": undefined,
 		  },
+		  "disable404Route": false,
 		  "editLink": {},
 		  "favicon": {
 		    "href": "/favicon.svg",
@@ -50,6 +60,7 @@ test('parses valid config successfully', () => {
 		  "isMultilingual": false,
 		  "lastUpdated": false,
 		  "locales": undefined,
+		  "pagefind": true,
 		  "pagination": true,
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
@@ -62,39 +73,50 @@ test('parses valid config successfully', () => {
 });
 
 test('errors if title is missing', () => {
-	expect(() => parseStarlightConfigWithFriendlyErrors({} as any))
-		.toThrowErrorMatchingInlineSnapshot(`
-"Invalid config passed to starlight integration
-**title**: Required"
-`);
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({} as any)
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		[Error: Invalid config passed to starlight integration
+		**title**: Required]
+	`
+	);
 });
 
 test('errors if title value is not a string', () => {
-	expect(() => parseStarlightConfigWithFriendlyErrors({ title: 5 } as any))
-		.toThrowErrorMatchingInlineSnapshot(`
-"Invalid config passed to starlight integration
-**title**: Expected type \`\\"string\\"\`, received \\"number\\""
-		`);
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({ title: 5 } as any)
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		[Error: Invalid config passed to starlight integration
+		**title**: Expected type \`"string"\`, received "number"]
+	`
+	);
 });
 
 test('errors with bad social icon config', () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({ title: 'Test', social: { unknown: '' } as any })
-	).toThrowErrorMatchingInlineSnapshot(`
-"Invalid config passed to starlight integration
-**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon', received 'unknown'
-**social.unknown**: Invalid url"
-	`);
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		[Error: Invalid config passed to starlight integration
+		**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'slack' | 'matrix' | 'openCollective', received 'unknown'
+		**social.unknown**: Invalid url]
+	`
+	);
 });
 
 test('errors with bad logo config', () => {
-	expect(() => parseStarlightConfigWithFriendlyErrors({ title: 'Test', logo: { html: '' } as any }))
-		.toThrowErrorMatchingInlineSnapshot(`
-"Invalid config passed to starlight integration
-**logo**: Did not match union:
-> Expected type \`{ src: string } | { dark: string; light: string }\`
-> Received {\\"html\\":\\"\\"}"
-		`);
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({ title: 'Test', logo: { html: '' } as any })
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		[Error: Invalid config passed to starlight integration
+		**logo**: Did not match union.
+		> Expected type \`{ src: string } | { dark: string; light: string }\`
+		> Received {"html":""}]
+	`
+	);
 });
 
 test('errors with bad head config', () => {
@@ -103,13 +125,15 @@ test('errors with bad head config', () => {
 			title: 'Test',
 			head: [{ tag: 'unknown', attrs: { prop: null }, content: 20 } as any],
 		})
-	).toThrowErrorMatchingInlineSnapshot(`
-"Invalid config passed to starlight integration
-**head.0.tag**: Invalid enum value. Expected 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template', received 'unknown'
-**head.0.attrs.prop**: Did not match union:
-> Expected type \`\\"string\\" | \\"boolean\\" | \\"undefined\\"\`, received \\"null\\"
-**head.0.content**: Expected type \`\\"string\\"\`, received \\"number\\""
-	`);
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		[Error: Invalid config passed to starlight integration
+		**head.0.tag**: Invalid enum value. Expected 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template', received 'unknown'
+		**head.0.attrs.prop**: Did not match union.
+		> Expected type \`"string" | "boolean" | "undefined"\`, received "null"
+		**head.0.content**: Expected type \`"string"\`, received "number"]
+	`
+	);
 });
 
 test('errors with bad sidebar config', () => {
@@ -118,10 +142,12 @@ test('errors with bad sidebar config', () => {
 			title: 'Test',
 			sidebar: [{ label: 'Example', href: '/' } as any],
 		})
-	).toThrowErrorMatchingInlineSnapshot(`
-"Invalid config passed to starlight integration
-**sidebar.0**: Did not match union:
-> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
-> Received {\\"label\\":\\"Example\\",\\"href\\":\\"/\\"}"
-	`);
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		[Error: Invalid config passed to starlight integration
+		**sidebar.0**: Did not match union.
+		> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+		> Received {"label":"Example","href":"/"}]
+	`
+	);
 });

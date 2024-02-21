@@ -226,7 +226,9 @@ test('throws error if sidebar is malformated', async () => {
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		[Error: Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
-		**0**: Did not match union:]
+		**0**: Did not match union.
+		> Expected type \`{ href: string } | { entries: array }\`
+		> Received {"label":"Custom link 1","href":5}]
 	`);
 });
 
