@@ -11,11 +11,27 @@ type TypeOrLiteralErrByPathEntry = {
 	expected: unknown[];
 };
 
-export function throwValidationError(error: z.ZodError, message: string): never {
-	throw new Error(`${message}\n${error.issues.map((i) => i.message).join('\n')}`);
+/**
+ * Parse data with a Zod schema and throw a nicely formatted error if it is invalid.
+ *
+ * @param schema The Zod schema to use to parse the input.
+ * @param input Input data that should match the schema.
+ * @param message Error message preamble to use if the input fails to parse.
+ * @returns Validated data parsed by Zod.
+ */
+export function parseWithFriendlyErrors<T extends z.Schema>(
+	schema: T,
+	input: z.input<T>,
+	message: string
+): z.output<T> {
+	const parsedConfig = schema.safeParse(input, { errorMap });
+	if (!parsedConfig.success) {
+		throw new Error(message + '\n' + parsedConfig.error.issues.map((i) => i.message).join('\n'));
+	}
+	return parsedConfig.data;
 }
 
-export const errorMap: z.ZodErrorMap = (baseError, ctx) => {
+const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 	const baseErrorPath = flattenErrorPath(baseError.path);
 	if (baseError.code === 'invalid_union') {
 		// Optimization: Combine type and literal errors for keys that are common across ALL union types
