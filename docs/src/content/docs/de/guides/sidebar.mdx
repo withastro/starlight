@@ -3,8 +3,8 @@ title: Seitenleisten-Navigation
 description: Erfahre, wie du die Navigationslinks in der Seitenleiste deiner Starlight-Website einrichten und anpassen kannst.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import FileTree from '~/components/file-tree.astro';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 Eine gut organisierte Seitenleiste ist der Schlüssel zu einer guten Dokumentation, da sie eine der Hauptwege ist, auf denen die Benutzer durch deine Website navigieren werden. Starlight bietet eine ganze Reihe von Optionen, um das Layout und den Inhalt der Seitenleiste anzupassen.
 
@@ -235,7 +235,7 @@ Die `sidebar`-Frontmatter-Konfiguration wird nur für automatisch generierte Lin
 
 ## Abzeichen
 
-Links können auch eine `badge`-Eigenschaft enthalten, um ein Abzeichen neben dem Link-Label anzuzeigen.
+Links, Gruppen und automatisch generierte Gruppen können auch eine `badge`-Eigenschaft enthalten, um ein Abzeichen neben dem jeweiligen Text anzuzeigen.
 
 ```js
 starlight({
@@ -250,6 +250,12 @@ starlight({
 					badge: 'Neu',
 				},
 			],
+		},
+		// Eine automatisch generierte Gruppe mit dem "Veraltet"-Abzeichen.
+		{
+			label: 'Referenz',
+			badge: 'Veraltet',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -266,6 +272,24 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 					label: 'Komponenten',
 					link: '/guides/components/',
 					badge: { text: 'Neu', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'Referenz',
+			badge: { text: 'Veraltet', variant: 'default' },
+			items: [
+				{
+					label: 'Konfigurationsreferenz',
+					link: '/reference/configuration/',
+				},
+				{
+					label: 'Frontmatter Referenz',
+					link: '/reference/frontmatter/',
+				},
+				{
+					label: 'Komponenten-Ersetzung Referenz',
+					link: '/reference/overrides/',
 				},
 			],
 		},

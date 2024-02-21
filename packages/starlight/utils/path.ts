@@ -35,3 +35,18 @@ export function stripLeadingAndTrailingSlashes(href: string): string {
 	href = stripTrailingSlash(href);
 	return href;
 }
+
+/** Remove the extension from a path. */
+export function stripHtmlExtension(path: string) {
+	const pathWithoutTrailingSlash = stripTrailingSlash(path);
+	return pathWithoutTrailingSlash.endsWith('.html') ? pathWithoutTrailingSlash.slice(0, -5) : path;
+}
+
+/** Add '.html' extension to a path. */
+export function ensureHtmlExtension(path: string) {
+	path = stripLeadingAndTrailingSlashes(path);
+	if (!path.endsWith('.html')) {
+		path = path ? path + '.html' : '/index.html';
+	}
+	return ensureLeadingSlash(path);
+}

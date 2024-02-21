@@ -5,17 +5,20 @@ description: Pelajari cara membuat website dokumentasi baru Anda dengan Starligh
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Membuat Proyek Baru
+Starlight adalah tema dokumentasi berfitur lengkap yang dibangun di atas _framework_ [Astro](https://astro.build).
+Panduan ini akan membantu Anda memulai proyek baru.
+Lihat [petunjuk penyiapan manual](/id/manual-setup/) untuk menambahkan Starlight ke proyek Astro yang sudah ada.
 
-Starlight adalah tema website dokumentasi berfitur lengkap berbasis [Astro](https://astro.build).
+## Mulai Cepat
 
-Anda dapat membuat proyek Astro + Starlight baru menggunakan perintah berikut ini:
+### Membuat proyek baru
+
+Buat proyek Astro + Starlight baru dengan menjalankan perintah berikut di terminal Anda:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-# membuat proyek baru dengan npm
 npm create astro@latest -- --template starlight
 ```
 
@@ -23,7 +26,6 @@ npm create astro@latest -- --template starlight
 <TabItem label="pnpm">
 
 ```sh
-# membuat proyek baru dengan pnpm
 pnpm create astro --template starlight
 ```
 
@@ -31,69 +33,114 @@ pnpm create astro --template starlight
 <TabItem label="Yarn">
 
 ```sh
-# membuat proyek baru dengan yarn
 yarn create astro --template starlight
 ```
 
 </TabItem>
 </Tabs>
 
-Perintah tersebut akan membuat [direktori proyek](/id/guides/project-structure/) baru berisikan seluruh file dan konfigurasi untuk website Anda.
+Perintah tersebut akan membuat [direktori proyek](/id/guides/project-structure/) baru berisikan seluruh file dan konfigurasi yang diperlukan untuk website Anda.
 
-:::tip[Lihat contohnya]
-Cobalah Starlight di browser:
+:::tip[Lihat itu beraksi]
+Cobalah Starlight di browser Anda:
 [buka dengan StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
 :::
 
-## Membuat konten dengan Starlight
+### Mulai server pengembangan
 
-Starlight sudah siap untuk ditambahkan konten baru, atau pindahkan konten lama Anda!
+Ketika bekerja secara lokal, [server pengembangan Astro](https://docs.astro.build/en/reference/cli-reference/#astro-dev) memungkinkan Anda melihat pratinjau pekerjaan Anda dan secara otomatis me-_refresh_ peramban ketika Anda membuat perubahan.
 
-### Format file
-
-Starlight mendukung pembuatan konten dalam bentuk Markdown and MDX. (Anda dapat menambahkan support untuk Markdoc dengan menginstall integrasi eksperimental [Astro Markdoc](https://docs.astro.build/en/guides/integrations-guide/markdoc/).)
-
-### Tambah halaman baru
-
-Tambah halaman baru secara otomatis dengan cara membuat file `.md` or `.mdx` di `src/content/docs/`. Tambahkan folder untuk mengatur konten Anda, dan membuat beberapa segmen _path_ bertingkat:
-
-```
-src/content/docs/hello-world.md => your-site.com/hello-world
-src/content/docs/guides/faq.md => your-site.com/guides/faq
-```
-
-### Frontmatter yang type-safe
-
-Semua halaman Starlight berbagi [properti _frontmatter_ umum](/id/reference/frontmatter/) yang dapat dikostumisasi untuk mengontrol tampilan setiap halaman:
-
-```md
----
-title: Hello, World!
-description: This is a page in my Starlight-powered site
----
-```
-
-Jika ada properti yang terlewat, Starlight akan memberitahu Anda.
-
-## Deploy website Starlight Anda
-
-Setelah Anda selesai membuat dan mengkostumisasi website Starlight anda, anda dapat men-_deploy_ website Anda ke web server atau platform hosting pilihan Anda, termasuk Netlify, Vercel, GitHub Pages, dan lain sebagainya.
-
-[Pelajari cara men-_deploy_ website Astro di dokumentasi Astro.](https://docs.astro.build/en/guides/deploy/)
-
-## Memperbaharui Starlight
-
-:::tip
-Karena Starlight masih berstatus beta, akan ada pembaruan dan peningkatan yang cukup sering. Pastikan Anda selalu memperbaharui Starlight secara rutin!
-:::
-
-Starlight adalah integrasi Astro, dan cara memperbaharuinya sama seperti integrasi `@astrojs/*` yang lain:
+Di dalam direktori proyek Anda, jalankan perintah berikut untuk memulai server pengembangan:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-# memperbaharui Starlight dengan npm
+npm run dev
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm dev
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn dev
+```
+
+</TabItem>
+</Tabs>
+
+Ini akan mencatat pesan ke terminal Anda dengan URL pratinjau lokal Anda.
+Buka URL tersebut untuk mulai menjelajahi situs Anda.
+
+### Tambahkan konten
+
+Starlight siap untuk ditambahkan konten baru, atau pindahkan konten Anda yang sudah ada!
+
+#### Format file
+
+Starlight mendukung penulisan konten dalam bentuk Markdown dan MDX tanpa memerlukan konfigurasi.
+Anda dapat menambahkan dukungan untuk Markdoc dengan memasang [integrasi Astro Markdoc](https://docs.astro.build/en/guides/integrations-guide/markdoc/) eksperimental.
+
+#### Tambahkan halaman
+
+Tambahkan halaman baru ke situs Anda dengan cara membuat file `.md` atau `.mdx` di `src/content/docs/`.
+Gunakan sub-folder untuk mengatur konten Anda dan untuk membuat beberapa segmen _path_.
+
+Sebagai contoh, struktur file berikut ini akan menghasilkan halaman di `example.com/hello-world` dan `example.com/guides/faq`:
+
+import FileTree from '~/components/file-tree.astro';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - guides/
+        - faq.md
+      - hello-world.md
+
+</FileTree>
+
+#### Frontmatter yang type-safe
+
+Semua halaman Starlight berbagi [properti _frontmatter_ umum](/id/reference/frontmatter/) yang dapat dikostumisasi untuk mengontrol tampilan setiap halaman:
+
+```md
+---
+title: Halo, Dunia!
+description: Ini adalah halaman di situs saya yang didukung Starlight
+---
+```
+
+Jika Anda lupa sesuatu yang penting, Starlight akan memberi tahu Anda.
+
+### Langkah selanjutnya
+
+- **Mengkonfigurasi:** Pelajari tentang opsi umum dalam ["Menyesuaikan Starlight”](/id/guides/customization/).
+- **Navigasi:** Siapkan sidebar Anda dengan panduan ["Navigasi Sidebar”](/id/guides/sidebar/).
+- **Komponen:** Temukan kartu, tab dan bawaan lainnya di dalam panduan ["Komponen”](/id/guides/components/).
+- **Sebarkan:** Publikasikan karya Anda dengan panduan [“_Deploy_ situs Anda”](https://docs.astro.build/en/guides/deploy/) di dokumentasi Astro.
+
+## Memperbarui Starlight
+
+:::tip
+Karena Starlight adalah perangkat lunak beta, akan ada pembaruan dan peningkatan yang sering dilakukan.
+Pastikan untuk memperbarui Starlight secara teratur!
+:::
+
+Starlight adalah integrasi Astro, dan diperbarui seperti integrasi `@astrojs/*` lainnya:
+
+<Tabs>
+<TabItem label="npm">
+
+```sh
 npm install @astrojs/starlight@latest
 ```
 
@@ -101,7 +148,6 @@ npm install @astrojs/starlight@latest
 <TabItem label="pnpm">
 
 ```sh
-# memperbaharui Starlight dengan pnpm
 pnpm upgrade @astrojs/starlight --latest
 ```
 
@@ -109,21 +155,20 @@ pnpm upgrade @astrojs/starlight --latest
 <TabItem label="Yarn">
 
 ```sh
-# memperbaharui Starlight dengan yarn
 yarn upgrade @astrojs/starlight --latest
 ```
 
 </TabItem>
 </Tabs>
 
-Anda dapat melihat daftar lengkap perubahan-perubahan yang dilakukan dalam setiap rilis di [_changelog_](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+Lihat [_changelog_ Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md) untuk daftar lengkap perubahan yang dibuat dalam setiap rilis.
 
 ## Troubleshooting Starlight
 
-[Konfigurasi proyek](/id/reference/configuration/) dan [konfigurasi _frontmatter_](/id/reference/frontmatter/) tersedia di bagian Referensi pada website ini. Gunakan halaman-halaman tersebut untuk memastikan website Starlight Anda terkonfigurasi dengan benar dan berfungsi dengan baik.
+Gunakan [konfigurasi proyek](/id/reference/configuration/) dan halaman referensi [konfigurasi _frontmatter_ halaman individual](/id/reference/frontmatter/) untuk memastikan bahwa situs Starlight Anda telah dikonfigurasi dan berfungsi dengan baik.
+Lihat panduan di _sidebar_ untuk bantuan menambahkan konten dan menyesuaikan situs Starlight Anda.
 
-Anda juga dapat merujuk kepada panduan di _sidebar_ untuk membantu Anda dalam menambah konten dan mengkustomisasi website Starlight Anda.
+Jika jawaban Anda tidak dapat ditemukan dalam dokumentasi ini, silakan kunjungi [Dokumentasi Astro](https://docs.astro.build) untuk dokumentasi lengkap Astro.
+Pertanyaan Anda mungkin terjawab dengan memahami cara kerja Astro secara umum, di bawah tema Starlight ini.
 
-Jika Anda tidak menemukan jawaban di dokumentasi ini, silahkan merujuk kepada [dokumentasi lengkap Astro](https://docs.astro.build). Pertanyaan Anda biasanya akan terjawab dengan memahami bagaimana Astro bekerja secara umum, sebagai basis dari Starlight.
-
-Anda juga dapat merujuk kepada [isu-isu di GitHub](https://github.com/withastro/starlight/issues), dan mendapatkan bantuan di [Astro Discord](https://astro.build/chat/) dari komunitas kami yang ramah dan sangat aktif! Silahkan bertanya di forum `#support` menggunakan tag "starlight" tag, atau kunjungi channel `#starlight` untuk mendiskusikan pengembangan Starlight, dan lain-lain!
+Anda juga dapat memeriksa masalah Starlight yang diketahui di [GitHub](https://github.com/withastro/starlight/issues), dan dapatkan bantuan di [Astro Discord](https://astro.build/chat/) dari komunitas kami yang aktif dan ramah! Kirimkan pertanyaan di forum `#support` kami dengan tag "starlight", atau kunjungi kanal `#starlight` khusus kami untuk mendiskusikan perkembangan terkini dan banyak lagi!

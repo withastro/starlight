@@ -1,10 +1,10 @@
 ---
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
-import { pathWithBase } from '../utils/base';
 import type { Props } from '../props';
+import { formatPath } from '../utils/format-path';
 
-const href = pathWithBase(Astro.props.locale || '/');
+const href = formatPath(Astro.props.locale || '/');
 ---
 
 <a {href} class="site-title sl-flex">
@@ -38,9 +38,6 @@ const href = pathWithBase(Astro.props.locale || '/');
 
 <style>
 	.site-title {
-		justify-self: flex-start;
-		max-width: 100%;
-		overflow: hidden;
 		align-items: center;
 		gap: var(--sl-nav-gap);
 		font-size: var(--sl-text-h4);

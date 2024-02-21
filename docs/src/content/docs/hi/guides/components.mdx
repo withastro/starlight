@@ -1,0 +1,197 @@
+---
+title: अवयवों
+description: Starlight के साथ MDX में अवयवों का उपयोग करना जाने।
+---
+
+अवयव आपको आसानी से UI के एक टुकड़े या शैलियों का लगातार पुन: उपयोग करने देते हैं।
+उदाहरणों में एक लिंक कार्ड या YouTube embed शामिल हो सकता है।
+Starlight [MDX](https://mdxjs.com/) फ़ाइलों में अवयवों के उपयोग का समर्थन करता है और आपके उपयोग के लिए कुछ सामान्य अवयव प्रदान करता है।
+
+[Astro दस्तावेज़ीकरण के माध्यम से अवयवों के निर्माण के बारे में और जानें](https://docs.astro.build/hi/core-concepts/astro-components/)।
+
+## जाने कैसे एक अवयव का उपयोग करें
+
+आप किसी अवयव को अपने MDX फ़ाइल में आयात करके और फिर उसे JSX टैग के रूप में प्रस्तुत करके उपयोग कर सकते हैं।
+ये HTML टैग्स की तरह दिखते हैं लेकिन आपके `import` कथन में नाम से मेल खाने वाले बड़े अक्षर से शुरू होते हैं:
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: मेरे दस्तावेज़ में आपका स्वागत है
+---
+
+import SomeComponent from '../../components/SomeComponent.astro';
+import AnotherComponent from '../../components/AnotherComponent.astro';
+
+<SomeComponent prop="something" />
+
+<AnotherComponent>
+	अवयवों में **नेस्टेड कंटेंट** भी हो सकती है।
+</AnotherComponent>
+```
+
+क्योंकि Starlight Astro द्वारा संचालित है, आप अपने MDX फ़ाइलों में किसी भी [समर्थित UI फ्रेमवर्क (React, Preact, Svelte, Vue, Solid, Lit और Alpine)](https://docs.astro.build/hi/core-concepts/framework-components/) के साथ निर्मित अवयवों के लिए समर्थन जोड़ सकते हैं।
+Astro दस्तावेज़ीकरण में [MDX में अवयवों का उपयोग करने](https://docs.astro.build/hi/guides/markdown-content/#using-components-in-mdx) के बारे में और जानें।
+
+### Starlight की शैलियों के साथ संगतता
+
+Starlight आपके Markdown कंटेंट पर डिफ़ॉल्ट शैलि लागू करता है, उदाहरण के लिए तत्वों के बीच margin जोड़ना।
+यदि ये शैलियाँ आपके अवयव की उपस्थिति के साथ संघर्ष करती हैं, तो उन्हें अक्षम करने के लिए अपने अवयव पर `not-content` वर्ग सेट करें।
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Starlight की डिफ़ॉल्ट कंटेंट शैली से प्रभावित नहीं।</p>
+</div>
+```
+
+## अंतर्निर्मित अवयव
+
+Starlight सामान्य दस्तावेज़ीकरण उपयोग मामलों के लिए कुछ अंतर्निहित अवयव प्रदान करता है।
+ये अवयव `@astrojs/starlight/components` पैकेज से उपलब्ध हैं।
+
+### टैब
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+आप `<Tabs>` और `<TabItem>` अवयवों का उपयोग करके एक टैब्ड इंटरफ़ेस प्रदर्शित कर सकते हैं।
+प्रत्येक `<TabItem>` में उपयोगकर्ताओं को प्रदर्शित करने के लिए एक `label` होना चाहिए।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित टैब उत्पन्न करता है:
+
+<Tabs>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+### कार्ड
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+आप `<Card>` अवयव का उपयोग करके Starlight की शैलियों से मेल खाने वाले बक्से में कंटेंट प्रदर्शित कर सकते हैं।
+पर्याप्त जगह होने पर कार्डों को एक साथ प्रदर्शित करने के लिए `<CardGrid>` अवयव में एकाधिक कार्ड लपेटें।
+
+एक `<Card>` के लिए एक `title` की आवश्यकता होती है और इसमें वैकल्पिक रूप से [Starlight के अंतर्निहित आइकनों में से एक](#सभी-आइकन) के नाम पर सेट एक `icon` विशेषता शामिल हो सकती है।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="इसको देखे">दिलचस्प कंटेंट जिसे आप हाइलाइट करना चाहते हैं।</Card>
+
+<CardGrid>
+	<Card title="सितारे" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="चन्द्रमा" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
+</CardGrid>
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+<Card title="इसको देखे">दिलचस्प कंटेंट जिसे आप हाइलाइट करना चाहते हैं।</Card>
+
+<CardGrid>
+	<Card title="सितारे" icon="star">
+		Sirius, Vega, Betelgeuse
+	</Card>
+	<Card title="चन्द्रमा" icon="moon">
+		Io, Europa, Ganymede
+	</Card>
+</CardGrid>
+
+:::tip
+अपने परियोजना की मुख्य विशेषताओं को प्रदर्शित करने के लिए अपने होम पेज पर एक कार्ड ग्रिड का उपयोग करें।
+कार्ड के दूसरे कॉलम को लंबवत रूप से स्थानांतरित करने और दृश्य रुचि जोड़ने के लिए `stagger` विशेषता जोड़ें:
+
+```astro
+<CardGrid stagger>
+	<!-- cards -->
+</CardGrid>
+```
+
+:::
+
+### लिंक कार्ड
+
+विभिन्न पेजों को प्रमुखता से लिंक करने के लिए `<LinkCard>` अवयव का उपयोग करें।
+
+`<LinkCard>` के लिए एक `title` और एक [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) विशेषता की आवश्यकता होती है। आप वैकल्पिक रूप से एक संक्षिप्त `description` या `target` जैसी अन्य लिंक विशेषताएँ शामिल कर सकते हैं।
+
+पर्याप्त जगह होने पर कार्डों को एक साथ प्रदर्शित करने के लिए `<CardGrid>` में कई `<LinkCard>` अवयवों को समूहित करें।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="स्टारलाईट को अनुकूलित करना"
+	description="जानें कि कस्टम शैलियों, फ़ॉन्ट और बहुत कुछ के साथ अपनी Starlight साइट को कैसे अपना बनाएं।"
+	href="/hi/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="Markdown का संलेखन" href="/hi/guides/authoring-content/" />
+	<LinkCard title="अवयवों" href="/hi/guides/components/" />
+</CardGrid>
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="स्टारलाईट को अनुकूलित करना"
+	description="जानें कि कस्टम शैलियों, फ़ॉन्ट और बहुत कुछ के साथ अपनी Starlight साइट को कैसे अपना बनाएं।"
+	href="/hi/guides/customization/"
+/>
+
+<CardGrid>
+	<LinkCard title="Markdown का संलेखन" href="/hi/guides/authoring-content/" />
+	<LinkCard title="अवयवों" href="/hi/guides/components/" />
+</CardGrid>
+
+### आइकन
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '~/components/icons-list.astro';
+
+Starlight सामान्य आइकन का एक संग्रह प्रदान करता है जिसे आप `<Icon>` अवयव का उपयोग करके अपने कंटेंट में प्रदर्शित कर सकते हैं।
+
+प्रत्येक `<Icon>` को एक [`name`](#सभी-आइकन) की आवश्यकता होती है और इसमें वैकल्पिक रूप से एक `label`, `size`, और `color` विशेषता शामिल हो सकती है।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### सभी आइकन
+
+सभी उपलब्ध आइकनों की एक सूची उनके संबंधित नामों के साथ नीचे दिखाई गई है। इसके अवयव कोड की प्रतिलिपि बनाने के लिए किसी भी आइकन पर क्लिक करें।
+
+<IconsList />

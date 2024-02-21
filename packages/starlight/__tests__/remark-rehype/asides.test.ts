@@ -1,9 +1,29 @@
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { describe, expect, test } from 'vitest';
 import { starlightAsides } from '../../integrations/asides';
+import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+
+const starlightConfig = StarlightConfigSchema.parse({
+	title: 'Asides Tests',
+	locales: { en: { label: 'English' }, fr: { label: 'French' } },
+	defaultLocale: 'en',
+} satisfies StarlightUserConfig);
+
+const useTranslations = createTranslationSystemFromFs(
+	starlightConfig,
+	// Using non-existent `_src/` to ignore custom files in this test fixture.
+	{ srcDir: new URL('./_src/', import.meta.url) }
+);
 
 const processor = await createMarkdownProcessor({
-	remarkPlugins: [...starlightAsides()],
+	remarkPlugins: [
+		...starlightAsides({
+			starlightConfig,
+			astroConfig: { root: new URL(import.meta.url), srcDir: new URL('./_src/', import.meta.url) },
+			useTranslations,
+		}),
+	],
 });
 
 test('generates <aside>', async () => {
@@ -12,7 +32,7 @@ test('generates <aside>', async () => {
 Some text
 :::
 `);
-	expect(res.code).toMatchFileSnapshot('./asides/generates-aside.html');
+	expect(res.code).toMatchFileSnapshot('./snapshots/generates-aside.html');
 });
 
 describe('default labels', () => {
@@ -23,7 +43,7 @@ describe('default labels', () => {
 		['danger', 'Danger'],
 	])('%s has label %s', async (type, label) => {
 		const res = await processor.render(`
-:::${type}[${label}]
+:::${type}
 Some text
 :::
 `);
@@ -69,7 +89,7 @@ More.
 </details>
 :::
 `);
-	expect(res.code).toMatchFileSnapshot('./asides/handles-complex-children.html');
+	expect(res.code).toMatchFileSnapshot('./snapshots/handles-complex-children.html');
 });
 
 test('nested asides', async () => {
@@ -83,5 +103,62 @@ Nested tip.
 
 ::::
 `);
-	expect(res.code).toMatchFileSnapshot('./asides/nested-asides.html');
+	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides.html');
+});
+
+describe('translated labels in French', () => {
+	test.each([
+		['note', 'Note'],
+		['tip', 'Astuce'],
+		['caution', 'Attention'],
+		['danger', 'Danger'],
+	])('%s has label %s', async (type, label) => {
+		const res = await processor.render(
+			`
+:::${type}
+Some text
+:::
+`,
+			// @ts-expect-error fileURL is part of MarkdownProcessor's options
+			{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
+		);
+		expect(res.code).includes(`aria-label="${label}"`);
+		expect(res.code).includes(`</svg>${label}</p>`);
+	});
+});
+
+test('runs without locales config', async () => {
+	const processor = await createMarkdownProcessor({
+		remarkPlugins: [
+			...starlightAsides({
+				starlightConfig: { locales: undefined },
+				astroConfig: {
+					root: new URL(import.meta.url),
+					srcDir: new URL('./_src/', import.meta.url),
+				},
+				useTranslations,
+			}),
+		],
+	});
+	const res = await processor.render(':::note\nTest\n::');
+	expect(res.code.includes('aria-label=Note"'));
+});
+
+test('tranforms back unhandled text directives', async () => {
+	const res = await processor.render(
+		`This is a:test of a sentence with a text:name[content]{key=val} directive.`
+	);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>This is a:test
+		 of a sentence with a text:name[content]{key="val"}
+		 directive.</p>"
+	`);
+});
+
+test('tranforms back unhandled leaf directives', async () => {
+	const res = await processor.render(`::video[Title]{v=xxxxxxxxxxx}`);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>::video[Title]{v="xxxxxxxxxxx"}
+		</p>"
+	`);
 });

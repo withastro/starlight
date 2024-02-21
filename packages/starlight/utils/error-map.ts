@@ -11,6 +11,10 @@ type TypeOrLiteralErrByPathEntry = {
 	expected: unknown[];
 };
 
+export function throwValidationError(error: z.ZodError, message: string): never {
+	throw new Error(`${message}\n${error.issues.map((i) => i.message).join('\n')}`);
+}
+
 export const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 	const baseErrorPath = flattenErrorPath(baseError.path);
 	if (baseError.code === 'invalid_union') {

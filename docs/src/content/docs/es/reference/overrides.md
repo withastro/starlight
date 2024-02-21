@@ -19,6 +19,7 @@ Para escribir los tipos de tus componentes personalizados, importa el tipo `Prop
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -135,6 +136,12 @@ Objeto `Date` de JavaScript que representa cuándo se actualizó por última vez
 
 Objeto `URL` para la dirección donde se puede editar esta página si está habilitado.
 
+#### `labels`
+
+**Tipo:** `Record<string, string>`
+
+Un objecto que contiene cadenas de UI localizadas para la página actual. Consulta la guía ["Traducir la UI de Starlight"](/es/guides/i18n/#traduce-la-ui-de-starlight) para ver una lista de todas las claves disponibles.
+
 ---
 
 ## Componentes
@@ -227,6 +234,8 @@ La implementación predeterminada incluye lógica para renderizar logotipos defi
 
 Componente utilizado para renderizar la UI de búsqueda de Starlight.
 La implementación predeterminada incluye el botón en el encabezado y el código para mostrar un modal de búsqueda cuando se hace clic y cargar la UI de [Pagefind](https://pagefind.app/).
+
+Cuando [`pagefind`](/es/reference/configuration/#pagefind) está deshabilitado, el componente de búsqueda predeterminado no se renderizará. Sin embargo, si reemplazas `Search`, tu componente personalizado siempre se renderizará incluso si la opción de configuración `pagefind` es `false`. Esto te permite agregar una interfaz de usuario para proveedores de búsqueda alternativos cuando se deshabilita Pagefind.
 
 #### `SocialIcons`
 
@@ -343,6 +352,8 @@ La implementación predeterminada muestra un título grande, un lema y enlaces d
 
 Componente renderizado alrededor del contenido principal de cada página.
 La implementación predeterminada configura estilos básicos para aplicar al contenido de Markdown.
+
+Los estilos de contenido Markdown también están expuestos en `@astrojs/starlight/style/markdown.css` y están limitados al ámbito de la clase CSS `.sl-markdown-content`.
 
 ---
 

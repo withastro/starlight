@@ -139,7 +139,7 @@ Vorsichts- und Gefahrenhinweise sind hilfreich, um die Aufmerksamkeit des Benutz
 Wenn du diese häufig verwenden, kann das auch ein Zeichen dafür sein, dass die Sache, die Sie dokumentieren, von einem neuen Design profitieren könnte.
 
 :::caution
-Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](../../../) verwendest.
+Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
 :::
 
 :::danger
@@ -153,7 +153,7 @@ Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein un
 
 ```md
 :::caution
-Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](../../) verwendest.
+Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
 :::
 
 :::danger
@@ -207,3 +207,7 @@ Lange, einzeilige Codeblöcke sollten nicht umgebrochen werden. Sie sollten hori
 ## Andere allgemeine Markdown-Funktionen
 
 Starlight unterstützt alle anderen Markdown-Autorensyntaxen, wie Listen und Tabellen. Einen schnellen Überblick über alle Markdown-Syntaxelemente findest du im [Markdown Cheat Sheet von The Markdown Guide](https://www.markdownguide.org/cheat-sheet/).
+
+## Erweiterte Markdown- und MDX-Konfiguration
+
+Starlight verwendet Astros Markdown- und MDX-Renderer, der auf remark und rehype aufbaut. Du kannst eine Unterstützung für eigene Syntax und Verhalten hinzufügen, indem du `remarkPlugins` oder `rehypePlugins` in deiner Astro-Konfigurationsdatei hinzufügst. Weitere Informationen findest du unter ["Markdown konfigurieren"] (https://docs.astro.build/de/guides/markdown-content/#markdown-konfigurieren) in der Astro-Dokumentation.

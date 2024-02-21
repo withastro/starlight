@@ -13,10 +13,14 @@
   "sidebarNav.accessibleLabel": "Основное",
   "tableOfContents.onThisPage": "На этой странице",
   "tableOfContents.overview": "Обзор",
-  "i18n.untranslatedContent": "Этот содержимое пока не доступно на вашем языке.",
+  "i18n.untranslatedContent": "Это содержимое пока не доступно на вашем языке.",
   "page.editLink": "Редактировать страницу",
   "page.lastUpdated": "Последнее обновление:",
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
-  "404.text": "Страница не найдена. Проверьтье  URL или используйте поиск по сайту"
+  "404.text": "Страница не найдена. Проверьтье  URL или используйте поиск по сайту",
+  "aside.note": "Заметка",
+  "aside.tip": "Знали ли вы?",
+  "aside.caution": "Осторожно",
+  "aside.danger": "Опасно"
 }

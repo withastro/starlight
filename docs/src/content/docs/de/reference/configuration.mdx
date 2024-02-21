@@ -79,7 +79,7 @@ starlight({
 });
 ```
 
-Mit dieser Konfiguration würde eine `/einfuehrung` einen Bearbeitungslink haben, der auf `https://github.com/withastro/starlight/edit/main/src/docs/einfuehrung.md` zeigt.
+Mit dieser Konfiguration würde eine `/einfuehrung` einen Bearbeitungslink haben, der auf `https://github.com/withastro/starlight/edit/main/src/content/docs/einfuehrung.md` zeigt.
 
 ### `sidebar`
 
@@ -181,10 +181,10 @@ sidebar: [
 type SidebarItem = {
 	label: string;
 	translations?: Record<string, string>;
+	badge?: string | BadgeConfig;
 } & (
 	| {
 			link: string;
-			badge?: string | BadgeConfig;
 			attrs?: Record<string, string | number | boolean | undefined>;
 	  }
 	| { items: SidebarItem[]; collapsed?: boolean }
@@ -306,7 +306,7 @@ Das `defaultLocale` wird verwendet, um Ersatzinhalte bereitzustellen, wenn Über
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **Typ:** <SocialLinksType />
 

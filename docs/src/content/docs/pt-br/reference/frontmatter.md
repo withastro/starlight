@@ -5,8 +5,9 @@ description: Uma visão geral dos campos padrões do frontmatter que o Starlight
 
 Você pode customizar páginas Markdown e MDX no Starlight definindo valores em seu frontmatter. Por exemplo, uma página comum pode definir os campos `title` e `description`:
 
-```md
+```md {3-4}
 ---
+# src/content/docs/exemplo.md
 title: Sobre este projeto
 description: Aprenda mais sobre o projeto no qual estou trabalhando.
 ---
@@ -28,6 +29,12 @@ Você deve providenciar um título para cada página. Ele será mostrado no topo
 
 A descrição da página é utilizada para metadados da página e será utilizada por motores de busca e em pré-visualizações em redes sociais.
 
+### `slug`
+
+**tipo:** `string`
+
+Sobrescreve o slug da página. Veja [“Definindo slugs customizados”](https://docs.astro.build/pt-br/guides/content-collections/#definindo-slugs-customizados) na documentação do Astro para mais detalhes.
+
 ### `editUrl`
 
 **tipo:** `string | boolean`
@@ -42,6 +49,7 @@ Você pode adicionar tags adicionais para ao `<head>` da sua página utilizando 
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Sobre nós
 head:
   # Utilize uma tag <title> customizada
@@ -59,6 +67,7 @@ Customize os níveis de cabeçalho a serem incluídos ou defina como `false` par
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página com apenas H2s no índice
 tableOfContents:
   minHeadingLevel: 2
@@ -68,6 +77,7 @@ tableOfContents:
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página sem índice
 tableOfContents: false
 ---
@@ -92,6 +102,7 @@ Por exemplo, essa configuração mostra algumas opções comuns, incluindo carre
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Minha Página Inicial
 template: splash
 hero:
@@ -108,6 +119,21 @@ hero:
     - text: Veja no GitHub
       link: https://github.com/astronaut/meu-projeto
       icon: external
+      attrs:
+        rel: me
+---
+```
+
+Você pode exibir diferentes versões da imagem hero no modo claro e escuro.
+
+```md
+---
+# src/content/docs/exemplo.md
+hero:
+  image:
+    alt: Um logo brilhante e colorido
+    dark: ../../assets/logo-escuro.png
+    light: ../../assets/logo-claro.png
 ---
 ```
 
@@ -117,19 +143,32 @@ hero:
 interface HeroConfig {
   title?: string;
   tagline?: string;
-  image?: {
-    alt?: string;
-    // Caminho relativo a uma imagem no seu repositório.
-    file?: string;
-    // HTML bruto para utilizar no slot de imagem.
-    // Pode ser uma tag `<img>` customizada ou um `<svg>` inline.
-    html?: string;
-  };
+  image?:
+    | {
+        // Caminho relativo de uma imagem no seu repositório.
+        file: string;
+        // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
+        alt?: string;
+      }
+    | {
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo escuro.
+        dark: string;
+        // Caminho relativo de uma imagem em seu repositório para ser usada no modo claro.
+        light: string;
+        // Texto alternativo para tornar a imagem acessível à tecnologia assistiva
+        alt?: string;
+      }
+    | {
+        // HTML bruto para utilizar no slot de imagem.
+        // Pode ser uma tag `<img>` personalizada ou um `<svg>` inline.
+        html: string;
+      };
   actions?: Array<{
     text: string;
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```
@@ -145,6 +184,7 @@ Por exemplo, esta página exibe um banner que inclui um link para `example.com`.
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página com um banner
 banner:
   content: |
@@ -161,6 +201,7 @@ Sobrescreve a [opção global `lastUpdated`](/pt-br/reference/configuration/#las
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página com uma data de última atualização customizada
 lastUpdated: 2022-08-09
 ---
@@ -174,6 +215,7 @@ Sobrescreve a [opção global `pagination`](/pt-br/reference/configuration/#pagi
 
 ```md
 ---
+# src/content/docs/exemplo.md
 # Esconda o link da página anterior
 prev: false
 ---
@@ -181,6 +223,7 @@ prev: false
 
 ```md
 ---
+# src/content/docs/exemplo.md
 # Sobrescreva o texto do link da página anterior
 prev: Continue o tutorial
 ---
@@ -188,6 +231,7 @@ prev: Continue o tutorial
 
 ```md
 ---
+# src/content/docs/exemplo.md
 # Sobrescreva ambos o link e o texto da página anterior
 prev:
   link: /pagina-diferente/
@@ -203,6 +247,7 @@ Mesmo que [`prev`](#prev) mas para o link da próxima página.
 
 ```md
 ---
+# src/content/docs/exemplo.md
 # Esconda o link da próxima página
 next: false
 ---
@@ -213,11 +258,11 @@ next: false
 **tipo:** `boolean`  
 **padrão:** `true`
 
-Configura se essa página deve ou não ser inclusa no índice de busca do [Pagefind](https://pagefind.app/).
-Defina como `false` para excluir a página do resultado de buscas.
+Configura se essa página deve ou não ser inclusa no índice de busca do [Pagefind](https://pagefind.app/). Defina como `false` para excluir a página do resultado de buscas.
 
 ```md
 ---
+# src/content/docs/exemplo.md
 # Não exibir essa página nas buscas
 pagefind: false
 ---
@@ -250,6 +295,7 @@ Define o rótulo para essa página na barra lateral quando mostrado em um grupo 
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Sobre este projeto
 sidebar:
   label: Sobre
@@ -265,6 +311,7 @@ Números menores são mostrados acima no grupo de links.
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página para mostrar primeiro
 sidebar:
   order: 1
@@ -280,6 +327,7 @@ Previne essa página de ser incluída no no grupo gerado automaticamente da barr
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página para esconder da barra lateral gerada automaticamente
 sidebar:
   hidden: true
@@ -296,6 +344,7 @@ Opcionalmente, passe um [objeto `BadgeConfig`](/pt-br/reference/configuration/#b
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página com um emblema
 sidebar:
   # Utiliza a variante padrão correspondente a cor de destaque do seu site
@@ -305,6 +354,7 @@ sidebar:
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Página com um emblema
 sidebar:
   badge:
@@ -321,10 +371,79 @@ Atributos HTML que será adicionado ao link da barra lateral da página quando e
 
 ```md
 ---
+# src/content/docs/exemplo.md
 title: Abrir em nova aba
 sidebar:
   # Abre a página em uma nova aba
   attrs:
     target: _blank
 ---
+```
+
+## Customize o esquema de frontmatter
+
+O esquema de frontmatter da coleção de conteúdo `docs` do Starlight é configurado em `src/content/config.ts` utilizando o utilitário `docsSchema()`:
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Aprenda mais sobre esquemas de coleções de conteúdo em [“Definindo um esquema de coleção”](https://docs.astro.build/pt-br/guides/content-collections/#definindo-um-esquema-de-cole%C3%A7%C3%A3o) na documentação do Astro.
+
+`docsSchema()` recebe os seguintes argumentos:
+
+### `extend`
+
+**tipo:** Esquema do Zod ou função que retorne um esquema do Zod  
+**padrão:** `z.object({})`
+
+Estenda o esquema do Starlight com campos adicionais definindo `extend` nas opções do `docsSchema()`.
+O valor deve ser um [esquema do Zod](https://docs.astro.build/pt-br/guides/content-collections/#definindo-tipos-de-dados-com-zod).
+
+No exemplo a seguir, nós definimos um tipo mais restrito para a descrição (`description`) para torná-la obrigatória e adicionamos um novo campo opcional `categoria`:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // Torna um campo nativo obrigatório ao invés de opcional.
+        description: z.string(),
+        // Adiciona um novo campo ao esquema.
+        categoria: z.enum(['tutorial', 'guia', 'referência']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+Para fazer uso do [utilitário `image()` do Astro](https://docs.astro.build/pt-br/guides/images/#imagens-em-cole%C3%A7%C3%B5es-de-conte%C3%BAdo), use uma função para retornar sua extensão de esquema:
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // Adiciona um campo que deve resolver para uma imagem local.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```

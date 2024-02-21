@@ -21,7 +21,7 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
 
 2. `astro.config.mjs`で、Starlightの`customCss`配列にCSSファイルへのパスを追加します。
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -31,8 +31,8 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
    		starlight({
    			title: 'カスタムCSSを設定したドキュメント',
    			customCss: [
-   				// カスタムCSSファイルへの相対パス
-   				'./src/styles/custom.css',
+   +				// カスタムCSSファイルへの相対パス
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
@@ -130,7 +130,7 @@ yarn create astro --template starlight/tailwind
     <TabItem label="pnpm">
 
     ```sh
-    pnpm install @astrojs/starlight-tailwind
+    pnpm add @astrojs/starlight-tailwind
     ```
 
     </TabItem>
@@ -179,14 +179,14 @@ yarn create astro --template starlight/tailwind
     });
     ```
 
-5.  StarlightのTailwindプラグインを`tailwind.config.cjs`に追加します。
+5.  StarlightのTailwindプラグインを`tailwind.config.mjs`に追加します。
 
     ```js ins={2,7}
-    // tailwind.config.cjs
-    const starlightPlugin = require('@astrojs/starlight-tailwind');
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
     /** @type {import('tailwindcss').Config} */
-    module.exports = {
+    export default {
     	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     	plugins: [starlightPlugin()],
     };
@@ -204,12 +204,12 @@ Starlightは、[Tailwindのテーマ](https://tailwindcss.com/docs/theme)の設�
 - `fontFamily.mono` — コード例に使用されます
 
 ```js {12,14,18,20}
-// tailwind.config.cjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
@@ -241,7 +241,7 @@ Starlightのカラーテーマは、デフォルトのカスタムプロパテ�
 
 変更内容に満足できたら、以下のCSSまたはTailwindコードをコピーしてプロジェクトで使用します。
 
-import ThemeDesigner from '../../../../components/theme-designer.astro';
+import ThemeDesigner from '~/components/theme-designer.astro';
 
 <ThemeDesigner
 	labels={{

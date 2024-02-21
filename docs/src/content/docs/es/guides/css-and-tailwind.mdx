@@ -22,7 +22,7 @@ Personaliza los estilos aplicados a tu sitio Starlight proporcionando archivos C
 
 2. Agrega la ruta de tu archivo CSS al array `customCss` de Starlight en `astro.config.mjs`:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,8 +32,8 @@ Personaliza los estilos aplicados a tu sitio Starlight proporcionando archivos C
    		starlight({
    			title: 'Docs With Custom CSS',
    			customCss: [
-   				// Ruta relativa a tu archivo CSS personalizado
-   				'./src/styles/custom.css',
+   +                // Ruta relativa a tu archivo CSS personalizado
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
@@ -132,7 +132,7 @@ Si ya tienes un sitio en Starlight y quieres agregar Tailwind CSS, sigue estos p
     <TabItem label="pnpm">
 
     ```sh
-    pnpm install @astrojs/starlight-tailwind
+    pnpm add @astrojs/starlight-tailwind
     ```
 
     </TabItem>
@@ -245,7 +245,7 @@ Las áreas de vista previa oscura y clara mostrarán los colores resultantes, y 
 
 Cuando estés satisfecho con tus cambios, copia el código CSS o Tailwind a continuación y úsalo en tu proyecto.
 
-import ThemeDesigner from '../../../../components/theme-designer.astro';
+import ThemeDesigner from '~/components/theme-designer.astro';
 
 <ThemeDesigner
 	labels={{

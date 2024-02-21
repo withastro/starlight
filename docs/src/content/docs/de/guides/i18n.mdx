@@ -3,7 +3,7 @@ title: Internationalisierung (i18n)
 description: Lerne, wie du deine Starlight-Website so konfigurierst, dass sie mehrere Sprachen unterstützt.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschließlich Routing, Fallback-Inhalte und vollständige Unterstützung von rechts-nach-links (RTL) Sprachen.
 
@@ -143,7 +143,7 @@ Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight d
 
 Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.B. die Überschrift "Auf dieser Seite" im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
 
-Englisch, Tschechisch, Französisch, Deutsch, Italienisch, Japanisch, Portugiesisch, Niederländisch, Dänisch, Spanisch, Türkisch, Arabisch, Norwegisch, Farsi, Hebräisch, Chinesisch (vereinfacht), Koreanisch, Indonesisch, Russisch, Schwedisch, Ukrainisch und Vietnamesisch werden standardmäßig übersetzt, und wir freuen uns über [Beiträge zur Aufnahme weiterer Standardsprachen](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Englisch, Tschechisch, Französisch, Deutsch, Italienisch, Japanisch, Portugiesisch, Niederländisch, Dänisch, Spanisch, Türkisch, Arabisch, Norwegisch, Farsi, Hebräisch, Chinesisch (vereinfacht), Koreanisch, Indonesisch, Russisch, Schwedisch, Ukrainisch, Vietnamesisch und Galizisch werden standardmäßig übersetzt, und wir freuen uns über [Beiträge zur Aufnahme weiterer Standardsprachen](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über die `i18n` Datensammlung zur Verfügung stellen - oder unsere Standardbezeichnungen überschreiben.
 
@@ -196,9 +196,13 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 

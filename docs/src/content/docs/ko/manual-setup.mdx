@@ -43,7 +43,7 @@ Starlight 통합은 `astro.config.mjs` 파일에서 구성됩니다.
 
 시작하려면 `title`을 추가하세요.
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -104,7 +104,7 @@ Starlight는 파일 기반 라우팅을 사용합니다. 즉, `src/content/docs/
 
 예를 들어, Starlight의 모든 페이지가 `/guides/`에서 시작해야 하는 경우 `src/content/docs/guides/` 디렉터리에 콘텐츠를 추가하세요.
 
-import FileTree from '../../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
@@ -123,4 +123,6 @@ import FileTree from '../../../components/file-tree.astro';
 
 ### SSR과 함께 Starlight 사용
 
-현재 Starlight는 Astro의 서버 어댑터를 사용한 [SSR 배포](https://docs.astro.build/ko/guides/server-side-rendering/)를 지원하지 않습니다. 우리는 곧 이것을 지원할 것입니다.
+Astro 문서의 [“주문형 렌더링 어댑터”](https://docs.astro.build/ko/guides/server-side-rendering/) 안내서에 따라 프로젝트에서 사용자 정의 주문형 렌더링 페이지와 함께 Starlight를 사용할 수 있습니다.
+
+현재 Starlight에서 생성된 문서 페이지는 프로젝트의 출력 모드에 관계없이 항상 사전 렌더링됩니다. 곧 Starlight 페이지에 대한 주문형 렌더링을 지원할 수 있기를 바랍니다.

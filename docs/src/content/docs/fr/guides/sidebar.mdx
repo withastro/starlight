@@ -3,8 +3,8 @@ title: Barre latérale de navigation
 description: Apprendre à configurer et personnaliser les liens de la barre latérale de navigation de votre site Starlight.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import FileTree from '~/components/file-tree.astro';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 Une barre latérale bien organisée est une des clés d'une bonne documentation, car c'est l'une des principales méthodes de navigation qui sera utilisée par les utilisateurs de votre site. Starlight fournit un ensemble complet d'options pour personnaliser la structure et le contenu de votre barre latérale.
 
@@ -62,7 +62,7 @@ En combinant les liens et les groupes, vous pouvez créer une grande variété d
 
 Ajoutez un lien vers une page interne ou externe en utilisant un objet avec les propriétés `label` et `link`.
 
-```js
+```js "label:" "link:"
 starlight({
 	sidebar: [
 		// Un lien vers le guide CSS et mise en forme.
@@ -91,7 +91,7 @@ Ajoutez un groupe en utilisant un objet avec les propriétés `label` et `items`
 Le `label` sera utilisé comme en-tête pour le groupe.
 Ajoutez des liens ou des sous-groupes au tableau `items`.
 
-```js
+```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
 		// Un groupe de liens avec le label "Guides".
@@ -141,11 +141,12 @@ La configuration ci-dessus génère la barre latérale suivante :
 
 Starlight peut générer automatiquement un groupe dans votre barre latérale en fonction d'un répertoire de votre documentation.
 Cela est utile lorsque vous ne souhaitez pas entrer manuellement chaque élément de la barre latérale dans un groupe.
-Les pages seront triées par ordre alphabétique en fonction du nom de fichier par défaut.
+
+Par défaut, les pages sont triées par ordre alphabétique selon le [`slug`](/fr/reference/overrides/#slug) du fichier.
 
 Ajoutez un groupe généré automatiquement en utilisant un objet avec les propriétés `label` et `autogenerate`. La configuration de `autogenerate` doit spécifier le répertoire à utiliser pour les entrées de la barre latérale avec la propriété `directory`. Par exemple, avec la configuration suivante :
 
-```js
+```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
@@ -201,14 +202,15 @@ Utilisez le [champ `sidebar` du frontmatter](/fr/reference/frontmatter/#sidebar)
 
 Les options du frontmatter pour la barre latérale vous permettent de définir une [étiquette personnalisée](/fr/reference/frontmatter/#label) ou d'ajouter un [badge](/fr/reference/frontmatter/#badge) à un lien, de [masquer](/fr/reference/frontmatter/#hidden) un lien de la barre latérale, ou de définir une [pondération de tri personnalisée](/fr/reference/frontmatter/#order).
 
-```md
+```md "sidebar:"
 ---
+# src/content/docs/exemple.md
 title: Ma page
 sidebar:
   # Définit une étiquette personnalisée pour le lien dans la barre latérale
   label: Étiquette personnalisée
-  # Définit un ordre personnalisé pour le lien (les nombres plus petits
-  # sont affichés plus haut)
+  # Définit un ordre personnalisé pour le lien
+  # (les nombres plus petits sont affichés plus haut)
   order: 2
   # Ajoute un badge au lien
   badge:
@@ -244,7 +246,7 @@ La configuration du frontmatter `sidebar` n'est utilisée que pour les liens gé
 
 Les liens, groupes et groupes générés automatiquement peuvent inclure une propriété `badge` pour afficher un badge à côté de leurs étiquettes.
 
-```js
+```js {10,17}
 starlight({
 	sidebar: [
 		{
@@ -310,7 +312,7 @@ Personnalisez le style du badge en utilisant un objet avec les propriétés `tex
 La propriété `text` représente le contenu à afficher (par exemple, "Nouveau").
 Remplacez le style `default`, qui utilise la couleur d'accentuation de votre site, en définissant la propriété `variant` avec l'une des valeurs suivantes : `note`, `tip`, `danger`, `caution` ou `success`.
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -351,7 +353,7 @@ Les liens peuvent aussi inclure une propriété `attrs` pour ajouter des attribu
 
 Dans l'exemple suivant, `attrs` est utilisé pour ajouter un attribut `target="_blank"`, afin que le lien s'ouvre dans un nouvel onglet, et pour appliquer un attribut `style` personnalisé pour mettre en italique l'étiquette du lien :
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -394,7 +396,7 @@ La configuration ci-dessus génère la barre latérale suivante :
 Utilisez la propriété `translations` sur les liens et les groupes pour traduire l'étiquette du lien ou du groupe pour chaque langue prise en charge en spécifiant une étiquette d'identification de langue [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), par exemple `"en"`, `"ar"` ou `"zh-CN"`, comme clé et l'étiquette traduite comme valeur.
 La propriété `label` sera utilisée pour la langue par défaut et pour les langues sans traduction.
 
-```js
+```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
@@ -441,7 +443,7 @@ Parcourir la documentation en portugais brésilien générera la barre latérale
 
 Les groupes de liens peuvent être rétractés par défaut en définissant la propriété `collapsed` à `true`.
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -474,7 +476,7 @@ La configuration ci-dessus génère la barre latérale suivante :
 
 Les [groupes générés automatiquement](#groupes-générés-automatiquement) respectent la valeur `collapsed` de leur groupe parent :
 
-```js
+```js {5-7}
 starlight({
 	sidebar: [
 		{
@@ -515,7 +517,7 @@ La configuration ci-dessus génère la barre latérale suivante :
 
 Ce comportement peut être remplacé en définissant la propriété `autogenerate.collapsed`.
 
-```js
+```js {5-7} "collapsed: true"
 starlight({
 	sidebar: [
 		{

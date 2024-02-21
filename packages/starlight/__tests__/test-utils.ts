@@ -17,6 +17,7 @@ const frontmatterSchema = docsSchema()({
 				z.literal('webp'),
 				z.literal('gif'),
 				z.literal('svg'),
+				z.literal('avif'),
 			]),
 		}),
 });
@@ -53,5 +54,16 @@ export async function mockedAstroContent({
 	return {
 		...mod,
 		getCollection: (collection: 'docs' | 'i18n') => (collection === 'i18n' ? mockDicts : mockDocs),
+	};
+}
+
+export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof docsSchema>[0]) {
+	const content = await vi.importActual<typeof import('astro:content')>('astro:content');
+	const schemas = await vi.importActual<typeof import('../schema')>('../schema');
+	return {
+		collections: {
+			docs: content.defineCollection({ schema: schemas.docsSchema(docsUserSchema) }),
+			i18n: content.defineCollection({ type: 'data', schema: schemas.i18nSchema() }),
+		},
 	};
 }

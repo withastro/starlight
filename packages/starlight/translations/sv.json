@@ -18,5 +18,9 @@
   "page.lastUpdated": "Senast uppdaterad:",
   "page.previousLink": "Föregående",
   "page.nextLink": "Nästa",
-  "404.text": "Sidan hittades inte. Kontrollera URL:n eller testa att använda sökfältet."
+  "404.text": "Sidan hittades inte. Kontrollera URL:n eller testa att använda sökfältet.",
+  "aside.note": "Note",
+  "aside.tip": "Tip",
+  "aside.caution": "Caution",
+  "aside.danger": "Danger"
 }
