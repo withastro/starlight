@@ -4,11 +4,10 @@ import { type Badge, badgeVariants } from '../schemas/badge';
 
 interface Props {
 	variant?: Badge['variant'];
-	text?: string;
 	class?: string;
 }
 
-const { variant = 'default', text, class: className } = Astro.props;
+const { variant = 'default', class: className } = Astro.props;
 
 if (!badgeVariants.includes(variant)) {
 	throw new AstroError(
@@ -19,7 +18,7 @@ if (!badgeVariants.includes(variant)) {
 }
 ---
 
-<span class:list={['sl-badge', variant, className]} set:html={text} />
+<span class:list={['sl-badge', variant, className]}><slot /></span>
 
 <style>
 	:global(:root) {

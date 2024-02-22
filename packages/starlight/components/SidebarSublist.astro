@@ -26,10 +26,7 @@ const { sublist, nested } = Astro.props;
 						{entry.badge && (
 							<>
 								{' '}
-								<Badge
-									text={entry.badge.text}
-									variant={entry.badge.variant}
-								/>
+								<Badge variant={entry.badge.variant}>{entry.badge.text}</Badge>
 							</>
 						)}
 					</a>
@@ -43,7 +40,7 @@ const { sublist, nested } = Astro.props;
 								{entry.badge && (
 									<>
 										{' '}
-										<Badge text={entry.badge.text} variant={entry.badge.variant} />
+										<Badge variant={entry.badge.variant}>{entry.badge.text}</Badge>
 									</>
 								)}
 							</div>
