@@ -83,42 +83,9 @@ Abre esta URL para comenzar a navegar por tu sitio.
 
 Starlight está listo para que añadas nuevo contenido o ¡traigas tus archivos existentes!.
 
-#### Formatos de archivo
+Agrega nuevas páginas a tu sitio web creando archivos Markdown en el directorio `src/content/docs/`.
 
-Starlight admite la creación de contenido en Markdown y MDX sin necesidad de configuración. Puedes agregar compatibilidad con Markdoc instalando la [integración experimental de Astro Markdoc](https://docs.astro.build/es/guides/integrations-guide/markdoc/).
-
-#### Añade páginas
-
-Añade nuevas páginas a tu sitio creando archivos `.md` o `.mdx` en `src/content/docs/`.
-Utiliza subcarpetas para organizar tus archivos y crear múltiples segmentos de ruta.
-
-Por ejemplo, la siguiente estructura de archivos generará páginas en `example.com/hello-world` y `example.com/guides/faq`:
-
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - hello-world.md
-
-</FileTree>
-
-#### Frontmatter con seguridad de tipos
-
-Todas las páginas de Starlight comparten un [conjunto común personalizable de propiedades frontmatter](/es/reference/frontmatter/) para controlar cómo se muestra la página:
-
-```md
----
-title: ¡Hola, Mundo!
-description: Esta es una página en mi sitio impulsado por Starlight
----
-```
-
-Si olvidas algo importante, Starlight te lo hará saber.
+Lee más sobre el enrutamiento basado en archivos y el soporte para archivos MDX y Markdoc en la [Guía de Páginas](/es/guides/pages/)
 
 ### Siguientes pasos
 
