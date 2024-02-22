@@ -3,46 +3,48 @@ import { AstroError } from 'astro/errors';
 import { type Badge, badgeVariants } from '../schemas/badge';
 
 interface Props {
-	variant?: Badge['variant']
+	variant?: Badge['variant'];
 	text?: string;
+	class?: string;
 }
 
-const { variant = 'default', text } = Astro.props;
+const { variant = 'default', text, class: className } = Astro.props;
 
 if (!badgeVariants.includes(variant)) {
-	throw new AstroError('Invalid `variant` prop passed to the `<Badge>` component.\n',
+	throw new AstroError(
+		'Invalid `variant` prop passed to the `<Badge>` component.\n',
 		`Received: ${JSON.stringify(variant)}\n` +
 			`Expected one of ${badgeVariants.map((i) => JSON.stringify(i)).join(', ')}`
 	);
 }
 ---
 
-<span class:list={['sl-badge', variant]} set:html={text} />
+<span class:list={['sl-badge', variant, className]} set:html={text} />
 
 <style>
 	:global(:root) {
 		--sl-badge-default-border: var(--sl-color-accent);
-		--sl-badge-default-bg:  var(--sl-color-accent-low);
+		--sl-badge-default-bg: var(--sl-color-accent-low);
 		--sl-badge-default-text: unset;
 
 		--sl-badge-note-border: var(--sl-color-blue);
-		--sl-badge-note-bg:  var(--sl-color-blue-low);
+		--sl-badge-note-bg: var(--sl-color-blue-low);
 		--sl-badge-note-text: unset;
 
 		--sl-badge-danger-border: var(--sl-color-red);
-		--sl-badge-danger-bg:  var(--sl-color-red-low);
+		--sl-badge-danger-bg: var(--sl-color-red-low);
 		--sl-badge-danger-text: unset;
 
 		--sl-badge-success-border: var(--sl-color-green);
-		--sl-badge-success-bg:  var(--sl-color-green-low);
+		--sl-badge-success-bg: var(--sl-color-green-low);
 		--sl-badge-success-text: unset;
 
 		--sl-badge-caution-border: var(--sl-color-orange);
-		--sl-badge-caution-bg:  var(--sl-color-orange-low);
+		--sl-badge-caution-bg: var(--sl-color-orange-low);
 		--sl-badge-caution-text: unset;
 
 		--sl-badge-tip-border: var(--sl-color-purple);
-		--sl-badge-tip-bg:  var(--sl-color-purple-low);
+		--sl-badge-tip-bg: var(--sl-color-purple-low);
 		--sl-badge-tip-text: unset;
 	}
 
@@ -83,7 +85,7 @@ if (!badgeVariants.includes(variant)) {
 		background-color: var(--sl-color-bg-badge);
 		overflow-wrap: anywhere;
 	}
-	
+
 	/* Sidebar overrides */
 	:global(#starlight__sidebar) .sl-badge {
 		line-height: 1;
@@ -96,7 +98,7 @@ if (!badgeVariants.includes(variant)) {
 	}
 
 	/* outline variant */
-	:global(a[aria-current="page"]) > .sl-badge {
+	:global(a[aria-current='page']) > .sl-badge {
 		--sl-color-bg-badge: transparent;
 		--sl-color-border-badge: currentColor;
 		color: inherit;
