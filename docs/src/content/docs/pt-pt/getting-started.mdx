@@ -91,35 +91,10 @@ Pode também adicionar suporte para Markdoc instalando a [integração experimen
 #### Adicione páginas
 
 Adicione novas páginas ao seu site criando arquivos `.md` ou `.mdx` em `src/content/docs/`.
-Utilize subdiretórios para organizar seus arquivos, e para criar múltiplos segmentos de caminho.
 
-Por exemplo, a seguinte estrutura de arquivos vai gerar páginas `example.com/ola-mundo` e `example.com/guides/faq`:
+Adicione páginas ao seu site criando ficheiros _Markdown_ no directório `src/content/docs/`.
 
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - ola-mundo.md
-
-</FileTree>
-
-#### Frontmatter com segurança de tipos
-
-Todas as páginas do Starlight partilham um [conjunto comum de propriedades frontmatter](/pt-pt/reference/frontmatter/) para controlar como a página aparece:
-
-```md
----
-title: Olá, Mundo!
-description: Esta é uma página no meu site com Starlight
----
-```
-
-Se você se esquecer de algum atributo importante, o Starlight irá informá-lo.
+Saiba mais acerca de _routing_ baseado em ficheiros e suporte para ficheiros MDX e Markdoc no guia [“Páginas”](/pt-pt/guides/pages/).
 
 ### Próximos passos
 
