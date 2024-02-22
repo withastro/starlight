@@ -78,7 +78,7 @@ starlight({
 });
 ```
 
-この設定により、`/introduction`ページには`https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`を指す編集リンクが表示されます。
+この設定により、`/introduction`ページには`https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`を指す編集リンクが表示されます。
 
 ### `sidebar`
 
@@ -499,6 +499,13 @@ starlight({
 ブラウザのタブに表示される、ページの`<title>`タグ内のページタイトルとサイトタイトルの間の区切り文字を設定します。
 
 デフォルトでは、すべてのページの`<title>`は`ページタイトル | サイトタイトル`となります。たとえば、このページのタイトルは「設定方法」であり、このサイトのタイトルは「Starlight」なので、このページの`<title>`は「設定方法 | Starlight」となります。
+
+### `disable404Route`
+
+**type:** `boolean`  
+**default:** `false`
+
+Starlightのデフォルトの[404ページ](https://docs.astro.build/ja/core-concepts/astro-pages/#カスタム404エラーページ)を無効にします。プロジェクトでカスタムの`src/pages/404.astro`ルートを使用するには、このオプションを`true`に設定します。
 
 ### `components`
 

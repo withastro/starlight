@@ -1,5 +1,61 @@
 # @astrojs/starlight
 
+## 0.19.1
+
+### Patch Changes
+
+- [#1527](https://github.com/withastro/starlight/pull/1527) [`163bc84`](https://github.com/withastro/starlight/commit/163bc848e173eecca92d1cb034045fdb42aa4ff1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightPageProps` TypeScript type representing the props expected by the `<StarlightPage />` component.
+
+- [#1504](https://github.com/withastro/starlight/pull/1504) [`fc83a05`](https://github.com/withastro/starlight/commit/fc83a05235b74be2bfe6ba8e7f95a8a5a618ead3) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Adds Traditional Chinese UI translations
+
+- [#1534](https://github.com/withastro/starlight/pull/1534) [`aada680`](https://github.com/withastro/starlight/commit/aada6805abc0068f07393585b86978ef5200439c) Thanks [@delucis](https://github.com/delucis)! - Improves DX of the `sidebar` prop used by the new `<StarlightPage>` component.
+
+## 0.19.0
+
+### Minor Changes
+
+- [#1485](https://github.com/withastro/starlight/pull/1485) [`2cb3578`](https://github.com/withastro/starlight/commit/2cb35782dace67c7c418a31005419fa95493b3d3) Thanks [@timokoessler](https://github.com/timokoessler)! - Add support for setting html attributes of hero action links
+
+- [#1175](https://github.com/withastro/starlight/pull/1175) [`dd11b95`](https://github.com/withastro/starlight/commit/dd11b9538abdf4b5ba2ef70e07c0edda03e95add) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `<StarlightPage>` component to use the Starlight layout in custom pages.
+
+  To learn more about this new feature, check out the new [“Using Starlight’s design in custom pages” guide](https://starlight.astro.build/guides/pages/#using-starlights-design-in-custom-pages).
+
+- [#1499](https://github.com/withastro/starlight/pull/1499) [`97bf523`](https://github.com/withastro/starlight/commit/97bf523923fb9678c12f58fcdbe36757f0e56ceb) Thanks [@delucis](https://github.com/delucis)! - Adds a new `<Aside>` component
+
+  The new component is in addition to the existing custom Markdown syntax.
+
+## 0.18.1
+
+### Patch Changes
+
+- [#1487](https://github.com/withastro/starlight/pull/1487) [`6a72bda`](https://github.com/withastro/starlight/commit/6a72bda8c5569e2eda68fdf258ae9b1dc8b320d6) Thanks [@NavyStack](https://github.com/NavyStack)! - Improves Korean UI translations
+
+- [#1489](https://github.com/withastro/starlight/pull/1489) [`b0d36de`](https://github.com/withastro/starlight/commit/b0d36de3398d4895603a787b612b1f0747defbdc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential text rendering issue with text containing colons.
+
+## 0.18.0
+
+### Minor Changes
+
+- [#1454](https://github.com/withastro/starlight/pull/1454) [`1d9ef56`](https://github.com/withastro/starlight/commit/1d9ef567907bed7210e75ab3460f536c0768a87f) Thanks [@Fryuni](https://github.com/Fryuni)! - Makes Starlight compatible with [on-demand server rendering](https://docs.astro.build/en/guides/server-side-rendering/) (sometimes referred to as server-side rendering or SSR).
+
+  Starlight pages are always prerendered, even when using `output: 'server'`.
+
+- [#1454](https://github.com/withastro/starlight/pull/1454) [`1d9ef56`](https://github.com/withastro/starlight/commit/1d9ef567907bed7210e75ab3460f536c0768a87f) Thanks [@Fryuni](https://github.com/Fryuni)! - Enables Astro’s [`experimental.globalRoutePriority`](https://docs.astro.build/en/reference/configuration-reference/#experimentalglobalroutepriority) option and bumps the minimum required Astro version.
+
+  ⚠️ **BREAKING CHANGE** The minimum supported Astro version is now 4.2.7. Upgrade Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.17.4
+
+### Patch Changes
+
+- [#1473](https://github.com/withastro/starlight/pull/1473) [`29da505`](https://github.com/withastro/starlight/commit/29da505474174fefaec4e27a2c2c3e90e3f68a31) Thanks [@delucis](https://github.com/delucis)! - Fixes a CSS bug for users with JavaScript disabled
+
+- [#1465](https://github.com/withastro/starlight/pull/1465) [`ce3108c`](https://github.com/withastro/starlight/commit/ce3108cf6ecb77d12db973485d21e0fc7fd63ca6) Thanks [@delucis](https://github.com/delucis)! - Updates internal MDX, sitemap, and Expressive Code dependencies to the latest versions
+
 ## 0.17.3
 
 ### Patch Changes
