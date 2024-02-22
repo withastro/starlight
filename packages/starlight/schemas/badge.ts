@@ -6,6 +6,7 @@ const badgeSchema = () =>
 	z.object({
 		variant: z.enum(badgeVariants).default('default'),
 		text: z.string(),
+		class: z.string().optional(),
 	});
 
 export const BadgeConfigSchema = () =>

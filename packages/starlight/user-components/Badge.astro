@@ -4,7 +4,7 @@ import { type Badge, badgeVariants } from '../schemas/badge';
 
 interface Props {
 	variant?: Badge['variant'];
-	class?: string;
+	class: string | undefined;
 }
 
 const { variant = 'default', class: className } = Astro.props;
