@@ -3,6 +3,7 @@
  * source: https://github.com/withastro/astro/blob/main/packages/astro/src/content/error-map.ts
  */
 
+import { AstroError } from 'astro/errors';
 import type { z } from 'astro:content';
 
 type TypeOrLiteralErrByPathEntry = {
@@ -26,7 +27,7 @@ export function parseWithFriendlyErrors<T extends z.Schema>(
 ): z.output<T> {
 	const parsedConfig = schema.safeParse(input, { errorMap });
 	if (!parsedConfig.success) {
-		throw new Error(message + '\n' + parsedConfig.error.issues.map((i) => i.message).join('\n'));
+		throw new AstroError(message, parsedConfig.error.issues.map((i) => i.message).join('\n'));
 	}
 	return parsedConfig.data;
 }
