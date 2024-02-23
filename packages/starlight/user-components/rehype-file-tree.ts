@@ -203,13 +203,13 @@ function validateFileTree(tree: Element) {
 
 	if (rootElements.length === 0) {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be a unique unordered list but found no elements.`
+			`The <FileTree> component expects its content to be a single unordered list but found no child elements.`
 		);
 	}
 
 	if (rootElements.length !== 1) {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be a unique unordered list but found the following elements: ${rootElements
+			`The <FileTree> component expects its content to be a single unordered list but found multiple child elements: ${rootElements
 				.map((element) => `<${element.tagName}>`)
 				.join(' - ')}.`
 		);
@@ -217,7 +217,7 @@ function validateFileTree(tree: Element) {
 
 	if (!rootElement || rootElement.tagName !== 'ul') {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be a unordered list but found the following element: <${rootElement?.tagName}>.`
+			`The <FileTree> component expects its content to be an unordered list but found the following element: <${rootElement?.tagName}>.`
 		);
 	}
 
@@ -225,7 +225,7 @@ function validateFileTree(tree: Element) {
 
 	if (!listItemElement) {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be a unordered list with at least one list item.`
+			`The <FileTree> component expects its content to be an unordered list with at least one list item.`
 		);
 	}
 }
