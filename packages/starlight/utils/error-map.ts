@@ -92,7 +92,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 			}
 			if (expectedShapes.length) {
 				details.push('> Expected type `' + expectedShapes.join(' | ') + '`');
-				details.push('> Received ' + JSON.stringify(ctx.data));
+				details.push('> Received `' + stringify(ctx.data) + '`');
 			}
 		}
 
@@ -122,19 +122,22 @@ const getTypeOrLiteralMsg = (error: TypeOrLiteralErrByPathEntry): string => {
 	const expectedDeduped = new Set(error.expected);
 	switch (error.code) {
 		case 'invalid_type':
-			return `Expected type \`${unionExpectedVals(expectedDeduped)}\`, received ${JSON.stringify(
+			return `Expected type \`${unionExpectedVals(expectedDeduped)}\`, received \`${stringify(
 				error.received
-			)}`;
+			)}\``;
 		case 'invalid_literal':
-			return `Expected \`${unionExpectedVals(expectedDeduped)}\`, received ${JSON.stringify(
+			return `Expected \`${unionExpectedVals(expectedDeduped)}\`, received \`${stringify(
 				error.received
-			)}`;
+			)}\``;
 	}
 };
 
 const prefix = (key: string, msg: string) => (key.length ? `**${key}**: ${msg}` : msg);
 
 const unionExpectedVals = (expectedVals: Set<unknown>) =>
-	[...expectedVals].map((expectedVal) => JSON.stringify(expectedVal)).join(' | ');
+	[...expectedVals].map((expectedVal) => stringify(expectedVal)).join(' | ');
 
 const flattenErrorPath = (errorPath: (string | number)[]) => errorPath.join('.');
+
+/** `JSON.stringify()` a value with spaces around object/array entries. */
+const stringify = (val: unknown) => JSON.stringify(val, null, 1).split(/\n\s*/).join(' ');

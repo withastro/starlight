@@ -230,7 +230,7 @@ test('throws error if sidebar is malformated', async () => {
 		Hint:
 			**0**: Did not match union.
 			> Expected type \`{ href: string } | { entries: array }\`
-			> Received {"label":"Custom link 1","href":5}"
+			> Received \`{ "label": "Custom link 1", "href": 5 }\`"
 	`);
 });
 
@@ -256,7 +256,7 @@ test('throws error if sidebar uses wrong literal for entry type', async () => {
 			Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
 		Hint:
 			**0**: Did not match union.
-			> **0.type**: Expected \`"link" | "group"\`, received "typo""
+			> **0.type**: Expected \`"link" | "group"\`, received \`"typo"\`"
 	`);
 });
 

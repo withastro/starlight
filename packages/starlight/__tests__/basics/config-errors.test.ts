@@ -93,7 +93,7 @@ test('errors if title value is not a string', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Expected type \`"string"\`, received "number""
+			**title**: Expected type \`"string"\`, received \`"number"\`"
 	`
 	);
 });
@@ -122,7 +122,7 @@ test('errors with bad logo config', () => {
 		Hint:
 			**logo**: Did not match union.
 			> Expected type \`{ src: string } | { dark: string; light: string }\`
-			> Received {"html":""}"
+			> Received \`{ "html": "" }\`"
 	`
 	);
 });
@@ -140,8 +140,8 @@ test('errors with bad head config', () => {
 		Hint:
 			**head.0.tag**: Invalid enum value. Expected 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template', received 'unknown'
 			**head.0.attrs.prop**: Did not match union.
-			> Expected type \`"string" | "boolean" | "undefined"\`, received "null"
-			**head.0.content**: Expected type \`"string"\`, received "number""
+			> Expected type \`"string" | "boolean" | "undefined"\`, received \`"null"\`
+			**head.0.content**: Expected type \`"string"\`, received \`"number"\`"
 	`
 	);
 });
@@ -159,7 +159,7 @@ test('errors with bad sidebar config', () => {
 		Hint:
 			**sidebar.0**: Did not match union.
 			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
-			> Received {"label":"Example","href":"/"}"
+			> Received \`{ "label": "Example", "href": "/" }\`"
 	`
 	);
 });
@@ -184,6 +184,6 @@ test('errors with bad nested sidebar config', () => {
 		Hint:
 			**sidebar.0.items.1**: Did not match union.
 			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
-			> Received {"label":"Example","items":[{"label":"Nested Example 1","link":"/"},{"label":"Nested Example 2","link":true}]}"
+			> Received \`{ "label": "Example", "items": [ { "label": "Nested Example 1", "link": "/" }, { "label": "Nested Example 2", "link": true } ] }\`"
 	`);
 });
