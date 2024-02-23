@@ -234,6 +234,32 @@ test('throws error if sidebar is malformated', async () => {
 	`);
 });
 
+test('throws error if sidebar uses wrong literal for entry type', async () => {
+	// This test also makes sure we show a helpful error for incorrect literals.
+	expect(() =>
+		generateStarlightPageRouteData({
+			props: {
+				...starlightPageProps,
+				sidebar: [
+					{
+						//@ts-expect-error Intentionally bad type to cause error.
+						type: 'typo',
+						label: 'Custom link 1',
+						href: '/',
+					},
+				],
+			},
+			url: starlightPageUrl,
+		})
+	).rejects.toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
+		Hint:
+			**0**: Did not match union.
+			> **0.type**: Expected \`"link" | "group"\`, received "typo""
+	`);
+});
+
 test('uses provided pagination if any', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: {

@@ -163,3 +163,27 @@ test('errors with bad sidebar config', () => {
 	`
 	);
 });
+
+test('errors with bad nested sidebar config', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{
+					label: 'Example',
+					items: [
+						{ label: 'Nested Example 1', link: '/' },
+						{ label: 'Nested Example 2', link: true },
+					],
+				} as any,
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0.items.1**: Did not match union.
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Received {"label":"Example","items":[{"label":"Nested Example 1","link":"/"},{"label":"Nested Example 2","link":true}]}"
+	`);
+});
