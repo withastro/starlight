@@ -83,43 +83,9 @@ yarn dev
 
 Starlight आपके लिए नई सामग्री जोड़ने, या अपनी मौजूदा फ़ाइलें लाने के लिए तैयार है!
 
-#### फ़ाइल स्वरूप
+`src/content/docs/` निर्देशिका में Markdown फ़ाइलें बनाकर अपनी साइट पर नए पेज जोड़ें।
 
-Starlight बिना किसी कॉन्फ़िगरेशन की आवश्यकता के Markdown और MDX में सामग्री लिखने का समर्थन करता है।
-आप प्रायोगिक [Astro Markdoc एकीकरण](https://docs.astro.build/hi/guides/integrations-guide/markdoc/) स्थापित करके Markdoc के लिए समर्थन जोड़ सकते हैं।
-
-#### पेज जोड़ें
-
-`src/content/docs/` में `.md` या `.mdx` फ़ाइलें बनाकर अपनी साइट पर नए पेज जोड़ें।
-अपनी फ़ाइलों को व्यवस्थित करने और एकाधिक पथ खंड बनाने के लिए उप-फ़ोल्डर्स का उपयोग करें।
-
-उदाहरण के लिए, निम्नलिखित फ़ाइल संरचना `example.com/hello-world` और `example.com/guides/faq` पर पेज बनाएगी:
-
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - hello-world.md
-
-</FileTree>
-
-#### टाइप-सुरक्षित फ्रंटमैटर
-
-सभी Starlight पेज [फ्रंटमैटर गुणों का एक अनुकूलन योग्य सामान्य सेट](/hi/reference/frontmatter/) साझा करते हैं पेज के प्रकट होने के तरीके को नियंत्रित करने के लिए:
-
-```md
----
-title: नमस्ते, दुनिया !
-description: यह मेरी Starlight-संचालित साइट का एक पेज है
----
-```
-
-यदि आप कुछ भी महत्वपूर्ण भूल जाते हैं, तो Starlight आपको बता देगा।
+["पेज"](/hi/guides/pages/) गाइड में MDX और Markdoc फाइलों के लिए फ़ाइल-आधारित रूटिंग और समर्थन के बारे में और पढ़ें।
 
 ### अगले कदम
 

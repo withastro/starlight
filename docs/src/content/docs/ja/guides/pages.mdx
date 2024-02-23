@@ -96,15 +96,35 @@ import CustomComponent from './CustomComponent.astro';
 
 - [`slug`](/ja/reference/frontmatter/#slug)プロパティはサポートされておらず、カスタムページのURLに基づいて自動的に設定されます。
 - [`editUrl`](/ja/reference/frontmatter/#editurl)オプションは、編集リンクを表示するためのURLが必要です。
-- [`sidebar`](/ja/reference/frontmatter/#sidebar)プロパティはサポートされていません。Markdownのフロントマターでは、このオプションは[自動生成されるリンクグループ](/ja/reference/configuration/#sidebar)のカスタマイズを可能にしますが、`<StarlightPage />`コンポーネントを使用するページには適用されません。
+- [自動生成されるリンクグループ](/ja/reference/configuration/#sidebar)にページを表示する方法をカスタマイズするための[`sidebar`](/ja/reference/frontmatter/#sidebar)フロントマタープロパティは利用できません。`<StarlightPage />`コンポーネントを使用するページはコレクションの一部ではなく、自動生成されるサイドバーグループには追加できません。
 
-{/* ##### `sidebar` */}
+##### `sidebar`
 
-{/* **type:** `SidebarEntry[] | undefined` */}
-{/* **default:** the sidebar generated based on the [global `sidebar` config](/reference/configuration/#sidebar) */}
+**type:** `SidebarEntry[]`  
+**default:** [グローバルな`sidebar`設定値](/ja/reference/configuration/#sidebar)に基づき生成されるサイドバー
 
-{/* Provide a custom site navigation sidebar for this page. */}
-{/* If not set, the page will use the default global sidebar. */}
+ページにカスタムのサイトナビゲーションサイドバーを設定します。未設定の場合、ページはデフォルトのグローバルサイドバーを使用します。
+
+たとえば以下のページは、ホームページへのリンクと星座へのリンクグループによりデフォルトのサイドバーをオーバーライドします。サイドバーの現在のページは`isCurrent`プロパティを使用して設定され、またリンクアイテムにオプションの`badge`が追加されています。
+
+```astro {3-13}
+<StarlightPage
+	frontmatter={{ title: 'オリオン座' }}
+	sidebar={[
+		{ label: 'ホーム', href: '/' },
+		{
+			label: '星座',
+			items: [
+				{ label: 'アンドロメダ座', href: '/andromeda/' },
+				{ label: 'オリオン座', href: '/orion/', isCurrent: true },
+				{ label: 'こぐま座', href: '/ursa-minor/', badge: 'スタブ' },
+			],
+		},
+	]}
+>
+	何らかのコンテンツ。
+</StarlightPage>
+```
 
 ##### `hasSidebar`
 
