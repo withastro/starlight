@@ -68,20 +68,28 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 			);
 
 		if (details.length === 0) {
-			const expectedShapes = baseError.unionErrors.map((unionError) => {
-				const props = unionError.issues
-					.map((issue) => {
-						const relativePath = flattenErrorPath(issue.path)
-							.replace(baseErrorPath, '')
-							.replace(/^\./, '');
-						if ('expected' in issue) {
-							return relativePath ? `${relativePath}: ${issue.expected}` : issue.expected;
-						}
-						return relativePath;
-					})
-					.join('; ');
-				return `{ ${props} }`;
-			});
+			const expectedShapes: string[] = [];
+			for (const unionError of baseError.unionErrors) {
+				const expectedShape: string[] = [];
+				for (const issue of unionError.issues) {
+					// If the issue is a nested union error, show the associated error message instead of the
+					// base error message.
+					if (issue.code === 'invalid_union') {
+						return errorMap(issue, ctx);
+					}
+					const relativePath = flattenErrorPath(issue.path)
+						.replace(baseErrorPath, '')
+						.replace(/^\./, '');
+					if ('expected' in issue && typeof issue.expected === 'string') {
+						expectedShape.push(
+							relativePath ? `${relativePath}: ${issue.expected}` : issue.expected
+						);
+					} else {
+						expectedShape.push(relativePath);
+					}
+				}
+				expectedShapes.push(`{ ${expectedShape.join('; ')} }`);
+			}
 			if (expectedShapes.length) {
 				details.push('> Expected type `' + expectedShapes.join(' | ') + '`');
 				details.push('> Received ' + JSON.stringify(ctx.data));
@@ -91,8 +99,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 		return {
 			message: messages.concat(details).join('\n'),
 		};
-	}
-	if (baseError.code === 'invalid_literal' || baseError.code === 'invalid_type') {
+	} else if (baseError.code === 'invalid_literal' || baseError.code === 'invalid_type') {
 		return {
 			message: prefix(
 				baseErrorPath,
