@@ -79,7 +79,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 					}
 					const relativePath = flattenErrorPath(issue.path)
 						.replace(baseErrorPath, '')
-						.replace(/^\./, '');
+						.replace(leadingPeriod, '');
 					if ('expected' in issue && typeof issue.expected === 'string') {
 						expectedShape.push(
 							relativePath ? `${relativePath}: ${issue.expected}` : issue.expected
@@ -140,4 +140,7 @@ const unionExpectedVals = (expectedVals: Set<unknown>) =>
 const flattenErrorPath = (errorPath: (string | number)[]) => errorPath.join('.');
 
 /** `JSON.stringify()` a value with spaces around object/array entries. */
-const stringify = (val: unknown) => JSON.stringify(val, null, 1).split(/\n\s*/).join(' ');
+const stringify = (val: unknown) =>
+	JSON.stringify(val, null, 1).split(newlinePlusWhitespace).join(' ');
+const newlinePlusWhitespace = /\n\s*/;
+const leadingPeriod = /^\./;
