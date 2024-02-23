@@ -1,4 +1,4 @@
-import { expect, test, vi } from 'vitest';
+import { assert, expect, test, vi } from 'vitest';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
@@ -137,6 +137,96 @@ test('uses provided sidebar if any', async () => {
 		  "Custom link 1",
 		  "Custom link 2",
 		]
+	`);
+});
+
+test('uses provided sidebar with minimal config', async () => {
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			sidebar: [
+				{ label: 'Custom link 1', href: '/test/1' },
+				{ label: 'Custom link 2', href: '/test/2' },
+			],
+		},
+		url: starlightPageUrl,
+	});
+	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
+		[
+		  "Custom link 1",
+		  "Custom link 2",
+		]
+	`);
+});
+
+test('supports deprecated `entries` field for sidebar groups', async () => {
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			sidebar: [
+				{
+					label: 'Group',
+					entries: [
+						{ label: 'Custom link 1', href: '/test/1' },
+						{ label: 'Custom link 2', href: '/test/2' },
+					],
+				},
+			],
+		},
+		url: starlightPageUrl,
+	});
+	assert(data.sidebar[0]!.type === 'group');
+	expect(data.sidebar[0]!.entries.map((entry) => entry.label)).toMatchInlineSnapshot(`
+		[
+		  "Custom link 1",
+		  "Custom link 2",
+		]
+	`);
+});
+
+test('supports `items` field for sidebar groups', async () => {
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			sidebar: [
+				{
+					label: 'Group',
+					items: [
+						{ label: 'Custom link 1', href: '/test/1' },
+						{ label: 'Custom link 2', href: '/test/2' },
+					],
+				},
+			],
+		},
+		url: starlightPageUrl,
+	});
+	assert(data.sidebar[0]!.type === 'group');
+	expect(data.sidebar[0]!.entries.map((entry) => entry.label)).toMatchInlineSnapshot(`
+		[
+		  "Custom link 1",
+		  "Custom link 2",
+		]
+	`);
+});
+
+test('throws error if sidebar is malformated', async () => {
+	expect(() =>
+		generateStarlightPageRouteData({
+			props: {
+				...starlightPageProps,
+				sidebar: [
+					{
+						label: 'Custom link 1',
+						//@ts-expect-error Intentionally bad type to cause error.
+						href: 5,
+					},
+				],
+			},
+			url: starlightPageUrl,
+		})
+	).rejects.toThrowErrorMatchingInlineSnapshot(`
+		[Error: Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
+		**0**: Did not match union:]
 	`);
 });
 

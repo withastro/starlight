@@ -104,15 +104,41 @@ Les propriétés suivantes diffèrent du frontmatter en Markdown :
 
 - La propriété [`slug`](/fr/reference/frontmatter/#slug) n'est pas supportée et est automatiquement définie en fonction de l'URL de la page personnalisée.
 - L'option [`editUrl`](/fr/reference/frontmatter/#editurl) nécessite une URL pour afficher un lien d'édition.
-- La propriété [`sidebar`](/fr/reference/frontmatter/#sidebar) n'est pas supportée. Dans le frontmatter en Markdown, cette option permet de personnaliser les [groupes de liens autogénérés](/fr/reference/configuration/#sidebar), ce qui n'est pas applicable aux pages utilisant le composant `<StarlightPage />`.
+- La propriété [`sidebar`](/fr/reference/frontmatter/#sidebar) du frontmatter permettant de personnaliser l'affichage de la page dans les [groupes de liens autogénérés](/fr/reference/configuration/#sidebar) n'est pas disponible. Les pages utilisant le composant `<StarlightPage />` ne font pas partie d'une collection et ne peuvent pas être ajoutées à un groupe de liens autogénérés.
 
-{/* ##### `sidebar` */}
+##### `sidebar`
 
-{/* **Type :** `SidebarEntry[] | undefined` */}
-{/* **Par défaut :** la barre latérale générée en fonction de la [configuration globale `sidebar`](/fr/reference/configuration/#sidebar) */}
+**Type :** `SidebarEntry[]`  
+**Par défaut :** la barre latérale générée en fonction de la [configuration globale `sidebar`](/fr/reference/configuration/#sidebar)
 
-{/* Fournir une barre latérale de navigation personnalisée pour cette page. */}
-{/* Si elle n'est pas définie, la page utilisera la barre latérale globale par défaut. */}
+Fournit une barre latérale de navigation personnalisée pour cette page.
+Si elle n'est pas définie, la page utilisera la barre latérale globale par défaut.
+
+Par exemple, la page suivante remplace la barre latérale par défaut par un lien vers la page d'accueil et un groupe de liens vers différentes constellations.
+La page courante dans la barre latérale est définie à l'aide de la propriété `isCurrent` et un `badge` optionnel a été ajouté à un élément de lien.
+
+```astro {3-13}
+<StarlightPage
+	frontmatter={{ title: 'Orion' }}
+	sidebar={[
+		{ label: 'Accueil', href: '/' },
+		{
+			label: 'Constellations',
+			items: [
+				{ label: 'Andromède', href: '/andromède/' },
+				{ label: 'Orion', href: '/orion/', isCurrent: true },
+				{
+					label: 'La Petite Ourse',
+					href: '/la-petite-ourse/',
+					badge: 'Ébauche',
+				},
+			],
+		},
+	]}
+>
+	Exemple de contenu.
+</StarlightPage>
+```
 
 ##### `hasSidebar`
 
