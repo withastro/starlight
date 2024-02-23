@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.19.1
+
+### Patch Changes
+
+- [#1527](https://github.com/withastro/starlight/pull/1527) [`163bc84`](https://github.com/withastro/starlight/commit/163bc848e173eecca92d1cb034045fdb42aa4ff1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightPageProps` TypeScript type representing the props expected by the `<StarlightPage />` component.
+
+- [#1504](https://github.com/withastro/starlight/pull/1504) [`fc83a05`](https://github.com/withastro/starlight/commit/fc83a05235b74be2bfe6ba8e7f95a8a5a618ead3) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Adds Traditional Chinese UI translations
+
+- [#1534](https://github.com/withastro/starlight/pull/1534) [`aada680`](https://github.com/withastro/starlight/commit/aada6805abc0068f07393585b86978ef5200439c) Thanks [@delucis](https://github.com/delucis)! - Improves DX of the `sidebar` prop used by the new `<StarlightPage>` component.
+
 ## 0.19.0
 
 ### Minor Changes

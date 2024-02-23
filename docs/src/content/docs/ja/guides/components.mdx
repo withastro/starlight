@@ -166,6 +166,60 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="コンポーネント" href="/ja/guides/components/" />
 </CardGrid>
 
+### 補足情報
+
+「警告」や「吹き出し」とも呼ばれる補足情報（Asides）は、ページのメインコンテンツと並べて補助的な情報を表示するのに便利です。
+
+`<Aside>`には、`note`（デフォルト）、`tip`、`caution`、`danger`のいずれかの`type`を任意で指定できます。`title`属性を設定すると、補足情報のデフォルトのタイトルが上書きされます。
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>カスタムタイトルなしのデフォルトの補足情報。</Aside>
+
+<Aside type="caution" title="気を付けて！">
+	カスタムタイトルを指定した警告用の補足情報。
+</Aside>
+
+<Aside type="tip">
+
+その他のコンテンツも補足情報に含められます。
+
+```js
+// たとえばコードスニペット。
+```
+
+</Aside>
+
+<Aside type="danger">パスワードは誰にも教えないでください。</Aside>
+````
+
+上のコードにより、ページに以下が生成されます。
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>カスタムタイトルなしのデフォルトの補足情報。</Aside>
+
+<Aside type="caution" title="気を付けて！">
+	カスタムタイトルを指定した警告用の補足情報。
+</Aside>
+
+<Aside type="tip">
+
+その他のコンテンツも補足情報に含められます。
+
+```js
+// たとえばコードスニペット。
+```
+
+</Aside>
+
+<Aside type="danger">パスワードは誰にも教えないでください。</Aside>
+
+Starlightは、`<Aside>`コンポーネントの代わりとして、MarkdownやMDXで補足情報をレンダリングするためのカスタム構文も提供しています。カスタム構文の詳細については、「[Markdownでのコンテンツ作成](/ja/guides/authoring-content/#補足情報)」ガイドを参照してください。
+
 ### アイコン
 
 import { Icon } from '@astrojs/starlight/components';
@@ -192,3 +246,48 @@ import { Icon } from '@astrojs/starlight/components';
 以下に、利用可能なすべてのアイコンとその名前を示します。アイコンをクリックすると、対応するコンポーネントのコードをコピーできます。
 
 <IconsList />
+
+### コード
+
+ファイルやデータベース、APIなど、外部ソースからのデータをレンダリングするため[Markdownのコードブロック](/ja/guides/authoring-content/#コード)を使用できない場合に、`<Code>`コンポーネントを使用してシンタックスハイライトされたコードをレンダリングできます。
+
+`<Code>`がサポートするプロパティの詳細については、[Expressive Codeの「Code Component」ドキュメント](https://expressive-code.com/key-features/code-component/)を参照してください。
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('これはファイルやCMSから来た文字列!');`;
+export const fileName = 'example.js';
+export const highlights = ['ファイル', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('これはファイルやCMSから来た文字列!');`;
+export const fileName = 'example.js';
+export const highlights = ['ファイル', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### インポートされたコード
+
+[Viteの`?raw`インポートサフィックス](https://ja.vitejs.dev/guide/assets.html#importing-asset-as-string)を使用して、任意のコードファイルを文字列としてインポートできます。
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />

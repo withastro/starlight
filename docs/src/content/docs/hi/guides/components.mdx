@@ -169,6 +169,61 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="अवयवों" href="/hi/guides/components/" />
 </CardGrid>
 
+### असाइड्स
+
+असाइड्स (जिन्हें "चेतावनी" या "कॉलआउट" के रूप में भी जाना जाता है) किसी पेज की मुख्य सामग्री के साथ-साथ द्वितीयक जानकारी प्रदर्शित करने के लिए उपयोगी होते हैं।
+
+एक `<Aside>` में `note` (डिफ़ॉल्ट), `tip`, `caution` या `danger` का वैकल्पिक `type` हो सकता है। `title` विशेषता सेट करना डिफ़ॉल्ट असाइड् शीर्षक को ओवरराइड करता है।
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>कस्टम शीर्षक के बिना एक डिफ़ॉल्ट असाइड्।</Aside>
+
+<Aside type="caution" title="ध्यान रहें!">
+	एक कस्टम शीर्षक के *साथ* एक चेतावनी वाला असाइड्।
+</Aside>
+
+<Aside type="tip">
+
+असाइड्स में अन्य कंटेंट भी अलग से समर्थित है।
+
+```js
+// उदाहरण के लिए, एक कोड स्निपेट।
+```
+
+</Aside>
+
+<Aside type="danger">आप अपना पासवर्ड किसी को न दें।</Aside>
+````
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>कस्टम शीर्षक के बिना एक डिफ़ॉल्ट असाइड्।</Aside>
+
+<Aside type="caution" title="ध्यान रहें!">
+	एक कस्टम शीर्षक के *साथ* एक चेतावनी वाला असाइड्।
+</Aside>
+
+<Aside type="tip">
+
+असाइड्स में अन्य कंटेंट भी अलग से समर्थित है।
+
+```js
+// उदाहरण के लिए, एक कोड स्निपेट।
+```
+
+</Aside>
+
+<Aside type="danger">आप अपना पासवर्ड किसी को न दें।</Aside>
+
+Starlight `<Aside>` अवयव के विकल्प के रूप में Markdown” और MDX में असाइड् प्रस्तुत करने के लिए एक कस्टम सिंटैक्स भी प्रदान करता है।
+कस्टम सिंटैक्स के विवरण के लिए ["Markdown में कंटेंट संलेखन"](/hi/guides/authoring-content/#asides) मार्गदर्शिका देखें।
+
 ### आइकन
 
 import { Icon } from '@astrojs/starlight/components';
@@ -195,3 +250,49 @@ import { Icon } from '@astrojs/starlight/components';
 सभी उपलब्ध आइकनों की एक सूची उनके संबंधित नामों के साथ नीचे दिखाई गई है। इसके अवयव कोड की प्रतिलिपि बनाने के लिए किसी भी आइकन पर क्लिक करें।
 
 <IconsList />
+
+### कोड
+
+जब [Markdown कोड ब्लॉक](/hi/guides/authoring-content/#code-blocks) का उपयोग करना संभव नहीं हो, तब सिंटैक्स हाइलाइट किए गए कोड को रेंडर करने के लिए `<Code>` अवयव का उपयोग करें, उदाहरण के लिए, फ़ाइलों, डेटाबेस, या APIs जैसे बाहरी स्रोतों से आने वाले डेटा को रेंडर करना।
+
+`<Code>` द्वारा समर्थित प्रॉप्स की पूरी जानकारी के लिए [Expressive Code "Code अवयव" दस्तावेज़](https://expressive-code.com/key-features/code-component/) देखें।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('यह किसी फ़ाइल या CMS से आ सकता है!');`;
+export const fileName = 'example.js';
+export const highlights = ['फ़ाइल', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('यह किसी फ़ाइल या CMS से आ सकता है!');`;
+export const fileName = 'example.js';
+export const highlights = ['फ़ाइल', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### आयातित कोड
+
+किसी भी कोड फ़ाइल को स्ट्रिंग के रूप में आयात करने के लिए [Vite के `?raw` आयात प्रत्यय](https://vitejs.dev/guide/assets#importing-asset-as-string) का उपयोग करें।
+फिर आप इस आयातित स्ट्रिंग को अपने पृष्ठ पर शामिल करने के लिए `<Code>` अवयव में पास कर सकते हैं।
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />

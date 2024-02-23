@@ -179,6 +179,61 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Composants" href="/fr/guides/components/" />
 </CardGrid>
 
+### Encarts
+
+Les encarts (également connus sous le nom de « admonitions » ou « asides » en anglais) sont utiles pour afficher des informations secondaires à côté du contenu principal d'une page.
+
+Le composant `<Aside>` peut avoir un `type` optionnel de `note` (par défaut), `tip`, `caution` ou `danger`. La définition d'un attribut `title` remplace le titre par défaut de l'encart.
+
+````mdx
+# src/content/docs/exemple.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un encart par défaut sans titre personnalisé.</Aside>
+
+<Aside type="caution" title="Prenez garde !">
+	Un encart d'avertissement *avec* un titre personnalisé.
+</Aside>
+
+<Aside type="tip">
+
+D'autres contenus sont également pris en charge dans les encarts.
+
+```js
+// Un extrait de code, par exemple.
+```
+
+</Aside>
+
+<Aside type="danger">Ne donnez votre mot de passe à personne.</Aside>
+````
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un encart par défaut sans titre personnalisé.</Aside>
+
+<Aside type="caution" title="Prenez garde !">
+	Un encart d'avertissement *avec* un titre personnalisé.
+</Aside>
+
+<Aside type="tip">
+
+D'autres contenus sont également pris en charge dans les encarts.
+
+```js
+// Un extrait de code, par exemple.
+```
+
+</Aside>
+
+<Aside type="danger">Ne donnez votre mot de passe à personne.</Aside>
+
+Starlight fournit également une syntaxe personnalisée pour afficher des encarts dans du contenu Markdown et MDX comme alternative au composant `<Aside>`.
+Voir le guide de [« Création de contenu en Markdown »](/fr/guides/authoring-content/#encarts) pour plus de détails sur la syntaxe personnalisée.
+
 ### Icônes
 
 import { Icon } from '@astrojs/starlight/components';
@@ -186,7 +241,7 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
 
-Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionellement inclure un attribut `label`, `size` et `color`.
+Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionnellement inclure un attribut `label`, `size` et `color`.
 
 ```mdx
 # src/content/docs/exemple.mdx
