@@ -1,5 +1,4 @@
-import { seti, type Override, starlight } from '../config';
-import { BuiltInIcons } from '../../starlight/components/Icons.ts';
+import { seti, starlight } from '../config';
 import type { Definitions } from '../../starlight/user-components/rehype-file-tree.ts';
 
 // https://github.com/jesseweed/seti-ui/blob/master/styles/components/icons/mapping.less
@@ -45,8 +44,8 @@ export async function fetchFont() {
  */
 export function parseMapping(mapping: string) {
 	const lines = mapping.split('\n');
-	const conflicts = new Set<string>();
-	const icons = new Set<string>();
+	// Include the `folder` icon by default as it is not defined in the mapping file.
+	const icons = new Set<string>(['folder']);
 	const definitions: Definitions = {
 		files: { ...starlight.definitions.files },
 		extensions: { ...starlight.definitions.extensions },
@@ -60,22 +59,12 @@ export function parseMapping(mapping: string) {
 		if (!identifier || !lang || !type) continue;
 		if (seti.ignores.includes(lang)) continue;
 
-		const maybeOverride: Override | undefined = seti.overrides[lang as keyof typeof seti.overrides];
+		const maybeOverride: string | undefined = seti.overrides[lang as keyof typeof seti.overrides];
 
-		if (!maybeOverride && isBuiltInIcon(lang)) {
-			// If the language is not overriden and the language matches a built-in icon, we skip
-			// generating the associated icon and we warn the user.
-			conflicts.add(lang);
-		} else if (!maybeOverride) {
-			// If the icon is not overriden and does not conflict with a built-in icon, we can safely
-			// generate the icon.
-			icons.add(lang);
-		} else if (maybeOverride.type === 'seti') {
-			// If the icon is overriden to use another Seti UI icon, we need to generate the alias icon.
-			icons.add(maybeOverride.name);
-		}
+		// Add the icon to the list of icons to extract as SVGs.
+		icons.add(maybeOverride ?? lang);
 
-		const icon = getSetiIconName(maybeOverride?.name ?? lang);
+		const icon = getSetiIconName(lang);
 
 		if (type === 'set') {
 			if (identifier?.startsWith('.')) {
@@ -88,26 +77,16 @@ export function parseMapping(mapping: string) {
 		}
 	}
 
-	if (conflicts.size > 0) {
-		console.warn(
-			`The following languages match built-in icons and will be skipped:\n\n${[...conflicts]
-				.map((lang) => `  - ${lang}`)
-				.join('\n')}\n`
-		);
-	}
-
 	return { definitions, icons: [...icons] };
 }
 
 /** Return the name of an icon by taking rename configuration into account. */
 export function getSetiIconName(icon: string) {
-	return seti.renames[icon as keyof typeof seti.renames] ?? icon;
+	const name = seti.renames[icon as keyof typeof seti.renames] ?? icon;
+
+	return `${starlight.prefix}${name}`;
 }
 
 function getGitHubDownloadLink(repo: string, path: string) {
 	return `https://raw.githubusercontent.com/${repo}/master/${path}`;
-}
-
-function isBuiltInIcon(iconName: string) {
-	return (BuiltInIcons as Record<string, string>)[iconName] !== undefined;
 }

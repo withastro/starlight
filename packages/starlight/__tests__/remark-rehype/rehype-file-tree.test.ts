@@ -100,20 +100,20 @@ describe('icons', () => {
 	test('adds a folder icon to directories with a screen-reader only label', () => {
 		const html = processTestFileTree(`<ul><li>directory/</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.folder);
+		expectHtmlToIncludeIcon(html, Icons['seti:folder']);
 		expect(extractFileTree(html)).toContain('<span class="sr-only">Directory</span>');
 	});
 
 	test('adds a default file icon to unknown files', () => {
 		const html = processTestFileTree(`<ul><li>test_file</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.document);
+		expectHtmlToIncludeIcon(html, Icons['seti:default']);
 	});
 
 	test('adds an icon to known files', () => {
 		const html = processTestFileTree(`<ul><li>README.md</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.information);
+		expectHtmlToIncludeIcon(html, Icons['seti:info']);
 	});
 
 	test('adds an icon to known file extensions', () => {
@@ -125,14 +125,14 @@ describe('icons', () => {
 	test('adds an icon to known file partials', () => {
 		const html = processTestFileTree(`<ul><li>TODO</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.todo);
+		expectHtmlToIncludeIcon(html, Icons['seti:todo']);
 	});
 
 	test('does not add a special icon to file based on the last letter of the file name', () => {
 		// The last letter of the file name is "c" and should not be matched to the icon for C files.
 		const html = processTestFileTree(`<ul><li>testc</li></ul>`);
 
-		expectHtmlToIncludeIcon(html, Icons.document);
+		expectHtmlToIncludeIcon(html, Icons['seti:default']);
 	});
 });
 

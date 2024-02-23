@@ -15,8 +15,8 @@ declare module 'vfile' {
 	}
 }
 
-const folderIcon = makeSVGIcon(Icons['folder']);
-const defaultFileIcon = makeSVGIcon(Icons['document']);
+const folderIcon = makeSVGIcon(Icons['seti:folder']);
+const defaultFileIcon = makeSVGIcon(Icons['seti:default']);
 
 /**
  * Process the HTML for a file tree to create the necessary markup for each file and directory
