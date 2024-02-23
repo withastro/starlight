@@ -77,8 +77,10 @@ test('errors if title is missing', () => {
 		parseStarlightConfigWithFriendlyErrors({} as any)
 	).toThrowErrorMatchingInlineSnapshot(
 		`
-		[Error: Invalid config passed to starlight integration
-		**title**: Required]
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**title**: Required"
 	`
 	);
 });
@@ -88,8 +90,10 @@ test('errors if title value is not a string', () => {
 		parseStarlightConfigWithFriendlyErrors({ title: 5 } as any)
 	).toThrowErrorMatchingInlineSnapshot(
 		`
-		[Error: Invalid config passed to starlight integration
-		**title**: Expected type \`"string"\`, received "number"]
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**title**: Expected type \`"string"\`, received "number""
 	`
 	);
 });
@@ -99,9 +103,11 @@ test('errors with bad social icon config', () => {
 		parseStarlightConfigWithFriendlyErrors({ title: 'Test', social: { unknown: '' } as any })
 	).toThrowErrorMatchingInlineSnapshot(
 		`
-		[Error: Invalid config passed to starlight integration
-		**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'slack' | 'matrix' | 'openCollective', received 'unknown'
-		**social.unknown**: Invalid url]
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'slack' | 'matrix' | 'openCollective', received 'unknown'
+			**social.unknown**: Invalid url"
 	`
 	);
 });
@@ -111,10 +117,12 @@ test('errors with bad logo config', () => {
 		parseStarlightConfigWithFriendlyErrors({ title: 'Test', logo: { html: '' } as any })
 	).toThrowErrorMatchingInlineSnapshot(
 		`
-		[Error: Invalid config passed to starlight integration
-		**logo**: Did not match union.
-		> Expected type \`{ src: string } | { dark: string; light: string }\`
-		> Received {"html":""}]
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**logo**: Did not match union.
+			> Expected type \`{ src: string } | { dark: string; light: string }\`
+			> Received {"html":""}"
 	`
 	);
 });
@@ -127,11 +135,13 @@ test('errors with bad head config', () => {
 		})
 	).toThrowErrorMatchingInlineSnapshot(
 		`
-		[Error: Invalid config passed to starlight integration
-		**head.0.tag**: Invalid enum value. Expected 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template', received 'unknown'
-		**head.0.attrs.prop**: Did not match union.
-		> Expected type \`"string" | "boolean" | "undefined"\`, received "null"
-		**head.0.content**: Expected type \`"string"\`, received "number"]
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**head.0.tag**: Invalid enum value. Expected 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template', received 'unknown'
+			**head.0.attrs.prop**: Did not match union.
+			> Expected type \`"string" | "boolean" | "undefined"\`, received "null"
+			**head.0.content**: Expected type \`"string"\`, received "number""
 	`
 	);
 });
@@ -144,10 +154,12 @@ test('errors with bad sidebar config', () => {
 		})
 	).toThrowErrorMatchingInlineSnapshot(
 		`
-		[Error: Invalid config passed to starlight integration
-		**sidebar.0**: Did not match union.
-		> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
-		> Received {"label":"Example","href":"/"}]
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Did not match union.
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Received {"label":"Example","href":"/"}"
 	`
 	);
 });
