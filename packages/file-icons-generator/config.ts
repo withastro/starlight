@@ -3,6 +3,8 @@ import type { Definitions } from '../starlight/user-components/rehype-file-tree'
 export const seti = {
 	/** The GitHub repository containing the Seti UI theme using the `username/repo` format. */
 	repo: 'jesseweed/seti-ui',
+	/** The repository branch to use. */
+	branch: 'master',
 	/** The path to the icon mapping file in the repository. */
 	mapping: 'styles/components/icons/mapping.less',
 	/** The path to the icon font file in the repository. */

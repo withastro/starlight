@@ -88,5 +88,5 @@ export function getSetiIconName(icon: string) {
 }
 
 function getGitHubDownloadLink(repo: string, path: string) {
-	return `https://raw.githubusercontent.com/${repo}/master/${path}`;
+	return `https://raw.githubusercontent.com/${repo}/${seti.branch}/${path}`;
 }
