@@ -2,7 +2,7 @@
   "name": "starlight-file-icons-generator",
   "version": "0.1.0",
   "description": "Generates Starlight file icons based on the Seti UI theme",
-  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "private": true,
   "scripts": {
     "build": "tsx ."
   },
@@ -14,13 +14,5 @@
   "devDependencies": {
     "@types/opentype.js": "^1.3.8"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/withastro/starlight",
-    "directory": "packages/file-icons-generator"
-  },
-  "bugs": "https://github.com/withastro/starlight/issues",
-  "homepage": "https://starlight.astro.build",
-  "type": "module",
-  "private": true
+  "type": "module"
 }
