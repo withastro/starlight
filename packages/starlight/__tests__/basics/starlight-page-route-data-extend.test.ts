@@ -21,25 +21,19 @@ const starlightPageProps: StarlightPageProps = {
 };
 
 test('throws a validation error if a built-in field required by the user schema is not passed down', async () => {
-	expect.assertions(3);
-
-	try {
-		await generateStarlightPageRouteData({
+	// The first line should be a user-friendly error message describing the exact issue and the second line should be
+	// the missing description field.
+	expect(() =>
+		generateStarlightPageRouteData({
 			props: starlightPageProps,
 			url: new URL('https://example.com/test-slug'),
-		});
-	} catch (error) {
-		assert(error instanceof Error);
-		const lines = error.message.split('\n');
-		// The first line should be a user-friendly error message describing the exact issue and the second line should be
-		// the missing description field.
-		expect(lines).toHaveLength(2);
-		const [message, missingField] = lines;
-		expect(message).toMatchInlineSnapshot(
-			`"Invalid frontmatter props passed to the \`<StarlightPage/>\` component."`
-		);
-		expect(missingField).toMatchInlineSnapshot(`"**description**: Required"`);
-	}
+		})
+	).rejects.toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid frontmatter props passed to the \`<StarlightPage/>\` component.
+		Hint:
+			**description**: Required"
+	`);
 });
 
 test('returns new field defined in the user schema', async () => {

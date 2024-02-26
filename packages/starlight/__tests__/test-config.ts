@@ -23,5 +23,8 @@ export async function defineVitestConfig(
 		plugins: [
 			vitePluginStarlightUserConfig(starlightConfig, { root, srcDir, build, trailingSlash }),
 		],
+		test: {
+			snapshotSerializers: ['./snapshot-serializer-astro-error.ts'],
+		},
 	});
 }

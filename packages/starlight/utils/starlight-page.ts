@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import { errorMap, throwValidationError } from './error-map';
+import { parseWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import { getToC, type PageProps, type StarlightRouteData } from './route-data';
 import type { StarlightDocsEntry } from './routing';
@@ -138,14 +138,11 @@ type StarlightPageSidebarUserConfig = z.input<typeof StarlightPageSidebarSchema>
 const normalizeSidebarProp = (
 	sidebarProp: StarlightPageSidebarUserConfig
 ): StarlightRouteData['sidebar'] => {
-	const sidebar = StarlightPageSidebarSchema.safeParse(sidebarProp, { errorMap });
-	if (!sidebar.success) {
-		throwValidationError(
-			sidebar.error,
-			'Invalid sidebar prop passed to the `<StarlightPage/>` component.'
-		);
-	}
-	return sidebar.data;
+	return parseWithFriendlyErrors(
+		StarlightPageSidebarSchema,
+		sidebarProp,
+		'Invalid sidebar prop passed to the `<StarlightPage/>` component.'
+	);
 };
 
 /**
@@ -267,16 +264,11 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			}),
 	});
 
-	const pageFrontmatter = schema.safeParse(frontmatter, { errorMap });
-
-	if (!pageFrontmatter.success) {
-		throwValidationError(
-			pageFrontmatter.error,
-			'Invalid frontmatter props passed to the `<StarlightPage/>` component.'
-		);
-	}
-
-	return pageFrontmatter.data;
+	return parseWithFriendlyErrors(
+		schema,
+		frontmatter,
+		'Invalid frontmatter props passed to the `<StarlightPage/>` component.'
+	);
 }
 
 /** Returns the user docs schema and falls back to the default schema if needed. */
