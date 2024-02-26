@@ -270,18 +270,18 @@ import importedCode from '/src/env.d.ts?raw';
 
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
 
-### FileTree
+### File Tree
 
-Use the `<FileTree>` component to display a file tree in your documentation representing the structure of a directory.
+Use the `<FileTree>` component to display the structure of a directory with file icons and collapsible sub-directories.
 
-A `<FileTree>` requires an [unordered Markdown list](https://www.markdownguide.org/basic-syntax/#unordered-lists) of files and directories.
-Directories can either end with a `/` or contain a nested list of files and directories.
+Specify the structure of your files and directories with an [unordered Markdown list](https://www.markdownguide.org/basic-syntax/#unordered-lists) inside `<FileTree>`.
+Create a sub-directory using a nested list or add a `/` to the end of a list item to render it as a directory without specific content.
 
 The following syntax can be used to customize the appearance of the file tree:
 
-- If a file or directory name is bolded, e.g. `**README.md**`, it will be highlighted in the file tree.
-- Comments can be appended after a file or directory name to provide additional information.
-- Placeholder files and directories can be added by using either `...` or `…` as the name.
+- Highlight a file or directory by making its name bold, e.g. `**README.md**`.
+- Add a comment to a file or directory by adding more text after the name.
+- Add placeholder files and directories by using either `...` or `…` as the name.
 
 ```mdx
 # src/content/docs/example.mdx
