@@ -92,7 +92,8 @@ if (!badgeVariants.includes(variant)) {
 	}
 
 	/* Markdown content overrides */
-	:global(.sl-markdown-content :not(h1, h2, h3, h4, h5, h6)) .sl-badge {
+	:global(.sl-markdown-content :not(h1, h2, h3, h4, h5, h6)) .sl-badge,
+	:global(.sl-markdown-content) > .sl-badge {
 		font-size: var(--sl-text-sm);
 	}
 

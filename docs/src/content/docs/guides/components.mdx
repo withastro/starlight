@@ -296,3 +296,60 @@ The code above generates the following on the page:
 import importedCode from '/src/env.d.ts?raw';
 
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### Badge
+
+import { Badge } from '@astrojs/starlight/components';
+
+Use the `<Badge>` component to display small pieces of information, such as status or labels.
+
+Place the content you want to display inside the `<Badge>` component. Optionally, you can specify a `variant` attribute with values like `tip`, `note`, `caution`, `danger`, `success`, or `default` to adjust the badge's color.
+
+```mdx
+
+import { Badge } from '@astrojs/starlight/components';
+
+- <Badge variant="note">Note</Badge>
+- <Badge variant="tip">Tip</Badge>
+- <Badge variant="success">Success</Badge>
+- <Badge variant="danger">Danger</Badge>
+- <Badge variant="caution">Caution</Badge>
+- <Badge variant="default">Default</Badge>
+
+```
+- <Badge variant="note">Note</Badge>
+- <Badge variant="tip">Tip</Badge>
+- <Badge variant="success">Success</Badge>
+- <Badge variant="danger">Danger</Badge>
+- <Badge variant="caution">Caution</Badge>
+- <Badge variant="default">Default</Badge>
+
+You can customize the badge variants colors by setting the CSS variables.
+
+```css
+:root {
+  --sl-badge-default-bg: var(--sl-color-accent-low);
+	--sl-badge-default-border: var(--sl-color-accent);
+	--sl-badge-default-text: var(--sl-color-accent-high);
+
+	--sl-badge-note-bg: var(--sl-color-blue-low);
+	--sl-badge-note-border: var(--sl-color-blue);
+	--sl-badge-note-text: var(--sl-color-blue-high);
+
+	--sl-badge-danger-bg: var(--sl-color-red-low);
+	--sl-badge-danger-border: var(--sl-color-red);
+	--sl-badge-danger-text: var(--sl-color-red-high);
+
+	--sl-badge-success-bg: var(--sl-color-green-low);
+	--sl-badge-success-border: var(--sl-color-green);
+	--sl-badge-success-text: var(--sl-color-green-high);
+
+	--sl-badge-caution-bg: var(--sl-color-orange-low);
+	--sl-badge-caution-border: var(--sl-color-orange);
+	--sl-badge-caution-text: var(--sl-color-orange-high);
+
+	--sl-badge-tip-bg: var(--sl-color-purple-low);
+	--sl-badge-tip-border: var(--sl-color-purple);
+	--sl-badge-tip-text: var(--sl-color-purple-high);
+}
+```
