@@ -109,9 +109,12 @@ function getFontGlyphAlias(icon: string): string {
 
 /** Update the definitions to use an alias instead of a specific icon name. */
 function updateDefinitionsWithAlias(definitions: Definitions, icon: string, alias: string) {
-	updateDefinitionsRecordWithAlias(definitions.files, icon, alias);
-	updateDefinitionsRecordWithAlias(definitions.extensions, icon, alias);
-	updateDefinitionsRecordWithAlias(definitions.partials, icon, alias);
+	const prefixedIcon = getSetiIconName(icon);
+	const prefixedAlias = getSetiIconName(alias);
+
+	updateDefinitionsRecordWithAlias(definitions.files, prefixedIcon, prefixedAlias);
+	updateDefinitionsRecordWithAlias(definitions.extensions, prefixedIcon, prefixedAlias);
+	updateDefinitionsRecordWithAlias(definitions.partials, prefixedIcon, prefixedAlias);
 }
 
 /** Update a definitions record to use an alias instead of a specific icon name. */
