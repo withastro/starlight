@@ -15,13 +15,13 @@ const stepsProcessor = rehype()
 				);
 			} else if (rootElements.length > 1) {
 				throw new StepsError(
-					'The `<FileTree>` component expects its content to be a single ordered list (`<ol>`) but found multiple child elements: ' +
+					'The `<Steps>` component expects its content to be a single ordered list (`<ol>`) but found multiple child elements: ' +
 						rootElements.map((element: Element) => `\`<${element.tagName}>\``).join(', ') +
 						'.'
 				);
 			} else if (rootElement.tagName !== 'ol') {
 				throw new StepsError(
-					'The `<FileTree>` component expects its content to be a single ordered list (`<ol>`) but found the following element: ' +
+					'The `<Steps>` component expects its content to be a single ordered list (`<ol>`) but found the following element: ' +
 						`\`<${rootElement.tagName}>\`.`
 				);
 			}
