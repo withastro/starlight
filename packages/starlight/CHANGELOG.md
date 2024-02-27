@@ -1,5 +1,51 @@
 # @astrojs/starlight
 
+## 0.20.1
+
+### Patch Changes
+
+- [#1553](https://github.com/withastro/starlight/pull/1553) [`8e091147`](https://github.com/withastro/starlight/commit/8e09114755d37322d6e97b0dc90a5dfd781de8cc) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates Expressive Code to v0.33.4 to fix potential race condition bug in Shiki.
+
+## 0.20.0
+
+### Minor Changes
+
+- [#1541](https://github.com/withastro/starlight/pull/1541) [`1043052f`](https://github.com/withastro/starlight/commit/1043052f3890a577a73276472f3773924909406b) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates `astro-expressive-code` dependency to the latest minor release (0.33).
+
+  This unlocks support for [word wrap](https://expressive-code.com/key-features/word-wrap/) and [line numbers](https://expressive-code.com/plugins/line-numbers/), as well as updating the syntax highlighter to the latest Shiki release, which includes new and updated language grammars.
+
+  See the [Expressive Code release notes](https://expressive-code.com/releases/) for more information including details of potentially breaking changes.
+
+### Patch Changes
+
+- [#1542](https://github.com/withastro/starlight/pull/1542) [`b3b7a606`](https://github.com/withastro/starlight/commit/b3b7a6069952d5f27a49b2fd097aa4db065e1718) Thanks [@delucis](https://github.com/delucis)! - Improves error messages shown by Starlight for configuration errors.
+
+- [#1544](https://github.com/withastro/starlight/pull/1544) [`65dc6586`](https://github.com/withastro/starlight/commit/65dc6586ef7c1754875db1d48c49e709051a0b13) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Update Vietnamese UI translations
+
+## 0.19.1
+
+### Patch Changes
+
+- [#1527](https://github.com/withastro/starlight/pull/1527) [`163bc84`](https://github.com/withastro/starlight/commit/163bc848e173eecca92d1cb034045fdb42aa4ff1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightPageProps` TypeScript type representing the props expected by the `<StarlightPage />` component.
+
+- [#1504](https://github.com/withastro/starlight/pull/1504) [`fc83a05`](https://github.com/withastro/starlight/commit/fc83a05235b74be2bfe6ba8e7f95a8a5a618ead3) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Adds Traditional Chinese UI translations
+
+- [#1534](https://github.com/withastro/starlight/pull/1534) [`aada680`](https://github.com/withastro/starlight/commit/aada6805abc0068f07393585b86978ef5200439c) Thanks [@delucis](https://github.com/delucis)! - Improves DX of the `sidebar` prop used by the new `<StarlightPage>` component.
+
+## 0.19.0
+
+### Minor Changes
+
+- [#1485](https://github.com/withastro/starlight/pull/1485) [`2cb3578`](https://github.com/withastro/starlight/commit/2cb35782dace67c7c418a31005419fa95493b3d3) Thanks [@timokoessler](https://github.com/timokoessler)! - Add support for setting html attributes of hero action links
+
+- [#1175](https://github.com/withastro/starlight/pull/1175) [`dd11b95`](https://github.com/withastro/starlight/commit/dd11b9538abdf4b5ba2ef70e07c0edda03e95add) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new `<StarlightPage>` component to use the Starlight layout in custom pages.
+
+  To learn more about this new feature, check out the new [“Using Starlight’s design in custom pages” guide](https://starlight.astro.build/guides/pages/#using-starlights-design-in-custom-pages).
+
+- [#1499](https://github.com/withastro/starlight/pull/1499) [`97bf523`](https://github.com/withastro/starlight/commit/97bf523923fb9678c12f58fcdbe36757f0e56ceb) Thanks [@delucis](https://github.com/delucis)! - Adds a new `<Aside>` component
+
+  The new component is in addition to the existing custom Markdown syntax.
+
 ## 0.18.1
 
 ### Patch Changes

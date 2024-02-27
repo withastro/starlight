@@ -30,7 +30,7 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 </AnotherComponent>
 ```
 
-Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/it/core-concepts/framework-components/).
+Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/it/core-concepts/framework-components/) nei tuoi file MDX.
 Vedi di più su come [usare componenti in MDX](https://docs.astro.build/it/guides/markdown-content/#using-components-in-mdx) nella documentazione Astro.
 
 ### Compatibilità con gli stili di Starlight
@@ -71,7 +71,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Tabs>
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 <Tabs>
 	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
@@ -104,7 +104,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 <Card title="Guarda qui">Contenuti interessanti da evidenziare.</Card>
 
@@ -150,14 +150,14 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard
-		title="Creazione di Markdown"
+		title="Creazione di contenuti in Markdown"
 		href="/it/guides/authoring-content/"
 	/>
 	<LinkCard title="Componenti" href="/it/guides/components/" />
 </CardGrid>
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 import { LinkCard } from '@astrojs/starlight/components';
 
@@ -169,11 +169,66 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard
-		title="Creazione di Markdown"
+		title="Creazione di contenuti in Markdown"
 		href="/it/guides/authoring-content/"
 	/>
 	<LinkCard title="Componenti" href="/it/guides/components/" />
 </CardGrid>
+
+### Avvisi
+
+Gli avvisi sono utili per indicare contenuti secondari insieme ai contenuti principali.
+
+`<Aside>` può avere un `type` opzionale di `note` (il valore predefinito), `tip`, `caution` o `danger`. Impostando un attributo `title` si sovrascrive il titolo predefinito dell'avviso.
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un avviso predefinito senza un titolo personalizzato.</Aside>
+
+<Aside type="caution" title="Attenzione!">
+	Un avviso *con* un titolo personalizzato.
+</Aside>
+
+<Aside type="tip">
+
+Altri contenuti sono supportati anche negli avvisi.
+
+```js
+// Un pezzo di codice, per esempio.
+```
+
+</Aside>
+
+<Aside type="danger">Non dare la tua password a nessuno.</Aside>
+````
+
+Il codice sopra genera quanto segue nella pagina:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un avviso di default senza un titolo personalizzato</Aside>
+
+<Aside type="caution" title="Attenzione!">
+	Un avviso di cautela con un titolo personalizzato.
+</Aside>
+
+<Aside type="tip">
+
+Altri contenuti sono supportati anche negli avvisi.
+
+```js
+// Un pezzo di codice, per esempio.
+```
+
+</Aside>
+
+<Aside type="danger">Non dare la tua password a nessuno.</Aside>
+
+Starlight fornisce anche una sintassi personalizzata per mostrare gli avvisi in Markdown e MDX come alternativa al componente `<Aside>`.
+Consulta la guida [“Creazione di contenuti in Markdown”](/it/guides/authoring-content/#avvisi) per i dettagli sulla sintassi personalizzata.
 
 ### Icone
 
@@ -192,7 +247,7 @@ import { Icon } from '@astrojs/starlight/components';
 <Icon name="star" color="goldenrod" size="2rem" />
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 <Icon name="star" color="goldenrod" size="2rem" />
 

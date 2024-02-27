@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.18.1",
+  "version": "0.20.1",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -102,6 +102,10 @@
       "types": "./components/Page.astro.tsx",
       "import": "./components/Page.astro"
     },
+    "./components/StarlightPage.astro": {
+      "types": "./components/StarlightPage.astro.tsx",
+      "import": "./components/StarlightPage.astro"
+    },
     "./components/Footer.astro": {
       "types": "./components/Footer.astro.tsx",
       "import": "./components/Footer.astro"
@@ -172,9 +176,9 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
     "@types/node": "^18.16.19",
-    "@vitest/coverage-v8": "^1.2.2",
-    "astro": "^4.3.4",
-    "vitest": "^1.2.2"
+    "@vitest/coverage-v8": "^1.3.1",
+    "astro": "^4.3.5",
+    "vitest": "^1.3.1"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.1.1",
@@ -182,7 +186,7 @@
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.3",
     "@types/mdast": "^4.0.3",
-    "astro-expressive-code": "^0.32.4",
+    "astro-expressive-code": "^0.33.4",
     "bcp-47": "^2.1.0",
     "hast-util-select": "^6.0.2",
     "hastscript": "^8.0.0",

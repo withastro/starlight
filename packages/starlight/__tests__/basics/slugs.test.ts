@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import {
 	localeToLang,
 	localizedId,
@@ -6,6 +6,7 @@ import {
 	slugToLocaleData,
 	slugToParam,
 	slugToPathname,
+	urlToSlug,
 } from '../../utils/slugs';
 
 describe('slugToLocaleData', () => {
@@ -74,5 +75,37 @@ describe('localizedId', () => {
 describe('localizedSlug', () => {
 	test('returns unchanged when no locales are set', () => {
 		expect(localizedSlug('test', undefined)).toBe('test');
+	});
+});
+
+describe('urlToSlug', () => {
+	test('returns slugs with `build.output: "directory"`', () => {
+		expect(urlToSlug(new URL('https://example.com'))).toBe('');
+		expect(urlToSlug(new URL('https://example.com/slug'))).toBe('slug');
+		expect(urlToSlug(new URL('https://example.com/dir/page/'))).toBe('dir/page');
+		expect(urlToSlug(new URL('https://example.com/dir/sub-dir/page/'))).toBe('dir/sub-dir/page');
+	});
+
+	test('returns slugs with `build.output: "file"`', () => {
+		expect(urlToSlug(new URL('https://example.com/index.html'))).toBe('');
+		expect(urlToSlug(new URL('https://example.com/slug.html'))).toBe('slug');
+		expect(urlToSlug(new URL('https://example.com/dir/page/index.html'))).toBe('dir/page');
+		expect(urlToSlug(new URL('https://example.com/dir/sub-dir/page.html'))).toBe(
+			'dir/sub-dir/page'
+		);
+	});
+
+	// It is currently not possible to test this as stubbing BASE_URL is not supported due to
+	// `vite-plugin-env` controlling it and the lack of a way to pass in an Astro config using
+	// `getViteConfig()` from `astro/config`.
+	test.todo('returns slugs with a custom `base` option', () => {
+		vi.stubEnv('BASE_URL', '/base/');
+		expect(urlToSlug(new URL('https://example.com/base'))).toBe('');
+		expect(urlToSlug(new URL('https://example.com/base/slug'))).toBe('slug');
+		expect(urlToSlug(new URL('https://example.com/base/dir/page/'))).toBe('dir/page');
+		expect(urlToSlug(new URL('https://example.com/base/dir/sub-dir/page/'))).toBe(
+			'dir/sub-dir/page'
+		);
+		vi.unstubAllEnvs();
 	});
 });
