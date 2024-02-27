@@ -23,14 +23,8 @@
     "sharp": "^0.32.5"
   },
   "devDependencies": {
-    "@types/hast": "^3.0.3",
-    "hast-util-from-html": "^2.0.1",
-    "hast-util-to-string": "^3.0.0",
-    "hastscript": "^8.0.0",
     "pa11y-ci": "^3.0.1",
-    "rehype": "^13.0.1",
     "starlight-links-validator": "^0.5.3",
-    "start-server-and-test": "^2.0.0",
-    "unist-util-visit": "^5.0.0"
+    "start-server-and-test": "^2.0.0"
   }
 }
