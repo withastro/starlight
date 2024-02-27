@@ -2,4 +2,4 @@
 '@astrojs/starlight': minor
 ---
 
-Adds 4 new icons: `astro`, `biome`, `bun`, and `pnpm`.
+Adds 5 new icons: `astro`, `biome`, `bun`, `mdx`, and `pnpm`.

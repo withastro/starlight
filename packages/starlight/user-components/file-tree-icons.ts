@@ -112,6 +112,7 @@ export const definitions: Definitions = {
 	},
 	extensions: {
 		'.astro': 'astro',
+		'.mdx': 'mdx',
 		'.bsl': 'seti:bsl',
 		'.mdo': 'seti:mdo',
 		'.cls': 'seti:salesforce',
