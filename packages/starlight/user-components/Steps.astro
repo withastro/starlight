@@ -1,7 +1,11 @@
-<div
-	class="sl-steps"
-	set:html={(await Astro.slots.render('default')).replace(/^\s*<ol /, '<ol role="list" ')}
-/>
+---
+import { processSteps } from './rehype-steps';
+
+const content = await Astro.slots.render('default');
+const { html } = processSteps(content);
+---
+
+<div class="sl-steps" set:html={html} />
 
 <style>
 	.sl-steps {
