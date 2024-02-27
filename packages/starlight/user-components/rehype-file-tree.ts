@@ -203,21 +203,21 @@ function validateFileTree(tree: Element) {
 
 	if (rootElements.length === 0) {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be a single unordered list but found no child elements.`
+			'The `<FileTree>` component expects its content to be a single unordered list but found no child elements.'
 		);
 	}
 
 	if (rootElements.length !== 1) {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be a single unordered list but found multiple child elements: ${rootElements
-				.map((element) => `<${element.tagName}>`)
+			`The \`<FileTree>\` component expects its content to be a single unordered list but found multiple child elements: ${rootElements
+				.map((element) => `\`<${element.tagName}>\``)
 				.join(' - ')}.`
 		);
 	}
 
 	if (!rootElement || rootElement.tagName !== 'ul') {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be an unordered list but found the following element: <${rootElement?.tagName}>.`
+			`The \`<FileTree>\` component expects its content to be an unordered list but found the following element: \`<${rootElement?.tagName}>\`.`
 		);
 	}
 
@@ -225,7 +225,7 @@ function validateFileTree(tree: Element) {
 
 	if (!listItemElement) {
 		throwFileTreeValidationError(
-			`The <FileTree> component expects its content to be an unordered list with at least one list item.`
+			'The `<FileTree>` component expects its content to be an unordered list with at least one list item.'
 		);
 	}
 }
@@ -234,7 +234,7 @@ function validateFileTree(tree: Element) {
 function throwFileTreeValidationError(message: string): never {
 	throw new AstroError(
 		message,
-		'To learn more about the <FileTree> component, see https://starlight.astro.build/guides/components/#filetree'
+		'To learn more about the `<FileTree>` component, see https://starlight.astro.build/guides/components/#filetree'
 	);
 }
 

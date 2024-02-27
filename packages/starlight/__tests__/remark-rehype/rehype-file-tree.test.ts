@@ -7,9 +7,9 @@ describe('validation', () => {
 		expect(() => processTestFileTree('')).toThrowErrorMatchingInlineSnapshot(
 			`
 			"[AstroUserError]:
-				The <FileTree> component expects its content to be a single unordered list but found no child elements.
+				The \`<FileTree>\` component expects its content to be a single unordered list but found no child elements.
 			Hint:
-				To learn more about the <FileTree> component, see https://starlight.astro.build/guides/components/#filetree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#filetree"
 		`
 		);
 	});
@@ -20,9 +20,9 @@ describe('validation', () => {
 		).toThrowErrorMatchingInlineSnapshot(
 			`
 			"[AstroUserError]:
-				The <FileTree> component expects its content to be a single unordered list but found multiple child elements: <p> - <ul>.
+				The \`<FileTree>\` component expects its content to be a single unordered list but found multiple child elements: \`<p>\` - \`<ul>\`.
 			Hint:
-				To learn more about the <FileTree> component, see https://starlight.astro.build/guides/components/#filetree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#filetree"
 		`
 		);
 	});
@@ -31,9 +31,9 @@ describe('validation', () => {
 		expect(() => processTestFileTree('<ol><li>file</li></ol>')).toThrowErrorMatchingInlineSnapshot(
 			`
 			"[AstroUserError]:
-				The <FileTree> component expects its content to be an unordered list but found the following element: <ol>.
+				The \`<FileTree>\` component expects its content to be an unordered list but found the following element: \`<ol>\`.
 			Hint:
-				To learn more about the <FileTree> component, see https://starlight.astro.build/guides/components/#filetree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#filetree"
 		`
 		);
 	});
@@ -42,9 +42,9 @@ describe('validation', () => {
 		expect(() => processTestFileTree('<ul></ul>')).toThrowErrorMatchingInlineSnapshot(
 			`
 			"[AstroUserError]:
-				The <FileTree> component expects its content to be an unordered list with at least one list item.
+				The \`<FileTree>\` component expects its content to be an unordered list with at least one list item.
 			Hint:
-				To learn more about the <FileTree> component, see https://starlight.astro.build/guides/components/#filetree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#filetree"
 		`
 		);
 	});
