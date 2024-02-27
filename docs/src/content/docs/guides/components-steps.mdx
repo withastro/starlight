@@ -1,0 +1,146 @@
+---
+title: ⚠️ <Steps> Test ⚠️
+---
+
+import {
+	CardGrid,
+	LinkCard,
+	Steps,
+	Tabs,
+	TabItem,
+} from '@astrojs/starlight/components';
+
+:::danger
+Delete me before merging
+:::
+
+## List without `<Steps>`
+
+For comparison, a regular ordered list in Starlight renders like this:
+
+5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+   Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam a iaculis libero.
+
+   12. Something nested
+
+   13. Something else
+
+6. Step six
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+## List with `<Steps>`
+
+<Steps>
+
+5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+   Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam a iaculis libero.
+
+   <Steps>
+
+   12. Something nested
+
+   13. Something else
+
+   </Steps>
+
+6. Step six
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+</Steps>
+
+## Compact variant
+
+(This list is `ol > li > (text node)` instead of `ol > li > p` like the previous examples.)
+
+### Without `<Steps>`
+
+1. **[Content-driven](#content-driven):** Astro was designed to showcase your content.
+2. **[Server-first](#server-first):** Websites run faster when they render HTML on the server.
+3. **[Fast by default](#fast-by-default):** It should be impossible to build a slow website in Astro.
+4. **[Easy to use](#easy-to-use):** You don't need to be an expert to build something with Astro.
+5. **[Developer-focused](#developer-focused):** You should have the resources you need to be successful.
+
+### With `<Steps>`
+
+<Steps>
+
+1. **[Content-driven](#content-driven):** Astro was designed to showcase your content.
+2. **[Server-first](#server-first):** Websites run faster when they render HTML on the server.
+3. **[Fast by default](#fast-by-default):** It should be impossible to build a slow website in Astro.
+4. **[Easy to use](#easy-to-use):** You don't need to be an expert to build something with Astro.
+5. **[Developer-focused](#developer-focused):** You should have the resources you need to be successful.
+
+</Steps>
+
+## With headings
+
+Run down of different heading levels as the first text in the list item:
+
+<Steps>
+
+1. # Step one
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+2. ## Step two
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+3. ### Step three
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+4. #### Step four
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+5. ##### Step five
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+6. ###### Step six
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum ante non neque convallis tempor.
+
+</Steps>
+
+## With component content
+
+<Steps>
+
+1. <CardGrid>
+
+   ### Installation
+
+   ```sh
+   pnpm i astro
+   ```
+
+   </CardGrid>
+
+2. <CardGrid>
+
+   Install your dependencies:
+
+   ```sh
+   pnpm install
+   ```
+
+   </CardGrid>
+
+3. <LinkCard
+   	title="Customizing Starlight"
+   	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+   	href="/guides/customization/"
+   />
+
+4. <Tabs>
+   	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+   	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+   </Tabs>
+
+</Steps>
