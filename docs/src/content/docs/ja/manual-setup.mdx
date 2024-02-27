@@ -103,7 +103,7 @@ Starlightのすべてのページをサブパスに追加するには、ドキ�
 
 たとえば、Starlightのページがすべて`/guides/`で始まる場合は、コンテンツを`src/content/docs/guides/`ディレクトリに追加します。
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
