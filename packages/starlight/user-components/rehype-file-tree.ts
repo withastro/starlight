@@ -234,7 +234,7 @@ function validateFileTree(tree: Element) {
 function throwFileTreeValidationError(message: string): never {
 	throw new AstroError(
 		message,
-		'To learn more about the `<FileTree>` component, see https://starlight.astro.build/guides/components/#filetree'
+		'To learn more about the `<FileTree>` component, see https://starlight.astro.build/guides/components/#file-tree'
 	);
 }
 
