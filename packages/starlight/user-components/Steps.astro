@@ -10,57 +10,76 @@ const { html } = processSteps(content);
 <style>
 	.sl-steps {
 		--bullet-size: calc(var(--sl-line-height) * 1rem);
+		--bullet-margin: 0.5rem;
 	}
 	.sl-steps > :global(ol) {
 		list-style: none;
-		padding-inline-start: calc(var(--bullet-size) / 2);
+		padding-inline-start: 0;
 	}
+
 	.sl-steps > :global(ol > li) {
 		position: relative;
-		/* border-inline-start: 1px solid var(--sl-color-hairline); */
-		box-shadow: inset 1px 0 var(--sl-color-hairline);
-		/* -0.5px 0 var(--sl-color-hairline); */
-		padding-inline-start: calc(1rem + var(--bullet-size) / 2);
+		padding-inline-start: calc(var(--bullet-size) + 1rem);
+		/* HACK: Keeps any `margin-bottom` inside the `<li>`’s padding box to avoid gaps in the hairline border. */
 		padding-bottom: 1px;
-	}
-	.sl-steps > :global(ol > li:last-of-type) {
-		/* border-color: transparent; */
-		box-shadow: none;
+		/* Prevent bullets from touching in short list items. */
+		min-height: calc(var(--bullet-size) + var(--bullet-margin));
 	}
 	.sl-steps > :global(ol > li + li) {
+		/* Remove margin between steps. */
 		margin-top: 0;
 	}
 
+	/* Custom list marker element. */
 	.sl-steps > :global(ol > li::before) {
-		content: counter(list-item) '.';
-
+		content: counter(list-item);
 		position: absolute;
-		inset-inline-start: calc(-1 * var(--bullet-size) / 2);
 		top: 0;
-
+		inset-inline-start: 0;
 		width: var(--bullet-size);
 		height: var(--bullet-size);
 		line-height: var(--bullet-size);
 
-		font-size: var(--sl-text-sm);
+		font-size: var(--sl-text-xs);
 		font-weight: 600;
 		text-align: center;
 		color: var(--sl-color-white);
-		background-color: var(--sl-color-black);
+		background-color: var(--sl-color-gray-6);
 		border-radius: 99rem;
+		box-shadow: inset 0 0 0 1px var(--sl-color-gray-5);
 	}
 
-	.sl-steps > :global(ol > li:has(p, h1, h2, h3, h4, h5, h6, ul, ol)::before) {
-		content: counter(list-item);
-		background: var(--sl-color-gray-6);
-		box-shadow:
-			/* inset 0 -1px var(--sl-color-text-accent), */ inset 0 0 0 1px
-			var(--sl-color-gray-5);
-		font-size: var(--sl-text-xs);
+	/* Vertical guideline linking list numbers. */
+	.sl-steps > :global(ol > li:not(:last-of-type)::after) {
+		--guide-width: 1px;
+		content: '';
+		position: absolute;
+		top: calc(var(--bullet-size) + var(--bullet-margin));
+		bottom: var(--bullet-margin);
+		inset-inline-start: calc((var(--bullet-size) - var(--guide-width)) / 2);
+		width: var(--guide-width);
+		background-color: var(--sl-color-hairline);
 	}
 
-	/* .sl-steps > :global(ol > li > p:first-child) {
-		color: var(--sl-color-white);
-		font-weight: 600;
-	} */
+	/* Adjust first item inside a step so that it aligns vertically with the number
+			even if using a larger font size (e.g. a heading) */
+	.sl-steps > :global(ol > li > :first-child) {
+		/*
+		The `lh` unit is not yet supported by all browsers in our support matrix
+		— see https://caniuse.com/mdn-css_types_length_lh
+		In unsupported browsers we approximate this using our known line-heights.
+		*/
+		--lh: calc(1em * var(--sl-line-height));
+		--shift-y: calc(0.5 * (var(--bullet-size) - var(--lh)));
+		transform: translateY(var(--shift-y));
+		margin-bottom: var(--shift-y);
+	}
+	.sl-steps > :global(ol > li > :first-child:where(h1, h2, h3, h4, h5, h6)) {
+		--lh: calc(1em * var(--sl-line-height-headings));
+	}
+	@supports (--prop: 1lh) {
+		.sl-steps > :global(ol > li > :first-child) {
+			--lh: 1lh;
+		}
+	}
 </style>
