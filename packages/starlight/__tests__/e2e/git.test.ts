@@ -1,9 +1,9 @@
-import { expect, test } from 'vitest';
-import { makeTestProject } from './test-e2e-utils';
+import { expect } from 'vitest';
+import { longTest, makeTestProject } from './test-e2e-utils';
 import starlight from '../../index';
 import * as cheerio from 'cheerio';
 
-test('include last updated date from git in the footer', async () => {
+longTest('include last updated date from git in the footer', async () => {
 	const project = makeTestProject({
 		config: {
 			integrations: [

@@ -1,13 +1,12 @@
-import { mkdtempSync, mkdirSync, writeFileSync, symlinkSync, rmdirSync } from 'node:fs';
-import { join, dirname, resolve } from 'node:path';
+import { mkdtempSync, mkdirSync, writeFileSync, rmdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
 import { realpathSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { dev, build, preview, type AstroInlineConfig } from 'astro';
 import { version as astroVersion } from 'astro/package.json';
 import { version as nodeIntegrationVersion } from '@astrojs/node/package.json';
-import { afterEach } from 'vitest';
+import { afterEach, test } from 'vitest';
 
 // Receive a file tree instead of a flattened list of files so it better works on Windows.
 export type FileTree = { [name in string]: TreeEntry };
@@ -189,3 +188,10 @@ export function makeTestProject(options: ProjectOptions) {
 type ISODate =
 	| `${number}-${number}-${number}`
 	| `${number}-${number}-${number}T${number}:${number}:${number}Z`;
+
+export function longTest(name: string, testFn: () => Promise<void>) {
+	test(name, testFn, {
+		concurrent: false,
+		timeout: 15000,
+	});
+}

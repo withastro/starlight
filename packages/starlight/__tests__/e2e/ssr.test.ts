@@ -1,15 +1,8 @@
-import { makeTestProject, type FileTree } from './test-e2e-utils';
+import { makeTestProject, type FileTree, longTest } from './test-e2e-utils';
 import node from '@astrojs/node';
 import starlight from '../../index';
 import * as cheerio from 'cheerio';
-import { expect, test } from 'vitest';
-
-function longTest(name: string, testFn: () => Promise<void>) {
-	test(name, testFn, {
-		concurrent: false,
-		timeout: 15000,
-	});
-}
+import { expect } from 'vitest';
 
 longTest('SSR mode renders the same content page', async () => {
 	const fileTree: FileTree = {
