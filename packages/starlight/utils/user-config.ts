@@ -218,8 +218,13 @@ const UserConfigSchema = z.object({
 	prerender: z.boolean().default(true),
 });
 
-export const StarlightConfigSchema = UserConfigSchema.strict().transform(
-	({ locales, defaultLocale, ...config }, ctx) => {
+export const StarlightConfigSchema = UserConfigSchema.strict()
+	.transform((config) => ({
+		...config,
+		// Pagefind only defaults to true if prerender is also true.
+		pagefind: config.pagefind ?? config.prerender,
+	}))
+	.transform(({ locales, defaultLocale, ...config }, ctx) => {
 		if (locales !== undefined && Object.keys(locales).length > 1) {
 			// This is a multilingual site (more than one locale configured).
 			// Make sure we can find the default locale and if not, help the user set it.
@@ -242,8 +247,6 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 
 			return {
 				...config,
-				// Pagefind only defaults to true if prerender is also true.
-				pagefind: config.pagefind ?? config.prerender,
 				/** Flag indicating if this site has multiple locales set up. */
 				isMultilingual: true,
 				/** Full locale object for this site’s default language. */
@@ -267,8 +270,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 			},
 			locales: undefined,
 		} as const;
-	}
-);
+	});
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
 export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;

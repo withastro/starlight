@@ -62,6 +62,7 @@ test('parses valid config successfully', () => {
 		  "locales": undefined,
 		  "pagefind": true,
 		  "pagination": true,
+		  "prerender": true,
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
