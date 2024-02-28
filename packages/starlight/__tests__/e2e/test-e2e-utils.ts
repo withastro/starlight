@@ -1,10 +1,13 @@
 import { mkdtempSync, mkdirSync, writeFileSync, symlinkSync, rmdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
+import { realpathSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { dev, build, preview, type AstroInlineConfig } from 'astro';
 import { version as astroVersion } from 'astro/package.json';
-import { afterEach, afterAll } from 'vitest';
+import { version as nodeIntegrationVersion } from '@astrojs/node/package.json';
+import { afterEach } from 'vitest';
 
 // Receive a file tree instead of a flattened list of files so it better works on Windows.
 export type FileTree = { [name in string]: TreeEntry };
@@ -18,6 +21,7 @@ const defaultFileTree: FileTree = {
 		version: '0.0.1',
 		dependencies: {
 			astro: astroVersion,
+			'@astrojs/node': nodeIntegrationVersion,
 			'@astrojs/starlight': new URL('../../', import.meta.url).toString(),
 		},
 	}),
@@ -64,9 +68,8 @@ afterEach(async () => {
 });
 
 export function makeTestProject(options: ProjectOptions) {
-	const prefix = join(fileURLToPath(import.meta.url), '..', 'tmp', 'test-');
-	mkdirSync(prefix, { recursive: true });
-	const projectPath = resolve(mkdtempSync(prefix));
+	const prefix = join(tmpdir(), 'starlight-test-');
+	const projectPath = realpathSync(mkdtempSync(prefix));
 
 	resourceCleanup.push(() => rmdirSync(projectPath, { recursive: true }));
 
@@ -82,7 +85,9 @@ export function makeTestProject(options: ProjectOptions) {
 		if (result.status !== 0) {
 			throw new Error(
 				`Failed to execute test repository command: '${command} ${args.join(' ')}'` +
-					`\n\n${result.error ?? result.stderr.toString()}`
+				`\n\n${result.error}` +
+				`\n\n${result.stderr.toString()}` +
+				`\n\n${result.stdout.toString()}`
 			);
 		}
 	}
@@ -173,13 +178,10 @@ export function makeTestProject(options: ProjectOptions) {
 	projectHandle.writeFileTree(defaultFileTree);
 	projectHandle.writeFileTree(options.fileTree ?? {});
 
-	// Starlight first release as default <3
+	runInRepo('pnpm', ['install']);
+
+	// Starlight first release as default initial date <3
 	projectHandle.commitAllChanges('Initial commit', options.initialCommitDate ?? '2023-05-08');
-	symlinkSync(
-		resolve(fileURLToPath(import.meta.url), '../../../../../docs/node_modules'),
-		resolve(projectPath, 'node_modules'),
-		'dir'
-	);
 
 	return projectHandle;
 }
