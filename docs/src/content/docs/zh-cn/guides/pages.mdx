@@ -121,15 +121,15 @@ import CustomComponent from './CustomComponent.astro';
 
 ```astro {3-13}
 <StarlightPage
-	frontmatter={{ title: 'Orion' }}
+	frontmatter={{ title: '猎户座' }}
 	sidebar={[
-		{ label: 'Home', href: '/' },
+		{ label: '首页', href: '/' },
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Andromeda', href: '/andromeda/' },
-				{ label: 'Orion', href: '/orion/', isCurrent: true },
-				{ label: 'Ursa Minor', href: '/ursa-minor/', badge: 'Stub' },
+				{ label: '仙女座', href: '/andromeda/' },
+				{ label: '猎户座', href: '/orion/', isCurrent: true },
+				{ label: '射手座', href: '/sagittarius/', badge: 'Stub' },
 			],
 		},
 	]}
