@@ -19,6 +19,7 @@ Por exemplo, na primeira visita, um utilizador vai descarregar menos do que 50 K
 Com uma boa estratégia de _cache_, as navegações subsequentes podem descarregar tão pouco quanto 10 KB.
 
 ### Imagens
+
 Enquanto o Starlight providencia uma boa base, as imagens que você adicionar à sua documentação podem aumentar o peso da sua página rapidamente.
 O Starlight usa o [suporte a assets otimizados][assets] do Astro para otimizar imagens locais nos seus arquivos Markdown e MDX.
 

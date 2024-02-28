@@ -198,11 +198,11 @@ export default defineConfig({
 			],
 			plugins: process.env.CHECK_LINKS
 				? [
-					starlightLinksValidator({
-						errorOnFallbackPages: false,
-						errorOnInconsistentLocale: true,
-					}),
-				]
+						starlightLinksValidator({
+							errorOnFallbackPages: false,
+							errorOnInconsistentLocale: true,
+						}),
+				  ]
 				: [],
 		}),
 	],
