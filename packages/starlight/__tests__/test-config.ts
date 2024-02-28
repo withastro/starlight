@@ -30,5 +30,8 @@ export async function defineVitestConfig(
 				trailingSlash,
 			}),
 		],
+		test: {
+			snapshotSerializers: ['./snapshot-serializer-astro-error.ts'],
+		},
 	});
 }

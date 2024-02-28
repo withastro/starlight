@@ -17,9 +17,6 @@ const defaultCoverageExcludes = [
 
 export default defineConfig({
 	test: {
-		watchExclude: [
-			'__test__/e2e/tmp/**',
-		],
 		coverage: {
 			all: true,
 			reportsDirectory: './__coverage__',

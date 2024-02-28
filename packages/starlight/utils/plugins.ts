@@ -1,7 +1,7 @@
 import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
-import { errorMap, throwValidationError } from '../utils/error-map';
+import { parseWithFriendlyErrors } from '../utils/error-map';
 import { AstroError } from 'astro/errors';
 
 /**
@@ -16,13 +16,14 @@ export async function runPlugins(
 ) {
 	// Validate the user-provided configuration.
 	let userConfig = starlightUserConfig;
-	let starlightConfig = StarlightConfigSchema.safeParse(userConfig, { errorMap });
 
-	if (!starlightConfig.success) {
-		throwValidationError(starlightConfig.error, 'Invalid config passed to starlight integration');
-	}
+	let starlightConfig = parseWithFriendlyErrors(
+		StarlightConfigSchema,
+		userConfig,
+		'Invalid config passed to starlight integration'
+	);
 
-	if (!starlightConfig.data.prerender && context.config.output === 'static') {
+	if (!starlightConfig.prerender && context.config.output === 'static') {
 		throw new AstroError(
 			'Disabling prerendering is not supported when using the `static` output mode.',
 			'Set `prerender: true` in your Astro config to enable prerendering\n' +
@@ -30,7 +31,7 @@ export async function runPlugins(
 		);
 	}
 
-	if (!starlightConfig.data.prerender && starlightConfig.data.pagefind) {
+	if (!starlightConfig.prerender && starlightConfig.pagefind) {
 		throw new AstroError(
 			'Pagefind search is not support with prerendering disabled.',
 			'Set `prerender: true` to enable prerendering or set `pagefind: false` to disable Pagefind.'
@@ -38,16 +39,11 @@ export async function runPlugins(
 	}
 
 	// Validate the user-provided plugins configuration.
-	const pluginsConfig = starlightPluginsConfigSchema.safeParse(pluginsUserConfig, {
-		errorMap,
-	});
-
-	if (!pluginsConfig.success) {
-		throwValidationError(
-			pluginsConfig.error,
-			'Invalid plugins config passed to starlight integration'
-		);
-	}
+	const pluginsConfig = parseWithFriendlyErrors(
+		starlightPluginsConfigSchema,
+		pluginsUserConfig,
+		'Invalid plugins config passed to starlight integration'
+	);
 
 	// A list of Astro integrations added by the various plugins.
 	const integrations: AstroIntegration[] = [];
@@ -55,7 +51,7 @@ export async function runPlugins(
 	for (const {
 		name,
 		hooks: { setup },
-	} of pluginsConfig.data) {
+	} of pluginsConfig) {
 		await setup({
 			config: pluginsUserConfig ? { ...userConfig, plugins: pluginsUserConfig } : userConfig,
 			updateConfig(newConfig) {
@@ -68,14 +64,11 @@ export async function runPlugins(
 
 				// If the plugin is updating the user config, re-validate it.
 				const mergedUserConfig = { ...userConfig, ...newConfig };
-				const mergedConfig = StarlightConfigSchema.safeParse(mergedUserConfig, { errorMap });
-
-				if (!mergedConfig.success) {
-					throwValidationError(
-						mergedConfig.error,
-						`Invalid config update provided by the '${name}' plugin`
-					);
-				}
+				const mergedConfig = parseWithFriendlyErrors(
+					StarlightConfigSchema,
+					mergedUserConfig,
+					`Invalid config update provided by the '${name}' plugin`
+				);
 
 				// If the updated config is valid, keep track of both the user config and parsed config.
 				userConfig = mergedUserConfig;
@@ -95,7 +88,7 @@ export async function runPlugins(
 		});
 	}
 
-	return { integrations, starlightConfig: starlightConfig.data };
+	return { integrations, starlightConfig };
 }
 
 // https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113

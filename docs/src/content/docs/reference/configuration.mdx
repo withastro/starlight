@@ -435,6 +435,7 @@ Define whether Starlight pages should be prerendered or handled using SSR.
 This option behave just like the [`export const prerender`](https://docs.astro.build/en/guides/server-side-rendering/#enable-on-demand-server-rendering) from Astro pages and allow overriding the default prerendering behavior of the selected output mode.
 
 The default behavior depends on the [`output` config](https://docs.astro.build/en/reference/configuration-reference/#output) of the Astro project:
+
 - `static`: This property is ignored just like the `prerender` page constants;
 - `hybrid`: This defaults to `true`;
 - `server`: This defaults to `false`.

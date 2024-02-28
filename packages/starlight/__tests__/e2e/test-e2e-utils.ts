@@ -85,9 +85,9 @@ export function makeTestProject(options: ProjectOptions) {
 		if (result.status !== 0) {
 			throw new Error(
 				`Failed to execute test repository command: '${command} ${args.join(' ')}'` +
-				`\n\n${result.error}` +
-				`\n\n${result.stderr.toString()}` +
-				`\n\n${result.stdout.toString()}`
+					`\n\n${result.error}` +
+					`\n\n${result.stderr.toString()}` +
+					`\n\n${result.stdout.toString()}`
 			);
 		}
 	}
