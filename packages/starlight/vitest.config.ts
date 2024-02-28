@@ -4,6 +4,7 @@ import { defineConfig } from 'vitest/config';
 const defaultCoverageExcludes = [
 	'coverage/**',
 	'dist/**',
+	'.astro/**',
 	'packages/*/test?(s)/**',
 	'**/*.d.ts',
 	'cypress/**',
@@ -34,10 +35,10 @@ export default defineConfig({
 			],
 			thresholds: {
 				autoUpdate: true,
-				lines: 80.11,
-				functions: 93.61,
-				branches: 91.23,
-				statements: 80.11,
+				lines: 94.7,
+				functions: 95.94,
+				branches: 92.44,
+				statements: 94.7,
 			},
 		},
 	},
