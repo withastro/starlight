@@ -175,19 +175,19 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 ### Apartados
 
-Los apartados (también conocidos como "admoniciones" o "llamadas") son útiles para mostrar información secundaria junto al contenido principal de una página.
+Los apartados son útiles para mostrar información secundaria junto al contenido principal de una página.
 
-Un `<Aside>` puede tener un `type` opcional de `note` (el valor predeterminado), `tip`, `caution` o `danger`. Establecer un atributo `title` anula el título predeterminado del aside.
+Un `<Aside>` puede tener un `type` opcional de `note` (el valor predeterminado), `tip`, `caution` o `danger`. Establecer un atributo `title` anula el título predeterminado del apartado.
 
 ````mdx
 # src/content/docs/example.mdx
 
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>Un aside predeterminado sin un título personalizado.</Aside>
+<Aside>Un apartado predeterminado sin un título personalizado.</Aside>
 
 <Aside type="caution" title="Watch out!">
-	Un aside de advertencia *con* un título personalizado.
+	Un apartado de advertencia *con* un título personalizado.
 </Aside>
 
 <Aside type="tip">
@@ -207,10 +207,10 @@ El código anterior genera lo siguiente en la página:
 
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>Un aside predeterminado sin un título personalizado.</Aside>
+<Aside>Un apartado predeterminado sin un título personalizado.</Aside>
 
 <Aside type="caution" title="Watch out!">
-	Un aside de advertencia *con* un título personalizado.
+	Un apartado de advertencia *con* un título personalizado.
 </Aside>
 
 <Aside type="tip">
