@@ -136,6 +136,7 @@ export default defineConfig({
 								id: 'Dampak terhadap lingkungan',
 								'zh-CN': '环境影响',
 								'pt-BR': 'Impacto Ambiental',
+								'pt-PT': 'Impacto Ambiental',
 								ko: '환경적 영향',
 								tr: 'Çevre Etkisi',
 								ru: 'Влияние на окружающую среду',
