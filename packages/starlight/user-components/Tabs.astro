@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { processPanels } from './rehype-tabs';
 
 const panelHtml = await Astro.slots.render('default');
@@ -10,7 +11,7 @@ const { html, panels } = processPanels(panelHtml);
 		panels && (
 			<div class="tablist-wrapper not-content">
 				<ul role="tablist">
-					{panels.map(({ label, panelId, tabId }, idx) => (
+					{panels.map(({ icon, label, panelId, tabId }, idx) => (
 						<li role="presentation" class="tab">
 							<a
 								role="tab"
@@ -19,6 +20,7 @@ const { html, panels } = processPanels(panelHtml);
 								aria-selected={idx === 0 && 'true'}
 								tabindex={idx !== 0 ? -1 : 0}
 							>
+								{icon && <Icon name={icon} />}
 								{label}
 							</a>
 						</li>
@@ -50,7 +52,9 @@ const { html, panels } = processPanels(panelHtml);
 		margin-bottom: -2px;
 	}
 	.tab > [role='tab'] {
-		display: block;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 		padding: 0 1.25rem;
 		text-decoration: none;
 		border-bottom: 2px solid var(--sl-color-gray-5);

@@ -173,6 +173,61 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Componentes" href="/es/guides/components/" />
 </CardGrid>
 
+### Apartados
+
+Los apartados son útiles para mostrar información secundaria junto al contenido principal de una página.
+
+Un `<Aside>` puede tener un `type` opcional de `note` (el valor predeterminado), `tip`, `caution` o `danger`. Establecer un atributo `title` anula el título predeterminado del apartado.
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un apartado predeterminado sin un título personalizado.</Aside>
+
+<Aside type="caution" title="Watch out!">
+	Un apartado de advertencia *con* un título personalizado.
+</Aside>
+
+<Aside type="tip">
+
+Otro contenido también es compatible en los apartados.
+
+```js
+// Una muestra de código, por ejemplo.
+```
+
+</Aside>
+
+<Aside type="danger">No le des tu contraseña a nadie.</Aside>
+````
+
+El código anterior genera lo siguiente en la página:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un apartado predeterminado sin un título personalizado.</Aside>
+
+<Aside type="caution" title="Watch out!">
+	Un apartado de advertencia *con* un título personalizado.
+</Aside>
+
+<Aside type="tip">
+
+Otro contenido también es compatible en los apartados.
+
+```js
+// Una muestra de código, por ejemplo.
+```
+
+</Aside>
+
+<Aside type="danger">No le des tu contraseña a nadie.</Aside>
+
+Starlight también proporciona una sintaxis personalizada para renderizar apartados en Markdown y MDX como una alternativa al componente `<Aside>`.
+Consulta la guía [“Creación de contenido en Markdown”](/es/guides/authoring-content/#apartados) para obtener más detalles de la sintaxis personalizada.
+
 ### Iconos
 
 import { Icon } from '@astrojs/starlight/components';
