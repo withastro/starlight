@@ -1,0 +1,72 @@
+---
+title: Testing badges
+description: Learn how to start building your next documentation site with Starlight by Astro.
+sidebar:
+  badge: Test
+---
+
+import { Tabs, TabItem, Badge } from '@astrojs/starlight/components';
+
+## APIs
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+### <Badge variant="success">POST</Badge> `/api/users`
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+#### <Badge variant="tip">PUT</Badge> `/api/users`
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+##### <Badge variant="danger">DELETE</Badge> `/api/users`
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+### Lists
+
+- *Italic <Badge variant="caution">caution</Badge>* lorem ipsum
+- **Bold <Badge variant="tip">caution</Badge>** lorem ipsum
+- ***Bold Italic <Badge variant="note">caution</Badge>*** lorem ipsum
+- Custom <Badge class="custom-badge">Custom</Badge> lorem ipsum
+
+### Asides
+
+:::danger
+<Badge variant="note">note</Badge> <Badge variant="caution">caution</Badge> <Badge variant="danger">danger</Badge> <Badge variant="success">sucess</Badge> <Badge variant="tip">tip</Badge> <Badge variant="default">default</Badge>
+:::
+
+ 
+:::note
+<Badge variant="note">note</Badge> <Badge variant="caution">caution</Badge> <Badge variant="danger">danger</Badge> <Badge variant="success">sucess</Badge> <Badge variant="tip">tip</Badge> <Badge variant="default">default</Badge>
+:::
+
+### Tabs
+
+<Tabs>
+  <TabItem label="Tab 1">
+    This API is <Badge variant="caution">caution</Badge> and should be avoided.
+
+    ```js
+    const foo = 'bar';
+    ```
+
+  </TabItem>
+  <TabItem label="Tab 2">
+    This API is <Badge variant="danger">danger</Badge> and should be avoided.
+
+    ```js
+    const foo = 'bar';
+    ```
+  </TabItem>
+</Tabs>
+
+
+### Tables
+
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| <Badge variant="success">GET</Badge> | `/api/users` | Get all users |
+| <Badge variant="tip">POST</Badge> | `/api/users` | Create a new user |
+| <Badge variant="note">PUT</Badge> | `/api/users` | Update a user |
+| <Badge variant="danger">DELETE</Badge> | `/api/users` | Delete a user |
