@@ -1,5 +1,27 @@
 # @astrojs/starlight
 
+## 0.20.1
+
+### Patch Changes
+
+- [#1553](https://github.com/withastro/starlight/pull/1553) [`8e091147`](https://github.com/withastro/starlight/commit/8e09114755d37322d6e97b0dc90a5dfd781de8cc) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates Expressive Code to v0.33.4 to fix potential race condition bug in Shiki.
+
+## 0.20.0
+
+### Minor Changes
+
+- [#1541](https://github.com/withastro/starlight/pull/1541) [`1043052f`](https://github.com/withastro/starlight/commit/1043052f3890a577a73276472f3773924909406b) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates `astro-expressive-code` dependency to the latest minor release (0.33).
+
+  This unlocks support for [word wrap](https://expressive-code.com/key-features/word-wrap/) and [line numbers](https://expressive-code.com/plugins/line-numbers/), as well as updating the syntax highlighter to the latest Shiki release, which includes new and updated language grammars.
+
+  See the [Expressive Code release notes](https://expressive-code.com/releases/) for more information including details of potentially breaking changes.
+
+### Patch Changes
+
+- [#1542](https://github.com/withastro/starlight/pull/1542) [`b3b7a606`](https://github.com/withastro/starlight/commit/b3b7a6069952d5f27a49b2fd097aa4db065e1718) Thanks [@delucis](https://github.com/delucis)! - Improves error messages shown by Starlight for configuration errors.
+
+- [#1544](https://github.com/withastro/starlight/pull/1544) [`65dc6586`](https://github.com/withastro/starlight/commit/65dc6586ef7c1754875db1d48c49e709051a0b13) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Update Vietnamese UI translations
+
 ## 0.19.1
 
 ### Patch Changes
