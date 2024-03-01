@@ -44,10 +44,26 @@ test('component with multiple children throws an error', () => {
 
 test('applies `role="list"` to child list', () => {
 	const { html } = processSteps('<ol><li>Step one</li></ol>');
-	expect(html).toMatchInlineSnapshot(`"<ol role="list"><li>Step one</li></ol>"`);
+	expect(html).toMatchInlineSnapshot(`"<ol role="list" class="sl-steps"><li>Step one</li></ol>"`);
 });
 
 test('does not interfere with other attributes on the child list', () => {
 	const { html } = processSteps('<ol start="5"><li>Step one</li></ol>');
-	expect(html).toMatchInlineSnapshot(`"<ol start="5" role="list"><li>Step one</li></ol>"`);
+	expect(html).toMatchInlineSnapshot(
+		`"<ol start="5" role="list" class="sl-steps"><li>Step one</li></ol>"`
+	);
+});
+
+test('applies `class="sl-list"` to child list', () => {
+	const { html } = processSteps('<ol><li>Step one</li></ol>');
+	expect(html).toContain('class="sl-steps"');
+});
+
+test('applies class name and preserves existing classes on a child list', () => {
+	const testClass = 'test class-concat';
+	const { html } = processSteps(`<ol class="${testClass}"><li>Step one</li></ol>`);
+	expect(html).toContain(`class="${testClass} sl-steps"`);
+	expect(html).toMatchInlineSnapshot(
+		`"<ol class="test class-concat sl-steps" role="list"><li>Step one</li></ol>"`
+	);
 });

@@ -30,6 +30,12 @@ const stepsProcessor = rehype()
 			// We use `list-style: none` in the styles for this component and need to ensure the list
 			// retains its semantics in Safari, which will remove them otherwise.
 			rootElement.properties.role = 'list';
+			// Add the required CSS class name, preserving existing classes if present.
+			if (!Array.isArray(rootElement.properties.className)) {
+				rootElement.properties.className = ['sl-steps'];
+			} else {
+				rootElement.properties.className.push('sl-steps');
+			}
 		};
 	});
 
