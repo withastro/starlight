@@ -328,6 +328,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </FileTree>
 
+### Steps
+
+Use the `<Steps>` component to style numbered lists of tasks.
+This is useful for more complex step-by-step guides where each step needs to be clearly highlighted.
+
+Wrap `<Steps>` around a standard Markdown ordered list.
+All the usual Markdown syntax is applicable inside `<Steps>`.
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+````
+
+The code above generates the following on the page:
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
