@@ -1,8 +1,10 @@
 import { expect, test } from 'vitest';
 import { processPanels, TabItemTagname } from '../../user-components/rehype-tabs';
 
-const TabItem = ({ label, slot }: { label: string; slot: string }) =>
-	`<${TabItemTagname} data-label="${label}">${slot}</${TabItemTagname}>`;
+const TabItem = ({ label, slot, icon }: { label: string; slot: string; icon?: string }) => {
+	const iconAttr = icon ? ` data-icon="${icon}"` : '';
+	return `<${TabItemTagname} data-label="${label}"${iconAttr}>${slot}</${TabItemTagname}>`;
+};
 
 /** Get an array of HTML strings, one for each `<section>` created by rehype-tabs for each tab item. */
 const extractSections = (html: string) =>
@@ -34,6 +36,7 @@ test('tab items are processed', () => {
 	expect(panels?.[0]?.label).toBe(label);
 	expect(panels?.[0]?.panelId).toMatchInlineSnapshot('"tab-panel-0"');
 	expect(panels?.[0]?.tabId).toMatchInlineSnapshot('"tab-0"');
+	expect(panels?.[0]?.icon).not.toBeDefined();
 });
 
 test('only first item is not hidden', () => {
@@ -88,4 +91,16 @@ test('applies tabindex="0" to tab items without focusable content', () => {
 	expect(sections[0]).not.includes('tabindex="0"');
 	expect(sections[1]).includes('tabindex="0"');
 	expect(sections[2]).not.includes('tabindex="0"');
+});
+
+test('processes a tab item icon', () => {
+	const icon = 'star';
+	const input = TabItem({ label: 'Test', slot: '<p>Random paragraph</p>', icon });
+	const { panels, html } = processPanels(input);
+
+	expect(html).toMatchInlineSnapshot(
+		`"<section id="tab-panel-10" aria-labelledby="tab-10" role="tabpanel" tabindex="0"><p>Random paragraph</p></section>"`
+	);
+	expect(panels).toHaveLength(1);
+	expect(panels?.[0]?.icon).toBe(icon);
 });
