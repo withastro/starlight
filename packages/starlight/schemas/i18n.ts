@@ -121,6 +121,10 @@ function starlightI18nSchema() {
 			'aside.note': z.string().describe('Text shown on the note aside variant'),
 			'aside.caution': z.string().describe('Text shown on the warning aside variant'),
 			'aside.danger': z.string().describe('Text shown on the danger aside variant'),
+
+			'fileTree.directory': z
+				.string()
+				.describe('Label for the directory icon in the file tree component.'),
 		})
 		.partial();
 }

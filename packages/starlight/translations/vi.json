@@ -22,5 +22,6 @@
   "aside.note": "Ghi chú",
   "aside.tip": "Mẹo",
   "aside.caution": "Thận trọng",
-  "aside.danger": "Nguy hiểm"
+  "aside.danger": "Nguy hiểm",
+  "fileTree.directory": "Directory"
 }
