@@ -59,16 +59,24 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
-	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="恒星" icon="star">
+		シリウス、ベガ、ペテルギウス
+	</TabItem>
+	<TabItem label="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</TabItem>
 </Tabs>
 ```
 
 上のコードは、ページに以下のタブを生成します。
 
 <Tabs>
-	<TabItem label="恒星">シリウス、ベガ、ペテルギウス</TabItem>
-	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="恒星" icon="star">
+		シリウス、ベガ、ペテルギウス
+	</TabItem>
+	<TabItem label="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</TabItem>
 </Tabs>
 
 ### カード
