@@ -22,5 +22,6 @@
   "aside.note": "टिप्पणी",
   "aside.tip": "संकेत",
   "aside.caution": "सावधानी",
-  "aside.danger": "खतरा"
+  "aside.danger": "खतरा",
+  "fileTree.directory": "Directory"
 }
