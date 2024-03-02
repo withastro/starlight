@@ -22,5 +22,6 @@
   "aside.note": "Mențiune",
   "aside.tip": "Sfat",
   "aside.caution": "Atenție",
-  "aside.danger": "Pericol"
+  "aside.danger": "Pericol",
+  "fileTree.directory": "Directory"
 }

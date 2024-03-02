@@ -59,6 +59,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 You can display a tabbed interface using the `<Tabs>` and `<TabItem>` components.
 Each `<TabItem>` must have a `label` to display to users.
+Use the optional `icon` attribute to include one of [Starlight’s built-in icons](#all-icons) next to the label.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -66,16 +67,24 @@ Each `<TabItem>` must have a `label` to display to users.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 ```
 
 The code above generates the following tabs on the page:
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 
 ### Cards
@@ -224,33 +233,6 @@ Other content is also supported in asides.
 Starlight also provides a custom syntax for rendering asides in Markdown and MDX as an alternative to the `<Aside>` component.
 See the [“Authoring Content in Markdown”](/guides/authoring-content/#asides) guide for details of the custom syntax.
 
-### Icon
-
-import { Icon } from '@astrojs/starlight/components';
-import IconsList from '~/components/icons-list.astro';
-
-Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
-
-Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
-
-```mdx
-# src/content/docs/example.mdx
-
-import { Icon } from '@astrojs/starlight/components';
-
-<Icon name="star" color="goldenrod" size="2rem" />
-```
-
-The code above generates the following on the page:
-
-<Icon name="star" color="goldenrod" size="2rem" />
-
-#### All icons
-
-A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
-
-<IconsList />
-
 ### Code
 
 Use the `<Code>` component to render syntax highlighted code when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
@@ -296,3 +278,119 @@ The code above generates the following on the page:
 import importedCode from '/src/env.d.ts?raw';
 
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### File Tree
+
+Use the `<FileTree>` component to display the structure of a directory with file icons and collapsible sub-directories.
+
+Specify the structure of your files and directories with an [unordered Markdown list](https://www.markdownguide.org/basic-syntax/#unordered-lists) inside `<FileTree>`.
+Create a sub-directory using a nested list or add a `/` to the end of a list item to render it as a directory without specific content.
+
+The following syntax can be used to customize the appearance of the file tree:
+
+- Highlight a file or directory by making its name bold, e.g. `**README.md**`.
+- Add a comment to a file or directory by adding more text after the name.
+- Add placeholder files and directories by using either `...` or `…` as the name.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+The above code generates the following on the page:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### Steps
+
+Use the `<Steps>` component to style numbered lists of tasks.
+This is useful for more complex step-by-step guides where each step needs to be clearly highlighted.
+
+Wrap `<Steps>` around a standard Markdown ordered list.
+All the usual Markdown syntax is applicable inside `<Steps>`.
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+````
+
+The code above generates the following on the page:
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+</Steps>
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '~/components/icons-list.astro';
+
+Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
+
+Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+The code above generates the following on the page:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### All icons
+
+A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
+
+<IconsList />
