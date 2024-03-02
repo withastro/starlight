@@ -228,33 +228,6 @@ import { Aside } from '@astrojs/starlight/components';
 
 Starlightは、`<Aside>`コンポーネントの代わりとして、MarkdownやMDXで補足情報をレンダリングするためのカスタム構文も提供しています。カスタム構文の詳細については、「[Markdownでのコンテンツ作成](/ja/guides/authoring-content/#補足情報)」ガイドを参照してください。
 
-### アイコン
-
-import { Icon } from '@astrojs/starlight/components';
-import IconsList from '~/components/icons-list.astro';
-
-Starlightは、`<Icon>`コンポーネントを通じてコンテンツ内に表示可能な、一般的なアイコンのセットを提供しています。
-
-`<Icon>`は[`name`](#すべてのアイコン)を必須とし、任意で`label`、`size`、`color`属性を含められます。
-
-```mdx
-# src/content/docs/example.mdx
-
-import { Icon } from '@astrojs/starlight/components';
-
-<Icon name="star" color="goldenrod" size="2rem" />
-```
-
-上のコードにより、ページに以下が生成されます。
-
-<Icon name="star" color="goldenrod" size="2rem" />
-
-#### すべてのアイコン
-
-以下に、利用可能なすべてのアイコンとその名前を示します。アイコンをクリックすると、対応するコンポーネントのコードをコピーできます。
-
-<IconsList />
-
 ### コード
 
 ファイルやデータベース、APIなど、外部ソースからのデータをレンダリングするため[Markdownのコードブロック](/ja/guides/authoring-content/#コード)を使用できない場合に、`<Code>`コンポーネントを使用してシンタックスハイライトされたコードをレンダリングできます。
@@ -299,3 +272,78 @@ import importedCode from '/src/env.d.ts?raw';
 import importedCode from '/src/env.d.ts?raw';
 
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### ファイルツリー
+
+`<FileTree>`コンポーネントにより、ファイルアイコンと折りたたみ可能なサブディレクトリを使ってディレクトリの構造を表示できます。
+
+`<FileTree>`内で[Markdownの順序なしリスト](https://www.markdownguide.org/basic-syntax/#unordered-lists)を使い、ファイルとディレクトリの構造を指定します。サブディレクトリを作成するにはリストをネストさせます。あるいは、リストアイテムの最後に`/`を追加することで、中身を指定しないディレクトリとしてレンダリングできます。
+
+以下の構文により、ファイルツリーの見た目をカスタマイズできます。
+
+- 名前を太字にして、ファイルやディレクトリをハイライトできます。たとえば`**README.md**`のようにします。
+- 名前の後ろにテキストを追加して、ファイルやディレクトリにコメントを追加できます。
+- `...`または`…`を名前として使用して、ファイルやディレクトリのプレースホルダーを追加できます。
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs **重要**ファイル
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+上のコードにより、ページに以下が生成されます。
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs **重要**ファイル
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### アイコン
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '~/components/icons-list.astro';
+
+Starlightは、`<Icon>`コンポーネントを通じてコンテンツ内に表示可能な、一般的なアイコンのセットを提供しています。
+
+`<Icon>`は[`name`](#すべてのアイコン)を必須とし、任意で`label`、`size`、`color`属性を含められます。
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+上のコードにより、ページに以下が生成されます。
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### すべてのアイコン
+
+以下に、利用可能なすべてのアイコンとその名前を示します。アイコンをクリックすると、対応するコンポーネントのコードをコピーできます。
+
+<IconsList />
