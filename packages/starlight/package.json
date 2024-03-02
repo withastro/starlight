@@ -4,7 +4,10 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:e2e": "UNIT_TESTS=false E2E_TESTS=true vitest",
+    "test:all": "E2E_TESTS=true vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:all": "E2E_TESTS=true vitest --run --coverage"
   },
   "keywords": [
     "docs",

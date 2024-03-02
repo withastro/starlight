@@ -4,6 +4,7 @@ import { realpathSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { dev, build, preview, type AstroInlineConfig } from 'astro';
+import { mergeConfig } from '../node_modules/astro/dist/core/config';
 import { version as astroVersion } from 'astro/package.json';
 import { version as nodeIntegrationVersion } from '@astrojs/node/package.json';
 import { afterEach, test } from 'vitest';
@@ -21,7 +22,7 @@ const defaultFileTree: FileTree = {
 		dependencies: {
 			astro: astroVersion,
 			'@astrojs/node': nodeIntegrationVersion,
-			'@astrojs/starlight': new URL('../../', import.meta.url).toString(),
+			'@astrojs/starlight': new URL('../', import.meta.url).toString(),
 		},
 	}),
 	'.gitignore': 'node_modules\ndist\n',
@@ -97,10 +98,10 @@ export function makeTestProject(options: ProjectOptions) {
 	runInRepo('git', ['config', 'user.email', 'starlight-test@example.com']);
 	runInRepo('git', ['config', 'commit.gpgsign', 'false']);
 
-	const astroConfig: AstroInlineConfig = {
-		...options.config,
+	const astroConfig: AstroInlineConfig = mergeConfig(options.config, {
 		root: projectPath,
-	};
+		logLevel: 'silent',
+	} satisfies AstroInlineConfig);
 	let serverAddress: string | null = null;
 
 	function checkNoServer() {

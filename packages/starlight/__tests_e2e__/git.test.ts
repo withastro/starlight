@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 import { longTest, makeTestProject } from './test-e2e-utils';
-import starlight from '../../index';
+import starlight from '../index';
 import * as cheerio from 'cheerio';
 
 longTest('include last updated date from git in the footer', async () => {

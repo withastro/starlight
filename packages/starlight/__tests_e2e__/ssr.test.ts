@@ -1,6 +1,6 @@
 import { makeTestProject, type FileTree, longTest } from './test-e2e-utils';
 import node from '@astrojs/node';
-import starlight from '../../index';
+import starlight from '../index';
 import * as cheerio from 'cheerio';
 import { expect } from 'vitest';
 
