@@ -321,6 +321,44 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </FileTree>
 
+### ステップ
+
+`<Steps>`コンポーネントにより、順序のあるタスクのリストをスタイリングできます。これは、各ステップを明確に強調する必要があるような、複雑なステップバイステップのガイドに便利です。
+
+`<Steps>`でMarkdown標準の順序付きリストをラップします。`<Steps>`内では、通常のMarkdownの構文はすべて使用できます。
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. MDXファイルにコンポーネントをインポートします。
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 順序付きリストの各アイテムを`<Steps>`でラップします。
+
+</Steps>
+````
+
+上のコードにより、ページに以下が生成されます。
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. MDXファイルにコンポーネントをインポートします。
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 順序付きリストの各アイテムを`<Steps>`でラップします。
+
+</Steps>
+
 ### アイコン
 
 import { Icon } from '@astrojs/starlight/components';
