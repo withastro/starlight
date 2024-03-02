@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Translate `fileTree.directory` into Japanese.
+Translates `fileTree.directory` UI string into Japanese.
