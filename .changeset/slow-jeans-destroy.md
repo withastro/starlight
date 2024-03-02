@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Adds French translations for the `<FileTree>` component.
+Translates `fileTree.directory` UI string into French.
