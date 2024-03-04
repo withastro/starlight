@@ -59,6 +59,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 `<Tabs>` 및 `<TabItem>` 컴포넌트를 사용하여 탭 인터페이스를 표시할 수 있습니다.
 각 `<TabItem>`은 사용자에게 보여줄 `label`을 반드시 포함해야합니다.
+label 옆에 [Starlight 내장 아이콘](#모든-아이콘) 중 하나를 포함하려면 선택적 `icon` 속성을 사용하세요.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -66,16 +67,24 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="별">시리우스, 베가, 베텔게우스</TabItem>
-	<TabItem label="달">이오, 유로파, 가니메데</TabItem>
+	<TabItem label="별" icon="star">
+		시리우스, 베가, 베텔게우스
+	</TabItem>
+	<TabItem label="달" icon="moon">
+		이오, 유로파, 가니메데
+	</TabItem>
 </Tabs>
 ```
 
 위 코드는 페이지에 아래와 같은 탭을 생성합니다.
 
 <Tabs>
-	<TabItem label="별">시리우스, 베가, 베텔게우스</TabItem>
-	<TabItem label="달">이오, 유로파, 가니메데</TabItem>
+	<TabItem label="별" icon="star">
+		시리우스, 베가, 베텔게우스
+	</TabItem>
+	<TabItem label="달" icon="moon">
+		이오, 유로파, 가니메데
+	</TabItem>
 </Tabs>
 
 ### 카드
@@ -176,32 +185,60 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="컴포넌트" href="/ko/guides/components/" />
 </CardGrid>
 
-### 아이콘
+### 주석
 
-import { Icon } from '@astrojs/starlight/components';
-import IconsList from '~/components/icons-list.astro';
+“권고” 또는 “콜아웃”이라고도 하는 '주석'은 페이지의 기본 콘텐츠 옆에 보조 정보를 표시하는 데 유용합니다.
 
-Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
+`<Aside>`에는 `note` (기본값), `tip`, `caution` 또는 `danger` 등 선택적인 `type`이 있을 수 있습니다. `title` 속성을 설정하면 주석의 기본 제목을 재정의합니다.
 
-각 `<Icon>` 컴포넌트에는 [`name`](#모든-아이콘) 속성이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
-
-```mdx
+````mdx
 # src/content/docs/example.mdx
 
-import { Icon } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 
-<Icon name="star" color="goldenrod" size="2rem" />
+<Aside>제목을 설정하지 않은 기본 주석입니다.</Aside>
+
+<Aside type="caution" title="주의!">
+	제목이 설정된 경고 주석입니다.
+</Aside>
+
+<Aside type="tip">
+
+주석에서는 다른 콘텐츠도 지원됩니다.
+
+```js
+// 코드 조각의 예시입니다.
 ```
 
-위 코드는 페이지에 아래와 같은 아이콘을 생성합니다.
+</Aside>
 
-<Icon name="star" color="goldenrod" size="2rem" />
+<Aside type="danger">여러분의 비밀번호를 누구에게도 알려주지 마세요.</Aside>
+````
 
-#### 모든 아이콘
+위 코드는 페이지에 다음을 생성합니다.
 
-사용 가능한 모든 아이콘 목록이 관련 이름과 함께 아래에 표시됩니다. 아이콘을 클릭하면 해당 아이콘 컴포넌트의 코드를 복사할 수 있습니다.
+import { Aside } from '@astrojs/starlight/components';
 
-<IconsList />
+<Aside>제목을 설정하지 않은 기본 주석입니다.</Aside>
+
+<Aside type="caution" title="주의!">
+	제목이 설정된 경고 주석입니다.
+</Aside>
+
+<Aside type="tip">
+
+주석에서는 다른 콘텐츠도 지원됩니다.
+
+```js
+// 코드 조각의 예시입니다.
+```
+
+</Aside>
+
+<Aside type="danger">여러분의 비밀번호를 누구에게도 알려주지 마세요.</Aside>
+
+Starlight는 `<Aside>` 컴포넌트 대신 Markdown 및 MDX에서 Aside를 렌더링하기 위한 사용자 정의 구문도 제공합니다.
+사용자 정의 구문에 대한 자세한 내용은 [“마크다운으로 콘텐츠 작성”](/ko/guides/authoring-content/#주석) 가이드를 참조하세요.
 
 ### 코드
 
@@ -247,3 +284,119 @@ import importedCode from '/src/env.d.ts?raw';
 import importedCode from '/src/env.d.ts?raw';
 
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### 파일 트리
+
+`<FileTree>` 컴포넌트를 사용하면 파일 아이콘과 축소 가능한 하위 디렉터리가 있는 디렉터리 구조를 표시할 수 있습니다.
+
+`<FileTree>`에서 [순서가 지정되지 않은 Markdown 목록](https://www.markdownguide.org/basic-syntax/#unordered-lists)을 사용하여 파일 및 디렉터리의 구조를 지정하세요.
+중첩된 목록을 사용하여 하위 디렉터리를 생성하거나 목록 항목 끝에 `/`를 추가하여 특정 내용이 없는 디렉터리로 렌더링합니다.
+
+다음 구문을 사용하여 파일 트리의 모양을 사용자 정의할 수 있습니다.
+
+- 이름을 굵게 표시하여 파일이나 디렉터리를 강조 표시합니다. 예: `**README.md**`.
+- 이름 뒤에 더 많은 텍스트를 추가하여 파일이나 디렉터리에 설명을 추가합니다.
+- `...` 또는 `…`을 이름으로 사용하여 자리 표시자 파일과 디렉터리를 추가합니다.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs **중요** 파일
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+위 코드는 페이지에 다음을 생성합니다.
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs **중요** 파일
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### 단계
+
+`<Steps>` 컴포넌트를 사용하여 번호가 매겨진 작업 목록의 스타일을 지정합니다.
+이는 각 단계를 명확하게 강조해야 하는 보다 복잡한 단계별 가이드에 유용합니다.
+
+표준 Markdown 정렬 목록을 `<Steps>`로 묶습니다.
+모든 일반적인 Markdown 구문은 `<Steps>` 내에서 적용 가능합니다.
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. 컴포넌트를 MDX 파일로 가져옵니다.
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 순서가 매겨진 목록 항목을 `<Steps>`로 묶습니다.
+
+</Steps>
+````
+
+위 코드는 페이지에 다음을 생성합니다.
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. 컴포넌트를 MDX 파일로 가져옵니다.
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 순서가 매겨진 목록 항목을 `<Steps>`로 묶습니다.
+
+</Steps>
+
+### 아이콘
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '~/components/icons-list.astro';
+
+Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
+
+각 `<Icon>`에는 [`name`](#모든-아이콘)이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+위 코드는 페이지에 다음을 생성합니다.
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### 모든 아이콘
+
+사용 가능한 모든 아이콘 목록이 관련 이름과 함께 아래에 표시됩니다. 아이콘을 클릭하면 해당 컴포넌트의 코드를 복사할 수 있습니다.
+
+<IconsList />
