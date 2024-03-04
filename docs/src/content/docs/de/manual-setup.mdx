@@ -106,7 +106,7 @@ Um alle Starlight-Seiten mit einem anderen Pfad aufrufen zu können, lege den ge
 
 Wenn zum Beispiel die URL alle Starlight-Seiten mit `/guides/` beginnen sollen, füge deine Inhalte in das Verzeichnis `src/content/docs/guides/` ein:
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
