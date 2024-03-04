@@ -112,7 +112,7 @@ Starlight использует роутинг на основе файлов, ч
 
 Например, если все страницы Starlight должны начинаться с `/guides/`, добавьте свой контент в директорию `src/content/docs/guides/`:
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
