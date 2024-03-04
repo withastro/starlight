@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': minor
+'@astrojs/starlight': patch
 ---
 
 Adds 1 new icon: `homebrew`.
