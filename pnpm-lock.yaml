@@ -54,38 +54,20 @@ importers:
         specifier: ^0.32.5
         version: 0.32.6
     devDependencies:
-      '@types/hast':
-        specifier: ^3.0.3
-        version: 3.0.3
-      hast-util-from-html:
-        specifier: ^2.0.1
-        version: 2.0.1
-      hast-util-to-string:
-        specifier: ^3.0.0
-        version: 3.0.0
-      hastscript:
-        specifier: ^8.0.0
-        version: 8.0.0
       pa11y-ci:
         specifier: ^3.0.1
         version: 3.0.1
-      rehype:
-        specifier: ^13.0.1
-        version: 13.0.1
       starlight-links-validator:
         specifier: ^0.5.3
         version: 0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.5)
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
-      unist-util-visit:
-        specifier: ^5.0.0
-        version: 5.0.0
 
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.21.0
+        specifier: ^0.21.1
         version: link:../../packages/starlight
       astro:
         specifier: ^4.3.5
@@ -97,7 +79,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.21.0
+        specifier: ^0.21.1
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.1
@@ -3833,6 +3815,7 @@ packages:
     resolution: {integrity: sha512-OGkAxX1Ua3cbcW6EJ5pT/tslVb90uViVkcJ4ZZIMW/R33DX/AkcJcRrPebPwJkHYwlDHXz4aIwvAAaAdtrACFA==}
     dependencies:
       '@types/hast': 3.0.3
+    dev: false
 
   /hast-util-whitespace@2.0.1:
     resolution: {integrity: sha512-nAxA0v8+vXSBDt3AnRUNjyRIQ0rD+ntpbAp4LnPkumc5M9yUbSMa4XDU9Q6etY4f1Wp4bNgvc1yjiZtsTTrSng==}

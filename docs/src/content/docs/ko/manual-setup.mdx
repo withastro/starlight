@@ -104,7 +104,7 @@ Starlight는 파일 기반 라우팅을 사용합니다. 즉, `src/content/docs/
 
 예를 들어, Starlight의 모든 페이지가 `/guides/`에서 시작해야 하는 경우 `src/content/docs/guides/` 디렉터리에 콘텐츠를 추가하세요.
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
