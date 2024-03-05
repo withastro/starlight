@@ -1,0 +1,173 @@
+---
+title: Páginas
+description: Aprenda como criar e gerenciar as páginas de documentação do seu site com o Starlight.
+sidebar:
+  order: 1
+---
+
+Starlight gera as páginas HTML do seu site com base no seu conteúdo, com opções flexíveis fornecidas através do frontmatter do Markdown.
+Starlight generates your site’s HTML pages based on your content, with flexible options provided via Markdown frontmatter.
+Além disso, os projetos Starlight têm acesso total às [poderosas ferramentas de geração de páginas do Astro](https://docs.astro.build/pt-br/basics/astro-pages/).
+Este guia mostra como a geração de páginas funciona no Starlight.
+
+## Páginas de conteúdo
+
+### Formatos de arquivo
+
+Starlight suporta a autoria de conteúdo em Markdown e MDX sem necessidade de configuração.
+Você pode adicionar suporte para Markdoc instalando a integração experimental [Astro Markdoc](https://docs.astro.build/pt-br/guides/integrations-guide/markdoc/).
+
+
+### Adicionando páginas
+
+Adicione novas páginas ao seu site criando arquivos `.md` ou `.mdx` em `src/content/docs/`.
+Utilize subpastas para organizar seus arquivos e criar múltiplos segmentos de caminho.
+
+Por exemplo, a seguinte estrutura de arquivos irá gerar páginas em `exemplo.com/ola-mundo` e `example.com/reference/faq`:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - ola-mundo.md
+      - reference/
+        - faq.md
+
+</FileTree>
+
+### Type-safe frontmatter
+
+```md
+Todas as páginas do Starlight compartilham um [conjunto comum de propriedades de frontmatter personalizáveis](/reference/frontmatter/) para controlar como a página aparece:
+
+```md
+---
+title: Olá, Mundo!
+description: Esta é uma página no meu site alimentado pelo Starlight
+---
+```
+Se você esquecer de algo importante, o Starlight irá te avisar.
+
+## Páginas customizadas
+
+Para casos de uso avançados, você pode adicionar páginas customizadas criando um diretório `src/pages/`.
+O diretório `src/pages/` usa [roteamento baseado em arquivos do Astro](https://docs.astro.build/pt-br/basics/astro-pages/#file-based-routing) e inclui suporte para arquivos `.astro` entre outros formatos de página.
+Por exemplo, este projeto mistura conteúdo Markdown em `src/content/docs/` com rotas Astro e HTML em `src/pages/`:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - ola-mundo.md
+  - pages/
+    - custom.astro
+    - archived.html
+
+</FileTree>
+
+Leia mais no [guia de “Páginas” na documentação do Astro](https://docs.astro.build/pt-br/basics/astro-pages/).
+
+#### Usando o design do Starlight em páginas customizadas
+
+Para usar o layout do Starlight em páginas customizadas, envolva o conteúdo da sua página com o componente `<StarlightPage />`.
+Isto pode ser útil se você estiver gerando conteúdo dinamicamente mas ainda quiser usar o design do Starlight.
+
+```astro
+---
+// src/pages/custom-page/example.astro
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import CustomComponent from './CustomComponent.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Minha página customizada' }}>
+	<p>Esta é uma página customizada com um componente customizado:</p>
+	<CustomComponent />
+</StarlightPage>
+```
+
+#### Props
+
+O componente `<StarlightPage />` aceita as seguintes props.
+
+##### `frontmatter` (requerido)
+
+**type:** `StarlightPageFrontmatter`
+
+Especifique as [propriedades de frontmatter](/reference/frontmatter/) para esta página, similar ao frontmatter em páginas Markdown.
+O [`title`](/reference/frontmatter/#title-required) é requerido e todas as outras propriedades são opcionais.
+
+As seguintes propriedades diferem do frontmatter Markdown:
+
+- O [`slug`](/reference/frontmatter/#slug) não é suportado e é automaticamente definido com base na URL da página customizada.
+- A opção [`editUrl`](/reference/frontmatter/#editurl) requer uma URL para exibir um link de edição.
+- A propriedade [`sidebar`](/reference/frontmatter/#sidebar) para customizar como a página aparece em [grupos de links autogerados](/reference/configuration/#sidebar) não está disponível. Páginas usando o componente `<StarlightPage />` não fazem parte de uma coleção e não podem ser adicionadas a um grupo de sidebar autogerado.
+
+##### `sidebar`
+
+**type:** `SidebarEntry[]`  
+**default:** o sidebar gerado baseado na [configuração global `sidebar`](/reference/configuration/#sidebar)
+
+Provê um sidebar de navegação customizado para esta página.
+Caso não seja definido, a página usará o sidebar global padrão.
+
+Por exemplo, a seguinte página sobrescreve o sidebar padrão com um link para a homepage e um grupo de links para diferentes constelações.
+A página atual no sidebar é definida usando a propriedade `isCurrent` e um `badge` opcional foi adicionado a um item de link.
+
+```astro {3-13}
+<StarlightPage
+	frontmatter={{ title: 'Orion' }}
+	sidebar={[
+		{ label: 'Home', href: '/' },
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andromeda', href: '/andromeda/' },
+				{ label: 'Orion', href: '/orion/', isCurrent: true },
+				{ label: 'Ursa Minor', href: '/ursa-minor/', badge: 'Stub' },
+			],
+		},
+	]}
+>
+  Conteúdo de exemplo.
+</StarlightPage>
+```
+
+##### `hasSidebar`
+
+**type:** `boolean`  
+**default:** `false` se [`frontmatter.template`](/reference/frontmatter/#template) é `'splash'`, caso contrário é `true`
+
+Controle se a sidebar deve ser exibida nesta página.
+
+##### `headings`
+
+**type:** `{ depth: number; slug: string; text: string }[]`  
+**default:** `[]`
+
+Provê um array com todos os títulos na página.
+Starlight irá gerar o sumário da página a partir destes títulos se fornecidos.
+
+##### `dir`
+
+**type:** `'ltr' | 'rtl'`  
+**default:** a direção de escrita para a localidade atual
+
+Define a direção de escrita para o conteúdo da página.
+
+##### `lang`
+
+**type:** `string`  
+**default:** a linguagem da localidade atual
+
+Define a tag de linguagem BCP-47 para o conteúdo da página, por exemplo, `en`, `zh-CN`, ou `pt-BR`.
+
+##### `isFallback`
+
+**type:** `boolean`  
+**default:** `false`
+
+Indica se esta página está usando [conteúdo fallback](/guides/i18n/#fallback-content) porque não há tradução para a linguagem atual.
