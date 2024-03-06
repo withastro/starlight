@@ -69,7 +69,7 @@ Puoi utilizzare una lingua principale per non avere il prefisso i18n nel percors
 
 Per fare questo, utilizza la chiave `root` nella configurazione `locales`. Se la lingua principale è anche la lingua di default rimuovi `defaultLocale` o impostala a `'root'`.
 
-```js
+```js {9,11-14}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -205,7 +205,8 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    	"aside.note": "Note",
    	"aside.tip": "Tip",
    	"aside.caution": "Caution",
-   	"aside.danger": "Danger"
+   	"aside.danger": "Danger",
+   	"fileTree.directory": "Directory"
    }
    ```
 
