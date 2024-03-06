@@ -254,3 +254,27 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [gfi]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+
 [api-docs]: https://docs.astro.build/en/reference/integrations-reference/
 [vitest]: https://vitest.dev/
+
+## Showcase
+
+We love to see websites built with Starlight and share them with the community on our [showcase](https://starlight.astro.build/resources/showcase/) page.
+If you’ve built a documentation site with Starlight, adding it to the showcase is just a pull request away!
+
+1. Setup a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. Add a screenshot of your site to the `docs/src/assets/showcase/` directory.
+   - The screenshot should be a `.png` file and named after your site’s domain, e.g. `example.com.png`.
+   - The screenshot should be 800 × 450 pixels.
+3. Add a new entry for your website in `docs/src/components/showcase-sites.astro`.
+
+   - The new entry should be appended at the end of the existing list of sites.
+   - The `title` attribute should be the name of your site with no extra details.
+   - The `href` attribute should be the URL of your Starlight site. If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
+   - The `thumbnail` attribute should be the filename of the screenshot you added in step 2.
+
+   ```diff
+     <Card title="Astro Docs" href="https://docs.astro.build" thumbnail="docs.astro.build.png" />
+   + <Card title="Example" href="https://example.com" thumbnail="example.com.png" />
+   </FluidGrid>
+   ```
+
+4. Open a pull request on GitHub to add your changes.
