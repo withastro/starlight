@@ -3,7 +3,7 @@ title: Internationalisation (i18n)
 description: Apprenez à configurer votre site Starlight pour qu'il prenne en charge plusieurs langues.
 ---
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 Starlight offre une prise en charge intégrée des sites multilingues, y compris le routage, le contenu de repli et la prise en charge complète des langues de droite à gauche (RTL).
 
@@ -204,7 +204,8 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
    	"aside.note": "Note",
    	"aside.tip": "Tip",
    	"aside.caution": "Caution",
-   	"aside.danger": "Danger"
+   	"aside.danger": "Danger",
+   	"fileTree.directory": "Directory"
    }
    ```
 

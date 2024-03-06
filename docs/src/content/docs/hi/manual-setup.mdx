@@ -106,7 +106,7 @@ Starlight फ़ाइल-आधारित रूटिंग का उपय
 
 उदाहरण के लिए, यदि Starlight पेज सभी `/guides/` से शुरू होने चाहिए, तो अपनी सामग्री को `src/content/docs/guides/` निर्देशिका में जोड़ें:
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
