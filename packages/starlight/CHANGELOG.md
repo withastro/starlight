@@ -1,5 +1,33 @@
 # @astrojs/starlight
 
+## 0.21.1
+
+### Patch Changes
+
+- [#1584](https://github.com/withastro/starlight/pull/1584) [`8851d5cd`](https://github.com/withastro/starlight/commit/8851d5cd0d8f8439320ef729ca57a59418db52b9) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 2 new icons: `apple` and `linux`.
+
+- [#1577](https://github.com/withastro/starlight/pull/1577) [`0ba77890`](https://github.com/withastro/starlight/commit/0ba77890e0dcf54a849c735efd870327c10972aa) Thanks [@morinokami](https://github.com/morinokami)! - Translates `fileTree.directory` UI string into Japanese.
+
+- [#1593](https://github.com/withastro/starlight/pull/1593) [`fa7ed245`](https://github.com/withastro/starlight/commit/fa7ed2458caf6261d16c5f43365cedbcb8572a48) Thanks [@liruifengv](https://github.com/liruifengv)! - Translates `fileTree.directory` UI string into simplified Chinese.
+
+- [#1585](https://github.com/withastro/starlight/pull/1585) [`bd4e278f`](https://github.com/withastro/starlight/commit/bd4e278f7fe7d7335494602db29a63002fd45059) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Translates `fileTree.directory` UI string into French.
+
+- [#1587](https://github.com/withastro/starlight/pull/1587) [`c5794260`](https://github.com/withastro/starlight/commit/c5794260251ed414a396089782a1788539c92dd3) Thanks [@Eveeifyeve](https://github.com/Eveeifyeve)! - Adds 1 new icon: `homebrew`.
+
+## 0.21.0
+
+### Minor Changes
+
+- [#1568](https://github.com/withastro/starlight/pull/1568) [`5f99a71d`](https://github.com/withastro/starlight/commit/5f99a71ddfe92568b1cd3c0bfe5ebfd139797c1a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for optionally setting an icon on a `<TabItem>` component to make it easier to visually distinguish between tabs.
+
+- [#1308](https://github.com/withastro/starlight/pull/1308) [`9a918a5b`](https://github.com/withastro/starlight/commit/9a918a5b4902f43729f4d023257772710af3a12b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds `<FileTree>` component to display the structure of a directory.
+
+- [#1308](https://github.com/withastro/starlight/pull/1308) [`9a918a5b`](https://github.com/withastro/starlight/commit/9a918a5b4902f43729f4d023257772710af3a12b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 144 new file-type icons from the [Seti UI icon set](https://github.com/jesseweed/seti-ui#current-icons), available with the `seti:` prefix, e.g. `seti:javascript`.
+
+- [#1564](https://github.com/withastro/starlight/pull/1564) [`d880065e`](https://github.com/withastro/starlight/commit/d880065e29a632823a08adcb6158a59fd9557270) Thanks [@delucis](https://github.com/delucis)! - Adds a `<Steps>` component for styling more complex guided tasks.
+
+- [#1308](https://github.com/withastro/starlight/pull/1308) [`9a918a5b`](https://github.com/withastro/starlight/commit/9a918a5b4902f43729f4d023257772710af3a12b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 5 new icons: `astro`, `biome`, `bun`, `mdx`, and `pnpm`.
+
 ## 0.20.1
 
 ### Patch Changes

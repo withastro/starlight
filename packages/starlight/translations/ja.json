@@ -22,5 +22,6 @@
   "aside.note": "ノート",
   "aside.tip": "ヒント",
   "aside.caution": "注意",
-  "aside.danger": "危険"
+  "aside.danger": "危険",
+  "fileTree.directory": "ディレクトリ"
 }

@@ -3,7 +3,7 @@ title: 国际化 (i18n)
 description: 学习如何配置你的 Starlight 网站支持多种语言。
 ---
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 Starlight 提供了内置的多语言支持，包括路由、回退内容和完整的从右到左（RTL）语言支持。
 
@@ -205,7 +205,8 @@ import LanguagesList from '~/components/languages-list.astro';
    	"aside.note": "Note",
    	"aside.tip": "Tip",
    	"aside.caution": "Caution",
-   	"aside.danger": "Danger"
+   	"aside.danger": "Danger",
+   	"fileTree.directory": "Directory"
    }
    ```
 
