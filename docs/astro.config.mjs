@@ -119,6 +119,7 @@ export default defineConfig({
 								fr: 'Installation manuelle',
 								hi: 'मैनुअल सेटअप',
 								id: 'Instalasi Manual',
+								// it: 'Manual Setup',
 								ja: '手動セットアップ',
 								ko: '수동으로 설정하기',
 								nb: 'Manuelt oppsett',
