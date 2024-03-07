@@ -1,0 +1,163 @@
+---
+title: Starlight 🌟 Bygg dokumentasjonssider med Astro
+head:
+  - tag: title
+    content: Starlight 🌟 Bygg dokumentasjonssider med Astro
+description: Starlight hjelper deg med å bygge vakre, raske dokumentasjonsider med Astro.
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  title: La dokumentasjonen din skinne med Starlight
+  tagline: Alt du trenger for å bygge en stjerners dokumentasjonside. Rask, tilgjengelig og enkel å bruke.
+  image:
+    file: ~/assets/hero-star.webp
+  actions:
+    - text: Kom i gang
+      icon: right-arrow
+      variant: primary
+      link: /nb/getting-started/
+    - text: Se på GitHub
+      icon: external
+      link: https://github.com/withastro/starlight
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+import AboutAstro from '~/components/about-astro.astro';
+import TestimonialGrid from '~/components/testimonial-grid.astro';
+import Testimonial from '~/components/testimonial.astro';
+
+<CardGrid stagger>
+	<Card title="Dokumenter som gleder" icon="open-book">
+		Inkluderer: Navigasjon, søk, internasjonalisering, SEO, lettlest typografi,
+		kodeutheving, mørk modus og mer.
+	</Card>
+	<Card title="Drevet av Astro" icon="rocket">
+		Dra nytte av den fulle kraften og ytelsen til Astro. Utvid Starlight med
+		dine favoritt Astro-integrasjoner og biblioteker.
+	</Card>
+	<Card title="Markdown, Markdoc og MDX" icon="document">
+		Ta med deg ditt favoritt markdown språk. Starlight gir deg innebygd
+		Frontmatter-validering med TypeScript-typesikkerhet.
+	</Card>
+	<Card title="Ta med dine egne UI-komponenter" icon="puzzle">
+		Starlight leveres som en rammeverk-agnostisk, komplett
+		dokumentasjonsløsning. Utvid med React, Vue, Svelte, Solid og mer.
+	</Card>
+</CardGrid>
+
+<TestimonialGrid title="Se hva folk sier">
+  <Testimonial
+    name="Rachel"
+    handle="rachelnabors"
+    cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
+  >
+    Astro-teamet har EVOLVERT måten dokumentasjon kan gjøres på, og du kan få alt rett ut av boksen med deres Starlight-prosjekt.
+  </Testimonial>
+  <Testimonial
+    name="Flavio"
+    handle="flaviocopes"
+    cite="https://twitter.com/flaviocopes/status/1738237658717905108"
+  >
+    Astros offisielle startpakke Starlight er et virkelig utrolig verktøy for å bygge et dokumentasjonssider
+  </Testimonial>
+  <Testimonial
+    name="Tomek"
+    handle="sulco"
+    cite="https://twitter.com/sulco/status/1735610348730802342"
+  >
+    Starlight er vårt fremste eksempel på en flott DX: hastigheten, bekvemmeligheten, og
+    oppmerksomheten til detaljer er inspirerende. Det tar hånd om teknikken og utseendet,
+    så du kan fokusere på innholdet ditt 👏
+     
+    StackBlitz-teamet elsker det absolutt!
+  </Testimonial>
+  <Testimonial
+    name="Roberto"
+    handle="RmeetsH"
+    cite="https://twitter.com/RmeetsH/status/1735783992018760090"
+  >
+    Starlight har vært en game-changer for meg, som lar meg fokusere på innholdsskaping.
+
+    Dets intuitive design forenkler ikke bare arbeidsflyten min, men reduserer også opplæringstiden for open-source utviklere.
+
+  </Testimonial>
+  <Testimonial
+    name="Joel"
+    handle="jhooks"
+    cite="https://twitter.com/jhooks/status/1727405160547418405"
+  >
+    Brukte litt mer tid med Starlight for Course Builder-dokumentasjonen og det har vært flott så langt. Mange fine detaljer og kan fokusere på å skrive i Markdown og ikke fikle med nettstedet.
+  </Testimonial>
+  <Testimonial
+    name="Rick"
+    handle="rick_viscomi"
+    cite="https://twitter.com/rick_viscomi/status/1665867447910510593"
+  >
+    Begynte å leke med Starlight. Må si jeg er veldig imponert over ytelsen rett ut av boksen.
+
+    💯💯💯💯
+
+  </Testimonial>
+  <Testimonial
+    name="Nicolas"
+    handle="beaussan"
+    cite="https://twitter.com/beaussan/status/1735625189583466893"
+  >
+    Starlight er den beste måten å komme i gang med dokumentasjon på. Kombinasjonen av Astros kraft og hastighet med Starlights verktøy er helt perfekt.
+
+    Det har vært min favoritt en stund nå, og jeg elsker det fortsatt!
+
+  </Testimonial>
+  <Testimonial
+    name="Sylwia"
+    handle="SylwiaVargas"
+    cite="https://x.com/SylwiaVargas/status/1726556825741578286"
+  >
+    Jeg brukte Starlight i forrige jobb, og elsket det. Flott komponenter, intuitiv design 
+    og et superresponsivt fellesskap (hvis noen trengte noe, fiksa de 
+    det ganske raskt eller foreslo en omvei). En veldig god opplevelse.
+  </Testimonial>
+  <Testimonial
+    name="Lou Cyx"
+    handle="loucyx"
+    cite="https://elk.zone/m.webtoo.ls/@loucyx@mastodon.social/111587380021362284"
+  >
+    Takket være Starlight ser dokumentasjonen på monorepo-nettstedet mitt bedre ut enn noensinne. 
+    Det er utrolig enkelt å bruke uten å miste all kraften til Astro. Tusen takk for jobben dere gjør med det!
+  </Testimonial>
+  <Testimonial
+    name="BowTiedWebReaper"
+    handle="BowTiedWebReapr"
+    cite="https://twitter.com/BowTiedWebReapr/status/1735633399501697517"
+  >
+    Starlight er mitt go-to verktøy for dokumentasjon. Det gjorde det superenkelt å legge til 
+    dokumentasjon på min eksisterende Astro side, vs å trenge et underdomene for å bruke med et annet verktøy.
+  </Testimonial>
+  <Testimonial
+    name="Jeff"
+    handle="J_Everhart383"
+    cite="https://twitter.com/J_Everhart383/status/1691900590048292908"
+  >
+    Jeg har vært i gang med å gjenoppbygge WPEngine Atlas Platform-dokumentasjonen. 
+    Tro meg når jeg sier Starlight har alt du trenger for å lage en A+ dokumentasjonsplattform&nbsp;🙌
+  </Testimonial>
+  <Testimonial
+    name="Chloe"
+    handle="solelychloe"
+    cite="https://twitter.com/solelychloe/status/1695115277602628082"
+  >
+    Gi Starlight et forsøk!
+
+    Jeg bruker det for noen av mine sider og det funker bra.
+
+  </Testimonial>
+</TestimonialGrid>
+
+<AboutAstro title="Brakt til deg av">
+Astro er et komplett rammeverk for nettsider utviklet for fart. 
+Hent innholdet ditt fra hvor som helst og distribuer det overalt, alt drevet av dine favoritt UI-komponenter og biblioteker.
+
+[Lær om Astro](https://astro.build/)
+
+</AboutAstro>
