@@ -116,6 +116,12 @@ function starlightI18nSchema() {
 				.string()
 				.describe('Label shown on the “next page” pagination arrow in the page footer.'),
 
+			'page.draft': z
+				.string()
+				.describe(
+					'Development-only notice informing users they are on a page that is a draft which will not be included in production builds.'
+				),
+
 			'404.text': z.string().describe('Text shown on Starlight’s default 404 page'),
 			'aside.tip': z.string().describe('Text shown on the tip aside variant'),
 			'aside.note': z.string().describe('Text shown on the note aside variant'),

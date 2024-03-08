@@ -18,6 +18,7 @@
   "page.lastUpdated": "آخرین به روز رسانی:",
   "page.previousLink": "قبلی",
   "page.nextLink": "بعدی",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "صفحه یافت نشد. لطفاً URL را بررسی کنید یا از جستجو استفاده نمایید.",
   "aside.note": "Note",
   "aside.tip": "Tip",
