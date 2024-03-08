@@ -46,7 +46,8 @@ test('routes includes drafts except in production', async () => {
 	expect(routes.find((route) => route.id === 'guides/authoring-content.md')).toBeTruthy();
 
 	// Reset the modules registry so that re-importing `utils/routing.ts` re-evaluates the module and
-	// re-computes the routes.
+	// re-computes the routes. Re-importing the module is necessary because top-level imports cannot
+	// be re-evaluated.
 	vi.resetModules();
 	// Set the mode to production.
 	vi.stubEnv('MODE', 'production');
