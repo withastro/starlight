@@ -92,7 +92,7 @@ Para adicionar todas as páginas do Starlight num subcaminho, coloque todo o con
 
 Por exemplo, se todas as páginas do Starlight devem começar com `/guias/`, adicione o seu conteúdo no diretório `src/content/docs/guias/`:
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
