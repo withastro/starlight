@@ -1,8 +1,6 @@
 ---
 title: 컴포넌트 재정의
 description: Starlight 내장 컴포넌트를 재정의하여 문서 사이트 UI에 사용자 정의 요소를 추가하는 방법에 대해 알아보세요.
-sidebar:
-  badge: New
 ---
 
 Starlight의 기본 UI 및 구성 옵션은 유연하고 다양한 콘텐츠에 작동하도록 설계되었습니다. Starlight의 기본 형태는 대부분 [CSS](/ko/guides/css-and-tailwind/) 및 [구성 옵션](/ko/guides/customization/)을 사용하여 변경할 수 있습니다.

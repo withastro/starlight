@@ -7,6 +7,22 @@ Starlight supports the full range of [Markdown](https://daringfireball.net/proje
 
 Please be sure to check the [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) or [Markdoc docs](https://markdoc.dev/docs/syntax) if using those file formats, as Markdown support and usage can differ.
 
+## Frontmatter
+
+You can customize individual pages in Starlight by setting values in their frontmatter.
+Frontmatter is set at the top of your files between `---` separators:
+
+```md title="src/content/docs/example.md"
+---
+title: My page title
+---
+
+Page content follows the second `---`.
+```
+
+Every page must include at least a `title`.
+See the [frontmatter reference](/reference/frontmatter/) for all available fields and how to add custom fields.
+
 ## Inline styles
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
@@ -141,7 +157,7 @@ Caution and danger asides are helpful for drawing a user’s attention to detail
 If you find yourself using these a lot, it may also be a sign that the thing you are documenting could benefit from being redesigned.
 
 :::caution
-If you are not sure you want an awesome docs site, think twice before using [Starlight](../../).
+If you are not sure you want an awesome docs site, think twice before using [Starlight](/).
 :::
 
 :::danger
@@ -155,7 +171,7 @@ Your users may be more productive and find your product easier to use thanks to 
 
 ```md
 :::caution
-If you are not sure you want an awesome docs site, think twice before using [Starlight](../../).
+If you are not sure you want an awesome docs site, think twice before using [Starlight](/).
 :::
 
 :::danger

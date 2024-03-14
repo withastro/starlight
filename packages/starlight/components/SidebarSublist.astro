@@ -7,17 +7,19 @@ interface Props {
 	sublist: SidebarEntry[];
 	nested?: boolean;
 }
+
+const { sublist, nested } = Astro.props;
 ---
 
-<ul class:list={{ 'top-level': !Astro.props.nested }}>
+<ul class:list={{ 'top-level': !nested }}>
 	{
-		Astro.props.sublist.map((entry) => (
+		sublist.map((entry) => (
 			<li>
 				{entry.type === 'link' ? (
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
-						class:list={[{ large: !Astro.props.nested }, entry.attrs.class]}
+						class:list={[{ large: !nested }, entry.attrs.class]}
 						{...entry.attrs}
 					>
 						<span>{entry.label}</span>

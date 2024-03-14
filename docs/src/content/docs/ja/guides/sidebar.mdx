@@ -1,12 +1,10 @@
 ---
 title: サイドバーのナビゲーション
 description: Starlightサイトのサイドバーのナビゲーションリンクを設定・カスタマイズする方法を学びます。
-sidebar:
-  badge: 新規
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import { FileTree } from '@astrojs/starlight/components';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 サイドバーはユーザーがサイト内を移動するための主要な方法の1つであるため、サイドバーを整理することは良いドキュメントの鍵となります。Starlightでは、サイドバーのレイアウトとコンテンツをカスタマイズするためのオプション一式を提供しています。
 
@@ -61,7 +59,7 @@ Starlightはデフォルトで、ドキュメントのファイルシステム�
 
 `label`と`link`プロパティをもつオブジェクトを使用して、内部または外部ページへのリンクを追加します。
 
-```js
+```js "label:" "link:"
 starlight({
 	sidebar: [
 		// CSSとスタイリングガイドへのリンク。
@@ -87,7 +85,7 @@ starlight({
 
 `label`と`items`プロパティをもつオブジェクトを使用して、グループを追加します。`label`はグループの見出しとして使用されます。`items`配列にリンクまたはサブグループを追加します。
 
-```js
+```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
 		// 「ガイド」というラベルのリンクグループ。
@@ -135,11 +133,13 @@ starlight({
 
 ### 自動生成されるグループ
 
-Starlightはドキュメントのディレクトリに基づいて、サイドバーのグループを自動的に生成できます。これはグループ内のサイドバー項目を手動で入力したくない場合に便利です。ページはデフォルトではファイル名のアルファベット順に並べ替えられます。
+Starlightはドキュメントのディレクトリに基づいて、サイドバーのグループを自動的に生成できます。これはグループ内のサイドバー項目を手動で入力したくない場合に便利です。
+
+デフォルトでは、ページはファイルの[`slug`](/ja/reference/overrides/#slug)に従ってアルファベット順に並べ替えられます。
 
 `label`と`autogenerate`プロパティをもつオブジェクトを使用して、自動生成されるグループを追加します。`autogenerate`の設定には、サイドバーのエントリに使用する`directory`を指定する必要があります。たとえば、以下のように設定したとします。
 
-```js
+```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
@@ -192,7 +192,7 @@ starlight({
 
 フロントマターのサイドバーオプションにより、[カスタムラベル](/ja/reference/frontmatter/#label)を設定したり、リンクに[バッジ](/ja/reference/frontmatter/#badge)を追加したり、サイドバーからリンクを[非表示](/ja/reference/frontmatter/#hidden)にしたり、[カスタムのソート順](/ja/reference/frontmatter/#order)を定義したりできます。
 
-```md
+```md "sidebar:"
 ---
 title: 私のページ
 sidebar:
@@ -232,9 +232,9 @@ sidebar:
 
 ## バッジ
 
-リンクには、リンクラベルの横にバッジを表示するための`badge`プロパティも含められます。
+リンク、グループ、自動生成されるグループには、ラベルの横にバッジを表示するための`badge`プロパティも含められます。
 
-```js
+```js {10,17}
 starlight({
 	sidebar: [
 		{
@@ -247,6 +247,12 @@ starlight({
 					badge: '新規',
 				},
 			],
+		},
+		// 「非推奨」バッジ付きの自動生成されるグループ。
+		{
+			label: 'リファレンス',
+			badge: '非推奨',
+			autogenerate: { directory: 'reference' },
 		},
 	],
 });
@@ -266,6 +272,24 @@ starlight({
 				},
 			],
 		},
+		{
+			label: 'リファレンス',
+			badge: { text: '非推奨', variant: 'default' },
+			items: [
+				{
+					label: '設定方法',
+					link: '/ja/reference/configuration/',
+				},
+				{
+					label: 'フロントマター',
+					link: '/ja/reference/frontmatter/',
+				},
+				{
+					label: 'オーバーライド',
+					link: '/ja/reference/overrides/',
+				},
+			],
+		},
 	]}
 />
 
@@ -275,7 +299,7 @@ starlight({
 
 `text`は表示するコンテンツ、たとえば「新規」などを表わします。`variant`プロパティを`note`、`tip`、`danger`、`caution`、`success`のいずれかに設定することで、サイトのアクセントカラーを使用する`default`スタイルを上書きできます。
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
@@ -310,30 +334,74 @@ starlight({
 	]}
 />
 
+## カスタムHTML属性
+
+リンク要素にカスタムのHTML属性を追加するには、`attrs`プロパティを使用します。
+
+以下の例では、リンクが新しいタブで開かれるよう、`attrs`を使用して`target="_blank"`属性を追加しています。また、リンクのラベルにカスタムの`style`属性を適用して斜体にします。
+
+```js {10}
+starlight({
+	sidebar: [
+		{
+			label: 'ガイド',
+			items: [
+				// 新しいタブで開かれる、Astroドキュメントへの外部リンク。
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+上の設定により、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'ガイド',
+			items: [
+				{
+					label: 'Astro Docs',
+					link: 'https://docs.astro.build/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
 ## 国際化
 
-リンクやグループのラベルをサポート対象の言語向けに翻訳するには、リンクやグループのエントリに`translations`プロパティを使用します。`label`プロパティは、デフォルトのロケールと、翻訳がない言語に対して使用されます。
+リンクやグループのラベルをサポート対象の言語向けに翻訳するには、リンクやグループのエントリに`translations`プロパティを使用します。[BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags)の言語タグ、たとえば`"en"`、`"ar"`、`"zh-CN"`をキーとして、翻訳されたラベルを値として指定します。`label`プロパティは、デフォルトのロケールと、翻訳がない言語に対して使用されます。
 
-```js
+```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
 			label: 'Guides',
 			translations: {
-				es: 'Guías',
+				'pt-BR': 'Guias',
 			},
 			items: [
 				{
 					label: 'Components',
 					translations: {
-						es: 'Componentes',
+						'pt-BR': 'Componentes',
 					},
 					link: '/guides/components/',
 				},
 				{
 					label: 'Internationalization (i18n)',
 					translations: {
-						es: 'Internacionalización (i18n)',
+						'pt-BR': 'Internacionalização (i18n)',
 					},
 					link: '/guides/i18n/',
 				},
@@ -343,15 +411,15 @@ starlight({
 });
 ```
 
-スペイン語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
+ブラジルポルトガル語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
 
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Guias',
 			items: [
-				{ label: 'Componentes', link: '/es/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/es/guides/i18n/' },
+				{ label: 'Componentes', link: '/pt-br/guides/components/' },
+				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
 			],
 		},
 	]}
@@ -361,7 +429,7 @@ starlight({
 
 `collapsed`プロパティを`true`に設定することで、リンクのグループをデフォルトで折りたためます。
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -394,7 +462,7 @@ starlight({
 
 [自動生成されるグループ](#自動生成されるグループ)は、親グループの`collapsed`値に従います。
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
@@ -431,7 +499,7 @@ starlight({
 
 この動作は、`autogenerate.collapsed`プロパティを定義することで上書きできます。
 
-```js
+```js {5-7} "collapsed: true"
 starlight({
 	sidebar: [
 		{

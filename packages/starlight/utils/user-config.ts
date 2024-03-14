@@ -190,6 +190,13 @@ const UserConfigSchema = z.object({
 	 */
 	expressiveCode: ExpressiveCodeSchema(),
 
+	/**
+	 * Define whether Starlight’s default site search provider Pagefind is enabled.
+	 * Set to `false` to disable indexing your site with Pagefind.
+	 * This will also hide the default search UI if in use.
+	 */
+	pagefind: z.boolean().default(true),
+
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
 
@@ -198,6 +205,9 @@ const UserConfigSchema = z.object({
 		.string()
 		.default('|')
 		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
+
+	/** Disable Starlight's default 404 page. */
+	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

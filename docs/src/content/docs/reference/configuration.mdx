@@ -79,7 +79,7 @@ starlight({
 });
 ```
 
-With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
+With this config, a `/introduction` page would have an edit link pointing to `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`.
 
 ### `sidebar`
 
@@ -307,7 +307,7 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-import SocialLinksType from '../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **type:** <SocialLinksType />
 
@@ -411,6 +411,16 @@ When `false`, the colors provided by the active syntax highlighting theme are us
 When using custom themes and setting this to `true`, you must provide at least one dark and one light theme to ensure proper color contrast.
 :::
 
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Define whether Starlight’s default site search provider [Pagefind](https://pagefind.app/) is enabled.
+
+Set to `false` to disable indexing your site with Pagefind.
+This will also hide the default search UI if in use.
+
 ### `head`
 
 **type:** [`HeadConfig[]`](#headconfig)
@@ -504,6 +514,13 @@ Sets the delimiter between page title and site title in the page’s `<title>` t
 By default, every page has a `<title>` of `Page Title | Site Title`.
 For example, this page is titled “Configuration Reference” and this site is titled “Starlight”, so the `<title>` for this page is “Configuration Reference | Starlight”.
 
+### `disable404Route`
+
+**type:** `boolean`  
+**default:** `false`
+
+Disables injecting Starlight's default [404 page](https://docs.astro.build/en/core-concepts/astro-pages/#custom-404-error-page). To use a custom `src/pages/404.astro` route in your project, set this option to `true`.
+
 ### `components`
 
 **type:** `Record<string, string>`
@@ -519,3 +536,20 @@ starlight({
 ```
 
 See the [Overrides Reference](/reference/overrides/) for details of all the components that you can override.
+
+### `plugins`
+
+**type:** [`StarlightPlugin[]`](/reference/plugins/#quick-api-reference)
+
+Extend Starlight with custom plugins.
+Plugins apply changes to your project to modify or add to Starlight's features.
+
+Visit the [plugins showcase](/resources/plugins/#plugins) to see a list of available plugins.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+See the [Plugins Reference](/reference/plugins/) for details about creating your own plugins.

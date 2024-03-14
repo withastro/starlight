@@ -1,7 +1,8 @@
 ---
 import type { Props } from '../props';
 
-import { TableOfContents, MobileTableOfContents } from 'virtual:starlight/components';
+import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
+import TableOfContents from 'virtual:starlight/components/TableOfContents';
 ---
 
 {
@@ -33,14 +34,14 @@ import { TableOfContents, MobileTableOfContents } from 'virtual:starlight/compon
 		line-height: var(--sl-line-height-headings);
 		margin-bottom: 0.5rem;
 	}
-	.right-sidebar-panel :global(a) {
+	.right-sidebar-panel :global(:where(a)) {
 		display: block;
 		font-size: var(--sl-text-xs);
 		text-decoration: none;
 		color: var(--sl-color-gray-3);
 		overflow-wrap: anywhere;
 	}
-	.right-sidebar-panel :global(a:hover) {
+	.right-sidebar-panel :global(:where(a):hover) {
 		color: var(--sl-color-white);
 	}
 	@media (min-width: 72rem) {

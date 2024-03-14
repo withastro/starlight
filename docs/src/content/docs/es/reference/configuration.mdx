@@ -78,7 +78,7 @@ starlight({
 });
 ```
 
-Con esta configuración, una página `/introduction` tendría un enlace de edición que apunta a `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`.
+Con esta configuración, una página `/introduction` tendría un enlace de edición que apunta a `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`.
 
 ### `sidebar`
 
@@ -130,7 +130,7 @@ Los grupos de enlaces se expanden de forma predeterminada. Puedes cambiar este c
 
 Los subgrupos generados automáticamente respetan por defecto la propiedad `collapsed` de su grupo padre. Puedes establecer la propiedad `autogenerate.collapsed` para anular esto.
 
-```js
+```js {5,16}
 sidebar: [
   // Un grupo colapsado de enlaces.
   {
@@ -156,7 +156,7 @@ sidebar: [
 
 Si tu sitio es multilingüe, se considera que la etiqueta de cada elemento está en el idioma predeterminado. Puedes establecer una propiedad de `translations` para proporcionar etiquetas en los otros idiomas que tu sitio admita:
 
-```js
+```js {5,9,14}
 sidebar: [
   // Un ejemplo de barra lateral con etiquetas traducidas al portugués de Brasil.
   {
@@ -216,7 +216,6 @@ interface BadgeConfig {
 Cada entrada debe usar el directorio donde se guardan los archivos de ese idioma como clave.
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -281,7 +280,7 @@ La dirección de escritura de este idioma; `"ltr"` para de izquierda a derecha (
 
 Puedes servir el idioma predeterminado sin un directorio `/lang/` estableciendo un idioma `root`:
 
-```js
+```js {3-6}
 starlight({
 	locales: {
 		root: {
@@ -309,7 +308,7 @@ El idioma predeterminado se utilizará para proporcionar contenido de respaldo d
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **tipo:** <SocialLinksType />
 
@@ -345,6 +344,82 @@ starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
+
+### `expressiveCode`
+
+**tipo:** `StarlightExpressiveCodeOptions | boolean`  
+**por defecto:** `true`
+
+Starlight usa [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) para renderizar bloques de código y agregar soporte para resaltar partes de ejemplos de código, agregar nombres de archivo a bloques de código y más.
+Consulta la [guía de “Bloques de código”](/es/guides/authoring-content/#bloques-de-código) para aprender a usar la sintaxis de Expressive Code en tu contenido Markdown y MDX.
+
+Puedes usar cualquier de las [opciones de configuración estándar de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) así como algunas propiedades específicas de Starlight, estableciéndolas en la opción `expressiveCode` de Starlight.
+Por ejemplo, establece la opción `styleOverrides` de Expressive Code para anular el CSS predeterminado. Esto permite personalizaciones como darle a tus bloques de código esquinas redondeadas:
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+Si quieres deshabilitar Expressive Code, establece `expressiveCode: false` en tu configuración de Starlight:
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+Adicionalmente a las opciones estándar de Expressive Code, también puedes establecer las siguientes propiedades específicas de Starlight en tu configuración `expressiveCode` para personalizar aún más el comportamiento del tema para tus bloques de código:
+
+#### `themes`
+
+**tipo:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**por defecto:** `['starlight-dark', 'starlight-light']`
+
+Establece los temas utilizados para dar estilo a los bloques de código.
+Consulta la [documentación de temas de Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) para obtener detalles de los formatos de tema admitidos.
+
+Starlight usa por defecto las variantes oscura y clara del [tema Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner.
+
+Si proporcionas por lo menos un tema oscuro y uno claro, Starlight mantendrá automáticamente el tema de bloque de código activo sincronizado con el tema actual del sitio.
+Configura este comportamiento con la opción [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
+
+#### `useStarlightDarkModeSwitch`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Cuando sea `true`, los bloques de código cambian automáticamente entre temas claros y oscuros cuando cambia el tema del sitio.
+Cuando sea `false`, debes agregar manualmente CSS para manejar el cambio entre múltiples temas.
+
+:::note
+Cuando estableces `themes`, debes proporcionar por lo menos un tema oscuro y uno claro para que el interruptor de modo oscuro de Starlight funcione.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**tipo:** `boolean`  
+**por defecto:** `true` si `themes` no está establecido, de lo contrario `false`
+
+Cuando sea `true`, se utilizan las variables CSS de Starlight para los colores de los elementos de la UI del bloque de código (fondos, botones, sombras, etc.), coincidiendo con el [tema de color del sitio](/es/guides/css-and-tailwind/#temas).
+Cuando sea `false`, se utilizan los colores proporcionados por el tema de resaltado de sintaxis activo para estos elementos.
+
+:::note
+Cuando usas temas personalizados y estableces esto en `true`, debes proporcionar por lo menos un tema oscuro y uno claro para asegurar un contraste de color adecuado.
+:::
+
+### `pagefind`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https://pagefind.app/) está habilitado.
+
+Establece esta opción a `false` para excluir una página de los resultados de búsqueda.
+Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
 
 ### `head`
 
@@ -439,6 +514,13 @@ Establece un delimitador entre el título de la página y el título del sitio w
 Por defecto, cada página tiene un `<title>` de `Título de la página | Título del sitio web`.
 Por ejemplo, esta página es titulada "Referencia de Configuración" y este sitio web es titulado "Starlight", por lo que el `<title>` de esta página es "Referencia de Configuración | Starlight".
 
+### `disable404Route`
+
+**tipo:** `boolean`  
+**por defecto:** `false`
+
+Deshabilita la inyección de la [página 404](https://docs.astro.build/es/core-concepts/astro-pages/#página-de-error-404-personalizada) predeterminada de Starlight. Para usar una ruta `src/pages/404.astro` personalizada en tu proyecto, establece esta opción en `true`.
+
 ### `components`
 
 **tipo:** `Record<string, string>`
@@ -454,3 +536,20 @@ starlight({
 ```
 
 Consulta la [Referencia de Personalización de Componentes](/es/reference/overrides/) para obtener detalles de todos los componentes que puedes anular.
+
+### `plugins`
+
+**tipo:** [`StarlightPlugin[]`](/es/reference/plugins/#referencia-rápida-de-la-api)
+
+Extiende Starlight con plugins personalizados.
+Los plugins aplican cambios a tu proyecto para modificar o agregar a las funcionalidades a Starlight.
+
+Visita la [exhibición de plugins](/es/resources/plugins/#plugins) para ver una lista de los plugins disponibles.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Consulta la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.

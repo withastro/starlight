@@ -64,6 +64,8 @@ export const HeroSchema = ({ image }: SchemaContext) =>
 							: ({ type: 'raw', html: icon } as const);
 					})
 					.optional(),
+				/** HTML attributes to add to the link */
+				attrs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 			})
 			.array()
 			.default([]),

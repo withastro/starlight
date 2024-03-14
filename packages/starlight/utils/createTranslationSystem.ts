@@ -19,10 +19,16 @@ export function createTranslationSystem(
 
 	/**
 	 * Generate a utility function that returns UI strings for the given `locale`.
+	 *
+	 * Also includes an `all()` method for getting the entire dictionary.
+	 *
 	 * @param {string | undefined} [locale]
 	 * @example
 	 * const t = useTranslations('en');
-	 * const label = t('search.label'); // => 'Search'
+	 * const label = t('search.label');
+	 * // => 'Search'
+	 * const dictionary = t.all();
+	 * // => { 'skipLink.label': 'Skip to content', 'search.label': 'Search', ... }
 	 */
 	return function useTranslations(locale: string | undefined) {
 		const lang = localeToLang(locale, config.locales, config.defaultLocale);
@@ -32,8 +38,7 @@ export function createTranslationSystem(
 			userTranslations[lang]
 		);
 		const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
-		t.pick = (startOfKey: string) =>
-			Object.fromEntries(Object.entries(dictionary).filter(([k]) => k.startsWith(startOfKey)));
+		t.all = () => dictionary;
 		return t;
 	};
 }
@@ -71,8 +76,8 @@ function buildDictionary(
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
 		for (const key in dict) {
-			const value = dict[key as keyof typeof dict];
-			if (value) dictionary[key as keyof typeof dict] = value;
+			const value = dict[key];
+			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}
 	return dictionary;

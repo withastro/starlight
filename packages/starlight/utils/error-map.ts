@@ -3,6 +3,7 @@
  * source: https://github.com/withastro/astro/blob/main/packages/astro/src/content/error-map.ts
  */
 
+import { AstroError } from 'astro/errors';
 import type { z } from 'astro:content';
 
 type TypeOrLiteralErrByPathEntry = {
@@ -11,7 +12,27 @@ type TypeOrLiteralErrByPathEntry = {
 	expected: unknown[];
 };
 
-export const errorMap: z.ZodErrorMap = (baseError, ctx) => {
+/**
+ * Parse data with a Zod schema and throw a nicely formatted error if it is invalid.
+ *
+ * @param schema The Zod schema to use to parse the input.
+ * @param input Input data that should match the schema.
+ * @param message Error message preamble to use if the input fails to parse.
+ * @returns Validated data parsed by Zod.
+ */
+export function parseWithFriendlyErrors<T extends z.Schema>(
+	schema: T,
+	input: z.input<T>,
+	message: string
+): z.output<T> {
+	const parsedConfig = schema.safeParse(input, { errorMap });
+	if (!parsedConfig.success) {
+		throw new AstroError(message, parsedConfig.error.issues.map((i) => i.message).join('\n'));
+	}
+	return parsedConfig.data;
+}
+
+const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 	const baseErrorPath = flattenErrorPath(baseError.path);
 	if (baseError.code === 'invalid_union') {
 		// Optimization: Combine type and literal errors for keys that are common across ALL union types
@@ -34,30 +55,51 @@ export const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 				}
 			}
 		}
-		let messages: string[] = [
-			prefix(
-				baseErrorPath,
-				typeOrLiteralErrByPath.size ? 'Did not match union:' : 'Did not match union.'
-			),
-		];
+		const messages: string[] = [prefix(baseErrorPath, 'Did not match union.')];
+		const details: string[] = [...typeOrLiteralErrByPath.entries()]
+			// If type or literal error isn't common to ALL union types,
+			// filter it out. Can lead to confusing noise.
+			.filter(([, error]) => error.expected.length === baseError.unionErrors.length)
+			.map(([key, error]) =>
+				key === baseErrorPath
+					? // Avoid printing the key again if it's a base error
+					  `> ${getTypeOrLiteralMsg(error)}`
+					: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
+			);
+
+		if (details.length === 0) {
+			const expectedShapes: string[] = [];
+			for (const unionError of baseError.unionErrors) {
+				const expectedShape: string[] = [];
+				for (const issue of unionError.issues) {
+					// If the issue is a nested union error, show the associated error message instead of the
+					// base error message.
+					if (issue.code === 'invalid_union') {
+						return errorMap(issue, ctx);
+					}
+					const relativePath = flattenErrorPath(issue.path)
+						.replace(baseErrorPath, '')
+						.replace(leadingPeriod, '');
+					if ('expected' in issue && typeof issue.expected === 'string') {
+						expectedShape.push(
+							relativePath ? `${relativePath}: ${issue.expected}` : issue.expected
+						);
+					} else {
+						expectedShape.push(relativePath);
+					}
+				}
+				expectedShapes.push(`{ ${expectedShape.join('; ')} }`);
+			}
+			if (expectedShapes.length) {
+				details.push('> Expected type `' + expectedShapes.join(' | ') + '`');
+				details.push('> Received `' + stringify(ctx.data) + '`');
+			}
+		}
+
 		return {
-			message: messages
-				.concat(
-					[...typeOrLiteralErrByPath.entries()]
-						// If type or literal error isn't common to ALL union types,
-						// filter it out. Can lead to confusing noise.
-						.filter(([, error]) => error.expected.length === baseError.unionErrors.length)
-						.map(([key, error]) =>
-							key === baseErrorPath
-								? // Avoid printing the key again if it's a base error
-								  `> ${getTypeOrLiteralMsg(error)}`
-								: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
-						)
-				)
-				.join('\n'),
+			message: messages.concat(details).join('\n'),
 		};
-	}
-	if (baseError.code === 'invalid_literal' || baseError.code === 'invalid_type') {
+	} else if (baseError.code === 'invalid_literal' || baseError.code === 'invalid_type') {
 		return {
 			message: prefix(
 				baseErrorPath,
@@ -80,25 +122,25 @@ const getTypeOrLiteralMsg = (error: TypeOrLiteralErrByPathEntry): string => {
 	const expectedDeduped = new Set(error.expected);
 	switch (error.code) {
 		case 'invalid_type':
-			return `Expected type \`${unionExpectedVals(expectedDeduped)}\`, received ${JSON.stringify(
+			return `Expected type \`${unionExpectedVals(expectedDeduped)}\`, received \`${stringify(
 				error.received
-			)}`;
+			)}\``;
 		case 'invalid_literal':
-			return `Expected \`${unionExpectedVals(expectedDeduped)}\`, received ${JSON.stringify(
+			return `Expected \`${unionExpectedVals(expectedDeduped)}\`, received \`${stringify(
 				error.received
-			)}`;
+			)}\``;
 	}
 };
 
 const prefix = (key: string, msg: string) => (key.length ? `**${key}**: ${msg}` : msg);
 
 const unionExpectedVals = (expectedVals: Set<unknown>) =>
-	[...expectedVals]
-		.map((expectedVal, idx) => {
-			if (idx === 0) return JSON.stringify(expectedVal);
-			const sep = ' | ';
-			return `${sep}${JSON.stringify(expectedVal)}`;
-		})
-		.join('');
+	[...expectedVals].map((expectedVal) => stringify(expectedVal)).join(' | ');
 
 const flattenErrorPath = (errorPath: (string | number)[]) => errorPath.join('.');
+
+/** `JSON.stringify()` a value with spaces around object/array entries. */
+const stringify = (val: unknown) =>
+	JSON.stringify(val, null, 1).split(newlinePlusWhitespace).join(' ');
+const newlinePlusWhitespace = /\n\s*/;
+const leadingPeriod = /^\./;

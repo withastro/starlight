@@ -1,13 +1,13 @@
 /// <reference types="vitest" />
 
-import { getViteConfig } from 'astro/config';
-import type { z } from 'astro/zod';
-import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
-import { StarlightConfigSchema } from '../utils/user-config';
 import type { AstroConfig } from 'astro';
+import { getViteConfig } from 'astro/config';
+import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
+import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
+import { createTestPluginContext } from './test-plugin-utils';
 
-export function defineVitestConfig(
-	config: z.input<typeof StarlightConfigSchema>,
+export async function defineVitestConfig(
+	{ plugins, ...config }: StarlightUserConfigWithPlugins,
 	opts?: {
 		build?: Pick<AstroConfig['build'], 'format'>;
 		trailingSlash?: AstroConfig['trailingSlash'];
@@ -18,14 +18,13 @@ export function defineVitestConfig(
 	const build = opts?.build ?? { format: 'directory' };
 	const trailingSlash = opts?.trailingSlash ?? 'ignore';
 
+	const { starlightConfig } = await runPlugins(config, plugins, createTestPluginContext());
 	return getViteConfig({
 		plugins: [
-			vitePluginStarlightUserConfig(StarlightConfigSchema.parse(config), {
-				root,
-				srcDir,
-				build,
-				trailingSlash,
-			}),
+			vitePluginStarlightUserConfig(starlightConfig, { root, srcDir, build, trailingSlash }),
 		],
+		test: {
+			snapshotSerializers: ['./snapshot-serializer-astro-error.ts'],
+		},
 	});
 }

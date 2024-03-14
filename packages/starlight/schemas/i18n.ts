@@ -1,7 +1,31 @@
 import { z } from 'astro/zod';
 
-export function i18nSchema() {
-	return starlightI18nSchema().merge(pagefindI18nSchema()).merge(expressiveCodeI18nSchema());
+interface i18nSchemaOpts<T extends z.AnyZodObject = z.ZodObject<{}>> {
+	/**
+	 * Extend Starlight’s i18n schema with additional fields.
+	 *
+	 * @example
+	 * // Add two optional fields to the default schema.
+	 * i18nSchema({
+	 * 	extend: z
+	 * 		.object({
+	 * 			'customUi.heading': z.string(),
+	 * 			'customUi.text': z.string(),
+	 * 		})
+	 * 		.partial(),
+	 * })
+	 */
+	extend?: T;
+}
+
+/** Content collection schema for Starlight’s optional `i18n` collection. */
+export function i18nSchema<T extends z.AnyZodObject = z.ZodObject<{}>>({
+	extend = z.object({}) as T,
+}: i18nSchemaOpts<T> = {}) {
+	return starlightI18nSchema()
+		.merge(pagefindI18nSchema())
+		.merge(expressiveCodeI18nSchema())
+		.merge(extend);
 }
 export type i18nSchemaOutput = z.output<ReturnType<typeof i18nSchema>>;
 
@@ -97,6 +121,10 @@ function starlightI18nSchema() {
 			'aside.note': z.string().describe('Text shown on the note aside variant'),
 			'aside.caution': z.string().describe('Text shown on the warning aside variant'),
 			'aside.danger': z.string().describe('Text shown on the danger aside variant'),
+
+			'fileTree.directory': z
+				.string()
+				.describe('Label for the directory icon in the file tree component.'),
 		})
 		.partial();
 }

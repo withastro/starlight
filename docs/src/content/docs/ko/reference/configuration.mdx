@@ -79,7 +79,7 @@ starlight({
 });
 ```
 
-이 구성을 통해 `/introduction` 페이지에 있는 편집 링크는 `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`를 가리킵니다.
+이 구성을 통해 `/introduction` 페이지에 있는 편집 링크는 `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`를 가리킵니다.
 
 ### `sidebar`
 
@@ -311,7 +311,7 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **타입:** <SocialLinksType />
 
@@ -415,6 +415,16 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 사용자 정의 테마를 사용하고 이를 `true`로 설정하는 경우, 적절한 색상 대비를 보장하기 위해 최소한 하나의 어두운 테마와 하나의 밝은 테마를 제공해야 합니다.
 :::
 
+### `pagefind`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)가 활성화되어 있는지 정의합니다.
+
+Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하세요.
+또한, 이는 기본 검색 UI도 숨깁니다.
+
 ### `head`
 
 **타입:** [`HeadConfig[]`](#headconfig)
@@ -507,6 +517,13 @@ starlight({
 기본적으로 모든 페이지에 설정된 `<title>` 태그의 내용은 `페이지 제목 | 사이트 제목`입니다.
 예를 들어, 이 페이지의 제목이 "구성 참조"이고, 이 사이트의 제목이 "Starlight"라면, 이 페이지의 `<title>`의 내용은 `구성 참조 | Starlight`가 됩니다.
 
+### `disable404Route`
+
+**타입:** `boolean`  
+**기본값:** `false`
+
+Starlight의 기본 [404 페이지](https://docs.astro.build/ko/core-concepts/astro-pages/#사용자-정의-404-오류-페이지) 삽입을 비활성화합니다. 프로젝트에서 사용자 정의 `src/pages/404.astro` 경로를 사용하려면 이 옵션을 `true`로 설정하세요.
+
 ### `components`
 
 **타입:** `Record<string, string>`
@@ -522,3 +539,20 @@ starlight({
 ```
 
 재정의할 수 있는 모든 컴포넌트에 대한 자세한 내용은 [재정의 참조](/ko/reference/overrides/)를 확인하세요.
+
+### `plugins`
+
+**타입:** [`StarlightPlugin[]`](/ko/reference/plugins/#빠른-api-참조)
+
+맞춤형 플러그인으로 Starlight를 확장하세요.
+플러그인은 프로젝트에 변경 사항을 적용하여 Starlight의 기능을 수정하거나 추가합니다.
+
+사용 가능한 플러그인 목록을 보려면 [플러그인 쇼케이스](/ko/resources/plugins/)를 방문하세요.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+나만의 플러그인을 만드는 방법에 대한 자세한 내용은 [플러그인 참조](/ko/reference/plugins/)를 확인하세요.

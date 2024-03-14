@@ -4,7 +4,7 @@ description: Apprenez à vous approprier votre site Starlight avec votre logo, p
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../../components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 Starlight propose par défaut un style et des fonctionnalités pragmatiques, vous pouvez donc démarrer rapidement sans configuration nécessaire.
 Lorsque vous souhaitez commencer à personnaliser l’apparence de votre site Starlight, ce guide vous accompagne.
@@ -128,7 +128,7 @@ Par défaut, les titres `<h2>` et `<h3>` sont inclus dans la table des matières
 
 ```md {4-6}
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page avec seulement les H2s dans la table des matières
 tableOfContents:
   minHeadingLevel: 2
@@ -162,7 +162,7 @@ Désactivez la table des matières complètement en définissant l’option `tab
 
 ```md {4}
 ---
-# src/content/docs/example.md
+# src/content/docs/exemple.md
 title: Page sans table des matières
 tableOfContents: false
 ---
@@ -277,6 +277,25 @@ hero:
 ---
 ```
 
+### Désactiver la page 404 par défaut
+
+Si votre projet nécessite une mise en page entièrement personnalisée pour votre page 404, vous pouvez créer une route `src/pages/404.astro` et définir l'option de configuration [`disable404Route`](/fr/reference/configuration/#disable404route) pour désactiver la route par défaut de Starlight :
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Documentation avec 404 personnalisée',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
 ## Polices personnalisées
 
 Par défaut, Starlight utilise des polices sans empattement disponibles en local sur la machine du visiteur pour tout les textes.
@@ -345,37 +364,41 @@ Pour utiliser Google Fonts, suivez le [Guide de configuration de Fontsource](#co
 Le projet [Fontsource](https://fontsource.org/) simplifie l’utilisation des polices Google et d’autres polices open source.
 Il fournit des modules npm que vous pouvez installer pour les polices que vous souhaitez utiliser et inclut des fichiers CSS prêts à l’emploi à ajouter à votre projet.
 
-1.  Trouvez la police que vous souhaitez utiliser dans le [catalogue de Fontsource](https://fontsource.org/). Cet exemple utilisera [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
+1.  Trouvez la police que vous souhaitez utiliser dans le [catalogue de Fontsource](https://fontsource.org/).
+    Cet exemple utilisera [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
 
-2.  Installez le package pour la police choisie. Vous pouvez trouver le nom du package en cliquant sur "Installer" sur la page de police Fontsource.
+2.  Installez le package pour la police choisie.
+    Vous pouvez trouver le nom du package en cliquant sur "Installer" sur la page de police Fontsource.
 
         <Tabs>
 
     <TabItem label="npm">
 
-            ```sh
-            npm install @fontsource/ibm-plex-serif
-            ```
+        ```sh
+        npm install @fontsource/ibm-plex-serif
+        ```
 
           </TabItem>
+
           <TabItem label="pnpm">
 
-            ```sh
-            pnpm install @fontsource/ibm-plex-serif
-            ```
+        ```sh
+        pnpm add @fontsource/ibm-plex-serif
+        ```
 
           </TabItem>
+
           <TabItem label="Yarn">
 
-            ```sh
-            yarn add @fontsource/ibm-plex-serif
-            ```
+        ```sh
+        yarn add @fontsource/ibm-plex-serif
+        ```
 
         </TabItem>
 
       </Tabs>
 
-3.  Ajoutez les fichiers CSS Fontsource au tableau `customCss` de Starlight dans `astro.config.mjs` :
+3.  Ajoutez les fichiers CSS Fontsource au tableau `customCss` de Starlight dans `astro.config.mjs` :
 
         ```diff lang="js"
         // astro.config.mjs
@@ -401,7 +424,7 @@ Il fournit des modules npm que vous pouvez installer pour les polices que vous s
 ### Utiliser vos polices personnalisées
 
 Une fois configurée, pour appliquer votre police personnalisée à votre site, utilisez le nom de la police que vous avez choisie dans un [fichier CSS personnalisé](/fr/guides/css-and-tailwind/#styles-css-personnalisés).
-Par exemple, pour remplacer la police par défaut de Starlight partout, définissez la propriété personnalisée `--sl-font` :
+Par exemple, pour remplacer la police par défaut de Starlight partout, définissez la propriété personnalisée `--sl-font` :
 
 ```css
 /* src/styles/custom.css */
@@ -412,7 +435,7 @@ Par exemple, pour remplacer la police par défaut de Starlight partout, définis
 ```
 
 Vous pouvez également écrire du CSS plus ciblé si vous souhaitez appliquer votre police de manière plus sélective.
-Par exemple, pour définir uniquement une police sur le contenu principal, mais pas sur les barres latérales :
+Par exemple, pour définir uniquement une police sur le contenu principal, mais pas sur les barres latérales :
 
 ```css
 /* src/styles/custom.css */

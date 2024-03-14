@@ -22,5 +22,6 @@
   "aside.note": "ملحوظة",
   "aside.tip": "نصيحة",
   "aside.caution": "تنبيه",
-  "aside.danger": "تحذير"
+  "aside.danger": "تحذير",
+  "fileTree.directory": "Directory"
 }

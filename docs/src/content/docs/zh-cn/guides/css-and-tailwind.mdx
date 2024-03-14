@@ -22,7 +22,7 @@ description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样
 
 2. 在 `astro.config.mjs` 中的 `customCss` 数组中添加你的 CSS 文件的路径：
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,8 +32,8 @@ description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样
    		starlight({
    			title: 'Docs With Custom CSS',
    			customCss: [
-   				// 你的自定义 CSS 文件的相对路径
-   				'./src/styles/custom.css',
+   +				// 你的自定义 CSS 文件的相对路径
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
@@ -132,7 +132,7 @@ yarn create astro --template starlight/tailwind
    <TabItem label="pnpm">
 
    ```sh
-   pnpm install @astrojs/starlight-tailwind
+   pnpm add @astrojs/starlight-tailwind
    ```
 
    </TabItem>
@@ -244,7 +244,7 @@ Starlight 的颜色主题可以通过覆盖其默认的自定义属性来控制�
 
 当你对你的更改满意时，复制下面的 CSS 或 Tailwind 代码并在你的项目中使用。
 
-import ThemeDesigner from '../../../../components/theme-designer.astro';
+import ThemeDesigner from '~/components/theme-designer.astro';
 
 <ThemeDesigner
 	labels={{

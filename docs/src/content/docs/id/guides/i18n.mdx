@@ -3,7 +3,7 @@ title: Internasionalisasi (i18n)
 description: Pelajari cara mengonfigurasi website Starlight Anda untuk mendukung beberapa bahasa.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 Starlight menyediakan dukungan bawaan untuk website multibahasa, termasuk pengaturan rute, konten cadangan, dan dukungan bahasa dari kanan ke kiri (RTL) sepenuhnya.
 
@@ -141,7 +141,7 @@ Jika terjemahan belum tersedia untuk suatu bahasa, Starlight akan menampilkan ko
 
 ## Terjemahkan UI Starlight
 
-import LanguagesList from '../../../../components/languages-list.astro';
+import LanguagesList from '~/components/languages-list.astro';
 
 Selain menyimpan file konten yang diterjemahkan, Starlight memungkinkan Anda menerjemahkan string UI default (misalnya, judul "Di halaman ini" dalam daftar isi) sehingga pembaca Anda dapat mengakses website Anda sepenuhnya dalam bahasa yang dipilih.
 
@@ -199,9 +199,13 @@ Anda dapat memberikan terjemahan untuk bahasa tambahan yang Anda dukung — atau
    	"i18n.untranslatedContent": "This content is not available in your language yet.",
    	"page.editLink": "Edit page",
    	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Next",
-   	"page.nextLink": "Previous",
-   	"404.text": "Page not found. Check the URL or try using the search bar."
+   	"page.previousLink": "Previous",
+   	"page.nextLink": "Next",
+   	"404.text": "Page not found. Check the URL or try using the search bar.",
+   	"aside.note": "Note",
+   	"aside.tip": "Tip",
+   	"aside.caution": "Caution",
+   	"aside.danger": "Danger"
    }
    ```
 
