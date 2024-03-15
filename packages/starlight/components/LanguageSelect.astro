@@ -48,3 +48,9 @@ const { labels } = Astro.props;
 	}
 	customElements.define('starlight-lang-select', StarlightLanguageSelect);
 </script>
+
+<style>
+	select:focus {
+		outline: 0;
+	}
+</style>
