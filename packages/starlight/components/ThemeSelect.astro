@@ -7,7 +7,7 @@ const { labels } = Astro.props;
 
 <starlight-theme-select>
 	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
-	<Select
+		<Select
 		icon="laptop"
 		label={labels['themeSelect.accessibleLabel']}
 		value="auto"
@@ -87,9 +87,3 @@ const { labels } = Astro.props;
 
 	customElements.define('starlight-theme-select', StarlightThemeSelect);
 </script>
-
-<style>
-	select:focus {
-		outline: 0;
-	}
-</style>
