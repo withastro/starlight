@@ -6,7 +6,6 @@ sidebar:
 ---
 
 Starlight gera as páginas HTML do seu site com base no seu conteúdo, com opções flexíveis fornecidas através do frontmatter do Markdown.
-Starlight generates your site’s HTML pages based on your content, with flexible options provided via Markdown frontmatter.
 Além disso, os projetos Starlight têm acesso total às [poderosas ferramentas de geração de páginas do Astro](https://docs.astro.build/pt-br/basics/astro-pages/).
 Este guia mostra como a geração de páginas funciona no Starlight.
 
@@ -16,7 +15,6 @@ Este guia mostra como a geração de páginas funciona no Starlight.
 
 Starlight suporta a autoria de conteúdo em Markdown e MDX sem necessidade de configuração.
 Você pode adicionar suporte para Markdoc instalando a integração experimental [Astro Markdoc](https://docs.astro.build/pt-br/guides/integrations-guide/markdoc/).
-
 
 ### Adicionando páginas
 
@@ -38,10 +36,10 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </FileTree>
 
-### Type-safe frontmatter
+### Frontmatter com segurança de tipos
 
 ```md
-Todas as páginas do Starlight compartilham um [conjunto comum de propriedades de frontmatter personalizáveis](/reference/frontmatter/) para controlar como a página aparece:
+Todas as páginas do Starlight compartilham um [conjunto comum de propriedades de frontmatter](/reference/pt-br/frontmatter/) personalizáveis para controlar como a página aparece:
 
 ```md
 ---
@@ -49,12 +47,15 @@ title: Olá, Mundo!
 description: Esta é uma página no meu site alimentado pelo Starlight
 ---
 ```
+
 Se você esquecer de algo importante, o Starlight irá te avisar.
 
 ## Páginas customizadas
 
 Para casos de uso avançados, você pode adicionar páginas customizadas criando um diretório `src/pages/`.
-O diretório `src/pages/` usa [roteamento baseado em arquivos do Astro](https://docs.astro.build/pt-br/basics/astro-pages/#file-based-routing) e inclui suporte para arquivos `.astro` entre outros formatos de página.
+O diretório `src/pages/` usa [roteamento baseado em arquivos do Astro](https://docs.astro.build/pt-br/basics/astro-pages/#roteamento-baseado-em-arquivos) e inclui suporte para arquivos `.astro` entre outros formatos de página.
+Isto é útil se você precisa construir páginas com um layout completamente customizado ou gerar uma página a partir de uma fonte de dados alternativa.
+
 Por exemplo, este projeto mistura conteúdo Markdown em `src/content/docs/` com rotas Astro e HTML em `src/pages/`:
 
 <FileTree>
@@ -93,35 +94,35 @@ import CustomComponent from './CustomComponent.astro';
 
 O componente `<StarlightPage />` aceita as seguintes props.
 
-##### `frontmatter` (requerido)
+##### `frontmatter` (obrigatório)
 
-**type:** `StarlightPageFrontmatter`
+**tipo:** `StarlightPageFrontmatter`
 
 Especifique as [propriedades de frontmatter](/reference/frontmatter/) para esta página, similar ao frontmatter em páginas Markdown.
-O [`title`](/reference/frontmatter/#title-required) é requerido e todas as outras propriedades são opcionais.
+O [`title`](/reference/frontmatter/#title-obrigatorio) é requerido e todas as outras propriedades são opcionais.
 
 As seguintes propriedades diferem do frontmatter Markdown:
 
-- O [`slug`](/reference/frontmatter/#slug) não é suportado e é automaticamente definido com base na URL da página customizada.
-- A opção [`editUrl`](/reference/frontmatter/#editurl) requer uma URL para exibir um link de edição.
-- A propriedade [`sidebar`](/reference/frontmatter/#sidebar) para customizar como a página aparece em [grupos de links autogerados](/reference/configuration/#sidebar) não está disponível. Páginas usando o componente `<StarlightPage />` não fazem parte de uma coleção e não podem ser adicionadas a um grupo de sidebar autogerado.
+- O [`slug`](/pt-br/reference/frontmatter/#slug) não é suportado e é automaticamente definido com base na URL da página customizada.
+- A opção [`editUrl`](/pt-br/reference/frontmatter/#editurl) requer uma URL para exibir um link de edição.
+- A propriedade [`sidebar`](/pt-br/reference/frontmatter/#sidebar) para customizar como a página aparece em [grupos de links autogerados](/pt-br/reference/configuration/#sidebar) não está disponível. Páginas usando o componente `<StarlightPage />` não fazem parte de uma coleção e não podem ser adicionadas a um grupo de sidebar autogerado.
 
 ##### `sidebar`
 
-**type:** `SidebarEntry[]`  
-**default:** o sidebar gerado baseado na [configuração global `sidebar`](/reference/configuration/#sidebar)
+**tipo:** `SidebarEntry[]`  
+**ão:** a barra lateral gerada baseado na [configuração global `sidebar`](/pt-br/reference/configuration/#sidebar)
 
-Provê um sidebar de navegação customizado para esta página.
-Caso não seja definido, a página usará o sidebar global padrão.
+Provê uma barra lateral de navegação customizada para esta página.
+Caso não seja definido, a página usará a barra lateral global padrão.
 
-Por exemplo, a seguinte página sobrescreve o sidebar padrão com um link para a homepage e um grupo de links para diferentes constelações.
-A página atual no sidebar é definida usando a propriedade `isCurrent` e um `badge` opcional foi adicionado a um item de link.
+Por exemplo, a seguinte página sobrescreve o sidebar padrão com um link para a página inicial e um grupo de links para diferentes constelações.
+A página atual na barra lateral é definida usando a propriedade `isCurrent` e um `badge` opcional foi adicionado a um item de link.
 
 ```astro {3-13}
 <StarlightPage
 	frontmatter={{ title: 'Orion' }}
 	sidebar={[
-		{ label: 'Home', href: '/' },
+		{ label: 'Início', href: '/' },
 		{
 			label: 'Constelações',
 			items: [
@@ -138,15 +139,15 @@ A página atual no sidebar é definida usando a propriedade `isCurrent` e um `ba
 
 ##### `hasSidebar`
 
-**type:** `boolean`  
-**default:** `false` se [`frontmatter.template`](/reference/frontmatter/#template) é `'splash'`, caso contrário é `true`
+**tipo:** `boolean`  
+**padrão:** `false` se [`frontmatter.template`](/reference/frontmatter/#template) é `'splash'`, caso contrário é `true`
 
-Controle se a sidebar deve ser exibida nesta página.
+Controle se a barra lateral deve ser exibida nesta página.
 
 ##### `headings`
 
-**type:** `{ depth: number; slug: string; text: string }[]`  
-**default:** `[]`
+**tipo:** `{ depth: number; slug: string; text: string }[]`  
+**padrão:** `[]`
 
 Provê um array com todos os títulos na página.
 Starlight irá gerar o sumário da página a partir destes títulos se fornecidos.
