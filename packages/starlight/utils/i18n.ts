@@ -1,3 +1,4 @@
+import config from 'virtual:starlight/user-config';
 /**
  * Get the string for the passed language from a dictionary object.
  *
@@ -13,4 +14,13 @@ export function pickLang<T extends Record<string, string>>(
 	lang: keyof T
 ): string | undefined {
 	return dictionary[lang];
+}
+
+
+export const getI18nTitle = (lang:string)=>{
+	const title = config.title
+	if(typeof title === 'object'){
+		return title[lang]
+	}
+	return title
 }

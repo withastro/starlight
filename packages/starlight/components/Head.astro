@@ -6,6 +6,7 @@ import type { HeadConfigSchema } from '../schemas/head';
 import { fileWithBase } from '../utils/base';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
+import { getI18nTitle } from '../utils/i18n'
 import type { Props } from '../props';
 
 const { entry, lang } = Astro.props;
@@ -13,7 +14,7 @@ const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
 const description = data.description || config.description;
-const siteTitle =  config.title[lang] || config.title.root;
+const siteTitle =  getI18nTitle(lang);
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { charset: 'utf-8' } },
 	{
