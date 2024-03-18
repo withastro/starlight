@@ -10,7 +10,7 @@ export const locales = {
 	fr: { label: 'Français', lang: 'fr' },
 	it: { label: 'Italiano', lang: 'it' },
 	id: { label: 'Bahasa Indonesia', lang: 'id' },
-	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+	'zh-CN': { label: '简体中文', lang: 'zh-CN' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
 	'pt-pt': { label: 'Português', lang: 'pt-PT' },
 	ko: { label: '한국어', lang: 'ko' },
@@ -36,7 +36,7 @@ export default defineConfig({
 		starlight({
 			title: {
 				root: 'Starlight',
-				'zh-cn': '星光',
+				'zh-CN': '星光',
 				de: 'Sternenlicht',
 				es: 'Luz de estrellas',
 				ja: '星明り',
