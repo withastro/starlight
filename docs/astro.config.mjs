@@ -34,7 +34,24 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
-			title: 'Starlight',
+			title: {
+				root: 'Starlight',
+				'zh-cn': '星光',
+				de: 'Sternenlicht',
+				es: 'Luz de estrellas',
+				ja: '星明り',
+				fr: 'Lumière des étoiles',
+				it: 'Luce delle stelle',
+				id: 'Cahaya bintang',
+				'pt-br': 'Luz das estrelas',
+				'pt-pt': 'Luz das estrelas',
+				ko: '별빛',
+				tr: 'Yıldız ışığı',
+				ru: 'Звездный свет',
+				hi: 'तारों की रोशनी',
+				da: 'Stjernelys',
+				uk: 'Зоряне світло',
+			},
 			logo: {
 				light: '/src/assets/logo-light.svg',
 				dark: '/src/assets/logo-dark.svg',

@@ -36,7 +36,13 @@ export default function StarlightIntegration({
 					logger,
 				});
 				userConfig = starlightConfig;
-
+				for(const key in userConfig.title ){
+					if((!userConfig.locales  || !userConfig.locales[key])){
+						throw new Error(
+							`Title Lang "${key}" must defind in locales First`,
+						);
+					}
+				}
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
 				if (!userConfig.disable404Route) {

@@ -13,14 +13,14 @@ const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
 const description = data.description || config.description;
-
+const siteTitle =  config.title[lang] || config.title.root;
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { charset: 'utf-8' } },
 	{
 		tag: 'meta',
 		attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 	},
-	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${config.title}` },
+	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${siteTitle}` },
 	{ tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
 	{ tag: 'meta', attrs: { name: 'generator', content: Astro.generator } },
 	{
@@ -42,7 +42,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { property: 'og:url', content: canonical?.href } },
 	{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
 	{ tag: 'meta', attrs: { property: 'og:description', content: description } },
-	{ tag: 'meta', attrs: { property: 'og:site_name', content: config.title } },
+	{ tag: 'meta', attrs: { property: 'og:site_name', content: siteTitle } },
 	// Twitter Tags
 	{
 		tag: 'meta',
