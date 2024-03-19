@@ -179,7 +179,7 @@ export const starlightExpressiveCode = ({
 			{
 				name: 'astro-expressive-code-shim',
 				hooks: {
-					'astro:config:setup': async ({ updateConfig }) => {
+					'astro:config:setup': ({ updateConfig }) => {
 						updateConfig({
 							vite: {
 								plugins: [
