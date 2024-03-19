@@ -33,7 +33,8 @@ const LocaleSchema = z.object({
 
 const UserConfigSchema = z.object({
 	/** Title for your website. Will be used in metadata and as browser tab title. */
-	title:z.union([z.string(),z.record(z.string()).default({})])
+	title:
+		z.union([z.string(), z.record(z.string())])
 		.describe('Title for your website. Will be used in metadata and as browser tab title.'),
 
 	/** Description metadata for your website. Can be used in page metadata. */
