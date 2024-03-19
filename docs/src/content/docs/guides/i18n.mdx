@@ -13,7 +13,7 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
 1. Tell Starlight about the languages you support by passing [`locales`](/reference/configuration/#locales) and [`defaultLocale`](/reference/configuration/#defaultlocale) to the Starlight integration:
 
-   ```js {9-26}
+   ```js {8-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -22,7 +22,7 @@ Starlight provides built-in support for multilingual sites, including routing, f
    	integrations: [
    		starlight({
    			'zh-cn':'我的文档',
-			  en:'my-doc'
+			  en:'My docs'
    			// Set English as the default language for this site.
    			defaultLocale: 'en',
    			locales: {
