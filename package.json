@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
+    "lint": "eslint .",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro ."
@@ -14,10 +15,15 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
     "@size-limit/file": "^8.2.4",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
     "astro": "^4.3.5",
+    "eslint": "^8.53.0",
+    "eslint-plugin-no-only-tests": "^3.1.0",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.13.0",
-    "size-limit": "^8.2.4"
+    "size-limit": "^8.2.4",
+    "typescript": "^5.4.2"
   },
   "packageManager": "pnpm@8.7.4",
   "size-limit": [
