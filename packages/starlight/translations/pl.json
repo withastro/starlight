@@ -3,7 +3,7 @@
   "search.label": "Szukaj",
   "search.shortcutLabel": "(Naciśnij /, aby wyszukać)",
   "search.cancelLabel": "Anuluj",
-  "search.devWarning": "Wyszukiwanie jest dostępne tylko w buildach produkcyjnych. Spróbuj zbudować i uruchomić aplikację, aby przetestować lokalnie.",
+  "search.devWarning": "Wyszukiwanie jest dostępne tylko w buildach produkcyjnych. \nSpróbuj zbudować i uruchomić aplikację, aby przetestować lokalnie.",
   "themeSelect.accessibleLabel": "Wybierz motyw",
   "themeSelect.dark": "Ciemny",
   "themeSelect.light": "Jasny",
