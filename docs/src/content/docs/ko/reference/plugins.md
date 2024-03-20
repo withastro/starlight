@@ -99,7 +99,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -148,7 +148,7 @@ Starlight를 실행하는 데 사용되는 명령:
 export default {
   name: 'long-process-plugin',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info('시간이 오래 걸리는 작업 진행 중…');
       // 오래 걸리는 작업…
     },
