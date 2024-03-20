@@ -12,16 +12,17 @@ Puoi modellare il tuo sito Starlight con file CSS personalizzati o utilizzare il
 Personalizza gli stili applicati al tuo sito Starlight fornendo file CSS aggiuntivi per modificare o estendere gli stili predefiniti di Starlight.
 
 <Steps>
+
 1. Aggiungi un file CSS alla tua directory `src/`.
    Ad esempio, potresti impostare una larghezza predefinita della colonna più ampia e una dimensione del testo più grande per i titoli delle pagine:
 
-```css
-/* src/styles/custom.css */
-:root {
-	--sl-content-width: 50rem;
-	--sl-text-5xl: 3.5rem;
-}
-```
+   ```css
+   /* src/styles/custom.css */
+   :root {
+   	--sl-content-width: 50rem;
+   	--sl-text-5xl: 3.5rem;
+   }
+   ```
 
 2. Aggiungi il percorso del tuo file CSS all'array `customCss` di Starlight in `astro.config.mjs`:
 
@@ -43,7 +44,7 @@ Personalizza gli stili applicati al tuo sito Starlight fornendo file CSS aggiunt
    });
    ```
 
-   </Steps>
+</Steps>
 
 Puoi vedere tutte le proprietà personalizzate CSS utilizzate da Starlight che puoi impostare per personalizzare il tuo sito nel [file `props.css` su GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
@@ -91,6 +92,7 @@ yarn create astro --template starlight/tailwind
 Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi passaggi.
 
 <Steps>
+
 1. Aggiungi l'integrazione Tailwind di Astro:
 
     <Tabs>
@@ -187,18 +189,18 @@ Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi p
 
 5. Aggiungi il plugin Starlight Tailwind a `tailwind.config.cjs`:
 
-        ```js ins={2,7}
-        // tailwind.config.mjs
-        import starlightPlugin from '@astrojs/starlight-tailwind';
+    ```js ins={2,7}
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
-        /** @type {import('tailwindcss').Config} */
-        export default {
-        	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-        	plugins: [starlightPlugin()],
-        };
-        ```
+    /** @type {import('tailwindcss').Config} */
+    export default {
+    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    	plugins: [starlightPlugin()],
+    };
+    ```
 
-    </Steps>
+</Steps>
 
 ### Styling di Starlight con Tailwind
 
