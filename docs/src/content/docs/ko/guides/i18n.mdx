@@ -3,7 +3,7 @@ title: 국제화 (i18n)
 description: 여러 언어를 지원하도록 Starlight 사이트를 구성하는 방법을 알아보세요.
 ---
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽으로) 언어 지원을 포함한 다국어 사이트에 대한 기본 지원을 제공합니다.
 
@@ -206,7 +206,8 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"aside.note": "Note",
    	"aside.tip": "Tip",
    	"aside.caution": "Caution",
-   	"aside.danger": "Danger"
+   	"aside.danger": "Danger",
+   	"fileTree.directory": "Directory"
    }
    ```
 
