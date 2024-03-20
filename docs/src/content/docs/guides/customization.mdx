@@ -17,11 +17,11 @@ Adding a custom logo to the site header is a quick way to add your individual br
 
    <FileTree>
 
-   - src/
-     - assets/
-       - **my-logo.svg**
-     - content/
-   - astro.config.mjs
+- src/
+  - assets/
+    - **my-logo.svg**
+  - content/
+- astro.config.mjs
 
    </FileTree>
 
@@ -43,7 +43,8 @@ Adding a custom logo to the site header is a quick way to add your individual br
    	],
    });
    ```
-</Steps>
+
+   </Steps>
 
 By default, the logo will be displayed alongside your site’s `title`.
 If your logo image already includes the site title, you can visually hide the title text by setting the `replacesTitle` option.
@@ -68,12 +69,12 @@ You can display different versions of your logo in light and dark modes.
 
    <FileTree>
 
-   - src/
-     - assets/
-       - **light-logo.svg**
-       - **dark-logo.svg**
-     - content/
-   - astro.config.mjs
+- src/
+  - assets/
+    - **light-logo.svg**
+    - **dark-logo.svg**
+  - content/
+- astro.config.mjs
 
    </FileTree>
 
@@ -88,7 +89,8 @@ You can display different versions of your logo in light and dark modes.
      },
    }),
    ```
-</Steps>
+
+   </Steps>
 
 ## Enable sitemap
 
@@ -318,12 +320,12 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
 
    <FileTree>
 
-   - src/
-     - content/
-     - fonts/
-       - **CustomFont.woff2**
-       - **font-face.css**
-   - astro.config.mjs
+- src/
+  - content/
+  - fonts/
+    - **CustomFont.woff2**
+    - **font-face.css**
+- astro.config.mjs
 
    </FileTree>
 
@@ -362,7 +364,8 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    	],
    });
    ```
-</Steps>
+
+   </Steps>
 
 #### Set up a Fontsource font
 
@@ -406,27 +409,28 @@ It provides npm modules you can install for the fonts you want to use and includ
 
 3.  Add Fontsource CSS files to Starlight’s `customCss` array in `astro.config.mjs`:
 
-    ```diff lang="js"
-    // astro.config.mjs
-    import { defineConfig } from 'astro/config';
-    import starlight from '@astrojs/starlight';
+        ```diff lang="js"
+        // astro.config.mjs
+        import { defineConfig } from 'astro/config';
+        import starlight from '@astrojs/starlight';
 
-    export default defineConfig({
-    	integrations: [
-    		starlight({
-    			title: 'Docs With a Custom Typeface',
-    			customCss: [
-    +				// Fontsource files for to regular and semi-bold font weights.
-    +				'@fontsource/ibm-plex-serif/400.css',
-    +				'@fontsource/ibm-plex-serif/600.css',
-    			],
-    		}),
-    	],
-    });
-    ```
+        export default defineConfig({
+        	integrations: [
+        		starlight({
+        			title: 'Docs With a Custom Typeface',
+        			customCss: [
+        +				// Fontsource files for to regular and semi-bold font weights.
+        +				'@fontsource/ibm-plex-serif/400.css',
+        +				'@fontsource/ibm-plex-serif/600.css',
+        			],
+        		}),
+        	],
+        });
+        ```
 
-    Fontsource ships multiple CSS files for each font. See the [Fontsource documentation](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) on including different weights and styles to understand which to use.
-</Steps>
+        Fontsource ships multiple CSS files for each font. See the [Fontsource documentation](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) on including different weights and styles to understand which to use.
+
+    </Steps>
 
 ### Use fonts
 

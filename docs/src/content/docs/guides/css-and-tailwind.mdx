@@ -15,13 +15,13 @@ Customize the styles applied to your Starlight site by providing additional CSS 
 1. Add a CSS file to your `src/` directory.
    For example, you could set a wider default column width and larger text size for page titles:
 
-   ```css
-   /* src/styles/custom.css */
-   :root {
-   	--sl-content-width: 50rem;
-   	--sl-text-5xl: 3.5rem;
-   }
-   ```
+```css
+/* src/styles/custom.css */
+:root {
+	--sl-content-width: 50rem;
+	--sl-text-5xl: 3.5rem;
+}
+```
 
 2. Add the path to your CSS file to Starlight’s `customCss` array in `astro.config.mjs`:
 
@@ -42,7 +42,8 @@ Customize the styles applied to your Starlight site by providing additional CSS 
    	],
    });
    ```
-</Steps>
+
+   </Steps>
 
 You can see all the CSS custom properties used by Starlight that you can set to customize your site in the [`props.css` file on GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
@@ -186,17 +187,18 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
 5.  Add the Starlight Tailwind plugin to `tailwind.config.mjs`:
 
-    ```js ins={2,7}
-    // tailwind.config.mjs
-    import starlightPlugin from '@astrojs/starlight-tailwind';
+        ```js ins={2,7}
+        // tailwind.config.mjs
+        import starlightPlugin from '@astrojs/starlight-tailwind';
 
-    /** @type {import('tailwindcss').Config} */
-    export default {
-    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-    	plugins: [starlightPlugin()],
-    };
-    ```
-</Steps>
+        /** @type {import('tailwindcss').Config} */
+        export default {
+        	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+        	plugins: [starlightPlugin()],
+        };
+        ```
+
+    </Steps>
 
 ### Styling Starlight with Tailwind
 

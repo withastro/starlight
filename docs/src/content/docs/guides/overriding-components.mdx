@@ -23,7 +23,7 @@ Overriding Starlight’s default components can be useful when:
 1. Choose the Starlight component you want to override.
    You can find a full list of components in the [Overrides Reference](/reference/overrides/).
 
-   This example will override Starlight’s [`SocialIcons`](/reference/overrides/#socialicons) component in the page nav bar.
+This example will override Starlight’s [`SocialIcons`](/reference/overrides/#socialicons) component in the page nav bar.
 
 2. Create an Astro component to replace the Starlight component with.
    This example renders a contact link.
@@ -45,18 +45,19 @@ Overriding Starlight’s default components can be useful when:
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My Docs with Overrides',
-         components: {
-           // Override the default `SocialIcons` component.
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My Docs with Overrides',
+   			components: {
+   				// Override the default `SocialIcons` component.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
-</Steps>
+
+   </Steps>
 
 ## Reuse a built-in component
 
@@ -98,9 +99,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -122,13 +123,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Built with Starlight 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Built with Starlight 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 
