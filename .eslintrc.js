@@ -15,26 +15,13 @@ module.exports = {
   ignorePatterns: ['**/node_modules/*', '**/dist/*'],
   rules: {
     'no-only-tests/no-only-tests': 'warn',
-    'no-empty': 'warn',
-    'no-unused-vars': [
-      'warn',
-      {
-        argsIgnorePattern: '^(_.*?|e)$',
-      },
-    ],
-    'no-unused-private-class-members': 'warn',
-    'no-invalid-this': 'warn',
-    'consistent-this': 'warn',
     'no-mixed-spaces-and-tabs': 'off',
   },
   overrides: [
     {
       files: ['**/*.ts'],
       parser: '@typescript-eslint/parser',
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-      ],
+      extends: ['plugin:@typescript-eslint/recommended-type-checked'],
       rules: {
         '@typescript-eslint/no-unused-vars': [
           'warn',
@@ -44,7 +31,6 @@ module.exports = {
             varsIgnorePattern: '^_',
           },
         ],
-        '@typescript-eslint/no-empty-function': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-redundant-type-constituents': 'off',
       },
