@@ -45,7 +45,7 @@ jobs:
         working-directory: ./docs
         run: pnpm astro sync
       - name: Run linter
-        run: pnpm lint:ci
+        run: pnpm lint
 
   pa11y:
     name: Check for accessibility issues
