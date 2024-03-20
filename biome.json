@@ -1,0 +1,33 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"formatter": {
+		"enabled": false
+	},
+	"linter": {
+		"rules": {
+			"complexity": {
+				"useLiteralKeys": "off",
+				"noForEach": "off"
+			},
+			"performance": {
+				"noDelete": "off"
+			},
+			"style": {
+				"noParameterAssign": "off",
+				"noUnusedTemplateLiteral": "off",
+				"noUselessElse": "off",
+				"useTemplate": "off"
+			},
+			"suspicious": {
+				"useAwait": "error"
+			}
+		}
+	},
+	"files": {
+		"ignore": [
+			"**/.astro/types.d.ts",
+			"**/__tests__/i18n/malformed-src/**",
+			"**/dist/**"
+		]
+	}
+}
