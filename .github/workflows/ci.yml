@@ -30,6 +30,26 @@ jobs:
       - name: Test packages
         run: pnpm -r test:coverage
 
+  lint:
+    name: Lint code
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Run linter
+        run: pnpm lint:ci
+        # Continue on errors because we use the generated report in the next step
+        continue-on-error: true
+      - name: Annotate lint results
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          report-json: "eslint-report.json"
+
   pa11y:
     name: Check for accessibility issues
     runs-on: ubuntu-20.04
