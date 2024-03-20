@@ -3,6 +3,8 @@ title: Overriding Components
 description: Learn how to override Starlight’s built-in components to add custom elements to your documentation site’s UI.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Starlight’s default UI and configuration options are designed to be flexible and work for a range of content. Much of Starlight's default appearance can be customized with [CSS](/guides/css-and-tailwind/) and [configuration options](/guides/customization/).
 
 When you need more than what’s possible out of the box, Starlight supports building your own custom components to extend or override (completely replace) its default components.
@@ -17,6 +19,7 @@ Overriding Starlight’s default components can be useful when:
 
 ## How to override
 
+<Steps>
 1. Choose the Starlight component you want to override.
    You can find a full list of components in the [Overrides Reference](/reference/overrides/).
 
@@ -53,6 +56,7 @@ Overriding Starlight’s default components can be useful when:
      ],
    });
    ```
+</Steps>
 
 ## Reuse a built-in component
 
