@@ -37,13 +37,5 @@ module.exports = {
         '@typescript-eslint/triple-slash-reference': 'off',
       },
     },
-    {
-      files: ['packages/*/__tests__/**/*.ts'],
-      rules: {
-        '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-      },
-    },
   ],
 };
