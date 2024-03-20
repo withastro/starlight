@@ -19,8 +19,7 @@
     "astro": "^4.3.5",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.13.0",
-    "size-limit": "^8.2.4",
-    "typescript": "^5.4.2"
+    "size-limit": "^8.2.4"
   },
   "packageManager": "pnpm@8.7.4",
   "size-limit": [
