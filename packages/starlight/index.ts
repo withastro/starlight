@@ -1,4 +1,5 @@
 import mdx from '@astrojs/mdx';
+import { builtinModules } from 'node:module';
 import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
@@ -68,10 +69,21 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
 				}
+
+				const nodeIdModules = builtinModules.flatMap((id) => [id, `node:${id}`]);
+
 				updateConfig({
 					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(command, starlightConfig, config)],
+						build: {
+							rollupOptions: {
+								treeshake: {
+									// Make Vite await that Node's built-in modules are side-effect free.
+									moduleSideEffects: (id) => !nodeIdModules.includes(id),
+								},
+							},
+						},
 					},
 					markdown: {
 						remarkPlugins: [
