@@ -13,15 +13,16 @@ Se vuoi iniziare a personalizzare l'aspetto del tuo sito Starlight, questa guida
 L'aggiunta di un logo personalizzato all'intestazione del sito è un modo rapido per aggiungere il tuo marchio individuale a un sito Starlight.
 
 <Steps>
+
 1. Aggiungi il file immagine del tuo logo alla directory `src/assets/`:
 
    <FileTree>
 
-- src/
-  - assets/
-    - **my-logo.svg**
-  - content/
-- astro.config.mjs
+   - src/
+     - assets/
+       - **my-logo.svg**
+     - content/
+   - astro.config.mjs
 
    </FileTree>
 
@@ -44,7 +45,7 @@ L'aggiunta di un logo personalizzato all'intestazione del sito è un modo rapido
    });
    ```
 
-   </Steps>
+</Steps>
 
 Per impostazione predefinita, il logo verrà visualizzato accanto al `title` del tuo sito.
 Se l'immagine del tuo logo include già il titolo del sito, puoi nascondere visivamente il testo del titolo impostando l'opzione `replacesTitle`.
@@ -65,16 +66,17 @@ starlight({
 Puoi visualizzare diverse versioni del tuo logo in modalità chiara e scura.
 
 <Steps>
+
 1. Aggiungi un file immagine per ciascuna variante a `src/assets/`:
 
    <FileTree>
 
-- src/
-  - assets/
-    - **light-logo.svg**
-    - **dark-logo.svg**
-  - content/
-- astro.config.mjs
+   - src/
+     - assets/
+       - **light-logo.svg**
+       - **dark-logo.svg**
+     - content/
+   - astro.config.mjs
 
    </FileTree>
 
@@ -90,7 +92,7 @@ Puoi visualizzare diverse versioni del tuo logo in modalità chiara e scura.
    }),
    ```
 
-   </Steps>
+</Steps>
 
 ## Abilita la mappa del sito
 
@@ -320,12 +322,12 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
 
    <FileTree>
 
-- src/
-  - content/
-  - fonts/
-    - **CustomFont.woff2**
-    - **font-face.css**
-- astro.config.mjs
+   - src/
+     - content/
+     - fonts/
+       - **CustomFont.woff2**
+       - **font-face.css**
+   - astro.config.mjs
 
    </FileTree>
 
@@ -365,7 +367,7 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
    });
    ```
 
-   </Steps>
+</Steps>
 
 #### Configura un font Fontsource
 
@@ -430,7 +432,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
     Fontsource fornisce più file CSS per ciascun font. Consulta la [documentazione Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) sull'inclusione di pesi e stili diversi per capire quale utilizzare.
 
-    </Steps>
+</Steps>
 
 ### Usa i caratteri
 
