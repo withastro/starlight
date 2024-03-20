@@ -142,6 +142,7 @@ Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà 
 ## Tradurre l'interfaccia Starlight
 
 import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 In aggiunta alla possibilità di avere pagine multilingua, Starlight permette di tradurre le scritte dell'interfaccia (per esempio l'intestazione "In questa pagina" nella tabella dei contenuti) in modo che i lettori possano vedere il sito interamente nella lingua selezionata.
 
@@ -180,35 +181,9 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 
    Queste sono le traduzioni di default per l'inglese:
 
-   ```json
-   {
-   	"skipLink.label": "Skip to content",
-   	"search.label": "Search",
-   	"search.shortcutLabel": "(Press / to Search)",
-   	"search.cancelLabel": "Cancel",
-   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-   	"themeSelect.accessibleLabel": "Select theme",
-   	"themeSelect.dark": "Dark",
-   	"themeSelect.light": "Light",
-   	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Select language",
-   	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "Main",
-   	"tableOfContents.onThisPage": "On this page",
-   	"tableOfContents.overview": "Overview",
-   	"i18n.untranslatedContent": "This content is not available in your language yet.",
-   	"page.editLink": "Edit page",
-   	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Previous",
-   	"page.nextLink": "Next",
-   	"404.text": "Page not found. Check the URL or try using the search bar.",
-   	"aside.note": "Note",
-   	"aside.tip": "Tip",
-   	"aside.caution": "Caution",
-   	"aside.danger": "Danger",
-   	"fileTree.directory": "Directory"
-   }
-   ```
+   {' '}
+
+   <UIStringsList />
 
    I blocchi di codice di Starlight sono gestiti dalla libreria [Expressive Code](https://github.com/expressive-code/expressive-code).
    Puoi impostare le traduzioni per le stringhe dell'interfaccia utente nella stessa file JSON utilizzando le chiavi `expressiveCode`:
