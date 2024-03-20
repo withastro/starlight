@@ -10,39 +10,40 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
 ## Configurare i18n
 
 <Steps>
+
 1. Indicare a Starlight le lingue che si vuole supportare passando [`locales`](/it/reference/configuration/#locales) e [`defaultLocale`](/it/reference/configuration/#defaultlocale) all'integrazione Starlight:
 
-```js {9-26}
-// astro.config.mjs
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+   ```js {9-26}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
 
-export default defineConfig({
-	integrations: [
-		starlight({
-			title: 'My Docs',
-			// Indica l'inglese come lingua predefinita.
-			defaultLocale: 'en',
-			locales: {
-				// La documentazione in inglese si trova in `src/content/docs/en/`
-				en: {
-					label: 'English',
-				},
-				// La documentazione in cinese semplificato si trova in `src/content/docs/zh-cn/`
-				'zh-cn': {
-					label: '简体中文',
-					lang: 'zh-CN',
-				},
-				// La documentazione in arabo si trova in `src/content/docs/ar/`
-				ar: {
-					label: 'العربية',
-					dir: 'rtl',
-				},
-			},
-		}),
-	],
-});
-```
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'My Docs',
+   			// Indica l'inglese come lingua predefinita.
+   			defaultLocale: 'en',
+   			locales: {
+   				// La documentazione in inglese si trova in `src/content/docs/en/`
+   				en: {
+   					label: 'English',
+   				},
+   				// La documentazione in cinese semplificato si trova in `src/content/docs/zh-cn/`
+   				'zh-cn': {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// La documentazione in arabo si trova in `src/content/docs/ar/`
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
+   });
+   ```
 
    Il `defaultLocale` sarà utilizzato come riserva per contenuti ed interfaccia, quindi scegli il linguaggio per cui c'è più probabilità di iniziare a scrivere o già hai contenuti.
 
@@ -64,7 +65,7 @@ export default defineConfig({
 
    Per esempio, crea `ar/index.md` e `en/index.md` per rappresentare la homepage rispettivamente in arabo e inglese.
 
-   </Steps>
+</Steps>
 
 ### Utilizzare una lingua principale
 
@@ -155,6 +156,7 @@ e accettiamo [contributi per aggiungere altre lingue predefinite](https://github
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
 
 <Steps>
+
 1. Configura la collezione `i18n` in `src/content/config.ts` se non lo è già:
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -184,8 +186,6 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 3. Aggiungere traduzioni per le chiavi che vuoi tradurre. Traduci solo i valori, le chiavi non devono essere modificate (per esempio `"search.label": "Buscar"`).
 
    Queste sono le traduzioni di default per l'inglese:
-
-   {' '}
 
    <UIStringsList />
 
@@ -218,7 +218,7 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    }
    ```
 
-   </Steps>
+ </Steps>
 
 ### Estendere lo schema di traduzione
 
