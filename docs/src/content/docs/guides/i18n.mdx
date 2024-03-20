@@ -10,41 +10,42 @@ Starlight provides built-in support for multilingual sites, including routing, f
 ## Configure i18n
 
 <Steps>
+
 1. Tell Starlight about the languages you support by passing [`locales`](/reference/configuration/#locales) and [`defaultLocale`](/reference/configuration/#defaultlocale) to the Starlight integration:
 
-```js {9-26}
-// astro.config.mjs
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+   ```js {9-26}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
 
-export default defineConfig({
-	integrations: [
-		starlight({
-			title: 'My Docs',
-			// Set English as the default language for this site.
-			defaultLocale: 'en',
-			locales: {
-				// English docs in `src/content/docs/en/`
-				en: {
-					label: 'English',
-				},
-				// Simplified Chinese docs in `src/content/docs/zh-cn/`
-				'zh-cn': {
-					label: '简体中文',
-					lang: 'zh-CN',
-				},
-				// Arabic docs in `src/content/docs/ar/`
-				ar: {
-					label: 'العربية',
-					dir: 'rtl',
-				},
-			},
-		}),
-	],
-});
-```
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'My Docs',
+   			// Set English as the default language for this site.
+   			defaultLocale: 'en',
+   			locales: {
+   				// English docs in `src/content/docs/en/`
+   				en: {
+   					label: 'English',
+   				},
+   				// Simplified Chinese docs in `src/content/docs/zh-cn/`
+   				'zh-cn': {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// Arabic docs in `src/content/docs/ar/`
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
+   });
+   ```
 
-Your `defaultLocale` will be used for fallback content and UI labels, so choose the language you are most likely to start writing content in, or already have content for.
+   Your `defaultLocale` will be used for fallback content and UI labels, so choose the language you are most likely to start writing content in, or already have content for.
 
 2. Create a directory for each language in `src/content/docs/`.
    For example, for the configuration shown above, create the following folders:
@@ -64,7 +65,7 @@ Your `defaultLocale` will be used for fallback content and UI labels, so choose 
 
    For example, create `ar/index.md` and `en/index.md` to represent the homepage for Arabic and English respectively.
 
-   </Steps>
+</Steps>
 
 ### Use a root locale
 
@@ -155,18 +156,19 @@ and we welcome [contributions to add more default languages](https://github.com/
 You can provide translations for additional languages you support — or override our default labels — via the `i18n` data collection.
 
 <Steps>
+
 1. Configure the `i18n` data collection in `src/content/config.ts` if it isn’t configured already:
 
-```diff lang="js" ins=/, (i18nSchema)/
-// src/content/config.ts
-import { defineCollection } from 'astro:content';
-import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+   ```diff lang="js" ins=/, (i18nSchema)/
+   // src/content/config.ts
+   import { defineCollection } from 'astro:content';
+   import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
-export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
-+	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
-};
-```
+   export const collections = {
+   	docs: defineCollection({ schema: docsSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   };
+   ```
 
 2. Create a JSON file in `src/content/i18n/` for each additional locale you want to provide UI translation strings for.
    For example, this would add translation files for Arabic and Simplified Chinese:
@@ -184,8 +186,6 @@ export const collections = {
 3. Add translations for the keys you want to translate to the JSON files. Translate only the values, leaving the keys in English (e.g. `"search.label": "Buscar"`).
 
    These are the English defaults of the existing strings Starlight ships with:
-
-   {' '}
 
    <UIStringsList />
 
@@ -218,7 +218,7 @@ export const collections = {
    }
    ```
 
-   </Steps>
+ </Steps>
 
 ### Extend translation schema
 
