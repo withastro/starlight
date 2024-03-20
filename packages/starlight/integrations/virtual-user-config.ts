@@ -1,5 +1,4 @@
 import type { AstroConfig, ViteUserConfig } from 'astro';
-import { builtinModules } from 'node:module';
 import { resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StarlightConfig } from '../utils/user-config';
@@ -70,8 +69,6 @@ export function vitePluginStarlightUserConfig(
 		])
 	);
 
-	const nodeIdModules = builtinModules.flatMap((id) => [id, `node:${id}`]);
-
 	return {
 		name: 'vite-plugin-starlight-user-config',
 		resolveId(id): string | void {
@@ -80,41 +77,6 @@ export function vitePluginStarlightUserConfig(
 		load(id): string | void {
 			const resolution = resolutionMap[id];
 			if (resolution) return modules[resolution];
-		},
-		generateBundle(_cfg, bundle) {
-			for (const [_id, chunk] of Object.entries(bundle)) {
-				if (chunk.type !== 'chunk') continue;
-
-				// Remove side-effect imports of node built-in modules.
-				// The built-in modules do not have side-effects, so removing them is safe.
-				//
-				// Astro Expressive Code seems to be adding 3 of those imports to the bundle, which prevent Starlight to work on
-				// SSR mode in non-Node environments. It is unclear why those imports are added.
-
-				// let modified = false;
-				for (const nodeModule of nodeIdModules) {
-					if (chunk.code.includes(`import '${nodeModule}'`)) {
-						chunk.code = chunk.code.replace(`import '${nodeModule}';\n`, '');
-						// modified = true;
-						//
-						// console.log(`Removed node module ${nodeModule} from ${chunk.name}`);
-					}
-					if (chunk.code.includes(`import "${nodeModule}"`)) {
-						chunk.code = chunk.code.replace(`import "${nodeModule}";\n`, '');
-						// modified = true;
-						//
-						// console.log(`Removed node module ${nodeModule} from ${chunk.name}`);
-					}
-				}
-
-				// if (modified) {
-				// 	console.log(
-				// 		`Removed node built-in imports from ${chunk.fileName} bundled from ${Array.from(
-				// 			chunk.moduleIds
-				// 		)}`
-				// 	);
-				// }
-			}
 		},
 	};
 }
