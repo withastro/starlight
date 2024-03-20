@@ -6,7 +6,7 @@
   "scripts": {
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "lint": "eslint .",
-    "lint:ci": "eslint . --max-warnings 0 --output-file eslint-report.json --format json",
+    "lint:ci": "eslint . --max-warnings 0",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro ."
