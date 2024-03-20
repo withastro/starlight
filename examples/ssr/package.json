@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^9.1.0",
     "@astrojs/node": "^7.0.0",
     "@astrojs/starlight": "workspace:*",
     "astro": "^4.0.1",

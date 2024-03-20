@@ -1,14 +1,11 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
 	output: 'server',
-	adapter: node({
-		mode: 'standalone',
-	}),
 	integrations: [
 		starlight({
 			title: 'My Docs',
@@ -40,4 +37,10 @@ export default defineConfig({
 			],
 		}),
 	],
+	adapter: cloudflare({}),
+	// vite: {
+	// 	build: {
+	// 		sourcemap: true,
+	// 	},
+	// },
 });
