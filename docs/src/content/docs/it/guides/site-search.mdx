@@ -49,31 +49,32 @@ Questo testo sarà nascosto dalla ricerca.
 Se hai accesso al programma [Algolia's DocSearch](https://docsearch.algolia.com/) e vuoi usarlo al posto di Pagefind, puoi utilizzare il plugin ufficiale Starlight DocSearch.
 
 <Steps>
+
 1. Installa `@astrojs/starlight-docsearch`:
 
    <Tabs>
 
    <TabItem label="npm">
 
-```sh
-npm install @astrojs/starlight-docsearch
-```
+   ```sh
+   npm install @astrojs/starlight-docsearch
+   ```
 
    </TabItem>
 
    <TabItem label="pnpm">
 
-```sh
-pnpm add @astrojs/starlight-docsearch
-```
+   ```sh
+   pnpm add @astrojs/starlight-docsearch
+   ```
 
    </TabItem>
 
    <TabItem label="Yarn">
 
-```sh
-yarn add @astrojs/starlight-docsearch
-```
+   ```sh
+   yarn add @astrojs/starlight-docsearch
+   ```
 
    </TabItem>
 
@@ -103,7 +104,7 @@ yarn add @astrojs/starlight-docsearch
    });
    ```
 
-   </Steps>
+</Steps>
 
 Con questa configurazione aggiornata, la barra di ricerca nel tuo sito aprirà ora una schermata Algolia invece della schermata di ricerca predefinita.
 
@@ -113,22 +114,23 @@ DocSearch fornisce solo stringhe dell'interfaccia utente in inglese di default.
 Aggiungi traduzioni della UI della schermata per la tua lingua utilizzando il [sistema di internazionalizzazione](/it/guides/i18n/#tradurre-linterfaccia-starlight) integrato in Starlight.
 
 <Steps>
+
 1. Estendi la definizione della collezione di contenuti `i18n` di Starlight con lo schema DocSearch in `src/content/config.ts`:
 
-```js ins={4} ins=/{ extend: .+ }/
-// src/content/config.ts
-import { defineCollection } from 'astro:content';
-import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
-import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
+   ```js ins={4} ins=/{ extend: .+ }/
+   // src/content/config.ts
+   import { defineCollection } from 'astro:content';
+   import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+   import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
-export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
-	i18n: defineCollection({
-		type: 'data',
-		schema: i18nSchema({ extend: docSearchI18nSchema() }),
-	}),
-};
-```
+   export const collections = {
+   	docs: defineCollection({ schema: docsSchema() }),
+   	i18n: defineCollection({
+   		type: 'data',
+   		schema: i18nSchema({ extend: docSearchI18nSchema() }),
+   	}),
+   };
+   ```
 
 2. Aggiungi le traduzioni nei tuoi file JSON in `src/content/i18n/`.
 
@@ -167,4 +169,4 @@ export const collections = {
    }
    ```
 
-   </Steps>
+</Steps>
