@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add Polish UI translations
+Adds Polish UI translations
