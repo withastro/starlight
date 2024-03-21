@@ -51,7 +51,7 @@ describe('validation', () => {
 });
 
 describe('processor', () => {
-	test('processes a basic tree', () => {
+	test('processes a basic tree', async () => {
 		const html = processTestFileTree(`<ul>
   <li>root_file</li>
   <li>root_directory/
@@ -61,7 +61,7 @@ describe('processor', () => {
   <li>
 </ul>`);
 
-		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-basic.html');
+		await expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-basic.html');
 	});
 
 	test('does not add a comment node with no comments', () => {
@@ -70,18 +70,18 @@ describe('processor', () => {
 		expect(extractFileTree(html)).not.toContain('<span class="comment">');
 	});
 
-	test('processes text comments following the file name', () => {
+	test('processes text comments following the file name', async () => {
 		const html = processTestFileTree(`<ul><li>file this is a comment</li></ul>`);
 
-		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-comment-text.html');
+		await expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-comment-text.html');
 	});
 
-	test('processes comment nodes', () => {
+	test('processes comment nodes', async () => {
 		const html = processTestFileTree(
 			`<ul><li>file this is an <strong>important</strong> comment</li></ul>`
 		);
 
-		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-comment-nodes.html');
+		await expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-comment-nodes.html');
 	});
 
 	test('identifies directory with either a file name ending with a slash or a nested list', () => {
