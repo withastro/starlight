@@ -46,15 +46,15 @@ Starlight의 기본 컴포넌트를 재정의하는 것은 다음과 같은 경�
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: '재정의된 문서',
-         components: {
-           // 기존 `SocialIcons` 컴포넌트를 재정의합니다.
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: '재정의된 문서',
+   			components: {
+   				// 기존 `SocialIcons` 컴포넌트를 재정의합니다.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -100,9 +100,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -124,13 +124,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Starlight 🌟 를 사용하여 구축</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Starlight 🌟 를 사용하여 구축</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 
