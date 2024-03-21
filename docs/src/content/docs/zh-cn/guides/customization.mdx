@@ -3,8 +3,7 @@ title: 自定义 Starlight
 description: 学习如何通过自定义样式、字体等使你的 Starlight 网站变得与众不同。
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { FileTree } from '@astrojs/starlight/components';
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight 提供了合理的默认样式和功能，因此你可以快速开始，无需配置即可进行操作。
 当你想要开始自定义 Starlight 网站的外观时，本指南可以帮助你。
@@ -12,6 +11,8 @@ Starlight 提供了合理的默认样式和功能，因此你可以快速开始�
 ## 添加你的 logo
 
 将自定义 logo 添加到网站标题是将品牌形象添加到 Starlight 网站的快速方法。
+
+<Steps>
 
 1. 将你的 logo 图像文件添加到 `src/assets/` 目录：
 
@@ -44,6 +45,8 @@ Starlight 提供了合理的默认样式和功能，因此你可以快速开始�
    });
    ```
 
+</Steps>
+
 默认情况下，logo 将显示在网站的标题旁边。
 如果你的 logo 图像已经包含了网站标题，你可以通过设置 `replacesTitle` 选项来在视觉上隐藏标题文本。
 标题文本仍包含在屏幕阅读器中，以便标题保持可访问性。
@@ -61,6 +64,8 @@ starlight({
 ### 亮色和暗色 logo 变体
 
 你可以在亮色和暗色模式下显示不同版本的 logo。
+
+<Steps>
 
 1. 将每个变体的图像文件添加到 `src/assets/`：
 
@@ -86,6 +91,8 @@ starlight({
      },
    }),
    ```
+
+</Steps>
 
 ## 启用 sitemap
 
@@ -302,6 +309,8 @@ export default defineConfig({
 
 #### 设置本地字体文件
 
+<Steps>
+
 1. 将字体文件添加到 `src/fonts/` 目录中，并创建一个空的 `font-face.css` 文件：
 
    <FileTree>
@@ -350,9 +359,13 @@ export default defineConfig({
    });
    ```
 
+</Steps>
+
 #### 设置 Fontsource 字体
 
 [Fontsource](https://fontsource.org/) 项目简化了使用 Google Fonts 和其他开源字体的过程。它提供了可安装的 npm 模块，用于你想要使用的字体，并包含了可以添加到项目中的现成 CSS 文件。
+
+<Steps>
 
 1.  在 [Fontsource 目录](https://fontsource.org/)中找到你想要使用的字体。本示例将使用 [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif) 字体。
 
@@ -408,6 +421,8 @@ export default defineConfig({
     ```
 
     Fontsource 为每个字体提供了多个 CSS 文件。请参阅 [Fontsource 文档](https://fontsource.org/docs/getting-started/install#4-weights-and-styles)以了解如何包含不同的字重和样式。
+
+</Steps>
 
 ### 使用字体
 
