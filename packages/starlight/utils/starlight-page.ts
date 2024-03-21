@@ -41,7 +41,7 @@ const StarlightPageFrontmatterSchema = async (context: SchemaContext) => {
 		 * @see StarlightPageFrontmatter
 		 * @see https://github.com/colinhacks/zod#intersections
 		 */
-		const { editUrl, sidebar, ...others } = frontmatter;
+		const { editUrl, sidebar: _, ...others } = frontmatter;
 		const pageEditUrl = editUrl === undefined || editUrl === true ? false : editUrl;
 		return { ...others, editUrl: pageEditUrl };
 	});

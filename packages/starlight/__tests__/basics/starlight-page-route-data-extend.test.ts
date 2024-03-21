@@ -1,4 +1,4 @@
-import { assert, expect, test, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
