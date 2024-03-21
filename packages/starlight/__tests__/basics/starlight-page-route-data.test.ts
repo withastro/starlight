@@ -210,7 +210,7 @@ test('supports `items` field for sidebar groups', async () => {
 });
 
 test('throws error if sidebar is malformated', async () => {
-	expect(() =>
+	await expect(() =>
 		generateStarlightPageRouteData({
 			props: {
 				...starlightPageProps,
@@ -236,7 +236,7 @@ test('throws error if sidebar is malformated', async () => {
 
 test('throws error if sidebar uses wrong literal for entry type', async () => {
 	// This test also makes sure we show a helpful error for incorrect literals.
-	expect(() =>
+	await expect(() =>
 		generateStarlightPageRouteData({
 			props: {
 				...starlightPageProps,
@@ -441,7 +441,7 @@ test('disables table of contents for splash template', async () => {
 });
 
 test('hides the sidebar if the `hasSidebar` option is not specified and the splash template is used', async () => {
-	const { hasSidebar, ...otherProps } = starlightPageProps;
+	const { hasSidebar: _, ...otherProps } = starlightPageProps;
 	const data = await generateStarlightPageRouteData({
 		props: {
 			...otherProps,
