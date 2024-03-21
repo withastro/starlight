@@ -76,7 +76,7 @@ function buildDictionary(
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
 		for (const key in dict) {
-			const value = dict[key];
+			const value = dict[key] as string | undefined;
 			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}

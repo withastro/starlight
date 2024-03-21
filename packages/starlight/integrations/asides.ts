@@ -25,22 +25,22 @@ interface AsidesOptions {
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
-function h(el: string, attrs: Properties = {}, children: any[] = []): P {
+function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
 	const { tagName, properties } = _h(el, attrs);
 	return {
 		type: 'paragraph',
 		data: { hName: tagName, hProperties: properties },
-		children,
+		children: children as P['children'],
 	};
 }
 
 /** Hacky function that generates an mdast SVG tree ready for conversion to HTML by rehype. */
-function s(el: string, attrs: Properties = {}, children: any[] = []): P {
+function s(el: string, attrs: Properties = {}, children: unknown[] = []): P {
 	const { tagName, properties } = _s(el, attrs);
 	return {
 		type: 'paragraph',
 		data: { hName: tagName, hProperties: properties },
-		children,
+		children: children as P['children'],
 	};
 }
 
@@ -165,7 +165,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 						Array.isArray(child.children) &&
 						'value' in child.children[0]
 					) {
-						title = child.children[0].value;
+						title = (child.children[0] as { value: string }).value;
 					}
 					return true;
 				}

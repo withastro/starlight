@@ -152,7 +152,11 @@ export function getStarlightEcConfigPreprocessor({
 				},
 				...otherStyleOverrides,
 			},
-			getBlockLocale: ({ file }) => pathToLocale(file.path, { starlightConfig, astroConfig }),
+			getBlockLocale: ({ file }) =>
+				pathToLocale((file as { path?: string | undefined }).path, {
+					starlightConfig,
+					astroConfig,
+				}),
 			plugins,
 			...rest,
 		};

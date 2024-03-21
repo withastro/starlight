@@ -1,7 +1,7 @@
 import { PAGE_TITLE_ID } from '../../constants';
 
 export class StarlightTOC extends HTMLElement {
-	private _current = this.querySelector('a[aria-current="true"]') as HTMLAnchorElement | null;
+	private _current = this.querySelector('a[aria-current="true"]');
 	private minH = parseInt(this.dataset.minH || '2', 10);
 	private maxH = parseInt(this.dataset.maxH || '3', 10);
 

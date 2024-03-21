@@ -27,7 +27,7 @@ export function createTranslationSystemFromFs(
 				.filter((file) => file.endsWith('.json'))
 				.map((file) => {
 					const id = file.slice(0, -5);
-					const data = JSON.parse(fs.readFileSync(new URL(file, i18nDir), 'utf-8'));
+					const data = JSON.parse(fs.readFileSync(new URL(file, i18nDir), 'utf-8')) as i18nSchemaOutput;
 					return [id, data] as const;
 				})
 		);
