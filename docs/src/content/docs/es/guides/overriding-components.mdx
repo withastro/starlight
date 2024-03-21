@@ -3,6 +3,8 @@ title: Sobreescribiendo Componentes
 description: Aprende como sobreescribir los componentes integrados de Starlight para agregar elementos personalizados a la interfaz de tu sitio de documentación.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 La UI por defecto de Starlight y las opciones de configuración están diseñadas para ser flexibles y funcionar para una variedad de contenidos. Gran parte de la apariencia predeterminada de Starlight se puede personalizar con [CSS](/es/guides/css-and-tailwind/) y [opciones de configuración](/es/guides/customization/).
 
 Cuando necesites más de lo que es posible por defecto, Starlight soporta la construcción de tus propios componentes personalizados para extender o sobreescribir (reemplazar completamente) sus componentes por defecto.
@@ -16,6 +18,8 @@ Sobreescribir los componentes por defecto de Starlight puede ser útil cuando:
 - Quieres agregar partes adicionales de la UI junto a la UI existente de Starlight.
 
 ## Cómo sobreescribir
+
+<Steps>
 
 1. Escoge el componente de Starlight que quieres sobreescribir.
    Puedes encontrar una lista completa de componentes en la [Referencia de Personalización de Componentes](/es/reference/overrides/).
@@ -42,17 +46,19 @@ Sobreescribir los componentes por defecto de Starlight puede ser útil cuando:
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My Docs with Overrides',
-         components: {
-           // Sobreescribe el componente `SocialIcons` por defecto.
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My Docs with Overrides',
+   			components: {
+   				// Sobreescribe el componente `SocialIcons` por defecto.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
+
+</Steps>
 
 ## Reusa un componente integrado
 
@@ -94,9 +100,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -118,13 +124,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Construido con Starlight 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Construido con Starlight 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 
