@@ -27,6 +27,7 @@ import hi from './hi.json';
 import zhTW from './zh-TW.json';
 import pl from './pl.json';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { parse } = builtinI18nSchema();
 
 export default Object.fromEntries(

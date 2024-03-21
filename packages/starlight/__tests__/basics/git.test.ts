@@ -94,17 +94,17 @@ function makeTestRepo() {
 
 	return {
 		// The `dateStr` argument should be in the `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM:SSZ` format.
-		commitAllChanges(message: string, dateStr: ISODate) {
+		commitAllChanges: (message: string, dateStr: ISODate) => {
 			const date = dateStr.endsWith('Z') ? dateStr : `${dateStr}T00:00:00Z`;
 
 			runInRepo('git', ['add', '-A']);
 			// This sets both the author and committer dates to the provided date.
 			runInRepo('git', ['commit', '-m', message, '--date', date], { GIT_COMMITTER_DATE: date });
 		},
-		getFilePath(name: string) {
+		getFilePath: (name: string) => {
 			return join(repoPath, name);
 		},
-		writeFile(name: string, content: string) {
+		writeFile: (name: string, content: string) => {
 			writeFileSync(join(repoPath, name), content);
 		},
 	};
