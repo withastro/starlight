@@ -3,11 +3,13 @@ title: Internazionalizzazione (i18n)
 description: Impara come configurare il tuo sito Starlight per supportare più lingue.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight offre il supporto per siti multilingua, compreso di indirizzamento, contenuti di riserva e completo supporto per lingue scritte da destra a sinistra (RTL).
 
 ## Configurare i18n
+
+<Steps>
 
 1. Indicare a Starlight le lingue che si vuole supportare passando [`locales`](/it/reference/configuration/#locales) e [`defaultLocale`](/it/reference/configuration/#defaultlocale) all'integrazione Starlight:
 
@@ -62,6 +64,8 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
 3. Puoi ora aggiungere file nelle cartelle. Usa file con lo stesso nome per associare pagine tra i linguaggi e sfruttare le funzionalità di Starlight per i18n, compresi i contenuti di riserva, avvisi di traduzione e altro.
 
    Per esempio, crea `ar/index.md` e `en/index.md` per rappresentare la homepage rispettivamente in arabo e inglese.
+
+</Steps>
 
 ### Utilizzare una lingua principale
 
@@ -151,6 +155,8 @@ e accettiamo [contributi per aggiungere altre lingue predefinite](https://github
 
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
 
+<Steps>
+
 1. Configura la collezione `i18n` in `src/content/config.ts` se non lo è già:
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -180,8 +186,6 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 3. Aggiungere traduzioni per le chiavi che vuoi tradurre. Traduci solo i valori, le chiavi non devono essere modificate (per esempio `"search.label": "Buscar"`).
 
    Queste sono le traduzioni di default per l'inglese:
-
-   {' '}
 
    <UIStringsList />
 
@@ -213,6 +217,8 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+ </Steps>
 
 ### Estendere lo schema di traduzione
 

@@ -3,6 +3,8 @@ title: Sostituzione dei componenti
 description: Scopri come sovrascrivere i componenti integrati di Starlight per aggiungere elementi personalizzati all'interfaccia utente del tuo sito di documentazione.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 L'interfaccia utente predefinita e le opzioni di configurazione di Starlight sono progettate per essere flessibili e funzionare con una vasta gamma di contenuti. Gran parte dell'aspetto predefinito di Starlight può essere personalizzato con [CSS](/it/guides/css-and-tailwind/) e [opzioni di configurazione](/it/guides/customization/).
 
 Quando hai bisogno di più di ciò che è possibile fare di base, Starlight supporta la creazione di componenti personalizzati per estendere o sovrascrivere (sostituire completamente) i suoi componenti predefiniti.
@@ -16,6 +18,8 @@ Sostituire i componenti predefiniti di Starlight può essere utile quando:
 - Vuoi aggiungere qualche interfaccia utente aggiuntiva accanto all'interfaccia utente esistente di Starlight.
 
 ## Come eseguire una sostituzione
+
+<Steps>
 
 1. Scegli il componente Starlight che desideri sovrascrivere.
    È possibile trovare un elenco completo dei componenti nel [Riferimento alle sostituzioni](/it/reference/overrides/).
@@ -42,17 +46,19 @@ Sostituire i componenti predefiniti di Starlight può essere utile quando:
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'La Mia Documentazione con le sostituzioni',
-         components: {
-           // Sostituisce il componente `SocialIcons` predefinito.
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'La Mia Documentazione con le sostituzioni',
+   			components: {
+   				// Sostituisce il componente `SocialIcons` predefinito.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
+
+</Steps>
 
 ## Riutilizza un componente integrato
 
@@ -94,9 +100,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -118,13 +124,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Costruito con Starlight 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Costruito con Starlight 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 
