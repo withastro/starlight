@@ -3,6 +3,8 @@ title: 重写组件
 description: 学习如何通过替换 Starlight 的内置组件来给你的文档站点 UI 添加自定义元素。
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内容。大部分 Starlight 的默认外观可以通过 [CSS](/zh-cn/guides/css-and-tailwind/) 和 [配置选项](/zh-cn/guides/customization/) 进行自定义。
 
 当你的需求超出了默认提供的功能时，Starlight 支持使用你自己的自定义组件来扩展或重写（完全替换）它的默认组件。
@@ -16,6 +18,8 @@ Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内
 - 你想要在 Starlight 的现有 UI 旁边添加一些额外的 UI。
 
 ## 如何重写
+
+<Steps>
 
 1. 选择你想要重写的 Starlight 组件。
    你可以在[重写参考](/zh-cn/reference/overrides/)中找到完整的组件列表。
@@ -53,6 +57,8 @@ Starlight 的默认 UI 和配置选项被设计成能灵活地适用于各种内
      ],
    });
    ```
+
+</Steps>
 
 ## 复用内置组件
 
