@@ -79,7 +79,7 @@ export default function StarlightIntegration({
 						build: {
 							rollupOptions: {
 								treeshake: {
-									// Make Vite await that Node's built-in modules are side-effect free.
+									// Make Vite aware that Node's built-in modules are side-effect free.
 									moduleSideEffects: (id) => !nodeIdModules.includes(id),
 								},
 							},
