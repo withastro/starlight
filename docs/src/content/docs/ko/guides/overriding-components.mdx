@@ -3,6 +3,8 @@ title: 컴포넌트 재정의
 description: Starlight 내장 컴포넌트를 재정의하여 문서 사이트 UI에 사용자 정의 요소를 추가하는 방법에 대해 알아보세요.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Starlight의 기본 UI 및 구성 옵션은 유연하고 다양한 콘텐츠에 작동하도록 설계되었습니다. Starlight의 기본 형태는 대부분 [CSS](/ko/guides/css-and-tailwind/) 및 [구성 옵션](/ko/guides/customization/)을 사용하여 변경할 수 있습니다.
 
 기본적으로 Starlight는 가능한 것보다 더 많은 것이 필요한 경우, 기본 컴포넌트를 확장하거나 재정의(완전히 대체)하기 위한 자체 사용자 정의 컴포넌트 구축을 지원합니다.
@@ -16,6 +18,8 @@ Starlight의 기본 컴포넌트를 재정의하는 것은 다음과 같은 경�
 - Starlight의 기존 UI 외 새로운 UI를 추가하고 싶은 경우.
 
 ## 재정의 방법
+
+<Steps>
 
 1. 재정의하려는 Starlight 컴포넌트를 선택합니다.
    [재정의 참조](/ko/reference/overrides/)에서 전체 컴포넌트 목록을 확인할 수 있습니다.
@@ -53,6 +57,8 @@ Starlight의 기본 컴포넌트를 재정의하는 것은 다음과 같은 경�
      ],
    });
    ```
+
+</Steps>
 
 ## 내장 컴포넌트 재사용
 
