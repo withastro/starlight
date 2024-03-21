@@ -163,7 +163,40 @@ export const starlightExpressiveCode = ({
 	starlightConfig,
 	useTranslations,
 }: StarlightEcIntegrationOptions): AstroIntegration[] => {
-	if (starlightConfig.expressiveCode === false) return [];
+	// If Expressive Code is disabled, add a shim to prevent build errors and provide
+	// a helpful error message in case the user tries to use the `<Code>` component
+	if (starlightConfig.expressiveCode === false) {
+		const modules: Record<string, string> = {
+			'virtual:astro-expressive-code/api': 'export default {}',
+			'virtual:astro-expressive-code/config': 'export default {}',
+			'virtual:astro-expressive-code/preprocess-config': `throw new Error("Starlight's
+				Code component requires Expressive Code, which is disabled in your Starlight config.
+				Please remove \`expressiveCode: false\` from your config or import Astro's built-in
+				Code component from 'astro:components' instead.")`.replace(/\s+/g, ' '),
+		};
+
+		return [
+			{
+				name: 'astro-expressive-code-shim',
+				hooks: {
+					'astro:config:setup': ({ updateConfig }) => {
+						updateConfig({
+							vite: {
+								plugins: [
+									{
+										name: 'vite-plugin-astro-expressive-code-shim',
+										enforce: 'post',
+										resolveId: (id) => (id in modules ? `\0${id}` : undefined),
+										load: (id) => (id?.[0] === '\0' ? modules[id.slice(1)] : undefined),
+									},
+								],
+							},
+						});
+					},
+				},
+			},
+		];
+	}
 
 	const configArgs =
 		typeof starlightConfig.expressiveCode === 'object'

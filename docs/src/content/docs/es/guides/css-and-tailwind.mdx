@@ -3,11 +3,15 @@ title: CSS y Estilos
 description: Aprende a darle estilo a tu sitio Starlight con CSS personalizado o integrado con Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Puedes darle estilo a tu sitio de Starlight con archivos CSS personalizados o usar el plugin Starlight Tailwind.
 
 ## Estilos CSS personalizados
 
 Personaliza los estilos aplicados a tu sitio Starlight proporcionando archivos CSS adicionales para modificar o extender los estilos predeterminados de Starlight.
+
+<Steps>
 
 1. Agrega un archivo CSS a tu directorio `src/`.
    Por ejemplo, podrías establecer un ancho de columna predeterminado más ancho y un tamaño de texto más grande para los títulos de las páginas:
@@ -40,6 +44,8 @@ Personaliza los estilos aplicados a tu sitio Starlight proporcionando archivos C
    });
    ```
 
+</Steps>
+
 Puedes ver todas las propiedades CSS personalizadas utilizadas por Starlight que puedes establecer para personalizar tu sitio en el archivo [`props.css` en GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## Tailwind CSS
@@ -54,8 +60,6 @@ El plugin Starlight Tailwind aplica la siguiente configuración:
 - Desactiva la [comprobación preliminar “Preflight”](https://tailwindcss.com/docs/preflight) de Tailwind mientras restauras selectivamente las partes esenciales de la comprobación preliminar requeridas para las clases de utilidad de borde de Tailwind.
 
 ### Crea un nuevo proyecto con Tailwind
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Empieza un nuevo proyecto en Starlight con Tailwind CSS preconfigurado usando `create astro`:
 
@@ -86,6 +90,8 @@ yarn create astro --template starlight/tailwind
 ### Agrega Tailwind a un proyecto existente
 
 Si ya tienes un sitio en Starlight y quieres agregar Tailwind CSS, sigue estos pasos.
+
+<Steps>
 
 1.  Agrega la integración de Tailwind de Astro:
 
@@ -193,6 +199,8 @@ Si ya tienes un sitio en Starlight y quieres agregar Tailwind CSS, sigue estos p
     	plugins: [starlightPlugin()],
     };
     ```
+
+</Steps>
 
 ### Estilando Starlight con Tailwind
 
