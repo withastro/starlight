@@ -3,7 +3,7 @@ title: Búsqueda en el sitio
 description: Aprende sobre las funciones de búsqueda de sitios integradas de Starlight y cómo personalizarlas.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Por defecto, los sitios de Starlight incluyen una búsqueda de texto completo impulsada por [Pagefind](https://pagefind.app/), que es una herramienta de búsqueda rápida y de bajo ancho de banda para sitios estáticos.
 
@@ -47,6 +47,8 @@ Este texto estará oculto de la búsqueda.
 ### Algolia DocSearch
 
 Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.com/) y quieres usarlo en lugar de Pagefind, puedes usar el plugin oficial Starlight DocSearch.
+
+<Steps>
 
 1. Instala `@astrojs/starlight-docsearch`:
 
@@ -102,12 +104,16 @@ Si tienes acceso al [programa DocSearch de Algolia](https://docsearch.algolia.co
    });
    ```
 
+</Steps>
+
 Con esta configuración actualizada, la barra de búsqueda de tu sitio ahora abrirá un modal de Algolia en lugar del modal de búsqueda predeterminado.
 
 #### Traduciendo la UI de DocSearch
 
 DocSearch solo proporciona cadenas de UI en inglés de forma predeterminada.
 Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de internacionalización](/es/guides/i18n/#traduce-la-ui-de-starlight) incorporado de Starlight.
+
+<Steps>
 
 1. Extiende la definición de la colección de contenido `i18n` de Starlight con el esquema de DocSearch en `src/content/config.ts`:
 
@@ -162,3 +168,5 @@ Para agregar traducciones de la UI al modal en otros idiomas, usa el [sistema de
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>
