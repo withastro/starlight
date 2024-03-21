@@ -23,7 +23,7 @@ const starlightPageProps: StarlightPageProps = {
 test('throws a validation error if a built-in field required by the user schema is not passed down', async () => {
 	// The first line should be a user-friendly error message describing the exact issue and the second line should be
 	// the missing description field.
-	expect(() =>
+	await expect(() =>
 		generateStarlightPageRouteData({
 			props: starlightPageProps,
 			url: new URL('https://example.com/test-slug'),
