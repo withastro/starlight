@@ -3,11 +3,15 @@ title: CSS et mise en forme
 description: Apprendre à mettre en forme votre site Starlight avec du CSS personnalisé ou l'intégrer avec Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Vous pouvez mettre en forme votre site Starlight avec du CSS personnalisé ou utiliser le module d'extension Tailwind de Starlight.
 
 ## Styles CSS personnalisés
 
 Personnalisez les styles appliqués à votre site Starlight en fournissant des fichiers CSS supplémentaires pour modifier ou étendre les styles par défaut de Starlight.
+
+<Steps>
 
 1. Ajoutez un fichier CSS à votre répertoire `src/`.
    Par exemple, vous pouvez définir une largeur de colonne par défaut plus large et une taille de texte plus grande pour les titres de page :
@@ -40,6 +44,8 @@ Personnalisez les styles appliqués à votre site Starlight en fournissant des f
    });
    ```
 
+</Steps>
+
 Vous pouvez retrouver toutes les propriétés CSS personnalisées utilisées par Starlight que vous pouvez définir pour personnaliser votre site dans le fichier [`props.css` sur GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## Tailwind CSS
@@ -54,8 +60,6 @@ Le module d'extension Tailwind de Starlight applique la configuration suivante :
 - Désactive les styles de réinitialisation [Preflight](https://tailwindcss.com/docs/preflight) de Tailwind tout en restaurant sélectivement les parties essentielles de Preflight requises pour les classes utilitaires de bordure de Tailwind.
 
 ### Créer un nouveau projet avec Tailwind
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Démarrez un nouveau projet Starlight avec Tailwind CSS préconfiguré en utilisant `create astro` :
 
@@ -86,6 +90,8 @@ yarn create astro --template starlight/tailwind
 ### Ajouter Tailwind à un projet existant
 
 Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS, suivez ces étapes.
+
+<Steps>
 
 1.  Ajoutez l'intégration Astro pour Tailwind :
 
@@ -194,6 +200,8 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
     };
     ```
 
+</Steps>
+
 ### Mettre en forme Starlight avec Tailwind
 
 Starlight utilise les valeurs de votre [configuration de thème Tailwind](https://tailwindcss.com/docs/theme) dans son interface utilisateur.
@@ -242,7 +250,7 @@ export default {
 Le thème de couleur de Starlight peut être contrôlé en remplaçant ses propriétés personnalisées par défaut.
 Ces variables sont utilisées dans toute l'interface utilisateur avec une gamme de nuances de gris utilisées pour les couleurs de texte et d'arrière-plan et une couleur d'accentuation utilisée pour les liens et pour mettre en évidence les éléments courants durant la navigation.
 
-### Editeur de thème de couleur
+### Éditeur de thème de couleur
 
 Utiliser les contrôles ci-dessous pour modifier les palettes de couleurs d'accentuation et de gris de Starlight.
 Les zones d'aperçu sombre et clair afficheront les couleurs résultantes, et la page entière sera également mise à jour pour prévisualiser vos modifications.
