@@ -10,6 +10,7 @@ describe('pickLang', () => {
 	});
 
 	test('returns undefined for unknown languages', () => {
-		expect(pickLang(dictionary, 'ar' as any)).toBeUndefined();
+		// @ts-expect-error Testing invalid input
+		expect(pickLang(dictionary, 'ar')).toBeUndefined();
 	});
 });
