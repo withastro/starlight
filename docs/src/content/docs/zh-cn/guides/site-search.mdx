@@ -3,7 +3,7 @@ title: 全站搜索
 description: 了解 Starlight 的内置全站搜索功能和如何自定义它们。
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 默认情况下，Starlight 站点提供了基于 [Pagefind](https://pagefind.app/) 的全文搜索，它是一个为静态站点的快速且低带宽的搜索工具。
 
@@ -13,7 +13,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### 排除一个页面
 
-要从搜索结果中排除一个页面，将 [`pagefind: false`](/zh-cn/reference/frontmatter/#pagefind) 添加到页面的 frontmatter 中：
+要从搜索结果中排除一个页面，需要将 [`pagefind: false`](/zh-cn/reference/frontmatter/#pagefind) 添加到页面的 frontmatter 中：
 
 ```md title="src/content/docs/不被索引.md" ins={3}
 ---
@@ -48,6 +48,8 @@ title: 部分索引的页面
 
 如果你加入了 [Algolia 的 DocSearch 计划](https://docsearch.algolia.com/)并且想要用它来替代 Pagefind，你可以使用官方的 Starlight DocSearch 插件。
 
+<Steps>
+
 1. 安装 `@astrojs/starlight-docsearch`:
 
    <Tabs>
@@ -78,7 +80,7 @@ title: 部分索引的页面
 
    </Tabs>
 
-2. 把 DocSearch 加到 `astro.config.mjs` 里你的 Starlight [`plugins`](/zh-cn/reference/configuration/#plugins) 配置中并传入你的 Algolia `appId`、`apiKey` 和 `indexName`：
+2. 把 DocSearch 加到 `astro.config.mjs` 里你的 Starlight [`plugins`](/zh-cn/reference/configuration/#plugins) 配置中，并传入你的 Algolia `appId`、`apiKey` 和 `indexName`：
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -102,12 +104,16 @@ title: 部分索引的页面
    });
    ```
 
+</Steps>
+
 像这样更新配置后，你站点上的搜索栏将会打开一个 Algolia 的模态框而不是默认的搜索模态框。
 
 #### 翻译 DocSearch UI
 
 DocSearch 默认只提供了英语 UI 文本。
 使用 Starlight 内置的[国际化系统](/zh-cn/guides/i18n/#翻译-starlight-的-ui)来添加你的语言的模态框 UI 的翻译。
+
+<Steps>
 
 1. 在 `src/content/config.ts` 中给 Starlight 的 `i18n` 内容集合定义添加 DocSearch schema：
 
@@ -162,3 +168,5 @@ DocSearch 默认只提供了英语 UI 文本。
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>
