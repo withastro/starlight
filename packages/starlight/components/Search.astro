@@ -96,13 +96,13 @@ const pagefindTranslations = {
 				window.removeEventListener('click', onClick);
 			});
 
-			// Listen for `/` and `cmd + k` keyboard shortcuts.
+			// Listen for `/`, `ctrl + k`, and `cmd + k` keyboard shortcuts.
 			window.addEventListener('keydown', (e) => {
 				const isInput =
 					document.activeElement instanceof HTMLElement &&
 					(['input', 'select', 'textarea'].includes(document.activeElement.tagName.toLowerCase()) ||
 						document.activeElement.isContentEditable);
-				if (e.metaKey === true && e.key === 'k') {
+				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
 					dialog.open ? closeModal() : openModal();
 					e.preventDefault();
 				} else if (e.key === '/' && !dialog.open && !isInput) {

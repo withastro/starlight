@@ -141,6 +141,7 @@ Starlightは、すべての言語で同等のページが作成されること�
 ## StarlightのUIを翻訳する
 
 import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 Starlightでは、読者が選択した言語でサイト全体を体験できるように、翻訳されたコンテンツファイルをホストするだけでなく、デフォルトUIの文字列（たとえば目次に表示されている「目次」という見出し）も翻訳できるようになっています。
 
@@ -178,35 +179,7 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
    以下は、Starlightが英語版のデフォルトとして使用している文字列です。
 
-   ```json
-   {
-   	"skipLink.label": "Skip to content",
-   	"search.label": "Search",
-   	"search.shortcutLabel": "(Press / to Search)",
-   	"search.cancelLabel": "Cancel",
-   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-   	"themeSelect.accessibleLabel": "Select theme",
-   	"themeSelect.dark": "Dark",
-   	"themeSelect.light": "Light",
-   	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Select language",
-   	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "Main",
-   	"tableOfContents.onThisPage": "On this page",
-   	"tableOfContents.overview": "Overview",
-   	"i18n.untranslatedContent": "This content is not available in your language yet.",
-   	"page.editLink": "Edit page",
-   	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Previous",
-   	"page.nextLink": "Next",
-   	"404.text": "Page not found. Check the URL or try using the search bar.",
-   	"aside.note": "Note",
-   	"aside.tip": "Tip",
-   	"aside.caution": "Caution",
-   	"aside.danger": "Danger",
-   	"fileTree.directory": "Directory"
-   }
-   ```
+   <UIStringsList />
 
    Starlightのコードブロックは、[Expressive Code](https://github.com/expressive-code/expressive-code)ライブラリによって動作しています。`expressiveCode`キーを使用して、同じJSONファイルでUI文字列の翻訳について設定できます。
 
