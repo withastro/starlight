@@ -3,11 +3,13 @@ title: 国际化 (i18n)
 description: 学习如何配置你的 Starlight 网站支持多种语言。
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight 提供了内置的多语言支持，包括路由、回退内容和完整的从右到左（RTL）语言支持。
 
 ## 配置 i18n
+
+<Steps>
 
 1. 通过将 [`locales`](/zh-cn/reference/configuration/#locales) 和 [`defaultLocale`](/zh-cn/reference/configuration/#defaultlocale) 传递给 Starlight 集成，告诉 Starlight 你支持的语言：
 
@@ -62,6 +64,8 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
 3. 现在你可以在你的语言目录中添加内容文件。使用相同的文件名来关联跨语言的页面，并利用 Starlight 的完整的 i18n 功能，包括回退内容、翻译通知等。
 
    举个例子，创建 `ar/index.md` 和 `en/index.md` 来分别表示阿拉伯语和英语的主页。
+
+</Steps>
 
 ### 使用 `root` 语言
 
@@ -151,6 +155,8 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 你可以通过 `i18n` 数据集合提供你支持的其他语言的翻译 - 或覆盖我们的默认标签。
 
+<Steps>
+
 1. 如果尚未配置，请在 `src/content/config.ts` 中配置 `i18n` 数据集合：
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -211,6 +217,8 @@ import UIStringsList from '~/components/ui-strings-list.astro';
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+ </Steps>
 
 ### 拓展翻译 schema
 
