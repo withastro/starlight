@@ -3,14 +3,15 @@ title: Starlight 사용자 정의
 description: 로고, 사용자 정의 글꼴, 랜딩 페이지 디자인 등을 사용하여 나만의 Starlight 사이트를 만드는 방법을 알아보세요.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { FileTree } from '@astrojs/starlight/components';
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight는 합리적인 기본 스타일과 기능을 제공하므로 구성 없이 빠르게 시작할 수 있습니다. Starlight 사이트의 모양과 느낌을 바꾸고 싶다면 이 가이드를 참조하세요.
 
 ## 로고 추가
 
 사이트 헤더에 로고를 추가하는 것은 Starlight 사이트에 브랜드를 추가하는 빠른 방법입니다.
+
+<Steps>
 
 1. `src/assets/` 디렉터리에 로고 이미지 파일을 추가합니다.
 
@@ -43,6 +44,8 @@ Starlight는 합리적인 기본 스타일과 기능을 제공하므로 구성 �
    });
    ```
 
+</Steps>
+
 기본적으로 로고는 사이트의 `title`과 함께 표시됩니다. 이미 로고 이미지에 사이트 제목이 포함되어 있는 경우, `replacementTitle` 옵션을 설정하여 제목 텍스트를 시각적으로 숨길 수 있습니다. `title` 텍스트는 스크린 리더를 위해 남아 있기 때문에 헤더의 접근성은 유지됩니다.
 
 ```js {5}
@@ -58,6 +61,8 @@ starlight({
 ### 라이트 모드와 다크 모드에서의 로고 변형
 
 라이트 모드와 다크 모드에서 다른 버전의 로고를 표시할 수 있습니다.
+
+<Steps>
 
 1. `src/assets/` 디렉터리에 각 변형에 대한 이미지 파일을 추가합니다.
 
@@ -83,6 +88,8 @@ starlight({
      },
    }),
    ```
+
+</Steps>
 
 ## 사이트맵 활성화
 
@@ -299,6 +306,8 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
 
 #### 로컬 글꼴 파일 설정
 
+<Steps>
+
 1. `src/fonts/` 디렉터리에 글꼴 파일을 추가하고 빈 `font-face.css` 파일을 만드세요.
 
    <FileTree>
@@ -347,9 +356,13 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
    });
    ```
 
+</Steps>
+
 #### Fontsource 글꼴 설정
 
 [Fontsource](https://fontsource.org/) 프로젝트는 Google Fonts 및 기타 오픈 소스 글꼴 사용을 단순화합니다. 글꼴을 설치할 수 있는 npm 모듈과 프로젝트에 추가할 CSS 파일을 제공합니다.
+
+<Steps>
 
 1.  [Fontsource 카탈로그](https://fontsource.org/)에서 사용하려는 글꼴을 찾으세요. 예시에서는 [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif)를 사용합니다.
 
@@ -405,6 +418,8 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
     ```
 
     Fontsource는 각 글꼴에 대해 여러 CSS 파일을 제공합니다. 다른 굵기 및 스타일을 포함하는 방법이 궁금하다면 [Fontsource 문서](https://fontsource.org/docs/getting-started/install#4-weights-and-styles)를 참조하세요.
+
+</Steps>
 
 ### 글꼴 사용
 
