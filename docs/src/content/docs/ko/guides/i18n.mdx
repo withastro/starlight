@@ -3,11 +3,13 @@ title: 국제화 (i18n)
 description: 여러 언어를 지원하도록 Starlight 사이트를 구성하는 방법을 알아보세요.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽으로) 언어 지원을 포함한 다국어 사이트에 대한 기본 지원을 제공합니다.
 
 ## i18n 구성
+
+<Steps>
 
 1. Starlight 통합에 [`locales`](/ko/reference/configuration/#locales) 및 [`defaultLocale`](/ko/reference/configuration/#defaultlocale)을 전달하여 사이트가 지원해야 할 언어에 대해 알려주세요.
 
@@ -61,6 +63,8 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 3. 이제 언어 디렉터리에 콘텐츠 파일을 추가할 수 있습니다. 여러 언어로 작성된 페이지를 연결하기 위해 같은 이름의 파일을 사용하면 Starlight의 모든 i18n 기능(대체 콘텐츠, 번역 알림 등)을 활용할 수 있습니다.
 
    예를 들어, 아랍어와 영어 홈페이지를 각각 나타내려면 `ar/index.md` 및 `en/index.md`를 만듭니다.
+
+</Steps>
 
 ### 루트 로케일 사용
 
@@ -142,6 +146,7 @@ Starlight는 귀하가 모든 언어로 같은 페이지를 생성할 것을 기
 ## Starlight UI 번역
 
 import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외에도 독자가 선택한 언어로 사이트 전체를 경험할 수 있도록 기본 UI 문자열(예를 들어, 목차의 제목인 "목차")을 번역할 수 있습니다.
 
@@ -151,6 +156,8 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 환영합니다.
 
 `i18n` 데이터 컬렉션을 통해 지원하는 추가 언어에 대한 번역을 제공하거나 기본 라벨을 변경할 수 있습니다.
+
+<Steps>
 
 1. 아직 구성되지 않은 경우 `src/content/config.ts`에서 `i18n` 데이터 컬렉션을 구성합니다.
 
@@ -181,35 +188,7 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
    Starlight와 함께 제공되는 기존 문자열의 영어 기본값은 다음과 같습니다.
 
-   ```json
-   {
-   	"skipLink.label": "Skip to content",
-   	"search.label": "Search",
-   	"search.shortcutLabel": "(Press / to Search)",
-   	"search.cancelLabel": "Cancel",
-   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-   	"themeSelect.accessibleLabel": "Select theme",
-   	"themeSelect.dark": "Dark",
-   	"themeSelect.light": "Light",
-   	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Select language",
-   	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "Main",
-   	"tableOfContents.onThisPage": "On this page",
-   	"tableOfContents.overview": "Overview",
-   	"i18n.untranslatedContent": "This content is not available in your language yet.",
-   	"page.editLink": "Edit page",
-   	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Previous",
-   	"page.nextLink": "Next",
-   	"404.text": "Page not found. Check the URL or try using the search bar.",
-   	"aside.note": "Note",
-   	"aside.tip": "Tip",
-   	"aside.caution": "Caution",
-   	"aside.danger": "Danger",
-   	"fileTree.directory": "Directory"
-   }
-   ```
+   <UIStringsList />
 
    Starlight의 코드 블록은 [Expressive Code](https://github.com/expressive-code/expressive-code) 라이브러리에 의해 구동됩니다.
    `expressiveCode` 키를 사용하여 동일한 JSON 파일에서 UI 문자열에 대한 번역을 설정할 수 있습니다.
@@ -238,6 +217,8 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+</Steps>
 
 ### 번역 스키마 확장
 
