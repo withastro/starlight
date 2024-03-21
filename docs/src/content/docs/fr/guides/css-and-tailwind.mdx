@@ -283,18 +283,21 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			bodyText:
 				"Le corps du texte est affiché dans une teinte grise avec un contraste élevé avec l'arrière-plan.",
 			linkText: 'Les liens sont colorés.',
-			dimText: 'Certains textes, comme la table des matières, ont un contraste plus faible.',
+			dimText:
+				'Certains textes, comme la table des matières, ont un contraste plus faible.',
 			inlineCode: 'Le code en ligne a un arrière-plan distinct.',
 		},
 	}}
 >
 	<Fragment slot="css-docs">
 		Ajouter le code CSS suivant à votre projet dans un [fichier CSS
-		personnalisé](#styles-css-personnalisés) pour appliquer ce thème à votre site.
+		personnalisé](#styles-css-personnalisés) pour appliquer ce thème à votre
+		site.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		Le fichier d'exemple de [configuration Tailwind](#mettre-en-forme-starlight-avec-tailwind) ci-dessous
-		inclut les palettes de couleurs `accent` et `gray` générées à utiliser dans l'objet de
+		Le fichier d'exemple de [configuration
+		Tailwind](#mettre-en-forme-starlight-avec-tailwind) ci-dessous inclut les
+		palettes de couleurs `accent` et `gray` générées à utiliser dans l'objet de
 		configuration `theme.extend.colors`.
 	</Fragment>
 </ThemeDesigner>
