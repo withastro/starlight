@@ -1,5 +1,3 @@
-/// <reference types="mdast-util-directive" />
-
 import type { AstroConfig, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Node, Paragraph as P, Parent, Root } from 'mdast';

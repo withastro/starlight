@@ -185,7 +185,7 @@ function treeify(routes: Route[], baseDir: string): Dir {
 				const isLeaf = index === parts.length - 1;
 
 				// Handle directory index pages by renaming them to `index`
-				if (isLeaf && currentNode.hasOwnProperty(part)) {
+				if (isLeaf && Object.hasOwn(currentNode, part)) {
 					currentNode = currentNode[part] as Dir;
 					part = 'index';
 				}

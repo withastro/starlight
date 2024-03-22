@@ -7,7 +7,7 @@ export function getSitemapConfig(opts: StarlightConfig): SitemapOptions {
 		sitemapConfig.i18n = {
 			defaultLocale: opts.defaultLocale.locale || 'root',
 			locales: Object.fromEntries(
-				Object.entries(opts.locales).map(([locale, config]) => [locale, config?.lang!])
+				Object.entries(opts.locales).map(([locale, config]) => [locale, config?.lang || locale])
 			),
 		};
 	}
