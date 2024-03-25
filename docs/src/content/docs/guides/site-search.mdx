@@ -1,11 +1,9 @@
 ---
 title: Site Search
 description: Learn about Starlight’s built-in site search features and how to customize them.
-sidebar:
-  badge: New
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 By default, Starlight sites include full-text search powered by [Pagefind](https://pagefind.app/), which is a fast and low-bandwidth search tool for static sites.
 
@@ -50,6 +48,8 @@ This text will be hidden from search.
 
 If you have access to [Algolia’s DocSearch program](https://docsearch.algolia.com/) and want to use it instead of Pagefind, you can use the official Starlight DocSearch plugin.
 
+<Steps>
+
 1. Install `@astrojs/starlight-docsearch`:
 
    <Tabs>
@@ -65,7 +65,7 @@ If you have access to [Algolia’s DocSearch program](https://docsearch.algolia.
    <TabItem label="pnpm">
 
    ```sh
-   pnpm install @astrojs/starlight-docsearch
+   pnpm add @astrojs/starlight-docsearch
    ```
 
    </TabItem>
@@ -104,12 +104,16 @@ If you have access to [Algolia’s DocSearch program](https://docsearch.algolia.
    });
    ```
 
+</Steps>
+
 With this updated configuration, the search bar on your site will now open an Algolia modal instead of the default search modal.
 
 #### Translating the DocSearch UI
 
 DocSearch only provides English UI strings by default.
 Add translations of the modal UI for your language using Starlight’s built-in [internationalization system](/guides/i18n/#translate-starlights-ui).
+
+<Steps>
 
 1. Extend Starlight’s `i18n` content collection definition with the DocSearch schema in `src/content/config.ts`:
 
@@ -164,3 +168,5 @@ Add translations of the modal UI for your language using Starlight’s built-in 
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>

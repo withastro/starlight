@@ -29,6 +29,12 @@ Debes proporcionar un título para cada página. Este se mostrará en la parte s
 
 La descripción de la página es usada para los metadatos de la página y será recogida por los motores de búsqueda y en las vistas previas de las redes sociales.
 
+### `slug`
+
+**tipo**: `string`
+
+Sobreescribe el slug de la página. Consulta [“Definiendo slugs personalizados”](https://docs.astro.build/es/guides/content-collections/#definiendo-slugs-personalizados) en la documentación de Astro para más detalles.
+
 ### `editUrl`
 
 **tipo:** `string | boolean`
@@ -113,6 +119,8 @@ hero:
     - text: View on GitHub
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -160,6 +168,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```

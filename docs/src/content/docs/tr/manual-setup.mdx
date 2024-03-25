@@ -5,7 +5,7 @@ description: Var olan Astro projesine Starlight'ı eklemek için nasıl yapılan
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Yeni bir Starlight sitesi yapmanın en hızlı yolu, [Başlangıç Rehberi](/tr/getting-started/#creating-a-new-project)'nde gösterildiği gibi `create astro` komutunu kullanmak.
+Yeni bir Starlight sitesi yapmanın en hızlı yolu, [Başlangıç Rehberi](/tr/getting-started/#yeni-proje-oluşturma)'nde gösterildiği gibi `create astro` komutunu kullanmak.
 Mevcut Astro projesine Starlight eklemek istersen, bu rehber nasıl yapılacağını açıklar.
 
 ## Starlight Kurulumu
@@ -106,7 +106,7 @@ Tüm Starlight sayfalarını alt kırılımda eklemek için `src/content/docs/` 
 
 Örneğin, Starlight sayfaların `/guides/` kırılımıyla başlaması gerekiyorsa, içeriklerini `src/content/docs/guides/` dizininde ekle:
 
-import FileTree from '../../../components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 

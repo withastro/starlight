@@ -22,5 +22,9 @@
   "aside.note": "Nota",
   "aside.tip": "Consejo",
   "aside.caution": "Precaución",
-  "aside.danger": "Peligro"
+  "aside.danger": "Peligro",
+  "expressiveCode.copyButtonCopied": "¡Copiado!",
+  "expressiveCode.copyButtonTooltip": "Copiar al portapapeles",
+  "expressiveCode.terminalWindowFallbackTitle": "Ventana de terminal",
+  "fileTree.directory": "Directory"
 }

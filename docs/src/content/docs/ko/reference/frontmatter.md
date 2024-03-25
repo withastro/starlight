@@ -29,6 +29,12 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 페이지 설명은 페이지 메타데이터에 사용되며 검색 엔진과 소셜 미디어 미리 보기에서 선택됩니다.
 
+### `slug`
+
+**타입**: `string`
+
+페이지의 슬러그를 재정의합니다. 자세한 내용은 Astro 공식문서의 [“사용자 정의 슬러그 정의”](https://docs.astro.build/ko/guides/content-collections/#defining-custom-slugs)를 참조하세요.
+
 ### `editUrl`
 
 **타입:** `string | boolean`
@@ -111,6 +117,8 @@ hero:
     - text: Github에서 보기
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -158,6 +166,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```

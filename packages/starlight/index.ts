@@ -39,21 +39,25 @@ export default function StarlightIntegration({
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
-				injectRoute({
-					pattern: '404',
-					entrypoint: '@astrojs/starlight/404.astro',
-				});
+				if (!userConfig.disable404Route) {
+					injectRoute({
+						pattern: '404',
+						entrypoint: '@astrojs/starlight/404.astro',
+						// Ensure page is pre-rendered even when project is on server output mode
+						prerender: true,
+					});
+				}
 				injectRoute({
 					pattern: '[...slug]',
 					entrypoint: '@astrojs/starlight/index.astro',
+					// Ensure page is pre-rendered even when project is on server output mode
+					prerender: true,
 				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
 				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
-					integrations.push(
-						...starlightExpressiveCode({ starlightConfig, astroConfig: config, useTranslations })
-					);
+					integrations.push(...starlightExpressiveCode({ starlightConfig, useTranslations }));
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
@@ -78,6 +82,9 @@ export default function StarlightIntegration({
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
+					experimental: {
+						globalRoutePriority: true,
+					},
 				});
 			},
 

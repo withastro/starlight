@@ -3,8 +3,7 @@ title: Customizing Starlight
 description: Learn how to make your Starlight site your own with your logo, custom fonts, landing page design and more.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '../../../components/file-tree.astro';
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight provides sensible default styling and features, so you can get started quickly with no configuration needed.
 When you want to start customizing the look and feel of your Starlight site, this guide has you covered.
@@ -12,6 +11,8 @@ When you want to start customizing the look and feel of your Starlight site, thi
 ## Add your logo
 
 Adding a custom logo to the site header is a quick way to add your individual branding to a Starlight site.
+
+<Steps>
 
 1. Add your logo image file to the `src/assets/` directory:
 
@@ -44,6 +45,8 @@ Adding a custom logo to the site header is a quick way to add your individual br
    });
    ```
 
+</Steps>
+
 By default, the logo will be displayed alongside your site’s `title`.
 If your logo image already includes the site title, you can visually hide the title text by setting the `replacesTitle` option.
 The `title` text will still be included for screen readers so that the header remains accessible.
@@ -61,6 +64,8 @@ starlight({
 ### Light and dark logo variants
 
 You can display different versions of your logo in light and dark modes.
+
+<Steps>
 
 1. Add an image file for each variant to `src/assets/`:
 
@@ -86,6 +91,8 @@ You can display different versions of your logo in light and dark modes.
      },
    }),
    ```
+
+</Steps>
 
 ## Enable sitemap
 
@@ -277,6 +284,25 @@ hero:
 ---
 ```
 
+### Disabling the default 404 page
+
+If your project requires an entirely customized 404 layout, you can create a `src/pages/404.astro` route and set the [`disable404Route`](/reference/configuration/#disable404route) config option to disable Starlight’s default route:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Docs With Custom 404',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
 ## Custom fonts
 
 By default, Starlight uses sans-serif fonts available on a user’s local device for all text.
@@ -290,6 +316,8 @@ If you already have font files, follow the [local set-up guide](#set-up-local-fo
 To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-font).
 
 #### Set up local font files
+
+<Steps>
 
 1. Add your font files to a `src/fonts/` directory and create an empty `font-face.css` file:
 
@@ -340,10 +368,14 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    });
    ```
 
+</Steps>
+
 #### Set up a Fontsource font
 
 The [Fontsource](https://fontsource.org/) project simplifies using Google Fonts and other open-source fonts.
 It provides npm modules you can install for the fonts you want to use and includes ready-made CSS files to add to your project.
+
+<Steps>
 
 1.  Find the font you want to use in [Fontsource’s catalog](https://fontsource.org/).
     This example will use [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
@@ -364,7 +396,7 @@ It provides npm modules you can install for the fonts you want to use and includ
         <TabItem label="pnpm">
 
     ```sh
-    pnpm install @fontsource/ibm-plex-serif
+    pnpm add @fontsource/ibm-plex-serif
     ```
 
            </TabItem>
@@ -401,6 +433,8 @@ It provides npm modules you can install for the fonts you want to use and includ
     ```
 
     Fontsource ships multiple CSS files for each font. See the [Fontsource documentation](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) on including different weights and styles to understand which to use.
+
+</Steps>
 
 ### Use fonts
 

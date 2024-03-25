@@ -1,11 +1,11 @@
 ---
 title: Instalação Manual
-description: Aprenda como instalar Starlight manualmente e o adicionar a um projeto Astro existente.
+description: Aprenda como instalar o Starlight manualmente e adicioná-lo a um projeto Astro existente.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-A forma mais rápida de criar um novo site Starlight é utilizando `create astro` como é mostrado no [guia Introdução](/pt-br/getting-started/#criando-um-novo-projeto).
+A forma mais rápida de criar um novo site Starlight é utilizando `create astro` como é mostrado no [guia Introdução](/pt-br/getting-started/#crie-um-novo-projeto).
 Se você deseja adicionar Starlight a um projeto Astro existente, este guia irá te explicar como.
 
 ## Instale Starlight
@@ -44,7 +44,7 @@ A integração Starlight é configurada no seu arquivo `astro.config.mjs`.
 
 Adicione um `title` para começar:
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -106,7 +106,7 @@ Para adicionar todas as páginas do Starlight em um subcaminho, coloque todo o c
 
 Por exemplo, se todas as páginas do Starlight devem começar com `/guias/`, adicione seu conteúdo no diretório `src/content/docs/guias/`:
 
-import FileTree from '../../../components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
@@ -125,4 +125,6 @@ No futuro, planejamos suportar esse caso de uso melhor para evitar a necessidade
 
 ### Use Starlight com SSR
 
-Atualmente, Starlight não suporta [deployments com SSR](https://docs.astro.build/pt-br/guides/server-side-rendering/) usando os adaptadores de servidor do Astro. Nós esperamos ser capazes de suportar isso em breve.
+Você pode utilizar Starlight em conjunto com páginas renderizadas sob demanda em seu projeto seguindo o guia ["Adaptadores de renderização sob demanda"](https://docs.astro.build/pt-br/guides/server-side-rendering/) na documentação do Astro.
+
+No momento, as páginas de documentação geradas pelo Starlight são sempre pré-renderizadas independentemente do modo de saída do seu projeto. Nós esperamos ser capazes de suportar renderização sob demanda para páginas Starlight em breve.

@@ -156,7 +156,7 @@ Astro te ayuda a construir sitios web más rápidos con la[“Arquitectura de Is
 Los apartados de caution y danger son útiles para llamar la atención del usuario sobre detalles que podrían generar problemas. Si te encuentras utilizando estos tipos de apartados con frecuencia, también puede ser una señal de que lo que estás documentando podría beneficiarse de una reestructuración o rediseño.
 
 :::caution
-Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](../../).
+Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](/es/).
 :::
 
 :::danger
@@ -170,7 +170,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 ```md
 :::caution
-Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](../../).
+Si no estás seguro de si deseas un sitio de documentación increíble, piénsalo dos veces antes de usar [Starlight](/es/).
 :::
 
 :::danger
@@ -298,7 +298,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     function thisIsJavaScript() {
       // ¡El bloque completo se resalta como JavaScript,
       // y aún podemos añadir marcadores de diferencias a él!
-  -   console.log('Código antiguo a eliminar'')
+  -   console.log('Código antiguo a eliminar')
   +   console.log('¡Nuevo y brillante código!')
     }
   ```
@@ -308,8 +308,8 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     function thisIsJavaScript() {
       // ¡El bloque completo se resalta como JavaScript,
       // y aún podemos añadir marcadores de diferencias a él!
-  -   console.log('Old code to be removed')
-  +   console.log('New and shiny code!')
+  -   console.log('Código antiguo a eliminar')
+  +   console.log('¡Nuevo y brillante código!')
     }
   ```
   ````

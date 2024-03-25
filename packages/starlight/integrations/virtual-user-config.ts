@@ -22,6 +22,13 @@ export function vitePluginStarlightUserConfig(
 	const resolveId = (id: string) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
 
+	const virtualComponentModules = Object.fromEntries(
+		Object.entries(opts.components).map(([name, path]) => [
+			`virtual:starlight/components/${name}`,
+			`export { default } from ${resolveId(path)};`,
+		])
+	);
+
 	/** Map of virtual module names to their code contents as strings. */
 	const modules = {
 		'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
@@ -41,9 +48,12 @@ export function vitePluginStarlightUserConfig(
 						opts.logo.light
 				  )}; export const logos = { dark, light };`
 			: 'export const logos = {};',
-		'virtual:starlight/components': Object.entries(opts.components)
-			.map(([name, path]) => `export { default as ${name} } from ${resolveId(path)};`)
-			.join(''),
+		'virtual:starlight/collection-config': `let userCollections;
+			try {
+				userCollections = (await import('/src/content/config.ts')).collections;
+			} catch {}
+			export const collections = userCollections;`,
+		...virtualComponentModules,
 	} satisfies Record<string, string>;
 
 	/** Mapping names prefixed with `\0` to their original form. */

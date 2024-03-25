@@ -101,3 +101,21 @@ export function localizedId(id: string, locale: string | undefined): string {
 		return id;
 	}
 }
+
+/** Extract the slug from a URL. */
+export function urlToSlug(url: URL): string {
+	let pathname = url.pathname;
+	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	if (pathname.startsWith(base)) pathname = pathname.replace(base, '');
+	const segments = pathname.split('/');
+	const htmlExt = '.html';
+	if (segments.at(-1) === 'index.html') {
+		// Remove trailing `index.html`.
+		segments.pop();
+	} else if (segments.at(-1)?.endsWith(htmlExt)) {
+		// Remove trailing `.html`.
+		const last = segments.pop();
+		if (last) segments.push(last.slice(0, -1 * htmlExt.length));
+	}
+	return segments.filter(Boolean).join('/');
+}

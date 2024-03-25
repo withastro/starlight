@@ -11,7 +11,7 @@
   "languageSelect.accessibleLabel": "选择语言",
   "menuButton.accessibleLabel": "菜单",
   "sidebarNav.accessibleLabel": "主要",
-  "tableOfContents.onThisPage": "本页",
+  "tableOfContents.onThisPage": "本页内容",
   "tableOfContents.overview": "概述",
   "i18n.untranslatedContent": "此内容尚不支持你的语言。",
   "page.editLink": "编辑此页",
@@ -22,5 +22,6 @@
   "aside.note": "注意",
   "aside.tip": "提示",
   "aside.caution": "警告",
-  "aside.danger": "危险"
+  "aside.danger": "危险",
+  "fileTree.directory": "文件夹"
 }

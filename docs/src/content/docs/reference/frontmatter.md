@@ -29,6 +29,12 @@ You must provide a title for every page. This will be displayed at the top of th
 
 The page description is used for page metadata and will be picked up by search engines and in social media previews.
 
+### `slug`
+
+**type**: `string`
+
+Override the slug of the page. See [“Defining custom slugs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) in the Astro docs for more details.
+
 ### `editUrl`
 
 **type:** `string | boolean`
@@ -104,7 +110,7 @@ hero:
   tagline: Take your stuff to the moon and back in the blink of an eye.
   image:
     alt: A glittering, brightly colored logo
-    file: ../../assets/logo.png
+    file: ~/assets/logo.png
   actions:
     - text: Tell me more
       link: /getting-started/
@@ -113,6 +119,8 @@ hero:
     - text: View on GitHub
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -124,8 +132,8 @@ You can display different versions of the hero image in light and dark modes.
 hero:
   image:
     alt: A glittering, brightly colored logo
-    dark: ../../assets/logo-dark.png
-    light: ../../assets/logo-light.png
+    dark: ~/assets/logo-dark.png
+    light: ~/assets/logo-light.png
 ---
 ```
 
@@ -160,6 +168,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```

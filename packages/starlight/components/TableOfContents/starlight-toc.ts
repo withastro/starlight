@@ -95,8 +95,8 @@ export class StarlightTOC extends HTMLElement {
 		const mobileTocHeight = this.querySelector('summary')?.getBoundingClientRect().height || 0;
 		/** Start intersections at nav height + 2rem padding. */
 		const top = navBarHeight + mobileTocHeight + 32;
-		/** End intersections 1.5rem later. */
-		const bottom = top + 24;
+		/** End intersections `53px` later. This is slightly more than the maximum `margin-top` in Markdown content. */
+		const bottom = top + 53;
 		const height = document.documentElement.clientHeight;
 		return `-${top}px 0% ${bottom - height}px`;
 	}

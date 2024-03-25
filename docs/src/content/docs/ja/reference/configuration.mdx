@@ -78,7 +78,7 @@ starlight({
 });
 ```
 
-この設定により、`/introduction`ページには`https://github.com/withastro/starlight/edit/main/src/docs/introduction.md`を指す編集リンクが表示されます。
+この設定により、`/introduction`ページには`https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`を指す編集リンクが表示されます。
 
 ### `sidebar`
 
@@ -302,7 +302,7 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '../../../../components/social-links-type.astro';
+import SocialLinksType from '~/components/social-links-type.astro';
 
 **type:** <SocialLinksType />
 
@@ -500,6 +500,13 @@ starlight({
 
 デフォルトでは、すべてのページの`<title>`は`ページタイトル | サイトタイトル`となります。たとえば、このページのタイトルは「設定方法」であり、このサイトのタイトルは「Starlight」なので、このページの`<title>`は「設定方法 | Starlight」となります。
 
+### `disable404Route`
+
+**type:** `boolean`  
+**default:** `false`
+
+Starlightのデフォルトの[404ページ](https://docs.astro.build/ja/core-concepts/astro-pages/#カスタム404エラーページ)を無効にします。プロジェクトでカスタムの`src/pages/404.astro`ルートを使用するには、このオプションを`true`に設定します。
+
 ### `components`
 
 **type:** `Record<string, string>`
@@ -521,6 +528,8 @@ starlight({
 **type:** [`StarlightPlugin[]`](/ja/reference/plugins/#api早見表)
 
 Starlightをカスタムプラグインにより拡張します。プラグインは、Starlightの機能を変更または追加するために、プロジェクトに変更を適用します。
+
+利用可能なプラグインの一覧については、[プラグインショーケース](/ja/resources/plugins/)を参照してください。
 
 ```js
 starlight({

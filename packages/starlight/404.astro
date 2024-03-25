@@ -7,6 +7,8 @@ import { generateRouteData } from './utils/route-data';
 import type { StarlightDocsEntry } from './utils/routing';
 import { useTranslations } from './utils/translations';
 
+export const prerender = true;
+
 const { lang = 'en', dir = 'ltr' } = config.defaultLocale || {};
 let locale = config.defaultLocale?.locale;
 if (locale === 'root') locale = undefined;

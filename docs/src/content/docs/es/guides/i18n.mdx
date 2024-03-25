@@ -3,11 +3,13 @@ title: Internacionalización (i18n)
 description: Aprende a configurar tu sitio Starlight para admitir varios idiomas.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight proporciona soporte incorporado para sitios multilingües, incluidas las rutas, el contenido de respaldo y el soporte completo de idiomas de derecha a izquierda (RTL).
 
 ## Configura i18n
+
+<Steps>
 
 1. Indícale a Starlight los idiomas que admites pasando [`locales`](/es/reference/configuration/#locales) y [`defaultLocale`](/es/reference/configuration/#defaultlocale) a la integración de Starlight:
 
@@ -62,6 +64,8 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 3. Ahora puedes agregar archivos de contenido en los directorios de tu idioma. Utiliza el mismo nombre de archivo para asociar páginas entre idiomas y aprovechar todas las características de internacionalización (i18n) de Starlight, como contenido de respaldo, avisos de traducción y más.
 
    Por ejemplo, crea `ar/index.md` y `en/index.md` para representar la página de inicio en árabe e inglés, respectivamente.
+
+</Steps>
 
 ### Usa una raíz de configuración regional
 
@@ -140,7 +144,8 @@ Si no hay una traducción disponible para un idioma, Starlight mostrará a los l
 
 ## Traduce la UI de Starlight
 
-import LanguagesList from '../../../../components/languages-list.astro';
+import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 Además de alojar archivos de contenido traducidos, Starlight te permite traducir las etiquetas de UI predeterminadas (p. ej. el encabezado "En esta página" en la tabla de contenidos) para que tus lectores puedan experimentar tu sitio completamente en el idioma seleccionado.
 
@@ -149,6 +154,8 @@ forma predeterminada, y damos la bienvenida a [contribuciones para agregar más 
 predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
+
+<Steps>
 
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 
@@ -179,61 +186,40 @@ Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras eti
 
 3. Agrega traducciones para las claves que deseas traducir en los archivos JSON. Traduce solo los valores, dejando las claves en inglés (p. ej. `"search.label": "Buscar"`).
 
-Estos son los valores predeterminados en inglés de las cadenas existentes que se incluyen en Starlight:
+   Estos son los valores predeterminados en inglés de las cadenas existentes que se incluyen en Starlight:
 
-```json
-{
-	"skipLink.label": "Skip to content",
-	"search.label": "Search",
-	"search.shortcutLabel": "(Press / to Search)",
-	"search.cancelLabel": "Cancel",
-	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-	"themeSelect.accessibleLabel": "Select theme",
-	"themeSelect.dark": "Dark",
-	"themeSelect.light": "Light",
-	"themeSelect.auto": "Auto",
-	"languageSelect.accessibleLabel": "Select language",
-	"menuButton.accessibleLabel": "Menu",
-	"sidebarNav.accessibleLabel": "Main",
-	"tableOfContents.onThisPage": "On this page",
-	"tableOfContents.overview": "Overview",
-	"i18n.untranslatedContent": "This content is not available in your language yet.",
-	"page.editLink": "Edit page",
-	"page.lastUpdated": "Last updated:",
-	"page.previousLink": "Next",
-	"page.nextLink": "Previous",
-	"404.text": "Page not found. Check the URL or try using the search bar."
-}
-```
+   <UIStringsList />
 
-Los bloques de código de Starlight están impulsados por la biblioteca [Expressive Code](https://github.com/expressive-code/expressive-code).
-Puedes establecer traducciones para las cadenas de UI en el mismo archivo JSON utilizando las llaves `expressiveCode`:
+   Los bloques de código de Starlight están impulsados por la biblioteca [Expressive Code](https://github.com/expressive-code/expressive-code).
+   Puedes establecer traducciones para las cadenas de UI en el mismo archivo JSON utilizando las llaves `expressiveCode`:
 
-```json
-{
-	"expressiveCode.copyButtonCopied": "¡Copiado!",
-	"expressiveCode.copyButtonTooltip": "Copiar al portapapeles",
-	"expressiveCode.terminalWindowFallbackTitle": "Ventana de terminal"
-}
-```
+   ```json
+   {
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
+   }
+   ```
 
-El modal de búsqueda de Starlight está impulsado por la biblioteca [Pagefind](https://pagefind.app/).
-Puedes establecer traducciones para la UI de Pagefind en el mismo archivo JSON utilizando claves `pagefind`:
+   El modal de búsqueda de Starlight está impulsado por la biblioteca [Pagefind](https://pagefind.app/).
+   Puedes establecer traducciones para la UI de Pagefind en el mismo archivo JSON utilizando claves `pagefind`:
 
-```json
-{
-	"pagefind.clear_search": "Clear",
-	"pagefind.load_more": "Load more results",
-	"pagefind.search_label": "Search this site",
-	"pagefind.filters_label": "Filters",
-	"pagefind.zero_results": "No results for [SEARCH_TERM]",
-	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
-	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
-	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
-	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
-	"pagefind.searching": "Searching for [SEARCH_TERM]..."
-}
-```
+   ```json
+   {
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
+   }
+   ```
+
+</Steps>
 
 ### Extiende el esquema de traducción
 

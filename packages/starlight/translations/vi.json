@@ -19,8 +19,9 @@
   "page.previousLink": "Tiếp",
   "page.nextLink": "Trước",
   "404.text": "Không tìm thấy trang. Kiểm tra URL hoặc thử sử dụng thanh tìm kiếm.",
-  "aside.note": "Note",
-  "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger"
+  "aside.note": "Ghi chú",
+  "aside.tip": "Mẹo",
+  "aside.caution": "Thận trọng",
+  "aside.danger": "Nguy hiểm",
+  "fileTree.directory": "Directory"
 }

@@ -2,11 +2,13 @@ import type { Element } from 'hast';
 import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
+import { Icons } from '../components/Icons';
 
 interface Panel {
 	panelId: string;
 	tabId: string;
 	label: string;
+	icon?: keyof typeof Icons;
 }
 
 declare module 'vfile' {
@@ -59,15 +61,18 @@ const tabsProcessor = rehype()
 					return CONTINUE;
 				}
 
-				const { dataLabel } = node.properties;
+				const { dataLabel, dataIcon } = node.properties;
 				const ids = getIDs();
-				file.data.panels?.push({
+				const panel: Panel = {
 					...ids,
 					label: String(dataLabel),
-				});
+				};
+				if (dataIcon) panel.icon = String(dataIcon) as keyof typeof Icons;
+				file.data.panels?.push(panel);
 
 				// Remove `<TabItem>` props
 				delete node.properties.dataLabel;
+				delete node.properties.dataIcon;
 				// Turn into `<section>` with required attributes
 				node.tagName = 'section';
 				node.properties.id = ids.panelId;

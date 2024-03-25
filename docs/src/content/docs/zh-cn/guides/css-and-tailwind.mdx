@@ -3,11 +3,15 @@ title: CSS & 样式
 description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样式或与 Tailwind CSS 集成。
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 你可以使用自定义 CSS 设置你的 Starlight 网站的样式或者使用 Starlight Tailwind 插件。
 
 ## 自定义 CSS 样式
 
 通过提供额外的 CSS 文件来修改或扩展 Starlight 的默认样式，从而自定义应用于 Starlight 网站的样式。
+
+<Steps>
 
 1. 在 `src/` 目录下添加一个 CSS 文件。
    例如，你可以设置一个更宽的默认列宽和更大的页面标题文本大小：
@@ -22,7 +26,7 @@ description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样
 
 2. 在 `astro.config.mjs` 中的 `customCss` 数组中添加你的 CSS 文件的路径：
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,13 +36,15 @@ description: 了解如何使用自定义 CSS 设置你的 Starlight 网站的样
    		starlight({
    			title: 'Docs With Custom CSS',
    			customCss: [
-   				// 你的自定义 CSS 文件的相对路径
-   				'./src/styles/custom.css',
+   +				// 你的自定义 CSS 文件的相对路径
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
    });
    ```
+
+</Steps>
 
 你可以在[ GitHub 上的 `props.css` 文件](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) 中查看 Starlight 使用的所有 CSS 自定义属性，你可以设置这些属性来自定义你的网站。
 
@@ -54,8 +60,6 @@ Starlight Tailwind 插件应用了以下配置：
 - 禁用 Tailwind 的 [Preflight](https://tailwindcss.com/docs/preflight) 重置样式，同时有选择地恢复 Preflight 的必要部分，以便使用 Tailwind 的边框实用程序类。
 
 ### 使用 Tailwind 创建新项目
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 使用 `create astro` 创建一个预配置了 Tailwind CSS 的新 Starlight 项目：
 
@@ -86,6 +90,8 @@ yarn create astro --template starlight/tailwind
 ### 将 Tailwind 添加到现有项目中
 
 如果你已经有了一个 Starlight 网站，并且想要添加 Tailwind CSS，请按照以下步骤操作。
+
+<Steps>
 
 1. 将 Astro 的 Tailwind 集成添加到项目中：
 
@@ -132,7 +138,7 @@ yarn create astro --template starlight/tailwind
    <TabItem label="pnpm">
 
    ```sh
-   pnpm install @astrojs/starlight-tailwind
+   pnpm add @astrojs/starlight-tailwind
    ```
 
    </TabItem>
@@ -194,6 +200,8 @@ yarn create astro --template starlight/tailwind
    };
    ```
 
+</Steps>
+
 ### 使用 Tailwind 设置 Starlight 的样式
 
 Starlight 将使用你的 [Tailwind 主题配置](https://tailwindcss.com/docs/theme)中的值来设置其 UI。
@@ -244,7 +252,7 @@ Starlight 的颜色主题可以通过覆盖其默认的自定义属性来控制�
 
 当你对你的更改满意时，复制下面的 CSS 或 Tailwind 代码并在你的项目中使用。
 
-import ThemeDesigner from '../../../../components/theme-designer.astro';
+import ThemeDesigner from '~/components/theme-designer.astro';
 
 <ThemeDesigner
 	labels={{

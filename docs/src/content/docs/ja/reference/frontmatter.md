@@ -29,6 +29,12 @@ description: 私が取り組んでいるプロジェクトについてもっと�
 
 ページに関する説明文はページのメタデータとして使用され、また検索エンジンやソーシャルメディアのプレビューでも使用されます。
 
+### `slug`
+
+**type**: `string`
+
+ページのスラグを上書きします。詳しくは、Astroドキュメントの[「カスタムスラグの定義」](https://docs.astro.build/ja/guides/content-collections/#カスタムスラグの定義)を参照してください。
+
 ### `editUrl`
 
 **type:** `string | boolean`
@@ -110,6 +116,8 @@ hero:
     - text: GitHubで見る
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -157,6 +165,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```

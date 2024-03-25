@@ -3,8 +3,8 @@ title: Barre latérale de navigation
 description: Apprendre à configurer et personnaliser les liens de la barre latérale de navigation de votre site Starlight.
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
-import SidebarPreview from '../../../../components/sidebar-preview.astro';
+import { FileTree } from '@astrojs/starlight/components';
+import SidebarPreview from '~/components/sidebar-preview.astro';
 
 Une barre latérale bien organisée est une des clés d'une bonne documentation, car c'est l'une des principales méthodes de navigation qui sera utilisée par les utilisateurs de votre site. Starlight fournit un ensemble complet d'options pour personnaliser la structure et le contenu de votre barre latérale.
 
@@ -141,7 +141,8 @@ La configuration ci-dessus génère la barre latérale suivante :
 
 Starlight peut générer automatiquement un groupe dans votre barre latérale en fonction d'un répertoire de votre documentation.
 Cela est utile lorsque vous ne souhaitez pas entrer manuellement chaque élément de la barre latérale dans un groupe.
-Les pages seront triées par ordre alphabétique en fonction du nom de fichier par défaut.
+
+Par défaut, les pages sont triées par ordre alphabétique selon le [`slug`](/fr/reference/overrides/#slug) du fichier.
 
 Ajoutez un groupe généré automatiquement en utilisant un objet avec les propriétés `label` et `autogenerate`. La configuration de `autogenerate` doit spécifier le répertoire à utiliser pour les entrées de la barre latérale avec la propriété `directory`. Par exemple, avec la configuration suivante :
 
@@ -208,8 +209,8 @@ title: Ma page
 sidebar:
   # Définit une étiquette personnalisée pour le lien dans la barre latérale
   label: Étiquette personnalisée
-  # Définit un ordre personnalisé pour le lien (les nombres plus petits
-  # sont affichés plus haut)
+  # Définit un ordre personnalisé pour le lien
+  # (les nombres plus petits sont affichés plus haut)
   order: 2
   # Ajoute un badge au lien
   badge:

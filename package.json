@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build:examples": "pnpm --filter '@example/*' build",
+    "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro ."
@@ -14,9 +14,9 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
     "@size-limit/file": "^8.2.4",
-    "astro": "^4.0.1",
+    "astro": "^4.3.5",
     "prettier": "^3.0.0",
-    "prettier-plugin-astro": "^0.11.0",
+    "prettier-plugin-astro": "^0.13.0",
     "size-limit": "^8.2.4"
   },
   "packageManager": "pnpm@8.7.4",
@@ -29,7 +29,7 @@
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "22 kB"
+      "limit": "22.5 kB"
     },
     {
       "name": "/_astro/*.css",

@@ -29,6 +29,12 @@ Vous devez fournir un titre pour chaque page. Il sera affiché en haut de la pag
 
 La description de la page est utilisée pour les métadonnées de la page et sera reprise par les moteurs de recherche et dans les aperçus des médias sociaux.
 
+### `slug`
+
+**type**: `string`
+
+Remplace le slug de la page. Consultez [« Définition d’un slug personnalisé »](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-slug-personnalis%C3%A9e) dans la documentation d'Astro pour plus de détails.
+
 ### `editUrl`
 
 **Type :** `string | boolean`
@@ -113,6 +119,8 @@ hero:
     - text: Voir sur GitHub
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -160,6 +168,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```
@@ -280,7 +289,7 @@ interface SidebarConfig {
 #### `label`
 
 **Type :** `string`  
-**Par défaut :** the page [`title`](#title-obligatoire)
+**Par défaut :** [`title`](#title-obligatoire) de la page
 
 Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 
@@ -369,4 +378,72 @@ sidebar:
   attrs:
     target: _blank
 ---
+```
+
+## Personnaliser le schéma du frontmatter
+
+Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content/config.ts` en utilisant l'utilitaire `docsSchema()` :
+
+```ts {3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
+
+`docsSchema()` accepte les options suivantes :
+
+### `extend`
+
+**Type :** Schéma Zod ou fonction qui retourne un schéma Zod  
+**Par défaut :** `z.object({})`
+
+Étendez le schéma de Starlight avec des champs supplémentaires en définissant `extend` dans les options de `docsSchema()`.
+La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content-collections/#defining-datatypes-with-zod).
+
+Dans l'exemple suivant, nous définissons un type plus strict pour `description` pour le rendre obligatoire et ajouter un nouveau champ `category` facultatif :
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: z.object({
+        // Rend un champ de base obligatoire au lieu de facultatif.
+        description: z.string(),
+        // Ajoute un nouveau champ au schéma.
+        category: z.enum(['tutoriel', 'guide', 'référence']).optional(),
+      }),
+    }),
+  }),
+};
+```
+
+Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-in-content-collections), utilisez une fonction qui retourne votre extension de schéma :
+
+```ts {8-13}
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+  docs: defineCollection({
+    schema: docsSchema({
+      extend: ({ image }) => {
+        return z.object({
+          // Ajoute un champ qui doit être résolu par une image locale.
+          cover: image(),
+        });
+      },
+    }),
+  }),
+};
 ```

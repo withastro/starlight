@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLinksValidator from 'starlight-links-validator';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -11,10 +12,13 @@ export const locales = {
 	id: { label: 'Bahasa Indonesia', lang: 'id' },
 	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 	'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
+	'pt-pt': { label: 'Português', lang: 'pt-PT' },
 	ko: { label: '한국어', lang: 'ko' },
 	tr: { label: 'Türkçe', lang: 'tr' },
 	ru: { label: 'Русский', lang: 'ru' },
 	hi: { label: 'हिंदी', lang: 'hi' },
+	da: { label: 'Dansk', lang: 'da' },
+	uk: { label: 'Українська', lang: 'uk' },
 };
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
@@ -75,10 +79,12 @@ export default defineConfig({
 						id: 'Mulai dari sini',
 						'zh-CN': '从这里开始',
 						'pt-BR': 'Comece Aqui',
+						'pt-PT': 'Comece Aqui',
 						ko: '여기서부터',
 						tr: 'Buradan Başlayın',
 						ru: 'Начать отсюда',
 						hi: 'यहाँ से शुरू करे',
+						uk: 'Почніть звідси',
 					},
 					items: [
 						{
@@ -93,10 +99,12 @@ export default defineConfig({
 								id: 'Memulai',
 								'zh-CN': '开始使用',
 								'pt-BR': 'Introdução',
+								'pt-PT': 'Introdução',
 								ko: '시작하기',
 								tr: 'Başlarken',
 								ru: 'Введение',
 								hi: 'पहले कदम',
+								uk: 'Вступ',
 							},
 						},
 						{
@@ -111,10 +119,12 @@ export default defineConfig({
 								id: 'Instalasi Manual',
 								'zh-CN': '手动配置',
 								'pt-BR': 'Instalação Manual',
+								'pt-PT': 'Instalação Manual',
 								ko: '수동으로 설정하기',
 								tr: 'Elle Kurulum',
 								ru: 'Установка вручную',
 								hi: 'मैनुअल सेटअप',
+								uk: 'Ручне встановлення',
 							},
 						},
 						{
@@ -129,26 +139,12 @@ export default defineConfig({
 								id: 'Dampak terhadap lingkungan',
 								'zh-CN': '环境影响',
 								'pt-BR': 'Impacto Ambiental',
+								'pt-PT': 'Impacto Ambiental',
 								ko: '환경적 영향',
 								tr: 'Çevre Etkisi',
 								ru: 'Влияние на окружающую среду',
 								hi: 'पर्यावरणीय प्रभाव',
-							},
-						},
-						{
-							label: 'Showcase',
-							link: 'showcase',
-							translations: {
-								de: 'Schaufenster',
-								// es: '',
-								ja: 'ショーケース',
-								fr: 'Vitrine',
-								// it: '',
-								id: 'Galeri',
-								ko: '쇼케이스',
-								tr: 'Vitrin',
-								ru: 'Примеры',
-								hi: 'प्रदर्शन',
+								uk: 'Вплив на довкілля',
 							},
 						},
 					],
@@ -168,6 +164,7 @@ export default defineConfig({
 						tr: 'Rehber',
 						ru: 'Руководства',
 						hi: 'गाइड',
+						uk: 'Ґайди',
 					},
 					autogenerate: { directory: 'guides' },
 				},
@@ -186,10 +183,30 @@ export default defineConfig({
 						tr: 'Referanslar',
 						ru: 'Справочник',
 						hi: 'संदर्भ',
+						uk: 'Довідник',
 					},
 					autogenerate: { directory: 'reference' },
 				},
+				{
+					label: 'Resources',
+					badge: 'New',
+					translations: {
+						'zh-CN': '资源',
+						fr: 'Ressources',
+						'pt-BR': 'Recursos',
+						ja: 'リソース',
+					},
+					autogenerate: { directory: 'resources' },
+				},
 			],
+			plugins: process.env.CHECK_LINKS
+				? [
+						starlightLinksValidator({
+							errorOnFallbackPages: false,
+							errorOnInconsistentLocale: true,
+						}),
+				  ]
+				: [],
 		}),
 	],
 });

@@ -9,6 +9,8 @@ vi.mock('astro:content', async () =>
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 			// @ts-expect-error — Using a slug not present in Starlight docs site
+			['reference/frontmatter/foo.mdx', { title: 'Foo' }],
+			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
 			['guides/components.mdx', { title: 'Components' }],
 		],
@@ -84,12 +86,28 @@ describe('getSidebar', () => {
 			        "type": "link",
 			      },
 			      {
-			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/reference/frontmatter/",
-			        "isCurrent": false,
-			        "label": "Frontmatter Reference",
-			        "type": "link",
+			        "collapsed": false,
+			        "entries": [
+			          {
+			            "attrs": {},
+			            "badge": undefined,
+			            "href": "/reference/frontmatter/",
+			            "isCurrent": false,
+			            "label": "Frontmatter Reference",
+			            "type": "link",
+			          },
+			          {
+			            "attrs": {},
+			            "badge": undefined,
+			            "href": "/reference/frontmatter/foo/",
+			            "isCurrent": false,
+			            "label": "Foo",
+			            "type": "link",
+			          },
+			        ],
+			        "label": "frontmatter",
+			        "type": "group",
 			      },
 			    ],
 			    "label": "Reference",
