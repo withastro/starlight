@@ -91,6 +91,31 @@ test('persists the focus when syncing tabs', async ({ page, starlight }) => {
 	).toBe(true);
 });
 
+test('preserves tabs position when alternating between tabs with different content heights', async ({
+	page,
+	starlight,
+}) => {
+	await starlight.goto('/tabs-variable-height');
+
+	const tabs = page.locator('starlight-tabs').nth(1);
+	const selectedTab = tabs.getByRole('tab', { selected: true });
+
+	// Scroll to the second set of synced tabs and focus the selected tab.
+	await tabs.scrollIntoViewIfNeeded();
+	await selectedTab.focus();
+
+	// Get the bounding box of the tabs.
+	const initialBoundingBox = await tabs.boundingBox();
+
+	// Select the second tab which has a different height.
+	await selectedTab.press('ArrowRight');
+
+	// Ensure the tabs vertical position is exactly the same after selecting the second tab.
+	// Note that a small difference could be the result of the base line-height having a fractional part which can cause a
+	// sub-pixel difference in some browsers like Chrome or Firefox.
+	expect((await tabs.boundingBox())?.y).toBe(initialBoundingBox?.y);
+});
+
 async function expectSelectedTab(tabs: Locator, label: string, panel: string) {
 	expect((await tabs.getByRole('tab', { selected: true }).textContent())?.trim()).toBe(label);
 	expect((await tabs.getByRole('tabpanel').textContent())?.trim()).toBe(panel);

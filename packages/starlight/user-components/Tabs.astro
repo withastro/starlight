@@ -136,6 +136,10 @@ const { html, panels } = processPanels(panelHtml);
 		switchTab(newTab: HTMLAnchorElement | null | undefined, index: number, shouldSync = true) {
 			if (!newTab) return;
 
+			// We store the current position so we can restore it after switching tabs to prevent the page from jumping when
+			// the new tab content is of a different height than the previous tab.
+			const previousTabsOffset = this.getBoundingClientRect().top;
+
 			// Mark all tabs as unselected and hide all tab panels.
 			this.tabs.forEach((tab) => {
 				tab.removeAttribute('aria-selected');
@@ -154,6 +158,9 @@ const { html, panels } = processPanels(panelHtml);
 			if (shouldSync) {
 				newTab.focus();
 				StarlightTabs.#syncTabs(this, newTab.textContent);
+				window.scrollTo({
+					top: window.scrollY + (this.getBoundingClientRect().top - previousTabsOffset),
+				});
 			}
 		}
 
