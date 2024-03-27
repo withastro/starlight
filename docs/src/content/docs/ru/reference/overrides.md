@@ -90,7 +90,7 @@ entry: {
 }
 ```
 
-Подробнее о форме этого объекта можно узнать из справочника [Коллекция типов записей Astro](https://docs.astro.build/ru/reference/api-reference/#collection-entry-type).
+Подробнее о форме этого объекта можно узнать из справочника [Коллекция типов записей Astro](https://docs.astro.build/ru/reference/api-reference/#%D1%82%D0%B8%D0%BF-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8).
 
 #### `sidebar`
 
@@ -165,7 +165,7 @@ entry: {
 **Стандартный компонент:** [`ThemeProvider.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro)
 
 Компонент, отображаемый внутри `<head>`, который устанавливает поддержку тёмной/светлой темы.
-Реализация по умолчанию включает в себя встроенный скрипт и `<шаблон>`, используемый скриптом в [`<ThemeSelect />`](#themeselect).
+Реализация по умолчанию включает в себя встроенный скрипт и `<template>`, используемый скриптом в [`<ThemeSelect />`](#themeselect).
 
 ---
 
