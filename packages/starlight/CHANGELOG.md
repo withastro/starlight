@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.21.2
+
+### Patch Changes
+
+- [#1628](https://github.com/withastro/starlight/pull/1628) [`24c0823c`](https://github.com/withastro/starlight/commit/24c0823c61b1e9850575766876f2e1035541cfd1) Thanks [@o-az](https://github.com/o-az)! - Adds 1 new icon: `nix`
+
+- [#1614](https://github.com/withastro/starlight/pull/1614) [`78fc9042`](https://github.com/withastro/starlight/commit/78fc90426d58d6c36dcb8215e3181476d0702f50) Thanks [@kpodurgiel](https://github.com/kpodurgiel)! - Adds Polish UI translations
+
+- [#1596](https://github.com/withastro/starlight/pull/1596) [`13ed30cd`](https://github.com/withastro/starlight/commit/13ed30cd335798177dfe24a27851d2c14d2fe80a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for toggling the built-in search modal using the `Ctrl+k` keyboard shortcut.
+
+- [#1608](https://github.com/withastro/starlight/pull/1608) [`4096e1b7`](https://github.com/withastro/starlight/commit/4096e1b77b3464338e5489d00cec4c29a1cd3c32) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes nested CSS from the `<FileTree>` component to prevent a potential warning when using Tailwind CSS.
+
+- [#1626](https://github.com/withastro/starlight/pull/1626) [`67459cb4`](https://github.com/withastro/starlight/commit/67459cb4021859f4a45d50a5f993d2c849f340a3) Thanks [@hippotastic](https://github.com/hippotastic)! - Fixes a bundling issue that caused imports from `@astrojs/starlight/components` to fail when using the config setting `expressiveCode: false`.
+
 ## 0.21.1
 
 ### Patch Changes

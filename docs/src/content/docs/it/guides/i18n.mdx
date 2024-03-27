@@ -3,11 +3,13 @@ title: Internazionalizzazione (i18n)
 description: Impara come configurare il tuo sito Starlight per supportare più lingue.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight offre il supporto per siti multilingua, compreso di indirizzamento, contenuti di riserva e completo supporto per lingue scritte da destra a sinistra (RTL).
 
 ## Configurare i18n
+
+<Steps>
 
 1. Indicare a Starlight le lingue che si vuole supportare passando [`locales`](/it/reference/configuration/#locales) e [`defaultLocale`](/it/reference/configuration/#defaultlocale) all'integrazione Starlight:
 
@@ -62,6 +64,8 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
 3. Puoi ora aggiungere file nelle cartelle. Usa file con lo stesso nome per associare pagine tra i linguaggi e sfruttare le funzionalità di Starlight per i18n, compresi i contenuti di riserva, avvisi di traduzione e altro.
 
    Per esempio, crea `ar/index.md` e `en/index.md` per rappresentare la homepage rispettivamente in arabo e inglese.
+
+</Steps>
 
 ### Utilizzare una lingua principale
 
@@ -142,6 +146,7 @@ Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà 
 ## Tradurre l'interfaccia Starlight
 
 import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 In aggiunta alla possibilità di avere pagine multilingua, Starlight permette di tradurre le scritte dell'interfaccia (per esempio l'intestazione "In questa pagina" nella tabella dei contenuti) in modo che i lettori possano vedere il sito interamente nella lingua selezionata.
 
@@ -149,6 +154,8 @@ Le stringhe dell'interfaccia utente tradotte in <LanguagesList /> sono disponibi
 e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
+
+<Steps>
 
 1. Configura la collezione `i18n` in `src/content/config.ts` se non lo è già:
 
@@ -180,35 +187,7 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
 
    Queste sono le traduzioni di default per l'inglese:
 
-   ```json
-   {
-   	"skipLink.label": "Skip to content",
-   	"search.label": "Search",
-   	"search.shortcutLabel": "(Press / to Search)",
-   	"search.cancelLabel": "Cancel",
-   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-   	"themeSelect.accessibleLabel": "Select theme",
-   	"themeSelect.dark": "Dark",
-   	"themeSelect.light": "Light",
-   	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Select language",
-   	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "Main",
-   	"tableOfContents.onThisPage": "On this page",
-   	"tableOfContents.overview": "Overview",
-   	"i18n.untranslatedContent": "This content is not available in your language yet.",
-   	"page.editLink": "Edit page",
-   	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Previous",
-   	"page.nextLink": "Next",
-   	"404.text": "Page not found. Check the URL or try using the search bar.",
-   	"aside.note": "Note",
-   	"aside.tip": "Tip",
-   	"aside.caution": "Caution",
-   	"aside.danger": "Danger",
-   	"fileTree.directory": "Directory"
-   }
-   ```
+   <UIStringsList />
 
    I blocchi di codice di Starlight sono gestiti dalla libreria [Expressive Code](https://github.com/expressive-code/expressive-code).
    Puoi impostare le traduzioni per le stringhe dell'interfaccia utente nella stessa file JSON utilizzando le chiavi `expressiveCode`:
@@ -238,6 +217,8 @@ Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori prede
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+ </Steps>
 
 ### Estendere lo schema di traduzione
 
