@@ -140,7 +140,7 @@ export default {
 
 **тип:** `AstroIntegrationLogger`
 
-Экземпляр [Astro integration logger](https://docs.astro.build/ru/reference/integrations-reference/#astrointegrationlogger), который можно использовать для записи журналов.
+Экземпляр [логгера интеграции Astro](https://docs.astro.build/ru/reference/integrations-reference/#astrointegrationlogger), который можно использовать для записи журналов.
 Все сообщения в журнале будут иметь префикс с названием плагина.
 
 ```ts {6}
