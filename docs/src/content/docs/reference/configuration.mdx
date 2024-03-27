@@ -489,18 +489,18 @@ If you need to set additional variants or fallback favicons, you can add tags us
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // Add ICO favicon fallback for Safari.
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// Add ICO favicon fallback for Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 

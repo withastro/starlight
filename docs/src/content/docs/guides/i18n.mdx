@@ -3,11 +3,13 @@ title: Internationalization (i18n)
 description: Learn how to configure your Starlight site to support multiple languages.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight provides built-in support for multilingual sites, including routing, fallback content, and full right-to-left (RTL) language support.
 
 ## Configure i18n
+
+<Steps>
 
 1. Tell Starlight about the languages you support by passing [`locales`](/reference/configuration/#locales) and [`defaultLocale`](/reference/configuration/#defaultlocale) to the Starlight integration:
 
@@ -62,6 +64,8 @@ Starlight provides built-in support for multilingual sites, including routing, f
 3. You can now add content files in your language directories. Use the same file name to associate pages across languages and take advantage of Starlight’s full set of i18n features, including fallback content, translation notices, and more.
 
    For example, create `ar/index.md` and `en/index.md` to represent the homepage for Arabic and English respectively.
+
+</Steps>
 
 ### Use a root locale
 
@@ -151,6 +155,8 @@ and we welcome [contributions to add more default languages](https://github.com/
 
 You can provide translations for additional languages you support — or override our default labels — via the `i18n` data collection.
 
+<Steps>
+
 1. Configure the `i18n` data collection in `src/content/config.ts` if it isn’t configured already:
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -211,6 +217,8 @@ You can provide translations for additional languages you support — or overrid
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+ </Steps>
 
 ### Extend translation schema
 
