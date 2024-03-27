@@ -3,11 +3,15 @@ title: CSS и стилизация
 description: Узнайте, как стилизовать ваш сайт Starlight с помощью CSS-файлов или интегрировать с Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Вы можете стилизовать ваш сайт Starlight с помощью CSS-файлов или использовать плагин Starlight Tailwind.
 
 ## Ваши CSS стили
 
 Настройте стили, применяемые к вашему сайту Starlight, предоставив дополнительные CSS-файлы для изменения или расширения стандартных стилей Starlight.
+
+<Steps>
 
 1. Добавьте CSS-файл в ваш каталог `src/`.
    Например, вы можете установить большую ширину колонки по умолчанию и бóльший размер текста для заголовков страниц:
@@ -40,6 +44,8 @@ description: Узнайте, как стилизовать ваш сайт Starl
    });
    ```
 
+</Steps>
+
 Вы можете увидеть все кастомные свойства CSS, используемые Starlight, которые вы можете установить для настройки вашего сайта, в [файле `props.css` на GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## Tailwind CSS
@@ -54,8 +60,6 @@ Starlight предоставляет дополнительный плагин T
 - Отключает стили сброса [Preflight](https://tailwindcss.ru/docs/preflight/) Tailwind при выборочном восстановлении основных частей Preflight, необходимых для служебных `border`-классов Tailwind.
 
 ### Создание нового проекта с Tailwind
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Создайте новый проект Starlight с предварительно настроенным Tailwind CSS, используя `create astro`:
 
@@ -86,6 +90,8 @@ yarn create astro --template starlight/tailwind
 ### Добавление Tailwind в существующий проект
 
 Если у вас уже есть сайт на Starlight и вы хотите добавить Tailwind CSS, следуйте этим шагам.
+
+<Steps>
 
 1.  Добавьте интеграцию Tailwind от Astro:
 
@@ -185,7 +191,7 @@ yarn create astro --template starlight/tailwind
 
     ```js ins={2,7}
     // tailwind.config.mjs
-    const starlightPlugin = require('@astrojs/starlight-tailwind');
+    import starlightPlugin from '@astrojs/starlight-tailwind';
 
     /** @type {import('tailwindcss').Config} */
     module.exports = {
@@ -193,6 +199,8 @@ yarn create astro --template starlight/tailwind
     	plugins: [starlightPlugin()],
     };
     ```
+
+</Steps>
 
 ### Стилизация Starlight с использованием Tailwind
 
@@ -207,8 +215,8 @@ Starlight будет использовать значения из вашей [
 
 ```js {12,14,18,20}
 // tailwind.config.mjs
-const starlightPlugin = require('@astrojs/starlight-tailwind');
-const colors = require('tailwindcss/colors');
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

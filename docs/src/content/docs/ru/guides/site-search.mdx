@@ -3,7 +3,7 @@ title: Поиск по сайту
 description: Узнайте о встроенных в Starlight функциях поиска по сайту и о том, как их настроить.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 По умолчанию сайты Starlight включают полнотекстовый поиск на основе [Pagefind](https://pagefind.app/), который является быстрым и не требующим большой пропускной способности инструментом поиска для статических сайтов.
 
@@ -13,7 +13,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### Исключение страницы
 
-Чтобы исключить страницу из поискового индекса, добавьте [`pagefind: false`](/reference/frontmatter/#pagefind) в метаданных страницы:
+Чтобы исключить страницу из поискового индекса, добавьте [`pagefind: false`](/ru/reference/frontmatter/#pagefind) в метаданных страницы:
 
 ```md title="src/content/docs/not-indexed.md" ins={3}
 ---
@@ -48,6 +48,8 @@ title: Частично проиндексированная страница
 
 Если у вас есть доступ к [программе DocSearch от Algolia](https://docsearch.algolia.com/) и вы хотите использовать её вместо Pagefind, вы можете воспользоваться официальным плагином Starlight DocSearch.
 
+<Steps>
+
 1. Установите `@astrojs/starlight-docsearch`:
 
    <Tabs>
@@ -78,7 +80,7 @@ title: Частично проиндексированная страница
 
    </Tabs>
 
-2. Добавьте DocSearch в конфигурацию Starlight [`plugins`](/reference/configuration/#plugins) в `astro.config.mjs` и передайте ему ваши Algolia `appId`, `apiKey` и `indexName`:
+2. Добавьте DocSearch в конфигурацию Starlight [`plugins`](/ru/reference/configuration/#plugins) в `astro.config.mjs` и передайте ему ваши Algolia `appId`, `apiKey` и `indexName`:
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -102,12 +104,16 @@ title: Частично проиндексированная страница
    });
    ```
 
+</Steps>
+
 С этой обновлённой конфигурацией строка поиска на вашем сайте теперь будет открывать модальное окно Algolia вместо стандартного модального окна поиска.
 
 #### Перевод пользовательского интерфейса DocSearch
 
 По умолчанию DocSearch предоставляет только английские строки пользовательского интерфейса.
 Добавьте перевод модального пользовательского интерфейса для вашего языка, используя встроенную [систему интернационализации](/ru/guides/i18n/#translate-starlights-ui) Starlight.
+
+<Steps>
 
 1. Расширьте определение коллекции контента Starlight `i18n` схемой DocSearch в файле `src/content/config.ts`:
 
@@ -162,3 +168,5 @@ title: Частично проиндексированная страница
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>

@@ -60,7 +60,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**тип:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
+**тип:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
 **по умолчанию:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Настройте оглавление, отображаемое справа на каждой странице. По умолчанию в оглавление будут включены заголовки `<h2>` и `<h3>`.
@@ -225,18 +225,23 @@ export default defineConfig({
 			// Устанавливаем русский язык в качестве языка по умолчанию для этого сайта.
 			defaultLocale: 'ru',
 			locales: {
-				// Русская документация в `src/content/docs/ru/`
-				ru: {
-					label: 'Русский',
-				},
 				// Английская документация в `src/content/docs/en/`
 				en: {
 					label: 'English',
 				},
-				// Арабская документация в `src/content/docs/ar/`
+				// Китайская документация в `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Арабская документация `src/content/docs/ar/`
 				ar: {
 					label: 'العربية',
 					dir: 'rtl',
+				},
+				// Русская документация в `src/content/docs/ru/`
+				ru: {
+					label: 'Русский',
 				},
 			},
 		}),
@@ -266,7 +271,7 @@ interface LocaleConfig {
 
 **тип:** `string`
 
-Метка BCP-47 для этого языка, например, `"en"`, `"ar"` или `"ru"`. Если не задано, то по умолчанию будет использоваться имя каталога языка. Языковые теги с региональными подтегами (например, `"pt-BR"` или `"en-US"`) будут использовать встроенные переводы пользовательского интерфейса для своего базового языка, если не будут найдены переводы для конкретного региона.
+Метка BCP-47 для этого языка, например, `"en"`, `"zh-CN"` или `"ru"`. Если не задано, то по умолчанию будет использоваться имя каталога языка. Языковые теги с региональными подтегами (например, `"pt-BR"` или `"en-US"`) будут использовать встроенные переводы пользовательского интерфейса для своего базового языка, если не будут найдены переводы для конкретного региона.
 
 ##### `dir`
 
@@ -346,7 +351,7 @@ starlight({
 
 ### `expressiveCode`
 
-**тип:** `StarlightExpressiveCodeOptions | boolean`
+**тип:** `StarlightExpressiveCodeOptions | boolean`  
 **по умолчанию:** `true`
 
 Starlight использует [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) для визуализации блоков кода и добавляет поддержку выделения частей примеров кода, добавления имён файлов к блокам кода и многое другое.
@@ -375,7 +380,7 @@ starlight({
 
 #### `themes`
 
-**тип:** `Array<string | ThemeObject | ExpressiveCodeTheme>`
+**тип:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **по умолчанию:** `['starlight-dark', 'starlight-light']`
 
 Установите темы, используемые для оформления блоков кода.
@@ -388,7 +393,7 @@ starlight({
 
 #### `useStarlightDarkModeSwitch`
 
-**тип:** `boolean`
+**тип:** `boolean`  
 **по умолчанию:** `true`
 
 Если установлено значение true, блоки кода автоматически переключаются между светлой и тёмной темами при изменении темы сайта.
@@ -400,10 +405,9 @@ starlight({
 
 #### `useStarlightUiThemeColors`
 
-**тип:** `boolean`
+**тип:** `boolean`  
 **по умолчанию:** `true` если `themes` не задано, иначе — `false`
 
-When `false`, the colors provided by the active syntax highlighting theme are used for these elements.
 Если `true`, то для цветов элементов пользовательского интерфейса кодового блока (фонов, кнопок, теней и т. д.) используются CSS-переменные Starlight, соответствующие [цветовой теме сайта](/ru/guides/css-and-tailwind/#темизация).
 Если `false`, то для этих элементов используются цвета, предоставляемые активной темой подсветки синтаксиса.
 
@@ -413,7 +417,7 @@ When `false`, the colors provided by the active syntax highlighting theme are us
 
 ### `pagefind`
 
-**тип:** `boolean`
+**тип:** `boolean`  
 **по умолчанию:** `true`
 
 Определите, включен ли в Starlight поставщик поиска по сайту по умолчанию [Pagefind](https://pagefind.app/).
@@ -456,7 +460,7 @@ interface HeadConfig {
 
 ### `lastUpdated`
 
-**тип:** `boolean`
+**тип:** `boolean`  
 **по умолчанию:** `false`
 
 Укажите, показывать ли в нижнем колонтитуле дату последнего обновления страницы.
@@ -465,7 +469,7 @@ interface HeadConfig {
 
 ### `pagination`
 
-**тип:** `boolean`
+**тип:** `boolean`  
 **по умолчанию:** `true`
 
 Определите, должен ли нижний колонтитул включать ссылки на предыдущую и следующую страницы.
@@ -474,7 +478,7 @@ interface HeadConfig {
 
 ### `favicon`
 
-**тип:** `string`
+**тип:** `string`  
 **по умолчанию:** `'/favicon.svg'`
 
 Задайте путь к фавиконке по умолчанию для вашего сайта, который должен находиться в директории `public/` и быть валидным (`.ico`, `.gif`, `.jpg`, `.png` или `.svg`) файлом иконок.
@@ -506,7 +510,7 @@ starlight({
 
 ### `titleDelimiter`
 
-**тип:** `string`
+**тип:** `string`  
 **по умолчанию:** `'|'`
 
 Устанавливает разделитель между заголовком страницы и заголовком сайта в теге `<title>`, который отображается на вкладках браузера.
@@ -516,7 +520,7 @@ starlight({
 
 ### `disable404Route`
 
-**тип:** `boolean`
+**тип:** `boolean`  
 **по умолчанию:** `false`
 
 Отключает внедрение стандартной [страницы 404](https://docs.astro.build/ru/core-concepts/astro-pages/#custom-404-error-page) Starlight. Чтобы использовать в своем проекте собственный маршрут `src/pages/404.astro`, установите для этого параметра значение `true`.
@@ -539,12 +543,12 @@ starlight({
 
 ### `plugins`
 
-**тип:** [`StarlightPlugin[]`](/ru/reference/plugins/#quick-api-reference)
+**тип:** [`StarlightPlugin[]`](/ru/reference/plugins/#краткая-справка-по-api)
 
 Расширьте Starlight с помощью пользовательских плагинов.
 Плагины вносят изменения в ваш проект, чтобы изменить или добавить функции Starlight.
 
-Посетите [витрину плагинов](/ru/resources/plugins/#plugins), чтобы увидеть список доступных плагинов.
+Посетите [витрину плагинов](/ru/resources/plugins/#плагины), чтобы увидеть список доступных плагинов.
 
 ```js
 starlight({
