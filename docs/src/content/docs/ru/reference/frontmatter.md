@@ -417,9 +417,9 @@ export const collections = {
   docs: defineCollection({
     schema: docsSchema({
       extend: z.object({
-        // Делаем встроенное поле обязательным.
+        // Делаем встроенное поле обязательным
         description: z.string(),
-        // Добавляем новое поле в схему.
+        // Добавляем новое поле в схему
         category: z.enum(['tutorial', 'guide', 'reference']).optional(),
       }),
     }),
@@ -427,7 +427,7 @@ export const collections = {
 };
 ```
 
-Чтобы воспользоваться преимуществами [хэлпера `image()`](https://docs.astro.build/ru/guides/images/#images-in-content-collections), используйте функцию, которая возвращает расширение вашей схемы:
+Чтобы воспользоваться преимуществами [хелпера `image()`](https://docs.astro.build/ru/guides/images/#images-in-content-collections), используйте функцию, которая возвращает расширение вашей схемы:
 
 ```ts {8-13}
 // src/content/config.ts
@@ -439,7 +439,7 @@ export const collections = {
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({
-          // Добавьте поле, которое должно разрешаться в локальное изображение.
+          // Добавляем поле, которое должно разрешаться в локальное изображение
           cover: image(),
         });
       },
