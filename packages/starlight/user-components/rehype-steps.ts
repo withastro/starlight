@@ -52,7 +52,7 @@ class StepsError extends AstroError {
 	constructor(message: string) {
 		super(
 			message,
-			'To learn more about the `<Steps>` component, see https://starlight.astro.build/guides/components/#steps'
+			'To learn more about the `<Steps>` component, see https://starlight.astro.build/guides/components/#steps | If your using `mdx` you may have to do indentation to fix this error.'
 		);
 	}
 }
