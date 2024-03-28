@@ -1,20 +1,47 @@
 ---
 import Icon from './Icon.astro';
+import Badge from '../components/Badge.astro';
+import { BadgeConfigSchema, type BadgeUserConfig } from '../schemas/badge';
+import { errorMap } from '../utils/error-map';
 import type { HTMLAttributes } from 'astro/types';
+import { AstroError } from 'astro/errors';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
+	badge?: BadgeUserConfig;
 	description?: string;
 }
 
-const { title, description, ...attributes } = Astro.props;
+const { title, badge, description, ...attributes } = Astro.props;
+
+const badgeData = BadgeConfigSchema().safeParse(badge, { errorMap });
+
+if (!badgeData.success) {
+	throw new AstroError(
+		'Invalid `badge` prop passed to `<LinkCard>` for route `' +
+			Astro.url.pathname +
+			'`.\n\n' +
+			badgeData.error.issues.map((i) => i.message).join('\n'),
+		'Find out more at https://starlight.astro.build/reference/frontmatter/#badge'
+	);
+}
 ---
 
 <div class="sl-link-card">
 	<span class="sl-flex stack">
-		<a {...attributes}>
-			<span class="title" set:html={title} />
-		</a>
+		<span>
+			<a {...attributes}>
+				<span class="title" set:html={title} />
+			</a>
+			{
+				badge && (
+					<>
+						{' '}
+						<Badge {...badgeData.data} />
+					</>
+				)
+			}
+		</span>
 		{description && <span class="description" set:html={description} />}
 	</span>
 	<Icon name="right-arrow" size="1.333em" class="icon rtl:flip" />
