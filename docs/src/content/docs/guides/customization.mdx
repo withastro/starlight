@@ -130,7 +130,7 @@ You can customize — or even disable — the table of contents globally in the 
 
 By default, `<h2>` and `<h3>` headings are included in the table of contents. Change which headings levels to include site-wide using the `minHeadingLevel` and `maxHeadingLevel` options in your [global `tableOfContents`](/reference/configuration/#tableofcontents). Override these defaults on an individual page by adding the corresponding [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents) properties:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4-6}
@@ -164,7 +164,7 @@ defineConfig({
 
 Disable the table of contents entirely by setting the `tableOfContents` option to `false`:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4}
