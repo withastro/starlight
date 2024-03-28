@@ -203,6 +203,15 @@ export function ComponentConfigSchema() {
 				.default('@astrojs/starlight/components/FallbackContentNotice.astro'),
 
 			/**
+			 * Notice displayed to users on draft pages. Only used in development mode.
+			 *
+			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro `DraftContentNotice` default implementation}
+			 */
+			DraftContentNotice: z
+				.string()
+				.default('@astrojs/starlight/components/DraftContentNotice.astro'),
+
+			/**
 			 * Component rendered at the top of the page when `hero` is set in frontmatter. The default
 			 * implementation shows a large title, tagline, and call-to-action links alongside an optional image.
 			 *

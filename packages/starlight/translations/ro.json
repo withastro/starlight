@@ -18,6 +18,7 @@
   "page.lastUpdated": "Ultima actualizare:",
   "page.previousLink": "Pagina precendentă",
   "page.nextLink": "Pagina următoare",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Pagina nu a fost găsită. Verifică adresa URL sau încercă să folosești bara de căutare.",
   "aside.note": "Mențiune",
   "aside.tip": "Sfat",

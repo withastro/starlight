@@ -44,6 +44,10 @@ declare module 'virtual:starlight/components/FallbackContentNotice' {
 	const FallbackContentNotice: typeof import('./components/FallbackContentNotice.astro').default;
 	export default FallbackContentNotice;
 }
+declare module 'virtual:starlight/components/DraftContentNotice' {
+	const DraftContentNotice: typeof import('./components/DraftContentNotice.astro').default;
+	export default DraftContentNotice;
+}
 
 declare module 'virtual:starlight/components/Footer' {
 	const Footer: typeof import('./components/Footer.astro').default;

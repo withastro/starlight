@@ -18,6 +18,7 @@
   "page.lastUpdated": "Останнє оновлення:",
   "page.previousLink": "Назад",
   "page.nextLink": "Далі",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Сторінку не знайдено. Перевірте URL або спробуйте скористатися пошуком.",
   "aside.note": "Заувага",
   "aside.tip": "Порада",

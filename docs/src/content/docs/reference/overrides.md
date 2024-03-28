@@ -332,6 +332,12 @@ Component containing the `<h1>` element for the current page.
 
 Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default implementation.
 
+#### `DraftContentNotice`
+
+**Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Notice displayed to users during development when the current page is marked as a draft.
+
 #### `FallbackContentNotice`
 
 **Default component:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)

@@ -18,6 +18,7 @@
   "page.lastUpdated": "最終更新日:",
   "page.previousLink": "前へ",
   "page.nextLink": "次へ",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "ページが見つかりません。 URL を確認するか、検索バーを使用してみてください。",
   "aside.note": "ノート",
   "aside.tip": "ヒント",

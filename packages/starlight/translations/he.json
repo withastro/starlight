@@ -18,6 +18,7 @@
   "page.lastUpdated": "עדכון אחרון:",
   "page.previousLink": "הקודם",
   "page.nextLink": "הבא",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "הדף לא נמצא. אנא בדקו את כתובת האתר או נסו להשתמש בסרגל החיפוש.",
   "aside.note": "Note",
   "aside.tip": "Tip",

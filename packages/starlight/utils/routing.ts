@@ -45,12 +45,15 @@ interface Path extends GetStaticPathsItem {
 const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
 
 /** All entries in the docs content collection. */
-const docs: StarlightDocsEntry[] = ((await getCollection('docs')) ?? []).map(
-	({ slug, ...entry }) => ({
-		...entry,
-		slug: normalizeIndexSlug(slug),
-	})
-);
+const docs: StarlightDocsEntry[] = (
+	(await getCollection('docs', ({ data }) => {
+		// In production, filter out drafts.
+		return import.meta.env.MODE !== 'production' || data.draft === false;
+	})) ?? []
+).map(({ slug, ...entry }) => ({
+	...entry,
+	slug: normalizeIndexSlug(slug),
+}));
 
 function getRoutes(): Route[] {
 	const routes: Route[] = docs.map((entry) => ({

@@ -103,6 +103,12 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 
 		/** Pagefind indexing for this page - set to false to disable. */
 		pagefind: z.boolean().default(true),
+
+		/**
+		 * Indicates that this page is a draft and will not be included in production builds.
+		 * Note that the page will still be available when running Astro in development mode.
+		 */
+		draft: z.boolean().default(false),
 	});
 /** Type of Starlight’s default frontmatter schema. */
 type DefaultSchema = ReturnType<typeof StarlightFrontmatterSchema>;
