@@ -1,0 +1,139 @@
+---
+title: Переопределение компонентов
+description: Узнайте, как переопределить встроенные компоненты Starlight, чтобы добавить пользовательские элементы в UI вашего сайта документации.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Пользовательский интерфейс и параметры конфигурации Starlight по умолчанию разработаны таким образом, чтобы быть гибкими и работать с разнообразным контентом. Большую часть внешнего вида Starlight по умолчанию можно настроить с помощью [CSS](/ru/guides/css-and-tailwind/) и [параметров конфигурации](/ru/guides/customization/).
+
+Если вам нужно больше, чем возможно из коробки, Starlight поддерживает создание собственных пользовательских компонентов для расширения или переопределения (полной замены) компонентов по умолчанию.
+
+## Когда переопределять
+
+Переопределение стандартных компонентов Starlight может быть полезно, когда:
+
+- Вы хотите изменить внешний вид UI Starlight, если это невозможно сделать с использованием [пользовательских CSS](/ru/guides/css-and-tailwind/).
+- Вы хотите изменить поведение UI Starlight.
+- Вы хотите добавить какой-то дополнительный UI наряду с существующим UI Starlight.
+
+## Как выполнить переопределение
+
+<Steps>
+
+1. Выберите компонент Starlight, который вы хотите переопределить.
+   Вы можете найти полный список компонентов в [Справочнике по переопределениям](/ru/reference/overrides/).
+
+   В этом примере будет переопределён компонент [`SocialIcons`](/ru/reference/overrides/#socialicons) в навигационной панели страницы.
+
+2. Создайте компонент Astro для замены компонента Starlight.
+   В этом примере отображается ссылка для связи.
+
+   ```astro
+   ---
+   // src/components/EmailLink.astro
+   import type { Props } from '@astrojs/starlight/props';
+   ---
+
+   <a href="mailto:houston@example.com">
+     Связаться с нами по электронной почте
+   </a>
+   ```
+
+3. Сообщите Starlight, что нужно использовать ваш компонент, указав его в параметре конфигурации [`components`](/ru/reference/configuration/#components) в `astro.config.mjs`:
+
+   ```js {9-12}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+     integrations: [
+       starlight({
+         title: 'Моя документация, с переопределением компонентов',
+         components: {
+           // Переопределение компонента `SocialIcons`.
+           SocialIcons: './src/components/EmailLink.astro',
+         },
+       }),
+     ],
+   });
+   ```
+
+</Steps>
+
+## Переиспользование встроенного компонента
+
+Вы можете работать со стандартными UI компонентами Starlight так же, как и со своими собственными: импортировать их и использовать в своих компонентах. Это позволяет вам сохранить весь UI Starlight в рамках вашего дизайна, добавляя свой UI рядом с ними.
+
+Пример ниже показывает компонент, который отображает ссылку на электронную почту наряду со стандартным компонентом `SocialIcons`:
+
+```astro {4,8}
+---
+// src/components/EmailLink.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+---
+
+<a href="mailto:houston@example.com"> Связаться с нами по электронной почте </a>
+<Default {...Astro.props}><slot /></Default>
+```
+
+При использовании встроенного компонента внутри вашего компонента:
+
+- Передайте в него `Astro.props`. Это гарантирует, что он получит все данные, необходимые для отображения.
+- Добавьте [`<slot />`](https://docs.astro.build/ru/core-concepts/astro-components/#slots) внутрь компонента по умолчанию. Это гарантирует, что если компоненту передаются какие-либо дочерние элементы, Astro знает, где их отображать.
+
+## Использование данных страницы
+
+При переопределении компонента Starlight ваша реализация получает стандартный объект `Astro.props`, содержащий все данные для текущей страницы.
+Это позволяет вам использовать эти значения для управления тем, как ваш компонент будет отображаться.
+
+Например, вы можете прочитать метаданные страницы как `Astro.props.entry.data`. В следующем примере компонент [`PageTitle`](/ru/reference/overrides/#pagetitle) использует этот объект для отображения текущего заголовка страницы:
+
+```astro {5} "{title}"
+---
+// src/components/Title.astro
+import type { Props } from '@astrojs/starlight/props';
+
+const { title } = Astro.props.entry.data;
+---
+
+<h1 id="_top">{title}</h1>
+
+<style>
+  h1 {
+    font-family: 'Comic Sans';
+  }
+</style>
+```
+
+Узнайте больше обо всех доступных свойствах в [Справочнике по переопределениям](/ru/reference/overrides/#параметры-компонентов).
+
+### Переопределение только на определённых страницах
+
+Переопределение компонентов применяется ко всем страницам. Тем не менее, вы можете осуществлять условную отрисовку, используя значения из `Astro.props`, чтобы определить, когда показывать ваш UI, когда показывать UI от Starlight, или даже когда показывать что-то совершенно другое.
+
+В следующем примере компонент, переопределяющий [`Footer`](/ru/reference/overrides/#footer-1) от Starlight, отображает надпись «Создано с помощью Starlight 🌟» только на главной странице, а на всех остальных страницах показывает футер по умолчанию:
+
+```astro
+---
+// src/components/ConditionalFooter.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const isHomepage = Astro.props.slug === '';
+---
+
+{
+  isHomepage ? (
+    <footer>Создано с помощью Starlight 🌟</footer>
+  ) : (
+    <Default {...Astro.props}>
+      <slot />
+    </Default>
+  )
+}
+```
+
+Узнайте больше об условной отрисовке в руководстве [Синтаксис Astro](https://docs.astro.build/ru/core-concepts/astro-syntax/#динамический-html).
