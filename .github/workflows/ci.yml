@@ -30,6 +30,23 @@ jobs:
       - name: Test packages
         run: pnpm -r test:coverage
 
+  lint:
+    name: Lint code
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Generate types
+        working-directory: ./docs
+        run: pnpm astro sync
+      - name: Run linter
+        run: pnpm lint
+
   pa11y:
     name: Check for accessibility issues
     runs-on: ubuntu-20.04

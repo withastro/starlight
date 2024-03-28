@@ -29,7 +29,7 @@ function mockDoc(
 ): StarlightDocsEntry {
 	return {
 		id,
-		slug: id.replace(/\.[^\.]+$/, '').replace(/\/index$/, ''),
+		slug: id.replace(/\.[^.]+$/, '').replace(/\/index$/, ''),
 		body,
 		collection: 'docs',
 		data: frontmatterSchema.parse(data),
