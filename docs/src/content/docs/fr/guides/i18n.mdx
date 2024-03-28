@@ -3,11 +3,13 @@ title: Internationalisation (i18n)
 description: Apprenez à configurer votre site Starlight pour qu'il prenne en charge plusieurs langues.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight offre une prise en charge intégrée des sites multilingues, y compris le routage, le contenu de repli et la prise en charge complète des langues de droite à gauche (RTL).
 
 ## Configurer i18n
+
+<Steps>
 
 1. Indiquez à Starlight les langues que vous prenez en charge en passant [`locales`](/fr/reference/configuration/#locales) et [`defaultLocale`](/fr/reference/configuration/#defaultlocale) à l'intégration Starlight :
 
@@ -62,6 +64,8 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
 3. Vous pouvez maintenant ajouter des fichiers de contenu dans vos répertoires de langues. Utilisez le même nom de fichier pour associer les pages d'une langue à l'autre et profiter de l'ensemble des fonctionnalités i18n de Starlight, y compris le contenu de repli, les avis de traduction, etc.
 
    Par exemple, créez `ar/index.md` et `en/index.md` pour représenter la page d'accueil en arabe et en anglais respectivement.
+
+</Steps>
 
 ### Utiliser une racine locale
 
@@ -142,12 +146,15 @@ Si une traduction n'est pas encore disponible pour une langue, Starlight affiche
 ## Traduire l'interface utilisateur de Starlight
 
 import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de traduire les chaînes de l'interface utilisateur par défaut (par exemple, l'en-tête "Sur cette page" dans la table des matières) afin que vos lecteurs puissent découvrir votre site entièrement dans la langue sélectionnée.
 
 Les textes de l'interface utilisateur traduits en <LanguagesList /> sont disponibles prêts à l'emploi, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de contenus `i18n`.
+
+<Steps>
 
 1. Configurez la collection de contenus `i18n` dans `src/content/config.ts` si elle n'est pas déjà configurée :
 
@@ -179,35 +186,7 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
 
    Voici les valeurs anglaises par défaut des chaînes de caractères existantes avec lesquelles Starlight est livré :
 
-   ```json
-   {
-   	"skipLink.label": "Skip to content",
-   	"search.label": "Search",
-   	"search.shortcutLabel": "(Press / to Search)",
-   	"search.cancelLabel": "Cancel",
-   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-   	"themeSelect.accessibleLabel": "Select theme",
-   	"themeSelect.dark": "Dark",
-   	"themeSelect.light": "Light",
-   	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Select language",
-   	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "Main",
-   	"tableOfContents.onThisPage": "On this page",
-   	"tableOfContents.overview": "Overview",
-   	"i18n.untranslatedContent": "This content is not available in your language yet.",
-   	"page.editLink": "Edit page",
-   	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Previous",
-   	"page.nextLink": "Next",
-   	"404.text": "Page not found. Check the URL or try using the search bar.",
-   	"aside.note": "Note",
-   	"aside.tip": "Tip",
-   	"aside.caution": "Caution",
-   	"aside.danger": "Danger",
-   	"fileTree.directory": "Directory"
-   }
-   ```
+   <UIStringsList />
 
    Les blocs de code de Starlight fonctionnent grâce à la librairie [Expressive Code](https://github.com/expressive-code/expressive-code).
    Vous pouvez définir des traductions pour les textes de l'interface utilisateur utilisés dans le même fichier JSON en utilisant les clés `expressiveCode` :
@@ -237,6 +216,8 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+ </Steps>
 
 ### Étendre le schéma de traduction
 
