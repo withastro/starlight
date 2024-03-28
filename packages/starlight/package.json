@@ -4,7 +4,10 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:e2e": "UNIT_TESTS=false E2E_TESTS=true vitest",
+    "test:all": "E2E_TESTS=true vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:all": "E2E_TESTS=true vitest --run --coverage"
   },
   "keywords": [
     "docs",
@@ -167,7 +170,9 @@
       "default": "./expressive-code.mjs"
     },
     "./index.astro": "./index.astro",
+    "./indexSSR.astro": "./indexSSR.astro",
     "./404.astro": "./404.astro",
+    "./404SSR.astro": "./404SSR.astro",
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
@@ -175,9 +180,11 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
+    "@astrojs/node": "^7.0.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.3.1",
     "astro": "^4.3.5",
+    "cheerio": "1.0.0-rc.12",
     "vitest": "^1.3.1"
   },
   "dependencies": {

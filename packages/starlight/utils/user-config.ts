@@ -195,7 +195,7 @@ const UserConfigSchema = z.object({
 	 * Set to `false` to disable indexing your site with Pagefind.
 	 * This will also hide the default search UI if in use.
 	 */
-	pagefind: z.boolean().default(true),
+	pagefind: z.boolean().optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
@@ -208,10 +208,23 @@ const UserConfigSchema = z.object({
 
 	/** Disable Starlight's default 404 page. */
 	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
+
+	/**
+	 * Define whether Starlight pages should be prerendered or not.
+	 * Defaults to Astro's default behavior, prerender when "hybrid" and
+	 * not prerendering when "server".
+	 * Does nothing when Astro's output mode is undefined or set to "static".
+	 */
+	prerender: z.boolean().default(true),
 });
 
-export const StarlightConfigSchema = UserConfigSchema.strict().transform(
-	({ locales, defaultLocale, ...config }, ctx) => {
+export const StarlightConfigSchema = UserConfigSchema.strict()
+	.transform((config) => ({
+		...config,
+		// Pagefind only defaults to true if prerender is also true.
+		pagefind: config.pagefind ?? config.prerender,
+	}))
+	.transform(({ locales, defaultLocale, ...config }, ctx) => {
 		if (locales !== undefined && Object.keys(locales).length > 1) {
 			// This is a multilingual site (more than one locale configured).
 			// Make sure we can find the default locale and if not, help the user set it.
@@ -257,8 +270,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 			},
 			locales: undefined,
 		} as const;
-	}
-);
+	});
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
 export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;

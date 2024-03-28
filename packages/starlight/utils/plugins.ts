@@ -2,6 +2,7 @@ import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
+import { AstroError } from 'astro/errors';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -21,6 +22,21 @@ export async function runPlugins(
 		userConfig,
 		'Invalid config passed to starlight integration'
 	);
+
+	if (!starlightConfig.prerender && context.config.output === 'static') {
+		throw new AstroError(
+			'Disabling prerendering is not supported when using the `static` output mode.',
+			'Set `prerender: true` in your Starlight config to enable prerendering\n' +
+			'or add an SSR adapter and, in your Astro config, set your `output` to either "hybrid" or "server".'
+		);
+	}
+
+	if (!starlightConfig.prerender && starlightConfig.pagefind) {
+		throw new AstroError(
+			'Pagefind search is not support with prerendering disabled.',
+			'On your Starlight config, set `prerender: true` to enable prerendering or set `pagefind: false` to disable Pagefind.'
+		);
+	}
 
 	// Validate the user-provided plugins configuration.
 	const pluginsConfig = parseWithFriendlyErrors(

@@ -39,20 +39,23 @@ export default function StarlightIntegration({
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
+				injectRoute({
+					pattern: '[...slug]',
+					entrypoint: starlightConfig.prerender
+						? '@astrojs/starlight/index.astro'
+						: '@astrojs/starlight/indexSSR.astro',
+					prerender: starlightConfig.prerender,
+				});
+
 				if (!userConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
-						entrypoint: '@astrojs/starlight/404.astro',
-						// Ensure page is pre-rendered even when project is on server output mode
-						prerender: true,
+						entrypoint: starlightConfig.prerender
+							? '@astrojs/starlight/404.astro'
+							: '@astrojs/starlight/404SSR.astro',
+						prerender: starlightConfig.prerender,
 					});
 				}
-				injectRoute({
-					pattern: '[...slug]',
-					entrypoint: '@astrojs/starlight/index.astro',
-					// Ensure page is pre-rendered even when project is on server output mode
-					prerender: true,
-				});
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
@@ -65,10 +68,11 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx());
 				}
+
 				updateConfig({
 					integrations,
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
+						plugins: [vitePluginStarlightUserConfig(command, starlightConfig, config)],
 					},
 					markdown: {
 						remarkPlugins: [
