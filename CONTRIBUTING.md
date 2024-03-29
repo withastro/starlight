@@ -272,9 +272,9 @@ If you’ve built a documentation site with Starlight, adding it to the showcase
    - The `thumbnail` attribute must be the filename of the screenshot you added in step 2.
 
    ```diff
-     <Card title="Example" href="https://example.com" thumbnail="example.com.png" />
+     <Card title="Example" href="https://example.net" thumbnail="example.net.png" />
      <Card title="Last Example" href="https://example.org" thumbnail="example.org.png" />
-   + <Card title="Example" href="https://example.com" thumbnail="example.com.png" />
+   + <Card title="New Example" href="https://example.com" thumbnail="example.com.png" />
    </FluidGrid>
    ```
 
