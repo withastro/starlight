@@ -53,14 +53,14 @@ Ce hook est appelé avec les options suivantes :
 
 **Type :** `StarlightUserConfig`
 
-Une copie en lecture seule de la [configuration de Starlight](/fr/reference/configuration) fournie par l'utilisateur.
+Une copie en lecture seule de la [configuration de Starlight](/fr/reference/configuration/) fournie par l'utilisateur.
 Cette configuration peut avoir été mise à jour par d'autres modules d'extension configurés avant celui en cours.
 
 #### `updateConfig`
 
 **Type :** `(newConfig: StarlightUserConfig) => void`
 
-Une fonction de rappel pour mettre à jour la [configuration de Starlight](/fr/reference/configuration) fournie par l'utilisateur.
+Une fonction de rappel pour mettre à jour la [configuration de Starlight](/fr/reference/configuration/) fournie par l'utilisateur.
 Spécifiez les clés de configuration de niveau racine que vous souhaitez remplacer.
 Pour mettre à jour des valeurs de configuration imbriquées, vous devez fournir l'objet imbriqué entier.
 

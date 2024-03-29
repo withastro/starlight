@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Vous pouvez redéfinir les composants intégrés à Starlight en spécifiant des chemins vers des composants de remplacement avec l'option de configuration [`components`](/fr/reference/configuration#components) de Starlight.
+Vous pouvez redéfinir les composants intégrés à Starlight en spécifiant des chemins vers des composants de remplacement avec l'option de configuration [`components`](/fr/reference/configuration/#components) de Starlight.
 Cette page répertorie tous les composants disponibles qui peuvent être redéfinis et fournit des liens vers leurs implémentations par défaut sur GitHub.
 
 Pour en savoir plus, consultez le [guide des redéfinitions de composants](/fr/guides/overriding-components/).
@@ -158,7 +158,7 @@ Composant utilisé à l'intérieur de l'élément `<head>` de chaque page.
 Inclut des balises importantes comme `<title>` et `<meta charset="utf-8">`.
 
 Redéfinissez ce composant en dernier recours.
-Préférez l'option [`head`](/fr/reference/configuration#head) de la configuration de Starlight si possible.
+Préférez l'option [`head`](/fr/reference/configuration/#head) de la configuration de Starlight si possible.
 
 #### `ThemeProvider`
 
@@ -243,7 +243,7 @@ Cela vous permet d'ajouter une interface de recherche alternative lorsque vous d
 **Composant par défaut :** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 Composant utilisé dans l'en-tête du site qui inclut des liens avec des icônes vers différents médias sociaux.
-L'implémentation par défaut utilise l'option [`social`](/fr/reference/configuration#social) de la configuration de Starlight pour afficher les icônes et les liens.
+L'implémentation par défaut utilise l'option [`social`](/fr/reference/configuration/#social) de la configuration de Starlight pour afficher les icônes et les liens.
 
 #### `ThemeSelect`
 
@@ -316,7 +316,7 @@ Ces composants sont utilisés dans la colonne principale de contenu de la page.
 **Composant par défaut :** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Composant représentant une bannière affichée en haut de chaque page.
-L'implémentation par défaut utilise la valeur du champ [`banner`](/fr/reference/frontmatter#banner) du frontmatter de la page pour décider de l'affichage ou non.
+L'implémentation par défaut utilise la valeur du champ [`banner`](/fr/reference/frontmatter/#banner) du frontmatter de la page pour décider de l'affichage ou non.
 
 #### `ContentPanel`
 
@@ -343,7 +343,7 @@ Utilisé uniquement sur les sites multilingues.
 
 **Composant par défaut :** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Composant affiché en haut de la page lorsque le champ [`hero`](/fr/reference/frontmatter#hero) est défini dans le frontmatter.
+Composant affiché en haut de la page lorsque le champ [`hero`](/fr/reference/frontmatter/#hero) est défini dans le frontmatter.
 L'implémentation par défaut affiche un large titre, une accroche et des liens d'appel à l'action à côté d'une image facultative.
 
 #### `MarkdownContent`

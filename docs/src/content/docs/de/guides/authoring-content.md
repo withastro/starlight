@@ -147,7 +147,7 @@ Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein un
 
 - Übersichtliche Navigation
 - Benutzer-konfigurierbares Farbthema
-- [i18n-Unterstützung](/de/guides/i18n)
+- [i18n-Unterstützung](/de/guides/i18n/)
 
 :::
 
@@ -161,7 +161,7 @@ Deine Benutzer können dank hilfreicher Starlight-Funktionen produktiver sein un
 
 - Übersichtliche Navigation
 - Benutzer-konfigurierbares Farbthema
-- [i18n-Unterstützung](/de/guides/i18n)
+- [i18n-Unterstützung](/de/guides/i18n/)
 
 :::
 ```

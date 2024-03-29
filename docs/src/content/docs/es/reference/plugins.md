@@ -54,14 +54,14 @@ Este hook es llamado con las siguientes opciones:
 
 **tipo:** `StarlightUserConfig`
 
-Una copia de lectura de la [configuración de Starlight](/es/reference/configuration) proporcionada por el usuario.
+Una copia de lectura de la [configuración de Starlight](/es/reference/configuration/) proporcionada por el usuario.
 Esta configuración puede haber sido actualizada por otros plugins configurados antes del actual.
 
 #### `updateConfig`
 
 **tipo:** `(newConfig: StarlightUserConfig) => void`
 
-Una función callback para actualizar la [configuración de Starlight](/es/reference/configuration).
+Una función callback para actualizar la [configuración de Starlight](/es/reference/configuration/).
 Proporciona las claves de configuración de nivel raíz que deseas sobreescribir.
 Para actualizar los valores de configuración anidados, debes proporcionar el objeto anidado completo.
 
