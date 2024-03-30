@@ -76,7 +76,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Tabs>
 ```
 
-Вышеуказанный код генерирует следующие вкладки на странице:
+Вышеуказанный код сформирует следующие вкладки:
 
 <Tabs>
 	<TabItem label="Звёзды" icon="star">
@@ -113,7 +113,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 <Card title="Зацени">Интересный контент, который вы хотите подсветить.</Card>
 
@@ -163,7 +163,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 import { LinkCard } from '@astrojs/starlight/components';
 
@@ -195,7 +195,7 @@ import { Aside } from '@astrojs/starlight/components';
 	Вставка предупреждения *с* пользовательским заголовком.
 </Aside>
 
-<Aside type="tip">
+<Aside type="tip" title="Совет">
 
 Другой контент также поддерживается.
 
@@ -208,7 +208,7 @@ import { Aside } from '@astrojs/starlight/components';
 <Aside type="danger">Никому не сообщайте свой пароль.</Aside>
 ````
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 import { Aside } from '@astrojs/starlight/components';
 
@@ -218,7 +218,7 @@ import { Aside } from '@astrojs/starlight/components';
 	Вставка предупреждения *с* пользовательским заголовком.
 </Aside>
 
-<Aside type="tip">
+<Aside type="tip" title="Совет">
 
 Другой контент также поддерживается.
 
@@ -251,7 +251,7 @@ export const highlights = ['файл', 'CMS'];
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 ```
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 import { Code } from '@astrojs/starlight/components';
 
@@ -273,7 +273,7 @@ import importedCode from '/src/env.d.ts?raw';
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
 ```
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 import importedCode from '/src/env.d.ts?raw';
 
@@ -311,7 +311,7 @@ import { FileTree } from '@astrojs/starlight/components';
 </FileTree>
 ```
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 import { FileTree } from '@astrojs/starlight/components';
 
@@ -352,7 +352,7 @@ import { Steps } from '@astrojs/starlight/components';
 </Steps>
 ````
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 import { Steps } from '@astrojs/starlight/components';
 
@@ -385,7 +385,7 @@ import { Icon } from '@astrojs/starlight/components';
 <Icon name="star" color="goldenrod" size="2rem" />
 ```
 
-Вышеуказанный код генерирует следующее на странице:
+Вышеуказанный код сформирует следующий HTML:
 
 <Icon name="star" color="goldenrod" size="2rem" />
 
