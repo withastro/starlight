@@ -36,7 +36,7 @@ import { Steps } from '@astrojs/starlight/components';
    ---
 
    <a href="mailto:houston@example.com">
-     Связаться с нами по электронной почте
+   	Связаться с нами по электронной почте
    </a>
    ```
 
@@ -48,15 +48,15 @@ import { Steps } from '@astrojs/starlight/components';
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Моя документация, с переопределением компонентов',
-         components: {
-           // Переопределение компонента `SocialIcons`.
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Моя документация, с переопределением компонентов',
+   			components: {
+   				// Переопределение компонента `SocialIcons`.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -102,9 +102,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -126,13 +126,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Создано с помощью Starlight 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Создано с помощью Starlight 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 
