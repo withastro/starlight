@@ -99,7 +99,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-utilisant-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -148,7 +148,7 @@ Tous les messages seront préfixés par le nom du module d'extension.
 export default {
   name: 'plugin-long-processus',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info("Démarrage d'un long processus…");
       // Un long processus…
     },
