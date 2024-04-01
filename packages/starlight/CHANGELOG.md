@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.21.3
+
+### Patch Changes
+
+- [#1622](https://github.com/withastro/starlight/pull/1622) [`3a074bad`](https://github.com/withastro/starlight/commit/3a074bad6c139bb9d6169d95ec79bc0fc1ecbdfe) Thanks [@SamuelLHuber](https://github.com/SamuelLHuber)! - Adds 1 new icon: `farcaster`
+
+- [#1616](https://github.com/withastro/starlight/pull/1616) [`a86f9b71`](https://github.com/withastro/starlight/commit/a86f9b71b795fb6dcd0409ca568e43d25525b964) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI strings
+
+- [#1698](https://github.com/withastro/starlight/pull/1698) [`67b892fd`](https://github.com/withastro/starlight/commit/67b892fd5290dfd0eeb95f4e60b6427bdc82110f) Thanks [@liruifengv](https://github.com/liruifengv)! - Adds 1 new icon: `starlight`
+
+- [#1687](https://github.com/withastro/starlight/pull/1687) [`6fa9ea7e`](https://github.com/withastro/starlight/commit/6fa9ea7e8d4d601cf8f49b61dafb1ebb557d1718) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Translates `fileTree.directory` UI string into Traditional Chinese.
+
 ## 0.21.2
 
 ### Patch Changes
