@@ -50,7 +50,7 @@ interface StarlightPlugin {
 
 **type:** `StarlightUserConfig`
 
-ユーザーが提供した[Starlightの設定](/ja/reference/configuration)の、読み取り専用の複製です。この設定は、現在のプラグインより前に置かれた他のプラグインによって更新されている可能性があります。
+ユーザーが提供した[Starlightの設定](/ja/reference/configuration/)の、読み取り専用の複製です。この設定は、現在のプラグインより前に置かれた他のプラグインによって更新されている可能性があります。
 
 #### `updateConfig`
 

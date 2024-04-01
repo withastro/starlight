@@ -53,14 +53,14 @@ This hook is called with the following options:
 
 **type:** `StarlightUserConfig`
 
-A read-only copy of the user-supplied [Starlight configuration](/reference/configuration).
+A read-only copy of the user-supplied [Starlight configuration](/reference/configuration/).
 This configuration may have been updated by other plugins configured before the current one.
 
 #### `updateConfig`
 
 **type:** `(newConfig: StarlightUserConfig) => void`
 
-A callback function to update the user-supplied [Starlight configuration](/reference/configuration).
+A callback function to update the user-supplied [Starlight configuration](/reference/configuration/).
 Provide the root-level configuration keys you want to override.
 To update nested configuration values, you must provide the entire nested object.
 

@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Starlight의 [`components`](/ko/reference/configuration#components) 구성 옵션에 대체 컴포넌트에 대한 경로를 제공하여 Starlight의 내장 컴포넌트를 재정의할 수 있습니다.
+Starlight의 [`components`](/ko/reference/configuration/#components) 구성 옵션에 대체 컴포넌트에 대한 경로를 제공하여 Starlight의 내장 컴포넌트를 재정의할 수 있습니다.
 이 페이지에는 재정의할 수 있는 모든 컴포넌트와 기본 구현에 대한 Github 링크가 나열되어 있습니다.
 
 [컴포넌트 재정의 가이드](/ko/guides/overriding-components/)에서 자세히 알아보세요.
@@ -158,7 +158,7 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 `<title>`, `<meta charset="utf-8">`를 포함하여 중요한 태그들이 포함합니다.
 
 최후의 수단으로 이 컴포넌트를 재정의합니다.
-가능하면 Starlight 구성의 [`head`](/ko/reference/configuration#head) 옵션을 사용하는 것이 좋습니다.
+가능하면 Starlight 구성의 [`head`](/ko/reference/configuration/#head) 옵션을 사용하는 것이 좋습니다.
 
 #### `ThemeProvider`
 
@@ -241,7 +241,7 @@ Starlight의 검색 UI를 렌더링하기 위해 사용되는 컴포넌트입니
 **기본 컴포넌트:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 사이트 헤더에 렌더링되며 소셜 아이콘 링크를 포함하는 컴포넌트입니다.
-기본적으로 아이콘과 링크를 렌더링하기 위해 Starlight 구성에서 [`social`](/ko/reference/configuration#social) 옵션을 사용합니다.
+기본적으로 아이콘과 링크를 렌더링하기 위해 Starlight 구성에서 [`social`](/ko/reference/configuration/#social) 옵션을 사용합니다.
 
 #### `ThemeSelect`
 
@@ -314,7 +314,7 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 **기본 컴포넌트:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 각 페이지 상단에 렌더링되는 배너 컴포넌트입니다.
-기본적으로 페이지의 [`banner`](/ko/reference/frontmatter#banner) 프론트매터 속성을 사용하여 렌더링 여부를 결정합니다.
+기본적으로 페이지의 [`banner`](/ko/reference/frontmatter/#banner) 프론트매터 속성을 사용하여 렌더링 여부를 결정합니다.
 
 #### `ContentPanel`
 
@@ -340,7 +340,7 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 
 **기본 컴포넌트:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-프론트매터에서 [`hero`](/ko/reference/frontmatter#hero)를 설정했을 때, 페이지 상단에 렌더링되는 컴포넌트입니다.
+프론트매터에서 [`hero`](/ko/reference/frontmatter/#hero)를 설정했을 때, 페이지 상단에 렌더링되는 컴포넌트입니다.
 기본적으로 큰 제목, 태그라인, 클릭 유도 문구 링크와 선택적 이미지를 표시합니다.
 
 #### `MarkdownContent`

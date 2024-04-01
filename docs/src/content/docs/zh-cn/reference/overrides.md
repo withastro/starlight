@@ -316,7 +316,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 **默认组件：** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 横幅 (Banner) 组件在每个页面的顶部渲染。
-默认实现使用页面的 [`banner`](/zh-cn/reference/frontmatter#banner) frontmatter 值来决定是否渲染。
+默认实现使用页面的 [`banner`](/zh-cn/reference/frontmatter/#banner) frontmatter 值来决定是否渲染。
 
 #### `ContentPanel`
 
@@ -343,7 +343,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 
 **默认组件：** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-当设置了 frontmatter 中的 [`hero`](/zh-cn/reference/frontmatter#hero) 时在页面顶部渲染的组件。
+当设置了 frontmatter 中的 [`hero`](/zh-cn/reference/frontmatter/#hero) 时在页面顶部渲染的组件。
 默认实现显示了一个大标题、标语、动作链接 (call-to-action links) 和可选的图片。
 
 #### `MarkdownContent`
