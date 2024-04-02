@@ -74,6 +74,10 @@ const { sublist, nested } = Astro.props;
 		padding-inline-start: var(--sl-sidebar-item-padding-inline);
 	}
 
+	ul ul li:has(> a[aria-current='page']) {
+		border-inline-start-color: var(--sl-color-text-accent);
+	}
+
 	.large {
 		font-size: var(--sl-text-lg);
 		font-weight: 600;
@@ -127,8 +131,7 @@ const { sublist, nested } = Astro.props;
 	[aria-current='page']:hover,
 	[aria-current='page']:focus {
 		font-weight: 600;
-		color: var(--sl-color-text-invert);
-		background-color: var(--sl-color-text-accent);
+		color: var(--sl-color-text-accent);
 	}
 
 	a > *:not(:last-child),
