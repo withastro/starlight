@@ -47,7 +47,6 @@ const { sublist, nested } = Astro.props;
 									</>
 								)}
 							</div>
-							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<Astro.self sublist={entry.entries} nested />
 					</details>
@@ -100,17 +99,6 @@ const { sublist, nested } = Astro.props;
 	summary::marker,
 	summary::-webkit-details-marker {
 		display: none;
-	}
-
-	.caret {
-		transition: transform 0.2s ease-in-out;
-		flex-shrink: 0;
-	}
-	:global([dir='rtl']) .caret {
-		transform: rotateZ(180deg);
-	}
-	[open] > summary .caret {
-		transform: rotateZ(90deg);
 	}
 
 	a {
