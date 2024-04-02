@@ -69,7 +69,7 @@ const { sublist, nested } = Astro.props;
 	}
 
 	ul ul li {
-		margin-inline-start: var(--sl-sidebar-item-padding-inline);
+		margin-inline-start: calc(var(--sl-sidebar-item-padding-inline) + 1ch / 2);
 		border-inline-start: 1px solid var(--sl-color-hairline-light);
 		padding-inline-start: var(--sl-sidebar-item-padding-inline);
 	}
@@ -88,7 +88,7 @@ const { sublist, nested } = Astro.props;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0.2em var(--sl-sidebar-item-padding-inline);
+		padding: 0.5em var(--sl-sidebar-item-padding-inline);
 		line-height: 1.4;
 		cursor: pointer;
 		user-select: none;
@@ -141,7 +141,7 @@ const { sublist, nested } = Astro.props;
 			margin-top: 0.5rem;
 		}
 		.large {
-			font-size: var(--sl-text-base);
+			font-size: var(--sl-text-sm);
 		}
 		a {
 			font-size: var(--sl-text-sm);
