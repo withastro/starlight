@@ -136,7 +136,7 @@ export function getStarlightEcConfigPreprocessor({
 				return `[data-theme='${theme.name}']`;
 			},
 			styleOverrides: {
-				borderRadius: '0px',
+				borderRadius: '0.5rem',
 				borderWidth: '1px',
 				codePaddingBlock: '0.75rem',
 				codePaddingInline: '1rem',
