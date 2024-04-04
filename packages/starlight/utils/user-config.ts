@@ -212,8 +212,8 @@ const UserConfigSchema = z.object({
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 	({ locales, defaultLocale, ...config }, ctx) => {
-		if (locales !== undefined && Object.keys(locales).length > 1) {
-			// This is a multilingual site (more than one locale configured).
+		const configuredLocalesCount = locales !== undefined ? Object.keys(locales).length : 0;
+		if (locales !== undefined && configuredLocalesCount >= 1) {
 			// Make sure we can find the default locale and if not, help the user set it.
 			// We treat the root locale as the default if present and no explicit default is set.
 			const defaultLocaleConfig = locales[defaultLocale || 'root'];
@@ -235,7 +235,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 			return {
 				...config,
 				/** Flag indicating if this site has multiple locales set up. */
-				isMultilingual: true,
+				isMultilingual: configuredLocalesCount > 1,
 				/** Full locale object for this site’s default language. */
 				defaultLocale: { ...defaultLocaleConfig, locale: defaultLocale },
 				locales,
