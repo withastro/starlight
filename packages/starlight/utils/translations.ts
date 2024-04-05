@@ -10,12 +10,13 @@ async function loadTranslations() {
 	const warn = console.warn;
 	console.warn = () => {};
 	try {
-		// Load the user’s i18n collection and ignore the error if it doesn’t exist.
-		userTranslations = Object.fromEntries(
-			// @ts-ignore — may be an error in projects without an i18n collection
-			(await getCollection('i18n')).map(({ id, data }) => [id, data] as const)
-		);
-	} catch {}
+		// Load the user’s i18n collection while ignoring type errors if it doesn’t exist.
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+		const i18n = await getCollection('i18n' as Parameters<typeof getCollection>[0]) as { id: string; data: i18nSchemaOutput }[];
+		userTranslations = Object.fromEntries(i18n.map(({ id, data }) => [id, data]));
+	} catch {
+		// Ignore runtime errors if the i18n collection doesn’t exist.
+	}
 	// Restore the original warn implementation.
 	console.warn = warn;
 	return userTranslations;

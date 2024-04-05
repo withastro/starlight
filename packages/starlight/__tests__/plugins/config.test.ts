@@ -52,7 +52,7 @@ test('receives the user provided configuration including the plugins list', asyn
 
 describe('validation', () => {
 	test('validates starlight configuration before running plugins', async () => {
-		expect(
+		await expect(
 			async () =>
 				await runPlugins(
 					// @ts-expect-error - invalid sidebar config.
@@ -64,7 +64,7 @@ describe('validation', () => {
 	});
 
 	test('validates plugins configuration before running them', async () => {
-		expect(
+		await expect(
 			async () =>
 				await runPlugins(
 					{ title: 'Test Docs' },
@@ -76,7 +76,7 @@ describe('validation', () => {
 	});
 
 	test('validates configuration updates from plugins do not update the `plugins` config key', async () => {
-		expect(
+		await expect(
 			async () =>
 				await runPlugins(
 					{ title: 'Test Docs' },
@@ -99,7 +99,7 @@ describe('validation', () => {
 	});
 
 	test('validates configuration updates from plugins', async () => {
-		expect(
+		await expect(
 			async () =>
 				await runPlugins(
 					{ title: 'Test Docs' },
