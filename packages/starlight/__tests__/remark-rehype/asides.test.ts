@@ -106,6 +106,35 @@ Nested tip.
 	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides.html');
 });
 
+test('nested asides with custom titles', async () => {
+	const res = await processor.render(`
+:::::caution[Caution with a custom title]
+Nested caution.
+
+::::note
+Nested note.
+
+:::tip[Tip with a custom title]
+Nested tip.
+:::
+
+::::
+
+:::::
+`);
+	const labels = [...res.code.matchAll(/aria-label="(?<label>[^"]+)"/g)].map(
+		(match) => match.groups?.label
+	);
+	expect(labels).toMatchInlineSnapshot(`
+		[
+		  "Caution with a custom title",
+		  "Note",
+		  "Tip with a custom title",
+		]
+	`);
+	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides-custom-titles.html');
+});
+
 describe('translated labels in French', () => {
 	test.each([
 		['note', 'Note'],

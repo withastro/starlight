@@ -198,7 +198,6 @@
     "rehype": "^13.0.1",
     "remark-directive": "^3.0.0",
     "unified": "^11.0.4",
-    "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.1"
   }

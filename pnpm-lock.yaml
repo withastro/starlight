@@ -175,9 +175,6 @@ importers:
       unified:
         specifier: ^11.0.4
         version: 11.0.4
-      unist-util-remove:
-        specifier: ^4.0.0
-        version: 4.0.0
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -6959,14 +6956,6 @@ packages:
     dependencies:
       '@types/unist': 3.0.0
       unist-util-visit: 5.0.0
-    dev: false
-
-  /unist-util-remove@4.0.0:
-    resolution: {integrity: sha512-b4gokeGId57UVRX/eVKej5gXqGlc9+trkORhFJpu9raqZkZhU0zm8Doi05+HaiBsMEIJowL+2WtQ5ItjsngPXg==}
-    dependencies:
-      '@types/unist': 3.0.0
-      unist-util-is: 6.0.0
-      unist-util-visit-parents: 6.0.1
     dev: false
 
   /unist-util-stringify-position@3.0.3:
