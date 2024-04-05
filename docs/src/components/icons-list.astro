@@ -2,7 +2,9 @@
 import { Icon } from '@astrojs/starlight/components';
 import { Icons } from '../../../packages/starlight/components/Icons';
 
-const icons = Object.keys(Icons) as (keyof typeof Icons)[];
+const icons = [...(Object.keys(Icons) as (keyof typeof Icons)[])].sort((a, b) =>
+	a.localeCompare(b, 'en')
+);
 ---
 
 <div class="icons-grid">
