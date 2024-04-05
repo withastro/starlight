@@ -3,7 +3,7 @@ title: Recherche
 description: Découvrez les fonctionnalités de recherche intégrées à Starlight et comment les personnaliser.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Par défaut, les sites utilisant Starlight incluent une recherche plein texte utilisant [Pagefind](https://pagefind.app/), un outil de recherche rapide et à faible bande passante pour sites statiques.
 
@@ -47,6 +47,8 @@ Ce texte sera caché de la recherche.
 ### Algolia DocSearch
 
 Si vous avez accès au [programme DocSearch d'Algolia](https://docsearch.algolia.com/) et que vous souhaitez l'utiliser à la place de Pagefind, vous pouvez utiliser le module d'extension officiel DocSearch de Starlight.
+
+<Steps>
 
 1. Installez `@astrojs/starlight-docsearch` :
 
@@ -102,12 +104,16 @@ Si vous avez accès au [programme DocSearch d'Algolia](https://docsearch.algolia
    });
    ```
 
+</Steps>
+
 Avec cette configuration mise à jour, la barre de recherche de votre site ouvrira désormais une modale Algolia au lieu de celle par défaut.
 
 #### Traduire l'interface utilisateur de DocSearch
 
 DocSearch fournit seulement des chaînes de l'interface utilisateur en anglais par défaut.
 Ajoutez des traductions de l'interface utilisateur de la modale pour votre langue en utilisant le [système d'internationalisation](/fr/guides/i18n/#traduire-linterface-utilisateur-de-starlight) intégré à Starlight.
+
+<Steps>
 
 1. Étendez la définition de la collection de contenus `i18n` de Starlight avec le schéma DocSearch dans `src/content/config.ts` :
 
@@ -162,3 +168,5 @@ Ajoutez des traductions de l'interface utilisateur de la modale pour votre langu
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>

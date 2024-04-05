@@ -53,14 +53,14 @@ Starlight가 초기화될 때 호출되는 플러그인 설정 함수입니다 (
 
 **타입:** `StarlightUserConfig`
 
-사용자 제공 [Starlight 구성](/ko/reference/configuration)의 읽기 전용 복사본입니다.
+사용자 제공 [Starlight 구성](/ko/reference/configuration/)의 읽기 전용 복사본입니다.
 이 구성은 현재 플러그인 이전에 구성된 다른 플러그인에 의해 업데이트되었을 수 있습니다.
 
 #### `updateConfig`
 
 **타입:** `(newConfig: StarlightUserConfig) => void`
 
-사용자가 제공한 [Starlight 구성](/ko/reference/configuration)을 업데이트하는 콜백 함수입니다.
+사용자가 제공한 [Starlight 구성](/ko/reference/configuration/)을 업데이트하는 콜백 함수입니다.
 재정의하려는 루트 수준 구성 키를 제공합니다.
 중첩된 구성 값을 업데이트하려면 전체 중첩 객체를 제공해야 합니다.
 
@@ -99,7 +99,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -148,7 +148,7 @@ Starlight를 실행하는 데 사용되는 명령:
 export default {
   name: 'long-process-plugin',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info('시간이 오래 걸리는 작업 진행 중…');
       // 오래 걸리는 작업…
     },

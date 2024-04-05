@@ -78,7 +78,7 @@ function starlightI18nSchema() {
 
 			'menuButton.accessibleLabel': z
 				.string()
-				.describe('Accessible label for he mobile menu button.'),
+				.describe('Accessible label for the mobile menu button.'),
 
 			'sidebarNav.accessibleLabel': z
 				.string()

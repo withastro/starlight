@@ -3,8 +3,7 @@ title: Personnaliser Starlight
 description: Apprenez à vous approprier votre site Starlight avec votre logo, polices personnalisées et bien plus encore.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { FileTree } from '@astrojs/starlight/components';
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight propose par défaut un style et des fonctionnalités pragmatiques, vous pouvez donc démarrer rapidement sans configuration nécessaire.
 Lorsque vous souhaitez commencer à personnaliser l’apparence de votre site Starlight, ce guide vous accompagne.
@@ -12,6 +11,8 @@ Lorsque vous souhaitez commencer à personnaliser l’apparence de votre site St
 ## Ajouter votre logo
 
 L’ajout d’un logo personnalisé à l’en-tête du site est un moyen rapide d’ajouter votre image de marque personnelle à un site Starlight.
+
+<Steps>
 
 1. Ajoutez votre fichier logo au répertoire `src/assets/` :
 
@@ -44,6 +45,8 @@ L’ajout d’un logo personnalisé à l’en-tête du site est un moyen rapide 
    });
    ```
 
+</Steps>
+
 Par défaut, le logo sera affiché à côté du nom de votre site (option `title` dans la configuration).
 Si l’image de votre logo inclut déjà le titre du site, vous pouvez masquer visuellement le texte du titre en définissant l’option `replacesTitle` à `true`.
 Le texte du titre (`title`) le texte sera toujours inclus pour les lecteurs d’écran afin que l’en-tête reste accessible.
@@ -61,6 +64,8 @@ starlight({
 ### Variantes claires et sombres de votre logo
 
 Vous pouvez afficher différentes versions de votre logo en modes clair et sombre.
+
+<Steps>
 
 1. Ajouter un fichier image pour chaque variante dans `src/assets/`:
 
@@ -86,6 +91,8 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
      },
    }),
    ```
+
+</Steps>
 
 ## Activer un plan de site
 
@@ -310,6 +317,8 @@ Pour utiliser Google Fonts, suivez le [Guide de configuration de Fontsource](#co
 
 #### Configurer les polices localement
 
+<Steps>
+
 1. Ajoutez vos fichiers de polices dans un répertoire `src/fonts/` et créez un fichier `font-face.css` vide :
 
    <FileTree>
@@ -359,10 +368,14 @@ Pour utiliser Google Fonts, suivez le [Guide de configuration de Fontsource](#co
    });
    ```
 
+</Steps>
+
 #### Configurer les polices avec Fontsource
 
 Le projet [Fontsource](https://fontsource.org/) simplifie l’utilisation des polices Google et d’autres polices open source.
 Il fournit des modules npm que vous pouvez installer pour les polices que vous souhaitez utiliser et inclut des fichiers CSS prêts à l’emploi à ajouter à votre projet.
+
+<Steps>
 
 1.  Trouvez la police que vous souhaitez utiliser dans le [catalogue de Fontsource](https://fontsource.org/).
     Cet exemple utilisera [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
@@ -420,6 +433,8 @@ Il fournit des modules npm que vous pouvez installer pour les polices que vous s
         ```
 
     Fontsource fournit plusieurs fichiers CSS pour chaque police. Consultez la [documentation Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) sur l’inclusion de différentes graisses et styles pour comprendre lesquels utiliser.
+
+</Steps>
 
 ### Utiliser vos polices personnalisées
 
