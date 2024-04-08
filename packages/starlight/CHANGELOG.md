@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.21.4
+
+### Patch Changes
+
+- [#1703](https://github.com/withastro/starlight/pull/1703) [`b26238f2`](https://github.com/withastro/starlight/commit/b26238f22990dcf8ba002bea6a50c66f20ad5786) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes aside custom titles rendering for nested asides.
+
+- [#1708](https://github.com/withastro/starlight/pull/1708) [`a72cb966`](https://github.com/withastro/starlight/commit/a72cb96600798c1fbc7558f8fd24556ca442d312) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes translation issues with Expressive Code when using a default language other than English
+
 ## 0.21.3
 
 ### Patch Changes

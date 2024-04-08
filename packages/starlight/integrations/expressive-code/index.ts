@@ -77,7 +77,6 @@ export function getStarlightEcConfigPreprocessor({
 	return (input): AstroExpressiveCodeOptions => {
 		const astroConfig = input.astroConfig;
 		const ecConfig = input.ecConfig as StarlightExpressiveCodeOptions;
-		const { locales } = starlightConfig;
 
 		const {
 			themes: themesInput,
@@ -111,7 +110,7 @@ export function getStarlightEcConfigPreprocessor({
 		});
 
 		// Add Expressive Code UI translations (if any) for all defined locales
-		if (useTranslations) addTranslations(locales, useTranslations);
+		if (useTranslations) addTranslations(starlightConfig, useTranslations);
 
 		return {
 			themes,
@@ -124,6 +123,7 @@ export function getStarlightEcConfigPreprocessor({
 				}
 				return theme;
 			},
+			defaultLocale: starlightConfig.defaultLocale?.lang ?? starlightConfig.defaultLocale?.locale,
 			themeCssSelector: (theme, { styleVariants }) => {
 				// If one dark and one light theme are available, and the user has not disabled it,
 				// generate theme CSS selectors compatible with Starlight's dark mode switch
