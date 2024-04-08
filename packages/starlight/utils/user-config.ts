@@ -212,30 +212,29 @@ const UserConfigSchema = z.object({
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 	({ locales, defaultLocale, ...config }, ctx) => {
-		const configuredLocalesCount = locales !== undefined ? Object.keys(locales).length : 0;
-		if (locales !== undefined && configuredLocalesCount >= 1) {
-			// Make sure we can find the default locale and if not, help the user set it.
-			// We treat the root locale as the default if present and no explicit default is set.
-			const defaultLocaleConfig = locales[defaultLocale || 'root'];
+		const localesKeys = Object.keys(locales ?? {});
+		const defaultLocaleConfig = locales?.[defaultLocale || 'root'];
 
-			if (!defaultLocaleConfig) {
-				const availableLocales = Object.keys(locales)
-					.map((l) => `"${l}"`)
-					.join(', ');
-				ctx.addIssue({
-					code: 'custom',
-					message:
-						'Could not determine the default locale. ' +
-						'Please make sure `defaultLocale` in your Starlight config is one of ' +
-						availableLocales,
-				});
-				return z.NEVER;
-			}
+		// Make sure we can find the default locale if needed and if not, help the user set it.
+		// We treat the root locale as the default if present and no explicit default is set.
+		if (locales !== undefined && localesKeys.length >= 1 && !defaultLocaleConfig) {
+			const availableLocales = localesKeys.map((l) => `"${l}"`).join(', ');
+			ctx.addIssue({
+				code: 'custom',
+				message:
+					'Could not determine the default locale. ' +
+					'Please make sure `defaultLocale` in your Starlight config is one of ' +
+					availableLocales,
+			});
+			return z.NEVER;
+		}
 
+		if (locales !== undefined && localesKeys.length > 1) {
+			// This is a multilingual site (more than one locale configured).
 			return {
 				...config,
 				/** Flag indicating if this site has multiple locales set up. */
-				isMultilingual: configuredLocalesCount > 1,
+				isMultilingual: true,
 				/** Full locale object for this site’s default language. */
 				defaultLocale: { ...defaultLocaleConfig, locale: defaultLocale },
 				locales,
@@ -252,8 +251,8 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 				label: 'English',
 				lang: 'en',
 				dir: 'ltr',
-				locale: undefined,
-				...locales?.root,
+				locale: defaultLocale || undefined,
+				...locales?.[defaultLocale || 'root'],
 			},
 			locales: undefined,
 		} as const;
