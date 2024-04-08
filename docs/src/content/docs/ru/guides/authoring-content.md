@@ -142,12 +142,12 @@ npm create astro@latest -- --template starlight
 Вы можете указать свой заголовок вставки в квадратных скобках после типа вставки, например, `:::tip[Небольшой совет]`.
 
 :::tip[Небольшой совет]
-Astro позволяет создавать быстрые сайты с помощью [архитектуры островов](https://docs.astro.build/ru/concepts/islands/)
+Astro позволяет создавать быстрые сайты с помощью [архитектуры Островов](https://docs.astro.build/ru/concepts/islands/)
 :::
 
 ```md
 :::tip[Небольшой совет]
-Astro позволяет создавать быстрые сайты с помощью [архитектуры островов](https://docs.astro.build/ru/concepts/islands/)
+Astro позволяет создавать быстрые сайты с помощью [архитектуры Островов](https://docs.astro.build/ru/concepts/islands/)
 :::
 ```
 
