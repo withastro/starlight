@@ -165,7 +165,7 @@ Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più faci
 
 - Navigazione chiara
 - Temi configurabili dall'utente
-- [Supporto per i18n](/it/guides/i18n)
+- [Supporto per i18n](/it/guides/i18n/)
 
 :::
 
@@ -179,7 +179,7 @@ Gli utenti potrebbero essere più produttivi e trovare il tuo prodotto più faci
 
 - Navigazione chiara
 - Temi configurabili dall'utente
-- [Supporto per i18n](/it/guides/i18n)
+- [Supporto per i18n](/it/guides/i18n/)
 
 :::
 ```

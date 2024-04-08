@@ -147,7 +147,7 @@ Yardımcı Starlight özellikleri sayesinde kullanıcılarınız daha kolay ür�
 
 - Yönlendirmeyi temizle
 - Kullanıcı-yapılandırmalı renk teması
-- [i18n desteği](/tr/guides/i18n)
+- [i18n desteği](/tr/guides/i18n/)
 
 :::
 
@@ -161,7 +161,7 @@ Yardımcı Starlight özellikleri sayesinde kullanıcılarınız daha kolay ür�
 
 - Yönlendirmeyi temizle
 - Kullanıcı-yapılandırmalı renk teması
-- [i18n desteği](/tr/guides/i18n)
+- [i18n desteği](/tr/guides/i18n/)
 
 :::
 ```

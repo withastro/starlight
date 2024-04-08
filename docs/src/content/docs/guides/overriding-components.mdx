@@ -3,6 +3,8 @@ title: Overriding Components
 description: Learn how to override Starlight’s built-in components to add custom elements to your documentation site’s UI.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Starlight’s default UI and configuration options are designed to be flexible and work for a range of content. Much of Starlight's default appearance can be customized with [CSS](/guides/css-and-tailwind/) and [configuration options](/guides/customization/).
 
 When you need more than what’s possible out of the box, Starlight supports building your own custom components to extend or override (completely replace) its default components.
@@ -16,6 +18,8 @@ Overriding Starlight’s default components can be useful when:
 - You want to add some additional UI alongside Starlight’s existing UI.
 
 ## How to override
+
+<Steps>
 
 1. Choose the Starlight component you want to override.
    You can find a full list of components in the [Overrides Reference](/reference/overrides/).
@@ -42,17 +46,19 @@ Overriding Starlight’s default components can be useful when:
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My Docs with Overrides',
-         components: {
-           // Override the default `SocialIcons` component.
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My Docs with Overrides',
+   			components: {
+   				// Override the default `SocialIcons` component.
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
+
+</Steps>
 
 ## Reuse a built-in component
 
@@ -94,9 +100,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -118,13 +124,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Built with Starlight 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Built with Starlight 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 

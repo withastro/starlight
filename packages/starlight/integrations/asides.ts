@@ -12,7 +12,6 @@ import {
 import { toMarkdown } from 'mdast-util-to-markdown';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
-import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
 import type { StarlightConfig } from '../types';
 import type { createTranslationSystemFromFs } from '../utils/translations-fs';
@@ -153,23 +152,24 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			const variant = node.name;
 			if (!isAsideVariant(variant)) return;
 
-			// remark-directive converts a container’s “label” to a paragraph in
-			// its children, but we want to pass it as the title prop to <Aside>, so
-			// we iterate over the children, find a directive label, store it for the
-			// title prop, and remove the paragraph from children.
+			// remark-directive converts a container’s “label” to a paragraph added as the head of its
+			// children with the `directiveLabel` property set to true. We want to pass it as the title
+			// prop to <Aside>, so when we find a directive label, we store it for the title prop and
+			// remove the paragraph from the container’s children.
 			let title = t(`aside.${variant}`);
-			remove(node, (child): boolean | void => {
-				if (child.data && 'directiveLabel' in child.data && child.data.directiveLabel) {
-					if (
-						'children' in child &&
-						Array.isArray(child.children) &&
-						'value' in child.children[0]
-					) {
-						title = child.children[0].value;
-					}
-					return true;
+			const firstChild = node.children[0];
+			if (
+				firstChild?.type === 'paragraph' &&
+				firstChild.data &&
+				'directiveLabel' in firstChild.data
+			) {
+				const firstGrandChild = firstChild.children[0];
+				if (firstGrandChild?.type === 'text') {
+					title = firstGrandChild.value;
 				}
-			});
+				// The first paragraph contains a directive label, we can safely remove it.
+				node.children.splice(0, 1);
+			}
 
 			const aside = h(
 				'aside',

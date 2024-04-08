@@ -58,8 +58,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       starlight-links-validator:
-        specifier: ^0.5.3
-        version: 0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.5)
+        specifier: ^0.7.1
+        version: 0.7.1(@astrojs/starlight@packages+starlight)(astro@4.3.5)
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
@@ -67,7 +67,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.21.1
+        specifier: ^0.21.4
         version: link:../../packages/starlight
       astro:
         specifier: ^4.3.5
@@ -79,7 +79,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.21.1
+        specifier: ^0.21.4
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.1
@@ -175,9 +175,6 @@ importers:
       unified:
         specifier: ^11.0.4
         version: 11.0.4
-      unist-util-remove:
-        specifier: ^4.0.0
-        version: 4.0.0
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -6396,8 +6393,8 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.5.3(@astrojs/starlight@packages+starlight)(astro@4.3.5):
-    resolution: {integrity: sha512-v79rwmzjQlEMVL8sZ4dalD/jhFOUvGZ2/f4CvxCySZ9KbEN9nDmgV8zJgfpmTzhbcYQ35wzyUinF4QNxgKVA4g==}
+  /starlight-links-validator@0.7.1(@astrojs/starlight@packages+starlight)(astro@4.3.5):
+    resolution: {integrity: sha512-6SYqCGQdiiTMrgCE4d3F/kFae1rYzuVk0QUs9MXqj6w65tZLvd4qieTrN2NdDNMWXyoxzUTR+ehNzajqr7ZUEg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
@@ -6959,14 +6956,6 @@ packages:
     dependencies:
       '@types/unist': 3.0.0
       unist-util-visit: 5.0.0
-    dev: false
-
-  /unist-util-remove@4.0.0:
-    resolution: {integrity: sha512-b4gokeGId57UVRX/eVKej5gXqGlc9+trkORhFJpu9raqZkZhU0zm8Doi05+HaiBsMEIJowL+2WtQ5ItjsngPXg==}
-    dependencies:
-      '@types/unist': 3.0.0
-      unist-util-is: 6.0.0
-      unist-util-visit-parents: 6.0.1
     dev: false
 
   /unist-util-stringify-position@3.0.3:
