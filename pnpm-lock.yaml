@@ -140,8 +140,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       astro-expressive-code:
-        specifier: ^0.34.0
-        version: 0.34.0(astro@4.3.5)
+        specifier: ^0.34.1
+        version: 0.34.1(astro@4.3.5)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1790,8 +1790,8 @@ packages:
     dev: false
     optional: true
 
-  /@expressive-code/core@0.34.0:
-    resolution: {integrity: sha512-2KAmE7/jifFpZiRUK6dTwCm4TnVHfyDbxtmWm703Z3w5PPJ8Fqgl5Rxb8whIwZPSMfw+/VuUj8gsX/xw0gdrVw==}
+  /@expressive-code/core@0.34.1:
+    resolution: {integrity: sha512-lq9Blzw9wrw0H+g/I96IGb4rxiO1PrfLySa3yRQYzHKH2YJwFFPTqXLSLzoZLUUkdPs5rD9JgeMtrlJ1uVvXkg==}
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       hast-util-select: 6.0.2
@@ -1804,23 +1804,23 @@ packages:
       unist-util-visit-parents: 6.0.1
     dev: false
 
-  /@expressive-code/plugin-frames@0.34.0:
-    resolution: {integrity: sha512-JlqBLG9pAHN2+HOQrUpmwjfsOTudr8jhCRwdAD2fsXRyRFZ7TW4m2OCFpCzDMoilhC026HS0fExjSlaKs6i38Q==}
+  /@expressive-code/plugin-frames@0.34.1:
+    resolution: {integrity: sha512-OOsIva7/eDWJ5gUp6QaoxovClrYM3OpddvV1izL7CpLWnSETsb/eNtwvMG4JmyTJwV6pfMpbitsithPCli08DQ==}
     dependencies:
-      '@expressive-code/core': 0.34.0
+      '@expressive-code/core': 0.34.1
     dev: false
 
-  /@expressive-code/plugin-shiki@0.34.0:
-    resolution: {integrity: sha512-rs9JD8V+iKvETplVkjSOdRfZXq0/7O6yQ03Z8ZoCmcBG5vmZudcWdN1YblkKaacQb5PGziaCFb8Xh6ISxzVhDQ==}
+  /@expressive-code/plugin-shiki@0.34.1:
+    resolution: {integrity: sha512-kMhxP7slGnGTsh5eo4UUKur/MMSk35wMxIbPgZ1M/H9KR0FdnyMOXqu15vWJrANHBHIhMygjbbndYM37VWvc2g==}
     dependencies:
-      '@expressive-code/core': 0.34.0
+      '@expressive-code/core': 0.34.1
       shiki: 1.2.4
     dev: false
 
-  /@expressive-code/plugin-text-markers@0.34.0:
-    resolution: {integrity: sha512-erIf7ZCHI34mxLKv/c6WED1Nmxe3OvfajkEHJzorqUm8AkItWDmZhggMQmCMnDx5B2eAoe2OWO7Nxxm/i81n/w==}
+  /@expressive-code/plugin-text-markers@0.34.1:
+    resolution: {integrity: sha512-V0NI56S5vsYUCMEoEXbpiACcVDgEbteBeeBS4RthV2bltDLkOvMfTRr2xHfO8zNLtjcYyu90nXR/ans8RZit1w==}
     dependencies:
-      '@expressive-code/core': 0.34.0
+      '@expressive-code/core': 0.34.1
     dev: false
 
   /@hapi/hoek@9.3.0:
@@ -2382,7 +2382,7 @@ packages:
   /@types/hast@3.0.4:
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
     dependencies:
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.0
     dev: false
 
   /@types/is-ci@3.0.0:
@@ -2705,13 +2705,13 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-expressive-code@0.34.0(astro@4.3.5):
-    resolution: {integrity: sha512-m2mjyVwrZ3NkaAOS9JIFM9SPn4S4JDNtMmXbTZXc/Wd/JGbMWSKZa6fCJaOyiJaZ7ftOMHlK1cCO6hft0ix4jA==}
+  /astro-expressive-code@0.34.1(astro@4.3.5):
+    resolution: {integrity: sha512-MoXRdAXnYif0tlxCXNH1tWMCWd4wTQZeBy8l2OMm/U49KqJ/UsBOQa/JjH0R7hLp3TSvmvg1bMCIWo9kwy+6ag==}
     peerDependencies:
       astro: ^4.0.0-beta || ^3.3.0
     dependencies:
       astro: 4.3.5(@types/node@18.16.19)
-      remark-expressive-code: 0.34.0
+      remark-expressive-code: 0.34.1
     dev: false
 
   /astro@4.3.5(@types/node@18.16.19):
@@ -3042,7 +3042,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001606
+      caniuse-lite: 1.0.30001607
       electron-to-chromium: 1.4.729
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
@@ -3107,8 +3107,8 @@ packages:
   /caniuse-lite@1.0.30001546:
     resolution: {integrity: sha512-zvtSJwuQFpewSyRrI3AsftF6rM0X80mZkChIt1spBGEvRglCrjTniXvinc8JKRoqTwXAgvqTImaN9igfSMtUBw==}
 
-  /caniuse-lite@1.0.30001606:
-    resolution: {integrity: sha512-LPbwnW4vfpJId225pwjZJOgX1m9sGfbw/RKJvw/t0QhYOOaTXHvkjVGFGPpvwEzufrjvTlsULnVTxdy4/6cqkg==}
+  /caniuse-lite@1.0.30001607:
+    resolution: {integrity: sha512-WcvhVRjXLKFB/kmOFVwELtMxyhq3iM/MvmXcyCe2PNf166c39mptscOc/45TTS96n2gpNV2z7+NakArTWZCQ3w==}
     dev: false
 
   /ccount@2.0.1:
@@ -3946,13 +3946,13 @@ packages:
     resolution: {integrity: sha512-XYfuKMvj4O35f/pOXLObndIRvyQ+/+6AhODh+OKWj9S9498pHHn/IMszH+gt0fBCRWMNfk1ZSp5x3AifmnI2vg==}
     engines: {node: '>=6'}
 
-  /expressive-code@0.34.0:
-    resolution: {integrity: sha512-LYr0etXyFYZAZjOdnqdb5zzwOk2Abb5x20Tqi2wjFUoDZpN6Dpt9nAoL7/xVPJRDikHM1A5Unx2krVBRIWeUog==}
+  /expressive-code@0.34.1:
+    resolution: {integrity: sha512-tYEmzezu5k/AM6nf52/Ctrj2uPYB3UQtfflWpLgFTvUbhaSPXbcvvaqPlDMgLVUUii55Mg1CFVnhhtbZwgHjDA==}
     dependencies:
-      '@expressive-code/core': 0.34.0
-      '@expressive-code/plugin-frames': 0.34.0
-      '@expressive-code/plugin-shiki': 0.34.0
-      '@expressive-code/plugin-text-markers': 0.34.0
+      '@expressive-code/core': 0.34.1
+      '@expressive-code/plugin-frames': 0.34.1
+      '@expressive-code/plugin-shiki': 0.34.1
+      '@expressive-code/plugin-text-markers': 0.34.1
     dev: false
 
   /extend-shallow@2.0.1:
@@ -4560,7 +4560,7 @@ packages:
       '@types/hast': 3.0.3
       comma-separated-tokens: 2.0.3
       devlop: 1.1.0
-      property-information: 6.2.0
+      property-information: 6.5.0
       space-separated-tokens: 2.0.2
       web-namespaces: 2.0.1
       zwitch: 2.0.4
@@ -6552,7 +6552,6 @@ packages:
 
   /property-information@6.5.0:
     resolution: {integrity: sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig==}
-    dev: false
 
   /protocolify@3.0.0:
     resolution: {integrity: sha512-PuvDJOkKJMVQx8jSNf8E5g0bJw/UTKm30mTjFHg4N30c8sefgA5Qr/f8INKqYBKfvP/MUSJrj+z1Smjbq4/3rQ==}
@@ -6774,10 +6773,10 @@ packages:
       - supports-color
     dev: false
 
-  /remark-expressive-code@0.34.0:
-    resolution: {integrity: sha512-exQlBj4o34bd3wHYE4ZFX6O2DqnRbiIqjM6VH9+Bo91rwgojqwZGWZL7VzZnTn5UHxChWmlFO50t+V4JYRkGMw==}
+  /remark-expressive-code@0.34.1:
+    resolution: {integrity: sha512-dUuSaswyUqXDDRN+2YL5KMVfaMgUltKeh6wav2YNnapJ8wBRMCr7ucuxkUPrTZIuElHQ6+VCINALuEvmnPxxmw==}
     dependencies:
-      expressive-code: 0.34.0
+      expressive-code: 0.34.1
     dev: false
 
   /remark-gfm@4.0.0:
