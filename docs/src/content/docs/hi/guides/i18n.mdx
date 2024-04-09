@@ -10,6 +10,7 @@ Starlight बहुभाषी साइटों के लिए अंतर
 ## i18n कॉन्फ़िगर करें
 
 <Steps>
+
 1. Starlight एकीकरण में [`locales`](/hi/reference/configuration/#locales) और [`defaultLocale`](/hi/reference/configuration/#defaultlocale) पास करके Starlight को उन भाषाओं के बारे में बताएं जिनका आप समर्थन करते हैं:
 
    ```js {9-26}
@@ -63,6 +64,7 @@ Starlight बहुभाषी साइटों के लिए अंतर
 3. अब आप अपनी भाषा निर्देशिकाओं में कंटेंट फ़ाइलें जोड़ सकते हैं। सभी भाषाओं में पेजों को संबद्ध करने के लिए एक ही फ़ाइल नाम का उपयोग करें और फ़ॉलबैक कंटेंट अनुवाद सूचनाएं और बहुत कुछ सहित Starlight के i18n सुविधाओं के पूर्ण सेट का लाभ उठाएं।
 
    उदाहरण के लिए, अरबी और अंग्रेजी के मुखपृष्ठ को दर्शाने के लिए क्रमशः `ar/index.md` और `en/index.md` बनाएं।
+
 </Steps>
 
 ### root locale का उपयोग करें
@@ -155,6 +157,7 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 आप `i18n` डेटा संग्रह के माध्यम से उन अतिरिक्त भाषाओं के लिए अनुवाद प्रदान कर सकते हैं जिनका आप समर्थन करते हैं - या हमारे डिफ़ॉल्ट लेबल को ओवरराइड कर सकते हैं।
 
 <Steps>
+
 1. `i18n` डेटा संग्रह को `src/content/config.ts` में कॉन्फ़िगर करें यदि यह पहले से कॉन्फ़िगर नहीं है:
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -214,6 +217,7 @@ import UIStringsList from '~/components/ui-strings-list.astro';
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
 </Steps>
 
 ### अनुवाद स्कीमा विस्तृत करें

@@ -12,6 +12,7 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 Starlight की डिफ़ॉल्ट शैलियों को संशोधित या विस्तारित करने के लिए अतिरिक्त CSS फ़ाइलें प्रदान करके अपनी Starlight साइट पर लागू शैलियों को अनुकूलित करें।
 
 <Steps>
+
 1. अपनी `src/` निर्देशिका में एक CSS फ़ाइल जोड़ें।
    उदाहरण के लिए, आप पेज शीर्षकों के लिए व्यापक डिफ़ॉल्ट कॉलम चौड़ाई और बड़ा टेक्स्ट आकार सेट कर सकते हैं:
 
@@ -42,6 +43,7 @@ Starlight की डिफ़ॉल्ट शैलियों को संश
    	],
    });
    ```
+
 </Steps>
 
 आप Starlight द्वारा उपयोग किए गए सभी CSS कस्टम गुणों को देख सकते हैं जिन्हें आप [GitHub पर `props.css` फ़ाइल](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) में अपनी साइट को अनुकूलित करने के लिए सेट कर सकते हैं।
@@ -90,6 +92,7 @@ yarn create astro --template starlight/tailwind
 यदि आपके पास पहले से ही एक Starlight साइट है और आप Tailwind CSS जोड़ना चाहते हैं, तो इन चरणों का पालन करें।
 
 <Steps>
+
 1.  Astro का Tailwind एकीकरण जोड़ें:
 
     <Tabs>
@@ -196,6 +199,7 @@ yarn create astro --template starlight/tailwind
     	plugins: [starlightPlugin()],
     };
     ```
+		
 </Steps>
 
 ### Tailwind के साथ Starlight को स्टाइल करें
