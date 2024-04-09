@@ -3,7 +3,7 @@ title: サイト内検索
 description: Starlight組み込みのサイト内検索機能と、そのカスタマイズ方法について学びます。
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Starlightサイトには、デフォルトで[Pagefind](https://pagefind.app/)による全文検索機能が組み込まれています。Pagefindは、静的サイト向けの高速で通信量が少ない検索ツールです。
 
@@ -47,6 +47,8 @@ title: 部分的にインデックスされるページ
 ### Algolia DocSearch
 
 [AlgoliaのDocSearchプログラム](https://docsearch.algolia.com/)にアクセスでき、Pagefindの代わりにそれを使いたい場合は、公式のStarlight DocSearchプラグインを使うことができます。
+
+<Steps>
 
 1. `@astrojs/starlight-docsearch`をインストールします。
 
@@ -102,11 +104,15 @@ title: 部分的にインデックスされるページ
    });
    ```
 
+</Steps>
+
 このように設定を更新すると、サイトの検索バーはデフォルトの検索モーダルではなく、Algoliaのモーダルを開きます。
 
 #### DocSearch UIを翻訳する
 
 DocSearchはデフォルトで英語のUI文字列のみを提供しています。Starlightの組み込みの[国際化の仕組み](/ja/guides/i18n/#starlightのuiを翻訳する)を使って、モーダルのUIを翻訳できます。
+
+<Steps>
 
 1. `src/content/config.ts`で、Starlightの`i18n`コンテンツコレクション定義をDocSearchスキーマにより拡張します。
 
@@ -161,3 +167,5 @@ DocSearchはデフォルトで英語のUI文字列のみを提供しています
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>
