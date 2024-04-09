@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 2.0.2
+
+### Patch Changes
+
+- [#1726](https://github.com/withastro/starlight/pull/1726) [`1aae51ac`](https://github.com/withastro/starlight/commit/1aae51ac512df8de088c7529236e196be42077e8) Thanks [@delucis](https://github.com/delucis)! - Adds warning log if a user tries to set `colors.white` in their Tailwind theme config with an object instead of a string.
+
 ## 2.0.1
 
 ### Patch Changes

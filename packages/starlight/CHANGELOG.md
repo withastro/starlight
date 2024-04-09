@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.21.5
+
+### Patch Changes
+
+- [#1728](https://github.com/withastro/starlight/pull/1728) [`0a75680d`](https://github.com/withastro/starlight/commit/0a75680ddd2f3325ab9ad7ac910f7c884b89a9ed) Thanks [@delucis](https://github.com/delucis)! - Adds 1 new icon: `pkl`
+
+- [#1709](https://github.com/withastro/starlight/pull/1709) [`c5cd1811`](https://github.com/withastro/starlight/commit/c5cd181186b42422f3e47052bf8182cb490bda6b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI strings translation issue for sites configured with a single non-root language different from English.
+
+- [#1723](https://github.com/withastro/starlight/pull/1723) [`3b29b3ab`](https://github.com/withastro/starlight/commit/3b29b3ab824f538f27e20310cb08786a92c7bd65) Thanks [@OliverSpeir](https://github.com/OliverSpeir)! - Fixes accessibility by using `aria-selected="false"` for inactive tabs instead of removing `aria-selected="true"` in the tablist of Starlight’s `<Tabs>` component
+
+- [#1706](https://github.com/withastro/starlight/pull/1706) [`f171ac4d`](https://github.com/withastro/starlight/commit/f171ac4d6396eb2538598d85957670df50938b6a) Thanks [@jorenbroekema](https://github.com/jorenbroekema)! - Fixes some minor type errors
+
 ## 0.21.4
 
 ### Patch Changes
@@ -200,7 +212,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -220,14 +232,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -239,9 +251,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -314,14 +326,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -378,12 +390,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -731,16 +743,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1119,8 +1131,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
