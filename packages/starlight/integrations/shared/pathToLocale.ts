@@ -1,3 +1,4 @@
+import type { AstroConfig } from 'astro';
 import type { StarlightConfig } from '../../types';
 
 function slugToLocale(
@@ -17,7 +18,7 @@ export function pathToLocale(
 		astroConfig,
 	}: {
 		starlightConfig: { locales: StarlightConfig['locales'] };
-		astroConfig: { root: URL; srcDir: URL };
+		astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
 	}
 ): string | undefined {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
