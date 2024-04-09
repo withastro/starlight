@@ -17,7 +17,7 @@ const { html, panels } = processPanels(panelHtml);
 								role="tab"
 								href={'#' + panelId}
 								id={tabId}
-								aria-selected={idx === 0 && 'true'}
+								aria-selected={idx === 0 ? 'true' : 'false'}
 								tabindex={idx !== 0 ? -1 : 0}
 							>
 								{icon && <Icon name={icon} />}
@@ -61,7 +61,7 @@ const { html, panels } = processPanels(panelHtml);
 		color: var(--sl-color-gray-3);
 		outline-offset: var(--sl-outline-offset-inside);
 	}
-	.tab [role='tab'][aria-selected] {
+	.tab [role='tab'][aria-selected='true'] {
 		color: var(--sl-color-white);
 		border-color: var(--sl-color-text-accent);
 		font-weight: 600;
@@ -87,7 +87,7 @@ const { html, panels } = processPanels(panelHtml);
 				// Handle clicks for mouse users
 				tab.addEventListener('click', (e) => {
 					e.preventDefault();
-					const currentTab = tablist.querySelector('[aria-selected]');
+					const currentTab = tablist.querySelector('[aria-selected="true"]');
 					if (e.currentTarget !== currentTab) {
 						this.switchTab(e.currentTarget as HTMLAnchorElement, i);
 					}
@@ -122,7 +122,7 @@ const { html, panels } = processPanels(panelHtml);
 
 			// Mark all tabs as unselected and hide all tab panels.
 			this.tabs.forEach((tab) => {
-				tab.removeAttribute('aria-selected');
+				tab.setAttribute('aria-selected', 'false');
 				tab.setAttribute('tabindex', '-1');
 			});
 			this.panels.forEach((oldPanel) => {

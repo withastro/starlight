@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.21.3",
+  "version": "0.21.4",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -198,7 +198,6 @@
     "rehype": "^13.0.1",
     "remark-directive": "^3.0.0",
     "unified": "^11.0.4",
-    "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.1"
   }
