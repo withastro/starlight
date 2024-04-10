@@ -113,3 +113,66 @@
 	border: 0;
 	border-bottom: 1px solid var(--sl-color-hairline);
 }
+
+.sl-markdown-content details:not(:where(.not-content *)) {
+	--sl-details-x-pad: 1rem;
+	--sl-details-y-pad: 0.75rem;
+	--sl-details-border-color: var(--sl-color-gray-5);
+	--sl-details-open-summary-bg-color: var(--sl-color-gray-6);
+
+	border-block: 1px solid var(--sl-details-border-color);
+	padding: var(--sl-details-y-pad) var(--sl-details-x-pad);
+}
+[data-theme='light'] .sl-markdown-content details:not(:where(.not-content *)) {
+	--sl-details-open-summary-bg-color: var(--sl-color-gray-7);
+}
+.sl-markdown-content summary:not(:where(.not-content *)) {
+	align-items: center;
+	border-inline: 1px solid transparent;
+	color: var(--sl-color-white);
+	cursor: pointer;
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-between;
+	margin: calc(-1 * var(--sl-details-y-pad)) calc(-1 * var(--sl-details-x-pad));
+	padding: var(--sl-details-y-pad) var(--sl-details-x-pad);
+}
+.sl-markdown-content details[open] > summary:not(:where(.not-content *)) {
+	background-color: var(--sl-details-open-summary-bg-color);
+	border-bottom: 1px solid;
+	border-color: var(--sl-details-border-color);
+	margin-bottom: var(--sl-details-y-pad);
+}
+.sl-markdown-content summary:not(:where(.not-content *))::marker,
+.sl-markdown-content summary:not(:where(.not-content *))::-webkit-details-marker {
+	display: none;
+}
+.sl-markdown-content summary:not(:where(.not-content *))::after {
+	background-color: currentColor;
+	content: '';
+	flex-shrink: 0;
+	height: 1.5rem;
+	width: 1.5rem;
+	mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZD0ibTE0LjgzIDExLjI5LTQuMjQtNC4yNGExIDEgMCAxIDAtMS40MiAxLjQxTDEyLjcxIDEybC0zLjU0IDMuNTRhMSAxIDAgMCAwIDAgMS40MSAxIDEgMCAwIDAgLjcxLjI5IDEgMSAwIDAgMCAuNzEtLjI5bDQuMjQtNC4yNGExLjAwMiAxLjAwMiAwIDAgMCAwLTEuNDJaIi8+PC9zdmc+');
+	mask-repeat: no-repeat;
+}
+@media (prefers-reduced-motion: no-preference) {
+	.sl-markdown-content summary:not(:where(.not-content *))::after {
+		transition: transform 0.2s ease-in-out;
+	}
+}
+.sl-markdown-content details[open] > summary:not(:where(.not-content *))::after {
+	transform: rotateZ(90deg);
+}
+[dir='rtl'] .sl-markdown-content summary:not(:where(.not-content *))::after,
+.sl-markdown-content [dir='rtl'] summary:not(:where(.not-content *))::after {
+	transform: rotateZ(180deg);
+}
+.sl-markdown-content details + details:not(:where(.not-content *)) {
+	border-top: 0;
+	margin-top: 0;
+}
+.sl-markdown-content .starlight-aside details:not(:where(.not-content *)) {
+	--sl-details-border-color: var(--sl-color-asides-border);
+	--sl-details-open-summary-bg-color: transparent;
+}
