@@ -11,13 +11,6 @@ export const TitleTransformConfigSchema = (defaultLang: string) =>
 		if (typeof title === 'string') {
 			return { [defaultLang]: title };
 		}
-		if (Object.keys(title).length === 0) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: 'Title must be a string or an object with at least one language key',
-			});
-			return z.NEVER;
-		}
 		if (!title[defaultLang]) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,

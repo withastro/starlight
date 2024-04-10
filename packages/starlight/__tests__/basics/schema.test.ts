@@ -41,13 +41,6 @@ describe('TitleTransformConfigSchema', () => {
 		expect(siteTitle).toEqual(title);
 	});
 
-	test('throws on empty object', () => {
-		const title = {};
-		const defaultLang = 'en';
-
-		expect(() => TitleTransformConfigSchema(defaultLang).parse(title)).toThrow();
-	});
-
 	test('throws on missing default language key', () => {
 		const title = {
 			es: 'Mi Sitio',
