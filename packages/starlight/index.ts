@@ -11,7 +11,7 @@ import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 import type { StarlightConfig } from './types';
-import { getErrorLangKey } from './utils/i18n'
+
 export default function StarlightIntegration({
 	plugins,
 	...opts
@@ -36,10 +36,6 @@ export default function StarlightIntegration({
 					logger,
 				});
 				userConfig = starlightConfig;
-				const checkTitleLangResult = getErrorLangKey(userConfig);
-				if(checkTitleLangResult[0]){
-					throw new Error(`Lang ${checkTitleLangResult[1]} need to be defined first`);
-				}
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
 				if (!userConfig.disable404Route) {
@@ -71,6 +67,17 @@ export default function StarlightIntegration({
 				updateConfig({
 					integrations,
 					vite: {
+            plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
+					},
+					markdown: {
+						remarkPlugins: [
+							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
+						],
+						rehypePlugins: [rehypeRtlCodeSupport()],
+						shikiConfig:
+							// Configure Shiki theme if the user is using the default github-dark theme.
+							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
+					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
