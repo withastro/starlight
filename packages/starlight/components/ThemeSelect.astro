@@ -42,6 +42,9 @@ const { labels } = Astro.props;
 						this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
 					}
 				});
+				matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', () => {
+					if (this.#loadTheme() === 'auto') this.#onThemeChange('auto');
+				});
 			}
 		}
 
