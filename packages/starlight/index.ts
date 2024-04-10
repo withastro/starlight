@@ -11,7 +11,7 @@ import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 import type { StarlightConfig } from './types';
-
+import { getErrorLangKey } from './utils/i18n'
 export default function StarlightIntegration({
 	plugins,
 	...opts
@@ -36,17 +36,9 @@ export default function StarlightIntegration({
 					logger,
 				});
 				userConfig = starlightConfig;
-				if(typeof userConfig.title === 'object'){
-					for(const key in userConfig.title ){
-						if((userConfig.locales)){
-						const localesList = Array.from (Object.values(userConfig.locales))
-							if(!localesList.find(el=>el?.lang ===key )){
-								throw new Error(
-									`Title Lang "${key}" must defind in locales First`,
-								);
-							}
-						}
-					}
+				const checkTitleLangResult = getErrorLangKey(userConfig);
+				if(checkTitleLangResult[0]){
+					throw new Error(`Lang ${checkTitleLangResult[1]} need to be defined first`);
 				}
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
@@ -79,17 +71,6 @@ export default function StarlightIntegration({
 				updateConfig({
 					integrations,
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
-					},
-					markdown: {
-						remarkPlugins: [
-							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
-						],
-						rehypePlugins: [rehypeRtlCodeSupport()],
-						shikiConfig:
-							// Configure Shiki theme if the user is using the default github-dark theme.
-							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
-					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
