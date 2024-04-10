@@ -42,20 +42,12 @@ const { labels } = Astro.props;
 						this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
 					}
 				});
-
-				const media = window.matchMedia(`(prefers-color-scheme: dark)`);
-				media.addEventListener('change', this.#handleMediaQuery);
+				matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', this.#handleMediaQuery);
 			}
 		}
 
-		#handleMediaQuery = () => {
-			const select = this.querySelector('select');
-
-			if (select?.value !== 'auto') {
-				return;
-			}
-
-			this.#onThemeChange(this.#parseTheme(select.value));
+		#handleMediaQuery(): void {
+			if (this.#loadTheme() === 'auto') this.#onThemeChange('auto');
 		};
 
 		/** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
