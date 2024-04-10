@@ -67,7 +67,7 @@ export default function StarlightIntegration({
 				updateConfig({
 					integrations,
 					vite: {
-            plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
+						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
 					},
 					markdown: {
 						remarkPlugins: [

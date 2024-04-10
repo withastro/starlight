@@ -7,7 +7,7 @@ import { createTitle } from '../utils/title';
 const { lang } = Astro.props;
 
 const href = formatPath(Astro.props.locale || '/');
-const title = createTitle(lang)
+const title = createTitle(lang);
 ---
 
 <a {href} class="site-title sl-flex">
