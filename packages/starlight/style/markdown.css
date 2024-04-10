@@ -19,6 +19,12 @@
 }
 
 .sl-markdown-content
+	li {
+		background: rgba(255, 0, 0, .5);
+		overflow-wrap: anywhere;
+}
+
+.sl-markdown-content
 	li
 	> :last-child:not(li, ul, ol):not(a, strong, em, del, span, input, :where(.not-content *)) {
 	margin-bottom: 1.25rem;
