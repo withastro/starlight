@@ -3,11 +3,11 @@ import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 import { formatPath } from '../utils/format-path';
-import { getI18nTitle } from '../utils/i18n'
+import { createTitle } from '../utils/title';
 const { lang } = Astro.props;
 
 const href = formatPath(Astro.props.locale || '/');
-const siteTitle = getI18nTitle(lang)
+const title = createTitle(lang)
 ---
 
 <a {href} class="site-title sl-flex">
@@ -35,7 +35,7 @@ const siteTitle = getI18nTitle(lang)
 		)
 	}
 	<span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
-		{siteTitle}
+		{title}
 	</span>
 </a>
 

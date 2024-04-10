@@ -1,22 +1,14 @@
-import type { StarlightConfig } from '../types';
+import { TitleTransformConfigSchema } from '../schemas/title';
 import config from 'virtual:starlight/user-config';
-export const getI18nTitle = (lang:string)=>{
-	const title = config.title
-	if(typeof title === 'object'){
-		return title[lang]
-	}
-	return title
-}
 
-export const getErrorLangKey = (userConfig:StarlightConfig)=>{
-	let result:[boolean, string]
-	if(typeof userConfig.title !== 'object' || !userConfig.locales) return [false,''];
-	for(const key in userConfig.title ){
-		const localesList = Array.from (Object.values(userConfig.locales))
-		if(!localesList.find(el=>el?.lang ===key )){
-			result = [true,key]
-			return result
-		}
+const defaultLang = config.defaultLocale.lang as string;
+const TitleSchema = TitleTransformConfigSchema(defaultLang);
+
+/** Create a title from a user-provided title. **/
+export function createTitle(lang: string): string {
+	const title = TitleSchema.parse(config.title);
+	if (lang && title[lang]) {
+		return title[lang] as string;
 	}
-	return [false,'']
+	return title[defaultLang] as string;
 }

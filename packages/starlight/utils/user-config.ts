@@ -4,6 +4,7 @@ import { ComponentConfigSchema } from '../schemas/components';
 import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
+import { TitleConfigSchema } from '../schemas/title';
 import { LogoConfigSchema } from '../schemas/logo';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import { SocialLinksSchema } from '../schemas/social';
@@ -33,9 +34,7 @@ const LocaleSchema = z.object({
 
 const UserConfigSchema = z.object({
 	/** Title for your website. Will be used in metadata and as browser tab title. */
-	title:
-		z.union([z.string(), z.record(z.string())])
-		.describe('Title for your website. Will be used in metadata and as browser tab title.'),
+	title: TitleConfigSchema(),
 
 	/** Description metadata for your website. Can be used in page metadata. */
 	description: z
