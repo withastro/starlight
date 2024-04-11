@@ -155,8 +155,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       hastscript:
-        specifier: ^9.0.0
-        version: 9.0.0
+        specifier: ^8.0.0
+        version: 8.0.0
       mdast-util-directive:
         specifier: ^3.0.0
         version: 3.0.0
