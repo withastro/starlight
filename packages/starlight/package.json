@@ -166,9 +166,20 @@
       "types": "./expressive-code.d.ts",
       "default": "./expressive-code.mjs"
     },
+    "./expressive-code/hast": {
+      "types": "./integrations/expressive-code/hast.d.ts",
+      "default": "./integrations/expressive-code/hast.mjs"
+    },
     "./index.astro": "./index.astro",
     "./404.astro": "./404.astro",
     "./style/markdown.css": "./style/markdown.css"
+  },
+  "typesVersions": {
+    "*": {
+      "expressive-code/hast": [
+        "integrations/expressive-code/hast.d.ts"
+      ]
+    }
   },
   "peerDependencies": {
     "astro": "^4.2.7"
