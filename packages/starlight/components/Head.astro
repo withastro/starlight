@@ -6,22 +6,21 @@ import type { HeadConfigSchema } from '../schemas/head';
 import { fileWithBase } from '../utils/base';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
-import { createTitle } from '../utils/title';
 import type { Props } from '../props';
 
-const { entry, lang } = Astro.props;
+const { entry, lang, siteTitle } = Astro.props;
 const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
-const title = createTitle(lang);
 const description = data.description || config.description;
+
 const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { charset: 'utf-8' } },
 	{
 		tag: 'meta',
 		attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 	},
-	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${title}` },
+	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${siteTitle}` },
 	{ tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
 	{ tag: 'meta', attrs: { name: 'generator', content: Astro.generator } },
 	{
@@ -43,7 +42,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { property: 'og:url', content: canonical?.href } },
 	{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
 	{ tag: 'meta', attrs: { property: 'og:description', content: description } },
-	{ tag: 'meta', attrs: { property: 'og:site_name', content: title } },
+	{ tag: 'meta', attrs: { property: 'og:site_name', content: siteTitle } },
 	// Twitter Tags
 	{
 		tag: 'meta',

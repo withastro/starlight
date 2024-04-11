@@ -9,12 +9,15 @@ import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
 import { localizedId } from './slugs';
 import { useTranslations } from './translations';
+import { getSiteTitle } from './title';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
 }
 
 export interface StarlightRouteData extends Route {
+  /** Title of the site. */
+  siteTitle: string;
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
 	/** Site navigation sidebar entries for this page. */
@@ -40,10 +43,12 @@ export function generateRouteData({
 	props: PageProps;
 	url: URL;
 }): StarlightRouteData {
-	const { entry, locale } = props;
+	const { entry, locale, lang } = props;
 	const sidebar = getSidebar(url.pathname, locale);
+  const siteTitle  = getSiteTitle(lang);
 	return {
 		...props,
+    siteTitle ,
 		sidebar,
 		hasSidebar: entry.data.template !== 'splash',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
