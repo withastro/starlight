@@ -174,13 +174,6 @@
     "./404.astro": "./404.astro",
     "./style/markdown.css": "./style/markdown.css"
   },
-  "typesVersions": {
-    "*": {
-      "expressive-code/hast": [
-        "integrations/expressive-code/hast.d.ts"
-      ]
-    }
-  },
   "peerDependencies": {
     "astro": "^4.2.7"
   },
