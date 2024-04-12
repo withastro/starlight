@@ -118,7 +118,7 @@
   <details> and <summary> styles
 */
 .sl-markdown-content details:not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-hairline);
+	--sl-details-border-color: var(--sl-color-hairline-light);
 
 	padding-inline-start: 1rem;
 	border-inline-start: 1px solid var(--sl-details-border-color);
