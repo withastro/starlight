@@ -54,14 +54,14 @@ interface StarlightPlugin {
 
 **类型：** `StarlightUserConfig`
 
-一个用户提供的 [Starlight 配置](/zh-cn/reference/configuration)的只读副本。
+一个用户提供的 [Starlight 配置](/zh-cn/reference/configuration/)的只读副本。
 这个配置可能已经被当前插件之前的其他插件更新过了。
 
 #### `updateConfig`
 
 **类型：** `(newConfig: StarlightUserConfig) => void`
 
-一个可以更新用户提供的 [Starlight 配置](/zh-cn/reference/configuration)的回调函数。
+一个可以更新用户提供的 [Starlight 配置](/zh-cn/reference/configuration/)的回调函数。
 传入你想要覆盖的根级配置键。
 要更新嵌套的配置值，你必须提供整个嵌套对象。
 
@@ -100,7 +100,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -149,7 +149,7 @@ export default {
 export default {
   name: 'long-process-plugin',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info('启动一个长流程…');
       // 一些很长的流程…
     },

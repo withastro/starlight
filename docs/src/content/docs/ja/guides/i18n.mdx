@@ -3,11 +3,13 @@ title: 国際化（i18n）
 description: 複数言語をサポートするためにStarlightサイトを設定する方法について学びます。
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlightは、ルーティング、フォールバックコンテンツ、右横書き（right-to-left、RTL）言語へのフルサポートなど、複数言語サイトを構築するための機能を組み込みで提供します。
 
 ## i18nの設定
+
+<Steps>
 
 1. [`locales`](/ja/reference/configuration/#locales)と[`defaultLocale`](/ja/reference/configuration/#defaultlocale)をStarlightインテグレーションに渡すことで、サポートする言語についてStarlightに伝えます。
 
@@ -61,6 +63,8 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 3. これで各言語のディレクトリにコンテンツ用のファイルを追加できるようになりました。言語間でページを関連付けるために、同じページには同じファイル名を使用してください。フォールバックコンテンツや翻訳に関する通知など、Starlightのi18n機能をフル活用しましょう。
 
    たとえば、`ar/index.md`と`en/index.md`は、アラビア語版と英語版のホームページをそれぞれ表わします。
+
+</Steps>
 
 ### ルートロケールを使用する
 
@@ -150,6 +154,8 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
 `18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
 
+<Steps>
+
 1. 設定がまだであれば、`src/content/config.ts`で`i18n`データコレクションを設定します。
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -207,6 +213,8 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+</Steps>
 
 ### 翻訳スキーマを拡張する
 

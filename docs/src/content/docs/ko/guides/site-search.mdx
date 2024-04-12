@@ -3,7 +3,7 @@ title: 사이트 검색
 description: Starlight에 내장된 사이트 검색 기능과 이를 사용자 정의하는 방법에 대해 알아보세요.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 기본적으로 Starlight 사이트에는 정적 사이트를 위한 빠르고 낮은 대역폭을 갖춘 검색 도구인 [Pagefind](https://pagefind.app/)에서 제공하는 전체 텍스트 검색이 포함되어 있습니다.
 
@@ -47,6 +47,8 @@ title: 부분적으로 색인이 생성된 페이지
 ### Algolia DocSearch
 
 [Algolia의 DocSearch 프로그램](https://docsearch.algolia.com/)에 대한 액세스 권한이 있고, 이를 Pagefind 대신 사용하려는 경우, 공식 Starlight DocSearch 플러그인을 사용할 수 있습니다.
+
+<Steps>
 
 1. `@astrojs/starlight-docsearch`를 설치합니다.
 
@@ -102,12 +104,16 @@ title: 부분적으로 색인이 생성된 페이지
    });
    ```
 
+</Steps>
+
 이 업데이트된 구성을 사용하면 사이트의 검색 창에서 기본 검색 모달 대신 Algolia 모달이 열립니다.
 
 #### DocSearch UI 번역
 
 DocSearch는 기본적으로 영어 UI 문자열만 제공합니다.
 Starlight에 내장된 [국제화 시스템](/ko/guides/i18n/#starlight-ui-번역)을 사용하여 모달 UI 번역을 추가하세요.
+
+<Steps>
 
 1. `src/content/config.ts` 파일의 DocSearch 스키마를 사용하여 Starlight의 `i18n` 콘텐츠 컬렉션 정의를 확장합니다.
 
@@ -162,3 +168,5 @@ Starlight에 내장된 [국제화 시스템](/ko/guides/i18n/#starlight-ui-번�
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>

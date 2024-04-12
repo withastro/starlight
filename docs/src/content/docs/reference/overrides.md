@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-You can override Starlight’s built-in components by providing paths to replacement components in Starlight’s [`components`](/reference/configuration#components) configuration option.
+You can override Starlight’s built-in components by providing paths to replacement components in Starlight’s [`components`](/reference/configuration/#components) configuration option.
 This page lists all components available to override and links to their default implementations on GitHub.
 
 Learn more in the [Guide to Overriding Components](/guides/overriding-components/).
@@ -158,7 +158,7 @@ Component rendered inside each page’s `<head>`.
 Includes important tags including `<title>`, and `<meta charset="utf-8">`.
 
 Override this component as a last resort.
-Prefer the [`head`](/reference/configuration#head) option Starlight config if possible.
+Prefer the [`head`](/reference/configuration/#head) option Starlight config if possible.
 
 #### `ThemeProvider`
 
@@ -243,7 +243,7 @@ This allows you to add UI for alternative search providers when disabling Pagefi
 **Default component:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 Component rendered in the site header including social icon links.
-The default implementation uses the [`social`](/reference/configuration#social) option in Starlight config to render icons and links.
+The default implementation uses the [`social`](/reference/configuration/#social) option in Starlight config to render icons and links.
 
 #### `ThemeSelect`
 
@@ -316,7 +316,7 @@ These components are rendered in the main column of page content.
 **Default component:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Banner component rendered at the top of each page.
-The default implementation uses the page’s [`banner`](/reference/frontmatter#banner) frontmatter value to decide whether or not to render.
+The default implementation uses the page’s [`banner`](/reference/frontmatter/#banner) frontmatter value to decide whether or not to render.
 
 #### `ContentPanel`
 
@@ -343,7 +343,7 @@ Only used on multilingual sites.
 
 **Default component:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Component rendered at the top of the page when [`hero`](/reference/frontmatter#hero) is set in frontmatter.
+Component rendered at the top of the page when [`hero`](/reference/frontmatter/#hero) is set in frontmatter.
 The default implementation shows a large title, tagline, and call-to-action links alongside an optional image.
 
 #### `MarkdownContent`

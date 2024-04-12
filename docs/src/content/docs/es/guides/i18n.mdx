@@ -3,11 +3,13 @@ title: Internacionalización (i18n)
 description: Aprende a configurar tu sitio Starlight para admitir varios idiomas.
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight proporciona soporte incorporado para sitios multilingües, incluidas las rutas, el contenido de respaldo y el soporte completo de idiomas de derecha a izquierda (RTL).
 
 ## Configura i18n
+
+<Steps>
 
 1. Indícale a Starlight los idiomas que admites pasando [`locales`](/es/reference/configuration/#locales) y [`defaultLocale`](/es/reference/configuration/#defaultlocale) a la integración de Starlight:
 
@@ -62,6 +64,8 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 3. Ahora puedes agregar archivos de contenido en los directorios de tu idioma. Utiliza el mismo nombre de archivo para asociar páginas entre idiomas y aprovechar todas las características de internacionalización (i18n) de Starlight, como contenido de respaldo, avisos de traducción y más.
 
    Por ejemplo, crea `ar/index.md` y `en/index.md` para representar la página de inicio en árabe e inglés, respectivamente.
+
+</Steps>
 
 ### Usa una raíz de configuración regional
 
@@ -151,6 +155,8 @@ predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.m
 
 Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
 
+<Steps>
+
 1. Configura la colección de datos `i18n` en `src/content/config.ts` si aún no está configurada:
 
    ```diff lang="js" ins=/, (i18nSchema)/
@@ -212,6 +218,8 @@ Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras eti
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+</Steps>
 
 ### Extiende el esquema de traducción
 

@@ -3,14 +3,15 @@ title: Personalizando Starlight
 description: Aprende cómo personalizar tu sitio de Starlight con estilos personalizados, fuentes y mucho más.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { FileTree } from '@astrojs/starlight/components';
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlight proporciona estilos y características predeterminadas sensatas, por lo que puedes comenzar rápidamente sin necesidad de configuración. Cuando desees comenzar a personalizar la apariencia de tu sitio de Starlight, esta guía te proporciona toda la información necesaria.
 
 ## Añade tu logo
 
 Agregando un logo personalizado al encabezado del sitio es una forma rápida de agregar tu marca personalizada a un sitio de Starlight.
+
+<Steps>
 
 1. Agrega el archivo de imagen de tu logo al directorio `src/assets/`:
 
@@ -43,6 +44,8 @@ Agregando un logo personalizado al encabezado del sitio es una forma rápida de 
    });
    ```
 
+</Steps>
+
 De forma predeterminada, el logo se mostrará junto al título de tu sitio.
 Si tu imagen de logo ya incluye el título del sitio, puedes ocultar visualmente el texto del título estableciendo la opción `replacesTitle`.
 El texto del título seguirá estando disponible para lectores de pantalla para garantizar la accesibilidad del encabezado.
@@ -60,6 +63,8 @@ starlight({
 ### Variantes de logo claro y oscuro
 
 Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
+
+<Steps>
 
 1. Agrega un archivo de imagen para cada variante en el directorio `src/assets/`:
 
@@ -85,6 +90,8 @@ Puedes mostrar diferentes versiones de tu logo en modos claro y oscuro.
      },
    }),
    ```
+
+</Steps>
 
 ## Habilitar el mapa del sitio
 
@@ -303,6 +310,8 @@ Para utilizar Google Fonts, sigue la [guía de configuración de Fontsource](#co
 
 #### Configurar archivos de fuentes locales.
 
+<Steps>
+
 1. Agrega tus archivos de fuente a un directorio `src/fonts/` y crea un archivo `font-face.css` vacío.
 
    <FileTree>
@@ -352,10 +361,14 @@ Para utilizar Google Fonts, sigue la [guía de configuración de Fontsource](#co
    });
    ```
 
+</Steps>
+
 #### Configurar una fuente de Fontsource
 
 El proyecto [Fontsource](https://fontsource.org/) simplifica el uso de fuentes de Google Fonts y otras fuentes de código abierto.
 Proporciona módulos npm que puedes instalar para las fuentes que deseas utilizar e incluye archivos CSS listos para usar que puedes agregar a tu proyecto.
+
+<Steps>
 
 1.  Encuentra la fuente que deseas utilizar en el catálogo de [Fontsource](https://fontsource.org/).
     En este ejemplo, se utilizará [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
@@ -413,6 +426,8 @@ Proporciona módulos npm que puedes instalar para las fuentes que deseas utiliza
     ```
 
     Fontsource incluye varios archivos CSS para cada fuente. Consulta la [documentación de Fontsource](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) sobre cómo incluir diferentes pesos y estilos para comprender cuál debes usar.
+
+</Steps>
 
 ### Usar fuentes
 

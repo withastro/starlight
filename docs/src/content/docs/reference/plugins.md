@@ -53,14 +53,14 @@ This hook is called with the following options:
 
 **type:** `StarlightUserConfig`
 
-A read-only copy of the user-supplied [Starlight configuration](/reference/configuration).
+A read-only copy of the user-supplied [Starlight configuration](/reference/configuration/).
 This configuration may have been updated by other plugins configured before the current one.
 
 #### `updateConfig`
 
 **type:** `(newConfig: StarlightUserConfig) => void`
 
-A callback function to update the user-supplied [Starlight configuration](/reference/configuration).
+A callback function to update the user-supplied [Starlight configuration](/reference/configuration/).
 Provide the root-level configuration keys you want to override.
 To update nested configuration values, you must provide the entire nested object.
 
@@ -99,7 +99,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -148,7 +148,7 @@ All logged messages will be prefixed with the plugin name.
 export default {
   name: 'long-process-plugin',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info('Starting long process…');
       // Some long process…
     },

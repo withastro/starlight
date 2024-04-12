@@ -3,11 +3,15 @@ title: CSS e stile
 description: Scopri come personalizzare lo stile del tuo sito Starlight con CSS personalizzati o integrarlo con Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Puoi modellare il tuo sito Starlight con file CSS personalizzati o utilizzare il plug-in Starlight Tailwind.
 
 ## Stili CSS personalizzati
 
 Personalizza gli stili applicati al tuo sito Starlight fornendo file CSS aggiuntivi per modificare o estendere gli stili predefiniti di Starlight.
+
+<Steps>
 
 1. Aggiungi un file CSS alla tua directory `src/`.
    Ad esempio, potresti impostare una larghezza predefinita della colonna più ampia e una dimensione del testo più grande per i titoli delle pagine:
@@ -40,6 +44,8 @@ Personalizza gli stili applicati al tuo sito Starlight fornendo file CSS aggiunt
    });
    ```
 
+</Steps>
+
 Puoi vedere tutte le proprietà personalizzate CSS utilizzate da Starlight che puoi impostare per personalizzare il tuo sito nel [file `props.css` su GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## CSS Tailwind
@@ -54,8 +60,6 @@ Il plugin Starlight Tailwind applica la seguente configurazione:
 - Disabilita gli stili di ripristino [Preflight](https://tailwindcss.com/docs/preflight) di Tailwind ripristinando selettivamente le parti essenziali di Preflight richieste per le classi di utilità sui bordi di Tailwind.
 
 ### Crea un nuovo progetto con Tailwind
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Avvia un nuovo progetto Starlight con Tailwind CSS preconfigurato utilizzando `create astro`:
 
@@ -86,6 +90,8 @@ yarn create astro --template starlight/tailwind
 ### Aggiungi Tailwind a un progetto esistente
 
 Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi passaggi.
+
+<Steps>
 
 1. Aggiungi l'integrazione Tailwind di Astro:
 
@@ -193,6 +199,8 @@ Se hai già un sito Starlight e desideri aggiungere Tailwind CSS, segui questi p
    	plugins: [starlightPlugin()],
    };
    ```
+
+</Steps>
 
 ### Styling di Starlight con Tailwind
 

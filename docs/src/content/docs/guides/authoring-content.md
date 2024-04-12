@@ -165,7 +165,7 @@ Your users may be more productive and find your product easier to use thanks to 
 
 - Clear navigation
 - User-configurable colour theme
-- [i18n support](/guides/i18n)
+- [i18n support](/guides/i18n/)
 
 :::
 
@@ -179,7 +179,7 @@ Your users may be more productive and find your product easier to use thanks to 
 
 - Clear navigation
 - User-configurable colour theme
-- [i18n support](/guides/i18n)
+- [i18n support](/guides/i18n/)
 
 :::
 ```
