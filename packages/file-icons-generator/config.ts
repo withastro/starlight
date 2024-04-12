@@ -87,6 +87,7 @@ export const starlight = {
 		extensions: {
 			'.astro': 'astro',
 			'.mdx': 'mdx',
+			'.pkl': 'pkl',
 		},
 		partials: {},
 	} satisfies Definitions,
