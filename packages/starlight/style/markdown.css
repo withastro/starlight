@@ -120,7 +120,7 @@
 .sl-markdown-content details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-hairline);
 
-	padding-inline-start: 0.75rem;
+	padding-inline-start: 1rem;
 	border-inline-start: 1px solid var(--sl-details-border-color);
 }
 .sl-markdown-content details[open]:not(:where(.not-content *)),
