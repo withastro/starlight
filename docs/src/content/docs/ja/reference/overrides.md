@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Starlightの[`components`](/ja/reference/configuration#components)設定オプションに置き換え対象のコンポーネントへのパスを指定することで、Starlightの組み込みコンポーネントをオーバーライドできます。このページでは、オーバーライド可能なすべてのコンポーネントと、GitHub上にあるコンポーネントのデフォルト実装へのリンクの一覧を記載しています。
+Starlightの[`components`](/ja/reference/configuration/#components)設定オプションに置き換え対象のコンポーネントへのパスを指定することで、Starlightの組み込みコンポーネントをオーバーライドできます。このページでは、オーバーライド可能なすべてのコンポーネントと、GitHub上にあるコンポーネントのデフォルト実装へのリンクの一覧を記載しています。
 
 [コンポーネントのオーバーライドガイド](/ja/guides/overriding-components/)も参照してください。
 
@@ -151,7 +151,7 @@ entry: {
 
 各ページの`<head>`内にレンダリングされるコンポーネント。`<title>`や`<meta charset="utf-8">`などの重要なタグが含まれます。
 
-このコンポーネントをオーバーライドするのは最後の手段としてください。可能な限り、Starlightの設定オプション[`head`](/ja/reference/configuration#head)を使用してください。
+このコンポーネントをオーバーライドするのは最後の手段としてください。可能な限り、Starlightの設定オプション[`head`](/ja/reference/configuration/#head)を使用してください。
 
 #### `ThemeProvider`
 
@@ -223,7 +223,7 @@ Starlightの検索UIをレンダリングするために使用されるコンポ
 
 **デフォルトコンポーネント:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
-ソーシャルアイコンへのリンクを含む、サイトヘッダーにレンダリングされるコンポーネント。デフォルトの実装では、Starlightの設定の[`social`](/ja/reference/configuration#social)オプションを使用して、アイコンとリンクをレンダリングします。
+ソーシャルアイコンへのリンクを含む、サイトヘッダーにレンダリングされるコンポーネント。デフォルトの実装では、Starlightの設定の[`social`](/ja/reference/configuration/#social)オプションを使用して、アイコンとリンクをレンダリングします。
 
 #### `ThemeSelect`
 
@@ -289,7 +289,7 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 
 **デフォルトコンポーネント:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
-各ページの上部にレンダリングされるバナーコンポーネント。デフォルトの実装では、ページの[`banner`](/ja/reference/frontmatter#banner)フロントマターの値を使用して、レンダリングするかどうかを決定します。
+各ページの上部にレンダリングされるバナーコンポーネント。デフォルトの実装では、ページの[`banner`](/ja/reference/frontmatter/#banner)フロントマターの値を使用して、レンダリングするかどうかを決定します。
 
 #### `ContentPanel`
 
@@ -315,7 +315,7 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 
 **デフォルトコンポーネント:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-フロントマターで[`hero`](/ja/reference/frontmatter#hero)が設定されている場合に、ページの上部にレンダリングされるコンポーネント。デフォルトの実装では、大きなタイトル、タグライン、コールトゥアクション（call-to-action）リンク、オプションの画像を表示します。
+フロントマターで[`hero`](/ja/reference/frontmatter/#hero)が設定されている場合に、ページの上部にレンダリングされるコンポーネント。デフォルトの実装では、大きなタイトル、タグライン、コールトゥアクション（call-to-action）リンク、オプションの画像を表示します。
 
 #### `MarkdownContent`
 

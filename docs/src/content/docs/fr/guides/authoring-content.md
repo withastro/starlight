@@ -164,7 +164,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 - Navigation claire
 - Thème de couleurs configurable par l'utilisateur
-- [Support i18n](/fr/guides/i18n)
+- [Support i18n](/fr/guides/i18n/)
 
 :::
 
@@ -178,7 +178,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 - Navigation claire
 - Thème de couleurs configurable par l'utilisateur
-- [Support i18n](/fr/guides/i18n)
+- [Support i18n](/fr/guides/i18n/)
 
 :::
 ```

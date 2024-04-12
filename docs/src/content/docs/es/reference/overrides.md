@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a los componentes en la opción de configuración [`components`](/es/reference/configuration#components) de Starlight.
+Puedes reemplazar los componentes integrados de Starlight proporcionando rutas a los componentes en la opción de configuración [`components`](/es/reference/configuration/#components) de Starlight.
 
 Esta página enumera todos los componentes disponibles para reemplazar y enlaces a sus implementaciones predeterminadas en GitHub.
 
@@ -159,7 +159,7 @@ Componente renderizado dentro del elemento `<head>` de cada página.
 Incluye etiquetas importantes como `<title>` y `<meta charset="utf-8">`.
 
 Reemplaza este componente como último recurso.
-Si es posible, prefiere la opción [`head`](/es/reference/configuration#head) de la configuración de Starlight si es posible.
+Si es posible, prefiere la opción [`head`](/es/reference/configuration/#head) de la configuración de Starlight si es posible.
 
 #### `ThemeProvider`
 
@@ -242,7 +242,7 @@ Cuando [`pagefind`](/es/reference/configuration/#pagefind) está deshabilitado, 
 **Componente por defecto:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 Componente renderizado en el encabezado del sitio que incluye enlaces de iconos sociales.
-La implementación predeterminada utiliza la opción [`social`](/es/reference/configuration#social) en la configuración de Starlight para renderizar iconos y enlaces.
+La implementación predeterminada utiliza la opción [`social`](/es/reference/configuration/#social) en la configuración de Starlight para renderizar iconos y enlaces.
 
 #### `ThemeSelect`
 
@@ -315,7 +315,7 @@ Estos componentes se renderizan en la columna principal del contenido de la pág
 **Componente por defecto:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Componente Banner renderizado en la parte superior de cada página.
-La implementación predeterminada usa el valor de frontmatter [`banner`](/es/reference/frontmatter#banner) de la página para decidir si renderizar o no.
+La implementación predeterminada usa el valor de frontmatter [`banner`](/es/reference/frontmatter/#banner) de la página para decidir si renderizar o no.
 
 #### `ContentPanel`
 
@@ -343,7 +343,7 @@ Solo se usa en sitios multilingües.
 
 **Componente por defecto:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Componente renderizado en la parte superior de la página cuando [`hero`](/es/reference/frontmatter#hero) está establecido en frontmatter.
+Componente renderizado en la parte superior de la página cuando [`hero`](/es/reference/frontmatter/#hero) está establecido en frontmatter.
 La implementación predeterminada muestra un título grande, un lema y enlaces de llamada a la acción junto con una imagen opcional.
 
 #### `MarkdownContent`
