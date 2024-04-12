@@ -2,6 +2,8 @@
 title: ⚠️ Details styles demo page ⚠️
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 :::danger
 // TODO(HiDeoo) Remove this page
 :::
@@ -11,8 +13,8 @@ title: ⚠️ Details styles demo page ⚠️
 The following is a basic `<details>` element with no block content:
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 The following is a basic `<details>` element with block content:
@@ -29,8 +31,8 @@ This is the details content
 The following is a `<details>` element opened by default:
 
 <details open>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 ## Long summary
@@ -38,8 +40,12 @@ This is the details content
 The following is a `<details>` element with a very long summary:
 
 <details>
-<summary>This is the very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long summary</summary>
-This is the details content
+	<summary>
+		This is the very very very very very very very very very very very very very
+		very very very very very very very very very very very very very very very
+		very very very very very long summary
+	</summary>
+	This is the details content
 </details>
 
 ## Long content
@@ -68,8 +74,8 @@ Donec purus nibh, ornare ac sagittis porta, porta ac neque. Donec efficitur dict
 The following are two `<details>` elements with a code block in between:
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 ```js
@@ -77,8 +83,8 @@ console.log('some content in between');
 ```
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 ## Markdown content
@@ -107,18 +113,30 @@ This is a note
 The following are `<details>` elements forming an uncontrolled accordion, where each `<details>` element can be opened or closed independently:
 
 <details>
-<summary>This is the summary (1)</summary>
-This is the details content (1)
+	<summary>This is the summary (1)</summary>
+	This is the details content (1)
 </details>
 
 <details>
-<summary>This is the summary (2)</summary>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod ante lorem, quis posuere massa sodales id. Donec a dapibus nisi, id volutpat lorem. Aenean eleifend nisl at ex feugiat, at vulputate lorem luctus. Aliquam eget accumsan ipsum. Maecenas ut elit hendrerit, sodales leo at, tincidunt elit. Nullam ut venenatis libero. In vel molestie tellus. Suspendisse vitae nibh in felis faucibus aliquet. Nunc tortor enim, pellentesque sit amet justo eget, auctor elementum enim. Nam posuere et ipsum lobortis porttitor. Proin consectetur ullamcorper augue, a fermentum neque dapibus eget. Praesent feugiat orci vulputate turpis mattis, eget placerat mi volutpat.
+	<summary>This is the summary (2)</summary>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod ante
+	lorem, quis posuere massa sodales id. Donec a dapibus nisi, id volutpat lorem.
+	Aenean eleifend nisl at ex feugiat, at vulputate lorem luctus. Aliquam eget accumsan
+	ipsum. Maecenas ut elit hendrerit, sodales leo at, tincidunt elit. Nullam ut venenatis
+	libero. In vel molestie tellus. Suspendisse vitae nibh in felis faucibus aliquet.
+	Nunc tortor enim, pellentesque sit amet justo eget, auctor elementum enim. Nam
+	posuere et ipsum lobortis porttitor. Proin consectetur ullamcorper augue, a fermentum
+	neque dapibus eget. Praesent feugiat orci vulputate turpis mattis, eget placerat
+	mi volutpat.
 </details>
 
 <details>
-<summary>This is the summary (3)</summary>
-Maecenas vehicula orci metus, quis dapibus turpis suscipit vitae. Nullam velit ante, convallis fermentum massa a, condimentum mattis lorem. Nunc interdum consequat mollis. Suspendisse semper diam tellus. Maecenas mollis congue mi, eu hendrerit dui hendrerit sed. Aliquam quis ornare dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+	<summary>This is the summary (3)</summary>
+	Maecenas vehicula orci metus, quis dapibus turpis suscipit vitae. Nullam velit
+	ante, convallis fermentum massa a, condimentum mattis lorem. Nunc interdum consequat
+	mollis. Suspendisse semper diam tellus. Maecenas mollis congue mi, eu hendrerit
+	dui hendrerit sed. Aliquam quis ornare dolor. Pellentesque habitant morbi tristique
+	senectus et netus et malesuada fames ac turpis egestas.
 </details>
 
 ## Controlled accordion
@@ -130,18 +148,30 @@ Note that this feature is not supported in Firefox.
 :::
 
 <details name="controlled-details">
-<summary>This is the summary (1)</summary>
-This is the details content (1)
+	<summary>This is the summary (1)</summary>
+	This is the details content (1)
 </details>
 
 <details name="controlled-details">
-<summary>This is the summary (2)</summary>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod ante lorem, quis posuere massa sodales id. Donec a dapibus nisi, id volutpat lorem. Aenean eleifend nisl at ex feugiat, at vulputate lorem luctus. Aliquam eget accumsan ipsum. Maecenas ut elit hendrerit, sodales leo at, tincidunt elit. Nullam ut venenatis libero. In vel molestie tellus. Suspendisse vitae nibh in felis faucibus aliquet. Nunc tortor enim, pellentesque sit amet justo eget, auctor elementum enim. Nam posuere et ipsum lobortis porttitor. Proin consectetur ullamcorper augue, a fermentum neque dapibus eget. Praesent feugiat orci vulputate turpis mattis, eget placerat mi volutpat.
+	<summary>This is the summary (2)</summary>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas euismod ante
+	lorem, quis posuere massa sodales id. Donec a dapibus nisi, id volutpat lorem.
+	Aenean eleifend nisl at ex feugiat, at vulputate lorem luctus. Aliquam eget accumsan
+	ipsum. Maecenas ut elit hendrerit, sodales leo at, tincidunt elit. Nullam ut venenatis
+	libero. In vel molestie tellus. Suspendisse vitae nibh in felis faucibus aliquet.
+	Nunc tortor enim, pellentesque sit amet justo eget, auctor elementum enim. Nam
+	posuere et ipsum lobortis porttitor. Proin consectetur ullamcorper augue, a fermentum
+	neque dapibus eget. Praesent feugiat orci vulputate turpis mattis, eget placerat
+	mi volutpat.
 </details>
 
 <details name="controlled-details">
-<summary>This is the summary (3)</summary>
-Maecenas vehicula orci metus, quis dapibus turpis suscipit vitae. Nullam velit ante, convallis fermentum massa a, condimentum mattis lorem. Nunc interdum consequat mollis. Suspendisse semper diam tellus. Maecenas mollis congue mi, eu hendrerit dui hendrerit sed. Aliquam quis ornare dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+	<summary>This is the summary (3)</summary>
+	Maecenas vehicula orci metus, quis dapibus turpis suscipit vitae. Nullam velit
+	ante, convallis fermentum massa a, condimentum mattis lorem. Nunc interdum consequat
+	mollis. Suspendisse semper diam tellus. Maecenas mollis congue mi, eu hendrerit
+	dui hendrerit sed. Aliquam quis ornare dolor. Pellentesque habitant morbi tristique
+	senectus et netus et malesuada fames ac turpis egestas.
 </details>
 
 ## Nested details
@@ -154,8 +184,8 @@ The following is a `<details>` element with a nested `<details>` element:
 This is the details content
 
 <details>
-<summary>This is the nested summary</summary>
-This is the nested details content
+	<summary>This is the nested summary</summary>
+	This is the nested details content
 </details>
 
 And some content after the nested details
@@ -166,13 +196,16 @@ And some content after the nested details
 
 <div class="not-content">
 
-<p>The following is a <code>&lt;details&gt;</code> element wrapped with the <code>not-content</code> CSS class:</p>
+<p>
+	The following is a <code>&lt;details&gt;</code> element wrapped with the{' '}
+	<code>not-content</code> CSS class:
+</p>
 
-<br>
+<br />
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 </div>
@@ -184,8 +217,8 @@ The following is a `<details>` element nested in a block in RTL:
 <div dir="rtl">
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 </div>
@@ -193,8 +226,8 @@ This is the details content
 The following is a `<details>` element in RTL:
 
 <details dir="rtl">
-<summary>This is the summary</summary>
-With a summary and some details not in a paragraph
+	<summary>This is the summary</summary>
+	With a summary and some details not in a paragraph
 </details>
 
 ## Asides
@@ -205,8 +238,8 @@ The following are `<details>` elements nested in asides:
 This is the note aside content
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 :::
@@ -215,8 +248,8 @@ This is the details content
 This is the tip aside content
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 :::
@@ -225,8 +258,8 @@ This is the details content
 This is the caution aside content
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 :::
@@ -235,8 +268,45 @@ This is the details content
 This is the danger aside content
 
 <details>
-<summary>This is the summary</summary>
-This is the details content
+	<summary>This is the summary</summary>
+	This is the details content
 </details>
 
 :::
+
+## Steps
+
+### Inside Steps
+
+<Steps>
+
+1.  Step one has some information
+
+      <details>
+
+        <summary>Need to know more?</summary>
+
+        You might need more information for step one.
+
+        So we’re here to help.
+
+      </details>
+
+2.  Step two has some more information
+
+</Steps>
+
+### Containing Steps
+
+<details>
+  <summary>Need more details?</summary>
+  <Steps>
+
+1. Step one has some information.
+
+   These steps help if you need extra details to complete this task.
+
+2. Step two has some more information.
+
+  </Steps>
+</details>
