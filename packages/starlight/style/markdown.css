@@ -136,6 +136,9 @@
 .sl-markdown-content details[open] > summary:not(:where(.not-content *)) {
 	margin-bottom: 1rem;
 }
+.sl-markdown-content summary:not(:where(.not-content *)) > * {
+	display: inline;
+}
 
 /* Marker styles */
 .sl-markdown-content summary:not(:where(.not-content *))::marker,
