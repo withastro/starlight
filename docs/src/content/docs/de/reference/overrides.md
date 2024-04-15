@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Du kannst Starlight's eingebaute Komponenten überschreiben, indem du Pfade zu Ersatzkomponenten in Starlight's [`components`](/de/reference/configuration#components)-Konfigurationsoption angibst.
+Du kannst Starlight's eingebaute Komponenten überschreiben, indem du Pfade zu Ersatzkomponenten in Starlight's [`components`](/de/reference/configuration/#components)-Konfigurationsoption angibst.
 Diese Seite listet alle Komponenten auf, die überschrieben werden können, und verweist auf ihre Standardimplementierungen auf GitHub.
 
 Erfahre mehr in der [Anleitung zum Überschreiben von Komponenten](/de/guides/overriding-components/).
@@ -151,7 +151,7 @@ Diese Komponente wird innerhalb des `<head>` einer jeden Seite gerendert.
 Enthält wichtige Tags wie `<title>`, und `<meta charset="utf-8">`.
 
 Überschreibe diese Komponente nur, wenn es unbedingt notwendig ist.
-Bevorzuge die [`head`](/de/reference/configuration#head) Option der Starlight-Konfiguration wenn möglich.
+Bevorzuge die [`head`](/de/reference/configuration/#head) Option der Starlight-Konfiguration wenn möglich.
 
 #### `ThemeProvider`
 
@@ -232,7 +232,7 @@ Die Standardimplementierung enthält die Schaltfläche in der Kopfzeile und den 
 **Standardkomponente:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 Diese Komponente wird in der Kopfzeile der Website gerendert und enthält Links zu sozialen Symbolen.
-Die Standardimplementierung verwendet die Option [`social`](/de/reference/configuration#social) in der Starlight-Konfiguration, um Icons und Links darzustellen.
+Die Standardimplementierung verwendet die Option [`social`](/de/reference/configuration/#social) in der Starlight-Konfiguration, um Icons und Links darzustellen.
 
 #### `ThemeSelect`
 
@@ -305,7 +305,7 @@ Folgende Komponenten werden in der Hauptspalte des Seiteninhalts wiedergegeben.
 **Standardkomponente:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Diese Bannerkomponente wird oben auf jeder Seite angezeigt.
-Die Standard-Implementierung verwendet den [`banner`](/de/reference/frontmatter#banner)-Frontmatter-Wert der Seite, um zu entscheiden, ob sie gerendert wird oder nicht.
+Die Standard-Implementierung verwendet den [`banner`](/de/reference/frontmatter/#banner)-Frontmatter-Wert der Seite, um zu entscheiden, ob sie gerendert wird oder nicht.
 
 #### `ContentPanel`
 
@@ -332,7 +332,7 @@ Wird nur auf mehrsprachigen Seiten verwendet.
 
 **Standardkomponente:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Diese Komponente wird am oberen Rand der Seite angezeigt, wenn [`hero`](/de/reference/frontmatter#hero) in frontmatter eingestellt ist.
+Diese Komponente wird am oberen Rand der Seite angezeigt, wenn [`hero`](/de/reference/frontmatter/#hero) in frontmatter eingestellt ist.
 Die Standardimplementierung zeigt einen großen Titel, eine Tagline und Call-to-Action-Links neben einem optionalen Bild.
 
 #### `MarkdownContent`

@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { processPanels } from './rehype-tabs';
 
 const panelHtml = await Astro.slots.render('default');
@@ -10,15 +11,16 @@ const { html, panels } = processPanels(panelHtml);
 		panels && (
 			<div class="tablist-wrapper not-content">
 				<ul role="tablist">
-					{panels.map(({ label, panelId, tabId }, idx) => (
+					{panels.map(({ icon, label, panelId, tabId }, idx) => (
 						<li role="presentation" class="tab">
 							<a
 								role="tab"
 								href={'#' + panelId}
 								id={tabId}
-								aria-selected={idx === 0 && 'true'}
+								aria-selected={idx === 0 ? 'true' : 'false'}
 								tabindex={idx !== 0 ? -1 : 0}
 							>
+								{icon && <Icon name={icon} />}
 								{label}
 							</a>
 						</li>
@@ -50,14 +52,16 @@ const { html, panels } = processPanels(panelHtml);
 		margin-bottom: -2px;
 	}
 	.tab > [role='tab'] {
-		display: block;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 		padding: 0 1.25rem;
 		text-decoration: none;
 		border-bottom: 2px solid var(--sl-color-gray-5);
 		color: var(--sl-color-gray-3);
 		outline-offset: var(--sl-outline-offset-inside);
 	}
-	.tab [role='tab'][aria-selected] {
+	.tab [role='tab'][aria-selected='true'] {
 		color: var(--sl-color-white);
 		border-color: var(--sl-color-text-accent);
 		font-weight: 600;
@@ -83,7 +87,7 @@ const { html, panels } = processPanels(panelHtml);
 				// Handle clicks for mouse users
 				tab.addEventListener('click', (e) => {
 					e.preventDefault();
-					const currentTab = tablist.querySelector('[aria-selected]');
+					const currentTab = tablist.querySelector('[aria-selected="true"]');
 					if (e.currentTarget !== currentTab) {
 						this.switchTab(e.currentTarget as HTMLAnchorElement, i);
 					}
@@ -118,7 +122,7 @@ const { html, panels } = processPanels(panelHtml);
 
 			// Mark all tabs as unselected and hide all tab panels.
 			this.tabs.forEach((tab) => {
-				tab.removeAttribute('aria-selected');
+				tab.setAttribute('aria-selected', 'false');
 				tab.setAttribute('tabindex', '-1');
 			});
 			this.panels.forEach((oldPanel) => {

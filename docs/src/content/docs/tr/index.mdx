@@ -24,6 +24,8 @@ hero:
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
 import AboutAstro from '~/components/about-astro.astro';
+import TestimonialGrid from '~/components/testimonial-grid.astro';
+import Testimonial from '~/components/testimonial.astro';
 
 <CardGrid stagger>
 	<Card title="Memnun eden dokümantasyon" icon="open-book">
@@ -44,6 +46,104 @@ import AboutAstro from '~/components/about-astro.astro';
 		gelir. React, Vue, Svelte ve daha fazlası ile genişletin.
 	</Card>
 </CardGrid>
+
+<TestimonialGrid title="İnsanlar ne diyor">
+  <Testimonial
+    name="Rachel"
+    handle="rachelnabors"
+    cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
+  >
+  Astro ekibi dokümantasyonun nasıl yapılacağını GELİŞTİRDİ ve kullanıma hazır olarak Starlight projesiyle edinebilirsiniz.
+  </Testimonial>
+  <Testimonial
+    name="Flavio"
+    handle="flaviocopes"
+    cite="https://twitter.com/flaviocopes/status/1738237658717905108"
+  >
+  Astro'nun resmi başlangıç kiti Starlight, dokümantasyon sitesi oluşturmak için gerçekten muhteşem bir araç.
+  </Testimonial>
+  <Testimonial
+    name="Tomek"
+    handle="sulco"
+    cite="https://twitter.com/sulco/status/1735610348730802342"
+  >
+  Starlight bizim mükemmel geliştirici deneyimine başlangıç örneğimiz: hız, kolaylık ve detaylara karşı titizlik ilham verici. Teknik ve görünümü hallediyor, böylece siz içeriğinize odaklanabiliyorsunuz 👏
+  
+	StackBlitz ekibi tümüyle seviyor!
+  </Testimonial>
+  <Testimonial
+    name="Roberto"
+    handle="RmeetsH"
+    cite="https://twitter.com/RmeetsH/status/1735783992018760090"
+  >
+  Starlight benim için oyun-değiştirici oldu, içerik oluşturmaya odaklanmama müsade ediyor.
+  Sezgisel tasarımı sadece iş akışımı kolaylaştırmıyor, ayrıca açık kaynak geliştiricileri için oryantasyon süresini kısaltıyor.
+  </Testimonial>
+  <Testimonial
+    name="Joel"
+    handle="jhooks"
+    cite="https://twitter.com/jhooks/status/1727405160547418405"
+  >
+	Course Builder dokümantasyonu için Starlight ile biraz vakit geçirdim ve harika geçti. Çokça iyi dokunuşlar ve detaylara boğulmadan Markdown ile yazmaya odaklanabiliyorum.
+  </Testimonial>
+  <Testimonial
+    name="Rick"
+    handle="rick_viscomi"
+    cite="https://twitter.com/rick_viscomi/status/1665867447910510593"
+  >
+	Starlight ile uğraşmaya başladım. Söylemeliyim ki kullanıma hazır halde gelen performansından etkilendim.
+
+    💯💯💯💯
+
+  </Testimonial>
+  <Testimonial
+    name="Nicolas"
+    handle="beaussan"
+    cite="https://twitter.com/beaussan/status/1735625189583466893"
+  >
+	Starlight dokümantasyona başlamanın en iyi yolu. Astro'nun hızı ve gücünün arasında ve Starlight'tan gelen kalıp, mükemmel çift.
+	Bir süredir benim başlangıcım ve hala seviyorum!
+
+  </Testimonial>
+  <Testimonial
+    name="Sylwia"
+    handle="SylwiaVargas"
+    cite="https://x.com/SylwiaVargas/status/1726556825741578286"
+  >
+	Starlight'ı son işimde kullandım ve bayıldım. Harika bileşenler, sezgisel tasarım, ve süper-hevesli topluluk (ne zaman biri bir şeye ihtiyaç duyarsa ya yakın zamanda ihtiyacı yerine getirirler ya da iş görecek yolu paylaşırlar). Çok keyifli bir deneyim.
+  </Testimonial>
+  <Testimonial
+    name="Lou Cyx"
+    handle="loucyx"
+    cite="https://elk.zone/m.webtoo.ls/@loucyx@mastodon.social/111587380021362284"
+  >
+	Starlight sayesinde monorepo sitemdeki dokümantasyon her zamankinden daha iyi görünüyor. Astro'nun tüm gücünü kaybetmeden kullanmak aşırı kolay. Starlight üzerinde çalıştığınız için teşekkür ederim!
+  </Testimonial>
+  <Testimonial
+    name="BowTiedWebReaper"
+    handle="BowTiedWebReapr"
+    cite="https://twitter.com/BowTiedWebReapr/status/1735633399501697517"
+  >
+	Starlight dokümantasyon için benim başlangıç aracım. Varolan Astro ürün web siteme dokümantasyon eklemeyi çok kolaylaştırdı, başka bir araç olsaydı alt alan adına ihtiyaç duyardım.
+  </Testimonial>
+  <Testimonial
+    name="Jeff"
+    handle="J_Everhart383"
+    cite="https://twitter.com/J_Everhart383/status/1691900590048292908"
+  >
+	WPEngine Atlas Platform dokümantasyonunu yeniden oluşturuyordum. İnanın bana Starlight A+ dokümantasyon platformu oluştumrak için ihtiyacınız olan her şeye sahip&nbsp;🙌
+  </Testimonial>
+  <Testimonial
+    name="Chloe"
+    handle="solelychloe"
+    cite="https://twitter.com/solelychloe/status/1695115277602628082"
+  >
+    Starlight'a bir şans verin!
+
+    	Birkaç sitem için kullandım ve o muhteşem.
+
+  </Testimonial>
+</TestimonialGrid>
 
 <AboutAstro title="Size getirildi">
 Astro, hız için tasarlanmış hepsi bir arada web çerçevesidir.

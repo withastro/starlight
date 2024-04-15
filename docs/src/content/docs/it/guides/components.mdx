@@ -30,7 +30,7 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 </AnotherComponent>
 ```
 
-Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/it/core-concepts/framework-components/).
+Siccome Starlight è integrato con Astro, puoi aggiungere componenti costruiti con qualsiasi [UI framework supportato (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/it/core-concepts/framework-components/) nei tuoi file MDX.
 Vedi di più su come [usare componenti in MDX](https://docs.astro.build/it/guides/markdown-content/#using-components-in-mdx) nella documentazione Astro.
 
 ### Compatibilità con gli stili di Starlight
@@ -59,6 +59,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Puoi rappresentare contenuti con un'interfaccia a schede con i componenti `<Tabs>` e `<TabItem>`.
 Ogni `<TabItem>` deve avere un `label` per indicare la scheda corrispondente.
+Usa l'attributo opzionale `icon` per includere una delle [icone integrate di Starlight](#tutte-le-icone) accanto all'etichetta.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -66,16 +67,24 @@ Ogni `<TabItem>` deve avere un `label` per indicare la scheda corrispondente.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Lune">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stelle" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Lune" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 <Tabs>
-	<TabItem label="Stelle">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Lune">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stelle" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Lune" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 
 ### Card
@@ -104,7 +113,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 <Card title="Guarda qui">Contenuti interessanti da evidenziare.</Card>
 
@@ -150,14 +159,14 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard
-		title="Creazione di Markdown"
+		title="Creazione di contenuti in Markdown"
 		href="/it/guides/authoring-content/"
 	/>
 	<LinkCard title="Componenti" href="/it/guides/components/" />
 </CardGrid>
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+Il codice sopra genera quanto segue nella pagina:
 
 import { LinkCard } from '@astrojs/starlight/components';
 
@@ -169,38 +178,66 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard
-		title="Creazione di Markdown"
+		title="Creazione di contenuti in Markdown"
 		href="/it/guides/authoring-content/"
 	/>
 	<LinkCard title="Componenti" href="/it/guides/components/" />
 </CardGrid>
 
-### Icone
+### Avvisi
 
-import { Icon } from '@astrojs/starlight/components';
-import IconsList from '~/components/icons-list.astro';
+Gli avvisi sono utili per indicare contenuti secondari insieme ai contenuti principali.
 
-Starlight fornisce una serie di icone comuni che puoi visualizzare nei tuoi contenuti utilizzando il componente `<Icon>`.
+`<Aside>` può avere un `type` opzionale di `note` (il valore predefinito), `tip`, `caution` o `danger`. Impostando un attributo `title` si sovrascrive il titolo predefinito dell'avviso.
 
-Ogni `<Icon>` richiede un [`name`](#tutte-le-icone) e può facoltativamente includere un attributo `label`, `size` e `color`.
-
-```mdx
+````mdx
 # src/content/docs/example.mdx
 
-import { Icon } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 
-<Icon name="star" color="goldenrod" size="2rem" />
+<Aside>Un avviso predefinito senza un titolo personalizzato.</Aside>
+
+<Aside type="caution" title="Attenzione!">
+	Un avviso *con* un titolo personalizzato.
+</Aside>
+
+<Aside type="tip">
+
+Altri contenuti sono supportati anche negli avvisi.
+
+```js
+// Un pezzo di codice, per esempio.
 ```
 
-Il codice precedente genera quanto segue nella pagina:
+</Aside>
 
-<Icon name="star" color="goldenrod" size="2rem" />
+<Aside type="danger">Non dare la tua password a nessuno.</Aside>
+````
 
-#### Tutte le icone
+Il codice sopra genera quanto segue nella pagina:
 
-Di seguito è riportato un elenco di tutte le icone disponibili con i nomi associati. Fare clic su un'icona per copiarne il codice componente.
+import { Aside } from '@astrojs/starlight/components';
 
-<IconsList />
+<Aside>Un avviso di default senza un titolo personalizzato</Aside>
+
+<Aside type="caution" title="Attenzione!">
+	Un avviso di cautela con un titolo personalizzato.
+</Aside>
+
+<Aside type="tip">
+
+Altri contenuti sono supportati anche negli avvisi.
+
+```js
+// Un pezzo di codice, per esempio.
+```
+
+</Aside>
+
+<Aside type="danger">Non dare la tua password a nessuno.</Aside>
+
+Starlight fornisce anche una sintassi personalizzata per mostrare gli avvisi in Markdown e MDX come alternativa al componente `<Aside>`.
+Consulta la guida [“Creazione di contenuti in Markdown”](/it/guides/authoring-content/#avvisi) per i dettagli sulla sintassi personalizzata.
 
 ### Codice
 
@@ -247,3 +284,119 @@ Il codice sopra genera quanto segue nella pagina:
 import importedCode from '/src/env.d.ts?raw';
 
 <Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### Albero di File
+
+Utilizza il componente `<FileTree>` per visualizzare la struttura di una directory con icone dei file e directory chiudibili.
+
+Specifica la struttura dei tuoi file e directory con una [lista Markdown non ordinata](https://www.markdownguide.org/basic-syntax/#unordered-lists) all'interno di `<FileTree>`.
+Crea una sottodirectory utilizzando una lista nidificata o aggiungi un `/` alla fine di un elemento della lista per renderlo una directory senza contenuto specifico.
+
+La seguente sintassi può essere utilizzata per personalizzare l'aspetto dell'albero dei file:
+
+- Evidenzia un file o una directory rendendo il suo nome in grassetto, ad esempio `**README.md**`.
+- Aggiungi un commento a un file o a una directory aggiungendo più testo dopo il nome.
+- Aggiungi file e directory segnaposto utilizzando `...` o `…` come nome.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs un file **importante**
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+Il codice sopra genera quanto segue nella pagina:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs un file **importante**
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### Passaggi
+
+Utilizza il componente `<Steps>` per stilizzare liste numerate di passaggi.
+Questo è utile per guide passo-passo più complesse in cui ogni passo deve essere chiaramente evidenziato.
+
+Utilizza `<Steps>` in una lista ordinata standard di Markdown.
+Tutta la solita sintassi Markdown è applicabile all'interno di `<Steps>`.
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Importa il componente nel tuo file MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Utilizza `<Steps>` intorno ai tuoi elementi della lista ordinata.
+
+</Steps>
+````
+
+Il codice sopra genera quanto segue nella pagina:
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Importa il componente nel tuo file MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Utilizza `<Steps>` intorno ai tuoi elementi della lista ordinata.
+
+</Steps>
+
+### Icone
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '~/components/icons-list.astro';
+
+Starlight fornisce una serie di icone comuni che puoi visualizzare nei tuoi contenuti utilizzando il componente `<Icon>`.
+
+Ogni `<Icon>` richiede un [`name`](#tutte-le-icone) e può facoltativamente includere un attributo `label`, `size` e `color`.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+Il codice sopra genera quanto segue nella pagina:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### Tutte le icone
+
+Di seguito è riportato un elenco di tutte le icone disponibili con i nomi associati. Fare clic su un'icona per copiarne il codice componente.
+
+<IconsList />

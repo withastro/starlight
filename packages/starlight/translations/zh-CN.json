@@ -22,5 +22,6 @@
   "aside.note": "注意",
   "aside.tip": "提示",
   "aside.caution": "警告",
-  "aside.danger": "危险"
+  "aside.danger": "危险",
+  "fileTree.directory": "文件夹"
 }

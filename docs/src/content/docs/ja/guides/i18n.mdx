@@ -3,11 +3,13 @@ title: 国際化（i18n）
 description: 複数言語をサポートするためにStarlightサイトを設定する方法について学びます。
 ---
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlightは、ルーティング、フォールバックコンテンツ、右横書き（right-to-left、RTL）言語へのフルサポートなど、複数言語サイトを構築するための機能を組み込みで提供します。
 
 ## i18nの設定
+
+<Steps>
 
 1. [`locales`](/ja/reference/configuration/#locales)と[`defaultLocale`](/ja/reference/configuration/#defaultlocale)をStarlightインテグレーションに渡すことで、サポートする言語についてStarlightに伝えます。
 
@@ -61,6 +63,8 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 3. これで各言語のディレクトリにコンテンツ用のファイルを追加できるようになりました。言語間でページを関連付けるために、同じページには同じファイル名を使用してください。フォールバックコンテンツや翻訳に関する通知など、Starlightのi18n機能をフル活用しましょう。
 
    たとえば、`ar/index.md`と`en/index.md`は、アラビア語版と英語版のホームページをそれぞれ表わします。
+
+</Steps>
 
 ### ルートロケールを使用する
 
@@ -141,6 +145,7 @@ Starlightは、すべての言語で同等のページが作成されること�
 ## StarlightのUIを翻訳する
 
 import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
 
 Starlightでは、読者が選択した言語でサイト全体を体験できるように、翻訳されたコンテンツファイルをホストするだけでなく、デフォルトUIの文字列（たとえば目次に表示されている「目次」という見出し）も翻訳できるようになっています。
 
@@ -148,6 +153,8 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 <LanguagesList startsSentence />の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
 
 `18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
+
+<Steps>
 
 1. 設定がまだであれば、`src/content/config.ts`で`i18n`データコレクションを設定します。
 
@@ -178,34 +185,7 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
    以下は、Starlightが英語版のデフォルトとして使用している文字列です。
 
-   ```json
-   {
-   	"skipLink.label": "Skip to content",
-   	"search.label": "Search",
-   	"search.shortcutLabel": "(Press / to Search)",
-   	"search.cancelLabel": "Cancel",
-   	"search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-   	"themeSelect.accessibleLabel": "Select theme",
-   	"themeSelect.dark": "Dark",
-   	"themeSelect.light": "Light",
-   	"themeSelect.auto": "Auto",
-   	"languageSelect.accessibleLabel": "Select language",
-   	"menuButton.accessibleLabel": "Menu",
-   	"sidebarNav.accessibleLabel": "Main",
-   	"tableOfContents.onThisPage": "On this page",
-   	"tableOfContents.overview": "Overview",
-   	"i18n.untranslatedContent": "This content is not available in your language yet.",
-   	"page.editLink": "Edit page",
-   	"page.lastUpdated": "Last updated:",
-   	"page.previousLink": "Previous",
-   	"page.nextLink": "Next",
-   	"404.text": "Page not found. Check the URL or try using the search bar.",
-   	"aside.note": "Note",
-   	"aside.tip": "Tip",
-   	"aside.caution": "Caution",
-   	"aside.danger": "Danger"
-   }
-   ```
+   <UIStringsList />
 
    Starlightのコードブロックは、[Expressive Code](https://github.com/expressive-code/expressive-code)ライブラリによって動作しています。`expressiveCode`キーを使用して、同じJSONファイルでUI文字列の翻訳について設定できます。
 
@@ -233,6 +213,8 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
    	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+</Steps>
 
 ### 翻訳スキーマを拡張する
 

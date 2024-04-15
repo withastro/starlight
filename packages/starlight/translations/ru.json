@@ -1,11 +1,11 @@
 {
-  "skipLink.label": "Пропустить до содержимого",
+  "skipLink.label": "Перейти к содержимому",
   "search.label": "Поиск",
-  "search.shortcutLabel": "(Нажмите / для Поиска)",
+  "search.shortcutLabel": "(Нажмите / для поиска)",
   "search.cancelLabel": "Отменить",
   "search.devWarning": "Поиск доступен только в производственных сборках. \nПопробуйте выполнить сборку и просмотреть сайт, чтобы протестировать его локально.",
   "themeSelect.accessibleLabel": "Выберите тему",
-  "themeSelect.dark": "Темная",
+  "themeSelect.dark": "Тёмная",
   "themeSelect.light": "Светлая",
   "themeSelect.auto": "Авто",
   "languageSelect.accessibleLabel": "Выберите язык",
@@ -18,9 +18,10 @@
   "page.lastUpdated": "Последнее обновление:",
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
-  "404.text": "Страница не найдена. Проверьтье  URL или используйте поиск по сайту",
+  "404.text": "Страница не найдена. Проверьте URL или используйте поиск по сайту.",
   "aside.note": "Заметка",
   "aside.tip": "Знали ли вы?",
   "aside.caution": "Осторожно",
-  "aside.danger": "Опасно"
+  "aside.danger": "Опасно",
+  "fileTree.directory": "Директория"
 }

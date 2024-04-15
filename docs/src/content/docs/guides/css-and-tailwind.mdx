@@ -3,11 +3,15 @@ title: CSS & Styling
 description: Learn how to style your Starlight site with custom CSS or integrate with Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 You can style your Starlight site with custom CSS files or use the Starlight Tailwind plugin.
 
 ## Custom CSS styles
 
 Customize the styles applied to your Starlight site by providing additional CSS files to modify or extend Starlight’s default styles.
+
+<Steps>
 
 1. Add a CSS file to your `src/` directory.
    For example, you could set a wider default column width and larger text size for page titles:
@@ -40,6 +44,8 @@ Customize the styles applied to your Starlight site by providing additional CSS 
    });
    ```
 
+</Steps>
+
 You can see all the CSS custom properties used by Starlight that you can set to customize your site in the [`props.css` file on GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## Tailwind CSS
@@ -54,8 +60,6 @@ The Starlight Tailwind plugin applies the following configuration:
 - Disables Tailwind’s [Preflight](https://tailwindcss.com/docs/preflight) reset styles while selectively restoring essential parts of Preflight required for Tailwind’s border utility classes.
 
 ### Create a new project with Tailwind
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Start a new Starlight project with Tailwind CSS pre-configured using `create astro`:
 
@@ -86,6 +90,8 @@ yarn create astro --template starlight/tailwind
 ### Add Tailwind to an existing project
 
 If you already have a Starlight site and want to add Tailwind CSS, follow these steps.
+
+<Steps>
 
 1.  Add Astro’s Tailwind integration:
 
@@ -193,6 +199,8 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
     	plugins: [starlightPlugin()],
     };
     ```
+
+</Steps>
 
 ### Styling Starlight with Tailwind
 

@@ -74,7 +74,11 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		title="使用 Astro Starlight 发布文档"
 		description="开始使用 Starlight 文档"
 	/>
-
+	<LinkCard
+		href="https://events-3bg.pages.dev/jotter/starlight/guide/"
+		title="启用视图过渡"
+		description="通过 Bag of Tricks 的视图过渡支持，获得 SPA 一样的观感"
+	/>
 </CardGrid>
 
 ## 视频内容
@@ -104,6 +108,12 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 
 <YouTubeGrid
 	videos={[
+		{
+			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
+			title: '使用 Starlight 和 Astro 构建文档',
+			description:
+				'观看 Chris 和 Alex 通过 CodingCat.dev 深入研究 Starlight 代码。',
+		},
 		{
 			href: 'https://www.youtube.com/watch?v=sWkkHbwDeQc',
 			title: 'Astro Starlight',

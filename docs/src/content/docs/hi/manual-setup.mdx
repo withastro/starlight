@@ -44,7 +44,7 @@ Starlight एकीकरण आपकी `astro.config.mjs` फ़ाइल म
 
 आरंभ करने के लिए एक `title` जोड़ें:
 
-```js {7-9}
+```js {8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -106,7 +106,7 @@ Starlight फ़ाइल-आधारित रूटिंग का उपय
 
 उदाहरण के लिए, यदि Starlight पेज सभी `/guides/` से शुरू होने चाहिए, तो अपनी सामग्री को `src/content/docs/guides/` निर्देशिका में जोड़ें:
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
@@ -125,4 +125,6 @@ import FileTree from '~/components/file-tree.astro';
 
 ### SSR के साथ Starlight का प्रयोग करें
 
-वर्तमान में, Starlight Astro के सर्वर एडेप्टर का उपयोग करके [SSR प्रविस्तारण](https://docs.astro.build/hi/guides/server-side-rendering/) का समर्थन नहीं करता है। हमें उम्मीद है कि हम जल्द ही इसका समर्थन करने में सक्षम होंगे।
+आप Astro दस्तावेज़ में [“ऑन-डिमांड रेंडरिंग एडेप्टर”](https://docs.astro.build/hi/guides/server-side-rendering/) मार्गदर्शिका का पालन करके अपने परियोजना में कस्टम ऑन-डिमांड रेंडर पेजों के साथ Starlight का उपयोग कर सकते हैं।
+
+वर्तमान में, आपके परियोजना के आउटपुट मोड की परवाह किए बिना, Starlight द्वारा उत्पन्न दस्तावेज़ीकरण पेज हमेशा पहले से प्रस्तुत किए जाते हैं। हमें उम्मीद है कि हम जल्द ही Starlight पेजों के लिए ऑन-डिमांड रेंडरिंग का समर्थन करने में सक्षम होंगे।

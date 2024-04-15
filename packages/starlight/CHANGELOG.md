@@ -1,5 +1,111 @@
 # @astrojs/starlight
 
+## 0.21.5
+
+### Patch Changes
+
+- [#1728](https://github.com/withastro/starlight/pull/1728) [`0a75680d`](https://github.com/withastro/starlight/commit/0a75680ddd2f3325ab9ad7ac910f7c884b89a9ed) Thanks [@delucis](https://github.com/delucis)! - Adds 1 new icon: `pkl`
+
+- [#1709](https://github.com/withastro/starlight/pull/1709) [`c5cd1811`](https://github.com/withastro/starlight/commit/c5cd181186b42422f3e47052bf8182cb490bda6b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI strings translation issue for sites configured with a single non-root language different from English.
+
+- [#1723](https://github.com/withastro/starlight/pull/1723) [`3b29b3ab`](https://github.com/withastro/starlight/commit/3b29b3ab824f538f27e20310cb08786a92c7bd65) Thanks [@OliverSpeir](https://github.com/OliverSpeir)! - Fixes accessibility by using `aria-selected="false"` for inactive tabs instead of removing `aria-selected="true"` in the tablist of Starlight’s `<Tabs>` component
+
+- [#1706](https://github.com/withastro/starlight/pull/1706) [`f171ac4d`](https://github.com/withastro/starlight/commit/f171ac4d6396eb2538598d85957670df50938b6a) Thanks [@jorenbroekema](https://github.com/jorenbroekema)! - Fixes some minor type errors
+
+## 0.21.4
+
+### Patch Changes
+
+- [#1703](https://github.com/withastro/starlight/pull/1703) [`b26238f2`](https://github.com/withastro/starlight/commit/b26238f22990dcf8ba002bea6a50c66f20ad5786) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes aside custom titles rendering for nested asides.
+
+- [#1708](https://github.com/withastro/starlight/pull/1708) [`a72cb966`](https://github.com/withastro/starlight/commit/a72cb96600798c1fbc7558f8fd24556ca442d312) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes translation issues with Expressive Code when using a default language other than English
+
+## 0.21.3
+
+### Patch Changes
+
+- [#1622](https://github.com/withastro/starlight/pull/1622) [`3a074bad`](https://github.com/withastro/starlight/commit/3a074bad6c139bb9d6169d95ec79bc0fc1ecbdfe) Thanks [@SamuelLHuber](https://github.com/SamuelLHuber)! - Adds 1 new icon: `farcaster`
+
+- [#1616](https://github.com/withastro/starlight/pull/1616) [`a86f9b71`](https://github.com/withastro/starlight/commit/a86f9b71b795fb6dcd0409ca568e43d25525b964) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI strings
+
+- [#1698](https://github.com/withastro/starlight/pull/1698) [`67b892fd`](https://github.com/withastro/starlight/commit/67b892fd5290dfd0eeb95f4e60b6427bdc82110f) Thanks [@liruifengv](https://github.com/liruifengv)! - Adds 1 new icon: `starlight`
+
+- [#1687](https://github.com/withastro/starlight/pull/1687) [`6fa9ea7e`](https://github.com/withastro/starlight/commit/6fa9ea7e8d4d601cf8f49b61dafb1ebb557d1718) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Translates `fileTree.directory` UI string into Traditional Chinese.
+
+## 0.21.2
+
+### Patch Changes
+
+- [#1628](https://github.com/withastro/starlight/pull/1628) [`24c0823c`](https://github.com/withastro/starlight/commit/24c0823c61b1e9850575766876f2e1035541cfd1) Thanks [@o-az](https://github.com/o-az)! - Adds 1 new icon: `nix`
+
+- [#1614](https://github.com/withastro/starlight/pull/1614) [`78fc9042`](https://github.com/withastro/starlight/commit/78fc90426d58d6c36dcb8215e3181476d0702f50) Thanks [@kpodurgiel](https://github.com/kpodurgiel)! - Adds Polish UI translations
+
+- [#1596](https://github.com/withastro/starlight/pull/1596) [`13ed30cd`](https://github.com/withastro/starlight/commit/13ed30cd335798177dfe24a27851d2c14d2fe80a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for toggling the built-in search modal using the `Ctrl+k` keyboard shortcut.
+
+- [#1608](https://github.com/withastro/starlight/pull/1608) [`4096e1b7`](https://github.com/withastro/starlight/commit/4096e1b77b3464338e5489d00cec4c29a1cd3c32) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes nested CSS from the `<FileTree>` component to prevent a potential warning when using Tailwind CSS.
+
+- [#1626](https://github.com/withastro/starlight/pull/1626) [`67459cb4`](https://github.com/withastro/starlight/commit/67459cb4021859f4a45d50a5f993d2c849f340a3) Thanks [@hippotastic](https://github.com/hippotastic)! - Fixes a bundling issue that caused imports from `@astrojs/starlight/components` to fail when using the config setting `expressiveCode: false`.
+
+## 0.21.1
+
+### Patch Changes
+
+- [#1584](https://github.com/withastro/starlight/pull/1584) [`8851d5cd`](https://github.com/withastro/starlight/commit/8851d5cd0d8f8439320ef729ca57a59418db52b9) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 2 new icons: `apple` and `linux`.
+
+- [#1577](https://github.com/withastro/starlight/pull/1577) [`0ba77890`](https://github.com/withastro/starlight/commit/0ba77890e0dcf54a849c735efd870327c10972aa) Thanks [@morinokami](https://github.com/morinokami)! - Translates `fileTree.directory` UI string into Japanese.
+
+- [#1593](https://github.com/withastro/starlight/pull/1593) [`fa7ed245`](https://github.com/withastro/starlight/commit/fa7ed2458caf6261d16c5f43365cedbcb8572a48) Thanks [@liruifengv](https://github.com/liruifengv)! - Translates `fileTree.directory` UI string into simplified Chinese.
+
+- [#1585](https://github.com/withastro/starlight/pull/1585) [`bd4e278f`](https://github.com/withastro/starlight/commit/bd4e278f7fe7d7335494602db29a63002fd45059) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Translates `fileTree.directory` UI string into French.
+
+- [#1587](https://github.com/withastro/starlight/pull/1587) [`c5794260`](https://github.com/withastro/starlight/commit/c5794260251ed414a396089782a1788539c92dd3) Thanks [@Eveeifyeve](https://github.com/Eveeifyeve)! - Adds 1 new icon: `homebrew`.
+
+## 0.21.0
+
+### Minor Changes
+
+- [#1568](https://github.com/withastro/starlight/pull/1568) [`5f99a71d`](https://github.com/withastro/starlight/commit/5f99a71ddfe92568b1cd3c0bfe5ebfd139797c1a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for optionally setting an icon on a `<TabItem>` component to make it easier to visually distinguish between tabs.
+
+- [#1308](https://github.com/withastro/starlight/pull/1308) [`9a918a5b`](https://github.com/withastro/starlight/commit/9a918a5b4902f43729f4d023257772710af3a12b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds `<FileTree>` component to display the structure of a directory.
+
+- [#1308](https://github.com/withastro/starlight/pull/1308) [`9a918a5b`](https://github.com/withastro/starlight/commit/9a918a5b4902f43729f4d023257772710af3a12b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 144 new file-type icons from the [Seti UI icon set](https://github.com/jesseweed/seti-ui#current-icons), available with the `seti:` prefix, e.g. `seti:javascript`.
+
+- [#1564](https://github.com/withastro/starlight/pull/1564) [`d880065e`](https://github.com/withastro/starlight/commit/d880065e29a632823a08adcb6158a59fd9557270) Thanks [@delucis](https://github.com/delucis)! - Adds a `<Steps>` component for styling more complex guided tasks.
+
+- [#1308](https://github.com/withastro/starlight/pull/1308) [`9a918a5b`](https://github.com/withastro/starlight/commit/9a918a5b4902f43729f4d023257772710af3a12b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 5 new icons: `astro`, `biome`, `bun`, `mdx`, and `pnpm`.
+
+## 0.20.1
+
+### Patch Changes
+
+- [#1553](https://github.com/withastro/starlight/pull/1553) [`8e091147`](https://github.com/withastro/starlight/commit/8e09114755d37322d6e97b0dc90a5dfd781de8cc) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates Expressive Code to v0.33.4 to fix potential race condition bug in Shiki.
+
+## 0.20.0
+
+### Minor Changes
+
+- [#1541](https://github.com/withastro/starlight/pull/1541) [`1043052f`](https://github.com/withastro/starlight/commit/1043052f3890a577a73276472f3773924909406b) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates `astro-expressive-code` dependency to the latest minor release (0.33).
+
+  This unlocks support for [word wrap](https://expressive-code.com/key-features/word-wrap/) and [line numbers](https://expressive-code.com/plugins/line-numbers/), as well as updating the syntax highlighter to the latest Shiki release, which includes new and updated language grammars.
+
+  See the [Expressive Code release notes](https://expressive-code.com/releases/) for more information including details of potentially breaking changes.
+
+### Patch Changes
+
+- [#1542](https://github.com/withastro/starlight/pull/1542) [`b3b7a606`](https://github.com/withastro/starlight/commit/b3b7a6069952d5f27a49b2fd097aa4db065e1718) Thanks [@delucis](https://github.com/delucis)! - Improves error messages shown by Starlight for configuration errors.
+
+- [#1544](https://github.com/withastro/starlight/pull/1544) [`65dc6586`](https://github.com/withastro/starlight/commit/65dc6586ef7c1754875db1d48c49e709051a0b13) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Update Vietnamese UI translations
+
+## 0.19.1
+
+### Patch Changes
+
+- [#1527](https://github.com/withastro/starlight/pull/1527) [`163bc84`](https://github.com/withastro/starlight/commit/163bc848e173eecca92d1cb034045fdb42aa4ff1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exports the `StarlightPageProps` TypeScript type representing the props expected by the `<StarlightPage />` component.
+
+- [#1504](https://github.com/withastro/starlight/pull/1504) [`fc83a05`](https://github.com/withastro/starlight/commit/fc83a05235b74be2bfe6ba8e7f95a8a5a618ead3) Thanks [@mingjunlu](https://github.com/mingjunlu)! - Adds Traditional Chinese UI translations
+
+- [#1534](https://github.com/withastro/starlight/pull/1534) [`aada680`](https://github.com/withastro/starlight/commit/aada6805abc0068f07393585b86978ef5200439c) Thanks [@delucis](https://github.com/delucis)! - Improves DX of the `sidebar` prop used by the new `<StarlightPage>` component.
+
 ## 0.19.0
 
 ### Minor Changes

@@ -59,6 +59,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 आप `<Tabs>` और `<TabItem>` अवयवों का उपयोग करके एक टैब्ड इंटरफ़ेस प्रदर्शित कर सकते हैं।
 प्रत्येक `<TabItem>` में उपयोगकर्ताओं को प्रदर्शित करने के लिए एक `label` होना चाहिए।
+लेबल के आगे [Starlight के अंतर्निर्मित आइकन](#सभी-आइकन) में से एक को शामिल करने के लिए वैकल्पिक `icon` विशेषता का उपयोग करें।
 
 ```mdx
 # src/content/docs/example.mdx
@@ -66,16 +67,24 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 ```
 
 उपरोक्त कोड पेज पर निम्नलिखित टैब उत्पन्न करता है:
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 
 ### कार्ड
@@ -168,6 +177,195 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Markdown का संलेखन" href="/hi/guides/authoring-content/" />
 	<LinkCard title="अवयवों" href="/hi/guides/components/" />
 </CardGrid>
+
+### असाइड्स
+
+असाइड्स (जिन्हें "चेतावनी" या "कॉलआउट" के रूप में भी जाना जाता है) किसी पेज की मुख्य सामग्री के साथ-साथ द्वितीयक जानकारी प्रदर्शित करने के लिए उपयोगी होते हैं।
+
+एक `<Aside>` में `note` (डिफ़ॉल्ट), `tip`, `caution` या `danger` का वैकल्पिक `type` हो सकता है। `title` विशेषता सेट करना डिफ़ॉल्ट असाइड् शीर्षक को ओवरराइड करता है।
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>कस्टम शीर्षक के बिना एक डिफ़ॉल्ट असाइड्।</Aside>
+
+<Aside type="caution" title="ध्यान रहें!">
+	एक कस्टम शीर्षक के *साथ* एक चेतावनी वाला असाइड्।
+</Aside>
+
+<Aside type="tip">
+
+असाइड्स में अन्य कंटेंट भी अलग से समर्थित है।
+
+```js
+// उदाहरण के लिए, एक कोड स्निपेट।
+```
+
+</Aside>
+
+<Aside type="danger">आप अपना पासवर्ड किसी को न दें।</Aside>
+````
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>कस्टम शीर्षक के बिना एक डिफ़ॉल्ट असाइड्।</Aside>
+
+<Aside type="caution" title="ध्यान रहें!">
+	एक कस्टम शीर्षक के *साथ* एक चेतावनी वाला असाइड्।
+</Aside>
+
+<Aside type="tip">
+
+असाइड्स में अन्य कंटेंट भी अलग से समर्थित है।
+
+```js
+// उदाहरण के लिए, एक कोड स्निपेट।
+```
+
+</Aside>
+
+<Aside type="danger">आप अपना पासवर्ड किसी को न दें।</Aside>
+
+Starlight `<Aside>` अवयव के विकल्प के रूप में Markdown” और MDX में असाइड् प्रस्तुत करने के लिए एक कस्टम सिंटैक्स भी प्रदान करता है।
+कस्टम सिंटैक्स के विवरण के लिए ["Markdown में कंटेंट संलेखन"](/hi/guides/authoring-content/#asides) मार्गदर्शिका देखें।
+
+### कोड
+
+जब [Markdown कोड ब्लॉक](/hi/guides/authoring-content/#code-blocks) का उपयोग करना संभव नहीं हो, तब सिंटैक्स हाइलाइट किए गए कोड को रेंडर करने के लिए `<Code>` अवयव का उपयोग करें, उदाहरण के लिए, फ़ाइलों, डेटाबेस, या APIs जैसे बाहरी स्रोतों से आने वाले डेटा को रेंडर करना।
+
+`<Code>` द्वारा समर्थित प्रॉप्स की पूरी जानकारी के लिए [Expressive Code "Code अवयव" दस्तावेज़](https://expressive-code.com/key-features/code-component/) देखें।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('यह किसी फ़ाइल या CMS से आ सकता है!');`;
+export const fileName = 'example.js';
+export const highlights = ['फ़ाइल', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('यह किसी फ़ाइल या CMS से आ सकता है!');`;
+export const fileName = 'example.js';
+export const highlights = ['फ़ाइल', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### आयातित कोड
+
+किसी भी कोड फ़ाइल को स्ट्रिंग के रूप में आयात करने के लिए [Vite के `?raw` आयात प्रत्यय](https://vitejs.dev/guide/assets#importing-asset-as-string) का उपयोग करें।
+फिर आप इस आयातित स्ट्रिंग को अपने पृष्ठ पर शामिल करने के लिए `<Code>` अवयव में पास कर सकते हैं।
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### फ़ाइल वृक्ष
+
+फ़ाइल आइकन और बंधने योग्य उप-निर्देशिकाओं के साथ निर्देशिका की संरचना प्रदर्शित करने के लिए `<FileTree>` घटक का उपयोग करें।
+
+`<FileTree>` के अंदर एक [अव्यवस्थित Markdown सूची](https://www.markdownguide.org/basic-syntax/#unordered-lists) के साथ अपनी फ़ाइलों और निर्देशिकाओं की संरचना निर्दिष्ट करें। नेस्टेड सूची का उपयोग करके एक उप-निर्देशिका बनाएं या इसे विशिष्ट सामग्री के बिना निर्देशिका के रूप में प्रस्तुत करने के लिए सूची आइटम के अंत में `/` जोड़ें।
+
+फ़ाइल वृक्ष के स्वरूप को अनुकूलित करने के लिए निम्नलिखित सिंटैक्स का उपयोग किया जा सकता है:
+
+- किसी फ़ाइल या निर्देशिका का नाम बोल्ड करके उसे हाइलाइट करें, उदा. `**README.md**` पढ़ें.
+- किसी फ़ाइल या निर्देशिका में नाम के बाद और टेक्स्ट जोड़कर एक टिप्पणी जोड़ें।
+- नाम के रूप में `...`. या `…` का उपयोग करके प्लेसहोल्डर फ़ाइलें और निर्देशिकाएँ जोड़ें।
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+उपरोक्त कोड पृष्ठ पर निम्नलिखित उत्पन्न करता है:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs एक **महत्वपूर्ण** फ़ाइल
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### चरण
+
+कार्यों की क्रमांकित सूचियों को स्टाइल करने के लिए `<चरण>` घटक का उपयोग करें।
+यह अधिक जटिल चरण-दर-चरण मार्गदर्शिकाओं के लिए उपयोगी है जहां प्रत्येक चरण को स्पष्ट रूप से हाइलाइट करने की आवश्यकता होती है।
+
+`<चरण>` को मानक Markdown आदेशित सूची के चारों ओर लपेटें।
+सभी सामान्य Markdown सिंटैक्स `<Steps>` के अंदर लागू होते हैं।
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. अवयव को अपनी MDX फ़ाइल में आयात करें:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. अपने ऑर्डर किए गए सूची आइटम के चारों ओर `<Steps>` लपेटें।
+
+</Steps>
+````
+
+उपरोक्त कोड पृष्ठ पर निम्नलिखित उत्पन्न करता है:
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. अवयव को अपनी MDX फ़ाइल में आयात करें:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. अपने ऑर्डर किए गए सूची आइटम के चारों ओर `<Steps>` लपेटें।
+
+</Steps>
 
 ### आइकन
 

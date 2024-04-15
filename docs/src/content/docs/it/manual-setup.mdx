@@ -106,7 +106,7 @@ Per aggiungere tutte le pagine Starlight in un sottopercorso, posiziona tutto il
 
 Ad esempio, se le pagine Starlight dovessero iniziare tutte con `/guides/`, aggiungi il contenuto nella directory `src/content/docs/guides/`:
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
@@ -125,4 +125,6 @@ In futuro, prevediamo di supportare meglio questo caso d'uso per evitare la nece
 
 ### Usa Starlight con SSR
 
-Attualmente, Starlight non supporta [distribuzione SSR](https://docs.astro.build/it/guides/server-side-rendering/) utilizzando gli adattatori server di Astro. Speriamo di poterlo supportare presto.
+Puoi utilizzare Starlight insieme a pagine personalizzate renderizzate su richiesta nel tuo progetto seguendo la guida [“Adattatori di rendering su richiesta”](https://docs.astro.build/it/guides/server-side-rendering/) nella documentazione di Astro.
+
+Attualmente, le pagine di documentazione generate da Starlight sono sempre prerenderizzate indipendentemente dalla modalità di output del tuo progetto. Speriamo di poter supportare presto il rendering su richiesta per le pagine di Starlight.

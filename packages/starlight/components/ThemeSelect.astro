@@ -28,62 +28,50 @@ const { labels } = Astro.props;
 <script>
 	type Theme = 'auto' | 'dark' | 'light';
 
-	class StarlightThemeSelect extends HTMLElement {
-		/** Key in `localStorage` to store color theme preference at. */
-		#key = 'starlight-theme';
+	/** Key in `localStorage` to store color theme preference at. */
+	const storageKey = 'starlight-theme';
 
-		constructor() {
-			super();
-			this.#onThemeChange(this.#loadTheme());
-			const select = this.querySelector('select');
-			if (select) {
-				select.addEventListener('change', (e) => {
-					if (e.currentTarget instanceof HTMLSelectElement) {
-						this.#onThemeChange(this.#parseTheme(e.currentTarget.value));
-					}
-				});
-			}
-		}
+	/** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
+	const parseTheme = (theme: unknown): Theme =>
+		theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
 
-		/** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
-		#parseTheme(theme: unknown): Theme {
-			if (theme === 'auto' || theme === 'dark' || theme === 'light') {
-				return theme;
-			} else {
-				return 'auto';
-			}
-		}
+	/** Load the user’s preference from `localStorage`. */
+	const loadTheme = (): Theme =>
+		parseTheme(typeof localStorage !== 'undefined' && localStorage.getItem(storageKey));
 
-		/** Get the preferred system color scheme. */
-		#getPreferredColorScheme(): Theme {
-			return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-		}
-
-		/** Update select menu UI, document theme, and local storage state. */
-		#onThemeChange(theme: Theme): void {
-			StarlightThemeProvider.updatePickers(theme);
-			document.documentElement.dataset.theme =
-				theme === 'auto' ? this.#getPreferredColorScheme() : theme;
-			this.#storeTheme(theme);
-		}
-
-		/** Store the user’s preference in `localStorage`. */
-		#storeTheme(theme: Theme): void {
-			if (typeof localStorage !== 'undefined') {
-				if (theme === 'light' || theme === 'dark') {
-					localStorage.setItem(this.#key, theme);
-				} else {
-					localStorage.removeItem(this.#key);
-				}
-			}
-		}
-
-		/** Load the user’s preference from `localStorage`. */
-		#loadTheme(): Theme {
-			const theme = typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
-			return this.#parseTheme(theme);
+	/** Store the user’s preference in `localStorage`. */
+	function storeTheme(theme: Theme): void {
+		if (typeof localStorage !== 'undefined') {
+			localStorage.setItem(storageKey, theme === 'light' || theme === 'dark' ? theme : '');
 		}
 	}
 
+	/** Get the preferred system color scheme. */
+	const getPreferredColorScheme = (): Theme =>
+		matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+	/** Update select menu UI, document theme, and local storage state. */
+	function onThemeChange(theme: Theme): void {
+		StarlightThemeProvider.updatePickers(theme);
+		document.documentElement.dataset.theme = theme === 'auto' ? getPreferredColorScheme() : theme;
+		storeTheme(theme);
+	}
+
+	// React to changes in system color scheme.
+	matchMedia(`(prefers-color-scheme: light)`).addEventListener('change', () => {
+		if (loadTheme() === 'auto') onThemeChange('auto');
+	});
+
+	class StarlightThemeSelect extends HTMLElement {
+		constructor() {
+			super();
+			onThemeChange(loadTheme());
+			this.querySelector('select')?.addEventListener('change', (e) => {
+				if (e.currentTarget instanceof HTMLSelectElement) {
+					onThemeChange(parseTheme(e.currentTarget.value));
+				}
+			});
+		}
+	}
 	customElements.define('starlight-theme-select', StarlightThemeSelect);
 </script>

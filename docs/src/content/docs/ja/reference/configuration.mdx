@@ -431,6 +431,8 @@ starlight({
 });
 ```
 
+`head`のエントリーは直接HTML要素に変換され、Astroの[スクリプト](https://docs.astro.build/ja/guides/client-side-scripts/#スクリプトの処理)や[スタイル](https://docs.astro.build/ja/guides/styling/#astroでのスタイリング)の処理を通過しません。スクリプト、スタイル、または画像などのローカルアセットをインポートする必要がある場合は、[Headコンポーネントをオーバーライド](/ja/guides/overriding-components/#組み込みコンポーネントを再利用する)してください。
+
 #### `HeadConfig`
 
 ```ts
@@ -476,18 +478,18 @@ starlight({
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // Safari用にICOファビコンのフォールバックを追加します。
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// Safari用にICOファビコンのフォールバックを追加します。
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 

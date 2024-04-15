@@ -164,7 +164,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 - Navegación clara
 - Tema de color configurable por el usuario
-- [Soporte de i18n](/es/guides/i18n)
+- [Soporte de i18n](/es/guides/i18n/)
 
 :::
 
@@ -178,7 +178,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 - Navegación clara
 - Tema de color configurable por el usuario
-- [Soporte de i18n](/es/guides/i18n)
+- [Soporte de i18n](/es/guides/i18n/)
 
 :::
 ```

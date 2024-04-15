@@ -3,14 +3,15 @@ title: Starlightのカスタマイズ
 description: Starlightサイトをカスタマイズして、ロゴ、カスタムフォント、ランディングページのデザインなどを追加する方法について学びます。
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import FileTree from '~/components/file-tree.astro';
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlightには標準的なスタイルと機能がデフォルトで用意されているため、設定不要ですぐに使い始めることができますが、Starlightサイトの見た目をカスタマイズしたくなった場合は、このガイドを参照してください。
 
 ## ロゴを追加する
 
 カスタムロゴをサイトヘッダーに設定して、Starlightサイトに個別のブランディングを追加することができます。
+
+<Steps>
 
 1. ロゴ画像のファイルを`src/assets/`ディレクトリに追加します。
 
@@ -43,6 +44,8 @@ Starlightには標準的なスタイルと機能がデフォルトで用意さ�
    });
    ```
 
+</Steps>
+
 デフォルトでは、ロゴはサイトの`title`と一緒に表示されます。ロゴ画像にサイトタイトルが含まれている場合は、`replacesTitle`オプションを設定して、タイトルテキストを非表示にすることができます。`title`テキストはスクリーンリーダーのために残されるので、ヘッダーはアクセシブルなままです。
 
 ```js {5}
@@ -58,6 +61,8 @@ starlight({
 ### ライトモードとダークモード
 
 ライトモードとダークモードで異なるバージョンのロゴを表示することができます。
+
+<Steps>
 
 1. `src/assets/`に各バージョンの画像ファイルを追加します。
 
@@ -83,6 +88,8 @@ starlight({
      },
    }),
    ```
+
+</Steps>
 
 ## サイトマップを有効化する
 
@@ -267,6 +274,25 @@ hero:
 ---
 ```
 
+### デフォルトの404ページを無効にする
+
+完全にカスタマイズされた404レイアウトがプロジェクトに必要な場合は、`src/pages/404.astro`ルートを作成し、Starlightのデフォルトルートを無効にするために[`disable404Route`](/ja/reference/configuration/#disable404route)オプションを設定します。
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: '404をカスタマイズしたドキュメント',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
 ## カスタムフォント
 
 デフォルトでは、Starlightはユーザーのローカルデバイスで利用可能なサンセリフフォントをすべてのテキストに使用します。これにより、大きなフォントファイルをダウンロードするための余分な帯域幅を必要とせず、各ユーザーに馴染みのあるフォントでドキュメントを高速に読み込むことができます。
@@ -278,6 +304,8 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 フォントファイルがすでに手元にある場合は、[ローカルの設定ガイド](#ローカルフォントファイルの設定)に従ってください。Google Fontsを使用するには、[Fontsourceの設定ガイド](#fontsourceフォントの設定)に従ってください。
 
 #### ローカルフォントファイルの設定
+
+<Steps>
 
 1. `src/fonts/`ディレクトリにフォントファイルを追加し、空の`font-face.css`ファイルを作成します。
 
@@ -327,9 +355,13 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
    });
    ```
 
+</Steps>
+
 #### Fontsourceフォントの設定
 
 [Fontsource](https://fontsource.org/)プロジェクトは、Google Fontsやその他のオープンソースフォントの使用を容易にします。使いたいフォントのnpmモジュールをインストールすることができ、プロジェクトに追加するためのCSSファイルも用意されています。
+
+<Steps>
 
 1.  [Fontsourceのカタログ](https://fontsource.org/)で使用したいフォントを見つけます。この例では、[IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif)を使用します。
 
@@ -385,6 +417,8 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
     ```
 
     Fontsourceは、各フォント用に複数のCSSファイルを同梱しています。異なるウェイトやスタイルを含める方法については、[Fontsourceのドキュメント](https://fontsource.org/docs/getting-started/install#4-weights-and-styles)を参照してください。
+
+</Steps>
 
 ### フォントを使う
 

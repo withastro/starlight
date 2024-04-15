@@ -444,6 +444,9 @@ starlight({
 });
 ```
 
+Entries in `head` are converted directly to HTML elements and do not pass through Astro’s [script](https://docs.astro.build/en/guides/client-side-scripts/#script-processing) or [style](https://docs.astro.build/en/guides/styling/#styling-in-astro) processing.
+If you need to import local assets like scripts, styles, or images, [override the Head component](/guides/overriding-components/#reuse-a-built-in-component).
+
 #### `HeadConfig`
 
 ```ts
@@ -489,18 +492,18 @@ If you need to set additional variants or fallback favicons, you can add tags us
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // Add ICO favicon fallback for Safari.
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// Add ICO favicon fallback for Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
