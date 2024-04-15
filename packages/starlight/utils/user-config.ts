@@ -3,13 +3,12 @@ import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
 import { ComponentConfigSchema } from '../schemas/components';
 import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
-import { TitleConfigSchema } from '../schemas/title';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
-import { TitleTransformConfigSchema } from '../schemas/title';
+import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */

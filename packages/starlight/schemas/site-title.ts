@@ -7,7 +7,7 @@ export const TitleConfigSchema = () =>
 
 // transform the title for runtime use
 export const TitleTransformConfigSchema = (defaultLang: string) =>
-	z.union([z.string(), z.record(z.string())]).transform((title, ctx) => {
+	TitleConfigSchema().transform((title, ctx) => {
 		if (typeof title === 'string') {
 			return { [defaultLang]: title };
 		}
@@ -20,6 +20,3 @@ export const TitleTransformConfigSchema = (defaultLang: string) =>
 		}
 		return title;
 	});
-
-export type TitleUserConfig = z.input<ReturnType<typeof TitleConfigSchema>>;
-export type TitleConfig = z.output<ReturnType<typeof TitleConfigSchema>>;

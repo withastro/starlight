@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { FaviconSchema } from '../../schemas/favicon';
-import { TitleTransformConfigSchema } from '../../schemas/title';
+import { TitleTransformConfigSchema } from '../../schemas/site-title';
 
 describe('FaviconSchema', () => {
 	test('returns the proper href and type attributes', () => {
