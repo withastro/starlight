@@ -23,6 +23,7 @@ export async function testFactory(fixturePath: string) {
 		devServer = await dev({
 			logLevel: 'error',
 			root: fileURLToPath(new URL(fixturePath, import.meta.url)),
+			devToolbar: { enabled: false },
 		});
 	});
 
