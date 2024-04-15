@@ -11,7 +11,7 @@ function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
 }
 
 test('parses valid config successfully', () => {
-	const data = parseStarlightConfigWithFriendlyErrors({ title: { en: '' } });
+	const data = parseStarlightConfigWithFriendlyErrors({ title: '' });
 	expect(data).toMatchInlineSnapshot(`
 		{
 		  "components": {
