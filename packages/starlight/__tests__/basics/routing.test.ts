@@ -14,7 +14,7 @@ vi.mock('astro:content', async () =>
 );
 
 test('test suite is using correct env', () => {
-	expect(config.title).toBe('Basics');
+	expect(config.title).toMatchObject({"en": "Basics"});
 });
 
 test('route slugs are normalized', () => {
