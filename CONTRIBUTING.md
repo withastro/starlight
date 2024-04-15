@@ -187,7 +187,7 @@ pnpm test:coverage
 
 This will print a table to your terminal and also generate an HTML report you can load in a web browser by opening [`packages/starlight/__coverage__/index.html`](./packages/starlight/__coverage__/index.html).
 
-### E2E tests
+### End-to-end (E2E) tests
 
 Starlight also includes E2E tests in [`packages/starlight/__e2e__/`](./packages/starlight/__e2e__/), which are run using [Playwright][playwright].
 
