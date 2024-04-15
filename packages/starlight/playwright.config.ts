@@ -12,7 +12,4 @@ export default defineConfig({
 		},
 	],
 	testMatch: '__e2e__/*.test.ts',
-	use: {
-		trace: 'retain-on-failure',
-	},
 });

@@ -43,12 +43,6 @@ jobs:
       - run: pnpm i
       - name: Test packages
         run: pnpm -r test:e2e
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-report
-          path: packages/starlight/test-results
-          retention-days: 10
 
   pa11y:
     name: Check for accessibility issues

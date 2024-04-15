@@ -1,34 +1,32 @@
 import { fileURLToPath } from 'node:url';
 import { test as baseTest, type Page } from '@playwright/test';
-import { dev } from 'astro';
+import { build, preview } from 'astro';
 
 export { expect, type Locator } from '@playwright/test';
 
-// Setup a test environment that will start a dev server for a given fixture path and provide a
-// Starlight Playwright fixture accessible from within all tests.
+// Setup a test environment that will build and start a preview server for a given fixture path and
+// provide a Starlight Playwright fixture accessible from within all tests.
 export async function testFactory(fixturePath: string) {
-	let devServer: DevServer | undefined;
+	let previewServer: PreviewServer | undefined;
 
 	const test = baseTest.extend<{ starlight: StarlightPage }>({
 		starlight: async ({ page }, use) => {
-			if (!devServer) {
-				throw new Error('Could not find a dev server to run tests against.');
+			if (!previewServer) {
+				throw new Error('Could not find a preview server to run tests against.');
 			}
 
-			await use(new StarlightPage(devServer, page));
+			await use(new StarlightPage(previewServer, page));
 		},
 	});
 
 	test.beforeAll(async () => {
-		devServer = await dev({
-			logLevel: 'error',
-			root: fileURLToPath(new URL(fixturePath, import.meta.url)),
-			devToolbar: { enabled: false },
-		});
+		const root = fileURLToPath(new URL(fixturePath, import.meta.url));
+		await build({ logLevel: 'error', root });
+		previewServer = await preview({ logLevel: 'error', root });
 	});
 
 	test.afterAll(async () => {
-		await devServer?.stop();
+		await previewServer?.stop();
 	});
 
 	return test;
@@ -37,7 +35,7 @@ export async function testFactory(fixturePath: string) {
 // A Playwright test fixture accessible from within all tests.
 class StarlightPage {
 	constructor(
-		private readonly devServer: DevServer,
+		private readonly previewServer: PreviewServer,
 		private readonly page: Page
 	) {}
 
@@ -48,8 +46,8 @@ class StarlightPage {
 
 	// Resolve a URL relative to the server used during a test run.
 	resolveUrl(url: string) {
-		return `http://localhost:${this.devServer.address.port}${url.replace(/^\/?/, '/')}`;
+		return `http://localhost:${this.previewServer.port}${url.replace(/^\/?/, '/')}`;
 	}
 }
 
-type DevServer = Awaited<ReturnType<typeof dev>>;
+type PreviewServer = Awaited<ReturnType<typeof preview>>;
