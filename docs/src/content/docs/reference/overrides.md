@@ -38,6 +38,12 @@ Starlight will pass the following props to your custom components.
 
 Page writing direction.
 
+#### `siteTitle`
+
+**Type:** `string`
+
+SiteTitle match this page’s locale.
+
 #### `lang`
 
 **Type:** `string`
