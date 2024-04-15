@@ -89,7 +89,8 @@ The code above generates the following tabs on the page:
 
 #### Synced tabs
 
-Multiple sets of tabs on the same page can be synced so that switching tabs in one switches the others to a tab with the same label.
+Keep multiple sets of tabs on the same page in sync with the `syncKey` attribute.
+Switching to a synced tab will also switch to the tab with the same label in other `<Tabs>` that share the same `syncKey`.
 
 To synchronize tabs, add an identical `syncKey` property to each related `<Tabs>` component.
 
