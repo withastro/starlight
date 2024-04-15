@@ -9,7 +9,6 @@ import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
 import { localizedId } from './slugs';
 import { useTranslations } from './translations';
-import { getSiteTitle } from './site-title';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -109,4 +108,13 @@ function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
 		url = ensureTrailingSlash(config.editLink.baseUrl) + srcPath + 'content/docs/' + filePath;
 	}
 	return url ? new URL(url) : undefined;
+}
+
+/** Get the site title for a given language. **/
+function getSiteTitle(lang: string): string {
+	const defaultLang = config.defaultLocale.lang as string;
+	if (lang && config.title[lang]) {
+		return config.title[lang] as string;
+	}
+	return config.title[defaultLang] as string;
 }
