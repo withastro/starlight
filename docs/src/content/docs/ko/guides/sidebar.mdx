@@ -19,11 +19,11 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-      - reference/
-        - configuration.md
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
 
 </FileTree>
 
@@ -32,17 +32,15 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 <SidebarPreview
 	config={[
 		{
-			label: 'guides',
+			label: 'constellations',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orion', link: '' },
 			],
 		},
 		{
-			label: 'reference',
-			items: [
-				{ label: 'Configuration Reference', link: '/reference/configuration/' },
-			],
+			label: 'stars',
+			items: [{ label: 'Betelgeuse', link: '' }],
 		},
 	]}
 />
@@ -62,10 +60,10 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// CSS 및 스타일링 가이드 링크
-		{ label: 'CSS & 스타일링', link: '/ko/guides/css-and-tailwind/' },
-		// Astro 웹사이트로 연결되는 외부 링크
-		{ label: 'Astro', link: 'https://astro.build/' },
+		// Ganymede moon 페이지로 이동하는 링크
+		{ label: 'Ganymede', link: '/moons/ganymede/' },
+		// NASA 웹사이트로 이동하는 외부 링크
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
 });
 ```
@@ -74,8 +72,8 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS & 스타일링', link: '/ko/guides/css-and-tailwind/' },
-		{ label: 'Astro', link: 'https://astro.build/' },
+		{ label: 'Ganymede', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
 
@@ -88,19 +86,19 @@ starlight({
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// "가이드" 라벨이 붙은 링크 그룹
+		// 'Constellations' 라벨이 붙은 링크 그룹
 		{
-			label: '가이드',
+			label: 'Constellations',
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
-				// 중첩된 링크 그룹
+				{ label: 'Carina', link: '/constellations/carina/' },
+				{ label: 'Centaurus', link: '/constellations/centaurus/' },
+				// seasonal constellations에 대한 중첩된 링크 그룹
 				{
-					label: '스타일링',
+					label: 'Seasonal',
 					items: [
-						{ label: 'CSS', link: '/ko/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/ko/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/ko/guides/css-and-tailwind/' },
+						{ label: 'Andromeda', link: '/constellations/andromeda/' },
+						{ label: 'Orion', link: '/constellations/orion/' },
+						{ label: 'Ursa Minor', link: '/constellations/ursa-minor/' },
 					],
 				},
 			],
@@ -114,17 +112,16 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Constellations',
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
-				// 중첩된 링크 그룹
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: '스타일링',
+					label: 'Seasonal',
 					items: [
-						{ label: 'CSS', link: '/ko/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/ko/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/ko/guides/css-and-tailwind/' },
+						{ label: 'Andromeda', link: '' },
+						{ label: 'Orion', link: '' },
+						{ label: 'Ursa Minor', link: '' },
 					],
 				},
 			],
@@ -144,9 +141,9 @@ Starlight는 문서 디렉터리를 기반해서 자동으로 사이드바에 �
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
-			// 'guides' 디렉터리에 대한 링크 그룹을 자동으로 생성
-			autogenerate: { directory: 'guides' },
+			label: 'Constellations',
+			// 'constellations' 디렉토리에 대한 링크 그룹을 자동 생성
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -159,11 +156,11 @@ starlight({
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-        - advanced/
-          - project-structure.md
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
 
 </FileTree>
 
@@ -172,18 +169,13 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Constellations',
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: '고급',
-					items: [
-						{
-							label: '프로젝트 구조',
-							link: '/ko/guides/project-structure/',
-						},
-					],
+					label: 'seasonal',
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
 		},
@@ -217,15 +209,15 @@ sidebar:
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Guides',
 			items: [
-				{ label: '홈페이지', link: '#' },
+				{ label: 'A page', link: '' },
 				{
-					label: '사용자 정의 사이드바 라벨',
-					link: '#',
+					label: 'Custom sidebar label',
+					link: '',
 					badge: { text: 'New', variant: 'tip' },
 				},
-				{ label: '다른 페이지', link: '#' },
+				{ label: 'Another page', link: '' },
 			],
 		},
 	]}
@@ -245,21 +237,21 @@ sidebar:
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
+			label: 'Stars',
 			items: [
-				// "New" 배지가 포함된 링크
+				// "Supergiant" 배지가 있는 링크
 				{
-					label: '컴포넌트',
-					link: '/ko/guides/components/',
-					badge: 'New',
+					label: 'Persei',
+					link: '/stars/persei/',
+					badge: 'Supergiant',
 				},
 			],
 		},
-		// "Deprecated" 배지가 포함된 자동 생성된 그룹
+		// "Outdated" 배지가 있는 자동 생성된 그룹
 		{
-			label: '참조',
-			badge: 'Deprecated',
-			autogenerate: { directory: 'reference' },
+			label: 'Moons',
+			badge: 'Outdated',
+			autogenerate: { directory: 'moons' },
 		},
 	],
 });
@@ -270,30 +262,30 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Stars',
 			items: [
 				{
-					label: '컴포넌트',
-					link: '/ko/guides/components/',
-					badge: { text: 'New', variant: 'default' },
+					label: 'Persei',
+					link: '',
+					badge: { text: 'Supergiant', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: '참조',
-			badge: { text: 'Deprecated', variant: 'default' },
+			label: 'Moons',
+			badge: { text: 'Outdated', variant: 'default' },
 			items: [
 				{
-					label: '구성 참조',
-					link: '/reference/configuration/',
+					label: 'Io',
+					link: '',
 				},
 				{
-					label: '프론트매터 참조',
-					link: '/reference/frontmatter/',
+					label: 'Europa',
+					link: '',
 				},
 				{
-					label: '재정의 참조',
-					link: '/reference/overrides/',
+					label: 'Ganymede',
+					link: '',
 				},
 			],
 		},
@@ -310,13 +302,13 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
+			label: 'Stars',
 			items: [
-				// 노란색 "실험적 기능" 배지가 포함된 링크
+				// 노란색 "Stub" 배지가 있는 링크
 				{
-					label: '컴포넌트',
-					link: '/ko/guides/components/',
-					badge: { text: '실험적 기능', variant: 'caution' },
+					label: 'Sirius',
+					link: '/stars/sirius/',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -329,12 +321,12 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Stars',
 			items: [
 				{
-					label: '컴포넌트',
-					link: '/ko/guides/components/',
-					badge: { text: '실험적 기능', variant: 'caution' },
+					label: 'Sirius',
+					link: '',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -353,12 +345,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
+			label: 'Resources',
 			items: [
-				// 새 탭에서 열리는 Astro 문서에 대한 외부 링크입니다.
+				// 새 탭에서 열리는 NASA 웹사이트로 이동하는 외부 링크
 				{
-					label: 'Astro 문서',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: { target: '_blank', style: 'font-style: italic' },
 				},
 			],
@@ -372,11 +364,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Resources',
 			items: [
 				{
-					label: 'Astro 문서',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: {
 						target: '_blank',
 						style: 'font-style: italic',
@@ -396,24 +388,24 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
+			label: 'Constellations',
 			translations: {
-				'pt-BR': 'Guias',
+				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: '컴포넌트',
+					label: 'Andromeda',
 					translations: {
-						'pt-BR': 'Componentes',
+						'pt-BR': 'Andrômeda',
 					},
-					link: '/ko/guides/components/',
+					link: '/constellations/andromeda/',
 				},
 				{
-					label: '국제화 (i18n)',
+					label: 'Scorpius',
 					translations: {
-						'pt-BR': 'Internacionalização (i18n)',
+						'pt-BR': 'Escorpião',
 					},
-					link: '/ko/guides/i18n/',
+					link: '/constellations/scorpius/',
 				},
 			],
 		},
@@ -426,10 +418,10 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guias',
+			label: 'Constelação',
 			items: [
-				{ label: 'Componentes', link: '/pt-br//guides/components/' },
-				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
 			],
 		},
 	]}
@@ -443,12 +435,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
-			// 접힌 상태를 기본 상태로 설정
+			label: 'Constellations',
+			// 기본적으로 그룹을 축소
 			collapsed: true,
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{ label: 'Andromeda', link: '/constellations/andromeda/' },
+				{ label: 'Orion', link: '/constellations/orion/' },
 			],
 		},
 	],
@@ -460,11 +452,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Constellations',
 			collapsed: true,
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orion', link: '' },
 			],
 		},
 	]}
@@ -476,10 +468,10 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
+			label: 'Constellations',
 			// 그룹 및 자동으로 생성된 하위 그룹의 기본 상태가 접힌 상태가 됩니다.
 			collapsed: true,
-			autogenerate: { directory: 'guides' },
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -490,17 +482,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Constellations',
 			collapsed: true,
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: '고급',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{ label: '프로젝트 구조', link: '/ko/guides/project-structure/' },
-					],
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
 		},
@@ -509,14 +499,14 @@ starlight({
 
 `autogenerate.collapsed` 속성을 정의하여 이 동작을 변경할 수 있습니다.
 
-```js {5-6} "collapsed: true"
+```js {5-7} "collapsed: true"
 starlight({
 	sidebar: [
 		{
-			label: '가이드',
-			// "가이드" 그룹은 축소하지 않고, 자동 생성된 하위 그룹을 축소합니다.
+			label: 'Constellations',
+			// "Constellations" 그룹을 축소하지 말고 자동 생성된 하위 그룹을 축소합니다.
 			collapsed: false,
-			autogenerate: { directory: 'guides', collapsed: true },
+			autogenerate: { directory: 'constellations', collapsed: true },
 		},
 	],
 });
@@ -527,16 +517,14 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: '가이드',
+			label: 'Constellations',
 			items: [
-				{ label: '컴포넌트', link: '/ko/guides/components/' },
-				{ label: '국제화 (i18n)', link: '/ko/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: '고급',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{ label: '프로젝트 구조', link: '/ko/guides/project-structure/' },
-					],
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
 		},
