@@ -11,7 +11,7 @@ export const TitleTransformConfigSchema = (defaultLang: string) =>
 		if (typeof title === 'string') {
 			return { [defaultLang]: title };
 		}
-		if (!title[defaultLang]) {
+		if (!title[defaultLang] && title[defaultLang] !== '') {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
 				message: `Title must have a key for the default language "${defaultLang}"`,

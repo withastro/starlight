@@ -66,7 +66,9 @@ test('parses valid config successfully', () => {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
 		  },
-		  "title": "",
+		  "title": {
+		    "en": "",
+		  },
 		  "titleDelimiter": "|",
 		}
 	`);
