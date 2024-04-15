@@ -447,6 +447,9 @@ starlight({
 });
 ```
 
+`head`의 항목은 HTML 요소로 직접 변환되며 Astro의 [스크립트](https://docs.astro.build/ko/guides/client-side-scripts/#스크립트-처리)나 [스타일](https://docs.astro.build/ko/guides/styling/#astro에서-스타일링하기) 처리를 거치지 않습니다.
+스크립트, 스타일 또는 이미지와 같은 로컬 자산을 가져와야 하는 경우 [Head 컴포넌트를 재정의하세요](/ko/guides/overriding-components/#내장-컴포넌트-재사용).
+
 #### `HeadConfig`
 
 ```ts
