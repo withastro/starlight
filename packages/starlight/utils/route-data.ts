@@ -16,8 +16,8 @@ export interface PageProps extends Route {
 }
 
 export interface StarlightRouteData extends Route {
-  /** Title of the site. */
-  siteTitle: string;
+	/** Title of the site. */
+	siteTitle: string;
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
 	/** Site navigation sidebar entries for this page. */
@@ -45,10 +45,10 @@ export function generateRouteData({
 }): StarlightRouteData {
 	const { entry, locale, lang } = props;
 	const sidebar = getSidebar(url.pathname, locale);
-  const siteTitle  = getSiteTitle(lang);
+	const siteTitle = getSiteTitle(lang);
 	return {
 		...props,
-    siteTitle ,
+		siteTitle,
 		sidebar,
 		hasSidebar: entry.data.template !== 'splash',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),

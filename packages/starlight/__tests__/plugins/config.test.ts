@@ -5,7 +5,7 @@ import { runPlugins } from '../../utils/plugins';
 import { createTestPluginContext } from '../test-plugin-utils';
 
 test('reads and updates a configuration option', () => {
-	expect(config.title).toMatchObject({"en": "Plugins - Custom"});
+	expect(config.title).toMatchObject({ en: 'Plugins - Custom' });
 });
 
 test('overwrites a configuration option', () => {

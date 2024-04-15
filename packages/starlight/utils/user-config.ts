@@ -236,13 +236,13 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 				return z.NEVER;
 			}
 
-      // Transform the title
-      const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang as string);
-	    const parsedTitle = TitleSchema.parse(title);
+			// Transform the title
+			const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang as string);
+			const parsedTitle = TitleSchema.parse(title);
 
 			return {
 				...config,
-        title: parsedTitle,
+				title: parsedTitle,
 				/** Flag indicating if this site has multiple locales set up. */
 				isMultilingual: configuredLocales.length > 1,
 				/** Full locale object for this site’s default language. */
@@ -253,23 +253,23 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 
 		// This is a monolingual site with no locales configured or only a root locale, so things are
 		// pretty simple.
-    /** Full locale object for this site’s default language. */
+		/** Full locale object for this site’s default language. */
 		const defaultLocaleConfig = {
-				label: 'English',
-				lang: 'en',
-				dir: 'ltr',
-				locale: undefined,
-				...locales?.root,
-    }
-    /** Transform the title */
-    const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang);
-    const parsedTitle = TitleSchema.parse(title);
+			label: 'English',
+			lang: 'en',
+			dir: 'ltr',
+			locale: undefined,
+			...locales?.root,
+		};
+		/** Transform the title */
+		const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang);
+		const parsedTitle = TitleSchema.parse(title);
 		return {
 			...config,
-      title: parsedTitle,
+			title: parsedTitle,
 			/** Flag indicating if this site has multiple locales set up. */
 			isMultilingual: false,
-      defaultLocale: defaultLocaleConfig,
+			defaultLocale: defaultLocaleConfig,
 			locales: undefined,
 		} as const;
 	}

@@ -4,9 +4,8 @@ import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 import { formatPath } from '../utils/format-path';
 
-const { siteTitle } = Astro.props
+const { siteTitle } = Astro.props;
 const href = formatPath(Astro.props.locale || '/');
-
 ---
 
 <a {href} class="site-title sl-flex">

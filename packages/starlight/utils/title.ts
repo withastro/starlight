@@ -4,7 +4,7 @@ import config from 'virtual:starlight/user-config';
 export function getSiteTitle(lang: string): string {
 	const defaultLang = config.defaultLocale.lang as string;
 	if (lang && config.title[lang]) {
-	  return config.title[lang] as string;
+		return config.title[lang] as string;
 	}
 	return config.title[defaultLang] as string;
-  }
+}
