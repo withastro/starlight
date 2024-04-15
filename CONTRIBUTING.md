@@ -202,7 +202,7 @@ pnpm test:e2e
 
 Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content/config.ts` and some content to render in `src/content/docs/`).
 
-The `testFactory()` helper can be used in a test file to define the fixture which will be loaded in a dev server during a set of tests.
+The `testFactory()` helper can be used in a test file to define the fixture which will be built and loaded in a preview server during a set of tests.
 
 ```ts
 // packages/starlight/__e2e__/feature.test.ts
