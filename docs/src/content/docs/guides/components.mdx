@@ -401,53 +401,45 @@ import { Badge } from '@astrojs/starlight/components';
 
 Use the `<Badge>` component to display small pieces of information, such as status or labels.
 
-Place the content you want to display inside the `<Badge>` component. Optionally, you can specify a `variant` attribute with values like `tip`, `note`, `caution`, `danger`, `success`, or `default` to adjust the badge's color.
+Pass the content you want to display to the `text` attribute of the `<Badge>` component. Optionally, you can specify a `variant` attribute with values like `tip`, `note`, `caution`, `danger`, `success` or `default` to adjust the badge's appearance. If no variant is specified, the default variant is `default` which uses the theme accent color.
 
-```mdx
+You can also specify a `size` attribute with values like `small`, `medium`, or `large` to adjust the badge's size. If no size is specified, the default size is `small`.
 
+```mdx title="src/content/docs/example.mdx"
 import { Badge } from '@astrojs/starlight/components';
 
-- <Badge variant="note">Note</Badge>
-- <Badge variant="tip">Tip</Badge>
-- <Badge variant="success">Success</Badge>
-- <Badge variant="danger">Danger</Badge>
-- <Badge variant="caution">Caution</Badge>
-- <Badge variant="default">Default</Badge>
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
 
 ```
-- <Badge variant="note">Note</Badge>
-- <Badge variant="tip">Tip</Badge>
-- <Badge variant="success">Success</Badge>
-- <Badge variant="danger">Danger</Badge>
-- <Badge variant="caution">Caution</Badge>
-- <Badge variant="default">Default</Badge>
 
-You can customize the badge variants colors by setting the CSS variables.
+The code above generates the following on the page:
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+
+#### Custom badges
+
+To create a custom badge, create a new CSS class and set the `--sl-color-bg-badge`, `--sl-color-border-badge`, and `--sl-color-text-badge` CSS variables to the desired colors.
 
 ```css
-:root {
-  --sl-badge-default-bg: var(--sl-color-accent-low);
-	--sl-badge-default-border: var(--sl-color-accent);
-	--sl-badge-default-text: var(--sl-color-accent-high);
-
-	--sl-badge-note-bg: var(--sl-color-blue-low);
-	--sl-badge-note-border: var(--sl-color-blue);
-	--sl-badge-note-text: var(--sl-color-blue-high);
-
-	--sl-badge-danger-bg: var(--sl-color-red-low);
-	--sl-badge-danger-border: var(--sl-color-red);
-	--sl-badge-danger-text: var(--sl-color-red-high);
-
-	--sl-badge-success-bg: var(--sl-color-green-low);
-	--sl-badge-success-border: var(--sl-color-green);
-	--sl-badge-success-text: var(--sl-color-green-high);
-
-	--sl-badge-caution-bg: var(--sl-color-orange-low);
-	--sl-badge-caution-border: var(--sl-color-orange);
-	--sl-badge-caution-text: var(--sl-color-orange-high);
-
-	--sl-badge-tip-bg: var(--sl-color-purple-low);
-	--sl-badge-tip-border: var(--sl-color-purple);
-	--sl-badge-tip-text: var(--sl-color-purple-high);
+.new-badge-variant {
+	--sl-color-bg-badge: XXX;
+	--sl-color-border-badge: XXX;
+	--sl-color-text-badge: XXX;
 }
+
+[data-theme='light'] .new-badge-variant {
+	--sl-color-bg-badge: YYY;
+	--sl-color-border-badge: YYY;
+	--sl-color-text-badge: YYY;
+}
+```
+
+Then, apply the new class to the `<Badge>` component.
+
+```mdx title="src/content/docs/example.mdx"
+<Badge text="Custom" class="new-badge-variant" />
 ```
