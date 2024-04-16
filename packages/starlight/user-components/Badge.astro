@@ -1,76 +1,56 @@
 ---
-import { AstroError } from 'astro/errors';
-import { type Badge, badgeVariants } from '../schemas/badge';
+import { type Badge, badgeSchema } from '../schemas/badge';
+import { parseWithFriendlyErrors } from '../utils/error-map';
 
-interface Props {
-	variant?: Badge['variant'];
-	class: string | undefined;
-}
+type Props = Badge;
 
-const { variant = 'default', class: className } = Astro.props;
-
-if (!badgeVariants.includes(variant)) {
-	throw new AstroError(
-		'Invalid `variant` prop passed to the `<Badge>` component.\n',
-		`Received: ${JSON.stringify(variant)}\n` +
-			`Expected one of ${badgeVariants.map((i) => JSON.stringify(i)).join(', ')}`
-	);
-}
+const {
+	text,
+	variant,
+	class: className,
+} = parseWithFriendlyErrors(
+	badgeSchema(),
+	Astro.props,
+	'Invalid prop passed to the `<Badge/>` component.'
+);
 ---
 
-<span class:list={['sl-badge', variant, className]}><slot /></span>
+<span class:list={['sl-badge', variant, className]} set:html={text} />
 
 <style>
 	:global(:root) {
 		--sl-badge-default-border: var(--sl-color-accent);
 		--sl-badge-default-bg: var(--sl-color-accent-low);
-		--sl-badge-default-text: unset;
+		--sl-badge-default-text: #fff;
 
 		--sl-badge-note-border: var(--sl-color-blue);
 		--sl-badge-note-bg: var(--sl-color-blue-low);
-		--sl-badge-note-text: unset;
+		--sl-badge-note-text: #fff;
 
 		--sl-badge-danger-border: var(--sl-color-red);
 		--sl-badge-danger-bg: var(--sl-color-red-low);
-		--sl-badge-danger-text: unset;
+		--sl-badge-danger-text: #fff;
 
 		--sl-badge-success-border: var(--sl-color-green);
 		--sl-badge-success-bg: var(--sl-color-green-low);
-		--sl-badge-success-text: unset;
+		--sl-badge-success-text: #fff;
 
 		--sl-badge-caution-border: var(--sl-color-orange);
 		--sl-badge-caution-bg: var(--sl-color-orange-low);
-		--sl-badge-caution-text: unset;
+		--sl-badge-caution-text: #fff;
 
 		--sl-badge-tip-border: var(--sl-color-purple);
 		--sl-badge-tip-bg: var(--sl-color-purple-low);
-		--sl-badge-tip-text: unset;
+		--sl-badge-tip-text: #fff;
 	}
 
 	:global([data-theme='light']:root) {
-		--sl-badge-default-bg: var(--sl-color-accent-low);
-		--sl-badge-default-border: var(--sl-color-accent);
-		--sl-badge-default-text: var(--sl-color-accent-high);
-
-		--sl-badge-note-bg: var(--sl-color-blue-low);
-		--sl-badge-note-border: var(--sl-color-blue);
-		--sl-badge-note-text: var(--sl-color-blue-high);
-
-		--sl-badge-danger-bg: var(--sl-color-red-low);
-		--sl-badge-danger-border: var(--sl-color-red);
-		--sl-badge-danger-text: var(--sl-color-red-high);
-
-		--sl-badge-success-bg: var(--sl-color-green-low);
-		--sl-badge-success-border: var(--sl-color-green);
-		--sl-badge-success-text: var(--sl-color-green-high);
-
-		--sl-badge-caution-bg: var(--sl-color-orange-low);
-		--sl-badge-caution-border: var(--sl-color-orange);
-		--sl-badge-caution-text: var(--sl-color-orange-high);
-
-		--sl-badge-tip-bg: var(--sl-color-purple-low);
-		--sl-badge-tip-border: var(--sl-color-purple);
-		--sl-badge-tip-text: var(--sl-color-purple-high);
+		--sl-badge-default-bg: var(--sl-color-accent-high);
+		--sl-badge-note-bg: var(--sl-color-blue-high);
+		--sl-badge-danger-bg: var(--sl-color-red-high);
+		--sl-badge-success-bg: var(--sl-color-green-high);
+		--sl-badge-caution-bg: var(--sl-color-orange-high);
+		--sl-badge-tip-bg: var(--sl-color-purple-high);
 	}
 
 	.sl-badge {
@@ -80,13 +60,13 @@ if (!badgeVariants.includes(variant)) {
 		font-family: var(--sl-font-system-mono);
 		padding: 0.125rem 0.375rem;
 		line-height: normal;
-		color: var(--sl-color-text-badge, #fff);
+		color: var(--sl-color-text-badge);
 		background-color: var(--sl-color-bg-badge);
 		overflow-wrap: anywhere;
 	}
 
 	/* Sidebar overrides */
-	:global(#starlight__sidebar) .sl-badge {
+	:global(.sidebar-content) .sl-badge {
 		line-height: 1;
 		font-size: var(--sl-text-xs);
 	}
@@ -98,7 +78,7 @@ if (!badgeVariants.includes(variant)) {
 	}
 
 	/* outline variant */
-	:global(a[aria-current='page']) > .sl-badge {
+	:global(.sidebar-content a[aria-current='page']) > .sl-badge {
 		--sl-color-bg-badge: transparent;
 		--sl-color-border-badge: currentColor;
 		color: inherit;

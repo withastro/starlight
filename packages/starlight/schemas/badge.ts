@@ -2,7 +2,7 @@ import { z } from 'astro/zod';
 
 export const badgeVariants = ['note', 'danger', 'success', 'caution', 'tip', 'default'] as const;
 
-const badgeSchema = () =>
+export const badgeSchema = () =>
 	z.object({
 		variant: z.enum(badgeVariants).default('default'),
 		text: z.string(),
