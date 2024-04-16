@@ -368,33 +368,6 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
-### Icon
-
-import { Icon } from '@astrojs/starlight/components';
-import IconsList from '~/components/icons-list.astro';
-
-Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
-
-Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
-
-```mdx
-# src/content/docs/example.mdx
-
-import { Icon } from '@astrojs/starlight/components';
-
-<Icon name="star" color="goldenrod" size="2rem" />
-```
-
-The code above generates the following on the page:
-
-<Icon name="star" color="goldenrod" size="2rem" />
-
-#### All icons
-
-A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
-
-<IconsList />
-
 ### Badge
 
 import { Badge } from '@astrojs/starlight/components';
@@ -443,3 +416,30 @@ Then, apply the new class to the `<Badge>` component.
 ```mdx title="src/content/docs/example.mdx"
 <Badge text="Custom" class="new-badge-variant" />
 ```
+
+### Icon
+
+import { Icon } from '@astrojs/starlight/components';
+import IconsList from '~/components/icons-list.astro';
+
+Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
+
+Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+```
+
+The code above generates the following on the page:
+
+<Icon name="star" color="goldenrod" size="2rem" />
+
+#### All icons
+
+A list of all available icons is shown below with their associated names. Click an icon to copy the component code for it.
+
+<IconsList />
