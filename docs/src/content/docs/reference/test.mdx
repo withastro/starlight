@@ -7,45 +7,24 @@ sidebar:
 
 import { Tabs, TabItem, Badge } from '@astrojs/starlight/components';
 
-## APIs
-
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 
-### <Badge variant="success">POST</Badge> `/api/users`
+## <Badge variant="success" text="POST" size="large" /> Title h2
+### Title h3 <Badge variant="tip" text="PUT" size="medium" />
+#### <Badge variant="danger" text="DELETE" size="small" />`Title h4`
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+- *Italic <Badge variant="caution" text="caution" />* lorem ipsum
+- **Bold <Badge variant="tip" text="caution" />** lorem ipsum
+- ***Bold Italic <Badge variant="note" text="caution"/>*** lorem ipsum
 
-#### <Badge variant="tip">PUT</Badge> `/api/users`
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-
-##### <Badge variant="danger">DELETE</Badge> `/api/users`
-
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-
-### Lists
-
-- *Italic <Badge variant="caution">caution</Badge>* lorem ipsum
-- **Bold <Badge variant="tip">caution</Badge>** lorem ipsum
-- ***Bold Italic <Badge variant="note">caution</Badge>*** lorem ipsum
-- Custom <Badge class="custom-badge">Custom</Badge> lorem ipsum
-
-### Asides
-
-:::danger
-<Badge variant="note">note</Badge> <Badge variant="caution">caution</Badge> <Badge variant="danger">danger</Badge> <Badge variant="success">sucess</Badge> <Badge variant="tip">tip</Badge> <Badge variant="default">default</Badge>
+:::tip
+<Badge variant="note" text="note"/> <Badge variant="caution" text="caution" size="medium" /> <Badge variant="danger" text="danger" size="large"/>
 :::
-
- 
-:::note
-<Badge variant="note">note</Badge> <Badge variant="caution">caution</Badge> <Badge variant="danger">danger</Badge> <Badge variant="success">sucess</Badge> <Badge variant="tip">tip</Badge> <Badge variant="default">default</Badge>
-:::
-
-### Tabs
 
 <Tabs>
   <TabItem label="Tab 1">
-    This API is <Badge variant="caution">caution</Badge> and should be avoided.
+    This API is <Badge variant="caution" text="caution" /> and should be avoided.
 
     ```js
     const foo = 'bar';
@@ -53,7 +32,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
   </TabItem>
   <TabItem label="Tab 2">
-    This API is <Badge variant="danger">danger</Badge> and should be avoided.
+    This API is <Badge variant="danger" text="danger" /> and should be avoided.
 
     ```js
     const foo = 'bar';
@@ -66,7 +45,6 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |
-| <Badge variant="success">GET</Badge> | `/api/users` | Get all users |
-| <Badge variant="tip">POST</Badge> | `/api/users` | Create a new user |
-| <Badge variant="note">PUT</Badge> | `/api/users` | Update a user |
-| <Badge variant="danger">DELETE</Badge> | `/api/users` | Delete a user |
+| <Badge variant="success" text="GET" size="small" /> | `/api/users` | Get all users |
+| <Badge variant="tip" text="POST" size="medium" /> | `/api/users` | Create a new user |
+| <Badge variant="note" text="PUT" size="large" /> | `/api/users` | Update a user |

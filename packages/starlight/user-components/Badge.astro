@@ -1,5 +1,5 @@
 ---
-import { type Badge, badgeSchema } from '../schemas/badge';
+import { type Badge, BadgeComponentSchema } from '../schemas/badge';
 import { parseWithFriendlyErrors } from '../utils/error-map';
 
 type Props = Badge;
@@ -8,14 +8,15 @@ const {
 	text,
 	variant,
 	class: className,
+	size,
 } = parseWithFriendlyErrors(
-	badgeSchema(),
+	BadgeComponentSchema,
 	Astro.props,
 	'Invalid prop passed to the `<Badge/>` component.'
 );
 ---
 
-<span class:list={['sl-badge', variant, className]} set:html={text} />
+<span class:list={['sl-badge', variant, size, className]} set:html={text} />
 
 <style>
 	:global(:root) {
@@ -58,7 +59,6 @@ const {
 		border: 1px solid var(--sl-color-border-badge);
 		border-radius: 0.25rem;
 		font-family: var(--sl-font-system-mono);
-		padding: 0.125rem 0.375rem;
 		line-height: normal;
 		color: var(--sl-color-text-badge);
 		background-color: var(--sl-color-bg-badge);
@@ -69,12 +69,7 @@ const {
 	:global(.sidebar-content) .sl-badge {
 		line-height: 1;
 		font-size: var(--sl-text-xs);
-	}
-
-	/* Markdown content overrides */
-	:global(.sl-markdown-content :not(h1, h2, h3, h4, h5, h6)) .sl-badge,
-	:global(.sl-markdown-content) > .sl-badge {
-		font-size: var(--sl-text-sm);
+		padding: 0.125rem 0.375rem;
 	}
 
 	/* outline variant */
@@ -119,5 +114,21 @@ const {
 		--sl-color-bg-badge: var(--sl-badge-caution-bg);
 		--sl-color-border-badge: var(--sl-badge-caution-border);
 		--sl-color-text-badge: var(--sl-badge-caution-text);
+	}
+
+	/* Size variants */
+	.small {
+		font-size: var(--sl-text-xs);
+		padding: 0.125rem 0.25rem;
+	}
+
+	.medium {
+		font-size: var(--sl-text-sm);
+		padding: 0.175rem 0.35rem;
+	}
+
+	.large {
+		font-size: var(--sl-text-base);
+		padding: 0.225rem 0.45rem;
 	}
 </style>
