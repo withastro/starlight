@@ -32,15 +32,15 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 <SidebarPreview
 	config={[
 		{
-			label: 'constellations',
+			label: '별자리',
 			items: [
-				{ label: 'Andromeda', link: '' },
-				{ label: 'Orion', link: '' },
+				{ label: '안드로메다', link: '' },
+				{ label: '오리온', link: '' },
 			],
 		},
 		{
-			label: 'stars',
-			items: [{ label: 'Betelgeuse', link: '' }],
+			label: '별',
+			items: [{ label: '베텔게우스', link: '' }],
 		},
 	]}
 />
@@ -60,8 +60,8 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Ganymede moon 페이지로 이동하는 링크
-		{ label: 'Ganymede', link: '/moons/ganymede/' },
+		// 가니메데 위성 페이지로 이동하는 링크
+		{ label: '가니메데', link: '/moons/ganymede/' },
 		// NASA 웹사이트로 이동하는 외부 링크
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -72,7 +72,7 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'Ganymede', link: '' },
+		{ label: '가니메데', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -86,19 +86,19 @@ starlight({
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// 'Constellations' 라벨이 붙은 링크 그룹
+		// '별자리' 라벨이 붙은 링크 그룹
 		{
-			label: 'Constellations',
+			label: '별자리',
 			items: [
-				{ label: 'Carina', link: '/constellations/carina/' },
-				{ label: 'Centaurus', link: '/constellations/centaurus/' },
-				// seasonal constellations에 대한 중첩된 링크 그룹
+				{ label: '용골자리', link: '/constellations/carina/' },
+				{ label: '켄타우루스', link: '/constellations/centaurus/' },
+				// 계절별 별자리에 대한 중첩된 링크 그룹
 				{
-					label: 'Seasonal',
+					label: '계절별',
 					items: [
-						{ label: 'Andromeda', link: '/constellations/andromeda/' },
-						{ label: 'Orion', link: '/constellations/orion/' },
-						{ label: 'Ursa Minor', link: '/constellations/ursa-minor/' },
+						{ label: '안드로메다', link: '/constellations/andromeda/' },
+						{ label: '오리온', link: '/constellations/orion/' },
+						{ label: '작은곰자리', link: '/constellations/ursa-minor/' },
 					],
 				},
 			],
@@ -112,16 +112,16 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '별자리',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '용골자리', link: '' },
+				{ label: '켄타우루스', link: '' },
 				{
-					label: 'Seasonal',
+					label: '계절별',
 					items: [
-						{ label: 'Andromeda', link: '' },
-						{ label: 'Orion', link: '' },
-						{ label: 'Ursa Minor', link: '' },
+						{ label: '안드로메다', link: '' },
+						{ label: '오리온', link: '' },
+						{ label: '작은곰자리', link: '' },
 					],
 				},
 			],
@@ -141,8 +141,8 @@ Starlight는 문서 디렉터리를 기반해서 자동으로 사이드바에 �
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
-			// 'constellations' 디렉토리에 대한 링크 그룹을 자동 생성
+			label: '별자리',
+			// '별자리' 디렉토리에 대한 링크 그룹을 자동 생성
 			autogenerate: { directory: 'constellations' },
 		},
 	],
@@ -169,13 +169,13 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '별자리',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '용골자리', link: '' },
+				{ label: '켄타우루스', link: '' },
 				{
-					label: 'seasonal',
-					items: [{ label: 'Andromeda', link: '' }],
+					label: '계절별',
+					items: [{ label: '안드로메다', link: '' }],
 				},
 			],
 		},
@@ -209,15 +209,15 @@ sidebar:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '안내서',
 			items: [
-				{ label: 'A page', link: '' },
+				{ label: '페이지', link: '' },
 				{
-					label: 'Custom sidebar label',
+					label: '사용자 정의 사이드바 라벨',
 					link: '',
 					badge: { text: 'New', variant: 'tip' },
 				},
-				{ label: 'Another page', link: '' },
+				{ label: '기타 페이지', link: '' },
 			],
 		},
 	]}
@@ -237,19 +237,19 @@ sidebar:
 starlight({
 	sidebar: [
 		{
-			label: 'Stars',
+			label: '별',
 			items: [
-				// "Supergiant" 배지가 있는 링크
+				// "초거성" 배지가 있는 링크
 				{
-					label: 'Persei',
+					label: '페르세우스',
 					link: '/stars/persei/',
-					badge: 'Supergiant',
+					badge: '초거성',
 				},
 			],
 		},
 		// "Outdated" 배지가 있는 자동 생성된 그룹
 		{
-			label: 'Moons',
+			label: '위성',
 			badge: 'Outdated',
 			autogenerate: { directory: 'moons' },
 		},
@@ -262,29 +262,29 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Stars',
+			label: '별',
 			items: [
 				{
-					label: 'Persei',
+					label: '페르세우스',
 					link: '',
-					badge: { text: 'Supergiant', variant: 'default' },
+					badge: { text: '초거성', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Moons',
+			label: '위성',
 			badge: { text: 'Outdated', variant: 'default' },
 			items: [
 				{
-					label: 'Io',
+					label: '이오',
 					link: '',
 				},
 				{
-					label: 'Europa',
+					label: '유로파',
 					link: '',
 				},
 				{
-					label: 'Ganymede',
+					label: '가니메데',
 					link: '',
 				},
 			],
@@ -296,17 +296,17 @@ starlight({
 
 `text` 및 `variant` 속성이 있는 객체를 사용하여 배지 스타일을 변경할 수 있습니다.
 
-`text`는 표시할 콘텐츠를 나타냅니다(예: "New"). `variant` 속성의 값을 `note`, `tip`, `danger`, `caution`, `success` 중 하나로 설정하여 사이트의 강조 색상을 사용하는 `default` 스타일을 변경하세요.
+`text`는 표시할 콘텐츠를 나타냅니다 (예: "New"). `variant` 속성의 값을 `note`, `tip`, `danger`, `caution`, `success` 중 하나로 설정하여 사이트의 강조 색상을 사용하는 `default` 스타일을 변경하세요.
 
 ```js {10}
 starlight({
 	sidebar: [
 		{
-			label: 'Stars',
+			label: '별',
 			items: [
 				// 노란색 "Stub" 배지가 있는 링크
 				{
-					label: 'Sirius',
+					label: '시리우스',
 					link: '/stars/sirius/',
 					badge: { text: 'Stub', variant: 'caution' },
 				},
@@ -321,10 +321,10 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Stars',
+			label: '별',
 			items: [
 				{
-					label: 'Sirius',
+					label: '시리우스',
 					link: '',
 					badge: { text: 'Stub', variant: 'caution' },
 				},
@@ -345,7 +345,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Resources',
+			label: '리소스',
 			items: [
 				// 새 탭에서 열리는 NASA 웹사이트로 이동하는 외부 링크
 				{
@@ -364,7 +364,7 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Resources',
+			label: '리소스',
 			items: [
 				{
 					label: 'NASA',
@@ -388,20 +388,20 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '별자리',
 			translations: {
 				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Andromeda',
+					label: '안드로메다',
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
 					link: '/constellations/andromeda/',
 				},
 				{
-					label: 'Scorpius',
+					label: '전갈자리',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
@@ -435,12 +435,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '별자리',
 			// 기본적으로 그룹을 축소
 			collapsed: true,
 			items: [
-				{ label: 'Andromeda', link: '/constellations/andromeda/' },
-				{ label: 'Orion', link: '/constellations/orion/' },
+				{ label: '안드로메다', link: '/constellations/andromeda/' },
+				{ label: '오리온', link: '/constellations/orion/' },
 			],
 		},
 	],
@@ -452,11 +452,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '별자리',
 			collapsed: true,
 			items: [
-				{ label: 'Andromeda', link: '' },
-				{ label: 'Orion', link: '' },
+				{ label: '안드로메다', link: '' },
+				{ label: '오리온', link: '' },
 			],
 		},
 	]}
@@ -468,7 +468,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '별자리',
 			// 그룹 및 자동으로 생성된 하위 그룹의 기본 상태가 접힌 상태가 됩니다.
 			collapsed: true,
 			autogenerate: { directory: 'constellations' },
@@ -482,15 +482,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '별자리',
 			collapsed: true,
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '용골자리', link: '' },
+				{ label: '켄타우루스', link: '' },
 				{
-					label: 'seasonal',
+					label: '계절별',
 					collapsed: true,
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: '안드로메다', link: '' }],
 				},
 			],
 		},
@@ -503,8 +503,8 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
-			// "Constellations" 그룹을 축소하지 말고 자동 생성된 하위 그룹을 축소합니다.
+			label: '별자리',
+			// "별자리" 그룹을 축소하지 말고 자동 생성된 하위 그룹을 축소합니다.
 			collapsed: false,
 			autogenerate: { directory: 'constellations', collapsed: true },
 		},
@@ -517,14 +517,14 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '별자리',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '용골자리', link: '' },
+				{ label: '켄타우루스', link: '' },
 				{
-					label: 'seasonal',
+					label: '계절별',
 					collapsed: true,
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: '안드로메다', link: '' }],
 				},
 			],
 		},
