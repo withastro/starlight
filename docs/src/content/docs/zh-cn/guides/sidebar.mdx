@@ -34,13 +34,13 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 		{
 			label: 'constellations',
 			items: [
-				{ label: 'Andromeda', link: '' },
-				{ label: 'Orion', link: '' },
+				{ label: '仙女座', link: '' },
+				{ label: '猎户座', link: '' },
 			],
 		},
 		{
 			label: 'stars',
-			items: [{ label: 'Betelgeuse', link: '' }],
+			items: [{ label: '参宿四', link: '' }],
 		},
 	]}
 />
@@ -60,8 +60,8 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// 指向 Ganymede moon 页面的链接。
-		{ label: 'Ganymede', link: '/moons/ganymede/' },
+		// 指向木卫三卫星页面的链接。
+		{ label: '木卫三', link: '/moons/ganymede/' },
 		// 指向 NASA 网站的外部链接。
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -72,7 +72,7 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'Ganymede', link: '' },
+		{ label: '木卫三', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -89,19 +89,19 @@ starlight({
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// 一个名为 "Constellations" 的链接分组
+		// 一个名为 "星座" 的链接分组
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '/constellations/carina/' },
-				{ label: 'Centaurus', link: '/constellations/centaurus/' },
-				// seasonal constellations 的嵌套链接分组。
+				{ label: '船底座', link: '/constellations/carina/' },
+				{ label: '半人马座', link: '/constellations/centaurus/' },
+				// 星座周期的嵌套链接分组。
 				{
-					label: 'Seasonal',
+					label: '周期',
 					items: [
-						{ label: 'Andromeda', link: '/constellations/andromeda/' },
-						{ label: 'Orion', link: '/constellations/orion/' },
-						{ label: 'Ursa Minor', link: '/constellations/ursa-minor/' },
+						{ label: '仙女座', link: '/constellations/andromeda/' },
+						{ label: '猎户座', link: '/constellations/orion/' },
+						{ label: '小熊座', link: '/constellations/ursa-minor/' },
 					],
 				},
 			],
@@ -115,16 +115,16 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'Seasonal',
+					label: '周期',
 					items: [
-						{ label: 'Andromeda', link: '' },
-						{ label: 'Orion', link: '' },
-						{ label: 'Ursa Minor', link: '' },
+						{ label: '仙女座', link: '' },
+						{ label: '猎户座', link: '' },
+						{ label: '小熊座', link: '' },
 					],
 				},
 			],
@@ -144,8 +144,8 @@ Starlight 可以根据文档目录在侧边栏中自动生成一个分组。当�
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
-			// 自动生成一个链接分组，用于 'constellations' 目录。
+			label: '星座',
+			// 自动生成一个链接分组，用于 '星座' 目录。
 			autogenerate: { directory: 'constellations' },
 		},
 	],
@@ -172,13 +172,13 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'seasonal',
-					items: [{ label: 'Andromeda', link: '' }],
+					label: '周期',
+					items: [{ label: '仙女座', link: '' }],
 				},
 			],
 		},
@@ -212,7 +212,7 @@ sidebar:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '指南',
 			items: [
 				{ label: '一个页面', link: '' },
 				{
@@ -238,11 +238,11 @@ sidebar:
 starlight({
 	sidebar: [
 		{
-			label: 'Stars',
+			label: '星星',
 			items: [
 				// 带有 "Supergiant" 徽章的链接。
 				{
-					label: 'Persei',
+					label: '英仙座',
 					link: '/stars/persei/',
 					badge: 'Supergiant',
 				},
@@ -250,7 +250,7 @@ starlight({
 		},
 		// 带有 "Outdated" 徽章的自动生成分组。
 		{
-			label: 'Moons',
+			label: '卫星',
 			badge: 'Outdated',
 			autogenerate: { directory: 'moons' },
 		},
@@ -263,29 +263,29 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Stars',
+			label: '星星',
 			items: [
 				{
-					label: 'Persei',
+					label: '英仙座',
 					link: '',
 					badge: { text: 'Supergiant', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Moons',
+			label: '卫星',
 			badge: { text: 'Outdated', variant: 'default' },
 			items: [
 				{
-					label: 'Io',
+					label: '木卫一',
 					link: '',
 				},
 				{
-					label: 'Europa',
+					label: '木卫二',
 					link: '',
 				},
 				{
-					label: 'Ganymede',
+					label: '木卫三',
 					link: '',
 				},
 			],
@@ -304,11 +304,11 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Stars',
+			label: '星星',
 			items: [
 				// 一个带有黄色 "Stub" 徽章的链接。
 				{
-					label: 'Sirius',
+					label: '天狼星',
 					link: '/stars/sirius/',
 					badge: { text: 'Stub', variant: 'caution' },
 				},
@@ -323,10 +323,10 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Stars',
+			label: '星星',
 			items: [
 				{
-					label: 'Sirius',
+					label: '天狼星',
 					link: '',
 					badge: { text: 'Stub', variant: 'caution' },
 				},
@@ -345,7 +345,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Resources',
+			label: '资源',
 			items: [
 				// 一个指向 NASA 网站的在新标签页打开的外部链接。
 				{
@@ -364,7 +364,7 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Resources',
+			label: '资源',
 			items: [
 				{
 					label: 'NASA',
@@ -389,24 +389,24 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			translations: {
-				'zh-CN': '星座',
+				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Andromeda',
+					label: '仙女座',
 					translations: {
-						'zh-CN': '仙女座',
+						'pt-BR': 'Andrômeda',
 					},
-					link: '/zh-cn/constellations/andromeda/',
+					link: '/constellations/andromeda/',
 				},
 				{
-					label: 'Scorpius',
+					label: '天蝎座',
 					translations: {
-						'zh-CN': '天蝎座',
+						'pt-BR': 'Escorpião',
 					},
-					link: /zh-cn/constellations/scorpius/',
+					link: '/constellations/scorpius/',
 				},
 			],
 		},
@@ -414,15 +414,15 @@ starlight({
 });
 ```
 
-浏览简体中文文档将生成以下侧边栏：
+浏览巴西葡萄牙语文档将生成以下侧边栏：
 
 <SidebarPreview
 	config={[
 		{
-			label: '星座',
+			label: 'Constelação',
 			items: [
-				{ label: '仙女座', link: '' },
-				{ label: '天蝎座', link: '' },
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
 			],
 		},
 	]}
@@ -436,12 +436,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			// 默认折叠分组
 			collapsed: true,
 			items: [
-				{ label: 'Andromeda', link: '/constellations/andromeda/' },
-				{ label: 'Orion', link: '/constellations/orion/' },
+				{ label: '仙女座', link: '/constellations/andromeda/' },
+				{ label: '猎户座', link: '/constellations/orion/' },
 			],
 		},
 	],
@@ -453,11 +453,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			collapsed: true,
 			items: [
-				{ label: 'Andromeda', link: '' },
-				{ label: 'Orion', link: '' },
+				{ label: '仙女座', link: '' },
+				{ label: '猎户座', link: '' },
 			],
 		},
 	]}
@@ -469,7 +469,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			// 默认折叠分组及其自动生成的子组。
 			collapsed: true,
 			autogenerate: { directory: 'constellations' },
@@ -483,15 +483,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			collapsed: true,
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'seasonal',
+					label: '周期',
 					collapsed: true,
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: '仙女座', link: '' }],
 				},
 			],
 		},
@@ -504,8 +504,8 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
-			// 不折叠 "Constellations" 分组，但折叠其自动生成的子组。
+			label: '星座',
+			// 不折叠 "星座" 分组，但折叠其自动生成的子组。
 			collapsed: false,
 			autogenerate: { directory: 'Constellations', collapsed: true },
 		},
@@ -518,14 +518,14 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'seasonal',
+					label: '周期',
 					collapsed: true,
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: '仙女座', link: '' }],
 				},
 			],
 		},
