@@ -6,9 +6,10 @@ interface Props {
 	text?: string;
 }
 const { variant = 'default', text } = Astro.props;
+const variantClass = variant === 'outline' ? 'sl-outline' : variant;
 ---
 
-<span class:list={['sl-badge', variant]} set:html={text} />
+<span class:list={['sl-badge', variantClass]} set:html={text} />
 
 <style>
 	.sl-badge {
@@ -25,7 +26,7 @@ const { variant = 'default', text } = Astro.props;
 		overflow-wrap: anywhere;
 	}
 
-	.outline {
+	.sl-outline {
 		--sl-color-bg-badge: transparent;
 		--sl-color-border-badge: currentColor;
 		color: inherit;
