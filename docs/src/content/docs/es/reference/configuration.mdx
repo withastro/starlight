@@ -444,6 +444,9 @@ starlight({
 });
 ```
 
+Las entradas en el `head` son convertidas directamente a elementos HTML y no pasan por el [procesamiento de script](https://docs.astro.build/es/guides/client-side-scripts/#procesamiento-de-scripts) o [estilo](https://docs.astro.build/es/guides/styling/#estilando-en-astro) de Astro.
+Si necesitas importar activos locales como scripts, estilos o imágenes, [anula el componente Head](/es/guides/overriding-components/#reutilizar-un-componente-integrado).
+
 #### `HeadConfig`
 
 ```ts
