@@ -30,14 +30,14 @@ import type { Props } from '../props';
 		}
 
 		.right-sidebar {
-			position: fixed;
-			top: 0;
+			position: sticky;
+			top: var(--sl-nav-height);
 			border-inline-start: 1px solid var(--sl-color-gray-6);
-			padding-top: var(--sl-nav-height);
-			width: 100%;
-			height: 100vh;
-			overflow-y: auto;
-			scrollbar-width: none;
+			max-width: var(--sl-sidebar-width);
+			width: auto;
+			height: calc(100vh - var(--sl-nav-height));
+			overflow-y: auto;			
+			margin-right: var(--sl-sidebar-pad-x);
 		}
 
 		.main-pane {
