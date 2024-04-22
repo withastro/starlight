@@ -5,6 +5,8 @@ on:
   pull_request_target:
     types: [opened, synchronize]
     branches: [main]
+    paths:
+      - 'docs/**'
 
 # Allow this job to clone the repository and comment on the pull request
 permissions:
