@@ -130,6 +130,9 @@
 	cursor: pointer;
 	display: block; /* Needed to hide the default marker in some browsers. */
 	font-weight: 600;
+	/* Expand the outline so that the marker cannot distort it. */
+	margin-inline-start: -0.5rem;
+	padding-inline-start: 0.5rem;
 }
 .sl-markdown-content details[open] > summary:not(:where(.not-content *)) {
 	margin-bottom: 1rem;
@@ -140,26 +143,29 @@
 .sl-markdown-content summary:not(:where(.not-content *))::-webkit-details-marker {
 	display: none;
 }
-.sl-markdown-content summary:not(:where(.not-content *))::after {
+.sl-markdown-content summary:not(:where(.not-content *))::before {
+	--sl-details-marker-size: 1.25rem;
+
 	background-color: currentColor;
 	content: '';
 	display: inline-block;
-	height: 1.25rem;
-	width: 1.25rem;
+	height: var(--sl-details-marker-size);
+	width: var(--sl-details-marker-size);
+	margin-inline: calc((var(--sl-details-marker-size) / 4) * -1) 0.25rem;
 	vertical-align: middle;
 	mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCc+PHBhdGggZD0ibTE0LjgzIDExLjI5LTQuMjQtNC4yNGExIDEgMCAxIDAtMS40MiAxLjQxTDEyLjcxIDEybC0zLjU0IDMuNTRhMSAxIDAgMCAwIDAgMS40MSAxIDEgMCAwIDAgLjcxLjI5IDEgMSAwIDAgMCAuNzEtLjI5bDQuMjQtNC4yNGExLjAwMiAxLjAwMiAwIDAgMCAwLTEuNDJaIi8+PC9zdmc+');
 	mask-repeat: no-repeat;
 }
 @media (prefers-reduced-motion: no-preference) {
-	.sl-markdown-content summary:not(:where(.not-content *))::after {
+	.sl-markdown-content summary:not(:where(.not-content *))::before {
 		transition: transform 0.2s ease-in-out;
 	}
 }
-.sl-markdown-content details[open] > summary:not(:where(.not-content *))::after {
+.sl-markdown-content details[open] > summary:not(:where(.not-content *))::before {
 	transform: rotateZ(90deg);
 }
-[dir='rtl'] .sl-markdown-content summary:not(:where(.not-content *))::after,
-.sl-markdown-content [dir='rtl'] summary:not(:where(.not-content *))::after {
+[dir='rtl'] .sl-markdown-content summary:not(:where(.not-content *))::before,
+.sl-markdown-content [dir='rtl'] summary:not(:where(.not-content *))::before {
 	transform: rotateZ(180deg);
 }
 
