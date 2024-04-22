@@ -439,6 +439,8 @@ starlight({
 });
 ```
 
+在 `head` 中的条目会直接转换为 HTML 元素，并不会经过 Astro 的 [脚本](https://docs.astro.build/zh-cn/guides/client-side-scripts/#脚本处理) 或 [样式](https://docs.astro.build/zh-cn/guides/styling/#在-astro-进行设计) 处理。如果你需要导入本地资源，如脚本、样式或图片，请[重写 Head 组件](/zh-cn/guides/overriding-components/#复用内置组件)。
+
 #### `HeadConfig`
 
 ```ts

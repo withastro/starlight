@@ -444,6 +444,9 @@ starlight({
 });
 ```
 
+Las entradas en el `head` son convertidas directamente a elementos HTML y no pasan por el [procesamiento de script](https://docs.astro.build/es/guides/client-side-scripts/#procesamiento-de-scripts) o [estilo](https://docs.astro.build/es/guides/styling/#estilando-en-astro) de Astro.
+Si necesitas importar activos locales como scripts, estilos o imágenes, [anula el componente Head](/es/guides/overriding-components/#reusa-un-componente-integrado).
+
 #### `HeadConfig`
 
 ```ts
@@ -489,18 +492,18 @@ Si necesitas establecer variantes adicionales o favicons de respaldo, puedes agr
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // Agregar un favicon ICO de respaldo para Safari.
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// Agregar un favicon ICO de respaldo para Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
