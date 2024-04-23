@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add Signal social button
+Refactors `<ThemeSelect>` custom element logic to improve performance
