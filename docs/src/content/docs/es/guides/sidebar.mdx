@@ -35,7 +35,7 @@ La siguiente barra lateral se generará automáticamente:
 			label: 'constellations',
 			items: [
 				{ label: 'Andrómeda', link: '' },
-				{ label: 'Orión', link: '' },				
+				{ label: 'Orión', link: '' },
 			],
 		},
 		{
@@ -486,16 +486,17 @@ La configuración anterior genera la siguiente barra lateral:
 			collapsed: true,
 			items: [
 
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
-				{
-					label: 'seasonal',
-					collapsed: true,
-					items: [{ label: 'Andrómeda', link: '' }],
-				},
-			],
-		},
-	]}
+    			{ label: 'Carina', link: '' },
+    			{ label: 'Centaurus', link: '' },
+    			{
+    				label: 'seasonal',
+    				collapsed: true,
+    				items: [{ label: 'Andrómeda', link: '' }],
+    			},
+    		],
+    	},
+    ]}
+
 />
 
 Este comportamiento puede remplazarse definiendo la propiedad `autogenerate.collapsed`.
