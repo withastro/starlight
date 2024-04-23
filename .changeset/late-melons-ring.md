@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add Signal Icon
+Adds 1 new icon: `signal`
