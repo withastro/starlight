@@ -24,6 +24,7 @@ export const socialLinks = [
 	'email',
 	'reddit',
 	'patreon',
+	'signal',
 	'slack',
 	'matrix',
 	'openCollective',
