@@ -1,0 +1,312 @@
+---
+title: ⚠️ Link button demo page ⚠️
+---
+
+:::danger
+// TODO(HiDeoo) Remove this page
+:::
+
+import { Card, CardGrid, Icon, LinkButton, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Basics
+
+The following examples are basic link buttons.
+
+<LinkButton href="#_" variant="primary">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal">
+	Minimal (explicit)
+</LinkButton>
+<LinkButton href="#_">Minimal (implicit)</LinkButton>
+
+And some text after the links.
+
+## Icons
+
+The following examples are link buttons with icon after the text (default).
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow">
+	Minimal
+</LinkButton>
+
+The following examples are link buttons with icon before the text (using the `iconPlacement="start"`).
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" iconPlacement="start">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow" iconPlacement="start">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow" iconPlacement="start">
+	Minimal
+</LinkButton>
+
+The following examples are link buttons with icon after the text (using the `iconPlacement="end"`)
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" iconPlacement="end">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow" iconPlacement="end">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow" iconPlacement="end">
+	Minimal
+</LinkButton>
+
+The following examples are link buttons with only an icon and an `aria-label`.
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" aria-label="Star this item" />
+<LinkButton href="#_" variant="secondary" icon="right-arrow" aria-label="Star this item" />
+
+The following example is a link button with only an icon using the `<Icon>` component with a size specified by the user and an `aria-label`.
+
+<LinkButton href="#_" variant="primary" aria-label="Star this item">
+	<Icon name="right-arrow" size="4rem" />
+</LinkButton>
+
+## Custom class
+
+The following examples are link buttons with a custom class that changes some styles.
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" class="custom-link-button">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow" class="custom-link-button">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow" class="custom-link-button">
+	Minimal
+</LinkButton>
+
+## Long text
+
+The following examples is a link button with a very long text in it.
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	This is a very very very very very very very very long text
+</LinkButton>
+
+## Interleaved content
+
+The following example are 2 link buttons with a code block in between.
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	Primary
+</LinkButton>
+
+```js
+console.log('some content in between');
+```
+
+<LinkButton href="#_" variant="secondary" icon="right-arrow">
+	Secondary
+</LinkButton>
+
+## Markdown content
+
+The following example is a link button with markdown content in it.
+
+<LinkButton href="#_" variant="primary">
+
+	_Primary in italic_
+
+</LinkButton>
+
+## RTL
+
+The following examples are link buttons in a block in RTL where the icon is before the text.
+
+<div dir="rtl">
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" iconPlacement="start">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow" iconPlacement="start">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow" iconPlacement="start">
+	Minimal
+</LinkButton>
+
+</div>
+
+The following examples are link buttons in a block in RTL where the icon is after the text.
+
+<div dir="rtl">
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" iconPlacement="end">
+	Primary
+	<Icon name="right-arrow" />
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow" iconPlacement="end">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow" iconPlacement="end">
+	Minimal
+</LinkButton>
+
+</div>
+
+The following example is a link button in RTL where the icon is before the text.
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" iconPlacement="start" dir="rtl">
+	Primary
+</LinkButton>
+
+The following example is a link button in RTL where the icon is after the text.
+
+<LinkButton href="#_" variant="primary" icon="right-arrow" iconPlacement="end" dir="rtl">
+	Primary
+</LinkButton>
+
+## Asides
+
+The following examples are asides with link buttons.
+
+:::note
+This is the note aside content
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow">
+	Minimal
+</LinkButton>
+
+:::
+
+:::tip
+This is the tip aside content
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow">
+	Minimal
+</LinkButton>
+
+:::
+
+:::caution
+This is the caution aside content
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow">
+	Minimal
+</LinkButton>
+
+:::
+
+:::danger
+This is the danger aside content
+
+<LinkButton href="#_" variant="primary" icon="right-arrow">
+	Primary
+</LinkButton>
+<LinkButton href="#_" variant="secondary" icon="right-arrow">
+	Secondary
+</LinkButton>
+<LinkButton href="#_" variant="minimal" icon="right-arrow">
+	Minimal
+</LinkButton>
+
+:::
+
+## Tabs
+
+The following examples are tabs with link buttons.
+
+<Tabs>
+  <TabItem label="Stars" icon="star">
+    <LinkButton href="#_" variant="primary" icon="right-arrow">
+			Star 1
+		</LinkButton>
+		<LinkButton href="#_" variant="secondary" icon="right-arrow">
+			Star 2
+		</LinkButton>
+		<LinkButton href="#_" variant="minimal" icon="right-arrow">
+			Star 3
+		</LinkButton>
+  </TabItem>
+  <TabItem label="Moons" icon="moon">
+    <LinkButton href="#_" variant="primary" icon="right-arrow">
+			Star 1
+		</LinkButton>
+		<LinkButton href="#_" variant="secondary" icon="right-arrow">
+			Star 2
+		</LinkButton>
+		<LinkButton href="#_" variant="minimal" icon="right-arrow">
+			Star 3
+		</LinkButton>
+  </TabItem>
+</Tabs>
+
+## Cards
+
+The following example is a card with a link button.
+
+<Card title="Check this out">
+	<LinkButton href="#_" variant="primary" icon="right-arrow">
+		Primary
+	</LinkButton>
+</Card>
+
+The following examples are cards in a grid with link buttons.
+
+<CardGrid>
+  <Card title="Stars" icon="star">
+    <LinkButton href="#_" variant="primary" icon="right-arrow">
+			More stars
+		</LinkButton>
+  </Card>
+  <Card title="Moons" icon="moon">
+    <LinkButton href="#_" variant="secondary" icon="right-arrow">
+			More moons
+		</LinkButton>
+  </Card>
+</CardGrid>
+
+## Steps
+
+The following example is a link button in a step.
+
+<Steps>
+
+1.  Do something
+
+2.  Step two has some more information with link buttons
+
+		<LinkButton href="#_" variant="primary" icon="right-arrow">
+			Primary
+		</LinkButton>
+		<LinkButton href="#_" variant="secondary" icon="right-arrow">
+			Secondary
+		</LinkButton>
+		<LinkButton href="#_" variant="minimal" icon="right-arrow">
+			Minimal
+		</LinkButton>
+
+3. And finally do something else
+
+</Steps>
