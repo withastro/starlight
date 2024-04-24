@@ -3,8 +3,8 @@ title: Komponen
 description: Menggunakan komponen dalam MDX dengan Starlight.
 ---
 
-Komponen memungkinkan Anda dengan mudah menggunakan kembali bagian UI atau _style_ secara konsisten.
-Contohnya mungkin kartu tautan atau _YouTube embed_.
+Komponen memudahkan Anda menggunakan kembali bagian UI atau _styling_ secara konsisten.
+Contohnya bisa kartu tautan atau penyematan YouTube.
 Starlight mendukung penggunaan komponen dalam file [MDX](https://mdxjs.com/) dan menyediakan beberapa komponen umum yang dapat Anda gunakan.
 
 [Pelajari lebih lanjut tentang membuat komponen di Astro Docs](https://docs.astro.build/en/core-concepts/astro-components/).
@@ -12,7 +12,7 @@ Starlight mendukung penggunaan komponen dalam file [MDX](https://mdxjs.com/) dan
 ## Menggunakan Komponen
 
 Anda dapat menggunakan komponen dengan mengimpornya ke dalam file MDX Anda dan kemudian merendernya sebagai tag JSX.
-Tag-tag ini mirip dengan tag HTML tetapi dimulai dengan huruf kapital yang sesuai dengan nama dalam pernyataan `import` Anda:
+Ini mirip dengan tag HTML tetapi dimulai dengan huruf kapital yang sesuai dengan nama dalam pernyataan `import` Anda:
 
 ```mdx
 ---
@@ -35,8 +35,8 @@ Pelajari lebih lanjut tentang menggunakan [komponen dalam MDX](https://docs.astr
 
 ### Kompatibilitas dengan style Starlight
 
-Starlight menerapkan _style_ default pada konten Markdown Anda, misalnya menambahkan margin antara elemen-elemen.
-Jika _style_ ini tidak sesuai dengan tampilan komponen Anda, atur kelas `not-content` pada komponen untuk menonaktifkannya.
+Starlight menerapkan _style_ bawaan pada konten Markdown Anda, misalnya menambahkan margin diantara elemen-elemen.
+Jika _style_ ini bertentangan dengan tampilan komponen Anda, atur kelas `not-content` pada komponen untuk menonaktifkannya.
 
 ```astro
 ---
@@ -51,14 +51,15 @@ Jika _style_ ini tidak sesuai dengan tampilan komponen Anda, atur kelas `not-con
 ## Komponen Bawaan
 
 Starlight menyediakan beberapa komponen bawaan yang umum digunakan untuk keperluan dokumentasi.
-Komponen ini tersedia di _package_ `@astrojs/starlight/components`.
+Komponen ini tersedia di paket `@astrojs/starlight/components`.
 
 ### Tabs
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Anda dapat menampilkan _interface_ berbasis tab menggunakan komponen `<Tabs>` dan `<TabItem>`.
+Anda dapat menampilkan antarmuka berbasis tab menggunakan komponen `<Tabs>` dan `<TabItem>`.
 Setiap `<TabItem>` harus memiliki `label` untuk ditampilkan kepada pengguna.
+Gunakan atribut opsional `icon` untuk mengikutsertakan salah satu [ikon bawaan Starlight ](#semua-icon) disamping label.
 
 ```mdx
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -69,7 +70,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Tabs>
 ```
 
-Kode di atas akan menampilkan tab seperti berikut pada halaman:
+Kode di atas akan menampilkan tab-tab berikut pada halaman:
 
 <Tabs>
 	<TabItem label="Bintang">Sirius, Vega, Betelgeuse</TabItem>
@@ -81,9 +82,9 @@ Kode di atas akan menampilkan tab seperti berikut pada halaman:
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 Anda dapat menampilkan konten di dalam kotak yang sesuai dengan _style_ Starlight menggunakan komponen `<Card>`.
-Bungkus beberapa _card_ dalam komponen `<CardGrid>` untuk menampilkan _card-card_ secara berdampingan ketika ada cukup ruang.
+Bungkus beberapa _card_ dalam komponen `<CardGrid>` untuk menampilkan _card_ secara berdampingan ketika ada cukup ruang.
 
-`<Card>` memerlukan `title` dan secara opsional dapat ditambahkan atribut `icon` yang di-set dengan [nama salah satu icon bawaan Starlight](#semua-icon).
+`<Card>` memerlukan `title` dan secara opsional dapat menyertakan atribut `icon` yang disesuaikan dengan nama [salah satu ikon bawaan Starlight](#semua-icon).
 
 ```mdx
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -114,7 +115,7 @@ Kode di atas akan menampilkan hasil sebagai berikut:
 </CardGrid>
 
 :::tip
-Gunakan _card_ grid di halaman utama untuk menampilkan fitur-fitur utama proyek Anda.
+Gunakan _card_ grid di beranda untuk menampilkan fitur-fitur utama proyek Anda.
 Tambahkan atribut `stagger` untuk menggeser kolom kedua _card_ secara vertikal dan menambah daya tarik visual:
 
 ```astro
@@ -162,6 +163,198 @@ import { LinkCard } from '@astrojs/starlight/components';
 	<LinkCard title="Menulis Markdown" href="/id/guides/authoring-content/" />
 	<LinkCard title="Komponen" href="/id/guides/components/" />
 </CardGrid>
+
+### Aside
+
+_Aside_ (dikenal juga sebagai “_admonition_” or “_callout_”) berguna untuk menampilkan informasi sekunder di samping konten utama halaman.
+
+`<Aside>` bisa memiliki atribut opsional `type` dengan `note` (bawaan), `tip`, `caution` atau `danger`. Menetapkan atribut `title` akan menggantikan judul bawaan.
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Aside bawaan tanpa judul khusus</Aside>
+
+<Aside type="caution" title="Hati-hati!">
+	Aside peringatan *dengan* judul khusus
+</Aside>
+
+<Aside type="tip">
+
+Konten lain juga didukung di aside.
+
+```js
+// Cuplikan kode, misalnya.
+```
+
+</Aside>
+
+<Aside type="danger">Jangan berikan kata sandi Anda kepada siapa pun.</Aside>
+````
+
+Kode di atas akan menampilkan hasil sebagai berikut di halaman:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>_Aside_ bawaan tanpa judul khusus</Aside>
+
+<Aside type="caution" title="Hati-hati!">
+	Aside peringatan *dengan* judul khusus
+</Aside>
+
+<Aside type="tip">
+
+Konten lain juga didukung di aside.
+
+```js
+// Cuplikan kode, misalnya.
+```
+
+</Aside>
+
+<Aside type="danger">Jangan berikan kata sandi Anda kepada siapa pun.</Aside>
+
+Starlight juga menyediakan sintaks khusus untuk merender aside di Markdown dan MDX sebagai alternatif dari komponent `<Aside>`.
+Lihat panduan [“Penulisan Konten di Markdown”](/id/guides/authoring-content/#asides) untuk detail dari siktaks khusus.
+
+### Code
+
+Menggunakan komponen `<Code>` untuk merender _syntax highlighted code_ ketika menggunakan [Markdown code block](/id/guides/authoring-content/#code-blocks) tidak memungkinkan, contohnya, untuk merender data dari sumber eksternal seperti file, database, atau API.
+
+Lihat [Expressive Code dokumentasi “Komponen Kode”](https://expressive-code.com/key-features/code-component/) untuk detail lengkap tentang dukungan props `<Code>`.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('Ini bisa berasal dari file atau CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+Kode di atas akan menampilkan hasil sebagai berikut di halaman:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('Ini bisa berasal dari file atau CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+
+#### Imported Code
+
+Gunakan [Sufiks impor `?raw` Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) to impor file kode apa pun sebagai string.
+Anda dapat meneruskan string yang diimpor ini ke komponen `<Code>` untuk memasukkannya ke halaman Anda.
+
+```mdx title="src/content/docs/example.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+```
+
+Kode di atas akan menampilkan hasil sebagai berikut di halaman:
+
+import importedCode from '/src/env.d.ts?raw';
+
+<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+
+### File Tree
+
+Gunakan komponen `<FileTree>` untuk menampilkan struktur direktori dengan ikon berkas beserta subdirektori yang dapat diciutkan.
+
+Tentukan struktur file dan direktori Anda dengan [daftar Markdown tidak berurutan](https://www.markdownguide.org/basic-syntax/#unordered-lists) di dalam `<FileTree>`.
+Buat subdirektori menggunakan daftar bersarang atau tambahkan `/` diakhir item untuk merendernya sebagai direktori tanpa konten yang spesifik.
+
+Sintaks berikut dapat digunakan untuk menyesuaikan tampilan pohon file:
+
+The following syntax can be used to customize the appearance of the file tree:
+
+- Sorot file atau direktori dengan membuat namanya tebal, mis. `**README.md**`.
+- Menambah komen ke berkas atau direktori dengan menambah teks setelah nama.
+- Menambah _placeholder_ untuk berkas dan direktori dengan memakai `...` or `…` sebagai nama.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+Kode di atas akan menampilkan hasil sebagai berikut di halaman:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### Steps
+
+Gunakan komponen `<Steps>` untuk menata gaya daftar tugas bernomor.
+Hal ini berguna untuk panduan langkah demi langkah yang lebih kompleks dimana setiap langkah perlu disorot dengan jelas.
+
+Bungkus `<Steps>` dengan standar daftar berurut Markdown. 
+Semua sintaks Markdown umum berlaku di dalam `<Steps>`.
+
+````mdx title="src/content/docs/example.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Impor komponen ke file MDX Anda:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Bungkus `<Steps>` dengan item dari daftar berurut.
+
+</Steps>
+````
+
+Kode di atas akan menampilkan hasil sebagai berikut di halaman:
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Impor komponen ke file MDX Anda:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Bungkus `<Steps>` dengan item dari daftar berurut.
+
+</Steps>
 
 ### Icon
 
