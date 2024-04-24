@@ -67,6 +67,7 @@ export const SocialLinksSchema = () =>
 					email: 'Email',
 					reddit: 'Reddit',
 					patreon: 'Patreon',
+					signal: 'Signal',
 					slack: 'Slack',
 					matrix: 'Matrix',
 					openCollective: 'Open Collective',
