@@ -5,8 +5,8 @@ import Icon from './Icon.astro';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
 	href: string | URL;
-	icon?: keyof typeof Icons;
-	iconPlacement?: 'start' | 'end';
+	icon?: keyof typeof Icons | undefined;
+	iconPlacement?: 'start' | 'end' | undefined;
 	variant?: 'primary' | 'secondary' | 'minimal';
 }
 
@@ -34,7 +34,6 @@ const {
 		font-size: var(--sl-text-sm);
 		gap: 0.5em;
 		line-height: 1.7145;
-		margin-inline-end: 0.5em;
 		padding: 0.5rem 1.125rem;
 		text-decoration: none;
 	}
@@ -51,10 +50,6 @@ const {
 		padding-inline: 0;
 	}
 
-	.sl-link-button:not(:where(p *)) {
-		margin-block: 1rem;
-	}
-
 	.sl-link-button :global(svg) {
 		flex-shrink: 0;
 	}
@@ -65,5 +60,12 @@ const {
 			line-height: 1.5;
 			padding: 1rem 1.25rem;
 		}
+	}
+
+	:global(.sl-markdown-content) .sl-link-button {
+		margin-inline-end: 0.5em;
+	}
+	:global(.sl-markdown-content) .sl-link-button:not(:where(p *)) {
+		margin-block: 1rem;
 	}
 </style>
