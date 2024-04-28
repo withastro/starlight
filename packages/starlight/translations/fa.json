@@ -12,16 +12,16 @@
   "menuButton.accessibleLabel": "منو",
   "sidebarNav.accessibleLabel": "اصلی",
   "tableOfContents.onThisPage": "در این صفحه",
-  "tableOfContents.overview": "بررسی اجمالی",
+  "tableOfContents.overview": "نگاه کلی",
   "i18n.untranslatedContent": "این محتوا هنوز به زبان شما در دسترس نیست.",
   "page.editLink": "ویرایش صفحه",
-  "page.lastUpdated": "آخرین به روز رسانی:",
+  "page.lastUpdated": "آخرین به‌روزرسانی:",
   "page.previousLink": "قبلی",
   "page.nextLink": "بعدی",
   "404.text": "صفحه یافت نشد. لطفاً URL را بررسی کنید یا از جستجو استفاده نمایید.",
-  "aside.note": "Note",
-  "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "aside.note": "یادداشت",
+  "aside.tip": "نکته",
+  "aside.caution": "احتیاط",
+  "aside.danger": "خطر",
+  "fileTree.directory": "فهرست"
 }
