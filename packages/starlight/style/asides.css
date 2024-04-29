@@ -8,20 +8,43 @@
 	border-color: var(--sl-color-blue);
 	background-color: var(--sl-color-blue-low);
 }
+
+ .starlight-aside--note tr:nth-child(even) {
+	--sl-color-asides-text-accent: var(--sl-color-blue-low);
+	background-color: hsl(234, 39%, 44%,0.277);;
+}
+
 .starlight-aside--tip {
 	--sl-color-asides-text-accent: var(--sl-color-purple-high);
 	border-color: var(--sl-color-purple);
 	background-color: var(--sl-color-purple-low);
 }
+
+ .starlight-aside--tip tr:nth-child(even) {
+	--sl-color-asides-text-accent: var(--sl-color-purple-high);
+	background-color: hsla(281, 39%, 44%, 0.277);
+}
+
 .starlight-aside--caution {
 	--sl-color-asides-text-accent: var(--sl-color-orange-high);
 	border-color: var(--sl-color-orange);
 	background-color: var(--sl-color-orange-low);
 }
+
+ .starlight-aside--caution tr:nth-child(even) {
+	--sl-color-asides-text-accent: var(--sl-color-orange-high);
+	background-color: hsla(var(--sl-hue-orange), 39%, 44%,0.277);
+}
+
 .starlight-aside--danger {
 	--sl-color-asides-text-accent: var(--sl-color-red-high);
 	border-color: var(--sl-color-red);
 	background-color: var(--sl-color-red-low);
+}
+
+.starlight-aside--danger tr:nth-child(even){
+	--sl-color-asides-text-accent: var(--sl-color-red-low);
+	background-color: hsla(var(--sl-hue-red), 39%, 44%,0.277);	
 }
 
 .starlight-aside__title {
@@ -47,3 +70,4 @@
 .starlight-aside__content a {
 	color: var(--sl-color-asides-text-accent);
 }
+
