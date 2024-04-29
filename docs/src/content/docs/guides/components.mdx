@@ -187,21 +187,16 @@ A `<LinkButton>` requires an [`href`](https://developer.mozilla.org/en-US/docs/W
 The `icon` attribute can optionally be set to the name of [one of Starlight's built-in icons](#all-icons) to include an icon next to the text.
 The `iconPlacement` attribute can be used to place the icon before the text by setting it to `start` (defaults to `end`).
 
-Customize the appearance of the link button using the `variant` attribute, which can be set to `primary`, `secondary`, or `minimal` (the default).
+Customize the appearance of the link button using the `variant` attribute, which can be set to `primary` (the default), `secondary`, or `minimal`.
 
 ```mdx
 # src/content/docs/example.mdx
 
 import { LinkButton } from '@astrojs/starlight/components';
 
-<LinkButton href="/getting-started/" variant="primary">
-	Get started
-</LinkButton>
+<LinkButton href="/getting-started/">Get started</LinkButton>
 <LinkButton href="https://docs.astro.build" variant="secondary" icon="external">
 	Related: Astro
-</LinkButton>
-<LinkButton href="/guides/i18n/" variant="minimal" icon="right-arrow">
-	More about internationalization
 </LinkButton>
 ```
 
@@ -209,14 +204,9 @@ The above code generates the following on the page:
 
 import { LinkButton } from '@astrojs/starlight/components';
 
-<LinkButton href="/getting-started/" variant="primary">
-	Get started
-</LinkButton>
+<LinkButton href="/getting-started/">Get started</LinkButton>
 <LinkButton href="https://docs.astro.build" variant="secondary" icon="external">
 	Related: Astro
-</LinkButton>
-<LinkButton href="/guides/i18n/" variant="minimal" icon="right-arrow">
-	More about internationalization
 </LinkButton>
 
 ### Asides
