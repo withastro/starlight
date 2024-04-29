@@ -85,6 +85,19 @@ export default function StarlightIntegration({
 					experimental: {
 						globalRoutePriority: true,
 					},
+					i18n: {
+						defaultLocale:
+							starlightConfig.defaultLocale.lang || starlightConfig.defaultLocale.locale || 'en',
+						locales: starlightConfig.locales
+							? Object.entries(starlightConfig.locales).map(([locale, config]) => ({
+									path: locale === 'root' ? config?.lang || 'en' : locale,
+									codes: [config?.lang || locale],
+							  }))
+							: ['en'],
+						routing: {
+							prefixDefaultLocale: starlightConfig.defaultLocale.locale === 'root',
+						},
+					},
 				});
 			},
 
