@@ -4,7 +4,8 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright install --with-deps chromium && playwright test"
   },
   "keywords": [
     "docs",
@@ -183,6 +184,7 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
+    "@playwright/test": "^1.43.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.3.1",
     "astro": "^4.3.5",
