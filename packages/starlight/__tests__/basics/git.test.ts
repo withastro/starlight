@@ -56,13 +56,13 @@ describe('getNewestCommitDate', () => {
 
 	test('throws when failing to retrieve the git history for a file', () => {
 		expect(() => getNewestCommitDate(getFilePath('../not-a-starlight-test-repo/test.md'))).toThrow(
-			/^Failed to retrieve the git history for file "[/\\-\w ]+\/test\.md"/
+			/^Failed to retrieve the git history for file "[/\\:-\w ]+[/\\]test\.md"/
 		);
 	});
 
 	test('throws when trying to get the history of a non-existing or untracked file', () => {
 		const expectedError =
-			/^Failed to validate the timestamp for file "[/\\-\w ]+\/(?:unknown|untracked)\.md"$/;
+			/^Failed to validate the timestamp for file "[/\\:-\w ]+[/\\](?:unknown|untracked)\.md"$/;
 		writeFile('untracked.md', 'content');
 
 		expect(() => getNewestCommitDate(getFilePath('unknown.md'))).toThrow(expectedError);
