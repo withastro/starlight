@@ -83,43 +83,9 @@ Buka URL tersebut untuk mulai menjelajahi situs Anda.
 
 Starlight siap untuk ditambahkan konten baru, atau pindahkan konten Anda yang sudah ada!
 
-#### Format file
+Tambahkan halaman baru ke website anda dengan membuat file Markdown di direktori `src/content/docs/`.
 
-Starlight mendukung penulisan konten dalam bentuk Markdown dan MDX tanpa memerlukan konfigurasi.
-Anda dapat menambahkan dukungan untuk Markdoc dengan memasang [integrasi Astro Markdoc](https://docs.astro.build/en/guides/integrations-guide/markdoc/) eksperimental.
-
-#### Tambahkan halaman
-
-Tambahkan halaman baru ke situs Anda dengan cara membuat file `.md` atau `.mdx` di `src/content/docs/`.
-Gunakan sub-folder untuk mengatur konten Anda dan untuk membuat beberapa segmen _path_.
-
-Sebagai contoh, struktur file berikut ini akan menghasilkan halaman di `example.com/hello-world` dan `example.com/guides/faq`:
-
-import { FileTree } from '@astrojs/starlight/components';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - hello-world.md
-
-</FileTree>
-
-#### Frontmatter yang type-safe
-
-Semua halaman Starlight berbagi [properti _frontmatter_ umum](/id/reference/frontmatter/) yang dapat dikostumisasi untuk mengontrol tampilan setiap halaman:
-
-```md
----
-title: Halo, Dunia!
-description: Ini adalah halaman di situs saya yang didukung Starlight
----
-```
-
-Jika Anda lupa sesuatu yang penting, Starlight akan memberi tahu Anda.
+Baca selengkapnya tentang perutean berbasis file serta dukungan untuk MDX dan Markdoc di panduan [“Halaman”](/id/guides/pages/).
 
 ### Langkah selanjutnya
 
