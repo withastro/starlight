@@ -67,7 +67,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.21.5
+        specifier: ^0.22.0
         version: link:../../packages/starlight
       astro:
         specifier: ^4.3.5
@@ -79,7 +79,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.21.5
+        specifier: ^0.22.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.2
@@ -1364,12 +1364,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@parse5/tools@0.3.0:
-    resolution: {integrity: sha512-zxRyTHkqb7WQMV8kTNBKWb1BeOFUKXBXTBWuxg9H9hfvQB3IwP6Iw2U75Ia5eyRxPNltmY7E8YAlz6zWwUnjKg==}
-    dependencies:
-      parse5: 7.1.2
-    dev: false
 
   /@playwright/test@1.43.1:
     resolution: {integrity: sha512-HgtQzFgNEEo4TE22K/X7sYTYNqEMMTZmFS8kTq6m8hXj+m1D8TgwgIbumHddJa9h4yl4GkKb8/bgAl2+g7eDgA==}

@@ -1,5 +1,62 @@
 # @astrojs/starlight
 
+## 0.22.0
+
+### Minor Changes
+
+- [#640](https://github.com/withastro/starlight/pull/640) [`7dc503ea`](https://github.com/withastro/starlight/commit/7dc503ea7993123a4aeff453d08de41cac887353) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for syncing multiple sets of tabs on the same page.
+
+- [#1620](https://github.com/withastro/starlight/pull/1620) [`ca0678ca`](https://github.com/withastro/starlight/commit/ca0678ca556d739bda9648edc1b79c764fdea851) Thanks [@emjio](https://github.com/emjio)! - Adds support for translating the site title
+
+  ⚠️ **Potentially breaking change:** The shape of the `title` field on Starlight’s internal config object has changed. This used to be a string, but is now an object.
+
+  If you are relying on `config.title` (for example in a custom `<SiteTitle>` or `<Head>` component), you will need to update your code. We recommend using the new [`siteTitle` prop](https://starlight.astro.build/reference/overrides/#sitetitle) available to component overrides:
+
+  ```astro
+  ---
+  import type { Props } from '@astrojs/starlight/props';
+
+  // The site title for this page’s language:
+  const { siteTitle } = Astro.props;
+  ---
+  ```
+
+- [#1613](https://github.com/withastro/starlight/pull/1613) [`61493e55`](https://github.com/withastro/starlight/commit/61493e55f1a80362af13f98d665018376e987439) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds new `draft` frontmatter option to exclude a page from production builds.
+
+- [#640](https://github.com/withastro/starlight/pull/640) [`7dc503ea`](https://github.com/withastro/starlight/commit/7dc503ea7993123a4aeff453d08de41cac887353) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the default `line-height` from `1.8` to `1.75`. This change avoids having a line height with a fractional part which can cause scripts accessing dimensions involving the line height to get an inconsistent rounded value in various browsers.
+
+  If you want to preserve the previous `line-height`, you can add the following custom CSS to your site:
+
+  ```css
+  :root {
+  	--sl-line-height: 1.8;
+  }
+  ```
+
+- [#1720](https://github.com/withastro/starlight/pull/1720) [`749ddf85`](https://github.com/withastro/starlight/commit/749ddf85a21d8ed1bfedbe60dee676cdd8784e96) Thanks [@jacobdalamb](https://github.com/jacobdalamb)! - Updates `astro-expressive-code` dependency to the latest minor release (0.35) and exposes a new `@astrojs/starlight/expressive-code/hast` module for users who need to use Expressive Code’s version of `hast`.
+
+  This includes a potentially breaking change if you use custom Expressive Code plugins. See the [Expressive Code release notes](https://expressive-code.com/releases/#0340) for full details.
+
+- [#1769](https://github.com/withastro/starlight/pull/1769) [`bd5f1cbd`](https://github.com/withastro/starlight/commit/bd5f1cbd5aef9e2d78e7f7187eb07deee87399d0) Thanks [@ncjones](https://github.com/ncjones)! - Adds support for [accessing frontmatter data as a variable](https://docs.astro.build/en/guides/integrations-guide/markdoc/#access-frontmatter-from-your-markdoc-content) when using Markdoc
+
+### Patch Changes
+
+- [#1788](https://github.com/withastro/starlight/pull/1788) [`681a4273`](https://github.com/withastro/starlight/commit/681a427366755fec71ba65d45e36f7d1267cf387) Thanks [@dragomano](https://github.com/dragomano)! - Adds Russian translations for Expressive Code labels
+
+- [#1780](https://github.com/withastro/starlight/pull/1780) [`4db6025a`](https://github.com/withastro/starlight/commit/4db6025a1c5c56cac2e3a98bd2e13124402445c7) Thanks [@MiahaCybersec](https://github.com/MiahaCybersec)! - Adds 1 new icon: `signal`
+
+- [#1785](https://github.com/withastro/starlight/pull/1785) [`65009c9c`](https://github.com/withastro/starlight/commit/65009c9cf8b0570303ecb87713e1c2968a704437) Thanks [@dreyfus92](https://github.com/dreyfus92)! - Adds 5 new icons: `node`, `cloudflare`, `vercel`, `netlify` and `deno`
+
+- [#1786](https://github.com/withastro/starlight/pull/1786) [`d05d693a`](https://github.com/withastro/starlight/commit/d05d693afcf1771b8269dfe2ccc94f8952c643e8) Thanks [@delucis](https://github.com/delucis)! - Fixes type inference for i18n strings added by extending the default schema
+
+- [#1777](https://github.com/withastro/starlight/pull/1777) [`6949404b`](https://github.com/withastro/starlight/commit/6949404b24a1c8254fd32d75122fdfbaf896fe29) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where TypeScript could fail to serialize the frontmatter schema when configured to emit declaration files
+
+- [#1734](https://github.com/withastro/starlight/pull/1734) [`4493dcfa`](https://github.com/withastro/starlight/commit/4493dcfac5171f839b1b0e39444a15ce696adee4) Thanks [@delucis](https://github.com/delucis)! - Refactors `<ThemeSelect>` custom element logic to improve performance
+
+- [#1731](https://github.com/withastro/starlight/pull/1731) [`f08b0dff`](https://github.com/withastro/starlight/commit/f08b0dff9638bbe7704ac2ba2e855d8d1464ba76) Thanks [@techfg](https://github.com/techfg)! - Fixes responding to system color scheme changes when theme is `auto`
+
+- [#1793](https://github.com/withastro/starlight/pull/1793) [`2616f0c7`](https://github.com/withastro/starlight/commit/2616f0c7acf39a99c9f92b3db4108cae81120034) Thanks [@Mrahmani71](https://github.com/Mrahmani71)! - Updates the Farsi UI translations
+
 ## 0.21.5
 
 ### Patch Changes
@@ -212,7 +269,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -232,14 +289,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -251,9 +308,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -326,14 +383,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -390,12 +447,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -743,16 +800,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1131,8 +1188,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
