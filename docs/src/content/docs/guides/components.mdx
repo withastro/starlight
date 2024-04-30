@@ -89,10 +89,11 @@ The code above generates the following tabs on the page:
 
 #### Synced tabs
 
-Keep multiple sets of tabs on the same page in sync with the `syncKey` attribute.
-Switching to a synced tab will also switch to the tab with the same label in other `<Tabs>` that share the same `syncKey`.
+Keep multiple tab groups synchronized by adding the `syncKey` attribute.
 
-To synchronize tabs, add an identical `syncKey` property to each related `<Tabs>` component.
+All `<Tabs>` on a page with the same `syncKey` value will display the same active label. This allows your reader to choose once (e.g. their operating system or package manager), and see their choice reflected throughout the page.
+
+To synchronize related tabs, add an identical `syncKey` property to each `<Tabs>` component and ensure that they all use the same `<TabItem>` labels:
 
 ```mdx 'syncKey="constellations"'
 # src/content/docs/example.mdx
