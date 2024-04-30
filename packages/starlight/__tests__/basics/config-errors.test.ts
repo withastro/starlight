@@ -66,7 +66,9 @@ test('parses valid config successfully', () => {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
 		  },
-		  "title": "",
+		  "title": {
+		    "en": "",
+		  },
 		  "titleDelimiter": "|",
 		}
 	`);
@@ -80,12 +82,13 @@ test('errors if title is missing', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Required"
-	`
+			**title**: Did not match union.
+			> Required"
+		`
 	);
 });
 
-test('errors if title value is not a string', () => {
+test('errors if title value is not a string or an Object', () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({ title: 5 } as any)
 	).toThrowErrorMatchingInlineSnapshot(
@@ -93,7 +96,8 @@ test('errors if title value is not a string', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Expected type \`"string"\`, received \`"number"\`"
+			**title**: Did not match union.
+			> Expected type \`"string" | "object"\`, received \`"number"\`"
 	`
 	);
 });

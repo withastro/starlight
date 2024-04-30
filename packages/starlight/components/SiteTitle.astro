@@ -4,6 +4,7 @@ import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 import { formatPath } from '../utils/format-path';
 
+const { siteTitle } = Astro.props;
 const href = formatPath(Astro.props.locale || '/');
 ---
 
@@ -32,7 +33,7 @@ const href = formatPath(Astro.props.locale || '/');
 		)
 	}
 	<span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
-		{config.title}
+		{siteTitle}
 	</span>
 </a>
 
