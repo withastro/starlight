@@ -25,26 +25,22 @@ You can pass the following options to the `starlight` integration.
 
 ### `title` (required)
 
-**type:** [`TitleConfig`](#titleconfig)
-
+**type:** `string | Record<string, string>`
 
 Set the title for your website. Will be used in metadata and in the browser tab title.
 
-#### `TitleConfig`
-
-```ts
-type TitleConfig = string | Record<string, string>
-```
-title object key must be BCP-47 tag e.g. "en", "ar", or "zh-CN".
+The value can be a string, or for multilingual sites, an object with values for each different locale.
+When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `zh-CN`):
 
 ```ts
 starlight({
 	title: {
 		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
 	},
 });
-
 ```
+
 ### `description`
 
 **type:** `string`
