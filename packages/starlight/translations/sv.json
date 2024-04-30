@@ -18,6 +18,7 @@
   "page.lastUpdated": "Senast uppdaterad:",
   "page.previousLink": "Föregående",
   "page.nextLink": "Nästa",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Sidan hittades inte. Kontrollera URL:n eller testa att använda sökfältet.",
   "aside.note": "Note",
   "aside.tip": "Tip",

@@ -18,6 +18,7 @@
   "page.lastUpdated": "اخر تحديث:",
   "page.previousLink": "السابق",
   "page.nextLink": "التالي",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "الصفحة غير موجودة. تأكد من الرابط أو ابحث بإستعمال شريط البحث.",
   "aside.note": "ملحوظة",
   "aside.tip": "نصيحة",
