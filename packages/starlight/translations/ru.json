@@ -18,6 +18,7 @@
   "page.lastUpdated": "Последнее обновление:",
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Страница не найдена. Проверьте URL или используйте поиск по сайту.",
   "aside.note": "Заметка",
   "aside.tip": "Знали ли вы?",

@@ -98,6 +98,10 @@
       "types": "./components/FallbackContentNotice.astro.tsx",
       "import": "./components/FallbackContentNotice.astro"
     },
+    "./components/DraftContentNotice.astro": {
+      "types": "./components/DraftContentNotice.astro.tsx",
+      "import": "./components/DraftContentNotice.astro"
+    },
     "./components/Page.astro": {
       "types": "./components/Page.astro.tsx",
       "import": "./components/Page.astro"

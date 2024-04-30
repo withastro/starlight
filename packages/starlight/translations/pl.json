@@ -18,6 +18,7 @@
   "page.lastUpdated": "Ostatnia aktualizacja:",
   "page.previousLink": "Poprzednia strona",
   "page.nextLink": "Następna strona",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Nie znaleziono. Sprawdź URL lub użyj wyszukiwarki.",
   "aside.note": "Notatka",
   "aside.tip": "Wskazówka",

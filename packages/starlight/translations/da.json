@@ -18,6 +18,7 @@
   "page.lastUpdated": "Sidst opdateret:",
   "page.previousLink": "Forrige",
   "page.nextLink": "Næste",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Siden er ikke fundet. Tjek din URL eller prøv søgelinjen.",
   "aside.note": "Note",
   "aside.tip": "Tip",
