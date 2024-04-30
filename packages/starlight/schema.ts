@@ -123,7 +123,9 @@ type BaseSchemaWithoutEffects =
 type BaseSchema = BaseSchemaWithoutEffects | z.ZodEffects<BaseSchemaWithoutEffects>;
 
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
-type ExtendedSchema<T extends BaseSchema> = T extends BaseSchema
+type ExtendedSchema<T extends BaseSchema | never = never> = [T] extends [never]
+	? DefaultSchema
+	: T extends BaseSchema
 	? z.ZodIntersection<DefaultSchema, T>
 	: DefaultSchema;
 
@@ -153,8 +155,13 @@ interface DocsSchemaOpts<T extends BaseSchema> {
 }
 
 /** Content collection schema for Starlight’s `docs` collection. */
-export function docsSchema<T extends BaseSchema>({ extend }: DocsSchemaOpts<T> = {}) {
-	return (context: SchemaContext): ExtendedSchema<T> => {
+export function docsSchema<T extends BaseSchema | never = never>(
+	...args: [DocsSchemaOpts<T>?]
+): (context: SchemaContext) => ExtendedSchema<T> {
+	const [options = {}] = args;
+	const { extend } = options;
+
+	return (context: SchemaContext) => {
 		const UserSchema = typeof extend === 'function' ? extend(context) : extend;
 
 		return (

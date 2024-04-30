@@ -18,14 +18,21 @@ interface i18nSchemaOpts<T extends z.AnyZodObject = z.ZodObject<{}>> {
 	extend?: T;
 }
 
+const defaultI18nSchema = () =>
+	starlightI18nSchema().merge(pagefindI18nSchema()).merge(expressiveCodeI18nSchema());
+/** Type of Starlight’s default i18n schema, including extensions from Pagefind and Expressive Code. */
+type DefaultI18nSchema = ReturnType<typeof defaultI18nSchema>;
+
+/** Type that extends Starlight’s default i18n schema with an optional, user-defined schema. */
+type ExtendedSchema<T extends z.AnyZodObject> = T extends z.AnyZodObject
+	? z.ZodIntersection<DefaultI18nSchema, T>
+	: DefaultI18nSchema;
+
 /** Content collection schema for Starlight’s optional `i18n` collection. */
 export function i18nSchema<T extends z.AnyZodObject = z.ZodObject<{}>>({
 	extend = z.object({}) as T,
-}: i18nSchemaOpts<T> = {}) {
-	return starlightI18nSchema()
-		.merge(pagefindI18nSchema())
-		.merge(expressiveCodeI18nSchema())
-		.merge(extend);
+}: i18nSchemaOpts<T> = {}): ExtendedSchema<T> {
+	return defaultI18nSchema().merge(extend) as ExtendedSchema<T>;
 }
 export type i18nSchemaOutput = z.output<ReturnType<typeof i18nSchema>>;
 

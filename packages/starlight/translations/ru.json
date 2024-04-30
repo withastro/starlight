@@ -24,5 +24,8 @@
   "aside.tip": "Знали ли вы?",
   "aside.caution": "Осторожно",
   "aside.danger": "Опасно",
-  "fileTree.directory": "Директория"
+  "fileTree.directory": "Директория",
+  "expressiveCode.copyButtonCopied": "Скопировано!",
+  "expressiveCode.copyButtonTooltip": "Копировать",
+  "expressiveCode.terminalWindowFallbackTitle": "Окно терминала"
 }

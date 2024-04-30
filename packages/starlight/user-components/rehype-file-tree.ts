@@ -168,7 +168,7 @@ function getFileIcon(fileName: string) {
 
 /** Return the icon name for a file based on its file name. */
 function getFileIconName(fileName: string) {
-	let icon = definitions.files[fileName];
+	let icon: string | undefined = definitions.files[fileName];
 	if (icon) return icon;
 	icon = getFileIconTypeFromExtension(fileName);
 	if (icon) return icon;

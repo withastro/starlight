@@ -1,5 +1,25 @@
 # @astrojs/starlight
 
+## 0.21.5
+
+### Patch Changes
+
+- [#1728](https://github.com/withastro/starlight/pull/1728) [`0a75680d`](https://github.com/withastro/starlight/commit/0a75680ddd2f3325ab9ad7ac910f7c884b89a9ed) Thanks [@delucis](https://github.com/delucis)! - Adds 1 new icon: `pkl`
+
+- [#1709](https://github.com/withastro/starlight/pull/1709) [`c5cd1811`](https://github.com/withastro/starlight/commit/c5cd181186b42422f3e47052bf8182cb490bda6b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI strings translation issue for sites configured with a single non-root language different from English.
+
+- [#1723](https://github.com/withastro/starlight/pull/1723) [`3b29b3ab`](https://github.com/withastro/starlight/commit/3b29b3ab824f538f27e20310cb08786a92c7bd65) Thanks [@OliverSpeir](https://github.com/OliverSpeir)! - Fixes accessibility by using `aria-selected="false"` for inactive tabs instead of removing `aria-selected="true"` in the tablist of Starlight’s `<Tabs>` component
+
+- [#1706](https://github.com/withastro/starlight/pull/1706) [`f171ac4d`](https://github.com/withastro/starlight/commit/f171ac4d6396eb2538598d85957670df50938b6a) Thanks [@jorenbroekema](https://github.com/jorenbroekema)! - Fixes some minor type errors
+
+## 0.21.4
+
+### Patch Changes
+
+- [#1703](https://github.com/withastro/starlight/pull/1703) [`b26238f2`](https://github.com/withastro/starlight/commit/b26238f22990dcf8ba002bea6a50c66f20ad5786) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes aside custom titles rendering for nested asides.
+
+- [#1708](https://github.com/withastro/starlight/pull/1708) [`a72cb966`](https://github.com/withastro/starlight/commit/a72cb96600798c1fbc7558f8fd24556ca442d312) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes translation issues with Expressive Code when using a default language other than English
+
 ## 0.21.3
 
 ### Patch Changes

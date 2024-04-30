@@ -3,11 +3,15 @@ title: CSSとスタイリング
 description: カスタムCSSやTailwind CSSを使用して、Starlightサイトをスタイリングする方法を学びます。
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 カスタムCSSファイルやStarlightのTailwindプラグインを使用して、Starlightサイトをスタイリングできます。
 
 ## カスタムCSSスタイル
 
 Starlightサイトに適用されるスタイルをカスタマイズするには、追加のCSSファイルを作成し、Starlightのデフォルトスタイルを変更または拡張します。
+
+<Steps>
 
 1. `src/`ディレクトリにCSSファイルを追加します。たとえば、以下ではデフォルトのカラム幅を広げ、ページタイトルのテキストサイズを大きくしています。
 
@@ -39,6 +43,8 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
    });
    ```
 
+</Steps>
+
 [GitHub上の`props.css`ファイル](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)で、サイトをカスタマイズするために設定可能な、Starlightが使用しているすべてのカスタムCSSプロパティを確認できます。
 
 ## Tailwind CSS
@@ -52,8 +58,6 @@ StarlightのTailwindプラグインは、以下の設定を適用します。
 - Tailwindの[Preflight](https://tailwindcss.com/docs/preflight)リセットスタイルを無効化した上で、Tailwindのボーダーユーティリティクラスに必要なPreflightの必須部分のみ有効化します。
 
 ### Tailwindを使用して新しいプロジェクトを作成する
-
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 `create astro`を使用して、Tailwind CSSが組み込まれた新しいStarlightプロジェクトを開始します。
 
@@ -84,6 +88,8 @@ yarn create astro --template starlight/tailwind
 ### Tailwindを既存のプロジェクトに追加する
 
 既存のStarlightサイトにTailwind CSSを追加する場合は、以下の手順に従ってください。
+
+<Steps>
 
 1.  AstroのTailwindインテグレーションを追加します。
 
@@ -191,6 +197,8 @@ yarn create astro --template starlight/tailwind
     	plugins: [starlightPlugin()],
     };
     ```
+
+</Steps>
 
 ### StarlightをTailwindでスタイリングする
 

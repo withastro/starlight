@@ -3,6 +3,8 @@ title: コンポーネントのオーバーライド
 description: Starlightの組み込みコンポーネントをオーバーライドして、ドキュメントサイトのUIにカスタム要素を追加する方法を学びます。
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 StarlightのデフォルトのUIと設定オプションは、柔軟に設計されており、さまざまなコンテンツで機能します。Starlightのデフォルトの見た目の大部分は、[CSS](/ja/guides/css-and-tailwind/)と[設定オプション](/ja/guides/customization/)によりカスタマイズできます。
 
 デフォルトの内容に満足できない場合には、デフォルトのコンポーネントを拡張したり、オーバーライドしたり（完全に置き換えたり）するためのカスタムコンポーネントを作成することも可能です。
@@ -16,6 +18,8 @@ StarlightのデフォルトのUIと設定オプションは、柔軟に設計さ
 - Starlightの既存のUIに別のUIを追加したい場合。
 
 ## オーバーライドの方法
+
+<Steps>
 
 1. オーバーライドしたいStarlightコンポーネントを選択します。コンポーネントの完全なリストは、[オーバーライドリファレンス](/ja/reference/overrides/)にあります。
 
@@ -40,17 +44,19 @@ StarlightのデフォルトのUIと設定オプションは、柔軟に設計さ
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'オーバーライドを設定したドキュメント',
-         components: {
-           // デフォルトの`SocialIcons`コンポーネントをオーバーライドします。
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'オーバーライドを設定したドキュメント',
+   			components: {
+   				// デフォルトの`SocialIcons`コンポーネントをオーバーライドします。
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
+
+</Steps>
 
 ## 組み込みコンポーネントを再利用する
 
@@ -91,9 +97,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -115,13 +121,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Starlightで作成 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Starlightで作成 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 
