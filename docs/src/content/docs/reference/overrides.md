@@ -50,6 +50,12 @@ BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
 
 The base path at which a language is served. `undefined` for root locale slugs.
 
+#### `siteTitle`
+
+**Type:** `string`
+
+The site title for this page’s locale.
+
 #### `slug`
 
 **Type:** `string`
@@ -218,7 +224,7 @@ These components render Starlight’s top navigation bar.
 **Default component:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Header component displayed at the top of every page.
-The default implementation displays [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
+The default implementation displays [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
