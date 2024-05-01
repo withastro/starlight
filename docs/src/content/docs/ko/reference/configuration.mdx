@@ -25,9 +25,21 @@ export default defineConfig({
 
 ### `title` (필수)
 
-**타입:** `string`
+**타입:** `string | Record<string, string>`
 
 웹사이트의 제목을 설정합니다. 메타데이터 및 브라우저 탭 제목에 사용됩니다.
+
+값은 문자열일 수도 있고, 다국어 사이트의 경우 각기 다른 로케일에 대한 값이 포함된 객체일 수도 있습니다.
+객체 형식을 사용할 때 키는 BCP-47 태그(예: `en`, `ar` 또는 `zh-CN`)여야 합니다.
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
