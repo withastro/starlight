@@ -12,7 +12,6 @@ Starlight suporta o uso de componentes em arquivos [MDX](https://mdxjs.com/) e p
 ## Utilizando um componente
 
 Você pode utilizar um componente ao importá-lo em seu arquivo MDX e então renderizá-lo como uma tag JSX.
-
 Elas se parecem com tags HTML porém começam com uma letra maiúscula correspondente ao nome na sua declaração `import`:
 
 ```mdx
@@ -60,6 +59,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Você pode mostrar uma interface com abas utilizando os componentes `<Tabs>` e `<TabItem>`.
 Cada `<TabItem>` tem que ter uma `label` para mostrar aos usuários.
+Use o atributo opcional `icon` para incluir um dos [ícones predefinidos do Starlight](#todos-os-ícones) ao lado da label.
 
 ```mdx
 # src/content/docs/exemplo.mdx
@@ -67,16 +67,68 @@ Cada `<TabItem>` tem que ter uma `label` para mostrar aos usuários.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Estrelas">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Luas">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Estrelas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Luas" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 ```
 
 O código acima gera as seguintes abas na página:
 
 <Tabs>
-	<TabItem label="Estrelas">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Luas">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Estrelas" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Luas" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
+</Tabs>
+
+#### Abas sincronizadas
+
+Mantenha vários grupos de abas sincronizados adicionando o atributo `syncKey`.
+
+Todas as `<Tabs>` em uma página com o mesmo valor `syncKey` exibirão a mesma label ativa. Isso permite que o leitor escolha uma vez (por exemplo, o sistema operacional ou o gerenciador de pacotes) e veja essa escolha refletida em toda a página.
+
+Para sincronizar as abas relacionadas, adicione uma propriedade `syncKey` idêntica a cada componente `<Tabs>` e certifique-se de que todos eles usem as mesmas labels de `<TabItem>`:
+
+```mdx 'syncKey="constelações"'
+# src/content/docs/exemplo.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Algumas estrelas:_
+
+<Tabs syncKey="constelações">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Alguns exoplanetas:_
+
+<Tabs syncKey="constelações">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+O código acima gera o seguinte na página:
+
+_Algumas estrelas:_
+
+<Tabs syncKey="constelações">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Alguns exoplanetas:_
+
+<Tabs syncKey="constelações">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
 </Tabs>
 
 ### Cartões
@@ -136,7 +188,7 @@ Utilize o componente `<LinkCard>` para fazer um link proeminente para outras pá
 
 Um `<LinkCard>` precisa de um `title` e um atributo [`href`](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/a#attr-href). Você pode opcionalmente incluir uma pequena `description` ou outros atributos de link como `target`.
 
-Agrupe múltiplos componentes `<LinkCard>` em `<CardGrid>` para mostrar cartões lado a lado quando houver espaço suficiente.
+Agrupe múltiplos componentes `<LinkCard>` em um `<CardGrid>` para mostrar cartões lado a lado quando houver espaço suficiente.
 
 ```mdx
 # src/content/docs/exemplo.mdx
@@ -150,10 +202,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 />
 
 <CardGrid>
-	<LinkCard
-		title="Escrevendo Markdown"
-		href="/pt-br/guides/authoring-content/"
-	/>
+	<LinkCard title="Escrevendo Markdown" href="/pt-br/guides/authoring-content/" />
 	<LinkCard title="Componentes" href="/pt-br/guides/components/" />
 </CardGrid>
 ```
@@ -169,12 +218,199 @@ import { LinkCard } from '@astrojs/starlight/components';
 />
 
 <CardGrid>
-	<LinkCard
-		title="Escrevendo Markdown"
-		href="/pt-br/guides/authoring-content/"
-	/>
+	<LinkCard title="Escrevendo Markdown" href="/pt-br/guides/authoring-content/" />
 	<LinkCard title="Componentes" href="/pt-br/guides/components/" />
 </CardGrid>
+
+### Asides
+
+Asides (também conhecidos como "advertências" ou "frases de destaque") são úteis para exibir informações secundárias ao lado do conteúdo principal de uma página.
+
+Um `<Aside>` pode ter um `type` opcional de `note` (o padrão, nota), `tip` (dica), `caution` (cuidado) ou `danger` (perigo). A definição de um atributo `title` substitui o título padrão do aside.
+
+````mdx
+# src/content/docs/exemplo.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Um aside padrão sem um título personalizado.</Aside>
+
+<Aside type="caution" title="Cuidado!">
+	Um aside de aviso *com* um título personalizado.
+</Aside>
+
+<Aside type="tip">
+
+Outros conteúdos também são compatíveis com asides.
+
+```js
+// Um trecho de código, por exemplo.
+```
+
+</Aside>
+
+<Aside type="danger">Não forneça sua senha a ninguém.</Aside>
+````
+
+O código acima gera o seguinte na página:
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Um aside padrão sem um título personalizado.</Aside>
+
+<Aside type="caution" title="Cuidado!">
+	Um aside de aviso *com* um título personalizado.
+</Aside>
+
+<Aside type="tip">
+
+Outros conteúdos também são compatíveis com asides.
+
+```js
+// Um trecho de código, por exemplo.
+```
+
+</Aside>
+
+<Aside type="danger">Não forneça sua senha a ninguém.</Aside>
+
+O Starlight também fornece uma sintaxe personalizada para renderizar asides em Markdown e MDX como uma alternativa ao componente `<Aside>`.
+Consulte o guia ["Escrevendo Conteúdo em Markdown"](/pt-br/guides/authoring-content/#asides) para obter detalhes sobre a sintaxe personalizada.
+
+### Código
+
+Use o componente `<Code>` para renderizar código com syntax highlighting quando não for possível usar um [bloco de código Markdown](/pt-br/guides/authoring-content/#blocos-de-código), por exemplo, para renderizar dados provenientes de fontes externas, como arquivos, bancos de dados ou APIs.
+
+Consulte a [documentação do "Componente de código" do Expressive Code](https://expressive-code.com/key-features/code-component/) para obter detalhes completos sobre as propriedades suportadas pelo `<Code>`.
+
+```mdx
+# src/content/docs/exemplo.mdx
+
+import { Code } from '@astrojs/starlight/components';
+
+export const codigoExemplo = `console.log('Isso pode vir de um arquivo ou CMS!');`;
+export const nomeArquivo = 'exemplo.js';
+export const destaques = ['arquivo', 'CMS'];
+
+<Code code={codigoExemplo} lang="js" title={nomeArquivo} mark={destaques} />
+```
+
+O código acima gera o seguinte na página:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const codigoExemplo = `console.log('Isso pode vir de um arquivo ou CMS!');`;
+export const nomeArquivo = 'exemplo.js';
+export const destaques = ['arquivo', 'CMS'];
+
+<Code code={codigoExemplo} lang="js" title={nomeArquivo} mark={destaques} />
+
+#### Código importado
+
+Use o [sufixo de importação `?raw` do Vite](https://vitejs.dev/guide/assets#importing-asset-as-string) para importar qualquer arquivo de código como uma string.
+Em seguida, você pode passar essa string importada para o componente `<Code>` para incluí-la em sua página.
+
+```mdx title="src/content/docs/exemplo.mdx" "?raw"
+import { Code } from '@astrojs/starlight/components';
+import codigoImportado from '/src/env.d.ts?raw';
+
+<Code code={codigoImportado} lang="ts" title="src/env.d.ts" />
+```
+
+O código acima gera o seguinte na página:
+
+import codigoImportado from '/src/env.d.ts?raw';
+
+<Code code={codigoImportado} lang="ts" title="src/env.d.ts" />
+
+### Árvore de arquivos
+
+Use o componente `<FileTree>` para exibir a estrutura de um diretório com ícones de arquivos e subdiretórios colapsáveis.
+
+Especifique a estrutura de seus arquivos e diretórios com uma [lista Markdown não ordenada](https://www.markdownguide.org/basic-syntax/#unordered-lists) dentro de `<FileTree>`.
+Crie um subdiretório usando uma lista aninhada ou adicione uma `/` ao final de um item da lista para renderizá-lo como um diretório sem conteúdo específico.
+
+A sintaxe a seguir pode ser usada para personalizar a aparência da árvore de arquivos:
+
+- Destaque um arquivo ou diretório tornando seu nome em negrito, por exemplo, `**README.md**`.
+- Adicione um comentário a um arquivo ou diretório acrescentando mais texto após o nome.
+- Adicione arquivos e diretórios placeholder usando `...` ou `…` como nome.
+
+```mdx
+# src/content/docs/exemplo.mdx
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs um arquivo **importante**
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+O código acima gera o seguinte na página:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs um arquivo **importante**
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+### Etapas
+
+Use o componente `<Steps>` para estilizar listas numeradas de tarefas.
+Isso é útil para guias passo a passo mais complexos, em que cada etapa precisa ser claramente destacada.
+
+Envolva uma lista ordenada padrão do Markdown com o `<Steps>`.
+Toda a sintaxe usual do Markdown é aplicável dentro de `<Steps>`.
+
+````mdx title="src/content/docs/exemplo.mdx"
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Importe o componente em seu arquivo MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Envolva seus itens de lista ordenada com `<Steps>`.
+
+</Steps>
+````
+
+O código acima gera o seguinte na página:
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Importe o componente em seu arquivo MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Envolva seus itens de lista ordenada com `<Steps>`.
+
+</Steps>
 
 ### Ícone
 
