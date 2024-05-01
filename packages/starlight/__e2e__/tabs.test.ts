@@ -116,7 +116,7 @@ test('preserves tabs position when alternating between tabs with different conte
 	expect((await tabs.boundingBox())?.y).toBe(initialBoundingBox?.y);
 });
 
-test.only('syncs tabs with the same sync key if they do not consistenly use icons', async ({
+test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
 	page,
 	starlight,
 }) => {
