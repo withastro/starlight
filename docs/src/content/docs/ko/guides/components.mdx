@@ -87,6 +87,50 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 	</TabItem>
 </Tabs>
 
+#### 동기화된 탭
+
+`syncKey` 속성을 추가하여 여러 탭 그룹을 동기화된 상태로 유지합니다.
+
+동일한 `syncKey` 값을 가진 페이지의 모든 `<Tabs>`에는 동일한 활성 라벨이 표시됩니다. 이를 통해 독자는 한 번 (예: 운영 체제 또는 패키지 관리자) 선택하고 선택 사항이 페이지 전체에 반영되는 것을 볼 수 있습니다.
+
+관련 탭을 동기화하려면 각 `<Tabs>` 컴포넌트에 동일한 `syncKey` 속성을 추가하고 모두 동일한 `<TabItem>` 라벨을 사용하는지 확인하세요.
+
+```mdx 'syncKey="별자리"'
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_별:_
+
+<Tabs syncKey="별자리">
+	<TabItem label="오리온자리">벨라트릭스, 리겔, 베텔게우스</TabItem>
+	<TabItem label="쌍둥이자리">폴룩스, 캐스터 A, 캐스터 B</TabItem>
+</Tabs>
+
+_외계 행성:_
+
+<Tabs syncKey="별자리">
+	<TabItem label="오리온자리">HD 34445 b, 글리제 179 b, Wasp-82 b</TabItem>
+	<TabItem label="쌍둥이자리">폴룩스 b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+위 코드는 페이지에 다음을 생성합니다.
+
+_별:_
+
+<Tabs syncKey="별자리">
+	<TabItem label="오리온자리">벨라트릭스, 리겔, 베텔게우스</TabItem>
+	<TabItem label="쌍둥이자리">폴룩스, 캐스터 A, 캐스터 B</TabItem>
+</Tabs>
+
+_외계 행성:_
+
+<Tabs syncKey="별자리">
+	<TabItem label="오리온자리">HD 34445 b, 글리제 179 b, Wasp-82 b</TabItem>
+	<TabItem label="쌍둥이자리">폴룩스 b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### 카드
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
