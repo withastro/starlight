@@ -187,6 +187,36 @@ pnpm test:coverage
 
 This will print a table to your terminal and also generate an HTML report you can load in a web browser by opening [`packages/starlight/__coverage__/index.html`](./packages/starlight/__coverage__/index.html).
 
+### End-to-end (E2E) tests
+
+Starlight also includes E2E tests in [`packages/starlight/__e2e__/`](./packages/starlight/__e2e__/), which are run using [Playwright][playwright].
+
+To run these tests, move into the Starlight package and then run `pnpm test:e2e`:
+
+```sh
+cd packages/starlight
+pnpm test:e2e
+```
+
+#### Test fixtures
+
+Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content/config.ts` and some content to render in `src/content/docs/`).
+
+The `testFactory()` helper can be used in a test file to define the fixture which will be built and loaded in a preview server during a set of tests.
+
+```ts
+// packages/starlight/__e2e__/feature.test.ts
+import { testFactory } from './test-utils';
+
+const test = await testFactory('./fixtures/basics/');
+```
+
+This allows you to run tests against different combinations of Astro and Starlight configuration options for various content.
+
+#### When to add E2E tests?
+
+E2E are most useful for testing what happens on a page after it has been loaded by a browser. They run slower than unit tests so they should be used sparingly when unit tests aren’t sufficient.
+
 ## Translations
 
 Translations help make Starlight accessible to more people.
@@ -254,6 +284,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [gfi]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+
 [api-docs]: https://docs.astro.build/en/reference/integrations-reference/
 [vitest]: https://vitest.dev/
+[playwright]: https://playwright.dev/
 
 ## Showcase
 

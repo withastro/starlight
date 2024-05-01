@@ -11,7 +11,8 @@ const defaultCoverageExcludes = [
 	'test?(-*).?(c|m)[jt]s?(x)',
 	'**/*{.,-}{test,spec}.?(c|m)[jt]s?(x)',
 	'**/__tests__/**',
-	'**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
+	'**/__e2e__/**',
+	'**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,playwright}.config.*',
 	'**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
 ];
 

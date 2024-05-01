@@ -1,11 +1,15 @@
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry, type DataCollectionKey } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import { createTranslationSystem } from './createTranslationSystem';
 
+type UserI18nSchema = 'i18n' extends DataCollectionKey
+	? CollectionEntry<'i18n'>['data']
+	: i18nSchemaOutput;
+
 /** Get all translation data from the i18n collection, keyed by `id`, which matches locale. */
 async function loadTranslations() {
-	let userTranslations: Record<string, i18nSchemaOutput> = {};
+	let userTranslations: Record<string, UserI18nSchema> = {};
 	// Briefly override `console.warn()` to silence logging when a project has no i18n collection.
 	const warn = console.warn;
 	console.warn = () => {};
