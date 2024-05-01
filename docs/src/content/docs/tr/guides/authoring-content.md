@@ -21,7 +21,7 @@ Sayfa içeriği, ikinci `---` 'den sonraki kısımda kalır.
 ```
 
 Her sayfa en azından bir `title` içermek zorundadır.
-Uygun tüm alanları görmek ve yeni özel alan eklemek için [ön-bölüm referansı](/reference/frontmatter/)'nı inceleyin.
+Uygun tüm alanları görmek ve yeni özel alan eklemek için [ön-bölüm referansı](/tr/reference/frontmatter/)'nı inceleyin.
 
 ## Satır İçi Stiller
 
