@@ -84,6 +84,50 @@ El código anterior genera las siguientes pestañas en la página:
 	</TabItem>
 </Tabs>
 
+#### Pestañas sincronizadas
+
+Manten varias pestañas sincronizadas añadiendo el atributo `syncKey`.
+
+Todas las `<Tabs>` en una página con el mismo valor de `syncKey` mostrarán la misma etiqueta activa. Esto permite a tu lector elegir una vez (por ejemplo, su sistema operativo o gestor de paquetes) y ver su elección reflejada en toda la página.
+
+Para sincronizar pestañas relacionadas, añade una propiedad `syncKey` idéntica a cada componente `<Tabs>` y asegúrate de que todos usen las mismas etiquetas `<TabItem>`:
+
+```mdx 'syncKey="constellations"'
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Algunas estrellas:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Cástor A, Cástor B</TabItem>
+</Tabs>
+
+_Algunos exoplanetas:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+El código anterior genera lo siguiente en la página:
+
+_Algunas estrellas:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Cástor A, Cástor B</TabItem>
+</Tabs>
+
+_Some exoplanets:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### Tarjetas
 
 import { Card, CardGrid } from '@astrojs/starlight/components';

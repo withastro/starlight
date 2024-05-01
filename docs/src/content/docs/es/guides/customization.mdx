@@ -127,7 +127,7 @@ Starlight muestra una tabla de contenidos en cada página para facilitar que los
 
 De forma predeterminada, los encabezados `<h2>` y `<h3>` se incluyen en la tabla de contenidos. Puedes cambiar qué niveles de encabezados se incluyen en toda la página utilizando las opciones `minHeadingLevel` y `maxHeadingLevel` en tu configuración [global de `tableOfContents`](/es/reference/configuration/#tableofcontents). Puedes anular estas configuraciones predeterminadas en una página individual agregando las propiedades correspondientes de [`tableOfContents` en el frontmatter](/es/reference/frontmatter/#tableofcontents):
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4-6}
@@ -161,7 +161,7 @@ defineConfig({
 
 Desactiva completamente la tabla de contenidos estableciendo la opción `tableOfContents` en `false`:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4}
