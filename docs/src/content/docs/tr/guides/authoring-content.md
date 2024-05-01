@@ -7,6 +7,22 @@ Starlight, `.md` uzantılı dosyalarda [Markdown](https://daringfireball.net/pro
 
 Markdown desteği ve kullanımı farklılık gösterebileceğinden dolayı, bu dosya formatlarını kullanıyorsanız [MDX dokümantasyonu](https://mdxjs.com/docs/what-is-mdx/#markdown) ya da [Markdoc dokümantasyonu](https://markdoc.dev/docs/syntax)'nu incelediğinizden emin olun.
 
+## Ön-bölüm
+
+Starlight'taki tekil sayfalarınızı, ön-bölümlerindeki değerlerini ayarlayarak özelleştirebilirsiniz.
+Ön-bölüm, dosyanızın en üstünde `---` ayraçları arasında kalan bölümdür:
+
+```md title="src/content/docs/example.md"
+---
+title: Sayfa Başlığım
+---
+
+Sayfa içeriği, ikinci `---` 'den sonraki kısımda kalır.
+```
+
+Her sayfa en azından bir `title` içermek zorundadır.
+Uygun tüm alanları görmek ve yeni özel alan eklemek için [ön-bölüm referansı](/reference/frontmatter/)'nı inceleyin.
+
 ## Satır İçi Stiller
 
 Metin **kalın**, _italik_ ya da ~~üstü çizili~~ olabilir.
