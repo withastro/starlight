@@ -157,14 +157,14 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
--			title: 'My Docs',
+-			title: '나의 문서',
 +			title: {
-+				en: 'My Docs',
++				ko: '나의 문서',
 +				'zh-CN': '我的文档',
 +			},
-			defaultLocale: 'en',
+			defaultLocale: 'ko',
 			locales: {
-				en: { label: 'English' },
+				ko: { label: '한국어' },
 				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 			},
 		}),
