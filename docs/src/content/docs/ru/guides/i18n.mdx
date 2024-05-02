@@ -158,13 +158,13 @@ export default defineConfig({
     starlight({
 -     title: 'Моя документация',
 +     title: {
-+       en: 'My Docs',
 +       ru: "Моя документация",
++       'zh-CN': '我的文档',
 +     },
       defaultLocale: 'ru',
       locales: {
-        en: { label: 'English' },
-        ru: { label: 'Русский', lang: 'ru' },
+        ru: { label: 'Русский' },
+        'zh-cn': { label: '简体中文', lang: 'zh-CN' },
       },
     }),
   ],
