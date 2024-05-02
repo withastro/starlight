@@ -270,6 +270,21 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**tipo:** `boolean`  
+**por defecto:** `false`
+
+Establece si esta página debe considerarse como un borrador y no incluirse en las [compilaciones de producción](https://docs.astro.build/es/reference/cli-reference/#astro-build) y [grupos de enlaces autogenerados](/es/guides/sidebar/#grupos-autogenerados). Establece en `true` para marcar una página como borrador y hacerla visible solo durante el desarrollo.
+
+```md
+---
+# src/content/docs/example.md
+# Excluye esta página de las compilaciones de producción
+draft: true
+---
+```
+
 ### `sidebar`
 
 **tipo:** [`SidebarConfig`](#sidebarconfig)
