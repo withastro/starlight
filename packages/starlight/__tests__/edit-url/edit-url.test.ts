@@ -8,6 +8,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Getting Started' }],
 			[
+				// @ts-expect-error — Using a slug not present in Starlight docs site
 				'showcase.mdx',
 				{ title: 'Custom edit link', editUrl: 'https://example.com/custom-edit?link' },
 			],
