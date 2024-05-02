@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.22.1
+
+### Patch Changes
+
+- [`1c0fc384`](https://github.com/withastro/starlight/commit/1c0fc3849771713d5a3e7a572bdbf1483ae5551b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where the `siteTitle` property would not be set when using the `<StarlightPage />` component.
+
 ## 0.22.0
 
 ### Minor Changes
