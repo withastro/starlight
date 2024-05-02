@@ -95,6 +95,51 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			{ path: '/guides/components.html/', expected: '/guides/components' },
 		],
 	},
+	{
+		options: { format: 'preserve', trailingSlash: 'ignore' },
+		tests: [
+			// index page
+			{ path: '/', expected: '/' },
+			// with trailing slash
+			{ path: '/reference/configuration/', expected: '/reference/configuration/' },
+			// without trailing slash
+			{ path: '/api/v1/users', expected: '/api/v1/users' },
+			// with file extension
+			{ path: '/guides/components.html', expected: '/guides/components.html' },
+			// with file extension and trailing slash
+			{ path: '/guides/components.html/', expected: '/guides/components.html/' },
+		],
+	},
+	{
+		options: { format: 'preserve', trailingSlash: 'always' },
+		tests: [
+			// index page
+			{ path: '/', expected: '/' },
+			// with trailing slash
+			{ path: '/reference/configuration/', expected: '/reference/configuration/' },
+			// without trailing slash
+			{ path: '/api/v1/users', expected: '/api/v1/users/' },
+			// with file extension
+			{ path: '/guides/components.html', expected: '/guides/components.html/' },
+			// with file extension and trailing slash
+			{ path: '/guides/components.html/', expected: '/guides/components.html/' },
+		],
+	},
+	{
+		options: { format: 'preserve', trailingSlash: 'never' },
+		tests: [
+			// index page
+			{ path: '/', expected: '/' },
+			// with trailing slash
+			{ path: '/reference/configuration/', expected: '/reference/configuration' },
+			// without trailing slash
+			{ path: '/api/v1/users', expected: '/api/v1/users' },
+			// with file extension
+			{ path: '/guides/components.html', expected: '/guides/components.html' },
+			// with file extension and trailing slash
+			{ path: '/guides/components.html/', expected: '/guides/components.html' },
+		],
+	},
 ])(
 	'formatPath() with { format: $options.format, trailingSlash: $options.trailingSlash }',
 	({ options, tests }) => {

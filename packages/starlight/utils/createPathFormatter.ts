@@ -1,5 +1,5 @@
 import type { AstroConfig } from 'astro';
-import { fileWithBase, pathWithBase } from './base';
+import { addBase } from './base';
 import {
 	ensureHtmlExtension,
 	ensureTrailingSlash,
@@ -13,14 +13,9 @@ interface FormatPathOptions {
 }
 
 const formatStrategies = {
-	file: {
-		addBase: fileWithBase,
-		handleExtension: (href: string) => ensureHtmlExtension(href),
-	},
-	directory: {
-		addBase: pathWithBase,
-		handleExtension: (href: string) => stripHtmlExtension(href),
-	},
+	file: ensureHtmlExtension,
+	directory: stripHtmlExtension,
+	preserve: (href: string) => href,
 };
 
 const trailingSlashStrategies = {
@@ -38,10 +33,10 @@ function formatPath(
 	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 
 	// Add base
-	href = formatStrategy.addBase(href);
+	href = addBase(href);
 
-	// Handle extension
-	href = formatStrategy.handleExtension(href);
+	// Handle format strategy
+	href = formatStrategy(href);
 
 	// Skip trailing slash handling for `build.format: 'file'`
 	if (format === 'file') return href;

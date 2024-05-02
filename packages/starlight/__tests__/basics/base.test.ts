@@ -1,13 +1,13 @@
 import { describe, expect, test, vi } from 'vitest';
-import { fileWithBase, pathWithBase } from '../../utils/base';
+import { addBase } from '../../utils/base';
 
-describe('fileWithBase()', () => {
+describe('addBase()', () => {
 	describe('with no base', () => {
 		test('does not prepend anything', () => {
-			expect(fileWithBase('/img.svg')).toBe('/img.svg');
+			expect(addBase('/img.svg')).toBe('/img.svg');
 		});
 		test('adds leading slash if needed', () => {
-			expect(fileWithBase('img.svg')).toBe('/img.svg');
+			expect(addBase('img.svg')).toBe('/img.svg');
 		});
 	});
 
@@ -17,19 +17,17 @@ describe('fileWithBase()', () => {
 	describe.todo('with base', () => {
 		test('prepends base', () => {
 			vi.stubEnv('BASE_URL', '/base/');
-			expect(fileWithBase('/img.svg')).toBe('/base/img.svg');
+			expect(addBase('/img.svg')).toBe('/base/img.svg');
 			vi.unstubAllEnvs();
 		});
 	});
-});
 
-describe('pathWithBase()', () => {
 	describe('with no base', () => {
 		test('does not prepend anything', () => {
-			expect(pathWithBase('/path/')).toBe('/path/');
+			expect(addBase('/path/')).toBe('/path/');
 		});
 		test('adds leading slash if needed', () => {
-			expect(pathWithBase('path')).toBe('/path');
+			expect(addBase('path')).toBe('/path');
 		});
 	});
 

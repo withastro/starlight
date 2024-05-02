@@ -15,14 +15,14 @@ vi.mock('astro:content', async () =>
 	})
 );
 
-describe('getSidebar with build.format = "file"', () => {
+describe('getSidebar with build.format = "directory"', () => {
 	test('returns an array of sidebar entries with its file extension', () => {
 		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/index.html",
+			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home",
 			    "type": "link",
@@ -37,7 +37,7 @@ describe('getSidebar with build.format = "file"', () => {
 			          "text": "New",
 			          "variant": "success",
 			        },
-			        "href": "/intro.html",
+			        "href": "/intro",
 			        "isCurrent": false,
 			        "label": "Introduction",
 			        "type": "link",
@@ -48,7 +48,7 @@ describe('getSidebar with build.format = "file"', () => {
 			          "text": "Deprecated",
 			          "variant": "default",
 			        },
-			        "href": "/next-steps.html",
+			        "href": "/next-steps",
 			        "isCurrent": false,
 			        "label": "Next Steps",
 			        "type": "link",
@@ -59,7 +59,7 @@ describe('getSidebar with build.format = "file"', () => {
 			          "target": "_blank",
 			        },
 			        "badge": undefined,
-			        "href": "/showcase.html",
+			        "href": "/showcase",
 			        "isCurrent": false,
 			        "label": "Showcase",
 			        "type": "link",
@@ -86,7 +86,7 @@ describe('getSidebar with build.format = "file"', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/reference/configuration.html",
+			        "href": "/reference/configuration/",
 			        "isCurrent": false,
 			        "label": "Config Reference",
 			        "type": "link",
@@ -94,7 +94,7 @@ describe('getSidebar with build.format = "file"', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/reference/frontmatter.html",
+			        "href": "/reference/frontmatter/",
 			        "isCurrent": false,
 			        "label": "Frontmatter Reference",
 			        "type": "link",
@@ -110,7 +110,7 @@ describe('getSidebar with build.format = "file"', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/api/v1/users.html",
+			        "href": "/api/v1/users/",
 			        "isCurrent": false,
 			        "label": "Users API",
 			        "type": "link",
