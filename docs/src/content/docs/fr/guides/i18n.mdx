@@ -143,6 +143,34 @@ Starlight s'attend à ce que vous créiez des pages équivalentes dans toutes vo
 
 Si une traduction n'est pas encore disponible pour une langue, Starlight affichera aux lecteurs le contenu de cette page dans la langue par défaut (définie via `defaultLocale`). Par exemple, si vous n'avez pas encore créé de version française de votre page À propos et que votre langue par défaut est l'anglais, les visiteurs de `/fr/about` verront le contenu anglais de `/en/about` avec un avis indiquant que cette page n'a pas encore été traduite. Cela vous permet d'ajouter du contenu dans votre langue par défaut et de le traduire progressivement lorsque vos traducteurs en ont le temps.
 
+## Traduire le titre du site
+
+Par défaut, Starlight utilisera le même titre de site pour toutes les langues.
+Si vous avez besoin de personnaliser le titre pour chaque langue, vous pouvez passer un objet à [`title`](/fr/reference/configuration/#title-obligatoire) dans les options de Starlight :
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'Ma documentation',
++			title: {
++				fr: 'Ma documentation',
++				'zh-CN': '我的文档',
++			},
+			defaultLocale: 'fr',
+			locales: {
+				fr: { label: 'Français' },
+				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+			},
+		}),
+	],
+});
+```
+
 ## Traduire l'interface utilisateur de Starlight
 
 import LanguagesList from '~/components/languages-list.astro';
