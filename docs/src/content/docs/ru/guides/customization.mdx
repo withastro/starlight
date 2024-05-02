@@ -130,7 +130,7 @@ Starlight отображает оглавление на каждой стран
 
 По умолчанию заголовки `<h2>` и `<h3>` включены в оглавление. Укажите уровни заголовков, которые нужно включить на всем сайте, с помощью параметров `minHeadingLevel` и `maxHeadingLevel`, в [`tableOfContents`](/ru/reference/configuration/#tableofcontents). Переопределите эти значения для отдельных страниц, добавив свойства в [метаданные `tableOfContents`](/ru/reference/frontmatter/#tableofcontents):
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Метаданные">
 
 ```md {4-6}
@@ -164,7 +164,7 @@ defineConfig({
 
 Чтобы полностью отключить оглавление, установите параметр `tableOfContents` в значение `false`:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Метаданные">
 
 ```md {4}
