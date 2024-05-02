@@ -51,6 +51,12 @@ Etiqueta de idioma BCP-47 para la configuración regional de esta página, por e
 
 La ruta base en la que se sirve un idioma. `undefined` para los slugs de idioma raíz.
 
+#### `siteTitle`
+
+**Type:** `string`
+
+El título del sitio para el idioma de esta página.
+
 #### `slug`
 
 **Tipo:** `string`
@@ -219,7 +225,7 @@ Estos componentes renderizan la barra de navegación superior de Starlight.
 **Componente por defecto:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Componente de encabezado que se muestra en la parte superior de cada página.
-La implementación predeterminada muestra [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) y [`<LanguageSelect />`](#languageselect).
+La implementación predeterminada muestra [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) y [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
@@ -330,6 +336,12 @@ Componente plantilla utilizado para envolver secciones de la columna de contenid
 Componente que contiene el elemento `<h1>` de la página actual.
 
 Las implementaciones deben asegurarse de establecer `id="_top"` en el elemento `<h1>` como en la implementación predeterminada.
+
+#### `DraftContentNotice`
+
+**Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Aviso mostrado a los usuarios durante el desarrollo cuando la página actual está marcada como borrador.
 
 #### `FallbackContentNotice`
 
