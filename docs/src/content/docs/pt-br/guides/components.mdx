@@ -71,7 +71,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 		Sirius, Vega, Betelgeuse
 	</TabItem>
 	<TabItem label="Luas" icon="moon">
-		Io, Europa, Ganymede
+		Io, Europa, Ganimedes
 	</TabItem>
 </Tabs>
 ```
@@ -83,7 +83,7 @@ O código acima gera as seguintes abas na página:
 		Sirius, Vega, Betelgeuse
 	</TabItem>
 	<TabItem label="Luas" icon="moon">
-		Io, Europa, Ganymede
+		Io, Europa, Ganimedes
 	</TabItem>
 </Tabs>
 
@@ -103,15 +103,15 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 _Algumas estrelas:_
 
 <Tabs syncKey="constelações">
-	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
-	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+	<TabItem label="Orion">Bellatrix, Rígel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pólux, Castor A, Castor B</TabItem>
 </Tabs>
 
 _Alguns exoplanetas:_
 
 <Tabs syncKey="constelações">
 	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
-	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+	<TabItem label="Gemini">Pólux b, HAT-P-24b, HD 50554 b</TabItem>
 </Tabs>
 ```
 
@@ -120,15 +120,15 @@ O código acima gera o seguinte na página:
 _Algumas estrelas:_
 
 <Tabs syncKey="constelações">
-	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
-	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+	<TabItem label="Orion">Bellatrix, Rígel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pólux, Castor A, Castor B</TabItem>
 </Tabs>
 
 _Alguns exoplanetas:_
 
 <Tabs syncKey="constelações">
 	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
-	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+	<TabItem label="Gemini">Pólux b, HAT-P-24b, HD 50554 b</TabItem>
 </Tabs>
 
 ### Cartões
@@ -152,7 +152,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 		Sirius, Vega, Betelgeuse
 	</Card>
 	<Card title="Luas" icon="moon">
-		Io, Europa, Ganymede
+		Io, Europa, Ganimedes
 	</Card>
 </CardGrid>
 ```
@@ -166,7 +166,7 @@ O código acima gera o seguinte na página:
 		Sirius, Vega, Betelgeuse
 	</Card>
 	<Card title="Luas" icon="moon">
-		Io, Europa, Ganymede
+		Io, Europa, Ganimedes
 	</Card>
 </CardGrid>
 
@@ -226,7 +226,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Asides (também conhecidos como "advertências" ou "frases de destaque") são úteis para exibir informações secundárias ao lado do conteúdo principal de uma página.
 
-Um `<Aside>` pode ter um `type` opcional de `note` (o padrão, nota), `tip` (dica), `caution` (cuidado) ou `danger` (perigo). A definição de um atributo `title` substitui o título padrão do aside.
+Um `<Aside>` pode ter um `type` opcional de `note` (o padrão), `tip`, `caution` ou `danger`. A definição de um atributo `title` substitui o título padrão do aside.
 
 ````mdx
 # src/content/docs/exemplo.mdx
