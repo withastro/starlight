@@ -50,6 +50,12 @@ L’étiquette d’identification BCP-47 pour la langue de la page, par exemple 
 
 Le chemin de base utilisé pour servir une langue. `undefined` pour les slugs de la locale racine.
 
+#### `siteTitle`
+
+**Type :** `string`
+
+Le titre du site pour la langue de cette page.
+
 #### `slug`
 
 **Type :** `string`
@@ -218,7 +224,7 @@ Ces composants affichent la barre de navigation supérieure de Starlight.
 **Composant par défaut :** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Composant d'en-tête affiché en haut de chaque page.
-L'implémentation par défaut affiche [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) et [`<LanguageSelect />`](#languageselect).
+L'implémentation par défaut affiche [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) et [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
@@ -331,6 +337,12 @@ Composant de mise en page utilisé pour envelopper les section de la colonne pri
 Composant contenant l'élement `<h1>` de la page courante.
 
 Les implémentations personnalisées doivent s'assurer qu'elles définissent `id="_top"` sur l'élément `<h1>` comme dans l'implémentation par défaut.
+
+#### `DraftContentNotice`
+
+**Composant par défaut :** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Note affichée aux utilisateurs durant le développement lorsque la page actuelle est marquée comme une ébauche.
 
 #### `FallbackContentNotice`
 
