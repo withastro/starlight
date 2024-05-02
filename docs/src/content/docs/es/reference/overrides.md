@@ -53,7 +53,7 @@ La ruta base en la que se sirve un idioma. `undefined` para los slugs de idioma 
 
 #### `siteTitle`
 
-**Type:** `string`
+**Tipo:** `string`
 
 El título del sitio para el idioma de esta página.
 
@@ -339,7 +339,7 @@ Las implementaciones deben asegurarse de establecer `id="_top"` en el elemento `
 
 #### `DraftContentNotice`
 
-**Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+**Componente por defecto:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
 
 Aviso mostrado a los usuarios durante el desarrollo cuando la página actual está marcada como borrador.
 
