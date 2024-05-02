@@ -111,7 +111,7 @@ function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
 }
 
 /** Get the site title for a given language. **/
-function getSiteTitle(lang: string): string {
+export function getSiteTitle(lang: string): string {
 	const defaultLang = config.defaultLocale.lang as string;
 	if (lang && config.title[lang]) {
 		return config.title[lang] as string;
