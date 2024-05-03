@@ -2,7 +2,7 @@ import config from 'virtual:starlight/user-config';
 import { expect, test } from 'vitest';
 
 test('test suite is using correct env', () => {
-	expect(config.title).toBe('Basics');
+	expect(config.title).toMatchObject({ en: 'Basics' });
 });
 
 test('isMultilingual is false when no locales configured ', () => {

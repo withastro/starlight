@@ -15,6 +15,8 @@ export interface PageProps extends Route {
 }
 
 export interface StarlightRouteData extends Route {
+	/** Title of the site. */
+	siteTitle: string;
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
 	/** Site navigation sidebar entries for this page. */
@@ -40,10 +42,12 @@ export function generateRouteData({
 	props: PageProps;
 	url: URL;
 }): StarlightRouteData {
-	const { entry, locale } = props;
+	const { entry, locale, lang } = props;
 	const sidebar = getSidebar(url.pathname, locale);
+	const siteTitle = getSiteTitle(lang);
 	return {
 		...props,
+		siteTitle,
 		sidebar,
 		hasSidebar: entry.data.template !== 'splash',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
@@ -104,4 +108,13 @@ function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
 		url = ensureTrailingSlash(config.editLink.baseUrl) + srcPath + 'content/docs/' + filePath;
 	}
 	return url ? new URL(url) : undefined;
+}
+
+/** Get the site title for a given language. **/
+export function getSiteTitle(lang: string): string {
+	const defaultLang = config.defaultLocale.lang as string;
+	if (lang && config.title[lang]) {
+		return config.title[lang] as string;
+	}
+	return config.title[defaultLang] as string;
 }

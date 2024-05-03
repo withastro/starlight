@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["**/dist/**", "**/__coverage__/**", "packages/starlight/components.ts"]
+}
