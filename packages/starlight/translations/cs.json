@@ -18,6 +18,7 @@
   "page.lastUpdated": "Poslední aktualizace:",
   "page.previousLink": "Předchozí",
   "page.nextLink": "Další",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Stránka nenalezena. Zkontrolujte adresu URL nebo zkuste použít vyhledávací pole.",
   "aside.note": "Note",
   "aside.tip": "Tip",

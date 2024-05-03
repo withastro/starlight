@@ -8,6 +8,7 @@ import { LogoConfigSchema } from '../schemas/logo';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -33,9 +34,7 @@ const LocaleSchema = z.object({
 
 const UserConfigSchema = z.object({
 	/** Title for your website. Will be used in metadata and as browser tab title. */
-	title: z
-		.string()
-		.describe('Title for your website. Will be used in metadata and as browser tab title.'),
+	title: TitleConfigSchema(),
 
 	/** Description metadata for your website. Can be used in page metadata. */
 	description: z
@@ -211,7 +210,7 @@ const UserConfigSchema = z.object({
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(
-	({ locales, defaultLocale, ...config }, ctx) => {
+	({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});
 
 		// This is a multilingual site (more than one locale configured) or a monolingual site with
@@ -236,8 +235,13 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 				return z.NEVER;
 			}
 
+			// Transform the title
+			const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang as string);
+			const parsedTitle = TitleSchema.parse(title);
+
 			return {
 				...config,
+				title: parsedTitle,
 				/** Flag indicating if this site has multiple locales set up. */
 				isMultilingual: configuredLocales.length > 1,
 				/** Full locale object for this site’s default language. */
@@ -248,18 +252,23 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 
 		// This is a monolingual site with no locales configured or only a root locale, so things are
 		// pretty simple.
+		/** Full locale object for this site’s default language. */
+		const defaultLocaleConfig = {
+			label: 'English',
+			lang: 'en',
+			dir: 'ltr' as const,
+			locale: undefined,
+			...locales?.root,
+		};
+		/** Transform the title */
+		const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang);
+		const parsedTitle = TitleSchema.parse(title);
 		return {
 			...config,
+			title: parsedTitle,
 			/** Flag indicating if this site has multiple locales set up. */
 			isMultilingual: false,
-			/** Full locale object for this site’s default language. */
-			defaultLocale: {
-				label: 'English',
-				lang: 'en',
-				dir: 'ltr',
-				locale: undefined,
-				...locales?.root,
-			},
+			defaultLocale: defaultLocaleConfig,
 			locales: undefined,
 		} as const;
 	}

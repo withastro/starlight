@@ -34,6 +34,7 @@ function formatPath(
 	href: string,
 	{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions
 ) {
+	// @ts-expect-error — TODO: add support for `preserve` (https://github.com/withastro/starlight/issues/1781)
 	const formatStrategy = formatStrategies[format];
 	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 

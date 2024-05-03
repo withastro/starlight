@@ -22,7 +22,7 @@ vi.mock('astro:content', async () =>
 );
 
 test('test suite is using correct env', () => {
-	expect(config.title).toBe('i18n with root locale');
+	expect(config.title).toMatchObject({ fr: 'i18n with root locale' });
 });
 
 test('routes includes fallback entries for untranslated pages', () => {
@@ -82,8 +82,8 @@ test('fallback routes use fallback entry last updated dates', () => {
 
 	expect(getNewestCommitDate).toHaveBeenCalledOnce();
 	expect(getNewestCommitDate.mock.lastCall?.[0]).toMatch(
-		/src\/content\/docs\/guides\/authoring-content.md$/
-		//                          ^ no `en/` prefix
+		/src[/\\]content[/\\]docs[/\\]guides[/\\]authoring-content.md$/
+		//                                       ^ no `en/` prefix
 	);
 
 	getNewestCommitDate.mockRestore();

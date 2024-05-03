@@ -19,11 +19,11 @@ Por ejemplo, dada la siguiente estructura de archivos:
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-      - reference/
-        - configuration.md
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
 
 </FileTree>
 
@@ -32,20 +32,15 @@ La siguiente barra lateral se generará automáticamente:
 <SidebarPreview
 	config={[
 		{
-			label: 'guides',
+			label: 'constellations',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Andrómeda', link: '' },
+				{ label: 'Orión', link: '' },
 			],
 		},
 		{
-			label: 'referencia',
-			items: [
-				{
-					label: 'Referencia de configuración',
-					link: '/reference/configuration/',
-				},
-			],
+			label: 'stars',
+			items: [{ label: 'Betelgeuse', link: '' }],
 		},
 	]}
 />
@@ -65,10 +60,10 @@ Agrega un enlace a una página interna o externa usando un objeto con las propie
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Un enlace a la guía CSS y Estilos.
-		{ label: 'CSS y Estilos', link: '/guides/css-and-tailwind/' },
-		// Un enlace externo al sitio web de Astro.
-		{ label: 'Astro', link: 'https://astro.build/' },
+		// Un enlace a la página de la luna Ganímedes.
+		{ label: 'Ganímedes', link: '/moons/ganymede/' },
+		// Un enlace externo al sitio web de la NASA.
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
 });
 ```
@@ -77,8 +72,8 @@ La configuración anterior genera la siguiente barra lateral:
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS y Estilos', link: '/guides/css-and-tailwind/' },
-		{ label: 'Astro', link: 'https://astro.build/' },
+		{ label: 'Ganímedes', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
 
@@ -94,19 +89,19 @@ Agrega enlaces o subgrupos al arreglo `items`.
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// Un grupo de enlaces etiquetados como "Guides"
+		// Un grupo de enlaces etiquetado "Constelaciones".
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
-				// Un grupo anidado de enlaces.
+				{ label: 'Carina', link: '/constellations/carina/' },
+				{ label: 'Centaurus', link: '/constellations/centaurus/' },
+				// Un grupo anidado de enlaces para constelaciones estacionales.
 				{
-					label: 'Estilando',
+					label: 'Estacional',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: 'Andrómeda', link: '/constellations/andromeda/' },
+						{ label: 'Orión', link: '/constellations/orion/' },
+						{ label: 'Osa Menor', link: '/constellations/ursa-minor/' },
 					],
 				},
 			],
@@ -120,16 +115,16 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'Estilando',
+					label: 'Estacional',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: 'Andrómeda', link: '' },
+						{ label: 'Orión', link: '' },
+						{ label: 'Osa Menor', link: '' },
 					],
 				},
 			],
@@ -150,9 +145,9 @@ Agrega un grupo autogenerado usando un objeto con las propiedades `label` y `aut
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
-			// Autogenera un grupo de enlaces para el directorio 'guides'.
-			autogenerate: { directory: 'guides' },
+			label: 'Constelaciones',
+			// Un grupo de enlaces autogenerados para el directorio 'constellations'.
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -165,11 +160,11 @@ Y la siguiente estructura de archivos:
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-        - advanced/
-          - project-structure.md
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
 
 </FileTree>
 
@@ -178,18 +173,13 @@ La siguiente barra lateral se generará automáticamente:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'avanzado',
-					items: [
-						{
-							label: 'Estructura de Proyecto',
-							link: '/guides/project-structure/',
-						},
-					],
+					label: 'seasonal',
+					items: [{ label: 'Andrómeda', link: '' }],
 				},
 			],
 		},
@@ -224,13 +214,13 @@ Un grupo autogenerado que incluye una página con el frontmatter anterior genera
 		{
 			label: 'Guías',
 			items: [
-				{ label: 'Una página', link: '#' },
+				{ label: 'Una página', link: '' },
 				{
 					label: 'Etiqueta personalizada de la barra lateral',
-					link: '#',
+					link: '',
 					badge: { text: 'Nuevo', variant: 'tip' },
 				},
-				{ label: 'Otra página', link: '#' },
+				{ label: 'Otra página', link: '' },
 			],
 		},
 	]}
@@ -248,21 +238,21 @@ Los enlaces, grupos y grupos autogenerados también pueden incluir una propiedad
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
+			label: 'Estrellas',
 			items: [
-				// Un enlace con una insignia "Nuevo".
+				// Un enlace con una insignia "Supergigante".
 				{
-					label: 'Componentes',
-					link: '/guides/components/',
-					badge: 'Nuevo',
+					label: 'Persei',
+					link: '/stars/persei/',
+					badge: 'Supergigante',
 				},
 			],
 		},
-		// An autogenerated group with a "Deprecated" badge.
+		// Un grupo autogenerado con una insignia "Obsoleto".
 		{
-			label: 'Referencia',
+			label: 'Moons',
 			badge: 'Obsoleto',
-			autogenerate: { directory: 'reference' },
+			autogenerate: { directory: 'moons' },
 		},
 	],
 });
@@ -273,30 +263,30 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Estrellas',
 			items: [
 				{
-					label: 'Componentes',
-					link: '/guides/components/',
-					badge: { text: 'Nuevo', variant: 'default' },
+					label: 'Persei',
+					link: '',
+					badge: { text: 'Supergigante', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Referencia',
+			label: 'Lunas',
 			badge: { text: 'Obsoleto', variant: 'default' },
 			items: [
 				{
-					label: 'Referencia de Configuración',
-					link: '/reference/configuration/',
+					label: 'Ío',
+					link: '',
 				},
 				{
-					label: 'Referencia de Frontmatter',
-					link: '/reference/frontmatter/',
+					label: 'Europa',
+					link: '',
 				},
 				{
-					label: 'Referencia de Personalización de Componentes',
-					link: '/reference/overrides/',
+					label: 'Ganímedes',
+					link: '',
 				},
 			],
 		},
@@ -314,13 +304,13 @@ Remplaza el estilo `default`, que usa el color de acento de tu sitio, establecie
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
+			label: 'Estrellas',
 			items: [
-				// Un enlace con una insignia "Experimental" amarilla.
+				// Un enlace con una insignia "Stub" amarilla.
 				{
-					label: 'Componentes',
-					link: '/guides/components/',
-					badge: { text: 'Experimental', variant: 'caution' },
+					label: 'Sirio',
+					link: '/stars/sirius/',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -333,12 +323,12 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Estrellas',
 			items: [
 				{
-					label: 'Componentes',
-					link: '/guides/components/',
-					badge: { text: 'Experimental', variant: 'caution' },
+					label: 'Sirio',
+					link: '',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -351,16 +341,15 @@ Los enlaces también pueden incluir una propiedad `attrs` para agregar atributos
 
 En el siguiente ejemplo, `attrs` se usa para agregar un atributo `target="_blank"`, de modo que el enlace se abra en una nueva pestaña, y para aplicar un atributo `style` personalizado para poner en cursiva la etiqueta del enlace:
 
-```js {10}
+```js {9}
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
+			label: 'Recursos',
 			items: [
-				// Un enlace externo a la documentación de Astro que se abre en una nueva pestaña.
 				{
-					label: 'Documentación de Astro',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: { target: '_blank', style: 'font-style: italic' },
 				},
 			],
@@ -374,11 +363,11 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Recursos',
 			items: [
 				{
-					label: 'Documentación de Astro',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: {
 						target: '_blank',
 						style: 'font-style: italic',
@@ -399,24 +388,24 @@ La propiedad `label` se utilizará para el idioma predeterminado y para los idio
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: 'Constelaciones',
 			translations: {
-				'pt-BR': 'Guias',
+				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Components',
+					label: 'Andrómeda',
 					translations: {
-						'pt-BR': 'Componentes',
+						'pt-BR': 'Andrômeda',
 					},
-					link: '/guides/components/',
+					link: '/constellations/andromeda/',
 				},
 				{
-					label: 'Internationalization (i18n)',
+					label: 'Escorpio',
 					translations: {
-						'pt-BR': 'Internacionalização (i18n)',
+						'pt-BR': 'Escorpião',
 					},
-					link: '/guides/i18n/',
+					link: '/constellations/scorpius/',
 				},
 			],
 		},
@@ -429,10 +418,10 @@ Navegar por la documentación en portugués de Brasil generará la siguiente bar
 <SidebarPreview
 	config={[
 		{
-			label: 'Guias',
+			label: 'Constelação',
 			items: [
-				{ label: 'Componentes', link: '/pt-br/guides/components/' },
-				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
 			],
 		},
 	]}
@@ -446,12 +435,12 @@ Los grupos de enlaces pueden colapsarse por defecto estableciendo la propiedad `
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			// Collapsa el grupo de forma predeterminada.
 			collapsed: true,
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Andrómeda', link: '/constellations/andromeda/' },
+				{ label: 'Orion', link: '/constellations/orion/' },
 			],
 		},
 	],
@@ -463,11 +452,11 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			collapsed: true,
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Andrómeda', link: '' },
+				{ label: 'Orion', link: '' },
 			],
 		},
 	]}
@@ -479,10 +468,10 @@ La configuración anterior genera la siguiente barra lateral:
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			// Colapsa el grupo y sus subgrupos autogenerados de forma predeterminada.
 			collapsed: true,
-			autogenerate: { directory: 'guides' },
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -493,24 +482,21 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			collapsed: true,
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
-				{
-					label: 'advanced',
-					collapsed: true,
-					items: [
-						{
-							label: 'Estructura de Proyecto',
-							link: '/guides/project-structure/',
-						},
-					],
-				},
-			],
-		},
-	]}
+
+    			{ label: 'Carina', link: '' },
+    			{ label: 'Centaurus', link: '' },
+    			{
+    				label: 'seasonal',
+    				collapsed: true,
+    				items: [{ label: 'Andrómeda', link: '' }],
+    			},
+    		],
+    	},
+    ]}
+
 />
 
 Este comportamiento puede remplazarse definiendo la propiedad `autogenerate.collapsed`.
@@ -519,11 +505,11 @@ Este comportamiento puede remplazarse definiendo la propiedad `autogenerate.coll
 starlight({
 	sidebar: [
 		{
-			label: 'Guías',
-			// No colapsa el grupo "Guides" pero colapsa sus
+			label: 'Constelaciones',
+			// No colapsa el grupo "Constelattions" pero colapsa sus
 			// subgrupos autogenerados.
 			collapsed: false,
-			autogenerate: { directory: 'guides', collapsed: true },
+			autogenerate: { directory: 'constellations', collapsed: true },
 		},
 	],
 });
@@ -534,19 +520,14 @@ La configuración anterior genera la siguiente barra lateral:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Constelaciones',
 			items: [
-				{ label: 'Componentes', link: '/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'advanced',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{
-							label: 'Estructura de Proyecto',
-							link: '/guides/project-structure/',
-						},
-					],
+					items: [{ label: 'Andrómeda', link: '' }],
 				},
 			],
 		},
