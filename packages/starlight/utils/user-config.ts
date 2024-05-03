@@ -256,7 +256,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 		const defaultLocaleConfig = {
 			label: 'English',
 			lang: 'en',
-			dir: 'ltr',
+			dir: 'ltr' as const,
 			locale: undefined,
 			...locales?.root,
 		};
