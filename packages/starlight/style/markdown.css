@@ -115,15 +115,16 @@
 }
 
 /* <details> and <summary> styles */
-.sl-markdown-content details:not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-hairline-light);
+.sl-markdown-content details:not(:where(.not-content *)),
+.sl-markdown-content details[open]:hover:not(:where(.not-content *)) {
+	--sl-details-border-color: var(--sl-color-gray-4);
 
 	border-inline-start: 1px solid var(--sl-details-border-color);
 	padding-inline-start: 1rem;
 }
 .sl-markdown-content details[open]:not(:where(.not-content *)),
 .sl-markdown-content details:hover:not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-gray-4);
+	--sl-details-border-color: var(--sl-color-gray-3);
 }
 .sl-markdown-content summary:not(:where(.not-content *)) {
 	color: var(--sl-color-white);
@@ -170,7 +171,8 @@
 }
 
 /* <details> styles inside asides */
-.sl-markdown-content .starlight-aside details:not(:where(.not-content *)) {
+.sl-markdown-content .starlight-aside details:not(:where(.not-content *)),
+.sl-markdown-content .starlight-aside details[open]:hover:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-asides-border);
 }
 .sl-markdown-content .starlight-aside details[open]:not(:where(.not-content *)),
