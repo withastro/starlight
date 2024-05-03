@@ -19,11 +19,11 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-      - reference/
-        - configuration.md
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
 
 </FileTree>
 
@@ -32,20 +32,15 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 <SidebarPreview
 	config={[
 		{
-			label: 'guides',
+			label: 'constellations',
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Андромеда', link: '' },
+				{ label: 'Орион', link: '' },
 			],
 		},
 		{
-			label: 'reference',
-			items: [
-				{
-					label: 'Справочник по конфигурации',
-					link: '/ru/reference/configuration/',
-				},
-			],
+			label: 'stars',
+			items: [{ label: 'Бетельгейзе', link: '' }],
 		},
 	]}
 />
@@ -54,8 +49,7 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 
 ## Добавление ссылок и групп ссылок
 
-Чтобы настроить свои [ссылки](#ссылки) и [группы ссылок](#группы) (внутри сворачиваемого заголовка) в боковой панели,
-используйте свойство [`starlight.sidebar`](/ru/reference/configuration/#sidebar) в `astro.config.mjs`.
+Чтобы настроить свои [ссылки](#ссылки) и [группы ссылок](#группы) (внутри сворачиваемого заголовка) в боковой панели, используйте свойство [`starlight.sidebar`](/ru/reference/configuration/#sidebar) в `astro.config.mjs`.
 
 Комбинируя ссылки и группы, вы можете создавать разнообразные макеты боковой панели.
 
@@ -66,10 +60,10 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Ссылка на руководство по CSS и стилизации.
-		{ label: 'CSS и стилизация', link: '/ru/guides/css-and-tailwind/' },
-		// Внешняя ссылка на веб-сайт Astro.
-		{ label: 'Astro', link: 'https://astro.build/' },
+		// Ссылка на страницу луны Ганимед.
+		{ label: 'Ганимед', link: '/moons/ganymede/' },
+		// Внешняя ссылка на веб-сайт NASA.
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
 });
 ```
@@ -78,8 +72,8 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS и стилизация', link: '/ru/guides/css-and-tailwind/' },
-		{ label: 'Astro', link: 'https://astro.build/' },
+		{ label: 'Ганимед', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
 
@@ -95,19 +89,19 @@ starlight({
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// Группа ссылок с названием "Руководства".
+		// Группа ссылок с названием «Созвездия».
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
-				// Вложенная группа ссылок.
+				{ label: 'Карина', link: '/constellations/carina/' },
+				{ label: 'Центавр', link: '/constellations/centaurus/' },
+				// Вложенная группа ссылок для сезонных созвездий.
 				{
-					label: 'Стилизация',
+					label: 'Сезонные',
 					items: [
-						{ label: 'CSS', link: '/ru/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/ru/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/ru/guides/css-and-tailwind/' },
+						{ label: 'Андромеда', link: '/constellations/andromeda/' },
+						{ label: 'Орион', link: '/constellations/orion/' },
+						{ label: 'Малая Медведица', link: '/constellations/ursa-minor/' },
 					],
 				},
 			],
@@ -121,16 +115,16 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Карина', link: '' },
+				{ label: 'Центавр', link: '' },
 				{
-					label: 'Стилизация',
+					label: 'Сезонные',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: 'Андромеда', link: '' },
+						{ label: 'Орион', link: '' },
+						{ label: 'Малая Медведица', link: '' },
 					],
 				},
 			],
@@ -151,9 +145,9 @@ Starlight может автоматически генерировать гру�
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
-			// Автоматически генерировать группу ссылок для директории "guides".
-			autogenerate: { directory: 'guides' },
+			label: 'Созвездия',
+			// Автогенерация группы ссылок для директории 'constellations'.
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -166,11 +160,11 @@ starlight({
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-        - advanced/
-          - project-structure.md
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
 
 </FileTree>
 
@@ -179,18 +173,13 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Карина', link: '' },
+				{ label: 'Центавр', link: '' },
 				{
-					label: 'advanced',
-					items: [
-						{
-							label: 'Структура проекта',
-							link: '/ru/guides/project-structure/',
-						},
-					],
+					label: 'seasonal',
+					items: [{ label: 'Андромеда', link: '' }],
 				},
 			],
 		},
@@ -201,8 +190,7 @@ starlight({
 
 Используйте [поле `sidebar`](/ru/reference/frontmatter/#sidebar) в метаданных страниц для настройки автоматически генерируемых ссылок.
 
-Параметры в метаданных для боковой панели позволяют [установить метку](/ru/reference/frontmatter/#label)
-или добавить [значок](/ru/reference/frontmatter/#badge) к ссылке, [скрыть](/ru/reference/frontmatter/#hidden) ссылку из боковой панели или определить её [порядок](/ru/reference/frontmatter/#order) в общем списке.
+Параметры в метаданных для боковой панели позволяют [установить метку](/ru/reference/frontmatter/#label) или добавить [значок](/ru/reference/frontmatter/#badge) к ссылке, [скрыть](/ru/reference/frontmatter/#hidden) ссылку из боковой панели или определить её [порядок](/ru/reference/frontmatter/#order) в общем списке.
 
 ```md "sidebar:"
 ---
@@ -227,13 +215,13 @@ sidebar:
 		{
 			label: 'Руководства',
 			items: [
-				{ label: 'Страница', link: '#' },
+				{ label: 'Моя страница', link: '' },
 				{
 					label: 'Текст в боковой панели',
-					link: '#',
+					link: '',
 					badge: { text: 'Новое', variant: 'tip' },
 				},
-				{ label: 'Другая страница', link: '#' },
+				{ label: 'Другая страница', link: '' },
 			],
 		},
 	]}
@@ -251,21 +239,21 @@ sidebar:
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
+			label: 'Звёзды',
 			items: [
-				// Ссылка со значком "Новое".
+				// Ссылка со значком «Сверхгигант».
 				{
-					label: 'Компоненты',
-					link: '/ru/guides/components/',
-					badge: 'Новое',
+					label: 'Персей',
+					link: '/stars/persei/',
+					badge: 'Сверхгигант',
 				},
 			],
 		},
 		// Автогенерируемая группа со значком "Устарело".
 		{
-			label: 'Справочник',
+			label: 'Луны',
 			badge: 'Устарело',
-			autogenerate: { directory: 'reference' },
+			autogenerate: { directory: 'moons' },
 		},
 	],
 });
@@ -276,30 +264,30 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Звёзды',
 			items: [
 				{
-					label: 'Компоненты',
-					link: '/ru/guides/components/',
-					badge: { text: 'Новое', variant: 'default' },
+					label: 'Персей',
+					link: '',
+					badge: { text: 'Сверхгигант', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Справочник',
+			label: 'Луны',
 			badge: { text: 'Устарело', variant: 'default' },
 			items: [
 				{
-					label: 'Конфигурация',
-					link: '/ru/reference/configuration/',
+					label: 'Ио',
+					link: '',
 				},
 				{
-					label: 'Метаданные',
-					link: '/ru/reference/frontmatter/',
+					label: 'Европа',
+					link: '',
 				},
 				{
-					label: 'Переопределения',
-					link: '/ru/reference/overrides/',
+					label: 'Ганимед',
+					link: '',
 				},
 			],
 		},
@@ -317,13 +305,13 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
+			label: 'Звёзды',
 			items: [
-				// Ссылка с жёлтым значком "Экспериментально".
+				// Ссылка с жёлтым значком «Заглушка»
 				{
-					label: 'Компоненты',
-					link: '/ru/guides/components/',
-					badge: { text: 'Экспериментально', variant: 'caution' },
+					label: 'Сириус',
+					link: '/stars/sirius/',
+					badge: { text: 'Заглушка', variant: 'caution' },
 				},
 			],
 		},
@@ -336,12 +324,12 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Звёзды',
 			items: [
 				{
-					label: 'Компоненты',
-					link: '/ru/guides/components/',
-					badge: { text: 'Экспериментально', variant: 'caution' },
+					label: 'Сириус',
+					link: '',
+					badge: { text: 'Заглушка', variant: 'caution' },
 				},
 			],
 		},
@@ -352,19 +340,18 @@ starlight({
 
 Ссылки также могут включать свойство `attrs` для добавления пользовательских HTML-атрибутов к элементу ссылки.
 
-В следующем примере `attrs` используется для добавления атрибута `target="_blank"`, чтобы ссылка открывалась в новой вкладке,
-а также для применения атрибута `style`, чтобы курсивом выделить метку ссылки:
+В следующем примере `attrs` используется для добавления атрибута `target="_blank"`, чтобы ссылка открывалась в новой вкладке, а также для применения атрибута `style`, чтобы курсивом выделить метку ссылки:
 
 ```js {10}
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
+			label: 'Ресурсы',
 			items: [
-				// Внешняя ссылка на документацию Astro, открывающаяся в новой вкладке.
+				// Внешняя ссылка на сайт NASA, открывающаяся в новой вкладке.
 				{
-					label: 'Документация Astro',
-					link: 'https://docs.astro.build/ru/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: { target: '_blank', style: 'font-style: italic' },
 				},
 			],
@@ -378,11 +365,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Ресурсы',
 			items: [
 				{
-					label: 'Документация Astro',
-					link: 'https://docs.astro.build/ru/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: {
 						target: '_blank',
 						style: 'font-style: italic',
@@ -402,24 +389,24 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			translations: {
-				'pt-BR': 'Guias',
+				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Компоненты',
+					label: 'Андромеда',
 					translations: {
-						'pt-BR': 'Componentes',
+						'pt-BR': 'Andrômeda',
 					},
-					link: '/guides/components/',
+					link: '/constellations/andromeda/',
 				},
 				{
-					label: 'Интернационализация (i18n)',
+					label: 'Скорпион',
 					translations: {
-						'pt-BR': 'Internacionalização (i18n)',
+						'pt-BR': 'Escorpião',
 					},
-					link: '/guides/i18n/',
+					link: '/constellations/scorpius/',
 				},
 			],
 		},
@@ -432,10 +419,10 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guías',
+			label: 'Constelação',
 			items: [
-				{ label: 'Componentes', link: '/pt-br/guides/components/' },
-				{ label: 'Internacionalización (i18n)', link: '/pt-br/guides/i18n/' },
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
 			],
 		},
 	]}
@@ -449,12 +436,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
-			// Сворачиваем группу по умолчанию.
+			label: 'Созвездия',
+			// Сворачивание группы по умолчанию
 			collapsed: true,
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Андромеда', link: '/constellations/andromeda/' },
+				{ label: 'Орион', link: '/constellations/orion/' },
 			],
 		},
 	],
@@ -466,11 +453,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			collapsed: true,
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Андромеда', link: '' },
+				{ label: 'Орион', link: '' },
 			],
 		},
 	]}
@@ -482,10 +469,10 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
-			// Сворачиваем группу и её автогенерируемые подгруппы по умолчанию.
+			label: 'Созвездия',
+			// Сворачивание группы и её автогенерируемых подгрупп по умолчанию.
 			collapsed: true,
-			autogenerate: { directory: 'guides' },
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -496,20 +483,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			collapsed: true,
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Карина', link: '' },
+				{ label: 'Центавр', link: '' },
 				{
-					label: 'дополнительно',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{
-							label: 'Структура проекта',
-							link: '/ru/guides/project-structure/',
-						},
-					],
+					items: [{ label: 'Андромеда', link: '' }],
 				},
 			],
 		},
@@ -522,11 +504,11 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Руководства',
-			// Не сворачивать группу "Руководства", но свернуть её
+			label: 'Созвездия',
+			// Не сворачивать группу «Созвездия», но сворачивать её
 			// автоматически сгенерированные подгруппы.
 			collapsed: false,
-			autogenerate: { directory: 'guides', collapsed: true },
+			autogenerate: { directory: 'constellations', collapsed: true },
 		},
 	],
 });
@@ -537,19 +519,14 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Руководства',
+			label: 'Созвездия',
 			items: [
-				{ label: 'Компоненты', link: '/ru/guides/components/' },
-				{ label: 'Интернационализация (i18n)', link: '/ru/guides/i18n/' },
+				{ label: 'Карина', link: '' },
+				{ label: 'Центавр', link: '' },
 				{
-					label: 'дополнительно',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{
-							label: 'Структура проекта',
-							link: '/ru/guides/project-structure/',
-						},
-					],
+					items: [{ label: 'Андромеда', link: '' }],
 				},
 			],
 		},

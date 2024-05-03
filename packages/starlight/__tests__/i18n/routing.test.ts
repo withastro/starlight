@@ -19,7 +19,7 @@ vi.mock('astro:content', async () =>
 );
 
 test('test suite is using correct env', () => {
-	expect(config.title).toBe('i18n with no root locale');
+	expect(config.title).toMatchObject({ 'en-US': 'i18n with no root locale' });
 });
 
 test('routes includes fallback entries for untranslated pages', () => {
