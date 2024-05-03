@@ -25,10 +25,3 @@
 [data-has-hero] .hero > img {
 	filter: drop-shadow(0 0 3rem var(--overlay-blurple));
 }
-
-/* // TODO(HiDeoo) Remove these styles */
-
-.sl-link-button.custom-link-button {
-	text-decoration: underline;
-	text-underline-offset: 0.25rem;
-}
