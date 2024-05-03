@@ -28,14 +28,7 @@
 
 /* // TODO(HiDeoo) Remove these styles */
 
-.sl-link-button.custom-link-button.primary {
-	background-color: green;
-}
-
-.sl-link-button.custom-link-button.secondary {
-	border-color: green;
-	color: green;
-}
-.sl-link-button.custom-link-button.minimal {
-	color: green;
+.sl-link-button.custom-link-button {
+	text-decoration: underline;
+	text-underline-offset: 0.25rem;
 }
