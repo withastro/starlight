@@ -169,6 +169,10 @@
 .sl-markdown-content [dir='rtl'] summary:not(:where(.not-content *))::before {
 	transform: rotateZ(180deg);
 }
+/* <summary> with only a paragraph automatically added when using MDX */
+.sl-markdown-content summary:not(:where(.not-content *)) p:only-child {
+	display: inline;
+}
 
 /* <details> styles inside asides */
 .sl-markdown-content .starlight-aside details:not(:where(.not-content *)),
