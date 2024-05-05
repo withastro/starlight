@@ -1,3 +1,6 @@
+/** Informations about the built-in default locale used as a fallback when no locales are defined. */
+export const BuiltInDefaultLocale = makeBuiltInDefaultLocale('en', 'ltr');
+
 /**
  * Get the string for the passed language from a dictionary object.
  *
@@ -13,4 +16,14 @@ export function pickLang<T extends Record<string, string>>(
 	lang: keyof T
 ): string | undefined {
 	return dictionary[lang];
+}
+
+/** Generates the built-in default locale informations used as a fallback when no locales are defined. */
+function makeBuiltInDefaultLocale(lang: string, dir: 'ltr' | 'rtl') {
+	const label = new Intl.DisplayNames([lang], { type: 'language' }).of(lang);
+	if (!label)
+		throw new Error(
+			`Failed to get the language name for '${lang}' when defining the built-in default locale.`
+		);
+	return { dir, label, lang };
 }
