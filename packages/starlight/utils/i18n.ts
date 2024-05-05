@@ -1,5 +1,31 @@
+import type { AstroUserConfig } from 'astro/config';
+import type { StarlightConfig } from './user-config';
+
 /** Informations about the built-in default locale used as a fallback when no locales are defined. */
 export const BuiltInDefaultLocale = makeBuiltInDefaultLocale('en', 'ltr');
+
+/** Generate the Astro i18n configuration to use based on a Starlight configuration. */
+export function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroUserConfig['i18n']> {
+	return {
+		defaultLocale:
+			config.defaultLocale.lang ?? config.defaultLocale.locale ?? BuiltInDefaultLocale.lang,
+		locales: config.locales
+			? Object.entries(config.locales).map(([locale, localeConfig]) => {
+					return {
+						codes: [localeConfig?.lang ?? locale],
+						path: locale === 'root' ? localeConfig?.lang ?? BuiltInDefaultLocale.lang : locale,
+					};
+			  })
+			: [BuiltInDefaultLocale.lang],
+		routing: {
+			prefixDefaultLocale:
+				// Sites with multiple languages without a root locale.
+				(config.isMultilingual && config.locales?.root === undefined) ||
+				// Sites with a single non-root language different from the built-in default locale.
+				(!config.isMultilingual && config.locales !== undefined),
+		},
+	};
+}
 
 /**
  * Get the string for the passed language from a dictionary object.

@@ -10,6 +10,7 @@ import { vitePluginStarlightUserConfig } from './integrations/virtual-user-confi
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import { getAstroI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration({
@@ -85,6 +86,7 @@ export default function StarlightIntegration({
 					experimental: {
 						globalRoutePriority: true,
 					},
+					i18n: getAstroI18nConfig(starlightConfig),
 				});
 			},
 
