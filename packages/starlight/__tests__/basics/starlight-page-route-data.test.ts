@@ -1,4 +1,6 @@
 import { assert, expect, test, vi } from 'vitest';
+import { generateRouteData } from '../../utils/route-data';
+import { routes } from '../../utils/routing';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
@@ -46,6 +48,7 @@ test('adds data to route shape', async () => {
 	// Starlight pages respect the passed data.
 	expect(data.entry.data.title).toBe(starlightPageProps.frontmatter.title);
 	// Starlight pages get expected defaults.
+	expect(data.siteTitle).toBe('Basics');
 	expect(data.hasSidebar).toBe(true);
 	expect(data.headings).toEqual([]);
 	expect(data.entryMeta.dir).toBe('ltr');
@@ -493,4 +496,19 @@ test('strips unknown frontmatter properties', async () => {
 		url: starlightPageUrl,
 	});
 	expect('unknown' in data.entry.data).toBe(false);
+});
+
+test('generates data with a similar root shape to regular route data', async () => {
+	const route = routes[0]!;
+	const data = generateRouteData({
+		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
+		url: new URL('https://example.com'),
+	});
+
+	const starlightPageData = await generateStarlightPageRouteData({
+		props: starlightPageProps,
+		url: starlightPageUrl,
+	});
+
+	expect(Object.keys(data).sort()).toEqual(Object.keys(starlightPageData).sort());
 });
