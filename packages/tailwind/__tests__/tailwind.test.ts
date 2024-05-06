@@ -5,12 +5,12 @@ import { test, expect, describe, vi } from 'vitest';
 import StarlightTailwindPlugin from '..';
 
 /** Generate a CSS string based on the passed CSS and HTML content. */
-const generatePluginCss = ({
+const generatePluginCss = async ({
 	css = '@tailwind base;',
 	html = '',
 	config = {},
 }: { css?: string; html?: string; config?: Partial<Config> } = {}): Promise<string> => {
-	return postcss(
+	const result = await postcss(
 		tailwindcss({
 			// Enable Starlight plugin.
 			plugins: [StarlightTailwindPlugin()],
@@ -19,9 +19,8 @@ const generatePluginCss = ({
 			// Spread in any custom Tailwind config.
 			...config,
 		})
-	)
-		.process(css, { from: '' })
-		.then((result) => result.css);
+	).process(css, { from: '' });
+	return result.css;
 };
 
 describe('@tailwind base;', async () => {
