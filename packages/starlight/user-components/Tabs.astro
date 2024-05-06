@@ -158,7 +158,7 @@ const { html, panels } = processPanels(panelHtml);
 			newTab.setAttribute('aria-selected', 'true');
 			if (shouldSync) {
 				newTab.focus();
-				StarlightTabs.#syncTabs(this, newTab.textContent);
+				StarlightTabs.#syncTabs(this, newTab.innerText);
 				window.scrollTo({
 					top: window.scrollY + (this.getBoundingClientRect().top - previousTabsOffset),
 				});
@@ -173,7 +173,7 @@ const { html, panels } = processPanels(panelHtml);
 
 			for (const receiver of syncedTabs) {
 				if (receiver === emitter) continue;
-				const labelIndex = receiver.tabs.findIndex((tab) => tab.textContent === label);
+				const labelIndex = receiver.tabs.findIndex((tab) => tab.innerText === label);
 				if (labelIndex === -1) continue;
 				receiver.switchTab(receiver.tabs[labelIndex], labelIndex, false);
 			}
