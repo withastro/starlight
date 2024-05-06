@@ -7,6 +7,7 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Splash', template: 'splash' }],
+			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['showcase.mdx', { title: 'ToC Disabled', tableOfContents: false }],
 			['environmental-impact.md', { title: 'Explicit update date', lastUpdated: new Date() }],
 		],

@@ -7,7 +7,8 @@
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
-    "format": "prettier -w --cache --plugin prettier-plugin-astro ."
+    "format": "prettier -w --cache --plugin prettier-plugin-astro .",
+    "typecheck": "tsc -p tsconfig.typecheck.json"
   },
   "license": "MIT",
   "devDependencies": {
@@ -17,6 +18,7 @@
     "astro": "^4.3.5",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.13.0",
+    "typescript": "^5.4.5",
     "size-limit": "^8.2.4"
   },
   "packageManager": "pnpm@8.7.4",

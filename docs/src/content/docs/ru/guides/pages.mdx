@@ -103,8 +103,9 @@ import CustomComponent from './CustomComponent.astro';
 Следующие свойства отличаются от метаданных Markdown:
 
 - Свойство [`slug`](/ru/reference/frontmatter/#slug) не поддерживается и устанавливается автоматически на основе URL-адреса пользовательской страницы.
-- Для свойства [`editUrl`](/ru/reference/frontmatter/#editurl) требуется URL-адрес для отображения ссылки на редактирование.
+- Свойство [`editUrl`](/ru/reference/frontmatter/#editurl) требует указания URL-адреса для отображения ссылки на редактирование.
 - Свойство [`sidebar`](/ru/reference/frontmatter/#sidebar) для настройки отображения страницы в [автогенерируемых группах ссылок](/ru/reference/configuration/#sidebar) недоступно. Страницы, использующие компонент `<StarlightPage />`, не являются частью коллекции и не могут быть добавлены в автоматически созданную группу боковой панели.
+- Свойство [`draft`](/ru/reference/frontmatter/#draft) лишь отображает [уведомление](/ru/reference/overrides/#draftcontentnotice) о том, что страница является черновиком, но не исключает её автоматически из производственных сборок.
 
 ##### `sidebar`
 

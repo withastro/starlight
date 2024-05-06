@@ -11,14 +11,21 @@ describe('fileWithBase()', () => {
 		});
 	});
 
-	// TODO: Stubbing BASE_URL is not currently possible.
-	// Astro controls BASE_URL via its `vite-plugin-env`, which prevents Vitest’s stubbing from
-	// working and there’s also no way to pass in Astro config in Astro’s `getViteConfig` helper.
-	describe.todo('with base', () => {
-		test('prepends base', () => {
+	describe('with base', () => {
+		test('prepends base', async () => {
+			// Reset the modules registry so that re-importing `../../utils/base` re-evaluates the module
+			// and re-computes the base. Re-importing the module is necessary because top-level imports
+			// cannot be re-evaluated.
+			vi.resetModules();
+			// Set the base URL.
 			vi.stubEnv('BASE_URL', '/base/');
+			// Re-import the module to re-evaluate it.
+			const { fileWithBase } = await import('../../utils/base');
+
 			expect(fileWithBase('/img.svg')).toBe('/base/img.svg');
+
 			vi.unstubAllEnvs();
+			vi.resetModules();
 		});
 	});
 });
@@ -33,5 +40,17 @@ describe('pathWithBase()', () => {
 		});
 	});
 
-	describe.todo('with base');
+	describe('with base', () => {
+		test('prepends base', async () => {
+			// See the first test with a base in this file for an explanation of the environment stubbing.
+			vi.resetModules();
+			vi.stubEnv('BASE_URL', '/base/');
+			const { pathWithBase } = await import('../../utils/base');
+
+			expect(pathWithBase('/path/')).toBe('/base/path/');
+
+			vi.unstubAllEnvs();
+			vi.resetModules();
+		});
+	});
 });
