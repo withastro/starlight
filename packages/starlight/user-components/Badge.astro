@@ -1,22 +1,19 @@
 ---
-import { type BadgeComponent, BadgeComponentSchema } from '../schemas/badge';
+import { BadgeComponentSchema, type BadgeProps } from '../schemas/badge';
 import { parseWithFriendlyErrors } from '../utils/error-map';
 
-type Props = BadgeComponent;
+type Props = BadgeProps;
 
-const {
-	text,
-	variant,
-	class: className,
-	size,
-} = parseWithFriendlyErrors(
+const { text, variant, size, attrs } = parseWithFriendlyErrors(
 	BadgeComponentSchema,
 	Astro.props,
 	'Invalid prop passed to the `<Badge/>` component.'
 );
+
+const { class: customClass, ...otherAttrs } = attrs;
 ---
 
-<span class:list={['sl-badge', variant, size, className]} set:html={text} />
+<span class:list={['sl-badge', variant, size, customClass]} {...otherAttrs}>{text}</span>
 
 <style>
 	:global(:root) {
