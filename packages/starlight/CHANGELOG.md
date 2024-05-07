@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.22.2
+
+### Patch Changes
+
+- [#1811](https://github.com/withastro/starlight/pull/1811) [`fe06aa13`](https://github.com/withastro/starlight/commit/fe06aa1307208ef9f5b249181ec29837f96940c2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a `<Tabs>` sync issue when inconsistently using the `icon` prop or not on `<TabItem>` components.
+
+- [#1826](https://github.com/withastro/starlight/pull/1826) [`52ea7381`](https://github.com/withastro/starlight/commit/52ea7381e131338a03cffb3499ba1699951cea1e) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI translations
+
 ## 0.22.1
 
 ### Patch Changes

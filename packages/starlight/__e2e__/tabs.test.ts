@@ -116,6 +116,29 @@ test('preserves tabs position when alternating between tabs with different conte
 	expect((await tabs.boundingBox())?.y).toBe(initialBoundingBox?.y);
 });
 
+test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
+	page,
+	starlight,
+}) => {
+	await starlight.goto('/tabs');
+
+	const tabs = page.locator('starlight-tabs');
+	const pkgTabsA = tabs.nth(0); // This set does not use icons for tab items.
+	const pkgTabsB = tabs.nth(4); // This set uses icons for tab items.
+
+	// Select the pnpm tab in the first set of synced tabs.
+	await pkgTabsA.getByRole('tab').filter({ hasText: 'pnpm' }).click();
+
+	await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
+	await expectSelectedTab(pkgTabsB, 'pnpm', 'another pnpm command');
+
+	// Select the yarn tab in the second set of synced tabs.
+	await pkgTabsB.getByRole('tab').filter({ hasText: 'yarn' }).click();
+
+	await expectSelectedTab(pkgTabsB, 'yarn', 'another yarn command');
+	await expectSelectedTab(pkgTabsA, 'yarn', 'yarn command');
+});
+
 async function expectSelectedTab(tabs: Locator, label: string, panel: string) {
 	expect((await tabs.getByRole('tab', { selected: true }).textContent())?.trim()).toBe(label);
 	expect((await tabs.getByRole('tabpanel').textContent())?.trim()).toBe(panel);
