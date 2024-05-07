@@ -1,9 +1,9 @@
 import {
 	astroExpressiveCode,
 	type AstroExpressiveCodeOptions,
-	addClassName,
 	type CustomConfigPreprocessors,
 } from 'astro-expressive-code';
+import { addClassName } from 'astro-expressive-code/hast';
 import type { AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
