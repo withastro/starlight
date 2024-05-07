@@ -368,15 +368,18 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
-### Badge
+### Badges
 
 import { Badge } from '@astrojs/starlight/components';
 
 Use the `<Badge>` component to display small pieces of information, such as status or labels.
 
-Pass the content you want to display to the `text` attribute of the `<Badge>` component. Optionally, you can specify a `variant` attribute with values like `tip`, `note`, `caution`, `danger`, `success` or `default` to adjust the badge's appearance. If no variant is specified, the default variant is `default` which uses the theme accent color.
+Pass the content you want to display to the `text` attribute of the `<Badge>` component.
+Optionally, you can specify a `variant` attribute with values like `tip`, `note`, `caution`, `danger`, `success` or `default` (the default uses the theme accent color) to adjust the badge's appearance.
 
-You can also specify a `size` attribute with values like `small`, `medium`, or `large` to adjust the badge's size. If no size is specified, the default size is `small`.
+To adjust the badge's size, you can specify a `size` attribute with values like `small` (the default), `medium`, or `large`.
+
+You can also include other `<span>` attributes inside the `attrs` property such as `class` or `style` to further customize the badge.
 
 ```mdx title="src/content/docs/example.mdx"
 import { Badge } from '@astrojs/starlight/components';
@@ -384,38 +387,20 @@ import { Badge } from '@astrojs/starlight/components';
 <Badge text="New" variant="tip" size="small" />
 <Badge text="Deprecated" variant="caution" size="medium" />
 <Badge text="Starlight" variant="note" size="large" />
-
+<Badge text="Custom" attrs={{ style: 'font-style: italic;' }}/>
 ```
 
 The code above generates the following on the page:
 
-<Badge text="New" variant="tip" size="small" />
+<Badge text="New" variant="tip" size="small" class="" />
 <Badge text="Deprecated" variant="caution" size="medium" />
 <Badge text="Starlight" variant="note" size="large" />
-
-#### Custom badges
-
-To create a custom badge, create a new CSS class and set the `--sl-color-bg-badge`, `--sl-color-border-badge`, and `--sl-color-text-badge` CSS variables to the desired colors.
-
-```css
-.new-badge-variant {
-	--sl-color-bg-badge: XXX;
-	--sl-color-border-badge: XXX;
-	--sl-color-text-badge: XXX;
-}
-
-[data-theme='light'] .new-badge-variant {
-	--sl-color-bg-badge: YYY;
-	--sl-color-border-badge: YYY;
-	--sl-color-text-badge: YYY;
-}
-```
-
-Then, apply the new class to the `<Badge>` component.
-
-```mdx title="src/content/docs/example.mdx" /"new-badge-variant"/
-<Badge text="Custom" class="new-badge-variant" />
-```
+<Badge
+	text="Custom"
+	attrs={{
+		style: 'font-style: italic;',
+	}}
+/>
 
 ### Icon
 
