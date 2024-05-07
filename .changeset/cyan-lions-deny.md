@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Adds two new icons: `comment`, `comment-alt`
+Adds three new icons: `comment`, `comment-alt`, `heart`
