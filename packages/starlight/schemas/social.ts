@@ -28,7 +28,7 @@ export const socialLinks = [
 	'slack',
 	'matrix',
 	'openCollective',
-	'hackerone',
+	'hackerOne',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -72,7 +72,7 @@ export const SocialLinksSchema = () =>
 					slack: 'Slack',
 					matrix: 'Matrix',
 					openCollective: 'Open Collective',
-					hackerone: 'Hacker One',
+					hackerOne: 'Hacker One',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
