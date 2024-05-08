@@ -25,9 +25,21 @@ export default defineConfig({
 
 ### `title` (必填)
 
-**类型：** `string`
+**类型：** `string | Record<string, string>`
 
 设置你的网站标题。将用于元数据和浏览器标签标题。
+
+这个值可以是一个字符串，或者对于多语言网站，可以是一个包含每种不同语言值的对象。
+当使用对象形式时，键必须是 BCP-47 标签（例如 `en`，`ar` 或 `zh-CN`）：
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 

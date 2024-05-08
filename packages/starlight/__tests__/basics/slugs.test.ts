@@ -95,10 +95,7 @@ describe('urlToSlug', () => {
 		);
 	});
 
-	// It is currently not possible to test this as stubbing BASE_URL is not supported due to
-	// `vite-plugin-env` controlling it and the lack of a way to pass in an Astro config using
-	// `getViteConfig()` from `astro/config`.
-	test.todo('returns slugs with a custom `base` option', () => {
+	test('returns slugs with a custom `base` option', () => {
 		vi.stubEnv('BASE_URL', '/base/');
 		expect(urlToSlug(new URL('https://example.com/base'))).toBe('');
 		expect(urlToSlug(new URL('https://example.com/base/slug'))).toBe('slug');
