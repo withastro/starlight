@@ -28,6 +28,7 @@ export const socialLinks = [
 	'slack',
 	'matrix',
 	'openCollective',
+	'hackerone',
 ] as const;
 
 export const SocialLinksSchema = () =>
