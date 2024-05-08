@@ -10,7 +10,7 @@ import { vitePluginStarlightUserConfig } from './integrations/virtual-user-confi
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
-import { getAstroI18nConfig } from './utils/i18n';
+import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration({
@@ -29,18 +29,25 @@ export default function StarlightIntegration({
 				logger,
 				updateConfig,
 			}) => {
-				// Run plugins to get the final configuration and any extra Astro integrations to load.
-				const { integrations, starlightConfig } = await runPlugins(opts, plugins, {
+				// Run plugins to get the updated configuration and any extra Astro integrations to load.
+				const pluginResult = await runPlugins(opts, plugins, {
 					command,
 					config,
 					isRestart,
 					logger,
 				});
+				// Process the Astro and Starlight configurations for i18n and translations.
+				const { astroI18nConfig, starlightConfig } = processI18nConfig(
+					pluginResult.starlightConfig,
+					config.i18n
+				);
+
+				const { integrations } = pluginResult;
 				userConfig = starlightConfig;
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
-				if (!userConfig.disable404Route) {
+				if (!starlightConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
 						entrypoint: '@astrojs/starlight/404.astro',
@@ -86,7 +93,7 @@ export default function StarlightIntegration({
 					experimental: {
 						globalRoutePriority: true,
 					},
-					i18n: getAstroI18nConfig(starlightConfig),
+					i18n: astroI18nConfig,
 				});
 			},
 
