@@ -56,6 +56,13 @@ The base path at which a language is served. `undefined` for root locale slugs.
 
 The site title for this page’s locale.
 
+#### `siteTitleHref`
+
+**Type:** `string`
+
+The value for the site title’s `href` attribute, linking back to the homepage, e.g. `/`.
+For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-CN/`.
+
 #### `slug`
 
 **Type:** `string`
