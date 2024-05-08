@@ -1,31 +1,19 @@
 ---
-import { BadgeComponentSchema } from '../schemas/badge';
+import { BadgeComponentSchema, type BadgeComponentProps } from '../schemas/badge';
 import { parseWithFriendlyErrors } from '../utils/error-map';
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = {
-	variant?: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default';
-	text: string;
-	size?: 'small' | 'medium' | 'large';
-	class?: string | undefined;
-} & HTMLAttributes<'span'>;
+type Props = BadgeComponentProps & HTMLAttributes<'span'>;
 
 const {
-	variant: variantProp,
-	text: textProp,
-	size: sizeProp,
-	class: classProp,
+	text,
+	variant,
+	size,
+	class: customClass,
 	...attrs
-} = Astro.props;
-
-const { text, variant, size, class: customClass } = parseWithFriendlyErrors(
+} = parseWithFriendlyErrors(
 	BadgeComponentSchema,
-	{
-		class: classProp,
-		variant: variantProp,
-		text: textProp,
-		size: sizeProp,
-	},
+	Astro.props,
 	'Invalid prop passed to the `<Badge/>` component.'
 );
 ---
