@@ -143,6 +143,34 @@ Starlight 期望你在所有语言中创建等效的页面。例如，如果你�
 
 如果某种语言尚未提供翻译，Starlight 将为读者显示该页面的默认语言（通过 `defaultLocale` 设置）的内容。例如，如果你尚未创建关于你的法语版本，并且你的默认语言是英语，那么访问 `/fr/about` 的访问者将看到来自 `/en/about` 的英语内容，并显示该页面尚未翻译的通知。这有助于你在默认语言中添加内容，然后在翻译人员有时间时逐步翻译它。
 
+## 翻译网站标题
+
+默认情况下，Starlight 会为所有语言使用相同的站点标题。
+如果你需要为每种语言自定义标题，你可以在 Starlight 的选项中将一个对象传递给 [`title`](/zh-cn/reference/configuration/#title-必填)：
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'My Docs',
++			title: {
++				en: 'My Docs',
++				'zh-CN': '我的文档',
++			},
+			defaultLocale: 'en',
+			locales: {
+				en: { label: 'English' },
+				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+			},
+		}),
+	],
+});
+```
+
 ## 翻译 Starlight 的 UI
 
 import LanguagesList from '~/components/languages-list.astro';
