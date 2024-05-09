@@ -4,7 +4,9 @@ import type { i18nSchemaOutput } from '../schemas/i18n';
 import { createTranslationSystem } from './createTranslationSystem';
 
 type UserI18nSchema = 'i18n' extends DataCollectionKey
-	? CollectionEntry<'i18n'>['data']
+	? CollectionEntry<'i18n'> extends { data: infer T }
+		? T
+		: i18nSchemaOutput
 	: i18nSchemaOutput;
 
 /** Get all translation data from the i18n collection, keyed by `id`, which matches locale. */
