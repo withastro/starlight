@@ -20,6 +20,7 @@ import MarkdownContent from 'virtual:starlight/components/MarkdownContent';
 import PageFrame from 'virtual:starlight/components/PageFrame';
 import PageSidebar from 'virtual:starlight/components/PageSidebar';
 import PageTitle from 'virtual:starlight/components/PageTitle';
+import ReadingTime from 'virtual:starlight/components/ReadingTime';
 import Sidebar from 'virtual:starlight/components/Sidebar';
 import SkipLink from 'virtual:starlight/components/SkipLink';
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
@@ -101,7 +102,11 @@ const pagefindEnabled =
 						) : (
 							<>
 								<ContentPanel {...Astro.props}>
-									<PageTitle {...Astro.props} />
+									<div>
+										<PageTitle {...Astro.props} />
+										<ReadingTime {...Astro.props} />
+									</div>
+
 									{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
 									{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
 								</ContentPanel>

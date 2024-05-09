@@ -143,6 +143,10 @@
       "types": "./components/PageTitle.astro.tsx",
       "import": "./components/PageTitle.astro"
     },
+    "./components/ReadingTime.astro": {
+      "types": "./components/ReadingTime.astro.tsx",
+      "import": "./components/ReadingTime.astro"
+    },
     "./components/ThemeSelect.astro": {
       "types": "./components/ThemeSelect.astro.tsx",
       "import": "./components/ThemeSelect.astro"

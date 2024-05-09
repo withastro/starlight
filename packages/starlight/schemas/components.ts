@@ -193,6 +193,13 @@ export function ComponentConfigSchema() {
 			PageTitle: z.string().default('@astrojs/starlight/components/PageTitle.astro'),
 
 			/**
+			 * Component containing the `Reading time` element for the current page.
+			 *
+			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/ReadingTime.astro `ReadingTime` default implementation}
+			 */
+			ReadingTime: z.string().default('@astrojs/starlight/components/ReadingTime.astro'),
+
+			/**
 			 * Notice displayed to users on pages where a translation for the current language is not
 			 * available. Only used on multilingual sites.
 			 *

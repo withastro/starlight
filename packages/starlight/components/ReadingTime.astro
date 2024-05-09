@@ -1,0 +1,21 @@
+---
+// Scripts
+/* import { getReadingTime } from '../utils/reading-time'; */
+
+import _getReadingTime from 'reading-time';
+
+export function getReadingTime(content: string) {
+	if (!content) return;
+
+	const cleaned_content = content.replace(/<\/?[^>]+(>|$)/g, '');
+	const readingTime = _getReadingTime(cleaned_content);
+	return readingTime.text;
+}
+
+import { Icon } from '../components';
+---
+
+<p style="display: flex; align-items: center; gap: 2px;">
+	<Icon name="document" />
+	<span>{getReadingTime(Astro.props.entry.body)}</span>
+</p>

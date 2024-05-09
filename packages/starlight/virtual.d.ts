@@ -40,6 +40,10 @@ declare module 'virtual:starlight/components/PageTitle' {
 	const PageTitle: typeof import('./components/PageTitle.astro').default;
 	export default PageTitle;
 }
+declare module 'virtual:starlight/components/ReadingTime' {
+	const ReadingTime: typeof import('./components/ReadingTime.astro').default;
+	export default ReadingTime;
+}
 declare module 'virtual:starlight/components/FallbackContentNotice' {
 	const FallbackContentNotice: typeof import('./components/FallbackContentNotice.astro').default;
 	export default FallbackContentNotice;

@@ -338,6 +338,13 @@ Component containing the `<h1>` element for the current page.
 
 Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default implementation.
 
+#### `ReadingTime`
+
+**Default component:** [`ReadingTime.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/ReadingTime.astro)
+
+Component containing the `ReadingTime` element for the current page.
+
+
 #### `DraftContentNotice`
 
 **Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
