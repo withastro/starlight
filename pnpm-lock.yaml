@@ -148,6 +148,9 @@ importers:
       astro-expressive-code:
         specifier: ^0.35.2
         version: 0.35.2(astro@4.3.5)
+      astro-social-share:
+        specifier: ^1.3.2
+        version: 1.3.2
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -2020,6 +2023,10 @@ packages:
     dependencies:
       astro: 4.3.5(@types/node@18.16.19)(typescript@5.4.5)
       rehype-expressive-code: 0.35.2
+    dev: false
+
+  /astro-social-share@1.3.2:
+    resolution: {integrity: sha512-QfJTJV/MZly5/ch9oFZskEl4xzFIIJWN3BVZ0RLEwTwKcjP8LZVsWU8w5TtBnClRwF3wt+o5CFKnU5Q/aOMYyg==}
     dev: false
 
   /astro@4.3.5(@types/node@18.16.19)(typescript@5.4.5):
