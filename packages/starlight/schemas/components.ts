@@ -183,6 +183,14 @@ export function ComponentConfigSchema() {
 			ContentPanel: z.string().default('@astrojs/starlight/components/ContentPanel.astro'),
 
 			/**
+			 * Component that renders the Social Share buttons
+			 *
+			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialShare.astro `SocialShare` default implementation}
+			 */
+			SocialShare: z.string().default('@astrojs/starlight/components/SocialShare.astro'),
+
+
+			/**
 			 * Component containing the `<h1>` element for the current page.
 			 *
 			 * Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default

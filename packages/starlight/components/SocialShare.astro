@@ -1,0 +1,197 @@
+---
+import Icon from '../user-components/Icon.astro';
+import project from 'virtual:starlight/project-context';
+import type { Props } from '../props';
+import {SocialShare} from "astro-social-share" 
+
+// const { labels } = Astro.props;
+---
+
+<site-share>
+	<button data-open-modal disabled>
+		<p> Share </p>
+	</button>
+
+	<dialog style="padding:0" aria-label="share">
+		<div class="dialog-frame" style="display:grid; place-items:center;">
+			<button data-close-modal class="sl-flex md:sl-hidden">
+				close
+			</button>
+			{
+				import.meta.env.DEV ? (
+					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
+						<p> Share is only available in production builds.
+							Try building and previewing the site to test it out locally.</p>
+					</div>
+				) : (
+					<div class="share-container">
+						<div id="starlight__share" />
+							<p style="text-align:center;">Share this page</p>
+							<SocialShare
+								description={Astro.props.entry.data.description || ''}
+								title={Astro.props.entry.data.title}
+							/> 
+						</div>
+				)
+				}
+		</div>
+	</dialog>
+</site-share>
+
+<script>
+	class SiteShare extends HTMLElement {
+		constructor() {
+			super();
+			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
+			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
+			const dialog = this.querySelector('dialog')!;
+			const dialogFrame = this.querySelector('.dialog-frame')!;
+
+			/** Close the modal if a user clicks on a link or outside of the modal. */
+			const onClick = (event: MouseEvent) => {
+				const isLink = 'href' in (event.target || {});
+				if (
+					isLink ||
+					(document.body.contains(event.target as Node) &&
+						!dialogFrame.contains(event.target as Node))
+				) {
+					closeModal();
+				}
+			};
+
+			const openModal = (event?: MouseEvent) => {
+				dialog.showModal();
+				document.body.toggleAttribute('data-share-modal-open', true);
+				this.querySelector('input')?.focus();
+				event?.stopPropagation();
+				window.addEventListener('click', onClick);
+			};
+
+			const closeModal = () => dialog.close();
+
+			openBtn.addEventListener('click', openModal);
+			openBtn.disabled = false;
+			closeBtn.addEventListener('click', closeModal);
+
+			dialog.addEventListener('close', () => {
+				document.body.toggleAttribute('data-share-modal-open', false);
+				window.removeEventListener('click', onClick);
+			});
+		}
+	}
+	customElements.define('site-share', SiteShare);
+</script>
+
+<style>
+
+	site-share {
+		display: contents;
+	}
+
+	button[data-open-modal] {
+		display: flex;
+		align-items:center;
+		gap:4px;
+		cursor: pointer;
+		padding: 0.5em;
+		margin: -0.5em;
+	}
+
+	button[data-open-modal]:hover {
+		opacity: 0.66;
+	}
+
+	@media (min-width: 50rem) {
+		button[data-open-modal] {
+			border: transparent;
+			border-radius: 0.5rem;
+			padding-inline-start: 0.75rem;
+			padding-inline-end: 1rem;
+			background:transparent;
+		}
+	}
+
+	dialog {
+		margin: 0;
+		background-color: var(--sl-color-gray-6);
+		border: 1px solid var(--sl-color-gray-5);
+		width: 100%;
+		max-width: 100%;
+		height: 100%;
+		max-height: 100%;
+		box-shadow: var(--sl-shadow-lg);
+	}
+	dialog[open] {
+		display: grid;
+	}
+
+	dialog::backdrop {
+		background-color: var(--sl-color-backdrop-overlay);
+		-webkit-backdrop-filter: blur(0.25rem);
+		backdrop-filter: blur(0.25rem);
+	}
+
+	.dialog-frame {
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	button[data-close-modal] {
+		position: absolute;
+		z-index: 1;
+		align-items: center;
+		align-self: flex-end;
+		height: calc(64px * var(--pagefind-ui-scale));
+		padding: 0.25rem;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+		color: var(--sl-color-text-accent);
+	}
+
+	#starlight__share {
+		--pagefind-ui-primary: var(--sl-color-accent-light);
+		--pagefind-ui-text: var(--sl-color-gray-2);
+		--pagefind-ui-font: var(--__sl-font);
+		--pagefind-ui-background: var(--sl-color-black);
+		--pagefind-ui-border: var(--sl-color-gray-5);
+		--pagefind-ui-border-width: 1px;
+		--sl-share-cancel-space: 5rem;
+	}
+
+	@media (min-width: 50rem) {
+		#starlight__share {
+			--sl-share-cancel-space: 0px;
+		}
+
+		dialog {
+			margin: 4rem auto auto;
+			border-radius: 0.5rem;
+			width: 90%;
+			max-width: 40rem;
+			height: max-content;
+			min-height: 15rem;
+			max-height: calc(100% - 8rem);
+		}
+
+		.dialog-frame {
+			padding: 1.5rem;
+		}
+	}
+</style>
+
+<style is:global>
+	.astro-social-share {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+		a.social-share-btn {
+				width: max-content;
+				min-width: 30px;
+				display: grid;
+				place-items: center;
+		}
+	}
+</style>

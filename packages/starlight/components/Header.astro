@@ -7,6 +7,7 @@ import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import SocialShare from 'virtual:starlight/components/SocialShare';
 
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
@@ -16,19 +17,20 @@ const shouldRenderSearch =
 ---
 
 <div class="header sl-flex">
-	<div class="title-wrapper sl-flex">
-		<SiteTitle {...Astro.props} />
-	</div>
-	<div class="sl-flex">
-		{shouldRenderSearch && <Search {...Astro.props} />}
-	</div>
-	<div class="sl-hidden md:sl-flex right-group">
-		<div class="sl-flex social-icons">
-			<SocialIcons {...Astro.props} />
+		<div class="title-wrapper sl-flex">
+				<SiteTitle {...Astro.props} />
 		</div>
-		<ThemeSelect {...Astro.props} />
-		<LanguageSelect {...Astro.props} />
-	</div>
+		<div class="sl-flex">
+				{shouldRenderSearch && <Search {...Astro.props} />}
+		</div>
+		<div class="sl-hidden md:sl-flex right-group">
+				<div class="sl-flex social-icons">
+						<SocialIcons {...Astro.props} />
+				</div>
+				<ThemeSelect {...Astro.props} />
+				<LanguageSelect {...Astro.props} />
+				<SocialShare {...Astro.props} />
+		</div>
 </div>
 
 <style>

@@ -36,6 +36,10 @@ declare module 'virtual:starlight/components/ContentPanel' {
 	const ContentPanel: typeof import('./components/ContentPanel.astro').default;
 	export default ContentPanel;
 }
+declare module 'virtual:starlight/components/SocialShare' {
+	const SocialShare: typeof import('./components/SocialShare.astro').default;
+	export default SocialShare;
+}
 declare module 'virtual:starlight/components/PageTitle' {
 	const PageTitle: typeof import('./components/PageTitle.astro').default;
 	export default PageTitle;

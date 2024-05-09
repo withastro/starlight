@@ -330,6 +330,12 @@ The default implementation uses the page’s [`banner`](/reference/frontmatter/#
 
 Layout component used to wrap sections of the main content column.
 
+#### `SocialShare`
+
+**Default component:** [`SocialShare.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialShare.astro)
+
+Component that renders the Social Share buttons
+
 #### `PageTitle`
 
 **Default component:** [`PageTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro)

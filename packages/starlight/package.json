@@ -135,6 +135,10 @@
       "types": "./components/ThemeProvider.astro.tsx",
       "import": "./components/ThemeProvider.astro"
     },
+    "./components/SocialShare.astro": {
+      "types": "./components/SocialShare.astro.tsx",
+      "import": "./components/SocialShare.astro"
+    },
     "./components/Header.astro": {
       "types": "./components/Header.astro.tsx",
       "import": "./components/Header.astro"
