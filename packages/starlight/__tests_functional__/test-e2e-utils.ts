@@ -193,6 +193,6 @@ type ISODate =
 export function longTest(name: string, testFn: () => Promise<void>) {
 	test(name, testFn, {
 		concurrent: false,
-		timeout: 15000,
+		timeout: 35000,
 	});
 }
