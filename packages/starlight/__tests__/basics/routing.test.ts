@@ -1,4 +1,4 @@
-import { type GetStaticPathItems } from 'astro';
+import { type GetStaticPathsResult } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import { expect, test, vi } from 'vitest';
@@ -45,18 +45,18 @@ test('routes have locale data added', () => {
 });
 
 test('paths contain normalized slugs for path parameters', () => {
-	const expectedPaths: GetStaticPathItems = [
+	const expectedPaths: GetStaticPathsResult = [
 		{
 			params: { slug: '404' },
-			props: routes[0],
+			props: routes[0]!,
 		},
 		{
 			params: { slug: undefined },
-			props: routes[1],
+			props: routes[1]!,
 		},
 		{
 			params: { slug: 'guides/authoring-content' },
-			props: routes[2],
+			props: routes[2]!,
 		},
 	];
 

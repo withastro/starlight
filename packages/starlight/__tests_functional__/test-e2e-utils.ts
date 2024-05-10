@@ -191,8 +191,8 @@ type ISODate =
 	| `${number}-${number}-${number}T${number}:${number}:${number}Z`;
 
 export function longTest(name: string, testFn: () => Promise<void>) {
-	test(name, testFn, {
+	test(name, {
 		concurrent: false,
 		timeout: 35000,
-	});
+	}, testFn);
 }
