@@ -126,8 +126,8 @@ type BaseSchema = BaseSchemaWithoutEffects | z.ZodEffects<BaseSchemaWithoutEffec
 type ExtendedSchema<T extends BaseSchema | never = never> = [T] extends [never]
 	? DefaultSchema
 	: T extends BaseSchema
-	? z.ZodIntersection<DefaultSchema, T>
-	: DefaultSchema;
+		? z.ZodIntersection<DefaultSchema, T>
+		: DefaultSchema;
 
 interface DocsSchemaOpts<T extends BaseSchema> {
 	/**

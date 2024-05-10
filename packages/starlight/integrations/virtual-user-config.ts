@@ -48,10 +48,10 @@ export function vitePluginStarlightUserConfig(
 			? 'src' in opts.logo
 				? `import src from ${resolveId(
 						opts.logo.src
-				  )}; export const logos = { dark: src, light: src };`
+					)}; export const logos = { dark: src, light: src };`
 				: `import dark from ${resolveId(opts.logo.dark)}; import light from ${resolveId(
 						opts.logo.light
-				  )}; export const logos = { dark, light };`
+					)}; export const logos = { dark, light };`
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {

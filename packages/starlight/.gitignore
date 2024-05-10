@@ -1,2 +1,3 @@
 # Astro generates this during tests, but we want to ignore it.
-src/env.d.ts
+.astro
+env.d.ts
