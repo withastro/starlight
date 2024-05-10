@@ -25,9 +25,21 @@ export default defineConfig({
 
 ### `title` (必填)
 
-**类型：** `string`
+**类型：** `string | Record<string, string>`
 
 设置你的网站标题。将用于元数据和浏览器标签标题。
+
+这个值可以是一个字符串，或者对于多语言网站，可以是一个包含每种不同语言值的对象。
+当使用对象形式时，键必须是 BCP-47 标签（例如 `en`，`ar` 或 `zh-CN`）：
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -438,6 +450,8 @@ starlight({
 	],
 });
 ```
+
+在 `head` 中的条目会直接转换为 HTML 元素，并不会经过 Astro 的 [脚本](https://docs.astro.build/zh-cn/guides/client-side-scripts/#脚本处理) 或 [样式](https://docs.astro.build/zh-cn/guides/styling/#在-astro-进行设计) 处理。如果你需要导入本地资源，如脚本、样式或图片，请[重写 Head 组件](/zh-cn/guides/overriding-components/#复用内置组件)。
 
 #### `HeadConfig`
 

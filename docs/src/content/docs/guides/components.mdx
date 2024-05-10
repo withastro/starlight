@@ -87,6 +87,50 @@ The code above generates the following tabs on the page:
 	</TabItem>
 </Tabs>
 
+#### Synced tabs
+
+Keep multiple tab groups synchronized by adding the `syncKey` attribute.
+
+All `<Tabs>` on a page with the same `syncKey` value will display the same active label. This allows your reader to choose once (e.g. their operating system or package manager), and see their choice reflected throughout the page.
+
+To synchronize related tabs, add an identical `syncKey` property to each `<Tabs>` component and ensure that they all use the same `<TabItem>` labels:
+
+```mdx 'syncKey="constellations"'
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Some stars:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Some exoplanets:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+The code above generates the following on the page:
+
+_Some stars:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Some exoplanets:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### Cards
 
 import { Card, CardGrid } from '@astrojs/starlight/components';

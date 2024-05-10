@@ -18,6 +18,7 @@
   "page.lastUpdated": "最近更新：",
   "page.previousLink": "上一页",
   "page.nextLink": "下一页",
+  "page.draft": "此内容为草稿，不会包含在生产版本中。",
   "404.text": "页面未找到。检查 URL 或尝试使用搜索栏。",
   "aside.note": "注意",
   "aside.tip": "提示",

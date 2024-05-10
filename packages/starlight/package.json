@@ -1,13 +1,14 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.21.5",
+  "version": "0.22.2",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
-    "test:e2e": "UNIT_TESTS=false E2E_TESTS=true vitest",
+    "test:functional": "UNIT_TESTS=false E2E_TESTS=true vitest",
     "test:all": "E2E_TESTS=true vitest",
     "test:coverage": "vitest run --coverage",
-    "test:coverage:all": "E2E_TESTS=true vitest --run --coverage"
+    "test:coverage:all": "E2E_TESTS=true vitest --run --coverage",
+    "test:e2e": "playwright install --with-deps chromium && playwright test"
   },
   "keywords": [
     "docs",
@@ -101,6 +102,10 @@
       "types": "./components/FallbackContentNotice.astro.tsx",
       "import": "./components/FallbackContentNotice.astro"
     },
+    "./components/DraftContentNotice.astro": {
+      "types": "./components/DraftContentNotice.astro.tsx",
+      "import": "./components/DraftContentNotice.astro"
+    },
     "./components/Page.astro": {
       "types": "./components/Page.astro.tsx",
       "import": "./components/Page.astro"
@@ -169,6 +174,10 @@
       "types": "./expressive-code.d.ts",
       "default": "./expressive-code.mjs"
     },
+    "./expressive-code/hast": {
+      "types": "./integrations/expressive-code/hast.d.ts",
+      "default": "./integrations/expressive-code/hast.mjs"
+    },
     "./index.astro": "./index.astro",
     "./indexSSR.astro": "./indexSSR.astro",
     "./404.astro": "./404.astro",
@@ -181,6 +190,7 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
     "@astrojs/node": "^7.0.0",
+    "@playwright/test": "^1.43.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.3.1",
     "astro": "^4.3.5",
@@ -193,7 +203,7 @@
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.3",
     "@types/mdast": "^4.0.3",
-    "astro-expressive-code": "^0.33.4",
+    "astro-expressive-code": "^0.35.2",
     "bcp-47": "^2.1.0",
     "hast-util-from-html": "^2.0.1",
     "hast-util-select": "^6.0.2",
@@ -203,6 +213,7 @@
     "mdast-util-to-markdown": "^2.1.0",
     "pagefind": "^1.0.3",
     "rehype": "^13.0.1",
+    "rehype-format": "^5.0.0",
     "remark-directive": "^3.0.0",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0",

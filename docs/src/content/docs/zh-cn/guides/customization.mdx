@@ -128,7 +128,7 @@ Starlight 在每个页面上显示目录，使读者更容易跳转到他们正�
 
 默认情况下，目录中包含 `<h2>` 和 `<h3>` 标题。使用全局 `tableOfContents` 中的 `minHeadingLevel` 和 `maxHeadingLevel` 选项更改要包含的标题级别。通过添加相应的 frontmatter 中的 `tableOfContents` 属性，在单个页面上覆盖这些默认值：
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4-6}
@@ -162,8 +162,8 @@ defineConfig({
 
 通过将 `tableOfContents` 选项设置为 `false` 来完全禁用目录：
 
-<Tabs>
-  <TabItem label=" frontmatter ">
+<Tabs syncKey="config-type">
+  <TabItem label="Frontmatter ">
 
 ```md {4}
 ---

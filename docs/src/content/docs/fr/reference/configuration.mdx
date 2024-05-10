@@ -25,9 +25,21 @@ Vous pouvez passer les options suivantes à l'intégration `starlight`.
 
 ### `title` (obligatoire)
 
-**Type :** `string`
+**Type :** `string | Record<string, string>`
 
 Définissez le titre de votre site web. Il sera utilisé dans les métadonnées et dans le titre de l'onglet du navigateur.
+
+La valeur peut être une chaîne de caractères, ou pour les sites multilingues, un objet avec des valeurs pour chacune des différentes locales.
+Lorsque vous utilisez la forme objet, les clés doivent être des étiquettes d'identification BCP-47 (par exemple `fr`, `ar`, ou `zh-CN`) :
+
+```ts
+starlight({
+	title: {
+		fr: 'Mon délicieux site de docs',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -443,6 +455,9 @@ starlight({
 	],
 });
 ```
+
+Les entrées dans `head` sont converties directement en éléments HTML et ne passent pas par le traitement de [script](https://docs.astro.build/fr/guides/client-side-scripts/#regroupement-de-script) ou de [style](https://docs.astro.build/fr/guides/styling/#styliser-avec-astro) d'Astro.
+Si vous avez besoin d'importer des ressources locales comme des scripts, des styles ou des images, [redéfinissez le composant Head](/fr/guides/overriding-components/#réutiliser-un-composant-intégré).
 
 #### `HeadConfig`
 

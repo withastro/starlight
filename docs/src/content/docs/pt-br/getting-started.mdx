@@ -15,7 +15,7 @@ Consulte as [instruções de instalação manual](/pt-br/manual-setup/) para adi
 
 Crie um novo projeto Astro + Starlight executando o seguinte comando em seu terminal:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -52,7 +52,7 @@ Quando estiver trabalhando localmente, o [servidor de desenvolvimento do Astro](
 
 Dentro do diretório do seu projeto, execute o seguinte comando para iniciar o servidor de desenvolvimento:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -83,43 +83,9 @@ Abra esta URL para começar a navegar no seu site.
 
 Starlight está pronto para você adicionar novo conteúdo, ou trazer seus arquivos existentes!
 
-#### Formatos de arquivo
+Adicione novas páginas ao seu site criando arquivos Markdown na pasta `src/content/docs/`.
 
-O Starlight suporta a escrita de conteúdo em Markdown e MDX sem nenhuma configuração extra.
-Você pode adicionar suporte para Markdoc instalando a [integração experimental Astro Markdoc](https://docs.astro.build/pt-br/guides/integrations-guide/markdoc/).
-
-#### Adicione páginas
-
-Adicione novas páginas ao seu site criando arquivos `.md` ou `.mdx` em `src/content/docs/`.
-Utilize subdiretórios para organizar seus arquivos, e para criar múltiplos segmentos de caminho.
-
-Por exemplo, a seguinte estrutura de arquivos vai gerar páginas `example.com/ola-mundo` e `example.com/guides/faq`:
-
-import { FileTree } from '@astrojs/starlight/components';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - ola-mundo.md
-
-</FileTree>
-
-#### Frontmatter com segurança de tipos
-
-Todas as páginas do Starlight compartilham um [conjunto comum de propriedades frontmatter](/pt-br/reference/frontmatter/) para controlar como a página aparece:
-
-```md
----
-title: Olá, Mundo!
-description: Essa é uma página no meu site com Starlight
----
-```
-
-Se você esquecer de algo importante, Starlight vai te informar.
+Leia mais sobre roteamento baseado em arquivos e suporte para arquivos MDX e Markdoc no guia de [“Páginas”](/pt-br/guides/pages/).
 
 ### Próximos passos
 
@@ -137,7 +103,7 @@ Certifique-se de atualizar Starlight constantemente!
 
 Starlight é uma integração Astro. Você pode atualiza-lo e outros pacotes Astro com o seguinte comando em seu terminal:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh

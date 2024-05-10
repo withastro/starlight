@@ -18,6 +18,7 @@
   "page.lastUpdated": "Laatst bewerkt:",
   "page.previousLink": "Vorige",
   "page.nextLink": "Volgende",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Pagina niet gevonden. Controleer de URL of probeer de zoekbalk.",
   "aside.note": "Opmerking",
   "aside.tip": "Tip",
