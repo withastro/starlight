@@ -3,7 +3,7 @@
   "search.label": "Ara",
   "search.shortcutLabel": "(Aramak için / bas)",
   "search.cancelLabel": "İptal",
-  "search.devWarning": "Arama yalnızca üretim derlemelerinde kullanılabilir. \nYerel bilgisayarınızda test etmek için siteyi derleyin ve önizleme yapın.",
+  "search.devWarning": "Arama yalnızca canlı sürümde kullanılabilir. \nYerel bilgisayarınızda test etmek için siteyi derleyin ve önizleme yapın.",
   "themeSelect.accessibleLabel": "Tema seç",
   "themeSelect.dark": "Koyu",
   "themeSelect.light": "Açık",
@@ -18,11 +18,11 @@
   "page.lastUpdated": "Son güncelleme:",
   "page.previousLink": "Önceki",
   "page.nextLink": "Sonraki",
-  "page.draft": "This content is a draft and will not be included in production builds.",
-  "404.text": "Sayfa bulunamadı. URL'i kontrol edin ya da arama çubuğunu kullanmayı deneyin.",
-  "aside.note": "Note",
-  "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "page.draft": "Bu içerik taslaktır ve canlı sürümde bulunmayacaktır.",
+  "404.text": "Sayfa bulunamadı. Bağlantıyı kontrol edin ya da arama çubuğunu kullanmayı deneyin.",
+  "aside.note": "Not",
+  "aside.tip": "İpucu",
+  "aside.caution": "Dikkat",
+  "aside.danger": "Tehlike",
+  "fileTree.directory": "Dizin"
 }
