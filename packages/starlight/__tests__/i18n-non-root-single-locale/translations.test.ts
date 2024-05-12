@@ -8,7 +8,7 @@ describe('built-in translations', () => {
 	});
 });
 
-describe.skip('useTranslations()', () => {
+describe('useTranslations()', () => {
 	test('works when no i18n collection is available', () => {
 		const t = useTranslations('fr');
 		expect(t).toBeTypeOf('function');
