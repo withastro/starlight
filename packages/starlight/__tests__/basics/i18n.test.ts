@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { assert, describe, expect, test } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { processI18nConfig, pickLang } from '../../utils/i18n';
 import type { AstroConfig } from 'astro';
@@ -23,6 +23,7 @@ describe('processI18nConfig', () => {
 
 		expect(astroI18nConfig.defaultLocale).toBe('en');
 		expect(astroI18nConfig.locales).toEqual(['en']);
+		assert(typeof astroI18nConfig.routing !== 'string');
 		expect(astroI18nConfig.routing?.prefixDefaultLocale).toBe(false);
 
 		// The Starlight configuration should not be modified.
@@ -46,6 +47,24 @@ describe('processI18nConfig', () => {
 				Hint:
 					Starlight uses its own fallback strategy showing readers content for a missing page in the default language.
 					See more at https://starlight.astro.build/guides/i18n/#fallback-content"
+			`);
+		});
+
+		test('throws an error when an Astro i18n `manual` routing option is used', () => {
+			expect(() =>
+				processI18nConfig(
+					config,
+					getAstroI18nTestConfig({
+						defaultLocale: 'en',
+						locales: ['en', 'fr'],
+						routing: 'manual',
+					})
+				)
+			).toThrowErrorMatchingInlineSnapshot(`
+				"[AstroUserError]:
+					Starlight is not compatible with the \`manual\` routing option in the Astro i18n configuration.
+				Hint:
+					"
 			`);
 		});
 
@@ -253,6 +272,9 @@ describe('processI18nConfig', () => {
 function getAstroI18nTestConfig(i18nConfig: AstroUserConfig['i18n']): AstroConfig['i18n'] {
 	return {
 		...i18nConfig,
-		routing: { prefixDefaultLocale: false, ...i18nConfig?.routing },
+		routing:
+			typeof i18nConfig?.routing !== 'string'
+				? { prefixDefaultLocale: false, ...i18nConfig?.routing }
+				: i18nConfig.routing,
 	} as AstroConfig['i18n'];
 }

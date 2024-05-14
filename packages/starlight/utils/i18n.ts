@@ -1,7 +1,6 @@
-import type { AstroUserConfig } from 'astro/config';
+import type { AstroConfig } from 'astro';
 import { AstroError } from 'astro/errors';
 import type { StarlightConfig } from './user-config';
-import type { AstroConfig } from 'astro';
 
 /** Informations about the built-in default locale used as a fallback when no locales are defined. */
 export const BuiltInDefaultLocale = makeBuiltInDefaultLocale('en');
@@ -50,7 +49,7 @@ export function processI18nConfig(
 }
 
 /** Generate an Astro i18n configuration based on a Starlight configuration. */
-function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroUserConfig['i18n']> {
+function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i18n']> {
 	return {
 		defaultLocale:
 			config.defaultLocale.lang ?? config.defaultLocale.locale ?? BuiltInDefaultLocale.lang,
@@ -68,6 +67,7 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroUserConfi
 				(config.isMultilingual && config.locales?.root === undefined) ||
 				// Sites with a single non-root language different from the built-in default locale.
 				(!config.isMultilingual && config.locales !== undefined),
+			redirectToDefaultLocale: false,
 		},
 	};
 }
@@ -76,16 +76,21 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroUserConfi
 function getStarlightI18nConfig(
 	astroI18nConfig: NonNullable<AstroConfig['i18n']>
 ): Pick<StarlightConfig, 'isMultilingual' | 'locales' | 'defaultLocale'> {
+	if (astroI18nConfig.routing === 'manual') {
+		throw new AstroError(
+			'Starlight is not compatible with the `manual` routing option in the Astro i18n configuration.'
+		);
+	}
+
+	const prefixDefaultLocale = astroI18nConfig.routing.prefixDefaultLocale;
 	const isMultilingual = astroI18nConfig.locales.length > 1;
-	const isMonolingualWithRootLocale =
-		!isMultilingual && !astroI18nConfig.routing.prefixDefaultLocale;
+	const isMonolingualWithRootLocale = !isMultilingual && !prefixDefaultLocale;
 
 	const locales = isMonolingualWithRootLocale
 		? undefined
 		: Object.fromEntries(
 				astroI18nConfig.locales.map((locale) => [
-					isDefaultAstroLocale(astroI18nConfig, locale) &&
-					!astroI18nConfig.routing.prefixDefaultLocale
+					isDefaultAstroLocale(astroI18nConfig, locale) && !prefixDefaultLocale
 						? 'root'
 						: isAstroLocaleExtendedConfig(locale)
 						? locale.path
