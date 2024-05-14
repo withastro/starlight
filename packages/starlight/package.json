@@ -180,14 +180,14 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^4.4.5"
+    "astro": "^4.8.0"
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
     "@playwright/test": "^1.43.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.4.0",
-    "astro": "^4.4.5",
+    "astro": "^4.8.0",
     "vitest": "^1.4.0"
   },
   "dependencies": {
