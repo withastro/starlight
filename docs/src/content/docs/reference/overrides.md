@@ -61,7 +61,7 @@ The site title for this page’s locale.
 **Type:** `string`
 
 The value for the site title’s `href` attribute, linking back to the homepage, e.g. `/`.
-For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-CN/`.
+For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-cn/`.
 
 #### `slug`
 
