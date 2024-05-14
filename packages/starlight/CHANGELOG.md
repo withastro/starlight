@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.22.3
+
+### Patch Changes
+
+- [#1838](https://github.com/withastro/starlight/pull/1838) [`9fe84754`](https://github.com/withastro/starlight/commit/9fe847544f1edb85bf5b25cd81db39227814335e) Thanks [@delucis](https://github.com/delucis)! - Adds extra information to the errors thrown by the `<Steps>` component to help locate misformatted code
+
+- [#1863](https://github.com/withastro/starlight/pull/1863) [`50be60bb`](https://github.com/withastro/starlight/commit/50be60bbc5cbc42db42e868b9e8f128b4dcbd6a5) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Update Vietnamese translation
+
+- [#1837](https://github.com/withastro/starlight/pull/1837) [`a33a1223`](https://github.com/withastro/starlight/commit/a33a12231772c1dc4b7cc2db3477a6802f3ef53e) Thanks [@delucis](https://github.com/delucis)! - Adds three new icons: `comment`, `comment-alt`, `heart`
+
+- [#1842](https://github.com/withastro/starlight/pull/1842) [`c7838636`](https://github.com/withastro/starlight/commit/c7838636edb8d60a2422ce76a2db511b9cebbb70) Thanks [@delucis](https://github.com/delucis)! - Moves the `href` used in the site title link to Starlight’s route data object. This makes it possible for overrides to change the title link while reusing Starlight’s default component implemenation.
+
+- [#1840](https://github.com/withastro/starlight/pull/1840) [`cb85563c`](https://github.com/withastro/starlight/commit/cb85563c9a3d4eb2925ad884e6a4e8698a15381b) Thanks [@MiahaCybersec](https://github.com/MiahaCybersec)! - Adds 1 new icon: `hackerone`
+
 ## 0.22.2
 
 ### Patch Changes
@@ -43,7 +57,7 @@
 
   ```css
   :root {
-    --sl-line-height: 1.8;
+  	--sl-line-height: 1.8;
   }
   ```
 
@@ -283,7 +297,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -303,14 +317,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -322,9 +336,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -397,14 +411,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -461,12 +475,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -814,16 +828,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1202,8 +1216,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
