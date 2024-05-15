@@ -3,6 +3,7 @@ import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
+	ContentEntryItem,
 	LinkHTMLAttributes,
 	SidebarItem,
 	SidebarLinkItem,
@@ -11,8 +12,9 @@ import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
-import { getLocaleRoutes, type Route } from './routing';
+import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
+import { AstroError } from 'astro/errors';
 
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
@@ -70,9 +72,11 @@ function configItemToEntry(
 	routes: Route[]
 ): SidebarEntry {
 	if ('link' in item) {
-		return linkFromConfig(item, locale, currentPathname);
+		return linkFromSidebarLinkItem(item, locale, currentPathname);
 	} else if ('autogenerate' in item) {
 		return groupFromAutogenerateConfig(item, locale, routes, currentPathname);
+	} else if ('slug' in item) {
+		return linkFromContentEntryItem(item, locale, currentPathname);
 	} else {
 		return {
 			type: 'group',
@@ -114,7 +118,7 @@ function groupFromAutogenerateConfig(
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
 /** Create a link entry from a user config object. */
-function linkFromConfig(
+function linkFromSidebarLinkItem(
 	item: SidebarLinkItem,
 	locale: string | undefined,
 	currentPathname: string
@@ -126,6 +130,27 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
+	return makeLink(href, label, currentPathname, item.badge, item.attrs);
+}
+
+/** Create a link entry from a user config object. */
+function linkFromContentEntryItem(
+	item: ContentEntryItem,
+	locale: string | undefined,
+	currentPathname: string
+) {
+	const slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
+	const entry = routes.find((entry) => slugWithLocale === entry.slug);
+	if (!entry) {
+		throw new AstroError(
+			`The slug \`${item.slug}\` specified in the sidebar object of the Starlight config does not exist. Update the Starlight config to reference a valid entry slug in the Starlight content collection.
+			
+Learn more at https://docs.astro.build/en/reference/api-reference/#getentry
+			`
+		);
+	}
+	let href = entry.slug;
+	const label = pickLang(item.translations, localeToLang(locale)) || entry.entry.data.title;
 	return makeLink(href, label, currentPathname, item.badge, item.attrs);
 }
 

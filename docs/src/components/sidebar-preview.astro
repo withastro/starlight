@@ -27,6 +27,20 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 			};
 		}
 
+		if ('slug' in item) {
+			return {
+				type: 'link',
+				label: item.slug,
+				// Empty hrefs are used to represent internal links that do not exist in the Starlight
+				// docs. Using a non-existing anchor link like `#_` will not trigger a page reload or any
+				// scrolling.
+				href: item.slug,
+				isCurrent: false,
+				badge: item.badge,
+				attrs: item.attrs ?? {},
+			};
+		}
+
 		return {
 			type: 'group',
 			label: item.label,

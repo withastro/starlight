@@ -163,7 +163,7 @@ test('errors with bad sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object } | { slug: string }\`
 			> Received \`{ "label": "Example", "href": "/" }\`"
 	`
 	);
@@ -188,7 +188,7 @@ test('errors with bad nested sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0.items.1**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object } | { slug: string }\`
 			> Received \`{ "label": "Example", "items": [ { "label": "Nested Example 1", "link": "/" }, { "label": "Nested Example 2", "link": true } ] }\`"
 	`);
 });

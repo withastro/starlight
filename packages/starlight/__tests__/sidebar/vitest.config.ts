@@ -36,5 +36,9 @@ export default defineVitestConfig({
 			label: 'API v1',
 			autogenerate: { directory: '/api/v1/' },
 		},
+		// A link using an entry's slug
+		{
+			slug: 'getting-started',
+		},
 	],
 });
