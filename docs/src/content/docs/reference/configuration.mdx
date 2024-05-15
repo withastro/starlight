@@ -25,9 +25,21 @@ You can pass the following options to the `starlight` integration.
 
 ### `title` (required)
 
-**type:** `string`
+**type:** `string | Record<string, string>`
 
 Set the title for your website. Will be used in metadata and in the browser tab title.
+
+The value can be a string, or for multilingual sites, an object with values for each different locale.
+When using the object form, the keys must be BCP-47 tags (e.g. `en`, `ar`, or `zh-CN`):
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -443,6 +455,9 @@ starlight({
 	],
 });
 ```
+
+Entries in `head` are converted directly to HTML elements and do not pass through Astro’s [script](https://docs.astro.build/en/guides/client-side-scripts/#script-processing) or [style](https://docs.astro.build/en/guides/styling/#styling-in-astro) processing.
+If you need to import local assets like scripts, styles, or images, [override the Head component](/guides/overriding-components/#reuse-a-built-in-component).
 
 #### `HeadConfig`
 

@@ -16,4 +16,4 @@ const { Content, headings } = await Astro.props.entry.render();
 const route = generateRouteData({ props: { ...Astro.props, headings }, url: Astro.url });
 ---
 
-<Page {...route}><Content /></Page>
+<Page {...route}><Content frontmatter={Astro.props.entry.data} /></Page>

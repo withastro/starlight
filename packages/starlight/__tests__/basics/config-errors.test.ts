@@ -17,6 +17,7 @@ test('parses valid config successfully', () => {
 		  "components": {
 		    "Banner": "@astrojs/starlight/components/Banner.astro",
 		    "ContentPanel": "@astrojs/starlight/components/ContentPanel.astro",
+		    "DraftContentNotice": "@astrojs/starlight/components/DraftContentNotice.astro",
 		    "EditLink": "@astrojs/starlight/components/EditLink.astro",
 		    "FallbackContentNotice": "@astrojs/starlight/components/FallbackContentNotice.astro",
 		    "Footer": "@astrojs/starlight/components/Footer.astro",
@@ -66,7 +67,9 @@ test('parses valid config successfully', () => {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
 		  },
-		  "title": "",
+		  "title": {
+		    "en": "",
+		  },
 		  "titleDelimiter": "|",
 		}
 	`);
@@ -80,12 +83,13 @@ test('errors if title is missing', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Required"
-	`
+			**title**: Did not match union.
+			> Required"
+		`
 	);
 });
 
-test('errors if title value is not a string', () => {
+test('errors if title value is not a string or an Object', () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({ title: 5 } as any)
 	).toThrowErrorMatchingInlineSnapshot(
@@ -93,7 +97,8 @@ test('errors if title value is not a string', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Expected type \`"string"\`, received \`"number"\`"
+			**title**: Did not match union.
+			> Expected type \`"string" | "object"\`, received \`"number"\`"
 	`
 	);
 });
@@ -106,7 +111,7 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'slack' | 'matrix' | 'openCollective', received 'unknown'
+			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne', received 'unknown'
 			**social.unknown**: Invalid url"
 	`
 	);

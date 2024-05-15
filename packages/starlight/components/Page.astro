@@ -11,6 +11,7 @@ import '../style/util.css';
 import Banner from 'virtual:starlight/components/Banner';
 import ContentPanel from 'virtual:starlight/components/ContentPanel';
 import FallbackContentNotice from 'virtual:starlight/components/FallbackContentNotice';
+import DraftContentNotice from 'virtual:starlight/components/DraftContentNotice';
 import Footer from 'virtual:starlight/components/Footer';
 import Head from 'virtual:starlight/components/Head';
 import Header from 'virtual:starlight/components/Header';
@@ -101,6 +102,7 @@ const pagefindEnabled =
 							<>
 								<ContentPanel {...Astro.props}>
 									<PageTitle {...Astro.props} />
+									{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
 									{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
 								</ContentPanel>
 								<ContentPanel {...Astro.props}>

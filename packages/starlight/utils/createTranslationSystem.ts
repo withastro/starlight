@@ -2,8 +2,8 @@ import type { i18nSchemaOutput } from '../schemas/i18n';
 import builtinTranslations from '../translations/index';
 import type { StarlightConfig } from './user-config';
 
-export function createTranslationSystem(
-	userTranslations: Record<string, i18nSchemaOutput>,
+export function createTranslationSystem<T extends i18nSchemaOutput>(
+	userTranslations: Record<string, T>,
 	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>
 ) {
 	/** User-configured default locale. */
@@ -67,18 +67,20 @@ function localeToLang(
 	return lang || defaultLang || 'en';
 }
 
+type BuiltInStrings = (typeof builtinTranslations)['en'];
+
 /** Build a dictionary by layering preferred translation sources. */
-function buildDictionary(
-	base: (typeof builtinTranslations)[string],
-	...dictionaries: (i18nSchemaOutput | undefined)[]
-) {
+function buildDictionary<T extends Record<string, string | undefined>>(
+	base: BuiltInStrings,
+	...dictionaries: (T | BuiltInStrings | undefined)[]
+): BuiltInStrings & T {
 	const dictionary = { ...base };
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
 		for (const key in dict) {
-			const value = dict[key];
+			const value = dict[key as keyof typeof dict];
 			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}
-	return dictionary;
+	return dictionary as BuiltInStrings & T;
 }

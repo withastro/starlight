@@ -18,10 +18,14 @@
   "page.lastUpdated": "Последнее обновление:",
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
+  "page.draft": "Этот контент является черновиком и не будет добавлен в производственные сборки.",
   "404.text": "Страница не найдена. Проверьте URL или используйте поиск по сайту.",
   "aside.note": "Заметка",
-  "aside.tip": "Знали ли вы?",
+  "aside.tip": "Совет",
   "aside.caution": "Осторожно",
   "aside.danger": "Опасно",
-  "fileTree.directory": "Директория"
+  "fileTree.directory": "Директория",
+  "expressiveCode.copyButtonCopied": "Скопировано!",
+  "expressiveCode.copyButtonTooltip": "Копировать",
+  "expressiveCode.terminalWindowFallbackTitle": "Окно терминала"
 }

@@ -7,8 +7,8 @@ describe('slugToLocaleData', () => {
 		expect(slugToLocaleData('fr/dir/test').locale).toBe('fr');
 	});
 	test('returns default locale "fr" lang', () => {
-		expect(slugToLocaleData('fr/test').lang).toBe('fr');
-		expect(slugToLocaleData('fr/dir/test').lang).toBe('fr');
+		expect(slugToLocaleData('fr/test').lang).toBe('fr-CA');
+		expect(slugToLocaleData('fr/dir/test').lang).toBe('fr-CA');
 	});
 	test('returns default locale "ltr" dir', () => {
 		expect(slugToLocaleData('fr/test').dir).toBe('ltr');
@@ -18,7 +18,7 @@ describe('slugToLocaleData', () => {
 
 describe('localeToLang', () => {
 	test('returns lang for default locale', () => {
-		expect(localeToLang('fr')).toBe('fr');
+		expect(localeToLang('fr')).toBe('fr-CA');
 	});
 });
 

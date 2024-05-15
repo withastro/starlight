@@ -87,6 +87,51 @@ Le code ci-dessus génère les onglets suivants sur la page :
 	</TabItem>
 </Tabs>
 
+#### Onglets synchronisés
+
+Conservez plusieurs groupes d'onglets synchronisés en ajoutant l'attribut `syncKey`.
+
+Tous les composants `<Tabs>` sur une page avec la même valeur `syncKey` afficheront le même label actif.
+Cela permet à votre lecteur de choisir une fois (par exemple, leur système d'exploitation ou leur gestionnaire de paquets) et de voir leur choix reflété sur l'ensemble de la page.
+
+Pour synchroniser des onglets liés, ajoutez une propriété `syncKey` identique à chaque composant `<Tabs>` et assurez-vous qu'ils utilisent tous les mêmes libellés de `<TabItem>` :
+
+```mdx 'syncKey="constellations"'
+# src/content/docs/exemple.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Quelques étoiles :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Bételgeuse</TabItem>
+	<TabItem label="Gémeaux">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Quelques exoplanètes :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gémeaux">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+Le code ci-dessus génère les onglets suivants sur la page :
+
+_Quelques étoiles :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Bételgeuse</TabItem>
+	<TabItem label="Gémeaux">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Quelques exoplanètes :_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gémeaux">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### Cartes
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -385,7 +430,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
 
-Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionnellement inclure un attribut `label`, `size` et `color`.
+Chaque `<Icon>` nécessite un attribut [`name`](#toutes-les-icônes) et peut optionnellement inclure un `label` pour fournir un contexte aux lecteurs d'écran.
+Les attributs `size` et `color` peuvent être utilisés pour ajuster l'apparence de l'icône en utilisant des unités et valeurs de couleur CSS.
 
 ```mdx
 # src/content/docs/exemple.mdx
@@ -393,11 +439,13 @@ Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionnellem
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 Le code ci-dessus génère ce qui suit sur la page :
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### Toutes les icônes
 

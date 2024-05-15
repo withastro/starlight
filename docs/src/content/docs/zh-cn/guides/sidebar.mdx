@@ -19,11 +19,11 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-      - reference/
-        - configuration.md
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
 
 </FileTree>
 
@@ -32,17 +32,15 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 <SidebarPreview
 	config={[
 		{
-			label: 'guides',
+			label: 'constellations',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '仙女座', link: '' },
+				{ label: '猎户座', link: '' },
 			],
 		},
 		{
-			label: 'reference',
-			items: [
-				{ label: 'Configuration Reference', link: '/reference/configuration/' },
-			],
+			label: 'stars',
+			items: [{ label: '参宿四', link: '' }],
 		},
 	]}
 />
@@ -62,10 +60,10 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// 指向 CSS & Styling 指南的链接
-		{ label: 'CSS & Styling', link: '/zh-cn/guides/css-and-tailwind/' },
-		// 指向 Astro 官网的外部链接
-		{ label: 'Astro', link: 'https://astro.build/' },
+		// 指向木卫三卫星页面的链接。
+		{ label: '木卫三', link: '/moons/ganymede/' },
+		// 指向 NASA 网站的外部链接。
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
 });
 ```
@@ -74,8 +72,8 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS & Styling', link: '/zh-cn/guides/css-and-tailwind/' },
-		{ label: 'Astro', link: 'https://astro.build/' },
+		{ label: '木卫三', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
 
@@ -91,19 +89,19 @@ starlight({
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// 一个名为 "Guides" 的链接分组
+		// 一个名为 "星座" 的链接分组
 		{
-			label: 'Guides',
+			label: '星座',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
-				// 一个嵌套的链接分组
+				{ label: '船底座', link: '/constellations/carina/' },
+				{ label: '半人马座', link: '/constellations/centaurus/' },
+				// 星座周期的嵌套链接分组。
 				{
-					label: 'Styling',
+					label: '周期',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: '仙女座', link: '/constellations/andromeda/' },
+						{ label: '猎户座', link: '/constellations/orion/' },
+						{ label: '小熊座', link: '/constellations/ursa-minor/' },
 					],
 				},
 			],
@@ -117,16 +115,16 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星座',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'Styling',
+					label: '周期',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						{ label: '仙女座', link: '' },
+						{ label: '猎户座', link: '' },
+						{ label: '小熊座', link: '' },
 					],
 				},
 			],
@@ -146,9 +144,9 @@ Starlight 可以根据文档目录在侧边栏中自动生成一个分组。当�
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
-			// 自动生成一个链接分组，用于 'guides' 目录。
-			autogenerate: { directory: 'guides' },
+			label: '星座',
+			// 自动生成一个链接分组，用于 '星座' 目录。
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -161,11 +159,11 @@ starlight({
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-        - advanced/
-          - project-structure.md
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
 
 </FileTree>
 
@@ -174,15 +172,13 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星座',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'advanced',
-					items: [
-						{ label: 'Project Structure', link: '/guides/project-structure/' },
-					],
+					label: 'seasonal',
+					items: [{ label: '仙女座', link: '' }],
 				},
 			],
 		},
@@ -216,15 +212,15 @@ sidebar:
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '指南',
 			items: [
-				{ label: '一个页面', link: '#' },
+				{ label: '一个页面', link: '' },
 				{
 					label: '自定义侧边栏 label ',
-					link: '#',
+					link: '',
 					badge: { text: 'New', variant: 'tip' },
 				},
-				{ label: '其他页面', link: '#' },
+				{ label: '其他页面', link: '' },
 			],
 		},
 	]}
@@ -242,21 +238,21 @@ sidebar:
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: '星星',
 			items: [
-				// 带有 "New" 徽章的链接。
+				// 带有 "Supergiant" 徽章的链接。
 				{
-					label: 'Components',
-					link: '/guides/components/',
-					badge: 'New',
+					label: '英仙座',
+					link: '/stars/persei/',
+					badge: 'Supergiant',
 				},
 			],
 		},
-		// 一个带有 "Deprecated" 徽章的自动生成分组。
+		// 带有 "Outdated" 徽章的自动生成分组。
 		{
-			label: 'Reference',
-			badge: 'Deprecated',
-			autogenerate: { directory: 'reference' },
+			label: '卫星',
+			badge: 'Outdated',
+			autogenerate: { directory: 'moons' },
 		},
 	],
 });
@@ -267,30 +263,30 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星星',
 			items: [
 				{
-					label: 'Components',
-					link: '/guides/components/',
-					badge: { text: 'New', variant: 'default' },
+					label: '英仙座',
+					link: '',
+					badge: { text: '超巨星', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Reference',
-			badge: { text: 'Deprecated', variant: 'default' },
+			label: '卫星',
+			badge: { text: 'Outdated', variant: 'default' },
 			items: [
 				{
-					label: 'Configuration Reference',
-					link: '/reference/configuration/',
+					label: '木卫一',
+					link: '',
 				},
 				{
-					label: 'Frontmatter Reference',
-					link: '/reference/frontmatter/',
+					label: '木卫二',
+					link: '',
 				},
 				{
-					label: 'Overrides Reference',
-					link: '/reference/overrides/',
+					label: '木卫三',
+					link: '',
 				},
 			],
 		},
@@ -308,13 +304,13 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: '星星',
 			items: [
-				// 一个带有黄色 "Experimental" 徽章的链接。
+				// 一个带有黄色 "Stub" 徽章的链接。
 				{
-					label: 'Components',
-					link: '/guides/components/',
-					badge: { text: 'Experimental', variant: 'caution' },
+					label: '天狼星',
+					link: '/stars/sirius/',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -327,12 +323,12 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星星',
 			items: [
 				{
-					label: 'Components',
-					link: '/guides/components/',
-					badge: { text: 'Experimental', variant: 'caution' },
+					label: '天狼星',
+					link: '',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -349,12 +345,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: '资源',
 			items: [
-				// 一个指向 Astro 文档的在新标签页打开的外部链接。
+				// 一个指向 NASA 网站的在新标签页打开的外部链接。
 				{
-					label: 'Astro Docs',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: { target: '_blank', style: 'font-style: italic' },
 				},
 			],
@@ -368,11 +364,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '资源',
 			items: [
 				{
-					label: 'Astro Docs',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: {
 						target: '_blank',
 						style: 'font-style: italic',
@@ -393,24 +389,24 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: '星座',
 			translations: {
-				'zh-CN': '指南',
+				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Components',
+					label: '仙女座',
 					translations: {
-						'zh-CN': '组件',
+						'pt-BR': 'Andrômeda',
 					},
-					link: '/zh-cn/guides/components/',
+					link: '/constellations/andromeda/',
 				},
 				{
-					label: 'Internationalization (i18n)',
+					label: '天蝎座',
 					translations: {
-						'zh-CN': '国际化 (i18n)',
+						'pt-BR': 'Escorpião',
 					},
-					link: '/zh-cn/guides/i18n/',
+					link: '/constellations/scorpius/',
 				},
 			],
 		},
@@ -418,15 +414,15 @@ starlight({
 });
 ```
 
-浏览简体中文文档将生成以下侧边栏：
+浏览巴西葡萄牙语文档将生成以下侧边栏：
 
 <SidebarPreview
 	config={[
 		{
-			label: '指南',
+			label: 'Constelação',
 			items: [
-				{ label: '组件', link: '/zh-cn/guides/components/' },
-				{ label: '国际化 (i18n)', link: '/zh-cn/guides/i18n/' },
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
 			],
 		},
 	]}
@@ -440,12 +436,12 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: '星座',
 			// 默认折叠分组
 			collapsed: true,
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '仙女座', link: '/constellations/andromeda/' },
+				{ label: '猎户座', link: '/constellations/orion/' },
 			],
 		},
 	],
@@ -457,11 +453,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星座',
 			collapsed: true,
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '仙女座', link: '' },
+				{ label: '猎户座', link: '' },
 			],
 		},
 	]}
@@ -473,10 +469,10 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
+			label: '星座',
 			// 默认折叠分组及其自动生成的子组。
 			collapsed: true,
-			autogenerate: { directory: 'guides' },
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -487,17 +483,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星座',
 			collapsed: true,
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'advanced',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{ label: 'Project Structure', link: '/guides/project-structure/' },
-					],
+					items: [{ label: '仙女座', link: '' }],
 				},
 			],
 		},
@@ -510,10 +504,10 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Guides',
-			// 不折叠 "Guides" 分组，但折叠其自动生成的子组。
+			label: '星座',
+			// 不折叠 "星座" 分组，但折叠其自动生成的子组。
 			collapsed: false,
-			autogenerate: { directory: 'guides', collapsed: true },
+			autogenerate: { directory: 'Constellations', collapsed: true },
 		},
 	],
 });
@@ -524,16 +518,14 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Guides',
+			label: '星座',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: '船底座', link: '' },
+				{ label: '半人马座', link: '' },
 				{
-					label: 'advanced',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{ label: 'Project Structure', link: '/guides/project-structure/' },
-					],
+					items: [{ label: '仙女座', link: '' }],
 				},
 			],
 		},
