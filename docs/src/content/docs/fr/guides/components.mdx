@@ -430,7 +430,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight fournit un ensemble d'icônes courantes que vous pouvez afficher dans votre contenu à l'aide du composant `<Icon>`.
 
-Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionnellement inclure un attribut `label`, `size` et `color`.
+Chaque `<Icon>` nécessite un attribut [`name`](#toutes-les-icônes) et peut optionnellement inclure un `label` pour fournir un contexte aux lecteurs d'écran.
+Les attributs `size` et `color` peuvent être utilisés pour ajuster l'apparence de l'icône en utilisant des unités et valeurs de couleur CSS.
 
 ```mdx
 # src/content/docs/exemple.mdx
@@ -438,11 +439,13 @@ Chaque `<Icon>` nécessite un [`name`](#toutes-les-icônes) et peut optionnellem
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 Le code ci-dessus génère ce qui suit sur la page :
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### Toutes les icônes
 
