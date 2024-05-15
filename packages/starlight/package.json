@@ -186,9 +186,9 @@
     "@astrojs/markdown-remark": "^4.2.1",
     "@playwright/test": "^1.43.1",
     "@types/node": "^18.16.19",
-    "@vitest/coverage-v8": "^1.4.0",
+    "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.8.0",
-    "vitest": "^1.4.0"
+    "vitest": "^1.6.0"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.0.0",

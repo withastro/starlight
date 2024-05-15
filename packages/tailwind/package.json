@@ -23,9 +23,9 @@
     "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^1.4.0",
+    "@vitest/coverage-v8": "^1.6.0",
     "postcss": "^8.4.33",
-    "vitest": "^1.4.0"
+    "vitest": "^1.6.0"
   },
   "peerDependencies": {
     "@astrojs/starlight": ">=0.9.0",
