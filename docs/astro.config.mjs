@@ -88,24 +88,7 @@ export default defineConfig({
 					},
 					items: [
 						{
-							label: 'Getting Started',
-							link: 'getting-started',
-							translations: {
-								de: 'Erste Schritte',
-								es: 'Empezando',
-								ja: '入門',
-								fr: 'Mise en route',
-								it: 'Iniziamo',
-								id: 'Memulai',
-								'zh-CN': '开始使用',
-								'pt-BR': 'Introdução',
-								'pt-PT': 'Introdução',
-								ko: '시작하기',
-								tr: 'Başlarken',
-								ru: 'Введение',
-								hi: 'पहले कदम',
-								uk: 'Вступ',
-							},
+							slug: 'getting-started',
 						},
 						{
 							label: 'Manual Setup',
