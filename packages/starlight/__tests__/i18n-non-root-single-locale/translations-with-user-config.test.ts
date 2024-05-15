@@ -4,7 +4,7 @@ import { useTranslations } from '../../utils/translations';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
-		i18n: [['fr', { 'page.editLink': 'Modifier cette doc!' }]],
+		i18n: [['fr-CA', { 'page.editLink': 'Modifier cette doc!' }]],
 	})
 );
 

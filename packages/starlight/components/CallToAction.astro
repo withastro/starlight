@@ -7,7 +7,7 @@ interface Props {
 	variant: 'primary' | 'secondary' | 'minimal';
 	link: string;
 	icon?: undefined | { type: 'icon'; name: keyof typeof Icons } | { type: 'raw'; html: string };
-	attrs?: Omit<HTMLAttributes<'a'>, 'href'>;
+	attrs?: Omit<HTMLAttributes<'a'>, 'href'> | undefined;
 }
 
 const { link, variant, icon } = Astro.props;

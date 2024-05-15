@@ -50,6 +50,19 @@ Starlight 会将以下参数传递给你的自定义组件。
 
 当前语言的根路径。对于默认语言来说是 `undefined`。
 
+#### `siteTitle`
+
+**类型：** `string`
+
+根据页面语言设置的网站标题。
+
+#### `siteTitleHref`
+
+**类型：** `string`
+
+网站标题的 `href` 属性值，链接回首页，例如 `/`。
+对于多语言站点，将包含当前的语言环境，例如 `/en/` 或 `/zh-cn/`。
+
 #### `slug`
 
 **类型：** `string`
@@ -218,7 +231,7 @@ entry: {
 **默认组件：** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 在每个页面顶部显示的导航栏组件。
-默认实现显示了 [`<SiteTitle />`](#sitetitle)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect) 和 [`<LanguageSelect />`](#languageselect)。
+默认实现显示了 [`<SiteTitle />`](#sitetitle-1)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect) 和 [`<LanguageSelect />`](#languageselect)。
 
 #### `SiteTitle`
 
@@ -331,6 +344,12 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 包含当前页面的 `<h1>` 元素的组件。
 
 自定义实现应确保在 `<h1>` 元素上设置 `id="_top"`，就像默认实现中一样。
+
+#### `DraftContentNotice`
+
+**默认组件：** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+在开发过程中，当当前页面被标记为草稿时，向用户显示的通知。
 
 #### `FallbackContentNotice`
 
