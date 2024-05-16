@@ -174,8 +174,7 @@
 }
 
 /* <details> styles inside asides */
-.sl-markdown-content .starlight-aside details:not(:where(.not-content *)),
-.sl-markdown-content .starlight-aside details[open]:hover:not(:where(.not-content *)) {
+.sl-markdown-content .starlight-aside details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-asides-border);
 }
 .sl-markdown-content .starlight-aside details[open]:not(:where(.not-content *)),
