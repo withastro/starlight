@@ -415,7 +415,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你的内容中显示。
 
-每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择包含 `label`、`size` 和 `color` 属性。
+每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择性地包含一个 `label` 来为屏幕阅读器提供上下文。
+`size` 和 `color` 属性可以使用 CSS 单位和颜色值来调整图标的外观。
 
 ```mdx
 # src/content/docs/example.mdx
@@ -423,11 +424,13 @@ Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 以上代码在页面上生成了以下内容：
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### 所有图标
 
