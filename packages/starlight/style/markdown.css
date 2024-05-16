@@ -115,8 +115,7 @@
 }
 
 /* <details> and <summary> styles */
-.sl-markdown-content details:not(:where(.not-content *)),
-.sl-markdown-content details[open]:hover:not(:where(.not-content *)) {
+.sl-markdown-content details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-gray-4);
 
 	border-inline-start: 1px solid var(--sl-details-border-color);
