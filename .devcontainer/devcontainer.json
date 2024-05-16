@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "pnpm install",
+  "postCreateCommand": "pnpm config set store-dir /home/node/.local/share/pnpm && pnpm install --frozen-lockfile",
   "waitFor": "postCreateCommand",
   "customizations": {
     "codespaces": {
