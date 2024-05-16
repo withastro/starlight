@@ -368,17 +368,3 @@ Starlight supports all other Markdown authoring syntax, such as lists and tables
 ## Advanced Markdown and MDX configuration
 
 Starlight uses Astro’s Markdown and MDX renderer built on remark and rehype. You can add support for custom syntax and behavior by adding `remarkPlugins` or `rehypePlugins` in your Astro config file. See [“Configuring Markdown and MDX”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) in the Astro docs to learn more.
-
-## Test
-
-I'm a test in a sentence https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com.
-
-Then, let's check some unordered lists:
-- https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com
-- https://github.com/withastro/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-- https://github.com/withastro/starlight
-
-Then, let's check some ordered lists:
-1. https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com
-1. https://github.com/withastro/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-1. https://github.com/withastro/starlight

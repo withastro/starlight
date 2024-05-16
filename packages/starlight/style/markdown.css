@@ -19,7 +19,6 @@
 }
 
 .sl-markdown-content li:not(:where(.not-content *)) {
-	background: rgba(255, 0, 0, .5);
 	overflow-wrap: anywhere;
 }
 
