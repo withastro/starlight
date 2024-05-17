@@ -370,8 +370,6 @@ Bir kod bloğunun zorunlu olmayan başlığı, kod bloğunun açık tırnak işa
 
 Starlight, liste ve tablo gibi diğer tüm Markdown yazım sözdizimini destekler. [Markdown Rehberi'nden Markdown Kopya Kağıdı](https://www.markdownguide.org/cheat-sheet/)'na tüm Markdown sözdizimi elemanlarına hızlı bir genel bakış için göz atın.
 
-Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) for a quick overview of all the Markdown syntax elements.
-
-## Advanced Markdown and MDX configuration
+## İleri Düzey Markdown ve MDX yapılandırması
 
 Starlight, Astro'nun remark ve rehype üzerine kurulu Markdown ve MDX işleyicisini kullanır. Astro konfigürasyon dosyanıza `remarkPlugins` ya da `rehypePlugins` ekleyerek özel sözdizimi ve davranışlar için destek ekleyebilirsiniz. Daha fazlasını öğrenmek için Astro dokümantasyonundaki [“Markdown ve MDX Yapılandırma”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) yazısına bakın.
