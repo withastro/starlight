@@ -1,5 +1,42 @@
 # @astrojs/starlight
 
+## 0.23.0
+
+### Minor Changes
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - Updates `@astrojs/mdx` to v3 and enables MDX optimization by default
+
+  ⚠️ **Potentially breaking change:** MDX optimization speeds up builds (Starlight’s docs are building ~40% faster for example), but restricts some advanced MDX features. See full details in the [MDX optimization documentation](https://docs.astro.build/en/guides/integrations-guide/mdx/#optimize).
+
+  Most Starlight users should be unaffected, but if you are using MDX files outside of Starlight pages with the `components` prop, you may see issues. You can disable optimization by adding MDX manually to your `integrations` array in `astro.config.mjs`:
+
+  ```diff
+  import { defineConfig } from 'astro/config';
+  + import mdx from '@astrojs/mdx';
+  import starlight from '@astrojs/starlight';
+
+  // https://astro.build/config
+  export default defineConfig({
+  	integrations: [
+  		starlight({
+  			title: 'My docs',
+  			// ...
+  		}),
+  +		mdx(),
+  	],
+  });
+  ```
+
+- [#1735](https://github.com/withastro/starlight/pull/1735) [`1a9ab50d`](https://github.com/withastro/starlight/commit/1a9ab50d458d6274994ffe66a23fe7a30681337a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds custom styles for `<details>` and `<summary>` elements in Markdown content.
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now 4.8.6
+
+  Please update Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.22.4
 
 ### Patch Changes
@@ -69,7 +106,7 @@
 
   ```css
   :root {
-    --sl-line-height: 1.8;
+  	--sl-line-height: 1.8;
   }
   ```
 
@@ -309,7 +346,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -329,14 +366,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -348,9 +385,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -423,14 +460,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -487,12 +524,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -840,16 +877,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1228,8 +1265,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
