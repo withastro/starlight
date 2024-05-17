@@ -128,7 +128,7 @@
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-details-border-color--hover);
+	border-color: var(--sl-details-border-color--hover);
 }
 .sl-markdown-content summary:not(:where(.not-content *)) {
 	color: var(--sl-color-white);
