@@ -50,6 +50,12 @@ Starlight будет передавать следующие параметры 
 
 Базовый путь, по которому обслуживается язык. `undefined` для слагов корневой локали.
 
+#### `siteTitle`
+
+**тип:** `string`
+
+Название сайта для локали этой страницы.
+
 #### `slug`
 
 **тип:** `string`
@@ -218,7 +224,7 @@ entry: {
 **Стандартный компонент:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Компонент заголовка отображается в верхней части каждой страницы.
-По умолчанию отображаются [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), и [`<LanguageSelect />`](#languageselect).
+По умолчанию отображаются [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), и [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
@@ -331,6 +337,12 @@ entry: {
 Компонент, содержащий элемент `<h1>` для текущей страницы.
 
 Реализации должны обеспечить установку `id="_top"` для элемента `<h1>`, как в реализации по умолчанию.
+
+#### `DraftContentNotice`
+
+**Стандартный компонент:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Уведомление, отображаемое пользователям во время разработки, когда текущая страница помечена как черновик.
 
 #### `FallbackContentNotice`
 

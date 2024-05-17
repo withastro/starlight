@@ -87,6 +87,50 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 	</TabItem>
 </Tabs>
 
+#### Синхронизированные вкладки
+
+Синхронизируйте несколько групп вкладок, добавив атрибут `syncKey`.
+
+Все `<Tabs>` на странице с одинаковым значением `syncKey` будут отображать одну и ту же активную метку. Это позволяет вашему читателю выбрать один раз (например, операционную систему или менеджер пакетов) и увидеть, как его выбор отражается на всей странице.
+
+Чтобы синхронизировать связанные вкладки, добавьте идентичное свойство `syncKey` к каждому компоненту `<Tabs>` и убедитесь, что все они используют одни и те же метки `<TabItem>`:
+
+```mdx 'syncKey="constellations"'
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Некоторые звёзды:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">Беллатрикс, Ригель, Бетельгейзе</TabItem>
+	<TabItem label="Близнецы">Поллукс, Кастор А, Кастор Б</TabItem>
+</Tabs>
+
+_Некоторые экзопланеты:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Близнецы">Поллукс b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+Вышеуказанный код сформирует следующий HTML:
+
+_Некоторые звёзды:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">Беллатрикс, Ригель, Бетельгейзе</TabItem>
+	<TabItem label="Близнецы">Поллукс, Кастор А, Кастор Б</TabItem>
+</Tabs>
+
+_Некоторые экзопланеты:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Орион">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Близнецы">Поллукс b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### Карточки
 
 import { Card, CardGrid } from '@astrojs/starlight/components';

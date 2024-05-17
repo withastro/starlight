@@ -425,7 +425,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
 
-각 `<Icon>`에는 [`name`](#모든-아이콘)이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
+각 `<Icon>`에는 [`name`](#모든-아이콘)이 필요하며 스크린 리더에 컨텍스트를 제공하기 위해 선택적으로 `label`을 포함할 수 있습니다.
+CSS 단위와 색상 값을 사용하여 아이콘의 모양을 조정하는 데 `size` 및 `color` 속성을 사용할 수 있습니다.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -433,11 +434,13 @@ Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 �
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 위 코드는 페이지에 다음을 생성합니다.
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### 모든 아이콘
 
