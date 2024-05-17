@@ -1,3 +1,15 @@
+.sl-markdown-content p,
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6,
+.sl-markdown-content code {
+	background-color: rgba(0, 255, 0, 0.2);
+	overflow-wrap: anywhere;
+}
+
 .sl-markdown-content
 	:not(a, strong, em, del, span, input, code)
 	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
