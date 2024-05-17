@@ -224,7 +224,7 @@ Uzun, tek satırlı kod bloğu alt satıra geçmemelidir. Çok uzunsa yatay kayd
 
 ### Expressive Code özellikleri
 
-Starlight, kod blokları için biçimlendirme imkanlarını genişletmek için [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) kullanır. Expressive Code’un metin işaretleyicileri ve çerçeve eklentileri varsayılan olarak geçerlidir. Kod bloğu işleme Starlight'ın [`expressiveCode` yapılandırma ayarından](en/reference/configuration/#expressivecode) yapılandırılabilir.
+Starlight, kod blokları için biçimlendirme imkanlarını genişletmek için [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) kullanır. Expressive Code’un metin işaretleyicileri ve çerçeve eklentileri varsayılan olarak geçerlidir. Kod bloğu işleme Starlight'ın [`expressiveCode` yapılandırma ayarından](/tr/reference/configuration/#expressivecode) yapılandırılabilir.
 
 #### Metin işaretleyicileri
 
