@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.22.4
+
+### Patch Changes
+
+- [#1871](https://github.com/withastro/starlight/pull/1871) [`03bb126b`](https://github.com/withastro/starlight/commit/03bb126b74d9adaba1be2f0df3f34566815dd77f) Thanks [@delucis](https://github.com/delucis)! - Adds a `blueSky` icon and social link option
+
+- [#1873](https://github.com/withastro/starlight/pull/1873) [`13f33b81`](https://github.com/withastro/starlight/commit/13f33b81fd51d18165eb52f2a0c02b890084e4bd) Thanks [@ekfuhrmann](https://github.com/ekfuhrmann)! - Adds 1 new icon: `alpine`
+
+- [#1857](https://github.com/withastro/starlight/pull/1857) [`32cdfaf0`](https://github.com/withastro/starlight/commit/32cdfaf0155e65ff6fbe9c0cfacd6969ab0015d9) Thanks [@tarikcoskun](https://github.com/tarikcoskun)! - Updates Turkish UI translations
+
+- [#1736](https://github.com/withastro/starlight/pull/1736) [`cfa94a34`](https://github.com/withastro/starlight/commit/cfa94a346ef10804b90db28d217be175e1c1d5ed) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Prevent list items from overflowing Markdown content
+
 ## 0.22.3
 
 ### Patch Changes
