@@ -121,13 +121,14 @@
 /* <details> and <summary> styles */
 .sl-markdown-content details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-gray-5);
+	--sl-details-border-color--hover: var(--sl-color-text-accent);
 
 	border-inline-start: 2px solid var(--sl-details-border-color);
 	padding-inline-start: 1rem;
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-text-accent);
+	--sl-details-border-color: var(--sl-details-border-color--hover);
 }
 .sl-markdown-content summary:not(:where(.not-content *)) {
 	color: var(--sl-color-white);
@@ -182,8 +183,5 @@
 /* <details> styles inside asides */
 .sl-markdown-content .starlight-aside details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-asides-border);
-}
-.sl-markdown-content .starlight-aside details:not([open]):hover:not(:where(.not-content *)),
-.sl-markdown-content .starlight-aside details:has(> summary:hover):not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-asides-text-accent);
+	--sl-details-border-color--hover: var(--sl-color-asides-text-accent);
 }
