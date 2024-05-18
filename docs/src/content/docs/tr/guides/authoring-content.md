@@ -365,7 +365,7 @@ Bir kod bloğunun zorunlu olmayan başlığı, kod bloğunun açık tırnak işa
   ```
   ````
 
-  ## Detaylar
+## Detaylar
 
 Detaylar (ayrıca "bildirimler" ya da "akordiyonlar" olarak da bilinir) konuyla ilgili içeriği gizlemek için kullanışlıdır.
 Kullanıcılar kısa özete genişletmek ve tüm içeriği görebilmek için tıklayabilir.
