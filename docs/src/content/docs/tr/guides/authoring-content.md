@@ -365,6 +365,31 @@ Bir kod bloğunun zorunlu olmayan başlığı, kod bloğunun açık tırnak işa
   ```
   ````
 
+  ## Detaylar
+
+Detaylar (ayrıca "bildirimler" ya da "akordiyonlar" olarak da bilinir) konuyla ilgili içeriği gizlemek için kullanışlıdır.
+Kullanıcılar kısa özete genişletmek ve tüm içeriği görebilmek için tıklayabilir.
+
+Akordiyon parçacığı oluşturmak için Markdown içeriğinizdeki standart HTML [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) ve [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) elemanlarını kullanın.
+
+`<details>` elemanı içerisine herhangi bir Markdown sözdizimini yerleştirebilirsiniz.
+
+<details>
+<summary>Nerede ve ne zaman Andromeda takımyıldızı en çok görünür olur?</summary>
+
+The [Andromeda takımyıldızı](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>) en çok Kasım ayı boyunca geceleri `+90°` ve `−40°` arasındaki enlemde görünür.
+
+</details>
+
+```md
+<details>
+<summary>Nerede ve ne zaman Andromeda takımyıldızı en çok görünür olur?</summary>
+
+The [Andromeda takımyıldızı](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>) en çok Kasım ayı boyunca geceleri `+90°` ve `−40°` arasındaki enlemde görünür.
+
+</details>
+```
+
 
 ## Diğer ortak Markdown Özellikleri
 
