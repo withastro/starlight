@@ -230,7 +230,7 @@ Starlight, kod blokları için biçimlendirme imkanlarını genişletmek için [
 
 Kod bloğunuzun belirli satırları ya da bölümlerini, kod bloğunuzun ilk satırında [Expressive Code metin işaretleyicilerini](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) kullanarak vurgulayabilirsiniz.
 
-Tüm satırı vurgulamak için çengelli parantez(`{ }`) ve  metin dizilerini vurgulamak için tırnak işaretleri kullanın.
+Tüm satırı vurgulamak için çengelli parantez(`{ }`) ve metin dizilerini vurgulamak için tırnak işaretleri kullanın.
 
 3 vurgulama stili mevcuttur: koda dikkat çekmek için renksiz, eklenmiş kodu belirtme için yeşil ve silinmiş kodu belirtme için kırmızı.
 Metin ve tüm satırlar varsayılan işaretleyici kullanılarak işaretlenebilir ya da `ins=` be `del=` kombinasyonuyla istenilen vurgulama uygulanabilir.
@@ -245,7 +245,7 @@ En yaygın örneklerden bazıları aşağıda gösterilmiştir:
 
   ```js {2-3}
   function demo() {
-  // Bu satır (2.) ve sonraki satır vurgulanacaktır.
+    // Bu satır (2.) ve sonraki satır vurgulanacaktır.
     return 'Bu, kod parçacığınının 3. satırıdır.';
   }
   ```
@@ -253,7 +253,7 @@ En yaygın örneklerden bazıları aşağıda gösterilmiştir:
   ````md
   ```js {2-3}
   function demo() {
-  // Bu satır (2.) ve sonraki satır vurgulanacaktır.
+    // Bu satır (2.) ve sonraki satır vurgulanacaktır.
     return 'Bu, kod parçacığınının 3. satırıdır.';
   }
   ```
@@ -389,7 +389,6 @@ The [Andromeda takımyıldızı](<https://en.wikipedia.org/wiki/Andromeda_(const
 
 </details>
 ```
-
 
 ## Diğer ortak Markdown Özellikleri
 
