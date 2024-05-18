@@ -7,6 +7,22 @@ Starlight, `.md` uzantılı dosyalarda [Markdown](https://daringfireball.net/pro
 
 Markdown desteği ve kullanımı farklılık gösterebileceğinden dolayı, bu dosya formatlarını kullanıyorsanız [MDX dokümantasyonu](https://mdxjs.com/docs/what-is-mdx/#markdown) ya da [Markdoc dokümantasyonu](https://markdoc.dev/docs/syntax)'nu incelediğinizden emin olun.
 
+## Ön-bölüm
+
+Starlight'taki tekil sayfalarınızı, ön-bölümlerindeki değerlerini ayarlayarak özelleştirebilirsiniz.
+Ön-bölüm, dosyanızın en üstünde `---` ayraçları arasında kalan bölümdür:
+
+```md title="src/content/docs/example.md"
+---
+title: Sayfa Başlığım
+---
+
+Sayfa içeriği, ikinci `---` 'den sonraki kısımda kalır.
+```
+
+Her sayfa en azından bir `title` içermek zorundadır.
+Uygun tüm alanları görmek ve yeni özel alan eklemek için [ön-bölüm referansı](/tr/reference/frontmatter/)'nı inceleyin.
+
 ## Satır İçi Stiller
 
 Metin **kalın**, _italik_ ya da ~~üstü çizili~~ olabilir.
@@ -88,6 +104,8 @@ description: Starlight'ın kurulu bağlantıları nasıl kullanılır
 ```
 
 Seviye 2 (`<h2>`) ve Seviye 3 (`<h3>`) başlıklar otomatik olarak içerik tablosunda görünecektir.
+
+Astro'nun, başlıklardaki `id` öğesini işlemesi hakkında daha fazlasını [Astro dokümantasyonundan](https://docs.astro.build/en/guides/markdown-content/#heading-ids) öğren.
 
 ## Ara Bölümler
 
@@ -204,6 +222,179 @@ var fun = function lang(l) {
 Uzun, tek satırlı kod bloğu alt satıra geçmemelidir. Çok uzunsa yatay kaydırma olmalıdır. Bu satır, yatay kaydırma çubuğunun görünmesi için yeterince uzun olmalıdır.
 ```
 
+### Expressive Code özellikleri
+
+Starlight, kod blokları için biçimlendirme imkanlarını genişletmek için [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) kullanır. Expressive Code’un metin işaretleyicileri ve çerçeve eklentileri varsayılan olarak geçerlidir. Kod bloğu işleme Starlight'ın [`expressiveCode` yapılandırma ayarından](/tr/reference/configuration/#expressivecode) yapılandırılabilir.
+
+#### Metin işaretleyicileri
+
+Kod bloğunuzun belirli satırları ya da bölümlerini, kod bloğunuzun ilk satırında [Expressive Code metin işaretleyicilerini](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) kullanarak vurgulayabilirsiniz.
+
+Tüm satırı vurgulamak için çengelli parantez(`{ }`) ve  metin dizilerini vurgulamak için tırnak işaretleri kullanın.
+
+3 vurgulama stili mevcuttur: koda dikkat çekmek için renksiz, eklenmiş kodu belirtme için yeşil ve silinmiş kodu belirtme için kırmızı.
+Metin ve tüm satırlar varsayılan işaretleyici kullanılarak işaretlenebilir ya da `ins=` be `del=` kombinasyonuyla istenilen vurgulama uygulanabilir.
+
+Expressive Code kod örneklerinizin görünümünü özelleştirmek için birkaç ayar sunar.
+Bunları çoğu çok iyi açıklayı kod örnekleri için kombine edilebilir.
+Lütfen kapsamlı uygun ayarlar için [Expressive Code dokümantasyonunu](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) keşfedin.
+
+En yaygın örneklerden bazıları aşağıda gösterilmiştir:
+
+- [Tüm satırı ve satır aralıklarını `{ }` işaretleyici kullanarak işaretleme](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+
+  ```js {2-3}
+  function demo() {
+  // Bu satır (2.) ve sonraki satır vurgulanacaktır.
+    return 'Bu, kod parçacığınının 3. satırıdır.';
+  }
+  ```
+
+  ````md
+  ```js {2-3}
+  function demo() {
+  // Bu satır (2.) ve sonraki satır vurgulanacaktır.
+    return 'Bu, kod parçacığınının 3. satırıdır.';
+  }
+  ```
+  ````
+
+- [ `" "` işaretleyicisi ya da düzenli ifadeleri kullanar seçili metni işaretleme](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+
+  ```js "Tekil ifadeler" /Düzenli.*destekleniyor/
+  // Tekil ifadeler de vurgulanabilir
+  function demo() {
+    return 'Düzenli ifadeleri bile destekleniyor';
+  }
+  ```
+
+  ````md
+  ```js "Tekil ifadeler" /Düzenli.*destekleniyor/
+  // Tekil ifadeler de vurgulanabilir
+  function demo() {
+    return 'Düzenli ifadeleri bile destekleniyor';
+  }
+  ```
+  ````
+
+- [`ins` ya da `del` ile satırları veya metni eklenmiş ya da silinmiş olarak işaretleme](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+
+  ```js "return true;" ins="eklenmiş" del="silinmiş"
+  function demo() {
+    console.log('Bunlar, eklenmiş ve silinmiş işaretleyici tipleridir');
+    // return ifadesi varsayılan işaretleyici tipini kullanır
+    return true;
+  }
+  ```
+
+  ````md
+  ```js "return true;" ins="eklenmiş" del="silinmiş"
+  function demo() {
+    console.log('Bunlar, eklenmiş ve silinmiş işaretleyici tipleridir');
+    // return ifadesi varsayılan işaretleyici tipini kullanır
+    return true;
+  }
+  ```
+  ````
+
+- [`diff`-benzeri sözdizimi ile sözdizimi vurgulamayı kombinleyin](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // Tüm blok Javascript olarak vurgulanır,
+      // yine de diff işaretleyicilerini ekleyebiliriz!
+  -   console.log('Kaldırılan eski kod')
+  +   console.log('Yeni ve dikkat çekici kod!')
+    }
+  ```
+
+  ````md
+  ```diff lang="js"
+    function thisIsJavaScript() {
+      // Tüm blok Javascript olarak vurgulanır,
+      // yine de diff işaretleyicilerini ekleyebiliriz!
+  -   console.log('Kaldırılan eski kod')
+  +   console.log('Yeni ve dikkat çekici kod!')
+    }
+  ```
+  ````
+
+#### Çerçeve ve Başlıklar
+
+Kod blokları, pencere benzeri çerçeve içerisinde işlenebilir.
+Terminal penceresi gibi görünen bir çerçeve shell scripting dilleri için (örneğin `bash` ya da `sh`) kullanılır.
+Diğer diller başlık içerirse kod editör tarzında olan bir çerçeve içerisinde görüntülenir.
+
+Bir kod bloğunun zorunlu olmayan başlığı, kod bloğunun açık tırnak işareti ve dil belirtecinin ardından `title="..."` niteliği ile ya da kodun ilk satırındaki dosya ismi yourumuyla ayarlanabilir.
+
+- [Yorum birile dosya ismi sekmesi ekleme](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```js
+  // test-dosyam.js
+  console.log('Merhaba Dünya!');
+  ```
+
+  ````md
+  ```js
+  // test-dosyam.js
+  console.log('Merhaba Dünya!');
+  ```
+  ````
+
+- [Terminal penceresine başlık ekleme](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+
+  ```bash title="Bağımlılıklar yükleniyor…"
+  npm install
+  ```
+
+  ````md
+  ```bash title="Bağımlılıklar yükleniyor…"
+  npm install
+  ```
+  ````
+
+- [`frame="none"` ile pencere çerçevelerini etkisizleştir](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+
+  ```bash frame="none"
+  echo "Bu, bash dili kullanılmasına rağmen terminal olarak işlenmeyecektir"
+  ```
+
+  ````md
+  ```bash frame="none"
+  echo "Bu, bash dili kullanılmasına rağmen terminal olarak işlenmeyecektir"
+  ```
+  ````
+
+## Detaylar
+
+Detaylar (ayrıca "bildirimler" ya da "akordiyonlar" olarak da bilinir) konuyla ilgili içeriği gizlemek için kullanışlıdır.
+Kullanıcılar kısa özete genişletmek ve tüm içeriği görebilmek için tıklayabilir.
+
+Akordiyon parçacığı oluşturmak için Markdown içeriğinizdeki standart HTML [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) ve [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) elemanlarını kullanın.
+
+`<details>` elemanı içerisine herhangi bir Markdown sözdizimini yerleştirebilirsiniz.
+
+<details>
+<summary>Nerede ve ne zaman Andromeda takımyıldızı en çok görünür olur?</summary>
+
+The [Andromeda takımyıldızı](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>) en çok Kasım ayı boyunca geceleri `+90°` ve `−40°` arasındaki enlemde görünür.
+
+</details>
+
+```md
+<details>
+<summary>Nerede ve ne zaman Andromeda takımyıldızı en çok görünür olur?</summary>
+
+The [Andromeda takımyıldızı](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>) en çok Kasım ayı boyunca geceleri `+90°` ve `−40°` arasındaki enlemde görünür.
+
+</details>
+```
+
+
 ## Diğer ortak Markdown Özellikleri
 
 Starlight, liste ve tablo gibi diğer tüm Markdown yazım sözdizimini destekler. [Markdown Rehberi'nden Markdown Kopya Kağıdı](https://www.markdownguide.org/cheat-sheet/)'na tüm Markdown sözdizimi elemanlarına hızlı bir genel bakış için göz atın.
+
+## İleri Düzey Markdown ve MDX yapılandırması
+
+Starlight, Astro'nun remark ve rehype üzerine kurulu Markdown ve MDX işleyicisini kullanır. Astro konfigürasyon dosyanıza `remarkPlugins` ya da `rehypePlugins` ekleyerek özel sözdizimi ve davranışlar için destek ekleyebilirsiniz. Daha fazlasını öğrenmek için Astro dokümantasyonundaki [“Markdown ve MDX Yapılandırma”](https://docs.astro.build/en/guides/markdown-content/#configuring-markdown-and-mdx) yazısına bakın.
