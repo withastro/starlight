@@ -1,5 +1,42 @@
 # @astrojs/starlight
 
+## 0.23.0
+
+### Minor Changes
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - Updates `@astrojs/mdx` to v3 and enables MDX optimization by default
+
+  ⚠️ **Potentially breaking change:** MDX optimization speeds up builds (Starlight’s docs are building ~40% faster for example), but restricts some advanced MDX features. See full details in the [MDX optimization documentation](https://docs.astro.build/en/guides/integrations-guide/mdx/#optimize).
+
+  Most Starlight users should be unaffected, but if you are using MDX files outside of Starlight pages with the `components` prop, you may see issues. You can disable optimization by adding MDX manually to your `integrations` array in `astro.config.mjs`:
+
+  ```diff
+  import { defineConfig } from 'astro/config';
+  + import mdx from '@astrojs/mdx';
+  import starlight from '@astrojs/starlight';
+
+  // https://astro.build/config
+  export default defineConfig({
+  	integrations: [
+  		starlight({
+  			title: 'My docs',
+  			// ...
+  		}),
+  +		mdx(),
+  	],
+  });
+  ```
+
+- [#1735](https://github.com/withastro/starlight/pull/1735) [`1a9ab50d`](https://github.com/withastro/starlight/commit/1a9ab50d458d6274994ffe66a23fe7a30681337a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds custom styles for `<details>` and `<summary>` elements in Markdown content.
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now 4.8.6
+
+  Please update Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.22.4
 
 ### Patch Changes

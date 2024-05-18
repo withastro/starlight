@@ -63,10 +63,17 @@ export default function StarlightIntegration({
 					integrations.push(starlightSitemap(starlightConfig));
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
-					integrations.push(mdx());
+					integrations.push(mdx({ optimize: true }));
 				}
+
+				// Add integrations immediately after Starlight in the config array.
+				// e.g. if a user has `integrations: [starlight(), tailwind()]`, then the order will be
+				// `[starlight(), expressiveCode(), sitemap(), mdx(), tailwind()]`.
+				// This ensures users can add integrations before/after Starlight and we respect that order.
+				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
+				config.integrations.splice(selfIndex + 1, 0, ...integrations);
+
 				updateConfig({
-					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
 					},
