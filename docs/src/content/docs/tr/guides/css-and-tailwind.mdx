@@ -1,0 +1,297 @@
+---
+title: CSS ve Stillendirme
+description: Starlight sitenizi özel CSS ile ya da Tailwind CSS ile entegre ederer nasıl stillendireceğinizi öğrenin.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Starlight sitenizi özel CSS dosyaları ya da Starlight Tailwind eklentisi kullanarak stillendirebilirsiniz.
+
+## Özel CSS Stilleri
+
+Starlight'ın varsayılan stillerini düzenlemek ya da genişletmek için ek CSS dosyaları sağlayarak özelleştirilmiş stiller uygulanır.
+
+<Steps>
+
+1. `src/` dizininize bir CSS dosyası ekleyin.
+   Örneğin, daha geniş varsayılan sütun genişliği ve sayfa başlıkları için daha büyük yazı boyutu ayarlayabilirsiniz.
+
+   ```css
+   /* src/styles/custom.css */
+   :root {
+   	--sl-content-width: 50rem;
+   	--sl-text-5xl: 3.5rem;
+   }
+   ```
+
+2. `astro.config.mjs` içerisinde Starlight'ın `customCss` dizisine CSS dosyanızın yolunu ekleyin:
+
+   ```diff lang="js"
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Özel CSS ile Dokümantasyon',
+   			customCss: [
+   +				// özel CSS dosyanıza ait dosya yolu
+   +				'./src/styles/custom.css',
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+[Github'daki `props.css` dosyası üzerinde ](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) özelleştirebileceğiniz, Starlight'ın kullandığı isteğe uyarlanmış tüm CSS özelliklerini görebilirsiniz.
+
+## Tailwind CSS
+
+Astro projelerinde Tailwind CSS desteği [Astro Tailwind entegrasyonu](https://docs.astro.build/en/guides/integrations-guide/tailwind/) ile sağlanır.
+Starlight, Starlight'ın stilleri ile uyumlu olması için Tailwind yapılandırmasına yardımcı olacak bir tamamlayıcı Tailwind eklentisi temin eder.
+
+Starlight Tailwind eklentisi aşağıdaki yapılandırmaları uygular:
+
+- Tailwind'in `dark:`varyantını Starlight'ın koyu modu ile çalışabilmesini yapılandırır.
+- Tailwind'in [tema renkler ve yazı karakterlerini](#tailwind-ile-starlightı-stillendirme) Starlight'ın kullanıcı arayüzünde kullanır.
+- Tailwind'in [Preflight](https://tailwindcss.com/docs/preflight) sıfırlama stillerini Tailwind'in kenarlık yardımcı sınıfları için Prefilght'ın zorunlu istediği önemli kısımları titizlikle geri yüklerken etkisizleştirir.
+
+### Tailwind ile proje oluştur
+
+`create astro` kullanarak Tailwind CSS ön-ayarlı yeni bir Starlight projesi oluştur:
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/tailwind
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/tailwind
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/tailwind
+```
+
+</TabItem>
+</Tabs>
+
+### Var olan projeye Tailwind Ekle
+
+Halihazırda bir Starlight siteniz varsa ve Tailwind CSS eklemek istiyorsanız, aşağıdaki adımları takip edin.
+
+<Steps>
+
+1.  Astro'nun Tailwind entegrasyonunu ekleyin:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add tailwind
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add tailwind
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add tailwind
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Starlight Tailwind eklentisini yükleyin:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-tailwind
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-tailwind
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-tailwind
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  Tailwind'in baz stilleri için CSS dosya oluşturun, örneğin `src/tailwind.css`:
+
+    ```css
+    /* src/tailwind.css */
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    ```
+
+4.  Tailwind'inizin baz stillerini kullanmak ve varsayılan baz stilleri etkisizleştirmek için Astro yapılandırma dosyasını güncelleyin:
+
+    ```js {11-12,16-17}
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+    import tailwind from '@astrojs/tailwind';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Tailwind ile Dokümantasyon',
+    			customCss: [
+    				//Tailwind baz stilleriniz için dosya yolu:
+    				'./src/tailwind.css',
+    			],
+    		}),
+    		tailwind({
+    			//Varsayılan baz stilleri etkisizleştir:
+    			applyBaseStyles: false,
+    		}),
+    	],
+    });
+    ```
+
+5.  Starlight Tailwind eklentisini `tailwind.config.mjs` dosyasına ekleyin:
+
+    ```js ins={2,7}
+    // tailwind.config.mjs
+    import starlightPlugin from '@astrojs/starlight-tailwind';
+
+    /** @type {import('tailwindcss').Config} */
+    export default {
+    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    	plugins: [starlightPlugin()],
+    };
+    ```
+
+</Steps>
+
+### Tailwind ile Starlight'ı Stillendirme
+
+Starlight kendi kullanıcı arayüzünde [Tailwind tema yapılandırmanızdaki](https://tailwindcss.com/docs/theme) değerleri kullanacaktır.
+
+Ayarlanmışsa, aşağıdaki seçenekler Starlight'ın varsayılan stillerini ezecektir:
+
+- `colors.accent` — Mevcut nesne vurgulama ve bağlantılar için kullanılır
+- `colors.gray` — Arkaplan rengi ve kenarlıklar için kullanılır
+- `fontFamily.sans` — Kullanıcı arayüzü ve içerik metni için kullanılır
+- `fontFamily.mono` — Kod örnekleri için kullanılır
+
+```js {12,14,18,20}
+// tailwind.config.mjs
+import starlightPlugin from '@astrojs/starlight-tailwind';
+import colors from 'tailwindcss/colors';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	theme: {
+		extend: {
+			colors: {
+				// Tercih ettiğiniz vurgu rengi. Indigo, Starlight'ın varsayılana en yakın olanıdır.
+				accent: colors.indigo,
+				// Tercig ettiğiniz gri skalası. Zinc, Starlight'ın varsayılana en yakın olanıdır.
+				gray: colors.zinc,
+			},
+			fontFamily: {
+				//Tercih ettiğiniz yazı karakteri. Starlight, sistem yazı karakterlerini varsayılan olarak kullanır.
+				sans: ['"Atkinson Hyperlegible"'],
+				// Tercih ettiğiniz kod yazı karakteri. Starlight sistem tek araklıklı yazı karakterlerini varsayılan olarak kullanır.
+				mono: ['"IBM Plex Mono"'],
+			},
+		},
+	},
+	plugins: [starlightPlugin()],
+};
+```
+
+## Temalandırma
+
+Starlight'ın renk teması, Starlight'ın varsayılan isteğe uyarlı özelliklerinin üzerine yazılmasıyla kontrol edilebilir.
+Bu değişkenler, metin ve arkaplan renkleri için gri gölgeler ve bağlantılar ve gezinti sırasındaki mevcut nesneler vurgulamak için vurgu rengi kullanıcı arayüzünce kullanılır.
+
+### Renk teması editörü
+
+Starlight'ın vurgu ve gri renk paletlerini değiştirmek için aşağıdaki kaydırıcıları kullanın.
+Koyu ve açık önizleme alanları renkleri gösterecek ve ayrıca tüm sayfa değişiklerinizi önizlemek için güncellenecektir.
+
+Değişikliklerinizden memnun olduğunuzda, aşağıdaki CSS ya da Tailwind kodu kopyalayın ve projenizde kullanın.
+
+import ThemeDesigner from '~/components/theme-designer.astro';
+
+<ThemeDesigner
+	labels={{
+		presets: {
+			label: 'Ön Ayarlar',
+			ocean: 'Okyanus',
+			forest: 'Orman',
+			oxide: 'Oksit',
+			nebula: 'Nebula',
+			default: 'Varsayılan',
+			random: 'Rasgele',
+		},
+		editor: {
+			accentColor: 'Vurgu',
+			grayColor: 'Gri',
+			hue: 'Ton',
+			chroma: 'Berraklık',
+			pickColor: 'Pick color',
+		},
+		preview: {
+			darkMode: 'Koyu mod',
+			lightMode: 'Açık Mod',
+			bodyText: 'Sayfa metni arkaplanla yüksek kontrastlı gri tonda görünür.',
+			linkText: 'Bağlantılar renklendirilmiştir.',
+			dimText:
+				'İçindekiler metni gibi bazı metinler daha düşük kontrasta sahiptir.',
+			inlineCode: 'Satır için kod belirgin arkaplana sahiptir.',
+		},
+	}}
+>
+	<Fragment slot="css-docs">
+		Bu temayı sitenize uygulamak için, [isteğe uyarlanmış CSS dosyası
+		içine](#özel-css-stilleri) aşağıdaki CSS'i dahil edin ve projenize ekleyin.
+	</Fragment>
+	<Fragment slot="tailwind-docs">
+		Aşağıdaki [Tailwind yapılandırma dosyasına
+		ait](#tailwind-ile-starlightı-stillendirme) örnek, yapılandırma nesnesi
+		içerisinde oluşturulmuş `accent` ve `gray` renk paletlerini
+		`theme.extend.colors` yapılandırma nesnesinde kullanmak için dahil eder.
+	</Fragment>
+</ThemeDesigner>
