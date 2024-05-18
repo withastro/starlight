@@ -58,8 +58,8 @@ Bu bileşenler `@astrojs/starlight/components` paketinde mevcuttur.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 `<Tabs>` ve `<TabItem>` bileşenlerini kullanarak sekmeli arayüz gösterebilirsiniz.
-You can display a tabbed interface using the `<Tabs>` and `<TabItem>` components.
 Her `<TabItem>` bileşenini kullanıcılara göstermek için `label` sahibi olması zorunludur.
+[Starlight’ın yerleşik ikonlarından](#all-icons) birini, etiketin yanında kalması için zorunlu olmayan `icon` niteliğini kullanın.
 
 ```mdx
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -215,6 +215,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### Ara bölümler
 
 Ara bölümler (ayrıca "uyarı" ve "açıklama balonu" olarak da bilinir), sayfanın ana içeriği ile birlikte ikincil bilgi göstermek için kullanışlıdır.
+
 `<Aside>` bileşeni zorunlu olmayan `note` (varsayılan), `tip`, `caution` ya da `danger` değerini alan `type` niteliğine sahiptir. `title` niteliği eklemek varsayılan ara bölüm başlığını değiştirir.
 
 ````mdx
@@ -229,6 +230,7 @@ import { Aside } from '@astrojs/starlight/components';
 </Aside>
 
 <Aside type="tip">
+
 Diğer içerikler de ara bölümde desteklenir.
 
 ```js
@@ -263,7 +265,6 @@ Diğer içerikler de ara bölümde desteklenir.
 <Aside type="danger">Şifreni kimseye verme.</Aside>
 
 Starlight, ayrıca `<Aside>` bileşenine alternatif olarak Markdown ve MDX içerisinde ara bölüm oluşturmak için özel bir sözdizimi sağlar.
-Starlight also provides a custom syntax for rendering asides in Markdown and MDX as an alternative to the `<Aside>` component.
 [“Markdown'da İçerik Yazmak”](/tr/guides/authoring-content/#ara-bölümler) rehberine özel sözdizimi detayları için bakın.
 
 ### Kod
@@ -364,13 +365,10 @@ import { FileTree } from '@astrojs/starlight/components';
 ### Adımlar
 
 `<Steps>` bileşenini numaralanmış görevler listesini biçimlendirmek için kullanın.
-
 Her aşamasının açıkça belirtilmeye ihtiyaç duyan çok karmaşık adım adım rehberleri oluşturmak için kullanışlıdır.
 
 Standart Markdown sıralanmış listesini `<Steps>` bileşeni ile sarmalayın.
-
 `<Steps>` bileşeni içerisinde tüm olağan Markdown sözdizimi uygulanabilir.
-
 
 ````mdx title="src/content/docs/example.mdx"
 import { Steps } from '@astrojs/starlight/components';
@@ -410,6 +408,7 @@ import { Icon } from '@astrojs/starlight/components';
 import IconsList from '~/components/icons-list.astro';
 
 Starlight, içeriğinizde görünmesi için `<Icon>` bileşenini kullanarak bir grup ortak ikonları kullanımınıza sunar.
+
 Her `<Icon>` [`name`](#tüm-i̇konlar) değerine ihtiyaç duyar ve isteğe bağlı olarak `label` eklenebilir.
 `size` ve `color` nitelikleri ikonun görünümünü CSS birimleri ve renk değerleri ile ayarlamak için kullanılabilir.
 
