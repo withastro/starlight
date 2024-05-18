@@ -9,12 +9,12 @@ Starlight sitenizi özel CSS dosyaları ya da Starlight Tailwind eklentisi kulla
 
 ## Özel CSS Stilleri
 
-Starlight'ın varsayılan stillerini düzenlemek ya da genişletmek için  ek CSS dosyaları sağlayarak özelleştirilmiş stiller uygulanır.
+Starlight'ın varsayılan stillerini düzenlemek ya da genişletmek için ek CSS dosyaları sağlayarak özelleştirilmiş stiller uygulanır.
 
 <Steps>
 
 1. `src/` dizininize bir CSS dosyası ekleyin.
-	Örneğin, daha geniş varsayılan sütun genişliği ve sayfa başlıkları için daha büyük yazı boyutu ayarlayabilirsiniz.
+   Örneğin, daha geniş varsayılan sütun genişliği ve sayfa başlıkları için daha büyük yazı boyutu ayarlayabilirsiniz.
 
    ```css
    /* src/styles/custom.css */
@@ -175,12 +175,12 @@ Halihazırda bir Starlight siteniz varsa ve Tailwind CSS eklemek istiyorsanız, 
     		starlight({
     			title: 'Tailwind ile Dokümantasyon',
     			customCss: [
-						//Tailwind baz stilleriniz için dosya yolu:
+    				//Tailwind baz stilleriniz için dosya yolu:
     				'./src/tailwind.css',
     			],
     		}),
     		tailwind({
-					//Varsayılan baz stilleri etkisizleştir:
+    			//Varsayılan baz stilleri etkisizleştir:
     			applyBaseStyles: false,
     		}),
     	],
@@ -244,7 +244,7 @@ export default {
 ## Temalandırma
 
 Starlight'ın renk teması, Starlight'ın varsayılan isteğe uyarlı özelliklerinin üzerine yazılmasıyla kontrol edilebilir.
-Bu değişkenler, metin ve arkaplan renkleri için gri gölgeler ve bağlantılar ve gezinti sırasındaki mevcut nesneler vurgulamak için vurgu rengi kullanıcı arayüzünce kullanılır.  
+Bu değişkenler, metin ve arkaplan renkleri için gri gölgeler ve bağlantılar ve gezinti sırasındaki mevcut nesneler vurgulamak için vurgu rengi kullanıcı arayüzünce kullanılır.
 
 ### Renk teması editörü
 
@@ -276,19 +276,22 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 		preview: {
 			darkMode: 'Koyu mod',
 			lightMode: 'Açık Mod',
-			bodyText:
-				'Sayfa metni arkaplanla yüksek kontrastlı gri tonda görünür.',
+			bodyText: 'Sayfa metni arkaplanla yüksek kontrastlı gri tonda görünür.',
 			linkText: 'Bağlantılar renklendirilmiştir.',
-			dimText: 'İçindekiler metni gibi bazı metinler daha düşük kontrasta sahiptir.',
+			dimText:
+				'İçindekiler metni gibi bazı metinler daha düşük kontrasta sahiptir.',
 			inlineCode: 'Satır için kod belirgin arkaplana sahiptir.',
 		},
 	}}
 >
 	<Fragment slot="css-docs">
-	Bu temayı sitenize uygulamak için, [isteğe uyarlanmış CSS
-		dosyası içine](#özel-css-stilleri) aşağıdaki CSS'i dahil edin ve projenize ekleyin.
+		Bu temayı sitenize uygulamak için, [isteğe uyarlanmış CSS dosyası
+		içine](#özel-css-stilleri) aşağıdaki CSS'i dahil edin ve projenize ekleyin.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-	Aşağıdaki [Tailwind yapılandırma dosyasına ait](#tailwind-ile-starlightı-stillendirme) örnek, yapılandırma nesnesi içerisinde oluşturulmuş `accent` ve `gray` renk paletlerini `theme.extend.colors` yapılandırma nesnesinde kullanmak için dahil eder.
+		Aşağıdaki [Tailwind yapılandırma dosyasına
+		ait](#tailwind-ile-starlightı-stillendirme) örnek, yapılandırma nesnesi
+		içerisinde oluşturulmuş `accent` ve `gray` renk paletlerini
+		`theme.extend.colors` yapılandırma nesnesinde kullanmak için dahil eder.
 	</Fragment>
 </ThemeDesigner>
