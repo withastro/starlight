@@ -106,36 +106,36 @@ export default defineConfig({
 });
 ```
 
-## Sayfa Şablonu
+## Sayfa şablonu
 
-By default, Starlight pages use a layout with a global navigation sidebar and a table of contents that shows the current page headings.
+Varsayılan olarak, Starlight genel gezinti kenar çubuğu ve mevcut sayfa başlıklarını gösteren içindekiler listesini içeren şablon kullanır.
 
-You can apply a wider page layout without sidebars by setting [`template: splash`](/reference/frontmatter/#template) in a page’s frontmatter.
-This works particularly well for landing pages and you can see it in action on the [homepage of this site](/).
+Sayfanın önbölümü içerisinde [`template: splash`](/reference/frontmatter/#template) ayarlayarak kenar çubuksuz daha geniş sayfa şablonu oluşturabilirsiniz.
+Bu, karşılama sayfaları için özellikle iyi çalışır ve bu [sitenin anasayfasında](/tr/) görebilirsiniz.
 
 ```md {5}
 ---
 # src/content/docs/index.md
 
-title: My Landing Page
+title: Karşılama Sayfam
 template: splash
 ---
 ```
 
-## Table of contents
+## İçindekiler listesi
 
-Starlight displays a table of contents on each page to make it easier for readers to jump to the heading they are looking for.
-You can customize — or even disable — the table of contents globally in the Starlight integration or on a page-by-page basis in frontmatter.
+Starlight okuyucuların aradıkları başlığa kolayca geçmeleri için her sayfada içindekiler listesini gösterir.
+İçindekiler tablosunu genel olarak Starlight entegrasyonunda ya da önbölümde sayfa-bazlı isteğinize uyarlayabilir hatta etkisizleştirebilirsiniz.
 
-By default, `<h2>` and `<h3>` headings are included in the table of contents. Change which headings levels to include site-wide using the `minHeadingLevel` and `maxHeadingLevel` options in your [global `tableOfContents`](/reference/configuration/#tableofcontents). Override these defaults on an individual page by adding the corresponding [frontmatter `tableOfContents`](/reference/frontmatter/#tableofcontents) properties:
+Varsayılan olarak, `<h2>` ve `<h3>` etiketleri içindekiler listesine dahil edilir. [Genel `tableOfContents`](/reference/configuration/#tableofcontents) içerisinde `minHeadingLevel` ve `maxHeadingLevel` seçeneklerini kullanarak site genelindeki başlık seviyelerini değiştiri. Bu varsayılan değerleri tekil bir sayfanın [önbölümüne `tableOfContents`](/reference/frontmatter/#tableofcontents) karşılık gelen niteliklerini ekleyerek değiştirin:
 
 <Tabs syncKey="config-type">
-  <TabItem label="Frontmatter">
+  <TabItem label="Önbölüm">
 
 ```md {4-6}
 ---
-# src/content/docs/example.md
-title: Page with only H2s in the table of contents
+# src/content/docs/ornek.md
+title: Sadece H2 etiketlerinin içindekiler listesinde yer aldığı sayfa
 tableOfContents:
   minHeadingLevel: 2
   maxHeadingLevel: 2
@@ -143,7 +143,7 @@ tableOfContents:
 ```
 
   </TabItem>
-  <TabItem label="Global config">
+  <TabItem label="Genel yapılandırma">
 
 ```js {7}
 // astro.config.mjs
@@ -161,21 +161,21 @@ defineConfig({
   </TabItem>
 </Tabs>
 
-Disable the table of contents entirely by setting the `tableOfContents` option to `false`:
+`tableOfContents` seçeneğini `false` olarak ayarlayıp tüm içindekiler tablosunu etkisizleştirin:
 
 <Tabs syncKey="config-type">
-  <TabItem label="Frontmatter">
+  <TabItem label="Önbölüm">
 
 ```md {4}
 ---
-# src/content/docs/example.md
-title: Page without a table of contents
+# src/content/docs/ornek.md
+title: İçindekiler tablosuz sayfa
 tableOfContents: false
 ---
 ```
 
   </TabItem>
-  <TabItem label="Global config">
+  <TabItem label="Genel yapılandırma">
 
 ```js {7}
 // astro.config.mjs
@@ -183,7 +183,7 @@ tableOfContents: false
 defineConfig({
 	integrations: [
 		starlight({
-			title: 'Docs with table of contents disabled globally',
+			title: 'İçindekiler tablosunun genel olarak etkisizleştirildiği dokümantasyon',
 			tableOfContents: false,
 		}),
 	],
@@ -193,12 +193,12 @@ defineConfig({
   </TabItem>
 </Tabs>
 
-## Social links
+## Sosyal medya bağlantıları
 
-Starlight has built-in support for adding links to your social media accounts to the site header via the [`social`](/reference/configuration/#social) option in the Starlight integration.
+Starlight'ın, site başlığına Starlight entegrasyonu içindeki [`social`](/reference/configuration/#social) seçeneğiyle sosyal medya hesaplarınızın bağlantısını eklemek için yerleşik desteği vardır.
 
-You can find a full list of supported link icons in the [Configuration Reference](/reference/configuration/#social).
-Let us know on GitHub or Discord if you need support for another service!
+[Yapılandırma Referansında](/reference/configuration/#social) desteklenen tüm bağlantı ikonlarının bulunduğu listeyi bulabilirsiniz.
+Başka bir hizmet için desteğe ihtiyacınız varsa Github ya da Discord üzerinden bize yazın!
 
 ```js {9-12}
 // astro.config.mjs
@@ -208,7 +208,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Docs With Social Links',
+			title: 'Sosyal Medya Bağlantılı Dokümantasyon',
 			social: {
 				discord: 'https://astro.build/chat',
 				github: 'https://github.com/withastro/starlight',
@@ -218,23 +218,23 @@ export default defineConfig({
 });
 ```
 
-## Edit links
+## Bağlantıları düzenle
 
-Starlight can display an “Edit page” link in each page’s footer.
-This makes it easy for a reader to find the file to edit to improve your docs.
-For open-source projects in particular, this can help encourage contributions from your community.
+Starlight her sayfanın altlığında “Sayfayı düzenle” bağlantısı gösterebilir.
+Bu, dokümantasyonunuzu geliştirmek için okuyucunun düzenlenecek dosyayı bulmasını kolaylaştırır.
+Özellikle açık kaynaklı projeler için, topluluğunuzdan gelecek katkıları cesaretlendirmeye yardımcı olabilir.
 
-To enable edit links, set [`editLink.baseUrl`](/reference/configuration/#editlink) to the URL used to edit your repository in the Starlight integration config.
-The value of `editLink.baseUrl` will be prepended to the path to the current page to form the full edit link.
+Sayfa düzenleme bağlantıları etkinleştirmek için, Starlight entegrasyon yapılandırmasında [`editLink.baseUrl`](/reference/configuration/#editlink) seçeneğine düzenlenecek reponuzu ekleyin.
+`editLink.baseUrl` değeri, mevcut sayfaya tam düzenleme bağlantısını oluştumak için başına ilave edilir.
 
-Common patterns include:
+Ortak desenler içerir:
 
-- GitHub: `https://github.com/USER_NAME/REPO_NAME/edit/BRANCH_NAME/`
-- GitLab: `https://gitlab.com/USER_NAME/REPO_NAME/-/edit/BRANCH_NAME/`
+- GitHub: `https://github.com/KULLANICI_ADI/REPO_ADI/edit/BRANCH_ADI/`
+- GitLab: `https://gitlab.com/KULLANICI_ADI/REPO_ADI/-/edit/BRANCH_ADI/`
 
-If your Starlight project is not in the root of your repository, include the path to the project at the end of the base URL.
+Starlight projeniz reponuzun en üstünde yer almıyorsa, baz URL sonuna projenizin yolunu ekleyin.
 
-This example shows the edit link configured for the Starlight docs, which live in the `docs/` subdirectory on the `main` branch of the `withastro/starlight` repository on GitHub:
+Bu örnek,  Github'daki `withastro/starlight` reposunda `main` branch içinde `docs/` alt dizinindeki Starlight dokümantasyonu için sayfa düzenleme bağlantısını yapılandırmayı gösterir:
 
 ```js {9-11}
 // astro.config.mjs
@@ -244,7 +244,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Docs With Edit Links',
+			title: 'Sayfa Düzenleme Bağlantılı Dokümantasyon',
 			editLink: {
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
@@ -253,10 +253,10 @@ export default defineConfig({
 });
 ```
 
-## Custom 404 page
+## İsteğe uyarlanmış 404 sayfası
 
-Starlight sites display a simple 404 page by default.
-You can customize this by adding a `404.md` (or `404.mdx`) file to your `src/content/docs/` directory:
+Starlight varsayılan olarak sade bir 404 sayfası gösterir.
+`src/content/docs/` dizininize `404.md` (ya da `404.mdx`) sayfası ekleyerek isteğinize uyarlayabilirsiniz:
 
 <FileTree>
 
@@ -269,7 +269,7 @@ You can customize this by adding a `404.md` (or `404.mdx`) file to your `src/con
 
 </FileTree>
 
-You can use all of Starlight’s page layout and customization techniques in your 404 page. For example, the default 404 page uses the [`splash` template](#page-layout) and [`hero`](/reference/frontmatter/#hero) component in frontmatter:
+404 sayfanızda Starlight'ın tüm sayfa şablonlarını ve isteğe uyarlama tekniklerini kullanabilirsiniz. Örneğin, varsayılan 404 sayfası [`splash` şablonunu](#sayfa-şablonu) ve önblümdeki [`hero`](/reference/frontmatter/#hero) bileşenini kullanır:
 
 ```md {4,6-8}
 ---
@@ -279,13 +279,14 @@ template: splash
 editUrl: false
 hero:
   title: '404'
-  tagline: Page not found. Check the URL or try using the search bar.
+  tagline: Sayfa bulunamadı. URL'i kontrol edin ya da arama çubuğunu kullanın.
 ---
 ```
 
-### Disabling the default 404 page
+### Varsayılan 404 sayfasını etkisizleştirme
 
-If your project requires an entirely customized 404 layout, you can create a `src/pages/404.astro` route and set the [`disable404Route`](/reference/configuration/#disable404route) config option to disable Starlight’s default route:
+Projeniz tamamen isteğe uyarlanmış 404 şablonuna ihtiyaç duyarsa, `src/pages/404.astro` dizini oluşturabilir ve [`disable404Route`](/reference/configuration/#disable404route) yapılandırma seçeneğini kullanarak Starlight'ın varsayılan yöneltmesini etkisizleştirebilirsiniz:
+
 
 ```js {9}
 // astro.config.mjs
@@ -295,30 +296,30 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Docs With Custom 404',
+			title: 'İsteğe Uyarlanmış 404 Sayfalı Dokümantasyon',
 			disable404Route: true,
 		}),
 	],
 });
 ```
 
-## Custom fonts
+## Özel yazı karakterleri
 
-By default, Starlight uses sans-serif fonts available on a user’s local device for all text.
-This ensures documentation loads quickly in a font that is familiar to each user, without requiring extra bandwidth to download large font files.
+Varsayılan olarak, Starlight tüm metinler için kullanıcının cihazındaki uygun sans-serif yazı karakterlerini kullanır.
+Bu sayede dokümantasyon kullanıcıların aşina olduğu yazı karakterleriyle büyük yazı karakterli dosyaları yüklemek için ekstra bant genişliği ihtiyacı olmadan hızlıca yüklenir.
 
-If you must add a custom font to your Starlight site, you can set up fonts to use in custom CSS files or with any other [Astro styling technique](https://docs.astro.build/en/guides/styling/).
+Starlight sitenize özel yazı karakteri eklemek zorundaysanız, yazı karakterlerini kullanmak için özel CSS dosyalarına ya da [Astro stillendirme tekniği](https://docs.astro.build/en/guides/styling/) ile ayarlayabilirsiniz.
 
-### Set up fonts
+### Yazı karakterlerini ayarlama
 
-If you already have font files, follow the [local set-up guide](#set-up-local-font-files).
-To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-font).
+Halihazırda yazı karakteri dosyalarınız varsa, [lokal ayarlama rehberini](#set-up-local-font-files) takip edin.
+Google Fonts kullanmak için [Fontsource ayarlama rehberini](#set-up-a-fontsource-font) takip edin.
 
-#### Set up local font files
+#### Lokal yazı karakteri dosyalarını ayarlama
 
 <Steps>
 
-1. Add your font files to a `src/fonts/` directory and create an empty `font-face.css` file:
+1. `src/fonts/` dizininde boş `font-face.css` dosyası oluşturun ve yazı karakteri dosyalarınızı ekleyin:
 
    <FileTree>
 
@@ -331,8 +332,9 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
 
    </FileTree>
 
-2. Add an [`@font-face` declaration](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for each of your fonts in `src/fonts/font-face.css`.
-   Use a relative path to the font file in the `url()` function.
+2. `src/fonts/font-face.css` içindeki her bir yazı karakteri için [`@font-face` deklarasyonu](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) ekleyin.
+    Yazı karakteri dosyasına ait dosya yolunu `url()` fonksiyonu içinde kullanın.
+
 
    ```css
    /* src/fonts/font-face.css */
@@ -347,7 +349,7 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    }
    ```
 
-3. Add the path to your `font-face.css` file to Starlight’s `customCss` array in `astro.config.mjs`:
+3. `astro.config.mjs` içindeki Starlight'ın `customCss` dizisine `font-face.css` dosyanızın yolunu ekleyin:
 
    ```diff lang="js"
    // astro.config.mjs
@@ -357,9 +359,9 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Docs With a Custom Typeface',
+   			title: 'Özel Yazı Karakterli Dokümantasyon',
    			customCss: [
-   +				// Relative path to your @font-face CSS file.
+   +				// @font-face CSS dosyanıza ait dosya yolu.
    +				'./src/fonts/font-face.css',
    			],
    		}),
@@ -369,18 +371,18 @@ To use Google Fonts, follow the [Fontsource set-up guide](#set-up-a-fontsource-f
 
 </Steps>
 
-#### Set up a Fontsource font
+#### Fontsource yazı karakteri ayarlama
 
-The [Fontsource](https://fontsource.org/) project simplifies using Google Fonts and other open-source fonts.
-It provides npm modules you can install for the fonts you want to use and includes ready-made CSS files to add to your project.
+[Fontsource](https://fontsource.org/) projesi, Google Fonts ve diğer açık kaynaklı yazı karakterlerini kullanmayı basitleştirir.
+Kullanmak istediğiniz yazı karakterlerini ve projenize ekleyeceğiniz okumaya hazır CSS dosyalarını içeren npm modülü olarak sunar.
 
 <Steps>
 
-1.  Find the font you want to use in [Fontsource’s catalog](https://fontsource.org/).
-    This example will use [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
+1.  [Fontsource’un kataloğundan](https://fontsource.org/) kullanmak istediğiniz yazı karakterini bulun.
+    Bu örnek IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif) kullanır.
 
-2.  Install the package for your chosen font.
-    You can find the package name by clicking “Install” on the Fontsource font page.
+2.  Seçtiğiniz yazı karakterine ait paketi yükleyin.
+    Fontsource yazı karakteri sayfasında “Install” butonuna tıklayarak paket ismini bulabilirsiniz.
 
          <Tabs>
 
@@ -410,7 +412,7 @@ It provides npm modules you can install for the fonts you want to use and includ
 
       </Tabs>
 
-3.  Add Fontsource CSS files to Starlight’s `customCss` array in `astro.config.mjs`:
+3.  `astro.config.mjs` içindeki Starlight'ın `customCss` dizisine Fontsource CSS dosyalarını ekleyin:
 
     ```diff lang="js"
     // astro.config.mjs
@@ -420,9 +422,9 @@ It provides npm modules you can install for the fonts you want to use and includ
     export default defineConfig({
     	integrations: [
     		starlight({
-    			title: 'Docs With a Custom Typeface',
+    			title: 'Özel Yazı Karakterli Dokümantasyon',
     			customCss: [
-    +				// Fontsource files for to regular and semi-bold font weights.
+    +				// Düz ve yarı kalın font genişlikleri için Fontsource dosyaları.
     +				'@fontsource/ibm-plex-serif/400.css',
     +				'@fontsource/ibm-plex-serif/600.css',
     			],
@@ -431,14 +433,14 @@ It provides npm modules you can install for the fonts you want to use and includ
     });
     ```
 
-    Fontsource ships multiple CSS files for each font. See the [Fontsource documentation](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) on including different weights and styles to understand which to use.
+    Fontsource her yazı karakteri için birden fazla CSS dosyası gönderir. Farklı genişlik ve stil içeren ve hangi yazı karakterini kullanmayı anlamak için [Fontsource dokümantasyonuna](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) göz atın.
 
 </Steps>
 
-### Use fonts
+### Yazı karakterlerini kullanma
 
-To apply the font you set up to your site, use your chosen font’s name in a [custom CSS file](/guides/css-and-tailwind/#custom-css-styles).
-For example, to override Starlight’s default font everywhere, set the `--sl-font` custom property:
+Sitenize ayarladığınız yazı karakterini uygulamak için seçtiğiniz yazı karakterinin ismini [özel CSS dosyasında](/guides/css-and-tailwind/#custom-css-styles) kullanın.
+Örneğin, Starlight'ın varsayılan yazı karakterini her yerde üzerine yazmak için, `--sl-font` özel niteliğini ayarlayın:
 
 ```css
 /* src/styles/custom.css */
@@ -448,8 +450,8 @@ For example, to override Starlight’s default font everywhere, set the `--sl-fo
 }
 ```
 
-You can also write more targeted CSS if you want to apply your font more selectively.
-For example, to only set a font on the main content, but not the sidebars:
+Ayrıca yazı karakterinizi titizlikle uygulamak için daha fazlasını hedefleyen CSS yazabilirsiniz.
+Örneğin, sadece ana içeriğinizde yazı karakteri uygulayıp kenar çubuğuna uygulamayabilirsiniz:
 
 ```css
 /* src/styles/custom.css */
@@ -459,4 +461,4 @@ main {
 }
 ```
 
-Follow the [custom CSS instructions](/guides/css-and-tailwind/#custom-css-styles) to add your styles to your site.
+[isteğe uyarlanmış CSS talimatlarını](/guides/css-and-tailwind/#custom-css-styles) sitenize kendi stilinizi eklemek için takip edin.
