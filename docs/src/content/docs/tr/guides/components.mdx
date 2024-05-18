@@ -65,8 +65,12 @@ Her `<TabItem>` bileşenini kullanıcılara göstermek için `label` sahibi olma
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Yıldızlar" icon="star">Sirius, Vega, Betelgeuse</TabItem>
-	<TabItem label="Uydular" icon="moon">Io, Europa, Ganymede</TabItem>
+	<TabItem label="Yıldızlar" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Uydular" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
 </Tabs>
 ```
 
@@ -74,10 +78,10 @@ Yukarıdaki kod, sayfa üzerinde aşağıdaki gibi sekmeler oluşturur:
 
 <Tabs>
 	<TabItem label="Yıldızlar" icon="star">
-	Sirius, Vega, Betelgeuse
+		Sirius, Vega, Betelgeuse
 	</TabItem>
 	<TabItem label="Uydular" icon="moon">
-	Io, Europa, Ganymede
+		Io, Europa, Ganymede
 	</TabItem>
 </Tabs>
 
@@ -108,6 +112,7 @@ _Bazı ötegezegenler:_
 	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
 </Tabs>
 ```
+
 Yukarıdaki kod, sayfa üzerinde aşağıdaki gibi çıktı oluşturur:
 
 _Bazı yıldızlar:_
@@ -123,7 +128,6 @@ _Bazı ötegezegenler:_
 	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
 	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
 </Tabs>
-
 
 ### Kartlar
 
@@ -318,7 +322,7 @@ import importedCode from '/src/env.d.ts?raw';
 `<FileTree>` bileşenini dizin yapısını dosya ikonları ve toplanabilir alt dizinleri göstermek için kullanın.
 
 Dosyalarınızın yapısını ve dizinleri `<FileTree>` içerisinde [numaralandırılmamış Markdown listesi](https://www.markdownguide.org/basic-syntax/#unordered-lists) ile açıkça belirtin.
-İç içe yerleşmiş liste kullanarak ya da belirli bir içeriksiz dizin oluşturmak için liste elemanının sonuna `/` ekleyerek  alt dizin oluşturun.
+İç içe yerleşmiş liste kullanarak ya da belirli bir içeriksiz dizin oluşturmak için liste elemanının sonuna `/` ekleyerek alt dizin oluşturun.
 
 Aşağıdaki sözdizimi dosya ağacınının görünümünü özelleştirmek için kullanılabilir:
 
