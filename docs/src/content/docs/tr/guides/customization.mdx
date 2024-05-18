@@ -1,5 +1,5 @@
 ---
-title: Starlight'ı İsteğe Uyarlama
+title: Starlight'ı İsteğe Uyarlamak
 description: Starlight sitenizi kendi logonuz, özel yazı karakteriniz, karşılama sayfanız ve daha fazlası ile hazırlamayı öğrenin.
 ---
 
@@ -26,7 +26,7 @@ Site başlığına özel logo eklemek, Starlight sitesine özgün markalamanın 
 
    </FileTree>
 
-2. `astro.config.mjs` içerisine Starlight'ın [`logo.src`](/reference/configuration/#logo) ayarı olarak logonuzun dosya yolunu ekleyin:
+2. `astro.config.mjs` içerisine Starlight'ın [`logo.src`](/tr/reference/configuration/#logo) ayarı olarak logonuzun dosya yolunu ekleyin:
 
    ```diff lang="js"
    // astro.config.mjs
@@ -110,7 +110,7 @@ export default defineConfig({
 
 Varsayılan olarak, Starlight genel gezinti kenar çubuğu ve mevcut sayfa başlıklarını gösteren içindekiler listesini içeren şablon kullanır.
 
-Sayfanın önbölümü içerisinde [`template: splash`](/reference/frontmatter/#template) ayarlayarak kenar çubuksuz daha geniş sayfa şablonu oluşturabilirsiniz.
+Sayfanın önbölümü içerisinde [`template: splash`](/tr/reference/frontmatter/#template) ayarlayarak kenar çubuksuz daha geniş sayfa şablonu oluşturabilirsiniz.
 Bu, karşılama sayfaları için özellikle iyi çalışır ve bu [sitenin anasayfasında](/tr/) görebilirsiniz.
 
 ```md {5}
@@ -127,7 +127,7 @@ template: splash
 Starlight okuyucuların aradıkları başlığa kolayca geçmeleri için her sayfada içindekiler listesini gösterir.
 İçindekiler tablosunu genel olarak Starlight entegrasyonunda ya da önbölümde sayfa-bazlı isteğinize uyarlayabilir hatta etkisizleştirebilirsiniz.
 
-Varsayılan olarak, `<h2>` ve `<h3>` etiketleri içindekiler listesine dahil edilir. [Genel `tableOfContents`](/reference/configuration/#tableofcontents) içerisinde `minHeadingLevel` ve `maxHeadingLevel` seçeneklerini kullanarak site genelindeki başlık seviyelerini değiştiri. Bu varsayılan değerleri tekil bir sayfanın [önbölümüne `tableOfContents`](/reference/frontmatter/#tableofcontents) karşılık gelen niteliklerini ekleyerek değiştirin:
+Varsayılan olarak, `<h2>` ve `<h3>` etiketleri içindekiler listesine dahil edilir. [Genel `tableOfContents`](/tr/reference/configuration/#tableofcontents) içerisinde `minHeadingLevel` ve `maxHeadingLevel` seçeneklerini kullanarak site genelindeki başlık seviyelerini değiştiri. Bu varsayılan değerleri tekil bir sayfanın [önbölümüne `tableOfContents`](/tr/reference/frontmatter/#tableofcontents) karşılık gelen niteliklerini ekleyerek değiştirin:
 
 <Tabs syncKey="config-type">
   <TabItem label="Önbölüm">
@@ -195,9 +195,9 @@ defineConfig({
 
 ## Sosyal medya bağlantıları
 
-Starlight'ın, site başlığına Starlight entegrasyonu içindeki [`social`](/reference/configuration/#social) seçeneğiyle sosyal medya hesaplarınızın bağlantısını eklemek için yerleşik desteği vardır.
+Starlight'ın, site başlığına Starlight entegrasyonu içindeki [`social`](/tr/reference/configuration/#social) seçeneğiyle sosyal medya hesaplarınızın bağlantısını eklemek için yerleşik desteği vardır.
 
-[Yapılandırma Referansında](/reference/configuration/#social) desteklenen tüm bağlantı ikonlarının bulunduğu listeyi bulabilirsiniz.
+[Yapılandırma Referansında](/tr/reference/configuration/#social) desteklenen tüm bağlantı ikonlarının bulunduğu listeyi bulabilirsiniz.
 Başka bir hizmet için desteğe ihtiyacınız varsa Github ya da Discord üzerinden bize yazın!
 
 ```js {9-12}
@@ -224,7 +224,7 @@ Starlight her sayfanın altlığında “Sayfayı düzenle” bağlantısı gös
 Bu, dokümantasyonunuzu geliştirmek için okuyucunun düzenlenecek dosyayı bulmasını kolaylaştırır.
 Özellikle açık kaynaklı projeler için, topluluğunuzdan gelecek katkıları cesaretlendirmeye yardımcı olabilir.
 
-Sayfa düzenleme bağlantıları etkinleştirmek için, Starlight entegrasyon yapılandırmasında [`editLink.baseUrl`](/reference/configuration/#editlink) seçeneğine düzenlenecek reponuzu ekleyin.
+Sayfa düzenleme bağlantıları etkinleştirmek için, Starlight entegrasyon yapılandırmasında [`editLink.baseUrl`](/tr/reference/configuration/#editlink) seçeneğine düzenlenecek reponuzu ekleyin.
 `editLink.baseUrl` değeri, mevcut sayfaya tam düzenleme bağlantısını oluştumak için başına ilave edilir.
 
 Ortak desenler içerir:
@@ -269,7 +269,7 @@ Starlight varsayılan olarak sade bir 404 sayfası gösterir.
 
 </FileTree>
 
-404 sayfanızda Starlight'ın tüm sayfa şablonlarını ve isteğe uyarlama tekniklerini kullanabilirsiniz. Örneğin, varsayılan 404 sayfası [`splash` şablonunu](#sayfa-şablonu) ve önblümdeki [`hero`](/reference/frontmatter/#hero) bileşenini kullanır:
+404 sayfanızda Starlight'ın tüm sayfa şablonlarını ve isteğe uyarlama tekniklerini kullanabilirsiniz. Örneğin, varsayılan 404 sayfası [`splash` şablonunu](#sayfa-şablonu) ve önblümdeki [`hero`](/tr/reference/frontmatter/#hero) bileşenini kullanır:
 
 ```md {4,6-8}
 ---
@@ -285,7 +285,7 @@ hero:
 
 ### Varsayılan 404 sayfasını etkisizleştirme
 
-Projeniz tamamen isteğe uyarlanmış 404 şablonuna ihtiyaç duyarsa, `src/pages/404.astro` dizini oluşturabilir ve [`disable404Route`](/reference/configuration/#disable404route) yapılandırma seçeneğini kullanarak Starlight'ın varsayılan yöneltmesini etkisizleştirebilirsiniz:
+Projeniz tamamen isteğe uyarlanmış 404 şablonuna ihtiyaç duyarsa, `src/pages/404.astro` dizini oluşturabilir ve [`disable404Route`](/tr/reference/configuration/#disable404route) yapılandırma seçeneğini kullanarak Starlight'ın varsayılan yöneltmesini etkisizleştirebilirsiniz:
 
 
 ```js {9}
@@ -312,8 +312,8 @@ Starlight sitenize özel yazı karakteri eklemek zorundaysanız, yazı karakterl
 
 ### Yazı karakterlerini ayarlama
 
-Halihazırda yazı karakteri dosyalarınız varsa, [lokal ayarlama rehberini](#set-up-local-font-files) takip edin.
-Google Fonts kullanmak için [Fontsource ayarlama rehberini](#set-up-a-fontsource-font) takip edin.
+Halihazırda yazı karakteri dosyalarınız varsa, [lokal ayarlama rehberini](#lokal-yazı-karakteri-dosyalarını-ayarlama) takip edin.
+Google Fonts kullanmak için [Fontsource ayarlama rehberini](#fontsource-yazı-karakteri-ayarlama) takip edin.
 
 #### Lokal yazı karakteri dosyalarını ayarlama
 
