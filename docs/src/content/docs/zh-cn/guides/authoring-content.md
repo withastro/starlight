@@ -366,7 +366,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
 
 ## 详细信息
 
-详细信息（也称为“披露”或“手风琴”）用于隐藏不立即相关的内容。用户可以点击一个简短的摘要来展开并查看完整内容。
+详细信息（也称为“手风琴（accordion）”）用于隐藏不立即相关的内容。用户可以点击一个简短的摘要来展开并查看完整内容。
 
 在你的 Markdown 内容中使用标准的 HTML [`<details>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/details) 和 [`<summary>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/summary) 元素来创建一个披露小部件。
 
