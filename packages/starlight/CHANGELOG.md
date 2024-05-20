@@ -1,5 +1,74 @@
 # @astrojs/starlight
 
+## 0.23.1
+
+### Patch Changes
+
+- [#1892](https://github.com/withastro/starlight/pull/1892) [`01de9be8`](https://github.com/withastro/starlight/commit/01de9be89c85bcd0022e87465182ee1aba501687) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: simplify some CSS for the `<details>` element
+
+## 0.23.0
+
+### Minor Changes
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - Updates `@astrojs/mdx` to v3 and enables MDX optimization by default
+
+  ⚠️ **Potentially breaking change:** MDX optimization speeds up builds (Starlight’s docs are building ~40% faster for example), but restricts some advanced MDX features. See full details in the [MDX optimization documentation](https://docs.astro.build/en/guides/integrations-guide/mdx/#optimize).
+
+  Most Starlight users should be unaffected, but if you are using MDX files outside of Starlight pages with the `components` prop, you may see issues. You can disable optimization by adding MDX manually to your `integrations` array in `astro.config.mjs`:
+
+  ```diff
+  import { defineConfig } from 'astro/config';
+  + import mdx from '@astrojs/mdx';
+  import starlight from '@astrojs/starlight';
+
+  // https://astro.build/config
+  export default defineConfig({
+  	integrations: [
+  		starlight({
+  			title: 'My docs',
+  			// ...
+  		}),
+  +		mdx(),
+  	],
+  });
+  ```
+
+- [#1735](https://github.com/withastro/starlight/pull/1735) [`1a9ab50d`](https://github.com/withastro/starlight/commit/1a9ab50d458d6274994ffe66a23fe7a30681337a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds custom styles for `<details>` and `<summary>` elements in Markdown content.
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now 4.8.6
+
+  Please update Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.22.4
+
+### Patch Changes
+
+- [#1871](https://github.com/withastro/starlight/pull/1871) [`03bb126b`](https://github.com/withastro/starlight/commit/03bb126b74d9adaba1be2f0df3f34566815dd77f) Thanks [@delucis](https://github.com/delucis)! - Adds a `blueSky` icon and social link option
+
+- [#1873](https://github.com/withastro/starlight/pull/1873) [`13f33b81`](https://github.com/withastro/starlight/commit/13f33b81fd51d18165eb52f2a0c02b890084e4bd) Thanks [@ekfuhrmann](https://github.com/ekfuhrmann)! - Adds 1 new icon: `alpine`
+
+- [#1857](https://github.com/withastro/starlight/pull/1857) [`32cdfaf0`](https://github.com/withastro/starlight/commit/32cdfaf0155e65ff6fbe9c0cfacd6969ab0015d9) Thanks [@tarikcoskun](https://github.com/tarikcoskun)! - Updates Turkish UI translations
+
+- [#1736](https://github.com/withastro/starlight/pull/1736) [`cfa94a34`](https://github.com/withastro/starlight/commit/cfa94a346ef10804b90db28d217be175e1c1d5ed) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Prevent list items from overflowing Markdown content
+
+## 0.22.3
+
+### Patch Changes
+
+- [#1838](https://github.com/withastro/starlight/pull/1838) [`9fe84754`](https://github.com/withastro/starlight/commit/9fe847544f1edb85bf5b25cd81db39227814335e) Thanks [@delucis](https://github.com/delucis)! - Adds extra information to the errors thrown by the `<Steps>` component to help locate misformatted code
+
+- [#1863](https://github.com/withastro/starlight/pull/1863) [`50be60bb`](https://github.com/withastro/starlight/commit/50be60bbc5cbc42db42e868b9e8f128b4dcbd6a5) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Update Vietnamese translation
+
+- [#1837](https://github.com/withastro/starlight/pull/1837) [`a33a1223`](https://github.com/withastro/starlight/commit/a33a12231772c1dc4b7cc2db3477a6802f3ef53e) Thanks [@delucis](https://github.com/delucis)! - Adds three new icons: `comment`, `comment-alt`, `heart`
+
+- [#1842](https://github.com/withastro/starlight/pull/1842) [`c7838636`](https://github.com/withastro/starlight/commit/c7838636edb8d60a2422ce76a2db511b9cebbb70) Thanks [@delucis](https://github.com/delucis)! - Moves the `href` used in the site title link to Starlight’s route data object. This makes it possible for overrides to change the title link while reusing Starlight’s default component implemenation.
+
+- [#1840](https://github.com/withastro/starlight/pull/1840) [`cb85563c`](https://github.com/withastro/starlight/commit/cb85563c9a3d4eb2925ad884e6a4e8698a15381b) Thanks [@MiahaCybersec](https://github.com/MiahaCybersec)! - Adds 1 new icon: `hackerone`
+
 ## 0.22.2
 
 ### Patch Changes
