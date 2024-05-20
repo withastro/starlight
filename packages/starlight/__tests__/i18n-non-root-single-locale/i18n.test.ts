@@ -7,12 +7,12 @@ describe('processI18nConfig', () => {
 	test('returns the Astro i18n config for a monolingual site with a non-root single locale', () => {
 		const { astroI18nConfig, starlightConfig } = processI18nConfig(config, undefined);
 
-		expect(astroI18nConfig.defaultLocale).toBe('fr');
+		expect(astroI18nConfig.defaultLocale).toBe('fr-CA');
 		expect(astroI18nConfig.locales).toMatchInlineSnapshot(`
 			[
 			  {
 			    "codes": [
-			      "fr",
+			      "fr-CA",
 			    ],
 			    "path": "fr",
 			  },
