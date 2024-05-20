@@ -364,6 +364,30 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
+## 详细信息
+
+详细信息（也称为“手风琴（accordion）”）用于隐藏不立即相关的内容。用户可以点击一个简短的摘要来展开并查看完整内容。
+
+在你的 Markdown 内容中使用标准的 HTML [`<details>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/details) 和 [`<summary>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/summary) 元素来创建一个手风琴小组件。
+
+你可以在 `<details>` 元素内嵌套任何其他 Markdown 语法。
+
+<details>
+<summary>何时何地可以最清楚地看到仙女座？</summary>
+
+在 11 月份的夜空中，[仙女座](<https://zh.wikipedia.org/wiki/仙女座>) 在 `+90°` 到 `-40°` 的纬度范围内最为明显。
+
+</details>
+
+```md
+<details>
+<summary>何时何地可以最清楚地看到仙女座？</summary>
+
+在 11 月份的夜空中，[仙女座](<https://zh.wikipedia.org/wiki/仙女座>) 在 `+90°` 到 `-40°` 的纬度范围内最为明显。
+
+</details>
+```
+
 ## 其它通用 Markdown 语法
 
 Starlight 支持所有其他 Markdown 语法，例如列表和表格。 请参阅 [Markdown 指南的 Markdown 速查表](https://www.markdownguide.org/cheat-sheet/) 以快速了解所有 Markdown 语法元素。
