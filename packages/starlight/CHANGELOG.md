@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.23.1
+
+### Patch Changes
+
+- [#1892](https://github.com/withastro/starlight/pull/1892) [`01de9be8`](https://github.com/withastro/starlight/commit/01de9be89c85bcd0022e87465182ee1aba501687) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: simplify some CSS for the `<details>` element
+
 ## 0.23.0
 
 ### Minor Changes
