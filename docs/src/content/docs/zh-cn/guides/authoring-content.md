@@ -375,7 +375,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
 <details>
 <summary>何时何地可以最清楚地看到仙女座？</summary>
 
-在 11 月份的夜空中，[仙女座](<https://zh.wikipedia.org/wiki/仙女座>) 在 `+90°` 到 `-40°` 的纬度范围内最为明显。
+在 11 月份的夜空中，[仙女座](https://zh.wikipedia.org/wiki/仙女座) 在 `+90°` 到 `-40°` 的纬度范围内最为明显。
 
 </details>
 
@@ -383,7 +383,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
 <details>
 <summary>何时何地可以最清楚地看到仙女座？</summary>
 
-在 11 月份的夜空中，[仙女座](<https://zh.wikipedia.org/wiki/仙女座>) 在 `+90°` 到 `-40°` 的纬度范围内最为明显。
+在 11 月份的夜空中，[仙女座](https://zh.wikipedia.org/wiki/仙女座) 在 `+90°` 到 `-40°` 的纬度范围内最为明显。
 
 </details>
 ```
