@@ -29,6 +29,7 @@ export const socialLinks = [
 	'matrix',
 	'openCollective',
 	'hackerOne',
+	'blueSky',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -73,6 +74,7 @@ export const SocialLinksSchema = () =>
 					matrix: 'Matrix',
 					openCollective: 'Open Collective',
 					hackerOne: 'Hacker One',
+					blueSky: 'BlueSky',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
