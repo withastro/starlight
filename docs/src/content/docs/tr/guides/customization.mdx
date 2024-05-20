@@ -183,7 +183,8 @@ tableOfContents: false
 defineConfig({
 	integrations: [
 		starlight({
-			title: 'İçindekiler tablosunun genel olarak etkisizleştirildiği dokümanlar',
+			title:
+				'İçindekiler tablosunun genel olarak etkisizleştirildiği dokümanlar',
 			tableOfContents: false,
 		}),
 	],
@@ -234,7 +235,7 @@ Ortak desenler içerir:
 
 Starlight projeniz reponuzun en üstünde yer almıyorsa, baz URL sonuna projenizin yolunu ekleyin.
 
-Bu örnek,  Github'daki `withastro/starlight` reposunda `main` branch içinde `docs/` alt dizinindeki Starlight dokümantasyonu için sayfa düzenleme bağlantısını yapılandırmayı gösterir:
+Bu örnek, Github'daki `withastro/starlight` reposunda `main` branch içinde `docs/` alt dizinindeki Starlight dokümantasyonu için sayfa düzenleme bağlantısını yapılandırmayı gösterir:
 
 ```js {9-11}
 // astro.config.mjs
@@ -287,7 +288,6 @@ hero:
 
 Projeniz tamamen isteğe uyarlanmış 404 şablonuna ihtiyaç duyarsa, `src/pages/404.astro` dizini oluşturabilir ve [`disable404Route`](/tr/reference/configuration/#disable404route) yapılandırma seçeneğini kullanarak Starlight'ın varsayılan yöneltmesini etkisizleştirebilirsiniz:
 
-
 ```js {9}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
@@ -333,8 +333,7 @@ Google Fonts kullanmak için [Fontsource ayarlama rehberini](#fontsource-yazı-k
    </FileTree>
 
 2. `src/fonts/font-face.css` içindeki her bir yazı karakteri için [`@font-face` deklarasyonu](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) ekleyin.
-    Yazı karakteri dosyasına ait dosya yolunu `url()` fonksiyonu içinde kullanın.
-
+   Yazı karakteri dosyasına ait dosya yolunu `url()` fonksiyonu içinde kullanın.
 
    ```css
    /* src/fonts/font-face.css */
