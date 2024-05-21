@@ -139,15 +139,17 @@ function linkFromContentEntryItem(
 	locale: string | undefined,
 	currentPathname: string
 ) {
+	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
+	item.slug = item.slug === 'index' ? '' : item.slug;
 	const slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
 	const entry = routes.find((entry) => slugWithLocale === entry.slug);
 	if (!entry) {
-		throw new AstroError(
-			`The slug \`${item.slug}\` specified in the sidebar object of the Starlight config does not exist. Update the Starlight config to reference a valid entry slug in the Starlight content collection.
+		throw new AstroError(`
+The slug \`${item.slug}\` specified in the sidebar object of the Starlight config does not exist. Update the Starlight config to reference a valid entry slug in the Starlight content collection.
+
+Be sure that no trailing or leading slashes are included when specifying \`slug\`
 			
-Learn more at https://docs.astro.build/en/reference/api-reference/#getentry
-			`
-		);
+Learn more at https://docs.astro.build/en/reference/api-reference/#getentry`);
 	}
 	let href = entry.slug;
 	const label = pickLang(item.translations, localeToLang(locale)) || entry.entry.data.title;
