@@ -68,6 +68,9 @@ const StarlightTailwindPlugin = () =>
 					borderColor: theme('borderColor.DEFAULT', 'currentColor'),
 				},
 				'::before, ::after': { '--tw-content': '' },
+				// Keep base font-family styles even in non-Starlight pages.
+				'html, :host': { 'font-family': theme('fontFamily.sans') },
+				'code, kbd, samp, pre': { 'font-family': theme('fontFamily.mono') },
 
 				// Wire up Starlight theme to use Tailwind config.
 				':root': {
