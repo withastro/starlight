@@ -22,6 +22,7 @@ export default function StarlightIntegration({
 		name: '@astrojs/starlight',
 		hooks: {
 			'astro:config:setup': async ({
+				addMiddleware,
 				command,
 				config,
 				injectRoute,
@@ -42,10 +43,16 @@ export default function StarlightIntegration({
 					config.i18n
 				);
 
-				const { integrations } = pluginResult;
+				const { integrations, pluginTranslations } = pluginResult;
 				userConfig = starlightConfig;
 
-				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
+				const useTranslations = createTranslationSystemFromFs(
+					starlightConfig,
+					config,
+					pluginTranslations
+				);
+
+				addMiddleware({ entrypoint: '@astrojs/starlight/locals', order: 'pre' });
 
 				if (!starlightConfig.disable404Route) {
 					injectRoute({
@@ -83,7 +90,7 @@ export default function StarlightIntegration({
 
 				updateConfig({
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
+						plugins: [vitePluginStarlightUserConfig(starlightConfig, config, pluginTranslations)],
 					},
 					markdown: {
 						remarkPlugins: [

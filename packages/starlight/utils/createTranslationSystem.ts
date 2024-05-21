@@ -1,22 +1,49 @@
+import i18next, { type TOptions } from 'i18next';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import builtinTranslations from '../translations/index';
 import { BuiltInDefaultLocale } from './i18n';
 import type { StarlightConfig } from './user-config';
+import type { UserI18nKeys, UserI18nSchema } from './translations';
+import type { RemoveIndexSignature } from './types';
+
+/**
+ * The namespace for i18next resources used by Starlight.
+ * All translations handled by Starlight are stored in the same namespace and Starlight always use
+ * a new instance of i18next configured with only the resources available to Starlight.
+ */
+const i18nextNamespace = 'starlight';
 
 export function createTranslationSystem<T extends i18nSchemaOutput>(
+	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	userTranslations: Record<string, T>,
-	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>
+	pluginTranslations: Record<string, T> = {}
 ) {
-	/** User-configured default locale. */
-	const defaultLocale = config.defaultLocale?.locale || 'root';
+	const translations = {
+		[BuiltInDefaultLocale.lang]: buildResources(
+			builtinTranslations[BuiltInDefaultLocale.lang]!,
+			pluginTranslations[BuiltInDefaultLocale.lang],
+			userTranslations[BuiltInDefaultLocale.lang]
+		),
+	};
 
-	/** Default map of UI strings based on Starlight and user-configured defaults. */
-	const defaults = buildDictionary(
-		builtinTranslations.en!,
-		userTranslations.en,
-		builtinTranslations[defaultLocale] || builtinTranslations[stripLangRegion(defaultLocale)],
-		userTranslations[defaultLocale]
-	);
+	if (config.locales) {
+		for (const locale in config.locales) {
+			const lang = localeToLang(locale, config.locales, config.defaultLocale);
+
+			translations[lang] = buildResources(
+				builtinTranslations[lang] || builtinTranslations[stripLangRegion(lang)],
+				pluginTranslations[lang],
+				userTranslations[lang]
+			);
+		}
+	}
+
+	const i18n = i18next.createInstance();
+	i18n.init({
+		resources: translations,
+		fallbackLng:
+			config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang,
+	});
 
 	/**
 	 * Generate a utility function that returns UI strings for the given `locale`.
@@ -31,15 +58,22 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	 * const dictionary = t.all();
 	 * // => { 'skipLink.label': 'Skip to content', 'search.label': 'Search', ... }
 	 */
-	return function useTranslations(locale: string | undefined) {
+	return (locale: string | undefined) => {
 		const lang = localeToLang(locale, config.locales, config.defaultLocale);
-		const dictionary = buildDictionary(
-			defaults,
-			builtinTranslations[lang] || builtinTranslations[stripLangRegion(lang)],
-			userTranslations[lang]
-		);
-		const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
-		t.all = () => dictionary;
+		const fixedT = i18n.getFixedT(lang);
+
+		const t: I18nT = (key: I18nKey, options?: I18nOptions): string => {
+			return fixedT(key, {
+				...options,
+				/** @see I18nOptions for the reasons why some options are enforced. */
+				ns: i18nextNamespace,
+				returnObjects: false,
+				returnDetails: false,
+			});
+		};
+		t.all = () => i18n.getResourceBundle(lang, i18nextNamespace);
+		t.exists = (key: I18nKey) => i18n.exists(key, { lng: lang, ns: i18nextNamespace });
+
 		return t;
 	};
 }
@@ -70,12 +104,11 @@ function localeToLang(
 
 type BuiltInStrings = (typeof builtinTranslations)['en'];
 
-/** Build a dictionary by layering preferred translation sources. */
-function buildDictionary<T extends Record<string, string | undefined>>(
-	base: BuiltInStrings,
+/** Build an i18next resources dictionary by layering preferred translation sources. */
+function buildResources<T extends Record<string, string | undefined>>(
 	...dictionaries: (T | BuiltInStrings | undefined)[]
-): BuiltInStrings & T {
-	const dictionary = { ...base };
+): { [i18nextNamespace]: BuiltInStrings & T } {
+	const dictionary: Partial<BuiltInStrings> = {};
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
 		for (const key in dict) {
@@ -83,5 +116,30 @@ function buildDictionary<T extends Record<string, string | undefined>>(
 			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}
-	return dictionary as BuiltInStrings & T;
+	return { [i18nextNamespace]: dictionary as BuiltInStrings & T };
 }
+
+type I18nKeys = UserI18nKeys | keyof StarlightApp.I18n;
+type I18nKey = I18nKeys | I18nKeys[];
+type I18nOptions = Omit<
+	RemoveIndexSignature<TOptions>,
+	/**
+	 * Some options are not user-configurable and are enforced by the translation system:
+	 *
+	 * - `ns` is always set to a single namespace.
+	 * - `returnDetails` is always `false` so that `t()` always returns a UI string and not the
+	 * 		details object which is mostly useless in a single namespace context and would comlicate
+	 * 		typing.
+	 * - `returnObjects` is always `false` so that `t()` always returns a string and not nested
+	 * 		translation objects as this would conflict with the i18n schema and require typegen.
+	 */
+	'ns' | 'returnDetails' | 'returnObjects'
+> & {
+	// Adding back support for any key that can be used for interpolation.
+	[key: string]: unknown;
+};
+
+export type I18nT = ((key: I18nKey, options?: I18nOptions) => string) & {
+	all: () => UserI18nSchema;
+	exists: (key: I18nKey) => boolean;
+};

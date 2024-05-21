@@ -11,22 +11,11 @@ vi.mock('astro:content', async () =>
 	})
 );
 
-test('includes localized labels (fr)', () => {
+test('does no longer include localized labels', () => {
 	const route = routes[0]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
 		url: new URL('https://example.com'),
 	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Aller au contenu');
-});
-
-test('includes localized labels (pt-br)', () => {
-	const route = routes[1]!;
-	const data = generateRouteData({
-		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		url: new URL('https://example.com'),
-	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Pular para o conteúdo');
+	expect(data.labels).not.toBeDefined();
 });

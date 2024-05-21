@@ -25,7 +25,11 @@
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.ts"
+    },
+    "./locals": "./locals.ts",
     "./components": "./components.ts",
     "./components/Badge.astro": {
       "types": "./components/Badge.astro.tsx",
@@ -202,6 +206,7 @@
     "hast-util-select": "^6.0.2",
     "hast-util-to-string": "^3.0.0",
     "hastscript": "^8.0.0",
+    "i18next": "^23.11.5",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.0",
     "pagefind": "^1.0.3",

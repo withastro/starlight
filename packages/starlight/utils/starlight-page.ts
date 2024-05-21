@@ -13,10 +13,10 @@ import {
 import type { StarlightDocsEntry } from './routing';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar } from './navigation';
-import { useTranslations } from './translations';
 import { docsSchema } from '../schema';
 import { BadgeConfigSchema } from '../schemas/badge';
 import { SidebarLinkItemHTMLAttributesSchema } from '../schemas/sidebar';
+import type { Prettify, RemoveIndexSignature } from './types';
 
 /**
  * The frontmatter schema for Starlight pages derived from the default schema for Starlight’s
@@ -225,7 +225,6 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: useTranslations(localeData.locale).all(),
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
@@ -286,19 +285,3 @@ async function getUserDocsSchema(): Promise<
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
 	return userCollections?.docs.schema ?? docsSchema();
 }
-
-// https://stackoverflow.com/a/66252656/1945960
-type RemoveIndexSignature<T> = {
-	[K in keyof T as string extends K
-		? never
-		: number extends K
-		? never
-		: symbol extends K
-		? never
-		: K]: T[K];
-};
-
-// https://www.totaltypescript.com/concepts/the-prettify-helper
-type Prettify<T> = {
-	[K in keyof T]: T[K];
-} & {};

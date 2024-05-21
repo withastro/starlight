@@ -458,13 +458,12 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 	expect(data.hasSidebar).toBe(false);
 });
 
-test('includes localized labels', async () => {
+test('does no longer include localized labels', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
 		url: starlightPageUrl,
 	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Skip to content');
+	expect(data.labels).not.toBeDefined();
 });
 
 test('uses provided edit URL if any', async () => {
