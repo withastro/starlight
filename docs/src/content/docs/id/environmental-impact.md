@@ -1,6 +1,8 @@
 ---
 title: Dokumentasi yang ramah lingkungan
 description: Pelajari bagaimana Starlight bisa membantu Anda membangun website dokumentasi yang lebih ramah lingkungan dan mengurangi jejak karbon Anda.
+sidebar:
+  title: Dampak terhadap lingkungan
 ---
 
 Estimasi dampak dari industri web terhadap iklim berkisar antara [2%][sf] hingga [4% dari emisi karbon global ][bbc], kira-kira setara dengan emisi industri penerbangan. Ada banyak faktor kompleks dalam menghitung dampak ekologis sebuah website, namun panduan ini mencakup beberapa tips untuk mengurangi jejak lingkungan dari website dokumentasi Anda.
