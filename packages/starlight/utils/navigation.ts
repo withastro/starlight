@@ -139,9 +139,9 @@ function linkFromContentEntryItem(
 	locale: string | undefined,
 	currentPathname: string
 ) {
+	let slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
-	item.slug = item.slug === 'index' ? '' : item.slug;
-	const slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
+	slugWithLocale = slugWithLocale.replace(/\/?index$/, '');
 	const entry = routes.find((entry) => slugWithLocale === entry.slug);
 	if (!entry) {
 		throw new AstroError(`

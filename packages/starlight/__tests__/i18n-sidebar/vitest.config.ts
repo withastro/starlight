@@ -8,10 +8,14 @@ export default defineVitestConfig({
 		en: { label: 'English', lang: 'en-US' },
 	},
 	sidebar: [
+		{ slug: 'index' },
 		{ slug: 'getting-started' },
+		{ slug: 'manual-setup' },
+		{ slug: 'environmental-impact' },
 		{
-			label: 'Group',
-			items: [{ slug: 'guides/authoring-content' }, { slug: 'guides/components' }],
+			label: 'Guides',
+			items: [{ slug: 'guides/pages' }, { slug: 'guides/authoring-content' }],
 		},
+		{ slug: 'resources/plugins' },
 	],
 });
