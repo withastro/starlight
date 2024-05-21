@@ -1,8 +1,6 @@
 ---
 title: Documents écologiques
 description: Découvrez comment Starlight peut vous aider à créer des documentations plus écologiques et à réduire votre empreinte carbone.
-sidebar:
-  title: Impact environnemental
 ---
 
 Les estimations de l'impact climatique de l'industrie du web varient entre [2 %][sf] et [4 % des émissions mondiales de carbone][bbc], ce qui équivaut à peu près aux émissions de l'industrie du transport aérien.

@@ -1,8 +1,6 @@
 ---
 title: Documentazione ecologica
 description: Impara come Starlight può aiutarti a costruire siti per documentazione più verdi e ridurre la tua impronta ecologica.
-sidebar:
-  title: Impatto ambientale
 ---
 
 Le stime dell'impatto ambientale del web si aggirano tra il [2%][sf] e il [4% delle emissioni globali di gas serra][bbc], equivalente circa alle emissioni dell'industria aerea.

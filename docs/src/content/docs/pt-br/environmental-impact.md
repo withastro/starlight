@@ -1,8 +1,6 @@
 ---
 title: Documentação amigável ao meio ambiente
 description: Aprenda como Starlight pode te ajudar a construir sites de documentação mais verdes e reduzir sua pegada de carbono.
-sidebar:
-  title: Impacto Ambiental
 ---
 
 Estimativas para o impacto climático da indústria web variam entre [2%][sf] e [4% da emissão global de carbono][bbc], aproximadamente equivalente as emissões da indústria aeronáutica.

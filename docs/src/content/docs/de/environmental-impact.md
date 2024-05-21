@@ -1,8 +1,6 @@
 ---
 title: Umweltfreundliche Dokumente
 description: Erfahre, wie Starlight dir helfen kann, umweltfreundlichere Dokumentationen zu erstellen und deinen ökologischen Fußabdruck zu verringern.
-sidebar:
-  title: Umweltbelastung
 ---
 
 Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2 %][sf] und [4 % der weltweiten Kohlenstoffemissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
