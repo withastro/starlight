@@ -88,7 +88,7 @@ importers:
         specifier: ^0.23.1
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
-        specifier: ^2.0.2
+        specifier: ^2.0.3
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
         specifier: ^5.1.0
