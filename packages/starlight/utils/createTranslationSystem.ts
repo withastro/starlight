@@ -62,7 +62,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 		const lang = localeToLang(locale, config.locales, config.defaultLocale);
 		const fixedT = i18n.getFixedT(lang);
 
-		const t: I18nT = (key: I18nKey, options?: I18nOptions): string => {
+		const t: I18nT = (key, options) => {
 			return fixedT(key, {
 				...options,
 				/** @see I18nOptions for the reasons why some options are enforced. */
@@ -72,7 +72,8 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 			});
 		};
 		t.all = () => i18n.getResourceBundle(lang, i18nextNamespace);
-		t.exists = (key: I18nKey) => i18n.exists(key, { lng: lang, ns: i18nextNamespace });
+		t.exists = (key) => i18n.exists(key, { lng: lang, ns: i18nextNamespace });
+		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;
 	};
@@ -142,4 +143,5 @@ type I18nOptions = Omit<
 export type I18nT = ((key: I18nKey, options?: I18nOptions) => string) & {
 	all: () => UserI18nSchema;
 	exists: (key: I18nKey) => boolean;
+	dir: (lang?: string) => 'ltr' | 'rtl';
 };
