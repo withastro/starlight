@@ -22,7 +22,6 @@ vi.mock('astro:content', async () =>
 			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
 			['guides/components.mdx', { title: 'Components' }],
-			['getting-started.mdx', { title: 'Getting Started' }],
 		],
 	})
 );
@@ -128,14 +127,6 @@ describe('getSidebar', () => {
 			    ],
 			    "label": "API v1",
 			    "type": "group",
-			  },
-			  {
-			    "attrs": {},
-			    "badge": undefined,
-			    "href": "/getting-started",
-			    "isCurrent": false,
-			    "label": "Getting Started",
-			    "type": "link",
 			  },
 			]
 		`);
