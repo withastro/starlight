@@ -1,15 +1,12 @@
-declare module '@astrojs/starlight' {
-	export default function StarlightIntegration(
-		options: import('./utils/plugins').StarlightUserConfigWithPlugins
-	): import('astro').AstroIntegration;
-}
+/// <reference path="./locals.d.ts" />
 
-declare namespace StarlightApp {
-	interface I18n {}
-}
+import 'i18next';
 
-declare namespace App {
-	interface Locals {
-		t: import('./utils/createTranslationSystem').I18nT;
+declare module 'i18next' {
+	interface CustomTypeOptions {
+		defaultNS: typeof import('./utils/createTranslationSystem').I18nextNamespace;
+		resources: {
+			starlight: Record<import('./utils/createTranslationSystem').I18nKeys, string>;
+		};
 	}
 }

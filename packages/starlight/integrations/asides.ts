@@ -156,7 +156,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			// children with the `directiveLabel` property set to true. We want to pass it as the title
 			// prop to <Aside>, so when we find a directive label, we store it for the title prop and
 			// remove the paragraph from the container’s children.
-			let title = t(`aside.${variant}`);
+			let title: string = t(`aside.${variant}`);
 			const firstChild = node.children[0];
 			if (
 				firstChild?.type === 'paragraph' &&

@@ -1,17 +1,16 @@
-import i18next, { type TOptions } from 'i18next';
+import i18next, { type ExistsFunction, type TFunction } from 'i18next';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import builtinTranslations from '../translations/index';
 import { BuiltInDefaultLocale } from './i18n';
 import type { StarlightConfig } from './user-config';
 import type { UserI18nKeys, UserI18nSchema } from './translations';
-import type { RemoveIndexSignature } from './types';
 
 /**
  * The namespace for i18next resources used by Starlight.
  * All translations handled by Starlight are stored in the same namespace and Starlight always use
- * a new instance of i18next configured with only the resources available to Starlight.
+ * a new instance of i18next configured for this namespace.
  */
-const i18nextNamespace = 'starlight';
+export const I18nextNamespace = 'starlight' as const;
 
 export function createTranslationSystem<T extends i18nSchemaOutput>(
 	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
@@ -48,7 +47,10 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	/**
 	 * Generate a utility function that returns UI strings for the given `locale`.
 	 *
-	 * Also includes an `all()` method for getting the entire dictionary.
+	 * Also includes a few utility methods:
+	 * - `all()` method for getting the entire dictionary.
+	 * - `exists()` method for checking if a key exists in the dictionary.
+	 * - `dir()` method for getting the text direction of the locale.
 	 *
 	 * @param {string | undefined} [locale]
 	 * @example
@@ -57,22 +59,17 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	 * // => 'Search'
 	 * const dictionary = t.all();
 	 * // => { 'skipLink.label': 'Skip to content', 'search.label': 'Search', ... }
+	 * const exists = t.exists('search.label');
+	 * // => true
+	 * const dir = t.dir();
+	 * // => 'ltr'
 	 */
 	return (locale: string | undefined) => {
 		const lang = localeToLang(locale, config.locales, config.defaultLocale);
-		const fixedT = i18n.getFixedT(lang);
 
-		const t: I18nT = (key, options) => {
-			return fixedT(key, {
-				...options,
-				/** @see I18nOptions for the reasons why some options are enforced. */
-				ns: i18nextNamespace,
-				returnObjects: false,
-				returnDetails: false,
-			});
-		};
-		t.all = () => i18n.getResourceBundle(lang, i18nextNamespace);
-		t.exists = (key) => i18n.exists(key, { lng: lang, ns: i18nextNamespace });
+		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
+		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace);
+		t.exists = (key) => i18n.exists(key, { lng: lang, ns: I18nextNamespace });
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;
@@ -108,7 +105,7 @@ type BuiltInStrings = (typeof builtinTranslations)['en'];
 /** Build an i18next resources dictionary by layering preferred translation sources. */
 function buildResources<T extends Record<string, string | undefined>>(
 	...dictionaries: (T | BuiltInStrings | undefined)[]
-): { [i18nextNamespace]: BuiltInStrings & T } {
+): { [I18nextNamespace]: BuiltInStrings & T } {
 	const dictionary: Partial<BuiltInStrings> = {};
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
@@ -117,31 +114,13 @@ function buildResources<T extends Record<string, string | undefined>>(
 			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}
-	return { [i18nextNamespace]: dictionary as BuiltInStrings & T };
+	return { [I18nextNamespace]: dictionary as BuiltInStrings & T };
 }
 
-type I18nKeys = UserI18nKeys | keyof StarlightApp.I18n;
-type I18nKey = I18nKeys | I18nKeys[];
-type I18nOptions = Omit<
-	RemoveIndexSignature<TOptions>,
-	/**
-	 * Some options are not user-configurable and are enforced by the translation system:
-	 *
-	 * - `ns` is always set to a single namespace.
-	 * - `returnDetails` is always `false` so that `t()` always returns a UI string and not the
-	 * 		details object which is mostly useless in a single namespace context and would comlicate
-	 * 		typing.
-	 * - `returnObjects` is always `false` so that `t()` always returns a string and not nested
-	 * 		translation objects as this would conflict with the i18n schema and require typegen.
-	 */
-	'ns' | 'returnDetails' | 'returnObjects'
-> & {
-	// Adding back support for any key that can be used for interpolation.
-	[key: string]: unknown;
-};
+export type I18nKeys = UserI18nKeys | keyof StarlightApp.I18n;
 
-export type I18nT = ((key: I18nKey, options?: I18nOptions) => string) & {
+export type I18nT = TFunction<'starlight', undefined> & {
 	all: () => UserI18nSchema;
-	exists: (key: I18nKey) => boolean;
+	exists: ExistsFunction;
 	dir: (lang?: string) => 'ltr' | 'rtl';
 };

@@ -106,16 +106,6 @@ describe('t()', async () => {
 		// @ts-expect-error - using a missing translation key.
 		expect(t('test.unknown')).toBe('test.unknown');
 	});
-
-	test('returns UI strings from the single namespace used by Starlight', () => {
-		expect(t).toBeTypeOf('function');
-		expect(t('skipLink.label', { ns: 'custom-namespace' })).toBe('Skip to content');
-	});
-
-	test('returns a string but never the details object', () => {
-		expect(t).toBeTypeOf('function');
-		expect(t('skipLink.label', { returnDetails: true })).toBe('Skip to content');
-	});
 });
 
 describe('t.all()', async () => {
@@ -149,13 +139,11 @@ describe('t.exists()', async () => {
 	test('returns `true` for existing translations', () => {
 		expect(t.exists).toBeTypeOf('function');
 		expect(t.exists('skipLink.label')).toBe(true);
-		// @ts-expect-error - using a mocked translation key.
 		expect(t.exists('test.foo')).toBe(true);
 	});
 
 	test('returns `false` for unknown translations', () => {
 		expect(t.exists).toBeTypeOf('function');
-		// @ts-expect-error - using a missing translation key.
 		expect(t.exists('test.unknown')).toBe(false);
 	});
 });
