@@ -69,7 +69,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 
 		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
 		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace);
-		t.exists = (key) => i18n.exists(key, { lng: lang, ns: I18nextNamespace });
+		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options });
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;
