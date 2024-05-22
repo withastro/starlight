@@ -1,0 +1,18 @@
+---
+title: Debug i18next
+---
+
+:::note
+
+The plugin provided string is provided in English and French.
+The user manually provides a custom translation for the plugin provided string in Spanish.
+
+- Switching the language to English or French will show the plugin provided string.
+- Switching the language to Spanish will show the custom translation.
+- Switching the language to any other language will show the plugin provided string in English as a fallback.
+
+:::
+
+import I18nextDebug from '~/components/i18next-debug.astro';
+
+<I18nextDebug />
