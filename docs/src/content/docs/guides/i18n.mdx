@@ -272,3 +272,89 @@ export const collections = {
 ```
 
 Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+
+## Accessing UI strings
+
+Starlight uses [Astro i18n](https://docs.astro.build/en/guides/internationalization/) and [i18next](https://www.i18next.com/) to handle internationalization and and manage UI strings.
+Most i18next features, like [interpolation](https://www.i18next.com/translation-function/interpolation) or [pluralization](https://www.i18next.com/translation-function/plurals), can be used in Starlight using the`locals.t` object available as a property to [`APIContext`](https://docs.astro.build/en/reference/api-reference/#contextlocals) and [`AstroGlobal`](https://docs.astro.build/en/reference/api-reference/#astrolocals).
+
+### `t`
+
+The `locals.t()` function can be used to access [built-in](/guides/i18n/#translate-starlights-ui), [user-defined](/guides/i18n/#extend-translation-schema), and [plugin-provided](/reference/plugins/#injecttranslations) UI strings.
+
+Considering a custom translation file with the following content:
+
+```json
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+Specify the translation key to acccess using the first argument of the `t()` function and optionally provide an option object as second argument to customize the translation.
+
+```astro
+---
+// src/components/Example.astro
+---
+
+<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+```
+
+Please refer to the [i18next documentation](https://www.i18next.com/overview/api#t) for more information on how to use the `t()` function with interpolation, formatting, and more.
+
+### `t.all`
+
+The `locals.t.all()` function provides an object containing all UI strings available for the current locale keyed by their translation key.
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Skip to content",
+//      "search.label": "Search",
+//      …
+//    }
+---
+```
+
+### `t.exists`
+
+To check if a translation key exists for the current or a specific locale, use the `locals.t.exists()` function with the translation key as first argument and an optional options object as second argument.
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^
+//    true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^
+//    false
+---
+```
+
+Please refer to the [i18next documentation](https://www.i18next.com/overview/api#exists) for more information on how to use the `t.exists()` function.
+
+### `t.dir`
+
+The `locals.t.dir()` function returns the text direction of the current or a specific locale.
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+Please refer to the [i18next documentation](https://www.i18next.com/overview/api#dir) for more information on how to use the `t.dir()` function.

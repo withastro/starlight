@@ -27,6 +27,7 @@ interface StarlightPlugin {
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
+      injectTranslations: (Record<string, Record<string, string>>) => void;
     }) => void | Promise<void>;
   };
 }
@@ -161,3 +162,32 @@ The example above will log a message that includes the provided info message:
 ```shell
 [long-process-plugin] Starting long process…
 ```
+
+#### `injectTranslations`
+
+**type:** `(translations: Record<string, Record<string, string>>) => void`
+
+A callback function to add or update translations strings.
+
+In the following example, the plugin injects a custom UI string translation named `myPlugin.doThing` for the `en` locale and `fr` locales:
+
+```ts {6-13} /injectTranslations[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-with-translations',
+  hooks: {
+    setup({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+To use the injected translation in your plugin UI, please check the [“Accessing UI strings” guide](/guides/i18n/#accessing-ui-strings) for more information.
