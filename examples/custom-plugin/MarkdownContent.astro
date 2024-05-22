@@ -1,0 +1,51 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+
+const showI18nDebug = Astro.props.slug.endsWith('guides/debug-i18next');
+---
+
+<Default {...Astro.props}><slot /></Default>
+{
+	showI18nDebug && (
+		<div class="plugin-context">
+			<div class="plugin-context-label">From a plugin</div>
+			<div class="sl-markdown-content">
+				<table>
+					<tr>
+						<td>Built-in string</td>
+						<td>
+							<code>skipLink.label</code>
+						</td>
+						<td>{Astro.locals.t('skipLink.label')}</td>
+					</tr>
+					<tr>
+						<td>Plugin-defined string</td>
+						<td>
+							<code>plugin.test</code>
+						</td>
+						<td>{Astro.locals.t('plugin.test')}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	)
+}
+
+<style>
+	.plugin-context {
+		border: 2px dashed var(--sl-color-text-accent);
+		display: flex;
+		flex-direction: column;
+	}
+
+	.plugin-context-label {
+		font-weight: 600;
+		padding: 1rem;
+		border-bottom: 2px dashed var(--sl-color-text-accent);
+	}
+
+	.sl-markdown-content {
+		padding: 1rem;
+	}
+</style>

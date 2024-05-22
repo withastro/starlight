@@ -7,7 +7,7 @@ import type { RemoveIndexSignature } from './types';
 
 export type UserI18nSchema = 'i18n' extends DataCollectionKey
 	? CollectionEntry<'i18n'> extends { data: infer T }
-		? T
+		? i18nSchemaOutput & T
 		: i18nSchemaOutput
 	: i18nSchemaOutput;
 export type UserI18nKeys = keyof RemoveIndexSignature<UserI18nSchema>;

@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+// TODO(HiDeoo) Remove
+import starlightCustomPlugin from 'starlight-custom-plugin';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -233,7 +235,7 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 				  ]
-				: [],
+				: [starlightCustomPlugin()],
 		}),
 	],
 });
