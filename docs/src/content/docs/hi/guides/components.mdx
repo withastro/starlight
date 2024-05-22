@@ -374,19 +374,19 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight सामान्य आइकन का एक संग्रह प्रदान करता है जिसे आप `<Icon>` अवयव का उपयोग करके अपने कंटेंट में प्रदर्शित कर सकते हैं।
 
-प्रत्येक `<Icon>` को एक [`name`](#सभी-आइकन) की आवश्यकता होती है और इसमें वैकल्पिक रूप से एक `label`, `size`, और `color` विशेषता शामिल हो सकती है।
+प्रत्येक `<Icon>` को एक [`name`](#सभी-आइकन) की आवश्यकता होती है और स्क्रीन रीडर के लिए संदर्भ प्रदान करने के लिए वैकल्पिक रूप से एक `label` शामिल किया जा सकता है। CSS इकाइयों और रंग मूल्यों का उपयोग करके आइकन की उपस्थिति को अनुकूलित करने के लिए `size` और `color` विशेषताओं का उपयोग किया जा सकता है।
 
 ```mdx
 # src/content/docs/example.mdx
 
 import { Icon } from '@astrojs/starlight/components';
 
-<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 उपरोक्त कोड पेज पर निम्नलिखित उत्पन्न करता है:
 
-<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### सभी आइकन
 
