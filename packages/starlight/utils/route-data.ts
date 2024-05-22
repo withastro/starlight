@@ -10,7 +10,6 @@ import type { Route } from './routing';
 import { localizedId } from './slugs';
 import { formatPath } from './format-path';
 import { useTranslations } from './translations';
-import { formatPath } from './format-path';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
