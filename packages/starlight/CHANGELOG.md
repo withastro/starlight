@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.23.2
+
+### Patch Changes
+
+- [#1913](https://github.com/withastro/starlight/pull/1913) [`7ebe8f75`](https://github.com/withastro/starlight/commit/7ebe8f7599d473cdd22c80bb0fe115fe6120cab7) Thanks [@delucis](https://github.com/delucis)! - Fixes support for Astro’s `build: { format: 'preserve' }` configuration option
+
+- [#1941](https://github.com/withastro/starlight/pull/1941) [`2f3240c9`](https://github.com/withastro/starlight/commit/2f3240c91c09dfc411d93a71eeb75ad6d704e14b) Thanks [@astrobot-houston](https://github.com/astrobot-houston)! - Adds icon support for `.otf` files in `<FileTree>`
+
 ## 0.23.1
 
 ### Patch Changes
