@@ -103,6 +103,12 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 
 		/** Pagefind indexing for this page - set to false to disable. */
 		pagefind: z.boolean().default(true),
+
+		/**
+		 * Indicates that this page is a draft and will not be included in production builds.
+		 * Note that the page will still be available when running Astro in development mode.
+		 */
+		draft: z.boolean().default(false),
 	});
 /** Type of Starlight’s default frontmatter schema. */
 type DefaultSchema = ReturnType<typeof StarlightFrontmatterSchema>;
@@ -117,7 +123,9 @@ type BaseSchemaWithoutEffects =
 type BaseSchema = BaseSchemaWithoutEffects | z.ZodEffects<BaseSchemaWithoutEffects>;
 
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
-type ExtendedSchema<T extends BaseSchema> = T extends BaseSchema
+type ExtendedSchema<T extends BaseSchema | never = never> = [T] extends [never]
+	? DefaultSchema
+	: T extends BaseSchema
 	? z.ZodIntersection<DefaultSchema, T>
 	: DefaultSchema;
 
@@ -147,8 +155,13 @@ interface DocsSchemaOpts<T extends BaseSchema> {
 }
 
 /** Content collection schema for Starlight’s `docs` collection. */
-export function docsSchema<T extends BaseSchema>({ extend }: DocsSchemaOpts<T> = {}) {
-	return (context: SchemaContext): ExtendedSchema<T> => {
+export function docsSchema<T extends BaseSchema | never = never>(
+	...args: [DocsSchemaOpts<T>?]
+): (context: SchemaContext) => ExtendedSchema<T> {
+	const [options = {}] = args;
+	const { extend } = options;
+
+	return (context: SchemaContext) => {
 		const UserSchema = typeof extend === 'function' ? extend(context) : extend;
 
 		return (

@@ -30,6 +30,37 @@ jobs:
       - name: Test packages
         run: pnpm -r test:coverage
 
+  e2e-test:
+    name: Run E2E tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Test packages
+        run: pnpm -r test:e2e
+
+  type-check:
+    name: Run type checks
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Generate docs types
+        working-directory: docs
+        run: pnpm astro sync
+      - name: Type check packages
+        run: pnpm typecheck
+
   pa11y:
     name: Check for accessibility issues
     runs-on: ubuntu-20.04

@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 2.0.3
+
+### Patch Changes
+
+- [#1906](https://github.com/withastro/starlight/pull/1906) [`b079ae11`](https://github.com/withastro/starlight/commit/b079ae114c49bf0570a142b94997bcc0828c47e0) Thanks [@delucis](https://github.com/delucis)! - Fixes default `font-family` in non-Starlight pages when using Tailwind plugin
+
 ## 2.0.2
 
 ### Patch Changes

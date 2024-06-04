@@ -86,6 +86,50 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 	</TabItem>
 </Tabs>
 
+#### 同步选项卡
+
+通过添加 `syncKey` 属性来保持多个选项卡组同步。
+
+页面上拥有相同的 `syncKey` 值的所有 `<Tabs>` 都将展示相同的活动标签。这使得你的读者只需选择一次（例如他们的操作系统或包管理器），就可以看到他们的选择反映在整个页面中。
+
+若要同步相关的选项卡，请为每个 `<Tabs>` 组件添加相同的 `syncKey` 属性，并确保它们都使用相同的 `<TabItem>` 标签：
+
+```mdx 'syncKey="constellations"'
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_一些星座:_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="双子座">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_一些系外行星:_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="双子座">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+以上代码在页面上生成了以下内容：
+
+_一些星座:_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="双子座">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_一些系外行星:_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="双子座">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### 卡片
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -337,11 +381,11 @@ import { Steps } from '@astrojs/starlight/components';
 
 <Steps>
 
-1.在 MDX 文件中导入该组件
+1. 在 MDX 文件中导入该组件
 
-```js
-import { Steps } from '@astrojs/starlight/components';
-```
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
 
 2. 将有序列表放入该组件中
 
@@ -371,7 +415,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你的内容中显示。
 
-每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择包含 `label`、`size` 和 `color` 属性。
+每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择性地包含一个 `label` 来为屏幕阅读器提供上下文。
+`size` 和 `color` 属性可以使用 CSS 单位和颜色值来调整图标的外观。
 
 ```mdx
 # src/content/docs/example.mdx
@@ -379,11 +424,13 @@ Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 以上代码在页面上生成了以下内容：
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### 所有图标
 

@@ -361,6 +361,31 @@ A code block’s optional title can be set either with a `title="..."` attribute
   ```
   ````
 
+## Details
+
+Details (also known as “disclosures” or “accordions”) are useful to hide content that is not immediately relevant.
+Users can click a short summary to expand and view the full content.
+
+Use the standard HTML [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) and [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) elements in your Markdown content to create a disclosure widget.
+
+You can nest any other Markdown syntax inside a `<details>` element.
+
+<details>
+<summary>Where and when is the Andromeda constellation most visible?</summary>
+
+The [Andromeda constellation](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>) is most visible in the night sky during the month of November at latitudes between `+90°` and `−40°`.
+
+</details>
+
+```md
+<details>
+<summary>Where and when is the Andromeda constellation most visible?</summary>
+
+The [Andromeda constellation](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>) is most visible in the night sky during the month of November at latitudes between `+90°` and `−40°`.
+
+</details>
+```
+
 ## Other common Markdown features
 
 Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) for a quick overview of all the Markdown syntax elements.

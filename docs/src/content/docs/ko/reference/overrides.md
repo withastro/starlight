@@ -50,6 +50,19 @@ Starlight는 사용자 정의 컴포넌트에 다음 속성들을 전달합니�
 
 언어가 제공되는 기본 경로입니다. 루트 로케일 슬러그의 경우 `undefined`입니다.
 
+#### `siteTitle`
+
+**타입:** `string`
+
+이 페이지의 로케일에 대한 사이트 제목입니다.
+
+#### `siteTitleHref`
+
+**타입:** `string`
+
+`/`처럼 홈페이지와 연결되는 사이트 제목 `href` 속성의 값입니다.
+다국어 사이트의 경우 `/en/` 또는 `/zh-cn/`과 같은 현재 로케일이 포함됩니다.
+
 #### `slug`
 
 **타입:** `string`
@@ -217,7 +230,7 @@ Starlight의 상단 탐색 바를 렌더링하는 컴포넌트입니다.
 **기본 컴포넌트:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Header 컴포넌트는 모든 페이지 상단에 표시됩니다.
-기본적으로 [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), 와 [`<LanguageSelect />`](#languageselect)를 표시합니다.
+기본적으로 [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), 와 [`<LanguageSelect />`](#languageselect)를 표시합니다.
 
 #### `SiteTitle`
 
@@ -328,6 +341,12 @@ Starlight의 페이지 사이드바는 현재 페이지의 하위 제목을 간�
 
 현재 페이지의 `<h1>` 요소를 포함하는 컴포넌트입니다.
 기본 구현과 같이 `<h1>` 요소에 `id="_top"`을 설정해야 합니다.
+
+#### `DraftContentNotice`
+
+**기본 컴포넌트:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+현재 페이지가 초안으로 표시되면 개발 중에 사용자에게 표시되는 알림입니다.
 
 #### `FallbackContentNotice`
 

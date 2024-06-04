@@ -18,10 +18,11 @@
   "page.lastUpdated": "Cập nhật lần cuối:",
   "page.previousLink": "Tiếp",
   "page.nextLink": "Trước",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Không tìm thấy trang. Kiểm tra URL hoặc thử sử dụng thanh tìm kiếm.",
   "aside.note": "Ghi chú",
   "aside.tip": "Mẹo",
   "aside.caution": "Thận trọng",
   "aside.danger": "Nguy hiểm",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Danh mục"
 }

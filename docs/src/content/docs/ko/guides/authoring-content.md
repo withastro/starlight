@@ -358,6 +358,31 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
   ```
   ````
 
+## Details
+
+Details (“disclosures” 또는 “accordions”이라고도 함)는 즉시 관련이 없는 콘텐츠를 숨기는 데 유용합니다.
+사용자는 짧은 요약을 클릭하여 전체 콘텐츠를 확장하고 볼 수 있습니다.
+
+Markdown 콘텐츠에서 표준 HTML인 [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) 및 [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) 요소를 사용하여 공개 위젯을 만듭니다.
+
+`<details>` 요소에 다른 Markdown 구문을 중첩할 수 있습니다.
+
+<details>
+<summary>안드로메다 별자리는 언제 어디서 가장 잘 보입니까?</summary>
+
+[안드로메다 별자리](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>)는 11월 밤하늘의 위도 `+90°`에서 `-40°` 사이에서 가장 잘 보입니다.
+
+</details>
+
+```md
+<details>
+<summary>안드로메다 별자리는 언제 어디서 가장 잘 보입니까?</summary>
+
+[안드로메다 별자리](<https://en.wikipedia.org/wiki/Andromeda_(constellation)>)는 11월 밤하늘의 위도 `+90°`에서 `-40°` 사이에서 가장 잘 보입니다.
+
+</details>
+```
+
 ## 기타 일반적인 Markdown 기능
 
 Starlight는 목록 및 테이블과 같은 다른 모든 Markdown 작성 구문을 지원합니다. 모든 Markdown 구문 요소에 대한 간략한 개요는 [Markdown Guide의 Markdown 치트 시트](https://www.markdownguide.org/cheat-sheet/)를 참조하세요.

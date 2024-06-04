@@ -50,6 +50,19 @@ BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
 
 The base path at which a language is served. `undefined` for root locale slugs.
 
+#### `siteTitle`
+
+**Type:** `string`
+
+The site title for this page’s locale.
+
+#### `siteTitleHref`
+
+**Type:** `string`
+
+The value for the site title’s `href` attribute, linking back to the homepage, e.g. `/`.
+For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-cn/`.
+
 #### `slug`
 
 **Type:** `string`
@@ -218,7 +231,7 @@ These components render Starlight’s top navigation bar.
 **Default component:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Header component displayed at the top of every page.
-The default implementation displays [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
+The default implementation displays [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
@@ -331,6 +344,12 @@ Layout component used to wrap sections of the main content column.
 Component containing the `<h1>` element for the current page.
 
 Implementations should ensure they set `id="_top"` on the `<h1>` element as in the default implementation.
+
+#### `DraftContentNotice`
+
+**Default component:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Notice displayed to users during development when the current page is marked as a draft.
 
 #### `FallbackContentNotice`
 

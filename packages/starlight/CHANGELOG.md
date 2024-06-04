@@ -1,5 +1,161 @@
 # @astrojs/starlight
 
+## 0.23.3
+
+### Patch Changes
+
+- [#1948](https://github.com/withastro/starlight/pull/1948) [`68c0c077`](https://github.com/withastro/starlight/commit/68c0c077a9ca5ec2a8206e99b70236043a74c3b8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a `<Steps>` component numbering issue with the next Chrome stable version when a step contains a nested list.
+
+- [#1909](https://github.com/withastro/starlight/pull/1909) [`c98c7088`](https://github.com/withastro/starlight/commit/c98c7088ee3ecd43522dac0916fd41c417693f65) Thanks [@joshka](https://github.com/joshka)! - Adds Discourse to social icons
+
+## 0.23.2
+
+### Patch Changes
+
+- [#1913](https://github.com/withastro/starlight/pull/1913) [`7ebe8f75`](https://github.com/withastro/starlight/commit/7ebe8f7599d473cdd22c80bb0fe115fe6120cab7) Thanks [@delucis](https://github.com/delucis)! - Fixes support for Astro’s `build: { format: 'preserve' }` configuration option
+
+- [#1941](https://github.com/withastro/starlight/pull/1941) [`2f3240c9`](https://github.com/withastro/starlight/commit/2f3240c91c09dfc411d93a71eeb75ad6d704e14b) Thanks [@astrobot-houston](https://github.com/astrobot-houston)! - Adds icon support for `.otf` files in `<FileTree>`
+
+## 0.23.1
+
+### Patch Changes
+
+- [#1892](https://github.com/withastro/starlight/pull/1892) [`01de9be8`](https://github.com/withastro/starlight/commit/01de9be89c85bcd0022e87465182ee1aba501687) Thanks [@delucis](https://github.com/delucis)! - Internal refactor: simplify some CSS for the `<details>` element
+
+## 0.23.0
+
+### Minor Changes
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - Updates `@astrojs/mdx` to v3 and enables MDX optimization by default
+
+  ⚠️ **Potentially breaking change:** MDX optimization speeds up builds (Starlight’s docs are building ~40% faster for example), but restricts some advanced MDX features. See full details in the [MDX optimization documentation](https://docs.astro.build/en/guides/integrations-guide/mdx/#optimize).
+
+  Most Starlight users should be unaffected, but if you are using MDX files outside of Starlight pages with the `components` prop, you may see issues. You can disable optimization by adding MDX manually to your `integrations` array in `astro.config.mjs`:
+
+  ```diff
+  import { defineConfig } from 'astro/config';
+  + import mdx from '@astrojs/mdx';
+  import starlight from '@astrojs/starlight';
+
+  // https://astro.build/config
+  export default defineConfig({
+  	integrations: [
+  		starlight({
+  			title: 'My docs',
+  			// ...
+  		}),
+  +		mdx(),
+  	],
+  });
+  ```
+
+- [#1735](https://github.com/withastro/starlight/pull/1735) [`1a9ab50d`](https://github.com/withastro/starlight/commit/1a9ab50d458d6274994ffe66a23fe7a30681337a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds custom styles for `<details>` and `<summary>` elements in Markdown content.
+
+- [#1846](https://github.com/withastro/starlight/pull/1846) [`2de67039`](https://github.com/withastro/starlight/commit/2de6703971908cfc0df2915ebf89a63e0141f954) Thanks [@delucis](https://github.com/delucis)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now 4.8.6
+
+  Please update Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.22.4
+
+### Patch Changes
+
+- [#1871](https://github.com/withastro/starlight/pull/1871) [`03bb126b`](https://github.com/withastro/starlight/commit/03bb126b74d9adaba1be2f0df3f34566815dd77f) Thanks [@delucis](https://github.com/delucis)! - Adds a `blueSky` icon and social link option
+
+- [#1873](https://github.com/withastro/starlight/pull/1873) [`13f33b81`](https://github.com/withastro/starlight/commit/13f33b81fd51d18165eb52f2a0c02b890084e4bd) Thanks [@ekfuhrmann](https://github.com/ekfuhrmann)! - Adds 1 new icon: `alpine`
+
+- [#1857](https://github.com/withastro/starlight/pull/1857) [`32cdfaf0`](https://github.com/withastro/starlight/commit/32cdfaf0155e65ff6fbe9c0cfacd6969ab0015d9) Thanks [@tarikcoskun](https://github.com/tarikcoskun)! - Updates Turkish UI translations
+
+- [#1736](https://github.com/withastro/starlight/pull/1736) [`cfa94a34`](https://github.com/withastro/starlight/commit/cfa94a346ef10804b90db28d217be175e1c1d5ed) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Prevent list items from overflowing Markdown content
+
+## 0.22.3
+
+### Patch Changes
+
+- [#1838](https://github.com/withastro/starlight/pull/1838) [`9fe84754`](https://github.com/withastro/starlight/commit/9fe847544f1edb85bf5b25cd81db39227814335e) Thanks [@delucis](https://github.com/delucis)! - Adds extra information to the errors thrown by the `<Steps>` component to help locate misformatted code
+
+- [#1863](https://github.com/withastro/starlight/pull/1863) [`50be60bb`](https://github.com/withastro/starlight/commit/50be60bbc5cbc42db42e868b9e8f128b4dcbd6a5) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Update Vietnamese translation
+
+- [#1837](https://github.com/withastro/starlight/pull/1837) [`a33a1223`](https://github.com/withastro/starlight/commit/a33a12231772c1dc4b7cc2db3477a6802f3ef53e) Thanks [@delucis](https://github.com/delucis)! - Adds three new icons: `comment`, `comment-alt`, `heart`
+
+- [#1842](https://github.com/withastro/starlight/pull/1842) [`c7838636`](https://github.com/withastro/starlight/commit/c7838636edb8d60a2422ce76a2db511b9cebbb70) Thanks [@delucis](https://github.com/delucis)! - Moves the `href` used in the site title link to Starlight’s route data object. This makes it possible for overrides to change the title link while reusing Starlight’s default component implemenation.
+
+- [#1840](https://github.com/withastro/starlight/pull/1840) [`cb85563c`](https://github.com/withastro/starlight/commit/cb85563c9a3d4eb2925ad884e6a4e8698a15381b) Thanks [@MiahaCybersec](https://github.com/MiahaCybersec)! - Adds 1 new icon: `hackerone`
+
+## 0.22.2
+
+### Patch Changes
+
+- [#1811](https://github.com/withastro/starlight/pull/1811) [`fe06aa13`](https://github.com/withastro/starlight/commit/fe06aa1307208ef9f5b249181ec29837f96940c2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a `<Tabs>` sync issue when inconsistently using the `icon` prop or not on `<TabItem>` components.
+
+- [#1826](https://github.com/withastro/starlight/pull/1826) [`52ea7381`](https://github.com/withastro/starlight/commit/52ea7381e131338a03cffb3499ba1699951cea1e) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI translations
+
+## 0.22.1
+
+### Patch Changes
+
+- [`1c0fc384`](https://github.com/withastro/starlight/commit/1c0fc3849771713d5a3e7a572bdbf1483ae5551b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where the `siteTitle` property would not be set when using the `<StarlightPage />` component.
+
+## 0.22.0
+
+### Minor Changes
+
+- [#640](https://github.com/withastro/starlight/pull/640) [`7dc503ea`](https://github.com/withastro/starlight/commit/7dc503ea7993123a4aeff453d08de41cac887353) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for syncing multiple sets of tabs on the same page.
+
+- [#1620](https://github.com/withastro/starlight/pull/1620) [`ca0678ca`](https://github.com/withastro/starlight/commit/ca0678ca556d739bda9648edc1b79c764fdea851) Thanks [@emjio](https://github.com/emjio)! - Adds support for translating the site title
+
+  ⚠️ **Potentially breaking change:** The shape of the `title` field on Starlight’s internal config object has changed. This used to be a string, but is now an object.
+
+  If you are relying on `config.title` (for example in a custom `<SiteTitle>` or `<Head>` component), you will need to update your code. We recommend using the new [`siteTitle` prop](https://starlight.astro.build/reference/overrides/#sitetitle) available to component overrides:
+
+  ```astro
+  ---
+  import type { Props } from '@astrojs/starlight/props';
+
+  // The site title for this page’s language:
+  const { siteTitle } = Astro.props;
+  ---
+  ```
+
+- [#1613](https://github.com/withastro/starlight/pull/1613) [`61493e55`](https://github.com/withastro/starlight/commit/61493e55f1a80362af13f98d665018376e987439) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds new `draft` frontmatter option to exclude a page from production builds.
+
+- [#640](https://github.com/withastro/starlight/pull/640) [`7dc503ea`](https://github.com/withastro/starlight/commit/7dc503ea7993123a4aeff453d08de41cac887353) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the default `line-height` from `1.8` to `1.75`. This change avoids having a line height with a fractional part which can cause scripts accessing dimensions involving the line height to get an inconsistent rounded value in various browsers.
+
+  If you want to preserve the previous `line-height`, you can add the following custom CSS to your site:
+
+  ```css
+  :root {
+    --sl-line-height: 1.8;
+  }
+  ```
+
+- [#1720](https://github.com/withastro/starlight/pull/1720) [`749ddf85`](https://github.com/withastro/starlight/commit/749ddf85a21d8ed1bfedbe60dee676cdd8784e96) Thanks [@jacobdalamb](https://github.com/jacobdalamb)! - Updates `astro-expressive-code` dependency to the latest minor release (0.35) and exposes a new `@astrojs/starlight/expressive-code/hast` module for users who need to use Expressive Code’s version of `hast`.
+
+  This includes a potentially breaking change if you use custom Expressive Code plugins. See the [Expressive Code release notes](https://expressive-code.com/releases/#0340) for full details.
+
+- [#1769](https://github.com/withastro/starlight/pull/1769) [`bd5f1cbd`](https://github.com/withastro/starlight/commit/bd5f1cbd5aef9e2d78e7f7187eb07deee87399d0) Thanks [@ncjones](https://github.com/ncjones)! - Adds support for [accessing frontmatter data as a variable](https://docs.astro.build/en/guides/integrations-guide/markdoc/#access-frontmatter-from-your-markdoc-content) when using Markdoc
+
+### Patch Changes
+
+- [#1788](https://github.com/withastro/starlight/pull/1788) [`681a4273`](https://github.com/withastro/starlight/commit/681a427366755fec71ba65d45e36f7d1267cf387) Thanks [@dragomano](https://github.com/dragomano)! - Adds Russian translations for Expressive Code labels
+
+- [#1780](https://github.com/withastro/starlight/pull/1780) [`4db6025a`](https://github.com/withastro/starlight/commit/4db6025a1c5c56cac2e3a98bd2e13124402445c7) Thanks [@MiahaCybersec](https://github.com/MiahaCybersec)! - Adds 1 new icon: `signal`
+
+- [#1785](https://github.com/withastro/starlight/pull/1785) [`65009c9c`](https://github.com/withastro/starlight/commit/65009c9cf8b0570303ecb87713e1c2968a704437) Thanks [@dreyfus92](https://github.com/dreyfus92)! - Adds 5 new icons: `node`, `cloudflare`, `vercel`, `netlify` and `deno`
+
+- [#1786](https://github.com/withastro/starlight/pull/1786) [`d05d693a`](https://github.com/withastro/starlight/commit/d05d693afcf1771b8269dfe2ccc94f8952c643e8) Thanks [@delucis](https://github.com/delucis)! - Fixes type inference for i18n strings added by extending the default schema
+
+- [#1777](https://github.com/withastro/starlight/pull/1777) [`6949404b`](https://github.com/withastro/starlight/commit/6949404b24a1c8254fd32d75122fdfbaf896fe29) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where TypeScript could fail to serialize the frontmatter schema when configured to emit declaration files
+
+- [#1734](https://github.com/withastro/starlight/pull/1734) [`4493dcfa`](https://github.com/withastro/starlight/commit/4493dcfac5171f839b1b0e39444a15ce696adee4) Thanks [@delucis](https://github.com/delucis)! - Refactors `<ThemeSelect>` custom element logic to improve performance
+
+- [#1731](https://github.com/withastro/starlight/pull/1731) [`f08b0dff`](https://github.com/withastro/starlight/commit/f08b0dff9638bbe7704ac2ba2e855d8d1464ba76) Thanks [@techfg](https://github.com/techfg)! - Fixes responding to system color scheme changes when theme is `auto`
+
+- [#1793](https://github.com/withastro/starlight/pull/1793) [`2616f0c7`](https://github.com/withastro/starlight/commit/2616f0c7acf39a99c9f92b3db4108cae81120034) Thanks [@Mrahmani71](https://github.com/Mrahmani71)! - Updates the Farsi UI translations
+
 ## 0.21.5
 
 ### Patch Changes

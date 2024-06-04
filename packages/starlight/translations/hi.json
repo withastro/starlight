@@ -18,6 +18,7 @@
   "page.lastUpdated": "आखिरी अद्यतन:",
   "page.previousLink": "पिछला",
   "page.nextLink": "अगला",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "यह पृष्ठ नहीं मिला। URL जांचें या खोज बार का उपयोग करने का प्रयास करें।",
   "aside.note": "टिप्पणी",
   "aside.tip": "संकेत",

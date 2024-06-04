@@ -12,15 +12,18 @@ interface FormatPathOptions {
 	trailingSlash?: AstroConfig['trailingSlash'];
 }
 
+const defaultFormatStrategy = {
+	addBase: pathWithBase,
+	handleExtension: (href: string) => stripHtmlExtension(href),
+};
+
 const formatStrategies = {
 	file: {
 		addBase: fileWithBase,
 		handleExtension: (href: string) => ensureHtmlExtension(href),
 	},
-	directory: {
-		addBase: pathWithBase,
-		handleExtension: (href: string) => stripHtmlExtension(href),
-	},
+	directory: defaultFormatStrategy,
+	preserve: defaultFormatStrategy,
 };
 
 const trailingSlashStrategies = {

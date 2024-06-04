@@ -3,7 +3,13 @@ import { type ContentConfig, type SchemaContext } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import { parseWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
-import { getToC, type PageProps, type StarlightRouteData } from './route-data';
+import {
+	getSiteTitle,
+	getSiteTitleHref,
+	getToC,
+	type PageProps,
+	type StarlightRouteData,
+} from './route-data';
 import type { StarlightDocsEntry } from './routing';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar } from './navigation';
@@ -223,6 +229,8 @@ export async function generateStarlightPageRouteData({
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
+		siteTitle: getSiteTitle(localeData.lang),
+		siteTitleHref: getSiteTitleHref(localeData.locale),
 		slug,
 		toc: getToC({
 			...routeProps,

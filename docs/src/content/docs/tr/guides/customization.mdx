@@ -1,0 +1,463 @@
+---
+title: Starlight'ı İsteğe Uyarlamak
+description: Starlight sitenizi kendi logonuz, özel yazı karakteriniz, karşılama sayfanız ve daha fazlası ile hazırlamayı öğrenin.
+---
+
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
+
+Starlight duyarlı varsayılan stil ve özellikler sunar, böylece herhangi bir yapılandırmaya ihtiyaç duymadan başlayabilirsiniz.
+Bu rehber, Starlight sitenizin görüşünü ve hissiyatını isteğinize uyarlamak istediğinizde yardımcı olacaktır.
+
+## Logonuzu ekleyin
+
+Site başlığına özel logo eklemek, Starlight sitesine özgün markalamanın hızlı bir yoludur.
+
+<Steps>
+
+1. `src/assets/` dizinine logonuzun görsel dosyasını ekleyin:
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **benim-logom.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+2. `astro.config.mjs` içerisine Starlight'ın [`logo.src`](/tr/reference/configuration/#logo) ayarı olarak logonuzun dosya yolunu ekleyin:
+
+   ```diff lang="js"
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Logomu İçeren Dokümantasyon',
+   			logo: {
+   +				src: './src/assets/benim-logom.svg',
+   			},
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+Varsayılan olarak, logo sitenizin başlığının ( `title` ) yanında görünecektir.
+Logonuz sitenizin başlığını içeriyorsa, başlık metnini `replacesTitle` seçeneğini ayarlayıp görsel olarak gizleyebilirsiniz.
+Başlık ( `title` ) ekran okuyucular için dahil edilecektir, böylece başlık erişilebilir kalacaktır.
+
+```js {5}
+starlight({
+  title: 'Logomu içeren Dokümantasyon',
+  logo: {
+    src: './src/assets/benim-logom.svg',
+    replacesTitle: true,
+  },
+}),
+```
+
+### Açık ve koyu varyantlar
+
+Açık ve koyu modda logonuzun farklı versiyonlarını gösterebilirsiniz.
+
+<Steps>
+
+1. Her varyant için `src/assets/` dizinine görsel dosyasını ekleyin:
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **acik-logo.svg**
+       - **koyu-logo.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+2. `astro.config.mjs` içerisine `src` yerine `light` ve `dark` seçeneklerine logo varyantlarının dosya yolunu ekleyin:
+
+   ```diff lang="js"
+   starlight({
+     title: 'Logomu İçeren Dokümantasyon',
+     logo: {
+   +    light: './src/assets/acik-logo.svg',
+   +    dark: './src/assets/koyu-logo.svg',
+     },
+   }),
+   ```
+
+</Steps>
+
+## Site haritasını etkinleştirme
+
+Starlight site haritası oluşturmak için yerleşik desteğe sahiptir. `astro.config.mjs` içerisinde URL'inizi `site` olarak ayarlayarak site haritası oluşturmayı etkinleştirin:
+
+```js {4}
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club',
+	integrations: [starlight({ title: 'Site haritalı site' })],
+});
+```
+
+## Sayfa şablonu
+
+Varsayılan olarak, Starlight genel gezinti kenar çubuğu ve mevcut sayfa başlıklarını gösteren içindekiler listesini içeren şablon kullanır.
+
+Sayfanın önbölümü içerisinde [`template: splash`](/tr/reference/frontmatter/#template) ayarlayarak kenar çubuksuz daha geniş sayfa şablonu oluşturabilirsiniz.
+Bu, karşılama sayfaları için özellikle iyi çalışır ve bu [sitenin anasayfasında](/tr/) görebilirsiniz.
+
+```md {5}
+---
+# src/content/docs/index.md
+
+title: Karşılama Sayfam
+template: splash
+---
+```
+
+## İçindekiler listesi
+
+Starlight okuyucuların aradıkları başlığa kolayca geçmeleri için her sayfada içindekiler listesini gösterir.
+İçindekiler tablosunu genel olarak Starlight entegrasyonunda ya da önbölümde sayfa-bazlı isteğinize uyarlayabilir hatta etkisizleştirebilirsiniz.
+
+Varsayılan olarak, `<h2>` ve `<h3>` etiketleri içindekiler listesine dahil edilir. [Genel `tableOfContents`](/tr/reference/configuration/#tableofcontents) içerisinde `minHeadingLevel` ve `maxHeadingLevel` seçeneklerini kullanarak site genelindeki başlık seviyelerini değiştiri. Bu varsayılan değerleri tekil bir sayfanın [önbölümüne `tableOfContents`](/tr/reference/frontmatter/#tableofcontents) karşılık gelen niteliklerini ekleyerek değiştirin:
+
+<Tabs syncKey="config-type">
+  <TabItem label="Önbölüm">
+
+```md {4-6}
+---
+# src/content/docs/ornek.md
+title: Sadece H2 etiketlerinin içindekiler listesinde yer aldığı sayfa
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+  </TabItem>
+  <TabItem label="Genel yapılandırma">
+
+```js {7}
+// astro.config.mjs
+
+defineConfig({
+	integrations: [
+		starlight({
+			title: 'Özel içindekiler tablosu yapılandırmasına sahip dokümanlar',
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
+		}),
+	],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+`tableOfContents` seçeneğini `false` olarak ayarlayıp tüm içindekiler tablosunu etkisizleştirin:
+
+<Tabs syncKey="config-type">
+  <TabItem label="Önbölüm">
+
+```md {4}
+---
+# src/content/docs/ornek.md
+title: İçindekiler tablosuz sayfa
+tableOfContents: false
+---
+```
+
+  </TabItem>
+  <TabItem label="Genel yapılandırma">
+
+```js {7}
+// astro.config.mjs
+
+defineConfig({
+	integrations: [
+		starlight({
+			title:
+				'İçindekiler tablosunun genel olarak etkisizleştirildiği dokümanlar',
+			tableOfContents: false,
+		}),
+	],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+## Sosyal medya bağlantıları
+
+Starlight'ın, site başlığına Starlight entegrasyonu içindeki [`social`](/tr/reference/configuration/#social) seçeneğiyle sosyal medya hesaplarınızın bağlantısını eklemek için yerleşik desteği vardır.
+
+[Yapılandırma Referansında](/tr/reference/configuration/#social) desteklenen tüm bağlantı ikonlarının bulunduğu listeyi bulabilirsiniz.
+Başka bir hizmet için desteğe ihtiyacınız varsa Github ya da Discord üzerinden bize yazın!
+
+```js {9-12}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Sosyal Medya Bağlantılı Dokümantasyon',
+			social: {
+				discord: 'https://astro.build/chat',
+				github: 'https://github.com/withastro/starlight',
+			},
+		}),
+	],
+});
+```
+
+## Bağlantıları düzenle
+
+Starlight her sayfanın altlığında “Sayfayı düzenle” bağlantısı gösterebilir.
+Bu, dokümantasyonunuzu geliştirmek için okuyucunun düzenlenecek dosyayı bulmasını kolaylaştırır.
+Özellikle açık kaynaklı projeler için, topluluğunuzdan gelecek katkıları cesaretlendirmeye yardımcı olabilir.
+
+Sayfa düzenleme bağlantıları etkinleştirmek için, Starlight entegrasyon yapılandırmasında [`editLink.baseUrl`](/tr/reference/configuration/#editlink) seçeneğine düzenlenecek reponuzu ekleyin.
+`editLink.baseUrl` değeri, mevcut sayfaya tam düzenleme bağlantısını oluştumak için başına ilave edilir.
+
+Ortak desenler içerir:
+
+- GitHub: `https://github.com/KULLANICI_ADI/REPO_ADI/edit/BRANCH_ADI/`
+- GitLab: `https://gitlab.com/KULLANICI_ADI/REPO_ADI/-/edit/BRANCH_ADI/`
+
+Starlight projeniz reponuzun en üstünde yer almıyorsa, baz URL sonuna projenizin yolunu ekleyin.
+
+Bu örnek, Github'daki `withastro/starlight` reposunda `main` branch içinde `docs/` alt dizinindeki Starlight dokümantasyonu için sayfa düzenleme bağlantısını yapılandırmayı gösterir:
+
+```js {9-11}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Sayfa Düzenleme Bağlantılı Dokümantasyon',
+			editLink: {
+				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+			},
+		}),
+	],
+});
+```
+
+## İsteğe uyarlanmış 404 sayfası
+
+Starlight varsayılan olarak sade bir 404 sayfası gösterir.
+`src/content/docs/` dizininize `404.md` (ya da `404.mdx`) sayfası ekleyerek isteğinize uyarlayabilirsiniz:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **404.md**
+      - index.md
+- astro.config.mjs
+
+</FileTree>
+
+404 sayfanızda Starlight'ın tüm sayfa şablonlarını ve isteğe uyarlama tekniklerini kullanabilirsiniz. Örneğin, varsayılan 404 sayfası [`splash` şablonunu](#sayfa-şablonu) ve önblümdeki [`hero`](/tr/reference/frontmatter/#hero) bileşenini kullanır:
+
+```md {4,6-8}
+---
+# src/content/docs/404.md
+title: '404'
+template: splash
+editUrl: false
+hero:
+  title: '404'
+  tagline: Sayfa bulunamadı. URL'i kontrol edin ya da arama çubuğunu kullanın.
+---
+```
+
+### Varsayılan 404 sayfasını etkisizleştirme
+
+Projeniz tamamen isteğe uyarlanmış 404 şablonuna ihtiyaç duyarsa, `src/pages/404.astro` dizini oluşturabilir ve [`disable404Route`](/tr/reference/configuration/#disable404route) yapılandırma seçeneğini kullanarak Starlight'ın varsayılan yöneltmesini etkisizleştirebilirsiniz:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'İsteğe Uyarlanmış 404 Sayfalı Dokümantasyon',
+			disable404Route: true,
+		}),
+	],
+});
+```
+
+## Özel yazı karakterleri
+
+Varsayılan olarak, Starlight tüm metinler için kullanıcının cihazındaki uygun sans-serif yazı karakterlerini kullanır.
+Bu sayede dokümantasyon kullanıcıların aşina olduğu yazı karakterleriyle büyük yazı karakterli dosyaları yüklemek için ekstra bant genişliği ihtiyacı olmadan hızlıca yüklenir.
+
+Starlight sitenize özel yazı karakteri eklemek zorundaysanız, yazı karakterlerini kullanmak için özel CSS dosyalarına ya da [Astro stillendirme tekniği](https://docs.astro.build/en/guides/styling/) ile ayarlayabilirsiniz.
+
+### Yazı karakterlerini ayarlama
+
+Halihazırda yazı karakteri dosyalarınız varsa, [lokal ayarlama rehberini](#lokal-yazı-karakteri-dosyalarını-ayarlama) takip edin.
+Google Fonts kullanmak için [Fontsource ayarlama rehberini](#fontsource-yazı-karakteri-ayarlama) takip edin.
+
+#### Lokal yazı karakteri dosyalarını ayarlama
+
+<Steps>
+
+1. `src/fonts/` dizininde boş `font-face.css` dosyası oluşturun ve yazı karakteri dosyalarınızı ekleyin:
+
+   <FileTree>
+
+   - src/
+     - content/
+     - fonts/
+       - **OzelYaziKarakteri.woff2**
+       - **font-face.css**
+   - astro.config.mjs
+
+   </FileTree>
+
+2. `src/fonts/font-face.css` içindeki her bir yazı karakteri için [`@font-face` deklarasyonu](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) ekleyin.
+   Yazı karakteri dosyasına ait dosya yolunu `url()` fonksiyonu içinde kullanın.
+
+   ```css
+   /* src/fonts/font-face.css */
+
+   @font-face {
+   	font-family: 'Özel Yazı Karakteri';
+   	/* 'url()' içindeki yerel yazı karakteri dosyasına göreli bir yol kullanın. */
+   	src: url('./OzelYaziKarakteri.woff2') format('woff2');
+   	font-weight: normal;
+   	font-style: normal;
+   	font-display: swap;
+   }
+   ```
+
+3. `astro.config.mjs` içindeki Starlight'ın `customCss` dizisine `font-face.css` dosyanızın yolunu ekleyin:
+
+   ```diff lang="js"
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Özel Yazı Karakterli Dokümantasyon',
+   			customCss: [
+   +				// @font-face CSS dosyanıza ait dosya yolu.
+   +				'./src/fonts/font-face.css',
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+#### Fontsource yazı karakteri ayarlama
+
+[Fontsource](https://fontsource.org/) projesi, Google Fonts ve diğer açık kaynaklı yazı karakterlerini kullanmayı basitleştirir.
+Kullanmak istediğiniz yazı karakterlerini ve projenize ekleyeceğiniz okumaya hazır CSS dosyalarını içeren npm modülü olarak sunar.
+
+<Steps>
+
+1.  [Fontsource’un kataloğundan](https://fontsource.org/) kullanmak istediğiniz yazı karakterini bulun.
+    Bu örnek [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif) kullanır.
+
+2.  Seçtiğiniz yazı karakterine ait paketi yükleyin.
+    Fontsource yazı karakteri sayfasında “Install” butonuna tıklayarak paket ismini bulabilirsiniz.
+
+         <Tabs>
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+        <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+        <TabItem label="Yarn">
+
+    ```sh
+    yarn add @fontsource/ibm-plex-serif
+    ```
+
+           </TabItem>
+
+      </Tabs>
+
+3.  `astro.config.mjs` içindeki Starlight'ın `customCss` dizisine Fontsource CSS dosyalarını ekleyin:
+
+    ```diff lang="js"
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Özel Yazı Karakterli Dokümantasyon',
+    			customCss: [
+    +				// Düz ve yarı kalın font genişlikleri için Fontsource dosyaları.
+    +				'@fontsource/ibm-plex-serif/400.css',
+    +				'@fontsource/ibm-plex-serif/600.css',
+    			],
+    		}),
+    	],
+    });
+    ```
+
+    Fontsource her yazı karakteri için birden fazla CSS dosyası gönderir. Farklı genişlik ve stil içeren ve hangi yazı karakterini kullanmayı anlamak için [Fontsource dokümantasyonuna](https://fontsource.org/docs/getting-started/install#4-weights-and-styles) göz atın.
+
+</Steps>
+
+### Yazı karakterlerini kullanma
+
+Sitenize ayarladığınız yazı karakterini uygulamak için seçtiğiniz yazı karakterinin ismini [özel CSS dosyasında](/tr/guides/css-and-tailwind/#özel-css-stilleri) kullanın.
+Örneğin, Starlight'ın varsayılan yazı karakterini her yerde üzerine yazmak için, `--sl-font` özel niteliğini ayarlayın:
+
+```css
+/* src/styles/custom.css */
+
+:root {
+	--sl-font: 'IBM Plex Serif', serif;
+}
+```
+
+Ayrıca yazı karakterinizi titizlikle uygulamak için daha fazlasını hedefleyen CSS yazabilirsiniz.
+Örneğin, sadece ana içeriğinizde yazı karakteri uygulayıp kenar çubuğuna uygulamayabilirsiniz:
+
+```css
+/* src/styles/custom.css */
+
+main {
+	font-family: 'IBM Plex Serif', serif;
+}
+```
+
+[isteğe uyarlanmış CSS talimatlarını](/tr/guides/css-and-tailwind/#özel-css-stilleri) sitenize kendi stilinizi eklemek için takip edin.

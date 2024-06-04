@@ -74,7 +74,16 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		title="Публикация документации с помощью Astro Starlight"
 		description="Начало работы с документацией в Starlight"
 	/>
-
+	<LinkCard
+		href="https://events-3bg.pages.dev/jotter/starlight/guide/"
+		title="Включение View Transitions"
+		description="Добейтесь SPA-подобного вида и ощущения с помощью поддержки переходов представлений"
+	/>
+	<LinkCard
+		href="https://jamcomments.com/posts/structured-data-with-starlight"
+		title="Добавление структурированных данных на страницы Starlight"
+		description="Узнайте, как создавать динамические структурированные данные JSON-LD для страниц документации"
+	/>
 </CardGrid>
 
 ## Видеоконтент
@@ -119,8 +128,15 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 		{
 			href: 'https://www.youtube.com/watch?v=-Ki-1E5gNCk',
 			title:
-				'Шаблон документации Astro Starlight (создавайте собственные документы для приложений!)',
+				'Шаблон документации Astro Starlight (создаём документацию для пользовательского приложения!)',
 			description: 'Запустите новый сайт Starlight примерно за 5 минут',
+		},
+		{
+			href: 'https://www.youtube.com/watch?v=12o7WxjAxjM',
+			title:
+				'Включите документацию Starlight в проект Next.js с помощью прокси',
+			description:
+				'Установите Starlight в подкаталоге проекта сайта на Next.js',
 		},
 	]}
 />
