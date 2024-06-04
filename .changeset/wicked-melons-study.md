@@ -2,5 +2,5 @@
 '@astrojs/starlight': minor
 ---
 
-Adds the `<Badge>` component
+Expands the `<Badge>` component to be generally available
 

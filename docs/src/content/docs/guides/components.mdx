@@ -375,11 +375,12 @@ import { Badge } from '@astrojs/starlight/components';
 Use the `<Badge>` component to display small pieces of information, such as status or labels.
 
 Pass the content you want to display to the `text` attribute of the `<Badge>` component.
-Optionally, you can specify a `variant` attribute with values like `tip`, `note`, `caution`, `danger`, `success` or `default` (the default uses the theme accent color) to adjust the badge's appearance.
 
-To adjust the badge's size, you can specify a `size` attribute with values like `small` (the default), `medium`, or `large`.
+By default, the badge will use the theme accent color of your site. To use a built-in badge color, set the `variant` attribute to one of the following values: `note` (blue), `tip` (purple), `danger` (red), `caution` (orange), or `success` (green).
 
-You can also include other `<span>` attributes such as `class` or `style` to further customize the badge.
+The `size` attribute (default: `small`) controls the size of the badge text. `medium` and `large` are also available options for displaying a larger badge.
+
+For further customization, use other `<span>` attributes such as `class` or `style` with custom CSS.
 
 ```mdx title="src/content/docs/example.mdx"
 import { Badge } from '@astrojs/starlight/components';
