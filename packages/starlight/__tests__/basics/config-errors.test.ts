@@ -44,6 +44,7 @@ test('parses valid config successfully', () => {
 		    "ThemeSelect": "@astrojs/starlight/components/ThemeSelect.astro",
 		    "TwoColumnContent": "@astrojs/starlight/components/TwoColumnContent.astro",
 		  },
+		  "credits": false,
 		  "customCss": [],
 		  "defaultLocale": {
 		    "dir": "ltr",

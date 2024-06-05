@@ -24,5 +24,6 @@
   "aside.tip": "팁",
   "aside.caution": "주의",
   "aside.danger": "위험",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

@@ -24,5 +24,6 @@
   "aside.tip": "Consiglio",
   "aside.caution": "Attenzione",
   "aside.danger": "Pericolo",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

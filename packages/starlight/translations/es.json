@@ -27,5 +27,6 @@
   "expressiveCode.copyButtonCopied": "¡Copiado!",
   "expressiveCode.copyButtonTooltip": "Copiar al portapapeles",
   "expressiveCode.terminalWindowFallbackTitle": "Ventana de terminal",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Hecho con Starlight"
 }

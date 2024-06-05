@@ -24,5 +24,6 @@
   "aside.tip": "Mẹo",
   "aside.caution": "Thận trọng",
   "aside.danger": "Nguy hiểm",
-  "fileTree.directory": "Danh mục"
+  "fileTree.directory": "Danh mục",
+  "builtWithStarlight.label": "Built with Starlight"
 }
