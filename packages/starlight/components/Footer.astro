@@ -18,7 +18,7 @@ import { Icon } from '../components';
 	{
 		config.credits && (
 			<a class="kudos sl-flex" href="https://starlight.astro.build">
-				<Icon name={'starlight'} /> Built with Starlight
+				<Icon name={'starlight'} /> {Astro.props.labels['builtWithStarlight.label']}
 			</a>
 		)
 	}

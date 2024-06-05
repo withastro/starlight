@@ -24,5 +24,6 @@
   "aside.tip": "संकेत",
   "aside.caution": "सावधानी",
   "aside.danger": "खतरा",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

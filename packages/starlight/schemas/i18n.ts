@@ -138,6 +138,12 @@ function starlightI18nSchema() {
 			'fileTree.directory': z
 				.string()
 				.describe('Label for the directory icon in the file tree component.'),
+
+			'builtWithStarlight.label': z
+				.string()
+				.describe(
+					'Label for the “Built with Starlight” badge optionally displayed in the site footer.'
+				),
 		})
 		.partial();
 }
