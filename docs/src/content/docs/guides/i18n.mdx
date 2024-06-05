@@ -277,9 +277,9 @@ Learn more about content collection schemas in [â€œDefining a collection schemaâ
 
 ## Accessing the current locale
 
-You can read the current locale from the `Astro` global that is available in all contexts in `.astro` files with the [`currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) property.
+You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) to read the current locale in `.astro` components.
 
-The following example reads the current locale and uses it to generate a link to an About page in the current language:
+The following example reads the current locale and uses it to generate a link to an about page in the current language:
 
 ```astro
 ---
