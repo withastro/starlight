@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.23.4
+
+### Patch Changes
+
+- [#1955](https://github.com/withastro/starlight/pull/1955) [`15ef1f4b`](https://github.com/withastro/starlight/commit/15ef1f4bdbf7174134121f4bbdf82ca3903c802a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Reverts a [change](https://github.com/withastro/starlight/pull/1948) to prevent a numbering issue with the `<Steps>` component in future versions of Chrome.
+
 ## 0.23.3
 
 ### Patch Changes
