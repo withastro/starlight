@@ -60,6 +60,7 @@ test('parses valid config successfully', () => {
 		  },
 		  "head": [],
 		  "isMultilingual": false,
+		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,
 		  "locales": undefined,
 		  "pagefind": true,
