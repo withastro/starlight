@@ -4,8 +4,6 @@ import type { Props } from '../props';
 const { banner } = Astro.props.entry.data;
 ---
 
-<!-- // TODO(HiDeoo) Remove -->
-<div class="sl-banner">{Astro.currentLocale}</div>
 {banner && <div class="sl-banner" set:html={banner.content} />}
 
 <style>
