@@ -30,9 +30,9 @@ describe('processI18nConfig', () => {
 			processI18nConfig(config, { defaultLocale: 'en', locales: ['en'] } as AstroConfig['i18n'])
 		).toThrowErrorMatchingInlineSnapshot(`
 			"[AstroUserError]:
-				Cannot provide both an Astro i18n configuration and a Starlight i18n configuration.
+				Cannot provide both an Astro \`i18n\` configuration and a Starlight \`locales\` configuration.
 			Hint:
-				Remove one of the i18n configurations.
+				Remove one of the two configurations.
 				See more at https://starlight.astro.build/guides/i18n/"
 		`);
 	});

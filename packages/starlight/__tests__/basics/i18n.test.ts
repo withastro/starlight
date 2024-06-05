@@ -31,25 +31,6 @@ describe('processI18nConfig', () => {
 	});
 
 	describe('with a provided Astro i18n config', () => {
-		test('throws an error when an Astro i18n `fallback` option is used', () => {
-			expect(() =>
-				processI18nConfig(
-					config,
-					getAstroI18nTestConfig({
-						defaultLocale: 'en',
-						locales: ['en', 'fr'],
-						fallback: { fr: 'en' },
-					})
-				)
-			).toThrowErrorMatchingInlineSnapshot(`
-				"[AstroUserError]:
-					Starlight is not compatible with the \`fallback\` option in the Astro i18n configuration.
-				Hint:
-					Starlight uses its own fallback strategy showing readers content for a missing page in the default language.
-					See more at https://starlight.astro.build/guides/i18n/#fallback-content"
-			`);
-		});
-
 		test('throws an error when an Astro i18n `manual` routing option is used', () => {
 			expect(() =>
 				processI18nConfig(

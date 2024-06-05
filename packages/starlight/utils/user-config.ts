@@ -245,6 +245,8 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 				title: parsedTitle,
 				/** Flag indicating if this site has multiple locales set up. */
 				isMultilingual: configuredLocales.length > 1,
+				/** Flag indicating if the Starlight built-in default locale is used. */
+				isUsingBuiltInDefaultLocale: false,
 				/** Full locale object for this site’s default language. */
 				defaultLocale: { ...defaultLocaleConfig, locale: defaultLocale },
 				locales,
@@ -269,6 +271,8 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 			title: parsedTitle,
 			/** Flag indicating if this site has multiple locales set up. */
 			isMultilingual: false,
+			/** Flag indicating if the Starlight built-in default locale is used. */
+			isUsingBuiltInDefaultLocale: locales?.root === undefined,
 			defaultLocale: defaultLocaleConfig,
 			locales: undefined,
 		} as const;
