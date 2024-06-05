@@ -207,6 +207,12 @@ const UserConfigSchema = z.object({
 
 	/** Disable Starlight's default 404 page. */
 	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
+
+	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
+	credits: z
+		.boolean()
+		.default(false)
+		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict().transform(

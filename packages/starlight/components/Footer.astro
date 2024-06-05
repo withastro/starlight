@@ -4,6 +4,7 @@ import type { Props } from '../props';
 import EditLink from 'virtual:starlight/components/EditLink';
 import LastUpdated from 'virtual:starlight/components/LastUpdated';
 import Pagination from 'virtual:starlight/components/Pagination';
+import config from 'virtual:starlight/user-config';
 import { Icon } from '../components';
 ---
 
@@ -14,9 +15,13 @@ import { Icon } from '../components';
 	</div>
 	<Pagination {...Astro.props} />
 
-	<a class="kudos sl-flex" href="https://starlight.astro.build">
-		<Icon name={'starlight'} /> Built with Starlight
-	</a>
+	{
+		config.credits && (
+			<a class="kudos sl-flex" href="https://starlight.astro.build">
+				<Icon name={'starlight'} /> Built with Starlight
+			</a>
+		)
+	}
 </footer>
 
 <style>
