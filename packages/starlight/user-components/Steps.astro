@@ -23,8 +23,6 @@ const { html } = processSteps(content);
 		padding-bottom: 1px;
 		/* Prevent bullets from touching in short list items. */
 		min-height: calc(var(--bullet-size) + var(--bullet-margin));
-		/* Enforce style containment so that nested lists CSS counters are scoped to the contained element. */
-		contain: style;
 	}
 	.sl-steps > li + li {
 		/* Remove margin between steps. */
