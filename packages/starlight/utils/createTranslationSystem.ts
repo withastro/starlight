@@ -1,5 +1,6 @@
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import builtinTranslations from '../translations/index';
+import { BuiltInDefaultLocale } from './i18n';
 import type { StarlightConfig } from './user-config';
 
 export function createTranslationSystem<T extends i18nSchemaOutput>(
@@ -64,7 +65,7 @@ function localeToLang(
 ): string {
 	const lang = locale ? locales?.[locale]?.lang : locales?.root?.lang;
 	const defaultLang = defaultLocale?.lang || defaultLocale?.locale;
-	return lang || defaultLang || 'en';
+	return lang || defaultLang || BuiltInDefaultLocale.lang;
 }
 
 type BuiltInStrings = (typeof builtinTranslations)['en'];

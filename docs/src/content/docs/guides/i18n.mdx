@@ -67,6 +67,8 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
 </Steps>
 
+For more advanced i18n scenarios, Starlight also supports configuring internationalization using the [Astro’s `i18n` config](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing) option.
+
 ### Use a root locale
 
 You can use a “root” locale to serve a language without any i18n prefix in its path. For example, if English is your root locale, an English page path would look like `/about` instead of `/en/about`.
@@ -272,3 +274,17 @@ export const collections = {
 ```
 
 Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+
+## Accessing the current locale
+
+You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) to read the current locale in `.astro` components.
+
+The following example reads the current locale and uses it to generate a link to an about page in the current language:
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+
+<a href={`/${Astro.currentLocale}/about`}>About</a>
+```

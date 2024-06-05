@@ -9,6 +9,7 @@ import { SidebarItemSchema } from '../schemas/sidebar';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
 import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
+import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -244,6 +245,8 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 				title: parsedTitle,
 				/** Flag indicating if this site has multiple locales set up. */
 				isMultilingual: configuredLocales.length > 1,
+				/** Flag indicating if the Starlight built-in default locale is used. */
+				isUsingBuiltInDefaultLocale: false,
 				/** Full locale object for this site’s default language. */
 				defaultLocale: { ...defaultLocaleConfig, locale: defaultLocale },
 				locales,
@@ -254,9 +257,9 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 		// pretty simple.
 		/** Full locale object for this site’s default language. */
 		const defaultLocaleConfig = {
-			label: 'English',
-			lang: 'en',
-			dir: 'ltr' as const,
+			label: BuiltInDefaultLocale.label,
+			lang: BuiltInDefaultLocale.lang,
+			dir: BuiltInDefaultLocale.dir,
 			locale: undefined,
 			...locales?.root,
 		};
@@ -268,6 +271,8 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 			title: parsedTitle,
 			/** Flag indicating if this site has multiple locales set up. */
 			isMultilingual: false,
+			/** Flag indicating if the Starlight built-in default locale is used. */
+			isUsingBuiltInDefaultLocale: locales?.root === undefined,
 			defaultLocale: defaultLocaleConfig,
 			locales: undefined,
 		} as const;
