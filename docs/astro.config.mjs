@@ -35,8 +35,6 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Starlight',
-			// TODO: remove this
-			credits: true,
 			logo: {
 				light: '/src/assets/logo-light.svg',
 				dark: '/src/assets/logo-dark.svg',
