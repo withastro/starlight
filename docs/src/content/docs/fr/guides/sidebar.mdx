@@ -295,13 +295,14 @@ La configuration ci-dessus génère la barre latérale suivante :
 	]}
 />
 
-### Variantes de badges
+### Variantes de badges et style personnalisé
 
-Personnalisez le style du badge en utilisant un objet avec les propriétés `text` et `variant`.
+Personnalisez le style du badge en utilisant un objet avec les propriétés `text`, `variant`, et `class`.
 
 La propriété `text` représente le contenu à afficher (par exemple, "Nouveau").
-Remplacez le style `default`, qui utilise la couleur d'accentuation de votre site, en définissant la propriété `variant` avec l'une des valeurs suivantes : `note`, `tip`, `danger`, `caution` ou `success`.
+Par défaut, le badge utilise la couleur d'accentuation de votre site. Pour utiliser un style de badge intégré, définissez la propriété `variant` à l'une des valeurs suivantes : `note`, `tip`, `danger`, `caution` ou `success`.
 
+En option, vous pouvez créer un style de badge personnalisé en définissant la propriété `class` à un nom de classe CSS.
 ```js {10}
 starlight({
 	sidebar: [
