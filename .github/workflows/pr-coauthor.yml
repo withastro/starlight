@@ -1,0 +1,17 @@
+name: Write coauthors to a pull request
+permissions:
+  pull-requests: write
+  
+on:
+  issue_comment:
+    types:
+      - created
+      
+jobs:
+  generate-coauthors:
+    name: Generate Coauthor
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: kevinzunigacuellar/coauthor-action@v0.1.2
