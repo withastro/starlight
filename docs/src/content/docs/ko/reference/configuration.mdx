@@ -212,7 +212,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -571,3 +572,13 @@ starlight({
 ```
 
 나만의 플러그인을 만드는 방법에 대한 자세한 내용은 [플러그인 참조](/ko/reference/plugins/)를 확인하세요.
+
+### `credits`
+
+사이트 바닥글에 “Built with Starlight” 링크 표시를 활성화합니다.
+
+```js
+starlight({
+	credits: true,
+});
+```
