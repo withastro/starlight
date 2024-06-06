@@ -408,6 +408,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### 徽章
+
+import { Badge } from '@astrojs/starlight/components';
+
+使用 `<Badge>` 组件来显示小块信息，如状态或标签。
+
+将你想显示的内容传递给 `<Badge>` 组件的 `text` 属性。
+
+默认情况下，徽章将使用你网站的主题突出色。要使用内置的徽章颜色，请将 `variant` 属性设置为以下值之一：`note`（蓝色）、`tip`（紫色）、`danger`（红色）、`caution`（橙色）或 `success`（绿色）。
+
+`size` 属性（默认为 `small`）控制徽章文本的大小。`medium` 和 `large` 也是显示更大徽章的可用选项。
+
+为了进一步自定义，使用其他 `<span>` 属性，如 `class` 或 `style`，并配合自定义 CSS。
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+以上代码在页面上生成了以下内容：
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### 图标
 
 import { Icon } from '@astrojs/starlight/components';
