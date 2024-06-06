@@ -292,11 +292,14 @@ starlight({
 	]}
 />
 
-### 배지 변형
+### 배지 변형 및 맞춤 스타일
 
-`text` 및 `variant` 속성이 있는 객체를 사용하여 배지 스타일을 변경할 수 있습니다.
+`text`, `variant`, `class` 속성이 있는 객체를 사용하여 배지 스타일을 맞춤설정하세요.
 
-`text`는 표시할 콘텐츠를 나타냅니다 (예: "New"). `variant` 속성의 값을 `note`, `tip`, `danger`, `caution`, `success` 중 하나로 설정하여 사이트의 강조 색상을 사용하는 `default` 스타일을 변경하세요.
+`text`는 표시할 콘텐츠 (예: "New")를 나타냅니다.
+기본적으로 배지는 사이트의 강조 색상을 사용합니다. 내장된 배지 스타일을 사용하려면 `variant` 속성의 값을 `note`, `tip`, `danger`, `caution`, `success` 중 하나로 설정하세요.
+
+선택적으로 `class` 속성을 CSS 클래스 이름으로 설정하여 사용자 정의 배지 스타일을 만들 수 있습니다.
 
 ```js {10}
 starlight({
