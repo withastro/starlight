@@ -66,6 +66,8 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 
 </Steps>
 
+고급 국제화 시나리오를 위해 Starlight는 [Astro의 `i18n` 구성](https://docs.astro.build/ko/guides/internationalization/#i18n-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EA%B5%AC%EC%84%B1) 옵션을 사용하는 국제화 구성도 지원합니다.
+
 ### 루트 로케일 사용
 
 경로에 i18n 접두사가 없는 언어를 제공하려면 "루트" 로케일을 사용할 수 있습니다. 예를 들어 영어가 루트 로케일인 경우 영어 페이지 경로는 `/en/about` 대신 `/about`이 됩니다.
@@ -272,3 +274,17 @@ export const collections = {
 ```
 
 Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
+
+## 현재 로케일에 액세스
+
+[`Astro.currentLocale`](https://docs.astro.build/ko/reference/api-reference/#astrocurrentlocale)을 사용하여 `.astro` 컴포넌트의 현재 로케일을 읽을 수 있습니다.
+
+다음 예시는 현재 로케일을 읽고 이를 사용하여 현재 언어로 작성된 소개 페이지로 이동하는 링크를 생성합니다.
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+
+<a href={`/${Astro.currentLocale}/about`}>소개</a>
+```
