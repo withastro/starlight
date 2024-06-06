@@ -290,7 +290,7 @@ Le sens d'écriture de cette langue ; `"ltr"` pour gauche à droite (par défaut
 
 #### Locale racine
 
-Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale `root` :
+Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale avec la clé `root` :
 
 ```js {3-6}
 starlight({
@@ -314,7 +314,7 @@ Par exemple, cela vous permet de servir `/getting-started/` comme une route angl
 
 Définit la langue par défaut pour ce site.
 La valeur doit correspondre à l'une des clés de votre objet [`locales`](#locales).
-(Si votre langue par défaut est votre [root locale](#locale-racine), vous pouvez sauter cette étape).
+(Si votre langue par défaut est votre [locale racine](#locale-racine), vous pouvez sauter cette étape).
 
 La locale par défaut sera utilisée pour fournir un contenu de remplacement lorsque les traductions sont manquantes.
 
