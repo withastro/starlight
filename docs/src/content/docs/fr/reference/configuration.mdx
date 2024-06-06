@@ -214,7 +214,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -568,3 +569,13 @@ starlight({
 ```
 
 Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus de détails pour créer vos propres modules d'extension.
+
+### `credits`
+
+Permet l'affichage d'un lien "Créé avec Starlight" dans le pied de page de votre site.
+
+```js
+starlight({
+	credits: true,
+});
+```

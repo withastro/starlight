@@ -67,6 +67,8 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
 
 </Steps>
 
+Pour les scénarios i18n plus avancés, Starlight prend également en compte la configuration de l'internationalisation à l'aide de l'option de [configuration `i18n` d'Astro](https://docs.astro.build/fr/guides/internationalization/#configure-i18n-routing).
+
 ### Utiliser une racine locale
 
 Vous pouvez utiliser une “racine” locale pour servir une langue sans aucun préfixe i18n dans son chemin. Par exemple, si l'anglais est votre racine locale, le chemin d'une page en anglais ressemblera à `/about` au lieu de `/en/about`.
@@ -271,3 +273,16 @@ export const collections = {
 ```
 
 Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
+
+## Accès aux paramètres régionaux
+
+Vous pouvez utiliser [`Astro.currentLocale`](https://docs.astro.build/fr/reference/api-reference/#astrocurrentlocale) pour lire les paramètres régionaux et linguistiques actuels dans les composants `.astro`.
+
+L'exemple suivant lit les paramètres régionaux actuels et les utilise pour générer un lien vers une page d'information dans la même langue :
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+<a href={`/${Astro.currentLocale}/about`}>À propos</a>
+```
