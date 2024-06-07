@@ -69,11 +69,11 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
 
 Pour les scénarios i18n plus avancés, Starlight prend également en compte la configuration de l'internationalisation à l'aide de l'option de [configuration `i18n` d'Astro](https://docs.astro.build/fr/guides/internationalization/#configure-i18n-routing).
 
-### Utiliser une racine locale
+### Utiliser une locale racine
 
-Vous pouvez utiliser une “racine” locale pour servir une langue sans aucun préfixe i18n dans son chemin. Par exemple, si l'anglais est votre racine locale, le chemin d'une page en anglais ressemblera à `/about` au lieu de `/en/about`.
+Vous pouvez utiliser une locale « racine » pour servir une langue sans aucun préfixe i18n dans son chemin. Par exemple, si l'anglais est votre locale racine, le chemin d'une page en anglais ressemblera à `/about` au lieu de `/en/about`.
 
-Pour définir une racine locale, utilisez la clé `root` dans votre configuration `locales`. Si la racine locale est aussi la locale par défaut de votre contenu, supprimez `defaultLocale` ou donnez-lui la valeur `'root''.
+Pour définir une locale racine, utilisez la clé `root` dans votre configuration `locales`. Si la locale racine est aussi la locale par défaut de votre contenu, supprimez `defaultLocale` ou donnez-lui la valeur `'root'`.
 
 ```js {9,11-14}
 // astro.config.mjs
@@ -88,7 +88,7 @@ export default defineConfig({
 			locales: {
 				root: {
 					label: 'English',
-					lang: 'en', // lang est nécessaire pour les locales de la racine
+					lang: 'en', // lang est nécessaire pour les locales racine
 				},
 				'zh-cn': {
 					label: '简体中文',
@@ -100,7 +100,7 @@ export default defineConfig({
 });
 ```
 
-Lorsque vous utilisez une locale `root`, gardez les pages pour cette langue directement dans `src/content/docs/` au lieu d'un dossier dédié à la langue. Par exemple, voici les fichiers de la page d'accueil pour l'anglais et le chinois en utilisant la configuration ci-dessus :
+Lorsque vous utilisez une locale racine avec la clé `root`, conservez les pages de cette langue directement dans `src/content/docs/` au lieu d'un dossier dédié à cette langue. Par exemple, voici les fichiers de la page d'accueil pour l'anglais et le chinois en utilisant la configuration ci-dessus :
 
 <FileTree>
 
