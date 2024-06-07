@@ -27,5 +27,6 @@
   "fileTree.directory": "Folder",
   "expressiveCode.copyButtonCopied": "Skopiowane!",
   "expressiveCode.copyButtonTooltip": "Skopiuj do schowka",
-  "expressiveCode.terminalWindowFallbackTitle": "Okno terminala"
+  "expressiveCode.terminalWindowFallbackTitle": "Okno terminala",
+  "builtWithStarlight.label": "Built with Starlight"
 }

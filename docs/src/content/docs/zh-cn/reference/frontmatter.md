@@ -354,7 +354,7 @@ sidebar:
 
 当在自动生成的链接组中显示时，在侧边栏中为页面添加徽章。
 
-当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh-cn/reference/configuration/#badgeconfig) ，其中包含 `text` 和 `variant` 字段，可以自定义徽章。
+当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh-cn/reference/configuration/#badgeconfig) ，其中包含 `text`、`variant` 和 `class` 字段，可以自定义徽章。
 
 ```md
 ---

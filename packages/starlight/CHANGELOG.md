@@ -1,5 +1,20 @@
 # @astrojs/starlight
 
+## 0.24.0
+
+### Minor Changes
+
+- [#1841](https://github.com/withastro/starlight/pull/1841) [`ee0cd38a`](https://github.com/withastro/starlight/commit/ee0cd38a1fae31717fe820e779baeabe693cd67a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for `Astro.currentLocale` and Astro’s i18n routing.
+
+  ⚠️ **Potentially breaking change:** Starlight now configures Astro’s `i18n` option for you based on its `locales` config.
+
+  If you are currently using Astro’s `i18n` option as well as Starlight’s `locales` option, you will need to remove one of these.
+  In general we recommend using Starlight’s `locales`, but if you have a more advanced configuration you may choose to keep Astro’s `i18n` config instead.
+
+- [#1958](https://github.com/withastro/starlight/pull/1958) [`081d1a96`](https://github.com/withastro/starlight/commit/081d1a969462633e41ca95a18a1ec121cb4af5d2) Thanks [@delucis](https://github.com/delucis)! - Allows users to opt into displaying a “Built with Starlight” link in the site footer
+
+- [#1530](https://github.com/withastro/starlight/pull/1530) [`dd64836a`](https://github.com/withastro/starlight/commit/dd64836af45f33df4a99ab864eabb91fc9b8e204) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Adds a new `<Badge>` component
+
 ## 0.23.4
 
 ### Patch Changes

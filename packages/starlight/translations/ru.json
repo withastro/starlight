@@ -27,5 +27,6 @@
   "fileTree.directory": "Директория",
   "expressiveCode.copyButtonCopied": "Скопировано!",
   "expressiveCode.copyButtonTooltip": "Копировать",
-  "expressiveCode.terminalWindowFallbackTitle": "Окно терминала"
+  "expressiveCode.terminalWindowFallbackTitle": "Окно терминала",
+  "builtWithStarlight.label": "Built with Starlight"
 }

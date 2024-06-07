@@ -9,6 +9,7 @@ import {
 	slugToParam,
 } from './slugs';
 import { validateLogoImports } from './validateLogoImports';
+import { BuiltInDefaultLocale } from './i18n';
 
 // Validate any user-provided logos imported correctly.
 // We do this here so all pages trigger it and at the top level so it runs just once.
@@ -86,7 +87,7 @@ function getRoutes(): Route[] {
 					slug,
 					id,
 					isFallback: true,
-					lang: localeConfig.lang || 'en',
+					lang: localeConfig.lang || BuiltInDefaultLocale.lang,
 					locale,
 					dir: localeConfig.dir,
 					entryMeta: slugToLocaleData(fallback.slug),
