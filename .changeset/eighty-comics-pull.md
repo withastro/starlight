@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Translated Vietnamese UI.
+Updates Vietnamese UI translations
