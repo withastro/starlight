@@ -280,7 +280,7 @@ describe('getLocaleDir', () => {
 		expect(starlightConfig.defaultLocale.dir).toBe('rtl');
 	});
 
-	test.only('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', async () => {
+	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', async () => {
 		// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
 		vi.spyOn(global.Intl, 'Locale').mockImplementation((tag) => ({ language: tag }));
 
