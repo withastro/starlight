@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.24.1
+
+### Patch Changes
+
+- [#1978](https://github.com/withastro/starlight/pull/1978) [`a5ab8cd6`](https://github.com/withastro/starlight/commit/a5ab8cd6a0095cb48b65b9784054714f87bd7e4d) Thanks [@kylewlacy](https://github.com/kylewlacy)! - Add new social icon for Zulip
+
+- [#1962](https://github.com/withastro/starlight/pull/1962) [`2ef19a94`](https://github.com/withastro/starlight/commit/2ef19a947c54c7d2c085bf8820c862737e2ab08b) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Updates Vietnamese UI translations
+
+- [#1976](https://github.com/withastro/starlight/pull/1976) [`5a61f73c`](https://github.com/withastro/starlight/commit/5a61f73c198a33b27342c9b0371dd5fd22da2190) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean UI translations
+
+- [#1987](https://github.com/withastro/starlight/pull/1987) [`0b8a8439`](https://github.com/withastro/starlight/commit/0b8a843936bd8506ac228608b07c54a76a7add19) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes issues with the locale text direction detection mechanism in some environments like WebContainers or Bun.
+
 ## 0.24.0
 
 ### Minor Changes
@@ -149,7 +161,7 @@
 
   ```css
   :root {
-    --sl-line-height: 1.8;
+  	--sl-line-height: 1.8;
   }
   ```
 
@@ -389,7 +401,7 @@
 
   ```css
   .sl-link-card a {
-    line-height: 1.6;
+  	line-height: 1.6;
   }
   ```
 
@@ -409,14 +421,14 @@
   ```css
   /* Restore vertical spacing to match Starlight v0.15 and below. */
   .sl-markdown-content
-    :not(a, strong, em, del, span, input, code)
-    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
-    margin-top: 1.5rem;
+  	:not(a, strong, em, del, span, input, code)
+  	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+  	margin-top: 1.5rem;
   }
   .sl-markdown-content
-    :not(h1, h2, h3, h4, h5, h6)
-    + :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-    margin-top: 2.5rem;
+  	:not(h1, h2, h3, h4, h5, h6)
+  	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  	margin-top: 2.5rem;
   }
   ```
 
@@ -428,9 +440,9 @@
   starlight-toc a[aria-current='true'],
   starlight-toc a[aria-current='true']:hover,
   starlight-toc a[aria-current='true']:focus {
-    font-weight: 600;
-    color: var(--sl-color-text-invert);
-    background-color: var(--sl-color-text-accent);
+  	font-weight: 600;
+  	color: var(--sl-color-text-invert);
+  	background-color: var(--sl-color-text-accent);
   }
   ```
 
@@ -503,14 +515,14 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    // Disable link prefetching:
-    prefetch: false,
+  	// Disable link prefetching:
+  	prefetch: false,
 
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -567,12 +579,12 @@
   import starlight from '@astrojs/starlight';
 
   export default defineConfig({
-    trailingSlash: 'always',
-    integrations: [
-      starlight({
-        // ...
-      }),
-    ],
+  	trailingSlash: 'always',
+  	integrations: [
+  		starlight({
+  			// ...
+  		}),
+  	],
   });
   ```
 
@@ -920,16 +932,16 @@
 
   ```css
   :root {
-    --sl-hue-accent: 234;
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
+  	--sl-hue-accent: 234;
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 54%, 20%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 100%, 60%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 100%, 87%);
   }
 
   :root[data-theme='light'] {
-    --sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
-    --sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
-    --sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
+  	--sl-color-accent-high: hsl(var(--sl-hue-accent), 80%, 30%);
+  	--sl-color-accent: hsl(var(--sl-hue-accent), 90%, 60%);
+  	--sl-color-accent-low: hsl(var(--sl-hue-accent), 88%, 90%);
   }
   ```
 
@@ -1308,8 +1320,8 @@
 
   ```json
   {
-    "search.label": "Suchen",
-    "search.shortcutLabel": "(Drücke / zum Suchen)"
+  	"search.label": "Suchen",
+  	"search.shortcutLabel": "(Drücke / zum Suchen)"
   }
   ```
 
