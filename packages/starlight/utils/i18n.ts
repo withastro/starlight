@@ -175,10 +175,10 @@ function getLocaleInfo(lang: string) {
  */
 function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
 	if ('textInfo' in locale) {
-		// @ts-expect-error - `textInfo` is typed but is available in v8 based environments.
+		// @ts-expect-error - `textInfo` is not typed but is available in v8 based environments.
 		return locale.textInfo.direction;
 	} else if ('getTextInfo' in locale) {
-		// @ts-expect-error - `getTextInfo` is typed but is available in some non-v8 based environments.
+		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
 		return locale.getTextInfo().direction;
 	}
 	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list
