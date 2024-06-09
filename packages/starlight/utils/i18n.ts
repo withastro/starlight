@@ -6,6 +6,15 @@ import type { StarlightConfig } from './user-config';
 export const BuiltInDefaultLocale = { ...getLocaleInfo('en'), lang: 'en' };
 
 /**
+ * A list of well-known right-to-left languages used as a fallback when determining the text
+ * direction of a locale is not supported by the `Intl.Locale` API in the current environment.
+ *
+ * @see getLocaleDir()
+ * @see https://en.wikipedia.org/wiki/IETF_language_tag#List_of_common_primary_language_subtags
+ */
+const wellKnownRTL = ['ar', 'fa', 'he', 'prs', 'ps', 'syc', 'ug', 'ur'];
+
+/**
  * Processes the Astro and Starlight i18n configurations to generate/update them accordingly:
  *
  * 	- If no Astro and Starlight i18n configurations are provided, the built-in default locale is
@@ -150,8 +159,7 @@ function getLocaleInfo(lang: string) {
 		if (!label || lang === label) throw new Error('Label not found.');
 		return {
 			label: label[0]?.toLocaleUpperCase(locale) + label.slice(1),
-			// @ts-expect-error - `textInfo` is not part of the `Intl.Locale` type but is available in Node.js 18.0.0+.
-			dir: locale.textInfo.direction as 'ltr' | 'rtl',
+			dir: getLocaleDir(locale),
 		};
 	} catch (error) {
 		throw new AstroError(
@@ -159,6 +167,23 @@ function getLocaleInfo(lang: string) {
 			'Make sure to provide a valid BCP-47 tags (e.g. en, ar, or zh-CN).'
 		);
 	}
+}
+
+/**
+ * Returns the direction of the passed locale.
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/getTextInfo
+ */
+function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
+	if ('textInfo' in locale) {
+		// @ts-expect-error - `textInfo` is typed but is available in v8 based environments.
+		return locale.textInfo.direction;
+	} else if ('getTextInfo' in locale) {
+		// @ts-expect-error - `getTextInfo` is typed but is available in some non-v8 based environments.
+		return locale.getTextInfo().direction;
+	}
+	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list
+	// of right-to-left languages.
+	return wellKnownRTL.includes(locale.language) ? 'rtl' : 'ltr';
 }
 
 /**
