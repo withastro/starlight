@@ -67,6 +67,8 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 
 </Steps>
 
+Para escenarios de i18n más avanzados, Starlight también admite la configuración de internacionalizaciónutlizando la [opción `i18n` de Astro](https://docs.astro.build/es/guides/internationalization/#configure-i18n-routing).
+
 ### Usa una raíz de configuración regional
 
 Puedes usar una raíz de configuración regional para servir un idioma sin ningún prefijo i18n en tu ruta. Por ejemplo, si el inglés es tu configuración regional, una ruta de página en inglés se vería como `/about` en lugar de `/en/about`.
@@ -273,3 +275,15 @@ export const collections = {
 ```
 
 Aprende más sobre los esquemas de colección de contenido en [“Definir un esquema de colección”](https://docs.astro.build/es/guides/content-collections/#definiendo-un-esquema-de-colección) en la documentación de Astro.
+
+## Acceder al idioma actual
+
+Puedes usar [`Astro.currentLocale`](https://docs.astro.build/es/reference/api-reference/#astrocurrentlocale) para leer el idioma actual en componentes `.astro`.
+
+El siguiente ejemplo lee el idioma actual y lo utiliza para generar un enlace a una página Acerca de en el idioma actual:
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+<a href={`/${Astro.currentLocale}/about`}>About</a>
