@@ -28,7 +28,7 @@
     "@astrojs/starlight": ">=0.14.0"
   },
   "dependencies": {
-    "@docsearch/css": "^3.5.2",
-    "@docsearch/js": "^3.5.2"
+    "@docsearch/css": "^3.6.0",
+    "@docsearch/js": "^3.6.0"
   }
 }
