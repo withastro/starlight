@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.24.1
+
+### Patch Changes
+
+- [#1978](https://github.com/withastro/starlight/pull/1978) [`a5ab8cd6`](https://github.com/withastro/starlight/commit/a5ab8cd6a0095cb48b65b9784054714f87bd7e4d) Thanks [@kylewlacy](https://github.com/kylewlacy)! - Add new social icon for Zulip
+
+- [#1962](https://github.com/withastro/starlight/pull/1962) [`2ef19a94`](https://github.com/withastro/starlight/commit/2ef19a947c54c7d2c085bf8820c862737e2ab08b) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Updates Vietnamese UI translations
+
+- [#1976](https://github.com/withastro/starlight/pull/1976) [`5a61f73c`](https://github.com/withastro/starlight/commit/5a61f73c198a33b27342c9b0371dd5fd22da2190) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean UI translations
+
+- [#1987](https://github.com/withastro/starlight/pull/1987) [`0b8a8439`](https://github.com/withastro/starlight/commit/0b8a843936bd8506ac228608b07c54a76a7add19) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes issues with the locale text direction detection mechanism in some environments like WebContainers or Bun.
+
 ## 0.24.0
 
 ### Minor Changes
