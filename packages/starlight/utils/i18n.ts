@@ -61,7 +61,7 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 						codes: [localeConfig?.lang ?? locale],
 						path: locale === 'root' ? localeConfig?.lang ?? BuiltInDefaultLocale.lang : locale,
 					};
-			  })
+				})
 			: [config.defaultLocale.lang],
 		routing: {
 			prefixDefaultLocale:
@@ -95,11 +95,11 @@ function getStarlightI18nConfig(
 					isDefaultAstroLocale(astroI18nConfig, locale) && !prefixDefaultLocale
 						? 'root'
 						: isAstroLocaleExtendedConfig(locale)
-						? locale.path
-						: locale,
+							? locale.path
+							: locale,
 					inferStarlightLocaleFromAstroLocale(locale),
 				])
-		  );
+			);
 
 	const defaultAstroLocale = astroI18nConfig.locales.find((locale) =>
 		isDefaultAstroLocale(astroI18nConfig, locale)
@@ -121,8 +121,8 @@ function getStarlightI18nConfig(
 			locale: isMonolingualWithRootLocale
 				? undefined
 				: isAstroLocaleExtendedConfig(defaultAstroLocale)
-				? defaultAstroLocale.codes[0]
-				: defaultAstroLocale,
+					? defaultAstroLocale.codes[0]
+					: defaultAstroLocale,
 		},
 	};
 }
