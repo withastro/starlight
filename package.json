@@ -15,11 +15,11 @@
     "@astrojs/check": "^0.7.0",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.5",
-    "@size-limit/file": "^8.2.4",
+    "@size-limit/file": "^11.1.4",
     "astro": "^4.10.2",
     "prettier": "^3.3.2",
     "prettier-plugin-astro": "^0.14.0",
-    "size-limit": "^8.2.4",
+    "size-limit": "^11.1.4",
     "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@8.7.4",
@@ -27,17 +27,20 @@
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "10 kB"
+      "limit": "10 kB",
+      "gzip": true
     },
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "23 kB"
+      "limit": "23 kB",
+      "gzip": true
     },
     {
       "name": "/_astro/*.css",
       "path": "examples/basics/dist/_astro/*.css",
-      "limit": "14.5 kB"
+      "limit": "14.5 kB",
+      "gzip": true
     }
   ]
 }
