@@ -14,11 +14,11 @@
     "lunaria:build": "lunaria build"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.4.4",
+    "@astro-community/astro-embed-youtube": "^0.5.2",
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.1.0",
     "@types/culori": "^2.0.0",
-    "astro": "^4.8.6",
+    "astro": "^4.10.2",
     "culori": "^3.2.0",
     "sharp": "^0.32.5"
   },

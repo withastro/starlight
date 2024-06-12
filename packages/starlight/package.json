@@ -183,20 +183,20 @@
     "astro": "^4.8.6"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^4.2.1",
+    "@astrojs/markdown-remark": "^5.1.0",
     "@playwright/test": "^1.43.1",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
-    "astro": "^4.8.6",
+    "astro": "^4.10.2",
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.5",
+    "@astrojs/mdx": "^3.1.0",
+    "@astrojs/sitemap": "^3.1.5",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.3",
     "@types/mdast": "^4.0.3",
-    "astro-expressive-code": "^0.35.2",
+    "astro-expressive-code": "^0.35.3",
     "bcp-47": "^2.1.0",
     "hast-util-from-html": "^2.0.1",
     "hast-util-select": "^6.0.2",
