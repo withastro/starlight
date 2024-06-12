@@ -27,10 +27,6 @@
   "exports": {
     ".": "./index.ts",
     "./components": "./components.ts",
-    "./components/Badge.astro": {
-      "types": "./components/Badge.astro.tsx",
-      "import": "./components/Badge.astro"
-    },
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",
       "import": "./components/LanguageSelect.astro"
