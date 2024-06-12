@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Remove outdate Badge component export
+Removes an outdated export in `package.json`
