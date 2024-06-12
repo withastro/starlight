@@ -62,7 +62,7 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 						path: locale === 'root' ? localeConfig?.lang ?? BuiltInDefaultLocale.lang : locale,
 					};
 			  })
-			: [BuiltInDefaultLocale.lang],
+			: [config.defaultLocale.lang],
 		routing: {
 			prefixDefaultLocale:
 				// Sites with multiple languages without a root locale.
