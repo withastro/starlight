@@ -45,8 +45,8 @@ importers:
         specifier: workspace:*
         version: link:../packages/starlight
       '@lunariajs/core':
-        specifier: ^0.0.32
-        version: 0.0.32
+        specifier: ^0.1.0
+        version: 0.1.0
       '@types/culori':
         specifier: ^2.0.0
         version: 2.0.0
@@ -1903,8 +1903,8 @@ packages:
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
     dev: false
 
-  /@lunariajs/core@0.0.32:
-    resolution: {integrity: sha512-l4JbgtatUlh64FJIyjPPPiLTEu26TTOKVa8GUBF32aGmzXb1ScdKwYQuN1c7Hf1sjW5VAc9Z+wthhx4/GU0jGA==}
+  /@lunariajs/core@0.1.0:
+    resolution: {integrity: sha512-UP2K3fjgmPP4eN92ZcreAzWitRfeqhMMSHeh2GK2FtzReYWoHeth7cogzNv9Glb64UA2PFJkZ3fU5DAdX53w+g==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     dependencies:
