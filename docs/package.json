@@ -25,6 +25,6 @@
   "devDependencies": {
     "pa11y-ci": "^3.0.1",
     "starlight-links-validator": "^0.7.1",
-    "start-server-and-test": "^2.0.0"
+    "start-server-and-test": "^2.0.4"
   }
 }
