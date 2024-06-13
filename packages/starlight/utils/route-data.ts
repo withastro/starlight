@@ -67,8 +67,8 @@ export function getToC({ entry, locale, headings }: PageProps) {
 		entry.data.template === 'splash'
 			? false
 			: entry.data.tableOfContents !== undefined
-			? entry.data.tableOfContents
-			: config.tableOfContents;
+				? entry.data.tableOfContents
+				: config.tableOfContents;
 	if (!tocConfig) return;
 	const t = useTranslations(locale);
 	return {

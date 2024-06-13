@@ -52,8 +52,8 @@ export function slugToParam(slug: string): string | undefined {
 	return slug === 'index' || slug === ''
 		? undefined
 		: slug.endsWith('/index')
-		? slug.replace(/\/index$/, '')
-		: slug;
+			? slug.replace(/\/index$/, '')
+			: slug;
 }
 
 export function slugToPathname(slug: string): string {
