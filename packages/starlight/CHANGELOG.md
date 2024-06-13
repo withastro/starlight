@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.24.2
+
+### Patch Changes
+
+- [#2008](https://github.com/withastro/starlight/pull/2008) [`40359c7`](https://github.com/withastro/starlight/commit/40359c7b73d9c7d60f0b44a870dbc93ba941228f) Thanks [@vnepogodin](https://github.com/vnepogodin)! - Add Slovak language UI translation.
+
+- [#2004](https://github.com/withastro/starlight/pull/2004) [`0aa2f06`](https://github.com/withastro/starlight/commit/0aa2f06d3a35a3c5182b4d461c8f3489ac145301) Thanks [@liruifengv](https://github.com/liruifengv)! - Removes an outdated export in `package.json`
+
+- [#2007](https://github.com/withastro/starlight/pull/2007) [`44ca490`](https://github.com/withastro/starlight/commit/44ca490f36ecd6789d0865dd2506e5ea03dfa0fb) Thanks [@delucis](https://github.com/delucis)! - Updates internal dependencies
+
+- [#1993](https://github.com/withastro/starlight/pull/1993) [`60165b2`](https://github.com/withastro/starlight/commit/60165b20c9d11a08c4c4793615778e045b41b7de) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an i18n configuration issue when using a single root locale.
+
 ## 0.24.1
 
 ### Patch Changes
