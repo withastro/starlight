@@ -63,7 +63,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 			.map(([key, error]) =>
 				key === baseErrorPath
 					? // Avoid printing the key again if it's a base error
-					  `> ${getTypeOrLiteralMsg(error)}`
+						`> ${getTypeOrLiteralMsg(error)}`
 					: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
 			);
 
