@@ -18,6 +18,7 @@ const { sublist, nested } = Astro.props;
 				{entry.type === 'link' ? (
 					<a
 						href={entry.href}
+						data-sl-current-page-link={entry.isCurrent}
 						aria-current={entry.isCurrent && 'page'}
 						class:list={[{ large: !nested }, entry.attrs.class]}
 						{...entry.attrs}
@@ -55,6 +56,34 @@ const { sublist, nested } = Astro.props;
 		))
 	}
 </ul>
+
+{
+	// Only include the script on the top level, once per page
+	!nested && (
+		<script>
+			// This little script makes sure that the sidebar link for the
+			// curent page is visible.
+
+			document.addEventListener("DOMContentLoaded", () => {
+				const linkElement = document.querySelector("[data-sl-current-page-link]");
+				if (!linkElement) return;
+
+				// Use an intersection observer to make sure that we
+				// only scroll if the link isn't visible
+				const observer = new IntersectionObserver((entries, observer)=>{
+					if (entries[0] && !entries[0].isIntersecting) {
+						// This can be changed to "smooth" if desig
+						linkElement.scrollIntoView({ behavior: "instant" })
+					}
+
+					// Shut down the observer after the first time it fires
+					observer.disconnect();
+				});
+				observer.observe(linkElement);
+			})
+		</script>
+	)
+}
 
 <style>
 	ul {
