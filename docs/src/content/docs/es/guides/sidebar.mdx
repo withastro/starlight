@@ -293,12 +293,14 @@ La configuración anterior genera la siguiente barra lateral:
 	]}
 />
 
-### Variantes de insignia
+### Variantes de insignia y estilos personalizados
 
-Personaliza el estilo de la insignia usando un objeto con las propiedades `text` y `variant`.
+Personaliza el estilo de la insignia usando un objeto con las propiedades `text`, `variant` y `class`.
 
 La propiedad `text` representa el contenido a mostrar (por ejemplo, "Nuevo").
-Remplaza el estilo `default`, que usa el color de acento de tu sitio, estableciendo la propiedad `variant` a uno de los siguientes valores: `note`, `tip`, `danger`, `caution` o `success`.
+Por defecto, la insignia usará el color de acento de tu sitio. Para usar un estilo de insignia integrado, establece la propiedad `variant` en uno de los siguientes valores: `note`, `tip`, `danger`, `caution` o `success`.
+
+Opcionalmente, puedes crear un estilo de insignia personalizado estableciendo la propiedad `class` en un nombre de clase CSS.
 
 ```js {10}
 starlight({
