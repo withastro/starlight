@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
       - name: Run size-limit
-        uses: andresz1/size-limit-action@dd31dce7dcc72a041fd3e49abf0502b13fc4ce05
+        uses: andresz1/size-limit-action@v1.8.0
         with:
           github_token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           build_script: 'build:examples'
