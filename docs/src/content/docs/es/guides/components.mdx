@@ -417,6 +417,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### Insignias
+
+import { Badge } from '@astrojs/starlight/components';
+
+Usa el componente `<Badge>` para mostrar pequeñas piezas de información, como estado o etiquetas.
+
+Pasa el contenido que deseas mostrar al atributo `text` del componente `<Badge>`.
+
+Por defecto, la insignia usará el color de acento del tema de tu sitio. Para usar un color de insignia integrado, establece el atributo `variant` en uno de los siguientes valores: `note` (azul), `tip` (morado), `danger` (rojo), `caution` (naranja) o `success` (verde).
+
+El atributo `size` (por defecto: `small`) controla el tamaño del texto de la insignia. `medium` y `large` también son opciones disponibles para mostrar una insignia más grande.
+
+Para personalizaciones adicionales, utiliza otros atributos de `<span>` como `class` o `style` con CSS personalizado.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Nuevo" variant="tip" size="small" />
+<Badge text="Obsoleto" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personalizado" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+El código anterior genera lo siguiente en la página:
+
+<Badge text="Nuevo" variant="tip" size="small" />
+<Badge text="Obsoleto" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personalizado" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### Iconos
 
 import { Icon } from '@astrojs/starlight/components';

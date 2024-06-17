@@ -1,5 +1,11 @@
 # @astrojs/starlight-docsearch
 
+## 0.1.1
+
+### Patch Changes
+
+- [#2009](https://github.com/withastro/starlight/pull/2009) [`1e8bfe4`](https://github.com/withastro/starlight/commit/1e8bfe4b7bb8e958ce22e65c4719e7f281cd6e88) Thanks [@delucis](https://github.com/delucis)! - Updates Docsearch packages to 3.6.0
+
 ## 0.1.0
 
 ### Minor Changes

@@ -58,6 +58,8 @@ export const docSearchI18nSchema = () =>
 			'docsearch.searchBox.cancelButtonText': z.string(),
 			/** Default: `Cancel` */
 			'docsearch.searchBox.cancelButtonAriaLabel': z.string(),
+			/** Default: `Search` */
+			'docsearch.searchBox.searchInputLabel': z.string(),
 
 			// START SCREEN
 			/** Default: `Recent` */
