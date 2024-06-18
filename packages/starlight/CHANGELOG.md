@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.24.3
+
+### Patch Changes
+
+- [#2028](https://github.com/withastro/starlight/pull/2028) [`af81ad3`](https://github.com/withastro/starlight/commit/af81ad38fd26c375c0372718fd3e152b7f1a0fa6) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a search dialog height issue in Safari.
+
+- [#2022](https://github.com/withastro/starlight/pull/2022) [`80f82b1`](https://github.com/withastro/starlight/commit/80f82b15afae1366676e0c25e674210a19606df5) Thanks [@playmr365](https://github.com/playmr365)! - Updates Czech UI translations
+
 ## 0.24.2
 
 ### Patch Changes
