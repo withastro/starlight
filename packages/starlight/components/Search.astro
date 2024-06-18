@@ -197,7 +197,7 @@ const pagefindTranslations = {
 		box-shadow: var(--sl-shadow-lg);
 	}
 	dialog[open] {
-		display: grid;
+		display: flex;
 	}
 
 	dialog::backdrop {
@@ -208,6 +208,7 @@ const pagefindTranslations = {
 
 	.dialog-frame {
 		flex-direction: column;
+		flex-grow: 1;
 		gap: 1rem;
 		padding: 1rem;
 	}
