@@ -18,12 +18,12 @@
   "page.lastUpdated": "Poslední aktualizace:",
   "page.previousLink": "Předchozí",
   "page.nextLink": "Další",
-  "page.draft": "This content is a draft and will not be included in production builds.",
-  "404.text": "Stránka nenalezena. Zkontrolujte adresu URL nebo zkuste použít vyhledávací pole.",
-  "aside.note": "Note",
+  "page.draft": "Tento obsah je koncept a nebude zahrnutý v produkčním sestavení.",
+  "404.text": "Stránka nenalezena. Zkontrolujte adresu nebo zkuste použít vyhledávač",
+  "aside.note": "Poznámka",
   "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger",
-  "fileTree.directory": "Directory",
-  "builtWithStarlight.label": "Built with Starlight"
+  "aside.caution": "Upozornění",
+  "aside.danger": "Nebezpečí",
+  "fileTree.directory": "Adresář",
+  "builtWithStarlight.label": "Postavené s Starlight"
 }
