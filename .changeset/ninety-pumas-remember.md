@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Edit czech UI translation
+Updates Czech UI translations
