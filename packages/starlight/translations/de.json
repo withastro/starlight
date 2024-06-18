@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Zum Inhalt springen",
   "search.label": "Suchen",
-  "search.shortcutLabel": "(Drücke / zum Suchen)",
   "search.cancelLabel": "Abbrechen",
   "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
   "themeSelect.accessibleLabel": "Farbschema wählen",

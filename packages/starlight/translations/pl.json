@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Przejdź do głównej zawartości",
   "search.label": "Szukaj",
-  "search.shortcutLabel": "(Naciśnij /, aby wyszukać)",
   "search.cancelLabel": "Anuluj",
   "search.devWarning": "Wyszukiwanie jest dostępne tylko w buildach produkcyjnych. \nSpróbuj zbudować i uruchomić aplikację, aby przetestować lokalnie.",
   "themeSelect.accessibleLabel": "Wybierz motyw",

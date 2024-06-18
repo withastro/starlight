@@ -55,10 +55,6 @@ function starlightI18nSchema() {
 
 			'search.label': z.string().describe('Text displayed in the search bar.'),
 
-			'search.shortcutLabel': z
-				.string()
-				.describe('Accessible label for the shortcut key to open the search modal.'),
-
 			'search.cancelLabel': z
 				.string()
 				.describe('Text for the “Cancel” button that closes the search modal.'),
