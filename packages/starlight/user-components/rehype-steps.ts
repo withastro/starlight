@@ -44,6 +44,12 @@ const stepsProcessor = rehype()
 			} else {
 				rootElement.properties.className.push('sl-steps');
 			}
+
+			// Add the `start` attribute as a CSS custom property so we can use it as the starting index
+			// of the steps custom counter.
+			if (typeof rootElement.properties.start === 'number') {
+				rootElement.properties.style = `${rootElement.properties.style ?? ''} --sl-steps-start: ${rootElement.properties.start - 1};`;
+			}
 		};
 	});
 

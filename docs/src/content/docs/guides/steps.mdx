@@ -1,0 +1,257 @@
+---
+title: ⚠️ Steps ⚠️
+---
+
+:::danger
+Delete this page
+:::
+
+import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. A step
+
+2. A step with some code bloc
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Amazing',
+   		}),
+   	],
+   });
+   ```
+
+3. A step with a file tree
+
+   <FileTree>
+
+   - src/
+     - assets/
+       - **my-logo.svg**
+     - content/
+   - astro.config.mjs
+
+   </FileTree>
+
+4. A step with an unordered list
+
+   - A
+   - B
+     - B1
+     - B2
+   - C
+
+5. A step with some tabs
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npx astro add tailwind
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm astro add tailwind
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn astro add tailwind
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+6. A step with an ordered list
+
+   1. A
+   2. B
+      1. B1
+      2. B2
+   3. C
+
+7. A step with nested steps
+
+   <Steps>
+
+   1. A step
+   2. A step with some code bloc
+
+      ```js
+      // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      import starlight from '@astrojs/starlight';
+
+      export default defineConfig({
+      	integrations: [
+      		starlight({
+      			title: 'Amazing',
+      		}),
+      	],
+      });
+      ```
+
+   3. A step with a file tree
+
+      <FileTree>
+
+      - src/
+        - assets/
+          - **my-logo.svg**
+        - content/
+      - astro.config.mjs
+
+      </FileTree>
+
+   4. A step with an unordered list
+
+      - A
+      - B
+        - B1
+        - B2
+      - C
+
+   5. A step with some tabs
+
+      <Tabs syncKey="pkg">
+
+      <TabItem label="npm">
+
+      ```sh
+      npx astro add tailwind
+      ```
+
+      </TabItem>
+
+      <TabItem label="pnpm">
+
+      ```sh
+      pnpm astro add tailwind
+      ```
+
+      </TabItem>
+
+      <TabItem label="Yarn">
+
+      ```sh
+      yarn astro add tailwind
+      ```
+
+      </TabItem>
+
+      </Tabs>
+
+   6. A step with an ordered list
+
+      1. A
+      2. B
+         1. B1
+         2. B2
+      3. C
+
+   7. A step
+
+   </Steps>
+
+8. A step with nested steps starting at 4
+
+   <Steps>
+
+   4. A step
+   5. A step with some code bloc
+
+      ```js
+      // astro.config.mjs
+      import { defineConfig } from 'astro/config';
+      import starlight from '@astrojs/starlight';
+
+      export default defineConfig({
+      	integrations: [
+      		starlight({
+      			title: 'Amazing',
+      		}),
+      	],
+      });
+      ```
+
+   6. A step with a file tree
+
+      <FileTree>
+
+      - src/
+        - assets/
+          - **my-logo.svg**
+        - content/
+      - astro.config.mjs
+
+      </FileTree>
+
+   7. A step with an unordered list
+
+      - A
+      - B
+        - B1
+        - B2
+      - C
+
+   8. A step with some tabs
+
+      <Tabs syncKey="pkg">
+
+      <TabItem label="npm">
+
+      ```sh
+      npx astro add tailwind
+      ```
+
+      </TabItem>
+
+      <TabItem label="pnpm">
+
+      ```sh
+      pnpm astro add tailwind
+      ```
+
+      </TabItem>
+
+      <TabItem label="Yarn">
+
+      ```sh
+      yarn astro add tailwind
+      ```
+
+      </TabItem>
+
+      </Tabs>
+
+   9. A step with an ordered list
+
+      1. A
+      2. B
+         1. B1
+         2. B2
+      3. C
+
+   10. A step
+
+   </Steps>
+
+9. A step
+
+</Steps>
