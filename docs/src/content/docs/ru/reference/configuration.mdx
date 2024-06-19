@@ -214,7 +214,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -567,3 +568,13 @@ starlight({
 ```
 
 См. [Справочник по плагинам](/ru/reference/plugins/) для получения подробной информации о создании собственных плагинов.
+
+### `credits`
+
+Включите отображение ссылки «Built with Starlight» в подвале вашего сайта.
+
+```js
+starlight({
+	credits: true,
+});
+```
