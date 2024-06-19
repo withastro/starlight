@@ -418,6 +418,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### Значки
+
+import { Badge } from '@astrojs/starlight/components';
+
+Используйте компонент `<Badge>` для отображения небольших фрагментов информации, таких как статус или ярлыки.
+
+Передайте содержимое, которое вы хотите отобразить, в атрибут `text` компонента `<Badge>`.
+
+По умолчанию значок будет использовать акцентный цвет темы вашего сайта. Чтобы использовать встроенный цвет значка, установите атрибут `variant` в одно из следующих значений: `note` (синий), `tip` (фиолетовый), `danger` (красный), `caution` (оранжевый), или `success` (зелёный).
+
+Атрибут `size` (по умолчанию: `small`) управляет размером текста значка. Для отображения значка большего размера также доступны опции `medium` и `large`.
+
+Для дальнейшей настройки используйте другие атрибуты `<span>`, такие как `class` или `style`, с помощью пользовательского CSS.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Новое" variant="tip" size="small" />
+<Badge text="Устарело" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Свой текст" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+Вышеуказанный код сформирует следующий HTML:
+
+<Badge text="Новое" variant="tip" size="small" />
+<Badge text="Устарело" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Свой текст" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### Иконки
 
 import { Icon } from '@astrojs/starlight/components';
