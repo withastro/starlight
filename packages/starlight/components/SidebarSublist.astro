@@ -72,7 +72,7 @@ const { sublist, nested } = Astro.props;
 				// only scroll if the link isn't visible
 				const observer = new IntersectionObserver((entries, observer)=>{
 					if (entries[0] && !entries[0].isIntersecting) {
-						// This can be changed to "smooth" if desig
+						// This can be changed to "smooth" if desired
 						linkElement.scrollIntoView({ behavior: "instant" })
 					}
 
