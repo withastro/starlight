@@ -70,7 +70,7 @@ test('applies `role="list"` to child list', () => {
 test('does not interfere with other attributes on the child list', () => {
 	const { html } = processSteps('<ol start="5"><li>Step one</li></ol>');
 	expect(html).toMatchInlineSnapshot(
-		`"<ol start="5" role="list" class="sl-steps"><li>Step one</li></ol>"`
+		`"<ol start="5" role="list" class="sl-steps" style="--sl-steps-start: 4"><li>Step one</li></ol>"`
 	);
 });
 
