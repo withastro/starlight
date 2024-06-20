@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.24.4
+
+### Patch Changes
+
+- [#2038](https://github.com/withastro/starlight/pull/2038) [`87f3f92`](https://github.com/withastro/starlight/commit/87f3f925be6f9897b71b09a3041ec6d54be483b2) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI translations
+
+- [#2043](https://github.com/withastro/starlight/pull/2043) [`53f4cd4`](https://github.com/withastro/starlight/commit/53f4cd443cf31b6135ff16eb74b5f26ee93ee2d5) Thanks [@playmr365](https://github.com/playmr365)! - Updates Czech UI translations
+
+- [#2041](https://github.com/withastro/starlight/pull/2041) [`8af5a60`](https://github.com/withastro/starlight/commit/8af5a60ab14f4dae7f5a5e4ee535ae927273368b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes `<Steps>` numbering bug caused by Chrome v126 CSS counter rewrite
+
 ## 0.24.3
 
 ### Patch Changes
