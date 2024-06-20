@@ -87,3 +87,14 @@ test('applies class name and preserves existing classes on a child list', () => 
 		`"<ol class="test class-concat sl-steps" role="list"><li>Step one</li></ol>"`
 	);
 });
+
+test('applies custom property if start attribute is used', () => {
+	const start = 10;
+	const { html } = processSteps(`<ol start="${start}"><li>Step one</li></ol>`);
+	expect(html).toContain(`style="--sl-steps-start: ${start - 1}"`);
+});
+
+test('custom property for start count does not interfere with custom styles', () => {
+	const { html } = processSteps(`<ol start="20" style="color: red"><li>Step one</li></ol>`);
+	expect(html).toMatchInlineSnapshot(`"<ol start="20" style="--sl-steps-start: 19;color: red" role="list" class="sl-steps"><li>Step one</li></ol>"`);
+});
