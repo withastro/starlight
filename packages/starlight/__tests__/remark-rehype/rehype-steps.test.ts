@@ -96,5 +96,7 @@ test('applies custom property if start attribute is used', () => {
 
 test('custom property for start count does not interfere with custom styles', () => {
 	const { html } = processSteps(`<ol start="20" style="color: red"><li>Step one</li></ol>`);
-	expect(html).toMatchInlineSnapshot(`"<ol start="20" style="--sl-steps-start: 19;color: red" role="list" class="sl-steps"><li>Step one</li></ol>"`);
+	expect(html).toMatchInlineSnapshot(
+		`"<ol start="20" style="--sl-steps-start: 19;color: red" role="list" class="sl-steps"><li>Step one</li></ol>"`
+	);
 });
