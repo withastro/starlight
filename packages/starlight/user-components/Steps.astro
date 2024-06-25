@@ -51,7 +51,7 @@ const { html } = processSteps(content);
 	}
 
 	/* Vertical guideline linking list numbers. */
-	.sl-steps > li:not(:last-of-type)::after {
+	.sl-steps > li::after {
 		--guide-width: 1px;
 		content: '';
 		position: absolute;
@@ -60,6 +60,14 @@ const { html } = processSteps(content);
 		inset-inline-start: calc((var(--bullet-size) - var(--guide-width)) / 2);
 		width: var(--guide-width);
 		background-color: var(--sl-color-hairline-light);
+	}
+	.sl-steps > li:last-of-type::after {
+		background: linear-gradient(
+			to bottom,
+			var(--sl-color-hairline-light) 0,
+			var(--sl-color-hairline-light) calc(100% - 5rem),
+			var(--sl-color-bg) 100%
+		);
 	}
 
 	/* Adjust first item inside a step so that it aligns vertically with the number
