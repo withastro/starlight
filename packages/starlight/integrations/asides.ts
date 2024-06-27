@@ -1,6 +1,6 @@
 /// <reference types="mdast-util-directive" />
 
-import type { AstroConfig, AstroUserConfig } from 'astro';
+import type { AstroConfig, AstroIntegration, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
 import type { Node, Paragraph as P, Parent, Root } from 'mdast';
 import {
@@ -146,7 +146,6 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				return;
 			}
 			if (node.type === 'textDirective' || node.type === 'leafDirective') {
-				transformUnhandledDirective(node, index, parent);
 				return;
 			}
 			const variant = node.name;
@@ -209,4 +208,44 @@ type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remar
 
 export function starlightAsides(options: AsidesOptions): RemarkPlugins {
 	return [remarkDirective, remarkAsides(options)];
+}
+
+export function remarkDirectivesRestoration() {
+	return function transformer(tree: Root) {
+		visit(tree, (node, index, parent) => {
+			if (
+				index !== undefined &&
+				parent &&
+				(node.type === 'textDirective' || node.type === 'leafDirective')
+			) {
+				transformUnhandledDirective(node, index, parent);
+				return;
+			}
+		});
+	};
+}
+
+/**
+ * Directives not handled by Starlight are transformed back to their original form to avoid
+ * breaking user content.
+ * To allow remark plugins injected by Starlight plugins through Astro integrations to handle
+ * such directives, we need to restore unhandled text and leaf directives back to their original
+ * form only after all these other plugins have run.
+ * To do so, we run a remark plugin restoring these directives back to their original form from
+ * another Astro integration that runs after all the ones that may have been injected by Starlight
+ * plugins.
+ */
+export function starlightDirectivesRestorationIntegration(): AstroIntegration {
+	return {
+		name: 'starlight-directives-restoration',
+		hooks: {
+			'astro:config:setup': ({ updateConfig }) => {
+				updateConfig({
+					markdown: {
+						remarkPlugins: [remarkDirectivesRestoration],
+					},
+				});
+			},
+		},
+	};
 }
