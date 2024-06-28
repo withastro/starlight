@@ -1,6 +1,8 @@
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import type { Root } from 'mdast';
+import { visit } from 'unist-util-visit';
 import { describe, expect, test } from 'vitest';
-import { starlightAsides } from '../../integrations/asides';
+import { starlightAsides, remarkDirectivesRestoration } from '../../integrations/asides';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 
@@ -23,6 +25,9 @@ const processor = await createMarkdownProcessor({
 			astroConfig: { root: new URL(import.meta.url), srcDir: new URL('./_src/', import.meta.url) },
 			useTranslations,
 		}),
+		// The restoration plugin is run after the asides and any other plugin that may have been
+		// injected by Starlight plugins.
+		remarkDirectivesRestoration,
 	],
 });
 
@@ -167,13 +172,14 @@ test('runs without locales config', async () => {
 				},
 				useTranslations,
 			}),
+			remarkDirectivesRestoration,
 		],
 	});
 	const res = await processor.render(':::note\nTest\n::');
 	expect(res.code.includes('aria-label=Note"'));
 });
 
-test('tranforms back unhandled text directives', async () => {
+test('transforms back unhandled text directives', async () => {
 	const res = await processor.render(
 		`This is a:test of a sentence with a text:name[content]{key=val} directive.`
 	);
@@ -184,10 +190,47 @@ test('tranforms back unhandled text directives', async () => {
 	`);
 });
 
-test('tranforms back unhandled leaf directives', async () => {
+test('transforms back unhandled leaf directives', async () => {
 	const res = await processor.render(`::video[Title]{v=xxxxxxxxxxx}`);
 	expect(res.code).toMatchInlineSnapshot(`
 		"<p>::video[Title]{v="xxxxxxxxxxx"}
 		</p>"
+	`);
+});
+
+test('lets remark plugin injected by Starlight plugins handle text and leaf directives', async () => {
+	const processor = await createMarkdownProcessor({
+		remarkPlugins: [
+			...starlightAsides({
+				starlightConfig,
+				astroConfig: {
+					root: new URL(import.meta.url),
+					srcDir: new URL('./_src/', import.meta.url),
+				},
+				useTranslations,
+			}),
+			// A custom remark plugin injected by a Starlight plugin through an Astro integration would
+			// run before the restoration plugin.
+			function customRemarkPlugin() {
+				return function transformer(tree: Root) {
+					visit(tree, (node, index, parent) => {
+						if (node.type !== 'textDirective' || typeof index !== 'number' || !parent) return;
+						if (node.name === 'abbr') {
+							parent.children.splice(index, 1, { type: 'text', value: 'TEXT FROM REMARK PLUGIN' });
+						}
+					});
+				};
+			},
+			remarkDirectivesRestoration,
+		],
+	});
+
+	const res = await processor.render(
+		`This is a:test of a sentence with a :abbr[SL]{name="Starlight"} directive handled by another remark plugin and some other text:name[content]{key=val} directives not handled by any plugin.`
+	);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>This is a:test
+		 of a sentence with a TEXT FROM REMARK PLUGIN directive handled by another remark plugin and some other text:name[content]{key="val"}
+		 directives not handled by any plugin.</p>"
 	`);
 });
