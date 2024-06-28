@@ -12,4 +12,5 @@ export default defineConfig({
 		},
 	],
 	testMatch: '__e2e__/*.test.ts',
+	workers: 1,
 });
