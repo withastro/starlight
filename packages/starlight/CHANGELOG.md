@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.24.5
+
+### Patch Changes
+
+- [#2062](https://github.com/withastro/starlight/pull/2062) [`5ac0ac6`](https://github.com/withastro/starlight/commit/5ac0ac6614e3c45d810a1594a2009d3febfa2793) Thanks [@evadecker](https://github.com/evadecker)! - Increase theme and language select inline padding
+
+- [#2056](https://github.com/withastro/starlight/pull/2056) [`87e9ad0`](https://github.com/withastro/starlight/commit/87e9ad029c9730fca8df66e35828b57cd0872a61) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing remark plugins injected by Starlight plugins to handle Markdown text and leaf directives.
+
+- [#2063](https://github.com/withastro/starlight/pull/2063) [`3ee1a94`](https://github.com/withastro/starlight/commit/3ee1a9404db25f5776a3c1ecd248614f64db46ae) Thanks [@delucis](https://github.com/delucis)! - Translate `fileTree.directory` and `aside.*` UI string into Norwegian (Bokmål).
+
+- [#2054](https://github.com/withastro/starlight/pull/2054) [`dbfd3ee`](https://github.com/withastro/starlight/commit/dbfd3eeccacb5f5b77d75213dac3b30dc0be6deb) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue when using the `<StarlightPage>` component in a custom page with a user-defined `srcDir` configuration.
+
 ## 0.24.4
 
 ### Patch Changes
