@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "scripts": {
     "test": "start-server-and-test 'pnpm preview' http://localhost:4321 'pnpm pa11y'",
-    "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-0.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(da|de|es|fr|hi|id|it|ko|nb|pt-br|pt-pt|ru|tr|uk|zh-cn)/.*'",
+    "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-0.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(de|zh-cn|fr|es|pt-br|pt-pt|it|id|ko|ru|tr|hi|da|uk)/.*'",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
