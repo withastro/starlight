@@ -70,7 +70,7 @@ test('applies `role="list"` to child list', () => {
 test('does not interfere with other attributes on the child list', () => {
 	const { html } = processSteps('<ol start="5"><li>Step one</li></ol>');
 	expect(html).toMatchInlineSnapshot(
-		`"<ol start="5" role="list" class="sl-steps"><li>Step one</li></ol>"`
+		`"<ol start="5" role="list" class="sl-steps" style="--sl-steps-start: 4"><li>Step one</li></ol>"`
 	);
 });
 
@@ -85,5 +85,18 @@ test('applies class name and preserves existing classes on a child list', () => 
 	expect(html).toContain(`class="${testClass} sl-steps"`);
 	expect(html).toMatchInlineSnapshot(
 		`"<ol class="test class-concat sl-steps" role="list"><li>Step one</li></ol>"`
+	);
+});
+
+test('applies custom property if start attribute is used', () => {
+	const start = 10;
+	const { html } = processSteps(`<ol start="${start}"><li>Step one</li></ol>`);
+	expect(html).toContain(`style="--sl-steps-start: ${start - 1}"`);
+});
+
+test('custom property for start count does not interfere with custom styles', () => {
+	const { html } = processSteps(`<ol start="20" style="color: red"><li>Step one</li></ol>`);
+	expect(html).toMatchInlineSnapshot(
+		`"<ol start="20" style="--sl-steps-start: 19;color: red" role="list" class="sl-steps"><li>Step one</li></ol>"`
 	);
 });

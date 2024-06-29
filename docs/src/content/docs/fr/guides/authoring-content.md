@@ -360,6 +360,31 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   ```
   ````
 
+## Détails
+
+Détails (également connus comme « divulgations » ou « accordéons ») sont utiles pour masquer du contenu qui n'est pas immédiatement pertinent.
+Les utilisateurs peuvent cliquer sur un court résumé pour développer et afficher le contenu complet.
+
+Utilisez les éléments HTML standard [`<details>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/details) et [`<summary>`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/summary) dans votre contenu Markdown pour créer un widget de divulgation.
+
+Vous pouvez imbriquer n'importe quelle autre syntaxe Markdown à l'intérieur d'un élément `<details>`.
+
+<details>
+<summary>Où et quand la constellation d'Andromède est-elle la plus visible ?</summary>
+
+La [constellation d'Andromède](<https://fr.wikipedia.org/wiki/Androm%C3%A8de_(constellation)>) est la plus visible dans le ciel nocturne pendant le mois de novembre aux latitudes comprises entre `+90°` et `−40°`.
+
+</details>
+
+```md
+<details>
+<summary>Où et quand la constellation d'Andromède est-elle la plus visible ?</summary>
+
+La [constellation d'Andromède](<https://fr.wikipedia.org/wiki/Androm%C3%A8de_(constellation)>) est la plus visible dans le ciel nocturne pendant le mois de novembre aux latitudes comprises entre `+90°` et `−40°`.
+
+</details>
+```
+
 ## Autres fonctionnalités courantes de Markdown
 
 Starlight prend en charge toutes les autres syntaxes de rédaction Markdown, telles que les listes et les tableaux. Voir [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) pour un aperçu rapide de tous les éléments de la syntaxe Markdown.

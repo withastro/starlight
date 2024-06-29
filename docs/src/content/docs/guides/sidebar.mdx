@@ -294,12 +294,14 @@ The configuration above generates the following sidebar:
 	]}
 />
 
-### Badge variants
+### Badge variants and custom styling
 
-Customize the badge styling using an object with `text` and `variant` properties.
+Customize the badge styling using an object with `text`, `variant`, and `class` properties.
 
 The `text` represents the content to display (e.g. "New").
-Override the `default` styling, which uses the accent color of your site, by setting the `variant` property to one of the following values: `note`, `tip`, `danger`, `caution` or `success`.
+By default, the badge will use the accent color of your site. To use a built-in badge style, set the `variant` property to one of the following values: `note`, `tip`, `danger`, `caution` or `success`.
+
+Optionally, you can create a custom badge style by setting the `class` property to a CSS class name.
 
 ```js {10}
 starlight({

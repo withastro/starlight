@@ -8,6 +8,7 @@ import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
 import { localizedId } from './slugs';
 import { useTranslations } from './translations';
+import { formatPath } from './format-path';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -16,6 +17,8 @@ export interface PageProps extends Route {
 export interface StarlightRouteData extends Route {
 	/** Title of the site. */
 	siteTitle: string;
+	/** URL or path used as the link when clicking on the site title. */
+	siteTitleHref: string;
 	/** Array of Markdown headings extracted from the current page. */
 	headings: MarkdownHeading[];
 	/** Site navigation sidebar entries for this page. */
@@ -47,6 +50,7 @@ export function generateRouteData({
 	return {
 		...props,
 		siteTitle,
+		siteTitleHref: getSiteTitleHref(locale),
 		sidebar,
 		hasSidebar: entry.data.template !== 'splash',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
@@ -115,4 +119,8 @@ export function getSiteTitle(lang: string): string {
 		return config.title[lang] as string;
 	}
 	return config.title[defaultLang] as string;
+}
+
+export function getSiteTitleHref(locale: string | undefined): string {
+	return formatPath(locale || '/');
 }

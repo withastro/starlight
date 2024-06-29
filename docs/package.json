@@ -14,17 +14,17 @@
     "lunaria:build": "lunaria build"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.4.4",
+    "@astro-community/astro-embed-youtube": "^0.5.2",
     "@astrojs/starlight": "workspace:*",
-    "@lunariajs/core": "^0.0.32",
+    "@lunariajs/core": "^0.1.1",
     "@types/culori": "^2.0.0",
-    "astro": "^4.3.5",
+    "astro": "^4.10.2",
     "culori": "^3.2.0",
     "sharp": "^0.32.5"
   },
   "devDependencies": {
     "pa11y-ci": "^3.0.1",
-    "starlight-links-validator": "^0.7.1",
-    "start-server-and-test": "^2.0.0"
+    "starlight-links-validator": "^0.9.0",
+    "start-server-and-test": "^2.0.4"
   }
 }

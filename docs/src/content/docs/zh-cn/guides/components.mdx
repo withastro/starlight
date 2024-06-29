@@ -381,11 +381,11 @@ import { Steps } from '@astrojs/starlight/components';
 
 <Steps>
 
-1.在 MDX 文件中导入该组件
+1. 在 MDX 文件中导入该组件
 
-```js
-import { Steps } from '@astrojs/starlight/components';
-```
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
 
 2. 将有序列表放入该组件中
 
@@ -408,6 +408,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### 徽章
+
+import { Badge } from '@astrojs/starlight/components';
+
+使用 `<Badge>` 组件来显示小块信息，如状态或标签。
+
+将你想显示的内容传递给 `<Badge>` 组件的 `text` 属性。
+
+默认情况下，徽章将使用你网站的主题突出色。要使用内置的徽章颜色，请将 `variant` 属性设置为以下值之一：`note`（蓝色）、`tip`（紫色）、`danger`（红色）、`caution`（橙色）或 `success`（绿色）。
+
+`size` 属性（默认为 `small`）控制徽章文本的大小。`medium` 和 `large` 也是显示更大徽章的可用选项。
+
+为了进一步自定义，可以使用其他 `<span>` 属性，如 `class` 或 `style`，并配合自定义 CSS。
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+以上代码在页面上生成了以下内容：
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### 图标
 
 import { Icon } from '@astrojs/starlight/components';
@@ -415,7 +445,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你的内容中显示。
 
-每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择包含 `label`、`size` 和 `color` 属性。
+每个 `<Icon>` 都需要一个 [`name`](#所有图标)，并且可以选择性地包含一个 `label` 来为屏幕阅读器提供上下文。
+`size` 和 `color` 属性可以使用 CSS 单位和颜色值来调整图标的外观。
 
 ```mdx
 # src/content/docs/example.mdx
@@ -423,11 +454,13 @@ Starlight 提供了一组常用的图标，你可以使用 `<Icon>` 组件在你
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 以上代码在页面上生成了以下内容：
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### 所有图标
 

@@ -3,13 +3,14 @@ import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { starlightAsides } from './integrations/asides';
+import { starlightAsides, starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration({
@@ -28,13 +29,20 @@ export default function StarlightIntegration({
 				logger,
 				updateConfig,
 			}) => {
-				// Run plugins to get the final configuration and any extra Astro integrations to load.
-				const { integrations, starlightConfig } = await runPlugins(opts, plugins, {
+				// Run plugins to get the updated configuration and any extra Astro integrations to load.
+				const pluginResult = await runPlugins(opts, plugins, {
 					command,
 					config,
 					isRestart,
 					logger,
 				});
+				// Process the Astro and Starlight configurations for i18n and translations.
+				const { astroI18nConfig, starlightConfig } = processI18nConfig(
+					pluginResult.starlightConfig,
+					config.i18n
+				);
+
+				const { integrations } = pluginResult;
 				userConfig = starlightConfig;
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
@@ -47,7 +55,7 @@ export default function StarlightIntegration({
 					prerender: starlightConfig.prerender,
 				});
 
-				if (!userConfig.disable404Route) {
+				if (!starlightConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
 						entrypoint: starlightConfig.prerender
@@ -66,11 +74,22 @@ export default function StarlightIntegration({
 					integrations.push(starlightSitemap(starlightConfig));
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
-					integrations.push(mdx());
+					integrations.push(mdx({ optimize: true }));
 				}
 
+				// Add Starlight directives restoration integration at the end of the list so that remark
+				// plugins injected by Starlight plugins through Astro integrations can handle text and
+				// leaf directives before they are transformed back to their original form.
+				integrations.push(starlightDirectivesRestorationIntegration());
+
+				// Add integrations immediately after Starlight in the config array.
+				// e.g. if a user has `integrations: [starlight(), tailwind()]`, then the order will be
+				// `[starlight(), expressiveCode(), sitemap(), mdx(), tailwind()]`.
+				// This ensures users can add integrations before/after Starlight and we respect that order.
+				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
+				config.integrations.splice(selfIndex + 1, 0, ...integrations);
+
 				updateConfig({
-					integrations,
 					vite: {
 						plugins: [vitePluginStarlightUserConfig(command, starlightConfig, config)],
 					},
@@ -89,6 +108,7 @@ export default function StarlightIntegration({
 					experimental: {
 						globalRoutePriority: true,
 					},
+					i18n: astroI18nConfig,
 				});
 			},
 

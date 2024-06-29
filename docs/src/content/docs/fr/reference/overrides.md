@@ -56,6 +56,13 @@ Le chemin de base utilisé pour servir une langue. `undefined` pour les slugs de
 
 Le titre du site pour la langue de cette page.
 
+#### `siteTitleHref`
+
+**Type :** `string`
+
+La valeur de l’attribut `href` du titre du site, renvoyant à la page d'accueil, par exemple `/`.
+Pour les sites multilingues, cette valeur inclura la locale actuelle, par exemple `/fr/` ou `/zh-cn/`.
+
 #### `slug`
 
 **Type :** `string`

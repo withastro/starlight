@@ -24,5 +24,6 @@
   "aside.tip": "提示",
   "aside.caution": "警告",
   "aside.danger": "危險",
-  "fileTree.directory": "目錄"
+  "fileTree.directory": "目錄",
+  "builtWithStarlight.label": "Built with Starlight"
 }

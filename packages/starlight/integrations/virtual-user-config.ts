@@ -55,7 +55,7 @@ export function vitePluginStarlightUserConfig(
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {
-				userCollections = (await import('/src/content/config.ts')).collections;
+				userCollections = (await import('${new URL('./content/config.ts', srcDir).pathname}')).collections;
 			} catch {}
 			export const collections = userCollections;`,
 		...virtualComponentModules,
