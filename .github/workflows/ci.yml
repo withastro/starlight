@@ -28,7 +28,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm i
       - name: Test packages
-        run: pnpm -r test:coverage:all
+        run: pnpm -r test:coverage
 
   e2e-test:
     name: Run E2E tests

@@ -24,8 +24,6 @@ export function vitePluginStarlightUserConfig(
 	const resolveId = (id: string) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
 
-	const srcDirectory = resolve(fileURLToPath(root), 'src/content/docs');
-
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
 			`virtual:starlight/components/${name}`,
@@ -42,16 +40,20 @@ export function vitePluginStarlightUserConfig(
 			srcDir,
 			trailingSlash,
 		})}`,
-		'virtual:starlight/git-info': generateGitInfoModule({ command, srcDirectory }),
+		'virtual:starlight/git-info': generateGitInfoModule({
+			command,
+			root: fileURLToPath(root),
+			srcDir: fileURLToPath(srcDir),
+		}),
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
 		'virtual:starlight/user-images': opts.logo
 			? 'src' in opts.logo
 				? `import src from ${resolveId(
 						opts.logo.src
-					)}; export const logos = { dark: src, light: src };`
+				  )}; export const logos = { dark: src, light: src };`
 				: `import dark from ${resolveId(opts.logo.dark)}; import light from ${resolveId(
 						opts.logo.light
-					)}; export const logos = { dark, light };`
+				  )}; export const logos = { dark, light };`
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {
@@ -83,31 +85,44 @@ export function vitePluginStarlightUserConfig(
 
 function generateGitInfoModule({
 	command,
-	srcDirectory,
+	root,
+	srcDir,
 }: {
 	command: 'dev' | 'build' | 'preview';
-	srcDirectory: string;
+	root: string;
+	srcDir: string;
 }) {
-	if (command === 'dev') {
+	const docsPath = resolve(srcDir, 'content/docs');
+
+	if (command !== 'build') {
 		const onDemandGitInfoModule = new URL('../utils/git.ts', import.meta.url);
 
 		// In dev mode expose the function directly so git is executed only when needed.
-		return `export {getNewestCommitDate} from '${onDemandGitInfoModule}';`;
+		return `import {getNewestCommitDate as getInternal} from '${onDemandGitInfoModule}';
+import { resolve } from 'node:path';
+
+export const getNewestCommitDate = (file) => getInternal(
+	resolve(${JSON.stringify(docsPath)}, file)
+);
+`;
 	}
 
-	const docsPath = resolve('content/docs', srcDirectory);
-
-	const trackedDocsFiles = listGitTrackedFiles(docsPath).map((file) => [
-		relative(docsPath, file),
-		getNewestCommitDate(file).valueOf(),
-	]);
+	const trackedDocsFiles = listGitTrackedFiles(docsPath).flatMap((file) => {
+		try {
+			return [[relative(docsPath, file), getNewestCommitDate(file).valueOf()]];
+		} catch {
+			// Files tracked but deleted in the staging area of git will be on the list
+			// but fail to retrieve the commit info.
+			return [];
+		}
+	});
 
 	return `
 const trackedDocsFiles = new Map(${JSON.stringify(trackedDocsFiles)});
 
 export function getNewestCommitDate(file) {
 	const timestamp = trackedDocsFiles.get(file);
-	if (!timestamp) throw new Error('File not found in git history');
+	if (!timestamp) throw new Error(\`Failed to retrieve the git history for file "\${file}"\`);
 	return new Date(timestamp);
 }`;
 }

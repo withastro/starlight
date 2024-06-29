@@ -47,14 +47,6 @@ export default function StarlightIntegration({
 
 				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
 
-				injectRoute({
-					pattern: '[...slug]',
-					entrypoint: starlightConfig.prerender
-						? '@astrojs/starlight/index.astro'
-						: '@astrojs/starlight/indexSSR.astro',
-					prerender: starlightConfig.prerender,
-				});
-
 				if (!starlightConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
@@ -64,6 +56,14 @@ export default function StarlightIntegration({
 						prerender: starlightConfig.prerender,
 					});
 				}
+				injectRoute({
+					pattern: '[...slug]',
+					entrypoint: starlightConfig.prerender
+						? '@astrojs/starlight/index.astro'
+						: '@astrojs/starlight/indexSSR.astro',
+					prerender: starlightConfig.prerender,
+				});
+
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];

@@ -10,6 +10,7 @@ import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
 import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { BuiltInDefaultLocale } from './i18n';
+import { AstroError } from 'astro/errors';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -230,6 +231,9 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 		// Pagefind only defaults to true if prerender is also true.
 		pagefind: config.pagefind ?? config.prerender,
 	}))
+	.refine((config) => !(!config.prerender && config.pagefind), {
+		message: 'Pagefind search is not support with prerendering disabled.',
+	})
 	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});
 
