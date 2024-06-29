@@ -114,6 +114,7 @@
 }
 .sl-markdown-content th:not(:where(.not-content *)) {
 	color: var(--sl-color-white);
+	font-weight: 600;
 }
 .sl-markdown-content td:not(:where(.not-content *)) {
 	border-color: var(--sl-color-gray-5);
