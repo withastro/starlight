@@ -104,7 +104,7 @@
 .sl-markdown-content table:not(:where(.not-content *)) {
 	display: block;
 	overflow: auto;
-	border-collapse: collapse;
+	border-spacing: 0;
 }
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
 	border-bottom: 1px solid;
