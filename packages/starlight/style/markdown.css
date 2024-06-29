@@ -127,9 +127,9 @@
 .sl-markdown-content .starlight-aside td:not(:where(.not-content *)) {
 	border-color: var(--sl-color-gray-4);
 }
-@supports (border-color: color-mix(in hsl, var(--sl-color-asides-text-accent) 30%, transparent)) {
+@supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent)) {
 	.sl-markdown-content .starlight-aside td:not(:where(.not-content *)) {
-		border-color: color-mix(in hsl, var(--sl-color-asides-text-accent) 30%, transparent);
+		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent);
 	}
 }
 
