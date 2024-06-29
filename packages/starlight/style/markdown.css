@@ -107,7 +107,7 @@
 	border-spacing: 0;
 }
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
-	border-bottom: 1px solid;
+	border-bottom: 1px solid var(--sl-color-gray-5);
 	padding: 0.5rem 1rem;
 	/* Align text to the top of the row in multiline tables. */
 	vertical-align: baseline;
@@ -122,19 +122,16 @@
 	color: var(--sl-color-white);
 	font-weight: 600;
 }
-.sl-markdown-content td:not(:where(.not-content *)) {
-	border-color: var(--sl-color-gray-5);
-}
 /* Align headings to the start of the line unless set by the `align` attribute. */
 .sl-markdown-content th:not([align]):not(:where(.not-content *)) {
 	text-align: start;
 }
 /* Table styles inside asides */
-.sl-markdown-content .starlight-aside td:not(:where(.not-content *)) {
+.sl-markdown-content .starlight-aside :is(th, td):not(:where(.not-content *)) {
 	border-color: var(--sl-color-gray-4);
 }
 @supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent)) {
-	.sl-markdown-content .starlight-aside td:not(:where(.not-content *)) {
+	.sl-markdown-content .starlight-aside :is(th, td):not(:where(.not-content *)) {
 		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent);
 	}
 }
