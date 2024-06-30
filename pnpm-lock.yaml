@@ -85,13 +85,13 @@ importers:
   examples/ssr:
     dependencies:
       '@astrojs/node':
-        specifier: ^7.0.0
-        version: 7.0.4(astro@4.11.3)
+        specifier: ^8.3.2
+        version: 8.3.2(astro@4.11.3)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../../packages/starlight
       astro:
-        specifier: ^4.0.1
+        specifier: ^4.11.2
         version: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
       sharp:
         specifier: ^0.32.5
@@ -544,18 +544,6 @@ packages:
       source-map: 0.7.4
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@astrojs/node@7.0.4(astro@4.11.3):
-    resolution: {integrity: sha512-og36WkHZ+v32filXWx2Iu9iwj6v9QUQaBl5GcTHVGmw1lrGdztl0MtbqbY56az4ew/HkWq3GPSSQ70aZd0u86Q==}
-    peerDependencies:
-      astro: ^4.0.0
-    dependencies:
-      astro: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
-      send: 0.18.0
-      server-destroy: 1.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false
