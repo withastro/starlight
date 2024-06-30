@@ -42,7 +42,6 @@ export function vitePluginStarlightUserConfig(
 		})}`,
 		'virtual:starlight/git-info': generateGitInfoModule({
 			command,
-			root: fileURLToPath(root),
 			srcDir: fileURLToPath(srcDir),
 		}),
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
@@ -85,11 +84,9 @@ export function vitePluginStarlightUserConfig(
 
 function generateGitInfoModule({
 	command,
-	root,
 	srcDir,
 }: {
 	command: 'dev' | 'build' | 'preview';
-	root: string;
 	srcDir: string;
 }) {
 	const docsPath = resolve(srcDir, 'content/docs');
