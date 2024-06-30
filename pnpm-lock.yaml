@@ -88,10 +88,10 @@ importers:
         specifier: ^8.3.2
         version: 8.3.2(astro@4.11.3)
       '@astrojs/starlight':
-        specifier: workspace:*
+        specifier: ^0.24.5
         version: link:../../packages/starlight
       astro:
-        specifier: ^4.11.2
+        specifier: ^4.10.2
         version: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
       sharp:
         specifier: ^0.32.5
