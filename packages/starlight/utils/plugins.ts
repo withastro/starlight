@@ -2,7 +2,6 @@ import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
-import { AstroError } from 'astro/errors';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
