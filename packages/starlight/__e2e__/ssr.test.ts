@@ -4,39 +4,55 @@ import * as cheerio from 'cheerio';
 
 const test = await testFactory('./fixtures/ssr/');
 
+test.beforeEach(() => {
+	delete process.env.STARLIGHT_PRERENDER;
+});
+
+test('Render page on the server', async ({ starlight, page }) => {
+	await starlight.goto('/demo');
+
+	await expect(page.locator('#server-check')).toHaveText('On server');
+});
+
+test('Render 404 page on the server', async ({ starlight, page }) => {
+	await starlight.goto('/not-found');
+
+	await expect(page.locator('#server-check')).toHaveText('On server');
+});
+
 test('SSR mode renders the same content page as prerendering', async ({
 	starlight,
 	makeServer,
 }) => {
-	const prerenderedContent = await starlight.goto('/tabs').then((res) => res?.text());
-	assert(prerenderedContent);
+	const ssrContent = await starlight.goto('/content').then((res) => res?.text());
+	assert(ssrContent);
 
-	process.env.STARLIGHT_SSR = 'yes';
-	const ssrStarlight = await makeServer({
+	process.env.STARLIGHT_PRERENDER = 'yes';
+	const prerenderStarlight = await makeServer({
 		config: {
 			server: { port: 4322 },
 		},
 	});
-	const ssrContent = await ssrStarlight.goto('/tabs').then((res) => res?.text());
-	assert(ssrContent);
+	const prerenderContent = await prerenderStarlight.goto('/content').then((res) => res?.text());
+	assert(prerenderContent);
 
-	expectEquivalentHTML(prerenderedContent, ssrContent);
+	expectEquivalentHTML(prerenderContent, ssrContent);
 });
 
 test('SSR mode renders the same splash page as prerendering', async ({ starlight, makeServer }) => {
-	const prerenderedContent = await starlight.goto('/').then((res) => res?.text());
-	assert(prerenderedContent);
+	const ssrContent = await starlight.goto('/').then((res) => res?.text());
+	assert(ssrContent);
 
-	process.env.STARLIGHT_SSR = 'yes';
-	const ssrStarlight = await makeServer({
+	process.env.STARLIGHT_PRERENDER = 'yes';
+	const prerenderStarlight = await makeServer({
 		config: {
 			server: { port: 4322 },
 		},
 	});
-	const ssrContent = await ssrStarlight.goto('/').then((res) => res?.text());
-	assert(ssrContent);
+	const prerenderContent = await prerenderStarlight.goto('/').then((res) => res?.text());
+	assert(prerenderContent);
 
-	expectEquivalentHTML(prerenderedContent, ssrContent);
+	expectEquivalentHTML(prerenderContent, ssrContent);
 });
 
 function expectEquivalentHTML(a: string, b: string) {
