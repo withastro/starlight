@@ -172,7 +172,9 @@
       "default": "./integrations/expressive-code/hast.mjs"
     },
     "./index.astro": "./index.astro",
+    "./indexSSR.astro": "./indexSSR.astro",
     "./404.astro": "./404.astro",
+    "./404SSR.astro": "./404SSR.astro",
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
@@ -184,6 +186,7 @@
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.10.2",
+    "cheerio": "1.0.0-rc.12",
     "vitest": "^1.6.0"
   },
   "dependencies": {
