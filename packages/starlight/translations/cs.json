@@ -25,5 +25,18 @@
   "aside.caution": "Upozornění",
   "aside.danger": "Nebezpečí",
   "fileTree.directory": "Adresář",
-  "builtWithStarlight.label": "Postavené s Starlight"
+  "builtWithStarlight.label": "Postavené s Starlight",
+  "expressiveCode.copyButtonCopied": "Zkopírováno!",
+  "expressiveCode.copyButtonTooltip": "Kopíruj do schránky",
+  "expressiveCode.terminalWindowFallbackTitle": "Terminál",
+  "pagefind.clear_search": "Vyčistit",
+  "pagefind.load_more": "Načíst další výsledky",
+  "pagefind.search_label": "Vyhledat stránku",
+  "pagefind.filters_label": "Filtry",
+  "pagefind.zero_results": "Žádný výsledek pro: [SEARCH_TERM]",
+  "pagefind.many_results": "počet výsledků: [COUNT] pro: [SEARCH_TERM]",
+  "pagefind.one_result": "[COUNT] výsledek pro: [SEARCH_TERM]",
+  "pagefind.alt_search": "Žádné výsledky pro [SEARCH_TERM]. Namísto toho zobrazuji výsledky pro: [DIFFERENT_TERM]",
+  "pagefind.search_suggestion": "Žádný výsledek pro [SEARCH_TERM]. Zkus nějaké z těchto hledání:",
+  "pagefind.searching": "Hledám [SEARCH_TERM]..."
 }

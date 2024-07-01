@@ -45,8 +45,8 @@ importers:
         specifier: workspace:*
         version: link:../packages/starlight
       '@lunariajs/core':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
       '@types/culori':
         specifier: ^2.0.0
         version: 2.0.0
@@ -73,7 +73,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.24.2
+        specifier: ^0.24.5
         version: link:../../packages/starlight
       astro:
         specifier: ^4.10.2
@@ -85,7 +85,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.24.2
+        specifier: ^0.24.5
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
@@ -211,6 +211,15 @@ importers:
         version: 1.6.0(@types/node@18.16.19)
 
   packages/starlight/__e2e__/fixtures/basics:
+    dependencies:
+      '@astrojs/starlight':
+        specifier: workspace:*
+        version: link:../../..
+      astro:
+        specifier: ^4.10.2
+        version: 4.10.2(@types/node@18.16.19)(typescript@5.4.5)
+
+  packages/starlight/__e2e__/fixtures/custom-src-dir:
     dependencies:
       '@astrojs/starlight':
         specifier: workspace:*
@@ -1725,8 +1734,8 @@ packages:
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
     dev: false
 
-  /@lunariajs/core@0.1.0:
-    resolution: {integrity: sha512-UP2K3fjgmPP4eN92ZcreAzWitRfeqhMMSHeh2GK2FtzReYWoHeth7cogzNv9Glb64UA2PFJkZ3fU5DAdX53w+g==}
+  /@lunariajs/core@0.1.1:
+    resolution: {integrity: sha512-sAqM9+DVsLe3xHM9wu2pEnKGYMs/bWS9qpR+CGHol3RihOELnOQTzHddXbdB1MtgesbI8dnQuG64Ocd8KkWsng==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     dependencies:
