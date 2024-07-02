@@ -285,3 +285,19 @@ async function getUserDocsSchema(): Promise<
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
 	return userCollections?.docs.schema ?? docsSchema();
 }
+
+// https://stackoverflow.com/a/66252656/1945960
+type RemoveIndexSignature<T> = {
+	[K in keyof T as string extends K
+		? never
+		: number extends K
+			? never
+			: symbol extends K
+				? never
+				: K]: T[K];
+};
+
+// https://www.totaltypescript.com/concepts/the-prettify-helper
+type Prettify<T> = {
+	[K in keyof T]: T[K];
+} & {};

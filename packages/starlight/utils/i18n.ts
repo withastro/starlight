@@ -3,7 +3,16 @@ import { AstroError } from 'astro/errors';
 import type { StarlightConfig } from './user-config';
 
 /** Informations about the built-in default locale used as a fallback when no locales are defined. */
-export const BuiltInDefaultLocale = makeBuiltInDefaultLocale('en');
+export const BuiltInDefaultLocale = { ...getLocaleInfo('en'), lang: 'en' };
+
+/**
+ * A list of well-known right-to-left languages used as a fallback when determining the text
+ * direction of a locale is not supported by the `Intl.Locale` API in the current environment.
+ *
+ * @see getLocaleDir()
+ * @see https://en.wikipedia.org/wiki/IETF_language_tag#List_of_common_primary_language_subtags
+ */
+const wellKnownRTL = ['ar', 'fa', 'he', 'prs', 'ps', 'syc', 'ug', 'ur'];
 
 /**
  * Processes the Astro and Starlight i18n configurations to generate/update them accordingly:
@@ -21,19 +30,12 @@ export function processI18nConfig(
 	astroI18nConfig: AstroConfig['i18n']
 ) {
 	// We don't know what to do if both an Astro and Starlight i18n configuration are provided.
-	if (astroI18nConfig && !isUsingBuiltInDefaultLocale(starlightConfig)) {
+	if (astroI18nConfig && !starlightConfig.isUsingBuiltInDefaultLocale) {
 		throw new AstroError(
-			'Cannot provide both an Astro i18n configuration and a Starlight i18n configuration.',
-			'Remove one of the i18n configurations.\nSee more at https://starlight.astro.build/guides/i18n/'
+			'Cannot provide both an Astro `i18n` configuration and a Starlight `locales` configuration.',
+			'Remove one of the two configurations.\nSee more at https://starlight.astro.build/guides/i18n/'
 		);
 	} else if (astroI18nConfig) {
-		if (astroI18nConfig.fallback) {
-			throw new AstroError(
-				'Starlight is not compatible with the `fallback` option in the Astro i18n configuration.',
-				'Starlight uses its own fallback strategy showing readers content for a missing page in the default language.\nSee more at https://starlight.astro.build/guides/i18n/#fallback-content'
-			);
-		}
-
 		// If a Starlight compatible Astro i18n configuration is provided, we generate the matching
 		// Starlight configuration.
 		return {
@@ -59,8 +61,8 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 						codes: [localeConfig?.lang ?? locale],
 						path: locale === 'root' ? localeConfig?.lang ?? BuiltInDefaultLocale.lang : locale,
 					};
-			  })
-			: [BuiltInDefaultLocale.lang],
+				})
+			: [config.defaultLocale.lang],
 		routing: {
 			prefixDefaultLocale:
 				// Sites with multiple languages without a root locale.
@@ -93,18 +95,23 @@ function getStarlightI18nConfig(
 					isDefaultAstroLocale(astroI18nConfig, locale) && !prefixDefaultLocale
 						? 'root'
 						: isAstroLocaleExtendedConfig(locale)
-						? locale.path
-						: locale,
+							? locale.path
+							: locale,
 					inferStarlightLocaleFromAstroLocale(locale),
 				])
-		  );
+			);
 
 	const defaultAstroLocale = astroI18nConfig.locales.find((locale) =>
 		isDefaultAstroLocale(astroI18nConfig, locale)
 	);
 
 	// This should never happen as Astro validation should prevent this case.
-	if (!defaultAstroLocale) throw new Error('Astro default locale not found.');
+	if (!defaultAstroLocale) {
+		throw new AstroError(
+			'Astro default locale not found.',
+			'This should never happen. Please open a new issue: https://github.com/withastro/starlight/issues/new?template=---01-bug-report.yml'
+		);
+	}
 
 	return {
 		isMultilingual,
@@ -114,8 +121,8 @@ function getStarlightI18nConfig(
 			locale: isMonolingualWithRootLocale
 				? undefined
 				: isAstroLocaleExtendedConfig(defaultAstroLocale)
-				? defaultAstroLocale.codes[0]
-				: defaultAstroLocale,
+					? defaultAstroLocale.codes[0]
+					: defaultAstroLocale,
 		},
 	};
 }
@@ -144,17 +151,6 @@ function isAstroLocaleExtendedConfig(locale: AstroLocale): locale is AstroLocale
 	return typeof locale !== 'string';
 }
 
-/** Check if the Starlight built-in default locale is used in a Starlight config. */
-function isUsingBuiltInDefaultLocale(config: StarlightConfig) {
-	return (
-		!config.isMultilingual &&
-		config.locales === undefined &&
-		config.defaultLocale.label === BuiltInDefaultLocale.label &&
-		config.defaultLocale.lang === BuiltInDefaultLocale.lang &&
-		config.defaultLocale.dir === BuiltInDefaultLocale.dir
-	);
-}
-
 /** Returns the locale informations such as a label and a direction based on a BCP-47 tag. */
 function getLocaleInfo(lang: string) {
 	try {
@@ -163,8 +159,7 @@ function getLocaleInfo(lang: string) {
 		if (!label || lang === label) throw new Error('Label not found.');
 		return {
 			label: label[0]?.toLocaleUpperCase(locale) + label.slice(1),
-			// `textInfo` is not part of the `Intl.Locale` type but is available in Node.js 18.0.0+.
-			dir: (locale as Intl.Locale & { textInfo: { direction: 'ltr' | 'rtl' } }).textInfo.direction,
+			dir: getLocaleDir(locale),
 		};
 	} catch (error) {
 		throw new AstroError(
@@ -174,9 +169,21 @@ function getLocaleInfo(lang: string) {
 	}
 }
 
-/** Generates the built-in default locale informations used as a fallback when no locales are defined. */
-function makeBuiltInDefaultLocale(tag: string) {
-	return { ...getLocaleInfo(tag), lang: tag };
+/**
+ * Returns the direction of the passed locale.
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/getTextInfo
+ */
+function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
+	if ('textInfo' in locale) {
+		// @ts-expect-error - `textInfo` is not typed but is available in v8 based environments.
+		return locale.textInfo.direction;
+	} else if ('getTextInfo' in locale) {
+		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
+		return locale.getTextInfo().direction;
+	}
+	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list
+	// of right-to-left languages.
+	return wellKnownRTL.includes(locale.language) ? 'rtl' : 'ltr';
 }
 
 /**

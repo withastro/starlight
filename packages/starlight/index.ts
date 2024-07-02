@@ -3,7 +3,7 @@ import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { starlightAsides } from './integrations/asides';
+import { starlightAsides, starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
@@ -80,6 +80,10 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx({ optimize: true }));
 				}
+				// Add Starlight directives restoration integration at the end of the list so that remark
+				// plugins injected by Starlight plugins through Astro integrations can handle text and
+				// leaf directives before they are transformed back to their original form.
+				integrations.push(starlightDirectivesRestorationIntegration());
 
 				// Add integrations immediately after Starlight in the config array.
 				// e.g. if a user has `integrations: [starlight(), tailwind()]`, then the order will be

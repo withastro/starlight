@@ -24,5 +24,6 @@
   "aside.tip": "提示",
   "aside.caution": "警告",
   "aside.danger": "危险",
-  "fileTree.directory": "文件夹"
+  "fileTree.directory": "文件夹",
+  "builtWithStarlight.label": "基于 Starlight 构建"
 }

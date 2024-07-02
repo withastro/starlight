@@ -12,15 +12,18 @@ interface FormatPathOptions {
 	trailingSlash?: AstroConfig['trailingSlash'];
 }
 
+const defaultFormatStrategy = {
+	addBase: pathWithBase,
+	handleExtension: (href: string) => stripHtmlExtension(href),
+};
+
 const formatStrategies = {
 	file: {
 		addBase: fileWithBase,
 		handleExtension: (href: string) => ensureHtmlExtension(href),
 	},
-	directory: {
-		addBase: pathWithBase,
-		handleExtension: (href: string) => stripHtmlExtension(href),
-	},
+	directory: defaultFormatStrategy,
+	preserve: defaultFormatStrategy,
 };
 
 const trailingSlashStrategies = {
@@ -34,7 +37,6 @@ function formatPath(
 	href: string,
 	{ format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions
 ) {
-	// @ts-expect-error — TODO: add support for `preserve` (https://github.com/withastro/starlight/issues/1781)
 	const formatStrategy = formatStrategies[format];
 	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 

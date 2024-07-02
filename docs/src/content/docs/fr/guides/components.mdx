@@ -91,8 +91,7 @@ Le code ci-dessus génère les onglets suivants sur la page :
 
 Conservez plusieurs groupes d'onglets synchronisés en ajoutant l'attribut `syncKey`.
 
-Tous les composants `<Tabs>` sur une page avec la même valeur `syncKey` afficheront le même label actif.
-Cela permet à votre lecteur de choisir une fois (par exemple, leur système d'exploitation ou leur gestionnaire de paquets) et de voir leur choix reflété sur l'ensemble de la page.
+Tous les composants `<Tabs>` sur une page avec la même valeur `syncKey` afficheront le même label actif. Cela permet à votre lecteur de choisir une fois (par exemple, leur système d'exploitation ou leur gestionnaire de paquets) et de voir leur choix reflété sur l'ensemble de la page.
 
 Pour synchroniser des onglets liés, ajoutez une propriété `syncKey` identique à chaque composant `<Tabs>` et assurez-vous qu'ils utilisent tous les mêmes libellés de `<TabItem>` :
 
@@ -422,6 +421,36 @@ import { Steps } from '@astrojs/starlight/components';
 2. Entourez les éléments de votre liste ordonnée de `<Steps>`.
 
 </Steps>
+
+### Badges
+
+import { Badge } from '@astrojs/starlight/components';
+
+Utilisez le composant `<Badge>` pour afficher de petits éléments d'information, tels que des statuts ou des étiquettes.
+
+Passez le contenu que vous souhaitez afficher à l'attribut `text` du composant `<Badge>`.
+
+Par défaut, le badge utilisera la couleur d'accentuation du thème de votre site. Pour utiliser une couleur de badge intégrée, définissez l'attribut `variant` à l'une des valeurs suivantes : `note` (bleu), `tip` (violet), `danger` (rouge), `caution` (orange), ou `success` (vert).
+
+L'attribut `size` (par défaut : `small`) contrôle la taille du texte du badge. Les valeurs `medium` et `large` sont également disponibles pour afficher un badge plus grand.
+
+Pour une personnalisation plus poussée, utilisez d'autres attributs de l'élément `<span>` tels que `class` ou `style` avec du CSS personnalisé.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Nouveau" variant="tip" size="small" />
+<Badge text="Obsolète" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personnalisé" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+Le code ci-dessus génère ce qui suit sur la page :
+
+<Badge text="Nouveau" variant="tip" size="small" />
+<Badge text="Déclassé" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personnalisé" variant="success" style={{ fontStyle: 'italic' }} />
 
 ### Icônes
 

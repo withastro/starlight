@@ -30,6 +30,8 @@ export const socialLinks = [
 	'openCollective',
 	'hackerOne',
 	'blueSky',
+	'discourse',
+	'zulip',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -75,6 +77,8 @@ export const SocialLinksSchema = () =>
 					openCollective: 'Open Collective',
 					hackerOne: 'Hacker One',
 					blueSky: 'BlueSky',
+					discourse: 'Discourse',
+					zulip: 'Zulip',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}

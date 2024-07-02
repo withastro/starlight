@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight-tailwind",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Tailwind CSS plugin for the Starlight documentation theme for Astro",
   "author": "Chris Swithinbank <swithinbank@gmail.com>",
   "license": "MIT",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^1.6.0",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.38",
     "vitest": "^1.6.0"
   },
   "peerDependencies": {

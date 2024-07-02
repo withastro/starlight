@@ -67,6 +67,8 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
 </Steps>
 
+For more advanced i18n scenarios, Starlight also supports configuring internationalization using the [Astro’s `i18n` config](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing) option.
+
 ### Use a root locale
 
 You can use a “root” locale to serve a language without any i18n prefix in its path. For example, if English is your root locale, an English page path would look like `/about` instead of `/en/about`.
@@ -178,8 +180,9 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 In addition to hosting translated content files, Starlight allows you to translate the default UI strings (e.g. the "On this page" heading in the table of contents) so that your readers can experience your site entirely in the selected language.
 
-<LanguagesList startsSentence /> translated UI strings are provided out of the box,
-and we welcome [contributions to add more default languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+<LanguagesList startsSentence /> translated UI strings are provided out of the
+box, and we welcome [contributions to add more default
+languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 You can provide translations for additional languages you support — or override our default labels — via the `i18n` data collection.
 
@@ -358,3 +361,17 @@ const arabicDirection = Astro.locals.t.dir('ar');
 ```
 
 Please refer to the [i18next documentation](https://www.i18next.com/overview/api#dir) for more information on how to use the `t.dir()` function.
+
+## Accessing the current locale
+
+You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) to read the current locale in `.astro` components.
+
+The following example reads the current locale and uses it to generate a link to an about page in the current language:
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+
+<a href={`/${Astro.currentLocale}/about`}>About</a>
+```

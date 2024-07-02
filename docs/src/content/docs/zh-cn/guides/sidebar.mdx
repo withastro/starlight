@@ -293,12 +293,15 @@ starlight({
 	]}
 />
 
-### 徽章种类
+### 徽章种类和自定义样式
 
-使用具有 `text` 和 `variant` 属性的对象自定义徽章样式。
+使用具有 `text`、`variant` 和 `class` 属性的对象自定义徽章样式。
 
 `text` 属性表示要显示的内容（例如 "New"）。
-通过将 `variant` 属性设置为以下值之一：`note`、`tip`、`danger`、`caution` 或 `success`，可以覆盖 `default` 样式，默认样式使用你的网站的强调色。
+
+默认情况下，徽章将使用你的网站的强调色。要使用内置的徽章样式，请将 `variant` 属性设置为以下值之一：`note`、`tip`、`danger`、`caution` 或 `success`。
+
+你还可以通过设置 `class` 属性为一个 CSS 类名来创建自定义的徽章样式。
 
 ```js {10}
 starlight({

@@ -212,7 +212,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -562,3 +563,13 @@ starlight({
 ```
 
 有关创建自己的插件的详细信息，请参阅[插件参考](/zh-cn/reference/plugins/)。
+
+### `credits`
+
+启用在你的网站页脚显示 “基于 Starlight 构建” 的链接。
+
+```js
+starlight({
+	credits: true,
+});
+```
