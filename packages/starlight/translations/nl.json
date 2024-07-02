@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Ga naar inhoud",
   "search.label": "Zoeken",
-  "search.shortcutLabel": "(Druk op / om te zoeken)",
   "search.cancelLabel": "Annuleren",
   "search.devWarning": "Zoeken is alleen beschikbaar tijdens productie. \nProbeer om de site te builden en er een preview van te bekijken om lokaal te testen.",
   "themeSelect.accessibleLabel": "Selecteer thema",

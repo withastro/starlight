@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Salta ai contenuti",
   "search.label": "Cerca",
-  "search.shortcutLabel": "(Usa / per cercare)",
   "search.cancelLabel": "Cancella",
   "search.devWarning": "La ricerca è disponibile solo nelle build di produzione. \nProvare ad eseguire il processo di build e visualizzare la preview del sito per testarlo localmente.",
   "themeSelect.accessibleLabel": "Seleziona tema",

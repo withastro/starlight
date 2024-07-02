@@ -1,7 +1,6 @@
 {
   "skipLink.label": "跳到內容",
   "search.label": "搜尋",
-  "search.shortcutLabel": "（按 / 鍵開始搜尋）",
   "search.cancelLabel": "取消",
   "search.devWarning": "正式版本才能使用搜尋功能。\n如要在本地測試，請先建置並預覽網站。",
   "themeSelect.accessibleLabel": "選擇佈景主題",

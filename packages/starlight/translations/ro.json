@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Sari la conținut",
   "search.label": "Caută",
-  "search.shortcutLabel": "(Apasă pe / ca să cauți)",
   "search.cancelLabel": "Anulează",
   "search.devWarning": "Căutarea este disponibilă numai în versiunea de producție. \nÎncercă să construiești și să previzualizezi site-ul pentru a-l testa local.",
   "themeSelect.accessibleLabel": "Selectează tema",

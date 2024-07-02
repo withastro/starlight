@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Přeskočit na obsah",
   "search.label": "Hledat",
-  "search.shortcutLabel": "(Vyhledejte stisknutím /)",
   "search.cancelLabel": "Zrušit",
   "search.devWarning": "Vyhledávání je dostupné pouze v produkčních sestaveních. \nZkuste sestavit a zobrazit náhled webu a otestovat jej lokálně.",
   "themeSelect.accessibleLabel": "Vyberte motiv",

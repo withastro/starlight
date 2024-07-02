@@ -1,7 +1,6 @@
 {
   "skipLink.label": "İçeriğe geç",
   "search.label": "Ara",
-  "search.shortcutLabel": "(Aramak için / bas)",
   "search.cancelLabel": "İptal",
   "search.devWarning": "Arama yalnızca üretim derlemelerinde kullanılabilir. \nYerel bilgisayarınızda test etmek için siteyi derleyin ve önizleme yapın.",
   "themeSelect.accessibleLabel": "Tema seç",

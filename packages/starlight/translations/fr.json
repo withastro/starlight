@@ -1,7 +1,6 @@
 {
   "skipLink.label": "Aller au contenu",
   "search.label": "Rechercher",
-  "search.shortcutLabel": "(Presser / pour rechercher)",
   "search.cancelLabel": "Annuler",
   "search.devWarning": "La recherche est disponible uniquement en mode production. \nEssayez de construire puis de prévisualiser votre site pour tester la recherche localement.",
   "themeSelect.accessibleLabel": "Selectionner le thème",
