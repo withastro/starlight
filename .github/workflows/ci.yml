@@ -14,6 +14,7 @@ concurrency:
 
 env:
   NODE_VERSION: 18
+  ASTRO_TELEMETRY_DISABLED: true
 
 jobs:
   unit-test:
