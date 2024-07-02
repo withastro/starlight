@@ -58,6 +58,7 @@ type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.input<typeof SidebarLinkItemSchema>
 		| z.input<typeof AutoSidebarGroupSchema>
+		| z.input<typeof ContentEntryItem>
 		| ManualSidebarGroupInput
 	>;
 };
@@ -67,6 +68,7 @@ type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.output<typeof SidebarLinkItemSchema>
 		| z.output<typeof AutoSidebarGroupSchema>
+		| z.output<typeof ContentEntryItem>
 		| ManualSidebarGroupOutput
 	>;
 };
@@ -78,13 +80,30 @@ const ManualSidebarGroupSchema: z.ZodType<
 > = SidebarGroupSchema.extend({
 	/** Array of links and subcategories to display in this category. */
 	items: z.lazy(() =>
-		z.union([SidebarLinkItemSchema, ManualSidebarGroupSchema, AutoSidebarGroupSchema]).array()
+		z
+			.union([
+				SidebarLinkItemSchema,
+				ManualSidebarGroupSchema,
+				AutoSidebarGroupSchema,
+				ContentEntryItem,
+			])
+			.array()
 	),
 });
+
+const ContentEntryItem = SidebarBaseSchema.omit({ label: true }).extend({
+	/** The link to this item’s content. Must be a slug of a Content Collection entry. */
+	slug: z.string(),
+	/** HTML attributes to add to the link item. */
+	attrs: SidebarLinkItemHTMLAttributesSchema(),
+});
+
+export type ContentEntryItem = z.infer<typeof ContentEntryItem>;
 
 export const SidebarItemSchema = z.union([
 	SidebarLinkItemSchema,
 	ManualSidebarGroupSchema,
 	AutoSidebarGroupSchema,
+	ContentEntryItem,
 ]);
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
