@@ -27,3 +27,4 @@ export const BadgeConfigSchema = () =>
 		.optional();
 
 export type Badge = z.output<ReturnType<typeof badgeSchema>>;
+export type BadgeUserConfig = z.input<ReturnType<typeof BadgeConfigSchema>>;
