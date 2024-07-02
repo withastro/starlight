@@ -17,11 +17,15 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	userTranslations: Record<string, T>,
 	pluginTranslations: Record<string, T> = {}
 ) {
+	const defaultLocale =
+		config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang;
+
 	const translations = {
-		[BuiltInDefaultLocale.lang]: buildResources(
-			builtinTranslations[BuiltInDefaultLocale.lang]!,
-			pluginTranslations[BuiltInDefaultLocale.lang],
-			userTranslations[BuiltInDefaultLocale.lang]
+		[defaultLocale]: buildResources(
+			builtinTranslations[defaultLocale],
+			builtinTranslations[stripLangRegion(defaultLocale)],
+			pluginTranslations[defaultLocale],
+			userTranslations[defaultLocale]
 		),
 	};
 
