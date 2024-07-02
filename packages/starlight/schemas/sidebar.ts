@@ -33,7 +33,7 @@ const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	link: z.string(),
 	/** HTML attributes to add to the link item. */
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
-});
+}).strict();
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
 const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
@@ -50,7 +50,7 @@ const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
 		/** How many directories deep to include from this directory in the sidebar. Default: `Infinity`. */
 		// depth: z.number().optional(),
 	}),
-});
+}).strict();
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
 type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
@@ -80,7 +80,7 @@ const ManualSidebarGroupSchema: z.ZodType<
 	items: z.lazy(() =>
 		z.union([SidebarLinkItemSchema, ManualSidebarGroupSchema, AutoSidebarGroupSchema]).array()
 	),
-});
+}).strict();
 
 export const SidebarItemSchema = z.union([
 	SidebarLinkItemSchema,
