@@ -5,6 +5,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Basics',
+			pagefind: false,
 		}),
 	],
 });
