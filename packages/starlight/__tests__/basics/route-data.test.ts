@@ -87,12 +87,11 @@ test('uses explicit last updated date from frontmatter', () => {
 	expect(data.lastUpdated).toEqual(route.entry.data.lastUpdated);
 });
 
-test('includes localized labels', () => {
+test('does no longer includes localized labels', () => {
 	const route = routes[0]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
 		url: new URL('https://example.com'),
 	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Skip to content');
+	expect(data.labels).not.toBeDefined();
 });

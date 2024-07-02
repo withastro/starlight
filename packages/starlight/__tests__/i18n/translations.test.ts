@@ -28,3 +28,11 @@ describe('useTranslations()', () => {
 		expect(t('page.nextLink')).not.toBe(translations.en?.['page.nextLink']);
 	});
 });
+
+describe('t.dir()', async () => {
+	test('returns text directions', () => {
+		expect(useTranslations(undefined).dir()).toBe('ltr');
+		expect(useTranslations('fr').dir()).toBe('ltr');
+		expect(useTranslations('ar').dir()).toBe('rtl');
+	});
+});

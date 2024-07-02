@@ -8,8 +8,8 @@ import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
 import { localizedId } from './slugs';
-import { useTranslations } from './translations';
 import { formatPath } from './format-path';
+import { useTranslations } from './translations';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -34,8 +34,6 @@ export interface StarlightRouteData extends Route {
 	lastUpdated: Date | undefined;
 	/** URL object for the address where this page can be edited if enabled. */
 	editUrl: URL | undefined;
-	/** Record of UI strings localized for the current page. */
-	labels: ReturnType<ReturnType<typeof useTranslations>['all']>;
 }
 
 export function generateRouteData({
@@ -58,7 +56,6 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
-		labels: useTranslations(locale).all(),
 	};
 }
 

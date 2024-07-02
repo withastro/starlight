@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+// TODO(HiDeoo) Remove
+import starlightCustomPlugin from 'starlight-custom-plugin';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -32,6 +34,29 @@ const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
 export default defineConfig({
 	site,
 	trailingSlash: 'always',
+	// TODO(HiDeoo) Remove
+	i18n: {
+		defaultLocale: 'en',
+		locales: [
+			'en',
+			'de',
+			'es',
+			'ja',
+			'fr',
+			'it',
+			'id',
+			{ codes: ['zh-CN'], path: 'zh-cn' },
+			{ codes: ['pt-BR'], path: 'pt-br' },
+			{ codes: ['pt-PT'], path: 'pt-pt' },
+			'ko',
+			'tr',
+			'ru',
+			'hi',
+			'da',
+			'uk',
+		],
+		routing: { prefixDefaultLocale: false },
+	},
 	integrations: [
 		starlight({
 			title: 'Starlight',
@@ -66,7 +91,8 @@ export default defineConfig({
 				},
 			],
 			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
-			locales,
+			// TODO(HiDeoo) Uncomment
+			// locales,
 			sidebar: [
 				{
 					label: 'Start Here',
@@ -208,8 +234,8 @@ export default defineConfig({
 							errorOnFallbackPages: false,
 							errorOnInconsistentLocale: true,
 						}),
-					]
-				: [],
+				  ]
+				: [starlightCustomPlugin()],
 		}),
 	],
 });

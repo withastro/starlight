@@ -18,10 +18,18 @@ export async function defineVitestConfig(
 	const build = opts?.build ?? { format: 'directory' };
 	const trailingSlash = opts?.trailingSlash ?? 'ignore';
 
-	const { starlightConfig } = await runPlugins(config, plugins, createTestPluginContext());
+	const { starlightConfig, pluginTranslations } = await runPlugins(
+		config,
+		plugins,
+		createTestPluginContext()
+	);
 	return getViteConfig({
 		plugins: [
-			vitePluginStarlightUserConfig(starlightConfig, { root, srcDir, build, trailingSlash }),
+			vitePluginStarlightUserConfig(
+				starlightConfig,
+				{ root, srcDir, build, trailingSlash },
+				pluginTranslations
+			),
 		],
 		test: {
 			snapshotSerializers: ['./snapshot-serializer-astro-error.ts'],
