@@ -24,5 +24,6 @@
   "aside.tip": "نکته",
   "aside.caution": "احتیاط",
   "aside.danger": "خطر",
-  "fileTree.directory": "فهرست"
+  "fileTree.directory": "فهرست",
+  "builtWithStarlight.label": "Built with Starlight"
 }

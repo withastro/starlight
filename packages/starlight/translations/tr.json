@@ -24,5 +24,6 @@
   "aside.tip": "İpucu",
   "aside.caution": "Dikkat",
   "aside.danger": "Tehlike",
-  "fileTree.directory": "Dizin"
+  "fileTree.directory": "Dizin",
+  "builtWithStarlight.label": "Built with Starlight"
 }

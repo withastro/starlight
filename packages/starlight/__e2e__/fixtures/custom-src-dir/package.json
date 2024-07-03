@@ -1,0 +1,9 @@
+{
+  "name": "@e2e/custom-src-dir",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@astrojs/starlight": "workspace:*",
+    "astro": "^4.10.2"
+  }
+}

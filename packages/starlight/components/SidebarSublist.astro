@@ -1,7 +1,7 @@
 ---
 import { flattenSidebar, type SidebarEntry } from '../utils/navigation';
 import Icon from '../user-components/Icon.astro';
-import Badge from './Badge.astro';
+import Badge from '../user-components/Badge.astro';
 
 interface Props {
 	sublist: SidebarEntry[];
@@ -24,13 +24,11 @@ const { sublist, nested } = Astro.props;
 					>
 						<span>{entry.label}</span>
 						{entry.badge && (
-							<>
-								{' '}
-								<Badge
-									text={entry.badge.text}
-									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
-								/>
-							</>
+							<Badge
+								variant={entry.badge.variant}
+								class={entry.badge.class}
+								text={entry.badge.text}
+							/>
 						)}
 					</a>
 				) : (
@@ -41,10 +39,11 @@ const { sublist, nested } = Astro.props;
 							<div class="group-label">
 								<span class="large">{entry.label}</span>
 								{entry.badge && (
-									<>
-										{' '}
-										<Badge text={entry.badge.text} variant={entry.badge.variant} />
-									</>
+									<Badge
+										variant={entry.badge.variant}
+										class={entry.badge.class}
+										text={entry.badge.text}
+									/>
 								)}
 							</div>
 							<Icon name="right-caret" class="caret" size="1.25rem" />

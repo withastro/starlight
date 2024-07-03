@@ -119,12 +119,12 @@ const { html, panels } = processPanels(panelHtml);
 						e.key === 'ArrowLeft'
 							? index - 1
 							: e.key === 'ArrowRight'
-							? index + 1
-							: e.key === 'Home'
-							? 0
-							: e.key === 'End'
-							? this.tabs.length - 1
-							: null;
+								? index + 1
+								: e.key === 'Home'
+									? 0
+									: e.key === 'End'
+										? this.tabs.length - 1
+										: null;
 					if (nextIndex === null) return;
 					if (this.tabs[nextIndex]) {
 						e.preventDefault();

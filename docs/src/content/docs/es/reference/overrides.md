@@ -57,6 +57,13 @@ La ruta base en la que se sirve un idioma. `undefined` para los slugs de idioma 
 
 El título del sitio para el idioma de esta página.
 
+#### `siteTitleHref`
+
+**Tipo:** `string`
+
+El valor del atributo `href` del título del sitio, enlazando de vuelta a la página de inicio, por ejemplo `/`.
+Para sitios multilingües, esto incluirá la configuración regional actual, por ejemplo, `/en/` o `/zh-cn/`.
+
 #### `slug`
 
 **Tipo:** `string`

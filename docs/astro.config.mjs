@@ -191,7 +191,7 @@ export default defineConfig({
 							errorOnFallbackPages: false,
 							errorOnInconsistentLocale: true,
 						}),
-				  ]
+					]
 				: [],
 		}),
 	],

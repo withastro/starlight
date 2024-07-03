@@ -1,4 +1,5 @@
 import config from 'virtual:starlight/user-config';
+import { BuiltInDefaultLocale } from './i18n';
 
 export interface LocaleData {
 	/** Writing direction. */
@@ -35,7 +36,7 @@ export function slugToLocaleData(slug: string): LocaleData {
 export function localeToLang(locale: string | undefined): string {
 	const lang = locale ? config.locales?.[locale]?.lang : config.locales?.root?.lang;
 	const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
-	return lang || defaultLang || 'en';
+	return lang || defaultLang || BuiltInDefaultLocale.lang;
 }
 
 /**
@@ -51,8 +52,8 @@ export function slugToParam(slug: string): string | undefined {
 	return slug === 'index' || slug === ''
 		? undefined
 		: slug.endsWith('/index')
-		? slug.replace(/\/index$/, '')
-		: slug;
+			? slug.replace(/\/index$/, '')
+			: slug;
 }
 
 export function slugToPathname(slug: string): string {

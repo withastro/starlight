@@ -4,9 +4,8 @@ import { addTranslations } from '../../integrations/expressive-code/translations
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 
 vi.mock('astro-expressive-code', async () => {
-	const mod = await vi.importActual<typeof import('astro-expressive-code')>(
-		'astro-expressive-code'
-	);
+	const mod =
+		await vi.importActual<typeof import('astro-expressive-code')>('astro-expressive-code');
 	return {
 		...mod,
 		pluginFramesTexts: {

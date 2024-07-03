@@ -14,6 +14,7 @@ concurrency:
 
 env:
   NODE_VERSION: 18
+  ASTRO_TELEMETRY_DISABLED: true
 
 jobs:
   unit-test:
@@ -31,8 +32,12 @@ jobs:
         run: pnpm -r test:coverage
 
   e2e-test:
-    name: Run E2E tests
-    runs-on: ubuntu-20.04
+    name: 'Run E2E tests (${{ matrix.os }})'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
