@@ -38,7 +38,7 @@ jobs:
     name: Run unit tests
     needs: changes
     if: ${{ needs.changes.outputs.packages == 'true' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
@@ -72,7 +72,7 @@ jobs:
 
   type-check:
     name: Run type checks
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
@@ -89,7 +89,7 @@ jobs:
 
   pa11y:
     name: Check for accessibility issues
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -135,7 +135,7 @@ jobs:
     name: Check for broken links
     needs: changes
     if: ${{ needs.changes.outputs.docs == 'true' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
