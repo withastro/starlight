@@ -1,9 +1,10 @@
+import { AstroError } from 'astro/errors';
 import config from 'virtual:starlight/user-config';
 import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
-	AutoSidebarLinkItem,
+	InternalSidebarLinkItem,
 	LinkHTMLAttributes,
 	SidebarItem,
 	SidebarLinkItem,
@@ -14,7 +15,6 @@ import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
-import { AstroError } from 'astro/errors';
 
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
@@ -76,7 +76,7 @@ function configItemToEntry(
 	} else if ('autogenerate' in item) {
 		return groupFromAutogenerateConfig(item, locale, routes, currentPathname);
 	} else if ('slug' in item) {
-		return linkFromContentEntryItem(item, locale, currentPathname);
+		return linkFromInternalSidebarLinkItem(item, locale, currentPathname);
 	} else {
 		return {
 			type: 'group',
@@ -117,7 +117,7 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
-/** Create a link entry from a user config object. */
+/** Create a link entry from a manual link item in user config. */
 function linkFromSidebarLinkItem(
 	item: SidebarLinkItem,
 	locale: string | undefined,
@@ -133,9 +133,9 @@ function linkFromSidebarLinkItem(
 	return makeLink(href, label, currentPathname, item.badge, item.attrs);
 }
 
-/** Create a link entry from a user config object. */
-function linkFromContentEntryItem(
-	item: AutoSidebarLinkItem,
+/** Create a link entry from an automatic internal link item in user config. */
+function linkFromInternalSidebarLinkItem(
+	item: InternalSidebarLinkItem,
 	locale: string | undefined,
 	currentPathname: string
 ) {
