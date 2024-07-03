@@ -107,6 +107,17 @@ export default defineConfig({
 });
 ```
 
+After verifying that the sitemaps are built, you can add them to your site's `robots.txt` file for crawlers to pick up.
+
+```diff
+// public/robots.txt
+
+User-agent: *
+Allow: /
+
++ Sitemap: https://<YOUR SITE>/sitemap-index.xml
+```
+
 ## Page layout
 
 By default, Starlight pages use a layout with a global navigation sidebar and a table of contents that shows the current page headings.
