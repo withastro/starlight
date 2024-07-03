@@ -9,13 +9,13 @@ export default defineVitestConfig({
 	},
 	sidebar: [
 		{ slug: 'index' },
-		{ slug: 'getting-started' },
+		'getting-started',
 		{ slug: 'manual-setup' },
 		{ slug: 'environmental-impact' },
 		{
 			label: 'Guides',
 			items: [{ slug: 'guides/pages' }, { slug: 'guides/authoring-content' }],
 		},
-		{ slug: 'resources/plugins' },
+		'resources/plugins',
 	],
 });

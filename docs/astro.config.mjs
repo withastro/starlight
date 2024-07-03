@@ -87,28 +87,9 @@ export default defineConfig({
 						uk: 'Почніть звідси',
 					},
 					items: [
+						'getting-started',
 						{
-							slug: 'getting-started',
-						},
-						{
-							label: 'Manual Setup',
-							link: 'manual-setup',
-							translations: {
-								de: 'Manuelle Einrichtung',
-								es: 'Configuración Manual',
-								ja: '手動セットアップ',
-								fr: 'Installation manuelle',
-								// it: 'Manual Setup',
-								id: 'Instalasi Manual',
-								'zh-CN': '手动配置',
-								'pt-BR': 'Instalação Manual',
-								'pt-PT': 'Instalação Manual',
-								ko: '수동으로 설정하기',
-								tr: 'Elle Kurulum',
-								ru: 'Установка вручную',
-								hi: 'मैनुअल सेटअप',
-								uk: 'Ручне встановлення',
-							},
+							slug: 'manual-setup',
 						},
 						{
 							label: 'Environmental Impact',

@@ -61,7 +61,8 @@ type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.input<typeof SidebarLinkItemSchema>
 		| z.input<typeof AutoSidebarGroupSchema>
-		| z.input<typeof AutoSidebarLinkItemSchema>
+		| z.input<typeof AutoSidebarLinkItemLonghandSchema>
+		| z.input<typeof AutoSidebarLinkItemShorthandSchema>
 		| ManualSidebarGroupInput
 	>;
 };
@@ -71,7 +72,8 @@ type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.output<typeof SidebarLinkItemSchema>
 		| z.output<typeof AutoSidebarGroupSchema>
-		| z.output<typeof AutoSidebarLinkItemSchema>
+		| z.output<typeof AutoSidebarLinkItemLonghandSchema>
+		| z.output<typeof AutoSidebarLinkItemShorthandSchema>
 		| ManualSidebarGroupOutput
 	>;
 };
@@ -88,23 +90,28 @@ const ManualSidebarGroupSchema: z.ZodType<
 				SidebarLinkItemSchema,
 				ManualSidebarGroupSchema,
 				AutoSidebarGroupSchema,
-				AutoSidebarLinkItemSchema,
+				AutoSidebarLinkItemLonghandSchema,
+				AutoSidebarLinkItemShorthandSchema,
 			])
 			.array()
 	),
 });
 
-const AutoSidebarLinkItemSchema = SidebarBaseSchema.extend({
+const AutoSidebarLinkItemLonghandSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Must be a slug of a Content Collection entry. */
 	slug: z.string(),
 	/** HTML attributes to add to the link item. */
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
 });
+const AutoSidebarLinkItemShorthandSchema = z
+	.string()
+	.transform((slug) => AutoSidebarLinkItemLonghandSchema.parse({ slug }));
 
 export const SidebarItemSchema = z.union([
 	SidebarLinkItemSchema,
 	ManualSidebarGroupSchema,
 	AutoSidebarGroupSchema,
-	AutoSidebarLinkItemSchema,
+	AutoSidebarLinkItemLonghandSchema,
+	AutoSidebarLinkItemShorthandSchema,
 ]);
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
