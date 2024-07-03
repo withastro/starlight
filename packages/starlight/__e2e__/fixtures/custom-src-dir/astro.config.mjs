@@ -6,6 +6,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Custom src directory',
+			pagefind: false,
 		}),
 	],
 });
