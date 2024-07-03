@@ -158,10 +158,9 @@ function linkFromInternalSidebarLinkItem(
 			);
 		}
 	}
-	const href = entry.slug;
 	const label =
 		pickLang(item.translations, localeToLang(locale)) || item.label || entry.entry.data.title;
-	return makeLink(href, label, currentPathname, item.badge, item.attrs);
+	return makeLink(entry.slug, label, currentPathname, item.badge, item.attrs);
 }
 
 /** Create a link entry. */
