@@ -3,7 +3,7 @@ import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
-	AutoSidebarLinkItemSchema,
+	AutoSidebarLinkItem,
 	LinkHTMLAttributes,
 	SidebarItem,
 	SidebarLinkItem,
@@ -135,7 +135,7 @@ function linkFromSidebarLinkItem(
 
 /** Create a link entry from a user config object. */
 function linkFromContentEntryItem(
-	item: AutoSidebarLinkItemSchema,
+	item: AutoSidebarLinkItem,
 	locale: string | undefined,
 	currentPathname: string
 ) {
