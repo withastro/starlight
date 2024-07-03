@@ -88,9 +88,7 @@ export default defineConfig({
 					},
 					items: [
 						'getting-started',
-						{
-							slug: 'manual-setup',
-						},
+						'manual-setup',
 						{
 							label: 'Environmental Impact',
 							link: 'environmental-impact',
