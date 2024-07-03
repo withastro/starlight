@@ -144,12 +144,19 @@ function linkFromInternalSidebarLinkItem(
 	slugWithLocale = slugWithLocale.replace(/\/?index$/, '');
 	const entry = routes.find((entry) => slugWithLocale === entry.slug);
 	if (!entry) {
-		throw new AstroError(`
-The slug \`${item.slug}\` specified in the sidebar object of the Starlight config does not exist. Update the Starlight config to reference a valid entry slug in the Starlight content collection.
-
-Be sure that no trailing or leading slashes are included when specifying \`slug\`
-			
-Learn more at https://docs.astro.build/en/reference/api-reference/#getentry`);
+		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
+		if (hasExternalSlashes) {
+			throw new AstroError(
+				`The slug \`"${item.slug}"\` specified in the Starlight sidebar config must not start or end with a slash.`,
+				`Please try updating \`"${item.slug}"\` to \`"${stripLeadingAndTrailingSlashes(item.slug)}"\`.`
+			);
+		} else {
+			throw new AstroError(
+				`The slug \`"${item.slug}"\` specified in the Starlight sidebar config does not exist.`,
+				'Update the Starlight config to reference a valid entry slug in the docs content collection.\n' +
+					'Learn more about Astro content collection slugs at https://docs.astro.build/en/reference/api-reference/#getentry'
+			);
+		}
 	}
 	let href = entry.slug;
 	const label = pickLang(item.translations, localeToLang(locale)) || entry.entry.data.title;
