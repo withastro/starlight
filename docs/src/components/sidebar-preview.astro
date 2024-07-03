@@ -1,5 +1,9 @@
 ---
-import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/schemas/sidebar';
+import type {
+	AutoSidebarGroup,
+	SidebarItem,
+	InternalSidebarLinkItem,
+} from '../../../packages/starlight/schemas/sidebar';
 import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
 import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
 
@@ -7,7 +11,7 @@ interface Props {
 	config: SidebarConfig;
 }
 
-type SidebarConfig = Exclude<SidebarItem, AutoSidebarGroup>[];
+type SidebarConfig = Exclude<SidebarItem, AutoSidebarGroup | InternalSidebarLinkItem>[];
 
 const { config } = Astro.props;
 
@@ -21,20 +25,6 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 				// docs. Using a non-existing anchor link like `#_` will not trigger a page reload or any
 				// scrolling.
 				href: item.link.length > 0 ? item.link : '#_',
-				isCurrent: false,
-				badge: item.badge,
-				attrs: item.attrs ?? {},
-			};
-		}
-
-		if ('slug' in item) {
-			return {
-				type: 'link',
-				label: item.slug,
-				// Empty hrefs are used to represent internal links that do not exist in the Starlight
-				// docs. Using a non-existing anchor link like `#_` will not trigger a page reload or any
-				// scrolling.
-				href: item.slug,
 				isCurrent: false,
 				badge: item.badge,
 				attrs: item.attrs ?? {},
