@@ -233,4 +233,14 @@ describe('getSidebar', () => {
 			]
 		`);
 	});
+	test('uses label from config for internal links', () => {
+		const sidebar = getSidebar('/', undefined);
+		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/manual-setup');
+		expect(entry?.label).toBe('Do it yourself');
+	});
+	test('uses translation from config for internal links', () => {
+		const sidebar = getSidebar('/fr', 'fr');
+		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/fr/manual-setup');
+		expect(entry?.label).toBe('Fait maison');
+	});
 });
