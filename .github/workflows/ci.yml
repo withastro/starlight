@@ -17,8 +17,27 @@ env:
   ASTRO_TELEMETRY_DISABLED: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      docs: ${{ steps.filter.outputs.docs }}
+      packages: ${{ steps.filter.outputs.packages }}
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docs:
+              - 'docs/**'
+            packages:
+              - 'packages/**'
+
   unit-test:
     name: Run unit tests
+    needs: changes
+    if: ${{ needs.changes.outputs.packages == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +52,8 @@ jobs:
 
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'
+    needs: changes
+    if: ${{ needs.changes.outputs.packages == 'true' }}
     strategy:
       fail-fast: false
       matrix:
@@ -112,6 +133,8 @@ jobs:
 
   links:
     name: Check for broken links
+    needs: changes
+    if: ${{ needs.changes.outputs.docs == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
