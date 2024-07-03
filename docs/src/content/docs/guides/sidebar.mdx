@@ -496,7 +496,7 @@ Browsing the documentation in Brazilian Portuguese will generate the following s
 <SidebarPreview
 	config={[
 		{
-			label: 'Constelação',
+			label: 'Constelações',
 			items: [
 				{ label: 'Andrômeda', link: '' },
 				{ label: 'Escorpião', link: '' },
@@ -504,6 +504,9 @@ Browsing the documentation in Brazilian Portuguese will generate the following s
 		},
 	]}
 />
+
+In multilingual sites, the value of `slug` does not include the language portion of the URL.
+For example, if you have pages at `en/intro` and `pt-br/intro`, the slug is `intro` when configuring the sidebar.
 
 ## Collapsing groups
 
