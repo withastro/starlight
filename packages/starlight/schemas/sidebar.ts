@@ -5,18 +5,15 @@ import { BadgeConfigSchema } from './badge';
 import { stripLeadingAndTrailingSlashes } from '../utils/path';
 
 const SidebarBaseSchema = z.object({
+	/** The visible label for this item in the sidebar. */
+	label: z.string(),
 	/** Translations of the `label` for each supported language. */
 	translations: z.record(z.string()).default({}),
 	/** Adds a badge to the link item */
 	badge: BadgeConfigSchema(),
 });
 
-const SidebarBaseSchemaWithLabel = SidebarBaseSchema.extend({
-	/** The visible label for this item in the sidebar. */
-	label: z.string(),
-});
-
-const SidebarGroupSchema = SidebarBaseSchemaWithLabel.extend({
+const SidebarGroupSchema = SidebarBaseSchema.extend({
 	/** Whether this item should be collapsed by default. */
 	collapsed: z.boolean().default(false),
 });
@@ -31,7 +28,7 @@ export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
 
 export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchema.default({});
 
-const SidebarLinkItemSchema = SidebarBaseSchemaWithLabel.extend({
+const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
 	link: z.string(),
 	/** HTML attributes to add to the link item. */
@@ -97,7 +94,7 @@ const ManualSidebarGroupSchema: z.ZodType<
 	),
 });
 
-const InternalSidebarLinkItemSchema = SidebarBaseSchema.extend({
+const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({ label: true }).extend({
 	/** The link to this item’s content. Must be a slug of a Content Collection entry. */
 	slug: z.string(),
 	/** HTML attributes to add to the link item. */

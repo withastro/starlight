@@ -40,7 +40,7 @@ describe('getSidebar', () => {
 			    "badge": undefined,
 			    "href": "/manual-setup",
 			    "isCurrent": false,
-			    "label": "Manual Setup",
+			    "label": "Do it yourself",
 			    "type": "link",
 			  },
 			  {
@@ -110,7 +110,7 @@ describe('getSidebar', () => {
 			    "badge": undefined,
 			    "href": "/fr/manual-setup",
 			    "isCurrent": false,
-			    "label": "Manual Setup",
+			    "label": "Fait maison",
 			    "type": "link",
 			  },
 			  {

@@ -9,7 +9,7 @@ export default defineVitestConfig({
 	sidebar: [
 		{ slug: 'index' },
 		'getting-started',
-		{ slug: 'manual-setup' },
+		{ slug: 'manual-setup', label: 'Do it yourself', translations: { fr: 'Fait maison' } },
 		{ slug: 'environmental-impact' },
 		{
 			label: 'Guides',

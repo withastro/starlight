@@ -47,7 +47,7 @@ describe('getSidebar', () => {
 			    "badge": undefined,
 			    "href": "/manual-setup",
 			    "isCurrent": false,
-			    "label": "Manual Setup",
+			    "label": "Do it yourself",
 			    "type": "link",
 			  },
 			  {
@@ -117,7 +117,7 @@ describe('getSidebar', () => {
 			    "badge": undefined,
 			    "href": "/fr/manual-setup",
 			    "isCurrent": false,
-			    "label": "Installation manuelle",
+			    "label": "Fait maison",
 			    "type": "link",
 			  },
 			  {
@@ -187,7 +187,7 @@ describe('getSidebar', () => {
 			    "badge": undefined,
 			    "href": "/fr/manual-setup",
 			    "isCurrent": false,
-			    "label": "Installation manuelle",
+			    "label": "Fait maison",
 			    "type": "link",
 			  },
 			  {
