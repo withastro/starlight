@@ -206,6 +206,13 @@ title: Page with a custom last update date
 lastUpdated: 2022-08-09
 ---
 ```
+```md
+---
+# src/content/docs/example.md
+title: Page with disabled lastUpdated global config
+lastUpdated: false
+---
+```
 
 ### `prev`
 
