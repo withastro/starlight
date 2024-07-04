@@ -91,7 +91,7 @@ export default defineConfig({
 						'manual-setup',
 						{
 							label: 'Environmental Impact',
-							link: 'environmental-impact',
+							slug: 'environmental-impact',
 							translations: {
 								de: 'Umweltbelastung',
 								es: 'Documentación ecológica',
