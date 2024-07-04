@@ -55,8 +55,10 @@ By combining links and groups, you can create a wide variety of sidebar layouts.
 
 ### Internal links
 
-Add a link to an internal docs page using an object with the `slug` property.
-The linked page’s title will be used as the label by default and in multilingual sites, translated content will be used automatically.
+Add a link to a page in `src/content/docs/` using an object with the `slug` property.
+The linked page’s title will be used as the label by default.
+
+For example, with the following configuration:
 
 ```js "slug:"
 starlight({
@@ -67,7 +69,20 @@ starlight({
 });
 ```
 
-The configuration above generates the following sidebar:
+And the following file structure:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+The following sidebar will be generated:
 
 <SidebarPreview
 	config={[
