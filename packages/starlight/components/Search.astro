@@ -56,15 +56,19 @@ const pagefindTranslations = {
 	</dialog>
 </site-search>
 
-{/* This is intentionally inlined to avoid briefly showing an invalid shortcut. */}
+{
+	/**
+	 * This is intentionally inlined to avoid briefly showing an invalid shortcut.
+	 * Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
+	 * user agent is spoofed by some browsers when opening the devtools.
+	 */
+}
 <script is:inline>
 	(() => {
 		const openBtn = document.querySelector('button[data-open-modal]');
 		const shortcut = openBtn?.querySelector('kbd');
 		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
 		const platformKey = shortcut.querySelector('kbd');
-		// Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
-		// user agent is spoofed by some browsers when opening the devtools.
 		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
 			platformKey.textContent = '⌘';
 			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
