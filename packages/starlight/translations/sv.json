@@ -1,6 +1,7 @@
 {
   "skipLink.label": "Hoppa till innehåll",
   "search.label": "Sök",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Avbryt",
   "search.devWarning": "Sökfunktionen är endast tillgänglig i produktionsbyggen. \nProva att bygga och förhandsvisa siten för att testa det lokalt.",
   "themeSelect.accessibleLabel": "Välj tema",

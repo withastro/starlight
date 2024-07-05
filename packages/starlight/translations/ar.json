@@ -1,6 +1,7 @@
 {
   "skipLink.label": "تخطَّ إلى المحتوى",
   "search.label": "ابحث",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "إلغاء",
   "search.devWarning": "البحث متوفر فقط في بنيات اﻹنتاج. \n جرب بناء المشروع ومعاينته على جهازك",
   "themeSelect.accessibleLabel": "اختر سمة",

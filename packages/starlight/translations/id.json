@@ -1,6 +1,7 @@
 {
   "skipLink.label": "Lewati ke konten",
   "search.label": "Pencarian",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Batal",
   "search.devWarning": "Pencarian hanya tersedia pada build produksi. \nLakukan proses build dan pratinjau situs Anda sebelum mencoba di lingkungan lokal.",
   "themeSelect.accessibleLabel": "Pilih tema",

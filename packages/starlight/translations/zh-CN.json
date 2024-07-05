@@ -1,6 +1,7 @@
 {
   "skipLink.label": "跳转到内容",
   "search.label": "搜索",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "取消",
   "search.devWarning": "搜索仅适用于生产版本。\n尝试构建并预览网站以在本地测试。",
   "themeSelect.accessibleLabel": "选择主题",

@@ -1,6 +1,7 @@
 {
   "skipLink.label": "Перейти до вмісту",
   "search.label": "Пошук",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Скасувати",
   "search.devWarning": "Пошук доступний лише у виробничих зборках. \nСпробуйте зібрати та переглянути сайт, щоби протестувати його локально",
   "themeSelect.accessibleLabel": "Обрати тему",

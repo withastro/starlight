@@ -1,6 +1,7 @@
 {
   "skipLink.label": "Preskočiť na obsah",
   "search.label": "Hľadať",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Zrušiť",
   "search.devWarning": "Vyhľadávanie je dostupné len v produkčných zostaveniach. \nSkúste vytvoriť a zobraziť náhľad stránky lokálne.",
   "themeSelect.accessibleLabel": "Vyberte tému",
