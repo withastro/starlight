@@ -1,7 +1,7 @@
 {
   "skipLink.label": "رفتن به محتوا",
   "search.label": "جستجو",
-  "search.shortcutLabel": "(برای جستجو / را فشار دهید)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "لغو",
   "search.devWarning": "جستجو تنها در نسخه‌های تولیدی در دسترس است. \nسعی کنید سایت را بسازید و پیش‌نمایش آن را به صورت محلی آزمایش کنید.",
   "themeSelect.accessibleLabel": "انتخاب پوسته",

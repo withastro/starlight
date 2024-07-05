@@ -165,7 +165,7 @@ test('errors with bad sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string;  } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "href": "/" }\`"
 	`
 	);
@@ -190,7 +190,57 @@ test('errors with bad nested sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0.items.1**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "items": [ { "label": "Nested Example 1", "link": "/" }, { "label": "Nested Example 2", "link": true } ] }\`"
+	`);
+});
+
+test('errors with sidebar entry that includes `link` and `items`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{ label: 'Parent', link: '/parent', items: [{ label: 'Child', link: '/parent/child' }] },
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'items'"
+	`);
+});
+
+test('errors with sidebar entry that includes `link` and `autogenerate`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [{ label: 'Parent', link: '/parent', autogenerate: { directory: 'test' } }],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
+	`);
+});
+
+test('errors with sidebar entry that includes `items` and `autogenerate`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{
+					label: 'Parent',
+					items: [{ label: 'Child', link: '/parent/child' }],
+					autogenerate: { directory: 'test' },
+				},
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
 	`);
 });
