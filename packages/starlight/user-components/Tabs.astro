@@ -162,6 +162,7 @@ const { html, panels } = processPanels(panelHtml);
 				StarlightTabs.#syncTabs(this, newTab.innerText);
 				window.scrollTo({
 					top: window.scrollY + (this.getBoundingClientRect().top - previousTabsOffset),
+					behavior: 'instant',
 				});
 			}
 		}
