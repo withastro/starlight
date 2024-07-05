@@ -418,6 +418,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### Emblemas
+
+import { Badge } from '@astrojs/starlight/components';
+
+Use o componente `<Badge>` para exibir pequenas informações, como status ou etiquetas.
+
+Passe o conteúdo que deseja exibir para o atributo `text` do componente `<Badge>`.
+
+Por padrão, o emblema usará a cor de destaque do tema do seu site. Para usar uma cor de emblema incorporada, defina o atributo `variant` com um dos seguintes valores: `note` (azul), `tip` (roxo), `danger` (vermelho), `caution` (laranja) ou `success` (verde).
+
+O atributo `size` (padrão: `small`) controla o tamanho do texto do emblema. As opções `medium` e `large` também estão disponíveis para exibir um emblema maior.
+
+Para personalização adicional, use outros atributos da tag `<span>` como `class` ou `style` com CSS personalizado.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Novo" variant="tip" size="small" />
+<Badge text="Obsoleto" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personalizado" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+O código acima gera o seguinte conteúdo na página:
+
+<Badge text="Novo" variant="tip" size="small" />
+<Badge text="Obsoleto" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personalizado" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### Ícone
 
 import { Icon } from '@astrojs/starlight/components';
@@ -425,7 +455,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight providencia um conjunto comum de ícones que você pode mostrar em seu conteúdo utilizando o componente `<Icon>`.
 
-Cada `<Icon>` requer um [`name`](#todos-os-ícones) e pode opcionalmente incluir um atributo `label`, `size` e `color`.
+Cada `<Icon>` requer um [`name`](#todos-os-ícones) e pode opcionalmente incluir um atributo `label` para prover contexto aos leitores de tela.
+Os atributos `size` e `color` podem ser utilizados para ajustar a aparência do ícone usando unidades CSS e valores de cores.
 
 ```mdx
 # src/content/docs/exemplo.mdx
@@ -433,11 +464,13 @@ Cada `<Icon>` requer um [`name`](#todos-os-ícones) e pode opcionalmente incluir
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 O código acima gera o seguinte na página:
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### Todos os ícones
 

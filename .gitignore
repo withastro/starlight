@@ -17,6 +17,9 @@ pnpm-debug.log*
 # Vitest
 __coverage__/
 
+# Playwright
+test-results/
+
 # Vercel output
 .vercel
 

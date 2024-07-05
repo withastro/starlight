@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.24.2",
+  "version": "0.24.5",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -180,7 +180,7 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.1.0",
-    "@playwright/test": "^1.44.1",
+    "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.10.2",

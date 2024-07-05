@@ -1,5 +1,35 @@
 # @astrojs/starlight
 
+## 0.24.5
+
+### Patch Changes
+
+- [#2062](https://github.com/withastro/starlight/pull/2062) [`5ac0ac6`](https://github.com/withastro/starlight/commit/5ac0ac6614e3c45d810a1594a2009d3febfa2793) Thanks [@evadecker](https://github.com/evadecker)! - Increase theme and language select inline padding
+
+- [#2056](https://github.com/withastro/starlight/pull/2056) [`87e9ad0`](https://github.com/withastro/starlight/commit/87e9ad029c9730fca8df66e35828b57cd0872a61) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing remark plugins injected by Starlight plugins to handle Markdown text and leaf directives.
+
+- [#2063](https://github.com/withastro/starlight/pull/2063) [`3ee1a94`](https://github.com/withastro/starlight/commit/3ee1a9404db25f5776a3c1ecd248614f64db46ae) Thanks [@delucis](https://github.com/delucis)! - Translate `fileTree.directory` and `aside.*` UI string into Norwegian (Bokmål).
+
+- [#2054](https://github.com/withastro/starlight/pull/2054) [`dbfd3ee`](https://github.com/withastro/starlight/commit/dbfd3eeccacb5f5b77d75213dac3b30dc0be6deb) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue when using the `<StarlightPage>` component in a custom page with a user-defined `srcDir` configuration.
+
+## 0.24.4
+
+### Patch Changes
+
+- [#2038](https://github.com/withastro/starlight/pull/2038) [`87f3f92`](https://github.com/withastro/starlight/commit/87f3f925be6f9897b71b09a3041ec6d54be483b2) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI translations
+
+- [#2043](https://github.com/withastro/starlight/pull/2043) [`53f4cd4`](https://github.com/withastro/starlight/commit/53f4cd443cf31b6135ff16eb74b5f26ee93ee2d5) Thanks [@playmr365](https://github.com/playmr365)! - Updates Czech UI translations
+
+- [#2041](https://github.com/withastro/starlight/pull/2041) [`8af5a60`](https://github.com/withastro/starlight/commit/8af5a60ab14f4dae7f5a5e4ee535ae927273368b) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes `<Steps>` numbering bug caused by Chrome v126 CSS counter rewrite
+
+## 0.24.3
+
+### Patch Changes
+
+- [#2028](https://github.com/withastro/starlight/pull/2028) [`af81ad3`](https://github.com/withastro/starlight/commit/af81ad38fd26c375c0372718fd3e152b7f1a0fa6) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a search dialog height issue in Safari.
+
+- [#2022](https://github.com/withastro/starlight/pull/2022) [`80f82b1`](https://github.com/withastro/starlight/commit/80f82b15afae1366676e0c25e674210a19606df5) Thanks [@playmr365](https://github.com/playmr365)! - Updates Czech UI translations
+
 ## 0.24.2
 
 ### Patch Changes
