@@ -33,7 +33,7 @@ const SidebarLinkItemSchema = SidebarBaseSchema.extend({
 	link: z.string(),
 	/** HTML attributes to add to the link item. */
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
-});
+}).strict();
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
 const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
@@ -50,7 +50,7 @@ const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
 		/** How many directories deep to include from this directory in the sidebar. Default: `Infinity`. */
 		// depth: z.number().optional(),
 	}),
-});
+}).strict();
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
 type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
@@ -92,7 +92,7 @@ const ManualSidebarGroupSchema: z.ZodType<
 			])
 			.array()
 	),
-});
+}).strict();
 
 const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({ label: true }).extend({
 	/** The link to this item’s content. Must be a slug of a Content Collection entry. */
