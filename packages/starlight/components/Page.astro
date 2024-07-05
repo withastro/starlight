@@ -54,15 +54,15 @@ const pagefindEnabled =
 			html:not([data-has-sidebar]) {
 				--sl-content-width: 67.5rem;
 			}
-			@media (prefers-reduced-motion: no-preference) {
-				html:not([data-no-smooth-scroll]) {
-					scroll-behavior: smooth;
-				}
-			}
 			/* Add scroll padding to ensure anchor headings aren't obscured by nav */
 			html {
 				/* Additional padding is needed to account for the mobile TOC */
 				scroll-padding-top: calc(1.5rem + var(--sl-nav-height) + var(--sl-mobile-toc-height));
+			}
+			@media (prefers-reduced-motion: no-preference) {
+				html {
+					scroll-behavior: smooth;
+				}
 			}
 			main {
 				padding-bottom: 3vh;
