@@ -58,6 +58,8 @@ type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.input<typeof SidebarLinkItemSchema>
 		| z.input<typeof AutoSidebarGroupSchema>
+		| z.input<typeof InternalSidebarLinkItemSchema>
+		| z.input<typeof InternalSidebarLinkItemShorthandSchema>
 		| ManualSidebarGroupInput
 	>;
 };
@@ -67,6 +69,8 @@ type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.output<typeof SidebarLinkItemSchema>
 		| z.output<typeof AutoSidebarGroupSchema>
+		| z.output<typeof InternalSidebarLinkItemSchema>
+		| z.output<typeof InternalSidebarLinkItemShorthandSchema>
 		| ManualSidebarGroupOutput
 	>;
 };
@@ -78,13 +82,34 @@ const ManualSidebarGroupSchema: z.ZodType<
 > = SidebarGroupSchema.extend({
 	/** Array of links and subcategories to display in this category. */
 	items: z.lazy(() =>
-		z.union([SidebarLinkItemSchema, ManualSidebarGroupSchema, AutoSidebarGroupSchema]).array()
+		z
+			.union([
+				SidebarLinkItemSchema,
+				ManualSidebarGroupSchema,
+				AutoSidebarGroupSchema,
+				InternalSidebarLinkItemSchema,
+				InternalSidebarLinkItemShorthandSchema,
+			])
+			.array()
 	),
 }).strict();
+
+const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({ label: true }).extend({
+	/** The link to this item’s content. Must be a slug of a Content Collection entry. */
+	slug: z.string(),
+	/** HTML attributes to add to the link item. */
+	attrs: SidebarLinkItemHTMLAttributesSchema(),
+});
+const InternalSidebarLinkItemShorthandSchema = z
+	.string()
+	.transform((slug) => InternalSidebarLinkItemSchema.parse({ slug }));
+export type InternalSidebarLinkItem = z.output<typeof InternalSidebarLinkItemSchema>;
 
 export const SidebarItemSchema = z.union([
 	SidebarLinkItemSchema,
 	ManualSidebarGroupSchema,
 	AutoSidebarGroupSchema,
+	InternalSidebarLinkItemSchema,
+	InternalSidebarLinkItemShorthandSchema,
 ]);
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;
