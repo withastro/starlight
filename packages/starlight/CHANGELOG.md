@@ -16,10 +16,6 @@
 
   If you see errors after updating, look for sidebar entries in the Starlight configuration in `astro.config.mjs` that include too many keys and remove the one that was previously ignored.
 
-### Patch Changes
-
-- [#2081](https://github.com/withastro/starlight/pull/2081) [`f0181d2`](https://github.com/withastro/starlight/commit/f0181d2689248a46ff3eb6fc604bfcd95d4cb1aa) Thanks [@andrii-bodnar](https://github.com/andrii-bodnar)! - Updates the Ukrainian UI translations
-
 - [#1874](https://github.com/withastro/starlight/pull/1874) [`eeba06e`](https://github.com/withastro/starlight/commit/eeba06ea7df962e8f0520e145d28b8c17cd32c18) Thanks [@lorenzolewis](https://github.com/lorenzolewis)! - Adds a new syntax for specifying sidebar link items for internal links
 
   You can now specify an internal page using only its slug, either as a string, or as an object with a `slug` property:
@@ -32,6 +28,10 @@
   ```
 
   Starlight will use the linked page’s frontmatter to configure the sidebar link.
+
+### Patch Changes
+
+- [#2081](https://github.com/withastro/starlight/pull/2081) [`f0181d2`](https://github.com/withastro/starlight/commit/f0181d2689248a46ff3eb6fc604bfcd95d4cb1aa) Thanks [@andrii-bodnar](https://github.com/andrii-bodnar)! - Updates the Ukrainian UI translations
 
 ## 0.24.5
 
