@@ -1,7 +1,7 @@
 {
   "skipLink.label": "इसे छोड़कर कंटेंट पर जाएं",
   "search.label": "खोजें",
-  "search.shortcutLabel": "(खोजने के लिए / दबाएँ)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "रद्द करे",
   "search.devWarning": "खोज केवल उत्पादन बिल्ड में उपलब्ध है। \nस्थानीय स्तर पर परीक्षण करने के लिए साइट बनाए और उसका पूर्वावलोकन करने का प्रयास करें।",
   "themeSelect.accessibleLabel": "थीम चुनें",
