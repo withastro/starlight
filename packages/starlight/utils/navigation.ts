@@ -130,7 +130,7 @@ function linkFromSidebarLinkItem(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.badge, item.attrs);
+	return makeSidebarLink(href, label, currentPathname, item.badge, item.attrs);
 }
 
 /** Create a link entry from an automatic internal link item in user config. */
@@ -160,11 +160,11 @@ function linkFromInternalSidebarLinkItem(
 	}
 	const label =
 		pickLang(item.translations, localeToLang(locale)) || item.label || entry.entry.data.title;
-	return makeLink(entry.slug, label, currentPathname, item.badge, item.attrs);
+	return makeSidebarLink(entry.slug, label, currentPathname, item.badge, item.attrs);
 }
 
-/** Create a link entry. */
-function makeLink(
+/** Process sidebar link options to create a link entry. */
+function makeSidebarLink(
 	href: string,
 	label: string,
 	currentPathname: string,
@@ -174,10 +174,24 @@ function makeLink(
 	if (!isAbsolute(href)) {
 		href = formatPath(href);
 	}
-
 	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
+	return makeLink({ label, href, isCurrent, badge, attrs });
+}
 
-	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
+/** Create a link entry */
+function makeLink({
+	isCurrent = false,
+	attrs = {},
+	badge = undefined,
+	...opts
+}: {
+	label: string;
+	href: string;
+	isCurrent?: boolean;
+	badge?: Badge | undefined;
+	attrs?: LinkHTMLAttributes | undefined;
+}): Link {
+	return { type: 'link', ...opts, badge, isCurrent, attrs };
 }
 
 /** Test if two paths are equivalent even if formatted differently. */
@@ -240,7 +254,7 @@ function treeify(routes: Route[], baseDir: string): Dir {
 
 /** Create a link entry for a given content collection entry. */
 function linkFromRoute(route: Route, currentPathname: string): Link {
-	return makeLink(
+	return makeSidebarLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
@@ -388,7 +402,7 @@ function applyPrevNextLinkConfig(
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
 			// create a new link.
-			return makeLink(config.link, config.label, '');
+			return makeLink({ href: config.link, label: config.label });
 		}
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.
