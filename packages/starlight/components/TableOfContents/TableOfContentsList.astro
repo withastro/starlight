@@ -38,6 +38,9 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 		padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
 		line-height: 1.25;
 	}
+  a[aria-passed='true'] {
+      color: var(--sl-color-gray-3);
+  }
 	a[aria-current='true'] {
 		color: var(--sl-color-text-accent);
 	}
@@ -56,6 +59,9 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 	}
 	.isMobile:first-child > li:first-child > a {
 		border-top: 0;
+	}
+	.isMobile a[aria-passed='true'] {
+		color: var(--sl-color-gray-3);
 	}
 	.isMobile a[aria-current='true'],
 	.isMobile a[aria-current='true']:hover,

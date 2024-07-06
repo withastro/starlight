@@ -6,6 +6,21 @@ export class StarlightTOC extends HTMLElement {
 	private maxH = parseInt(this.dataset.maxH || '3', 10);
 
 	protected set current(link: HTMLAnchorElement) {
+		let passed = true;
+		for (const element of this.querySelectorAll('a')) {
+			if (passed && element !== link) {
+				if (element.getAttribute('aria-passed') !== 'true') {
+					element.setAttribute('aria-passed', 'true');
+				}
+			} else {
+				element.removeAttribute('aria-passed');
+			}
+
+			if (element === link) {
+				passed = false;
+			}
+		}
+
 		if (link === this._current) return;
 		if (this._current) this._current.removeAttribute('aria-current');
 		link.setAttribute('aria-current', 'true');
