@@ -26,19 +26,21 @@ describe('without base', async () => {
 		sidebar = getSidebar('/reference/frontmatter/', undefined);
 	});
 
-	test('pagination links are formatted correctly with no frontmatter', () => {
+	test('pagination links are inferred correctly with no frontmatter', () => {
 		const links = getPrevNextLinks(sidebar, true, {});
-		expect(links.prev?.href).toMatchInlineSnapshot(`"/guides/components/"`);
-		expect(links.next?.href).toMatchInlineSnapshot(`undefined`);
+		expect(links.prev?.href).toBe('/guides/components/');
+		expect(links.next?.href).toBeUndefined();
 	});
 
-	test('pagination links are formatted correctly with custom links in frontmatter', () => {
+	test('pagination links are used as authored with custom links in frontmatter', () => {
+		const prevLink = '/other-page';
+		const nextLink = '/extra-page';
 		const links = getPrevNextLinks(sidebar, true, {
-			prev: { link: '/other-page', label: 'Other Page' },
-			next: { link: '/extra-page', label: 'Extra Page' },
+			prev: { link: prevLink, label: 'Other Page' },
+			next: { link: nextLink, label: 'Extra Page' },
 		});
-		expect(links.prev?.href).toMatchInlineSnapshot(`"/other-page"`);
-		expect(links.next?.href).toMatchInlineSnapshot(`"/extra-page"`);
+		expect(links.prev?.href).toBe(prevLink);
+		expect(links.next?.href).toBe(nextLink);
 	});
 });
 
@@ -59,18 +61,20 @@ describe('with base', () => {
 		vi.resetModules();
 	});
 
-	test('pagination links are formatted correctly with no frontmatter', () => {
+	test('pagination links are inferred correctly with no frontmatter', () => {
 		const links = getPrevNextLinks(sidebar, true, {});
-		expect(links.prev?.href).toMatchInlineSnapshot(`"/test-base/guides/components/"`);
-		expect(links.next?.href).toMatchInlineSnapshot(`undefined`);
+		expect(links.prev?.href).toBe('/test-base/guides/components/');
+		expect(links.next?.href).toBeUndefined();
 	});
 
-	test('pagination links are formatted correctly with custom links in frontmatter', () => {
+	test('pagination links are used as authored with custom links in frontmatter', () => {
+		const prevLink = '/other-page';
+		const nextLink = '/extra-page';
 		const links = getPrevNextLinks(sidebar, true, {
-			prev: { link: '/other-page', label: 'Other Page' },
-			next: { link: '/extra-page', label: 'Extra Page' },
+			prev: { link: prevLink, label: 'Other Page' },
+			next: { link: nextLink, label: 'Extra Page' },
 		});
-		expect(links.prev?.href).toMatchInlineSnapshot(`"/other-page"`);
-		expect(links.next?.href).toMatchInlineSnapshot(`"/extra-page"`);
+		expect(links.prev?.href).toBe(prevLink);
+		expect(links.next?.href).toBe(nextLink);
 	});
 });
