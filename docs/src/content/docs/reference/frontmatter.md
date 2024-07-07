@@ -209,7 +209,7 @@ lastUpdated: 2022-08-09
 ```md
 ---
 # src/content/docs/example.md
-title: Page with disabled lastUpdated global config
+title: Page with a hidden last-updated date
 lastUpdated: false
 ---
 ```
