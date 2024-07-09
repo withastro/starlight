@@ -88,8 +88,8 @@ importers:
         specifier: ^8.3.2
         version: 8.3.2(astro@4.11.3)
       '@astrojs/starlight':
-        specifier: ^0.24.5
-        version: 0.24.5(astro@4.11.3)
+        specifier: ^0.25.0
+        version: link:../../packages/starlight
       astro:
         specifier: ^4.10.2
         version: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
@@ -572,36 +572,6 @@ packages:
       sitemap: 7.1.2
       stream-replace-string: 2.0.0
       zod: 3.23.8
-    dev: false
-
-  /@astrojs/starlight@0.24.5(astro@4.11.3):
-    resolution: {integrity: sha512-DDI8NpLzk+ReBudhAV09OhO5DxD+KN4Nnp3YlG6kwn/F8fmywNTNgY7VW67Z8aad+A/85OOiQOtq9wIFNRy3YA==}
-    peerDependencies:
-      astro: ^4.8.6
-    dependencies:
-      '@astrojs/mdx': 3.1.2(astro@4.11.3)
-      '@astrojs/sitemap': 3.1.6
-      '@pagefind/default-ui': 1.0.3
-      '@types/hast': 3.0.4
-      '@types/mdast': 4.0.4
-      astro: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
-      astro-expressive-code: 0.35.3(astro@4.11.3)
-      bcp-47: 2.1.0
-      hast-util-from-html: 2.0.1
-      hast-util-select: 6.0.2
-      hast-util-to-string: 3.0.0
-      hastscript: 9.0.0
-      mdast-util-directive: 3.0.0
-      mdast-util-to-markdown: 2.1.0
-      pagefind: 1.0.3
-      rehype: 13.0.1
-      rehype-format: 5.0.0
-      remark-directive: 3.0.0
-      unified: 11.0.5
-      unist-util-visit: 5.0.0
-      vfile: 6.0.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@astrojs/tailwind@5.1.0(astro@4.11.3)(tailwindcss@3.4.4):

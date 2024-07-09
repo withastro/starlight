@@ -211,8 +211,8 @@ const UserConfigSchema = z.object({
 
 	/**
 	 * Define whether Starlight pages should be prerendered or not.
-	 * Defaults to Astro's default behavior, prerender when "hybrid" and
-	 * not prerendering when "server".
+	 * Defaults to always prerender Starlight pages, even when the project is
+	 * set to "server" output mode.
 	 * Does nothing when Astro's output mode is undefined or set to "static".
 	 */
 	prerender: z.boolean().default(true),
