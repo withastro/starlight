@@ -4,6 +4,8 @@ import { build, dev, preview, type AstroInlineConfig } from 'astro';
 
 export { expect, type Locator } from '@playwright/test';
 
+process.env.ASTRO_TELEMETRY_DISABLED = 'true';
+
 // Setup a test environment that will build and start a preview server for a given fixture path and
 // provide a Starlight Playwright fixture accessible from within all tests.
 export async function testFactory(fixturePath: string, options: { mode?: 'build' | 'dev' } = {}) {

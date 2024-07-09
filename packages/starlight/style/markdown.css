@@ -100,17 +100,40 @@
 	padding-inline-start: 1rem;
 }
 
+/* Table styling */
 .sl-markdown-content table:not(:where(.not-content *)) {
 	display: block;
 	overflow: auto;
-	border-collapse: collapse;
-}
-.sl-markdown-content tr:nth-child(2n):not(:where(.not-content *)) {
-	background-color: var(--sl-color-gray-7, var(--sl-color-gray-6));
+	border-spacing: 0;
 }
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
-	border: 1px solid var(--sl-color-hairline-light);
-	padding: 0.375rem 0.8125rem;
+	border-bottom: 1px solid var(--sl-color-gray-5);
+	padding: 0.5rem 1rem;
+	/* Align text to the top of the row in multiline tables. */
+	vertical-align: baseline;
+}
+.sl-markdown-content :is(th:first-child, td:first-child):not(:where(.not-content *)) {
+	padding-inline-start: 0;
+}
+.sl-markdown-content :is(th:last-child, td:last-child):not(:where(.not-content *)) {
+	padding-inline-end: 0;
+}
+.sl-markdown-content th:not(:where(.not-content *)) {
+	color: var(--sl-color-white);
+	font-weight: 600;
+}
+/* Align headings to the start of the line unless set by the `align` attribute. */
+.sl-markdown-content th:not([align]):not(:where(.not-content *)) {
+	text-align: start;
+}
+/* Table styles inside asides */
+.sl-markdown-content .starlight-aside :is(th, td):not(:where(.not-content *)) {
+	border-color: var(--sl-color-gray-4);
+}
+@supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent)) {
+	.sl-markdown-content .starlight-aside :is(th, td):not(:where(.not-content *)) {
+		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent);
+	}
 }
 
 .sl-markdown-content hr:not(:where(.not-content *)) {
