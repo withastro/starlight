@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': minor
+'@astrojs/starlight': patch
 ---
 
-Improve styling of hr, blockquote, and code within asides
+Improves styling of `<hr>`, `<blockquote>`, and `<code>` within asides
