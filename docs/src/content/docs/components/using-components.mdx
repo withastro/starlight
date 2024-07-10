@@ -1,0 +1,74 @@
+---
+title: Using components
+description: Using components in MDX with Starlight.
+sidebar:
+  order: 1
+---
+
+Components let you easily reuse a piece of UI or styling consistently.
+Examples might include a link card or a YouTube embed.
+Starlight supports the use of components in [MDX](https://mdxjs.com/) files and provides some common components for you to use.
+
+[Learn more about building components in the Astro Docs](https://docs.astro.build/en/core-concepts/astro-components/).
+
+## Using a component
+
+You can use a component by importing it into your MDX file and then rendering it as a JSX tag.
+These look like HTML tags but start with an uppercase letter matching the name in your `import` statement:
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: Welcome to my docs
+---
+
+import SomeComponent from '../../components/SomeComponent.astro';
+import AnotherComponent from '../../components/AnotherComponent.astro';
+
+<SomeComponent prop="something" />
+
+<AnotherComponent>
+	Components can also contain **nested content**.
+</AnotherComponent>
+```
+
+Because Starlight is powered by Astro, you can add support for components built with any [supported UI framework (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) in your MDX files.
+Learn more about [using components in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) in the Astro docs.
+
+## Built-in components
+
+Starlight provides some built-in components for common documentation use cases.
+These components are available from the `@astrojs/starlight/components` package.
+
+See the components group in the sidebar for a list of available components and how to use them.
+
+## Compatibility with Starlight’s styles
+
+Starlight applies default styling to your Markdown content, for example adding margin between elements.
+If these styles conflict with your component’s appearance, set the `not-content` class on your component to disable them.
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Not impacted by Starlight’s default content styling.</p>
+</div>
+```
+
+## Component props
+
+Use the [`ComponentProps`](https://docs.astro.build/en/guides/typescript/#componentprops-type) type from `astro/types` to reference the `Props` accepted by a component even if they are not exported by the component.
+
+The following example uses `ComponentProps` to reference the props accepted by a `Callout` component:
+
+```astro
+---
+// src/components/Example.astro
+import type { ComponentProps } from 'astro/types';
+import Callout from './Callout.astro';
+
+type CalloutProps = ComponentProps<typeof Callout>;
+---
+```
