@@ -1,0 +1,169 @@
+---
+title: Tabs
+description: Learn how to create tabbed interfaces in Starlight.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+To create a tabbed interface useful to organize content by grouping similar information together, use the `<Tabs>` and `<TabItem>` components.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+### Basic usage
+
+Display a tabbed interface using the `<Tabs>` and `<TabItem>` components.
+Each `<TabItem>` must have a [`label`](#label) to display to users.
+
+<Preview>
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+```
+
+<Tabs slot="preview">
+	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
+</Tabs>
+
+</Preview>
+
+### Sync tabs
+
+Keep multiple tab groups synchronized by adding the [`syncKey`](#synckey) attribute.
+
+All `<Tabs>` on a page with the same `syncKey` value will display the same active label.
+This allows your reader to choose once (e.g. their operating system or package manager), and see their choice reflected throughout the page.
+
+To synchronize related tabs, add an identical `syncKey` property to each `<Tabs>` component and ensure that they all use the same `<TabItem>` labels:
+
+<Preview>
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Some stars:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Some exoplanets:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="preview">
+
+_Some stars:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Some exoplanets:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### Add icons to tabs
+
+Include an icon in a tab item using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/components/icon/#all-icons) to display an icon next to the label.
+
+<Preview>
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
+</Tabs>
+```
+
+<Tabs slot="preview">
+	<TabItem label="Stars" icon="star">
+		Sirius, Vega, Betelgeuse
+	</TabItem>
+	<TabItem label="Moons" icon="moon">
+		Io, Europa, Ganymede
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## `<Tabs>` Props
+
+**Implementation:** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+The `<Tabs>` component groups multiple `<TabItem>` components together and accepts the following props:
+
+### `syncKey`
+
+**type:** `string`
+
+A key used to keep multiple tab groups synchronized on a page.
+See the [“sync tabs”](#sync-tabs) guide for an example.
+
+## `<TabItem>` Props
+
+**Implementation:** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+A set of tabs is composed of tab items, each with the following props:
+
+### `label`
+
+**required**  
+**type:** `string`
+
+A tab item must include a `label` attribute set to the text that will be displayed in the tab.
+See the [“basic usage”](#basic-usage) guide for an example.
+
+### `icon`
+
+**type:** `string`
+
+Each tab item can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/components/icon/#all-icons) to display an icon next to the label.
+See the [“Add icons to tabs”](#add-icons-to-tabs) guide for an example.
