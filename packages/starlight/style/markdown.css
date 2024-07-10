@@ -139,7 +139,7 @@
 /* <code> inside asides */
 @supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent)) {
 	.sl-markdown-content .starlight-aside code:not(:where(.not-content *)) {
-		background-color: color-mix(in srgb, var(--sl-color-text-accent) 12%, transparent);
+		background-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent);
 	}
 }
 
