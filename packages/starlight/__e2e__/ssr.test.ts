@@ -2,53 +2,46 @@ import { expect, testFactory } from './test-utils';
 import assert from 'node:assert';
 import * as cheerio from 'cheerio';
 
-const test = await testFactory('./fixtures/ssr/');
+const test = testFactory('./fixtures/ssr/');
 
 test.beforeEach(() => {
 	delete process.env.STARLIGHT_PRERENDER;
 });
 
-test('Render page on the server', async ({ starlight, page }) => {
+test('Render page on the server', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/demo');
 
 	await expect(page.locator('#server-check')).toHaveText('On server');
 });
 
-test('Render 404 page on the server', async ({ starlight, page }) => {
+test('Render 404 page on the server', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/not-found');
 
 	await expect(page.locator('#server-check')).toHaveText('On server');
 });
 
-test('SSR mode renders the same content page as prerendering', async ({
-	starlight,
-	makeServer,
-}) => {
+test('SSR mode renders the same content page as prerendering', async ({ makeServer }) => {
+	const starlight = await makeServer();
 	const ssrContent = await starlight.goto('/content').then((res) => res?.text());
 	assert(ssrContent);
 
 	process.env.STARLIGHT_PRERENDER = 'yes';
-	const prerenderStarlight = await makeServer({
-		config: {
-			server: { port: 4322 },
-		},
-	});
+	const prerenderStarlight = await makeServer();
 	const prerenderContent = await prerenderStarlight.goto('/content').then((res) => res?.text());
 	assert(prerenderContent);
 
 	expectEquivalentHTML(prerenderContent, ssrContent);
 });
 
-test('SSR mode renders the same splash page as prerendering', async ({ starlight, makeServer }) => {
+test('SSR mode renders the same splash page as prerendering', async ({ makeServer }) => {
+	const starlight = await makeServer();
 	const ssrContent = await starlight.goto('/').then((res) => res?.text());
 	assert(ssrContent);
 
 	process.env.STARLIGHT_PRERENDER = 'yes';
-	const prerenderStarlight = await makeServer({
-		config: {
-			server: { port: 4322 },
-		},
-	});
+	const prerenderStarlight = await makeServer();
 	const prerenderContent = await prerenderStarlight.goto('/').then((res) => res?.text());
 	assert(prerenderContent);
 

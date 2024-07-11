@@ -1,8 +1,9 @@
 import { expect, testFactory, type Locator } from './test-utils';
 
-const test = await testFactory('./fixtures/basics/');
+const test = testFactory('./fixtures/basics/');
 
-test('syncs tabs with a click event', async ({ page, starlight }) => {
+test('syncs tabs with a click event', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -22,7 +23,8 @@ test('syncs tabs with a click event', async ({ page, starlight }) => {
 	await expectSelectedTab(pkgTabsA, 'yarn', 'yarn command');
 });
 
-test('syncs tabs with a keyboard event', async ({ page, starlight }) => {
+test('syncs tabs with a keyboard event', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -45,7 +47,8 @@ test('syncs tabs with a keyboard event', async ({ page, starlight }) => {
 	await expectSelectedTab(pkgTabsB, 'npm', 'another npm command');
 });
 
-test('syncs only tabs using the same sync key', async ({ page, starlight }) => {
+test('syncs only tabs using the same sync key', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -60,7 +63,8 @@ test('syncs only tabs using the same sync key', async ({ page, starlight }) => {
 	await expectSelectedTab(styleTabs, 'css', 'css code');
 });
 
-test('supports synced tabs with different tab items', async ({ page, starlight }) => {
+test('supports synced tabs with different tab items', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -74,7 +78,8 @@ test('supports synced tabs with different tab items', async ({ page, starlight }
 	await expectSelectedTab(pkgTabsB, 'bun', 'another bun command');
 });
 
-test('persists the focus when syncing tabs', async ({ page, starlight }) => {
+test('persists the focus when syncing tabs', async ({ page, makeServer }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs');
 
 	const pkgTabsA = page.locator('starlight-tabs').nth(0);
@@ -93,8 +98,9 @@ test('persists the focus when syncing tabs', async ({ page, starlight }) => {
 
 test('preserves tabs position when alternating between tabs with different content heights', async ({
 	page,
-	starlight,
+	makeServer,
 }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs-variable-height');
 
 	const tabs = page.locator('starlight-tabs').nth(1);
@@ -118,8 +124,9 @@ test('preserves tabs position when alternating between tabs with different conte
 
 test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
 	page,
-	starlight,
+	makeServer,
 }) => {
+	const starlight = await makeServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');

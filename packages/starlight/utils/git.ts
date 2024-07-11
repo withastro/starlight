@@ -30,7 +30,10 @@ export function listGitTrackedFiles(directory: string): string[] {
 	});
 
 	if (result.error) {
-		throw new Error(`Failed to retrieve list of git tracked files in "${directory}"`);
+		// If git is not installed, the project is not a git repository
+		// or any other reason for there to be no git information retrievable,
+		// proceed without any git information.
+		return [];
 	}
 
 	const output = result.stdout.trim();

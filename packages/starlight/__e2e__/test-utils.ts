@@ -8,7 +8,7 @@ process.env.ASTRO_TELEMETRY_DISABLED = 'true';
 
 // Setup a test environment that will build and start a preview server for a given fixture path and
 // provide a Starlight Playwright fixture accessible from within all tests.
-export async function testFactory(fixturePath: string, options: { mode?: 'build' | 'dev' } = {}) {
+export function testFactory(fixturePath: string) {
 	async function makeServer(
 		options: {
 			mode?: 'build' | 'dev';
@@ -17,41 +17,50 @@ export async function testFactory(fixturePath: string, options: { mode?: 'build'
 	): Promise<Server> {
 		const { mode, config } = options;
 		const root = fileURLToPath(new URL(fixturePath, import.meta.url));
-		if (mode === 'build') {
+		if (mode === 'dev') {
+			return await dev({ logLevel: 'error', root, ...config });
+		} else {
 			await build({ logLevel: 'error', root, ...config });
 			return await preview({ logLevel: 'error', root, ...config });
-		} else {
-			return await dev({ logLevel: 'error', root, ...config });
 		}
 	}
 
-	let server: Server | undefined;
+	const customServers: Server[] = [];
+	// Optimization for tests that don't customize any server options
+	// to not rebuild the fixture for each test.
+	const defaultServers: {
+		build?: Server;
+		dev?: Server;
+	} = {};
 
 	const test = baseTest.extend<{
-		starlight: StarlightPage;
 		makeServer: (config?: Parameters<typeof makeServer>[0]) => Promise<StarlightPage>;
 	}>({
-		starlight: async ({ page }, use) => {
-			if (!server) {
-				throw new Error('Could not find a preview server to run tests against.');
-			}
-
-			await use(new StarlightPage(server, page));
-		},
 		makeServer: ({ page }, use) =>
-			use(async (config) => {
-				const newServer = await makeServer(config);
+			use(async (params) => {
+				const { mode = 'build', config } = params ?? {};
+
+				if (config === undefined) {
+					const server = (defaultServers[mode] ??= await makeServer({ mode }));
+					return new StarlightPage(server, page);
+				}
+
+				const newServer = await makeServer(params);
+				customServers.push(newServer);
 
 				return new StarlightPage(newServer, page);
 			}),
 	});
 
-	test.beforeAll(async () => {
-		server = await makeServer(options);
+	test.afterAll(async () => {
+		await defaultServers.build?.stop();
+		await defaultServers.dev?.stop();
 	});
 
-	test.afterAll(async () => {
-		await server?.stop();
+	test.afterEach(async () => {
+		// Stop all started servers.
+		await Promise.all(customServers.map((server) => server.stop()));
+		customServers.splice(0, customServers.length);
 	});
 
 	return test;
