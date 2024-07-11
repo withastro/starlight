@@ -162,7 +162,7 @@ describe('processI18nConfig', () => {
 					locales: ['en', { codes: ['fr'], path: 'french' }],
 				},
 				expected: {
-					defaultLocale: { label: 'English', lang: 'en', dir: 'ltr', locale: 'en' },
+					defaultLocale: { label: 'English', lang: 'en', dir: 'ltr', locale: undefined },
 					locales: {
 						root: { label: 'English', lang: 'en', dir: 'ltr' },
 						french: { label: 'Français', lang: 'fr', dir: 'ltr' },
@@ -180,7 +180,7 @@ describe('processI18nConfig', () => {
 					routing: { prefixDefaultLocale: false },
 				},
 				expected: {
-					defaultLocale: { label: 'فارسی', lang: 'fa', dir: 'rtl', locale: 'fa' },
+					defaultLocale: { label: 'فارسی', lang: 'fa', dir: 'rtl', locale: undefined },
 					locales: {
 						root: { label: 'فارسی', lang: 'fa', dir: 'rtl' },
 						de: { label: 'Deutsch', lang: 'de', dir: 'ltr' },
