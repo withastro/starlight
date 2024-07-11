@@ -118,11 +118,12 @@ function getStarlightI18nConfig(
 		locales,
 		defaultLocale: {
 			...inferStarlightLocaleFromAstroLocale(defaultAstroLocale),
-			locale: isMonolingualWithRootLocale
-				? undefined
-				: isAstroLocaleExtendedConfig(defaultAstroLocale)
-					? defaultAstroLocale.codes[0]
-					: defaultAstroLocale,
+			locale:
+				isMonolingualWithRootLocale || (isMultilingual && !prefixDefaultLocale)
+					? undefined
+					: isAstroLocaleExtendedConfig(defaultAstroLocale)
+						? defaultAstroLocale.codes[0]
+						: defaultAstroLocale,
 		},
 	};
 }
