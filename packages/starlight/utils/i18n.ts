@@ -6,6 +6,26 @@ import type { StarlightConfig } from './user-config';
 export const BuiltInDefaultLocale = { ...getLocaleInfo('en'), lang: 'en' };
 
 /**
+ * A proxy object that throws an error when a user tries to access the deprecated `labels` prop in
+ * a component override.
+ *
+ * @todo Remove in a future release once people have updated — no later than v1.
+ */
+export const DeprecatedLabelsPropProxy = new Proxy<Record<string, never>>(
+	{},
+	{
+		get(_, key) {
+			const label = String(key);
+			throw new AstroError(
+				`The \`labels\` prop in component overrides has been removed.`,
+				`Replace \`Astro.props.labels["${label}"]\` with \`Astro.locals.t("${label}")\` instead.\n` +
+					'For more information see https://starlight.astro.build/guides/i18n/#accessing-ui-strings'
+			);
+		},
+	}
+);
+
+/**
  * A list of well-known right-to-left languages used as a fallback when determining the text
  * direction of a locale is not supported by the `Intl.Locale` API in the current environment.
  *

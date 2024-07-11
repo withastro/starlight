@@ -17,6 +17,7 @@ import { docsSchema } from '../schema';
 import { BadgeConfigSchema } from '../schemas/badge';
 import { SidebarLinkItemHTMLAttributesSchema } from '../schemas/sidebar';
 import type { Prettify, RemoveIndexSignature } from './types';
+import { DeprecatedLabelsPropProxy } from './i18n';
 
 /**
  * The frontmatter schema for Starlight pages derived from the default schema for Starlight’s
@@ -225,6 +226,7 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
+		labels: DeprecatedLabelsPropProxy,
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,

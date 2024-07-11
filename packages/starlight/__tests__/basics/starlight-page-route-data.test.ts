@@ -458,12 +458,18 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 	expect(data.hasSidebar).toBe(false);
 });
 
-test('does no longer include localized labels', async () => {
+test('throws when accessing a label using the deprecated `labels` prop', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
 		url: starlightPageUrl,
 	});
-	expect(data.labels).not.toBeDefined();
+	expect(() => data.labels['any']).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			The \`labels\` prop in component overrides has been removed.
+		Hint:
+			Replace \`Astro.props.labels["any"]\` with \`Astro.locals.t("any")\` instead.
+			For more information see https://starlight.astro.build/guides/i18n/#accessing-ui-strings"
+	`);
 });
 
 test('uses provided edit URL if any', async () => {
