@@ -114,8 +114,8 @@ Agrega un enlace a una página externa o un enlace que no sea de documentación 
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Un enlace a la página de la luna Ganímedes.
-		{ label: 'Ganímedes', link: '/moons/ganymede/' },
+		// Un enlace a una página que no sea de documentación en este sitio.
+		{ label: 'Tienda de Meteoritos', link: '/shop/' },
 		// Un enlace externo al sitio web de la NASA.
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -126,7 +126,7 @@ La configuración anterior genera la siguiente barra lateral:
 
 <SidebarPreview
 	config={[
-		{ label: 'Ganímedes', link: '' },
+		{ label: 'Tienda de Meteoritos', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -147,15 +147,15 @@ starlight({
 		{
 			label: 'Constelaciones',
 			items: [
-				{ label: 'Carina', link: '/constellations/carina/' },
-				{ label: 'Centaurus', link: '/constellations/centaurus/' },
+				'constellations/carina',
+				'constellations/centaurus',
 				// Un grupo anidado de enlaces para constelaciones estacionales.
 				{
 					label: 'Estacional',
 					items: [
-						{ label: 'Andrómeda', link: '/constellations/andromeda/' },
-						{ label: 'Orión', link: '/constellations/orion/' },
-						{ label: 'Osa Menor', link: '/constellations/ursa-minor/' },
+						'constellations/andrómeda',
+						'constellations/orión',
+						'constellations/ursa-menor',						
 					],
 				},
 			],
@@ -240,7 +240,7 @@ La siguiente barra lateral se generará automáticamente:
 	]}
 />
 
-#### Personalización de enlaces autogenerados en el frontmatter
+## Personalización de enlaces autogenerados en el frontmatter
 
 Usa el campo [`sidebar`](/es/reference/frontmatter/#sidebar) en las páginas individuales para personalizar los enlaces autogenerados.
 
@@ -281,14 +281,14 @@ Un grupo autogenerado que incluye una página con el frontmatter anterior genera
 />
 
 :::note
-La configuración `sidebar` del frontmatter solo se usa para enlaces autogenerados y se ignorará para enlaces definidos manualmente.
+El frontmatter `sidebar` solo se utiliza para enlaces en grupos autogenerados y enlaces de documentos definidos con la propiedad `slug`. No se aplica a los enlaces definidos con la propiedad `link`.
 :::
 
 ## Insignias
 
 Los enlaces, grupos y grupos autogenerados también pueden incluir una propiedad `badge` para mostrar una insignia junto a la etiqueta del enlace.
 
-```js {10,17}
+```js {9,16}
 starlight({
 	sidebar: [
 		{
@@ -296,8 +296,7 @@ starlight({
 			items: [
 				// Un enlace con una insignia "Supergigante".
 				{
-					label: 'Persei',
-					link: '/stars/persei/',
+					slug: 'stars/persei',
 					badge: 'Supergigante',
 				},
 			],
@@ -364,8 +363,7 @@ starlight({
 			items: [
 				// Un enlace con una insignia "Stub" amarilla.
 				{
-					label: 'Sirio',
-					link: '/stars/sirius/',
+					slug: 'stars/sirius',
 					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
@@ -454,14 +452,14 @@ starlight({
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
-					link: '/constellations/andromeda/',
+					slug: 'constellations/andromeda',
 				},
 				{
 					label: 'Escorpio',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
-					link: '/constellations/scorpius/',
+					slug: 'constellations/scorpius',
 				},
 			],
 		},
@@ -482,6 +480,43 @@ Navegar por la documentación en portugués de Brasil generará la siguiente bar
 		},
 	]}
 />
+
+### Internacionalización con enlaces internos
+
+[Los Enlaces internos](#enlaces-internos) utilizarán automáticamente los títulos de página traducidos del frontmatter de contenido de forma predeterminada:
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+Navegando por la documentación en portugués de Brasil generará la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+En sitios multilingües, el valor de `slug` no incluye la parte del idioma de la URL.
+Por ejemplo, si tienes páginas en `en/intro` y `pt-br/intro`, el slug es `intro` al configurar la barra lateral.
 
 ## Grupos colapsables
 
