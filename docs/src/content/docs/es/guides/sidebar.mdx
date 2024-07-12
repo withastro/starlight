@@ -49,13 +49,67 @@ Aprende más sobre las barras laterales generadas automáticamente en la secció
 
 ## Agregar enlaces y grupos de enlaces
 
-Para configurar los [enlaces](#enlaces) de tu barra lateral y [grupos de enlaces](#grupos) (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
+Para configurar los enlaces de tu barra lateral y grupos de enlaces (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
 
 Combinando enlaces y grupos, puedes crear una amplia variedad de diseños de barra lateral.
 
-### Enlaces
+### Enlaces internos
 
-Agrega un enlace a una página interna o externa usando un objeto con las propiedades `label` y `link`.
+Agrega un enlace a una página en `src/content/docs/` usando un objeto con la propiedad `slug`.
+El título de la página vinculada se utilizará como etiqueta de forma predeterminada.
+
+Por ejemplo, con la siguiente configuración:
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+Y la siguiente estructura de archivos:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+La siguiente barra lateral se generará automáticamente:
+
+<SidebarPreview
+	config={[
+		{ label: 'Andromeda', link: '' },
+		{ label: 'Orion', link: '' },
+	]}
+/>
+
+Para sobreescribir los valores inferidos del frontmatter de una página vinculada, puedes agregar las propiedades `label`, [`translations`](#internacionalización) y [`attrs`](#atributos-html-personalizados).
+
+Ve [“Personalización de enlaces autogenerados”](#personalización-de-enlaces-autogenerados-en-el-frontmatter) para más detalles sobre cómo controlar la apariencia de la barra lateral desde el frontmatter de la página.
+
+#### Atajo para enlaces internos
+
+Los enlaces internos también se pueden especificar proporcionando solo un string para el slug de la página como un atajo.
+
+Por ejemplo, la siguiente configuración es equivalente a la configuración anterior, que usaba `slug`:
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### Otros enlaces
+
+Agrega un enlace a una página externa o un enlace que no sea de documentación usando un objeto con las propiedades `label` y `link`.
 
 ```js "label:" "link:"
 starlight({
