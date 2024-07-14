@@ -16,7 +16,7 @@ test.beforeAll(async () => {
 
 	const repoPath = testRepo.getFilePath('/');
 
-	const sourcePath = new URL('./fixtures/basics/', import.meta.url);
+	const sourcePath = new URL('./fixtures/git/', import.meta.url);
 	await cp(sourcePath, repoPath, { recursive: true });
 
 	testRepo.writeFileTree({

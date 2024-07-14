@@ -9,6 +9,15 @@ process.env.ASTRO_TELEMETRY_DISABLED = 'true';
 // Setup a test environment that will build and start a preview server for a given fixture path and
 // provide a Starlight Playwright fixture accessible from within all tests.
 export function testFactory(fixturePath: string) {
+	const fixturePathUrl = new URL(fixturePath, import.meta.url);
+	// Combining absolute paths with a `file:` base URL on Windows results
+	// in a URL with the drive letter as the protocol.
+	// In that case, use the URL as is instead of interpreting the `file:` protocol.
+	const root =
+		fixturePathUrl.protocol === 'file:'
+			? fileURLToPath(new URL(fixturePath, import.meta.url))
+			: fixturePathUrl.toString();
+
 	async function makeServer(
 		options: {
 			mode?: 'build' | 'dev';
@@ -16,7 +25,6 @@ export function testFactory(fixturePath: string) {
 		} = {}
 	): Promise<Server> {
 		const { mode, config } = options;
-		const root = fileURLToPath(new URL(fixturePath, import.meta.url));
 		if (mode === 'dev') {
 			return await dev({ logLevel: 'error', root, ...config });
 		} else {
