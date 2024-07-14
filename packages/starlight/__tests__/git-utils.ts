@@ -16,6 +16,7 @@ export function makeTestRepo(onPath?: string) {
 		if (result.status !== 0) {
 			console.log(result.stdout);
 			console.error(result.stderr);
+			console.error(result.error);
 			throw new Error(`Failed to execute test repository command: '${command} ${args.join(' ')}'`);
 		}
 	}
