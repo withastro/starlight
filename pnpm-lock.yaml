@@ -246,6 +246,15 @@ importers:
         specifier: ^4.10.2
         version: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
 
+  packages/starlight/__e2e__/fixtures/git:
+    dependencies:
+      '@astrojs/starlight':
+        specifier: workspace:*
+        version: link:../../..
+      astro:
+        specifier: ^4.10.2
+        version: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
+
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
       '@astrojs/node':
