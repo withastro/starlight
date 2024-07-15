@@ -1,53 +1,24 @@
-import { makeTestRepo, makeTestRepoDir } from '../__tests__/git-utils';
+import { makeTestRepo } from '../__tests__/git-utils';
 import { expect, testFactory } from './test-utils';
-import { cp, readFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
+import { rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
-const require = createRequire(import.meta.url);
-const astroPkg = JSON.parse(await readFile(require.resolve('astro/package.json'), 'utf8'));
+const repoPath = fileURLToPath(new URL('./fixtures/git/', import.meta.url));
 
-const testRepoPath = makeTestRepoDir();
-
-const test = testFactory(testRepoPath);
+const test = testFactory(repoPath);
 
 test.beforeAll(async () => {
-	// Setup separate
-	const testRepo = makeTestRepo(testRepoPath);
+	// Clears existing nested repo to account for previously interrupted tests.
+	await rm(join(repoPath, '.git'), { recursive: true, force: true });
+	const testRepo = makeTestRepo(repoPath);
 
-	const repoPath = testRepo.getFilePath('/');
-
-	const sourcePath = new URL('./fixtures/git/', import.meta.url);
-	await cp(sourcePath, repoPath, { recursive: true });
-
-	testRepo.writeFileTree({
-		'package.json': JSON.stringify({
-			name: 'test-docs',
-			private: true,
-			type: 'module',
-			version: '0.0.1',
-			dependencies: {
-				astro: astroPkg.version,
-				'@astrojs/starlight': new URL('../', import.meta.url).toString(),
-			},
-		}),
-		'.gitignore': 'node_modules\n.astro',
-		src: {
-			content: {
-				docs: {
-					'index.md': `---
-title: Home Page
-lastUpdated: true
----
-
-Home page content
-`,
-				},
-			},
-		},
-	});
-
-	testRepo.runInRepo('pnpm', ['install']);
 	testRepo.commitAllChanges('Add home page', '2024-02-03');
+});
+
+test.afterAll(async () => {
+	// Remove nested repo after test runs
+	await rm(join(repoPath, '.git'), { recursive: true, force: true });
 });
 
 test('include last updated date from git in the footer', async ({ page, makeServer }) => {

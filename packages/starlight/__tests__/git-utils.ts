@@ -3,15 +3,20 @@ import { mkdtempSync, mkdirSync, writeFileSync, realpathSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
-export function makeTestRepoDir() {
-	return realpathSync(mkdtempSync(join(tmpdir(), 'starlight-test-git-')));
-}
-
 export function makeTestRepo(onPath?: string) {
 	const repoPath = realpathSync(onPath ?? mkdtempSync(join(tmpdir(), 'starlight-test-git-')));
 
 	function runInRepo(command: string, args: string[], env: NodeJS.ProcessEnv = process.env) {
-		const result = spawnSync(command, args, { cwd: repoPath, env, encoding: 'utf8' });
+		// Format arguments to be shell-friendly for Windows.
+		const formattedArgs = process.platform === 'win32' ? args.map((arg) => `"${arg}"`) : args;
+		const result = spawnSync(command, formattedArgs, {
+			cwd: repoPath,
+			env,
+			encoding: 'utf8',
+			// Run commands using shell on Windows to ensure proper path resolution.
+			shell: process.platform === 'win32',
+			windowsVerbatimArguments: true,
+		});
 
 		if (result.status !== 0) {
 			console.log(result.stdout);
