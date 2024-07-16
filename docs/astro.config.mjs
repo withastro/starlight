@@ -25,7 +25,7 @@ export const locales = {
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
 
 const site = NETLIFY_PREVIEW_SITE || 'https://starlight.astro.build/';
-const ogUrl = new URL('og.jpg?v=1', site);
+const ogUrl = new URL('og.jpg?v=1', site).href;
 
 export default defineConfig({
 	site,
