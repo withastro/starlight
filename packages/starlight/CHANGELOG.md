@@ -1,5 +1,20 @@
 # @astrojs/starlight
 
+## 0.25.1
+
+### Patch Changes
+
+- [#2122](https://github.com/withastro/starlight/pull/2122) [`359a642`](https://github.com/withastro/starlight/commit/359a64219288795936f18fd50fb5f195c412a748) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an i18n configuration issue for multilingual sites when using Astro’s `i18n` config with `prefixDefaultLocale` set to `false`.
+
+- [#2107](https://github.com/withastro/starlight/pull/2107) [`61e223b`](https://github.com/withastro/starlight/commit/61e223b153cb10958f3fbaa77acf6ac07d982944) Thanks [@sanabel-al-firdaws](https://github.com/sanabel-al-firdaws)! - Updates Arabic UI translations
+
+- [#2105](https://github.com/withastro/starlight/pull/2105) [`81f8a2c`](https://github.com/withastro/starlight/commit/81f8a2c9580ec07dd17e2f596b9b1b50fae8237a) Thanks [@delucis](https://github.com/delucis)! - Fixes an edge case in custom pagination link processing
+
+  Custom link values for `prev`/`next` in page frontmatter are now always used as authored.
+  Previously this was not the case in some edge cases such as for the first and final pages in the sidebar.
+
+- [#2119](https://github.com/withastro/starlight/pull/2119) [`464685a`](https://github.com/withastro/starlight/commit/464685a3ce33e7ccc8d1d7365935732c87ba95e9) Thanks [@evadecker](https://github.com/evadecker)! - Improves styling of `<hr>`, `<blockquote>`, and `<code>` within asides
+
 ## 0.25.0
 
 ### Minor Changes
