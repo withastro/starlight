@@ -86,8 +86,8 @@ La siguiente barra lateral se generará automáticamente:
 
 <SidebarPreview
 	config={[
-		{ label: 'Andromeda', link: '' },
-		{ label: 'Orion', link: '' },
+		{ label: 'Andrómeda', link: '' },
+		{ label: 'Orión', link: '' },
 	]}
 />
 
@@ -153,9 +153,9 @@ starlight({
 				{
 					label: 'Estacional',
 					items: [
-						'constellations/andrómeda',
-						'constellations/orión',
-						'constellations/ursa-menor',						
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',						
 					],
 				},
 			],
@@ -355,7 +355,7 @@ Por defecto, la insignia usará el color de acento de tu sitio. Para usar un est
 
 Opcionalmente, puedes crear un estilo de insignia personalizado estableciendo la propiedad `class` en un nombre de clase CSS.
 
-```js {10}
+```js {9}
 starlight({
 	sidebar: [
 		{
@@ -531,8 +531,9 @@ starlight({
 			collapsed: true,
 			items: [
 				{ label: 'Andrómeda', link: '/constellations/andromeda/' },
-				{ label: 'Orion', link: '/constellations/orion/' },
+				{ label: 'Orión', link: '/constellations/orion/' },
 			],
+			items: ['constellations/andromeda', 'constellations/orion'],
 		},
 	],
 });
