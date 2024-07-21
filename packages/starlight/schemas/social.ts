@@ -32,6 +32,7 @@ export const socialLinks = [
 	'blueSky',
 	'discourse',
 	'zulip',
+	'pinterest',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -79,6 +80,7 @@ export const SocialLinksSchema = () =>
 					blueSky: 'BlueSky',
 					discourse: 'Discourse',
 					zulip: 'Zulip',
+					pinterest: 'Pinterest',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
