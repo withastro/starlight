@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Allow asides titles to contain markdown formatting
+Adds support for markdown formatting in aside titles
