@@ -18,7 +18,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { charset: 'utf-8' } },
 	{
 		tag: 'meta',
-		attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+		attrs: { name: 'viewport', content: 'width=device-width' },
 	},
 	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${siteTitle}` },
 	{ tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
@@ -36,6 +36,11 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 			type: config.favicon.type,
 		},
 	},
+	// Twitter Tags
+	{
+		tag: 'meta',
+		attrs: { name: 'twitter:card', content: 'summary_large_image' },
+	},
 	// OpenGraph Tags
 	{ tag: 'meta', attrs: { property: 'og:title', content: data.title } },
 	{ tag: 'meta', attrs: { property: 'og:type', content: 'article' } },
@@ -43,13 +48,6 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
 	{ tag: 'meta', attrs: { property: 'og:description', content: description } },
 	{ tag: 'meta', attrs: { property: 'og:site_name', content: siteTitle } },
-	// Twitter Tags
-	{
-		tag: 'meta',
-		attrs: { name: 'twitter:card', content: 'summary_large_image' },
-	},
-	{ tag: 'meta', attrs: { name: 'twitter:title', content: data.title } },
-	{ tag: 'meta', attrs: { name: 'twitter:description', content: description } },
 ];
 
 if (description)
