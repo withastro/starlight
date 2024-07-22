@@ -92,17 +92,18 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 | Framework                   | CO₂ per page visit |
 | --------------------------- | ------------------ |
 | [Starlight][sl-carbon]      | 0.01g              |
-| [VitePress][vp-carbon]      | 0.05g              |
-| [Docus][dc-carbon]          | 0.05g              |
-| [Sphinx][sx-carbon]         | 0.07g              |
-| [MkDocs][mk-carbon]         | 0.10g              |
+| [Read the Docs][rtd-carbon] | 0.05g              |
+| [Sphinx][sx-carbon]         | 0.06g              |
+| [VitePress][vp-carbon]      | 0.07g              |
+| [Docus][dc-carbon]          | 0.09g              |
+| [docsify][dy-carbon]        | 0.10g              |
 | [Nextra][nx-carbon]         | 0.11g              |
-| [docsify][dy-carbon]        | 0.11g              |
-| [Docusaurus][ds-carbon]     | 0.24g              |
-| [Read the Docs][rtd-carbon] | 0.24g              |
-| [GitBook][gb-carbon]        | 0.71g              |
+| [MkDocs][mk-carbon]         | 0.19g              |
+| [Docusaurus][ds-carbon]     | 0.21g              |
+| [GitBook][gb-carbon]        | 0.43g              |
+| [Mintlify][mt-carbon]       | 1.22g              |
 
-<small>Data collected on 14 May 2023. Click a link to see up-to-date figures.</small>
+<small>Data collected on 22 July 2024. Click a link to see up-to-date figures.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -114,6 +115,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## More resources
 
