@@ -89,19 +89,19 @@ Choosing a host that uses renewable energy will mean lower carbon emissions for 
 Curious how other docs frameworks compare?
 These tests with the [Website Carbon Calculator][wcc] compare similar pages built with different tools.
 
-| Framework                   | CO₂ per page visit |
-| --------------------------- | ------------------ |
-| [Starlight][sl-carbon]      | 0.01g              |
-| [Read the Docs][rtd-carbon] | 0.05g              |
-| [Sphinx][sx-carbon]         | 0.06g              |
-| [VitePress][vp-carbon]      | 0.07g              |
-| [Docus][dc-carbon]          | 0.09g              |
-| [docsify][dy-carbon]        | 0.10g              |
-| [Nextra][nx-carbon]         | 0.11g              |
-| [MkDocs][mk-carbon]         | 0.19g              |
-| [Docusaurus][ds-carbon]     | 0.21g              |
-| [GitBook][gb-carbon]        | 0.43g              |
-| [Mintlify][mt-carbon]       | 1.22g              |
+| Framework                   | CO₂ per page visit | Rating |
+| --------------------------- | ------------------ | :----: |
+| [Starlight][sl-carbon]      | 0.01g              |   A+   |
+| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
+| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
+| [VitePress][vp-carbon]      | 0.07g              |   A+   |
+| [Docus][dc-carbon]          | 0.09g              |   A+   |
+| [docsify][dy-carbon]        | 0.10g              |   A    |
+| [Nextra][nx-carbon]         | 0.11g              |   A    |
+| [MkDocs][mk-carbon]         | 0.19g              |   B    |
+| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
+| [GitBook][gb-carbon]        | 0.43g              |   C    |
+| [Mintlify][mt-carbon]       | 1.22g              |   F    |
 
 <small>Data collected on 22 July 2024. Click a link to see up-to-date figures.</small>
 
