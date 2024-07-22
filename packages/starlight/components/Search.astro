@@ -20,17 +20,17 @@ const pagefindTranslations = {
 	data-translations={JSON.stringify(pagefindTranslations)}
 	data-strip-trailing-slash={project.trailingSlash === 'never'}
 >
-	<button data-open-modal disabled>
-		{
-			/* The span is `aria-hidden` because it is not shown on small screens. Instead, the icon label is used for accessibility purposes. */
-		}
-		<Icon name="magnifier" label={labels['search.label']} />
+	<button
+		data-open-modal
+		disabled
+		aria-label={labels['search.label']}
+		aria-keyshortcuts="Control+K"
+	>
+		<Icon name="magnifier" />
 		<span class="sl-hidden md:sl-block" aria-hidden="true">{labels['search.label']}</span>
-		<Icon
-			name="forward-slash"
-			class="sl-hidden md:sl-block"
-			label={labels['search.shortcutLabel']}
-		/>
+		<kbd class="sl-hidden md:sl-flex" style="display: none;">
+			<kbd>{labels['search.ctrlKey']}</kbd><kbd>K</kbd>
+		</kbd>
 	</button>
 
 	<dialog style="padding:0" aria-label={labels['search.label']}>
@@ -55,6 +55,27 @@ const pagefindTranslations = {
 		</div>
 	</dialog>
 </site-search>
+
+{
+	/**
+	 * This is intentionally inlined to avoid briefly showing an invalid shortcut.
+	 * Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
+	 * user agent is spoofed by some browsers when opening the devtools.
+	 */
+}
+<script is:inline>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script>
 
 <script>
 	class SiteSearch extends HTMLElement {
@@ -96,17 +117,10 @@ const pagefindTranslations = {
 				window.removeEventListener('click', onClick);
 			});
 
-			// Listen for `/`, `ctrl + k`, and `cmd + k` keyboard shortcuts.
+			// Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
 			window.addEventListener('keydown', (e) => {
-				const isInput =
-					document.activeElement instanceof HTMLElement &&
-					(['input', 'select', 'textarea'].includes(document.activeElement.tagName.toLowerCase()) ||
-						document.activeElement.isContentEditable);
 				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
 					dialog.open ? closeModal() : openModal();
-					e.preventDefault();
-				} else if (e.key === '/' && !dialog.open && !isInput) {
-					openModal();
 					e.preventDefault();
 				}
 			});
@@ -169,7 +183,7 @@ const pagefindTranslations = {
 			border: 1px solid var(--sl-color-gray-5);
 			border-radius: 0.5rem;
 			padding-inline-start: 0.75rem;
-			padding-inline-end: 1rem;
+			padding-inline-end: 0.5rem;
 			background-color: var(--sl-color-black);
 			color: var(--sl-color-gray-2);
 			font-size: var(--sl-text-sm);
@@ -184,6 +198,18 @@ const pagefindTranslations = {
 		button[data-open-modal] > :last-child {
 			margin-inline-start: auto;
 		}
+	}
+
+	button > kbd {
+		border-radius: 0.25rem;
+		font-size: var(--sl-text-2xs);
+		gap: 0.25em;
+		padding-inline: 0.375rem;
+		background-color: var(--sl-color-gray-6);
+	}
+
+	kbd {
+		font-family: var(--__sl-font);
 	}
 
 	dialog {

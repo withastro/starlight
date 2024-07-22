@@ -58,6 +58,7 @@
 		0px 4px 2px hsla(0, 0%, 0%, 0.25);
 
 	/* Text size and line height */
+	--sl-text-2xs: 0.75rem; /* 12px */
 	--sl-text-xs: 0.8125rem; /* 13px */
 	--sl-text-sm: 0.875rem; /* 14px */
 	--sl-text-base: 1rem; /* 16px */

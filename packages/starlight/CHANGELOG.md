@@ -1,5 +1,65 @@
 # @astrojs/starlight
 
+## 0.25.1
+
+### Patch Changes
+
+- [#2122](https://github.com/withastro/starlight/pull/2122) [`359a642`](https://github.com/withastro/starlight/commit/359a64219288795936f18fd50fb5f195c412a748) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an i18n configuration issue for multilingual sites when using Astro’s `i18n` config with `prefixDefaultLocale` set to `false`.
+
+- [#2107](https://github.com/withastro/starlight/pull/2107) [`61e223b`](https://github.com/withastro/starlight/commit/61e223b153cb10958f3fbaa77acf6ac07d982944) Thanks [@sanabel-al-firdaws](https://github.com/sanabel-al-firdaws)! - Updates Arabic UI translations
+
+- [#2105](https://github.com/withastro/starlight/pull/2105) [`81f8a2c`](https://github.com/withastro/starlight/commit/81f8a2c9580ec07dd17e2f596b9b1b50fae8237a) Thanks [@delucis](https://github.com/delucis)! - Fixes an edge case in custom pagination link processing
+
+  Custom link values for `prev`/`next` in page frontmatter are now always used as authored.
+  Previously this was not the case in some edge cases such as for the first and final pages in the sidebar.
+
+- [#2119](https://github.com/withastro/starlight/pull/2119) [`464685a`](https://github.com/withastro/starlight/commit/464685a3ce33e7ccc8d1d7365935732c87ba95e9) Thanks [@evadecker](https://github.com/evadecker)! - Improves styling of `<hr>`, `<blockquote>`, and `<code>` within asides
+
+## 0.25.0
+
+### Minor Changes
+
+- [#2025](https://github.com/withastro/starlight/pull/2025) [`47f32c1`](https://github.com/withastro/starlight/commit/47f32c196c5d840a6a45799ddf123d17c77274b0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes the `/` search shortcut for [accessibility reasons](https://www.w3.org/WAI/WCAG21/Understanding/character-key-shortcuts.html).
+
+  ⚠️ **Potentially breaking change:** The `search.shortcutLabel` UI string has been removed. If you were using this string in your custom UI, you will need to update your code.
+
+- [#2064](https://github.com/withastro/starlight/pull/2064) [`c5b47cb`](https://github.com/withastro/starlight/commit/c5b47cbe1242f0b29b9212db72fe26590ab57d88) Thanks [@SnowDingo](https://github.com/SnowDingo)! - Improves styling of Markdown tables to work better in different contexts, including against different background colours like when used in asides.
+
+- [#2031](https://github.com/withastro/starlight/pull/2031) [`2bab648`](https://github.com/withastro/starlight/commit/2bab648be9ddc6bfe05562650b773f5158a9ed42) Thanks [@delucis](https://github.com/delucis)! - Makes sidebar entry parsing stricter in Starlight config
+
+  **⚠️ Potentially breaking change:** Previously Starlight would accept a sidebar entry that matched one of its expected shapes, even if it included additional properties. For example, including both `link` and `items` was considered valid, with `items` being ignored. Now, it is an error to include more than one of `link`, `items`, or `autogenerate` in a sidebar entry.
+
+  If you see errors after updating, look for sidebar entries in the Starlight configuration in `astro.config.mjs` that include too many keys and remove the one that was previously ignored.
+
+- [#1874](https://github.com/withastro/starlight/pull/1874) [`eeba06e`](https://github.com/withastro/starlight/commit/eeba06ea7df962e8f0520e145d28b8c17cd32c18) Thanks [@lorenzolewis](https://github.com/lorenzolewis)! - Adds a new syntax for specifying sidebar link items for internal links
+
+  You can now specify an internal page using only its slug, either as a string, or as an object with a `slug` property:
+
+  ```js
+  starlight({
+    title: 'Docs with easier sidebars',
+    sidebar: ['getting-started', { slug: 'guides/installation' }],
+  });
+  ```
+
+  Starlight will use the linked page’s frontmatter to configure the sidebar link.
+
+### Patch Changes
+
+- [#2081](https://github.com/withastro/starlight/pull/2081) [`f0181d2`](https://github.com/withastro/starlight/commit/f0181d2689248a46ff3eb6fc604bfcd95d4cb1aa) Thanks [@andrii-bodnar](https://github.com/andrii-bodnar)! - Updates the Ukrainian UI translations
+
+## 0.24.5
+
+### Patch Changes
+
+- [#2062](https://github.com/withastro/starlight/pull/2062) [`5ac0ac6`](https://github.com/withastro/starlight/commit/5ac0ac6614e3c45d810a1594a2009d3febfa2793) Thanks [@evadecker](https://github.com/evadecker)! - Increase theme and language select inline padding
+
+- [#2056](https://github.com/withastro/starlight/pull/2056) [`87e9ad0`](https://github.com/withastro/starlight/commit/87e9ad029c9730fca8df66e35828b57cd0872a61) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing remark plugins injected by Starlight plugins to handle Markdown text and leaf directives.
+
+- [#2063](https://github.com/withastro/starlight/pull/2063) [`3ee1a94`](https://github.com/withastro/starlight/commit/3ee1a9404db25f5776a3c1ecd248614f64db46ae) Thanks [@delucis](https://github.com/delucis)! - Translate `fileTree.directory` and `aside.*` UI string into Norwegian (Bokmål).
+
+- [#2054](https://github.com/withastro/starlight/pull/2054) [`dbfd3ee`](https://github.com/withastro/starlight/commit/dbfd3eeccacb5f5b77d75213dac3b30dc0be6deb) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue when using the `<StarlightPage>` component in a custom page with a user-defined `srcDir` configuration.
+
 ## 0.24.4
 
 ### Patch Changes
