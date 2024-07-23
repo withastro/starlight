@@ -58,10 +58,6 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: { property: 'og:image', content: ogUrl },
 				},
-				{
-					tag: 'meta',
-					attrs: { property: 'twitter:image', content: ogUrl },
-				},
 			],
 			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
 			locales,
