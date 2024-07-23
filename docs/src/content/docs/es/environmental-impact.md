@@ -73,7 +73,7 @@ Elegir un proveedor de alojamiento que utilice energía renovable significa tene
 ¿Curioso por saber cómo se comparan otros frameworks de documentación?
 Estas pruebas con el [Calculadora de Carbono de Sitios Web][wcc] comparan páginas similares construidas con diferentes herramientas.
 
-| Framework                   | CO₂ per page visit | Rating |
+| Framework                   | CO₂ por visita a la página | Calificación |
 | --------------------------- | ------------------ | :----: |
 | [Starlight][sl-carbon]      | 0.01g              |   A+   |
 | [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
