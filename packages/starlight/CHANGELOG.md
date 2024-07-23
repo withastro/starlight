@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.25.2
+
+### Patch Changes
+
+- [#2126](https://github.com/withastro/starlight/pull/2126) [`ada51ee`](https://github.com/withastro/starlight/commit/ada51ee1500d07c1819059f57e97dc6e97b4d2ba) Thanks [@essential-randomness](https://github.com/essential-randomness)! - Adds support for markdown formatting in aside titles
+
+- [#2135](https://github.com/withastro/starlight/pull/2135) [`9bbb969`](https://github.com/withastro/starlight/commit/9bbb9690616f79a80f3d286082b2500457bbcae9) Thanks [@oluwatobiss](https://github.com/oluwatobiss)! - Adds Pinterest social icon
+
 ## 0.25.1
 
 ### Patch Changes
