@@ -61,14 +61,6 @@ const { html } = processSteps(content);
 		width: var(--guide-width);
 		background-color: var(--sl-color-hairline-light);
 	}
-	.sl-steps > li:last-of-type::after {
-		background: linear-gradient(
-			to bottom,
-			var(--sl-color-hairline-light) 0,
-			var(--sl-color-hairline-light) calc(100% - 5rem),
-			var(--sl-color-bg) 100%
-		);
-	}
 
 	/* Adjust first item inside a step so that it aligns vertically with the number
 			even if using a larger font size (e.g. a heading) */
