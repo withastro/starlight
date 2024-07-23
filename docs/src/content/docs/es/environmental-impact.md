@@ -74,18 +74,18 @@ Elegir un proveedor de alojamiento que utilice energía renovable significa tene
 Estas pruebas con el [Calculadora de Carbono de Sitios Web][wcc] comparan páginas similares construidas con diferentes herramientas.
 
 | Framework                   | CO₂ por visita a la página | Calificación |
-| --------------------------- | ------------------ | :----: |
-| [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
-| [VitePress][vp-carbon]      | 0.07g              |   A+   |
-| [Docus][dc-carbon]          | 0.09g              |   A+   |
-| [docsify][dy-carbon]        | 0.10g              |   A    |
-| [Nextra][nx-carbon]         | 0.11g              |   A    |
-| [MkDocs][mk-carbon]         | 0.19g              |   B    |
-| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
-| [GitBook][gb-carbon]        | 0.43g              |   C    |
-| [Mintlify][mt-carbon]       | 1.22g              |   F    |
+| --------------------------- | -------------------------- | :----------: |
+| [Starlight][sl-carbon]      | 0.01g                      |      A+      |
+| [Read the Docs][rtd-carbon] | 0.05g                      |      A+      |
+| [Sphinx][sx-carbon]         | 0.06g                      |      A+      |
+| [VitePress][vp-carbon]      | 0.07g                      |      A+      |
+| [Docus][dc-carbon]          | 0.09g                      |      A+      |
+| [docsify][dy-carbon]        | 0.10g                      |      A       |
+| [Nextra][nx-carbon]         | 0.11g                      |      A       |
+| [MkDocs][mk-carbon]         | 0.19g                      |      B       |
+| [Docusaurus][ds-carbon]     | 0.21g                      |      B       |
+| [GitBook][gb-carbon]        | 0.43g                      |      C       |
+| [Mintlify][mt-carbon]       | 1.22g                      |      F       |
 
 <small>Datos recopilados el 22 de Julio de 2024. Haz clic en un enlace para ver cifras actualizadas.</small>
 
