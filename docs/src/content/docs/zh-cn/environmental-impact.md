@@ -89,19 +89,19 @@ Cache-Control: public, max-age=604800, immutable
 好奇和其他文档框架相比如何？
 下面使用 [Website Carbon Calculator][wcc] 的测试比较了使用不同工具构建的类似页面。
 
-| 框架                         | 每页访问量产生的 CO₂  |  评级   |
-| --------------------------- | ------------------ | :----: |
-| [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
-| [VitePress][vp-carbon]      | 0.07g              |   A+   |
-| [Docus][dc-carbon]          | 0.09g              |   A+   |
-| [docsify][dy-carbon]        | 0.10g              |   A    |
-| [Nextra][nx-carbon]         | 0.11g              |   A    |
-| [MkDocs][mk-carbon]         | 0.19g              |   B    |
-| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
-| [GitBook][gb-carbon]        | 0.43g              |   C    |
-| [Mintlify][mt-carbon]       | 1.22g              |   F    |
+| 框架                        | 每页访问量产生的 CO₂ | 评级 |
+| --------------------------- | -------------------- | :--: |
+| [Starlight][sl-carbon]      | 0.01g                |  A+  |
+| [Read the Docs][rtd-carbon] | 0.05g                |  A+  |
+| [Sphinx][sx-carbon]         | 0.06g                |  A+  |
+| [VitePress][vp-carbon]      | 0.07g                |  A+  |
+| [Docus][dc-carbon]          | 0.09g                |  A+  |
+| [docsify][dy-carbon]        | 0.10g                |  A   |
+| [Nextra][nx-carbon]         | 0.11g                |  A   |
+| [MkDocs][mk-carbon]         | 0.19g                |  B   |
+| [Docusaurus][ds-carbon]     | 0.21g                |  B   |
+| [GitBook][gb-carbon]        | 0.43g                |  C   |
+| [Mintlify][mt-carbon]       | 1.22g                |  F   |
 
 <small>数据收集于 2024 年 7 月 22 日。点击链接查看最新数据。</small>
 
