@@ -89,7 +89,7 @@ Cache-Control: public, max-age=604800, immutable
 好奇和其他文档框架相比如何？
 下面使用 [Website Carbon Calculator][wcc] 的测试比较了使用不同工具构建的类似页面。
 
-| 框架                         | 每页访问量产生的CO₂   |  评级   |
+| 框架                         | 每页访问量产生的 CO₂  |  评级   |
 | --------------------------- | ------------------ | :----: |
 | [Starlight][sl-carbon]      | 0.01g              |   A+   |
 | [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
