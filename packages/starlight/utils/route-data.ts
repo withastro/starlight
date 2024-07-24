@@ -4,7 +4,7 @@ import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
 import { getNewestCommitDate } from './git';
-import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
+import { getPrevNextLinks, getSidebar, getSidebarHash, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
 import { localizedId } from './slugs';
@@ -24,6 +24,8 @@ export interface StarlightRouteData extends Route {
 	headings: MarkdownHeading[];
 	/** Site navigation sidebar entries for this page. */
 	sidebar: SidebarEntry[];
+	/** Hash for quickly identifying if two sidebars have the same structure. */
+	sidebarHash: string;
 	/** Whether or not the sidebar should be displayed on this page. */
 	hasSidebar: boolean;
 	/** Links to the previous and next page in the sidebar if enabled. */
@@ -53,6 +55,7 @@ export function generateRouteData({
 		siteTitle,
 		siteTitleHref: getSiteTitleHref(locale),
 		sidebar,
+		sidebarHash: getSidebarHash(sidebar),
 		hasSidebar: entry.data.template !== 'splash',
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		toc: getToC(props),
