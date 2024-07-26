@@ -42,5 +42,10 @@
       "limit": "14.5 kB",
       "gzip": true
     }
-  ]
+  ],
+  "pnpm": {
+    "patchedDependencies": {
+      "@expressive-code/core@0.35.3": "patches/@expressive-code__core@0.35.3.patch"
+    }
+  }
 }

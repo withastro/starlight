@@ -1,0 +1,13 @@
+diff --git a/dist/index.js b/dist/index.js
+index e76155763991b1aedc9b45f2ea36b16d84bc7d00..8cc3d2d7d540df9f6071291cfc7012fda857cefc 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -4161,7 +4161,7 @@ function resolveStyleVariants({
+ }
+ 
+ // src/internal/tabindex-js-module.min.ts
+-var tabindex_js_module_min_default = 'try{(()=>{function i(e){if(!e)return;let r=e.getAttribute("tabindex")!==null,t=e.scrollWidth>e.clientWidth;t&&!r?e.setAttribute("tabindex","0"):!t&&r&&e.removeAttribute("tabindex")}function a(e){let r=new Set,t;return new ResizeObserver(u=>{u.forEach(o=>r.add(o.target)),t&&clearTimeout(t),t=setTimeout(()=>{t=void 0,r.forEach(o=>e(o)),r.clear()},250)})}function s(e,r){e.querySelectorAll?.(".expressive-code pre > code").forEach(t=>{let n=t.parentElement;n&&(i(n),r.observe(n))})}var d=a(i);s(document,d);var c=new MutationObserver(e=>e.forEach(r=>r.addedNodes.forEach(t=>{s(t,d)})));c.observe(document.body,{childList:!0,subtree:!0});document.addEventListener("astro:page-load",()=>{s(document,d)});})();}catch(e){console.error("[EC] tabindex-js-module failed:",e)}';
++var tabindex_js_module_min_default = 'try{(()=>{function i(e){if(!e)return;console.log("checking if tabindex is needed for ", e);let r=e.getAttribute("tabindex")!==null,t=e.scrollWidth>e.clientWidth;t&&!r?e.setAttribute("tabindex","0"):!t&&r&&e.removeAttribute("tabindex")}function a(e){let r=new Set,t;return new ResizeObserver(u=>{u.forEach(o=>r.add(o.target)),t&&cancelIdleCallback(t),t=requestIdleCallback(()=>{t=void 0,r.forEach(o=>e(o)),r.clear()})})}function s(e,r){e.querySelectorAll?.(".expressive-code pre > code").forEach(t=>{let n=t.parentElement;n&&(requestIdleCallback(()=>i(n)),r.observe(n))})}var d=a(i);s(document,d);var c=new MutationObserver(e=>e.forEach(r=>r.addedNodes.forEach(t=>{s(t,d)})));c.observe(document.body,{childList:!0,subtree:!0});document.addEventListener("astro:page-load",()=>{s(document,d)});})();}catch(e){console.error("[EC] tabindex-js-module failed:",e)}';
+ 
+ // src/internal/core-plugins.ts
+ var corePlugins = [
