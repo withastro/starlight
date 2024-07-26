@@ -72,9 +72,9 @@ export class StarlightTOC extends HTMLElement {
 		const toObserve = document.querySelectorAll('main [id], main [id] ~ *, main .content > *');
 
 		let observer: IntersectionObserver | undefined;
-		const observe = () => {
-			observer = new IntersectionObserver(setCurrent, { rootMargin: this.getRootMargin() });
+		const observe = async () => {
 			if (observer) return;
+			observer = new IntersectionObserver(setCurrent, { rootMargin: await this.getRootMargin() });
 			toObserve.forEach((h) => observer!.observe(h));
 		};
 		observe();
@@ -89,17 +89,38 @@ export class StarlightTOC extends HTMLElement {
 		});
 	}
 
-	private getRootMargin(): `-${number}px 0% ${number}px` {
-		const navBarHeight = document.querySelector('header')?.getBoundingClientRect().height || 0;
-		// `<summary>` only exists in mobile ToC, so will fall back to 0 in large viewport component.
-		const mobileTocHeight = this.querySelector('summary')?.getBoundingClientRect().height || 0;
+	private async getRootMargin(): Promise<`-${number}px 0% ${number}px`> {
+		const [navBar, mobileToC] = await this.getNavHeights();
 		/** Start intersections at nav height + 2rem padding. */
-		const top = navBarHeight + mobileTocHeight + 32;
+		const top = navBar + mobileToC + 32;
 		/** End intersections `53px` later. This is slightly more than the maximum `margin-top` in Markdown content. */
 		const bottom = top + 53;
 		const height = document.documentElement.clientHeight;
 		return `-${top}px 0% ${bottom - height}px`;
 	}
+
+	/**
+	 * Asynchronously get the height of Starlight’s navigation elements.
+	 * By avoiding a direct `getBoundingClientRect()` call, this code doesn’t force an immediate style reflow.
+	 */
+	private getNavHeights(): Promise<NavHeights> {
+		return new Promise((resolve) => {
+			const heights: NavHeights = [0, 0];
+			const observer = new IntersectionObserver((entries) => {
+				for (const entry of entries) {
+					const key = ({ HEADER: 0, SUMMARY: 1 } as const)[entry.target.tagName];
+					if (key !== undefined) heights[key] = entry.boundingClientRect.height;
+				}
+				observer.disconnect();
+				resolve(heights);
+			});
+			const elements = [document.querySelector('header'), this.querySelector('summary')].filter(
+				(el): el is HTMLElement => !!el
+			);
+			for (const el of elements) observer.observe(el);
+		});
+	}
 }
+type NavHeights = [navBar: number, mobileToC: number];
 
 customElements.define('starlight-toc', StarlightTOC);
