@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@expressive-code/core@0.35.3':
-    hash: i74jz37aez3jkdc67hpgke7tpy
+    hash: a4jdmznzpper5ud4lhm4x4pe5e
     path: patches/@expressive-code__core@0.35.3.patch
 
 importers:
@@ -1472,7 +1472,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@expressive-code/core@0.35.3(patch_hash=i74jz37aez3jkdc67hpgke7tpy):
+  /@expressive-code/core@0.35.3(patch_hash=a4jdmznzpper5ud4lhm4x4pe5e):
     resolution: {integrity: sha512-SYamcarAjufYhbuK/kfvJSvAXLsfnM7DKc78R7Dq4B73R5bKQK2m5zR0l57tXr4yp2C5Z8lu5xZncdwWxcmPdg==}
     dependencies:
       '@ctrl/tinycolor': 4.1.0
@@ -1490,20 +1490,20 @@ packages:
   /@expressive-code/plugin-frames@0.35.3:
     resolution: {integrity: sha512-QYytMq6IsaHgTofQ5b6d+CnbxkqLdikSF2hC+IL/ZZwPYHYZoUlmjIwmJZhY4/hHqJGELrtZsyVdlt06RntgmA==}
     dependencies:
-      '@expressive-code/core': 0.35.3(patch_hash=i74jz37aez3jkdc67hpgke7tpy)
+      '@expressive-code/core': 0.35.3(patch_hash=a4jdmznzpper5ud4lhm4x4pe5e)
     dev: false
 
   /@expressive-code/plugin-shiki@0.35.3:
     resolution: {integrity: sha512-aFQBPepv0zhVXqJFAvfQ4vXYv/meJKiqmEEKSxdjAfwXllIV49PDlnGEXmbGYjR4hUQQjbfDgzAbrbfePc3YVQ==}
     dependencies:
-      '@expressive-code/core': 0.35.3(patch_hash=i74jz37aez3jkdc67hpgke7tpy)
+      '@expressive-code/core': 0.35.3(patch_hash=a4jdmznzpper5ud4lhm4x4pe5e)
       shiki: 1.6.4
     dev: false
 
   /@expressive-code/plugin-text-markers@0.35.3:
     resolution: {integrity: sha512-gDdnQrfDRXw5Y+PKHJDkpAUdf2pthYOthGcgy3JB8GOTQ3EL1h+755Ct/bGc4MR6jn+dgnQP47uHMWQaccvN6Q==}
     dependencies:
-      '@expressive-code/core': 0.35.3(patch_hash=i74jz37aez3jkdc67hpgke7tpy)
+      '@expressive-code/core': 0.35.3(patch_hash=a4jdmznzpper5ud4lhm4x4pe5e)
     dev: false
 
   /@hapi/hoek@9.3.0:
@@ -3523,7 +3523,7 @@ packages:
   /expressive-code@0.35.3:
     resolution: {integrity: sha512-XjWWUCxS4uQjPoRM98R7SNWWIYlFEaOeHm1piWv+c7coHCekuWno81thsc3g/UJ+DajNtOEsIQIAAcsBQZ8LMg==}
     dependencies:
-      '@expressive-code/core': 0.35.3(patch_hash=i74jz37aez3jkdc67hpgke7tpy)
+      '@expressive-code/core': 0.35.3(patch_hash=a4jdmznzpper5ud4lhm4x4pe5e)
       '@expressive-code/plugin-frames': 0.35.3
       '@expressive-code/plugin-shiki': 0.35.3
       '@expressive-code/plugin-text-markers': 0.35.3
