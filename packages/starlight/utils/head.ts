@@ -26,7 +26,7 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 		case 'meta':
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		case 'link':
-			return head.some(({ attrs }) => typeof attrs.rel === 'string' && ['canonical'].includes(attrs.rel))
+			return head.some(({ attrs }) => attrs.rel === 'canonical')
 		default:
 			return false;
 	}
