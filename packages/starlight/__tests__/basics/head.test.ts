@@ -14,21 +14,23 @@ describe('createHead', () => {
 	test('merges two <link rel="canonical" href="" /> tags', () => {
 		expect(
 			createHead(
-				[{ tag: 'link', attrs: { rel: 'canonical', href: "https://example.com" }, }],
-				[{ tag: 'link', attrs: { rel: 'canonical', href: "https://astro.build" }, content: '' }],
+				[{ tag: 'link', attrs: { rel: 'canonical', href: 'https://example.com' } }],
+				[{ tag: 'link', attrs: { rel: 'canonical', href: 'https://astro.build' }, content: '' }]
 			)
-		).toEqual([{ tag: 'link', attrs: { rel: 'canonical', href: "https://astro.build" }, content: '' }]);
+		).toEqual([
+			{ tag: 'link', attrs: { rel: 'canonical', href: 'https://astro.build' }, content: '' },
+		]);
 	});
 
 	test('does not merge same link tags', () => {
 		expect(
 			createHead(
-				[{ tag: 'link', attrs: { rel: 'stylesheet', href: "primary.css" }, content: '' }],
-				[{ tag: 'link', attrs: { rel: 'stylesheet', href: "secondary.css" }, content: '' }],
+				[{ tag: 'link', attrs: { rel: 'stylesheet', href: 'primary.css' }, content: '' }],
+				[{ tag: 'link', attrs: { rel: 'stylesheet', href: 'secondary.css' }, content: '' }]
 			)
 		).toEqual([
-			{ tag: 'link', attrs: { rel: 'stylesheet', href: "primary.css" }, content: '' },
-			{ tag: 'link', attrs: { rel: 'stylesheet', href: "secondary.css" }, content: '' }
+			{ tag: 'link', attrs: { rel: 'stylesheet', href: 'primary.css' }, content: '' },
+			{ tag: 'link', attrs: { rel: 'stylesheet', href: 'secondary.css' }, content: '' },
 		]);
 	});
 
