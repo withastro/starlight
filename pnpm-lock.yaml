@@ -222,7 +222,7 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(@types/node@18.16.19)(typescript@5.4.5)
 
-  packages/starlight/__e2e__/fixtures/custom-src-dir:
+  packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
       '@astrojs/starlight':
         specifier: workspace:*
