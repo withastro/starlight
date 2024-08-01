@@ -192,7 +192,7 @@
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
-    "astro-expressive-code": "^0.35.3",
+    "astro-expressive-code": "^0.35.4",
     "bcp-47": "^2.1.0",
     "hast-util-from-html": "^2.0.1",
     "hast-util-select": "^6.0.2",
