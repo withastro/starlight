@@ -71,6 +71,39 @@ Some text
 	});
 });
 
+describe('custom labels with nested markdown', () => {
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom code label', async (type) => {
+		const label = 'Custom `code` Label';
+		const labelWithoutMarkdown = 'Custom code Label';
+		const labelHtml = 'Custom <code>code</code> Label';
+		const res = await processor.render(`
+:::${type}[${label}]
+Some text
+:::
+  `);
+		expect(res.code).includes(`aria-label="${labelWithoutMarkdown}"`);
+		expect(res.code).includes(`</svg>${labelHtml}</p>`);
+	});
+});
+
+describe('custom labels with doubly-nested markdown', () => {
+	test.each(['note', 'tip', 'caution', 'danger'])(
+		'%s with custom doubly-nested label',
+		async (type) => {
+			const label = 'Custom **strong with _emphasis_** Label';
+			const labelWithoutMarkdown = 'Custom strong with emphasis Label';
+			const labelHtml = 'Custom <strong>strong with <em>emphasis</em></strong> Label';
+			const res = await processor.render(`
+:::${type}[${label}]
+Some text
+:::
+  `);
+			expect(res.code).includes(`aria-label="${labelWithoutMarkdown}"`);
+			expect(res.code).includes(`</svg>${labelHtml}</p>`);
+		}
+	);
+});
+
 test('ignores unknown directive variants', async () => {
 	const res = await processor.render(`
 :::unknown
