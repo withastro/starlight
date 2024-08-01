@@ -73,7 +73,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.25.2
+        specifier: ^0.25.3
         version: link:../../packages/starlight
       astro:
         specifier: ^4.10.2
@@ -85,7 +85,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.25.2
+        specifier: ^0.25.3
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
@@ -222,7 +222,7 @@ importers:
         specifier: ^4.10.2
         version: 4.10.2(@types/node@18.16.19)(typescript@5.4.5)
 
-  packages/starlight/__e2e__/fixtures/custom-src-dir:
+  packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
       '@astrojs/starlight':
         specifier: workspace:*
