@@ -26,8 +26,6 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Usage
 
-### Basic usage
-
 Display a tabbed interface using the `<Tabs>` and `<TabItem>` components.
 Each `<TabItem>` must have a [`label`](#label) to display to users.
 
@@ -62,7 +60,7 @@ To synchronize related tabs, add an identical `syncKey` property to each `<Tabs>
 
 <Preview>
 
-```mdx
+```mdx 'syncKey="constellations"'
 # src/content/docs/example.mdx
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -104,11 +102,11 @@ _Some exoplanets:_
 
 ### Add icons to tabs
 
-Include an icon in a tab item using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/components/icon/#all-icons) to display an icon next to the label.
+Include an icon in a tab item using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons) to display an icon next to the label.
 
 <Preview>
 
-```mdx
+```mdx /icon="\w+"/
 # src/content/docs/example.mdx
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -145,7 +143,6 @@ The `<Tabs>` component groups multiple `<TabItem>` components together and accep
 **type:** `string`
 
 A key used to keep multiple tab groups synchronized on a page.
-See the [“sync tabs”](#sync-tabs) guide for an example.
 
 ## `<TabItem>` Props
 
@@ -159,11 +156,9 @@ A set of tabs is composed of tab items, each with the following props:
 **type:** `string`
 
 A tab item must include a `label` attribute set to the text that will be displayed in the tab.
-See the [“basic usage”](#basic-usage) guide for an example.
 
 ### `icon`
 
 **type:** `string`
 
-Each tab item can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/components/icon/#all-icons) to display an icon next to the label.
-See the [“Add icons to tabs”](#add-icons-to-tabs) guide for an example.
+Each tab item can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons) to display an icon next to the label.
