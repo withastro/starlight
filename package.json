@@ -8,7 +8,7 @@
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro .",
-    "typecheck": "astro check"
+    "typecheck": "astro check --minimumSeverity warning"
   },
   "license": "MIT",
   "devDependencies": {

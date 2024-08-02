@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Saltearse al contenido",
   "search.label": "Buscar",
-  "search.shortcutLabel": "(Presiona / para buscar)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Interrumpir",
   "search.devWarning": "La búsqueda solo está disponible en las versiones de producción.  \nIntenta construir y previsualizar el sitio para probarlo localmente.",
   "themeSelect.accessibleLabel": "Seleccionar tema",

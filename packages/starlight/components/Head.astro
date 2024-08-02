@@ -48,8 +48,6 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 		tag: 'meta',
 		attrs: { name: 'twitter:card', content: 'summary_large_image' },
 	},
-	{ tag: 'meta', attrs: { name: 'twitter:title', content: data.title } },
-	{ tag: 'meta', attrs: { name: 'twitter:description', content: description } },
 ];
 
 if (description)
