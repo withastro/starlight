@@ -1,0 +1,120 @@
+---
+title: Asides
+description: Learn how to use asides in Starlight to display secondary information alongside a page’s main content.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+To display secondary information alongside a page’s main content, use the `<Aside>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Aside slot="preview" type="danger">
+	Do not give your password to anyone.
+</Aside>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Display an aside (also known as “admonitions” or “callouts”) using the `<Aside>` component.
+
+An `<Aside>` can have an optional [`type`](#type) set to one of the supported values.
+
+<Preview>
+
+````mdx
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Some content in an aside.</Aside>
+
+<Aside type="caution">Some cautionary content.</Aside>
+
+<Aside type="tip">
+
+Other content is also supported in asides.
+
+```js
+// A code snippet, for example.
+```
+
+</Aside>
+
+<Aside type="danger">Do not give your password to anyone.</Aside>
+````
+
+<Fragment slot="preview">
+
+    <Aside>Some content in an aside.</Aside>
+
+    <Aside type="caution">Some cautionary content.</Aside>
+
+    <Aside type="tip">
+
+    Other content is also supported in asides.
+
+    ```js
+    // A code snippet, for example.
+    ```
+
+    </Aside>
+
+    <Aside type="danger">Do not give your password to anyone.</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlight also provides a custom syntax for rendering asides in Markdown and MDX as an alternative to the `<Aside>` component.
+See the [“Authoring Content in Markdown”](/guides/authoring-content/#asides) guide for details of the custom syntax.
+
+### Use custom titles
+
+Override the default aside titles by using the [`title`](#title) attribute.
+
+<Preview>
+
+```mdx 'title="Watch out!"'
+# src/content/docs/example.mdx
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Watch out!">
+	A warning aside *with* a custom title.
+</Aside>
+```
+
+<Aside slot="preview" type="caution" title="Watch out!">
+	A warning aside *with* a custom title.
+</Aside>
+
+</Preview>
+
+## `<Aside>` Props
+
+**Implementation:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+The `<Aside>` component accepts the following props:
+
+### `type`
+
+**type:** `'note' | 'tip' | 'caution' | 'danger'`  
+**default:** `'note'`
+
+The type of aside to display: `note` (the default), `tip`, `caution` or `danger`.
+
+### `title`
+
+**type:** `string`
+
+The title of the aside to display.
