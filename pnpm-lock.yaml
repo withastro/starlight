@@ -73,7 +73,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.25.1
+        specifier: ^0.25.3
         version: link:../../packages/starlight
       astro:
         specifier: ^4.10.2
@@ -100,7 +100,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.25.1
+        specifier: ^0.25.3
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
@@ -184,6 +184,9 @@ importers:
       mdast-util-to-markdown:
         specifier: ^2.1.0
         version: 2.1.0
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
       pagefind:
         specifier: ^1.0.3
         version: 1.0.3
@@ -237,7 +240,7 @@ importers:
         specifier: ^4.10.2
         version: 4.11.3(@types/node@18.16.19)(typescript@5.4.5)
 
-  packages/starlight/__e2e__/fixtures/custom-src-dir:
+  packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
       '@astrojs/starlight':
         specifier: workspace:*

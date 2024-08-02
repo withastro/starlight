@@ -21,8 +21,15 @@ export function vitePluginStarlightUserConfig(
 		build: Pick<AstroConfig['build'], 'format'>;
 	}
 ): NonNullable<ViteUserConfig['plugins']>[number] {
-	const resolveId = (id: string) =>
-		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
+	/**
+	 * Resolves module IDs to a usable format:
+	 * - Relative paths (e.g. `'./module.js'`) are resolved against `base` and formatted as an absolute path.
+	 * - Package identifiers (e.g. `'module'`) are returned unchanged.
+	 *
+	 * By default, `base` is the project root directory.
+	 */
+	const resolveId = (id: string, base = root) =>
+		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
 
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
@@ -56,7 +63,7 @@ export function vitePluginStarlightUserConfig(
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {
-				userCollections = (await import('${new URL('./content/config.ts', srcDir).pathname}')).collections;
+				userCollections = (await import(${resolveId('./content/config.ts', srcDir)})).collections;
 			} catch {}
 			export const collections = userCollections;`,
 		...virtualComponentModules,

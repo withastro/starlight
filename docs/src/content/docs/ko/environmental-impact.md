@@ -90,20 +90,21 @@ JavaScript를 분석하고 컴파일하는 것은 브라우저가 수행해야 �
 다른 문서 프레임워크와 어떻게 비교되는지 궁금하십니까?
 [Website Carbon Calculator][wcc]를 사용한 이러한 테스트는 서로 다른 도구로 작성된 유사한 페이지를 비교합니다.
 
-| 프레임워크                  | 페이지 방문당 CO₂ |
-| --------------------------- | ----------------- |
-| [Starlight][sl-carbon]      | 0.01g             |
-| [VitePress][vp-carbon]      | 0.05g             |
-| [Docus][dc-carbon]          | 0.05g             |
-| [Sphinx][sx-carbon]         | 0.07g             |
-| [MkDocs][mk-carbon]         | 0.10g             |
-| [Nextra][nx-carbon]         | 0.11g             |
-| [docsify][dy-carbon]        | 0.11g             |
-| [Docusaurus][ds-carbon]     | 0.24g             |
-| [Read the Docs][rtd-carbon] | 0.24g             |
-| [GitBook][gb-carbon]        | 0.71g             |
+| 프레임워크                  | 페이지 방문당 CO₂ | 등급 |
+| --------------------------- | ----------------- | :--: |
+| [Starlight][sl-carbon]      | 0.01g             |  A+  |
+| [Read the Docs][rtd-carbon] | 0.05g             |  A+  |
+| [Sphinx][sx-carbon]         | 0.06g             |  A+  |
+| [VitePress][vp-carbon]      | 0.07g             |  A+  |
+| [Docus][dc-carbon]          | 0.09g             |  A+  |
+| [docsify][dy-carbon]        | 0.10g             |  A   |
+| [Nextra][nx-carbon]         | 0.11g             |  A   |
+| [MkDocs][mk-carbon]         | 0.19g             |  B   |
+| [Docusaurus][ds-carbon]     | 0.21g             |  B   |
+| [GitBook][gb-carbon]        | 0.43g             |  C   |
+| [Mintlify][mt-carbon]       | 1.22g             |  F   |
 
-<small>2023년 5월 14일에 수집된 데이터. 최신 수치를 보려면 링크를 클릭하세요.</small>
+<small>2024년 7월 22일에 수집된 데이터. 최신 수치를 보려면 링크를 클릭하세요.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -115,6 +116,7 @@ JavaScript를 분석하고 컴파일하는 것은 브라우저가 수행해야 �
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## 더 많은 자료
 
