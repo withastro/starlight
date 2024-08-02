@@ -11,7 +11,7 @@ import Preview from '~/components/component-preview.astro';
 
 <Preview>
 
-<Badge text="New" slot="preview" />
+<Badge slot="preview" text="New" />
 
 </Preview>
 
@@ -23,14 +23,10 @@ import { Badge } from '@astrojs/starlight/components';
 
 ## Usage
 
-### Basic usage
-
 Display a badge using the `<Badge>` component and pass the content you want to display to the [`text`](#text) attribute of the `<Badge>` component.
 
 By default, the badge will use the theme accent color of your site.
 To use a built-in badge color, set the [`variant`](#variant) attribute to one of the supported values.
-
-The [`size`](#size) attribute controls the size of the badge text.
 
 <Preview>
 
@@ -39,15 +35,39 @@ The [`size`](#size) attribute controls the size of the badge text.
 
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="New" variant="tip" size="small" />
-<Badge text="Deprecated" variant="caution" size="medium" />
-<Badge text="Starlight" variant="note" size="large" />
+<Badge text="New" variant="tip" />
+<Badge text="Deprecated" variant="caution" />
+<Badge text="Starlight" variant="note" />
 ```
 
 <Fragment slot="preview">
-	<Badge text="New" variant="tip" size="small" />
-	<Badge text="Deprecated" variant="caution" size="medium" />
-	<Badge text="Starlight" variant="note" size="large" />
+	<Badge text="New" variant="tip" />
+	<Badge text="Deprecated" variant="caution" />
+	<Badge text="Starlight" variant="note" />
+</Fragment>
+
+</Preview>
+
+### Use different sizes
+
+Use the [`size`](#size) attribute controls the size of the badge text.
+
+<Preview>
+
+```mdx /size="\w+"/
+# src/content/docs/example.mdx
+
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" size="small" />
+<Badge text="New and improved" size="medium" />
+<Badge text="New, improved, and bigger" size="large" />
+```
+
+<Fragment slot="preview">
+	<Badge text="New" size="small" />
+	<Badge text="New and improved" size="medium" />
+	<Badge text="New, improved, and bigger" size="large" />
 </Fragment>
 
 </Preview>
@@ -58,7 +78,7 @@ Customize badges by using any other `<span>` attributes such as `class` or `styl
 
 <Preview>
 
-```mdx
+```mdx "style={{ fontStyle: 'italic' }}"
 # src/content/docs/example.mdx
 
 import { Badge } from '@astrojs/starlight/components';
@@ -66,11 +86,12 @@ import { Badge } from '@astrojs/starlight/components';
 <Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
 ```
 
-<Fragment slot="preview">
-
-<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
-
-</Fragment>
+<Badge
+	slot="preview"
+	text="Custom"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
 
 </Preview>
 
@@ -86,7 +107,6 @@ The `<Badge>` component accepts the following props and also any [other `<span>`
 **type:** `string`
 
 The text content to display in the badge.
-See the [“basic usage”](#basic-usage) guide for an example.
 
 ### `variant`
 
@@ -94,11 +114,9 @@ See the [“basic usage”](#basic-usage) guide for an example.
 **default:** `'default'`
 
 The badge color variant to use: `note` (blue), `tip` (purple), `danger` (red), `caution` (orange), `success` (green), or `default` (theme accent color).
-See the [“basic usage”](#basic-usage) guide for an example.
 
 ### `size`
 
 **type:** `'small' | 'medium' | 'large'`
 
 Defines the size of the badge to display.
-See the [“basic usage”](#basic-usage) guide for an example.
