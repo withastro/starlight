@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { test as baseTest, type Page } from '@playwright/test';
 import { build, dev, preview } from 'astro';
+import * as timers from 'node:timers/promises';
 
 export { expect, type Locator } from '@playwright/test';
 
@@ -56,7 +57,12 @@ export function testFactory(fixturePath: string) {
 			}),
 	});
 
-	test.afterAll(async () => {
+	test.afterAll(async (_, context) => {
+		// Playwright's afterAll timeout is shared with the last test
+		// in the suite. If the last test is slower, stopping all the
+		// servers can easily read the timeout limit.
+		// To avoid that, we add 40 seconds to effective timeout limit.
+		context.setTimeout(context.timeout + 40000);
 		// Stop all started servers.
 		await prodServer?.stop();
 		for (const server of servers.values()) {
