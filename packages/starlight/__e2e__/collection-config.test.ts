@@ -6,9 +6,9 @@ const test = testFactory('./fixtures/custom src-dir/');
 
 test('builds a custom page using the `<StarlightPage>` component and a custom `srcDir`', async ({
 	page,
-	makeServer,
+	getProdServer,
 }) => {
-	const starlight = await makeServer();
+	const starlight = await getProdServer();
 	await starlight.goto('/custom');
 
 	await expect(page.getByText('Hello')).toBeVisible();

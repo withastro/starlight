@@ -8,40 +8,40 @@ test.beforeEach(() => {
 	delete process.env.STARLIGHT_PRERENDER;
 });
 
-test('Render page on the server', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('Render page on the server', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/demo');
 
 	await expect(page.locator('#server-check')).toHaveText('On server');
 });
 
-test('Render 404 page on the server', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('Render 404 page on the server', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/not-found');
 
 	await expect(page.locator('#server-check')).toHaveText('On server');
 });
 
-test('SSR mode renders the same content page as prerendering', async ({ makeServer }) => {
-	const starlight = await makeServer();
+test('SSR mode renders the same content page as prerendering', async ({ getProdServer }) => {
+	const starlight = await getProdServer();
 	const ssrContent = await starlight.goto('/content').then((res) => res?.text());
 	assert(ssrContent);
 
 	process.env.STARLIGHT_PRERENDER = 'yes';
-	const prerenderStarlight = await makeServer();
+	const prerenderStarlight = await getProdServer();
 	const prerenderContent = await prerenderStarlight.goto('/content').then((res) => res?.text());
 	assert(prerenderContent);
 
 	expectEquivalentHTML(prerenderContent, ssrContent);
 });
 
-test('SSR mode renders the same splash page as prerendering', async ({ makeServer }) => {
-	const starlight = await makeServer();
+test('SSR mode renders the same splash page as prerendering', async ({ getProdServer }) => {
+	const starlight = await getProdServer();
 	const ssrContent = await starlight.goto('/').then((res) => res?.text());
 	assert(ssrContent);
 
 	process.env.STARLIGHT_PRERENDER = 'yes';
-	const prerenderStarlight = await makeServer();
+	const prerenderStarlight = await getProdServer();
 	const prerenderContent = await prerenderStarlight.goto('/').then((res) => res?.text());
 	assert(prerenderContent);
 

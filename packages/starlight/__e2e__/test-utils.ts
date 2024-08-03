@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { test as baseTest, type Page } from '@playwright/test';
-import { build, dev, preview, type AstroInlineConfig } from 'astro';
+import { build, dev, preview } from 'astro';
 
 export { expect, type Locator } from '@playwright/test';
 
@@ -21,54 +21,47 @@ export function testFactory(fixturePath: string) {
 	async function makeServer(
 		options: {
 			mode?: 'build' | 'dev';
-			config?: AstroInlineConfig;
 		} = {}
 	): Promise<Server> {
-		const { mode, config } = options;
+		const { mode } = options;
 		if (mode === 'dev') {
-			return await dev({ logLevel: 'error', root, ...config });
+			return await dev({ logLevel: 'error', root });
 		} else {
-			await build({ logLevel: 'error', root, ...config });
-			return await preview({ logLevel: 'error', root, ...config });
+			await build({ logLevel: 'error', root });
+			return await preview({ logLevel: 'error', root });
 		}
 	}
 
-	const customServers: Server[] = [];
 	// Optimization for tests that don't customize any server options
 	// to not rebuild the fixture for each test.
-	const defaultServers: {
-		build?: Server;
-		dev?: Server;
-	} = {};
+	const servers: Server[] = [];
 
 	const test = baseTest.extend<{
-		makeServer: (config?: Parameters<typeof makeServer>[0]) => Promise<StarlightPage>;
+		getProdServer: () => Promise<StarlightPage>;
+		getDevServer: () => Promise<StarlightPage>;
 	}>({
-		makeServer: ({ page }, use) =>
-			use(async (params) => {
-				const { mode = 'build', config } = params ?? {};
-
-				if (config === undefined) {
-					const server = (defaultServers[mode] ??= await makeServer({ mode }));
-					return new StarlightPage(server, page);
-				}
-
-				const newServer = await makeServer(params);
-				customServers.push(newServer);
-
-				return new StarlightPage(newServer, page);
+		getProdServer: ({ page }, use) =>
+			use(async () => {
+				const server = await makeServer({
+					mode: 'build',
+				});
+				servers.push(server);
+				return new StarlightPage(server, page);
 			}),
-	});
-
-	test.afterAll(async () => {
-		await defaultServers.build?.stop();
-		await defaultServers.dev?.stop();
+		getDevServer: ({ page }, use) =>
+			use(async () => {
+				const server = await makeServer({
+					mode: 'dev',
+				});
+				servers.push(server);
+				return new StarlightPage(server, page);
+			}),
 	});
 
 	test.afterEach(async () => {
 		// Stop all started servers.
-		await Promise.all(customServers.map((server) => server.stop()));
-		customServers.splice(0, customServers.length);
+		await Promise.all(servers.map((server) => server.stop()));
+		servers.splice(0, servers.length);
 	});
 
 	return test;
@@ -79,7 +72,7 @@ class StarlightPage {
 	constructor(
 		private readonly server: Server,
 		private readonly page: Page
-	) {}
+	) { }
 
 	// Navigate to a URL relative to the server used during a test run and return the resource response.
 	goto(url: string) {

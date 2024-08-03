@@ -2,8 +2,8 @@ import { expect, testFactory, type Locator } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
 
-test('syncs tabs with a click event', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('syncs tabs with a click event', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -23,8 +23,8 @@ test('syncs tabs with a click event', async ({ page, makeServer }) => {
 	await expectSelectedTab(pkgTabsA, 'yarn', 'yarn command');
 });
 
-test('syncs tabs with a keyboard event', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('syncs tabs with a keyboard event', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -47,8 +47,8 @@ test('syncs tabs with a keyboard event', async ({ page, makeServer }) => {
 	await expectSelectedTab(pkgTabsB, 'npm', 'another npm command');
 });
 
-test('syncs only tabs using the same sync key', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('syncs only tabs using the same sync key', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -63,8 +63,8 @@ test('syncs only tabs using the same sync key', async ({ page, makeServer }) => 
 	await expectSelectedTab(styleTabs, 'css', 'css code');
 });
 
-test('supports synced tabs with different tab items', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('supports synced tabs with different tab items', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -78,8 +78,8 @@ test('supports synced tabs with different tab items', async ({ page, makeServer 
 	await expectSelectedTab(pkgTabsB, 'bun', 'another bun command');
 });
 
-test('persists the focus when syncing tabs', async ({ page, makeServer }) => {
-	const starlight = await makeServer();
+test('persists the focus when syncing tabs', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const pkgTabsA = page.locator('starlight-tabs').nth(0);
@@ -98,9 +98,9 @@ test('persists the focus when syncing tabs', async ({ page, makeServer }) => {
 
 test('preserves tabs position when alternating between tabs with different content heights', async ({
 	page,
-	makeServer,
+	getProdServer,
 }) => {
-	const starlight = await makeServer();
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs-variable-height');
 
 	const tabs = page.locator('starlight-tabs').nth(1);
@@ -124,9 +124,9 @@ test('preserves tabs position when alternating between tabs with different conte
 
 test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
 	page,
-	makeServer,
+	getProdServer,
 }) => {
-	const starlight = await makeServer();
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
