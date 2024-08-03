@@ -28,8 +28,8 @@ test('include last updated date from git in the footer', async ({ page, getProdS
 	await expect(page.locator('footer')).toContainText('Last updated: Feb 3, 2024');
 });
 
-test('include git information while developing', async ({ page, getDevServer }) => {
-	const starlight = await getDevServer();
+test('include git information while developing', async ({ page, makeServer }) => {
+	const starlight = await makeServer('dev', { mode: 'dev' });
 	await starlight.goto('/');
 
 	await expect(page.locator('footer')).toContainText('Last updated: Feb 3, 2024');

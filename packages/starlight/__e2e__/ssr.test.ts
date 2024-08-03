@@ -22,26 +22,32 @@ test('Render 404 page on the server', async ({ page, getProdServer }) => {
 	await expect(page.locator('#server-check')).toHaveText('On server');
 });
 
-test('SSR mode renders the same content page as prerendering', async ({ getProdServer }) => {
+test('SSR mode renders the same content page as prerendering', async ({
+	getProdServer,
+	makeServer,
+}) => {
 	const starlight = await getProdServer();
 	const ssrContent = await starlight.goto('/content').then((res) => res?.text());
 	assert(ssrContent);
 
 	process.env.STARLIGHT_PRERENDER = 'yes';
-	const prerenderStarlight = await getProdServer();
+	const prerenderStarlight = await makeServer('prerender');
 	const prerenderContent = await prerenderStarlight.goto('/content').then((res) => res?.text());
 	assert(prerenderContent);
 
 	expectEquivalentHTML(prerenderContent, ssrContent);
 });
 
-test('SSR mode renders the same splash page as prerendering', async ({ getProdServer }) => {
+test('SSR mode renders the same splash page as prerendering', async ({
+	getProdServer,
+	makeServer,
+}) => {
 	const starlight = await getProdServer();
 	const ssrContent = await starlight.goto('/').then((res) => res?.text());
 	assert(ssrContent);
 
 	process.env.STARLIGHT_PRERENDER = 'yes';
-	const prerenderStarlight = await getProdServer();
+	const prerenderStarlight = await makeServer('prerender');
 	const prerenderContent = await prerenderStarlight.goto('/').then((res) => res?.text());
 	assert(prerenderContent);
 

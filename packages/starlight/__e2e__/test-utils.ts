@@ -34,35 +34,34 @@ export function testFactory(fixturePath: string) {
 
 	// Optimization for tests that don't customize any server options
 	// to not rebuild the fixture for each test.
-	const servers: Server[] = [];
+	let prodServer: Server | null = null;
+	const servers = new Map<string, Server>();
 
 	const test = baseTest.extend<{
 		getProdServer: () => Promise<StarlightPage>;
-		getDevServer: () => Promise<StarlightPage>;
+		makeServer: (name: string, ...params: Parameters<typeof makeServer>) => Promise<StarlightPage>;
 	}>({
 		getProdServer: ({ page }, use) =>
 			use(async () => {
-				const server = await makeServer({
+				const server = (prodServer ??= await makeServer({
 					mode: 'build',
-				});
-				servers.push(server);
+				}));
 				return new StarlightPage(server, page);
 			}),
-		getDevServer: ({ page }, use) =>
-			use(async () => {
-				const server = await makeServer({
-					mode: 'dev',
-				});
-				servers.push(server);
+		makeServer: ({ page }, use) =>
+			use(async (name, ...params) => {
+				const server = servers.get(name) ?? (await makeServer(...params));
+				servers.set(name, server);
 				return new StarlightPage(server, page);
 			}),
 	});
 
-	test.afterEach(async ({ page }) => {
-		await page.close();
+	test.afterAll(async () => {
 		// Stop all started servers.
-		servers.map((server) => server.stop());
-		servers.splice(0, servers.length);
+		await prodServer?.stop();
+		for (const server of servers.values()) {
+			await server.stop();
+		}
 	});
 
 	return test;
@@ -73,7 +72,7 @@ class StarlightPage {
 	constructor(
 		private readonly server: Server,
 		private readonly page: Page
-	) { }
+	) {}
 
 	// Navigate to a URL relative to the server used during a test run and return the resource response.
 	goto(url: string) {
