@@ -58,9 +58,10 @@ export function testFactory(fixturePath: string) {
 			}),
 	});
 
-	test.afterEach(async () => {
+	test.afterEach(async ({ page }) => {
+		await page.close();
 		// Stop all started servers.
-		await Promise.all(servers.map((server) => server.stop()));
+		servers.map((server) => server.stop());
 		servers.splice(0, servers.length);
 	});
 

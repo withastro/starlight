@@ -21,15 +21,15 @@ test.afterAll(async () => {
 	await rm(join(repoPath, '.git'), { recursive: true, force: true });
 });
 
-test('include last updated date from git in the footer', async ({ page, getDevServer }) => {
-	const starlight = await getDevServer();
+test('include last updated date from git in the footer', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/');
 
 	await expect(page.locator('footer')).toContainText('Last updated: Feb 3, 2024');
 });
 
-test('include git information while developing', async ({ page, getProdServer }) => {
-	const starlight = await getProdServer();
+test('include git information while developing', async ({ page, getDevServer }) => {
+	const starlight = await getDevServer();
 	await starlight.goto('/');
 
 	await expect(page.locator('footer')).toContainText('Last updated: Feb 3, 2024');
