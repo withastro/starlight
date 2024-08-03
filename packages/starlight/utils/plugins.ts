@@ -2,6 +2,7 @@ import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
+import { AstroError } from 'astro/errors';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -16,24 +17,8 @@ export async function runPlugins(
 	// Validate the user-provided configuration.
 	let userConfig = starlightUserConfig;
 
-	const starlightSchema =
-		context.config.output === 'static'
-			? StarlightConfigSchema.and(
-					z.object({
-						prerender: z
-							.literal(true, {
-								errorMap: () => ({
-									message:
-										'astro:Disabling prerendering is not supported when using the `static` output mode.',
-								}),
-							})
-							.optional(),
-					})
-			  )
-			: StarlightConfigSchema;
-
 	let starlightConfig = parseWithFriendlyErrors(
-		starlightSchema,
+		StarlightConfigSchema,
 		userConfig,
 		'Invalid config passed to starlight integration'
 	);
@@ -86,6 +71,13 @@ export async function runPlugins(
 			isRestart: context.isRestart,
 			logger: context.logger.fork(name),
 		});
+	}
+
+	if (context.config.output === 'static' && !starlightConfig.prerender) {
+		throw new AstroError(
+			'Starlight prerendering cannot be disabled when the project is set to "static" output mode.',
+			'Either set output mode to "server"/"hybrid" or enable Starlight prerendering.'
+		);
 	}
 
 	return { integrations, starlightConfig };

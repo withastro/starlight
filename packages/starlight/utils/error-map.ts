@@ -34,12 +34,6 @@ export function parseWithFriendlyErrors<T extends z.Schema>(
 
 const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 	const baseErrorPath = flattenErrorPath(baseError.path);
-
-	if (ctx.defaultError.startsWith('astro:')) {
-		// Custom per-validation error message
-		return { message: prefix(baseErrorPath, ctx.defaultError.substring(6)) };
-	}
-
 	if (baseError.code === 'invalid_union') {
 		// Optimization: Combine type and literal errors for keys that are common across ALL union types
 		// Ex. a union between `{ key: z.literal('tutorial') }` and `{ key: z.literal('blog') }` will
@@ -69,7 +63,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 			.map(([key, error]) =>
 				key === baseErrorPath
 					? // Avoid printing the key again if it's a base error
-					  `> ${getTypeOrLiteralMsg(error)}`
+						`> ${getTypeOrLiteralMsg(error)}`
 					: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
 			);
 
