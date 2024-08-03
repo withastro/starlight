@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { test as baseTest, type Page } from '@playwright/test';
-import { build, preview } from 'astro';
+import { build, dev, preview } from 'astro';
+import * as timers from 'node:timers/promises';
 
 export { expect, type Locator } from '@playwright/test';
 
@@ -8,27 +9,71 @@ process.env.ASTRO_TELEMETRY_DISABLED = 'true';
 
 // Setup a test environment that will build and start a preview server for a given fixture path and
 // provide a Starlight Playwright fixture accessible from within all tests.
-export async function testFactory(fixturePath: string) {
-	let previewServer: PreviewServer | undefined;
+export function testFactory(fixturePath: string) {
+	const fixturePathUrl = new URL(fixturePath, import.meta.url);
+	// Combining absolute paths with a `file:` base URL on Windows results
+	// in a URL with the drive letter as the protocol.
+	// In that case, use the URL as is instead of interpreting the `file:` protocol.
+	const root =
+		fixturePathUrl.protocol === 'file:'
+			? fileURLToPath(new URL(fixturePath, import.meta.url))
+			: fixturePathUrl.toString();
 
-	const test = baseTest.extend<{ starlight: StarlightPage }>({
-		starlight: async ({ page }, use) => {
-			if (!previewServer) {
-				throw new Error('Could not find a preview server to run tests against.');
-			}
+	async function makeServer(
+		options: {
+			mode?: 'build' | 'dev';
+		} = {}
+	): Promise<Server> {
+		const { mode } = options;
+		if (mode === 'dev') {
+			return await dev({ logLevel: 'error', root });
+		} else {
+			await build({ logLevel: 'error', root });
+			return await preview({ logLevel: 'error', root });
+		}
+	}
 
-			await use(new StarlightPage(previewServer, page));
-		},
+	// Optimization for tests that don't customize any server options
+	// to not rebuild the fixture for each test.
+	let prodServer: Server | null = null;
+	const servers = new Map<string, Server>();
+
+	const test = baseTest.extend<{
+		getProdServer: () => Promise<StarlightPage>;
+		makeServer: (name: string, ...params: Parameters<typeof makeServer>) => Promise<StarlightPage>;
+	}>({
+		getProdServer: ({ page }, use) =>
+			use(async () => {
+				const server = (prodServer ??= await makeServer({
+					mode: 'build',
+				}));
+				return new StarlightPage(server, page);
+			}),
+		makeServer: ({ page }, use) =>
+			use(async (name, ...params) => {
+				const server = servers.get(name) ?? (await makeServer(...params));
+				servers.set(name, server);
+				return new StarlightPage(server, page);
+			}),
 	});
 
-	test.beforeAll(async () => {
-		const root = fileURLToPath(new URL(fixturePath, import.meta.url));
-		await build({ logLevel: 'error', root });
-		previewServer = await preview({ logLevel: 'error', root });
-	});
-
-	test.afterAll(async () => {
-		await previewServer?.stop();
+	test.afterAll(({}, context) => {
+		// Playwright's afterAll timeout is shared with the last test
+		// in the suite. If the last test is slower, stopping all the
+		// servers can easily read the timeout limit.
+		// To avoid that, we add 40 seconds to effective timeout limit.
+		context.setTimeout(context.timeout + 40000);
+		return Promise.race([
+			// Let the cleanup happen on the background
+			timers.setTimeout(30000),
+			(async () => {
+				// Stop all started servers.
+				await prodServer?.stop();
+				for (const server of servers.values()) {
+					await server.stop();
+				}
+			})(),
+		]);
 	});
 
 	return test;
@@ -37,7 +82,7 @@ export async function testFactory(fixturePath: string) {
 // A Playwright test fixture accessible from within all tests.
 class StarlightPage {
 	constructor(
-		private readonly previewServer: PreviewServer,
+		private readonly server: Server,
 		private readonly page: Page
 	) {}
 
@@ -48,8 +93,12 @@ class StarlightPage {
 
 	// Resolve a URL relative to the server used during a test run.
 	resolveUrl(url: string) {
-		return `http://localhost:${this.previewServer.port}${url.replace(/^\/?/, '/')}`;
+		const port = 'address' in this.server ? this.server.address.port : this.server.port;
+
+		return `http://localhost:${port}${url.replace(/^\/?/, '/')}`;
 	}
 }
 
 type PreviewServer = Awaited<ReturnType<typeof preview>>;
+type DevServer = Awaited<ReturnType<typeof dev>>;
+type Server = PreviewServer | DevServer;
