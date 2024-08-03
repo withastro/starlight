@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Basics',
+			title: 'Git',
 			pagefind: false,
 		}),
 	],

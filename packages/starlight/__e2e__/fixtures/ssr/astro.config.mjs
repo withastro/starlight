@@ -8,7 +8,7 @@ export default defineConfig({
 	compressHTML: false, // for easier debugging
 	integrations: [
 		starlight({
-			title: 'Docs',
+			title: 'SSR',
 			prerender: process.env.STARLIGHT_PRERENDER === 'yes',
 			pagefind: false,
 		}),
