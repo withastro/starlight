@@ -29,7 +29,6 @@ const {
 	.sl-link-button {
 		align-items: center;
 		border-radius: 999rem;
-		color: var(--sl-color-white);
 		display: inline-flex;
 		font-size: var(--sl-text-sm);
 		gap: 0.5em;
@@ -43,10 +42,15 @@ const {
 		border: 1px solid var(--sl-color-text-accent);
 		color: var(--sl-color-black);
 	}
+	.sl-link-button.primary:hover {
+		color: var(--sl-color-black);
+	}
 	.sl-link-button.secondary {
 		border: 1px solid;
+		color: var(--sl-color-white);
 	}
 	.sl-link-button.minimal {
+		color: var(--sl-color-white);
 		outline-offset: 0.25rem;
 		padding-inline: 0;
 	}

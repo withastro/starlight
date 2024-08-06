@@ -66,10 +66,10 @@
 	font-size: var(--sl-text-h6);
 }
 
-.sl-markdown-content a:not(:where(:is(.not-content, .not-content *))) {
+.sl-markdown-content a:not(:where(.not-content *)) {
 	color: var(--sl-color-text-accent);
 }
-.sl-markdown-content a:hover:not(:where(:is(.not-content, .not-content *))) {
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
 	color: var(--sl-color-white);
 }
 
