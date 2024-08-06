@@ -49,19 +49,73 @@ Pour en savoir plus sur les barres latérales générées automatiquement, consu
 
 ## Ajouter des liens et des groupes de liens
 
-Pour configurer les [liens](#liens) et les [groupes de liens](#groupes) (dans un en-tête rétractable) de votre barre latérale, utilisez la propriété [`starlight.sidebar`](/fr/reference/configuration/#sidebar) dans le fichier `astro.config.mjs`.
+Pour configurer les liens et groupes de liens (dans un en-tête rétractable) de votre barre latérale, utilisez la propriété [`starlight.sidebar`](/fr/reference/configuration/#sidebar) dans le fichier `astro.config.mjs`.
 
 En combinant les liens et les groupes, vous pouvez créer une grande variété de structures de barre latérale.
 
-### Liens
+### Liens internes
 
-Ajoutez un lien vers une page interne ou externe en utilisant un objet avec les propriétés `label` et `link`.
+Ajoutez un lien vers une page située dans `src/content/docs/` en utilisant un objet avec la propriété `slug`.
+Le titre de la page liée sera utilisé comme étiquette par défaut.
+
+Par exemple, avec la configuration suivante :
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromede' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+Et la structure de fichiers suivante :
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromede.md
+        - orion.md
+
+</FileTree>
+
+La barre latérale suivante sera générée :
+
+<SidebarPreview
+	config={[
+		{ label: 'Andromède', link: '' },
+		{ label: 'Orion', link: '' },
+	]}
+/>
+
+Pour personnaliser les valeurs inférées du frontmatter de la page liée, vous pouvez ajouter les propriétés `label`, [`translations`](#internationalisation) et [`attrs`](#attributs-html-personnalisés).
+
+Consultez la section [« Personnaliser les liens générés automatiquement dans le frontmatter »](#personnaliser-les-liens-générés-automatiquement-dans-le-frontmatter) pour plus de détails sur comment contrôler l'apparence de la barre latérale à partir du frontmatter de la page.
+
+#### Syntaxe simplifiée pour les liens internes
+
+Les liens internes peuvent également être spécifiés en utilisant uniquement une chaîne de caractères comme raccourci pour le slug de la page.
+
+Par exemple, la configuration suivante est équivalente à la configuration ci-dessus, qui utilisait `slug` :
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromede', 'constellations/orion'],
+});
+```
+
+### Autres liens
+
+Ajoutez un lien vers une page externe ou ne faisant pas partie de votre documentation en utilisant un objet avec les propriétés `label` et `link`.
 
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Un lien vers la page de la lune Ganymède.
-		{ label: 'Ganymède', link: '/lunes/ganymede/' },
+		// Un lien vers une page ne faisant pas partie de la documentation.
+		{ label: 'Boutique de météores', link: '/boutique/' },
 		// Un lien externe vers le site de la NASA.
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -72,7 +126,7 @@ La configuration ci-dessus génère la barre latérale suivante :
 
 <SidebarPreview
 	config={[
-		{ label: 'Ganymède', link: '' },
+		{ label: 'Boutique de météores', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -93,15 +147,15 @@ starlight({
 		{
 			label: 'Constellations',
 			items: [
-				{ label: 'Carène', link: '/constellations/carene/' },
-				{ label: 'Centaure', link: '/constellations/centaure/' },
+				'constellations/carene',
+				'constellations/centaure',
 				// Un groupe de liens imbriqué pour les constellations saisonnières.
 				{
 					label: 'Saisonnières',
 					items: [
-						{ label: 'Andromède', link: '/constellations/andromede/' },
-						{ label: 'Orion', link: '/constellations/orion/' },
-						{ label: 'Petite Ourse', link: '/constellations/petite-ourse/' },
+						'constellations/andromede',
+						'constellations/orion',
+						'constellations/petite-ourse',
 					],
 				},
 			],
@@ -186,7 +240,7 @@ La barre latérale suivante sera générée :
 	]}
 />
 
-#### Personnaliser les liens générés automatiquement dans le frontmatter
+## Personnaliser les liens générés automatiquement dans le frontmatter
 
 Utilisez le [champ `sidebar` du frontmatter](/fr/reference/frontmatter/#sidebar) dans différentes pages pour personnaliser les liens générés automatiquement.
 
@@ -229,14 +283,15 @@ Un groupe généré automatiquement incluant une page avec le frontmatter ci-des
 />
 
 :::note
-La configuration du frontmatter `sidebar` n'est utilisée que pour les liens générés automatiquement et sera ignorée pour les liens définis manuellement.
+La configuration du frontmatter `sidebar` est seulement utilisée pour les liens dans des groupes générés automatiquement et les liens de documentation définis avec la propriété `slug`.
+Elle ne s'applique pas aux liens définis avec la propriété `link`.
 :::
 
 ## Badges
 
 Les liens, groupes et groupes générés automatiquement peuvent inclure une propriété `badge` pour afficher un badge à côté de leurs étiquettes.
 
-```js {10,17}
+```js {9,16}
 starlight({
 	sidebar: [
 		{
@@ -244,8 +299,7 @@ starlight({
 			items: [
 				// Un lien avec un badge "Supergéante".
 				{
-					label: 'Persei',
-					link: '/etoiles/persei/',
+					slug: 'etoiles/persei',
 					badge: 'Supergéante',
 				},
 			],
@@ -295,14 +349,16 @@ La configuration ci-dessus génère la barre latérale suivante :
 	]}
 />
 
-### Variantes de badges
+### Variantes de badges et style personnalisé
 
-Personnalisez le style du badge en utilisant un objet avec les propriétés `text` et `variant`.
+Personnalisez le style du badge en utilisant un objet avec les propriétés `text`, `variant`, et `class`.
 
 La propriété `text` représente le contenu à afficher (par exemple, "Nouveau").
-Remplacez le style `default`, qui utilise la couleur d'accentuation de votre site, en définissant la propriété `variant` avec l'une des valeurs suivantes : `note`, `tip`, `danger`, `caution` ou `success`.
+Par défaut, le badge utilise la couleur d'accentuation de votre site. Pour utiliser un style de badge intégré, définissez la propriété `variant` à l'une des valeurs suivantes : `note`, `tip`, `danger`, `caution` ou `success`.
 
-```js {10}
+Facultativement, vous pouvez créer un style de badge personnalisé en définissant la propriété `class` à un nom de classe CSS.
+
+```js {9}
 starlight({
 	sidebar: [
 		{
@@ -310,8 +366,7 @@ starlight({
 			items: [
 				// Un lien avec un badge "Ébauche" jaune.
 				{
-					label: 'Sirius',
-					link: '/etoiles/sirius/',
+					slug: 'etoiles/sirius',
 					badge: { text: 'Ébauche', variant: 'caution' },
 				},
 			],
@@ -400,14 +455,14 @@ starlight({
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
-					link: '/constellations/andromede/',
+					slug: 'constellations/andromede',
 				},
 				{
 					label: 'Scorpion',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
-					link: '/constellations/scorpion/',
+					slug: 'constellations/scorpion',
 				},
 			],
 		},
@@ -429,6 +484,44 @@ Parcourir la documentation en portugais brésilien générera la barre latérale
 	]}
 />
 
+### Internationalisation avec des liens internes
+
+Les [liens internes](#liens-internes) utiliseront automatiquement les titres de page traduits depuis le frontmatter du contenu par défaut :
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromede' },
+				{ slug: 'constellations/scorpion' },
+			],
+		},
+	],
+});
+```
+
+Parcourir la documentation en portugais brésilien générera la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+Pour les sites multilingues, la valeur de la propriété `slug` n'inclut pas la portion de langue dans l'URL.
+Par exemple, si vous avez des pages à `en/intro` et `pt-br/intro`, le slug est `intro` lors de la configuration de la barre latérale.
+
 ## Groupes rétractables
 
 Les groupes de liens peuvent être rétractés par défaut en définissant la propriété `collapsed` à `true`.
@@ -440,10 +533,7 @@ starlight({
 			label: 'Constellations',
 			// Rétracte le groupe par défaut.
 			collapsed: true,
-			items: [
-				{ label: 'Andromède', link: '/constellations/andromede/' },
-				{ label: 'Orion', link: '/constellations/orion/' },
-			],
+			items: ['constellations/andromede', 'constellations/orion'],
 		},
 	],
 });

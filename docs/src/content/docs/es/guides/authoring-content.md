@@ -360,6 +360,31 @@ Un título opcional del bloque de código se puede establecer con un atributo `t
   ```
   ````
 
+## Details
+
+Los details (también conocidos como "revelaciones" o "acordeones") son útiles para ocultar contenido que no es inmediatamente relevante.
+Los usuarios pueden hacer clic en un breve resumen para expandir y ver el contenido completo.
+
+Usa el elemento HTML estándar [`<details>`](https://developer.mozilla.org/es/docs/Web/HTML/Element/details) y [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) en tu contenido Markdown para crear un widget de revelación.
+
+Puedes anidar cualquier otra sintaxis de Markdown dentro de un elemento `<details>`.
+
+<details>
+<summary>¿Dónde y cuándo es más visible la constelación de Andrómeda?</summary>
+
+La [constelación de Andrómeda](<https://es.wikipedia.org/wiki/Andr%C3%B3meda_(constelaci%C3%B3n)>) es más visible en el cielo nocturno durante el mes de noviembre en latitudes entre `+90°` y `−40°`.
+
+</details>
+
+```md
+<details>
+<summary>¿Dónde y cuándo es más visible la constelación de Andrómeda?</summary>
+
+La [constelación de Andrómeda](<https://es.wikipedia.org/wiki/Andr%C3%B3meda_(constelaci%C3%B3n)>) es más visible en el cielo nocturno durante el mes de noviembre en latitudes entre `+90°` y `−40°`.
+
+</details>
+```
+
 ## Otras características comunes de Markdown
 
 Starlight admite todas las demás sintaxis de autoría de Markdown, como listas y tablas. Puedes consultar la [Guía de referencia de Markdown](https://www.markdownguide.org/cheat-sheet/) para obtener una descripción general rápida de todos los elementos de sintaxis de Markdown.

@@ -3,7 +3,7 @@ title: Doğa Dostu Dokümanlar
 description: Starlight'ın daha çevreci dokümantasyon sitesi oluşturmanda nasıl yardımcı olacağını ve karbon ayakizini nasıl düşüreceğini öğren.
 ---
 
-Web endüstrisinin iklime etkisinin [%2][sf] ila [4% arasında küresel karbon emisyonu][bbc]'na sahip olduğu tahmin ediliyor; kabaca havayolları endüstrisindeki emisyon oranında.
+Web endüstrisinin iklime etkisinin [%2][sf] ila [%4 arasında küresel karbon emisyonu][bbc]'na sahip olduğu tahmin ediliyor; kabaca havayolları endüstrisindeki emisyon oranında.
 Bir websitesinin ekolojik etkisini hesaplamada çok fazla karmaşık etken var, ancak bu rehber dokümantasyon sitenizin çevresel ayakizini düşürmek için birkaç ipucu içerir.
 
 İyi haber şu ki, Starlight'ı seçmek mükemmel bir başlangıç.

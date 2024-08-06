@@ -63,7 +63,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 			.map(([key, error]) =>
 				key === baseErrorPath
 					? // Avoid printing the key again if it's a base error
-					  `> ${getTypeOrLiteralMsg(error)}`
+						`> ${getTypeOrLiteralMsg(error)}`
 					: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
 			);
 
@@ -88,7 +88,12 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 						expectedShape.push(relativePath);
 					}
 				}
-				expectedShapes.push(`{ ${expectedShape.join('; ')} }`);
+				if (expectedShape.length === 1 && !expectedShape[0]?.includes(':')) {
+					// In this case the expected shape is not an object, but probably a literal type, e.g. `['string']`.
+					expectedShapes.push(expectedShape.join(''));
+				} else {
+					expectedShapes.push(`{ ${expectedShape.join('; ')} }`);
+				}
 			}
 			if (expectedShapes.length) {
 				details.push('> Expected type `' + expectedShapes.join(' | ') + '`');

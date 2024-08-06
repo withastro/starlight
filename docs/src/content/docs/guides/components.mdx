@@ -443,6 +443,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### Badges
+
+import { Badge } from '@astrojs/starlight/components';
+
+Use the `<Badge>` component to display small pieces of information, such as status or labels.
+
+Pass the content you want to display to the `text` attribute of the `<Badge>` component.
+
+By default, the badge will use the theme accent color of your site. To use a built-in badge color, set the `variant` attribute to one of the following values: `note` (blue), `tip` (purple), `danger` (red), `caution` (orange), or `success` (green).
+
+The `size` attribute (default: `small`) controls the size of the badge text. `medium` and `large` are also available options for displaying a larger badge.
+
+For further customization, use other `<span>` attributes such as `class` or `style` with custom CSS.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+The code above generates the following on the page:
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### Icon
 
 import { Icon } from '@astrojs/starlight/components';
@@ -450,7 +480,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight provides a set of common icons that you can display in your content using the `<Icon>` component.
 
-Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label`, `size`, and `color` attribute.
+Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `label` to provide context for screen readers.
+The `size` and `color` attributes can be used to adjust the icon’s appearance using CSS units and color values.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -458,11 +489,13 @@ Each `<Icon>` requires a [`name`](#all-icons) and can optionally include a `labe
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 The code above generates the following on the page:
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### All icons
 

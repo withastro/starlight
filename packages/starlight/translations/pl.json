@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Przejdź do głównej zawartości",
   "search.label": "Szukaj",
-  "search.shortcutLabel": "(Naciśnij /, aby wyszukać)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Anuluj",
   "search.devWarning": "Wyszukiwanie jest dostępne tylko w buildach produkcyjnych. \nSpróbuj zbudować i uruchomić aplikację, aby przetestować lokalnie.",
   "themeSelect.accessibleLabel": "Wybierz motyw",
@@ -27,5 +27,6 @@
   "fileTree.directory": "Folder",
   "expressiveCode.copyButtonCopied": "Skopiowane!",
   "expressiveCode.copyButtonTooltip": "Skopiuj do schowka",
-  "expressiveCode.terminalWindowFallbackTitle": "Okno terminala"
+  "expressiveCode.terminalWindowFallbackTitle": "Okno terminala",
+  "builtWithStarlight.label": "Built with Starlight"
 }

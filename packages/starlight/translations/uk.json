@@ -1,9 +1,9 @@
 {
   "skipLink.label": "Перейти до вмісту",
   "search.label": "Пошук",
-  "search.shortcutLabel": "(Натисніть / для Пошуку)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Скасувати",
-  "search.devWarning": "Пошук доступний лише у виробничих зборках. \nСпробуйте зібрати та переглянути сайт, щоби протестувати його локально",
+  "search.devWarning": "Пошук доступний лише у виробничих збірках. \nСпробуйте зібрати та переглянути сайт, щоби протестувати його локально",
   "themeSelect.accessibleLabel": "Обрати тему",
   "themeSelect.dark": "Темна",
   "themeSelect.light": "Світла",
@@ -18,11 +18,12 @@
   "page.lastUpdated": "Останнє оновлення:",
   "page.previousLink": "Назад",
   "page.nextLink": "Далі",
-  "page.draft": "This content is a draft and will not be included in production builds.",
+  "page.draft": "Цей контент є чернеткою і не буде включений до виробничих збірок.",
   "404.text": "Сторінку не знайдено. Перевірте URL або спробуйте скористатися пошуком.",
   "aside.note": "Заувага",
   "aside.tip": "Порада",
   "aside.caution": "Обережно",
   "aside.danger": "Небезпечно",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Каталог",
+  "builtWithStarlight.label": "Створено з Starlight"
 }

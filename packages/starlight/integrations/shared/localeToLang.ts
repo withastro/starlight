@@ -1,4 +1,5 @@
 import type { StarlightConfig } from '../../types';
+import { BuiltInDefaultLocale } from '../../utils/i18n';
 
 /**
  * Get the BCP-47 language tag for the given locale.
@@ -7,5 +8,5 @@ import type { StarlightConfig } from '../../types';
 export function localeToLang(config: StarlightConfig, locale: string | undefined): string {
 	const lang = locale ? config.locales?.[locale]?.lang : config.locales?.root?.lang;
 	const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
-	return lang || defaultLang || 'en';
+	return lang || defaultLang || BuiltInDefaultLocale.lang;
 }

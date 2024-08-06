@@ -1,7 +1,7 @@
 {
   "skipLink.label": "跳到內容",
   "search.label": "搜尋",
-  "search.shortcutLabel": "（按 / 鍵開始搜尋）",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "取消",
   "search.devWarning": "正式版本才能使用搜尋功能。\n如要在本地測試，請先建置並預覽網站。",
   "themeSelect.accessibleLabel": "選擇佈景主題",
@@ -24,5 +24,6 @@
   "aside.tip": "提示",
   "aside.caution": "警告",
   "aside.danger": "危險",
-  "fileTree.directory": "目錄"
+  "fileTree.directory": "目錄",
+  "builtWithStarlight.label": "Built with Starlight"
 }

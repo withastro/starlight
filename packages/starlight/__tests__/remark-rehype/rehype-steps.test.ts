@@ -29,16 +29,36 @@ test('component with non-`<ol>` content throws an error', () => {
 			"[AstroUserError]:
 				The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found the following element: \`<p>\`.
 			Hint:
-				To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps"
+				To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps
+				
+				Full HTML passed to \`<Steps>\`:
+				
+				<p>A paragraph is not an ordered list</p>
+				"
 		`);
 });
 
 test('component with multiple children throws an error', () => {
-	expect(() => processSteps('<ol></ol><ol></ol>')).toThrowErrorMatchingInlineSnapshot(`
+	expect(() =>
+		processSteps(
+			'<ol><li>List item</li></ol><p>I intended this to be part of the same list item</p><ol><li>Other list item</li></ol>'
+		)
+	).toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
-			The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found multiple child elements: \`<ol>\`, \`<ol>\`.
+			The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found multiple child elements: \`<ol>\`, \`<p>\`, \`<ol>\`.
 		Hint:
-			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps"
+			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps
+			
+			Full HTML passed to \`<Steps>\`:
+			
+			<ol>
+			  <li>List item</li>
+			</ol>
+			<p>I intended this to be part of the same list item</p>
+			<ol>
+			  <li>Other list item</li>
+			</ol>
+			"
 	`);
 });
 
@@ -50,7 +70,7 @@ test('applies `role="list"` to child list', () => {
 test('does not interfere with other attributes on the child list', () => {
 	const { html } = processSteps('<ol start="5"><li>Step one</li></ol>');
 	expect(html).toMatchInlineSnapshot(
-		`"<ol start="5" role="list" class="sl-steps"><li>Step one</li></ol>"`
+		`"<ol start="5" role="list" class="sl-steps" style="--sl-steps-start: 4"><li>Step one</li></ol>"`
 	);
 });
 
@@ -65,5 +85,18 @@ test('applies class name and preserves existing classes on a child list', () => 
 	expect(html).toContain(`class="${testClass} sl-steps"`);
 	expect(html).toMatchInlineSnapshot(
 		`"<ol class="test class-concat sl-steps" role="list"><li>Step one</li></ol>"`
+	);
+});
+
+test('applies custom property if start attribute is used', () => {
+	const start = 10;
+	const { html } = processSteps(`<ol start="${start}"><li>Step one</li></ol>`);
+	expect(html).toContain(`style="--sl-steps-start: ${start - 1}"`);
+});
+
+test('custom property for start count does not interfere with custom styles', () => {
+	const { html } = processSteps(`<ol start="20" style="color: red"><li>Step one</li></ol>`);
+	expect(html).toMatchInlineSnapshot(
+		`"<ol start="20" style="--sl-steps-start: 19;color: red" role="list" class="sl-steps"><li>Step one</li></ol>"`
 	);
 });

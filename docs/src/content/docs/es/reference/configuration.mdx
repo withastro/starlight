@@ -99,25 +99,33 @@ Con esta configuración, una página `/introduction` tendría un enlace de edici
 Configura los elementos de navegación de la barra lateral de tu sitio.
 
 Una barra lateral es un conjunto de enlaces y grupos de enlaces.
-Cada elemento debe tener una propiedad `label` y una de las siguientes propiedades:
+Con la excepción de los elementos que usan `slug`, cada elemento debe tener una `label` y una de las siguientes propiedades:
 
 - `link` — Un solo enlace a una URL específica, p. ej. `'/home'` o `'https://example.com'`.
+
+- `slug` — una referencia a una página interna, p. ej. `'guides/getting-started'`.
 
 - `items` — Un array que contiene más enlaces de la barra lateral y subgrupos.
 
 - `autogenerate` — Un objeto que especifica un directorio de tus documentos para generar automáticamente un grupo de enlaces.
+
+Los enlaces internos también se pueden especificar como una cadena en lugar de un objeto con una propiedad `slug`.
 
 ```js
 starlight({
 	sidebar: [
 		// Un solo elemento de enlace etiquetado como “Home”.
 		{ label: 'Home', link: '/' },
-		// Un grupo etiquetado como "Start Here" que contiene dos enlaces.
+		// Un grupo etiquetado como "Start Here" que contiene cuatro enlaces.
 		{
 			label: 'Start Here',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Next Steps', link: '/next-steps' },
+				// Usando `slug` para enlaces internos.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// O usando la forma abreviada para enlaces internos.
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// Un grupo que enlaza a todas las páginas del directorio de referencia.
@@ -142,16 +150,13 @@ Los grupos de enlaces se expanden de forma predeterminada. Puedes cambiar este c
 
 Los subgrupos generados automáticamente respetan por defecto la propiedad `collapsed` de su grupo padre. Puedes establecer la propiedad `autogenerate.collapsed` para anular esto.
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // Un grupo colapsado de enlaces.
   {
     label: 'Collapsed Links',
     collapsed: true,
-    items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // Un grupo expandido que contiene subgrupos generados automáticamente colapsados.
   {
@@ -193,21 +198,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Enlace
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Enlace interno
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Grupo de enlaces
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Grupo de enlaces autogenerado
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -215,7 +236,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -568,3 +590,13 @@ starlight({
 ```
 
 Consulta la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.
+
+### `credits`
+
+Habilita la visualización de un enlace “Hecho con Starlight” en el pie de página de tu sitio.
+
+```js
+starlight({
+	credits: true,
+});
+```

@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Перейти к содержимому",
   "search.label": "Поиск",
-  "search.shortcutLabel": "(Нажмите / для поиска)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Отменить",
   "search.devWarning": "Поиск доступен только в производственных сборках. \nПопробуйте выполнить сборку и просмотреть сайт, чтобы протестировать его локально.",
   "themeSelect.accessibleLabel": "Выберите тему",
@@ -18,14 +18,15 @@
   "page.lastUpdated": "Последнее обновление:",
   "page.previousLink": "Предыдущая",
   "page.nextLink": "Следующая",
-  "page.draft": "This content is a draft and will not be included in production builds.",
+  "page.draft": "Этот контент является черновиком и не будет добавлен в производственные сборки.",
   "404.text": "Страница не найдена. Проверьте URL или используйте поиск по сайту.",
   "aside.note": "Заметка",
-  "aside.tip": "Знали ли вы?",
+  "aside.tip": "Совет",
   "aside.caution": "Осторожно",
   "aside.danger": "Опасно",
   "fileTree.directory": "Директория",
   "expressiveCode.copyButtonCopied": "Скопировано!",
   "expressiveCode.copyButtonTooltip": "Копировать",
-  "expressiveCode.terminalWindowFallbackTitle": "Окно терминала"
+  "expressiveCode.terminalWindowFallbackTitle": "Окно терминала",
+  "builtWithStarlight.label": "Сделано с помощью Starlight"
 }

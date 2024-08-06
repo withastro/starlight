@@ -8,35 +8,39 @@
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro .",
-    "typecheck": "tsc -p tsconfig.typecheck.json"
+    "typecheck": "astro check --minimumSeverity warning"
   },
   "license": "MIT",
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.1",
-    "@size-limit/file": "^8.2.4",
-    "astro": "^4.3.5",
-    "prettier": "^3.0.0",
-    "prettier-plugin-astro": "^0.13.0",
-    "typescript": "^5.4.5",
-    "size-limit": "^8.2.4"
+    "@astrojs/check": "^0.7.0",
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.5",
+    "@size-limit/file": "^11.1.4",
+    "astro": "^4.10.2",
+    "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.14.0",
+    "size-limit": "^11.1.4",
+    "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@8.7.4",
   "size-limit": [
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "10 kB"
+      "limit": "10 kB",
+      "gzip": true
     },
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "23 kB"
+      "limit": "23 kB",
+      "gzip": true
     },
     {
       "name": "/_astro/*.css",
       "path": "examples/basics/dist/_astro/*.css",
-      "limit": "14 kB"
+      "limit": "14.5 kB",
+      "gzip": true
     }
   ]
 }

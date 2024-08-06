@@ -1,8 +1,10 @@
+import { AstroError } from 'astro/errors';
 import config from 'virtual:starlight/user-config';
 import type { Badge } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
+	InternalSidebarLinkItem,
 	LinkHTMLAttributes,
 	SidebarItem,
 	SidebarLinkItem,
@@ -11,7 +13,7 @@ import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
-import { getLocaleRoutes, type Route } from './routing';
+import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 
 const DirKey = Symbol('DirKey');
@@ -70,9 +72,11 @@ function configItemToEntry(
 	routes: Route[]
 ): SidebarEntry {
 	if ('link' in item) {
-		return linkFromConfig(item, locale, currentPathname);
+		return linkFromSidebarLinkItem(item, locale, currentPathname);
 	} else if ('autogenerate' in item) {
 		return groupFromAutogenerateConfig(item, locale, routes, currentPathname);
+	} else if ('slug' in item) {
+		return linkFromInternalSidebarLinkItem(item, locale, currentPathname);
 	} else {
 		return {
 			type: 'group',
@@ -113,8 +117,8 @@ function groupFromAutogenerateConfig(
 /** Check if a string starts with one of `http://` or `https://`. */
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
-/** Create a link entry from a user config object. */
-function linkFromConfig(
+/** Create a link entry from a manual link item in user config. */
+function linkFromSidebarLinkItem(
 	item: SidebarLinkItem,
 	locale: string | undefined,
 	currentPathname: string
@@ -126,11 +130,41 @@ function linkFromConfig(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeLink(href, label, currentPathname, item.badge, item.attrs);
+	return makeSidebarLink(href, label, currentPathname, item.badge, item.attrs);
 }
 
-/** Create a link entry. */
-function makeLink(
+/** Create a link entry from an automatic internal link item in user config. */
+function linkFromInternalSidebarLinkItem(
+	item: InternalSidebarLinkItem,
+	locale: string | undefined,
+	currentPathname: string
+) {
+	let slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
+	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
+	slugWithLocale = slugWithLocale.replace(/\/?index$/, '');
+	const entry = routes.find((entry) => slugWithLocale === entry.slug);
+	if (!entry) {
+		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
+		if (hasExternalSlashes) {
+			throw new AstroError(
+				`The slug \`"${item.slug}"\` specified in the Starlight sidebar config must not start or end with a slash.`,
+				`Please try updating \`"${item.slug}"\` to \`"${stripLeadingAndTrailingSlashes(item.slug)}"\`.`
+			);
+		} else {
+			throw new AstroError(
+				`The slug \`"${item.slug}"\` specified in the Starlight sidebar config does not exist.`,
+				'Update the Starlight config to reference a valid entry slug in the docs content collection.\n' +
+					'Learn more about Astro content collection slugs at https://docs.astro.build/en/reference/api-reference/#getentry'
+			);
+		}
+	}
+	const label =
+		pickLang(item.translations, localeToLang(locale)) || item.label || entry.entry.data.title;
+	return makeSidebarLink(entry.slug, label, currentPathname, item.badge, item.attrs);
+}
+
+/** Process sidebar link options to create a link entry. */
+function makeSidebarLink(
 	href: string,
 	label: string,
 	currentPathname: string,
@@ -140,10 +174,24 @@ function makeLink(
 	if (!isAbsolute(href)) {
 		href = formatPath(href);
 	}
-
 	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
+	return makeLink({ label, href, isCurrent, badge, attrs });
+}
 
-	return { type: 'link', label, href, isCurrent, badge, attrs: attrs ?? {} };
+/** Create a link entry */
+function makeLink({
+	isCurrent = false,
+	attrs = {},
+	badge = undefined,
+	...opts
+}: {
+	label: string;
+	href: string;
+	isCurrent?: boolean;
+	badge?: Badge | undefined;
+	attrs?: LinkHTMLAttributes | undefined;
+}): Link {
+	return { type: 'link', ...opts, badge, isCurrent, attrs };
 }
 
 /** Test if two paths are equivalent even if formatted differently. */
@@ -206,7 +254,7 @@ function treeify(routes: Route[], baseDir: string): Dir {
 
 /** Create a link entry for a given content collection entry. */
 function linkFromRoute(route: Route, currentPathname: string): Link {
-	return makeLink(
+	return makeSidebarLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		currentPathname,
@@ -223,7 +271,7 @@ function getOrder(routeOrDir: Route | Dir): number {
 	return isDir(routeOrDir)
 		? Math.min(...Object.values(routeOrDir).flatMap(getOrder))
 		: // If no order value is found, set it to the largest number possible.
-		  routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE;
+			routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE;
 }
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
@@ -354,7 +402,7 @@ function applyPrevNextLinkConfig(
 		} else if (config.link && config.label) {
 			// If there is no link and the frontmatter contains both a URL and a label,
 			// create a new link.
-			return makeLink(config.link, config.label, '');
+			return makeLink({ href: config.link, label: config.label });
 		}
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.

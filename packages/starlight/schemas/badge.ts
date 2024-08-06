@@ -4,7 +4,16 @@ const badgeSchema = () =>
 	z.object({
 		variant: z.enum(['note', 'danger', 'success', 'caution', 'tip', 'default']).default('default'),
 		text: z.string(),
+		class: z.string().optional(),
 	});
+
+export const BadgeComponentSchema = badgeSchema()
+	.extend({
+		size: z.enum(['small', 'medium', 'large']).default('small'),
+	})
+	.passthrough();
+
+export type BadgeComponentProps = z.input<typeof BadgeComponentSchema>;
 
 export const BadgeConfigSchema = () =>
 	z

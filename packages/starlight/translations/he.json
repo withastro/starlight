@@ -1,7 +1,7 @@
 {
   "skipLink.label": "דלגו לתוכן",
   "search.label": "חיפוש",
-  "search.shortcutLabel": "(לחצו / כדי לחפש)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "ביטול",
   "search.devWarning": "החיפוש זמין רק בסביבת ייצור. \nנסו לבנות ולהציג תצוגה מקדימה של האתר כדי לבדוק אותו באופן מקומי.",
   "themeSelect.accessibleLabel": "בחרו פרופיל צבע",
@@ -24,5 +24,6 @@
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

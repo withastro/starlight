@@ -1,7 +1,7 @@
 {
   "skipLink.label": "コンテンツにスキップ",
   "search.label": "検索",
-  "search.shortcutLabel": "（/を押して検索）",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "キャンセル",
   "search.devWarning": "検索はプロダクションビルドでのみ利用可能です。\nローカルでテストするには、サイトをビルドしてプレビューしてください。",
   "themeSelect.accessibleLabel": "テーマの選択",
@@ -24,5 +24,6 @@
   "aside.tip": "ヒント",
   "aside.caution": "注意",
   "aside.danger": "危険",
-  "fileTree.directory": "ディレクトリ"
+  "fileTree.directory": "ディレクトリ",
+  "builtWithStarlight.label": "Built with Starlight"
 }

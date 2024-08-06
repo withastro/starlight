@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Gå til indhold",
   "search.label": "Søg",
-  "search.shortcutLabel": "(Tryk / for at søge)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Annuller",
   "search.devWarning": "Søgning er kun tilgængeligt i produktions versioner. \nPrøv at bygge siden og forhåndsvis den for at teste det lokalt.",
   "themeSelect.accessibleLabel": "Vælg tema",
@@ -24,5 +24,6 @@
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

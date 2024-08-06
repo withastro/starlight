@@ -418,6 +418,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### 배지
+
+import { Badge } from '@astrojs/starlight/components';
+
+상태나 라벨과 같은 작은 정보를 표시하려면 `<Badge>` 컴포넌트를 사용하세요.
+
+표시하려는 콘텐츠를 `<Badge>` 컴포넌트의 `text` 속성에 전달하세요.
+
+기본적으로 배지는 사이트의 테마 강조 색상을 사용합니다. 내장 배지 색상을 사용하려면 `variant` 속성의 값을 `note` (파란색), `tip` (보라색), `danger` (빨간색), `caution` (주황색), 'success'(녹색) 중 하나로 설정하세요.
+
+`size` 속성 (기본값: `small`)은 배지의 텍스트 크기를 제어합니다. 더 큰 배지를 표시하기 위해 `medium` 및 `large` 옵션도 사용할 수 있습니다.
+
+맞춤 설정이 더 필요하다면 사용자 정의 CSS와 함께 `class` 또는 `style`과 같은 다른 `<span>` 속성을 사용하세요.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+위의 코드는 페이지에 다음을 생성합니다.
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### 아이콘
 
 import { Icon } from '@astrojs/starlight/components';
@@ -425,7 +455,8 @@ import IconsList from '~/components/icons-list.astro';
 
 Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 공통 아이콘 세트를 제공합니다.
 
-각 `<Icon>`에는 [`name`](#모든-아이콘)이 필요하며 선택적으로 `label`, `size` 및 `color` 속성을 포함할 수 있습니다.
+각 `<Icon>`에는 [`name`](#모든-아이콘)이 필요하며 스크린 리더에 컨텍스트를 제공하기 위해 선택적으로 `label`을 포함할 수 있습니다.
+CSS 단위와 색상 값을 사용하여 아이콘의 모양을 조정하는 데 `size` 및 `color` 속성을 사용할 수 있습니다.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -433,11 +464,13 @@ Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 �
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 위 코드는 페이지에 다음을 생성합니다.
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### 모든 아이콘
 

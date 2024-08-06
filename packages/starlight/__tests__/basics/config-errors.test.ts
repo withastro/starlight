@@ -44,6 +44,7 @@ test('parses valid config successfully', () => {
 		    "ThemeSelect": "@astrojs/starlight/components/ThemeSelect.astro",
 		    "TwoColumnContent": "@astrojs/starlight/components/TwoColumnContent.astro",
 		  },
+		  "credits": false,
 		  "customCss": [],
 		  "defaultLocale": {
 		    "dir": "ltr",
@@ -59,6 +60,7 @@ test('parses valid config successfully', () => {
 		  },
 		  "head": [],
 		  "isMultilingual": false,
+		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,
 		  "locales": undefined,
 		  "pagefind": true,
@@ -111,7 +113,7 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective', received 'unknown'
+			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne' | 'blueSky' | 'discourse' | 'zulip' | 'pinterest', received 'unknown'
 			**social.unknown**: Invalid url"
 	`
 	);
@@ -163,7 +165,7 @@ test('errors with bad sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string;  } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "href": "/" }\`"
 	`
 	);
@@ -188,7 +190,57 @@ test('errors with bad nested sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0.items.1**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "items": [ { "label": "Nested Example 1", "link": "/" }, { "label": "Nested Example 2", "link": true } ] }\`"
+	`);
+});
+
+test('errors with sidebar entry that includes `link` and `items`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{ label: 'Parent', link: '/parent', items: [{ label: 'Child', link: '/parent/child' }] },
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'items'"
+	`);
+});
+
+test('errors with sidebar entry that includes `link` and `autogenerate`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [{ label: 'Parent', link: '/parent', autogenerate: { directory: 'test' } }],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
+	`);
+});
+
+test('errors with sidebar entry that includes `items` and `autogenerate`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{
+					label: 'Parent',
+					items: [{ label: 'Child', link: '/parent/child' }],
+					autogenerate: { directory: 'test' },
+				},
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
 	`);
 });

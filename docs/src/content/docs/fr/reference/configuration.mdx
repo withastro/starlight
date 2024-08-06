@@ -100,25 +100,33 @@ Avec cette configuration, une page `/introduction` aurait un lien d'édition poi
 Configure les éléments de navigation de la barre latérale de votre site.
 
 Une barre latérale est un tableau de liens et de groupes de liens.
-Chaque élément doit comporter un `label` et l'une des propriétés suivantes :
+À l'exception des éléments utilisant `slug`, chaque élément doit comporter un `label` et l'une des propriétés suivantes :
 
 - `link` — un lien uninque vers une URL spécifique, comme `'/home'` ou `'https://example.com'`.
+
+- `slug` — une référence à une page interne, par exemple `'guides/getting-started'`.
 
 - `items` — un tableau contenant plus de liens et des sous-groupes.
 
 - `autogenerate` — un objet indiquant un répertoire de vos docs depuis lequel générer automatiquement un groupe de liens.
+
+Les liens internes peuvent également être spécifiés sous forme de chaîne de caractères au lieu d'un objet avec une propriété `slug`.
 
 ```js
 starlight({
 	sidebar: [
 		// Un lien unique étiqueté “Accueil”.
 		{ label: 'Accueil', link: '/' },
-		// Un groupe étiqueté “Débuter ici” contenant deux liens.
+		// Un groupe étiqueté “Débuter ici” contenant quatre liens.
 		{
 			label: 'Débuter ici',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Prochaines étapes', link: '/next-steps' },
+				// Utilisation de `slug` pour les liens internes.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// Ou la forme simplifiée pour les liens internes.
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// Un groupe liant toutes les pages présentes dans le répertoire reference.
@@ -141,16 +149,13 @@ Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comp
 
 Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // Un groupe rétractable de liens.
   {
     label: 'Collapsed Links',
     collapsed: true,
-    items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // Un groupe développé contenant des sous-groupes générés automatiquement rétractés.
   {
@@ -192,21 +197,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Lien
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Lien interne
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Groupe de liens
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Groupe de liens généré automatiquement
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -214,7 +235,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -289,7 +311,7 @@ Le sens d'écriture de cette langue ; `"ltr"` pour gauche à droite (par défaut
 
 #### Locale racine
 
-Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale `root` :
+Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale avec la clé `root` :
 
 ```js {3-6}
 starlight({
@@ -313,7 +335,7 @@ Par exemple, cela vous permet de servir `/getting-started/` comme une route angl
 
 Définit la langue par défaut pour ce site.
 La valeur doit correspondre à l'une des clés de votre objet [`locales`](#locales).
-(Si votre langue par défaut est votre [root locale](#locale-racine), vous pouvez sauter cette étape).
+(Si votre langue par défaut est votre [locale racine](#locale-racine), vous pouvez sauter cette étape).
 
 La locale par défaut sera utilisée pour fournir un contenu de remplacement lorsque les traductions sont manquantes.
 
@@ -568,3 +590,13 @@ starlight({
 ```
 
 Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus de détails pour créer vos propres modules d'extension.
+
+### `credits`
+
+Permet l'affichage d'un lien "Créé avec Starlight" dans le pied de page de votre site.
+
+```js
+starlight({
+	credits: true,
+});
+```

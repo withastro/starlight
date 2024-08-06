@@ -254,7 +254,7 @@ describe('getPrevNextLinks', () => {
 		expect(withDefaults.prev).toBeUndefined();
 		expect(withCustomLinks.prev).toEqual({
 			type: 'link',
-			href: '/x',
+			href: 'x',
 			label: 'X',
 			isCurrent: false,
 			attrs: {},

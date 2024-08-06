@@ -19,8 +19,15 @@ export function vitePluginStarlightUserConfig(
 		build: Pick<AstroConfig['build'], 'format'>;
 	}
 ): NonNullable<ViteUserConfig['plugins']>[number] {
-	const resolveId = (id: string) =>
-		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(root), id) : id);
+	/**
+	 * Resolves module IDs to a usable format:
+	 * - Relative paths (e.g. `'./module.js'`) are resolved against `base` and formatted as an absolute path.
+	 * - Package identifiers (e.g. `'module'`) are returned unchanged.
+	 *
+	 * By default, `base` is the project root directory.
+	 */
+	const resolveId = (id: string, base = root) =>
+		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
 
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
@@ -43,14 +50,14 @@ export function vitePluginStarlightUserConfig(
 			? 'src' in opts.logo
 				? `import src from ${resolveId(
 						opts.logo.src
-				  )}; export const logos = { dark: src, light: src };`
+					)}; export const logos = { dark: src, light: src };`
 				: `import dark from ${resolveId(opts.logo.dark)}; import light from ${resolveId(
 						opts.logo.light
-				  )}; export const logos = { dark, light };`
+					)}; export const logos = { dark, light };`
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {
-				userCollections = (await import('/src/content/config.ts')).collections;
+				userCollections = (await import(${resolveId('./content/config.ts', srcDir)})).collections;
 			} catch {}
 			export const collections = userCollections;`,
 		...virtualComponentModules,

@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Bỏ qua nội dung",
   "search.label": "Tìm kiếm",
-  "search.shortcutLabel": "(Nhấn / để Tìm kiếm)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Thoát",
   "search.devWarning": "Tìm kiếm không khả dụng khi đang trong môi trường lập trình. \nThử xuất bản website và tìm kiếm.",
   "themeSelect.accessibleLabel": "Chọn giao diện",
@@ -24,5 +24,6 @@
   "aside.tip": "Mẹo",
   "aside.caution": "Thận trọng",
   "aside.danger": "Nguy hiểm",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Danh mục",
+  "builtWithStarlight.label": "Tạo với Starlight"
 }

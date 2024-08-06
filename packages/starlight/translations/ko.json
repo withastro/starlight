@@ -1,7 +1,7 @@
 {
   "skipLink.label": "컨텐츠로 건너뛰기",
   "search.label": "검색",
-  "search.shortcutLabel": "(검색하려면 / 를 누르세요)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "취소",
   "search.devWarning": "검색 기능은 운영 환경에서만 사용할 수 있습니다. \n로컬에서 테스트하려면 사이트를 빌드하고 미리보기를 해보세요.",
   "themeSelect.accessibleLabel": "테마 선택",
@@ -24,5 +24,6 @@
   "aside.tip": "팁",
   "aside.caution": "주의",
   "aside.danger": "위험",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "디렉터리",
+  "builtWithStarlight.label": "Starlight로 제작됨"
 }

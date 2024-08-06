@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Ir ao contido",
   "search.label": "Busca",
-  "search.shortcutLabel": "(Preme / para Busca)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Deixar",
   "search.devWarning": "A busca só está dispoñible nas versións de producción. \nTrata de construir e ollear o sitio para probalo localmente.",
   "themeSelect.accessibleLabel": "Seleciona tema",
@@ -24,5 +24,6 @@
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

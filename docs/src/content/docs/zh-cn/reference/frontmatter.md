@@ -267,6 +267,21 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**类型：** `boolean`  
+**默认值：** `false`
+
+设置此页面是否应被视为草稿，并且不包含在 [生产版本](https://docs.astro.build/zh-cn/reference/cli-reference/#astro-build) 和 [自动生成的链接组](/zh-cn/guides/sidebar/#自动生成的分组) 中。设置为 `true` 可将页面标记为草稿，并使其仅在开发过程中可见。
+
+```md
+---
+# src/content/docs/example.md
+# 从生产版本中排除此页面
+draft: true
+---
+```
+
 ### `sidebar`
 
 **类型：** [`SidebarConfig`](#sidebarconfig)
@@ -339,7 +354,7 @@ sidebar:
 
 当在自动生成的链接组中显示时，在侧边栏中为页面添加徽章。
 
-当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh-cn/reference/configuration/#badgeconfig) ，其中包含 `text` 和 `variant` 字段，可以自定义徽章。
+当使用字符串时，徽章将显示为默认的强调色。可选择的，传递一个 [`BadgeConfig` 对象](/zh-cn/reference/configuration/#badgeconfig) ，其中包含 `text`、`variant` 和 `class` 字段，可以自定义徽章。
 
 ```md
 ---

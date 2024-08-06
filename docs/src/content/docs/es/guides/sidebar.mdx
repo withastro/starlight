@@ -49,19 +49,73 @@ Aprende más sobre las barras laterales generadas automáticamente en la secció
 
 ## Agregar enlaces y grupos de enlaces
 
-Para configurar los [enlaces](#enlaces) de tu barra lateral y [grupos de enlaces](#grupos) (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
+Para configurar los enlaces de tu barra lateral y grupos de enlaces (dentro de un encabezado plegable), usa la propiedad [`starlight.sidebar`](/es/reference/configuration/#sidebar) en `astro.config.mjs`.
 
 Combinando enlaces y grupos, puedes crear una amplia variedad de diseños de barra lateral.
 
-### Enlaces
+### Enlaces internos
 
-Agrega un enlace a una página interna o externa usando un objeto con las propiedades `label` y `link`.
+Agrega un enlace a una página en `src/content/docs/` usando un objeto con la propiedad `slug`.
+El título de la página vinculada se utilizará como etiqueta de forma predeterminada.
+
+Por ejemplo, con la siguiente configuración:
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+Y la siguiente estructura de archivos:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+La siguiente barra lateral se generará automáticamente:
+
+<SidebarPreview
+	config={[
+		{ label: 'Andrómeda', link: '' },
+		{ label: 'Orión', link: '' },
+	]}
+/>
+
+Para sobreescribir los valores inferidos del frontmatter de una página vinculada, puedes agregar las propiedades `label`, [`translations`](#internacionalización) y [`attrs`](#atributos-html-personalizados).
+
+Ve [“Personalización de enlaces autogenerados”](#personalización-de-enlaces-autogenerados-en-el-frontmatter) para más detalles sobre cómo controlar la apariencia de la barra lateral desde el frontmatter de la página.
+
+#### Atajo para enlaces internos
+
+Los enlaces internos también se pueden especificar proporcionando solo un string para el slug de la página como un atajo.
+
+Por ejemplo, la siguiente configuración es equivalente a la configuración anterior, que usaba `slug`:
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### Otros enlaces
+
+Agrega un enlace a una página externa o un enlace que no sea de documentación usando un objeto con las propiedades `label` y `link`.
 
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Un enlace a la página de la luna Ganímedes.
-		{ label: 'Ganímedes', link: '/moons/ganymede/' },
+		// Un enlace a una página que no sea de documentación en este sitio.
+		{ label: 'Tienda de Meteoritos', link: '/shop/' },
 		// Un enlace externo al sitio web de la NASA.
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -72,7 +126,7 @@ La configuración anterior genera la siguiente barra lateral:
 
 <SidebarPreview
 	config={[
-		{ label: 'Ganímedes', link: '' },
+		{ label: 'Tienda de Meteoritos', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -93,15 +147,15 @@ starlight({
 		{
 			label: 'Constelaciones',
 			items: [
-				{ label: 'Carina', link: '/constellations/carina/' },
-				{ label: 'Centaurus', link: '/constellations/centaurus/' },
+				'constellations/carina',
+				'constellations/centaurus',
 				// Un grupo anidado de enlaces para constelaciones estacionales.
 				{
 					label: 'Estacional',
 					items: [
-						{ label: 'Andrómeda', link: '/constellations/andromeda/' },
-						{ label: 'Orión', link: '/constellations/orion/' },
-						{ label: 'Osa Menor', link: '/constellations/ursa-minor/' },
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',
 					],
 				},
 			],
@@ -186,7 +240,7 @@ La siguiente barra lateral se generará automáticamente:
 	]}
 />
 
-#### Personalización de enlaces autogenerados en el frontmatter
+## Personalización de enlaces autogenerados en el frontmatter
 
 Usa el campo [`sidebar`](/es/reference/frontmatter/#sidebar) en las páginas individuales para personalizar los enlaces autogenerados.
 
@@ -227,14 +281,14 @@ Un grupo autogenerado que incluye una página con el frontmatter anterior genera
 />
 
 :::note
-La configuración `sidebar` del frontmatter solo se usa para enlaces autogenerados y se ignorará para enlaces definidos manualmente.
+El frontmatter `sidebar` solo se utiliza para enlaces en grupos autogenerados y enlaces de documentos definidos con la propiedad `slug`. No se aplica a los enlaces definidos con la propiedad `link`.
 :::
 
 ## Insignias
 
 Los enlaces, grupos y grupos autogenerados también pueden incluir una propiedad `badge` para mostrar una insignia junto a la etiqueta del enlace.
 
-```js {10,17}
+```js {9,16}
 starlight({
 	sidebar: [
 		{
@@ -242,8 +296,7 @@ starlight({
 			items: [
 				// Un enlace con una insignia "Supergigante".
 				{
-					label: 'Persei',
-					link: '/stars/persei/',
+					slug: 'stars/persei',
 					badge: 'Supergigante',
 				},
 			],
@@ -293,14 +346,16 @@ La configuración anterior genera la siguiente barra lateral:
 	]}
 />
 
-### Variantes de insignia
+### Variantes de insignia y estilos personalizados
 
-Personaliza el estilo de la insignia usando un objeto con las propiedades `text` y `variant`.
+Personaliza el estilo de la insignia usando un objeto con las propiedades `text`, `variant` y `class`.
 
 La propiedad `text` representa el contenido a mostrar (por ejemplo, "Nuevo").
-Remplaza el estilo `default`, que usa el color de acento de tu sitio, estableciendo la propiedad `variant` a uno de los siguientes valores: `note`, `tip`, `danger`, `caution` o `success`.
+Por defecto, la insignia usará el color de acento de tu sitio. Para usar un estilo de insignia integrado, establece la propiedad `variant` en uno de los siguientes valores: `note`, `tip`, `danger`, `caution` o `success`.
 
-```js {10}
+Opcionalmente, puedes crear un estilo de insignia personalizado estableciendo la propiedad `class` en un nombre de clase CSS.
+
+```js {9}
 starlight({
 	sidebar: [
 		{
@@ -308,8 +363,7 @@ starlight({
 			items: [
 				// Un enlace con una insignia "Stub" amarilla.
 				{
-					label: 'Sirio',
-					link: '/stars/sirius/',
+					slug: 'stars/sirius',
 					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
@@ -398,14 +452,14 @@ starlight({
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
-					link: '/constellations/andromeda/',
+					slug: 'constellations/andromeda',
 				},
 				{
 					label: 'Escorpio',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
-					link: '/constellations/scorpius/',
+					slug: 'constellations/scorpius',
 				},
 			],
 		},
@@ -427,6 +481,44 @@ Navegar por la documentación en portugués de Brasil generará la siguiente bar
 	]}
 />
 
+### Internacionalización con enlaces internos
+
+[Los Enlaces internos](#enlaces-internos) utilizarán automáticamente los títulos de página traducidos del frontmatter de contenido de forma predeterminada:
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+Navegando por la documentación en portugués de Brasil generará la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+En sitios multilingües, el valor de `slug` no incluye la parte del idioma de la
+URL. Por ejemplo, si tienes páginas en `en/intro` y `pt-br/intro`, el slug es
+`intro` al configurar la barra lateral.
+
 ## Grupos colapsables
 
 Los grupos de enlaces pueden colapsarse por defecto estableciendo la propiedad `collapsed` en `true`.
@@ -438,10 +530,7 @@ starlight({
 			label: 'Constelaciones',
 			// Collapsa el grupo de forma predeterminada.
 			collapsed: true,
-			items: [
-				{ label: 'Andrómeda', link: '/constellations/andromeda/' },
-				{ label: 'Orion', link: '/constellations/orion/' },
-			],
+			items: ['constellations/andromeda', 'constellations/orion'],
 		},
 	],
 });

@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Skip to content",
   "search.label": "Search",
-  "search.shortcutLabel": "(Press / to Search)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Cancel",
   "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
   "themeSelect.accessibleLabel": "Select theme",
@@ -24,5 +24,6 @@
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

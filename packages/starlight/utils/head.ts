@@ -12,7 +12,7 @@ export function createHead(defaults: HeadUserConfig, ...heads: HeadConfig[]) {
 }
 
 /**
- * Test if a head config object contains a matching `<title>` or `<meta>` tag.
+ * Test if a head config object contains a matching `<title>` or `<meta>` or `<link rel="canonical">` tag.
  *
  * For example, will return true if `head` already contains
  * `<meta name="description" content="A">` and the passed `tag`
@@ -25,6 +25,8 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 			return head.some(({ tag }) => tag === 'title');
 		case 'meta':
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
+		case 'link':
+			return head.some(({ attrs }) => attrs.rel === 'canonical');
 		default:
 			return false;
 	}
