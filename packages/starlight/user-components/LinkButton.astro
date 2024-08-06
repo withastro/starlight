@@ -28,26 +28,27 @@ const {
 <style>
 	.sl-link-button {
 		align-items: center;
+		border: 1px solid transparent;
 		border-radius: 999rem;
 		display: inline-flex;
 		font-size: var(--sl-text-sm);
 		gap: 0.5em;
-		line-height: 1.7145;
+		line-height: 1.1875;
 		outline-offset: 0.25rem;
-		padding: 0.5rem 1.125rem;
+		padding: 0.4375rem 1.125rem;
 		text-decoration: none;
 	}
 
 	.sl-link-button.primary {
 		background: var(--sl-color-text-accent);
-		border: 1px solid var(--sl-color-text-accent);
+		border-color: var(--sl-color-text-accent);
 		color: var(--sl-color-black);
 	}
 	.sl-link-button.primary:hover {
 		color: var(--sl-color-black);
 	}
 	.sl-link-button.secondary {
-		border: 1px solid;
+		border-color: inherit;
 		color: var(--sl-color-white);
 	}
 	.sl-link-button.minimal {
@@ -62,8 +63,7 @@ const {
 	@media (min-width: 50rem) {
 		.sl-link-button {
 			font-size: var(--sl-text-base);
-			line-height: 1.5;
-			padding: 1rem 1.25rem;
+			padding: 0.9375rem 1.25rem;
 		}
 	}
 
