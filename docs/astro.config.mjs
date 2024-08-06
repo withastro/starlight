@@ -21,13 +21,12 @@ export const locales = {
 	uk: { label: 'Українська', lang: 'uk' },
 };
 
-/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
-const VERCEL_PREVIEW_SITE =
-	process.env.VERCEL_ENV !== 'production' &&
-	process.env.VERCEL_URL &&
-	`https://${process.env.VERCEL_URL}`;
+/* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
+const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
 
-const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
+const site = NETLIFY_PREVIEW_SITE || 'https://starlight.astro.build/';
+const ogUrl = new URL('og.jpg?v=1', site).href;
+const ogImageAlt = 'Make your docs shine with Starlight';
 
 export default defineConfig({
 	site,
@@ -58,11 +57,11 @@ export default defineConfig({
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: site + 'og.jpg?v=1' },
+					attrs: { property: 'og:image', content: ogUrl },
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
+					attrs: { property: 'og:image:alt', content: ogImageAlt },
 				},
 			],
 			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
@@ -87,49 +86,11 @@ export default defineConfig({
 						uk: 'Почніть звідси',
 					},
 					items: [
-						{
-							label: 'Getting Started',
-							link: 'getting-started',
-							translations: {
-								de: 'Erste Schritte',
-								es: 'Empezando',
-								ja: '入門',
-								fr: 'Mise en route',
-								it: 'Iniziamo',
-								id: 'Memulai',
-								'zh-CN': '开始使用',
-								'pt-BR': 'Introdução',
-								'pt-PT': 'Introdução',
-								ko: '시작하기',
-								tr: 'Başlarken',
-								ru: 'Введение',
-								hi: 'पहले कदम',
-								uk: 'Вступ',
-							},
-						},
-						{
-							label: 'Manual Setup',
-							link: 'manual-setup',
-							translations: {
-								de: 'Manuelle Einrichtung',
-								es: 'Configuración Manual',
-								ja: '手動セットアップ',
-								fr: 'Installation manuelle',
-								// it: 'Manual Setup',
-								id: 'Instalasi Manual',
-								'zh-CN': '手动配置',
-								'pt-BR': 'Instalação Manual',
-								'pt-PT': 'Instalação Manual',
-								ko: '수동으로 설정하기',
-								tr: 'Elle Kurulum',
-								ru: 'Установка вручную',
-								hi: 'मैनुअल सेटअप',
-								uk: 'Ручне встановлення',
-							},
-						},
+						'getting-started',
+						'manual-setup',
 						{
 							label: 'Environmental Impact',
-							link: 'environmental-impact',
+							slug: 'environmental-impact',
 							translations: {
 								de: 'Umweltbelastung',
 								es: 'Documentación ecológica',

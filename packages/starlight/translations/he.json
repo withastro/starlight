@@ -1,7 +1,7 @@
 {
   "skipLink.label": "דלגו לתוכן",
   "search.label": "חיפוש",
-  "search.shortcutLabel": "(לחצו / כדי לחפש)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "ביטול",
   "search.devWarning": "החיפוש זמין רק בסביבת ייצור. \nנסו לבנות ולהציג תצוגה מקדימה של האתר כדי לבדוק אותו באופן מקומי.",
   "themeSelect.accessibleLabel": "בחרו פרופיל צבע",
