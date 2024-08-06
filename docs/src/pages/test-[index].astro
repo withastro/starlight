@@ -1,0 +1,61 @@
+---
+import StarlightPage, {
+	type StarlightPageProps,
+} from '@astrojs/starlight/components/StarlightPage.astro';
+
+// TODO(HiDeoo) Remove this file.
+
+export function getStaticPaths() {
+	return [{ params: { index: '3' } }, { params: { index: '4' } }, { params: { index: '5' } }];
+}
+
+const index = Number.parseInt(Astro.params.index, 10);
+
+const sidebar: StarlightPageProps['sidebar'] = [
+	'getting-started',
+	{
+		label: 'Tests',
+		items: [
+			{ label: 'Test 1', link: '/test-1/' },
+			{ label: 'Test 2', link: '/test-2/' },
+			{ label: 'Test 3', link: '/test-3/' },
+			{ label: 'Test 4', link: '/test-4/' },
+			{ label: 'Test 5', link: '/test-5/' },
+		],
+	},
+	{
+		label: 'Recent posts',
+		items: [
+			{ label: 'Article 6', link: '/blog/article-6/' },
+			{ label: 'Article 5', link: '/blog/article-5/' },
+			{ label: 'Article 4', link: '/blog/article-4/' },
+			{ label: 'Article 3', link: '/blog/article-3/' },
+			{ label: 'Article 2', link: '/blog/article-2/' },
+		],
+	},
+	{
+		label: 'Tags',
+		items: [
+			{ label: 'Starlight', link: '/blog/tags/starlight/' },
+			{ label: 'Astro', link: '/blog/tags/astro/' },
+		],
+	},
+	{
+		label: 'Reference',
+		autogenerate: { directory: 'reference' },
+	},
+];
+---
+
+<StarlightPage frontmatter={{ title: 'Test 3' }} {sidebar}>
+	<p>
+		A custom <code>sidebar</code> config is used with <code>StarlightPage</code> in this custom page.
+	</p>
+	{
+		index < 5 && (
+			<p>
+				Continue to the <a href={`/test-${index + 1}/`}>next test page</a>.
+			</p>
+		)
+	}
+</StarlightPage>

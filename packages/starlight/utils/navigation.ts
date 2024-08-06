@@ -15,6 +15,7 @@ import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
+import type { StarlightConfig } from './user-config';
 
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
@@ -333,11 +334,20 @@ function sidebarFromDir(
 	);
 }
 
-/** Get the sidebar for the current page. */
+/** Get the sidebar for the current page using the global config. */
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
+	return getSidebarFromConfig(config.sidebar, pathname, locale);
+}
+
+/** Get the sidebar for the current page using the specified sidebar config. */
+export function getSidebarFromConfig(
+	sidebarConfig: StarlightConfig['sidebar'],
+	pathname: string,
+	locale: string | undefined
+): SidebarEntry[] {
 	const routes = getLocaleRoutes(locale);
-	if (config.sidebar) {
-		return config.sidebar.map((group) => configItemToEntry(group, pathname, locale, routes));
+	if (sidebarConfig) {
+		return sidebarConfig.map((group) => configItemToEntry(group, pathname, locale, routes));
 	} else {
 		const tree = treeify(routes, locale || '');
 		return sidebarFromDir(tree, pathname, locale, false);
