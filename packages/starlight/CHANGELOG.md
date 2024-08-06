@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.25.4
+
+### Patch Changes
+
+- [#2155](https://github.com/withastro/starlight/pull/2155) [`8bed886`](https://github.com/withastro/starlight/commit/8bed88674c732040cf66d392372386a8917a2eeb) Thanks [@delucis](https://github.com/delucis)! - Improves page load performance on slower devices
+
+- [#2167](https://github.com/withastro/starlight/pull/2167) [`9ac7725`](https://github.com/withastro/starlight/commit/9ac7725dbe84f3fab9b191452471d8eaffd55048) Thanks [@delucis](https://github.com/delucis)! - Fixes an issue detecting the built-in locale when running Starlight in a web container environment on Firefox
+
+- [#2166](https://github.com/withastro/starlight/pull/2166) [`4f12049`](https://github.com/withastro/starlight/commit/4f120490e914fb308e909b97890a11bb95ae964c) Thanks [@delucis](https://github.com/delucis)! - Updates `@astrojs/mdx`, `@astrojs/sitemap`, `astro-expressive-code`, `unified`, and `vfile` dependencies to the latest version
+
 ## 0.25.3
 
 ### Patch Changes
