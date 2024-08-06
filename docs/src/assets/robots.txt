@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://starlight.astro.build/sitemap-index.xml
