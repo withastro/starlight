@@ -96,7 +96,18 @@ You can display different versions of your logo in light and dark modes.
 
 ## Enable sitemap
 
-Starlight has built-in support for sitemaps, you can read more about [how to enable it here](https://docs.astro.build/en/guides/integrations-guide/sitemap/#usage).
+Starlight has built-in support for generating a sitemap. Enable sitemap generation by setting your URL as `site` in `astro.config.mjs`:
+
+```js {4}
+// astro.config.mjs
+
+export default defineConfig({
+	site: 'https://stargazers.club/',
+	integrations: [starlight({ title: 'Site with sitemap' })],
+});
+```
+
+Learn how to [add a sitemap link to `robots.txt`](https://docs.astro.build/en/guides/integrations-guide/sitemap/#sitemap-link-in-robotstxt) in the Astro Docs.
 
 ## Page layout
 
