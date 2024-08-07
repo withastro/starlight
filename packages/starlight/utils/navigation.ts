@@ -410,4 +410,7 @@ function applyPrevNextLinkConfig(
 }
 
 /** Remove the extension from a path. */
-const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
+function stripExtension(path: string) {
+	const periodIndex = path.lastIndexOf('.');
+	return periodIndex < path.length - 1 ? path.slice(0, periodIndex) : path;
+}
