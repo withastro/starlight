@@ -52,12 +52,16 @@ test('syncs only tabs using the same sync key', async ({ page, starlight }) => {
 	const pkgTabsA = tabs.nth(0);
 	const unsyncedTabs = tabs.nth(1);
 	const styleTabs = tabs.nth(3);
+	const osTabsA = tabs.nth(5);
+	const osTabsB = tabs.nth(6);
 
 	// Select the pnpm tab in the set of tabs synced with the 'pkg' key.
 	await pkgTabsA.getByRole('tab').filter({ hasText: 'pnpm' }).click();
 
 	await expectSelectedTab(unsyncedTabs, 'one', 'tab 1');
 	await expectSelectedTab(styleTabs, 'css', 'css code');
+	await expectSelectedTab(osTabsA, 'macos', 'macOS');
+	await expectSelectedTab(osTabsB, 'macos', 'ls');
 });
 
 test('supports synced tabs with different tab items', async ({ page, starlight }) => {
@@ -148,6 +152,8 @@ test('restores tabs only for synced tabs with a persisted state', async ({ page,
 	const pkgTabsC = tabs.nth(4);
 	const unsyncedTabs = tabs.nth(1);
 	const styleTabs = tabs.nth(3);
+	const osTabsA = tabs.nth(5);
+	const osTabsB = tabs.nth(6);
 
 	// Select the pnpm tab in the set of tabs synced with the 'pkg' key.
 	await pkgTabsA.getByRole('tab').filter({ hasText: 'pnpm' }).click();
@@ -166,6 +172,8 @@ test('restores tabs only for synced tabs with a persisted state', async ({ page,
 	// Other tabs should not be affected.
 	await expectSelectedTab(unsyncedTabs, 'one', 'tab 1');
 	await expectSelectedTab(styleTabs, 'css', 'css code');
+	await expectSelectedTab(osTabsA, 'macos', 'macOS');
+	await expectSelectedTab(osTabsB, 'macos', 'ls');
 });
 
 test('restores tabs for a single set of synced tabs with a persisted state', async ({
@@ -188,16 +196,51 @@ test('restores tabs for a single set of synced tabs with a persisted state', asy
 	await expectSelectedTab(styleTabs, 'tailwind', 'tailwind code');
 });
 
+test('restores tabs for multiple synced tabs with different sync keys', async ({
+	page,
+	starlight,
+}) => {
+	await starlight.goto('/tabs');
+
+	const tabs = page.locator('starlight-tabs');
+	const pkgTabsA = tabs.nth(0);
+	const pkgTabsB = tabs.nth(2);
+	const pkgTabsC = tabs.nth(4);
+	const osTabsA = tabs.nth(5);
+	const osTabsB = tabs.nth(6);
+
+	// Select the pnpm tab in the set of tabs synced with the 'pkg' key.
+	await pkgTabsA.getByRole('tab').filter({ hasText: 'pnpm' }).click();
+
+	await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
+	await expectSelectedTab(pkgTabsB, 'pnpm', 'another pnpm command');
+	await expectSelectedTab(pkgTabsC, 'pnpm', 'another pnpm command');
+
+	// Select the windows tab in the set of tabs synced with the 'os' key.
+	await osTabsB.getByRole('tab').filter({ hasText: 'windows' }).click();
+
+	page.reload();
+
+	// The synced tabs with a persisted state for the `pkg` sync key should be restored.
+	await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
+	await expectSelectedTab(pkgTabsB, 'pnpm', 'another pnpm command');
+	await expectSelectedTab(pkgTabsC, 'pnpm', 'another pnpm command');
+
+	// The synced tabs with a persisted state for the `os` sync key should be restored.
+	await expectSelectedTab(osTabsA, 'windows', 'Windows');
+	await expectSelectedTab(osTabsB, 'windows', 'Get-ChildItem');
+});
+
 test('includes the `<starlight-tabs-restore>` element only for synced tabs', async ({
 	page,
 	starlight,
 }) => {
 	await starlight.goto('/tabs');
 
-	// The page includes 5 sets of tabs.
-	await expect(page.locator('starlight-tabs')).toHaveCount(5);
-	// Only 4 sets of tabs are synced.
-	await expect(page.locator('starlight-tabs-restore')).toHaveCount(4);
+	// The page includes 7 sets of tabs.
+	await expect(page.locator('starlight-tabs')).toHaveCount(7);
+	// Only 6 sets of tabs are synced.
+	await expect(page.locator('starlight-tabs-restore')).toHaveCount(6);
 });
 
 test('includes the synced tabs restore script only when needed and at most once', async ({
@@ -230,7 +273,7 @@ test('gracefully handles invalid persisted state for synced tabs', async ({ page
 
 	// Replace the persisted state with a new invalid value.
 	await page.evaluate(
-		(value) => localStorage.setItem('starlight-synced-tabs', value),
+		(value) => localStorage.setItem('starlight-synced-tabs__pkg', value),
 		'invalid-value'
 	);
 
@@ -245,8 +288,8 @@ test('gracefully handles invalid persisted state for synced tabs', async ({ page
 	await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
 
 	// The synced tabs should be restored with the new valid persisted state.
-	expect(await page.evaluate(() => localStorage.getItem('starlight-synced-tabs'))).toBe(
-		'{"pkg":"pnpm"}'
+	expect(await page.evaluate(() => localStorage.getItem('starlight-synced-tabs__pkg'))).toBe(
+		'pnpm'
 	);
 });
 

@@ -47,13 +47,7 @@ if (isSynced) {
 				if (!(starlightTabs instanceof HTMLElement) || typeof localStorage === 'undefined') return;
 				const syncKey = starlightTabs.dataset.syncKey;
 				if (!syncKey) return;
-				let label = '';
-				try {
-					const storedSyncedTabs = localStorage.getItem('starlight-synced-tabs') ?? '{}';
-					const persistedSyncedTabs = JSON.parse(storedSyncedTabs);
-					if (typeof persistedSyncedTabs !== 'object') return;
-					label = persistedSyncedTabs[syncKey];
-				} catch {}
+				const label = localStorage.getItem(`starlight-synced-tabs__${syncKey}`);
 				if (!label) return;
 				const tabs = [...starlightTabs?.querySelectorAll('[role="tab"]')];
 				const tabIndexToRestore = tabs.findIndex(
@@ -151,8 +145,8 @@ if (isSynced) {
 		tabs: HTMLAnchorElement[];
 		panels: HTMLElement[];
 		#syncKey: string | undefined;
-		// The storage key should be in sync with the one used in the restore script.
-		#storageKey = 'starlight-synced-tabs';
+		// The storage key prefix should be in sync with the one used in the restore script.
+		#storageKeyPrefix = 'starlight-synced-tabs__';
 
 		constructor() {
 			super();
@@ -238,16 +232,7 @@ if (isSynced) {
 
 		#persistSyncedTabs(label: string) {
 			if (!this.#syncKey || typeof localStorage === 'undefined') return;
-			let syncedTabs: Record<string, string> = {};
-
-			try {
-				const storedSyncedTabs = localStorage.getItem(this.#storageKey) ?? '{}';
-				const persistedSyncedTabs = JSON.parse(storedSyncedTabs);
-				if (typeof persistedSyncedTabs === 'object') syncedTabs = persistedSyncedTabs;
-			} catch {}
-
-			syncedTabs[this.#syncKey] = label;
-			localStorage.setItem(this.#storageKey, JSON.stringify(syncedTabs));
+			localStorage.setItem(this.#storageKeyPrefix + this.#syncKey, label);
 		}
 
 		static #syncTabs(emitter: StarlightTabs, label: string) {
