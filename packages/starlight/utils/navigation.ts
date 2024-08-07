@@ -412,5 +412,5 @@ function applyPrevNextLinkConfig(
 /** Remove the extension from a path. */
 function stripExtension(path: string) {
 	const periodIndex = path.lastIndexOf('.');
-	return periodIndex < path.length - 1 ? path.slice(0, periodIndex) : path;
+	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
 }
