@@ -56,7 +56,9 @@ if (isSynced) {
 				} catch {}
 				if (!label) return;
 				const tabs = [...starlightTabs?.querySelectorAll('[role="tab"]')];
-				const tabIndexToRestore = tabs.findIndex((tab) => tab instanceof HTMLAnchorElement && tab.innerText === label);
+				const tabIndexToRestore = tabs.findIndex(
+					(tab) => tab instanceof HTMLAnchorElement && tab.textContent?.trim() === label
+				);
 				const panels = starlightTabs?.querySelectorAll('[role="tabpanel"]');
 				const newTab = tabs[tabIndexToRestore];
 				const newPanel = panels[tabIndexToRestore];
@@ -224,7 +226,8 @@ if (isSynced) {
 			newTab.setAttribute('aria-selected', 'true');
 			if (shouldSync) {
 				newTab.focus();
-				const label = newTab.innerText;
+				const label = StarlightTabs.getTabLabel(newTab);
+				if (!label) return;
 				StarlightTabs.#syncTabs(this, label);
 				window.scrollTo({
 					top: window.scrollY + (this.getBoundingClientRect().top - previousTabsOffset),
@@ -247,18 +250,26 @@ if (isSynced) {
 			localStorage.setItem(this.#storageKey, JSON.stringify(syncedTabs));
 		}
 
-		static #syncTabs(emitter: StarlightTabs, label: string | null) {
+		static #syncTabs(emitter: StarlightTabs, label: string) {
 			const syncKey = emitter.#syncKey;
-			if (!syncKey || !label) return;
+			if (!syncKey) return;
 			const syncedTabs = StarlightTabs.#syncedTabs.get(syncKey);
 			if (!syncedTabs) return;
 
 			for (const receiver of syncedTabs) {
 				if (receiver === emitter) continue;
-				const labelIndex = receiver.tabs.findIndex((tab) => tab.innerText === label);
+				const labelIndex = receiver.tabs.findIndex((tab) => StarlightTabs.getTabLabel(tab) === label);
 				if (labelIndex === -1) continue;
 				receiver.switchTab(receiver.tabs[labelIndex], labelIndex, false);
 			}
+		}
+
+		static getTabLabel(tab: HTMLAnchorElement) {
+			// `textContent` returns the content of all elements. In the case of a tab with an icon, this
+			// could potentially include extra spaces due to the presence of the SVG icon.
+			// To sync tabs with the same sync key and label, no matter the presence of an icon, we trim
+			// these extra spaces.
+			return tab.textContent?.trim();
 		}
 	}
 
