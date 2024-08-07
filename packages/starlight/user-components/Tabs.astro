@@ -24,7 +24,7 @@ const { html, panels } = processPanels(panelHtml);
  *
  * The restore script defines a custom element `starlight-tabs-restore` that will be included in
  * each set of synced tabs to restore the active tab based on the persisted value using the
- * `connectCallback` lifecycle method. To ensure this callback can access all tabs and panels for
+ * `connectedCallback` lifecycle method. To ensure this callback can access all tabs and panels for
  * the current set of tabs, the script should be rendered before the tabs themselves.
  */
 // @ts-expect-error - See above
