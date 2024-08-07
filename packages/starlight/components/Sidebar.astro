@@ -31,7 +31,9 @@ const { sidebar, sidebarHash } = Astro.props;
 			const target = document.querySelector('sl-sidebar-state-persist');
 			const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
 			if (!scroller || !target || !state || target.dataset.hash !== state.hash) return;
-			target.querySelectorAll('details').forEach((el, idx) => (el.open = state.open[idx]));
+			target
+				.querySelectorAll('details')
+				.forEach((el, idx) => typeof state.open[idx] === 'boolean' && (el.open = state.open[idx]));
 			scroller.scrollTop = state.scroll;
 		} catch {}
 	})();
