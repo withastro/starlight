@@ -220,13 +220,10 @@ if (isSynced) {
 			newTab.setAttribute('aria-selected', 'true');
 			if (shouldSync) {
 				newTab.focus();
-				const label = StarlightTabs.getTabLabel(newTab);
-				if (!label) return;
-				StarlightTabs.#syncTabs(this, label);
+				StarlightTabs.#syncTabs(this, newTab);
 				window.scrollTo({
 					top: window.scrollY + (this.getBoundingClientRect().top - previousTabsOffset),
 				});
-				this.#persistSyncedTabs(label);
 			}
 		}
 
@@ -235,21 +232,24 @@ if (isSynced) {
 			localStorage.setItem(this.#storageKeyPrefix + this.#syncKey, label);
 		}
 
-		static #syncTabs(emitter: StarlightTabs, label: string) {
+		static #syncTabs(emitter: StarlightTabs, newTab: HTMLAnchorElement) {
 			const syncKey = emitter.#syncKey;
-			if (!syncKey) return;
+			const label = StarlightTabs.#getTabLabel(newTab);
+			if (!syncKey || !label) return;
 			const syncedTabs = StarlightTabs.#syncedTabs.get(syncKey);
 			if (!syncedTabs) return;
 
 			for (const receiver of syncedTabs) {
 				if (receiver === emitter) continue;
-				const labelIndex = receiver.tabs.findIndex((tab) => StarlightTabs.getTabLabel(tab) === label);
+				const labelIndex = receiver.tabs.findIndex((tab) => StarlightTabs.#getTabLabel(tab) === label);
 				if (labelIndex === -1) continue;
 				receiver.switchTab(receiver.tabs[labelIndex], labelIndex, false);
 			}
+
+			emitter.#persistSyncedTabs(label);
 		}
 
-		static getTabLabel(tab: HTMLAnchorElement) {
+		static #getTabLabel(tab: HTMLAnchorElement) {
 			// `textContent` returns the content of all elements. In the case of a tab with an icon, this
 			// could potentially include extra spaces due to the presence of the SVG icon.
 			// To sync tabs with the same sync key and label, no matter the presence of an icon, we trim
