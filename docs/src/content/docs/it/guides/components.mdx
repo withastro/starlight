@@ -87,6 +87,50 @@ Il codice sopra genera quanto segue nella pagina:
 	</TabItem>
 </Tabs>
 
+#### Schede sincronizzate
+
+Mantieni sincronizzati più gruppi di schede aggiungendo l'attributo `syncKey`.
+
+Tutti i componenti `<Tabs>` in una pagina con lo stesso valore `syncKey` mostreranno la stessa etichetta attiva. Questo permette al lettore di scegliere una volta (ad esempio, il proprio sistema operativo o gestore di pacchetti) e vedere la propria scelta riflessa in tutta la pagina.
+
+Per sincronizzare le schede correlate, aggiungi una proprietà `syncKey` identica a ciascun componente `<Tabs>` e assicurati che utilizzino tutte le stesse etichette `<TabItem>`:
+
+```mdx 'syncKey="constellations"'
+# src/content/docs/example.mdx
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_Alcune stelle:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Alcuni esopianeti:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+```
+
+Il codice sopra genera quanto segue nella pagina:
+
+_Alcune stelle:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">Bellatrix, Rigel, Betelgeuse</TabItem>
+	<TabItem label="Gemini">Pollux, Castor A, Castor B</TabItem>
+</Tabs>
+
+_Alcuni esopianeti:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="Orion">HD 34445 b, Gliese 179 b, Wasp-82 b</TabItem>
+	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
+</Tabs>
+
 ### Card
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
