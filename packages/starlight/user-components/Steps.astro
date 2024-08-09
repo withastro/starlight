@@ -51,7 +51,7 @@ const { html } = processSteps(content);
 	}
 
 	/* Vertical guideline linking list numbers. */
-	.sl-steps > li:not(:last-of-type)::after {
+	.sl-steps > li::after {
 		--guide-width: 1px;
 		content: '';
 		position: absolute;
