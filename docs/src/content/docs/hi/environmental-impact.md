@@ -89,20 +89,21 @@ JavaScript को पार्स करना और संकलित कर�
 क्या आप जानना चाहते हैं कि अन्य दस्तावेज़ीकरण फ्रेमवर्क की तुलना कैसे की जाती है?
 [Website Carbon Calculator][wcc] के साथ ये परीक्षण विभिन्न उपकरणों के साथ बनाए गए समान पृष्ठों की तुलना करते हैं।
 
-| फ्रेमवर्क                   | प्रति पृष्ठ विज़िट CO₂ |
-| --------------------------- | ---------------------- |
-| [Starlight][sl-carbon]      | 0.01g                  |
-| [VitePress][vp-carbon]      | 0.05g                  |
-| [Docus][dc-carbon]          | 0.05g                  |
-| [Sphinx][sx-carbon]         | 0.07g                  |
-| [MkDocs][mk-carbon]         | 0.10g                  |
-| [Nextra][nx-carbon]         | 0.11g                  |
-| [docsify][dy-carbon]        | 0.11g                  |
-| [Docusaurus][ds-carbon]     | 0.24g                  |
-| [Read the Docs][rtd-carbon] | 0.24g                  |
-| [GitBook][gb-carbon]        | 0.71g                  |
+| फ्रेमवर्क                   | प्रति पृष्ठ विज़िट CO₂ | रेटिंग |
+| --------------------------- | ------------------ | :----: |
+| [Starlight][sl-carbon]      | 0.01g              |   A+   |
+| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
+| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
+| [VitePress][vp-carbon]      | 0.07g              |   A+   |
+| [Docus][dc-carbon]          | 0.09g              |   A+   |
+| [docsify][dy-carbon]        | 0.10g              |   A    |
+| [Nextra][nx-carbon]         | 0.11g              |   A    |
+| [MkDocs][mk-carbon]         | 0.19g              |   B    |
+| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
+| [GitBook][gb-carbon]        | 0.43g              |   C    |
+| [Mintlify][mt-carbon]       | 1.22g              |   F    |
 
-<small>डेटा 14 मई 2023 को एकत्र किया गया। नवीनतम आंकड़े देखने के लिए लिंक पर क्लिक करें।</small>
+<small>डेटा 22 जुलाई 2024 को एकत्र किया गया। नवीनतम आंकड़े देखने के लिए लिंक पर क्लिक करें।</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -114,6 +115,7 @@ JavaScript को पार्स करना और संकलित कर�
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## और अधिक संसाधन
 
