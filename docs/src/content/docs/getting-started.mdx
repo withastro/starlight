@@ -3,6 +3,36 @@ title: Getting Started
 description: Learn how to start building your next documentation site with Starlight by Astro.
 ---
 
+{/* TODO(Chris): Remove this navigation component before merging. */}
+
+<table>
+	<thead>
+		<th colspan="5">Test page links</th>
+	</thead>
+	<tbody>
+		{[
+			'ant',
+			'badger',
+			'capybara',
+			'dingo',
+			'elephant',
+			'ferret',
+			'goat',
+			'hoopoe',
+			'impala',
+		].map((slug) => (
+			<tr>
+				<td>{slug}</td>
+				{[1, 2, 3, 4].map((i) => (
+					<td>
+						<a href={`/test/${slug}/${i}/`}>{i}</a>
+					</td>
+				))}
+			</tr>
+		))}
+	</tbody>
+</table>
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Starlight is a full-featured documentation theme built on top of the [Astro](https://astro.build) framework.

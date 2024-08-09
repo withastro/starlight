@@ -12,7 +12,7 @@ import {
 } from './route-data';
 import type { StarlightDocsEntry } from './routing';
 import { slugToLocaleData, urlToSlug } from './slugs';
-import { getPrevNextLinks, getSidebar } from './navigation';
+import { getPrevNextLinks, getSidebar, getSidebarHash } from './navigation';
 import { useTranslations } from './translations';
 import { docsSchema } from '../schema';
 import { BadgeConfigSchema } from '../schemas/badge';
@@ -229,6 +229,7 @@ export async function generateStarlightPageRouteData({
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
+		sidebarHash: getSidebarHash(sidebar),
 		siteTitle: getSiteTitle(localeData.lang),
 		siteTitleHref: getSiteTitleHref(localeData.locale),
 		slug,
