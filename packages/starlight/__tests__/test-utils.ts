@@ -37,8 +37,17 @@ function mockDoc(
 	};
 }
 
-function mockDict(id: string, data: z.input<ReturnType<typeof i18nSchema>>) {
-	return { id, data: i18nSchema().parse(data) };
+function mockDict(
+	id: string,
+	data: z.input<ReturnType<typeof i18nSchema>>,
+	{ stripUnknown } = { stripUnknown: true }
+) {
+	return {
+		id,
+		data: stripUnknown
+			? i18nSchema().parse(data)
+			: i18nSchema().and(z.record(z.string())).parse(data),
+	};
 }
 
 export async function mockedAstroContent({

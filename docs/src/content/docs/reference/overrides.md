@@ -148,12 +148,6 @@ JavaScript `Date` object representing when this page was last updated if enabled
 
 `URL` object for the address where this page can be edited if enabled.
 
-#### `labels`
-
-**Type:** `Record<string, string>`
-
-An object containing UI strings localized for the current page. See the [“Translate Starlight’s UI”](/guides/i18n/#translate-starlights-ui) guide for a list of all the available keys.
-
 ---
 
 ## Components

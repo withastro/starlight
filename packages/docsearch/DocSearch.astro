@@ -4,8 +4,6 @@ import '@docsearch/css/dist/modal.css';
 import type docsearch from '@docsearch/js';
 import './variables.css';
 
-const { labels } = Astro.props;
-
 type DocSearchTranslationProps = Pick<
 	Parameters<typeof docsearch>[0],
 	'placeholder' | 'translations'
@@ -13,15 +11,18 @@ type DocSearchTranslationProps = Pick<
 
 const pick = (keyStart: string) =>
 	Object.fromEntries(
-		Object.entries(labels)
+		Object.entries(Astro.locals.t.all())
 			.filter(([key]) => key.startsWith(keyStart))
 			.map(([key, value]) => [key.replace(keyStart, ''), value])
 	);
 
 const docsearchTranslations: DocSearchTranslationProps = {
-	placeholder: labels['search.label'],
+	placeholder: Astro.locals.t('search.label'),
 	translations: {
-		button: { buttonText: labels['search.label'], buttonAriaLabel: labels['search.label'] },
+		button: {
+			buttonText: Astro.locals.t('search.label'),
+			buttonAriaLabel: Astro.locals.t('search.label'),
+		},
 		modal: {
 			searchBox: pick('docsearch.searchBox.'),
 			startScreen: pick('docsearch.startScreen.'),
@@ -34,7 +35,11 @@ const docsearchTranslations: DocSearchTranslationProps = {
 ---
 
 <sl-doc-search data-translations={JSON.stringify(docsearchTranslations)}>
-	<button type="button" class="DocSearch DocSearch-Button" aria-label={labels['search.label']}>
+	<button
+		type="button"
+		class="DocSearch DocSearch-Button"
+		aria-label={Astro.locals.t('search.label')}
+	>
 		<span class="DocSearch-Button-Container">
 			<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
 				<path
@@ -45,7 +50,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 					stroke-linecap="round"
 					stroke-linejoin="round"></path>
 			</svg>
-			<span class="DocSearch-Button-Placeholder">{labels['search.label']}</span>
+			<span class="DocSearch-Button-Placeholder">{Astro.locals.t('search.label')}</span>
 		</span>
 		<span class="DocSearch-Button-Keys"></span>
 	</button>

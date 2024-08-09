@@ -10,8 +10,6 @@ import type { Props } from '../props';
 function localizedPathname(locale: string | undefined): string {
 	return localizedUrl(Astro.url, locale).pathname;
 }
-
-const { labels } = Astro.props;
 ---
 
 {
@@ -19,7 +17,7 @@ const { labels } = Astro.props;
 		<starlight-lang-select>
 			<Select
 				icon="translate"
-				label={labels['languageSelect.accessibleLabel']}
+				label={Astro.locals.t('languageSelect.accessibleLabel')}
 				value={localizedPathname(Astro.props.locale)}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
 					value: localizedPathname(code),

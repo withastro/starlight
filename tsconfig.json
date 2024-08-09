@@ -3,7 +3,6 @@
   "exclude": ["**/dist/**", "**/__coverage__/**"],
   "compilerOptions": {
     "jsx": "preserve",
-    "allowJs": true,
     "checkJs": true
   }
 }

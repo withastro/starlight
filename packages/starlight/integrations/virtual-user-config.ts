@@ -2,6 +2,7 @@ import type { AstroConfig, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StarlightConfig } from '../utils/user-config';
+import type { PluginTranslations } from '../utils/plugins';
 
 function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 	return `\0${id}`;
@@ -17,7 +18,8 @@ export function vitePluginStarlightUserConfig(
 		trailingSlash,
 	}: Pick<AstroConfig, 'root' | 'srcDir' | 'trailingSlash'> & {
 		build: Pick<AstroConfig['build'], 'format'>;
-	}
+	},
+	pluginTranslations: PluginTranslations
 ): NonNullable<ViteUserConfig['plugins']>[number] {
 	/**
 	 * Resolves module IDs to a usable format:
@@ -60,6 +62,7 @@ export function vitePluginStarlightUserConfig(
 				userCollections = (await import(${resolveId('./content/config.ts', srcDir)})).collections;
 			} catch {}
 			export const collections = userCollections;`,
+		'virtual:starlight/plugin-translations': `export default ${JSON.stringify(pluginTranslations)}`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 

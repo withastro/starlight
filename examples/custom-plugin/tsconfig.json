@@ -1,0 +1,5 @@
+{
+  // This plugin explicitly uses a `tsconfig.json` file to prevent our monorepo setup to properly
+  // work and simulate a real-world 3rd party plugin setup.
+  "extends": "../../tsconfig.json"
+}
