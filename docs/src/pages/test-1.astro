@@ -1,0 +1,13 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+// TODO(HiDeoo) Remove this file.
+---
+
+<StarlightPage frontmatter={{ title: 'Test 1' }}>
+	<p>
+		No <code>sidebar</code> props are used with <code>StarlightPage</code> in this custom page so the
+		global <code>sidebar</code> config should be used.
+	</p>
+	<p>Continue to the <a href="/test-2/">next test page</a>.</p>
+</StarlightPage>

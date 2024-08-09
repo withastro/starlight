@@ -108,6 +108,11 @@ export default defineConfig({
 								uk: 'Вплив на довкілля',
 							},
 						},
+						// TODO(HiDeoo) Remove this link
+						{
+							label: 'Test 1',
+							link: '/test-1/',
+						},
 					],
 				},
 				{
