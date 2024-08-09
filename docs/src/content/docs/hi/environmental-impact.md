@@ -90,18 +90,18 @@ JavaScript को पार्स करना और संकलित कर�
 [Website Carbon Calculator][wcc] के साथ ये परीक्षण विभिन्न उपकरणों के साथ बनाए गए समान पृष्ठों की तुलना करते हैं।
 
 | फ्रेमवर्क                   | प्रति पृष्ठ विज़िट CO₂ | रेटिंग |
-| --------------------------- | ------------------ | :----: |
-| [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
-| [VitePress][vp-carbon]      | 0.07g              |   A+   |
-| [Docus][dc-carbon]          | 0.09g              |   A+   |
-| [docsify][dy-carbon]        | 0.10g              |   A    |
-| [Nextra][nx-carbon]         | 0.11g              |   A    |
-| [MkDocs][mk-carbon]         | 0.19g              |   B    |
-| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
-| [GitBook][gb-carbon]        | 0.43g              |   C    |
-| [Mintlify][mt-carbon]       | 1.22g              |   F    |
+| --------------------------- | ---------------------- | :----: |
+| [Starlight][sl-carbon]      | 0.01g                  |   A+   |
+| [Read the Docs][rtd-carbon] | 0.05g                  |   A+   |
+| [Sphinx][sx-carbon]         | 0.06g                  |   A+   |
+| [VitePress][vp-carbon]      | 0.07g                  |   A+   |
+| [Docus][dc-carbon]          | 0.09g                  |   A+   |
+| [docsify][dy-carbon]        | 0.10g                  |   A    |
+| [Nextra][nx-carbon]         | 0.11g                  |   A    |
+| [MkDocs][mk-carbon]         | 0.19g                  |   B    |
+| [Docusaurus][ds-carbon]     | 0.21g                  |   B    |
+| [GitBook][gb-carbon]        | 0.43g                  |   C    |
+| [Mintlify][mt-carbon]       | 1.22g                  |   F    |
 
 <small>डेटा 22 जुलाई 2024 को एकत्र किया गया। नवीनतम आंकड़े देखने के लिए लिंक पर क्लिक करें।</small>
 
