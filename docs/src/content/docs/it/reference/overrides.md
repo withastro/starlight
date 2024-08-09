@@ -50,6 +50,19 @@ Tag di lingua BCP-47 per le impostazioni internazionali di questa pagina, ad es.
 
 Il percorso di base in cui viene servita una lingua. `undefined` per gli slug della lingua di base.
 
+#### `siteTitle`
+
+**Tipo:** `string`
+
+Il titolo del sito per la lingua di questa pagina.
+
+#### `siteTitleHref`
+
+**Tipo:** `string`
+
+Il valore per l'attributo `href` del titolo del sito, che collega alla homepage, ad esempio `/`.
+Per i siti multilingua, questo includerà la lingua corrente, ad esempio `/en/` o `/zh-cn/`.
+
 #### `slug`
 
 **tipo:** `string`
@@ -331,6 +344,12 @@ Componente di layout utilizzato per racchiudere le sezioni della colonna del con
 Componente contenente l'elemento `<h1>` per la pagina corrente.
 
 Le implementazioni dovrebbero garantire di impostare `id="_top"` sull'elemento `<h1>` come nell'implementazione predefinita.
+
+#### `DraftContentNotice`
+
+**Componente predefinito:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Avviso mostrato agli utenti durante lo sviluppo quando la pagina corrente è contrassegnata come bozza.
 
 #### `FallbackContentNotice`
 
