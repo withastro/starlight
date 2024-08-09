@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.25.5
+
+### Patch Changes
+
+- [#2171](https://github.com/withastro/starlight/pull/2171) [`c8258d7`](https://github.com/withastro/starlight/commit/c8258d7ef9264a0f85710d463a83d16013dc1934) Thanks [@delucis](https://github.com/delucis)! - Improves build performance slightly for bigger sites
+
 ## 0.25.4
 
 ### Patch Changes
