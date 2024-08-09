@@ -1,0 +1,122 @@
+---
+title: Badges
+description: Learn how to use badges in Starlight.
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+To display small pieces of information, such as status or labels, use the `<Badge>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="New" />
+
+</Preview>
+
+## Import
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Display a badge using the `<Badge>` component and pass the content you want to display to the [`text`](#text) attribute of the `<Badge>` component.
+
+By default, the badge will use the theme accent color of your site.
+To use a built-in badge color, set the [`variant`](#variant) attribute to one of the supported values.
+
+<Preview>
+
+```mdx
+# src/content/docs/example.mdx
+
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" variant="tip" />
+<Badge text="Deprecated" variant="caution" />
+<Badge text="Starlight" variant="note" />
+```
+
+<Fragment slot="preview">
+	<Badge text="New" variant="tip" />
+	<Badge text="Deprecated" variant="caution" />
+	<Badge text="Starlight" variant="note" />
+</Fragment>
+
+</Preview>
+
+### Use different sizes
+
+Use the [`size`](#size) attribute controls the size of the badge text.
+
+<Preview>
+
+```mdx /size="\w+"/
+# src/content/docs/example.mdx
+
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" size="small" />
+<Badge text="New and improved" size="medium" />
+<Badge text="New, improved, and bigger" size="large" />
+```
+
+<Fragment slot="preview">
+	<Badge text="New" size="small" />
+	<Badge text="New and improved" size="medium" />
+	<Badge text="New, improved, and bigger" size="large" />
+</Fragment>
+
+</Preview>
+
+### Customize badges
+
+Customize badges by using any other `<span>` attributes such as `class` or `style` with custom CSS.
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+# src/content/docs/example.mdx
+
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Badge
+	slot="preview"
+	text="Custom"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## `<Badge>` Props
+
+**Implementation:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+The `<Badge>` component accepts the following props and also any [other `<span>` attributes](#customize-badges):
+
+### `text`
+
+**required**  
+**type:** `string`
+
+The text content to display in the badge.
+
+### `variant`
+
+**type:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**default:** `'default'`
+
+The badge color variant to use: `note` (blue), `tip` (purple), `danger` (red), `caution` (orange), `success` (green), or `default` (theme accent color).
+
+### `size`
+
+**type:** `'small' | 'medium' | 'large'`
+
+Defines the size of the badge to display.

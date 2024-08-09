@@ -1,0 +1,31 @@
+<figure>
+	<slot />
+	<div class="preview">
+		<figcaption>Preview</figcaption>
+		<div class="preview-content"><slot name="preview" /></div>
+	</div>
+</figure>
+
+<style>
+	:global(.sl-markdown-content) .preview {
+		border: 1px solid var(--sl-color-gray-5);
+		border-top: none;
+		margin-top: 0;
+	}
+
+	.preview:only-child {
+		border-top: 1px solid var(--sl-color-gray-5);
+	}
+
+	figcaption {
+		border-bottom: 1px solid var(--sl-color-gray-5);
+		font-size: var(--sl-text-sm);
+		font-weight: 600;
+		padding: 0.5rem 1rem;
+	}
+
+	:global(.sl-markdown-content) .preview-content {
+		margin-top: 0;
+		padding: 1rem;
+	}
+</style>

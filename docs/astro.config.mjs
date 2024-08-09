@@ -131,6 +131,13 @@ export default defineConfig({
 					autogenerate: { directory: 'guides' },
 				},
 				{
+					label: 'Components',
+					translations: {
+						fr: 'Composants',
+					},
+					autogenerate: { directory: 'components' },
+				},
+				{
 					label: 'Reference',
 					translations: {
 						de: 'Referenz',
