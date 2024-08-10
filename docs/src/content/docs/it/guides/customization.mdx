@@ -1,6 +1,6 @@
 ---
 title: Personalizzazione di Starlight
-description: Scopri come personalizzare il tuo sito Starlight con il tuo logo, caratteri personalizzati, design della pagina di destinazione e altro ancora.
+description: Scopri come personalizzare il tuo sito Starlight con il tuo logo, font personalizzati, design della pagina di destinazione e altro ancora.
 ---
 
 import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
@@ -107,6 +107,8 @@ export default defineConfig({
 });
 ```
 
+Scopri come [aggiungere un link alla mappa del sito nel file `robots.txt`](https://docs.astro.build/it/guides/integrations-guide/sitemap/#sitemap-link-in-robotstxt) nella documentazione di Astro.
+
 ## Layout della pagina
 
 Per impostazione predefinita, le pagine Starlight utilizzano un layout con una barra laterale di navigazione globale e un indice dei contenuti che mostra le intestazioni della pagina corrente.
@@ -130,7 +132,7 @@ Puoi personalizzare, o addirittura disabilitare, l'indice dei contenuti a livell
 
 Per impostazione predefinita, le intestazioni `<h2>` e `<h3>` sono incluse nell'indice dei contenuti. Modifica i livelli delle intestazioni da includere in tutto il sito utilizzando le opzioni `minHeadingLevel` e `maxHeadingLevel` nel tuo [global `tableOfContents`](/it/reference/configuration/#tableofcontents). Sostituisci queste impostazioni predefinite su una singola pagina aggiungendo le proprietà [frontmatter `tableOfContents`](/it/reference/frontmatter/#tableofcontents) corrispondenti:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4-6}
@@ -164,7 +166,7 @@ defineConfig({
 
 Disabilita completamente l'indice dei contenuti impostando l'opzione `tableOfContents` su `false`:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4}
@@ -184,8 +186,7 @@ tableOfContents: false
 defineConfig({
 	integrations: [
 		starlight({
-			title:
-				'Documentazione con indice dei contenuti disabilitato a livello globale',
+			title: 'Documentazione con indice dei contenuti disabilitato a livello globale',
 			tableOfContents: false,
 		}),
 	],
@@ -304,23 +305,23 @@ export default defineConfig({
 });
 ```
 
-## Caratteri personalizzati
+## Font personalizzati
 
-Per impostazione predefinita, Starlight utilizza i caratteri sans-serif disponibili sul dispositivo locale dell'utente per tutto il testo.
-Ciò garantisce che la documentazione venga caricata rapidamente in un carattere familiare a ciascun utente, senza richiedere larghezza di banda aggiuntiva per scaricare file di caratteri di grandi dimensioni.
+Per impostazione predefinita, Starlight utilizza i font sans-serif disponibili sul dispositivo locale dell'utente per tutto il testo.
+Ciò garantisce che la documentazione venga caricata rapidamente in un carattere familiare a ciascun utente, senza richiedere larghezza di banda aggiuntiva per scaricare file di font di grandi dimensioni.
 
-Se devi aggiungere un carattere personalizzato al tuo sito Starlight, puoi impostare i caratteri da utilizzare nei file CSS personalizzati o con qualsiasi altra [tecnica di stile Astro](https://docs.astro.build/it/guides/styling/) .
+Se devi aggiungere un carattere personalizzato al tuo sito Starlight, puoi impostare i font da utilizzare nei file CSS personalizzati o con qualsiasi altra [tecnica di stile Astro](https://docs.astro.build/it/guides/styling/) .
 
-### Imposta i caratteri
+### Imposta i font
 
-Se disponi già di file di font, segui la [guida alla configurazione locale](#configura-i-file-dei-caratteri-locali).
+Se disponi già di file di font, segui la [guida alla configurazione locale](#configura-i-file-dei-font-locali).
 Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](#configura-un-font-fontsource).
 
-#### Configura i file dei caratteri locali
+#### Configura i file dei font locali
 
 <Steps>
 
-1. Aggiungi i file dei caratteri a una directory `src/fonts/` e crea un file `font-face.css` vuoto:
+1. Aggiungi i file dei font a una directory `src/fonts/` e crea un file `font-face.css` vuoto:
 
    <FileTree>
 
@@ -333,7 +334,7 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
 
    </FileTree>
 
-2. Aggiungi una [dichiarazione `@font-face`](https://developer.mozilla.org/it/docs/Web/CSS/@font-face) per ciascuno dei tuoi caratteri in `src/fonts/font-face.css`.
+2. Aggiungi una [dichiarazione `@font-face`](https://developer.mozilla.org/it/docs/Web/CSS/@font-face) per ciascuno dei tuoi font in `src/fonts/font-face.css`.
    Utilizza un percorso relativo al file del font nella funzione `url()`.
 
    ```css
@@ -373,8 +374,8 @@ Per utilizzare Google Fonts, segui la [guida alla configurazione di Fontsource](
 
 #### Configura un font Fontsource
 
-Il progetto [Fontsource](https://fontsource.org/) semplifica l'utilizzo di Google Fonts e altri caratteri open source.
-Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare e include file CSS già pronti da aggiungere al tuo progetto.
+Il progetto [Fontsource](https://fontsource.org/) semplifica l'utilizzo di Google Fonts e altri font open source.
+Fornisce moduli npm che puoi installare per i font che desideri utilizzare e include file CSS già pronti da aggiungere al tuo progetto.
 
 <Steps>
 
@@ -382,7 +383,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
     Questo esempio utilizzerà [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
 
 2.  Installa il pacchetto per il font scelto.
-    Puoi trovare il nome del pacchetto facendo clic su "Installa" nella pagina dei caratteri Fontsource.
+    Puoi trovare il nome del pacchetto facendo clic su "Installa" nella pagina dei font Fontsource.
 
          <Tabs>
 
@@ -437,7 +438,7 @@ Fornisce moduli npm che puoi installare per i caratteri che desideri utilizzare 
 
 </Steps>
 
-### Usa i caratteri
+### Usa i font
 
 Per applicare il font che hai impostato al tuo sito, utilizza il nome del font scelto in un [file CSS personalizzato](/it/guides/css-and-tailwind/#stili-css-personalizzati).
 Ad esempio, per sovrascrivere ovunque il font predefinito di Starlight, imposta la proprietà personalizzata `--sl-font`:
