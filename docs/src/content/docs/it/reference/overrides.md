@@ -52,13 +52,13 @@ Il percorso di base in cui viene servita una lingua. `undefined` per gli slug de
 
 #### `siteTitle`
 
-**Tipo:** `string`
+**tipo:** `string`
 
 Il titolo del sito per la lingua di questa pagina.
 
 #### `siteTitleHref`
 
-**Tipo:** `string`
+**tipo:** `string`
 
 Il valore per l'attributo `href` del titolo del sito, che collega alla homepage, ad esempio `/`.
 Per i siti multilingua, questo includerà la lingua corrente, ad esempio `/en/` o `/zh-cn/`.
