@@ -73,7 +73,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 ### `tableOfContents`
 
 **tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**predefinito:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Configura la tabella dei contenuti mostrata sulla destra di ogni pagina. Per impostazione predefinita, i titoli `<h2>` e `<h3>` saranno inclusi in questa tabella dei contenuti.
 
@@ -335,7 +335,7 @@ Per esempio, questo ti permette di fornire `/getting-started/` come un percorso 
 
 Imposta la lingua predefinita per questo sito.
 Il valore dovrebbe corrispondere a una delle chiavi del tuo oggetto [`locales`](#locales).
-(Se la tua lingua predefinita è il tuo [locale radice](#locale-radice), puoi saltare questo.)
+(Se la tua lingua predefinita è il tuo [locale radice](#lingua-principale), puoi saltare questo.)
 
 Il locale predefinito verrà utilizzato per fornire contenuti di fallback dove mancano le traduzioni.
 
@@ -385,7 +385,7 @@ starlight({
 **predefinito:** `true`
 
 Starlight utilizza [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) per renderizzare i blocchi di codice e aggiungere supporto per evidenziare parti di esempi di codice, aggiungere nomi di file ai blocchi di codice e altro ancora.
-Consulta la [guida "Blocchi di codice"](/guides/authoring-content/#code-blocks) per imparare come utilizzare la sintassi di Expressive Code nel tuo contenuto Markdown e MDX.
+Consulta la [guida "Blocchi di codice"](/it/guides/authoring-content/#blocco-di-codice) per imparare come utilizzare la sintassi di Expressive Code nel tuo contenuto Markdown e MDX.
 
 Puoi utilizzare qualsiasi delle [opzioni di configurazione standard di Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) così come alcune proprietà specifiche di Starlight, impostandole nell'opzione `expressiveCode` di Starlight.
 Ad esempio, imposta l'opzione `styleOverrides` di Expressive Code per sovrascrivere il CSS predefinito. Questo permette personalizzazioni come dare ai tuoi blocchi di codice angoli arrotondati:
@@ -438,7 +438,7 @@ Quando imposti `themes`, devi fornire almeno un tema scuro e uno chiaro affinch�
 **tipo:** `boolean`
 **predefinito:** `true` se `themes` non è impostato, altrimenti `false`
 
-Quando `true`, le variabili CSS di Starlight vengono utilizzate per i colori degli elementi dell'interfaccia utente dei blocchi di codice (sfondi, pulsanti, ombre, ecc.), corrispondenti al [tema di colore del sito](/guides/css-and-tailwind/#theming).
+Quando `true`, le variabili CSS di Starlight vengono utilizzate per i colori degli elementi dell'interfaccia utente dei blocchi di codice (sfondi, pulsanti, ombre, ecc.), corrispondenti al [tema di colore del sito](/it/guides/css-and-tailwind/#temi).
 Quando `false`, vengono utilizzati i colori forniti dal tema di evidenziazione della sintassi attivo per questi elementi.
 
 :::note
@@ -478,8 +478,8 @@ starlight({
 });
 ```
 
-Le voci in `head` vengono convertite direttamente in elementi HTML e non passano attraverso l'elaborazione [script](https://docs.astro.build/en/guides/client-side-scripts/#script-processing) o [style](https://docs.astro.build/en/guides/styling/#styling-in-astro) di Astro.
-Se hai bisogno di importare risorse locali come script, stili o immagini, [sovrascrivi il componente Head](/guides/overriding-components/#reuse-a-built-in-component).
+Le voci in `head` vengono convertite direttamente in elementi HTML e non passano attraverso l'elaborazione [script](https://docs.astro.build/it/guides/client-side-scripts/#script-processing) o [style](https://docs.astro.build/it/guides/styling/#styling-in-astro) di Astro.
+Se hai bisogno di importare risorse locali come script, stili o immagini, [sovrascrivi il componente Head](/it/guides/overriding-components/#riutilizza-un-componente-integrato).
 
 #### `HeadConfig`
 
@@ -498,7 +498,7 @@ interface HeadConfig {
 
 Controlla se il footer mostra quando la pagina è stata aggiornata l'ultima volta.
 
-Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git del tuo repository e potrebbe non essere accurata su alcune piattaforme di distribuzione che eseguono [cloni superficiali](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una pagina può sovrascrivere questa impostazione o la data basata su Git utilizzando il [campo frontmatter `lastUpdated`](/reference/frontmatter/#lastupdated).
+Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git del tuo repository e potrebbe non essere accurata su alcune piattaforme di distribuzione che eseguono [cloni superficiali](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una pagina può sovrascrivere questa impostazione o la data basata su Git utilizzando il [campo frontmatter `lastUpdated`](/it/reference/frontmatter/#lastupdated).
 
 ### `pagination`
 
@@ -507,7 +507,7 @@ Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git 
 
 Definisce se il footer deve includere i link alla pagina precedente e successiva.
 
-Una pagina può sovrascrivere questa impostazione o il testo del link e/o l'URL utilizzando i campi frontmatter [`prev`](/reference/frontmatter/#prev) e [`next`](/reference/frontmatter/#next).
+Una pagina può sovrascrivere questa impostazione o il testo del link e/o l'URL utilizzando i campi frontmatter [`prev`](/it/reference/frontmatter/#prev) e [`next`](/it/reference/frontmatter/#next).
 
 ### `favicon`
 
