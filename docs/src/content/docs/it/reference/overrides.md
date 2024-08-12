@@ -231,7 +231,7 @@ Questi componenti eseguono il rendering della barra di navigazione superiore di 
 **Componente standard:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Componente dell'intestazione renderizzato nella parte superiore di ogni pagina.
-L'implementazione predefinita renderizza [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) e [`<LanguageSelect />`](#languageselect).
+L'implementazione predefinita renderizza [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) e [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
@@ -347,7 +347,7 @@ Le implementazioni dovrebbero garantire di impostare `id="_top"` sull'elemento `
 
 #### `DraftContentNotice`
 
-**Componente predefinito:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+**Componente standard:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
 
 Avviso mostrato agli utenti durante lo sviluppo quando la pagina corrente è contrassegnata come bozza.
 
