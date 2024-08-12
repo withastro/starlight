@@ -381,7 +381,7 @@ starlight({
 
 ### `expressiveCode`
 
-**tipo:** `StarlightExpressiveCodeOptions | boolean`
+**tipo:** `StarlightExpressiveCodeOptions | boolean`  
 **predefinito:** `true`
 
 Starlight utilizza [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) per renderizzare i blocchi di codice e aggiungere supporto per evidenziare parti di esempi di codice, aggiungere nomi di file ai blocchi di codice e altro ancora.
@@ -410,7 +410,7 @@ Oltre alle opzioni standard di Expressive Code, puoi anche impostare le seguenti
 
 #### `themes`
 
-**tipo:** `Array<string | ThemeObject | ExpressiveCodeTheme>`
+**tipo:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **predefinito:** `['starlight-dark', 'starlight-light']`
 
 Imposta i temi utilizzati per stilizzare i blocchi di codice.
@@ -423,7 +423,7 @@ Configura questo comportamento con l'opzione [`useStarlightDarkModeSwitch`](#use
 
 #### `useStarlightDarkModeSwitch`
 
-**tipo:** `boolean`
+**tipo:** `boolean`  
 **predefinito:** `true`
 
 Quando `true`, i blocchi di codice passano automaticamente tra i temi chiari e scuri quando cambia il tema del sito.
@@ -435,7 +435,7 @@ Quando imposti `themes`, devi fornire almeno un tema scuro e uno chiaro affinch�
 
 #### `useStarlightUiThemeColors`
 
-**tipo:** `boolean`
+**tipo:** `boolean`  
 **predefinito:** `true` se `themes` non è impostato, altrimenti `false`
 
 Quando `true`, le variabili CSS di Starlight vengono utilizzate per i colori degli elementi dell'interfaccia utente dei blocchi di codice (sfondi, pulsanti, ombre, ecc.), corrispondenti al [tema di colore del sito](/it/guides/css-and-tailwind/#temi).
@@ -447,7 +447,7 @@ Quando si utilizzano temi personalizzati e si imposta questo su `true`, è neces
 
 ### `pagefind`
 
-**tipo:** `boolean`
+**tipo:** `boolean`  
 **predefinito:** `true`
 
 Definisce se il provider di ricerca predefinito del sito di Starlight [Pagefind](https://pagefind.app/) è abilitato.
@@ -526,18 +526,18 @@ Se hai bisogno di impostare varianti aggiuntive o favicon di fallback, puoi aggi
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
+	favicon: '/images/favicon.svg',
+	head: [
     // Aggiungi il fallback della favicon ICO per Safari.
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
@@ -553,7 +553,7 @@ Ad esempio, questa pagina è intitolata "Riferimento di Configurazione" e questo
 
 ### `disable404Route`
 
-**tipo:** `boolean`
+**tipo:** `boolean`  
 **predefinito:** `false`
 
 Disabilita l'iniezione della [pagina 404](https://docs.astro.build/it/core-concepts/astro-pages/#pagina-di-errore-404-personalizzata) predefinita di Starlight. Per utilizzare una route `src/pages/404.astro` personalizzata nel tuo progetto, imposta questa opzione su `true`.
