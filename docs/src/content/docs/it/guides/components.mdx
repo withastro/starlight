@@ -418,6 +418,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### Badge
+
+import { Badge } from '@astrojs/starlight/components';
+
+Usa il componente `<Badge>` per mostrare piccole informazioni, come stati o etichette.
+
+Passa il contenuto che vuoi mostrare all'attributo `text` del componente `<Badge>`.
+
+Per impostazione predefinita, il badge utilizzerà il colore di accento del tema del tuo sito. Per utilizzare un colore di badge predefinito, imposta l'attributo `variant` su uno dei seguenti valori: `note` (blu), `tip` (viola), `danger` (rosso), `caution` (arancione), o `success` (verde).
+
+L'attributo `size` (predefinito: `small`) controlla la dimensione del testo del badge. Sono disponibili anche le opzioni `medium` e `large` per visualizzare un badge più grande.
+
+Per ulteriori personalizzazioni, usa altri attributi `<span>` come `class` o `style` con CSS personalizzato.
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Nuovo" variant="tip" size="small" />
+<Badge text="Deprecato" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personalizzato" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+Il codice sopra genera quanto segue nella pagina:
+
+<Badge text="Nuovo" variant="tip" size="small" />
+<Badge text="Deprecato" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="Personalizzato" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### Icone
 
 import { Icon } from '@astrojs/starlight/components';
@@ -426,6 +456,7 @@ import IconsList from '~/components/icons-list.astro';
 Starlight fornisce una serie di icone comuni che puoi visualizzare nei tuoi contenuti utilizzando il componente `<Icon>`.
 
 Ogni `<Icon>` richiede un [`name`](#tutte-le-icone) e può facoltativamente includere un attributo `label`, `size` e `color`.
+Gli attributi `size` e `color` possono essere utilizzati per regolare l'aspetto dell'icona utilizzando unità CSS e valori di colore.
 
 ```mdx
 # src/content/docs/example.mdx
@@ -433,11 +464,13 @@ Ogni `<Icon>` richiede un [`name`](#tutte-le-icone) e può facoltativamente incl
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
 
 Il codice sopra genera quanto segue nella pagina:
 
 <Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
 
 #### Tutte le icone
 
