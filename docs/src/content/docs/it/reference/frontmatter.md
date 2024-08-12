@@ -355,7 +355,7 @@ sidebar:
 
 Aggiungi un badge alla pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 Quando si utilizza una stringa, il badge verrà visualizzato con un colore in risalto predefinito.
-Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#badgeconfig) con i campi `text` e `variant` per personalizzare il badge.
+Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#badgeconfig) con i campi `text`, `variant` e `class` per personalizzare il badge.
 
 ```md
 ---
