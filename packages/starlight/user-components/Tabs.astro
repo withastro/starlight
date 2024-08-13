@@ -19,22 +19,23 @@ const { html, panels } = processPanels(panelHtml);
  * - The script should only be included once per page.
  *
  * To do so, we keep track of whether the script has been rendered using a variable stored using
- * `Astro.locals` which will be reset for each new page. The value is not typed on purpose to avoid
- * Starlight users to get autocomplete for it.
+ * `Astro.locals` which will be reset for each new page. The value is tracked using an untyped
+ * symbol on purpose to avoid Starlight users to get autocomplete for it and avoid potential
+ * clashes with user-defined variables.
  *
  * The restore script defines a custom element `starlight-tabs-restore` that will be included in
  * each set of synced tabs to restore the active tab based on the persisted value using the
  * `connectedCallback` lifecycle method. To ensure this callback can access all tabs and panels for
  * the current set of tabs, the script should be rendered before the tabs themselves.
  */
-// @ts-expect-error - See above
-const { didRenderSyncedTabsRestoreScript } = Astro.locals;
 const isSynced = syncKey !== undefined;
-const shouldRenderSyncedTabsRestoreScript = isSynced && didRenderSyncedTabsRestoreScript !== true;
+const didRenderSyncedTabsRestoreScriptSymbol = Symbol.for('starlight:did-render-synced-tabs-restore-script');
+// @ts-expect-error - See above
+const shouldRenderSyncedTabsRestoreScript = isSynced && Astro.locals[didRenderSyncedTabsRestoreScriptSymbol] !== true;
 
 if (isSynced) {
 	// @ts-expect-error - See above
-	Astro.locals.didRenderSyncedTabsRestoreScript = true;
+	Astro.locals[didRenderSyncedTabsRestoreScriptSymbol] = true
 }
 ---
 
