@@ -268,6 +268,21 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**tipo:** `boolean`  
+**predefinito:** `false`
+
+Imposta se questa pagina deve essere considerata una bozza e non essere inclusa nelle [build di produzione](https://docs.astro.build/en/reference/cli-reference/#astro-build) e nei [gruppi di link autogenerati](/it/guides/sidebar/#gruppi-generati-automaticamente). Imposta su `true` per contrassegnare una pagina come bozza e renderla visibile solo durante lo sviluppo.
+
+```md
+---
+# src/content/docs/example.md
+# Escludi questa pagina dalle build di produzione
+draft: true
+---
+```
+
 ### `sidebar`
 
 **tipo:** [`SidebarConfig`](#sidebarconfig)
@@ -340,7 +355,7 @@ sidebar:
 
 Aggiungi un badge alla pagina nella barra laterale quando viene visualizzata in un gruppo di collegamenti generato automaticamente.
 Quando si utilizza una stringa, il badge verrà visualizzato con un colore in risalto predefinito.
-Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#badgeconfig) con i campi `text` e `variant` per personalizzare il badge.
+Facoltativamente, passa un [oggetto `BadgeConfig`](/it/reference/configuration/#badgeconfig) con i campi `text`, `variant` e `class` per personalizzare il badge.
 
 ```md
 ---
