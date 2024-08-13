@@ -92,11 +92,6 @@ export const BuiltInIcons = {
 		'<path d="M20.47 2H3.53a1.45 1.45 0 0 0-1.47 1.43v17.14A1.45 1.45 0 0 0 3.53 22h16.94a1.45 1.45 0 0 0 1.47-1.43V3.43A1.45 1.45 0 0 0 20.47 2ZM8.09 18.74h-3v-9h3v9ZM6.59 8.48a1.56 1.56 0 0 1 0-3.12 1.57 1.57 0 1 1 0 3.12Zm12.32 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0 0 12.85 13a2 2 0 0 0-.1.73v5h-3v-9h3V11a3 3 0 0 1 2.71-1.5c2 0 3.45 1.29 3.45 4.06v5.18Z"/>',
 	twitch:
 		'<path d="M2.5 1 1 4.8v15.4h5.5V23h3.1l3-2.8H17l6-5.7V1H2.6ZM21 13.5l-3.4 3.3H12l-3 2.8v-2.8H4.5V3H21v10.5Zm-3.4-6.8v5.8h-2V6.7h2Zm-5.5 0v5.8h-2V6.7h2Z"/>',
-
-	// https://learn.microsoft.com/en-us/azure/architecture/icons/
-	// Archive: https://web.archive.org/web/20240730063048/https://learn.microsoft.com/en-us/azure/architecture/icons/
-	// “Microsoft permits the use of these icons in architectural diagrams, training materials, or documentation. You may copy, distribute, and display the icons only for the permitted use unless granted explicit permission by Microsoft. Microsoft reserves all other rights.”
-	// Extracted path. Removed fill and id.
 	azureDevOps:
 		'<path d="M17,4v9.74l-4,3.28-6.2-2.26V17L3.29,12.41l10.23.8V4.44Zm-3.41.49L7.85,1V3.29L2.58,4.84,1,6.87v4.61l2.26,1V6.57Z"/>',
 
