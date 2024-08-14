@@ -1,3 +1,8 @@
+declare module '*?sl-inline-minified' {
+	const src: string;
+	export default src;
+}
+
 declare module 'virtual:starlight/user-config' {
 	const Config: import('./types').StarlightConfig;
 	export default Config;
