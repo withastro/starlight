@@ -12,6 +12,7 @@ import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
+import { vitePluginMinifiedImports } from './integrations/vite-plugin-minified-imports';
 
 export default function StarlightIntegration({
 	plugins,
@@ -87,7 +88,10 @@ export default function StarlightIntegration({
 
 				updateConfig({
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
+						plugins: [
+							vitePluginMinifiedImports(),
+							vitePluginStarlightUserConfig(starlightConfig, config),
+						],
 					},
 					markdown: {
 						remarkPlugins: [
