@@ -63,9 +63,11 @@ Starlight बहुभाषी साइटों के लिए अंतर
 
 3. अब आप अपनी भाषा निर्देशिकाओं में कंटेंट फ़ाइलें जोड़ सकते हैं। सभी भाषाओं में पेजों को संबद्ध करने के लिए एक ही फ़ाइल नाम का उपयोग करें और फ़ॉलबैक कंटेंट अनुवाद सूचनाएं और बहुत कुछ सहित Starlight के i18n सुविधाओं के पूर्ण सेट का लाभ उठाएं।
 
-   उदाहरण के लिए, अरबी और अंग्रेजी के मुखपृष्ठ को दर्शाने के लिए क्रमशः `ar/index.md` और `en/index.md` बनाएं।
+   उदाहरण के लिए, अरबी और अंग्रेजी के मुखपेज को दर्शाने के लिए क्रमशः `ar/index.md` और `en/index.md` बनाएं।
 
 </Steps>
+
+अधिक उन्नत i18n परिदृश्यों के लिए, Starlight [Astro के `i18n` कॉन्फ़िगरेशन](https://docs.astro.build/hi/guides/internationalization/#configure-i18n-routing) विकल्प का उपयोग करके अंतर्राष्ट्रीयकरण को कॉन्फ़िगर करने का भी समर्थन करता है।
 
 ### root locale का उपयोग करें
 
@@ -273,3 +275,17 @@ export const collections = {
 ```
 
 Astro दस्तावेज़ में ["एक संग्रह स्कीमा को परिभाषित करना"](https://docs.astro.build/hi/guides/content-collections/#defining-a-collection-schema) में कंटेंट संग्रह स्कीमा के बारे में और जानें।
+
+## वर्तमान लोकेल तक पहुँचना
+
+आप `.astro` अवयवों में वर्तमान लोकेल पढ़ने के लिए [`Astro.currentLocale`](https://docs.astro.build/hi/reference/api-reference/#astrocurrentlocale) का उपयोग कर सकते हैं।
+
+निम्नलिखित उदाहरण वर्तमान लोकेल को पढ़ता है और इसका उपयोग वर्तमान भाषा में एक परिचय पेज के लिए लिंक बनाने के लिए करता है:
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+
+<a href={`/${Astro.currentLocale}/about`}>के बारे में</a>
+```
