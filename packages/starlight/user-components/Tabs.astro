@@ -58,8 +58,8 @@ if (isSynced) {
 				const newTab = tabs[tabIndexToRestore];
 				const newPanel = panels[tabIndexToRestore];
 				if (tabIndexToRestore < 1 || !newTab || !newPanel) return;
-				tabs?.[0]?.setAttribute('aria-selected', 'false');
-				tabs?.[0]?.setAttribute('tabindex', '-1');
+				tabs[0]?.setAttribute('aria-selected', 'false');
+				tabs[0]?.setAttribute('tabindex', '-1');
 				panels?.[0]?.setAttribute('hidden', 'true');
 				newTab.removeAttribute('tabindex');
 				newTab.setAttribute('aria-selected', 'true');
