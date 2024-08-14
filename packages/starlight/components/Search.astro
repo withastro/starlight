@@ -3,6 +3,7 @@ import '@pagefind/default-ui/css/ui.css';
 import Icon from '../user-components/Icon.astro';
 import project from 'virtual:starlight/project-context';
 import type { Props } from '../props';
+import ShortcutScript from './SearchShortcutScript?sl-inline-minified';
 
 const { labels } = Astro.props;
 
@@ -56,26 +57,8 @@ const pagefindTranslations = {
 	</dialog>
 </site-search>
 
-{
-	/**
-	 * This is intentionally inlined to avoid briefly showing an invalid shortcut.
-	 * Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
-	 * user agent is spoofed by some browsers when opening the devtools.
-	 */
-}
-<script is:inline>
-	(() => {
-		const openBtn = document.querySelector('button[data-open-modal]');
-		const shortcut = openBtn?.querySelector('kbd');
-		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
-		const platformKey = shortcut.querySelector('kbd');
-		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
-			platformKey.textContent = '⌘';
-			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
-		}
-		shortcut.style.display = '';
-	})();
-</script>
+{/** This is intentionally inlined to avoid briefly showing an invalid shortcut. */}
+<script is:inline set:html={ShortcutScript}></script>
 
 <script>
 	class SiteSearch extends HTMLElement {
