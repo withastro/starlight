@@ -139,10 +139,10 @@ function linkFromInternalSidebarLinkItem(
 	locale: string | undefined,
 	currentPathname: string
 ) {
-	let slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
-	slugWithLocale = slugWithLocale.replace(/\/?index$/, '');
-	const entry = routes.find((entry) => slugWithLocale === entry.slug);
+	const slug = item.slug === 'index' ? '' : item.slug;
+	const localizedSlug = locale ? (slug ? locale + '/' + slug : locale) : slug;
+	const entry = routes.find((entry) => localizedSlug === entry.slug);
 	if (!entry) {
 		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
 		if (hasExternalSlashes) {
@@ -410,4 +410,7 @@ function applyPrevNextLinkConfig(
 }
 
 /** Remove the extension from a path. */
-const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
+function stripExtension(path: string) {
+	const periodIndex = path.lastIndexOf('.');
+	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
+}

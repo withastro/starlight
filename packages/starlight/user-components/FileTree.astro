@@ -1,9 +1,10 @@
 ---
+import { stripLeadingAndTrailingSlashes } from '../utils/path';
 import { slugToLocaleData } from '../utils/slugs';
 import { useTranslations } from '../utils/translations';
 import { processFileTree } from './rehype-file-tree';
 
-const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
+const slug = stripLeadingAndTrailingSlashes(Astro.url.pathname);
 const t = useTranslations(slugToLocaleData(slug).locale);
 
 const fileTreeHtml = await Astro.slots.render('default');

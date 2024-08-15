@@ -1,5 +1,6 @@
 import config from 'virtual:starlight/user-config';
 import { BuiltInDefaultLocale } from './i18n';
+import { stripTrailingSlash } from './path';
 
 export interface LocaleData {
 	/** Writing direction. */
@@ -52,7 +53,7 @@ export function slugToParam(slug: string): string | undefined {
 	return slug === 'index' || slug === ''
 		? undefined
 		: slug.endsWith('/index')
-			? slug.replace(/\/index$/, '')
+			? slug.slice(0, -6)
 			: slug;
 }
 
@@ -77,7 +78,7 @@ export function localizedSlug(slug: string, locale: string | undefined): string 
 	locale = locale || '';
 	if (slugLocale === slug) return locale;
 	if (slugLocale) {
-		return slug.replace(slugLocale + '/', locale ? locale + '/' : '').replace(/\/$/, '');
+		return stripTrailingSlash(slug.replace(slugLocale + '/', locale ? locale + '/' : ''));
 	}
 	return slug ? locale + '/' + slug : locale;
 }
@@ -106,7 +107,7 @@ export function localizedId(id: string, locale: string | undefined): string {
 /** Extract the slug from a URL. */
 export function urlToSlug(url: URL): string {
 	let pathname = url.pathname;
-	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const base = stripTrailingSlash(import.meta.env.BASE_URL);
 	if (pathname.startsWith(base)) pathname = pathname.replace(base, '');
 	const segments = pathname.split('/');
 	const htmlExt = '.html';

@@ -67,6 +67,8 @@ Starlight offre il supporto per siti multilingua, compreso di indirizzamento, co
 
 </Steps>
 
+Per scenari di internazionalizzazione più avanzati, Starlight supporta anche la configurazione dell'internazionalizzazione utilizzando l'[opzione `i18n` di Astro](https://docs.astro.build/it/guides/internationalization/#configure-i18n-routing).
+
 ### Utilizzare una lingua principale
 
 Puoi utilizzare una lingua principale per non avere il prefisso i18n nel percorso. Per esempio, se l'inglese è la lingua principale, un indirizzo sarà del tipo `/about` invece che `/en/about`.
@@ -143,6 +145,34 @@ Starlight si aspetta che crei pagine equivalenti per tutte le lingue impostate. 
 
 Se una traduzione non è ancora disponibile per una lingua, Starlight mostrerà ai lettori i contenuti per quella pagina nel linguaggio predefinito (impostato da `defaultLocale`). Per esempio, se non hai ancora creato una versione italiana della pagina About e la lingua predefinita è inglese, gli utenti che visiteranno `/it/about` vedranno i contenuti in inglese di `/en/about` con un avviso che la pagina non è stata ancora tradotta.
 
+## Traduci il titolo del sito
+
+Di default, Starlight utilizzerà lo stesso titolo del sito per tutte le lingue.
+Se hai bisogno di personalizzare il titolo per ogni locale, puoi passare un oggetto a [`title`](/it/reference/configuration/#title-obbligatorio) nelle opzioni di Starlight:
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'My Docs',
++			title: {
++				en: 'My Docs',
++				it: 'I Miei Documenti',
++			},
+			defaultLocale: 'en',
+			locales: {
+				en: { label: 'English' },
+				it: { label: 'Italiano', lang: 'it' },
+			},
+		}),
+	],
+});
+```
+
 ## Tradurre l'interfaccia Starlight
 
 import LanguagesList from '~/components/languages-list.astro';
@@ -151,7 +181,8 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 In aggiunta alla possibilità di avere pagine multilingua, Starlight permette di tradurre le scritte dell'interfaccia (per esempio l'intestazione "In questa pagina" nella tabella dei contenuti) in modo che i lettori possano vedere il sito interamente nella lingua selezionata.
 
 Le stringhe dell'interfaccia utente tradotte in <LanguagesList /> sono disponibili di default
-e accettiamo [contributi per aggiungere altre lingue predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+e accettiamo [contributi per aggiungere altre lingue
+predefinite](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puoi fornire traduzioni per lingue aggiuntive — o sovrascrivere i valori predefiniti — con la collezione `i18n`.
 
@@ -244,3 +275,17 @@ export const collections = {
 ```
 
 Per saperne di più sugli schemi di raccolta dei contenuti, consulta [ "Definire uno schema di raccolta"](https://docs.astro.build/it/guides/content-collections/#defining-a-collection-schema) nella documentazione di Astro.
+
+## Accesso alla lingua in utilizzo
+
+Puoi utilizzare [`Astro.currentLocale`](https://docs.astro.build/it/reference/api-reference/#astrocurrentlocale) per leggere la lingua in utilizzo nei componenti `.astro`.
+
+Il seguente esempio legge la lingua in utilizzo e la utilizza per generare un link a una pagina "about" nella lingua in utilizzo:
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+
+<a href={`/${Astro.currentLocale}/about`}>Chi siamo</a>
+```
