@@ -151,6 +151,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Resources',
+					badge: 'New',
 					translations: {
 						'zh-CN': '资源',
 						fr: 'Ressources',
@@ -160,12 +161,6 @@ export default defineConfig({
 						ru: 'Ресурсы',
 					},
 					autogenerate: { directory: 'resources' },
-				},
-				// TODO(Chris): Remove test pages before merging:
-				{
-					label: 'Test',
-					badge: { variant: 'danger', text: 'Test' },
-					autogenerate: { directory: 'test', collapsed: true },
 				},
 			],
 			plugins: process.env.CHECK_LINKS
