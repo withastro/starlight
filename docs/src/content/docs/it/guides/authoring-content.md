@@ -361,6 +361,31 @@ Il titolo opzionale di un blocco di codice può essere impostato sia con un attr
   ```
   ````
 
+## Dettagli
+
+I dettagli (noti anche come "disclosure" o "accordion") sono utili per nascondere contenuti che non sono immediatamente rilevanti.
+Gli utenti possono cliccare su un breve riepilogo per espandere e visualizzare il contenuto completo.
+
+Utilizza gli elementi HTML standard [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) e [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary) nel tuo contenuto Markdown per creare un widget di disclosure.
+
+Puoi annidare qualsiasi altra sintassi Markdown all'interno di un elemento `<details>`.
+
+<details>
+<summary>Dove e quando è più visibile la costellazione di Andromeda?</summary>
+
+La [costellazione di Andromeda](<https://it.wikipedia.org/wiki/Andromeda_(costellazione)>) è più visibile nel cielo notturno durante il mese di novembre a latitudini comprese tra `+90°` e `−40°`.
+
+</details>
+
+```md
+<details>
+<summary>Dove e quando è più visibile la costellazione di Andromeda?</summary>
+
+La [costellazione di Andromeda](<https://it.wikipedia.org/wiki/Andromeda_(costellazione)>) è più visibile nel cielo notturno durante il mese di novembre a latitudini comprese tra `+90°` e `−40°`.
+
+</details>
+```
+
 ## Altre funzionalità Markdown utili
 
 Starlight supporta tutte le altre funzionalità Markdown, come liste e tabelle. Guarda la [Markdown Cheat Sheet da The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) per una panoramica veloce su tutte le funzionalità Markdown.
