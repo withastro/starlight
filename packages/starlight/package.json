@@ -47,10 +47,6 @@
       "types": "./components/Sidebar.astro.tsx",
       "import": "./components/Sidebar.astro"
     },
-    "./components/CallToAction.astro": {
-      "types": "./components/CallToAction.astro.tsx",
-      "import": "./components/CallToAction.astro"
-    },
     "./components/MarkdownContent.astro": {
       "types": "./components/MarkdownContent.astro.tsx",
       "import": "./components/MarkdownContent.astro"
