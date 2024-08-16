@@ -14,6 +14,7 @@ export const socialLinks = [
 	'threads',
 	'linkedin',
 	'twitch',
+	'azureDevOps',
 	'microsoftTeams',
 	'instagram',
 	'stackOverflow',
@@ -32,6 +33,7 @@ export const socialLinks = [
 	'blueSky',
 	'discourse',
 	'zulip',
+	'pinterest',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -61,6 +63,7 @@ export const SocialLinksSchema = () =>
 					threads: 'Threads',
 					linkedin: 'LinkedIn',
 					twitch: 'Twitch',
+					azureDevOps: 'Azure DevOps',
 					microsoftTeams: 'Microsoft Teams',
 					instagram: 'Instagram',
 					stackOverflow: 'Stack Overflow',
@@ -79,6 +82,7 @@ export const SocialLinksSchema = () =>
 					blueSky: 'BlueSky',
 					discourse: 'Discourse',
 					zulip: 'Zulip',
+					pinterest: 'Pinterest',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}

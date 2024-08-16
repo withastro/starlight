@@ -2,7 +2,7 @@
 
 import type { AstroConfig, AstroIntegration, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
-import type { Node, Paragraph as P, Parent, Root } from 'mdast';
+import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
 	type Directives,
 	directiveToMarkdown,
@@ -10,6 +10,7 @@ import {
 	type LeafDirective,
 } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
+import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
@@ -156,16 +157,16 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			// prop to <Aside>, so when we find a directive label, we store it for the title prop and
 			// remove the paragraph from the container’s children.
 			let title = t(`aside.${variant}`);
+			let titleNode: PhrasingContent[] = [{ type: 'text', value: title }];
 			const firstChild = node.children[0];
 			if (
 				firstChild?.type === 'paragraph' &&
 				firstChild.data &&
-				'directiveLabel' in firstChild.data
+				'directiveLabel' in firstChild.data &&
+				firstChild.children.length > 0
 			) {
-				const firstGrandChild = firstChild.children[0];
-				if (firstGrandChild?.type === 'text') {
-					title = firstGrandChild.value;
-				}
+				titleNode = firstChild.children;
+				title = toString(firstChild.children);
 				// The first paragraph contains a directive label, we can safely remove it.
 				node.children.splice(0, 1);
 			}
@@ -189,7 +190,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 							},
 							iconPaths[variant]
 						),
-						{ type: 'text', value: title },
+						...titleNode,
 					]),
 					h('section', { class: 'starlight-aside__content' }, node.children),
 				]
