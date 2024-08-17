@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { processPanels } from './rehype-tabs';
-import SidebarRestore from './SidebarRestoreScript?sl-inline-minified';
+import TabsRestore from './TabsRestoreScript?sl-inline-minified';
 
 interface Props {
 	syncKey?: string;
@@ -41,7 +41,7 @@ if (isSynced) {
 ---
 
 {/* Inlined to avoid a flash of invalid active tab. */}
-{shouldRenderSyncedTabsRestoreScript && <script is:inline set:html={SidebarRestore} />}
+{shouldRenderSyncedTabsRestoreScript && <script is:inline set:html={TabsRestore} />}
 
 <starlight-tabs data-sync-key={syncKey}>
 	{
