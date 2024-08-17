@@ -14,3 +14,6 @@ pnpm-lock.yaml
 
 # Test snapshots
 **/__tests__/**/snapshots
+
+# https://github.com/withastro/prettier-plugin-astro/issues/337
+packages/starlight/user-components/Tabs.astro
