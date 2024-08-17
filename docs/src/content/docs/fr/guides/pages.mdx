@@ -109,28 +109,27 @@ Les propriétés suivantes diffèrent du frontmatter en Markdown :
 
 ##### `sidebar`
 
-**Type :** `SidebarEntry[]`  
+**Type :** [`SidebarItem[]`](/fr/reference/configuration/#sidebaritem)  
 **Par défaut :** la barre latérale générée en fonction de la [configuration globale `sidebar`](/fr/reference/configuration/#sidebar)
 
 Fournit une barre latérale de navigation personnalisée pour cette page.
 Si elle n'est pas définie, la page utilisera la barre latérale globale par défaut.
 
-Par exemple, la page suivante remplace la barre latérale par défaut par un lien vers la page d'accueil et un groupe de liens vers différentes constellations.
-La page courante dans la barre latérale est définie à l'aide de la propriété `isCurrent` et un `badge` optionnel a été ajouté à un élément de lien.
+Par exemple, la page suivante remplace la barre latérale par défaut par un lien vers la page d'accueil et un groupe de liens vers diverses autres pages personnalisées.
 
-```astro {3-13}
+```astro {3-17}
 <StarlightPage
 	frontmatter={{ title: 'Orion' }}
 	sidebar={[
-		{ label: 'Accueil', href: '/' },
+		{ label: 'Accueil', link: '/' },
 		{
 			label: 'Constellations',
 			items: [
-				{ label: 'Andromède', href: '/andromède/' },
-				{ label: 'Orion', href: '/orion/', isCurrent: true },
+				{ label: 'Andromède', link: '/andromède/' },
+				{ label: 'Orion', link: '/orion/' },
 				{
 					label: 'La Petite Ourse',
-					href: '/la-petite-ourse/',
+					link: '/la-petite-ourse/',
 					badge: 'Ébauche',
 				},
 			],
@@ -140,6 +139,8 @@ La page courante dans la barre latérale est définie à l'aide de la propriét�
 	Exemple de contenu.
 </StarlightPage>
 ```
+
+Consultez le guide [« Barre latérale de navigation »](/fr/guides/sidebar/) pour en savoir plus sur les options disponibles pour personnaliser la barre latérale.
 
 ##### `hasSidebar`
 
