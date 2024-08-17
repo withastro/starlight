@@ -16,17 +16,19 @@ interface SidebarState {
 /**
  * Get the current sidebar state.
  *
- * The `open` state is loaded from session storage, while `scroll` and `hash` are read from the current page.
+ * The `open` state is loaded from session storage when the sidebar hashes match, while `scroll`
+ * and `hash` are read from the current page.
  */
 const getState = (): SidebarState => {
 	let open = [];
+	const hash = target?.dataset.hash || '';
 	try {
 		const rawStoredState = sessionStorage.getItem(storageKey);
 		const storedState = JSON.parse(rawStoredState || '{}');
-		if (Array.isArray(storedState.open)) open = storedState.open;
+		if (Array.isArray(storedState.open) && storedState.hash === hash) open = storedState.open;
 	} catch {}
 	return {
-		hash: target?.dataset.hash || '',
+		hash,
 		open,
 		scroll: scroller?.scrollTop || 0,
 	};
