@@ -113,10 +113,10 @@ hero:
     - text: 더보기
       link: /getting-started/
       icon: right-arrow
-      variant: primary
     - text: Github에서 보기
       link: https://github.com/astronaut/my-project
       icon: external
+      variant: minimal
       attrs:
         rel: me
 ---
@@ -164,8 +164,8 @@ interface HeroConfig {
   actions?: Array<{
     text: string;
     link: string;
-    variant: 'primary' | 'secondary' | 'minimal';
-    icon: string;
+    variant?: 'primary' | 'secondary' | 'minimal';
+    icon?: string;
     attrs?: Record<string, string | number | boolean>;
   }>;
 }
