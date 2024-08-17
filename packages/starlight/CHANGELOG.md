@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.26.1
+
+### Patch Changes
+
+- [#2219](https://github.com/withastro/starlight/pull/2219) [`74d4716`](https://github.com/withastro/starlight/commit/74d4716f6a70fbef486e1057b81d2280c40251df) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a sidebar persistence issue when navigating between pages with different sidebar content.
+
 ## 0.26.0
 
 ### Minor Changes
