@@ -126,13 +126,20 @@
 .sl-markdown-content th:not([align]):not(:where(.not-content *)) {
 	text-align: start;
 }
-/* Table styles inside asides */
-.sl-markdown-content .starlight-aside :is(th, td):not(:where(.not-content *)) {
+/* <table>s, <hr>s, and <blockquote>s inside asides */
+.sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
 	border-color: var(--sl-color-gray-4);
 }
 @supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent)) {
-	.sl-markdown-content .starlight-aside :is(th, td):not(:where(.not-content *)) {
+	.sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
 		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent);
+	}
+}
+
+/* <code> inside asides */
+@supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent)) {
+	.sl-markdown-content .starlight-aside code:not(:where(.not-content *)) {
+		background-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent);
 	}
 }
 

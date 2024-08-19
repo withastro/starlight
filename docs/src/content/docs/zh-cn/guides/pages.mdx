@@ -111,26 +111,25 @@ import CustomComponent from './CustomComponent.astro';
 
 ##### `sidebar`
 
-**类型：** `SidebarEntry[]`  
+**类型：**[`SidebarItem[]`](/zh-cn/reference/configuration/#sidebaritem)  
 **默认值：** 根据 [全局 `sidebar` 配置](/zh-cn/reference/configuration/#sidebar) 生成的侧边栏
 
 为此页面提供自定义站点导航侧边栏。
 如果未设置，此页面将使用默认的全局侧边栏。
 
-例如，以下页面使用指向主页的链接和一组指向不同星座的链接覆盖了默认的侧边栏。
-侧边栏中的当前页面使用 `isCurrent` 属性设置，一个可选的 `badge` 已经添加到了一个链接项中。
+例如，以下页面使用指向主页的链接和一组指向各种其他自定义页面的链接覆盖了默认的侧边栏。
 
 ```astro {3-13}
 <StarlightPage
 	frontmatter={{ title: '猎户座' }}
 	sidebar={[
-		{ label: '首页', href: '/' },
+		{ label: '首页', link: '/' },
 		{
 			label: '星座',
 			items: [
-				{ label: '仙女座', href: '/andromeda/' },
-				{ label: '猎户座', href: '/orion/', isCurrent: true },
-				{ label: '射手座', href: '/sagittarius/', badge: 'Stub' },
+				{ label: '仙女座', link: '/andromeda/' },
+				{ label: '猎户座', link: '/orion/' },
+				{ label: '射手座', link: '/sagittarius/', badge: 'Stub' },
 			],
 		},
 	]}
@@ -138,6 +137,8 @@ import CustomComponent from './CustomComponent.astro';
 	示例内容。
 </StarlightPage>
 ```
+
+了解更多有关自定义侧边栏的可用选项，请参阅[“侧边栏导航”](/zh-cn/guides/sidebar/)指南。
 
 ##### `hasSidebar`
 

@@ -80,6 +80,7 @@ const pagefindEnabled =
 		<PageFrame {...Astro.props}>
 			<Header slot="header" {...Astro.props} />
 			{Astro.props.hasSidebar && <Sidebar slot="sidebar" {...Astro.props} />}
+			<script src="./SidebarPersistState"></script>
 			<TwoColumnContent {...Astro.props}>
 				<PageSidebar slot="right-sidebar" {...Astro.props} />
 				<main

@@ -99,25 +99,34 @@ starlight({
 
 配置你的网站的侧边栏导航项目。
 
-侧边栏是包含链接和链接组的数组。每个项目都必须具有 `label` 和以下属性之一：
+侧边栏是包含链接和链接组的数组。
+除了使用 `slug` 的项目之外，每个项目都必须具有 `label` 和以下属性之一：
 
 - `link` — 指向特定 URL 的单个链接，例如 `'/home'` 或 `'https://example.com'`。
+
+- `slug` — 指向一个内部页面的引用， 例如 `'guides/getting-started'`。
 
 - `items` — 包含更多侧边栏链接和子组的数组。
 
 - `autogenerate` — 指定要从中自动生成一组链接的文档目录的对象。
+
+内部链接也可以被指定为字符串，而不是带有 `slug` 属性的对象。
 
 ```js
 starlight({
 	sidebar: [
 		// 标记为“Home”的单个链接项。
 		{ label: 'Home', link: '/' },
-		// 一个标记为“Start Here”的组，其中包含两个链接。
+		// 一个标记为“Start Here”的组，其中包含四个链接。
 		{
 			label: 'Start Here',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Next Steps', link: '/next-steps' },
+				// 在内部链接中使用 `slug`。
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// 或者使用内部链接的简易写法。
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// 一个链接到参考目录中所有页面的组。
@@ -139,16 +148,13 @@ starlight({
 
 自动生成的子组默认情况下会遵守其父组的 `collapsed` 属性。设置 `autogenerate.collapsed` 属性以覆盖此行为。
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // 一个折叠的链接组。
   {
     label: 'Collapsed Links',
     collapsed: true,
-    items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // 一个展开的组，其中包含折叠的自动生成的子组。
   {
@@ -190,21 +196,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// 链接
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// 内部链接
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// 链接组
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// 自动生成的链接组
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`

@@ -89,20 +89,21 @@ Choosing a host that uses renewable energy will mean lower carbon emissions for 
 Curious how other docs frameworks compare?
 These tests with the [Website Carbon Calculator][wcc] compare similar pages built with different tools.
 
-| Framework                   | CO₂ per page visit |
-| --------------------------- | ------------------ |
-| [Starlight][sl-carbon]      | 0.01g              |
-| [VitePress][vp-carbon]      | 0.05g              |
-| [Docus][dc-carbon]          | 0.05g              |
-| [Sphinx][sx-carbon]         | 0.07g              |
-| [MkDocs][mk-carbon]         | 0.10g              |
-| [Nextra][nx-carbon]         | 0.11g              |
-| [docsify][dy-carbon]        | 0.11g              |
-| [Docusaurus][ds-carbon]     | 0.24g              |
-| [Read the Docs][rtd-carbon] | 0.24g              |
-| [GitBook][gb-carbon]        | 0.71g              |
+| Framework                   | CO₂ per page visit | Rating |
+| --------------------------- | ------------------ | :----: |
+| [Starlight][sl-carbon]      | 0.01g              |   A+   |
+| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
+| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
+| [VitePress][vp-carbon]      | 0.07g              |   A+   |
+| [Docus][dc-carbon]          | 0.09g              |   A+   |
+| [docsify][dy-carbon]        | 0.10g              |   A    |
+| [Nextra][nx-carbon]         | 0.11g              |   A    |
+| [MkDocs][mk-carbon]         | 0.19g              |   B    |
+| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
+| [GitBook][gb-carbon]        | 0.43g              |   C    |
+| [Mintlify][mt-carbon]       | 1.22g              |   F    |
 
-<small>Data collected on 14 May 2023. Click a link to see up-to-date figures.</small>
+<small>Data collected on 22 July 2024. Click a link to see up-to-date figures.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -114,6 +115,7 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## More resources
 
