@@ -54,7 +54,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 Keep multiple tab groups synchronized by adding the [`syncKey`](#synckey) attribute.
 
 All `<Tabs>` on a page with the same `syncKey` value will display the same active label.
-This allows your reader to choose once (e.g. their operating system or package manager), and see their choice reflected throughout the page.
+This allows your reader to choose once (e.g. their operating system or package manager), and see their choice persisted across page navigations.
 
 To synchronize related tabs, add an identical `syncKey` property to each `<Tabs>` component and ensure that they all use the same `<TabItem>` labels:
 
@@ -142,7 +142,7 @@ The `<Tabs>` component groups multiple `<TabItem>` components together and accep
 
 **type:** `string`
 
-A key used to keep multiple tab groups synchronized on a page.
+A key used to keep multiple tab groups synchronized across multiple pages.
 
 ## `<TabItem>` Props
 
