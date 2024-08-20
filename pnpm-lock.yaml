@@ -145,6 +145,9 @@ importers:
 
   packages/starlight:
     dependencies:
+      '@astrojs/markdoc':
+        specifier: ^0.11.0
+        version: 0.11.3(astro@4.10.2)
       '@astrojs/mdx':
         specifier: ^3.1.3
         version: 3.1.3(astro@4.10.2)
