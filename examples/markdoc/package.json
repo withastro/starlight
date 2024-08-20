@@ -1,0 +1,19 @@
+{
+  "name": "@example/starlight-markdoc",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/markdoc": "^0.11.3",
+    "@astrojs/starlight": "^0.26.1",
+    "astro": "^4.10.2",
+    "sharp": "^0.32.5"
+  }
+}
