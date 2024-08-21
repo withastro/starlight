@@ -7,6 +7,7 @@ import {
 	Card,
 	CardGrid,
 	FileTree,
+	Icon,
 	LinkButton,
 	LinkCard,
 	Steps,
@@ -49,6 +50,10 @@ test('defines all `<FileTree>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'filetree'>>().toEqualTypeOf<
 		UserComponentProps<typeof FileTree>
 	>();
+});
+
+test('defines all `<Icon>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'icon'>>().toEqualTypeOf<UserComponentProps<typeof Icon>>();
 });
 
 test('defines all `<LinkButton>` component attributes', () => {

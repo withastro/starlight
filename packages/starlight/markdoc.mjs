@@ -68,6 +68,32 @@ export const StarlightMarkdocPreset = {
 			render: component('@astrojs/starlight/components', 'FileTree'),
 			attributes: {},
 		},
+		icon: {
+			render: component('@astrojs/starlight/components', 'Icon'),
+			attributes: {
+				class: {
+					type: String,
+					required: false,
+				},
+				color: {
+					type: String,
+					required: false,
+				},
+				label: {
+					type: String,
+					required: false,
+				},
+				name: {
+					type: String,
+					required: true,
+					// TODO(HiDeoo) Union?
+				},
+				size: {
+					type: String,
+					required: false,
+				},
+			},
+		},
 		linkbutton: {
 			render: component('@astrojs/starlight/components', 'LinkButton'),
 			attributes: {
