@@ -1,7 +1,15 @@
 import type { ComponentProps } from 'astro/types';
 import { expectTypeOf, test } from 'vitest';
 
-import { Aside, Card, CardGrid, LinkCard, TabItem, Tabs } from '@astrojs/starlight/components';
+import {
+	Aside,
+	Card,
+	CardGrid,
+	LinkButton,
+	LinkCard,
+	TabItem,
+	Tabs,
+} from '@astrojs/starlight/components';
 
 type UserComponents = keyof typeof import('@astrojs/starlight/components');
 type UserComponentProps<T extends (args: any) => any> = keyof ComponentProps<T>;
@@ -25,6 +33,12 @@ test('defines all `<Card>` component attributes', () => {
 test('defines all `<CardGrid>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'cardgrid'>>().toEqualTypeOf<
 		UserComponentProps<typeof CardGrid>
+	>();
+});
+
+test('defines all `<LinkButton>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'linkbutton'>>().toEqualTypeOf<
+		UserComponentProps<typeof LinkButton>
 	>();
 });
 

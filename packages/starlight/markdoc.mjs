@@ -42,6 +42,33 @@ export const StarlightMarkdocPreset = {
 				},
 			},
 		},
+		linkbutton: {
+			render: component('@astrojs/starlight/components', 'LinkButton'),
+			attributes: {
+				href: {
+					type: String,
+					required: true,
+				},
+				icon: {
+					type: String,
+					required: false,
+					// TODO(HiDeoo) Union?
+				},
+				iconPlacement: {
+					type: String,
+					required: false,
+					default: 'end',
+					matches: ['start', 'end'],
+				},
+				variant: {
+					type: String,
+					required: false,
+					default: 'primary',
+					matches: ['primary', 'secondary', 'minimal'],
+				},
+				// TODO(HiDeoo) Any link attributes
+			},
+		},
 		linkcard: {
 			render: component('@astrojs/starlight/components', 'LinkCard'),
 			attributes: {
