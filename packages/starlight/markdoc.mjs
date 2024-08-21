@@ -18,6 +18,28 @@ export const StarlightMarkdocPreset = {
 				},
 			},
 		},
+		tabitem: {
+			render: component('@astrojs/starlight/components', 'TabItem'),
+			attributes: {
+				icon: {
+					type: String,
+					required: false,
+				},
+				label: {
+					type: String,
+					required: true,
+				},
+			},
+		},
+		tabs: {
+			render: component('@astrojs/starlight/components', 'Tabs'),
+			attributes: {
+				syncKey: {
+					type: String,
+					required: false,
+				},
+			},
+		},
 	},
 };
 
