@@ -88,7 +88,63 @@ export const StarlightMarkdocPreset = {
 				},
 			},
 		},
-		// TODO(HiDeoo) code component
+		code: {
+			render: component('@astrojs/starlight/components', 'Code'),
+			attributes: {
+				class: {
+					type: String,
+					required: false,
+				},
+				code: {
+					type: String,
+					required: true,
+				},
+				lang: {
+					type: String,
+					required: false,
+				},
+				meta: {
+					type: String,
+					required: false,
+				},
+				locale: {
+					type: String,
+					required: false,
+				},
+				frame: {
+					type: String,
+					required: false,
+					default: 'auto',
+					matches: ['auto', 'code', 'terminal', 'none'],
+				},
+				preserveIndent: {
+					type: Boolean,
+					required: false,
+					default: true,
+				},
+				title: {
+					type: String,
+					required: false,
+				},
+				useDiffSyntax: {
+					type: Boolean,
+					required: false,
+					default: false,
+				},
+				wrap: {
+					type: Boolean,
+					required: false,
+					default: false,
+				},
+				/**
+				 * `mark`, `ins`, and `del` are not supported as the Markdoc attribute validation syntax
+				 * does not allow to describe properly all the possible values.
+				 * Users should use the `meta` attribute instead.
+				 *
+				 * @see https://expressive-code.com/key-features/code-component/#mark--ins--del
+				 */
+			},
+		},
 		filetree: {
 			render: component('@astrojs/starlight/components', 'FileTree'),
 			attributes: {},

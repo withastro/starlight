@@ -6,6 +6,7 @@ import {
 	Badge,
 	Card,
 	CardGrid,
+	Code,
 	FileTree,
 	Icon,
 	LinkButton,
@@ -43,6 +44,17 @@ test('defines all `<Card>` component attributes', () => {
 test('defines all `<CardGrid>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'cardgrid'>>().toEqualTypeOf<
 		UserComponentProps<typeof CardGrid>
+	>();
+});
+
+test('defines all `<Code>` component attributes', () => {
+	/**
+	 * @see {@link file://./../markdoc/preset.mjs} `code` tag `attributes` comment.
+	 */
+	type UnsupportedCodeProps = 'mark' | 'ins' | 'del';
+
+	expectTypeOf<MarkdocTagAttributes<'code'>>().toEqualTypeOf<
+		Exclude<UserComponentProps<typeof Code>, UnsupportedCodeProps>
 	>();
 });
 
