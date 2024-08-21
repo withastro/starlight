@@ -35,8 +35,8 @@ declare global {
 				/** @type {HTMLElement | null} */
 				const target = document.querySelector('sl-sidebar-state-persist');
 				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
-				window._starlightScrollRestore = state.scroll;
 				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
 				customElements.define(
 					'sl-sidebar-restore',
 					class SidebarRestore extends HTMLElement {
