@@ -27,7 +27,8 @@
   "exports": {
     ".": "./index.ts",
     "./components": "./components.ts",
-    "./markdoc": "./markdoc.mjs",
+    "./markdoc": "./markdoc/preset.mjs",
+    "./markdoc/components": "./markdoc/components.ts",
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",
       "import": "./components/LanguageSelect.astro"

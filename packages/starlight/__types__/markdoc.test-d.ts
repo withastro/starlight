@@ -20,7 +20,7 @@ type UserComponentProps<T extends (args: any) => any> = keyof RemoveIndexSignatu
 	ComponentProps<T>
 >;
 
-type MarkdocPreset = typeof import('../markdoc.mjs').StarlightMarkdocPreset;
+type MarkdocPreset = typeof import('../markdoc/preset.mjs').StarlightMarkdocPreset;
 type MarkdocTags = keyof MarkdocPreset['tags'];
 type MarkdocTagAttributes<T extends MarkdocTags> = keyof MarkdocPreset['tags'][T]['attributes'];
 
