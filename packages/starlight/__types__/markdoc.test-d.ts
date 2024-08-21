@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'astro/types';
+import type { ComponentProps, HTMLAttributes } from 'astro/types';
 import { expectTypeOf, test } from 'vitest';
 
 import {
@@ -34,7 +34,12 @@ test('defines all `<Aside>` component attributes', () => {
 });
 
 test('defines all `<Badge>` component attributes', () => {
-	expectTypeOf<MarkdocTagAttributes<'badge'>>().toEqualTypeOf<UserComponentProps<typeof Badge>>();
+	/** @see {@link file://./../markdoc/preset.mjs} */
+	type UnsupportedBadgeProps = keyof HTMLAttributes<'span'>;
+
+	expectTypeOf<MarkdocTagAttributes<'badge'>>().toEqualTypeOf<
+		Exclude<UserComponentProps<typeof Badge>, UnsupportedBadgeProps>
+	>();
 });
 
 test('defines all `<Card>` component attributes', () => {
@@ -48,9 +53,7 @@ test('defines all `<CardGrid>` component attributes', () => {
 });
 
 test('defines all `<Code>` component attributes', () => {
-	/**
-	 * @see {@link file://./../markdoc/preset.mjs} `code` tag `attributes` comment.
-	 */
+	/** @see {@link file://./../markdoc/preset.mjs} */
 	type UnsupportedCodeProps = 'mark' | 'ins' | 'del';
 
 	expectTypeOf<MarkdocTagAttributes<'code'>>().toEqualTypeOf<
@@ -69,14 +72,20 @@ test('defines all `<Icon>` component attributes', () => {
 });
 
 test('defines all `<LinkButton>` component attributes', () => {
+	/** @see {@link file://./../markdoc/preset.mjs} */
+	type UnsupportedLinkButtonProps = Exclude<keyof HTMLAttributes<'a'>, 'href'>;
+
 	expectTypeOf<MarkdocTagAttributes<'linkbutton'>>().toEqualTypeOf<
-		UserComponentProps<typeof LinkButton>
+		Exclude<UserComponentProps<typeof LinkButton>, UnsupportedLinkButtonProps>
 	>();
 });
 
 test('defines all `<LinkCard>` component attributes', () => {
+	/** @see {@link file://./../markdoc/preset.mjs} */
+	type UnsupportedLinkCardProps = Exclude<keyof HTMLAttributes<'a'>, 'href' | 'title'>;
+
 	expectTypeOf<MarkdocTagAttributes<'linkcard'>>().toEqualTypeOf<
-		UserComponentProps<typeof LinkCard>
+		Exclude<UserComponentProps<typeof LinkCard>, UnsupportedLinkCardProps>
 	>();
 });
 

@@ -1,6 +1,17 @@
 import { component } from '@astrojs/markdoc/config';
 
-/** @satisfies {import('@astrojs/markdoc/config').AstroMarkdocConfig} */
+/**
+ * The Markdoc preset for Starlight mapping Starlight components to Markdoc nodes and tags.
+ *
+ * - The icons are not using a `matches` to provide a list of supported icons as it is not possible
+ * to import a TypeScript file in this file (which can also not be a TypeScript file). When
+ * Starlight is bundled, this could be refactored to provide a list of supported icons.
+ * - Some component (`<Badge>`, `<LinkButton>`, and `<LinkCard>`) support extra attributes, e.g.
+ * all the attributes supported by the `<a>` tag. As Markdoc requires type definitions for each
+ * attribute, these specific attributes are not supported when these components with Markdoc.
+ *
+ * @satisfies {import('@astrojs/markdoc/config').AstroMarkdocConfig}
+ */
 export const StarlightMarkdocPreset = {
 	nodes: {
 		fence: {
@@ -61,7 +72,6 @@ export const StarlightMarkdocPreset = {
 					required: false,
 					matches: ['note', 'tip', 'danger', 'caution', 'success'],
 				},
-				// TODO(HiDeoo) Any span attributes
 			},
 		},
 		card: {
@@ -70,7 +80,6 @@ export const StarlightMarkdocPreset = {
 				icon: {
 					type: String,
 					required: false,
-					// TODO(HiDeoo) Union?
 				},
 				title: {
 					type: String,
@@ -167,7 +176,6 @@ export const StarlightMarkdocPreset = {
 				name: {
 					type: String,
 					required: true,
-					// TODO(HiDeoo) Union?
 				},
 				size: {
 					type: String,
@@ -185,7 +193,6 @@ export const StarlightMarkdocPreset = {
 				icon: {
 					type: String,
 					required: false,
-					// TODO(HiDeoo) Union?
 				},
 				iconPlacement: {
 					type: String,
@@ -199,7 +206,6 @@ export const StarlightMarkdocPreset = {
 					default: 'primary',
 					matches: ['primary', 'secondary', 'minimal'],
 				},
-				// TODO(HiDeoo) Any link attributes
 			},
 		},
 		linkcard: {
@@ -217,7 +223,6 @@ export const StarlightMarkdocPreset = {
 					type: String,
 					required: true,
 				},
-				// TODO(HiDeoo) Any link attributes
 			},
 		},
 		steps: {
@@ -230,7 +235,6 @@ export const StarlightMarkdocPreset = {
 				icon: {
 					type: String,
 					required: false,
-					// TODO(HiDeoo) Union?
 				},
 				label: {
 					type: String,
