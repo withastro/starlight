@@ -1,5 +1,6 @@
 import { component } from '@astrojs/markdoc/config';
 
+// TODO(HiDeoo) satisfies
 // Explicitly not using `defineMarkdocConfig` or typing this value here so that we can rely on
 // TypeScript to infer the type in tests.
 export const StarlightMarkdocPreset = {
@@ -25,6 +26,7 @@ export const StarlightMarkdocPreset = {
 				icon: {
 					type: String,
 					required: false,
+					// TODO(HiDeoo) Union?
 				},
 				title: {
 					type: String,
@@ -42,12 +44,31 @@ export const StarlightMarkdocPreset = {
 				},
 			},
 		},
+		linkcard: {
+			render: component('@astrojs/starlight/components', 'LinkCard'),
+			attributes: {
+				description: {
+					type: String,
+					required: false,
+				},
+				href: {
+					type: String,
+					required: true,
+				},
+				title: {
+					type: String,
+					required: true,
+				},
+				// TODO(HiDeoo) Any link attributes
+			},
+		},
 		tabitem: {
 			render: component('@astrojs/starlight/components', 'TabItem'),
 			attributes: {
 				icon: {
 					type: String,
 					required: false,
+					// TODO(HiDeoo) Union?
 				},
 				label: {
 					type: String,
