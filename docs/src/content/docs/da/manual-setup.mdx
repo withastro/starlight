@@ -1,0 +1,130 @@
+---
+title: Manuel Opsætning
+description: Lær, hvordan du konfigurerer Starlight manuelt for at tilføje det til et eksisterende Astro-projekt.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Den hurtigste måde at oprette et nyt Starlight-site på er ved at bruge `create astro` som vist i [Kom godt i gang-guiden](/getting-started/#create-a-new-project).
+Hvis du vil tilføje Starlight til et eksisterende Astro-projekt, vil denne vejledning forklare hvordan.
+
+## Opsætning af Starlight
+
+For at følge denne vejledning skal du have et eksisterende Astro-projekt.
+
+### Tilføj Starlight-integrationen
+
+Starlight er en [Astro-integration](https://docs.astro.build/en/guides/integrations-guide/). Tilføj det til dit site ved at køre `astro add`-kommandoen i dit projekts rodbibliotek:
+
+<Tabs syncKey="pkg">
+    <TabItem label="npm">
+        ```sh
+        npx astro add starlight
+        ```
+
+    </TabItem>
+    <TabItem label="pnpm">
+        ```sh
+        pnpm astro add starlight
+        ```
+    </TabItem>
+    <TabItem label="Yarn">
+        ```sh
+        yarn astro add starlight
+        ```
+    </TabItem>
+
+</Tabs>
+
+Dette vil installere de nødvendige afhængigheder og tilføje Starlight til `integrations`-arrayet i din Astro-konfigurationsfil.
+
+### Konfigurer integrationen
+
+Starlight-integrationen konfigureres i din `astro.config.mjs`-fil.
+
+Tilføj en `title` for at komme i gang:
+
+```js ins={8}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Mit vidunderlige dokumentationssite',
+		}),
+	],
+});
+```
+
+Find alle tilgængelige muligheder i [Starlight-konfigurationsreferencen](/reference/configuration/).
+
+### Konfigurer indholdssamlinger
+
+Starlight er bygget oven på Astro's [indholdssamlinger](https://docs.astro.build/en/guides/content-collections/), som konfigureres i `src/content/config.ts`-filen.
+
+Opret eller opdater konfigurationsfilen for indholdet, og tilføj en `docs`-samling, der bruger Starlight's `docsSchema`:
+
+```js ins={3,6}
+// src/content/config.ts
+import { defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+};
+```
+
+### Tilføj indhold
+
+Starlight er nu konfigureret, og det er tid til at tilføje noget indhold!
+
+Opret en `src/content/docs/`-mappe, og start med at tilføje en `index.md`-fil.
+Dette vil være startsiden for dit nye site:
+
+```md
+---
+# src/content/docs/index.md
+title: Mine dokumenter
+description: Lær mere om mit projekt i dette dokumentationssite bygget med Starlight.
+---
+
+Velkommen til mit projekt!
+```
+
+Starlight bruger filbaseret routing, hvilket betyder, at hver Markdown-, MDX- eller Markdoc-fil i `src/content/docs/` vil blive til en side på dit site. Frontmatter metadata (felterne `title` og `description` i eksemplet ovenfor) kan ændre, hvordan hver side vises.
+Se alle tilgængelige muligheder i [frontmatter-referencen](/reference/frontmatter/).
+
+## Tips til eksisterende sites
+
+Hvis du har et eksisterende Astro-projekt, kan du bruge Starlight til hurtigt at tilføje en dokumentationssektion til dit site.
+
+### Brug Starlight på en understi
+
+For at tilføje alle Starlight-sider på en understi, skal du placere alt dit dokumentationsindhold i et underbibliotek af `src/content/docs/`.
+
+For eksempel, hvis Starlight-sider alle skal starte med `/guides/`, skal du tilføje dit indhold i `src/content/docs/guides/`-mappen:
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **guides/**
+        - guide.md
+        - index.md
+  - pages/
+- astro.config.mjs
+
+</FileTree>
+
+I fremtiden planlægger vi at understøtte dette brugsscenario bedre for at undgå behovet for det ekstra nestede bibliotek i `src/content/docs/`.
+
+### Brug Starlight med SSR
+
+Du kan bruge Starlight sammen med brugerdefinerede sider, der bliver renderet efter behov i dit projekt, ved at følge guiden [“On-demand Rendering Adapters”](https://docs.astro.build/en/guides/server-side-rendering/) i Astro's dokumentation.
+
+I øjeblikket er dokumentationssider genereret af Starlight altid prerenderet uanset dit projekts outputtilstand. Vi håber snart at kunne understøtte rendering efter behov for Starlight-sider.
