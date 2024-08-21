@@ -1,0 +1,25 @@
+---
+title: Cards
+---
+
+{% card title="Card title" %}
+A basic card.
+{% /card %}
+
+{% cardgrid %}
+{% card title="Card 1" icon="star" %}
+Card 1 content with an icon.
+{% /card %}
+{% card title="Card 2" icon="moon" %}
+Card 2 content with an icon.
+{% /card %}
+{% /cardgrid %}
+
+{% cardgrid stagger=true %}
+{% card title="Card 3" %}
+Staggered card 3 content.
+{% /card %}
+{% card title="Card 4" %}
+Staggered card 4 content.
+{% /card %}
+{% /cardgrid %}

@@ -14,7 +14,31 @@ export const StarlightMarkdocPreset = {
 				type: {
 					type: String,
 					required: false,
+					default: 'note',
 					matches: ['note', 'danger', 'caution', 'tip'],
+				},
+			},
+		},
+		card: {
+			render: component('@astrojs/starlight/components', 'Card'),
+			attributes: {
+				icon: {
+					type: String,
+					required: false,
+				},
+				title: {
+					type: String,
+					required: true,
+				},
+			},
+		},
+		cardgrid: {
+			render: component('@astrojs/starlight/components', 'CardGrid'),
+			attributes: {
+				stagger: {
+					type: Boolean,
+					required: false,
+					default: false,
 				},
 			},
 		},

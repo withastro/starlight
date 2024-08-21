@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'astro/types';
 import { expectTypeOf, test } from 'vitest';
 
-import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+import { Aside, Card, CardGrid, TabItem, Tabs } from '@astrojs/starlight/components';
 
 type UserComponents = keyof typeof import('@astrojs/starlight/components');
 type UserComponentProps<T extends (args: any) => any> = keyof ComponentProps<T>;
@@ -16,6 +16,16 @@ test('defines a tag for each user components', () => {
 
 test('defines all `<Aside>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'aside'>>().toEqualTypeOf<UserComponentProps<typeof Aside>>();
+});
+
+test('defines all `<Card>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'card'>>().toEqualTypeOf<UserComponentProps<typeof Card>>();
+});
+
+test('defines all `<CardGrid>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'cardgrid'>>().toEqualTypeOf<
+		UserComponentProps<typeof CardGrid>
+	>();
 });
 
 test('defines all `<TabItem>` component attributes', () => {
