@@ -92,6 +92,10 @@ export const StarlightMarkdocPreset = {
 				// TODO(HiDeoo) Any link attributes
 			},
 		},
+		steps: {
+			render: component('@astrojs/starlight/components', 'Steps'),
+			attributes: {},
+		},
 		tabitem: {
 			render: component('@astrojs/starlight/components', 'TabItem'),
 			attributes: {

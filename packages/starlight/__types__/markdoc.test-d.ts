@@ -8,6 +8,7 @@ import {
 	FileTree,
 	LinkButton,
 	LinkCard,
+	Steps,
 	TabItem,
 	Tabs,
 } from '@astrojs/starlight/components';
@@ -55,6 +56,10 @@ test('defines all `<LinkCard>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'linkcard'>>().toEqualTypeOf<
 		UserComponentProps<typeof LinkCard>
 	>();
+});
+
+test('defines all `<Steps>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'steps'>>().toEqualTypeOf<UserComponentProps<typeof Steps>>();
 });
 
 test('defines all `<TabItem>` component attributes', () => {
