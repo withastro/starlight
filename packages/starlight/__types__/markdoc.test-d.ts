@@ -5,6 +5,7 @@ import {
 	Aside,
 	Card,
 	CardGrid,
+	FileTree,
 	LinkButton,
 	LinkCard,
 	TabItem,
@@ -12,7 +13,9 @@ import {
 } from '@astrojs/starlight/components';
 
 type UserComponents = keyof typeof import('@astrojs/starlight/components');
-type UserComponentProps<T extends (args: any) => any> = keyof ComponentProps<T>;
+type UserComponentProps<T extends (args: any) => any> = keyof RemoveIndexSignature<
+	ComponentProps<T>
+>;
 
 type MarkdocPreset = typeof import('../markdoc.mjs').StarlightMarkdocPreset;
 type MarkdocTags = keyof MarkdocPreset['tags'];
@@ -33,6 +36,12 @@ test('defines all `<Card>` component attributes', () => {
 test('defines all `<CardGrid>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'cardgrid'>>().toEqualTypeOf<
 		UserComponentProps<typeof CardGrid>
+	>();
+});
+
+test('defines all `<FileTree>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'filetree'>>().toEqualTypeOf<
+		UserComponentProps<typeof FileTree>
 	>();
 });
 
@@ -57,3 +66,14 @@ test('defines all `<TabItem>` component attributes', () => {
 test('defines all `<Tabs>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'tabs'>>().toEqualTypeOf<UserComponentProps<typeof Tabs>>();
 });
+
+// https://stackoverflow.com/a/66252656/1945960
+type RemoveIndexSignature<T> = {
+	[K in keyof T as string extends K
+		? never
+		: number extends K
+			? never
+			: symbol extends K
+				? never
+				: K]: T[K];
+};
