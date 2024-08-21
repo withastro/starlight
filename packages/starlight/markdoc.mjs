@@ -18,6 +18,27 @@ export const StarlightMarkdocPreset = {
 				},
 			},
 		},
+		badge: {
+			render: component('@astrojs/starlight/components', 'Badge'),
+			attributes: {
+				text: {
+					type: String,
+					required: true,
+				},
+				size: {
+					type: String,
+					required: false,
+					default: 'small',
+					matches: ['small', 'medium', 'large'],
+				},
+				variant: {
+					type: String,
+					required: false,
+					matches: ['note', 'tip', 'danger', 'caution', 'success'],
+				},
+				// TODO(HiDeoo) Any span attributes
+			},
+		},
 		card: {
 			render: component('@astrojs/starlight/components', 'Card'),
 			attributes: {

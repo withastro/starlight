@@ -3,6 +3,7 @@ import { expectTypeOf, test } from 'vitest';
 
 import {
 	Aside,
+	Badge,
 	Card,
 	CardGrid,
 	FileTree,
@@ -28,6 +29,10 @@ test('defines a tag for each user components', () => {
 
 test('defines all `<Aside>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'aside'>>().toEqualTypeOf<UserComponentProps<typeof Aside>>();
+});
+
+test('defines all `<Badge>` component attributes', () => {
+	expectTypeOf<MarkdocTagAttributes<'badge'>>().toEqualTypeOf<UserComponentProps<typeof Badge>>();
 });
 
 test('defines all `<Card>` component attributes', () => {
