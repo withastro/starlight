@@ -12,7 +12,7 @@ import {
 } from './route-data';
 import type { StarlightDocsEntry } from './routing';
 import { slugToLocaleData, urlToSlug } from './slugs';
-import { getPrevNextLinks, getSidebarFromConfig } from './navigation';
+import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { useTranslations } from './translations';
 import { docsSchema } from '../schema';
 import { SidebarItemSchema } from '../schemas/sidebar';
@@ -114,11 +114,9 @@ export async function generateStarlightPageRouteData({
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
 	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
 	const localeData = slugToLocaleData(slug);
-	const sidebar = getSidebarFromConfig(
-		props.sidebar ? validateSidebarProp(props.sidebar) : config.sidebar,
-		url.pathname,
-		localeData.locale
-	);
+	const sidebar = props.sidebar
+		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
+		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const pageDocsEntry: StarlightPageDocsEntry = {
 		id,
