@@ -50,12 +50,14 @@ if (image) {
 		{
 			actions.length > 0 && (
 				<div class="sl-flex actions">
-					{actions.map(({ attrs, icon, link: href, text, variant }) => (
-						<LinkButton {href} {variant} icon={icon?.name} {...attrs}>
-							{text}
-							{icon?.html && <Fragment set:html={icon.html} />}
-						</LinkButton>
-					))}
+					{actions.map(
+						({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
+							<LinkButton {href} {variant} icon={icon?.name} class:list={[className]} {...attrs}>
+								{text}
+								{icon?.html && <Fragment set:html={icon.html} />}
+							</LinkButton>
+						)
+					)}
 				</div>
 			)
 		}
