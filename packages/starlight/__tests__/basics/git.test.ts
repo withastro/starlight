@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest';
-import { getNewestCommitDate } from '../../utils/git';
+import { assert, describe, expect, test } from 'vitest';
+import { getAllNewestCommitDate, getNewestCommitDate } from '../../utils/git';
 import { makeTestRepo, type ISODate } from '../git-utils';
 
 describe('getNewestCommitDate', () => {
@@ -64,6 +64,54 @@ describe('getNewestCommitDate', () => {
 
 		expect(() => getNewestCommitDate(getFilePath('unknown.md'))).toThrow(expectedError);
 		expect(() => getNewestCommitDate(getFilePath('untracked.md'))).toThrow(expectedError);
+	});
+});
+
+describe('getAllNewestCommitDate', () => {
+	const { commitAllChanges, getFilePath, writeFile } = makeTestRepo();
+
+	test('returns the newest commit date', () => {
+		writeFile('added.md', 'content');
+		commitAllChanges('add added.md', '2022-09-18');
+
+		writeFile('updated.md', 'content 0');
+		commitAllChanges('add updated.md', '2023-06-21');
+		writeFile('updated.md', 'content 1');
+		commitAllChanges('update updated.md', '2023-06-25');
+
+		writeFile('updated with space.md', 'content 0');
+		commitAllChanges('add updated.md', '2021-01-01');
+		writeFile('updated with space.md', 'content 1');
+		commitAllChanges('update updated.md', '2021-01-02');
+
+		writeFile('updated-same-day.md', 'content 0');
+		commitAllChanges('add updated.md', '2023-06-25T12:34:56Z');
+		writeFile('updated-same-day.md', 'content 1');
+		commitAllChanges('update updated.md', '2023-06-25T14:22:35Z');
+
+		const latestDates = new Map(getAllNewestCommitDate(getFilePath('')));
+
+		const expectedDates = new Map<string, ISODate>([
+			['added.md', '2022-09-18'],
+			['updated.md', '2023-06-25'],
+			['updated with space.md', '2021-01-02'],
+			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+		]);
+
+		for (const [file, date] of latestDates.entries()) {
+			const expectedDate = expectedDates.get(file);
+			assert.ok(expectedDate, `Unexpected tracked file: ${file}`);
+			expectCommitDateToEqual(new Date(date), expectedDate!);
+		}
+
+		for (const file of expectedDates.keys()) {
+			const latestDate = latestDates.get(file);
+			assert.ok(latestDate, `Missing tracked file: ${file}`);
+		}
+	});
+
+	test('returns an empty list when the git history for the directory cannot be retrieved', () => {
+		expect(getAllNewestCommitDate(getFilePath('../not-a-starlight-test-repo'))).toStrictEqual([]);
 	});
 });
 

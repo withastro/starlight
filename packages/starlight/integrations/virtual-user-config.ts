@@ -1,8 +1,8 @@
 import type { AstroConfig, ViteUserConfig } from 'astro';
-import { resolve, relative } from 'node:path';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StarlightConfig } from '../utils/user-config';
-import { getNewestCommitDate, listGitTrackedFiles } from '../utils/git';
+import { getAllNewestCommitDate } from '../utils/git';
 
 function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 	return `\0${id}`;
@@ -56,10 +56,10 @@ export function vitePluginStarlightUserConfig(
 			? 'src' in opts.logo
 				? `import src from ${resolveId(
 						opts.logo.src
-				  )}; export const logos = { dark: src, light: src };`
+					)}; export const logos = { dark: src, light: src };`
 				: `import dark from ${resolveId(opts.logo.dark)}; import light from ${resolveId(
 						opts.logo.light
-				  )}; export const logos = { dark, light };`
+					)}; export const logos = { dark, light };`
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {
@@ -111,15 +111,7 @@ export const getNewestCommitDate = (file) => getInternal(
 `;
 	}
 
-	const trackedDocsFiles = listGitTrackedFiles(docsPath).flatMap((file) => {
-		try {
-			return [[relative(docsPath, file), getNewestCommitDate(file).valueOf()]];
-		} catch {
-			// Files tracked but deleted in the staging area of git will be on the list
-			// but fail to retrieve the commit info.
-			return [];
-		}
-	});
+	const trackedDocsFiles = getAllNewestCommitDate(docsPath);
 
 	return `
 const trackedDocsFiles = new Map(${JSON.stringify(trackedDocsFiles)});
