@@ -62,10 +62,8 @@ export function testFactory(fixturePath: string) {
 	});
 
 	test.afterAll(async () => {
-		console.log('Shutting down main server');
 		await prodServer?.stop();
-		for (const [name, server] of servers.entries()) {
-			console.log(`Shutting down server ${name}`);
+		for (const server of servers.values()) {
 			await server.stop();
 		}
 	});
