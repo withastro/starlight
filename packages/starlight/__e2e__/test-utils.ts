@@ -1,7 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { test as baseTest, type Page } from '@playwright/test';
 import { build, dev, preview } from 'astro';
-import * as timers from 'node:timers/promises';
 
 export { expect, type Locator } from '@playwright/test';
 

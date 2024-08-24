@@ -150,7 +150,11 @@ test('syncs tabs with the same sync key if they do not consistenly use icons', a
 	await expectSelectedTab(pkgTabsA, 'yarn', 'yarn command');
 });
 
-test('restores tabs only for synced tabs with a persisted state', async ({ page, starlight }) => {
+test('restores tabs only for synced tabs with a persisted state', async ({
+	page,
+	getProdServer,
+}) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -185,8 +189,9 @@ test('restores tabs only for synced tabs with a persisted state', async ({ page,
 
 test('restores tabs for a single set of synced tabs with a persisted state', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -205,8 +210,9 @@ test('restores tabs for a single set of synced tabs with a persisted state', asy
 
 test('restores tabs for multiple synced tabs with different sync keys', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -240,8 +246,9 @@ test('restores tabs for multiple synced tabs with different sync keys', async ({
 
 test('includes the `<starlight-tabs-restore>` element only for synced tabs', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	// The page includes 7 sets of tabs.
@@ -252,8 +259,9 @@ test('includes the `<starlight-tabs-restore>` element only for synced tabs', asy
 
 test('includes the synced tabs restore script only when needed and at most once', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	const syncedTabsRestoreScriptRegex = /customElements\.define\('starlight-tabs-restore',/g;
 
 	await starlight.goto('/tabs');
@@ -267,7 +275,11 @@ test('includes the synced tabs restore script only when needed and at most once'
 	expect((await page.content()).match(syncedTabsRestoreScriptRegex)).toBeNull();
 });
 
-test('gracefully handles invalid persisted state for synced tabs', async ({ page, starlight }) => {
+test('gracefully handles invalid persisted state for synced tabs', async ({
+	page,
+	getProdServer,
+}) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
