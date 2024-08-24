@@ -1,7 +1,7 @@
 import { PAGE_TITLE_ID } from '../../constants';
 
 export class StarlightTOC extends HTMLElement {
-	private _current = this.querySelector('a[aria-current="true"]') as HTMLAnchorElement | null;
+	private _current = this.querySelector<HTMLAnchorElement>('a[aria-current="true"]');
 	private minH = parseInt(this.dataset.minH || '2', 10);
 	private maxH = parseInt(this.dataset.maxH || '3', 10);
 
@@ -12,9 +12,15 @@ export class StarlightTOC extends HTMLElement {
 		this._current = link;
 	}
 
+	private onIdle = (cb: IdleRequestCallback) =>
+		(window.requestIdleCallback || ((cb) => setTimeout(cb, 1)))(cb);
+
 	constructor() {
 		super();
+		this.onIdle(() => this.init());
+	}
 
+	private init = (): void => {
 		/** All the links in the table of contents. */
 		const links = [...this.querySelectorAll('a')];
 
@@ -73,21 +79,20 @@ export class StarlightTOC extends HTMLElement {
 
 		let observer: IntersectionObserver | undefined;
 		const observe = () => {
-			if (observer) observer.disconnect();
+			if (observer) return;
 			observer = new IntersectionObserver(setCurrent, { rootMargin: this.getRootMargin() });
 			toObserve.forEach((h) => observer!.observe(h));
 		};
 		observe();
 
-		const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 		let timeout: NodeJS.Timeout;
 		window.addEventListener('resize', () => {
 			// Disable intersection observer while window is resizing.
 			if (observer) observer.disconnect();
 			clearTimeout(timeout);
-			timeout = setTimeout(() => onIdle(observe), 200);
+			timeout = setTimeout(() => this.onIdle(observe), 200);
 		});
-	}
+	};
 
 	private getRootMargin(): `-${number}px 0% ${number}px` {
 		const navBarHeight = document.querySelector('header')?.getBoundingClientRect().height || 0;

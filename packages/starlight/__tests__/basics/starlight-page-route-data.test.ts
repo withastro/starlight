@@ -1,4 +1,4 @@
-import { assert, expect, test, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { generateRouteData } from '../../utils/route-data';
 import { routes } from '../../utils/routing';
 import {
@@ -15,6 +15,9 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Getting Started' }],
+			['guides/authoring-content.md', { title: 'Authoring Markdown' }],
+			['guides/components.mdx', { title: 'Components' }],
+			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 		],
 	})
 );
@@ -102,10 +105,64 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		props: starlightPageProps,
 		url: starlightPageUrl,
 	});
-	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
+	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
-		  "Home Page",
-		  "Getting Started",
+		  {
+		    "attrs": {},
+		    "badge": undefined,
+		    "href": "/",
+		    "isCurrent": false,
+		    "label": "Home Page",
+		    "type": "link",
+		  },
+		  {
+		    "attrs": {},
+		    "badge": undefined,
+		    "href": "/getting-started/",
+		    "isCurrent": false,
+		    "label": "Getting Started",
+		    "type": "link",
+		  },
+		  {
+		    "badge": undefined,
+		    "collapsed": false,
+		    "entries": [
+		      {
+		        "attrs": {},
+		        "badge": undefined,
+		        "href": "/guides/authoring-content/",
+		        "isCurrent": false,
+		        "label": "Authoring Markdown",
+		        "type": "link",
+		      },
+		      {
+		        "attrs": {},
+		        "badge": undefined,
+		        "href": "/guides/components/",
+		        "isCurrent": false,
+		        "label": "Components",
+		        "type": "link",
+		      },
+		    ],
+		    "label": "guides",
+		    "type": "group",
+		  },
+		  {
+		    "badge": undefined,
+		    "collapsed": false,
+		    "entries": [
+		      {
+		        "attrs": {},
+		        "badge": undefined,
+		        "href": "/reference/frontmatter/",
+		        "isCurrent": false,
+		        "label": "Frontmatter Reference",
+		        "type": "link",
+		      },
+		    ],
+		    "label": "reference",
+		    "type": "group",
+		  },
 		]
 	`);
 });
@@ -116,98 +173,76 @@ test('uses provided sidebar if any', async () => {
 			...starlightPageProps,
 			sidebar: [
 				{
-					type: 'link',
 					label: 'Custom link 1',
-					href: '/test/1',
-					isCurrent: false,
-					badge: undefined,
-					attrs: {},
+					link: '/test/1',
+					badge: 'New',
 				},
 				{
-					type: 'link',
 					label: 'Custom link 2',
-					href: '/test/2',
-					isCurrent: false,
-					badge: undefined,
-					attrs: {},
+					link: '/test/2',
 				},
-			],
-		},
-		url: starlightPageUrl,
-	});
-	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
-		[
-		  "Custom link 1",
-		  "Custom link 2",
-		]
-	`);
-});
-
-test('uses provided sidebar with minimal config', async () => {
-	const data = await generateStarlightPageRouteData({
-		props: {
-			...starlightPageProps,
-			sidebar: [
-				{ label: 'Custom link 1', href: '/test/1' },
-				{ label: 'Custom link 2', href: '/test/2' },
-			],
-		},
-		url: starlightPageUrl,
-	});
-	expect(data.sidebar.map((entry) => entry.label)).toMatchInlineSnapshot(`
-		[
-		  "Custom link 1",
-		  "Custom link 2",
-		]
-	`);
-});
-
-test('supports deprecated `entries` field for sidebar groups', async () => {
-	const data = await generateStarlightPageRouteData({
-		props: {
-			...starlightPageProps,
-			sidebar: [
 				{
-					label: 'Group',
-					entries: [
-						{ label: 'Custom link 1', href: '/test/1' },
-						{ label: 'Custom link 2', href: '/test/2' },
-					],
+					label: 'Guides',
+					autogenerate: { directory: 'guides' },
 				},
+				'reference/frontmatter',
 			],
 		},
 		url: starlightPageUrl,
 	});
-	assert(data.sidebar[0]!.type === 'group');
-	expect(data.sidebar[0]!.entries.map((entry) => entry.label)).toMatchInlineSnapshot(`
+	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
-		  "Custom link 1",
-		  "Custom link 2",
-		]
-	`);
-});
-
-test('supports `items` field for sidebar groups', async () => {
-	const data = await generateStarlightPageRouteData({
-		props: {
-			...starlightPageProps,
-			sidebar: [
-				{
-					label: 'Group',
-					items: [
-						{ label: 'Custom link 1', href: '/test/1' },
-						{ label: 'Custom link 2', href: '/test/2' },
-					],
-				},
-			],
-		},
-		url: starlightPageUrl,
-	});
-	assert(data.sidebar[0]!.type === 'group');
-	expect(data.sidebar[0]!.entries.map((entry) => entry.label)).toMatchInlineSnapshot(`
-		[
-		  "Custom link 1",
-		  "Custom link 2",
+		  {
+		    "attrs": {},
+		    "badge": {
+		      "text": "New",
+		      "variant": "default",
+		    },
+		    "href": "/test/1",
+		    "isCurrent": false,
+		    "label": "Custom link 1",
+		    "type": "link",
+		  },
+		  {
+		    "attrs": {},
+		    "badge": undefined,
+		    "href": "/test/2",
+		    "isCurrent": false,
+		    "label": "Custom link 2",
+		    "type": "link",
+		  },
+		  {
+		    "badge": undefined,
+		    "collapsed": false,
+		    "entries": [
+		      {
+		        "attrs": {},
+		        "badge": undefined,
+		        "href": "/guides/authoring-content/",
+		        "isCurrent": false,
+		        "label": "Authoring Markdown",
+		        "type": "link",
+		      },
+		      {
+		        "attrs": {},
+		        "badge": undefined,
+		        "href": "/guides/components/",
+		        "isCurrent": false,
+		        "label": "Components",
+		        "type": "link",
+		      },
+		    ],
+		    "label": "Guides",
+		    "type": "group",
+		  },
+		  {
+		    "attrs": {},
+		    "badge": undefined,
+		    "href": "/reference/frontmatter",
+		    "isCurrent": false,
+		    "label": "Frontmatter Reference",
+		    "type": "link",
+		  },
 		]
 	`);
 });
@@ -221,7 +256,7 @@ test('throws error if sidebar is malformated', async () => {
 					{
 						label: 'Custom link 1',
 						//@ts-expect-error Intentionally bad type to cause error.
-						href: 5,
+						href: '/test/1',
 					},
 				],
 			},
@@ -232,34 +267,8 @@ test('throws error if sidebar is malformated', async () => {
 			Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
 		Hint:
 			**0**: Did not match union.
-			> Expected type \`{ href: string } | { entries: array }\`
-			> Received \`{ "label": "Custom link 1", "href": 5 }\`"
-	`);
-});
-
-test('throws error if sidebar uses wrong literal for entry type', async () => {
-	// This test also makes sure we show a helpful error for incorrect literals.
-	expect(() =>
-		generateStarlightPageRouteData({
-			props: {
-				...starlightPageProps,
-				sidebar: [
-					{
-						//@ts-expect-error Intentionally bad type to cause error.
-						type: 'typo',
-						label: 'Custom link 1',
-						href: '/',
-					},
-				],
-			},
-			url: starlightPageUrl,
-		})
-	).rejects.toThrowErrorMatchingInlineSnapshot(`
-		"[AstroUserError]:
-			Invalid sidebar prop passed to the \`<StarlightPage/>\` component.
-		Hint:
-			**0**: Did not match union.
-			> **0.type**: Expected \`"link" | "group"\`, received \`"typo"\`"
+			> Expected type \`{ link: string;  } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
+			> Received \`{ "label": "Custom link 1", "href": "/test/1" }\`"
 	`);
 });
 

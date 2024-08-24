@@ -151,7 +151,6 @@ export default defineConfig({
 				},
 				{
 					label: 'Resources',
-					badge: 'New',
 					translations: {
 						'zh-CN': '资源',
 						fr: 'Ressources',

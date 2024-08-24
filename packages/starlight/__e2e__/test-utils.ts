@@ -6,6 +6,7 @@ import * as timers from 'node:timers/promises';
 export { expect, type Locator } from '@playwright/test';
 
 process.env.ASTRO_TELEMETRY_DISABLED = 'true';
+process.env.ASTRO_DISABLE_UPDATE_CHECK = 'true';
 
 // Setup a test environment that will build and start a preview server for a given fixture path and
 // provide a Starlight Playwright fixture accessible from within all tests.

@@ -1,4 +1,5 @@
 import config from 'virtual:starlight/user-config';
+import { stripTrailingSlash } from './path';
 
 /**
  * Get the equivalent of the passed URL for the passed locale.
@@ -12,7 +13,7 @@ export function localizedUrl(url: URL, locale: string | undefined): URL {
 	}
 	if (locale === 'root') locale = '';
 	/** Base URL with trailing `/` stripped. */
-	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const base = stripTrailingSlash(import.meta.env.BASE_URL);
 	const hasBase = url.pathname.startsWith(base);
 	// Temporarily remove base to simplify
 	if (hasBase) url.pathname = url.pathname.replace(base, '');

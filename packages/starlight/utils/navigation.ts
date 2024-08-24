@@ -15,6 +15,7 @@ import { pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
+import type { StarlightConfig } from './user-config';
 
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
@@ -139,10 +140,10 @@ function linkFromInternalSidebarLinkItem(
 	locale: string | undefined,
 	currentPathname: string
 ) {
-	let slugWithLocale = locale ? locale + '/' + item.slug : item.slug;
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
-	slugWithLocale = slugWithLocale.replace(/\/?index$/, '');
-	const entry = routes.find((entry) => slugWithLocale === entry.slug);
+	const slug = item.slug === 'index' ? '' : item.slug;
+	const localizedSlug = locale ? (slug ? locale + '/' + slug : locale) : slug;
+	const entry = routes.find((entry) => localizedSlug === entry.slug);
 	if (!entry) {
 		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
 		if (hasExternalSlashes) {
@@ -333,15 +334,46 @@ function sidebarFromDir(
 	);
 }
 
-/** Get the sidebar for the current page. */
+/** Get the sidebar for the current page using the global config. */
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
+	return getSidebarFromConfig(config.sidebar, pathname, locale);
+}
+
+/** Get the sidebar for the current page using the specified sidebar config. */
+export function getSidebarFromConfig(
+	sidebarConfig: StarlightConfig['sidebar'],
+	pathname: string,
+	locale: string | undefined
+): SidebarEntry[] {
 	const routes = getLocaleRoutes(locale);
-	if (config.sidebar) {
-		return config.sidebar.map((group) => configItemToEntry(group, pathname, locale, routes));
+	if (sidebarConfig) {
+		return sidebarConfig.map((group) => configItemToEntry(group, pathname, locale, routes));
 	} else {
 		const tree = treeify(routes, locale || '');
 		return sidebarFromDir(tree, pathname, locale, false);
 	}
+}
+
+/** Generates a deterministic string based on the content of the passed sidebar. */
+export function getSidebarHash(sidebar: SidebarEntry[]): string {
+	let hash = 0;
+	const sidebarIdentity = recursivelyBuildSidebarIdentity(sidebar);
+	for (let i = 0; i < sidebarIdentity.length; i++) {
+		const char = sidebarIdentity.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+	}
+	return (hash >>> 0).toString(36).padStart(7, '0');
+}
+
+/** Recurses through a sidebar tree to generate a string concatenating labels and link hrefs. */
+function recursivelyBuildSidebarIdentity(sidebar: SidebarEntry[]): string {
+	return sidebar
+		.flatMap((entry) =>
+			entry.type === 'group'
+				? entry.label + recursivelyBuildSidebarIdentity(entry.entries)
+				: entry.label + entry.href
+		)
+		.join('');
 }
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
@@ -410,4 +442,7 @@ function applyPrevNextLinkConfig(
 }
 
 /** Remove the extension from a path. */
-const stripExtension = (path: string) => path.replace(/\.\w+$/, '');
+function stripExtension(path: string) {
+	const periodIndex = path.lastIndexOf('.');
+	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
+}
