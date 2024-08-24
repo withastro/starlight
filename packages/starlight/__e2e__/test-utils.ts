@@ -26,13 +26,13 @@ export function testFactory(fixturePath: string) {
 	): Promise<Server> {
 		const { mode } = options;
 		if (mode === 'dev') {
-			return await dev({ logLevel: 'error', root });
-		} else {
-			await build({
+			return await dev({
 				logLevel: 'error',
 				root,
 				vite: { optimizeDeps: { noDiscovery: true } },
 			});
+		} else {
+			await build({ logLevel: 'error', root });
 			return await preview({ logLevel: 'error', root });
 		}
 	}
@@ -62,8 +62,10 @@ export function testFactory(fixturePath: string) {
 	});
 
 	test.afterAll(async () => {
+		console.log('Shutting down main server');
 		await prodServer?.stop();
-		for (const server of servers.values()) {
+		for (const [name, server] of servers.entries()) {
+			console.log(`Shutting down server ${name}`);
 			await server.stop();
 		}
 	});
@@ -76,7 +78,7 @@ class StarlightPage {
 	constructor(
 		private readonly server: Server,
 		private readonly page: Page
-	) {}
+	) { }
 
 	// Navigate to a URL relative to the server used during a test run and return the resource response.
 	goto(url: string) {
