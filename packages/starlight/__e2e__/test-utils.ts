@@ -28,7 +28,11 @@ export function testFactory(fixturePath: string) {
 		if (mode === 'dev') {
 			return await dev({ logLevel: 'error', root });
 		} else {
-			await build({ logLevel: 'error', root });
+			await build({
+				logLevel: 'error',
+				root,
+				vite: { optimizeDeps: { noDiscovery: true } },
+			});
 			return await preview({ logLevel: 'error', root });
 		}
 	}
