@@ -2,6 +2,7 @@
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
+import { Image } from 'astro:assets';
 const { siteTitle, siteTitleHref } = Astro.props;
 ---
 
@@ -9,21 +10,21 @@ const { siteTitle, siteTitleHref } = Astro.props;
 	{
 		config.logo && logos.dark && (
 			<>
-				<img
+				<Image
 					class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
-					alt={config.logo.alt}
-					src={logos.dark.src}
-					width={logos.dark.width}
+					src={logos.dark}
 					height={logos.dark.height}
+					width={logos.dark.width}
+					alt={config.logo.alt}
 				/>
 				{/* Show light alternate if a user configure both light and dark logos. */}
-				{!('src' in config.logo) && (
-					<img
+				{!('src' in config.logo) && logos.light && (
+					<Image
 						class="dark:sl-hidden"
+						src={logos.light}
+						height={logos.light.height}
+						width={logos.light.width}
 						alt={config.logo.alt}
-						src={logos.light?.src}
-						width={logos.light?.width}
-						height={logos.light?.height}
 					/>
 				)}
 			</>
