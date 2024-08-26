@@ -24,23 +24,6 @@ export function getNewestCommitDate(file: string): Date {
 	return date;
 }
 
-export function listGitTrackedFiles(directory: string): string[] {
-	const result = spawnSync('git', ['ls-files'], {
-		cwd: directory,
-		encoding: 'utf-8',
-	});
-
-	if (result.error) {
-		// If git is not installed, the project is not a git repository
-		// or any other reason for there to be no git information retrievable,
-		// proceed without any git information.
-		return [];
-	}
-
-	const output = result.stdout.trim();
-	return output.split('\n').map((file) => join(directory, file));
-}
-
 function getRepoRoot(directory: string): string {
 	const result = spawnSync('git', ['rev-parse', '--show-toplevel'], {
 		cwd: directory,
