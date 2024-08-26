@@ -29,6 +29,10 @@ export function testFactory(fixturePath: string) {
 			return await dev({
 				logLevel: 'error',
 				root,
+				// Vite's dev server hangs on the optimization discovery phase when
+				// trying to stop the server programmatically at the end of the test.
+				// Disabling this optimization here allows the test to run properly
+				// on CI and fresh clones of the project.
 				vite: { optimizeDeps: { noDiscovery: true } },
 			});
 		} else {
