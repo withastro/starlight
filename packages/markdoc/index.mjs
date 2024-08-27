@@ -1,4 +1,5 @@
 import { component } from '@astrojs/markdoc/config';
+import { WellKnownElementAttributes, WellKnownAnchorAttributes } from './html.mjs';
 
 /**
  * The Markdoc preset for Starlight mapping Starlight components to Markdoc nodes and tags.
@@ -57,6 +58,7 @@ export const StarlightMarkdocPreset = {
 		badge: {
 			render: component('@astrojs/starlight/components', 'Badge'),
 			attributes: {
+				...WellKnownElementAttributes,
 				text: {
 					type: String,
 					required: true,
@@ -186,6 +188,7 @@ export const StarlightMarkdocPreset = {
 		linkbutton: {
 			render: component('@astrojs/starlight/components', 'LinkButton'),
 			attributes: {
+				...WellKnownAnchorAttributes,
 				href: {
 					type: String,
 					required: true,
@@ -211,6 +214,7 @@ export const StarlightMarkdocPreset = {
 		linkcard: {
 			render: component('@astrojs/starlight/components', 'LinkCard'),
 			attributes: {
+				...WellKnownAnchorAttributes,
 				description: {
 					type: String,
 					required: false,

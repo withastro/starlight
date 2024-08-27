@@ -34,8 +34,11 @@ test('defines all `<Aside>` component attributes', () => {
 });
 
 test('defines all `<Badge>` component attributes', () => {
-	/** @see {@link file://./../index.mjs} */
-	type UnsupportedBadgeProps = keyof HTMLAttributes<'span'>;
+	/**
+	 * Only supports a list of well-known `<span>` attributes.
+	 * @see {@link file://./../html.mjs}
+	 */
+	type UnsupportedBadgeProps = Exclude<keyof HTMLAttributes<'span'>, WellKnownElementAttributes>;
 
 	expectTypeOf<MarkdocTagAttributes<'badge'>>().toEqualTypeOf<
 		Exclude<UserComponentProps<typeof Badge>, UnsupportedBadgeProps>
@@ -72,8 +75,11 @@ test('defines all `<Icon>` component attributes', () => {
 });
 
 test('defines all `<LinkButton>` component attributes', () => {
-	/** @see {@link file://./../index.mjs} */
-	type UnsupportedLinkButtonProps = Exclude<keyof HTMLAttributes<'a'>, 'href'>;
+	/**
+	 * Only supports a list of well-known `<a>` attributes.
+	 * @see {@link file://./../html.mjs}
+	 */
+	type UnsupportedLinkButtonProps = Exclude<keyof HTMLAttributes<'a'>, WellKnownAnchorAttributes>;
 
 	expectTypeOf<MarkdocTagAttributes<'linkbutton'>>().toEqualTypeOf<
 		Exclude<UserComponentProps<typeof LinkButton>, UnsupportedLinkButtonProps>
@@ -81,8 +87,11 @@ test('defines all `<LinkButton>` component attributes', () => {
 });
 
 test('defines all `<LinkCard>` component attributes', () => {
-	/** @see {@link file://./../index.mjs} */
-	type UnsupportedLinkCardProps = Exclude<keyof HTMLAttributes<'a'>, 'href' | 'title'>;
+	/**
+	 * Only supports a list of well-known `<a>` attributes.
+	 * @see {@link file://./../html.mjs}
+	 */
+	type UnsupportedLinkCardProps = Exclude<keyof HTMLAttributes<'a'>, WellKnownAnchorAttributes>;
 
 	expectTypeOf<MarkdocTagAttributes<'linkcard'>>().toEqualTypeOf<
 		Exclude<UserComponentProps<typeof LinkCard>, UnsupportedLinkCardProps>
@@ -102,6 +111,9 @@ test('defines all `<TabItem>` component attributes', () => {
 test('defines all `<Tabs>` component attributes', () => {
 	expectTypeOf<MarkdocTagAttributes<'tabs'>>().toEqualTypeOf<UserComponentProps<typeof Tabs>>();
 });
+
+type WellKnownElementAttributes = keyof typeof import('../html.mjs').WellKnownElementAttributes;
+type WellKnownAnchorAttributes = keyof typeof import('../html.mjs').WellKnownAnchorAttributes;
 
 // https://stackoverflow.com/a/66252656/1945960
 type RemoveIndexSignature<T> = {
