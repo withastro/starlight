@@ -1,5 +1,5 @@
 ---
-import { Code } from '@astrojs/starlight/components';
+import { Code as Default } from '@astrojs/starlight/components';
 
 interface Props {
 	code: string;
@@ -13,4 +13,4 @@ interface Props {
  */
 ---
 
-<Code {...Astro.props} />
+<Default {...Astro.props} />

@@ -15,7 +15,7 @@ import { component } from '@astrojs/markdoc/config';
 export const StarlightMarkdocPreset = {
 	nodes: {
 		fence: {
-			render: component('@astrojs/starlight/markdoc/components', 'Code'),
+			render: component('@astrojs/starlight-markdoc/components', 'Code'),
 			attributes: {
 				content: {
 					type: String,

@@ -27,8 +27,6 @@
   "exports": {
     ".": "./index.ts",
     "./components": "./components.ts",
-    "./markdoc": "./markdoc/preset.mjs",
-    "./markdoc/components": "./markdoc/components.ts",
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",
       "import": "./components/LanguageSelect.astro"
@@ -174,13 +172,7 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "@astrojs/markdoc": "^0.11.0",
     "astro": "^4.8.6"
-  },
-  "peerDependenciesMeta": {
-    "@astrojs/markdoc": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.1.0",

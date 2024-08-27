@@ -21,7 +21,7 @@ type UserComponentProps<T extends (args: any) => any> = keyof RemoveIndexSignatu
 	ComponentProps<T>
 >;
 
-type MarkdocPreset = typeof import('../markdoc/preset.mjs').StarlightMarkdocPreset;
+type MarkdocPreset = typeof import('../index.mjs').StarlightMarkdocPreset;
 type MarkdocTags = keyof MarkdocPreset['tags'];
 type MarkdocTagAttributes<T extends MarkdocTags> = keyof MarkdocPreset['tags'][T]['attributes'];
 
@@ -34,7 +34,7 @@ test('defines all `<Aside>` component attributes', () => {
 });
 
 test('defines all `<Badge>` component attributes', () => {
-	/** @see {@link file://./../markdoc/preset.mjs} */
+	/** @see {@link file://./../index.mjs} */
 	type UnsupportedBadgeProps = keyof HTMLAttributes<'span'>;
 
 	expectTypeOf<MarkdocTagAttributes<'badge'>>().toEqualTypeOf<
@@ -53,7 +53,7 @@ test('defines all `<CardGrid>` component attributes', () => {
 });
 
 test('defines all `<Code>` component attributes', () => {
-	/** @see {@link file://./../markdoc/preset.mjs} */
+	/** @see {@link file://./../index.mjs} */
 	type UnsupportedCodeProps = 'mark' | 'ins' | 'del';
 
 	expectTypeOf<MarkdocTagAttributes<'code'>>().toEqualTypeOf<
@@ -72,7 +72,7 @@ test('defines all `<Icon>` component attributes', () => {
 });
 
 test('defines all `<LinkButton>` component attributes', () => {
-	/** @see {@link file://./../markdoc/preset.mjs} */
+	/** @see {@link file://./../index.mjs} */
 	type UnsupportedLinkButtonProps = Exclude<keyof HTMLAttributes<'a'>, 'href'>;
 
 	expectTypeOf<MarkdocTagAttributes<'linkbutton'>>().toEqualTypeOf<
@@ -81,7 +81,7 @@ test('defines all `<LinkButton>` component attributes', () => {
 });
 
 test('defines all `<LinkCard>` component attributes', () => {
-	/** @see {@link file://./../markdoc/preset.mjs} */
+	/** @see {@link file://./../index.mjs} */
 	type UnsupportedLinkCardProps = Exclude<keyof HTMLAttributes<'a'>, 'href' | 'title'>;
 
 	expectTypeOf<MarkdocTagAttributes<'linkcard'>>().toEqualTypeOf<
