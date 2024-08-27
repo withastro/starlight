@@ -459,13 +459,13 @@ Pagefind cannot be enabled when the [`prerender`](#prerender) option is set to `
 
 ### `prerender`
 
-**type:** `boolean`
-**default:**: `true`
+**type:** `boolean`  
+**default:** `true`
 
 Define whether Starlight pages should be prerendered or handled using SSR.
 This option behave just like the [`export const prerender`](https://docs.astro.build/en/guides/server-side-rendering/#enable-on-demand-server-rendering) from Astro pages and allow overriding the default prerendering behavior of the selected output mode.
 
-Starlight pages are prerendeered by default regardless of the output mode of the Astro project. This differs from the default behavior of Astro pages, which are prerendered by default on `output: 'hybrid'` but not `output: 'server'`.
+Starlight pages are pre-rendered by default regardless of the output mode of the Astro project. This differs from the default behavior of Astro pages, which are pre-rendered by default on `output: 'hybrid'` but not `output: 'server'`.
 
 ### `head`
 

@@ -1,4 +1,4 @@
-import { basename, dirname, join, relative, resolve } from 'node:path';
+import { basename, dirname, relative, resolve } from 'node:path';
 import { realpathSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
