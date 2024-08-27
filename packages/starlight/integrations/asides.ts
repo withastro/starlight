@@ -14,7 +14,11 @@ import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { HookParameters, StarlightConfig } from '../types';
+import type { HookParameters, StarlightConfig, StarlightIcon } from '../types';
+import { Icons } from '../components/Icons';
+import { fromHtml } from 'hast-util-from-html';
+import type { Element } from 'hast';
+import { AstroError } from 'astro/errors';
 
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
@@ -85,6 +89,20 @@ function transformUnhandledDirective(
 			children: [textNode],
 		};
 	}
+}
+
+/** Hacky function that generates the children of an mdast SVG tree. */
+function makeSvgChildNodes(children: Result['children']): any[] {
+	const nodes: P[] = [];
+	for (const child of children) {
+		if (child.type !== 'element') continue;
+		nodes.push({
+			type: 'paragraph',
+			data: { hName: child.tagName, hProperties: child.properties },
+			children: makeSvgChildNodes(child.children),
+		});
+	}
+	return nodes;
 }
 
 /**
@@ -159,6 +177,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				return;
 			}
 			const variant = node.name;
+			const attributes = node.attributes;
 			if (!isAsideVariant(variant)) return;
 
 			// remark-directive converts a container’s “label” to a paragraph added as the head of its
@@ -180,6 +199,25 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				node.children.splice(0, 1);
 			}
 
+			let iconPath = iconPaths[variant];
+
+			if (attributes?.['icon']) {
+				const iconName = attributes['icon'] as StarlightIcon;
+				const icon = Icons[iconName];
+				if (!icon) {
+					throw new AstroError(
+						'Invalid aside icon',
+						`An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`${iconName}\`.\n\n` +
+							'See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons.'
+					);
+				}
+				// Omit the root node and return only the first child which is the SVG element.
+				const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
+					.children[0] as Element;
+				// Render all SVG child nodes.
+				iconPath = makeSvgChildNodes(iconHastTree.children);
+			}
+
 			const aside = h(
 				'aside',
 				{
@@ -197,7 +235,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 								fill: 'currentColor',
 								class: 'starlight-aside__icon',
 							},
-							iconPaths[variant]
+							iconPath
 						),
 						...titleNode,
 					]),

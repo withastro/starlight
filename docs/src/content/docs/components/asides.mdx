@@ -49,10 +49,6 @@ Other content is also supported in asides.
 </Aside>
 
 <Aside type="danger">Do not give your password to anyone.</Aside>
-
-<Aside icon="heart">
-	Aside with a custom icon. The icon must be part of starlight's icon list.
-</Aside>
 ````
 
 <Fragment slot="markdoc">
@@ -77,10 +73,6 @@ Other content is also supported in asides.
 {% aside type="danger" %}
 Do not give your password to anyone.
 {% /aside %}
-
-{% aside icon="heart" %}
-Aside with a custom icon. The icon must be part of starlight's icon list.
-{% /aside %}
 ````
 
 </Fragment>
@@ -102,10 +94,6 @@ Aside with a custom icon. The icon must be part of starlight's icon list.
     </Aside>
 
     <Aside type="danger">Do not give your password to anyone.</Aside>
-
-    <Aside icon="heart">
-        Aside with a custom icon. The icon must be part of starlight's icon list.
-    </Aside>
 
 </Fragment>
 
@@ -144,6 +132,36 @@ A warning aside *with* a custom title.
 
 </Preview>
 
+### Use custom icons
+
+Override the default aside icons by using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	A warning aside *with* a custom icon.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+A warning aside *with* a custom icon.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	A warning aside *with* a custom icon.
+</Aside>
+
+</Preview>
+
 ## `<Aside>` Props
 
 **Implementation:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
@@ -168,3 +186,9 @@ The type of aside to display:
 
 The title of the aside to display.
 If `title` is not set, the default title for the current aside `type` will be used.
+
+### `icon`
+
+**type:** `string`
+
+An aside can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
