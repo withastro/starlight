@@ -16,6 +16,7 @@ const { siteTitle, siteTitleHref } = Astro.props;
 					height={logos.dark.height}
 					width={logos.dark.width}
 					alt={config.logo.alt}
+					loading="eager"
 				/>
 				{/* Show light alternate if a user configure both light and dark logos. */}
 				{!('src' in config.logo) && logos.light && (
@@ -25,6 +26,7 @@ const { siteTitle, siteTitleHref } = Astro.props;
 						height={logos.light.height}
 						width={logos.light.width}
 						alt={config.logo.alt}
+						loading="eager"
 					/>
 				)}
 			</>
