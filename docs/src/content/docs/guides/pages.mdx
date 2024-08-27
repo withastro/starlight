@@ -109,26 +109,25 @@ The following properties differ from Markdown frontmatter:
 
 ##### `sidebar`
 
-**type:** `SidebarEntry[]`  
+**type:** [`SidebarItem[]`](/reference/configuration/#sidebaritem)  
 **default:** the sidebar generated based on the [global `sidebar` config](/reference/configuration/#sidebar)
 
 Provide a custom site navigation sidebar for this page.
 If not set, the page will use the default global sidebar.
 
-For example, the following page overrides the default sidebar with a link to the homepage and a group of links to different constellations.
-The current page in the sidebar is set using the `isCurrent` property and an optional `badge` has been added to a link item.
+For example, the following page overrides the default sidebar with a link to the homepage and a group of links to various other custom pages.
 
 ```astro {3-13}
 <StarlightPage
 	frontmatter={{ title: 'Orion' }}
 	sidebar={[
-		{ label: 'Home', href: '/' },
+		{ label: 'Home', link: '/' },
 		{
 			label: 'Constellations',
 			items: [
-				{ label: 'Andromeda', href: '/andromeda/' },
-				{ label: 'Orion', href: '/orion/', isCurrent: true },
-				{ label: 'Ursa Minor', href: '/ursa-minor/', badge: 'Stub' },
+				{ label: 'Andromeda', link: '/andromeda/' },
+				{ label: 'Orion', link: '/orion/' },
+				{ label: 'Ursa Minor', link: '/ursa-minor/', badge: 'Stub' },
 			],
 		},
 	]}
@@ -136,6 +135,8 @@ The current page in the sidebar is set using the `isCurrent` property and an opt
 	Example content.
 </StarlightPage>
 ```
+
+See the [“Sidebar Navigation”](/guides/sidebar/) guide to learn more about the available options for customizing the sidebar.
 
 ##### `hasSidebar`
 

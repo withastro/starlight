@@ -367,6 +367,36 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
+### बैज
+
+import { Badge } from '@astrojs/starlight/components';
+
+स्थिति या लेबल जैसी छोटी जानकारी प्रदर्शित करने के लिए `<Badge>` अवयव का उपयोग करें।
+
+वह सामग्री जिसे आप प्रदर्शित करना चाहते हैं उसे `<Badge>` अवयव की `text` विशेषता में भेजे।
+
+डिफ़ॉल्ट रूप से, बैज आपकी साइट के थीम एक्सेंट रंग का उपयोग करेगा। बिल्ट-इन बैज रंग का उपयोग करने के लिए, `variant` विशेषता को निम्न मानों में से किसी एक पर सेट करें: `note` (नीला), `tip` (बैंगनी), `danger` (लाल), `caution` (नारंगी), या `success` (हरा)।
+
+`size` विशेषता (डिफ़ॉल्ट: `small`) बैज पाठ के आकार को नियंत्रित करती है। बड़ा बैज प्रदर्शित करने के लिए `medium` और `large` भी उपलब्ध विकल्प हैं।
+
+आगे के अनुकूलन के लिए, कस्टम CSS के साथ `<span>` विशेषताओं जैसे `class` या `style` का उपयोग करें।
+
+```mdx title="src/content/docs/example.mdx"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="नया" variant="tip" size="small" />
+<Badge text="पदावनत" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="कस्टम" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+उपरोक्त कोड पृष्ठ पर निम्नलिखित उत्पन्न करता है:
+
+<Badge text="नया" variant="tip" size="small" />
+<Badge text="पदावनत" variant="caution" size="medium" />
+<Badge text="Starlight" variant="note" size="large" />
+<Badge text="कस्टम" variant="success" style={{ fontStyle: 'italic' }} />
+
 ### आइकन
 
 import { Icon } from '@astrojs/starlight/components';

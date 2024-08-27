@@ -2,9 +2,6 @@ import type { AstroConfig } from 'astro';
 import { AstroError } from 'astro/errors';
 import type { StarlightConfig } from './user-config';
 
-/** Informations about the built-in default locale used as a fallback when no locales are defined. */
-export const BuiltInDefaultLocale = { ...getLocaleInfo('en'), lang: 'en' };
-
 /**
  * A proxy object that throws an error when a user tries to access the deprecated `labels` prop in
  * a component override.
@@ -33,6 +30,9 @@ export const DeprecatedLabelsPropProxy = new Proxy<Record<string, never>>(
  * @see https://en.wikipedia.org/wiki/IETF_language_tag#List_of_common_primary_language_subtags
  */
 const wellKnownRTL = ['ar', 'fa', 'he', 'prs', 'ps', 'syc', 'ug', 'ur'];
+
+/** Informations about the built-in default locale used as a fallback when no locales are defined. */
+export const BuiltInDefaultLocale = { ...getLocaleInfo('en'), lang: 'en' };
 
 /**
  * Processes the Astro and Starlight i18n configurations to generate/update them accordingly:

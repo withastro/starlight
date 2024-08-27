@@ -8,4 +8,5 @@ export { default as TabItem } from './user-components/TabItem.astro';
 export { default as LinkCard } from './user-components/LinkCard.astro';
 export { default as Steps } from './user-components/Steps.astro';
 export { default as FileTree } from './user-components/FileTree.astro';
+export { default as LinkButton } from './user-components/LinkButton.astro';
 export { Code } from 'astro-expressive-code/components';
