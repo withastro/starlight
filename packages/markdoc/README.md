@@ -4,8 +4,6 @@ Markdoc preset for the [Starlight][starlight] documentation theme for [Astro][as
 
 ## Documentation
 
-// TODO(HiDeoo) Add link to documentation
-
 See the [Starlight Markdoc docs][docs] for how to use this preset.
 
 ## License
@@ -16,5 +14,5 @@ Copyright (c) 2024–present [Starlight contributors][contributors]
 
 [starlight]: https://starlight.astro.build/
 [astro]: https://astro.build/
-[docs]: https://starlight.astro.build/guides/css-and-tailwind/#tailwind-css
+[docs]: https://starlight.astro.build/guides/authoring-content/#markdoc
 [contributors]: https://github.com/withastro/starlight/graphs/contributors
