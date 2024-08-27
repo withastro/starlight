@@ -8,7 +8,7 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['404.md', { title: 'Not found' }],
 			['index.mdx', { title: 'Home page' }],
-			['guides/authoring-content.md', { title: 'Authoring content', draft: true }],
+			['guides/authoring-content.mdx', { title: 'Authoring content', draft: true }],
 		],
 	})
 );
@@ -43,7 +43,7 @@ test('routes have locale data added', () => {
 });
 
 test('routes includes drafts except in production', async () => {
-	expect(routes.find((route) => route.id === 'guides/authoring-content.md')).toBeTruthy();
+	expect(routes.find((route) => route.id === 'guides/authoring-content.mdx')).toBeTruthy();
 
 	// Reset the modules registry so that re-importing `utils/routing.ts` re-evaluates the module and
 	// re-computes the routes. Re-importing the module is necessary because top-level imports cannot
@@ -54,7 +54,7 @@ test('routes includes drafts except in production', async () => {
 	// Re-import the module to re-evaluate it.
 	const { routes: prodRoutes } = await import('../../utils/routing');
 
-	expect(prodRoutes.find((route) => route.id === 'guides/authoring-content.md')).toBeFalsy();
+	expect(prodRoutes.find((route) => route.id === 'guides/authoring-content.mdx')).toBeFalsy();
 
 	vi.unstubAllEnvs();
 	vi.resetModules();
