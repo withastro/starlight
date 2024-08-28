@@ -85,8 +85,8 @@ importers:
   examples/markdoc:
     dependencies:
       '@astrojs/markdoc':
-        specifier: ^0.11.3
-        version: 0.11.3(astro@4.10.2)
+        specifier: ^0.11.4
+        version: 0.11.4(astro@4.10.2)
       '@astrojs/starlight':
         specifier: ^0.26.1
         version: link:../../packages/starlight
@@ -149,8 +149,8 @@ importers:
   packages/markdoc:
     dependencies:
       '@astrojs/markdoc':
-        specifier: ^0.11.0
-        version: 0.11.3(astro@4.10.2)
+        specifier: ^0.11.4
+        version: 0.11.4(astro@4.10.2)
       '@astrojs/starlight':
         specifier: '>=0.23.0'
         version: link:../starlight
@@ -506,8 +506,8 @@ packages:
       - typescript
     dev: true
 
-  /@astrojs/markdoc@0.11.3(astro@4.10.2):
-    resolution: {integrity: sha512-t9pxu//dBTkaTNC3VMMSoh3WO9bTRXHD3gMuMdEaj5s/Qy7kZUtgoBdvZ6d+QHwXurRtL16lA9n0RXT0FJhGqw==}
+  /@astrojs/markdoc@0.11.4(astro@4.10.2):
+    resolution: {integrity: sha512-6s60ZpsODsEvws57TEpUPXq5Uo+eSHsTVUUAQbbkSL+nQHIy1tR7tI6vbbO2y/VOLj214kATAc18/iRjFp2TbQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
@@ -521,8 +521,6 @@ packages:
       github-slugger: 2.0.0
       gray-matter: 4.0.3
       htmlparser2: 9.1.0
-      kleur: 4.1.5
-      zod: 3.23.8
     transitivePeerDependencies:
       - '@types/react'
       - react

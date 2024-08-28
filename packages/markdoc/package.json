@@ -20,7 +20,7 @@
     "vitest": "^1.6.0"
   },
   "peerDependencies": {
-    "@astrojs/markdoc": "^0.11.0",
+    "@astrojs/markdoc": "^0.11.4",
     "@astrojs/starlight": ">=0.23.0"
   }
 }
