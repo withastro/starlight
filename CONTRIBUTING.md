@@ -221,6 +221,8 @@ E2E are most useful for testing what happens on a page after it has been loaded 
 
 Translations help make Starlight accessible to more people.
 
+Check out the dedicated [i18n contribution guide](https://contribute.docs.astro.build/guides/i18n/#quality-standards--adaptation) for more details regarding our translation process and quality standards.
+
 ### Translating Starlight’s UI
 
 Starlight’s UI comes with some built-in text elements. For example, the table of contents on a Starlight page has a heading of “On this page” and the theme picker shows “Light”, “Dark”, and “Auto” labels. Starlight aims to provide these in as many languages as possible.
@@ -244,7 +246,7 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 
 #### Adding a new language to Starlight’s docs
 
-To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
+To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs contributor guide for some helpful tips around choosing these.
 
 - Add your language to the `locales` config in `docs/astro.config.mjs`
 - Add your language to the `locales` config in `docs/lunaria.config.json`
