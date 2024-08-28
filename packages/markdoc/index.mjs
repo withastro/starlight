@@ -9,7 +9,7 @@ import { WellKnownElementAttributes, WellKnownAnchorAttributes } from './html.mj
  * Starlight is bundled, this could be refactored to provide a list of supported icons.
  * - Some component (`<Badge>`, `<LinkButton>`, and `<LinkCard>`) support extra attributes, e.g.
  * all the attributes supported by the `<a>` tag. As Markdoc requires type definitions for each
- * attribute, these specific attributes are not supported when these components with Markdoc.
+ * attribute, only some well-known attributes are supported in these tags.
  *
  * @satisfies {import('@astrojs/markdoc/config').AstroMarkdocConfig}
  */
