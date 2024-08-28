@@ -91,7 +91,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Синхронизируйте несколько групп вкладок, добавив атрибут `syncKey`.
 
-Все `<Tabs>` на странице с одинаковым значением `syncKey` будут отображать одну и ту же активную метку. Это позволяет вашему читателю выбрать один раз (например, операционную систему или менеджер пакетов) и увидеть, как его выбор отражается на всей странице.
+Все `<Tabs>` с одинаковым значением `syncKey` будут отображать одну и ту же активную метку. Это позволит вашему читателю выбрать один раз (например, операционную систему или менеджер пакетов), и видеть, что их выбор сохраняется при переходе по страницам.
 
 Чтобы синхронизировать связанные вкладки, добавьте идентичное свойство `syncKey` к каждому компоненту `<Tabs>` и убедитесь, что все они используют одни и те же метки `<TabItem>`:
 
@@ -227,6 +227,38 @@ import { LinkCard } from '@astrojs/starlight/components';
 	/>
 	<LinkCard title="Компоненты" href="/ru/guides/components/" />
 </CardGrid>
+
+### Кнопки-ссылки
+
+Используйте компонент `<LinkButton>` для визуального выделения ссылок, призывающих к действию.
+Кнопка-ссылка полезна для направления пользователей к наиболее релевантному или действующему контенту и часто используется на целевых страницах.
+
+`<LinkButton>` требует обязательного атрибута [`href`](https://developer.mozilla.org/ru/docs/Web/HTML/Element/a#href) и по желанию принимает другие атрибуты ссылки, такие как `target`.
+
+Атрибут `icon` может содержать имя [одной из встроенных иконок Starlight](#все-иконки), чтобы включить иконку рядом с текстом.
+Атрибут `iconPlacement` можно использовать для размещения иконки перед текстом, задав ему значение `start` (по умолчанию `end`).
+
+Настройте внешний вид кнопки-ссылки с помощью атрибута `variant`, который может быть установлен в значение `primary` (по умолчанию), `secondary` или `minimal`.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/getting-started/">Начнём</LinkButton>
+<LinkButton href="https://docs.astro.build" variant="secondary" icon="external">
+	Похожие: Astro
+</LinkButton>
+```
+
+Вышеуказанный код сформирует следующий HTML:
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/getting-started/">Начнём</LinkButton>
+<LinkButton href="https://docs.astro.build" variant="secondary" icon="external">
+	Похожие: Astro
+</LinkButton>
 
 ### Вставки
 
