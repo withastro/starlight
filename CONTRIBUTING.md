@@ -221,7 +221,7 @@ E2E are most useful for testing what happens on a page after it has been loaded 
 
 Translations help make Starlight accessible to more people.
 
-Check out the dedicated [i18n contribution guide](https://contribute.docs.astro.build/guides/i18n/#quality-standards--adaptation) for more details regarding our translation process and quality standards.
+Check out the dedicated [i18n contribution guidelines](https://contribute.docs.astro.build/guides/i18n/#quality-standards--adaptation) in the Astro docs contributor guide for more details regarding our translation process and quality standards.
 
 ### Translating Starlight’s UI
 
