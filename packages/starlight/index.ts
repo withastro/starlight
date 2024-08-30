@@ -51,16 +51,16 @@ export default function StarlightIntegration({
 					injectRoute({
 						pattern: '404',
 						entrypoint: starlightConfig.prerender
-							? '@astrojs/starlight/404.astro'
-							: '@astrojs/starlight/404SSR.astro',
+							? '@astrojs/starlight/routes/static/404.astro'
+							: '@astrojs/starlight/routes/ssr/404.astro',
 						prerender: starlightConfig.prerender,
 					});
 				}
 				injectRoute({
 					pattern: '[...slug]',
 					entrypoint: starlightConfig.prerender
-						? '@astrojs/starlight/index.astro'
-						: '@astrojs/starlight/indexSSR.astro',
+						? '@astrojs/starlight/routes/static/index.astro'
+						: '@astrojs/starlight/routes/ssr/index.astro',
 					prerender: starlightConfig.prerender,
 				});
 

@@ -167,10 +167,7 @@
       "types": "./integrations/expressive-code/hast.d.ts",
       "default": "./integrations/expressive-code/hast.mjs"
     },
-    "./index.astro": "./index.astro",
-    "./indexSSR.astro": "./indexSSR.astro",
-    "./404.astro": "./404.astro",
-    "./404SSR.astro": "./404SSR.astro",
+    "./routes/*": "./routes/*",
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
