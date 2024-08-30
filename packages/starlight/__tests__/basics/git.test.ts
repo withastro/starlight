@@ -1,5 +1,10 @@
 import { assert, describe, expect, test } from 'vitest';
-import { getAllNewestCommitDate, getNewestCommitDate } from '../../utils/git';
+import {
+	getAllNewestCommitDate,
+	getNewestCommitDate,
+	makeAPI as makeLiveGitAPI,
+} from '../../utils/git';
+import { makeAPI as makeInlineGitAPI } from '../../utils/gitInlined';
 import { makeTestRepo, type ISODate } from '../git-utils';
 
 describe('getNewestCommitDate', () => {
@@ -15,6 +20,20 @@ describe('getNewestCommitDate', () => {
 		commitAllChanges('update updated.md', lastCommitDate);
 
 		expectCommitDateToEqual(getNewestCommitDate(getFilePath(file)), lastCommitDate);
+	});
+
+	test('returns the newest commit date from the wrapped API', () => {
+		const api = makeLiveGitAPI(getFilePath(''));
+
+		const file = 'updated.md';
+		const lastCommitDate = '2023-06-25';
+
+		writeFile(file, 'content 0');
+		commitAllChanges('add updated.md', '2023-06-21');
+		writeFile(file, 'content 1');
+		commitAllChanges('update updated.md', lastCommitDate);
+
+		expectCommitDateToEqual(api.getNewestCommitDate(file), lastCommitDate);
 	});
 
 	test('returns the initial commit date for a file never updated', () => {
@@ -107,6 +126,22 @@ describe('getAllNewestCommitDate', () => {
 		for (const file of expectedDates.keys()) {
 			const latestDate = latestDates.get(file);
 			assert.ok(latestDate, `Missing tracked file: ${file}`);
+		}
+	});
+
+	test('returns the newest commit date from inlined API', () => {
+		const api = makeInlineGitAPI(getAllNewestCommitDate(getFilePath('')));
+
+		const expectedDates = new Map<string, ISODate>([
+			['added.md', '2022-09-18'],
+			['updated.md', '2023-06-25'],
+			['updated with space.md', '2021-01-02'],
+			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+		]);
+
+		for (const [file, expectedDate] of expectedDates.entries()) {
+			const latestDate = api.getNewestCommitDate(file);
+			expectCommitDateToEqual(latestDate, expectedDate);
 		}
 	});
 

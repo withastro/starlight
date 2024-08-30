@@ -31,6 +31,8 @@ export function vitePluginStarlightUserConfig(
 	const resolveId = (id: string, base = root) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
 
+	const docsPath = resolve(fileURLToPath(srcDir), 'content/docs');
+
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
 			`virtual:starlight/components/${name}`,
@@ -47,10 +49,13 @@ export function vitePluginStarlightUserConfig(
 			srcDir,
 			trailingSlash,
 		})}`,
-		'virtual:starlight/git-info': generateGitInfoModule({
-			command,
-			srcDir: fileURLToPath(srcDir),
-		}),
+		'virtual:starlight/git-info':
+			(command !== 'build'
+				? `import { makeAPI } from '${new URL('../utils/git.ts', import.meta.url)}';` +
+				`const api = makeAPI(${JSON.stringify(docsPath)});`
+				: `import { makeAPI } from '${new URL('../utils/gitInlined.ts', import.meta.url)}';` +
+				`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(docsPath))});`) +
+			'export const getNewestCommitDate = api.getNewestCommitDate;',
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
 		'virtual:starlight/user-images': opts.logo
 			? 'src' in opts.logo
@@ -87,38 +92,4 @@ export function vitePluginStarlightUserConfig(
 			if (resolution) return modules[resolution];
 		},
 	};
-}
-
-function generateGitInfoModule({
-	command,
-	srcDir,
-}: {
-	command: 'dev' | 'build' | 'preview';
-	srcDir: string;
-}) {
-	const docsPath = resolve(srcDir, 'content/docs');
-
-	if (command !== 'build') {
-		const onDemandGitInfoModule = new URL('../utils/git.ts', import.meta.url);
-
-		// In dev mode expose the function directly so git is executed only when needed.
-		return `import {getNewestCommitDate as getInternal} from '${onDemandGitInfoModule}';
-import { resolve } from 'node:path';
-
-export const getNewestCommitDate = (file) => getInternal(
-	resolve(${JSON.stringify(docsPath)}, file)
-);
-`;
-	}
-
-	const trackedDocsFiles = getAllNewestCommitDate(docsPath);
-
-	return `
-const trackedDocsFiles = new Map(${JSON.stringify(trackedDocsFiles)});
-
-export function getNewestCommitDate(file) {
-	const timestamp = trackedDocsFiles.get(file);
-	if (!timestamp) throw new Error(\`Failed to retrieve the git history for file "\${file}"\`);
-	return new Date(timestamp);
-}`;
 }

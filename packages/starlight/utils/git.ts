@@ -1,6 +1,20 @@
+/**
+ * Git module to be used from the dev server and from the integration.
+ */
+
 import { basename, dirname, relative, resolve } from 'node:path';
 import { realpathSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+
+export type GitAPI = {
+	getNewestCommitDate: (file: string) => Date;
+};
+
+export const makeAPI = (directory: string): GitAPI => {
+	return {
+		getNewestCommitDate: (file) => getNewestCommitDate(resolve(directory, file)),
+	};
+};
 
 export function getNewestCommitDate(file: string): Date {
 	const result = spawnSync('git', ['log', '--format=%ct', '--max-count=1', basename(file)], {
