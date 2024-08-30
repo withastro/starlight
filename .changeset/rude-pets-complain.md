@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': minor
+'@astrojs/starlight': patch
 ---
 
 Adding TikTok in Social Links
