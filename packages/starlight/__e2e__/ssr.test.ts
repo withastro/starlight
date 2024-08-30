@@ -1,6 +1,6 @@
 import { expect, testFactory } from './test-utils';
 import assert from 'node:assert';
-import * as cheerio from 'cheerio';
+import { parseHTML } from 'linkedom';
 
 const test = testFactory('./fixtures/ssr/');
 
@@ -55,14 +55,12 @@ test('SSR mode renders the same splash page as prerendering', async ({
 });
 
 function expectEquivalentHTML(a: string, b: string) {
-	const a$ = cheerio.load(a);
-	const b$ = cheerio.load(b);
+	expect(getNormalizedHTML(a)).toEqual(getNormalizedHTML(b));
+}
 
-	a$('script[src]').attr('src', '');
-	a$('link[href]').attr('href', '');
-
-	b$('script[src]').attr('src', '');
-	b$('link[href]').attr('href', '');
-
-	expect(a$.html()).toEqual(b$.html());
+function getNormalizedHTML(html: string) {
+	const window = parseHTML(html);
+	window.document.querySelectorAll('script[src]').forEach((el) => el.setAttribute('src', ''));
+	window.document.querySelectorAll('link[href]').forEach((el) => el.setAttribute('href', ''));
+	return window.toString();
 }

@@ -179,7 +179,6 @@
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.10.2",
-    "cheerio": "1.0.0-rc.12",
     "vitest": "^1.6.0"
   },
   "dependencies": {
@@ -194,6 +193,7 @@
     "hast-util-select": "^6.0.2",
     "hast-util-to-string": "^3.0.0",
     "hastscript": "^9.0.0",
+    "linkedom": "^0.18.4",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.0",
     "mdast-util-to-string": "^4.0.0",
