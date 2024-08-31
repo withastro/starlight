@@ -253,26 +253,40 @@ You can provide translations for additional languages you support — or overrid
 
 ### Extend translation schema
 
-Add custom keys to your site’s translation dictionaries by setting `extend` in the `i18nSchema()` options.
-In the following example, a new, optional `custom.label` key is added to the default keys:
+You can add custom keys to your site’s translation dictionaries. In the following example, a new, optional `custom.label` key is added to the default keys:
 
-```diff lang="js"
-// src/content/config.ts
-import { defineCollection, z } from 'astro:content';
-import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+<Steps>
 
-export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
-	i18n: defineCollection({
-		type: 'data',
-		schema: i18nSchema({
-+			extend: z.object({
-+				'custom.label': z.string().optional(),
-+			}),
+1. Set `extend` in the `i18nSchema()` options.
+	```diff lang="js"
+	// src/content/config.ts
+	import { defineCollection, z } from 'astro:content';
+	import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+	export const collections = {
+		docs: defineCollection({ schema: docsSchema() }),
+		i18n: defineCollection({
+			type: 'data',
+			schema: i18nSchema({
+	+			extend: z.object({
+	+				'custom.label': z.string().optional(),
+	+			}),
+			}),
 		}),
-	}),
-};
-```
+	};
+	```
+
+2. Access this newly-created custom label in your component thanks to the `labels` props.
+	```astro
+	---
+	// src/components/Custom.astro
+
+	const { labels } = Astro.props;
+	---
+	<h2>{labels['custom.label']}</h2>
+	```
+</Steps>
+
 
 Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
 
