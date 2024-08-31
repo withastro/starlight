@@ -75,8 +75,9 @@ export async function runPlugins(
 
 	if (context.config.output === 'static' && !starlightConfig.prerender) {
 		throw new AstroError(
-			'Starlight prerendering cannot be disabled when the project is set to "static" output mode.',
-			'Either set output mode to "server"/"hybrid" or enable Starlight prerendering.'
+			'Starlight’s `prerender: false` option requires `output: "hybrid"` or `"server"` in your Astro config.',
+			'Either set `output` in your Astro config or set `prerender: true` in the Starlight options.\n\n' +
+				'Learn more about rendering modes in the Astro docs: https://docs.astro.build/en/basics/rendering-modes/'
 		);
 	}
 

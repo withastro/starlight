@@ -100,20 +100,17 @@ function getRoutes(): Route[] {
 }
 export const routes = getRoutes();
 
-function getParamRouteMapping(): ReadonlyMap<string | typeof INDEX_SLUG_PARAM, Route> {
-	const map = new Map<string | typeof INDEX_SLUG_PARAM, Route>();
-
+function getParamRouteMapping(): ReadonlyMap<string | undefined, Route> {
+	const map = new Map<string | undefined, Route>();
 	for (const route of routes) {
-		map.set(slugToParam(route.slug) ?? INDEX_SLUG_PARAM, route);
+		map.set(slugToParam(route.slug), route);
 	}
-
 	return map;
 }
-const INDEX_SLUG_PARAM = Symbol('index');
 const routesBySlugParam = getParamRouteMapping();
 
 export function getRouteBySlugParam(slugParam: string | undefined): Route | undefined {
-	return routesBySlugParam.get(slugParam?.replace(/\/$/, '') ?? INDEX_SLUG_PARAM);
+	return routesBySlugParam.get(slugParam?.replace(/\/$/, '') || undefined);
 }
 
 function getPaths(): Path[] {
