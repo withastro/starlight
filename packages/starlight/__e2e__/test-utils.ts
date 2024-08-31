@@ -80,7 +80,7 @@ class StarlightPage {
 	constructor(
 		private readonly server: Server,
 		private readonly page: Page
-	) { }
+	) {}
 
 	// Navigate to a URL relative to the server used during a test run and return the resource response.
 	goto(url: string) {

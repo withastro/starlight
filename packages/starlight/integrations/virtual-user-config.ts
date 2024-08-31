@@ -52,9 +52,9 @@ export function vitePluginStarlightUserConfig(
 		'virtual:starlight/git-info':
 			(command !== 'build'
 				? `import { makeAPI } from '${new URL('../utils/git.ts', import.meta.url)}';` +
-				`const api = makeAPI(${JSON.stringify(docsPath)});`
+					`const api = makeAPI(${JSON.stringify(docsPath)});`
 				: `import { makeAPI } from '${new URL('../utils/gitInlined.ts', import.meta.url)}';` +
-				`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(docsPath))});`) +
+					`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(docsPath))});`) +
 			'export const getNewestCommitDate = api.getNewestCommitDate;',
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
 		'virtual:starlight/user-images': opts.logo
