@@ -1,6 +1,8 @@
 # Vitest
 __coverage__/
 __tests__/
+__e2e__/
 vitest.*
+playwright.config.ts
 # Astro generates this during tests, but we want to ignore it.
 src/env.d.ts
