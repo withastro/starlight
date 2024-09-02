@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.26.2
+
+### Patch Changes
+
+- [#2273](https://github.com/withastro/starlight/pull/2273) [`746e0cd`](https://github.com/withastro/starlight/commit/746e0cd301f4ac4a182e8c45b36865c61d208b77) Thanks [@delucis](https://github.com/delucis)! - Fixes type error when using Starlight with Astro v4.15
+
+- [#2265](https://github.com/withastro/starlight/pull/2265) [`25b661e`](https://github.com/withastro/starlight/commit/25b661e238cdc6c08ef79504fa5507d879c0f62d) Thanks [@SeraphicRav](https://github.com/SeraphicRav)! - Adds TikTok social icon
+
+- [#2272](https://github.com/withastro/starlight/pull/2272) [`d1969dd`](https://github.com/withastro/starlight/commit/d1969dde2ea8ece6ce9d439eae12d9c63c2201d7) Thanks [@o-az](https://github.com/o-az)! - Adds new icon: `jsr`
+
+- [#2250](https://github.com/withastro/starlight/pull/2250) [`c0a6166`](https://github.com/withastro/starlight/commit/c0a6166bb280e2d70060b68cdf6ee166812c82d2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes internal E2E tests from the package published to the npm registry.
+
+- [#2253](https://github.com/withastro/starlight/pull/2253) [`72bc76a`](https://github.com/withastro/starlight/commit/72bc76a28f5c1b050d8125d80c6146526b699600) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing to use the `class` attribute in hero action link buttons.
+
 ## 0.26.1
 
 ### Patch Changes
