@@ -70,6 +70,7 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 				// Sites with a single non-root language different from the built-in default locale.
 				(!config.isMultilingual && config.locales !== undefined),
 			redirectToDefaultLocale: false,
+			fallbackType: 'redirect',
 		},
 	};
 }
