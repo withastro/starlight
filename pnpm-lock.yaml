@@ -64,8 +64,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       starlight-links-validator:
-        specifier: ^0.9.0
-        version: 0.9.0(@astrojs/starlight@packages+starlight)(astro@4.10.2)
+        specifier: ^0.11.0
+        version: 0.11.0(@astrojs/starlight@packages+starlight)(astro@4.10.2)
       start-server-and-test:
         specifier: ^2.0.4
         version: 2.0.4
@@ -73,7 +73,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.26.1
+        specifier: ^0.26.2
         version: link:../../packages/starlight
       astro:
         specifier: ^4.10.2
@@ -103,7 +103,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.26.1
+        specifier: ^0.26.2
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
@@ -6909,8 +6909,8 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.9.0(@astrojs/starlight@packages+starlight)(astro@4.10.2):
-    resolution: {integrity: sha512-DJQDncEJBuuguPHJKP/SMmYdToWCFeEpZuRV5z9Qqgif3njJiF7dBRDAFdNIM2TCNADAZdseMOcR0iUpnvvjLQ==}
+  /starlight-links-validator@0.11.0(@astrojs/starlight@packages+starlight)(astro@4.10.2):
+    resolution: {integrity: sha512-7mKiP0xAS8ItKy8QAIkmeNYbzI4w0WD0pOYoTPa1xMNbz+qYr/QWT+a40QO/Z2XYJLzzQn47yomupUfI89wheg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
