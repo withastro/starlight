@@ -66,7 +66,18 @@ function transformUnhandledDirective(
 ) {
 	const textNode = {
 		type: 'text',
-		value: toMarkdown(node, { extensions: [directiveToMarkdown()] }),
+		/**
+		 * `mdast-util-to-markdown` assumes that the tree represents a complete document (as it's an
+		 * AST and not a CST) and to follow the POSIX definition of a line (a sequence of zero or more
+		 * non- <newline> characters plus a terminating <newline> character), a newline is
+		 * automatically added at the end of the output so that the output is a valid file.
+		 * In this specific case, we can safely remove the newline character at the end of the output
+		 * before replacing the directive with its value.
+		 *
+		 * @see https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206
+		 * @see https://github.com/syntax-tree/mdast-util-to-markdown/blob/fd6a508cc619b862f75b762dcf876c6b8315d330/lib/index.js#L79-L85
+		 */
+		value: toMarkdown(node, { extensions: [directiveToMarkdown()] }).replace(/\n$/, ''),
 	} as const;
 	if (node.type === 'textDirective') {
 		parent.children[index] = textNode;
