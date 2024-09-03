@@ -7,7 +7,7 @@ import { WellKnownElementAttributes, WellKnownAnchorAttributes } from './html.mj
  * - The icons are not using a `matches` to provide a list of supported icons as it is not possible
  * to import a TypeScript file in this file (which can also not be a TypeScript file). When
  * Starlight is bundled, this could be refactored to provide a list of supported icons.
- * - Some component (`<Badge>`, `<LinkButton>`, and `<LinkCard>`) support extra attributes, e.g.
+ * - Some components (`<Badge>`, `<LinkButton>`, and `<LinkCard>`) support extra attributes, e.g.
  * all the attributes supported by the `<a>` tag. As Markdoc requires type definitions for each
  * attribute, only some well-known attributes are supported in these tags.
  *
