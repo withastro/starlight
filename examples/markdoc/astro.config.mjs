@@ -23,12 +23,6 @@ export default defineConfig({
 					label: 'Reference',
 					autogenerate: { directory: 'reference' },
 				},
-				// TODO(HiDeoo) Remove this entire group once the feature is ready.
-				{
-					label: '⚠️ Demo ⚠️',
-					badge: { text: 'To remove', variant: 'danger' },
-					autogenerate: { directory: 'demo' },
-				},
 			],
 		}),
 	],
