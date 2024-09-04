@@ -251,6 +251,8 @@ These variables are used throughout the UI with a range of gray shades used for 
 Use the sliders below to modify Starlight’s accent and gray color palettes.
 The dark and light preview areas will show the resulting colors, and the whole page will also update to preview your changes.
 
+Use the Contrast Level option to specify which of the Web Content Accessibility Guideline [colour contrast standards](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) to meet.
+
 When you’re happy with your changes, copy the CSS or Tailwind code below and use it in your project.
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -267,7 +269,7 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			random: 'Random',
 		},
 		contrast: {
-			label: 'WCAG Contrast Level',
+			label: 'Contrast Level',
 		},
 		editor: {
 			accentColor: 'Accent',
