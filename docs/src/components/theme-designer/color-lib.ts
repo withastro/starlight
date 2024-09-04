@@ -42,9 +42,6 @@ const contrastColor = (text: Oklch, bg: Oklch, threshold = 4.5): Oklch => {
 	while (wcagContrast(fgColor, bg) < threshold && fgColor.l < 100 && fgColor.l > 0) {
 		fgColor.l += increment;
 	}
-	if (oklchColorToHex(text) !== oklchColorToHex(fgColor)) {
-		console.log(oklchColorToHex(text), '=>', oklchColorToHex(fgColor));
-	}
 	return fgColor;
 };
 
