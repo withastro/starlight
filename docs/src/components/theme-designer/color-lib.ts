@@ -1,13 +1,49 @@
-import { useMode, modeOklch, modeRgb, formatHex, clampChroma } from 'culori/fn';
+import {
+	clampChroma,
+	formatHex,
+	modeLrgb,
+	modeOklch,
+	modeRgb,
+	useMode,
+	wcagContrast,
+	type Color,
+	type Oklch,
+} from 'culori/fn';
 
 const rgb = useMode(modeRgb);
 export const oklch = useMode(modeOklch);
+// We need to initialise LRGB support for culori’s `wcagContrast()` method.
+useMode(modeLrgb);
 
-/** Convert an OKLCH color to an RGB hex code. */
-export const oklchToHex = (l: number, c: number, h: number) => {
-	const okLchColor = oklch(`oklch(${l}% ${c} ${h})`)!;
+/** Convert a culori OKLCH color object to an RGB hex code. */
+const oklchColorToHex = (okLchColor: Oklch) => {
 	const rgbColor = rgb(clampChroma(okLchColor, 'oklch'));
 	return formatHex(rgbColor);
+};
+/** Construct a culori OKLCH color object from LCH parameters. */
+const oklchColorFromParts = (l: number, c: number, h: number) => oklch(`oklch(${l}% ${c} ${h})`)!;
+/** Convert OKLCH parameters to an RGB hex code. */
+export const oklchToHex = (l: number, c: number, h: number) =>
+	oklchColorToHex(oklchColorFromParts(l, c, h));
+
+/**
+ * Ensure a text colour passes a contrast threshold against a specific background colour.
+ * If necessary, colours will be darkened/lightened to increase contrast until the threshold is passed.
+ *
+ * @param text The text colour to adjust if necessary.
+ * @param bg The background colour to test contrast against.
+ * @param threshold The minimum contrast ratio required. Defaults to `7` to meet WCAG AAA standards.
+ * @returns An RGB hex code for the adjusted text colour.
+ */
+const contrastColor = (text: Color | string, bg: Color | string, threshold = 7): string => {
+	const fgColor = oklch(text)!;
+	const bgColor = oklch(bg)!;
+	// Brighten text in dark mode, darken text in light mode.
+	const increment = fgColor.l > bgColor.l ? 0.005 : -0.005;
+	while (wcagContrast(fgColor, bgColor) < threshold && fgColor.l < 100 && fgColor.l > 0) {
+		fgColor.l += increment;
+	}
+	return oklchColorToHex(fgColor);
 };
 
 /** Generate dark and light palettes based on user-selected hue and chroma values. */
@@ -19,7 +55,8 @@ export function getPalettes(config: {
 		accent: { hue: ah, chroma: ac },
 		gray: { hue: gh, chroma: gc },
 	} = config;
-	return {
+
+	const palette = {
 		dark: {
 			// Accents
 			'accent-low': oklchToHex(25.94, ac / 3, ah),
@@ -52,6 +89,24 @@ export function getPalettes(config: {
 			black: oklchToHex(100, 0, 0),
 		},
 	};
+
+	// Ensure text shades have sufficient contrast against common background colours.
+
+	// Dark mode:
+	// `gray-2` is used against `gray-5` in inline code snippets.
+	palette.dark['gray-2'] = contrastColor(palette.dark['gray-2'], palette.dark['gray-5']);
+	// `gray-3` is used in the table of contents.
+	palette.dark['gray-3'] = contrastColor(palette.dark['gray-3'], palette.dark.black);
+
+	// Light mode:
+	// `accent` is used for links and link buttons and can be slightly under 7:1 for some hues.
+	palette.light.accent = contrastColor(palette.light.accent, palette.light.black);
+	// `gray-2` is used against `gray-6` in inline code snippets.
+	palette.light['gray-2'] = contrastColor(palette.light['gray-2'], palette.light['gray-6']);
+	// `gray-3` is used in the table of contents.
+	palette.light['gray-3'] = contrastColor(palette.light['gray-3'], palette.light.black);
+
+	return palette;
 }
 
 /*
