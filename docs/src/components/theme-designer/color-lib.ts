@@ -49,10 +49,12 @@ const contrastColor = (text: Oklch, bg: Oklch, threshold = 4.5): Oklch => {
 export function getPalettes(config: {
 	accent: { hue: number; chroma: number };
 	gray: { hue: number; chroma: number };
+	minimumContrast?: number;
 }) {
 	const {
 		accent: { hue: ah, chroma: ac },
 		gray: { hue: gh, chroma: gc },
+		minimumContrast: mc,
 	} = config;
 
 	const palettes = {
@@ -93,17 +95,17 @@ export function getPalettes(config: {
 
 	// Dark mode:
 	// `gray-2` is used against `gray-5` in inline code snippets.
-	palettes.dark['gray-2'] = contrastColor(palettes.dark['gray-2'], palettes.dark['gray-5']);
+	palettes.dark['gray-2'] = contrastColor(palettes.dark['gray-2'], palettes.dark['gray-5'], mc);
 	// `gray-3` is used in the table of contents.
-	palettes.dark['gray-3'] = contrastColor(palettes.dark['gray-3'], palettes.dark.black);
+	palettes.dark['gray-3'] = contrastColor(palettes.dark['gray-3'], palettes.dark.black, mc);
 
 	// Light mode:
 	// `accent` is used for links and link buttons and can be slightly under 7:1 for some hues.
-	palettes.light.accent = contrastColor(palettes.light.accent, palettes.light['gray-6']);
+	palettes.light.accent = contrastColor(palettes.light.accent, palettes.light['gray-6'], mc);
 	// `gray-2` is used against `gray-6` in inline code snippets.
-	palettes.light['gray-2'] = contrastColor(palettes.light['gray-2'], palettes.light['gray-6']);
+	palettes.light['gray-2'] = contrastColor(palettes.light['gray-2'], palettes.light['gray-6'], mc);
 	// `gray-3` is used in the table of contents.
-	palettes.light['gray-3'] = contrastColor(palettes.light['gray-3'], palettes.light.black);
+	palettes.light['gray-3'] = contrastColor(palettes.light['gray-3'], palettes.light.black, mc);
 
 	// Convert the palette from OKLCH to RGB hex codes.
 	return {
