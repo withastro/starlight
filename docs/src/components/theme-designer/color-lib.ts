@@ -6,7 +6,6 @@ import {
 	modeRgb,
 	useMode,
 	wcagContrast,
-	type Color,
 	type Oklch,
 } from 'culori/fn';
 
@@ -32,18 +31,21 @@ export const oklchToHex = (l: number, c: number, h: number) =>
  *
  * @param text The text colour to adjust if necessary.
  * @param bg The background colour to test contrast against.
- * @param threshold The minimum contrast ratio required. Defaults to `7` to meet WCAG AAA standards.
- * @returns An RGB hex code for the adjusted text colour.
+ * @param threshold The minimum contrast ratio required. Defaults to `4.5` to meet WCAG AA standards.
+ * @returns The adjusted text colour as a culori OKLCH color object.
  */
-const contrastColor = (text: Color | string, bg: Color | string, threshold = 7): string => {
-	const fgColor = oklch(text)!;
-	const bgColor = oklch(bg)!;
+const contrastColor = (text: Oklch, bg: Oklch, threshold = 4.5): Oklch => {
+	/** Clone of the input foreground colour to mutate. */
+	const fgColor = { ...text };
 	// Brighten text in dark mode, darken text in light mode.
-	const increment = fgColor.l > bgColor.l ? 0.005 : -0.005;
-	while (wcagContrast(fgColor, bgColor) < threshold && fgColor.l < 100 && fgColor.l > 0) {
+	const increment = fgColor.l > bg.l ? 0.005 : -0.005;
+	while (wcagContrast(fgColor, bg) < threshold && fgColor.l < 100 && fgColor.l > 0) {
 		fgColor.l += increment;
 	}
-	return oklchColorToHex(fgColor);
+	if (oklchColorToHex(text) !== oklchColorToHex(fgColor)) {
+		console.log(oklchColorToHex(text), '=>', oklchColorToHex(fgColor));
+	}
+	return fgColor;
 };
 
 /** Generate dark and light palettes based on user-selected hue and chroma values. */
@@ -56,37 +58,37 @@ export function getPalettes(config: {
 		gray: { hue: gh, chroma: gc },
 	} = config;
 
-	const palette = {
+	const palettes = {
 		dark: {
 			// Accents
-			'accent-low': oklchToHex(25.94, ac / 3, ah),
-			accent: oklchToHex(52.28, ac, ah),
-			'accent-high': oklchToHex(83.38, ac / 3, ah),
+			'accent-low': oklchColorFromParts(25.94, ac / 3, ah),
+			accent: oklchColorFromParts(52.28, ac, ah),
+			'accent-high': oklchColorFromParts(83.38, ac / 3, ah),
 			// Grays
-			white: oklchToHex(100, 0, 0),
-			'gray-1': oklchToHex(94.77, gc / 2.5, gh),
-			'gray-2': oklchToHex(81.34, gc / 2, gh),
-			'gray-3': oklchToHex(63.78, gc, gh),
-			'gray-4': oklchToHex(46.01, gc, gh),
-			'gray-5': oklchToHex(34.09, gc, gh),
-			'gray-6': oklchToHex(27.14, gc, gh),
-			black: oklchToHex(20.94, gc / 2, gh),
+			white: oklchColorFromParts(100, 0, 0),
+			'gray-1': oklchColorFromParts(94.77, gc / 2.5, gh),
+			'gray-2': oklchColorFromParts(81.34, gc / 2, gh),
+			'gray-3': oklchColorFromParts(63.78, gc, gh),
+			'gray-4': oklchColorFromParts(46.01, gc, gh),
+			'gray-5': oklchColorFromParts(34.09, gc, gh),
+			'gray-6': oklchColorFromParts(27.14, gc, gh),
+			black: oklchColorFromParts(20.94, gc / 2, gh),
 		},
 		light: {
 			// Accents
-			'accent-low': oklchToHex(87.81, ac / 4, ah),
-			accent: oklchToHex(52.95, ac, ah),
-			'accent-high': oklchToHex(31.77, ac / 2, ah),
+			'accent-low': oklchColorFromParts(87.81, ac / 4, ah),
+			accent: oklchColorFromParts(52.95, ac, ah),
+			'accent-high': oklchColorFromParts(31.77, ac / 2, ah),
 			// Grays
-			white: oklchToHex(20.94, gc / 2, gh),
-			'gray-1': oklchToHex(27.14, gc, gh),
-			'gray-2': oklchToHex(34.09, gc, gh),
-			'gray-3': oklchToHex(46.01, gc, gh),
-			'gray-4': oklchToHex(63.78, gc, gh),
-			'gray-5': oklchToHex(81.34, gc / 2, gh),
-			'gray-6': oklchToHex(94.77, gc / 2.5, gh),
-			'gray-7': oklchToHex(97.35, gc / 5, gh),
-			black: oklchToHex(100, 0, 0),
+			white: oklchColorFromParts(20.94, gc / 2, gh),
+			'gray-1': oklchColorFromParts(27.14, gc, gh),
+			'gray-2': oklchColorFromParts(34.09, gc, gh),
+			'gray-3': oklchColorFromParts(46.01, gc, gh),
+			'gray-4': oklchColorFromParts(63.78, gc, gh),
+			'gray-5': oklchColorFromParts(81.34, gc / 2, gh),
+			'gray-6': oklchColorFromParts(94.77, gc / 2.5, gh),
+			'gray-7': oklchColorFromParts(97.35, gc / 5, gh),
+			black: oklchColorFromParts(100, 0, 0),
 		},
 	};
 
@@ -94,19 +96,27 @@ export function getPalettes(config: {
 
 	// Dark mode:
 	// `gray-2` is used against `gray-5` in inline code snippets.
-	palette.dark['gray-2'] = contrastColor(palette.dark['gray-2'], palette.dark['gray-5']);
+	palettes.dark['gray-2'] = contrastColor(palettes.dark['gray-2'], palettes.dark['gray-5']);
 	// `gray-3` is used in the table of contents.
-	palette.dark['gray-3'] = contrastColor(palette.dark['gray-3'], palette.dark.black);
+	palettes.dark['gray-3'] = contrastColor(palettes.dark['gray-3'], palettes.dark.black);
 
 	// Light mode:
 	// `accent` is used for links and link buttons and can be slightly under 7:1 for some hues.
-	palette.light.accent = contrastColor(palette.light.accent, palette.light.black);
+	palettes.light.accent = contrastColor(palettes.light.accent, palettes.light['gray-6']);
 	// `gray-2` is used against `gray-6` in inline code snippets.
-	palette.light['gray-2'] = contrastColor(palette.light['gray-2'], palette.light['gray-6']);
+	palettes.light['gray-2'] = contrastColor(palettes.light['gray-2'], palettes.light['gray-6']);
 	// `gray-3` is used in the table of contents.
-	palette.light['gray-3'] = contrastColor(palette.light['gray-3'], palette.light.black);
+	palettes.light['gray-3'] = contrastColor(palettes.light['gray-3'], palettes.light.black);
 
-	return palette;
+	// Convert the palette from OKLCH to RGB hex codes.
+	return {
+		dark: Object.fromEntries(
+			Object.entries(palettes.dark).map(([key, color]) => [key, oklchColorToHex(color)])
+		) as Record<keyof typeof palettes.dark, string>,
+		light: Object.fromEntries(
+			Object.entries(palettes.light).map(([key, color]) => [key, oklchColorToHex(color)])
+		) as Record<keyof typeof palettes.light, string>,
+	};
 }
 
 /*
