@@ -3,8 +3,8 @@
 	/* Colors (dark mode) */
 	--sl-color-white: hsl(0, 0%, 100%); /* “white” */
 	--sl-color-gray-1: hsl(224, 20%, 94%);
-	--sl-color-gray-2: hsl(224, 6%, 77%);
-	--sl-color-gray-3: hsl(224, 6%, 56%);
+	--sl-color-gray-2: hsl(224, 6%, 80%);
+	--sl-color-gray-3: hsl(224, 7%, 66%);
 	--sl-color-gray-4: hsl(224, 7%, 36%);
 	--sl-color-gray-5: hsl(224, 10%, 23%);
 	--sl-color-gray-6: hsl(224, 14%, 16%);
@@ -142,7 +142,7 @@
 	--sl-color-red-low: hsl(var(--sl-hue-red), 80%, 90%);
 
 	--sl-color-accent-high: hsl(234, 80%, 30%);
-	--sl-color-accent: hsl(234, 90%, 60%);
+	--sl-color-accent: hsl(236, 86%, 56%);
 	--sl-color-accent-low: hsl(234, 88%, 90%);
 
 	--sl-color-text-accent: var(--sl-color-accent);
