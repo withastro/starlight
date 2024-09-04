@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.26.3
+
+### Patch Changes
+
+- [#2281](https://github.com/withastro/starlight/pull/2281) [`5062d30`](https://github.com/withastro/starlight/commit/5062d30c08f6ede9e6c39174537bb61280e7c23d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential text rendering issue that could include extra whitespaces for text containing colons.
+
+- [#2279](https://github.com/withastro/starlight/pull/2279) [`62d59e2`](https://github.com/withastro/starlight/commit/62d59e29d2621d834c28c764a02c58b1e1b49243) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with frontmatter schemas containing collection references used with the `<StarlightPage />` component and an Astro version greater than `4.14.0`.
+
 ## 0.26.2
 
 ### Patch Changes
