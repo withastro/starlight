@@ -64,9 +64,9 @@ const { labels = { label: 'WCAG Contrast Level' } } = Astro.props;
 		font-size: var(--sl-text-xs);
 		cursor: pointer;
 	}
-	label:focus-within {
+	label:has(:focus-visible) {
 		outline: 2px solid;
-		outline-offset: -3px;
+		outline-offset: -4px;
 	}
 	label:first-child {
 		border-start-start-radius: 99rem;
@@ -80,7 +80,7 @@ const { labels = { label: 'WCAG Contrast Level' } } = Astro.props;
 		color: var(--sl-color-black);
 		background-color: var(--sl-color-text-accent);
 	}
-	input {
+	input:focus-visible {
 		outline: none;
 	}
 </style>

@@ -64,6 +64,10 @@ const resolvedPresets = Object.entries(presets).map(([key, preset]) => {
 		font-size: var(--sl-text-xs);
 		cursor: pointer;
 	}
+	button:focus-visible {
+		outline: 2px solid;
+		outline-offset: -4px;
+	}
 	:global([data-theme='light']) [data-preset] {
 		background-color: var(--light-bg);
 		color: var(--light-text);
