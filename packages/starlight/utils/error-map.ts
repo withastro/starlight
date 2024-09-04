@@ -25,11 +25,31 @@ export function parseWithFriendlyErrors<T extends z.Schema>(
 	input: z.input<T>,
 	message: string
 ): z.output<T> {
-	const parsedConfig = schema.safeParse(input, { errorMap });
-	if (!parsedConfig.success) {
-		throw new AstroError(message, parsedConfig.error.issues.map((i) => i.message).join('\n'));
+	return processParsedData(schema.safeParse(input, { errorMap }), message);
+}
+
+/**
+ * Asynchronously parse data with a Zod schema that contains asynchronous refinements or transforms
+ * and throw a nicely formatted error if it is invalid.
+ *
+ * @param schema The Zod schema to use to parse the input.
+ * @param input Input data that should match the schema.
+ * @param message Error message preamble to use if the input fails to parse.
+ * @returns Validated data parsed by Zod.
+ */
+export async function parseAsyncWithFriendlyErrors<T extends z.Schema>(
+	schema: T,
+	input: z.input<T>,
+	message: string
+): Promise<z.output<T>> {
+	return processParsedData(await schema.safeParseAsync(input, { errorMap }), message);
+}
+
+function processParsedData(parsedData: z.SafeParseReturnType<any, any>, message: string) {
+	if (!parsedData.success) {
+		throw new AstroError(message, parsedData.error.issues.map((i) => i.message).join('\n'));
 	}
-	return parsedConfig.data;
+	return parsedData.data;
 }
 
 const errorMap: z.ZodErrorMap = (baseError, ctx) => {
