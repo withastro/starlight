@@ -252,8 +252,10 @@ Ces variables sont utilisées dans toute l'interface utilisateur avec une gamme 
 
 ### Éditeur de thème de couleur
 
-Utiliser les contrôles ci-dessous pour modifier les palettes de couleurs d'accentuation et de gris de Starlight.
+Utilisez les contrôles ci-dessous pour modifier les palettes de couleurs d'accentuation et de gris de Starlight.
 Les zones d'aperçu sombre et clair afficheront les couleurs résultantes, et la page entière sera également mise à jour pour prévisualiser vos modifications.
+
+Utilisez l'option Niveau de contraste pour spécifier lequel des [standards de contraste de couleur](https://developer.mozilla.org/fr/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) des règles pour l’accessibilité des contenus Web à respecter.
 
 Quand vous êtes satisfait de vos modifications, copiez le code CSS ou Tailwind ci-dessous et utilisez-le dans votre projet.
 
@@ -269,6 +271,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'Nébuleuse',
 			default: 'Par défaut',
 			random: 'Aléatoire',
+		},
+		contrast: {
+			label: 'Niveau de contraste',
 		},
 		editor: {
 			accentColor: 'Accentuation',
