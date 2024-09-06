@@ -49,6 +49,20 @@ export const highlights = ['file', 'CMS'];
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% code
+   code="console.log('This could come from a file or CMS!');"
+   lang="js"
+   title="example.js"
+   meta="'file' 'CMS'" /%}
+```
+
+</Fragment>
+
 export const exampleCode = `console.log('This could come from a file or CMS!');`;
 export const fileName = 'example.js';
 export const highlights = ['file', 'CMS'];

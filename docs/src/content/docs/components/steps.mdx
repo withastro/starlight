@@ -83,6 +83,26 @@ import { Steps } from '@astrojs/starlight/components';
 </Steps>
 ````
 
+<Fragment slot="markdoc">
+
+````markdoc
+# src/content/docs/example.mdoc
+
+{% steps %}
+
+1. Import the component into your MDX file:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Wrap `<Steps>` around your ordered list items.
+
+{% /steps %}
+````
+
+</Fragment>
+
 <Steps slot="preview">
 
 1. Import the component into your MDX file:

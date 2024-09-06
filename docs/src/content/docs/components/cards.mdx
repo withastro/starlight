@@ -39,6 +39,18 @@ import { Card } from '@astrojs/starlight/components';
 <Card title="Check this out">Interesting content you want to highlight.</Card>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% card title="Check this out" %}
+Interesting content you want to highlight.
+{% /card %}
+```
+
+</Fragment>
+
 <Card slot="preview" title="Check this out">
 	Interesting content you want to highlight.
 </Card>
@@ -60,6 +72,18 @@ import { Card } from '@astrojs/starlight/components';
 	Sirius, Vega, Betelgeuse
 </Card>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+# src/content/docs/example.mdoc
+
+{% card title="Stars" icon="star" %}
+Sirius, Vega, Betelgeuse
+{% /card %}
+```
+
+</Fragment>
 
 <Card slot="preview" title="Stars" icon="star">
 	Sirius, Vega, Betelgeuse

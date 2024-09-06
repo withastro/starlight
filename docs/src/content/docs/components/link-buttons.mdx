@@ -43,6 +43,20 @@ import { LinkButton } from '@astrojs/starlight/components';
 </LinkButton>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% linkbutton href="/getting-started/" %}Get started{% /linkbutton %}
+
+{% linkbutton href="/reference/configuration/" variant="secondary" %}
+Configuration Reference
+{% /linkbutton %}
+```
+
+</Fragment>
+
 <Fragment slot="preview">
 	<LinkButton href="/getting-started/">Get started</LinkButton>
 	<LinkButton href="/reference/configuration/" variant="secondary">
@@ -74,6 +88,22 @@ import { LinkButton } from '@astrojs/starlight/components';
 	Related: Astro
 </LinkButton>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc {6-7}
+# src/content/docs/example.mdoc
+
+{% linkbutton
+   href="https://docs.astro.build"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+Related: Astro
+{% /linkbutton %}
+```
+
+</Fragment>
 
 <LinkButton
 	slot="preview"

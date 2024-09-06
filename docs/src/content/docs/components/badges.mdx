@@ -40,6 +40,18 @@ import { Badge } from '@astrojs/starlight/components';
 <Badge text="Starlight" variant="note" />
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% badge text="New" variant="tip" /%}
+{% badge text="Deprecated" variant="caution" /%}
+{% badge text="Starlight" variant="note" /%}
+```
+
+</Fragment>
+
 <Fragment slot="preview">
 	<Badge text="New" variant="tip" />
 	<Badge text="Deprecated" variant="caution" />
@@ -64,6 +76,18 @@ import { Badge } from '@astrojs/starlight/components';
 <Badge text="New, improved, and bigger" size="large" />
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+# src/content/docs/example.mdoc
+
+{% badge text="New" size="small" /%}
+{% badge text="New and improved" size="medium" /%}
+{% badge text="New, improved, and bigger" size="large" /%}
+```
+
+</Fragment>
+
 <Fragment slot="preview">
 	<Badge text="New" size="small" />
 	<Badge text="New and improved" size="medium" />
@@ -85,6 +109,16 @@ import { Badge } from '@astrojs/starlight/components';
 
 <Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+# src/content/docs/example.mdoc
+
+{% badge text="Custom" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
 
 <Badge
 	slot="preview"

@@ -43,6 +43,16 @@ import { LinkCard } from '@astrojs/starlight/components';
 <LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
 <LinkCard
 	slot="preview"
 	title="Authoring Markdown"
@@ -68,6 +78,19 @@ import { LinkCard } from '@astrojs/starlight/components';
 	description="Configure Starlight to support multiple languages."
 />
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc {6}
+# src/content/docs/example.mdoc
+
+{% linkcard
+   title="Internationalization"
+	 href="/guides/i18n/"
+	 description="Configure Starlight to support multiple languages." /%}
+```
+
+</Fragment>
 
 <LinkCard
 	slot="preview"

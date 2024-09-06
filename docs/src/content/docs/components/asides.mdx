@@ -53,6 +53,34 @@ Other content is also supported in asides.
 <Aside type="danger">Do not give your password to anyone.</Aside>
 ````
 
+<Fragment slot="markdoc">
+
+````markdoc
+# src/content/docs/example.mdoc
+
+{% aside %}
+Some content in an aside.
+{% /aside %}
+
+{% aside type="caution" %}
+Some cautionary content.
+{% /aside %}
+
+{% aside type="tip" %}
+Other content is also supported in asides.
+
+```js
+// A code snippet, for example.
+```
+{% /aside %}
+
+{% aside type="danger" %}
+Do not give your password to anyone.
+{% /aside %}
+````
+
+</Fragment>
+
 <Fragment slot="preview">
 
     <Aside>Some content in an aside.</Aside>
@@ -93,6 +121,18 @@ import { Aside } from '@astrojs/starlight/components';
 	A warning aside *with* a custom title.
 </Aside>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="Watch out!"'
+# src/content/docs/example.mdoc
+
+{% aside type="caution" title="Watch out!" %}
+A warning aside *with* a custom title.
+{% /aside %}
+```
+
+</Fragment>
 
 <Aside slot="preview" type="caution" title="Watch out!">
 	A warning aside *with* a custom title.

@@ -1,17 +1,17 @@
 ---
 title: Using components
-description: Using components in MDX with Starlight.
+description: Using components in MDX and Markdoc with Starlight.
 sidebar:
   order: 1
 ---
 
 Components let you easily reuse a piece of UI or styling consistently.
 Examples might include a link card or a YouTube embed.
-Starlight supports the use of components in [MDX](https://mdxjs.com/) files and provides some common components for you to use.
+Starlight supports the use of components in [MDX](https://mdxjs.com/) and [Markdoc](https://markdoc.dev/) files and provides some common components for you to use.
 
 [Learn more about building components in the Astro Docs](https://docs.astro.build/en/core-concepts/astro-components/).
 
-## Using a component
+## Using a component in MDX
 
 You can use a component by importing it into your MDX file and then rendering it as a JSX tag.
 These look like HTML tags but start with an uppercase letter matching the name in your `import` statement:
@@ -35,10 +35,15 @@ import AnotherComponent from '../../components/AnotherComponent.astro';
 Because Starlight is powered by Astro, you can add support for components built with any [supported UI framework (React, Preact, Svelte, Vue, Solid, Lit, and Alpine)](https://docs.astro.build/en/core-concepts/framework-components/) in your MDX files.
 Learn more about [using components in MDX](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx) in the Astro docs.
 
+## Using a component in Markdoc
+
+Starlight supports authoring content in [Markdoc](/guides/authoring-content/#markdoc).
+Check the experimental [Astro Markdoc integration documentation](https://docs.astro.build/en/guides/integrations-guide/markdoc/#render-components) for more information on how to use components in Markdoc files.
+
 ## Built-in components
 
 Starlight provides some built-in components for common documentation use cases.
-These components are available from the `@astrojs/starlight/components` package.
+These components are available from the `@astrojs/starlight/components` package in MDX files and from the [Starlight Markdoc preset](/guides/authoring-content/#markdoc) in Markdoc files.
 
 See the components group in the sidebar for a list of available components and how to use them.
 

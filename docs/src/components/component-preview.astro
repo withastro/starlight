@@ -1,5 +1,24 @@
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+const showContentTypeTabs = Astro.slots.has('markdoc');
+---
+
 <figure>
-	<slot />
+	{
+		showContentTypeTabs ? (
+			<Tabs syncKey="content-type">
+				<TabItem label="MDX">
+					<slot />
+				</TabItem>
+				<TabItem label="Markdoc">
+					<slot name="markdoc" />
+				</TabItem>
+			</Tabs>
+		) : (
+			<slot />
+		)
+	}
 	<div class="preview">
 		<figcaption>Preview</figcaption>
 		<div class="preview-content"><slot name="preview" /></div>

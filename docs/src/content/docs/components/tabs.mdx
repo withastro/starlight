@@ -42,6 +42,24 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Tabs>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% tabs %}
+{% tabitem label="Stars" %}
+Sirius, Vega, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Moons" %}
+Io, Europa, Ganymede
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
 <Tabs slot="preview">
 	<TabItem label="Stars">Sirius, Vega, Betelgeuse</TabItem>
 	<TabItem label="Moons">Io, Europa, Ganymede</TabItem>
@@ -79,6 +97,38 @@ _Some exoplanets:_
 	<TabItem label="Gemini">Pollux b, HAT-P-24b, HD 50554 b</TabItem>
 </Tabs>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="constellations"'
+# src/content/docs/example.mdoc
+
+_Some stars:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+Bellatrix, Rigel, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Gemini" %}
+Pollux, Castor A, Castor B
+{% /tabitem %}
+{% /tabs %}
+
+_Some exoplanets:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="Orion" %}
+HD 34445 b, Gliese 179 b, Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="Gemini" %}
+Pollux b, HAT-P-24b, HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
 
 <Fragment slot="preview">
 
@@ -120,6 +170,24 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 	</TabItem>
 </Tabs>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+# src/content/docs/example.mdoc
+
+{% tabs %}
+{% tabitem label="Stars" icon="star" %}
+Sirius, Vega, Betelgeuse
+{% /tabitem %}
+
+{% tabitem label="Moons" icon="moon" %}
+Io, Europa, Ganymede
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
 
 <Tabs slot="preview">
 	<TabItem label="Stars" icon="star">

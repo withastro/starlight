@@ -51,6 +51,24 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 </CardGrid>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc {3,11}
+# src/content/docs/example.mdoc
+
+{% cardgrid %}
+{% card title="Check this out" icon="open-book" %}
+Interesting content you want to highlight.
+{% /card %}
+
+{% card title="Other feature" icon="information" %}
+More information you want to share.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
 <CardGrid slot="preview">
 	<Card title="Check this out" icon="open-book">
 		Interesting content you want to highlight.
@@ -78,6 +96,20 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	<LinkCard title="Components" href="/guides/components/" />
 </CardGrid>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc {3,7}
+# src/content/docs/example.mdoc
+
+{% cardgrid %}
+{% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
+
+{% linkcard title="Components" href="/guides/components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
 
 <CardGrid slot="preview">
 	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
@@ -108,6 +140,24 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 </CardGrid>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+# src/content/docs/example.mdoc
+
+{% cardgrid stagger=true %}
+{% card title="Check this out" icon="open-book" %}
+Interesting content you want to highlight.
+{% /card %}
+
+{% card title="Other feature" icon="information" %}
+More information you want to share.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
 
 <CardGrid slot="preview" stagger>
 	<Card title="Check this out" icon="open-book">

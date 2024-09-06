@@ -42,6 +42,17 @@ import { Icon } from '@astrojs/starlight/components';
 <Icon name="starlight" label="The Starlight logo" />
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% icon name="star" /%}
+{% icon name="starlight" label="The Starlight logo" /%}
+```
+
+</Fragment>
+
 <Fragment slot="preview">
 	<Icon name="star" />
 	<Icon name="starlight" label="The Starlight logo" />
@@ -64,6 +75,17 @@ import { Card } from '@astrojs/starlight/components';
 <Icon name="star" color="goldenrod" size="2rem" />
 <Icon name="rocket" color="var(--sl-color-text-accent)" />
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
 
 <Fragment slot="preview">
 	<Icon name="star" color="goldenrod" size="2rem" />

@@ -58,6 +58,23 @@ import { FileTree } from '@astrojs/starlight/components';
 </FileTree>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc
+# src/content/docs/example.mdoc
+
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
 <FileTree slot="preview">
 
 - astro.config.mjs
@@ -92,6 +109,21 @@ import { FileTree } from '@astrojs/starlight/components';
 </FileTree>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc {6}
+# src/content/docs/example.mdoc
+
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
 <FileTree slot="preview">
 
 - src
@@ -125,6 +157,21 @@ import { FileTree } from '@astrojs/starlight/components';
 </FileTree>
 ```
 
+<Fragment slot="markdoc">
+
+```markdoc {6}
+# src/content/docs/example.mdoc
+
+{% filetree %}
+- src
+  - components
+    - Header.astro an **important** file
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
 <FileTree slot="preview">
 
 - src
@@ -156,6 +203,21 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </FileTree>
 ```
+
+<Fragment slot="markdoc">
+
+```markdoc {7}
+# src/content/docs/example.mdoc
+
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
 
 <FileTree slot="preview">
 
