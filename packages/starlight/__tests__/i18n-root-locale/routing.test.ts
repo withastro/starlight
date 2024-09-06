@@ -2,7 +2,7 @@ import config from 'virtual:starlight/user-config';
 import { assert, expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
 import { generateRouteData } from '../../utils/route-data';
-import * as git from '../../utils/git';
+import * as git from 'virtual:starlight/git-info';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -82,9 +82,9 @@ test('fallback routes use fallback entry last updated dates', () => {
 	});
 
 	expect(getNewestCommitDate).toHaveBeenCalledOnce();
-	expect(getNewestCommitDate.mock.lastCall?.[0]).toMatch(
-		/src[/\\]content[/\\]docs[/\\]guides[/\\]authoring-content.mdx$/
-		//                                       ^ no `en/` prefix
+	expect(getNewestCommitDate).toHaveBeenCalledWith(
+		'guides/authoring-content.mdx'
+		//^ no `en/` prefix
 	);
 
 	getNewestCommitDate.mockRestore();

@@ -167,8 +167,7 @@
       "types": "./integrations/expressive-code/hast.d.ts",
       "default": "./integrations/expressive-code/hast.mjs"
     },
-    "./index.astro": "./index.astro",
-    "./404.astro": "./404.astro",
+    "./routes/*": "./routes/*",
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
@@ -180,7 +179,8 @@
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.15.3",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "linkedom": "^0.18.4"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.3",

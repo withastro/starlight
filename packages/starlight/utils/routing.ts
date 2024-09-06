@@ -100,6 +100,19 @@ function getRoutes(): Route[] {
 }
 export const routes = getRoutes();
 
+function getParamRouteMapping(): ReadonlyMap<string | undefined, Route> {
+	const map = new Map<string | undefined, Route>();
+	for (const route of routes) {
+		map.set(slugToParam(route.slug), route);
+	}
+	return map;
+}
+const routesBySlugParam = getParamRouteMapping();
+
+export function getRouteBySlugParam(slugParam: string | undefined): Route | undefined {
+	return routesBySlugParam.get(slugParam?.replace(/\/$/, '') || undefined);
+}
+
 function getPaths(): Path[] {
 	return routes.map((route) => ({
 		params: { slug: slugToParam(route.slug) },
