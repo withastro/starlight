@@ -1,0 +1,35 @@
+---
+title: Welcome to Starlight
+description: Get started building your docs site with Starlight.
+template: splash
+hero:
+  title: Welcome to Starlight with Markdoc
+  tagline: Congrats on setting up a new Starlight project!
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: Example Guide
+      link: /guides/example/
+      icon: right-arrow
+    - text: Read the Starlight docs
+      link: https://starlight.astro.build
+      icon: external
+      variant: minimal
+---
+
+## Next steps
+
+{% cardgrid stagger=true %}
+{% card title="Update content" icon="pencil" %}
+Edit `src/content/docs/index.mdoc` to see this page change.
+{% /card %}
+{% card title="Add new content" icon="add-document" %}
+Add Markdoc files to `src/content/docs` to create new pages.
+{% /card %}
+{% card title="Configure your site" icon="setting" %}
+Edit your `sidebar` and other config in `astro.config.mjs`.
+{% /card %}
+{% card title="Read the docs" icon="open-book" %}
+Learn more in [the Starlight Docs](https://starlight.astro.build/).
+{% /card %}
+{% /cardgrid %}

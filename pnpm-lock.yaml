@@ -82,6 +82,24 @@ importers:
         specifier: ^0.32.5
         version: 0.32.6
 
+  examples/markdoc:
+    dependencies:
+      '@astrojs/markdoc':
+        specifier: ^0.11.4
+        version: 0.11.4(astro@4.15.3)
+      '@astrojs/starlight':
+        specifier: ^0.26.1
+        version: link:../../packages/starlight
+      '@astrojs/starlight-markdoc':
+        specifier: ^0.0.1
+        version: link:../../packages/markdoc
+      astro:
+        specifier: ^4.15.3
+        version: 4.15.3(@types/node@18.16.19)(typescript@5.4.5)
+      sharp:
+        specifier: ^0.32.5
+        version: 0.32.6
+
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
@@ -127,6 +145,19 @@ importers:
       '@types/opentype.js':
         specifier: ^1.3.8
         version: 1.3.8
+
+  packages/markdoc:
+    dependencies:
+      '@astrojs/markdoc':
+        specifier: ^0.11.4
+        version: 0.11.4(astro@4.15.3)
+      '@astrojs/starlight':
+        specifier: '>=0.23.0'
+        version: link:../starlight
+    devDependencies:
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.0(@types/node@18.16.19)
 
   packages/starlight:
     dependencies:
@@ -470,6 +501,27 @@ packages:
     transitivePeerDependencies:
       - typescript
     dev: true
+
+  /@astrojs/markdoc@0.11.4(astro@4.15.3):
+    resolution: {integrity: sha512-6s60ZpsODsEvws57TEpUPXq5Uo+eSHsTVUUAQbbkSL+nQHIy1tR7tI6vbbO2y/VOLj214kATAc18/iRjFp2TbQ==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      astro: ^3.0.0 || ^4.0.0
+    dependencies:
+      '@astrojs/internal-helpers': 0.4.1
+      '@astrojs/markdown-remark': 5.2.0
+      '@astrojs/prism': 3.1.0
+      '@markdoc/markdoc': 0.4.0
+      astro: 4.15.3(@types/node@18.16.19)(typescript@5.4.5)
+      esbuild: 0.21.5
+      github-slugger: 2.0.0
+      gray-matter: 4.0.3
+      htmlparser2: 9.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - supports-color
+    dev: false
 
   /@astrojs/markdown-remark@5.2.0:
     resolution: {integrity: sha512-vWGM24KZXz11jR3JO+oqYU3T2qpuOi4uGivJ9SQLCAI01+vEkHC60YJMRvHPc+hwd60F7euNs1PeOEixIIiNQw==}
@@ -1563,6 +1615,21 @@ packages:
       read-yaml-file: 1.1.0
     dev: true
 
+  /@markdoc/markdoc@0.4.0:
+    resolution: {integrity: sha512-fSh4P3Y4E7oaKYc2oNzSIJVPDto7SMzAuQN1Iyx53UxzleA6QzRdNWRxmiPqtVDaDi5dELd2yICoG91csrGrAw==}
+    engines: {node: '>=14.7.0'}
+    peerDependencies:
+      '@types/react': '*'
+      react: '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    optionalDependencies:
+      '@types/markdown-it': 12.2.3
+    dev: false
+
   /@mdx-js/mdx@3.0.1:
     resolution: {integrity: sha512-eIQ4QTrOWyL3LWEe/bu6Taqzq2HQvHcyTMaOrI95P2/LmJE7AsfPfgJGuFLPVqBUE1BC1rik3VIhU+s9u72arA==}
     dependencies:
@@ -1889,10 +1956,31 @@ packages:
     dependencies:
       '@types/unist': 3.0.0
 
+  /@types/linkify-it@5.0.0:
+    resolution: {integrity: sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@types/markdown-it@12.2.3:
+    resolution: {integrity: sha512-GKMHFfv3458yYy+v/N8gjufHO6MSZKCOXpZc5GXIWWy8uldwfmPn98vp81gZ5f9SVw8YYBctgfJ22a2d7AOMeQ==}
+    requiresBuild: true
+    dependencies:
+      '@types/linkify-it': 5.0.0
+      '@types/mdurl': 2.0.0
+    dev: false
+    optional: true
+
   /@types/mdast@4.0.4:
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
     dependencies:
       '@types/unist': 3.0.0
+
+  /@types/mdurl@2.0.0:
+    resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /@types/mdx@2.0.5:
     resolution: {integrity: sha512-76CqzuD6Q7LC+AtbPqrvD9AqsN0k8bsYo2bM2J8pmNldP1aIPAbzUQ7QbobyXL4eLr1wK5x8FZFe8eF/ubRuBg==}
@@ -3019,18 +3107,15 @@ packages:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       entities: 4.5.0
-    dev: true
 
   /domelementtype@2.3.0:
     resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
-    dev: true
 
   /domhandler@5.0.3:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.3.0
-    dev: true
 
   /domutils@3.1.0:
     resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
@@ -3038,7 +3123,6 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
-    dev: true
 
   /dotenv@8.6.0:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
@@ -3989,6 +4073,15 @@ packages:
       domutils: 3.1.0
       entities: 4.5.0
     dev: true
+
+  /htmlparser2@9.1.0:
+    resolution: {integrity: sha512-5zfg6mHUoaer/97TxnGpxmbR7zJtPwIYFMZ/H5ucTlPZhKvtum05yiPK3Mgai3a0DyVxv7qYqoweaEd2nrYQzQ==}
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.1.0
+      entities: 4.5.0
+    dev: false
 
   /http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
