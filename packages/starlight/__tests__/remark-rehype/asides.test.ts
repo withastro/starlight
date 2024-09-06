@@ -218,18 +218,23 @@ test('transforms back unhandled text directives', async () => {
 		`This is a:test of a sentence with a text:name[content]{key=val} directive.`
 	);
 	expect(res.code).toMatchInlineSnapshot(`
-		"<p>This is a:test
-		 of a sentence with a text:name[content]{key="val"}
-		 directive.</p>"
+		"<p>This is a:test of a sentence with a text:name[content]{key="val"} directive.</p>"
 	`);
 });
 
 test('transforms back unhandled leaf directives', async () => {
 	const res = await processor.render(`::video[Title]{v=xxxxxxxxxxx}`);
 	expect(res.code).toMatchInlineSnapshot(`
-		"<p>::video[Title]{v="xxxxxxxxxxx"}
-		</p>"
+		"<p>::video[Title]{v="xxxxxxxxxxx"}</p>"
 	`);
+});
+
+test('does not add any whitespace character after any unhandled directive', async () => {
+	const res = await processor.render(`## Environment variables (astro:env)`);
+	expect(res.code).toMatchInlineSnapshot(
+		`"<h2 id="environment-variables-astroenv">Environment variables (astro:env)</h2>"`
+	);
+	expect(res.code).not.toMatch(/\n/);
 });
 
 test('lets remark plugin injected by Starlight plugins handle text and leaf directives', async () => {
@@ -263,8 +268,6 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 		`This is a:test of a sentence with a :abbr[SL]{name="Starlight"} directive handled by another remark plugin and some other text:name[content]{key=val} directives not handled by any plugin.`
 	);
 	expect(res.code).toMatchInlineSnapshot(`
-		"<p>This is a:test
-		 of a sentence with a TEXT FROM REMARK PLUGIN directive handled by another remark plugin and some other text:name[content]{key="val"}
-		 directives not handled by any plugin.</p>"
+		"<p>This is a:test of a sentence with a TEXT FROM REMARK PLUGIN directive handled by another remark plugin and some other text:name[content]{key="val"} directives not handled by any plugin.</p>"
 	`);
 });
