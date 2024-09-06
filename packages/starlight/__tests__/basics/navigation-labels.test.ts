@@ -9,7 +9,7 @@ vi.mock('astro:content', async () =>
 				'environmental-impact.md',
 				{ title: 'Eco-friendly docs', sidebar: { label: 'Environmental impact' } },
 			],
-			['guides/authoring-content.md', { title: 'Authoring Markdown' }],
+			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
 			['guides/components.mdx', { title: 'Using components', sidebar: { label: 'Components' } }],
 		],
 	})

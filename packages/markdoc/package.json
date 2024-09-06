@@ -1,0 +1,26 @@
+{
+  "name": "@astrojs/starlight-markdoc",
+  "version": "0.0.1",
+  "description": "Markdoc preset for the Starlight documentation theme for Astro",
+  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/withastro/starlight",
+    "directory": "packages/markdoc"
+  },
+  "bugs": "https://github.com/withastro/starlight/issues",
+  "homepage": "https://starlight.astro.build",
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs",
+    "./components": "./components.ts"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "@astrojs/markdoc": "^0.11.4",
+    "@astrojs/starlight": ">=0.23.0"
+  }
+}
