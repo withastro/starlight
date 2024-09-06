@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.26.4
+
+### Patch Changes
+
+- [#2288](https://github.com/withastro/starlight/pull/2288) [`b15f725`](https://github.com/withastro/starlight/commit/b15f725ead981387f80f089d0523d9c2748b184e) Thanks [@matthewp](https://github.com/matthewp)! - Safely handle Zod errors
+
+  Prevents bugs where errors without the `.received` props would through and cause builds to fail unnecessarily.
+
 ## 0.26.3
 
 ### Patch Changes
