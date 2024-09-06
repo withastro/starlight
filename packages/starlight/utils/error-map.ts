@@ -143,7 +143,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 };
 
 const getTypeOrLiteralMsg = (error: TypeOrLiteralErrByPathEntry): string => {
-	if (error.received === 'undefined') return 'Required';
+	if (typeof error.received === 'undefined') return 'Required';
 	const expectedDeduped = new Set(error.expected);
 	switch (error.code) {
 		case 'invalid_type':
