@@ -179,7 +179,7 @@
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
-    "astro": "^4.10.2",
+    "astro": "^4.15.3",
     "vitest": "^1.6.0"
   },
   "dependencies": {
