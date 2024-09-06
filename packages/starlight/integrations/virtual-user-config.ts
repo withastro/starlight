@@ -1,4 +1,4 @@
-import type { AstroConfig, ViteUserConfig } from 'astro';
+import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StarlightConfig } from '../utils/user-config';
@@ -10,7 +10,7 @@ function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 
 /** Vite plugin that exposes Starlight user config and project context via virtual modules. */
 export function vitePluginStarlightUserConfig(
-	command: 'dev' | 'build' | 'preview',
+	command: HookParameters<'astro:config:setup'>['command'],
 	opts: StarlightConfig,
 	{
 		build,
