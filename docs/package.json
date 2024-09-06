@@ -17,9 +17,9 @@
     "@astro-community/astro-embed-youtube": "^0.5.2",
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.1.1",
-    "@types/culori": "^2.0.0",
-    "astro": "^4.10.2",
-    "culori": "^3.2.0",
+    "@types/culori": "^2.1.1",
+    "astro": "^4.15.3",
+    "culori": "^4.0.1",
     "sharp": "^0.32.5"
   },
   "devDependencies": {
