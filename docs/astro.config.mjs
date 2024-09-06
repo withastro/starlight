@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
@@ -169,6 +170,11 @@ export default defineConfig({
 					autogenerate: { directory: 'resources' },
 				},
 			],
+			expressiveCode: {
+				shiki: {
+					langs: [JSON.parse(fs.readFileSync('./grammars/markdoc.tmLanguage.json', 'utf-8'))],
+				},
+			},
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({
