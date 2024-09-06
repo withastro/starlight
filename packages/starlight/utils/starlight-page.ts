@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import { parseWithFriendlyErrors } from './error-map';
+import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import {
 	getSiteTitle,
@@ -198,7 +198,9 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			}),
 	});
 
-	return parseWithFriendlyErrors(
+	// Starting with Astro 4.14.0, a frontmatter schema that contains collection references will
+	// contain an async transform.
+	return parseAsyncWithFriendlyErrors(
 		schema,
 		frontmatter,
 		'Invalid frontmatter props passed to the `<StarlightPage/>` component.'
