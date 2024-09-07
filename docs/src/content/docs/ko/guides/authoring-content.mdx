@@ -204,8 +204,8 @@ Starlight의 유용한 기능 덕분에 사용자의 생산성이 향상되고 �
 ```js
 // 구문 강조 기능이 있는 Javascript 코드입니다.
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 
@@ -213,8 +213,8 @@ var fun = function lang(l) {
 ```js
 // 구문 강조 기능이 있는 Javascript 코드입니다.
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 ````
@@ -238,16 +238,16 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
 
   ```js {2-3}
   function demo() {
-    // 이 줄(#2)과 다음 줄이 강조 표시됩니다.
-    return '이 줄은 이 스니펫의 라인 #3입니다.';
+  	// 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+  	return '이 줄은 이 스니펫의 라인 #3입니다.';
   }
   ```
 
   ````md
   ```js {2-3}
   function demo() {
-    // 이 줄(#2)과 다음 줄이 강조 표시됩니다.
-    return '이 줄은 이 스니펫의 라인 #3입니다.';
+  	// 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+  	return '이 줄은 이 스니펫의 라인 #3입니다.';
   }
   ```
   ````
@@ -257,7 +257,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```js "Individual terms" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
-    return '정규 표현식도 지원됩니다.';
+  	return '정규 표현식도 지원됩니다.';
   }
   ```
 
@@ -265,7 +265,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```js "Individual terms" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
-    return '정규 표현식도 지원됩니다.';
+  	return '정규 표현식도 지원됩니다.';
   }
   ```
   ````
@@ -274,18 +274,18 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
 
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
-    console.log('삽입 및 삭제된 마커 타입입니다.');
-    // return 문은 기본 마커 타입을 사용합니다.
-    return true;
+  	console.log('삽입 및 삭제된 마커 타입입니다.');
+  	// return 문은 기본 마커 타입을 사용합니다.
+  	return true;
   }
   ```
 
   ````md
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
-    console.log('삽입 및 삭제된 마커 타입입니다.');
-    // return 문은 기본 마커 타입을 사용합니다.
-    return true;
+  	console.log('삽입 및 삭제된 마커 타입입니다.');
+  	// return 문은 기본 마커 타입을 사용합니다.
+  	return true;
   }
   ```
   ````
@@ -491,7 +491,7 @@ yarn create astro --template starlight/markdoc
 
     </Tabs>
 
-3. `markdoc.config.mjs`에 Markdoc 구성 파일을 만들고 Starlight Markdoc 프리셋을 사용하세요:
+3.  `markdoc.config.mjs`에 Markdoc 구성 파일을 만들고 Starlight Markdoc 프리셋을 사용하세요:
 
     ```js
     import { defineMarkdocConfig } from '@astrojs/markdoc/config';
