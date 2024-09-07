@@ -9,7 +9,7 @@ vi.mock('astro:content', async () =>
 			['manual-setup.mdx', { title: 'Manual Setup' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['guides/pages.mdx', { title: 'Pages' }],
-			['guides/authoring-content.md', { title: 'Authoring Content in Markdown' }],
+			['guides/authoring-content.mdx', { title: 'Authoring Content in Markdown' }],
 			['resources/plugins.mdx', { title: 'Plugins and Integrations' }],
 		],
 	})

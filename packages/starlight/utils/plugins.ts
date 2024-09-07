@@ -2,6 +2,7 @@ import type { AstroIntegration } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
+import { AstroError } from 'astro/errors';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -70,6 +71,14 @@ export async function runPlugins(
 			isRestart: context.isRestart,
 			logger: context.logger.fork(name),
 		});
+	}
+
+	if (context.config.output === 'static' && !starlightConfig.prerender) {
+		throw new AstroError(
+			'Starlight’s `prerender: false` option requires `output: "hybrid"` or `"server"` in your Astro config.',
+			'Either set `output` in your Astro config or set `prerender: true` in the Starlight options.\n\n' +
+				'Learn more about rendering modes in the Astro docs: https://docs.astro.build/en/basics/rendering-modes/'
+		);
 	}
 
 	return { integrations, starlightConfig };

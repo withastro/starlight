@@ -303,7 +303,7 @@ function getAstroI18nTestConfig(i18nConfig: AstroUserConfig['i18n']): AstroConfi
 		...i18nConfig,
 		routing:
 			typeof i18nConfig?.routing !== 'string'
-				? { prefixDefaultLocale: false, ...i18nConfig?.routing }
+				? { prefixDefaultLocale: false, fallbackType: 'redirect', ...i18nConfig?.routing }
 				: i18nConfig.routing,
 	} as AstroConfig['i18n'];
 }

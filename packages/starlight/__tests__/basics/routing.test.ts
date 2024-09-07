@@ -1,14 +1,16 @@
+import { type GetStaticPathsResult } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import { expect, test, vi } from 'vitest';
-import { routes } from '../../utils/routing';
+import { routes, paths, getRouteBySlugParam } from '../../utils/routing';
+import { slugToParam } from '../../utils/slugs';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
 		docs: [
 			['404.md', { title: 'Not found' }],
 			['index.mdx', { title: 'Home page' }],
-			['guides/authoring-content.md', { title: 'Authoring content', draft: true }],
+			['guides/authoring-content.mdx', { title: 'Authoring content', draft: true }],
 		],
 	})
 );
@@ -42,8 +44,36 @@ test('routes have locale data added', () => {
 	}
 });
 
+test('paths contain normalized slugs for path parameters', () => {
+	const expectedPaths: GetStaticPathsResult = [
+		{
+			params: { slug: '404' },
+			props: routes[0]!,
+		},
+		{
+			params: { slug: undefined },
+			props: routes[1]!,
+		},
+		{
+			params: { slug: 'guides/authoring-content' },
+			props: routes[2]!,
+		},
+	];
+
+	expect(paths).toEqual(expectedPaths);
+});
+
+test('routes can be retrieved from their path parameters', () => {
+	for (const route of routes) {
+		const params = slugToParam(route.slug);
+		const routeFromParams = getRouteBySlugParam(params);
+
+		expect(routeFromParams).toBe(route);
+	}
+});
+
 test('routes includes drafts except in production', async () => {
-	expect(routes.find((route) => route.id === 'guides/authoring-content.md')).toBeTruthy();
+	expect(routes.find((route) => route.id === 'guides/authoring-content.mdx')).toBeTruthy();
 
 	// Reset the modules registry so that re-importing `utils/routing.ts` re-evaluates the module and
 	// re-computes the routes. Re-importing the module is necessary because top-level imports cannot
@@ -54,7 +84,7 @@ test('routes includes drafts except in production', async () => {
 	// Re-import the module to re-evaluate it.
 	const { routes: prodRoutes } = await import('../../utils/routing');
 
-	expect(prodRoutes.find((route) => route.id === 'guides/authoring-content.md')).toBeFalsy();
+	expect(prodRoutes.find((route) => route.id === 'guides/authoring-content.mdx')).toBeFalsy();
 
 	vi.unstubAllEnvs();
 	vi.resetModules();

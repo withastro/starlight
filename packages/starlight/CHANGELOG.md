@@ -1,5 +1,64 @@
 # @astrojs/starlight
 
+## 0.27.0
+
+### Minor Changes
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Adds support for server-rendered Starlight pages.
+
+  When building a project with `hybrid` or `server` output mode, a new `prerender` option on Starlight config can be set to `false` to make all Starlight pages be rendered on-demand:
+
+  ```ts
+  export default defineConfig({
+    output: 'server',
+    integrations: [
+      starlight({
+        prerender: false,
+      }),
+    ],
+  });
+  ```
+
+### Patch Changes
+
+- [#2242](https://github.com/withastro/starlight/pull/2242) [`756e85e`](https://github.com/withastro/starlight/commit/756e85e8e814657c42c4a6f9c299b5bef32aee22) Thanks [@delucis](https://github.com/delucis)! - Refactors the logic for persisting and restoring sidebar state across navigations for better performance on slow or busy devices
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Improves performance of computing the last updated times from Git history.
+
+  Instead of executing `git` for each docs page, it is now executed twice regardless of the number of pages.
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Fixes last updated times on projects with custom `srcDir`
+
+## 0.26.4
+
+### Patch Changes
+
+- [#2288](https://github.com/withastro/starlight/pull/2288) [`b15f725`](https://github.com/withastro/starlight/commit/b15f725ead981387f80f089d0523d9c2748b184e) Thanks [@matthewp](https://github.com/matthewp)! - Safely handle Zod errors
+
+  Prevents bugs where errors without the `.received` props would through and cause builds to fail unnecessarily.
+
+## 0.26.3
+
+### Patch Changes
+
+- [#2281](https://github.com/withastro/starlight/pull/2281) [`5062d30`](https://github.com/withastro/starlight/commit/5062d30c08f6ede9e6c39174537bb61280e7c23d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential text rendering issue that could include extra whitespaces for text containing colons.
+
+- [#2279](https://github.com/withastro/starlight/pull/2279) [`62d59e2`](https://github.com/withastro/starlight/commit/62d59e29d2621d834c28c764a02c58b1e1b49243) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with frontmatter schemas containing collection references used with the `<StarlightPage />` component and an Astro version greater than `4.14.0`.
+
+## 0.26.2
+
+### Patch Changes
+
+- [#2273](https://github.com/withastro/starlight/pull/2273) [`746e0cd`](https://github.com/withastro/starlight/commit/746e0cd301f4ac4a182e8c45b36865c61d208b77) Thanks [@delucis](https://github.com/delucis)! - Fixes type error when using Starlight with Astro v4.15
+
+- [#2265](https://github.com/withastro/starlight/pull/2265) [`25b661e`](https://github.com/withastro/starlight/commit/25b661e238cdc6c08ef79504fa5507d879c0f62d) Thanks [@SeraphicRav](https://github.com/SeraphicRav)! - Adds TikTok social icon
+
+- [#2272](https://github.com/withastro/starlight/pull/2272) [`d1969dd`](https://github.com/withastro/starlight/commit/d1969dde2ea8ece6ce9d439eae12d9c63c2201d7) Thanks [@o-az](https://github.com/o-az)! - Adds new icon: `jsr`
+
+- [#2250](https://github.com/withastro/starlight/pull/2250) [`c0a6166`](https://github.com/withastro/starlight/commit/c0a6166bb280e2d70060b68cdf6ee166812c82d2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes internal E2E tests from the package published to the npm registry.
+
+- [#2253](https://github.com/withastro/starlight/pull/2253) [`72bc76a`](https://github.com/withastro/starlight/commit/72bc76a28f5c1b050d8125d80c6146526b699600) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing to use the `class` attribute in hero action link buttons.
+
 ## 0.26.1
 
 ### Patch Changes

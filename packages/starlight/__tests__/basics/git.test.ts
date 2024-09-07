@@ -1,9 +1,11 @@
-import { mkdtempSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { tmpdir } from 'node:os';
-import { spawnSync } from 'node:child_process';
-import { describe, expect, test } from 'vitest';
-import { getNewestCommitDate } from '../../utils/git';
+import { assert, describe, expect, test } from 'vitest';
+import {
+	getAllNewestCommitDate,
+	getNewestCommitDate,
+	makeAPI as makeLiveGitAPI,
+} from '../../utils/git';
+import { makeAPI as makeInlineGitAPI } from '../../utils/gitInlined';
+import { makeTestRepo, type ISODate } from '../git-utils';
 
 describe('getNewestCommitDate', () => {
 	const { commitAllChanges, getFilePath, writeFile } = makeTestRepo();
@@ -18,6 +20,20 @@ describe('getNewestCommitDate', () => {
 		commitAllChanges('update updated.md', lastCommitDate);
 
 		expectCommitDateToEqual(getNewestCommitDate(getFilePath(file)), lastCommitDate);
+	});
+
+	test('returns the newest commit date from the wrapped API', () => {
+		const api = makeLiveGitAPI(getFilePath(''));
+
+		const file = 'updated.md';
+		const lastCommitDate = '2023-06-25';
+
+		writeFile(file, 'content 0');
+		commitAllChanges('add updated.md', '2023-06-21');
+		writeFile(file, 'content 1');
+		commitAllChanges('update updated.md', lastCommitDate);
+
+		expectCommitDateToEqual(api.getNewestCommitDate(file), lastCommitDate);
 	});
 
 	test('returns the initial commit date for a file never updated', () => {
@@ -70,48 +86,73 @@ describe('getNewestCommitDate', () => {
 	});
 });
 
+describe('getAllNewestCommitDate', () => {
+	const { commitAllChanges, getFilePath, writeFile } = makeTestRepo();
+
+	test('returns the newest commit date', () => {
+		writeFile('added.md', 'content');
+		commitAllChanges('add added.md', '2022-09-18');
+
+		writeFile('updated.md', 'content 0');
+		commitAllChanges('add updated.md', '2023-06-21');
+		writeFile('updated.md', 'content 1');
+		commitAllChanges('update updated.md', '2023-06-25');
+
+		writeFile('updated with space.md', 'content 0');
+		commitAllChanges('add updated.md', '2021-01-01');
+		writeFile('updated with space.md', 'content 1');
+		commitAllChanges('update updated.md', '2021-01-02');
+
+		writeFile('updated-same-day.md', 'content 0');
+		commitAllChanges('add updated.md', '2023-06-25T12:34:56Z');
+		writeFile('updated-same-day.md', 'content 1');
+		commitAllChanges('update updated.md', '2023-06-25T14:22:35Z');
+
+		const latestDates = new Map(getAllNewestCommitDate(getFilePath('')));
+
+		const expectedDates = new Map<string, ISODate>([
+			['added.md', '2022-09-18'],
+			['updated.md', '2023-06-25'],
+			['updated with space.md', '2021-01-02'],
+			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+		]);
+
+		for (const [file, date] of latestDates.entries()) {
+			const expectedDate = expectedDates.get(file);
+			assert.ok(expectedDate, `Unexpected tracked file: ${file}`);
+			expectCommitDateToEqual(new Date(date), expectedDate!);
+		}
+
+		for (const file of expectedDates.keys()) {
+			const latestDate = latestDates.get(file);
+			assert.ok(latestDate, `Missing tracked file: ${file}`);
+		}
+	});
+
+	test('returns the newest commit date from inlined API', () => {
+		const api = makeInlineGitAPI(getAllNewestCommitDate(getFilePath('')));
+
+		const expectedDates = new Map<string, ISODate>([
+			['added.md', '2022-09-18'],
+			['updated.md', '2023-06-25'],
+			['updated with space.md', '2021-01-02'],
+			['updated-same-day.md', '2023-06-25T14:22:35Z'],
+		]);
+
+		for (const [file, expectedDate] of expectedDates.entries()) {
+			const latestDate = api.getNewestCommitDate(file);
+			expectCommitDateToEqual(latestDate, expectedDate);
+		}
+	});
+
+	test('returns an empty list when the git history for the directory cannot be retrieved', () => {
+		expect(getAllNewestCommitDate(getFilePath('../not-a-starlight-test-repo'))).toStrictEqual([]);
+	});
+});
+
 function expectCommitDateToEqual(commitDate: CommitDate, expectedDateStr: ISODate) {
 	const expectedDate = new Date(expectedDateStr);
 	expect(commitDate).toStrictEqual(expectedDate);
 }
-
-function makeTestRepo() {
-	const repoPath = mkdtempSync(join(tmpdir(), 'starlight-test-git-'));
-
-	function runInRepo(command: string, args: string[], env: NodeJS.ProcessEnv = {}) {
-		const result = spawnSync(command, args, { cwd: repoPath, env });
-
-		if (result.status !== 0) {
-			throw new Error(`Failed to execute test repository command: '${command} ${args.join(' ')}'`);
-		}
-	}
-
-	// Configure git specifically for this test repository.
-	runInRepo('git', ['init']);
-	runInRepo('git', ['config', 'user.name', 'starlight-test']);
-	runInRepo('git', ['config', 'user.email', 'starlight-test@example.com']);
-	runInRepo('git', ['config', 'commit.gpgsign', 'false']);
-
-	return {
-		// The `dateStr` argument should be in the `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM:SSZ` format.
-		commitAllChanges(message: string, dateStr: ISODate) {
-			const date = dateStr.endsWith('Z') ? dateStr : `${dateStr}T00:00:00Z`;
-
-			runInRepo('git', ['add', '-A']);
-			// This sets both the author and committer dates to the provided date.
-			runInRepo('git', ['commit', '-m', message, '--date', date], { GIT_COMMITTER_DATE: date });
-		},
-		getFilePath(name: string) {
-			return join(repoPath, name);
-		},
-		writeFile(name: string, content: string) {
-			writeFileSync(join(repoPath, name), content);
-		},
-	};
-}
-
-type ISODate =
-	| `${number}-${number}-${number}`
-	| `${number}-${number}-${number}T${number}:${number}:${number}Z`;
 
 type CommitDate = ReturnType<typeof getNewestCommitDate>;

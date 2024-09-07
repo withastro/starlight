@@ -1,4 +1,4 @@
-import { map } from './atom';
+import { atom, map } from './atom';
 
 export const presets = {
 	ocean: {
@@ -27,6 +27,7 @@ export const store = {
 	accent: map(presets.default.accent),
 	gray: map(presets.default.gray),
 };
+export const minimumContrast = atom(4.5);
 
 export const usePreset = (name: string) => {
 	if (name in presets) {

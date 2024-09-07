@@ -65,6 +65,7 @@ test('parses valid config successfully', () => {
 		  "locales": undefined,
 		  "pagefind": true,
 		  "pagination": true,
+		  "prerender": true,
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
@@ -113,7 +114,7 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'azureDevOps' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne' | 'blueSky' | 'discourse' | 'zulip' | 'pinterest', received 'unknown'
+			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'azureDevOps' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne' | 'blueSky' | 'discourse' | 'zulip' | 'pinterest' | 'tiktok', received 'unknown'
 			**social.unknown**: Invalid url"
 	`
 	);

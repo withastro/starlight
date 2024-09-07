@@ -50,17 +50,20 @@ export default function StarlightIntegration({
 				if (!starlightConfig.disable404Route) {
 					injectRoute({
 						pattern: '404',
-						entrypoint: '@astrojs/starlight/404.astro',
-						// Ensure page is pre-rendered even when project is on server output mode
-						prerender: true,
+						entrypoint: starlightConfig.prerender
+							? '@astrojs/starlight/routes/static/404.astro'
+							: '@astrojs/starlight/routes/ssr/404.astro',
+						prerender: starlightConfig.prerender,
 					});
 				}
 				injectRoute({
 					pattern: '[...slug]',
-					entrypoint: '@astrojs/starlight/index.astro',
-					// Ensure page is pre-rendered even when project is on server output mode
-					prerender: true,
+					entrypoint: starlightConfig.prerender
+						? '@astrojs/starlight/routes/static/index.astro'
+						: '@astrojs/starlight/routes/ssr/index.astro',
+					prerender: starlightConfig.prerender,
 				});
+
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
@@ -73,6 +76,7 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx({ optimize: true }));
 				}
+
 				// Add Starlight directives restoration integration at the end of the list so that remark
 				// plugins injected by Starlight plugins through Astro integrations can handle text and
 				// leaf directives before they are transformed back to their original form.
@@ -87,7 +91,7 @@ export default function StarlightIntegration({
 
 				updateConfig({
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(starlightConfig, config)],
+						plugins: [vitePluginStarlightUserConfig(command, starlightConfig, config)],
 					},
 					markdown: {
 						remarkPlugins: [
