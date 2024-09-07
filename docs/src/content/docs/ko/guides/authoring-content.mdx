@@ -204,8 +204,8 @@ Starlight의 유용한 기능 덕분에 사용자의 생산성이 향상되고 �
 ```js
 // 구문 강조 기능이 있는 Javascript 코드입니다.
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 
@@ -213,8 +213,8 @@ var fun = function lang(l) {
 ```js
 // 구문 강조 기능이 있는 Javascript 코드입니다.
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 ````
@@ -238,16 +238,16 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
 
   ```js {2-3}
   function demo() {
-    // 이 줄(#2)과 다음 줄이 강조 표시됩니다.
-    return '이 줄은 이 스니펫의 라인 #3입니다.';
+  	// 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+  	return '이 줄은 이 스니펫의 라인 #3입니다.';
   }
   ```
 
   ````md
   ```js {2-3}
   function demo() {
-    // 이 줄(#2)과 다음 줄이 강조 표시됩니다.
-    return '이 줄은 이 스니펫의 라인 #3입니다.';
+  	// 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+  	return '이 줄은 이 스니펫의 라인 #3입니다.';
   }
   ```
   ````
@@ -257,7 +257,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```js "Individual terms" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
-    return '정규 표현식도 지원됩니다.';
+  	return '정규 표현식도 지원됩니다.';
   }
   ```
 
@@ -265,7 +265,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```js "Individual terms" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
-    return '정규 표현식도 지원됩니다.';
+  	return '정규 표현식도 지원됩니다.';
   }
   ```
   ````
@@ -274,18 +274,18 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
 
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
-    console.log('삽입 및 삭제된 마커 타입입니다.');
-    // return 문은 기본 마커 타입을 사용합니다.
-    return true;
+  	console.log('삽입 및 삭제된 마커 타입입니다.');
+  	// return 문은 기본 마커 타입을 사용합니다.
+  	return true;
   }
   ```
 
   ````md
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
-    console.log('삽입 및 삭제된 마커 타입입니다.');
-    // return 문은 기본 마커 타입을 사용합니다.
-    return true;
+  	console.log('삽입 및 삭제된 마커 타입입니다.');
+  	// return 문은 기본 마커 타입을 사용합니다.
+  	return true;
   }
   ```
   ````
@@ -390,3 +390,118 @@ Starlight는 목록 및 테이블과 같은 다른 모든 Markdown 작성 구문
 ## 고급 Markdown 및 MDX 구성
 
 Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 및 MDX 구성](https://docs.astro.build/ko/guides/markdown-content/#configuring-markdown-and-mdx)을 참조하세요.
+
+## Markdoc
+
+Starlight는 실험적인 [Astro Markdoc 통합](https://docs.astro.build/ko/guides/integrations-guide/markdoc/)과 Starlight Markdoc 프리셋을 사용하여 Markdoc으로 콘텐츠를 작성할 수 있도록 지원합니다.
+
+### Markdoc으로 새 프로젝트 만들기
+
+`create astro`를 사용하여 사전 구성된 Markdoc이 포함된 새 Starlight 프로젝트를 시작합니다:
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### 기존 프로젝트에 Markdoc 추가하기
+
+이미 Starlight 사이트가 있고 Markdoc을 추가하려는 경우 다음 단계를 따르세요.
+
+<Steps>
+
+1.  Astro의 Markdoc 통합을 추가하세요:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Starlight Markdoc 프리셋을 설치합니다:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  `markdoc.config.mjs`에 Markdoc 구성 파일을 만들고 Starlight Markdoc 프리셋을 사용하세요:
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Markdoc 구문 및 기능에 대한 자세한 내용은 [Markdoc 문서](https://markdoc.dev/docs/syntax) 또는 [Astro Markdoc 통합 가이드](https://docs.astro.build/ko/guides/integrations-guide/markdoc/)를 참조하세요.
