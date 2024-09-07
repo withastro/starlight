@@ -460,6 +460,18 @@ Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.ap
 Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하세요.
 또한, 이는 기본 검색 UI도 숨깁니다.
 
+[`prerender`](#prerender) 옵션이 `false`로 설정된 경우 Pagefind를 활성화할 수 없습니다.
+
+### `prerender`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+Starlight 페이지를 정적 HTML로 사전 렌더링할지, 아니면 [SSR 어댑터](https://docs.astro.build/ko/guides/server-side-rendering/)를 통해 주문형으로 렌더링할지 정의합니다.
+
+Starlight 페이지는 기본적으로 사전 렌더링됩니다.
+SSR 어댑터를 사용 중이고 Starlight 페이지를 주문형으로 렌더링하기를 원한다면 `prerender: false`를 설정하세요.
+
 ### `head`
 
 **타입:** [`HeadConfig[]`](#headconfig)
