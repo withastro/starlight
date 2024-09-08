@@ -4,51 +4,51 @@ import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 import { Image } from 'astro:assets';
 const { siteTitle, siteTitleHref } = Astro.props;
-
-const isDarkSvg = logos.dark?.format === 'svg';
-const isLightSvg = logos.light?.format === 'svg';
 ---
 
 <a href={siteTitleHref} class="site-title sl-flex">
 	{
 		config.logo && logos.dark && (
 			<>
-				{!isDarkSvg && (
-					<Image
-						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
-						src={logos.dark}
-						height={logos.dark.height}
-						width={logos.dark.width}
-						alt={config.logo.alt}
-						loading="eager"
-					/>
-				)}
-				{isDarkSvg && (
+				{logos.dark.format === 'svg' ? (
 					<img
 						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
+						alt={config.logo.alt}
 						src={logos.dark.src}
-						alt={config.logo.alt}
-						loading="eager"
+						width={logos.dark.width}
+						height={logos.dark.height}
 					/>
-				)}
-			</>
-		)
-	}
-	{
-		config.logo && logos.light && (
-			<>
-				{!isLightSvg && (
+				) : (
 					<Image
-						class="dark:sl-hidden"
-						src={logos.light}
-						height={logos.light.height}
-						width={logos.light.width}
+						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
 						alt={config.logo.alt}
+						src={logos.dark}
+						width={logos.dark.width}
+						height={logos.dark.height}
 						loading="eager"
 					/>
 				)}
-				{isLightSvg && (
-					<img class="dark:sl-hidden" src={logos.light.src} alt={config.logo.alt} loading="eager" />
+				{!('src' in config.logo) && logos.light && (
+					<>
+						{logos.light.format === 'svg' ? (
+							<img
+								class="dark:sl-hidden"
+								alt={config.logo.alt}
+								src={logos.light.src}
+								width={logos.light.width}
+								height={logos.light.height}
+							/>
+						) : (
+							<Image
+								class="dark:sl-hidden"
+								alt={config.logo.alt}
+								src={logos.light}
+								width={logos.light.width}
+								height={logos.light.height}
+								loading="eager"
+							/>
+						)}
+					</>
 				)}
 			</>
 		)
