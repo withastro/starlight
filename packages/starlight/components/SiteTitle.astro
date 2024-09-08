@@ -4,22 +4,40 @@ import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
 import { Image } from 'astro:assets';
 const { siteTitle, siteTitleHref } = Astro.props;
+
+const isDarkSvg = logos.dark?.format === 'svg';
+const isLightSvg = logos.light?.format === 'svg';
 ---
 
 <a href={siteTitleHref} class="site-title sl-flex">
 	{
 		config.logo && logos.dark && (
 			<>
-				<Image
-					class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
-					src={logos.dark}
-					height={logos.dark.height}
-					width={logos.dark.width}
-					alt={config.logo.alt}
-					loading="eager"
-				/>
-				{/* Show light alternate if a user configure both light and dark logos. */}
-				{!('src' in config.logo) && logos.light && (
+				{!isDarkSvg && (
+					<Image
+						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
+						src={logos.dark}
+						height={logos.dark.height}
+						width={logos.dark.width}
+						alt={config.logo.alt}
+						loading="eager"
+					/>
+				)}
+				{isDarkSvg && (
+					<img
+						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
+						src={logos.dark.src}
+						alt={config.logo.alt}
+						loading="eager"
+					/>
+				)}
+			</>
+		)
+	}
+	{
+		config.logo && logos.light && (
+			<>
+				{!isLightSvg && (
 					<Image
 						class="dark:sl-hidden"
 						src={logos.light}
@@ -28,6 +46,9 @@ const { siteTitle, siteTitleHref } = Astro.props;
 						alt={config.logo.alt}
 						loading="eager"
 					/>
+				)}
+				{isLightSvg && (
+					<img class="dark:sl-hidden" src={logos.light.src} alt={config.logo.alt} loading="eager" />
 				)}
 			</>
 		)
