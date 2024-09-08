@@ -31,6 +31,14 @@ export function vitePluginStarlightUserConfig(
 	const resolveId = (id: string, base = root) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
 
+	/**
+	 * Resolves a path to a Starlight file relative to this file.
+	 * @example
+	 * resolveLocalPath('../utils/git.ts');
+	 * // => '/users/houston/docs/node_modules/@astrojs/starlight/utils/git.ts'
+	 */
+	const resolveLocalPath = (path: string) => fileURLToPath(new URL(path, import.meta.url));
+
 	const docsPath = resolve(fileURLToPath(srcDir), 'content/docs');
 
 	const virtualComponentModules = Object.fromEntries(
@@ -51,9 +59,9 @@ export function vitePluginStarlightUserConfig(
 		})}`,
 		'virtual:starlight/git-info':
 			(command !== 'build'
-				? `import { makeAPI } from '${new URL('../utils/git.ts', import.meta.url)}';` +
+				? `import { makeAPI } from '${resolveLocalPath('../utils/git.ts')}';` +
 					`const api = makeAPI(${JSON.stringify(docsPath)});`
-				: `import { makeAPI } from '${new URL('../utils/gitInlined.ts', import.meta.url)}';` +
+				: `import { makeAPI } from '${resolveLocalPath('../utils/gitInlined.ts')}';` +
 					`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(docsPath))});`) +
 			'export const getNewestCommitDate = api.getNewestCommitDate;',
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
