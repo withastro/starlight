@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.27.1
+
+### Patch Changes
+
+- [#2303](https://github.com/withastro/starlight/pull/2303) [`f92791a`](https://github.com/withastro/starlight/commit/f92791aa1d1ec3d5498e445a078f7143fef60553) Thanks [@delucis](https://github.com/delucis)! - Fixes resolution for the internal module Git virtual module in projects with special characters in the file path
+
 ## 0.27.0
 
 ### Minor Changes
