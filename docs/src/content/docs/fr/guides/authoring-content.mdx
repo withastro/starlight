@@ -202,8 +202,8 @@ Un bloc de code est indiqué par un bloc avec trois accents graves <code>```</co
 ```js
 // Code Javascript avec coloration syntaxique.
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 
@@ -211,8 +211,8 @@ var fun = function lang(l) {
 ```js
 // Code Javascript avec coloration syntaxique.
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 ````
@@ -240,16 +240,16 @@ Certaines des options les plus courantes sont présentées ci-dessous :
 
   ```js {2-3}
   function demo() {
-    // Cette ligne (#2) et la suivante sont mises en évidence
-    return 'Ceci est la ligne #3 de cet exemple';
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
   }
   ```
 
   ````md
   ```js {2-3}
   function demo() {
-    // Cette ligne (#2) et la suivante sont mises en évidence
-    return 'Ceci est la ligne #3 de cet exemple';
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
   }
   ```
   ````
@@ -259,7 +259,7 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   ```js "termes individuels" /Même.*charge/
   // Des termes individuels peuvent également être mis en évidence
   function demo() {
-    return 'Même les expressions régulières sont prises en charge';
+  	return 'Même les expressions régulières sont prises en charge';
   }
   ```
 
@@ -267,7 +267,7 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   ```js "termes individuels" /Même.*charge/
   // Des termes individuels peuvent également être mis en évidence
   function demo() {
-    return 'Même les expressions régulières sont prises en charge';
+  	return 'Même les expressions régulières sont prises en charge';
   }
   ```
   ````
@@ -276,18 +276,18 @@ Certaines des options les plus courantes sont présentées ci-dessous :
 
   ```js "return true;" ins="insertion" del="suppression"
   function demo() {
-    console.log("Voici des marqueurs d'insertion et de suppression");
-    // La déclaration return utilise le type de marqueur par défaut
-    return true;
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
   }
   ```
 
   ````md
   ```js "return true;" ins="insertion" del="suppression"
   function demo() {
-    console.log("Voici des marqueurs d'insertion et de suppression");
-    // La déclaration return utilise le type de marqueur par défaut
-    return true;
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
   }
   ```
   ````
@@ -392,3 +392,118 @@ Starlight prend en charge toutes les autres syntaxes de rédaction Markdown, tel
 ## Configuration avancée de Markdown et MDX
 
 Starlight utilise le moteur de rendu Markdown et MDX d'Astro basé sur remark et rehype. Vous pouvez ajouter la prise en charge de syntaxe et comportement personnalisés en ajoutant `remarkPlugins` ou `rehypePlugins` dans votre fichier de configuration Astro. Pour en savoir plus, consultez [« Configuration de Markdown et MDX »](https://docs.astro.build/fr/guides/markdown-content/#configuration-de-markdown-et-mdx) dans la documentation d'Astro.
+
+## Markdoc
+
+Starlight supporte la création de contenu en Markdoc en utilisant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) et la préconfiguration Markdoc de Starlight.
+
+### Créer un nouveau projet avec Markdoc
+
+Créez un nouveau projet Starlight avec Markdoc préconfiguré en utilisant `create astro` :
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### Ajouter Markdoc à un projet existant
+
+Si vous disposez déjà d'un site Starlight et que vous souhaitez ajouter Markdoc, suivez ces étapes.
+
+<Steps>
+
+1.  Ajoutez l'intégration Markdoc d'Astro :
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Installez la préconfiguration Markdoc de Starlight :
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  Créez une configuration Markdoc dans le fichier `markdoc.config.mjs` et utilisez la préconfiguration Markdoc de Starlight :
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Pour en savoir plus sur la syntaxe et les fonctionnalités de Markdoc, consultez la [documentation Markdoc](https://markdoc.dev/docs/syntax) ou le [guide de l'intégration Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).

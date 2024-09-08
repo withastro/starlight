@@ -13,7 +13,7 @@ vi.mock('astro:content', async () =>
 			['guides/pages.mdx', { title: 'Pages' }],
 			['fr/guides/pages.mdx', { title: 'Pages' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Content in Markdown' }],
-			['fr/guides/authoring-content.md', { title: 'Création de contenu en Markdown' }],
+			['fr/guides/authoring-content.mdx', { title: 'Création de contenu en Markdown' }],
 			['resources/plugins.mdx', { title: 'Plugins and Integrations' }],
 			['fr/resources/plugins.mdx', { title: "Modules d'extension et outils" }],
 		],
