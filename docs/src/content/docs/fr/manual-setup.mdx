@@ -125,6 +125,6 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### Utiliser Starlight avec SSR
 
-Vous pouvez utiliser Starlight en parallèle de pages personnalisées rendues à la demande dans votre projet en suivant le guide [« Adaptateurs de rendu à la demande »](https://docs.astro.build/fr/guides/server-side-rendering/) dans la documentation d'Astro.
+Pour activer le SSR, suivez le guide [« Adaptateurs de rendu à la demande »](https://docs.astro.build/fr/guides/server-side-rendering/) dans la documentation d'Astro pour ajouter un adaptateur serveur à votre projet Starlight.
 
-À l'heure actuelle, les pages de documentation générées par Starlight sont toujours pré-rendues, quel que soit le mode de rendu de votre projet. Nous espérons pouvoir bientôt supporter le rendu à la demande pour les pages de Starlight.
+Les pages de documentation générées par Starlight sont pré-rendues par défaut, quel que soit le mode de rendu de votre projet. Pour désactiver le pré-rendu de vos pages Starlight, définissez [l'option de configuration `prerender`](/fr/reference/configuration/#prerender) à `false`.

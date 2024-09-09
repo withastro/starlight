@@ -1,7 +1,8 @@
-import type { AstroConfig, ViteUserConfig } from 'astro';
+import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StarlightConfig } from '../utils/user-config';
+import { getAllNewestCommitDate } from '../utils/git';
 
 function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 	return `\0${id}`;
@@ -9,6 +10,7 @@ function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 
 /** Vite plugin that exposes Starlight user config and project context via virtual modules. */
 export function vitePluginStarlightUserConfig(
+	command: HookParameters<'astro:config:setup'>['command'],
 	opts: StarlightConfig,
 	{
 		build,
@@ -29,6 +31,17 @@ export function vitePluginStarlightUserConfig(
 	const resolveId = (id: string, base = root) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
 
+	/**
+	 * Resolves a path to a Starlight file relative to this file.
+	 * @example
+	 * resolveLocalPath('../utils/git.ts');
+	 * // => '"/users/houston/docs/node_modules/@astrojs/starlight/utils/git.ts"'
+	 */
+	const resolveLocalPath = (path: string) =>
+		JSON.stringify(fileURLToPath(new URL(path, import.meta.url)));
+
+	const docsPath = resolve(fileURLToPath(srcDir), 'content/docs');
+
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
 			`virtual:starlight/components/${name}`,
@@ -45,6 +58,13 @@ export function vitePluginStarlightUserConfig(
 			srcDir,
 			trailingSlash,
 		})}`,
+		'virtual:starlight/git-info':
+			(command !== 'build'
+				? `import { makeAPI } from ${resolveLocalPath('../utils/git.ts')};` +
+					`const api = makeAPI(${JSON.stringify(docsPath)});`
+				: `import { makeAPI } from ${resolveLocalPath('../utils/gitInlined.ts')};` +
+					`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(docsPath))});`) +
+			'export const getNewestCommitDate = api.getNewestCommitDate;',
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
 		'virtual:starlight/user-images': opts.logo
 			? 'src' in opts.logo

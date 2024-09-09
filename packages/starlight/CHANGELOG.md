@@ -1,5 +1,40 @@
 # @astrojs/starlight
 
+## 0.27.1
+
+### Patch Changes
+
+- [#2303](https://github.com/withastro/starlight/pull/2303) [`f92791a`](https://github.com/withastro/starlight/commit/f92791aa1d1ec3d5498e445a078f7143fef60553) Thanks [@delucis](https://github.com/delucis)! - Fixes resolution for the internal module Git virtual module in projects with special characters in the file path
+
+## 0.27.0
+
+### Minor Changes
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Adds support for server-rendered Starlight pages.
+
+  When building a project with `hybrid` or `server` output mode, a new `prerender` option on Starlight config can be set to `false` to make all Starlight pages be rendered on-demand:
+
+  ```ts
+  export default defineConfig({
+    output: 'server',
+    integrations: [
+      starlight({
+        prerender: false,
+      }),
+    ],
+  });
+  ```
+
+### Patch Changes
+
+- [#2242](https://github.com/withastro/starlight/pull/2242) [`756e85e`](https://github.com/withastro/starlight/commit/756e85e8e814657c42c4a6f9c299b5bef32aee22) Thanks [@delucis](https://github.com/delucis)! - Refactors the logic for persisting and restoring sidebar state across navigations for better performance on slow or busy devices
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Improves performance of computing the last updated times from Git history.
+
+  Instead of executing `git` for each docs page, it is now executed twice regardless of the number of pages.
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Fixes last updated times on projects with custom `srcDir`
+
 ## 0.26.4
 
 ### Patch Changes
