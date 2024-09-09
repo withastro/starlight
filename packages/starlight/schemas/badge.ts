@@ -9,9 +9,8 @@ const badgeSchema = badgeBaseSchema.extend({
 	text: z.string(),
 });
 
-const i18nBadgeTextSchema = z.union([z.string(), z.record(z.string())]);
 const i18nBadgeSchema = badgeBaseSchema.extend({
-	text: i18nBadgeTextSchema,
+	text: z.union([z.string(), z.record(z.string())]),
 });
 
 export const BadgeComponentSchema = badgeSchema
@@ -33,8 +32,7 @@ export const BadgeConfigSchema = () =>
 		})
 		.optional();
 
-export const I18nBadgeConfigSchema = () =>
-	z.union([i18nBadgeTextSchema, i18nBadgeSchema]).optional();
+export const I18nBadgeConfigSchema = () => z.union([z.string(), i18nBadgeSchema]).optional();
 
 export type Badge = z.output<typeof badgeSchema>;
 export type I18nBadge = z.output<typeof i18nBadgeSchema>;

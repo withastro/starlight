@@ -13,7 +13,7 @@ export default defineVitestConfig({
 			slug: 'manual-setup',
 			label: 'Do it yourself',
 			translations: { fr: 'Fait maison' },
-			badge: { 'en-US': 'New', fr: 'Nouveau' },
+			badge: { text: { 'en-US': 'New', fr: 'Nouveau' } },
 		},
 		{
 			slug: 'environmental-impact',

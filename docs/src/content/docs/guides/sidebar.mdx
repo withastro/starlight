@@ -522,14 +522,14 @@ For example, if you have pages at `en/intro` and `pt-br/intro`, the slug is `int
 
 ### Internationalization with badges
 
-For [badges](#badges), the `badge` property or the `text` when using the object form can be a string, or for multilingual sites, an object with values for each different locale.
+For [badges](#badges), the `text` property can be a string, or for multilingual sites, an object with values for each different locale.
 When using the object form, the keys must be [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) tags (e.g. `en`, `ar`, or `zh-CN`):
 
-```js {11-14,19-22}
+```js {11-16}
 starlight({
 	sidebar: [
 		{
-			label: 'Constelações',
+			label: 'Constellations',
 			translations: {
 				'pt-BR': 'Constelações',
 			},
@@ -537,18 +537,10 @@ starlight({
 				{
 					slug: 'constellations/andromeda',
 					badge: {
-						en: 'New',
-						'pt-BR': 'Novo',
-					},
-				},
-				{
-					slug: 'constellations/scorpius',
-					badge: {
 						text: {
-							en: 'Outdated',
-							'pt-BR': 'Descontinuado',
+							en: 'New',
+							'pt-BR': 'Novo',
 						},
-						variant: 'caution',
 					},
 				},
 			],
@@ -568,11 +560,6 @@ Browsing the documentation in Brazilian Portuguese will generate the following s
 					label: 'Andrômeda',
 					link: '',
 					badge: { text: 'Novo', variant: 'default' },
-				},
-				{
-					label: 'Escorpião',
-					link: '',
-					badge: { text: 'Descontinuado', variant: 'caution' },
 				},
 			],
 		},

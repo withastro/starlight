@@ -9,7 +9,7 @@ export default defineVitestConfig({
 	sidebar: [
 		{
 			slug: 'getting-started',
-			badge: { fr: 'Nouveau' },
+			badge: { text: { fr: 'Nouveau' } },
 		},
 	],
 });

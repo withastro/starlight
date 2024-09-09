@@ -468,15 +468,15 @@ function getSidebarBadge(
 	itemLabel: string
 ): Badge | undefined {
 	if (!config) return;
-	if (isI18nBadge(config)) {
-		return { ...config, text: getSidebarBadgeText(config.text, locale, itemLabel) };
+	if (typeof config === 'string') {
+		return { variant: 'default', text: config };
 	}
-	return { variant: 'default', text: getSidebarBadgeText(config, locale, itemLabel) };
+	return { ...config, text: getSidebarBadgeText(config.text, locale, itemLabel) };
 }
 
 /** Get the badge text for a sidebar item. */
 function getSidebarBadgeText(
-	text: string | Record<string, string>,
+	text: I18nBadge['text'],
 	locale: string | undefined,
 	itemLabel: string
 ): string {
@@ -494,9 +494,4 @@ function getSidebarBadgeText(
 	}
 
 	return pickLang(text, localeToLang(locale)) || defaultText;
-}
-
-/** Check if a badge config is a badge with internationalized text. */
-function isI18nBadge(config: I18nBadgeConfig): config is I18nBadge {
-	return typeof config === 'object' && 'text' in config && 'variant' in config;
 }
