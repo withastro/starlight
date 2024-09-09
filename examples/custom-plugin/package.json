@@ -5,10 +5,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.ts"
-    },
+    ".": "./index.ts",
     "./MarkdownContent.astro": "./MarkdownContent.astro",
     "./schema": "./schema.ts"
   },

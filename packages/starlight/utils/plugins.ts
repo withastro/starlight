@@ -1,4 +1,4 @@
-import type { AstroIntegration } from 'astro';
+import type { AstroIntegration, HookParameters } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
@@ -92,6 +92,31 @@ export async function runPlugins(
 	}
 
 	return { integrations, starlightConfig, pluginTranslations };
+}
+
+export function injectPluginTranslationsTypes(
+	translations: PluginTranslations,
+	injectTypes: HookParameters<'astro:config:done'>['injectTypes']
+) {
+	const allKeys = new Set<string>();
+
+	for (const localeTranslations of Object.values(translations)) {
+		for (const key of Object.keys(localeTranslations)) {
+			allKeys.add(key);
+		}
+	}
+
+	if (allKeys.size === 0) return;
+
+	injectTypes({
+		filename: 'i18n-plugins.d.ts',
+		content: `declare namespace StarlightApp {
+	type PluginUIStringKeys = {
+		${[...allKeys].map((key) => `'${key}': string;`).join('\n\t\t')}
+	};
+	interface I18n extends PluginUIStringKeys {}
+}`,
+	});
 }
 
 // https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113

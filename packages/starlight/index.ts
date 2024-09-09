@@ -9,7 +9,12 @@ import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
-import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import {
+	injectPluginTranslationsTypes,
+	runPlugins,
+	type PluginTranslations,
+	type StarlightUserConfigWithPlugins,
+} from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
 
@@ -18,6 +23,7 @@ export default function StarlightIntegration({
 	...opts
 }: StarlightUserConfigWithPlugins): AstroIntegration {
 	let userConfig: StarlightConfig;
+	let pluginTranslations: PluginTranslations = {};
 	return {
 		name: '@astrojs/starlight',
 		hooks: {
@@ -43,7 +49,8 @@ export default function StarlightIntegration({
 					config.i18n
 				);
 
-				const { integrations, pluginTranslations } = pluginResult;
+				const integrations = pluginResult.integrations;
+				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
 
 				const useTranslations = createTranslationSystemFromFs(
@@ -119,6 +126,10 @@ export default function StarlightIntegration({
 					},
 					i18n: astroI18nConfig,
 				});
+			},
+
+			'astro:config:done': ({ injectTypes }) => {
+				injectPluginTranslationsTypes(pluginTranslations, injectTypes);
 			},
 
 			'astro:build:done': ({ dir }) => {
