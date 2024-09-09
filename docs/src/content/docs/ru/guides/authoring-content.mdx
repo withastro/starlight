@@ -393,3 +393,118 @@ Starlight поддерживает все синтаксические возм�
 ## Расширенная конфигурация Markdown и MDX
 
 Starlight использует Markdown и рендерер MDX от Astro, основанный на `remark` и `rehype`. Вы можете добавить поддержку пользовательского синтаксиса и поведения, добавив `remarkPlugins` или `rehypePlugins` в свой файл конфигурации Astro. Дополнительную информацию см. в разделе [Настройка Markdown и MDX](https://docs.astro.build/ru/guides/markdown-content/#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-markdown-%D0%B8-mdx) в документации Astro.
+
+## Markdoc
+
+Starlight поддерживает создание контента в Markdoc с помощью экспериментальной [интеграции с Astro](https://docs.astro.build/ru/guides/integrations-guide/markdoc/) и пресета Starlight Markdoc.
+
+### Создание нового проекта с Markdoc
+
+Начните новый проект Starlight с предварительно настроенным Markdoc с помощью команды `create astro`:
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### Добавление Markdoc в существующий проект
+
+Если у вас уже есть сайт Starlight и вы хотите добавить Markdoc, выполните следующие действия.
+
+<Steps>
+
+1.  Добавьте интеграцию Markdoc:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Установите пресет Markdoc для Starlight:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  Создайте файл конфигурации Markdoc по адресу `markdoc.config.mjs` и используйте пресет Markdoc:
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+      extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Чтобы узнать больше о синтаксисе и возможностях Markdoc, смотрите [документацию](https://markdoc.dev/docs/syntax) или [Руководство по интеграции Markdoc в Astro](https://docs.astro.build/ru/guides/integrations-guide/markdoc/).
