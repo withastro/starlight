@@ -195,7 +195,7 @@ const UserConfigSchema = z.object({
 	 * Set to `false` to disable indexing your site with Pagefind.
 	 * This will also hide the default search UI if in use.
 	 */
-	pagefind: z.boolean().default(true),
+	pagefind: z.boolean().optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
@@ -209,6 +209,13 @@ const UserConfigSchema = z.object({
 	/** Disable Starlight's default 404 page. */
 	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
 
+	/**
+	 * Define whether Starlight pages should be prerendered or not.
+	 * Defaults to always prerender Starlight pages, even when the project is
+	 * set to "server" output mode.
+	 */
+	prerender: z.boolean().default(true),
+
 	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
 	credits: z
 		.boolean()
@@ -216,8 +223,16 @@ const UserConfigSchema = z.object({
 		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
 });
 
-export const StarlightConfigSchema = UserConfigSchema.strict().transform(
-	({ title, locales, defaultLocale, ...config }, ctx) => {
+export const StarlightConfigSchema = UserConfigSchema.strict()
+	.transform((config) => ({
+		...config,
+		// Pagefind only defaults to true if prerender is also true.
+		pagefind: config.pagefind ?? config.prerender,
+	}))
+	.refine((config) => !(!config.prerender && config.pagefind), {
+		message: 'Pagefind search is not support with prerendering disabled.',
+	})
+	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});
 
 		// This is a multilingual site (more than one locale configured) or a monolingual site with
@@ -286,8 +301,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 			defaultLocale: defaultLocaleConfig,
 			locales: undefined,
 		} as const;
-	}
-);
+	});
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
 export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;

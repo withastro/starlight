@@ -15,7 +15,7 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Getting Started' }],
-			['guides/authoring-content.md', { title: 'Authoring Markdown' }],
+			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
 			['guides/components.mdx', { title: 'Components' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 		],

@@ -2,6 +2,7 @@
 import { flattenSidebar, type SidebarEntry } from '../utils/navigation';
 import Icon from '../user-components/Icon.astro';
 import Badge from '../user-components/Badge.astro';
+import SidebarRestorePoint from './SidebarRestorePoint.astro';
 
 interface Props {
 	sublist: SidebarEntry[];
@@ -35,6 +36,7 @@ const { sublist, nested } = Astro.props;
 					<details
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
+						<SidebarRestorePoint />
 						<summary>
 							<div class="group-label">
 								<span class="large">{entry.label}</span>

@@ -11,12 +11,14 @@ export async function defineVitestConfig(
 	opts?: {
 		build?: Pick<AstroConfig['build'], 'format'>;
 		trailingSlash?: AstroConfig['trailingSlash'];
+		command?: 'dev' | 'build' | 'preview';
 	}
 ) {
 	const root = new URL('./', import.meta.url);
 	const srcDir = new URL('./src/', root);
 	const build = opts?.build ?? { format: 'directory' };
 	const trailingSlash = opts?.trailingSlash ?? 'ignore';
+	const command = opts?.command ?? 'dev';
 
 	const { starlightConfig, pluginTranslations } = await runPlugins(
 		config,
@@ -26,8 +28,14 @@ export async function defineVitestConfig(
 	return getViteConfig({
 		plugins: [
 			vitePluginStarlightUserConfig(
+				command,
 				starlightConfig,
-				{ root, srcDir, build, trailingSlash },
+				{
+					root,
+					srcDir,
+					build,
+					trailingSlash,
+				},
 				pluginTranslations
 			),
 		],
