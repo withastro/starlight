@@ -1,6 +1,12 @@
 ---
 import type { Props } from '../props';
 
+// TODO(HiDeoo)
+import 'virtual:starlight/user-css';
+
+// TODO(HiDeoo)
+import '../style/layers.css';
+
 // Built-in CSS styles.
 import '../style/props.css';
 import '../style/reset.css';
@@ -16,6 +22,8 @@ import Footer from 'virtual:starlight/components/Footer';
 import Head from 'virtual:starlight/components/Head';
 import Header from 'virtual:starlight/components/Header';
 import Hero from 'virtual:starlight/components/Hero';
+// TODO(HiDeoo)
+// TODO(HiDeoo) Maybe we can even move the definition to outside of the Markdown components
 import MarkdownContent from 'virtual:starlight/components/MarkdownContent';
 import PageFrame from 'virtual:starlight/components/PageFrame';
 import PageSidebar from 'virtual:starlight/components/PageSidebar';
@@ -25,11 +33,14 @@ import SkipLink from 'virtual:starlight/components/SkipLink';
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
 import TwoColumnContent from 'virtual:starlight/components/TwoColumnContent';
 
+// TODO(HiDeoo)
+// TODO(HiDeoo) Maybe we can move that too
 // Remark component CSS (needs to override `MarkdownContent.astro`)
 import '../style/asides.css';
 
+// FIXME(HiDeoo)
 // Important that this is the last import so it can override built-in styles.
-import 'virtual:starlight/user-css';
+// import 'virtual:starlight/user-css';
 
 const pagefindEnabled =
 	Astro.props.entry.slug !== '404' &&
