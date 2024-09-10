@@ -98,43 +98,45 @@ if (isSynced) {
 </starlight-tabs>
 
 <style>
-	starlight-tabs {
-		display: block;
-	}
+	@layer starlight.user-components {
+		starlight-tabs {
+			display: block;
+		}
 
-	.tablist-wrapper {
-		overflow-x: auto;
-	}
+		.tablist-wrapper {
+			overflow-x: auto;
+		}
 
-	[role='tablist'] {
-		display: flex;
-		list-style: none;
-		border-bottom: 2px solid var(--sl-color-gray-5);
-		padding: 0;
-	}
+		[role='tablist'] {
+			display: flex;
+			list-style: none;
+			border-bottom: 2px solid var(--sl-color-gray-5);
+			padding: 0;
+		}
 
-	.tab {
-		margin-bottom: -2px;
-	}
-	.tab > [role='tab'] {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0 1.25rem;
-		text-decoration: none;
-		border-bottom: 2px solid var(--sl-color-gray-5);
-		color: var(--sl-color-gray-3);
-		outline-offset: var(--sl-outline-offset-inside);
-		overflow-wrap: initial;
-	}
-	.tab [role='tab'][aria-selected='true'] {
-		color: var(--sl-color-white);
-		border-color: var(--sl-color-text-accent);
-		font-weight: 600;
-	}
+		.tab {
+			margin-bottom: -2px;
+		}
+		.tab > [role='tab'] {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0 1.25rem;
+			text-decoration: none;
+			border-bottom: 2px solid var(--sl-color-gray-5);
+			color: var(--sl-color-gray-3);
+			outline-offset: var(--sl-outline-offset-inside);
+			overflow-wrap: initial;
+		}
+		.tab [role='tab'][aria-selected='true'] {
+			color: var(--sl-color-white);
+			border-color: var(--sl-color-text-accent);
+			font-weight: 600;
+		}
 
-	.tablist-wrapper ~ :global([role='tabpanel']) {
-		margin-top: 1rem;
+		.tablist-wrapper ~ :global([role='tabpanel']) {
+			margin-top: 1rem;
+		}
 	}
 </style>
 
