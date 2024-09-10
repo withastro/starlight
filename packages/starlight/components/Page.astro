@@ -13,6 +13,7 @@ import '../style/props.css';
 import '../style/reset.css';
 import '../style/shiki.css';
 import '../style/util.css';
+import '../style/asides.css';
 
 // TODO(HiDeoo)
 // Components — can override built-in CSS, but not user CSS.
@@ -32,11 +33,6 @@ import Sidebar from 'virtual:starlight/components/Sidebar';
 import SkipLink from 'virtual:starlight/components/SkipLink';
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
 import TwoColumnContent from 'virtual:starlight/components/TwoColumnContent';
-
-// TODO(HiDeoo)
-// TODO(HiDeoo) Maybe we can move that too
-// Remark component CSS (needs to override `MarkdownContent.astro`)
-import '../style/asides.css';
 
 // FIXME(HiDeoo)
 // Important that this is the last import so it can override built-in styles.
