@@ -6,9 +6,7 @@ import type { Props } from '../props';
 ---
 
 <div class="mobile-preferences sl-flex">
-	<div class="sl-flex social-icons">
-		<SocialIcons {...Astro.props} />
-	</div>
+	<div class="social-icons"><SocialIcons {...Astro.props} /></div>
 	<ThemeSelect {...Astro.props} />
 	<LanguageSelect {...Astro.props} />
 </div>
@@ -16,6 +14,7 @@ import type { Props } from '../props';
 <style>
 	@layer starlight.components {
 		.social-icons {
+			display: flex;
 			margin-inline-end: auto;
 			gap: 1rem;
 			align-items: center;

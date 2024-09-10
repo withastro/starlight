@@ -15,7 +15,7 @@ const shouldRenderSearch =
 	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
-<div class="header sl-flex">
+<div class="header">
 	<div class="title-wrapper sl-flex">
 		<SiteTitle {...Astro.props} />
 	</div>
@@ -34,6 +34,7 @@ const shouldRenderSearch =
 <style>
 	@layer starlight.components {
 		.header {
+			display: flex;
 			gap: var(--sl-nav-gap);
 			justify-content: space-between;
 			align-items: center;
