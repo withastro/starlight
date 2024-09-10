@@ -53,45 +53,49 @@ const { labels } = Astro.props;
 </script>
 
 <style>
-	button {
-		position: fixed;
-		top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
-		inset-inline-end: var(--sl-nav-pad-x);
-		z-index: var(--sl-z-index-navbar);
-		border: 0;
-		border-radius: 50%;
-		width: var(--sl-menu-button-size);
-		height: var(--sl-menu-button-size);
-		padding: 0.5rem;
-		background-color: var(--sl-color-white);
-		color: var(--sl-color-black);
-		box-shadow: var(--sl-shadow-md);
-		cursor: pointer;
-	}
+	@layer starlight.components {
+		button {
+			position: fixed;
+			top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+			inset-inline-end: var(--sl-nav-pad-x);
+			z-index: var(--sl-z-index-navbar);
+			border: 0;
+			border-radius: 50%;
+			width: var(--sl-menu-button-size);
+			height: var(--sl-menu-button-size);
+			padding: 0.5rem;
+			background-color: var(--sl-color-white);
+			color: var(--sl-color-black);
+			box-shadow: var(--sl-shadow-md);
+			cursor: pointer;
+		}
 
-	[aria-expanded='true'] button {
-		background-color: var(--sl-color-gray-2);
-		box-shadow: none;
-	}
+		[aria-expanded='true'] button {
+			background-color: var(--sl-color-gray-2);
+			box-shadow: none;
+		}
 
-	:global([data-theme='light']) button {
-		background-color: var(--sl-color-black);
-		color: var(--sl-color-white);
-	}
+		:global([data-theme='light']) button {
+			background-color: var(--sl-color-black);
+			color: var(--sl-color-white);
+		}
 
-	:global([data-theme='light']) [aria-expanded='true'] button {
-		background-color: var(--sl-color-gray-5);
+		:global([data-theme='light']) [aria-expanded='true'] button {
+			background-color: var(--sl-color-gray-5);
+		}
 	}
 </style>
 
 <style is:global>
-	[data-mobile-menu-expanded] {
-		overflow: hidden;
-	}
-
-	@media (min-width: 50rem) {
+	@layer starlight.components {
 		[data-mobile-menu-expanded] {
-			overflow: auto;
+			overflow: hidden;
+		}
+
+		@media (min-width: 50rem) {
+			[data-mobile-menu-expanded] {
+				overflow: auto;
+			}
 		}
 	}
 </style>
