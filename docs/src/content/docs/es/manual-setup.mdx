@@ -16,7 +16,7 @@ Para seguir esta guía, necesitarás un proyecto de Astro existente.
 
 Starlight es una [integración de Astro](https://docs.astro.build/es/guides/integrations-guide/). Agregala a tu sitio ejecutando el comando `astro add` en el directorio raíz de tu proyecto:
 
-<Tabs>
+<Tabs syncKey="pkg">
     <TabItem label="npm">
         ```sh
         npx astro add starlight
@@ -125,8 +125,8 @@ En el futuro, planeamos soportar mejor este caso de uso para evitar la necesidad
 
 ### Usa Starlight con SSR
 
-Por el momento, Starlight no soporta el [despliegue SSR](https://docs.astro.build/es/guides/server-side-rendering/) usando los adaptadores de servidor de Astro. Esperamos poder soportar esto pronto.
+Para habilitar el SSR, sigue la guía [“Adaptadores de Renderizado bajo Demanda”](https://docs.astro.build/es/guides/server-side-rendering/) en la documentación de Astro para agregar un adaptador de servidor a tu proyecto Starlight.
 
 Puedes usar Starlight junto a páginas personalizadas renderizadas bajo demanda en tu proyecto siguiendo la guía [“Adaptadores de Renderizado bajo Demanda”](https://docs.astro.build/es/guides/server-side-rendering/) en la documentación de Astro.
 
-Por el momento, las páginas de documentación generadas por Starlight siempre son prerenderizadas, independientemente del modo de salida de tu proyecto. Esperamos poder soportar el renderizado bajo demanda para las páginas de Starlight pronto.
+Las páginas de documentación generadas por Starlight se pre-renderizan de forma predeterminada independientemente del modo de salida de tu proyecto. Para excluir tus páginas de Starlight de la pre-renderización, establece la opción de configuración [`prerender`](/es/reference/configuration/#prerender) en `false`.
