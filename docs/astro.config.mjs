@@ -29,6 +29,8 @@ const ogUrl = new URL('og.jpg?v=1', site).href;
 const ogImageAlt = 'Make your docs shine with Starlight';
 
 export default defineConfig({
+	// TODO(HiDeoo) Remove this, only used to avoid screenshoting the dev toolbar.
+	devToolbar: { enabled: false },
 	site,
 	trailingSlash: 'always',
 	integrations: [
