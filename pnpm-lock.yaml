@@ -121,24 +121,6 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4
 
-  packages/dev-prod-visual-diff:
-    dependencies:
-      '@playwright/test':
-        specifier: ^1.45.0
-        version: 1.45.0
-      '@types/pixelmatch':
-        specifier: ^5.2.6
-        version: 5.2.6
-      '@types/pngjs':
-        specifier: ^6.0.5
-        version: 6.0.5
-      pixelmatch:
-        specifier: ^6.0.0
-        version: 6.0.0
-      pngjs:
-        specifier: ^7.0.0
-        version: 7.0.0
-
   packages/docsearch:
     dependencies:
       '@astrojs/starlight':
@@ -163,6 +145,24 @@ importers:
       '@types/opentype.js':
         specifier: ^1.3.8
         version: 1.3.8
+
+  packages/local-prod-visual-diff:
+    dependencies:
+      '@playwright/test':
+        specifier: ^1.45.0
+        version: 1.45.0
+      '@types/pixelmatch':
+        specifier: ^5.2.6
+        version: 5.2.6
+      '@types/pngjs':
+        specifier: ^6.0.5
+        version: 6.0.5
+      pixelmatch:
+        specifier: ^6.0.0
+        version: 6.0.0
+      pngjs:
+        specifier: ^7.0.0
+        version: 7.0.0
 
   packages/markdoc:
     dependencies:
