@@ -1,13 +1,12 @@
 ---
 import type { Props } from '../props';
 
-// TODO(HiDeoo)
+// Important that this is the first import so it can override cascade layers order.
 import 'virtual:starlight/user-css';
 
-// TODO(HiDeoo)
+// Starlight nested cascade layers definitions which specify the default order of internal layers.
 import '../style/layers.css';
 
-// TODO(HiDeoo)
 // Built-in CSS styles.
 import '../style/props.css';
 import '../style/reset.css';
@@ -15,8 +14,6 @@ import '../style/shiki.css';
 import '../style/asides.css';
 import '../style/util.css';
 
-// TODO(HiDeoo)
-// Components — can override built-in CSS, but not user CSS.
 import Banner from 'virtual:starlight/components/Banner';
 import ContentPanel from 'virtual:starlight/components/ContentPanel';
 import FallbackContentNotice from 'virtual:starlight/components/FallbackContentNotice';
@@ -33,10 +30,6 @@ import Sidebar from 'virtual:starlight/components/Sidebar';
 import SkipLink from 'virtual:starlight/components/SkipLink';
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
 import TwoColumnContent from 'virtual:starlight/components/TwoColumnContent';
-
-// FIXME(HiDeoo)
-// Important that this is the last import so it can override built-in styles.
-// import 'virtual:starlight/user-css';
 
 const pagefindEnabled =
 	Astro.props.entry.slug !== '404' &&
