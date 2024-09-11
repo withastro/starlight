@@ -25,6 +25,7 @@ export default defineConfig({
 	webServer: [
 		{
 			command: 'pnpm run dev',
+			// command: 'pnpm run build && pnpm run preview',
 			cwd: '../../docs',
 			reuseExistingServer: !process.env['CI'],
 			url: baseURL,
