@@ -51,16 +51,6 @@ interface Props {
 			pointer-events: none;
 		}
 
-		.label-icon {
-			font-size: var(--sl-label-icon-size);
-			inset-inline-start: 0;
-		}
-
-		.caret {
-			font-size: var(--sl-caret-size);
-			inset-inline-end: 0;
-		}
-
 		select {
 			border: 0;
 			padding-block: 0.625rem;
@@ -84,6 +74,18 @@ interface Props {
 			select {
 				font-size: var(--sl-text-sm);
 			}
+		}
+	}
+
+	@layer starlight.user-components {
+		.label-icon {
+			font-size: var(--sl-label-icon-size);
+			inset-inline-start: 0;
+		}
+
+		.caret {
+			font-size: var(--sl-caret-size);
+			inset-inline-end: 0;
 		}
 	}
 </style>

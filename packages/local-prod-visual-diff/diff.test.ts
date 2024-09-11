@@ -54,7 +54,7 @@ for (const routePath of routePaths) {
 		);
 
 		// Save the diff image if the number of mismatched pixels is greater than the maximum allowed.
-		if (diffPixels > maxDiffPixels) {
+		if (diffPixels >= maxDiffPixels) {
 			await fs.writeFile(getScreenshotPath(routePath, 'diff'), PNG.sync.write(diffImage));
 		}
 
@@ -91,7 +91,7 @@ async function compareScreenshots(screenshotPath1: string, screenshotPath2: stri
 		diffImage.data,
 		diffSize.width,
 		diffSize.height,
-		{ threshold: 0.2 }
+		{ threshold: 0.1 }
 	);
 
 	return { diffPixels, diffImage };
@@ -114,8 +114,16 @@ async function takeScreenshot(page: Page, screenshotPath: string) {
 		await lazyImage.scrollIntoViewIfNeeded();
 	}
 
+	const overviewLink = page.getByRole('link', { name: 'Overview', exact: true });
+
 	// Scroll to the top of the page to ensure the screenshot is consistent.
-	await page.evaluate(() => window.scrollTo(0, 0));
+	if (await overviewLink.isVisible()) {
+		// Use the Overview link when possible to avoid mismatched pixels due to ToC highlighting.
+		overviewLink.click();
+	} else {
+		await page.evaluate(() => window.scrollTo(0, 0));
+	}
+	await page.waitForTimeout(500);
 
 	await page.screenshot({ path: screenshotPath, fullPage: true });
 }
