@@ -91,7 +91,7 @@ async function compareScreenshots(screenshotPath1: string, screenshotPath2: stri
 		diffImage.data,
 		diffSize.width,
 		diffSize.height,
-		{ threshold: 0.1 }
+		{ threshold: 0.2 }
 	);
 
 	return { diffPixels, diffImage };

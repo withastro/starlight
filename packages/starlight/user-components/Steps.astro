@@ -62,7 +62,9 @@ const { html } = processSteps(content);
 			width: var(--guide-width);
 			background-color: var(--sl-color-hairline-light);
 		}
+	}
 
+	@layer starlight.content {
 		/* Adjust first item inside a step so that it aligns vertically with the number
 			even if using a larger font size (e.g. a heading) */
 		.sl-steps > li > :first-child {
