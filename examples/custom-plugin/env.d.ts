@@ -3,3 +3,10 @@ declare namespace App {
 
 	interface Locals extends StarlightLocals {}
 }
+
+declare namespace StarlightApp {
+	type UIStringsKeys = {
+		[Key in keyof typeof import('./i18n').UIStrings.en]: string;
+	};
+	interface I18n extends UIStringsKeys {}
+}
