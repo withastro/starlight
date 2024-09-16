@@ -23,7 +23,7 @@ describe('getSidebar with build.format = "file"', () => {
 			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/index.html",
-			    "isCurrent": true,
+			    "isCurrent": false,
 			    "label": "Home",
 			    "type": "link",
 			  },
