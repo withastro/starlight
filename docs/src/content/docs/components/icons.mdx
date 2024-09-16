@@ -5,7 +5,7 @@ description: Learn how to display icons in Starlight.
 
 import { Icon } from '@astrojs/starlight/components';
 
-To display icons from a set of [common icons](/reference/icons/#all-icons), use the `<Icon>` component.
+To display icons from Starlight’s [built-in icon set](/reference/icons/#all-icons), use the `<Icon>` component.
 
 import Preview from '~/components/component-preview.astro';
 
@@ -111,7 +111,11 @@ The name of the icon to display set to [one of Starlight’s built-in icons](/re
 
 **type:** `string`
 
-An optional label to provide context for screen readers.
+An optional label to provide context for assistive technologies, such as screen readers.
+
+When `label` is not set, the icon will be completely hidden from assistive technologies.
+In this case, make sure the context is still understandable without the icon.
+For example, a link containing only the icon **must** include the `label` attribute in order to be accessible, but if a link contains text and the icon is purely decorative, omitting the `label` may make sense.
 
 ### `size`
 
@@ -129,4 +133,4 @@ The color of the icon using a CSS color value.
 
 **type:** `string`
 
-Defines custom CSS classes to add to the icon.
+Custom CSS classes to add to the icon.

@@ -25,7 +25,8 @@ import { LinkButton } from '@astrojs/starlight/components';
 
 ## Usage
 
-Display a link button, useful for directing users to the most relevant or actionable content and often used on landing pages, using the `<LinkButton>` component.
+Use the `<LinkButton>` component to display a visually distinct call-to-action link.
+A link button is useful for directing users to the most relevant or actionable content and is often used on landing pages.
 
 A `<LinkButton>` requires an [`href`](#href) attribute.
 Optionally, customize the appearance of the link button using the [`variant`](#variant) attribute, which can be set to `primary` (the default), `secondary`, or `minimal`.
@@ -121,11 +122,11 @@ Related: Astro
 
 **Implementation:** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
 
-The `<LinkButton>` component accepts the following props and also any other `<a>` attributes:
+The `<LinkButton>` component accepts the following props and also any [other `<a>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a):
 
 ### `href`
 
-**required**
+**required**  
 **type:** `string`
 
 The URL that the link button points to.

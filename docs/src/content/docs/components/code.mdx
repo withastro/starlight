@@ -1,11 +1,12 @@
 ---
 title: Code
-description: Learn how to display syntax highlighted code using the Code component.
+description: Learn how to display syntax highlighted code in Starlight without Markdown code blocks.
 ---
 
 import { Code } from '@astrojs/starlight/components';
 
-To render syntax highlighted code, use the `<Code>` component.
+The `<Code>` component renders syntax highlighted code.
+It is useful when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
 
 import Preview from '~/components/component-preview.astro';
 
@@ -31,7 +32,7 @@ import { Code } from '@astrojs/starlight/components';
 
 ## Usage
 
-When using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs, use the `<Code>` component to render syntax highlighted code.
+Use the `<Code>` component to render syntax highlighted code, for example when displaying code fetched from external sources.
 
 See the [Expressive Code “Code Component” docs](https://expressive-code.com/key-features/code-component/) for full details on how to use the `<Code>` component and the list of available props.
 
@@ -77,9 +78,9 @@ export const highlights = ['file', 'CMS'];
 
 </Preview>
 
-### Use imported code
+### Display imported code
 
-Use [Vite’s `?raw` import suffix](https://vitejs.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
+In MDX files and Astro components, use [Vite’s `?raw` import suffix](https://vitejs.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
 You can then pass this imported string to the `<Code>` component to include it on your page.
 
 <Preview>

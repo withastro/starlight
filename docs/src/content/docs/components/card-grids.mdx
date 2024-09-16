@@ -1,13 +1,13 @@
 ---
 title: Card Grids
-description: Learn how to wrap multiple cards in a grid.
+description: Learn how to wrap multiple cards in a grid in Starlight.
 sidebar:
   order: 4
 ---
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-To wrap multiple [`<Card>`](/components/cards/) or [`<LinkCard>`](/components/link-cards/) in a grid, use the`<CardGrid>` component.
+To wrap multiple [`<Card>`](/components/cards/) or [`<LinkCard>`](/components/link-cards/) components in a grid, use the`<CardGrid>` component.
 
 import Preview from '~/components/component-preview.astro';
 
@@ -32,7 +32,9 @@ import { CardGrid } from '@astrojs/starlight/components';
 
 ## Usage
 
-Display multiple [`<Card>`](/components/cards/) side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
+### Group cards
+
+Display multiple [`<Card>`](/components/cards/) components side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
 
 <Preview>
 
@@ -82,14 +84,14 @@ More information you want to share.
 
 ### Group link cards
 
-Display multiple [`<LinkCard>`](/components/link-cards/) side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
+Display multiple [`<LinkCard>`](/components/link-cards/) components side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
 
 <Preview>
 
 ```mdx {5,8}
 # src/content/docs/example.mdx
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
@@ -120,7 +122,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ### Stagger cards
 
-Shift the second column of [`<Card>`](/components/cards/) or [`<LinkCard>`](/components/link-cards/) vertically to add visual interest by adding the [`stagger`](#stagger) attribute to the `<CardGrid>` component.
+Shift the second column of the grid vertically to add visual interest by adding the [`stagger`](#stagger) attribute to the `<CardGrid>` component.
 
 This attribute is useful on your home page to display your project’s key features.
 

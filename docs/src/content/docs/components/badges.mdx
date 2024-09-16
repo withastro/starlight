@@ -1,11 +1,11 @@
 ---
 title: Badges
-description: Learn how to use badges in Starlight.
+description: Learn how to use badges in Starlight to display additional pieces of information.
 ---
 
 import { Badge } from '@astrojs/starlight/components';
 
-To display small pieces of information, such as status or labels, use the `<Badge>` component.
+To display small pieces of information, such as a status or category, use the `<Badge>` component.
 
 import Preview from '~/components/component-preview.astro';
 
@@ -35,9 +35,11 @@ To use a built-in badge color, set the [`variant`](#variant) attribute to one of
 
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="New" variant="tip" />
-<Badge text="Deprecated" variant="caution" />
-<Badge text="Starlight" variant="note" />
+<Badge text="Note" variant="note" />
+<Badge text="Success" variant="success" />
+<Badge text="Tip" variant="tip" />
+<Badge text="Caution" variant="caution" />
+<Badge text="Danger" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
@@ -45,24 +47,28 @@ import { Badge } from '@astrojs/starlight/components';
 ```markdoc
 # src/content/docs/example.mdoc
 
-{% badge text="New" variant="tip" /%}
-{% badge text="Deprecated" variant="caution" /%}
-{% badge text="Starlight" variant="note" /%}
+{% badge text="Note" variant="note" /%}
+{% badge text="Success" variant="success" /%}
+{% badge text="Tip" variant="tip" /%}
+{% badge text="Caution" variant="caution" /%}
+{% badge text="Danger" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="New" variant="tip" />
-	<Badge text="Deprecated" variant="caution" />
-	<Badge text="Starlight" variant="note" />
+	<Badge text="Note" variant="note" />
+	<Badge text="Success" variant="success" />
+	<Badge text="Tip" variant="tip" />
+	<Badge text="Caution" variant="caution" />
+	<Badge text="Danger" variant="danger" />
 </Fragment>
 
 </Preview>
 
 ### Use different sizes
 
-Use the [`size`](#size) attribute controls the size of the badge text.
+Use the [`size`](#size) attribute to control the size of the badge text.
 
 <Preview>
 
@@ -133,7 +139,7 @@ import { Badge } from '@astrojs/starlight/components';
 
 **Implementation:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
 
-The `<Badge>` component accepts the following props and also any [other `<span>` attributes](#customize-badges):
+The `<Badge>` component accepts the following props and also any [other `<span>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes):
 
 ### `text`
 

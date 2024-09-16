@@ -11,8 +11,8 @@ import Preview from '~/components/component-preview.astro';
 
 <Preview>
 
-<Aside slot="preview" type="danger">
-	Do not give your password to anyone.
+<Aside slot="preview">
+    Include nonessential, supplementary information in an `<Aside>`.
 </Aside>
 
 </Preview>
@@ -27,7 +27,7 @@ import { Aside } from '@astrojs/starlight/components';
 
 Display an aside (also known as “admonitions” or “callouts”) using the `<Aside>` component.
 
-An `<Aside>` can have an optional [`type`](#type) set to one of the supported values.
+An `<Aside>` can have an optional [`type`](#type) attribute, which controls the aside’s color, icon, and default title.
 
 <Preview>
 
@@ -151,10 +151,16 @@ The `<Aside>` component accepts the following props:
 **type:** `'note' | 'tip' | 'caution' | 'danger'`  
 **default:** `'note'`
 
-The type of aside to display: `note` (the default), `tip`, `caution` or `danger`.
+The type of aside to display:
+
+- `note` asides (the default) are blue and display an information icon.
+- `tip` asides are purple and display a rocket icon.
+- `caution` asides are yellow and display a triangular warning icon.
+- `danger` asides are red and display an octagonal warning icon.
 
 ### `title`
 
 **type:** `string`
 
 The title of the aside to display.
+If `title` is not set, the default title for the current aside `type` will be used.
