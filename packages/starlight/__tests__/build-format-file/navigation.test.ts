@@ -17,13 +17,13 @@ vi.mock('astro:content', async () =>
 
 describe('getSidebar with build.format = "file"', () => {
 	test('returns an array of sidebar entries with its file extension', () => {
-		expect(getSidebar('/', undefined)).toMatchInlineSnapshot(`
+		expect(getSidebar('/index.html', undefined)).toMatchInlineSnapshot(`
 			[
 			  {
 			    "attrs": {},
 			    "badge": undefined,
 			    "href": "/index.html",
-			    "isCurrent": false,
+			    "isCurrent": true,
 			    "label": "Home",
 			    "type": "link",
 			  },
