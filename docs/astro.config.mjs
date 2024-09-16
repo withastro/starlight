@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -170,11 +171,7 @@ export default defineConfig({
 					autogenerate: { directory: 'resources' },
 				},
 			],
-			expressiveCode: {
-				shiki: {
-					langs: [JSON.parse(fs.readFileSync('./grammars/markdoc.tmLanguage.json', 'utf-8'))],
-				},
-			},
+			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({
