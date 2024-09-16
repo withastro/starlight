@@ -106,6 +106,8 @@ export function injectPluginTranslationsTypes(
 		}
 	}
 
+	// If there are no translations to inject, we don't need to generate any types or cleanup
+	// previous ones as they will not be referenced anymore.
 	if (allKeys.size === 0) return;
 
 	injectTypes({
