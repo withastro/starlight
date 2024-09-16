@@ -171,7 +171,7 @@ A callback function to add or update translations strings.
 
 In the following example, the plugin injects a custom UI string translation named `myPlugin.doThing` for the `en` locale and `fr` locales:
 
-```ts {6-13} /injectTranslations[^(]/
+```ts {6-13} /(injectTranslations)[^(]/
 // plugin.ts
 export default {
   name: 'plugin-with-translations',
@@ -190,4 +190,22 @@ export default {
 };
 ```
 
-To use the injected translation in your plugin UI, please check the [“Accessing UI strings” guide](/guides/i18n/#accessing-ui-strings) for more information.
+To use the injected translation in your plugin UI using the `locals.t` object, please check the [“Accessing UI strings” guide](/guides/i18n/#accessing-ui-strings) for more information.
+
+To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // Define the `locals.t` object in the context of a plugin.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // Define the additional plugin translations in the `I18n` interface.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
