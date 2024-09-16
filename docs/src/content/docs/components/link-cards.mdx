@@ -36,8 +36,6 @@ Each `<LinkCard>` requires a [`title`](#title) and an [`href`](#href) attribute.
 <Preview>
 
 ```mdx
-# src/content/docs/example.mdx
-
 import { LinkCard } from '@astrojs/starlight/components';
 
 <LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
@@ -46,8 +44,6 @@ import { LinkCard } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc
-# src/content/docs/example.mdoc
-
 {% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
 ```
 
@@ -68,8 +64,6 @@ Add a short description to a link card using the [`description`](#description) a
 <Preview>
 
 ```mdx {8}
-# src/content/docs/example.mdx
-
 import { LinkCard } from '@astrojs/starlight/components';
 
 <LinkCard
@@ -82,8 +76,6 @@ import { LinkCard } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc {6}
-# src/content/docs/example.mdoc
-
 {% linkcard
    title="Internationalization"
 	 href="/guides/i18n/"

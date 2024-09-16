@@ -34,8 +34,6 @@ An icon requires a [`name`](#name) set to [one of Starlight’s built-in icons](
 <Preview>
 
 ```mdx
-# src/content/docs/example.mdx
-
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" />
@@ -45,8 +43,6 @@ import { Icon } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc
-# src/content/docs/example.mdoc
-
 {% icon name="star" /%}
 {% icon name="starlight" label="The Starlight logo" /%}
 ```
@@ -68,8 +64,6 @@ The [`class`](#class) attribute can be used to add custom CSS classes to the ico
 <Preview>
 
 ```mdx
-# src/content/docs/example.mdx
-
 import { Card } from '@astrojs/starlight/components';
 
 <Icon name="star" color="goldenrod" size="2rem" />
@@ -79,8 +73,6 @@ import { Card } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc
-# src/content/docs/example.mdoc
-
 {% icon name="star" color="goldenrod" size="2rem" /%}
 {% icon name="rocket" color="var(--sl-color-text-accent)" /%}
 ```

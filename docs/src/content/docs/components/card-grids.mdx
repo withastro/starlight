@@ -39,8 +39,6 @@ Display multiple [`<Card>`](/components/cards/) components side-by-side when the
 <Preview>
 
 ```mdx {5,12}
-# src/content/docs/example.mdx
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
@@ -56,8 +54,6 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc {3,11}
-# src/content/docs/example.mdoc
-
 {% cardgrid %}
 {% card title="Check this out" icon="open-book" %}
 Interesting content you want to highlight.
@@ -89,8 +85,6 @@ Display multiple [`<LinkCard>`](/components/link-cards/) components side-by-side
 <Preview>
 
 ```mdx {5,8}
-# src/content/docs/example.mdx
-
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
@@ -102,8 +96,6 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc {3,7}
-# src/content/docs/example.mdoc
-
 {% cardgrid %}
 {% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
 
@@ -129,8 +121,6 @@ This attribute is useful on your home page to display your project’s key featu
 <Preview>
 
 ```mdx "stagger"
-# src/content/docs/example.mdx
-
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
@@ -146,8 +136,6 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc "stagger=true"
-# src/content/docs/example.mdoc
-
 {% cardgrid stagger=true %}
 {% card title="Check this out" icon="open-book" %}
 Interesting content you want to highlight.

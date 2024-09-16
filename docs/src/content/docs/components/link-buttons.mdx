@@ -34,8 +34,6 @@ Optionally, customize the appearance of the link button using the [`variant`](#v
 <Preview>
 
 ```mdx
-# src/content/docs/example.mdx
-
 import { LinkButton } from '@astrojs/starlight/components';
 
 <LinkButton href="/getting-started/">Get started</LinkButton>
@@ -47,8 +45,6 @@ import { LinkButton } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc
-# src/content/docs/example.mdoc
-
 {% linkbutton href="/getting-started/" %}Get started{% /linkbutton %}
 
 {% linkbutton href="/reference/configuration/" variant="secondary" %}
@@ -76,8 +72,6 @@ The [`iconPlacement`](#iconplacement) attribute can be used to place the icon be
 <Preview>
 
 ```mdx {8-9}
-# src/content/docs/example.mdx
-
 import { LinkButton } from '@astrojs/starlight/components';
 
 <LinkButton
@@ -93,8 +87,6 @@ import { LinkButton } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc {6-7}
-# src/content/docs/example.mdoc
-
 {% linkbutton
    href="https://docs.astro.build"
 	 variant="secondary"

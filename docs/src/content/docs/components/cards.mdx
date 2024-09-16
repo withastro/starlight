@@ -32,8 +32,6 @@ Display a card using the `<Card>` component and provide a [`title`](#title) for 
 <Preview>
 
 ```mdx
-# src/content/docs/example.mdx
-
 import { Card } from '@astrojs/starlight/components';
 
 <Card title="Check this out">Interesting content you want to highlight.</Card>
@@ -42,8 +40,6 @@ import { Card } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc
-# src/content/docs/example.mdoc
-
 {% card title="Check this out" %}
 Interesting content you want to highlight.
 {% /card %}
@@ -64,8 +60,6 @@ Include an icon in a card using the [`icon`](#icon) attribute set to the name of
 <Preview>
 
 ```mdx 'icon="star"'
-# src/content/docs/example.mdx
-
 import { Card } from '@astrojs/starlight/components';
 
 <Card title="Stars" icon="star">
@@ -76,8 +70,6 @@ import { Card } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc 'icon="star"'
-# src/content/docs/example.mdoc
-
 {% card title="Stars" icon="star" %}
 Sirius, Vega, Betelgeuse
 {% /card %}

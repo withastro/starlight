@@ -31,8 +31,6 @@ To use a built-in badge color, set the [`variant`](#variant) attribute to one of
 <Preview>
 
 ```mdx
-# src/content/docs/example.mdx
-
 import { Badge } from '@astrojs/starlight/components';
 
 <Badge text="Note" variant="note" />
@@ -45,8 +43,6 @@ import { Badge } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc
-# src/content/docs/example.mdoc
-
 {% badge text="Note" variant="note" /%}
 {% badge text="Success" variant="success" /%}
 {% badge text="Tip" variant="tip" /%}
@@ -73,8 +69,6 @@ Use the [`size`](#size) attribute to control the size of the badge text.
 <Preview>
 
 ```mdx /size="\w+"/
-# src/content/docs/example.mdx
-
 import { Badge } from '@astrojs/starlight/components';
 
 <Badge text="New" size="small" />
@@ -85,8 +79,6 @@ import { Badge } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-# src/content/docs/example.mdoc
-
 {% badge text="New" size="small" /%}
 {% badge text="New and improved" size="medium" /%}
 {% badge text="New, improved, and bigger" size="large" /%}
@@ -109,8 +101,6 @@ Customize badges by using any other `<span>` attributes such as `class` or `styl
 <Preview>
 
 ```mdx "style={{ fontStyle: 'italic' }}"
-# src/content/docs/example.mdx
-
 import { Badge } from '@astrojs/starlight/components';
 
 <Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
@@ -119,8 +109,6 @@ import { Badge } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc 'style="font-style: italic;"'
-# src/content/docs/example.mdoc
-
 {% badge text="Custom" variant="success" style="font-style: italic;" /%}
 ```
 

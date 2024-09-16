@@ -32,8 +32,6 @@ An `<Aside>` can have an optional [`type`](#type) attribute, which controls the 
 <Preview>
 
 ````mdx
-# src/content/docs/example.mdx
-
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside>Some content in an aside.</Aside>
@@ -56,8 +54,6 @@ Other content is also supported in asides.
 <Fragment slot="markdoc">
 
 ````markdoc
-# src/content/docs/example.mdoc
-
 {% aside %}
 Some content in an aside.
 {% /aside %}
@@ -113,8 +109,6 @@ Override the default aside titles by using the [`title`](#title) attribute.
 <Preview>
 
 ```mdx 'title="Watch out!"'
-# src/content/docs/example.mdx
-
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="caution" title="Watch out!">
@@ -125,8 +119,6 @@ import { Aside } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc 'title="Watch out!"'
-# src/content/docs/example.mdoc
-
 {% aside type="caution" title="Watch out!" %}
 A warning aside *with* a custom title.
 {% /aside %}
