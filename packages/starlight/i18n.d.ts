@@ -1,5 +1,3 @@
-/// <reference path="./locals.d.ts" />
-
 import 'i18next';
 
 declare module 'i18next' {

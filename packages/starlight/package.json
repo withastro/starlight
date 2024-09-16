@@ -25,10 +25,7 @@
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.ts"
-    },
+    ".": "./index.ts",
     "./locals": "./locals.ts",
     "./components": "./components.ts",
     "./components/LanguageSelect.astro": {
