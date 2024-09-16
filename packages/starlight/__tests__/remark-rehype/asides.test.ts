@@ -15,8 +15,7 @@ const starlightConfig = StarlightConfigSchema.parse({
 const useTranslations = createTranslationSystemFromFs(
 	starlightConfig,
 	// Using non-existent `_src/` to ignore custom files in this test fixture.
-	{ srcDir: new URL('./_src/', import.meta.url) },
-	{}
+	{ srcDir: new URL('./_src/', import.meta.url) }
 );
 
 const processor = await createMarkdownProcessor({

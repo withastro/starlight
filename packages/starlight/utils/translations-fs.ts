@@ -14,10 +14,10 @@ import type { AstroConfig } from 'astro';
 export function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 	opts: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	{ srcDir }: Pick<AstroConfig, 'srcDir'>,
-	pluginTranslations: Record<string, T>
+	pluginTranslations: Record<string, T> = {}
 ) {
 	/** All translation data from the i18n collection, keyed by `id`, which matches locale. */
-	let userTranslations: Record<string, i18nSchemaOutput> = { ...pluginTranslations };
+	let userTranslations: Record<string, i18nSchemaOutput> = {};
 	try {
 		const i18nDir = new URL('content/i18n/', srcDir);
 		// Load the user’s i18n directory
@@ -41,5 +41,5 @@ export function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 		}
 	}
 
-	return createTranslationSystem(opts, userTranslations);
+	return createTranslationSystem(opts, userTranslations, pluginTranslations);
 }

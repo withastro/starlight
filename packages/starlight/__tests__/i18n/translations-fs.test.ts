@@ -9,8 +9,7 @@ describe('createTranslationSystemFromFs', () => {
 				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
 			},
 			// Using non-existent `_src/` to ignore custom files in this test fixture.
-			{ srcDir: new URL('./_src/', import.meta.url) },
-			{}
+			{ srcDir: new URL('./_src/', import.meta.url) }
 		);
 		const t = useTranslations('en');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Edit page"');
@@ -23,8 +22,7 @@ describe('createTranslationSystemFromFs', () => {
 				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
 			},
 			// Using `src/` to load custom files in this test fixture.
-			{ srcDir: new URL('./src/', import.meta.url) },
-			{}
+			{ srcDir: new URL('./src/', import.meta.url) }
 		);
 		const t = useTranslations('en');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
@@ -37,8 +35,7 @@ describe('createTranslationSystemFromFs', () => {
 				defaultLocale: { label: 'English', locale: 'root', lang: 'en', dir: 'ltr' },
 			},
 			// Using `src/` to load custom files in this test fixture.
-			{ srcDir: new URL('./src/', import.meta.url) },
-			{}
+			{ srcDir: new URL('./src/', import.meta.url) }
 		);
 		const t = useTranslations(undefined);
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
@@ -51,8 +48,7 @@ describe('createTranslationSystemFromFs', () => {
 				defaultLocale: { label: 'English', locale: undefined, dir: 'ltr' },
 			},
 			// Using `src/` to load custom files in this test fixture.
-			{ srcDir: new URL('./src/', import.meta.url) },
-			{}
+			{ srcDir: new URL('./src/', import.meta.url) }
 		);
 		const t = useTranslations('fr');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
@@ -62,8 +58,7 @@ describe('createTranslationSystemFromFs', () => {
 		const useTranslations = createTranslationSystemFromFs(
 			{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
 			// Using `empty-src/` to emulate empty `src/content/i18n/` directory.
-			{ srcDir: new URL('./empty-src/', import.meta.url) },
-			{}
+			{ srcDir: new URL('./empty-src/', import.meta.url) }
 		);
 		const t = useTranslations('en');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Edit page"');
@@ -74,8 +69,7 @@ describe('createTranslationSystemFromFs', () => {
 			createTranslationSystemFromFs(
 				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
 				// Using `malformed-src/` to trigger syntax error in bad JSON file.
-				{ srcDir: new URL('./malformed-src/', import.meta.url) },
-				{}
+				{ srcDir: new URL('./malformed-src/', import.meta.url) }
 			)
 		).toThrow(SyntaxError);
 	});
