@@ -455,6 +455,18 @@ Définit si le système de recherche du site par défaut de Starlight, [Pagefind
 Utilisez la valeur `false` pour désactiver l'indexation de votre site avec Pagefind.
 Cela désactivera également l'interface de recherche par défaut de Starlight si utilisée.
 
+Pagefind ne peut pas être activé lorsque l'option [`prerender`](#prerender) est définie à `false`.
+
+### `prerender`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Définit si les pages générées par Starlight doivent être pré-rendues en HTML statique ou rendues à la demande par un [adaptateur SSR](https://docs.astro.build/fr/guides/server-side-rendering/).
+
+Les pages Starlight sont pré-rendues par défaut.
+Si vous utilisez un adaptateur SSR et que vous souhaitez générer les pages Starlight à la demande, définissez `prerender: false`.
+
 ### `head`
 
 **Type :** [`HeadConfig[]`](#headconfig)
