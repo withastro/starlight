@@ -2,13 +2,6 @@
  * These triple-slash directives defines dependencies to various declaration files that will be
  * loaded when a user imports the Starlight integration in their Astro configuration file. These
  * directives must be first at the top of the file and can only be preceded by this comment.
- *
- * - `./locals.d.ts` registers the various Astro middlewares used by Starlight and also defines a
- * 	 namespace reserved for Starlight (only used for i18n at the moment) that can be extended by
- *   plugins using module augmentation and interface merging.
- * - `./i18n.d.ts` imports the original `i18next` types and extends to configure the Starlight
- *   namespace (note that this can only be done in a different file due to a top-level `import`
- *   making it non-ambient).
  */
 /// <reference path="./locals.d.ts" />
 /// <reference path="./i18n.d.ts" />
