@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
@@ -171,7 +170,14 @@ export default defineConfig({
 					autogenerate: { directory: 'resources' },
 				},
 			],
-			expressiveCode: { shiki: { langs: [markdocGrammar] } },
+			expressiveCode: {
+				shiki: {
+					langs: [
+						// @ts-expect-error - The inferred type of the JSON grammar is not recognized by Shiki.
+						markdocGrammar,
+					],
+				},
+			},
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({
