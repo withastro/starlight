@@ -167,7 +167,7 @@ The example above will log a message that includes the provided info message:
 
 **type:** `(translations: Record<string, Record<string, string>>) => void`
 
-A callback function to add or update translation strings used in Starlight’s [localization APIs](/guides/i18n/#accessing-ui-strings).
+A callback function to add or update translation strings used in Starlight’s [localization APIs](/guides/i18n/#using-ui-translations).
 
 In the following example, a plugin injects translations for a custom UI string named `myPlugin.doThing` for the `en` and `fr` locales:
 
@@ -190,7 +190,7 @@ export default {
 };
 ```
 
-To use the injected translations in your plugin UI, follow the [“Accessing UI strings” guide](/guides/i18n/#accessing-ui-strings).
+To use the injected translations in your plugin UI, follow the [“Accessing UI strings” guide](/guides/i18n/#using-ui-translations).
 
 Types for a plugin’s injected translation strings are generated automatically in a user’s project, but are not yet available when working in your plugin’s codebase.
 To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:

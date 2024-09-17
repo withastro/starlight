@@ -103,7 +103,7 @@ test('throws when accessing a label using the deprecated `labels` prop in pre v1
 				The \`labels\` prop in component overrides has been removed.
 			Hint:
 				Replace \`Astro.props.labels["any"]\` with \`Astro.locals.t("any")\` instead.
-				For more information see https://starlight.astro.build/guides/i18n/#accessing-ui-strings"
+				For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations"
 		`);
 	} else {
 		expect(() => data.labels['any']).not.toThrow();

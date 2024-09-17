@@ -276,42 +276,69 @@ export const collections = {
 
 Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
 
-## Accessing UI strings
+## Using UI translations
 
-Starlight uses [Astro i18n](https://docs.astro.build/en/guides/internationalization/) and [i18next](https://www.i18next.com/) to handle internationalization and and manage UI strings.
-Most i18next features, like [interpolation](https://www.i18next.com/translation-function/interpolation) or [pluralization](https://www.i18next.com/translation-function/plurals), can be used in Starlight using the`locals.t` object available as a property to [`APIContext`](https://docs.astro.build/en/reference/api-reference/#contextlocals) and [`AstroGlobal`](https://docs.astro.build/en/reference/api-reference/#astrolocals).
+You can access Starlight’s [built-in UI strings](/guides/i18n/#translate-starlights-ui) as well as [user-defined](/guides/i18n/#extend-translation-schema), and [plugin-provided](/reference/plugins/#injecttranslations) UI strings through a unified API powered by [i18next](https://www.i18next.com/).
+This includes support for features like [interpolation](https://www.i18next.com/translation-function/interpolation) and [pluralization](https://www.i18next.com/translation-function/plurals).
 
-### `t`
+In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#astrolocals) as `Astro.locals.t`:
 
-The `locals.t()` function can be used to access [built-in](/guides/i18n/#translate-starlights-ui), [user-defined](/guides/i18n/#extend-translation-schema), and [plugin-provided](/reference/plugins/#injecttranslations) UI strings.
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
 
-Considering a custom translation file with the following content:
+You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#contextlocals):
 
-```json
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+### Rendering a UI string
+
+Render UI strings using the `locals.t()` function.
+This is an instance of i18next’s `t()` function, which takes a UI string key as its first argument and returns the corresponding translation for the current language.
+
+For example, given a custom translation file with the following content:
+
+```json title="src/content/i18n/en.json"
 {
 	"link.astro": "Astro documentation",
 	"link.astro.custom": "Astro documentation for {{feature}}"
 }
 ```
 
-Specify the translation key to acccess using the first argument of the `t()` function and optionally provide an option object as second argument to customize the translation.
+The first UI string can be rendered by passing `'link.astro'` to the `t()` function:
 
-```astro
----
-// src/components/Example.astro
----
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- Renders: <a href="...">Astro documentation</a> -->
+```
 
-<a href="https://docs.astro.build/">{Astro.locals.t('link.astro')}</a>
+The second UI string uses i18next’s [interpolation syntax](https://www.i18next.com/translation-function/interpolation) for the `{{feature}}` placeholder.
+The value for `feature` must be set in an options object passed as the second argument to `t()`:
+
+```astro {3}
+<!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/en/guides/astro-db/">
 	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
 </a>
+<!-- Renders: <a href="...">Astro documentation for Astro DB</a> -->
 ```
 
-Please refer to the [i18next documentation](https://www.i18next.com/overview/api#t) for more information on how to use the `t()` function with interpolation, formatting, and more.
+See the [i18next documentation](https://www.i18next.com/overview/api#t) for more information on how to use the `t()` function with interpolation, formatting, and more.
 
-### `t.all`
+### Advanced APIs
 
-The `locals.t.all()` function provides an object containing all UI strings available for the current locale keyed by their translation key.
+#### `t.all()`
+
+The `locals.t.all()` function returns an object containing all UI strings available for the current locale.
 
 ```astro
 ---
@@ -326,25 +353,24 @@ const allStrings = Astro.locals.t.all();
 ---
 ```
 
-### `t.exists`
+#### `t.exists()`
 
-To check if a translation key exists for the current or a specific locale, use the `locals.t.exists()` function with the translation key as first argument and an optional options object as second argument.
+To check if a translation key exists for a locale, use the `locals.t.exists()` function with the translation key as first argument.
+Pass an optional second argument if you need to override the current locale.
 
 ```astro
 ---
 // src/components/Example.astro
 const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
-//    ^
-//    true
+//    ^ true
 const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
-//    ^
-//    false
+//    ^ false
 ---
 ```
 
-Please refer to the [i18next documentation](https://www.i18next.com/overview/api#exists) for more information on how to use the `t.exists()` function.
+See the [`exists()` reference in the i18next documentation](https://www.i18next.com/overview/api#exists) for more information.
 
-### `t.dir`
+#### `t.dir()`
 
 The `locals.t.dir()` function returns the text direction of the current or a specific locale.
 
@@ -360,7 +386,7 @@ const arabicDirection = Astro.locals.t.dir('ar');
 ---
 ```
 
-Please refer to the [i18next documentation](https://www.i18next.com/overview/api#dir) for more information on how to use the `t.dir()` function.
+See the [`dir()` reference in the i18next documentation](https://www.i18next.com/overview/api#dir) for more information.
 
 ## Accessing the current locale
 

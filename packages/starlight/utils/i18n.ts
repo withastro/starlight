@@ -16,7 +16,7 @@ export const DeprecatedLabelsPropProxy = new Proxy<Record<string, never>>(
 			throw new AstroError(
 				`The \`labels\` prop in component overrides has been removed.`,
 				`Replace \`Astro.props.labels["${label}"]\` with \`Astro.locals.t("${label}")\` instead.\n` +
-					'For more information see https://starlight.astro.build/guides/i18n/#accessing-ui-strings'
+					'For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations'
 			);
 		},
 	}
