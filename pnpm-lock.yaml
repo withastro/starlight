@@ -59,9 +59,6 @@ importers:
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
-      starlight-custom-plugin:
-        specifier: workspace:*
-        version: link:../examples/custom-plugin
     devDependencies:
       pa11y-ci:
         specifier: ^3.0.1
@@ -84,12 +81,6 @@ importers:
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
-
-  examples/custom-plugin:
-    devDependencies:
-      '@astrojs/starlight':
-        specifier: workspace:*
-        version: link:../../packages/starlight
 
   examples/markdoc:
     dependencies:

@@ -20,8 +20,7 @@
     "@types/culori": "^2.1.1",
     "astro": "^4.15.3",
     "culori": "^4.0.1",
-    "sharp": "^0.32.5",
-    "starlight-custom-plugin": "workspace:*"
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
     "pa11y-ci": "^3.0.1",
