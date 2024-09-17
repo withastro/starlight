@@ -60,7 +60,15 @@ for (const rule of Object.keys(markdocMarkdownTmLanguage.repository)) {
 // Write the grammar to a file.
 await fs.writeFile(
 	'./grammars/markdoc.tmLanguage.json',
-	JSON.stringify(markdownTmLanguage, null, 2)
+	JSON.stringify(
+		markdownTmLanguage,
+		(key, value) => {
+			// The `applyEndPatternLast` property should be a boolean and not a number.
+			if (key === 'applyEndPatternLast') return Boolean(value);
+			return value;
+		},
+		2
+	)
 );
 
 console.log('Markdoc grammar generated successfully.');

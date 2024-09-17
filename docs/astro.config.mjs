@@ -170,14 +170,7 @@ export default defineConfig({
 					autogenerate: { directory: 'resources' },
 				},
 			],
-			expressiveCode: {
-				shiki: {
-					langs: [
-						// @ts-expect-error - The inferred type of the JSON grammar is not recognized by Shiki.
-						markdocGrammar,
-					],
-				},
-			},
+			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({
