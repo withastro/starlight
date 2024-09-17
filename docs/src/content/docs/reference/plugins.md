@@ -217,8 +217,8 @@ For example, given the following source file:
 
 ```ts title="ui-strings.ts"
 export const UIStrings = {
-	en: { 'myPlugin.doThing': 'Do the thing' },
-	fr: { 'myPlugin.doThing': 'Faire le truc' },
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
 };
 ```
 
@@ -226,9 +226,7 @@ The following declaration would infer types from the English keys in the source 
 
 ```ts title="env.d.ts"
 declare namespace StarlightApp {
-	type UIStrings = {
-		[Key in keyof typeof import('./ui-strings').UIStrings.en]: string;
-	};
-	interface I18n extends UIStrings {}
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
 }
 ```
