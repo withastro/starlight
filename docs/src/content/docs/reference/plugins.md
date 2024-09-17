@@ -167,9 +167,9 @@ The example above will log a message that includes the provided info message:
 
 **type:** `(translations: Record<string, Record<string, string>>) => void`
 
-A callback function to add or update translations strings.
+A callback function to add or update translation strings used in Starlight’s [localization APIs](/guides/i18n/#accessing-ui-strings).
 
-In the following example, the plugin injects a custom UI string translation named `myPlugin.doThing` for the `en` locale and `fr` locales:
+In the following example, a plugin injects translations for a custom UI string named `myPlugin.doThing` for the `en` and `fr` locales:
 
 ```ts {6-13} /(injectTranslations)[^(]/
 // plugin.ts
@@ -190,8 +190,9 @@ export default {
 };
 ```
 
-To use the injected translation in your plugin UI using the `locals.t` object, please check the [“Accessing UI strings” guide](/guides/i18n/#accessing-ui-strings) for more information.
+To use the injected translations in your plugin UI, follow the [“Accessing UI strings” guide](/guides/i18n/#accessing-ui-strings).
 
+Types for a plugin’s injected translation strings are generated automatically in a user’s project, but are not yet available when working in your plugin’s codebase.
 To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:
 
 ```ts
@@ -207,5 +208,27 @@ declare namespace StarlightApp {
   interface I18n {
     'myPlugin.doThing': string;
   }
+}
+```
+
+You can also infer the types for the `StarlightApp.I18n` interface from a source file if you have an object containing your translations.
+
+For example, given the following source file:
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+	en: { 'myPlugin.doThing': 'Do the thing' },
+	fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+The following declaration would infer types from the English keys in the source file:
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+	type UIStrings = {
+		[Key in keyof typeof import('./ui-strings').UIStrings.en]: string;
+	};
+	interface I18n extends UIStrings {}
 }
 ```
