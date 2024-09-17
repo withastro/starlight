@@ -38,7 +38,7 @@ Display multiple [`<Card>`](/components/cards/) components side-by-side when the
 
 <Preview>
 
-```mdx {5,12}
+```mdx {3,10}
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
@@ -53,7 +53,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <Fragment slot="markdoc">
 
-```markdoc {3,11}
+```markdoc {1,9}
 {% cardgrid %}
 {% card title="Check this out" icon="open-book" %}
 Interesting content you want to highlight.
@@ -84,7 +84,7 @@ Display multiple [`<LinkCard>`](/components/link-cards/) components side-by-side
 
 <Preview>
 
-```mdx {5,8}
+```mdx {3,6}
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
@@ -95,7 +95,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <Fragment slot="markdoc">
 
-```markdoc {3,7}
+```markdoc {1,5}
 {% cardgrid %}
 {% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
 
