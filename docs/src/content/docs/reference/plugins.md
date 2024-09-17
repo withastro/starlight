@@ -190,7 +190,7 @@ export default {
 };
 ```
 
-To use the injected translations in your plugin UI, follow the [“Accessing UI strings” guide](/guides/i18n/#using-ui-translations).
+To use the injected translations in your plugin UI, follow the [“Using UI translations” guide](/guides/i18n/#using-ui-translations).
 
 Types for a plugin’s injected translation strings are generated automatically in a user’s project, but are not yet available when working in your plugin’s codebase.
 To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:
