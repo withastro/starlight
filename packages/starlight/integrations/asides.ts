@@ -227,7 +227,8 @@ export function remarkDirectivesRestoration() {
 			if (
 				index !== undefined &&
 				parent &&
-				(node.type === 'textDirective' || node.type === 'leafDirective')
+				(node.type === 'textDirective' || node.type === 'leafDirective') &&
+				node.data === undefined
 			) {
 				transformUnhandledDirective(node, index, parent);
 				return;
