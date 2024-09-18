@@ -1,5 +1,17 @@
 # @astrojs/starlight-docsearch
 
+## 0.2.0
+
+### Minor Changes
+
+- [#1923](https://github.com/withastro/starlight/pull/1923) [`5269aad`](https://github.com/withastro/starlight/commit/5269aad928773ae08b35ba8e19c0f2832d0d2c89) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.28.0
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.1.1
 
 ### Patch Changes

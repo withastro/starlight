@@ -1,5 +1,39 @@
 # @astrojs/starlight
 
+## 0.28.0
+
+### Minor Changes
+
+- [#1923](https://github.com/withastro/starlight/pull/1923) [`5269aad`](https://github.com/withastro/starlight/commit/5269aad928773ae08b35ba8e19c0f2832d0d2c89) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Overhauls the built-in localization system which is now powered by the [`i18next`](https://www.i18next.com/) library and available to use anywhere in your documentation website.
+
+  See the [“Using UI translations”](https://starlight.astro.build/guides/i18n/#using-ui-translations) guide to learn more about how to access built-in UI labels or your own custom strings in your project. Plugin authors can also use the new [`injectTranslations()`](https://starlight.astro.build/reference/plugins/#injecttranslations) helper to add or update translation strings.
+
+  ⚠️ **BREAKING CHANGE:** The `Astro.props.labels` props has been removed from the props passed down to custom component overrides.
+
+  If you are relying on `Astro.props.labels` (for example to read a built-in UI label), you will need to update your code to use the new [`Astro.locals.t()`](https://starlight.astro.build/guides/i18n/#using-ui-translations) helper instead.
+
+  ```astro
+  ---
+  import type { Props } from '@astrojs/starlight/props';
+  // The `search.label` UI label for this page’s language:
+  const searchLabel = Astro.locals.t('search.label');
+  ---
+  ```
+
+- [#2285](https://github.com/withastro/starlight/pull/2285) [`7286220`](https://github.com/withastro/starlight/commit/728622037602999ed67dedc2757ca5654236feb8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for translating sidebar badges.
+
+- [#1923](https://github.com/withastro/starlight/pull/1923) [`5269aad`](https://github.com/withastro/starlight/commit/5269aad928773ae08b35ba8e19c0f2832d0d2c89) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now 4.14.0
+
+  Please update Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+### Patch Changes
+
+- [#2327](https://github.com/withastro/starlight/pull/2327) [`d7a295e`](https://github.com/withastro/starlight/commit/d7a295e5f63171c7eee9fc11333157d8c7e6c803) Thanks [@tritao](https://github.com/tritao)! - Fixes restoration of remark directives for nodes with custom data attached.
+
 ## 0.27.1
 
 ### Patch Changes
