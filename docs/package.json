@@ -11,7 +11,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lunaria:build": "lunaria build"
+    "lunaria:build": "lunaria build",
+    "grammars": "node grammars/generate.mjs"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.2",

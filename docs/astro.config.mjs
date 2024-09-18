@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -131,6 +132,13 @@ export default defineConfig({
 					autogenerate: { directory: 'guides' },
 				},
 				{
+					label: 'Components',
+					translations: {
+						fr: 'Composants',
+					},
+					autogenerate: { directory: 'components' },
+				},
+				{
 					label: 'Reference',
 					translations: {
 						de: 'Referenz',
@@ -162,6 +170,7 @@ export default defineConfig({
 					autogenerate: { directory: 'resources' },
 				},
 			],
+			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({

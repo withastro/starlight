@@ -15,9 +15,9 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			// without trailing slash
 			{ path: '/api/v1/users', expected: '/api/v1/users.html' },
 			// with file extension
-			{ path: '/guides/components.html', expected: '/guides/components.html' },
+			{ path: '/guides/project-structure.html', expected: '/guides/project-structure.html' },
 			// with file extension and trailing slash
-			{ path: '/guides/components.html/', expected: '/guides/components.html' },
+			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure.html' },
 		],
 	},
 	{
@@ -30,9 +30,9 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			// without trailing slash
 			{ path: '/api/v1/users', expected: '/api/v1/users.html' },
 			// with file extension
-			{ path: '/guides/components.html', expected: '/guides/components.html' },
+			{ path: '/guides/project-structure.html', expected: '/guides/project-structure.html' },
 			// with file extension and trailing slash
-			{ path: '/guides/components.html/', expected: '/guides/components.html' },
+			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure.html' },
 		],
 	},
 	{
@@ -45,9 +45,9 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			// without trailing slash
 			{ path: '/api/v1/users', expected: '/api/v1/users.html' },
 			// with file extension
-			{ path: '/guides/components.html', expected: '/guides/components.html' },
+			{ path: '/guides/project-structure.html', expected: '/guides/project-structure.html' },
 			// with file extension and trailing slash
-			{ path: '/guides/components.html/', expected: '/guides/components.html' },
+			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure.html' },
 		],
 	},
 	{
@@ -60,9 +60,9 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			// without trailing slash
 			{ path: '/api/v1/users', expected: '/api/v1/users/' },
 			// with file extension
-			{ path: '/guides/components.html', expected: '/guides/components/' },
+			{ path: '/guides/project-structure.html', expected: '/guides/project-structure/' },
 			// with file extension and trailing slash
-			{ path: '/guides/components.html/', expected: '/guides/components/' },
+			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure/' },
 		],
 	},
 	{
@@ -75,9 +75,9 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			// without trailing slash
 			{ path: '/api/v1/users', expected: '/api/v1/users' },
 			// with file extension
-			{ path: '/guides/components.html', expected: '/guides/components' },
+			{ path: '/guides/project-structure.html', expected: '/guides/project-structure' },
 			// with file extension and trailing slash
-			{ path: '/guides/components.html/', expected: '/guides/components' },
+			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure' },
 		],
 	},
 	{
@@ -90,9 +90,9 @@ describe.each<{ options: FormatPathOptions; tests: Array<{ path: string; expecte
 			// without trailing slash
 			{ path: '/api/v1/users', expected: '/api/v1/users' },
 			// with file extension
-			{ path: '/guides/components.html', expected: '/guides/components' },
+			{ path: '/guides/project-structure.html', expected: '/guides/project-structure' },
 			// with file extension and trailing slash
-			{ path: '/guides/components.html/', expected: '/guides/components' },
+			{ path: '/guides/project-structure.html/', expected: '/guides/project-structure' },
 		],
 	},
 ])(

@@ -1,0 +1,49 @@
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+const showContentTypeTabs = Astro.slots.has('markdoc');
+---
+
+<figure>
+	{
+		showContentTypeTabs ? (
+			<Tabs syncKey="content-type">
+				<TabItem label="MDX">
+					<slot />
+				</TabItem>
+				<TabItem label="Markdoc">
+					<slot name="markdoc" />
+				</TabItem>
+			</Tabs>
+		) : (
+			<slot />
+		)
+	}
+	<div class="preview">
+		<figcaption>{Astro.locals.t('component.preview')}</figcaption>
+		<div class="preview-content"><slot name="preview" /></div>
+	</div>
+</figure>
+
+<style>
+	:global(.sl-markdown-content) .preview {
+		border: 1px solid var(--sl-color-gray-5);
+		border-top: none;
+		margin-top: 0;
+	}
+
+	.preview:only-child {
+		border-top: 1px solid var(--sl-color-gray-5);
+	}
+
+	figcaption {
+		font-size: var(--sl-text-sm);
+		font-weight: 600;
+		padding: 0.5rem 1rem 0;
+	}
+
+	:global(.sl-markdown-content) .preview-content {
+		margin-top: 0;
+		padding: 1rem;
+	}
+</style>

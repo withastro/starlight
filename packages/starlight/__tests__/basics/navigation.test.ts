@@ -8,7 +8,7 @@ vi.mock('astro:content', async () =>
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { hidden: true } }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
 		],
 	})
 );
@@ -48,9 +48,9 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/guides/components/",
+			        "href": "/guides/project-structure/",
 			        "isCurrent": false,
-			        "label": "Components",
+			        "label": "Project Structure",
 			        "type": "link",
 			      },
 			    ],
@@ -145,9 +145,9 @@ describe('flattenSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/guides/components/",
+			    "href": "/guides/project-structure/",
 			    "isCurrent": false,
-			    "label": "Components",
+			    "label": "Project Structure",
 			    "type": "link",
 			  },
 			]
@@ -194,7 +194,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('returns no next link for last item', () => {
-		const sidebar = getSidebar('/guides/components/', undefined);
+		const sidebar = getSidebar('/guides/project-structure/', undefined);
 		const links = getPrevNextLinks(sidebar, true, {});
 		expect(links.next).toBeUndefined();
 	});

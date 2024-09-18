@@ -10,7 +10,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 		],
 	})
@@ -28,7 +28,7 @@ describe('without base', async () => {
 
 	test('pagination links are inferred correctly with no frontmatter', () => {
 		const links = getPrevNextLinks(sidebar, true, {});
-		expect(links.prev?.href).toBe('/guides/components/');
+		expect(links.prev?.href).toBe('/guides/project-structure/');
 		expect(links.next?.href).toBeUndefined();
 	});
 
@@ -63,7 +63,7 @@ describe('with base', () => {
 
 	test('pagination links are inferred correctly with no frontmatter', () => {
 		const links = getPrevNextLinks(sidebar, true, {});
-		expect(links.prev?.href).toBe('/test-base/guides/components/');
+		expect(links.prev?.href).toBe('/test-base/guides/project-structure/');
 		expect(links.next?.href).toBeUndefined();
 	});
 

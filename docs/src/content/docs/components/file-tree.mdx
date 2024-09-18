@@ -1,0 +1,225 @@
+---
+title: File Tree
+description: Learn how to display the structure of a directory with file icons and collapsible sub-directories in Starlight.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+To display the structure of a directory with file icons and collapsible sub-directories, use the `<FileTree>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## Import
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Display a file tree with file icons and collapsible sub-directories using the `<FileTree>` component.
+
+Specify the structure of your files and directories with an [unordered Markdown list](https://www.markdownguide.org/basic-syntax/#unordered-lists) inside `<FileTree>`.
+Create a sub-directory using a nested list or add a `/` to the end of a list item to render it as a directory without specific content.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### Highlight entries
+
+Make a file or directory stand out by making its name bold, e.g. `**README.md**`.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Add comments
+
+Add a comment to a file or directory by adding more text after the name.
+Inline Markdown formatting such as bold and italics is supported in comments.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro an **important** file
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro an **important** file
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro an **important** file
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Add placeholders
+
+Add placeholder files and directories by using either `...` or `…` as the name.
+This can be useful to indicate to a reader that a folder is expected to contain more items without specifying them all explicitly.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## `<FileTree>` Props
+
+**Implementation:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+The `<FileTree>` component does not accept any props.

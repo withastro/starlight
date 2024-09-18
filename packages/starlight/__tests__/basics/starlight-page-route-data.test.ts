@@ -16,7 +16,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Getting Started' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 		],
 	})
@@ -138,9 +138,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		      {
 		        "attrs": {},
 		        "badge": undefined,
-		        "href": "/guides/components/",
+		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
-		        "label": "Components",
+		        "label": "Project Structure",
 		        "type": "link",
 		      },
 		    ],
@@ -226,9 +226,9 @@ test('uses provided sidebar if any', async () => {
 		      {
 		        "attrs": {},
 		        "badge": undefined,
-		        "href": "/guides/components/",
+		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
-		        "label": "Components",
+		        "label": "Project Structure",
 		        "type": "link",
 		      },
 		    ],

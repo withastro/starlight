@@ -7,7 +7,7 @@ test('empty component throws an error', () => {
 		"[AstroUserError]:
 			The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found no child elements.
 		Hint:
-			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps"
+			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/components/steps/"
 	`
 	);
 });
@@ -18,7 +18,7 @@ test('component with non-element content throws an error', () => {
 		"[AstroUserError]:
 			The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found no child elements.
 		Hint:
-			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps"
+			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/components/steps/"
 	`
 	);
 });
@@ -29,7 +29,7 @@ test('component with non-`<ol>` content throws an error', () => {
 			"[AstroUserError]:
 				The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found the following element: \`<p>\`.
 			Hint:
-				To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps
+				To learn more about the \`<Steps>\` component, see https://starlight.astro.build/components/steps/
 				
 				Full HTML passed to \`<Steps>\`:
 				
@@ -47,7 +47,7 @@ test('component with multiple children throws an error', () => {
 		"[AstroUserError]:
 			The \`<Steps>\` component expects its content to be a single ordered list (\`<ol>\`) but found multiple child elements: \`<ol>\`, \`<p>\`, \`<ol>\`.
 		Hint:
-			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/guides/components/#steps
+			To learn more about the \`<Steps>\` component, see https://starlight.astro.build/components/steps/
 			
 			Full HTML passed to \`<Steps>\`:
 			
