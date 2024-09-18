@@ -88,7 +88,7 @@ El código anterior genera las siguientes pestañas en la página:
 
 Manten varias pestañas sincronizadas añadiendo el atributo `syncKey`.
 
-Todas las `<Tabs>` en una página con el mismo valor de `syncKey` mostrarán la misma etiqueta activa. Esto permite a tu lector elegir una vez (por ejemplo, su sistema operativo o gestor de paquetes) y ver su elección reflejada en toda la página.
+Todas las `<Tabs>` en una página con el mismo valor de `syncKey` mostrarán la misma etiqueta activa. Esto permite a tu lector elegir una vez (por ejemplo, su sistema operativo o gestor de paquetes) y ver su elección persistida en toda la navegación de la página.
 
 Para sincronizar pestañas relacionadas, añade una propiedad `syncKey` idéntica a cada componente `<Tabs>` y asegúrate de que todos usen las mismas etiquetas `<TabItem>`:
 
@@ -226,6 +226,38 @@ import { LinkCard } from '@astrojs/starlight/components';
 	/>
 	<LinkCard title="Componentes" href="/es/guides/components/" />
 </CardGrid>
+
+### Botones de enlace
+
+Usa el componente `<LinkButton>` para enlaces de llamada a la acción visualmente distintos.
+Un botón de enlace es útil para dirigir a los usuarios al contenido más relevante o contenido accionable y se usa a menudo en páginas de destino
+
+Un `<LinkButton>` requiere un atributo [`href`](https://developer.mozilla.org/es/docs/Web/HTML/Element/a#href) y opcionalmente acepta otros atributos de enlace como `target`.
+
+El atributo `icon` se puede establecer opcionalmente en el nombre de [uno de los iconos integrados de Starlight](#todos-los-iconos) para incluir un icono junto al texto.
+El atributo ìconPlacemente`se puede usar para colocar el icono antes del texto estableciéndolo en`start`(el valor predeterminado es`end`).
+
+Personaliza la apariencia del botón de enlace utilizando el atributo `variant`, que se puede establecer en `primary` (el valor predeterminado), `secondary` o `minimal`.
+
+```mdx
+# src/content/docs/example.mdx
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/es/getting-started/">Comienza</LinkButton>
+<LinkButton href="https://docs.astro.build" variant="secondary" icon="external">
+	Relacionado: Astro
+</LinkButton>
+```
+
+El código anterior genera lo siguiente en la página:
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/es/getting-started/">Comienza</LinkButton>
+<LinkButton href="https://docs.astro.build" variant="secondary" icon="external">
+	Relacionado: Astro
+</LinkButton>
 
 ### Apartados
 

@@ -455,6 +455,18 @@ Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https
 Establece esta opción a `false` para excluir una página de los resultados de búsqueda.
 Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
 
+Pagefind no puede estar habilitado cuando la opción [`prerender`](#prerender) está establecida en `false`.
+
+### `prerender`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si las páginas de Starlight deben ser pre-renderizadas a HTML estático o renderizadas bajo demanda por un [adaptador SSR](https://docs.astro.build/es/guides/server-side-rendering/).
+
+Las páginas de Starlight se pre-renderizan de forma predeterminada.
+Si estás usando un adaptador SSR y deseas renderizar las páginas de Starlight bajo demanda, establece `prerender: false`.
+
 ### `head`
 
 **tipo:** [`HeadConfig[]`](#headconfig)
