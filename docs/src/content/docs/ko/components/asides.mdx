@@ -1,5 +1,5 @@
 ---
-title: Asides
+title: 보조 내용
 description: Starlight에서 보조 내용을 사용하여 페이지의 주요 콘텐츠와 함께 보조 정보를 표시하는 방법을 알아보세요.
 ---
 
@@ -34,13 +34,13 @@ import { Aside } from '@astrojs/starlight/components';
 ````mdx
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>Some content in an aside.</Aside>
+<Aside>보조 내용의 콘텐츠입니다.</Aside>
 
-<Aside type="caution">Some cautionary content.</Aside>
+<Aside type="caution">몇 가지 주의해야 할 내용입니다.</Aside>
 
 <Aside type="tip">
 
-Other content is also supported in asides.
+보조 내용에는 다른 콘텐츠도 지원됩니다.
 
 ```js
 // 예시 코드 스니펫.
@@ -48,22 +48,22 @@ Other content is also supported in asides.
 
 </Aside>
 
-<Aside type="danger">Do not give your password to anyone.</Aside>
+<Aside type="danger">비밀번호를 다른 사람에게 알려주지 마세요.</Aside>
 ````
 
 <Fragment slot="markdoc">
 
 ````markdoc
 {% aside %}
-Some content in an aside.
+보조 내용의 콘텐츠입니다.
 {% /aside %}
 
 {% aside type="caution" %}
-Some cautionary content.
+몇 가지 주의해야 할 내용입니다.
 {% /aside %}
 
 {% aside type="tip" %}
-Other content is also supported in asides.
+보조 내용에는 다른 콘텐츠도 지원됩니다.
 
 ```js
 // 예시 코드 스니펫.
@@ -71,7 +71,7 @@ Other content is also supported in asides.
 {% /aside %}
 
 {% aside type="danger" %}
-Do not give your password to anyone.
+비밀번호를 다른 사람에게 알려주지 마세요.
 {% /aside %}
 ````
 
@@ -79,13 +79,13 @@ Do not give your password to anyone.
 
 <Fragment slot="preview">
 
-    <Aside>Some content in an aside.</Aside>
+    <Aside>보조 내용의 콘텐츠입니다.</Aside>
 
-    <Aside type="caution">Some cautionary content.</Aside>
+    <Aside type="caution">몇 가지 주의해야 할 내용입니다.</Aside>
 
     <Aside type="tip">
 
-    Other content is also supported in asides.
+    보조 내용에는 다른 콘텐츠도 지원됩니다.
 
     ```js
     // 예시 코드 스니펫.
@@ -93,7 +93,7 @@ Do not give your password to anyone.
 
     </Aside>
 
-    <Aside type="danger">Do not give your password to anyone.</Aside>
+    <Aside type="danger">비밀번호를 다른 사람에게 알려주지 마세요.</Aside>
 
 </Fragment>
 
@@ -108,35 +108,35 @@ Starlight는 또한 `<Aside>` 컴포넌트의 대안으로 Markdown 및 MDX에�
 
 <Preview>
 
-```mdx 'title="Watch out!"'
+```mdx 'title="조심하세요!"'
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside type="caution" title="Watch out!">
-	A warning aside *with* a custom title.
+<Aside type="caution" title="조심하세요!">
+	사용자 정의 제목을 *사용하는* 경고 보조 내용입니다.
 </Aside>
 ```
 
 <Fragment slot="markdoc">
 
-```markdoc 'title="Watch out!"'
-{% aside type="caution" title="Watch out!" %}
-A warning aside *with* a custom title.
+```markdoc 'title="조심하세요!"'
+{% aside type="caution" title="조심하세요!" %}
+사용자 정의 제목을 *사용하는* 경고 보조 내용입니다.
 {% /aside %}
 ```
 
 </Fragment>
 
-<Aside slot="preview" type="caution" title="Watch out!">
-	A warning aside *with* a custom title.
+<Aside slot="preview" type="caution" title="조심하세요!">
+	사용자 정의 제목을 *사용하는* 경고 보조 내용입니다.
 </Aside>
 
 </Preview>
 
-## `<Aside>` Props
+## `<Aside>` 속성
 
 **구현:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
 
-`<Aside>` 컴포넌트는 다음과 같은 props를 허용합니다:
+`<Aside>` 컴포넌트는 다음과 같은 속성을 허용합니다:
 
 ### `type`
 
