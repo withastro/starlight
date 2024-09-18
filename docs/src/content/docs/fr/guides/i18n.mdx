@@ -274,6 +274,118 @@ export const collections = {
 
 Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
 
+## Utiliser les traductions de l'interface utilisateur
+
+Vous pouvez accéder aux [chaînes de l'interface utilisateur intégrées](/fr/guides/i18n/#traduire-linterface-utilisateur-de-starlight) à Starlight ainsi qu'aux chaînes de l'interface utilisateur [définies par l'utilisateur](/fr/guides/i18n/#étendre-le-schéma-de-traduction), et celles [fournies par les modules d'extension](/fr/reference/plugins/#injecttranslations) via une API unifiée utilisant [i18next](https://www.i18next.com/).
+Cela inclut le support de fonctionnalités telles que [l'interpolation](https://www.i18next.com/translation-function/interpolation) et [la pluralisation](https://www.i18next.com/translation-function/plurals).
+
+Dans les composants Astro, cette API est disponible via l'[objet global `Astro`](https://docs.astro.build/fr/reference/api-reference/#astrolocals) sous le nom `Astro.locals.t` :
+
+```astro title="exemple.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+Vous pouvez également utiliser l'API dans les [points de terminaison](https://docs.astro.build/fr/guides/endpoints/), où l'objet `locals` est disponible dans le cadre du [contexte du point de terminaison](https://docs.astro.build/fr/reference/api-reference/#contextlocals):
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+### Afficher une chaîne de l'interface utilisateur
+
+Affichez une chaîne de l'interface utilisateur en utilisant la fonction `locals.t()`.
+C'est une instance de la fonction `t()` d'i18next, qui prend une clé de chaîne d'interface utilisateur en premier argument et renvoie la traduction correspondante pour la langue actuelle.
+
+Par exemple, étant donné un fichier de traduction personnalisé avec le contenu suivant :
+
+```json title="src/content/i18n/fr.json"
+{
+	"link.astro": "Documentation d'Astro",
+	"link.astro.custom": "Documentation d'Astro pour {{feature}}"
+}
+```
+
+La première chaîne d'interface utilisateur peut être affichée en passant `'link.astro'` à la fonction `t()` :
+
+```astro {3}
+<!-- src/components/Exemple.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- Affiche: <a href="...">Documentation d'Astro</a> -->
+```
+
+La deuxième chaîne d'interface utilisateur utilise la [syntaxe d'interpolation](https://www.i18next.com/translation-function/interpolation) d'i18next pour le paramètre `{{feature}}`.
+La valeur de `feature` doit être définie dans un objet d'options passé en tant que deuxième argument à `t()` :
+
+```astro {3}
+<!-- src/components/Exemple.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- Affiche: <a href="...">Documentation d'Astro pour Astro DB</a> -->
+```
+
+Consultez la [documentation d'i18next](https://www.i18next.com/overview/api#t) pour plus d'informations sur l'utilisation de la fonction `t()` avec l'interpolation, le formatage, et plus encore.
+
+### APIs avancées
+
+#### `t.all()`
+
+La fonction `locals.t.all()` renvoie un objet contenant toutes les chaînes d'interface utilisateur disponibles pour la langue actuelle.
+
+```astro
+---
+// src/components/Exemple.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Aller au contenu",
+//      "search.label": "Rechercher",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+Pour vérifier si une clé de traduction existe pour une langue, utilisez la fonction `locals.t.exists()` avec la clé de traduction comme premier argument.
+Passez un deuxième argument facultatif si vous avez besoin de re-définir la langue actuelle.
+
+```astro
+---
+// src/components/Exemple.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+Consultez la [référence pour `exists()` dans la documentation d'i18next](https://www.i18next.com/overview/api#exists) pour plus d'informations.
+
+#### `t.dir()`
+
+La fonction `locals.t.dir()` renvoie la direction du texte de la langue actuelle ou d'une langue spécifique.
+
+```astro
+---
+// src/components/Exemple.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+Consultez la [référence pour `dir()` dans la documentation d'i18next](https://www.i18next.com/overview/api#dir) pour plus d'informations.
+
 ## Accès aux paramètres régionaux
 
 Vous pouvez utiliser [`Astro.currentLocale`](https://docs.astro.build/fr/reference/api-reference/#astrocurrentlocale) pour lire les paramètres régionaux et linguistiques actuels dans les composants `.astro`.
