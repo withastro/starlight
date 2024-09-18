@@ -25,10 +25,13 @@
     "./schema": "./schema.ts"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.14.0"
+    "@astrojs/starlight": ">=0.28.0"
   },
   "dependencies": {
     "@docsearch/css": "^3.6.0",
     "@docsearch/js": "^3.6.0"
+  },
+  "devDependencies": {
+    "@astrojs/starlight": "workspace:*"
   }
 }

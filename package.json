@@ -42,5 +42,13 @@
       "limit": "14.5 kB",
       "gzip": true
     }
-  ]
+  ],
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "search-insights"
+      ]
+    }
+  }
 }
