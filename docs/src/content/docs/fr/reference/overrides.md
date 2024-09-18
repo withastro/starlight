@@ -148,12 +148,6 @@ Un objet JavaScript de type `Date` représentant la date de dernière mise à jo
 
 Un objet `URL` de l'adresse où cette page peut être modifiée si cette fonctionnalité est activée.
 
-#### `labels`
-
-**Type :** `Record<string, string>`
-
-Un objet contenant les chaînes de l’interface utilisateur localisées pour la page courante. Consultez le guide [« Traduire l’interface utilisateur de Starlight »](/fr/guides/i18n/#traduire-linterface-utilisateur-de-starlight) pour obtenir une liste de toutes les clés disponibles.
-
 ---
 
 ## Composants

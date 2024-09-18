@@ -522,6 +522,52 @@ Parcourir la documentation en portugais brésilien générera la barre latérale
 Pour les sites multilingues, la valeur de la propriété `slug` n'inclut pas la portion de langue dans l'URL.
 Par exemple, si vous avez des pages à `en/intro` et `pt-br/intro`, le slug est `intro` lors de la configuration de la barre latérale.
 
+### Internationalisation avec des badges
+
+Pour les [badges](#badges), la propriété `text` peut être une chaîne de caractères, ou pour les sites multilingues, un objet avec des valeurs pour chaque langue différente.
+Lors de l'utilisation de la forme d'objet, les clés doivent être des étiquettes d'identification de langue [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) (par exemple, `en`, `ar` ou `zh-CN`) :
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							fr: 'Nouveau',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+Parcourir la documentation en portugais brésilien générera la barre latérale suivante :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
 ## Groupes rétractables
 
 Les groupes de liens peuvent être rétractés par défaut en définissant la propriété `collapsed` à `true`.
