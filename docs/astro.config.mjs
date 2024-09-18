@@ -135,6 +135,7 @@ export default defineConfig({
 					label: 'Components',
 					translations: {
 						fr: 'Composants',
+						ru: 'Компоненты',
 					},
 					autogenerate: { directory: 'components' },
 				},
