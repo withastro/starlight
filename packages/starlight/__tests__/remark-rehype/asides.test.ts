@@ -270,3 +270,35 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 		"<p>This is a:test of a sentence with a TEXT FROM REMARK PLUGIN directive handled by another remark plugin and some other text:name[content]{key="val"} directives not handled by any plugin.</p>"
 	`);
 });
+
+test('does not transform back directive nodes with data', async () => {
+	const processor = await createMarkdownProcessor({
+		remarkPlugins: [
+			...starlightAsides({
+				starlightConfig,
+				astroConfig: {
+					root: new URL(import.meta.url),
+					srcDir: new URL('./_src/', import.meta.url),
+				},
+				useTranslations,
+			}),
+			// A custom remark plugin updating the node with data that should be consumed by rehype.
+			function customRemarkPlugin() {
+				return function transformer(tree: Root) {
+					visit(tree, (node) => {
+						if (node.type !== 'textDirective') return;
+						node.data ??= {};
+						node.data.hName = 'span';
+						node.data.hProperties = { class: `api` };
+					});
+				};
+			},
+			remarkDirectivesRestoration,
+		],
+	});
+
+	const res = await processor.render(`This method is available in the :api[thing] API.`);
+	expect(res.code).toMatchInlineSnapshot(
+		`"<p>This method is available in the <span class="api">thing</span> API.</p>"`
+	);
+});
