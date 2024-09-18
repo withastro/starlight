@@ -3,6 +3,13 @@ import { defineVitestConfig } from '../test-config';
 export default defineVitestConfig({
 	title: 'Plugins',
 	sidebar: [{ label: 'Getting Started', link: 'getting-started' }],
+	defaultLocale: 'en',
+	locales: {
+		en: { label: 'English', lang: 'en' },
+		fr: { label: 'French' },
+		ar: { label: 'Arabic', dir: 'rtl' },
+		'pt-br': { label: 'Brazilian Portuguese', lang: 'pt-BR' },
+	},
 	plugins: [
 		{
 			name: 'test-plugin-1',
@@ -37,10 +44,23 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-3',
 			hooks: {
-				async setup({ config, updateConfig }) {
+				async setup({ config, updateConfig, injectTranslations }) {
 					await Promise.resolve();
 					updateConfig({
 						description: `${config.description} - plugin 3`,
+					});
+					injectTranslations({
+						en: {
+							'search.label': 'Search the thing',
+							'testPlugin3.doThing': 'Do the Plugin 3 thing',
+						},
+						fr: {
+							'search.label': 'Rechercher le truc',
+							'testPlugin3.doThing': 'Faire la chose du plugin 3',
+						},
+						ar: {
+							'testPlugin3.doThing': 'قم بعمل المكون الإضافي 3',
+						},
 					});
 				},
 			},

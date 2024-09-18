@@ -1,20 +1,18 @@
 ---
 import Select from './Select.astro';
 import type { Props } from '../props';
-
-const { labels } = Astro.props;
 ---
 
 <starlight-theme-select>
 	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
 	<Select
 		icon="laptop"
-		label={labels['themeSelect.accessibleLabel']}
+		label={Astro.locals.t('themeSelect.accessibleLabel')}
 		value="auto"
 		options={[
-			{ label: labels['themeSelect.dark'], selected: false, value: 'dark' },
-			{ label: labels['themeSelect.light'], selected: false, value: 'light' },
-			{ label: labels['themeSelect.auto'], selected: true, value: 'auto' },
+			{ label: Astro.locals.t('themeSelect.dark'), selected: false, value: 'dark' },
+			{ label: Astro.locals.t('themeSelect.light'), selected: false, value: 'light' },
+			{ label: Astro.locals.t('themeSelect.auto'), selected: true, value: 'auto' },
 		]}
 		width="6.25em"
 	/>
