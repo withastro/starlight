@@ -1,7 +1,7 @@
 import type { AstroBuiltinAttributes } from 'astro';
 import type { HTMLAttributes } from 'astro/types';
 import { z } from 'astro/zod';
-import { BadgeConfigSchema } from './badge';
+import { I18nBadgeConfigSchema } from './badge';
 import { stripLeadingAndTrailingSlashes } from '../utils/path';
 
 const SidebarBaseSchema = z.object({
@@ -9,8 +9,8 @@ const SidebarBaseSchema = z.object({
 	label: z.string(),
 	/** Translations of the `label` for each supported language. */
 	translations: z.record(z.string()).default({}),
-	/** Adds a badge to the link item */
-	badge: BadgeConfigSchema(),
+	/** Adds a badge to the item */
+	badge: I18nBadgeConfigSchema(),
 });
 
 const SidebarGroupSchema = SidebarBaseSchema.extend({
