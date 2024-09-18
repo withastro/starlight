@@ -518,6 +518,52 @@ starlight({
 다국어 사이트에서는 `slug` 값에 URL의 언어 부분이 포함되지 않습니다.
 예를 들어 `en/intro` 및 `pt-br/intro`에 페이지가 있는 경우, 사이드바를 구성할 때 슬러그는 `intro`입니다.
 
+### 배지 국제화
+
+[배지](#배지)의 경우 `text` 속성은 문자열이며, 다국어 사이트의 경우 각 로케일별 값이 포함된 객체일 수 있습니다.
+객체 양식을 사용하는 경우 키는 [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 태그 (예: `en`, `ar` 또는 `zh-CN`)여야 합니다:
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							en: 'New',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+브라질 포르투갈어로 문서를 검색하면 다음과 같은 사이드바가 생성됩니다:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
 ## 그룹 축소
 
 `collapsed` 속성을 `true`로 설정하면 링크 그룹의 기본 상태를 접힌 상태로 만들 수 있습니다.
