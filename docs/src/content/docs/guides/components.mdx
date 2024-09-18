@@ -186,7 +186,7 @@ Add the `stagger` attribute to shift the second column of cards vertically and a
 
 Use the `<LinkCard>` component to link prominently to different pages.
 
-A `<LinkCard>` requires a `title` and an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) attribute. You can optionally include a short `description` or other link attributes such as `target`.
+A `<LinkCard>` requires a `title` and an [`href`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href) attribute. You can optionally include a short `description`, a [badge](/guides/sidebar/#badges), and other link attributes such as `target`.
 
 Group multiple `<LinkCard>` components in `<CardGrid>` to display cards side-by-side when there’s enough space.
 
@@ -203,7 +203,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
-	<LinkCard title="Components" href="/guides/components/" />
+	<LinkCard title="Sidebar Navigation" badge="New" href="/guides/sidebar/" />
 </CardGrid>
 ```
 
@@ -219,7 +219,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 <CardGrid>
 	<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
-	<LinkCard title="Components" href="/guides/components/" />
+	<LinkCard title="Sidebar Navigation" badge="New" href="/guides/sidebar/" />
 </CardGrid>
 
 ### Link Buttons
