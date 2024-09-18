@@ -27,6 +27,7 @@ interface StarlightPlugin {
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
+      injectTranslations: (Record<string, Record<string, string>>) => void;
     }) => void | Promise<void>;
   };
 }
@@ -160,4 +161,72 @@ export default {
 
 ```shell
 [long-process-plugin] Начало длительного процесса...
+```
+
+#### `injectTranslations`
+
+**тип:** `(translations: Record<string, Record<string, string>>) => void`
+
+Функция обратного вызова для добавления или обновления строк перевода, используемых в [API локализации](/ru/guides/i18n/#использование-переводов-пользовательского-интерфейса) Starlight.
+
+В следующем примере плагин инжектирует переводы для пользовательской строки пользовательского интерфейса с именем `myPlugin.doThing` для локалей `en` и `ru`:
+
+```ts {6-13} /(injectTranslations)[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-with-translations',
+  hooks: {
+    setup({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        ru: {
+          'myPlugin.doThing': 'Делай дело',
+        },
+      });
+    },
+  },
+};
+```
+
+Чтобы использовать инжектированные переводы в пользовательском интерфейсе плагина, следуйте руководству [Использование переводов пользовательского интерфейса](/ru/guides/i18n/#использование-переводов-пользовательского-интерфейса).
+
+Типы для инжектируемых строк перевода плагина генерируются автоматически в проекте пользователя, но ещё не доступны при работе с кодовой базой вашего плагина.
+Чтобы ввести объект `locals.t` в контексте вашего плагина, объявите следующие глобальные пространства имён в файле декларации TypeScript:
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // Определяем объект `locals.t` в контексте плагина.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // Определяем дополнительные переводы плагинов в интерфейсе `I18n`.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+Вы также можете определить типы интерфейса `StarlightApp.I18n` из исходного файла, если у вас есть объект, содержащий ваши переводы.
+
+Например, учитывая следующий исходный файл:
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  ru: { 'myPlugin.doThing': 'Делай дело' },
+};
+```
+
+Следующее объявление будет определять типы по английским ключам в исходном файле:
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
 ```

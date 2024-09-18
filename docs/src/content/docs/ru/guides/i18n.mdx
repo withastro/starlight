@@ -277,6 +277,118 @@ export const collections = {
 
 Дополнительную информацию о схемах коллекции контента см. в разделе [Определение схемы коллекции](https://docs.astro.build/ru/guides/content-collections/#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%85%D0%B5%D0%BC%D1%8B-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8) в документации Astro.
 
+## Использование переводов пользовательского интерфейса
+
+Вы можете получить доступ к [встроенным строкам пользовательского интерфейса](/ru/guides/i18n/#перевод-интерфейса-starlight) Starlight, а также к [пользовательским](/ru/guides/i18n/#расширение-схемы-перевода) и [предоставляемым плагинами](/ru/reference/plugins/#injecttranslations) строкам пользовательского интерфейса через единый API на базе [i18next](https://www.i18next.com/).
+Это включает поддержку таких функций, как [интерполяция](https://www.i18next.com/translation-function/interpolation) и [плюрализация](https://www.i18next.com/translation-function/plurals).
+
+В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/ru/reference/api-reference/#astrolocals) в виде `Astro.locals.t`:
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/ru/reference/api-reference/#contextlocals):
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+### Рендеринг строки пользовательского интерфейса
+
+Отрисовка строк пользовательского интерфейса с помощью функции `locals.t()`.
+Это экземпляр функции i18next `t()`, которая принимает в качестве первого аргумента строку-ключ UI и возвращает соответствующий перевод для текущего языка.
+
+Например, задан файл пользовательского перевода со следующим содержанием:
+
+```json title="src/content/i18n/ru.json"
+{
+	"link.astro": "Документация Astro",
+	"link.astro.custom": "Документация Astro о {{feature}}"
+}
+```
+
+Первую строку пользовательского интерфейса можно отобразить, передав `'link.astro'` в функцию `t()`:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- Отрисовывает: <a href="...">Документация Astro</a> -->
+```
+
+Вторая строка пользовательского интерфейса использует [синтаксис интерполяции](https://www.i18next.com/translation-function/interpolation) i18next для размещения `{{feature}}`.
+Значение для `feature` должно быть задано в объекте options, передаваемом в качестве второго аргумента в `t()`:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/ru/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- Отрисовывает: <a href="...">Документация Astro о Astro DB</a> -->
+```
+
+Подробнее о том, как использовать функцию `t()` для интерполяции, форматирования и т. д., см. в [документации i18next](https://www.i18next.com/overview/api#t).
+
+### Расширенные API
+
+#### `t.all()`
+
+Функция `locals.t.all()` возвращает объект, содержащий все строки пользовательского интерфейса, доступные для текущей локали.
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Перейти к содержанию",
+//      "search.label": "Поиск",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+Чтобы проверить, существует ли ключ перевода для локали, используйте функцию `locals.t.exists()` с ключом перевода в качестве первого аргумента.
+Передайте необязательный второй аргумент, если вам нужно переопределить текущую локаль.
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+Дополнительную информацию см. в статье [`exists()` в документации i18next](https://www.i18next.com/overview/api#exists).
+
+#### `t.dir()`
+
+Функция `locals.t.dir()` возвращает направление текста текущей или определённой локали.
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+Дополнительную информацию см. в статье [`dir()` в документации i18next](https://www.i18next.com/overview/api#dir).
+
 ## Доступ к текущей локали
 
 Вы можете использовать [`Astro.currentLocale`](https://docs.astro.build/ru/reference/api-reference/#astrocurrentlocale) для получения текущей локали в компонентах `.astro`.
