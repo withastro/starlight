@@ -73,4 +73,32 @@ describe('createTranslationSystemFromFs', () => {
 			)
 		).toThrow(SyntaxError);
 	});
+
+	test('creates a translation system that uses custom strings injected by plugins', () => {
+		const useTranslations = createTranslationSystemFromFs(
+			{
+				locales: { en: { label: 'English', dir: 'ltr' } },
+				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
+			},
+			// Using non-existent `_src/` to ignore custom files in this test fixture.
+			{ srcDir: new URL('./_src/', import.meta.url) },
+			{ en: { 'page.editLink': 'Make this page even more different' } }
+		);
+		const t = useTranslations('en');
+		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page even more different"');
+	});
+
+	test('creates a translation system that prioritizes user translations over plugin translations', () => {
+		const useTranslations = createTranslationSystemFromFs(
+			{
+				locales: { en: { label: 'English', dir: 'ltr' } },
+				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
+			},
+			// Using `src/` to load custom files in this test fixture.
+			{ srcDir: new URL('./src/', import.meta.url) },
+			{ en: { 'page.editLink': 'Make this page even more different' } }
+		);
+		const t = useTranslations('en');
+		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
+	});
 });

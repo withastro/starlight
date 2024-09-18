@@ -26,6 +26,7 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./locals": "./locals.ts",
     "./components": "./components.ts",
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",
@@ -171,7 +172,7 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^4.8.6"
+    "astro": "^4.14.0"
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.1.0",
@@ -194,6 +195,7 @@
     "hast-util-select": "^6.0.2",
     "hast-util-to-string": "^3.0.0",
     "hastscript": "^9.0.0",
+    "i18next": "^23.11.5",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.0",
     "mdast-util-to-string": "^4.0.0",

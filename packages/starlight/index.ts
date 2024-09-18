@@ -1,3 +1,11 @@
+/**
+ * These triple-slash directives defines dependencies to various declaration files that will be
+ * loaded when a user imports the Starlight integration in their Astro configuration file. These
+ * directives must be first at the top of the file and can only be preceded by this comment.
+ */
+/// <reference path="./locals.d.ts" />
+/// <reference path="./i18n.d.ts" />
+
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
@@ -9,7 +17,12 @@ import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import { createTranslationSystemFromFs } from './utils/translations-fs';
-import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
+import {
+	injectPluginTranslationsTypes,
+	runPlugins,
+	type PluginTranslations,
+	type StarlightUserConfigWithPlugins,
+} from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
 
@@ -18,10 +31,12 @@ export default function StarlightIntegration({
 	...opts
 }: StarlightUserConfigWithPlugins): AstroIntegration {
 	let userConfig: StarlightConfig;
+	let pluginTranslations: PluginTranslations = {};
 	return {
 		name: '@astrojs/starlight',
 		hooks: {
 			'astro:config:setup': async ({
+				addMiddleware,
 				command,
 				config,
 				injectRoute,
@@ -42,10 +57,17 @@ export default function StarlightIntegration({
 					config.i18n
 				);
 
-				const { integrations } = pluginResult;
+				const integrations = pluginResult.integrations;
+				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
 
-				const useTranslations = createTranslationSystemFromFs(starlightConfig, config);
+				const useTranslations = createTranslationSystemFromFs(
+					starlightConfig,
+					config,
+					pluginTranslations
+				);
+
+				addMiddleware({ entrypoint: '@astrojs/starlight/locals', order: 'pre' });
 
 				if (!starlightConfig.disable404Route) {
 					injectRoute({
@@ -91,7 +113,9 @@ export default function StarlightIntegration({
 
 				updateConfig({
 					vite: {
-						plugins: [vitePluginStarlightUserConfig(command, starlightConfig, config)],
+						plugins: [
+							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
+						],
 					},
 					markdown: {
 						remarkPlugins: [
@@ -110,6 +134,10 @@ export default function StarlightIntegration({
 					},
 					i18n: astroI18nConfig,
 				});
+			},
+
+			'astro:config:done': ({ injectTypes }) => {
+				injectPluginTranslationsTypes(pluginTranslations, injectTypes);
 			},
 
 			'astro:build:done': ({ dir }) => {

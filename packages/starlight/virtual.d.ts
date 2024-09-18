@@ -28,6 +28,11 @@ declare module 'virtual:starlight/user-images' {
 	};
 }
 
+declare module 'virtual:starlight/plugin-translations' {
+	const PluginTranslations: import('./utils/plugins').PluginTranslations;
+	export default PluginTranslations;
+}
+
 declare module 'virtual:starlight/collection-config' {
 	export const collections: import('astro:content').ContentConfig['collections'] | undefined;
 }

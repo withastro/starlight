@@ -2,14 +2,14 @@
 import MobileMenuToggle from 'virtual:starlight/components/MobileMenuToggle';
 import type { Props } from '../props';
 
-const { hasSidebar, labels } = Astro.props;
+const { hasSidebar } = Astro.props;
 ---
 
 <div class="page sl-flex">
 	<header class="header"><slot name="header" /></header>
 	{
 		hasSidebar && (
-			<nav class="sidebar" aria-label={labels['sidebarNav.accessibleLabel']}>
+			<nav class="sidebar" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle {...Astro.props} />
 				<div id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">
