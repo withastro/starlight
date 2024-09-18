@@ -5,13 +5,16 @@ import type {
 	InternalSidebarLinkItem,
 } from '../../../packages/starlight/schemas/sidebar';
 import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
+import type { Badge } from '../../../packages/starlight/schemas/badge';
 import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
 
 interface Props {
 	config: SidebarConfig;
 }
 
-type SidebarConfig = Exclude<SidebarItem, AutoSidebarGroup | InternalSidebarLinkItem>[];
+type SidebarConfig = (Exclude<SidebarItem, AutoSidebarGroup | InternalSidebarLinkItem> & {
+	badge?: Badge;
+})[];
 
 const { config } = Astro.props;
 
