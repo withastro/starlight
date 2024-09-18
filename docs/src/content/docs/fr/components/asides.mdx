@@ -1,0 +1,158 @@
+---
+title: Encarts
+description: Apprenez à utiliser les encarts dans Starlight pour afficher des informations secondaires à côté du contenu principal d'une page.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Pour afficher des informations secondaires à côté du contenu principal d'une page, utilisez le composant `<Aside>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Aside slot="aperçu">
+Incluez des informations supplémentaires non essentielles dans un `<Aside>`.
+</Aside>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## Utilisation
+
+Affichez un encart à l'aide du composant `<Aside>`.
+
+Un `<Aside>` peut avoir un attribut facultatif [`type`](#type), qui contrôle la couleur, l'icône et le titre par défaut de l'encart.
+
+<Preview>
+
+````mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Un peu de contenu en encart.</Aside>
+
+<Aside type="caution">Quelques mises en garde.</Aside>
+
+<Aside type="tip">
+
+	D'autres contenus sont également pris en charge dans les encarts.
+
+```js
+// Un extrait de code, par exemple.
+```
+
+</Aside>
+
+<Aside type="danger">Ne communiquez votre mot de passe à personne.</Aside>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% aside %}
+Un peu de contenu en encart.
+{% /aside %}
+
+{% aside type="caution" %}
+Quelques mises en garde.
+{% /aside %}
+
+{% aside type="tip" %}
+D'autres contenus sont également pris en charge dans les encarts.
+
+```js
+// Un extrait de code, par exemple.
+```
+{% /aside %}
+
+{% aside type="danger" %}
+Ne communiquez votre mot de passe à personne.
+{% /aside %}
+````
+
+</Fragment>
+
+<Fragment slot="preview">
+
+    <Aside>Un peu de contenu en encart.</Aside>
+
+    <Aside type="caution">Quelques mises en garde.</Aside>
+
+    <Aside type="tip">
+
+	D'autres contenus sont également pris en charge dans les encarts.
+
+    ```js
+    // Un extrait de code, par exemple.
+    ```
+
+    </Aside>
+
+    <Aside type="danger">Ne communiquez votre mot de passe à personne.</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlight fournit également une syntaxe personnalisée pour afficher les encarts dans Markdown et MDX comme alternative au composant `<Aside>`.
+Voir le guide [« Authoring Content in Markdown »](/fr/guides/authoring-content/#asides) pour plus de détails sur la syntaxe personnalisée.
+
+### Utilisation de titres personnalisés
+
+Remplacez les titres par défaut des encarts en utilisant l'attribut [`title`](#title).
+
+<Preview>
+
+```mdx 'title="Watch out!"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Attention !">
+	Un avertissement est mis de côté *avec* un titre personnalisé.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="Attention !"'
+{% aside type="caution" title="Attention !" %}
+Un avertissement est mis de côté *avec* un titre personnalisé.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="caution" title="Attention !">
+	Un avertissement est mis de côté *avec* un titre personnalisé.
+</Aside>
+
+</Preview>
+
+## `<Aside>` Props
+
+**Implémentation :** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+The `<Aside>` component accepts the following props:
+
+### `type`
+
+**type :** `'note' | 'tip' | 'caution' | 'danger'`
+**Par défaut :** `'note'`
+
+Le type d'encart à afficher :
+
+- L'encart `note` (par défaut) est bleu et affiche une icône d'information.
+- L'encart `tip` est violet et affiche une icône de fusée.
+- L'encart `caution` est jaune et affiche une icône d'avertissement triangulaire.
+- L'encarts `danger` est rouge et affiche une icône d'avertissement octogonale.
+
+### `title`
+
+**type :** `string`
+
+Le titre de l'encart à afficher.
+Si `title` n'est pas défini, le titre par défaut du `type` de l'encart en cours sera utilisé.
