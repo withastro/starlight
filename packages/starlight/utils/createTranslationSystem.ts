@@ -1,27 +1,60 @@
+import i18next, { type ExistsFunction, type TFunction } from 'i18next';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import builtinTranslations from '../translations/index';
 import { BuiltInDefaultLocale } from './i18n';
 import type { StarlightConfig } from './user-config';
+import type { UserI18nKeys, UserI18nSchema } from './translations';
+
+/**
+ * The namespace for i18next resources used by Starlight.
+ * All translations handled by Starlight are stored in the same namespace and Starlight always use
+ * a new instance of i18next configured for this namespace.
+ */
+export const I18nextNamespace = 'starlight' as const;
 
 export function createTranslationSystem<T extends i18nSchemaOutput>(
+	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	userTranslations: Record<string, T>,
-	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>
+	pluginTranslations: Record<string, T> = {}
 ) {
-	/** User-configured default locale. */
-	const defaultLocale = config.defaultLocale?.locale || 'root';
+	const defaultLocale =
+		config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang;
 
-	/** Default map of UI strings based on Starlight and user-configured defaults. */
-	const defaults = buildDictionary(
-		builtinTranslations.en!,
-		userTranslations.en,
-		builtinTranslations[defaultLocale] || builtinTranslations[stripLangRegion(defaultLocale)],
-		userTranslations[defaultLocale]
-	);
+	const translations = {
+		[defaultLocale]: buildResources(
+			builtinTranslations[defaultLocale],
+			builtinTranslations[stripLangRegion(defaultLocale)],
+			pluginTranslations[defaultLocale],
+			userTranslations[defaultLocale]
+		),
+	};
+
+	if (config.locales) {
+		for (const locale in config.locales) {
+			const lang = localeToLang(locale, config.locales, config.defaultLocale);
+
+			translations[lang] = buildResources(
+				builtinTranslations[lang] || builtinTranslations[stripLangRegion(lang)],
+				pluginTranslations[lang],
+				userTranslations[lang]
+			);
+		}
+	}
+
+	const i18n = i18next.createInstance();
+	i18n.init({
+		resources: translations,
+		fallbackLng:
+			config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang,
+	});
 
 	/**
 	 * Generate a utility function that returns UI strings for the given `locale`.
 	 *
-	 * Also includes an `all()` method for getting the entire dictionary.
+	 * Also includes a few utility methods:
+	 * - `all()` method for getting the entire dictionary.
+	 * - `exists()` method for checking if a key exists in the dictionary.
+	 * - `dir()` method for getting the text direction of the locale.
 	 *
 	 * @param {string | undefined} [locale]
 	 * @example
@@ -30,16 +63,19 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	 * // => 'Search'
 	 * const dictionary = t.all();
 	 * // => { 'skipLink.label': 'Skip to content', 'search.label': 'Search', ... }
+	 * const exists = t.exists('search.label');
+	 * // => true
+	 * const dir = t.dir();
+	 * // => 'ltr'
 	 */
-	return function useTranslations(locale: string | undefined) {
+	return (locale: string | undefined) => {
 		const lang = localeToLang(locale, config.locales, config.defaultLocale);
-		const dictionary = buildDictionary(
-			defaults,
-			builtinTranslations[lang] || builtinTranslations[stripLangRegion(lang)],
-			userTranslations[lang]
-		);
-		const t = <K extends keyof typeof dictionary>(key: K) => dictionary[key];
-		t.all = () => dictionary;
+
+		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
+		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace);
+		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options });
+		t.dir = (dirLang = lang) => i18n.dir(dirLang);
+
 		return t;
 	};
 }
@@ -70,12 +106,11 @@ function localeToLang(
 
 type BuiltInStrings = (typeof builtinTranslations)['en'];
 
-/** Build a dictionary by layering preferred translation sources. */
-function buildDictionary<T extends Record<string, string | undefined>>(
-	base: BuiltInStrings,
+/** Build an i18next resources dictionary by layering preferred translation sources. */
+function buildResources<T extends Record<string, string | undefined>>(
 	...dictionaries: (T | BuiltInStrings | undefined)[]
-): BuiltInStrings & T {
-	const dictionary = { ...base };
+): { [I18nextNamespace]: BuiltInStrings & T } {
+	const dictionary: Partial<BuiltInStrings> = {};
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
 		for (const key in dict) {
@@ -83,5 +118,13 @@ function buildDictionary<T extends Record<string, string | undefined>>(
 			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}
-	return dictionary as BuiltInStrings & T;
+	return { [I18nextNamespace]: dictionary as BuiltInStrings & T };
 }
+
+export type I18nKeys = UserI18nKeys | keyof StarlightApp.I18n;
+
+export type I18nT = TFunction<'starlight', undefined> & {
+	all: () => UserI18nSchema;
+	exists: ExistsFunction;
+	dir: (lang?: string) => 'ltr' | 'rtl';
+};
