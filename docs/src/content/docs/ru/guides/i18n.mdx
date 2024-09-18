@@ -286,7 +286,7 @@ export const collections = {
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
-  {Astro.locals.t('404.text')}
+	{Astro.locals.t('404.text')}
 </p>
 ```
 
@@ -294,7 +294,7 @@ export const collections = {
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
-  return new Response(context.locals.t('404.text'));
+	return new Response(context.locals.t('404.text'));
 };
 ```
 
@@ -307,8 +307,8 @@ export const GET = (context) => {
 
 ```json title="src/content/i18n/ru.json"
 {
-  "link.astro": "Документация Astro",
-  "link.astro.custom": "Документация Astro о {{feature}}"
+	"link.astro": "Документация Astro",
+	"link.astro.custom": "Документация Astro о {{feature}}"
 }
 ```
 
@@ -317,7 +317,7 @@ export const GET = (context) => {
 ```astro {3}
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/">
-  {Astro.locals.t('link.astro')}
+	{Astro.locals.t('link.astro')}
 </a>
 <!-- Отрисовывает: <a href="...">Документация Astro</a> -->
 ```
@@ -328,7 +328,7 @@ export const GET = (context) => {
 ```astro {3}
 <!-- src/components/Example.astro -->
 <a href="https://docs.astro.build/ru/guides/astro-db/">
-  {Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
 </a>
 <!-- Отрисовывает: <a href="...">Документация Astro о Astro DB</a> -->
 ```
