@@ -20,7 +20,7 @@ const showContentTypeTabs = Astro.slots.has('markdoc');
 		)
 	}
 	<div class="preview">
-		<figcaption>Preview</figcaption>
+		<figcaption>{Astro.locals.t('component.preview')}</figcaption>
 		<div class="preview-content"><slot name="preview" /></div>
 	</div>
 </figure>
