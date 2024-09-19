@@ -38,7 +38,8 @@ const pagefindEnabled =
 	!Astro.props.entry.slug.endsWith('/404') &&
 	pagefindConfig !== false;
 
-const pagefindWeight = typeof pagefindConfig === 'object' && pagefindConfig.weight;
+const pagefindWeight =
+	pagefindEnabled && typeof pagefindConfig === 'object' && pagefindConfig.weight;
 ---
 
 <html
