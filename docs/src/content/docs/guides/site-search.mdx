@@ -42,6 +42,44 @@ This text will be hidden from search.
 </div>
 ```
 
+## Adjust ranking in search results
+
+Pagefind's index ranking can be adjusted using the [`data-pagefind-weight`](https://pagefind.app/docs/weighting/#ranking-content-higher-or-lower) attribute. This can be used to [adjust a whole page](#adjust-whole-page-rank) or [individual sections of a page](#adjust-individual-section-rank).
+
+Learn more about about how the weight value impacts search results in the [Pagefind Weighting content guide](https://pagefind.app/docs/weighting/).
+
+### Adjust whole page rank
+
+To adjust where a page is listed in the Pagefind search results, add the [`pagefind.weight`](/reference/frontmatter/#pagefind) property to the page's frontmatter:
+
+```md title="src/content/docs/important-doc.md" ins={3,4}
+---
+title: Content to hide from search
+pagefind:
+  weight: 2
+---
+```
+
+### Adjust individual section rank
+
+Pagefind will use the [`data-pagefind-weight`](https://pagefind.app/docs/weighting/#ranking-content-higher-or-lower) attribute to adjust the ranking of search results.
+
+In this example, the 
+
+```md title="src/content/docs/custom-weighted-page.md" ins="data-pagefind-weight=\"5.0\""
+---
+title: Custom Weighted Page
+---
+
+This text will be ranked normally.
+
+<div data-pagefind-weight="5.0">
+
+This text will be ranked higher in search results.
+
+</div>
+```
+
 ## Alternative search providers
 
 ### Algolia DocSearch
