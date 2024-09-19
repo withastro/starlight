@@ -1,0 +1,225 @@
+---
+title: 파일 트리
+description: Starlight에서 파일 아이콘과 접을 수 있는 하위 디렉터리를 사용하여 디렉터리 구조를 표시하는 방법을 알아보세요.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+파일 아이콘과 접을 수 있는 하위 디렉터리가 있는 디렉터리의 구조를 표시하려면 `<FileTree>` 컴포넌트를 사용하세요.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs **중요** 파일
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+`<FileTree>` 컴포넌트를 사용하여 파일 아이콘과 접을 수 있는 하위 디렉터리가 있는 파일 트리를 표시합니다.
+
+`<FileTree>`에서 [순서가 지정되지 않은 Markdown 목록](https://www.markdownguide.org/basic-syntax/#unordered-lists)을 사용하여 파일 및 디렉터리의 구조를 지정하세요.
+중첩된 목록을 사용하여 하위 디렉터리를 생성하거나 목록 항목 끝에 `/`를 추가하여 특정 내용이 없는 디렉터리로 렌더링합니다.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### 항목 강조 표시
+
+파일이나 디렉터리의 이름을 굵은 글씨로 만들어 눈에 띄게 만드세요 (예: `**README.md**`).
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### 주석 추가
+
+이름 뒤에 텍스트를 더 추가하여 파일이나 디렉터리에 주석을 추가합니다.
+주석에서 굵게 및 기울임꼴과 같은 인라인 Markdown 서식이 지원됩니다.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro **중요** 파일
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro **중요** 파일
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro **중요** 파일
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### 자리 표시자 추가
+
+`...` 또는 `…`을 이름으로 사용하여 자리 표시자 파일과 디렉터리를 추가합니다.
+이는 폴더에 더 많은 항목이 포함될 수 있음을 모든 항목을 일일이 명시하지 않고도 독자에게 알려주는 데 유용할 수 있습니다.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## `<FileTree>` 속성
+
+**구현:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+`<FileTree>` 컴포넌트는 어떤 속성도 허용하지 않습니다.
