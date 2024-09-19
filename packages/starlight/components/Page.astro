@@ -31,10 +31,14 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
+const pagefindConfig = Astro.props.entry.data.pagefind;
+
 const pagefindEnabled =
 	Astro.props.entry.slug !== '404' &&
 	!Astro.props.entry.slug.endsWith('/404') &&
-	Astro.props.entry.data.pagefind !== false;
+	pagefindConfig !== false;
+
+const pagefindWeight = typeof pagefindConfig === 'object' && pagefindConfig.weight;
 ---
 
 <html
@@ -85,6 +89,7 @@ const pagefindEnabled =
 				<PageSidebar slot="right-sidebar" {...Astro.props} />
 				<main
 					data-pagefind-body={pagefindEnabled}
+					data-pagefind-weight={pagefindWeight}
 					lang={Astro.props.entryMeta.lang}
 					dir={Astro.props.entryMeta.dir}
 				>
