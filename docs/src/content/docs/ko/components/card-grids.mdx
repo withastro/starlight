@@ -14,7 +14,7 @@ import Preview from '~/components/component-preview.astro';
 <Preview>
 
 <CardGrid slot="preview">
-  <Card title="별" icon="star">
+	<Card title="별" icon="star">
 		시리우스, 베가, 베텔게우스
 	</Card>
 	<Card title="달" icon="moon">
@@ -88,7 +88,10 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
-	<LinkCard title="Markdown으로 콘텐츠 작성" href="/ko/guides/authoring-content/" />
+	<LinkCard
+		title="Markdown으로 콘텐츠 작성"
+		href="/ko/guides/authoring-content/"
+	/>
 	<LinkCard title="컴포넌트" href="/ko/components/using-components/" />
 </CardGrid>
 ```
@@ -106,7 +109,10 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 </Fragment>
 
 <CardGrid slot="preview">
-	<LinkCard title="Markdown으로 콘텐츠 작성" href="/ko/guides/authoring-content/" />
+	<LinkCard
+		title="Markdown으로 콘텐츠 작성"
+		href="/ko/guides/authoring-content/"
+	/>
 	<LinkCard title="컴포넌트" href="/ko/components/using-components/" />
 </CardGrid>
 
