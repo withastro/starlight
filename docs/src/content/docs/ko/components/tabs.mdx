@@ -153,10 +153,10 @@ _외계 행성:_
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="별" icon="별">
+	<TabItem label="별" icon="star">
 		시리우스, 베가, 베텔게우스
 	</TabItem>
-	<TabItem label="달" icon="달">
+	<TabItem label="달" icon="moon">
 		이오, 유로파, 가니메데
 	</TabItem>
 </Tabs>
@@ -166,11 +166,11 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ```markdoc /icon="\w+"/
 {% tabs %}
-{% tabitem label="별" icon="별" %}
+{% tabitem label="별" icon="star" %}
 시리우스, 베가, 베텔게우스
 {% /tabitem %}
 
-{% tabitem label="달" icon="달" %}
+{% tabitem label="달" icon="moon" %}
 이오, 유로파, 가니메데
 {% /tabitem %}
 {% /tabs %}
@@ -179,10 +179,10 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Fragment>
 
 <Tabs slot="preview">
-	<TabItem label="별" icon="별">
+	<TabItem label="별" icon="star">
 		시리우스, 베가, 베텔게우스
 	</TabItem>
-	<TabItem label="달" icon="달">
+	<TabItem label="달" icon="moon">
 		이오, 유로파, 가니메데
 	</TabItem>
 </Tabs>
