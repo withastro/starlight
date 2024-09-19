@@ -1,0 +1,179 @@
+---
+title: 카드 그리드
+description: Starlight에서 여러 카드를 그리드로 묶는 방법을 알아보세요.
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+여러 개의 [`<Card>`](/ko/components/cards/) 또는 [`<LinkCard>`](/ko/components/link-cards/) 컴포넌트를 그리드에 래핑하려면 `<CardGrid>` 컴포넌트를 사용합니다.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="별" icon="star">
+		시리우스, 베가, 베텔게우스
+	</Card>
+	<Card title="달" icon="moon">
+		이오, 유로파, 가니메데
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+### 카드 그룹화
+
+충분한 공간이 있을 때 여러 개의 [`<Card>`](/ko/components/cards/) 컴포넌트를 `<CardGrid>` 컴포넌트로 그룹화하여 나란히 표시합니다.
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="확인하세요" icon="open-book">
+		강조하고 싶은 흥미로운 콘텐츠.
+	</Card>
+	<Card title="기타 기능" icon="information">
+		공유하고 싶은 추가 정보.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="확인하세요" icon="open-book" %}
+강조하고 싶은 흥미로운 콘텐츠.
+{% /card %}
+
+{% card title="기타 기능" icon="information" %}
+공유하고 싶은 추가 정보.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="확인하세요" icon="open-book">
+		강조하고 싶은 흥미로운 콘텐츠.
+	</Card>
+	<Card title="기타 기능" icon="information">
+		공유하고 싶은 추가 정보.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### 링크 카드 그룹화
+
+충분한 공간이 있을 때 여러 개의 [`<LinkCard>`](/ko/components/link-cards/) 컴포넌트를 `<CardGrid>` 컴포넌트를 사용하여 그룹화하여 나란히 표시합니다.
+
+<Preview>
+
+```mdx {3,6}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard
+		title="Markdown으로 콘텐츠 작성"
+		href="/ko/guides/authoring-content/"
+	/>
+	<LinkCard title="컴포넌트" href="/ko/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Markdown으로 콘텐츠 작성" href="/ko/guides/authoring-content/" /%}
+
+{% linkcard title="컴포넌트" href="/ko/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard
+		title="Markdown으로 콘텐츠 작성"
+		href="/ko/guides/authoring-content/"
+	/>
+	<LinkCard title="컴포넌트" href="/ko/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### 카드를 엇갈리게 배치
+
+그리드의 두 번째 열을 수직으로 이동하여 시각적 흥미를 더하려면 `<CardGrid>` 컴포넌트에 [`stagger`](#stagger) 속성을 추가합니다.
+
+이 속성은 홈 페이지에서 프로젝트의 주요 기능을 표시하는 데 유용합니다.
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="확인하세요" icon="open-book">
+		강조하고 싶은 흥미로운 콘텐츠.
+	</Card>
+	<Card title="기타 기능" icon="information">
+		공유하고 싶은 추가 정보.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="확인하세요" icon="open-book" %}
+강조하고 싶은 흥미로운 콘텐츠.
+{% /card %}
+
+{% card title="기타 기능" icon="information" %}
+공유하고 싶은 추가 정보.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="확인하세요" icon="open-book">
+		강조하고 싶은 흥미로운 콘텐츠.
+	</Card>
+	<Card title="기타 기능" icon="information">
+		공유하고 싶은 추가 정보.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## `<CardGrid>` 속성
+
+**구현:** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+`<CardGrid>` 컴포넌트는 다음과 같은 속성을 허용합니다:
+
+### `stagger`
+
+**타입:** `boolean`
+
+그리드에 카드를 엇갈리게 배치할지 여부를 정의합니다.

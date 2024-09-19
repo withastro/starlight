@@ -107,15 +107,15 @@ description: Starlight에 내장된 링크를 사용하는 방법
 
 [Astro 공식 문서](https://docs.astro.build/ko/guides/markdown-content/#heading-ids)에서 Astro가 제목의 `id`를 처리하는 방법에 대해 자세히 알아보세요.
 
-## 주석
+## 보조 내용
 
-주석은 "admonitions" 또는 "callouts" 라고도 하며, 페이지의 기본 콘텐츠 주변에 보조 정보를 표시하는 데 유용합니다.
+보조 내용은 "admonitions" 또는 "callouts" 라고도 하며, 페이지의 기본 콘텐츠 주변에 보조 정보를 표시하는 데 유용합니다.
 
-Starlight는 주석 렌더링을 위한 사용자 정의 Markdown 구문을 제공합니다. 주석 블록은 내용을 감싸기 위해 세 개의 콜론 `:::`을 사용하며 `note`, `tip`, `caution` 또는 `danger` 타입일 수 있습니다.
+Starlight는 보조 내용 렌더링을 위한 사용자 정의 Markdown 구문을 제공합니다. 보조 내용 블록은 내용을 감싸기 위해 세 개의 콜론 `:::`을 사용하며 `note`, `tip`, `caution` 또는 `danger` 타입일 수 있습니다.
 
-다른 Markdown 콘텐츠를 주석 안에 중첩시킬 수도 있지만 짧고 간결한 콘텐츠 덩어리에 가장 적합합니다.
+다른 Markdown 콘텐츠를 보조 내용 안에 중첩시킬 수도 있지만 짧고 간결한 콘텐츠 덩어리에 가장 적합합니다.
 
-### Note 주석
+### Note 보조 내용
 
 :::note
 
@@ -138,9 +138,9 @@ npm create astro@latest -- --template starlight
 :::
 ````
 
-### 사용자 정의 주석 제목
+### 사용자 정의 보조 내용 제목
 
-주석 타입 다음에 대괄호를 사용해 주석의 제목을 지정할 수 있습니다. `:::tip[알고 계셨나요?]`
+보조 내용 타입 다음에 대괄호를 사용해 보조 내용의 제목을 지정할 수 있습니다. `:::tip[알고 계셨나요?]`
 
 :::tip[알고 계셨나요?]
 
@@ -153,9 +153,9 @@ Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)
 :::
 ```
 
-### 더 많은 주석 타입
+### 더 많은 보조 내용 타입
 
-Caution과 Danger 주석은 실수하기 쉬운 세부 사항에 대해 사용자를 집중시키는 데 도움이 됩니다. 이러한 기능을 많이 사용하고 있다면, 문서화중인 내용을 다시 디자인하는 것이 좋습니다.
+Caution과 Danger 보조 내용은 실수하기 쉬운 세부 사항에 대해 사용자를 집중시키는 데 도움이 됩니다. 이러한 기능을 많이 사용하고 있다면, 문서화중인 내용을 다시 디자인하는 것이 좋습니다.
 
 :::caution
 당신이 멋진 문서 사이트를 원하지 않는다면 [Starlight](/ko/)는 필요하지 않을 수도 있습니다.
@@ -389,7 +389,7 @@ Starlight는 목록 및 테이블과 같은 다른 모든 Markdown 작성 구문
 
 ## 고급 Markdown 및 MDX 구성
 
-Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 및 MDX 구성](https://docs.astro.build/ko/guides/markdown-content/#configuring-markdown-and-mdx)을 참조하세요.
+Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 플러그인](https://docs.astro.build/ko/guides/markdown-content/#markdown-플러그인)을 참조하세요.
 
 ## Markdoc
 
