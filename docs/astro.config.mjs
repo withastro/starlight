@@ -136,6 +136,7 @@ export default defineConfig({
 					translations: {
 						fr: 'Composants',
 						ko: '컴포넌트',
+						ja: 'コンポーネント',
 					},
 					autogenerate: { directory: 'components' },
 				},
