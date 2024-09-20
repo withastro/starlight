@@ -27,7 +27,7 @@ type DefaultI18nSchema = ReturnType<typeof defaultI18nSchema>;
  * Based on the the return type of Zod’s `merge()` method. Merges the type of two `z.object()` schemas.
  * Also sets them as “passthrough” schemas as that’s how we use them. In practice whether or not the types
  * are passthrough or not doesn’t matter too much.
- * 
+ *
  * @see https://github.com/colinhacks/zod/blob/3032e240a0c227692bb96eedf240ed493c53f54c/src/types.ts#L2656-L2660
  */
 type MergeSchemas<A extends z.AnyZodObject, B extends z.AnyZodObject> = z.ZodObject<
