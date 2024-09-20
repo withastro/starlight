@@ -1,0 +1,150 @@
+---
+title: バッジ
+description: Starlightでバッジを使用して追加の情報を表示する方法を学びましょう。
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+ステータスやカテゴリーのような小さな情報を表示するには、`<Badge>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="New" />
+
+</Preview>
+
+## インポート
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+バッジを表示するには、`<Badge>`コンポーネントを使用し、表示したい内容を[`text`](#text)属性に渡します。
+
+デフォルトでは、バッジはサイトのテーマのアクセントカラーを使用します。
+組み込みのバッジカラーを使用するには、[`variant`](#variant)属性をサポートされている値のいずれかに設定します。
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Note" variant="note" />
+<Badge text="Success" variant="success" />
+<Badge text="Tip" variant="tip" />
+<Badge text="Caution" variant="caution" />
+<Badge text="Danger" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% badge text="Note" variant="note" /%}
+{% badge text="Success" variant="success" /%}
+{% badge text="Tip" variant="tip" /%}
+{% badge text="Caution" variant="caution" /%}
+{% badge text="Danger" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Badge text="Note" variant="note" />
+	<Badge text="Success" variant="success" />
+	<Badge text="Tip" variant="tip" />
+	<Badge text="Caution" variant="caution" />
+	<Badge text="Danger" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### 異なるサイズの使用
+
+[`size`](#size)属性を使用してバッジのテキストサイズを制御します。
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="New" size="small" />
+<Badge text="New and improved" size="medium" />
+<Badge text="New, improved, and bigger" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+{% badge text="New" size="small" /%}
+{% badge text="New and improved" size="medium" /%}
+{% badge text="New, improved, and bigger" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Badge text="New" size="small" />
+	<Badge text="New and improved" size="medium" />
+	<Badge text="New, improved, and bigger" size="large" />
+</Fragment>
+
+</Preview>
+
+### バッジのカスタマイズ
+
+カスタムCSSを使用して、`class`や`style`などの他の`<span>`属性を使用してバッジをカスタマイズします。
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="Custom" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="Custom"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## `<Badge>` プロパティ
+
+**実装:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+`<Badge>`コンポーネントは、以下のプロパティおよびその他の[`<span>`要素の属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)を受け付けます。
+
+### `text`
+
+**必須**  
+**タイプ:** `string`
+
+バッジに表示するテキスト内容。
+
+### `variant`
+
+**タイプ:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**デフォルト:** `'default'`
+
+使用するバッジのカラーバリアント: `note` (青), `tip` (紫), `danger` (赤), `caution` (オレンジ), `success` (緑), または `default` (テーマのアクセントカラー)。
+
+### `size`
+
+**タイプ:** `'small' | 'medium' | 'large'`
+
+表示するバッジのサイズを定義します。
