@@ -30,10 +30,6 @@ describe('t()', async () => {
 						'test.nesting1': '$t(test.nesting2) is nested',
 						'test.nesting2': 'this UI string',
 					},
-					// We do not strip unknown translations in this test so that user-defined translations can
-					// override plugin translations like it would in a real- world scenario were the plugin
-					// would have provided a custom schema to extend the translations.
-					{ stripUnknown: false },
 				],
 			],
 		})
@@ -112,7 +108,7 @@ describe('t.all()', async () => {
 	// See the `t()` tests for an explanation of how the user-defined translations are mocked.
 	vi.doMock('astro:content', async () =>
 		(await import('../test-utils')).mockedAstroContent({
-			i18n: [['en', { 'test.foo': 'bar' }, { stripUnknown: false }]],
+			i18n: [['en', { 'test.foo': 'bar' }]],
 		})
 	);
 	vi.resetModules();
@@ -129,7 +125,7 @@ describe('t.exists()', async () => {
 	// See the `t()` tests for an explanation of how the user-defined translations are mocked.
 	vi.doMock('astro:content', async () =>
 		(await import('../test-utils')).mockedAstroContent({
-			i18n: [['en', { 'test.foo': 'bar' }, { stripUnknown: false }]],
+			i18n: [['en', { 'test.foo': 'bar' }]],
 		})
 	);
 	vi.resetModules();

@@ -6,7 +6,7 @@ vi.mock('astro:content', async () =>
 		// We do not strip unknown translations in this test so that user-defined translations can
 		// override plugin translations like it would in a real- world scenario were the plugin would
 		// have provided a custom schema to extend the translations.
-		i18n: [['ar', { 'testPlugin3.doThing': 'افعل الشيء' }, { stripUnknown: false }]],
+		i18n: [['ar', { 'testPlugin3.doThing': 'افعل الشيء' }]],
 	})
 );
 
