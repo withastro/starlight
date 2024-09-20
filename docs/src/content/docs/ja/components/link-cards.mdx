@@ -16,7 +16,7 @@ import Preview from '~/components/component-preview.astro';
 		slot="preview"
 		title="Starlightのカスタマイズ"
 		description="カスタムスタイル、フォントなどを使用して、Starlightサイトを自分のものにする方法を学びます。"
-		href="/guides/customization/"
+		href="/ja/guides/customization/"
 	/>
 </Preview>
 
@@ -36,13 +36,13 @@ import { LinkCard } from '@astrojs/starlight/components';
 ```mdx
 import { LinkCard } from '@astrojs/starlight/components';
 
-<LinkCard title="Markdownの作成" href="/guides/authoring-content/" />
+<LinkCard title="Markdownの作成" href="/ja/guides/authoring-content/" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% linkcard title="Markdownの作成" href="/guides/authoring-content/" /%}
+{% linkcard title="Markdownの作成" href="/ja/guides/authoring-content/" /%}
 ```
 
 </Fragment>
@@ -50,14 +50,14 @@ import { LinkCard } from '@astrojs/starlight/components';
 <LinkCard
 	slot="preview"
 	title="Markdownの作成"
-	href="/guides/authoring-content/"
+	href="/ja/guides/authoring-content/"
 />
   
 </Preview>
 
 ### リンクの説明を追加する
 
-[`description`](#description)属性を使用して、リンクカードに短い説明を追加します。
+[`description`](#概要)属性を使用して、リンクカードに短い説明を追加します。
 
 <Preview>
 
@@ -66,7 +66,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 <LinkCard
 	title="国際化"
-	href="/guides/i18n/"
+	href="/ja/guides/i18n/"
 	description="複数の言語をサポートするようにStarlightを設定します。"
 />
 ```
@@ -76,7 +76,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 ```markdoc {4}
 {% linkcard
    title="国際化"
-	 href="/guides/i18n/"
+	 href="/ja/guides/i18n/"
 	 description="複数の言語をサポートするようにStarlightを設定します。" /%}
 ```
 
@@ -85,7 +85,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 <LinkCard
 	slot="preview"
 	title="国際化"
-	href="/guides/i18n/"
+	href="/ja/guides/i18n/"
 	description="複数の言語をサポートするようにStarlightを設定します。"
 />
   
@@ -93,9 +93,9 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 ### リンクカードをグループ化する
 
-[`<CardGrid>`](/components/card-grids/)コンポーネントを使用してグループ化することで、十分なスペースがある場合に複数のリンクカードを並べて表示できます。
+[`<CardGrid>`](/ja/components/card-grids/)コンポーネントを使用してグループ化することで、十分なスペースがある場合に複数のリンクカードを並べて表示できます。
 
-例については、["リンクカードのグループ化"](/ja/components/card-grids/#group-link-cards)ガイドを参照してください。
+例については、["リンクカードのグループ化"](/ja/components/card-grids/#リンクカードをグループ化する)ガイドを参照してください。
 
 ## `<LinkCard>` プロパティ
 
