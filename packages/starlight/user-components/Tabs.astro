@@ -54,7 +54,7 @@ if (isSynced) {
 			const tabIndexToRestore = tabs.findIndex(
 				(tab) => tab instanceof HTMLAnchorElement && tab.textContent?.trim() === label
 			);
-			const panels = starlightTabs?.querySelectorAll('[role="tabpanel"]');
+			const panels = starlightTabs?.querySelectorAll(':scope > [role="tabpanel"]');
 			const newTab = tabs[tabIndexToRestore];
 			const newPanel = panels[tabIndexToRestore];
 			if (tabIndexToRestore < 1 || !newTab || !newPanel) return;
