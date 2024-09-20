@@ -23,16 +23,28 @@ const defaultI18nSchema = () =>
 /** Type of Starlight’s default i18n schema, including extensions from Pagefind and Expressive Code. */
 type DefaultI18nSchema = ReturnType<typeof defaultI18nSchema>;
 
+/**
+ * Based on the the return type of Zod’s `merge()` method. Merges the type of two `z.object()` schemas.
+ * Also sets them as “passthrough” schemas as that’s how we use them. In practice whether or not the types
+ * are passthrough or not doesn’t matter too much.
+ * 
+ * @see https://github.com/colinhacks/zod/blob/3032e240a0c227692bb96eedf240ed493c53f54c/src/types.ts#L2656-L2660
+ */
+type MergeSchemas<A extends z.AnyZodObject, B extends z.AnyZodObject> = z.ZodObject<
+	z.objectUtil.extendShape<A['shape'], B['shape']>,
+	'passthrough',
+	B['_def']['catchall']
+>;
 /** Type that extends Starlight’s default i18n schema with an optional, user-defined schema. */
 type ExtendedSchema<T extends z.AnyZodObject> = T extends z.AnyZodObject
-	? z.ZodIntersection<DefaultI18nSchema, T>
+	? MergeSchemas<DefaultI18nSchema, T>
 	: DefaultI18nSchema;
 
 /** Content collection schema for Starlight’s optional `i18n` collection. */
 export function i18nSchema<T extends z.AnyZodObject = z.ZodObject<{}>>({
 	extend = z.object({}) as T,
 }: i18nSchemaOpts<T> = {}): ExtendedSchema<T> {
-	return defaultI18nSchema().merge(extend) as ExtendedSchema<T>;
+	return defaultI18nSchema().merge(extend).passthrough() as ExtendedSchema<T>;
 }
 export type i18nSchemaOutput = z.output<ReturnType<typeof i18nSchema>>;
 
