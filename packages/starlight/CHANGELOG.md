@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.28.2
+
+### Patch Changes
+
+- [#2377](https://github.com/withastro/starlight/pull/2377) [`a257b83`](https://github.com/withastro/starlight/commit/a257b83f1e5704ff41bcbe85482ac81a1a61ce1f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with synced `<Tabs>` components containing nested `<Tabs>` causing tab panels to not render correctly.
+
 ## 0.28.1
 
 ### Patch Changes
