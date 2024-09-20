@@ -97,6 +97,20 @@ test('add translations in a multilingual site with french as default locale', as
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr', 'ru']);
 });
 
+test('does not add translations if the label does not exist', async () => {
+	const [config] = getStarlightConfigAndUseTranslations(undefined);
+
+	addTranslations(config, getUseTranslations(false));
+
+	expect(vi.mocked(pluginFramesTexts.overrideTexts)).not.toHaveBeenCalled();
+});
+
+function getUseTranslations(exists: boolean = true) {
+	const t = () => 'test UI string';
+	t.exists = vi.fn().mockReturnValue(exists);
+	return vi.fn().mockReturnValue(t);
+}
+
 function getStarlightConfigAndUseTranslations(
 	locales: StarlightUserConfig['locales'],
 	defaultLocale?: StarlightUserConfig['defaultLocale']
@@ -107,7 +121,7 @@ function getStarlightConfigAndUseTranslations(
 			locales,
 			defaultLocale,
 		}),
-		vi.fn().mockReturnValue(() => 'test UI string'),
+		getUseTranslations(),
 	] as const;
 }
 

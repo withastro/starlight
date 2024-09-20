@@ -136,6 +136,7 @@ export default defineConfig({
 					translations: {
 						fr: 'Composants',
 						ru: 'Компоненты',
+						ko: '컴포넌트',
 					},
 					autogenerate: { directory: 'components' },
 				},
@@ -167,6 +168,7 @@ export default defineConfig({
 						'pt-PT': 'Recursos',
 						ja: 'リソース',
 						ru: 'Ресурсы',
+						ko: '리소스',
 					},
 					autogenerate: { directory: 'resources' },
 				},
