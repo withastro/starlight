@@ -312,7 +312,41 @@ test('gracefully handles invalid persisted state for synced tabs', async ({
 	);
 });
 
-async function expectSelectedTab(tabs: Locator, label: string, panel: string) {
-	expect((await tabs.getByRole('tab', { selected: true }).textContent())?.trim()).toBe(label);
-	expect((await tabs.getByRole('tabpanel').textContent())?.trim()).toBe(panel);
+test('syncs and restores nested tabs', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
+	await starlight.goto('/tabs-nested');
+
+	const tabs = page.locator('starlight-tabs');
+	const pkgTabs = tabs.nth(0);
+	const osTabsA = tabs.nth(1);
+	const osTabsB = tabs.nth(2);
+
+	// Select the linux tab in the npm tab.
+	await osTabsA.getByRole('tab').filter({ hasText: 'linux' }).click();
+
+	await expectSelectedTab(osTabsA, 'linux', 'npm GNU/Linux');
+
+	// Select the pnpm tab.
+	await pkgTabs.getByRole('tab').filter({ hasText: 'pnpm' }).click();
+
+	await expectSelectedTab(pkgTabs, 'pnpm');
+	await expectSelectedTab(osTabsB, 'linux', 'pnpm GNU/Linux');
+
+	page.reload();
+
+	// The synced tabs should be restored.
+	await expectSelectedTab(pkgTabs, 'pnpm');
+	await expectSelectedTab(osTabsB, 'linux', 'pnpm GNU/Linux');
+});
+
+async function expectSelectedTab(tabs: Locator, label: string, panel?: string) {
+	expect(
+		(await tabs.locator(':scope > div [role=tab][aria-selected=true]').textContent())?.trim()
+	).toBe(label);
+
+	if (panel) {
+		const tabPanel = tabs.locator(':scope > [role=tabpanel]:not([hidden])');
+		await expect(tabPanel).toBeVisible();
+		expect((await tabPanel.textContent())?.trim()).toBe(panel);
+	}
 }
