@@ -1,8 +1,7 @@
 ---
 import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
-import type { Props } from '../props';
 
-const { toc } = Astro.props;
+const { toc } = Astro.locals.routeData!;
 ---
 
 {

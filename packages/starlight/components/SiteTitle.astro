@@ -1,8 +1,7 @@
 ---
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
-import type { Props } from '../props';
-const { siteTitle, siteTitleHref } = Astro.props;
+const { siteTitle, siteTitleHref } = Astro.locals.routeData!;
 ---
 
 <a href={siteTitleHref} class="site-title sl-flex">

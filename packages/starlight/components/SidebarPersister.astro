@@ -14,10 +14,9 @@
   - This is a progressive enhancement, so any errors are swallowed silently.
 */
 
-import type { Props } from '../props';
 import { getSidebarHash } from '../utils/navigation';
 
-const hash = getSidebarHash(Astro.props.sidebar);
+const hash = getSidebarHash(Astro.locals.routeData!.sidebar);
 
 declare global {
 	interface Window {

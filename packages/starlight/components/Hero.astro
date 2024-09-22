@@ -1,10 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { PAGE_TITLE_ID } from '../constants';
-import type { Props } from '../props';
 import LinkButton from '../user-components/LinkButton.astro';
 
-const { data } = Astro.props.entry;
+const { data } = Astro.locals.routeData!.entry;
 const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 
 const imageAttrs = {
