@@ -1,16 +1,7 @@
 ---
-import { generateRouteData } from '../utils/route-data';
-import type { Route } from '../utils/routing';
 import Page from '../components/Page.astro';
 
-export type Props = {
-	route: Route;
-};
-
-const { route } = Astro.props;
-
-const { Content, headings } = await route.entry.render();
-const routeData = generateRouteData({ props: { ...route, headings }, url: Astro.url });
+const { Content, entry } = Astro.locals.routeData!;
 ---
 
-<Page {...routeData}><Content frontmatter={route.entry.data} /></Page>
+<Page>{Content && <Content frontmatter={entry.data} />}</Page>

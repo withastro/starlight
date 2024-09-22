@@ -6,6 +6,7 @@ import type { Route, StarlightDocsEntry } from '../../utils/routing';
 import { useTranslations } from '../../utils/translations';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
 import CommonPage from '../common.astro';
+import { generateRouteData } from '../../utils/route-data';
 
 export const prerender = true;
 
@@ -42,6 +43,11 @@ const fallbackEntry: StarlightDocsEntry = {
 const userEntry = await getEntry('docs', '404');
 const entry = userEntry || fallbackEntry;
 const route: Route = { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
+const { Content, headings } = await route.entry.render();
+Astro.locals.routeData = {
+	...generateRouteData({ props: { ...route, headings }, url: Astro.url }),
+	Content,
+};
 ---
 
-<CommonPage {route} />
+<CommonPage />
