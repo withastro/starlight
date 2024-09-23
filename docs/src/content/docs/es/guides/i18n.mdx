@@ -362,9 +362,9 @@ Pasa un segundo argumento opcional si necesitas anular el idioma actual.
 ---
 // src/components/Example.astro
 const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
-//    ^ verdadero
+//    ^ true
 const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
-//    ^ falso
+//    ^ false
 ---
 ```
 
