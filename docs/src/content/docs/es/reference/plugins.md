@@ -162,3 +162,71 @@ El ejemplo anterior registrará un mensaje que incluye el mensaje de informació
 ```shell
 [long-process-plugin] Empezando un proceso largo…
 ```
+
+#### `injectTranslations`
+
+**tipo:** `(translations: Record<string, Record<string, string>>) => void`
+
+Una función callback para añadir o actualizar las strings de traducción utilizadas en las [APIs de localización](/guides/i18n/#usar-traducciones-de-ui) de Starlight.
+
+En el siguiente ejemplo, un plugin inyecta traducciones para una string de UI personalizada llamada `myPlugin.doThing` para los locales `en` y `fr`:
+
+```ts {6-13} /(injectTranslations)[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-with-translations',
+  hooks: {
+    setup({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+Para usar las traducciones inyectadas en tu plugin de UI, sigue la [guía “Usar traducciones de UI”](/guides/i18n/#usar-traducciones-de-ui).
+
+Los tipos para las strings de traducción inyectadas en un plugin se generan automáticamente en el proyecto de un usuario, pero aún no están disponibles cuando trabajas en el código de tu plugin.
+Para tipar el objeto `locals.t` en el contexto de tu plugin, declara los siguientes espacios de nombres globales en un archivo de declaración de TypeScript:
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // Define el objeto `locals.t` en el contexto de un plugin.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // Define las traducciones adicionales del plugin en la interfaz `I18n`.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+También puedes inferir los tipos para la interfaz `StarlightApp.I18n` a partir de un archivo fuente si tienes un objeto que contiene tus traducciones.
+
+Por ejemplo, dado el siguiente archivo fuente:
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+La siguiente declaración inferiría los tipos de las claves en inglés del archivo fuente:
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
+```
