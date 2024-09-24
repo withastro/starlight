@@ -1,0 +1,158 @@
+---
+title: Apartados
+description: Aprende a usar apartados en Starlight para mostrar información secundaria junto al contenido principal de una página.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Para mostrar información secundaria junto al contenido principal de una página, usa el componente `<Aside>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Aside slot="preview">
+    Incluye información no esencial y complementaria en un `<Aside>`.
+</Aside>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { Aside } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Muestra un apartado (también conocido como “admoniciones” o “llamadas”) usando el componente `<Aside>`.
+
+Un `<Aside>` también puede tener un atributo opcional [`type`](#type), que controla el color, el icono y el título predeterminado del apartado.
+
+<Preview>
+
+````mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Contenido en un apartado.</Aside>
+
+<Aside type="caution">Contenido de precaución.</Aside>
+
+<Aside type="tip">
+
+Otro tipo de contenido también es compatible en los apartados.
+
+```js
+// Por ejemplo, un fragmento de código.
+```
+
+</Aside>
+
+<Aside type="danger">No des tu contraseña a nadie.</Aside>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% aside %}
+Contenido en un apartado.
+{% /aside %}
+
+{% aside type="caution" %}
+Contenido de precaución.
+{% /aside %}
+
+{% aside type="tip" %}
+Otro tipo de contenido también es compatible en los apartados.
+
+```js
+// Por ejemplo, un fragmento de código.
+```
+{% /aside %}
+
+{% aside type="danger" %}
+No des tu contraseña a nadie.
+{% /aside %}
+````
+
+</Fragment>
+
+<Fragment slot="preview">
+
+    <Aside>Contenido en un apartado.</Aside>
+
+    <Aside type="caution">Contenido de precaución.</Aside>
+
+    <Aside type="tip">
+
+    Otro tipo de contenido también es compatible en los apartados.
+
+    ```js
+    // Por ejemplo, un fragmento de código.
+    ```
+
+    </Aside>
+
+    <Aside type="danger">No des tu contraseña a nadie.</Aside>
+
+</Fragment>
+
+</Preview>
+
+Starlight también proporciona una sintaxis personalizada para renderizar apartados en Markdown y MDX como una alternativa al componente `<Aside>`.
+Ver la guía [“Redacción de contenido en Markdown”](/es/guides/authoring-content/#apartados) para obtener detalles de la sintaxis personalizada.
+
+### Usa títulos personalizados
+
+Sobreescribe los títulos predeterminados de los apartados usando el atributo [`title`](#title).
+
+<Preview>
+
+```mdx 'title="Watch out!"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="¡Cuidado!">
+	Una advertencia *con* un título personalizado.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'title="Watch out!"'
+{% aside type="caution" title="¡Cuidado!" %}
+Una advertencia *con* un título personalizado.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="caution" title="¡Cuidado!">
+	Una advertencia *con* un título personalizado.
+</Aside>
+
+</Preview>
+
+## Props de `<Aside>`
+
+**Implementación:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
+
+El componente `<Aside>` acepta las siguientes propiedades:
+
+### `type`
+
+**tipo:** `'note' | 'tip' | 'caution' | 'danger'`  
+**por defecto:** `'note'`
+
+El tipo de apartado a mostrar:
+
+- apartados `note` (el predeterminado) son azules y muestran un icono de información.
+- apartados `tip` son morados y muestran un icono de cohete.
+- apartados `caution` son amarillos y muestran un icono de advertencia.
+- apartados `danger` son rojos y muestran un icono de advertencia octogonal.
+
+### `title`
+
+**tipo:** `string`
+
+El título del apartado a mostrar.
+Si `title` no está establecido, se usará el título predeterminado para el `type` actual del apartado.
