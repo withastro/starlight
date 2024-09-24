@@ -1,6 +1,6 @@
 ---
-title: アサイド
-description: Starlightでアサイドを使用して、ページのメインコンテンツの横に補足情報を表示する方法を学びます。
+title: 補足情報
+description: Starlightで補足情報を使用して、ページのメインコンテンツの横に補足情報を表示する方法を学びます。
 ---
 
 import { Aside } from '@astrojs/starlight/components';
@@ -23,22 +23,22 @@ import { Aside } from '@astrojs/starlight/components';
 
 ## 使用方法
 
-`<Aside>`コンポーネントを使用してアサイド（「アドモニション」や「コールアウト」とも呼ばれる）を表示します。
+`<Aside>`コンポーネントを使用して補足情報（「アドモニション」や「コールアウト」とも呼ばれる）を表示します。
 
-`<Aside>`にはオプションの[`type`](#type)属性があり、これによってアサイドの色、アイコン、およびデフォルトのタイトルが制御されます。
+`<Aside>`にはオプションの[`type`](#type)属性があり、これによって補足情報の色、アイコン、およびデフォルトのタイトルが制御されます。
 
 <Preview>
 
 ````mdx
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>アサイドのコンテンツ。</Aside>
+<Aside>補足情報のコンテンツ。</Aside>
 
 <Aside type="caution">注意が必要なコンテンツ。</Aside>
 
 <Aside type="tip">
 
-アサイドには他のコンテンツも対応しています。
+補足情報には他のコンテンツも対応しています。
 
 ```js
 // たとえば、コードスニペットなど。
@@ -53,7 +53,7 @@ import { Aside } from '@astrojs/starlight/components';
 
 ````markdoc
 {% aside %}
-アサイドのコンテンツ。
+補足情報のコンテンツ。
 {% /aside %}
 
 {% aside type="caution" %}
@@ -61,7 +61,7 @@ import { Aside } from '@astrojs/starlight/components';
 {% /aside %}
 
 {% aside type="tip" %}
-アサイドには他のコンテンツも対応しています。
+補足情報には他のコンテンツも対応しています。
 
 ```js
 // たとえば、コードスニペットなど。
@@ -77,13 +77,13 @@ import { Aside } from '@astrojs/starlight/components';
 
 <Fragment slot="preview">
 
-    <Aside>アサイドのコンテンツ。</Aside>
+    <Aside>補足情報のコンテンツ。</Aside>
 
     <Aside type="caution">注意が必要なコンテンツ。</Aside>
 
     <Aside type="tip">
 
-    アサイドには他のコンテンツも対応しています。
+    補足情報には他のコンテンツも対応しています。
 
     ```js
     // たとえば、コードスニペットなど。
@@ -96,12 +96,12 @@ import { Aside } from '@astrojs/starlight/components';
 
 </Preview>
 
-Starlightは、`<Aside>`コンポーネントの代替として、MarkdownとMDXでアサイドをレンダリングするためのカスタム構文も提供しています。
+Starlightは、`<Aside>`コンポーネントの代替として、MarkdownとMDXで補足情報をレンダリングするためのカスタム構文も提供しています。
 カスタム構文の詳細については、["MarkdownでのContent作成"](/ja/guides/authoring-content/#補足情報)ガイドを参照してください。
 
 ### カスタムタイトルの使用
 
-[`title`](#title)属性を使用して、デフォルトのアサイドタイトルを上書きできます。
+[`title`](#title)属性を使用して、デフォルトの補足情報タイトルを上書きできます。
 
 <Preview>
 
@@ -109,7 +109,7 @@ Starlightは、`<Aside>`コンポーネントの代替として、MarkdownとMDX
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="caution" title="注意してください！">
-	カスタムタイトル*付きの*警告アサイド。
+	カスタムタイトル*付きの*警告補足情報。
 </Aside>
 ```
 
@@ -117,14 +117,14 @@ import { Aside } from '@astrojs/starlight/components';
 
 ```markdoc 'title="注意してください！"'
 {% aside type="caution" title="注意してください！" %}
-カスタムタイトル*付きの*警告アサイド。
+カスタムタイトル*付きの*警告補足情報。
 {% /aside %}
 ```
 
 </Fragment>
 
 <Aside slot="preview" type="caution" title="注意してください！">
-	カスタムタイトル*付きの*警告アサイド。
+	カスタムタイトル*付きの*警告補足情報。
 </Aside>
   
 </Preview>
@@ -140,16 +140,16 @@ import { Aside } from '@astrojs/starlight/components';
 **型:** `'note' | 'tip' | 'caution' | 'danger'`  
 **デフォルト:** `'note'`
 
-表示するアサイドのタイプ：
+表示する補足情報のタイプ：
 
-- `note`アサイド（デフォルト）は青色で、情報アイコンを表示します。
-- `tip`アサイドは紫色で、ロケットアイコンを表示します。
-- `caution`アサイドは黄色で、三角形の警告アイコンを表示します。
-- `danger`アサイドは赤色で、八角形の警告アイコンを表示します。
+- `note`補足情報（デフォルト）は青色で、情報アイコンを表示します。
+- `tip`補足情報は紫色で、ロケットアイコンを表示します。
+- `caution`補足情報は黄色で、三角形の警告アイコンを表示します。
+- `danger`補足情報は赤色で、八角形の警告アイコンを表示します。
 
 ### `title`
 
 **型:** `string`
 
-表示するアサイドのタイトル。
-`title`が設定されていない場合、現在のアサイド`type`のデフォルトタイトルが使用されます。
+補足情報に表示するタイトル。
+`title`が設定されていない場合、現在の補足情報に`type`のデフォルトタイトルが使用されます。
