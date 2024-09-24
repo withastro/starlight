@@ -13,8 +13,8 @@ import Preview from '~/components/component-preview.astro';
 <Preview>
 
 <Tabs slot="preview">
-	<TabItem label="星たち">シリウス、ベガ、ベテルギウス</TabItem>
-	<TabItem label="月たち">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="星">シリウス、ベガ、ベテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 
 </Preview>
@@ -36,8 +36,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stars">シリウス、ベガ、ベテルギウス</TabItem>
-	<TabItem label="Moons">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="星">シリウス、ベガ、ベテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 ```
 
@@ -45,11 +45,11 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ```markdoc
 {% tabs %}
-{% tabitem label="Stars" %}
+{% tabitem label="星" %}
 シリウス、ベガ、ベテルギウス
 {% /tabitem %}
 
-{% tabitem label="Moons" %}
+{% tabitem label="衛星" %}
 イオ、エウロパ、ガニメデ
 {% /tabitem %}
 {% /tabs %}
@@ -58,8 +58,8 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Fragment>
 
 <Tabs slot="preview">
-	<TabItem label="Stars">シリウス、ベガ、ベテルギウス</TabItem>
-	<TabItem label="Moons">イオ、エウロパ、ガニメデ</TabItem>
+	<TabItem label="星">シリウス、ベガ、ベテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
 </Tabs>
 
 </Preview>
