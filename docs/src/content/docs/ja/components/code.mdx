@@ -41,9 +41,9 @@ import { Code } from '@astrojs/starlight/components';
 ```mdx
 import { Code } from '@astrojs/starlight/components';
 
-export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const exampleCode = `console.log('これはファイルやCMSから来る可能性がある！');`;
 export const fileName = 'example.js';
-export const highlights = ['file', 'CMS'];
+export const highlights = ['ファイル', 'CMS'];
 
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 ```
@@ -52,17 +52,17 @@ export const highlights = ['file', 'CMS'];
 
 ```markdoc
 {% code
-   code="console.log('This could come from a file or CMS!');"
+   code="console.log('これはファイルやCMSから来る可能性がある！');"
    lang="js"
    title="example.js"
-   meta="'file' 'CMS'" /%}
+   meta="'ファイル' 'CMS'" /%}
 ```
 
 </Fragment>
 
-export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const exampleCode = `console.log('これはファイルやCMSから来る可能性がある！');`;
 export const fileName = 'example.js';
-export const highlights = ['file', 'CMS'];
+export const highlights = ['ファイル', 'CMS'];
 
 <Code
 	slot="preview"
