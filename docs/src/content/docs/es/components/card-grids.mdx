@@ -14,10 +14,10 @@ import Preview from '~/components/component-preview.astro';
 <Preview>
 
 <CardGrid slot="preview">
-	<Card title="Stars" icon="star">
+	<Card title="Estrellas" icon="star">
 		Sirius, Vega, Betelgeuse
 	</Card>
-	<Card title="Moons" icon="moon">
+	<Card title="Lunas" icon="moon">
 		Io, Europa, Ganymede
 	</Card>
 </CardGrid>
@@ -42,10 +42,10 @@ Muestra varios componentes [`<Card>`](/es/components/cards/) uno al lado del otr
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
-	<Card title="Check this out" icon="open-book">
+	<Card title="Revisa esto" icon="open-book">
 		Contenido interesante que deseas destacar.
 	</Card>
-	<Card title="Other feature" icon="information">
+	<Card title="Otra caracaterística" icon="information">
 		Más información que deseas compartir.
 	</Card>
 </CardGrid>
@@ -55,11 +55,11 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ```markdoc {1,9}
 {% cardgrid %}
-{% card title="Check this out" icon="open-book" %}
+{% card title="Revisa esto" icon="open-book" %}
 Contenido interesante que deseas destacar.
 {% /card %}
 
-{% card title="Other feature" icon="information" %}
+{% card title="Otra caracaterística" icon="information" %}
 Más información que deseas compartir.
 {% /card %}
 {% /cardgrid %}
@@ -68,10 +68,10 @@ Más información que deseas compartir.
 </Fragment>
 
 <CardGrid slot="preview">
-	<Card title="Check this out" icon="open-book">
+	<Card title="Revisa esto" icon="open-book">
 		Contenido interesante que deseas destacar.
 	</Card>
-	<Card title="Other feature" icon="information">
+	<Card title="Otra caracaterística" icon="information">
 		Más información que deseas compartir.
 	</Card>
 </CardGrid>
@@ -84,7 +84,7 @@ Muestra varios componentes [`<LinkCard>`](/es/components/link-cards/) uno al lad
 
 <Preview>
 
-```mdx {3,6}
+```mdx {3,9}
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
