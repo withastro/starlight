@@ -521,6 +521,52 @@ starlight({
 在多语言网站中，`slug` 的值不会包含 URL 的语言部分。
 例如，如果页面位于 `en/intro` 和 `pt-br/intro`，则在配置侧边栏时，slug 为 `intro`。
 
+### 通过徽章实现国际化
+
+对于[徽章](#徽章)，`text` 属性可以是字符串，而对于多语言网站，文本属性则可以是具有每个不同区域设置值的对象。
+使用对象形式时，键必须是 [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 标签（例如 `en`、`ar` 或 `zh-CN`）：
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							en: 'New',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+浏览巴西葡萄牙语文档将生成以下侧边栏：
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
 ## 折叠分组
 
 链接分组可以通过将 `collapsed` 属性设置为 `true` 来默认折叠。
