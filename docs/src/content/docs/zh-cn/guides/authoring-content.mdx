@@ -394,4 +394,119 @@ Starlight 支持所有其他 Markdown 语法，例如列表和表格。 请参�
 
 ## 高级 Markdown 和 MDX 配置
 
-Starlight 使用 Astro 的 Markdown 和 MDX 渲染器，该渲染器构建在 remark 和 rehype 之上。 你可以通过在 Astro 配置文件中添加 `remarkPlugins` 或 `rehypePlugins` 来添加对自定义语法和行为的支持。 请参阅 Astro 文档中的 [“配置 Markdown 和 MDX”](https://docs.astro.build/zh-cn/guides/markdown-content/#配置-markdown) 以了解更多信息。
+Starlight 使用 Astro 的 Markdown 和 MDX 渲染器，该渲染器构建在 remark 和 rehype 之上。 你可以通过在 Astro 配置文件中添加 `remarkPlugins` 或 `rehypePlugins` 来添加对自定义语法和行为的支持。 请参阅 Astro 文档中的 [“Markdown 插件”](https://docs.astro.build/zh-cn/guides/markdown-content/#markdown-插件) 以了解更多信息。
+
+## Markdoc
+
+Starlight 支持使用实验性 [Astro Markdoc 集成](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/) 和 Starlight Markdoc 预设在 Markdoc 中创作内容。
+
+### 使用 Markdoc 创建新项目
+
+使用 Markdoc 的预配置 `create astro` 来启动一个新的 Starlight 项目：
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+</Tabs>
+
+### 添加 Markdoc 到现有项目
+
+如果你已有一个 Starlight 网站并想要添加 Markdoc，请按照以下步骤操作。
+
+<Steps>
+
+1.  添加 Astro 的 Markdoc 集成：
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  安装 Starlight Markdoc 预设：
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  在 `markdoc.config.mjs` 创建一个 Markdoc 配置文件并使用 Starlight Markdoc 预设：
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+要了解有关 Markdoc 语法和功能的更多信息，请参阅 [Markdoc 文档](https://markdoc.dev/docs/syntax) 或 [Astro Markdoc 集成指南](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/)。
