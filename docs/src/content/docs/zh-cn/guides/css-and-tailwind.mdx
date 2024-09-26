@@ -250,6 +250,8 @@ Starlight 的颜色主题可以通过覆盖其默认的自定义属性来控制�
 
 使用下面的滑块来修改 Starlight 的强调色和灰色调色板。暗色和亮色的预览区域将显示结果颜色，整个页面也会更新以预览你的更改。
 
+使用“对比度级别”选项来指定要满足的 Web 内容无障碍功能指南的[颜色对比度标准](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast)。
+
 当你对你的更改满意时，复制下面的 CSS 或 Tailwind 代码并在你的项目中使用。
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -265,11 +267,14 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			default: '默认',
 			random: '随机',
 		},
+		contrast: {
+			label: '对比度级别',
+		},
 		editor: {
-			accentColor: 'Accent',
-			grayColor: 'Gray',
-			hue: '颜色',
-			chroma: '色度',
+			accentColor: '强调色',
+			grayColor: '灰色',
+			hue: '色调',
+			chroma: '饱和度',
 			pickColor: '选择颜色',
 		},
 		preview: {
