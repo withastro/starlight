@@ -162,3 +162,71 @@ export default {
 ```shell
 [long-process-plugin] 启动一个长流程…
 ```
+
+#### `injectTranslations`
+
+**类型：** `(translations: Record<string, Record<string, string>>) => void`
+
+一个回调函数，用于添加或更新 Starlight [本地化 API](/zh-cn/guides/i18n/#使用-ui-翻译) 中使用的翻译字符串。
+
+在以下示例中，插件向 `en` 和 `fr` 语言环境注入了名为 `myPlugin.doThing` 的自定义 UI 字符串的翻译：
+
+```ts {6-13} /(injectTranslations)[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-with-translations',
+  hooks: {
+    setup({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+要在你的插件 UI 中使用注入的翻译，可以依照 [“使用 UI 翻译”指南](/zh-cn/guides/i18n/#使用-ui-翻译)。
+
+插件注入的翻译字符串的类型，是在用户的项目中自动生成的，但在插件的代码库中工作时还不可用。
+要在插件上下文中对 `locals.t` 对象进行类型定义，可以在 TypeScript 声明文件中声明以下全局命名空间：
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // 在插件上下文中定义 `locals.t` 对象。
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // 在 `I18n` 接口中定义附加的插件翻译。
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+如果你有一个包含了翻译内容的对象，你还可以从源文件推断 `StarlightApp.I18n` 接口的类型。
+
+举个例子，给定以下源文件：
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+以下声明将从源文件中的英文键来推断出类型：
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
+```
