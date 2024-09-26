@@ -1,0 +1,179 @@
+---
+title: Карточные сетки
+description: Узнайте, как обернуть несколько карточек в сетку в Starlight.
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Чтобы обернуть несколько компонентов [`<Card>`](/ru/components/cards/) или [`<LinkCard>`](/ru/components/link-cards/) в сетку, используйте компонент `<CardGrid>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="Звёзды" icon="star">
+		Сириус, Вега, Бетельгейзе
+	</Card>
+	<Card title="Луны" icon="moon">
+		Ио, Европа, Ганимед
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+### Группировка карточек
+
+Отображайте несколько компонентов [`<Card>`](/ru/components/cards/) рядом друг с другом при наличии свободного места, группируя их с помощью компонента `<CardGrid>`.
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Зацените это" icon="open-book">
+		Интересный контент, который вы хотите выделить.
+	</Card>
+	<Card title="Другая фича" icon="information">
+		Дополнительная информация, которой вы хотите поделиться.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="Зацените это" icon="open-book" %}
+Интересный контент, который вы хотите выделить.
+{% /card %}
+
+{% card title="Другая фича" icon="information" %}
+Дополнительная информация, которой вы хотите поделиться.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="Зацените это" icon="open-book">
+		Интересный контент, который вы хотите выделить.
+	</Card>
+	<Card title="Другая фича" icon="information">
+		Дополнительная информация, которой вы хотите поделиться.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### Группировка карточек-ссылок
+
+Отображайте несколько компонентов [`<LinkCard>`](/ru/components/link-cards/) рядом друг с другом при наличии свободного места, группируя их с помощью компонента `<CardGrid>`.
+
+<Preview>
+
+```mdx {3,6}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard
+		title="Создание контента в Markdown"
+		href="/ru/guides/authoring-content/"
+	/>
+	<LinkCard title="Компоненты" href="/ru/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Создание контента в Markdown" href="/ru/guides/authoring-content/" /%}
+
+{% linkcard title="Компоненты" href="/ru/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard
+		title="Создание контента в Markdown"
+		href="/ru/guides/authoring-content/"
+	/>
+	<LinkCard title="Компоненты" href="/ru/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### Смещение карточек
+
+Сместите второй столбец сетки по вертикали, чтобы добавить визуальный интерес, добавив атрибут [`stagger`](#stagger) к компоненту `<CardGrid>`.
+
+Этот атрибут полезен на главной странице для отображения ключевых особенностей вашего проекта.
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Зацените это" icon="open-book">
+		Интересный контент, который вы хотите выделить.
+	</Card>
+	<Card title="Другая фича" icon="information">
+		Дополнительная информация, которой вы хотите поделиться.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="Зацените это" icon="open-book" %}
+Интересный контент, который вы хотите выделить.
+{% /card %}
+
+{% card title="Другая фича" icon="information" %}
+Дополнительная информация, которой вы хотите поделиться.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="Зацените это" icon="open-book">
+		Интересный контент, который вы хотите выделить.
+	</Card>
+	<Card title="Другая фича" icon="information">
+		Дополнительная информация, которой вы хотите поделиться.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Параметры `<CardGrid>`
+
+**Реализация:** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+Компонент `<CardGrid>` принимает следующие параметры:
+
+### `stagger`
+
+**тип:** `boolean`
+
+Определяет, нужно ли перемешивать карты в сетке или нет.

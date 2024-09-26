@@ -149,12 +149,6 @@ Objeto `Date` de JavaScript que representa cuándo se actualizó por última vez
 
 Objeto `URL` para la dirección donde se puede editar esta página si está habilitado.
 
-#### `labels`
-
-**Tipo:** `Record<string, string>`
-
-Un objecto que contiene cadenas de UI localizadas para la página actual. Consulta la guía ["Traducir la UI de Starlight"](/es/guides/i18n/#traduce-la-ui-de-starlight) para ver una lista de todas las claves disponibles.
-
 ---
 
 ## Componentes
