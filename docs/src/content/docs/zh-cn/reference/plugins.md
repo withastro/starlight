@@ -28,6 +28,7 @@ interface StarlightPlugin {
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
+      injectTranslations: (Record<string, Record<string, string>>) => void;
     }) => void | Promise<void>;
   };
 }
