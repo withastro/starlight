@@ -451,6 +451,18 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
 
+当 [`prerender`](#prerender) 选项设置为 `false` 时，无法启用 Pagefind。
+
+### `prerender`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+定义 Starlight 页面是应预渲染为静态 HTML 还是由 [SSR 适配器](https://docs.astro.build/zh-cn/guides/server-side-rendering/) 按需渲染。
+
+默认情况下，Starlight 页面是预渲染的。
+如果你正在使用 SSR 适配器并希望按需渲染 Starlight 页面，请设置为 `prerender: false`。
+
 ### `head`
 
 **类型：** [`HeadConfig[]`](#headconfig)

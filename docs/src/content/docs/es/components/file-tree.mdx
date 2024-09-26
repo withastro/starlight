@@ -1,0 +1,225 @@
+---
+title: Árbol de archivos
+description: Aprende a mostrar la estructura de un directorio con iconos de archivo y subdirectorios colapsables en Starlight.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+Para mostrar la estructura de un directorio con iconos de archivo y subdirectorios colapsables, usa el componente `<FileTree>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs un archivo **importante**
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Muestra un árbol de archivos con iconos de archivo y subdirectorios colapsables usando el componente `<FileTree>`.
+
+Especifica la estructura de tus archivos y directorios con una [lista Markdown no ordenada](https://www.markdownguide.org/basic-syntax/#unordered-lists) dentro de `<FileTree>`.
+Crea un subdirectorio usando una lista anidada o agrega una `/` al final de un elemento de la lista para renderizarlo como un directorio sin contenido específico.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### Resaltar entradas
+
+Haz que un archivo o directorio destaque haciendo que su nombre esté en negrita, por ejemplo, `**README.md**`.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Agregar comentarios
+
+Agrega un comentario a un archivo o directorio agregando más texto después del nombre.
+El formateo de Markdown en línea como negritas e itálicas es compatible en los comentarios.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro un archivo **importante**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro un archivo **importante**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro un archivo **importante**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Agregar marcadores de posición
+
+Agrega archivos y directorios de marcador de posición usando `...` o `…` como nombre.
+Esto puede ser útil para indicar a un lector que se espera que una carpeta contenga más elementos sin especificarlos todos explícitamente.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## Props de `<FileTree>`
+
+**Implementación:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+El componente `<FileTree>` no acepta ninguna propiedad.
