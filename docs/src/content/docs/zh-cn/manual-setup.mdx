@@ -124,6 +124,6 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### 结合 SSR 使用 Starlight
 
-你可以通过按照 Astro 文档中的 [“按需渲染适配器”](https://docs.astro.build/zh-cn/guides/server-side-rendering/) 指南，在你的项目中使用 Starlight 与自定义的按需渲染页面一起工作。
+要启用 SSR，请按照 Astro 文档中的 [“按需渲染适配器”](https://docs.astro.build/zh-cn/guides/server-side-rendering/) 指南将服务器适配器添加到你的 Starlight 项目中。
 
-目前，Starlight 生成的文档页面始终是预渲染的，无论你的项目的输出模式如何。我们希望能够尽快支持 Starlight 页面的按需渲染。
+无论项目的输出模式如何，Starlight 生成的文档页面都默认为预渲染。要选择不对 Starlight 页面进行预渲染，请将 [`prerender` 配置选项](/zh-cn/reference/configuration/#prerender) 设置为 `false`。
