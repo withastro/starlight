@@ -275,6 +275,119 @@ export const collections = {
 
 在 Astro 文档的[“定义集合模式”](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式)中了解有关内容集合 schema 的更多信息。
 
+## 使用 UI 翻译
+
+你可以使用由 [i18next](https://www.i18next.com/) 提供支持的统一 API 访问 Starlight 的 [内置 UI 字符串](/zh-cn/guides/i18n/#翻译-starlight-的-ui) 以及 [用户定义](/zh-cn/guides/i18n/#拓展翻译-schema) 和 [插件提供](/zh-cn/reference/plugins/#injecttranslations) 的 UI 字符串。
+其中包括了对 [插值](https://www.i18next.com/translation-function/interpolation) 和 [多元化](https://www.i18next.com/translation-function/plurals) 等功能的支持。
+
+在 Astro 组件中，此 API 作为 [全局 `Astro` 对象](https://docs.astro.build/zh-cn/reference/api-reference/#astrolocals) 的一部分提供，即 `Astro.locals.t`：
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+你还可以在 [端点](https://docs.astro.build/zh-cn/guides/endpoints/) 中使用 API，其中的 `locals` 对象可作为 [端点上下文](https://docs.astro.build/zh-cn/reference/api-reference/#contextlocals) 的一部分使用：
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+### 渲染 UI 字符串
+
+使用 `locals.t()` 函数以渲染 UI 字符串。
+这是 i18next 的 `t()` 函数的一个实例，该函数将 UI 字符串键作为其第一个参数，并返回当前语言的相应翻译。
+
+例如，给定一个包含以下内容的自定义翻译文件：
+
+```json title="src/content/i18n/en.json"
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+The first UI string can be rendered by passing `'link.astro'` to the `t()` function:
+第一个 UI 字符串可以通过将 `'link.astro'` 传递给 `t()` 函数来渲染：
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- 渲染结果：<a href="...">Astro documentation</a> -->
+```
+
+第二个 UI 字符串对 `{{feature}}` 占位符使用了 i18next 的 [插值语法](https://www.i18next.com/translation-function/interpolation)。
+`feature` 的值在被作为第二个参数传递给 `t()` 时，必须被设置在一个选项对象中：
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- 渲染结果：<a href="...">Astro documentation for Astro DB</a> -->
+```
+
+有关如何使用 `t()` 函数进行插值、格式化等更多信息，请参阅 [i18next 文档](https://www.i18next.com/overview/api#t)。
+
+### Advanced APIs
+
+#### `t.all()`
+
+`locals.t.all()` 函数可返回一个对象，返回的对象中包含当前区域设置下所有可用的 UI 字符串。
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Skip to content",
+//      "search.label": "Search",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+要检查某个区域设置是否存在某个翻译键，请使用 `locals.t.exists()` 函数，并将该翻译键作为第一个参数。
+如需覆盖当前的区域设置，请传递第二个可选参数。
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+有关详细信息，请参阅 [i18next 文档中的 `exists()` 参考](https://www.i18next.com/overview/api#exists)。
+
+#### `t.dir()`
+
+`locals.t.dir()` 函数可返回当前或特定语言环境的文本方向。
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+有关详细信息，请参阅 [i18next 文档中的 `dir()` 参考](https://www.i18next.com/overview/api#dir)。
+
 ## 访问当前语言环境
 
 你可以使用 [`Astro.currentLocale`](https://docs.astro.build/zh-cn/reference/api-reference/#astrocurrentlocale) 在 `.astro` 组件中读取当前的语言环境。
