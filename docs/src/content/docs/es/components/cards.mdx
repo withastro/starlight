@@ -13,7 +13,7 @@ import Preview from '~/components/component-preview.astro';
 
 <Preview>
 
-<Card slot="preview" title="Moons" icon="moon">
+<Card slot="preview" title="Lunas" icon="moon">
 	Io, Europa, Ganymede
 </Card>
 
@@ -62,7 +62,7 @@ Incluye un icono en una tarjeta usando el atributo [`icon`](#icon) establecido e
 ```mdx 'icon="star"'
 import { Card } from '@astrojs/starlight/components';
 
-<Card title="Stars" icon="star">
+<Card title="Estrellas" icon="star">
 	Sirius, Vega, Betelgeuse
 </Card>
 ```
@@ -70,14 +70,14 @@ import { Card } from '@astrojs/starlight/components';
 <Fragment slot="markdoc">
 
 ```markdoc 'icon="star"'
-{% card title="Stars" icon="star" %}
+{% card title="Estrellas" icon="star" %}
 Sirius, Vega, Betelgeuse
 {% /card %}
 ```
 
 </Fragment>
 
-<Card slot="preview" title="Stars" icon="star">
+<Card slot="preview" title="Estrellas" icon="star">
 	Sirius, Vega, Betelgeuse
 </Card>
 
