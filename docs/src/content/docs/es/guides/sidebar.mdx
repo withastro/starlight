@@ -519,6 +519,52 @@ En sitios multilingües, el valor de `slug` no incluye la parte del idioma de la
 URL. Por ejemplo, si tienes páginas en `en/intro` y `pt-br/intro`, el slug es
 `intro` al configurar la barra lateral.
 
+### Internacionalización con insignias
+
+Para [insignias](#insignias), la propiedad `text` puede ser un string, o para sitios multilingües, un objeto con valores para cada idioma diferente.
+Cuando se usa la forma de objeto, las claves deben ser etiquetas [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) (p. ej. `en`, `ar`, o `zh-CN`):
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							en: 'New',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+Navegando por la documentación en portugués de Brasil generará la siguiente barra lateral:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
 ## Grupos colapsables
 
 Los grupos de enlaces pueden colapsarse por defecto estableciendo la propiedad `collapsed` en `true`.

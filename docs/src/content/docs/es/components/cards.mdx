@@ -1,0 +1,108 @@
+---
+title: Tarjetas
+description: Aprende a usar tarjetas en Starlight para mostrar contenido en una caja.
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Para mostrar contenido en una caja que coincida con los estilos de Starlight, usa el componente `<Card>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Card slot="preview" title="Lunas" icon="moon">
+	Io, Europa, Ganymede
+</Card>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Muestra una tarjeta usando el componente `<Card>` y proporciona un [`title`](#title) para la tarjeta.
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Revisa esto">Contenido interesante que deseas destacar.</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="Revisa esto" %}
+Contenido interesante que deseas destacar.
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Revisa esto">
+	Contenido interesante que deseas destacar.
+</Card>
+
+</Preview>
+
+### Agregar iconos a las tarjetas
+
+Incluye un icono en una tarjeta usando el atributo [`icon`](#icon) establecido en el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Estrellas" icon="star">
+	Sirius, Vega, Betelgeuse
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="Estrellas" icon="star" %}
+Sirius, Vega, Betelgeuse
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Estrellas" icon="star">
+	Sirius, Vega, Betelgeuse
+</Card>
+
+</Preview>
+
+### Agrupar tarjetas
+
+Muestra varias tarjetas una al lado de la otra cuando hay suficiente espacio agrupándolas con el componente [`<CardGrid>`](/es/components/card-grids/).
+Consulta la guía [“Agrupar tarjetas”](/es/components/card-grids/#agrupar-tarjetas) para un ejemplo.
+
+## Props de `<Card>`
+
+**Implementación:** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+El componente `<Card>` acepta las siguientes propiedades:
+
+### `title`
+
+**requerido**  
+**tipo:** `string`
+
+El título de la tarjeta a mostrar.
+
+### `icon`
+
+**tipo:** `string`
+
+Una tarjeta puede incluir un atributo `icon` establecido en el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
