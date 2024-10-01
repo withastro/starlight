@@ -84,20 +84,20 @@ Memilih penyedia hosting yang menggunakan energi terbarukan berarti emisi karbon
 
 Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes ini dengan [Website Carbon Calculator][wcc] membandingkan halaman-halaman serupa yang dibangun dengan _tool_ yang berbeda.
 
-| Framework                   | CO₂ per kunjungan halaman |
-| --------------------------- | ------------------------- |
-| [Starlight][sl-carbon]      | 0.01g                     |
-| [VitePress][vp-carbon]      | 0.05g                     |
-| [Docus][dc-carbon]          | 0.05g                     |
-| [Sphinx][sx-carbon]         | 0.07g                     |
-| [MkDocs][mk-carbon]         | 0.10g                     |
-| [Nextra][nx-carbon]         | 0.11g                     |
-| [docsify][dy-carbon]        | 0.11g                     |
-| [Docusaurus][ds-carbon]     | 0.24g                     |
-| [Read the Docs][rtd-carbon] | 0.24g                     |
-| [GitBook][gb-carbon]        | 0.71g                     |
-
-<small>Data dikumpulkan pada 14 Mei 2023. Klik link untuk melihat angka terkini.</small>
+| Framework                   | CO₂ per kunjungan halaman | Peringkat |
+| --------------------------- | ------------------------- | :-------: |
+| [Starlight][sl-carbon]      | 0.01g                     |     A+    |
+| [Read the Docs][rtd-carbon] | 0.05g                     |     A+    |
+| [Sphinx][sx-carbon]         | 0.06g                     |     A+    |
+| [VitePress][vp-carbon]      | 0.07g                     |     A+    |
+| [Docus][dc-carbon]          | 0.09g                     |     A+    |
+| [docsify][dy-carbon]        | 0.10g                     |     A     |
+| [Nextra][nx-carbon]         | 0.11g                     |     A     |
+| [MkDocs][mk-carbon]         | 0.19g                     |     B     |
+| [Docusaurus][ds-carbon]     | 0.21g                     |     B     |
+| [GitBook][gb-carbon]        | 0.43g                     |     C     |
+| [Mintlify][mt-carbon]       | 1.22g                     |     F     |
+<small>Data dikumpulkan pada 22 July 2024. Klik link untuk melihat angka terkini.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
