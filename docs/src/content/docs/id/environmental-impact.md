@@ -97,7 +97,7 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 | [Docusaurus][ds-carbon]     | 0.21g                     |     B     |
 | [GitBook][gb-carbon]        | 0.43g                     |     C     |
 | [Mintlify][mt-carbon]       | 1.22g                     |     F     |
-<small>Data dikumpulkan pada 22 July 2024. Klik link untuk melihat angka terkini.</small>
+<small>Data dikumpulkan pada 22 Juli 2024. Klik link untuk melihat angka terkini.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -109,6 +109,7 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Sumber Tambahan
 
