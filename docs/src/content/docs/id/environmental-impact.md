@@ -97,6 +97,7 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 | [Docusaurus][ds-carbon]     | 0.21g                     |     B     |
 | [GitBook][gb-carbon]        | 0.43g                     |     C     |
 | [Mintlify][mt-carbon]       | 1.22g                     |     F     |
+
 <small>Data dikumpulkan pada 22 Juli 2024. Klik link untuk melihat angka terkini.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
