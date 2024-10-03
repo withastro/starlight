@@ -1,0 +1,108 @@
+---
+title: 卡片
+description: 了解如何在 Starlight 中使用卡片来显示框中的内容。
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+要在框中显示与 Starlight 样式匹配的内容，请使用 `<Card>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Card slot="preview" title="卫星" icon="moon">
+	木卫一，木卫二，木卫三
+</Card>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<Card>` 组件来显示卡片，并为其提供一个 [`title`](#title)。
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="试试这个">一些你想着重展示的有趣内容。</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="试试这个" %}
+一些你想着重展示的有趣内容。
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="试试这个">
+	一些你想着重展示的有趣内容。
+</Card>
+
+</Preview>
+
+### 为卡片添加图标
+
+要在卡片中包含一个图标，请把 [`icon`](#icon) 属性设置为 [Starlight 的内置图标名称之一](/zh-cn/reference/icons/#所有图标)。
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="星星" icon="star">
+	天狼星，织女星，参宿四
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="星星" icon="star" %}
+天狼星，织女星，参宿四
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="星星" icon="star">
+	天狼星，织女星，参宿四
+</Card>
+
+</Preview>
+
+### 分组卡片
+
+当有足够大的空间时，可以使用 [`<CardGrid>`](/zh-cn/components/card-grids/) 组件将多个卡片分组，并排显示多个卡片。
+有关示例，请参阅 [“分组卡片”](/zh-cn/components/card-grids/#分组卡片) 指南。
+
+## `<Card>` 的属性
+
+**实现：** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+`<Card>` 组件接受以下属性：
+
+### `title`
+
+**必要属性**  
+**类型：** `string`
+
+要显示的卡片标题。
+
+### `icon`
+
+**类型：** `string`
+
+将 `icon` 属性设置为 [Starlight 的内置图标名称之一](/zh-cn/reference/icons/#所有图标)，能够使卡片包含一个图标。
