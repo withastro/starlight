@@ -19,11 +19,11 @@ Sebagai contoh, dengan struktur file berikut:
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-      - reference/
-        - configuration.md
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
 
 </FileTree>
 
@@ -32,17 +32,15 @@ Sidebar berikut akan secara otomatis dihasilkan:
 <SidebarPreview
 	config={[
 		{
-			label: 'guides',
+			label: 'constellations',
 			items: [
-				{ label: 'Components', link: '/guides/components/' },
-				{ label: 'Internationalization (i18n)', link: '/guides/i18n/' },
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orion', link: '' },
 			],
 		},
 		{
-			label: 'reference',
-			items: [
-				{ label: 'Configuration Reference', link: '/reference/configuration/' },
-			],
+			label: 'stars',
+			items: [{ label: 'Betelgeuse', link: '' }],
 		},
 	]}
 />
@@ -51,31 +49,85 @@ Pelajari lebih lanjut tentang sidebar yang dihasilkan secara otomatis di bagian 
 
 ## Tambahkan tautan dan grup tautan
 
-Untuk mengonfigurasi [tautan](#tautan) dan [grup tautan](#grup-tautan) (dalam header yang dapat dilipat), gunakan properti [`starlight.sidebar`](/id/reference/configuration/#sidebar) dalam `astro.config.mjs`.
+Untuk mengonfigurasi tautan sidebar dan grup tautan (dalam header yang dapat dilipat), gunakan properti [`starlight.sidebar`](/id/reference/configuration/#sidebar) di `astro.config.mjs`.
 
 Dengan menggabungkan tautan dan grup, Anda dapat membuat berbagai macam layout sidebar.
 
-### Tautan
+### Tautan Internal
 
-Tambahkan tautan ke halaman internal atau eksternal menggunakan objek dengan properti `label` dan `link`.
+Tambahkan tautan ke halaman di `src/content/docs/` menggunakan objek dengan properti `slug`.
+Judul halaman yang ditautkan akan digunakan sebagai label secara default.
 
-```js
+Misalnya, dengan konfigurasi berikut:
+
+```js "slug:"
 starlight({
 	sidebar: [
-		// Tautan ke panduan CSS dan Styling.
-		{ label: 'CSS dan Styling', link: '/guides/css-and-tailwind/' },
-		// Tautan eksternal ke website Astro.
-		{ label: 'Astro', link: 'https://astro.build/' },
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
 	],
 });
 ```
 
-Konfigurasi di atas akan menghasilkan sidebar berikut:
+Dan struktur berkasnya sebagai berikut:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+Sidebar berikut akan dibuat:
 
 <SidebarPreview
 	config={[
-		{ label: 'CSS dan Styling', link: '/id/guides/css-and-tailwind/' },
-		{ label: 'Astro', link: 'https://astro.build/' },
+		{ label: 'Andromeda', link: '' },
+		{ label: 'Orion', link: '' },
+	]}
+/>
+
+Untuk mengganti nilai yang disimpulkan dari frontmatter halaman yang ditautkan, Anda dapat menambahkan properti `label`, [`translations`](#internasionalisasi), dan [`attrs`](#atribut-html-custom).
+
+Lihat [“Menyesuaikan tautan yang dibuat secara otomatis”](#menyesuaikan-tautan-yang-dihasilkan-secara-otomatis-di-frontmatter) untuk detail lebih lanjut tentang cara mengendalikan tampilan sidebar dari halaman frontmatter.
+
+#### Singkatan untuk tautan internal
+
+Tautan internal juga dapat ditentukan dengan hanya menyediakan string untuk slug halaman sebagai singkatan.
+
+Misalnya, konfigurasi berikut ini setara dengan konfigurasi di atas, yang menggunakan `slug`:
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### Tautan lainnya
+
+Tambahkan tautan ke halaman eksternal atau non-dokumen menggunakan objek dengan properti `label` dan `link`.
+
+```js "label:" "link:"
+starlight({
+	sidebar: [
+		// A link to a non-docs page on this site.
+		{ label: 'Toko Meteor', link: '/shop/' },
+		// An external link to the NASA website.
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	],
+});
+```
+
+Konfigurasi di atas menghasilkan sidebar berikut:
+
+<SidebarPreview
+	config={[
+		{ label: 'Toko Meteor', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
 
@@ -87,22 +139,22 @@ Grup dapat berisi baik tautan maupun sub-grup lainnya.
 Tambahkan grup menggunakan objek dengan properti `label` dan `items`. `label` akan digunakan sebagai judul untuk grup.
 Tambahkan tautan atau subgrup ke dalam array `items`.
 
-```js
+```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// Grup tautan dengan label "Panduan".
+		// Sekelompok tautan yang diberi label "Constellations".
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			items: [
-				{ label: 'Komponen', link: '/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/guides/i18n/' },
-				// Grup tautan bertingkat
+				'constellations/carina',
+				'constellations/centaurus',
+				// Sekelompok tautan bersarang untuk constellations seasonal.
 				{
-					label: 'Styling',
+					label: 'Seasonal',
 					items: [
-						{ label: 'CSS', link: '/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/guides/css-and-tailwind/' },
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',
 					],
 				},
 			],
@@ -116,16 +168,16 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			items: [
-				{ label: 'Komponen', link: '/id/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/id/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'Styling',
+					label: 'Seasonal',
 					items: [
-						{ label: 'CSS', link: '/id/guides/css-and-tailwind/' },
-						{ label: 'Tailwind', link: '/id/guides/css-and-tailwind/' },
-						{ label: 'Shiki', link: '/id/guides/css-and-tailwind/' },
+						{ label: 'Andromeda', link: '' },
+						{ label: 'Orion', link: '' },
+						{ label: 'Ursa Minor', link: '' },
 					],
 				},
 			],
@@ -139,15 +191,17 @@ Starlight dapat secara otomatis membuat grup di sidebar Anda berdasarkan direkto
 Ini berguna ketika Anda tidak ingin memasukkan setiap item sidebar secara manual ke dalam grup.
 Halaman akan diurutkan secara alfabetis berdasarkan nama file secara default.
 
+Secara default, halaman diurutkan berdasarkan abjad menurut file [`slug`](/id/reference/overrides/#slug).
+
 Tambahkan grup yang dihasilkan secara otomatis menggunakan objek dengan properti `label` dan `autogenerate`. Konfigurasi `autogenerate` Anda harus menentukan `directory` yang akan digunakan untuk entri sidebar. Sebagai contoh, dengan konfigurasi berikut:
 
-```js
+```js "label:" "autogenerate:"
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
-			// Hasilkan grup tautan secara otomatis untuk direktori 'guides'.
-			autogenerate: { directory: 'guides' },
+			label: 'Constellations',
+			// Buat secara otomatis sekelompok tautan untuk direktori 'constellations'.
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -160,11 +214,11 @@ Dan struktur file berikut:
 - src/
   - content/
     - docs/
-      - guides/
-        - components.md
-        - i18n.md
-        - advanced/
-          - project-structure.md
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
 
 </FileTree>
 
@@ -173,15 +227,13 @@ Sidebar berikut akan dihasilkan:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			items: [
-				{ label: 'Komponen', link: '/id/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/id/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'advanced',
-					items: [
-						{ label: 'Struktur Proyek', link: '/id/guides/project-structure/' },
-					],
+					label: 'seasonal',
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
 		},
@@ -194,8 +246,9 @@ Gunakan [field `sidebar` frontmatter](/id/reference/frontmatter/#sidebar) pada m
 
 Opsi frontmatter sidebar memungkinkan Anda mengatur [label custom](/id/reference/frontmatter/#label) atau menambahkan [badge](/id/reference/frontmatter/#badge) ke tautan, [menyembunyikan](/id/reference/frontmatter/#hidden) tautan dari sidebar, atau menentukan [urutan pengurutan custom](/id/reference/frontmatter/#order).
 
-```md
+```md "sidebar:"
 ---
+# src/content/docs/example.md
 title: Halaman Saya
 sidebar:
   # Atur label custom untuk tautan
@@ -216,45 +269,44 @@ Sebuah grup yang dihasilkan secara otomatis termasuk halaman dengan frontmatter 
 		{
 			label: 'Panduan',
 			items: [
-				{ label: 'Sebuah halaman', link: '#' },
+				{ label: 'Sebuah halaman', link: '' },
 				{
 					label: 'Label sidebar custom',
-					link: '#',
+					link: '',
 					badge: { text: 'Baru', variant: 'tip' },
 				},
-				{ label: 'Halaman lain', link: '#' },
+				{ label: 'Halaman lain', link: '' },
 			],
 		},
 	]}
 />
 
-:::note
-Konfigurasi frontmatter `sidebar` hanya digunakan untuk tautan yang dihasilkan secara otomatis dan akan diabaikan untuk tautan yang ditentukan secara manual.
+:::catatan
+Konfigurasi frontmatter `sidebar` hanya digunakan untuk tautan dalam grup yang dibuat secara otomatis dan tautan dokumen yang didefinisikan dengan properti `slug`. Konfigurasi ini tidak berlaku untuk tautan yang didefinisikan dengan properti `link`.
 :::
 
 ## Badges
 
 Tautan, grup, dan grup yang dibuat secara otomatis juga dapat menyertakan properti `badge` untuk menampilkan _badge_ di samping labelnya.
 
-```js
+```js {9,16}
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
+			label: 'Stars',
 			items: [
-				// Tautan dengan badge "Baru".
+				// Tautan dengan badge "Supergiant".
 				{
-					label: 'Komponen',
-					link: '/guides/components/',
-					badge: 'Baru',
+					slug: 'stars/persei',
+					badge: 'Supergiant',
 				},
 			],
 		},
-		// Grup yang dibuat secara otomatis dengan badge "Ditinggalkan"
+		// Grup yang dibuat secara otomatis dengan badge "Outdated".
 		{
-			label: 'Referensi',
-			badge: 'Ditinggalkan',
-			autogenerate: { directory: 'reference' },
+			label: 'Moons',
+			badge: 'Outdated',
+			autogenerate: { directory: 'moons' },
 		},
 	],
 });
@@ -265,54 +317,55 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Stars',
 			items: [
 				{
-					label: 'Komponen',
-					link: '/id/guides/components/',
-					badge: { text: 'Baru', variant: 'default' },
+					label: 'Persei',
+					link: '',
+					badge: { text: 'Supergiant', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Referensi',
-			badge: { text: 'Ditinggalkan', variant: 'default' },
+			label: 'Moons',
+			badge: { text: 'Outdated', variant: 'default' },
 			items: [
 				{
-					label: 'Referensi Konfigurasi',
-					link: '/id/reference/configuration/',
+					label: 'Io',
+					link: '',
 				},
 				{
-					label: 'Referensi Frontmatter',
-					link: '/id/reference/frontmatter/',
+					label: 'Europa',
+					link: '',
 				},
 				{
-					label: 'Referensi Overrides',
-					link: '/id/reference/overrides/',
+					label: 'Ganymede',
+					link: '',
 				},
 			],
 		},
 	]}
 />
 
-### Variasi badge
+### Variasi badge dan tampilan kustom
 
-Sesuaikan gaya lambang menggunakan objek dengan properti `text` dan `variant`.
+Sesuaikan gaya badge menggunakan objek dengan properti `text`, `variant`, dan `class`.
 
 `text` mewakili konten yang akan ditampilkan (misalnya "Baru").
-Timpa gaya `default`, yang menggunakan warna aksen website Anda, dengan mengatur properti `variant` ke salah satu nilai berikut: `note`, `tip`, `danger`, `caution`, atau `success`.
+Secara default, badge akan menggunakan warna aksen website Anda. Untuk menggunakan tampilan badge bawaan, tetapkan properti `variant` ke salah satu nilai berikut: `note`, `tip`, `danger`, `caution` atau `success`.
 
-```js
+Secara opsional, Anda dapat membuat tampilan badge kustom dengan menyetel properti `class` ke nama kelas CSS.
+
+```js {9}
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
+			label: 'Stars',
 			items: [
-				// Sebuah tautan dengan badge "Eksperimental" berwarna kuning.
+				// Tautan dengan badge "Stub" berwarna kuning.
 				{
-					label: 'Komponen',
-					link: '/guides/components/',
-					badge: { text: 'Eksperimental', variant: 'caution' },
+					slug: 'stars/sirius',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -325,12 +378,12 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Stars',
 			items: [
 				{
-					label: 'Komponen',
-					link: '/id/guides/components/',
-					badge: { text: 'Eksperimental', variant: 'caution' },
+					label: 'Sirius',
+					link: '',
+					badge: { text: 'Stub', variant: 'caution' },
 				},
 			],
 		},
@@ -343,16 +396,16 @@ Tautan juga dapat menyertakan properti `attrs` untuk menambahkan atribut HTML ku
 
 Pada contoh berikut, `attrs` digunakan untuk menambahkan atribut `target="_blank"`, sehingga tautan dibuka di tab baru, dan untuk menerapkan atribut `style` kustom untuk memberi style miring pada label tautan:
 
-```js
+```js {10}
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
+			label: 'Resources',
 			items: [
-				// Tautan eksternal ke dokumentasi Astro yang dibuka di tab baru.
+				// Tautan eksternal ke situs web NASA yang dibuka di tab baru.
 				{
-					label: 'Dokumentasi Astro',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: { target: '_blank', style: 'font-style: italic' },
 				},
 			],
@@ -366,11 +419,11 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Resources',
 			items: [
 				{
-					label: 'Dokumentasi Astro',
-					link: 'https://docs.astro.build/',
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
 					attrs: {
 						target: '_blank',
 						style: 'font-style: italic',
@@ -383,31 +436,31 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 
 ## Internasionalisasi
 
-Gunakan properti `translations` pada entri tautan dan grup untuk menerjemahkan label tautan atau grup untuk setiap bahasa yang didukung dengan menentukan tag bahasa [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), misalnya `"en"`, `"ar"`, atau `"zh-CN"`, sebagai kunci dan label yang diterjemahkan sebagai nilainya.
+Gunakan properti `translations` pada entri tautan dan grup untuk menerjemahkan label tautan atau grup untuk setiap bahasa yang didukung dengan menentukan tag bahasa [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), misalnya `"en"`, `"ar"`, atau `"zh-CN"`, sebagai nama properti dan label yang diterjemahkan sebagai nilainya.
 Properti `label` akan digunakan untuk bahasa default dan untuk bahasa yang tidak memiliki terjemahan.
 
-```js
+```js {5-7,11-13,18-20}
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			translations: {
-				'pt-BR': 'Guias',
+				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Komponen',
+					label: 'Andromeda',
 					translations: {
-						'pt-BR': 'Componentes',
+						'pt-BR': 'Andrômeda',
 					},
-					link: '/guides/components/',
+					slug: 'constellations/andromeda',
 				},
 				{
-					label: 'Internasionalisasi (i18n)',
+					label: 'Scorpius',
 					translations: {
-						'pt-BR': 'Internacionalização (i18n)',
+						'pt-BR': 'Escorpião',
 					},
-					link: '/guides/i18n/',
+					slug: 'constellations/scorpius',
 				},
 			],
 		},
@@ -420,10 +473,94 @@ Menelusuri dokumentasi dalam Bahasa Portugis Brasil akan menghasilkan sidebar be
 <SidebarPreview
 	config={[
 		{
-			label: 'Guias',
+			label: 'Constelação',
 			items: [
-				{ label: 'Componentes', link: '/pt-br/guides/components/' },
-				{ label: 'Internacionalização (i18n)', link: '/pt-br/guides/i18n/' },
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+### Internasionalisasi dengan tautan internal
+
+[Tautan internal](#tautan-internal) akan secara otomatis menggunakan judul halaman yang diterjemahkan dari bagian depan konten secara default:
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan bilah sisi berikut:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+Di website multibahasa, nilai `slug` tidak menyertakan bagian bahasa dari URL.
+Misalnya, jika Anda memiliki halaman di `en/intro` dan `pt-br/intro`, slug-nya adalah `intro` saat mengonfigurasi sidebar.
+
+### Internasionalisasi dengan badges
+
+Untuk [badges](#badges), properti `text` dapat berupa string, atau untuk website multibahasa, objek dengan nilai untuk setiap bahasa yang berbeda.
+Saat menggunakan bentuk objek, nama propertinya harus berupa tag [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) (misalnya `en`, `ar`, atau `zh-CN`):
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							en: 'New',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan bilah sisi berikut:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
 			],
 		},
 	]}
@@ -433,17 +570,14 @@ Menelusuri dokumentasi dalam Bahasa Portugis Brasil akan menghasilkan sidebar be
 
 Grup-grup tautan dapat dikembangkan secara default dengan mengatur properti `collapsed` menjadi `true`.
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
-			// Kembangkan grup secara default.
+			label: 'Constellations',
+			// Grup terlipat secara default.
 			collapsed: true,
-			items: [
-				{ label: 'Komponen', link: '/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/guides/i18n/' },
-			],
+			items: ['constellations/andromeda', 'constellations/orion'],
 		},
 	],
 });
@@ -454,11 +588,11 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			collapsed: true,
 			items: [
-				{ label: 'Komponen', link: '/id/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/id/guides/i18n/' },
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orion', link: '' },
 			],
 		},
 	]}
@@ -466,14 +600,14 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 
 [Grup-grup yang dihasilkan secara otomatis](#grup-grup-yang-dihasilkan-secara-otomatis) akan mengikuti nilai `collapsed` dari _parent group_ mereka:
 
-```js
+```js {5-6}
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
-			// Kembangkan grup dan subgrup otomatis yang dihasilkan secara bawaan.
+			label: 'Constellations',
+			// Grup terlipat dan subgrup yang dibuat secara otomatis secara default.
 			collapsed: true,
-			autogenerate: { directory: 'guides' },
+			autogenerate: { directory: 'constellations' },
 		},
 	],
 });
@@ -484,33 +618,32 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			collapsed: true,
 			items: [
-				{ label: 'Komponen', link: '/id/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/id/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'advanced',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{ label: 'Struktur Proyek', link: '/id/guides/project-structure/' },
-					],
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
 		},
 	]}
 />
 
-Perilaku ini dapat diubah dengan mendefinisikan properti `autogenerate.collapsed`.
+Perilaku ini dapat ditimpa dengan mendefinisikan properti `autogenerate.collapsed`.
 
-```js
+```js {5-7} "collapsed: true"
 starlight({
 	sidebar: [
 		{
-			label: 'Panduan',
-			// Jangan kembangkan grup "Panduan" tetapi kembangkan subgrup otomatisnya.
+			label: 'Constellations',
+			// Jangan lipat grup "Constellations" tetapi lipat subgrupnya yang
+			// dibuat secara otomatis.
 			collapsed: false,
-			autogenerate: { directory: 'guides', collapsed: true },
+			autogenerate: { directory: 'constellations', collapsed: true },
 		},
 	],
 });
@@ -521,16 +654,14 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Panduan',
+			label: 'Constellations',
 			items: [
-				{ label: 'Komponen', link: '/id/guides/components/' },
-				{ label: 'Internasionalisasi (i18n)', link: '/id/guides/i18n/' },
+				{ label: 'Carina', link: '' },
+				{ label: 'Centaurus', link: '' },
 				{
-					label: 'advanced',
+					label: 'seasonal',
 					collapsed: true,
-					items: [
-						{ label: 'Struktur Proyek', link: '/id/guides/project-structure/' },
-					],
+					items: [{ label: 'Andromeda', link: '' }],
 				},
 			],
 		},
