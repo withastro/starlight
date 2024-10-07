@@ -26,51 +26,53 @@ const {
 </a>
 
 <style>
-	.sl-link-button {
-		align-items: center;
-		border: 1px solid transparent;
-		border-radius: 999rem;
-		display: inline-flex;
-		font-size: var(--sl-text-sm);
-		gap: 0.5em;
-		line-height: 1.1875;
-		outline-offset: 0.25rem;
-		padding: 0.4375rem 1.125rem;
-		text-decoration: none;
-	}
-
-	.sl-link-button.primary {
-		background: var(--sl-color-text-accent);
-		border-color: var(--sl-color-text-accent);
-		color: var(--sl-color-black);
-	}
-	.sl-link-button.primary:hover {
-		color: var(--sl-color-black);
-	}
-	.sl-link-button.secondary {
-		border-color: inherit;
-		color: var(--sl-color-white);
-	}
-	.sl-link-button.minimal {
-		color: var(--sl-color-white);
-		padding-inline: 0;
-	}
-
-	.sl-link-button :global(svg) {
-		flex-shrink: 0;
-	}
-
-	@media (min-width: 50rem) {
+	@layer starlight.user-components {
 		.sl-link-button {
-			font-size: var(--sl-text-base);
-			padding: 0.9375rem 1.25rem;
+			align-items: center;
+			border: 1px solid transparent;
+			border-radius: 999rem;
+			display: inline-flex;
+			font-size: var(--sl-text-sm);
+			gap: 0.5em;
+			line-height: 1.1875;
+			outline-offset: 0.25rem;
+			padding: 0.4375rem 1.125rem;
+			text-decoration: none;
 		}
-	}
 
-	:global(.sl-markdown-content) .sl-link-button {
-		margin-inline-end: 1rem;
-	}
-	:global(.sl-markdown-content) .sl-link-button:not(:where(p *)) {
-		margin-block: 1rem;
+		.sl-link-button.primary {
+			background: var(--sl-color-text-accent);
+			border-color: var(--sl-color-text-accent);
+			color: var(--sl-color-black);
+		}
+		.sl-link-button.primary:hover {
+			color: var(--sl-color-black);
+		}
+		.sl-link-button.secondary {
+			border-color: inherit;
+			color: var(--sl-color-white);
+		}
+		.sl-link-button.minimal {
+			color: var(--sl-color-white);
+			padding-inline: 0;
+		}
+
+		.sl-link-button :global(svg) {
+			flex-shrink: 0;
+		}
+
+		@media (min-width: 50rem) {
+			.sl-link-button {
+				font-size: var(--sl-text-base);
+				padding: 0.9375rem 1.25rem;
+			}
+		}
+
+		:global(.sl-markdown-content) .sl-link-button {
+			margin-inline-end: 1rem;
+		}
+		:global(.sl-markdown-content) .sl-link-button:not(:where(p *)) {
+			margin-block: 1rem;
+		}
 	}
 </style>

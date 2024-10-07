@@ -25,34 +25,36 @@ import { Icon } from '../components';
 </footer>
 
 <style>
-	footer {
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-	.meta {
-		gap: 0.75rem 3rem;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		margin-top: 3rem;
-		font-size: var(--sl-text-sm);
-		color: var(--sl-color-gray-3);
-	}
-	.meta > :global(p:only-child) {
-		margin-inline-start: auto;
-	}
+	@layer starlight.components {
+		footer {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+		.meta {
+			gap: 0.75rem 3rem;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-top: 3rem;
+			font-size: var(--sl-text-sm);
+			color: var(--sl-color-gray-3);
+		}
+		.meta > :global(p:only-child) {
+			margin-inline-start: auto;
+		}
 
-	.kudos {
-		align-items: center;
-		gap: 0.5em;
-		margin: 1.5rem auto;
-		font-size: var(--sl-text-xs);
-		text-decoration: none;
-		color: var(--sl-color-gray-3);
-	}
-	.kudos :global(svg) {
-		color: var(--sl-color-orange);
-	}
-	.kudos:hover {
-		color: var(--sl-color-white);
+		.kudos {
+			align-items: center;
+			gap: 0.5em;
+			margin: 1.5rem auto;
+			font-size: var(--sl-text-xs);
+			text-decoration: none;
+			color: var(--sl-color-gray-3);
+		}
+		.kudos :global(svg) {
+			color: var(--sl-color-orange);
+		}
+		.kudos:hover {
+			color: var(--sl-color-white);
+		}
 	}
 </style>
