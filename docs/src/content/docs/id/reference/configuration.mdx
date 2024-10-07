@@ -384,10 +384,10 @@ starlight({
 **type:** `StarlightExpressiveCodeOptions | boolean`  
 **default:** `true`
 
-Starlight menggunakan [Kode Ekspresif](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) untuk merender blok kode dan menambahkan dukungan untuk menyorot bagian contoh kode, menambahkan nama file ke blok kode, dan banyak lagi.
-Lihat [panduan “Blok kode”](/id/guides/authoring-content/#code-blocks) untuk mempelajari cara menggunakan sintaksis Kode Ekspresif dalam konten Markdown dan MDX Anda.
+Starlight menggunakan [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) untuk merender blok kode dan menambahkan dukungan untuk menyorot bagian contoh kode, menambahkan nama file ke blok kode, dan banyak lagi.
+Lihat [panduan “Blok kode”](/id/guides/authoring-content/#code-blocks) untuk mempelajari cara menggunakan sintaksis Expressive Code dalam konten Markdown dan MDX Anda.
 
-Anda dapat menggunakan salah satu [opsi konfigurasi Kode Ekspresif](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) standar serta beberapa properti khusus Starlight, dengan mengaturnya dalam opsi `expressiveCode` Starlight.
+Anda dapat menggunakan salah satu [opsi konfigurasi Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) standar serta beberapa properti khusus Starlight, dengan mengaturnya dalam opsi `expressiveCode` Starlight.
 Misalnya, gunakan opsi `styleOverrides` Expressive Code untuk mengganti CSS default. Ini memungkinkan kustomisasi seperti memberi blok kode Anda sudut membulat:
 
 ```js ins={2-4}
@@ -398,7 +398,7 @@ starlight({
 });
 ```
 
-Jika Anda ingin menonaktifkan Kode Ekspresif, gunakan `expressiveCode: false` dalam konfigurasi Starlight Anda:
+Jika Anda ingin menonaktifkan Expressive Code, gunakan `expressiveCode: false` dalam konfigurasi Starlight Anda:
 
 ```js ins={2}
 starlight({
@@ -406,7 +406,7 @@ starlight({
 });
 ```
 
-Selain opsi Kode Ekspresif standar, Anda juga dapat mengatur properti khusus Starlight berikut dalam konfigurasi `expressiveCode` Anda untuk lebih menyesuaikan aturan tema untuk blok kode Anda:
+Selain opsi Expressive Code standar, Anda juga dapat mengatur properti khusus Starlight berikut dalam konfigurasi `expressiveCode` Anda untuk lebih menyesuaikan aturan tema untuk blok kode Anda:
 
 #### `themes`
 
@@ -429,7 +429,7 @@ Konfigurasikan aturan ini dengan opsi [`useStarlightDarkModeSwitch`](#usestarlig
 Jika `true`, blok kode secara otomatis beralih antara tema terang dan gelap saat tema situs berubah.
 Jika `false`, Anda harus menambahkan CSS secara manual untuk menangani peralihan antara beberapa tema.
 
-:::catatan
+:::note
 Saat mengatur `themes`, Anda harus menyediakan setidaknya satu tema gelap dan satu tema terang agar sakelar mode gelap Starlight dapat berfungsi.
 :::
 
@@ -441,7 +441,7 @@ Saat mengatur `themes`, Anda harus menyediakan setidaknya satu tema gelap dan sa
 Jika `true`, variabel CSS Starlight digunakan untuk warna elemen UI blok kode (latar belakang, tombol, bayangan, dll.), yang sesuai dengan [tema warna situs](/id/guides/css-and-tailwind/#tema).
 Jika `false`, warna yang disediakan oleh tema penyorotan sintaksis aktif digunakan untuk elemen-elemen ini.
 
-:::catatan
+:::note
 Saat menggunakan tema khusus dan menyetelnya ke `true`, Anda harus menyediakan setidaknya satu tema gelap dan satu tema terang untuk memastikan kontras warna yang tepat.
 :::
 
