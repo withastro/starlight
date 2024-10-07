@@ -114,9 +114,9 @@ Tambahkan tautan ke halaman eksternal atau non-dokumen menggunakan objek dengan 
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// A link to a non-docs page on this site.
+		// Tautan ke halaman non-dokumen pada website ini.
 		{ label: 'Toko Meteor', link: '/shop/' },
-		// An external link to the NASA website.
+		// Tautan eksternal ke website NASA.
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
 });
@@ -144,13 +144,13 @@ starlight({
 	sidebar: [
 		// Sekelompok tautan yang diberi label "Constellations".
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			items: [
 				'constellations/carina',
 				'constellations/centaurus',
-				// Sekelompok tautan bersarang untuk constellations seasonal.
+				// Sekelompok tautan bersarang untuk Rasi bintang musiman.
 				{
-					label: 'Seasonal',
+					label: 'Musiman',
 					items: [
 						'constellations/andromeda',
 						'constellations/orion',
@@ -168,12 +168,12 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			items: [
 				{ label: 'Carina', link: '' },
 				{ label: 'Centaurus', link: '' },
 				{
-					label: 'Seasonal',
+					label: 'Musiman',
 					items: [
 						{ label: 'Andromeda', link: '' },
 						{ label: 'Orion', link: '' },
@@ -199,7 +199,7 @@ Tambahkan grup yang dihasilkan secara otomatis menggunakan objek dengan properti
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			// Buat secara otomatis sekelompok tautan untuk direktori 'constellations'.
 			autogenerate: { directory: 'constellations' },
 		},
@@ -227,7 +227,7 @@ Sidebar berikut akan dihasilkan:
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			items: [
 				{ label: 'Carina', link: '' },
 				{ label: 'Centaurus', link: '' },
@@ -281,7 +281,7 @@ Sebuah grup yang dihasilkan secara otomatis termasuk halaman dengan frontmatter 
 	]}
 />
 
-:::catatan
+:::note
 Konfigurasi frontmatter `sidebar` hanya digunakan untuk tautan dalam grup yang dibuat secara otomatis dan tautan dokumen yang didefinisikan dengan properti `slug`. Konfigurasi ini tidak berlaku untuk tautan yang didefinisikan dengan properti `link`.
 :::
 
@@ -293,19 +293,19 @@ Tautan, grup, dan grup yang dibuat secara otomatis juga dapat menyertakan proper
 starlight({
 	sidebar: [
 		{
-			label: 'Stars',
+			label: 'Bintang',
 			items: [
-				// Tautan dengan badge "Supergiant".
+				// Tautan dengan badge "Maharaksasa".
 				{
 					slug: 'stars/persei',
-					badge: 'Supergiant',
+					badge: 'Maharaksasa',
 				},
 			],
 		},
-		// Grup yang dibuat secara otomatis dengan badge "Outdated".
+		// Grup yang dibuat secara otomatis dengan badge "Usang".
 		{
-			label: 'Moons',
-			badge: 'Outdated',
+			label: 'Bulan',
+			badge: 'Usang',
 			autogenerate: { directory: 'moons' },
 		},
 	],
@@ -317,18 +317,18 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Stars',
+			label: 'Bintang',
 			items: [
 				{
 					label: 'Persei',
 					link: '',
-					badge: { text: 'Supergiant', variant: 'default' },
+					badge: { text: 'Maharaksasa', variant: 'default' },
 				},
 			],
 		},
 		{
-			label: 'Moons',
-			badge: { text: 'Outdated', variant: 'default' },
+			label: 'Bulan',
+			badge: { text: 'Usang', variant: 'default' },
 			items: [
 				{
 					label: 'Io',
@@ -360,12 +360,12 @@ Secara opsional, Anda dapat membuat tampilan badge kustom dengan menyetel proper
 starlight({
 	sidebar: [
 		{
-			label: 'Stars',
+			label: 'Bintang',
 			items: [
-				// Tautan dengan badge "Stub" berwarna kuning.
+				// Tautan dengan badge "Rintisan" berwarna kuning.
 				{
 					slug: 'stars/sirius',
-					badge: { text: 'Stub', variant: 'caution' },
+					badge: { text: 'Rintisan', variant: 'caution' },
 				},
 			],
 		},
@@ -378,12 +378,12 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Stars',
+			label: 'Bintang',
 			items: [
 				{
 					label: 'Sirius',
 					link: '',
-					badge: { text: 'Stub', variant: 'caution' },
+					badge: { text: 'Rintisan', variant: 'caution' },
 				},
 			],
 		},
@@ -400,7 +400,7 @@ Pada contoh berikut, `attrs` digunakan untuk menambahkan atribut `target="_blank
 starlight({
 	sidebar: [
 		{
-			label: 'Resources',
+			label: 'Sumber',
 			items: [
 				// Tautan eksternal ke situs web NASA yang dibuka di tab baru.
 				{
@@ -419,7 +419,7 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Resources',
+			label: 'Sumber',
 			items: [
 				{
 					label: 'NASA',
@@ -503,7 +503,7 @@ starlight({
 });
 ```
 
-Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan bilah sisi berikut:
+Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan sidebar berikut:
 
 <SidebarPreview
 	config={[
@@ -549,7 +549,7 @@ starlight({
 });
 ```
 
-Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan bilah sisi berikut:
+Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan sidebar berikut:
 
 <SidebarPreview
 	config={[
@@ -566,15 +566,15 @@ Menelusuri dokumentasi dalam bahasa Portugis Brasil akan menghasilkan bilah sisi
 	]}
 />
 
-## Grup yang dapat dikembangkan
+## Grup yang dapat dilipat
 
-Grup-grup tautan dapat dikembangkan secara default dengan mengatur properti `collapsed` menjadi `true`.
+Grup-grup tautan dapat dilipat secara default dengan mengatur properti `collapsed` menjadi `true`.
 
 ```js {5-6}
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			// Grup terlipat secara default.
 			collapsed: true,
 			items: ['constellations/andromeda', 'constellations/orion'],
@@ -588,7 +588,7 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			collapsed: true,
 			items: [
 				{ label: 'Andromeda', link: '' },
@@ -604,7 +604,7 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			// Grup terlipat dan subgrup yang dibuat secara otomatis secara default.
 			collapsed: true,
 			autogenerate: { directory: 'constellations' },
@@ -618,7 +618,7 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			collapsed: true,
 			items: [
 				{ label: 'Carina', link: '' },
@@ -639,7 +639,7 @@ Perilaku ini dapat ditimpa dengan mendefinisikan properti `autogenerate.collapse
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			// Jangan lipat grup "Constellations" tetapi lipat subgrupnya yang
 			// dibuat secara otomatis.
 			collapsed: false,
@@ -654,7 +654,7 @@ Konfigurasi di atas akan menghasilkan sidebar berikut:
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: 'Rasi bintang',
 			items: [
 				{ label: 'Carina', link: '' },
 				{ label: 'Centaurus', link: '' },
