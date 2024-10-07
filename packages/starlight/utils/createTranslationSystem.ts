@@ -56,7 +56,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	 * - `exists()` method for checking if a key exists in the dictionary.
 	 * - `dir()` method for getting the text direction of the locale.
 	 *
-	 * @param {string | undefined} [locale]
+	 * @param {string | undefined} [lang]
 	 * @example
 	 * const t = useTranslations('en');
 	 * const label = t('search.label');
@@ -68,8 +68,8 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	 * const dir = t.dir();
 	 * // => 'ltr'
 	 */
-	return (locale: string | undefined) => {
-		const lang = localeToLang(locale, config.locales, config.defaultLocale);
+	return (lang: string | undefined) => {
+		lang ??= config.defaultLocale?.lang || BuiltInDefaultLocale.lang;
 
 		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
 		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace);
