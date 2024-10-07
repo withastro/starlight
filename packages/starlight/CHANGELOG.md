@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.28.3
+
+### Patch Changes
+
+- [#2408](https://github.com/withastro/starlight/pull/2408) [`0b4823d`](https://github.com/withastro/starlight/commit/0b4823d534abe517fac5efd97f6febb5965714fe) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a link formatting issue when using the Astro `build.format` option set to `file` with a `base`.
+
+- [#2380](https://github.com/withastro/starlight/pull/2380) [`7b451cf`](https://github.com/withastro/starlight/commit/7b451cff6979bef1c817f3a84392221ac884ba3d) Thanks [@delucis](https://github.com/delucis)! - Loosen Starlight’s i18n schema to pass through unknown keys
+
+- [#2388](https://github.com/withastro/starlight/pull/2388) [`6bba3d8`](https://github.com/withastro/starlight/commit/6bba3d8e02b95ecee7f9c945b6ee33b4c4ba755d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential type-checking issue in Starlight projects.
+
+- [#2443](https://github.com/withastro/starlight/pull/2443) [`a0f40b3`](https://github.com/withastro/starlight/commit/a0f40b3c3c7ab0cb9f0f5f11b94e3679547f6ab4) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fixes CSS issue where bottom padding is not applied in the search dialog.
+
 ## 0.28.2
 
 ### Patch Changes
