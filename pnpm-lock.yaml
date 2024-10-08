@@ -64,8 +64,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       starlight-links-validator:
-        specifier: ^0.11.0
-        version: 0.11.0(@astrojs/starlight@packages+starlight)(astro@4.15.3)
+        specifier: ^0.12.1
+        version: 0.12.1(@astrojs/starlight@packages+starlight)(astro@4.15.3)
       start-server-and-test:
         specifier: ^2.0.4
         version: 2.0.4
@@ -73,7 +73,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.28.2
+        specifier: ^0.28.3
         version: link:../../packages/starlight
       astro:
         specifier: ^4.15.3
@@ -88,7 +88,7 @@ importers:
         specifier: ^0.11.4
         version: 0.11.4(astro@4.15.3)
       '@astrojs/starlight':
-        specifier: ^0.28.2
+        specifier: ^0.28.3
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
         specifier: ^0.1.0
@@ -103,7 +103,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.28.2
+        specifier: ^0.28.3
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
@@ -2054,6 +2054,10 @@ packages:
 
   /@types/opentype.js@1.3.8:
     resolution: {integrity: sha512-H6qeTp03jrknklSn4bpT1/9+1xCAEIU2CnjcWPkicJy8A1SKuthanbvoHYMiv79/2W3Xn1XE4gfSJFzt2U3JSw==}
+    dev: true
+
+  /@types/picomatch@2.3.3:
+    resolution: {integrity: sha512-Yll76ZHikRFCyz/pffKGjrCwe/le2CDwOP5F210KQo27kpRE46U2rDnzikNlVn6/ezH3Mhn46bJMTfeVTtcYMg==}
     dev: true
 
   /@types/sax@1.2.4:
@@ -6777,14 +6781,15 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.11.0(@astrojs/starlight@packages+starlight)(astro@4.15.3):
-    resolution: {integrity: sha512-7mKiP0xAS8ItKy8QAIkmeNYbzI4w0WD0pOYoTPa1xMNbz+qYr/QWT+a40QO/Z2XYJLzzQn47yomupUfI89wheg==}
+  /starlight-links-validator@0.12.1(@astrojs/starlight@packages+starlight)(astro@4.15.3):
+    resolution: {integrity: sha512-LhRuGaI9Rp7c7ltwcG0BfCZuAN1d15oYbDB4jXblJ6zsiFcrSGHNlDnKXJHEJZ6XhJ+eOpd1IsHLFLh5Sq6uHg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
       astro: '>=4.0.0'
     dependencies:
       '@astrojs/starlight': link:packages/starlight
+      '@types/picomatch': 2.3.3
       astro: 4.15.3(@types/node@18.16.19)(typescript@5.4.5)
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.1
