@@ -134,6 +134,7 @@ export default defineConfig({
 				{
 					label: 'Components',
 					translations: {
+						de: 'Komponenten',
 						fr: 'Composants',
 						ru: 'Компоненты',
 						ko: '컴포넌트',
