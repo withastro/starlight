@@ -2,6 +2,7 @@
 import { logos } from 'virtual:starlight/user-images';
 import config from 'virtual:starlight/user-config';
 import type { Props } from '../props';
+import { Image } from 'astro:assets';
 const { siteTitle, siteTitleHref } = Astro.props;
 ---
 
@@ -9,22 +10,45 @@ const { siteTitle, siteTitleHref } = Astro.props;
 	{
 		config.logo && logos.dark && (
 			<>
-				<img
-					class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
-					alt={config.logo.alt}
-					src={logos.dark.src}
-					width={logos.dark.width}
-					height={logos.dark.height}
-				/>
-				{/* Show light alternate if a user configure both light and dark logos. */}
-				{!('src' in config.logo) && (
+				{logos.dark.format === 'svg' ? (
 					<img
-						class="dark:sl-hidden"
+						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
 						alt={config.logo.alt}
-						src={logos.light?.src}
-						width={logos.light?.width}
-						height={logos.light?.height}
+						src={logos.dark.src}
+						width={logos.dark.width}
+						height={logos.dark.height}
 					/>
+				) : (
+					<Image
+						class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
+						alt={config.logo.alt}
+						src={logos.dark}
+						width={logos.dark.width}
+						height={logos.dark.height}
+						loading="eager"
+					/>
+				)}
+				{!('src' in config.logo) && logos.light && (
+					<>
+						{logos.light.format === 'svg' ? (
+							<img
+								class="dark:sl-hidden"
+								alt={config.logo.alt}
+								src={logos.light.src}
+								width={logos.light.width}
+								height={logos.light.height}
+							/>
+						) : (
+							<Image
+								class="dark:sl-hidden"
+								alt={config.logo.alt}
+								src={logos.light}
+								width={logos.light.width}
+								height={logos.light.height}
+								loading="eager"
+							/>
+						)}
+					</>
 				)}
 			</>
 		)
