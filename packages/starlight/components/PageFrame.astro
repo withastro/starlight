@@ -1,8 +1,7 @@
 ---
 import MobileMenuToggle from 'virtual:starlight/components/MobileMenuToggle';
-import type { Props } from '../props';
 
-const { hasSidebar } = Astro.props;
+const { hasSidebar } = Astro.locals.routeData!;
 ---
 
 <div class="page sl-flex">
@@ -10,7 +9,7 @@ const { hasSidebar } = Astro.props;
 	{
 		hasSidebar && (
 			<nav class="sidebar" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
-				<MobileMenuToggle {...Astro.props} />
+				<MobileMenuToggle />
 				<div id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">
 						<slot name="sidebar" />

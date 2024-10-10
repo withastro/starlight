@@ -1,9 +1,8 @@
 ---
 import { PAGE_TITLE_ID } from '../constants';
-import type { Props } from '../props';
 ---
 
-<h1 id={PAGE_TITLE_ID}>{Astro.props.entry.data.title}</h1>
+<h1 id={PAGE_TITLE_ID}>{Astro.locals.routeData!.entry.data.title}</h1>
 
 <style>
 	h1 {
