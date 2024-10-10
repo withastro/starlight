@@ -139,6 +139,7 @@ export default defineConfig({
 						ru: 'Компоненты',
 						ko: '컴포넌트',
 						ja: 'コンポーネント',
+						'zh-CN': '组件',
 					},
 					autogenerate: { directory: 'components' },
 				},
