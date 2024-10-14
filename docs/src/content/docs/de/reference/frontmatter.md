@@ -1,5 +1,5 @@
 ---
-title: Frontmatter Referenz
+title: 'Referenz: Frontmatter'
 description: Ein Überblick über die von Starlight unterstützten Standard-Frontmatter-Felder.
 ---
 
