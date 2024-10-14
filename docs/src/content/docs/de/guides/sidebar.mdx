@@ -85,10 +85,10 @@ Und die folgende Dateistruktur:
 Die folgende Seitenleiste wird erstellt:
 
 <SidebarPreview
-    config={[
-        { label: 'Andromeda', link: '' },
-        { label: 'Orion', link: '' },
-    ]}
+	config={[
+		{ label: 'Andromeda', link: '' },
+		{ label: 'Orion', link: '' },
+	]}
 />
 
 Um die Werte zu überschreiben, die aus dem Frontmatter einer verlinkten Seite abgeleitet werden, kannst du die Eigenschaften `label`, [`translations`](#internationalisierung) und [`attrs`](#benutzerdefinierte-html-attribute) hinzufügen.
@@ -103,7 +103,7 @@ Die folgende Konfiguration entspricht zum Beispiel der obigen Konfiguration, die
 
 ```js
 starlight({
-    sidebar: ['constellations/andromeda', 'constellations/orion'],
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
 });
 ```
 
