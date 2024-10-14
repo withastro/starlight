@@ -86,11 +86,11 @@ Tertarik bagaimana perbandingannya dengan _framework_ dokumentasi lainnya? Tes i
 
 | Framework                   | CO₂ per kunjungan halaman | Peringkat |
 | --------------------------- | ------------------------- | :-------: |
-| [Starlight][sl-carbon]      | 0.01g                     |     A+    |
-| [Read the Docs][rtd-carbon] | 0.05g                     |     A+    |
-| [Sphinx][sx-carbon]         | 0.06g                     |     A+    |
-| [VitePress][vp-carbon]      | 0.07g                     |     A+    |
-| [Docus][dc-carbon]          | 0.09g                     |     A+    |
+| [Starlight][sl-carbon]      | 0.01g                     |    A+     |
+| [Read the Docs][rtd-carbon] | 0.05g                     |    A+     |
+| [Sphinx][sx-carbon]         | 0.06g                     |    A+     |
+| [VitePress][vp-carbon]      | 0.07g                     |    A+     |
+| [Docus][dc-carbon]          | 0.09g                     |    A+     |
 | [docsify][dy-carbon]        | 0.10g                     |     A     |
 | [Nextra][nx-carbon]         | 0.11g                     |     A     |
 | [MkDocs][mk-carbon]         | 0.19g                     |     B     |
