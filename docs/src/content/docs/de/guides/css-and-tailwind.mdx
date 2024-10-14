@@ -3,11 +3,15 @@ title: CSS & Styling
 description: Lerne, wie du deine Starlight-Seite mit benutzerdefiniertem CSS gestalten oder mit Tailwind CSS integrieren kannst.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Du kannst deine Starlight-Website mit benutzerdefinierten CSS-Dateien gestalten oder das Starlight Tailwind-Plugin verwenden.
 
 ## Benutzerdefinierte CSS-Styles (Stile)
 
 Passe die Styles deiner Starlight-Seite an, indem du zusätzliche CSS-Dateien bereitstellst, um die Standard-Styles von Starlight zu verändern oder zu erweitern.
+
+<Steps>
 
 1. Füge eine CSS-Datei zu deinem `src/`-Verzeichnis hinzu.
    Du kannst zum Beispiel eine größere Standard-Spaltenbreite und eine größere Textgröße für den Seitentitel festlegen:
@@ -22,7 +26,7 @@ Passe die Styles deiner Starlight-Seite an, indem du zusätzliche CSS-Dateien be
 
 2. Füge den Pfad zu deiner CSS-Datei in Starlights `customCss`- Array in `astro.config.mjs` ein:
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -30,15 +34,17 @@ Passe die Styles deiner Starlight-Seite an, indem du zusätzliche CSS-Dateien be
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Dokumentation mit eigenem CSS',
+   			title: 'Docs With Custom CSS',
    			customCss: [
-   				// Relative Pfad zur eigenen CSS Datei
-   				'./src/styles/custom.css',
+   +				// Relative path to your custom CSS file
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
    });
    ```
+
+</Steps>
 
 Du kannst dir alle CSS-Eigenschaften, die von Starlight verwendet werden und die du einstellen kannst, um deine Seite anzupassen, in der [Datei `props.css` auf GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) ansehen.
 
@@ -55,11 +61,9 @@ Das Starlight Tailwind-Plugin wendet die folgende Konfiguration an:
 
 ### Erstelle ein neues Projekt mit Tailwind
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
 Starte ein neues Starlight-Projekt mit Tailwind CSS vorkonfiguriert, indem du `create astro` verwendest:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -87,9 +91,11 @@ yarn create astro --template starlight/tailwind
 
 Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchtest, folge dieser Anleitung.
 
+<Steps>
+
 1.  Füge die Tailwind-Integration von Astro hinzu:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -119,7 +125,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
 
 2.  Installiere das Starlight Tailwind-Plugin:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -194,6 +200,8 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     };
     ```
 
+</Steps>
+
 ### Starlight mit Tailwind designen
 
 Starlight verwendet Werte aus deiner [Tailwind-Theme-Konfiguration](https://tailwindcss.com/docs/theme) in der Benutzeroberfläche.
@@ -243,6 +251,8 @@ Diese Variablen werden in der gesamten Benutzeroberfläche verwendet, wobei eine
 Verwende die Schieberegler unten, um die Akzent- und Graufarbpalette von Starlight zu ändern.
 Die dunklen und hellen Vorschaubereiche zeigen die resultierenden Farben, und die gesamte Seite wird ebenfalls aktualisiert, um deine Änderungen anzuzeigen.
 
+Verwende die Option Kontraststufe, um festzulegen, welche der Richtlinie für die Zugänglichkeit von Webinhalten [Farbkontraststandards](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) erfüllt werden soll.
+
 Wenn du mit deinen Änderungen zufrieden bist, kopiere den CSS- oder Tailwind-Code unten und verwende ihn in deinem Projekt.
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -257,6 +267,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'Nebel',
 			default: 'Standard',
 			random: 'Zufällig',
+		},
+		contrast: {
+			label: 'Kontraststufe',
 		},
 		editor: {
 			accentColor: 'Akzent',
