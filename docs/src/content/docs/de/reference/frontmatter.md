@@ -270,7 +270,7 @@ pagefind: false
 
 ### `draft`
 
-**Typ:** `boolean`
+**Typ:** `boolean`  
 **Voreinstellung:** `false`
 
 Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build) und [Autogenerierte Link-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) aufgenommen werden soll. Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
