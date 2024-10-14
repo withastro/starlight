@@ -1,6 +1,6 @@
 ---
-title: Komponenten-Ersetzung Referenz
-description: Ein Überblick über die Komponenten und Komponentenprops, die von Starlight Ersetzungen unterstützt werden.
+title: 'Referenz: Ersetzungen'
+description: Ein Überblick über die Komponenten und Komponenteneigenschaften, die von Starlight Ersetzungen unterstützt werden.
 tableOfContents:
   maxHeadingLevel: 4
 ---
