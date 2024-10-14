@@ -1,5 +1,5 @@
 ---
-title: Plugin Referenz
+title: 'Referenz: Plugins'
 description: Ein Überblick über die Starlight-Plugin-API.
 tableOfContents:
   maxHeadingLevel: 4
