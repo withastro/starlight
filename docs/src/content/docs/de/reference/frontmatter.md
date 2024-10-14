@@ -355,7 +355,7 @@ sidebar:
 
 Füge der Seite in der Seitenleiste ein Abzeichen hinzu, wenn es in einer automatisch generierten Gruppe von Links angezeigt wird.
 Bei Verwendung einer Zeichenkette wird das Abzeichen mit einer Standard-Akzentfarbe angezeigt.
-Optional kann ein [`BadgeConfig` Objekt](/de/reference/configuration/#badgeconfig) mit den Feldern `text` und `variant` übergeben werden, um das Abzeichen anzupassen.
+Optional kann ein [`BadgeConfig` Objekt](/de/reference/configuration/#badgeconfig) mit den Feldern `text`, `variant` and `class` übergeben werden, um das Abzeichen anzupassen.
 
 ```md
 ---
