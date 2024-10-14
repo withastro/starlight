@@ -166,8 +166,8 @@ interface HeroConfig {
   actions?: Array<{
     text: string;
     link: string;
-    variant: 'primary' | 'secondary' | 'minimal';
-    icon: string;
+    variant?: 'primary' | 'secondary' | 'minimal';
+    icon?: string;
     attrs?: Record<string, string | number | boolean>;
   }>;
 }
