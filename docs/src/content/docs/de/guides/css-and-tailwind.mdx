@@ -34,9 +34,9 @@ Passe die Styles deiner Starlight-Seite an, indem du zusätzliche CSS-Dateien be
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'Docs With Custom CSS',
+   			title: 'Dokumentation mit benutzerdefiniertem CSS',
    			customCss: [
-   +				// Relative path to your custom CSS file
+   +				// Relativer Pfad zu deiner benutzerdefinierten CSS-Datei
    +				'./src/styles/custom.css',
    			],
    		}),
@@ -173,7 +173,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     export default defineConfig({
     	integrations: [
     		starlight({
-    			title: 'Docs with Tailwind',
+    			title: 'Dokumentation mit Tailwind',
     			customCss: [
     				// Pfad zu deinen grundlegenden Tailwind-Styles
     				'./src/tailwind.css',
