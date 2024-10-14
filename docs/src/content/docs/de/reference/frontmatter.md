@@ -415,7 +415,7 @@ Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines 
 
 ### `extend`
 
-**Typ:** Zod-Schema oder Funktion, die ein Zod-Schema zurückgibt
+**Typ:** Zod-Schema oder Funktion, die ein Zod-Schema zurückgibt  
 **Voreinstellung:** `z.object({})`
 
 Erweitere das Schema von Starlight um zusätzliche Felder, indem du `extend` in den `docsSchema()` Optionen setzt.
