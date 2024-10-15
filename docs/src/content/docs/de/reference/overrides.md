@@ -1,8 +1,10 @@
 ---
-title: 'Referenz: Ersetzungen'
+title: Ersetzung von Komponenten Referenz
 description: Ein Überblick über die Komponenten und Komponenteneigenschaften, die von Starlight Ersetzungen unterstützt werden.
 tableOfContents:
   maxHeadingLevel: 4
+sidebar:
+  label: Ersetzung von Komponenten
 ---
 
 Du kannst Starlight's eingebaute Komponenten überschreiben, indem du Pfade zu Ersatzkomponenten in Starlight's [`components`](/de/reference/configuration/#components)-Konfigurationsoption angibst.
