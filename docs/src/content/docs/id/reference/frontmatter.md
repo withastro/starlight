@@ -415,7 +415,7 @@ Pelajari selengkapnya tentang koleksi skema konten di [“Mendefinisikan koleksi
 
 ### `extend`
 
-**tipe:** Skema Zod atau fungsi yang mengembalikan skema Zod
+**tipe:** Skema Zod atau fungsi yang mengembalikan skema Zod  
 **bawaan:** `z.object({})`
 
 Pengembangan skema Starlight dengan kolom tambahan dengan menyetel `extend` dalam opsi `docsSchema()`.
