@@ -1,6 +1,8 @@
 ---
-title: 'Referenz: Frontmatter'
+title: Frontmatter Referenz
 description: Ein Überblick über die von Starlight unterstützten Standard-Frontmatter-Felder.
+sidebar:
+  label: Frontmatter
 ---
 
 Du kannst einzelne Markdown- und MDX-Seiten in Starlight anpassen, indem du Werte in deren Frontmatter setzt. Zum Beispiel könnte eine normale Seite die Felder `title` und `description` setzen:
