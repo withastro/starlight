@@ -36,8 +36,8 @@ Jedes `<TabItem>` muss ein [`label`](#label) haben, um es den Benutzern anzuzeig
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stars">Sirius, Wega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymed</TabItem>
+	<TabItem label="Sterne">Sirius, Wega, Betelgeuse</TabItem>
+	<TabItem label="Monde">Io, Europa, Ganymed</TabItem>
 </Tabs>
 ```
 
@@ -45,11 +45,11 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ```markdoc
 {% tabs %}
-{% tabitem label="Stars" %}
+{% tabitem label="Sterne" %}
 Sirius, Wega, Betelgeuse
 {% /tabitem %}
 
-{% tabitem label="Moons" %}
+{% tabitem label="Monde" %}
 Io, Europa, Ganymed
 {% /tabitem %}
 {% /tabs %}
@@ -58,8 +58,8 @@ Io, Europa, Ganymed
 </Fragment>
 
 <Tabs slot="preview">
-	<TabItem label="Stars">Sirius, Wega, Betelgeuse</TabItem>
-	<TabItem label="Moons">Io, Europa, Ganymed</TabItem>
+	<TabItem label="Sterne">Sirius, Wega, Betelgeuse</TabItem>
+	<TabItem label="Monde">Io, Europa, Ganymed</TabItem>
 </Tabs>
 
 </Preview>
@@ -154,10 +154,10 @@ Füge ein Symbol in ein Tab-Element ein, indem du das Attribut [`icon`](#icon) a
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
-	<TabItem label="Stars" icon="star">
+	<TabItem label="Sterne" icon="star">
 		Sirius, Wega, Betelgeuse
 	</TabItem>
-	<TabItem label="Moons" icon="moon">
+	<TabItem label="Monde" icon="moon">
 		Io, Europa, Ganymed
 	</TabItem>
 </Tabs>
@@ -167,11 +167,11 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ```markdoc /icon="\w+"/
 {% tabs %}
-{% tabitem label="Stars" icon="star" %}
+{% tabitem label="Sterne" icon="star" %}
 Sirius, Wega, Betelgeuse
 {% /tabitem %}
 
-{% tabitem label="Moons" icon="moon" %}
+{% tabitem label="Monde" icon="moon" %}
 Io, Europa, Ganymed
 {% /tabitem %}
 {% /tabs %}
@@ -180,10 +180,10 @@ Io, Europa, Ganymed
 </Fragment>
 
 <Tabs slot="preview">
-	<TabItem label="Stars" icon="star">
+	<TabItem label="Sterne" icon="star">
 		Sirius, Wega, Betelgeuse
 	</TabItem>
-	<TabItem label="Moons" icon="moon">
+	<TabItem label="Monde" icon="moon">
 		Io, Europa, Ganymed
 	</TabItem>
 </Tabs>
