@@ -1,6 +1,8 @@
 ---
-title: 'Referenz: Konfiguration'
+title: Konfigurationsreferenz
 description: Ein Überblick über alle von Starlight unterstützten Konfigurationsoptionen.
+sidebar:
+  label: Konfiguration
 ---
 
 ## Konfiguriere die `starlight` Integration
@@ -129,7 +131,7 @@ starlight({
 		},
 		// Eine Gruppe, die auf alle Seiten im Referenzverzeichnis verweist.
 		{
-			label: 'Referenz',
+			label: 'Referenzen',
 			autogenerate: { directory: 'referenz' },
 		},
 	],
@@ -151,7 +153,7 @@ Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collap
 sidebar: [
   // Eine zusammengefasste Gruppe von Links
   {
-    label: 'Collapsed Links',
+    label: 'Zusammengeklappte Links',
     collapsed: true,
     items: [
         { label: 'Einleitung', link: '/intro' },
@@ -160,7 +162,7 @@ sidebar: [
   },
   // Eine aufgeklappte Gruppe, die automatisch generierte Untergruppen enthält, welche standardmäßig eingeklappt sind.
   {
-    label: 'Referenz',
+    label: 'Referenzen',
     autogenerate: {
       directory: 'reference',
       collapsed: true,
@@ -585,7 +587,7 @@ starlight({
 });
 ```
 
-Siehe die [Referenz: Ersetzung](/de/reference/overrides/) für Details zu allen Komponenten, die du überschreiben kannst.
+Siehe die [Referenz der Ersetzung von Komponenten](/de/reference/overrides/) für Details zu allen Komponenten, die du überschreiben kannst.
 
 ### `plugins`
 
@@ -602,7 +604,7 @@ starlight({
 });
 ```
 
-Siehe die [Referenz: Plugins](/de/reference/plugins/) für Details zur Erstellung eigener Plugins.
+Siehe die [Referenz für Plugins](/de/reference/plugins/) für Details zur Erstellung eigener Plugins.
 
 ### `credits`
 
