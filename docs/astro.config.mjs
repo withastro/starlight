@@ -166,6 +166,7 @@ export default defineConfig({
 				{
 					label: 'Resources',
 					translations: {
+						de: 'Ressourcen',
 						'zh-CN': '资源',
 						fr: 'Ressources',
 						'pt-BR': 'Recursos',
