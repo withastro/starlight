@@ -1,8 +1,10 @@
 ---
-title: 'Referenz: Plugins'
+title: Plugins Referenz
 description: Ein Überblick über die Starlight-Plugin-API.
 tableOfContents:
   maxHeadingLevel: 4
+sidebar:
+  label: Plugins
 ---
 
 Starlight-Plugins können die Konfiguration, die Benutzeroberfläche und das Verhalten von Starlight anpassen und sind gleichzeitig einfach weiterzugeben und wiederzuverwenden.
