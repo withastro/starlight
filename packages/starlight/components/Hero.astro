@@ -28,11 +28,13 @@ if (image) {
 		rawHtml = image.html;
 	}
 }
+const isDarkSvg = darkImage?.format === 'svg';
+const isLightSvg = lightImage?.format === 'svg';
 ---
 
 <div class="hero">
 	{
-		darkImage && (
+		darkImage && !isDarkSvg && (
 			<Image
 				src={darkImage}
 				{...imageAttrs}
@@ -40,7 +42,28 @@ if (image) {
 			/>
 		)
 	}
-	{lightImage && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
+	{
+		darkImage && isDarkSvg && (
+			<img
+				src={darkImage.src}
+				loading={imageAttrs.loading}
+				alt={imageAttrs.alt}
+				class:list={{ 'light:sl-hidden': Boolean(lightImage) }}
+			/>
+		)
+	}
+	{lightImage && !isLightSvg && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
+	{
+		lightImage && isLightSvg && (
+			<img
+				src={lightImage.src}
+				alt={imageAttrs.alt}
+				loading={imageAttrs.loading}
+				class="dark:sl-hidden"
+			/>
+		)
+	}
+
 	{rawHtml && <div class="hero-html sl-flex" set:html={rawHtml} />}
 	<div class="sl-flex stack">
 		<div class="sl-flex copy">
