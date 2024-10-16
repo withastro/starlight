@@ -135,28 +135,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-If the component you want to conditionally override uses one or more [slots](https://docs.astro.build/en/core-concepts/astro-components/#slots), make sure to pass them through to the default UI.
-
-```astro
----
-// src/components/ConditionalPageFrame.astro
-import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/PageFrame.astro';
-
-const isHomepage = Astro.props.slug === '';
----
-
-{
-	isHomepage ? (
-		<section>My great landing page 🌟</section>
-	) : (
-		<Default {...Astro.props}>
-			<slot />
-			<Fragment slot="header"><slot name="header"/></Fragment>
-			<Fragment slot="sidebar"><slot name="sidebar"/></Fragment>
-		</Default>
-	)
-}
-```
-
 Learn more about conditional rendering in [Astro’s Template Syntax guide](https://docs.astro.build/en/core-concepts/astro-syntax/#dynamic-html).
