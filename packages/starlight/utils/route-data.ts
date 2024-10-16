@@ -1,11 +1,12 @@
-import type { MarkdownHeading } from 'astro';
+import type { APIContext, MarkdownHeading } from 'astro';
+import type { RenderResult } from 'astro:content';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
-import type { Route } from './routing';
+import { getRouteBySlugParam, type Route } from './routing';
 import { localizedId } from './slugs';
 import { formatPath } from './format-path';
 import { useTranslations } from './translations';
@@ -36,6 +37,16 @@ export interface StarlightRouteData extends Route {
 	editUrl: URL | undefined;
 	/** @deprecated Use `Astro.locals.t()` instead. */
 	labels: Record<string, never>;
+	/** An Astro component to render the current page’s content if this route is a Markdown page. */
+	Content?: RenderResult['Content'];
+}
+
+export async function useRouteData(context: APIContext): Promise<StarlightRouteData | undefined> {
+	const route = getRouteBySlugParam(context.params.slug);
+	if (!route) return;
+	const { Content, headings } = await route.entry.render();
+	const routeData = generateRouteData({ props: { ...route, headings }, url: context.url });
+	return { ...routeData, Content };
 }
 
 export function generateRouteData({
