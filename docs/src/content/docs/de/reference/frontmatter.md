@@ -35,7 +35,7 @@ Die Seitenbeschreibung wird für die Metadaten der Seite verwendet und wird von 
 
 **Typ**: `string`
 
-Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte Slugs definieren“](https://docs.astro.build/de/guides/content-collections/#benutzerdefinierte-slugs-definieren) in der Astro-Dokumentation für weitere Details.
+Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte Slugs definieren“](https://docs.astro.build/de/guides/content-collections/#defining-custom-slugs) in der Astro-Dokumentation für weitere Details.
 
 ### `editUrl`
 
