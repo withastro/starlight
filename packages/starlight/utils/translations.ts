@@ -31,8 +31,8 @@ async function loadTranslations() {
 }
 
 /**
- * Generate a utility function that returns UI strings for the given `locale`.
- * @param {string | undefined} [locale]
+ * Generate a utility function that returns UI strings for the given language.
+ * @param {string | undefined} [lang]
  * @example
  * const t = useTranslations('en');
  * const label = t('search.label'); // => 'Search'

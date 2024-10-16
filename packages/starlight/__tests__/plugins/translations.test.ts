@@ -35,7 +35,7 @@ describe('useTranslations()', () => {
 	});
 
 	test('uses user-defined translations for untranslated strings injected by plugins', () => {
-		const t = useTranslations('pt-br');
+		const t = useTranslations('pt-BR');
 		// @ts-expect-error - translation key injected by a test plugin.
 		expect(t('testPlugin3.doThing')).toBe('Do the Plugin 3 thing');
 	});
