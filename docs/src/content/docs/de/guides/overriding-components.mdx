@@ -1,9 +1,9 @@
 ---
 title: Komponenten ersetzen
 description: In Starlight kannst du eingebauten Komponenten ersetzen, um eigene Elemente in die Benutzeroberfläche deiner Dokumentationsseite einzufügen.
-sidebar:
-  badge: New
 ---
+
+import { Steps } from '@astrojs/starlight/components';
 
 Starlight's Standard-UI und Konfigurationsoptionen sind so gestaltet, dass sie flexibel sind und für eine Reihe von Inhalten funktionieren. Ein Großteil des Standardaussehens von Starlight kann mit [CSS](/de/guides/css-and-tailwind/) und [Konfigurationsoptionen](/de/guides/customization/) angepasst werden.
 
@@ -18,6 +18,8 @@ Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wen
 - Du zusätzliche UI neben Starlights bestehender UI hinzufügen willst.
 
 ## Wie kann man das ersetzen
+
+<Steps>
 
 1. Wähle die Starlight-Komponente, die du überschreiben möchtest.
    Du kannst eine vollständige Liste der Komponenten in der [Komponenten-Ersetzung Referenz](/de/reference/overrides/) finden.
@@ -44,17 +46,19 @@ Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wen
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'Meine Dokumentation nutzt eigene Komponenten',
-         components: {
-           // Ersetze den Standardkomponent `SocialIcons`
-           SocialIcons: './src/components/EmailLink.astro',
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'Meine Dokumentation nutzt eigene Komponenten',
+   			components: {
+   				// Ersetze den Standardkomponent `SocialIcons`
+   				SocialIcons: './src/components/EmailLink.astro',
+   			},
+   		}),
+   	],
    });
    ```
+
+</Steps>
 
 ## Eine integrierte Komponente wiederverwenden
 
@@ -96,9 +100,9 @@ const { title } = Astro.props.entry.data;
 <h1 id="_top">{title}</h1>
 
 <style>
-  h1 {
-    font-family: 'Comic Sans';
-  }
+	h1 {
+		font-family: 'Comic Sans';
+	}
 </style>
 ```
 
@@ -120,13 +124,13 @@ const isHomepage = Astro.props.slug === '';
 ---
 
 {
-  isHomepage ? (
-    <footer>Verwendet Starlight 🌟</footer>
-  ) : (
-    <Default {...Astro.props}>
-      <slot />
-    </Default>
-  )
+	isHomepage ? (
+		<footer>Verwendet Starlight 🌟</footer>
+	) : (
+		<Default {...Astro.props}>
+			<slot />
+		</Default>
+	)
 }
 ```
 

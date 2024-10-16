@@ -200,8 +200,8 @@ Starlightの便利な機能のおかげで、ユーザーはより生産的に�
 ```js
 // シンタックスハイライトされたJavascriptコード。
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 
@@ -209,8 +209,8 @@ var fun = function lang(l) {
 ```js
 // シンタックスハイライトされたJavascriptコード。
 var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l);
-  return true;
+	dateformat.i18n = require('./lang/' + l);
+	return true;
 };
 ```
 ````
@@ -231,16 +231,16 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
 
   ```js {2-3}
   function demo() {
-    // この行（2行目）と次の行はハイライトされます
-    return 'このスニペットの3行目です';
+  	// この行（2行目）と次の行はハイライトされます
+  	return 'このスニペットの3行目です';
   }
   ```
 
   ````md
   ```js {2-3}
   function demo() {
-    // この行（2行目）と次の行はハイライトされます
-    return 'このスニペットの3行目です';
+  	// この行（2行目）と次の行はハイライトされます
+  	return 'このスニペットの3行目です';
   }
   ```
   ````
@@ -250,7 +250,7 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
   ```js "個別の用語" /正規表現.*います/
   // 個別の用語もハイライトできます
   function demo() {
-    return '正規表現もサポートされています';
+  	return '正規表現もサポートされています';
   }
   ```
 
@@ -258,7 +258,7 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
   ```js "個別の用語" /正規表現.*います/
   // 個別の用語もハイライトできます
   function demo() {
-    return '正規表現もサポートされています';
+  	return '正規表現もサポートされています';
   }
   ```
   ````
@@ -267,18 +267,18 @@ Expressive Codeには、コードサンプルの外観をカスタマイズす�
 
   ```js "return true;" ins="挿入" del="削除"
   function demo() {
-    console.log('これらは挿入と削除のマーカーです');
-    // return文はデフォルトのマーカータイプを使用します
-    return true;
+  	console.log('これらは挿入と削除のマーカーです');
+  	// return文はデフォルトのマーカータイプを使用します
+  	return true;
   }
   ```
 
   ````md
   ```js "return true;" ins="挿入" del="削除"
   function demo() {
-    console.log('これらは挿入と削除のマーカーです');
-    // return文はデフォルトのマーカータイプを使用します
-    return true;
+  	console.log('これらは挿入と削除のマーカーです');
+  	// return文はデフォルトのマーカータイプを使用します
+  	return true;
   }
   ```
   ````
@@ -356,3 +356,119 @@ Starlightは、リストやテーブルなど、その他のMarkdown記法をす
 ## 高度なMarkdownとMDXの設定
 
 Starlightは、remarkとrehypeをベースとした、AstroのMarkdown・MDXレンダラーを使用しています。Astroの設定ファイルに`remarkPlugins`または`rehypePlugins`を追加することで、カスタム構文や動作をサポートできます。詳しくは、Astroドキュメントの[「MarkdownとMDXの設定」](https://docs.astro.build/ja/guides/markdown-content/#markdownとmdxの設定)を参照してください。
+
+## Markdoc
+
+Starlightは、実験的な[Astro Markdoc統合](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)とStarlight Markdocプリセットを使用して、Markdocでのコンテンツ作成をサポートしています。
+
+### Markdocで新しいプロジェクトを作成する
+
+`create astro`を使用して、Markdocが事前設定された新しいStarlightプロジェクトを開始します：
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npm create astro@latest -- --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm create astro --template starlight/markdoc
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn create astro --template starlight/markdoc
+```
+
+</TabItem>
+
+</Tabs>
+
+### 既存のプロジェクトにMarkdocを追加する
+
+既にStarlightサイトがあり、Markdocを追加したい場合は、以下の手順に従ってください。
+
+<Steps>
+
+1.  AstroのMarkdoc統合を追加します：
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npx astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm astro add markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn astro add markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Starlight Markdocプリセットをインストールします：
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-markdoc
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  `markdoc.config.mjs`にMarkdoc設定ファイルを作成し、Starlight Markdocプリセットを使用します：
+
+    ```js
+    import { defineMarkdocConfig } from '@astrojs/markdoc/config';
+    import starlightMarkdoc from '@astrojs/starlight-markdoc';
+
+    export default defineMarkdocConfig({
+    	extends: [starlightMarkdoc()],
+    });
+    ```
+
+</Steps>
+
+Markdocの構文と機能についてさらに学ぶには、[Markdocのドキュメント](https://markdoc.dev/docs/syntax)または[Astro Markdoc統合ガイド](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)を参照してください。
