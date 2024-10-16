@@ -81,8 +81,7 @@ When rendering a built-in component inside a custom component:
 
 - Spread `Astro.props` into it. This makes sure that it receives all the data it needs to render.
 - Add a [`<slot />`](https://docs.astro.build/en/core-concepts/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
-- If the component you want to override uses one or more [slots](https://docs.astro.build/en/core-concepts/astro-components/#slots), make sure to pass them through if you do not wish to remove them. This can be achieved by [transferring slots](https://docs.astro.build/en/basics/astro-components/#transferring-slots).
-
+- If the built-in component you are reusing also contains [named slots](https://docs.astro.build/en/basics/astro-components/#named-slots), you need to transfer them as well. For example the [`TwoColumnContent`](https://docs.astro.build/en/basics/astro-components/#named-slots) component uses a `right-sidebar` slot. To keep it you need to transfer it using the `<slot name="right-sidebar" slot="right-sidebar" />` syntax (see [transferring slots](https://docs.astro.build/en/basics/astro-components/#transferring-slots)).
 ## Use page data
 
 When overriding a Starlight component, your custom implementation receives a standard `Astro.props` object containing all the data for the current page.
