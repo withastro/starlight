@@ -99,6 +99,7 @@ function localeToLang(
 	locales: StarlightConfig['locales'],
 	defaultLocale: StarlightConfig['defaultLocale']
 ): string {
+	locale = locale?.toLocaleLowerCase();
 	const lang = locale ? locales?.[locale]?.lang : locales?.root?.lang;
 	const defaultLang = defaultLocale?.lang || defaultLocale?.locale;
 	return lang || defaultLang || BuiltInDefaultLocale.lang;
