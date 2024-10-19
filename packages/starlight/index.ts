@@ -5,6 +5,7 @@
  */
 /// <reference path="./locals.d.ts" />
 /// <reference path="./i18n.d.ts" />
+/// <reference path="./virtual.d.ts" />
 
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';

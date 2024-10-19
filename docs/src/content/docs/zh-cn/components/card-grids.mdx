@@ -1,0 +1,173 @@
+---
+title: 卡片网格
+description: 了解如何在 Starlight 中将多张卡片包裹在网格中。
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+要将多个 [`<Card>`](/zh-cn/components/cards/) 或 [`<LinkCard>`](/zh-cn/components/link-cards/) 组件包装在网格中，请使用 `<CardGrid>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="星星" icon="star">
+		天狼星，织女星，参宿四
+	</Card>
+	<Card title="卫星" icon="moon">
+		木卫一，木卫二，木卫三
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+### 分组卡片
+
+当有足够大的空间时，可以使用 `<CardGrid>` 组件对卡片进行分组，并排显示多个 [`<Card>`](/zh-cn/components/cards/) 组件。
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="试试这个" icon="open-book">
+		一些你想着重展示的有趣内容。
+	</Card>
+	<Card title="其他功能" icon="information">
+		更多你想分享的信息。
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="试试这个" icon="open-book" %}
+一些你想着重展示的有趣内容。
+{% /card %}
+
+{% card title="其他功能" icon="information" %}
+更多你想分享的信息。
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="试试这个" icon="open-book">
+		一些你想着重展示的有趣内容。
+	</Card>
+	<Card title="其他功能" icon="information">
+		更多你想分享的信息。
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### 分组链接卡片
+
+当有足够大的空间时，可以使用 `<CardGrid>` 组件对链接卡片进行分组，并排显示多个 [`<LinkCard>`](/zh-cn/components/link-cards/) 组件。
+
+<Preview>
+
+```mdx {3,6}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard title="Markdown 创作" href="/zh-cn/guides/authoring-content/" />
+	<LinkCard title="组件" href="/zh-cn/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Markdown 创作" href="/zh-cn/guides/authoring-content/" /%}
+
+{% linkcard title="组件" href="/zh-cn/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard title="Markdown 创作" href="/zh-cn/guides/authoring-content/" />
+	<LinkCard title="组件" href="/zh-cn/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### 交错卡片
+
+通过向 `<CardGrid>` 组件添加 [`stagger`](#stagger) 属性，使网格的第二列卡片向着垂直方向移动，从而增添视觉趣味。
+
+该属性在主页上非常有用，可用于展示项目的核心功能。
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="试试这个" icon="open-book">
+		一些你想着重展示的有趣内容。
+	</Card>
+	<Card title="其他功能" icon="information">
+		更多你想分享的信息。
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="试试这个" icon="open-book" %}
+一些你想着重展示的有趣内容。
+{% /card %}
+
+{% card title="其他功能" icon="information" %}
+更多你想分享的信息。
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="试试这个" icon="open-book">
+		一些你想着重展示的有趣内容。
+	</Card>
+	<Card title="其他功能" icon="information">
+		更多你想分享的信息。
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## `<CardGrid>` 的属性
+
+**实现：** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+`<CardGrid>` 组件接受以下属性：
+
+### `stagger`
+
+**类型：** `boolean`
+
+定义是否在网格中交错卡片。
