@@ -112,6 +112,8 @@ Mit Ausnahme von Einträgen, die `slug` verwenden, muss jeder Eintrag ein `label
 
 - `autogenerate` - ein Objekt, das ein Verzeichnis deiner Dokumentation angibt, aus dem automatisch eine Gruppe von Links erzeugt werden soll.
 
+Interne Links können auch als Zeichenkette anstelle eines Objekts mit der Eigenschaft `slug` angegeben werden.
+
 ```js
 starlight({
 	sidebar: [
@@ -124,7 +126,7 @@ starlight({
 				// Verwendung von `slug` für interne Links.
 				{ slug: 'intro' },
 				{ slug: 'installation' },
-				// Oder Sie verwenden die Abkürzung für interne Links.
+				// Oder du verwendst die Abkürzung für interne Links.
 				'tutorial',
 				'next-steps',
 			],
@@ -149,16 +151,13 @@ Gruppen von Links sind standardmäßig aufgeklappt. Du kannst dieses Verhalten �
 
 Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collapsed` ihrer übergeordneten Gruppe. Dies kannst du mit der Eigenschaft `autogenerate.collapsed` außer Kraft setzen.
 
-```js
+```js {5,13}
 sidebar: [
   // Eine zusammengefasste Gruppe von Links
   {
     label: 'Zusammengeklappte Links',
     collapsed: true,
-    items: [
-        { label: 'Einleitung', link: '/intro' },
-        { label: 'Nächste Schritte', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // Eine aufgeklappte Gruppe, die automatisch generierte Untergruppen enthält, welche standardmäßig eingeklappt sind.
   {
