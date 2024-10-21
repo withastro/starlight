@@ -1,7 +1,5 @@
 ---
 import { AstroError } from 'astro/errors';
-import { slugToLocaleData, urlToSlug } from '../utils/slugs';
-import { useTranslations } from '../utils/translations';
 import Icon from './Icon.astro';
 
 const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
@@ -23,8 +21,7 @@ if (!asideVariants.includes(type)) {
 }
 
 if (!title) {
-	const { locale } = slugToLocaleData(urlToSlug(Astro.url));
-	title = useTranslations(locale)(`aside.${type}`);
+	title = Astro.locals.t(`aside.${type}`);
 }
 ---
 
