@@ -12,7 +12,7 @@ interface Props {
 	title?: string;
 }
 
-let { type = 'note', title } = Astro.props;
+let { type = 'note', title, icon } = Astro.props;
 
 if (!asideVariants.includes(type)) {
 	throw new AstroError(
@@ -30,7 +30,7 @@ if (!title) {
 
 <aside aria-label={title} class={`starlight-aside starlight-aside--${type}`}>
 	<p class="starlight-aside__title" aria-hidden="true">
-		<Icon name={icons[type]} class="starlight-aside__icon" />{title}
+		<Icon name={icon || icons[type]} class="starlight-aside__icon" />{title}
 	</p>
 	<section class="starlight-aside__content">
 		<slot />
