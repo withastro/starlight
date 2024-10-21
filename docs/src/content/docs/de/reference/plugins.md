@@ -107,7 +107,7 @@ export default {
         ({ name }) => name === '@astrojs/react'
       );
 
-      // Only add the React integration if it's not already loaded.
+      // Füge die React-Integration nur hinzu, wenn sie nicht bereits geladen ist.
       if (!isReactLoaded) {
         addIntegration(react());
       }
@@ -152,8 +152,8 @@ export default {
   name: 'long-process-plugin',
   hooks: {
     setup({ logger }) {
-      logger.info('Starting long process…');
-      // Some long process…
+      logger.info('Beginn eines langen Prozesses…');
+      // Ein langer Prozess…
     },
   },
 };
@@ -162,7 +162,7 @@ export default {
 Im obigen Beispiel wird eine Meldung protokolliert, die die angegebene Info-Meldung enthält:
 
 ```shell
-[long-process-plugin] Starting long process…
+[long-process-plugin] Beginn eines langen Prozesses…
 ```
 
 #### `injectTranslations`
