@@ -67,7 +67,7 @@ Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschlie�
 
 </Steps>
 
-Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit der Option [Astro's `i18n` config](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
+Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit [Astro's `i18n`-Konfigurationsoption](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
 
 ### Verwende ein Root-Verzeichnis
 
@@ -274,7 +274,7 @@ export const collections = {
 };
 ```
 
-Mehr über Inhaltssammlungsschemata erfährst du in [„Defining a collection schema“](https://docs.astro.build/de/guides/content-collections/#defining-a-collection-schema) in den Astro-Dokumenten.
+Mehr über Inhaltssammlungsschemata erfährst du in [„Ein Sammelschema definieren“](https://docs.astro.build/de/guides/content-collections/#defining-a-collection-schema) in den Astro-Dokumenten.
 
 
 ## UI-Übersetzungen verwenden
@@ -319,7 +319,7 @@ Der erste UI-String kann gerendert werden, indem man `'link.astro'` an die Funkt
 <a href="https://docs.astro.build/">
 	{Astro.locals.t('link.astro')}
 </a>
-<!-- Renders: <a href="...">Astro Dokumentation</a> -->
+<!-- Rendert: <a href="...">Astro Dokumentation</a> -->
 ```
 
 Der zweite UI-String verwendet die [Interpolationssyntax](https://www.i18next.com/translation-function/interpolation) von i18next für den Platzhalter `{{feature}}`.
@@ -330,7 +330,7 @@ Der Wert für `feature` muss in einem Optionsobjekt gesetzt werden, das als zwei
 <a href="https://docs.astro.build/en/guides/astro-db/">
 	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
 </a>
-<!-- Renders: <a href="...">Astro-Dokumentation für Astro DB</a> -->
+<!-- Rendert: <a href="...">Astro-Dokumentation für Astro DB</a> -->
 ```
 
 In der [i18next-Dokumentation](https://www.i18next.com/overview/api#t) findest du weitere Informationen darüber, wie du die Funktion `t()` mit Interpolation, Formatierung und mehr verwenden kannst.
