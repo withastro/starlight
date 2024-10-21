@@ -292,8 +292,9 @@ Wenn dein Projekt ein komplett angepasstes 404-Layout benötigt, kannst du eine 
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
 export default defineConfig({
-	Integrationen: [
+	integrationen: [
 		starlight({
 			title: 'Dokumentation mit benutzerdefinierten 404',
 			disable404Route: true,
