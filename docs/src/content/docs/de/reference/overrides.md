@@ -227,7 +227,7 @@ Diese Komponenten stellen die obere Navigationsleiste von Starlight dar.
 **Standardkomponente:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Dies ist eine Kopfzielen-Komponente, welche oben auf jeder Seite angezeigt wird.
-Die Standardimplementierung zeigt [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), und [`<LanguageSelect />`](#languageselect).
+Die Standardimplementierung zeigt [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), und [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
