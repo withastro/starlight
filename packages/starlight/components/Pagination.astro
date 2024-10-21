@@ -1,8 +1,7 @@
 ---
 import Icon from '../user-components/Icon.astro';
-import type { Props } from '../props';
 
-const { dir, pagination } = Astro.props;
+const { dir, pagination } = Astro.locals.routeData!;
 const { prev, next } = pagination;
 const isRtl = dir === 'rtl';
 ---

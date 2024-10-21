@@ -6,9 +6,8 @@ import type { HeadConfigSchema } from '../schemas/head';
 import { fileWithBase } from '../utils/base';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
-import type { Props } from '../props';
 
-const { entry, lang, siteTitle } = Astro.props;
+const { entry, lang, siteTitle } = Astro.locals.routeData!;
 const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
