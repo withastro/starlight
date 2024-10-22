@@ -65,7 +65,7 @@ class DocsSite {
 			`> Found ${violations.length} violations on ${this.page.url().replace(config.sitemap.replace.value, '')}\n`
 		);
 		await reportViolations(violations, new DefaultTerminalReporter(true, true, false));
-		console.error('');
+		console.error('\n');
 	}
 }
 
