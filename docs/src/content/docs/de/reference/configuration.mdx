@@ -1,6 +1,8 @@
 ---
 title: Konfigurationsreferenz
 description: Ein Überblick über alle von Starlight unterstützten Konfigurationsoptionen.
+sidebar:
+  label: Konfiguration
 ---
 
 ## Konfiguriere die `starlight` Integration
@@ -25,9 +27,21 @@ Du kannst die folgenden Optionen an die `starlight` Integration übergeben.
 
 ### `title` (erforderlich)
 
-**Typ:** `string`
+**Typ:** `string | Record<string, string>`
 
 Lege den Titel für deine Website fest. Wird in den Metadaten und im Titel der Browser-Tabs verwendet.
+
+Der Wert kann eine Zeichenkette sein, oder für mehrsprachige Websites ein Objekt mit Werten für jedes Gebietsschema.
+Wenn die Objektform verwendet wird, müssen die Schlüssel BCP-47-Tags sein (z. B. `en`, `ar` oder `zh-CN`):
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -69,7 +83,7 @@ Konfiguriere das Inhaltsverzeichnis, das rechts auf jeder Seite angezeigt wird. 
 
 **Typ:** `{ baseUrl: string }`
 
-Aktiviere "Diese Seite bearbeiten"-Links, indem du die Basis-URL für diese festlegst. Der endgültige Link wird `editLink.baseUrl` + der aktuelle Seitenpfad sein. Zum Beispiel, um das Bearbeiten von Seiten im `withastro/starlight` Repo auf GitHub zu ermöglichen:
+Aktiviere „Diese Seite bearbeiten“-Links, indem du die Basis-URL für diese festlegst. Der endgültige Link wird `editLink.baseUrl` + der aktuelle Seitenpfad sein. Zum Beispiel, um das Bearbeiten von Seiten im `withastro/starlight` Repo auf GitHub zu ermöglichen:
 
 ```js
 starlight({
@@ -88,28 +102,38 @@ Mit dieser Konfiguration würde eine `/einfuehrung` einen Bearbeitungslink haben
 Konfiguriere die Navigationselemente der Seitenleiste deiner Website.
 
 Eine Seitenleiste ist eine Array von Links und Linkgruppen.
-Jedes Element muss ein `label` und eine der folgenden Eigenschaften haben:
+Mit Ausnahme von Einträgen, die `slug` verwenden, muss jeder Eintrag ein `label` und eine der folgenden Eigenschaften haben:
 
 - `link` - ein einzelner Link zu einer bestimmten URL, z.B. `'/home'` oder `'https://example.com'`.
+
+- `slug` - ein Verweis auf eine interne Seite, z.B. `'guides/getting-started'`.
+
 - `items` - ein Array, das weitere Links und Untergruppen enthält.
+
 - `autogenerate` - ein Objekt, das ein Verzeichnis deiner Dokumentation angibt, aus dem automatisch eine Gruppe von Links erzeugt werden soll.
+
+Interne Links können auch als Zeichenkette anstelle eines Objekts mit der Eigenschaft `slug` angegeben werden.
 
 ```js
 starlight({
 	sidebar: [
 		// Ein einzelner Link mit der Bezeichnung "Startseite".
 		{ label: 'Startseite', link: '/' },
-		// Eine Gruppe mit der Bezeichnung "Hier anfangen", die zwei Links enthält.
+		// Eine Gruppe mit der Bezeichnung „Hier beginnen“, die vier Links enthält.
 		{
 			label: 'Hier anfangen',
 			items: [
-				{ label: 'Einleitung', link: '/intro' },
-				{ label: 'Nächste Schritte', link: '/next-steps' },
+				// Verwendung von `slug` für interne Links.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// Oder du verwendst die Abkürzung für interne Links.
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// Eine Gruppe, die auf alle Seiten im Referenzverzeichnis verweist.
 		{
-			label: 'Referenz',
+			label: 'Referenzen',
 			autogenerate: { directory: 'referenz' },
 		},
 	],
@@ -127,20 +151,17 @@ Gruppen von Links sind standardmäßig aufgeklappt. Du kannst dieses Verhalten �
 
 Autogenerierte Untergruppen respektieren standardmäßig die Eigenschaft `collapsed` ihrer übergeordneten Gruppe. Dies kannst du mit der Eigenschaft `autogenerate.collapsed` außer Kraft setzen.
 
-```js
+```js {5,13}
 sidebar: [
   // Eine zusammengefasste Gruppe von Links
   {
-    label: 'Collapsed Links',
+    label: 'Zusammengeklappte Links',
     collapsed: true,
-    items: [
-        { label: 'Einleitung', link: '/intro' },
-        { label: 'Nächste Schritte', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // Eine aufgeklappte Gruppe, die automatisch generierte Untergruppen enthält, welche standardmäßig eingeklappt sind.
   {
-    label: 'Referenz',
+    label: 'Referenzen',
     autogenerate: {
       directory: 'reference',
       collapsed: true,
@@ -153,7 +174,7 @@ sidebar: [
 
 Wenn deine Website mehrsprachig ist, wird das `label` jedes Elements als in der Standard-Sprache verfasst betrachtet. Du kannst die Eigenschaft `translations` verwenden, um die Labels für andere unterstützte Sprachen festzulegen:
 
-```js
+```js {5,9,14}
 sidebar: [
   // Ein Beispiel für eine Seitenleiste mit ins Französische übersetzten Beschriftungen
   {
@@ -178,21 +199,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Link
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Interner Link
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Gruppe von Links
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Automatisch generierte Linkgruppe
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -200,7 +237,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -208,12 +246,11 @@ interface BadgeConfig {
 
 **Typ:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
-[Konfiguriere die Internationalisierung (i18n)](/de/guides/i18n/) für Ihre Website, indem du festlegst, welche `Locales` unterstützt werden.
+[Konfiguriere die Internationalisierung (i18n)](/de/guides/i18n/) für deine Website, indem du festlegst, welche `locales` unterstützt werden.
 
 Jeder Eintrag sollte das Verzeichnis, in dem die Dateien der jeweiligen Sprache gespeichert sind, als Schlüssel verwenden.
 
 ```js
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
@@ -266,7 +303,7 @@ Die Bezeichnung für diese Sprache, die den Benutzern angezeigt werden soll, z. 
 
 **Typ:** `string`
 
-Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für ihre Basissprache, wenn keine regionalspezifischen Übersetzungen gefunden werden.
+Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regionalspezifischen Übersetzungen gefunden werden.
 
 ##### `dir`
 
@@ -278,7 +315,7 @@ Die Schreibrichtung dieser Sprache; `"ltr"` für links-nach-rechts (die Voreinst
 
 Du kannst die Standardsprache ohne ein `/lang/`-Verzeichnis anbieten, indem du ein `root`-Locale setzst:
 
-```js
+```js {3-6}
 starlight({
 	locales: {
 		root: {
@@ -302,7 +339,7 @@ Legt die Sprache fest, die als Standard für diese Website gilt.
 Der Wert sollte mit einem der Schlüssel deines [`locales`](#locales)-Objekts übereinstimmen.
 (Wenn deine Standardsprache deiner [Root-Locale](#root-locale) ist, kannst du dies überspringen).
 
-Das `defaultLocale` wird verwendet, um Ersatzinhalte bereitzustellen, wenn Übersetzungen fehlen.
+Das standard Locale wird verwendet, um Ersatzinhalte bereitzustellen, wenn Übersetzungen fehlen.
 
 ### `social`
 
@@ -344,6 +381,94 @@ starlight({
 });
 ```
 
+### `expressiveCode`
+
+**Typ:** `StarlightExpressiveCodeOptions | boolean`  
+**Voreinstellung:** `true`
+
+Starlight verwendet [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
+Im [Handbuch „Codeblöcke“](/de/guides/authoring-content/#codeblöcke) erfährst du, wie du die Expressive Code-Syntax in deinen Markdown- und MDX-Inhalten verwendest.
+
+Du kannst alle standardmäßigen [Expressive Code-Konfigurationsoptionen](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
+Lege beispielsweise die Option `styleOverrides` von Expressive Code fest, um das Standard-CSS zu überschreiben. Dadurch sind Anpassungen möglich, beispielsweise das Hinzufügen abgerundeter Ecken zu deinen Codeblöcken:
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+Wenn du Expressive Code deaktivieren möchtest, setze in deiner Starlight-Konfiguration `expressiveCode: false`:
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+Zusätzlich zu den standardmäßigen Expressive Code-Optionen kannst du in deiner `expressiveCode`-Konfiguration auch die folgenden Starlight-spezifischen Eigenschaften festlegen, um das Designverhalten für deine Codeblöcke weiter anzupassen:
+
+#### `themes`
+
+**Typ:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**Voreinstellung:** `['starlight-dark', 'starlight-light']`
+
+Lege die Designs fest, die zum Stylen von Codeblöcken verwendet werden.
+Weitere Informationen zu den unterstützten Designformaten findest du in der [Expressive Code-Dokumentation zu Designs](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes).
+
+Starlight verwendet standardmäßig die dunkle und helle Variante von Sarah Drasners [Night Owl-Thema](https://github.com/sdras/night-owl-vscode-theme).
+
+Wenn du mindestens ein dunkles und ein helles Design angibst, wird Starlight das aktive Codeblock-Design automatisch mit dem aktuellen Site-Design synchron halten.
+Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
+
+#### `useStarlightDarkModeSwitch`
+
+**Typ:** `boolean`  
+**Voreinstellung:** `true`
+
+Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Site-Design ändert.
+Falls `false`, müssen Sie manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
+
+:::note
+Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Design angeben, damit der Wechsel zum Starlight-Dunkelmodus funktioniert.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**Typ:** `boolean`  
+**Voreinstellung:** `true` wenn `themes` nicht gesetzt ist, andernfalls `false`
+
+Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Site-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
+Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungsdesign bereitgestellten Farben verwendet.
+
+:::note
+Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du mindestens ein dunkles und ein helles Theme bereitstellen, um den richtigen Farbkontrast zu gewährleisten.
+:::
+
+### `pagefind`
+
+**Typ:** `boolean`  
+**Voreinstellung:** `true`
+
+Lege fest, ob Starlight's Standard-Site-Search-Anbieter [Pagefind](https://pagefind.app/) aktiviert ist.
+
+Setze diese Option auf `false`, um die Indizierung deiner Website mit Pagefind zu deaktivieren.
+Dadurch wird auch die Standard-Suchoberfläche ausgeblendet, falls sie verwendet wird.
+
+Pagefind kann nicht aktiviert werden, wenn die Option [`prerender`](#prerender) auf `false` gesetzt ist.
+
+### `prerender`
+
+**Typ:** `boolean`  
+**Voreinstellung:** `true`
+
+Lege fest, ob Starlight-Seiten vorgerendert zu statischem HTML oder bei Bedarf von einem [SSR-Adapter](https://docs.astro.build/de/guides/server-side-rendering/) gerendert werden sollen.
+
+Starlight-Seiten werden standardmäßig vorgerendert.
+Wenn du einen SSR-Adapter verwendest und Starlight-Seiten bei Bedarf rendern möchtest, setze `prerender: false`.
+
 ### `head`
 
 **Typ:** [`HeadConfig[]`](#headconfig)
@@ -367,6 +492,9 @@ starlight({
 });
 ```
 
+Einträge in `head` werden direkt in HTML-Elemente umgewandelt und durchlaufen nicht Astros [script](https://docs.astro.build/de/guides/client-side-scripts/#script-bundling) oder [style](https://docs.astro.build/de/guides/styling/#styles-stile-in-astro) Verarbeitung.
+Wenn du lokale Elemente wie Skripte, Stile oder Bilder importieren musst, [überschreibe die Komponente Head](/de/guides/overriding-components/#eine-integrierte-komponente-wiederverwenden).
+
 #### `HeadConfig`
 
 ```ts
@@ -380,16 +508,16 @@ interface HeadConfig {
 ### `lastUpdated`
 
 **Typ:** `boolean`  
-**Standard:** `false`
+**Voreinstellung:** `false`
 
 Legt fest, ob in der Fußzeile angezeigt werden soll, wann die Seite zuletzt aktualisiert wurde.
 
-Standardmäßig verwendet diese Funktion die Git-Historie Ihres Repositorys und kann auf einigen Bereitstellungsplattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
+Standardmäßig verwendet diese Funktion die Git-Historie deines Repositorys und kann auf einigen Bereitstellungsplattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
 
 ### `pagination`
 
 **Typ:** `boolean`  
-**Standard:** `true`
+**Voreinstellung:** `true`
 
 Legt fest, ob die Fußzeile Links zur vorherigen und nächsten Seite enthalten soll.
 
@@ -398,7 +526,7 @@ Eine Seite kann diese Einstellung oder den Linktext und/oder die URL mit Hilfe d
 ### `favicon`
 
 **Typ:** `string`  
-**Standard:** `'/favicon.svg'`
+**Voreinstellung:** `'/favicon.svg'`
 
 Legt den Pfad des Standard-Favicons für deine Website fest. Dieses sollte sich im Verzeichnis `public/` befinden und eine gültige Icon-Datei (`.ico`, `.gif`, `.jpg`, `.png` oder `.svg`) sein.
 
@@ -412,30 +540,37 @@ Wenn du zusätzliche Varianten oder Fallback-Favicons festlegen musst, kannst du
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // ICO-Favicon als Fallback für Safari hinzufügen
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// ICO-Favicon als Fallback für Safari hinzufügen
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
 ### `titleDelimiter`
 
 **Typ:** `string`  
-**Standard:** `'|'`
+**Voreinstellung:** `'|'`
 
 Legt das Trennzeichen zwischen Seitentitel und dem Titel der Website im `<title>`-Tag der Website fest, welches in den Browser-Tabs angezeigt wird.
 
 Standardmäßig hat jede Seite einen `<title>` von `Seiten Überschrift | Webseitenname`.
-Zum Beispiel heißt diese Seite "Konfigurationsreferenz" und diese Website heißt "Starlight", also ist der `<titel>` für diese Seite "Konfigurationsreferenz | Starlight".
+Zum Beispiel heißt diese Seite „Konfigurationsreferenz“ und diese Website heißt „Starlight“, also ist der `<titel>` für diese Seite „Konfigurationsreferenz | Starlight“.
+
+### `disable404Route`
+
+**Typ:** `Boolean`  
+**Voreinstellung:** `false`
+
+Deaktiviert die Einspeisung von Starlights Standard [404 Seite](https://docs.astro.build/en/core-concepts/astro-pages/#custom-404-error-page). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
 
 ### `components`
 
@@ -451,4 +586,31 @@ starlight({
 });
 ```
 
-Siehe die [Komponenten-Ersetzung Referenz](/de/reference/overrides/) für Details zu allen Komponenten, die du überschreiben kannst.
+Siehe die [Referenz der Ersetzung von Komponenten](/de/reference/overrides/) für Details zu allen Komponenten, die du überschreiben kannst.
+
+### `plugins`
+
+**Typ:** [`StarlightPlugin[]`](/de/reference/plugins/#api-schnellreferenz)
+
+Erweitere Starlight mit eigenen Plugins.
+Plugins nehmen Änderungen an deinem Projekt vor, um die Funktionen von Starlight zu verändern oder zu erweitern.
+
+Besuche das [Plugins Schaufenster](/de/resources/plugins/#plugins) um eine Liste der verfügbaren Plugins zu sehen.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Siehe die [Referenz für Plugins](/de/reference/plugins/) für Details zur Erstellung eigener Plugins.
+
+### `credits`
+
+Aktiviere die Anzeige eines „Erstellt mit Starlight“-Links in der Fußzeile deiner Website.
+
+```js
+starlight({
+	credits: true,
+});
+```
