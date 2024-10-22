@@ -16,7 +16,7 @@ Um dieser Anleitung folgen zu können, benötigst du ein bestehendes Astro-Proje
 
 Starlight ist eine [Astro-Integration](https://docs.astro.build/de/guides/integrations-guide/). Füge sie zu deiner Website hinzu, indem du den Befehl `astro add` im Wurzelverzeichnis deines Projekts ausführst:
 
-<Tabs>
+<Tabs syncKey="pkg">
     <TabItem label="npm">
         ```sh
         npx astro add starlight
@@ -44,7 +44,7 @@ Die Starlight-Integration wird in der Datei `astro.config.mjs` konfiguriert.
 
 Füge zunächst einen Titel mit der Eigenschaft `title` hinzu:
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -125,4 +125,6 @@ Für die Zukunft planen wir, diesen Anwendungsfall besser zu unterstützen, um d
 
 ### Starlight mit SSR verwenden
 
-Derzeit unterstützt Starlight kein [Serverseitiges Rendern \(SSR\)](https://docs.astro.build/de/guides/server-side-rendering/) mit Astros Server-Adaptern. Wir hoffen, dies bald unterstützen zu können.
+Um SSR zu aktivieren, folge der Anleitung [„Serverseitiges Rendern (SSR)“](https://docs.astro.build/de/guides/server-side-rendering/) in der Astro-Dokumentation, um einen Server-Adapter zu deinem Starlight-Projekt hinzuzufügen.
+
+Die von Starlight erzeugten Dokumentationsseiten werden standardmäßig vorgerendert, unabhängig vom Ausgabemodus deines Projekts. Wenn du nicht möchtest, dass deine Starlight-Seiten vorgerendert werden, setze die [Konfigurationsoption `prerender`](/de/reference/configuration/#prerender) auf `false`.
