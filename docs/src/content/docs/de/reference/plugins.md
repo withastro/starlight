@@ -169,7 +169,7 @@ Im obigen Beispiel wird eine Meldung protokolliert, die die angegebene Info-Meld
 
 **Typ:** `(translations: Record<string, Record<string, string>>) => void`
 
-Eine Callback-Funktion zum Hinzufügen oder Aktualisieren von Übersetzungsstrings, die in Starlights [Lokalisierungs-APIs](/de/guides/i18n/#ui-%C3%BCbersetzungen-verwenden) verwendet werden.
+Eine Callback-Funktion zum Hinzufügen oder Aktualisieren von Übersetzungsstrings, die in Starlights [Lokalisierungs-APIs](/de/guides/i18n/#ui-übersetzungen-verwenden) verwendet werden.
 
 Im folgenden Beispiel injiziert ein Plugin Übersetzungen für einen benutzerdefinierten UI-String mit dem Namen `myPlugin.doThing` für die Gebietsschemata `en` und `fr`:
 
@@ -192,7 +192,7 @@ export default {
 };
 ```
 
-Um die eingefügten Übersetzungen in der Benutzeroberfläche deines Plugins zu verwenden, folge der Anleitung [„UI-Übersetzungen verwenden“](/de/guides/i18n/#ui-%C3%BCbersetzungen-verwenden).
+Um die eingefügten Übersetzungen in der Benutzeroberfläche deines Plugins zu verwenden, folge der Anleitung [„UI-Übersetzungen verwenden“](/de/guides/i18n/#ui-übersetzungen-verwenden).
 
 Typen für die injizierten Übersetzungsstrings eines Plugins werden automatisch im Projekt eines Benutzers generiert, sind aber noch nicht verfügbar, wenn du in der Codebasis deines Plugins arbeitest.
 Um das `locals.t`-Objekt im Kontext deines Plugins einzugeben, deklariere die folgenden globalen Namespaces in einer TypeScript-Deklarationsdatei:
