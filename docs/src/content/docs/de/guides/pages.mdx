@@ -113,7 +113,7 @@ Die folgenden Eigenschaften unterscheiden sich von Markdown frontmatter:
 ##### `sidebar`
 
 **Typ:** [`SidebarItem[]`](/de/reference/configuration/#sidebaritem)  
-**Voreinstellung:** die Seitenleiste, die auf der Grundlage der [globalen `Sidebar`-Konfiguration](/de/reference/configuration/#sidebar) erzeugt wird
+**Standard:** die Seitenleiste, die auf der Grundlage der [globalen `Sidebar`-Konfiguration](/de/reference/configuration/#sidebar) erzeugt wird
 
 Legt eine benutzerdefinierte Navigationsleiste für diese Seite fest.
 Wenn sie nicht gesetzt wird, verwendet die Seite die globale Standard-Seitenleiste.
@@ -144,14 +144,14 @@ In der Anleitung [„Seitenleisten-Navigation“](/de/guides/sidebar/) erfährst
 ##### `hasSidebar`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `false` wenn [`frontmatter.template`](/de/reference/frontmatter/#template) `'splash'` ist, sonst `true`
+**Standard:** `false` wenn [`frontmatter.template`](/de/reference/frontmatter/#template) `'splash'` ist, sonst `true`
 
 Legt fest, ob die Seitenleiste auf dieser Seite angezeigt werden soll oder nicht.
 
 ##### `headings`
 
 **Typ:** `{ depth: number; slug: string; text: string }[]`  
-**Voreinstellung:** `[]`
+**Standard:** `[]`
 
 Gib ein Array mit allen Überschriften auf dieser Seite an.
 Starlight wird das Inhaltsverzeichnis der Seite aus diesen Überschriften generieren, wenn sie angegeben sind.
@@ -159,20 +159,20 @@ Starlight wird das Inhaltsverzeichnis der Seite aus diesen Überschriften generi
 ##### `dir`
 
 **Typ:** `'ltr' | 'rtl'`  
-**Voreinstellung:** die Schreibrichtung für das aktuelle Gebietsschema
+**Standard:** die Schreibrichtung für das aktuelle Gebietsschema
 
 Legt die Schreibrichtung für den Inhalt dieser Seite fest.
 
 ##### `lang`
 
 **Typ:** `String`  
-**Voreinstellung:** die Sprache des aktuellen Gebietsschemas
+**Standard:** die Sprache des aktuellen Gebietsschemas
 
 Setzt das BCP-47 Sprach-Tag für den Inhalt dieser Seite, z.B. `en`, `zh-CN` oder `pt-BR`.
 
 ##### `isFallback`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `false`
+**Standard:** `false`
 
 Gibt an, ob diese Seite [Fallback-Inhalt](/de/guides/i18n/#fallback-inhalt) verwendet, weil es für die aktuelle Sprache keine Übersetzung gibt.

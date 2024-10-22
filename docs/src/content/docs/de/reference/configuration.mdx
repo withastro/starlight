@@ -75,7 +75,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 ### `tableOfContents`
 
 **Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**Voreinstellung:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**Standard:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 Konfiguriere das Inhaltsverzeichnis, das rechts auf jeder Seite angezeigt wird. Standardmäßig werden `<h2>` und `<h3>` Überschriften in dieses Inhaltsverzeichnis aufgenommen.
 
@@ -384,7 +384,7 @@ starlight({
 ### `expressiveCode`
 
 **Typ:** `StarlightExpressiveCodeOptions | boolean`  
-**Voreinstellung:** `true`
+**Standard:** `true`
 
 Starlight verwendet [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
 Im [Handbuch „Codeblöcke“](/de/guides/authoring-content/#codeblöcke) erfährst du, wie du die Expressive Code-Syntax in deinen Markdown- und MDX-Inhalten verwendest.
@@ -413,7 +413,7 @@ Zusätzlich zu den standardmäßigen Expressive Code-Optionen kannst du in deine
 #### `themes`
 
 **Typ:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
-**Voreinstellung:** `['starlight-dark', 'starlight-light']`
+**Standard:** `['starlight-dark', 'starlight-light']`
 
 Lege die Designs fest, die zum Stylen von Codeblöcken verwendet werden.
 Weitere Informationen zu den unterstützten Designformaten findest du in der [Expressive Code-Dokumentation zu Designs](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes).
@@ -426,7 +426,7 @@ Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#use
 #### `useStarlightDarkModeSwitch`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `true`
+**Standard:** `true`
 
 Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Site-Design ändert.
 Falls `false`, müssen Sie manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
@@ -438,7 +438,7 @@ Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Desig
 #### `useStarlightUiThemeColors`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `true` wenn `themes` nicht gesetzt ist, andernfalls `false`
+**Standard:** `true` wenn `themes` nicht gesetzt ist, andernfalls `false`
 
 Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Site-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
 Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungsdesign bereitgestellten Farben verwendet.
@@ -450,7 +450,7 @@ Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du
 ### `pagefind`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `true`
+**Standard:** `true`
 
 Lege fest, ob Starlight's Standard-Site-Search-Anbieter [Pagefind](https://pagefind.app/) aktiviert ist.
 
@@ -462,7 +462,7 @@ Pagefind kann nicht aktiviert werden, wenn die Option [`prerender`](#prerender) 
 ### `prerender`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `true`
+**Standard:** `true`
 
 Lege fest, ob Starlight-Seiten vorgerendert zu statischem HTML oder bei Bedarf von einem [SSR-Adapter](https://docs.astro.build/de/guides/server-side-rendering/) gerendert werden sollen.
 
@@ -508,7 +508,7 @@ interface HeadConfig {
 ### `lastUpdated`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `false`
+**Standard:** `false`
 
 Legt fest, ob in der Fußzeile angezeigt werden soll, wann die Seite zuletzt aktualisiert wurde.
 
@@ -517,7 +517,7 @@ Standardmäßig verwendet diese Funktion die Git-Historie deines Repositorys und
 ### `pagination`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `true`
+**Standard:** `true`
 
 Legt fest, ob die Fußzeile Links zur vorherigen und nächsten Seite enthalten soll.
 
@@ -526,7 +526,7 @@ Eine Seite kann diese Einstellung oder den Linktext und/oder die URL mit Hilfe d
 ### `favicon`
 
 **Typ:** `string`  
-**Voreinstellung:** `'/favicon.svg'`
+**Standard:** `'/favicon.svg'`
 
 Legt den Pfad des Standard-Favicons für deine Website fest. Dieses sollte sich im Verzeichnis `public/` befinden und eine gültige Icon-Datei (`.ico`, `.gif`, `.jpg`, `.png` oder `.svg`) sein.
 
@@ -558,7 +558,7 @@ starlight({
 ### `titleDelimiter`
 
 **Typ:** `string`  
-**Voreinstellung:** `'|'`
+**Standard:** `'|'`
 
 Legt das Trennzeichen zwischen Seitentitel und dem Titel der Website im `<title>`-Tag der Website fest, welches in den Browser-Tabs angezeigt wird.
 
@@ -568,7 +568,7 @@ Zum Beispiel heißt diese Seite „Konfigurationsreferenz“ und diese Website h
 ### `disable404Route`
 
 **Typ:** `Boolean`  
-**Voreinstellung:** `false`
+**Standard:** `false`
 
 Deaktiviert die Einspeisung von Starlights Standard [404 Seite](https://docs.astro.build/en/core-concepts/astro-pages/#custom-404-error-page). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
 
