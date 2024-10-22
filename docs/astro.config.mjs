@@ -147,7 +147,7 @@ export default defineConfig({
 				{
 					label: 'Reference',
 					translations: {
-						de: 'Referenz',
+						de: 'Referenzen',
 						es: 'Referencias',
 						ja: 'リファレンス',
 						fr: 'Référence',
@@ -166,6 +166,7 @@ export default defineConfig({
 				{
 					label: 'Resources',
 					translations: {
+						de: 'Ressourcen',
 						'zh-CN': '资源',
 						fr: 'Ressources',
 						'pt-BR': 'Recursos',
