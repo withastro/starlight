@@ -88,7 +88,7 @@ tableOfContents: false
 ### `template`
 
 **Typ:** `'doc' | 'splash'`  
-**Voreinstellung:** `'doc'`
+**Standard:** `'doc'`
 
 Legt die Layoutvorlage für diese Seite fest.
 Seiten verwenden standardmäßig das `'doc'`-Layout.
@@ -258,7 +258,7 @@ next: false
 ### `pagefind`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `true`
+**Standard:** `true`
 
 Legt fest, ob diese Seite in den [Pagefind](https://pagefind.app/)-Suchindex aufgenommen werden soll. Setze das Feld auf `false`, um eine Seite von den Suchergebnissen auszuschließen:
 
@@ -273,7 +273,7 @@ pagefind: false
 ### `draft`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `false`
+**Standard:** `false`
 
 Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build) und [Autogenerierte Link-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) aufgenommen werden soll. Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
 
@@ -306,7 +306,7 @@ interface SidebarConfig {
 #### `label`
 
 **Typ:** `string`  
-**Voreinstellung:** der Seitentitel ([`title`](#title-erforderlich))
+**Standard:** der Seitentitel ([`title`](#title-erforderlich))
 
 Legt die Bezeichnung für diese Seite in der Seitenleiste fest, wenn sie in einer automatisch erzeugten Linkgruppe angezeigt wird.
 
@@ -338,7 +338,7 @@ sidebar:
 #### `hidden`
 
 **Typ:** `boolean`  
-**Voreinstellung:** `false`
+**Standard:** `false`
 
 Verhindert, dass diese Seite in eine automatisch generierte Seitenleistengruppe aufgenommen wird.
 
@@ -418,7 +418,7 @@ Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines 
 ### `extend`
 
 **Typ:** Zod-Schema oder Funktion, die ein Zod-Schema zurückgibt  
-**Voreinstellung:** `z.object({})`
+**Standard:** `z.object({})`
 
 Erweitere das Schema von Starlight um zusätzliche Felder, indem du `extend` in den `docsSchema()` Optionen setzt.
 Der Wert sollte ein [Zod-Schema](https://docs.astro.build/de/guides/content-collections/#datentypen-mit-zod-definieren) sein.
