@@ -540,18 +540,18 @@ Wenn du zusätzliche Varianten oder Fallback-Favicons festlegen musst, kannst du
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg',
-  head: [
-    // ICO-Favicon als Fallback für Safari hinzufügen
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// ICO-Favicon als Fallback für Safari hinzufügen
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
