@@ -13,7 +13,6 @@ import {
 import type { StarlightDocsEntry } from './routing';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
-import { useTranslations } from './translations';
 import { docsSchema } from '../schema';
 import type { Prettify, RemoveIndexSignature } from './types';
 import { DeprecatedLabelsPropProxy } from './i18n';
