@@ -5,6 +5,7 @@ import { describe, expect, test } from 'vitest';
 import { starlightAsides, remarkDirectivesRestoration } from '../../integrations/asides';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { BuiltInDefaultLocale } from '../../utils/i18n';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Asides Tests',
@@ -198,7 +199,11 @@ test('runs without locales config', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
 			...starlightAsides({
-				starlightConfig: { locales: undefined },
+				starlightConfig: {
+					// With no locales config, the default built-in locale is used.
+					defaultLocale: { ...BuiltInDefaultLocale, locale: 'en' },
+					locales: undefined,
+				},
 				astroConfig: {
 					root: new URL(import.meta.url),
 					srcDir: new URL('./_src/', import.meta.url),

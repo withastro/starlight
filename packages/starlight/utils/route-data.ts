@@ -62,7 +62,7 @@ export function generateRouteData({
 	};
 }
 
-export function getToC({ entry, locale, headings }: PageProps) {
+export function getToC({ entry, lang, headings }: PageProps) {
 	const tocConfig =
 		entry.data.template === 'splash'
 			? false
@@ -70,7 +70,7 @@ export function getToC({ entry, locale, headings }: PageProps) {
 				? entry.data.tableOfContents
 				: config.tableOfContents;
 	if (!tocConfig) return;
-	const t = useTranslations(locale);
+	const t = useTranslations(lang);
 	return {
 		...tocConfig,
 		items: generateToC(headings, { ...tocConfig, title: t('tableOfContents.overview') }),
