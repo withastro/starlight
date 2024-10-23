@@ -1,7 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
 import translations from '../../../packages/starlight/translations';
-import { slugToLocaleData } from '../../../packages/starlight/utils/slugs';
 
 interface Props {
 	startsSentence?: boolean;
@@ -12,7 +11,7 @@ const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '');
 // The docs entry for the current page, or `undefined` if the page is using fallback content.
 const entry = await getEntry('docs', slug);
 // The BCP-47 tag for the current page or fallback content's language.
-const pageLang = entry ? slugToLocaleData(slug).lang : 'en';
+const pageLang = entry && Astro.currentLocale ? Astro.currentLocale : 'en';
 // The BCP-47 tags for all supported languages in Starlight.
 const supportedLangs = Object.keys(translations);
 // An i18n helper that returns the language name for a given BCP-47 tag configured for the current page's language.
