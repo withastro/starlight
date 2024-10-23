@@ -19,7 +19,25 @@ const config: Config = {
 	},
 	sitemap: {
 		url: 'http://localhost:4321/sitemap-index.xml',
-		exclude: /\/(de|zh-cn|fr|es|pt-br|pt-pt|it|id|ko|ru|tr|hi|da|uk)\/.*/,
+		exclude: {
+			// A pattern to exclude URLs from the sitemap.
+			pattern: /\/(de|zh-cn|fr|es|pt-br|pt-pt|it|id|ko|ru|tr|hi|da|uk)\/.*/,
+			// A list of slugs to exclude from the sitemap after processing the pattern.
+			slugs: [
+				'components/using-components',
+				'getting-started',
+				'guides/customization',
+				'guides/i18n',
+				'guides/overriding-components',
+				'guides/pages',
+				'guides/project-structure',
+				'guides/site-search',
+				'manual-setup',
+				'reference/frontmatter',
+				'reference/overrides',
+				'reference/plugins',
+			],
+		},
 		replace: {
 			query: 'https://starlight.astro.build',
 			value: 'http://localhost:4321',
@@ -48,9 +66,16 @@ class DocsSite {
 			throw new Error('No URLs found in sitemap.');
 		}
 
-		return sites
-			.map((url) => url.replace(config.sitemap.replace.query, config.sitemap.replace.value))
-			.filter((url) => !config.sitemap.exclude.test(url));
+		const urls: string[] = [];
+
+		for (const site of sites) {
+			const url = site.replace(config.sitemap.replace.query, config.sitemap.replace.value);
+			if (config.sitemap.exclude.pattern.test(url)) continue;
+			if (config.sitemap.exclude.slugs.some((slug) => url.endsWith(`/${slug}/`))) continue;
+			urls.push(url);
+		}
+
+		return urls;
 	}
 
 	async testPage(url: string) {
@@ -73,7 +98,10 @@ interface Config {
 	axe: Parameters<typeof getViolations>[2];
 	sitemap: {
 		url: string;
-		exclude: RegExp;
+		exclude: {
+			pattern: RegExp;
+			slugs: string[];
+		};
 		replace: {
 			query: string;
 			value: string;
