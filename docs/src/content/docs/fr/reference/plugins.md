@@ -27,6 +27,7 @@ interface StarlightPlugin {
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
+      injectTranslations: (Record<string, Record<string, string>>) => void;
     }) => void | Promise<void>;
   };
 }
@@ -160,4 +161,72 @@ L'exemple ci-dessus affichera un message qui inclut le message d'information fou
 
 ```plaintext frame="terminal"
 [plugin-long-processus] Démarrage d'un long processus…
+```
+
+#### `injectTranslations`
+
+**Type :** `(translations: Record<string, Record<string, string>>) => void`
+
+Une fonction de rappel pour ajouter ou mettre à jour des chaînes de traduction utilisées dans les [API de localisation](/fr/guides/i18n/#utiliser-les-traductions-de-linterface-utilisateur) de Starlight.
+
+Dans l'exemple suivant, un module d'extension injecte des traductions pour une chaîne d'interface utilisateur personnalisée nommée `myPlugin.doThing` pour les locales `en` et `fr` :
+
+```ts {6-13} /(injectTranslations)[^(]/
+// module-extension.ts
+export default {
+  name: 'plugin-avec-traductions',
+  hooks: {
+    setup({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+Pour utiliser les traductions injectées dans l'interface utilisateur de votre module d'extension, suivez le [guide « Utiliser les traductions de l'interface utilisateur »](/fr/guides/i18n/#utiliser-les-traductions-de-linterface-utilisateur).
+
+Le typage des chaînes de traduction injectées pour un module d'extension est généré automatiquement dans le projet d'un utilisateur, mais n'est pas encore disponible lors du développement dans le code source de votre module d'extension.
+Pour typer l'objet `locals.t` dans le contexte de votre module d'extension, déclarez les espaces de noms globaux suivants dans un fichier de déclaration TypeScript :
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // Definit l'objet `locals.t` dans le contexte d'un module d'extension.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // Définit les traductions supplémentaires du module d'extension dans l'interface `I18n`.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+Vous pouvez également inférer le typage de l'interface `StarlightApp.I18n` à partir d'un fichier source si vous avez un objet contenant vos traductions.
+
+Par exemple, étant donné le fichier source suivant :
+
+```ts title="traductions.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+La déclaration suivante inférerait le typage à partir des clés anglaises dans le fichier source :
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./traductions').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
 ```

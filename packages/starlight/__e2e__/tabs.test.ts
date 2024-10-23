@@ -1,8 +1,9 @@
 import { expect, testFactory, type Locator } from './test-utils';
 
-const test = await testFactory('./fixtures/basics/');
+const test = testFactory('./fixtures/basics/');
 
-test('syncs tabs with a click event', async ({ page, starlight }) => {
+test('syncs tabs with a click event', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -22,7 +23,8 @@ test('syncs tabs with a click event', async ({ page, starlight }) => {
 	await expectSelectedTab(pkgTabsA, 'yarn', 'yarn command');
 });
 
-test('syncs tabs with a keyboard event', async ({ page, starlight }) => {
+test('syncs tabs with a keyboard event', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -45,7 +47,8 @@ test('syncs tabs with a keyboard event', async ({ page, starlight }) => {
 	await expectSelectedTab(pkgTabsB, 'npm', 'another npm command');
 });
 
-test('syncs only tabs using the same sync key', async ({ page, starlight }) => {
+test('syncs only tabs using the same sync key', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -64,7 +67,8 @@ test('syncs only tabs using the same sync key', async ({ page, starlight }) => {
 	await expectSelectedTab(osTabsB, 'macos', 'ls');
 });
 
-test('supports synced tabs with different tab items', async ({ page, starlight }) => {
+test('supports synced tabs with different tab items', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -78,7 +82,8 @@ test('supports synced tabs with different tab items', async ({ page, starlight }
 	await expectSelectedTab(pkgTabsB, 'bun', 'another bun command');
 });
 
-test('persists the focus when syncing tabs', async ({ page, starlight }) => {
+test('persists the focus when syncing tabs', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const pkgTabsA = page.locator('starlight-tabs').nth(0);
@@ -97,8 +102,9 @@ test('persists the focus when syncing tabs', async ({ page, starlight }) => {
 
 test('preserves tabs position when alternating between tabs with different content heights', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs-variable-height');
 
 	const tabs = page.locator('starlight-tabs').nth(1);
@@ -122,8 +128,9 @@ test('preserves tabs position when alternating between tabs with different conte
 
 test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -143,7 +150,11 @@ test('syncs tabs with the same sync key if they do not consistenly use icons', a
 	await expectSelectedTab(pkgTabsA, 'yarn', 'yarn command');
 });
 
-test('restores tabs only for synced tabs with a persisted state', async ({ page, starlight }) => {
+test('restores tabs only for synced tabs with a persisted state', async ({
+	page,
+	getProdServer,
+}) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -178,8 +189,9 @@ test('restores tabs only for synced tabs with a persisted state', async ({ page,
 
 test('restores tabs for a single set of synced tabs with a persisted state', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -198,8 +210,9 @@ test('restores tabs for a single set of synced tabs with a persisted state', asy
 
 test('restores tabs for multiple synced tabs with different sync keys', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -233,8 +246,9 @@ test('restores tabs for multiple synced tabs with different sync keys', async ({
 
 test('includes the `<starlight-tabs-restore>` element only for synced tabs', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	// The page includes 7 sets of tabs.
@@ -245,8 +259,9 @@ test('includes the `<starlight-tabs-restore>` element only for synced tabs', asy
 
 test('includes the synced tabs restore script only when needed and at most once', async ({
 	page,
-	starlight,
+	getProdServer,
 }) => {
+	const starlight = await getProdServer();
 	const syncedTabsRestoreScriptRegex = /customElements\.define\('starlight-tabs-restore',/g;
 
 	await starlight.goto('/tabs');
@@ -260,7 +275,11 @@ test('includes the synced tabs restore script only when needed and at most once'
 	expect((await page.content()).match(syncedTabsRestoreScriptRegex)).toBeNull();
 });
 
-test('gracefully handles invalid persisted state for synced tabs', async ({ page, starlight }) => {
+test('gracefully handles invalid persisted state for synced tabs', async ({
+	page,
+	getProdServer,
+}) => {
+	const starlight = await getProdServer();
 	await starlight.goto('/tabs');
 
 	const tabs = page.locator('starlight-tabs');
@@ -293,7 +312,41 @@ test('gracefully handles invalid persisted state for synced tabs', async ({ page
 	);
 });
 
-async function expectSelectedTab(tabs: Locator, label: string, panel: string) {
-	expect((await tabs.getByRole('tab', { selected: true }).textContent())?.trim()).toBe(label);
-	expect((await tabs.getByRole('tabpanel').textContent())?.trim()).toBe(panel);
+test('syncs and restores nested tabs', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
+	await starlight.goto('/tabs-nested');
+
+	const tabs = page.locator('starlight-tabs');
+	const pkgTabs = tabs.nth(0);
+	const osTabsA = tabs.nth(1);
+	const osTabsB = tabs.nth(2);
+
+	// Select the linux tab in the npm tab.
+	await osTabsA.getByRole('tab').filter({ hasText: 'linux' }).click();
+
+	await expectSelectedTab(osTabsA, 'linux', 'npm GNU/Linux');
+
+	// Select the pnpm tab.
+	await pkgTabs.getByRole('tab').filter({ hasText: 'pnpm' }).click();
+
+	await expectSelectedTab(pkgTabs, 'pnpm');
+	await expectSelectedTab(osTabsB, 'linux', 'pnpm GNU/Linux');
+
+	page.reload();
+
+	// The synced tabs should be restored.
+	await expectSelectedTab(pkgTabs, 'pnpm');
+	await expectSelectedTab(osTabsB, 'linux', 'pnpm GNU/Linux');
+});
+
+async function expectSelectedTab(tabs: Locator, label: string, panel?: string) {
+	expect(
+		(await tabs.locator(':scope > div [role=tab][aria-selected=true]').textContent())?.trim()
+	).toBe(label);
+
+	if (panel) {
+		const tabPanel = tabs.locator(':scope > [role=tabpanel]:not([hidden])');
+		await expect(tabPanel).toBeVisible();
+		expect((await tabPanel.textContent())?.trim()).toBe(panel);
+	}
 }

@@ -455,6 +455,18 @@ Define whether Starlight’s default site search provider [Pagefind](https://pag
 Set to `false` to disable indexing your site with Pagefind.
 This will also hide the default search UI if in use.
 
+Pagefind cannot be enabled when the [`prerender`](#prerender) option is set to `false`.
+
+### `prerender`
+
+**type:** `boolean`  
+**default:** `true`
+
+Define whether Starlight pages should be pre-rendered to static HTML or on-demand rendered by an [SSR adapter](https://docs.astro.build/en/guides/server-side-rendering/).
+
+Starlight pages are pre-rendered by default.
+If you are using an SSR adapter and want to render Starlight pages on demand, set `prerender: false`.
+
 ### `head`
 
 **type:** [`HeadConfig[]`](#headconfig)

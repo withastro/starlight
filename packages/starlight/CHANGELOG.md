@@ -1,5 +1,128 @@
 # @astrojs/starlight
 
+## 0.28.3
+
+### Patch Changes
+
+- [#2408](https://github.com/withastro/starlight/pull/2408) [`0b4823d`](https://github.com/withastro/starlight/commit/0b4823d534abe517fac5efd97f6febb5965714fe) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a link formatting issue when using the Astro `build.format` option set to `file` with a `base`.
+
+- [#2380](https://github.com/withastro/starlight/pull/2380) [`7b451cf`](https://github.com/withastro/starlight/commit/7b451cff6979bef1c817f3a84392221ac884ba3d) Thanks [@delucis](https://github.com/delucis)! - Loosen Starlight’s i18n schema to pass through unknown keys
+
+- [#2388](https://github.com/withastro/starlight/pull/2388) [`6bba3d8`](https://github.com/withastro/starlight/commit/6bba3d8e02b95ecee7f9c945b6ee33b4c4ba755d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential type-checking issue in Starlight projects.
+
+- [#2443](https://github.com/withastro/starlight/pull/2443) [`a0f40b3`](https://github.com/withastro/starlight/commit/a0f40b3c3c7ab0cb9f0f5f11b94e3679547f6ab4) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fixes CSS issue where bottom padding is not applied in the search dialog.
+
+## 0.28.2
+
+### Patch Changes
+
+- [#2377](https://github.com/withastro/starlight/pull/2377) [`a257b83`](https://github.com/withastro/starlight/commit/a257b83f1e5704ff41bcbe85482ac81a1a61ce1f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with synced `<Tabs>` components containing nested `<Tabs>` causing tab panels to not render correctly.
+
+## 0.28.1
+
+### Patch Changes
+
+- [#2334](https://github.com/withastro/starlight/pull/2334) [`79b9ade`](https://github.com/withastro/starlight/commit/79b9ade194cf704dad79267715a6970e0d7a7277) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with Expressive Code UI labels not displaying correctly.
+
+## 0.28.0
+
+### Minor Changes
+
+- [#1923](https://github.com/withastro/starlight/pull/1923) [`5269aad`](https://github.com/withastro/starlight/commit/5269aad928773ae08b35ba8e19c0f2832d0d2c89) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Overhauls the built-in localization system which is now powered by the [`i18next`](https://www.i18next.com/) library and available to use anywhere in your documentation website.
+
+  See the [“Using UI translations”](https://starlight.astro.build/guides/i18n/#using-ui-translations) guide to learn more about how to access built-in UI labels or your own custom strings in your project. Plugin authors can also use the new [`injectTranslations()`](https://starlight.astro.build/reference/plugins/#injecttranslations) helper to add or update translation strings.
+
+  ⚠️ **BREAKING CHANGE:** The `Astro.props.labels` props has been removed from the props passed down to custom component overrides.
+
+  If you are relying on `Astro.props.labels` (for example to read a built-in UI label), you will need to update your code to use the new [`Astro.locals.t()`](https://starlight.astro.build/guides/i18n/#using-ui-translations) helper instead.
+
+  ```astro
+  ---
+  import type { Props } from '@astrojs/starlight/props';
+  // The `search.label` UI label for this page’s language:
+  const searchLabel = Astro.locals.t('search.label');
+  ---
+  ```
+
+- [#2285](https://github.com/withastro/starlight/pull/2285) [`7286220`](https://github.com/withastro/starlight/commit/728622037602999ed67dedc2757ca5654236feb8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for translating sidebar badges.
+
+- [#1923](https://github.com/withastro/starlight/pull/1923) [`5269aad`](https://github.com/withastro/starlight/commit/5269aad928773ae08b35ba8e19c0f2832d0d2c89) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now 4.14.0
+
+  Please update Astro and Starlight together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+### Patch Changes
+
+- [#2327](https://github.com/withastro/starlight/pull/2327) [`d7a295e`](https://github.com/withastro/starlight/commit/d7a295e5f63171c7eee9fc11333157d8c7e6c803) Thanks [@tritao](https://github.com/tritao)! - Fixes restoration of remark directives for nodes with custom data attached.
+
+## 0.27.1
+
+### Patch Changes
+
+- [#2303](https://github.com/withastro/starlight/pull/2303) [`f92791a`](https://github.com/withastro/starlight/commit/f92791aa1d1ec3d5498e445a078f7143fef60553) Thanks [@delucis](https://github.com/delucis)! - Fixes resolution for the internal module Git virtual module in projects with special characters in the file path
+
+## 0.27.0
+
+### Minor Changes
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Adds support for server-rendered Starlight pages.
+
+  When building a project with `hybrid` or `server` output mode, a new `prerender` option on Starlight config can be set to `false` to make all Starlight pages be rendered on-demand:
+
+  ```ts
+  export default defineConfig({
+    output: 'server',
+    integrations: [
+      starlight({
+        prerender: false,
+      }),
+    ],
+  });
+  ```
+
+### Patch Changes
+
+- [#2242](https://github.com/withastro/starlight/pull/2242) [`756e85e`](https://github.com/withastro/starlight/commit/756e85e8e814657c42c4a6f9c299b5bef32aee22) Thanks [@delucis](https://github.com/delucis)! - Refactors the logic for persisting and restoring sidebar state across navigations for better performance on slow or busy devices
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Improves performance of computing the last updated times from Git history.
+
+  Instead of executing `git` for each docs page, it is now executed twice regardless of the number of pages.
+
+- [#1255](https://github.com/withastro/starlight/pull/1255) [`6f3202b`](https://github.com/withastro/starlight/commit/6f3202b3eb747de8a1cfcba001ab618d5fdee44a) Thanks [@Fryuni](https://github.com/Fryuni)! - Fixes last updated times on projects with custom `srcDir`
+
+## 0.26.4
+
+### Patch Changes
+
+- [#2288](https://github.com/withastro/starlight/pull/2288) [`b15f725`](https://github.com/withastro/starlight/commit/b15f725ead981387f80f089d0523d9c2748b184e) Thanks [@matthewp](https://github.com/matthewp)! - Safely handle Zod errors
+
+  Prevents bugs where errors without the `.received` props would through and cause builds to fail unnecessarily.
+
+## 0.26.3
+
+### Patch Changes
+
+- [#2281](https://github.com/withastro/starlight/pull/2281) [`5062d30`](https://github.com/withastro/starlight/commit/5062d30c08f6ede9e6c39174537bb61280e7c23d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential text rendering issue that could include extra whitespaces for text containing colons.
+
+- [#2279](https://github.com/withastro/starlight/pull/2279) [`62d59e2`](https://github.com/withastro/starlight/commit/62d59e29d2621d834c28c764a02c58b1e1b49243) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with frontmatter schemas containing collection references used with the `<StarlightPage />` component and an Astro version greater than `4.14.0`.
+
+## 0.26.2
+
+### Patch Changes
+
+- [#2273](https://github.com/withastro/starlight/pull/2273) [`746e0cd`](https://github.com/withastro/starlight/commit/746e0cd301f4ac4a182e8c45b36865c61d208b77) Thanks [@delucis](https://github.com/delucis)! - Fixes type error when using Starlight with Astro v4.15
+
+- [#2265](https://github.com/withastro/starlight/pull/2265) [`25b661e`](https://github.com/withastro/starlight/commit/25b661e238cdc6c08ef79504fa5507d879c0f62d) Thanks [@SeraphicRav](https://github.com/SeraphicRav)! - Adds TikTok social icon
+
+- [#2272](https://github.com/withastro/starlight/pull/2272) [`d1969dd`](https://github.com/withastro/starlight/commit/d1969dde2ea8ece6ce9d439eae12d9c63c2201d7) Thanks [@o-az](https://github.com/o-az)! - Adds new icon: `jsr`
+
+- [#2250](https://github.com/withastro/starlight/pull/2250) [`c0a6166`](https://github.com/withastro/starlight/commit/c0a6166bb280e2d70060b68cdf6ee166812c82d2) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes internal E2E tests from the package published to the npm registry.
+
+- [#2253](https://github.com/withastro/starlight/pull/2253) [`72bc76a`](https://github.com/withastro/starlight/commit/72bc76a28f5c1b050d8125d80c6146526b699600) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing to use the `class` attribute in hero action link buttons.
+
 ## 0.26.1
 
 ### Patch Changes

@@ -18,7 +18,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 Starlight является [интеграцией Astro](https://docs.astro.build/ru/guides/integrations-guide/).
 Добавьте её на ваш сайт, запустив команду `astro add` в корневой директории вашего проекта:
 
-<Tabs>
+<Tabs syncKey="pkg">
     <TabItem label="npm">
         ```sh
         npx astro add starlight
@@ -132,6 +132,6 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### Использование Starlight с SSR
 
-Вы можете использовать Starlight вместе со страницами, отображаемыми по требованию, в своем проекте, следуя руководству [Адаптеры рендеринга по требованию](https://docs.astro.build/ru/guides/server-side-rendering/) в документации Astro.
+Чтобы включить SSR, следуйте руководству [Адаптеры рендеринга по требованию](https://docs.astro.build/ru/guides/server-side-rendering/) в документации Astro, для добавления серверного адаптера в ваш проект Starlight.
 
-В настоящее время страницы документации, созданные Starlight, всегда предварительно обрабатываются независимо от режима вывода вашего проекта. Мы надеемся, что вскоре сможем поддерживать рендеринг по требованию для страниц Starlight.
+Страницы документации, создаваемые Starlight, по умолчанию предварительно отрисовываются независимо от режима вывода вашего проекта. Для отключения предварительного рендеринга страниц установите для [параметра `prerender`](/ru/reference/configuration/#prerender) значение `false`.

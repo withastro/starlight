@@ -100,25 +100,33 @@ starlight({
 Настройте элементы навигации боковой панели вашего сайта.
 
 Боковая панель — это массив ссылок и групп ссылок.
-Каждый элемент должен иметь метку `label` и одно из следующих свойств:
+За исключением элементов, использующих `slug`, каждый элемент должен иметь `label` и одно из следующих свойств:
 
-- `link` - одиночная ссылка на определённый URL, например, `'/home'` или `'https://example.com'`.
+- `link` — одиночная ссылка на определённый URL, например, `'/home'` или `'https://example.com'`.
 
-- `items` - массив, содержащий дополнительные ссылки и подгруппы боковой панели.
+- `slug` — ссылка на внутреннюю страницу, например, `'guides/getting-started'`.
 
-- `autogenerate` - объект, указывающий каталог ваших документов для автоматической генерации группы ссылок.
+- `items` — массив, содержащий дополнительные ссылки и подгруппы боковой панели.
+
+- `autogenerate` — объект, указывающий каталог ваших документов для автоматической генерации группы ссылок.
+
+Внутренние ссылки также могут быть указаны в виде строки, а не объекта со свойством `slug`.
 
 ```js
 starlight({
 	sidebar: [
-		// Одиночный элемент ссылки, помеченный как "Главная".
+		// Одиночный элемент ссылки, помеченный как «Главная».
 		{ label: 'Главная', link: '/' },
-		// Группа с надписью "Первые шаги" содержит две ссылки.
+		// Группа с надписью «Первые шаги» содержит четыре ссылки.
 		{
 			label: 'Первые шаги',
 			items: [
-				{ label: 'Введение', link: '/intro' },
-				{ label: 'Следующие шаги', link: '/next-steps' },
+				// Использование `slug` для внутренних ссылок.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// Или использование сокращения для обозначения внутренних ссылок.
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// Группа, связывающая все страницы директории reference.
@@ -141,16 +149,13 @@ starlight({
 
 Автогенерируемые подгруппы по умолчанию уважают свойство `collapsed` своей родительской группы. Установите свойство `autogenerate.collapsed`, чтобы переопределить его.
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // Группа свёрнутых ссылок.
   {
     label: 'Свёрнутые ссылки',
     collapsed: true,
-    items: [
-      { label: 'Введение', link: '/intro' },
-      { label: 'Следующие шаги', link: '/next-steps' },
-    ],
+		items: ['intro', 'next-steps'],
   },
   // Развёрнутая группа, содержащая свёрнутые автогенерируемые подгруппы.
   {
@@ -192,21 +197,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Обычная ссылка
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Внутренняя ссылка
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Группа ссылок
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Автоматически созданная группа ссылок
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -428,10 +449,22 @@ starlight({
 **тип:** `boolean`  
 **по умолчанию:** `true`
 
-Определите, включен ли в Starlight поставщик поиска по сайту по умолчанию [Pagefind](https://pagefind.app/).
+Определите, включен ли в Starlight поставщик поиска по сайту по умолчанию — [Pagefind](https://pagefind.app/).
 
 Установите значение `false`, чтобы отключить индексацию вашего сайта с помощью Pagefind.
 Это также скроет стандартный пользовательский интерфейс поиска, если он используется.
+
+Pagefind не может быть включен, если для параметра [`prerender`](#prerender) установлено значение `false`.
+
+### `prerender`
+
+**тип:** `boolean`  
+**по умолчанию:** `true`
+
+Определите, должны ли страницы Starlight предварительно отрисовываться в статический HTML или отрисовываться по требованию с помощью [SSR-адаптера](https://docs.astro.build/ru/guides/server-side-rendering/).
+
+Страницы Starlight предварительно отрисовываются по умолчанию.
+Если вы используете адаптер SSR и хотите рендерить страницы Starlight по требованию, установите `prerender: false`.
 
 ### `head`
 

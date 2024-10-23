@@ -275,6 +275,118 @@ export const collections = {
 
 Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
 
+## UI 번역 사용
+
+Starlight의 [기본 제공 UI 문자열](/ko/guides/i18n/#starlight-ui-번역)과 [사용자 정의](/ko/guides/i18n/#번역-스키마-확장) 및 [플러그인 제공](/ko/reference/plugins/#injecttranslations) UI 문자열에 액세스할 수 있는 통합 API는 [i18next](https://www.i18next.com/)로 구동됩니다.
+여기에는 [보간](https://www.i18next.com/translation-function/interpolation) 및 [복수화](https://www.i18next.com/translation-function/plurals)와 같은 기능에 대한 지원이 포함됩니다.
+
+Astro 컴포넌트에서 이 API는 [전역 `Astro` 객체](https://docs.astro.build/ko/reference/api-reference/#astrolocals)의 일부인 `Astro.locals.t`로 사용할 수 있습니다:
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+[엔드포인트](https://docs.astro.build/ko/guides/endpoints/)에서도 API를 사용할 수 있으며, 여기서 `locals` 객체는 [엔드포인트 컨텍스트](https://docs.astro.build/ko/reference/api-reference/#contextlocals)의 일부로 사용할 수 있습니다:
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+### UI 문자열 렌더링
+
+`locals.t()` 함수를 사용하여 UI 문자열을 렌더링합니다.
+이것은 UI 문자열 키를 첫 번째 인수로 받아 현재 언어에 해당하는 번역을 반환하는 i18next의 `t()` 함수의 인스턴스입니다.
+
+예를 들어 다음과 같은 콘텐츠가 포함된 사용자 정의 번역 파일이 있다고 가정해 보겠습니다:
+
+```json title="src/content/i18n/en.json"
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+첫 번째 UI 문자열은 `t()` 함수에 `'link.astro'`를 전달하여 렌더링할 수 있습니다:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- 렌더링: <a href="...">Astro documentation</a> -->
+```
+
+두 번째 UI 문자열은 `{{feature}}` 자리 표시자에 i18next의 [보간 구문](https://www.i18next.com/translation-function/interpolation)을 사용합니다.
+`feature`의 값은 `t()`의 두 번째 인수로 전달된 옵션 객체에서 설정되어야 합니다:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- 렌더링: <a href="...">Astro documentation for Astro DB</a> -->
+```
+
+보간, 서식 지정 등과 함께 `t()` 함수를 사용하는 방법에 대한 자세한 내용은 [i18next 문서](https://www.i18next.com/overview/api#t)를 참조하세요.
+
+### 고급 API
+
+#### `t.all()`
+
+`locals.t.all()` 함수는 현재 로케일에서 사용 가능한 모든 UI 문자열이 포함된 객체를 반환합니다.
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Skip to content",
+//      "search.label": "Search",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+로케일에 대한 번역 키가 존재하는지 확인하려면 번역 키를 첫 번째 인수로 전달하여 `locals.t.exists()` 함수를 사용합니다.
+현재 로케일을 재정의해야 하는 경우 선택적 두 번째 인수를 전달합니다.
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+자세한 내용은 [i18next 문서의 `exists()` 참조](https://www.i18next.com/overview/api#exists)를 확인하세요.
+
+#### `t.dir()`
+
+`locals.t.dir()` 함수는 현재 또는 특정 로케일의 텍스트 방향을 반환합니다.
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+자세한 내용은 [i18next 문서의 `dir()` 참조](https://www.i18next.com/overview/api#dir)를 확인하세요.
+
 ## 현재 로케일에 액세스
 
 [`Astro.currentLocale`](https://docs.astro.build/ko/reference/api-reference/#astrocurrentlocale)을 사용하여 `.astro` 컴포넌트의 현재 로케일을 읽을 수 있습니다.

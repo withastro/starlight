@@ -1,0 +1,97 @@
+---
+title: Usando componentes
+description: Usando componentes en MDX y Markdoc con Starlight.
+sidebar:
+  order: 1
+---
+
+Los componentes te permiten reutilizar fácilmente un fragmento de UI o estilos de manera consistente.
+Los ejemplos pueden incluir una tarjeta de enlace o un incrustado de YouTube.
+Starlight admite el uso de componentes en archivos [MDX](https://mdxjs.com/) y [Markdoc](https://markdoc.dev/) y proporciona algunos componentes comunes para que los uses.
+
+[Conoce más sobre la construcción de componentes en la documentación de Astro](https://docs.astro.build/es/core-concepts/astro-components/).
+
+## Usando un componente en MDX
+
+Puedes usar un componente importándolo en tu archivo MDX y luego renderizándolo como una etiqueta JSX.
+Estos se ven como etiquetas HTML pero comienzan con una letra mayúscula que coincide con el nombre en tu declaración de `import`:
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: Bienvenido a mi documentación
+---
+
+import { Icon } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+
+<Icon name="open-book" />
+
+<CustomCard>
+	Los componentes también pueden contener **contenido anidado**.
+</CustomCard>
+```
+
+Debido a que Starlight está impulsado por Astro, puedes agregar soporte para componentes construidos con cualquier [framework de UI compatible (React, Preact, Svelte, Vue, Solid y Alpine)](https://docs.astro.build/es/core-concepts/framework-components/) en tus archivos MDX.
+{/* TODO: Actualizar esta liga cuando los docs en español de Astro incluyan el fragmento de la versión en inglés. */}
+Aprende más sobre [usar componentes en MDX](https://docs.astro.build/en/guides/integrations-guide/mdx/#using-components-in-mdx) en la documentación de Astro.
+
+## Usando un componente en Markdoc
+
+Agrega soporte para la creación de contenido en Markdoc siguiendo nuestra [guía de configuración de Markdoc](/es/guides/authoring-content/#markdoc).
+
+Usando el preset de Starlight Markdoc, puedes usar los componentes incorporados de Starlight con la sintaxis de etiqueta de Markdoc `{% %}`.
+A diferencia de MDX, los componentes en Markdoc no necesitan ser importados.
+El siguiente ejemplo renderiza el [componente de tarjeta](/es/components/cards/) de Starlight en un archivo Markdoc:
+
+```markdoc
+---
+# src/content/docs/example.mdoc
+title: Bienvenido a mi documentación
+---
+
+{% card title="Estrellas" icon="star" %}
+Sirius, Vega, Betelgeuse
+{% /card %}
+```
+
+Ver la [documentación de integración de Astro Markdoc](https://docs.astro.build/es/guides/integrations-guide/markdoc/#render-components) para más información sobre cómo usar componentes en archivos Markdoc.
+
+## Componentes incorporados
+
+Starlight proporcona componentes integrados para casos de uso comunes en la documentación.
+Estos componentes están disponibles en el paquete `@astrojs/starlight/components` en archivos MDX y en el [preset de Starlight Markdoc](/es/guides/authoring-content/#markdoc) en archivos Markdoc.
+
+Ve la barra lateral para una lista de componentes disponibles y cómo usarlos.
+
+## Compatibilidad con los estilos de Starlight
+
+Starlight aplica estilos predeterminados a tu contenido de Markdown, por ejemplo, agregando márgenes entre elementos.
+Si estos estilos entran en conflicto con la apariencia de tu componente, establece la clase `not-content` en tu componente para deshabilitarlos.
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>No se ve afectado por los estilos predeterminados de Starlight.</p>
+</div>
+```
+
+## Props de componentes
+
+Usa el tipo [`ComponentProps`](https://docs.astro.build/es/guides/typescript/#tipo-componentprops) de `astro/types` para hacer referencia a las `Props` aceptadas por un componente incluso si no están exportadas por el componente en sí.
+Esto puede ser util al envolver o extender un componente existente.
+
+El siguiente ejemplo usa `ComponentProps` para obtener el tipo de las props aceptadas por el componente `Icon` incorporado de Starlight:
+
+```astro
+---
+// src/components/Example.astro
+import type { ComponentProps } from 'astro/types';
+import { Icon } from '@astrojs/starlight/icon';
+
+type IconProps = ComponentProps<typeof Icon>;
+---
+```

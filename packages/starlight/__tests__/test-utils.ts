@@ -38,7 +38,10 @@ function mockDoc(
 }
 
 function mockDict(id: string, data: z.input<ReturnType<typeof i18nSchema>>) {
-	return { id, data: i18nSchema().parse(data) };
+	return {
+		id,
+		data: i18nSchema().parse(data),
+	};
 }
 
 export async function mockedAstroContent({

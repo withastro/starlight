@@ -1,7 +1,9 @@
-import type { AstroIntegration } from 'astro';
+import type { AstroIntegration, HookParameters } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
+import { AstroError } from 'astro/errors';
+import type { UserI18nSchema } from './translations';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -31,6 +33,8 @@ export async function runPlugins(
 
 	// A list of Astro integrations added by the various plugins.
 	const integrations: AstroIntegration[] = [];
+	// A list of translations injected by the various plugins keyed by locale.
+	const pluginTranslations: PluginTranslations = {};
 
 	for (const {
 		name,
@@ -69,10 +73,52 @@ export async function runPlugins(
 			command: context.command,
 			isRestart: context.isRestart,
 			logger: context.logger.fork(name),
+			injectTranslations(translations) {
+				// Merge the translations injected by the plugin.
+				for (const [locale, localeTranslations] of Object.entries(translations)) {
+					pluginTranslations[locale] ??= {};
+					Object.assign(pluginTranslations[locale]!, localeTranslations);
+				}
+			},
 		});
 	}
 
-	return { integrations, starlightConfig };
+	if (context.config.output === 'static' && !starlightConfig.prerender) {
+		throw new AstroError(
+			'Starlight’s `prerender: false` option requires `output: "hybrid"` or `"server"` in your Astro config.',
+			'Either set `output` in your Astro config or set `prerender: true` in the Starlight options.\n\n' +
+				'Learn more about rendering modes in the Astro docs: https://docs.astro.build/en/basics/rendering-modes/'
+		);
+	}
+
+	return { integrations, starlightConfig, pluginTranslations };
+}
+
+export function injectPluginTranslationsTypes(
+	translations: PluginTranslations,
+	injectTypes: HookParameters<'astro:config:done'>['injectTypes']
+) {
+	const allKeys = new Set<string>();
+
+	for (const localeTranslations of Object.values(translations)) {
+		for (const key of Object.keys(localeTranslations)) {
+			allKeys.add(key);
+		}
+	}
+
+	// If there are no translations to inject, we don't need to generate any types or cleanup
+	// previous ones as they will not be referenced anymore.
+	if (allKeys.size === 0) return;
+
+	injectTypes({
+		filename: 'i18n-plugins.d.ts',
+		content: `declare namespace StarlightApp {
+	type PluginUIStringKeys = {
+		${[...allKeys].map((key) => `'${key}': string;`).join('\n\t\t')}
+	};
+	interface I18n extends PluginUIStringKeys {}
+}`,
+	});
 }
 
 // https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113
@@ -183,6 +229,32 @@ const starlightPluginSchema = baseStarlightPluginSchema.extend({
 					 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
 					 */
 					logger: z.any() as z.Schema<StarlightPluginContext['logger']>,
+					/**
+					 * A callback function to add or update translations strings.
+					 *
+					 * @see https://starlight.astro.build/guides/i18n/#extend-translation-schema
+					 *
+					 * @example
+					 * {
+					 * 	name: 'My Starlight Plugin',
+					 * 	hooks: {
+					 * 		setup({ injectTranslations }) {
+					 * 			injectTranslations({
+					 * 				en: {
+					 * 					'myPlugin.doThing': 'Do the thing',
+					 * 				},
+					 * 				fr: {
+					 * 					'myPlugin.doThing': 'Faire le truc',
+					 * 				},
+					 * 			});
+					 * 		}
+					 * 	}
+					 * }
+					 */
+					injectTranslations: z.function(
+						z.tuple([z.record(z.string(), z.record(z.string(), z.string()))]),
+						z.void()
+					),
 				}),
 			]),
 			z.union([z.void(), z.promise(z.void())])
@@ -213,3 +285,5 @@ export type StarlightPluginContext = Pick<
 	Parameters<NonNullable<AstroIntegration['hooks']['astro:config:setup']>>[0],
 	'command' | 'config' | 'isRestart' | 'logger'
 >;
+
+export type PluginTranslations = Record<string, UserI18nSchema & Record<string, string>>;

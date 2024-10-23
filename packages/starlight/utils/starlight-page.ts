@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import { parseWithFriendlyErrors } from './error-map';
+import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import {
 	getSiteTitle,
@@ -15,6 +15,8 @@ import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { useTranslations } from './translations';
 import { docsSchema } from '../schema';
+import type { Prettify, RemoveIndexSignature } from './types';
+import { DeprecatedLabelsPropProxy } from './i18n';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import type { StarlightConfig, StarlightUserConfig } from './user-config';
 
@@ -149,7 +151,7 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: useTranslations(localeData.locale).all(),
+		labels: DeprecatedLabelsPropProxy,
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
@@ -196,7 +198,9 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			}),
 	});
 
-	return parseWithFriendlyErrors(
+	// Starting with Astro 4.14.0, a frontmatter schema that contains collection references will
+	// contain an async transform.
+	return parseAsyncWithFriendlyErrors(
 		schema,
 		frontmatter,
 		'Invalid frontmatter props passed to the `<StarlightPage/>` component.'
@@ -210,19 +214,3 @@ async function getUserDocsSchema(): Promise<
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
 	return userCollections?.docs.schema ?? docsSchema();
 }
-
-// https://stackoverflow.com/a/66252656/1945960
-type RemoveIndexSignature<T> = {
-	[K in keyof T as string extends K
-		? never
-		: number extends K
-			? never
-			: symbol extends K
-				? never
-				: K]: T[K];
-};
-
-// https://www.totaltypescript.com/concepts/the-prettify-helper
-type Prettify<T> = {
-	[K in keyof T]: T[K];
-} & {};

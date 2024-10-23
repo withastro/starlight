@@ -14,8 +14,8 @@ vi.mock('astro:content', async () =>
 			['fr/environmental-impact.md', { title: 'Documents écologiques' }],
 			['guides/pages.mdx', { title: 'Pages' }],
 			['fr/guides/pages.mdx', { title: 'Pages' }],
-			['guides/authoring-content.md', { title: 'Authoring Content in Markdown' }],
-			['fr/guides/authoring-content.md', { title: 'Création de contenu en Markdown' }],
+			['guides/authoring-content.mdx', { title: 'Authoring Content in Markdown' }],
+			['fr/guides/authoring-content.mdx', { title: 'Création de contenu en Markdown' }],
 			['resources/plugins.mdx', { title: 'Plugins and Integrations' }],
 			['fr/resources/plugins.mdx', { title: "Modules d'extension et outils" }],
 		],
@@ -44,7 +44,10 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
-			    "badge": undefined,
+			    "badge": {
+			      "text": "New",
+			      "variant": "default",
+			    },
 			    "href": "/manual-setup",
 			    "isCurrent": false,
 			    "label": "Do it yourself",
@@ -52,7 +55,10 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
-			    "badge": undefined,
+			    "badge": {
+			      "text": "Eco-friendly",
+			      "variant": "success",
+			    },
 			    "href": "/environmental-impact",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
@@ -72,7 +78,10 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
-			        "badge": undefined,
+			        "badge": {
+			          "text": "Deprecated",
+			          "variant": "default",
+			        },
 			        "href": "/guides/authoring-content",
 			        "isCurrent": false,
 			        "label": "Authoring Content in Markdown",
@@ -114,7 +123,10 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
-			    "badge": undefined,
+			    "badge": {
+			      "text": "Nouveau",
+			      "variant": "default",
+			    },
 			    "href": "/fr/manual-setup",
 			    "isCurrent": false,
 			    "label": "Fait maison",
@@ -122,7 +134,10 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
-			    "badge": undefined,
+			    "badge": {
+			      "text": "Écologique",
+			      "variant": "success",
+			    },
 			    "href": "/fr/environmental-impact",
 			    "isCurrent": false,
 			    "label": "Documents écologiques",
@@ -142,7 +157,10 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
-			        "badge": undefined,
+			        "badge": {
+			          "text": "Deprecated",
+			          "variant": "default",
+			        },
 			        "href": "/fr/guides/authoring-content",
 			        "isCurrent": false,
 			        "label": "Création de contenu en Markdown",
@@ -184,7 +202,10 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
-			    "badge": undefined,
+			    "badge": {
+			      "text": "Nouveau",
+			      "variant": "default",
+			    },
 			    "href": "/fr/manual-setup",
 			    "isCurrent": false,
 			    "label": "Fait maison",
@@ -192,7 +213,10 @@ describe('getSidebar', () => {
 			  },
 			  {
 			    "attrs": {},
-			    "badge": undefined,
+			    "badge": {
+			      "text": "Écologique",
+			      "variant": "success",
+			    },
 			    "href": "/fr/environmental-impact",
 			    "isCurrent": false,
 			    "label": "Documents écologiques",
@@ -212,7 +236,10 @@ describe('getSidebar', () => {
 			      },
 			      {
 			        "attrs": {},
-			        "badge": undefined,
+			        "badge": {
+			          "text": "Deprecated",
+			          "variant": "default",
+			        },
 			        "href": "/fr/guides/authoring-content",
 			        "isCurrent": false,
 			        "label": "Création de contenu en Markdown",

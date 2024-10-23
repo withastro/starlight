@@ -1,15 +1,15 @@
 import type { MarkdownHeading } from 'astro';
-import { fileURLToPath } from 'node:url';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
-import { getNewestCommitDate } from './git';
+import { getNewestCommitDate } from 'virtual:starlight/git-info';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import type { Route } from './routing';
 import { localizedId } from './slugs';
-import { useTranslations } from './translations';
 import { formatPath } from './format-path';
+import { useTranslations } from './translations';
+import { DeprecatedLabelsPropProxy } from './i18n';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -34,8 +34,8 @@ export interface StarlightRouteData extends Route {
 	lastUpdated: Date | undefined;
 	/** URL object for the address where this page can be edited if enabled. */
 	editUrl: URL | undefined;
-	/** Record of UI strings localized for the current page. */
-	labels: ReturnType<ReturnType<typeof useTranslations>['all']>;
+	/** @deprecated Use `Astro.locals.t()` instead. */
+	labels: Record<string, never>;
 }
 
 export function generateRouteData({
@@ -58,7 +58,7 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
-		labels: useTranslations(locale).all(),
+		labels: DeprecatedLabelsPropProxy,
 	};
 }
 
@@ -82,11 +82,10 @@ function getLastUpdated({ entry }: PageProps): Date | undefined {
 	const { lastUpdated: configLastUpdated } = config;
 
 	if (frontmatterLastUpdated ?? configLastUpdated) {
-		const currentFilePath = fileURLToPath(new URL('src/content/docs/' + entry.id, project.root));
 		try {
 			return frontmatterLastUpdated instanceof Date
 				? frontmatterLastUpdated
-				: getNewestCommitDate(currentFilePath);
+				: getNewestCommitDate(entry.id);
 		} catch {
 			// If the git command fails, ignore the error.
 			return undefined;

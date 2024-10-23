@@ -23,8 +23,7 @@ const icons = Object.keys(Icons) as (keyof typeof Icons)[];
 	icons.forEach((icon) => {
 		icon.addEventListener('click', () => {
 			const iconName = icon.dataset.name!;
-			const copiedValue = `<Icon name="${iconName}" />`;
-			navigator.clipboard.writeText(copiedValue);
+			navigator.clipboard.writeText(iconName);
 
 			const iconLabel = icon.querySelector('[aria-live]');
 			if (iconLabel) {

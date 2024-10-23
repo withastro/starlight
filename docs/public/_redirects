@@ -6,6 +6,10 @@
 /showcase/          /resources/showcase/
 /:lang/showcase/    /:lang/resources/showcase/
 
+# Component docs
+/guides/components/          /components/using-components/
+/:lang/guides/components/    /:lang/components/using-components/
+
 # Translated 404s
 /:lang/*            /:lang/404/     404
 /*                  /404/           404

@@ -1,0 +1,150 @@
+---
+title: Insignias
+description: Aprende a usar insignias en Starlight para mostrar información adicional.
+---
+
+import { Badge } from '@astrojs/starlight/components';
+
+Para mostrar pequeñas piezas de información, como un estado o categoría, usa el componente `<Badge>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Badge slot="preview" text="Nuevo" />
+
+</Preview>
+
+## Importación
+
+```tsx
+import { Badge } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Muestra una insignia usando el componente `<Badge>` y pasa el contenido que deseas mostrar al atributo [`text`](#text) del componente `<Badge>`.
+
+Por defecto, la insignia usará el color de acento del tema de tu sitio.
+Para usar un color de insignia integrado, establece el atributo [`variant`](#variant) en uno de los valores admitidos.
+
+<Preview>
+
+```mdx
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Nota" variant="note" />
+<Badge text="Éxito" variant="success" />
+<Badge text="Consejo" variant="tip" />
+<Badge text="Precaución" variant="caution" />
+<Badge text="Peligro" variant="danger" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% badge text="Nota" variant="note" /%}
+{% badge text="Éxito" variant="success" /%}
+{% badge text="Consejo" variant="tip" /%}
+{% badge text="Precaución" variant="caution" /%}
+{% badge text="Peligro" variant="danger" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Badge text="Nota" variant="note" />
+	<Badge text="Éxito" variant="success" />
+	<Badge text="Consejo" variant="tip" />
+	<Badge text="Precaución" variant="caution" />
+	<Badge text="Peligro" variant="danger" />
+</Fragment>
+
+</Preview>
+
+### Usa diferentes tamaños
+
+Usa el atributo [`size`](#size) para controlar el tamaño del texto de la insignia.
+
+<Preview>
+
+```mdx /size="\w+"/
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Nuevo" size="small" />
+<Badge text="Nuevo y mejorado" size="medium" />
+<Badge text="Nuevo, mejorado y grande" size="large" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /size="\w+"/
+{% badge text="Nuevo" size="small" /%}
+{% badge text="Nuevo y mejorado" size="medium" /%}
+{% badge text="Nuevo, mejorado y grande" size="large" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Badge text="Nuevo" size="small" />
+	<Badge text="Nuevo y mejorado" size="medium" />
+	<Badge text="Nuevo, mejorado y grande" size="large" />
+</Fragment>
+
+</Preview>
+
+### Personaliza las insignias
+
+Personaliza las insignias usando cualquier otro atributo `<span>` como `class` o `style` con CSS personalizado.
+
+<Preview>
+
+```mdx "style={{ fontStyle: 'italic' }}"
+import { Badge } from '@astrojs/starlight/components';
+
+<Badge text="Personalizado" variant="success" style={{ fontStyle: 'italic' }} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'style="font-style: italic;"'
+{% badge text="Personalizado" variant="success" style="font-style: italic;" /%}
+```
+
+</Fragment>
+
+<Badge
+	slot="preview"
+	text="Personalizado"
+	variant="success"
+	style={{ fontStyle: 'italic' }}
+/>
+
+</Preview>
+
+## Props de `<Badge>`
+
+**Implementación:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
+
+El componente `<Badge>` acepta las siguientes propiedades y también cualquier [otro atributo `<span>`](https://developer.mozilla.org/es/docs/Web/HTML/Atributos_globales):
+
+### `text`
+
+**requerido**  
+**tipo:** `string`
+
+El contenido de texto que se mostrará en la insignia.
+
+### `variant`
+
+**tipo:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+**por defecto:** `'default'`
+
+El color de la insignia a usar: `note` (azul), `tip` (morado), `danger` (rojo), `caution` (naranja), `success` (verde) o `default` (color de acento del tema).
+
+### `size`
+
+**tipo:** `'small' | 'medium' | 'large'`
+
+Define el tamaño de la insignia a mostrar.

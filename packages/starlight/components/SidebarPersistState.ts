@@ -1,7 +1,6 @@
 // Collect required elements from the DOM.
 const scroller = document.getElementById('starlight__sidebar');
 const target = scroller?.querySelector<HTMLElement>('sl-sidebar-state-persist');
-const details = [...(target?.querySelectorAll('details') || [])];
 
 /** Starlight uses this key to store sidebar state in `sessionStorage`. */
 const storageKey = 'sl-sidebar-state';
@@ -58,8 +57,9 @@ target?.addEventListener('click', (event) => {
 	// This excludes clicks outside of the `<summary>`, which don’t trigger toggles.
 	const toggledDetails = event.target.closest('summary')?.closest('details');
 	if (!toggledDetails) return;
-	const index = details.indexOf(toggledDetails);
-	if (index === -1) return;
+	const restoreElement = toggledDetails.querySelector<HTMLElement>('sl-sidebar-restore');
+	const index = parseInt(restoreElement?.dataset.index || '');
+	if (isNaN(index)) return;
 	setToggleState(!toggledDetails.open, index);
 });
 

@@ -15,8 +15,8 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Getting Started' }],
-			['guides/authoring-content.md', { title: 'Authoring Markdown' }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 		],
 	})
@@ -138,9 +138,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		      {
 		        "attrs": {},
 		        "badge": undefined,
-		        "href": "/guides/components/",
+		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
-		        "label": "Components",
+		        "label": "Project Structure",
 		        "type": "link",
 		      },
 		    ],
@@ -226,9 +226,9 @@ test('uses provided sidebar if any', async () => {
 		      {
 		        "attrs": {},
 		        "badge": undefined,
-		        "href": "/guides/components/",
+		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
-		        "label": "Components",
+		        "label": "Project Structure",
 		        "type": "link",
 		      },
 		    ],
@@ -467,13 +467,18 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 	expect(data.hasSidebar).toBe(false);
 });
 
-test('includes localized labels', async () => {
+test('throws when accessing a label using the deprecated `labels` prop', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
 		url: starlightPageUrl,
 	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Skip to content');
+	expect(() => data.labels['any']).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			The \`labels\` prop in component overrides has been removed.
+		Hint:
+			Replace \`Astro.props.labels["any"]\` with \`Astro.locals.t("any")\` instead.
+			For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations"
+	`);
 });
 
 test('uses provided edit URL if any', async () => {

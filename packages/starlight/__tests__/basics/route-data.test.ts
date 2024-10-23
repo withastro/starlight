@@ -1,6 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { generateRouteData } from '../../utils/route-data';
 import { routes } from '../../utils/routing';
+import pkg from '../../package.json';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -87,12 +88,24 @@ test('uses explicit last updated date from frontmatter', () => {
 	expect(data.lastUpdated).toEqual(route.entry.data.lastUpdated);
 });
 
-test('includes localized labels', () => {
+test('throws when accessing a label using the deprecated `labels` prop in pre v1 versions', () => {
+	const isPreV1 = pkg.version[0] === '0';
+
 	const route = routes[0]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
 		url: new URL('https://example.com'),
 	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Skip to content');
+
+	if (isPreV1) {
+		expect(() => data.labels['any']).toThrowErrorMatchingInlineSnapshot(`
+			"[AstroUserError]:
+				The \`labels\` prop in component overrides has been removed.
+			Hint:
+				Replace \`Astro.props.labels["any"]\` with \`Astro.locals.t("any")\` instead.
+				For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations"
+		`);
+	} else {
+		expect(() => data.labels['any']).not.toThrow();
+	}
 });

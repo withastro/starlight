@@ -67,7 +67,7 @@ export const processSteps = (html: string | undefined) => {
 class StepsError extends AstroError {
 	constructor(message: string, html?: string) {
 		let hint =
-			'To learn more about the `<Steps>` component, see https://starlight.astro.build/guides/components/#steps';
+			'To learn more about the `<Steps>` component, see https://starlight.astro.build/components/steps/';
 		if (html) {
 			hint += '\n\nFull HTML passed to `<Steps>`:\n' + prettyPrintHtml(html);
 		}

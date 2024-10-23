@@ -49,19 +49,73 @@ import SidebarPreview from '~/components/sidebar-preview.astro';
 
 ## Добавление ссылок и групп ссылок
 
-Чтобы настроить свои [ссылки](#ссылки) и [группы ссылок](#группы) (внутри сворачиваемого заголовка) в боковой панели, используйте свойство [`starlight.sidebar`](/ru/reference/configuration/#sidebar) в `astro.config.mjs`.
+Чтобы настроить ссылки и группы ссылок на боковой панели (внутри сворачиваемого заголовка), используйте свойство [`starlight.sidebar`](/ru/reference/configuration/#sidebar) в `astro.config.mjs`.
 
 Комбинируя ссылки и группы, вы можете создавать разнообразные макеты боковой панели.
 
-### Ссылки
+### Внутренние ссылки
 
-Добавьте ссылку на внутреннюю или внешнюю страницу, используя объект со свойствами `label` и `link`.
+Добавьте ссылку на страницу в `src/content/docs/`, используя объект со свойством `slug`.
+Заголовок связанной страницы будет использоваться в качестве метки по умолчанию.
+
+Например, со следующей конфигурацией:
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+И следующей файловой структурой:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+Будет создана следующая боковая панель:
+
+<SidebarPreview
+	config={[
+		{ label: 'Андромеда', link: '' },
+		{ label: 'Орион', link: '' },
+	]}
+/>
+
+Чтобы переопределить значения, полученные из метаданных связанной страницы, вы можете добавить свойства `label`, [`translations`](#интернационализация) и [`attrs`](#пользовательские-html-атрибуты).
+
+См. [Настройка сгенерированных ссылок](#настройка-сгенерированных-ссылок-через-метаданные) для получения более подробной информации об управлении внешним видом боковой панели из метаданных страницы.
+
+#### Сокращенное обозначение внутренних ссылок
+
+Внутренние ссылки также можно определить, указав только строку для обозначения страницы в качестве сокращения.
+
+Например, следующая конфигурация эквивалентна конфигурации выше, в которой используется `slug`:
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### Другие ссылки
+
+Добавьте ссылку на внешнюю страницу или страницу, не являющуюся документацией, используя объект со свойствами `label` и `link`.
 
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// Ссылка на страницу луны Ганимед.
-		{ label: 'Ганимед', link: '/moons/ganymede/' },
+		// Ссылка на страницу, не связанную с документацией, на этом сайте.
+		{ label: 'Meteor Store', link: '/shop/' },
 		// Внешняя ссылка на веб-сайт NASA.
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -72,7 +126,7 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'Ганимед', link: '' },
+		{ label: 'Meteor Store', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -93,15 +147,15 @@ starlight({
 		{
 			label: 'Созвездия',
 			items: [
-				{ label: 'Карина', link: '/constellations/carina/' },
-				{ label: 'Центавр', link: '/constellations/centaurus/' },
+				'constellations/carina',
+				'constellations/centaurus',
 				// Вложенная группа ссылок для сезонных созвездий.
 				{
 					label: 'Сезонные',
 					items: [
-						{ label: 'Андромеда', link: '/constellations/andromeda/' },
-						{ label: 'Орион', link: '/constellations/orion/' },
-						{ label: 'Малая Медведица', link: '/constellations/ursa-minor/' },
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',
 					],
 				},
 			],
@@ -186,7 +240,7 @@ starlight({
 	]}
 />
 
-#### Настройка сгенерированных ссылок через метаданные
+## Настройка сгенерированных ссылок через метаданные
 
 Используйте [поле `sidebar`](/ru/reference/frontmatter/#sidebar) в метаданных страниц для настройки автоматически генерируемых ссылок.
 
@@ -228,14 +282,14 @@ sidebar:
 />
 
 :::note
-Конфигурация `sidebar` в метаданных используется только для автоматически генерируемых ссылок и будет проигнорирована для вручную определённых ссылок.
+Параметр `sidebar` в метаданных используется только для ссылок в автогенерируемых группах и ссылок на документы, заданных с помощью свойства `slug`. Он не применяется к ссылкам, заданным с помощью свойства `link`.
 :::
 
 ## Значки
 
 Ссылки также могут включать свойство `badge` для отображения значка рядом с текстом ссылки.
 
-```js {10,17}
+```js {9,16}
 starlight({
 	sidebar: [
 		{
@@ -243,8 +297,7 @@ starlight({
 			items: [
 				// Ссылка со значком «Сверхгигант».
 				{
-					label: 'Персей',
-					link: '/stars/persei/',
+					slug: 'stars/persei',
 					badge: 'Сверхгигант',
 				},
 			],
@@ -303,7 +356,7 @@ starlight({
 
 Кроме того, можно создать собственный стиль значка, задав свойству `class` имя класса CSS.
 
-```js {10}
+```js {9}
 starlight({
 	sidebar: [
 		{
@@ -311,8 +364,7 @@ starlight({
 			items: [
 				// Ссылка с жёлтым значком «Заглушка»
 				{
-					label: 'Сириус',
-					link: '/stars/sirius/',
+					slug: 'stars/sirius',
 					badge: { text: 'Заглушка', variant: 'caution' },
 				},
 			],
@@ -401,14 +453,14 @@ starlight({
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
-					link: '/constellations/andromeda/',
+					slug: 'constellations/andromeda',
 				},
 				{
 					label: 'Скорпион',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
-					link: '/constellations/scorpius/',
+					slug: 'constellations/scorpius',
 				},
 			],
 		},
@@ -430,6 +482,90 @@ starlight({
 	]}
 />
 
+### Интернационализация с внутренними ссылками
+
+[Внутренние ссылки](#внутренние-ссылки) по умолчанию будут автоматически использовать переведённые заголовки страниц из метаданных контента:
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Созвездия',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+При просмотре документации на бразильском португальском языке появится следующая боковая панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+На многоязычных сайтах значение `slug` не включает языковую часть URL.
+Например, если у вас есть страницы `en/intro` и `pt-br/intro`, при настройке боковой панели в качестве slug будет `intro`.
+
+### Интернационализация с помощью значков
+
+Для [значков](#значки) свойство `text` может быть строкой, а для многоязычных сайтов — объектом со значениями для каждой локали.
+При использовании объектной формы ключи должны быть тегами [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) (например: `en`, `ar` или `zh-CN`):
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Созвездия',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							ru: 'Новинка',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+При просмотре документации на бразильском португальском языке появится следующая боковая панель:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
 ## Сворачиваемые группы
 
 Группы ссылок могут быть свёрнуты по умолчанию, если установить свойство `collapsed` в `true`.
@@ -442,8 +578,7 @@ starlight({
 			// Сворачивание группы по умолчанию
 			collapsed: true,
 			items: [
-				{ label: 'Андромеда', link: '/constellations/andromeda/' },
-				{ label: 'Орион', link: '/constellations/orion/' },
+				items: ['constellations/andromeda', 'constellations/orion'],
 			],
 		},
 	],

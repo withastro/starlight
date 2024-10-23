@@ -4,12 +4,10 @@ import Icon from '../user-components/Icon.astro';
 import project from 'virtual:starlight/project-context';
 import type { Props } from '../props';
 
-const { labels } = Astro.props;
-
 const pagefindTranslations = {
-	placeholder: labels['search.label'],
+	placeholder: Astro.locals.t('search.label'),
 	...Object.fromEntries(
-		Object.entries(labels)
+		Object.entries(Astro.locals.t.all())
 			.filter(([key]) => key.startsWith('pagefind.'))
 			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
@@ -23,28 +21,28 @@ const pagefindTranslations = {
 	<button
 		data-open-modal
 		disabled
-		aria-label={labels['search.label']}
+		aria-label={Astro.locals.t('search.label')}
 		aria-keyshortcuts="Control+K"
 	>
 		<Icon name="magnifier" />
-		<span class="sl-hidden md:sl-block" aria-hidden="true">{labels['search.label']}</span>
+		<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
 		<kbd class="sl-hidden md:sl-flex" style="display: none;">
-			<kbd>{labels['search.ctrlKey']}</kbd><kbd>K</kbd>
+			<kbd>{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
 		</kbd>
 	</button>
 
-	<dialog style="padding:0" aria-label={labels['search.label']}>
+	<dialog style="padding:0" aria-label={Astro.locals.t('search.label')}>
 		<div class="dialog-frame sl-flex">
 			{
 				/* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */
 			}
 			<button data-close-modal class="sl-flex md:sl-hidden">
-				{labels['search.cancelLabel']}
+				{Astro.locals.t('search.cancelLabel')}
 			</button>
 			{
 				import.meta.env.DEV ? (
 					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
-						<p>{labels['search.devWarning']}</p>
+						<p>{Astro.locals.t('search.devWarning')}</p>
 					</div>
 				) : (
 					<div class="search-container">
@@ -233,6 +231,8 @@ const pagefindTranslations = {
 	}
 
 	.dialog-frame {
+		position: relative;
+		overflow: auto;
 		flex-direction: column;
 		flex-grow: 1;
 		gap: 1rem;

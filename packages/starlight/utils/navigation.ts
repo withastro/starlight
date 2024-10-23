@@ -1,6 +1,6 @@
 import { AstroError } from 'astro/errors';
 import config from 'virtual:starlight/user-config';
-import type { Badge } from '../schemas/badge';
+import type { Badge, I18nBadge, I18nBadgeConfig } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
 	AutoSidebarGroup,
@@ -11,7 +11,7 @@ import type {
 } from '../schemas/sidebar';
 import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
-import { pickLang } from './i18n';
+import { BuiltInDefaultLocale, pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
@@ -81,12 +81,13 @@ function configItemToEntry(
 	} else if ('slug' in item) {
 		return linkFromInternalSidebarLinkItem(item, locale);
 	} else {
+		const label = pickLang(item.translations, localeToLang(locale)) || item.label;
 		return {
 			type: 'group',
-			label: pickLang(item.translations, localeToLang(locale)) || item.label,
+			label,
 			entries: item.items.map((i) => configItemToEntry(i, currentPathname, locale, routes)),
 			collapsed: item.collapsed,
-			badge: item.badge,
+			badge: getSidebarBadge(item.badge, locale, label),
 		};
 	}
 }
@@ -108,12 +109,13 @@ function groupFromAutogenerateConfig(
 			doc.id.startsWith(localeDir + '/')
 	);
 	const tree = treeify(dirDocs, localeDir);
+	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
 	return {
 		type: 'group',
-		label: pickLang(item.translations, localeToLang(locale)) || item.label,
+		label,
 		entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
 		collapsed: item.collapsed,
-		badge: item.badge,
+		badge: getSidebarBadge(item.badge, locale, label),
 	};
 }
 
@@ -129,7 +131,7 @@ function linkFromSidebarLinkItem(item: SidebarLinkItem, locale: string | undefin
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeSidebarLink(href, label, item.badge, item.attrs);
+	return makeSidebarLink(href, label, getSidebarBadge(item.badge, locale, label), item.attrs);
 }
 
 /** Create a link entry from an automatic internal link item in user config. */
@@ -160,7 +162,7 @@ function linkFromInternalSidebarLinkItem(
 	}
 	const label =
 		pickLang(item.translations, localeToLang(locale)) || item.label || entry.entry.data.title;
-	return makeSidebarLink(entry.slug, label, item.badge, item.attrs);
+	return makeSidebarLink(entry.slug, label, getSidebarBadge(item.badge, locale, label), item.attrs);
 }
 
 /** Process sidebar link options to create a link entry. */
@@ -485,4 +487,39 @@ function applyPrevNextLinkConfig(
 function stripExtension(path: string) {
 	const periodIndex = path.lastIndexOf('.');
 	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
+}
+
+/** Get a sidebar badge for a given item. */
+function getSidebarBadge(
+	config: I18nBadgeConfig,
+	locale: string | undefined,
+	itemLabel: string
+): Badge | undefined {
+	if (!config) return;
+	if (typeof config === 'string') {
+		return { variant: 'default', text: config };
+	}
+	return { ...config, text: getSidebarBadgeText(config.text, locale, itemLabel) };
+}
+
+/** Get the badge text for a sidebar item. */
+function getSidebarBadgeText(
+	text: I18nBadge['text'],
+	locale: string | undefined,
+	itemLabel: string
+): string {
+	if (typeof text === 'string') return text;
+	const defaultLang =
+		config.defaultLocale?.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang;
+	const defaultText = text[defaultLang];
+
+	if (!defaultText) {
+		throw new AstroError(
+			`The badge text for "${itemLabel}" must have a key for the default language "${defaultLang}".`,
+			'Update the Starlight config to include a badge text for the default language.\n' +
+				'Learn more about sidebar badges internationalization at https://starlight.astro.build/guides/sidebar/#internationalization-with-badges'
+		);
+	}
+
+	return pickLang(text, localeToLang(locale)) || defaultText;
 }

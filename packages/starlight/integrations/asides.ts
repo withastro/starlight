@@ -64,10 +64,20 @@ function transformUnhandledDirective(
 	index: number,
 	parent: Parent
 ) {
-	const textNode = {
-		type: 'text',
-		value: toMarkdown(node, { extensions: [directiveToMarkdown()] }),
-	} as const;
+	let markdown = toMarkdown(node, { extensions: [directiveToMarkdown()] });
+	/**
+	 * `mdast-util-to-markdown` assumes that the tree represents a complete document (as it's an AST
+	 * and not a CST) and to follow the POSIX definition of a line (a sequence of zero or more
+	 * non- <newline> characters plus a terminating <newline> character), a newline is automatically
+	 * added at the end of the output so that the output is a valid file.
+	 * In this specific case, we can safely remove the newline character at the end of the output
+	 * before replacing the directive with its value.
+	 *
+	 * @see https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206
+	 * @see https://github.com/syntax-tree/mdast-util-to-markdown/blob/fd6a508cc619b862f75b762dcf876c6b8315d330/lib/index.js#L79-L85
+	 */
+	if (markdown.at(-1) === '\n') markdown = markdown.slice(0, -1);
+	const textNode = { type: 'text', value: markdown } as const;
 	if (node.type === 'textDirective') {
 		parent.children[index] = textNode;
 	} else {
@@ -156,7 +166,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			// children with the `directiveLabel` property set to true. We want to pass it as the title
 			// prop to <Aside>, so when we find a directive label, we store it for the title prop and
 			// remove the paragraph from the container’s children.
-			let title = t(`aside.${variant}`);
+			let title: string = t(`aside.${variant}`);
 			let titleNode: PhrasingContent[] = [{ type: 'text', value: title }];
 			const firstChild = node.children[0];
 			if (
@@ -217,7 +227,8 @@ export function remarkDirectivesRestoration() {
 			if (
 				index !== undefined &&
 				parent &&
-				(node.type === 'textDirective' || node.type === 'leafDirective')
+				(node.type === 'textDirective' || node.type === 'leafDirective') &&
+				node.data === undefined
 			) {
 				transformUnhandledDirective(node, index, parent);
 				return;

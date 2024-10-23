@@ -27,6 +27,7 @@ interface StarlightPlugin {
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
+      injectTranslations: (Record<string, Record<string, string>>) => void;
     }) => void | Promise<void>;
   };
 }
@@ -160,4 +161,72 @@ export default {
 
 ```shell
 [long-process-plugin] 시간이 오래 걸리는 작업 진행 중…
+```
+
+#### `injectTranslations`
+
+**타입:** `(translations: Record<string, Record<string, string>>) => void`
+
+Starlight의 [현지화 API](/ko/guides/i18n/#ui-번역-사용)에서 사용되는 번역 문자열을 추가하거나 업데이트하는 콜백 함수입니다.
+
+다음 예시에서는 플러그인이 `en` 및 `fr` 로케일에 대해 `myPlugin.doThing`이라는 사용자 정의 UI 문자열에 대한 번역을 삽입합니다:
+
+```ts {6-13} /(injectTranslations)[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-with-translations',
+  hooks: {
+    setup({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+플러그인 UI에서 삽입된 번역을 사용하려면 [“UI 번역 사용” 가이드](/ko/guides/i18n/#ui-번역-사용)를 참조하세요.
+
+플러그인의 삽입된 번역 문자열에 대한 타입은 사용자 프로젝트에서 자동으로 생성되지만 플러그인의 코드베이스에서 작업할 때는 아직 사용할 수 없습니다.
+플러그인 컨텍스트에서 `locals.t` 객체의 타입을 설정하려면 TypeScript 선언 파일에 다음 전역 네임스페이스를 선언하세요:
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // 플러그인 컨텍스트에서 `locals.t` 객체를 정의합니다.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // `I18n` 인터페이스에서 추가 플러그인 번역을 정의합니다.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+번역이 포함된 객체가 있는 경우 소스 파일에서 `StarlightApp.I18n` 인터페이스의 타입을 유추할 수도 있습니다.
+
+예를 들어 다음 소스 파일이 있다고 가정해 보겠습니다:
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+다음 선언은 소스 파일의 영어 키에서 타입을 추론합니다:
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
 ```

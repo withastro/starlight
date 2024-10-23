@@ -21,7 +21,7 @@ vi.mock('astro:content', async () =>
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: 'New' } }],
 			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
 		],
 	})
 );
