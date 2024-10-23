@@ -17,6 +17,10 @@ import { visit } from 'unist-util-visit';
 import type { StarlightConfig } from '../types';
 import type { createTranslationSystemFromFs } from '../utils/translations-fs';
 import { pathToLocale } from './shared/pathToLocale';
+import { Icons } from '../components/Icons';
+import { fromHtml } from 'hast-util-from-html';
+import type { Element } from 'hast';
+import { AstroError } from 'astro/errors';
 
 interface AsidesOptions {
 	starlightConfig: { locales: StarlightConfig['locales'] };
@@ -160,6 +164,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				return;
 			}
 			const variant = node.name;
+			const attributes = node.attributes;
 			if (!isAsideVariant(variant)) return;
 
 			// remark-directive converts a container’s “label” to a paragraph added as the head of its
@@ -181,6 +186,19 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				node.children.splice(0, 1);
 			}
 
+			let iconPath = iconPaths[variant];
+			if (attributes) {
+				if (attributes['icon']) {
+					const iconName = attributes['icon'] as keyof typeof Icons;
+					if (!Object.keys(Icons).includes(iconName)) {
+						throw new AstroError("Icon name should be part of Starlight's icon list.");
+					}
+					const { properties } = fromHtml(Icons[iconName], { fragment: true })
+						.children[0] as Element;
+					iconPath = [s('path', properties)];
+				}
+			}
+
 			const aside = h(
 				'aside',
 				{
@@ -198,7 +216,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 								fill: 'currentColor',
 								class: 'starlight-aside__icon',
 							},
-							iconPaths[variant]
+							iconPath
 						),
 						...titleNode,
 					]),
