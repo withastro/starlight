@@ -1,7 +1,6 @@
 ---
 import config from 'virtual:starlight/user-config';
 import Icon from '../user-components/Icon.astro';
-import type { Props } from '../props';
 
 type Platform = keyof NonNullable<typeof config.social>;
 type SocialConfig = NonNullable<NonNullable<typeof config.social>[Platform]>;
