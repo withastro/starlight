@@ -341,7 +341,9 @@ test('syncs and restores nested tabs', async ({ page, getProdServer }) => {
 
 async function expectSelectedTab(tabs: Locator, label: string, panel?: string) {
 	expect(
-		(await tabs.locator(':scope > div [role=tab][aria-selected=true]').textContent())?.trim()
+		(
+			await tabs.locator(':scope > div:first-child [role=tab][aria-selected=true]').textContent()
+		)?.trim()
 	).toBe(label);
 
 	if (panel) {

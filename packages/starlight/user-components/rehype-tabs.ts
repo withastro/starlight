@@ -47,7 +47,7 @@ const getIDs = () => {
 
 /**
  * Rehype processor to extract tab panel data and turn each
- * `<starlight-tab-item>` into a `<section>` with the necessary
+ * `<starlight-tab-item>` into a `<div>` with the necessary
  * attributes.
  */
 const tabsProcessor = rehype()
@@ -73,8 +73,8 @@ const tabsProcessor = rehype()
 				// Remove `<TabItem>` props
 				delete node.properties.dataLabel;
 				delete node.properties.dataIcon;
-				// Turn into `<section>` with required attributes
-				node.tagName = 'section';
+				// Turn into `<div>` with required attributes
+				node.tagName = 'div';
 				node.properties.id = ids.panelId;
 				node.properties['aria-labelledby'] = ids.tabId;
 				node.properties.role = 'tabpanel';
