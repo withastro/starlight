@@ -86,11 +86,15 @@ class DocsSite {
 	}
 
 	async reportPageViolations(violations: Awaited<ReturnType<typeof this.testPage>>) {
-		console.error(
-			`> Found ${violations.length} violations on ${this.page.url().replace(config.sitemap.replace.value, '')}\n`
-		);
-		await reportViolations(violations, new DefaultTerminalReporter(true, true, false));
-		console.error('\n');
+		const url = this.page.url().replace(config.sitemap.replace.value, '');
+
+		if (violations.length > 0) {
+			console.error(`> Found ${violations.length} violations on ${url}\n`);
+			await reportViolations(violations, new DefaultTerminalReporter(true, true, false));
+			console.error('\n');
+		} else {
+			console.log(`> Found no violations on ${url}`);
+		}
 	}
 }
 

@@ -10,8 +10,9 @@ test('does not report accessibility violations on the docs site', async ({ docsS
 
 		if (violations.length > 0) {
 			violationsCount += violations.length;
-			await docsSite.reportPageViolations(violations);
 		}
+
+		await docsSite.reportPageViolations(violations);
 	}
 
 	expect(
