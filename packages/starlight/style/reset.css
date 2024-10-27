@@ -11,6 +11,7 @@
 html {
 	color-scheme: dark;
 	accent-color: var(--sl-color-accent);
+	scrollbar-gutter: stable;
 }
 
 html[data-theme='light'] {
