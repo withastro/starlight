@@ -1,0 +1,225 @@
+---
+title: Verzeichnisbaum
+description: Lerne, wie du die Struktur eines Verzeichnisses mit Dateisymbolen und einklappbaren Unterverzeichnissen in Starlight anzeigen kannst.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+Um die Struktur eines Verzeichnisses mit Dateisymbolen und einklappbaren Unterverzeichnissen anzuzeigen, verwende die Komponente `<FileTree>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs eine **wichtige** Datei
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## Import
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeige einen Dateibaum mit Dateisymbolen und zusammenklappbaren Unterverzeichnissen unter Verwendung der Komponente `<FileTree>` an.
+
+Gib die Struktur deiner Dateien und Verzeichnisse mit einer [ungeordneten Markdown-Liste](https://www.markdownguide.org/basic-syntax/#unordered-lists) innerhalb von `<FileTree>` an.
+Erstelle ein Unterverzeichnis mit einer verschachtelten Liste oder füge ein `/` am Ende eines Listenelements hinzu, um es als Verzeichnis ohne spezifischen Inhalt darzustellen.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### Einträge hervorheben
+
+Hebe eine Datei oder ein Verzeichnis hervor, indem du seinen Namen fett druckst, z. B. `**README.md**`.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Kommentare hinzufügen
+
+Füge einen Kommentar zu einer Datei oder einem Verzeichnis hinzu, indem du nach dem Namen weiteren Text hinzufügst.
+Inline-Markdown-Formatierung wie Fett- und Kursivdruck wird in Kommentaren unterstützt.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro eine **wichtige** Datei
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro eine **wichtige** Datei
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro eine **wichtige** Datei
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Platzhalter hinzufügen
+
+Füge Platzhalterdateien und Verzeichnisse hinzu, indem du entweder `...` oder `…` als Namen verwendest.
+Dies kann nützlich sein, um einem Leser zu zeigen, dass ein Ordner mehr Elemente enthalten soll, ohne sie alle explizit anzugeben.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## `<FileTree>`-Eigenschaften
+
+**Implementation:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+Die Komponente `<FileTree>` akzeptiert keine Eigenschaften.

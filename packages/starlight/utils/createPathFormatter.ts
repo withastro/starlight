@@ -40,11 +40,11 @@ function formatPath(
 	const formatStrategy = formatStrategies[format];
 	const trailingSlashStrategy = trailingSlashStrategies[trailingSlash];
 
-	// Add base
-	href = formatStrategy.addBase(href);
-
 	// Handle extension
 	href = formatStrategy.handleExtension(href);
+
+	// Add base
+	href = formatStrategy.addBase(href);
 
 	// Skip trailing slash handling for `build.format: 'file'`
 	if (format === 'file') return href;
