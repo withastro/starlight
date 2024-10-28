@@ -49,7 +49,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	});
 
 	/**
-	 * Generate a utility function that returns UI strings for the given `locale`.
+	 * Generate a utility function that returns UI strings for the given language.
 	 *
 	 * Also includes a few utility methods:
 	 * - `all()` method for getting the entire dictionary.
