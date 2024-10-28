@@ -1,14 +1,8 @@
 ---
-import { stripLeadingAndTrailingSlashes } from '../utils/path';
-import { slugToLocaleData } from '../utils/slugs';
-import { useTranslations } from '../utils/translations';
 import { processFileTree } from './rehype-file-tree';
 
-const slug = stripLeadingAndTrailingSlashes(Astro.url.pathname);
-const t = useTranslations(slugToLocaleData(slug).locale);
-
 const fileTreeHtml = await Astro.slots.render('default');
-const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
+const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'));
 ---
 
 <starlight-file-tree set:html={html} class="not-content" data-pagefind-ignore />

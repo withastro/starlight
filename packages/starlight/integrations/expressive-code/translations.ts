@@ -22,7 +22,7 @@ function addTranslationsForLocale(
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ) {
 	const lang = localeToLang(config, locale);
-	const t = useTranslations(locale);
+	const t = useTranslations(lang);
 	const translationKeys = [
 		'expressiveCode.copyButtonCopied',
 		'expressiveCode.copyButtonTooltip',
