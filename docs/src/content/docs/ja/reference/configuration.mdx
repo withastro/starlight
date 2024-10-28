@@ -24,9 +24,20 @@ export default defineConfig({
 
 ### `title`（必須）
 
-**type:** `string`
+**type:** `string | Record<string, string>`
 
 ウェブサイトのタイトルを設定します。メタデータとブラウザのタブのタイトルに使用されます。
+
+文字列を設定できますが、多言語サイトの場合は、異なるロケールごとの値をもつオブジェクトも使用できます。オブジェクト形式を使用する場合、キーはBCP-47タグ（`en`、`ar`、`zh-CN`など）である必要があります。
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
