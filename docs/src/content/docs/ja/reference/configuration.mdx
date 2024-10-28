@@ -443,6 +443,17 @@ Starlightのデフォルトのサイト検索プロバイダである[Pagefind](
 
 `false`に設定すると、Pagefindによるサイトのインデックス作成はおこなわれません。また、デフォルトの検索UIを使用している場合は、これも非表示になります。
 
+[`prerender`](#prerender)オプションが`false`に設定されている場合、Pagefindを有効にすることはできません。
+
+### `prerender`
+
+**type:** `boolean`  
+**default:** `true`
+
+Starlightページが静的HTMLに事前レンダリングされるか、[SSRアダプター](https://docs.astro.build/ja/guides/server-side-rendering/)によってオンデマンドでレンダリングされるかを設定します。
+
+Starlightページはデフォルトで事前レンダリングされます。SSRアダプターを使用してStarlightページをオンデマンドでレンダリングしたい場合は、`prerender: false`に設定します。
+
 ### `head`
 
 **type:** [`HeadConfig[]`](#headconfig)
