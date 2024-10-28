@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.28.4
+
+### Patch Changes
+
+- [#2444](https://github.com/withastro/starlight/pull/2444) [`d585b3e`](https://github.com/withastro/starlight/commit/d585b3e0485dd55b2ffab985a6c06d267d22fe51) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI string translation issue for languages with a region subtag.
+
+- [#2518](https://github.com/withastro/starlight/pull/2518) [`0f69db8`](https://github.com/withastro/starlight/commit/0f69db8b806833a7160570a469ddcdc8c0dec5e0) Thanks [@morinokami](https://github.com/morinokami)! - Updates Japanese UI translations
+
+- [#2507](https://github.com/withastro/starlight/pull/2507) [`bd6ced5`](https://github.com/withastro/starlight/commit/bd6ced5bc46310b217c7bfe83a0f68ba4a03da45) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a table of contents highlighting issue after resizing the window.
+
+- [#2444](https://github.com/withastro/starlight/pull/2444) [`d585b3e`](https://github.com/withastro/starlight/commit/d585b3e0485dd55b2ffab985a6c06d267d22fe51) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Refactors various components to use the new built-in localization system to access translated UI strings.
+
 ## 0.28.3
 
 ### Patch Changes
