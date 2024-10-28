@@ -97,25 +97,33 @@ starlight({
 
 サイトのサイドバーのナビゲーション項目を設定します。
 
-サイドバーはリンクとリンクのグループの配列です。各項目は、`label`と以下のプロパティのいずれかが必要です。
+サイドバーはリンクとリンクのグループの配列です。`slug`を使用する場合を除き、各項目は`label`と以下のプロパティのいずれかが必要です。
 
 - `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。
+
+- `slug` — たとえば`'guides/getting-started'`など、内部ページへの参照。
 
 - `items` — サイドバーの複数のリンクとサブグループを含む配列。
 
 - `autogenerate` — リンクのグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。
+
+内部リンクは、`slug`プロパティをもつオブジェクトの代わりに文字列として指定することもできます。
 
 ```js
 starlight({
 	sidebar: [
 		// 「ホーム」というラベルのついた単一のリンク。
 		{ label: 'ホーム', link: '/' },
-		// 2つのリンクを含む、「ここから始める」というラベルのついたグループ。
+		// 4つのリンクを含む、「ここから始める」というラベルのついたグループ。
 		{
 			label: 'ここから始める',
 			items: [
-				{ label: 'はじめに', link: '/intro' },
-				{ label: '次のステップ', link: '/next-steps' },
+				// 内部リンクに`slug`を使用する。
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// 内部リンクのための省略形を使用する。
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// referenceディレクトリのすべてのページにリンクするグループ。
@@ -137,16 +145,13 @@ starlight({
 
 自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // 折りたたまれたリンクのグループ。
   {
     label: '折りたたまれたリンク',
     collapsed: true,
-    items: [
-      { label: 'はじめに', link: '/intro' },
-      { label: '次のステップ', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // 自動生成される折りたたまれたサブグループを含む展開されたグループ。
   {
@@ -188,20 +193,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// リンク
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// 内部リンク
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// リンクのグループ
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// 自動生成されたリンクのグループ
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 );
 ```
 
