@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-update wrong links
+Fixes a broken link to Astro’s Docs in an error message
