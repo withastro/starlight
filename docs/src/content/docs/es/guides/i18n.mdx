@@ -180,8 +180,7 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 Además de alojar archivos de contenido traducidos, Starlight te permite traducir las etiquetas de UI predeterminadas (p. ej. el encabezado "En esta página" en la tabla de contenidos) para que tus lectores puedan experimentar tu sitio completamente en el idioma seleccionado.
 
 <LanguagesList startsSentence /> los strings de UI traducidos se proporcionan de
-forma predeterminada, y damos la bienvenida a [contribuciones para agregar más
-idiomas
+forma predeterminada, y damos la bienvenida a [contribuciones para agregar más idiomas
 predeterminados](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras etiquetas predeterminadas, a través de la colección de datos `i18n`.
@@ -393,12 +392,13 @@ Ver la [referencia de `dir()` en la documentación de i18next](https://www.i18ne
 
 Puedes usar [`Astro.currentLocale`](https://docs.astro.build/es/reference/api-reference/#astrocurrentlocale) para leer el idioma actual en componentes `.astro`.
 
-El siguiente ejemplo lee el idioma actual y lo utiliza para generar un enlace a una página Acerca de en el idioma actual:
+El siguiente ejemplo lee el idioma actual y lo utiliza con la función [`getRelativeLocaleUrl()`](https://docs.astro.build/es/reference/modules/astro-i18n/#getrelativelocaleurl) para generar un enlace a una página Acerca de en el idioma actual:
 
 ```astro
 ---
 // src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={`/${Astro.currentLocale}/about`}>Acerca</a>
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>Acerca</a>
 ```
