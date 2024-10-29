@@ -310,7 +310,6 @@ export const GET = (context) => {
 }
 ```
 
-The first UI string can be rendered by passing `'link.astro'` to the `t()` function:
 第一个 UI 字符串可以通过将 `'link.astro'` 传递给 `t()` 函数来渲染：
 
 ```astro {3}
@@ -334,7 +333,7 @@ The first UI string can be rendered by passing `'link.astro'` to the `t()` funct
 
 有关如何使用 `t()` 函数进行插值、格式化等更多信息，请参阅 [i18next 文档](https://www.i18next.com/overview/api#t)。
 
-### Advanced APIs
+### 高级 API
 
 #### `t.all()`
 
@@ -392,7 +391,7 @@ const arabicDirection = Astro.locals.t.dir('ar');
 
 你可以使用 [`Astro.currentLocale`](https://docs.astro.build/zh-cn/reference/api-reference/#astrocurrentlocale) 在 `.astro` 组件中读取当前的语言环境。
 
-下面的示例读取当前语言环境，并使用它和 [`getRelativeLocaleUrl()`](https://docs.astro.build/zh-cn/reference/api-reference/#getrelativelocaleurl) 助手函数以生成一个当前语言的关于页面的链接：
+下面的示例读取当前语言环境，并使用它和 [`getRelativeLocaleUrl()`](https://docs.astro.build/zh-cn/reference/modules/astro-i18n/#getrelativelocaleurl) 助手函数以生成一个当前语言的关于页面的链接：
 
 ```astro
 ---
