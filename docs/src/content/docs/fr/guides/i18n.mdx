@@ -390,12 +390,13 @@ Consultez la [référence pour `dir()` dans la documentation d'i18next](https://
 
 Vous pouvez utiliser [`Astro.currentLocale`](https://docs.astro.build/fr/reference/api-reference/#astrocurrentlocale) pour lire les paramètres régionaux et linguistiques actuels dans les composants `.astro`.
 
-L'exemple suivant lit les paramètres régionaux actuels et les utilise pour générer un lien vers une page d'information dans la même langue :
+L'exemple suivant lit les paramètres régionaux actuels et l'utilise avec l'aide de [`getRelativeLocaleUrl()`](https://docs.astro.build/fr/reference/api-reference/#getrelativelocaleurl) pour générer un lien vers une page d'information dans la langue actuelle :
 
 ```astro
 ---
 // src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={`/${Astro.currentLocale}/about`}>À propos</a>
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>À propos</a>
 ```
