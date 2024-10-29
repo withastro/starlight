@@ -392,12 +392,13 @@ const arabicDirection = Astro.locals.t.dir('ar');
 
 你可以使用 [`Astro.currentLocale`](https://docs.astro.build/zh-cn/reference/api-reference/#astrocurrentlocale) 在 `.astro` 组件中读取当前的语言环境。
 
-下面的示例读取当前语言环境，并使用它生成一个当前语言的关于页面的链接：
+下面的示例读取当前语言环境，并使用它和 [`getRelativeLocaleUrl()`](https://docs.astro.build/zh-cn/reference/api-reference/#getrelativelocaleurl) 助手函数以生成一个当前语言的关于页面的链接：
 
 ```astro
 ---
 // src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={`/${Astro.currentLocale}/about`}>About</a>
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>About</a>
 ```
