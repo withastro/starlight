@@ -18,9 +18,10 @@ export interface LocaleData {
  * @param slug A collection entry slug
  */
 function slugToLocale(slug: string): string | undefined {
-	const locales = Object.keys(config.locales || {});
+	const localesConfig = config.locales ?? {};
 	const baseSegment = slug.split('/')[0];
-	if (baseSegment && locales.includes(baseSegment)) return baseSegment;
+	if (baseSegment && localesConfig[baseSegment]) return baseSegment;
+	if (!localesConfig.root) return config.defaultLocale.locale;
 	return undefined;
 }
 
