@@ -108,8 +108,8 @@ jobs:
         run: pnpm i
 
       - name: Run accessibility audit
-        working-directory: ./packages/starlight
-        run: pnpm test:a11y
+        working-directory: ./docs
+        run: pnpm t
 
   windows-smoke:
     name: Docs site builds on Windows

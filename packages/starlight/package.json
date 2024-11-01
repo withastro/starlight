@@ -5,8 +5,7 @@
   "scripts": {
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "playwright install --with-deps chromium && playwright test",
-    "test:a11y": "playwright install --with-deps chromium && playwright test -c playwright.config.a11y.ts"
+    "test:e2e": "playwright install --with-deps chromium && playwright test"
   },
   "keywords": [
     "docs",
@@ -181,8 +180,6 @@
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.15.3",
-    "axe-playwright": "^2.0.3",
-    "sitemapper": "^3.2.12",
     "vitest": "^1.6.0",
     "linkedom": "^0.18.4"
   },

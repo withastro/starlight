@@ -1,15 +1,22 @@
-import { defineConfig } from '@playwright/test';
-import config from './playwright.config';
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-	...config,
+	forbidOnly: !!process.env['CI'],
+	projects: [
+		{
+			name: 'Chrome Stable',
+			use: {
+				...devices['Desktop Chrome'],
+				headless: true,
+			},
+		},
+	],
 	testMatch: '__a11y__/*.test.ts',
 	// The timeout for the accessibility tests only.
 	timeout: 180 * 1_000,
 	webServer: [
 		{
 			command: 'pnpm run build && pnpm run preview',
-			cwd: '../../docs',
 			reuseExistingServer: !process.env['CI'],
 			stdout: 'pipe',
 			// The timeout of the single build step ran before the accessibility tests.
@@ -17,4 +24,5 @@ export default defineConfig({
 			url: 'http://localhost:4321',
 		},
 	],
+	workers: 1,
 });

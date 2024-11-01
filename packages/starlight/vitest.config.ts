@@ -7,7 +7,6 @@ export default defineConfig({
 			reportsDirectory: './__coverage__',
 			exclude: [
 				...coverageConfigDefaults.exclude,
-				'**/__a11y__/**',
 				'**/__e2e__/**',
 				'playwright.config.*',
 				'**/vitest.*',

@@ -251,7 +251,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 - Add your language to the `locales` config in `docs/astro.config.mjs`
 - Add your language to the `locales` config in `docs/lunaria.config.json`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
-- Add your language to the `config.sitemap.exclude` option in `packages/starlight/__a11y__/test-utils.ts`
+- Add your language to the `config.sitemap.exclude` option in `docs/__a11y__/test-utils.ts`
 - Create the first translated page for your language.
   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
 - Open a pull request on GitHub to add your changes to Starlight!

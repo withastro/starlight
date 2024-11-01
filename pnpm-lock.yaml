@@ -60,6 +60,15 @@ importers:
         specifier: ^0.32.5
         version: 0.32.6
     devDependencies:
+      '@playwright/test':
+        specifier: ^1.45.0
+        version: 1.45.0
+      axe-playwright:
+        specifier: ^2.0.3
+        version: 2.0.3
+      sitemapper:
+        specifier: ^3.2.12
+        version: 3.2.12
       starlight-links-validator:
         specifier: ^0.12.1
         version: 0.12.1(@astrojs/starlight@packages+starlight)(astro@4.15.3)
@@ -237,15 +246,9 @@ importers:
       astro:
         specifier: ^4.15.3
         version: 4.15.3(@types/node@18.16.19)(typescript@5.4.5)
-      axe-playwright:
-        specifier: ^2.0.3
-        version: 2.0.3
       linkedom:
         specifier: ^0.18.4
         version: 0.18.4
-      sitemapper:
-        specifier: ^3.2.12
-        version: 3.2.12
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@18.16.19)
@@ -657,7 +660,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/highlight': 7.24.7
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   /@babel/compat-data@7.25.4:
     resolution: {integrity: sha512-+LGRog6RAsCJrrrg/IO6LGmpphNe5DiK30dGjCoxxeGv49B10/3XYGxPsAwrDlMFcFEvdAUavDT8r9k/hSyQqQ==}
@@ -772,7 +775,7 @@ packages:
       '@babel/helper-validator-identifier': 7.24.7
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   /@babel/parser@7.25.6:
     resolution: {integrity: sha512-trGdfBdbD0l1ZPmcJ83eNxB9rbEax4ALFTF7fN386TMYbeCQbyme5cOEXQhbGXKebwGaB/J52w1mrklMcbgy6Q==}
@@ -5214,7 +5217,7 @@ packages:
   /nanospinner@1.1.0:
     resolution: {integrity: sha512-yFvNYMig4AthKYfHFl1sLj7B2nkHL4lzdig4osvl9/LdGbXwrdFRoqBS98gsEsOakr0yH+r5NZ/1Y9gdVB8trA==}
     dependencies:
-      picocolors: 1.0.1
+      picocolors: 1.1.1
     dev: true
 
   /napi-build-utils@1.0.2:
@@ -5558,7 +5561,6 @@ packages:
 
   /picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
-    dev: true
 
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -6989,7 +6991,7 @@ packages:
     dependencies:
       browserslist: 4.23.3
       escalade: 3.2.0
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
