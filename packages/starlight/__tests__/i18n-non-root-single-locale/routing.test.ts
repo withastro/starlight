@@ -7,6 +7,7 @@ vi.mock('astro:content', async () =>
 			['fr/index.mdx', { title: 'Accueil' }],
 			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/index.mdx', { title: 'Home page' }],
+			['404.md', { title: '404' }],
 		],
 	})
 );
@@ -17,16 +18,16 @@ test('route slugs are normalized', () => {
 });
 
 test('routes for the configured locale have locale data added', () => {
-	for (const route of routes) {
-		if (route.id.startsWith('fr')) {
-			expect(route.lang).toBe('fr-CA');
-			expect(route.dir).toBe('ltr');
-			expect(route.locale).toBe('fr');
-		} else {
-			expect(route.lang).toBe('fr-CA');
-			expect(route.dir).toBe('ltr');
-			expect(route.locale).toBeUndefined();
-		}
+	expect(routes[0]?.lang).toBe('fr-CA');
+	expect(routes[0]?.dir).toBe('ltr');
+	expect(routes[0]?.locale).toBe('fr');
+});
+
+test('routes not matching the configured locale fall back to the default locale', () => {
+	for (const route of routes.slice(1)) {
+		expect(route.lang).toBe('fr-CA');
+		expect(route.dir).toBe('ltr');
+		expect(route.locale).toBe('fr');
 	}
 });
 
