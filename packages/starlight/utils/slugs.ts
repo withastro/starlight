@@ -1,6 +1,7 @@
 import config from 'virtual:starlight/user-config';
 import { BuiltInDefaultLocale } from './i18n';
 import { stripTrailingSlash } from './path';
+import { slugToLocale as getLocaleFromSlug } from '../integrations/shared/slugToLocale';
 
 export interface LocaleData {
 	/** Writing direction. */
@@ -18,11 +19,7 @@ export interface LocaleData {
  * @param slug A collection entry slug
  */
 function slugToLocale(slug: string): string | undefined {
-	const localesConfig = config.locales ?? {};
-	const baseSegment = slug.split('/')[0];
-	if (baseSegment && localesConfig[baseSegment]) return baseSegment;
-	if (!localesConfig.root) return config.defaultLocale.locale;
-	return undefined;
+	return getLocaleFromSlug(slug, config);
 }
 
 /** Get locale information for a given slug. */
