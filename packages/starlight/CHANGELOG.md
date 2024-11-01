@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.28.5
+
+### Patch Changes
+
+- [#2546](https://github.com/withastro/starlight/pull/2546) [`bf42300`](https://github.com/withastro/starlight/commit/bf42300e76241a2df888dc458c59a7478a8b2d61) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where i18n content collection related errors, e.g. malformed JSON or YAML, would not be reported.
+
+- [#2548](https://github.com/withastro/starlight/pull/2548) [`07673c8`](https://github.com/withastro/starlight/commit/07673c80114021a269065e451e660337237f76e1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a URL localization edge case. In projects without a root locale configured, slugs without a locale prefix did not fall back to the default locale as expected.
+
+- [#2547](https://github.com/withastro/starlight/pull/2547) [`91e1dd7`](https://github.com/withastro/starlight/commit/91e1dd731a06657890a68b2d474199455df2756f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a Firefox Markdown content rendering issue for text sentences separated by a line break.
+
+- [#2524](https://github.com/withastro/starlight/pull/2524) [`1b46783`](https://github.com/withastro/starlight/commit/1b4678325fb10714fc3508bd87a7563b10a0f803) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Fixes a broken link to Astro’s Docs in an error message
+
 ## 0.28.4
 
 ### Patch Changes
