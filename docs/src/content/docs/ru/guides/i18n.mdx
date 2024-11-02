@@ -393,12 +393,13 @@ const arabicDirection = Astro.locals.t.dir('ar');
 
 Вы можете использовать [`Astro.currentLocale`](https://docs.astro.build/ru/reference/api-reference/#astrocurrentlocale) для получения текущей локали в компонентах `.astro`.
 
-Следующий пример считывает текущую локаль и использует её для создания ссылки на страницу о сайте на текущем языке:
+Следующий пример считывает текущую локаль и использует её с помощью хелпера [`getRelativeLocaleUrl()`](https://docs.astro.build/ru/reference/modules/astro-i18n/#getrelativelocaleurl) для генерации ссылки на страницу «О сайте» на текущем языке:
 
 ```astro
 ---
 // src/components/AboutLink.astro
+// import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={`/${Astro.currentLocale}/about`}>О сайте</a>
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>О сайте</a>
 ```
