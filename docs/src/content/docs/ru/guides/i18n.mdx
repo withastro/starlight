@@ -398,7 +398,7 @@ const arabicDirection = Astro.locals.t.dir('ar');
 ```astro
 ---
 // src/components/AboutLink.astro
-// import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
 <a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>О сайте</a>
