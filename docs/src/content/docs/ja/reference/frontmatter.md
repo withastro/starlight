@@ -112,10 +112,10 @@ hero:
     - text: もっと知りたい
       link: /getting-started/
       icon: right-arrow
-      variant: primary
     - text: GitHubで見る
       link: https://github.com/astronaut/my-project
       icon: external
+      variant: minimal
       attrs:
         rel: me
 ---
@@ -163,8 +163,8 @@ interface HeroConfig {
   actions?: Array<{
     text: string;
     link: string;
-    variant: 'primary' | 'secondary' | 'minimal';
-    icon: string;
+    variant?: 'primary' | 'secondary' | 'minimal';
+    icon?: string;
     attrs?: Record<string, string | number | boolean>;
   }>;
 }
@@ -264,6 +264,21 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**type:** `boolean`  
+**default:** `false`
+
+このページをドラフトとしてマークし、[本番ビルド](https://docs.astro.build/ja/reference/cli-reference/#astro-build)と[自動生成されるリンクのグループ](/ja/guides/sidebar/#自動生成されるグループ)から除外するかどうかを設定します。ページをドラフトとしてマークし、開発中にのみ表示するには`true`に設定します。
+
+```md
+---
+# src/content/docs/example.md
+# 本番ビルドからこのページを除外します
+draft: true
+---
+```
+
 ### `sidebar`
 
 **type:** [`SidebarConfig`](#sidebarconfig)
@@ -333,7 +348,7 @@ sidebar:
 
 **type:** <code>string | <a href="/ja/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
-自動生成されるリンクのグループに表示されたとき、サイドバーのページにバッジを追加します。文字列を使用すると、バッジはデフォルトのアクセントカラーで表示されます。オプションで、`text`と`variant`フィールドをもつ[`BadgeConfig`オブジェクト](/ja/reference/configuration/#badgeconfig)を渡してバッジをカスタマイズできます。
+自動生成されるリンクのグループに表示されたとき、サイドバーのページにバッジを追加します。文字列を使用すると、バッジはデフォルトのアクセントカラーで表示されます。オプションで、`text`と`variant`、`class`フィールドをもつ[`BadgeConfig`オブジェクト](/ja/reference/configuration/#badgeconfig)を渡してバッジをカスタマイズできます。
 
 ```md
 ---
