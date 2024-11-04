@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.28.5",
+  "version": "0.28.6",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -177,6 +177,7 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.1.0",
     "@playwright/test": "^1.45.0",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.15.3",
@@ -196,6 +197,7 @@
     "hast-util-to-string": "^3.0.0",
     "hastscript": "^9.0.0",
     "i18next": "^23.11.5",
+    "js-yaml": "^4.1.0",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.0",
     "mdast-util-to-string": "^4.0.0",
