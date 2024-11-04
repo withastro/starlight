@@ -264,6 +264,21 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**type:** `boolean`  
+**default:** `false`
+
+このページをドラフトとしてマークし、[本番ビルド](https://docs.astro.build/ja/reference/cli-reference/#astro-build)と[自動生成されるリンクのグループ](/ja/guides/sidebar/#自動生成されるグループ)から除外するかどうかを設定します。ページをドラフトとしてマークし、開発中にのみ表示するには`true`に設定します。
+
+```md
+---
+# src/content/docs/example.md
+# 本番ビルドからこのページを除外します
+draft: true
+---
+```
+
 ### `sidebar`
 
 **type:** [`SidebarConfig`](#sidebarconfig)
