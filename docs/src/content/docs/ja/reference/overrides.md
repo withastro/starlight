@@ -49,6 +49,12 @@ Starlightは、以下のpropsをカスタムコンポーネントに渡します
 
 言語が配信されるベースパス。ルートロケールスラグの場合は`undefined`となります。
 
+#### `siteTitle`
+
+**Type:** `string`
+
+このページのロケールのサイトタイトル。
+
 #### `slug`
 
 **Type:** `string`
@@ -203,7 +209,7 @@ entry: {
 
 **デフォルトコンポーネント:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
-すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
+すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle-1)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
 
 #### `SiteTitle`
 
