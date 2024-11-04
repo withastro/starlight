@@ -79,7 +79,21 @@ const pagefindEnabled =
 		<SkipLink {...Astro.props} />
 		<PageFrame {...Astro.props}>
 			<Header slot="header" {...Astro.props} />
-			{Astro.props.hasSidebar && <Sidebar slot="sidebar" {...Astro.props} />}
+			{
+				Astro.props.hasSidebar && (
+					<Fragment slot="sidebar">
+						<Sidebar {...Astro.props} />
+						<script is:inline>
+							(() => {
+								const scroller = document.getElementById('starlight__sidebar');
+								if (!window._starlightScrollRestore || !scroller) return;
+								scroller.scrollTop = window._starlightScrollRestore;
+								delete window._starlightScrollRestore;
+							})();
+						</script>
+					</Fragment>
+				)
+			}
 			<script src="./SidebarPersistState"></script>
 			<TwoColumnContent {...Astro.props}>
 				<PageSidebar slot="right-sidebar" {...Astro.props} />

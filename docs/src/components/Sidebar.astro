@@ -1,0 +1,45 @@
+---
+// TODO(HiDeoo) Remove this entire file
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<div class="sl-hidden md:sl-block">
+	<div dir="ltr" lang="en" class="sponsors">
+		<h2 class="sponsors-title">Sponsored by</h2>
+		<a href="https://starlight.astro.build/" aria-label="Starlight"></a>
+		<a href="https://starlight.astro.build/" aria-label="Starlight"></a>
+	</div>
+</div>
+
+<style>
+	.sponsors {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1.5rem;
+		padding: 1.5rem 0.5rem 0.75rem;
+	}
+	a {
+		display: flex;
+		align-items: center;
+		min-height: 3rem;
+		opacity: 0.75;
+		background-color: red;
+		width: 96px;
+	}
+	a:hover {
+		opacity: 1;
+	}
+
+	.sponsors-title {
+		width: 100%;
+		color: var(--sl-color-gray-3);
+		font-size: var(--sl-text-xs);
+		font-weight: 400;
+		font-family: var(--__sl-font-mono);
+		line-height: var(--sl-line-height-headings);
+		margin: 0 0 0.5rem;
+	}
+</style>
