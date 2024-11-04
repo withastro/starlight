@@ -311,6 +311,12 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 
 デフォルトの実装と同様に、`<h1>`要素に`id="_top"`を設定する必要があります。
 
+#### `DraftContentNotice`
+
+**デフォルトコンポーネント:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+現在のページがドラフトとしてマークされている場合、開発中にユーザーに表示される通知。
+
 #### `FallbackContentNotice`
 
 **デフォルトコンポーネント:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
