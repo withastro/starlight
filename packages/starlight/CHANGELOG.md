@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.28.6
+
+### Patch Changes
+
+- [#2565](https://github.com/withastro/starlight/pull/2565) [`236467b`](https://github.com/withastro/starlight/commit/236467bb745cea7a284ae3d398874d3edbcd846e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with custom UI strings defined in YAML files not being loaded in some contexts.
+
 ## 0.28.5
 
 ### Patch Changes
