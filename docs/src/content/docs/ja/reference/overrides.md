@@ -99,7 +99,7 @@ entry: {
 }
 ```
 
-このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/api-reference/#collection-entry-type)リファレンスを参照してください。
+このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/modules/astro-content/#collectionentry)リファレンスを参照してください。
 
 #### `sidebar`
 
