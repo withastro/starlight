@@ -97,6 +97,7 @@ import CustomComponent from './CustomComponent.astro';
 - [`slug`](/ja/reference/frontmatter/#slug)プロパティはサポートされておらず、カスタムページのURLに基づいて自動的に設定されます。
 - [`editUrl`](/ja/reference/frontmatter/#editurl)オプションは、編集リンクを表示するためのURLが必要です。
 - [自動生成されるリンクグループ](/ja/reference/configuration/#sidebar)にページを表示する方法をカスタマイズするための[`sidebar`](/ja/reference/frontmatter/#sidebar)フロントマタープロパティは利用できません。`<StarlightPage />`コンポーネントを使用するページはコレクションの一部ではなく、自動生成されるサイドバーグループには追加できません。
+- [`draft`](/ja/reference/frontmatter/#draft)オプションは、ページがドラフトであることを[通知](/ja/reference/overrides/#draftcontentnotice)するだけで、自動的に本番ビルドから除外されるわけではありません。
 
 ##### `sidebar`
 
