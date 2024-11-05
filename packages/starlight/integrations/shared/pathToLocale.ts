@@ -1,7 +1,7 @@
 import type { AstroConfig } from 'astro';
 import type { StarlightConfig } from '../../types';
 
-function slugToLocale(
+export function slugToLocale(
 	slug: string | undefined,
 	localesConfig: StarlightConfig['locales']
 ): string | undefined {
