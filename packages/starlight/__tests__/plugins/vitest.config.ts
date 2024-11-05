@@ -44,11 +44,7 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-3',
 			hooks: {
-				async setup({ config, updateConfig, injectTranslations }) {
-					await Promise.resolve();
-					updateConfig({
-						description: `${config.description} - plugin 3`,
-					});
+				init({ injectTranslations }) {
 					injectTranslations({
 						en: {
 							'search.label': 'Search the thing',
@@ -61,6 +57,34 @@ export default defineVitestConfig({
 						ar: {
 							'testPlugin3.doThing': 'قم بعمل المكون الإضافي 3',
 						},
+					});
+				},
+				async setup({ config, updateConfig, useTranslations, pathToLang }) {
+					await Promise.resolve();
+
+					const docsUrl = new URL('../src/content/docs/', import.meta.url);
+
+					// To test that a plugin can access UI strings in the plugin context using the
+					// `useTranslations()` helper and also use the `pathToLang()` helper, we generate a
+					// bunch of expected values that are JSON stringified, passed to the config through the
+					// `titleDelimiter` option, and later parsed and verified in a test.
+					const result = {
+						uiStrings: [
+							useTranslations('en')('skipLink.label'),
+							useTranslations('fr')('search.label'),
+							// @ts-expect-error - `testPlugin3.doThing` is a translation key injected by a test plugin
+							useTranslations('en')('testPlugin3.doThing'),
+						],
+						langs: [
+							pathToLang(new URL('./en/index.md', docsUrl).pathname),
+							pathToLang(new URL('./pt-br/index.md', docsUrl).pathname),
+							pathToLang(new URL('./index.md', docsUrl).pathname),
+						],
+					};
+
+					updateConfig({
+						description: `${config.description} - plugin 3`,
+						titleDelimiter: JSON.stringify(result),
 					});
 				},
 			},

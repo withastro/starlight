@@ -59,6 +59,9 @@ importers:
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
+      starlight-demo-plugin:
+        specifier: workspace:*
+        version: link:../packages/demo-plugin
     devDependencies:
       pa11y-ci:
         specifier: ^3.0.1
@@ -120,6 +123,15 @@ importers:
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4
+
+  packages/demo-plugin:
+    dependencies:
+      '@astrojs/starlight':
+        specifier: workspace:*
+        version: link:../starlight
+      astro:
+        specifier: ^4.15.3
+        version: 4.15.3(@types/node@18.16.19)(typescript@5.4.5)
 
   packages/docsearch:
     dependencies:

@@ -19,6 +19,11 @@ See below for details of the different properties and hook parameters.
 interface StarlightPlugin {
   name: string;
   hooks: {
+    init?: (options: {
+      injectTranslations: (
+        translations: Record<string, Record<string, string>>
+      ) => void;
+    }) => void | Promise<void>;
     setup: (options: {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
@@ -27,7 +32,8 @@ interface StarlightPlugin {
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
-      injectTranslations: (Record<string, Record<string, string>>) => void;
+      useTranslations: (lang: string) => I18nT;
+      pathToLang: (path: string) => string;
     }) => void | Promise<void>;
   };
 }
@@ -41,7 +47,83 @@ A plugin must provide a unique name that describes it. The name is used when [lo
 
 ## `hooks`
 
-Hooks are functions which Starlight calls to run plugin code at specific times. Currently, Starlight supports a single `setup` hook.
+Hooks are functions which Starlight calls to run plugin code at specific times.
+
+### `hooks.init`
+
+Plugin initialization function called before Starlight is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
+The `init` hook can currently only be used to inject translations.
+
+This hook is called with the following options:
+
+#### `injectTranslations`
+
+**type:** `(translations: Record<string, Record<string, string>>) => void`
+
+A callback function to add or update translation strings used in Starlight’s [localization APIs](/guides/i18n/#using-ui-translations).
+
+In the following example, a plugin injects translations for a custom UI string named `myPlugin.doThing` for the `en` and `fr` locales:
+
+```ts {6-13} /(injectTranslations)[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-with-translations',
+  hooks: {
+    init({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+To use the injected translations in your plugin UI, follow the [“Using UI translations” guide](/guides/i18n/#using-ui-translations).
+If you need to use UI strings in the context of the `setup` hook of your plugin, you can use the [`useTranslations()`](#usetranslations) callback.
+
+Types for a plugin’s injected translation strings are generated automatically in a user’s project, but are not yet available when working in your plugin’s codebase.
+To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // Define the `locals.t` object in the context of a plugin.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // Define the additional plugin translations in the `I18n` interface.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+You can also infer the types for the `StarlightApp.I18n` interface from a source file if you have an object containing your translations.
+
+For example, given the following source file:
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+The following declaration would infer types from the English keys in the source file:
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
+```
 
 ### `hooks.setup`
 
@@ -163,70 +245,75 @@ The example above will log a message that includes the provided info message:
 [long-process-plugin] Starting long process…
 ```
 
-#### `injectTranslations`
+#### `useTranslations`
 
-**type:** `(translations: Record<string, Record<string, string>>) => void`
+**type:** `(lang: string) => I18nT`
 
-A callback function to add or update translation strings used in Starlight’s [localization APIs](/guides/i18n/#using-ui-translations).
+A callback function to generate a utility function to access UI strings for a given language.
+To learn more about the generated utility function and all the APIs available, see the [“Using UI translations”](/guides/i18n/#using-ui-translations) guide.
 
-In the following example, a plugin injects translations for a custom UI string named `myPlugin.doThing` for the `en` and `fr` locales:
-
-```ts {6-13} /(injectTranslations)[^(]/
+```ts {6}
 // plugin.ts
 export default {
-  name: 'plugin-with-translations',
+  name: 'plugin-use-translations',
   hooks: {
-    setup({ injectTranslations }) {
-      injectTranslations({
-        en: {
-          'myPlugin.doThing': 'Do the thing',
-        },
-        fr: {
-          'myPlugin.doThing': 'Faire le truc',
-        },
-      });
+    setup({ useTranslations, logger }) {
+      const t = useTranslations('en');
+      logger.info(t('builtWithStarlight.label'));
     },
   },
 };
 ```
 
-To use the injected translations in your plugin UI, follow the [“Using UI translations” guide](/guides/i18n/#using-ui-translations).
+The example above will log a message that includes a built-in UI string for the English language:
 
-Types for a plugin’s injected translation strings are generated automatically in a user’s project, but are not yet available when working in your plugin’s codebase.
-To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:
-
-```ts
-// env.d.ts
-declare namespace App {
-  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
-  // Define the `locals.t` object in the context of a plugin.
-  interface Locals extends StarlightLocals {}
-}
-
-declare namespace StarlightApp {
-  // Define the additional plugin translations in the `I18n` interface.
-  interface I18n {
-    'myPlugin.doThing': string;
-  }
-}
+```shell
+[plugin-use-translations] Built with Starlight
 ```
 
-You can also infer the types for the `StarlightApp.I18n` interface from a source file if you have an object containing your translations.
+#### `pathToLang`
 
-For example, given the following source file:
+**type:** `(path: string) => string`
 
-```ts title="ui-strings.ts"
-export const UIStrings = {
-  en: { 'myPlugin.doThing': 'Do the thing' },
-  fr: { 'myPlugin.doThing': 'Faire le truc' },
+A callback function to get the language for a given full file path.
+
+This can be particularly useful in [remark or rehype plugins](https://docs.astro.build/en/guides/markdown-content/#markdown-plugins) that a Starlight plugin may use to process Markdown or MDX files.
+The [virtual file format](https://github.com/vfile/vfile) used by such plugins includes the [full path](https://github.com/vfile/vfile#filepath) of the file being processed, which can be used with `pathToLang` to determine the language of the file.
+The returned language can be used with the [`useTranslations`](#usetranslations) helper to get UI strings for that language.
+
+For example, given the following Starlight configuration:
+
+```js
+starlight({
+  title: 'My Docs',
+  defaultLocale: 'en',
+  locales: {
+    // English docs in `src/content/docs/en/`
+    en: { label: 'English' },
+    // French docs in `src/content/docs/fr/`
+    fr: { label: 'Français', lang: 'fr' },
+  },
+});
+```
+
+A plugin can determine the language of a file using its full path:
+
+```ts {6} /fr/
+// plugin.ts
+export default {
+  name: 'plugin-use-translations',
+  hooks: {
+    setup({ useTranslations, logger }) {
+      const lang = pathToLang('/path/to/project/src/content/docs/fr/index.mdx');
+      const t = useTranslations(lang);
+      logger.info(t('aside.tip'));
+    },
+  },
 };
 ```
 
-The following declaration would infer types from the English keys in the source file:
+The example above will log a message that includes a built-in UI string for the French language:
 
-```ts title="env.d.ts"
-declare namespace StarlightApp {
-  type UIStrings = typeof import('./ui-strings').UIStrings.en;
-  interface I18n extends UIStrings {}
-}
+```shell
+[plugin-use-translations] Astuce
 ```

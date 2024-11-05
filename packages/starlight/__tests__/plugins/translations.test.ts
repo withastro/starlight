@@ -1,4 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
+import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../../utils/translations';
 
 vi.mock('astro:content', async () =>
@@ -10,7 +11,7 @@ vi.mock('astro:content', async () =>
 	})
 );
 
-describe('useTranslations()', () => {
+describe('can access UI string in an Astro context', () => {
 	test('includes UI strings injected by plugins for the default locale', () => {
 		const t = useTranslations(undefined);
 		expect(t).toBeTypeOf('function');
@@ -45,4 +46,26 @@ describe('useTranslations()', () => {
 		// @ts-expect-error - translation key injected by a test plugin.
 		expect(t('testPlugin3.doThing')).toBe('افعل الشيء');
 	});
+});
+
+test('can access UI strings in the plugin context using useTranslations()', () => {
+	const { uiStrings } = JSON.parse(config.titleDelimiter);
+
+	// A built-in UI string.
+	expect(uiStrings[0]).toBe('Skip to content');
+	// A built-in UI string overriden by a plugin.
+	expect(uiStrings[1]).toBe('Rechercher le truc');
+	// A UI string injected by a plugin.
+	expect(uiStrings[2]).toBe('Do the Plugin 3 thing');
+});
+
+test('can infer langs from a full path in the plugin context using pathToLang()', () => {
+	const { langs } = JSON.parse(config.titleDelimiter);
+
+	// The default language.
+	expect(langs[0]).toBe('en');
+	// A language with a regional subtag.
+	expect(langs[1]).toBe('pt-BR');
+	// A page not matching any language defaults to the default language.
+	expect(langs[2]).toBe('en');
 });

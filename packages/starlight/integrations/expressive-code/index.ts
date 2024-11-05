@@ -5,9 +5,8 @@ import {
 } from 'astro-expressive-code';
 import { addClassName } from 'astro-expressive-code/hast';
 import type { AstroIntegration } from 'astro';
-import type { StarlightConfig } from '../../types';
-import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { pathToLocale } from '../shared/pathToLocale';
+import type { StarlightConfig, StarlightPlugin } from '../../types';
+import { pathToLang } from '../shared/pathToLang';
 import {
 	applyStarlightUiThemeColors,
 	preprocessThemes,
@@ -63,7 +62,7 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 
 type StarlightEcIntegrationOptions = {
 	starlightConfig: StarlightConfig;
-	useTranslations?: ReturnType<typeof createTranslationSystemFromFs> | undefined;
+	useTranslations: Parameters<StarlightPlugin['hooks']['setup']>[0]['useTranslations'];
 };
 
 /**
@@ -109,8 +108,8 @@ export function getStarlightEcConfigPreprocessor({
 			},
 		});
 
-		// Add Expressive Code UI translations (if any) for all defined locales
-		if (useTranslations) addTranslations(starlightConfig, useTranslations);
+		// Add Expressive Code UI translations for all defined locales
+		addTranslations(starlightConfig, useTranslations);
 
 		return {
 			themes,
@@ -152,7 +151,7 @@ export function getStarlightEcConfigPreprocessor({
 				},
 				...otherStyleOverrides,
 			},
-			getBlockLocale: ({ file }) => pathToLocale(file.path, { starlightConfig, astroConfig }),
+			getBlockLocale: ({ file }) => pathToLang(file.path, { astroConfig, starlightConfig }),
 			plugins,
 			...rest,
 		};

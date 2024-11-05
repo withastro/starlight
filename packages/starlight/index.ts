@@ -17,7 +17,6 @@ import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
-import { createTranslationSystemFromFs } from './utils/translations-fs';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -59,14 +58,10 @@ export default function StarlightIntegration({
 				);
 
 				const integrations = pluginResult.integrations;
+				const useTranslations = pluginResult.useTranslations;
+				const pathToLang = pluginResult.pathToLang;
 				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
-
-				const useTranslations = createTranslationSystemFromFs(
-					starlightConfig,
-					config,
-					pluginTranslations
-				);
 
 				addMiddleware({ entrypoint: '@astrojs/starlight/locals', order: 'pre' });
 
@@ -120,7 +115,12 @@ export default function StarlightIntegration({
 					},
 					markdown: {
 						remarkPlugins: [
-							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
+							...starlightAsides({
+								starlightConfig,
+								astroConfig: config,
+								useTranslations,
+								pathToLang,
+							}),
 						],
 						rehypePlugins: [rehypeRtlCodeSupport()],
 						shikiConfig:

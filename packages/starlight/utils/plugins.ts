@@ -4,6 +4,8 @@ import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-c
 import { parseWithFriendlyErrors } from '../utils/error-map';
 import { AstroError } from 'astro/errors';
 import type { UserI18nSchema } from './translations';
+import { createTranslationSystemFromFs } from './translations-fs';
+import { pathToLang as getPathFromLang } from '../integrations/shared/pathToLang';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -31,10 +33,37 @@ export async function runPlugins(
 		'Invalid plugins config passed to starlight integration'
 	);
 
-	// A list of Astro integrations added by the various plugins.
-	const integrations: AstroIntegration[] = [];
 	// A list of translations injected by the various plugins keyed by locale.
 	const pluginTranslations: PluginTranslations = {};
+
+	for (const {
+		hooks: { init },
+	} of pluginsConfig) {
+		if (init) {
+			await init({
+				injectTranslations(translations) {
+					// Merge the translations injected by the plugin.
+					for (const [locale, localeTranslations] of Object.entries(translations)) {
+						pluginTranslations[locale] ??= {};
+						Object.assign(pluginTranslations[locale]!, localeTranslations);
+					}
+				},
+			});
+		}
+	}
+
+	const useTranslations = createTranslationSystemFromFs(
+		starlightConfig,
+		context.config,
+		pluginTranslations
+	);
+
+	function pathToLang(path: string) {
+		return getPathFromLang(path, { astroConfig: context.config, starlightConfig });
+	}
+
+	// A list of Astro integrations added by the various plugins.
+	const integrations: AstroIntegration[] = [];
 
 	for (const {
 		name,
@@ -73,13 +102,8 @@ export async function runPlugins(
 			command: context.command,
 			isRestart: context.isRestart,
 			logger: context.logger.fork(name),
-			injectTranslations(translations) {
-				// Merge the translations injected by the plugin.
-				for (const [locale, localeTranslations] of Object.entries(translations)) {
-					pluginTranslations[locale] ??= {};
-					Object.assign(pluginTranslations[locale]!, localeTranslations);
-				}
-			},
+			useTranslations,
+			pathToLang,
 		});
 	}
 
@@ -91,7 +115,7 @@ export async function runPlugins(
 		);
 	}
 
-	return { integrations, starlightConfig, pluginTranslations };
+	return { integrations, starlightConfig, pluginTranslations, useTranslations, pathToLang };
 }
 
 export function injectPluginTranslationsTypes(
@@ -140,6 +164,45 @@ const baseStarlightPluginSchema = z.object({
 const starlightPluginSchema = baseStarlightPluginSchema.extend({
 	/** The different hooks available to the plugin. */
 	hooks: z.object({
+		/**
+		 * Plugin initialization function called with an object containing various values that can be used by
+		 * the plugin to interact with Starlight.
+		 */
+		init: z
+			.function(
+				z.tuple([
+					z.object({
+						/**
+						 * A callback function to add or update translations strings.
+						 *
+						 * @see https://starlight.astro.build/guides/i18n/#extend-translation-schema
+						 *
+						 * @example
+						 * {
+						 * 	name: 'My Starlight Plugin',
+						 * 	hooks: {
+						 * 		init({ injectTranslations }) {
+						 * 			injectTranslations({
+						 * 				en: {
+						 * 					'myPlugin.doThing': 'Do the thing',
+						 * 				},
+						 * 				fr: {
+						 * 					'myPlugin.doThing': 'Faire le truc',
+						 * 				},
+						 * 			});
+						 * 		}
+						 * 	}
+						 * }
+						 */
+						injectTranslations: z.function(
+							z.tuple([z.record(z.string(), z.record(z.string(), z.string()))]),
+							z.void()
+						),
+					}),
+				]),
+				z.union([z.void(), z.promise(z.void())])
+			)
+			.optional(),
 		/**
 		 * Plugin setup function called with an object containing various values that can be used by
 		 * the plugin to interact with Starlight.
@@ -230,31 +293,47 @@ const starlightPluginSchema = baseStarlightPluginSchema.extend({
 					 */
 					logger: z.any() as z.Schema<StarlightPluginContext['logger']>,
 					/**
-					 * A callback function to add or update translations strings.
+					 * A callback function to generate a utility function to access UI strings for a given
+					 * language.
 					 *
-					 * @see https://starlight.astro.build/guides/i18n/#extend-translation-schema
+					 * @see https://starlight.astro.build/guides/i18n/#using-ui-translations
 					 *
 					 * @example
 					 * {
 					 * 	name: 'My Starlight Plugin',
-					 * 	hooks: {
-					 * 		setup({ injectTranslations }) {
-					 * 			injectTranslations({
-					 * 				en: {
-					 * 					'myPlugin.doThing': 'Do the thing',
-					 * 				},
-					 * 				fr: {
-					 * 					'myPlugin.doThing': 'Faire le truc',
-					 * 				},
-					 * 			});
+					 *	hooks: {
+					 * 		setup({ useTranslations, logger }) {
+					 * 			const t = useTranslations('en');
+					 * 			logger.info(t('builtWithStarlight.label'));
+					 * 		  // ^ Logs 'Built with Starlight' to the console.
 					 * 		}
-					 * 	}
+					 *	}
 					 * }
 					 */
-					injectTranslations: z.function(
-						z.tuple([z.record(z.string(), z.record(z.string(), z.string()))]),
-						z.void()
-					),
+					useTranslations: z.any() as z.Schema<ReturnType<typeof createTranslationSystemFromFs>>,
+					/**
+					 * A callback function to get the language for a given full file path. The returned
+					 * language can be used with the `useTranslations` helper to get UI strings for that
+					 * language.
+					 *
+					 * This can be particularly useful in remark or rehype plugins to get the language for
+					 * the current file being processed and use it to get the appropriate UI strings for that
+					 * language.
+					 *
+					 * @example
+					 * {
+					 * 	name: 'My Starlight Plugin',
+					 *	hooks: {
+					 * 		setup({ pathToLang, useTranslations, logger }) {
+					 * 			const lang = pathToLang('/path/to/project/src/content/docs/fr/index.mdx');
+					 * 			const t = useTranslations(lang);
+					 * 			logger.info(t('aside.tip'));
+					 * 		  // ^ Logs 'Astuce' to the console.
+					 * 		}
+					 *	}
+					 * }
+					 */
+					pathToLang: z.function(z.tuple([z.string()]), z.string()),
 				}),
 			]),
 			z.union([z.void(), z.promise(z.void())])

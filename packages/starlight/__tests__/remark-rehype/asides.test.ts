@@ -6,6 +6,7 @@ import { starlightAsides, remarkDirectivesRestoration } from '../../integrations
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
+import { pathToLang as getPathFromLang } from '../../integrations/shared/pathToLang';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Asides Tests',
@@ -13,18 +14,28 @@ const starlightConfig = StarlightConfigSchema.parse({
 	defaultLocale: 'en',
 } satisfies StarlightUserConfig);
 
+const astroConfig = {
+	root: new URL(import.meta.url),
+	srcDir: new URL('./_src/', import.meta.url),
+};
+
 const useTranslations = createTranslationSystemFromFs(
 	starlightConfig,
 	// Using non-existent `_src/` to ignore custom files in this test fixture.
 	{ srcDir: new URL('./_src/', import.meta.url) }
 );
 
+function pathToLang(path: string) {
+	return getPathFromLang(path, { astroConfig, starlightConfig });
+}
+
 const processor = await createMarkdownProcessor({
 	remarkPlugins: [
 		...starlightAsides({
 			starlightConfig,
-			astroConfig: { root: new URL(import.meta.url), srcDir: new URL('./_src/', import.meta.url) },
+			astroConfig,
 			useTranslations,
+			pathToLang,
 		}),
 		// The restoration plugin is run after the asides and any other plugin that may have been
 		// injected by Starlight plugins.
@@ -209,6 +220,7 @@ test('runs without locales config', async () => {
 					srcDir: new URL('./_src/', import.meta.url),
 				},
 				useTranslations,
+				pathToLang,
 			}),
 			remarkDirectivesRestoration,
 		],
@@ -251,6 +263,7 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 					srcDir: new URL('./_src/', import.meta.url),
 				},
 				useTranslations,
+				pathToLang,
 			}),
 			// A custom remark plugin injected by a Starlight plugin through an Astro integration would
 			// run before the restoration plugin.
@@ -286,6 +299,7 @@ test('does not transform back directive nodes with data', async () => {
 					srcDir: new URL('./_src/', import.meta.url),
 				},
 				useTranslations,
+				pathToLang,
 			}),
 			// A custom remark plugin updating the node with data that should be consumed by rehype.
 			function customRemarkPlugin() {

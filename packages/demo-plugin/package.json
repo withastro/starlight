@@ -1,0 +1,14 @@
+{
+  "name": "starlight-demo-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "workspace:*",
+    "astro": "^4.15.3"
+  }
+}

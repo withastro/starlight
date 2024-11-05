@@ -1,3 +1,5 @@
 {
-  "component.preview": "预览"
+  "component.preview": "预览",
+  "// TODO(HiDeoo) ": "Remove this comment and the following entry",
+  "demo.test": "Something in zh-CN translated by the user in their project"
 }

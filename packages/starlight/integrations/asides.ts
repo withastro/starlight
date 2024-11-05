@@ -14,15 +14,13 @@ import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { StarlightConfig } from '../types';
-import type { createTranslationSystemFromFs } from '../utils/translations-fs';
-import { pathToLocale } from './shared/pathToLocale';
-import { localeToLang } from './shared/localeToLang';
+import type { StarlightConfig, StarlightPlugin } from '../types';
 
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
+	useTranslations: Parameters<StarlightPlugin['hooks']['setup']>[0]['useTranslations'];
+	pathToLang: Parameters<StarlightPlugin['hooks']['setup']>[0]['pathToLang'];
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -151,8 +149,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = pathToLocale(file.history[0], options);
-		const lang = localeToLang(options.starlightConfig, locale);
+		const lang = options.pathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === undefined || !isNodeDirective(node)) {
