@@ -16,7 +16,7 @@
     "grammars": "node grammars/generate.mjs"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.5.2",
+    "@astro-community/astro-embed-youtube": "^0.5.6",
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.1.1",
     "@types/culori": "^2.1.1",

@@ -39,8 +39,8 @@ importers:
   docs:
     dependencies:
       '@astro-community/astro-embed-youtube':
-        specifier: ^0.5.2
-        version: 0.5.2(astro@4.16.10)
+        specifier: ^0.5.6
+        version: 0.5.6(astro@4.16.10)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
@@ -463,13 +463,13 @@ packages:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  /@astro-community/astro-embed-youtube@0.5.2(astro@4.16.10):
-    resolution: {integrity: sha512-cckWcq7mFCmI6uPpIlRolSafSQRYZBOaxIc8DaCUh8+JQAtPF7O4EdpRpZBUcvbARrWEEyHJCWrt0XOGppMniw==}
+  /@astro-community/astro-embed-youtube@0.5.6(astro@4.16.10):
+    resolution: {integrity: sha512-/mRfCl/eTBUz0kmjD1psOy0qoDDBorVp0QumUacjFcIkBullYtbeFQ2ZGZ+3N/tA6cR/OIyzr2QA4dQXlY6USg==}
     peerDependencies:
-      astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta
+      astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
     dependencies:
       astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
-      lite-youtube-embed: 0.3.2
+      lite-youtube-embed: 0.3.3
     dev: false
 
   /@astrojs/check@0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.4.5):
@@ -5092,8 +5092,8 @@ packages:
       uhyphen: 0.2.0
     dev: true
 
-  /lite-youtube-embed@0.3.2:
-    resolution: {integrity: sha512-b1dgKyF4PHhinonmr3PB172Nj0qQgA/7DE9EmeIXHR1ksnFEC2olWjNJyJGdsN2cleKHRjjsmrziKlwXtPlmLQ==}
+  /lite-youtube-embed@0.3.3:
+    resolution: {integrity: sha512-gFfVVnj6NRjxVfJKo3qoLtpi0v5mn3AcR4eKD45wrxQuxzveFJUb+7Cr6uV6n+DjO8X3p0UzPPquhGt0H/y+NA==}
     dev: false
 
   /load-yaml-file@0.2.0:
