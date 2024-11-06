@@ -323,10 +323,10 @@ If you’ve built a Starlight plugin, theme or some other tool, adding it to the
 
 3. Open a pull request on GitHub to add your changes.
 
-## Starlight-related content
+## Community Content
 
 We love when people create content around Starlight and share it on our [community content](https://starlight.astro.build/resources/community-content/)
-If you’ve published some content that's related to Statlight, adding it to the community content page is just a pull request away!
+If you’ve published some content that's related to Starlight, adding it to the community content page is just a pull request away!
 
 1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
 2. Add a new entry for your content in the right section in `docs/src/content/docs/resources/community-content.mdx`.
