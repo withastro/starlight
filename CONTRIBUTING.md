@@ -303,12 +303,12 @@ If you’ve built a Starlight plugin, theme or some other tool, adding it to the
 
    ```diff
 	   <LinkCard
-	   	    href="https://github.com/ghost/starlight-plugin-example"
+	  href="https://github.com/ghost/starlight-plugin-example"
 		   title="starlight-plugin-example"
 		   description="Add blog to your documentation."
 	   />
-           <LinkCard
-		 href="https://github.com/ghost/starlight-plugin-last-example"
+       <LinkCard
+		   href="https://github.com/ghost/starlight-plugin-last-example"
 		   title="starlight-plugin-last-example"
 		   description="Add badge to your headings."
 	   />
