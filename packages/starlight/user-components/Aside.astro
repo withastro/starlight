@@ -25,11 +25,11 @@ if (!title) {
 }
 ---
 
-<div aria-label={title} class={`starlight-aside starlight-aside--${type}`} role="note">
+<aside aria-label={title} class={`starlight-aside starlight-aside--${type}`}>
 	<p class="starlight-aside__title" aria-hidden="true">
 		<Icon name={icons[type]} class="starlight-aside__icon" />{title}
 	</p>
 	<div class="starlight-aside__content">
 		<slot />
 	</div>
-</div>
+</aside>

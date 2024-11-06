@@ -105,12 +105,12 @@ function transformUnhandledDirective(
  * will produce this output
  *
  * ```astro
- * <div class="starlight-aside starlight-aside--tip" aria-label="Did you know?" role="note">
+ * <aside class="starlight-aside starlight-aside--tip" aria-label="Did you know?">
  *   <p class="starlight-aside__title" aria-hidden="true">Did you know?</p>
  *   <div class="starlight-aside__content">
  *     <p>Astro helps you build faster websites with “Islands Architecture”.</p>
  *   </div>
- * </div>
+ * </aside>
  * ```
  */
 function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
@@ -184,11 +184,10 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			}
 
 			const aside = h(
-				'div',
+				'aside',
 				{
 					'aria-label': title,
 					class: `starlight-aside starlight-aside--${variant}`,
-					role: 'note',
 				},
 				[
 					h('p', { class: 'starlight-aside__title', 'aria-hidden': 'true' }, [
