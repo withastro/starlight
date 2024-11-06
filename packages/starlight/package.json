@@ -175,7 +175,7 @@
     "astro": "^4.14.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^5.1.0",
+    "@astrojs/markdown-remark": "^5.3.0",
     "@playwright/test": "^1.45.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^18.16.19",
