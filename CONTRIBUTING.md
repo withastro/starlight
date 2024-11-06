@@ -380,11 +380,11 @@ If the content you want to share is a YouTube video, you should add a new entry 
        title: '🌟 SUB 1 MINUTE RUN',
        description: 'Watch Ben launch a new Starlight site in under a minute!',
      },
-   +  {
-   +    href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-   +    title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)k',
-   +    description: "The official video for “Never Gonna Give You Up” by Rick Astley.",
-   +  },
+   + {
+   +   href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+   +   title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)k',
+   +   description: "The official video for “Never Gonna Give You Up” by Rick Astley.",
+   + },
    ]}
    ```
 
