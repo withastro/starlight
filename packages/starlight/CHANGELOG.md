@@ -1,5 +1,35 @@
 # @astrojs/starlight
 
+## 0.28.6
+
+### Patch Changes
+
+- [#2565](https://github.com/withastro/starlight/pull/2565) [`236467b`](https://github.com/withastro/starlight/commit/236467bb745cea7a284ae3d398874d3edbcd846e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with custom UI strings defined in YAML files not being loaded in some contexts.
+
+## 0.28.5
+
+### Patch Changes
+
+- [#2546](https://github.com/withastro/starlight/pull/2546) [`bf42300`](https://github.com/withastro/starlight/commit/bf42300e76241a2df888dc458c59a7478a8b2d61) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where i18n content collection related errors, e.g. malformed JSON or YAML, would not be reported.
+
+- [#2548](https://github.com/withastro/starlight/pull/2548) [`07673c8`](https://github.com/withastro/starlight/commit/07673c80114021a269065e451e660337237f76e1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a URL localization edge case. In projects without a root locale configured, slugs without a locale prefix did not fall back to the default locale as expected.
+
+- [#2547](https://github.com/withastro/starlight/pull/2547) [`91e1dd7`](https://github.com/withastro/starlight/commit/91e1dd731a06657890a68b2d474199455df2756f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a Firefox Markdown content rendering issue for text sentences separated by a line break.
+
+- [#2524](https://github.com/withastro/starlight/pull/2524) [`1b46783`](https://github.com/withastro/starlight/commit/1b4678325fb10714fc3508bd87a7563b10a0f803) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Fixes a broken link to Astro’s Docs in an error message
+
+## 0.28.4
+
+### Patch Changes
+
+- [#2444](https://github.com/withastro/starlight/pull/2444) [`d585b3e`](https://github.com/withastro/starlight/commit/d585b3e0485dd55b2ffab985a6c06d267d22fe51) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI string translation issue for languages with a region subtag.
+
+- [#2518](https://github.com/withastro/starlight/pull/2518) [`0f69db8`](https://github.com/withastro/starlight/commit/0f69db8b806833a7160570a469ddcdc8c0dec5e0) Thanks [@morinokami](https://github.com/morinokami)! - Updates Japanese UI translations
+
+- [#2507](https://github.com/withastro/starlight/pull/2507) [`bd6ced5`](https://github.com/withastro/starlight/commit/bd6ced5bc46310b217c7bfe83a0f68ba4a03da45) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a table of contents highlighting issue after resizing the window.
+
+- [#2444](https://github.com/withastro/starlight/pull/2444) [`d585b3e`](https://github.com/withastro/starlight/commit/d585b3e0485dd55b2ffab985a6c06d267d22fe51) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Refactors various components to use the new built-in localization system to access translated UI strings.
+
 ## 0.28.3
 
 ### Patch Changes

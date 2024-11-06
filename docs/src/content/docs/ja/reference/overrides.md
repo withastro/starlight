@@ -49,6 +49,18 @@ Starlightは、以下のpropsをカスタムコンポーネントに渡します
 
 言語が配信されるベースパス。ルートロケールスラグの場合は`undefined`となります。
 
+#### `siteTitle`
+
+**Type:** `string`
+
+このページのロケールのサイトタイトル。
+
+#### `siteTitleHref`
+
+**Type:** `string`
+
+サイトタイトルの`href`属性の値。たとえば`/`など、ホームページへのリンクとなります。多言語サイトの場合、たとえば`/en/`や`/zh-cn/`など、現在のロケールが含まれます。
+
 #### `slug`
 
 **Type:** `string`
@@ -87,7 +99,7 @@ entry: {
 }
 ```
 
-このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/api-reference/#collection-entry-type)リファレンスを参照してください。
+このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/modules/astro-content/#collectionentry)リファレンスを参照してください。
 
 #### `sidebar`
 
@@ -130,12 +142,6 @@ entry: {
 **Type:** `URL | undefined`
 
 ページの編集設定が有効な場合、このページを編集可能なアドレスの`URL`オブジェクト。
-
-#### `labels`
-
-**Type:** `Record<string, string>`
-
-現在のページのローカライズされたUI文字列を含んだオブジェクト。利用可能なすべてのキーの一覧については、[「StarlightのUIを翻訳する」](/ja/guides/i18n/#starlightのuiを翻訳する)ガイドを参照してください。
 
 ---
 
@@ -203,7 +209,7 @@ entry: {
 
 **デフォルトコンポーネント:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
-すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
+すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle-1)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
 
 #### `SiteTitle`
 
@@ -304,6 +310,12 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 現在のページの`<h1>`要素を含むコンポーネント。
 
 デフォルトの実装と同様に、`<h1>`要素に`id="_top"`を設定する必要があります。
+
+#### `DraftContentNotice`
+
+**デフォルトコンポーネント:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+現在のページがドラフトとしてマークされている場合、開発中にユーザーに表示される通知。
 
 #### `FallbackContentNotice`
 

@@ -154,7 +154,7 @@ function linkFromInternalSidebarLinkItem(
 			throw new AstroError(
 				`The slug \`"${item.slug}"\` specified in the Starlight sidebar config does not exist.`,
 				'Update the Starlight config to reference a valid entry slug in the docs content collection.\n' +
-					'Learn more about Astro content collection slugs at https://docs.astro.build/en/reference/api-reference/#getentry'
+					'Learn more about Astro content collection slugs at https://docs.astro.build/en/reference/modules/astro-content/#getentry'
 			);
 		}
 	}

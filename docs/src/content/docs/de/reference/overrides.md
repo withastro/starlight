@@ -105,7 +105,7 @@ entry: {
 }
 ```
 
-Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/api-reference/#collection-eintragstyp) Referenz.
+Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/modules/astro-content/#collectionentry) Referenz.
 
 #### `sidebar`
 

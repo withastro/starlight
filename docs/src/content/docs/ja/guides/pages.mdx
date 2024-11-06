@@ -11,7 +11,7 @@ Starlightは、Markdownのフロントマターにより提供される柔軟な
 
 ### ファイルフォーマット
 
-Starlightは、設定なしでMarkdownとMDXによってコンテンツを作成できます。Markdocのサポートを追加するには、実験的な[AstroのMarkdocインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/markdoc/)をインストールします。
+Starlightは、設定なしでMarkdownとMDXによってコンテンツを作成できます。Markdocのサポートを追加するには、[Markdocガイド](/ja/guides/authoring-content/#markdoc)に従ってください。
 
 ### ページの追加
 
@@ -97,27 +97,28 @@ import CustomComponent from './CustomComponent.astro';
 - [`slug`](/ja/reference/frontmatter/#slug)プロパティはサポートされておらず、カスタムページのURLに基づいて自動的に設定されます。
 - [`editUrl`](/ja/reference/frontmatter/#editurl)オプションは、編集リンクを表示するためのURLが必要です。
 - [自動生成されるリンクグループ](/ja/reference/configuration/#sidebar)にページを表示する方法をカスタマイズするための[`sidebar`](/ja/reference/frontmatter/#sidebar)フロントマタープロパティは利用できません。`<StarlightPage />`コンポーネントを使用するページはコレクションの一部ではなく、自動生成されるサイドバーグループには追加できません。
+- [`draft`](/ja/reference/frontmatter/#draft)オプションは、ページがドラフトであることを[通知](/ja/reference/overrides/#draftcontentnotice)するだけで、自動的に本番ビルドから除外されるわけではありません。
 
 ##### `sidebar`
 
-**type:** `SidebarEntry[]`  
+**type:** [`SidebarItem[]`](/ja/reference/configuration/#sidebaritem)  
 **default:** [グローバルな`sidebar`設定値](/ja/reference/configuration/#sidebar)に基づき生成されるサイドバー
 
 ページにカスタムのサイトナビゲーションサイドバーを設定します。未設定の場合、ページはデフォルトのグローバルサイドバーを使用します。
 
-たとえば以下のページは、ホームページへのリンクと星座へのリンクグループによりデフォルトのサイドバーをオーバーライドします。サイドバーの現在のページは`isCurrent`プロパティを使用して設定され、またリンクアイテムにオプションの`badge`が追加されています。
+たとえば以下のページは、ホームページへのリンクとその他のカスタムページへのリンクグループにより、デフォルトのサイドバーをオーバーライドします。
 
 ```astro {3-13}
 <StarlightPage
 	frontmatter={{ title: 'オリオン座' }}
 	sidebar={[
-		{ label: 'ホーム', href: '/' },
+		{ label: 'ホーム', link: '/' },
 		{
 			label: '星座',
 			items: [
-				{ label: 'アンドロメダ座', href: '/andromeda/' },
-				{ label: 'オリオン座', href: '/orion/', isCurrent: true },
-				{ label: 'こぐま座', href: '/ursa-minor/', badge: 'スタブ' },
+				{ label: 'アンドロメダ座', link: '/andromeda/' },
+				{ label: 'オリオン座', link: '/orion/' },
+				{ label: 'こぐま座', link: '/ursa-minor/', badge: 'スタブ' },
 			],
 		},
 	]}
@@ -125,6 +126,8 @@ import CustomComponent from './CustomComponent.astro';
 	何らかのコンテンツ。
 </StarlightPage>
 ```
+
+サイドバーをカスタマイズするための利用可能なオプションについては、[「サイドバーのナビゲーション」](/ja/guides/sidebar/)ガイドを参照してください。
 
 ##### `hasSidebar`
 
