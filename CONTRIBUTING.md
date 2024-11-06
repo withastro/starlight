@@ -288,105 +288,45 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [vitest]: https://vitest.dev/
 [playwright]: https://playwright.dev/
 
-## Plugins and Integrations
+## Plugins, Integrations and Community Content
 
-It's great to see plugins and other integrations enhance or change features of Starlight.
-We have a collection of plugins and tools on our [plugins](https://starlight.astro.build/resources/plugins/) page.
-If you’ve built a Starlight plugin, theme or some other tool, adding it to the plugin page is just a pull request away!
+It's great to see new plugins, integrations, tools, themes or any other content you created being shared with the community on our pages ["Plugins and Integrations"](https://starlight.astro.build/resources/plugins/) and ["Community Content"](https://starlight.astro.build/resources/community-content/).
+If you’ve built a creation that's related to Starlight, adding it to one of these pages is just a pull request away!
 
 1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
-2. Add a new entry for your plugin or tool in the right section in `docs/src/content/docs/resources/plugins.mdx`.
+2. If you have developed any kind of software, add a new entry in `docs/src/content/docs/resources/plugins.mdx`. Articles, guides or video content are welcome in `docs/src/content/docs/resources/community-content.mdx`.
 
    - The new entry must be appended at the end of an existing list.
-   - The `href` attribute must be the URL of the GitHub repository containing the plugin. You can also use other git providers of course. If your code is private and you can't share a link to any repository, just link to your website.
-   - The `title` attribute must be the name of your site with no extra details.
-   - The `description` attribute must be a short and accurate description of what your plugin or tool does or what your theme offers.
+   - The structure of the list can be copied from existing items in this list. Generally speaking, there are two types of items, the `<LinkCard />` HTML element and a `json` object, examples represented below respectfully:
+     <br/>
 
-   ```diff
-     <LinkCard
-       href="https://github.com/ghost/starlight-plugin-example"
-       title="starlight-plugin-example"
-       description="Add blog to your documentation."
-     />
-     <LinkCard
-       href="https://github.com/ghost/starlight-plugin-last-example"
-       title="starlight-plugin-last-example"
-       description="Add badge to your headings."
-     />
-   + <LinkCard
-   +   href="https://github.com/ghost/starlight-plugin-new-example"
-   +   title="starlight-plugin-new-example"
-   +   description="Add astronaut image to bottom right corner."
-   + />
-   </CardGrid>
-   ```
+     ```diff
+       <LinkCard
+         href="https://github.com/ghost/starlight-plugin-example"
+         title="starlight-plugin-example"
+         description="Add blog to your documentation."
+       />
+     + <LinkCard
+     +   href="https://github.com/ghost/starlight-plugin-new-example"
+     +   title="starlight-plugin-new-example"
+     +   description="Add astronaut image to bottom right corner."
+     + />
+     </CardGrid>
+     ```
 
-3. Open a pull request on GitHub to add your changes.
-
-## Community Content
-
-We love when people create content around Starlight and share it on our [community content](https://starlight.astro.build/resources/community-content/)
-If you’ve published some content that's related to Starlight, adding it to the community content page is just a pull request away!
-
-1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
-2. Add a new entry for your content in the right section in `docs/src/content/docs/resources/community-content.mdx`.
-
-   - The new entry must be appended at the end of an existing list.
-   - The `href` attribute must be the URL to your content (post on X, some blog, ...). If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
-   - The `title` attribute must be the name of your site with no extra details.
-   - The `description` attribute must be a short and accurate description of what the content is about.
-
-   ```diff
-     <LinkCard
-       href="https://example.net"
-       title="Content Example"
-       description="Some example of the community content list."
-     />
-     <LinkCard
-       href="https://example.org"
-       title="Last Content Example"
-       description="Last example of the community content list."
-     />
-   + <LinkCard
-   +   href="https://example.com"
-   +   title="New Content Example"
-   +   description="New example of the community content list."
-   + />
-   </CardGrid>
-   ```
-
-3. Open a pull request on GitHub to add your changes.
-
-### Video Content
-
-If the content you want to share is a YouTube video, you should add a new entry to the [video content section](https://starlight.astro.build/resources/community-content/#video-content). These entries differ in their properties. Therefore, step 2 is a little bit different:
-
-1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
-2. Add a new entry for your content in the video section in `docs/src/content/docs/resources/community-content.mdx`.
-
-   - The new entry must be appended at the end of an existing list of the video content section.
-   - The `href` attribute must be the URL to your YouTube video. 
-   - The `title` attribute must be the YouTube title.
-   - The `description` attribute must be a short and accurate description of the video. If the YouTube description of your video is short, you can copy and paste it. 
-
-   ```diff
-     {
-       href: 'https://www.youtube.com/watch?v=5u0Ds7wzUeI',
-       title: 'Starlight by Astro',
-       description: 'Watch the official Starlight launch video',
-     },
-     {
-       href: 'https://www.youtube.com/shorts/zjOWezSzd18',
-       title: '🌟 SUB 1 MINUTE RUN',
-       description: 'Watch Ben launch a new Starlight site in under a minute!',
-     },
-   + {
-   +   href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-   +   title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)k',
-   +   description: "The official video for “Never Gonna Give You Up” by Rick Astley.",
-   + },
-   ]}
-   ```
+     ```diff
+       {
+         href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+         title: '🌟 SUB 1 MINUTE RUN',
+         description: 'Watch Ben launch a new Starlight site in under a minute!',
+       },
+     + {
+     +   href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+     +   title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)k',
+     +   description: "The official video for “Never Gonna Give You Up” by Rick Astley.",
+     + },
+     ]}
+     ```
 
 3. Open a pull request on GitHub to add your changes. Just please don't try to add “Never Gonna Give You Up” by Rick Astley to our videos like the example above ;)
 
