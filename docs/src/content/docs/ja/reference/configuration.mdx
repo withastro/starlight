@@ -24,9 +24,20 @@ export default defineConfig({
 
 ### `title`（必須）
 
-**type:** `string`
+**type:** `string | Record<string, string>`
 
 ウェブサイトのタイトルを設定します。メタデータとブラウザのタブのタイトルに使用されます。
+
+文字列を設定できますが、多言語サイトの場合は、異なるロケールごとの値をもつオブジェクトも使用できます。オブジェクト形式を使用する場合、キーはBCP-47タグ（`en`、`ar`、`zh-CN`など）である必要があります。
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -86,25 +97,33 @@ starlight({
 
 サイトのサイドバーのナビゲーション項目を設定します。
 
-サイドバーはリンクとリンクのグループの配列です。各項目は、`label`と以下のプロパティのいずれかが必要です。
+サイドバーはリンクとリンクのグループの配列です。`slug`を使用する場合を除き、各項目は`label`と以下のプロパティのいずれかが必要です。
 
 - `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。
+
+- `slug` — たとえば`'guides/getting-started'`など、内部ページへの参照。
 
 - `items` — サイドバーの複数のリンクとサブグループを含む配列。
 
 - `autogenerate` — リンクのグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。
+
+内部リンクは、`slug`プロパティをもつオブジェクトの代わりに文字列として指定することもできます。
 
 ```js
 starlight({
 	sidebar: [
 		// 「ホーム」というラベルのついた単一のリンク。
 		{ label: 'ホーム', link: '/' },
-		// 2つのリンクを含む、「ここから始める」というラベルのついたグループ。
+		// 4つのリンクを含む、「ここから始める」というラベルのついたグループ。
 		{
 			label: 'ここから始める',
 			items: [
-				{ label: 'はじめに', link: '/intro' },
-				{ label: '次のステップ', link: '/next-steps' },
+				// 内部リンクに`slug`を使用する。
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// 内部リンクのための省略形を使用する。
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// referenceディレクトリのすべてのページにリンクするグループ。
@@ -126,16 +145,13 @@ starlight({
 
 自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // 折りたたまれたリンクのグループ。
   {
     label: '折りたたまれたリンク',
     collapsed: true,
-    items: [
-      { label: 'はじめに', link: '/intro' },
-      { label: '次のステップ', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // 自動生成される折りたたまれたサブグループを含む展開されたグループ。
   {
@@ -177,20 +193,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// リンク
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// 内部リンク
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// リンクのグループ
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// 自動生成されたリンクのグループ
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 );
 ```
 
@@ -199,7 +232,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -409,6 +443,17 @@ Starlightのデフォルトのサイト検索プロバイダである[Pagefind](
 
 `false`に設定すると、Pagefindによるサイトのインデックス作成はおこなわれません。また、デフォルトの検索UIを使用している場合は、これも非表示になります。
 
+[`prerender`](#prerender)オプションが`false`に設定されている場合、Pagefindを有効にすることはできません。
+
+### `prerender`
+
+**type:** `boolean`  
+**default:** `true`
+
+Starlightページが静的HTMLに事前レンダリングされるか、[SSRアダプター](https://docs.astro.build/ja/guides/server-side-rendering/)によってオンデマンドでレンダリングされるかを設定します。
+
+Starlightページはデフォルトで事前レンダリングされます。SSRアダプターを使用してStarlightページをオンデマンドでレンダリングしたい場合は、`prerender: false`に設定します。
+
 ### `head`
 
 **type:** [`HeadConfig[]`](#headconfig)
@@ -540,3 +585,13 @@ starlight({
 ```
 
 独自のプラグインを作成する方法の詳細については、[プラグインリファレンス](/ja/reference/plugins/)を参照してください。
+
+### `credits`
+
+「Starlightで作成」リンクをサイトのフッターに表示します。
+
+```js
+starlight({
+	credits: true,
+});
+```

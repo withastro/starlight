@@ -23,7 +23,7 @@ describe('useTranslations()', () => {
 	});
 
 	test('uses built-in translations for regional variants', () => {
-		const t = useTranslations('pt-br');
+		const t = useTranslations('pt-BR');
 		expect(t('page.nextLink')).toBe(translations.pt?.['page.nextLink']);
 		expect(t('page.nextLink')).not.toBe(translations.en?.['page.nextLink']);
 	});
