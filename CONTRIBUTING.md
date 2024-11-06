@@ -298,7 +298,7 @@ If you’ve built a Starlight plugin, theme or some other tool, adding it to the
 2. Add a new entry for your plugin or tool in the right section in `docs/src/content/docs/resources/plugins.mdx`.
 
    - The new entry must be appended at the end of an existing list.
-   - The `href` attribute must be the URL of your Starlight site. If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
+   - The `href` attribute must be the URL of the GitHub repository containing the plugin. You can also use other git providers of course. If your code is private and you can't share a link to any repository, just link to your website.
    - The `title` attribute must be the name of your site with no extra details.
    - The `description` attribute must be a short and accurate description of what your plugin or tool does or what your theme offers.
 
