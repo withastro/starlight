@@ -288,6 +288,40 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [vitest]: https://vitest.dev/
 [playwright]: https://playwright.dev/
 
+## Plugins and Integrations
+
+It's great to see plugins and other integrations enhance or change features of Starlight.
+If you’ve built a Starlight plugin, theme or some other tool, adding it to the plugin page is just a pull request away!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. Add a new entry for your plugin or tool in the right section in `docs/src/content/docs/resources/plugins.mdx`.
+
+   - The new entry must be appended at the end of an existing list.
+   - The `href` attribute must be the URL of your Starlight site. If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
+   - The `title` attribute must be the name of your site with no extra details.
+   - The `description` attribute must be a short and accurate description of what your plugin or tool does or what your theme offers.
+
+   ```diff
+	   <LinkCard
+	   	 href="https://github.com/ghost/starlight-plugin-example"
+		   title="starlight-plugin-example"
+		   description="Add blog to your documentation."
+	   />
+     <LinkCard
+		   href="https://github.com/ghost/starlight-plugin-last-example"
+		   title="starlight-plugin-last-example"
+		   description="Add badge to your headings."
+	   />
+	   <LinkCard
+		   href="https://github.com/ghost/starlight-plugin-new-example"
+		   title="starlight-plugin-new-example"
+		   description="Add astronaut image to bottom right corner."
+	   />
+   </CardGrid>
+   ```
+
+4. Open a pull request on GitHub to add your changes.
+
 ## Showcase
 
 We love to see websites built with Starlight and share them with the community on our [showcase](https://starlight.astro.build/resources/showcase/) page.
