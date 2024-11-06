@@ -110,7 +110,7 @@ importers:
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
         specifier: ^5.1.0
-        version: 5.1.2(astro@4.16.10)(tailwindcss@3.4.4)
+        version: 5.1.2(astro@4.16.10)(tailwindcss@3.4.14)
       astro:
         specifier: ^4.16.10
         version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
@@ -119,7 +119,7 @@ importers:
         version: 0.32.6
       tailwindcss:
         specifier: ^3.4.4
-        version: 3.4.4
+        version: 3.4.14
 
   packages/docsearch:
     dependencies:
@@ -301,11 +301,11 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(vitest@1.6.0)
       postcss:
-        specifier: ^8.4.38
+        specifier: ^8.4.47
         version: 8.4.47
       tailwindcss:
-        specifier: ^3.3.3
-        version: 3.4.4
+        specifier: ^3.4.14
+        version: 3.4.14
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@18.16.19)
@@ -624,7 +624,7 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /@astrojs/tailwind@5.1.2(astro@4.16.10)(tailwindcss@3.4.4):
+  /@astrojs/tailwind@5.1.2(astro@4.16.10)(tailwindcss@3.4.14):
     resolution: {integrity: sha512-IvOF0W/dtHElcXvhrPR35nHmhyV3cfz1EzPitMGtU7sYy9Hci3BNK1To6FWmVuuNKPxza1IgCGetSynJZL7fOg==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0 || ^5.0.0-beta.0
@@ -634,7 +634,7 @@ packages:
       autoprefixer: 10.4.20(postcss@8.4.47)
       postcss: 8.4.47
       postcss-load-config: 4.0.2(postcss@8.4.47)
-      tailwindcss: 3.4.4
+      tailwindcss: 3.4.14
     transitivePeerDependencies:
       - ts-node
     dev: false
@@ -6354,8 +6354,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /tailwindcss@3.4.4:
-    resolution: {integrity: sha512-ZoyXOdJjISB7/BcLTR6SEsLgKtDStYyYZVLsUtWChO4Ps20CBad7lfJKVDiejocV4ME1hLmyY0WJE3hSDcmQ2A==}
+  /tailwindcss@3.4.14:
+    resolution: {integrity: sha512-IcSvOcTRcUtQQ7ILQL5quRDg7Xs93PdJEk1ZLbhhvJc7uj/OAhYOnruEiwnGgBvUtaUAJ8/mhSw1o8L2jCiENA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
