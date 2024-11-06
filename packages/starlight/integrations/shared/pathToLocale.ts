@@ -1,14 +1,6 @@
 import type { AstroConfig } from 'astro';
 import type { StarlightConfig } from '../../types';
-
-export function slugToLocale(
-	slug: string | undefined,
-	localesConfig: StarlightConfig['locales']
-): string | undefined {
-	const locales = Object.keys(localesConfig || {});
-	const baseSegment = slug?.split('/')[0];
-	return baseSegment && locales.includes(baseSegment) ? baseSegment : undefined;
-}
+import { slugToLocale } from './slugToLocale';
 
 /** Get current locale from the full file path. */
 export function pathToLocale(
@@ -17,7 +9,7 @@ export function pathToLocale(
 		starlightConfig,
 		astroConfig,
 	}: {
-		starlightConfig: { locales: StarlightConfig['locales'] };
+		starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 		astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
 	}
 ): string | undefined {
@@ -31,5 +23,5 @@ export function pathToLocale(
 	// Strip docs path leaving only content collection file ID.
 	// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
 	const slug = path?.replace(docsDir.pathname, '');
-	return slugToLocale(slug, starlightConfig.locales);
+	return slugToLocale(slug, starlightConfig);
 }

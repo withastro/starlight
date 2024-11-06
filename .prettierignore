@@ -17,3 +17,6 @@ pnpm-lock.yaml
 
 # https://github.com/withastro/prettier-plugin-astro/issues/337
 packages/starlight/user-components/Tabs.astro
+
+# Malformed YAML file used for testing
+packages/starlight/__tests__/i18n/malformed-yaml-src/content/i18n/*.yml

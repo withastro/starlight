@@ -73,7 +73,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.28.4
+        specifier: ^0.28.6
         version: link:../../packages/starlight
       astro:
         specifier: ^4.15.3
@@ -88,7 +88,7 @@ importers:
         specifier: ^0.11.4
         version: 0.11.4(astro@4.15.3)
       '@astrojs/starlight':
-        specifier: ^0.28.4
+        specifier: ^0.28.6
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
         specifier: ^0.1.0
@@ -103,7 +103,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.28.4
+        specifier: ^0.28.6
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
@@ -197,6 +197,9 @@ importers:
       i18next:
         specifier: ^23.11.5
         version: 23.11.5
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       mdast-util-directive:
         specifier: ^3.0.0
         version: 3.0.0
@@ -234,6 +237,9 @@ importers:
       '@playwright/test':
         specifier: ^1.45.0
         version: 1.45.0
+      '@types/js-yaml':
+        specifier: ^4.0.9
+        version: 4.0.9
       '@types/node':
         specifier: ^18.16.19
         version: 18.16.19
@@ -2033,6 +2039,10 @@ packages:
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
     dependencies:
       '@types/unist': 3.0.0
+
+  /@types/js-yaml@4.0.9:
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
+    dev: true
 
   /@types/linkify-it@5.0.0:
     resolution: {integrity: sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==}

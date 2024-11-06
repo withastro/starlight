@@ -104,6 +104,8 @@ export default defineConfig({
 });
 ```
 
+Astroドキュメントで[`robots.txt`にサイトマップへのリンクを追加する方法](https://docs.astro.build/ja/guides/integrations-guide/sitemap/#sitemap-link-in-robotstxt)について確認してください。
+
 ## ページレイアウト
 
 Starlightのページはデフォルトで、グローバルなナビゲーションサイドバーと、現在のページの見出しを表示する目次を配置したレイアウトを使用します。
@@ -125,7 +127,7 @@ Starlightは、目当ての見出しに読者が簡単にジャンプできる�
 
 デフォルトでは、目次には`<h2>`と`<h3>`の見出しが含まれます。目次に含める見出しレベルをサイト全体で変更するには、[グローバルな`tableOfContents`](/ja/reference/configuration/#tableofcontents)の`minHeadingLevel`と`maxHeadingLevel`オプションを使用します。個々のページでこれらのデフォルト値を上書きするには、対応する[フロントマターの`tableOfContents`](/ja/reference/frontmatter/#tableofcontents)プロパティを追加します。
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="フロントマター">
 
 ```md {4-6}
@@ -159,7 +161,7 @@ defineConfig({
 
 `tableOfContents`オプションを`false`に設定することで、目次を完全に無効にできます。
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="フロントマター">
 
 ```md {4}
@@ -367,7 +369,7 @@ Starlightサイトにカスタムフォントを追加する必要がある場�
 
 2.  使いたいフォントのパッケージをインストールします。Fontsourceのフォントページで「Install」をクリックすると、パッケージ名が表示されます。
 
-         <Tabs>
+         <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
