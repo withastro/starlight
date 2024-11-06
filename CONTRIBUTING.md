@@ -291,6 +291,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 ## Plugins and Integrations
 
 It's great to see plugins and other integrations enhance or change features of Starlight.
+We have a collection of plugins and tools on our [plugins](https://starlight.astro.build/resources/plugins/) page.
 If you’ve built a Starlight plugin, theme or some other tool, adding it to the plugin page is just a pull request away!
 
 1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
@@ -320,7 +321,41 @@ If you’ve built a Starlight plugin, theme or some other tool, adding it to the
    </CardGrid>
    ```
 
-4. Open a pull request on GitHub to add your changes.
+3. Open a pull request on GitHub to add your changes.
+
+## Starlight-related content
+
+We love when people create content around Starlight and share it on our [community content](https://starlight.astro.build/resources/community-content/)
+If you’ve published some content that's related to Statlight, adding it to the community content page is just a pull request away!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. Add a new entry for your content in the right section in `docs/src/content/docs/resources/community-content.mdx`.
+
+   - The new entry must be appended at the end of an existing list.
+   - The `href` attribute must be the URL to your content (post on X, some blog, ...). If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
+   - The `title` attribute must be the name of your site with no extra details.
+   - The `description` attribute must be a short and accurate description of what the content is about.
+
+   ```diff
+     <LinkCard
+       href="https://example.net"
+       title="Content Example"
+       description="Some example of the community content list."
+     />
+     <LinkCard
+       href="https://example.org"
+       title="Last Content Example"
+       description="Last example of the community content list."
+     />
+   + <LinkCard
+   +   href="https://example.com"
+   +   title="New Content Example"
+   +   description="New example of the community content list."
+   + />
+   </CardGrid>
+   ```
+
+3. Open a pull request on GitHub to add your changes.
 
 ## Showcase
 
