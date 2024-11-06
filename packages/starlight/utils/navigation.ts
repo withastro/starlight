@@ -148,9 +148,7 @@ function linkFromInternalSidebarLinkItem(
 		if (hasExternalSlashes) {
 			throw new AstroError(
 				`The slug \`"${item.slug}"\` specified in the Starlight sidebar config must not start or end with a slash.`,
-				`Please try updating \`"${
-					item.slug
-				}"\` to \`"${stripLeadingAndTrailingSlashes(item.slug)}"\`.`
+				`Please try updating \`"${item.slug}"\` to \`"${stripLeadingAndTrailingSlashes(item.slug)}"\`.`
 			);
 		} else {
 			throw new AstroError(
