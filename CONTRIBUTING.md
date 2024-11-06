@@ -302,21 +302,21 @@ If you’ve built a Starlight plugin, theme or some other tool, adding it to the
    - The `description` attribute must be a short and accurate description of what your plugin or tool does or what your theme offers.
 
    ```diff
-	   <LinkCard
-	          href="https://github.com/ghost/starlight-plugin-example"
-		   title="starlight-plugin-example"
-		   description="Add blog to your documentation."
-	   />
-       <LinkCard
-		   href="https://github.com/ghost/starlight-plugin-last-example"
-		   title="starlight-plugin-last-example"
-		   description="Add badge to your headings."
-	   />
-   +   <LinkCard
-   +   	   href="https://github.com/ghost/starlight-plugin-new-example"
-   +    	   title="starlight-plugin-new-example"
-   +    	   description="Add astronaut image to bottom right corner."
-   +   />
+     <LinkCard
+       href="https://github.com/ghost/starlight-plugin-example"
+       title="starlight-plugin-example"
+       description="Add blog to your documentation."
+     />
+     <LinkCard
+       href="https://github.com/ghost/starlight-plugin-last-example"
+       title="starlight-plugin-last-example"
+       description="Add badge to your headings."
+     />
+   + <LinkCard
+   +   href="https://github.com/ghost/starlight-plugin-new-example"
+   +   title="starlight-plugin-new-example"
+   +   description="Add astronaut image to bottom right corner."
+   + />
    </CardGrid>
    ```
 
