@@ -179,7 +179,12 @@ export default defineConfig({
 					autogenerate: { directory: 'resources' },
 				},
 			],
-			expressiveCode: { shiki: { langs: [markdocGrammar] } },
+			expressiveCode: {
+				shiki: {
+					// TODO: Remove `any` once Expressive Code supports grammars with comments.
+					langs: [/** @type {any} */ (markdocGrammar)],
+				},
+			},
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({
