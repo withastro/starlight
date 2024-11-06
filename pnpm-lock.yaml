@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@astrojs/check':
         specifier: ^0.7.0
-        version: 0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.4.5)
+        version: 0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.6.3)
       '@changesets/changelog-github':
         specifier: ^0.5.0
         version: 0.5.0
@@ -22,7 +22,7 @@ importers:
         version: 11.1.4(size-limit@11.1.4)
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
@@ -33,8 +33,8 @@ importers:
         specifier: ^11.1.4
         version: 11.1.4
       typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
+        specifier: ^5.6.3
+        version: 5.6.3
 
   docs:
     dependencies:
@@ -52,7 +52,7 @@ importers:
         version: 2.1.1
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       culori:
         specifier: ^4.0.1
         version: 4.0.1
@@ -77,7 +77,7 @@ importers:
         version: link:../../packages/starlight
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -95,7 +95,7 @@ importers:
         version: link:../../packages/markdoc
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -113,7 +113,7 @@ importers:
         version: 5.1.2(astro@4.16.10)(tailwindcss@3.4.4)
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -248,7 +248,7 @@ importers:
         version: 1.6.0(vitest@1.6.0)
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       linkedom:
         specifier: ^0.18.4
         version: 0.18.4
@@ -263,7 +263,7 @@ importers:
         version: link:../../..
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
@@ -272,7 +272,7 @@ importers:
         version: link:../../..
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/git:
     dependencies:
@@ -281,7 +281,7 @@ importers:
         version: link:../../..
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
@@ -293,7 +293,7 @@ importers:
         version: link:../../..
       astro:
         specifier: ^4.16.10
-        version: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+        version: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/tailwind:
     devDependencies:
@@ -468,21 +468,21 @@ packages:
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
     dependencies:
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       lite-youtube-embed: 0.3.3
     dev: false
 
-  /@astrojs/check@0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.4.5):
+  /@astrojs/check@0.7.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.6.3):
     resolution: {integrity: sha512-UTqwOeKNu9IYZmJXEeWnQuTdSd/pX58Hl4TUARsMlT97SVDL//kLBE4T/ctxRz6J573N87oE5ddtW/uOOnQTug==}
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
-      '@astrojs/language-server': 2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.4.5)
+      '@astrojs/language-server': 2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.6.3)
       chokidar: 3.6.0
       fast-glob: 3.3.2
       kleur: 4.1.5
-      typescript: 5.4.5
+      typescript: 5.6.3
       yargs: 17.7.2
     transitivePeerDependencies:
       - prettier
@@ -499,7 +499,7 @@ packages:
   /@astrojs/internal-helpers@0.4.1:
     resolution: {integrity: sha512-bMf9jFihO8YP940uD70SI/RDzIhUHJAolWVcO1v5PUivxGKvfLZTLTVVxEYzGYyPsA3ivdLNqMnL5VgmQySa+g==}
 
-  /@astrojs/language-server@2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.4.5):
+  /@astrojs/language-server@2.10.0(prettier-plugin-astro@0.14.0)(prettier@3.3.2)(typescript@5.6.3):
     resolution: {integrity: sha512-crHXpqYfA5qWioiuZnZFpTsNItgBlF1f0S9MzDYS7/pfCALkHNJ7K3w9U/j0uMKymsT4hC7BfMaX0DYlfdSzHg==}
     hasBin: true
     peerDependencies:
@@ -513,7 +513,7 @@ packages:
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@jridgewell/sourcemap-codec': 1.5.0
-      '@volar/kit': 2.2.5(typescript@5.4.5)
+      '@volar/kit': 2.2.5(typescript@5.6.3)
       '@volar/language-core': 2.2.5
       '@volar/language-server': 2.2.5
       '@volar/language-service': 2.2.5
@@ -543,7 +543,7 @@ packages:
       '@astrojs/markdown-remark': 5.3.0
       '@astrojs/prism': 3.1.0
       '@markdoc/markdoc': 0.4.0
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       esbuild: 0.21.5
       github-slugger: 2.0.0
       gray-matter: 4.0.3
@@ -586,7 +586,7 @@ packages:
       '@astrojs/markdown-remark': 5.3.0
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       gray-matter: 4.0.3
@@ -607,7 +607,7 @@ packages:
     peerDependencies:
       astro: ^4.2.0
     dependencies:
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       send: 0.18.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -634,7 +634,7 @@ packages:
       astro: ^3.0.0 || ^4.0.0 || ^5.0.0-beta.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       autoprefixer: 10.4.20(postcss@8.4.47)
       postcss: 8.4.47
       postcss-load-config: 4.0.2(postcss@8.4.47)
@@ -2158,7 +2158,7 @@ packages:
       pretty-format: 29.7.0
     dev: true
 
-  /@volar/kit@2.2.5(typescript@5.4.5):
+  /@volar/kit@2.2.5(typescript@5.6.3):
     resolution: {integrity: sha512-Bmn0UCaT43xUGGRwcmFG9lKhiCCLjRT4ScSLLPn5C9ltUcSGnIFFDlbZZa1PreHYHq25/4zkXt9Ap32klAh17w==}
     peerDependencies:
       typescript: '*'
@@ -2166,7 +2166,7 @@ packages:
       '@volar/language-service': 2.2.5
       '@volar/typescript': 2.2.5
       typesafe-path: 0.2.2
-      typescript: 5.4.5
+      typescript: 5.6.3
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
     dev: true
@@ -2412,11 +2412,11 @@ packages:
     peerDependencies:
       astro: ^4.0.0-beta || ^3.3.0
     dependencies:
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       rehype-expressive-code: 0.35.6
     dev: false
 
-  /astro@4.16.10(@types/node@18.16.19)(typescript@5.4.5):
+  /astro@4.16.10(@types/node@18.16.19)(typescript@5.6.3):
     resolution: {integrity: sha512-a+nB4bZE50NXHLzVXUHtx/lYct2Aa8kbqZnWNrWqkU97RuhBuWJ5H5/LQbKRnBWGvqChKfJBiMWJe53TY9ieYQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
@@ -2472,7 +2472,7 @@ packages:
       semver: 7.6.3
       shiki: 1.22.2
       tinyexec: 0.3.1
-      tsconfck: 3.1.4(typescript@5.4.5)
+      tsconfck: 3.1.4(typescript@5.6.3)
       unist-util-visit: 5.0.0
       vfile: 6.0.3
       vite: 5.4.10(@types/node@18.16.19)
@@ -2482,7 +2482,7 @@ packages:
       yargs-parser: 21.1.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.5(zod@3.23.8)
-      zod-to-ts: 1.2.0(typescript@5.4.5)(zod@3.23.8)
+      zod-to-ts: 1.2.0(typescript@5.6.3)(zod@3.23.8)
     optionalDependencies:
       sharp: 0.33.3
     transitivePeerDependencies:
@@ -6868,7 +6868,7 @@ packages:
     dependencies:
       '@astrojs/starlight': link:packages/starlight
       '@types/picomatch': 2.3.3
-      astro: 4.16.10(@types/node@18.16.19)(typescript@5.4.5)
+      astro: 4.16.10(@types/node@18.16.19)(typescript@5.6.3)
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.1
       hast-util-has-property: 3.0.0
@@ -7239,7 +7239,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /tsconfck@3.1.4(typescript@5.4.5):
+  /tsconfck@3.1.4(typescript@5.6.3):
     resolution: {integrity: sha512-kdqWFGVJqe+KGYvlSO9NIaWn9jT1Ny4oKVzAJsKii5eoE9snzTJzL4+MMVOMn+fikWGFmKEylcXL710V/kIPJQ==}
     engines: {node: ^18 || >=20}
     hasBin: true
@@ -7249,7 +7249,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      typescript: 5.4.5
+      typescript: 5.6.3
 
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
@@ -7327,8 +7327,8 @@ packages:
       semver: 7.6.3
     dev: true
 
-  /typescript@5.4.5:
-    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+  /typescript@5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -7991,13 +7991,13 @@ packages:
     dependencies:
       zod: 3.23.8
 
-  /zod-to-ts@1.2.0(typescript@5.4.5)(zod@3.23.8):
+  /zod-to-ts@1.2.0(typescript@5.6.3)(zod@3.23.8):
     resolution: {integrity: sha512-x30XE43V+InwGpvTySRNz9kB7qFU8DlyEy7BsSTCHPH1R0QasMmHWZDCzYm6bVXtj/9NNJAZF3jW8rzFvH5OFA==}
     peerDependencies:
       typescript: ^4.9.4 || ^5.0.2
       zod: ^3
     dependencies:
-      typescript: 5.4.5
+      typescript: 5.6.3
       zod: 3.23.8
 
   /zod@3.23.8:
