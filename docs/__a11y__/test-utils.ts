@@ -17,6 +17,8 @@ const config: Config = {
 			values: ['wcag2a', 'wcag21a', 'wcag2aa', 'wcag21aa', 'wcag22aa', 'best-practice'],
 		},
 	},
+	// A list of violation to ignore.
+	ignore: [{ id: 'landmark-unique', nodeMatcher: landmarkUniqueNodeMatcher }],
 	sitemap: {
 		url: 'http://localhost:4321/sitemap-index.xml',
 		exclude: {
@@ -82,7 +84,8 @@ class DocsSite {
 		await this.page.goto(url);
 		await injectAxe(this.page);
 		await this.page.waitForLoadState('networkidle');
-		return getViolations(this.page, undefined, config.axe);
+		const violations = await getViolations(this.page, undefined, config.axe);
+		return this.#filterViolations(violations);
 	}
 
 	async reportPageViolations(violations: Awaited<ReturnType<typeof this.testPage>>) {
@@ -96,10 +99,45 @@ class DocsSite {
 			console.log(`> Found no violations on ${url}`);
 		}
 	}
+
+	#filterViolations(violations: Awaited<ReturnType<typeof getViolations>>) {
+		return violations.filter((violation) => {
+			return !config.ignore.some((ignore) => {
+				if (typeof ignore === 'string') return violation.id === ignore;
+				if (violation.id !== ignore.id) return false;
+				if (!ignore.nodeMatcher) return true;
+				return !violation.nodes.some(ignore.nodeMatcher);
+			});
+		});
+	}
+}
+
+function landmarkUniqueNodeMatcher(node: ViolationNode) {
+	/**
+	 * Ignore the `landmark-unique` violation only if the node HTML is an aside.
+	 *
+	 * The best action to fix this violation would be to remove the landmark altogether as it's not
+	 * necessary in this case and switch to the `note` role. Although, this is not possible at the
+	 * moment due to an issue with NVDA not announcing it and also skipping the associated label for
+	 * a role not supported.
+	 *
+	 * @see https://github.com/nvaccess/nvda/issues/10439
+	 * @see https://github.com/withastro/starlight/pull/2503
+	 */
+	return !/^<aside[^>]* class="starlight-aside[^>]*>$/.test(node.html);
 }
 
 interface Config {
 	axe: Parameters<typeof getViolations>[2];
+	ignore: Array<
+		| string
+		| {
+				id: string;
+				// A function called for each node to evaluate if it should be ignored or not.
+				// Return `true` if the node should be considered for the violation, `false` otherwise.
+				nodeMatcher?: (node: ViolationNode) => boolean;
+		  }
+	>;
 	sitemap: {
 		url: string;
 		exclude: {
@@ -112,3 +150,6 @@ interface Config {
 		};
 	};
 }
+
+type Violations = Awaited<ReturnType<typeof getViolations>>;
+type ViolationNode = Violations[number]['nodes'][number];
