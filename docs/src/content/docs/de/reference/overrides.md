@@ -1,8 +1,10 @@
 ---
-title: Komponenten-Ersetzung Referenz
-description: Ein Überblick über die Komponenten und Komponentenprops, die von Starlight Ersetzungen unterstützt werden.
+title: Ersetzung von Komponenten Referenz
+description: Ein Überblick über die Komponenten und Komponenteneigenschaften, die von Starlight Ersetzungen unterstützt werden.
 tableOfContents:
   maxHeadingLevel: 4
+sidebar:
+  label: Ersetzung von Komponenten
 ---
 
 Du kannst Starlight's eingebaute Komponenten überschreiben, indem du Pfade zu Ersatzkomponenten in Starlight's [`components`](/de/reference/configuration/#components)-Konfigurationsoption angibst.
@@ -18,59 +20,73 @@ Um deine eigenen Komponenten zu schreiben, importiere den `Props`-Typ von Starli
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
-const { hatSeitennavigation } = Astro.props;
+const { hasSidebar } = Astro.props;
 //      ^ Typ: boolean
 ---
 ```
 
 So erhaltest du die Autovervollständigung und Angabe des Datentyps beim Zugriff auf `Astro.props`.
 
-### Props
+### Eigenschaften
 
 Starlight wird die folgenden Props an deine eigenen Komponenten übergeben.
 
 #### `dir`
 
-**Type:** `'ltr' | 'rtl'`
+**Typ:** `'ltr' | 'rtl'`
 
 Schreibrichtung der Seite.
 
 #### `lang`
 
-**Type:** `string`
+**Typ:** `string`
 
 BCP-47-Sprachkennzeichen für das Gebietsschema dieser Seite, z.B. `de`, `zh-CN` oder `pt-BR`.
 
 #### `locale`
 
-**Type:** `string | undefined`
+**Typ:** `string | undefined`
 
 Der Basispfad, unter dem eine Sprache angeboten wird. `undefined` für Root-Locale-Slugs.
 
+#### `siteTitle`
+
+**Typ:** `string`
+
+Der Seitentitel für das Gebietsschema dieser Seite.
+
+#### `siteTitleHref`
+
+**Typ:** `string`
+
+Der Wert für das Attribut `href` des Seitentitels, der auf die Homepage zurückverweist, z. B. `/`.
+Bei mehrsprachigen Websites wird hier das aktuelle Gebietsschema angegeben, z. B. `/en/` oder `/zh-cn/`.
+
 #### `slug`
 
-**Type:** `string`
+**Typ:** `string`
 
 Der aus dem Dateinamen des Inhalts generierte Slug für diese Seite.
 
 #### `id`
 
-**Type:** `string`
+**Typ:** `string`
 
 Die eindeutige ID für diese Seite auf der Grundlage des Dateinamens des Inhalts.
 
 #### `isFallback`
 
-**Type:** `true | undefined`
+**Typ:** `true | undefined`
 
 `true`, wenn diese Seite in der aktuellen Sprache unübersetzt ist und Fallback-Inhalte aus dem Standardgebietsschema verwendet.
 Wird nur in mehrsprachigen Sites verwendet.
 
 #### `entryMeta`
 
-**Type:** `{ dir: 'ltr' | 'rtl'; lang: string }`
+**Typ:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
 Gebietsschema-Metadaten für den Seiteninhalt. Du kannst von den Werten der Top-Level-Locale unterscheiden, wenn eine Seite Fallback-Inhalte verwendet.
 
@@ -89,48 +105,48 @@ entry: {
 }
 ```
 
-Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/api-reference/#collection-eintragstyp) Referenz.
+Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](https://docs.astro.build/de/reference/modules/astro-content/#collectionentry) Referenz.
 
 #### `sidebar`
 
-**Type:** `SidebarEntry[]`
+**Typ:** `SidebarEntry[]`
 
 Seitennavigationseinträge für diese Seite.
 
 #### `hasSidebar`
 
-**Type:** `boolean`
+**Typ:** `boolean`
 
 Ob die Seitenleiste auf dieser Seite angezeigt werden soll oder nicht.
 
 #### `pagination`
 
-**Type:** `{ prev?: Link; next?: Link }`
+**Typ:** `{ prev?: Link; next?: Link }`
 
 Links zur vorherigen und nächsten Seite in der Seitenleiste, falls aktiviert.
 
 #### `toc`
 
-**Type:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+**Typ:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
 
 Inhaltsverzeichnis für diese Seite, falls aktiviert.
 
 #### `headings`
 
-**Type:** `{ depth: number; slug: string; text: string }[]`
+**Typ:** `{ depth: number; slug: string; text: string }[]`
 
 Array aller Markdown-Überschriften, die aus der aktuellen Seite extrahiert wurden.
 Verwende stattdessen [`toc`](#toc), wenn du einen Inhaltsverzeichnis-Komponenten erstellen willst, welches die Konfigurationsoptionen von Starlight berücksichtigt.
 
 #### `lastUpdated`
 
-**Type:** `Date | undefined`
+**Typ:** `Date | undefined`
 
 JavaScript `Date` Objekt, welches angibt, wann diese Seite zuletzt aktualisiert wurde, falls aktiviert.
 
 #### `editUrl`
 
-**Type:** `URL | undefined`
+**Typ:** `URL | undefined`
 
 `URL`-Objekt für die Adresse, unter der diese Seite bearbeitet werden kann, falls aktiviert.
 
@@ -211,7 +227,7 @@ Diese Komponenten stellen die obere Navigationsleiste von Starlight dar.
 **Standardkomponente:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Dies ist eine Kopfzielen-Komponente, welche oben auf jeder Seite angezeigt wird.
-Die Standardimplementierung zeigt [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), und [`<LanguageSelect />`](#languageselect).
+Die Standardimplementierung zeigt [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), und [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
@@ -226,6 +242,10 @@ Die Standardimplementierung enthält die Logik für die Darstellung von Logos, d
 
 Diese Komponente wird verwendet, um Starlight's Suchoberfläche darzustellen.
 Die Standardimplementierung enthält die Schaltfläche in der Kopfzeile und den Code für die Anzeige eines Suchmodals, wenn darauf geklickt wird, und das Laden von [Pagefinds UI](https://pagefind.app/).
+
+Wenn [`pagefind`](/de/reference/configuration/#pagefind) deaktiviert ist, wird die Standard-Suchkomponente nicht angezeigt.
+Wenn du jedoch `Search` überschreibst, wird deine benutzerdefinierte Komponente immer angezeigt, auch wenn die Konfigurationsoption `pagefind` auf `false` gesetzt ist.
+So kannst du eine Benutzeroberfläche für alternative Suchanbieter hinzufügen, wenn du Pagefind deaktivierst.
 
 #### `SocialIcons`
 
@@ -270,7 +290,7 @@ Die Standardimplementierung rendert [`<ThemeSelect />`](#themeselect) und [`<Lan
 
 ---
 
-### Seiten-Seitenleiste
+### Seitenleiste des Inhalts
 
 Die Seitenleiste von Starlight ist für die Anzeige eines Inhaltsverzeichnisses verantwortlich, welches die Untertitel der aktuellen Seite anzeigt.
 Bei schmalen Ansichtsfenstern wird diese Leiste zu einem Dropdown-Menü.
@@ -321,6 +341,12 @@ Eine Komponente, welche das `<h1>`-Element für die aktuelle Seite enthält.
 
 Implementierungen sollten sicherstellen, dass sie `id="_top"` auf dem `<h1>` Element wie in der Standardimplementierung setzen.
 
+#### `DraftContentNotice`
+
+**Standardkomponente:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+Hinweis, der den Nutzern während der Entwicklung angezeigt wird, wenn die aktuelle Seite als Entwurf markiert ist.
+
 #### `FallbackContentNotice`
 
 **Standardkomponente:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
@@ -341,6 +367,8 @@ Die Standardimplementierung zeigt einen großen Titel, eine Tagline und Call-to-
 
 Die Kompoente wird um den Hauptinhalt jeder Seite gerendert.
 Die Standardimplementierung richtet grundlegende Stile ein, die auf Markdown-Inhalte angewendet werden.
+
+Die Markdown-Inhaltsstile werden auch in der Datei `@astrojs/starlight/style/markdown.css` veröffentlicht und auf die CSS-Klasse `.sl-markdown-content` bezogen.
 
 ---
 

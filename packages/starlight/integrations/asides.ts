@@ -17,9 +17,10 @@ import { visit } from 'unist-util-visit';
 import type { StarlightConfig } from '../types';
 import type { createTranslationSystemFromFs } from '../utils/translations-fs';
 import { pathToLocale } from './shared/pathToLocale';
+import { localeToLang } from './shared/localeToLang';
 
 interface AsidesOptions {
-	starlightConfig: { locales: StarlightConfig['locales'] };
+	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
 }
@@ -151,7 +152,8 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 
 	const transformer: Transformer<Root> = (tree, file) => {
 		const locale = pathToLocale(file.history[0], options);
-		const t = options.useTranslations(locale);
+		const lang = localeToLang(options.starlightConfig, locale);
+		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === undefined || !isNodeDirective(node)) {
 				return;

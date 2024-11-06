@@ -19,7 +19,7 @@ describe('useTranslations()', () => {
 	});
 
 	test('uses user-defined regional translations when available', () => {
-		const t = useTranslations('pt-br');
+		const t = useTranslations('pt-BR');
 		expect(t('page.editLink')).toBe('Modifique esse doc!');
 		expect(t('page.editLink')).not.toBe(translations.pt?.['page.editLink']);
 	});

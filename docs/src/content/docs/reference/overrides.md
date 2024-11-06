@@ -103,7 +103,7 @@ entry: {
 }
 ```
 
-Learn more about the shape of this object in [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/api-reference/#collection-entry-type) reference.
+Learn more about the shape of this object in [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/modules/astro-content/#collectionentry) reference.
 
 #### `sidebar`
 
