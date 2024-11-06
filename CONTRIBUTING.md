@@ -357,6 +357,39 @@ If you’ve published some content that's related to Starlight, adding it to the
 
 3. Open a pull request on GitHub to add your changes.
 
+### Video Content
+
+If the content you want to share is a YouTube video, you should add a new entry to the [video content section](https://starlight.astro.build/resources/community-content/#video-content). These entries differ in their properties. Therefore, step 2 is a little bit different:
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. Add a new entry for your content in the video section in `docs/src/content/docs/resources/community-content.mdx`.
+
+   - The new entry must be appended at the end of an existing list of the video content section.
+   - The `href` attribute must be the URL to your YouTube video. 
+   - The `title` attribute must be the YouTube title.
+   - The `description` attribute must be a short and accurate description of the video. If the YouTube description of your video is short, you can copy and paste it. 
+
+   ```diff
+     <LinkCard
+       href="https://example.net"
+       title="Content Example"
+       description="Some example of the community content list."
+     />
+     <LinkCard
+       href="https://example.org"
+       title="Last Content Example"
+       description="Last example of the community content list."
+     />
+   + <LinkCard
+   +   href="https://example.com"
+   +   title="New Content Example"
+   +   description="New example of the community content list."
+   + />
+   </CardGrid>
+   ```
+
+3. Open a pull request on GitHub to add your changes.
+
 ## Showcase
 
 We love to see websites built with Starlight and share them with the community on our [showcase](https://starlight.astro.build/resources/showcase/) page.
