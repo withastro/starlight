@@ -20,7 +20,7 @@
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.1.1",
     "@types/culori": "^2.1.1",
-    "astro": "^4.15.3",
+    "astro": "^4.16.10",
     "culori": "^4.0.1",
     "sharp": "^0.32.5"
   },
