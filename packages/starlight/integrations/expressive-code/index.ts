@@ -7,7 +7,8 @@ import { addClassName } from 'astro-expressive-code/hast';
 import type { AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { pathToLocale, slugToLocale } from '../shared/pathToLocale';
+import { pathToLocale } from '../shared/pathToLocale';
+import { slugToLocale } from '../shared/slugToLocale';
 import {
 	applyStarlightUiThemeColors,
 	preprocessThemes,
@@ -154,7 +155,7 @@ export function getStarlightEcConfigPreprocessor({
 			},
 			getBlockLocale: ({ file }) =>
 				file.url
-					? slugToLocale(file.url.pathname.slice(1), starlightConfig.locales)
+					? slugToLocale(file.url.pathname.slice(1), starlightConfig)
 					: pathToLocale(file.path, { starlightConfig, astroConfig }),
 			plugins,
 			...rest,
