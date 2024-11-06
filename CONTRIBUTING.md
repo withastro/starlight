@@ -371,21 +371,21 @@ If the content you want to share is a YouTube video, you should add a new entry 
 
    ```diff
      {
-			 href: 'https://www.youtube.com/watch?v=5u0Ds7wzUeI',
-			 title: 'Starlight by Astro',
-			 description: 'Watch the official Starlight launch video',
-		 },
-		 {
-			 href: 'https://www.youtube.com/shorts/zjOWezSzd18',
-			 title: '🌟 SUB 1 MINUTE RUN',
-			 description: 'Watch Ben launch a new Starlight site in under a minute!',
-		 },
+       href: 'https://www.youtube.com/watch?v=5u0Ds7wzUeI',
+       title: 'Starlight by Astro',
+       description: 'Watch the official Starlight launch video',
+     },
+     {
+       href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+       title: '🌟 SUB 1 MINUTE RUN',
+       description: 'Watch Ben launch a new Starlight site in under a minute!',
+     },
    +  {
    +    href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
    +    title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)k',
    +    description: "The official video for “Never Gonna Give You Up” by Rick Astley.",
    +  },
-	 ]}
+   ]}
    ```
 
 3. Open a pull request on GitHub to add your changes. Just please don't try to add “Never Gonna Give You Up” by Rick Astley to our videos like the example above ;)
