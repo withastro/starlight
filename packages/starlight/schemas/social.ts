@@ -35,6 +35,7 @@ export const socialLinks = [
 	'zulip',
 	'pinterest',
 	'tiktok',
+	'flickr',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -85,6 +86,7 @@ export const SocialLinksSchema = () =>
 					zulip: 'Zulip',
 					pinterest: 'Pinterest',
 					tiktok: 'TikTok',
+					flickr: 'Flickr',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
