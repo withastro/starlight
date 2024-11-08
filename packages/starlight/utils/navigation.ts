@@ -378,20 +378,17 @@ function setIntermediateSidebarCurrentEntry(
 	intermediateSidebar: SidebarEntry[],
 	pathname: string
 ): boolean {
-	let found = false;
 	for (const entry of intermediateSidebar) {
-		if (entry.type === 'link') {
-			found = pathsMatch(encodeURI(entry.href), pathname);
-			if (found) {
-				entry.isCurrent = true;
-				break;
-			}
-		} else if (entry.type === 'group') {
-			found = setIntermediateSidebarCurrentEntry(entry.entries, pathname);
-			if (found) break;
+		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
+			entry.isCurrent = true;
+			return true;
+		}
+
+		if (entry.type === 'group' && setIntermediateSidebarCurrentEntry(entry.entries, pathname)) {
+			return true;
 		}
 	}
-	return found;
+	return false;
 }
 
 /** Generates a deterministic string based on the content of the passed sidebar. */
