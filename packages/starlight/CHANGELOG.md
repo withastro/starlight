@@ -1,5 +1,23 @@
 # @astrojs/starlight
 
+## 0.29.0
+
+### Minor Changes
+
+- [#2551](https://github.com/withastro/starlight/pull/2551) [`154c8e3`](https://github.com/withastro/starlight/commit/154c8e337819c7d7ebf4ff4dd55db0d10607620b) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates the `astro-expressive-code` dependency to the latest version (0.38).
+
+  The new version allows using `ec.config.mjs` to selectively override individual Expressive Code styles and settings provided by Starlight themes and plugins, speeds up Shiki language loading, and adds the config option `expressiveCode.shiki.injectLangsIntoNestedCodeBlocks`. See the [Expressive Code release notes](https://expressive-code.com/releases/#0380) for full details.
+
+- [#2588](https://github.com/withastro/starlight/pull/2588) [`0dea6e8`](https://github.com/withastro/starlight/commit/0dea6e8ebf027504f347e793b6208f4170109fad) Thanks [@delucis](https://github.com/delucis)! - Improves build performance for sites with large sidebars
+
+  This release adds a caching layer to Starlight’s sidebar generation logic, reducing the number of times sidebars need to be regenerated while building a site. Some benchmarks for projects with a complex sidebar saw builds complete more than 35% faster with this change.
+
+- [#2503](https://github.com/withastro/starlight/pull/2503) [`a4c8edd`](https://github.com/withastro/starlight/commit/a4c8eddc53993068c0f60159fecc123013827ef0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves the accessibility of asides and tabs by removing some unnecessary HTML landmarks.
+
+### Patch Changes
+
+- [#2579](https://github.com/withastro/starlight/pull/2579) [`241966b`](https://github.com/withastro/starlight/commit/241966bd0523a2e82891d622b2a97b2f3646bc41) Thanks [@RafidMuhymin](https://github.com/RafidMuhymin)! - Adds social link icon for Nostr
+
 ## 0.28.6
 
 ### Patch Changes
