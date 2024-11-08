@@ -181,8 +181,7 @@ export default defineConfig({
 			],
 			expressiveCode: {
 				shiki: {
-					// TODO: Remove `any` once Expressive Code supports grammars with comments.
-					langs: [/** @type {any} */ (markdocGrammar)],
+					langs: [markdocGrammar],
 				},
 			},
 			plugins: process.env.CHECK_LINKS
