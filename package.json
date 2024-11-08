@@ -47,6 +47,7 @@
     "peerDependencyRules": {
       "ignoreMissing": [
         "@algolia/client-search",
+        "playwright",
         "search-insights"
       ]
     }

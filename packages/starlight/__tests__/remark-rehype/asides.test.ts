@@ -32,7 +32,7 @@ const processor = await createMarkdownProcessor({
 	],
 });
 
-test('generates <aside>', async () => {
+test('generates aside', async () => {
 	const res = await processor.render(`
 :::note
 Some text
