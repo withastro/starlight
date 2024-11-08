@@ -8,6 +8,7 @@ import type { AstroIntegration } from 'astro';
 import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { pathToLocale } from '../shared/pathToLocale';
+import { slugToLocale } from '../shared/slugToLocale';
 import {
 	applyStarlightUiThemeColors,
 	preprocessThemes,
@@ -152,7 +153,10 @@ export function getStarlightEcConfigPreprocessor({
 				},
 				...otherStyleOverrides,
 			},
-			getBlockLocale: ({ file }) => pathToLocale(file.path, { starlightConfig, astroConfig }),
+			getBlockLocale: ({ file }) =>
+				file.url
+					? slugToLocale(file.url.pathname.slice(1), starlightConfig)
+					: pathToLocale(file.path, { starlightConfig, astroConfig }),
 			plugins,
 			...rest,
 		};
