@@ -8,7 +8,7 @@
 
   The new version allows using `ec.config.mjs` to selectively override individual Expressive Code styles and settings provided by Starlight themes and plugins, speeds up Shiki language loading, and adds the config option `expressiveCode.shiki.injectLangsIntoNestedCodeBlocks`. See the [Expressive Code release notes](https://expressive-code.com/releases/#0380) for full details.
 
-- [#2588](https://github.com/withastro/starlight/pull/2588) [`0dea6e8`](https://github.com/withastro/starlight/commit/0dea6e8ebf027504f347e793b6208f4170109fad) Thanks [@delucis](https://github.com/delucis)! - Improves build performance for sites with large sidebars
+- [#2252](https://github.com/withastro/starlight/pull/2252) [`6116db0`](https://github.com/withastro/starlight/commit/6116db03a4157c0f0caa210690ef0dcdd001a287) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves build performance for sites with large sidebars
 
   This release adds a caching layer to Starlight’s sidebar generation logic, reducing the number of times sidebars need to be regenerated while building a site. Some benchmarks for projects with a complex sidebar saw builds complete more than 35% faster with this change.
 
