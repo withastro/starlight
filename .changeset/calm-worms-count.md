@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Added social icon for Nostr
+Adds social link icon for Nostr
