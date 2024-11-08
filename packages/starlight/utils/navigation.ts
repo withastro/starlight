@@ -20,6 +20,8 @@ import type { StarlightConfig } from './user-config';
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
 
+const neverPathFormatter = createPathFormatter({ trailingSlash: 'never' });
+
 export interface Link {
 	type: 'link';
 	label: string;
@@ -73,11 +75,11 @@ function configItemToEntry(
 	routes: Route[]
 ): SidebarEntry {
 	if ('link' in item) {
-		return linkFromSidebarLinkItem(item, locale, currentPathname);
+		return linkFromSidebarLinkItem(item, locale);
 	} else if ('autogenerate' in item) {
 		return groupFromAutogenerateConfig(item, locale, routes, currentPathname);
 	} else if ('slug' in item) {
-		return linkFromInternalSidebarLinkItem(item, locale, currentPathname);
+		return linkFromInternalSidebarLinkItem(item, locale);
 	} else {
 		const label = pickLang(item.translations, localeToLang(locale)) || item.label;
 		return {
@@ -121,11 +123,7 @@ function groupFromAutogenerateConfig(
 const isAbsolute = (link: string) => /^https?:\/\//.test(link);
 
 /** Create a link entry from a manual link item in user config. */
-function linkFromSidebarLinkItem(
-	item: SidebarLinkItem,
-	locale: string | undefined,
-	currentPathname: string
-) {
+function linkFromSidebarLinkItem(item: SidebarLinkItem, locale: string | undefined) {
 	let href = item.link;
 	if (!isAbsolute(href)) {
 		href = ensureLeadingSlash(href);
@@ -133,20 +131,13 @@ function linkFromSidebarLinkItem(
 		if (locale) href = '/' + locale + href;
 	}
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
-	return makeSidebarLink(
-		href,
-		label,
-		currentPathname,
-		getSidebarBadge(item.badge, locale, label),
-		item.attrs
-	);
+	return makeSidebarLink(href, label, getSidebarBadge(item.badge, locale, label), item.attrs);
 }
 
 /** Create a link entry from an automatic internal link item in user config. */
 function linkFromInternalSidebarLinkItem(
 	item: InternalSidebarLinkItem,
-	locale: string | undefined,
-	currentPathname: string
+	locale: string | undefined
 ) {
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
 	const slug = item.slug === 'index' ? '' : item.slug;
@@ -169,50 +160,39 @@ function linkFromInternalSidebarLinkItem(
 	}
 	const label =
 		pickLang(item.translations, localeToLang(locale)) || item.label || entry.entry.data.title;
-	return makeSidebarLink(
-		entry.slug,
-		label,
-		currentPathname,
-		getSidebarBadge(item.badge, locale, label),
-		item.attrs
-	);
+	return makeSidebarLink(entry.slug, label, getSidebarBadge(item.badge, locale, label), item.attrs);
 }
 
 /** Process sidebar link options to create a link entry. */
 function makeSidebarLink(
 	href: string,
 	label: string,
-	currentPathname: string,
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): Link {
 	if (!isAbsolute(href)) {
 		href = formatPath(href);
 	}
-	const isCurrent = pathsMatch(encodeURI(href), currentPathname);
-	return makeLink({ label, href, isCurrent, badge, attrs });
+	return makeLink({ label, href, badge, attrs });
 }
 
 /** Create a link entry */
 function makeLink({
-	isCurrent = false,
 	attrs = {},
 	badge = undefined,
 	...opts
 }: {
 	label: string;
 	href: string;
-	isCurrent?: boolean;
 	badge?: Badge | undefined;
 	attrs?: LinkHTMLAttributes | undefined;
 }): Link {
-	return { type: 'link', ...opts, badge, isCurrent, attrs };
+	return { type: 'link', ...opts, badge, isCurrent: false, attrs };
 }
 
 /** Test if two paths are equivalent even if formatted differently. */
 function pathsMatch(pathA: string, pathB: string) {
-	const format = createPathFormatter({ trailingSlash: 'never' });
-	return format(pathA) === format(pathB);
+	return neverPathFormatter(pathA) === neverPathFormatter(pathB);
 }
 
 /** Get the segments leading to a page. */
@@ -268,11 +248,10 @@ function treeify(routes: Route[], baseDir: string): Dir {
 }
 
 /** Create a link entry for a given content collection entry. */
-function linkFromRoute(route: Route, currentPathname: string): Link {
+function linkFromRoute(route: Route): Link {
 	return makeSidebarLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
-		currentPathname,
 		route.entry.data.sidebar.badge,
 		route.entry.data.sidebar.attrs
 	);
@@ -333,7 +312,7 @@ function dirToItem(
 ): SidebarEntry {
 	return isDir(dirOrRoute)
 		? groupFromDir(dirOrRoute, fullPath, dirName, currentPathname, locale, collapsed)
-		: linkFromRoute(dirOrRoute, currentPathname);
+		: linkFromRoute(dirOrRoute);
 }
 
 /** Create a sidebar entry for a given content directory. */
@@ -348,9 +327,25 @@ function sidebarFromDir(
 	);
 }
 
+/**
+ * Intermediate sidebar represents sidebar entries generated from the user config for a specific
+ * locale and do not contain any information about the current page.
+ * These representations are cached per locale to avoid regenerating them for each page.
+ * When generating the final sidebar for a page, the intermediate sidebar is cloned and the current
+ * page is marked as such.
+ *
+ * @see getSidebarFromIntermediateSidebar
+ */
+const intermediateSidebars = new Map<string | undefined, SidebarEntry[]>();
+
 /** Get the sidebar for the current page using the global config. */
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
-	return getSidebarFromConfig(config.sidebar, pathname, locale);
+	let intermediateSidebar = intermediateSidebars.get(locale);
+	if (!intermediateSidebar) {
+		intermediateSidebar = getSidebarFromConfig(config.sidebar, pathname, locale);
+		intermediateSidebars.set(locale, intermediateSidebar);
+	}
+	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
 }
 
 /** Get the sidebar for the current page using the specified sidebar config. */
@@ -366,6 +361,34 @@ export function getSidebarFromConfig(
 		const tree = treeify(routes, locale || '');
 		return sidebarFromDir(tree, pathname, locale, false);
 	}
+}
+
+/** Transform an intermediate sidebar into a sidebar for the current page. */
+function getSidebarFromIntermediateSidebar(
+	intermediateSidebar: SidebarEntry[],
+	pathname: string
+): SidebarEntry[] {
+	const sidebar = structuredClone(intermediateSidebar);
+	setIntermediateSidebarCurrentEntry(sidebar, pathname);
+	return sidebar;
+}
+
+/** Marks the current page as such in an intermediate sidebar. */
+function setIntermediateSidebarCurrentEntry(
+	intermediateSidebar: SidebarEntry[],
+	pathname: string
+): boolean {
+	for (const entry of intermediateSidebar) {
+		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
+			entry.isCurrent = true;
+			return true;
+		}
+
+		if (entry.type === 'group' && setIntermediateSidebarCurrentEntry(entry.entries, pathname)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /** Generates a deterministic string based on the content of the passed sidebar. */
