@@ -175,12 +175,12 @@
     "astro": "^4.14.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^5.1.0",
+    "@astrojs/markdown-remark": "^5.3.0",
     "@playwright/test": "^1.45.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
-    "astro": "^4.15.3",
+    "astro": "^4.16.10",
     "linkedom": "^0.18.4",
     "vitest": "^1.6.0"
   },

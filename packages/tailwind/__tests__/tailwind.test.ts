@@ -104,49 +104,6 @@ describe('@tailwind base;', async () => {
 		expect(baseWithDefaultPlugins).includes('--tw-');
 		expect(baseWithDefaultPlugins).toMatchInlineSnapshot(`
 			"*, ::before, ::after {
-			    border-width: 0;
-			    border-style: solid;
-			    border-color: #e5e7eb;
-			}
-			::before, ::after {
-			    --tw-content: ;
-			}
-			html, :host {
-			    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			}
-			code, kbd, samp, pre {
-			    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-			}
-			:root {
-			    --sl-font: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			    --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-			    --sl-color-white: #fff;
-			    --sl-color-gray-1: #e5e7eb;
-			    --sl-color-gray-2: #d1d5db;
-			    --sl-color-gray-3: #9ca3af;
-			    --sl-color-gray-4: #4b5563;
-			    --sl-color-gray-5: #374151;
-			    --sl-color-gray-6: #1f2937;
-			    --sl-color-black: #111827;
-			    --sl-color-accent-low: #1e1b4b;
-			    --sl-color-accent: #4f46e5;
-			    --sl-color-accent-high: #c7d2fe;
-			}
-			:root[data-theme="light"] {
-			    --sl-color-white: #111827;
-			    --sl-color-gray-1: #1f2937;
-			    --sl-color-gray-2: #374151;
-			    --sl-color-gray-3: #6b7280;
-			    --sl-color-gray-4: #9ca3af;
-			    --sl-color-gray-5: #d1d5db;
-			    --sl-color-gray-6: #e5e7eb;
-			    --sl-color-gray-7: #f3f4f6;
-			    --sl-color-black: #fff;
-			    --sl-color-accent-low: #c7d2fe;
-			    --sl-color-accent: #4f46e5;
-			    --sl-color-accent-high: #312e81;
-			}
-			*, ::before, ::after {
 			    --tw-border-spacing-x: 0;
 			    --tw-border-spacing-y: 0;
 			    --tw-translate-x: 0;
@@ -251,6 +208,49 @@ describe('@tailwind base;', async () => {
 			    --tw-contain-layout:  ;
 			    --tw-contain-paint:  ;
 			    --tw-contain-style:  ;
+			}
+			*, ::before, ::after {
+			    border-width: 0;
+			    border-style: solid;
+			    border-color: #e5e7eb;
+			}
+			::before, ::after {
+			    --tw-content: ;
+			}
+			html, :host {
+			    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+			}
+			code, kbd, samp, pre {
+			    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+			}
+			:root {
+			    --sl-font: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+			    --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+			    --sl-color-white: #fff;
+			    --sl-color-gray-1: #e5e7eb;
+			    --sl-color-gray-2: #d1d5db;
+			    --sl-color-gray-3: #9ca3af;
+			    --sl-color-gray-4: #4b5563;
+			    --sl-color-gray-5: #374151;
+			    --sl-color-gray-6: #1f2937;
+			    --sl-color-black: #111827;
+			    --sl-color-accent-low: #1e1b4b;
+			    --sl-color-accent: #4f46e5;
+			    --sl-color-accent-high: #c7d2fe;
+			}
+			:root[data-theme="light"] {
+			    --sl-color-white: #111827;
+			    --sl-color-gray-1: #1f2937;
+			    --sl-color-gray-2: #374151;
+			    --sl-color-gray-3: #6b7280;
+			    --sl-color-gray-4: #9ca3af;
+			    --sl-color-gray-5: #d1d5db;
+			    --sl-color-gray-6: #e5e7eb;
+			    --sl-color-gray-7: #f3f4f6;
+			    --sl-color-black: #fff;
+			    --sl-color-accent-low: #c7d2fe;
+			    --sl-color-accent: #4f46e5;
+			    --sl-color-accent-high: #312e81;
 			}"
 		`);
 	});
