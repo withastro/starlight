@@ -265,7 +265,7 @@ function getOrder(routeOrDir: Route | Dir): number {
 	return isDir(routeOrDir)
 		? Math.min(...Object.values(routeOrDir).flatMap(getOrder))
 		: // If no order value is found, set it to the largest number possible.
-			routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE;
+			(routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE);
 }
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */

@@ -79,7 +79,7 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 			? Object.entries(config.locales).map(([locale, localeConfig]) => {
 					return {
 						codes: [localeConfig?.lang ?? locale],
-						path: locale === 'root' ? localeConfig?.lang ?? BuiltInDefaultLocale.lang : locale,
+						path: locale === 'root' ? (localeConfig?.lang ?? BuiltInDefaultLocale.lang) : locale,
 					};
 				})
 			: [config.defaultLocale.lang],
