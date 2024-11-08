@@ -107,10 +107,10 @@ function transformUnhandledDirective(
  * ```astro
  * <aside class="starlight-aside starlight-aside--tip" aria-label="Did you know?">
  *   <p class="starlight-aside__title" aria-hidden="true">Did you know?</p>
- *   <section class="starlight-aside__content">
+ *   <div class="starlight-aside__content">
  *     <p>Astro helps you build faster websites with “Islands Architecture”.</p>
- *   </section>
- * </Aside>
+ *   </div>
+ * </aside>
  * ```
  */
 function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
@@ -204,7 +204,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 						),
 						...titleNode,
 					]),
-					h('section', { class: 'starlight-aside__content' }, node.children),
+					h('div', { class: 'starlight-aside__content' }, node.children),
 				]
 			);
 
