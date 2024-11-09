@@ -108,6 +108,15 @@ title: 부분적으로 색인이 생성된 페이지
 
 이 업데이트된 구성을 사용하면 사이트의 검색 창에서 기본 검색 모달 대신 Algolia 모달이 열립니다.
 
+#### DocSearch 구성
+
+Starlight DocSearch 플러그인은 다음과 같은 추가 옵션을 통해 DocSearch 컴포넌트를 사용자 지정할 수도 있습니다:
+
+- `maxResultsPerGroup`: 각 검색 그룹에 표시되는 결과 수를 제한합니다. 기본값은 `5`입니다.
+- `disableUserPersonalization`: DocSearch가 사용자의 최근 검색 및 즐겨찾기를 로컬 스토리지에 저장하지 못하도록 합니다. 기본값은 `false`입니다.
+- `insights`: Algolia Insights 플러그인을 활성화하고 검색 이벤트를 DocSearch 인덱스로 보냅니다. 기본값은 `false`입니다.
+- `searchParameters`: [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/)를 사용자 정의하는 객체입니다.
+
 #### DocSearch UI 번역
 
 DocSearch는 기본적으로 영어 UI 문자열만 제공합니다.
