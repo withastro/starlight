@@ -1,17 +1,49 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
+import type docsearch from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
 import { z } from 'astro/zod';
 
-/** Config options users must provide for DocSearch to work. */
-const DocSearchConfigSchema = z.object({
-	appId: z.string(),
-	apiKey: z.string(),
-	indexName: z.string(),
-});
-export type DocSearchConfig = z.input<typeof DocSearchConfigSchema>;
+type SearchOptions = Parameters<typeof docsearch>[0]['searchParameters'];
+
+/** DocSearch configuration options. */
+const DocSearchConfigSchema = z
+	.object({
+		// Required config without which DocSearch won’t work.
+		/** Your Algolia application ID. */
+		appId: z.string(),
+		/** Your Algolia Search API key. */
+		apiKey: z.string(),
+		/** Your Algolia index name. */
+		indexName: z.string(),
+		// Optional DocSearch component config (only the serializable properties can be included here)
+		/**
+		 * The maximum number of results to display per search group.
+		 * @default 5
+		 */
+		maxResultsPerGroup: z.number().optional(),
+		/**
+		 * Disable saving recent searches and favorites to the local storage.
+		 * @default false
+		 */
+		disableUserPersonalization: z.boolean().optional(),
+		/**
+		 * Whether to enable the Algolia Insights plugin and send search events to your DocSearch index.
+		 * @default false
+		 */
+		insights: z.boolean().optional(),
+		/**
+		 * The Algolia Search Parameters.
+		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
+		 */
+		searchParameters: z.custom<SearchOptions>(),
+	})
+	.strict();
+
+type DocSearchUserConfig = z.input<typeof DocSearchConfigSchema>;
+export type DocSearchConfig = z.output<typeof DocSearchConfigSchema>;
 
 /** Starlight DocSearch plugin. */
-export default function starlightDocSearch(userConfig: DocSearchConfig): StarlightPlugin {
+export default function starlightDocSearch(userConfig: DocSearchUserConfig): StarlightPlugin {
 	const opts = DocSearchConfigSchema.parse(userConfig);
 	return {
 		name: 'starlight-docsearch',

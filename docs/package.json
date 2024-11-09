@@ -4,8 +4,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "test": "start-server-and-test 'pnpm preview' http://localhost:4321 'pnpm pa11y'",
-    "pa11y": "pa11y-ci --sitemap 'http://localhost:4321/sitemap-0.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:4321' --sitemap-exclude '/(de|zh-cn|fr|es|pt-br|pt-pt|it|id|ko|ru|tr|hi|da|uk)/.*'",
+    "test": "playwright install --with-deps chromium && playwright test",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -16,18 +15,19 @@
     "grammars": "node grammars/generate.mjs"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.5.2",
+    "@astro-community/astro-embed-youtube": "^0.5.6",
     "@astrojs/starlight": "workspace:*",
     "@lunariajs/core": "^0.1.1",
     "@types/culori": "^2.1.1",
-    "astro": "^4.15.3",
+    "astro": "^4.16.10",
     "culori": "^4.0.1",
     "sharp": "^0.32.5",
     "starlight-demo-plugin": "workspace:*"
   },
   "devDependencies": {
-    "pa11y-ci": "^3.0.1",
-    "starlight-links-validator": "^0.12.1",
-    "start-server-and-test": "^2.0.4"
+    "@playwright/test": "^1.45.0",
+    "axe-playwright": "^2.0.3",
+    "sitemapper": "^3.2.12",
+    "starlight-links-validator": "^0.12.1"
   }
 }

@@ -88,9 +88,9 @@ jobs:
       - name: Type check packages
         run: pnpm typecheck
 
-  pa11y:
+  a11y:
     name: Check for accessibility issues
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -106,12 +106,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
-
-      - name: Build docs site
-        working-directory: ./docs
-        run: pnpm build
-        env:
-          NO_GRADIENTS: true
 
       - name: Run accessibility audit
         working-directory: ./docs
