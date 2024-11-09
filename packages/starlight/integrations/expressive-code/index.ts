@@ -160,6 +160,8 @@ export function getStarlightEcConfigPreprocessor({
 					const locale = slugToLocale(file.url.pathname.slice(1), starlightConfig);
 					return localeToLang(starlightConfig, locale);
 				}
+				// Note that EC cannot use the `pathToLang` helper passed down to plugins as this callback
+				// is also called in the context of the `<Code>` component.
 				return pathToLang(file.path, { starlightConfig, astroConfig });
 			},
 			plugins,
