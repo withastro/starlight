@@ -250,8 +250,9 @@ The example above will log a message that includes the provided info message:
 
 **type:** `(lang: string) => I18nT`
 
-A callback function to generate a utility function to access UI strings for a given language.
-To learn more about the generated utility function and all the APIs available, see the [“Using UI translations”](/guides/i18n/#using-ui-translations) guide.
+Call `useTranslations()` with a language tag to generate a utility function that provides access to UI strings for that language.
+`useTranslations()` returns an equivalent of the `Astro.locals.t()` API that is available in Astro components.
+To learn more about the available APIs, see the [“Using UI translations”](/guides/i18n/#using-ui-translations) guide.
 
 ```ts {6}
 // plugin.ts
