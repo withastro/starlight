@@ -16,13 +16,25 @@ const DocSearchConfigSchema = z
 		/** Your Algolia index name. */
 		indexName: z.string(),
 		// Optional DocSearch component config (only the serializable properties can be included here)
-		/** The maximum number of results to display per search group. Default is `5`. */
+		/**
+		 * The maximum number of results to display per search group.
+		 * @default 5
+		 */
 		maxResultsPerGroup: z.number().optional(),
-		/** Disable saving recent searches and favorites to the local storage. Default is `false`. */
+		/**
+		 * Disable saving recent searches and favorites to the local storage.
+		 * @default false
+		 */
 		disableUserPersonalization: z.boolean().optional(),
-		/** Whether to enable the Algolia Insights plugin and send search events to your DocSearch index. Default is `false`. */
+		/**
+		 * Whether to enable the Algolia Insights plugin and send search events to your DocSearch index.
+		 * @default false
+		 */
 		insights: z.boolean().optional(),
-		/** The Algolia Search Parameters. See https://www.algolia.com/doc/api-reference/search-api-parameters/ */
+		/**
+		 * The Algolia Search Parameters.
+		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
+		 */
 		searchParameters: z.custom<SearchOptions>(),
 	})
 	.strict();
