@@ -60,6 +60,7 @@ export default defineVitestConfig({
 					});
 				},
 				async 'config:setup'({ config, updateConfig, useTranslations, pathToLang }) {
+					// Fake an async operation to ensure that the plugin system can handle async hooks.
 					await Promise.resolve();
 
 					const docsUrl = new URL('../src/content/docs/', import.meta.url);
