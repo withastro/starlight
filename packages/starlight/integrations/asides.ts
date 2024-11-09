@@ -16,11 +16,15 @@ import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { StarlightConfig, StarlightPlugin } from '../types';
 
+type StarlightPluginConfigSetupProps = Parameters<
+	NonNullable<StarlightPlugin['hooks']['config:setup']>
+>[0];
+
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
-	useTranslations: Parameters<StarlightPlugin['hooks']['setup']>[0]['useTranslations'];
-	pathToLang: Parameters<StarlightPlugin['hooks']['setup']>[0]['pathToLang'];
+	useTranslations: StarlightPluginConfigSetupProps['useTranslations'];
+	pathToLang: StarlightPluginConfigSetupProps['pathToLang'];
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */

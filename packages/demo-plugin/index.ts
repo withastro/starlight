@@ -5,10 +5,10 @@ export default function starlightDemoPlugin(): StarlightPlugin {
 	return {
 		name: 'starlight-demo-plugin',
 		hooks: {
-			init({ injectTranslations }) {
+			'i18n:setup'({ injectTranslations }) {
 				injectTranslations(Translations);
 			},
-			setup({ logger, useTranslations }) {
+			'config:setup'({ logger, useTranslations }) {
 				logger.info('Built-in translations:');
 				console.table([
 					{ key: 'skipLink.label', lang: 'en', value: useTranslations('en')('skipLink.label') },

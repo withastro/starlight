@@ -14,7 +14,7 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-1',
 			hooks: {
-				setup({ config, updateConfig }) {
+				'config:setup'({ config, updateConfig }) {
 					updateConfig({
 						title: `${config.title} - Custom`,
 						description: 'plugin 1',
@@ -33,7 +33,7 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-2',
 			hooks: {
-				setup({ config, updateConfig }) {
+				'config:setup'({ config, updateConfig }) {
 					updateConfig({
 						description: `${config.description} - plugin 2`,
 						sidebar: [{ label: 'Showcase', link: 'showcase' }],
@@ -44,7 +44,7 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-3',
 			hooks: {
-				init({ injectTranslations }) {
+				'i18n:setup'({ injectTranslations }) {
 					injectTranslations({
 						en: {
 							'search.label': 'Search the thing',
@@ -59,7 +59,7 @@ export default defineVitestConfig({
 						},
 					});
 				},
-				async setup({ config, updateConfig, useTranslations, pathToLang }) {
+				async 'config:setup'({ config, updateConfig, useTranslations, pathToLang }) {
 					await Promise.resolve();
 
 					const docsUrl = new URL('../src/content/docs/', import.meta.url);

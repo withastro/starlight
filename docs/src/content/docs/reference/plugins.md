@@ -19,12 +19,12 @@ See below for details of the different properties and hook parameters.
 interface StarlightPlugin {
   name: string;
   hooks: {
-    init?: (options: {
+    'i18n:setup'?: (options: {
       injectTranslations: (
         translations: Record<string, Record<string, string>>
       ) => void;
     }) => void | Promise<void>;
-    setup: (options: {
+    'config:setup': (options: {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
@@ -49,10 +49,11 @@ A plugin must provide a unique name that describes it. The name is used when [lo
 
 Hooks are functions which Starlight calls to run plugin code at specific times.
 
-### `hooks.init`
+### `i18n:setup`
 
-Plugin initialization function called before Starlight is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
-The `init` hook can currently only be used to inject translations.
+Plugin internationalization setup function called when Starlight is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
+The `i18n:setup` hook can be used to inject translations strings for the plugin in various locales.
+These translations will be available in the [`config:setup`](#configsetup) hook and plugin UI.
 
 This hook is called with the following options:
 
@@ -69,7 +70,7 @@ In the following example, a plugin injects translations for a custom UI string n
 export default {
   name: 'plugin-with-translations',
   hooks: {
-    init({ injectTranslations }) {
+    'i18n:setup'({ injectTranslations }) {
       injectTranslations({
         en: {
           'myPlugin.doThing': 'Do the thing',
@@ -84,7 +85,7 @@ export default {
 ```
 
 To use the injected translations in your plugin UI, follow the [“Using UI translations” guide](/guides/i18n/#using-ui-translations).
-If you need to use UI strings in the context of the `setup` hook of your plugin, you can use the [`useTranslations()`](#usetranslations) callback.
+If you need to use UI strings in the context of the [`config:setup`](#configsetup) hook of your plugin, you can use the [`useTranslations()`](#usetranslations) callback.
 
 Types for a plugin’s injected translation strings are generated automatically in a user’s project, but are not yet available when working in your plugin’s codebase.
 To type the `locals.t` object in the context of your plugin, declare the following global namespaces in a TypeScript declaration file:
@@ -125,10 +126,10 @@ declare namespace StarlightApp {
 }
 ```
 
-### `hooks.setup`
+### `config:setup`
 
-Plugin setup function called when Starlight is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
-The `setup` hook can be used to update the Starlight configuration or add Astro integrations.
+Plugin configuration setup function called when Starlight is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
+The `config:setup` hook can be used to update the Starlight configuration or add Astro integrations.
 
 This hook is called with the following options:
 
@@ -155,7 +156,7 @@ In the following example, a new [`social`](/reference/configuration/#social) med
 export default {
   name: 'add-twitter-plugin',
   hooks: {
-    setup({ config, updateConfig }) {
+    'config:setup'({ config, updateConfig }) {
       updateConfig({
         social: {
           ...config.social,
@@ -182,7 +183,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    setup({ addIntegration, astroConfig }) {
+    'config:setup'({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -231,7 +232,7 @@ All logged messages will be prefixed with the plugin name.
 export default {
   name: 'long-process-plugin',
   hooks: {
-    setup({ logger }) {
+    'config:setup'({ logger }) {
       logger.info('Starting long process…');
       // Some long process…
     },
@@ -257,7 +258,7 @@ To learn more about the generated utility function and all the APIs available, s
 export default {
   name: 'plugin-use-translations',
   hooks: {
-    setup({ useTranslations, logger }) {
+    'config:setup'({ useTranslations, logger }) {
       const t = useTranslations('en');
       logger.info(t('builtWithStarlight.label'));
     },
@@ -303,7 +304,7 @@ A plugin can determine the language of a file using its full path:
 export default {
   name: 'plugin-use-translations',
   hooks: {
-    setup({ useTranslations, logger }) {
+    'config:setup'({ useTranslations, logger }) {
       const lang = pathToLang('/path/to/project/src/content/docs/fr/index.mdx');
       const t = useTranslations(lang);
       logger.info(t('aside.tip'));

@@ -64,7 +64,9 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 
 type StarlightEcIntegrationOptions = {
 	starlightConfig: StarlightConfig;
-	useTranslations: Parameters<StarlightPlugin['hooks']['setup']>[0]['useTranslations'];
+	useTranslations: Parameters<
+		NonNullable<StarlightPlugin['hooks']['config:setup']>
+	>[0]['useTranslations'];
 };
 
 /**
