@@ -50,6 +50,9 @@
         "playwright",
         "search-insights"
       ]
+    },
+    "patchedDependencies": {
+      "starlight-links-validator@0.13.1": "patches/starlight-links-validator@0.13.1.patch"
     }
   }
 }

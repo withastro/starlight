@@ -1,0 +1,38 @@
+diff --git a/libs/i18n.ts b/libs/i18n.ts
+index ea31b6bb9bc1f5b19ba4d0e15ca179d335085c36..4e410162c3f47091191a30be5c115f3ec5268c3b 100644
+--- a/libs/i18n.ts
++++ b/libs/i18n.ts
+@@ -1,9 +1,9 @@
+-import type { StarlightUserConfig } from '@astrojs/starlight/types'
++import type { HookParameters } from '@astrojs/starlight/types'
+ 
+ import { ensureLeadingSlash, ensureTrailingSlash } from './path'
+ import type { Headings } from './remark'
+ 
+-export function getLocaleConfig(config: StarlightUserConfig): LocaleConfig | undefined {
++export function getLocaleConfig(config: HookParameters<'config:setup'>['config']): LocaleConfig | undefined {
+   if (!config.locales || Object.keys(config.locales).length === 0) return
+ 
+   let defaultLocale = config.defaultLocale
+diff --git a/libs/validation.ts b/libs/validation.ts
+index 2e382fcc8c24f5fb5faf023e7c14c0e87c610c9a..5dc1d15d4dcedad09af3bafa2d368239d4f994a8 100644
+--- a/libs/validation.ts
++++ b/libs/validation.ts
+@@ -2,7 +2,7 @@ import { statSync } from 'node:fs'
+ import { posix } from 'node:path'
+ import { fileURLToPath } from 'node:url'
+ 
+-import type { StarlightUserConfig } from '@astrojs/starlight/types'
++import type { HookParameters } from '@astrojs/starlight/types'
+ import type { AstroConfig, AstroIntegrationLogger } from 'astro'
+ import { bgGreen, black, blue, dim, green, red } from 'kleur/colors'
+ import picomatch from 'picomatch'
+@@ -26,7 +26,7 @@ export function validateLinks(
+   pages: PageData[],
+   outputDir: URL,
+   astroConfig: AstroConfig,
+-  starlightConfig: StarlightUserConfig,
++  starlightConfig: HookParameters<'config:setup'>['config'],
+   options: StarlightLinksValidatorOptions,
+ ): ValidationErrors {
+   process.stdout.write(`\n${bgGreen(black(` validating links `))}\n`)
