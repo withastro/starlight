@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  starlight-links-validator@0.13.1:
-    hash: zlfcdlgfxstrn5jota2yvhjkdq
-    path: patches/starlight-links-validator@0.13.1.patch
-
 importers:
 
   .:
@@ -78,8 +73,8 @@ importers:
         specifier: ^3.2.12
         version: 3.2.12
       starlight-links-validator:
-        specifier: ^0.13.1
-        version: 0.13.1(patch_hash=zlfcdlgfxstrn5jota2yvhjkdq)(@astrojs/starlight@packages+starlight)(astro@4.16.10)
+        specifier: ^0.13.2
+        version: 0.13.2(@astrojs/starlight@packages+starlight)(astro@4.16.10)
 
   examples/basics:
     dependencies:
@@ -5837,8 +5832,8 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.13.1(patch_hash=zlfcdlgfxstrn5jota2yvhjkdq)(@astrojs/starlight@packages+starlight)(astro@4.16.10):
-    resolution: {integrity: sha512-1qt04vxO7rsu//JoaRP2TNU9/cj8Wfx6FYK3VXIvkkN9HoIpQ/zgq43dy3h7+6fcuyksg7+Eu17dgDQaOUbQVw==}
+  /starlight-links-validator@0.13.2(@astrojs/starlight@packages+starlight)(astro@4.16.10):
+    resolution: {integrity: sha512-BP6vf+fj91LnQXPnggWVhZXhcSF1x6SHof0GRg+IGgY0idSbIU7OHE2SvLggs2fRZ5SflVqpCTpK0pQcOmYcDg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
@@ -5856,7 +5851,6 @@ packages:
       picomatch: 4.0.2
       unist-util-visit: 5.0.0
     dev: true
-    patched: true
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
