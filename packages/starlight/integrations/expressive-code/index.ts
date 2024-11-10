@@ -6,7 +6,7 @@ import {
 import { addClassName } from 'astro-expressive-code/hast';
 import type { AstroIntegration } from 'astro';
 import type { StarlightConfig, StarlightPlugin } from '../../types';
-import { pathToLang } from '../shared/pathToLang';
+import { absolutePathToLang } from '../shared/absolutePathToLang';
 import { slugToLocale } from '../shared/slugToLocale';
 import { localeToLang } from '../shared/localeToLang';
 import {
@@ -160,9 +160,9 @@ export function getStarlightEcConfigPreprocessor({
 					const locale = slugToLocale(file.url.pathname.slice(1), starlightConfig);
 					return localeToLang(starlightConfig, locale);
 				}
-				// Note that EC cannot use the `pathToLang` helper passed down to plugins as this callback
+				// Note that EC cannot use the `absolutePathToLang` helper passed down to plugins as this callback
 				// is also called in the context of the `<Code>` component.
-				return pathToLang(file.path, { starlightConfig, astroConfig });
+				return absolutePathToLang(file.path, { starlightConfig, astroConfig });
 			},
 			plugins,
 			...rest,

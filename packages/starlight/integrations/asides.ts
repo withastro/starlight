@@ -24,7 +24,7 @@ interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
 	useTranslations: StarlightPluginConfigSetupProps['useTranslations'];
-	pathToLang: StarlightPluginConfigSetupProps['pathToLang'];
+	absolutePathToLang: StarlightPluginConfigSetupProps['absolutePathToLang'];
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -153,7 +153,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const lang = options.pathToLang(file.path);
+		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === undefined || !isNodeDirective(node)) {

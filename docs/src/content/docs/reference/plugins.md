@@ -33,7 +33,7 @@ interface StarlightPlugin {
       isRestart: boolean;
       logger: AstroIntegrationLogger;
       useTranslations: (lang: string) => I18nT;
-      pathToLang: (path: string) => string;
+      absolutePathToLang: (path: string) => string;
     }) => void | Promise<void>;
   };
 }
@@ -273,15 +273,15 @@ The example above will log a message that includes a built-in UI string for the 
 [plugin-use-translations] Built with Starlight
 ```
 
-#### `pathToLang`
+#### `absolutePathToLang`
 
 **type:** `(path: string) => string`
 
-A callback function to get the language for a given full file path.
+Call `absolutePathToLang()` with an absolute file path to get the language for that file.
 
-This can be particularly useful in [remark or rehype plugins](https://docs.astro.build/en/guides/markdown-content/#markdown-plugins) that a Starlight plugin may use to process Markdown or MDX files.
-The [virtual file format](https://github.com/vfile/vfile) used by such plugins includes the [full path](https://github.com/vfile/vfile#filepath) of the file being processed, which can be used with `pathToLang` to determine the language of the file.
-The returned language can be used with the [`useTranslations`](#usetranslations) helper to get UI strings for that language.
+This can be particularly useful when adding [remark or rehype plugins](https://docs.astro.build/en/guides/markdown-content/#markdown-plugins) to process Markdown or MDX files.
+The [virtual file format](https://github.com/vfile/vfile) used by these plugins includes the [absolute path](https://github.com/vfile/vfile#filepath) of the file being processed, which can be used with `absolutePathToLang()` to determine the language of the file.
+The returned language can be used with the [`useTranslations()`](#usetranslations) helper to get UI strings for that language.
 
 For example, given the following Starlight configuration:
 
@@ -298,15 +298,17 @@ starlight({
 });
 ```
 
-A plugin can determine the language of a file using its full path:
+A plugin can determine the language of a file using its absolute path:
 
-```ts {6} /fr/
+```ts {6-8} /fr/
 // plugin.ts
 export default {
   name: 'plugin-use-translations',
   hooks: {
-    'config:setup'({ useTranslations, logger }) {
-      const lang = pathToLang('/path/to/project/src/content/docs/fr/index.mdx');
+    'config:setup'({ absolutePathToLang, useTranslations, logger }) {
+      const lang = absolutePathToLang(
+        '/absolute/path/to/project/src/content/docs/fr/index.mdx'
+      );
       const t = useTranslations(lang);
       logger.info(t('aside.tip'));
     },

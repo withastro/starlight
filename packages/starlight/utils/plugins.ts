@@ -58,8 +58,8 @@ export async function runPlugins(
 		pluginTranslations
 	);
 
-	function pathToLang(path: string) {
-		return getPathFromLang(path, { astroConfig: context.config, starlightConfig });
+	function absolutePathToLang(path: string) {
+		return getAbsolutePathFromLang(path, { astroConfig: context.config, starlightConfig });
 	}
 
 	// A list of Astro integrations added by the various plugins.
@@ -106,7 +106,7 @@ export async function runPlugins(
 			isRestart: context.isRestart,
 			logger: context.logger.fork(name),
 			useTranslations,
-			pathToLang,
+			absolutePathToLang,
 		});
 	}
 
@@ -118,7 +118,7 @@ export async function runPlugins(
 		);
 	}
 
-	return { integrations, starlightConfig, pluginTranslations, useTranslations, pathToLang };
+	return { integrations, starlightConfig, pluginTranslations, useTranslations, absolutePathToLang };
 }
 
 export function injectPluginTranslationsTypes(
@@ -265,7 +265,7 @@ const configSetupHookSchema = z
 				 */
 				useTranslations: z.any() as z.Schema<ReturnType<typeof createTranslationSystemFromFs>>,
 				/**
-				 * A callback function to get the language for a given full file path. The returned
+				 * A callback function to get the language for a given absolute file path. The returned
 				 * language can be used with the `useTranslations` helper to get UI strings for that
 				 * language.
 				 *
@@ -277,8 +277,8 @@ const configSetupHookSchema = z
 				 * {
 				 * 	name: 'My Starlight Plugin',
 				 *	hooks: {
-				 * 		'config:setup'({ pathToLang, useTranslations, logger }) {
-				 * 			const lang = pathToLang('/path/to/project/src/content/docs/fr/index.mdx');
+				 * 		'config:setup'({ absolutePathToLang, useTranslations, logger }) {
+				 * 			const lang = absolutePathToLang('/absolute/path/to/project/src/content/docs/fr/index.mdx');
 				 * 			const t = useTranslations(lang);
 				 * 			logger.info(t('aside.tip'));
 				 * 		  // ^ Logs 'Astuce' to the console.
@@ -286,7 +286,7 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				pathToLang: z.function(z.tuple([z.string()]), z.string()),
+				absolutePathToLang: z.function(z.tuple([z.string()]), z.string()),
 			}),
 		]),
 		z.union([z.void(), z.promise(z.void())])

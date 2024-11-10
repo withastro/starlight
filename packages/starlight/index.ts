@@ -59,7 +59,7 @@ export default function StarlightIntegration({
 
 				const integrations = pluginResult.integrations;
 				const useTranslations = pluginResult.useTranslations;
-				const pathToLang = pluginResult.pathToLang;
+				const absolutePathToLang = pluginResult.absolutePathToLang;
 				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
 
@@ -119,7 +119,7 @@ export default function StarlightIntegration({
 								starlightConfig,
 								astroConfig: config,
 								useTranslations,
-								pathToLang,
+								absolutePathToLang,
 							}),
 						],
 						rehypePlugins: [rehypeRtlCodeSupport()],

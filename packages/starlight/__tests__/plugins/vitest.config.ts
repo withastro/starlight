@@ -59,15 +59,15 @@ export default defineVitestConfig({
 						},
 					});
 				},
-				async 'config:setup'({ config, updateConfig, useTranslations, pathToLang }) {
+				async 'config:setup'({ config, updateConfig, useTranslations, absolutePathToLang }) {
 					// Fake an async operation to ensure that the plugin system can handle async hooks.
 					await Promise.resolve();
 
 					const docsUrl = new URL('../src/content/docs/', import.meta.url);
 
 					// To test that a plugin can access UI strings in the plugin context using the
-					// `useTranslations()` helper and also use the `pathToLang()` helper, we generate a
-					// bunch of expected values that are JSON stringified, passed to the config through the
+					// `useTranslations()` helper and also use the `absolutePathToLang()` helper, we generate
+					// a bunch of expected values that are JSON stringified, passed to the config through the
 					// `titleDelimiter` option, and later parsed and verified in a test.
 					const result = {
 						uiStrings: [
@@ -77,9 +77,9 @@ export default defineVitestConfig({
 							useTranslations('en')('testPlugin3.doThing'),
 						],
 						langs: [
-							pathToLang(new URL('./en/index.md', docsUrl).pathname),
-							pathToLang(new URL('./pt-br/index.md', docsUrl).pathname),
-							pathToLang(new URL('./index.md', docsUrl).pathname),
+							absolutePathToLang(new URL('./en/index.md', docsUrl).pathname),
+							absolutePathToLang(new URL('./pt-br/index.md', docsUrl).pathname),
+							absolutePathToLang(new URL('./index.md', docsUrl).pathname),
 						],
 					};
 

@@ -1,10 +1,12 @@
 import type { AstroConfig } from 'astro';
+import { AstroError } from 'astro/errors';
 import type { StarlightConfig } from '../../types';
+import { localeToLang } from './localeToLang';
 import { slugToLocale } from './slugToLocale';
 
-/** Get current locale from the full file path. */
-export function pathToLocale(
-	path: string | undefined,
+/** Get current language from an absolute file path. */
+export function absolutePathToLang(
+	path: string,
 	{
 		starlightConfig,
 		astroConfig,
@@ -12,7 +14,7 @@ export function pathToLocale(
 		starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 		astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
 	}
-): string | undefined {
+) {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
 	const docsDir = new URL('content/docs/', srcDir);
 	// Format path to unix style path.
@@ -23,5 +25,14 @@ export function pathToLocale(
 	// Strip docs path leaving only content collection file ID.
 	// Example: /Users/houston/repo/src/content/docs/en/guide.md => en/guide.md
 	const slug = path?.replace(docsDir.pathname, '');
-	return slugToLocale(slug, starlightConfig);
+	// If the provided path is not a valid docs path, throw an error.
+	if (path === slug) {
+		throw new AstroError(
+			`Invalid file path: ${path}`,
+			'The `absolutePathToLang()` function can only be used with absolute paths for files in the docs directory.\n' +
+				'Learn more about `absolutePathToLang()` at https://starlight.astro.build/reference/plugins/#absolutepathtolang'
+		);
+	}
+	const locale = slugToLocale(slug, starlightConfig);
+	return localeToLang(starlightConfig, locale);
 }

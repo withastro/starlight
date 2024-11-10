@@ -1,4 +1,4 @@
-import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { describe, expect, test } from 'vitest';
@@ -6,7 +6,7 @@ import { starlightAsides, remarkDirectivesRestoration } from '../../integrations
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
-import { pathToLang as getPathFromLang } from '../../integrations/shared/pathToLang';
+import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Asides Tests',
@@ -25,8 +25,8 @@ const useTranslations = createTranslationSystemFromFs(
 	{ srcDir: new URL('./_src/', import.meta.url) }
 );
 
-function pathToLang(path: string) {
-	return getPathFromLang(path, { astroConfig, starlightConfig });
+function absolutePathToLang(path: string) {
+	return getAbsolutePathFromLang(path, { astroConfig, starlightConfig });
 }
 
 const processor = await createMarkdownProcessor({
@@ -35,7 +35,7 @@ const processor = await createMarkdownProcessor({
 			starlightConfig,
 			astroConfig,
 			useTranslations,
-			pathToLang,
+			absolutePathToLang,
 		}),
 		// The restoration plugin is run after the asides and any other plugin that may have been
 		// injected by Starlight plugins.
@@ -43,8 +43,19 @@ const processor = await createMarkdownProcessor({
 	],
 });
 
+function renderMarkdown(
+	content: string,
+	options: { fileURL?: URL; processor?: MarkdownProcessor } = {}
+) {
+	return (options.processor ?? processor).render(
+		content,
+		// @ts-expect-error fileURL is part of MarkdownProcessor's options
+		{ fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url) }
+	);
+}
+
 test('generates aside', async () => {
-	const res = await processor.render(`
+	const res = await renderMarkdown(`
 :::note
 Some text
 :::
@@ -59,7 +70,7 @@ describe('default labels', () => {
 		['caution', 'Caution'],
 		['danger', 'Danger'],
 	])('%s has label %s', async (type, label) => {
-		const res = await processor.render(`
+		const res = await renderMarkdown(`
 :::${type}
 Some text
 :::
@@ -72,7 +83,7 @@ Some text
 describe('custom labels', () => {
 	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom label', async (type) => {
 		const label = 'Custom Label';
-		const res = await processor.render(`
+		const res = await renderMarkdown(`
 :::${type}[${label}]
 Some text
 :::
@@ -87,7 +98,7 @@ describe('custom labels with nested markdown', () => {
 		const label = 'Custom `code` Label';
 		const labelWithoutMarkdown = 'Custom code Label';
 		const labelHtml = 'Custom <code>code</code> Label';
-		const res = await processor.render(`
+		const res = await renderMarkdown(`
 :::${type}[${label}]
 Some text
 :::
@@ -104,7 +115,7 @@ describe('custom labels with doubly-nested markdown', () => {
 			const label = 'Custom **strong with _emphasis_** Label';
 			const labelWithoutMarkdown = 'Custom strong with emphasis Label';
 			const labelHtml = 'Custom <strong>strong with <em>emphasis</em></strong> Label';
-			const res = await processor.render(`
+			const res = await renderMarkdown(`
 :::${type}[${label}]
 Some text
 :::
@@ -116,7 +127,7 @@ Some text
 });
 
 test('ignores unknown directive variants', async () => {
-	const res = await processor.render(`
+	const res = await renderMarkdown(`
 :::unknown
 Some text
 :::
@@ -125,7 +136,7 @@ Some text
 });
 
 test('handles complex children', async () => {
-	const res = await processor.render(`
+	const res = await renderMarkdown(`
 :::note
 Paragraph [link](/href/).
 
@@ -143,7 +154,7 @@ More.
 });
 
 test('nested asides', async () => {
-	const res = await processor.render(`
+	const res = await renderMarkdown(`
 ::::note
 Note contents.
 
@@ -157,7 +168,7 @@ Nested tip.
 });
 
 test('nested asides with custom titles', async () => {
-	const res = await processor.render(`
+	const res = await renderMarkdown(`
 :::::caution[Caution with a custom title]
 Nested caution.
 
@@ -192,13 +203,12 @@ describe('translated labels in French', () => {
 		['caution', 'Attention'],
 		['danger', 'Danger'],
 	])('%s has label %s', async (type, label) => {
-		const res = await processor.render(
+		const res = await renderMarkdown(
 			`
 :::${type}
 Some text
 :::
 `,
-			// @ts-expect-error fileURL is part of MarkdownProcessor's options
 			{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
 		);
 		expect(res.code).includes(`aria-label="${label}"`);
@@ -220,17 +230,17 @@ test('runs without locales config', async () => {
 					srcDir: new URL('./_src/', import.meta.url),
 				},
 				useTranslations,
-				pathToLang,
+				absolutePathToLang,
 			}),
 			remarkDirectivesRestoration,
 		],
 	});
-	const res = await processor.render(':::note\nTest\n::');
+	const res = await renderMarkdown(':::note\nTest\n::', { processor });
 	expect(res.code.includes('aria-label=Note"'));
 });
 
 test('transforms back unhandled text directives', async () => {
-	const res = await processor.render(
+	const res = await renderMarkdown(
 		`This is a:test of a sentence with a text:name[content]{key=val} directive.`
 	);
 	expect(res.code).toMatchInlineSnapshot(`
@@ -239,14 +249,14 @@ test('transforms back unhandled text directives', async () => {
 });
 
 test('transforms back unhandled leaf directives', async () => {
-	const res = await processor.render(`::video[Title]{v=xxxxxxxxxxx}`);
+	const res = await renderMarkdown(`::video[Title]{v=xxxxxxxxxxx}`);
 	expect(res.code).toMatchInlineSnapshot(`
 		"<p>::video[Title]{v="xxxxxxxxxxx"}</p>"
 	`);
 });
 
 test('does not add any whitespace character after any unhandled directive', async () => {
-	const res = await processor.render(`## Environment variables (astro:env)`);
+	const res = await renderMarkdown(`## Environment variables (astro:env)`);
 	expect(res.code).toMatchInlineSnapshot(
 		`"<h2 id="environment-variables-astroenv">Environment variables (astro:env)</h2>"`
 	);
@@ -263,7 +273,7 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 					srcDir: new URL('./_src/', import.meta.url),
 				},
 				useTranslations,
-				pathToLang,
+				absolutePathToLang,
 			}),
 			// A custom remark plugin injected by a Starlight plugin through an Astro integration would
 			// run before the restoration plugin.
@@ -281,8 +291,9 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 		],
 	});
 
-	const res = await processor.render(
-		`This is a:test of a sentence with a :abbr[SL]{name="Starlight"} directive handled by another remark plugin and some other text:name[content]{key=val} directives not handled by any plugin.`
+	const res = await renderMarkdown(
+		`This is a:test of a sentence with a :abbr[SL]{name="Starlight"} directive handled by another remark plugin and some other text:name[content]{key=val} directives not handled by any plugin.`,
+		{ processor }
 	);
 	expect(res.code).toMatchInlineSnapshot(`
 		"<p>This is a:test of a sentence with a TEXT FROM REMARK PLUGIN directive handled by another remark plugin and some other text:name[content]{key="val"} directives not handled by any plugin.</p>"
@@ -299,7 +310,7 @@ test('does not transform back directive nodes with data', async () => {
 					srcDir: new URL('./_src/', import.meta.url),
 				},
 				useTranslations,
-				pathToLang,
+				absolutePathToLang,
 			}),
 			// A custom remark plugin updating the node with data that should be consumed by rehype.
 			function customRemarkPlugin() {
@@ -316,7 +327,9 @@ test('does not transform back directive nodes with data', async () => {
 		],
 	});
 
-	const res = await processor.render(`This method is available in the :api[thing] API.`);
+	const res = await renderMarkdown(`This method is available in the :api[thing] API.`, {
+		processor,
+	});
 	expect(res.code).toMatchInlineSnapshot(
 		`"<p>This method is available in the <span class="api">thing</span> API.</p>"`
 	);

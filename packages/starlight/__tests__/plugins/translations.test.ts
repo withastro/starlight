@@ -1,6 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { useTranslations } from '../../utils/translations';
+import { runPlugins } from '../../utils/plugins';
+import { createTestPluginContext } from '../test-plugin-utils';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -59,7 +61,7 @@ test('can access UI strings in the plugin context using useTranslations()', () =
 	expect(uiStrings[2]).toBe('Do the Plugin 3 thing');
 });
 
-test('can infer langs from a full path in the plugin context using pathToLang()', () => {
+test('can infer langs from an absolute path in the plugin context using absolutePathToLang()', () => {
 	const { langs } = JSON.parse(config.titleDelimiter);
 
 	// The default language.
@@ -68,4 +70,37 @@ test('can infer langs from a full path in the plugin context using pathToLang()'
 	expect(langs[1]).toBe('pt-BR');
 	// A page not matching any language defaults to the default language.
 	expect(langs[2]).toBe('en');
+});
+
+test('throws when using absolutePathToLang() with a path that is not absolute and in the docs directory', async () => {
+	expect.assertions(2);
+
+	await runPlugins(
+		{ title: 'Test Docs' },
+		[
+			{
+				name: 'test-plugin',
+				hooks: {
+					'config:setup'({ absolutePathToLang }) {
+						expect(() => absolutePathToLang(new URL('../src/index.md', import.meta.url).pathname))
+							.toThrowErrorMatchingInlineSnapshot(`
+							"[AstroUserError]:
+								Invalid file path: /Users/hideo/Temp/starlight/refactor-inject-translations/starlight/packages/starlight/__tests__/src/index.md
+							Hint:
+								The \`absolutePathToLang()\` function can only be used with absolute paths for files in the docs directory.
+								Learn more about \`absolutePathToLang()\` at https://starlight.astro.build/reference/plugins/#absolutepathtolang"
+						`);
+						expect(() => absolutePathToLang('en/index.md')).toThrowErrorMatchingInlineSnapshot(`
+							"[AstroUserError]:
+								Invalid file path: /en/index.md
+							Hint:
+								The \`absolutePathToLang()\` function can only be used with absolute paths for files in the docs directory.
+								Learn more about \`absolutePathToLang()\` at https://starlight.astro.build/reference/plugins/#absolutepathtolang"
+						`);
+					},
+				},
+			},
+		],
+		createTestPluginContext()
+	);
 });
