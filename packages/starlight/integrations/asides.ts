@@ -14,17 +14,13 @@ import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { StarlightConfig, StarlightPlugin } from '../types';
-
-type StarlightPluginConfigSetupProps = Parameters<
-	NonNullable<StarlightPlugin['hooks']['config:setup']>
->[0];
+import type { HookParameters, StarlightConfig } from '../types';
 
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
-	useTranslations: StarlightPluginConfigSetupProps['useTranslations'];
-	absolutePathToLang: StarlightPluginConfigSetupProps['absolutePathToLang'];
+	useTranslations: HookParameters<'config:setup'>['useTranslations'];
+	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */

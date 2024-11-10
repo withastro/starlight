@@ -1,11 +1,11 @@
-import type { AstroIntegration, HookParameters } from 'astro';
+import type { AstroIntegration, HookParameters as AstroHookParameters } from 'astro';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
 import { AstroError } from 'astro/errors';
 import type { UserI18nSchema } from './translations';
 import { createTranslationSystemFromFs } from './translations-fs';
-import { pathToLang as getPathFromLang } from '../integrations/shared/pathToLang';
+import { absolutePathToLang as getAbsolutePathFromLang } from '../integrations/shared/absolutePathToLang';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -123,7 +123,7 @@ export async function runPlugins(
 
 export function injectPluginTranslationsTypes(
 	translations: PluginTranslations,
-	injectTypes: HookParameters<'astro:config:done'>['injectTypes']
+	injectTypes: AstroHookParameters<'astro:config:done'>['injectTypes']
 ) {
 	const allKeys = new Set<string>();
 
@@ -377,6 +377,11 @@ type StarlightPluginsUserConfig = z.input<typeof starlightPluginsConfigSchema>;
 
 export type StarlightPlugin = z.input<typeof starlightPluginSchema>;
 
+export type HookParameters<
+	Hook extends keyof StarlightPlugin['hooks'],
+	HookFn = StarlightPlugin['hooks'][Hook],
+> = HookFn extends (...args: any) => any ? Parameters<HookFn>[0] : never;
+
 export type StarlightUserConfigWithPlugins = StarlightUserConfig & {
 	/**
 	 * A list of plugins to extend Starlight with.
@@ -391,7 +396,7 @@ export type StarlightUserConfigWithPlugins = StarlightUserConfig & {
 };
 
 export type StarlightPluginContext = Pick<
-	Parameters<NonNullable<AstroIntegration['hooks']['astro:config:setup']>>[0],
+	AstroHookParameters<'astro:config:setup'>,
 	'command' | 'config' | 'isRestart' | 'logger'
 >;
 

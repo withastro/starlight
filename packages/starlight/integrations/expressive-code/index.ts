@@ -5,7 +5,7 @@ import {
 } from 'astro-expressive-code';
 import { addClassName } from 'astro-expressive-code/hast';
 import type { AstroIntegration } from 'astro';
-import type { StarlightConfig, StarlightPlugin } from '../../types';
+import type { HookParameters, StarlightConfig } from '../../types';
 import { absolutePathToLang } from '../shared/absolutePathToLang';
 import { slugToLocale } from '../shared/slugToLocale';
 import { localeToLang } from '../shared/localeToLang';
@@ -64,9 +64,7 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 
 type StarlightEcIntegrationOptions = {
 	starlightConfig: StarlightConfig;
-	useTranslations: Parameters<
-		NonNullable<StarlightPlugin['hooks']['config:setup']>
-	>[0]['useTranslations'];
+	useTranslations: HookParameters<'config:setup'>['useTranslations'];
 };
 
 /**
