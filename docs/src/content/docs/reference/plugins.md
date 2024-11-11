@@ -271,17 +271,17 @@ export default {
   name: 'plugin-use-translations',
   hooks: {
     'config:setup'({ useTranslations, logger }) {
-      const t = useTranslations('en');
+      const t = useTranslations('zh-CN');
       logger.info(t('builtWithStarlight.label'));
     },
   },
 };
 ```
 
-The example above will log a message that includes a built-in UI string for the English language:
+The example above will log a message that includes a built-in UI string for the Simplified Chinese language:
 
 ```shell
-[plugin-use-translations] Built with Starlight
+[plugin-use-translations] 基于 Starlight 构建
 ```
 
 #### `absolutePathToLang`
