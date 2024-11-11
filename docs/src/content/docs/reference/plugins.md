@@ -261,7 +261,7 @@ The example above will log a message that includes the provided info message:
 
 **type:** `(lang: string) => I18nT`
 
-Call `useTranslations()` with a language tag to generate a utility function that provides access to UI strings for that language.
+Call `useTranslations()` with a BCP-47 language tag to generate a utility function that provides access to UI strings for that language.
 `useTranslations()` returns an equivalent of the `Astro.locals.t()` API that is available in Astro components.
 To learn more about the available APIs, see the [“Using UI translations”](/guides/i18n/#using-ui-translations) guide.
 
