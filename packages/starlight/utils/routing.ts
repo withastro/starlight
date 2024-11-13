@@ -51,9 +51,9 @@ const docs: StarlightDocsEntry[] = (
 		// In production, filter out drafts.
 		return import.meta.env.MODE !== 'production' || data.draft === false;
 	})) ?? []
-).map(({ slug, ...entry }) => ({
+).map((entry) => ({
 	...entry,
-	slug: normalizeIndexSlug(slug),
+	slug: normalizeIndexSlug(entry.id),
 }));
 
 function getRoutes(): Route[] {
