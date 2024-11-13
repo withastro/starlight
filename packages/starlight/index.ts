@@ -7,7 +7,6 @@
 /// <reference path="./i18n.d.ts" />
 /// <reference path="./virtual.d.ts" />
 
-import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
@@ -96,18 +95,19 @@ export default function StarlightIntegration({
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
 				}
-				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
-					integrations.push(mdx({ optimize: true }));
-				}
 
 				// Add Starlight directives restoration integration at the end of the list so that remark
 				// plugins injected by Starlight plugins through Astro integrations can handle text and
 				// leaf directives before they are transformed back to their original form.
 				integrations.push(starlightDirectivesRestorationIntegration());
 
+				// TODO(HiDeoo) `astroExpressiveCode()` has to come before `mdx()` so if the peer dep
+				// change is persisted, we probably want to add some tests here with some clear instruction
+				// on how users should order their integrations.
+
 				// Add integrations immediately after Starlight in the config array.
-				// e.g. if a user has `integrations: [starlight(), tailwind()]`, then the order will be
-				// `[starlight(), expressiveCode(), sitemap(), mdx(), tailwind()]`.
+				// e.g. if a user has `integrations: [starlight(), mdx(), tailwind()]`, then the order will
+				// be `[starlight(), expressiveCode(), sitemap(), mdx(), tailwind()]`.
 				// This ensures users can add integrations before/after Starlight and we respect that order.
 				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
 				config.integrations.splice(selfIndex + 1, 0, ...integrations);
