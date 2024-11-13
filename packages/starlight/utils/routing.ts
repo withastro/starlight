@@ -1,6 +1,7 @@
-import type { GetStaticPathsItem } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import type { GetStaticPathsItem } from 'astro';
+import { BuiltInDefaultLocale } from './i18n';
 import {
 	type LocaleData,
 	localizedId,
@@ -9,7 +10,6 @@ import {
 	slugToParam,
 } from './slugs';
 import { validateLogoImports } from './validateLogoImports';
-import { BuiltInDefaultLocale } from './i18n';
 
 // Validate any user-provided logos imported correctly.
 // We do this here so all pages trigger it and at the top level so it runs just once.
@@ -57,13 +57,19 @@ const docs: StarlightDocsEntry[] = (
 }));
 
 function getRoutes(): Route[] {
-	const routes: Route[] = docs.map((entry) => ({
-		entry,
-		slug: entry.slug,
-		id: entry.id,
-		entryMeta: slugToLocaleData(entry.slug),
-		...slugToLocaleData(entry.slug),
-	}));
+	const routes: Route[] = docs.map((entry) => {
+		const slug = entry.slug ?? entry.id;
+		return {
+			entry: {
+				...entry,
+				slug
+			},
+			slug,
+			id: entry.id,
+			entryMeta: slugToLocaleData(slug),
+			...slugToLocaleData(slug),
+		}
+	});
 
 	// In multilingual sites, add required fallback routes.
 	if (config.isMultilingual) {
