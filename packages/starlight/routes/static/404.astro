@@ -38,7 +38,7 @@ const fallbackEntry: StarlightDocsEntry = {
 };
 
 const userEntry = await getEntry('docs', '404');
-const entry = userEntry || fallbackEntry;
+const entry = userEntry ? { ...userEntry, slug: userEntry.id } : fallbackEntry;
 const route: Route = { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
 ---
 
