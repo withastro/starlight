@@ -1,7 +1,8 @@
 ---
+import { render } from 'astro:content';
+import Page from '../components/Page.astro';
 import { generateRouteData } from '../utils/route-data';
 import type { Route } from '../utils/routing';
-import Page from '../components/Page.astro';
 
 export type Props = {
 	route: Route;
@@ -9,7 +10,7 @@ export type Props = {
 
 const { route } = Astro.props;
 
-const { Content, headings } = await route.entry.render();
+const { Content, headings } = await render(route.entry);
 const routeData = generateRouteData({ props: { ...route, headings }, url: Astro.url });
 ---
 
