@@ -44,6 +44,10 @@
     }
   ],
   "pnpm": {
+    "overrides": {
+      "vitest>vite": "6.0.0-beta.6",
+      "vite-node>vite": "6.0.0-beta.6"
+    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "@algolia/client-search",
