@@ -222,6 +222,9 @@ function treeify(routes: Route[], baseDir: string): Dir {
 		// Build the tree
 		.forEach((doc) => {
 			const parts = getBreadcrumbs(doc.id, baseDir);
+			// If the breadcrumb is empty, the document is at the root level so we can fallback to the
+			// document ID.
+			if (parts.length === 0) parts.push(doc.id);
 			let currentNode = treeRoot;
 
 			parts.forEach((part, index) => {
