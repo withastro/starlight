@@ -14,6 +14,8 @@ export function pathToLocale(
 	}
 ): string | undefined {
 	const srcDir = new URL(astroConfig.srcDir, astroConfig.root);
+	// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
+	// Note that this code is also changed in https://github.com/withastro/starlight/pull/2578
 	const docsDir = new URL('content/docs/', srcDir);
 	// Format path to unix style path.
 	path = path?.replace(/\\/g, '/');
