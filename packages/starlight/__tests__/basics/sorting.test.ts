@@ -5,15 +5,10 @@ vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
 		docs: [
 			['index.mdx', { title: 'first' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['guides/example.md', { title: 'second' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['reference/example.md', { title: 'third' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['reference/rod/foo.md', { title: 'fourth' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['reference/rod/zip.md', { title: 'fifth' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['reference/zoo.md', { title: 'sixth' }],
 		],
 	})

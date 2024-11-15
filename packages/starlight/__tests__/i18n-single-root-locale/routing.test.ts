@@ -6,7 +6,6 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Accueil' }],
 			['guides/authoring-content.mdx', { title: 'Authoring content' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/index.mdx', { title: 'Not the home page' }],
 		],
 	})

@@ -5,21 +5,13 @@ vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
 		docs: [
 			['fr/index.mdx', { title: 'Accueil' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/index.mdx', { title: 'Home page', sidebar: { order: 1 } }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['ar/index.mdx', { title: 'الصفحة الرئيسية' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/guides/authoring-content.md', { title: 'Authoring Markdown' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/404.md', { title: 'Not found' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['fr/route/distribuer.mdx', { title: 'Distribuer' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['fr/route/décoder.mdx', { title: 'Décoder' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['fr/référence/bricolage.mdx', { title: 'Bricolage' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['fr/référence/bénéfice.mdx', { title: 'Bénéfice' }],
 		],
 	})
