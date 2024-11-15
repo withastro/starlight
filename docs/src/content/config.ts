@@ -4,11 +4,11 @@ import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
 	docs: defineCollection({
-		loader: docsLoader('./src/content/docs'),
+		loader: docsLoader(),
 		schema: docsSchema(),
 	}),
 	i18n: defineCollection({
-		loader: i18nLoader('./src/content/i18n'),
+		loader: i18nLoader(),
 		schema: i18nSchema({
 			extend: z.object({
 				'component.preview': z.string().optional(),
