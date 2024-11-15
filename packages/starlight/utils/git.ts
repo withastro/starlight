@@ -55,8 +55,8 @@ function getRepoRoot(directory: string): string {
 	}
 }
 
-export function getAllNewestCommitDate(directory: string): [string, number][] {
-	const repoRoot = getRepoRoot(directory);
+export function getAllNewestCommitDate(rootPath: string, docsPath: string): [string, number][] {
+	const repoRoot = getRepoRoot(docsPath);
 
 	const gitLog = spawnSync(
 		'git',
@@ -67,7 +67,7 @@ export function getAllNewestCommitDate(directory: string): [string, number][] {
 			// In each entry include the name and status for each modified file
 			'--name-status',
 			'--',
-			directory,
+			docsPath,
 		],
 		{
 			cwd: repoRoot,
@@ -105,7 +105,7 @@ export function getAllNewestCommitDate(directory: string): [string, number][] {
 
 	return Array.from(latestDates.entries()).map(([file, date]) => {
 		const fileFullPath = resolve(repoRoot, file);
-		const fileInDirectory = relative(directory, fileFullPath);
+		const fileInDirectory = relative(rootPath, fileFullPath);
 
 		return [fileInDirectory, date];
 	});

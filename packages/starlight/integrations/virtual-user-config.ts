@@ -42,6 +42,8 @@ export function vitePluginStarlightUserConfig(
 	const resolveLocalPath = (path: string) =>
 		JSON.stringify(fileURLToPath(new URL(path, import.meta.url)));
 
+	// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
+	const rootPath = fileURLToPath(root);
 	const docsPath = resolve(fileURLToPath(srcDir), 'content/docs');
 
 	const virtualComponentModules = Object.fromEntries(
@@ -63,9 +65,9 @@ export function vitePluginStarlightUserConfig(
 		'virtual:starlight/git-info':
 			(command !== 'build'
 				? `import { makeAPI } from ${resolveLocalPath('../utils/git.ts')};` +
-					`const api = makeAPI(${JSON.stringify(docsPath)});`
+					`const api = makeAPI(${JSON.stringify(rootPath)});`
 				: `import { makeAPI } from ${resolveLocalPath('../utils/gitInlined.ts')};` +
-					`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(docsPath))});`) +
+					`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(rootPath, docsPath))});`) +
 			'export const getNewestCommitDate = api.getNewestCommitDate;',
 		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
 		'virtual:starlight/user-images': opts.logo

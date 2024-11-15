@@ -87,7 +87,7 @@ describe('getNewestCommitDate', () => {
 });
 
 describe('getAllNewestCommitDate', () => {
-	const { commitAllChanges, getFilePath, writeFile } = makeTestRepo();
+	const { commitAllChanges, getRepoPath, getFilePath, writeFile } = makeTestRepo();
 
 	test('returns the newest commit date', () => {
 		writeFile('added.md', 'content');
@@ -108,7 +108,7 @@ describe('getAllNewestCommitDate', () => {
 		writeFile('updated-same-day.md', 'content 1');
 		commitAllChanges('update updated.md', '2023-06-25T14:22:35Z');
 
-		const latestDates = new Map(getAllNewestCommitDate(getFilePath('')));
+		const latestDates = new Map(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
 
 		const expectedDates = new Map<string, ISODate>([
 			['added.md', '2022-09-18'],
@@ -130,7 +130,7 @@ describe('getAllNewestCommitDate', () => {
 	});
 
 	test('returns the newest commit date from inlined API', () => {
-		const api = makeInlineGitAPI(getAllNewestCommitDate(getFilePath('')));
+		const api = makeInlineGitAPI(getAllNewestCommitDate(getRepoPath(), getFilePath('')));
 
 		const expectedDates = new Map<string, ISODate>([
 			['added.md', '2022-09-18'],
@@ -146,7 +146,9 @@ describe('getAllNewestCommitDate', () => {
 	});
 
 	test('returns an empty list when the git history for the directory cannot be retrieved', () => {
-		expect(getAllNewestCommitDate(getFilePath('../not-a-starlight-test-repo'))).toStrictEqual([]);
+		expect(
+			getAllNewestCommitDate(getRepoPath(), getFilePath('../not-a-starlight-test-repo'))
+		).toStrictEqual([]);
 	});
 });
 

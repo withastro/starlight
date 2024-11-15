@@ -42,6 +42,9 @@ export function makeTestRepo(onPath?: string) {
 			// This sets both the author and committer dates to the provided date.
 			runInRepo('git', ['commit', '-m', message, '--date', date], { GIT_COMMITTER_DATE: date });
 		},
+		getRepoPath() {
+			return repoPath;
+		},
 		getFilePath(name: string) {
 			return join(repoPath, name);
 		},

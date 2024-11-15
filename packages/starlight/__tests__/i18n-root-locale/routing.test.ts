@@ -88,8 +88,8 @@ test('fallback routes use fallback entry last updated dates', () => {
 
 	expect(getNewestCommitDate).toHaveBeenCalledOnce();
 	expect(getNewestCommitDate).toHaveBeenCalledWith(
-		'guides/authoring-content.mdx'
-		//^ no `en/` prefix
+		'src/content/docs/guides/authoring-content.mdx'
+		//               ^ no `en/` prefix
 	);
 
 	getNewestCommitDate.mockRestore();
