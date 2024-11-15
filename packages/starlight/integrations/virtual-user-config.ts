@@ -15,11 +15,13 @@ export function vitePluginStarlightUserConfig(
 	opts: StarlightConfig,
 	{
 		build,
+		legacy,
 		root,
 		srcDir,
 		trailingSlash,
 	}: Pick<AstroConfig, 'root' | 'srcDir' | 'trailingSlash'> & {
 		build: Pick<AstroConfig['build'], 'format'>;
+		legacy: Pick<AstroConfig['legacy'], 'collections'>;
 	},
 	pluginTranslations: PluginTranslations
 ): NonNullable<ViteUserConfig['plugins']>[number] {
@@ -58,6 +60,7 @@ export function vitePluginStarlightUserConfig(
 		'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
 		'virtual:starlight/project-context': `export default ${JSON.stringify({
 			build: { format: build.format },
+			legacyCollections: legacy.collections,
 			root,
 			srcDir,
 			trailingSlash,

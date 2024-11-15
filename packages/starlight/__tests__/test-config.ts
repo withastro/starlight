@@ -6,6 +6,8 @@ import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-conf
 import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
 import { createTestPluginContext } from './test-plugin-utils';
 
+const testLegacyCollections = process.env.LEGACY_COLLECTIONS === 'true';
+
 export async function defineVitestConfig(
 	{ plugins, ...config }: StarlightUserConfigWithPlugins,
 	opts?: {
@@ -35,6 +37,7 @@ export async function defineVitestConfig(
 					srcDir,
 					build,
 					trailingSlash,
+					legacy: { collections: testLegacyCollections },
 				},
 				pluginTranslations
 			),

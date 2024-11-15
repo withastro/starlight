@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
+import project from 'virtual:starlight/project-context';
 import { docsSchema, i18nSchema } from '../schema';
-import type { StarlightDocsEntry } from '../utils/routing';
+import type { StarlightDocsCollectionEntry } from '../utils/routing';
 import { vi } from 'vitest';
 
 const frontmatterSchema = docsSchema()({
@@ -23,18 +24,26 @@ const frontmatterSchema = docsSchema()({
 });
 
 function mockDoc(
-	id: StarlightDocsEntry['id'],
+	docsFilePath: string,
 	data: z.input<typeof frontmatterSchema>,
 	body = ''
-): StarlightDocsEntry {
-	return {
-		id,
-		slug: id.replace(/\.[^\.]+$/, '').replace(/\/index$/, ''),
+): StarlightDocsCollectionEntry {
+	const slug = docsFilePath.replace(/\.[^\.]+$/, '').replace(/\/index$/, '');
+
+	const doc: StarlightDocsCollectionEntry = {
+		id: project.legacyCollections ? docsFilePath : slug,
 		body,
 		collection: 'docs',
 		data: frontmatterSchema.parse(data),
-		render: (() => {}) as StarlightDocsEntry['render'],
 	};
+
+	if (project.legacyCollections) {
+		doc.slug = slug;
+	} else {
+		doc.filePath = `src/content/docs/${docsFilePath}`;
+	}
+
+	return doc;
 }
 
 function mockDict(id: string, data: z.input<ReturnType<typeof i18nSchema>>) {
