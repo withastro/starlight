@@ -1,5 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import {
 	normalizeCollectionEntry,
@@ -35,7 +36,7 @@ const fallbackEntry: StarlightDocsEntry = {
 		draft: false,
 	},
 	// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
-	filePath: 'src/content/docs/404.md',
+	filePath: `${project.srcDir.replace(project.root, '')}src/content/docs/404.md`,
 };
 
 const userEntry = (await getEntry('docs', '404')) as StarlightDocsCollectionEntry;
