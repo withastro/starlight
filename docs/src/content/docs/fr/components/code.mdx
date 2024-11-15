@@ -85,14 +85,14 @@ Vous pouvez ensuite passer cette chaîne importée au composant `<Code>` pour l'
 # src/content/docs/example.mdx
 
 import { Code } from '@astrojs/starlight/components';
-import importedCode from '/src/env.d.ts?raw';
+import importedCode from '/tsconfig.json?raw';
 
-<Code code={importedCode} lang="ts" title="src/env.d.ts" />
+<Code code={importedCode} lang="json" title="tsconfig.json" />
 ```
 
-import importedCode from '/src/env.d.ts?raw';
+import importedCode from '../../../../../../examples/basics/tsconfig.json?raw';
 
-<Code slot="preview" code={importedCode} lang="ts" title="src/env.d.ts" />
+<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
 
 </Preview>
 
