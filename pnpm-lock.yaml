@@ -265,6 +265,9 @@ importers:
 
   packages/starlight/__e2e__/fixtures/basics:
     dependencies:
+      '@astrojs/mdx':
+        specifier: ^4.0.0-beta.3
+        version: 4.0.0-beta.3(astro@5.0.0-beta.8)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../../..
@@ -292,6 +295,9 @@ importers:
 
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
+      '@astrojs/mdx':
+        specifier: ^4.0.0-beta.3
+        version: 4.0.0-beta.3(astro@5.0.0-beta.8)
       '@astrojs/node':
         specifier: ^9.0.0-beta.3
         version: 9.0.0-beta.3(astro@5.0.0-beta.8)
@@ -591,6 +597,30 @@ packages:
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
       astro: 5.0.0-beta.7(typescript@5.6.3)
+      es-module-lexer: 1.5.4
+      estree-util-visit: 2.0.0
+      hast-util-to-html: 9.0.3
+      kleur: 4.1.5
+      rehype-raw: 7.0.0
+      remark-gfm: 4.0.0
+      remark-smartypants: 3.0.2
+      source-map: 0.7.4
+      unist-util-visit: 5.0.0
+      vfile: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@astrojs/mdx@4.0.0-beta.3(astro@5.0.0-beta.8):
+    resolution: {integrity: sha512-U8fWNOTpbGqxyvHQY/Uj2ucp8uUdBxHxInkH+2AcRQaL4ZYq0W/agufz+VsCt4DQkapvgREwIACsJ8WnoEE79A==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      astro: ^5.0.0-alpha.0
+    dependencies:
+      '@astrojs/markdown-remark': 6.0.0-beta.2
+      '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
+      acorn: 8.14.0
+      astro: 5.0.0-beta.8(@types/node@18.16.19)(typescript@5.6.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.3

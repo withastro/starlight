@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@astrojs/mdx": "^4.0.0-beta.3",
     "@astrojs/node": "^9.0.0-beta.3",
     "@astrojs/starlight": "workspace:*",
     "astro": "^5.0.0-beta.8"
