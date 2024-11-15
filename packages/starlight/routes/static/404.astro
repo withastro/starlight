@@ -1,8 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import EmptyContent from '../../components/EmptyMarkdown.md';
-import type { Route, StarlightDocsEntry } from '../../utils/routing';
+import {
+	normalizeCollectionEntry,
+	type Route,
+	type StarlightDocsCollectionEntry,
+	type StarlightDocsEntry,
+} from '../../utils/routing';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
 import CommonPage from '../common.astro';
 
@@ -17,7 +21,7 @@ const entryMeta = { dir, lang, locale };
 
 const fallbackEntry: StarlightDocsEntry = {
 	slug: '404',
-	id: '404.md' as StarlightDocsEntry['id'],
+	id: '404',
 	body: '',
 	collection: 'docs',
 	data: {
@@ -30,15 +34,12 @@ const fallbackEntry: StarlightDocsEntry = {
 		sidebar: { hidden: false, attrs: {} },
 		draft: false,
 	},
-	render: async () => ({
-		Content: EmptyContent,
-		headings: [],
-		remarkPluginFrontmatter: {},
-	}),
+	// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
+	filePath: 'src/content/docs/404.md',
 };
 
-const userEntry = await getEntry('docs', '404');
-const entry = userEntry ? { ...userEntry, slug: userEntry.id } : fallbackEntry;
+const userEntry = (await getEntry('docs', '404')) as StarlightDocsCollectionEntry;
+const entry = userEntry ? normalizeCollectionEntry(userEntry) : fallbackEntry;
 const route: Route = { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
 ---
 
