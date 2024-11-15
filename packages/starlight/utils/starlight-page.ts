@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
@@ -113,17 +114,19 @@ export async function generateStarlightPageRouteData({
 	const { isFallback, frontmatter, ...routeProps } = props;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
+	const id = slug;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar
 		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
 		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const pageDocsEntry: StarlightPageDocsEntry = {
-		id,
+		id: slug,
 		slug,
 		body: '',
 		collection: 'docs',
+		// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
+		filePath: `${project.srcDir.replace(project.root, '')}content/docs/${stripLeadingAndTrailingSlashes(slug)}.md}`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {
