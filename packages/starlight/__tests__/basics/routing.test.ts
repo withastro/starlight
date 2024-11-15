@@ -1,8 +1,9 @@
 import { type GetStaticPathsResult } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import project from 'virtual:starlight/project-context';
 import { expect, test, vi } from 'vitest';
-import { routes, paths, getRouteBySlugParam } from '../../utils/routing';
+import { routes, paths, getRouteBySlugParam, type Route } from '../../utils/routing';
 import { slugToParam } from '../../utils/slugs';
 
 vi.mock('astro:content', async () =>
@@ -20,7 +21,9 @@ test('test suite is using correct env', () => {
 });
 
 test('route slugs are normalized', () => {
-	const indexRoute = routes.find((route) => route.id.startsWith('index.md'));
+	const indexRoute = routes.find(
+		(route) => route.id === (project.legacyCollections ? 'index.mdx' : 'index')
+	);
 	expect(indexRoute?.slug).toBe('');
 });
 
@@ -32,7 +35,14 @@ test('routes contain copy of original doc as entry', async () => {
 		// Compare without slug as slugs can be normalized.
 		const { slug: _, ...entry } = route.entry;
 		const { slug: __, ...input } = doc;
-		expect(entry).toEqual(input);
+		if (project.legacyCollections) {
+			// When using legacy collections, the `filePath` property is added to the route entry.
+			expect(entry.filePath).toBeDefined();
+			const { filePath: _, ...legacyEntry } = entry;
+			expect(legacyEntry).toEqual(input);
+		} else {
+			expect(entry).toEqual(input);
+		}
 	}
 });
 
@@ -73,7 +83,11 @@ test('routes can be retrieved from their path parameters', () => {
 });
 
 test('routes includes drafts except in production', async () => {
-	expect(routes.find((route) => route.id === 'guides/authoring-content.mdx')).toBeTruthy();
+	const routeMatcher = (route: Route) =>
+		route.id ===
+		(project.legacyCollections ? 'guides/authoring-content.mdx' : 'guides/authoring-content');
+
+	expect(routes.find(routeMatcher)).toBeTruthy();
 
 	// Reset the modules registry so that re-importing `utils/routing.ts` re-evaluates the module and
 	// re-computes the routes. Re-importing the module is necessary because top-level imports cannot
@@ -84,7 +98,7 @@ test('routes includes drafts except in production', async () => {
 	// Re-import the module to re-evaluate it.
 	const { routes: prodRoutes } = await import('../../utils/routing');
 
-	expect(prodRoutes.find((route) => route.id === 'guides/authoring-content.mdx')).toBeFalsy();
+	expect(prodRoutes.find(routeMatcher)).toBeFalsy();
 
 	vi.unstubAllEnvs();
 	vi.resetModules();

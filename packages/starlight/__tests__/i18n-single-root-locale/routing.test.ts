@@ -1,4 +1,5 @@
 import { expect, test, vi } from 'vitest';
+import project from 'virtual:starlight/project-context';
 import { routes } from '../../utils/routing';
 
 vi.mock('astro:content', async () =>
@@ -12,7 +13,9 @@ vi.mock('astro:content', async () =>
 );
 
 test('route slugs are normalized', () => {
-	const indexRoute = routes.find((route) => route.id.startsWith('index.md'));
+	const indexRoute = routes.find(
+		(route) => route.id === (project.legacyCollections ? 'index.mdx' : 'index')
+	);
 	expect(indexRoute?.slug).toBe('');
 });
 
