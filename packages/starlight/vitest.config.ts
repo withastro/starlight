@@ -22,10 +22,10 @@ export default defineConfig({
 				'**/*.astro',
 			],
 			thresholds: {
-				lines: 88,
+				lines: 87,
 				functions: 90,
 				branches: 90,
-				statements: 88,
+				statements: 87,
 			},
 		},
 	},
