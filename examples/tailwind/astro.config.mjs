@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
+// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +27,8 @@ export default defineConfig({
 			],
 			customCss: ['./src/tailwind.css'],
 		}),
+		// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
+		mdx(),
 		tailwind({ applyBaseStyles: false }),
 	],
 });
