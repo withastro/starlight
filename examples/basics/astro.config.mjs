@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 // TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
