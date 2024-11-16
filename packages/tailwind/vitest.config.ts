@@ -5,7 +5,6 @@ export default defineConfig({
 		coverage: {
 			reportsDirectory: './__coverage__',
 			thresholds: {
-				autoUpdate: true,
 				lines: 94,
 				functions: 100,
 				branches: 85,
