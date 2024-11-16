@@ -8,6 +8,11 @@ overrides:
   vitest>vite: 6.0.0-beta.6
   vite-node>vite: 6.0.0-beta.6
 
+patchedDependencies:
+  starlight-links-validator@0.13.2:
+    hash: uzxiecwrihwm4whxdfjvzfhjsq
+    path: patches/starlight-links-validator@0.13.2.patch
+
 importers:
 
   .:
@@ -78,7 +83,7 @@ importers:
         version: 3.2.12
       starlight-links-validator:
         specifier: ^0.13.2
-        version: 0.13.2(@astrojs/starlight@packages+starlight)(astro@5.0.0-beta.7)
+        version: 0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.0-beta.7)
 
   examples/basics:
     dependencies:
@@ -5842,7 +5847,7 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.13.2(@astrojs/starlight@packages+starlight)(astro@5.0.0-beta.7):
+  /starlight-links-validator@0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.0-beta.7):
     resolution: {integrity: sha512-BP6vf+fj91LnQXPnggWVhZXhcSF1x6SHof0GRg+IGgY0idSbIU7OHE2SvLggs2fRZ5SflVqpCTpK0pQcOmYcDg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -5861,6 +5866,7 @@ packages:
       picomatch: 4.0.2
       unist-util-visit: 5.0.0
     dev: true
+    patched: true
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}

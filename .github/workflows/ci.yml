@@ -152,6 +152,4 @@ jobs:
 
       - name: Build docs site and check links
         working-directory: ./docs
-        run: pnpm build
-        env:
-          CHECK_LINKS: true
+        run: pnpm linkcheck

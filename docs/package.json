@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "tsc --noEmit",
+    "linkcheck": "CHECK_LINKS=true pnpm build --force",
     "astro": "astro",
     "lunaria:build": "lunaria build",
     "grammars": "node grammars/generate.mjs"

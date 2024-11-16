@@ -1,0 +1,28 @@
+diff --git a/libs/remark.ts b/libs/remark.ts
+index b3239f3ca44243cf48d3845443d3da14376216e6..322004af700df9c28d8fdf448061c3769d85d4b0 100644
+--- a/libs/remark.ts
++++ b/libs/remark.ts
+@@ -3,6 +3,7 @@ import 'mdast-util-mdx-jsx'
+ import nodePath from 'node:path'
+ import { fileURLToPath } from 'node:url'
+ 
++import type { MarkdownHeading } from 'astro'
+ import GitHubSlugger, { slug } from 'github-slugger'
+ import type { Nodes } from 'hast'
+ import { fromHtml } from 'hast-util-from-html'
+@@ -203,11 +204,10 @@ interface MdxIdAttribute {
+ 
+ declare module 'vfile' {
+   interface DataMap {
+-    astro?: {
+-      frontmatter?: {
+-        draft?: boolean
+-        slug?: string
+-      }
++    astro: {
++      headings?: MarkdownHeading[]
++      imagePaths?: string[]
++      frontmatter?: Record<string, any>
+     }
+   }
+ }
