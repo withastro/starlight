@@ -12,12 +12,12 @@ const pagefindTranslations = {
 			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
 };
+
+const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagefindTranslations) };
+if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
 ---
 
-<site-search
-	data-translations={JSON.stringify(pagefindTranslations)}
-	data-strip-trailing-slash={project.trailingSlash === 'never'}
->
+<site-search class={Astro.props.class} {...dataAttributes}>
 	<button
 		data-open-modal
 		disabled
