@@ -105,7 +105,9 @@ export function getAllNewestCommitDate(rootPath: string, docsPath: string): [str
 
 	return Array.from(latestDates.entries()).map(([file, date]) => {
 		const fileFullPath = resolve(repoRoot, file);
-		const fileInDirectory = relative(rootPath, fileFullPath);
+		let fileInDirectory = relative(rootPath, fileFullPath);
+		// Format path to unix style path.
+		fileInDirectory = fileInDirectory?.replace(/\\/g, '/');
 
 		return [fileInDirectory, date];
 	});
