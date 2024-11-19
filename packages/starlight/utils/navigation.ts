@@ -13,7 +13,7 @@ import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { BuiltInDefaultLocale, pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
-import { getLocaleRoutes, routes, type Route, type StarlightDocsEntry } from './routing';
+import { getLocaleRoutes, routes, type Route } from './routing';
 import { localeToLang, slugToPathname } from './slugs';
 import type { StarlightConfig } from './user-config';
 
