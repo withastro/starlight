@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.29.1
+
+### Patch Changes
+
+- [#2611](https://github.com/withastro/starlight/pull/2611) [`6059d96`](https://github.com/withastro/starlight/commit/6059d961a6b31fd7848b0c59411fc6370e62abab) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI string type issue in projects with multiple data content collections.
+
+- [#2606](https://github.com/withastro/starlight/pull/2606) [`10b15a7`](https://github.com/withastro/starlight/commit/10b15a7fcda4805dda622f893b6671b96a349161) Thanks [@delucis](https://github.com/delucis)! - Makes `<CardGrid>` more resilient to complex child content on smaller viewports
+
+- [#2605](https://github.com/withastro/starlight/pull/2605) [`ec7ab4f`](https://github.com/withastro/starlight/commit/ec7ab4f1df83052aa00c5f560adf7e7b8d61c9db) Thanks [@brianzelip](https://github.com/brianzelip)! - Exposes `SidebarPersister` component in package exports for use in custom overrides
+
+- [#2614](https://github.com/withastro/starlight/pull/2614) [`9a31980`](https://github.com/withastro/starlight/commit/9a319807c698f65b461f456c54c413081ab551f0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with custom pages using the `<StarlightPage />` component and a custom sidebar missing highlighting for the active page and navigation links.
+
+- [#2600](https://github.com/withastro/starlight/pull/2600) [`49aef17`](https://github.com/withastro/starlight/commit/49aef173811d05ae132729c92c3920a142ceeb7d) Thanks [@jdevega](https://github.com/jdevega)! - Adds Backstage social icon
+
+- [#2613](https://github.com/withastro/starlight/pull/2613) [`a73780f`](https://github.com/withastro/starlight/commit/a73780fb280feb5b96ffa94539633b2930bd8e76) Thanks [@delucis](https://github.com/delucis)! - Fixes support for `sidebar` frontmatter options in sidebar entries using `slug` or the string shorthand for internal links
+
 ## 0.29.0
 
 ### Minor Changes
