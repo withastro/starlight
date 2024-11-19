@@ -91,7 +91,7 @@ importers:
         specifier: ^4.0.0-beta.3
         version: 4.0.0-beta.3(astro@5.0.0-beta.7)
       '@astrojs/starlight':
-        specifier: ^0.29.0
+        specifier: ^0.29.1
         version: link:../../packages/starlight
       astro:
         specifier: ^5.0.0-beta.7
@@ -106,7 +106,7 @@ importers:
         specifier: ^0.12.0-beta.0
         version: 0.12.0-beta.0(astro@5.0.0-beta.7)
       '@astrojs/starlight':
-        specifier: ^0.29.0
+        specifier: ^0.29.1
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
         specifier: ^0.1.0
@@ -124,7 +124,7 @@ importers:
         specifier: ^4.0.0-beta.3
         version: 4.0.0-beta.3(astro@5.0.0-beta.7)
       '@astrojs/starlight':
-        specifier: ^0.29.0
+        specifier: ^0.29.1
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.3
