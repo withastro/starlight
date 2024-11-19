@@ -2,4 +2,4 @@
 '@astrojs/starlight': minor
 ---
 
-Add Backstage social icon
+Adds Backstage social icon
