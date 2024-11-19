@@ -70,8 +70,8 @@ importers:
         specifier: ^3.2.12
         version: 3.2.12
       starlight-links-validator:
-        specifier: ^0.12.1
-        version: 0.12.1(@astrojs/starlight@packages+starlight)(astro@4.16.10)
+        specifier: ^0.13.2
+        version: 0.13.2(@astrojs/starlight@packages+starlight)(astro@4.16.10)
 
   examples/basics:
     dependencies:
@@ -5820,8 +5820,8 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.12.1(@astrojs/starlight@packages+starlight)(astro@4.16.10):
-    resolution: {integrity: sha512-LhRuGaI9Rp7c7ltwcG0BfCZuAN1d15oYbDB4jXblJ6zsiFcrSGHNlDnKXJHEJZ6XhJ+eOpd1IsHLFLh5Sq6uHg==}
+  /starlight-links-validator@0.13.2(@astrojs/starlight@packages+starlight)(astro@4.16.10):
+    resolution: {integrity: sha512-BP6vf+fj91LnQXPnggWVhZXhcSF1x6SHof0GRg+IGgY0idSbIU7OHE2SvLggs2fRZ5SflVqpCTpK0pQcOmYcDg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
