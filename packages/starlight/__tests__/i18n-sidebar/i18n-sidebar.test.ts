@@ -12,7 +12,13 @@ vi.mock('astro:content', async () =>
 			['fr/manual-setup.mdx', { title: 'Installation manuelle' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['fr/environmental-impact.md', { title: 'Documents écologiques' }],
-			['guides/pages.mdx', { title: 'Pages' }],
+			[
+				'guides/pages.mdx',
+				{
+					title: 'Pages',
+					sidebar: { label: 'Pages Guide', badge: 'Test', attrs: { class: 'test' } },
+				},
+			],
 			['fr/guides/pages.mdx', { title: 'Pages' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Content in Markdown' }],
 			['fr/guides/authoring-content.mdx', { title: 'Création de contenu en Markdown' }],
@@ -69,11 +75,16 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": {},
-			        "badge": undefined,
+			        "attrs": {
+			          "class": "test",
+			        },
+			        "badge": {
+			          "text": "Test",
+			          "variant": "default",
+			        },
 			        "href": "/guides/pages",
 			        "isCurrent": false,
-			        "label": "Pages",
+			        "label": "Pages Guide",
 			        "type": "link",
 			      },
 			      {

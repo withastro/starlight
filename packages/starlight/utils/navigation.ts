@@ -142,8 +142,8 @@ function linkFromInternalSidebarLinkItem(
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
 	const slug = item.slug === 'index' ? '' : item.slug;
 	const localizedSlug = locale ? (slug ? locale + '/' + slug : locale) : slug;
-	const entry = routes.find((entry) => localizedSlug === entry.slug);
-	if (!entry) {
+	const route = routes.find((entry) => localizedSlug === entry.slug);
+	if (!route) {
 		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
 		if (hasExternalSlashes) {
 			throw new AstroError(
@@ -158,9 +158,15 @@ function linkFromInternalSidebarLinkItem(
 			);
 		}
 	}
+	const frontmatter = route.entry.data;
 	const label =
-		pickLang(item.translations, localeToLang(locale)) || item.label || entry.entry.data.title;
-	return makeSidebarLink(entry.slug, label, getSidebarBadge(item.badge, locale, label), item.attrs);
+		pickLang(item.translations, localeToLang(locale)) ||
+		item.label ||
+		frontmatter.sidebar?.label ||
+		frontmatter.title;
+	const badge = item.badge ?? frontmatter.sidebar?.badge;
+	const attrs = { ...frontmatter.sidebar?.attrs, ...item.attrs };
+	return makeSidebarLink(route.slug, label, getSidebarBadge(badge, locale, label), attrs);
 }
 
 /** Process sidebar link options to create a link entry. */
