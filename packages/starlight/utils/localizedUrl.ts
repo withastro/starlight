@@ -46,8 +46,6 @@ export function localizedUrl(
 	}
 	// Restore base
 	if (hasBase) url.pathname = base + url.pathname;
-	if (trailingSlash === 'never' && url.pathname.at(-1) === '/') {
-		url.pathname = url.pathname.slice(0, -1);
-	}
+	if (trailingSlash === 'never') url.pathname = stripTrailingSlash(url.pathname);
 	return url;
 }
