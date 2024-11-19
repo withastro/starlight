@@ -78,10 +78,20 @@ export async function mockedAstroContent({
 export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof docsSchema>[0]) {
 	const content = await vi.importActual<typeof import('astro:content')>('astro:content');
 	const schemas = await vi.importActual<typeof import('../schema')>('../schema');
+	const loaders = await vi.importActual<typeof import('../loader')>('../loader');
+
 	return {
 		collections: {
-			docs: content.defineCollection({ schema: schemas.docsSchema(docsUserSchema) }),
-			i18n: content.defineCollection({ type: 'data', schema: schemas.i18nSchema() }),
+			docs: content.defineCollection(
+				project.legacyCollections
+					? { schema: schemas.docsSchema(docsUserSchema) }
+					: { loader: loaders.docsLoader(), schema: schemas.docsSchema(docsUserSchema) }
+			),
+			i18n: content.defineCollection(
+				project.legacyCollections
+					? { type: 'data', schema: schemas.i18nSchema() }
+					: { loader: loaders.i18nLoader(), schema: schemas.i18nSchema() }
+			),
 		},
 	};
 }
