@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.29.2
+
+### Patch Changes
+
+- [#2616](https://github.com/withastro/starlight/pull/2616) [`128cc51`](https://github.com/withastro/starlight/commit/128cc51b416a1a934eabb1989c04b76517e77a04) Thanks [@delucis](https://github.com/delucis)! - Fixes an edge case to correctly avoid a trailing slash when navigating from a root locale homepage to another language via Starlight’s language switcher when `trailingSlash: 'never'` is set
+
 ## 0.29.1
 
 ### Patch Changes
