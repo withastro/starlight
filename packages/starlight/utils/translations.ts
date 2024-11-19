@@ -5,8 +5,13 @@ import type { i18nSchemaOutput } from '../schemas/i18n';
 import { createTranslationSystem } from './createTranslationSystem';
 import type { RemoveIndexSignature } from './types';
 
+// @ts-ignore - This may be a type error in projects without an i18n collection and running
+// `tsc --noEmit` in their project. Note that it is not possible to inline this type in
+// `UserI18nSchema` because this would break types for users having multiple data collections.
+type i18nCollection = CollectionEntry<'i18n'>;
+
 export type UserI18nSchema = 'i18n' extends DataCollectionKey
-	? CollectionEntry<'i18n'> extends { data: infer T }
+	? i18nCollection extends { data: infer T }
 		? i18nSchemaOutput & T
 		: i18nSchemaOutput
 	: i18nSchemaOutput;
