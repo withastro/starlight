@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
+// TODO(HiDeoo) Remove
+import starlightDemoPlugin from 'starlight-demo-plugin';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -187,7 +189,10 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 					]
-				: [],
+				: [
+						// TODO(HiDeoo) Remove
+						starlightDemoPlugin(),
+					],
 		}),
 	],
 });
