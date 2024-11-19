@@ -348,7 +348,7 @@ const intermediateSidebars = new Map<string | undefined, SidebarEntry[]>();
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
 	let intermediateSidebar = intermediateSidebars.get(locale);
 	if (!intermediateSidebar) {
-		intermediateSidebar = getSidebarFromConfig(config.sidebar, pathname, locale);
+		intermediateSidebar = getIntermediateSidebarFromConfig(config.sidebar, pathname, locale);
 		intermediateSidebars.set(locale, intermediateSidebar);
 	}
 	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
@@ -356,6 +356,16 @@ export function getSidebar(pathname: string, locale: string | undefined): Sideba
 
 /** Get the sidebar for the current page using the specified sidebar config. */
 export function getSidebarFromConfig(
+	sidebarConfig: StarlightConfig['sidebar'],
+	pathname: string,
+	locale: string | undefined
+): SidebarEntry[] {
+	const intermediateSidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
+	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
+}
+
+/** Get the intermediate sidebar for the current page using the specified sidebar config. */
+function getIntermediateSidebarFromConfig(
 	sidebarConfig: StarlightConfig['sidebar'],
 	pathname: string,
 	locale: string | undefined
