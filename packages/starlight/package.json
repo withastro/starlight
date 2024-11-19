@@ -52,6 +52,10 @@
       "types": "./components/MarkdownContent.astro.tsx",
       "import": "./components/MarkdownContent.astro"
     },
+    "./components/SidebarPersister.astro": {
+      "types": "./components/SidebarPersister.astro.tsx",
+      "import": "./components/SidebarPersister.astro"
+    },
     "./components/SidebarSublist.astro": {
       "types": "./components/SidebarSublist.astro.tsx",
       "import": "./components/SidebarSublist.astro"
