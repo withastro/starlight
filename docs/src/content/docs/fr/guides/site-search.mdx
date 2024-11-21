@@ -108,6 +108,15 @@ Si vous avez accès au [programme DocSearch d'Algolia](https://docsearch.algolia
 
 Avec cette configuration mise à jour, la barre de recherche de votre site ouvrira désormais une modale Algolia au lieu de celle par défaut.
 
+#### Configuration de DocSearch
+
+Le module d’extension DocSearch de Starlight supporte également la personnalisation du composant DocSearch avec les options supplémentaires suivantes :
+
+- `maxRecentSearches`: Limite le nombre de résultats affichés pour chaque groupe de recherche. La valeur par défaut est `5`.
+- `disableUserPersonalization`: Empêche DocSearch de sauvegarder les recherches récentes et favorites d'un utilisateur localement. La valeur par défaut est `false`.
+- `insights`: Active le plugin Algolia Insights et envoie les événements liés à toute recherche à votre index DocSearch. La valeur par défaut est `false`.
+- `searchParameters`: Un objet personnalisant les [paramètres de recherche Algolia](https://www.algolia.com/doc/api-reference/search-api-parameters/).
+
 #### Traduire l'interface utilisateur de DocSearch
 
 DocSearch fournit seulement des chaînes de l'interface utilisateur en anglais par défaut.

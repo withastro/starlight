@@ -108,6 +108,15 @@ title: 部分索引的页面
 
 像这样更新配置后，你站点上的搜索栏将会打开一个 Algolia 的模态框而不是默认的搜索模态框。
 
+#### DocSearch 配置
+
+Starlight DocSearch 插件还支持通过下面这些附加的选项来自定义 DocSearch 组件：
+
+- `maxResultsPerGroup`：限制每个搜索组所显示的结果数。默认值为 `5`。
+- `disableUserPersonalization`：阻止 DocSearch 将用户的最近搜索和收藏夹保存到本地存储。默认值为 `false`。
+- `insights`：启用 Algolia Insights 插件并将搜索事件发送到你的 DocSearch 索引。默认值为 `false`。
+- `searchParameters`：一个可用于自定义 [Algolia 搜索参数](https://www.algolia.com/doc/api-reference/search-api-parameters/)的对象。
+
 #### 翻译 DocSearch UI
 
 DocSearch 默认只提供了英语 UI 文本。

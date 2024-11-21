@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
+import { YAMLException } from 'js-yaml';
 
 describe('createTranslationSystemFromFs', () => {
 	test('creates a translation system that returns default strings', () => {
@@ -18,14 +19,21 @@ describe('createTranslationSystemFromFs', () => {
 	test('creates a translation system that uses custom strings', () => {
 		const useTranslations = createTranslationSystemFromFs(
 			{
-				locales: { en: { label: 'English', dir: 'ltr' } },
+				locales: {
+					en: { label: 'English', dir: 'ltr', lang: 'en' },
+					fr: { label: 'Français', dir: 'ltr', lang: 'fr' },
+				},
 				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
 			},
 			// Using `src/` to load custom files in this test fixture.
 			{ srcDir: new URL('./src/', import.meta.url) }
 		);
-		const t = useTranslations('en');
+		// From an i18n JSON file
+		let t = useTranslations('en');
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
+		// From an i18n YAML file
+		t = useTranslations('fr');
+		expect(t('page.editLink')).toMatchInlineSnapshot('"Rendre cette page différente"');
 	});
 
 	test('supports root locale', () => {
@@ -68,10 +76,20 @@ describe('createTranslationSystemFromFs', () => {
 		expect(() =>
 			createTranslationSystemFromFs(
 				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
-				// Using `malformed-src/` to trigger syntax error in bad JSON file.
-				{ srcDir: new URL('./malformed-src/', import.meta.url) }
+				// Using `malformed-json-src/` to trigger syntax error in bad JSON file.
+				{ srcDir: new URL('./malformed-json-src/', import.meta.url) }
 			)
 		).toThrow(SyntaxError);
+	});
+
+	test('throws on malformed i18n YAML', () => {
+		expect(() =>
+			createTranslationSystemFromFs(
+				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
+				// Using `malformed-yaml-src/` to trigger syntax error in bad YAML file.
+				{ srcDir: new URL('./malformed-yaml-src/', import.meta.url) }
+			)
+		).toThrow(YAMLException);
 	});
 
 	test('creates a translation system that uses custom strings injected by plugins', () => {

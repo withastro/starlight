@@ -1,5 +1,75 @@
 # @astrojs/starlight
 
+## 0.29.2
+
+### Patch Changes
+
+- [#2616](https://github.com/withastro/starlight/pull/2616) [`128cc51`](https://github.com/withastro/starlight/commit/128cc51b416a1a934eabb1989c04b76517e77a04) Thanks [@delucis](https://github.com/delucis)! - Fixes an edge case to correctly avoid a trailing slash when navigating from a root locale homepage to another language via Starlight’s language switcher when `trailingSlash: 'never'` is set
+
+## 0.29.1
+
+### Patch Changes
+
+- [#2611](https://github.com/withastro/starlight/pull/2611) [`6059d96`](https://github.com/withastro/starlight/commit/6059d961a6b31fd7848b0c59411fc6370e62abab) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI string type issue in projects with multiple data content collections.
+
+- [#2606](https://github.com/withastro/starlight/pull/2606) [`10b15a7`](https://github.com/withastro/starlight/commit/10b15a7fcda4805dda622f893b6671b96a349161) Thanks [@delucis](https://github.com/delucis)! - Makes `<CardGrid>` more resilient to complex child content on smaller viewports
+
+- [#2605](https://github.com/withastro/starlight/pull/2605) [`ec7ab4f`](https://github.com/withastro/starlight/commit/ec7ab4f1df83052aa00c5f560adf7e7b8d61c9db) Thanks [@brianzelip](https://github.com/brianzelip)! - Exposes `SidebarPersister` component in package exports for use in custom overrides
+
+- [#2614](https://github.com/withastro/starlight/pull/2614) [`9a31980`](https://github.com/withastro/starlight/commit/9a319807c698f65b461f456c54c413081ab551f0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with custom pages using the `<StarlightPage />` component and a custom sidebar missing highlighting for the active page and navigation links.
+
+- [#2600](https://github.com/withastro/starlight/pull/2600) [`49aef17`](https://github.com/withastro/starlight/commit/49aef173811d05ae132729c92c3920a142ceeb7d) Thanks [@jdevega](https://github.com/jdevega)! - Adds Backstage social icon
+
+- [#2613](https://github.com/withastro/starlight/pull/2613) [`a73780f`](https://github.com/withastro/starlight/commit/a73780fb280feb5b96ffa94539633b2930bd8e76) Thanks [@delucis](https://github.com/delucis)! - Fixes support for `sidebar` frontmatter options in sidebar entries using `slug` or the string shorthand for internal links
+
+## 0.29.0
+
+### Minor Changes
+
+- [#2551](https://github.com/withastro/starlight/pull/2551) [`154c8e3`](https://github.com/withastro/starlight/commit/154c8e337819c7d7ebf4ff4dd55db0d10607620b) Thanks [@hippotastic](https://github.com/hippotastic)! - Updates the `astro-expressive-code` dependency to the latest version (0.38).
+
+  The new version allows using `ec.config.mjs` to selectively override individual Expressive Code styles and settings provided by Starlight themes and plugins, speeds up Shiki language loading, and adds the config option `expressiveCode.shiki.injectLangsIntoNestedCodeBlocks`. See the [Expressive Code release notes](https://expressive-code.com/releases/#0380) for full details.
+
+- [#2252](https://github.com/withastro/starlight/pull/2252) [`6116db0`](https://github.com/withastro/starlight/commit/6116db03a4157c0f0caa210690ef0dcdd001a287) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves build performance for sites with large sidebars
+
+  This release adds a caching layer to Starlight’s sidebar generation logic, reducing the number of times sidebars need to be regenerated while building a site. Some benchmarks for projects with a complex sidebar saw builds complete more than 35% faster with this change.
+
+- [#2503](https://github.com/withastro/starlight/pull/2503) [`a4c8edd`](https://github.com/withastro/starlight/commit/a4c8eddc53993068c0f60159fecc123013827ef0) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves the accessibility of asides and tabs by removing some unnecessary HTML landmarks.
+
+### Patch Changes
+
+- [#2579](https://github.com/withastro/starlight/pull/2579) [`241966b`](https://github.com/withastro/starlight/commit/241966bd0523a2e82891d622b2a97b2f3646bc41) Thanks [@RafidMuhymin](https://github.com/RafidMuhymin)! - Adds social link icon for Nostr
+
+## 0.28.6
+
+### Patch Changes
+
+- [#2565](https://github.com/withastro/starlight/pull/2565) [`236467b`](https://github.com/withastro/starlight/commit/236467bb745cea7a284ae3d398874d3edbcd846e) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue with custom UI strings defined in YAML files not being loaded in some contexts.
+
+## 0.28.5
+
+### Patch Changes
+
+- [#2546](https://github.com/withastro/starlight/pull/2546) [`bf42300`](https://github.com/withastro/starlight/commit/bf42300e76241a2df888dc458c59a7478a8b2d61) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where i18n content collection related errors, e.g. malformed JSON or YAML, would not be reported.
+
+- [#2548](https://github.com/withastro/starlight/pull/2548) [`07673c8`](https://github.com/withastro/starlight/commit/07673c80114021a269065e451e660337237f76e1) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a URL localization edge case. In projects without a root locale configured, slugs without a locale prefix did not fall back to the default locale as expected.
+
+- [#2547](https://github.com/withastro/starlight/pull/2547) [`91e1dd7`](https://github.com/withastro/starlight/commit/91e1dd731a06657890a68b2d474199455df2756f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a Firefox Markdown content rendering issue for text sentences separated by a line break.
+
+- [#2524](https://github.com/withastro/starlight/pull/2524) [`1b46783`](https://github.com/withastro/starlight/commit/1b4678325fb10714fc3508bd87a7563b10a0f803) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Fixes a broken link to Astro’s Docs in an error message
+
+## 0.28.4
+
+### Patch Changes
+
+- [#2444](https://github.com/withastro/starlight/pull/2444) [`d585b3e`](https://github.com/withastro/starlight/commit/d585b3e0485dd55b2ffab985a6c06d267d22fe51) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI string translation issue for languages with a region subtag.
+
+- [#2518](https://github.com/withastro/starlight/pull/2518) [`0f69db8`](https://github.com/withastro/starlight/commit/0f69db8b806833a7160570a469ddcdc8c0dec5e0) Thanks [@morinokami](https://github.com/morinokami)! - Updates Japanese UI translations
+
+- [#2507](https://github.com/withastro/starlight/pull/2507) [`bd6ced5`](https://github.com/withastro/starlight/commit/bd6ced5bc46310b217c7bfe83a0f68ba4a03da45) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a table of contents highlighting issue after resizing the window.
+
+- [#2444](https://github.com/withastro/starlight/pull/2444) [`d585b3e`](https://github.com/withastro/starlight/commit/d585b3e0485dd55b2ffab985a6c06d267d22fe51) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Refactors various components to use the new built-in localization system to access translated UI strings.
+
 ## 0.28.3
 
 ### Patch Changes

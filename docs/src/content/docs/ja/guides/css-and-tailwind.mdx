@@ -61,7 +61,7 @@ StarlightのTailwindプラグインは、以下の設定を適用します。
 
 `create astro`を使用して、Tailwind CSSが組み込まれた新しいStarlightプロジェクトを開始します。
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -93,7 +93,7 @@ yarn create astro --template starlight/tailwind
 
 1.  AstroのTailwindインテグレーションを追加します。
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -123,7 +123,7 @@ yarn create astro --template starlight/tailwind
 
 2.  StarlightのTailwindプラグインをインストールします。
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -247,6 +247,8 @@ Starlightのカラーテーマは、デフォルトのカスタムプロパテ�
 
 以下のスライダーを使用して、Starlightのアクセントカラーとグレーカラーのパレットを変更してみましょう。ダークとライトのプレビューエリアには、結果となる色の組み合わせが表示されます。また、このページ自体も合わせて更新されるため、変更内容をプレビューできます。
 
+コントラストレベルオプションで、WCAGによる[色のコントラスト基準](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast)から満たしたいものを指定します。
+
 変更内容に満足できたら、以下のCSSまたはTailwindコードをコピーしてプロジェクトで使用します。
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -261,6 +263,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'ネビュラ',
 			default: 'デフォルト',
 			random: 'ランダム',
+		},
+		contrast: {
+			label: 'コントラストレベル',
 		},
 		editor: {
 			accentColor: 'アクセント',

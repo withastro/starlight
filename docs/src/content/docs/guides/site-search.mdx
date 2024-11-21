@@ -108,6 +108,15 @@ If you have access to [Algolia’s DocSearch program](https://docsearch.algolia.
 
 With this updated configuration, the search bar on your site will now open an Algolia modal instead of the default search modal.
 
+#### DocSearch configuration
+
+The Starlight DocSearch plugin also supports customizing the DocSearch component with the following additional options:
+
+- `maxResultsPerGroup`: Limit the number of results displayed for each search group. Default is `5`.
+- `disableUserPersonalization`: Prevent DocSearch from saving a user’s recent searches and favorites to local storage. Default is `false`.
+- `insights`: Enable the Algolia Insights plugin and send search events to your DocSearch index. Default is `false`.
+- `searchParameters`: An object customizing the [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/).
+
 #### Translating the DocSearch UI
 
 DocSearch only provides English UI strings by default.

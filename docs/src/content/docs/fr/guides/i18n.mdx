@@ -180,7 +180,9 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de traduire les chaînes de l'interface utilisateur par défaut (par exemple, l'en-tête "Sur cette page" dans la table des matières) afin que vos lecteurs puissent découvrir votre site entièrement dans la langue sélectionnée.
 
-Les textes de l'interface utilisateur traduits en <LanguagesList /> sont disponibles prêts à l'emploi, et nous acceptons les [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+Les textes de l'interface utilisateur traduits en <LanguagesList />
+sont disponibles prêts à l'emploi, et nous acceptons les
+[contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de contenus `i18n`.
 
@@ -390,12 +392,14 @@ Consultez la [référence pour `dir()` dans la documentation d'i18next](https://
 
 Vous pouvez utiliser [`Astro.currentLocale`](https://docs.astro.build/fr/reference/api-reference/#astrocurrentlocale) pour lire les paramètres régionaux et linguistiques actuels dans les composants `.astro`.
 
-L'exemple suivant lit les paramètres régionaux actuels et les utilise pour générer un lien vers une page d'information dans la même langue :
+L'exemple suivant lit les paramètres régionaux actuels et les utilise avec la fonction [`getRelativeLocaleUrl()`](https://docs.astro.build/fr/reference/modules/astro-i18n/#getrelativelocaleurl) pour générer un lien vers une page d'information dans la langue actuelle :
 
 ```astro
 ---
 // src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
 ---
 
-<a href={`/${Astro.currentLocale}/about`}>À propos</a>
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>À propos</a
+>
 ```

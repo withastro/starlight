@@ -103,7 +103,7 @@ entry: {
 }
 ```
 
-[Astro 컬렉션 엔트리 타입](https://docs.astro.build/ko/reference/api-reference/#collection-entry-type) 참조에서 이 객체의 형태에 대해 자세히 알아보세요.
+[Astro 컬렉션 엔트리 타입](https://docs.astro.build/ko/reference/modules/astro-content/#collectionentry) 참조에서 이 객체의 형태에 대해 자세히 알아보세요.
 
 #### `sidebar`
 

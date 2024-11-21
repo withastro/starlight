@@ -49,14 +49,14 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	});
 
 	/**
-	 * Generate a utility function that returns UI strings for the given `locale`.
+	 * Generate a utility function that returns UI strings for the given language.
 	 *
 	 * Also includes a few utility methods:
 	 * - `all()` method for getting the entire dictionary.
 	 * - `exists()` method for checking if a key exists in the dictionary.
 	 * - `dir()` method for getting the text direction of the locale.
 	 *
-	 * @param {string | undefined} [locale]
+	 * @param {string | undefined} [lang]
 	 * @example
 	 * const t = useTranslations('en');
 	 * const label = t('search.label');
@@ -68,8 +68,8 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	 * const dir = t.dir();
 	 * // => 'ltr'
 	 */
-	return (locale: string | undefined) => {
-		const lang = localeToLang(locale, config.locales, config.defaultLocale);
+	return (lang: string | undefined) => {
+		lang ??= config.defaultLocale?.lang || BuiltInDefaultLocale.lang;
 
 		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
 		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace);
@@ -121,7 +121,11 @@ function buildResources<T extends Record<string, string | undefined>>(
 	return { [I18nextNamespace]: dictionary as BuiltInStrings & T };
 }
 
-export type I18nKeys = UserI18nKeys | keyof StarlightApp.I18n;
+// `keyof BuiltInStrings` and `UserI18nKeys` may contain some identical keys, e.g. the built-in UI
+// strings. We let TypeScript merge them into a single union type so that plugins with a TypeScript
+// configuration preventing `UserI18nKeys` to be properly inferred can still get auto-completion
+// for built-in UI strings.
+export type I18nKeys = keyof BuiltInStrings | UserI18nKeys | keyof StarlightApp.I18n;
 
 export type I18nT = TFunction<'starlight', undefined> & {
 	all: () => UserI18nSchema;

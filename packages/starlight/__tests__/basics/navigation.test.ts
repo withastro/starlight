@@ -105,6 +105,24 @@ describe('getSidebar', () => {
 		const homeLink = sidebar.find((item) => item.type === 'link' && item.href === '/');
 		expect(homeLink?.label).toBe('Home Page');
 	});
+
+	test('uses cached intermediate sidebars', async () => {
+		// Reset the modules registry so that re-importing `utils/navigation.ts` re-evaluates the
+		// module and clears the cache of intermediate sidebars from previous tests in this file.
+		vi.resetModules();
+		const navigation = await import('../../utils/navigation');
+		const routing = await import('../../utils/routing');
+
+		const getLocaleRoutes = vi.spyOn(routing, 'getLocaleRoutes');
+
+		navigation.getSidebar('/', undefined);
+		navigation.getSidebar('/environmental-impact/', undefined);
+		navigation.getSidebar('/guides/authoring-content/', undefined);
+
+		expect(getLocaleRoutes).toHaveBeenCalledOnce();
+
+		getLocaleRoutes.mockRestore();
+	});
 });
 
 describe('flattenSidebar', () => {

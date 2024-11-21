@@ -3,7 +3,6 @@ import { getEntry } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import EmptyContent from '../../components/EmptyMarkdown.md';
 import type { Route, StarlightDocsEntry } from '../../utils/routing';
-import { useTranslations } from '../../utils/translations';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
 import CommonPage from '../common.astro';
 
@@ -15,7 +14,6 @@ let locale = config.defaultLocale?.locale;
 if (locale === 'root') locale = undefined;
 
 const entryMeta = { dir, lang, locale };
-const t = useTranslations(locale);
 
 const fallbackEntry: StarlightDocsEntry = {
 	slug: '404',
@@ -27,7 +25,7 @@ const fallbackEntry: StarlightDocsEntry = {
 		template: 'splash',
 		editUrl: false,
 		head: [],
-		hero: { tagline: t('404.text'), actions: [] },
+		hero: { tagline: Astro.locals.t('404.text'), actions: [] },
 		pagefind: false,
 		sidebar: { hidden: false, attrs: {} },
 		draft: false,

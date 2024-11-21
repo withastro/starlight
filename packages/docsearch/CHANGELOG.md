@@ -1,5 +1,11 @@
 # @astrojs/starlight-docsearch
 
+## 0.3.0
+
+### Minor Changes
+
+- [#2589](https://github.com/withastro/starlight/pull/2589) [`d4cf8cc`](https://github.com/withastro/starlight/commit/d4cf8cc5633dc87474f943657ec4846e821f7f5b) Thanks [@delucis](https://github.com/delucis)! - Adds support for some more of the DocSearch component’s configuration options
+
 ## 0.2.0
 
 ### Minor Changes
