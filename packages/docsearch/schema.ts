@@ -3,7 +3,7 @@ import { z } from 'astro/zod';
 /**
  * Schema for the Algolia DocSearch modal’s strings.
  *
- * Add this to your `src/content/config.ts`:
+ * Add this to your `src/content.config.ts`:
  *
  * ```js
  * import { defineCollection } from 'astro:content';
