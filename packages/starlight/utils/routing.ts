@@ -16,10 +16,6 @@ import { BuiltInDefaultLocale } from './i18n';
 // We do this here so all pages trigger it and at the top level so it runs just once.
 validateLogoImports();
 
-// TODO(HiDeoo) https://github.com/withastro/astro/pull/12438
-// If a content collection is using a loader and is located in the `src/content/` directory, there
-// is currently a typegen issue where the old/compat types are generated.
-
 // The type returned from `CollectionEntry` is different for legacy collections and collections
 // using a loader. This type is a common subset of both types.
 export type StarlightDocsCollectionEntry = Omit<
