@@ -55,7 +55,7 @@ export function vitePluginStarlightUserConfig(
 	);
 	// If not using legacy collections and the config doesn't exist, fallback to the legacy location.
 	// We need to test this ahead of time as we cannot `try/catch` a failing import in the virtual
-	// as this would fail at build time when Rollup tries to resolve the import.
+	// as this would fail at build time when Rollup tries to resolve a non-existenting path.
 	if (!legacy.collections && !existsSync(collectionConfigImportPath)) {
 		collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content/config.ts');
 	}
