@@ -187,7 +187,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^2.1.4",
-    "astro": "^5.0.0-beta.8",
+    "astro": "^5.0.0-beta.10",
     "linkedom": "^0.18.4",
     "vitest": "^2.1.4"
   },
