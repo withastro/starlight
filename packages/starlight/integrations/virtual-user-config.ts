@@ -1,4 +1,5 @@
 import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { StarlightConfig } from '../utils/user-config';
@@ -48,6 +49,17 @@ export function vitePluginStarlightUserConfig(
 	const rootPath = fileURLToPath(root);
 	const docsPath = resolve(fileURLToPath(srcDir), 'content/docs');
 
+	let collectionConfigImportPath = resolve(
+		fileURLToPath(srcDir),
+		legacy.collections ? './content/config.ts' : './content.config.ts'
+	);
+	// If not using legacy collections and the config doesn't exist, fallback to the legacy location.
+	// We need to test this ahead of time as we cannot `try/catch` a failing import in the virtual
+	// as this would fail at build time when Rollup tries to resolve the import.
+	if (!legacy.collections && !existsSync(collectionConfigImportPath)) {
+		collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content/config.ts');
+	}
+
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
 			`virtual:starlight/components/${name}`,
@@ -84,7 +96,7 @@ export function vitePluginStarlightUserConfig(
 			: 'export const logos = {};',
 		'virtual:starlight/collection-config': `let userCollections;
 			try {
-				userCollections = (await import(${resolveId('./content/config.ts', srcDir)})).collections;
+				userCollections = (await import("${collectionConfigImportPath}")).collections;
 			} catch {}
 			export const collections = userCollections;`,
 		'virtual:starlight/plugin-translations': `export default ${JSON.stringify(pluginTranslations)}`,

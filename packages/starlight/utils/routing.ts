@@ -67,6 +67,7 @@ export function normalizeCollectionEntry(entry: StarlightDocsCollectionEntry): S
 		...entry,
 		// In a legacy collection, the `filePath` property doesn't exist.
 		filePath:
+			// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
 			entry.filePath ?? `${project.srcDir.replace(project.root, '')}content/docs/${entry.id}`,
 		// In a collection with a loader, the `slug` property is replaced by the `id`.
 		slug: normalizeIndexSlug(entry.slug ?? entry.id),

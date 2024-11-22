@@ -40,6 +40,7 @@ function mockDoc(
 	if (project.legacyCollections) {
 		doc.slug = slug;
 	} else {
+		// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
 		doc.filePath = `src/content/docs/${docsFilePath}`;
 	}
 
