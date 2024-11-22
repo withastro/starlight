@@ -34,14 +34,16 @@ test('routes contain copy of original doc as entry', async () => {
 		if (!doc) throw new Error('Expected to find doc for route ' + route.id);
 		// Compare without slug as slugs can be normalized.
 		const { slug: _, ...entry } = route.entry;
-		const { slug: __, ...input } = doc;
 		if (project.legacyCollections) {
 			// When using legacy collections, the `filePath` property is added to the route entry.
 			expect(entry.filePath).toBeDefined();
 			const { filePath: _, ...legacyEntry } = entry;
-			expect(legacyEntry).toEqual(input);
+			// @ts-expect-error - When using legacy collections, the `slug` property is available but can
+			// be normalized.
+			const { slug: __, ...legacyInput } = doc;
+			expect(legacyEntry).toEqual(legacyInput);
 		} else {
-			expect(entry).toEqual(input);
+			expect(entry).toEqual(doc);
 		}
 	}
 });
