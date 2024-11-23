@@ -103,7 +103,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: starlightPageUrl,
+		url: new URL('https://example.com/getting-started/'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -119,7 +119,7 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "attrs": {},
 		    "badge": undefined,
 		    "href": "/getting-started/",
-		    "isCurrent": false,
+		    "isCurrent": true,
 		    "label": "Getting Started",
 		    "type": "link",
 		  },
@@ -188,7 +188,7 @@ test('uses provided sidebar if any', async () => {
 				'reference/frontmatter',
 			],
 		},
-		url: starlightPageUrl,
+		url: new URL('https://example.com/test/2'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -207,7 +207,7 @@ test('uses provided sidebar if any', async () => {
 		    "attrs": {},
 		    "badge": undefined,
 		    "href": "/test/2",
-		    "isCurrent": false,
+		    "isCurrent": true,
 		    "label": "Custom link 2",
 		    "type": "link",
 		  },
@@ -245,6 +245,8 @@ test('uses provided sidebar if any', async () => {
 		  },
 		]
 	`);
+	expect(data.pagination.prev?.href).toBe('/test/1');
+	expect(data.pagination.next?.href).toBe('/guides/authoring-content/');
 });
 
 test('throws error if sidebar is malformated', async () => {
