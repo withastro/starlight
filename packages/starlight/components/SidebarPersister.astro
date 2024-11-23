@@ -28,7 +28,7 @@ declare global {
 ---
 
 <sl-sidebar-state-persist data-hash={hash}>
-	<script is:inline>
+	<script is:inline aria-hidden="true">
 		(() => {
 			try {
 				if (!matchMedia('(min-width: 50em)').matches) return;
@@ -55,7 +55,7 @@ declare global {
 
 	<slot />
 
-	<script is:inline>
+	<script is:inline aria-hidden="true">
 		(() => {
 			const scroller = document.getElementById('starlight__sidebar');
 			if (!window._starlightScrollRestore || !scroller) return;
