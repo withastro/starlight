@@ -195,6 +195,7 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 #### `PageFrame`
 
 **기본 컴포넌트:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**명명된 슬롯:** `header`, `sidebar`
 
 대부분의 페이지 콘텐츠를 감싸는 레이아웃 컴포넌트입니다.
 기본적으로 header-sidebar-main 레이아웃을 설정하고 슬롯으로 명명된 `header`와 `sidebar` 및 메인 콘텐츠에 대한 기본 슬롯을 포함합니다.
@@ -209,6 +210,7 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 #### `TwoColumnContent`
 
 **기본 컴포넌트:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**명명된 슬롯:** `right-sidebar`
 
 메인 콘텐츠 열과 오른쪽 사이드바 (목차)를 감싸는 레이아웃 컴포넌트입니다.
 기본적으로 작은 뷰포트에서 하나의 열로 이루어진 레이아웃과 큰 뷰포트에서 두 개의 열로 이루어진 레이아웃 간 전환을 처리합니다.
