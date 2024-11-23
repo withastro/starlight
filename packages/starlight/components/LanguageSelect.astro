@@ -1,4 +1,5 @@
 ---
+import context from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
 import Select from './Select.astro';
@@ -8,7 +9,7 @@ import type { Props } from '../props';
  * Get the equivalent of the current page path for the passed locale.
  */
 function localizedPathname(locale: string | undefined): string {
-	return localizedUrl(Astro.url, locale).pathname;
+	return localizedUrl(Astro.url, locale, context.trailingSlash).pathname;
 }
 ---
 
