@@ -86,6 +86,22 @@ Beim Rendern einer integrierten Komponente innerhalb einer benutzerdefinierten K
 - Verbreite `Astro.props` darin. Dadurch wird sichergestellt, dass es alle Daten erhält, die es zum Rendern benötigt.
 - Füge einen [`<slot />`](https://docs.astro.build/de/core-concepts/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden muss, wenn der Komponente untergeordnete Elemente übergeben werden.
 
+Wenn du die Komponenten [`PageFrame`](/de/reference/overrides/#pageframe) oder [`TwoColumnContent`](/de/reference/overrides/#twocolumncontent) wiederverwendst, die [benannte Slots](https://docs.astro.build/de/basics/astro-components/#benannte-slots) enthalten, musst du auch diese Slots [übertragen](https://docs.astro.build/de/basics/astro-components/#slots-weitergeben).
+
+Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die die Komponente `TwoColumnContent` wiederverwendet. Diese integrierte Komponente enthält einen zusätzlichen benannten Slot, nämlich `right-sidebar`, welcher übertragen werden muss:
+
+```astro {9}
+---
+// src/components/CustomContent.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+<Default {...Astro.props}>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
+
 ## Seitendaten verwenden
 
 Beim Überschreiben einer Starlight-Komponente erhält deine benutzerdefinierte Implementierung ein Standardobjekt `Astro.props`, das alle Daten für die aktuelle Seite enthält.
