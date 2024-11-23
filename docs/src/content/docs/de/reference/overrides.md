@@ -197,7 +197,8 @@ Wenn möglich, bevorzuge das Überschreiben einer Komponente auf einer niedriger
 
 #### `PageFrame`
 
-**Standardkomponente:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Standardkomponente:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Benannte Slots:** `header`, `sidebar`
 
 Diese Layout-Komponente beinhaltet den größten Teil des Seiteninhalts.
 Die Standardimplementierung konfiguriert das Kopfzeilen-Seitennavigation-Haupt-Layout und beinhaltet `header` und `sidebar` benannte Slots zusammen mit einem Standard-Slot für den Hauptinhalt.
@@ -211,7 +212,8 @@ Diese Komponente wird innerhalb von [`<PageFrame>`](#pageframe) gerendert und is
 
 #### `TwoColumnContent`
 
-**Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Benannter Slot:** `right-sidebar`
 
 Dies ist die Layout-Komponente, welche die Hauptinhaltsspalte und die rechte Seitenleiste (Inhaltsverzeichnis) beinhaltet.
 Die Standardimplementierung behandelt den Wechsel zwischen einem einspaltigen Layout mit kleinem Sichtfeld und einem zweispaltigen Layout mit größerem Sichtfeld.
