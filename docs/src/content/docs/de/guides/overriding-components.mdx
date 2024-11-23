@@ -96,6 +96,7 @@ Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die die Komponen
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 ---
+
 <Default {...Astro.props}>
 	<slot />
 	<slot name="right-sidebar" slot="right-sidebar" />
