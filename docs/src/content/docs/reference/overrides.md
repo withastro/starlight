@@ -195,7 +195,8 @@ When possible, prefer overriding a lower-level component.
 
 #### `PageFrame`
 
-**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Named slots:** `header`, `sidebar`
 
 Layout component wrapped around most of the page content.
 The default implementation sets up the header–sidebar–main layout and includes `header` and `sidebar` named slots along with a default slot for the main content.
@@ -209,7 +210,8 @@ Component rendered inside [`<PageFrame>`](#pageframe) that is responsible for to
 
 #### `TwoColumnContent`
 
-**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Named slot:** `right-sidebar`
 
 Layout component wrapped around the main content column and right sidebar (table of contents).
 The default implementation handles the switch between a single-column, small-viewport layout and a two-column, larger-viewport layout.
