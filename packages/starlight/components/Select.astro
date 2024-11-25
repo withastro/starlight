@@ -17,7 +17,7 @@ interface Props {
 <label style={`--sl-select-width: ${Astro.props.width}`}>
 	<span class="sr-only">{Astro.props.label}</span>
 	<Icon name={Astro.props.icon} class="icon label-icon" />
-	<select value={Astro.props.value}>
+	<select value={Astro.props.value} autocomplete="off">
 		{
 			Astro.props.options.map(({ value, selected, label }) => (
 				<option value={value} selected={selected} set:html={label} />
