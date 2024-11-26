@@ -33,7 +33,7 @@ The page description is used for page metadata and will be picked up by search e
 
 **type**: `string`
 
-Override the slug of the page. See [“Defining custom slugs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-slugs) in the Astro docs for more details.
+Override the slug of the page. See [“Defining custom IDs”](https://docs.astro.build/en/guides/content-collections/#defining-custom-ids) in the Astro docs for more details.
 
 ### `editUrl`
 
