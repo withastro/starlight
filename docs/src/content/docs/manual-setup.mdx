@@ -62,17 +62,18 @@ Find all available options in the [Starlight configuration reference](/reference
 
 ### Configure content collections
 
-Starlight is built on top of Astro’s [content collections](https://docs.astro.build/en/guides/content-collections/), which are configured in the `src/content/config.ts` file.
+Starlight is built on top of Astro’s [content collections](https://docs.astro.build/en/guides/content-collections/), which are configured in the `src/content.config.ts` file.
 
-Create or update the content config file, adding a `docs` collection that uses Starlight’s `docsSchema`:
+Create or update the content config file, adding a `docs` collection that uses Starlight’s `docsLoader` and `docsSchema`:
 
-```js ins={3,6}
-// src/content/config.ts
+```js ins={3,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loader';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
