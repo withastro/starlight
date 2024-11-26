@@ -98,8 +98,8 @@ export type StarlightPageProps = Prettify<
  */
 type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 	/**
-	 * The unique ID for this Starlight page which cannot be inferred from codegen like content
-	 * collection entries.
+	 * The unique ID if using the `legacy.collections` for this Starlight page which cannot be
+	 * inferred from codegen like content collection entries or the slug.
 	 */
 	id: string;
 };
@@ -114,14 +114,14 @@ export async function generateStarlightPageRouteData({
 	const { isFallback, frontmatter, ...routeProps } = props;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = slug;
+	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar
 		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
 		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const pageDocsEntry: StarlightPageDocsEntry = {
-		id: slug,
+		id,
 		slug,
 		body: '',
 		collection: 'docs',
