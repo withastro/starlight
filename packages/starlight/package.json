@@ -191,6 +191,7 @@
     "vitest": "^2.1.4"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.0.0-beta.4",
     "@astrojs/sitemap": "^3.1.6",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",

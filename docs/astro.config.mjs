@@ -1,7 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
-import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
@@ -192,7 +190,5 @@ export default defineConfig({
 					]
 				: [],
 		}),
-		// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
-		mdx(),
 	],
 });

@@ -1,8 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
-import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,7 +24,5 @@ export default defineConfig({
 				},
 			],
 		}),
-		// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
-		mdx(),
 	],
 });

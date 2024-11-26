@@ -2,8 +2,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import node from '@astrojs/node';
-// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
-import mdx from '@astrojs/mdx';
 
 const prerendering = process.env.STARLIGHT_PRERENDER === 'yes';
 
@@ -24,7 +22,5 @@ export default defineConfig({
 			prerender: prerendering,
 			pagefind: false,
 		}),
-		// TODO(HiDeoo) Remove or keep depending on the final decision regarding the peer dep change
-		mdx(),
 	],
 });
