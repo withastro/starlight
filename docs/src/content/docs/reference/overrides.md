@@ -73,7 +73,7 @@ The slug for this page generated from the content filename.
 
 **Type:** `string`
 
-The unique ID for this page based on the content filename.
+The slug for this page or the unique ID for this page based on the content filename if using the [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections) flag.
 
 #### `isFallback`
 
