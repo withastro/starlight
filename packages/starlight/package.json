@@ -100,9 +100,17 @@
       "types": "./components/DraftContentNotice.astro.tsx",
       "import": "./components/DraftContentNotice.astro"
     },
+    "./components/Layout.astro": {
+      "types": "./components/Layout.astro.tsx",
+      "import": "./components/Layout.astro"
+    },
     "./components/Page.astro": {
       "types": "./components/Page.astro.tsx",
       "import": "./components/Page.astro"
+    },
+    "./components/SimpleStarlightPage.astro": {
+      "types": "./components/SimpleStarlightPage.astro.tsx",
+      "import": "./components/SimpleStarlightPage.astro"
     },
     "./components/StarlightPage.astro": {
       "types": "./components/StarlightPage.astro.tsx",

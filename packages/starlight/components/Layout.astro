@@ -1,0 +1,25 @@
+---
+import type { Props } from '../props';
+
+import Head from 'virtual:starlight/components/Head';
+import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
+
+// Important that this is the last import so it can override built-in styles.
+import 'virtual:starlight/user-css';
+---
+
+<html
+	lang={Astro.props.lang}
+	dir={Astro.props.dir}
+	data-has-toc={Boolean(Astro.props.toc)}
+	data-has-sidebar={Astro.props.hasSidebar}
+	data-has-hero={Boolean(Astro.props.entry.data.hero)}
+	data-theme="dark"
+>
+	<head>
+		<Head {...Astro.props} />
+		<slot name="head" />
+		<ThemeProvider {...Astro.props} />
+	</head>
+	<body><slot /></body>
+</html>

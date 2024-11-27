@@ -1,0 +1,13 @@
+---
+import {
+	generateStarlightPageRouteData,
+	type StarlightPageProps as Props,
+} from '../utils/starlight-page';
+import Layout from './Layout.astro';
+
+export type StarlightPageProps = Props;
+---
+
+<Layout {...await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url })}>
+	<slot />
+</Layout>
