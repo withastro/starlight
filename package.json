@@ -16,7 +16,7 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.9",
     "@size-limit/file": "^11.1.6",
-    "astro": "^5.0.0-beta.11",
+    "astro": "^5.0.0-beta.12",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "size-limit": "^11.1.6",
@@ -44,10 +44,6 @@
     }
   ],
   "pnpm": {
-    "overrides": {
-      "vitest>vite": "6.0.0-beta.6",
-      "vite-node>vite": "6.0.0-beta.6"
-    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "@algolia/client-search",
