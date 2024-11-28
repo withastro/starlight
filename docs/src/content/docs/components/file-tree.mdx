@@ -218,6 +218,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Escape white-space in file names
+
+To include white-space in a file or directory name, escape it with double quotes.
+
+<Preview>
+
+```mdx {5,6}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- "main folder/"
+  - "The Header.astro"
+  - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {2,3}
+{% filetree %}
+- "main folder/"
+  - "The Header.astro"
+  - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- "main folder/"
+  - "The Header.astro"
+  - …
+
+</FileTree>
+
+</Preview>
+
 ## `<FileTree>` Props
 
 **Implementation:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
