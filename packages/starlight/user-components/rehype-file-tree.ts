@@ -252,6 +252,11 @@ function splitFileNameAndTextComments(value: string): [string, string] {
 		if (match) return [match[1]!, match[2]!];
 	}
 
+	if (value.startsWith('“')) {
+		const match = value.match(/^“([^”]+)”\s*(.*)$/);
+		if (match) return [match[1]!, match[2]!];
+	}
+
 	const [filename, ...fragments] = value.split(' ');
 	const textComments = fragments.join(' ');
 	return [filename!, textComments];

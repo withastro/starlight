@@ -120,6 +120,42 @@ describe('processor', () => {
 		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-folder-node.html');
 	});
 
+	test('special quotes allows to add white-space to file names', () => {
+		const html = processTestFileTree(`<ul><li>“file name”</li></ul>`);
+
+		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-file.html');
+	});
+
+	test('special quotes file name with text comments', () => {
+		const html = processTestFileTree(`<ul><li>“file name” with some comments</li></ul>`);
+
+		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-file-text.html');
+	});
+
+	test('special quotes file name with node comments', () => {
+		const html = processTestFileTree(`<ul><li>“file name” with <strong>important</strong> comments</li></ul>`);
+
+		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-file-node.html');
+	});
+
+	test('special quotes allows to add white-space to folder names', () => {
+		const html = processTestFileTree(`<ul><li>“folder name/”</li></ul>`);
+
+		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-folder.html');
+	});
+
+	test('special quotes folder name with text comments', () => {
+		const html = processTestFileTree(`<ul><li>“folder name/” with some comments</li></ul>`);
+
+		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-folder-text.html');
+	});
+
+	test('special quotes folder name with node comments', () => {
+		const html = processTestFileTree(`<ul><li>“folder name/” with <strong>important</strong> comments</li></ul>`);
+
+		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-double-quotes-folder-node.html');
+	});
+
 	test('identifies directory with either a file name ending with a slash or a nested list', () => {
 		const html = processTestFileTree(`<ul>
   <li>directory/</li>

@@ -229,8 +229,9 @@ import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
-- "main folder/"
-  - "The Header.astro"
+- "main folder/" file <strong>container</strong>
+- "main folder/" file container
+  - "The Header.astro" main file
   - …
 
 </FileTree>
@@ -240,8 +241,9 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ```markdoc {2,3}
 {% filetree %}
-- "main folder/"
-  - "The Header.astro"
+- "main folder/" file <strong>container</strong>
+- "main folder/" file container
+  - "The Header.astro" main file
   - …
 {% /filetree %}
 ```
@@ -250,8 +252,9 @@ import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree slot="preview">
 
-- "main folder/"
-  - "The Header.astro"
+- "main folder/" file <strong>container</strong>
+- "main folder/" file container
+  - "The Header.astro" main file
   - …
 
 </FileTree>
