@@ -56,11 +56,10 @@ const fileTreeProcessor = rehype()
 
 				// Extract text comment that follows the file name, e.g. `README.md This is a comment`
 				if (firstChild?.type === 'text') {
-					const [filename, ...fragments] = firstChild.value.split(' ');
-					firstChild.value = filename || '';
-					const textComment = fragments.join(' ').trim();
-					if (textComment.length > 0) {
-						comment.push(fragments.join(' '));
+					const [filename, textComment] = splitFileNameAndTextComments(firstChild.value);
+					firstChild.value = filename;
+					if (textComment.trim().length > 0) {
+						comment.push(textComment);
 					}
 				}
 
@@ -242,6 +241,20 @@ function throwFileTreeValidationError(message: string): never {
 		message,
 		'To learn more about the `<FileTree>` component, see https://starlight.astro.build/components/file-tree/'
 	);
+}
+
+function splitFileNameAndTextComments(value: string): [string, string] {
+	if (!value || value.trim() === '') return ['', ''];
+
+	// Handles the case where the file name is wrapped in double quotes, e.g. `"READ ME.md" This is a comment`.
+	if (value.startsWith('"')) {
+		const match = value.match(/^"([^"]+)"\s*(.*)$/);
+		if (match) return [match[1]!, match[2]!];
+	}
+
+	const [filename, ...fragments] = value.split(' ');
+	const textComments = fragments.join(' ');
+	return [filename!, textComments];
 }
 
 export interface Definitions {
