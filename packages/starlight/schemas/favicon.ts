@@ -1,5 +1,6 @@
 import { extname } from 'node:path';
 import { z } from 'astro/zod';
+import { splitQueryAndFragment } from '../utils/path';
 
 const faviconTypeMap = {
 	'.ico': 'image/x-icon',
@@ -15,7 +16,8 @@ export const FaviconSchema = () =>
 		.string()
 		.default('/favicon.svg')
 		.transform((favicon, ctx) => {
-			const ext = extname(favicon).toLowerCase();
+			const { base } = splitQueryAndFragment(favicon);
+			const ext = extname(base).toLowerCase();
 
 			if (!isFaviconExt(ext)) {
 				ctx.addIssue({
