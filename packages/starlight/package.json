@@ -181,7 +181,6 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.3.0",
     "@playwright/test": "^1.45.0",
-    "@types/js-yaml": "^4.0.9",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.16.10",
@@ -193,6 +192,7 @@
     "@astrojs/sitemap": "^3.1.6",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",
+    "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
     "astro-expressive-code": "^0.38.3",
     "bcp-47": "^2.1.0",
