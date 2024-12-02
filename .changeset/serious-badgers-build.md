@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Include `@types/js-yaml` package in non-dev dependencies
+Moves `@types/js-yaml` package to non-dev dependencies
