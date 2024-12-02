@@ -38,10 +38,6 @@ export const FaviconSchema = () =>
                 });
                 return z.NEVER;
             }
-			// If it is a relative link but with different format, reformat it.
-			if (!favicon.startsWith('/')) {
-                favicon = `/${favicon}`;
-            }
 
 			// Return the relative path (correctly formatted)
 			return {
