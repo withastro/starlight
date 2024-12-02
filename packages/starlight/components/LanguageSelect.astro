@@ -42,22 +42,18 @@ function localizedPathname(locale: string | undefined): string {
 						window.location.pathname = e.currentTarget.value;
 					}
 				});
+				window.addEventListener('pageshow', (event) => {
+					if (!event.persisted) return;
+					// If the page was loaded from a cache, the language select selected index might not be
+					// in sync with the current page.
+					const markupSelectedIndex =
+						select.querySelector<HTMLOptionElement>('option[selected]')?.index;
+					if (markupSelectedIndex !== select.selectedIndex) {
+						select.selectedIndex = markupSelectedIndex ?? 0;
+					}
+				});
 			}
 		}
 	}
 	customElements.define('starlight-lang-select', StarlightLanguageSelect);
-	window.addEventListener('pageshow', (event) => {
-		if (!event.persisted) return;
-		document
-			.querySelectorAll<HTMLSelectElement>('starlight-lang-select select')
-			.forEach((select) => {
-				// If the page was loaded from a cache, the language select selected index might not be in
-				// sync with the current page.
-				const markupSelectedIndex =
-					select.querySelector<HTMLOptionElement>('option[selected]')?.index;
-				if (markupSelectedIndex !== select.selectedIndex) {
-					select.selectedIndex = markupSelectedIndex ?? 0;
-				}
-			});
-	});
 </script>
