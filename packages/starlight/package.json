@@ -178,19 +178,19 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^5.0.0-beta.12"
+    "astro": "^5.0.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^6.0.0-beta.3",
+    "@astrojs/markdown-remark": "^6.0.0",
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^2.1.6",
-    "astro": "^5.0.0-beta.12",
+    "astro": "^5.0.1",
     "linkedom": "^0.18.4",
     "vitest": "^2.1.6"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.0-beta.5",
+    "@astrojs/mdx": "^4.0.1",
     "@astrojs/sitemap": "^3.1.6",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",

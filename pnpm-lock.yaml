@@ -14,8 +14,8 @@ importers:
   .:
     devDependencies:
       '@astrojs/check':
-        specifier: ^0.7.0
-        version: 0.7.0(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3)
+        specifier: ^0.9.4
+        version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3)
       '@changesets/changelog-github':
         specifier: ^0.5.0
         version: 0.5.0
@@ -26,8 +26,8 @@ importers:
         specifier: ^11.1.6
         version: 11.1.6(size-limit@11.1.6)
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -45,7 +45,7 @@ importers:
     dependencies:
       '@astro-community/astro-embed-youtube':
         specifier: ^0.5.6
-        version: 0.5.6(astro@5.0.0-beta.12)
+        version: 0.5.6(astro@5.0.1)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
@@ -56,8 +56,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       culori:
         specifier: ^4.0.1
         version: 4.0.1
@@ -76,7 +76,7 @@ importers:
         version: 3.2.12
       starlight-links-validator:
         specifier: ^0.13.2
-        version: 0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.0-beta.12)
+        version: 0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.1)
 
   examples/basics:
     dependencies:
@@ -84,8 +84,8 @@ importers:
         specifier: ^0.29.2
         version: link:../../packages/starlight
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -93,8 +93,8 @@ importers:
   examples/markdoc:
     dependencies:
       '@astrojs/markdoc':
-        specifier: ^0.12.0-beta.1
-        version: 0.12.0-beta.1(astro@5.0.0-beta.12)
+        specifier: ^0.12.1
+        version: 0.12.1(astro@5.0.1)
       '@astrojs/starlight':
         specifier: ^0.29.2
         version: link:../../packages/starlight
@@ -102,8 +102,8 @@ importers:
         specifier: ^0.1.0
         version: link:../../packages/markdoc
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -117,11 +117,11 @@ importers:
         specifier: ^2.0.3
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
-        specifier: ^5.1.2
-        version: 5.1.2(astro@5.0.0-beta.12)(tailwindcss@3.4.14)
+        specifier: ^5.1.3
+        version: 5.1.3(astro@5.0.1)(tailwindcss@3.4.14)
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -158,8 +158,8 @@ importers:
   packages/markdoc:
     devDependencies:
       '@astrojs/markdoc':
-        specifier: ^0.12.0-beta.1
-        version: 0.12.0-beta.1(astro@5.0.0-beta.12)
+        specifier: ^0.12.1
+        version: 0.12.1(astro@5.0.1)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../starlight
@@ -170,8 +170,8 @@ importers:
   packages/starlight:
     dependencies:
       '@astrojs/mdx':
-        specifier: ^4.0.0-beta.5
-        version: 4.0.0-beta.5(astro@5.0.0-beta.12)
+        specifier: ^4.0.1
+        version: 4.0.1(astro@5.0.1)
       '@astrojs/sitemap':
         specifier: ^3.1.6
         version: 3.1.6
@@ -189,7 +189,7 @@ importers:
         version: 4.0.4
       astro-expressive-code:
         specifier: ^0.38.3
-        version: 0.38.3(astro@5.0.0-beta.12)
+        version: 0.38.3(astro@5.0.1)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -243,8 +243,8 @@ importers:
         version: 6.0.3
     devDependencies:
       '@astrojs/markdown-remark':
-        specifier: ^6.0.0-beta.3
-        version: 6.0.0-beta.3
+        specifier: ^6.0.0
+        version: 6.0.0
       '@playwright/test':
         specifier: ^1.45.0
         version: 1.45.0
@@ -255,8 +255,8 @@ importers:
         specifier: ^2.1.6
         version: 2.1.6(vitest@2.1.6)
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       linkedom:
         specifier: ^0.18.4
         version: 0.18.4
@@ -270,8 +270,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
@@ -279,8 +279,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/git:
     dependencies:
@@ -288,8 +288,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/legacy-collection-config-file:
     dependencies:
@@ -297,20 +297,20 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
       '@astrojs/node':
-        specifier: ^9.0.0-beta.3
-        version: 9.0.0-beta.3(astro@5.0.0-beta.12)
+        specifier: ^9.0.0
+        version: 9.0.0(astro@5.0.1)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.0.0-beta.12
-        version: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/tailwind:
     devDependencies:
@@ -481,24 +481,23 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
-  /@astro-community/astro-embed-youtube@0.5.6(astro@5.0.0-beta.12):
+  /@astro-community/astro-embed-youtube@0.5.6(astro@5.0.1):
     resolution: {integrity: sha512-/mRfCl/eTBUz0kmjD1psOy0qoDDBorVp0QumUacjFcIkBullYtbeFQ2ZGZ+3N/tA6cR/OIyzr2QA4dQXlY6USg==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
     dependencies:
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       lite-youtube-embed: 0.3.3
     dev: false
 
-  /@astrojs/check@0.7.0(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3):
-    resolution: {integrity: sha512-UTqwOeKNu9IYZmJXEeWnQuTdSd/pX58Hl4TUARsMlT97SVDL//kLBE4T/ctxRz6J573N87oE5ddtW/uOOnQTug==}
+  /@astrojs/check@0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3):
+    resolution: {integrity: sha512-IOheHwCtpUfvogHHsvu0AbeRZEnjJg3MopdLddkJE70mULItS/Vh37BHcI00mcOJcH1vhD3odbpvWokpxam7xA==}
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
-      '@astrojs/language-server': 2.10.0(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3)
-      chokidar: 3.6.0
-      fast-glob: 3.3.2
+      '@astrojs/language-server': 2.15.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3)
+      chokidar: 4.0.1
       kleur: 4.1.5
       typescript: 5.6.3
       yargs: 17.7.2
@@ -510,11 +509,11 @@ packages:
   /@astrojs/compiler@2.10.3:
     resolution: {integrity: sha512-bL/O7YBxsFt55YHU021oL+xz+B/9HvGNId3F9xURN16aeqDK9juHGktdkCSXz+U4nqFACq6ZFvWomOzhV+zfPw==}
 
-  /@astrojs/internal-helpers@0.4.1:
-    resolution: {integrity: sha512-bMf9jFihO8YP940uD70SI/RDzIhUHJAolWVcO1v5PUivxGKvfLZTLTVVxEYzGYyPsA3ivdLNqMnL5VgmQySa+g==}
+  /@astrojs/internal-helpers@0.4.2:
+    resolution: {integrity: sha512-EdDWkC3JJVcpGpqJAU/5hSk2LKXyG3mNGkzGoAuyK+xoPHbaVdSuIWoN1QTnmK3N/gGfaaAfM8gO2KDCAW7S3w==}
 
-  /@astrojs/language-server@2.10.0(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3):
-    resolution: {integrity: sha512-crHXpqYfA5qWioiuZnZFpTsNItgBlF1f0S9MzDYS7/pfCALkHNJ7K3w9U/j0uMKymsT4hC7BfMaX0DYlfdSzHg==}
+  /@astrojs/language-server@2.15.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3):
+    resolution: {integrity: sha512-JivzASqTPR2bao9BWsSc/woPHH7OGSGc9aMxXL4U6egVTqBycB3ZHdBJPuOCVtcGLrzdWTosAqVPz1BVoxE0+A==}
     hasBin: true
     peerDependencies:
       prettier: ^3.0.0
@@ -526,38 +525,40 @@ packages:
         optional: true
     dependencies:
       '@astrojs/compiler': 2.10.3
+      '@astrojs/yaml2ts': 0.2.2
       '@jridgewell/sourcemap-codec': 1.5.0
-      '@volar/kit': 2.2.5(typescript@5.6.3)
-      '@volar/language-core': 2.2.5
-      '@volar/language-server': 2.2.5
-      '@volar/language-service': 2.2.5
-      '@volar/typescript': 2.2.5
+      '@volar/kit': 2.4.10(typescript@5.6.3)
+      '@volar/language-core': 2.4.10
+      '@volar/language-server': 2.4.10
+      '@volar/language-service': 2.4.10
       fast-glob: 3.3.2
+      muggle-string: 0.4.1
       prettier: 3.3.3
       prettier-plugin-astro: 0.14.1
-      volar-service-css: 0.0.45(@volar/language-service@2.2.5)
-      volar-service-emmet: 0.0.45(@volar/language-service@2.2.5)
-      volar-service-html: 0.0.45(@volar/language-service@2.2.5)
-      volar-service-prettier: 0.0.45(@volar/language-service@2.2.5)(prettier@3.3.3)
-      volar-service-typescript: 0.0.45(@volar/language-service@2.2.5)
-      volar-service-typescript-twoslash-queries: 0.0.45(@volar/language-service@2.2.5)
-      vscode-html-languageservice: 5.2.0
+      volar-service-css: 0.0.62(@volar/language-service@2.4.10)
+      volar-service-emmet: 0.0.62(@volar/language-service@2.4.10)
+      volar-service-html: 0.0.62(@volar/language-service@2.4.10)
+      volar-service-prettier: 0.0.62(@volar/language-service@2.4.10)(prettier@3.3.3)
+      volar-service-typescript: 0.0.62(@volar/language-service@2.4.10)
+      volar-service-typescript-twoslash-queries: 0.0.62(@volar/language-service@2.4.10)
+      volar-service-yaml: 0.0.62(@volar/language-service@2.4.10)
+      vscode-html-languageservice: 5.3.1
       vscode-uri: 3.0.8
     transitivePeerDependencies:
       - typescript
     dev: true
 
-  /@astrojs/markdoc@0.12.0-beta.1(astro@5.0.0-beta.12):
-    resolution: {integrity: sha512-bHj0W9USM4VigaS32WPKEc1uo3Ub2SAG2JDCsTPqkmumx5YFQp4pKerX+Bilp0bfiS6t4GkmNXnw0S1s322hbw==}
+  /@astrojs/markdoc@0.12.1(astro@5.0.1):
+    resolution: {integrity: sha512-1ayrIK1DlsT72QurLGMBCNmmTIlvVFbNih3bobaUxbjQ/r0hKbbdlLx42p8bfvf0J4iTiXSL7FhpU972rtwMHA==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     peerDependencies:
-      astro: ^5.0.0-alpha.0
+      astro: ^5.0.0
     dependencies:
-      '@astrojs/internal-helpers': 0.4.1
-      '@astrojs/markdown-remark': 6.0.0-beta.3
-      '@astrojs/prism': 3.2.0-beta.0
+      '@astrojs/internal-helpers': 0.4.2
+      '@astrojs/markdown-remark': 6.0.0
+      '@astrojs/prism': 3.2.0
       '@markdoc/markdoc': 0.4.0
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       esbuild: 0.21.5
       github-slugger: 2.0.0
       htmlparser2: 9.1.0
@@ -566,10 +567,10 @@ packages:
       - react
       - supports-color
 
-  /@astrojs/markdown-remark@6.0.0-beta.3:
-    resolution: {integrity: sha512-M6wGxQH9rRwsmcJ+IVfYJ8moYmPVXE2u2pcPJx+VbOEMgJ7gmnJ1eso40KP0JOvq8nGPlcfeyqba45WrYxhKlA==}
+  /@astrojs/markdown-remark@6.0.0:
+    resolution: {integrity: sha512-Tabo7xM44Pz2Yf9qpdaCCgxRmtaypi2YCinqTUNefDrWUa+OyKW62OuNeCaGwNh/ys+QAd9FUWN5/3HgPWjP4Q==}
     dependencies:
-      '@astrojs/prism': 3.2.0-beta.0
+      '@astrojs/prism': 3.2.0
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.3
       hast-util-to-text: 4.0.2
@@ -591,16 +592,16 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@4.0.0-beta.5(astro@5.0.0-beta.12):
-    resolution: {integrity: sha512-NsWw80Qm8W04gphADvYJ+gs5A4fB6SIui7wL3HgaSEXFGCuJiOkePJFUpojVsV8uRXlTfPlN6RuTZWazo5JROg==}
+  /@astrojs/mdx@4.0.1(astro@5.0.1):
+    resolution: {integrity: sha512-ShntQtbIsMEnR29DCF9vBNxBOGU29FVRBXKdS5njYic4t4asrbxYmjFXiqqQ0ONnBNHk9P0RHFgqEy1GL/YbJg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     peerDependencies:
-      astro: ^5.0.0-alpha.0
+      astro: ^5.0.0
     dependencies:
-      '@astrojs/markdown-remark': 6.0.0-beta.3
+      '@astrojs/markdown-remark': 6.0.0
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.3
@@ -615,20 +616,20 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/node@9.0.0-beta.3(astro@5.0.0-beta.12):
-    resolution: {integrity: sha512-HTj11VO+yiUtu9vP3O2O33bqZy0/Q3eH7uDkPYan6BOgsTN+m+7wDZNCUrw10eB/uXsQTbGw06qR6AuZM1OEFw==}
+  /@astrojs/node@9.0.0(astro@5.0.1):
+    resolution: {integrity: sha512-3h/5kFZvpuo+chYAjj75YhtRUxfquxEJrpZRRC7TdiMGp2WhLp2us4VXm2mjezJp/zHKotW2L3qgp0P2ujQ0xw==}
     peerDependencies:
-      astro: ^5.0.0-alpha.8
+      astro: ^5.0.0
     dependencies:
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       send: 1.1.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@astrojs/prism@3.2.0-beta.0:
-    resolution: {integrity: sha512-0OZSIFV0accYiNZRoDjMkGsp+M3DNemBxEQJ4rphB6vL5mPBBgTKPwD+zf3H1PmOysIYltSJ6rzSI8JCnGqVIg==}
+  /@astrojs/prism@3.2.0:
+    resolution: {integrity: sha512-GilTHKGCW6HMq7y3BUv9Ac7GMe/MO9gi9GW62GzKtth0SwukCu/qp2wLiGpEujhY+VVhaG9v7kv/5vFzvf4NYw==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     dependencies:
       prismjs: 1.29.0
@@ -641,13 +642,13 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /@astrojs/tailwind@5.1.2(astro@5.0.0-beta.12)(tailwindcss@3.4.14):
-    resolution: {integrity: sha512-IvOF0W/dtHElcXvhrPR35nHmhyV3cfz1EzPitMGtU7sYy9Hci3BNK1To6FWmVuuNKPxza1IgCGetSynJZL7fOg==}
+  /@astrojs/tailwind@5.1.3(astro@5.0.1)(tailwindcss@3.4.14):
+    resolution: {integrity: sha512-XF7WhXRhqEHGvADqc0kDtF7Yv/g4wAWTaj91jBBTBaYnc4+MQLH94duFfFa4NlTkRG40VQd012eF3MhO3Kk+bg==}
     peerDependencies:
-      astro: ^3.0.0 || ^4.0.0 || ^5.0.0-beta.0
+      astro: ^3.0.0 || ^4.0.0 || ^5.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       autoprefixer: 10.4.20(postcss@8.4.49)
       postcss: 8.4.49
       postcss-load-config: 4.0.2(postcss@8.4.49)
@@ -656,8 +657,8 @@ packages:
       - ts-node
     dev: false
 
-  /@astrojs/telemetry@3.2.0-beta.0:
-    resolution: {integrity: sha512-8KCnaFAVsm/0KdXzWN0Afz50Ijyr1uHT31bE5AgCF5CLMh0dUpEOvHgZ++zLLq+VFj+5e4o0L6TLXMeAVHECBg==}
+  /@astrojs/telemetry@3.2.0:
+    resolution: {integrity: sha512-wxhSKRfKugLwLlr4OFfcqovk+LIFtKwLyGPqMsv+9/ibqqnW3Gv7tBhtKEb0gAyUAC4G9BTVQeQahqnQAhd6IQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     dependencies:
       ci-info: 4.1.0
@@ -669,6 +670,12 @@ packages:
       which-pm-runs: 1.1.0
     transitivePeerDependencies:
       - supports-color
+
+  /@astrojs/yaml2ts@0.2.2:
+    resolution: {integrity: sha512-GOfvSr5Nqy2z5XiwqTouBBpy5FyI6DEe+/g/Mk5am9SjILN1S5fOEvYK0GuWHg98yS/dobP4m8qyqw/URW35fQ==}
+    dependencies:
+      yaml: 2.6.1
+    dev: true
 
   /@babel/helper-string-parser@7.25.9:
     resolution: {integrity: sha512-4A/SCr/2KLd5jrtOMFzaKjVtAei3+2r/NChoBNoZ3EyP/+GlhoaEGoWOZUmFmoITP7zOJyHIMm+DYRd8o3PvHA==}
@@ -1593,15 +1600,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /@johnsoncodehk/vscode-html-languageservice@5.2.0-34a5462:
-    resolution: {integrity: sha512-etqLfpSJ5zaw76KUNF603be6d6QsiQPmaHr9FKEp4zhLZJzWCCMH6Icak7MtLUFLZLMpL761mZNImi/joBo1ZA==}
-    dependencies:
-      '@vscode/l10n': 0.0.18
-      vscode-languageserver-textdocument: 1.0.11
-      vscode-languageserver-types: 3.17.5
-      vscode-uri: 3.0.8
-    dev: true
-
   /@jridgewell/gen-mapping@0.3.5:
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
@@ -2219,68 +2217,58 @@ packages:
       tinyrainbow: 1.2.0
     dev: true
 
-  /@volar/kit@2.2.5(typescript@5.6.3):
-    resolution: {integrity: sha512-Bmn0UCaT43xUGGRwcmFG9lKhiCCLjRT4ScSLLPn5C9ltUcSGnIFFDlbZZa1PreHYHq25/4zkXt9Ap32klAh17w==}
+  /@volar/kit@2.4.10(typescript@5.6.3):
+    resolution: {integrity: sha512-ul+rLeO9RlFDgkY/FhPWMnpFqAsjvjkKz8VZeOY5YCJMwTblmmSBlNJtFNxSBx9t/k1q80nEthLyxiJ50ZbIAg==}
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@volar/language-service': 2.2.5
-      '@volar/typescript': 2.2.5
+      '@volar/language-service': 2.4.10
+      '@volar/typescript': 2.4.10
       typesafe-path: 0.2.2
       typescript: 5.6.3
-      vscode-languageserver-textdocument: 1.0.11
+      vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.0.8
     dev: true
 
-  /@volar/language-core@2.2.5:
-    resolution: {integrity: sha512-2htyAuxRrAgETmFeUhT4XLELk3LiEcqoW/B8YUXMF6BrGWLMwIR09MFaZYvrA2UhbdAeSyeQ726HaWSWkexUcQ==}
+  /@volar/language-core@2.4.10:
+    resolution: {integrity: sha512-hG3Z13+nJmGaT+fnQzAkS0hjJRa2FCeqZt6Bd+oGNhUkQ+mTFsDETg5rqUTxyzIh5pSOGY7FHCWUS8G82AzLCA==}
     dependencies:
-      '@volar/source-map': 2.2.5
+      '@volar/source-map': 2.4.10
     dev: true
 
-  /@volar/language-server@2.2.5:
-    resolution: {integrity: sha512-PV/jkUkI+m72HTXwnY7hsGqLY3VNi96ZRoWFRzVC9QG/853bixxjveXPJIiydMJ9I739lO3kcj3hnGrF5Sm+HA==}
+  /@volar/language-server@2.4.10:
+    resolution: {integrity: sha512-odQsgrJh8hOXfxkSj/BSnpjThb2/KDhbxZnG/XAEx6E3QGDQv4hAOz9GWuKoNs0tkjgwphQGIwDMT1JYaTgRJw==}
     dependencies:
-      '@volar/language-core': 2.2.5
-      '@volar/language-service': 2.2.5
-      '@volar/snapshot-document': 2.2.5
-      '@volar/typescript': 2.2.5
-      '@vscode/l10n': 0.0.16
+      '@volar/language-core': 2.4.10
+      '@volar/language-service': 2.4.10
+      '@volar/typescript': 2.4.10
       path-browserify: 1.0.1
       request-light: 0.7.0
       vscode-languageserver: 9.0.1
       vscode-languageserver-protocol: 3.17.5
-      vscode-languageserver-textdocument: 1.0.11
+      vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.0.8
     dev: true
 
-  /@volar/language-service@2.2.5:
-    resolution: {integrity: sha512-a97e/0uCe+uSu23F4zvgvldqJtZe6jugQeEHWjTfhgOEO8+Be0t5CZNNVItQqmPyAsD8eElg0S/cP6uxvCmCSQ==}
+  /@volar/language-service@2.4.10:
+    resolution: {integrity: sha512-VxUiWS11rnRzakkqw5x1LPhsz+RBfD0CrrFarLGW2/voliYXEdCuSOM3r8JyNRvMvP4uwhD38ccAdTcULQEAIQ==}
     dependencies:
-      '@volar/language-core': 2.2.5
+      '@volar/language-core': 2.4.10
       vscode-languageserver-protocol: 3.17.5
-      vscode-languageserver-textdocument: 1.0.11
+      vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.0.8
     dev: true
 
-  /@volar/snapshot-document@2.2.5:
-    resolution: {integrity: sha512-MTOvWVKxM7ugKO3Amffkv2pND03fe2JtfygYaputqjVFML7YxtTXj8SPnI2pODLeSwOKzDYL6Q8r5j6Y5AgUzQ==}
-    dependencies:
-      vscode-languageserver-protocol: 3.17.5
-      vscode-languageserver-textdocument: 1.0.11
+  /@volar/source-map@2.4.10:
+    resolution: {integrity: sha512-OCV+b5ihV0RF3A7vEvNyHPi4G4kFa6ukPmyVocmqm5QzOd8r5yAtiNvaPEjl8dNvgC/lj4JPryeeHLdXd62rWA==}
     dev: true
 
-  /@volar/source-map@2.2.5:
-    resolution: {integrity: sha512-wrOEIiZNf4E+PWB0AxyM4tfhkfldPsb3bxg8N6FHrxJH2ohar7aGu48e98bp3pR9HUA7P/pR9VrLmkTrgCCnWQ==}
+  /@volar/typescript@2.4.10:
+    resolution: {integrity: sha512-F8ZtBMhSXyYKuBfGpYwqA5rsONnOwAVvjyE7KPYJ7wgZqo2roASqNWUnianOomJX5u1cxeRooHV59N0PhvEOgw==}
     dependencies:
-      muggle-string: 0.4.1
-    dev: true
-
-  /@volar/typescript@2.2.5:
-    resolution: {integrity: sha512-eSV/n75+ppfEVugMC/salZsI44nXDPAyL6+iTYCNLtiLHGJsnMv9GwiDMujrvAUj/aLQyqRJgYtXRoxop2clCw==}
-    dependencies:
-      '@volar/language-core': 2.2.5
+      '@volar/language-core': 2.4.10
       path-browserify: 1.0.1
+      vscode-uri: 3.0.8
     dev: true
 
   /@vscode/emmet-helper@2.9.3:
@@ -2288,13 +2276,9 @@ packages:
     dependencies:
       emmet: 2.4.7
       jsonc-parser: 2.3.1
-      vscode-languageserver-textdocument: 1.0.11
+      vscode-languageserver-textdocument: 1.0.12
       vscode-languageserver-types: 3.17.5
       vscode-uri: 2.1.2
-    dev: true
-
-  /@vscode/l10n@0.0.16:
-    resolution: {integrity: sha512-JT5CvrIYYCrmB+dCana8sUqJEcGB1ZDXNLMQ2+42bW995WmNoenijWMUdZfwmuQUTQcEVVIa2OecZzTYWUW9Cg==}
     dev: true
 
   /@vscode/l10n@0.0.18:
@@ -2313,6 +2297,15 @@ packages:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  /ajv@8.17.1:
+    resolution: {integrity: sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-uri: 3.0.3
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+    dev: true
 
   /algoliasearch@4.20.0:
     resolution: {integrity: sha512-y+UHEjnOItoNy0bYO+WWmLWBlPwDjKHW6mNHrPi0NkuhpQOOEbrkwQH/wgKFDLh7qlKjzoKeiRtlpewDPDG23g==}
@@ -2405,24 +2398,24 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-expressive-code@0.38.3(astro@5.0.0-beta.12):
+  /astro-expressive-code@0.38.3(astro@5.0.1):
     resolution: {integrity: sha512-Tvdc7RV0G92BbtyEOsfJtXU35w41CkM94fOAzxbQP67Wj5jArfserJ321FO4XA7WG9QMV0GIBmQq77NBIRDzpQ==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
     dependencies:
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       rehype-expressive-code: 0.38.3
     dev: false
 
-  /astro@5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3):
-    resolution: {integrity: sha512-ZZSjXSZXtgfE89iSW8bhOTgKFha5To6GL2rbkZH6IzXg60xplcIQFYJ2Q5/U0I2/2Qv+ydL3H79Jiaw/DTSHjw==}
+  /astro@5.0.1(@types/node@18.16.19)(typescript@5.6.3):
+    resolution: {integrity: sha512-7XzFq3eFdSkeT/aCNealVv4klwmKoOYb6LZymbyZQrdUA9vEoUCKFcujVo4YbJJ8WXyEm515ZHPCxHTdDneEug==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     dependencies:
       '@astrojs/compiler': 2.10.3
-      '@astrojs/internal-helpers': 0.4.1
-      '@astrojs/markdown-remark': 6.0.0-beta.3
-      '@astrojs/telemetry': 3.2.0-beta.0
+      '@astrojs/internal-helpers': 0.4.2
+      '@astrojs/markdown-remark': 6.0.0
+      '@astrojs/telemetry': 3.2.0
       '@oslojs/encoding': 1.1.0
       '@rollup/pluginutils': 5.1.3
       '@types/cookie': 0.6.0
@@ -3252,6 +3245,10 @@ packages:
       tmp: 0.0.33
     dev: true
 
+  /fast-deep-equal@3.1.3:
+    resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+    dev: true
+
   /fast-fifo@1.3.0:
     resolution: {integrity: sha512-IgfweLvEpwyA4WgiQe9Nx6VV2QkML2NkvZnk1oKnIzXgXdWxuhF7zw4DvLTPZJn6PIUneiAXPF24QmoEqHTjyw==}
     dev: false
@@ -3265,6 +3262,10 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.8
+
+  /fast-uri@3.0.3:
+    resolution: {integrity: sha512-aLrHthzCjH5He4Z2H9YZ+v6Ujb9ocRuW6ZzkJQOrTxleEijANq4v1TsaPaVG1PZcuurEzrLcWRyYBYXD5cEiaw==}
+    dev: true
 
   /fastq@1.17.1:
     resolution: {integrity: sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==}
@@ -3960,8 +3961,16 @@ packages:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
     dev: true
 
+  /json-schema-traverse@1.0.0:
+    resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
+    dev: true
+
   /jsonc-parser@2.3.1:
     resolution: {integrity: sha512-H8jvkz1O50L3dMZCsLqiuB2tA7muqbSg1AtGEkN0leAqGjsUzDJir3Zwr02BhqdcITPg3ei3mZ+HjMocAknhhg==}
+    dev: true
+
+  /jsonc-parser@3.3.1:
+    resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
     dev: true
 
   /jsonfile@4.0.0:
@@ -5054,7 +5063,7 @@ packages:
     dependencies:
       lilconfig: 3.1.2
       postcss: 8.4.49
-      yaml: 2.3.4
+      yaml: 2.6.1
 
   /postcss-nested@6.0.1(postcss@8.4.49):
     resolution: {integrity: sha512-mEp4xPMi5bSWiMbsgoPfcP74lsWLHkQbZc3sY+jWYd65CUwXrUaTp0fmNpa01ZcETKlIgUdFN/MpS2xZtqL9dQ==}
@@ -5122,6 +5131,14 @@ packages:
       prettier: 3.3.3
       sass-formatter: 0.7.6
     dev: true
+
+  /prettier@2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
@@ -5410,12 +5427,21 @@ packages:
       mdast-util-to-markdown: 2.1.0
       unified: 11.0.5
 
+  /request-light@0.5.8:
+    resolution: {integrity: sha512-3Zjgh+8b5fhRJBQZoy+zbVKpAQGLyka0MPgW3zruTF4dFFJ8Fqcfu9YsAvi/rvdcaTeWG3MkbZv4WKxAn/84Lg==}
+    dev: true
+
   /request-light@0.7.0:
     resolution: {integrity: sha512-lMbBMrDoxgsyO+yB3sDcrDuX85yYt7sS8BfQd11jtbW/z5ZWgLZRcEGLsLoYw7I0WSUGQBs8CC8ScIxkTX1+6Q==}
     dev: true
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  /require-from-string@2.0.2:
+    resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -5758,7 +5784,7 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.0-beta.12):
+  /starlight-links-validator@0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.1):
     resolution: {integrity: sha512-BP6vf+fj91LnQXPnggWVhZXhcSF1x6SHof0GRg+IGgY0idSbIU7OHE2SvLggs2fRZ5SflVqpCTpK0pQcOmYcDg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -5767,7 +5793,7 @@ packages:
     dependencies:
       '@astrojs/starlight': link:packages/starlight
       '@types/picomatch': 2.3.3
-      astro: 5.0.0-beta.12(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.0.1(@types/node@18.16.19)(typescript@5.6.3)
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.1
       hast-util-has-property: 3.0.0
@@ -6101,8 +6127,8 @@ packages:
     resolution: {integrity: sha512-OJabfkAg1WLZSqJAJ0Z6Sdt3utnbzr/jh+NAHoyWHJe8CMSy79Gm085094M9nvTPy22KzTVn5Zq5mbapCI/hPA==}
     dev: true
 
-  /typescript-auto-import-cache@0.3.2:
-    resolution: {integrity: sha512-+laqe5SFL1vN62FPOOJSUDTZxtgsoOXjneYOXIpx5rQ4UMiN89NAtJLpqLqyebv9fgQ/IMeeTX+mQyRnwvJzvg==}
+  /typescript-auto-import-cache@0.3.5:
+    resolution: {integrity: sha512-fAIveQKsoYj55CozUiBoj4b/7WpN0i4o74wiGY5JVUEoD0XiqDk1tJqTEjgzL2/AizKQrXxyRosSebyDzBZKjw==}
     dependencies:
       semver: 7.6.3
     dev: true
@@ -6371,52 +6397,53 @@ packages:
       - yaml
     dev: true
 
-  /volar-service-css@0.0.45(@volar/language-service@2.2.5):
-    resolution: {integrity: sha512-f+AlUI1+kESbcZSVaNJVAnK0c/9Da5StoxzPqA5/8VqUHJWNdubWNnwG5xpFVTfgh6pgTcey3UBhBfHytFaIOg==}
+  /volar-service-css@0.0.62(@volar/language-service@2.4.10):
+    resolution: {integrity: sha512-JwNyKsH3F8PuzZYuqPf+2e+4CTU8YoyUHEHVnoXNlrLe7wy9U3biomZ56llN69Ris7TTy/+DEX41yVxQpM4qvg==}
     peerDependencies:
-      '@volar/language-service': ~2.2.3
+      '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
     dependencies:
-      '@volar/language-service': 2.2.5
-      vscode-css-languageservice: 6.2.14
-      vscode-languageserver-textdocument: 1.0.11
+      '@volar/language-service': 2.4.10
+      vscode-css-languageservice: 6.3.2
+      vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.0.8
     dev: true
 
-  /volar-service-emmet@0.0.45(@volar/language-service@2.2.5):
-    resolution: {integrity: sha512-9nLXSDkR1vA/3fQkFEsSXAu3XovQxOpTkVG2jilQgfek/K1ZLkaA/WMhN/TtmPmQg4NxE9Ni6mA5udBQ5gVXIA==}
+  /volar-service-emmet@0.0.62(@volar/language-service@2.4.10):
+    resolution: {integrity: sha512-U4dxWDBWz7Pi4plpbXf4J4Z/ss6kBO3TYrACxWNsE29abu75QzVS0paxDDhI6bhqpbDFXlpsDhZ9aXVFpnfGRQ==}
     peerDependencies:
-      '@volar/language-service': ~2.2.3
+      '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
     dependencies:
       '@emmetio/css-parser': 0.4.0
       '@emmetio/html-matcher': 1.3.0
-      '@volar/language-service': 2.2.5
+      '@volar/language-service': 2.4.10
       '@vscode/emmet-helper': 2.9.3
+      vscode-uri: 3.0.8
     dev: true
 
-  /volar-service-html@0.0.45(@volar/language-service@2.2.5):
-    resolution: {integrity: sha512-tLTJqfy1v5C4nmeAsfekFIKPl4r4qDMyL0L9MWywr/EApZzPCsbeUGxCqdzxSMC2q7PMCfX2i167txDo+J0LVA==}
+  /volar-service-html@0.0.62(@volar/language-service@2.4.10):
+    resolution: {integrity: sha512-Zw01aJsZRh4GTGUjveyfEzEqpULQUdQH79KNEiKVYHZyuGtdBRYCHlrus1sueSNMxwwkuF5WnOHfvBzafs8yyQ==}
     peerDependencies:
-      '@volar/language-service': ~2.2.3
+      '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
     dependencies:
-      '@volar/language-service': 2.2.5
-      vscode-html-languageservice: /@johnsoncodehk/vscode-html-languageservice@5.2.0-34a5462
-      vscode-languageserver-textdocument: 1.0.11
+      '@volar/language-service': 2.4.10
+      vscode-html-languageservice: 5.3.1
+      vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.0.8
     dev: true
 
-  /volar-service-prettier@0.0.45(@volar/language-service@2.2.5)(prettier@3.3.3):
-    resolution: {integrity: sha512-+mBS2EsDgp/kunKEBnHvhBwIQm5v2ahw4NKpKdg4sTpXy3UxqHt+Fq/wRYQ7Z8LlNVNRVfp75ThjM+w2zaZBAw==}
+  /volar-service-prettier@0.0.62(@volar/language-service@2.4.10)(prettier@3.3.3):
+    resolution: {integrity: sha512-h2yk1RqRTE+vkYZaI9KYuwpDfOQRrTEMvoHol0yW4GFKc75wWQRrb5n/5abDrzMPrkQbSip8JH2AXbvrRtYh4w==}
     peerDependencies:
-      '@volar/language-service': ~2.2.3
+      '@volar/language-service': ~2.4.0
       prettier: ^2.2 || ^3.0
     peerDependenciesMeta:
       '@volar/language-service':
@@ -6424,59 +6451,97 @@ packages:
       prettier:
         optional: true
     dependencies:
-      '@volar/language-service': 2.2.5
+      '@volar/language-service': 2.4.10
       prettier: 3.3.3
       vscode-uri: 3.0.8
     dev: true
 
-  /volar-service-typescript-twoslash-queries@0.0.45(@volar/language-service@2.2.5):
-    resolution: {integrity: sha512-KrPUUvKggZgV9mrDpstCzmf20irgv0ooMv+FGDzIIQUkya+d2+nSS8Mx2h9FvsYgLccUVw5jU3Rhwhd3pv/7qg==}
+  /volar-service-typescript-twoslash-queries@0.0.62(@volar/language-service@2.4.10):
+    resolution: {integrity: sha512-KxFt4zydyJYYI0kFAcWPTh4u0Ha36TASPZkAnNY784GtgajerUqM80nX/W1d0wVhmcOFfAxkVsf/Ed+tiYU7ng==}
     peerDependencies:
-      '@volar/language-service': ~2.2.3
+      '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
     dependencies:
-      '@volar/language-service': 2.2.5
+      '@volar/language-service': 2.4.10
+      vscode-uri: 3.0.8
     dev: true
 
-  /volar-service-typescript@0.0.45(@volar/language-service@2.2.5):
-    resolution: {integrity: sha512-i/mMIIAMastJ2kgPo3qvX0Rrl7NyxhIYZ0ug/B4ambZcLPI1vzBgS2fmvyWX3jhBYHh8NmbAotFj+0Y9JtN47A==}
+  /volar-service-typescript@0.0.62(@volar/language-service@2.4.10):
+    resolution: {integrity: sha512-p7MPi71q7KOsH0eAbZwPBiKPp9B2+qrdHAd6VY5oTo9BUXatsOAdakTm9Yf0DUj6uWBAaOT01BSeVOPwucMV1g==}
     peerDependencies:
-      '@volar/language-service': ~2.2.3
+      '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
       '@volar/language-service':
         optional: true
     dependencies:
-      '@volar/language-service': 2.2.5
+      '@volar/language-service': 2.4.10
       path-browserify: 1.0.1
       semver: 7.6.3
-      typescript-auto-import-cache: 0.3.2
-      vscode-languageserver-textdocument: 1.0.11
+      typescript-auto-import-cache: 0.3.5
+      vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
+      vscode-uri: 3.0.8
     dev: true
 
-  /vscode-css-languageservice@6.2.14:
-    resolution: {integrity: sha512-5UPQ9Y1sUTnuMyaMBpO7LrBkqjhEJb5eAwdUlDp+Uez8lry+Tspnk3+3p2qWS4LlNsr4p3v9WkZxUf1ltgFpgw==}
+  /volar-service-yaml@0.0.62(@volar/language-service@2.4.10):
+    resolution: {integrity: sha512-k7gvv7sk3wa+nGll3MaSKyjwQsJjIGCHFjVkl3wjaSP2nouKyn9aokGmqjrl39mi88Oy49giog2GkZH526wjig==}
+    peerDependencies:
+      '@volar/language-service': ~2.4.0
+    peerDependenciesMeta:
+      '@volar/language-service':
+        optional: true
+    dependencies:
+      '@volar/language-service': 2.4.10
+      vscode-uri: 3.0.8
+      yaml-language-server: 1.15.0
+    dev: true
+
+  /vscode-css-languageservice@6.3.2:
+    resolution: {integrity: sha512-GEpPxrUTAeXWdZWHev1OJU9lz2Q2/PPBxQ2TIRmLGvQiH3WZbqaNoute0n0ewxlgtjzTW3AKZT+NHySk5Rf4Eg==}
     dependencies:
       '@vscode/l10n': 0.0.18
-      vscode-languageserver-textdocument: 1.0.11
+      vscode-languageserver-textdocument: 1.0.12
       vscode-languageserver-types: 3.17.5
       vscode-uri: 3.0.8
     dev: true
 
-  /vscode-html-languageservice@5.2.0:
-    resolution: {integrity: sha512-cdNMhyw57/SQzgUUGSIMQ66jikqEN6nBNyhx5YuOyj9310+eY9zw8Q0cXpiKzDX8aHYFewQEXRnigl06j/TVwQ==}
+  /vscode-html-languageservice@5.3.1:
+    resolution: {integrity: sha512-ysUh4hFeW/WOWz/TO9gm08xigiSsV/FOAZ+DolgJfeLftna54YdmZ4A+lIn46RbdO3/Qv5QHTn1ZGqmrXQhZyA==}
     dependencies:
       '@vscode/l10n': 0.0.18
-      vscode-languageserver-textdocument: 1.0.11
+      vscode-languageserver-textdocument: 1.0.12
       vscode-languageserver-types: 3.17.5
       vscode-uri: 3.0.8
+    dev: true
+
+  /vscode-json-languageservice@4.1.8:
+    resolution: {integrity: sha512-0vSpg6Xd9hfV+eZAaYN63xVVMOTmJ4GgHxXnkLCh+9RsQBkWKIghzLhW2B9ebfG+LQQg8uLtsQ2aUKjTgE+QOg==}
+    engines: {npm: '>=7.0.0'}
+    dependencies:
+      jsonc-parser: 3.3.1
+      vscode-languageserver-textdocument: 1.0.12
+      vscode-languageserver-types: 3.17.5
+      vscode-nls: 5.2.0
+      vscode-uri: 3.0.8
+    dev: true
+
+  /vscode-jsonrpc@6.0.0:
+    resolution: {integrity: sha512-wnJA4BnEjOSyFMvjZdpiOwhSq9uDoK8e/kpRJDTaMYzwlkrhG1fwDIZI94CLsLzlCK5cIbMMtFlJlfR57Lavmg==}
+    engines: {node: '>=8.0.0 || >=10.0.0'}
     dev: true
 
   /vscode-jsonrpc@8.2.0:
     resolution: {integrity: sha512-C+r0eKJUIfiDIfwJhria30+TYWPtuHJXHtI7J0YlOmKAo7ogxP20T0zxB7HZQIFhIyvoBPwWskjxrvAtfjyZfA==}
     engines: {node: '>=14.0.0'}
+    dev: true
+
+  /vscode-languageserver-protocol@3.16.0:
+    resolution: {integrity: sha512-sdeUoAawceQdgIfTI+sdcwkiK2KU+2cbEYA0agzM2uqaUy2UpnnGHtWTHVEtS0ES4zHU0eMFRGN+oQgDxlD66A==}
+    dependencies:
+      vscode-jsonrpc: 6.0.0
+      vscode-languageserver-types: 3.16.0
     dev: true
 
   /vscode-languageserver-protocol@3.17.5:
@@ -6486,12 +6551,23 @@ packages:
       vscode-languageserver-types: 3.17.5
     dev: true
 
-  /vscode-languageserver-textdocument@1.0.11:
-    resolution: {integrity: sha512-X+8T3GoiwTVlJbicx/sIAF+yuJAqz8VvwJyoMVhwEMoEKE/fkDmrqUgDMyBECcM2A2frVZIUj5HI/ErRXCfOeA==}
+  /vscode-languageserver-textdocument@1.0.12:
+    resolution: {integrity: sha512-cxWNPesCnQCcMPeenjKKsOCKQZ/L6Tv19DTRIGuLWe32lyzWhihGVJ/rcckZXJxfdKCFvRLS3fpBIsV/ZGX4zA==}
+    dev: true
+
+  /vscode-languageserver-types@3.16.0:
+    resolution: {integrity: sha512-k8luDIWJWyenLc5ToFQQMaSrqCHiLwyKPHKPQZ5zz21vM+vIVUSvsRpcbiECH4WR88K2XZqc4ScRcZ7nk/jbeA==}
     dev: true
 
   /vscode-languageserver-types@3.17.5:
     resolution: {integrity: sha512-Ld1VelNuX9pdF39h2Hgaeb5hEZM2Z3jUrrMgWQAu82jMtZp7p3vJT3BzToKtZI7NgQssZje5o0zryOrhQvzQAg==}
+    dev: true
+
+  /vscode-languageserver@7.0.0:
+    resolution: {integrity: sha512-60HTx5ID+fLRcgdHfmz0LDZAXYEV68fzwG0JWwEPBode9NuMYTIxuYXPg4ngO8i8+Ou0lM7y6GzaYWbiDL0drw==}
+    hasBin: true
+    dependencies:
+      vscode-languageserver-protocol: 3.16.0
     dev: true
 
   /vscode-languageserver@9.0.1:
@@ -6626,9 +6702,33 @@ packages:
     resolution: {integrity: sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A==}
     dev: true
 
-  /yaml@2.3.4:
-    resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
+  /yaml-language-server@1.15.0:
+    resolution: {integrity: sha512-N47AqBDCMQmh6mBLmI6oqxryHRzi33aPFPsJhYy3VTUGCdLHYjGh4FZzpUjRlphaADBBkDmnkM/++KNIOHi5Rw==}
+    hasBin: true
+    dependencies:
+      ajv: 8.17.1
+      lodash: 4.17.21
+      request-light: 0.5.8
+      vscode-json-languageservice: 4.1.8
+      vscode-languageserver: 7.0.0
+      vscode-languageserver-textdocument: 1.0.12
+      vscode-languageserver-types: 3.17.5
+      vscode-nls: 5.2.0
+      vscode-uri: 3.0.8
+      yaml: 2.2.2
+    optionalDependencies:
+      prettier: 2.8.7
+    dev: true
+
+  /yaml@2.2.2:
+    resolution: {integrity: sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==}
     engines: {node: '>= 14'}
+    dev: true
+
+  /yaml@2.6.1:
+    resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
+    engines: {node: '>= 14'}
+    hasBin: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
