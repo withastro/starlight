@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.29.3
+
+### Patch Changes
+
+- [#2645](https://github.com/withastro/starlight/pull/2645) [`cf12beb`](https://github.com/withastro/starlight/commit/cf12beb91b4cb2f212dbcc0cc1ed56e79d055ff0) Thanks [@techfg](https://github.com/techfg)! - Fixes support for favicon URLs that contain a search query and/or hash
+
+- [#2650](https://github.com/withastro/starlight/pull/2650) [`38db4ec`](https://github.com/withastro/starlight/commit/38db4ecfdb572b1f6362aca544f72f5128f5fe08) Thanks [@raviqqe](https://github.com/raviqqe)! - Moves `@types/js-yaml` package to non-dev dependencies
+
+- [#2633](https://github.com/withastro/starlight/pull/2633) [`5adb720`](https://github.com/withastro/starlight/commit/5adb720afd354d99b3682d045b9dc8729a1ff274) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a VoiceOver issue with Safari where the content of a `<script>` element could be read before the sidebar content.
+
 ## 0.29.2
 
 ### Patch Changes
