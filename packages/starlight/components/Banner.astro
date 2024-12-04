@@ -1,7 +1,5 @@
 ---
-import type { Props } from '../props';
-
-const { banner } = Astro.props.entry.data;
+const { banner } = Astro.locals.routeData!.entry.data;
 ---
 
 {banner && <div class="sl-banner" set:html={banner.content} />}
