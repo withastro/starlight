@@ -185,7 +185,7 @@
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^2.1.6",
-    "astro": "^5.0.1",
+    "astro": "^5.0.2",
     "linkedom": "^0.18.4",
     "vitest": "^2.1.6"
   },
