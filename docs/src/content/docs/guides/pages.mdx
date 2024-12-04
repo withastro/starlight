@@ -89,6 +89,39 @@ import CustomComponent from './CustomComponent.astro';
 </StarlightPage>
 ```
 
+### Using Starlight’s minimum layout in custom pages
+
+If you want to use Starlight’s design but don’t need the full layout, wrap your page content with the `<SimpleStarlightPage />` component. This will inherit only the `head` tag and user CSS, without any other styles or layout.
+
+```astro
+---
+// src/pages/custom-page/example.astro
+import SimpleStarlightPage from '@astrojs/starlight/components/SimpleStarlightPage.astro';
+import CustomComponent from './CustomComponent.astro';
+---
+
+<SimpleStarlightPage frontmatter={{ title: 'My custom page' }}>
+	<p>This is a custom page with a custom component:</p>
+	<CustomComponent />
+</SimpleStarlightPage>
+```
+
+If you need to set up everything from scratch, you can set up the `html` tag yourself.
+
+```astro
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>My custom page</title>
+	</head>
+	<body>
+		<p>This is a custom page with a custom component:</p>
+		<CustomComponent />
+	</body>
+</html>
+```
+
 #### Props
 
 The `<StarlightPage />` component accepts the following props.
