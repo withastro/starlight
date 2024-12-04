@@ -50,14 +50,3 @@ export function ensureHtmlExtension(path: string) {
 	}
 	return ensureLeadingSlash(path);
 }
-
-export function splitQueryAndFragment(url: string) {
-	const [urlWithQuery, hash] = url.split('#');
-	const [urlBase, queryString] = (urlWithQuery || '').split('?');
-
-	return {
-		base: urlBase || '',
-		query: queryString ? `?${queryString}` : '',
-		fragment: hash ? `#${hash}` : '',
-	};
-}

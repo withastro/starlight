@@ -1,6 +1,5 @@
 import { extname } from 'node:path';
 import { z } from 'astro/zod';
-import { splitQueryAndFragment } from '../utils/path';
 
 const faviconTypeMap = {
 	'.ico': 'image/x-icon',
@@ -16,8 +15,9 @@ export const FaviconSchema = () =>
 		.string()
 		.default('/favicon.svg')
 		.transform((favicon, ctx) => {
-			const { base } = splitQueryAndFragment(favicon);
-			const ext = extname(base).toLowerCase();
+			// favicon can be absolute or relative url
+			const { pathname } = new URL(favicon, 'https://example.com');
+			const ext = extname(pathname).toLowerCase();
 
 			if (!isFaviconExt(ext)) {
 				ctx.addIssue({

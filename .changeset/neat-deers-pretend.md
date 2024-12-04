@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Fixes favicon url parsing of query and fragment
+Fixes support for favicon URLs that contain a search query and/or hash
