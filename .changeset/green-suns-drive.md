@@ -48,4 +48,6 @@ Astro 5.0 introduces a new version of [content collections](https://docs.astro.b
     };
    ```
 
+1. **Update other collections.** To update any other collections you may have, follow the [“Updating existing collections”](https://docs.astro.build/en/guides/upgrade-to/v5/#updating-existing-collections) section in the Astro 5 upgrade guide.
+
 If you are unable to make any changes to your collections at this time, you can enable the [`legacy.collections` flag](https://docs.astro.build/en/reference/legacy-flags/) which is supported by Starlight and will allow you to keep your collections in their current state until the legacy flag is no longer supported.
