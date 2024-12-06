@@ -2,6 +2,7 @@ import type { GetStaticPathsItem } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
+import { getCollectionPathFromRoot } from '../loader';
 import {
 	type LocaleData,
 	localizedId,
@@ -66,9 +67,7 @@ export function normalizeCollectionEntry(entry: StarlightDocsCollectionEntry): S
 	return {
 		...entry,
 		// In a legacy collection, the `filePath` property doesn't exist.
-		filePath:
-			// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
-			entry.filePath ?? `${project.srcDir.replace(project.root, '')}content/docs/${entry.id}`,
+		filePath: entry.filePath ?? `${getCollectionPathFromRoot('docs', project)}/${entry.id}`,
 		// In a collection with a loader, the `slug` property is replaced by the `id`.
 		slug: normalizeIndexSlug(entry.slug ?? entry.id),
 	};

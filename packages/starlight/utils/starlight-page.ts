@@ -2,6 +2,7 @@ import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
+import { getCollectionPathFromRoot } from '../loader';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import {
@@ -125,8 +126,7 @@ export async function generateStarlightPageRouteData({
 		slug,
 		body: '',
 		collection: 'docs',
-		// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
-		filePath: `${project.srcDir.replace(project.root, '')}content/docs/${stripLeadingAndTrailingSlashes(slug)}.md}`,
+		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(slug)}.md`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {

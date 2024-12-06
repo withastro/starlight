@@ -2,6 +2,7 @@ import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { resolveCollectionPath } from '../loader';
 import type { StarlightConfig } from '../utils/user-config';
 import { getAllNewestCommitDate } from '../utils/git';
 import type { PluginTranslations } from '../utils/plugins';
@@ -45,9 +46,8 @@ export function vitePluginStarlightUserConfig(
 	const resolveLocalPath = (path: string) =>
 		JSON.stringify(fileURLToPath(new URL(path, import.meta.url)));
 
-	// TODO(HiDeoo) When the docs content collection path is configurable, this should be refactored.
 	const rootPath = fileURLToPath(root);
-	const docsPath = resolve(fileURLToPath(srcDir), 'content/docs');
+	const docsPath = resolveCollectionPath('docs', srcDir);
 
 	let collectionConfigImportPath = resolve(
 		fileURLToPath(srcDir),
