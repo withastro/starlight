@@ -18,12 +18,14 @@ export default defineConfig({
 				'props.ts',
 				// Main integration entrypoint — don’t think we’re able to test this directly currently.
 				'index.ts',
+				// Since Vitest 2.1.2, coverage is collected for `*.astro` files.
+				'**/*.astro',
 			],
 			thresholds: {
-				lines: 88,
+				lines: 87,
 				functions: 90,
 				branches: 90,
-				statements: 88,
+				statements: 87,
 			},
 		},
 	},

@@ -50,6 +50,9 @@ jobs:
       - run: pnpm i
       - name: Test packages
         run: pnpm -r test:coverage
+      - name: Test legacy collections support
+        working-directory: packages/starlight
+        run: pnpm test:legacy
 
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'
@@ -149,6 +152,4 @@ jobs:
 
       - name: Build docs site and check links
         working-directory: ./docs
-        run: pnpm build
-        env:
-          CHECK_LINKS: true
+        run: pnpm linkcheck

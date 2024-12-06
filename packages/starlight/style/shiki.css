@@ -1,6 +1,6 @@
 :root {
-	--astro-code-color-text: var(--sl-color-white);
-	--astro-code-color-background: var(--sl-color-gray-6);
+	--astro-code-foreground: var(--sl-color-white);
+	--astro-code-background: var(--sl-color-gray-6);
 	--astro-code-token-constant: var(--sl-color-blue-high);
 	--astro-code-token-string: var(--sl-color-green-high);
 	--astro-code-token-comment: var(--sl-color-gray-2);
