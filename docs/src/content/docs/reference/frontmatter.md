@@ -255,10 +255,12 @@ next: false
 
 ### `pagefind`
 
-**type:** `boolean`  
+**type:** `boolean | { weight: number; }`  
 **default:** `true`
 
-Set whether this page should be included in the [Pagefind](https://pagefind.app/) search index. Set to `false` to exclude a page from search results:
+Set the weighting of a page in the [Pagefind](https://pagefind.app/) search index or whether the page should be included.
+
+Set to `false` to exclude a page from search results:
 
 ```md
 ---
@@ -267,6 +269,19 @@ Set whether this page should be included in the [Pagefind](https://pagefind.app/
 pagefind: false
 ---
 ```
+
+Set to `pagefind.weight` with a number between 0 and 10 (inclusive) to adjust the ranking a page in search results:
+
+```md
+---
+# src/content/docs/example.md
+# Adjust the ranking of a page
+pagefind:
+  weight: 4.0
+---
+```
+
+Learn more about about how the weight value impacts search results in the [Pagefind Weighting content guide](https://pagefind.app/docs/weighting/).
 
 ### `draft`
 
