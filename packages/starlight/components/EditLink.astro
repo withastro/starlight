@@ -1,8 +1,7 @@
 ---
 import Icon from '../user-components/Icon.astro';
-import type { Props } from '../props';
 
-const { editUrl } = Astro.props;
+const { editUrl } = Astro.locals.routeData!;
 ---
 
 {

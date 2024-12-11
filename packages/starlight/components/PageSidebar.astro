@@ -1,19 +1,17 @@
 ---
-import type { Props } from '../props';
-
 import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
 import TableOfContents from 'virtual:starlight/components/TableOfContents';
 ---
 
 {
-	Astro.props.toc && (
+	Astro.locals.routeData!.toc && (
 		<>
 			<div class="lg:sl-hidden">
-				<MobileTableOfContents {...Astro.props} />
+				<MobileTableOfContents />
 			</div>
 			<div class="right-sidebar-panel sl-hidden lg:sl-block">
 				<div class="sl-container">
-					<TableOfContents {...Astro.props} />
+					<TableOfContents />
 				</div>
 			</div>
 		</>
