@@ -1,17 +1,15 @@
 import opentype, { type Font, Glyph } from 'opentype.js';
 import { seti, starlight } from '../config';
 import type { Definitions } from '../../starlight/user-components/rehype-file-tree';
-import { getSetiIconName } from './seti';
+import { getFont, getSetiIconName } from './seti';
 
 // This matches the default precision used by the SVGO default preset.
 const pathDecimalPrecision = 3;
 
 /** Extract SVG paths from the Seti UI icon font from a list of icon names matching font glyphs. */
-export function getIconSvgPaths(
-	icons: string[],
-	definitions: Definitions,
-	fontBuffer: ArrayBuffer
-) {
+export async function getIconSvgPaths(repoPath: string, icons: string[], definitions: Definitions) {
+	const fontBuffer = await getFont(repoPath);
+
 	const iconSvgs: Record<string, string> = {};
 
 	let font: Font;

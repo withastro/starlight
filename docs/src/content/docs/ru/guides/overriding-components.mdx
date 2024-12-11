@@ -88,6 +88,23 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 - Передайте в него `Astro.props`. Это гарантирует, что он получит все данные, необходимые для отображения.
 - Добавьте [`<slot />`](https://docs.astro.build/ru/core-concepts/astro-components/#slots) внутрь компонента по умолчанию. Это гарантирует, что если компоненту передаются какие-либо дочерние элементы, Astro знает, где их отображать.
 
+Если вы повторно используете компоненты [`PageFrame`](/ru/reference/overrides/#pageframe) или [`TwoColumnContent`](/ru/reference/overrides/#twocolumncontent), содержащие [именованные слоты](https://docs.astro.build/ru/basics/astro-components/#именованые-слоты), вам также необходимо [перенести](https://docs.astro.build/ru/basics/astro-components/#перенос-слотов) эти слоты.
+
+Ниже показан пользовательский компонент, который повторно использует компонент `TwoColumnContent`, содержащий дополнительный именованный слот `right-sidebar`, нуждающийся в переносе:
+
+```astro {9}
+---
+// src/components/CustomContent.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default {...Astro.props}>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
+
 ## Использование данных страницы
 
 При переопределении компонента Starlight ваша реализация получает стандартный объект `Astro.props`, содержащий все данные для текущей страницы.

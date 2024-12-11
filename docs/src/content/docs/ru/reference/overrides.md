@@ -196,6 +196,7 @@ entry: {
 #### `PageFrame`
 
 **Стандартный компонент:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Именованные слоты:** `header`, `sidebar`
 
 Компонент макета оборачивается вокруг большей части содержимого страницы.
 Реализация по умолчанию устанавливает макет header-sidebar-main и включает в себя именованные слоты `header` и `sidebar`, а также слот по умолчанию для основного содержимого.
@@ -210,6 +211,7 @@ entry: {
 #### `TwoColumnContent`
 
 **Стандартный компонент:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Именованный слот:** `right-sidebar`
 
 Компонент макета оборачивается вокруг колонки с основным содержанием и правой боковой панели (оглавление).
 Реализация по умолчанию управляет переключением между одноколоночным макетом с малой областью просмотра и двухколоночным макетом с большей областью просмотра.
