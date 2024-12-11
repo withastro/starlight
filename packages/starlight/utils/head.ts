@@ -89,7 +89,12 @@ function getImportance(entry: HeadConfig[number]) {
 		// The default favicon should be below any extra icons that the user may have set
 		// because if several icons are equally appropriate, the last one is used and we
 		// want to use the SVG icon when supported.
-		if (entry.tag === 'link' && 'rel' in entry.attrs && entry.attrs.rel === 'shortcut icon') {
+		if (
+			entry.tag === 'link' &&
+			'rel' in entry.attrs &&
+			entry.attrs.rel === 'icon' &&
+			entry.attrs['data-favicon'] === 'default'
+		) {
 			return 70;
 		}
 		return 80;
