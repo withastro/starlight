@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.29.3
+
+### Patch Changes
+
+- [#2642](https://github.com/withastro/starlight/pull/2642) [`12750ae`](https://github.com/withastro/starlight/commit/12750ae1bc303f2c53efd25adf01428e54aced90) Thanks [@dragomano](https://github.com/dragomano)! - Updates Russian UI translations
+
+- [#2656](https://github.com/withastro/starlight/pull/2656) [`4d543be`](https://github.com/withastro/starlight/commit/4d543bec280f3b5e00e21727d78f25756a1ced75) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Improves error message when an invalid configuration or no configuration is provided to the Starlight integration.
+
+- [#2645](https://github.com/withastro/starlight/pull/2645) [`cf12beb`](https://github.com/withastro/starlight/commit/cf12beb91b4cb2f212dbcc0cc1ed56e79d055ff0) Thanks [@techfg](https://github.com/techfg)! - Fixes support for favicon URLs that contain a search query and/or hash
+
+- [#2650](https://github.com/withastro/starlight/pull/2650) [`38db4ec`](https://github.com/withastro/starlight/commit/38db4ecfdb572b1f6362aca544f72f5128f5fe08) Thanks [@raviqqe](https://github.com/raviqqe)! - Moves `@types/js-yaml` package to non-dev dependencies
+
+- [#2633](https://github.com/withastro/starlight/pull/2633) [`5adb720`](https://github.com/withastro/starlight/commit/5adb720afd354d99b3682d045b9dc8729a1ff274) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a VoiceOver issue with Safari where the content of a `<script>` element could be read before the sidebar content.
+
+- [#2663](https://github.com/withastro/starlight/pull/2663) [`34755f9`](https://github.com/withastro/starlight/commit/34755f9c5f2fa451e8a56aecf3ff5a6ff499767b) Thanks [@astrobot-houston](https://github.com/astrobot-houston)! - Adds a new `seti:vite` icon for Vite configuration files in the `<FileTree>` component
+
 ## 0.29.2
 
 ### Patch Changes
