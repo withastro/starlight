@@ -8,9 +8,7 @@ vi.mock('astro:content', async () =>
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['reference/frontmatter/foo.mdx', { title: 'Foo' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
 			['guides/project-structure.mdx', { title: 'Project Structure' }],
 		],

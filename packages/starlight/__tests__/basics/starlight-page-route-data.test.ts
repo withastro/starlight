@@ -250,7 +250,7 @@ test('uses provided sidebar if any', async () => {
 });
 
 test('throws error if sidebar is malformated', async () => {
-	expect(() =>
+	await expect(() =>
 		generateStarlightPageRouteData({
 			props: {
 				...starlightPageProps,

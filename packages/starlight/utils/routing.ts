@@ -1,6 +1,8 @@
 import type { GetStaticPathsItem } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import project from 'virtual:starlight/project-context';
+import { getCollectionPathFromRoot } from '../loader';
 import {
 	type LocaleData,
 	localizedId,
@@ -15,7 +17,22 @@ import { BuiltInDefaultLocale } from './i18n';
 // We do this here so all pages trigger it and at the top level so it runs just once.
 validateLogoImports();
 
-export type StarlightDocsEntry = Omit<CollectionEntry<'docs'>, 'slug'> & {
+// The type returned from `CollectionEntry` is different for legacy collections and collections
+// using a loader. This type is a common subset of both types.
+export type StarlightDocsCollectionEntry = Omit<
+	CollectionEntry<'docs'>,
+	'id' | 'filePath' | 'render' | 'slug'
+> & {
+	// Update the `id` property to be a string like in the loader type.
+	id: string;
+	// Add the `filePath` property which is only present in the loader type.
+	filePath?: string;
+	// Add the `slug` property which is only present in the legacy type.
+	slug?: string;
+};
+
+export type StarlightDocsEntry = StarlightDocsCollectionEntry & {
+	filePath: string;
 	slug: string;
 };
 
@@ -26,7 +43,7 @@ export interface Route extends LocaleData {
 	entryMeta: LocaleData;
 	/** The slug, a.k.a. permalink, for this page. */
 	slug: string;
-	/** The unique ID for this page. */
+	/** The slug or unique ID if using the `legacy.collections` flag. */
 	id: string;
 	/** True if this page is untranslated in the current language and using fallback content from the default locale. */
 	isFallback?: true;
@@ -45,16 +62,24 @@ interface Path extends GetStaticPathsItem {
  */
 const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
 
+/** Normalize the different collection entry we can get from a legacy collection or a loader. */
+export function normalizeCollectionEntry(entry: StarlightDocsCollectionEntry): StarlightDocsEntry {
+	return {
+		...entry,
+		// In a legacy collection, the `filePath` property doesn't exist.
+		filePath: entry.filePath ?? `${getCollectionPathFromRoot('docs', project)}/${entry.id}`,
+		// In a collection with a loader, the `slug` property is replaced by the `id`.
+		slug: normalizeIndexSlug(entry.slug ?? entry.id),
+	};
+}
+
 /** All entries in the docs content collection. */
 const docs: StarlightDocsEntry[] = (
 	(await getCollection('docs', ({ data }) => {
 		// In production, filter out drafts.
 		return import.meta.env.MODE !== 'production' || data.draft === false;
 	})) ?? []
-).map(({ slug, ...entry }) => ({
-	...entry,
-	slug: normalizeIndexSlug(slug),
-}));
+).map(normalizeCollectionEntry);
 
 function getRoutes(): Route[] {
 	const routes: Route[] = docs.map((entry) => ({
@@ -79,7 +104,7 @@ function getRoutes(): Route[] {
 			const localeDocs = getLocaleDocs(locale);
 			for (const fallback of defaultLocaleDocs) {
 				const slug = localizedSlug(fallback.slug, locale);
-				const id = localizedId(fallback.id, locale);
+				const id = project.legacyCollections ? localizedId(fallback.id, locale) : slug;
 				const doesNotNeedFallback = localeDocs.some((doc) => doc.slug === slug);
 				if (doesNotNeedFallback) continue;
 				routes.push({
