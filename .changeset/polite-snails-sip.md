@@ -1,6 +1,6 @@
 ---
 '@astrojs/starlight-docsearch': minor
-'@astrojs/starlight-tailwind': minor
+'@astrojs/starlight-tailwind': major
 '@astrojs/starlight-markdoc': minor
 ---
 
