@@ -2,7 +2,7 @@ import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { getCollectionPathFromRoot } from '../loaders';
+import { getCollectionPathFromRoot } from './collection';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import {

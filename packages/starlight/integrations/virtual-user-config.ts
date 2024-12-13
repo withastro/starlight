@@ -2,7 +2,7 @@ import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { resolveCollectionPath } from '../loaders';
+import { resolveCollectionPath } from '../utils/collection';
 import type { StarlightConfig } from '../utils/user-config';
 import { getAllNewestCommitDate } from '../utils/git';
 import type { PluginTranslations } from '../utils/plugins';
