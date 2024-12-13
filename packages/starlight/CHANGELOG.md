@@ -1,5 +1,68 @@
 # @astrojs/starlight
 
+## 0.30.0
+
+### Minor Changes
+
+- [#2612](https://github.com/withastro/starlight/pull/2612) [`8d5a4e8`](https://github.com/withastro/starlight/commit/8d5a4e8000d9e3a4bb9ca8178767cf3d8bc48773) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for Astro v5, drops support for Astro v4.
+
+  #### Upgrade Astro and dependencies
+
+  ⚠️ **BREAKING CHANGE:** Astro v4 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v5/) and any other official integrations at the same time as updating Starlight:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+  _Community Starlight plugins and Astro integrations may also need to be manually updated to work with Astro v5. If you encounter any issues, please reach out to the plugin or integration author to see if it is a known issue or if an updated version is being worked on._
+
+  #### Update your collections
+
+  ⚠️ **BREAKING CHANGE:** Starlight's internal [content collections](https://docs.astro.build/en/guides/content-collections/), which organize, validate, and render your content, have been updated to use Astro's new Content Layer API and require configuration changes in your project.
+
+  1. **Move the content config file.** This file no longer lives within the `src/content/config.ts` folder and should now exist at `src/content.config.ts`.
+  1. **Edit the collection definition(s).** To update the `docs` collection, a `loader` is now required:
+
+     ```diff
+      // src/content.config.ts
+      import { defineCollection } from "astro:content";
+     +import { docsLoader } from "@astrojs/starlight/loaders";
+      import { docsSchema } from "@astrojs/starlight/schema";
+
+      export const collections = {
+     -  docs: defineCollection({ schema: docsSchema() }),
+     +  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+      };
+     ```
+
+     If you are using the [`i18n` collection](https://starlight.astro.build/guides/i18n/#translate-starlights-ui) to provide translations for additional languages you support or override our default labels, you will need to update the collection definition in a similar way and remove the collection `type` which is no longer available:
+
+     ```diff
+      // src/content.config.ts
+      import { defineCollection } from "astro:content";
+     +import { docsLoader, i18nLoader } from "@astrojs/starlight/loaders";
+      import { docsSchema, i18nSchema } from "@astrojs/starlight/schema";
+
+      export const collections = {
+     -  docs: defineCollection({ schema: docsSchema() }),
+     +  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+     -  i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+     +  i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+      };
+     ```
+
+  1. **Update other collections.** To update any other collections you may have, follow the [“Updating existing collections”](https://docs.astro.build/en/guides/upgrade-to/v5/#updating-existing-collections) section in the Astro 5 upgrade guide.
+
+  If you are unable to make any changes to your collections at this time, including Starlight's default `docs` and `i18n` collections, you can enable the [`legacy.collections` flag](https://docs.astro.build/en/reference/legacy-flags/) to upgrade to v5 without updating your collections. This legacy flag exists to provide temporary backwards compatibility, and will allow you to keep your collections in their current state until the legacy flag is no longer supported.
+
+### Patch Changes
+
+- [#2669](https://github.com/withastro/starlight/pull/2669) [`310df7d`](https://github.com/withastro/starlight/commit/310df7d6b01f5c4a56540bdba9243fb60dace323) Thanks [@aaronperezaguilera](https://github.com/aaronperezaguilera)! - Adds Catalan UI translations
+
+- [#2664](https://github.com/withastro/starlight/pull/2664) [`62ff007`](https://github.com/withastro/starlight/commit/62ff0074d9a3f82e46f5c62db85c04d87ff5e931) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Publishes provenance containing verifiable data to link a package back to its source repository and the specific build instructions used to publish it.
+
+- [#2670](https://github.com/withastro/starlight/pull/2670) [`0223b42`](https://github.com/withastro/starlight/commit/0223b425249f8d1fa468e367c632467276c9c208) Thanks [@aaronperezaguilera](https://github.com/aaronperezaguilera)! - Adds Spanish UI translations for the Pagefind search modal
+
 ## 0.29.3
 
 ### Patch Changes
