@@ -23,7 +23,7 @@ Astro 5.0 introduces a new version of [content collections](https://docs.astro.b
    ```diff
     // src/content.config.ts
     import { defineCollection } from "astro:content";
-   +import { docsLoader } from "@astrojs/starlight/loader";
+   +import { docsLoader } from "@astrojs/starlight/loaders";
     import { docsSchema } from "@astrojs/starlight/schema";
 
     export const collections = {
@@ -37,7 +37,7 @@ Astro 5.0 introduces a new version of [content collections](https://docs.astro.b
    ```diff
     // src/content.config.ts
     import { defineCollection } from "astro:content";
-   +import { docsLoader, i18nLoader } from "@astrojs/starlight/loader";
+   +import { docsLoader, i18nLoader } from "@astrojs/starlight/loaders";
     import { docsSchema, i18nSchema } from "@astrojs/starlight/schema";
 
     export const collections = {

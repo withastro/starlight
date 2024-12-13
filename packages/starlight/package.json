@@ -164,7 +164,7 @@
     "./internal": "./internal.ts",
     "./props": "./props.ts",
     "./schema": "./schema.ts",
-    "./loader": "./loader.ts",
+    "./loaders": "./loaders.ts",
     "./types": "./types.ts",
     "./expressive-code": {
       "types": "./expressive-code.d.ts",

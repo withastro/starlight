@@ -192,7 +192,7 @@ You can provide translations for additional languages you support — or overrid
 
    ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
    // src/content.config.ts
-   import { docsLoader, i18nLoader } from '@astrojs/starlight/loader';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
@@ -259,7 +259,7 @@ In the following example, a new, optional `custom.label` key is added to the def
 ```diff lang="js"
 // src/content.config.ts
 import { defineCollection, z } from 'astro:content';
-import { docsLoader, i18nLoader } from '@astrojs/starlight/loader';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {

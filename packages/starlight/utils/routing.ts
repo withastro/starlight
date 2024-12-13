@@ -2,7 +2,7 @@ import type { GetStaticPathsItem } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
-import { getCollectionPathFromRoot } from '../loader';
+import { getCollectionPathFromRoot } from '../loaders';
 import {
 	type LocaleData,
 	localizedId,

@@ -402,7 +402,7 @@ The frontmatter schema for Starlight’s `docs` content collection is configured
 ```ts {4,7}
 // src/content.config.ts
 import { defineCollection } from 'astro:content';
-import { docsLoader, i18nLoader } from '@astrojs/starlight/loader';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
@@ -427,7 +427,7 @@ In the following example, we provide a stricter type for `description` to make i
 ```ts {10-15}
 // src/content.config.ts
 import { defineCollection, z } from 'astro:content';
-import { docsLoader } from '@astrojs/starlight/loader';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
@@ -450,7 +450,7 @@ To take advantage of the [Astro `image()` helper](https://docs.astro.build/en/gu
 ```ts {10-15}
 // src/content.config.ts
 import { defineCollection, z } from 'astro:content';
-import { docsLoader } from '@astrojs/starlight/loader';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {

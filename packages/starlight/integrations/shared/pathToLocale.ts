@@ -1,6 +1,6 @@
 import type { AstroConfig } from 'astro';
 import type { StarlightConfig } from '../../types';
-import { getCollectionPath } from '../../loader';
+import { getCollectionPath } from '../../loaders';
 import { slugToLocale } from './slugToLocale';
 
 /** Get current locale from the full file path. */

@@ -69,7 +69,7 @@ Create or update the content config file, adding a `docs` collection that uses S
 ```js ins={3,7}
 // src/content.config.ts
 import { defineCollection } from 'astro:content';
-import { docsLoader } from '@astrojs/starlight/loader';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {

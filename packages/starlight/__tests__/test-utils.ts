@@ -78,7 +78,7 @@ export async function mockedAstroContent({
 export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof docsSchema>[0]) {
 	const content = await vi.importActual<typeof import('astro:content')>('astro:content');
 	const schemas = await vi.importActual<typeof import('../schema')>('../schema');
-	const loaders = await vi.importActual<typeof import('../loader')>('../loader');
+	const loaders = await vi.importActual<typeof import('../loaders')>('../loaders');
 
 	return {
 		collections: {

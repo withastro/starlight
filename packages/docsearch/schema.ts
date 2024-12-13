@@ -7,7 +7,7 @@ import { z } from 'astro/zod';
  *
  * ```js
  * import { defineCollection } from 'astro:content';
- * import { docsLoader, i18nLoader } from '@astrojs/starlight/loader';
+ * import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
  * import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
  * import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
  *
