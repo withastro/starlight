@@ -101,8 +101,14 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 			})
 			.optional(),
 
-		/** Pagefind indexing for this page - set to false to disable. */
-		pagefind: z.boolean().default(true),
+		/**
+		 * Pagefind configuration for this page - set to false to disable indexing or set
+		 * as an object with a "weight" key between 0.0 and 10.0 to adjust the ranking where
+		 * a larger number is a higher ranking.
+		 *
+		 * More information about Pagefind weighting: https://pagefind.app/docs/weighting/
+		 */
+		pagefind: z.union([z.boolean(), z.object({ weight: z.number().min(0).max(10) })]).default(true),
 
 		/**
 		 * Indicates that this page is a draft and will not be included in production builds.
