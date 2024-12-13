@@ -41,7 +41,7 @@ export interface Route extends LocaleData {
 	entry: StarlightDocsEntry;
 	/** Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content. */
 	entryMeta: LocaleData;
-	/** The slug, a.k.a. permalink, for this page. */
+	/** @deprecated Migrate to the new Content Layer API and use `id` instead. */
 	slug: string;
 	/** The slug or unique ID if using the `legacy.collections` flag. */
 	id: string;
