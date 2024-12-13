@@ -205,8 +205,8 @@ function pathsMatch(pathA: string, pathB: string) {
 function getBreadcrumbs(path: string, baseDir: string): string[] {
 	// Strip extension from path.
 	const pathWithoutExt = stripExtension(path);
-	// Index paths will match `baseDir` and don’t include breadcrumbs.
-	if (pathWithoutExt === baseDir) return [];
+	// Index paths will match `baseDir` but we still need to consider them as a single segment.
+	if (pathWithoutExt === baseDir) return [path];
 	// Ensure base directory ends in a trailing slash.
 	baseDir = ensureTrailingSlash(baseDir);
 	// Strip base directory from path if present.

@@ -82,7 +82,7 @@ export function localizedSlug(slug: string, locale: string | undefined): string 
 }
 
 /**
- * Convert a collection entry ID to a different locale.
+ * Convert a legacy collection entry ID to a different locale.
  * For example, passing an ID of `en/home.md` and a locale of `fr` results in `fr/home.md`.
  * An undefined locale is treated as the root locale, resulting in `home.md`.
  * @param id A collection entry ID

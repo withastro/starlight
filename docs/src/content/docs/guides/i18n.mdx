@@ -188,16 +188,16 @@ You can provide translations for additional languages you support — or overrid
 
 <Steps>
 
-1. Configure the `i18n` data collection in `src/content/config.ts` if it isn’t configured already:
+1. Configure the `i18n` data collection in `src/content.config.ts` if it isn’t configured already:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
-   import { defineCollection } from 'astro:content';
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -257,14 +257,15 @@ Add custom keys to your site’s translation dictionaries by setting `extend` in
 In the following example, a new, optional `custom.label` key is added to the default keys:
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -274,7 +275,7 @@ export const collections = {
 };
 ```
 
-Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema) in the Astro docs.
 
 ## Using UI translations
 

@@ -6,6 +6,7 @@ declare module 'virtual:starlight/project-context' {
 		build: {
 			format: import('astro').AstroConfig['build']['format'];
 		};
+		legacyCollections: boolean;
 	};
 	export default ProjectContext;
 }

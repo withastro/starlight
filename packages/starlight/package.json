@@ -4,6 +4,7 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
+    "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright install --with-deps chromium && playwright test"
   },
@@ -163,6 +164,7 @@
     "./internal": "./internal.ts",
     "./props": "./props.ts",
     "./schema": "./schema.ts",
+    "./loaders": "./loaders.ts",
     "./types": "./types.ts",
     "./expressive-code": {
       "types": "./expressive-code.d.ts",
@@ -176,19 +178,19 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^4.14.0"
+    "astro": "^5.0.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^5.3.0",
+    "@astrojs/markdown-remark": "^6.0.0",
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
-    "@vitest/coverage-v8": "^1.6.0",
-    "astro": "^4.16.10",
+    "@vitest/coverage-v8": "2.1.6",
+    "astro": "^5.0.2",
     "linkedom": "^0.18.4",
-    "vitest": "^1.6.0"
+    "vitest": "2.1.6"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.1.3",
+    "@astrojs/mdx": "^4.0.1",
     "@astrojs/sitemap": "^3.1.6",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",
