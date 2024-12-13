@@ -16,7 +16,6 @@ Astro 5.0 introduces a new version of [content collections](https://docs.astro.b
 
 1. **Move the content config file.** This file no longer lives within the `src/content/config.ts` folder and should now exist at `src/content.config.ts`.
 
-   The previous location is still supported, and is required if the [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/) flag is enabled.
 
 1. **Edit the collection definition(s).** To update the `docs` collection, a `loader` is now required:
 
