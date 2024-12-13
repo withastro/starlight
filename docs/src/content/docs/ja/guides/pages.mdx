@@ -82,6 +82,39 @@ import CustomComponent from './CustomComponent.astro';
 </StarlightPage>
 ```
 
+### カスタムページでStarlightの最低限のレイアウトのみ使用する
+
+カスタムページでStarlightのデザインを利用したくない場合は、`<SimpleStarlightPage />`コンポーネントでラップします。これは、コンテンツを動的に生成したいものの、Starlightのデザインを使用したくない場合に役立ちます。`head`タグとユーザーCSSのみ継承し、それ以外のスタイルとレイアウトは一切継承しません。
+
+```astro
+---
+// src/pages/custom-page/example.astro
+import SimpleStarlightPage from '@astrojs/starlight/components/SimpleStarlightPage.astro';
+import CustomComponent from './CustomComponent.astro';
+---
+
+<SimpleStarlightPage frontmatter={{ title: '私のカスタムページ' }}>
+	<p>これはカスタムコンポーネントを用いたカスタムページです:</p>
+	<CustomComponent />
+</SimpleStarlightPage>
+```
+
+全てを1から設定する必要がある場合は、独自に`html`タグから設定してください。
+
+```astro
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>私のカスタムページ</title>
+	</head>
+	<body>
+		<p>これはカスタムコンポーネントを用いたカスタムページです:</p>
+		<CustomComponent />
+	</body>
+</html>
+```
+
 #### Props
 
 `<StarlightPage />`コンポーネントは以下のpropsを受け付けます。
