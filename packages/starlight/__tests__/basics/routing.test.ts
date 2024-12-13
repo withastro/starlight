@@ -22,7 +22,7 @@ test('test suite is using correct env', () => {
 
 test('route slugs are normalized', () => {
 	const indexRoute = routes.find(
-		(route) => route.id === (project.legacyCollections ? 'index.mdx' : 'index')
+		(route) => route.id === (project.legacyCollections ? 'index.mdx' : '')
 	);
 	expect(indexRoute?.slug).toBe('');
 });
@@ -30,7 +30,7 @@ test('route slugs are normalized', () => {
 test('routes contain copy of original doc as entry', async () => {
 	const docs = await getCollection('docs');
 	for (const route of routes) {
-		const doc = docs.find((doc) => doc.id === route.id);
+		const doc = docs.find((doc) => doc.id === route.id || (doc.id === 'index' && route.id === ''));
 		if (!doc) throw new Error('Expected to find doc for route ' + route.id);
 		// Compare without slug as slugs can be normalized.
 		const { slug: _, ...entry } = route.entry;
@@ -43,7 +43,10 @@ test('routes contain copy of original doc as entry', async () => {
 			const { slug: __, ...legacyInput } = doc;
 			expect(legacyEntry).toEqual(legacyInput);
 		} else {
-			expect(entry).toEqual(doc);
+			// Compare without ids as ids can be normalized when using loaders.
+			const { id: _, ...loaderEntry } = entry;
+			const { id: __, ...loaderInput } = doc;
+			expect(loaderEntry).toEqual(loaderInput);
 		}
 	}
 });

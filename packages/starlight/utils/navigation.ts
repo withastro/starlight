@@ -205,8 +205,8 @@ function pathsMatch(pathA: string, pathB: string) {
 function getBreadcrumbs(path: string, baseDir: string): string[] {
 	// Strip extension from path.
 	const pathWithoutExt = stripExtension(path);
-	// Index paths will match `baseDir` and don’t include breadcrumbs.
-	if (pathWithoutExt === baseDir) return [];
+	// Index paths will match `baseDir` but we still need to consider them as a single segment.
+	if (pathWithoutExt === baseDir) return [path];
 	// Ensure base directory ends in a trailing slash.
 	baseDir = ensureTrailingSlash(baseDir);
 	// Strip base directory from path if present.
@@ -228,9 +228,6 @@ function treeify(routes: Route[], baseDir: string): Dir {
 		// Build the tree
 		.forEach((doc) => {
 			const parts = getBreadcrumbs(doc.id, baseDir);
-			// If the breadcrumb is empty, the document is at the root level so we can fallback to the
-			// document ID.
-			if (parts.length === 0) parts.push(doc.id);
 			let currentNode = treeRoot;
 
 			parts.forEach((part, index) => {

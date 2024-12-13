@@ -14,7 +14,7 @@ vi.mock('astro:content', async () =>
 
 test('route slugs are normalized', () => {
 	const indexRoute = routes.find(
-		(route) => route.id === (project.legacyCollections ? 'index.mdx' : 'index')
+		(route) => route.id === (project.legacyCollections ? 'index.mdx' : '')
 	);
 	expect(indexRoute?.slug).toBe('');
 });

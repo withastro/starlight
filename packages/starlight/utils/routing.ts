@@ -64,8 +64,11 @@ const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
 
 /** Normalize the different collection entry we can get from a legacy collection or a loader. */
 export function normalizeCollectionEntry(entry: StarlightDocsCollectionEntry): StarlightDocsEntry {
+	const slug = normalizeIndexSlug(entry.slug ?? entry.id);
 	return {
 		...entry,
+		// In a collection with a loader, the `id` is a slug and should be normalized.
+		id: entry.slug ? entry.id : slug,
 		// In a legacy collection, the `filePath` property doesn't exist.
 		filePath: entry.filePath ?? `${getCollectionPathFromRoot('docs', project)}/${entry.id}`,
 		// In a collection with a loader, the `slug` property is replaced by the `id`.
