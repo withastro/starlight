@@ -4,6 +4,8 @@
 
 Adds support for Astro v5, drops support for Astro v4.
 
+#### Upgrade Astro and dependencies
+
 ⚠️ **BREAKING CHANGE:** Astro v4 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v5/) and any other official integrations at the same time as updating Starlight:
 
 ```sh
@@ -12,7 +14,9 @@ npx @astrojs/upgrade
 
 _Community Starlight plugins and Astro integrations may also need to be manually updated to work with Astro v5. If you encounter any issues, please reach out to the plugin or integration author to see if it is a known issue or if an updated version is being worked on._
 
-Astro 5.0 introduces a new version of [content collections](https://docs.astro.build/en/guides/content-collections/) which Starlight is built on top of. We recommend converting the `docs` (and optionally the `i18n`) collection(s) used by Starlight to the new Content Layer API which brings several performance improvements and added capabilities.
+#### Update your collections
+
+⚠️ **BREAKING CHANGE:** Starlight's internal [content collections](https://docs.astro.build/en/guides/content-collections/), which organize, validate, and render your content, have been updated to use Astro's new Content Layer API and require configuration changes in your project.
 
 1. **Move the content config file.** This file no longer lives within the `src/content/config.ts` folder and should now exist at `src/content.config.ts`.
 
