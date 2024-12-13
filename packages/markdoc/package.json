@@ -24,5 +24,8 @@
   "peerDependencies": {
     "@astrojs/markdoc": "^0.11.4",
     "@astrojs/starlight": ">=0.23.0"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
