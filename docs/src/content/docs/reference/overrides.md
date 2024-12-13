@@ -70,7 +70,7 @@ For multilingual sites this will include the current locale, e.g. `/en/` or `/zh
 The slug for this page generated from the content filename.
 
 This property is deprecated and will be removed in a future version of Starlight.
-Migrate to the new Content Layer API by using [Starlight’s `docsLoader`](http://localhost:4321/manual-setup/#configure-content-collections) and use the [`id`](#id) property instead.
+Migrate to the new Content Layer API by using [Starlight’s `docsLoader`](/manual-setup/#configure-content-collections) and use the [`id`](#id) property instead.
 
 #### `id`
 
