@@ -1,5 +1,6 @@
 import { AstroError } from 'astro/errors';
 import config from 'virtual:starlight/user-config';
+import project from 'virtual:starlight/project-context';
 import type { Badge, I18nBadge, I18nBadgeConfig } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
@@ -14,8 +15,9 @@ import { formatPath } from './format-path';
 import { BuiltInDefaultLocale, pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, routes, type Route } from './routing';
-import { localeToLang, slugToPathname } from './slugs';
+import { localeToLang, localizedId, slugToPathname } from './slugs';
 import type { StarlightConfig } from './user-config';
+import { getCollectionPathFromRoot } from './collection';
 
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');
@@ -108,7 +110,7 @@ function groupFromAutogenerateConfig(
 			// Match against `foo/anything/else.md`.
 			doc.id.startsWith(localeDir + '/')
 	);
-	const tree = treeify(dirDocs, localeDir);
+	const tree = treeify(dirDocs, locale, localeDir);
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
 	return {
 		type: 'group',
@@ -205,8 +207,8 @@ function pathsMatch(pathA: string, pathB: string) {
 function getBreadcrumbs(path: string, baseDir: string): string[] {
 	// Strip extension from path.
 	const pathWithoutExt = stripExtension(path);
-	// Index paths will match `baseDir` but we still need to consider them as a single segment.
-	if (pathWithoutExt === baseDir) return [path];
+	// Index paths will match `baseDir` and don’t include breadcrumbs.
+	if (pathWithoutExt === baseDir) return [];
 	// Ensure base directory ends in a trailing slash.
 	baseDir = ensureTrailingSlash(baseDir);
 	// Strip base directory from path if present.
@@ -218,16 +220,28 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 }
 
 /** Turn a flat array of routes into a tree structure. */
-function treeify(routes: Route[], baseDir: string): Dir {
+function treeify(routes: Route[], locale: string | undefined, baseDir: string): Dir {
 	const treeRoot: Dir = makeDir(baseDir);
+	const collectionPathFromRoot = getCollectionPathFromRoot('docs', project);
 	routes
 		// Remove any entries that should be hidden
 		.filter((doc) => !doc.entry.data.sidebar.hidden)
+		// Compute the path of each entry from the root of the collection ahead of time.
+		.map(
+			(doc) =>
+				[
+					project.legacyCollections
+						? doc.id
+						: // For collections with a loader, use a localized filePath relative to the collection
+							localizedId(doc.entry.filePath.replace(`${collectionPathFromRoot}/`, ''), locale),
+					doc,
+				] as const
+		)
 		// Sort by depth, to build the tree depth first.
-		.sort((a, b) => b.id.split('/').length - a.id.split('/').length)
+		.sort(([a], [b]) => b.split('/').length - a.split('/').length)
 		// Build the tree
-		.forEach((doc) => {
-			const parts = getBreadcrumbs(doc.id, baseDir);
+		.forEach(([filePathFromContentDir, doc]) => {
+			const parts = getBreadcrumbs(filePathFromContentDir, baseDir);
 			let currentNode = treeRoot;
 
 			parts.forEach((part, index) => {
@@ -374,7 +388,7 @@ function getIntermediateSidebarFromConfig(
 	if (sidebarConfig) {
 		return sidebarConfig.map((group) => configItemToEntry(group, pathname, locale, routes));
 	} else {
-		const tree = treeify(routes, locale || '');
+		const tree = treeify(routes, locale, locale || '');
 		return sidebarFromDir(tree, pathname, locale, false);
 	}
 }
