@@ -29,6 +29,7 @@ const shouldRenderSearch =
 		<ThemeSelect {...Astro.props} />
 		<LanguageSelect {...Astro.props} />
 	</div>
+	<div class="header-backdrop"></div>
 </div>
 
 <style>
@@ -37,6 +38,13 @@ const shouldRenderSearch =
 		justify-content: space-between;
 		align-items: center;
 		height: 100%;
+	}
+
+	.header-backdrop {
+		position: absolute;
+		inset: 0;
+		block-size: 200%;
+		inline-size: 100%;
 	}
 
 	.title-wrapper {

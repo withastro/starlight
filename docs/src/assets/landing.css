@@ -18,8 +18,14 @@
 [data-has-hero] header {
 	border-bottom: 1px solid transparent;
 	background-color: transparent;
-	-webkit-backdrop-filter: blur(16px);
+}
+
+[data-has-hero] .header-backdrop {
 	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
+	-webkit-mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
+	z-index: -1;
 }
 
 [data-has-hero] .hero > img {
