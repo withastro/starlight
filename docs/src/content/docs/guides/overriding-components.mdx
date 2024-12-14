@@ -141,7 +141,7 @@ In the following example, a component overriding Starlight's [`Footer`](/referen
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.props.entry.slug === '';
 ---
 
 {
