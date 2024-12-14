@@ -282,7 +282,7 @@ Learn more about content collection schemas in [“Defining a collection schema�
 You can access Starlight’s [built-in UI strings](/guides/i18n/#translate-starlights-ui) as well as [user-defined](/guides/i18n/#extend-translation-schema), and [plugin-provided](/reference/plugins/#injecttranslations) UI strings through a unified API powered by [i18next](https://www.i18next.com/).
 This includes support for features like [interpolation](https://www.i18next.com/translation-function/interpolation) and [pluralization](https://www.i18next.com/translation-function/plurals).
 
-In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#astrolocals) as `Astro.locals.t`:
+In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#locals) as `Astro.locals.t`:
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
@@ -290,7 +290,7 @@ In Astro components, this API is available as part of the [global `Astro` object
 </p>
 ```
 
-You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#contextlocals):
+You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#locals):
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
@@ -391,7 +391,7 @@ See the [`dir()` reference in the i18next documentation](https://www.i18next.com
 
 ## Accessing the current locale
 
-You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) to read the current locale in `.astro` components.
+You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#currentlocale) to read the current locale in `.astro` components.
 
 The following example reads the current locale and uses it with the [`getRelativeLocaleUrl()`](https://docs.astro.build/en/reference/modules/astro-i18n/#getrelativelocaleurl) helper to generate a link to an about page in the current language:
 
