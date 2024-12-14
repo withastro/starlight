@@ -3,7 +3,7 @@ import CommonPage from '../common.astro';
 
 export const prerender = false;
 
-if (Astro.locals.routeData === undefined) {
+if (Astro.locals.routeData.id === '404') {
 	return new Response(null, { status: 404 });
 }
 ---
