@@ -1,14 +1,22 @@
 import type { APIContext, MarkdownHeading } from 'astro';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
-import { getRouteBySlugParam, type Route } from './routing';
+import {
+	getRouteBySlugParam,
+	normalizeCollectionEntry,
+	type Route,
+	type StarlightDocsCollectionEntry,
+	type StarlightDocsEntry,
+} from './routing';
 import { formatPath } from './format-path';
 import { useTranslations } from './translations';
-import { DeprecatedLabelsPropProxy } from './i18n';
-import { render, type RenderResult } from 'astro:content';
+import { BuiltInDefaultLocale, DeprecatedLabelsPropProxy } from './i18n';
+import { getEntry, render, type RenderResult } from 'astro:content';
+import { getCollectionPathFromRoot } from './collection';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -39,26 +47,10 @@ export interface StarlightRouteData extends Route {
 	Content?: RenderResult['Content'];
 }
 
-export function attachRouteData(
-	locals: App.Locals,
-	routeData: StarlightRouteData | undefined,
-	currentUrl: URL
-): void {
-	Reflect.defineProperty(locals, 'routeData', {
-		enumerable: true,
-		configurable: true,
-		get() {
-			if (!routeData) {
-				throw new Error('Starlight route data undefined for route: ' + currentUrl.pathname);
-			}
-			return routeData;
-		},
-	});
-}
-
-export async function useRouteData(context: APIContext): Promise<StarlightRouteData | undefined> {
-	const route = getRouteBySlugParam(context.params.slug);
-	if (!route) return;
+export async function useRouteData(context: APIContext): Promise<StarlightRouteData> {
+	const route =
+		('slug' in context.params && getRouteBySlugParam(context.params.slug)) ||
+		(await get404Route(context.locals));
 	const { Content, headings } = await render(route.entry);
 	const routeData = generateRouteData({ props: { ...route, headings }, url: context.url });
 	return { ...routeData, Content };
@@ -148,4 +140,36 @@ export function getSiteTitle(lang: string): string {
 
 export function getSiteTitleHref(locale: string | undefined): string {
 	return formatPath(locale || '/');
+}
+
+/** Generate a route object for Starlight’s 404 page. */
+async function get404Route(locals: App.Locals): Promise<Route> {
+	const { lang = BuiltInDefaultLocale.lang, dir = BuiltInDefaultLocale.dir } =
+		config.defaultLocale || {};
+	let locale = config.defaultLocale?.locale;
+	if (locale === 'root') locale = undefined;
+
+	const entryMeta = { dir, lang, locale };
+
+	const fallbackEntry: StarlightDocsEntry = {
+		slug: '404',
+		id: '404',
+		body: '',
+		collection: 'docs',
+		data: {
+			title: '404',
+			template: 'splash',
+			editUrl: false,
+			head: [],
+			hero: { tagline: locals.t('404.text'), actions: [] },
+			pagefind: false,
+			sidebar: { hidden: false, attrs: {} },
+			draft: false,
+		},
+		filePath: `${getCollectionPathFromRoot('docs', project)}/404.md`,
+	};
+
+	const userEntry = (await getEntry('docs', '404')) as StarlightDocsCollectionEntry;
+	const entry = userEntry ? normalizeCollectionEntry(userEntry) : fallbackEntry;
+	return { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
 }

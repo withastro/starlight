@@ -1,5 +1,4 @@
 ---
-import { attachRouteData } from '../utils/route-data';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps as Props,
@@ -11,11 +10,10 @@ export type StarlightPageProps = Props;
 // TODO: This is a bit tricky to solve.
 // We can’t apply other middleware transformations to route data here, so that makes
 // the `<StarlightPage>` behaviour quite different from regular pages.
-attachRouteData(
-	Astro.locals,
-	await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url }),
-	Astro.url
-);
+Astro.locals.routeData = await generateStarlightPageRouteData({
+	props: Astro.props,
+	url: Astro.url,
+});
 ---
 
 <Page><slot /></Page>
