@@ -72,7 +72,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`
 **기본값:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
 
 각 페이지 오른쪽에 표시되는 목차를 구성합니다. 기본적으로 `<h2>` 및 `<h3>` 제목이 이 목차에 포함됩니다.
@@ -386,7 +386,7 @@ starlight({
 
 ### `expressiveCode`
 
-**타입:** `StarlightExpressiveCodeOptions | boolean`  
+**타입:** `StarlightExpressiveCodeOptions | boolean`
 **기본값:** `true`
 
 Starlight는 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)를 사용하여 코드 블록을 렌더링하고 코드 예시의 부분 강조 표시, 코드 블록에 파일 이름 추가 등 다양한 기능을 지원합니다.
@@ -415,7 +415,7 @@ starlight({
 
 #### `themes`
 
-**타입:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**타입:** `Array<string | ThemeObject | ExpressiveCodeTheme>`
 **기본값:** `['starlight-dark', 'starlight-light']`
 
 코드 블록 스타일을 지정하는 데 사용되는 테마를 설정합니다.
@@ -428,7 +428,7 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 
 #### `useStarlightDarkModeSwitch`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `true`
 
 값이 `true`인 경우, 사이트 테마가 변경되면 코드 블록이 밝은 테마와 어두운 테마를 자동으로 전환합니다.
@@ -440,7 +440,7 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 
 #### `useStarlightUiThemeColors`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `themes`가 설정되어 있지 않으면 `true`이고, 그렇지 않으면 `false`입니다.
 
 값이 `true`인 경우, Starlight의 CSS 변수는 코드 블록의 UI 요소(배경, 버튼, 그림자 등)에 사용되며, [사이트 색상 테마](/ko/guides/css-and-tailwind/#테마)와 일치합니다.
@@ -452,7 +452,7 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 
 ### `pagefind`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `true`
 
 Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)가 활성화되어 있는지 정의합니다.
@@ -464,10 +464,10 @@ Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하�
 
 ### `prerender`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `true`
 
-Starlight 페이지를 정적 HTML로 사전 렌더링할지, 아니면 [SSR 어댑터](https://docs.astro.build/ko/guides/server-side-rendering/)를 통해 주문형으로 렌더링할지 정의합니다.
+Starlight 페이지를 정적 HTML로 사전 렌더링할지, 아니면 [SSR 어댑터](https://docs.astro.build/ko/guides/on-demand-rendering/)를 통해 주문형으로 렌더링할지 정의합니다.
 
 Starlight 페이지는 기본적으로 사전 렌더링됩니다.
 SSR 어댑터를 사용 중이고 Starlight 페이지를 주문형으로 렌더링하기를 원한다면 `prerender: false`를 설정하세요.
@@ -509,7 +509,7 @@ interface HeadConfig {
 
 ### `lastUpdated`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `false`
 
 페이지 하단에 최종 업데이트 날짜를 표시할지 여부를 제어합니다.
@@ -518,7 +518,7 @@ interface HeadConfig {
 
 ### `pagination`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `true`
 
 페이지 하단에 이전 페이지 링크와 다음 페이지 링크가 포함되어야 하는지 정의합니다.
@@ -527,7 +527,7 @@ interface HeadConfig {
 
 ### `favicon`
 
-**타입:** `string`  
+**타입:** `string`
 **기본값:** `'/favicon.svg'`
 
 `public/` 디렉터리에 포함되어 있으며 유효한 아이콘 파일인 (`.ico`, `.gif`, `.jpg`, `.png`, 또는 `.svg`) 웹 사이트의 기본 파비콘 경로를 설정합니다.
@@ -559,7 +559,7 @@ starlight({
 
 ### `titleDelimiter`
 
-**타입:** `string`  
+**타입:** `string`
 **기본값:** `'|'`
 
 브라우저 탭에 표시되는 페이지의 `<title>` 태그에서 페이지 제목과 사이트 제목 사이의 구분 기호를 설정합니다.
@@ -569,10 +569,10 @@ starlight({
 
 ### `disable404Route`
 
-**타입:** `boolean`  
+**타입:** `boolean`
 **기본값:** `false`
 
-Starlight의 기본 [404 페이지](https://docs.astro.build/ko/core-concepts/astro-pages/#사용자-정의-404-오류-페이지) 삽입을 비활성화합니다. 프로젝트에서 사용자 정의 `src/pages/404.astro` 경로를 사용하려면 이 옵션을 `true`로 설정하세요.
+Starlight의 기본 [404 페이지](https://docs.astro.build/ko/basics/astro-pages/#사용자-정의-404-오류-페이지) 삽입을 비활성화합니다. 프로젝트에서 사용자 정의 `src/pages/404.astro` 경로를 사용하려면 이 옵션을 `true`로 설정하세요.
 
 ### `components`
 
