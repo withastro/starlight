@@ -9,6 +9,7 @@
 
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration } from 'astro';
+import { AstroError } from 'astro/errors';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,10 +28,16 @@ import {
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
 
-export default function StarlightIntegration({
-	plugins,
-	...opts
-}: StarlightUserConfigWithPlugins): AstroIntegration {
+export default function StarlightIntegration(
+	userOpts: StarlightUserConfigWithPlugins
+): AstroIntegration {
+	if (typeof userOpts !== 'object' || userOpts === null || Array.isArray(userOpts))
+		throw new AstroError(
+			'Invalid config passed to starlight integration',
+			`The Starlight integration expects a configuration object with at least a \`title\` property.\n\n` +
+				`See more details in the [Starlight configuration reference](https://starlight.astro.build/reference/configuration/)\n`
+		);
+	const { plugins, ...opts } = userOpts;
 	let userConfig: StarlightConfig;
 	let pluginTranslations: PluginTranslations = {};
 	return {
@@ -130,9 +137,6 @@ export default function StarlightIntegration({
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
-					experimental: {
-						globalRoutePriority: true,
-					},
 					i18n: astroI18nConfig,
 				});
 			},

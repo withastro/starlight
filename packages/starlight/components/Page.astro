@@ -32,19 +32,17 @@ import 'virtual:starlight/user-css';
 const routeData = Astro.locals.routeData!;
 
 const pagefindEnabled =
-	routeData.entry.slug !== '404' &&
+routeData.entry.slug !== '404' &&
 	!routeData.entry.slug.endsWith('/404') &&
 	routeData.entry.data.pagefind !== false;
+
+const dataAttributes: DOMStringMap = { 'data-theme': 'dark' };
+if (Boolean(routeData.toc)) dataAttributes['data-has-toc'] = '';
+if (routeData.hasSidebar) dataAttributes['data-has-sidebar'] = '';
+if (Boolean(routeData.entry.data.hero)) dataAttributes['data-has-hero'] = '';
 ---
 
-<html
-	lang={routeData.lang}
-	dir={routeData.dir}
-	data-has-toc={Boolean(routeData.toc)}
-	data-has-sidebar={routeData.hasSidebar}
-	data-has-hero={Boolean(routeData.entry.data.hero)}
-	data-theme="dark"
->
+<html lang={routeData.lang} dir={routeData.dir} {...dataAttributes}>
 	<head>
 		<Head />
 		<style>

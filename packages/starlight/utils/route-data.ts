@@ -1,16 +1,14 @@
 import type { APIContext, MarkdownHeading } from 'astro';
-import type { RenderResult } from 'astro:content';
-import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC, type TocItem } from './generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
 import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
 import { ensureTrailingSlash } from './path';
 import { getRouteBySlugParam, type Route } from './routing';
-import { localizedId } from './slugs';
 import { formatPath } from './format-path';
 import { useTranslations } from './translations';
 import { DeprecatedLabelsPropProxy } from './i18n';
+import { render, type RenderResult } from 'astro:content';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
@@ -44,7 +42,7 @@ export interface StarlightRouteData extends Route {
 export async function useRouteData(context: APIContext): Promise<StarlightRouteData | undefined> {
 	const route = getRouteBySlugParam(context.params.slug);
 	if (!route) return;
-	const { Content, headings } = await route.entry.render();
+	const { Content, headings } = await render(route.entry);
 	const routeData = generateRouteData({ props: { ...route, headings }, url: context.url });
 	return { ...routeData, Content };
 }
@@ -96,7 +94,7 @@ function getLastUpdated({ entry }: PageProps): Date | undefined {
 		try {
 			return frontmatterLastUpdated instanceof Date
 				? frontmatterLastUpdated
-				: getNewestCommitDate(entry.id);
+				: getNewestCommitDate(entry.filePath);
 		} catch {
 			// If the git command fails, ignore the error.
 			return undefined;
@@ -106,7 +104,7 @@ function getLastUpdated({ entry }: PageProps): Date | undefined {
 	return undefined;
 }
 
-function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
+function getEditUrl({ entry }: PageProps): URL | undefined {
 	const { editUrl } = entry.data;
 	// If frontmatter value is false, editing is disabled for this page.
 	if (editUrl === false) return;
@@ -116,10 +114,8 @@ function getEditUrl({ entry, id, isFallback }: PageProps): URL | undefined {
 		// If a URL was provided in frontmatter, use that.
 		url = editUrl;
 	} else if (config.editLink.baseUrl) {
-		const srcPath = project.srcDir.replace(project.root, '');
-		const filePath = isFallback ? localizedId(id, config.defaultLocale.locale) : id;
 		// If a base URL was added in Starlight config, synthesize the edit URL from it.
-		url = ensureTrailingSlash(config.editLink.baseUrl) + srcPath + 'content/docs/' + filePath;
+		url = ensureTrailingSlash(config.editLink.baseUrl) + entry.filePath;
 	}
 	return url ? new URL(url) : undefined;
 }

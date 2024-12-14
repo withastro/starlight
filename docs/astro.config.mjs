@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
@@ -65,7 +66,7 @@ export default defineConfig({
 					attrs: { property: 'og:image:alt', content: ogImageAlt },
 				},
 			],
-			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
+			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
 				{

@@ -188,16 +188,16 @@ You can provide translations for additional languages you support — or overrid
 
 <Steps>
 
-1. Configure the `i18n` data collection in `src/content/config.ts` if it isn’t configured already:
+1. Configure the `i18n` data collection in `src/content.config.ts` if it isn’t configured already:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
-   import { defineCollection } from 'astro:content';
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -257,14 +257,15 @@ Add custom keys to your site’s translation dictionaries by setting `extend` in
 In the following example, a new, optional `custom.label` key is added to the default keys:
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -274,14 +275,14 @@ export const collections = {
 };
 ```
 
-Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema) in the Astro docs.
 
 ## Using UI translations
 
 You can access Starlight’s [built-in UI strings](/guides/i18n/#translate-starlights-ui) as well as [user-defined](/guides/i18n/#extend-translation-schema), and [plugin-provided](/reference/plugins/#injecttranslations) UI strings through a unified API powered by [i18next](https://www.i18next.com/).
 This includes support for features like [interpolation](https://www.i18next.com/translation-function/interpolation) and [pluralization](https://www.i18next.com/translation-function/plurals).
 
-In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#astrolocals) as `Astro.locals.t`:
+In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#locals) as `Astro.locals.t`:
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
@@ -289,7 +290,7 @@ In Astro components, this API is available as part of the [global `Astro` object
 </p>
 ```
 
-You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#contextlocals):
+You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#locals):
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
@@ -390,7 +391,7 @@ See the [`dir()` reference in the i18next documentation](https://www.i18next.com
 
 ## Accessing the current locale
 
-You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) to read the current locale in `.astro` components.
+You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#currentlocale) to read the current locale in `.astro` components.
 
 The following example reads the current locale and uses it with the [`getRelativeLocaleUrl()`](https://docs.astro.build/en/reference/modules/astro-i18n/#getrelativelocaleurl) helper to generate a link to an about page in the current language:
 

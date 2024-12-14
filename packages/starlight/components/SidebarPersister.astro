@@ -12,6 +12,11 @@
   - On smaller viewports, restoring state is skipped as the sidebar is collapsed inside a menu.
   - The state is parsed from session storage and restored.
   - This is a progressive enhancement, so any errors are swallowed silently.
+
+  The `aria-hidden` attribute on script tags is used to prevent a Safari/VoiceOver bug where the
+  script is read out loud due to them being inside a container with `display: contents`.
+  @see https://bugs.webkit.org/show_bug.cgi?id=283645
+  @see https://github.com/withastro/starlight/pull/2633
 */
 
 import { getSidebarHash } from '../utils/navigation';
@@ -27,7 +32,7 @@ declare global {
 ---
 
 <sl-sidebar-state-persist data-hash={hash}>
-	<script is:inline>
+	<script is:inline aria-hidden="true">
 		(() => {
 			try {
 				if (!matchMedia('(min-width: 50em)').matches) return;
@@ -54,7 +59,7 @@ declare global {
 
 	<slot />
 
-	<script is:inline>
+	<script is:inline aria-hidden="true">
 		(() => {
 			const scroller = document.getElementById('starlight__sidebar');
 			if (!window._starlightScrollRestore || !scroller) return;

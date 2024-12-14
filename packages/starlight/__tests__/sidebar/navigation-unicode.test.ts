@@ -8,7 +8,6 @@ vi.mock('astro:content', async () =>
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/用户.md', { title: 'Path with non-ASCII characters' }],
 			['guides/project-structure.mdx', { title: 'Project Structure' }],
 		],

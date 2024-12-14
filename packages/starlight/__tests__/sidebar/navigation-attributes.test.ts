@@ -13,7 +13,6 @@ vi.mock('astro:content', async () =>
 					sidebar: { attrs: { class: 'advanced', ping: 'https://example.com' } },
 				},
 			],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
 		],
 	})

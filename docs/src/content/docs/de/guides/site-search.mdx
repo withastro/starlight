@@ -108,6 +108,15 @@ Wenn du Zugang zum [Algolia DocSearch-Programm](https://docsearch.algolia.com/) 
 
 Mit dieser aktualisierten Konfiguration öffnet die Suchleiste deiner Website nun ein Algolia-Modal anstelle des Standardmodals.
 
+#### DocSearch Konfiguration
+
+Das Starlight DocSearch Plugin unterstützt auch die Anpassung der DocSearch Komponente mit den folgenden zusätzlichen Optionen:
+
+- `maxResultsPerGroup`: Begrenzt die Anzahl der Ergebnisse, die für jede Suchgruppe angezeigt werden. Der Standardwert ist `5`.
+- `disableUserPersonalization`: Verhindere, dass DocSearch die letzten Suchen und Favoriten eines Nutzers im lokalen Speicher speichert. Der Standardwert ist `false`.
+- `insights`: Aktiviere das Algolia Insights Plugin und sende Suchereignisse an deinen DocSearch-Index. Der Standardwert ist `false`.
+- `searchParameters`: Ein Objekt, das die [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) anpasst.
+
 #### Die Benutzeroberfläche von DocSearch übersetzen
 
 DocSearch stellt standardmäßig nur englische Benutzeroberflächen-Strings zur Verfügung.
