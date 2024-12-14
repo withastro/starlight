@@ -29,20 +29,20 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
-const { routeData } = Astro.locals;
+const { starlightRoute } = Astro.locals;
 
 const pagefindEnabled =
-	routeData.entry.slug !== '404' &&
-	!routeData.entry.slug.endsWith('/404') &&
-	routeData.entry.data.pagefind !== false;
+	starlightRoute.entry.slug !== '404' &&
+	!starlightRoute.entry.slug.endsWith('/404') &&
+	starlightRoute.entry.data.pagefind !== false;
 
 const dataAttributes: DOMStringMap = { 'data-theme': 'dark' };
-if (Boolean(routeData.toc)) dataAttributes['data-has-toc'] = '';
-if (routeData.hasSidebar) dataAttributes['data-has-sidebar'] = '';
-if (Boolean(routeData.entry.data.hero)) dataAttributes['data-has-hero'] = '';
+if (Boolean(starlightRoute.toc)) dataAttributes['data-has-toc'] = '';
+if (starlightRoute.hasSidebar) dataAttributes['data-has-sidebar'] = '';
+if (Boolean(starlightRoute.entry.data.hero)) dataAttributes['data-has-hero'] = '';
 ---
 
-<html lang={routeData.lang} dir={routeData.dir} {...dataAttributes}>
+<html lang={starlightRoute.lang} dir={starlightRoute.dir} {...dataAttributes}>
 	<head>
 		<Head />
 		<style>
@@ -77,19 +77,19 @@ if (Boolean(routeData.entry.data.hero)) dataAttributes['data-has-hero'] = '';
 		<SkipLink />
 		<PageFrame>
 			<Header slot="header" />
-			{routeData.hasSidebar && <Sidebar slot="sidebar" />}
+			{starlightRoute.hasSidebar && <Sidebar slot="sidebar" />}
 			<script src="./SidebarPersistState"></script>
 			<TwoColumnContent>
 				<PageSidebar slot="right-sidebar" />
 				<main
 					data-pagefind-body={pagefindEnabled}
-					lang={routeData.entryMeta.lang}
-					dir={routeData.entryMeta.dir}
+					lang={starlightRoute.entryMeta.lang}
+					dir={starlightRoute.entryMeta.dir}
 				>
 					{/* TODO: Revisit how this logic flows. */}
 					<Banner />
 					{
-						routeData.entry.data.hero ? (
+						starlightRoute.entry.data.hero ? (
 							<ContentPanel>
 								<Hero />
 								<MarkdownContent>
@@ -101,8 +101,8 @@ if (Boolean(routeData.entry.data.hero)) dataAttributes['data-has-hero'] = '';
 							<>
 								<ContentPanel>
 									<PageTitle />
-									{routeData.entry.data.draft && <DraftContentNotice />}
-									{routeData.isFallback && <FallbackContentNotice />}
+									{starlightRoute.entry.data.draft && <DraftContentNotice />}
+									{starlightRoute.isFallback && <FallbackContentNotice />}
 								</ContentPanel>
 								<ContentPanel>
 									<MarkdownContent>

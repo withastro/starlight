@@ -4,6 +4,6 @@ import { useRouteData } from './utils/route-data';
 
 export const onRequest = defineMiddleware(async (context, next) => {
 	context.locals.t = useTranslations(context.currentLocale);
-	context.locals.routeData = await useRouteData(context);
+	context.locals.starlightRoute = await useRouteData(context);
 	return next();
 });

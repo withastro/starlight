@@ -1,7 +1,7 @@
 ---
 import Page from '../components/Page.astro';
 
-const { Content, entry } = Astro.locals.routeData;
+const { Content, entry } = Astro.locals.starlightRoute;
 ---
 
 <Page>{Content && <Content frontmatter={entry.data} />}</Page>

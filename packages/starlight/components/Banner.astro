@@ -1,5 +1,5 @@
 ---
-const { banner } = Astro.locals.routeData.entry.data;
+const { banner } = Astro.locals.starlightRoute.entry.data;
 ---
 
 {banner && <div class="sl-banner" set:html={banner.content} />}

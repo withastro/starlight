@@ -10,7 +10,7 @@ export type StarlightPageProps = Props;
 // TODO: This is a bit tricky to solve.
 // We can’t apply other middleware transformations to route data here, so that makes
 // the `<StarlightPage>` behaviour quite different from regular pages.
-Astro.locals.routeData = await generateStarlightPageRouteData({
+Astro.locals.starlightRoute = await generateStarlightPageRouteData({
 	props: Astro.props,
 	url: Astro.url,
 });
