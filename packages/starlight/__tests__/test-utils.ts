@@ -28,7 +28,11 @@ function mockDoc(
 	data: z.input<typeof frontmatterSchema>,
 	body = ''
 ): StarlightDocsCollectionEntry {
-	const slug = docsFilePath.replace(/\.[^\.]+$/, '').replace(/\/index$/, '');
+	const slug = docsFilePath
+		.replace(/\.[^\.]+$/, '')
+		.replace(/\s/, '-')
+		.replace(/\/index$/, '')
+		.toLowerCase();
 
 	const doc: StarlightDocsCollectionEntry = {
 		id: project.legacyCollections ? docsFilePath : slug,
