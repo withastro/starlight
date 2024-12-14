@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { getCollectionPathFromRoot } from '../../utils/collection';
@@ -43,7 +43,7 @@ const fallbackEntry: StarlightDocsEntry = {
 const userEntry = (await getEntry('docs', '404')) as StarlightDocsCollectionEntry;
 const entry = userEntry ? normalizeCollectionEntry(userEntry) : fallbackEntry;
 const route: Route = { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
-const { Content, headings } = await route.entry.render();
+const { Content, headings } = await render(route.entry);
 Astro.locals.routeData = {
 	...generateRouteData({ props: { ...route, headings }, url: Astro.url }),
 	Content,
