@@ -85,7 +85,7 @@ tableOfContents: false
 
 ### `template`
 
-**타입:** `'doc' | 'splash'`
+**타입:** `'doc' | 'splash'`  
 **기본값:** `'doc'`
 
 이 페이지의 레이아웃 템플릿을 설정합니다. 페이지는 기본적으로 `'doc'` 레이아웃을 사용합니다. 랜딩 페이지용으로 설계된 사이드바 없이 더 넓은 레이아웃을 사용하려면 `'splash'`로 설정하세요.
@@ -253,7 +253,7 @@ next: false
 
 ### `pagefind`
 
-**타입:** `boolean`
+**타입:** `boolean`  
 **기본값:** `true`
 
 이 페이지를 [Pagefind](https://pagefind.app/) 검색 색인에 포함할지 여부를 설정합니다. 검색 결과에서 페이지를 제외하려면 값을 `false`로 설정하세요.
@@ -268,7 +268,7 @@ pagefind: false
 
 ### `draft`
 
-**타입:** `boolean`
+**타입:** `boolean`  
 **기본값:** `false`
 
 이 페이지를 초안으로 간주하여 [프로덕션 빌드](https://docs.astro.build/ko/reference/cli-reference/#astro-build) 및 [자동 생성된 링크 그룹](/ko/guides/sidebar/#자동-생성-그룹)에 포함하지 않을지 여부를 설정합니다. 페이지를 초안으로 표시하고 개발 중에만 표시하려면 `true`로 설정하세요.
@@ -301,7 +301,7 @@ interface SidebarConfig {
 
 #### `label`
 
-**타입:** `string`
+**타입:** `string`  
 **기본값:** 페이지의 [`title`](#title-필수)
 
 자동 생성된 링크 그룹에 표시될 때 사이드바에서 이 페이지에 대한 라벨을 설정합니다.
@@ -411,7 +411,7 @@ Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko
 
 ### `extend`
 
-**타입:** Zod 스키마 또는 Zod 스키마를 반환하는 함수
+**타입:** Zod 스키마 또는 Zod 스키마를 반환하는 함수  
 **기본값:** `z.object({})`
 
 `docsSchema()` 옵션에서 `extend`를 설정하여 추가 필드로 Starlight의 스키마를 확장하세요.
