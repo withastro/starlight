@@ -226,17 +226,22 @@ function treeify(routes: Route[], locale: string | undefined, baseDir: string): 
 	routes
 		// Remove any entries that should be hidden
 		.filter((doc) => !doc.entry.data.sidebar.hidden)
+		// Compute the path of each entry from the root of the collection ahead of time.
+		.map(
+			(doc) =>
+				[
+					project.legacyCollections
+						? doc.id
+						: // For collections with a loader, use a localized filePath relative to the collection
+							localizedId(doc.entry.filePath.replace(`${collectionPathFromRoot}/`, ''), locale),
+					doc,
+				] as const
+		)
 		// Sort by depth, to build the tree depth first.
-		.sort((a, b) => b.id.split('/').length - a.id.split('/').length)
+		.sort(([a], [b]) => b.split('/').length - a.split('/').length)
 		// Build the tree
-		.forEach((doc) => {
-			const parts = getBreadcrumbs(
-				project.legacyCollections
-					? doc.id
-					: // For collections with a loader, use a localized filePath relative to the collection
-						localizedId(doc.entry.filePath.replace(`${collectionPathFromRoot}/`, ''), locale),
-				baseDir
-			);
+		.forEach(([filePathFromContentDir, doc]) => {
+			const parts = getBreadcrumbs(filePathFromContentDir, baseDir);
 			let currentNode = treeRoot;
 
 			parts.forEach((part, index) => {
