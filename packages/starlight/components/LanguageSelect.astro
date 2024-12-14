@@ -18,10 +18,10 @@ function localizedPathname(locale: string | undefined): string {
 			<Select
 				icon="translate"
 				label={Astro.locals.t('languageSelect.accessibleLabel')}
-				value={localizedPathname(Astro.locals.routeData!.locale)}
+				value={localizedPathname(Astro.locals.routeData.locale)}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
 					value: localizedPathname(code),
-					selected: code === Astro.locals.routeData!.locale,
+					selected: code === Astro.locals.routeData.locale,
 					label: locale!.label,
 				}))}
 				width="7em"

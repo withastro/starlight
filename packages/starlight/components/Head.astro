@@ -8,7 +8,7 @@ import { fileWithBase } from '../utils/base';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
 
-const { entry, lang, siteTitle } = Astro.locals.routeData!;
+const { entry, lang, siteTitle } = Astro.locals.routeData;
 const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;

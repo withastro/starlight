@@ -21,7 +21,7 @@
 
 import { getSidebarHash } from '../utils/navigation';
 
-const hash = getSidebarHash(Astro.locals.routeData!.sidebar);
+const hash = getSidebarHash(Astro.locals.routeData.sidebar);
 
 declare global {
 	interface Window {

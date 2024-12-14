@@ -1,9 +1,9 @@
 import { defineMiddleware } from 'astro:middleware';
 import { useTranslations } from './utils/translations';
-import { useRouteData } from './utils/route-data';
+import { attachRouteData, useRouteData } from './utils/route-data';
 
 export const onRequest = defineMiddleware(async (context, next) => {
 	context.locals.t = useTranslations(context.currentLocale);
-	context.locals.routeData = await useRouteData(context);
+	attachRouteData(context.locals, await useRouteData(context), context.url);
 	return next();
 });

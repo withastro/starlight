@@ -39,6 +39,23 @@ export interface StarlightRouteData extends Route {
 	Content?: RenderResult['Content'];
 }
 
+export function attachRouteData(
+	locals: App.Locals,
+	routeData: StarlightRouteData | undefined,
+	currentUrl: URL
+): void {
+	Reflect.defineProperty(locals, 'routeData', {
+		enumerable: true,
+		configurable: true,
+		get() {
+			if (!routeData) {
+				throw new Error('Starlight route data undefined for route: ' + currentUrl.pathname);
+			}
+			return routeData;
+		},
+	});
+}
+
 export async function useRouteData(context: APIContext): Promise<StarlightRouteData | undefined> {
 	const route = getRouteBySlugParam(context.params.slug);
 	if (!route) return;
