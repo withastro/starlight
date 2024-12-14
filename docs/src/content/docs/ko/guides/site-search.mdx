@@ -124,18 +124,19 @@ Starlight에 내장된 [국제화 시스템](/ko/guides/i18n/#starlight-ui-번�
 
 <Steps>
 
-1. `src/content/config.ts` 파일의 DocSearch 스키마를 사용하여 Starlight의 `i18n` 콘텐츠 컬렉션 정의를 확장합니다.
+1. `src/content.config.ts` 파일의 DocSearch 스키마를 사용하여 Starlight의 `i18n` 콘텐츠 컬렉션 정의를 확장합니다.
 
-   ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
    	i18n: defineCollection({
-   		type: 'data',
+   		loader: i18nLoader(),
    		schema: i18nSchema({ extend: docSearchI18nSchema() }),
    	}),
    };

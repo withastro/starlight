@@ -61,19 +61,23 @@ export default defineConfig({
 
 ### 콘텐츠 컬렉션 구성
 
-Starlight는 `src/content/config.ts` 파일에 구성된 Astro의 [콘텐츠 컬렉션](https://docs.astro.build/ko/guides/content-collections/) 위에 구축되었습니다.
+Starlight는 `src/content.config.ts` 파일에 구성된 Astro의 [콘텐츠 컬렉션](https://docs.astro.build/ko/guides/content-collections/) 위에 구축되었습니다.
 
-Starlight의 `docsSchema`를 사용하는 `docs` 컬렉션을 추가하여 콘텐츠 구성 파일을 생성하거나 업데이트하세요.
+Starlight의 `docsLoader` 및 `docsSchema`를 사용하는 `docs` 컬렉션을 추가하여 콘텐츠 구성 파일을 생성하거나 업데이트하세요.
 
-```js ins={3,6}
-// src/content/config.ts
+```js ins={3-4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
+
+Starlight는 레거시 콘텐츠 컬렉션 구현을 사용하여 컬렉션을 처리하는 [`legacy.collections` 플래그](https://docs.astro.build/ko/reference/legacy-flags/)도 지원합니다.
+이 플래그는 기존 Astro 프로젝트가 있고 현재 로더를 사용하기 위해 컬렉션을 변경할 수 없는 경우에 유용합니다.
 
 ### 콘텐츠 추가
 
@@ -123,6 +127,6 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### SSR과 함께 Starlight 사용
 
-SSR을 사용하려면 Astro 문서에 있는 ["주문형 렌더링 어댑터"](https://docs.astro.build/ko/guides/server-side-rendering/) 가이드에 따라 Starlight 프로젝트에 서버 어댑터를 추가하세요.
+SSR을 사용하려면 Astro 문서에 있는 ["요청 시 렌더링 어댑터"](https://docs.astro.build/ko/guides/on-demand-rendering/) 가이드에 따라 Starlight 프로젝트에 서버 어댑터를 추가하세요.
 
 Starlight에서 생성된 문서 페이지는 프로젝트의 출력 모드에 관계없이 기본적으로 미리 렌더링됩니다. Starlight 페이지의 사전 렌더링을 선택 해제하려면 [`prerender` 구성 옵션](/ko/reference/configuration/#prerender)을 `false`로 설정하세요.
