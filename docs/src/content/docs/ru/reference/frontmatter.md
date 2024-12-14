@@ -33,7 +33,7 @@ description: Узнайте больше о проекте, над которы�
 
 **type**: `string`
 
-Переопределите slug страницы. Более подробную информацию вы найдете в разделе [Определение пользовательских слагов](https://docs.astro.build/ru/guides/content-collections/#defining-custom-slugs) в документации Astro.
+Переопределите slug страницы. Более подробную информацию вы найдете в разделе [Определение пользовательских идентификаторов](https://docs.astro.build/en/guides/content-collections/#defining-custom-ids) в документации Astro.
 
 ### `editUrl`
 
@@ -397,19 +397,20 @@ sidebar:
 
 ## Настройка схемы метаданных
 
-Схема метаданных для коллекции контента Starlight `docs` настраивается в файле `src/content/config.ts` с помощью помощника `docsSchema()`:
+Схема метаданных для коллекции контента Starlight `docs` настраивается в файле `src/content.config.ts` с помощью помощника `docsSchema()`:
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-Подробнее о схемах коллекций содержимого читайте в разделе [Определение схемы коллекции](https://docs.astro.build/ru/guides/content-collections/#defining-a-collection-schema) в документации Astro.
+Подробнее о схемах коллекций содержимого читайте в разделе [Определение схемы коллекции](https://docs.astro.build/ru/guides/content-collections/#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%85%D0%B5%D0%BC%D1%8B-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8) в документации Astro.
 
 `docsSchema()` принимает следующие параметры:
 
@@ -423,13 +424,15 @@ export const collections = {
 
 В следующем примере мы задаем более строгий тип для `description`, чтобы сделать его обязательным, и добавляем новое необязательное поле `category`:
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // Делаем встроенное поле обязательным
@@ -444,13 +447,15 @@ export const collections = {
 
 Чтобы воспользоваться преимуществами [хелпера `image()`](https://docs.astro.build/ru/guides/images/#images-in-content-collections), используйте функцию, которая возвращает расширение вашей схемы:
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({
