@@ -41,7 +41,10 @@ const shouldRenderSearch =
 
 	.title-wrapper {
 		/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
-		overflow: hidden;
+		overflow: clip;
+		/* Avoid clipping focus ring around link inside title wrapper. */
+		padding: 0.25rem;
+		margin: -0.25rem;
 	}
 
 	.right-group,
