@@ -24,6 +24,8 @@ const SlugKey = Symbol('SlugKey');
 
 const neverPathFormatter = createPathFormatter({ trailingSlash: 'never' });
 
+const docsCollectionPathFromRoot = getCollectionPathFromRoot('docs', project);
+
 export interface Link {
 	type: 'link';
 	label: string;
@@ -103,13 +105,15 @@ function groupFromAutogenerateConfig(
 ): Group {
 	const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
-	const dirDocs = routes.filter(
-		(doc) =>
+	const dirDocs = routes.filter((doc) => {
+		const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
+		return (
 			// Match against `foo.md` or `foo/index.md`.
-			stripExtension(doc.id) === localeDir ||
+			stripExtension(filePathFromContentDir) === localeDir ||
 			// Match against `foo/anything/else.md`.
-			doc.id.startsWith(localeDir + '/')
-	);
+			filePathFromContentDir.startsWith(localeDir + '/')
+		);
+	});
 	const tree = treeify(dirDocs, locale, localeDir);
 	const label = pickLang(item.translations, localeToLang(locale)) || item.label;
 	return {
@@ -219,24 +223,22 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 	return relativePath.split('/');
 }
 
+/** Return the path of a route relative to the root of the collection, which is equivalent to legacy IDs. */
+function getRoutePathRelativeToCollectionRoot(route: Route, locale: string | undefined) {
+	return project.legacyCollections
+		? route.id
+		: // For collections with a loader, use a localized filePath relative to the collection
+			localizedId(route.entry.filePath.replace(`${docsCollectionPathFromRoot}/`, ''), locale);
+}
+
 /** Turn a flat array of routes into a tree structure. */
 function treeify(routes: Route[], locale: string | undefined, baseDir: string): Dir {
 	const treeRoot: Dir = makeDir(baseDir);
-	const collectionPathFromRoot = getCollectionPathFromRoot('docs', project);
 	routes
 		// Remove any entries that should be hidden
 		.filter((doc) => !doc.entry.data.sidebar.hidden)
 		// Compute the path of each entry from the root of the collection ahead of time.
-		.map(
-			(doc) =>
-				[
-					project.legacyCollections
-						? doc.id
-						: // For collections with a loader, use a localized filePath relative to the collection
-							localizedId(doc.entry.filePath.replace(`${collectionPathFromRoot}/`, ''), locale),
-					doc,
-				] as const
-		)
+		.map((doc) => [getRoutePathRelativeToCollectionRoot(doc, locale), doc] as const)
 		// Sort by depth, to build the tree depth first.
 		.sort(([a], [b]) => b.split('/').length - a.split('/').length)
 		// Build the tree
