@@ -192,6 +192,7 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
 
    ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
    // src/content.config.ts
+   import { defineCollection } from 'astro:content';
    import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
