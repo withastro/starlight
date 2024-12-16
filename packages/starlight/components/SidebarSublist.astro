@@ -12,7 +12,7 @@ interface Props {
 const { sublist, nested } = Astro.props;
 ---
 
-<ul class:list={{ 'top-level': !nested, 'print:hidden': true }}>
+<ul class:list={{ 'top-level': !nested }}>
 	{
 		sublist.map((entry) => (
 			<li>
