@@ -84,7 +84,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 Beim Rendern einer integrierten Komponente innerhalb einer benutzerdefinierten Komponente:
 
 - Verbreite `Astro.props` darin. Dadurch wird sichergestellt, dass es alle Daten erhält, die es zum Rendern benötigt.
-- Füge einen [`<slot />`](https://docs.astro.build/de/core-concepts/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden muss, wenn der Komponente untergeordnete Elemente übergeben werden.
+- Füge einen [`<slot />`](https://docs.astro.build/de/basics/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden muss, wenn der Komponente untergeordnete Elemente übergeben werden.
 
 Wenn du die Komponenten [`PageFrame`](/de/reference/overrides/#pageframe) oder [`TwoColumnContent`](/de/reference/overrides/#twocolumncontent) wiederverwendst, die [benannte Slots](https://docs.astro.build/de/basics/astro-components/#benannte-slots) enthalten, musst du auch diese Slots [übertragen](https://docs.astro.build/de/basics/astro-components/#slots-weitergeben).
 
@@ -141,7 +141,7 @@ Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/refer
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.props.id === '';
 ---
 
 {
@@ -155,4 +155,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-Weitere Informationen zum bedingten Rendering findest du im [Astro-Leitfaden zur Vorlagensyntax](https://docs.astro.build/de/core-concepts/astro-syntax/#dynamisches-html).
+Weitere Informationen zum bedingten Rendering findest du im [Astro-Leitfaden zur Vorlagensyntax](https://docs.astro.build/de/basics/astro-syntax/#dynamisches-html).
