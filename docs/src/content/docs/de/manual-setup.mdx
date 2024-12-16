@@ -62,12 +62,12 @@ Alle verfügbaren Optionen findest du in der [Starlight-Konfigurationsreferenz](
 
 ### Konfigurieren von Inhaltssammlungen
 
-Starlight baut auf Astros [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/) auf, die in der Datei `src/content/config.ts` konfiguriert werden.
+Starlight baut auf Astros [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/) auf, die in der Datei `src/content.config.ts` konfiguriert werden.
 
 Erstelle oder aktualisiere die Inhaltskonfigurationsdatei und füge eine `docs`-Sammlung hinzu, die Starlight's `docsSchema` verwendet:
 
 ```js ins={3,6}
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
 import { docsSchema } from '@astrojs/starlight/schema';
 

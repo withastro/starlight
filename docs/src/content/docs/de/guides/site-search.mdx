@@ -124,10 +124,10 @@ Füge mithilfe des in Starlight integrierten [Internationalisierungssystems](/de
 
 <Steps>
 
-1. Erweitere die Definition der Starlight-Inhaltssammlung `i18n` um das DocSearch-Schema in `src/content/config.ts`:
+1. Erweitere die Definition der Starlight-Inhaltssammlung `i18n` um das DocSearch-Schema in `src/content.config.ts`:
 
    ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
