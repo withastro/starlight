@@ -1,0 +1,49 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import MediaCard from './media-card.astro';
+import { AstroError } from 'astro/errors';
+
+interface Props {
+	href: string;
+	title: string;
+	thumbnail: string;
+}
+const { href, title } = Astro.props;
+
+const thumbnails = import.meta.glob<{ default: ImageMetadata }>(
+	'../assets/showcase/*{.png,.jpg,.jpeg,.webp,.avif}'
+);
+const thumbnail = thumbnails[`../assets/showcase/${Astro.props.thumbnail}`];
+if (!thumbnail) {
+	throw new Error(`Could not resolve showcase thumbnail: ${Astro.props.thumbnail}`);
+}
+const src = (await thumbnail()).default;
+
+if (src.width !== 800 || src.height !== 450) {
+	let fileName = src.src.split('/').pop();
+	const queryIndex = fileName?.indexOf('?');
+	if (queryIndex !== undefined && queryIndex > -1) {
+		fileName = fileName?.slice(0, queryIndex);
+	}
+	throw new AstroError(
+		'Showcase images must be **800×450px**',
+		`Dimensions of **${src.width}×${src.height}px** found for showcase image \`${fileName || src.src}\`\n\n` +
+			`For best results:\n\n` +
+			`1. Take a screenshot of the site using a browser resized to **1280×720px**. The responsive view in dev tools can be helpful for this.\n\n` +
+			`2. Resize the screenshot to **800×450px** and make sure it is saved as a PNG. An online tool like [Squoosh](https://squoosh.app/) can help here.\n\n` +
+			`See more details in the [Starlight contributing guide](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md#showcase)\n`
+	);
+}
+---
+
+<MediaCard {href}>
+	<Image slot="media" {src} alt="" width="560" />
+	<p class="title">{title}</p>
+</MediaCard>
+
+<style>
+	.title {
+		padding: 0.75rem 1rem;
+	}
+</style>

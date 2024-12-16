@@ -1,5 +1,5 @@
-declare global {
-  var StarlightThemeProvider: {
-    updatePickers(theme?: string): void;
-  };
+export declare global {
+	var StarlightThemeProvider: {
+		updatePickers(theme?: string): void;
+	};
 }

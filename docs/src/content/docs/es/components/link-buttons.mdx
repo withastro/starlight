@@ -1,0 +1,145 @@
+---
+title: Botones de enlace
+description: Aprende a crear botones de enlace en Starlight para enlaces de llamada a la acción visualmente distintos.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Para mostrar enlaces de llamada a la acción visualmente distintos, usa el componente `<LinkButton>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/es/getting-started/">
+	Lee la documentación
+</LinkButton>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Usa el componente `<LinkButton>` para mostrar un enlace de llamada a la acción visualmente distinto.
+Un botón de enlace es útil para dirigir a los usuarios al contenido más relevante o accionable y se usa a menudo en páginas de destino.
+
+Un `<LinkButton>` requiere un atributo [`href`](#href).
+Opcionalmente, personaliza la apariencia del botón de enlace usando el atributo [`variant`](#variant), que se puede establecer en `primary` (el valor predeterminado), `secondary` o `minimal`.
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/es/getting-started/">Comienza</LinkButton>
+<LinkButton href="/es/reference/configuration/" variant="secondary">
+	Referencia de configuración
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/es/getting-started/" %}Comienza{% /linkbutton %}
+
+{% linkbutton href="/es/reference/configuration/" variant="secondary" %}
+Referencia de configuración
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/es/getting-started/">Comienza</LinkButton>
+	<LinkButton href="/es/reference/configuration/" variant="secondary">
+		Referencia de configuración
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### Agregar iconos a los botones de enlace
+
+Incluye un icono en un botón de enlace usando el atributo [`icon`](#icon) establecido en el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
+
+El atributo [`iconPlacement`](#iconplacement) se puede usar para colocar el icono antes del texto estableciéndolo en `start` (el valor predeterminado es `end`).
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Relacionado: Astro
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+Relacionado: Astro
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Relacionado: Astro
+</LinkButton>
+
+</Preview>
+
+## Props de `<LinkButton>`
+
+**Implementación:** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+El componente `<LinkButton>` acepta las siguientes props y también cualquier [otro atributo `<a>`](https://developer.mozilla.org/es/docs/Web/HTML/Element/a):
+
+### `href`
+
+**requerido**  
+**tipo:** `string`
+
+El URL al que apunta el botón de enlace.
+
+### `variant`
+
+**tipo:** `'primary' | 'secondary' | 'minimal'`  
+**por defecto:** `'primary'`
+
+La apariencia del botón de enlace.
+Establece `primary` para un enlace de llamada a la acción prominente que usa el color de acento del tema, `secondary` para un enlace menos prominente o `minimal` para un enlace con un estilo mínimo.
+
+### `icon`
+
+**tipo:** `string`
+
+Un botón de enlace puede incluir un atributo `icon` establecido en el nombre de [uno de los iconos integrados de Starlight](/es/reference/icons/#todos-los-iconos).
+
+### `iconPlacement`
+
+**tipo:** `'start' | 'end'`  
+**por defecto:** `'end'`
+
+Determina la ubicación del icono en relación con el texto del botón de enlace.

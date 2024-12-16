@@ -4,46 +4,30 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "test": "start-server-and-test preview http://localhost:3000 pa11y",
-    "pa11y": "pa11y-ci --sitemap 'http://localhost:3000/sitemap-index.xml' --sitemap-find 'https://starlight.astro.build' --sitemap-replace 'http://localhost:3000'",
-    "size": "size-limit",
+    "test": "playwright install --with-deps chromium && playwright test",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "typecheck": "tsc --noEmit",
+    "linkcheck": "CHECK_LINKS=true pnpm build --force",
+    "astro": "astro",
+    "lunaria:build": "lunaria build",
+    "grammars": "node grammars/generate.mjs"
   },
   "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.5.6",
     "@astrojs/starlight": "workspace:*",
-    "astro": "^2.5.0",
-    "sharp": "^0.32.1"
+    "@lunariajs/core": "^0.1.1",
+    "@types/culori": "^2.1.1",
+    "astro": "^5.0.2",
+    "culori": "^4.0.1",
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
-    "@size-limit/file": "^8.2.4",
-    "hast-util-from-html": "^1.0.2",
-    "hast-util-to-string": "^2.0.0",
-    "hastscript": "^7.2.0",
-    "pa11y-ci": "^3.0.1",
-    "rehype": "^12.0.1",
-    "size-limit": "^8.2.4",
-    "start-server-and-test": "^2.0.0",
-    "unist-util-visit": "^4.1.2"
-  },
-  "size-limit": [
-    {
-      "name": "/index.html",
-      "path": "dist/index.html",
-      "limit": "14 kB"
-    },
-    {
-      "name": "/_astro/*.js",
-      "path": "dist/_astro/*.js",
-      "limit": "20 kB"
-    },
-    {
-      "name": "/_astro/*.css",
-      "path": "dist/_astro/*.css",
-      "limit": "10 kB"
-    }
-  ]
+    "@playwright/test": "^1.45.0",
+    "axe-playwright": "^2.0.3",
+    "sitemapper": "^3.2.12",
+    "starlight-links-validator": "^0.13.2"
+  }
 }

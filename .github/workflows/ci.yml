@@ -12,32 +12,144 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
   cancel-in-progress: true
 
+env:
+  NODE_VERSION: 18
+  ASTRO_TELEMETRY_DISABLED: true
+
 jobs:
-  pa11y:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      docs: ${{ steps.filter.outputs.docs }}
+      packages: ${{ steps.filter.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            docs:
+              - 'docs/**'
+            packages:
+              - 'packages/**'
+
+  unit-test:
+    name: Run unit tests
+    needs: changes
+    if: ${{ needs.changes.outputs.packages == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Test packages
+        run: pnpm -r test:coverage
+      - name: Test legacy collections support
+        working-directory: packages/starlight
+        run: pnpm test:legacy
+
+  e2e-test:
+    name: 'Run E2E tests (${{ matrix.os }})'
+    needs: changes
+    if: ${{ needs.changes.outputs.packages == 'true' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Test packages
+        run: pnpm -r test:e2e
+
+  type-check:
+    name: Run type checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Generate docs types
+        working-directory: docs
+        run: pnpm astro sync
+      - name: Type check packages
+        run: pnpm typecheck
+
+  a11y:
     name: Check for accessibility issues
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Build docs site
-        working-directory: ./docs
-        run: pnpm build
-        env:
-          NO_GRADIENTS: true
-
       - name: Run accessibility audit
         working-directory: ./docs
         run: pnpm t
+
+  windows-smoke:
+    name: Docs site builds on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Build docs site
+        working-directory: ./docs
+        run: pnpm build
+
+  links:
+    name: Check for broken links
+    needs: changes
+    if: ${{ needs.changes.outputs.docs == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build docs site and check links
+        working-directory: ./docs
+        run: pnpm linkcheck

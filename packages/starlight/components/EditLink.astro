@@ -1,46 +1,27 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import config from 'virtual:starlight/user-config';
-import { useTranslations } from '../utils/translations';
-import Icon from './Icon.astro';
+import Icon from '../user-components/Icon.astro';
+import type { Props } from '../props';
 
-interface Props {
-  data: CollectionEntry<'docs'>['data'];
-  id: CollectionEntry<'docs'>['id'];
-  locale: string | undefined;
-}
-
-const t = useTranslations(Astro.props.locale);
-const { editUrl } = Astro.props.data;
-
-let { baseUrl } = config.editLink;
-if (baseUrl && baseUrl.at(-1) !== '/') baseUrl += '/';
-
-const url =
-  typeof editUrl === 'string'
-    ? editUrl
-    : baseUrl
-    ? baseUrl + 'src/content/docs/' + Astro.props.id
-    : undefined;
+const { editUrl } = Astro.props;
 ---
 
 {
-  editUrl !== false && url && (
-    <a href={url} class="flex print:hidden">
-      <Icon name="pencil" size="1.2em" />
-      {t('page.editLink')}
-    </a>
-  )
+	editUrl && (
+		<a href={editUrl} class="sl-flex print:hidden">
+			<Icon name="pencil" size="1.2em" />
+			{Astro.locals.t('page.editLink')}
+		</a>
+	)
 }
 
 <style>
-  a {
-    gap: 0.5rem;
-    align-items: center;
-    text-decoration: none;
-    color: var(--sl-color-gray-3);
-  }
-  a:hover {
-    color: var(--sl-color-white);
-  }
+	a {
+		gap: 0.5rem;
+		align-items: center;
+		text-decoration: none;
+		color: var(--sl-color-gray-3);
+	}
+	a:hover {
+		color: var(--sl-color-white);
+	}
 </style>

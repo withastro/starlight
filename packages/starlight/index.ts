@@ -1,121 +1,163 @@
+/**
+ * These triple-slash directives defines dependencies to various declaration files that will be
+ * loaded when a user imports the Starlight integration in their Astro configuration file. These
+ * directives must be first at the top of the file and can only be preceded by this comment.
+ */
+/// <reference path="./locals.d.ts" />
+/// <reference path="./i18n.d.ts" />
+/// <reference path="./virtual.d.ts" />
+
 import mdx from '@astrojs/mdx';
-import type {
-  AstroConfig,
-  AstroIntegration,
-  AstroUserConfig,
-  ViteUserConfig,
-} from 'astro';
+import type { AstroIntegration } from 'astro';
+import { AstroError } from 'astro/errors';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { starlightAsides } from './integrations/asides';
+import { starlightAsides, starlightDirectivesRestorationIntegration } from './integrations/asides';
+import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
+import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
+import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
+import { createTranslationSystemFromFs } from './utils/translations-fs';
 import {
-  StarlightUserConfig,
-  StarlightConfig,
-  StarlightConfigSchema,
-} from './utils/user-config';
-import { errorMap } from './utils/error-map';
+	injectPluginTranslationsTypes,
+	runPlugins,
+	type PluginTranslations,
+	type StarlightUserConfigWithPlugins,
+} from './utils/plugins';
+import { processI18nConfig } from './utils/i18n';
+import type { StarlightConfig } from './types';
 
 export default function StarlightIntegration(
-  opts: StarlightUserConfig
-): AstroIntegration[] {
-  const parsedConfig = StarlightConfigSchema.safeParse(opts, { errorMap });
+	userOpts: StarlightUserConfigWithPlugins
+): AstroIntegration {
+	if (typeof userOpts !== 'object' || userOpts === null || Array.isArray(userOpts))
+		throw new AstroError(
+			'Invalid config passed to starlight integration',
+			`The Starlight integration expects a configuration object with at least a \`title\` property.\n\n` +
+				`See more details in the [Starlight configuration reference](https://starlight.astro.build/reference/configuration/)\n`
+		);
+	const { plugins, ...opts } = userOpts;
+	let userConfig: StarlightConfig;
+	let pluginTranslations: PluginTranslations = {};
+	return {
+		name: '@astrojs/starlight',
+		hooks: {
+			'astro:config:setup': async ({
+				addMiddleware,
+				command,
+				config,
+				injectRoute,
+				isRestart,
+				logger,
+				updateConfig,
+			}) => {
+				// Run plugins to get the updated configuration and any extra Astro integrations to load.
+				const pluginResult = await runPlugins(opts, plugins, {
+					command,
+					config,
+					isRestart,
+					logger,
+				});
+				// Process the Astro and Starlight configurations for i18n and translations.
+				const { astroI18nConfig, starlightConfig } = processI18nConfig(
+					pluginResult.starlightConfig,
+					config.i18n
+				);
 
-  if (!parsedConfig.success) {
-    throw new Error(
-      'Invalid config passed to starlight integration\n' +
-        parsedConfig.error.issues.map((i) => i.message).join('\n')
-    );
-  }
+				const integrations = pluginResult.integrations;
+				pluginTranslations = pluginResult.pluginTranslations;
+				userConfig = starlightConfig;
 
-  const userConfig = parsedConfig.data;
+				const useTranslations = createTranslationSystemFromFs(
+					starlightConfig,
+					config,
+					pluginTranslations
+				);
 
-  const Starlight: AstroIntegration = {
-    name: '@astrojs/starlight',
-    hooks: {
-      'astro:config:setup': ({ config, injectRoute, updateConfig }) => {
-        injectRoute({
-          pattern: '404',
-          entryPoint: '@astrojs/starlight/404.astro',
-        });
-        injectRoute({
-          pattern: '[...slug]',
-          entryPoint: '@astrojs/starlight/index.astro',
-        });
-        const newConfig: AstroUserConfig = {
-          vite: {
-            plugins: [vitePluginStarlightUserConfig(userConfig, config)],
-          },
-          markdown: {
-            remarkPlugins: [...starlightAsides()],
-            shikiConfig:
-              // Configure Shiki theme if the user is using the default github-dark theme.
-              config.markdown.shikiConfig.theme !== 'github-dark'
-                ? {}
-                : { theme: 'css-variables' },
-          },
-          experimental: { assets: true, inlineStylesheets: 'auto' },
-        };
-        updateConfig(newConfig);
-      },
+				addMiddleware({ entrypoint: '@astrojs/starlight/locals', order: 'pre' });
 
-      'astro:build:done': ({ dir }) => {
-        const targetDir = fileURLToPath(dir);
-        const cwd = dirname(fileURLToPath(import.meta.url));
-        const relativeDir = relative(cwd, targetDir);
-        return new Promise<void>((resolve) => {
-          spawn('npx', ['-y', 'pagefind', '--source', relativeDir], {
-            stdio: 'inherit',
-            shell: true,
-            cwd,
-          }).on('close', () => resolve());
-        });
-      },
-    },
-  };
+				if (!starlightConfig.disable404Route) {
+					injectRoute({
+						pattern: '404',
+						entrypoint: starlightConfig.prerender
+							? '@astrojs/starlight/routes/static/404.astro'
+							: '@astrojs/starlight/routes/ssr/404.astro',
+						prerender: starlightConfig.prerender,
+					});
+				}
+				injectRoute({
+					pattern: '[...slug]',
+					entrypoint: starlightConfig.prerender
+						? '@astrojs/starlight/routes/static/index.astro'
+						: '@astrojs/starlight/routes/ssr/index.astro',
+					prerender: starlightConfig.prerender,
+				});
 
-  return [starlightSitemap(userConfig), Starlight, mdx()];
-}
+				// Add built-in integrations only if they are not already added by the user through the
+				// config or by a plugin.
+				const allIntegrations = [...config.integrations, ...integrations];
+				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
+					integrations.push(...starlightExpressiveCode({ starlightConfig, useTranslations }));
+				}
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
+					integrations.push(starlightSitemap(starlightConfig));
+				}
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
+					integrations.push(mdx({ optimize: true }));
+				}
 
-function resolveVirtualModuleId(id: string) {
-  return '\0' + id;
-}
+				// Add Starlight directives restoration integration at the end of the list so that remark
+				// plugins injected by Starlight plugins through Astro integrations can handle text and
+				// leaf directives before they are transformed back to their original form.
+				integrations.push(starlightDirectivesRestorationIntegration());
 
-/** Expose the Starlight user config object via a virtual module. */
-function vitePluginStarlightUserConfig(
-  opts: StarlightConfig,
-  { root }: AstroConfig
-): NonNullable<ViteUserConfig['plugins']>[number] {
-  const modules = {
-    'virtual:starlight/user-config': `export default ${JSON.stringify(opts)}`,
-    'virtual:starlight/project-context': `export default ${JSON.stringify({
-      root,
-    })}`,
-    'virtual:starlight/user-css': opts.customCss
-      .map((id) => `import "${id}";`)
-      .join(''),
-    'virtual:starlight/user-images': opts.logo
-      ? 'src' in opts.logo
-        ? `import src from "${opts.logo.src}"; export const logos = { dark: src, light: src };`
-        : `import dark from "${opts.logo.dark}"; import light from "${opts.logo.light}"; export const logos = { dark, light };`
-      : 'export const logos = {};',
-  };
-  const resolutionMap = Object.fromEntries(
-    (Object.keys(modules) as (keyof typeof modules)[]).map((key) => [
-      resolveVirtualModuleId(key),
-      key,
-    ])
-  );
+				// Add integrations immediately after Starlight in the config array.
+				// e.g. if a user has `integrations: [starlight(), tailwind()]`, then the order will be
+				// `[starlight(), expressiveCode(), sitemap(), mdx(), tailwind()]`.
+				// This ensures users can add integrations before/after Starlight and we respect that order.
+				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
+				config.integrations.splice(selfIndex + 1, 0, ...integrations);
 
-  return {
-    name: 'vite-plugin-starlight-user-config',
-    resolveId(id): string | void {
-      if (id in modules) return resolveVirtualModuleId(id);
-    },
-    load(id): string | void {
-      const resolution = resolutionMap[id];
-      if (resolution) return modules[resolution];
-    },
-  };
+				updateConfig({
+					vite: {
+						plugins: [
+							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
+						],
+					},
+					markdown: {
+						remarkPlugins: [
+							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
+						],
+						rehypePlugins: [rehypeRtlCodeSupport()],
+						shikiConfig:
+							// Configure Shiki theme if the user is using the default github-dark theme.
+							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
+					},
+					scopedStyleStrategy: 'where',
+					// If not already configured, default to prefetching all links on hover.
+					prefetch: config.prefetch ?? { prefetchAll: true },
+					i18n: astroI18nConfig,
+				});
+			},
+
+			'astro:config:done': ({ injectTypes }) => {
+				injectPluginTranslationsTypes(pluginTranslations, injectTypes);
+			},
+
+			'astro:build:done': ({ dir }) => {
+				if (!userConfig.pagefind) return;
+				const targetDir = fileURLToPath(dir);
+				const cwd = dirname(fileURLToPath(import.meta.url));
+				const relativeDir = relative(cwd, targetDir);
+				return new Promise<void>((resolve) => {
+					spawn('npx', ['-y', 'pagefind', '--site', relativeDir], {
+						stdio: 'inherit',
+						shell: true,
+						cwd,
+					}).on('close', () => resolve());
+				});
+			},
+		},
+	};
 }

@@ -1,0 +1,103 @@
+---
+title: 代码
+description: 了解如何在没有 Markdown 代码块的情况下，在 Starlight 中显示语法高亮的代码。
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+`<Code>` 组件可以渲染出语法高亮的代码。
+当无法使用 [Markdown 代码块](/zh-cn/guides/authoring-content/#代码块) 时，它非常有用，例如，渲染来自文件、数据库或 API 等外部源的数据。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Code
+	slot="preview"
+	code={`## 欢迎
+
+来自 **宇宙** 的问候！`}
+lang="md"
+title="example.md"
+ins={3}
+/>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { Code } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<Code>` 组件的渲染能将代码语法高亮，例如在展示从外部源获取的代码时。
+
+有关如何使用 `<Code>` 组件和可用属性的完整列表信息，请参阅 [Expressive Code “代码组件” 文档](https://expressive-code.com/key-features/code-component/)。
+
+<Preview>
+
+```mdx
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('这可能来自文件或 CMS！');`;
+export const fileName = 'example.js';
+export const highlights = ['文件', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% code
+   code="console.log('这可能来自文件或 CMS！');"
+   lang="js"
+   title="example.js"
+   meta="'文件' 'CMS'" /%}
+```
+
+</Fragment>
+
+export const exampleCode = `console.log('这可能来自文件或 CMS！');`;
+export const fileName = 'example.js';
+export const highlights = ['文件', 'CMS'];
+
+<Code
+	slot="preview"
+	code={exampleCode}
+	lang="js"
+	title={fileName}
+	mark={highlights}
+/>
+
+</Preview>
+
+### 显示导入的代码
+
+在 MDX 文件和 Astro 组件中，使用 [Vite 的 `?raw` 导入后缀](https://cn.vite.dev/guide/assets#importing-asset-as-string) 将任何代码文件作为字符串导入。
+然后，你可以将此导入的字符串传递给 `<Code>` 组件，以将其包含在你的页面上。
+
+<Preview>
+
+```mdx "?raw"
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/tsconfig.json?raw';
+
+<Code code={importedCode} lang="json" title="tsconfig.json" />
+```
+
+import importedCode from '../../../../../../examples/basics/tsconfig.json?raw';
+
+<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
+
+</Preview>
+
+## `<Code>` 的属性
+
+**实现：** [`Code.astro`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/components/Code.astro)
+
+`<Code>` 组件接受 [Expressive Code “Code Component” 文档](https://expressive-code.com/key-features/code-component/#available-props) 中记录的所有 props。

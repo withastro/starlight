@@ -6,12 +6,19 @@ on:
 
 jobs:
   congrats:
-    if: ${{ github.repository_owner == 'withastro' }}
+    if: ${{ github.repository_owner == 'withastro' && github.event.head_commit.message != '[ci] format' }}
     uses: withastro/automation/.github/workflows/congratsbot.yml@main
     with:
-      GITHUB_REPO: ${{ github.repository }}
-      COMMIT_AUTHOR: ${{ github.event.commits[0].author.name }}
-      COMMIT_MESSAGE: ${{ github.event.commits[0].message }}
-      COMMIT_ID: ${{ github.event.commits[0].id }}
+      EMOJIS: '🎉,🎊,🧑‍🚀,🥳,🙌,🚀,🤩,☄️,💫,<:starlight:1107431075543797802>,<:houston_pride:1130504824673284107>'
+      COAUTHOR_TEMPLATES: >
+        [
+          "Thanks <names> for helping! ✨",
+          "<names> stepped up to lend a hand — thank you! 🙌",
+          "<names> with the assist! 💪",
+          "Couldn’t have done this without <names>! 💖",
+          "Made even better by <names>! 🚀",
+          "And the team effort award goes to… <names>! 🏆",
+          "Featuring contributions by <names>! 🌟"
+        ]
     secrets:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_CONGRATS }}

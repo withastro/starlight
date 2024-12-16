@@ -1,0 +1,120 @@
+---
+title: 步骤
+description: 了解如何设计任务编号列表的样式，以在 Starlight 中创建分步指南。
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+要设置任务编号列表的样式以创建分步指南，请使用 `<Steps>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Steps slot="preview">
+
+1. 创建一个新的 Starlight 项目：
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npm create astro@latest -- --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm create astro --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn create astro --template starlight
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+2. 编写你的第一个文档页面。
+
+</Steps>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { Steps } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<Steps>` 组件来设置任务编号列表的样式。
+这对于需要清楚地显示出有关每个步骤的、更复杂的分步指南来说，非常有用。
+
+用 `<Steps>` 将标准的 Markdown 有序列表包裹起来。
+所有常用的 Markdown 语法都适用于 `<Steps>`。
+
+<Preview>
+
+````mdx
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. 将组件导入到 MDX 文件中：
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 用 `<Steps>` 将你的有序列表包裹起来。
+
+</Steps>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% steps %}
+
+1. 将组件导入到 MDX 文件中：
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 用 `<Steps>` 将你的有序列表包裹起来。
+
+{% /steps %}
+````
+
+</Fragment>
+
+<Steps slot="preview">
+
+1. 将组件导入到 MDX 文件中：
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. 用 `<Steps>` 将你的有序列表包裹起来。
+
+</Steps>
+
+</Preview>
+
+## `<Steps>` 的属性
+
+**实现：** [`Steps.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Steps.astro)
+
+`<Steps>` 组件不接受任何 props。

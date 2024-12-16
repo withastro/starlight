@@ -1,0 +1,10 @@
+# This fixture is used for the E2E tests related to Git where
+# a new repo is created. Nested repos do not inherit the .gitignore
+# options from the parent repo, so even though these files are
+# already ignored on the package they have to be re-declared here.
+# Do not delete this file or the Git tests will try to index and
+# and commit all the node_modules and generated files from the test.
+env.d.ts
+.astro
+/node_modules/
+/dist/

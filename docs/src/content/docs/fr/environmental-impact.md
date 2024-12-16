@@ -65,7 +65,7 @@ Des paquets comme [`astro-embed`][embed] peuvent aider pour les services communs
 
 :::tip[Le saviez-vous ?]
 L'analyse et la compilation de JavaScript est l'une des tâches les plus coûteuses pour les navigateurs.
-Par rapport au rendu d'une image JPEG de même taille, [le traitement de JavaScript peut prendre plus de 30 fois plus de temps][coût-de-js].
+Par rapport au rendu d'une image JPEG de même taille, [le traitement de JavaScript peut prendre plus de 30 fois plus de temps][cost-of-js].
 :::
 
 [cabin]: https://withcabin.com/
@@ -89,20 +89,21 @@ Le choix d'un hébergeur utilisant des énergies renouvelables se traduira par u
 Curieux de savoir comment les autres frameworks de documentation se comparent ?
 Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaires construites avec différents outils.
 
-| Framework                   | CO₂ par page visitée |
-| --------------------------- | -------------------- |
-| [Starlight][sl-carbon]      | 0.01g                |
-| [VitePress][vp-carbon]      | 0.05g                |
-| [Docus][dc-carbon]          | 0.05g                |
-| [Sphinx][sx-carbon]         | 0.07g                |
-| [MkDocs][mk-carbon]         | 0.10g                |
-| [Nextra][nx-carbon]         | 0.11g                |
-| [docsify][dy-carbon]        | 0.11g                |
-| [Docusaurus][ds-carbon]     | 0.24g                |
-| [Read the Docs][rtd-carbon] | 0.24g                |
-| [GitBook][gb-carbon]        | 0.71g                |
+| Framework                   | CO₂ par page visitée | Notation |
+| --------------------------- | -------------------- | :------: |
+| [Starlight][sl-carbon]      | 0.01g                |    A+    |
+| [Read the Docs][rtd-carbon] | 0.05g                |    A+    |
+| [Sphinx][sx-carbon]         | 0.06g                |    A+    |
+| [VitePress][vp-carbon]      | 0.07g                |    A+    |
+| [Docus][dc-carbon]          | 0.09g                |    A+    |
+| [docsify][dy-carbon]        | 0.10g                |    A     |
+| [Nextra][nx-carbon]         | 0.11g                |    A     |
+| [MkDocs][mk-carbon]         | 0.19g                |    B     |
+| [Docusaurus][ds-carbon]     | 0.21g                |    B     |
+| [GitBook][gb-carbon]        | 0.43g                |    C     |
+| [Mintlify][mt-carbon]       | 1.22g                |    F     |
 
-<small>Données collectées le 14 mai 2023. Cliquez sur un lien pour voir les chiffres actualisés.</small>
+<small>Données collectées le 22 juillet 2024. Cliquez sur un lien pour voir les chiffres actualisés.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -114,6 +115,7 @@ Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaire
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Plus de ressources
 

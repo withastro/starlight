@@ -1,0 +1,108 @@
+---
+title: 카드
+description: Starlight에서 카드를 사용하여 상자에 콘텐츠를 표시하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Starlight의 스타일과 일치하는 상자에 콘텐츠를 표시하려면 `<Card>` 컴포넌트를 사용합니다.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Card slot="preview" title="달" icon="moon">
+	이오, 유로파, 가니메데
+</Card>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+`<Card>` 컴포넌트를 사용하여 카드를 표시하고 카드의 [`title`](#title)을 입력합니다.
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="확인하세요">강조하고 싶은 흥미로운 콘텐츠.</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="확인하세요" %}
+강조하고 싶은 흥미로운 콘텐츠.
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="확인하세요">
+	강조하고 싶은 흥미로운 콘텐츠.
+</Card>
+
+</Preview>
+
+### 카드에 아이콘 추가
+
+[Starlight 내장 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 [`icon`](#icon) 속성을 사용하여 카드에 아이콘을 포함하세요.
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="별" icon="star">
+	시리우스, 베가, 베텔게우스
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="별" icon="star" %}
+시리우스, 베가, 베텔게우스
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="별" icon="star">
+	시리우스, 베가, 베텔게우스
+</Card>
+
+</Preview>
+
+### 카드 그룹화
+
+[`<CardGrid>`](/ko/components/card-grids/) 컴포넌트를 사용해 카드를 그룹화하여 공간이 충분할 때 여러 카드를 나란히 표시합니다.
+예시는 [“카드 그룹화”](/ko/components/card-grids/#카드-그룹화) 가이드를 참조하세요.
+
+## `<Card>` 속성
+
+**구현:** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+`<Card>` 컴포넌트는 다음과 같은 속성을 허용합니다:
+
+### `title`
+
+**필수**  
+**타입:** `string`
+
+표시할 카드의 제목입니다.
+
+### `icon`
+
+**타입:** `string`
+
+카드에는 [Starlight 내장 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.

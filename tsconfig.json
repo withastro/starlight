@@ -1,6 +1,9 @@
 {
   "extends": "astro/tsconfigs/strictest",
+  "include": ["docs/.astro/types.d.ts", "**/*"],
+  "exclude": ["**/dist/**", "**/__coverage__/**", "**/build/**"],
   "compilerOptions": {
+    "jsx": "preserve",
     "checkJs": true
   }
 }

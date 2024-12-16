@@ -13,3 +13,12 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Vitest
+__coverage__/
+
+# Playwright
+test-results/
+
+# Vercel output
+.vercel

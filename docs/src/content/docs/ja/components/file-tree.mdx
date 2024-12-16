@@ -1,0 +1,222 @@
+---
+title: ファイルツリー
+description: Starlightでファイルアイコンや折りたたみ可能なサブディレクトリを使ってディレクトリ構造を表示する方法を学びましょう。
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+ファイルアイコンや折りたたみ可能なサブディレクトリを使ってディレクトリ構造を表示するには、`<FileTree>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs **重要な**ファイル
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## インポート
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<FileTree>`コンポーネントを使用して、ファイルアイコンや折りたたみ可能なサブディレクトリを含むファイルツリーを表示します。
+
+ファイルやディレクトリの構造を指定するには、[Markdownの箇条書きリスト](https://www.markdownguide.org/basic-syntax/#unordered-lists)を`<FileTree>`の内部で使用します。サブディレクトリを作成するには、ネストしたリストを作成するか、リスト項目の末尾に `/` を追加して、特定の内容を持たないディレクトリとして表示します。
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### エントリを強調表示する
+
+ファイルやディレクトリの名前を太字にして目立たせることができます。例: `**README.md**`。
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### コメントを追加する
+
+ファイルやディレクトリにコメントを追加するには、名前の後にテキストを追加します。コメントには、太字や斜体などのMarkdownのインライン形式がサポートされています。
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro **重要な**ファイル
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro **重要な**ファイル
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro **重要な**ファイル
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### プレースホルダーを追加する
+
+`...`または`…`を名前として使用することで、プレースホルダーファイルやディレクトリを追加できます。これは、フォルダがさらに多くのアイテムを含むことが期待されていることを読者に示しながら、それらをすべて明示的に指定する必要がない場合に便利です。
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## `<FileTree>` プロパティ
+
+**実装:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+`<FileTree>`コンポーネントはプロパティを受け付けません。

@@ -1,0 +1,221 @@
+---
+title: タブ
+description: Starlightで同等の情報をグループ化するためのタブインターフェースを作成する方法を学びましょう。
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+タブインターフェースを作成するには、`<Tabs>`と`<TabItem>`コンポーネントを使用します。
+タブは、ユーザーが複数のオプションのうち1つだけを見る必要がある場合に、同等の情報をグループ化するのに便利です。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="星">シリウス、ベガ、ベテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+</Tabs>
+
+</Preview>
+
+## インポート
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<Tabs>`と`<TabItem>`コンポーネントを使用してタブインターフェースを表示します。
+各`<TabItem>`には、ユーザーに表示される[`label`](#label)が必要です。
+
+<Preview>
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="星">シリウス、ベガ、ベテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% tabs %}
+{% tabitem label="星" %}
+シリウス、ベガ、ベテルギウス
+{% /tabitem %}
+
+{% tabitem label="衛星" %}
+イオ、エウロパ、ガニメデ
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="星">シリウス、ベガ、ベテルギウス</TabItem>
+	<TabItem label="衛星">イオ、エウロパ、ガニメデ</TabItem>
+</Tabs>
+
+</Preview>
+
+### タブを同期させる
+
+複数のタブグループを同期させるには、[`syncKey`](#synckey)属性を追加します。
+
+ページ上のすべての`<Tabs>`に同じ`syncKey`値を設定すると、同じアクティブなラベルが表示されます。
+これにより、読者は一度選択（例: オペレーティングシステムやパッケージマネージャー）すると、その選択がページを移動しても保持されます。
+
+関連するタブを同期させるには、各`<Tabs>`コンポーネントに同じ`syncKey`プロパティを追加し、同じ`<TabItem>`ラベルを使用してください。
+
+<Preview>
+
+```mdx 'syncKey="constellations"'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_いくつかの星:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="オリオン座">ベラトリックス、リゲル、ベテルギウス</TabItem>
+	<TabItem label="ふたご座">ポルックス、カストルA、カストルB</TabItem>
+</Tabs>
+
+_いくつかのエキソプラネット:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="オリオン座">HD 34445 b、グリーゼ 179 b、Wasp-82 b</TabItem>
+	<TabItem label="ふたご座">ポルックスb、HAT-P-24b、HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="constellations"'
+_いくつかの星:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="オリオン座" %}
+ベラトリックス、リゲル、ベテルギウス
+{% /tabitem %}
+
+{% tabitem label="ふたご座" %}
+ポルックス、カストルA、カストルB
+{% /tabitem %}
+{% /tabs %}
+
+_いくつかのエキソプラネット:_
+
+{% tabs syncKey="constellations" %}
+{% tabitem label="オリオン座" %}
+HD 34445 b、グリーゼ 179 b、Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="ふたご座" %}
+ポルックスb、HAT-P-24b、HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+
+_いくつかの星:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="オリオン座">ベラトリックス、リゲル、ベテルギウス</TabItem>
+	<TabItem label="ふたご座">ポルックス、カストルA、カストルB</TabItem>
+</Tabs>
+
+_いくつかのエキソプラネット:_
+
+<Tabs syncKey="constellations">
+	<TabItem label="オリオン座">HD 34445 b、グリーゼ 179 b、Wasp-82 b</TabItem>
+	<TabItem label="ふたご座">ポルックスb、HAT-P-24b、HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### タブにアイコンを追加する
+
+[`icon`](#icon)属性を使用してタブ項目にアイコンを追加し、[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前を指定して、ラベルの横にアイコンを表示します。
+
+<Preview>
+
+```mdx /icon="\w+"/
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="星" icon="star">
+		シリウス、ベガ、ベテルギウス
+	</TabItem>
+	<TabItem label="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+{% tabs %}
+{% tabitem label="星" icon="star" %}
+シリウス、ベガ、ベテルギウス
+{% /tabitem %}
+
+{% tabitem label="衛星" icon="moon" %}
+イオ、エウロパ、ガニメデ
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="星" icon="star">
+		シリウス、ベガ、ベテルギウス
+	</TabItem>
+	<TabItem label="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## `<Tabs>` プロパティ
+
+**実装:** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+`<Tabs>`コンポーネントは複数の`<TabItem>`コンポーネントをグループ化し、以下のプロパティを受け付けます。
+
+### `syncKey`
+
+**型:** `string`
+
+複数のページにわたってタブグループを同期させるためのキー。
+
+## `<TabItem>` プロパティ
+
+**実装:** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+タブは複数のタブ項目から構成され、それぞれ以下のプロパティを持ちます。
+
+### `label`
+
+**必須**  
+**型:** `string`
+
+タブ項目には、タブに表示されるテキストを指定する`label`属性が必要です。
+
+### `icon`
+
+**型:** `string`
+
+各タブ項目には、ラベルの横に表示される[Starlightに組み込まれたアイコン](/ja/reference/icons/#すべてのアイコン)を指定する`icon`属性を設定できます。

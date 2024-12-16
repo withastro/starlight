@@ -1,0 +1,145 @@
+---
+title: リンクボタン
+description: 視覚的に目立つコールトゥアクションリンクをStarlightで作成する方法を学びましょう。
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+視覚的に目立つコールトゥアクションリンクを表示するには、`<LinkButton>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/ja/getting-started/">
+	ドキュメントを読む
+</LinkButton>
+
+</Preview>
+
+## インポート
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<LinkButton>`コンポーネントを使用して、視覚的に目立つコールトゥアクションリンクを表示します。
+リンクボタンは、ユーザーを最も関連性の高いコンテンツやアクションにつなげるために便利で、ランディングページなどでよく使用されます。
+
+`<LinkButton>`には[`href`](#href)属性が必要です。
+オプションとして、[`variant`](#variant)属性を使用して、ボタンの外観をカスタマイズできます。`variant`属性には`primary`（デフォルト）、`secondary`、`minimal`のいずれかを指定できます。
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/ja/getting-started/">始めましょう</LinkButton>
+<LinkButton href="/ja/reference/configuration/" variant="secondary">
+	設定リファレンス
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/ja/getting-started/" %}始めましょう{% /linkbutton %}
+
+{% linkbutton href="/ja/reference/configuration/" variant="secondary" %}
+設定リファレンス
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/ja/getting-started/">始めましょう</LinkButton>
+	<LinkButton href="/ja/reference/configuration/" variant="secondary">
+		設定リファレンス
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### リンクボタンにアイコンを追加する
+
+[`icon`](#icon)属性を使用して、リンクボタンにアイコンを追加できます。これは、[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前を指定します。
+
+[`iconPlacement`](#iconplacement)属性を使用すると、アイコンをテキストの前に配置することができ、デフォルトでは`end`（後ろ）ですが、`start`（前）に設定できます。
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build/ja/"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Astroに関連するドキュメント
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build/ja/"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+Astroに関連するドキュメント
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build/ja/"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Astroに関連するドキュメント
+</LinkButton>
+
+</Preview>
+
+## `<LinkButton>` プロパティ
+
+**実装:** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+`<LinkButton>`コンポーネントは以下のプロパティを受け付け、[他の`<a>`要素の属性](https://developer.mozilla.org/ja/docs/Web/HTML/Element/a)も使用できます。
+
+### `href`
+
+**必須**  
+**型:** `string`
+
+リンクボタンが指すURL。
+
+### `variant`
+
+**型:** `'primary' | 'secondary' | 'minimal'`  
+**デフォルト:** `'primary'`
+
+リンクボタンの外観。
+`primary`はテーマのアクセントカラーを使用して目立つコールトゥアクションリンクを作成し、`secondary`はそれほど目立たないリンク、`minimal`は最小限のスタイルのリンクを作成します。
+
+### `icon`
+
+**型:** `string`
+
+リンクボタンにアイコンを含めるための属性。これは[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前を指定します。
+
+### `iconPlacement`
+
+**型:** `'start' | 'end'`  
+**デフォルト:** `'end'`
+
+アイコンの配置をテキストの前後どちらにするかを指定します。

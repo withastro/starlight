@@ -1,36 +1,16 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { fileURLToPath } from 'node:url';
-import project from 'virtual:starlight/project-context';
-import { getFileCommitDate } from '../utils/git';
-import { useTranslations } from '../utils/translations';
+import type { Props } from '../props';
 
-interface Props {
-  id: CollectionEntry<'docs'>['id'];
-  lang: string;
-  locale: string | undefined;
-}
-
-const { id, lang, locale } = Astro.props;
-const t = useTranslations(locale);
-
-const currentFilePath = fileURLToPath(
-  new URL('src/content/docs/' + id, project.root)
-);
-
-let date: Date | undefined;
-try {
-  ({ date } = getFileCommitDate(currentFilePath, 'newest'));
-} catch {}
+const { lang, lastUpdated } = Astro.props;
 ---
 
 {
-  date && (
-    <p>
-      {t('page.lastUpdated')}
-      <time datetime={date.toISOString()}>
-        {date.toLocaleDateString(lang, { dateStyle: 'medium' })}
-      </time>
-    </p>
-  )
+	lastUpdated && (
+		<p>
+			{Astro.locals.t('page.lastUpdated')}{' '}
+			<time datetime={lastUpdated.toISOString()}>
+				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
+			</time>
+		</p>
+	)
 }

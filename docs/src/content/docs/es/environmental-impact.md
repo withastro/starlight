@@ -73,20 +73,21 @@ Elegir un proveedor de alojamiento que utilice energía renovable significa tene
 ¿Curioso por saber cómo se comparan otros frameworks de documentación?
 Estas pruebas con el [Calculadora de Carbono de Sitios Web][wcc] comparan páginas similares construidas con diferentes herramientas.
 
-| Framework                   | CO₂ por visita a la página |
-| --------------------------- | -------------------------- |
-| [Starlight][sl-carbon]      | 0.01g                      |
-| [VitePress][vp-carbon]      | 0.05g                      |
-| [Docus][dc-carbon]          | 0.05g                      |
-| [Sphinx][sx-carbon]         | 0.07g                      |
-| [MkDocs][mk-carbon]         | 0.10g                      |
-| [Nextra][nx-carbon]         | 0.11g                      |
-| [docsify][dy-carbon]        | 0.11g                      |
-| [Docusaurus][ds-carbon]     | 0.24g                      |
-| [Read the Docs][rtd-carbon] | 0.24g                      |
-| [GitBook][gb-carbon]        | 0.71g                      |
+| Framework                   | CO₂ por visita a la página | Calificación |
+| --------------------------- | -------------------------- | :----------: |
+| [Starlight][sl-carbon]      | 0.01g                      |      A+      |
+| [Read the Docs][rtd-carbon] | 0.05g                      |      A+      |
+| [Sphinx][sx-carbon]         | 0.06g                      |      A+      |
+| [VitePress][vp-carbon]      | 0.07g                      |      A+      |
+| [Docus][dc-carbon]          | 0.09g                      |      A+      |
+| [docsify][dy-carbon]        | 0.10g                      |      A       |
+| [Nextra][nx-carbon]         | 0.11g                      |      A       |
+| [MkDocs][mk-carbon]         | 0.19g                      |      B       |
+| [Docusaurus][ds-carbon]     | 0.21g                      |      B       |
+| [GitBook][gb-carbon]        | 0.43g                      |      C       |
+| [Mintlify][mt-carbon]       | 1.22g                      |      F       |
 
-<small>Datos recopilados el 14 de mayo de 2023. Haz clic en un enlace para ver cifras actualizadas.</small>
+<small>Datos recopilados el 22 de Julio de 2024. Haz clic en un enlace para ver cifras actualizadas.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -98,6 +99,7 @@ Estas pruebas con el [Calculadora de Carbono de Sitios Web][wcc] comparan págin
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Más recursos
 

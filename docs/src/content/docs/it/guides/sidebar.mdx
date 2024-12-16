@@ -1,0 +1,623 @@
+---
+title: Navigazione nella barra laterale
+description: Scopri come impostare e personalizzare i collegamenti di navigazione della barra laterale del tuo sito Starlight.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+import SidebarPreview from '~/components/sidebar-preview.astro';
+
+Una barra laterale ben organizzata è fondamentale per una buona documentazione poiché è uno dei modi principali in cui gli utenti navigheranno nel tuo sito. Starlight fornisce un set completo di opzioni per personalizzare il layout e il contenuto della barra laterale.
+
+## Barra laterale predefinita
+
+Per impostazione predefinita, Starlight genererà automaticamente una barra laterale in base alla struttura del file system della documentazione, utilizzando la proprietà `title` di ciascun file come voce della barra laterale.
+
+Ad esempio, data la seguente struttura di file:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - costellazioni/
+        - andromeda.md
+        - orione.md
+      - stelle/
+        - betelgeuse.md
+
+</FileTree>
+
+Verrà generata automaticamente la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'costellazioni',
+			items: [
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orione', link: '' },
+			],
+		},
+		{
+			label: 'stelle',
+			items: [{ label: 'Betelgeuse', link: '' }],
+		},
+	]}
+/>
+
+Scopri di più sulle barre laterali generate automaticamente nella sezione [gruppi generati automaticamente](#gruppi-generati-automaticamente).
+
+## Aggiungi collegamenti e gruppi di collegamenti
+
+Per configurare i collegamenti della barra laterale e i gruppi di collegamenti (all'interno di un'intestazione comprimibile), utilizza la proprietà [`starlight.sidebar`](/it/reference/configuration/#sidebar) in `astro.config.mjs`.
+
+Combinando collegamenti e gruppi, puoi creare un'ampia varietà di layout della barra laterale.
+
+### Collegamenti interni
+
+Aggiungi un collegamento a una pagina in `src/content/docs/` utilizzando un oggetto con la proprietà `slug`.
+Il titolo della pagina collegata verrà utilizzato come etichetta per impostazione predefinita.
+
+Ad esempio, con la seguente configurazione:
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'costellazioni/andromeda' },
+		{ slug: 'costellazioni/orione' },
+	],
+});
+```
+
+E la seguente struttura di file:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - costellazioni/
+        - andromeda.md
+        - orione.md
+
+</FileTree>
+
+Verrà generata la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{ label: 'Andromeda', link: '' },
+		{ label: 'Orione', link: '' },
+	]}
+/>
+
+Per sovrascrivere i valori dedotti dal frontmatter di una pagina collegata, puoi aggiungere le proprietà `label`, [`translations`](#internazionalizzazione) e [`attrs`](#attributi-html-personalizzati).
+
+Consulta ["Personalizzazione dei collegamenti generati automaticamente"](#personalizzazione-dei-collegamenti-generati-automaticamente-nel-frontmatter) per ulteriori dettagli sul controllo dell'aspetto della barra laterale dal frontmatter della pagina.
+
+#### Forma abbreviata per i collegamenti interni
+
+I collegamenti interni possono anche essere specificati fornendo solo una stringa per lo slug della pagina come forma abbreviata.
+
+Ad esempio, la seguente configurazione è equivalente alla configurazione sopra, che utilizzava `slug`:
+
+```js "slug:"
+starlight({
+	sidebar: ['costellazioni/andromeda', 'costellazioni/orione'],
+});
+```
+
+### Altri collegamenti
+
+Aggiungi un collegamento a una pagina esterna o non di documentazione utilizzando un oggetto con le proprietà `label` e `link`.
+
+```js "label:" "link:"
+starlight({
+	sidebar: [
+		// Un collegamento a una pagina non di documentazione su questo sito.
+		{ label: 'Negozio di Meteore', link: '/negozio/' },
+		// Un collegamento esterno al sito web della NASA.
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{ label: 'Negozio di Meteore', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	]}
+/>
+
+### Gruppi
+
+Puoi aggiungere struttura alla barra laterale raggruppando i collegamenti correlati sotto un'intestazione comprimibile.
+I gruppi possono contenere sia collegamenti che altri sottogruppi.
+
+Aggiungi un gruppo utilizzando un oggetto con le proprietà `label` e `items`.
+`label` verrà utilizzato come intestazione per il gruppo.
+Aggiungi collegamenti o sottogruppi all'array `items`.
+
+```js /^\s*(label:|items:)/
+starlight({
+	sidebar: [
+		// Un gruppo di collegamenti etichettato "Costellazioni".
+		{
+			label: 'Costellazioni',
+			items: [
+				'costellazioni/carina',
+				'costellazioni/centauro',
+				// Un gruppo nidificato di collegamenti per le costellazioni stagionali.
+				{
+					label: 'Stagionali',
+					items: [
+						'costellazioni/andromeda',
+						'costellazioni/orione',
+						'costellazioni/orsa-minore',
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Costellazioni',
+			items: [
+				{ label: 'Carina', link: '' },
+				{ label: 'Centauro', link: '' },
+				{
+					label: 'Stagionali',
+					items: [
+						{ label: 'Andromeda', link: '' },
+						{ label: 'Orione', link: '' },
+						{ label: 'Orsa Minore', link: '' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### Gruppi generati automaticamente
+
+Starlight può generare automaticamente un gruppo nella barra laterale basato su una directory dei tuoi documenti.
+Questo è utile quando non vuoi inserire manualmente ogni elemento della barra laterale in un gruppo.
+
+Per impostazione predefinita, le pagine sono ordinate alfabeticamente in base allo [`slug`](/it/reference/overrides/#slug) del file.
+
+Aggiungi un gruppo generato automaticamente utilizzando un oggetto con le proprietà `label` e `autogenerate`. La tua configurazione `autogenerate` deve specificare la `directory` da utilizzare per le voci della barra laterale. Ad esempio, con la seguente configurazione:
+
+```js "label:" "autogenerate:"
+starlight({
+	sidebar: [
+		{
+			label: 'Costellazioni',
+			// Genera automaticamente un gruppo di collegamenti per la directory 'costellazioni'.
+			autogenerate: { directory: 'costellazioni' },
+		},
+	],
+});
+```
+
+E la seguente struttura di file:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - costellazioni/
+        - carina.md
+        - centauro.md
+        - stagionali/
+          - andromeda.md
+
+</FileTree>
+
+Verrà generata la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Costellazioni',
+			items: [
+				{ label: 'Carina', link: '' },
+				{ label: 'Centauro', link: '' },
+				{
+					label: 'stagionali',
+					items: [{ label: 'Andromeda', link: '' }],
+				},
+			],
+		},
+	]}
+/>
+
+## Personalizzazione dei collegamenti generati automaticamente nel frontmatter
+
+Utilizza il [campo frontmatter `sidebar`](/it/reference/frontmatter/#sidebar) nelle singole pagine per personalizzare i collegamenti generati automaticamente.
+
+Le opzioni frontmatter della barra laterale ti consentono di impostare un'[etichetta personalizzata](/it/reference/frontmatter/#label) o aggiungere un [badge](/it/reference/frontmatter/#badge) a un collegamento, [nascondere](/it/reference/frontmatter/#hidden) un collegamento dalla barra laterale o definire una [ponderazione dell'ordinamento personalizzata](/it/reference/frontmatter/#order).
+
+```md "sidebar:"
+---
+# src/content/docs/example.md
+title: La mia pagina
+sidebar:
+  # Imposta un'etichetta personalizzata per il collegamento
+  label: Etichetta personalizzata della barra laterale
+  # Imposta un ordine personalizzato per il collegamento (i numeri inferiori vengono visualizzati più in alto)
+  order: 2
+  # Aggiungi un badge al collegamento
+  badge:
+    text: Nuovo
+    variant: tip
+---
+```
+
+Un gruppo generato automaticamente che include una pagina con il frontmatter sopra genererà la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Guida',
+			items: [
+				{ label: 'Pagina uno', link: '' },
+				{
+					label: 'Etichetta personalizzata della barra laterale',
+					link: '',
+					badge: { text: 'Nuovo', variant: 'tip' },
+				},
+				{ label: 'Pagina tre', link: '' },
+			],
+		},
+	]}
+/>
+
+:::note
+La configurazione del frontmatter `sidebar` viene utilizzata solo per i collegamenti in gruppi generati automaticamente e per i collegamenti di documenti definiti con la proprietà `slug`. Non si applica ai collegamenti definiti con la proprietà `link`.
+:::
+
+## Badge
+
+I collegamenti, i gruppi e i gruppi generati automaticamente possono anche includere una proprietà `badge` per visualizzare un badge accanto alla loro etichetta.
+
+```js {9,16}
+starlight({
+	sidebar: [
+		{
+			label: 'Stelle',
+			items: [
+				// Un collegamento con un badge "Supergigante".
+				{
+					slug: 'stelle/persei',
+					badge: 'Supergigante',
+				},
+			],
+		},
+		// Un gruppo generato automaticamente con un badge "Obsoleto".
+		{
+			label: 'Lune',
+			badge: 'Obsoleto',
+			autogenerate: { directory: 'lune' },
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Stelle',
+			items: [
+				{
+					label: 'Persei',
+					link: '',
+					badge: { text: 'Supergigante', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'Lune',
+			badge: { text: 'Obsoleto', variant: 'default' },
+			items: [
+				{
+					label: 'Io',
+					link: '',
+				},
+				{
+					label: 'Europa',
+					link: '',
+				},
+				{
+					label: 'Ganimede',
+					link: '',
+				},
+			],
+		},
+	]}
+/>
+
+### Varianti del badge e stile personalizzato
+
+Personalizza lo stile del badge utilizzando un oggetto con le proprietà `text`, `variant` e `class`.
+
+Il `text` rappresenta il contenuto da visualizzare (ad esempio "Nuovo").
+Per impostazione predefinita, il badge utilizzerà il colore di accento del tuo sito. Per utilizzare uno stile di badge incorporato, imposta la proprietà `variant` su uno dei seguenti valori: `note`, `tip`, `danger`, `caution` o `success`.
+
+In alternativa, puoi creare uno stile di badge personalizzato impostando la proprietà `class` su un nome di classe CSS.
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: 'Stelle',
+			items: [
+				// Un collegamento con un badge giallo "Bozza".
+				{
+					slug: '/stelle/sirio/',
+					badge: { text: 'Bozza', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Stelle',
+			items: [
+				{
+					label: 'Sirio',
+					link: '',
+					badge: { text: 'Bozza', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## Attributi HTML personalizzati
+
+I collegamenti possono anche includere una proprietà `attrs` per aggiungere attributi HTML personalizzati all'elemento del collegamento.
+
+Nell'esempio seguente, `attrs` viene utilizzato per aggiungere un attributo `target="_blank"`, in modo che il collegamento si apra in una nuova scheda e per applicare un attributo personalizzato `style` per scrivere in corsivo l'etichetta del collegamento:
+
+```js {10}
+starlight({
+	sidebar: [
+		{
+			label: 'Risorse',
+			items: [
+				// Un collegamento esterno al sito web della NASA che si apre in una nuova scheda.
+				{
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Risorse',
+			items: [
+				{
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
+## Internazionalizzazione
+
+Utilizza la proprietà `translations` sulle voci di collegamenti e gruppi per tradurre l'etichetta del collegamento o del gruppo per ogni lingua supportata specificando un tag di lingua [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags), ad esempio `"en"`, `"ar"`, o `"zh-CN"`, come chiave e l'etichetta tradotta come valore.
+La proprietà `label` sarà utilizzata per la lingua predefinita e per le lingue senza traduzione.
+
+```js {5-7,11-13,18-20}
+starlight({
+	sidebar: [
+		{
+			label: 'Costellazioni',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					label: 'Andromeda',
+					translations: {
+						'pt-BR': 'Andrômeda',
+					},
+					slug: 'costellazioni/andromeda',
+				},
+				{
+					label: 'Scorpius',
+					translations: {
+						'pt-BR': 'Escorpião',
+					},
+					slug: 'costellazioni/scorpius',
+				},
+			],
+		},
+	],
+});
+```
+
+La navigazione della documentazione in Portoghese (Brasile) genererà la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+### Internazionalizzazione con collegamenti interni
+
+I [collegamenti interni](#collegamenti-interni) utilizzeranno automaticamente i titoli delle pagine tradotti dal frontmatter del contenuto per impostazione predefinita:
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Costellazioni',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'costellazioni/andromeda' },
+				{ slug: 'costellazioni/scorpius' },
+			],
+		},
+	],
+});
+```
+
+La navigazione della documentazione in Portoghese (Brasile) genererà la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+Nei siti multilingua, il valore di `slug` non include la parte della URL relativa alla lingua.
+Ad esempio, se hai pagine in `en/intro` e `pt-br/intro`, lo slug è `intro` quando configuri la barra laterale.
+
+## Gruppi compressi
+
+I gruppi di collegamenti possono essere compressi per impostazione predefinita impostando la proprietà `collapsed` su `true`.
+
+```js {5-6}
+starlight({
+	sidebar: [
+		{
+			label: 'Costellazioni',
+			// Comprimi il gruppo per impostazione predefinita.
+			collapsed: true,
+			items: ['costellazioni/andromeda', 'costellazioni/orione'],
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Costellazioni',
+			collapsed: true,
+			items: [
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orione', link: '' },
+			],
+		},
+	]}
+/>
+
+[I gruppi generati automaticamente](#gruppi-generati-automaticamente) rispettano il valore `collapsed` del gruppo principale:
+
+```js {5-6}
+starlight({
+	sidebar: [
+		{
+			label: 'Costellazioni',
+			// Comprimi il gruppo e i relativi sottogruppi generati automaticamente per impostazione predefinita.
+			collapsed: true,
+			autogenerate: { directory: 'costellazioni' },
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Costellazioni',
+			collapsed: true,
+			items: [
+				{ label: 'Carina', link: '' },
+				{ label: 'Centauro', link: '' },
+				{
+					label: 'stagionali',
+					collapsed: true,
+					items: [{ label: 'Andromeda', link: '' }],
+				},
+			],
+		},
+	]}
+/>
+
+Questo comportamento può essere ignorato definendo la proprietà `autogenerate.collapsed`.
+
+```js {5-7} "collapsed: true"
+starlight({
+	sidebar: [
+		{
+			label: 'Costellazioni',
+			// Non comprimere il gruppo "Costellazioni", ma comprimere
+			// i suoi sottogruppi generati automaticamente.
+			collapsed: false,
+			autogenerate: { directory: 'costellazioni', collapsed: true },
+		},
+	],
+});
+```
+
+La configurazione sopra genera la seguente barra laterale:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Costellazioni',
+			items: [
+				{ label: 'Carina', link: '' },
+				{ label: 'Centauro', link: '' },
+				{
+					label: 'stagionali',
+					collapsed: true,
+					items: [{ label: 'Andromeda', link: '' }],
+				},
+			],
+		},
+	]}
+/>

@@ -1,0 +1,15 @@
+---
+function checkServer() {
+	try {
+		Astro.clientAddress;
+
+		return true;
+	} catch {
+		// Accessing `clientAddress` during build time
+		// fails, so it is not SSR.
+		return false;
+	}
+}
+---
+
+<div id="server-check">{checkServer() ? 'On server' : 'Not server'}</div>

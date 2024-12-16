@@ -1,0 +1,22 @@
+# Deep Directories
+**/node_modules
+
+# Generated Directories
+**/dist
+**/.astro
+**/__coverage__
+
+# Directories
+.changeset
+
+# Files
+pnpm-lock.yaml
+
+# Test snapshots
+**/__tests__/**/snapshots
+
+# https://github.com/withastro/prettier-plugin-astro/issues/337
+packages/starlight/user-components/Tabs.astro
+
+# Malformed YAML file used for testing
+packages/starlight/__tests__/i18n/malformed-yaml-src/content/i18n/*.yml

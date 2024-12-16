@@ -1,0 +1,124 @@
+---
+title: リンクカード
+description: Starlightでリンクを目立つカードとして表示する方法を学びます。
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+異なるページへのリンクを目立たせて表示するには、`<LinkCard>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+	<LinkCard
+		slot="preview"
+		title="Starlightのカスタマイズ"
+		description="カスタムスタイル、フォントなどを使用して、Starlightサイトを自分のものにする方法を学びます。"
+		href="/ja/guides/customization/"
+	/>
+</Preview>
+
+## インポート
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<LinkCard>`コンポーネントを使用して、リンクを目立たせて表示します。
+各`<LinkCard>`には[`title`](#title)と[`href`](#href)属性が必要です。
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard title="Markdownの作成" href="/ja/guides/authoring-content/" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Markdownの作成" href="/ja/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Markdownの作成"
+	href="/ja/guides/authoring-content/"
+/>
+  
+</Preview>
+
+### リンクの説明を追加する
+
+[`description`](#description)属性を使用して、リンクカードに短い説明を追加します。
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="国際化"
+	href="/ja/guides/i18n/"
+	description="複数の言語をサポートするようにStarlightを設定します。"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="国際化"
+	 href="/ja/guides/i18n/"
+	 description="複数の言語をサポートするようにStarlightを設定します。" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="国際化"
+	href="/ja/guides/i18n/"
+	description="複数の言語をサポートするようにStarlightを設定します。"
+/>
+  
+</Preview>
+
+### リンクカードをグループ化する
+
+[`<CardGrid>`](/ja/components/card-grids/)コンポーネントを使用してグループ化することで、十分なスペースがある場合に複数のリンクカードを並べて表示できます。
+
+例については、["リンクカードのグループ化"](/ja/components/card-grids/#リンクカードをグループ化する)ガイドを参照してください。
+
+## `<LinkCard>` プロパティ
+
+**実装:** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+`<LinkCard>`コンポーネントは、以下のプロパティおよび他のすべての[`<a>`要素の属性](https://developer.mozilla.org/ja/docs/Web/HTML/Element/a)を受け入れます：
+
+### `title`
+
+**必須**  
+**型:** `string`
+
+表示するリンクカードのタイトル。
+
+### `href`
+
+**必須**  
+**型:** `string`
+
+カードが操作されたときにリンクするURL。
+
+### `description`
+
+**型:** `string`
+
+タイトルの下に表示するオプションの説明。

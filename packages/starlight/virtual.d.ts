@@ -1,17 +1,9 @@
 declare module 'virtual:starlight/user-config' {
-  const Config: import('./types').StarlightConfig;
-  export default Config;
-}
-declare module 'virtual:starlight/project-context' {
-  export default { root: string };
+	const Config: import('./types').StarlightConfig;
+	export default Config;
 }
 
-declare module 'virtual:starlight/user-css' {}
-
-declare module 'virtual:starlight/user-images' {
-  type ImageMetadata = import('astro').ImageMetadata;
-  export const logos: {
-    dark?: ImageMetadata;
-    light?: ImageMetadata;
-  };
+declare module 'virtual:starlight/plugin-translations' {
+	const PluginTranslations: import('./utils/plugins').PluginTranslations;
+	export default PluginTranslations;
 }

@@ -1,0 +1,46 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for getting in touch! Please fill out this form as completely as possible.
+
+        Want to report a bug instead? [Use our bug report form](https://github.com/withastro/starlight/issues/new?assignees=&labels=&projects=&template=---01-bug-report.yml)
+        Want to chat before posting? [Join us in the `#starlight` channel on Discord](https://astro.build/chat)
+  - type: input
+    id: starlight-version
+    attributes:
+      label: What version of `starlight` are you using?
+      placeholder: 0.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What is your idea?
+      description: A brief, one or two sentence description of your idea for a new feature.
+    validations:
+      required: true
+  - type: textarea
+    id: background
+    attributes:
+      label: Why is this feature necessary?
+      description: Explain why this feature is important. What problems would it solve? Which users would it help?
+    validations:
+      required: true
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: Do you have examples of this feature in other projects?
+      description: Help us understand your idea by sharing links to example implementations we can compare against.
+      placeholder: |
+        - Example
+        - Example
+        - Example
+  - type: checkboxes
+    id: will-pr
+    attributes:
+      label: Participation
+      description: Let us know if your interested in contributing this feature yourself.
+      options:
+        - label: I am willing to submit a pull request for this feature.
+          required: false

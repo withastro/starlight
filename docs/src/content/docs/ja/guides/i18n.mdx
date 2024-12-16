@@ -3,43 +3,45 @@ title: 国際化（i18n）
 description: 複数言語をサポートするためにStarlightサイトを設定する方法について学びます。
 ---
 
-import FileTree from '../../../../components/file-tree.astro';
+import { FileTree, Steps } from '@astrojs/starlight/components';
 
 Starlightは、ルーティング、フォールバックコンテンツ、右横書き（right-to-left、RTL）言語へのフルサポートなど、複数言語サイトを構築するための機能を組み込みで提供します。
 
 ## i18nの設定
 
-1. `locales`と`defaultLocale`をStarlightインテグレーションに渡すことで、サポートする言語についてStarlightに伝えます。
+<Steps>
 
-   ```js
+1. [`locales`](/ja/reference/configuration/#locales)と[`defaultLocale`](/ja/reference/configuration/#defaultlocale)をStarlightインテグレーションに渡すことで、サポートする言語についてStarlightに伝えます。
+
+   ```js {9-26}
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My Docs',
-         // このサイトのデフォルト言語として英語を設定します。
-         defaultLocale: 'en',
-         locales: {
-           // 英語のドキュメントは`src/content/docs/en/`に置きます。
-           en: {
-             label: 'English',
-           },
-           // 簡体字中国語のドキュメントは`src/content/docs/zh/`に置きます。
-           zh: {
-             label: '简体中文',
-             lang: 'zh-CN',
-           },
-           // アラビア語のドキュメントは`src/content/docs/ar/`に置きます。
-           ar: {
-             label: 'العربية',
-             dir: 'rtl',
-           },
-         },
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My Docs',
+   			// このサイトのデフォルト言語として英語を設定します。
+   			defaultLocale: 'en',
+   			locales: {
+   				// 英語のドキュメントは`src/content/docs/en/`に置きます。
+   				en: {
+   					label: 'English',
+   				},
+   				// 簡体字中国語のドキュメントは`src/content/docs/zh-cn/`に置きます。
+   				'zh-cn': {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// アラビア語のドキュメントは`src/content/docs/ar/`に置きます。
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
    });
    ```
 
@@ -54,7 +56,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
        - docs/
          - ar/
          - en/
-         - zh/
+         - zh-cn/
 
    </FileTree>
 
@@ -62,34 +64,36 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
    たとえば、`ar/index.md`と`en/index.md`は、アラビア語版と英語版のホームページをそれぞれ表わします。
 
+</Steps>
+
 ### ルートロケールを使用する
 
 「ルート」ロケールを使用すると、パスにi18nプレフィックスを付けずにある言語を提供できます。たとえば英語をルートロケールとすると、英語のページパスは`/en/about`ではなく`/about`のようになります。
 
 ルートロケールを設定するには、`locales`の`root`キーを使用します。ルートロケールがコンテンツのデフォルトロケールでもある場合は、`defaultLocale`を削除するか、`'root'`に設定します。
 
-```js
+```js {9,11-14}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'My Docs',
-      defaultLocale: 'root', // 任意
-      locales: {
-        root: {
-          label: 'English',
-          lang: 'en', // langはルートロケールに必要です
-        },
-        zh: {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			defaultLocale: 'root', // 任意
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en', // langはルートロケールに必要です
+				},
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -101,7 +105,7 @@ export default defineConfig({
   - content/
     - docs/
       - **index.md**
-      - zh/
+      - zh-cn/
         - **index.md**
 
 </FileTree>
@@ -110,22 +114,23 @@ export default defineConfig({
 
 デフォルトでは、Starlightは単一言語（英語）のサイトです。他の言語で単一言語のサイトを作成するには、その言語を`locales`において`root`に設定します。
 
-```js
+```diff lang="js" {10-13}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: '私のドキュメント',
-      locales: {
-        root: {
-          label: '简体中文',
-          lang: 'zh-CN',
-        },
-      },
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: '私のドキュメント',
+			locales: {
+				root: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
 });
 ```
 
@@ -139,22 +144,28 @@ Starlightは、すべての言語で同等のページが作成されること�
 
 ## StarlightのUIを翻訳する
 
+import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
+
 Starlightでは、読者が選択した言語でサイト全体を体験できるように、翻訳されたコンテンツファイルをホストするだけでなく、デフォルトUIの文字列（たとえば目次に表示されている「目次」という見出し）も翻訳できるようになっています。
 
-英語、フランス語、ドイツ語、日本語、ポルトガル語、スペイン語の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
+{/* prettier-ignore */}
+<LanguagesList startsSentence />の翻訳済みUI文字列がすでに用意されていますが、[デフォルト言語をさらに追加するための貢献](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md)も歓迎します。
 
 `18n`データコレクションを使用すると、サポートしたい言語の翻訳を追加したり、デフォルトのラベルを上書きしたりできます。
 
+<Steps>
+
 1. 設定がまだであれば、`src/content/config.ts`で`i18n`データコレクションを設定します。
 
-   ```js
+   ```diff lang="js" ins=/, (i18nSchema)/
    // src/content/config.ts
    import { defineCollection } from 'astro:content';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-     docs: defineCollection({ schema: docsSchema() }),
-     i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ schema: docsSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```
 
@@ -174,27 +185,15 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
    以下は、Starlightが英語版のデフォルトとして使用している文字列です。
 
+   <UIStringsList />
+
+   Starlightのコードブロックは、[Expressive Code](https://github.com/expressive-code/expressive-code)ライブラリによって動作しています。`expressiveCode`キーを使用して、同じJSONファイルでUI文字列の翻訳について設定できます。
+
    ```json
    {
-     "skipLink.label": "Skip to content",
-     "search.label": "Search",
-     "search.shortcutLabel": "(Press / to Search)",
-     "search.cancelLabel": "Cancel",
-     "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
-     "themeSelect.accessibleLabel": "Select theme",
-     "themeSelect.dark": "Dark",
-     "themeSelect.light": "Light",
-     "themeSelect.auto": "Auto",
-     "languageSelect.accessibleLabel": "Select language",
-     "menuButton.accessibleLabel": "Menu",
-     "sidebarNav.accessibleLabel": "Main",
-     "tableOfContents.onThisPage": "On this page",
-     "tableOfContents.overview": "Overview",
-     "i18n.untranslatedContent": "This content is not available in your language yet.",
-     "page.editLink": "Edit page",
-     "page.lastUpdated": "Last updated:",
-     "page.previousLink": "Next",
-     "page.nextLink": "Previous"
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
    }
    ```
 
@@ -202,15 +201,41 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
    ```json
    {
-     "pagefind.clear_search": "Clear",
-     "pagefind.load_more": "Load more results",
-     "pagefind.search_label": "Search this site",
-     "pagefind.filters_label": "Filters",
-     "pagefind.zero_results": "No results for [SEARCH_TERM]",
-     "pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
-     "pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
-     "pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
-     "pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
-     "pagefind.searching": "Searching for [SEARCH_TERM]..."
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
    }
    ```
+
+</Steps>
+
+### 翻訳スキーマを拡張する
+
+`i18nSchema()`オプションの`extend`を設定することで、サイトの翻訳辞書にカスタムキーを追加できます。以下の例では、オプションの`custom.label`キーが新たにデフォルトのキーに追加されています。
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。

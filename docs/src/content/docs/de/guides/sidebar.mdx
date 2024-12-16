@@ -1,0 +1,669 @@
+---
+title: Seitenleisten-Navigation
+description: Erfahre, wie du die Navigationslinks in der Seitenleiste deiner Starlight-Website einrichten und anpassen kannst.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+import SidebarPreview from '~/components/sidebar-preview.astro';
+
+Eine gut organisierte Seitenleiste ist der Schlüssel zu einer guten Dokumentation, da sie eine der Hauptwege ist, auf denen die Benutzer durch deine Website navigieren werden. Starlight bietet eine ganze Reihe von Optionen, um das Layout und den Inhalt der Seitenleiste anzupassen.
+
+## Standard-Seitenleiste
+
+Standardmäßig erzeugt Starlight automatisch eine Seitenleiste, die auf der Dateistruktur deiner Dokumentation basiert und die Eigenschaft `title` jeder Datei als Seitenleisteneintrag verwendet.
+
+Zum Beispiel, wenn du die folgende Dateistruktur hast:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+      - stars/
+        - betelgeuse.md
+
+</FileTree>
+
+Wird die folgende Seitenleiste automatisch generiert:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'constellations',
+			items: [
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orion', link: '' },
+			],
+		},
+		{
+			label: 'stars',
+			items: [{ label: 'Beteigeuze', link: '' }],
+		},
+	]}
+/>
+
+Erfahre mehr über autogenerierte Seitenleisten im Abschnitt [autogenerierte Gruppen](#automatisch-erzeugte-gruppen).
+
+## Links und Linkgruppen hinzufügen
+
+Um deiner Seitenleiste Links und Gruppen von Links (innerhalb einer einklappbaren Kopfzeile) zu konfigurieren, verwende die Eigenschaft [`starlight.sidebar`](/de/reference/configuration/#sidebar) in `astro.config.mjs`.
+
+Durch die Kombination von Links und Gruppen kannst du eine Vielzahl von Seitenleistenlayouts erstellen.
+
+### Interne Links
+
+Füge einen Link zu einer Seite in `src/content/docs/` mit Hilfe eines Objekts mit der Eigenschaft `slug` hinzu.
+Der Titel der verlinkten Seite wird standardmäßig als Bezeichnung verwendet.
+
+Zum Beispiel mit der folgenden Konfiguration:
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+Und die folgende Dateistruktur:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+Die folgende Seitenleiste wird erstellt:
+
+<SidebarPreview
+	config={[
+		{ label: 'Andromeda', link: '' },
+		{ label: 'Orion', link: '' },
+	]}
+/>
+
+Um die Werte zu überschreiben, die aus dem Frontmatter einer verlinkten Seite abgeleitet werden, kannst du die Eigenschaften `label`, [`translations`](#internationalisierung) und [`attrs`](#benutzerdefinierte-html-attribute) hinzufügen.
+
+Unter [„Anpassen von automatisch generierten Links“](#autogenerierte-links-im-frontmatter-anpassen) findest du weitere Informationen über die Steuerung des Erscheinungsbildes der Seitenleiste über das Frontmatter der Seite.
+
+#### Kürzel für interne Links
+
+Interne Links können auch angegeben werden, indem nur ein String für den Slug der Seite als Kurzform angegeben wird.
+
+Die folgende Konfiguration entspricht zum Beispiel der obigen Konfiguration, die `slug` verwendet:
+
+```js
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### Andere Links
+
+Füge einen Link zu einer externen oder Nicht-Dokumentations-Seite hinzu, indem du ein Objekt mit den Eigenschaften `label` und `link` verwendest.
+
+```js "label:" "link:"
+starlight({
+	sidebar: [
+		// Ein Link zu einer Nicht-Dokumentations-Seite auf dieser Website.
+		{ label: 'Meteor-Laden', link: '/laden/' },
+		// Ein externer Link zur NASA-Website.
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{ label: 'Meteor-Laden', link: '' },
+		{ label: 'NASA', link: 'https://www.nasa.gov/' },
+	]}
+/>
+
+### Gruppen
+
+Du kannst deine Seitenleiste strukturieren, indem du zusammengehörige Links unter einer zusammenklappbaren Überschrift gruppierst.
+Gruppen können sowohl Links als auch andere Untergruppen enthalten.
+
+Füge eine Gruppe mit einem Objekt mit den Eigenschaften `label` und `items` hinzu.
+Das `label` wird als Überschrift für die Gruppe verwendet.
+Füge Links oder Untergruppen zu dem `items` Array hinzu.
+
+```js /^\s*(label:|items:)/
+starlight({
+	sidebar: [
+		// Eine Gruppe von Links mit der Bezeichnung "Konstellationen".
+		{
+			label: 'Konstellationen',
+			items: [
+				'constellations/carina',
+				'constellations/centaurus',
+				// Eine verschachtelte Gruppe von Links für saisonale Konstellationen.
+				{
+					label: 'Saisonale',
+					items: [
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',
+					],
+				},
+			],
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Konstellationen',
+			items: [
+				{ label: 'Kiel des Schiffes', link: '' },
+				{ label: 'Zentaur', link: '' },
+				{
+					label: 'Saisonale',
+					items: [
+						{ label: 'Andromeda', link: '' },
+						{ label: 'Orion', link: '' },
+						{ label: 'Kleiner Bär', link: '' },
+					],
+				},
+			],
+		},
+	]}
+/>
+
+### Automatisch erzeugte Gruppen
+
+Starlight kann automatisch eine Gruppe in deiner Seitenleiste erzeugen, die auf einem Verzeichnis deiner Dokumente basiert.
+Dies ist hilfreich, wenn du nicht jedes Element der Seitenleiste manuell in eine Gruppe eintragen willst.
+
+Standardmäßig werden die Seiten in alphabetischer Reihenfolge nach der Datei [`slug`](/de/reference/overrides/#slug) sortiert.
+
+Füge eine automatisch generierte Gruppe hinzu, indem du ein Objekt mit den Eigenschaften `label` und `autogenerate` verwendest. In der Konfiguration von `autogenerate` muss das `directory` angegeben werden, das für die Einträge in der Seitenleiste verwendet werden soll. Zum Beispiel, mit der folgenden Konfiguration:
+
+```js "label:" "autogenerate:"
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			// Automatisches Erzeugen einer Gruppe von Links für das Verzeichnis 'constellations'.
+			autogenerate: { directory: 'constellations' },
+		},
+	],
+});
+```
+
+Und die folgende Dateistruktur:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+Wird die folgende Seitenleiste erzeugt:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Konstellationen',
+			items: [
+				{ label: 'Kiel des Schiffes', link: '' },
+				{ label: 'Zentaur', link: '' },
+				{
+					label: 'seasonal',
+					items: [{ label: 'Andromeda', link: '' }],
+				},
+			],
+		},
+	]}
+/>
+
+#### Autogenerierte Links im Frontmatter anpassen
+
+Verwende das [`sidebar`-Frontmatter-Feld](/de/reference/frontmatter/#sidebar) in einzelnen Seiten, um automatisch generierte Links anzupassen.
+
+Mit den Frontmatter-Optionen in der Seitenleiste kannst du einem Link eine [eigenen Bezeichnung](/de/reference/frontmatter/#label) oder ein [Abzeichen](/de/reference/frontmatter/#badge) hinzufügen, einen Link aus der Seitenleiste [verstecken](/de/reference/frontmatter/#hidden), oder eine [eigene Reihenfolge](/de/reference/frontmatter/#order) definieren.
+
+```md "sidebar:"
+---
+# src/content/docs/example.md
+title: Meine Seite
+sidebar:
+  # Setzt eine eigene Beschriftung für den Link
+  label: Benutzerdefinierte Seitenleistenbeschriftung
+  # Legen du eine benutzerdefinierte Reihenfolge für den Link fest (niedrigere Zahlen werden weiter oben angezeigt)
+  order: 2
+  # Fügen du dem Link ein Abzeichen hinzu
+  badge:
+    text: Neu
+    variant: tip
+---
+```
+
+Eine autogenerierte Gruppe, die eine Seite mit dem obigen Frontmatter enthält, erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Anleitungen',
+			items: [
+				{ label: 'Eine Seite', link: '' },
+				{
+					label: 'Benutzerdefinierte Seitenleistenbeschriftung',
+					link: '',
+					badge: { text: 'Neu', variant: 'tip' },
+				},
+				{ label: 'Andere Seite', link: '' },
+			],
+		},
+	]}
+/>
+
+:::note[Anmerkung]
+Die `sidebar` Frontmatter-Konfiguration wird nur für Links in automatisch generierten Gruppen und für Dokumentations-Links verwendet, die mit der Eigenschaft `slug` definiert wurden. Sie gilt nicht für Links, die mit der Eigenschaft `link` definiert wurden.
+:::
+
+## Abzeichen
+
+Links, Gruppen und automatisch generierte Gruppen können auch eine `badge`-Eigenschaft enthalten, um ein Abzeichen neben dem jeweiligen Text anzuzeigen.
+
+```js {9,16}
+starlight({
+	sidebar: [
+		{
+			label: 'Sterne',
+			items: [
+				//Ein Link mit einem "Überriese"-Abzeichen.
+				{
+					slug: 'stars/persei',
+					badge: 'Überriese',
+				},
+			],
+		},
+		// Eine automatisch generierte Gruppe mit dem "Veraltet"-Abzeichen.
+		{
+			label: 'Monde',
+			badge: 'Veraltet',
+			autogenerate: { directory: 'moons' },
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Sterne',
+			items: [
+				{
+					label: 'Persei',
+					link: '',
+					badge: { text: 'Überriese', variant: 'default' },
+				},
+			],
+		},
+		{
+			label: 'Monde',
+			badge: { text: 'Veraltet', variant: 'default' },
+			items: [
+				{
+					label: 'Io',
+					link: '',
+				},
+				{
+					label: 'Europa',
+					link: '',
+				},
+				{
+					label: 'Ganymed',
+					link: '',
+				},
+			],
+		},
+	]}
+/>
+
+### Abzeichenvarianten
+
+Passe das Design des Abzeichens mit einem Objekt mit den Eigenschaften `text`, `variant` und `class` an.
+
+Der `text` steht für den anzuzeigenden Inhalt (z.B. "Neu").
+Überschreibe das `default`-Styling, das die Akzentfarbe deiner Website verwendet, indem du die Eigenschaft `variant` auf einen der folgenden Werte setzt: `note`, `tip`, `danger`, `caution` oder `success`.
+
+Optional kannst du einen benutzerdefinierten Abzeichenstil erstellen, indem du die Eigenschaft `class` auf einen CSS-Klassennamen setzt.
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: 'Sterne',
+			items: [
+				// Ein Link mit einem gelben „Platzhalter“-Abzeichen.
+				{
+					slug: 'stars/sirius',
+					badge: { text: 'Platzhalter', variant: 'caution' },
+				},
+			],
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Sterne',
+			items: [
+				{
+					label: 'Sirius',
+					link: '',
+					badge: { text: 'Platzhalter', variant: 'caution' },
+				},
+			],
+		},
+	]}
+/>
+
+## Benutzerdefinierte HTML-Attribute
+
+Links können auch eine Eigenschaft `attrs` enthalten, um dem Link-Element benutzerdefinierte HTML-Attribute hinzuzufügen.
+
+Im folgenden Beispiel wird `attrs` verwendet, um ein `target="_blank"`-Attribut hinzuzufügen, so dass der Link in einem neuen Tab geöffnet wird, und um ein benutzerdefiniertes `style`-Attribut anzuwenden, um die Linkbeschriftung kursiv zu machen:
+
+```js {10}
+starlight({
+	sidebar: [
+		{
+			label: 'Ressourcen',
+			items: [
+				// Ein externer Link zur NASA-Website, der in einem neuen Tab geöffnet wird.
+				{
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
+					attrs: { target: '_blank', style: 'font-style: italic' },
+				},
+			],
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Ressourcen',
+			items: [
+				{
+					label: 'NASA',
+					link: 'https://www.nasa.gov/',
+					attrs: {
+						target: '_blank',
+						style: 'font-style: italic',
+					},
+				},
+			],
+		},
+	]}
+/>
+
+## Internationalisierung
+
+Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um die Link- oder Gruppenbeschriftung für jede unterstützte Sprache zu übersetzen, indem du ein [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Sprach-Tag, z.B. `"en"`, `"ar"`, oder `"zh-CN"`, als Schlüssel und die übersetzte Beschriftung als Wert angibst.
+Die Eigenschaft `label` wird für das Standardgebietsschema und für Sprachen ohne Übersetzung verwendet.
+
+```js {5-7,11-13,18-20}
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					label: 'Andromeda',
+					translations: {
+						'pt-BR': 'Andrômeda',
+					},
+					slug: 'constellations/andromeda',
+				},
+				{
+					label: 'Skorpion',
+					translations: {
+						'pt-BR': 'Escorpião',
+					},
+					slug: 'constellations/scorpius',
+				},
+			],
+		},
+	],
+});
+```
+
+Wenn du die Dokumentation in brasilianischem Portugiesisch durchsuchst, wird die folgende Seitenleiste angezeigt:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelação',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+### Internationalisierung mit internen Links
+
+[Interne Links](#interne-links) verwenden standardmäßig automatisch übersetzte Seitentitel aus dem Frontmatter des Inhalts:
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+Wenn du die Dokumentation auf brasilianisches Portugiesisch durchsuchst, wird die folgende Seitenleiste angezeigt:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+Bei mehrsprachigen Seiten enthält der Wert von `slug` nicht den sprachlichen Teil der URL.
+Wenn du zum Beispiel Seiten unter `en/intro` und `pt-br/intro` hast, ist der Slug `intro`, wenn du die Seitenleiste konfigurierst.
+
+### Internationalisierung mit Badges
+
+Für [Abzeichen](#abzeichen) kann die Eigenschaft `text` ein String sein oder für mehrsprachige Seiten ein Objekt mit Werten für jedes unterschiedliche Gebietsschema.
+Wenn du die Objektform verwendest, müssen die Schlüssel [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Tags sein (z.B. `en`, `ar` oder `zh-CN`):
+
+```js {11-16}
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{
+					slug: 'constellations/andromeda',
+					badge: {
+						text: {
+							de: 'Neu',
+							'pt-BR': 'Novo',
+						},
+					},
+				},
+			],
+		},
+	],
+});
+```
+
+Wenn du die Dokumentation auf brasilianisches Portugiesisch durchsuchst, wird die folgende Seitenleiste angezeigt:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{
+					label: 'Andrômeda',
+					link: '',
+					badge: { text: 'Novo', variant: 'default' },
+				},
+			],
+		},
+	]}
+/>
+
+## Zusammenklappen von Gruppen
+
+Gruppen von Links können standardmäßig eingeklappt werden, indem man die Eigenschaft `collapsed` auf `true` setzt.
+
+```js {5-6}
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			// Schließe die Gruppe standardmäßig.
+			collapsed: true,
+			items: ['constellations/andromeda', 'constellations/orion'],
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Konstellationen',
+			collapsed: true,
+			items: [
+				{ label: 'Andromeda', link: '' },
+				{ label: 'Orion', link: '' },
+			],
+		},
+	]}
+/>
+
+[Autogenerierte Gruppen](#automatisch-erzeugte-gruppen) respektieren den `collapsed` Wert ihrer Elterngruppe:
+
+```js {5-6}
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			// Die Gruppe und ihre automatisch erzeugten Untergruppen standardmäßig einklappen.
+			collapsed: true,
+			autogenerate: { directory: 'constellations' },
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Konstellationen',
+			collapsed: true,
+			items: [
+				{ label: 'Kiel des Schiffes', link: '' },
+				{ label: 'Zentaur', link: '' },
+				{
+					label: 'seasonal',
+					collapsed: true,
+					items: [{ label: 'Andromeda', link: '' }],
+				},
+			],
+		},
+	]}
+/>
+
+Dieses Verhalten kann durch die Definition der Eigenschaft `autogenerate.collapsed` außer Kraft gesetzt werden.
+
+```js {5-7} "collapsed: true"
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			// Die Gruppe "Konstellationen" nicht einklappen, aber ihre
+			// automatisch erzeugten Untergruppen.
+			collapsed: false,
+			autogenerate: { directory: 'constellations', collapsed: true },
+		},
+	],
+});
+```
+
+Die obige Konfiguration erzeugt die folgende Seitenleiste:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Konstellationen',
+			items: [
+				{ label: 'Kiel des Schiffes', link: '' },
+				{ label: 'Zentaur', link: '' },
+				{
+					label: 'seasonal',
+					collapsed: true,
+					items: [{ label: 'Andromeda', link: '' }],
+				},
+			],
+		},
+	]}
+/>

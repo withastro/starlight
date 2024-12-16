@@ -1,0 +1,221 @@
+---
+title: 选项卡
+description: 了解如何在 Starlight 中创建选项卡式的界面以对等效信息进行分组。
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+要创建选项卡式界面，请使用 `<Tabs>` 和 `<TabItem>` 组件。
+选项卡对于给等效信息进行分组非常有用，用户只需查看多个选项之一即可。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Tabs slot="preview">
+	<TabItem label="恒星">天狼星，织女星，参宿四</TabItem>
+	<TabItem label="卫星">木卫一，木卫二，木卫三</TabItem>
+</Tabs>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<Tabs>` 和 `<TabItem>` 组件以显示选项卡式的界面。
+每个 `<TabItem>` 必须有一个 [`label`](#label) 来展示给用户。
+
+<Preview>
+
+```mdx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="恒星">天狼星，织女星，参宿四</TabItem>
+	<TabItem label="卫星">木卫一，木卫二，木卫三</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% tabs %}
+{% tabitem label="恒星" %}
+天狼星，织女星，参宿四
+{% /tabitem %}
+
+{% tabitem label="卫星" %}
+木卫一，木卫二，木卫三
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="恒星">天狼星，织女星，参宿四</TabItem>
+	<TabItem label="卫星">木卫一，木卫二，木卫三</TabItem>
+</Tabs>
+
+</Preview>
+
+### 同步选项卡
+
+通过添加 [`syncKey`](#synckey) 属性来保持多个选项卡组之间的同步。
+
+页面上具有相同 `syncKey` 值的所有 `<Tabs>` 将显示相同的活动标签。
+这允许你的读者只需选择一次（例如选择他们的操作系统或包管理器），就可以看到他们的选择在页面导航中保持一致。
+
+要同步相关选项卡，请向每个 `<Tabs>` 组件添加相同的 `syncKey` 属性，并确保它们都使用相同的 `<TabItem>` labels 属性：
+
+<Preview>
+
+```mdx 'syncKey="星座"'
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+_一些恒星：_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">参宿五，参宿七，参宿四</TabItem>
+	<TabItem label="双子座">北河三，北河二 A，北河二 B</TabItem>
+</Tabs>
+
+_一些系外行星：_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">HD 34445 b，格利泽 179b，Wasp-82 b</TabItem>
+	<TabItem label="双子座">北河三 b，HAT-P-24b，HD 50554 b</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'syncKey="星座"'
+_一些恒星：_
+
+{% tabs syncKey="星座" %}
+{% tabitem label="猎户座" %}
+参宿五，参宿七，参宿四
+{% /tabitem %}
+
+{% tabitem label="双子座" %}
+北河三，北河二 A，北河二 B
+{% /tabitem %}
+{% /tabs %}
+
+_一些系外行星：_
+
+{% tabs syncKey="星座" %}
+{% tabitem label="猎户座" %}
+HD 34445 b，格利泽 179b，Wasp-82 b
+{% /tabitem %}
+
+{% tabitem label="双子座" %}
+北河三 b，HAT-P-24b，HD 50554 b
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+
+_一些恒星：_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">参宿五，参宿七，参宿四</TabItem>
+	<TabItem label="双子座">北河三，北河二 A，北河二 B</TabItem>
+</Tabs>
+
+_一些系外行星：_
+
+<Tabs syncKey="星座">
+	<TabItem label="猎户座">HD 34445 b，格利泽 179b，Wasp-82 b</TabItem>
+	<TabItem label="双子座">北河三 b，HAT-P-24b，HD 50554 b</TabItem>
+</Tabs>
+
+</Fragment>
+
+</Preview>
+
+### 为选项卡添加图标
+
+在选项卡组件中，添加 [`icon`](#icon) 属性并将其设置为 [Starlight 内置图标之一](/zh-cn/reference/icons/#所有图标) 来为选项卡添加图标。
+
+<Preview>
+
+```mdx /icon="\w+"/
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+	<TabItem label="恒星" icon="star">
+		天狼星，织女星，参宿四
+	</TabItem>
+	<TabItem label="卫星" icon="moon">
+		木卫一，木卫二，木卫三
+	</TabItem>
+</Tabs>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc /icon="\w+"/
+{% tabs %}
+{% tabitem label="恒星" icon="star" %}
+天狼星，织女星，参宿四
+{% /tabitem %}
+
+{% tabitem label="卫星" icon="moon" %}
+木卫一，木卫二，木卫三
+{% /tabitem %}
+{% /tabs %}
+```
+
+</Fragment>
+
+<Tabs slot="preview">
+	<TabItem label="恒星" icon="star">
+		天狼星，织女星，参宿四
+	</TabItem>
+	<TabItem label="卫星" icon="moon">
+		木卫一，木卫二，木卫三
+	</TabItem>
+</Tabs>
+
+</Preview>
+
+## `<Tabs>` 的属性
+
+**实现：** [`Tabs.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro)
+
+`<Tabs>` 组件将多个 `<TabItem>` 组件组合在一起并接受以下属性：
+
+### `syncKey`
+
+**类型：** `string`
+
+一个用于使多个选项卡组在多个页面之间保持同步的键。
+
+## `<TabItem>` 的属性
+
+**实现：** [`TabItem.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/TabItem.astro)
+
+一组选项卡（tabs）由选项卡项（tab items）组成，每个选项卡项都具有以下属性：
+
+### `label`
+
+**必要属性**  
+**类型：** `string`
+
+选项卡项必须包含一个 `label` 属性，该属性决定了将在选项卡项中显示的文本。
+
+### `icon`
+
+**类型：** `string`
+
+每个选项卡项都可以包含一个 `icon` 属性，该属性设置为 [Starlight 的内置图标之一](/zh-cn/reference/icons/#所有图标) 的名称，以在标签旁边显示图标。

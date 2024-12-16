@@ -1,0 +1,403 @@
+---
+title: Internasionalisasi (i18n)
+description: Pelajari cara mengonfigurasi website Starlight Anda untuk mendukung beberapa bahasa.
+---
+
+import { FileTree, Steps } from '@astrojs/starlight/components';
+
+Starlight menyediakan dukungan bawaan untuk website multibahasa, termasuk pengaturan rute, konten cadangan, dan dukungan bahasa dari kanan ke kiri (RTL) sepenuhnya.
+
+## Konfigurasikan i18n
+
+<Steps>
+
+1. Beri tahu Starlight tentang bahasa yang Anda dukung dengan cara menambahkan [`locales`](/id/reference/configuration/#locales) dan [`defaultLocale`](/id/reference/configuration/#defaultlocale) ke integrasi Starlight:
+
+   ```js {9-26}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'My Docs',
+   			// Tetapkan Bahasa Inggris sebagai bahasa default untuk website ini.
+   			defaultLocale: 'en',
+   			locales: {
+   				// Dokumentasi berbahasa Inggris di `src/content/docs/en/`
+   				en: {
+   					label: 'English',
+   				},
+   				// Dokumentasi berbahasa Cina (yang disederhanakan) di `src/content/docs/zh-cn/`
+   				'zh-cn': {
+   					label: '简体中文',
+   					lang: 'zh-CN',
+   				},
+   				// Dokumentasi berbahasa Arab di `src/content/docs/ar/`
+   				ar: {
+   					label: 'العربية',
+   					dir: 'rtl',
+   				},
+   			},
+   		}),
+   	],
+   });
+   ```
+
+   `defaultLocale` Anda akan digunakan untuk konten cadangan dan label UI pengguna, jadi pilih bahasa yang kemungkinan besar akan Anda gunakan untuk menulis konten, atau sudah memiliki konten.
+
+2. Buat direktori untuk setiap bahasa di `src/content/docs/`.
+   Sebagai contoh, untuk konfigurasi yang ditunjukkan di atas, buat folder berikut:
+
+   <FileTree>
+
+   - src/
+     - content/
+       - docs/
+         - ar/
+         - en/
+         - zh-cn/
+
+   </FileTree>
+
+3. Sekarang Anda dapat menambahkan file konten dalam direktori bahasa Anda. Gunakan nama file yang sama untuk mengaitkan halaman di seluruh bahasa dan manfaatkan fitur i18n lengkap Starlight, termasuk konten cadangan, pemberitahuan terjemahan, dan lainnya.
+
+   Sebagai contoh, buat `ar/index.md` dan `en/index.md`, masing-masing mewakili beranda untuk bahasa Arab dan Inggris.
+
+</Steps>
+
+Untuk skenario i18n yang lebih canggih, Starlight juga mendukung konfigurasi internasionalisasi menggunakan opsi [konfigurasi `i18n` Astro](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing).
+
+### Gunakan root locale
+
+Anda dapat menggunakan root locale untuk melayani bahasa tanpa awalan i18n dalam path-nya. Sebagai contoh, jika Inggris adalah root locale Anda, path halaman dalam bahasa Inggris akan terlihat sebagai `/about` dan bukan `/en/about`.
+
+Untuk mengatur root locale, gunakan properi `root` dalam konfigurasi locales Anda. Jika root locale juga merupakan bahasa default konten Anda, hapus `defaultLocale` atau tetapkan nilainya dengan nilai `'root'`.
+
+```js {9,11-14}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			defaultLocale: 'root', // opsional
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en', // lang diperlukan untuk root locales
+				},
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
+});
+```
+
+Ketika menggunakan locale `root`, simpan halaman untuk bahasa tersebut langsung di `src/content/docs/` dan tidak di dalam folder khusus untuk bahasa. Sebagai contoh, berikut adalah file halaman beranda untuk bahasa Inggris dan Cina ketika menggunakan konfigurasi di atas:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - **index.md**
+      - zh-cn/
+        - **index.md**
+
+</FileTree>
+
+#### Website monolingual
+
+Secara default, Starlight adalah website monolingual (Inggris). Untuk membuat website bahasa tunggal dalam bahasa lain, tetapkan bahasa tersebut sebagai `root` dalam konfigurasi `locales` Anda:
+
+```diff lang="js" {10-13}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My Docs',
+			locales: {
+				root: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+			},
+		}),
+	],
+});
+```
+
+Ini memungkinkan Anda mengganti bahasa default Starlight tanpa mengaktifkan fitur internasionalisasi lainnya untuk website multibahasa, seperti pemilih bahasa.
+
+## Konten cadangan
+
+Starlight mengharapkan Anda membuat halaman yang sama untuk semua bahasa yang Anda dukung. Sebagai contoh, jika Anda memiliki file `en/about.md`, buatlah `about.md` untuk setiap bahasa lain yang Anda dukung. Ini memungkinkan Starlight menyediakan konten cadangan otomatis untuk halaman yang belum diterjemahkan.
+
+Jika terjemahan belum tersedia untuk suatu bahasa, Starlight akan menampilkan konten untuk halaman tersebut dalam bahasa default (di-set melalui `defaultLocale`). Sebagai contoh, jika Anda belum membuat versi bahasa Prancis dari halaman Tentang Anda dan bahasa default Anda adalah Inggris, pengunjung ke `/fr/about` akan melihat konten berbahasa Inggris dari `/en/about` dengan pemberitahuan bahwa halaman ini belum diterjemahkan. Ini membantu Anda menambahkan konten dalam bahasa default Anda dan kemudian secara bertahap menerjemahkannya saat penerjemah Anda memiliki waktu.
+
+## Terjemahkan judul website
+
+Secara default, Starlight akan menggunakan judul website yang sama untuk semua bahasa.
+Jika Anda perlu menyesuaikan judul untuk setiap bahasa, Anda dapat meneruskan objek ke [`title`](/id/reference/configuration/#title-wajib) di opsi Starlight:
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'My Docs',
++			title: {
++				en: 'My Docs',
++				'zh-CN': '我的文档',
++			},
+			defaultLocale: 'en',
+			locales: {
+				en: { label: 'English' },
+				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+			},
+		}),
+	],
+});
+```
+
+## Terjemahkan UI Starlight
+
+import LanguagesList from '~/components/languages-list.astro';
+import UIStringsList from '~/components/ui-strings-list.astro';
+
+Selain menyimpan file konten yang diterjemahkan, Starlight memungkinkan Anda menerjemahkan string UI default (misalnya, judul "Di halaman ini" dalam daftar isi) sehingga pembaca Anda dapat mengakses website Anda sepenuhnya dalam bahasa yang dipilih.
+
+<LanguagesList startsSentence /> string UI yang diterjemahkan disediakan secara
+langsung, dan kami menyambut [kontribusi untuk menambahkan lebih banyak bahasa
+default](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+
+Anda dapat memberikan terjemahan untuk bahasa tambahan yang Anda dukung — atau mengganti label default kami — melalui koleksi data `i18n`.
+
+<Steps>
+
+1. Konfigurasikan koleksi data `i18n` di `src/content/config.ts` jika belum dikonfigurasi:
+
+   ```diff lang="js" ins=/, (i18nSchema)/
+   // src/content/config.ts
+   import { defineCollection } from 'astro:content';
+   import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+   export const collections = {
+   	docs: defineCollection({ schema: docsSchema() }),
+   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   };
+   ```
+
+2. Buat file JSON di `src/content/i18n/` untuk setiap locale tambahan yang ingin Anda berikan string terjemahan UI-nya.
+   Sebagai contoh, ini akan menambahkan file terjemahan untuk bahasa Arab dan Cina (yang disederhanakan):
+
+   <FileTree>
+
+   - src/
+     - content/
+       - i18n/
+         - ar.json
+         - zh-CN.json
+
+   </FileTree>
+
+3. Tambahkan terjemahan untuk properti yang ingin Anda terjemahkan ke file JSON. Terjemahkan hanya nilai-nilainya, biarkan nama propertinya dalam bahasa Inggris (misalnya, `"search.label": "Buscar"`).
+
+   Berikut adalah nilai default bahasa Inggris dari string-string yang sudah ada yang diberikan secara bawaan oleh Starlight:
+
+   <UIStringsList />
+
+   Blok kode Starlight didukung oleh pustaka [Expressive Code](https://github.com/expressive-code/expressive-code).
+   Anda dapat mengatur terjemahan untuk string UI-nya dalam file JSON yang sama menggunakan nama properti `expressiveCode`:
+
+   ```json
+   {
+   	"expressiveCode.copyButtonCopied": "Copied!",
+   	"expressiveCode.copyButtonTooltip": "Copy to clipboard",
+   	"expressiveCode.terminalWindowFallbackTitle": "Terminal window"
+   }
+   ```
+
+   Modal pencarian Starlight didukung oleh pustaka [Pagefind](https://pagefind.app/).
+   Anda dapat mengatur terjemahan untuk UI Pagefind di file JSON yang sama menggunakan properti-properti `pagefind`:
+
+   ```json
+   {
+   	"pagefind.clear_search": "Clear",
+   	"pagefind.load_more": "Load more results",
+   	"pagefind.search_label": "Search this site",
+   	"pagefind.filters_label": "Filters",
+   	"pagefind.zero_results": "No results for [SEARCH_TERM]",
+   	"pagefind.many_results": "[COUNT] results for [SEARCH_TERM]",
+   	"pagefind.one_result": "[COUNT] result for [SEARCH_TERM]",
+   	"pagefind.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+   	"pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+   	"pagefind.searching": "Searching for [SEARCH_TERM]..."
+   }
+   ```
+
+ </Steps>
+
+### Memperluas skema terjemahan
+
+Tambahkan nama properti khusus ke kamus terjemahan website Anda dengan menyetel `extend` di opsi `i18nSchema()`.
+Dalam contoh berikut, nama properti `custom.label` opsional yang baru ditambahkan ke nama properti default:
+
+```diff lang="js"
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ schema: docsSchema() }),
+	i18n: defineCollection({
+		type: 'data',
+		schema: i18nSchema({
++			extend: z.object({
++				'custom.label': z.string().optional(),
++			}),
+		}),
+	}),
+};
+```
+
+Pelajari selengkapnya tentang skema pengumpulan konten di [“Mendefinisikan skema pengumpulan”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) di dokumen Astro.
+
+## Menggunakan terjemahan UI
+
+Anda dapat mengakses [string UI bawaan](/id/guides/i18n/#terjemahkan-ui-starlight) Starlight serta string UI [yang ditentukan pengguna](/id/guides/i18n/#memperluas-skema-terjemahan), dan [yang disediakan plugin](/id/reference/plugins/#injecttranslations) melalui API terpadu yang didukung oleh [i18next](https://www.i18next.com/).
+Ini termasuk dukungan untuk fitur seperti [interpolasi](https://www.i18next.com/translation-function/interpolation) dan [pluralisasi](https://www.i18next.com/translation-function/plurals).
+
+Dalam komponen Astro, API ini tersedia sebagai bagian dari [objek `Astro` global](https://docs.astro.build/en/reference/api-reference/#astrolocals) sebagai `Astro.locals.t`:
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+Anda juga dapat menggunakan API di [titik akhir](https://docs.astro.build/en/guides/endpoints/), di mana objek `locals` tersedia sebagai bagian dari [konteks titik akhir](https://docs.astro.build/en/reference/api-reference/#contextlocals):
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+### Merender string UI
+
+Render string UI menggunakan fungsi `locals.t()`.
+Ini adalah contoh fungsi `t()` i18next, yang mengambil nama properti string UI sebagai argumen pertamanya dan mengembalikan terjemahan yang sesuai untuk bahasa saat ini.
+
+Misalnya, diberikan berkas terjemahan khusus dengan konten berikut:
+
+```json title="src/content/i18n/en.json"
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+String UI pertama dapat dirender dengan meneruskan `'link.astro'` ke fungsi `t()`:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- Render: <a href="...">Astro documentation</a> -->
+```
+
+String UI kedua menggunakan [sintaks interpolasi](https://www.i18next.com/translation-function/interpolation) i18next untuk placeholder `{{feature}}`.
+Nilai untuk `feature` harus ditetapkan dalam objek opsi yang diteruskan sebagai argumen kedua ke `t()`:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- Render: <a href="...">Astro documentation for Astro DB</a> -->
+```
+
+Lihat [dokumentasi i18next](https://www.i18next.com/overview/api#t) untuk informasi lebih lanjut tentang cara menggunakan fungsi `t()` dengan interpolasi, pemformatan, dan lainnya.
+
+### API Tingkat Lanjut
+
+#### `t.all()`
+
+Fungsi `locals.t.all()` mengembalikan objek berisi semua string UI yang tersedia untuk bahasa saat ini.
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Langsung ke konten",
+//      "search.label": "Mencari",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+Untuk memeriksa apakah nama properti terjemahan tersedia untuk suatu bahasa, gunakan fungsi `locals.t.exists()` dengan nama properti terjemahan sebagai argumen pertama.
+Berikan argumen kedua opsional jika Anda perlu mengganti bahasa saat ini.
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+Lihat referensi [`exists()` dalam dokumentasi i18next](https://www.i18next.com/overview/api#exists) untuk informasi lebih lanjut.
+
+#### `t.dir()`
+
+Fungsi `locals.t.dir()` mengembalikan arah teks bahasa saat ini atau bahasa tertentu.
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+Lihat referensi [`dir()` dalam dokumentasi i18next](https://www.i18next.com/overview/api#dir) untuk informasi lebih lanjut.
+
+## Mengakses bahasa saat ini
+
+Anda dapat menggunakan [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#astrocurrentlocale) untuk membaca bahasa saat ini di komponen `.astro`.
+
+Contoh berikut membaca bahasa saat ini dan menggunakannya untuk membuat tautan ke halaman tentang dalam bahasa saat ini:
+
+```astro
+---
+// src/components/AboutLink.astro
+---
+
+<a href={`/${Astro.currentLocale}/about`}>Tentang</a>
+```

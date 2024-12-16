@@ -2,4 +2,3 @@ packages:
   - 'packages/**/*'
   - 'examples/**/*'
   - 'docs'
-  - 'docs-i18n-tracker'

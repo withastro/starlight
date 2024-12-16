@@ -1,0 +1,602 @@
+---
+title: Riferimento di Configurazione
+description: Una panoramica di tutte le opzioni di configurazione supportate da Starlight.
+---
+
+## Configurare l'integrazione `starlight`
+
+Starlight è un'integrazione costruita sopra il framework web [Astro](https://astro.build). Puoi configurare il tuo progetto all'interno del file di configurazione `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Il mio delizioso sito di documentazione',
+		}),
+	],
+});
+```
+
+Puoi passare le seguenti opzioni all'integrazione `starlight`.
+
+### `title` (obbligatorio)
+
+**tipo:** `string | Record<string, string>`
+
+Imposta il titolo per il tuo sito web. Sarà utilizzato nei metadati e nel titolo della scheda del browser.
+
+Il valore può essere una stringa o, per siti multilingua, un oggetto con valori per ciascuna lingua diversa.
+Quando si utilizza la forma oggetto, le chiavi devono essere tag BCP-47 (ad esempio `en`, `ar`, o `zh-CN`):
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		it: 'Il mio delizioso sito di documentazione',
+	},
+});
+```
+
+### `description`
+
+**tipo:** `string`
+
+Imposta la descrizione per il tuo sito web. Utilizzata nei metadati condivisi con i motori di ricerca nel tag `<meta name="description">` se `description` non è impostata nel frontmatter di una pagina.
+
+### `logo`
+
+**tipo:** [`LogoConfig`](#logoconfig)
+
+Imposta un'immagine del logo da mostrare nella barra di navigazione insieme o al posto del titolo del sito. Puoi impostare una singola proprietà `src` o impostare sorgenti di immagini separate per `light` e `dark`.
+
+```js
+starlight({
+	logo: {
+		src: './src/assets/my-logo.svg',
+	},
+});
+```
+
+#### `LogoConfig`
+
+```ts
+type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
+	| { src: string }
+	| { light: string; dark: string }
+);
+```
+
+### `tableOfContents`
+
+**tipo:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**predefinito:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+
+Configura la tabella dei contenuti mostrata sulla destra di ogni pagina. Per impostazione predefinita, i titoli `<h2>` e `<h3>` saranno inclusi in questa tabella dei contenuti.
+
+### `editLink`
+
+**tipo:** `{ baseUrl: string }`
+
+Abilita i link "Modifica questa pagina" impostando l'URL di base che questi dovrebbero utilizzare. Il link finale sarà `editLink.baseUrl` + il percorso della pagina corrente. Per esempio, per abilitare la modifica delle pagine nel repository `withastro/starlight` su GitHub:
+
+```js
+starlight({
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
+});
+```
+
+Con questa configurazione, una pagina `/introduction` avrebbe un link di modifica che punta a `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`.
+
+### `sidebar`
+
+**tipo:** [`SidebarItem[]`](#sidebaritem)
+
+Configura gli elementi di navigazione della barra laterale del tuo sito.
+
+Una barra laterale è un array di link e gruppi di link.
+Ad eccezione degli elementi che utilizzano `slug`, ogni elemento deve avere una `label` e una delle seguenti proprietà:
+
+- `link` — un singolo link a un URL specifico, ad esempio `'/home'` o `'https://example.com'`.
+
+- `slug` — un riferimento a una pagina interna, ad esempio `'guides/getting-started'`.
+
+- `items` — un array contenente più link della barra laterale e sottogruppi.
+
+- `autogenerate` — un oggetto che specifica una directory della tua documentazione per generare automaticamente un gruppo di link.
+
+I link interni possono anche essere specificati come una stringa invece di un oggetto con una proprietà `slug`.
+
+```js
+starlight({
+	sidebar: [
+		// Un singolo elemento di link etichettato "Home".
+		{ label: 'Home', link: '/' },
+		// Un gruppo etichettato "Inizia Qui" contenente quattro link.
+		{
+			label: 'Inizia Qui',
+			items: [
+				// Usando `slug` per i link interni.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// O usando la forma abbreviata per i link interni.
+				'tutorial',
+				'next-steps',
+			],
+		},
+		// Un gruppo che collega a tutte le pagine nella directory reference.
+		{
+			label: 'Riferimento',
+			autogenerate: { directory: 'reference' },
+		},
+	],
+});
+```
+
+#### Ordinamento
+
+I gruppi della barra laterale generati automaticamente sono ordinati alfabeticamente per nome del file.
+Per esempio, una pagina generata da `astro.md` apparirebbe sopra la pagina per `starlight.md`.
+
+#### Gruppi comprimibili
+
+I gruppi di link sono espansi per impostazione predefinita. Puoi modificare questo comportamento impostando la proprietà `collapsed` di un gruppo su `true`.
+
+I sottogruppi generati automaticamente rispettano la proprietà `collapsed` del loro gruppo genitore per impostazione predefinita. Imposta la proprietà `autogenerate.collapsed` per sovrascrivere questo comportamento.
+
+```js {5,13}
+sidebar: [
+  // Un gruppo di link compresso.
+  {
+    label: 'Link Compressi',
+    collapsed: true,
+    items: ['intro', 'next-steps'],
+  },
+  // Un gruppo espanso contenente sottogruppi generati automaticamente compressi.
+  {
+    label: 'Riferimento',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
+#### Traduzione delle etichette
+
+Se il tuo sito è multilingua, la `label` di ogni elemento è considerata essere nella lingua predefinita. Puoi impostare una proprietà `translations` per fornire etichette per le altre lingue supportate:
+
+```js {5,9,14}
+sidebar: [
+  // Un esempio di barra laterale con traduzioni in italiano.
+  {
+    label: 'Start here',
+    translations: { it: 'Inizia qui' },
+    items: [
+      {
+        label: 'Getting Started',
+        translations: { it: 'Iniziamo' },
+        link: '/getting-started',
+      },
+      {
+        label: 'Project Structure',
+        translations: { it: 'Struttura del progetto' },
+        link: '/structure',
+      },
+    ],
+  },
+],
+```
+
+#### `SidebarItem`
+
+```ts
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Link
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Link interno
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Gruppo di link
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Gruppo di link autogenerato
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+	text: string;
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
+}
+```
+
+### `locales`
+
+**tipo:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
+
+[Configura l'internazionalizzazione (i18n)](/it/guides/i18n/) per il tuo sito impostando quali `locales` sono supportati.
+
+Ogni voce dovrebbe utilizzare la directory in cui sono salvati i file di quella lingua come chiave.
+
+```js
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Il Mio Sito',
+			// Imposta l'inglese come lingua predefinita per questo sito.
+			defaultLocale: 'en',
+			locales: {
+				// Documentazione in inglese in `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Documentazione in cinese semplificato in `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Documentazione in arabo in `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
+});
+```
+
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
+}
+```
+
+Puoi impostare le seguenti opzioni per ogni locale:
+
+##### `label` (obbligatorio)
+
+**tipo:** `string`
+
+L'etichetta per questa lingua da mostrare agli utenti, ad esempio nel selettore di lingua. Nella maggior parte dei casi, vorrai che questo sia il nome della lingua come un utente di quella lingua si aspetterebbe di leggerlo, ad esempio `"English"`, `"العربية"`, o `"简体中文"`.
+
+##### `lang`
+
+**tipo:** `string`
+
+Il tag BCP-47 per questa lingua, ad esempio `"en"`, `"ar"`, o `"zh-CN"`. Se non impostato, verrà utilizzato di default il nome della directory della lingua. I tag di lingua con sottotag regionali (ad esempio `"pt-BR"` o `"en-US"`) utilizzeranno le traduzioni dell'interfaccia utente integrate per la loro lingua di base se non vengono trovate traduzioni specifiche per la regione.
+
+##### `dir`
+
+**tipo:** `'ltr' | 'rtl'`
+
+La direzione di scrittura di questa lingua; `"ltr"` per da sinistra a destra (predefinito) o `"rtl"` per da destra a sinistra.
+
+#### Lingua principale
+
+Puoi definire un linguaggio principale senza una cartella `/lang/` definendo `root`:
+
+```js {3-6}
+starlight({
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		it: {
+			label: 'Italiano',
+		},
+	},
+});
+```
+
+Per esempio, questo ti permette di fornire `/getting-started/` come un percorso in inglese e `/it/getting-started/` come quello equivalente in italiano.
+
+### `defaultLocale`
+
+**tipo:** `string`
+
+Imposta la lingua predefinita per questo sito.
+Il valore dovrebbe corrispondere a una delle chiavi del tuo oggetto [`locales`](#locales).
+(Se la tua lingua predefinita è il tuo [locale radice](#lingua-principale), puoi saltare questo.)
+
+Il locale predefinito verrà utilizzato per fornire contenuti di fallback dove mancano le traduzioni.
+
+### `social`
+
+import SocialLinksType from '~/components/social-links-type.astro';
+
+**tipo:** <SocialLinksType />
+
+Dettagli opzionali sugli account dei social media per questo sito. L'aggiunta di uno qualsiasi di questi li visualizzerà come collegamenti con icone nell'intestazione del sito.
+
+```js
+starlight({
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
+});
+```
+
+### `customCss`
+
+**tipo:** `string[]`
+
+Fornisci file CSS per personalizzare l'aspetto e il comportamento del tuo sito Starlight.
+
+Supporta file CSS locali relativi alla radice del tuo progetto, ad esempio `'./src/custom.css'`, e CSS che hai installato come modulo npm, ad esempio `'@fontsource/roboto'`.
+
+```js
+starlight({
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+});
+```
+
+### `expressiveCode`
+
+**tipo:** `StarlightExpressiveCodeOptions | boolean`  
+**predefinito:** `true`
+
+Starlight utilizza [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) per renderizzare i blocchi di codice e aggiungere supporto per evidenziare parti di esempi di codice, aggiungere nomi di file ai blocchi di codice e altro ancora.
+Consulta la [guida "Blocchi di codice"](/it/guides/authoring-content/#blocco-di-codice) per imparare come utilizzare la sintassi di Expressive Code nel tuo contenuto Markdown e MDX.
+
+Puoi utilizzare qualsiasi delle [opzioni di configurazione standard di Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) così come alcune proprietà specifiche di Starlight, impostandole nell'opzione `expressiveCode` di Starlight.
+Ad esempio, imposta l'opzione `styleOverrides` di Expressive Code per sovrascrivere il CSS predefinito. Questo permette personalizzazioni come dare ai tuoi blocchi di codice angoli arrotondati:
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+Se vuoi disabilitare Expressive Code, imposta `expressiveCode: false` nella tua configurazione Starlight:
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+Oltre alle opzioni standard di Expressive Code, puoi anche impostare le seguenti proprietà specifiche di Starlight nella tua configurazione `expressiveCode` per personalizzare ulteriormente il comportamento del tema per i tuoi blocchi di codice:
+
+#### `themes`
+
+**tipo:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**predefinito:** `['starlight-dark', 'starlight-light']`
+
+Imposta i temi utilizzati per stilizzare i blocchi di codice.
+Consulta la [documentazione di Expressive Code sui `themes`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) per i dettagli sui formati di tema supportati.
+
+Starlight utilizza di default le varianti scura e chiara del tema [Night Owl](https://github.com/sdras/night-owl-vscode-theme) di Sarah Drasner.
+
+Se fornisci almeno un tema scuro e uno chiaro, Starlight manterrà automaticamente sincronizzato il tema attivo del blocco di codice con il tema corrente del sito.
+Configura questo comportamento con l'opzione [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
+
+#### `useStarlightDarkModeSwitch`
+
+**tipo:** `boolean`  
+**predefinito:** `true`
+
+Quando `true`, i blocchi di codice passano automaticamente tra i temi chiari e scuri quando cambia il tema del sito.
+Quando `false`, devi aggiungere manualmente CSS per gestire il passaggio tra più temi.
+
+:::note
+Quando imposti `themes`, devi fornire almeno un tema scuro e uno chiaro affinché il cambio di modalità scura di Starlight funzioni.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**tipo:** `boolean`  
+**predefinito:** `true` se `themes` non è impostato, altrimenti `false`
+
+Quando `true`, le variabili CSS di Starlight vengono utilizzate per i colori degli elementi dell'interfaccia utente dei blocchi di codice (sfondi, pulsanti, ombre, ecc.), corrispondenti al [tema di colore del sito](/it/guides/css-and-tailwind/#temi).
+Quando `false`, vengono utilizzati i colori forniti dal tema di evidenziazione della sintassi attivo per questi elementi.
+
+:::note
+Quando si utilizzano temi personalizzati e si imposta questo su `true`, è necessario fornire almeno un tema scuro e uno chiaro per garantire un contrasto di colore adeguato.
+:::
+
+### `pagefind`
+
+**tipo:** `boolean`  
+**predefinito:** `true`
+
+Definisce se il provider di ricerca predefinito del sito di Starlight [Pagefind](https://pagefind.app/) è abilitato.
+
+Imposta su `false` per disabilitare l'indicizzazione del tuo sito con Pagefind.
+Questo nasconderà anche l'interfaccia utente di ricerca predefinita se in uso.
+
+### `head`
+
+**tipo:** [`HeadConfig[]`](#headconfig)
+
+Aggiungi tag personalizzati all'`<head>` del tuo sito Starlight.
+Può essere utile per aggiungere analytics e altri script e risorse di terze parti.
+
+```js
+starlight({
+	head: [
+		// Esempio: aggiungi tag script per Fathom analytics.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
+});
+```
+
+Le voci in `head` vengono convertite direttamente in elementi HTML e non passano attraverso l'elaborazione [script](https://docs.astro.build/it/guides/client-side-scripts/#script-processing) o [style](https://docs.astro.build/it/guides/styling/#styling-in-astro) di Astro.
+Se hai bisogno di importare risorse locali come script, stili o immagini, [sovrascrivi il componente Head](/it/guides/overriding-components/#riutilizza-un-componente-integrato).
+
+#### `HeadConfig`
+
+```ts
+interface HeadConfig {
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
+}
+```
+
+### `lastUpdated`
+
+**tipo:** `boolean`  
+**predefinito:** `false`
+
+Controlla se il footer mostra quando la pagina è stata aggiornata l'ultima volta.
+
+Per impostazione predefinita, questa funzionalità si basa sulla cronologia Git del tuo repository e potrebbe non essere accurata su alcune piattaforme di distribuzione che eseguono [cloni superficiali](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Una pagina può sovrascrivere questa impostazione o la data basata su Git utilizzando il [campo frontmatter `lastUpdated`](/it/reference/frontmatter/#lastupdated).
+
+### `pagination`
+
+**tipo:** `boolean`  
+**predefinito:** `true`
+
+Definisce se il footer deve includere i link alla pagina precedente e successiva.
+
+Una pagina può sovrascrivere questa impostazione o il testo del link e/o l'URL utilizzando i campi frontmatter [`prev`](/it/reference/frontmatter/#prev) e [`next`](/it/reference/frontmatter/#next).
+
+### `favicon`
+
+**tipo:** `string`  
+**predefinito:** `'/favicon.svg'`
+
+Imposta il percorso del favicon predefinito per il tuo sito web che dovrebbe essere posizionato nella directory `public/` ed essere un file di icona valido (`.ico`, `.gif`, `.jpg`, `.png`, o `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Se hai bisogno di impostare varianti aggiuntive o favicon di fallback, puoi aggiungere tag utilizzando l'[opzione `head`](#head):
+
+```js
+starlight({
+	favicon: '/images/favicon.svg',
+	head: [
+		// Aggiungi il fallback della favicon ICO per Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
+});
+```
+
+### `titleDelimiter`
+
+**tipo:** `string`  
+**predefinito:** `'|'`
+
+Imposta il delimitatore tra il titolo della pagina e il titolo del sito nel tag `<title>` della pagina, che viene visualizzato nelle schede del browser.
+
+Per impostazione predefinita, ogni pagina ha un `<title>` del formato `Titolo Pagina | Titolo Sito`.
+Ad esempio, questa pagina è intitolata "Riferimento di Configurazione" e questo sito è intitolato "Starlight", quindi il `<title>` per questa pagina è "Riferimento di Configurazione | Starlight".
+
+### `disable404Route`
+
+**tipo:** `boolean`  
+**predefinito:** `false`
+
+Disabilita l'iniezione della [pagina 404](https://docs.astro.build/it/core-concepts/astro-pages/#pagina-di-errore-404-personalizzata) predefinita di Starlight. Per utilizzare una route `src/pages/404.astro` personalizzata nel tuo progetto, imposta questa opzione su `true`.
+
+### `components`
+
+**tipo:** `Record<string, string>`
+
+Fornisci i percorsi dei componenti per sovrascrivere le implementazioni predefinite di Starlight.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
+});
+```
+
+Consulta il [Riferimento alle sostituzioni](/it/reference/overrides/) per i dettagli di tutti i componenti che puoi sovrascrivere.
+
+### `plugins`
+
+**tipo:** [`StarlightPlugin[]`](/it/reference/plugins/#riferimento-rapido-per-le-api)
+
+Estendi Starlight con plugin personalizzati.
+I plugin applicano modifiche al tuo progetto per modificare o aggiungere funzionalità a Starlight.
+
+Visita la [vetrina dei plugin](/it/resources/plugins/#plugins) per vedere un elenco dei plugin disponibili.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Consulta il [Riferimento ai plugin](/it/reference/plugins/) per i dettagli sulla creazione dei tuoi plugin personalizzati.
+
+### `credits`
+
+Abilita la visualizzazione di un link "Costruito con Starlight" nel footer del tuo sito.
+
+```js
+starlight({
+	credits: true,
+});
+```
