@@ -86,7 +86,7 @@
 		overflow-x: hidden !important;
 		white-space: pre-wrap !important;
 	}
-	.sl-markdown-content .expressive-code figcaption {
+	.sl-markdown-content .expressive-code {
 		break-inside: avoid;
 	}
 
