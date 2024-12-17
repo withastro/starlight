@@ -69,11 +69,14 @@ Starlight는 사용자 정의 컴포넌트에 다음 속성들을 전달합니�
 
 콘텐츠 파일 이름에서 생성된 이 페이지의 슬러그입니다.
 
+이 속성은 더 이상 사용되지 않으며 향후 버전의 Starlight에서 제거될 예정입니다.
+[Starlight의 `docsLoader`](/ko/manual-setup/#콘텐츠-컬렉션-구성)를 사용하여 새 콘텐츠 레이어 API로 마이그레이션하고 대신 [`id`](#id) 속성을 사용하세요.
+
 #### `id`
 
 **타입:** `string`
 
-콘텐츠 파일 이름을 기반으로 하는 이 페이지의 고유 ID입니다.
+이 페이지의 슬러그 또는 [`legacy.collections`](https://docs.astro.build/ko/reference/legacy-flags/#collections) 플래그를 사용하는 경우 콘텐츠 파일명을 기준으로 한 이 페이지의 고유 ID입니다.
 
 #### `isFallback`
 

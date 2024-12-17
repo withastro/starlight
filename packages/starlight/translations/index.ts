@@ -2,6 +2,7 @@ import { builtinI18nSchema } from '../schemas/i18n';
 import cs from './cs.json';
 import en from './en.json';
 import es from './es.json';
+import ca from './ca.json';
 import de from './de.json';
 import ja from './ja.json';
 import pt from './pt.json';
@@ -35,6 +36,7 @@ export default Object.fromEntries(
 		cs,
 		en,
 		es,
+		ca,
 		de,
 		ja,
 		pt,

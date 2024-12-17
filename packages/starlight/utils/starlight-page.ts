@@ -1,6 +1,8 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
+import { getCollectionPathFromRoot } from './collection';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import {
@@ -97,8 +99,8 @@ export type StarlightPageProps = Prettify<
  */
 type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 	/**
-	 * The unique ID for this Starlight page which cannot be inferred from codegen like content
-	 * collection entries.
+	 * The unique ID if using the `legacy.collections` for this Starlight page which cannot be
+	 * inferred from codegen like content collection entries or the slug.
 	 */
 	id: string;
 };
@@ -113,7 +115,7 @@ export async function generateStarlightPageRouteData({
 	const { isFallback, frontmatter, ...routeProps } = props;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
+	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar
 		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
@@ -124,6 +126,7 @@ export async function generateStarlightPageRouteData({
 		slug,
 		body: '',
 		collection: 'docs',
+		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(slug)}.md`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {
