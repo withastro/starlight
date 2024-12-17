@@ -90,6 +90,14 @@
 		break-inside: avoid;
 	}
 
+	/* Inline code */
+	.sl-markdown-content code:not(:where(.not-content *)) {
+		background-color: transparent !important;
+		padding: 0 !important;
+		margin-block: unset !important;
+		font-size: var(--sl-text-code) !important;
+	}
+
 	/* layout/PageFrame.astro */
 	.page > header {
 		position: relative !important;
