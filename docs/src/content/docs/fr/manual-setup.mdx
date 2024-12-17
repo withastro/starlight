@@ -62,19 +62,23 @@ Retrouvez toutes les options disponibles dans la [référence de configuration S
 
 ### Configurer les collections de contenu
 
-Starlight s'appuie sur les [collections de contenu d'Astro](https://docs.astro.build/fr/guides/content-collections/), qui sont configurées dans le fichier `src/content/config.ts`.
+Starlight s'appuie sur les [collections de contenu d'Astro](https://docs.astro.build/fr/guides/content-collections/), qui sont configurées dans le fichier `src/content.config.ts`.
 
-Créez ou mettez à jour le fichier de configuration du contenu, en ajoutant une collection `docs` qui utilise le schéma `docsSchema` de Starlight :
+Créez ou mettez à jour le fichier de configuration du contenu, en ajoutant une collection `docs` qui utilise les `docsLoader` et `docsSchema` de Starlight :
 
-```js ins={3,6}
-// src/content/config.ts
+```js ins={3-4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
+
+Starlight supporte également [l'option `legacy.collections`](https://docs.astro.build/fr/reference/legacy-flags/) où les collections sont gérées en utilisant l'implémentation de collections de contenu héritée.
+Celà est utile si vous avez un projet Astro existant et que vous ne pouvez pas apporter de modifications aux collections pour utiliser un chargeur.
 
 ### Ajouter du contenu
 
@@ -125,6 +129,6 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### Utiliser Starlight avec SSR
 
-Pour activer le SSR, suivez le guide [« Adaptateurs de rendu à la demande »](https://docs.astro.build/fr/guides/server-side-rendering/) dans la documentation d'Astro pour ajouter un adaptateur serveur à votre projet Starlight.
+Pour activer le SSR, suivez le guide [« Adaptateurs de rendu à la demande »](https://docs.astro.build/fr/guides/on-demand-rendering/) dans la documentation d'Astro pour ajouter un adaptateur serveur à votre projet Starlight.
 
 Les pages de documentation générées par Starlight sont pré-rendues par défaut, quel que soit le mode de rendu de votre projet. Pour désactiver le pré-rendu de vos pages Starlight, définissez [l'option de configuration `prerender`](/fr/reference/configuration/#prerender) à `false`.
