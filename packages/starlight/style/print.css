@@ -98,6 +98,16 @@
 		font-size: 0.9375em !important;
 	}
 
+	/* user-components/FileTree.astro */
+	starlight-file-tree {
+		break-inside: avoid;
+	}
+	starlight-file-tree .highlight {
+		outline: 3px solid var(--sl-color-accent-low);
+		color: var(--sl-color-text) !important;
+		background-color: transparent !important;
+	}
+
 	/* layout/PageFrame.astro */
 	.page > header {
 		position: relative !important;
