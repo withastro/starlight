@@ -189,16 +189,16 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 <Steps>
 
-1. Сконфигурируйте коллекцию данных `i18n` в `src/content/config.ts`, если она ещё не настроена:
+1. Сконфигурируйте коллекцию данных `i18n` в `src/content.config.ts`, если она ещё не настроена:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
-   import { defineCollection } from 'astro:content';
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+    docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +  i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -258,14 +258,15 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 В следующем примере к ключам по умолчанию добавляется новый необязательный ключ `custom.label`:
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),

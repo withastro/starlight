@@ -86,7 +86,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 При использовании встроенного компонента внутри вашего компонента:
 
 - Передайте в него `Astro.props`. Это гарантирует, что он получит все данные, необходимые для отображения.
-- Добавьте [`<slot />`](https://docs.astro.build/ru/core-concepts/astro-components/#slots) внутрь компонента по умолчанию. Это гарантирует, что если компоненту передаются какие-либо дочерние элементы, Astro знает, где их отображать.
+- Добавьте [`<slot />`](https://docs.astro.build/ru/basics/astro-components/#slots) внутрь компонента по умолчанию. Это гарантирует, что если компоненту передаются какие-либо дочерние элементы, Astro знает, где их отображать.
 
 Если вы повторно используете компоненты [`PageFrame`](/ru/reference/overrides/#pageframe) или [`TwoColumnContent`](/ru/reference/overrides/#twocolumncontent), содержащие [именованные слоты](https://docs.astro.build/ru/basics/astro-components/#именованые-слоты), вам также необходимо [перенести](https://docs.astro.build/ru/basics/astro-components/#перенос-слотов) эти слоты.
 
@@ -157,4 +157,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-Узнайте больше об условной отрисовке в руководстве [Синтаксис Astro](https://docs.astro.build/ru/core-concepts/astro-syntax/#динамический-html).
+Узнайте больше об условной отрисовке в руководстве [Синтаксис Astro](https://docs.astro.build/ru/basics/astro-syntax/#динамический-html).

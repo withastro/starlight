@@ -35,7 +35,7 @@ Die Seitenbeschreibung wird für die Metadaten der Seite verwendet und wird von 
 
 **Typ**: `string`
 
-Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte Slugs definieren“](https://docs.astro.build/de/guides/content-collections/#defining-custom-slugs) in der Astro-Dokumentation für weitere Details.
+Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte IDs definieren“](https://docs.astro.build/de/guides/content-collections/#defining-custom-ids) in der Astro-Dokumentation für weitere Details.
 
 ### `editUrl`
 
@@ -399,19 +399,20 @@ sidebar:
 
 ## Frontmatter-Schema anpassen
 
-Das Frontmatter-Schema für die Starlight-Inhaltssammlung `docs` wird in `src/content/config.ts` mit dem `docsSchema()`-Helper konfiguriert:
+Das Frontmatter-Schema für die Starlight-Inhaltssammlung `docs` wird in `src/content.config.ts` mit dem `docsSchema()`-Helper konfiguriert:
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#definieren-eines-sammelschemas) in den Astro-Dokumenten.
+Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in den Astro-Dokumenten.
 
 `docsSchema()` nimmt die folgenden Optionen an:
 
@@ -425,13 +426,15 @@ Der Wert sollte ein [Zod-Schema](https://docs.astro.build/de/guides/content-coll
 
 Im folgenden Beispiel geben wir einen strengeren Typ für `description` an, um es zur Pflicht zu machen und fügen ein neues optionales Feld `category` hinzu:
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // Mache ein eingebautes Feld erforderlich statt optional.
@@ -446,13 +449,15 @@ export const collections = {
 
 Um die Vorteile der [Astro `image()`-Hilfe](https://docs.astro.build/de/guides/images/#bilder-in-inhaltssammlungen) zu nutzen, verwende eine Funktion, die deine Schemaerweiterung zurückgibt:
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({
