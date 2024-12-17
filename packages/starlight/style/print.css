@@ -108,6 +108,16 @@
 		background-color: transparent !important;
 	}
 
+	/* user-components/Aside.astro */
+	.starlight-aside {
+		break-inside: avoid;
+	}
+
+	/* user-components/Tabs.astro */
+	starlight-tabs {
+		break-inside: avoid;
+	}
+
 	/* layout/PageFrame.astro */
 	.page > header {
 		position: relative !important;
