@@ -193,6 +193,7 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
    ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
    // src/content.config.ts
+   import { defineCollection } from 'astro:content';
    import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
