@@ -95,7 +95,7 @@
 		background-color: transparent !important;
 		padding: 0 !important;
 		margin-block: unset !important;
-		font-size: var(--sl-text-code) !important;
+		font-size: 0.875em !important;
 	}
 
 	/* layout/PageFrame.astro */
