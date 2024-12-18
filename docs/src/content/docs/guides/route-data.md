@@ -84,13 +84,19 @@ This is a function that is called every time Starlight renders a page and can mo
 
 3. Update your `onRequest` function to modify route data.
 
+   The first argument middleware receive is [Astro’s `context` object](https://docs.astro.build/en/reference/api-reference/).
+   This contains full information about the current page render, including the current URL and `locals`.
+
    In this example, we are going to make our docs more exciting by adding an exclamation mark to the end of every page’s title.
 
    ```ts
    // src/routeData.ts
    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
-   export const onRequest = defineRouteMiddleware((route) => {
-     route.entry.data.title = route.entry.data.title + '!';
+   export const onRequest = defineRouteMiddleware((context) => {
+     // Get the content collection entry for this page.
+     const { entry } = context.locals.starlightRoute;
+     // Update the title to add an exclamation mark.
+     entry.data.title = entry.data.title + '!';
    });
    ```
