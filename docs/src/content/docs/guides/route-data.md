@@ -20,6 +20,8 @@ In this case, values set for a specific page in frontmatter override the global 
 For example, route data includes a `pagination` object with links to the previous and next pages in the sidebar.
 If a page disables one of these, for example by setting `prev: false` in frontmatter, this will be reflected in the `pagination` object.
 
+See the [“Route Data Reference”](/reference/route-data/) for a full list of the available properties.
+
 ## How is route data used?
 
 All of Starlight’s components have access to route data and use it to decide what to render for each page.
