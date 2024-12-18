@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Adds social link icon for phone
+Adds icon for phone
