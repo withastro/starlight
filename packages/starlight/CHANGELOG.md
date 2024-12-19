@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.30.3
+
+### Patch Changes
+
+- [#2717](https://github.com/withastro/starlight/pull/2717) [`c5fcbb3`](https://github.com/withastro/starlight/commit/c5fcbb33a7a0511ac372f5d006a69f4195d1e266) Thanks [@delucis](https://github.com/delucis)! - Fixes a list item spacing issue where line break elements (`<br>`) could receive a margin, breaking layout in Firefox
+
+- [#2724](https://github.com/withastro/starlight/pull/2724) [`02d7ac6`](https://github.com/withastro/starlight/commit/02d7ac66a0bdca3f26001f556de070027d4e0faf) Thanks [@dionysuzx](https://github.com/dionysuzx)! - Adds social link support for Farcaster
+
+- [#2635](https://github.com/withastro/starlight/pull/2635) [`ec4b851`](https://github.com/withastro/starlight/commit/ec4b85154ea301d9144ff49f3abd009e3a929387) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where the language picker in multilingual sites could display the wrong language when navigating between pages with the browser back/forward buttons.
+
+- [#2726](https://github.com/withastro/starlight/pull/2726) [`e54ebd5`](https://github.com/withastro/starlight/commit/e54ebd5c879deb3fdff2180426b377181773b85f) Thanks [@techfg](https://github.com/techfg)! - Adds icon for phone
+
 ## 0.30.2
 
 ### Patch Changes
