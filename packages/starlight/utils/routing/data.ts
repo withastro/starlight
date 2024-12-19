@@ -1,22 +1,17 @@
 import type { APIContext, MarkdownHeading } from 'astro';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { generateToC, type TocItem } from './generateToC';
+import { generateToC, type TocItem } from '../generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
-import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
-import { ensureTrailingSlash } from './path';
-import {
-	getRouteBySlugParam,
-	normalizeCollectionEntry,
-	type Route,
-	type StarlightDocsCollectionEntry,
-	type StarlightDocsEntry,
-} from './routing';
-import { formatPath } from './format-path';
-import { useTranslations } from './translations';
-import { BuiltInDefaultLocale, DeprecatedLabelsPropProxy } from './i18n';
+import { getPrevNextLinks, getSidebar, type SidebarEntry } from '../navigation';
+import { ensureTrailingSlash } from '../path';
+import { getRouteBySlugParam, normalizeCollectionEntry } from '../routing';
+import type { Route, StarlightDocsCollectionEntry, StarlightDocsEntry } from './types';
+import { formatPath } from '../format-path';
+import { useTranslations } from '../translations';
+import { BuiltInDefaultLocale, DeprecatedLabelsPropProxy } from '../i18n';
 import { getEntry, render, type RenderResult } from 'astro:content';
-import { getCollectionPathFromRoot } from './collection';
+import { getCollectionPathFromRoot } from '../collection';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];

@@ -1,6 +1,6 @@
 import { AstroError } from 'astro/errors';
-import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
+import config from 'virtual:starlight/user-config';
 import type { Badge, I18nBadge, I18nBadgeConfig } from '../schemas/badge';
 import type { PrevNextLinkConfig } from '../schemas/prevNextLink';
 import type {
@@ -10,14 +10,15 @@ import type {
 	SidebarItem,
 	SidebarLinkItem,
 } from '../schemas/sidebar';
+import { getCollectionPathFromRoot } from './collection';
 import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { BuiltInDefaultLocale, pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
-import { getLocaleRoutes, routes, type Route } from './routing';
+import { getLocaleRoutes, routes } from './routing';
+import type { Route } from './routing/types';
 import { localeToLang, localizedId, slugToPathname } from './slugs';
 import type { StarlightConfig } from './user-config';
-import { getCollectionPathFromRoot } from './collection';
 
 const DirKey = Symbol('DirKey');
 const SlugKey = Symbol('SlugKey');

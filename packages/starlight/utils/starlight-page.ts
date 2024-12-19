@@ -11,8 +11,8 @@ import {
 	getToC,
 	type PageProps,
 	type StarlightRouteData,
-} from './route-data';
-import type { StarlightDocsEntry } from './routing';
+} from './routing/data';
+import type { StarlightDocsEntry } from './routing/types';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { docsSchema } from '../schema';

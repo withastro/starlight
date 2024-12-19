@@ -3,8 +3,9 @@ import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import { expect, test, vi } from 'vitest';
-import { routes, paths, getRouteBySlugParam, type Route } from '../../utils/routing';
+import { routes, paths, getRouteBySlugParam } from '../../utils/routing';
 import { slugToParam } from '../../utils/slugs';
+import type { Route } from '../../utils/routing/types';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
