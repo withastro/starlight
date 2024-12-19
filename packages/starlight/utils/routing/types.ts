@@ -1,8 +1,43 @@
 import type { MarkdownHeading } from 'astro';
 import type { CollectionEntry, RenderResult } from 'astro:content';
 import type { TocItem } from '../generateToC';
-import type { LocaleData } from '../slugs';
-import type { getPrevNextLinks, SidebarEntry } from '../navigation';
+import type { LinkHTMLAttributes } from '../../schemas/sidebar';
+import type { Badge } from '../../schemas/badge';
+
+export interface LocaleData {
+	/** Writing direction. */
+	dir: 'ltr' | 'rtl';
+	/** BCP-47 language tag. */
+	lang: string;
+	/** The base path at which a language is served. `undefined` for root locale slugs. */
+	locale: string | undefined;
+}
+
+export interface SidebarLink {
+	type: 'link';
+	label: string;
+	href: string;
+	isCurrent: boolean;
+	badge: Badge | undefined;
+	attrs: LinkHTMLAttributes;
+}
+
+export interface SidebarGroup {
+	type: 'group';
+	label: string;
+	entries: (SidebarLink | SidebarGroup)[];
+	collapsed: boolean;
+	badge: Badge | undefined;
+}
+
+export type SidebarEntry = SidebarLink | SidebarGroup;
+
+export interface PaginationLinks {
+	/** Link to previous page in the sidebar. */
+	prev: SidebarLink | undefined;
+	/** Link to next page in the sidebar. */
+	next: SidebarLink | undefined;
+}
 
 // The type returned from `CollectionEntry` is different for legacy collections and collections
 // using a loader. This type is a common subset of both types.
@@ -49,7 +84,7 @@ export interface StarlightRouteData extends Route {
 	/** Whether or not the sidebar should be displayed on this page. */
 	hasSidebar: boolean;
 	/** Links to the previous and next page in the sidebar if enabled. */
-	pagination: ReturnType<typeof getPrevNextLinks>;
+	pagination: PaginationLinks;
 	/** Table of contents for this page if enabled. */
 	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
 	/** JS Date object representing when this page was last updated if enabled. */

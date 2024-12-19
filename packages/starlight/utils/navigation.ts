@@ -16,7 +16,13 @@ import { formatPath } from './format-path';
 import { BuiltInDefaultLocale, pickLang } from './i18n';
 import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
 import { getLocaleRoutes, routes } from './routing';
-import type { Route } from './routing/types';
+import type {
+	SidebarGroup,
+	SidebarLink,
+	PaginationLinks,
+	Route,
+	SidebarEntry,
+} from './routing/types';
 import { localeToLang, localizedId, slugToPathname } from './slugs';
 import type { StarlightConfig } from './user-config';
 
@@ -26,25 +32,6 @@ const SlugKey = Symbol('SlugKey');
 const neverPathFormatter = createPathFormatter({ trailingSlash: 'never' });
 
 const docsCollectionPathFromRoot = getCollectionPathFromRoot('docs', project);
-
-export interface Link {
-	type: 'link';
-	label: string;
-	href: string;
-	isCurrent: boolean;
-	badge: Badge | undefined;
-	attrs: LinkHTMLAttributes;
-}
-
-interface Group {
-	type: 'group';
-	label: string;
-	entries: (Link | Group)[];
-	collapsed: boolean;
-	badge: Badge | undefined;
-}
-
-export type SidebarEntry = Link | Group;
 
 /**
  * A representation of the route structure. For each object entry:
@@ -103,7 +90,7 @@ function groupFromAutogenerateConfig(
 	locale: string | undefined,
 	routes: Route[],
 	currentPathname: string
-): Group {
+): SidebarGroup {
 	const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
 	const dirDocs = routes.filter((doc) => {
@@ -182,7 +169,7 @@ function makeSidebarLink(
 	label: string,
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
-): Link {
+): SidebarLink {
 	if (!isAbsolute(href)) {
 		href = formatPath(href);
 	}
@@ -199,7 +186,7 @@ function makeLink({
 	href: string;
 	badge?: Badge | undefined;
 	attrs?: LinkHTMLAttributes | undefined;
-}): Link {
+}): SidebarLink {
 	return { type: 'link', ...opts, badge, isCurrent: false, attrs };
 }
 
@@ -271,7 +258,7 @@ function treeify(routes: Route[], locale: string | undefined, baseDir: string): 
 }
 
 /** Create a link entry for a given content collection entry. */
-function linkFromRoute(route: Route): Link {
+function linkFromRoute(route: Route): SidebarLink {
 	return makeSidebarLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
@@ -311,7 +298,7 @@ function groupFromDir(
 	currentPathname: string,
 	locale: string | undefined,
 	collapsed: boolean
-): Group {
+): SidebarGroup {
 	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
 		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
 	);
@@ -447,7 +434,7 @@ function recursivelyBuildSidebarIdentity(sidebar: SidebarEntry[]): string {
 }
 
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
-export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
+export function flattenSidebar(sidebar: SidebarEntry[]): SidebarLink[] {
 	return sidebar.flatMap((entry) =>
 		entry.type === 'group' ? flattenSidebar(entry.entries) : entry
 	);
@@ -461,12 +448,7 @@ export function getPrevNextLinks(
 		prev?: PrevNextLinkConfig;
 		next?: PrevNextLinkConfig;
 	}
-): {
-	/** Link to previous page in the sidebar. */
-	prev: Link | undefined;
-	/** Link to next page in the sidebar. */
-	next: Link | undefined;
-} {
+): PaginationLinks {
 	const entries = flattenSidebar(sidebar);
 	const currentIndex = entries.findIndex((entry) => entry.isCurrent);
 	const prev = applyPrevNextLinkConfig(entries[currentIndex - 1], paginationEnabled, config.prev);
@@ -480,10 +462,10 @@ export function getPrevNextLinks(
 
 /** Apply a prev/next link config to a navigation link. */
 function applyPrevNextLinkConfig(
-	link: Link | undefined,
+	link: SidebarLink | undefined,
 	paginationEnabled: boolean,
 	config: PrevNextLinkConfig | undefined
-): Link | undefined {
+): SidebarLink | undefined {
 	// Explicitly remove the link.
 	if (config === false) return undefined;
 	// Use the generated link if any.
