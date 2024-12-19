@@ -47,7 +47,7 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 	starlight-file-tree :global(.directory > details > summary:hover .tree-icon) {
 		cursor: pointer;
 		color: var(--sl-color-text-accent);
-		fill: var(--sl-color-text-accent);
+		fill: currentColor;
 	}
 
 	starlight-file-tree :global(.directory > details > summary:hover ~ ul) {
@@ -55,7 +55,7 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 	}
 
 	starlight-file-tree :global(.directory > details > summary:hover .highlight .tree-icon) {
-		fill: var(--sl-color-text-invert);
+		fill: currentColor;
 	}
 
 	starlight-file-tree :global(ul) {
@@ -129,6 +129,6 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 	}
 
 	starlight-file-tree :global(.highlight svg.tree-icon) {
-		fill: var(--sl-color-text-invert);
+		fill: currentColor;
 	}
 </style>
