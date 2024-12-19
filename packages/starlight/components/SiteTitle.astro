@@ -29,7 +29,7 @@ const { siteTitle, siteTitleHref } = Astro.props;
 			</>
 		)
 	}
-	<span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
+	<span class:list={[{ 'sr-only': config.logo?.replacesTitle }, 'site-title-text']}>
 		{siteTitle}
 	</span>
 </a>
@@ -43,6 +43,12 @@ const { siteTitle, siteTitleHref } = Astro.props;
 		color: var(--sl-color-text-accent);
 		text-decoration: none;
 		white-space: nowrap;
+		min-width: 0;
+	}
+	.site-title-text {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-wrap: nowrap;
 	}
 	img {
 		height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
