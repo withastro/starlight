@@ -37,14 +37,14 @@ const { siteTitle } = Astro.locals.starlightRoute;
 <p>The title of this site is “{siteTitle}”</p>
 ```
 
-If you are building [component overrides](/overriding-components/), you can access route data like this to customize what you display.
+If you are building [component overrides](/guides/overriding-components/), you can access route data like this to customize what you display.
 
 ## Customizing route data
 
 Starlight’s route data works out of the box and does not require any configuration.
 However, for advanced use cases, you may want to customize route data for some or all pages to modify how your site displays.
 
-This is a similar concept to [component overrides](/overriding-components/), but instead of modifying how Starlight renders your data, you modify the data Starlight renders.
+This is a similar concept to [component overrides](/guides/overriding-components/), but instead of modifying how Starlight renders your data, you modify the data Starlight renders.
 
 ### When to customize route data
 
