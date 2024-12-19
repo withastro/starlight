@@ -19,10 +19,9 @@
   @see https://github.com/withastro/starlight/pull/2633
 */
 
-import type { Props } from '../props';
 import { getSidebarHash } from '../utils/navigation';
 
-const hash = getSidebarHash(Astro.props.sidebar);
+const hash = getSidebarHash(Astro.locals.starlightRoute.sidebar);
 
 declare global {
 	interface Window {
