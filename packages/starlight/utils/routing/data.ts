@@ -1,45 +1,25 @@
 import type { APIContext, MarkdownHeading } from 'astro';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { generateToC, type TocItem } from '../generateToC';
+import { generateToC } from '../generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
-import { getPrevNextLinks, getSidebar, type SidebarEntry } from '../navigation';
+import { getPrevNextLinks, getSidebar } from '../navigation';
 import { ensureTrailingSlash } from '../path';
 import { getRouteBySlugParam, normalizeCollectionEntry } from '../routing';
-import type { Route, StarlightDocsCollectionEntry, StarlightDocsEntry } from './types';
+import type {
+	Route,
+	StarlightDocsCollectionEntry,
+	StarlightDocsEntry,
+	StarlightRouteData,
+} from './types';
 import { formatPath } from '../format-path';
 import { useTranslations } from '../translations';
 import { BuiltInDefaultLocale, DeprecatedLabelsPropProxy } from '../i18n';
-import { getEntry, render, type RenderResult } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 import { getCollectionPathFromRoot } from '../collection';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
-}
-
-export interface StarlightRouteData extends Route {
-	/** Title of the site. */
-	siteTitle: string;
-	/** URL or path used as the link when clicking on the site title. */
-	siteTitleHref: string;
-	/** Array of Markdown headings extracted from the current page. */
-	headings: MarkdownHeading[];
-	/** Site navigation sidebar entries for this page. */
-	sidebar: SidebarEntry[];
-	/** Whether or not the sidebar should be displayed on this page. */
-	hasSidebar: boolean;
-	/** Links to the previous and next page in the sidebar if enabled. */
-	pagination: ReturnType<typeof getPrevNextLinks>;
-	/** Table of contents for this page if enabled. */
-	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
-	/** JS Date object representing when this page was last updated if enabled. */
-	lastUpdated: Date | undefined;
-	/** URL object for the address where this page can be edited if enabled. */
-	editUrl: URL | undefined;
-	/** @deprecated Use `Astro.locals.t()` instead. */
-	labels: Record<string, never>;
-	/** An Astro component to render the current page’s content if this route is a Markdown page. */
-	Content?: RenderResult['Content'];
 }
 
 export async function useRouteData(context: APIContext): Promise<StarlightRouteData> {

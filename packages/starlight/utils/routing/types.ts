@@ -1,5 +1,8 @@
-import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry, RenderResult } from 'astro:content';
+import type { TocItem } from '../generateToC';
 import type { LocaleData } from '../slugs';
+import type { getPrevNextLinks, SidebarEntry } from '../navigation';
 
 // The type returned from `CollectionEntry` is different for legacy collections and collections
 // using a loader. This type is a common subset of both types.
@@ -32,4 +35,29 @@ export interface Route extends LocaleData {
 	/** True if this page is untranslated in the current language and using fallback content from the default locale. */
 	isFallback?: true;
 	[key: string]: unknown;
+}
+
+export interface StarlightRouteData extends Route {
+	/** Title of the site. */
+	siteTitle: string;
+	/** URL or path used as the link when clicking on the site title. */
+	siteTitleHref: string;
+	/** Array of Markdown headings extracted from the current page. */
+	headings: MarkdownHeading[];
+	/** Site navigation sidebar entries for this page. */
+	sidebar: SidebarEntry[];
+	/** Whether or not the sidebar should be displayed on this page. */
+	hasSidebar: boolean;
+	/** Links to the previous and next page in the sidebar if enabled. */
+	pagination: ReturnType<typeof getPrevNextLinks>;
+	/** Table of contents for this page if enabled. */
+	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
+	/** JS Date object representing when this page was last updated if enabled. */
+	lastUpdated: Date | undefined;
+	/** URL object for the address where this page can be edited if enabled. */
+	editUrl: URL | undefined;
+	/** @deprecated Use `Astro.locals.t()` instead. */
+	labels: Record<string, never>;
+	/** An Astro component to render the current page’s content if this route is a Markdown page. */
+	Content?: RenderResult['Content'];
 }

@@ -13,6 +13,6 @@ declare namespace StarlightApp {
 declare namespace App {
 	interface Locals {
 		t: import('./utils/createTranslationSystem').I18nT;
-		starlightRoute: import('./utils/routing/data').StarlightRouteData;
+		starlightRoute: import('./utils/routing/types').StarlightRouteData;
 	}
 }
