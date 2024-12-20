@@ -79,6 +79,7 @@ export function applyStarlightUiThemeColors(theme: ExpressiveCodeTheme) {
 
 	// Set theme `bg` color property for contrast calculations
 	theme.bg = isDark ? '#23262f' : '#f6f7f9';
+	theme.colors['editor.background'] = theme.bg;
 	// Set actual background color to the appropriate Starlight CSS variable
 	const editorBackgroundColor = isDark ? 'var(--sl-color-gray-6)' : 'var(--sl-color-gray-7)';
 
