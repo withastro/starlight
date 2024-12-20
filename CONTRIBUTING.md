@@ -121,11 +121,11 @@ You should then be able to open <http://localhost:4321> and see your changes.
 When adding or translating content in the Starlight docs site, you can check all internal links are valid.
 All GitHub PRs are checked this way automatically, but testing locally can help if you want to confirm changes are correct before committing them.
 
-To do this, move into the `docs/` directory from the root of the repo and then build the site with the `CHECK_LINKS` environment variable:
+To do this, move into the `docs/` directory from the root of the repo and then run `pnpm linkcheck`:
 
 ```sh
 cd docs
-CHECK_LINKS=true pnpm build
+pnpm linkcheck
 ```
 
 If there are any broken links, the build will fail and log which pages need to be fixed.
@@ -200,7 +200,7 @@ pnpm test:e2e
 
 #### Test fixtures
 
-Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content/config.ts` and some content to render in `src/content/docs/`).
+Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content.config.ts` and some content to render in `src/content/docs/`).
 
 The `testFactory()` helper can be used in a test file to define the fixture which will be built and loaded in a preview server during a set of tests.
 

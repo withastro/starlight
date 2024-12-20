@@ -69,11 +69,14 @@ Starlight는 사용자 정의 컴포넌트에 다음 속성들을 전달합니�
 
 콘텐츠 파일 이름에서 생성된 이 페이지의 슬러그입니다.
 
+이 속성은 더 이상 사용되지 않으며 향후 버전의 Starlight에서 제거될 예정입니다.
+[Starlight의 `docsLoader`](/ko/manual-setup/#콘텐츠-컬렉션-구성)를 사용하여 새 콘텐츠 레이어 API로 마이그레이션하고 대신 [`id`](#id) 속성을 사용하세요.
+
 #### `id`
 
 **타입:** `string`
 
-콘텐츠 파일 이름을 기반으로 하는 이 페이지의 고유 ID입니다.
+이 페이지의 슬러그 또는 [`legacy.collections`](https://docs.astro.build/ko/reference/legacy-flags/#collections) 플래그를 사용하는 경우 콘텐츠 파일명을 기준으로 한 이 페이지의 고유 ID입니다.
 
 #### `isFallback`
 
@@ -194,7 +197,8 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 
 #### `PageFrame`
 
-**기본 컴포넌트:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**기본 컴포넌트:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**명명된 슬롯:** `header`, `sidebar`
 
 대부분의 페이지 콘텐츠를 감싸는 레이아웃 컴포넌트입니다.
 기본적으로 header-sidebar-main 레이아웃을 설정하고 슬롯으로 명명된 `header`와 `sidebar` 및 메인 콘텐츠에 대한 기본 슬롯을 포함합니다.
@@ -208,7 +212,8 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 
 #### `TwoColumnContent`
 
-**기본 컴포넌트:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**기본 컴포넌트:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**명명된 슬롯:** `right-sidebar`
 
 메인 콘텐츠 열과 오른쪽 사이드바 (목차)를 감싸는 레이아웃 컴포넌트입니다.
 기본적으로 작은 뷰포트에서 하나의 열로 이루어진 레이아웃과 큰 뷰포트에서 두 개의 열로 이루어진 레이아웃 간 전환을 처리합니다.

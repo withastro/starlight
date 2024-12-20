@@ -1,5 +1,6 @@
 ---
 import type { z } from 'astro/zod';
+import context from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { version } from '../package.json';
 import type { HeadConfigSchema } from '../schemas/head';
@@ -66,7 +67,7 @@ if (canonical && config.isMultilingual) {
 			attrs: {
 				rel: 'alternate',
 				hreflang: localeOpts.lang,
-				href: localizedUrl(canonical, locale).href,
+				href: localizedUrl(canonical, locale, context.trailingSlash).href,
 			},
 		});
 	}

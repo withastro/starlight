@@ -121,7 +121,7 @@ function buildResources<T extends Record<string, string | undefined>>(
 	return { [I18nextNamespace]: dictionary as BuiltInStrings & T };
 }
 
-// `keyof BuiltInStrings` and `UserI18nKeys` contain some identical keys, e.g. the built-in UI
+// `keyof BuiltInStrings` and `UserI18nKeys` may contain some identical keys, e.g. the built-in UI
 // strings. We let TypeScript merge them into a single union type so that plugins with a TypeScript
 // configuration preventing `UserI18nKeys` to be properly inferred can still get auto-completion
 // for built-in UI strings.

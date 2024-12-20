@@ -69,11 +69,14 @@ Pour les sites multilingues, cette valeur inclura la locale actuelle, par exempl
 
 Le slug de la page généré à partir du nom du fichier du contenu.
 
+Cette propriété est dépréciée et sera supprimée dans une version future de Starlight.
+Migrez vers la nouvelle API Content Layer en utilisant le [`docsLoader` de Starlight](/fr/manual-setup/#configurer-les-collections-de-contenu) et utilisez la propriété [`id`](#id) à la place.
+
 #### `id`
 
 **Type :** `string`
 
-L'identifiant unique de cette page basé sur le nom du fichier du contenu.
+Le slug de cette page ou l'identifiant unique de cette page basé sur le nom du fichier du contenu si l'option [`legacy.collections`](https://docs.astro.build/fr/reference/legacy-flags/#collections) est utilisée.
 
 #### `isFallback`
 
@@ -195,7 +198,8 @@ Lorsque cela est possible, préférez redéfinir un composant de plus bas niveau
 
 #### `PageFrame`
 
-**Composant par défaut :** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Composant par défaut :** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Emplacements (slots) nommés :** `header`, `sidebar`
 
 Composant de mise en page contenant la plupart du contenu de la page.
 L'implémentation par défaut configure la mise en page de l'en-tête, de la barre latérale et du contenu principal et inclut des emplacements (slots) nommés `header` et `sidebar` en plus de l'emplacement par défaut pour le contenu principal.
@@ -209,7 +213,8 @@ Composant utilisé à l'intérieur de [`<PageFrame>`](#pageframe) qui est respon
 
 #### `TwoColumnContent`
 
-**Composant par défaut :** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Composant par défaut :** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Emplacement (slot) nommé :** `right-sidebar`
 
 Composant de mise en page enveloppant le contenu principal de la page et la barre latérale de droite (table des matières).
 L'implémentation par défaut prend en charge le changement entre une mise en page à une seule colonne pour petits écrans et une mise en page à deux colonnes pour écrans plus larges.

@@ -84,7 +84,24 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 Lorsque vous affichez un composant intégré dans un composant personnalisé :
 
 - Décomposez `Astro.props` dans celui-ci. Cela permet de s'assurer qu'il reçoit toutes les données dont il a besoin pour être affiché.
-- Ajoutez un élément [`<slot />`](https://docs.astro.build/fr/core-concepts/astro-components/#les-emplacements-slots) à l'intérieur du composant par défaut. Cela permet de s'assurer que si le composant reçoit des éléments enfants, Astro sait où les afficher.
+- Ajoutez un élément [`<slot />`](https://docs.astro.build/fr/basics/astro-components/#les-emplacements-slots) à l'intérieur du composant par défaut. Cela permet de s'assurer que si le composant reçoit des éléments enfants, Astro sait où les afficher.
+
+Si vous réutilisez les composants [`PageFrame`](/fr/reference/overrides/#pageframe) ou [`TwoColumnContent`](/fr/reference/overrides/#twocolumncontent) qui contiennent des [emplacements (slots) nommés](https://docs.astro.build/fr/basics/astro-components/#les-emplacements-slots-nomm%C3%A9s), vous devez également [transférer](https://docs.astro.build/fr/basics/astro-components/#transf%C3%A9rer-les-emplacements) ces emplacements.
+
+L'exemple ci-dessous montre un composant personnalisé qui réutilise le composant `TwoColumnContent` qui contient un emplacement supplémentaire nommé `right-sidebar` qui doit être transféré :
+
+```astro {9}
+---
+// src/components/CustomContent.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default {...Astro.props}>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
 
 ## Utiliser les données de la page
 
@@ -124,7 +141,7 @@ Dans l'exemple suivant, un composant redéfinissant le composant [`Footer`](/fr/
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.props.id === '';
 ---
 
 {
@@ -138,4 +155,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-Pour en savoir plus sur le rendu conditionnel, consultez le [guide de syntaxe d'Astro](https://docs.astro.build/fr/core-concepts/astro-syntax/#html-dynamique).
+Pour en savoir plus sur le rendu conditionnel, consultez le [guide de syntaxe d'Astro](https://docs.astro.build/fr/basics/astro-syntax/#html-dynamique).

@@ -19,9 +19,9 @@ vi.mock('astro:content', async () =>
 				},
 			],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { badge: 'New' } }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
 			['guides/project-structure.mdx', { title: 'Project Structure' }],
+			['Deprecated API/users.md', { title: 'Deprecated Users API' }],
 		],
 	})
 );
@@ -126,6 +126,22 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "API v1",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/deprecated-api/users/",
+			        "isCurrent": false,
+			        "label": "Deprecated Users API",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API (deprecated)",
 			    "type": "group",
 			  },
 			]

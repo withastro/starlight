@@ -54,66 +54,70 @@ test('receives the user provided configuration including the plugins list', asyn
 
 describe('validation', () => {
 	test('validates starlight configuration before running plugins', async () => {
-		expect(
-			runPlugins(
-				// @ts-expect-error - invalid sidebar config.
-				{ title: 'Test Docs', sidebar: true },
-				[],
-				createTestPluginContext()
-			)
+		await expect(
+			async () =>
+				await runPlugins(
+					// @ts-expect-error - invalid sidebar config.
+					{ title: 'Test Docs', sidebar: true },
+					[],
+					createTestPluginContext()
+				)
 		).rejects.toThrowError(/Invalid config passed to starlight integration/);
 	});
 
 	test('validates plugins configuration before running them', async () => {
-		expect(
-			runPlugins(
-				{ title: 'Test Docs' },
-				// @ts-expect-error - invalid plugin with no `hooks` defined.
-				[{ name: 'invalid-plugin' }],
-				createTestPluginContext()
-			)
+		await expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					// @ts-expect-error - invalid plugin with no `hooks` defined.
+					[{ name: 'invalid-plugin' }],
+					createTestPluginContext()
+				)
 		).rejects.toThrowError(/Invalid plugins config passed to starlight integration/);
 	});
 
 	test('validates configuration updates from plugins do not update the `plugins` config key', async () => {
-		expect(
-			runPlugins(
-				{ title: 'Test Docs' },
-				[
-					{
-						name: 'test-plugin',
-						hooks: {
-							'config:setup'({ updateConfig }) {
-								// @ts-expect-error - plugins cannot update the `plugins` config key.
-								updateConfig({ plugins: [{ name: 'invalid-plugin' }] });
+		await expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					[
+						{
+							name: 'test-plugin',
+							hooks: {
+								setup: ({ updateConfig }) => {
+									// @ts-expect-error - plugins cannot update the `plugins` config key.
+									updateConfig({ plugins: [{ name: 'invalid-plugin' }] });
+								},
 							},
 						},
-					},
-				],
-				createTestPluginContext()
-			)
+					],
+					createTestPluginContext()
+				)
 		).rejects.toThrowError(
 			/The 'test-plugin' plugin tried to update the 'plugins' config key which is not supported./
 		);
 	});
 
 	test('validates configuration updates from plugins', async () => {
-		expect(
-			runPlugins(
-				{ title: 'Test Docs' },
-				[
-					{
-						name: 'test-plugin',
-						hooks: {
-							'config:setup'({ updateConfig }) {
-								// @ts-expect-error - invalid sidebar config update.
-								updateConfig({ description: true });
+		await expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					[
+						{
+							name: 'test-plugin',
+							hooks: {
+								setup: ({ updateConfig }) => {
+									// @ts-expect-error - invalid sidebar config update.
+									updateConfig({ description: true });
+								},
 							},
 						},
-					},
-				],
-				createTestPluginContext()
-			)
+					],
+					createTestPluginContext()
+				)
 		).rejects.toThrowError(/Invalid config update provided by the 'test-plugin' plugin/);
 	});
 });
