@@ -19,10 +19,10 @@ const shouldRenderSearch =
 	<div class="title-wrapper sl-flex">
 		<SiteTitle {...Astro.props} />
 	</div>
-	<div class="sl-flex">
+	<div class="sl-flex print:hidden">
 		{shouldRenderSearch && <Search {...Astro.props} />}
 	</div>
-	<div class="sl-hidden md:sl-flex right-group">
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
 		<div class="sl-flex social-icons">
 			<SocialIcons {...Astro.props} />
 		</div>
