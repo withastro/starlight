@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Add Storybook, Confluence and Jira social icons
+Adds Storybook, Confluence and Jira social icons
