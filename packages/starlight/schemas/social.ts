@@ -38,6 +38,9 @@ export const socialLinks = [
 	'nostr',
 	'backstage',
 	'farcaster',
+	'confluence',
+	'jira',
+	'storybook',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -91,6 +94,9 @@ export const SocialLinksSchema = () =>
 					nostr: 'Nostr',
 					backstage: 'Backstage',
 					farcaster: 'Farcaster',
+					confluence: 'Confluence',
+					jira: 'Jira',
+					storybook: 'Storybook',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
