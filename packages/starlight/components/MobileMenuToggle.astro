@@ -10,7 +10,8 @@ import Icon from '../user-components/Icon.astro';
 		aria-controls="starlight__sidebar"
 		class="sl-flex md:sl-hidden"
 	>
-		<Icon name="bars" />
+		<Icon name="bars" class="open-menu" />
+		<Icon name="close" class="close-menu" />
 	</button>
 </starlight-menu-button>
 
@@ -67,18 +68,17 @@ import Icon from '../user-components/Icon.astro';
 		cursor: pointer;
 	}
 
-	[aria-expanded='true'] button {
-		background-color: var(--sl-color-gray-2);
-		box-shadow: none;
+	[aria-expanded='true'] button .open-menu {
+		display: none;
+	}
+
+	:not([aria-expanded='true']) button .close-menu {
+		display: none;
 	}
 
 	:global([data-theme='light']) button {
 		background-color: var(--sl-color-black);
 		color: var(--sl-color-white);
-	}
-
-	:global([data-theme='light']) [aria-expanded='true'] button {
-		background-color: var(--sl-color-gray-5);
 	}
 </style>
 
