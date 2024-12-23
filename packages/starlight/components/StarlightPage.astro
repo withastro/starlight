@@ -1,4 +1,5 @@
 ---
+import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps as Props,
@@ -7,13 +8,10 @@ import Page from './Page.astro';
 
 export type StarlightPageProps = Props;
 
-// TODO: This is a bit tricky to solve.
-// We can’t apply other middleware transformations to route data here, so that makes
-// the `<StarlightPage>` behaviour quite different from regular pages.
-Astro.locals.starlightRoute = await generateStarlightPageRouteData({
-	props: Astro.props,
-	url: Astro.url,
-});
+await attachRouteDataAndRunMiddleware(
+	Astro,
+	await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url })
+);
 ---
 
 <Page><slot /></Page>
