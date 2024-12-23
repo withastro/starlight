@@ -11,7 +11,6 @@ import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { docsSchema } from '../schema';
 import type { Prettify, RemoveIndexSignature } from './types';
-import { DeprecatedLabelsPropProxy } from './i18n';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import type { StarlightConfig, StarlightUserConfig } from './user-config';
 
@@ -147,7 +146,6 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: DeprecatedLabelsPropProxy,
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,

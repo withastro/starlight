@@ -91,8 +91,6 @@ export interface StarlightRouteData extends Route {
 	lastUpdated: Date | undefined;
 	/** URL object for the address where this page can be edited if enabled. */
 	editUrl: URL | undefined;
-	/** @deprecated Use `Astro.locals.t()` instead. */
-	labels: Record<string, never>;
 	/** An Astro component to render the current page’s content if this route is a Markdown page. */
 	Content?: RenderResult['Content'];
 }

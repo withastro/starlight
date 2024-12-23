@@ -14,7 +14,7 @@ import type {
 } from './types';
 import { formatPath } from '../format-path';
 import { useTranslations } from '../translations';
-import { BuiltInDefaultLocale, DeprecatedLabelsPropProxy } from '../i18n';
+import { BuiltInDefaultLocale } from '../i18n';
 import { getEntry, render } from 'astro:content';
 import { getCollectionPathFromRoot } from '../collection';
 
@@ -51,7 +51,6 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
-		labels: DeprecatedLabelsPropProxy,
 	};
 }
 
