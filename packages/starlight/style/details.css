@@ -1,0 +1,25 @@
+details {
+	interpolate-size: allow-keywords;
+}
+
+details::details-content {
+	block-size: 0;
+	opacity: 0;
+	transform: translateY(-5px);
+}
+
+details[open]::details-content {
+	block-size: auto;
+	opacity: 1;
+	transform: translateY(0px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	details::details-content {
+		transition:
+		block-size 200ms ease-in-out,
+		content-visibility 200ms allow-discrete ease-in-out,
+		opacity 200ms ease-in-out,
+		transform 200ms ease-in-out;
+	}
+}
