@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.30.4
+
+### Patch Changes
+
+- [#2747](https://github.com/withastro/starlight/pull/2747) [`474c27e`](https://github.com/withastro/starlight/commit/474c27e28d79794ac78d36e3384f0c0da6f2dfed) Thanks [@bbag](https://github.com/bbag)! - Ensures `<Tab>` component toggling is stable when smooth scrolling is enabled via custom CSS
+
+- [#2740](https://github.com/withastro/starlight/pull/2740) [`0e169c9`](https://github.com/withastro/starlight/commit/0e169c9fd9fbfc16d86225db6b00448edf39ffad) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing Pagefind to be disabled using the `pagefind` frontmatter field.
+
+- [#2732](https://github.com/withastro/starlight/pull/2732) [`a10b466`](https://github.com/withastro/starlight/commit/a10b46680810882b029dd1d578cc86e22bc97af5) Thanks [@Sidnioulz](https://github.com/Sidnioulz)! - Adds Storybook, Confluence and Jira social icons
+
 ## 0.30.3
 
 ### Patch Changes
