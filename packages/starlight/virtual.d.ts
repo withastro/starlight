@@ -8,6 +8,8 @@ declare module 'virtual:starlight/plugin-translations' {
 	export default PluginTranslations;
 }
 
+// TODO: Move back to `virtual-internal.d.ts` when possible. For example, when dropping support for
+// legacy collections, `utils/translations.ts` would no longer need to import project context.
 declare module 'virtual:starlight/project-context' {
 	const ProjectContext: {
 		root: string;
