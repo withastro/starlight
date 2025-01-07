@@ -48,19 +48,24 @@ Encontre todas as opções disponíveis na referência sobre [configuração do 
 
 ### Configure coleções de conteúdos
 
-O Starlight é construído com base nas [coleções de conteúdos](https://docs.astro.build/pt-pt/guides/content-collections/) do Astro, que são configuradas no arquivo `src/content/config.ts`.
+O Starlight é construído com base nas [coleções de conteúdos](https://docs.astro.build/pt-pt/guides/content-collections/) do Astro, que são configuradas no arquivo `src/content.config.ts`.
 
-Crie ou atualize o arquivo de configuração de conteúdo, adicionando uma coleção `docs` que usa o esquema `docsSchema` do Starlight:
+Crie ou atualize o arquivo de configuração de conteúdo, adicionando uma coleção `docs` que usa os esquemas `docsLoader` e `docsSchema` do Starlight:
 
-```js ins={3,6}
+```js ins={3-4,7}
 // src/content/config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
+
+O Starlight tambem suporta a [opção `legacy.collections`](https://docs.astro.build/pt-pt/reference/legacy-flags/) onde as coleções são tratadas utilizando a implementação
+anterior das coleções de conteúdo.
+Isto é útil se tiver um projeto Astro existente e não pode, de momento, efetuar alterações às coleções para utilizar um `loader`.
 
 ### Adicione conteúdo
 
@@ -84,11 +89,11 @@ Veja todas as opções disponíveis na [referência do frontmatter](/pt-pt/refer
 
 ## Dicas para sites existentes
 
-Se você tiver um projeto Astro existente, pode utilizar o Starlight para adicionar rapidamente uma seção de documentação ao seu site.
+Se você tiver um projeto Astro existente, pode utilizar o Starlight para adicionar rapidamente uma secção de documentação ao seu site.
 
-### Utilize o Starlight como um subcaminho
+### Utilize o Starlight como um sub-caminho
 
-Para adicionar todas as páginas do Starlight num subcaminho, coloque todo o conteúdo da sua documentação dentro de um subdiretório de `src/content/docs/`.
+Para adicionar todas as páginas do Starlight num sub-caminho, coloque todo o conteúdo da sua documentação dentro de um sub-diretório de `src/content/docs/`.
 
 Por exemplo, se todas as páginas do Starlight devem começar com `/guias/`, adicione o seu conteúdo no diretório `src/content/docs/guias/`:
 
@@ -115,4 +120,4 @@ Para habilitar o SSR siga o guia [“Adaptadores de renderização a pedido”](
 adicione um adaptador ao seu projeto Starlight.
 
 Atualmente as páginas de documentação geradas pelo Starlight são sempre pré-renderizadas independentemente do modo de geração do projeto.
-Para desabilitar a pré-renderização das suas páginas Starlight coloque a [opção de config `prerender`](/reference/configuration/#prerender) a `false`.
+Para desabilitar a pré-renderização das suas páginas Starlight coloque a [opção de config `prerender`](/pt-pt/reference/configuration/#prerender) a `false`.
