@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.30.5
+
+### Patch Changes
+
+- [#2757](https://github.com/withastro/starlight/pull/2757) [`e7b0e74`](https://github.com/withastro/starlight/commit/e7b0e742dffb7c4a8f4619297e4bd6e5a8015edb) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a UI string translation issue for languages with a region subtag.
+
+- [#2760](https://github.com/withastro/starlight/pull/2760) [`aec9edd`](https://github.com/withastro/starlight/commit/aec9edd14827a45fbc92d82db83dd713571e0c2d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds 5 new icons: `left-caret`, `up-arrow`, `down-arrow`, `download`, and `cloud-download`.
+
 ## 0.30.4
 
 ### Patch Changes
