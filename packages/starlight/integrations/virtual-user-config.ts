@@ -100,6 +100,7 @@ export function vitePluginStarlightUserConfig(
 			} catch {}
 			export const collections = userCollections;`,
 		'virtual:starlight/plugin-translations': `export default ${JSON.stringify(pluginTranslations)}`,
+		'virtual:starlight/pagefind-config': `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind || {})}`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 
