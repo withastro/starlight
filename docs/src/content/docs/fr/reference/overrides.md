@@ -69,11 +69,14 @@ Pour les sites multilingues, cette valeur inclura la locale actuelle, par exempl
 
 Le slug de la page généré à partir du nom du fichier du contenu.
 
+Cette propriété est dépréciée et sera supprimée dans une version future de Starlight.
+Migrez vers la nouvelle API Content Layer en utilisant le [`docsLoader` de Starlight](/fr/manual-setup/#configurer-les-collections-de-contenu) et utilisez la propriété [`id`](#id) à la place.
+
 #### `id`
 
 **Type :** `string`
 
-L'identifiant unique de cette page basé sur le nom du fichier du contenu.
+Le slug de cette page ou l'identifiant unique de cette page basé sur le nom du fichier du contenu si l'option [`legacy.collections`](https://docs.astro.build/fr/reference/legacy-flags/#collections) est utilisée.
 
 #### `isFallback`
 

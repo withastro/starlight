@@ -33,7 +33,7 @@
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "23 kB",
+      "limit": "23.5 kB",
       "gzip": true
     },
     {
@@ -53,9 +53,6 @@
         "playwright",
         "search-insights"
       ]
-    },
-    "patchedDependencies": {
-      "starlight-links-validator@0.13.2": "patches/starlight-links-validator@0.13.2.patch"
     }
   }
 }

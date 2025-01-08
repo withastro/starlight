@@ -29,7 +29,7 @@ const { siteTitle, siteTitleHref } = Astro.props;
 			</>
 		)
 	}
-	<span class:list={{ 'sr-only': config.logo?.replacesTitle }}>
+	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no">
 		{siteTitle}
 	</span>
 </a>

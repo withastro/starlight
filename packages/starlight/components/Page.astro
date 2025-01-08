@@ -38,13 +38,16 @@ const pagefindEnabled =
 	!Astro.props.entry.slug.endsWith('/404') &&
 	Astro.props.entry.data.pagefind !== false;
 
-const dataAttributes: DOMStringMap = { 'data-theme': 'dark' };
-if (Boolean(Astro.props.toc)) dataAttributes['data-has-toc'] = '';
-if (Astro.props.hasSidebar) dataAttributes['data-has-sidebar'] = '';
-if (Boolean(Astro.props.entry.data.hero)) dataAttributes['data-has-hero'] = '';
+const htmlDataAttributes: DOMStringMap = { 'data-theme': 'dark' };
+if (Boolean(Astro.props.toc)) htmlDataAttributes['data-has-toc'] = '';
+if (Astro.props.hasSidebar) htmlDataAttributes['data-has-sidebar'] = '';
+if (Boolean(Astro.props.entry.data.hero)) htmlDataAttributes['data-has-hero'] = '';
+
+const mainDataAttributes: DOMStringMap = {};
+if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 ---
 
-<html lang={Astro.props.lang} dir={Astro.props.dir} {...dataAttributes}>
+<html lang={Astro.props.lang} dir={Astro.props.dir} {...htmlDataAttributes}>
 	<head>
 		<Head {...Astro.props} />
 		<link rel="stylesheet" href={printHref} media="print" />
@@ -85,7 +88,7 @@ if (Boolean(Astro.props.entry.data.hero)) dataAttributes['data-has-hero'] = '';
 			<TwoColumnContent {...Astro.props}>
 				<PageSidebar slot="right-sidebar" {...Astro.props} />
 				<main
-					data-pagefind-body={pagefindEnabled}
+					{...mainDataAttributes}
 					lang={Astro.props.entryMeta.lang}
 					dir={Astro.props.entryMeta.dir}
 				>
