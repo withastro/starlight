@@ -213,7 +213,7 @@ entry: {
 
 #### `TwoColumnContent`
 
-**默认组件：** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**默认组件：** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
 **命名插槽：** `right-sidebar`
 
 包在主内容列和右侧栏 (目录) 外的布局组件。
