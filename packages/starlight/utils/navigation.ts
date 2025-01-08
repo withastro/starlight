@@ -14,7 +14,12 @@ import { getCollectionPathFromRoot } from './collection';
 import { createPathFormatter } from './createPathFormatter';
 import { formatPath } from './format-path';
 import { BuiltInDefaultLocale, pickLang } from './i18n';
-import { ensureLeadingSlash, ensureTrailingSlash, stripLeadingAndTrailingSlashes } from './path';
+import {
+	ensureLeadingSlash,
+	ensureTrailingSlash,
+	stripExtension,
+	stripLeadingAndTrailingSlashes,
+} from './path';
 import { getLocaleRoutes, routes } from './routing';
 import type {
 	SidebarGroup,
@@ -491,12 +496,6 @@ function applyPrevNextLinkConfig(
 	}
 	// Otherwise, if the global config is enabled, return the generated link if any.
 	return paginationEnabled ? link : undefined;
-}
-
-/** Remove the extension from a path. */
-function stripExtension(path: string) {
-	const periodIndex = path.lastIndexOf('.');
-	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
 }
 
 /** Get a sidebar badge for a given item. */

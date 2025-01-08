@@ -36,13 +36,16 @@ const pagefindEnabled =
 	!starlightRoute.entry.slug.endsWith('/404') &&
 	starlightRoute.entry.data.pagefind !== false;
 
-const dataAttributes: DOMStringMap = { 'data-theme': 'dark' };
-if (Boolean(starlightRoute.toc)) dataAttributes['data-has-toc'] = '';
-if (starlightRoute.hasSidebar) dataAttributes['data-has-sidebar'] = '';
-if (Boolean(starlightRoute.entry.data.hero)) dataAttributes['data-has-hero'] = '';
+const htmlDataAttributes: DOMStringMap = { 'data-theme': 'dark' };
+if (Boolean(starlightRoute.toc)) htmlDataAttributes['data-has-toc'] = '';
+if (starlightRoute.hasSidebar) htmlDataAttributes['data-has-sidebar'] = '';
+if (Boolean(starlightRoute.entry.data.hero)) htmlDataAttributes['data-has-hero'] = '';
+        
+const mainDataAttributes: DOMStringMap = {};
+if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 ---
 
-<html lang={starlightRoute.lang} dir={starlightRoute.dir} {...dataAttributes}>
+<html lang={starlightRoute.lang} dir={starlightRoute.dir} {...htmlDataAttributes}>
 	<head>
 		<Head />
 		<style>
@@ -82,7 +85,7 @@ if (Boolean(starlightRoute.entry.data.hero)) dataAttributes['data-has-hero'] = '
 			<TwoColumnContent>
 				<PageSidebar slot="right-sidebar" />
 				<main
-					data-pagefind-body={pagefindEnabled}
+					{...mainDataAttributes}
 					lang={starlightRoute.entryMeta.lang}
 					dir={starlightRoute.entryMeta.dir}
 				>
