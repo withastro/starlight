@@ -76,7 +76,7 @@ Starlight 会将以下参数传递给你的自定义组件。
 
 **类型：** `string`
 
-当前页面的 slug 或者如果你正在使用 [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections)，那么就是基于内容文件名的页面的唯一 ID。
+当前页面的 slug 或者如果你正在使用 [`legacy.collections`](https://docs.astro.build/zh-cn/reference/legacy-flags/#collections)，那么就是基于内容文件名的页面的唯一 ID。
 
 #### `isFallback`
 
