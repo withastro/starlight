@@ -198,7 +198,7 @@ entry: {
 
 #### `PageFrame`
 
-**默认组件：** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**默认组件：** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
 **命名插槽：** `header`, `sidebar`
 
 包在绝大部分页面内容外的布局组件。
