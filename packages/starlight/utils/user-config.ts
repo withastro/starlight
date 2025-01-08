@@ -238,7 +238,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 				: config.pagefind,
 	}))
 	.refine((config) => !(!config.prerender && config.pagefind), {
-		message: 'Pagefind search is not support with prerendering disabled.',
+		message: 'Pagefind search is not supported with prerendering disabled.',
 	})
 	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});
