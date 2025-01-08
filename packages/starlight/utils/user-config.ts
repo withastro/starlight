@@ -5,12 +5,12 @@ import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
+import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
 import { SidebarItemSchema } from '../schemas/sidebar';
+import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
-import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { BuiltInDefaultLocale } from './i18n';
-import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
