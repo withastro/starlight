@@ -193,6 +193,7 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
    ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
    // src/content.config.ts
+   import { defineCollection } from 'astro:content';
    import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -283,7 +284,7 @@ export const collections = {
 Вы можете получить доступ к [встроенным строкам пользовательского интерфейса](/ru/guides/i18n/#перевод-интерфейса-starlight) Starlight, а также к [пользовательским](/ru/guides/i18n/#расширение-схемы-перевода) и [предоставляемым плагинами](/ru/reference/plugins/#injecttranslations) строкам пользовательского интерфейса через единый API на базе [i18next](https://www.i18next.com/).
 Это включает поддержку таких функций, как [интерполяция](https://www.i18next.com/translation-function/interpolation) и [плюрализация](https://www.i18next.com/translation-function/plurals).
 
-В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/ru/reference/api-reference/#astrolocals) в виде `Astro.locals.t`:
+В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/en/reference/api-reference/#locals) в виде `Astro.locals.t`:
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
@@ -291,7 +292,7 @@ export const collections = {
 </p>
 ```
 
-Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/ru/reference/api-reference/#contextlocals):
+Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/en/reference/api-reference/#locals):
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
@@ -392,7 +393,7 @@ const arabicDirection = Astro.locals.t.dir('ar');
 
 ## Доступ к текущей локали
 
-Вы можете использовать [`Astro.currentLocale`](https://docs.astro.build/ru/reference/api-reference/#astrocurrentlocale) для получения текущей локали в компонентах `.astro`.
+Вы можете использовать [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#currentlocale) для получения текущей локали в компонентах `.astro`.
 
 Следующий пример считывает текущую локаль и использует её с помощью хелпера [`getRelativeLocaleUrl()`](https://docs.astro.build/ru/reference/modules/astro-i18n/#getrelativelocaleurl) для генерации ссылки на страницу «О сайте» на текущем языке:
 
