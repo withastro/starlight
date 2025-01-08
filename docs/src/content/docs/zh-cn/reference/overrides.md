@@ -69,11 +69,14 @@ Starlight 会将以下参数传递给你的自定义组件。
 
 从内容文件名生成的页面 slug。
 
+此属性已废弃，将在未来的 Starlight 版本中移除。
+通过使用 [Starlight 的 `docsLoader`](/zh-cn/manual-setup/#配置内容集合) 迁移到新的内容层（Content Layer） API，并使用 [`id`](#id) 属性替代。
+
 #### `id`
 
 **类型：** `string`
 
-基于内容文件名的页面的唯一 ID。
+当前页面的 slug 或者如果你正在使用 [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections)，那么就是基于内容文件名的页面的唯一 ID。
 
 #### `isFallback`
 
@@ -103,7 +106,7 @@ entry: {
 }
 ```
 
-在 [Astro 的集合条目类型](https://docs.astro.build/zh-cn/reference/api-reference/#集合条目类型)参考中了解更多关于此对象的信息。
+在 [Astro 的集合条目类型](https://docs.astro.build/zh-cn/reference/modules/astro-content/#collectionentry)参考中了解更多关于此对象的信息。
 
 #### `sidebar`
 
@@ -196,6 +199,7 @@ entry: {
 #### `PageFrame`
 
 **默认组件：** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**命名插槽：** `header`, `sidebar`
 
 包在绝大部分页面内容外的布局组件。
 默认实现提供了头部—侧边栏—主内容的布局，并包含 `header` 和 `sidebar` 命名插槽以及主内容的默认插槽。
@@ -210,6 +214,7 @@ entry: {
 #### `TwoColumnContent`
 
 **默认组件：** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**命名插槽：** `right-sidebar`
 
 包在主内容列和右侧栏 (目录) 外的布局组件。
 默认实现实现了在单列、小视口布局和两列、较大视口布局之间的切换。
