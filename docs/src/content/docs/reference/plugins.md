@@ -50,7 +50,7 @@ A plugin must provide a unique name that describes it. The name is used when [lo
 Hooks are functions which Starlight calls to run plugin code at specific times.
 
 To get the type of a hook's arguments, use the `HookParameters` utility type and pass in the hook name.
-In the following example, the `configSetup` function `options` parameter is typed to match the parameters of the `config:setup` hook:
+In the following example, the `options` parameter is typed to match the arguments passed to the `config:setup` hook:
 
 ```ts
 import type { HookParameters } from '@astrojs/starlight/types';
@@ -62,11 +62,11 @@ function configSetup(options: HookParameters['config:setup']) {
 
 ### `i18n:setup`
 
-Plugin internationalization setup function called when Starlight is initialized (during the [`astro:config:setup`](https://docs.astro.build/en/reference/integrations-reference/#astroconfigsetup) integration hook).
-The `i18n:setup` hook can be used to inject translations strings for the plugin in various locales.
-These translations will be available in the [`config:setup`](#configsetup) hook and plugin UI.
+Plugin internationalization setup function called when Starlight is initialized.
+The `i18n:setup` hook can be used to inject translation strings so a plugin can support different locales.
+These translations will be available via [`useTranslations()`](#usetranslations) in the `config:setup` hook and in UI components via [`Astro.locals.t()`](/guides/i18n/#using-ui-translations).
 
-This hook is called with the following options:
+The `i18n:setup` hook is called with the following options:
 
 #### `injectTranslations`
 
