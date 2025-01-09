@@ -114,6 +114,13 @@
 		break-inside: avoid;
 	}
 
+	/* user-components/LinkButton.astro */
+	.sl-link-button.primary {
+		background: transparent !important;
+		border-color: var(--sl-color-white) !important;
+		color: var(--sl-color-white) !important;
+	}
+
 	/* user-components/Tabs.astro */
 	starlight-tabs {
 		break-inside: avoid;
