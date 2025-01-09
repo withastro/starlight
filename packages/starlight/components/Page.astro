@@ -50,7 +50,6 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 <html lang={Astro.props.lang} dir={Astro.props.dir} {...htmlDataAttributes}>
 	<head>
 		<Head {...Astro.props} />
-		<link rel="stylesheet" href={printHref} media="print" />
 		<style>
 			html:not([data-has-toc]) {
 				--sl-mobile-toc-height: 0rem;
@@ -78,6 +77,7 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 			}
 		</style>
 		<ThemeProvider {...Astro.props} />
+		<link rel="stylesheet" href={printHref} media="print" />
 	</head>
 	<body>
 		<SkipLink {...Astro.props} />
