@@ -53,6 +53,7 @@
 		--sl-shadow-lg: none;
 	}
 
+	/* Utility classes for controlling element visibility when printing. */
 	.print\:hidden {
 		display: none !important;
 	}
@@ -63,7 +64,7 @@
 		display: block !important;
 	}
 
-	/* index.astro */
+	/* Page layout tweaks. */
 	main {
 		padding-bottom: 0 !important;
 	}
@@ -72,6 +73,19 @@
 	}
 	.content-panel + .content-panel {
 		border: 0 !important;
+	}
+	/* layout/PageFrame.astro */
+	.page > header {
+		position: relative !important;
+	}
+	.page > .main-frame {
+		padding-top: 0;
+		padding-inline-start: 0;
+	}
+	/* layout/TwoColumnContent.astro */
+	.main-pane {
+		--sl-sidebar-width: 0px !important;
+		--sl-content-width: 100% !important;
 	}
 
 	/* components/MarkdownContent.astro */
@@ -82,7 +96,6 @@
 		orphans: 2;
 		widows: 2;
 	}
-
 	.sl-markdown-content pre {
 		overflow-x: hidden !important;
 		white-space: pre-wrap !important;
@@ -90,7 +103,6 @@
 	.sl-markdown-content .expressive-code {
 		break-inside: avoid;
 	}
-
 	/* Inline code */
 	.sl-markdown-content code:not(:where(.not-content *)) {
 		background-color: transparent !important;
@@ -124,20 +136,5 @@
 	/* user-components/Tabs.astro */
 	starlight-tabs {
 		break-inside: avoid;
-	}
-
-	/* layout/PageFrame.astro */
-	.page > header {
-		position: relative !important;
-	}
-	.page > .main-frame {
-		padding-top: 0;
-		padding-inline-start: 0;
-	}
-
-	/* layout/TwoColumnContent.astro */
-	.main-pane {
-		--sl-sidebar-width: 0px !important;
-		--sl-content-width: 100% !important;
 	}
 }
