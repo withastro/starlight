@@ -64,9 +64,7 @@ export default function StarlightIntegration(
 					config.i18n
 				);
 
-				const integrations = pluginResult.integrations;
-				const useTranslations = pluginResult.useTranslations;
-				const absolutePathToLang = pluginResult.absolutePathToLang;
+				const { integrations, useTranslations, absolutePathToLang } = pluginResult;
 				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
 
