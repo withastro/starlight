@@ -89,20 +89,21 @@ Escolher um alojamento que utiliza energia renovável significará menos emissõ
 Está curioso para comparar com os outros frameworks de documentação?
 Estes testes realizados com o [Website Carbon Calculator][wcc] comparam páginas semelhantes construídas com diferentes ferramentas.
 
-| Framework                   | CO₂ por visita da página |
-| --------------------------- | ------------------------ |
-| [Starlight][sl-carbon]      | 0.01g                    |
-| [VitePress][vp-carbon]      | 0.05g                    |
-| [Docus][dc-carbon]          | 0.05g                    |
-| [Sphinx][sx-carbon]         | 0.07g                    |
-| [MkDocs][mk-carbon]         | 0.10g                    |
-| [Nextra][nx-carbon]         | 0.11g                    |
-| [docsify][dy-carbon]        | 0.11g                    |
-| [Docusaurus][ds-carbon]     | 0.24g                    |
-| [Read the Docs][rtd-carbon] | 0.24g                    |
-| [GitBook][gb-carbon]        | 0.71g                    |
+| Framework                   | CO₂ per page visit | Rating |
+| --------------------------- | ------------------ | :----: |
+| [Starlight][sl-carbon]      | 0.01g              |   A+   |
+| [Read the Docs][rtd-carbon] | 0.05g              |   A+   |
+| [Sphinx][sx-carbon]         | 0.06g              |   A+   |
+| [VitePress][vp-carbon]      | 0.07g              |   A+   |
+| [Docus][dc-carbon]          | 0.09g              |   A+   |
+| [docsify][dy-carbon]        | 0.10g              |   A    |
+| [Nextra][nx-carbon]         | 0.11g              |   A    |
+| [MkDocs][mk-carbon]         | 0.19g              |   B    |
+| [Docusaurus][ds-carbon]     | 0.21g              |   B    |
+| [GitBook][gb-carbon]        | 0.43g              |   C    |
+| [Mintlify][mt-carbon]       | 1.22g              |   F    |
 
-<small>Dados recolhidos a 14 de Maio de 2023. Clique num dos links para ver os valores atualizados.</small>
+<small>Dados recolhidos a 22 de Julho de 2024. Clique num dos links para ver os valores atualizados.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -114,6 +115,7 @@ Estes testes realizados com o [Website Carbon Calculator][wcc] comparam páginas
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Mais recursos
 
@@ -135,6 +137,6 @@ Estes testes realizados com o [Website Carbon Calculator][wcc] comparam páginas
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
 [http]: https://httparchive.org/reports/state-of-the-web
-[assets]: https://docs.astro.build/pt-pt/guides/assets/
+[assets]: https://docs.astro.build/en/guides/images/
 [islands]: https://docs.astro.build/pt-pt/concepts/islands/
 [wcc]: https://www.websitecarbon.com/
