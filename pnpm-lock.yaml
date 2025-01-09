@@ -21,8 +21,8 @@ importers:
         specifier: ^11.1.6
         version: 11.1.6(size-limit@11.1.6)
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -40,7 +40,7 @@ importers:
     dependencies:
       '@astro-community/astro-embed-youtube':
         specifier: ^0.5.6
-        version: 0.5.6(astro@5.1.1)
+        version: 0.5.6(astro@5.1.4)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
@@ -51,8 +51,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       culori:
         specifier: ^4.0.1
         version: 4.0.1
@@ -79,8 +79,8 @@ importers:
         specifier: ^0.30.5
         version: link:../../packages/starlight
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -89,7 +89,7 @@ importers:
     dependencies:
       '@astrojs/markdoc':
         specifier: ^0.12.4
-        version: 0.12.4(astro@5.1.1)
+        version: 0.12.4(astro@5.1.4)
       '@astrojs/starlight':
         specifier: ^0.30.5
         version: link:../../packages/starlight
@@ -97,8 +97,8 @@ importers:
         specifier: ^0.2.0
         version: link:../../packages/markdoc
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -113,10 +113,10 @@ importers:
         version: link:../../packages/tailwind
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.1)(tailwindcss@3.4.14)
+        version: 5.1.4(astro@5.1.4)(tailwindcss@3.4.14)
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -154,7 +154,7 @@ importers:
     devDependencies:
       '@astrojs/markdoc':
         specifier: ^0.12.4
-        version: 0.12.4(astro@5.1.1)
+        version: 0.12.4(astro@5.1.4)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../starlight
@@ -166,7 +166,7 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^4.0.3
-        version: 4.0.3(astro@5.1.1)
+        version: 4.0.3(astro@5.1.4)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
@@ -184,7 +184,7 @@ importers:
         version: 4.0.4
       astro-expressive-code:
         specifier: ^0.38.3
-        version: 0.38.3(astro@5.1.1)
+        version: 0.38.3(astro@5.1.4)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -250,8 +250,8 @@ importers:
         specifier: 2.1.6
         version: 2.1.6(vitest@2.1.6)
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       linkedom:
         specifier: ^0.18.4
         version: 0.18.4
@@ -265,8 +265,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/custom src-dir:
     dependencies:
@@ -274,8 +274,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/git:
     dependencies:
@@ -283,8 +283,8 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/legacy-collection-config-file:
     dependencies:
@@ -292,20 +292,20 @@ importers:
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
       '@astrojs/node':
         specifier: ^9.0.0
-        version: 9.0.0(astro@5.1.1)
+        version: 9.0.0(astro@5.1.4)
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../../..
       astro:
-        specifier: ^5.1.1
-        version: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
 
   packages/tailwind:
     devDependencies:
@@ -476,12 +476,12 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
-  /@astro-community/astro-embed-youtube@0.5.6(astro@5.1.1):
+  /@astro-community/astro-embed-youtube@0.5.6(astro@5.1.4):
     resolution: {integrity: sha512-/mRfCl/eTBUz0kmjD1psOy0qoDDBorVp0QumUacjFcIkBullYtbeFQ2ZGZ+3N/tA6cR/OIyzr2QA4dQXlY6USg==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta || ^4.0.0-beta || ^5.0.0-beta
     dependencies:
-      astro: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       lite-youtube-embed: 0.3.3
     dev: false
 
@@ -543,7 +543,7 @@ packages:
       - typescript
     dev: true
 
-  /@astrojs/markdoc@0.12.4(astro@5.1.1):
+  /@astrojs/markdoc@0.12.4(astro@5.1.4):
     resolution: {integrity: sha512-zED/R3nRj939pFUtpq1gFmwjPj/j6e/cUYLDr6Jgo0U3qjy+ua8r13sN4Rr6GG0/Dgax6BcAQ2AfANoElSPrRw==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     peerDependencies:
@@ -553,7 +553,7 @@ packages:
       '@astrojs/markdown-remark': 6.0.1
       '@astrojs/prism': 3.2.0
       '@markdoc/markdoc': 0.4.0
-      astro: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       esbuild: 0.21.5
       github-slugger: 2.0.0
       htmlparser2: 9.1.0
@@ -587,7 +587,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@4.0.3(astro@5.1.1):
+  /@astrojs/mdx@4.0.3(astro@5.1.4):
     resolution: {integrity: sha512-8HcuyNG/KgYUAQWVzKFkboXcTOBCW6aQ0WK0Er/iSmVSF0y3yimg4/3QSt+Twv9dogpwIHL+E8iBJKqieFv4+g==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     peerDependencies:
@@ -596,7 +596,7 @@ packages:
       '@astrojs/markdown-remark': 6.0.1
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.3
@@ -611,12 +611,12 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/node@9.0.0(astro@5.1.1):
+  /@astrojs/node@9.0.0(astro@5.1.4):
     resolution: {integrity: sha512-3h/5kFZvpuo+chYAjj75YhtRUxfquxEJrpZRRC7TdiMGp2WhLp2us4VXm2mjezJp/zHKotW2L3qgp0P2ujQ0xw==}
     peerDependencies:
       astro: ^5.0.0
     dependencies:
-      astro: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       send: 1.1.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -637,13 +637,13 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /@astrojs/tailwind@5.1.4(astro@5.1.1)(tailwindcss@3.4.14):
+  /@astrojs/tailwind@5.1.4(astro@5.1.4)(tailwindcss@3.4.14):
     resolution: {integrity: sha512-EJ3uoTZZr0RYwTrVS2HgYN0+VbXvg7h87AtwpD5OzqS3GyMwRmzfOwHfORTxoWGQRrY9k/Fi+Awk60kwpvRL5Q==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0 || ^5.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       autoprefixer: 10.4.20(postcss@8.4.49)
       postcss: 8.4.49
       postcss-load-config: 4.0.2(postcss@8.4.49)
@@ -2530,17 +2530,17 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-expressive-code@0.38.3(astro@5.1.1):
+  /astro-expressive-code@0.38.3(astro@5.1.4):
     resolution: {integrity: sha512-Tvdc7RV0G92BbtyEOsfJtXU35w41CkM94fOAzxbQP67Wj5jArfserJ321FO4XA7WG9QMV0GIBmQq77NBIRDzpQ==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
     dependencies:
-      astro: 5.1.1(@types/node@18.16.19)(typescript@5.6.3)
+      astro: 5.1.4(@types/node@18.16.19)(typescript@5.6.3)
       rehype-expressive-code: 0.38.3
     dev: false
 
-  /astro@5.1.1(@types/node@18.16.19)(typescript@5.6.3):
-    resolution: {integrity: sha512-prpWC2PRs4P3FKQg6gZaU+VNMqbZi5pDvORGB2nrjfRjkrvF6/l4BqhvkJ6YQ0Ohm5rIMVz8ljgaRI77mLHbwg==}
+  /astro@5.1.4(@types/node@18.16.19)(typescript@5.6.3):
+    resolution: {integrity: sha512-V0XD2GlwUweCROYv+QKs97p7I1cZ6mYycU3VKGbJv2l55suTTy766F/MtHgoM/VAFdPBn488MUvDAYx85gf/Zw==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     dependencies:
