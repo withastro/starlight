@@ -190,7 +190,7 @@
     "vitest": "2.1.6"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.3",
+    "@astrojs/mdx": "^4.0.4",
     "@astrojs/sitemap": "^3.2.1",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",
