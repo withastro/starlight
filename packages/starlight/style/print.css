@@ -47,13 +47,10 @@
 
 		--sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 
-		/* Shadows (light mode) */
-		--sl-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06), 0px 2px 1px hsla(0, 0%, 0%, 0.06);
-		--sl-shadow-md: 0px 8px 4px hsla(0, 0%, 0%, 0.03), 0px 5px 2px hsla(0, 0%, 0%, 0.03),
-			0px 3px 2px hsla(0, 0%, 0%, 0.06), 0px 1px 1px hsla(0, 0%, 0%, 0.06);
-		--sl-shadow-lg: 0px 25px 7px rgba(0, 0, 0, 0.01), 0px 16px 6px hsla(0, 0%, 0%, 0.03),
-			0px 9px 5px hsla(223, 13%, 10%, 0.08), 0px 4px 4px hsla(0, 0%, 0%, 0.16),
-			0px 4px 2px hsla(0, 0%, 0%, 0.04);
+		/* Disable shadows when printing. */
+		--sl-shadow-sm: none;
+		--sl-shadow-md: none;
+		--sl-shadow-lg: none;
 	}
 
 	.print\:hidden {
