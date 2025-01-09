@@ -4,7 +4,6 @@ import { getSidebar } from '../../utils/navigation';
 import { runPlugins } from '../../utils/plugins';
 import { createTestPluginContext } from '../test-plugin-utils';
 import pkg from '../../package.json';
-import starlightDocSearch from '../../../docsearch/index';
 
 test('reads and updates a configuration option', () => {
 	expect(config.title).toMatchObject({ en: 'Plugins - Custom' });
