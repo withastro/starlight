@@ -25,6 +25,8 @@ export function testFactory(fixturePath: string) {
 		} = {}
 	): Promise<Server> {
 		const { mode } = options;
+		// Reset NODE_ENV so it can be re-set by `dev()` or `build()`.
+		delete process.env.NODE_ENV;
 		if (mode === 'dev') {
 			return await dev({
 				logLevel: 'error',
