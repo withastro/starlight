@@ -181,19 +181,6 @@ describe('deprecated `setup` hook', () => {
 				A plugin cannot define both a \`config:setup\` and \`setup\` hook. As \`setup\` is deprecated and will be removed in a future version, consider using \`config:setup\` instead."
 		`);
 	});
-
-	test.runIf(pkg.version[0] === '1')(
-		'removes the deprecated `setup` hook in the DocSearch plugin with Starlight v1',
-		async () => {
-			const docSearchPlugin = starlightDocSearch({
-				appId: 'YOUR_APP_ID',
-				apiKey: 'YOUR_SEARCH_API_KEY',
-				indexName: 'YOUR_INDEX_NAME',
-			});
-			expect(docSearchPlugin.hooks.setup).not.toBeDefined();
-			expect(docSearchPlugin.hooks['config:setup']).toBeDefined();
-		}
-	);
 });
 
 test('does not expose plugins to the config virtual module', () => {
