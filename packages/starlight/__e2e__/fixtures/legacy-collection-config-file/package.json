@@ -4,6 +4,6 @@
   "private": true,
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
-    "astro": "^5.1.4"
+    "astro": "0.0.0-data-store-location-20250109131010"
   }
 }
