@@ -165,6 +165,7 @@
     "./props": "./props.ts",
     "./schema": "./schema.ts",
     "./loaders": "./loaders.ts",
+    "./route-data": "./route-data.ts",
     "./types": "./types.ts",
     "./expressive-code": {
       "types": "./expressive-code.d.ts",
