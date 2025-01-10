@@ -127,6 +127,10 @@
 		/* Remove title tab highlight. */
 		border-top: 0 !important;
 	}
+	.expressive-code .copy {
+		/* Ensure Expressive Code copy button is hidden when printing from touch devices. */
+		display: none !important;
+	}
 	/* Inline code */
 	.sl-markdown-content code:not(:where(.not-content *)) {
 		background-color: transparent !important;
