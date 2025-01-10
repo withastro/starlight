@@ -74,7 +74,7 @@
 	.content-panel + .content-panel {
 		border: 0 !important;
 	}
-	/* layout/PageFrame.astro */
+	/* components/PageFrame.astro */
 	.page > header {
 		position: relative !important;
 	}
@@ -82,7 +82,7 @@
 		padding-top: 0;
 		padding-inline-start: 0;
 	}
-	/* layout/TwoColumnContent.astro */
+	/* components/TwoColumnContent.astro */
 	.main-pane {
 		--sl-sidebar-width: 0px !important;
 		--sl-content-width: 100% !important;
