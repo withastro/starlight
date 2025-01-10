@@ -124,18 +124,19 @@ DocSearch 默认只提供了英语 UI 文本。
 
 <Steps>
 
-1. 在 `src/content/config.ts` 中给 Starlight 的 `i18n` 内容集合定义添加 DocSearch schema：
+1. 在 `src/content.config.ts` 中给 Starlight 的 `i18n` 内容集合定义添加 DocSearch schema：
 
-   ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
    	i18n: defineCollection({
-   		type: 'data',
+   		loader: i18nLoader(),
    		schema: i18nSchema({ extend: docSearchI18nSchema() }),
    	}),
    };

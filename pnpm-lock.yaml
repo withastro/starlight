@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  starlight-links-validator@0.13.2:
-    hash: uzxiecwrihwm4whxdfjvzfhjsq
-    path: patches/starlight-links-validator@0.13.2.patch
-
 importers:
 
   .:
@@ -75,13 +70,13 @@ importers:
         specifier: ^3.2.12
         version: 3.2.12
       starlight-links-validator:
-        specifier: ^0.13.2
-        version: 0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.2)
+        specifier: ^0.14.0
+        version: 0.14.0(@astrojs/starlight@packages+starlight)
 
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.30.2
+        specifier: ^0.30.5
         version: link:../../packages/starlight
       astro:
         specifier: ^5.0.2
@@ -96,7 +91,7 @@ importers:
         specifier: ^0.12.1
         version: 0.12.1(astro@5.0.2)
       '@astrojs/starlight':
-        specifier: ^0.30.2
+        specifier: ^0.30.5
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
         specifier: ^0.2.0
@@ -111,7 +106,7 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.30.2
+        specifier: ^0.30.5
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
@@ -2104,8 +2099,8 @@ packages:
     resolution: {integrity: sha512-H6qeTp03jrknklSn4bpT1/9+1xCAEIU2CnjcWPkicJy8A1SKuthanbvoHYMiv79/2W3Xn1XE4gfSJFzt2U3JSw==}
     dev: true
 
-  /@types/picomatch@2.3.3:
-    resolution: {integrity: sha512-Yll76ZHikRFCyz/pffKGjrCwe/le2CDwOP5F210KQo27kpRE46U2rDnzikNlVn6/ezH3Mhn46bJMTfeVTtcYMg==}
+  /@types/picomatch@3.0.1:
+    resolution: {integrity: sha512-1MRgzpzY0hOp9pW/kLRxeQhUWwil6gnrUYd3oEpeYBqp/FexhaCPv3F8LsYr47gtUU45fO2cm1dbwkSrHEo8Uw==}
     dev: true
 
   /@types/responselike@1.0.3:
@@ -3488,17 +3483,6 @@ packages:
       '@types/hast': 3.0.4
       hast-util-is-element: 3.0.0
     dev: false
-
-  /hast-util-from-html@2.0.1:
-    resolution: {integrity: sha512-RXQBLMl9kjKVNkJTIO6bZyb2n+cUH8LFaSSzo82jiLT6Tfc+Pt7VQCS+/h3YwG4jaNE2TA2sdJisGWR+aJrp0g==}
-    dependencies:
-      '@types/hast': 3.0.4
-      devlop: 1.1.0
-      hast-util-from-parse5: 8.0.1
-      parse5: 7.1.2
-      vfile: 6.0.3
-      vfile-message: 4.0.2
-    dev: true
 
   /hast-util-from-html@2.0.3:
     resolution: {integrity: sha512-CUSRHXyKjzHov8yKsQjGOElXy/3EKpyX56ELnkHH34vDVw1N1XSQ1ZcAvTyAPtGqLTuKP/uxM+aLkSPqF/EtMw==}
@@ -5784,18 +5768,16 @@ packages:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
 
-  /starlight-links-validator@0.13.2(patch_hash=uzxiecwrihwm4whxdfjvzfhjsq)(@astrojs/starlight@packages+starlight)(astro@5.0.2):
-    resolution: {integrity: sha512-BP6vf+fj91LnQXPnggWVhZXhcSF1x6SHof0GRg+IGgY0idSbIU7OHE2SvLggs2fRZ5SflVqpCTpK0pQcOmYcDg==}
-    engines: {node: '>=18.14.1'}
+  /starlight-links-validator@0.14.0(@astrojs/starlight@packages+starlight):
+    resolution: {integrity: sha512-mxaNtlSl+BR32PoBkFPymhNNttrozGLQan2Nkki7mzQw2Z+li5o3c1ltds+EnbIh/RuVm3xHUxZz8THQW6Xgbw==}
+    engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.15.0'
-      astro: '>=4.0.0'
     dependencies:
       '@astrojs/starlight': link:packages/starlight
-      '@types/picomatch': 2.3.3
-      astro: 5.0.2(@types/node@18.16.19)(typescript@5.6.3)
+      '@types/picomatch': 3.0.1
       github-slugger: 2.0.0
-      hast-util-from-html: 2.0.1
+      hast-util-from-html: 2.0.3
       hast-util-has-property: 3.0.0
       is-absolute-url: 4.0.1
       kleur: 4.1.5
@@ -5803,7 +5785,6 @@ packages:
       picomatch: 4.0.2
       unist-util-visit: 5.0.0
     dev: true
-    patched: true
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
