@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.30.6
+
+### Patch Changes
+
+- [#2722](https://github.com/withastro/starlight/pull/2722) [`0b206d3`](https://github.com/withastro/starlight/commit/0b206d3a23f0876146dc17f5e507984362917696) Thanks [@techfg](https://github.com/techfg)! - Fixes display of long site title on mobile
+
+- [#2762](https://github.com/withastro/starlight/pull/2762) [`7ab1576`](https://github.com/withastro/starlight/commit/7ab157639da62fdc6b444b0280ad4c9d5ee4872f) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Prevents the header title from being translated by automatic translation systems.
+
 ## 0.30.5
 
 ### Patch Changes

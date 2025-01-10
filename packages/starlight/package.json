@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.30.5",
+  "version": "0.30.6",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
@@ -178,20 +178,20 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^5.0.0"
+    "astro": "^5.1.5"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^6.0.0",
+    "@astrojs/markdown-remark": "^6.0.1",
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "2.1.6",
-    "astro": "^5.0.2",
+    "astro": "^5.1.5",
     "linkedom": "^0.18.4",
     "vitest": "2.1.6"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.1",
-    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/mdx": "^4.0.5",
+    "@astrojs/sitemap": "^3.2.1",
     "@pagefind/default-ui": "^1.0.3",
     "@types/hast": "^3.0.4",
     "@types/js-yaml": "^4.0.9",
