@@ -87,6 +87,11 @@
 		--sl-sidebar-width: 0px !important;
 		--sl-content-width: 100% !important;
 	}
+	/* components/Banner.astro */
+	.sl-banner {
+		--sl-color-banner-text: var(--sl-color-white) !important;
+		background-color: transparent !important;
+	}
 
 	/* components/MarkdownContent.astro */
 	.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
