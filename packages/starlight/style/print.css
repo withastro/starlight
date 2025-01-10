@@ -112,6 +112,19 @@
 		/* Ensure terminal frame dots are visible even if backgrounds are disabled. */
 		box-shadow: inset 99rem 99rem var(--sl-color-gray-5);
 	}
+	.expressive-code .frame.has-title:not(.is-terminal) .header {
+		/* Divide title bar and code without relying on background colors. */
+		background: transparent !important;
+		border-bottom: 1px solid var(--sl-color-gray-6) !important;
+	}
+	.expressive-code .frame.has-title:not(.is-terminal) .title {
+		/* Hide title tab background color. */
+		background: transparent !important;
+	}
+	.expressive-code .frame.has-title:not(.is-terminal) .title::after {
+		/* Remove title tab highlight. */
+		border-top: 0 !important;
+	}
 	/* Inline code */
 	.sl-markdown-content code:not(:where(.not-content *)) {
 		background-color: transparent !important;
