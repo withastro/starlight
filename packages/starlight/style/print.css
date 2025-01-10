@@ -105,7 +105,9 @@
 		overflow-x: hidden !important;
 		white-space: pre-wrap !important;
 	}
-	.sl-markdown-content .expressive-code {
+	.sl-markdown-content .expressive-code,
+	.sl-markdown-content figure,
+	.sl-markdown-content pre {
 		break-inside: avoid;
 	}
 	.expressive-code .frame.is-terminal .header::before {
