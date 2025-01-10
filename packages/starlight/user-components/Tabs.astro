@@ -224,6 +224,7 @@ if (isSynced) {
 				StarlightTabs.#syncTabs(this, newTab);
 				window.scrollTo({
 					top: window.scrollY + (this.getBoundingClientRect().top - previousTabsOffset),
+					behavior: 'instant',
 				});
 			}
 		}
