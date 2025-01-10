@@ -133,6 +133,12 @@
 		font-size: 0.9375em !important;
 	}
 
+	/* user-components/Badge.astro */
+	.sl-badge {
+		background: transparent !important;
+		color: var(--sl-color-white) !important;
+	}
+
 	/* user-components/FileTree.astro */
 	starlight-file-tree {
 		break-inside: avoid;
