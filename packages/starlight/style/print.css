@@ -159,4 +159,10 @@
 	starlight-tabs {
 		break-inside: avoid;
 	}
+
+	/* user-components/Steps.astro */
+	.sl-steps > li::after {
+		/* Ensure steps guidelines are visible when background colors are disabled. */
+		box-shadow: inset 99rem 99rem var(--sl-color-hairline-light);
+	}
 }
