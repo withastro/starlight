@@ -5,7 +5,7 @@
 	Same goes for the use of `!important` in this file.
 	*/
 	:root[data-theme]:is(:root) {
-		/* Colours (light mode) */
+		/* Colours — force light mode when printing */
 		--sl-color-white: hsl(224, 10%, 10%);
 		--sl-color-gray-1: hsl(224, 14%, 16%);
 		--sl-color-gray-2: hsl(224, 10%, 23%);
