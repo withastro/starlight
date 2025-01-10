@@ -165,8 +165,8 @@ importers:
   packages/starlight:
     dependencies:
       '@astrojs/mdx':
-        specifier: ^4.0.4
-        version: 4.0.4(astro@5.1.5)
+        specifier: ^4.0.5
+        version: 4.0.5(astro@5.1.5)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
@@ -587,8 +587,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@4.0.4(astro@5.1.5):
-    resolution: {integrity: sha512-w68BeD6K3mjyZbLtg9+ahCs+uFxDXfwD2Lb8zBwBOyDvAFvkgG4VqqHP+hwAUvgxLuH3GbadQhV1fv7NEbrxPg==}
+  /@astrojs/mdx@4.0.5(astro@5.1.5):
+    resolution: {integrity: sha512-JhMCm4wf94PNHQDWKyez2ZVLcG5R6Cyjk8TmpqYVRrOTuU3GIWeDAoum7Q1p05SFD+nYwvXOcv42/m8pE3Ylug==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     peerDependencies:
       astro: ^5.0.0
