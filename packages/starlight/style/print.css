@@ -108,6 +108,10 @@
 	.sl-markdown-content .expressive-code {
 		break-inside: avoid;
 	}
+	.expressive-code .frame.is-terminal .header::before {
+		/* Ensure terminal frame dots are visible even if backgrounds are disabled. */
+		box-shadow: inset 99rem 99rem var(--sl-color-gray-5);
+	}
 	/* Inline code */
 	.sl-markdown-content code:not(:where(.not-content *)) {
 		background-color: transparent !important;
