@@ -3,6 +3,8 @@ title: Route Data
 description: Learn how Starlight’s page data model is used to render your pages and how you can customize it.
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 When Starlight renders a page in your documentation, it first creates a route data object to represent what is on that page.
 This guide explains how route data is generated, how it is used, and how you can customize it to modify Starlight’s default behavior.
 
@@ -58,6 +60,7 @@ Changes like this do not require modifying Starlight’s default components, onl
 You can customize route data using a special form of “middleware”.
 This is a function that is called every time Starlight renders a page and can modify values in the route data object.
 
+<Steps>
 1. Create a new file exporting an `onRequest` function using Starlight’s `defineRouteMiddleware()` utility:
 
    ```ts
@@ -75,12 +78,12 @@ This is a function that is called every time Starlight renders a page and can mo
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My delightful docs site',
-         routeMiddleware: './src/routeData.ts',
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My delightful docs site',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
    });
    ```
 
@@ -96,9 +99,10 @@ This is a function that is called every time Starlight renders a page and can mo
    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
    export const onRequest = defineRouteMiddleware((context) => {
-     // Get the content collection entry for this page.
-     const { entry } = context.locals.starlightRoute;
-     // Update the title to add an exclamation mark.
-     entry.data.title = entry.data.title + '!';
+   	// Get the content collection entry for this page.
+   	const { entry } = context.locals.starlightRoute;
+   	// Update the title to add an exclamation mark.
+   	entry.data.title = entry.data.title + '!';
    });
    ```
+</Steps>
