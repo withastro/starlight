@@ -1,4 +1,5 @@
 import type { APIContext } from 'astro';
+export type { StarlightRouteData } from './utils/routing/types';
 
 type RouteMiddlewareHandler = (context: APIContext) => void | Promise<void>;
 
