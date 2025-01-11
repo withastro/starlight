@@ -23,7 +23,7 @@ In [route middleware](/guides/route-data/#customizing-route-data), access route 
 import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
 export const onRequest = defineRouteMiddleware((context) => {
-  const { hasSidebar } = context.locals.starlightRoute;
+	const { hasSidebar } = context.locals.starlightRoute;
 });
 ```
 
@@ -97,11 +97,11 @@ Includes frontmatter values for the current page at `entry.data`.
 
 ```ts
 entry: {
-  data: {
-    title: string;
-    description: string | undefined;
-    // etc.
-  }
+	data: {
+		title: string;
+		description: string | undefined;
+		// etc.
+	}
 }
 ```
 

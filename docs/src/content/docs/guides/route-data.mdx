@@ -15,7 +15,7 @@ Starlight route data is an object constructed for each page of your site by comb
 1. The Starlight configuration in `astro.config.mjs`
 2. The content and frontmatter of the current page
 
-For example, the route data includes a `siteTitle` property with a value based on the [`title`](/reference/configuration/#title-required) option in your Starlight configuration and a `toc` property generated from headings in the content for the current page.
+For example, route data includes a `siteTitle` property with a value based on the [`title`](/reference/configuration/#title-required) option in your Starlight configuration and a `toc` property generated from headings in the content for the current page.
 
 Some features can be configured both globally in the Starlight configuration and for a specific page in Markdown frontmatter.
 In this case, values set for a specific page in frontmatter override the global or default value.
@@ -61,6 +61,7 @@ You can customize route data using a special form of “middleware”.
 This is a function that is called every time Starlight renders a page and can modify values in the route data object.
 
 <Steps>
+
 1. Create a new file exporting an `onRequest` function using Starlight’s `defineRouteMiddleware()` utility:
 
    ```ts
@@ -78,12 +79,12 @@ This is a function that is called every time Starlight renders a page and can mo
    import starlight from '@astrojs/starlight';
 
    export default defineConfig({
-     integrations: [
-       starlight({
-         title: 'My delightful docs site',
-         routeMiddleware: './src/routeData.ts',
-       }),
-     ],
+   	integrations: [
+   		starlight({
+   			title: 'My delightful docs site',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
    });
    ```
 
@@ -99,10 +100,11 @@ This is a function that is called every time Starlight renders a page and can mo
    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
    export const onRequest = defineRouteMiddleware((context) => {
-     // Get the content collection entry for this page.
-     const { entry } = context.locals.starlightRoute;
-     // Update the title to add an exclamation mark.
-     entry.data.title = entry.data.title + '!';
+   	// Get the content collection entry for this page.
+   	const { entry } = context.locals.starlightRoute;
+   	// Update the title to add an exclamation mark.
+   	entry.data.title = entry.data.title + '!';
    });
    ```
+
 </Steps>
