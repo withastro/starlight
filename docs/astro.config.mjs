@@ -35,6 +35,8 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
+			// TODO(Chris): Remove the demo middleware
+			routeMiddleware: './src/demo-middleware.ts',
 			title: 'Starlight',
 			logo: {
 				light: '/src/assets/logo-light.svg',
