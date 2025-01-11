@@ -149,3 +149,49 @@ JavaScript `Date` object representing when this page was last updated if enabled
 **Type:** `URL | undefined`
 
 `URL` object for the address where this page can be edited if enabled.
+
+## Utilities
+
+### `defineRouteMiddleware()`
+
+Use the `defineRouteMiddleware()` utility to help type your route middleware module:
+
+```ts "defineRouteMiddleware"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	// ...
+});
+```
+
+### `StarlightRouteData` type
+
+If you are writing code that needs to work with Starlight’s route data, you can import the `StarlightRouteData` type to match the shape of `Astro.locals.starlightRoute`.
+
+In the following example, a `usePageTitleInTOC()` function updates route data to use the current page’s title as the label for the first item in the table of contents, replacing the default “Overview” label.
+The `StarlightRouteData` type allows you to check whether the route data changes are valid.
+
+```ts "StarlightRouteData"
+// src/route-utils.ts
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+export function usePageTitleInTOC(starlightRoute: StarlightRouteData) {
+	const overviewLink = starlightRoute.toc?.items[0];
+	if (overviewLink) {
+		overviewLink.text = starlightRoute.entry.data.title;
+	}
+}
+```
+
+This function can then be called from a route middleware:
+
+```ts {3,6}
+// src/route-middleware.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { usePageTitleInTOC } from './route-utils';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	usePageTitleInTOC(context.locals.starlightRoute);
+});
+```
