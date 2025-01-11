@@ -38,7 +38,7 @@ test('generates aside', async () => {
 Some text
 :::
 `);
-	expect(res.code).toMatchFileSnapshot('./snapshots/generates-aside.html');
+	await expect(res.code).toMatchFileSnapshot('./snapshots/generates-aside.html');
 });
 
 describe('default labels', () => {
@@ -128,7 +128,7 @@ More.
 </details>
 :::
 `);
-	expect(res.code).toMatchFileSnapshot('./snapshots/handles-complex-children.html');
+	await expect(res.code).toMatchFileSnapshot('./snapshots/handles-complex-children.html');
 });
 
 test('nested asides', async () => {
@@ -142,7 +142,7 @@ Nested tip.
 
 ::::
 `);
-	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides.html');
+	await expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides.html');
 });
 
 test('nested asides with custom titles', async () => {
@@ -171,7 +171,7 @@ Nested tip.
 		  "Tip with a custom title",
 		]
 	`);
-	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides-custom-titles.html');
+	await expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides-custom-titles.html');
 });
 
 describe('translated labels in French', () => {

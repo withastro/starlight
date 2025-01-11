@@ -84,7 +84,24 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 在自定义组件中渲染内置组件时：
 
 - 展开传入 `Astro.props`。这样可以确保它接收到渲染所需的所有数据。
-- 在默认组件内部添加一个 [`<slot />`](https://docs.astro.build/zh-cn/core-concepts/astro-components/#插槽)。这样，如果组件传入了任何子元素，Astro 就知道在哪里渲染它们。
+- 在默认组件内部添加一个 [`<slot />`](https://docs.astro.build/zh-cn/basics/astro-components/#插槽)。这样，如果组件传入了任何子元素，Astro 就知道在哪里渲染它们。
+
+如果你要复用包含 [命名插槽](https://docs.astro.build/zh-cn/basics/astro-components/#命名插槽) 的 [`PageFrame`](/zh-cn/reference/overrides/#pageframe) 或 [`TwoColumnContent`](/zh-cn/reference/overrides/#twocolumncontent) 组件，你还需要 [传递](https://docs.astro.build/zh-cn/basics/astro-components/#传递插槽) 这些插槽。
+
+下面的示例展示了一个自定义组件，它复用了 `TwoColumnContent` 组件，该组件需要传递一个额外的 `right-sidebar` 命名插槽：
+
+```astro {9}
+---
+// src/components/CustomContent.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default {...Astro.props}>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
 
 ## 使用页面数据
 
@@ -124,7 +141,7 @@ const { title } = Astro.props.entry.data;
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.props.id === '';
 ---
 
 {
@@ -138,4 +155,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-了解更多关于条件渲染的内容，请参阅 [Astro 模板语法指南](https://docs.astro.build/zh-cn/core-concepts/astro-syntax/#动态-html)。
+了解更多关于条件渲染的内容，请参阅 [Astro 模板语法指南](https://docs.astro.build/zh-cn/basics/astro-syntax/#动态-html)。

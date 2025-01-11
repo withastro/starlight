@@ -8,9 +8,9 @@ vi.mock('astro:content', async () =>
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/用户.md', { title: 'Path with non-ASCII characters' }],
 			['guides/project-structure.mdx', { title: 'Project Structure' }],
+			['Deprecated API/用户.md', { title: 'Another path with non-ASCII characters' }],
 		],
 	})
 );
@@ -109,6 +109,22 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "API v1",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/deprecated-api/用户/",
+			        "isCurrent": false,
+			        "label": "Another path with non-ASCII characters",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API (deprecated)",
 			    "type": "group",
 			  },
 			]

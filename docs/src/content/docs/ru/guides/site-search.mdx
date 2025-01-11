@@ -108,6 +108,15 @@ title: Частично проиндексированная страница
 
 С этой обновлённой конфигурацией строка поиска на вашем сайте теперь будет открывать модальное окно Algolia вместо стандартного модального окна поиска.
 
+#### Конфигурация DocSearch
+
+Плагин Starlight DocSearch также поддерживает настройку компонента DocSearch с помощью следующих дополнительных опций:
+
+- `maxResultsPerGroup`: Ограничивает количество результатов, отображаемых для каждой группы поиска. По умолчанию `5`.
+- `disableUserPersonalization`: Предотвращает сохранение недавних поисков и избранных элементов пользователя в локальном хранилище. По умолчанию `false`.
+- `insights`: Включает плагин Algolia Insights и отправляет события поиска в ваш индекс DocSearch. По умолчанию `false`.
+- `searchParameters`: Объект, настраивающий [параметры поиска Algolia](https://www.algolia.com/doc/api-reference/search-api-parameters/).
+
 #### Перевод пользовательского интерфейса DocSearch
 
 По умолчанию DocSearch предоставляет только английские строки пользовательского интерфейса.
@@ -115,18 +124,19 @@ title: Частично проиндексированная страница
 
 <Steps>
 
-1. Расширьте определение коллекции контента Starlight `i18n` схемой DocSearch в файле `src/content/config.ts`:
+1. Расширьте определение коллекции контента Starlight `i18n` схемой DocSearch в файле `src/content.config.ts`:
 
-   ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
    	i18n: defineCollection({
-   		type: 'data',
+   		loader: i18nLoader(),
    		schema: i18nSchema({ extend: docSearchI18nSchema() }),
    	}),
    };

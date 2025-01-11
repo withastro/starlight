@@ -9,6 +9,7 @@ vi.mock('astro:content', async () =>
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { hidden: true } }],
 			['guides/project-structure.mdx', { title: 'Project Structure' }],
+			['Getting Started/intro.md', { title: 'Introduction' }],
 		],
 	})
 );
@@ -32,6 +33,22 @@ describe('getSidebar', () => {
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
 			    "type": "link",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/getting-started/intro/",
+			        "isCurrent": false,
+			        "label": "Introduction",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "Getting Started",
+			    "type": "group",
 			  },
 			  {
 			    "badge": undefined,
@@ -155,6 +172,14 @@ describe('flattenSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
+			    "href": "/getting-started/intro/",
+			    "isCurrent": false,
+			    "label": "Introduction",
+			    "type": "link",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
 			    "label": "Authoring Markdown",
@@ -182,9 +207,9 @@ describe('getPrevNextLinks', () => {
 			  "next": {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/guides/authoring-content/",
+			    "href": "/getting-started/intro/",
 			    "isCurrent": false,
-			    "label": "Authoring Markdown",
+			    "label": "Introduction",
 			    "type": "link",
 			  },
 			  "prev": {

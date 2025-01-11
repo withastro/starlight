@@ -33,7 +33,7 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type**: `string`
 
-Remplace le slug de la page. Consultez [« Définition d’un slug personnalisé »](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-slug-personnalis%C3%A9e) dans la documentation d'Astro pour plus de détails.
+Remplace le slug de la page. Consultez [« Définition d’identifiants personnalisés »](https://docs.astro.build/fr/guides/content-collections/#définition-didentifiants-personnalisés) dans la documentation d'Astro pour plus de détails.
 
 ### `editUrl`
 
@@ -397,19 +397,20 @@ sidebar:
 
 ## Personnaliser le schéma du frontmatter
 
-Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content/config.ts` en utilisant l'utilitaire `docsSchema()` :
+Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content.config.ts` en utilisant l'utilitaire `docsSchema()` :
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
+Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#définition-dun-schéma-de-collection) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
 
 `docsSchema()` accepte les options suivantes :
 
@@ -423,13 +424,15 @@ La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content
 
 Dans l'exemple suivant, nous définissons un type plus strict pour `description` pour le rendre obligatoire et ajouter un nouveau champ `category` facultatif :
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // Rend un champ de base obligatoire au lieu de facultatif.
@@ -444,13 +447,15 @@ export const collections = {
 
 Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-in-content-collections), utilisez une fonction qui retourne votre extension de schéma :
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({

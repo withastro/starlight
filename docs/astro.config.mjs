@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
@@ -40,6 +41,7 @@ export default defineConfig({
 				dark: '/src/assets/logo-dark.svg',
 				replacesTitle: true,
 			},
+			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
