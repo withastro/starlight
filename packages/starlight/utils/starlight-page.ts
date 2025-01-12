@@ -5,19 +5,12 @@ import config from 'virtual:starlight/user-config';
 import { getCollectionPathFromRoot } from './collection';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
-import {
-	getSiteTitle,
-	getSiteTitleHref,
-	getToC,
-	type PageProps,
-	type StarlightRouteData,
-} from './route-data';
-import type { StarlightDocsEntry } from './routing';
+import { getSiteTitle, getSiteTitleHref, getToC, type PageProps } from './routing/data';
+import type { StarlightDocsEntry, StarlightRouteData } from './routing/types';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { docsSchema } from '../schema';
 import type { Prettify, RemoveIndexSignature } from './types';
-import { DeprecatedLabelsPropProxy } from './i18n';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import type { StarlightConfig, StarlightUserConfig } from './user-config';
 
@@ -153,7 +146,6 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: DeprecatedLabelsPropProxy,
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,

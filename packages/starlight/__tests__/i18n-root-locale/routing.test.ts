@@ -2,7 +2,7 @@ import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { assert, expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
-import { generateRouteData } from '../../utils/route-data';
+import { generateRouteData } from '../../utils/routing/data';
 import * as git from 'virtual:starlight/git-info';
 
 vi.mock('astro:content', async () =>
