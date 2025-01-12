@@ -220,13 +220,13 @@ var fun = function lang(l) {
 
 ### Expressive Code features
 
-Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to extend formatting possibilities for code blocks.
+Starlight uses [Expressive Code](https://expressive-code.com/) to extend formatting possibilities for code blocks.
 Expressive Code’s text markers and window frames plugins are enabled by default.
 Code block rendering can be configured using Starlight’s [`expressiveCode` configuration option](/reference/configuration/#expressivecode).
 
 #### Text markers
 
-You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) on the opening line of your code block.
+You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://expressive-code.com/key-features/text-markers/) on the opening line of your code block.
 Use curly braces (`{ }`) to highlight entire lines, and quotation marks to highlight strings of text.
 
 There are three highlighting styles: neutral for calling attention to code, green for indicating inserted code, and red for indicating deleted code.
@@ -234,10 +234,10 @@ Both text and entire lines can be marked using the default marker, or in combina
 
 Expressive Code provides several options for customizing the visual appearance of your code samples.
 Many of these can be combined, for highly illustrative code samples.
-Please explore the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) for the extensive options available.
+Please explore the [Expressive Code documentation](https://expressive-code.com/key-features/text-markers/#configuration) for the extensive options available.
 Some of the most common examples are shown below:
 
-- [Mark entire lines & line ranges using the `{ }` marker](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Mark entire lines & line ranges using the `{ }` marker](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -255,7 +255,7 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Mark selections of text using the `" "` marker or regular expressions](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+- [Mark selections of text using the `" "` marker or regular expressions](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
   ```js "Individual terms" /Even.*supported/
   // Individual terms can be highlighted, too
@@ -273,7 +273,7 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Mark text or lines as inserted or deleted with `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+- [Mark text or lines as inserted or deleted with `ins` or `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
@@ -293,7 +293,7 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Combine syntax highlighting with `diff`-like syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+- [Combine syntax highlighting with `diff`-like syntax](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -323,7 +323,7 @@ Other languages display inside a code editor-style frame if they include a title
 
 A code block’s optional title can be set either with a `title="..."` attribute following the code block's opening backticks and language identifier, or with a file name comment in the first lines of the code.
 
-- [Add a file name tab with a comment](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Add a file name tab with a comment](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // my-test-file.js
@@ -337,7 +337,7 @@ A code block’s optional title can be set either with a `title="..."` attribute
   ```
   ````
 
-- [Add a title to a Terminal window](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Add a title to a Terminal window](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="Installing dependencies…"
   npm install
@@ -349,7 +349,7 @@ A code block’s optional title can be set either with a `title="..."` attribute
   ```
   ````
 
-- [Disable window frames with `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+- [Disable window frames with `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "This is not rendered as a terminal despite using the bash language"
