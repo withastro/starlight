@@ -63,7 +63,14 @@ test('parses valid config successfully', () => {
 		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,
 		  "locales": undefined,
-		  "pagefind": true,
+		  "pagefind": {
+		    "ranking": {
+		      "pageLength": 0.1,
+		      "termFrequency": 0.1,
+		      "termSaturation": 2,
+		      "termSimilarity": 9,
+		    },
+		  },
 		  "pagination": true,
 		  "prerender": true,
 		  "tableOfContents": {

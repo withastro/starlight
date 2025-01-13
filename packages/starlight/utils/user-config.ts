@@ -5,10 +5,11 @@ import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
+import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
 import { SidebarItemSchema } from '../schemas/sidebar';
+import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
-import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
@@ -191,11 +192,15 @@ const UserConfigSchema = z.object({
 	expressiveCode: ExpressiveCodeSchema(),
 
 	/**
-	 * Define whether Starlight’s default site search provider Pagefind is enabled.
-	 * Set to `false` to disable indexing your site with Pagefind.
-	 * This will also hide the default search UI if in use.
+	 * Configure Starlight’s default site search provider Pagefind. Set to `false` to disable indexing
+	 * your site with Pagefind, which will also hide the default search UI if in use.
 	 */
-	pagefind: z.boolean().optional(),
+	pagefind: z
+		.boolean()
+		// Transform `true` to our default config object.
+		.transform((val) => val && PagefindConfigDefaults())
+		.or(PagefindConfigSchema())
+		.optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
@@ -227,10 +232,13 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 	.transform((config) => ({
 		...config,
 		// Pagefind only defaults to true if prerender is also true.
-		pagefind: config.pagefind ?? config.prerender,
+		pagefind:
+			typeof config.pagefind === 'undefined'
+				? config.prerender && PagefindConfigDefaults()
+				: config.pagefind,
 	}))
 	.refine((config) => !(!config.prerender && config.pagefind), {
-		message: 'Pagefind search is not support with prerendering disabled.',
+		message: 'Pagefind search is not supported with prerendering disabled.',
 	})
 	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});

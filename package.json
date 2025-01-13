@@ -33,7 +33,7 @@
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "23.5 kB",
+      "limit": "27 kB",
       "gzip": true
     },
     {
