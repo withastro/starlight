@@ -452,15 +452,31 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 
 ### `pagefind`
 
-**타입:** `boolean`  
+**타입:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **기본값:** `true`
 
-Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)가 활성화되어 있는지 정의합니다.
+Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)를 구성합니다.
 
 Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하세요.
 또한, 이는 기본 검색 UI도 숨깁니다.
 
 [`prerender`](#prerender) 옵션이 `false`로 설정된 경우 Pagefind를 활성화할 수 없습니다.
+
+`pagefind`를 객체로 설정하여 Pagefind 검색 클라이언트를 구성할 수 있습니다.
+Pagefind 문서의 ["Pagefind의 결과 순위 사용자 정의"](https://pagefind.app/docs/ranking/)에서 `pagefind.ranking` 옵션을 사용하여 검색 결과 순위가 계산되는 방식을 제어하는 방법에 대해 자세히 알아보실 수 있습니다.
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+}
+```
 
 ### `prerender`
 
