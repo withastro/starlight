@@ -113,7 +113,7 @@ Nebenbemerkungen (auch bekannt als "Ermahnungen" oder "Callouts") sind nützlich
 
 Starlight bietet eine eigene Markdown-Syntax für die Darstellung von Nebeninformationen. Seitenblöcke werden mit einem Paar dreifacher Doppelpunkte `:::` angezeigt, um den Inhalt zu umschließen, und können vom Typ `note`, `tip`, `caution` oder `danger` sein.
 
-Sie können alle anderen Markdown-Inhaltstypen innerhalb einer Nebenbemerkung verschachteln, allerdings eignen sich diese am besten für kurze und prägnante Inhaltsstücke.
+Du kannst alle anderen Markdown-Inhaltstypen innerhalb einer Nebenbemerkung verschachteln, allerdings eignen sich diese am besten für kurze und prägnante Inhaltsstücke.
 
 ### Nebenbemerkung `note`
 
@@ -154,7 +154,7 @@ Astro hilft dir, schnellere Websites mit ["Islands Architecture"](https://docs.a
 ### Weitere Typen
 
 Vorsichts- und Gefahrenhinweise sind hilfreich, um die Aufmerksamkeit des Benutzers auf Details zu lenken, über die er stolpern könnte.
-Wenn du diese häufig verwenden, kann das auch ein Zeichen dafür sein, dass die Sache, die Sie dokumentieren, von einem neuen Design profitieren könnte.
+Wenn du diese häufig verwenden, kann das auch ein Zeichen dafür sein, dass die Sache, die du dokumentierest, von einem neuen Design profitieren könnte.
 
 :::caution
 Wenn du nicht sicher bist, ob du eine großartige Dokumentseite willst, überlege es dir zweimal, bevor du [Starlight](/de/) verwendest.
@@ -220,13 +220,13 @@ var fun = function lang(l) {
 
 ### Expressive Code-Merkmale
 
-Starlight verwendet [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code), um die Formatierungsmöglichkeiten für Codeblöcke zu erweitern.
+Starlight verwendet [Expressive Code](https://expressive-code.com/), um die Formatierungsmöglichkeiten für Codeblöcke zu erweitern.
 Die Textmarker und Fensterrahmen-Plugins von Expressive Code sind standardmäßig aktiviert.
 Die Darstellung von Codeblöcken kann mit Starlights [`expressiveCode` Konfigurationsoption](/de/reference/configuration/#expressivecode) konfiguriert werden.
 
 #### Textmarkierungen
 
-Du kannst bestimmte Zeilen oder Teile deiner Codeblöcke hervorheben, indem du [Expressive Code Textmarkierungen](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) in der ersten Zeile deines Codeblocks verwendest.
+Du kannst bestimmte Zeilen oder Teile deiner Codeblöcke hervorheben, indem du [Expressive Code Textmarkierungen](https://expressive-code.com/key-features/text-markers/) in der ersten Zeile deines Codeblocks verwendest.
 Verwende geschweifte Klammern (`{ }`), um ganze Zeilen hervorzuheben, und Anführungszeichen, um Textabschnitte zu markieren.
 
 Es gibt drei Hervorhebungsstile: neutral, um auf den Code aufmerksam zu machen, grün, um eingefügten Code zu kennzeichnen, und rot, um gelöschten Code zu kennzeichnen.
@@ -234,10 +234,10 @@ Sowohl Text als auch ganze Zeilen können mit der Standardmarkierung oder in Kom
 
 Expressive Code bietet mehrere Optionen zur Anpassung des visuellen Erscheinungsbildes deiner Codebeispiele.
 Viele dieser Optionen können kombiniert werden, um sehr anschauliche Codebeispiele zu erstellen.
-Bitte schaue dir die [Expressive Code Dokumentation](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) an, um dich über die umfangreichen Optionen zu informieren.
+Bitte schaue dir die [Expressive Code Dokumentation](https://expressive-code.com/key-features/text-markers/#configuration) an, um dich über die umfangreichen Optionen zu informieren.
 Einige der gebräuchlichsten Beispiele sind unten aufgeführt:
 
-- [Markiere ganze Zeilen und Zeilenbereiche mit dem Marker `{ }`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Markiere ganze Zeilen und Zeilenbereiche mit dem Marker `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -255,7 +255,7 @@ Einige der gebräuchlichsten Beispiele sind unten aufgeführt:
   ```
   ````
 
-- [Markieren von Textabschnitten mit der Markierung `" "` oder regulären Ausdrücken](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+- [Markieren von Textabschnitten mit der Markierung `" "` oder regulären Ausdrücken](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
   ```js "einzelne Begriffe" /Auch.*unterstützt/
   // Auch einzelne Begriffe können hervorgehoben werden
@@ -273,7 +273,7 @@ Einige der gebräuchlichsten Beispiele sind unten aufgeführt:
   ```
   ````
 
-- [Text oder Zeilen mit `ins` oder `del` als eingefügt oder gelöscht markieren](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+- [Text oder Zeilen mit `ins` oder `del` als eingefügt oder gelöscht markieren](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
   ```js "return true;" ins="eingefügte" del="gelöschte"
   function demo() {
@@ -293,7 +293,7 @@ Einige der gebräuchlichsten Beispiele sind unten aufgeführt:
   ```
   ````
 
-- [Kombinieren Sie die Syntaxhervorhebung mit einer `diff`-ähnlichen Syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+- [Kombiniere die Syntaxhervorhebung mit einer `diff`-ähnlichen Syntax](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -323,7 +323,7 @@ Andere Sprachen werden in einem Rahmen im Stil eines Code-Editors angezeigt, wen
 
 Der optionale Titel eines Code-Blocks kann entweder mit einem `title="..."`-Attribut gesetzt werden, das den öffnenden Backticks und dem Sprachbezeichner des Code-Blocks folgt, oder mit einem Dateinamenkommentar in den ersten Zeilen des Codes.
 
-- [Hinzufügen einer Registerkarte für den Dateinamen mit einem Kommentar](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Hinzufügen einer Registerkarte für den Dateinamen mit einem Kommentar](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // meine-test-datei.js
@@ -337,7 +337,7 @@ Der optionale Titel eines Code-Blocks kann entweder mit einem `title="..."`-Attr
   ```
   ````
 
-- [Hinzufügen eines Titels zu einem Terminalfenster](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Hinzufügen eines Titels zu einem Terminalfenster](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="Installieren von Abhängigkeiten…"
   npm install
@@ -349,7 +349,7 @@ Der optionale Titel eines Code-Blocks kann entweder mit einem `title="..."`-Attr
   ```
   ````
 
-- [Fensterrahmen mit `frame="none"` deaktivieren](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+- [Fensterrahmen mit `frame="none"` deaktivieren](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "Dies wird trotz Verwendung der Bash-Sprache nicht als Terminal dargestellt"
