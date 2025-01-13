@@ -384,10 +384,10 @@ starlight({
 **type:** `StarlightExpressiveCodeOptions | boolean`  
 **default:** `true`
 
-Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
+Starlight uses [Expressive Code](https://expressive-code.com) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
 See the [“Code blocks” guide](/guides/authoring-content/#code-blocks) to learn how to use Expressive Code syntax in your Markdown and MDX content.
 
-You can use any of the standard [Expressive Code configuration options](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) as well as some Starlight-specific properties, by setting them in Starlight’s `expressiveCode` option.
+You can use any of the standard [Expressive Code configuration options](https://expressive-code.com/reference/configuration/) as well as some Starlight-specific properties, by setting them in Starlight’s `expressiveCode` option.
 For example, set Expressive Code’s `styleOverrides` option to override the default CSS. This enables customizations like giving your code blocks rounded corners:
 
 ```js ins={2-4}
@@ -414,7 +414,7 @@ In addition to the standard Expressive Code options, you can also set the follow
 **default:** `['starlight-dark', 'starlight-light']`
 
 Set the themes used to style code blocks.
-See the [Expressive Code `themes` documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) for details of the supported theme formats.
+See the [Expressive Code `themes` documentation](https://expressive-code.com/guides/themes/) for details of the supported theme formats.
 
 Starlight uses the dark and light variants of Sarah Drasner’s [Night Owl theme](https://github.com/sdras/night-owl-vscode-theme) by default.
 
