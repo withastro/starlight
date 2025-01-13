@@ -31,6 +31,8 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
+import printHref from '../style/print.css?url&no-inline';
+
 const pagefindEnabled =
 	Astro.props.entry.slug !== '404' &&
 	!Astro.props.entry.slug.endsWith('/404') &&
@@ -75,6 +77,7 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 			}
 		</style>
 		<ThemeProvider {...Astro.props} />
+		<link rel="stylesheet" href={printHref} media="print" />
 	</head>
 	<body>
 		<SkipLink {...Astro.props} />
