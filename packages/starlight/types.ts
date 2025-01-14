@@ -3,3 +3,4 @@ export type {
 	StarlightPlugin,
 	StarlightUserConfigWithPlugins as StarlightUserConfig,
 } from './utils/plugins';
+export type { StarlightIcon } from './components/Icons';
