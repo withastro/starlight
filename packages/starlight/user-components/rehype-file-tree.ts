@@ -6,7 +6,7 @@ import { fromHtml } from 'hast-util-from-html';
 import { toString } from 'hast-util-to-string';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import { Icons } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components/Icons';
 import { definitions } from './file-tree-icons';
 
 declare module 'vfile' {
@@ -160,7 +160,7 @@ function getFileIcon(fileName: string) {
 	const name = getFileIconName(fileName);
 	if (!name) return defaultFileIcon;
 	if (name in Icons) {
-		const path = Icons[name as keyof typeof Icons];
+		const path = Icons[name as StarlightIcon];
 		return makeSVGIcon(path);
 	}
 	return defaultFileIcon;

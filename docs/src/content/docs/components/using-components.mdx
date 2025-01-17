@@ -81,14 +81,14 @@ If these styles conflict with your component’s appearance, set the `not-conten
 Use the [`ComponentProps`](https://docs.astro.build/en/guides/typescript/#componentprops-type) type from `astro/types` to reference the `Props` accepted by a component even if they are not exported by the component itself.
 This can be helpful when wrapping or extending an existing component.
 
-The following example uses `ComponentProps` to get the type of the props accepted by Starlight’s built-in `Icon` component:
+The following example uses `ComponentProps` to get the type of the props accepted by Starlight’s built-in `Badge` component:
 
 ```astro
 ---
 // src/components/Example.astro
 import type { ComponentProps } from 'astro/types';
-import { Icon } from '@astrojs/starlight/components';
+import { Badge } from '@astrojs/starlight/components';
 
-type IconProps = ComponentProps<typeof Icon>;
+type BadgeProps = ComponentProps<typeof Badge>;
 ---
 ```
