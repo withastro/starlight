@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.31.1
+
+### Patch Changes
+
+- [#2805](https://github.com/withastro/starlight/pull/2805) [`ed6f9fd`](https://github.com/withastro/starlight/commit/ed6f9fd77334c02a75240087d0800ef32f159583) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exposes the [`StarlightIcon`](https://starlight.astro.build/reference/icons/#starlighticon-type) TypeScript type referencing the names of Starlight’s built-in icons.
+
 ## 0.31.0
 
 ### Minor Changes
