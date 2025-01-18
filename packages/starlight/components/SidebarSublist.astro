@@ -128,7 +128,17 @@ const { sublist, nested } = Astro.props;
 	[aria-current='page']:hover,
 	[aria-current='page']:focus {
 		font-weight: 600;
-		color: var(--sl-color-text-invert);
+		color: var(--sl-color-text-accent);
+		position: relative;
+	}
+
+	[aria-current='page']::before {
+		content: '';
+		position: absolute;
+		width: 0.15rem;
+		height: 100%;
+		top: 0;
+		left: calc(-1 * var(--sl-sidebar-item-padding-inline));
 		background-color: var(--sl-color-text-accent);
 	}
 
