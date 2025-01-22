@@ -1,6 +1,8 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
 import type docsearch from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { z } from 'astro/zod';
 
 type SearchOptions = Parameters<typeof docsearch>[0]['searchParameters'];
@@ -36,6 +38,38 @@ const DocSearchConfigSchema = z
 		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 		 */
 		searchParameters: z.custom<SearchOptions>(),
+		/**
+		 * A JavaScript module containing a default export. These options
+		 * are merged with other configuration options and provided to
+		 * the DocSearch library.
+		 *
+		 * In the event that a configuration option exists in both,
+		 * for example in the plugin options and the module, the
+		 * value in the module will be used.
+		 *
+		 * It can be used to configure options that are not serializable,
+		 * such as `transformSearchClient` or `resultsFooterComponent`.
+		 *
+		 * Supports local JS files relative to the root of your project,
+		 * e.g. `'/src/docsearch.js'`, and JS you installed as an npm
+		 * module, e.g. `'@company/docsearch-config'`.
+		 *
+		 * @see https://docsearch.algolia.com/docs/api
+		 * @example
+		 * // astro.config.mjs
+		 * starlightDocSearch({
+		 *   // ...
+		 *   clientOptionsModule: "./src/config/docsearch.js",
+		 * })
+		 *
+		 * // src/config/docsearch.js
+		 * export default {
+		 *  getMissingResultsUrl({ query }) {
+		 *       return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+		 *   },
+		 * }
+		 */
+		clientOptionsModule: z.string().optional(),
 	})
 	.strict();
 
@@ -73,10 +107,10 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 				addIntegration({
 					name: 'starlight-docsearch',
 					hooks: {
-						'astro:config:setup': ({ updateConfig }) => {
+						'astro:config:setup': ({ config, updateConfig }) => {
 							updateConfig({
 								vite: {
-									plugins: [vitePluginDocSearch(opts)],
+									plugins: [vitePluginDocSearch(config.root, opts)],
 								},
 							} satisfies AstroUserConfig);
 						},
@@ -88,10 +122,28 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 }
 
 /** Vite plugin that exposes the DocSearch config via virtual modules. */
-function vitePluginDocSearch(config: DocSearchConfig): VitePlugin {
+function vitePluginDocSearch(root: URL, config: DocSearchConfig): VitePlugin {
 	const moduleId = 'virtual:starlight/docsearch-config';
 	const resolvedModuleId = `\0${moduleId}`;
-	const moduleContent = `export default ${JSON.stringify(config)}`;
+
+	const resolveId = (id: string, base = root) =>
+		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
+
+	const moduleContent = `
+	${
+		config.clientOptionsModule
+			? `import moduleConfig from ${resolveId(config.clientOptionsModule)};`
+			: 'const moduleConfig = {};'
+	}
+	const userConfig = ${JSON.stringify(config)};
+
+	const config = {
+		...userConfig,
+		...moduleConfig,
+	};
+	
+	export default config;
+	`;
 
 	return {
 		name: 'vite-plugin-starlight-docsearch-config',
