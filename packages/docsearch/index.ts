@@ -5,7 +5,12 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'astro/zod';
 
-type SearchOptions = Parameters<typeof docsearch>[0]['searchParameters'];
+export type DocSearchClientOptions = Omit<
+	Parameters<typeof docsearch>[0],
+	'container' | 'translations'
+>;
+
+type SearchOptions = DocSearchClientOptions['searchParameters'];
 
 /** DocSearch configuration options. */
 const DocSearchConfigSchema = z
@@ -38,43 +43,46 @@ const DocSearchConfigSchema = z
 		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 		 */
 		searchParameters: z.custom<SearchOptions>(),
-		/**
-		 * A JavaScript module containing a default export. These options
-		 * are merged with other configuration options and provided to
-		 * the DocSearch library.
-		 *
-		 * In the event that a configuration option exists in both,
-		 * for example in the plugin options and the module, the
-		 * value in the module will be used.
-		 *
-		 * It can be used to configure options that are not serializable,
-		 * such as `transformSearchClient` or `resultsFooterComponent`.
-		 *
-		 * Supports local JS files relative to the root of your project,
-		 * e.g. `'/src/docsearch.js'`, and JS you installed as an npm
-		 * module, e.g. `'@company/docsearch-config'`.
-		 *
-		 * @see https://docsearch.algolia.com/docs/api
-		 * @example
-		 * // astro.config.mjs
-		 * starlightDocSearch({
-		 *   // ...
-		 *   clientOptionsModule: "./src/config/docsearch.js",
-		 * })
-		 *
-		 * // src/config/docsearch.js
-		 * export default {
-		 *  getMissingResultsUrl({ query }) {
-		 *       return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
-		 *   },
-		 * }
-		 */
-		clientOptionsModule: z.string().optional(),
 	})
-	.strict();
+	.strict()
+	.or(
+		z
+			.object({
+				/**
+				 * A JavaScript module containing a default export of options
+				 * which are passed to the DocSearch library.
+				 *
+				 * It can be used to configure options that are not serializable,
+				 * such as `transformSearchClient` or `resultsFooterComponent`.
+				 *
+				 * Supports local JS files relative to the root of your project,
+				 * e.g. `'/src/docsearch.js'`, and JS you installed as an npm
+				 * module, e.g. `'@company/docsearch-config'`.
+				 *
+				 * @see https://docsearch.algolia.com/docs/api
+				 * @example
+				 * // astro.config.mjs
+				 * starlightDocSearch({
+				 *   // ...
+				 *   clientOptionsModule: "./src/config/docsearch.ts",
+				 * })
+				 *
+				 * // src/config/docsearch.ts
+				 * import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+				 *
+				 * export default {
+				 *   // ...
+				 *   getMissingResultsUrl({ query }) {
+				 *     return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+				 *   },
+				 * } satisfies DocSearchClientOptions;
+				 */
+				clientOptionsModule: z.string(),
+			})
+			.strict()
+	);
 
-type DocSearchUserConfig = z.input<typeof DocSearchConfigSchema>;
-export type DocSearchConfig = z.output<typeof DocSearchConfigSchema>;
+type DocSearchUserConfig = z.infer<typeof DocSearchConfigSchema>;
 
 /** Starlight DocSearch plugin. */
 export default function starlightDocSearch(userConfig: DocSearchUserConfig): StarlightPlugin {
@@ -122,7 +130,7 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 }
 
 /** Vite plugin that exposes the DocSearch config via virtual modules. */
-function vitePluginDocSearch(root: URL, config: DocSearchConfig): VitePlugin {
+function vitePluginDocSearch(root: URL, config: DocSearchUserConfig): VitePlugin {
 	const moduleId = 'virtual:starlight/docsearch-config';
 	const resolvedModuleId = `\0${moduleId}`;
 
@@ -131,18 +139,10 @@ function vitePluginDocSearch(root: URL, config: DocSearchConfig): VitePlugin {
 
 	const moduleContent = `
 	${
-		config.clientOptionsModule
-			? `import moduleConfig from ${resolveId(config.clientOptionsModule)};`
-			: 'const moduleConfig = {};'
+		'clientOptionsModule' in config
+			? `export { default } from ${resolveId(config.clientOptionsModule)};`
+			: `export default ${JSON.stringify(config)};`
 	}
-	const userConfig = ${JSON.stringify(config)};
-
-	const config = {
-		...userConfig,
-		...moduleConfig,
-	};
-	
-	export default config;
 	`;
 
 	return {

@@ -1,4 +1,4 @@
 declare module 'virtual:starlight/docsearch-config' {
-	const DocSearchProps: Parameters<typeof import('@docsearch/js').default>[0];
-	export default DocSearchProps;
+	const DocSearchClientOptions: import('./index').DocSearchClientOptions;
+	export default DocSearchClientOptions;
 }
