@@ -121,13 +121,13 @@ The Starlight DocSearch plugin supports customizing the DocSearch component with
 
 ##### Additional DocSearch options
 
-The Starlight DocSearch plugin’s inline options only support configuring JSON-serializable values to pass to the DocSearch component.
-A separate configuration file is required to set function options like `transformItems()` or `resultsFooterComponent()`.
+A separate configuration file is required to pass function options like `transformItems()` or `resultsFooterComponent()` to the DocSearch component.
+
+{/* The Starlight DocSearch plugin’s inline options only support configuring JSON-serializable values to pass to the DocSearch component. */}
 
 <Steps>
 
-1. Create a file exporting your DocSearch configuration.
-   In TypeScript files, you can use the `DocSearchClientOptions` to type check your configuration.
+1. Create a TypeScript file exporting your DocSearch configuration.
 
    ```ts
    // src/config/docsearch.ts
