@@ -1,5 +1,13 @@
 # @astrojs/starlight-docsearch
 
+## 0.5.0
+
+### Minor Changes
+
+- [#2822](https://github.com/withastro/starlight/pull/2822) [`e56586a`](https://github.com/withastro/starlight/commit/e56586add37188b43f3f4c8c15883724fe8fdf87) Thanks [@KianNH](https://github.com/KianNH)! - Adds a new `clientOptionsModule` plugin option to support configuring unserializable DocSearch options such as `resultsFooterComponent()`.
+
+  See [“DocSearch configuration”](https://starlight.astro.build/guides/site-search/#docsearch-configuration) in the Starlight docs for more details.
+
 ## 0.4.0
 
 ### Minor Changes
