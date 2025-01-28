@@ -2,4 +2,6 @@
 '@astrojs/starlight-docsearch': minor
 ---
 
-Add an optional `clientOptionsModule` configuration option, used to point towards a JavaScript module containing a default export to configure unserializable DocSearch options such as `resultsFooterComponent`.
+Adds a new `clientOptionsModule` plugin option to support configuring unserializable DocSearch options such as `resultsFooterComponent()`.
+
+See [“DocSearch configuration”](https://starlight.astro.build/guides/site-search/#docsearch-configuration) in the Starlight docs for more details.
