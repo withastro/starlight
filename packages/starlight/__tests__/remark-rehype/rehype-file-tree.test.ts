@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { processFileTree } from '../../user-components/rehype-file-tree';
-import { Icons } from '../../components/Icons';
+import { Icons, type StarlightIcon } from '../../components/Icons';
 
 describe('validation', () => {
 	test('throws an error with no content', () => {
@@ -176,6 +176,6 @@ function extractFileTree(html: string, stripIcons = true) {
 	return tree;
 }
 
-function expectHtmlToIncludeIcon(html: string, icon: (typeof Icons)[keyof typeof Icons]) {
+function expectHtmlToIncludeIcon(html: string, icon: (typeof Icons)[StarlightIcon]) {
 	return expect(extractFileTree(html, false)).toContain(icon.replace('/>', '>'));
 }

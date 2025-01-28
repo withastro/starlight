@@ -22,6 +22,12 @@ declare module 'virtual:starlight/route-middleware' {
 	>;
 }
 
+declare module 'virtual:starlight/pagefind-config' {
+	export const pagefindUserConfig: Partial<
+		Extract<import('./types').StarlightConfig['pagefind'], object>
+	>;
+}
+
 declare module 'virtual:starlight/components/Banner' {
 	const Banner: typeof import('./components/Banner.astro').default;
 	export default Banner;

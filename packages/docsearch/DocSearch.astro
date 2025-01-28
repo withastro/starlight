@@ -130,8 +130,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
 				const { default: docsearch } = await import('@docsearch/js');
-				type DocSearchOptions = Parameters<typeof docsearch>[0];
-				const options = { ...config, container: 'sl-doc-search' } as DocSearchOptions;
+				const options = { ...config, container: 'sl-doc-search' };
 				try {
 					const translations = JSON.parse(this.dataset.translations || '{}');
 					Object.assign(options, translations);

@@ -127,6 +127,7 @@ export function vitePluginStarlightUserConfig(
 				)
 				.join('\n') + '];',
 		/** Map of modules exporting Starlight’s templating components. */
+		'virtual:starlight/pagefind-config': `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind || {})}`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 

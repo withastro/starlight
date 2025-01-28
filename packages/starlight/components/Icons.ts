@@ -185,3 +185,5 @@ export const Icons = {
 	...BuiltInIcons,
 	...FileIcons,
 };
+
+export type StarlightIcon = keyof typeof Icons;

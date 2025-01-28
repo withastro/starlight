@@ -1,7 +1,7 @@
 <div class="lg:sl-flex">
 	{
 		Astro.locals.starlightRoute.toc && (
-			<aside class="right-sidebar-container">
+			<aside class="right-sidebar-container print:hidden">
 				<div class="right-sidebar">
 					<slot name="right-sidebar" />
 				</div>
@@ -28,7 +28,7 @@
 		.right-sidebar {
 			position: fixed;
 			top: 0;
-			border-inline-start: 1px solid var(--sl-color-gray-6);
+			border-inline-start: 1px solid var(--sl-color-hairline);
 			padding-top: var(--sl-nav-height);
 			width: 100%;
 			height: 100vh;

@@ -18,10 +18,10 @@ const shouldRenderSearch =
 	<div class="title-wrapper sl-flex">
 		<SiteTitle />
 	</div>
-	<div class="sl-flex">
+	<div class="sl-flex print:hidden">
 		{shouldRenderSearch && <Search />}
 	</div>
-	<div class="sl-hidden md:sl-flex right-group">
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
 		<div class="sl-flex social-icons">
 			<SocialIcons />
 		</div>
@@ -44,6 +44,7 @@ const shouldRenderSearch =
 		/* Avoid clipping focus ring around link inside title wrapper. */
 		padding: 0.25rem;
 		margin: -0.25rem;
+		min-width: 0;
 	}
 
 	.right-group,

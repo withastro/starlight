@@ -8,7 +8,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 	<header class="header"><slot name="header" /></header>
 	{
 		hasSidebar && (
-			<nav class="sidebar" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
+			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle />
 				<div id="starlight__sidebar" class="sidebar-pane">
 					<div class="sidebar-content sl-flex">

@@ -6,7 +6,7 @@ const { editUrl } = Astro.locals.starlightRoute;
 
 {
 	editUrl && (
-		<a href={editUrl} class="sl-flex">
+		<a href={editUrl} class="sl-flex print:hidden">
 			<Icon name="pencil" size="1.2em" />
 			{Astro.locals.t('page.editLink')}
 		</a>
