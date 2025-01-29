@@ -273,7 +273,7 @@ pagefind: false
 **Type :** `boolean`  
 **Par défaut :** `false`
 
-Définit si cette page doit être considérée comme une ébauche et ne pas être incluse dans les [déploiements en production](https://docs.astro.build/fr/reference/cli-reference/#astro-build) et les [groupes de liens générés automatiquement](/fr/guides/sidebar/#groupes-générés-automatiquement). Définissez la valeur à `true` pour marquer une page comme une ébauche et la rendre visible uniquement pendant le développement.
+Définit si cette page doit être considérée comme une ébauche et ne pas être incluse dans les [déploiements en production](https://docs.astro.build/fr/reference/cli-reference/#astro-build). Définissez la valeur à `true` pour marquer une page comme une ébauche et la rendre visible uniquement pendant le développement.
 
 ```md
 ---
@@ -282,6 +282,9 @@ Définit si cette page doit être considérée comme une ébauche et ne pas êtr
 draft: true
 ---
 ```
+
+Puisque les ébauches ne sont pas incluses lors d'un déploiement, vous ne pouvez pas ajouter des ébauches directement à la configuration de la barre latérale de navigation de votre site en utilisant des [slugs](/fr/guides/sidebar/#liens-internes).
+Les ébauches situées dans des répertoires utilisés dans des [groupes de barre latérale générés automatiquement](/fr/guides/sidebar/#groupes-générés-automatiquement) sont automatiquement exclues des déploiements en production.
 
 ### `sidebar`
 
