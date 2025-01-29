@@ -1,6 +1,8 @@
 ---
 title: Suche
 description: Finde heraus, welche Suchfunktionen in Starlight integriert sind und wie du sie anpassen kannst.
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
@@ -110,12 +112,59 @@ Mit dieser aktualisierten Konfiguration öffnet die Suchleiste deiner Website nu
 
 #### DocSearch Konfiguration
 
-Das Starlight DocSearch Plugin unterstützt auch die Anpassung der DocSearch Komponente mit den folgenden zusätzlichen Optionen:
+Das Starlight DocSearch Plugin unterstützt die Anpassung der DocSearch Komponente mit den folgenden Optionen, die in der Konfiguration des Erweiterungsmoduls angegeben werden:
 
 - `maxResultsPerGroup`: Begrenzt die Anzahl der Ergebnisse, die für jede Suchgruppe angezeigt werden. Der Standardwert ist `5`.
 - `disableUserPersonalization`: Verhindere, dass DocSearch die letzten Suchen und Favoriten eines Nutzers im lokalen Speicher speichert. Der Standardwert ist `false`.
 - `insights`: Aktiviere das Algolia Insights Plugin und sende Suchereignisse an deinen DocSearch-Index. Der Standardwert ist `false`.
 - `searchParameters`: Ein Objekt, das die [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/) anpasst.
+
+##### Zusätzliche DocSearch-Optionen
+
+Eine separate Konfigurationsdatei ist erforderlich, um Funktionsoptionen wie `transformItems()` oder `resultsFooterComponent()` an die DocSearch-Komponente zu übergeben.
+
+<Steps>
+
+1. Erstelle eine TypeScript-Datei, die deine DocSearch-Konfiguration exportiert.
+
+   ```ts
+   // src/config/docsearch.ts
+   import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+   export default {
+   	appId: 'DEINE_APP_ID',
+   	apiKey: 'DEIN_SUCH_API_SCHLÜSSEL',
+   	indexName: 'DEIN_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
+   } satisfies DocSearchClientOptions;
+   ```
+
+2. Übergib den Pfad zu deiner Konfigurationsdatei an das Starlight DocSearch Plugin in der Datei `astro.config.mjs`.
+
+   ```js {11-13}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Website mit DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+Alle unterstützten Optionen findest du in der [DocSearch JavaScript Client API Referenz](https://docsearch.algolia.com/docs/api/).
 
 #### Die Benutzeroberfläche von DocSearch übersetzen
 
