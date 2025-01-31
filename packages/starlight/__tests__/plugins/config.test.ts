@@ -98,6 +98,29 @@ describe('validation', () => {
 		);
 	});
 
+	test('validates configuration updates from plugins do not update the `routeMiddleware` config key', async () => {
+		await expect(
+			async () =>
+				await runPlugins(
+					{ title: 'Test Docs' },
+					[
+						{
+							name: 'test-plugin',
+							hooks: {
+								setup: ({ updateConfig }) => {
+									// @ts-expect-error - plugins cannot update the `routeMiddleware` config key.
+									updateConfig({ routeMiddleware: './test-middleware.ts' });
+								},
+							},
+						},
+					],
+					createTestPluginContext()
+				)
+		).rejects.toThrowError(
+			/The `test-plugin` plugin tried to update the `routeMiddleware` config key which is not supported./
+		);
+	});
+
 	test('validates configuration updates from plugins', async () => {
 		await expect(
 			async () =>
