@@ -1,4 +1,5 @@
 import type { AstroIntegration, HookParameters } from 'astro';
+import { AstroError } from 'astro/errors';
 import { z } from 'astro/zod';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
@@ -44,8 +45,8 @@ export async function runPlugins(
 			updateConfig(newConfig) {
 				// Ensure that plugins do not update the `plugins` config key.
 				if ('plugins' in newConfig) {
-					throw new Error(
-						`The '${name}' plugin tried to update the 'plugins' config key which is not supported.`
+					throw new AstroError(
+						`The \`${name}\` plugin tried to update the \`plugins\` config key which is not supported.`
 					);
 				}
 

@@ -94,7 +94,7 @@ describe('validation', () => {
 					createTestPluginContext()
 				)
 		).rejects.toThrowError(
-			/The 'test-plugin' plugin tried to update the 'plugins' config key which is not supported./
+			/The `test-plugin` plugin tried to update the `plugins` config key which is not supported./
 		);
 	});
 
