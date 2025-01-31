@@ -18,7 +18,7 @@ declare module 'virtual:starlight/collection-config' {
 
 declare module 'virtual:starlight/route-middleware' {
 	export const routeMiddleware: Array<
-		(context: import('astro').APIContext) => void | Promise<void>
+		(context: import('astro').APIContext, next: () => Promise<void>) => void | Promise<void>
 	>;
 }
 
