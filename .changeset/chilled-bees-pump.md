@@ -11,7 +11,7 @@ This data is now available as `Astro.locals.starlightRoute` instead.
 To update, refactor any component overrides you have:
 
 - Remove imports of `@astrojs/starlight/props`, which are no longer required.
-- Update code that access `Astro.props` to use `Astro.locals.starlightRoute` instead.
+- Update code that accesses `Astro.props` to use `Astro.locals.starlightRoute` instead.
 - Remove any spreading of `{...Astro.props}` into child components, which is no longer required.
 
 In the following example, a custom override for Starlight’s `LastUpdated` component is updated for the new style:
