@@ -108,3 +108,41 @@ This is a function that is called every time Starlight renders a page and can mo
    ```
 
 </Steps>
+
+#### Multiple route middleware
+
+Starlight also supports providing multiple middleware.
+Set `routeMiddleware` to an array of paths to add more than one middleware handler:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My site with multiple middleware',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### Waiting for later route middleware
+
+To wait for middleware later in the stack to run before executing your code, you can await the `next()` callback passed as the second argument to your middleware function.
+This can be useful to wait for a plugin’s middleware to run before making changes for example.
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// Wait for later middleware to run.
+	await next();
+	// Modify route data.
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```
