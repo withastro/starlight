@@ -81,14 +81,14 @@ Starlight применяет стандартную стилистику к со
 Используйте тип [`ComponentProps`](https://docs.astro.build/ru/guides/typescript/#%D1%82%D0%B8%D0%BF-componentprops) из `astro/types` для ссылки на `Props`, принимаемые компонентом, даже если они не экспортируются самим компонентом.
 Это может быть полезно при обёртке или расширении существующего компонента.
 
-В следующем примере используется `ComponentProps` для получения типа параметров, принимаемых встроенным компонентом Starlight `Icon`:
+В следующем примере используется `ComponentProps` для получения типа параметров, принимаемых встроенным компонентом Starlight `Badge`:
 
 ```astro
 ---
 // src/components/Example.astro
 import type { ComponentProps } from 'astro/types';
-import { Icon } from '@astrojs/starlight/icon';
+import { Badge } from '@astrojs/starlight/components';
 
-type IconProps = ComponentProps<typeof Icon>;
+type BadgeProps = ComponentProps<typeof Badge>;
 ---
 ```
