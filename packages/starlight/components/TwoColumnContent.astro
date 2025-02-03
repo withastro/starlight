@@ -1,10 +1,6 @@
----
-import type { Props } from '../props';
----
-
 <div class="lg:sl-flex">
 	{
-		Astro.props.toc && (
+		Astro.locals.starlightRoute.toc && (
 			<aside class="right-sidebar-container print:hidden">
 				<div class="right-sidebar">
 					<slot name="right-sidebar" />

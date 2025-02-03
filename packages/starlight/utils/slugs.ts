@@ -1,16 +1,8 @@
 import config from 'virtual:starlight/user-config';
+import { slugToLocale as getLocaleFromSlug } from '../integrations/shared/slugToLocale';
 import { BuiltInDefaultLocale } from './i18n';
 import { stripTrailingSlash } from './path';
-import { slugToLocale as getLocaleFromSlug } from '../integrations/shared/slugToLocale';
-
-export interface LocaleData {
-	/** Writing direction. */
-	dir: 'ltr' | 'rtl';
-	/** BCP-47 language tag. */
-	lang: string;
-	/** The base path at which a language is served. `undefined` for root locale slugs. */
-	locale: string | undefined;
-}
+import type { LocaleData } from './routing/types';
 
 /**
  * Get the “locale” of a slug. This is the base path at which a language is served.

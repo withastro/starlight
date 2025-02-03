@@ -36,10 +36,11 @@ Overriding Starlight’s default components can be useful when:
    ```astro
    ---
    // src/components/EmailLink.astro
-   import type { Props } from '@astrojs/starlight/props';
+
+   const email = 'houston@example.com';
    ---
 
-   <a href="mailto:houston@example.com">E-mail Me</a>
+   <a href=`mailto:${email}`>E-mail Me</a>
    ```
 
 3. Tell Starlight to use your custom component in the [`components`](/reference/configuration/#components) configuration option in `astro.config.mjs`:
@@ -70,34 +71,29 @@ You can build with Starlight’s default UI components just as you would with yo
 
 The example below shows a custom component that renders an e-mail link along with the default `SocialIcons` component:
 
-```astro {4,8}
+```astro {3,7}
 ---
 // src/components/EmailLink.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">E-mail Me</a>
-<Default {...Astro.props}><slot /></Default>
+<Default><slot /></Default>
 ```
 
-When rendering a built-in component inside a custom component:
-
-- Spread `Astro.props` into it. This makes sure that it receives all the data it needs to render.
-- Add a [`<slot />`](https://docs.astro.build/en/basics/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
+When rendering a built-in component inside a custom component add a [`<slot />`](https://docs.astro.build/en/basics/astro-components/#slots) inside the default component. This makes sure that if the component is passed any child elements, Astro knows where to render them.
 
 If you are reusing the [`PageFrame`](/reference/overrides/#pageframe) or [`TwoColumnContent`](/reference/overrides/#twocolumncontent) components which contain [named slots](https://docs.astro.build/en/basics/astro-components/#named-slots), you also need to [transfer](https://docs.astro.build/en/basics/astro-components/#transferring-slots) these slots as well.
 
 The example below shows a custom component that reuses the `TwoColumnContent` component which contains an additional `right-sidebar` named slot that needs to be transferred:
 
-```astro {9}
+```astro {8}
 ---
 // src/components/CustomContent.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 ---
 
-<Default {...Astro.props}>
+<Default>
 	<slot />
 	<slot name="right-sidebar" slot="right-sidebar" />
 </Default>
@@ -105,17 +101,16 @@ import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
 
 ## Use page data
 
-When overriding a Starlight component, your custom implementation receives a standard `Astro.props` object containing all the data for the current page.
+When overriding a Starlight component, you can access the global [`starlightRoute` object](/guides/route-data/) containing all the data for the current page.
 This allows you to use these values to control how your component template renders.
 
-For example, you can read the page’s frontmatter values as `Astro.props.entry.data`. In the following example, a replacement [`PageTitle`](/reference/overrides/#pagetitle) component uses this to display the current page’s title:
+In the following example, a replacement [`PageTitle`](/reference/overrides/#pagetitle) component displays the current page’s title as set in the content’s frontmatter:
 
-```astro {5} "{title}"
+```astro {4} "{title}"
 ---
 // src/components/Title.astro
-import type { Props } from '@astrojs/starlight/props';
 
-const { title } = Astro.props.entry.data;
+const { title } = Astro.locals.starlightRoute.entry.data;
 ---
 
 <h1 id="_top">{title}</h1>
@@ -127,28 +122,27 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Learn more about all the available props in the [Overrides Reference](/reference/overrides/#component-props).
+Learn more about all the available properties in the [Route Data Reference](/reference/route-data/).
 
 ### Only override on specific pages
 
-Component overrides apply to all pages. However, you can conditionally render using values from `Astro.props` to determine when to show your custom UI, when to show Starlight’s default UI, or even when to show something entirely different.
+Component overrides apply to all pages. However, you can conditionally render using values from `starlightRoute` to determine when to show your custom UI, when to show Starlight’s default UI, or even when to show something entirely different.
 
 In the following example, a component overriding Starlight's [`Footer`](/reference/overrides/#footer-1) displays "Built with Starlight 🌟" on the homepage only, and otherwise shows the default footer on all other pages:
 
 ```astro
 ---
 // src/components/ConditionalFooter.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.id === '';
+const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
 {
 	isHomepage ? (
 		<footer>Built with Starlight 🌟</footer>
 	) : (
-		<Default {...Astro.props}>
+		<Default>
 			<slot />
 		</Default>
 	)
