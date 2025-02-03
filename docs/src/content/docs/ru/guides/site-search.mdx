@@ -132,13 +132,13 @@ title: Частично проиндексированная страница
    import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
 
    export default {
-      appId: 'YOUR_APP_ID',
-      apiKey: 'YOUR_SEARCH_API_KEY',
-      indexName: 'YOUR_INDEX_NAME',
-      getMissingResultsUrl({ query }) {
-         return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
-      },
-      // ...
+   	appId: 'YOUR_APP_ID',
+   	apiKey: 'YOUR_SEARCH_API_KEY',
+   	indexName: 'YOUR_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
    } satisfies DocSearchClientOptions;
    ```
 
@@ -151,16 +151,16 @@ title: Частично проиндексированная страница
    import starlightDocSearch from '@astrojs/starlight-docsearch';
 
    export default defineConfig({
-      integrations: [
-         starlight({
-            title: 'Сайт с DocSearch',
-            plugins: [
-               starlightDocSearch({
-                  clientOptionsModule: './src/config/docsearch.ts',
-               }),
-            ],
-         }),
-      ],
+   	integrations: [
+   		starlight({
+   			title: 'Сайт с DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
    });
    ```
 
