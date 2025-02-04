@@ -10,7 +10,7 @@ This data is now available as `Astro.locals.starlightRoute` instead.
 
 To update, refactor any component overrides you have:
 
-- Remove imports of `@astrojs/starlight/props`, which are no longer required.
+- Remove imports of `@astrojs/starlight/props`, which is now deprecated.
 - Update code that accesses `Astro.props` to use `Astro.locals.starlightRoute` instead.
 - Remove any spreading of `{...Astro.props}` into child components, which is no longer required.
 
