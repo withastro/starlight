@@ -33,4 +33,4 @@ const updatedThisYear = lastUpdated?.getFullYear() === new Date().getFullYear();
 )}
 ```
 
-Any plugins you use that add component overrides will also need to be updated at the same time as updating Starlight.
+_Community Starlight plugins may also need to be manually updated to work with Starlight 0.32. If you encounter any issues, please reach out to the plugin author to see if it is a known issue or if an updated version is being worked on._
