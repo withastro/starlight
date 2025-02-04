@@ -1,6 +1,17 @@
 import { z } from 'astro/zod';
 
+const indexWeightSchema = z.number().nonnegative().nullish();
+
 const pagefindSchema = z.object({
+	/**
+	 * Set Pagefind’s `pageLength` ranking option.
+	 * 
+	 * Configure how search result in the current website are weighted by Pagefind
+	 * compared to other sit'e's merge indexes.
+	 *
+	 * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
+	 */
+	indexWeight: indexWeightSchema,
 	/** Configure how search result rankings are calculated by Pagefind. */
 	ranking: z
 		.object({
@@ -38,6 +49,29 @@ const pagefindSchema = z.object({
 			termSimilarity: z.number().min(0).default(9),
 		})
 		.default({}),
+	/**
+	 * Configure how search indexes from different sites are merged by Pagefind.
+	 *
+	 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
+	 */
+	mergeIndex: z
+		.array(
+			z.object({
+				/**
+				 * Set Pagefind’s `bundlePath` mergeIndex option.
+				 *
+				 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
+				 */
+				pageLength: z.string(),
+				/**
+				 * Set Pagefind’s `indexWeight` mergeIndex option.
+				 *
+				 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
+				 */
+				indexWeight: indexWeightSchema,
+			}),
+		)
+		.nullish(),
 });
 
 export const PagefindConfigSchema = () => pagefindSchema;
