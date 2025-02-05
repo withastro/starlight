@@ -15,6 +15,7 @@ Learn more about using a Starlight plugin in the [Configuration Reference](/refe
 A Starlight plugin has the following shape.
 See below for details of the different properties and hook parameters.
 
+<!-- prettier-ignore-start -->
 ```ts
 interface StarlightPlugin {
   name: string;
@@ -23,21 +24,17 @@ interface StarlightPlugin {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
-      addRouteMiddleware: (config: {
-        entrypoint: string;
-        order?: 'pre' | 'post';
-      }) => void;
+      addRouteMiddleware: (config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void;
       astroConfig: AstroConfig;
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
-      injectTranslations: (dict: {
-        [lang: string]: Record<string, string>;
-      }) => void;
+      injectTranslations: (dict: { [lang: string]: Record<string, string> }) => void;
     }) => void | Promise<void>;
   };
 }
 ```
+<!-- prettier-ignore-end -->
 
 ## `name`
 
@@ -122,7 +119,7 @@ export default {
 
 #### `addRouteMiddleware`
 
-**type:** `(config: { entrypoint: string; order?: 'pre' | 'post' }) => void`
+**type:** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void`
 
 A callback function to add a [route middleware handler](/guides/route-data/) to the site.
 
