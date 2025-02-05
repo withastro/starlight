@@ -3,12 +3,7 @@ import Page from '../components/Page.astro';
 import { useRouteData } from '../utils/routing/data';
 import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
 
-// If starlightRoute has not been set up yet, do so now.
-try {
-	Astro.locals.starlightRoute;
-} catch {
-	await attachRouteDataAndRunMiddleware(Astro, await useRouteData(Astro));
-}
+await attachRouteDataAndRunMiddleware(Astro, await useRouteData(Astro));
 
 const { Content, entry } = Astro.locals.starlightRoute;
 ---

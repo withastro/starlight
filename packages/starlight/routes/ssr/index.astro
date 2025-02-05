@@ -1,13 +1,12 @@
 ---
-import { useRouteData } from '../../utils/routing/data';
-import { attachRouteDataAndRunMiddleware } from '../../utils/routing/middleware';
+import { getRouteBySlugParam } from '../../utils/routing';
 import CommonPage from '../common.astro';
 
 export const prerender = false;
 
-await attachRouteDataAndRunMiddleware(Astro, await useRouteData(Astro));
+const route = getRouteBySlugParam(Astro.params.slug);
 
-if (Astro.locals.starlightRoute.id === '404') {
+if (route === undefined) {
 	return new Response(null, { status: 404 });
 }
 ---
