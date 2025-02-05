@@ -1,7 +1,11 @@
 ---
+import { useRouteData } from '../../utils/routing/data';
+import { attachRouteDataAndRunMiddleware } from '../../utils/routing/middleware';
 import CommonPage from '../common.astro';
 
 export const prerender = false;
+
+await attachRouteDataAndRunMiddleware(Astro, await useRouteData(Astro));
 
 if (Astro.locals.starlightRoute.id === '404') {
 	return new Response(null, { status: 404 });
