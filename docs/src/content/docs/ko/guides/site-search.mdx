@@ -1,6 +1,8 @@
 ---
 title: 사이트 검색
 description: Starlight에 내장된 사이트 검색 기능과 이를 사용자 정의하는 방법에 대해 알아보세요.
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
@@ -110,12 +112,61 @@ title: 부분적으로 색인이 생성된 페이지
 
 #### DocSearch 구성
 
-Starlight DocSearch 플러그인은 다음과 같은 추가 옵션을 통해 DocSearch 컴포넌트를 사용자 지정할 수도 있습니다:
+Starlight DocSearch 플러그인은 다음과 같은 인라인 옵션을 통해 DocSearch 컴포넌트를 사용자 지정할 수 있습니다:
 
 - `maxResultsPerGroup`: 각 검색 그룹에 표시되는 결과 수를 제한합니다. 기본값은 `5`입니다.
 - `disableUserPersonalization`: DocSearch가 사용자의 최근 검색 및 즐겨찾기를 로컬 스토리지에 저장하지 못하도록 합니다. 기본값은 `false`입니다.
 - `insights`: Algolia Insights 플러그인을 활성화하고 검색 이벤트를 DocSearch 인덱스로 보냅니다. 기본값은 `false`입니다.
 - `searchParameters`: [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/)를 사용자 정의하는 객체입니다.
+
+##### 추가 DocSearch 옵션
+
+`transformItems()` 또는 `resultsFooterComponent()`와 같은 함수 옵션을 DocSearch 컴포넌트에 전달하려면 별도의 구성 파일이 필요합니다.
+
+<Steps>
+
+1. DocSearch 구성을 내보내는 TypeScript 파일을 만듭니다.
+
+   ```ts
+   // src/config/docsearch.ts
+   import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+
+   export default {
+   	appId: 'YOUR_APP_ID',
+   	apiKey: 'YOUR_SEARCH_API_KEY',
+   	indexName: 'YOUR_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
+   } satisfies DocSearchClientOptions;
+   ```
+
+2. `astro.config.mjs`의 Starlight DocSearch 플러그인에 구성 파일 경로를 전달합니다.
+
+   ```js {11-13}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Site with DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+지원되는 모든 옵션은 [DocSearch JavaScript 클라이언트 API 참조](https://docsearch.algolia.com/docs/api/)를 확인하세요.
 
 #### DocSearch UI 번역
 

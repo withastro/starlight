@@ -275,7 +275,7 @@ pagefind: false
 **Typ:** `boolean`  
 **Standard:** `false`
 
-Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build) und [Autogenerierte Link-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) aufgenommen werden soll. Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
+Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build). Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
 
 ```md
 ---
@@ -284,6 +284,9 @@ Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produ
 draft: true
 ---
 ```
+
+Da Entwurfsseiten nicht in die Build-Ausgabe aufgenommen werden, kannst du keine Entwurfsseiten direkt mit [Slugs](/de/guides/sidebar/#interne-links) zu deiner Seitenleistenkonfiguration hinzufügen.
+Entwurfsseiten in Verzeichnissen, die für [autogenerierte Seitenleisten-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) verwendet werden, werden bei Produktions-Builds automatisch ausgeschlossen.
 
 ### `sidebar`
 
