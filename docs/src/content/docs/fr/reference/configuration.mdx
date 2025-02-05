@@ -447,8 +447,8 @@ Lorsque des thèmes personnalisés sont utilisés et que cette option est défin
 
 ### `pagefind`
 
-**Type :** `boolean`  
-**Par défaut :** `false`
+**Type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
+**Par défaut :** `true`
 
 Définit si le système de recherche du site par défaut de Starlight, [Pagefind](https://pagefind.app/), est activé.
 
@@ -456,6 +456,40 @@ Utilisez la valeur `false` pour désactiver l'indexation de votre site avec Page
 Cela désactivera également l'interface de recherche par défaut de Starlight si utilisée.
 
 Pagefind ne peut pas être activé lorsque l'option [`prerender`](#prerender) est définie à `false`.
+
+Affectez un objet à `pagefind`pour configurer le client de recherche [Pagefind](https://pagefind.app/) :
+- Consultez [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) dans la documentation de Pagefind pour plus de détails à propos des options `pagefind.ranking` pour contrôler comment le classement des résultats de recherche est calculé,
+- Consultez [“Searching multiple sites”](https://pagefind.app/docs/multisite/) dans la documentation de Pagefind pour plus de détails à propos des options `pagefind.mergeIndex` pour configurer plusieurs site comme source de données de la recherche.
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	indexWeigth?: number;
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	mergeIndex?: [{
+		bundlePath: string;
+		indexWeigth?: number;
+		basePath?: string;
+		baseUrl?: string;
+		excerptLength?: number;
+		mergeFilter?: any;
+		highlightParam?: string;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}];
+}
+```
 
 ### `prerender`
 

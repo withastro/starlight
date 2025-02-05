@@ -469,12 +469,29 @@ Pagefind 문서의 ["Pagefind의 결과 순위 사용자 정의"](https://pagefi
 
 ```ts
 interface PagefindOptions {
+	indexWeigth?: number;
 	ranking?: {
 		pageLength?: number;
 		termFrequency?: number;
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
+	mergeIndex?: [{
+		bundlePath: string;
+		indexWeigth?: number;
+		basePath?: string;
+		baseUrl?: string;
+		excerptLength?: number;
+		mergeFilter?: any;
+		highlightParam?: string;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}];
 }
 ```
 

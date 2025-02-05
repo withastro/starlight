@@ -435,7 +435,7 @@ When setting `themes`, you must provide at least one dark and one light theme fo
 
 #### `useStarlightUiThemeColors`
 
-**type:** `boolean`  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **default:** `true` if `themes` is not set, otherwise `false`
 
 When `true`, Starlight's CSS variables are used for the colors of code block UI elements (backgrounds, buttons, shadows etc.), matching the [site color theme](/guides/css-and-tailwind/#theming).
@@ -447,7 +447,7 @@ When using custom themes and setting this to `true`, you must provide at least o
 
 ### `pagefind`
 
-**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>
 **default:** `true`
 
 Configure Starlight’s default site search provider [Pagefind](https://pagefind.app/).
@@ -457,19 +457,37 @@ This will also hide the default search UI if in use.
 
 Pagefind cannot be enabled when the [`prerender`](#prerender) option is set to `false`.
 
-Set `pagefind` to an object to configure the Pagefind search client.
-See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated.
+Set `pagefind` to an object to configure the Pagefind search client :
+- See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated
+- See [“Searching multiple sites”](https://pagefind.app/docs/multisite/) in the Pagefind documentation for more details about using the `pagefind.mergeIndex` option to control how to search accros multiple sites
 
 #### `PagefindOptions`
 
 ```ts
 interface PagefindOptions {
+	indexWeigth?: number;
 	ranking?: {
 		pageLength?: number;
 		termFrequency?: number;
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
+	mergeIndex?: [{
+		bundlePath: string;
+		indexWeigth?: number;
+		basePath?: string;
+		baseUrl?: string;
+		excerptLength?: number;
+		mergeFilter?: any;
+		highlightParam?: string;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}];
 }
 ```
 

@@ -447,7 +447,7 @@ Saat menggunakan tema khusus dan menyetelnya ke `true`, Anda harus menyediakan s
 
 ### `pagefind`
 
-**type:** `boolean`  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **default:** `true`
 
 Tentukan apakah penyedia pencarian situs default Starlight [Pagefind](https://pagefind.app/) diaktifkan.
@@ -456,6 +456,36 @@ Atur ke `false` untuk menonaktifkan pengindeksan situs Anda dengan Pagefind.
 Ini juga akan menyembunyikan UI pencarian default jika digunakan.
 
 Pagefind tidak dapat diaktifkan saat opsi [`prerender`](#prerender) diatur ke `false`.
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	indexWeigth?: number;
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	mergeIndex?: [{
+		bundlePath: string;
+		indexWeigth?: number;
+		basePath?: string;
+		baseUrl?: string;
+		excerptLength?: number;
+		mergeFilter?: any;
+		highlightParam?: string;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}];
+}
+```
 
 ### `prerender`
 

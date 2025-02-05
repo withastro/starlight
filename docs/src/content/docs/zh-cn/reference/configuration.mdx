@@ -444,12 +444,42 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 ### `pagefind`
 
-**类型：** `boolean`  
+**类型：** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **默认值：** `true`
 
 定义 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/) 是否启用。
 
 将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	indexWeigth?: number;
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	mergeIndex?: [{
+		bundlePath: string;
+		indexWeigth?: number;
+		basePath?: string;
+		baseUrl?: string;
+		excerptLength?: number;
+		mergeFilter?: any;
+		highlightParam?: string;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}];
+}
+```
 
 当 [`prerender`](#prerender) 选项设置为 `false` 时，无法启用 Pagefind。
 

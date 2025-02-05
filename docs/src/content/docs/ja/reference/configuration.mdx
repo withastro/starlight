@@ -425,7 +425,7 @@ Starlightは、デフォルトでSarah Drasnerの[Night Owlテーマ](https://gi
 
 #### `useStarlightUiThemeColors`
 
-**type:** `boolean`  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **default:** `themes`が設定されていない場合は`true`、それ以外の場合は`false`
 
 `true`の場合、コードブロックのUI要素（背景、ボタン、シャドウなど）の色にStarlightのCSS変数が使用され、[サイトのカラーテーマ](/ja/guides/css-and-tailwind/#テーマの設定)と一致させます。`false`の場合、これらの要素には、アクティブなシンタックスハイライトのテーマから提供される色が使用されます。
@@ -436,7 +436,7 @@ Starlightは、デフォルトでSarah Drasnerの[Night Owlテーマ](https://gi
 
 ### `pagefind`
 
-**type:** `boolean`  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **default:** `true`
 
 Starlightのデフォルトのサイト検索プロバイダである[Pagefind](https://pagefind.app/)を有効にするかどうかを定義します。
@@ -444,6 +444,36 @@ Starlightのデフォルトのサイト検索プロバイダである[Pagefind](
 `false`に設定すると、Pagefindによるサイトのインデックス作成はおこなわれません。また、デフォルトの検索UIを使用している場合は、これも非表示になります。
 
 [`prerender`](#prerender)オプションが`false`に設定されている場合、Pagefindを有効にすることはできません。
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	indexWeigth?: number;
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	mergeIndex?: [{
+		bundlePath: string;
+		indexWeigth?: number;
+		basePath?: string;
+		baseUrl?: string;
+		excerptLength?: number;
+		mergeFilter?: any;
+		highlightParam?: string;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}];
+}
+```
 
 ### `prerender`
 
