@@ -89,7 +89,7 @@ export default {
 
 **тип:** `(integration: AstroIntegration) => void`
 
-Функция обратного вызова для добавления [Astro integration](https://docs.astro.build/ru/reference/integrations-reference/), необходимой плагину.
+Функция обратного вызова для добавления [интеграции Astro](https://docs.astro.build/ru/reference/integrations-reference/), необходимой плагину.
 
 В следующем примере плагин сначала проверяет, настроена ли [интеграция Astro с React](https://docs.astro.build/ru/guides/integrations-guide/react/), и, если нет, использует `addIntegration()` для её добавления:
 
