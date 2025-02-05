@@ -17,9 +17,7 @@ declare module 'virtual:starlight/collection-config' {
 }
 
 declare module 'virtual:starlight/route-middleware' {
-	export const routeMiddleware: Array<
-		(context: import('astro').APIContext, next: () => Promise<void>) => void | Promise<void>
-	>;
+	export const routeMiddleware: Array<import('./route-data').RouteMiddlewareHandler>;
 }
 
 declare module 'virtual:starlight/pagefind-config' {
