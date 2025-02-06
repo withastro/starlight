@@ -1,6 +1,6 @@
 import { z } from 'astro/zod';
 
-const indexWeightSchema = z.number().nonnegative().nullish();
+const indexWeightSchema = z.number().nonnegative().optional();
 const pagefindRankingWeightsSchema = z
 	.object({
 		/**
@@ -40,7 +40,7 @@ const pagefindIndexOptionsSchema = z.object({
     /** 
 	 * Overrides the URL path that Pagefind uses to load its search bundle
 	 * */
-	basePath: z.string().nullish(),
+	basePath: z.string().optional(),
     /**
 	 * Appends the given baseURL to all search results. May be a path, or a full domain
 	 * */
@@ -53,16 +53,20 @@ const pagefindIndexOptionsSchema = z.object({
      * Merge this filter object into all search queries in this index.
      *
      * Only applies in multisite setups.
+	 * 
+	 * Expected formalism is an object :
+	 * - with keys as the filter names 
+	 * - and values as the filter values, represented as a string or an array of strings.
      */
-	mergeFilter: z.any().nullish(),
+	mergeFilter: z.any().optional(),
     /**
      * Language of this index.
      */
-	language: z.string().nullish(),
+	language: z.string().optional(),
     /**
      * Provides the ability to fine tune Pagefind's ranking algorithm to better suit your dataset.
      */
-	ranking: pagefindRankingWeightsSchema.nullish(),
+	ranking: pagefindRankingWeightsSchema.optional(),
 });
 
 const pagefindSchema = z.object({
@@ -102,7 +106,7 @@ const pagefindSchema = z.object({
 				bundlePath: z.string(),
 			})
 		)
-		.nullish(),
+		.optional(),
 });
 
 export const PagefindConfigSchema = () => pagefindSchema;
