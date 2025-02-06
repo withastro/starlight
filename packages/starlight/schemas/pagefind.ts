@@ -44,13 +44,7 @@ const pagefindIndexOptionsSchema = z.object({
     /**
 	 * Appends the given baseURL to all search results. May be a path, or a full domain
 	 * */
-	baseUrl: z.string().nullish(),
-    /**
-	 *  The maximum length of excerpts that Pagefind should generate for search results.
-     *
-     * Only applies in multisite setups, where one site should rank higher or lower than others.
-	 * */
-	excerptLength: z.number().nonnegative().nullish(),
+	baseUrl: z.string().optional(),
     /**
      * Multiply all rankings for this index by the given weight.
      */
@@ -61,10 +55,6 @@ const pagefindIndexOptionsSchema = z.object({
      * Only applies in multisite setups.
      */
 	mergeFilter: z.any().nullish(),
-    /**
-     * If set, will ass the search term as a query parameter under this key, for use with Pagefind's highlighting script.
-     */
-	highlightParam: z.string().nullish(),
     /**
      * Language of this index.
      */
