@@ -20,7 +20,7 @@ test('returns all integrations added by plugins without deduping them', async ()
 			{
 				name: 'test-plugin-1',
 				hooks: {
-					setup({ addIntegration, updateConfig }) {
+					'config:setup'({ addIntegration, updateConfig }) {
 						updateConfig({ description: 'test' });
 						addIntegration(integration1);
 					},
@@ -29,7 +29,7 @@ test('returns all integrations added by plugins without deduping them', async ()
 			{
 				name: 'test-plugin-2',
 				hooks: {
-					setup({ addIntegration }) {
+					'config:setup'({ addIntegration }) {
 						addIntegration(integration1);
 						addIntegration(integration2);
 					},
@@ -55,7 +55,7 @@ test('receives the Astro config with a list of integrations including the ones a
 			{
 				name: 'test-plugin-1',
 				hooks: {
-					setup({ addIntegration }) {
+					'config:setup'({ addIntegration }) {
 						addIntegration({
 							name: 'test-integration',
 							hooks: {},
@@ -66,7 +66,7 @@ test('receives the Astro config with a list of integrations including the ones a
 			{
 				name: 'test-plugin-2',
 				hooks: {
-					setup({ astroConfig }) {
+					'config:setup'({ astroConfig }) {
 						expect(astroConfig.integrations).toMatchObject([{ name: 'test-integration' }]);
 					},
 				},
