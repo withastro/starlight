@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.31.2
+
+### Patch Changes
+
+- [#2848](https://github.com/withastro/starlight/pull/2848) [`9b32ba9`](https://github.com/withastro/starlight/commit/9b32ba967c5741354bc99ba0bcff3f454b8117ad) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes styling of [filter](https://pagefind.app/docs/filtering/) and [metadata](https://pagefind.app/docs/metadata/) elements in Pagefind search UI.
+
 ## 0.31.1
 
 ### Patch Changes
