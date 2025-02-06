@@ -413,41 +413,13 @@ Ao utilizar temas customizados e definir esta opção para `true`, você deve pr
 
 ### `pagefind`
 
-**tipo:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
+**tipo:** `boolean`  
 **padrão:** `true`
 
 Define se o [Pagefind](https://pagefind.app/), provedor de busca dentro do site padrão do Starlight, está habilitado.
 
 Defina como `false` para desabilitar a indexação de seu site com Pagefind.
 Isso também vai ocultar a UI de busca padrão se utilizado.
-
-#### `PagefindOptions`
-
-```ts
-interface PagefindOptions {
-	indexWeigth?: number;
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
-	mergeIndex?: [{
-		bundlePath: string;
-		indexWeigth?: number;
-		basePath?: string;
-		baseUrl?: string;
-		mergeFilter?: any;
-		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
-	}];
-}
-```
 
 ### `head`
 

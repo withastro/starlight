@@ -447,7 +447,7 @@ Cuando usas temas personalizados y estableces esto en `true`, debes proporcionar
 
 ### `pagefind`
 
-**tipo:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>
+**tipo:** `boolean`  
 **por defecto:** `true`
 
 Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https://pagefind.app/) está habilitado.
@@ -456,34 +456,6 @@ Establece esta opción a `false` para excluir una página de los resultados de b
 Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
 
 Pagefind no puede estar habilitado cuando la opción [`prerender`](#prerender) está establecida en `false`.
-
-#### `PagefindOptions`
-
-```ts
-interface PagefindOptions {
-	indexWeigth?: number;
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
-	mergeIndex?: [{
-		bundlePath: string;
-		indexWeigth?: number;
-		basePath?: string;
-		baseUrl?: string;
-		mergeFilter?: any;
-		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
-	}];
-}
-```
 
 ### `prerender`
 

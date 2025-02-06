@@ -449,7 +449,7 @@ Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du
 
 ### `pagefind`
 
-**Typ:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>
+**Typ:** `boolean`  
 **Standard:** `true`
 
 Lege fest, ob Starlights Standard-Site-Search-Anbieter [Pagefind](https://pagefind.app/) aktiviert ist.
@@ -458,34 +458,6 @@ Setze diese Option auf `false`, um die Indizierung deiner Website mit Pagefind z
 Dadurch wird auch die Standard-Suchoberfläche ausgeblendet, falls sie verwendet wird.
 
 Pagefind kann nicht aktiviert werden, wenn die Option [`prerender`](#prerender) auf `false` gesetzt ist.
-
-#### `PagefindOptions`
-
-```ts
-interface PagefindOptions {
-	indexWeigth?: number;
-	ranking?: {
-		pageLength?: number;
-		termFrequency?: number;
-		termSaturation?: number;
-		termSimilarity?: number;
-	};
-	mergeIndex?: [{
-		bundlePath: string;
-		indexWeigth?: number;
-		basePath?: string;
-		baseUrl?: string;
-		mergeFilter?: any;
-		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
-	}];
-}
-```
 
 ### `prerender`
 

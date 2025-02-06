@@ -468,27 +468,12 @@ Pagefind не может быть включен, если для парамет
 
 ```ts
 interface PagefindOptions {
-	indexWeigth?: number;
 	ranking?: {
 		pageLength?: number;
 		termFrequency?: number;
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
-	mergeIndex?: [{
-		bundlePath: string;
-		indexWeigth?: number;
-		basePath?: string;
-		baseUrl?: string;
-		mergeFilter?: any;
-		language?: string;
-		ranking?: {
-			pageLength?: number;
-			termFrequency?: number;
-			termSaturation?: number;
-			termSimilarity?: number;
-		};
-	}];
 }
 ```
 
