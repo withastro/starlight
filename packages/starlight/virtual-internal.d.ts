@@ -16,6 +16,10 @@ declare module 'virtual:starlight/collection-config' {
 	export const collections: import('astro:content').ContentConfig['collections'] | undefined;
 }
 
+declare module 'virtual:starlight/route-middleware' {
+	export const routeMiddleware: Array<import('./route-data').RouteMiddlewareHandler>;
+}
+
 declare module 'virtual:starlight/pagefind-config' {
 	export const pagefindUserConfig: Partial<
 		Extract<import('./types').StarlightConfig['pagefind'], object>
