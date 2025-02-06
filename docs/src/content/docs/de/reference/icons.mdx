@@ -12,6 +12,19 @@ Starlight bietet eine Reihe von eingebauten Icons, die du mit Hilfe der Komponen
 Symbole können mit der Komponente [`<Icon>`](/de/components/icons/) angezeigt werden.
 Sie werden auch häufig in anderen Komponenten verwendet, wie [Karten](/de/components/cards/) oder Umgebungen wie [Hero-Komponenten](/de/reference/frontmatter/#hero).
 
+## `StarlightIcon`-Typ
+
+Verwende den TypeScript-Typ `StarlightIcon`, um die Namen von [Starlights eingebauten Icons](#alle-symbole) zu referenzieren.
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
 ## Alle Symbole
 
 Nachstehend findest du eine Liste aller verfügbaren Symbole mit den zugehörigen Namen. Klicke auf ein Symbol, um den Namen in deine Zwischenablage zu kopieren.

@@ -386,10 +386,10 @@ starlight({
 **Typ:** `StarlightExpressiveCodeOptions | boolean`  
 **Standard:** `true`
 
-Starlight verwendet [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
+Starlight verwendet [Expressive Code](https://expressive-code.com), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
 Im [Handbuch „Codeblöcke“](/de/guides/authoring-content/#codeblöcke) erfährst du, wie du die Expressive Code-Syntax in deinen Markdown- und MDX-Inhalten verwendest.
 
-Du kannst alle standardmäßigen [Expressive Code-Konfigurationsoptionen](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
+Du kannst alle standardmäßigen [Expressive Code-Konfigurationsoptionen](https://expressive-code.com/reference/configuration/) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
 Lege beispielsweise die Option `styleOverrides` von Expressive Code fest, um das Standard-CSS zu überschreiben. Dadurch sind Anpassungen möglich, beispielsweise das Hinzufügen abgerundeter Ecken zu deinen Codeblöcken:
 
 ```js ins={2-4}
@@ -416,7 +416,7 @@ Zusätzlich zu den standardmäßigen Expressive Code-Optionen kannst du in deine
 **Standard:** `['starlight-dark', 'starlight-light']`
 
 Lege die Designs fest, die zum Stylen von Codeblöcken verwendet werden.
-Weitere Informationen zu den unterstützten Designformaten findest du in der [Expressive Code-Dokumentation zu Designs](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes).
+Weitere Informationen zu den unterstützten Designformaten findest du in der [Expressive Code-Dokumentation zu Designs](https://expressive-code.com/guides/themes/).
 
 Starlight verwendet standardmäßig die dunkle und helle Variante von Sarah Drasners [Night Owl-Thema](https://github.com/sdras/night-owl-vscode-theme).
 
@@ -429,7 +429,7 @@ Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#use
 **Standard:** `true`
 
 Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Site-Design ändert.
-Falls `false`, müssen Sie manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
+Falls `false`, musst du manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
 
 :::note
 Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Design angeben, damit der Wechsel zum Starlight-Dunkelmodus funktioniert.

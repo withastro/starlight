@@ -20,7 +20,7 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	/**
 	 * Set the themes used to style code blocks.
 	 *
-	 * See the [Expressive Code `themes` documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)
+	 * See the [Expressive Code `themes` documentation](https://expressive-code.com/guides/themes/)
 	 * for details of the supported theme formats.
 	 *
 	 * Starlight uses the dark and light variants of Sarah Drasner’s

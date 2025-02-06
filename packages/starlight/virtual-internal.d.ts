@@ -16,6 +16,12 @@ declare module 'virtual:starlight/collection-config' {
 	export const collections: import('astro:content').ContentConfig['collections'] | undefined;
 }
 
+declare module 'virtual:starlight/pagefind-config' {
+	export const pagefindUserConfig: Partial<
+		Extract<import('./types').StarlightConfig['pagefind'], object>
+	>;
+}
+
 declare module 'virtual:starlight/components/Banner' {
 	const Banner: typeof import('./components/Banner.astro').default;
 	export default Banner;

@@ -2,13 +2,13 @@ import type { Element } from 'hast';
 import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import { Icons } from '../components/Icons';
+import type { StarlightIcon } from '../components/Icons';
 
 interface Panel {
 	panelId: string;
 	tabId: string;
 	label: string;
-	icon?: keyof typeof Icons;
+	icon?: StarlightIcon;
 }
 
 declare module 'vfile' {
@@ -67,7 +67,7 @@ const tabsProcessor = rehype()
 					...ids,
 					label: String(dataLabel),
 				};
-				if (dataIcon) panel.icon = String(dataIcon) as keyof typeof Icons;
+				if (dataIcon) panel.icon = String(dataIcon) as StarlightIcon;
 				file.data.panels?.push(panel);
 
 				// Remove `<TabItem>` props

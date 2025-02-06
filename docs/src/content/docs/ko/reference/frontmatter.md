@@ -271,7 +271,7 @@ pagefind: false
 **타입:** `boolean`  
 **기본값:** `false`
 
-이 페이지를 초안으로 간주하여 [프로덕션 빌드](https://docs.astro.build/ko/reference/cli-reference/#astro-build) 및 [자동 생성된 링크 그룹](/ko/guides/sidebar/#자동-생성-그룹)에 포함하지 않을지 여부를 설정합니다. 페이지를 초안으로 표시하고 개발 중에만 표시하려면 `true`로 설정하세요.
+이 페이지를 초안으로 간주하여 [프로덕션 빌드](https://docs.astro.build/ko/reference/cli-reference/#astro-build)에서 제외할지 설정합니다. 페이지를 초안으로 표시하여 개발 중에만 표시하려면 `true`로 설정하세요.
 
 ```md
 ---
@@ -280,6 +280,9 @@ pagefind: false
 draft: true
 ---
 ```
+
+초안 페이지는 빌드 출력에 포함되지 않으므로 [슬러그](/ko/guides/sidebar/#내부-링크)를 사용하여 사이트 사이드바 구성에 직접 초안 페이지를 추가할 수 없습니다.
+[자동 생성된 사이드바 그룹](/ko/guides/sidebar/#자동-생성-그룹)에 사용되는 디렉터리의 초안 페이지는 프로덕션 빌드에서 자동으로 제외됩니다.
 
 ### `sidebar`
 

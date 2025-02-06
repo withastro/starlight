@@ -76,6 +76,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <script>
+	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super();
@@ -139,6 +141,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 					// @ts-expect-error — Missing types for @pagefind/default-ui package.
 					const { PagefindUI } = await import('@pagefind/default-ui');
 					new PagefindUI({
+						...pagefindUserConfig,
 						element: '#starlight__search',
 						baseUrl: import.meta.env.BASE_URL,
 						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
@@ -253,13 +256,18 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	}
 
 	#starlight__search {
-		--pagefind-ui-primary: var(--sl-color-accent-light);
+		--pagefind-ui-primary: var(--sl-color-text);
 		--pagefind-ui-text: var(--sl-color-gray-2);
 		--pagefind-ui-font: var(--__sl-font);
 		--pagefind-ui-background: var(--sl-color-black);
 		--pagefind-ui-border: var(--sl-color-gray-5);
 		--pagefind-ui-border-width: 1px;
+		--pagefind-ui-tag: var(--sl-color-gray-5);
 		--sl-search-cancel-space: 5rem;
+	}
+
+	:root[data-theme='light'] #starlight__search {
+		--pagefind-ui-tag: var(--sl-color-gray-6);
 	}
 
 	@media (min-width: 50rem) {
@@ -436,7 +444,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
 			0% 0% / 100% no-repeat;
 	}
-	#starlight__search .pagefind-ui__result-nested:last-child::before {
+	#starlight__search .pagefind-ui__result-nested:last-of-type::before {
 		-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 	}
@@ -462,5 +470,15 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		color: var(--sl-color-gray-2);
 		background-color: transparent;
 		font-weight: 600;
+	}
+
+	#starlight__search .pagefind-ui__filter-value::before {
+		border-color: var(--sl-color-text-invert);
+	}
+
+	#starlight__search .pagefind-ui__result-tags {
+		background-color: var(--sl-color-black);
+		margin-top: 0;
+		padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
 	}
 </style>
