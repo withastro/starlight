@@ -58,7 +58,12 @@ const pagefindIndexOptionsSchema = z.object({
 	 * - with keys as the filter names 
 	 * - and values as the filter values, represented as a string or an array of strings.
      */
-	mergeFilter: z.any().optional(),
+	mergeFilter: z.record(
+		z.string(),
+		z.string().or(
+			z.array(z.string()).nonempty()
+		)
+	).optional(),
     /**
      * Language of this index.
      */
