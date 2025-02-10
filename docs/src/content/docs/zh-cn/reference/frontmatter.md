@@ -336,7 +336,7 @@ sidebar:
 
 #### `hidden`
 
-**类型：** `boolean`
+**类型：** `boolean`  
 **默认值：** `false`
 
 防止此页面包含在自动生成的侧边栏组中。
