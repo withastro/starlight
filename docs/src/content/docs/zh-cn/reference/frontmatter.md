@@ -272,7 +272,7 @@ pagefind: false
 **类型：** `boolean`  
 **默认值：** `false`
 
-设置此页面是否应被视为草稿，并且不包含在 [生产版本](https://docs.astro.build/zh-cn/reference/cli-reference/#astro-build) 和 [自动生成的链接组](/zh-cn/guides/sidebar/#自动生成的分组) 中。设置为 `true` 可将页面标记为草稿，并使其仅在开发过程中可见。
+设置此页面是否应被视为草稿，并且不包含在 [生产版本](https://docs.astro.build/zh-cn/reference/cli-reference/#astro-build)。设置为 `true` 可将页面标记为草稿，并使其仅在开发过程中可见。
 
 ```md
 ---
@@ -281,6 +281,8 @@ pagefind: false
 draft: true
 ---
 ```
+
+因为草稿页面并不包含在构建输出中，所以你无法使用 [slugs](/zh-cn/guides/sidebar/#内部链接) 直接将草稿页面添加到网页中。目录中用于 [自动生成侧栏组](/zh-cn/guides/sidebar/#自动生成的分组) 的草稿页面在生产版中自动排除。
 
 ### `sidebar`
 
