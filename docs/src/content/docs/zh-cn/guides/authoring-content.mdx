@@ -223,13 +223,13 @@ var fun = function lang(l) {
 
 ### Expressive Code 功能
 
-Starlight 使用 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) 来扩展代码块的格式化功能。
+Starlight 使用 [Expressive Code](https://expressive-code.com/) 来扩展代码块的格式化功能。
 Expressive Code 的文本标记和窗口外框插件是默认启用的。
 可以使用 Starlight 的 [`expressiveCode` 配置选项](/zh-cn/reference/configuration/#expressivecode) 来配置代码块的渲染。
 
 #### 文本标记
 
-你可以通过在代码块的起始行上使用 [Expressive Code 文本标记 (text markers)](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) 在代码块里突出显示特定行或代码块的一部分。
+你可以通过在代码块的起始行上使用 [Expressive Code 文本标记 (text markers)](https://expressive-code.com/key-features/text-markers/) 在代码块里突出显示特定行或代码块的一部分。
 使用大括号 (`{ }`) 来突出显示整行，使用引号来突出显示文本字符串。
 
 有三种突出显示样式：中性用于突出显示代码，绿色用于表示插入的代码，红色用于表示删除的代码。
@@ -237,10 +237,10 @@ Expressive Code 的文本标记和窗口外框插件是默认启用的。
 
 Expressive Code 提供了几种自定义你的代码示例视觉外观的选项。
 其中许多可以组合使用，以获得极具说明性的代码示例。
-请探索 [Expressive Code 文档](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) 以了解可用的众多设置项。
+请探索 [Expressive Code 文档](https://expressive-code.com/key-features/text-markers/#configuration) 以了解众多可用的设置项。
 下面显示了一些最常见的示例：
 
-- [使用 `{ }` 标记标出整行和行范围](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [使用 `{ }` 标记标出整行和行范围](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -258,7 +258,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
-- [使用 `" "` 标记或正则表达式标出文本字符串](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+- [使用 `" "` 标记或正则表达式标出文本字符串](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
   ```js "单个词组" /甚.*表达式/
   // 单个词组也能被高亮显示
@@ -276,7 +276,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
-- [使用 `ins` 或 `del` 来标记行或文本为插入或删除](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+- [使用 `ins` 或 `del` 来标记行或文本为插入或删除](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
   ```js "return true;" ins="插入" del="删除"
   function demo() {
@@ -296,7 +296,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
-- [混合语法高亮和类 `diff` 语法](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+- [混合语法高亮和类 `diff` 语法](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -326,7 +326,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
 
 一个代码块的可选标题可以通过在代码块的开头反引号后面添加一个 `title="..."` 属性来设置，或者通过在代码的前几行中添加一个文件名注释来设置。
 
-- [通过注释添加一个文件名标签](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [通过注释添加一个文件名标签](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // my-test-file.js
@@ -340,7 +340,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
-- [给终端窗口添加一个标题](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [给终端窗口添加一个标题](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="安装依赖…"
   npm install
@@ -352,7 +352,7 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
-- [使用 `frame="none"` 禁用边框](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+- [使用 `frame="none"` 禁用边框](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "这个代码块即使使用了 bash 语言也不会被显示成终端窗口"
