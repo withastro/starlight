@@ -220,13 +220,13 @@ var fun = function lang(l) {
 
 ### Возможности Expressive Code
 
-Starlight использует [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) для расширения возможностей форматирования блоков кода.
+Starlight использует [Expressive Code](https://expressive-code.com/) для расширения возможностей форматирования блоков кода.
 Текстовые маркеры и плагины оконных рамок Expressive Code включены по умолчанию.
 Рендеринг блоков кода можно настроить с помощью [параметра конфигурации `expressiveCode`](/ru/reference/configuration/#expressivecode) Starlight.
 
 #### Текстовые маркеры
 
-Вы можете выделить определённые строки или части блоков кода с помощью [текстовых маркеров Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) в первой строке вашего блока кода.
+Вы можете выделить определённые строки или части блоков кода с помощью [текстовых маркеров Expressive Code](https://expressive-code.com/key-features/text-markers/) в первой строке вашего блока кода.
 Используйте фигурные скобки (`{ }`), чтобы выделить целые строки, и кавычки, чтобы выделить строки текста.
 
 Существует три стиля выделения: нейтральный для привлечения внимания к коду, зелёный для обозначения вставленного кода и красный для обозначения удалённого кода.
@@ -234,10 +234,10 @@ Starlight использует [Expressive Code](https://github.com/expressive-c
 
 Expressive Code предоставляет несколько вариантов настройки внешнего вида примеров кода.
 Многие из них можно комбинировать для получения наглядных примеров кода.
-Ознакомьтесь с [документацией Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md), чтобы узнать о расширенных возможностях. доступный.
+Ознакомьтесь с [документацией Expressive Code](https://expressive-code.com/key-features/text-markers/#configuration), чтобы узнать о расширенных возможностях. доступный.
 Некоторые из наиболее распространённых примеров показаны ниже:
 
-- [Пометка целых строк и диапазонов строк с помощью маркера `{ }`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Пометка целых строк и диапазонов строк с помощью маркера `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -255,7 +255,7 @@ Expressive Code предоставляет несколько вариантов
   ```
   ````
 
-- [Пометка выделенного текста с помощью маркера `" "` или регулярных выражений](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+- [Пометка выделенного текста с помощью маркера `" "` или регулярных выражений](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
   ```js "Отдельные термины" /даже.*выражения/
   // Отдельные термины также могут быть выделены
@@ -273,7 +273,7 @@ Expressive Code предоставляет несколько вариантов
   ```
   ````
 
-- [Пометка текста или строк как вставленных или удалённых с помощью `ins` или `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+- [Пометка текста или строк как вставленных или удалённых с помощью `ins` или `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
   ```js "return true;" ins="вставленные" del="удалённые"
   function demo() {
@@ -293,7 +293,7 @@ Expressive Code предоставляет несколько вариантов
   ```
   ````
 
-- [Объединение подсветки синтаксиса с синтаксисом типа `diff`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+- [Объединение подсветки синтаксиса с синтаксисом типа `diff`](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -323,7 +323,7 @@ Expressive Code предоставляет несколько вариантов
 
 Необязательный заголовок блока кода может быть установлен либо с помощью атрибута `title="..."` после открывающих обратных кавычек блока кода и идентификатора языка, либо с помощью комментария к имени файла в первых строках кода.
 
-- [Добавление вкладки имени файла с помощью комментария](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Добавление вкладки имени файла с помощью комментария](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // my-test-file.js
@@ -337,7 +337,7 @@ Expressive Code предоставляет несколько вариантов
   ```
   ````
 
-- [Добавление заголовка в окне терминала](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Добавление заголовка в окне терминала](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="Установка зависимостей…"
   npm install
@@ -349,7 +349,7 @@ Expressive Code предоставляет несколько вариантов
   ```
   ````
 
-- [Отключение оконных рамок с помощью `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+- [Отключение оконных рамок с помощью `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "Это не отображается как терминал, несмотря на использование языка bash"
