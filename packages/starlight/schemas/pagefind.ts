@@ -47,6 +47,8 @@ const pagefindIndexOptionsSchema = z.object({
 	baseUrl: z.string().optional(),
     /**
      * Multiply all rankings for this index by the given weight.
+     *
+     * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
      */
 	indexWeight: indexWeightSchema,
     /**
