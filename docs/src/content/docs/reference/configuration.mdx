@@ -466,29 +466,27 @@ Set `pagefind` to an object to configure the Pagefind search client:
 
 ```ts
 interface PagefindOptions {
-	indexWeight?: number;
 	ranking?: {
 		pageLength?: number;
 		termFrequency?: number;
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
-	mergeIndex?: [
-		{
-			bundlePath: string;
-			indexWeight?: number;
-			basePath?: string;
-			baseUrl?: string;
-			mergeFilter?: Record<string, string | string[]>;
-			language?: string;
-			ranking?: {
-				pageLength?: number;
-				termFrequency?: number;
-				termSaturation?: number;
-				termSimilarity?: number;
-			};
-		},
-	];
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
 }
 ```
 
