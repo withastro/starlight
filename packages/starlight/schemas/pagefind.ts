@@ -66,6 +66,8 @@ const pagefindIndexOptionsSchema = z.object({
 	).optional(),
     /**
      * Language of this index.
+     *
+     * @see https://pagefind.app/docs/multisite/#merging-a-specific-language-index
      */
 	language: z.string().optional(),
     /**
