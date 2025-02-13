@@ -71,7 +71,7 @@ const pagefindIndexOptionsSchema = z.object({
      */
 	language: z.string().optional(),
     /**
-     * Provides the ability to fine tune Pagefind's ranking algorithm to better suit your dataset.
+     * Configure how search result rankings are calculated by Pagefind.
      */
 	ranking: pagefindRankingWeightsSchema.optional(),
 });
