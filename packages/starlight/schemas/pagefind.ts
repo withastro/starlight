@@ -52,7 +52,7 @@ const pagefindIndexOptionsSchema = z.object({
      */
 	indexWeight: indexWeightSchema,
     /**
-     * Merge this filter object into all search queries in this index.
+     * Apply this filter configuration to all search results from this index.
      *
      * Only applies in multisite setups.
 	 * 
