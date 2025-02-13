@@ -11,7 +11,14 @@ test('starlightRoute throws when accessed outside of a Starlight page', async ()
 		"[AstroUserError]:
 			\`locals.starlightRoute\` is not defined
 		Hint:
-			This usually means a Starlight component is being rendered outside of a Starlight page, which is not supported."
+			This usually means a component that accesses \`locals.starlightRoute\` is being rendered outside of a Starlight page, which is not supported.
+			
+			If this is a component you authored, you can do one of the following:
+			
+			1. Avoid using that component in non-Starlight pages.
+			2. Wrap the code that reads \`locals.starlightRoute\` in a  \`try/catch\` block and handle the cases where \`starlightRoute\` is not available.
+			
+			If this is a Starlight built-in or third-party component, you may need to report a bug or avoid this use of the component."
 	`);
 });
 
