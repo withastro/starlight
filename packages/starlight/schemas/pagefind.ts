@@ -105,7 +105,6 @@ const pagefindSchema = z.object({
 				 * Set Pagefind’s `bundlePath` mergeIndex option.
 				 *
 				 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
-				 * @see https://github.com/CloudCannon/pagefind/blob/v1.3.0/pagefind_ui/modular/modular-core.js#L192
 				 */
 				bundlePath: z.string(),
 			})
