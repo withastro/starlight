@@ -39,11 +39,11 @@ const pagefindRankingWeightsSchema = z
 const pagefindIndexOptionsSchema = z.object({
     /** 
 	 * Overrides the URL path that Pagefind uses to load its search bundle
-	 * */
+	 */
 	basePath: z.string().optional(),
     /**
 	 * Appends the given baseURL to all search results. May be a path, or a full domain
-	 * */
+	 */
 	baseUrl: z.string().optional(),
     /**
      * Multiply all rankings for this index by the given weight.
