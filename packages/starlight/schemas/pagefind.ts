@@ -1,78 +1,72 @@
 import { z } from 'astro/zod';
 
 const indexWeightSchema = z.number().nonnegative().optional();
-const pagefindRankingWeightsSchema = z
-	.object({
-		/**
-		 * Set Pagefind’s `pageLength` ranking option.
-		 *
-		 * The default value is `0.1` and values must be in the range `0` to `1`.
-		 *
-		 * @see https://pagefind.app/docs/ranking/#configuring-page-length
-		 */
-		pageLength: z.number().min(0).max(1).default(0.1),
-		/**
-		 * Set Pagefind’s `termFrequency` ranking option.
-		 *
-		 * The default value is `0.1` and values must be in the range `0` to `1`.
-		 *
-		 * @see https://pagefind.app/docs/ranking/#configuring-term-frequency
-		 */
-		termFrequency: z.number().min(0).max(1).default(0.1),
-		/**
-		 * Set Pagefind’s `termSaturation` ranking option.
-		 *
-		 * The default value is `2` and values must be in the range `0` to `2`.
-		 *
-		 * @see https://pagefind.app/docs/ranking/#configuring-term-saturation
-		 */
-		termSaturation: z.number().min(0).max(2).default(2),
-		/**
-		 * Set Pagefind’s `termSimilarity` ranking option.
-		 *
-		 * The default value is `9` and values must be greater than or equal to `0`.
-		 *
-		 * @see https://pagefind.app/docs/ranking/#configuring-term-similarity
-		 */
-		termSimilarity: z.number().min(0).default(9),
-	});
+const pagefindRankingWeightsSchema = z.object({
+	/**
+	 * Set Pagefind’s `pageLength` ranking option.
+	 *
+	 * The default value is `0.1` and values must be in the range `0` to `1`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-page-length
+	 */
+	pageLength: z.number().min(0).max(1).default(0.1),
+	/**
+	 * Set Pagefind’s `termFrequency` ranking option.
+	 *
+	 * The default value is `0.1` and values must be in the range `0` to `1`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-term-frequency
+	 */
+	termFrequency: z.number().min(0).max(1).default(0.1),
+	/**
+	 * Set Pagefind’s `termSaturation` ranking option.
+	 *
+	 * The default value is `2` and values must be in the range `0` to `2`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-term-saturation
+	 */
+	termSaturation: z.number().min(0).max(2).default(2),
+	/**
+	 * Set Pagefind’s `termSimilarity` ranking option.
+	 *
+	 * The default value is `9` and values must be greater than or equal to `0`.
+	 *
+	 * @see https://pagefind.app/docs/ranking/#configuring-term-similarity
+	 */
+	termSimilarity: z.number().min(0).default(9),
+});
 const pagefindIndexOptionsSchema = z.object({
-    /** 
+	/**
 	 * Overrides the URL path that Pagefind uses to load its search bundle
 	 */
 	basePath: z.string().optional(),
-    /**
+	/**
 	 * Appends the given baseURL to all search results. May be a path, or a full domain
 	 */
 	baseUrl: z.string().optional(),
-    /**
-     * Multiply all rankings for this index by the given weight.
-     *
-     * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
-     */
+	/**
+	 * Multiply all rankings for this index by the given weight.
+	 *
+	 * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
+	 */
 	indexWeight: indexWeightSchema,
-    /**
-     * Apply this filter configuration to all search results from this index.
-     *
-     * Only applies in multisite setups.
-	 * 
+	/**
+	 * Apply this filter configuration to all search results from this index.
+	 *
+	 * Only applies in multisite setups.
+	 *
 	 * @see https://pagefind.app/docs/multisite/#filtering-results-by-index
-     */
-	mergeFilter: z.record(
-		z.string(),
-		z.string().or(
-			z.array(z.string()).nonempty()
-		)
-	).optional(),
-    /**
-     * Language of this index.
-     *
-     * @see https://pagefind.app/docs/multisite/#merging-a-specific-language-index
-     */
+	 */
+	mergeFilter: z.record(z.string(), z.string().or(z.array(z.string()).nonempty())).optional(),
+	/**
+	 * Language of this index.
+	 *
+	 * @see https://pagefind.app/docs/multisite/#merging-a-specific-language-index
+	 */
 	language: z.string().optional(),
-    /**
-     * Configure how search result rankings are calculated by Pagefind.
-     */
+	/**
+	 * Configure how search result rankings are calculated by Pagefind.
+	 */
 	ranking: pagefindRankingWeightsSchema.optional(),
 });
 
