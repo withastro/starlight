@@ -56,9 +56,7 @@ const pagefindIndexOptionsSchema = z.object({
      *
      * Only applies in multisite setups.
 	 * 
-	 * Expected formalism is an object :
-	 * - with keys as the filter names 
-	 * - and values as the filter values, represented as a string or an array of strings.
+	 * @see https://pagefind.app/docs/multisite/#filtering-results-by-index
      */
 	mergeFilter: z.record(
 		z.string(),
