@@ -78,10 +78,8 @@ const pagefindIndexOptionsSchema = z.object({
 
 const pagefindSchema = z.object({
 	/**
-	 * Set Pagefind’s `pageLength` ranking option.
-	 * 
-	 * Configure how search result in the current website are weighted by Pagefind
-	 * compared to other sit'e's merge indexes.
+	 * Configure how search results from the current website are weighted by Pagefind
+	 * compared to results from other sites when using the `mergeIndex` option.
 	 *
 	 * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
 	 */
