@@ -6,32 +6,23 @@ description: Learn how Starlight’s page data model is used to render your page
 import { Steps } from '@astrojs/starlight/components';
 
 When Starlight renders a page in your documentation, it first creates a route data object to represent what is on that page.
-This guide explains how route data is generated, how it is used, and how you can customize it to modify Starlight’s default behavior.
-
-## What is route data?
-
-Starlight route data is an object constructed for each page of your site by combining the following parts of your project:
-
-1. The Starlight configuration in `astro.config.mjs`
-2. The content and frontmatter of the current page
-
-For example, route data includes a `siteTitle` property with a value based on the [`title`](/reference/configuration/#title-required) option in your Starlight configuration and a `toc` property generated from headings in the content for the current page.
-
-Some features can be configured both globally in the Starlight configuration and for a specific page in Markdown frontmatter.
-In this case, values set for a specific page in frontmatter override the global or default value.
-For example, route data includes a `pagination` object with links to the previous and next pages in the sidebar.
-If a page disables one of these, for example by setting `prev: false` in frontmatter, this will be reflected in the `pagination` object.
+This guide explains how route data is generated, how to use it, and how you can customize it to modify Starlight’s default behavior.
 
 See the [“Route Data Reference”](/reference/route-data/) for a full list of the available properties.
 
-## How is route data used?
+## What is route data?
 
-All of Starlight’s components have access to route data and use it to decide what to render for each page.
-For example, the `siteTitle` string is used to display the site title and the `sidebar` array is used to render the global sidebar navigation.
+Starlight route data is an object containing all the information required to render a single page.
+It includes information for the current page as well as data generated from your Starlight configuration.
 
-Route data is available from the `Astro.locals.starlightRoute` global in Astro components:
+## Using route data
 
-```astro title="example.astro"
+All of Starlight’s components use route data to decide what to render for each page.
+For example, the [`siteTitle`](/reference/route-data/#sitetitle) string is used to display the site title and the [`sidebar`](/reference/route-data/#sidebar) array is used to render the global sidebar navigation.
+
+You can access this data from the `Astro.locals.starlightRoute` global in Astro components:
+
+```astro title="example.astro" {2}
 ---
 const { siteTitle } = Astro.locals.starlightRoute;
 ---
@@ -39,7 +30,7 @@ const { siteTitle } = Astro.locals.starlightRoute;
 <p>The title of this site is “{siteTitle}”</p>
 ```
 
-If you are building [component overrides](/guides/overriding-components/), you can access route data like this to customize what you display.
+This can be useful for example when building [component overrides](/guides/overriding-components/) to customize what you display.
 
 ## Customizing route data
 
@@ -90,7 +81,7 @@ This is a function that is called every time Starlight renders a page and can mo
 
 3. Update your `onRequest` function to modify route data.
 
-   The first argument middleware receive is [Astro’s `context` object](https://docs.astro.build/en/reference/api-reference/).
+   The first argument your middleware will receive is [Astro’s `context` object](https://docs.astro.build/en/reference/api-reference/).
    This contains full information about the current page render, including the current URL and `locals`.
 
    In this example, we are going to make our docs more exciting by adding an exclamation mark to the end of every page’s title.
