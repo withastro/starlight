@@ -4,7 +4,8 @@
 
 ### Minor Changes
 
-- [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.32.0
+- [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) and [#2390](https://github.com/withastro/starlight/pull/2390) [`f493361`](https://github.com/withastro/starlight/commit/f493361d7b64a3279980e0f046c3a52196ab94e0) Thanks [@HiDeoo](https://github.com/HiDeoo) and [@delucis](https://github.com/delucis)!  
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.32.0
 
   Please use the `@astrojs/upgrade` command to upgrade your project:
 
