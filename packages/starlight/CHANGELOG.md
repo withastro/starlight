@@ -4,8 +4,6 @@
 
 ### Minor Changes
 
-- [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`HookParameters`](https://starlight.astro.build/reference/plugins/#hooks) utility type to get the type of a plugin hook’s arguments.
-
 - [#2390](https://github.com/withastro/starlight/pull/2390) [`f493361`](https://github.com/withastro/starlight/commit/f493361d7b64a3279980e0f046c3a52196ab94e0) Thanks [@delucis](https://github.com/delucis)! - Moves route data to `Astro.locals` instead of passing it down via component props
 
   ⚠️ **Breaking change:**
@@ -39,7 +37,23 @@
 
   _Community Starlight plugins may also need to be manually updated to work with Starlight 0.32. If you encounter any issues, please reach out to the plugin author to see if it is a known issue or if an updated version is being worked on._
 
-- [#2858](https://github.com/withastro/starlight/pull/2858) [`2df9d05`](https://github.com/withastro/starlight/commit/2df9d05fe7b61282809aa85a1d77662fdd3b748f) Thanks [@XREvo](https://github.com/XREvo)! - Adds support for Pagefind’s multisite search features
+- [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Deprecates the Starlight plugin `setup` hook in favor of the new `config:setup` hook which provides the same functionality.
+
+  ⚠️ **BREAKING CHANGE:**
+
+  The Starlight plugin `setup` hook is now deprecated and will be removed in a future release. Please update your plugins to use the new `config:setup` hook instead.
+
+  ```diff
+  export default {
+    name: 'plugin-with-translations',
+    hooks: {
+  -   'setup'({ config }) {
+  +   'config:setup'({ config }) {
+        // Your plugin configuration setup code
+      },
+    },
+  };
+  ```
 
 - [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Exposes the built-in localization system in the Starlight plugin `config:setup` hook.
 
@@ -67,25 +81,11 @@
   };
   ```
 
+- [#2858](https://github.com/withastro/starlight/pull/2858) [`2df9d05`](https://github.com/withastro/starlight/commit/2df9d05fe7b61282809aa85a1d77662fdd3b748f) Thanks [@XREvo](https://github.com/XREvo)! - Adds support for Pagefind’s multisite search features
+
+- [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`HookParameters`](https://starlight.astro.build/reference/plugins/#hooks) utility type to get the type of a plugin hook’s arguments.
+
 - [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`useTranslations()`](https://starlight.astro.build/reference/plugins/#usetranslations) callback function to the Starlight plugin `config:setup` hook to generate a utility function to access UI strings for a given language.
-
-- [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Deprecates the Starlight plugin `setup` hook in favor of the new `config:setup` hook which provides the same functionality.
-
-  ⚠️ **BREAKING CHANGE:**
-
-  The Starlight plugin `setup` hook is now deprecated and will be removed in a future release. Please update your plugins to use the new `config:setup` hook instead.
-
-  ```diff
-  export default {
-    name: 'plugin-with-translations',
-    hooks: {
-  -   'setup'({ config }) {
-  +   'config:setup'({ config }) {
-        // Your plugin configuration setup code
-      },
-    },
-  };
-  ```
 
 - [#2578](https://github.com/withastro/starlight/pull/2578) [`f895f75`](https://github.com/withastro/starlight/commit/f895f75b17f36c826cc871ba1826e5ae1dff44ca) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`absolutePathToLang()`](https://starlight.astro.build/reference/plugins/#absolutepathtolang) callback function to the Starlight plugin `config:setup` to get the language for a given absolute file path.
 
