@@ -457,8 +457,10 @@ This will also hide the default search UI if in use.
 
 Pagefind cannot be enabled when the [`prerender`](#prerender) option is set to `false`.
 
-Set `pagefind` to an object to configure the Pagefind search client.
-See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated.
+Set `pagefind` to an object to configure the Pagefind search client:
+
+- See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated
+- See [“Searching multiple sites”](https://pagefind.app/docs/multisite/) in the Pagefind documentation for more details about using the `pagefind.mergeIndex` option to control how to search accros multiple sites
 
 #### `PagefindOptions`
 
@@ -470,6 +472,21 @@ interface PagefindOptions {
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
 }
 ```
 

@@ -95,7 +95,7 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 	return {
 		name: 'starlight-docsearch',
 		hooks: {
-			setup({ addIntegration, config, logger, updateConfig }) {
+			'config:setup'({ addIntegration, config, logger, updateConfig }) {
 				// If the user has already has a custom override for the Search component, don't override it.
 				if (config.components?.Search) {
 					logger.warn(
