@@ -2,7 +2,7 @@
 '@astrojs/starlight-docsearch': minor
 ---
 
-⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.31.0
+⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.32.0
 
 Please use the `@astrojs/upgrade` command to upgrade your project:
 
