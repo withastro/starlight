@@ -459,6 +459,39 @@ Dadurch wird auch die Standard-Suchoberfläche ausgeblendet, falls sie verwendet
 
 Pagefind kann nicht aktiviert werden, wenn die Option [`prerender`](#prerender) auf `false` gesetzt ist.
 
+Setze `pagefind` auf ein Objekt, um den Pagefind-Suchclient zu konfigurieren:
+
+- Siehe [„Anpassen des Pagefind-Rankings (EN)“](https://pagefind.app/docs/ranking/) in der Pagefind-Dokumentation für weitere Details über die Verwendung der Option `pagefind.ranking`, um zu kontrollieren, wie die Rangfolge der Suchergebnisse berechnet wird
+- Siehe [„Mehrere Websites durchsuchen (EN)“](https://pagefind.app/docs/multisite/) in der Pagefind-Dokumentation für weitere Informationen über die Verwendung der Option `pagefind.mergeIndex` zur Steuerung der Suche über mehrere Websites
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
+
 ### `prerender`
 
 **Typ:** `boolean`  
