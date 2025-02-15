@@ -226,6 +226,14 @@ const UserConfigSchema = z.object({
 		.boolean()
 		.default(false)
 		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
+
+	/** Add middleware to process Starlight’s route data for each page. */
+	routeMiddleware: z
+		.string()
+		.transform((string) => [string])
+		.or(z.string().array())
+		.default([])
+		.describe('Add middleware to process Starlight’s route data for each page.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict()

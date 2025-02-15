@@ -1,7 +1,12 @@
 import type { AstroIntegration, HookParameters as AstroHookParameters } from 'astro';
+import { AstroError } from 'astro/errors';
 import { z } from 'astro/zod';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../utils/user-config';
 import { parseWithFriendlyErrors } from '../utils/error-map';
+import {
+	StarlightConfigSchema,
+	type StarlightConfig,
+	type StarlightUserConfig,
+} from '../utils/user-config';
 import type { UserI18nSchema } from './translations';
 import { createTranslationSystemFromFs } from './translations-fs';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../integrations/shared/absolutePathToLang';
@@ -34,6 +39,8 @@ export async function runPlugins(
 
 	// A list of translations injected by the various plugins keyed by locale.
 	const pluginTranslations: PluginTranslations = {};
+	// A list of route middleware added by the various plugins.
+	const routeMiddlewareConfigs: Array<z.output<typeof routeMiddlewareConfigSchema>> = [];
 
 	for (const {
 		hooks: { 'i18n:setup': i18nSetup },
@@ -76,8 +83,15 @@ export async function runPlugins(
 			updateConfig(newConfig) {
 				// Ensure that plugins do not update the `plugins` config key.
 				if ('plugins' in newConfig) {
-					throw new Error(
-						`The '${name}' plugin tried to update the 'plugins' config key which is not supported.`
+					throw new AstroError(
+						`The \`${name}\` plugin tried to update the \`plugins\` config key which is not supported.`
+					);
+				}
+				if ('routeMiddleware' in newConfig) {
+					throw new AstroError(
+						`The \`${name}\` plugin tried to update the \`routeMiddleware\` config key which is not supported.`,
+						'Use the `addRouteMiddleware()` utility instead.\n' +
+							'See https://starlight.astro.build/reference/plugins/#addroutemiddleware for more details.'
 					);
 				}
 
@@ -97,6 +111,9 @@ export async function runPlugins(
 				// Collect any Astro integrations added by the plugin.
 				integrations.push(integration);
 			},
+			addRouteMiddleware(middlewareConfig) {
+				routeMiddlewareConfigs.push(middlewareConfig);
+			},
 			astroConfig: {
 				...context.config,
 				integrations: [...context.config.integrations, ...integrations],
@@ -109,7 +126,27 @@ export async function runPlugins(
 		});
 	}
 
+	applyPluginMiddleware(routeMiddlewareConfigs, starlightConfig);
+
 	return { integrations, starlightConfig, pluginTranslations, useTranslations, absolutePathToLang };
+}
+
+/** Updates `routeMiddleware` in the Starlight config to add plugin middlewares in the correct order. */
+function applyPluginMiddleware(
+	routeMiddlewareConfigs: { entrypoint: string; order: 'default' | 'pre' | 'post' }[],
+	starlightConfig: StarlightConfig
+) {
+	const middlewareBuckets = routeMiddlewareConfigs.reduce<
+		Record<'pre' | 'default' | 'post', string[]>
+	>(
+		(buckets, { entrypoint, order = 'default' }) => {
+			buckets[order].push(entrypoint);
+			return buckets;
+		},
+		{ pre: [], default: [], post: [] }
+	);
+	starlightConfig.routeMiddleware.unshift(...middlewareBuckets.pre);
+	starlightConfig.routeMiddleware.push(...middlewareBuckets.default, ...middlewareBuckets.post);
 }
 
 export function injectPluginTranslationsTypes(
@@ -144,6 +181,11 @@ const astroIntegrationSchema = z.object({
 	name: z.string(),
 	hooks: z.object({}).passthrough().default({}),
 }) as z.Schema<AstroIntegration>;
+
+const routeMiddlewareConfigSchema = z.object({
+	entrypoint: z.string(),
+	order: z.enum(['pre', 'post', 'default']).default('default'),
+});
 
 const baseStarlightPluginSchema = z.object({
 	/** Name of the Starlight plugin. */
@@ -183,7 +225,9 @@ const configSetupHookSchema = z
 				 * }
 				 */
 				updateConfig: z.function(
-					z.tuple([z.record(z.any()) as z.Schema<Partial<StarlightUserConfig>>]),
+					z.tuple([
+						z.record(z.any()) as z.Schema<Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>>,
+					]),
 					z.void()
 				),
 				/**
@@ -209,6 +253,23 @@ const configSetupHookSchema = z
 				 * }
 				 */
 				addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
+				/**
+				 * A callback function to register additional route middleware handlers.
+				 *
+				 * If the order of execution is important, a plugin can use the `order` option to enforce
+				 * running first or last.
+				 *
+				 * @example
+				 * {
+				 * 	name: 'My Starlight Plugin',
+				 * 	hooks: {
+				 * 		setup({ addRouteMiddleware }) {
+				 * 			addRouteMiddleware({ entrypoint: '@me/my-plugin/route-middleware' });
+				 * 		},
+				 * 	},
+				 * }
+				 */
+				addRouteMiddleware: z.function(z.tuple([routeMiddlewareConfigSchema]), z.void()),
 				/**
 				 * A read-only copy of the user-supplied Astro configuration.
 				 *

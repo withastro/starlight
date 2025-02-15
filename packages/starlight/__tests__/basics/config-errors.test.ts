@@ -73,6 +73,7 @@ test('parses valid config successfully', () => {
 		  },
 		  "pagination": true,
 		  "prerender": true,
+		  "routeMiddleware": [],
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,

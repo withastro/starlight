@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 import project from 'virtual:starlight/project-context';
 import { docsSchema, i18nSchema } from '../schema';
-import type { StarlightDocsCollectionEntry } from '../utils/routing';
+import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
 import { vi } from 'vitest';
 
 const frontmatterSchema = docsSchema()({

@@ -15,6 +15,7 @@ Learn more about using a Starlight plugin in the [Configuration Reference](/refe
 A Starlight plugin has the following shape.
 See below for details of the different properties and hook parameters.
 
+<!-- prettier-ignore-start -->
 ```ts
 interface StarlightPlugin {
   name: string;
@@ -28,6 +29,7 @@ interface StarlightPlugin {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
+      addRouteMiddleware: (config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void;
       astroConfig: AstroConfig;
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
@@ -38,6 +40,7 @@ interface StarlightPlugin {
   };
 }
 ```
+<!-- prettier-ignore-end -->
 
 ## `name`
 
@@ -207,6 +210,40 @@ export default {
   },
 };
 ```
+
+#### `addRouteMiddleware`
+
+**type:** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void`
+
+A callback function to add a [route middleware handler](/guides/route-data/) to the site.
+
+The `entrypoint` property must be a module specifier for your plugin’s middleware file that exports an `onRequest` handler.
+
+In the following example, a plugin published as `@example/starlight-plugin` adds a route middleware using an npm module specifier:
+
+```js {6-9}
+// plugin.ts
+export default {
+  name: '@example/starlight-plugin',
+  hooks: {
+    setup({ addRouteMiddleware }) {
+      addRouteMiddleware({
+        entrypoint: '@example/starlight-plugin/route-middleware',
+      });
+    },
+  },
+};
+```
+
+##### Controlling execution order
+
+By default, plugin middleware runs in the order the plugins are added.
+
+Use the optional `order` property if you need more control over when your middleware runs.
+Set `order: "pre"` to run before a user’s middleware.
+Set `order: "post"` to run after all other middleware.
+
+If two plugins add middleware with the same `order` value, the plugin added first will run first.
 
 #### `astroConfig`
 

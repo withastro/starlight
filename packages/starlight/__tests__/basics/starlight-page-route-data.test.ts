@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { generateRouteData } from '../../utils/route-data';
+import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 import {
 	generateStarlightPageRouteData,
@@ -467,20 +467,6 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 		url: starlightPageUrl,
 	});
 	expect(data.hasSidebar).toBe(false);
-});
-
-test('throws when accessing a label using the deprecated `labels` prop', async () => {
-	const data = await generateStarlightPageRouteData({
-		props: starlightPageProps,
-		url: starlightPageUrl,
-	});
-	expect(() => data.labels['any']).toThrowErrorMatchingInlineSnapshot(`
-		"[AstroUserError]:
-			The \`labels\` prop in component overrides has been removed.
-		Hint:
-			Replace \`Astro.props.labels["any"]\` with \`Astro.locals.t("any")\` instead.
-			For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations"
-	`);
 });
 
 test('uses provided edit URL if any', async () => {
