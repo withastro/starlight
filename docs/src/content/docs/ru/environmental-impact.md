@@ -137,6 +137,6 @@ Cache-Control: public, max-age=604800, immutable
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
 [http]: https://httparchive.org/reports/state-of-the-web
-[assets]: https://docs.astro.build/ru/guides/assets/
+[assets]: https://docs.astro.build/ru/guides/images/
 [islands]: https://docs.astro.build/ru/concepts/islands/
 [wcc]: https://www.websitecarbon.com/

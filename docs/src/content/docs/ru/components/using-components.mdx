@@ -9,7 +9,7 @@ sidebar:
 Примерами могут служить карточки-ссылки или встраиваемые ролики YouTube.
 Starlight поддерживает использование компонентов в файлах [MDX](https://mdxjs.com/) и [Markdoc](https://markdoc.dev/), а также предоставляет некоторые общие компоненты для применения.
 
-[Узнайте больше о создании компонентов в документации Astro](https://docs.astro.build/ru/core-concepts/astro-components/).
+[Узнайте больше о создании компонентов в документации Astro](https://docs.astro.build/ru/basics/astro-components/).
 
 ## Использование компонента в MDX
 
@@ -30,7 +30,7 @@ import CustomCard from '../../components/CustomCard.astro';
 <CustomCard>Компоненты могут содержать **вложенное содержимое**.</CustomCard>
 ```
 
-Поскольку Starlight работает на базе Astro, вы можете использовать в своих файлах MDX любые компоненты, созданные на [поддерживаемом UI-фреймворке (React, Preact, Svelte, Vue, Solid и Alpine)](https://docs.astro.build/ru/core-concepts/framework-components/).
+Поскольку Starlight работает на базе Astro, вы можете использовать в своих файлах MDX любые компоненты, созданные на [поддерживаемом UI-фреймворке (React, Preact, Svelte, Vue, Solid и Alpine)](https://docs.astro.build/ru/guides/framework-components/).
 Узнайте больше об [использовании компонентов в MDX](https://docs.astro.build/ru/guides/integrations-guide/mdx/#using-components-in-mdx) в документации Astro.
 
 ## Использование компонента в Markdoc
@@ -81,14 +81,14 @@ Starlight применяет стандартную стилистику к со
 Используйте тип [`ComponentProps`](https://docs.astro.build/ru/guides/typescript/#%D1%82%D0%B8%D0%BF-componentprops) из `astro/types` для ссылки на `Props`, принимаемые компонентом, даже если они не экспортируются самим компонентом.
 Это может быть полезно при обёртке или расширении существующего компонента.
 
-В следующем примере используется `ComponentProps` для получения типа параметров, принимаемых встроенным компонентом Starlight `Icon`:
+В следующем примере используется `ComponentProps` для получения типа параметров, принимаемых встроенным компонентом Starlight `Badge`:
 
 ```astro
 ---
 // src/components/Example.astro
 import type { ComponentProps } from 'astro/types';
-import { Icon } from '@astrojs/starlight/icon';
+import { Badge } from '@astrojs/starlight/components';
 
-type IconProps = ComponentProps<typeof Icon>;
+type BadgeProps = ComponentProps<typeof Badge>;
 ---
 ```

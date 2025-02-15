@@ -9,7 +9,7 @@ Les composants vous permettent de réutiliser facilement un élément d'interfac
 Il peut s'agir par exemple d'une carte de liaison ou d'une intégration YouTube.
 Starlight prend en charge l'utilisation de composants dans les fichiers [MDX](https://mdxjs.com/) et [Markdoc](https://markdoc.dev/) et fournit des composants courants que vous pouvez utiliser.
 
-[Pour en savoir plus sur la création de composants, consultez la documentation d'Astro](https://docs.astro.build/fr/core-concepts/astro-components/).
+[Pour en savoir plus sur la création de composants, consultez la documentation d'Astro](https://docs.astro.build/fr/basics/astro-components/).
 
 ## Utilisation d'un composant avec MDX
 
@@ -83,14 +83,14 @@ Si ces styles entrent en conflit avec l'apparence de votre composant, utilisez l
 Utilisez le type [`ComponentProps`](https://docs.astro.build/fr/guides/typescript/#type-componentprops) depuis `astro/types` pour référencer les `Props` acceptées par un composant même si elles ne sont pas exportées par le composant lui-même.
 Cela peut être utile lorsqu'il s'agit d'entourer ou d'étendre un composant existant.
 
-L'exemple suivant utilise `ComponentProps` pour obtenir le type des props acceptées par le composant `Icon` intégré à Starlight :
+L'exemple suivant utilise `ComponentProps` pour obtenir le type des props acceptées par le composant `Badge` intégré à Starlight :
 
 ```astro
 ---
 // src/components/Exemple.astro
 import type { ComponentProps } from 'astro/types';
-import { Icon } from '@astrojs/starlight/icon';
+import { Badge } from '@astrojs/starlight/components';
 
-type IconProps = ComponentProps<typeof Icon>;
+type BadgeProps = ComponentProps<typeof Badge>;
 ---
 ```

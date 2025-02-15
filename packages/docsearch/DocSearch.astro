@@ -1,5 +1,4 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
 import '@docsearch/css/dist/modal.css';
 import type docsearch from '@docsearch/js';
 import './variables.css';
@@ -131,7 +130,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
 				const { default: docsearch } = await import('@docsearch/js');
-				const options: Parameters<typeof docsearch>[0] = { ...config, container: 'sl-doc-search' };
+				const options = { ...config, container: 'sl-doc-search' };
 				try {
 					const translations = JSON.parse(this.dataset.translations || '{}');
 					Object.assign(options, translations);

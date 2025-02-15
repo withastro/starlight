@@ -12,6 +12,32 @@ declare namespace StarlightApp {
  */
 declare namespace App {
 	interface Locals {
+		/**
+		 * Starlight’s localization API, powered by i18next.
+		 *
+		 * @see https://starlight.astro.build/guides/i18n/#using-ui-translations
+		 *
+		 * @example
+		 * // Render a UI string for the current locale.
+		 * <p>{Astro.locals.t('404.text')}</p>
+		 */
 		t: import('./utils/createTranslationSystem').I18nT;
+
+		/**
+		 * Starlight’s data for the current route.
+		 *
+		 * @see https://starlight.astro.build/guides/route-data/
+		 *
+		 * @throws Will throw an error if accessed on non-Starlight routes.
+		 *
+		 * @example
+		 * // Render the title for the current page
+		 * <h1>{Astro.locals.starlightRoute.entry.data.title}</h1>
+		 *
+		 * @example
+		 * // Check if the current page should render the sidebar
+		 * const { hasSidebar } = Astro.locals.starlightRoute;
+		 */
+		starlightRoute: import('./utils/routing/types').StarlightRouteData;
 	}
 }

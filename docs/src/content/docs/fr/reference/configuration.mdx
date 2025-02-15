@@ -384,10 +384,10 @@ starlight({
 **Type :** `StarlightExpressiveCodeOptions | boolean`  
 **Par défaut :** `true`
 
-Starlight utilise [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
+Starlight utilise [Expressive Code](https://expressive-code.com) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
 Consultez le [guide « Blocs de code »](/fr/guides/authoring-content/#blocs-de-code) pour apprendre à utiliser la syntaxe d'Expressive Code dans votre contenu Markdown et MDX.
 
-Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
+Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://expressive-code.com/reference/configuration/) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
 Par exemple, définissez l'option `styleOverrides` d'Expressive Code pour remplacer le CSS par défaut. Cela permet des personnalisations comme donner à vos blocs de code des coins arrondis :
 
 ```js ins={2-4}
@@ -414,7 +414,7 @@ En plus des options standard d'Expressive Code, vous pouvez également définir 
 **Par défaut :** `['starlight-dark', 'starlight-light']`
 
 Définit les thèmes utilisés pour styliser les blocs de code.
-Consultez la [documentation des `themes` d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) pour plus de détails sur les formats de thème pris en charge.
+Consultez la [documentation des `themes` d'Expressive Code](https://expressive-code.com/guides/themes/) pour plus de détails sur les formats de thème pris en charge.
 
 Starlight utilise les variantes claires et sombres du [thème Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner par défaut.
 
@@ -462,7 +462,7 @@ Pagefind ne peut pas être activé lorsque l'option [`prerender`](#prerender) es
 **Type :** `boolean`  
 **Par défaut :** `true`
 
-Définit si les pages générées par Starlight doivent être pré-rendues en HTML statique ou rendues à la demande par un [adaptateur SSR](https://docs.astro.build/fr/guides/server-side-rendering/).
+Définit si les pages générées par Starlight doivent être pré-rendues en HTML statique ou rendues à la demande par un [adaptateur SSR](https://docs.astro.build/fr/guides/on-demand-rendering/).
 
 Les pages Starlight sont pré-rendues par défaut.
 Si vous utilisez un adaptateur SSR et que vous souhaitez générer les pages Starlight à la demande, définissez `prerender: false`.
@@ -568,7 +568,7 @@ Par example, cette page a pour titre « Référence de configuration » et ce si
 **Type :** `boolean`  
 **Par défaut :** `false`
 
-Désactive l'injection de la [page 404](https://docs.astro.build/fr/core-concepts/astro-pages/#page-derreur-404-personnalis%C3%A9e) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, définissez cette option à `true`.
+Désactive l'injection de la [page 404](https://docs.astro.build/fr/basics/astro-pages/#page-derreur-404-personnalis%C3%A9e) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, définissez cette option à `true`.
 
 ### `components`
 

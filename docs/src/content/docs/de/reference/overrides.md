@@ -7,7 +7,7 @@ sidebar:
   label: Ersetzung von Komponenten
 ---
 
-Du kannst Starlight's eingebaute Komponenten überschreiben, indem du Pfade zu Ersatzkomponenten in Starlight's [`components`](/de/reference/configuration/#components)-Konfigurationsoption angibst.
+Du kannst Starlights eingebaute Komponenten überschreiben, indem du Pfade zu Ersatzkomponenten in Starlights [`components`](/de/reference/configuration/#components)-Konfigurationsoption angibst.
 Diese Seite listet alle Komponenten auf, die überschrieben werden können, und verweist auf ihre Standardimplementierungen auf GitHub.
 
 Erfahre mehr in der [Anleitung zum Überschreiben von Komponenten](/de/guides/overriding-components/).
@@ -71,11 +71,14 @@ Bei mehrsprachigen Websites wird hier das aktuelle Gebietsschema angegeben, z. B
 
 Der aus dem Dateinamen des Inhalts generierte Slug für diese Seite.
 
+Diese Eigenschaft ist veraltet und wird in einer zukünftigen Version von Starlight entfernt werden.
+Stelle auf die neue Content Layer API um, indem du [Starlights `docsLoader`](/de/manual-setup/#konfigurieren-von-inhaltssammlungen) benutzt und verwende stattdessen die Eigenschaft [`id`](#id).
+
 #### `id`
 
 **Typ:** `string`
 
-Die eindeutige ID für diese Seite auf der Grundlage des Dateinamens des Inhalts.
+Der Slug für diese Seite oder die eindeutige ID für diese Seite, die auf dem Dateinamen des Inhalts basiert, wenn du das Flag [`legacy.collections`](https://docs.astro.build/de/reference/legacy-flags/#collections) benutzt.
 
 #### `isFallback`
 
@@ -197,7 +200,8 @@ Wenn möglich, bevorzuge das Überschreiben einer Komponente auf einer niedriger
 
 #### `PageFrame`
 
-**Standardkomponente:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Standardkomponente:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Benannte Slots:** `header`, `sidebar`
 
 Diese Layout-Komponente beinhaltet den größten Teil des Seiteninhalts.
 Die Standardimplementierung konfiguriert das Kopfzeilen-Seitennavigation-Haupt-Layout und beinhaltet `header` und `sidebar` benannte Slots zusammen mit einem Standard-Slot für den Hauptinhalt.
@@ -211,7 +215,8 @@ Diese Komponente wird innerhalb von [`<PageFrame>`](#pageframe) gerendert und is
 
 #### `TwoColumnContent`
 
-**Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Standardkomponente:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Benannter Slot:** `right-sidebar`
 
 Dies ist die Layout-Komponente, welche die Hauptinhaltsspalte und die rechte Seitenleiste (Inhaltsverzeichnis) beinhaltet.
 Die Standardimplementierung behandelt den Wechsel zwischen einem einspaltigen Layout mit kleinem Sichtfeld und einem zweispaltigen Layout mit größerem Sichtfeld.
@@ -240,7 +245,7 @@ Die Standardimplementierung enthält die Logik für die Darstellung von Logos, d
 
 **Standardkomponente:** [`Search.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro)
 
-Diese Komponente wird verwendet, um Starlight's Suchoberfläche darzustellen.
+Diese Komponente wird verwendet, um Starlights Suchoberfläche darzustellen.
 Die Standardimplementierung enthält die Schaltfläche in der Kopfzeile und den Code für die Anzeige eines Suchmodals, wenn darauf geklickt wird, und das Laden von [Pagefinds UI](https://pagefind.app/).
 
 Wenn [`pagefind`](/de/reference/configuration/#pagefind) deaktiviert ist, wird die Standard-Suchkomponente nicht angezeigt.

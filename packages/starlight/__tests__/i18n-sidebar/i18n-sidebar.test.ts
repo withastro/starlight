@@ -12,7 +12,13 @@ vi.mock('astro:content', async () =>
 			['fr/manual-setup.mdx', { title: 'Installation manuelle' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['fr/environmental-impact.md', { title: 'Documents écologiques' }],
-			['guides/pages.mdx', { title: 'Pages' }],
+			[
+				'guides/pages.mdx',
+				{
+					title: 'Pages',
+					sidebar: { label: 'Pages Guide', badge: 'Test', attrs: { class: 'test' } },
+				},
+			],
 			['fr/guides/pages.mdx', { title: 'Pages' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Content in Markdown' }],
 			['fr/guides/authoring-content.mdx', { title: 'Création de contenu en Markdown' }],
@@ -69,11 +75,16 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": {},
-			        "badge": undefined,
+			        "attrs": {
+			          "class": "test",
+			        },
+			        "badge": {
+			          "text": "Test",
+			          "variant": "default",
+			        },
 			        "href": "/guides/pages",
 			        "isCurrent": false,
-			        "label": "Pages",
+			        "label": "Pages Guide",
 			        "type": "link",
 			      },
 			      {
@@ -269,5 +280,27 @@ describe('getSidebar', () => {
 		const sidebar = getSidebar('/fr', 'fr');
 		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/fr/manual-setup');
 		expect(entry?.label).toBe('Fait maison');
+	});
+	test('uses intermediate sidebars cached by locales', async () => {
+		// Reset the modules registry so that re-importing `utils/navigation.ts` re-evaluates the
+		// module and clears the cache of intermediate sidebars from previous tests in this file.
+		vi.resetModules();
+		const navigation = await import('../../utils/navigation');
+		const routing = await import('../../utils/routing');
+
+		const getLocaleRoutes = vi.spyOn(routing, 'getLocaleRoutes');
+
+		const paths = ['/', '/environmental-impact/', '/guides/authoring-content/'];
+
+		for (const path of paths) {
+			navigation.getSidebar(path, undefined);
+			navigation.getSidebar(path, 'fr');
+		}
+
+		expect(getLocaleRoutes).toHaveBeenCalledTimes(2);
+		expect(getLocaleRoutes).toHaveBeenNthCalledWith(1, undefined);
+		expect(getLocaleRoutes).toHaveBeenNthCalledWith(2, 'fr');
+
+		getLocaleRoutes.mockRestore();
 	});
 });

@@ -2,13 +2,13 @@ import type { Element } from 'hast';
 import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import { Icons } from '../components/Icons';
+import type { StarlightIcon } from '../components/Icons';
 
 interface Panel {
 	panelId: string;
 	tabId: string;
 	label: string;
-	icon?: keyof typeof Icons;
+	icon?: StarlightIcon;
 }
 
 declare module 'vfile' {
@@ -47,7 +47,7 @@ const getIDs = () => {
 
 /**
  * Rehype processor to extract tab panel data and turn each
- * `<starlight-tab-item>` into a `<section>` with the necessary
+ * `<starlight-tab-item>` into a `<div>` with the necessary
  * attributes.
  */
 const tabsProcessor = rehype()
@@ -67,14 +67,14 @@ const tabsProcessor = rehype()
 					...ids,
 					label: String(dataLabel),
 				};
-				if (dataIcon) panel.icon = String(dataIcon) as keyof typeof Icons;
+				if (dataIcon) panel.icon = String(dataIcon) as StarlightIcon;
 				file.data.panels?.push(panel);
 
 				// Remove `<TabItem>` props
 				delete node.properties.dataLabel;
 				delete node.properties.dataIcon;
-				// Turn into `<section>` with required attributes
-				node.tagName = 'section';
+				// Turn into `<div>` with required attributes
+				node.tagName = 'div';
 				node.properties.id = ids.panelId;
 				node.properties['aria-labelledby'] = ids.tabId;
 				node.properties.role = 'tabpanel';

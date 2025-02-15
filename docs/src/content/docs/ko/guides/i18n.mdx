@@ -66,7 +66,7 @@ Starlight는 라우팅, 대체 콘텐츠 및 전체 RTL(오른쪽에서 왼쪽�
 
 </Steps>
 
-고급 국제화 시나리오를 위해 Starlight는 [Astro의 `i18n` 구성](https://docs.astro.build/ko/guides/internationalization/#i18n-%EB%9D%BC%EC%9A%B0%ED%8C%85-%EA%B5%AC%EC%84%B1) 옵션을 사용하는 국제화 구성도 지원합니다.
+고급 국제화 시나리오를 위해 Starlight는 [Astro의 `i18n` 구성](https://docs.astro.build/ko/guides/internationalization/#i18n-라우팅-구성) 옵션을 사용하는 국제화 구성도 지원합니다.
 
 ### 루트 로케일 사용
 
@@ -189,16 +189,17 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
 <Steps>
 
-1. 아직 구성되지 않은 경우 `src/content/config.ts`에서 `i18n` 데이터 컬렉션을 구성합니다.
+1. 아직 구성되지 않은 경우 `src/content.config.ts`에서 `i18n` 데이터 컬렉션을 구성합니다.
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -220,7 +221,7 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
    <UIStringsList />
 
-   Starlight의 코드 블록은 [Expressive Code](https://github.com/expressive-code/expressive-code) 라이브러리에 의해 구동됩니다.
+   Starlight의 코드 블록은 [Expressive Code](https://expressive-code.com/) 라이브러리에 의해 구동됩니다.
    `expressiveCode` 키를 사용하여 동일한 JSON 파일에서 UI 문자열에 대한 번역을 설정할 수 있습니다.
 
    ```json
@@ -256,14 +257,15 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 다음 예시에서는 기본 키에 새로운 선택적 `custom.label` 키가 추가됩니다.
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+	  loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -273,14 +275,14 @@ export const collections = {
 };
 ```
 
-Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
+Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#컬렉션-스키마-정의)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
 
 ## UI 번역 사용
 
 Starlight의 [기본 제공 UI 문자열](/ko/guides/i18n/#starlight-ui-번역)과 [사용자 정의](/ko/guides/i18n/#번역-스키마-확장) 및 [플러그인 제공](/ko/reference/plugins/#injecttranslations) UI 문자열에 액세스할 수 있는 통합 API는 [i18next](https://www.i18next.com/)로 구동됩니다.
 여기에는 [보간](https://www.i18next.com/translation-function/interpolation) 및 [복수화](https://www.i18next.com/translation-function/plurals)와 같은 기능에 대한 지원이 포함됩니다.
 
-Astro 컴포넌트에서 이 API는 [전역 `Astro` 객체](https://docs.astro.build/ko/reference/api-reference/#astrolocals)의 일부인 `Astro.locals.t`로 사용할 수 있습니다:
+Astro 컴포넌트에서 이 API는 [전역 `Astro` 객체](https://docs.astro.build/ko/reference/api-reference/#locals)의 일부인 `Astro.locals.t`로 사용할 수 있습니다:
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
@@ -288,7 +290,7 @@ Astro 컴포넌트에서 이 API는 [전역 `Astro` 객체](https://docs.astro.b
 </p>
 ```
 
-[엔드포인트](https://docs.astro.build/ko/guides/endpoints/)에서도 API를 사용할 수 있으며, 여기서 `locals` 객체는 [엔드포인트 컨텍스트](https://docs.astro.build/ko/reference/api-reference/#contextlocals)의 일부로 사용할 수 있습니다:
+[엔드포인트](https://docs.astro.build/ko/guides/endpoints/)에서도 API를 사용할 수 있으며, 여기서 `locals` 객체는 [엔드포인트 컨텍스트](https://docs.astro.build/ko/reference/api-reference/#locals)의 일부로 사용할 수 있습니다:
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
@@ -389,7 +391,7 @@ const arabicDirection = Astro.locals.t.dir('ar');
 
 ## 현재 로케일에 액세스
 
-[`Astro.currentLocale`](https://docs.astro.build/ko/reference/api-reference/#astrocurrentlocale)을 사용하여 `.astro` 컴포넌트의 현재 로케일을 읽을 수 있습니다.
+[`Astro.currentLocale`](https://docs.astro.build/ko/reference/api-reference/#currentlocale)을 사용하여 `.astro` 컴포넌트의 현재 로케일을 읽을 수 있습니다.
 
 다음 예시는 현재 로케일을 읽고 이를 [`getRelativeLocaleUrl()`](https://docs.astro.build/ko/reference/modules/astro-i18n/#getrelativelocaleurl) 헬퍼와 함께 사용하여 현재 언어로 된 소개 페이지 링크를 생성합니다:
 

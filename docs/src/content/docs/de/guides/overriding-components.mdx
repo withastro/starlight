@@ -5,7 +5,7 @@ description: In Starlight kannst du eingebauten Komponenten ersetzen, um eigene 
 
 import { Steps } from '@astrojs/starlight/components';
 
-Starlight's Standard-UI und Konfigurationsoptionen sind so gestaltet, dass sie flexibel sind und für eine Reihe von Inhalten funktionieren. Ein Großteil des Standardaussehens von Starlight kann mit [CSS](/de/guides/css-and-tailwind/) und [Konfigurationsoptionen](/de/guides/customization/) angepasst werden.
+Starlights Standard-UI und Konfigurationsoptionen sind so gestaltet, dass sie flexibel sind und für eine Reihe von Inhalten funktionieren. Ein Großteil des Standardaussehens von Starlight kann mit [CSS](/de/guides/css-and-tailwind/) und [Konfigurationsoptionen](/de/guides/customization/) angepasst werden.
 
 Wenn du mehr brauchst als das, was von Haus aus möglich ist, unterstützt Starlight die Erstellung eigener Komponenten, um die Standardkomponenten zu erweitern oder zu ersetzen.
 
@@ -25,7 +25,7 @@ Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wen
    Du kannst eine vollständige Liste der Komponenten in der [Komponenten-Ersetzung Referenz](/de/reference/overrides/) finden.
 
    :::tip
-   Du bist dir nicht sicher, welche Komponente du überschreiben musst? Benutze die [interaktive Starlight Overrides Map](https://starlight-overrides-map.netlify.app/), um die Namen von Starlight's UI-Komponenten zu erfahren.
+   Du bist dir nicht sicher, welche Komponente du überschreiben musst? Benutze die [interaktive Starlight Overrides Map](https://starlight-overrides-map.netlify.app/), um die Namen von Starlights UI-Komponenten zu erfahren.
    :::
 
    In diesem Beispiel wird die Starlight-Komponente [`SocialIcons`](/de/reference/overrides/#socialicons) in der Navigationsleiste der Seite außer Kraft gesetzt.
@@ -84,7 +84,24 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 Beim Rendern einer integrierten Komponente innerhalb einer benutzerdefinierten Komponente:
 
 - Verbreite `Astro.props` darin. Dadurch wird sichergestellt, dass es alle Daten erhält, die es zum Rendern benötigt.
-- Füge einen [`<slot />`](https://docs.astro.build/de/core-concepts/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden muss, wenn der Komponente untergeordnete Elemente übergeben werden.
+- Füge einen [`<slot />`](https://docs.astro.build/de/basics/astro-components/#slots) innerhalb der Standardkomponente hinzu. Dadurch wird sichergestellt, dass Astro weiß, wo die Komponente gerendert werden muss, wenn der Komponente untergeordnete Elemente übergeben werden.
+
+Wenn du die Komponenten [`PageFrame`](/de/reference/overrides/#pageframe) oder [`TwoColumnContent`](/de/reference/overrides/#twocolumncontent) wiederverwendst, die [benannte Slots](https://docs.astro.build/de/basics/astro-components/#benannte-slots) enthalten, musst du auch diese Slots [übertragen](https://docs.astro.build/de/basics/astro-components/#slots-weitergeben).
+
+Das folgende Beispiel zeigt eine benutzerdefinierte Komponente, die die Komponente `TwoColumnContent` wiederverwendet. Diese integrierte Komponente enthält einen zusätzlichen benannten Slot, nämlich `right-sidebar`, welcher übertragen werden muss:
+
+```astro {9}
+---
+// src/components/CustomContent.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default {...Astro.props}>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
 
 ## Seitendaten verwenden
 
@@ -124,7 +141,7 @@ Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/refer
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.props.id === '';
 ---
 
 {
@@ -138,4 +155,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-Weitere Informationen zum bedingten Rendering findest du im [Astro-Leitfaden zur Vorlagensyntax](https://docs.astro.build/de/core-concepts/astro-syntax/#dynamisches-html).
+Weitere Informationen zum bedingten Rendering findest du im [Astro-Leitfaden zur Vorlagensyntax](https://docs.astro.build/de/basics/astro-syntax/#dynamisches-html).

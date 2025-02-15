@@ -84,7 +84,24 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 사용자 정의 컴포넌트 내부에 내장 컴포넌트를 렌더링하는 경우:
 
 - 전개 연산자를 사용하여 내장 컴포넌트에 `Astro.props`의 모든 속성을 전달합니다. 이를 통해, 내장 컴포넌트는 렌더링에 필요한 모든 데이터를 전달받습니다.
-- 기본 컴포넌트 내에 [`<slot />`](https://docs.astro.build/ko/core-concepts/astro-components/#슬롯)을 추가합니다. 이를 통해, 하위 컴포넌트를 전달받은 경우, Astro가 전달받은 컴포넌트를 렌더링할 위치를 알 수 있습니다.
+- 기본 컴포넌트 내에 [`<slot />`](https://docs.astro.build/ko/basics/astro-components/#슬롯)을 추가합니다. 이를 통해, 하위 컴포넌트를 전달받은 경우, Astro가 전달받은 컴포넌트를 렌더링할 위치를 알 수 있습니다.
+
+[명명된 슬롯](https://docs.astro.build/ko/basics/astro-components/#명명된-슬롯)이 포함된 [`PageFrame`](/ko/reference/overrides/#pageframe) 또는 [`TwoColumnContent`](/ko/reference/overrides/#twocolumncontent) 컴포넌트를 재사용하는 경우 이러한 슬롯도 [전송](https://docs.astro.build/ko/basics/astro-components/#슬롯-전송)해야 합니다.
+
+아래 예시는 `TwoColumnContent` 컴포넌트를 재사용하는 사용자 정의 컴포넌트를 보여줍니다. 이 컴포넌트는 `right-sidebar`라는 이름의 추가 슬롯을 포함하여 전송합니다.
+
+```astro {9}
+---
+// src/components/CustomContent.astro
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default {...Astro.props}>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
 
 ## 페이지 데이터 사용
 
@@ -124,7 +141,7 @@ const { title } = Astro.props.entry.data;
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.props.id === '';
 ---
 
 {
@@ -138,4 +155,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-[Astro의 템플릿 구문 가이드](https://docs.astro.build/ko/core-concepts/astro-syntax/#dynamic-html)에서 조건부 렌더링에 대해 자세히 알아보세요.
+[Astro의 템플릿 구문 가이드](https://docs.astro.build/ko/basics/astro-syntax/#동적-html)에서 조건부 렌더링에 대해 자세히 알아보세요.

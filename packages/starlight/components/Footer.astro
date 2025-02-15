@@ -1,6 +1,4 @@
 ---
-import type { Props } from '../props';
-
 import EditLink from 'virtual:starlight/components/EditLink';
 import LastUpdated from 'virtual:starlight/components/LastUpdated';
 import Pagination from 'virtual:starlight/components/Pagination';
@@ -10,10 +8,10 @@ import { Icon } from '../components';
 
 <footer class="sl-flex">
 	<div class="meta sl-flex">
-		<EditLink {...Astro.props} />
-		<LastUpdated {...Astro.props} />
+		<EditLink />
+		<LastUpdated />
 	</div>
-	<Pagination {...Astro.props} />
+	<Pagination />
 
 	{
 		config.credits && (

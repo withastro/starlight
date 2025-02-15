@@ -1,6 +1,4 @@
 ---
-import type { Props } from '../props';
-
 // Built-in CSS styles.
 import '../style/props.css';
 import '../style/reset.css';
@@ -31,22 +29,27 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
+import printHref from '../style/print.css?url&no-inline';
+
+const { starlightRoute } = Astro.locals;
+
 const pagefindEnabled =
-	Astro.props.entry.slug !== '404' &&
-	!Astro.props.entry.slug.endsWith('/404') &&
-	Astro.props.entry.data.pagefind !== false;
+	starlightRoute.entry.slug !== '404' &&
+	!starlightRoute.entry.slug.endsWith('/404') &&
+	starlightRoute.entry.data.pagefind !== false;
+
+const htmlDataAttributes: DOMStringMap = { 'data-theme': 'dark' };
+if (Boolean(starlightRoute.toc)) htmlDataAttributes['data-has-toc'] = '';
+if (starlightRoute.hasSidebar) htmlDataAttributes['data-has-sidebar'] = '';
+if (Boolean(starlightRoute.entry.data.hero)) htmlDataAttributes['data-has-hero'] = '';
+
+const mainDataAttributes: DOMStringMap = {};
+if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 ---
 
-<html
-	lang={Astro.props.lang}
-	dir={Astro.props.dir}
-	data-has-toc={Boolean(Astro.props.toc)}
-	data-has-sidebar={Astro.props.hasSidebar}
-	data-has-hero={Boolean(Astro.props.entry.data.hero)}
-	data-theme="dark"
->
+<html lang={starlightRoute.lang} dir={starlightRoute.dir} {...htmlDataAttributes}>
 	<head>
-		<Head {...Astro.props} />
+		<Head />
 		<style>
 			html:not([data-has-toc]) {
 				--sl-mobile-toc-height: 0rem;
@@ -73,44 +76,45 @@ const pagefindEnabled =
 				}
 			}
 		</style>
-		<ThemeProvider {...Astro.props} />
+		<ThemeProvider />
+		<link rel="stylesheet" href={printHref} media="print" />
 	</head>
 	<body>
-		<SkipLink {...Astro.props} />
-		<PageFrame {...Astro.props}>
-			<Header slot="header" {...Astro.props} />
-			{Astro.props.hasSidebar && <Sidebar slot="sidebar" {...Astro.props} />}
+		<SkipLink />
+		<PageFrame>
+			<Header slot="header" />
+			{starlightRoute.hasSidebar && <Sidebar slot="sidebar" />}
 			<script src="./SidebarPersistState"></script>
-			<TwoColumnContent {...Astro.props}>
-				<PageSidebar slot="right-sidebar" {...Astro.props} />
+			<TwoColumnContent>
+				<PageSidebar slot="right-sidebar" />
 				<main
-					data-pagefind-body={pagefindEnabled}
-					lang={Astro.props.entryMeta.lang}
-					dir={Astro.props.entryMeta.dir}
+					{...mainDataAttributes}
+					lang={starlightRoute.entryMeta.lang}
+					dir={starlightRoute.entryMeta.dir}
 				>
 					{/* TODO: Revisit how this logic flows. */}
-					<Banner {...Astro.props} />
+					<Banner />
 					{
-						Astro.props.entry.data.hero ? (
-							<ContentPanel {...Astro.props}>
-								<Hero {...Astro.props} />
-								<MarkdownContent {...Astro.props}>
+						starlightRoute.entry.data.hero ? (
+							<ContentPanel>
+								<Hero />
+								<MarkdownContent>
 									<slot />
 								</MarkdownContent>
-								<Footer {...Astro.props} />
+								<Footer />
 							</ContentPanel>
 						) : (
 							<>
-								<ContentPanel {...Astro.props}>
-									<PageTitle {...Astro.props} />
-									{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
-									{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
+								<ContentPanel>
+									<PageTitle />
+									{starlightRoute.entry.data.draft && <DraftContentNotice />}
+									{starlightRoute.isFallback && <FallbackContentNotice />}
 								</ContentPanel>
-								<ContentPanel {...Astro.props}>
-									<MarkdownContent {...Astro.props}>
+								<ContentPanel>
+									<MarkdownContent>
 										<slot />
 									</MarkdownContent>
-									<Footer {...Astro.props} />
+									<Footer />
 								</ContentPanel>
 							</>
 						)
