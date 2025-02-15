@@ -225,7 +225,9 @@ const configSetupHookSchema = z
 				 * }
 				 */
 				updateConfig: z.function(
-					z.tuple([z.record(z.any()) as z.Schema<Partial<StarlightUserConfig>>]),
+					z.tuple([
+						z.record(z.any()) as z.Schema<Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>>,
+					]),
 					z.void()
 				),
 				/**
