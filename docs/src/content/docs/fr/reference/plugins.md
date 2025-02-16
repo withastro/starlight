@@ -305,7 +305,7 @@ Pour en savoir plus sur les APIs disponibles, consultez le [guide « Utiliser le
 ```ts {6}
 // module-extension.ts
 export default {
-  name: 'plugin-use-translations',
+  name: 'plugin-utilisant-traductions',
   hooks: {
     'config:setup'({ useTranslations, logger }) {
       const t = useTranslations('zh-CN');
@@ -318,7 +318,7 @@ export default {
 L'exemple ci-dessus affichera un message qui inclut une chaîne d'interface utilisateur intégrée pour la langue chinoise simplifiée :
 
 ```shell
-[plugin-use-translations] 基于 Starlight 构建
+[plugin-utilisant-traductions] 基于 Starlight 构建
 ```
 
 #### `absolutePathToLang`
@@ -351,7 +351,7 @@ Un module d'extension peut déterminer la langue d'un fichier en utilisant son c
 ```ts {6-8} /en/
 // module-extension.ts
 export default {
-  name: 'plugin-use-translations',
+  name: 'plugin-utilisant-traductions',
   hooks: {
     'config:setup'({ absolutePathToLang, useTranslations, logger }) {
       const lang = absolutePathToLang(
@@ -367,5 +367,5 @@ export default {
 L'exemple ci-dessus affichera un message qui inclut une chaîne d'interface utilisateur intégrée pour la langue anglaise :
 
 ```shell
-[plugin-use-translations] Tip
+[plugin-utilisant-traductions] Tip
 ```
