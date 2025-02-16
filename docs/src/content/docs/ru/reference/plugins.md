@@ -59,7 +59,7 @@ interface StarlightPlugin {
 import type { HookParameters } from '@astrojs/starlight/types';
 
 function configSetup(options: HookParameters['config:setup']) {
-  options.useTranslations('en');
+  options.useTranslations('ru');
 }
 ```
 
@@ -338,9 +338,9 @@ starlight({
   title: 'Моя документация',
   defaultLocale: 'en',
   locales: {
-    // English docs in `src/content/docs/en/`
+    // Англоязычная документация в `src/content/docs/en/`
     en: { label: 'English' },
-    // Russian docs in `src/content/docs/ru/`
+    // Русскоязычная документация в `src/content/docs/ru/`
     ru: { label: 'Русский', lang: 'ru' },
   },
 });
