@@ -17,23 +17,32 @@ Erfahre mehr über die Verwendung eines Starlight-Plugins in der [Konfigurations
 Ein Starlight-Plugin hat die folgende Form.
 Siehe unten für Details zu den verschiedenen Eigenschaften und Hook-Parametern.
 
+<!-- prettier-ignore-start -->
 ```ts
 interface StarlightPlugin {
   name: string;
   hooks: {
-    setup: (options: {
+    'i18n:setup'?: (options: {
+      injectTranslations: (
+        translations: Record<string, Record<string, string>>
+      ) => void;
+    }) => void | Promise<void>;
+    'config:setup': (options: {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
+      addRouteMiddleware: (config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void;
       astroConfig: AstroConfig;
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
       logger: AstroIntegrationLogger;
-      injectTranslations: (Record<string, Record<string, string>>) => void;
+      useTranslations: (lang: string) => I18nT;
+      absolutePathToLang: (path: string) => string;
     }) => void | Promise<void>;
   };
 }
 ```
+<!-- prettier-ignore-end -->
 
 ## `name`
 
@@ -43,12 +52,100 @@ Ein Plugin muss einen eindeutigen Namen angeben, der es beschreibt. Der Name wir
 
 ## `hooks`
 
-Hooks sind Funktionen, die Starlight aufruft, um Plugin-Code zu bestimmten Zeiten auszuführen. Derzeit unterstützt Starlight nur einen einzigen `setup`-Hook.
+Hooks sind Funktionen, die Starlight aufruft, um Plugin-Code zu bestimmten Zeiten auszuführen.
 
-### `hooks.setup`
+Um den Typ der Argumente eines Hooks zu erhalten, verwende den Utility-Typ `HookParameters` und gib den Namen des Hooks an.
+Im folgenden Beispiel wird der Parameter `options` so eingegeben, dass er mit den Argumenten übereinstimmt, die an den Hook `config:setup` übergeben werden:
 
-Plugin-Setup-Funktion, die aufgerufen wird, wenn Starlight initialisiert wird (während des [`astro:config:setup`](https://docs.astro.build/de/reference/integrations-reference/#astroconfigsetup) Integrations-Hooks).
-Der `setup`-Hook kann verwendet werden, um die Starlight-Konfiguration zu aktualisieren oder Astro-Integrationen hinzuzufügen.
+```ts
+import type { HookParameters } from '@astrojs/starlight/types';
+
+function configSetup(options: HookParameters['config:setup']) {
+  options.useTranslations('de');
+}
+```
+
+### `i18n:setup`
+
+Die Funktion zum Einrichten der Plugin-Internationalisierung wird beim Initialisieren von Starlight aufgerufen.
+Der `i18n:setup`-Hook kann verwendet werden, um Übersetzungsstrings zu injizieren, damit ein Plugin verschiedene Locales unterstützen kann.
+Diese Übersetzungen werden über [`useTranslations()`](#usetranslations) im `config:setup`-Hook und in UI-Komponenten über [`Astro.locals.t()`](/de/guides/i18n/#ui-übersetzungen-verwenden) verfügbar sein.
+
+Der `i18n:setup`-Hook wird mit den folgenden Optionen aufgerufen:
+
+#### `injectTranslations`
+
+**Typ:** `(translations: Record<string, Record<string, string>>) => void`
+
+Eine Callback-Funktion zum Hinzufügen oder Aktualisieren von Übersetzungsstrings, die in Starlights [Lokalisierungs-APIs](/de/guides/i18n/#ui-übersetzungen-verwenden) verwendet werden.
+
+Im folgenden Beispiel injiziert ein Plugin Übersetzungen für einen benutzerdefinierten UI-String mit dem Namen `myPlugin.doThing` für die Sprachumgebungen `en` und `fr`:
+
+```ts {6-13} /(injectTranslations)[^(]/
+// plugin.ts
+export default {
+  name: 'plugin-use-translations',
+  hooks: {
+    'i18n:setup'({ injectTranslations }) {
+      injectTranslations({
+        en: {
+          'myPlugin.doThing': 'Do the thing',
+        },
+        fr: {
+          'myPlugin.doThing': 'Faire le truc',
+        },
+      });
+    },
+  },
+};
+```
+
+Um die injizierten Übersetzungen in der Benutzeroberfläche deines Plugins zu verwenden, befolge die [„UI-Übersetzungen verwenden“-Anleitung](/de/guides/i18n/#ui-übersetzungen-verwenden).
+Wenn du UI-Strings im Zusammenhang mit dem [`config:setup`](#configsetup)-Hook deines Plugins verwenden musst, kannst du den [`useTranslations()`](#usetranslations)-Callback verwenden.
+
+Die Typen für die injizierten Übersetzungsstrings eines Plugins werden im Projekt des Benutzers automatisch generiert, sind aber bei der Arbeit in der Codebasis deines Plugins noch nicht verfügbar.
+Um das Objekt `locals.t` im Kontext deines Plugins zu typisieren, deklariere die folgenden globalen Namespaces in einer TypeScript-Deklarationsdatei:
+
+```ts
+// env.d.ts
+declare namespace App {
+  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
+  // Definiere das Objekt `locals.t` im Kontext eines Plugins.
+  interface Locals extends StarlightLocals {}
+}
+
+declare namespace StarlightApp {
+  // Definiere die zusätzlichen Plugin-Übersetzungen in der `I18n`-Schnittstelle.
+  interface I18n {
+    'myPlugin.doThing': string;
+  }
+}
+```
+
+Du kannst die Typen für die Schnittstelle `StarlightApp.I18n` auch aus einer Quelldatei ableiten, wenn du ein Objekt hast, das deine Übersetzungen enthält.
+
+Nehmen wir zum Beispiel die folgende Quelldatei:
+
+```ts title="ui-strings.ts"
+export const UIStrings = {
+  en: { 'myPlugin.doThing': 'Do the thing' },
+  fr: { 'myPlugin.doThing': 'Faire le truc' },
+};
+```
+
+Die folgende Deklaration würde die Typen aus den englischen Schlüsseln in der Quelldatei ableiten:
+
+```ts title="env.d.ts"
+declare namespace StarlightApp {
+  type UIStrings = typeof import('./ui-strings').UIStrings.en;
+  interface I18n extends UIStrings {}
+}
+```
+
+### `config:setup`
+
+Plugin-Konfiguration-Setup-Funktion, die aufgerufen wird, wenn Starlight initialisiert wird (während des [`astro:config:setup`](https://docs.astro.build/de/reference/integrations-reference/#astroconfigsetup) Integrations-Hooks).
+Der `config:setup`-Hook kann verwendet werden, um die Starlight-Konfiguration zu aktualisieren oder Astro-Integrationen hinzuzufügen.
 
 Dieser Hook wird mit den folgenden Optionen aufgerufen:
 
@@ -75,7 +172,7 @@ Im folgenden Beispiel wird ein neues [`social`](/de/reference/configuration/#soc
 export default {
   name: 'add-twitter-plugin',
   hooks: {
-    setup({ config, updateConfig }) {
+    'config:setup'({ config, updateConfig }) {
       updateConfig({
         social: {
           ...config.social,
@@ -102,7 +199,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    setup({ addIntegration, astroConfig }) {
+    'config:setup'({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -115,6 +212,40 @@ export default {
   },
 };
 ```
+
+#### `addRouteMiddleware`
+
+**Typ:** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default'}) => void`
+
+Eine Callback-Funktion, um der Website einen [Routen-Middleware-Handler](/de/guides/route-data/) hinzuzufügen.
+
+Die Eigenschaft `entrypoint` muss ein Modulbezeichner für die Middleware-Datei deines Plugins sein, die einen `onRequest`-Handler exportiert.
+
+Im folgenden Beispiel fügt ein Plugin, das unter dem Namen `@example/starlight-plugin` veröffentlicht wurde, eine Route-Middleware über einen npm-Modul-Spezifizierer hinzu:
+
+```js {6-9}
+// plugin.ts
+export default {
+  name: '@example/starlight-plugin',
+  hooks: {
+    setup({ addRouteMiddleware }) {
+      addRouteMiddleware({
+        entrypoint: '@example/starlight-plugin/route-middleware',
+      });
+    },
+  },
+};
+```
+
+##### Kontrolle der Ausführungsreihenfolge
+
+Standardmäßig wird die Plugin-Middleware in der Reihenfolge ausgeführt, in der die Plugins hinzugefügt werden.
+
+Verwende die optionale Eigenschaft `order`, wenn du mehr Kontrolle darüber brauchst, wann deine Middleware läuft.
+Setze `order: "pre"`, um vor der Middleware eines Benutzers zu laufen.
+Setze `order: "post"`, um nach allen anderen Middlewares zu laufen.
+
+Wenn zwei Plugins Middleware mit demselben `order`-Wert hinzufügen, wird das zuerst hinzugefügte Plugin zuerst ausgeführt.
 
 #### `astroConfig`
 
@@ -151,7 +282,7 @@ Allen protokollierten Meldungen wird der Name des Plugins vorangestellt.
 export default {
   name: 'long-process-plugin',
   hooks: {
-    setup({ logger }) {
+    'config:setup'({ logger }) {
       logger.info('Beginn eines langen Prozesses…');
       // Ein langer Prozess…
     },
@@ -165,70 +296,78 @@ Im obigen Beispiel wird eine Meldung protokolliert, die die angegebene Info-Meld
 [long-process-plugin] Beginn eines langen Prozesses…
 ```
 
-#### `injectTranslations`
+#### `useTranslations`
 
-**Typ:** `(translations: Record<string, Record<string, string>>) => void`
+**Typ:** `(lang: string) => I18nT`
 
-Eine Callback-Funktion zum Hinzufügen oder Aktualisieren von Übersetzungsstrings, die in Starlights [Lokalisierungs-APIs](/de/guides/i18n/#ui-übersetzungen-verwenden) verwendet werden.
+Rufe `useTranslations()` mit einem BCP-47-Sprach-Tag auf, um eine Utility-Funktion zu generieren, die Zugriff auf UI-Strings für diese Sprache bietet.
+`useTranslations()` gibt ein Äquivalent der API `Astro.locals.t()` zurück, die in Astro-Komponenten verfügbar ist.
+Weitere Informationen zu den verfügbaren APIs findest du im Leitfaden [„UI-Übersetzungen verwenden“](/de/guides/i18n/#ui-übersetzungen-verwenden).
 
-Im folgenden Beispiel injiziert ein Plugin Übersetzungen für einen benutzerdefinierten UI-String mit dem Namen `myPlugin.doThing` für die Gebietsschemata `en` und `fr`:
-
-```ts {6-13} /(injectTranslations)[^(]/
+```ts {6}
 // plugin.ts
 export default {
-  name: 'plugin-with-translations',
+  name: 'plugin-use-translations',
   hooks: {
-    setup({ injectTranslations }) {
-      injectTranslations({
-        en: {
-          'myPlugin.doThing': 'Do the thing',
-        },
-        fr: {
-          'myPlugin.doThing': 'Faire le truc',
-        },
-      });
+    'config:setup'({ useTranslations, logger }) {
+      const t = useTranslations('zh-CN');
+      logger.info(t('builtWithStarlight.label'));
     },
   },
 };
 ```
 
-Um die eingefügten Übersetzungen in der Benutzeroberfläche deines Plugins zu verwenden, folge der Anleitung [„UI-Übersetzungen verwenden“](/de/guides/i18n/#ui-übersetzungen-verwenden).
+Im obigen Beispiel wird eine Meldung protokolliert, die einen integrierten UI-String für die vereinfachte chinesische Sprache enthält:
 
-Typen für die injizierten Übersetzungsstrings eines Plugins werden automatisch im Projekt eines Benutzers generiert, sind aber noch nicht verfügbar, wenn du in der Codebasis deines Plugins arbeitest.
-Um das `locals.t`-Objekt im Kontext deines Plugins einzugeben, deklariere die folgenden globalen Namespaces in einer TypeScript-Deklarationsdatei:
-
-```ts
-// env.d.ts
-declare namespace App {
-  type StarlightLocals = import('@astrojs/starlight').StarlightLocals;
-  // Definiere das Objekt `locals.t` im Kontext eines Plugins.
-  interface Locals extends StarlightLocals {}
-}
-
-declare namespace StarlightApp {
-  // Definiere die zusätzlichen Plugin-Übersetzungen in der Schnittstelle `I18n`.
-  interface I18n {
-    'myPlugin.doThing': string;
-  }
-}
+```shell
+[plugin-use-translations] 基于 Starlight 构建
 ```
 
-Du kannst die Typen für die Schnittstelle `StarlightApp.I18n` auch aus einer Quelldatei ableiten, wenn du ein Objekt hast, das deine Übersetzungen enthält.
+#### `absolutePathToLang`
 
-Nehmen wir zum Beispiel die folgende Quelldatei:
+**Typ:** `(path: string) => string`
 
-```ts title="ui-strings.ts"
-export const UIStrings = {
-  en: { 'myPlugin.doThing': 'Do the thing' },
-  fr: { 'myPlugin.doThing': 'Faire le truc' },
+Rufe `absolutePathToLang()` mit einem absoluten Dateipfad auf, um die Sprache für diese Datei zu erhalten.
+
+Dies kann besonders nützlich sein, wenn du [remark oder rehype Plugins](https://docs.astro.build/de/guides/markdown-content/#markdown-plugins) hinzufügst, um Markdown- oder MDX-Dateien zu verarbeiten.
+Das von diesen Plugins verwendete [virtuelle Dateiformat](https://github.com/vfile/vfile) enthält den [absoluten Pfad](https://github.com/vfile/vfile#filepath) der zu verarbeitenden Datei, der mit `absolutePathToLang()` verwendet werden kann, um die Sprache der Datei zu bestimmen.
+Die zurückgegebene Sprache kann mit dem Helfer [`useTranslations()`](#usetranslations) verwendet werden, um UI-Strings für diese Sprache zu erhalten.
+
+Nehmen wir zum Beispiel die folgende Starlight-Konfiguration:
+
+```js
+starlight({
+  title: 'Meine Dokumentation',
+  defaultLocale: 'en',
+  locales: {
+    // Englische Dokumentationen in `src/content/docs/en/`
+    en: { label: 'English' },
+    // Französische Dokumentationen in `src/content/docs/fr/`
+    fr: { label: 'Français', lang: 'fr' },
+  },
+});
+```
+
+Ein Plugin kann die Sprache einer Datei anhand ihres absoluten Pfads bestimmen:
+
+```ts {6-8} /fr/
+// plugin.ts
+export default {
+  name: 'plugin-use-translations',
+  hooks: {
+    'config:setup'({ absolutePathToLang, useTranslations, logger }) {
+      const lang = absolutePathToLang(
+        '/absolute/path/to/project/src/content/docs/fr/index.mdx'
+      );
+      const t = useTranslations(lang);
+      logger.info(t('aside.tip'));
+    },
+  },
 };
 ```
 
-Die folgende Deklaration würde Typen aus den englischen Schlüsseln in der Quelldatei ableiten:
+Im obigen Beispiel wird eine Meldung protokolliert, die einen integrierten UI-String für die französische Sprache enthält:
 
-```ts title="env.d.ts"
-declare namespace StarlightApp {
-  type UIStrings = typeof import('./ui-strings').UIStrings.en;
-  interface I18n extends UIStrings {}
-}
+```shell
+[plugin-use-translations] Astuce
 ```
