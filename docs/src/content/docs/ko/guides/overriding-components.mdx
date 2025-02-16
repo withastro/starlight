@@ -36,7 +36,7 @@ Starlight의 기본 컴포넌트를 재정의하는 것은 다음과 같은 경�
    ```astro
    ---
    // src/components/EmailLink.astro
-   
+
    const email = 'houston@example.com';
    ---
 
@@ -143,7 +143,7 @@ const isHomepage = Astro.locals.starlightRoute.id === '';
 	isHomepage ? (
 		<footer>Starlight 🌟 를 사용하여 구축</footer>
 	) : (
-	  <Default>
+		<Default>
 			<slot />
 		</Default>
 	)
