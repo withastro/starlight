@@ -462,8 +462,10 @@ Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하�
 
 [`prerender`](#prerender) 옵션이 `false`로 설정된 경우 Pagefind를 활성화할 수 없습니다.
 
-`pagefind`를 객체로 설정하여 Pagefind 검색 클라이언트를 구성할 수 있습니다.
-Pagefind 문서의 ["Pagefind의 결과 순위 사용자 정의"](https://pagefind.app/docs/ranking/)에서 `pagefind.ranking` 옵션을 사용하여 검색 결과 순위가 계산되는 방식을 제어하는 방법에 대해 자세히 알아보실 수 있습니다.
+`pagefind`를 객체로 설정하여 Pagefind 검색 클라이언트를 구성합니다:
+
+- `pagefind.ranking` 옵션을 사용하여 검색 결과 순위 계산 방법을 제어하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Customize Pagefind's result ranking"](https://pagefind.app/docs/ranking/)을 참조하세요.
+- 여러 사이트에서 검색하는 방법을 제어하기 위해 `pagefind.mergeIndex` 옵션을 사용하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Searching multiple sites"](https://pagefind.app/docs/multisite/)를 참조하세요.
 
 #### `PagefindOptions`
 
@@ -475,6 +477,21 @@ interface PagefindOptions {
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
 }
 ```
 
