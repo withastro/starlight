@@ -61,7 +61,7 @@ Im folgenden Beispiel wird der Parameter `options` so eingegeben, dass er mit de
 import type { HookParameters } from '@astrojs/starlight/types';
 
 function configSetup(options: HookParameters['config:setup']) {
-  options.useTranslations('en');
+  options.useTranslations('de');
 }
 ```
 
