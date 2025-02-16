@@ -59,7 +59,7 @@ interface StarlightPlugin {
 import type { HookParameters } from '@astrojs/starlight/types';
 
 function configSetup(options: HookParameters['config:setup']) {
-  options.useTranslations('en');
+  options.useTranslations('ko');
 }
 ```
 
