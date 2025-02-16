@@ -461,8 +461,10 @@ starlight({
 
 Pagefind не может быть включен, если для параметра [`prerender`](#prerender) установлено значение `false`.
 
-Установите `pagefind` в объект, чтобы настроить клиент поиска Pagefind.
-Смотрите главу [Настройка ранжирования результатов Pagefind](https://pagefind.app/docs/ranking/) в документации Pagefind для получения дополнительной информации о том, как использовать параметр `pagefind.ranking` для управления расчётом ранжирования результатов поиска.
+Установите объект в качестве значения `pagefind` для настройки клиента поиска Pagefind:
+
+- Смотрите [Настройка ранжирования результатов Pagefind](https://pagefind.app/docs/ranking/) в документации Pagefind для получения дополнительных сведений об использовании опции `pagefind.ranking` для управления порядком сортировки результатов поиска.
+- Смотрите [Поиск по нескольким сайтам](https://pagefind.app/docs/multisite/) в документации Pagefind для получения дополнительных сведений об использовании опции `pagefind.mergeIndex` для управления поиском по нескольким сайтам.
 
 #### `PagefindOptions`
 
@@ -474,6 +476,21 @@ interface PagefindOptions {
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
 }
 ```
 
