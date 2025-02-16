@@ -70,7 +70,7 @@ Starlight의 경로 데이터는 별도의 구성 없이 바로 작동합니다.
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'My delightful docs site',
+   			title: '나의 즐거운 문서 사이트',
    			routeMiddleware: './src/routeData.ts',
    		}),
    	],
@@ -111,7 +111,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My site with multiple middleware',
+			title: '여러 미들웨어가 있는 내 사이트',
 			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
 		}),
 	],
