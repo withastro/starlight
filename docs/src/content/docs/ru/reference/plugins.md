@@ -16,6 +16,7 @@ tableOfContents:
 Подробнее о различных свойствах и параметрах хуков см. ниже.
 
 <!-- prettier-ignore-start -->
+
 ```ts
 interface StarlightPlugin {
   name: string;
@@ -29,7 +30,10 @@ interface StarlightPlugin {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
-      addRouteMiddleware: (config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void;
+      addRouteMiddleware: (config: {
+        entrypoint: string;
+        order?: 'pre' | 'post' | 'default';
+      }) => void;
       astroConfig: AstroConfig;
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
@@ -40,6 +44,7 @@ interface StarlightPlugin {
   };
 }
 ```
+
 <!-- prettier-ignore-start -->
 
 ## `name`
@@ -240,6 +245,7 @@ export default {
 По умолчанию мидлвары плагинов выполняются в порядке их добавления.
 
 Если вам нужно больше контроля над порядком выполнения, используйте необязательное свойство `order`.
+
 - Установите `order: "pre"`, чтобы мидлвар выполнялся перед пользовательскими мидлварами.
 - Установите `order: "post"`, чтобы мидлвар выполнялся после всех остальных мидлваров.
 
@@ -325,7 +331,7 @@ export default {
 
 **тип:** `(path: string) => string`
 
-Вызовите `absolutePathToLang()` с абсолютным путём к файлу, чтобы получить язык для этого файла. 
+Вызовите `absolutePathToLang()` с абсолютным путём к файлу, чтобы получить язык для этого файла.
 
 Это может быть особенно полезно при добавлении [плагинов remark или rehype](https://docs.astro.build/ru/guides/markdown-content/#%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D1%8B-markdown) для обработки файлов Markdown или MDX.
 Виртуальный формат файлов, используемый этими плагинами, включает [абсолютный путь](https://github.com/vfile/vfile#filepath) обрабатываемого файла, который можно использовать с `absolutePathToLang()`, чтобы определить язык файла.
@@ -364,7 +370,7 @@ export default {
 };
 ```
 
-Пример выше выведет сообщение, которое включает встроенную строку интерфейса для русского языка:  
+Пример выше выведет сообщение, которое включает встроенную строку интерфейса для русского языка:
 
 ```shell
 [plugin-use-translations] Совет
