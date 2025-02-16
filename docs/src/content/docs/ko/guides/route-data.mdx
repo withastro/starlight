@@ -59,7 +59,7 @@ Starlight의 경로 데이터는 별도의 구성 없이 바로 작동합니다.
 
    export const onRequest = defineRouteMiddleware(() => {});
    ```
-   
+
 2. `astro.config.mjs`에서 경로 데이터 미들웨어 파일의 위치를 Starlight에 알려줍니다.
 
    ```js ins={9}
@@ -76,7 +76,7 @@ Starlight의 경로 데이터는 별도의 구성 없이 바로 작동합니다.
    	],
    });
    ```
-   
+
 3. `onRequest` 함수를 업데이트하여 경로 데이터를 수정합니다.
 
    미들웨어가 받는 첫 번째 인자는 [Astro의 `context` 객체](https://docs.astro.build/ko/reference/api-reference/)입니다.
@@ -89,9 +89,9 @@ Starlight의 경로 데이터는 별도의 구성 없이 바로 작동합니다.
    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
    export const onRequest = defineRouteMiddleware((context) => {
-     // 이 페이지의 콘텐츠 컬렉션 항목을 가져옵니다.
+   	// 이 페이지의 콘텐츠 컬렉션 항목을 가져옵니다.
    	const { entry } = context.locals.starlightRoute;
-     // 제목에 느낌표를 추가하여 업데이트합니다.
+   	// 제목에 느낌표를 추가하여 업데이트합니다.
    	entry.data.title = entry.data.title + '!';
    });
    ```
