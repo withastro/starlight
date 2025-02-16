@@ -279,7 +279,7 @@ export const collections = {
 
 Дополнительную информацию о схемах коллекции контента см. в разделе [Определение схемы коллекции](https://docs.astro.build/ru/guides/content-collections/#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%85%D0%B5%D0%BC%D1%8B-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8) в документации Astro.
 
-## Использование переводов пользовательского интерфейса
+## Использование UI-переводов
 
 Вы можете получить доступ к [встроенным строкам пользовательского интерфейса](/ru/guides/i18n/#перевод-интерфейса-starlight) Starlight, а также к [пользовательским](/ru/guides/i18n/#расширение-схемы-перевода) и [предоставляемым плагинами](/ru/reference/plugins/#injecttranslations) строкам пользовательского интерфейса через единый API на базе [i18next](https://www.i18next.com/).
 Это включает поддержку таких функций, как [интерполяция](https://www.i18next.com/translation-function/interpolation) и [плюрализация](https://www.i18next.com/translation-function/plurals).
@@ -299,6 +299,9 @@ export const GET = (context) => {
 	return new Response(context.locals.t('404.text'));
 };
 ```
+
+В контексте плагина Starlight вы можете использовать хелпер [`useTranslations()`](/ru/reference/plugins/#usetranslations) для доступа к этому API для конкретного языка.
+Дополнительную информацию смотрите в [справочнике по плагинам](/ru/reference/plugins/).
 
 ### Рендеринг строки пользовательского интерфейса
 

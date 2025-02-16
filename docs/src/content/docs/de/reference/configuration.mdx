@@ -449,15 +449,48 @@ Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du
 
 ### `pagefind`
 
-**Typ:** `boolean`  
+**Typ:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **Standard:** `true`
 
-Lege fest, ob Starlights Standard-Site-Search-Anbieter [Pagefind](https://pagefind.app/) aktiviert ist.
+Konfiguriere den Standard-Site-Suchanbieter von Starlight [Pagefind](https://pagefind.app/).
 
 Setze diese Option auf `false`, um die Indizierung deiner Website mit Pagefind zu deaktivieren.
 Dadurch wird auch die Standard-Suchoberfläche ausgeblendet, falls sie verwendet wird.
 
 Pagefind kann nicht aktiviert werden, wenn die Option [`prerender`](#prerender) auf `false` gesetzt ist.
+
+Setze `pagefind` auf ein Objekt, um den Pagefind-Suchclient zu konfigurieren:
+
+- Siehe [„Anpassen des Pagefind-Rankings (EN)“](https://pagefind.app/docs/ranking/) in der Pagefind-Dokumentation für weitere Details über die Verwendung der Option `pagefind.ranking`, um zu kontrollieren, wie die Rangfolge der Suchergebnisse berechnet wird
+- Siehe [„Mehrere Websites durchsuchen (EN)“](https://pagefind.app/docs/multisite/) in der Pagefind-Dokumentation für weitere Informationen über die Verwendung der Option `pagefind.mergeIndex` zur Steuerung der Suche über mehrere Websites
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
 
 ### `prerender`
 
