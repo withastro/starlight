@@ -86,7 +86,7 @@ Starlight의 상단 탐색 바를 렌더링하는 컴포넌트입니다.
 **기본 컴포넌트:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Header 컴포넌트는 모든 페이지 상단에 표시됩니다.
-기본적으로 [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), 와 [`<LanguageSelect />`](#languageselect)를 표시합니다.
+기본적으로 [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), 와 [`<LanguageSelect />`](#languageselect)를 표시합니다.
 
 #### `SiteTitle`
 
