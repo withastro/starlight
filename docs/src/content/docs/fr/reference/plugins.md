@@ -55,8 +55,6 @@ Les hooks sont des fonctions que Starlight appelle pour exécuter le code du mod
 Pour référencer le type des arguments d'un hook, utilisez le type utilitaire `HookParameters` et passez le nom du hook.
 Dans l'exemple suivant, le paramètre `options` est typé pour correspondre aux arguments passés au hook `config:setup` :
 
-In the following example, the `options` parameter is typed to match the arguments passed to the `config:setup` hook:
-
 ```ts
 import type { HookParameters } from '@astrojs/starlight/types';
 
@@ -67,7 +65,7 @@ function configSetup(options: HookParameters['config:setup']) {
 
 ### `i18n:setup`
 
-Fontion de configuration de l'internationalisation du module d'extension appelée lorsque Starlight est initialisé.
+Fonction de configuration de l'internationalisation du module d'extension appelée lorsque Starlight est initialisé.
 Le hook `i18n:setup` peut être utilisé pour injecter des traductions afin que le module d'extension puisse prendre en charge différentes locales.
 Ces traductions seront disponibles via [`useTranslations()`](#usetranslations) dans le hook `config:setup` et dans les composants d'interface utilisateur via [`Astro.locals.t()`](/fr/guides/i18n/#utiliser-les-traductions-de-linterface-utilisateur).
 
@@ -350,7 +348,7 @@ starlight({
 
 Un module d'extension peut déterminer la langue d'un fichier en utilisant son chemin absolu :
 
-```ts {6-8} /fr/
+```ts {6-8} /en/
 // module-extension.ts
 export default {
   name: 'plugin-use-translations',
