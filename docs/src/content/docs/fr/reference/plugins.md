@@ -348,7 +348,7 @@ starlight({
 
 Un module d'extension peut déterminer la langue d'un fichier en utilisant son chemin absolu :
 
-```ts {6-8} /en/
+```ts {6-8} //(en)//
 // module-extension.ts
 export default {
   name: 'plugin-utilisant-traductions',
