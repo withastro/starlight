@@ -67,6 +67,7 @@ for (const routePath of routePaths) {
 
 		// Save the diff image if the number of mismatched pixels is greater than the maximum allowed.
 		if (diffPixels >= maxDiffPixels) {
+			// @ts-expect-error - let me write my file, I don't want to update `@types/node` for this.
 			await fs.writeFile(getScreenshotPath(routePath, 'diff'), PNG.sync.write(diffImage));
 		}
 
