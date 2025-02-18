@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
+import reproPlugin from 'repro-plugin';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -189,7 +190,7 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 					]
-				: [],
+				: [reproPlugin()],
 		}),
 	],
 });
