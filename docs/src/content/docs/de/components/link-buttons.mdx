@@ -1,0 +1,145 @@
+---
+title: Link-Buttons
+description: Erfahre, wie du in Starlight Link-Buttons für visuell eindeutige Call-to-Action-Links erstellen.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+Um visuell eindeutige Call-to-Action-Links anzuzeigen, verwende die Komponente `<LinkButton>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkButton slot="preview" href="/de/getting-started/">
+	Lies die Dokumentationen
+</LinkButton>
+
+</Preview>
+
+## Import
+
+```tsx
+import { LinkButton } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Verwende die Komponente `<LinkButton>`, um einen visuell eindeutigen Call-to-Action-Link anzuzeigen.
+Ein Link-Button ist nützlich, um Nutzer zu den relevantesten oder handlungsrelevanten Inhalten zu leiten und wird häufig auf Landing Pages verwendet.
+
+Ein `<LinkButton>` benötigt ein [`href`](#href) Attribut.
+Optional kann das Aussehen des Link-Buttons mit dem Attribut [`variant`](#variant) angepasst werden, das auf `primary` (Standard), `secondary` oder `minimal` gesetzt werden kann.
+
+<Preview>
+
+```mdx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="/de/getting-started/">Los geht's</LinkButton>
+<LinkButton href="/de/reference/configuration/" variant="secondary">
+	Konfiguration Referenz
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkbutton href="/de/getting-started/" %}Los geht's{% /linkbutton %}
+
+{% linkbutton href="/de/reference/configuration/" variant="secondary" %}
+Konfiguration Referenz
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<LinkButton href="/de/getting-started/">Los geht's</LinkButton>
+	<LinkButton href="/de/reference/configuration/" variant="secondary">
+		Konfiguration Referenz
+	</LinkButton>
+</Fragment>
+
+</Preview>
+
+### Hinzufügen von Symbolen zu Link-Buttons
+
+Füge ein Symbol in einen Link-Button ein, indem du das Attribut [`icon`](#icon) auf den Namen [eines von Starlights eingebauten Symbolen](/de/reference/icons/#alle-symbole) setzt.
+
+Das Attribut [`iconPlacement`](#iconplacement) kann verwendet werden, um das Symbol vor dem Text zu platzieren, indem man es auf `start` setzt (Standardwert ist `end`).
+
+<Preview>
+
+```mdx {6-7}
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Verwandt: Astro
+</LinkButton>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4-5}
+{% linkbutton
+   href="https://docs.astro.build"
+	 variant="secondary"
+	 icon="external"
+	 iconPlacement="start" %}
+Verwandt: Astro
+{% /linkbutton %}
+```
+
+</Fragment>
+
+<LinkButton
+	slot="preview"
+	href="https://docs.astro.build"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+>
+	Verwandt: Astro
+</LinkButton>
+
+</Preview>
+
+## `<LinkButton>`-Eigenschaften
+
+**Implementation:** [`LinkButton.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkButton.astro)
+
+Die `<LinkButton>`-Komponente akzeptiert die folgenden Eigenschaften und auch alle [anderen `<a>`-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a):
+
+### `href`
+
+**Erforderlich**  
+**Typ:** `string`
+
+Die URL, auf die der Link-Button zeigt.
+
+### `variant`
+
+**Typ:** `'primary' | 'secondary' | 'minimal'`  
+**Standard:** `'primary'`
+
+Das Aussehen des Link-Button.
+Setze auf `primary` für einen auffälligen Call-to-Action-Link mit der Akzentfarbe des Themas, auf `secondary` für einen weniger auffälligen Link oder auf `minimal` für einen Link mit minimalem Styling.
+
+### `icon`
+
+**Typ:** `string`
+
+Ein Link-Button kann ein `icon`-Attribut enthalten, das auf den Namen [eines von Starlights eingebauten Symbolen](/de/reference/icons/#alle-symbole) gesetzt ist.
+
+### `iconPlacement`
+
+**Typ:** `'start' | 'end'`  
+**Standard:** `'end'`
+
+Bestimmt die Platzierung des Symbols im Verhältnis zum Text des Link-Buttons.

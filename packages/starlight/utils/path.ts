@@ -50,3 +50,9 @@ export function ensureHtmlExtension(path: string) {
 	}
 	return ensureLeadingSlash(path);
 }
+
+/** Remove the extension from a path. */
+export function stripExtension(path: string) {
+	const periodIndex = path.lastIndexOf('.');
+	return path.slice(0, periodIndex > -1 ? periodIndex : undefined);
+}

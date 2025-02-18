@@ -1,0 +1,108 @@
+---
+title: Карточки
+description: Узнайте, как использовать карточки в Starlight для отображения содержимого в прямоугольных блоках.
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Для отображения контента в блоке со стилями Starlight используя компонент `<Card>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Card slot="preview" title="Луны" icon="moon">
+	Ио, Европа, Ганимед
+</Card>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Отображайте карточки с помощью компонента `<Card>`, используя атрибут [`title`](#title) для добавления заголовка.
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Зацените это">Интересный контент, который хочется выделить.</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="Зацените это" %}
+Интересный контент, который хочется выделить.
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Зацените это">
+	Интересный контент, который хочется выделить.
+</Card>
+
+</Preview>
+
+### Добавление иконок
+
+Включите иконку в карточку, используя атрибут [`icon`](#icon), содержащий имя [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки).
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="Звёзды" icon="star">
+	Сириус, Вега, Бетельгейзе
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="Звёзды" icon="star" %}
+Сириус, Вега, Бетельгейзе
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="Звёзды" icon="star">
+	Сириус, Вега, Бетельгейзе
+</Card>
+
+</Preview>
+
+### Группировка карточек
+
+Отображайте несколько карточек рядом друг с другом при наличии свободного места, группируя их с помощью компонента [`<CardGrid>`](/ru/components/card-grids/).
+Пример смотрите в статье [Группировка карточек](/ru/components/card-grids/#группировка-карточек).
+
+## Параметры `<Card>`
+
+**Реализация:** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+Компонент `<Card>` принимает следующие параметры:
+
+### `title`
+
+**обязательный**  
+**тип:** `string`
+
+Заголовок карточки для отображения.
+
+### `icon`
+
+**тип:** `string`
+
+Карточка может содержать атрибут `icon`, содержащий имя [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки).

@@ -1,6 +1,8 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -41,6 +43,7 @@ export default defineConfig({
 				dark: '/src/assets/logo-dark.svg',
 				replacesTitle: true,
 			},
+			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
@@ -66,7 +69,7 @@ export default defineConfig({
 					attrs: { property: 'og:image:alt', content: ogImageAlt },
 				},
 			],
-			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
+			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
 				{
@@ -133,9 +136,22 @@ export default defineConfig({
 					autogenerate: { directory: 'guides' },
 				},
 				{
+					label: 'Components',
+					translations: {
+						de: 'Komponenten',
+						fr: 'Composants',
+						ru: 'Компоненты',
+						ko: '컴포넌트',
+						ja: 'コンポーネント',
+						'zh-CN': '组件',
+						uk: 'Компоненти',
+					},
+					autogenerate: { directory: 'components' },
+				},
+				{
 					label: 'Reference',
 					translations: {
-						de: 'Referenz',
+						de: 'Referenzen',
 						es: 'Referencias',
 						ja: 'リファレンス',
 						fr: 'Référence',
@@ -154,16 +170,20 @@ export default defineConfig({
 				{
 					label: 'Resources',
 					translations: {
+						de: 'Ressourcen',
 						'zh-CN': '资源',
 						fr: 'Ressources',
 						'pt-BR': 'Recursos',
 						'pt-PT': 'Recursos',
 						ja: 'リソース',
 						ru: 'Ресурсы',
+						ko: '리소스',
+						uk: 'Ресурси',
 					},
 					autogenerate: { directory: 'resources' },
 				},
 			],
+			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({

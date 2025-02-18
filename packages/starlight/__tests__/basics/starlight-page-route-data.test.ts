@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { generateRouteData } from '../../utils/route-data';
+import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 import {
 	generateStarlightPageRouteData,
@@ -16,7 +16,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Getting Started' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 		],
 	})
@@ -103,7 +103,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: starlightPageUrl,
+		url: new URL('https://example.com/getting-started/'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -119,7 +119,7 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "attrs": {},
 		    "badge": undefined,
 		    "href": "/getting-started/",
-		    "isCurrent": false,
+		    "isCurrent": true,
 		    "label": "Getting Started",
 		    "type": "link",
 		  },
@@ -138,9 +138,9 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		      {
 		        "attrs": {},
 		        "badge": undefined,
-		        "href": "/guides/components/",
+		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
-		        "label": "Components",
+		        "label": "Project Structure",
 		        "type": "link",
 		      },
 		    ],
@@ -188,7 +188,7 @@ test('uses provided sidebar if any', async () => {
 				'reference/frontmatter',
 			],
 		},
-		url: starlightPageUrl,
+		url: new URL('https://example.com/test/2'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -207,7 +207,7 @@ test('uses provided sidebar if any', async () => {
 		    "attrs": {},
 		    "badge": undefined,
 		    "href": "/test/2",
-		    "isCurrent": false,
+		    "isCurrent": true,
 		    "label": "Custom link 2",
 		    "type": "link",
 		  },
@@ -226,9 +226,9 @@ test('uses provided sidebar if any', async () => {
 		      {
 		        "attrs": {},
 		        "badge": undefined,
-		        "href": "/guides/components/",
+		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
-		        "label": "Components",
+		        "label": "Project Structure",
 		        "type": "link",
 		      },
 		    ],
@@ -245,10 +245,12 @@ test('uses provided sidebar if any', async () => {
 		  },
 		]
 	`);
+	expect(data.pagination.prev?.href).toBe('/test/1');
+	expect(data.pagination.next?.href).toBe('/guides/authoring-content/');
 });
 
 test('throws error if sidebar is malformated', async () => {
-	expect(() =>
+	await expect(() =>
 		generateStarlightPageRouteData({
 			props: {
 				...starlightPageProps,
@@ -465,15 +467,6 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 		url: starlightPageUrl,
 	});
 	expect(data.hasSidebar).toBe(false);
-});
-
-test('includes localized labels', async () => {
-	const data = await generateStarlightPageRouteData({
-		props: starlightPageProps,
-		url: starlightPageUrl,
-	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Skip to content');
 });
 
 test('uses provided edit URL if any', async () => {

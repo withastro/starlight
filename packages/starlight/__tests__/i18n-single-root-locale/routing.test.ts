@@ -1,4 +1,5 @@
 import { expect, test, vi } from 'vitest';
+import project from 'virtual:starlight/project-context';
 import { routes } from '../../utils/routing';
 
 vi.mock('astro:content', async () =>
@@ -6,14 +7,15 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Accueil' }],
 			['guides/authoring-content.mdx', { title: 'Authoring content' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/index.mdx', { title: 'Not the home page' }],
 		],
 	})
 );
 
 test('route slugs are normalized', () => {
-	const indexRoute = routes.find((route) => route.id.startsWith('index.md'));
+	const indexRoute = routes.find(
+		(route) => route.id === (project.legacyCollections ? 'index.mdx' : '')
+	);
 	expect(indexRoute?.slug).toBe('');
 });
 

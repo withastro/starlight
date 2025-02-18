@@ -1,7 +1,7 @@
 ---
 /** Unique symbol for storing a running index in `locals`. */
 const currentGroupIndexSymbol = Symbol.for('starlight-sidebar-group-index');
-const locals = Astro.locals as Record<typeof currentGroupIndexSymbol, number>;
+const locals = Astro.locals as App.Locals & { [currentGroupIndexSymbol]: number };
 
 /** The current sidebar group’s index retrieved from `locals` if set, starting at `0`. */
 const index = locals[currentGroupIndexSymbol] || 0;

@@ -14,14 +14,13 @@ import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { StarlightConfig } from '../types';
-import type { createTranslationSystemFromFs } from '../utils/translations-fs';
-import { pathToLocale } from './shared/pathToLocale';
+import type { HookParameters, StarlightConfig } from '../types';
 
 interface AsidesOptions {
-	starlightConfig: { locales: StarlightConfig['locales'] };
+	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
+	useTranslations: HookParameters<'config:setup'>['useTranslations'];
+	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -106,10 +105,10 @@ function transformUnhandledDirective(
  * ```astro
  * <aside class="starlight-aside starlight-aside--tip" aria-label="Did you know?">
  *   <p class="starlight-aside__title" aria-hidden="true">Did you know?</p>
- *   <section class="starlight-aside__content">
+ *   <div class="starlight-aside__content">
  *     <p>Astro helps you build faster websites with “Islands Architecture”.</p>
- *   </section>
- * </Aside>
+ *   </div>
+ * </aside>
  * ```
  */
 function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
@@ -150,8 +149,8 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = pathToLocale(file.history[0], options);
-		const t = options.useTranslations(locale);
+		const lang = options.absolutePathToLang(file.path);
+		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === undefined || !isNodeDirective(node)) {
 				return;
@@ -166,7 +165,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			// children with the `directiveLabel` property set to true. We want to pass it as the title
 			// prop to <Aside>, so when we find a directive label, we store it for the title prop and
 			// remove the paragraph from the container’s children.
-			let title = t(`aside.${variant}`);
+			let title: string = t(`aside.${variant}`);
 			let titleNode: PhrasingContent[] = [{ type: 'text', value: title }];
 			const firstChild = node.children[0];
 			if (
@@ -202,7 +201,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 						),
 						...titleNode,
 					]),
-					h('section', { class: 'starlight-aside__content' }, node.children),
+					h('div', { class: 'starlight-aside__content' }, node.children),
 				]
 			);
 
@@ -227,7 +226,8 @@ export function remarkDirectivesRestoration() {
 			if (
 				index !== undefined &&
 				parent &&
-				(node.type === 'textDirective' || node.type === 'leafDirective')
+				(node.type === 'textDirective' || node.type === 'leafDirective') &&
+				node.data === undefined
 			) {
 				transformUnhandledDirective(node, index, parent);
 				return;

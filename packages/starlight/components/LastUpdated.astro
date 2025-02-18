@@ -1,13 +1,11 @@
 ---
-import type { Props } from '../props';
-
-const { labels, lang, lastUpdated } = Astro.props;
+const { lang, lastUpdated } = Astro.locals.starlightRoute;
 ---
 
 {
 	lastUpdated && (
 		<p>
-			{labels['page.lastUpdated']}{' '}
+			{Astro.locals.t('page.lastUpdated')}{' '}
 			<time datetime={lastUpdated.toISOString()}>
 				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
 			</time>

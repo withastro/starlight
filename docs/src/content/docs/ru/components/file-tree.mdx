@@ -1,0 +1,225 @@
+---
+title: Дерево файлов
+description: Узнайте, как отобразить структуру каталога с помощью значков файлов и сворачиваемых подкаталогов в Starlight.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+Для отображения структуры каталога с иконками файлов и сворачиваемыми подкаталогами используйте компонент `<FileTree>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<FileTree slot="preview">
+
+- astro.config.mjs — **важный** файл
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { FileTree } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Отображайте дерево файлов с иконками файлов и сворачиваемыми подкаталогами с помощью компонента `<FileTree>`.
+
+Укажите структуру ваших файлов и каталогов с помощью [неупорядоченного списка Markdown](https://www.markdownguide.org/basic-syntax/#unordered-lists) внутри `<FileTree>`.
+Создайте подкаталог с помощью вложенного списка или добавьте `/` в конец элемента списка, чтобы отобразить его как каталог без определённого содержимого.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- astro.config.mjs
+- package.json
+- src
+  - components
+    - Header.astro
+    - Title.astro
+  - pages/
+
+</FileTree>
+
+</Preview>
+
+### Выделение элементов
+
+Выделите файл или каталог, сделав его имя жирным, например: `**README.md**`.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - **Header.astro**
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Добавление комментариев
+
+Добавьте комментарий к файлу или каталогу с помощью дополнительного текста после имени.
+В комментариях поддерживается встроенное форматирование Markdown, такое как полужирное и курсивное начертание.
+
+<Preview>
+
+```mdx {7}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro — **важный** файл
+    - Title.astro
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% filetree %}
+- src
+  - components
+    - Header.astro — **важный** файл
+    - Title.astro
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro — **важный** файл
+    - Title.astro
+
+</FileTree>
+
+</Preview>
+
+### Добавление заглушек
+
+Добавьте заглушки файлов и каталогов, используя в качестве имени либо `...`, либо `_`.
+Это может быть полезно для указания читателю, что папка должна содержать больше элементов, не указывая их все в явном виде.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro
+    - …
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro
+    - …
+
+</FileTree>
+
+</Preview>
+
+## Параметры `<FileTree>`
+
+**Реализация:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
+
+Компонент `<FileTree>` не принимает никаких параметров.

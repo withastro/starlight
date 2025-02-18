@@ -1,0 +1,103 @@
+---
+title: 코드
+description: Markdown 코드 블록 없이 Starlight에서 구문 강조 표시된 코드를 표시하는 방법을 알아보세요.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+`<Code>` 컴포넌트는 구문이 강조 표시된 코드를 렌더링합니다.
+예를 들어 파일, 데이터베이스, API와 같은 외부 소스에서 가져온 데이터를 렌더링할 때와 같이 [Markdown 코드 블록](/ko/guides/authoring-content/#코드-블록)을 사용할 수 없을 때 유용합니다.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Code
+	slot="preview"
+	code={`## 환영합니다
+
+**우주에서** 하는 인사!`}
+lang="md"
+title="example.md"
+ins={3}
+/>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { Code } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+외부 소스에서 가져온 코드를 표시할 때와 같은 상황에서 구문이 강조된 코드를 렌더링하려면 `<Code>` 컴포넌트를 사용합니다.
+
+[Expressive Code “Code 컴포넌트” 문서](https://expressive-code.com/key-features/code-component/)에서 `<Code>` 컴포넌트 사용 방법과 사용 가능한 속성 목록에 대한 자세한 내용을 확인할 수 있습니다.
+
+<Preview>
+
+```mdx
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('이는 파일이나 CMS에서 올 수 있습니다!');`;
+export const fileName = 'example.js';
+export const highlights = ['파일', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% code
+   code="console.log('이는 파일이나 CMS에서 올 수 있습니다!');"
+   lang="js"
+   title="example.js"
+   meta="'파일' 'CMS'" /%}
+```
+
+</Fragment>
+
+export const exampleCode = `console.log('이는 파일이나 CMS에서 올 수 있습니다!');`;
+export const fileName = 'example.js';
+export const highlights = ['파일', 'CMS'];
+
+<Code
+	slot="preview"
+	code={exampleCode}
+	lang="js"
+	title={fileName}
+	mark={highlights}
+/>
+
+</Preview>
+
+### 가져온 코드 표시
+
+MDX 파일 및 Astro 컴포넌트에서 [Vite의 `?raw` 가져오기 접미사](https://ko.vite.dev/guide/assets#importing-asset-as-string)를 사용하여 코드 파일을 문자열로 가져옵니다.
+그런 다음 이 가져온 문자열을 `<Code>` 컴포넌트에 전달하여 페이지에 포함할 수 있습니다.
+
+<Preview>
+
+```mdx "?raw"
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/tsconfig.json?raw';
+
+<Code code={importedCode} lang="json" title="tsconfig.json" />
+```
+
+import importedCode from '../../../../../../examples/basics/tsconfig.json?raw';
+
+<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
+
+</Preview>
+
+## `<Code>` 속성
+
+**구현:** [`Code.astro`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/components/Code.astro)
+
+`<Code>` 컴포넌트는 [Expressive Code “Code 컴포넌트” 문서](https://expressive-code.com/key-features/code-component/#available-props)에 문서화된 모든 속성을 허용합니다.

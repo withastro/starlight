@@ -12,12 +12,21 @@ interface Props {
 		selected: boolean;
 	}>;
 }
+
+/**
+ * The `autocomplete="off"` attribute is used to prevent the browser from automatically selecting a
+ * value for this input, e.g. based on the user's previous selections, as this could lead to
+ * incorrect values being selected for example when the user switches between languages and uses
+ * the back button.
+ * Note that this attribute is only useful when a value is not restored at a later stage, e.g. the
+ * bfcache that ignores this attribute when restoring the value.
+ */
 ---
 
 <label style={`--sl-select-width: ${Astro.props.width}`}>
 	<span class="sr-only">{Astro.props.label}</span>
 	<Icon name={Astro.props.icon} class="icon label-icon" />
-	<select value={Astro.props.value}>
+	<select value={Astro.props.value} autocomplete="off">
 		{
 			Astro.props.options.map(({ value, selected, label }) => (
 				<option value={value} selected={selected} set:html={label} />

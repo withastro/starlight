@@ -1,0 +1,173 @@
+---
+title: Kartenraster
+description: Erfahre, wie du in Starlight mehrere Karten in ein Raster packen kannst.
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Um mehrere [`<Card>`](/de/components/cards/) oder [`<LinkCard>`](/de/components/link-cards/) Komponenten in einem Raster zu verpacken, verwende die Komponente `<CardGrid>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="Sterne" icon="star">
+		Sirius, Wega, Betelgeuse
+	</Card>
+	<Card title="Monde" icon="moon">
+		Io, Europa, Ganymed
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## Import
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+### Karten gruppieren
+
+Zeige mehrere [`<Card>`](/de/components/cards/) Komponenten nebeneinander an, wenn genügend Platz vorhanden ist, indem du sie mit der `<CardGrid>` Komponente gruppierst.
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Schau dir das an" icon="open-book">
+		Interessante Inhalte, die du hervorheben möchtest.
+	</Card>
+	<Card title="Anderer Inhalt" icon="information">
+		Weitere Informationen, die du weitergeben möchtest.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="Schau dir das an" icon="open-book" %}
+Interessante Inhalte, die du hervorheben möchtest.
+{% /card %}
+
+{% card title="Anderer Inhalt" icon="information" %}
+Weitere Informationen, die du weitergeben möchtest.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="Schau dir das an" icon="open-book">
+		Interessante Inhalte, die du hervorheben möchtest.
+	</Card>
+	<Card title="Anderer Inhalt" icon="information">
+		Weitere Informationen, die du weitergeben möchtest.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### Link-Karten gruppieren
+
+Zeige mehrere [`<LinkCard>`](/de/components/link-cards/) Komponenten nebeneinander an, wenn genügend Platz vorhanden ist, indem du sie mit der `<CardGrid>` Komponente gruppierst.
+
+<Preview>
+
+```mdx {3,6}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard title="Markdown verfassen" href="/de/guides/authoring-content/" />
+	<LinkCard title="Komponenten" href="/de/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Markdown verfassen" href="/de/guides/authoring-content/" /%}
+
+{% linkcard title="Komponenten" href="/de/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard title="Markdown verfassen" href="/de/guides/authoring-content/" />
+	<LinkCard title="Komponenten" href="/de/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### Karten staffeln
+
+Verschiebe die zweite Spalte des Rasters vertikal, um es optisch interessanter zu gestalten, indem du das Attribut [`stagger`](#stagger) zur Komponente `<CardGrid>` hinzufügst.
+
+Dieses Attribut ist auf deiner Homepage nützlich, um die wichtigsten Merkmale deines Projekts anzuzeigen.
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Schau dir das an" icon="open-book">
+		Interessante Inhalte, die du hervorheben möchtest.
+	</Card>
+	<Card title="Anderer Inhalt" icon="information">
+		Weitere Informationen, die du weitergeben möchtest.
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="Schau dir das an" icon="open-book" %}
+Interessante Inhalte, die du hervorheben möchtest.
+{% /card %}
+
+{% card title="Anderer Inhalt" icon="information" %}
+Weitere Informationen, die du weitergeben möchtest.
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="Schau dir das an" icon="open-book">
+		Interessante Inhalte, die du hervorheben möchtest.
+	</Card>
+	<Card title="Anderer Inhalt" icon="information">
+		Weitere Informationen, die du weitergeben möchtest.
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## `<CardGrid>`-Eigenschaften
+
+**Implementation:** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+Die Komponente `<CardGrid>` akzeptiert die folgenden Eigenschaften:
+
+### `stagger`
+
+**Typ:** `boolean`
+
+Legt fest, ob die Karten im Raster gestaffelt werden sollen oder nicht.

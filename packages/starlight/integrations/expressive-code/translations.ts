@@ -22,14 +22,14 @@ function addTranslationsForLocale(
 	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
 ) {
 	const lang = localeToLang(config, locale);
-	const t = useTranslations(locale);
+	const t = useTranslations(lang);
 	const translationKeys = [
 		'expressiveCode.copyButtonCopied',
 		'expressiveCode.copyButtonTooltip',
 		'expressiveCode.terminalWindowFallbackTitle',
 	] as const;
 	translationKeys.forEach((key) => {
-		const translation = t(key);
+		const translation = t.exists(key) ? t(key) : undefined;
 		if (!translation) return;
 		const ecId = key.replace(/^expressiveCode\./, '');
 		pluginFramesTexts.overrideTexts(lang, { [ecId]: translation });

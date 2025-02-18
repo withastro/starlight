@@ -8,7 +8,8 @@ vi.mock('astro:content', async () =>
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { hidden: true } }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
+			['Getting Started/intro.md', { title: 'Introduction' }],
 		],
 	})
 );
@@ -40,6 +41,22 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
+			        "href": "/getting-started/intro/",
+			        "isCurrent": false,
+			        "label": "Introduction",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "Getting Started",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
@@ -48,9 +65,9 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/guides/components/",
+			        "href": "/guides/project-structure/",
 			        "isCurrent": false,
-			        "label": "Components",
+			        "label": "Project Structure",
 			        "type": "link",
 			      },
 			    ],
@@ -105,6 +122,24 @@ describe('getSidebar', () => {
 		const homeLink = sidebar.find((item) => item.type === 'link' && item.href === '/');
 		expect(homeLink?.label).toBe('Home Page');
 	});
+
+	test('uses cached intermediate sidebars', async () => {
+		// Reset the modules registry so that re-importing `utils/navigation.ts` re-evaluates the
+		// module and clears the cache of intermediate sidebars from previous tests in this file.
+		vi.resetModules();
+		const navigation = await import('../../utils/navigation');
+		const routing = await import('../../utils/routing');
+
+		const getLocaleRoutes = vi.spyOn(routing, 'getLocaleRoutes');
+
+		navigation.getSidebar('/', undefined);
+		navigation.getSidebar('/environmental-impact/', undefined);
+		navigation.getSidebar('/guides/authoring-content/', undefined);
+
+		expect(getLocaleRoutes).toHaveBeenCalledOnce();
+
+		getLocaleRoutes.mockRestore();
+	});
 });
 
 describe('flattenSidebar', () => {
@@ -137,6 +172,14 @@ describe('flattenSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
+			    "href": "/getting-started/intro/",
+			    "isCurrent": false,
+			    "label": "Introduction",
+			    "type": "link",
+			  },
+			  {
+			    "attrs": {},
+			    "badge": undefined,
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
 			    "label": "Authoring Markdown",
@@ -145,9 +188,9 @@ describe('flattenSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/guides/components/",
+			    "href": "/guides/project-structure/",
 			    "isCurrent": false,
-			    "label": "Components",
+			    "label": "Project Structure",
 			    "type": "link",
 			  },
 			]
@@ -164,9 +207,9 @@ describe('getPrevNextLinks', () => {
 			  "next": {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/guides/authoring-content/",
+			    "href": "/getting-started/intro/",
 			    "isCurrent": false,
-			    "label": "Authoring Markdown",
+			    "label": "Introduction",
 			    "type": "link",
 			  },
 			  "prev": {
@@ -194,7 +237,7 @@ describe('getPrevNextLinks', () => {
 	});
 
 	test('returns no next link for last item', () => {
-		const sidebar = getSidebar('/guides/components/', undefined);
+		const sidebar = getSidebar('/guides/project-structure/', undefined);
 		const links = getPrevNextLinks(sidebar, true, {});
 		expect(links.next).toBeUndefined();
 	});

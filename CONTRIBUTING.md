@@ -121,11 +121,11 @@ You should then be able to open <http://localhost:4321> and see your changes.
 When adding or translating content in the Starlight docs site, you can check all internal links are valid.
 All GitHub PRs are checked this way automatically, but testing locally can help if you want to confirm changes are correct before committing them.
 
-To do this, move into the `docs/` directory from the root of the repo and then build the site with the `CHECK_LINKS` environment variable:
+To do this, move into the `docs/` directory from the root of the repo and then run `pnpm linkcheck`:
 
 ```sh
 cd docs
-CHECK_LINKS=true pnpm build
+pnpm linkcheck
 ```
 
 If there are any broken links, the build will fail and log which pages need to be fixed.
@@ -200,7 +200,7 @@ pnpm test:e2e
 
 #### Test fixtures
 
-Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content/config.ts` and some content to render in `src/content/docs/`).
+Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content.config.ts` and some content to render in `src/content/docs/`).
 
 The `testFactory()` helper can be used in a test file to define the fixture which will be built and loaded in a preview server during a set of tests.
 
@@ -251,7 +251,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 - Add your language to the `locales` config in `docs/astro.config.mjs`
 - Add your language to the `locales` config in `docs/lunaria.config.json`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
-- Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
+- Add your language to the `config.sitemap.exclude` option in `docs/__a11y__/test-utils.ts`
 - Create the first translated page for your language.
   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
 - Open a pull request on GitHub to add your changes to Starlight!

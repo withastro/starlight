@@ -1,7 +1,7 @@
 @layer starlight.content {
 	.sl-markdown-content
-		:not(a, strong, em, del, span, input, code)
-		+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+		:not(a, strong, em, del, span, input, code, br)
+		+ :not(a, strong, em, del, span, input, code, br, :where(.not-content *)) {
 		margin-top: 1rem;
 	}
 
@@ -25,7 +25,20 @@
 
 	.sl-markdown-content
 		li
-		> :last-child:not(li, ul, ol):not(a, strong, em, del, span, input, :where(.not-content *)) {
+		> :last-child:not(
+			li,
+			ul,
+			ol,
+			a,
+			strong,
+			em,
+			del,
+			span,
+			input,
+			code,
+			br,
+			:where(.not-content *)
+		) {
 		margin-bottom: 1.25rem;
 	}
 

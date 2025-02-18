@@ -88,7 +88,10 @@ export class StarlightTOC extends HTMLElement {
 		let timeout: NodeJS.Timeout;
 		window.addEventListener('resize', () => {
 			// Disable intersection observer while window is resizing.
-			if (observer) observer.disconnect();
+			if (observer) {
+				observer.disconnect();
+				observer = undefined;
+			}
 			clearTimeout(timeout);
 			timeout = setTimeout(() => this.onIdle(observe), 200);
 		});

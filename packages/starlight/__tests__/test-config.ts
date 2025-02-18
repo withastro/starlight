@@ -6,6 +6,8 @@ import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-conf
 import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
 import { createTestPluginContext } from './test-plugin-utils';
 
+const testLegacyCollections = process.env.LEGACY_COLLECTIONS === 'true';
+
 export async function defineVitestConfig(
 	{ plugins, ...config }: StarlightUserConfigWithPlugins,
 	opts?: {
@@ -20,15 +22,25 @@ export async function defineVitestConfig(
 	const trailingSlash = opts?.trailingSlash ?? 'ignore';
 	const command = opts?.command ?? 'dev';
 
-	const { starlightConfig } = await runPlugins(config, plugins, createTestPluginContext());
+	const { starlightConfig, pluginTranslations } = await runPlugins(
+		config,
+		plugins,
+		createTestPluginContext()
+	);
 	return getViteConfig({
 		plugins: [
-			vitePluginStarlightUserConfig(command, starlightConfig, {
-				root,
-				srcDir,
-				build,
-				trailingSlash,
-			}),
+			vitePluginStarlightUserConfig(
+				command,
+				starlightConfig,
+				{
+					root,
+					srcDir,
+					build,
+					trailingSlash,
+					legacy: { collections: testLegacyCollections },
+				},
+				pluginTranslations
+			),
 		],
 		test: {
 			snapshotSerializers: ['./snapshot-serializer-astro-error.ts'],

@@ -1,17 +1,15 @@
 ---
+import context from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { localizedUrl } from '../utils/localizedUrl';
 import Select from './Select.astro';
-import type { Props } from '../props';
 
 /**
  * Get the equivalent of the current page path for the passed locale.
  */
 function localizedPathname(locale: string | undefined): string {
-	return localizedUrl(Astro.url, locale).pathname;
+	return localizedUrl(Astro.url, locale, context.trailingSlash).pathname;
 }
-
-const { labels } = Astro.props;
 ---
 
 {
@@ -19,11 +17,11 @@ const { labels } = Astro.props;
 		<starlight-lang-select>
 			<Select
 				icon="translate"
-				label={labels['languageSelect.accessibleLabel']}
-				value={localizedPathname(Astro.props.locale)}
+				label={Astro.locals.t('languageSelect.accessibleLabel')}
+				value={localizedPathname(Astro.locals.starlightRoute.locale)}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
 					value: localizedPathname(code),
-					selected: code === Astro.props.locale,
+					selected: code === Astro.locals.starlightRoute.locale,
 					label: locale!.label,
 				}))}
 				width="7em"
@@ -41,6 +39,16 @@ const { labels } = Astro.props;
 				select.addEventListener('change', (e) => {
 					if (e.currentTarget instanceof HTMLSelectElement) {
 						window.location.pathname = e.currentTarget.value;
+					}
+				});
+				window.addEventListener('pageshow', (event) => {
+					if (!event.persisted) return;
+					// If the page was loaded from a cache, the language select selected index might not be
+					// in sync with the current page.
+					const markupSelectedIndex =
+						select.querySelector<HTMLOptionElement>('option[selected]')?.index;
+					if (markupSelectedIndex !== select.selectedIndex) {
+						select.selectedIndex = markupSelectedIndex ?? 0;
 					}
 				});
 			}

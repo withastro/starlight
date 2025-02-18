@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { generateRouteData } from '../../utils/route-data';
+import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 
 vi.mock('astro:content', async () =>
@@ -7,7 +7,6 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['getting-started.mdx', { title: 'Splash', template: 'splash' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['showcase.mdx', { title: 'ToC Disabled', tableOfContents: false }],
 			['environmental-impact.md', { title: 'Explicit update date', lastUpdated: new Date() }],
 		],
@@ -85,14 +84,4 @@ test('uses explicit last updated date from frontmatter', () => {
 	});
 	expect(data.lastUpdated).toBeInstanceOf(Date);
 	expect(data.lastUpdated).toEqual(route.entry.data.lastUpdated);
-});
-
-test('includes localized labels', () => {
-	const route = routes[0]!;
-	const data = generateRouteData({
-		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		url: new URL('https://example.com'),
-	});
-	expect(data.labels).toBeDefined();
-	expect(data.labels['skipLink.label']).toBe('Skip to content');
 });

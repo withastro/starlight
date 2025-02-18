@@ -27,7 +27,7 @@ describe('getSidebar', () => {
 				The slug \`"getting-started"\` specified in the Starlight sidebar config does not exist.
 			Hint:
 				Update the Starlight config to reference a valid entry slug in the docs content collection.
-				Learn more about Astro content collection slugs at https://docs.astro.build/en/reference/api-reference/#getentry"
+				Learn more about Astro content collection slugs at https://docs.astro.build/en/reference/modules/astro-content/#getentry"
 		`);
 	});
 });

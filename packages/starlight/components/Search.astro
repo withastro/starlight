@@ -2,49 +2,46 @@
 import '@pagefind/default-ui/css/ui.css';
 import Icon from '../user-components/Icon.astro';
 import project from 'virtual:starlight/project-context';
-import type { Props } from '../props';
-
-const { labels } = Astro.props;
 
 const pagefindTranslations = {
-	placeholder: labels['search.label'],
+	placeholder: Astro.locals.t('search.label'),
 	...Object.fromEntries(
-		Object.entries(labels)
+		Object.entries(Astro.locals.t.all())
 			.filter(([key]) => key.startsWith('pagefind.'))
 			.map(([key, value]) => [key.replace('pagefind.', ''), value])
 	),
 };
+
+const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagefindTranslations) };
+if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
 ---
 
-<site-search
-	data-translations={JSON.stringify(pagefindTranslations)}
-	data-strip-trailing-slash={project.trailingSlash === 'never'}
->
+<site-search class={Astro.props.class} {...dataAttributes}>
 	<button
 		data-open-modal
 		disabled
-		aria-label={labels['search.label']}
+		aria-label={Astro.locals.t('search.label')}
 		aria-keyshortcuts="Control+K"
 	>
 		<Icon name="magnifier" />
-		<span class="sl-hidden md:sl-block" aria-hidden="true">{labels['search.label']}</span>
+		<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
 		<kbd class="sl-hidden md:sl-flex" style="display: none;">
-			<kbd>{labels['search.ctrlKey']}</kbd><kbd>K</kbd>
+			<kbd>{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
 		</kbd>
 	</button>
 
-	<dialog style="padding:0" aria-label={labels['search.label']}>
+	<dialog style="padding:0" aria-label={Astro.locals.t('search.label')}>
 		<div class="dialog-frame sl-flex">
 			{
 				/* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */
 			}
 			<button data-close-modal class="sl-flex md:sl-hidden">
-				{labels['search.cancelLabel']}
+				{Astro.locals.t('search.cancelLabel')}
 			</button>
 			{
 				import.meta.env.DEV ? (
 					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
-						<p>{labels['search.devWarning']}</p>
+						<p>{Astro.locals.t('search.devWarning')}</p>
 					</div>
 				) : (
 					<div class="search-container">
@@ -78,6 +75,8 @@ const pagefindTranslations = {
 </script>
 
 <script>
+	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super();
@@ -141,6 +140,7 @@ const pagefindTranslations = {
 					// @ts-expect-error — Missing types for @pagefind/default-ui package.
 					const { PagefindUI } = await import('@pagefind/default-ui');
 					new PagefindUI({
+						...pagefindUserConfig,
 						element: '#starlight__search',
 						baseUrl: import.meta.env.BASE_URL,
 						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
@@ -234,6 +234,8 @@ const pagefindTranslations = {
 		}
 
 		.dialog-frame {
+			position: relative;
+			overflow: auto;
 			flex-direction: column;
 			flex-grow: 1;
 			gap: 1rem;
@@ -254,13 +256,18 @@ const pagefindTranslations = {
 		}
 
 		#starlight__search {
-			--pagefind-ui-primary: var(--sl-color-accent-light);
+			--pagefind-ui-primary: var(--sl-color-text);
 			--pagefind-ui-text: var(--sl-color-gray-2);
 			--pagefind-ui-font: var(--__sl-font);
 			--pagefind-ui-background: var(--sl-color-black);
 			--pagefind-ui-border: var(--sl-color-gray-5);
 			--pagefind-ui-border-width: 1px;
+			--pagefind-ui-tag: var(--sl-color-gray-5);
 			--sl-search-cancel-space: 5rem;
+		}
+
+		:root[data-theme='light'] #starlight__search {
+			--pagefind-ui-tag: var(--sl-color-gray-6);
 		}
 
 		@media (min-width: 50rem) {
@@ -465,6 +472,16 @@ const pagefindTranslations = {
 			color: var(--sl-color-gray-2);
 			background-color: transparent;
 			font-weight: 600;
+		}
+
+		#starlight__search .pagefind-ui__filter-value::before {
+			border-color: var(--sl-color-text-invert);
+		}
+
+		#starlight__search .pagefind-ui__result-tags {
+			background-color: var(--sl-color-black);
+			margin-top: 0;
+			padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
 		}
 	}
 </style>

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { processFileTree } from '../../user-components/rehype-file-tree';
-import { Icons } from '../../components/Icons';
+import { Icons, type StarlightIcon } from '../../components/Icons';
 
 describe('validation', () => {
 	test('throws an error with no content', () => {
@@ -9,7 +9,7 @@ describe('validation', () => {
 			"[AstroUserError]:
 				The \`<FileTree>\` component expects its content to be a single unordered list but found no child elements.
 			Hint:
-				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#file-tree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/components/file-tree/"
 		`
 		);
 	});
@@ -22,7 +22,7 @@ describe('validation', () => {
 			"[AstroUserError]:
 				The \`<FileTree>\` component expects its content to be a single unordered list but found multiple child elements: \`<p>\` - \`<ul>\`.
 			Hint:
-				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#file-tree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/components/file-tree/"
 		`
 		);
 	});
@@ -33,7 +33,7 @@ describe('validation', () => {
 			"[AstroUserError]:
 				The \`<FileTree>\` component expects its content to be an unordered list but found the following element: \`<ol>\`.
 			Hint:
-				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#file-tree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/components/file-tree/"
 		`
 		);
 	});
@@ -44,14 +44,14 @@ describe('validation', () => {
 			"[AstroUserError]:
 				The \`<FileTree>\` component expects its content to be an unordered list with at least one list item.
 			Hint:
-				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/guides/components/#file-tree"
+				To learn more about the \`<FileTree>\` component, see https://starlight.astro.build/components/file-tree/"
 		`
 		);
 	});
 });
 
 describe('processor', () => {
-	test('processes a basic tree', () => {
+	test('processes a basic tree', async () => {
 		const html = processTestFileTree(`<ul>
   <li>root_file</li>
   <li>root_directory/
@@ -61,7 +61,7 @@ describe('processor', () => {
   <li>
 </ul>`);
 
-		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-basic.html');
+		await expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-basic.html');
 	});
 
 	test('does not add a comment node with no comments', () => {
@@ -70,18 +70,22 @@ describe('processor', () => {
 		expect(extractFileTree(html)).not.toContain('<span class="comment">');
 	});
 
-	test('processes text comments following the file name', () => {
+	test('processes text comments following the file name', async () => {
 		const html = processTestFileTree(`<ul><li>file this is a comment</li></ul>`);
 
-		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-comment-text.html');
+		await expect(extractFileTree(html)).toMatchFileSnapshot(
+			'./snapshots/file-tree-comment-text.html'
+		);
 	});
 
-	test('processes comment nodes', () => {
+	test('processes comment nodes', async () => {
 		const html = processTestFileTree(
 			`<ul><li>file this is an <strong>important</strong> comment</li></ul>`
 		);
 
-		expect(extractFileTree(html)).toMatchFileSnapshot('./snapshots/file-tree-comment-nodes.html');
+		await expect(extractFileTree(html)).toMatchFileSnapshot(
+			'./snapshots/file-tree-comment-nodes.html'
+		);
 	});
 
 	test('identifies directory with either a file name ending with a slash or a nested list', () => {
@@ -172,6 +176,6 @@ function extractFileTree(html: string, stripIcons = true) {
 	return tree;
 }
 
-function expectHtmlToIncludeIcon(html: string, icon: (typeof Icons)[keyof typeof Icons]) {
+function expectHtmlToIncludeIcon(html: string, icon: (typeof Icons)[StarlightIcon]) {
 	return expect(extractFileTree(html, false)).toContain(icon.replace('/>', '>'));
 }

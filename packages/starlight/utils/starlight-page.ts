@@ -1,20 +1,16 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
+import { getCollectionPathFromRoot } from './collection';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
-import {
-	getSiteTitle,
-	getSiteTitleHref,
-	getToC,
-	type PageProps,
-	type StarlightRouteData,
-} from './route-data';
-import type { StarlightDocsEntry } from './routing';
+import { getSiteTitle, getSiteTitleHref, getToC, type PageProps } from './routing/data';
+import type { StarlightDocsEntry, StarlightRouteData } from './routing/types';
 import { slugToLocaleData, urlToSlug } from './slugs';
-import { getPrevNextLinks, getSidebarFromConfig } from './navigation';
-import { useTranslations } from './translations';
+import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { docsSchema } from '../schema';
+import type { Prettify, RemoveIndexSignature } from './types';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import type { StarlightConfig, StarlightUserConfig } from './user-config';
 
@@ -96,8 +92,8 @@ export type StarlightPageProps = Prettify<
  */
 type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 	/**
-	 * The unique ID for this Starlight page which cannot be inferred from codegen like content
-	 * collection entries.
+	 * The unique ID if using the `legacy.collections` for this Starlight page which cannot be
+	 * inferred from codegen like content collection entries or the slug.
 	 */
 	id: string;
 };
@@ -112,19 +108,18 @@ export async function generateStarlightPageRouteData({
 	const { isFallback, frontmatter, ...routeProps } = props;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
+	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
 	const localeData = slugToLocaleData(slug);
-	const sidebar = getSidebarFromConfig(
-		props.sidebar ? validateSidebarProp(props.sidebar) : config.sidebar,
-		url.pathname,
-		localeData.locale
-	);
+	const sidebar = props.sidebar
+		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
+		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const pageDocsEntry: StarlightPageDocsEntry = {
 		id,
 		slug,
 		body: '',
 		collection: 'docs',
+		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(slug)}.md`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {
@@ -151,7 +146,6 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: useTranslations(localeData.locale).all(),
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
@@ -214,19 +208,3 @@ async function getUserDocsSchema(): Promise<
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
 	return userCollections?.docs.schema ?? docsSchema();
 }
-
-// https://stackoverflow.com/a/66252656/1945960
-type RemoveIndexSignature<T> = {
-	[K in keyof T as string extends K
-		? never
-		: number extends K
-			? never
-			: symbol extends K
-				? never
-				: K]: T[K];
-};
-
-// https://www.totaltypescript.com/concepts/the-prettify-helper
-type Prettify<T> = {
-	[K in keyof T]: T[K];
-} & {};

@@ -45,7 +45,7 @@ title: 페이지 제목
 
 ## 이미지
 
-Starlight의 이미지는 [Astro에 내장된 최적화된 자산 지원](https://docs.astro.build/ko/guides/assets/)을 사용합니다.
+Starlight의 이미지는 [Astro에 내장된 최적화된 자산 지원](https://docs.astro.build/ko/guides/images/)을 사용합니다.
 
 Markdown 및 MDX는 스크린 리더 및 보조 기술에서 사용되는 대체 텍스트가 포함된 이미지를 표시하기 위한 Markdown 구문을 지원합니다.
 
@@ -105,17 +105,17 @@ description: Starlight에 내장된 링크를 사용하는 방법
 
 레벨 2 (`<h2>`) 및 레벨 3 (`<h3>`) 제목이 페이지 목차에 자동으로 나타납니다.
 
-[Astro 공식 문서](https://docs.astro.build/ko/guides/markdown-content/#heading-ids)에서 Astro가 제목의 `id`를 처리하는 방법에 대해 자세히 알아보세요.
+[Astro 공식 문서](https://docs.astro.build/ko/guides/markdown-content/#제목-id)에서 Astro가 제목의 `id`를 처리하는 방법에 대해 자세히 알아보세요.
 
-## 주석
+## 보조 내용
 
-주석은 "admonitions" 또는 "callouts" 라고도 하며, 페이지의 기본 콘텐츠 주변에 보조 정보를 표시하는 데 유용합니다.
+보조 내용은 "admonitions" 또는 "callouts" 라고도 하며, 페이지의 기본 콘텐츠 주변에 보조 정보를 표시하는 데 유용합니다.
 
-Starlight는 주석 렌더링을 위한 사용자 정의 Markdown 구문을 제공합니다. 주석 블록은 내용을 감싸기 위해 세 개의 콜론 `:::`을 사용하며 `note`, `tip`, `caution` 또는 `danger` 타입일 수 있습니다.
+Starlight는 보조 내용 렌더링을 위한 사용자 정의 Markdown 구문을 제공합니다. 보조 내용 블록은 내용을 감싸기 위해 세 개의 콜론 `:::`을 사용하며 `note`, `tip`, `caution` 또는 `danger` 타입일 수 있습니다.
 
-다른 Markdown 콘텐츠를 주석 안에 중첩시킬 수도 있지만 짧고 간결한 콘텐츠 덩어리에 가장 적합합니다.
+다른 Markdown 콘텐츠를 보조 내용 안에 중첩시킬 수도 있지만 짧고 간결한 콘텐츠 덩어리에 가장 적합합니다.
 
-### Note 주석
+### Note 보조 내용
 
 :::note
 
@@ -138,24 +138,24 @@ npm create astro@latest -- --template starlight
 :::
 ````
 
-### 사용자 정의 주석 제목
+### 사용자 정의 보조 내용 제목
 
-주석 타입 다음에 대괄호를 사용해 주석의 제목을 지정할 수 있습니다. `:::tip[알고 계셨나요?]`
+보조 내용 타입 다음에 대괄호를 사용해 보조 내용의 제목을 지정할 수 있습니다. `:::tip[알고 계셨나요?]`
 
 :::tip[알고 계셨나요?]
 
-Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 
 ```md
 :::tip[알고 계셨나요?]
-Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 ```
 
-### 더 많은 주석 타입
+### 더 많은 보조 내용 타입
 
-Caution과 Danger 주석은 실수하기 쉬운 세부 사항에 대해 사용자를 집중시키는 데 도움이 됩니다. 이러한 기능을 많이 사용하고 있다면, 문서화중인 내용을 다시 디자인하는 것이 좋습니다.
+Caution과 Danger 보조 내용은 실수하기 쉬운 세부 사항에 대해 사용자를 집중시키는 데 도움이 됩니다. 이러한 기능을 많이 사용하고 있다면, 문서화중인 내용을 다시 디자인하는 것이 좋습니다.
 
 :::caution
 당신이 멋진 문서 사이트를 원하지 않는다면 [Starlight](/ko/)는 필요하지 않을 수도 있습니다.
@@ -221,20 +221,20 @@ var fun = function lang(l) {
 
 ### Expressive Code 기능
 
-Starlight는 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)를 사용하여 코드 블록의 형식 지정 가능성을 확장합니다.
+Starlight는 [Expressive Code](https://expressive-code.com/)를 사용하여 코드 블록의 형식 지정 가능성을 확장합니다.
 기본적으로 Expressive Code의 텍스트 마커와 창 프레임 플러그인은 활성화되어 있습니다.
 코드 블록 렌더링은 Starlight의 [`expressiveCode` 구성 옵션](/ko/reference/configuration/#expressivecode)을 사용하여 구성할 수 있습니다.
 
 #### 텍스트 마커
 
-코드 블록의 시작 줄에 [Expressive Code 텍스트 마커](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents)를 사용하여 코드 블록의 특정 줄이나 부분을 강조 표시할 수 있습니다. 전체 줄을 강조 표시하려면 중괄호(`{ }`)를 사용하고, 텍스트 문자열을 강조 표시하려면 따옴표를 사용하세요.
+코드 블록의 시작 줄에 [Expressive Code 텍스트 마커](https://expressive-code.com/key-features/text-markers/)를 사용하여 코드 블록의 특정 줄이나 부분을 강조 표시할 수 있습니다. 전체 줄을 강조 표시하려면 중괄호(`{ }`)를 사용하고, 텍스트 문자열을 강조 표시하려면 따옴표를 사용하세요.
 
 세 가지 강조 스타일이 있습니다. 코드에 주의를 환기시키는 중립, 삽입된 코드를 나타내는 녹색, 삭제된 코드를 나타내는 빨간색입니다.
 텍스트와 전체 줄 모두 기본 마커를 사용하거나 `ins=` 및 `del=`과 함께 표시하여 원하는 강조 표시를 생성할 수 있습니다.
 
-Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 위한 여러 옵션을 제공합니다. 이들 중 다수는 예시적인 코드 샘플을 위해 결합될 수 있습니다. 사용 가능한 광범위한 옵션을 보려면 [Expressive Code 문서](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md)를 살펴보세요. 가장 일반적인 예시 중 일부는 다음과 같습니다.
+Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 위한 여러 옵션을 제공합니다. 이들 중 다수는 예시적인 코드 샘플을 위해 결합될 수 있습니다. 사용 가능한 광범위한 옵션을 보려면 [Expressive Code 문서](https://expressive-code.com/key-features/text-markers/#configuration)를 살펴보세요. 가장 일반적인 예시 중 일부는 다음과 같습니다.
 
-- [`{ }` 마커를 사용하여 전체 줄과 줄 범위를 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+- [`{ }` 마커를 사용하여 전체 줄과 줄 범위를 표시합니다.](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges)
 
   ```js {2-3}
   function demo() {
@@ -252,7 +252,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```
   ````
 
-- [`" "` 마커 또는 정규 표현식을 사용하여 텍스트 선택 항목을 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines)
+- [`" "` 마커 또는 정규 표현식을 사용하여 텍스트 선택 항목을 표시합니다.](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines)
 
   ```js "Individual terms" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
@@ -270,7 +270,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```
   ````
 
-- [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del)
+- [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del)
 
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
@@ -290,7 +290,7 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```
   ````
 
-- [구문 강조와 `diff` 유사 구문을 결합합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax)
+- [구문 강조와 `diff` 유사 구문을 결합합니다.](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax)
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -320,7 +320,7 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
 
 코드 블록의 선택적 제목은 코드 블록을 여는 백틱 및 언어 식별자 뒤에 `title="..."` 속성을 추가하거나 코드 첫 번째 줄에 파일 이름 주석을 추가하여 설정할 수 있습니다.
 
-- [설명과 함께 파일 이름 탭 추가](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [설명과 함께 파일 이름 탭 추가](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // my-test-file.js
@@ -334,7 +334,7 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
   ```
   ````
 
-- [터미널 창에 제목 추가](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [터미널 창에 제목 추가](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="종속성 설치 중…"
   npm install
@@ -346,7 +346,7 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
   ```
   ````
 
-- [`frame="none"`으로 창 프레임 비활성화](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+- [`frame="none"`으로 창 프레임 비활성화](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
@@ -389,7 +389,7 @@ Starlight는 목록 및 테이블과 같은 다른 모든 Markdown 작성 구문
 
 ## 고급 Markdown 및 MDX 구성
 
-Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 및 MDX 구성](https://docs.astro.build/ko/guides/markdown-content/#configuring-markdown-and-mdx)을 참조하세요.
+Starlight는 remark 및 rehype를 기반으로 구축된 Astro의 Markdown 및 MDX 렌더러를 사용합니다. Astro 구성 파일에 `remarkPlugins` 또는 `rehypePlugins`를 추가하여 사용자 정의 구문 및 동작에 대한 지원을 추가할 수 있습니다. 자세한 내용은 Astro 문서의 [Markdown 플러그인](https://docs.astro.build/ko/guides/markdown-content/#markdown-플러그인)을 참조하세요.
 
 ## Markdoc
 

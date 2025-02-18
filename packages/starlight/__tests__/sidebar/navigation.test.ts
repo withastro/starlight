@@ -8,11 +8,10 @@ vi.mock('astro:content', async () =>
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['reference/frontmatter/foo.mdx', { title: 'Foo' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
-			['guides/components.mdx', { title: 'Components' }],
+			['guides/project-structure.mdx', { title: 'Project Structure' }],
+			['Deprecated API/users.md', { title: 'Deprecated Users API' }],
 		],
 	})
 );
@@ -127,6 +126,22 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "API v1",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/deprecated-api/users/",
+			        "isCurrent": false,
+			        "label": "Deprecated Users API",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API (deprecated)",
 			    "type": "group",
 			  },
 			]

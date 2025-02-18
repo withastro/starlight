@@ -1,0 +1,128 @@
+---
+title: Иконки
+description: Узнайте, как отображать иконки в Starlight.
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+Для отображения иконок из [встроенного набора Starlight](/ru/reference/icons/#все-иконки) используйте компонент `<Icon>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Отображайте иконки с помощью компонента `<Icon>`.
+Иконка требует указания атрибута [`name`](#name) с именем [одной из встроенных иконок Starlight](/ru/reference/icons/#все-иконки) и по желанию может включать атрибут [`label`](#label), чтобы обеспечить контекст для программ чтения с экрана.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="Логотип Starlight" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="Логотип Starlight" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="Логотип Starlight" />
+</Fragment>
+
+</Preview>
+
+### Настройка иконок
+
+Атрибуты [`size`](#size) и [`color`](#color) можно использовать для настройки внешнего вида иконки с помощью единиц CSS и значений цвета.
+Атрибут [`class`](#class) можно использовать для добавления пользовательских классов CSS к иконке.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## Параметры `<Icon>`
+
+**Реализация:** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+Компонент `<Icon>` принимает следующие параметры:
+
+### `name`
+
+**обязательный**  
+**тип:** [`StarlightIcon`](/ru/reference/icons/#тип-starlighticon)
+
+Имя отображаемой иконки, из набора [встроенных иконок Starlight](/ru/reference/icons/#все-иконки).
+
+### `label`
+
+**тип:** `string`
+
+Необязательная метка, обеспечивающая контекст для вспомогательных технологий, таких как программы чтения с экрана.
+
+Если `label` не задана, иконка будет полностью скрыта от вспомогательных технологий.
+В этом случае убедитесь, что контекст понятен и без иконки.
+Например, ссылка, содержащая только иконку, **обязательно** должна содержать атрибут `label`, чтобы быть доступной, но если ссылка содержит текст, а иконка является чисто декоративной, опустить `label` может быть вполне разумно.
+
+### `size`
+
+**тип:** `string`
+
+Размер иконки, заданный с помощью единиц CSS. Например, `2rem`.
+
+### `color`
+
+**тип:** `string`
+
+Цвет иконки с использованием значения цвета CSS. Например, `red`.
+
+### `class`
+
+**тип:** `string`
+
+Пользовательские классы CSS для добавления к иконке.

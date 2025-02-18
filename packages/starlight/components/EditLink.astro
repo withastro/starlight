@@ -1,15 +1,14 @@
 ---
 import Icon from '../user-components/Icon.astro';
-import type { Props } from '../props';
 
-const { editUrl, labels } = Astro.props;
+const { editUrl } = Astro.locals.starlightRoute;
 ---
 
 {
 	editUrl && (
-		<a href={editUrl} class="sl-flex">
+		<a href={editUrl} class="sl-flex print:hidden">
 			<Icon name="pencil" size="1.2em" />
-			{labels['page.editLink']}
+			{Astro.locals.t('page.editLink')}
 		</a>
 	)
 }

@@ -1,0 +1,128 @@
+---
+title: Icons
+description: Learn how to display icons in Starlight.
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+To display icons from Starlight’s [built-in icon set](/reference/icons/#all-icons), use the `<Icon>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Display an icon using the `<Icon>` component.
+An icon requires a [`name`](#name) set to [one of Starlight’s built-in icons](/reference/icons/#all-icons) and can optionally include a [`label`](#label) to provide context for screen readers.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="The Starlight logo" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="The Starlight logo" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="The Starlight logo" />
+</Fragment>
+
+</Preview>
+
+### Customize icons
+
+The [`size`](#size) and [`color`](#color) attributes can be used to adjust the icon’s appearance using CSS units and color values.
+The [`class`](#class) attribute can be used to add custom CSS classes to the icon.
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## `<Icon>` Props
+
+**Implementation:** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+The `<Icon>` component accepts the following props:
+
+### `name`
+
+**required**  
+**type:** [`StarlightIcon`](/reference/icons/#starlighticon-type)
+
+The name of the icon to display set to [one of Starlight’s built-in icons](/reference/icons/#all-icons).
+
+### `label`
+
+**type:** `string`
+
+An optional label to provide context for assistive technologies, such as screen readers.
+
+When `label` is not set, the icon will be completely hidden from assistive technologies.
+In this case, make sure the context is still understandable without the icon.
+For example, a link containing only the icon **must** include the `label` attribute in order to be accessible, but if a link contains text and the icon is purely decorative, omitting the `label` may make sense.
+
+### `size`
+
+**type:** `string`
+
+The size of the icon using CSS units.
+
+### `color`
+
+**type:** `string`
+
+The color of the icon using a CSS color value.
+
+### `class`
+
+**type:** `string`
+
+Custom CSS classes to add to the icon.

@@ -15,7 +15,9 @@ export const FaviconSchema = () =>
 		.string()
 		.default('/favicon.svg')
 		.transform((favicon, ctx) => {
-			const ext = extname(favicon).toLowerCase();
+			// favicon can be absolute or relative url
+			const { pathname } = new URL(favicon, 'https://example.com');
+			const ext = extname(pathname).toLowerCase();
 
 			if (!isFaviconExt(ext)) {
 				ctx.addIssue({

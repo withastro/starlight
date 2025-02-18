@@ -1,0 +1,96 @@
+---
+title: コンポーネントの使用
+description: StarlightでMDXとMarkdocにコンポーネントを使用する。
+sidebar:
+  order: 1
+---
+
+コンポーネントを使用すると、UIの一部やスタイリングを一貫して簡単に再利用できます。
+例えば、リンクカードやYouTube埋め込みなどが挙げられます。
+Starlightは[MDX](https://mdxjs.com/)と[Markdoc](https://markdoc.dev/)ファイルでのコンポーネントの使用をサポートし、いくつかの一般的なコンポーネントを提供しています。
+
+[Astro Docsでコンポーネントの構築についてさらに学ぶ](https://docs.astro.build/ja/basics/astro-components/)。
+
+## MDXでコンポーネントを使用する
+
+コンポーネントを使用するには、MDXファイルにインポートし、JSXタグとしてレンダリングします。
+これらはHTMLタグのように見えますが、`import`文の名前に一致する大文字で始まります：
+
+```mdx
+---
+# src/content/docs/example.mdx
+title: 私のドキュメントへようこそ
+---
+
+import { Icon } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+
+<Icon name="open-book" />
+
+<CustomCard>
+	コンポーネントには**ネストされたコンテンツ**も含めることができます。
+</CustomCard>
+```
+
+StarlightはAstroを基盤としているため、MDXファイルで[サポートされているUIフレームワーク（React、Preact、Svelte、Vue、Solid、Alpine）](https://docs.astro.build/ja/core-concepts/framework-components/)で構築されたコンポーネントのサポートを追加できます。
+Astroドキュメントの[MDXでのコンポーネントの使用](https://docs.astro.build/ja/guides/integrations-guide/mdx/#using-components-in-mdx)についてさらに学んでください。
+
+## Markdocでコンポーネントを使用する
+
+[Markdocセットアップガイド](/ja/guides/authoring-content/#markdoc)に従って、Markdocでコンテンツを作成するためのサポートを追加してください。
+
+Starlight Markdocプリセットを使用すると、Markdocの`{% %}`タグ構文でStarlightの組み込みコンポーネントを使用できます。
+MDXとは異なり、Markdocのコンポーネントはインポートする必要がありません。
+以下の例は、MarkdocファイルでのStarlightの[カードコンポーネント](/ja/components/cards/)のレンダリングを示しています：
+
+```markdoc
+---
+# src/content/docs/example.mdoc
+title: 私のドキュメントへようこそ
+---
+
+{% card title="星" icon="star" %}
+シリウス、ベガ、ベテルギウス
+{% /card %}
+```
+
+Markdocファイルでのコンポーネントの使用方法についての詳細は、[Astro Markdoc統合ドキュメント](https://docs.astro.build/ja/guides/integrations-guide/markdoc/#render-components)を参照してください。
+
+## 組み込みコンポーネント
+
+Starlightは、一般的なドキュメントのユースケースに対応した組み込みコンポーネントを提供しています。
+これらのコンポーネントは、MDXファイルでは`@astrojs/starlight/components`パッケージから、Markdocファイルでは[Starlight Markdocプリセット](/ja/guides/authoring-content/#markdoc)から利用できます。
+
+利用可能なコンポーネントとその使用方法のリストについては、サイドバーを参照してください。
+
+## Starlightのスタイルとの互換性
+
+Starlightは、Markdownコンテンツにデフォルトのスタイリングを適用します。例えば、要素間にマージンを追加します。
+これらのスタイルがコンポーネントの外観と競合する場合は、`not-content`クラスをコンポーネントに設定して無効化できます。
+
+```astro 'class="not-content"'
+---
+// src/components/Example.astro
+---
+
+<div class="not-content">
+	<p>Starlightのデフォルトのコンテンツスタイリングの影響を受けません。</p>
+</div>
+```
+
+## コンポーネントのprops
+
+`astro/types`からの[`ComponentProps`](https://docs.astro.build/ja/guides/typescript/#componentprops%E5%9E%8B)タイプを使用して、コンポーネント自体がエクスポートしていない場合でも、コンポーネントが受け入れる`Props`を参照できます。
+これは、既存のコンポーネントをラップまたは拡張する際に役立ちます。
+
+以下の例では、`ComponentProps`を使用してStarlightの組み込み`Icon`コンポーネントが受け入れるpropsのタイプを取得しています：
+
+```astro
+---
+// src/components/Example.astro
+import type { ComponentProps } from 'astro/types';
+import { Icon } from '@astrojs/starlight/icon';
+
+type IconProps = ComponentProps<typeof Icon>;
+---
+```

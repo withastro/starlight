@@ -7,7 +7,7 @@ vi.mock('astro:content', async () =>
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs', sidebar: { order: 1 } }],
 			['guides/authoring-content.mdx', { title: 'Authoring Markdown' }],
-			['guides/components.mdx', { title: 'Components', sidebar: { order: 0 } }],
+			['guides/project-structure.mdx', { title: 'Project Structure', sidebar: { order: 0 } }],
 		],
 	})
 );
@@ -23,9 +23,9 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/guides/components/",
+			        "href": "/guides/project-structure/",
 			        "isCurrent": false,
-			        "label": "Components",
+			        "label": "Project Structure",
 			        "type": "link",
 			      },
 			      {

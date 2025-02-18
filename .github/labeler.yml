@@ -26,6 +26,9 @@ i18n:
 '🌟 tailwind':
   - packages/tailwind/**
 
+'🌟 docsearch':
+  - packages/docsearch/**
+
 '🌟 markdoc':
   - packages/markdoc/**
 

@@ -1,14 +1,8 @@
 ---
-import { stripLeadingAndTrailingSlashes } from '../utils/path';
-import { slugToLocaleData } from '../utils/slugs';
-import { useTranslations } from '../utils/translations';
 import { processFileTree } from './rehype-file-tree';
 
-const slug = stripLeadingAndTrailingSlashes(Astro.url.pathname);
-const t = useTranslations(slugToLocaleData(slug).locale);
-
 const fileTreeHtml = await Astro.slots.render('default');
-const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
+const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'));
 ---
 
 <starlight-file-tree set:html={html} class="not-content" data-pagefind-ignore />
@@ -54,7 +48,7 @@ const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
 		starlight-file-tree :global(.directory > details > summary:hover .tree-icon) {
 			cursor: pointer;
 			color: var(--sl-color-text-accent);
-			fill: var(--sl-color-text-accent);
+			fill: currentColor;
 		}
 
 		starlight-file-tree :global(.directory > details > summary:hover ~ ul) {
@@ -62,7 +56,7 @@ const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
 		}
 
 		starlight-file-tree :global(.directory > details > summary:hover .highlight .tree-icon) {
-			fill: var(--sl-color-text-invert);
+			fill: currentColor;
 		}
 
 		starlight-file-tree :global(ul) {
@@ -136,7 +130,7 @@ const html = processFileTree(fileTreeHtml, t('fileTree.directory'));
 		}
 
 		starlight-file-tree :global(.highlight svg.tree-icon) {
-			fill: var(--sl-color-text-invert);
+			fill: currentColor;
 		}
 	}
 </style>

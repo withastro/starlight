@@ -16,7 +16,7 @@ Um dieser Anleitung folgen zu können, benötigst du ein bestehendes Astro-Proje
 
 Starlight ist eine [Astro-Integration](https://docs.astro.build/de/guides/integrations-guide/). Füge sie zu deiner Website hinzu, indem du den Befehl `astro add` im Wurzelverzeichnis deines Projekts ausführst:
 
-<Tabs>
+<Tabs syncKey="pkg">
     <TabItem label="npm">
         ```sh
         npx astro add starlight
@@ -44,7 +44,7 @@ Die Starlight-Integration wird in der Datei `astro.config.mjs` konfiguriert.
 
 Füge zunächst einen Titel mit der Eigenschaft `title` hinzu:
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -62,19 +62,23 @@ Alle verfügbaren Optionen findest du in der [Starlight-Konfigurationsreferenz](
 
 ### Konfigurieren von Inhaltssammlungen
 
-Starlight baut auf Astros [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/) auf, die in der Datei `src/content/config.ts` konfiguriert werden.
+Starlight baut auf Astros [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/) auf, die in der Datei `src/content.config.ts` konfiguriert werden.
 
-Erstelle oder aktualisiere die Inhaltskonfigurationsdatei und füge eine `docs`-Sammlung hinzu, die Starlight's `docsSchema` verwendet:
+Erstelle oder aktualisiere die Inhaltskonfigurationsdatei und füge eine `docs`-Sammlung hinzu, die Starlights `docsLoader` und `docsSchema` verwendet:
 
-```js ins={3,6}
-// src/content/config.ts
+```js ins={3-4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
+
+Starlight unterstützt auch die Option [`legacy.collections`](https://docs.astro.build/de/reference/legacy-flags/), bei dem Sammlungen mit der Legacy-Implementierung von Inhaltssammlungen behandelt werden.
+Dies ist nützlich, wenn du ein bestehendes Astro-Projekt hast und zum jetzigen Zeitpunkt keine Änderungen an den Sammlungen vornehmen kannst, um einen Loader zu verwenden.
 
 ### Inhalte hinzufügen
 
@@ -125,4 +129,6 @@ Für die Zukunft planen wir, diesen Anwendungsfall besser zu unterstützen, um d
 
 ### Starlight mit SSR verwenden
 
-Derzeit unterstützt Starlight kein [Serverseitiges Rendern \(SSR\)](https://docs.astro.build/de/guides/server-side-rendering/) mit Astros Server-Adaptern. Wir hoffen, dies bald unterstützen zu können.
+Um SSR zu aktivieren, folge der Anleitung [„Serverseitiges Rendern (SSR)“](https://docs.astro.build/de/guides/on-demand-rendering/) in der Astro-Dokumentation, um einen Server-Adapter zu deinem Starlight-Projekt hinzuzufügen.
+
+Die von Starlight erzeugten Dokumentationsseiten werden standardmäßig vorgerendert, unabhängig vom Ausgabemodus deines Projekts. Wenn du nicht möchtest, dass deine Starlight-Seiten vorgerendert werden, setze die [Konfigurationsoption `prerender`](/de/reference/configuration/#prerender) auf `false`.

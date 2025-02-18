@@ -14,7 +14,7 @@ Esta guía muestra cómo funciona la generación de páginas en Starlight.
 ### Formatos de archivo
 
 Starlight admite la creación de contenido en Markdown y MDX sin necesidad de configuración.
-Puedes agregar soporte para Markdoc instalando la integración experimental de [Astro Markdoc](https://docs.astro.build/es/guides/integrations-guide/markdoc/).
+Puedes agregar soporte para Markdoc siguiendo la [guía de “Markdoc”](/es/guides/authoring-content/#markdoc).
 
 ### Agregar páginas
 
@@ -109,26 +109,25 @@ Las siguientes propiedades difieren del frontmatter de Markdown:
 
 ##### `sidebar`
 
-**tipo:** `SidebarEntry[]`  
+**tipo:** [`SidebarItem[]`](/es/reference/configuration/#sidebaritem)  
 **por defecto:** la barra lateral generada basada en la [configuración global de `sidebar`](/es/reference/configuration/#sidebar)
 
 Proporciona una barra lateral de navegación personalizada para esta página.
 Si no se establece, la página usará la barra lateral global predeterminada.
 
-Por ejemplo, la siguiente página sobrescribe la barra lateral predeterminada con un enlace a la página de inicio y un grupo de enlaces a diferentes constelaciones.
-La página actual en la barra lateral se establece utilizando la propiedad `isCurrent` y se ha agregado un `badge` opcional a un elemento de enlace.
+Por ejemplo, la siguiente página anula la barra lateral predeterminada con un enlace a la página de inicio y un grupo de enlaces a varias otras páginas personalizadas.
 
 ```astro {3-13}
 <StarlightPage
 	frontmatter={{ title: 'Orion' }}
 	sidebar={[
-		{ label: 'Home', href: '/' },
+		{ label: 'Home', link: '/' },
 		{
 			label: 'Constelaciones',
 			items: [
-				{ label: 'Andromeda', href: '/andromeda/' },
-				{ label: 'Orion', href: '/orion/', isCurrent: true },
-				{ label: 'Osa Menor', href: '/ursa-minor/', badge: 'Stub' },
+				{ label: 'Andromeda', link: '/andromeda/' },
+				{ label: 'Orion', link: '/orion/', isCurrent: true },
+				{ label: 'Osa Menor', link: '/ursa-minor/', badge: 'Stub' },
 			],
 		},
 	]}
@@ -136,6 +135,8 @@ La página actual en la barra lateral se establece utilizando la propiedad `isCu
 	Contenido de la página
 </StarlightPage>
 ```
+
+Ver la guía [“Navegación de la barra lateral”](/es/guides/sidebar/) para obtener más información sobre las opciones disponibles para personalizar la barra lateral.
 
 ##### `hasSidebar`
 

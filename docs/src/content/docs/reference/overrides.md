@@ -10,152 +10,6 @@ This page lists all components available to override and links to their default 
 
 Learn more in the [Guide to Overriding Components](/guides/overriding-components/).
 
-## Component props
-
-All components can access a standard `Astro.props` object that contains information about the current page.
-
-To type your custom components, import the `Props` type from Starlight:
-
-```astro
----
-// src/components/Custom.astro
-import type { Props } from '@astrojs/starlight/props';
-
-const { hasSidebar } = Astro.props;
-//      ^ type: boolean
----
-```
-
-This will give you autocomplete and types when accessing `Astro.props`.
-
-### Props
-
-Starlight will pass the following props to your custom components.
-
-#### `dir`
-
-**Type:** `'ltr' | 'rtl'`
-
-Page writing direction.
-
-#### `lang`
-
-**Type:** `string`
-
-BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
-
-#### `locale`
-
-**Type:** `string | undefined`
-
-The base path at which a language is served. `undefined` for root locale slugs.
-
-#### `siteTitle`
-
-**Type:** `string`
-
-The site title for this page’s locale.
-
-#### `siteTitleHref`
-
-**Type:** `string`
-
-The value for the site title’s `href` attribute, linking back to the homepage, e.g. `/`.
-For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-cn/`.
-
-#### `slug`
-
-**Type:** `string`
-
-The slug for this page generated from the content filename.
-
-#### `id`
-
-**Type:** `string`
-
-The unique ID for this page based on the content filename.
-
-#### `isFallback`
-
-**Type:** `true | undefined`
-
-`true` if this page is untranslated in the current language and using fallback content from the default locale.
-Only used in multilingual sites.
-
-#### `entryMeta`
-
-**Type:** `{ dir: 'ltr' | 'rtl'; lang: string }`
-
-Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content.
-
-#### `entry`
-
-The Astro content collection entry for the current page.
-Includes frontmatter values for the current page at `entry.data`.
-
-```ts
-entry: {
-  data: {
-    title: string;
-    description: string | undefined;
-    // etc.
-  }
-}
-```
-
-Learn more about the shape of this object in [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/api-reference/#collection-entry-type) reference.
-
-#### `sidebar`
-
-**Type:** `SidebarEntry[]`
-
-Site navigation sidebar entries for this page.
-
-#### `hasSidebar`
-
-**Type:** `boolean`
-
-Whether or not the sidebar should be displayed on this page.
-
-#### `pagination`
-
-**Type:** `{ prev?: Link; next?: Link }`
-
-Links to the previous and next page in the sidebar if enabled.
-
-#### `toc`
-
-**Type:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
-
-Table of contents for this page if enabled.
-
-#### `headings`
-
-**Type:** `{ depth: number; slug: string; text: string }[]`
-
-Array of all Markdown headings extracted from the current page.
-Use [`toc`](#toc) instead if you want to build a table of contents component that respects Starlight’s configuration options.
-
-#### `lastUpdated`
-
-**Type:** `Date | undefined`
-
-JavaScript `Date` object representing when this page was last updated if enabled.
-
-#### `editUrl`
-
-**Type:** `URL | undefined`
-
-`URL` object for the address where this page can be edited if enabled.
-
-#### `labels`
-
-**Type:** `Record<string, string>`
-
-An object containing UI strings localized for the current page. See the [“Translate Starlight’s UI”](/guides/i18n/#translate-starlights-ui) guide for a list of all the available keys.
-
----
-
 ## Components
 
 ### Head
@@ -201,7 +55,8 @@ When possible, prefer overriding a lower-level component.
 
 #### `PageFrame`
 
-**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Default component:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Named slots:** `header`, `sidebar`
 
 Layout component wrapped around most of the page content.
 The default implementation sets up the header–sidebar–main layout and includes `header` and `sidebar` named slots along with a default slot for the main content.
@@ -215,7 +70,8 @@ Component rendered inside [`<PageFrame>`](#pageframe) that is responsible for to
 
 #### `TwoColumnContent`
 
-**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Default component:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Named slot:** `right-sidebar`
 
 Layout component wrapped around the main content column and right sidebar (table of contents).
 The default implementation handles the switch between a single-column, small-viewport layout and a two-column, larger-viewport layout.
@@ -231,7 +87,7 @@ These components render Starlight’s top navigation bar.
 **Default component:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Header component displayed at the top of every page.
-The default implementation displays [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
+The default implementation displays [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), and [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 
