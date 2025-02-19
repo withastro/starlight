@@ -1,0 +1,50 @@
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+	/* Restore crucial styles from Tailwind Preflight: https://tailwindcss.com/docs/preflight */
+	/* Keep base font-family styles even in non-Starlight pages. */
+	html,
+	:host {
+		font-family: var(--font-sans);
+	}
+	code,
+	kbd,
+	samp,
+	pre {
+		font-family: var(--font-mono);
+	}
+
+	/* Wire up Starlight theme to use Tailwind config. */
+	:root {
+		/* Use Tailwind-configured font families. */
+		--sl-font: var(--font-sans);
+		--sl-font-mono: var(--font-mono);
+		/* Dark mode Starlight theme variables. */
+		--sl-color-white: var(--color-white);
+		--sl-color-gray-1: var(--color-gray-200);
+		--sl-color-gray-2: var(--color-gray-300);
+		--sl-color-gray-3: var(--color-gray-400);
+		--sl-color-gray-4: var(--color-gray-600);
+		--sl-color-gray-5: var(--color-gray-700);
+		--sl-color-gray-6: var(--color-gray-800);
+		--sl-color-black: var(--color-gray-900);
+		--sl-color-accent-low: var(--color-accent-950, var(--color-accent-900, #1e1b4b));
+		--sl-color-accent: var(--color-accent-600, #4f46e5);
+		--sl-color-accent-high: var(--color-accent-200, #c7d2fe);
+		/* Light mode Starlight theme variables. */
+		&[data-theme='light'] {
+			--sl-color-white: var(--color-gray-900);
+			--sl-color-gray-1: var(--color-gray-800);
+			--sl-color-gray-2: var(--color-gray-700);
+			--sl-color-gray-3: var(--color-gray-500);
+			--sl-color-gray-4: var(--color-gray-400);
+			--sl-color-gray-5: var(--color-gray-300);
+			--sl-color-gray-6: var(--color-gray-200);
+			--sl-color-gray-7: var(--color-gray-100);
+			--sl-color-black: var(--color-white);
+			--sl-color-accent-low: var(--color-accent-200, #c7d2fe);
+			--sl-color-accent: var(--color-accent-600, #4f46e5);
+			--sl-color-accent-high: var(--color-accent-900, #312e81);
+		}
+	}
+}
