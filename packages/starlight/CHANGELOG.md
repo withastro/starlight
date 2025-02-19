@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.32.1
+
+### Patch Changes
+
+- [#2904](https://github.com/withastro/starlight/pull/2904) [`ec5ca59`](https://github.com/withastro/starlight/commit/ec5ca5953e62b6ad2de78996d37e08522aa4aa76) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing the use of [rewrites](https://docs.astro.build/en/guides/routing/#rewrites).
+
 ## 0.32.0
 
 ### Minor Changes
