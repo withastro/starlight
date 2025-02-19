@@ -20,8 +20,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
  * avoid generating route data in this middleware which also runs for non-Starlight route.
  */
 export function initializeStarlightRoute(context: APIContext) {
-	const state: { routeData: StarlightRouteData | undefined } = { routeData: undefined };
 	if ('starlightRoute' in context.locals) return;
+	const state: { routeData: StarlightRouteData | undefined } = { routeData: undefined };
 	Object.defineProperty(context.locals, 'starlightRoute', {
 		get() {
 			if (!state.routeData) {
