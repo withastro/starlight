@@ -21,6 +21,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
  */
 export function initializeStarlightRoute(context: APIContext) {
 	const state: { routeData: StarlightRouteData | undefined } = { routeData: undefined };
+	if ('starlightRoute' in context.locals) return;
 	Object.defineProperty(context.locals, 'starlightRoute', {
 		get() {
 			if (!state.routeData) {

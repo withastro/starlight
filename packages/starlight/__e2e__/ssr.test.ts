@@ -54,6 +54,14 @@ test('SSR mode renders the same splash page as prerendering', async ({
 	expectEquivalentHTML(prerenderContent, ssrContent);
 });
 
+test('supports middleware rewriting', async ({ page, getProdServer }) => {
+	const starlight = await getProdServer();
+	const response = await starlight.goto('/content');
+
+	expect(response?.status()).toBe(200);
+	await expect(page.locator('#server-check')).toHaveText('On server');
+});
+
 function expectEquivalentHTML(a: string, b: string) {
 	expect(getNormalizedHTML(a)).toEqual(getNormalizedHTML(b));
 }
