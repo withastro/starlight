@@ -56,9 +56,6 @@ importers:
       culori:
         specifier: ^4.0.1
         version: 4.0.1
-      repro-plugin:
-        specifier: workspace:*
-        version: link:../packages/repro-plugin
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -164,12 +161,6 @@ importers:
       vitest:
         specifier: ^3.0.5
         version: 3.0.5(@types/node@18.16.19)
-
-  packages/repro-plugin:
-    devDependencies:
-      '@astrojs/starlight':
-        specifier: workspace:*
-        version: link:../starlight
 
   packages/starlight:
     dependencies:
