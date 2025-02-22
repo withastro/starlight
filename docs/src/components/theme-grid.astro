@@ -1,0 +1,198 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import FluidGrid from './fluid-grid.astro';
+import MediaCard from './media-card.astro';
+import ThemeImage from './theme-image.astro';
+
+interface Props {
+	labels: {
+		/** Accessible label for the theme toggle. */
+		toggle: string;
+		/** Accessible label for the dark color scheme variant. */
+		dark: string;
+		/** Accessible label for the light color scheme variant. */
+		light: string;
+	};
+	themes: Array<{
+		/** The name of this theme. */
+		title: string;
+		/** A short description of this theme. */
+		description: string;
+		/** URL for this theme’s website. Ideally should link to a demo site showing off the theme. */
+		href: string;
+		previews: {
+			/** Image filename as found in `src/assets/themes/`, e.g. `ion-light.png`. */
+			light: string;
+			/** Image filename as found in `src/assets/themes/`, e.g. `ion-dark.png`. */
+			dark: string;
+		};
+	}>;
+}
+
+const { labels, themes } = Astro.props;
+---
+
+<FluidGrid minColumnWidth="25rem">
+	{
+		themes.map(async ({ title, description, href, previews }) => {
+			if (!previews) return;
+			const inputName = `preview-${title.toLowerCase().replace(/[^a-z0-9_-]+/g, '')}`;
+			return (
+				<MediaCard>
+					<starlight-theme-preview slot="media">
+						<div class="previews">
+							<ThemeImage src={previews.light} class="light" />
+							<ThemeImage src={previews.dark} class="dark" />
+						</div>
+						<fieldset>
+							<legend class="sr-only">{labels.toggle}</legend>
+							<label class="dark">
+								<Icon name="approve-check" />
+								<span class="sr-only">{labels.dark}</span>
+								<input class="sr-only dark" name={inputName} value="dark" type="radio" checked />
+							</label>
+							<label class="light">
+								<Icon name="approve-check" />
+								<span class="sr-only">{labels.light}</span>
+								<input class="sr-only light" name={inputName} value="light" type="radio" />
+							</label>
+						</fieldset>
+					</starlight-theme-preview>
+					<div class="meta sl-flex">
+						<a class="title" {href}>
+							{title}
+						</a>
+						{description && <p class="description" set:html={description} />}
+					</div>
+				</MediaCard>
+			);
+		})
+	}
+</FluidGrid>
+
+<script>
+	/**
+	 * Progressive enhancement that syncs all theme previews when the light/dark option is toggled for a theme.
+	 */
+	class ThemePreview extends HTMLElement {
+		static subscribers: Array<(val: 'light' | 'dark') => void> = [];
+		static notify = (val: 'light' | 'dark') => {
+			for (const callback of ThemePreview.subscribers) callback(val);
+		};
+
+		constructor() {
+			super();
+			ThemePreview.subscribers.push((val) => this.onChange(val));
+			// When the inputs in this preview component change, notify other preview components.
+			this.querySelector('fieldset')?.addEventListener('change', ({ target }) => {
+				if (target instanceof HTMLInputElement) {
+					ThemePreview.notify(target.value as 'light' | 'dark');
+				}
+			});
+		}
+
+		/** When notified of a change, update this component to match. */
+		onChange(newValue: 'light' | 'dark') {
+			const targetInput = this.querySelector<HTMLInputElement>(`input[value="${newValue}"]`);
+			if (targetInput) targetInput.checked = true;
+		}
+	}
+	customElements.define('starlight-theme-preview', ThemePreview);
+</script>
+
+<style>
+	starlight-theme-preview {
+		display: grid;
+		grid-template-columns: 1fr;
+		position: relative;
+	}
+
+	.previews {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+	.previews > * {
+		grid-area: 1 / 1;
+		transition: opacity 0.2s ease-in-out;
+	}
+	starlight-theme-preview:has(.dark:checked) .previews .light {
+		opacity: 0;
+	}
+	starlight-theme-preview:has(.light:checked) .previews .dark {
+		opacity: 0;
+	}
+
+	fieldset {
+		position: absolute;
+		inset-inline-end: 0;
+		inset-block-end: 0;
+		border: 0;
+		padding: 0.5rem;
+		display: flex;
+		gap: 0.5rem;
+	}
+	@media (hover: hover) {
+		fieldset {
+			opacity: 0;
+			transition: opacity 0.2s ease-in-out;
+		}
+		starlight-theme-preview:hover fieldset,
+		fieldset:has(:focus-visible) {
+			opacity: 1;
+		}
+	}
+
+	label {
+		display: grid;
+		place-content: center;
+		border: 2px solid #fff3;
+		border-radius: 100%;
+		width: 2rem;
+		height: 2rem;
+		background-color: #000;
+		color: #fff;
+		transition: transform 0.2s ease-in-out;
+	}
+	label:hover,
+	label:focus-within {
+		transform: scale(1.1);
+	}
+	label.light {
+		border-color: #0003;
+		background-color: #fff;
+		color: #000;
+	}
+
+	/* Show the input’s focus ring on our parent element. */
+	label:has(:focus-visible) {
+		outline: auto;
+		outline-offset: 2px;
+	}
+
+	/* Show check mark icon only when input is checked. */
+	label svg {
+		opacity: 0;
+		transition: opacity 0.2s ease-in-out;
+	}
+	label:has(:checked) svg {
+		opacity: 1;
+	}
+
+	.meta {
+		padding: 1rem;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.title {
+		font-size: var(--sl-text-lg);
+	}
+	.title:hover {
+		color: var(--sl-text-accent);
+	}
+
+	.description {
+		color: var(--sl-color-gray-3);
+		line-height: 1.5;
+	}
+</style>
