@@ -32,7 +32,7 @@ interface Props {
 const { labels, themes } = Astro.props;
 ---
 
-<FluidGrid minColumnWidth="25rem">
+<FluidGrid minColumnWidth="25rem" gap="clamp(1rem, calc(0.75rem + 1vw), 1.5rem)">
 	{
 		themes.map(async ({ title, description, href, previews }) => {
 			if (!previews) return;
