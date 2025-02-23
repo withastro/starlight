@@ -40,10 +40,8 @@ const { labels, themes } = Astro.props;
 			return (
 				<MediaCard>
 					<starlight-theme-preview slot="media">
-						<div class="previews">
-							<ThemeImage src={previews.light} class="light" />
-							<ThemeImage src={previews.dark} class="dark" />
-						</div>
+						<ThemeImage src={previews.light} class="light" />
+						<ThemeImage src={previews.dark} class="dark" />
 						<fieldset>
 							<legend class="sr-only">{labels.toggle}</legend>
 							<label class="dark">
@@ -101,31 +99,31 @@ const { labels, themes } = Astro.props;
 </script>
 
 <style>
+	/* Stack all preview children in the same grid row and column. */
 	starlight-theme-preview {
 		display: grid;
 		grid-template-columns: 1fr;
-		position: relative;
+	}
+	starlight-theme-preview > * {
+		grid-area: 1 / 1;
 	}
 
-	.previews {
-		display: grid;
-		grid-template-columns: 1fr;
-	}
-	.previews > * {
-		grid-area: 1 / 1;
+	/* Fade out the preview image that isn’t currently selected. */
+	img {
 		transition: opacity 0.2s ease-in-out;
 	}
-	starlight-theme-preview:has(.dark:checked) .previews .light {
+	starlight-theme-preview:has(.dark:checked) > .light {
 		opacity: 0;
 	}
-	starlight-theme-preview:has(.light:checked) .previews .dark {
+	starlight-theme-preview:has(.light:checked) > .dark {
 		opacity: 0;
 	}
 
 	fieldset {
-		position: absolute;
-		inset-inline-end: 0;
-		inset-block-end: 0;
+		/* Ensure transitions happen in their own layer. */
+		isolation: isolate;
+		/* Place controls in the bottom right. */
+		place-self: end;
 		border: 0;
 		padding: 0.5rem;
 		display: flex;
