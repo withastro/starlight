@@ -56,9 +56,9 @@ Wie du das Caching konfigurierst, hängt von deinem Webhost ab. Zum Beispiel wen
 ## Stromverbrauch
 
 Die Art und Weise, wie eine Website aufgebaut ist, kann sich auf den Stromverbrauch auswirken, den sie auf dem Gerät des Benutzers benötigt.
-Durch die Verwendung von minimalem JavaScript reduziert Starlight die Rechenleistung, die das Telefon, Tablet oder der Computer eines Nutzers zum Laden und Rendern von Websites benötigt.
+Durch die Verwendung von minimalem JavaScript reduziert Starlight die Rechenleistung, die das Telefon, Tablet oder der Computer eines Nutzers zum Laden und Rendern von Seiten benötigt.
 
-Sei jedoch vorsichtig, wenn du Funktionen wie analytische Tracking-Skripte oder JavaScript-lastige Inhalte wie Videoeinbettungen hinzufügst, da diese den Stromverbrauch der Website erhöhen können.
+Sei jedoch vorsichtig, wenn du Funktionen wie analytische Tracking-Skripte oder JavaScript-lastige Inhalte wie Videoeinbettungen hinzufügst, da diese den Stromverbrauch der Seite erhöhen können.
 Wenn du Analysen benötigst, solltest du eine schlanke Option wie [Cabin][cabin], [Fathom][fathom] oder [Plausible][plausible] wählen.
 Einbettungen wie YouTube- und Vimeo-Videos können verbessert werden, indem man auf [Laden des Videos bei Benutzerinteraktion][lazy-video] wartet.
 Pakete wie [`astro-embed`][embed] können bei gängigen Diensten helfen.
