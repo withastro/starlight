@@ -5,7 +5,7 @@ description: Lerne, wie du deine Starlight-Website so konfigurierst, dass sie me
 
 import { FileTree, Steps } from '@astrojs/starlight/components';
 
-Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschließlich Routing, Fallback-Inhalte und vollständige Unterstützung von rechts-nach-links (RTL) Sprachen.
+Starlight bietet eingebaute Unterstützung für mehrsprachige Websites, einschließlich Routing, Fallback-Inhalte und vollständige Unterstützung von rechts-nach-links (RTL) Sprachen.
 
 ## Konfiguriere i18n
 
@@ -113,7 +113,7 @@ Wenn du ein `root`-Verzeichnis verwendest, speichere die Seiten für diese Sprac
 
 </FileTree>
 
-#### Einsprachige Seiten
+#### Einsprachige Website
 
 Standardmäßig ist Starlight eine einsprachige (englische) Website. Um eine einsprachige Website in einer anderen Sprache zu erstellen, setze diese als `root` in Ihrer `locales` Konfiguration:
 
@@ -137,13 +137,13 @@ export default defineConfig({
 });
 ```
 
-Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungs&shy;funktionen für mehrsprachige Seiten zu aktivieren, wie z.B. die Sprachauswahl.
+Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungs&shy;funktionen für mehrsprachige Websites zu aktivieren, wie z.B. die Sprachauswahl.
 
 ## Fallback-Inhalt
 
-Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `de/about.md` Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Ersatzinhalte für Websiten zu liefern, die noch nicht übersetzt wurden.
+Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `de/about.md` Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Ersatzinhalte für Seiten zu liefern, die noch nicht übersetzt wurden.
 
-Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.B. noch keine französische Version Ihrer "About"-Website erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
+Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.B. noch keine französische Version deiner "About"-Seite erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
 
 ## Übersetze den Seitentitel
 

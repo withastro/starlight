@@ -41,7 +41,7 @@ Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte IDs definier
 
 **Typ:** `string | boolean`
 
-Überschreibt die [globale `editLink`-Konfiguration](/de/reference/configuration/#editlink). Setze die Konfiguration auf `false`, um den Link `Seite bearbeiten` für eine bestimmte Seite zu deaktivieren oder gibt eine alternative URL an, unter der der Inhalt dieser Seite bearbeitet werden kann.
+Überschreibt die [globale `editLink`-Konfiguration](/de/reference/configuration/#editlink). Setze die Konfiguration auf `false`, um den Link `Seite bearbeiten` für eine bestimmte Seite zu deaktivieren oder gibt eine alternative URL an, unter welcher der Inhalt dieser Seite bearbeitet werden kann.
 
 ### `head`
 

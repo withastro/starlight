@@ -97,7 +97,7 @@ Die Standard&shy;implementierung zeigt [`<SiteTitle />`](#sitetitle), [`<Search 
 
 **Standardkomponente:** [`SiteTitle.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro)
 
-Die Komponente wird die am Anfang des Site-Headers gerendert, um den Titel der Website darzustellen.
+Die Komponente wird die am Anfang des Website-Headers gerendert, um den Titel der Website darzustellen.
 Die Standard&shy;implementierung enthält die Logik für die Darstellung von Logos, die in der Starlight-Konfiguration definiert sind.
 
 #### `Search`
@@ -215,8 +215,8 @@ Hinweis, der den Nutzern während der Entwicklung angezeigt wird, wenn die aktue
 
 **Standardkomponente:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
 
-Ein Hinweis, welcher den Benutzern auf der Website angezeigt wird, für die keine Übersetzung in der aktuellen Sprache verfügbar ist.
-Wird nur auf mehrsprachigen Seiten verwendet.
+Ein Hinweis, welcher den Benutzern auf der Seite angezeigt wird, für die keine Übersetzung in der aktuellen Sprache verfügbar ist.
+Wird nur auf mehrsprachigen Websites verwendet.
 
 #### `Hero`
 

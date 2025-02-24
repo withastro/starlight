@@ -38,7 +38,7 @@ Wenn die Objektform verwendet wird, müssen die Schlüssel BCP-47-Tags sein (z. 
 starlight({
 	title: {
 		en: 'My delightful docs site',
-		de: 'Meine bezaubernde Dokumentationsseite',
+		de: 'Meine bezaubernde Dokumentationswebsite',
 	},
 });
 ```
@@ -347,7 +347,7 @@ import SocialLinksType from '~/components/social-links-type.astro';
 
 **Typ:** <SocialLinksType />
 
-Optionale Angaben zu den Social-Media-Konten für diese Site. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
+Optionale Angaben zu den Social-Media-Konten für diese Website. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
 
 ```js
 starlight({
@@ -420,7 +420,7 @@ Weitere Informationen zu den unterstützten Designformaten findest du in der [Ex
 
 Starlight verwendet standardmäßig die dunkle und helle Variante von Sarah Drasners [Night Owl-Thema](https://github.com/sdras/night-owl-vscode-theme).
 
-Wenn du mindestens ein dunkles und ein helles Design angibst, wird Starlight das aktive Codeblock-Design automatisch mit dem aktuellen Site-Design synchron halten.
+Wenn du mindestens ein dunkles und ein helles Design angibst, wird Starlight das aktive Codeblock-Design automatisch mit dem aktuellen Website-Design synchron halten.
 Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
 
 #### `useStarlightDarkModeSwitch`
@@ -428,7 +428,7 @@ Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#use
 **Typ:** `boolean`  
 **Standard:** `true`
 
-Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Site-Design ändert.
+Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Website-Design ändert.
 Falls `false`, musst du manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
 
 :::note
@@ -440,7 +440,7 @@ Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Desig
 **Typ:** `boolean`  
 **Standard:** `true` wenn `themes` nicht gesetzt ist, andernfalls `false`
 
-Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Site-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
+Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Website-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
 Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungs&shy;design bereitgestellten Farben verwendet.
 
 :::note
@@ -595,7 +595,7 @@ starlight({
 
 Legt das Trennzeichen zwischen Seitentitel und dem Titel der Website im `<title>`-Tag der Website fest, welches in den Browser-Tabs angezeigt wird.
 
-Standardmäßig hat jede Seite einen `<title>` von `Seiten Überschrift | Websitename`.
+Standardmäßig hat jede Seite einen `<title>` von `Seiten-Titel | Websitename`.
 Zum Beispiel heißt diese Seite „Konfigurations&shy;referenz“ und diese Website heißt „Starlight“, also ist der `<titel>` für diese Seite „Konfigurations&shy;referenz | Starlight“.
 
 ### `disable404Route`
@@ -603,7 +603,7 @@ Zum Beispiel heißt diese Seite „Konfigurations&shy;referenz“ und diese Webs
 **Typ:** `Boolean`  
 **Standard:** `false`
 
-Deaktiviert die Einspeisung von Starlights Standard [404 Seite](https://docs.astro.build/de/basics/astro-pages/#benutzerdefinierte-404-fehlerseite). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
+Deaktiviert die Einspeisung von Starlights Standard [404-Seite](https://docs.astro.build/de/basics/astro-pages/#benutzerdefinierte-404-fehlerseite). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
 
 ### `components`
 
