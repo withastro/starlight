@@ -3,11 +3,11 @@ title: Umweltfreundliche Dokumentation
 description: Erfahre, wie Starlight dir helfen kann, umweltfreundlichere Dokumentationen zu erstellen und deinen ökologischen Fußabdruck zu verringern.
 ---
 
-Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2 %][sf] und [4 % der weltweiten Kohlenstoff&shy;emissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
+Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2%][sf] und [4% der weltweiten Kohlenstoff&shy;emissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
 Es gibt viele komplexe Faktoren bei der Berechnung der ökologischen Auswirkungen einer Website, aber dieser Leitfaden enthält einige Tipps, wie du den ökologischen Fußabdruck deiner Docs-Website verringern kannst.
 
 Die gute Nachricht ist, dass die Wahl von Starlight ein guter Anfang ist.
-Laut dem Website Carbon Calculator ist diese Website [sauberer als 99 % der getesteten Websiten][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
+Laut dem Website Carbon Calculator ist diese Website [sauberer als 99% der getesteten Websiten][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
 
 ## Seitengewicht
 
@@ -15,7 +15,7 @@ Je mehr Daten eine Website überträgt, desto mehr Energieressourcen benötigt s
 Im April 2023 musste ein Nutzer laut [Daten aus dem HTTP-Archiv][http] für die durchschnittliche Website mehr als 2.000 KB herunterladen.
 
 Starlight erstellt Seiten, die so leicht wie möglich sind.
-So lädt ein Benutzer beim ersten Besuch weniger als 50 KB an komprimierten Daten herunter - nur 2,5 % des Medianwerts des HTTP-Archivs.
+So lädt ein Benutzer beim ersten Besuch weniger als 50 KB an komprimierten Daten herunter - nur 2,5% des Medianwerts des HTTP-Archivs.
 Mit einer guten Caching-Strategie können nachfolgende Besuche sogar nur 10 KB herunterladen.
 
 ### Bilder
