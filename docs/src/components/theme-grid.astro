@@ -60,7 +60,7 @@ const { labels, themes } = Astro.props;
 						<a class="title" {href}>
 							{title}
 						</a>
-						{description && <p class="description" set:html={description} />}
+						<p class="description" set:html={description} />
 					</div>
 				</MediaCard>
 			);
