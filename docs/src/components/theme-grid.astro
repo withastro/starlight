@@ -39,7 +39,7 @@ const { labels, themes } = Astro.props;
 			const inputName = `preview-${title.toLowerCase().replace(/[^a-z0-9_-]+/g, '')}`;
 			return (
 				<MediaCard>
-					<starlight-theme-preview slot="media">
+					<starlight-theme-preview slot="media" aria-hidden="true">
 						<ThemeImage src={previews.light} class="light" />
 						<ThemeImage src={previews.dark} class="dark" />
 						<fieldset>
