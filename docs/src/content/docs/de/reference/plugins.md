@@ -10,7 +10,7 @@ sidebar:
 Starlight-Plugins können die Konfiguration, die Benutzeroberfläche und das Verhalten von Starlight anpassen und sind gleichzeitig einfach weiterzugeben und wiederzuverwenden.
 Diese Referenzseite dokumentiert die API, auf die Plugins Zugriff haben.
 
-Erfahre mehr über die Verwendung eines Starlight-Plugins in der [Konfigurationsreferenz](/de/reference/configuration/#plugins) oder besuche das [Plugins Schaufenster](/de/resources/plugins/#plugins), um eine Liste der verfügbaren Plugins zu sehen.
+Erfahre mehr über die Verwendung eines Starlight-Plugins in der [Konfigurations&shy;referenz](/de/reference/configuration/#plugins) oder besuche das [Plugins Schaufenster](/de/resources/plugins/#plugins), um eine Liste der verfügbaren Plugins zu sehen.
 
 ## API-Schnellreferenz
 
@@ -161,10 +161,10 @@ Diese Konfiguration kann durch andere Plugins, die vor dem aktuellen Plugin konf
 **Typ:** `(newConfig: StarlightUserConfig) => void`
 
 Eine Callback-Funktion zur Aktualisierung der vom Benutzer bereitgestellten [Starlight-Konfiguration](/de/reference/configuration/).
-Gib die Konfigurationsschlüssel der root-Ebene an, die du überschreiben möchtest.
+Gib die Konfigurations&shy;schlüssel der root-Ebene an, die du überschreiben möchtest.
 Um verschachtelte Konfigurationswerte zu aktualisieren, musst du das gesamte verschachtelte Objekt bereitstellen.
 
-Um eine vorhandene Konfigurationsoption zu erweitern, ohne sie außer Kraft zu setzen, wird der vorhandene Wert in den neuen Wert übertragen.
+Um eine vorhandene Konfigurations&shy;option zu erweitern, ohne sie außer Kraft zu setzen, wird der vorhandene Wert in den neuen Wert übertragen.
 Im folgenden Beispiel wird ein neues [`social`](/de/reference/configuration/#social) Medienkonto zur bestehenden Konfiguration hinzugefügt, indem `config.social` in das neue `social` Objekt übertragen wird:
 
 ```ts {6-11}
@@ -237,7 +237,7 @@ export default {
 };
 ```
 
-##### Kontrolle der Ausführungsreihenfolge
+##### Kontrolle der Ausführungs&shy;reihenfolge
 
 Standardmäßig wird die Plugin-Middleware in der Reihenfolge ausgeführt, in der die Plugins hinzugefügt werden.
 

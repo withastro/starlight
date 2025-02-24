@@ -3,7 +3,7 @@ title: Umweltfreundliche Dokumentation
 description: Erfahre, wie Starlight dir helfen kann, umweltfreundlichere Dokumentationen zu erstellen und deinen ökologischen Fußabdruck zu verringern.
 ---
 
-Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2 %][sf] und [4 % der weltweiten Kohlenstoffemissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
+Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2 %][sf] und [4 % der weltweiten Kohlenstoff&shy;emissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
 Es gibt viele komplexe Faktoren bei der Berechnung der ökologischen Auswirkungen einer Website, aber dieser Leitfaden enthält einige Tipps, wie du den ökologischen Fußabdruck deiner Docs-Website verringern kannst.
 
 Die gute Nachricht ist, dass die Wahl von Starlight ein guter Anfang ist.
@@ -80,7 +80,7 @@ Verglichen mit dem Rendern eines JPEG-Bildes derselben Größe kann die [Verarbe
 Wo eine Website gehostet wird, kann einen großen Einfluss darauf haben, wie umweltfreundlich deine Dokumentationsseite ist.
 Rechenzentren und Serveranlagen können große ökologische Auswirkungen haben, einschließlich eines hohen Stromverbrauchs und eines intensiven Wasserverbrauchs.
 
-Wenn du dich für einen Hoster entscheidest, der erneuerbare Energien einsetzt, wird deine Website weniger Kohlenstoffemissionen verursachen. Das [Green Web Directory][gwb] ist ein Tool, das dir helfen kann, Hosting-Unternehmen zu finden.
+Wenn du dich für einen Hoster entscheidest, der erneuerbare Energien einsetzt, wird deine Website weniger Kohlenstoff&shy;emissionen verursachen. Das [Green Web Directory][gwb] ist ein Tool, das dir helfen kann, Hosting-Unternehmen zu finden.
 
 [gwb]: https://www.thegreenwebfoundation.org/directory/
 
@@ -124,7 +124,7 @@ Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seite
 - [Website Carbon Calculator][wcc]
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
-- [WebPageTest Kohlenstoffkontrolle](https://www.webpagetest.org/carbon-control/)
+- [WebPageTest Kohlenstoff&shy;kontrolle](https://www.webpagetest.org/carbon-control/)
 - [Ecoping](https://ecoping.earth/)
 
 ### Artikel und Vorträge

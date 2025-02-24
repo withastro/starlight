@@ -285,7 +285,7 @@ draft: true
 ---
 ```
 
-Da Entwurfsseiten nicht in die Build-Ausgabe aufgenommen werden, kannst du keine Entwurfsseiten direkt mit [Slugs](/de/guides/sidebar/#interne-links) zu deiner Seitenleistenkonfiguration hinzufügen.
+Da Entwurfsseiten nicht in die Build-Ausgabe aufgenommen werden, kannst du keine Entwurfsseiten direkt mit [Slugs](/de/guides/sidebar/#interne-links) zu deiner Seitenleisten&shy;konfiguration hinzufügen.
 Entwurfsseiten in Verzeichnissen, die für [autogenerierte Seitenleisten-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) verwendet werden, werden bei Produktions-Builds automatisch ausgeschlossen.
 
 ### `sidebar`

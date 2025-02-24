@@ -14,7 +14,7 @@ Um dieser Anleitung folgen zu können, benötigst du ein bestehendes Astro-Proje
 
 ### Hinzufügen der Starlight-Integration
 
-Starlight ist eine [Astro-Integration](https://docs.astro.build/de/guides/integrations-guide/). Füge sie zu deiner Website hinzu, indem du den Befehl `astro add` im Wurzelverzeichnis deines Projekts ausführst:
+Starlight ist eine [Astro-Integration](https://docs.astro.build/de/guides/integrations-guide/). Füge sie zu deiner Website hinzu, indem du den Befehl `astro add` im Projektstamm&shy;verzeichnis deines Projekts ausführst:
 
 <Tabs syncKey="pkg">
     <TabItem label="npm">
@@ -58,13 +58,13 @@ export default defineConfig({
 });
 ```
 
-Alle verfügbaren Optionen findest du in der [Starlight-Konfigurationsreferenz](/de/reference/configuration/).
+Alle verfügbaren Optionen findest du in der [Starlight-Konfigurations&shy;referenz](/de/reference/configuration/).
 
 ### Konfigurieren von Inhaltssammlungen
 
 Starlight baut auf Astros [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/) auf, die in der Datei `src/content.config.ts` konfiguriert werden.
 
-Erstelle oder aktualisiere die Inhaltskonfigurationsdatei und füge eine `docs`-Sammlung hinzu, die Starlights `docsLoader` und `docsSchema` verwendet:
+Erstelle oder aktualisiere die Inhalts&shy;konfigurationsdatei und füge eine `docs`-Sammlung hinzu, die Starlights `docsLoader` und `docsSchema` verwendet:
 
 ```js ins={3-4,7}
 // src/content.config.ts
@@ -131,4 +131,4 @@ Für die Zukunft planen wir, diesen Anwendungsfall besser zu unterstützen, um d
 
 Um SSR zu aktivieren, folge der Anleitung [„Serverseitiges Rendern (SSR)“](https://docs.astro.build/de/guides/on-demand-rendering/) in der Astro-Dokumentation, um einen Server-Adapter zu deinem Starlight-Projekt hinzuzufügen.
 
-Die von Starlight erzeugten Dokumentationsseiten werden standardmäßig vorgerendert, unabhängig vom Ausgabemodus deines Projekts. Wenn du nicht möchtest, dass deine Starlight-Seiten vorgerendert werden, setze die [Konfigurationsoption `prerender`](/de/reference/configuration/#prerender) auf `false`.
+Die von Starlight erzeugten Dokumentations&shy;seiten werden standardmäßig vorgerendert, unabhängig vom Ausgabemodus deines Projekts. Wenn du nicht möchtest, dass deine Starlight-Seiten vorgerendert werden, setze die [Konfigurations&shy;option `prerender`](/de/reference/configuration/#prerender) auf `false`.

@@ -1,6 +1,6 @@
 ---
-title: Konfigurationsreferenz
-description: Ein Überblick über alle von Starlight unterstützten Konfigurationsoptionen.
+title: Konfigurations&shy;referenz
+description: Ein Überblick über alle von Starlight unterstützten Konfigurations&shy;optionen.
 sidebar:
   label: Konfiguration
 ---
@@ -303,7 +303,7 @@ Die Bezeichnung für diese Sprache, die den Benutzern angezeigt werden soll, z. 
 
 **Typ:** `string`
 
-Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regionalspezifischen Übersetzungen gefunden werden.
+Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regional&shy;spezifischen Übersetzungen gefunden werden.
 
 ##### `dir`
 
@@ -389,7 +389,7 @@ starlight({
 Starlight verwendet [Expressive Code](https://expressive-code.com), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
 Im [Handbuch „Codeblöcke“](/de/guides/authoring-content/#codeblöcke) erfährst du, wie du die Expressive Code-Syntax in deinen Markdown- und MDX-Inhalten verwendest.
 
-Du kannst alle standardmäßigen [Expressive Code-Konfigurationsoptionen](https://expressive-code.com/reference/configuration/) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
+Du kannst alle standardmäßigen [Expressive Code-Konfigurations&shy;optionen](https://expressive-code.com/reference/configuration/) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
 Lege beispielsweise die Option `styleOverrides` von Expressive Code fest, um das Standard-CSS zu überschreiben. Dadurch sind Anpassungen möglich, beispielsweise das Hinzufügen abgerundeter Ecken zu deinen Codeblöcken:
 
 ```js ins={2-4}
@@ -441,7 +441,7 @@ Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Desig
 **Standard:** `true` wenn `themes` nicht gesetzt ist, andernfalls `false`
 
 Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Site-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
-Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungsdesign bereitgestellten Farben verwendet.
+Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungs&shy;design bereitgestellten Farben verwendet.
 
 :::note
 Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du mindestens ein dunkles und ein helles Theme bereitstellen, um den richtigen Farbkontrast zu gewährleisten.
@@ -545,7 +545,7 @@ interface HeadConfig {
 
 Legt fest, ob in der Fußzeile angezeigt werden soll, wann die Seite zuletzt aktualisiert wurde.
 
-Standardmäßig verwendet diese Funktion die Git-Historie deines Repositorys und kann auf einigen Bereitstellungsplattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
+Standardmäßig verwendet diese Funktion die Git-Historie deines Repositorys und kann auf einigen Bereitstellungs&shy;plattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
 
 ### `pagination`
 
@@ -596,7 +596,7 @@ starlight({
 Legt das Trennzeichen zwischen Seitentitel und dem Titel der Website im `<title>`-Tag der Website fest, welches in den Browser-Tabs angezeigt wird.
 
 Standardmäßig hat jede Seite einen `<title>` von `Seiten Überschrift | Websitename`.
-Zum Beispiel heißt diese Seite „Konfigurationsreferenz“ und diese Website heißt „Starlight“, also ist der `<titel>` für diese Seite „Konfigurationsreferenz | Starlight“.
+Zum Beispiel heißt diese Seite „Konfigurations&shy;referenz“ und diese Website heißt „Starlight“, also ist der `<titel>` für diese Seite „Konfigurations&shy;referenz | Starlight“.
 
 ### `disable404Route`
 
@@ -609,7 +609,7 @@ Deaktiviert die Einspeisung von Starlights Standard [404 Seite](https://docs.ast
 
 **Typ:** `Record<string, string>`
 
-Gib die Pfade zu den Komponenten an, um die Standardimplementierungen von Starlight zu ersetzen.
+Gib die Pfade zu den Komponenten an, um die Standard&shy;implementierungen von Starlight zu ersetzen.
 
 ```js
 starlight({

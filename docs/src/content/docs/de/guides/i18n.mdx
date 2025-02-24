@@ -61,13 +61,13 @@ Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschlie�
 
    </FileTree>
 
-3. Du kannst nun Inhaltsdateien in deinen Sprachverzeichnissen hinzufügen. Verwende den gleichen Dateinamen, um Seiten in verschiedenen Sprachen zuzuordnen und nutze Starlights volle i18n-Funktionen, einschließlich Fallback-Inhalte, Übersetzungshinweise und mehr.
+3. Du kannst nun Inhaltsdateien in deinen Sprach&shy;verzeichnissen hinzufügen. Verwende den gleichen Dateinamen, um Seiten in verschiedenen Sprachen zuzuordnen und nutze Starlights volle i18n-Funktionen, einschließlich Fallback-Inhalte, Übersetzungs&shy;hinweise und mehr.
 
    Erstelle zum Beispiel `ar/index.md` und `en/index.md`, um die Homepage für Arabisch bzw. Englisch darzustellen.
 
 </Steps>
 
-Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit [Astro's `i18n`-Konfigurationsoption](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
+Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit [Astro's `i18n`-Konfigurations&shy;option](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
 
 ### Verwende ein Root-Verzeichnis
 
@@ -137,7 +137,7 @@ export default defineConfig({
 });
 ```
 
-Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungsfunktionen für mehrsprachige Seiten zu aktivieren, wie z.B. die Sprachauswahl.
+Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungs&shy;funktionen für mehrsprachige Seiten zu aktivieren, wie z.B. die Sprachauswahl.
 
 ## Fallback-Inhalt
 
@@ -184,7 +184,7 @@ Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglich
 uns über [Beiträge zur Aufnahme weiterer
 Standardsprachen](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über die `i18n` Datensammlung zur Verfügung stellen - oder unsere Standardbezeichnungen überschreiben.
+Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über die `i18n` Datensammlung zur Verfügung stellen - oder unsere Standard&shy;bezeichnungen überschreiben.
 
 <Steps>
 
@@ -254,7 +254,7 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
 
 ### Übersetzungsschema erweitern
 
-Füge benutzerdefinierte Schlüssel zu den Übersetzungswörterbüchern deiner Website hinzu, indem du die Option `extend` in den `i18nSchema()`-Optionen setzt.
+Füge benutzerdefinierte Schlüssel zu den Übersetzungs&shy;wörterbüchern deiner Website hinzu, indem du die Option `extend` in den `i18nSchema()`-Optionen setzt.
 Im folgenden Beispiel wird ein neuer, optionaler Schlüssel `custom.label` zu den Standardschlüsseln hinzugefügt:
 
 ```diff lang="js"
@@ -276,7 +276,7 @@ export const collections = {
 };
 ```
 
-Mehr über Inhaltssammlungsschemata erfährst du in [„Ein Sammelschema definieren“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
+Mehr über Inhaltssammlungs&shy;schemata erfährst du in [„Ein Sammelschema definieren“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
 
 ## UI-Übersetzungen verwenden
 
@@ -326,7 +326,7 @@ Der erste UI-String kann gerendert werden, indem man `'link.astro'` an die Funkt
 <!-- Rendert: <a href="...">Astro Dokumentation</a> -->
 ```
 
-Der zweite UI-String verwendet die [Interpolationssyntax](https://www.i18next.com/translation-function/interpolation) von i18next für den Platzhalter `{{feature}}`.
+Der zweite UI-String verwendet die [Interpolations&shy;syntax](https://www.i18next.com/translation-function/interpolation) von i18next für den Platzhalter `{{feature}}`.
 Der Wert für `feature` muss in einem Optionsobjekt gesetzt werden, das als zweites Argument an `t()` übergeben wird:
 
 ```astro {3}
@@ -360,7 +360,7 @@ const allStrings = Astro.locals.t.all();
 
 #### `t.exists()`
 
-Um zu überprüfen, ob ein Übersetzungsschlüssel für eine Sprache existiert, verwende die Funktion `locals.t.exists()` mit dem Übersetzungsschlüssel als erstem Argument.
+Um zu überprüfen, ob ein Übersetzungs&shy;schlüssel für eine Sprache existiert, verwende die Funktion `locals.t.exists()` mit dem Übersetzungs&shy;schlüssel als erstem Argument.
 Übergib ein optionales zweites Argument, wenn du die aktuelle Sprache neu definieren musst.
 
 ```astro
