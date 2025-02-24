@@ -1,5 +1,5 @@
 ---
-title: Umweltfreundliche Dokumente
+title: Umweltfreundliche Dokumentation
 description: Erfahre, wie Starlight dir helfen kann, umweltfreundlichere Dokumentationen zu erstellen und deinen ökologischen Fußabdruck zu verringern.
 ---
 

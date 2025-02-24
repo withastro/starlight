@@ -415,7 +415,7 @@ export const collections = {
 };
 ```
 
-Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in den Astro-Dokumenten.
+Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
 
 `docsSchema()` nimmt die folgenden Optionen an:
 
