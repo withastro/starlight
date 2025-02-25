@@ -165,7 +165,12 @@ function linkFromInternalSidebarLinkItem(
 		frontmatter.title;
 	const badge = item.badge ?? frontmatter.sidebar?.badge;
 	const attrs = { ...frontmatter.sidebar?.attrs, ...item.attrs };
-	return makeSidebarLink(route.slug, label, getSidebarBadge(badge, locale, label), attrs);
+	return makeSidebarLink(
+		slugToPathname(route.slug),
+		label,
+		getSidebarBadge(badge, locale, label),
+		attrs
+	);
 }
 
 /** Process sidebar link options to create a link entry. */
