@@ -60,6 +60,7 @@ const { labels, themes } = Astro.props;
 		}
 		{/* If the currently active theme is light mode, default to showing the light mode previews. */}
 		<script is:inline>
+			// @ts-nocheck
 			const theme = document.documentElement.dataset.theme || 'dark';
 			const input = document.querySelector(`input[value="${theme}"]`);
 			if (input) input.checked = true;
