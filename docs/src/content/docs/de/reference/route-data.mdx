@@ -1,6 +1,6 @@
 ---
 title: Routendaten Referenz
-description: Die vollständige Referenzdokumentation für Starlights Routendatenobjekt.
+description: Die vollständige Referenz&shy;dokumentation für Starlights Routendatenobjekt.
 sidebar:
   label: Routendaten
 ---
@@ -83,8 +83,8 @@ Der Slug für diese Seite oder die eindeutige ID für diese Seite, die auf dem D
 
 **Typ:** `true | undefined`
 
-`true`, wenn diese Seite in der aktuellen Sprache unübersetzt ist und Fallback-Inhalte aus dem Standardgebietsschema verwendet.
-Wird nur in mehrsprachigen Sites verwendet.
+`true`, wenn diese Seite in der aktuellen Sprache unübersetzt ist und Fallback-Inhalte aus dem Standardgebiets&shy;schema verwendet.
+Wird nur in mehrsprachigen Websites verwendet.
 
 ### `entryMeta`
 
@@ -94,7 +94,7 @@ Gebietsschema-Metadaten für den Seiteninhalt. Du kannst von den Werten der Top-
 
 ### `entry`
 
-Der Astro-Inhaltssammlungseintrag für die aktuelle Seite.
+Der Astro-Inhaltssammlungs&shy;eintrag für die aktuelle Seite.
 Beinhaltet Frontmatter-Werte für die aktuelle Seite in `entry.data`.
 
 ```ts
@@ -113,7 +113,7 @@ Erfahre mehr über die Form dieses Objekts in der [Astros Eintragstyp-Sammlung](
 
 **Typ:** `SidebarEntry[]`
 
-Seitennavigationseinträge für diese Seite.
+Seitennavigations&shy;einträge für diese Seite.
 
 ### `hasSidebar`
 
@@ -138,7 +138,7 @@ Inhaltsverzeichnis für diese Seite, falls aktiviert.
 **Typ:** `{ depth: number; slug: string; text: string }[]`
 
 Array aller Markdown-Überschriften, die aus der aktuellen Seite extrahiert wurden.
-Verwende stattdessen [`toc`](#toc), wenn du einen Inhaltsverzeichnis-Komponenten erstellen willst, welches die Konfigurationsoptionen von Starlight berücksichtigt.
+Verwende stattdessen [`toc`](#toc), wenn du einen Inhaltsverzeichnis-Komponenten erstellen willst, welches die Konfigurations&shy;optionen von Starlight berücksichtigt.
 
 ### `lastUpdated`
 
@@ -171,7 +171,7 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 Wenn du Code schreibst, der mit den Routendaten von Starlight arbeiten muss, kannst du den Typ `StarlightRouteData` importieren, damit er der Form von `Astro.locals.starlightRoute` entspricht.
 
-Im folgenden Beispiel aktualisiert die Funktion `usePageTitleInTOC()` die Routedaten so, dass der Titel der aktuellen Seite als Beschriftung für den ersten Eintrag im Inhaltsverzeichnis verwendet wird und die Standardbeschriftung „Übersicht“ ersetzt.
+Im folgenden Beispiel aktualisiert die Funktion `usePageTitleInTOC()` die Routedaten so, dass der Titel der aktuellen Seite als Beschriftung für den ersten Eintrag im Inhaltsverzeichnis verwendet wird und die Standard&shy;beschriftung „Übersicht“ ersetzt.
 Mit dem Typ `StarlightRouteData` kannst du prüfen, ob die Änderungen der Routendaten gültig sind.
 
 ```ts "StarlightRouteData"
