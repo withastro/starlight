@@ -1,4 +1,4 @@
-import { assert, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { getSidebar } from '../../utils/navigation';
 import type { SidebarEntry } from '../../utils/routing/types';
 
