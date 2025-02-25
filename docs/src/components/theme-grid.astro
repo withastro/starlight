@@ -32,136 +32,143 @@ interface Props {
 const { labels, themes } = Astro.props;
 ---
 
-<FluidGrid minColumnWidth="25rem" gap="clamp(1rem, calc(0.75rem + 1vw), 1.5rem)">
-	{
-		themes.map(async ({ title, description, href, previews }) => {
-			if (!previews) return;
-			const inputName = `preview-${title.toLowerCase().replace(/[^a-z0-9_-]+/g, '')}`;
-			return (
-				<MediaCard>
-					<starlight-theme-preview slot="media" aria-hidden="true">
-						<ThemeImage src={previews.light} class="light" />
-						<ThemeImage src={previews.dark} class="dark" />
-						<fieldset>
-							<legend class="sr-only">{labels.toggle}</legend>
-							<label class="dark">
-								<Icon name="approve-check" />
-								<span class="sr-only">{labels.dark}</span>
-								<input class="sr-only dark" name={inputName} value="dark" type="radio" checked />
-							</label>
-							<label class="light">
-								<Icon name="approve-check" />
-								<span class="sr-only">{labels.light}</span>
-								<input class="sr-only light" name={inputName} value="light" type="radio" />
-							</label>
-						</fieldset>
-					</starlight-theme-preview>
-					<div class="meta sl-flex">
-						<a class="title" {href}>
-							{title}
-						</a>
-						<p class="description" set:html={description} />
-					</div>
-				</MediaCard>
-			);
-		})
-	}
-</FluidGrid>
+<starlight-theme-preview data-theme-preview="dark">
+	<fieldset class="not-content sl-flex">
+		{
+			/* `<legend>` is a pain to position, so we visually hide it and use an `aria-hidden` duplicate
+		for the visual representation. See https://adrianroselli.com/2022/07/use-legend-and-fieldset.html */
+		}
+		<legend class="sr-only">{labels.toggle}</legend>
+		<strong aria-hidden="true">{labels.toggle}</strong>
+		{
+			(['dark', 'light'] as const).map((variant) => (
+				<label class:list={['sl-flex', variant]} for={`${variant}-input`}>
+					<span class="radio">
+						<Icon name="approve-check" />
+					</span>
+					<span>{labels[variant]}</span>
+					<input
+						id={`${variant}-input`}
+						class="sr-only"
+						name="preview-theme"
+						value={variant}
+						type="radio"
+						checked={variant === 'dark'}
+					/>
+				</label>
+			))
+		}
+		{/* If the currently active theme is light mode, default to showing the light mode previews. */}
+		<script is:inline>
+			const theme = document.documentElement.dataset.theme || 'dark';
+			const input = document.querySelector(`input[value="${theme}"]`);
+			if (input) input.checked = true;
+			const customEl = document.querySelector('starlight-theme-preview');
+			if (customEl) customEl.dataset.themePreview = theme;
+		</script>
+	</fieldset>
+
+	<FluidGrid minColumnWidth="25rem" gap="clamp(1rem, calc(0.75rem + 1vw), 1.5rem)">
+		{
+			themes.map(
+				async ({ title, description, href, previews }) =>
+					previews && (
+						<MediaCard {href}>
+							<div class="preview-images" slot="media" aria-hidden="true">
+								<ThemeImage src={previews.light} class="light" />
+								<ThemeImage src={previews.dark} class="dark" />
+							</div>
+							<div class="meta sl-flex">
+								<p class="title">{title}</p>
+								<p class="description" set:html={description} />
+							</div>
+						</MediaCard>
+					)
+			)
+		}
+	</FluidGrid>
+</starlight-theme-preview>
 
 <script>
-	/**
-	 * Progressive enhancement that syncs all theme previews when the light/dark option is toggled for a theme.
-	 */
-	class ThemePreview extends HTMLElement {
-		static subscribers: Array<(val: 'light' | 'dark') => void> = [];
-		static notify = (val: 'light' | 'dark') => {
-			for (const callback of ThemePreview.subscribers) callback(val);
-		};
-
-		constructor() {
-			super();
-			ThemePreview.subscribers.push((val) => this.onChange(val));
-			// When the inputs in this preview component change, notify other preview components.
-			this.querySelector('fieldset')?.addEventListener('change', ({ target }) => {
-				if (target instanceof HTMLInputElement) {
-					ThemePreview.notify(target.value as 'light' | 'dark');
-				}
-			});
+	customElements.define(
+		'starlight-theme-preview',
+		class ThemePreview extends HTMLElement {
+			constructor() {
+				super();
+				this.querySelector('fieldset')?.addEventListener('change', ({ target }) => {
+					if (target instanceof HTMLInputElement) {
+						this.dataset.themePreview = target.value;
+					}
+				});
+			}
 		}
-
-		/** When notified of a change, update this component to match. */
-		onChange(newValue: 'light' | 'dark') {
-			const targetInput = this.querySelector<HTMLInputElement>(`input[value="${newValue}"]`);
-			if (targetInput) targetInput.checked = true;
-		}
-	}
-	customElements.define('starlight-theme-preview', ThemePreview);
+	);
 </script>
 
 <style>
-	/* Stack all preview children in the same grid row and column. */
 	starlight-theme-preview {
-		display: grid;
-		grid-template-columns: 1fr;
-	}
-	starlight-theme-preview > * {
-		grid-area: 1 / 1;
-	}
-
-	/* Fade out the preview image that isn’t currently selected. */
-	img {
-		transition: opacity 0.2s ease-in-out;
-	}
-	starlight-theme-preview:has(.dark:checked) > .light {
-		opacity: 0;
-	}
-	starlight-theme-preview:has(.light:checked) > .dark {
-		opacity: 0;
+		--transition-time: 0.25s;
+		display: block;
 	}
 
 	fieldset {
-		/* Ensure transitions happen in their own layer. */
-		isolation: isolate;
-		/* Place controls in the bottom right. */
-		place-self: end;
-		border: 0;
-		padding: 0.5rem;
-		display: flex;
-		gap: 0.5rem;
+		/* Snappier transitions for the form controls. */
+		--transition-time: 0.15s;
+
+		/* Stick the control bar to bottom of the nav bar on scroll. */
+		position: sticky;
+		top: var(--sl-nav-height);
+		z-index: var(--sl-z-index-toc);
+		/* Pull the bar out so it is full width on small screens. */
+		margin-inline: calc(-1 * var(--sl-nav-pad-x));
+		padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+		/* Internal layout and styles. */
+		gap: 1rem;
+		align-items: center;
+		justify-content: end;
+		border: 1px solid var(--sl-color-hairline);
+		font-size: var(--sl-text-sm);
+		background-color: var(--sl-color-bg-nav);
+		box-shadow: var(--sl-shadow-md);
 	}
-	@media (hover: hover) {
+	@media (min-width: 50rem) and (max-width: 72rem) {
+		/* Medium-width screens need a custom value to avoid x-axis overflow. */
 		fieldset {
-			opacity: 0;
-			transition: opacity 0.2s ease-in-out;
-		}
-		starlight-theme-preview:hover fieldset,
-		fieldset:has(:focus-visible) {
-			opacity: 1;
+			margin-inline: -1rem;
 		}
 	}
 
 	label {
-		display: grid;
-		place-content: center;
-		border: 2px solid #fff3;
-		border-radius: 100%;
-		width: 2rem;
-		height: 2rem;
-		background-color: #000;
-		color: #fff;
-		transition: transform 0.2s ease-in-out;
+		align-items: center;
+		gap: 0.375rem;
+		color: var(--sl-color-gray-3);
+		transition: color var(--transition-time) ease-in-out;
 	}
 	label:hover,
-	label:focus-within {
-		transform: scale(1.1);
+	label:has(:checked) {
+		color: var(--sl-color-white);
 	}
-	label.light {
-		border-color: #0003;
+
+	.radio {
+		display: grid;
+		place-content: center;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 100%;
+		width: 1.5rem;
+		height: 1.5rem;
+		background-color: #000;
+		color: #fff;
+		transition: transform var(--transition-time) ease-in-out;
+	}
+	label:not(:has(:checked)):hover .radio {
+		transform: scale(1.15);
+	}
+	.light .radio {
 		background-color: #fff;
 		color: #000;
 	}
 
-	/* Show the input’s focus ring on our parent element. */
+	/* Show the input’s focus ring on the label. */
 	label:has(:focus-visible) {
 		outline: auto;
 		outline-offset: 2px;
@@ -170,10 +177,30 @@ const { labels, themes } = Astro.props;
 	/* Show check mark icon only when input is checked. */
 	label svg {
 		opacity: 0;
-		transition: opacity 0.2s ease-in-out;
+		transition: opacity var(--transition-time) ease-in-out;
 	}
 	label:has(:checked) svg {
 		opacity: 1;
+	}
+
+	/* Stack light/dark images in the same grid row and column. */
+	.preview-images {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+	.preview-images > * {
+		grid-area: 1 / 1;
+	}
+
+	/* Fade out the preview image that isn’t currently selected. */
+	img {
+		transition: opacity var(--transition-time) ease-in-out;
+	}
+	[data-theme-preview='dark'] img.light {
+		opacity: 0;
+	}
+	[data-theme-preview='light'] img.dark {
+		opacity: 0;
 	}
 
 	.meta {
@@ -184,9 +211,6 @@ const { labels, themes } = Astro.props;
 
 	.title {
 		font-size: var(--sl-text-lg);
-	}
-	.title:hover {
-		color: var(--sl-color-text-accent);
 	}
 
 	.description {
