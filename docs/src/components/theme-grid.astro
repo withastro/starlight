@@ -7,7 +7,7 @@ import ThemeImage from './theme-image.astro';
 interface Props {
 	labels: {
 		/** Accessible label for the theme toggle. */
-		toggle: string;
+		legend: string;
 		/** Accessible label for the dark color scheme variant. */
 		dark: string;
 		/** Accessible label for the light color scheme variant. */
@@ -38,8 +38,8 @@ const { labels, themes } = Astro.props;
 			/* `<legend>` is a pain to position, so we visually hide it and use an `aria-hidden` duplicate
 		for the visual representation. See https://adrianroselli.com/2022/07/use-legend-and-fieldset.html */
 		}
-		<legend class="sr-only">{labels.toggle}</legend>
-		<strong aria-hidden="true">{labels.toggle}</strong>
+		<legend class="sr-only">{labels.legend}</legend>
+		<strong aria-hidden="true">{labels.legend}</strong>
 		{
 			(['dark', 'light'] as const).map((variant) => (
 				<label class:list={['sl-flex', variant]} for={`${variant}-input`}>
