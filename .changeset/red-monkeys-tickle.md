@@ -26,6 +26,7 @@ NewFeature
 
 To fix this, you can add a space between the badge and the text:
 
-```mdx
-<Badge text="New" /> Feature
+```diff
+- <Badge text="New" />Feature
++ <Badge text="New" /> Feature
 ```
