@@ -1,0 +1,76 @@
+---
+title: 테마
+description: Starlight의 커뮤니티 테마로 문서를 스타일링하세요.
+tableOfContents: false
+sidebar:
+  order: 1
+head:
+  - tag: style
+    content: |
+      body { --sl-content-width: 66.75rem; }
+---
+
+import ThemeGrid from '~/components/theme-grid.astro';
+
+테마는 [사용자 정의 CSS](/ko/guides/css-and-tailwind/), [컴포넌트 재정의](/ko/guides/overriding-components/) 또는 기타 새로운 기능을 사용하여 사이트의 시각적 모양을 변경하는 Starlight 플러그인입니다.
+
+## 커뮤니티 테마
+
+커뮤니티에서 빌드한 테마를 설치하여 사이트의 모양과 느낌을 빠르게 사용자 정의하세요.
+
+<ThemeGrid
+	labels={{
+		/** 테마 전환을 위한 접근성 레이블입니다. */
+		legend: 'Preview',
+		/** 어두운 색상 체계 변형에 대한 접근성 레이블입니다. */
+		dark: '다크',
+		/** 밝은 색상 체계 변형에 대한 접근성 레이블입니다. */
+		light: '라이트',
+	}}
+	themes={[
+		{
+			title: 'Starlight Rapide',
+			description:
+				'Visual Studio Code Vitesse 테마에서 영감을 받은 Starlight 테마',
+			href: 'https://starlight-theme-rapide.vercel.app/',
+			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
+		},
+		{
+			title: 'Starlight Obsidian Theme',
+			description:
+				'Obsidian Publish 사이트 스타일에서 영감을 받은 Starlight 테마',
+			href: 'https://fevol.github.io/starlight-theme-obsidian/',
+			previews: { light: 'obsidian-light.png', dark: 'obsidian-dark.png' },
+		},
+		{
+			title: 'Catppuccin for Starlight',
+			description: 'Starlight를 위한 편안한 파스텔 테마',
+			href: 'https://catppuccin-starlight.otterlord.dev/',
+			previews: { light: 'catppuccin-light.png', dark: 'catppuccin-dark.png' },
+		},
+		{
+			title: 'Ion',
+			description: 'Starlight를 위한 세련되고 현대적인 테마',
+			href: 'https://louisescher.github.io/starlight-ion-theme/',
+			previews: { light: 'ion-light.png', dark: 'ion-dark.png' },
+		},
+		{
+			title: 'Starlight Black',
+			description: 'shadcn 문서에서 영감을 받은 Starlight 테마',
+			href: 'https://starlight-theme-black.vercel.app/',
+			previews: { light: 'black-light.png', dark: 'black-dark.png' },
+		},
+		{
+			title: 'Starlight Flexoki',
+			description:
+				'Flexoki 색상 팔레트를 기반으로 한 따뜻하고 친근한 테마',
+			href: 'https://delucis.github.io/starlight-theme-flexoki/',
+			previews: { light: 'flexoki-light.png', dark: 'flexoki-dark.png' },
+		},
+	]}
+/>
+
+:::tip[여러분의 테마를 추가하세요!]
+Starlight 테마를 만드셨나요?
+이 페이지에 테마를 추가하는 [PR을 여세요](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md#themes)!
+:::
