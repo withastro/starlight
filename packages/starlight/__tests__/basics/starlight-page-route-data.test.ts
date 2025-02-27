@@ -1,4 +1,5 @@
 import { expect, test, vi } from 'vitest';
+import { getRouteDataTestContext } from '../test-utils';
 import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 import {
@@ -26,12 +27,12 @@ const starlightPageProps: StarlightPageProps = {
 	frontmatter: { title: 'This is a test title' },
 };
 
-const starlightPageUrl = new URL('https://example.com/test-slug');
+const starlightPagePathname = '/test-slug';
 
 test('adds data to route shape', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	// Starlight pages infer the slug from the URL.
 	expect(data.slug).toBe('test-slug');
@@ -65,7 +66,10 @@ test('adds custom data to route shape', async () => {
 		dir: 'rtl',
 		lang: 'ks',
 	};
-	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
+	const data = await generateStarlightPageRouteData({
+		props,
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
@@ -82,7 +86,10 @@ test('adds custom frontmatter data to route shape', async () => {
 			template: 'splash',
 		},
 	};
-	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
+	const data = await generateStarlightPageRouteData({
+		props,
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
 		[
 		  {
@@ -103,7 +110,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: new URL('https://example.com/getting-started/'),
+		context: getRouteDataTestContext('/getting-started/'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -188,7 +195,7 @@ test('uses provided sidebar if any', async () => {
 				'reference/frontmatter',
 			],
 		},
-		url: new URL('https://example.com/test/2'),
+		context: getRouteDataTestContext('/test/2'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -262,7 +269,7 @@ test('throws error if sidebar is malformated', async () => {
 					},
 				],
 			},
-			url: starlightPageUrl,
+			context: getRouteDataTestContext(starlightPagePathname),
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -290,7 +297,7 @@ test('uses provided pagination if any', async () => {
 				},
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.pagination).toMatchInlineSnapshot(`
 		{
@@ -321,7 +328,7 @@ test('uses provided headings if any', async () => {
 	];
 	const data = await generateStarlightPageRouteData({
 		props: { ...starlightPageProps, headings },
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.headings).toEqual(headings);
 });
@@ -337,7 +344,7 @@ test('generates the table of contents for provided headings', async () => {
 				{ depth: 4, slug: 'heading-3', text: 'Heading 3' },
 			],
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -386,7 +393,7 @@ test('respects the `tableOfContents` level configuration', async () => {
 				},
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -431,7 +438,7 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 				tableOfContents: false,
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -449,7 +456,7 @@ test('disables table of contents for splash template', async () => {
 				template: 'splash',
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -464,7 +471,7 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 				template: 'splash',
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.hasSidebar).toBe(false);
 });
@@ -479,7 +486,7 @@ test('uses provided edit URL if any', async () => {
 				editUrl,
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.editUrl).toEqual(new URL(editUrl));
 	expect(data.entry.data.editUrl).toEqual(editUrl);
@@ -495,21 +502,22 @@ test('strips unknown frontmatter properties', async () => {
 				unknown: 'test',
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect('unknown' in data.entry.data).toBe(false);
 });
 
 test('generates data with a similar root shape to regular route data', async () => {
 	const route = routes[0]!;
+	const context = getRouteDataTestContext(starlightPagePathname);
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		url: new URL('https://example.com'),
+		context,
 	});
 
 	const starlightPageData = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: starlightPageUrl,
+		context,
 	});
 
 	expect(Object.keys(data).sort()).toEqual(Object.keys(starlightPageData).sort());
