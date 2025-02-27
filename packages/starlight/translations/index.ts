@@ -28,6 +28,7 @@ import hi from './hi.json';
 import zhTW from './zh-TW.json';
 import pl from './pl.json';
 import sk from './sk.json';
+import lv from './lv.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -62,5 +63,6 @@ export default Object.fromEntries(
 		'zh-TW': zhTW,
 		pl,
 		sk,
+		lv,
 	}).map(([key, dict]) => [key, parse(dict)])
 );
