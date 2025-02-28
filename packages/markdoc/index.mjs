@@ -32,9 +32,33 @@ export const StarlightMarkdocPreset = {
 				 * Markdoc ignores meta attributes (markers) after a fence block (e.g.
 				 * ```js title="example.js" del={2} ins={3-4} {6} ).
 				 * This means that Expressive Code markers defined after the fence block are ignored and
-				 * users would need to use the `code` tag instead.
+				 * users would need to either use the Markdoc syntax for fence attributes or the `code` tag
+				 * instead.
 				 *
 				 * @see https://github.com/withastro/astro/blob/9f943c1344671b569a0d1ddba683b3cca0068adc/packages/integrations/markdoc/src/extensions/shiki.ts#L15-L17
+				 * @see https://github.com/markdoc/markdoc/discussions/318#discussioncomment-4821979
+				 */
+				frame: {
+					type: String,
+					required: false,
+					default: 'auto',
+					matches: ['auto', 'code', 'terminal', 'none'],
+				},
+				meta: {
+					type: String,
+					required: false,
+				},
+				title: {
+					type: String,
+					required: false,
+				},
+				/**
+				 * `mark`, `ins`, `del`, and the label syntax are not supported as the Markdoc attribute
+				 * validation syntax does not allow to describe properly all the possible values.
+				 * Users should use the `meta` attribute instead.
+				 *
+				 * @see https://expressive-code.com/key-features/code-component/#mark--ins--del
+				 * @see https://expressive-code.com/key-features/code-component/#meta
 				 */
 			},
 		},
@@ -148,11 +172,12 @@ export const StarlightMarkdocPreset = {
 					default: false,
 				},
 				/**
-				 * `mark`, `ins`, and `del` are not supported as the Markdoc attribute validation syntax
-				 * does not allow to describe properly all the possible values.
+				 * `mark`, `ins`, `del`, and the label syntax are not supported as the Markdoc attribute
+				 * validation syntax does not allow to describe properly all the possible values.
 				 * Users should use the `meta` attribute instead.
 				 *
 				 * @see https://expressive-code.com/key-features/code-component/#mark--ins--del
+				 * @see https://expressive-code.com/key-features/code-component/#meta
 				 */
 			},
 		},
