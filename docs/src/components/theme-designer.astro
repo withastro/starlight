@@ -115,22 +115,28 @@ const {
 		}
 
 		#updateTailwindConfig({ dark, light }: ReturnType<typeof getPalettes>) {
-			const config = `import starlightPlugin from '@astrojs/starlight-tailwind';
+			const config = `@layer starlight.base, starlight.reset, starlight.shiki, starlight.components, starlight.content, starlight.user-components, starlight.asides, starlight.expressive-code, starlight.utils, theme, base, components, utilities;
 
-// Generated color palettes
-const accent = { 200: '${dark['accent-high']}', 600: '${light.accent}', 900: '${light['accent-high']}', 950: '${dark['accent-low']}' };
-const gray = { 100: '${light['gray-7']}', 200: '${light['gray-6']}', 300: '${light['gray-5']}', 400: '${light['gray-4']}', 500: '${light['gray-3']}', 700: '${light['gray-2']}', 800: '${light['gray-1']}', 900: '${light.white}' };
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
-/** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-	theme: {
-		extend: {
-			colors: { accent, gray },
-		},
-	},
-	plugins: [starlightPlugin()],
-};`;
+@theme {
+	/* Generated accent color palettes. */
+	--color-accent-200: ${dark['accent-high']};
+	--color-accent-600: ${light.accent};
+	--color-accent-900: ${light['accent-high']};
+	--color-accent-950: ${dark['accent-low']};
+	/* Generated gray color palettes. */
+	--color-gray-100: ${light['gray-7']};
+	--color-gray-200: ${light['gray-6']};
+	--color-gray-300: ${light['gray-5']};
+	--color-gray-400: ${light['gray-4']};
+	--color-gray-500: ${light['gray-3']};
+	--color-gray-700: ${light['gray-2']};
+	--color-gray-800: ${light['gray-1']};
+	--color-gray-900: ${light.white};
+}`;
 			const codePreview = this.querySelector('[data-theme-tailwind]');
 			if (codePreview) codePreview.innerHTML = config;
 		}
