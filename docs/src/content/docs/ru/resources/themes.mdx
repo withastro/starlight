@@ -1,0 +1,76 @@
+---
+title: Темы
+description: Оформите документацию с помощью темы от сообщества для Starlight
+tableOfContents: false
+sidebar:
+  order: 2
+head:
+  - tag: style
+    content: |
+      body { --sl-content-width: 66.75rem; }
+---
+
+import ThemeGrid from '~/components/theme-grid.astro';
+
+Тема — это плагин Starlight, который изменяет внешний вид сайта с помощью [пользовательского CSS](/ru/guides/css-and-tailwind/), [переопределения компонентов](/ru/guides/overriding-components/), или других новых возможностей.
+
+## Темы от сообщества
+
+Установите тему, созданную сообществом, чтобы быстро настроить внешний вид и стиль вашего сайта.
+
+<ThemeGrid
+	labels={{
+		/** Accessible label for the theme toggle. */
+		legend: 'Превью',
+		/** Accessible label for the dark color scheme variant. */
+		dark: 'Тёмные',
+		/** Accessible label for the light color scheme variant. */
+		light: 'Светлые',
+	}}
+	themes={[
+		{
+			title: 'Starlight Rapide',
+			description:
+				'Тема Starlight, вдохновлённая темой Visual Studio Code Vitesse.',
+			href: 'https://starlight-theme-rapide.vercel.app/',
+			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
+		},
+		{
+			title: 'Starlight Obsidian Theme',
+			description:
+				'Тема Starlight, вдохновлённая стилем сайтов Obsidian Publish.',
+			href: 'https://fevol.github.io/starlight-theme-obsidian/',
+			previews: { light: 'obsidian-light.png', dark: 'obsidian-dark.png' },
+		},
+		{
+			title: 'Catppuccin for Starlight',
+			description: 'Успокаивающая пастельная тема для Starlight.',
+			href: 'https://catppuccin-starlight.otterlord.dev/',
+			previews: { light: 'catppuccin-light.png', dark: 'catppuccin-dark.png' },
+		},
+		{
+			title: 'Ion',
+			description: 'Элегантная, современная тема для Starlight.',
+			href: 'https://louisescher.github.io/starlight-ion-theme/',
+			previews: { light: 'ion-light.png', dark: 'ion-dark.png' },
+		},
+		{
+			title: 'Starlight Black',
+			description: 'Тема Starlight, вдохновлённая документацией shadcn.',
+			href: 'https://starlight-theme-black.vercel.app/',
+			previews: { light: 'black-light.png', dark: 'black-dark.png' },
+		},
+		{
+			title: 'Starlight Flexoki',
+			description:
+				'Тёплая и дружелюбная тема, основанная на цветовой палитре Flexoki.',
+			href: 'https://delucis.github.io/starlight-theme-flexoki/',
+			previews: { light: 'flexoki-light.png', dark: 'flexoki-dark.png' },
+		},
+	]}
+/>
+
+:::tip[Добавьте собственную работу!]
+Вы создали тему для Starlight?
+[Откройте PR](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md#themes), добавляющий вашу тему на эту страницу!
+:::
