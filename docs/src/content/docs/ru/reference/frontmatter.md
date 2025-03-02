@@ -400,7 +400,7 @@ sidebar:
 
 ## Настройка схемы метаданных
 
-Схема метаданных для коллекции контента Starlight `docs` настраивается в файле `src/content.config.ts` с помощью помощника `docsSchema()`:
+Схема метаданных для коллекции контента Starlight `docs` настраивается в файле `src/content.config.ts` с помощью хелпера `docsSchema()`:
 
 ```ts {4,7}
 // src/content.config.ts
