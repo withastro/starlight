@@ -1,0 +1,36 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+/**
+ * Two conditions must be met for the issue to occur:
+ *
+ * - Use a rest parameter for the route
+ * - Render `<StarlightPage>`
+ */
+
+export function getStaticPaths() {
+	return [
+		{ params: { dog: 'clifford' } },
+		{ params: { dog: 'rover' } },
+		{ params: { dog: 'spot' } },
+	];
+}
+---
+
+<StarlightPage frontmatter={{ title: 'My custom page' }}>
+	<p>This is a custom page</p>
+</StarlightPage>
+
+<!--  -->
+
+<!-- <!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Test</title>
+	</head>
+	<body>
+		<p>This is a test</p>
+	</body>
+</html> -->
