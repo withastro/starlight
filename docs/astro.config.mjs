@@ -37,8 +37,8 @@ export default defineConfig({
 		starlight({
 			title: 'Starlight',
 			logo: {
-				light: '/src/assets/logo-light.svg',
-				dark: '/src/assets/logo-dark.svg',
+				light: '/src/assets/inmo-logo-black.svg',
+				dark: '/src/assets/inmo-logo-white.svg',
 				replacesTitle: true,
 			},
 			lastUpdated: true,
