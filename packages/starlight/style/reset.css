@@ -40,7 +40,7 @@ h4,
 h5,
 h6,
 code {
-	overflow-wrap: anywhere;
+	background-color: rgba(255, 0, 0, 0.2);
 }
 
 code {
