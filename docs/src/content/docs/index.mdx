@@ -7,24 +7,16 @@ description: INMO Product Support provides product manuals, FAQs, and technical 
 template: splash
 editUrl: false
 lastUpdated: false
-hero:
-  title: Product Support
-  tagline: We're here to help you with any questions or issues you may have
-  image:
-    file: ~/assets/hero-star.webp
-  actions: []
+search: true
 ---
 
 import { CardGrid, Card, LinkCard } from '@astrojs/starlight/components';
-import AboutAstro from '~/components/about-astro.astro';
-import TestimonialGrid from '~/components/testimonial-grid.astro';
-import Testimonial from '~/components/testimonial.astro';
 import ProductCard from '~/components/product-card.astro';
 
 {/* Search Box Area */}
-<div class="search-container" style="margin: 2rem auto; max-width: 600px; text-align: center;">
+{/* <div class="search-container" style="margin: 2rem auto; max-width: 600px; text-align: center;">
   <input type="text" placeholder="Search" style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1.1rem;" />
-</div>
+</div> */}
 
 {/* Main Navigation Cards */}
 <CardGrid>
@@ -52,22 +44,22 @@ import ProductCard from '~/components/product-card.astro';
   <CardGrid>
     <ProductCard 
       title="INMO Air3"
-      image="/assets/products/inmo-air3-800x400.png"
+      image="/images/products/inmo-air3-800x400.png"
       href="/products/air3/"
     />
     <ProductCard 
       title="INMO GO2"
-      image="/assets/products/inmo-go2-800x400.png"
+      image="/images/products/inmo-go2-800x400.png"
       href="/products/go2/"
     />
     <ProductCard 
       title="INMO Air2"
-      image="/assets/products/inmo-air2-800x400.png"
+      image="/images/products/inmo-air2-800x400.png"
       href="/products/air2/"
     />
     <ProductCard 
       title="INMO GO"
-      image="/assets/products/inmo-go-800x400.png"
+      image="/images/products/inmo-go-800x400.png"
       href="/products/go/"
     />
   </CardGrid>
