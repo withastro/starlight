@@ -6,7 +6,6 @@ import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
-	de: { label: 'Deutsch', lang: 'de' },
 	'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 };
 
@@ -74,14 +73,17 @@ export default defineConfig({
 						label: 'User Guide',
 						items: [
 						  { label: 'User Manual', link: '/go/manual/' },
-						  { label: 'Features', link: '/go/features/' },
-						  { label: 'Settings', link: '/go/settings/' },
 						],
 					  },
 					  {
 						label: 'Support',
 						items: [
 						  { label: 'Troubleshooting', link: '/go/troubleshooting/' },
+						],
+					  },
+					  {
+						label: 'FAQ',
+						items: [
 						  { label: 'FAQ', link: '/go/faq/' },
 						],
 					  },
@@ -89,24 +91,27 @@ export default defineConfig({
 				  // 中文文档结构
 				  '/zh-cn/go/': [
 					{
-						label: '开始',
+						label: 'Getting Started',
 						items: [
 						  { label: 'Overview', link: '/go/' },
 						  { label: 'Quick Start', link: '/go/quick-start/' },
 						],
 					  },
 					  {
-						label: '用户手册',
+						label: 'User Guide',
 						items: [
 						  { label: 'User Manual', link: '/go/manual/' },
-						  { label: 'Features', link: '/go/features/' },
-						  { label: 'Settings', link: '/go/settings/' },
 						],
 					  },
 					  {
-						label: '常见问题',
+						label: 'Support',
 						items: [
 						  { label: 'Troubleshooting', link: '/go/troubleshooting/' },
+						],
+					  },
+					  {
+						label: 'FAQ',
+						items: [
 						  { label: 'FAQ', link: '/go/faq/' },
 						],
 					  },
