@@ -15,7 +15,7 @@ hero:
   actions: []
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
+import { CardGrid, Card, LinkCard } from '@astrojs/starlight/components';
 import AboutAstro from '~/components/about-astro.astro';
 import TestimonialGrid from '~/components/testimonial-grid.astro';
 import Testimonial from '~/components/testimonial.astro';
@@ -27,15 +27,24 @@ import Testimonial from '~/components/testimonial.astro';
 
 {/* Main Navigation Cards */}
 <CardGrid>
-	<Card title="Orders" icon="document">
-		Track your orders, shipping information, and purchase history
-	</Card>
-	<Card title="Manuals & Downloads" icon="open-book">
-		Get product manuals, drivers, and firmware updates
-	</Card>
-	<Card title="Develop" icon="setting">
-		API documentation, SDKs, and developer guides
-	</Card>
+  <LinkCard 
+    title="Orders" 
+    description="Track your orders, shipping information, and purchase history"
+    icon="document"
+    href="/orders/"
+  />
+  <LinkCard 
+    title="Manuals & Downloads" 
+    description="Get product manuals, drivers, and firmware updates"
+    icon="open-book"
+    href="/manuals/"
+  />
+  <LinkCard 
+    title="Develop" 
+    description="API documentation, SDKs, and developer guides"
+    icon="setting"
+    href="/develop/"
+  />
 </CardGrid>
 
 {/* Product Support Section */}
@@ -45,25 +54,25 @@ import Testimonial from '~/components/testimonial.astro';
   <CardGrid>
     <Card title="INMO Air3">
       <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="/placeholder-air3.jpg" alt="INMO Air3" style="width: 150px; height: 150px; margin-bottom: 1rem;" />
+        <img src="products/inmo-ari3-800x400.png" alt="INMO Air3" style="width: 300px; height: 150px; margin-bottom: 1rem;" />
         <span>INMO Air3</span>
       </div>
     </Card>
     <Card title="INMO GO2">
       <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="/placeholder-go2.jpg" alt="INMO GO2" style="width: 150px; height: 150px; margin-bottom: 1rem;" />
+        <img src="products/inmo-go2-800x400.png" alt="INMO GO2" style="width: 300px; height: 150px; margin-bottom: 1rem;" />
         <span>INMO GO2</span>
       </div>
     </Card>
     <Card title="INMO Air2">
       <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="/placeholder-air2.jpg" alt="INMO Air2" style="width: 150px; height: 150px; margin-bottom: 1rem;" />
+        <img src="products/inmo-air2-800x400.png" alt="INMO Air2" style="width: 300px; height: 150px; margin-bottom: 1rem;" />
         <span>INMO Air2</span>
       </div>
     </Card>
     <Card title="INMO GO">
       <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="/placeholder-go.jpg" alt="INMO GO" style="width: 150px; height: 150px; margin-bottom: 1rem;" />
+        <img src="products/inmo-go-800x400.png" alt="INMO GO" style="width: 300px; height: 150px; margin-bottom: 1rem;" />
         <span>INMO GO</span>
       </div>
     </Card>
