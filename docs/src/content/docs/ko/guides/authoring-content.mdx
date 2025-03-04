@@ -242,6 +242,10 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   	return '이 줄은 이 스니펫의 라인 #3입니다.';
   }
   ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js {2-3}
@@ -251,24 +255,62 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   }
   ```
   ````
+  
+  </TabItem>
+
+  <TabItem label="Markdoc">
+  
+    ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+  	return '이 줄은 이 스니펫의 라인 #3입니다.';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [`" "` 마커 또는 정규 표현식을 사용하여 텍스트 선택 항목을 표시합니다.](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines)
 
-  ```js "Individual terms" /정규.*지원됩니다./
+  ```js "개별 용어" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
   	return '정규 표현식도 지원됩니다.';
   }
   ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
-  ```js "Individual terms" /정규.*지원됩니다./
+  ```js "개별 용어" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
   	return '정규 표현식도 지원됩니다.';
   }
   ```
   ````
+  
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'개별 용어' /정규.*지원됩니다./" %}
+  // 개별 용어도 강조 표시할 수 있습니다.
+  function demo() {
+  	return '정규 표현식도 지원됩니다.';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del)
 
@@ -279,6 +321,10 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   	return true;
   }
   ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js "return true;" ins="삽입" del="삭제된"
@@ -289,6 +335,24 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   }
   ```
   ````
+  
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='삽입' del='삭제된'" %}
+  function demo() {
+  	console.log('삽입 및 삭제된 마커 타입입니다.');
+  	// return 문은 기본 마커 타입을 사용합니다.
+    return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [구문 강조와 `diff` 유사 구문을 결합합니다.](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax)
 
@@ -300,6 +364,10 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   +   console.log('새롭고 빛나는 코드!')
     }
   ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```diff lang="js"
@@ -311,6 +379,25 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
     }
   ```
   ````
+  
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // 이 전체 블록은 JavaScript로 강조표시됩니다.
+      // 그리고 여전히 diff 마커를 추가할 수 있습니다!
+  -   console.log('제거할 이전 코드')
+  +   console.log('새롭고 빛나는 코드!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Frames 및 titles
 
@@ -326,6 +413,10 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
   // my-test-file.js
   console.log('안녕하세요!');
   ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js
@@ -334,29 +425,80 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
   ```
   ````
 
-- [터미널 창에 제목 추가](https://expressive-code.com/key-features/frames/#terminal-frames)
+  </TabItem>
 
-  ```bash title="종속성 설치 중…"
-  npm install
-  ```
+  <TabItem label="Markdoc">
 
   ````md
-  ```bash title="종속성 설치 중…"
+  ```js
+  // my-test-file.js
+  console.log('안녕하세요!');
+  ```
+  ````
+  
+  </TabItem>
+
+  </Tabs>
+
+- [터미널 창에 제목 추가](https://expressive-code.com/key-features/frames/#terminal-frames)
+
+  ```bash title="의존성 설치 중…"
+  npm install
+  ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```bash title="의존성 설치 중…"
   npm install
   ```
   ````
+  
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="의존성 설치 중…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [`frame="none"`으로 창 프레임 비활성화](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
   ```
+  
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash frame="none"
   echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
   ```
   ````
+  
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Details
 
