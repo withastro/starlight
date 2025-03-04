@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  image: string;
+  href: string;
+}
+
+const { title, image, href } = Astro.props;
+---
+
+<a href={href} class="product-card">
+  <div class="image-container">
+    <img src={image} alt={title} />
+  </div>
+  <h3>{title}</h3>
+</a>
+
+<style>
+  .product-card {
+    display: block;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2/1;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .image-container img {
+    transform: scale(1.05);
+  }
+
+  h3 {
+    padding: 1rem;
+    margin: 0;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+</style>
