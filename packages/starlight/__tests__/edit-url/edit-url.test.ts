@@ -1,4 +1,5 @@
 import { expect, test, vi } from 'vitest';
+import { getRouteDataTestContext } from '../test-utils';
 import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 
@@ -20,7 +21,7 @@ test('synthesizes edit URL using file location and `editLink.baseUrl`', () => {
 		const route = routes[0]!;
 		const data = generateRouteData({
 			props: { ...route, headings: [] },
-			url: new URL('https://example.com'),
+			context: getRouteDataTestContext(),
 		});
 		expect(data.editUrl?.href).toBe(
 			'https://github.com/withastro/starlight/edit/main/docs/src/content/docs/index.mdx'
@@ -30,7 +31,7 @@ test('synthesizes edit URL using file location and `editLink.baseUrl`', () => {
 		const route = routes[1]!;
 		const data = generateRouteData({
 			props: { ...route, headings: [] },
-			url: new URL('https://example.com'),
+			context: getRouteDataTestContext(),
 		});
 		expect(data.editUrl?.href).toBe(
 			'https://github.com/withastro/starlight/edit/main/docs/src/content/docs/getting-started.mdx'
@@ -42,7 +43,7 @@ test('uses frontmatter `editUrl` if defined', () => {
 	const route = routes[2]!;
 	const data = generateRouteData({
 		props: { ...route, headings: [] },
-		url: new URL('https://example.com'),
+		context: getRouteDataTestContext(),
 	});
 	expect(data.editUrl?.href).toBe('https://example.com/custom-edit?link');
 });
