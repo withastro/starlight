@@ -1,0 +1,120 @@
+---
+title: Шаги
+description: Узнайте, как стилизовать нумерованные списки задач для создания пошаговых руководств в Starlight.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Для стилизации нумерованного списка задач, при создании пошаговых руководств, используйте компонент `<Steps>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Steps slot="preview">
+
+1. Создайте новый проект Starlight:
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npm create astro@latest -- --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm create astro --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn create astro --template starlight
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+2. Напишите первую страницу документации.
+
+</Steps>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Steps } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Используйте компонент `<Steps>` для стилизации нумерованных списков задач.
+Это удобно для сложных пошаговых руководств, где каждый шаг должен быть чётко выделен.
+
+Оберните `<Steps>` вокруг стандартного упорядоченного списка Markdown.
+Внутри `<Steps>` применим весь обычный синтаксис Markdown.
+
+<Preview>
+
+````mdx
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Импортируйте компонент в свой MDX-файл:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Оберните `<Steps>` вокруг элементов упорядоченного списка.
+
+</Steps>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% steps %}
+
+1. Импортируйте компонент в свой MDX-файл:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Оберните `<Steps>` вокруг элементов упорядоченного списка.
+
+{% /steps %}
+````
+
+</Fragment>
+
+<Steps slot="preview">
+
+1. Импортируйте компонент в свой MDX-файл:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Оберните `<Steps>` вокруг элементов упорядоченного списка.
+
+</Steps>
+
+</Preview>
+
+## Параметры `<Steps>`
+
+**Реализация:** [`Steps.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Steps.astro)
+
+Компонент `<Steps>` не принимает никаких параметров.

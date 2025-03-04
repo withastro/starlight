@@ -1,0 +1,103 @@
+---
+title: Код
+description: Узнайте, как отображать код с подсветкой синтаксиса в Starlight без блоков кода Markdown.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+Компонент `<Code>` отображает код с подсветкой синтаксиса.
+Это полезно, когда использование [блоков кода Markdown](/ru/guides/authoring-content/#блоки-кода) невозможно, например, для отображения данных, поступающих из внешних источников, таких как файлы, базы данных или API.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Code
+	slot="preview"
+	code={`## Добро пожаловать
+
+Привет из **космоса**!`}
+lang="md"
+title="example.md"
+ins={3}
+/>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { Code } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Используйте компонент `<Code>` для отображения кода с подсветкой синтаксиса, например, при отображении кода, полученного из внешних источников.
+
+См. главу [Компонент кода](https://expressive-code.com/key-features/code-component/) в документации Expressive Code для получения полной информации о параметрах, которые поддерживает `<Code>`.
+
+<Preview>
+
+```mdx
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('Это может быть файл или CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['файл', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% code
+   code="console.log('Это может быть файл или CMS!');"
+   lang="js"
+   title="example.js"
+   meta="'файл' 'CMS'" /%}
+```
+
+</Fragment>
+
+export const exampleCode = `console.log('Это может быть файл или CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['файл', 'CMS'];
+
+<Code
+	slot="preview"
+	code={exampleCode}
+	lang="js"
+	title={fileName}
+	mark={highlights}
+/>
+
+</Preview>
+
+### Отображение импортированного кода
+
+Используйте [суффикс `?raw`](https://vite.dev/guide/assets#importing-asset-as-string) в MDX-файлах и компонентах Astro, чтобы импортировать любой файл кода в виде строки.
+Затем можно передать эту импортированную строку компоненту `<Code>`, чтобы включить её на свою страницу.
+
+<Preview>
+
+```mdx "?raw"
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/tsconfig.json?raw';
+
+<Code code={importedCode} lang="json" title="tsconfig.json" />
+```
+
+import importedCode from '../../../../../../examples/basics/tsconfig.json?raw';
+
+<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
+
+</Preview>
+
+## Параметры `<Code>`
+
+**Реализация:** [`Code.astro`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/components/Code.astro)
+
+Компонент `<Code>` принимает все параметры, описанные в документации [Компонент кода](https://expressive-code.com/key-features/code-component/#available-props) Expressive Code.

@@ -1,0 +1,614 @@
+---
+title: Referensi Konfigurasi
+description: Ringkasan dari semua opsi konfigurasi yang didukung oleh Starlight.
+---
+
+## Mengonfigurasi integrasi `starlight`
+
+Starlight adalah integrasi yang dibangun di atas web framework [Astro](https://astro.build). Anda dapat mengonfigurasi proyek Anda di dalam file konfigurasi `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Website dokumentasi yang memukau',
+		}),
+	],
+});
+```
+
+Anda dapat meneruskan opsi-opsi berikut ke integrasi `starlight`.
+
+### `title` (wajib)
+
+**type:** `string | Record<string, string>`
+
+Atur judul untuk website Anda. Akan digunakan dalam metadata dan di judul tab browser.
+
+Nilainya dapat berupa string, atau untuk situs multibahasa, objek dengan nilai untuk setiap bahasa yang berbeda.
+Saat menggunakan bentuk objek, nama propertinya harus berupa tag BCP-47 (misalnya `en`, `ar`, atau `zh-CN`):
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
+
+### `description`
+
+**type:** `string`
+
+Atur deskripsi untuk website Anda. Digunakan dalam metadata yang dibagikan dengan mesin pencari di tag `<meta name="description">` jika `description` tidak diatur dalam frontmatter halaman.
+
+### `logo`
+
+**type:** [`LogoConfig`](#logoconfig)
+
+Atur gambar logo untuk ditampilkan di bilah navigasi bersamaan dengan atau sebagai pengganti judul website. Anda dapat mengatur properti `src` tunggal atau mengatur sumber gambar terpisah untuk mode `light` dan `dark`.
+
+```js
+starlight({
+	logo: {
+		src: './src/assets/logo-saya.svg',
+	},
+});
+```
+
+#### `LogoConfig`
+
+```ts
+type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
+	| { src: string }
+	| { light: string; dark: string }
+);
+```
+
+### `tableOfContents`
+
+**type:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
+**default:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+
+Konfigurasi daftar isi yang ditampilkan di sebelah kanan setiap halaman. Secara default, judul `<h2>` dan `<h3>` akan dimasukkan dalam daftar isi ini.
+
+### `editLink`
+
+**type:** `{ baseUrl: string }`
+
+Aktifkan tautan "Edit halaman ini" dengan mengatur base URL yang harus digunakan. Tautan akhir akan menjadi `editLink.baseUrl` + path halaman saat ini. Sebagai contoh, untuk mengaktifkan pengeditan halaman di repositori `withastro/starlight` di GitHub:
+
+```js
+starlight({
+	editLink: {
+		baseUrl: 'https://github.com/withastro/starlight/edit/main/',
+	},
+});
+```
+
+Dengan konfigurasi ini, halaman `/introduction` akan memiliki tautan untuk mengedit yang mengarah ke `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md`.
+
+### `sidebar`
+
+**type:** [`SidebarItem[]`](#sidebaritem)
+
+Konfigurasikan item navigasi sidebar website Anda.
+
+Sidebar adalah array dari tautan dan grup tautan.
+Kecuali item yang menggunakan `slug`, setiap item harus memiliki `label` dan salah satu properti berikut:
+
+- `link` — tautan tunggal ke URL tertentu, misalnya `'/home'` atau `'https://example.com'`.
+
+- `slug` — referensi ke halaman internal, misalnya `'guides/getting-started'`.
+
+- `items` — array yang berisikan lebih banyak tautan sidebar dan sub-grup.
+
+- `autogenerate` — objek yang menentukan direktori mana di website dokumentasi Anda yang akan digunakan untuk secara otomatis menghasilkan grup tautan.
+
+Tautan internal juga dapat ditentukan sebagai string, bukan objek dengan properti `slug`.
+
+```js
+starlight({
+	sidebar: [
+		// Item tautan tunggal dengan label "Beranda".
+		{ label: 'Home', link: '/' },
+		// Grup dengan label "Mulai dari Sini" yang berisi dua tautan.
+		{
+			label: 'Mulai dari Sini',
+			items: [
+				// Menggunakan `slug` untuk tautan internal.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// Atau menggunakan singkatan untuk tautan internal.
+				'tutorial',
+				'next-steps',
+			],
+		},
+		// Sebuah grup yang menghubungkan ke semua halaman di direktori referensi.
+		{
+			label: 'Referensi',
+			autogenerate: { directory: 'reference' },
+		},
+	],
+});
+```
+
+#### Urutan
+
+Grup sidebar yang dihasilkan secara otomatis diurutkan berdasarkan nama file secara alfabetis.
+Sebagai contoh, halaman yang dihasilkan dari `astro.md` akan muncul di atas halaman untuk `starlight.md`.
+
+#### Grup yang bisa dilipat
+
+Grup tautan dilebarkan secara default. Anda dapat mengubah perilaku ini dengan mengatur properti `collapsed` dari grup tersebut menjadi `true`.
+
+Sub-grup yang dihasilkan secara otomatis akan mengikuti properti `collapsed` dari parent group-nya secara default. Atur properti `autogenerate.collapsed` untuk mengganti pengaturan ini.
+
+```js {5,13}
+sidebar: [
+  // Grup tautan yang terlipat
+  {
+    label: 'Grup tautan yang Terlipat',
+    collapsed: true,
+    items: ['intro', 'next-steps'],
+  },
+  // Grup yang dilebarkan yang berisi autogenerated sub-grup yang terlipat.
+  {
+    label: 'Referensi',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
+#### Menerjemahkan label
+
+Jika website Anda mendukung banyak bahasa, `label` dari setiap item dianggap berada dalam bahasa default. Anda dapat mengatur properti `translations` untuk menyediakan label dalam bahasa-bahasa lain yang didukung:
+
+```js {5,9,14}
+sidebar: [
+  // Contoh sidebar dengan label-label yang diterjemahkan ke Bahasa Portugis Brasil.
+  {
+    label: 'Mulai dari Sini',
+    translations: { 'pt-BR': 'Comece Aqui' },
+    items: [
+      {
+        label: 'Pengantar',
+        translations: { 'pt-BR': 'Introdução' },
+        link: '/getting-started',
+      },
+      {
+        label: 'Struktur Proyek',
+        translations: { 'pt-BR': 'Estrutura de Projetos' },
+        link: '/structure',
+      },
+    ],
+  },
+],
+```
+
+#### `SidebarItem`
+
+```ts
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Tauntan
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Tautan internal
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Group tautan
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Grup tautan yang dibuat secara otomatis
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
+```
+
+#### `BadgeConfig`
+
+```ts
+interface BadgeConfig {
+	text: string;
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
+}
+```
+
+### `locales`
+
+**type:** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
+
+[Mengonfigurasi internasionalisasi (i18n)](/id/guides/i18n/) untuk website Anda dengan mengatur `locales` yang mana yang didukung.
+
+Setiap entri harus menggunakan direktori di mana file-file bahasa tersebut disimpan sebagai nama propertinya.
+
+```js
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'My Site',
+			// Tetapkan Bahasa Inggris sebagai bahasa default untuk website ini.
+			defaultLocale: 'en',
+			locales: {
+				// Dokumentasi berbahasa Inggris di `src/content/docs/en/`
+				en: {
+					label: 'English',
+				},
+				// Dokumentasi berbahasa Cina (yang disederhanakan) di `src/content/docs/zh-cn/`
+				'zh-cn': {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
+				// Dokumentasi berbahasa Arab di `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
+				},
+			},
+		}),
+	],
+});
+```
+
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+	label: string;
+	lang?: string;
+	dir?: 'ltr' | 'rtl';
+}
+```
+
+Anda dapat mengatur opsi berikut untuk setiap bahasa:
+
+##### `label` (wajib)
+
+**type:** `string`
+
+Label untuk bahasa ini yang ditampilkan kepada pengguna, misalnya di pemilih bahasa. Biasanya, Anda ingin menggunakan nama bahasa ini seperti yang diharapkan oleh pengguna yang menggunakan bahasa tersebut, contohnya `"English"`, `"العربية"`, atau `"简体中文"`.
+
+##### `lang`
+
+**type:** `string`
+
+Tag BCP-47 untuk bahasa saat ini, misalnya `"en"`, `"ar"`, atau `"zh-CN"`. Jika tidak diatur, nama direktori bahasa akan digunakan secara default. Tag bahasa dengan subtag regional (misalnya `"pt-BR"` atau `"en-US"`) akan menggunakan terjemahan UI bawaan untuk bahasa dasarnya jika tidak ada terjemahan khusus untuk wilayah ditemukan.
+
+##### `dir`
+
+**type:** `'ltr' | 'rtl'`
+
+Arah penulisan bahasa ini; `"ltr"` untuk kiri-ke-kanan (default) atau `"rtl"` untuk kanan-ke-kiri.
+
+#### Bahasa utama
+
+Anda dapat serve bahasa default tanpa direktori `/lang/` dengan mengatur bahasa `root`:
+
+```js {3-6}
+starlight({
+	locales: {
+		root: {
+			label: 'English',
+			lang: 'en',
+		},
+		fr: {
+			label: 'Français',
+		},
+	},
+});
+```
+
+Sebagai contoh, ini memungkinkan Anda untuk serve `/getting-started/` sebagai path untuk Bahasa Inggris dan menggunakan `/fr/getting-started/` untuk halaman yang sama dalam Bahasa Prancis.
+
+### `defaultLocale`
+
+**type:** `string`
+
+Menetapkan bahasa yang menjadi default untuk website ini.
+Nilainya harus cocok dengan salah satu properti objek [`locales`](#locales) Anda.
+(Jika bahasa default Anda adalah [bahasa utama](#bahasa-utama) Anda, Anda dapat melewatkannya.)
+
+Bahasa default akan digunakan untuk memberikan konten cadangan ketika terjemahan tidak tersedia.
+
+### `social`
+
+import SocialLinksType from '~/components/social-links-type.astro';
+
+**type:** <SocialLinksType />
+
+Rincian opsional tentang akun media sosial untuk website ini. Menambahkan salah satu dari ini akan menampilkan mereka sebagai tautan ikon di header website.
+
+```js
+starlight({
+	social: {
+		codeberg: 'https://codeberg.org/knut/examples',
+		discord: 'https://astro.build/chat',
+		github: 'https://github.com/withastro/starlight',
+		gitlab: 'https://gitlab.com/delucis',
+		linkedin: 'https://www.linkedin.com/company/astroinc',
+		mastodon: 'https://m.webtoo.ls/@astro',
+		threads: 'https://www.threads.net/@nmoodev',
+		twitch: 'https://www.twitch.tv/bholmesdev',
+		twitter: 'https://twitter.com/astrodotbuild',
+		'x.com': 'https://x.com/astrodotbuild',
+		youtube: 'https://youtube.com/@astrodotbuild',
+	},
+});
+```
+
+### `customCss`
+
+**type:** `string[]`
+
+Sediakan file CSS untuk menyesuaikan tampilan dan nuansa website Starlight Anda.
+
+Mendukung file CSS lokal yang bersifat relatif terhadap path proyek Anda, misalnya `'./src/custom.css'`, dan CSS yang Anda instal sebagai modul npm, misalnya `'@fontsource/roboto'`.
+
+```js
+starlight({
+	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
+});
+```
+
+### `expressiveCode`
+
+**type:** `StarlightExpressiveCodeOptions | boolean`  
+**default:** `true`
+
+Starlight menggunakan [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) untuk merender blok kode dan menambahkan dukungan untuk menyorot bagian contoh kode, menambahkan nama file ke blok kode, dan banyak lagi.
+Lihat [panduan “Blok kode”](/id/guides/authoring-content/#code-blocks) untuk mempelajari cara menggunakan sintaksis Expressive Code dalam konten Markdown dan MDX Anda.
+
+Anda dapat menggunakan salah satu [opsi konfigurasi Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) standar serta beberapa properti khusus Starlight, dengan mengaturnya dalam opsi `expressiveCode` Starlight.
+Misalnya, gunakan opsi `styleOverrides` Expressive Code untuk mengganti CSS default. Ini memungkinkan kustomisasi seperti memberi blok kode Anda sudut membulat:
+
+```js ins={2-4}
+starlight({
+	expressiveCode: {
+		styleOverrides: { borderRadius: '0.5rem' },
+	},
+});
+```
+
+Jika Anda ingin menonaktifkan Expressive Code, gunakan `expressiveCode: false` dalam konfigurasi Starlight Anda:
+
+```js ins={2}
+starlight({
+	expressiveCode: false,
+});
+```
+
+Selain opsi Expressive Code standar, Anda juga dapat mengatur properti khusus Starlight berikut dalam konfigurasi `expressiveCode` Anda untuk lebih menyesuaikan aturan tema untuk blok kode Anda:
+
+#### `themes`
+
+**type:** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
+**default:** `['starlight-dark', 'starlight-light']`
+
+Mengatur tema yang digunakan untuk memberi gaya pada blok kode.
+Lihat [Dokumentasi Expressive Code `themes`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) untuk detail format tema yang didukung.
+
+Starlight menggunakan varian gelap dan terang dari [tema Night Owl](https://github.com/sdras/night-owl-vscode-theme) Sarah Drasner secara default.
+
+Jika Anda menyediakan setidaknya satu tema gelap dan satu tema terang, Starlight akan secara otomatis menjaga tema blok kode aktif tetap sinkron dengan tema situs saat ini.
+Konfigurasikan aturan ini dengan opsi [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
+
+#### `useStarlightDarkModeSwitch`
+
+**type:** `boolean`  
+**default:** `true`
+
+Jika `true`, blok kode secara otomatis beralih antara tema terang dan gelap saat tema situs berubah.
+Jika `false`, Anda harus menambahkan CSS secara manual untuk menangani peralihan antara beberapa tema.
+
+:::note
+Saat mengatur `themes`, Anda harus menyediakan setidaknya satu tema gelap dan satu tema terang agar sakelar mode gelap Starlight dapat berfungsi.
+:::
+
+#### `useStarlightUiThemeColors`
+
+**type:** `boolean`  
+**default:** `true` jika `themes` tidak diatur, kalau tidak `false`
+
+Jika `true`, variabel CSS Starlight digunakan untuk warna elemen UI blok kode (latar belakang, tombol, bayangan, dll.), yang sesuai dengan [tema warna situs](/id/guides/css-and-tailwind/#tema).
+Jika `false`, warna yang disediakan oleh tema penyorotan sintaksis aktif digunakan untuk elemen-elemen ini.
+
+:::note
+Saat menggunakan tema khusus dan menyetelnya ke `true`, Anda harus menyediakan setidaknya satu tema gelap dan satu tema terang untuk memastikan kontras warna yang tepat.
+:::
+
+### `pagefind`
+
+**type:** `boolean`  
+**default:** `true`
+
+Tentukan apakah penyedia pencarian situs default Starlight [Pagefind](https://pagefind.app/) diaktifkan.
+
+Atur ke `false` untuk menonaktifkan pengindeksan situs Anda dengan Pagefind.
+Ini juga akan menyembunyikan UI pencarian default jika digunakan.
+
+Pagefind tidak dapat diaktifkan saat opsi [`prerender`](#prerender) diatur ke `false`.
+
+### `prerender`
+
+**type:** `boolean`  
+**default:** `true`
+
+Tentukan apakah halaman Starlight harus dirender terlebih dahulu ke HTML statis atau dirender sesuai permintaan oleh [adaptor SSR](https://docs.astro.build/en/guides/server-side-rendering/).
+
+Halaman Starlight dirender terlebih dahulu secara default.
+Jika Anda menggunakan adaptor SSR dan ingin merender halaman Starlight sesuai permintaan, tetapkan `prerender: false`.
+
+### `head`
+
+**type:** [`HeadConfig[]`](#headconfig)
+
+Tambahkan tag kustom ke `<head>` website Starlight Anda.
+Bisa berguna untuk menambahkan script analitik dan skrip pihak ketiga lainnya.
+
+```js
+starlight({
+	head: [
+		// Contoh: menambahkan tag skrip analitik Fathom.
+		{
+			tag: 'script',
+			attrs: {
+				src: 'https://cdn.usefathom.com/script.js',
+				'data-site': 'MY-FATHOM-ID',
+				defer: true,
+			},
+		},
+	],
+});
+```
+
+Entri dalam `head` dikonversi langsung ke elemen HTML dan tidak melewati pemrosesan [skrip](https://docs.astro.build/en/guides/client-side-scripts/#script-processing) atau [gaya](https://docs.astro.build/en/guides/styling/#styling-in-astro) Astro.
+Jika Anda perlu mengimpor aset lokal seperti skrip, gaya, atau gambar, [ganti komponen Head](/id/guides/overriding-components/#menggunakan-data-halaman).
+
+#### `HeadConfig`
+
+```ts
+interface HeadConfig {
+	tag: string;
+	attrs?: Record<string, string | boolean | undefined>;
+	content?: string;
+}
+```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+Atur apakah footer menampilkan kapan halaman terakhir diperbarui.
+
+Secara default, fitur ini mengandalkan histori Git repositori Anda dan mungkin tidak akurat pada beberapa deployment platform yang melakukan [shallow clones](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt). Halaman dapat mengesampingkan pengaturan ini atau tanggal Git-based menggunakan kolom [`lastUpdated` pada frontmatter](/id/reference/frontmatter/#lastupdated).
+
+### `pagination`
+
+**type:** `boolean`  
+**default:** `true`
+
+Tentukan apakah footer harus menampilkan tautan ke halaman sebelumnya dan halaman berikutnya.
+
+Halaman dapat mengesampingkan pengaturan ini atau teks tautan dan/atau URL menggunakan kolom [`prev`](/id/reference/frontmatter/#prev) dan [`next`](/id/reference/frontmatter/#next) pada frontmatter.
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+Atur path favicon default untuk website Anda yang harus berada di direktori `public/` dan merupakan file ikon yang valid (`.ico`, `.gif`, `.jpg`, `.png`, atau `.svg`).
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+Jika Anda perlu mengatur varian tambahan atau favicon cadangan, Anda dapat menambahkan tag menggunakan opsi [`head`](#head):
+
+```js
+starlight({
+	favicon: '/images/favicon.svg',
+	head: [
+		// Tambahkan favicon ICO cadangan untuk Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
+});
+```
+
+### `titleDelimiter`
+
+**type:** `string`  
+**default:** `'|'`
+
+Atur pemisah antara judul halaman dan judul website di tag `<title>` halaman, yang ditampilkan pada tab browser.
+
+Secara default, setiap halaman memiliki `<title>` berupa `Judul Halaman | Judul Website`.
+Sebagai contoh, halaman ini berjudul "Referensi Konfigurasi" dan website ini berjudul "Starlight", sehingga `<title>` untuk halaman ini adalah "Referensi Konfigurasi | Starlight".
+
+### `disable404Route`
+
+**type:** `boolean`  
+**default:** `false`
+
+Menonaktifkan penyuntikan [halaman 404](https://docs.astro.build/en/core-concepts/astro-pages/#custom-404-error-page) bawaan Starlight. Untuk menggunakan kustom rute `src/pages/404.astro` di proyek Anda, tetapkan opsi ini ke `true`.
+
+### `components`
+
+**type:** `Record<string, string>`
+
+Berikan path ke komponen untuk mengganti implementasi default Starlight.
+
+```js
+starlight({
+	components: {
+		SocialLinks: './src/components/MySocialLinks.astro',
+	},
+});
+```
+
+Lihat [Referensi Penggantian](/id/reference/overrides/) untuk rincian semua komponen yang dapat Anda ganti.
+
+### `plugins`
+
+**type:** [`StarlightPlugin[]`](/id/reference/plugins/#quick-api-reference)
+
+Perluas Starlight dengan plugin khusus.
+Plugin menerapkan perubahan pada proyek Anda untuk mengubah atau menambah fitur Starlight.
+
+Kunjungi [pajangan plugin](/id/resources/plugins/#plugins) untuk melihat daftar plugin yang tersedia.
+
+```js
+starlight({
+	plugins: [starlightPlugin()],
+});
+```
+
+Lihat [Referensi Plugin](/id/reference/plugins/) untuk detail tentang cara membuat plugin Anda sendiri.
+
+### `credits`
+
+Aktifkan tampilan tautan “Built with Starlight” di footer situs Anda.
+
+```js
+starlight({
+	credits: true,
+});
+```

@@ -1,0 +1,103 @@
+---
+title: コード
+description: StarlightでMarkdownのコードブロックを使わずにシンタックスハイライトされたコードを表示する方法を学びましょう。
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+`<Code>`コンポーネントは、シンタックスハイライトされたコードをレンダリングします。
+これは、[Markdownのコードブロック](/ja/guides/authoring-content/#コード)を使用できない場合、例えば、ファイルやデータベース、APIから取得したデータを表示する場合に便利です。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Code
+	slot="preview"
+	code={`## ようこそ
+
+**宇宙**からこんにちは！`}
+lang="md"
+title="example.md"
+ins={3}
+/>
+
+</Preview>
+
+## インポート
+
+```tsx
+import { Code } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+外部ソースから取得したコードを表示する場合などに、`<Code>`コンポーネントを使用してシンタックスハイライトされたコードをレンダリングします。
+
+完全な使用方法と利用可能なプロパティのリストについては、[Expressive Codeの「Codeコンポーネント」ドキュメント](https://expressive-code.com/key-features/code-component/)を参照してください。
+
+<Preview>
+
+```mdx
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('これはファイルやCMSから来る可能性がある！');`;
+export const fileName = 'example.js';
+export const highlights = ['ファイル', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% code
+   code="console.log('これはファイルやCMSから来る可能性がある！');"
+   lang="js"
+   title="example.js"
+   meta="'ファイル' 'CMS'" /%}
+```
+
+</Fragment>
+
+export const exampleCode = `console.log('これはファイルやCMSから来る可能性がある！');`;
+export const fileName = 'example.js';
+export const highlights = ['ファイル', 'CMS'];
+
+<Code
+	slot="preview"
+	code={exampleCode}
+	lang="js"
+	title={fileName}
+	mark={highlights}
+/>
+
+</Preview>
+
+### インポートしたコードを表示する
+
+MDXファイルやAstroコンポーネント内で、[Viteの`?raw`インポートサフィックス](https://ja.vite.dev/guide/assets#importing-asset-as-string)を使用して、任意のコードファイルを文字列としてインポートできます。
+その後、このインポートした文字列を`<Code>`コンポーネントに渡して、ページにコードを表示することができます。
+
+<Preview>
+
+```mdx "?raw"
+# src/content/docs/example.mdx
+
+import { Code } from '@astrojs/starlight/components';
+import importedCode from '/tsconfig.json?raw';
+
+<Code code={importedCode} lang="json" title="tsconfig.json" />
+```
+
+import importedCode from '../../../../../../examples/basics/tsconfig.json?raw';
+
+<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
+
+</Preview>
+
+## `<Code>` プロパティ
+
+**実装:** [`Code.astro`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/components/Code.astro)
+
+`<Code>`コンポーネントは、[Expressive Codeの「Codeコンポーネント」ドキュメント](https://expressive-code.com/key-features/code-component/#available-props)に記載されているすべてのプロパティを受け付けます。
