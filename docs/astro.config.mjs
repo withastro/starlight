@@ -37,7 +37,6 @@ export default defineConfig({
 		starlight({
 			title: 'INMO Support',
 			defaultLocale: 'root',
-			title: 'Starlight',
 			logo: {
 				light: '/src/assets/inmo-logo-black.svg',
 				dark: '/src/assets/inmo-logo-white.svg',
@@ -48,8 +47,7 @@ export default defineConfig({
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
 			social: {
-				website: 'https://www.inmoxr.com',
-				x: 'https://x.com/inmoxreality',
+				x.com: 'https://x.com/inmoxreality',
 				facebook: 'https://www.facebook.com/inmocares',
 				instagram: 'https://www.instagram.com/inmo.xr/',
 				youtube: 'https://www.youtube.com/@inmo-xr',
