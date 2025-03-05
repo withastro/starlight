@@ -73,34 +73,36 @@ export default defineConfig({
 			],
 			customCss: ['./src/assets/landing.css'],
 			locales,
-			sidebar: {
-				// INMO GO 文档结构
-				'/go/': [
-				  {
-					label: 'Getting Started',
-					items: [
-					  { label: 'Overview', link: '/go/' },
-					  { label: 'Quick Start', link: '/go/quick-start/' },
-					],
-				  },
-				  {
-					label: 'User Guide',
-					items: [
-					  { label: 'User Manual', link: '/go/manual/' },
-					  { label: 'Features', link: '/go/features/' },
-					  { label: 'Settings', link: '/go/settings/' },
-					],
-				  },
-				  {
-					label: 'Support',
-					items: [
-					  { label: 'Troubleshooting', link: '/go/troubleshooting/' },
-					  { label: 'FAQ', link: '/go/faq/' },
-					],
-				  },
-				],
-				// 其他产品的文档结构类似...
-			  },
+			sidebar: [
+				{
+				  label: 'INMO GO',
+				  items: [
+					{
+					  label: 'Getting Started',
+					  items: [
+						{ label: 'Overview', link: '/go/' },
+						{ label: 'Quick Start', link: '/go/quick-start/' },
+					  ],
+					},
+					{
+					  label: 'User Guide',
+					  items: [
+						{ label: 'User Manual', link: '/go/manual/' },
+						{ label: 'Features', link: '/go/features/' },
+						{ label: 'Settings', link: '/go/settings/' },
+					  ],
+					},
+					{
+					  label: 'Support',
+					  items: [
+						{ label: 'Troubleshooting', link: '/go/troubleshooting/' },
+						{ label: 'FAQ', link: '/go/faq/' },
+					  ],
+					},
+				  ],
+				},
+				// 可以继续添加其他产品的文档结构
+			  ],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
