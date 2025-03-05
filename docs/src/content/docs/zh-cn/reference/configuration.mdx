@@ -453,7 +453,10 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 当 [`prerender`](#prerender) 选项设置为 `false` 时，无法启用 Pagefind。
 
-将 `pagefind` 设置为对象，以配置 Pagefind 搜索客户端。有关更多使用 `pagefind.ranking` 选项来控制搜索结果是如何排序的细节，请参阅 Pagefind 文档中的 ["自定义 Pagefind 的 结果排序"](https://pagefind.app/docs/ranking/)。
+将 `pagefind` 设置为对象，以配置 Pagefind 搜索客户端。
+
+- 查看 Pagefind 文档中的 [“自定义 Pagefind 的结果排序”](https://pagefind.app/docs/ranking/)，了解如何使用 `pagefind.ranking` 选项来控制搜索结果排序的计算。
+- 查看 Pagefind 文档中的 [“搜索多个站点”](https://pagefind.app/docs/multisite/)，了解如何使用 `pagefind.mergeIndex` 选项来控制如何跨多个站点搜索。
 
 #### `PagefindOptions`
 
@@ -465,6 +468,21 @@ interface PagefindOptions {
 		termSaturation?: number;
 		termSimilarity?: number;
 	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
 }
 ```
 
