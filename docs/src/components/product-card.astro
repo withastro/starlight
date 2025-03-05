@@ -18,17 +18,19 @@ const { title, image, href } = Astro.props;
 <style>
   .product-card {
     display: block;
-    background: white;
+    background: var(--sl-color-bg);
     border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: var(--sl-color-text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--sl-shadow-sm);
+    border: 1px solid var(--sl-color-border);
   }
 
   .product-card:hover {
     transform: translateY(-4px);
+    box-shadow: var(--sl-shadow-md);
   }
 
   .image-container {

@@ -48,7 +48,7 @@ export default defineConfig({
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
 			social: {
-				website： ‘https://www.inmoxr.com’
+				website: 'https://www.inmoxr.com',
 				x: 'https://x.com/inmoxreality',
 				facebook: 'https://www.facebook.com/inmocares',
 				instagram: 'https://www.instagram.com/inmo.xr/',

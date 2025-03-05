@@ -7,12 +7,6 @@ description: INMO Product Support provides product manuals, FAQs, and technical 
 template: splash
 editUrl: false
 lastUpdated: false
-hero:
-  title: Product Support
-  tagline: We're here to help you with any questions or issues you may have
-  image:
-    file: ~/assets/hero-star.webp
-  actions: []
 ---
 
 import { CardGrid, Card, LinkCard } from '@astrojs/starlight/components';
@@ -43,6 +37,11 @@ import ProductCard from '~/components/product-card.astro';
     icon="setting"
     href="/develop/"
   />
+  <LinkCard 
+    title="Warranty"
+    icon="shield"
+    href="/Warranty/"
+  />
 </CardGrid>
 
 {/* Product Support Section */}
@@ -52,22 +51,22 @@ import ProductCard from '~/components/product-card.astro';
   <CardGrid>
     <ProductCard 
       title="INMO Air3"
-      image="/assets/products/inmo-air3-800x400.png"
+      image="/images/products/inmo-air3-800x400.png"
       href="/products/air3/"
     />
     <ProductCard 
       title="INMO GO2"
-      image="/assets/products/inmo-go2-800x400.png"
+      image="/images/products/inmo-go2-800x400.png"
       href="/products/go2/"
     />
     <ProductCard 
       title="INMO Air2"
-      image="/assets/products/inmo-air2-800x400.png"
+      image="/images/products/inmo-air2-800x400.png"
       href="/products/air2/"
     />
     <ProductCard 
       title="INMO GO"
-      image="/assets/products/inmo-go-800x400.png"
+      image="/images/products/inmo-go-800x400.png"
       href="/products/go/"
     />
   </CardGrid>
