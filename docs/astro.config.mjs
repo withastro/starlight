@@ -44,14 +44,14 @@ export default defineConfig({
 			},
 			lastUpdated: true,
 			editLink: {
-				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
+				baseUrl: 'https://github.com/INMOXR/support/tree/main/docs/src/content/docs',
 			},
 			social: {
 				twitter: 'https://x.com/inmoxreality',
 				facebook: 'https://www.facebook.com/inmocares',
 				instagram: 'https://www.instagram.com/inmo.xr/',
 				youtube: 'https://www.youtube.com/@inmo-xr',
-				discord: 'https://astro.build/chat',
+				discord: 'https://discord.gg/daQShJJH',
 			},
 			head: [
 				{
