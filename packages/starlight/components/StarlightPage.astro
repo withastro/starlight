@@ -10,7 +10,7 @@ export type StarlightPageProps = Props;
 
 await attachRouteDataAndRunMiddleware(
 	Astro,
-	await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url })
+	await generateStarlightPageRouteData({ props: Astro.props, context: Astro })
 );
 ---
 
