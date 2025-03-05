@@ -74,35 +74,37 @@ export default defineConfig({
 			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
-				{
-				  label: 'INMO GO',
-				  items: [
-					{
-					  label: 'Getting Started',
-					  items: [
-						{ label: 'Overview', link: '/go/' },
-						{ label: 'Quick Start', link: '/go/quick-start/' },
-					  ],
-					},
-					{
-					  label: 'User Guide',
-					  items: [
-						{ label: 'User Manual', link: '/go/manual/' },
-						{ label: 'Features', link: '/go/features/' },
-						{ label: 'Settings', link: '/go/settings/' },
-					  ],
-					},
-					{
-					  label: 'Support',
-					  items: [
-						{ label: 'Troubleshooting', link: '/go/troubleshooting/' },
-						{ label: 'FAQ', link: '/go/faq/' },
-					  ],
-					},
-				  ],
-				},
-				// 可以继续添加其他产品的文档结构
-			  ],
+                {
+                  label: 'Products',
+                  autogenerate: {
+                    directory: 'products'
+                  }
+                },
+                {
+                  label: 'INMO GO',
+                  autogenerate: {
+                    directory: 'go'
+                  }
+                },
+                {
+                  label: 'INMO GO2',
+                  autogenerate: {
+                    directory: 'go2'
+                  }
+                },
+                {
+                  label: 'INMO Air2',
+                  autogenerate: {
+                    directory: 'air2'
+                  }
+                },
+                {
+                  label: 'INMO Air3',
+                  autogenerate: {
+                    directory: 'air3'
+                  }
+                }
+              ],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
