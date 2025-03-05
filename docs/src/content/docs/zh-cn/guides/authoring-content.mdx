@@ -245,6 +245,10 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js {2-3}
   function demo() {
@@ -253,6 +257,23 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdown/MDX">
+
+  ````md
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// 这一行 (#2) 以及下一行被高亮显示
+  	return '这是本代码段的第 3 行';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [使用 `" "` 标记或正则表达式标出文本字符串](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
@@ -263,6 +284,10 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "单个词组" /甚.*表达式/
   // 单个词组也能被高亮显示
@@ -271,6 +296,23 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'单个词组' /甚.*表达式/" %}
+  // 单个词组也能被高亮显示
+  function demo() {
+  	return '甚至支持使用正则表达式';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [使用 `ins` 或 `del` 来标记行或文本为插入或删除](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
@@ -282,6 +324,11 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   }
   ```
 
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "return true;" ins="插入" del="删除"
   function demo() {
@@ -291,6 +338,24 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='插入' del='删除'" %}
+  function demo() {
+  	console.log('这是插入以及删除类型的标记');
+  	// 返回语句使用默认标记类型
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [混合语法高亮和类 `diff` 语法](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
@@ -303,6 +368,10 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -313,6 +382,25 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // 这整个代码块都会被作为 JavaScript 高亮
+      // 而且我们还可以给它添加 diff 标记！
+  -   console.log('旧的不去')
+  +   console.log('新的不来')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### 边框和标题
 
@@ -329,6 +417,10 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   console.log('Hello World!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // my-test-file.js
@@ -336,17 +428,50 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   ```
   ````
 
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
 - [给终端窗口添加一个标题](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="安装依赖…"
   npm install
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+  
   ````md
   ```bash title="安装依赖…"
   npm install
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="安装依赖…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [使用 `frame="none"` 禁用边框](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
@@ -354,11 +479,29 @@ Expressive Code 提供了几种自定义你的代码示例视觉外观的选项�
   echo "这个代码块即使使用了 bash 语言也不会被显示成终端窗口"
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```bash frame="none"
   echo "这个代码块即使使用了 bash 语言也不会被显示成终端窗口"
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "这个代码块即使使用了 bash 语言也不会被显示成终端窗口"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## 详细信息
 
