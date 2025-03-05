@@ -73,11 +73,11 @@ export default defineConfig({
 				  items: [
 					{
 					  label: 'Getting Started',
-					  autogenerate: { directory: 'quick-start' },
+					  autogenerate: { directory: '/go/quick-start' },
 					},
 					{
 					  label: 'Troubleshooting',
-					  autogenerate: { directory: 'troubleshooting' },
+					  autogenerate: { directory: '/go/troubleshooting' },
 					},
 				  ],
 				},
