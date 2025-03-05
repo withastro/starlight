@@ -65,20 +65,25 @@ import ProductCard from '~/components/product-card.astro';
 </div>
 
 {/* Still Need Help Section */}
-<div style="display: flex; justify-content: center; gap: 4rem;">
-  <a href="mailto:support@inmoxr.com" style="text-decoration: none; color: inherit;">
+<div style="margin-top: 5rem; text-align: center; padding-bottom: 3rem;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Still Need Help?</h2>
+  <p style="font-size: 1.2rem; margin-bottom: 3rem;">We're happy to assist you whenever you need us.</p>
+  
+  <div style="display: flex; justify-content: center; gap: 4rem;">
+    <a href="mailto:support@inmoxr.com" style="text-decoration: none; color: inherit;">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #f5f5f5; display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
+          <img src="/icons/24hours.svg" alt="24/7 Support" style="width: 40px; height: 40px;" />
+        </div>
+        <span style="font-size: 1.2rem;">Email us</span>
+      </div>
+    </a>
+    
     <div style="display: flex; flex-direction: column; align-items: center;">
       <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #f5f5f5; display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-        <img src="/icons/24hours.svg" alt="24/7 Support" style="width: 40px; height: 40px;" />
+        <img src="/icons/live-chat.svg" alt="Live Chat" style="width: 40px; height: 40px;" />
       </div>
-      <span style="font-size: 1.2rem;">Email us</span>
+      <span style="font-size: 1.2rem;">Live Chat</span>
     </div>
-  </a>
-  
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #f5f5f5; display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-      <img src="/icons/livechat.svg" alt="Live Chat" style="width: 40px; height: 40px;" />
-    </div>
-    <span style="font-size: 1.2rem;">Live Chat</span>
   </div>
-  </div>
+</div>
