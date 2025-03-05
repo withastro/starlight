@@ -73,25 +73,11 @@ export default defineConfig({
 				  items: [
 					{
 					  label: 'Getting Started',
-					  items: [
-						{ label: 'Overview', link: '/go/' },
-						{ label: 'Quick Start', link: '/go/quick-start/' },
-					  ],
+					  autogenerate: { directory: 'quick-start' },
 					},
 					{
-					  label: 'User Guide',
-					  items: [
-						{ label: 'User Manual', link: '/go/manual/' },
-						{ label: 'Features', link: '/go/features/' },
-						{ label: 'Settings', link: '/go/settings/' },
-					  ],
-					},
-					{
-					  label: 'Support',
-					  items: [
-						{ label: 'Troubleshooting', link: '/go/troubleshooting/' },
-						{ label: 'FAQ', link: '/go/faq/' },
-					  ],
+					  label: 'Troubleshooting',
+					  autogenerate: { directory: 'troubleshooting' },
 					},
 				  ],
 				},
