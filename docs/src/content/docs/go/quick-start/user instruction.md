@@ -17,19 +17,15 @@ Download the  INMO App
 
 Step2 Power On
 
-（缺图：按钮图例）
+（缺图：按钮图例)
 
-例如：From Xreal
-
-![](/images/go/go-user-instruction-1.png)
+![](/public/images/go/go-user-instruction-1.png)
 
 Turn on the power of INMO Go
 
 Step3 Settings
 
 （缺少Setting 图）
-
-图例：from X
 
 ![]()
 
@@ -39,45 +35,55 @@ Charging
 
 ## Functions
 
-Translation
+* Translation
 
-Navigation
+(detail)
 
-Teleprompt
+* Navigation
 
-INMO AI
+(detail)
 
-Notification
+* Teleprompt
 
-Music
+(detail)
 
-## Overview
+* INMO AI
+
+(detail)
+
+* Notification
+
+(detail)
+
+* Music
+
+## (detail)Overview
 
 ### Indicator
 
 Reminder. lt is suggested to charge with a 5V1A charger orthe UsB interface ofa computer. Charging with a charger subject to a quick charge protocol may fail
 
-![](/images/go/go-user-instruction-2.png)
+![](/public/images/go/go-user-instruction-2.png)
 
-![](/images/go/go-user-instruction-3.png)
+![](/public/images/go/go-user-instruction-3.png)
 
 ### Usage
 
-![](/mages/go/go-user-instruction-usage-1.png)
+![](/public/mages/go/go-user-instruction-usage-1.png)
 
-![](images/go/go-user-instruction-usage-2.png)
+![](/public/images/go/go-user-instruction-usage-2.png)
 
 ### INMO Go Introduction
 
-![](/images/go/go-user-instruction-introduction-1.png)
+![](/public/images/go/go-user-instruction-introduction-1.png)
 
-![](/images/go/go-user-instruction-introduction-2.png)
+![](/public/images/go/go-user-instruction-introduction-2.png)
 
 ### Myopia correction
 
 Our official shop provides extra qlasses frame and prescription lenstemplates. You can buythe acessories from our customer senice person and have the gasses asembled in a qlases shop (for more information abouthe customization. please consult your suoplier. Make sure the person assemblina the glasses wear gloves to avoid contamination of the lenses by fingerprints and/or greasy dirt
 
-![](/images/go/go-user-instruction-myopia.png)
+![](/public/images/go/go-user-instruction-myopia.png)
 
 ### Packing list(standard)&#x20;
 
@@ -135,7 +141,7 @@ Interactive mode: Touch control.mobile phone Bluetooth
 
 To comply with the laws, regulations and other requirements related to the restrictions of hazardous substances in electronic and electrical products in China, SHENZHEN YINGMU TECHNOLOGY CO., LTD. has tested the hazardous substances in the components of this product. The substances are listed as follows
 
-![](images/go/go-user-instruction-hazardous.png)
+![](/public/images/go/go-user-instruction-hazardous.png)
 
 This form is prepared according to SJ/T 11364
 
@@ -153,14 +159,11 @@ PCB\*: lt contains PCB equipment parts, electronic parts, etc. For some models, 
 
 ## Wrong operation
 
-Moving the arms outward excessively or applying any force larger than mechanical load of the product.&#x20;
-
-Rotating the product continuously or using roughly or throwing it away (the lenses are fragile)·
-
-Binding the product with the data cable
+* Moving the arms outward excessively or applying any force larger than mechanical load of the product.&#x20;
+* Rotating the product continuously or using roughly or throwing it away (the lenses are fragile)·
+* Binding the product with the data cable
 
 ## Kind Reminder
 
-For any questions, please call our customer service hotline 400-165-6906, send e-mails to customer@inmolens.com (for the domestic market) or support@inmoalass.com (for the overseas market) or consult with the authorized local service outlet or dealer.
-
-The power adapter used for the product should be one with a"CCC"certificate and compliant with the applicable standard.
+* For any questions, please call our customer service hotline 400-165-6906, send e-mails to customer@inmolens.com (for the domestic market) or support@inmoalass.com (for the overseas market) or consult with the authorized local service outlet or dealer.
+* The power adapter used for the product should be one with a"CCC"certificate and compliant with the applicable standard.
