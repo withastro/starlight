@@ -3,14 +3,15 @@ title: User Instruction
 
 description: An overview of the default frontmatter fields Starlight supports.
 ---
-
 ## User guide
 
 ### Start
 
 Step1
 
-(缺图：IOS和Android 二维码)
+![](public/icons/google-download.svg)
+
+![](/public/icons/apple-download.svg)
 
 Download the  INMO App
 
@@ -20,7 +21,7 @@ Step2 Power On
 
 例如：From Xreal
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWM3ZDI1NWY0MzAzM2QxZTg5MjI0MGE5NzA2OTVlYTVfMTRUcTlPd3JnWnQ0anRjeFpqZWloSTRhVTNOSUlJaUpfVG9rZW46RVBWeWJ0Umx6b2IzRTV4Nmh5amMwckpmbk5lXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/images/go/go-user-instruction-1.png)
 
 Turn on the power of INMO Go
 
@@ -56,27 +57,27 @@ Music
 
 Reminder. lt is suggested to charge with a 5V1A charger orthe UsB interface ofa computer. Charging with a charger subject to a quick charge protocol may fail
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUxY2MxOGE5ODc2ZGMwZTQ3NTc1MDI0ZTQwZGQ5OTZfYmlGMXRJbDB6dzRaWllKbTNHSVdjd1JuVWV2RnF4WGRfVG9rZW46RjJhVmJxRXpxb1RBcFl4MFFNTGMxOFRLbmpnXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/images/go/go-user-instruction-2.png)
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=NmQzOTRlMGNmZTkwMjI0MGE1Nzc1NzQ1OTA0M2RmMjZfVVdBUWprbWlLVW1UZ0VLbjhJTmE2em1BcVJQSEpQRXBfVG9rZW46SkR4NGJSY0hLb1R2WUd4Tk9ZMmNUTU1qbm9mXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/images/go/go-user-instruction-3.png)
 
 ### Usage
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2Q1NGUyYjFjMmNmNDgyYmRiYWU5MzVhZmJmM2RjNDdfOVlzejl0SnRtZVhpM1VnaHVqaU5PT3NiNUduaFYyNzdfVG9rZW46Q3pDVWJab0Z3b1k4NGF4YUtldmNGNDUwbmJiXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/mages/go/go-user-instruction-usage-1.png)
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=YmQwMjA2OTA4NWRhNjI5NDkyOWE1NzA4MmJlMGVjZDJfU2ViNU5wcVEyWEhXTERncDFaTnFyZm1lT2xUbXl3bWRfVG9rZW46R2dYcWJONHhYb2RhRmt4NUEzT2MwcGRubmRkXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](images/go/go-user-instruction-usage-2.png)
 
 ### INMO Go Introduction
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=YjBlMTRlYzgwM2MyYWE4MWE1YTgxZDZiODJmMjNlY2JfcUhnTXNHZVFUNFZVN1lKWEhPOEFoYTRHd2tlbERsNUlfVG9rZW46R2hZcWJUVHkwb1Nxeml4NzZsY2N5eGd5bjFmXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/images/go/go-user-instruction-introduction-1.png)
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=M2MwMjE1NDg3NDk1MGRiOTcxNGRkYjUyOWVjODhlMWZfaDFla3BTc1lPTG0weWtIN3d2YXZmWnNJVDlUSmlYeDlfVG9rZW46SUtvNGJVZFJ5bzJudDB4cnBDWGN0SXFMbjZnXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/images/go/go-user-instruction-introduction-2.png)
 
 ### Myopia correction
 
 Our official shop provides extra qlasses frame and prescription lenstemplates. You can buythe acessories from our customer senice person and have the gasses asembled in a qlases shop (for more information abouthe customization. please consult your suoplier. Make sure the person assemblina the glasses wear gloves to avoid contamination of the lenses by fingerprints and/or greasy dirt
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=OTI4OGYzN2U4MzA4YzY4YTIyNDBkMzYwMGMzZDRiNTdfNjllcEVUemd5cjFObmJWVjdUWGExMWJ0NHh3cFIyc3BfVG9rZW46SlpZbWI4RTFUb3RSODN4WlZSZ2NJeWFrbmZlXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](/images/go/go-user-instruction-myopia.png)
 
 ### Packing list(standard)&#x20;
 
@@ -134,7 +135,7 @@ Interactive mode: Touch control.mobile phone Bluetooth
 
 To comply with the laws, regulations and other requirements related to the restrictions of hazardous substances in electronic and electrical products in China, SHENZHEN YINGMU TECHNOLOGY CO., LTD. has tested the hazardous substances in the components of this product. The substances are listed as follows
 
-![](https://inmolens.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjYzMmQzNWU2ZGU4OGZjNjk1ZGIxYjA1ZWM1NjVjZGFfSjJNUjZyR0pBOG9RMkZQRE9BMEdoTnNnMzJKa2IxUEtfVG9rZW46TXdFRmJZaXV6b0FCOTl4UzVxeGM5ZjBlbkNiXzE3NDEyNDYyNTk6MTc0MTI0OTg1OV9WNA)
+![](images/go/go-user-instruction-hazardous.png)
 
 This form is prepared according to SJ/T 11364
 
