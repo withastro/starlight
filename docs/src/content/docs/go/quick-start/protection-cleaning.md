@@ -1,11 +1,8 @@
 ---
-
-title: Features
+title: Protection-Cleaning
 
 description: An overview of the default frontmatter fields Starlight supports.
-
 ---
-
 #### Routine maintenance for the main body of the product
 
 Use a balloon or a soft brush to remove dust from the inside or gap of the opticalwaveguide lenses

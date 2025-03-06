@@ -11,15 +11,15 @@ Step1
 
 ![](public/icons/google-download.svg)
 
-![](/public/icons/apple-download.svg)
+![](public/icons/apple-download.svg)
 
-Download the  INMO App
+**Download the  INMO App**
 
 Step2 Power On
 
 （缺图：按钮图例)
 
-![](/public/images/go/go-user-instruction-1.png)
+![](public/images/go/go-user-instruction-1.png)
 
 Turn on the power of INMO Go
 
@@ -63,27 +63,27 @@ Charging
 
 Reminder. lt is suggested to charge with a 5V1A charger orthe UsB interface ofa computer. Charging with a charger subject to a quick charge protocol may fail
 
-![](/public/images/go/go-user-instruction-2.png)
+![](public/images/go/go-user-instruction-2.png)
 
-![](/public/images/go/go-user-instruction-3.png)
+![](public/images/go/go-user-instruction-3.png)
 
 ### Usage
 
-![](/public/mages/go/go-user-instruction-usage-1.png)
+![](public/mages/go/go-user-instruction-usage-1.png)
 
-![](/public/images/go/go-user-instruction-usage-2.png)
+![](public/images/go/go-user-instruction-usage-2.png)
 
 ### INMO Go Introduction
 
-![](/public/images/go/go-user-instruction-introduction-1.png)
+![](public/images/go/go-user-instruction-introduction-1.png)
 
-![](/public/images/go/go-user-instruction-introduction-2.png)
+![](public/images/go/go-user-instruction-introduction-2.png)
 
 ### Myopia correction
 
 Our official shop provides extra qlasses frame and prescription lenstemplates. You can buythe acessories from our customer senice person and have the gasses asembled in a qlases shop (for more information abouthe customization. please consult your suoplier. Make sure the person assemblina the glasses wear gloves to avoid contamination of the lenses by fingerprints and/or greasy dirt
 
-![](/public/images/go/go-user-instruction-myopia.png)
+![](public/images/go/go-user-instruction-myopia.png)
 
 ### Packing list(standard)&#x20;
 
@@ -141,7 +141,7 @@ Interactive mode: Touch control.mobile phone Bluetooth
 
 To comply with the laws, regulations and other requirements related to the restrictions of hazardous substances in electronic and electrical products in China, SHENZHEN YINGMU TECHNOLOGY CO., LTD. has tested the hazardous substances in the components of this product. The substances are listed as follows
 
-![](/public/images/go/go-user-instruction-hazardous.png)
+![](public/images/go/go-user-instruction-hazardous.png)
 
 This form is prepared according to SJ/T 11364
 
