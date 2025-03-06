@@ -69,7 +69,7 @@ Reminder. lt is suggested to charge with a 5V1A charger orthe UsB interface ofa 
 
 ### Usage
 
-![](public/mages/go/go-user-instruction-usage-1.png)
+![](public/images/go/go-user-instruction-usage-1.png)
 
 ![](public/images/go/go-user-instruction-usage-2.png)
 
