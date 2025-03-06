@@ -47,6 +47,12 @@
 [data-theme='dark'] .dark\:sl-hidden {
 	display: none;
 }
+[data-theme='light'] img[src$="#only-dark"] {
+	display: none;
+}
+[data-theme='dark'] img[src$="#only-light"] {
+	display: none;
+}
 
 /*
 Flip an element around the y-axis when in an RTL context.
