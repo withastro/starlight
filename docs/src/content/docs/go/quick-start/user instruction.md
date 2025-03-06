@@ -17,21 +17,19 @@ Step1
 
 Step2 Power On
 
-（缺图：按钮图例)
+![](public/images/go/go-user-instruction-poweron.PNG)
 
-![](public/images/go/go-user-instruction-1.png)
-
-Turn on the power of INMO Go
+**Turn on the power of INMO Go**
 
 Step3 Settings
 
-（缺少Setting 图）
+![](public/images/go/go-user-instruction-setting1.PNG)
 
-![]()
+![](public/images/go/go-user-instruction-setting2.PNG)
 
 Charging
 
-(缺图：Charging)
+![](public/images/go/go-user-instruction-charging1.png)
 
 ## Functions
 
@@ -56,12 +54,19 @@ Charging
 (detail)
 
 * Music
+  (detail)
 
-## (detail)Overview
+## Overview
+
+### Instruction
+
+![](public/images/go/go-user-instruction-introduction1.png)
+
+![](public/images/go/go-user-instruction-introduction2.png)
 
 ### Indicator
 
-Reminder. lt is suggested to charge with a 5V1A charger orthe UsB interface ofa computer. Charging with a charger subject to a quick charge protocol may fail
+Reminder. lt is suggested to charge with a 5V1A charger orthe USB interface ofa computer. Charging with a charger subject to a quick charge protocol may fail
 
 ![](public/images/go/go-user-instruction-2.png)
 
