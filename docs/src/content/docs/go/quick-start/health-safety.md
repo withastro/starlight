@@ -1,14 +1,10 @@
-***
+---
 
-title: Features
-
-
+title: Health & Safety
 
 description: An overview of the default frontmatter fields Starlight supports.
 
-
-
-***
+---
 
 # User Guide
 
