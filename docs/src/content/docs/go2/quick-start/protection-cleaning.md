@@ -1,6 +1,8 @@
 ---
 title: Protection&Cleaning
 description: An overview of the default frontmatter fields Starlight supports.
+sidebar:
+  order：4
 ---
 #### Routine maintenance for the main body of the product
 

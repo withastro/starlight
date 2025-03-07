@@ -2,9 +2,9 @@
 title: Health & Safety
 
 description: An overview of the default frontmatter fields Starlight supports.
+sidebar:
+order： 3
 ---
-
-
 * Keep the product dry, Using it in a dusty, humid or hiah-salt (such as seaside) place may result in circuit failure
 * Using the product in thunderstorms may result in product failure or electric shocks.
 * Please use the product below 200m and at 0℃ to 40℃.lfthe ambient temperature is too high or too low, the product will shut down automatically, have a short life and have other faults.&#x20;
