@@ -3,7 +3,7 @@ title: User Instruction
 
 description: An overview of the default frontmatter fields Starlight supports.
 sidebar:
-order： 1
+  order：1
 ---
 ## User guide
 
