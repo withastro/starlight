@@ -2,6 +2,8 @@
 title: User Instruction
 
 description: An overview of the default frontmatter fields Starlight supports.
+sidebar:
+order： 1
 ---
 ## User guide
 
@@ -170,5 +172,5 @@ PCB\*: lt contains PCB equipment parts, electronic parts, etc. For some models, 
 
 ## Kind Reminder
 
-* For any questions, please call our customer service hotline 400-165-6906, send e-mails to customer@inmolens.com (for the domestic market) or support@inmoalass.com (for the overseas market) or consult with the authorized local service outlet or dealer.
+* For any questions, please send e-mails to support@inmoxr.com
 * The power adapter used for the product should be one with a"CCC"certificate and compliant with the applicable standard.
