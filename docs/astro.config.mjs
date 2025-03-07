@@ -81,7 +81,21 @@ export default defineConfig({
 					},
 				  ],
 				},
-				// 可以继续添加其他产品的文档结构
+				// GO2的文档结构
+				{
+					label: 'INMO GO2',
+					items: [
+					  {
+						label: 'Getting Started',
+						autogenerate: { directory: '/go2/quick-start' },
+					  },
+					  {
+						label: 'Troubleshooting',
+						autogenerate: { directory: '/go2/troubleshooting' },
+					  },
+					],
+				  },
+				  // 可以继续添加其他产品的文档结构
 			  ],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
