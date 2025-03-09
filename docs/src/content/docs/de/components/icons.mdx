@@ -1,11 +1,11 @@
 ---
-title: Symbole
-description: Erfahre, wie du Symbole in Starlight anzeigen kannst.
+title: Icons
+description: Erfahre, wie du Icons in Starlight anzeigen kannst.
 ---
 
 import { Icon } from '@astrojs/starlight/components';
 
-Um Symbole aus Starlights [eingebautem Symbol-Set](/de/reference/icons/#alle-symbole) anzuzeigen, verwende die `<Icon>` Komponente.
+Um Icons aus Starlights [eingebautem Icon-Set](/de/reference/icons/#alle-icons) anzuzeigen, verwende die `<Icon>` Komponente.
 
 import Preview from '~/components/component-preview.astro';
 
@@ -28,8 +28,8 @@ import { Icon } from '@astrojs/starlight/components';
 
 ## Verwendung
 
-Zeigt ein Symbol mit der Komponente `<Icon>` an.
-Ein Symbole benötigt einen [`name`](#name), der auf [eines der in Starlight eingebauten Icons](/de/reference/icons/#alle-symbole) gesetzt ist, und kann optional ein [`label`](#label) enthalten, um Kontext für Screenreader zu liefern.
+Zeigt ein Icon mit der Komponente `<Icon>` an.
+Ein Icon benötigt einen [`name`](#name), der auf [eines der in Starlight eingebauten Icons](/de/reference/icons/#alle-icons) gesetzt ist, und kann optional ein [`label`](#label) enthalten, um Kontext für Screenreader zu liefern.
 
 <Preview>
 
@@ -56,10 +56,10 @@ import { Icon } from '@astrojs/starlight/components';
 
 </Preview>
 
-### Anpassen von Symbolen
+### Anpassen von Icons
 
-Die Attribute [`size`](#size) und [`color`](#color) können verwendet werden, um das Aussehen des Symbols mit CSS-Einheiten und Farbwerten anzupassen.
-Das Attribut [`class`](#class) kann verwendet werden, um dem Symbol eigene CSS-Klassen hinzuzufügen.
+Die Attribute [`size`](#size) und [`color`](#color) können verwendet werden, um das Aussehen des Icons mit CSS-Einheiten und Farbwerten anzupassen.
+Das Attribut [`class`](#class) kann verwendet werden, um dem Icon eigene CSS-Klassen hinzuzufügen.
 
 <Preview>
 
@@ -97,7 +97,7 @@ Die Komponente `<Icon>` akzeptiert die folgenden Eigenschaften:
 **Erforderlich**  
 **Typ:** [`StarlightIcon`](/de/reference/icons/#starlighticon-typ)
 
-Der Name des anzuzeigenden Symbols wird auf [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) gesetzt.
+Der Name des anzuzeigenden Icons wird auf [eines der in Starlight integrierten Icons](/de/reference/icons/#alle-icons) gesetzt.
 
 ### `label`
 
@@ -105,24 +105,24 @@ Der Name des anzuzeigenden Symbols wird auf [eines der in Starlight integrierten
 
 Eine optionale Beschriftung, die den Kontext für unterstützende Technologien wie Bildschirm&shy;lesegeräte liefert.
 
-Wenn `label` nicht gesetzt ist, wird das Symbol von assistiven Technologien vollständig ausgeblendet.
-In diesem Fall ist darauf zu achten, dass der Kontext auch ohne das Symbol verständlich ist.
-Ein Link, der nur das Symbol enthält, **muss** das Attribut `label` enthalten, um zugänglich zu sein, aber wenn ein Link Text enthält und das Symbol rein dekorativ ist, kann es sinnvoll sein, das `label` wegzulassen.
+Wenn `label` nicht gesetzt ist, wird das Icon von assistiven Technologien vollständig ausgeblendet.
+In diesem Fall ist darauf zu achten, dass der Kontext auch ohne das Icon verständlich ist.
+Ein Link, der nur das Icon enthält, **muss** das Attribut `label` enthalten, um zugänglich zu sein, aber wenn ein Link Text enthält und das Icon rein dekorativ ist, kann es sinnvoll sein, das `label` wegzulassen.
 
 ### `size`
 
 **Typ:** `string`
 
-Die Größe des Symbols in CSS-Einheiten.
+Die Größe des Icons in CSS-Einheiten.
 
 ### `color`
 
 **Typ:** `string`
 
-Die Farbe des Symbols unter Verwendung eines CSS-Farbwerts.
+Die Farbe des Icons unter Verwendung eines CSS-Farbwerts.
 
 ### `class`
 
 **Typ:** `string`
 
-Benutzerdefinierte CSS-Klassen, die dem Symbol hinzugefügt werden können.
+Benutzerdefinierte CSS-Klassen, die dem Icon hinzugefügt werden können.
