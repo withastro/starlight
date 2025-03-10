@@ -2,7 +2,7 @@
 title: Features
 description: An overview of the default frontmatter fields Starlight supports.
 sidebar:
-  order：2
+  order: 2
 ---
 INMO GO2 offers a suite of intelligent features designed to revolutionize your communication and understanding of the world.
 
