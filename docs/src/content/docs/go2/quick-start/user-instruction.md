@@ -16,7 +16,7 @@ sidebar:
 
 ### Step2   Power On
 
-![](\public/images/go2/go2-user-poweron.png)
+![](public/images/go2/go2-user-poweron.png)
 
 ### Step3 Settings
 
