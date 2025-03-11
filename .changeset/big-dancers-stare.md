@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Adds VS Code, Jetbrains, Zed and Vim icons
+Adds 5 new icons: `figma`, `jetbrains`, `sketch`, `vscode`, and `zed`.

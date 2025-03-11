@@ -41,8 +41,6 @@ export const socialLinks = [
 	'confluence',
 	'jira',
 	'storybook',
-	'figma',
-	'sketch',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -99,8 +97,6 @@ export const SocialLinksSchema = () =>
 					confluence: 'Confluence',
 					jira: 'Jira',
 					storybook: 'Storybook',
-					figma: 'Figma',
-					sketch: 'Sketch',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
