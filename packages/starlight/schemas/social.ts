@@ -41,10 +41,6 @@ export const socialLinks = [
 	'confluence',
 	'jira',
 	'storybook',
-	'vscode',
-	'jetbrains',
-	'zed',
-	'vim',
 	'figma',
 	'sketch',
 ] as const;
@@ -103,10 +99,6 @@ export const SocialLinksSchema = () =>
 					confluence: 'Confluence',
 					jira: 'Jira',
 					storybook: 'Storybook',
-					vscode: 'VS Code',
-					jetbrains: 'JetBrains',
-					zed: 'Zed',
-					vim: 'Vim',
 					figma: 'Figma',
 					sketch: 'Sketch',
 				}[key];
