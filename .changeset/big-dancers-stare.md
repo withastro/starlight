@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Adds 5 new icons: `figma`, `jetbrains`, `sketch`, `vscode`, and `zed`.
+Adds 6 new icons: `figma`, `jetbrains`, `sketch`, `vim`, `vscode`, and `zed`.
