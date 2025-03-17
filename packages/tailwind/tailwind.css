@@ -13,7 +13,9 @@
 	pre {
 		font-family: var(--font-mono);
 	}
+}
 
+@layer utilities {
 	/* Wire up Starlight theme to use Tailwind config. */
 	:root {
 		/* Use Tailwind-configured font families. */
