@@ -58,8 +58,6 @@ If you are using cascade layers in your custom CSS, you can use the [`@layer`](h
 	starlight.core,
 	starlight.content,
 	starlight.components,
-	starlight.asides,
-	starlight.expressive-code,
 	starlight.utils,
 	my-layer;
 ```
@@ -173,7 +171,7 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
     ```css {4}
     /* src/tailwind.css */
-    @layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.asides, starlight.expressive-code, starlight.utils, theme, base, components, utilities;
+    @layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, base, components, utilities;
 
     @import '@astrojs/starlight-tailwind';
     @import 'tailwindcss/theme.css' layer(theme);
@@ -244,7 +242,7 @@ If set, the following CSS custom properties will override Starlight’s default 
 
 ```css {10-20,22-32,34,36}
 /* src/tailwind.css */
-@layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.asides, starlight.expressive-code, starlight.utils, theme, base, components, utilities;
+@layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, base, components, utilities;
 
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);

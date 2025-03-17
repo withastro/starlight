@@ -137,7 +137,7 @@ export function getStarlightEcConfigPreprocessor({
 				// Return the default selector
 				return `[data-theme='${theme.name}']`;
 			},
-			cascadeLayer: cascadeLayer ?? 'starlight.expressive-code',
+			cascadeLayer: cascadeLayer ?? 'starlight.components',
 			styleOverrides: {
 				borderRadius: '0px',
 				borderWidth: '1px',

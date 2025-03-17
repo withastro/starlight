@@ -1,4 +1,4 @@
-@layer starlight.asides {
+@layer starlight.components {
 	.starlight-aside {
 		padding: 1rem;
 		border-inline-start: 0.25rem solid var(--sl-color-asides-border);
