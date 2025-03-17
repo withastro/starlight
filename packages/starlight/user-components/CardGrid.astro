@@ -9,7 +9,7 @@ const { stagger = false } = Astro.props;
 <div class:list={['card-grid', { stagger }]}><slot /></div>
 
 <style>
-	@layer starlight.user-components {
+	@layer starlight.components {
 		.card-grid {
 			display: grid;
 			grid-template-columns: 100%;

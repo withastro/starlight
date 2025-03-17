@@ -24,7 +24,7 @@ const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden':
 />
 
 <style define:vars={{ 'sl-icon-color': color, 'sl-icon-size': size }}>
-	@layer starlight.user-components {
+	@layer starlight.components {
 		svg {
 			color: var(--sl-icon-color);
 			font-size: var(--sl-icon-size, 1em);
