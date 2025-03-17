@@ -1,5 +1,4 @@
 ---
-import '@pagefind/default-ui/css/ui.css';
 import Icon from '../user-components/Icon.astro';
 import project from 'virtual:starlight/project-context';
 
@@ -293,6 +292,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </style>
 
 <style is:global>
+	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.components);
+
 	@layer starlight.components {
 		[data-search-modal-open] {
 			overflow: hidden;
