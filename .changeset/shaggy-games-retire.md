@@ -24,7 +24,7 @@ export default defineConfig({
 });
 ```
 
-Additionally, you can use [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to control the appearance of the code blocks. Here is the previously used CSS variables for the fallback theme:
+Additionally, you can use [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to control the appearance of the code blocks. Here are the previously used CSS variables for the fallback theme:
 
 ```css
 :root {
