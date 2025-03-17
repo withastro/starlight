@@ -50,7 +50,7 @@ import Icon from '../user-components/Icon.astro';
 </script>
 
 <style>
-	@layer starlight.components {
+	@layer starlight.core {
 		button {
 			position: fixed;
 			top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
@@ -84,7 +84,7 @@ import Icon from '../user-components/Icon.astro';
 </style>
 
 <style is:global>
-	@layer starlight.components {
+	@layer starlight.core {
 		[data-mobile-menu-expanded] {
 			overflow: hidden;
 		}

@@ -5,7 +5,7 @@ const { banner } = Astro.locals.starlightRoute.entry.data;
 {banner && <div class="sl-banner" set:html={banner.content} />}
 
 <style>
-	@layer starlight.components {
+	@layer starlight.core {
 		.sl-banner {
 			--__sl-banner-text: var(--sl-color-banner-text, var(--sl-color-text-invert));
 			padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);

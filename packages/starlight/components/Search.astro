@@ -162,7 +162,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <style>
-	@layer starlight.components {
+	@layer starlight.core {
 		site-search {
 			display: contents;
 		}
@@ -292,9 +292,9 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </style>
 
 <style is:global>
-	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.components);
+	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
 
-	@layer starlight.components {
+	@layer starlight.core {
 		[data-search-modal-open] {
 			overflow: hidden;
 		}
