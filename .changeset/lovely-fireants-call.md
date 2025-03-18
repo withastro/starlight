@@ -1,9 +1,5 @@
 ---
-'@astrojs/starlight': minor
+'@astrojs/starlight': patch
 ---
 
-Adds four new icons:
-- `vscode`
-- `vim`
-- `zed`
-- `jetbrains`
+Adds official `jetbrains` icon
