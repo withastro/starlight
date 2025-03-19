@@ -1,14 +1,13 @@
 {
 	$schema: 'https://docs.renovatebot.com/renovate-schema.json',
 	extends: [
-		'config:recommended',
-		'schedule:weekly',
-		'group:allNonMajor',
-		':disablePeerDependencies',
+		":dependencyDashboard",
+		":semanticPrefixFixDepsChoreOthers",
+		":ignoreModulesAndTests",
+		"workarounds:all",
 		'helpers:pinGitHubActionDigestsToSemver',
 	],
 	rangeStrategy: 'bump',
-	postUpdateOptions: ['pnpmDedupe'],
 	ignorePaths: ['**/node_modules/**'],
 	packageRules: [
 		{
