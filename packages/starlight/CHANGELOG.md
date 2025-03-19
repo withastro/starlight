@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.32.3
+
+### Patch Changes
+
+- [#2955](https://github.com/withastro/starlight/pull/2955) [`77b6a41`](https://github.com/withastro/starlight/commit/77b6a412c9daba8e6b856f3640204a1ca61c93b9) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds 5 new icons: `figma`, `sketch`, `vim`, `vscode`, and `zed`.
+
+- [#2961](https://github.com/withastro/starlight/pull/2961) [`da57fab`](https://github.com/withastro/starlight/commit/da57fab3027048825e048384fe4aa773b5db3ebf) Thanks [@ematipico](https://github.com/ematipico)! - Adds 1 new icon: `jetbrains`.
+
 ## 0.32.2
 
 ### Patch Changes
