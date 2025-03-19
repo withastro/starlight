@@ -27,7 +27,7 @@
   "devDependencies": {
     "@playwright/test": "^1.45.0",
     "axe-playwright": "^2.0.3",
-    "sitemapper": "^3.2.12",
+    "sitemapper": "^3.2.20",
     "starlight-links-validator": "^0.14.0"
   }
 }
