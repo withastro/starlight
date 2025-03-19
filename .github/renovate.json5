@@ -6,6 +6,7 @@
 		':ignoreModulesAndTests',
 		'workarounds:all',
 		'helpers:pinGitHubActionDigestsToSemver',
+		'docker:disable',
 	],
 	rangeStrategy: 'bump',
 	ignorePaths: ['**/node_modules/**'],
