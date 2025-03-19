@@ -250,8 +250,8 @@ importers:
         specifier: ^18.16.19
         version: 18.16.19
       '@vitest/coverage-v8':
-        specifier: ^3.0.5
-        version: 3.0.5(vitest@3.0.5)
+        specifier: ^3.0.9
+        version: 3.0.9(vitest@3.0.5)
       astro:
         specifier: ^5.1.5
         version: 5.1.5(@types/node@18.16.19)(typescript@5.6.3)
@@ -313,8 +313,8 @@ importers:
   packages/tailwind:
     devDependencies:
       '@vitest/coverage-v8':
-        specifier: ^3.0.5
-        version: 3.0.5(vitest@3.0.5)
+        specifier: ^3.0.9
+        version: 3.0.9(vitest@3.0.5)
       postcss:
         specifier: ^8.4.47
         version: 8.4.49
@@ -2147,11 +2147,11 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  /@vitest/coverage-v8@3.0.5(vitest@3.0.5):
-    resolution: {integrity: sha512-zOOWIsj5fHh3jjGwQg+P+J1FW3s4jBu1Zqga0qW60yutsBtqEqNEJKWYh7cYn1yGD+1bdPsPdC/eL4eVK56xMg==}
+  /@vitest/coverage-v8@3.0.9(vitest@3.0.5):
+    resolution: {integrity: sha512-15OACZcBtQ34keIEn19JYTVuMFTlFrClclwWjHo/IRPg/8ELpkgNTl0o7WLP9WO9XGH6+tip9CPYtEOrIDJvBA==}
     peerDependencies:
-      '@vitest/browser': 3.0.5
-      vitest: 3.0.5
+      '@vitest/browser': 3.0.9
+      vitest: 3.0.9
     peerDependenciesMeta:
       '@vitest/browser':
         optional: true

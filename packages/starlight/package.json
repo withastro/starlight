@@ -185,7 +185,7 @@
     "@astrojs/markdown-remark": "^6.0.1",
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
-    "@vitest/coverage-v8": "^3.0.5",
+    "@vitest/coverage-v8": "^3.0.9",
     "astro": "^5.1.5",
     "linkedom": "^0.18.4",
     "vitest": "^3.0.5"
