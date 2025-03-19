@@ -1,10 +1,10 @@
 {
 	$schema: 'https://docs.renovatebot.com/renovate-schema.json',
 	extends: [
-		":dependencyDashboard",
-		":semanticPrefixFixDepsChoreOthers",
-		":ignoreModulesAndTests",
-		"workarounds:all",
+		':dependencyDashboard',
+		':semanticPrefixFixDepsChoreOthers',
+		':ignoreModulesAndTests',
+		'workarounds:all',
 		'helpers:pinGitHubActionDigestsToSemver',
 	],
 	rangeStrategy: 'bump',
