@@ -14,5 +14,11 @@
 			groupName: 'github-actions',
 			matchManagers: ['github-actions'],
 		},
+		{
+			matchManagers: ["npm"],
+			groupName: "dependencies",
+			matchDepTypes: ["devDependencies", "dependencies", "peerDependencies"],
+			enabled: false
+		}
 	],
 }
