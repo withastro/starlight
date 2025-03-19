@@ -22,7 +22,7 @@
     "size-limit": "^11.1.6",
     "typescript": "^5.6.3"
   },
-  "packageManager": "pnpm@8.7.4",
+  "packageManager": "pnpm@8.15.9",
   "size-limit": [
     {
       "name": "/index.html",
