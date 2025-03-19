@@ -73,7 +73,7 @@ describe('processI18nConfig', () => {
 				},
 			},
 			{
-				i18nConfig: { defaultLocale: 'fr', locales: [{ codes: ['fr'], path: 'fr' }] },
+				i18nConfig: { defaultLocale: 'fr', locales: [{ codes: ['fr'] as ['fr'], path: 'fr' }] },
 				expected: {
 					defaultLocale: { label: 'Français', lang: 'fr', dir: 'ltr', locale: undefined },
 				},
@@ -119,7 +119,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'french',
-					locales: [{ codes: ['fr'], path: 'french' }],
+					locales: [{ codes: ['fr'] as ['fr'], path: 'french' }],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
@@ -130,7 +130,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'farsi',
-					locales: [{ codes: ['fa'], path: 'farsi' }],
+					locales: [{ codes: ['fa'] as ['fa'], path: 'farsi' }],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
@@ -158,7 +158,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
-					locales: ['en', { codes: ['fr'], path: 'french' }],
+					locales: ['en', { codes: ['fr'] as ['fr'], path: 'french' }],
 				},
 				expected: {
 					defaultLocale: { label: 'English', lang: 'en', dir: 'ltr', locale: undefined },
@@ -175,7 +175,7 @@ describe('processI18nConfig', () => {
 					// default locale is defined with a custom path.
 					// In this case, the default locale is considered to be a root locale and the custom path
 					// is ignored.
-					locales: [{ codes: ['fa'], path: 'farsi' }, 'de'],
+					locales: [{ codes: ['fa'] as ['fa'], path: 'farsi' }, 'de'],
 					routing: { prefixDefaultLocale: false },
 				},
 				expected: {
@@ -206,7 +206,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
-					locales: ['en', { codes: ['fr'], path: 'french' }],
+					locales: ['en', { codes: ['fr'] as ['fr'], path: 'french' }],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
@@ -220,7 +220,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'farsi',
-					locales: [{ codes: ['fa'], path: 'farsi' }, 'de'],
+					locales: [{ codes: ['fa'] as ['fa'], path: 'farsi' }, 'de'],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
