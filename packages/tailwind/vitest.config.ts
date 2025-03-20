@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	test: {
+		css: true,
 		coverage: {
 			reportsDirectory: './__coverage__',
 			thresholds: {

@@ -1,10 +1,5 @@
 @media print {
-	/**
-	This is increased in specificity so it works even when injected into pages before regular styles.
-	TODO: Just use `:root` once we move to @layer.
-	Same goes for the use of `!important` in this file.
-	*/
-	:root[data-theme]:is(:root) {
+	:root {
 		/* Colours — force light mode when printing */
 		--sl-color-white: hsl(224, 10%, 10%);
 		--sl-color-gray-1: hsl(224, 14%, 16%);
@@ -55,28 +50,28 @@
 
 	/* Utility classes for controlling element visibility when printing. */
 	.print\:hidden {
-		display: none !important;
+		display: none;
 	}
 	.print\:flex {
-		display: flex !important;
+		display: flex;
 	}
 	.print\:block {
-		display: block !important;
+		display: block;
 	}
 
 	/* Page layout tweaks. */
 	main {
-		padding-bottom: 0 !important;
+		padding-bottom: 0;
 	}
 	main > .content-panel {
-		padding-block-start: 0 !important;
+		padding-block-start: 0;
 	}
 	.content-panel + .content-panel {
-		border: 0 !important;
+		border: 0;
 	}
 	/* components/PageFrame.astro */
 	.page > header {
-		position: relative !important;
+		position: relative;
 	}
 	.page > .main-frame {
 		padding-top: 0;
@@ -84,13 +79,13 @@
 	}
 	/* components/TwoColumnContent.astro */
 	.main-pane {
-		--sl-sidebar-width: 0px !important;
-		--sl-content-width: 100% !important;
+		--sl-sidebar-width: 0px;
+		--sl-content-width: 100%;
 	}
 	/* components/Banner.astro */
 	.sl-banner {
-		--sl-color-banner-text: var(--sl-color-white) !important;
-		background-color: transparent !important;
+		--sl-color-banner-text: var(--sl-color-white);
+		background-color: transparent;
 	}
 
 	/* components/MarkdownContent.astro */
@@ -102,8 +97,8 @@
 		widows: 2;
 	}
 	.sl-markdown-content pre {
-		overflow-x: hidden !important;
-		white-space: pre-wrap !important;
+		overflow-x: hidden;
+		white-space: pre-wrap;
 	}
 	.sl-markdown-content .expressive-code,
 	.sl-markdown-content figure,
@@ -116,33 +111,33 @@
 	}
 	.expressive-code .frame.has-title:not(.is-terminal) .header {
 		/* Divide title bar and code without relying on background colors. */
-		background: transparent !important;
-		border-bottom: 1px solid var(--sl-color-gray-6) !important;
+		background: transparent;
+		border-bottom: 1px solid var(--sl-color-gray-6);
 	}
 	.expressive-code .frame.has-title:not(.is-terminal) .title {
 		/* Hide title tab background color. */
-		background: transparent !important;
+		background: transparent;
 	}
 	.expressive-code .frame.has-title:not(.is-terminal) .title::after {
 		/* Remove title tab highlight. */
-		border-top: 0 !important;
+		border-top: 0;
 	}
 	.expressive-code .copy {
 		/* Ensure Expressive Code copy button is hidden when printing from touch devices. */
-		display: none !important;
+		display: none;
 	}
 	/* Inline code */
 	.sl-markdown-content code:not(:where(.not-content *)) {
-		background-color: transparent !important;
-		padding: 0 !important;
-		margin-block: unset !important;
-		font-size: 0.9375em !important;
+		background-color: transparent;
+		padding: 0;
+		margin-block: unset;
+		font-size: 0.9375em;
 	}
 
 	/* user-components/Badge.astro */
 	.sl-badge {
-		background: transparent !important;
-		color: var(--sl-color-white) !important;
+		background: transparent;
+		color: var(--sl-color-white);
 	}
 
 	/* user-components/FileTree.astro */
@@ -151,8 +146,8 @@
 	}
 	starlight-file-tree .highlight {
 		outline: 3px solid var(--sl-color-accent-low);
-		color: var(--sl-color-text) !important;
-		background-color: transparent !important;
+		color: var(--sl-color-text);
+		background-color: transparent;
 	}
 
 	/* user-components/Aside.astro */
@@ -162,9 +157,9 @@
 
 	/* user-components/LinkButton.astro */
 	.sl-link-button.primary {
-		background: transparent !important;
-		border-color: var(--sl-color-white) !important;
-		color: var(--sl-color-white) !important;
+		background: transparent;
+		border-color: var(--sl-color-white);
+		color: var(--sl-color-white);
 	}
 
 	/* user-components/Tabs.astro */
