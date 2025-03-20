@@ -2,6 +2,7 @@ import { assert, describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { processI18nConfig, pickLang } from '../../utils/i18n';
 import type { AstroConfig, AstroUserConfig } from 'astro';
+import type { StarlightConfig } from '../../types';
 
 describe('pickLang', () => {
 	const dictionary = { en: 'Hello', fr: 'Bonjour' };
@@ -65,7 +66,15 @@ describe('processI18nConfig', () => {
 			`);
 		});
 
-		test.each([
+		type AstroI18nTestEachConfig = {
+			i18nConfig: AstroUserConfig['i18n'];
+			expected: {
+				defaultLocale: StarlightConfig['defaultLocale'];
+				locales?: StarlightConfig['locales'];
+			};
+		};
+
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: { defaultLocale: 'en', locales: ['en'] },
 				expected: {
@@ -73,7 +82,7 @@ describe('processI18nConfig', () => {
 				},
 			},
 			{
-				i18nConfig: { defaultLocale: 'fr', locales: [{ codes: ['fr'] as ['fr'], path: 'fr' }] },
+				i18nConfig: { defaultLocale: 'fr', locales: [{ codes: ['fr'], path: 'fr' }] },
 				expected: {
 					defaultLocale: { label: 'Français', lang: 'fr', dir: 'ltr', locale: undefined },
 				},
@@ -104,7 +113,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
@@ -119,7 +128,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'french',
-					locales: [{ codes: ['fr'] as ['fr'], path: 'french' }],
+					locales: [{ codes: ['fr'], path: 'french' }],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
@@ -130,7 +139,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'farsi',
-					locales: [{ codes: ['fa'] as ['fa'], path: 'farsi' }],
+					locales: [{ codes: ['fa'], path: 'farsi' }],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
@@ -154,11 +163,11 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
-					locales: ['en', { codes: ['fr'] as ['fr'], path: 'french' }],
+					locales: ['en', { codes: ['fr'], path: 'french' }],
 				},
 				expected: {
 					defaultLocale: { label: 'English', lang: 'en', dir: 'ltr', locale: undefined },
@@ -175,7 +184,7 @@ describe('processI18nConfig', () => {
 					// default locale is defined with a custom path.
 					// In this case, the default locale is considered to be a root locale and the custom path
 					// is ignored.
-					locales: [{ codes: ['fa'] as ['fa'], path: 'farsi' }, 'de'],
+					locales: [{ codes: ['fa'], path: 'farsi' }, 'de'],
 					routing: { prefixDefaultLocale: false },
 				},
 				expected: {
@@ -202,11 +211,11 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
-					locales: ['en', { codes: ['fr'] as ['fr'], path: 'french' }],
+					locales: ['en', { codes: ['fr'], path: 'french' }],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
@@ -220,7 +229,7 @@ describe('processI18nConfig', () => {
 			{
 				i18nConfig: {
 					defaultLocale: 'farsi',
-					locales: [{ codes: ['fa'] as ['fa'], path: 'farsi' }, 'de'],
+					locales: [{ codes: ['fa'], path: 'farsi' }, 'de'],
 					routing: { prefixDefaultLocale: true },
 				},
 				expected: {
