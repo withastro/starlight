@@ -18,6 +18,7 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",
     "@astrojs/starlight": "workspace:*",
+    "@iconify-json/mdi": "^1.2.3",
     "@lunariajs/core": "^0.1.1",
     "@types/culori": "^2.1.1",
     "astro": "^5.1.5",

@@ -1,7 +1,14 @@
 ---
+import { Icon as AstroIcon } from 'astro-icon/components';
 import { Icons, type StarlightIcon } from '../components/Icons';
 
+// TODO(HiDeoo) global astro-icon options?
+// TODO(HiDeoo) Can we support icons from `src/icons/` in a remark plugin?
+
+// TODO(HiDeoo) Review all props
 interface Props {
+	// TODO(HiDeoo) improve type to support string but keep autocomplete
+	// TODO(HiDeoo) Mayvbe it should not be done here but in the `StarlightIcon` type itself
 	name: StarlightIcon;
 	label?: string;
 	color?: string;
@@ -11,17 +18,30 @@ interface Props {
 
 const { name, label, size = '1em', color } = Astro.props;
 const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden': 'true' } as const);
+
+const isStarlightIcon = name in Icons;
 ---
 
-<svg
-	{...a11yAttrs}
-	class={Astro.props.class}
-	width="16"
-	height="16"
-	viewBox="0 0 24 24"
-	fill="currentColor"
-	set:html={Icons[name]}
-/>
+{
+	isStarlightIcon ? (
+		<svg
+			{...a11yAttrs}
+			class={Astro.props.class}
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			set:html={Icons[name]}
+		/>
+	) : (
+		<AstroIcon
+			{...a11yAttrs}
+			class={Astro.props.class}
+			{name}
+			style={`${color ? `--sl-icon-color: ${color};` : ''}--sl-icon-size: ${size};`}
+		/>
+	)
+}
 
 <style define:vars={{ 'sl-icon-color': color, 'sl-icon-size': size }}>
 	svg {

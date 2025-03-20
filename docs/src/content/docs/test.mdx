@@ -1,0 +1,77 @@
+---
+title: ⚠️ Test Page ⚠️
+description: // TODO(HiDeoo) Remove me
+---
+
+:::danger
+This is a test page that should be removed.
+:::
+
+## `<Icon>` component
+
+import Preview from '~/components/component-preview.astro';
+import { Icon } from '@astrojs/starlight/components';
+
+Icons from the built-in default set:
+
+<Preview>
+
+```mdx
+<Icon name="starlight" />
+<Icon name="starlight" color="goldenrod" size="2rem" />
+```
+
+<Fragment slot="preview">
+	<Icon name="starlight" />
+	<Icon name="starlight" color="goldenrod" size="2rem" />
+</Fragment>
+
+</Preview>
+
+Icons from the built-in `seti` set:
+
+<Preview>
+
+```mdx
+<Icon name="seti:tsconfig" />
+<Icon name="seti:tsconfig" color="royalblue" size="2rem" />
+```
+
+<Fragment slot="preview">
+	<Icon name="seti:tsconfig" />
+	<Icon name="seti:tsconfig" color="royalblue" size="2rem" />
+</Fragment>
+
+</Preview>
+
+Icons from the user-installed Iconify `mdi` set:
+
+<Preview>
+
+```mdx
+<Icon name="mdi:bike-fast" />
+<Icon name="mdi:bike-fast" color="mediumvioletred" size="2rem" />
+```
+
+<Fragment slot="preview">
+	<Icon name="mdi:bike-fast" />
+	<Icon name="mdi:bike-fast" color="mediumvioletred" size="2rem" />
+</Fragment>
+
+</Preview>
+
+Icons from the user `src/icons/` directory:
+
+<Preview>
+
+```mdx
+<Icon name="test" />
+<Icon name="test" color="chartreuse" size="2rem" />
+```
+
+<Fragment slot="preview">
+	<Icon name="test" />
+	<Icon name="test" color="chartreuse" size="2rem" />
+</Fragment>
+
+</Preview>

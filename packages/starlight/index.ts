@@ -10,6 +10,7 @@
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
 import { AstroError } from 'astro/errors';
+import astroIcon from 'astro-icon';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -98,6 +99,9 @@ export default function StarlightIntegration(
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
 					integrations.push(mdx({ optimize: true }));
+				}
+				if (!allIntegrations.find(({ name }) => name === 'astro-icon')) {
+					integrations.push(astroIcon());
 				}
 
 				// Add Starlight directives restoration integration at the end of the list so that remark
