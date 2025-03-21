@@ -19,6 +19,8 @@ interface Props {
 const { name, label, size = '1em', color } = Astro.props;
 const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden': 'true' } as const);
 
+// TODO(HiDeoo) Probably need a better name once the `StarlightIcon` type is updated
+// TODO(HiDeoo) move to a helper if we do the same thing somewhere else
 const isStarlightIcon = name in Icons;
 ---
 
