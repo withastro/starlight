@@ -2,11 +2,14 @@ import { AstroError } from 'astro/errors';
 import type { Element, ElementContent, Text } from 'hast';
 import { type Child, h, s } from 'hastscript';
 import { select } from 'hast-util-select';
-import { fromHtml } from 'hast-util-from-html';
 import { toString } from 'hast-util-to-string';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import { Icons, type StarlightIcon } from '../components/Icons';
+import {
+	isBuiltInIcon,
+	getBuiltInIconHastTree,
+	type StarlightBuiltInIcon,
+} from '../components/Icons';
 import { definitions } from './file-tree-icons';
 
 declare module 'vfile' {
@@ -15,8 +18,8 @@ declare module 'vfile' {
 	}
 }
 
-const folderIcon = makeSVGIcon(Icons['seti:folder']);
-const defaultFileIcon = makeSVGIcon(Icons['seti:default']);
+const folderIcon = makeSVGIcon('seti:folder');
+const defaultFileIcon = makeSVGIcon('seti:default');
 
 /**
  * Process the HTML for a file tree to create the necessary markup for each file and directory
@@ -140,8 +143,8 @@ function makeText(value = ''): Text {
 	return { type: 'text', value };
 }
 
-/** Make a node containing an SVG icon from the passed HTML string. */
-function makeSVGIcon(svgString: string) {
+/** Make a node containing an SVG icon from the passed built-in icon name. */
+function makeSVGIcon(icon: StarlightBuiltInIcon) {
 	return s(
 		'svg',
 		{
@@ -151,7 +154,7 @@ function makeSVGIcon(svgString: string) {
 			'aria-hidden': 'true',
 			viewBox: '0 0 24 24',
 		},
-		fromHtml(svgString, { fragment: true })
+		getBuiltInIconHastTree(icon)
 	);
 }
 
@@ -159,10 +162,7 @@ function makeSVGIcon(svgString: string) {
 function getFileIcon(fileName: string) {
 	const name = getFileIconName(fileName);
 	if (!name) return defaultFileIcon;
-	if (name in Icons) {
-		const path = Icons[name as StarlightIcon];
-		return makeSVGIcon(path);
-	}
+	if (isBuiltInIcon(name)) return makeSVGIcon(name);
 	return defaultFileIcon;
 }
 

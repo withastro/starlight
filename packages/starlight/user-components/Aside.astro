@@ -1,13 +1,11 @@
 ---
 import { AstroError } from 'astro/errors';
 import Icon from './Icon.astro';
-import type { StarlightIcon } from '../components/Icons';
-
-const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
-const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 'error' } as const;
+import { AsideDefaultIcons, type StarlightIcon } from '../components/Icons';
+import { AsideVariants, isAsideVariant, type AsideVariant } from '../integrations/asides';
 
 interface Props {
-	type?: (typeof asideVariants)[number];
+	type?: AsideVariant;
 	title?: string;
 	// TODO(HiDeoo) Update docs?
 	// TODO(HiDeoo) markdoc support
@@ -16,11 +14,11 @@ interface Props {
 
 let { type = 'note', title, icon } = Astro.props;
 
-if (!asideVariants.includes(type)) {
+if (!isAsideVariant(type)) {
 	throw new AstroError(
 		'Invalid `type` prop passed to the `<Aside>` component.\n',
 		`Received: ${JSON.stringify(type)}\n` +
-			`Expected one of ${asideVariants.map((i) => JSON.stringify(i)).join(', ')}`
+			`Expected one of ${AsideVariants.map((i) => JSON.stringify(i)).join(', ')}`
 	);
 }
 
@@ -31,7 +29,7 @@ if (!title) {
 
 <aside aria-label={title} class={`starlight-aside starlight-aside--${type}`}>
 	<p class="starlight-aside__title" aria-hidden="true">
-		<Icon name={icon ?? icons[type]} class="starlight-aside__icon" />{title}
+		<Icon name={icon ?? AsideDefaultIcons[type]} class="starlight-aside__icon" />{title}
 	</p>
 	<div class="starlight-aside__content">
 		<slot />

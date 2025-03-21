@@ -1,4 +1,9 @@
+// TODO(HiDeoo) move/rename this file?
+
+import { fromHtml } from 'hast-util-from-html';
+
 import { FileIcons } from '../user-components/file-tree-icons';
+import type { AsideVariant } from '../integrations/asides';
 
 export const BuiltInIcons = {
 	'up-caret':
@@ -196,4 +201,22 @@ export const Icons = {
 	...FileIcons,
 };
 
-export type StarlightIcon = keyof typeof Icons;
+export const AsideDefaultIcons: Record<AsideVariant, StarlightBuiltInIcon> = {
+	note: 'information',
+	tip: 'rocket',
+	caution: 'warning',
+	danger: 'error',
+} as const;
+
+export type StarlightBuiltInIcon = keyof typeof Icons;
+export type StarlightIcon = StarlightBuiltInIcon;
+
+/** Determine if the given name matches a built-in icon. */
+export function isBuiltInIcon(name: string): name is StarlightBuiltInIcon {
+	return name in Icons;
+}
+
+/** Return the HAST tree for the given built-in icon children. */
+export function getBuiltInIconHastTree(icon: StarlightBuiltInIcon) {
+	return fromHtml(Icons[icon], { fragment: true });
+}
