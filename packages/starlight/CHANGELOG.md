@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.32.4
+
+### Patch Changes
+
+- [#2994](https://github.com/withastro/starlight/pull/2994) [`ca4ec8b`](https://github.com/withastro/starlight/commit/ca4ec8bc30b8e627bbc946736869ba67a2f4a6c6) Thanks [@XREvo](https://github.com/XREvo)! - Fixes default ranking of merged indexes when using multi-site search
+
+- [#2969](https://github.com/withastro/starlight/pull/2969) [`4682c7a`](https://github.com/withastro/starlight/commit/4682c7a4f248f53073a64ada671548709be49cd7) Thanks [@webpro](https://github.com/webpro)! - Add npm social icon
+
 ## 0.32.3
 
 ### Patch Changes
