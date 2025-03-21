@@ -66,10 +66,8 @@ const pagefindIndexOptionsSchema = z.object({
 	language: z.string().optional(),
 	/**
 	 * Configure how search result rankings are calculated by Pagefind.
-	 * 
-	 * We applied the default value for the merged indexes in order to have the same search
-	 * conditions on them and do not let them have a better scoring than the current site.
 	 */
+	 // We apply a default value to merged indexes in order to share the same ranking for them and the current site when not set explicitly.
 	ranking: pagefindRankingWeightsSchema.default({}),
 });
 
