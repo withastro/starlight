@@ -1,6 +1,7 @@
 ---
 import { AstroError } from 'astro/errors';
 import Icon from './Icon.astro';
+import type { StarlightIcon } from '../components/Icons';
 
 const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
 const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 'error' } as const;
@@ -8,9 +9,12 @@ const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 
 interface Props {
 	type?: (typeof asideVariants)[number];
 	title?: string;
+	// TODO(HiDeoo) Update docs?
+	// TODO(HiDeoo) markdoc support
+	icon?: StarlightIcon;
 }
 
-let { type = 'note', title } = Astro.props;
+let { type = 'note', title, icon } = Astro.props;
 
 if (!asideVariants.includes(type)) {
 	throw new AstroError(
@@ -27,7 +31,7 @@ if (!title) {
 
 <aside aria-label={title} class={`starlight-aside starlight-aside--${type}`}>
 	<p class="starlight-aside__title" aria-hidden="true">
-		<Icon name={icons[type]} class="starlight-aside__icon" />{title}
+		<Icon name={icon ?? icons[type]} class="starlight-aside__icon" />{title}
 	</p>
 	<div class="starlight-aside__content">
 		<slot />

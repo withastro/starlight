@@ -80,7 +80,7 @@ Icons from the user `src/icons/` directory (`src/icons/test.svg`):
 
 import { Card } from '@astrojs/starlight/components';
 
-Card with icon from the built-in default set:
+Card component with icon from the built-in default set:
 
 <Preview>
 
@@ -98,7 +98,7 @@ Card with icon from the built-in default set:
 
 </Preview>
 
-Card with icon from the built-in `seti` set:
+Card component with icon from the built-in `seti` set:
 
 <Preview>
 
@@ -116,7 +116,7 @@ Card with icon from the built-in `seti` set:
 
 </Preview>
 
-Card with icon from the user-installed Iconify `mdi` set:
+Card component with icon from the user-installed Iconify `mdi` set:
 
 <Preview>
 
@@ -134,7 +134,7 @@ Card with icon from the user-installed Iconify `mdi` set:
 
 </Preview>
 
-Card with icon from the user `src/icons/` directory (`src/icons/test.svg`):
+Card component with icon from the user `src/icons/` directory (`src/icons/test.svg`):
 
 <Preview>
 
@@ -148,6 +148,78 @@ Card with icon from the user `src/icons/` directory (`src/icons/test.svg`):
 	<Card icon="test" title="Example">
 		A card with an icon from the user `src/icons/` directory.
 	</Card>
+</Fragment>
+
+</Preview>
+
+## `<Aside>` component
+
+import { Aside } from '@astrojs/starlight/components';
+
+Aside component with icon from the built-in default set:
+
+<Preview>
+
+```mdx
+<Aside icon="phone">Aside with an icon from the built-in default set.</Aside>
+```
+
+<Fragment slot="preview">
+	<Aside icon="phone">Aside with an icon from the built-in default set.</Aside>
+</Fragment>
+
+</Preview>
+
+Aside component with icon from the built-in `seti` set:
+
+<Preview>
+
+```mdx
+<Aside icon="seti:github" type="tip">
+	Aside with an icon from the built-in `seti` set.
+</Aside>
+```
+
+<Fragment slot="preview">
+	<Aside icon="seti:github" type="tip">
+		Aside with an icon from the built-in `seti` set.
+	</Aside>
+</Fragment>
+
+</Preview>
+
+Aside component with icon from the user-installed Iconify `mdi` set:
+
+<Preview>
+
+```mdx
+<Aside icon="mdi:emoticon-cool" type="caution">
+	Aside with an icon from the user-installed Iconify `mdi` set.
+</Aside>
+```
+
+<Fragment slot="preview">
+	<Aside icon="mdi:emoticon-cool" type="caution">
+		Aside with an icon from the user-installed Iconify `mdi` set.
+	</Aside>
+</Fragment>
+
+</Preview>
+
+Aside component with icon from the user `src/icons/` directory (`src/icons/test.svg`):
+
+<Preview>
+
+```mdx
+<Aside icon="test" type="danger">
+	Aside with an icon from the user `src/icons/` directory.
+</Aside>
+```
+
+<Fragment slot="preview">
+	<Aside icon="test" type="danger">
+		Aside with an icon from the user `src/icons/` directory.
+	</Aside>
 </Fragment>
 
 </Preview>
