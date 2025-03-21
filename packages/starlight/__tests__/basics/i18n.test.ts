@@ -2,6 +2,7 @@ import { assert, describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { processI18nConfig, pickLang } from '../../utils/i18n';
 import type { AstroConfig, AstroUserConfig } from 'astro';
+import type { StarlightConfig } from '../../types';
 
 describe('pickLang', () => {
 	const dictionary = { en: 'Hello', fr: 'Bonjour' };
@@ -65,7 +66,15 @@ describe('processI18nConfig', () => {
 			`);
 		});
 
-		test.each([
+		type AstroI18nTestEachConfig = {
+			i18nConfig: AstroUserConfig['i18n'];
+			expected: {
+				defaultLocale: StarlightConfig['defaultLocale'];
+				locales?: StarlightConfig['locales'];
+			};
+		};
+
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: { defaultLocale: 'en', locales: ['en'] },
 				expected: {
@@ -104,7 +113,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
@@ -154,7 +163,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
@@ -202,7 +211,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
