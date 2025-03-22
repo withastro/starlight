@@ -50,12 +50,14 @@ Adding a custom logo to the site header is a quick way to add your individual br
 By default, the logo will be displayed alongside your site’s `title`.
 If your logo image already includes the site title, you can visually hide the title text by setting the `replacesTitle` option.
 The `title` text will still be included for screen readers so that the header remains accessible.
+Use the `href` option to define a custom destination when clicking the logo, in case you prefer a value different from `site`.
 
-```js {5}
+```js {5-6}
 starlight({
   title: 'Docs With My Logo',
   logo: {
     src: './src/assets/my-logo.svg',
+    href: 'my-domain.example',
     replacesTitle: true,
   },
 }),

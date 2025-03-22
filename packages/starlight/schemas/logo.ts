@@ -6,6 +6,8 @@ export const LogoConfigSchema = () =>
 			z.object({
 				/** Source of the image file to use. */
 				src: z.string(),
+				/** Link to follow when clicking the logo. */
+				href: z.string().optional(),
 				/** Alternative text description of the logo. */
 				alt: z.string().default(''),
 				/** Set to `true` to hide the site title text and only show the logo. */
@@ -16,6 +18,8 @@ export const LogoConfigSchema = () =>
 				dark: z.string(),
 				/** Source of the image file to use in light mode. */
 				light: z.string(),
+				/** Link to follow when clicking the logo. */
+				href: z.string().optional(),
 				/** Alternative text description of the logo. */
 				alt: z.string().default(''),
 				/** Set to `true` to hide the site title text and only show the logo. */
