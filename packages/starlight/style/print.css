@@ -177,4 +177,11 @@
 		/* Ensure steps guidelines are visible when background colors are disabled. */
 		box-shadow: inset 99rem 99rem var(--sl-color-hairline-light);
 	}
+
+	[data-theme='dark'] img[src$='#only-dark'] {
+	  display: none;
+	}
+	[data-theme='dark'] img[src$='#only-light'] {
+	  display: block !important;
+	}
 }
