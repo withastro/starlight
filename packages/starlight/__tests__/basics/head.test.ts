@@ -91,9 +91,10 @@ describe('createHead', () => {
 		const defaultFavicon = {
 			tag: 'link',
 			attrs: {
-				rel: 'shortcut icon',
+				rel: 'icon',
 				href: '/favicon.svg',
 				type: 'image/svg+xml',
+				'data-favicon': 'default',
 			},
 		} as const;
 
