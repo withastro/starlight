@@ -226,7 +226,7 @@ Dans l'exemple suivant, un module d'extension publié sous `@exemple/starlight-m
 export default {
   name: '@exemple/starlight-module-extension',
   hooks: {
-    setup({ addRouteMiddleware }) {
+    'config:setup'({ addRouteMiddleware }) {
       addRouteMiddleware({
         entrypoint: '@exemple/starlight-module-extension/route-middleware',
       });
