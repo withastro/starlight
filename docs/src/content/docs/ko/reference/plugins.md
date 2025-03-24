@@ -226,7 +226,7 @@ export default {
 export default {
   name: '@example/starlight-plugin',
   hooks: {
-    setup({ addRouteMiddleware }) {
+    'config:setup'({ addRouteMiddleware }) {
       addRouteMiddleware({
         entrypoint: '@example/starlight-plugin/route-middleware',
       });
