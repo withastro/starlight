@@ -245,6 +245,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js {2-3}
   function demo() {
@@ -253,6 +257,23 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines) :
 
@@ -263,6 +284,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "termes individuels" /Même.*charge/
   // Des termes individuels peuvent également être mis en évidence
@@ -271,6 +296,23 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'termes individuels' /Même.*charge/" %}
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+  	return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Marquer du texte ou des lignes comme insérés ou supprimés avec `ins` ou `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del) :
 
@@ -282,6 +324,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "return true;" ins="insertion" del="suppression"
   function demo() {
@@ -291,6 +337,24 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='insertion' del='suppression'" %}
+  function demo() {
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Combiner coloration syntaxique et syntaxe de type `diff`](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax) :
 
@@ -303,6 +367,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function ceciEstDuJavaScript() {
@@ -313,6 +381,25 @@ Certaines des options les plus courantes sont présentées ci-dessous :
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Cadres et titres
 
@@ -329,6 +416,10 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   console.log('Hello World!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // mon-fichier-de-test.js
@@ -336,17 +427,50 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   ```
   ````
 
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
 - [Ajouter un titre à une fenêtre de terminal](https://expressive-code.com/key-features/frames/#terminal-frames) :
 
   ```bash title="Installation des dépendances…"
   npm install
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```bash title="Installation des dépendances…"
   npm install
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Installation des dépendances…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Désactiver les cadres de fenêtre avec `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types) :
 
@@ -354,11 +478,29 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```bash frame="none"
   echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Détails
 

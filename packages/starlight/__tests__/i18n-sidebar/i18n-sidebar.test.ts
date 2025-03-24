@@ -43,7 +43,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/getting-started",
+			    "href": "/getting-started/",
 			    "isCurrent": false,
 			    "label": "Getting Started",
 			    "type": "link",
@@ -54,7 +54,7 @@ describe('getSidebar', () => {
 			      "text": "New",
 			      "variant": "default",
 			    },
-			    "href": "/manual-setup",
+			    "href": "/manual-setup/",
 			    "isCurrent": false,
 			    "label": "Do it yourself",
 			    "type": "link",
@@ -65,7 +65,7 @@ describe('getSidebar', () => {
 			      "text": "Eco-friendly",
 			      "variant": "success",
 			    },
-			    "href": "/environmental-impact",
+			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
 			    "type": "link",
@@ -82,7 +82,7 @@ describe('getSidebar', () => {
 			          "text": "Test",
 			          "variant": "default",
 			        },
-			        "href": "/guides/pages",
+			        "href": "/guides/pages/",
 			        "isCurrent": false,
 			        "label": "Pages Guide",
 			        "type": "link",
@@ -93,7 +93,7 @@ describe('getSidebar', () => {
 			          "text": "Deprecated",
 			          "variant": "default",
 			        },
-			        "href": "/guides/authoring-content",
+			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Content in Markdown",
 			        "type": "link",
@@ -105,7 +105,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/resources/plugins",
+			    "href": "/resources/plugins/",
 			    "isCurrent": false,
 			    "label": "Plugins and Integrations",
 			    "type": "link",
@@ -119,7 +119,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr",
+			    "href": "/fr/",
 			    "isCurrent": true,
 			    "label": "Starlight 🌟 Construire des sites de documentation avec Astro",
 			    "type": "link",
@@ -127,7 +127,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr/getting-started",
+			    "href": "/fr/getting-started/",
 			    "isCurrent": false,
 			    "label": "Mise en route",
 			    "type": "link",
@@ -138,7 +138,7 @@ describe('getSidebar', () => {
 			      "text": "Nouveau",
 			      "variant": "default",
 			    },
-			    "href": "/fr/manual-setup",
+			    "href": "/fr/manual-setup/",
 			    "isCurrent": false,
 			    "label": "Fait maison",
 			    "type": "link",
@@ -149,7 +149,7 @@ describe('getSidebar', () => {
 			      "text": "Écologique",
 			      "variant": "success",
 			    },
-			    "href": "/fr/environmental-impact",
+			    "href": "/fr/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Documents écologiques",
 			    "type": "link",
@@ -161,7 +161,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/guides/pages",
+			        "href": "/fr/guides/pages/",
 			        "isCurrent": false,
 			        "label": "Pages",
 			        "type": "link",
@@ -172,7 +172,7 @@ describe('getSidebar', () => {
 			          "text": "Deprecated",
 			          "variant": "default",
 			        },
-			        "href": "/fr/guides/authoring-content",
+			        "href": "/fr/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Création de contenu en Markdown",
 			        "type": "link",
@@ -184,7 +184,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr/resources/plugins",
+			    "href": "/fr/resources/plugins/",
 			    "isCurrent": false,
 			    "label": "Modules d'extension et outils",
 			    "type": "link",
@@ -198,7 +198,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr",
+			    "href": "/fr/",
 			    "isCurrent": false,
 			    "label": "Starlight 🌟 Construire des sites de documentation avec Astro",
 			    "type": "link",
@@ -206,7 +206,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr/getting-started",
+			    "href": "/fr/getting-started/",
 			    "isCurrent": true,
 			    "label": "Mise en route",
 			    "type": "link",
@@ -217,7 +217,7 @@ describe('getSidebar', () => {
 			      "text": "Nouveau",
 			      "variant": "default",
 			    },
-			    "href": "/fr/manual-setup",
+			    "href": "/fr/manual-setup/",
 			    "isCurrent": false,
 			    "label": "Fait maison",
 			    "type": "link",
@@ -228,7 +228,7 @@ describe('getSidebar', () => {
 			      "text": "Écologique",
 			      "variant": "success",
 			    },
-			    "href": "/fr/environmental-impact",
+			    "href": "/fr/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Documents écologiques",
 			    "type": "link",
@@ -240,7 +240,7 @@ describe('getSidebar', () => {
 			      {
 			        "attrs": {},
 			        "badge": undefined,
-			        "href": "/fr/guides/pages",
+			        "href": "/fr/guides/pages/",
 			        "isCurrent": false,
 			        "label": "Pages",
 			        "type": "link",
@@ -251,7 +251,7 @@ describe('getSidebar', () => {
 			          "text": "Deprecated",
 			          "variant": "default",
 			        },
-			        "href": "/fr/guides/authoring-content",
+			        "href": "/fr/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Création de contenu en Markdown",
 			        "type": "link",
@@ -263,7 +263,7 @@ describe('getSidebar', () => {
 			  {
 			    "attrs": {},
 			    "badge": undefined,
-			    "href": "/fr/resources/plugins",
+			    "href": "/fr/resources/plugins/",
 			    "isCurrent": false,
 			    "label": "Modules d'extension et outils",
 			    "type": "link",
@@ -273,12 +273,12 @@ describe('getSidebar', () => {
 	});
 	test('uses label from config for internal links', () => {
 		const sidebar = getSidebar('/', undefined);
-		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/manual-setup');
+		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/manual-setup/');
 		expect(entry?.label).toBe('Do it yourself');
 	});
 	test('uses translation from config for internal links', () => {
 		const sidebar = getSidebar('/fr', 'fr');
-		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/fr/manual-setup');
+		const entry = sidebar.find((item) => item.type === 'link' && item.href === '/fr/manual-setup/');
 		expect(entry?.label).toBe('Fait maison');
 	});
 	test('uses intermediate sidebars cached by locales', async () => {

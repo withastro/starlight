@@ -238,7 +238,7 @@ test('uses provided sidebar if any', async () => {
 		  {
 		    "attrs": {},
 		    "badge": undefined,
-		    "href": "/reference/frontmatter",
+		    "href": "/reference/frontmatter/",
 		    "isCurrent": false,
 		    "label": "Frontmatter Reference",
 		    "type": "link",
