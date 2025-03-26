@@ -233,6 +233,22 @@ const UserConfigSchema = z.object({
 		.transform((string) => [string])
 		.or(z.string().array())
 		.default([])
+		.refine(
+			(middlewares) => {
+				// Ensure the middleware paths don't match the invalid ones
+				const invalidPaths = [
+					'src/middleware.js',
+					'src/middleware.ts',
+					'src/middleware/index.js',
+					'src/middleware/index.ts',
+				];
+				return !middlewares.some((middleware) => invalidPaths.includes(middleware));
+			},
+			{
+				message:
+					'Middleware path cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts" because they would conflict with Astro’s middleware. Read more about Astro’s middleware: https://docs.astro.build/en/guides/middleware/',
+			}
+		)
 		.describe('Add middleware to process Starlight’s route data for each page.'),
 });
 
