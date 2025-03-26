@@ -212,38 +212,38 @@ export default {
 ```
 
 #### `addRouteMiddleware`
- 
- **类型：** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void`
- 
- 一个回调函数，用于向站点添加 [路由中间件处理程序](/zh-cn/guides/route-data/)。
- 
- `entrypoint` 属性必须符合插件的中间件文件的模块规范，该文件导出一个 `onRequest` 处理程序。
- 
- 在下面的例子中，一个名为 `@example/starlight-plugin` 的插件使用 npm 模块规范添加了一个路由中间件：
- 
- ```js {6-9}
- // plugin.ts
- export default {
-   name: '@example/starlight-plugin',
-   hooks: {
-     'config:setup'({ addRouteMiddleware }) {
-       addRouteMiddleware({
-         entrypoint: '@example/starlight-plugin/route-middleware',
-       });
-     },
-   },
- };
- ```
- 
- ##### 控制执行顺序
- 
- 默认情况下，插件中间件按插件添加的顺序运行。
- 
- 如果你需要更精细地控制中间件的执行顺序，可以使用可选的 `order` 属性。
- 设置 `order: "pre"` 在用户中间件之前运行。
- 设置 `order: "post"` 在所有其他中间件之后运行。
- 
- 如果两个插件添加了具有相同 `order` 值的中间件，则先添加的插件将先运行。
+
+**类型：** `(config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void`
+
+一个回调函数，用于向站点添加 [路由中间件处理程序](/zh-cn/guides/route-data/)。
+
+`entrypoint` 属性必须符合插件的中间件文件的模块规范，该文件导出一个 `onRequest` 处理程序。
+
+在下面的例子中，一个名为 `@example/starlight-plugin` 的插件使用 npm 模块规范添加了一个路由中间件：
+
+```js {6-9}
+// plugin.ts
+export default {
+  name: '@example/starlight-plugin',
+  hooks: {
+    'config:setup'({ addRouteMiddleware }) {
+      addRouteMiddleware({
+        entrypoint: '@example/starlight-plugin/route-middleware',
+      });
+    },
+  },
+};
+```
+
+##### 控制执行顺序
+
+默认情况下，插件中间件按插件添加的顺序运行。
+
+如果你需要更精细地控制中间件的执行顺序，可以使用可选的 `order` 属性。
+设置 `order: "pre"` 在用户中间件之前运行。
+设置 `order: "post"` 在所有其他中间件之后运行。
+
+如果两个插件添加了具有相同 `order` 值的中间件，则先添加的插件将先运行。
 
 #### `astroConfig`
 
