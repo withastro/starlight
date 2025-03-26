@@ -1,5 +1,9 @@
 // TODO(HiDeoo) move/rename this file?
 
+import fs from 'node:fs/promises';
+import { stringToIcon } from '@iconify/utils';
+import { loadCollectionFromFS } from '@iconify/utils/lib/loader/fs';
+import { AstroError } from 'astro/errors';
 import { fromHtml } from 'hast-util-from-html';
 
 import { FileIcons } from '../user-components/file-tree-icons';
@@ -209,14 +213,78 @@ export const AsideDefaultIcons: Record<AsideVariant, StarlightBuiltInIcon> = {
 } as const;
 
 export type StarlightBuiltInIcon = keyof typeof Icons;
-export type StarlightIcon = StarlightBuiltInIcon;
+// Add any string to the type to support Iconify icons while preserving autocomplete for built-in icons.
+export type StarlightIcon = StarlightBuiltInIcon | (string & {});
 
 /** Determine if the given name matches a built-in icon. */
 export function isBuiltInIcon(name: string): name is StarlightBuiltInIcon {
 	return name in Icons;
 }
 
-/** Return the HAST tree for the given built-in icon children. */
-export function getBuiltInIconHastTree(icon: StarlightBuiltInIcon) {
-	return fromHtml(Icons[icon], { fragment: true });
+/** Return the HAST tree for the given built-in icon. */
+export function getBuiltInIconHastTree(name: StarlightBuiltInIcon) {
+	return getIconHastTree(Icons[name]);
 }
+
+/** Return the HAST tree for the given Iconify icon. */
+export function getIconifyIconHastTree(name: string) {
+	return getIconHastTree(getIconifyIcon(name).body);
+}
+
+/** Return the HAST tree for the given icon HTML. */
+function getIconHastTree(html: string) {
+	return fromHtml(html, { fragment: true });
+}
+
+/** A map of all Iconify collections loaded in a remark context keyed by collection name. */
+const iconifyCollections = new Map<string, IconifyJSON>();
+
+/** Load and cache all detected Iconify collections. */
+export async function loadIconifyCollections(root: URL) {
+	const collections = await detectIconifyCollections(root);
+
+	for (const collection of collections) {
+		const collectionData = await loadCollectionFromFS(collection);
+		if (collectionData) {
+			iconifyCollections.set(collection, collectionData);
+		}
+	}
+}
+
+/**
+ * Detect all user-installed Iconify collections in a project.
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadIconifyCollections.ts#L88
+ */
+export async function detectIconifyCollections(root: URL) {
+	const collections: string[] = [];
+	try {
+		const text = await fs.readFile(new URL('./package.json', root), { encoding: 'utf8' });
+		const { dependencies = {}, devDependencies = {} } = JSON.parse(text);
+		for (const dep of [...Object.keys(dependencies), ...Object.keys(devDependencies)]) {
+			if (!dep.startsWith('@iconify-json/')) continue;
+			collections.push(dep.replace('@iconify-json/', ''));
+		}
+	} catch {
+		// Return an empty array if we fail to properly detect Iconify collections.
+	}
+	return collections;
+}
+
+/** Returns an Iconify icon object from the given icon name. */
+function getIconifyIcon(name: string) {
+	const iconName = stringToIcon(name);
+	if (!iconName)
+		throw new AstroError(
+			`Failed to parse \`${name}\` Iconify icon name.`,
+			'Make sure the icon name is a valid Iconify icon name.'
+		);
+	const icon = iconifyCollections.get(iconName.prefix)?.icons[iconName.name];
+	if (!icon)
+		throw new AstroError(
+			`Failed to locate \`${name}\` Iconify icon.`,
+			`Make sure the Iconify \`${iconName.prefix}\` collection is installed and that the \`${iconName.name}\` icon exists.`
+		);
+	return icon;
+}
+
+type IconifyJSON = NonNullable<Awaited<ReturnType<typeof loadCollectionFromFS>>>;

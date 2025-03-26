@@ -14,12 +14,13 @@ import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { HookParameters, StarlightConfig } from '../types';
+import type { HookParameters, StarlightConfig, StarlightIcon } from '../types';
 import {
 	AsideDefaultIcons,
 	getBuiltInIconHastTree,
+	getIconifyIconHastTree,
 	isBuiltInIcon,
-	type StarlightBuiltInIcon,
+	loadIconifyCollections,
 } from '../components/Icons';
 
 export const AsideVariants = ['note', 'tip', 'caution', 'danger'] as const;
@@ -115,9 +116,12 @@ function transformUnhandledDirective(
 	}
 }
 
-/** Make a node containing an SVG icon from the passed built-in icon name. */
-function makeSVGIcon(icon: StarlightBuiltInIcon) {
-	const tree = getBuiltInIconHastTree(icon);
+/** Make a node containing an SVG icon from the passed icon name. */
+function makeSVGIcon(icon: StarlightIcon) {
+	const iconHastTree = isBuiltInIcon(icon)
+		? getBuiltInIconHastTree(icon)
+		: getIconifyIconHastTree(icon);
+
 	return s(
 		'svg',
 		{
@@ -127,7 +131,7 @@ function makeSVGIcon(icon: StarlightBuiltInIcon) {
 			fill: 'currentColor',
 			class: 'starlight-aside__icon',
 		},
-		makeSvgChildNodes(tree.children)
+		makeSvgChildNodes(iconHastTree.children)
 	);
 }
 
@@ -156,7 +160,8 @@ function makeSVGIcon(icon: StarlightBuiltInIcon) {
  * ```
  */
 function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
-	const transformer: Transformer<Root> = (tree, file) => {
+	const transformer: Transformer<Root> = async (tree, file) => {
+		await loadIconifyCollections(options.astroConfig.root);
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
@@ -197,11 +202,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				},
 				[
 					h('p', { class: 'starlight-aside__title', 'aria-hidden': 'true' }, [
-						makeSVGIcon(
-							iconAttribute && isBuiltInIcon(iconAttribute)
-								? iconAttribute
-								: AsideDefaultIcons[variant]
-						),
+						makeSVGIcon(iconAttribute || AsideDefaultIcons[variant]),
 						...titleNode,
 					]),
 					h('div', { class: 'starlight-aside__content' }, node.children),

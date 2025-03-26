@@ -60,22 +60,6 @@ Icons from the user-installed Iconify `mdi` set:
 
 </Preview>
 
-Icons from the user `src/icons/` directory (`src/icons/test.svg`):
-
-<Preview>
-
-```mdx
-<Icon name="test" />
-<Icon name="test" color="chartreuse" size="2rem" />
-```
-
-<Fragment slot="preview">
-	<Icon name="test" />
-	<Icon name="test" color="chartreuse" size="2rem" />
-</Fragment>
-
-</Preview>
-
 ## `<Card>` component
 
 import { Card } from '@astrojs/starlight/components';
@@ -129,24 +113,6 @@ Card component with icon from the user-installed Iconify `mdi` set:
 <Fragment slot="preview">
 	<Card icon="mdi:parachute-outline" title="Example">
 		A card with an icon from the user-installed Iconify `mdi` set.
-	</Card>
-</Fragment>
-
-</Preview>
-
-Card component with icon from the user `src/icons/` directory (`src/icons/test.svg`):
-
-<Preview>
-
-```mdx
-<Card icon="test" title="Example">
-	A card with an icon from the user `src/icons/` directory.
-</Card>
-```
-
-<Fragment slot="preview">
-	<Card icon="test" title="Example">
-		A card with an icon from the user `src/icons/` directory.
 	</Card>
 </Fragment>
 
@@ -206,24 +172,6 @@ Aside component with icon from the user-installed Iconify `mdi` set:
 
 </Preview>
 
-Aside component with icon from the user `src/icons/` directory (`src/icons/test.svg`):
-
-<Preview>
-
-```mdx
-<Aside icon="test" type="danger">
-	Aside with an icon from the user `src/icons/` directory.
-</Aside>
-```
-
-<Fragment slot="preview">
-	<Aside icon="test" type="danger">
-		Aside with an icon from the user `src/icons/` directory.
-	</Aside>
-</Fragment>
-
-</Preview>
-
 ## Aside directives
 
 Aside directive with icon from the built-in default set:
@@ -260,6 +208,26 @@ Aside with an icon from the built-in `seti` set.
 
 :::tip[Wow]{icon="seti:yml"}
 Aside with an icon from the built-in `seti` set.
+:::
+
+</Fragment>
+
+</Preview>
+
+Aside directive with icon from the user-installed Iconify `mdi` set:
+
+<Preview>
+
+```mdx
+:::caution[Coffee break]{icon="mdi:coffee-outline"}
+Aside with an icon from the user-installed Iconify `mdi` set.
+:::
+```
+
+<Fragment slot="preview">
+
+:::caution[Coffee break]{icon="mdi:coffee-outline"}
+Aside with an icon from the user-installed Iconify `mdi` set.
 :::
 
 </Fragment>
