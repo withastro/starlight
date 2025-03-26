@@ -242,7 +242,7 @@ export async function loadIconifyCollections(root: URL) {
 	const collections = await detectIconifyCollections(root);
 
 	for (const collection of collections) {
-		const collectionData = await loadCollectionFromFS(collection);
+		const collectionData = await loadCollectionFromFS(collection, false, undefined, root.pathname);
 		if (collectionData) {
 			iconifyCollections.set(collection, collectionData);
 		}

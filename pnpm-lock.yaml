@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  astro-icon@1.1.5:
+    hash: sbd2kgdsncenxfz6iwt3ojmeny
+    path: patches/astro-icon@1.1.5.patch
+
 importers:
 
   .:
@@ -196,7 +201,7 @@ importers:
         version: 0.40.0(astro@5.1.5)
       astro-icon:
         specifier: ^1.1.5
-        version: 1.1.5
+        version: 1.1.5(patch_hash=sbd2kgdsncenxfz6iwt3ojmeny)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -279,6 +284,9 @@ importers:
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../../..
+      '@iconify-json/mdi':
+        specifier: ^1.2.3
+        version: 1.2.3
       astro:
         specifier: ^5.1.5
         version: 5.1.5(@types/node@18.16.19)(typescript@5.6.3)
@@ -2511,7 +2519,7 @@ packages:
       rehype-expressive-code: 0.40.0
     dev: false
 
-  /astro-icon@1.1.5:
+  /astro-icon@1.1.5(patch_hash=sbd2kgdsncenxfz6iwt3ojmeny):
     resolution: {integrity: sha512-CJYS5nWOw9jz4RpGWmzNQY7D0y2ZZacH7atL2K9DeJXJVaz7/5WrxeyIxO8KASk1jCM96Q4LjRx/F3R+InjJrw==}
     dependencies:
       '@iconify/tools': 4.1.2
@@ -2521,6 +2529,7 @@ packages:
       - debug
       - supports-color
     dev: false
+    patched: true
 
   /astro@5.1.5(@types/node@18.16.19)(typescript@5.6.3):
     resolution: {integrity: sha512-Q9TE4aNlczxVoPDoXR3UcjLezL+70z0KbTRXovE4ybpx0mgNL1jsmSWtF3UFXB5+GTf9JK7om5fbIaaMReKcUg==}

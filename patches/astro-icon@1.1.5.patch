@@ -1,0 +1,26 @@
+diff --git a/dist/loaders/loadIconifyCollections.js b/dist/loaders/loadIconifyCollections.js
+index b94f53885887bed93031a5ac1353ef16cd860c86..2a4ae126512103f4ebd17ffc213f10cec1e48422 100644
+--- a/dist/loaders/loadIconifyCollections.js
++++ b/dist/loaders/loadIconifyCollections.js
+@@ -12,7 +12,7 @@ export default async function loadIconifyCollections({ root, include = {}, }) {
+             continue;
+         include[name] = ["*"];
+     }
+-    const possibleCollections = await Promise.all(installedCollections.map((collectionName) => loadCollection(collectionName).then((possibleCollection) => [collectionName, possibleCollection])));
++    const possibleCollections = await Promise.all(installedCollections.map((collectionName) => loadCollection(collectionName, false, root).then((possibleCollection) => [collectionName, possibleCollection])));
+     const collections = possibleCollections.reduce((acc, [name, collection]) => {
+         if (!collection) {
+             console.error(`[astro-icon] "${name}" does not appear to be a valid iconify collection! Did you install the "@iconify-json/${name}" dependency?`);
+@@ -37,10 +37,10 @@ export default async function loadIconifyCollections({ root, include = {}, }) {
+     }, {});
+     return collections;
+ }
+-export async function loadCollection(name, autoInstall) {
++export async function loadCollection(name, autoInstall, root) {
+     if (!name)
+         return;
+-    return loadCollectionFromFS(name, autoInstall);
++    return loadCollectionFromFS(name, autoInstall, undefined, root.pathname);
+ }
+ async function detectInstalledCollections(root) {
+     try {
