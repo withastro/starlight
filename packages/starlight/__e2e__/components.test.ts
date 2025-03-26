@@ -343,7 +343,7 @@ test.describe('tabs', () => {
 });
 
 test.describe('Iconify icons', () => {
-	test.only('renders Iconify icons', async ({ page, getProdServer }) => {
+	test('renders Iconify icons', async ({ page, getProdServer }) => {
 		const starlight = await getProdServer();
 		await starlight.goto('/iconify');
 
