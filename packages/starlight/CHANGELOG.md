@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.32.4
+
+### Patch Changes
+
+- [#2994](https://github.com/withastro/starlight/pull/2994) [`ca4ec8b`](https://github.com/withastro/starlight/commit/ca4ec8bc30b8e627bbc946736869ba67a2f4a6c6) Thanks [@XREvo](https://github.com/XREvo)! - Fixes default ranking of merged indexes when using multi-site search
+
+- [#2969](https://github.com/withastro/starlight/pull/2969) [`4682c7a`](https://github.com/withastro/starlight/commit/4682c7a4f248f53073a64ada671548709be49cd7) Thanks [@webpro](https://github.com/webpro)! - Add npm social icon
+
+## 0.32.3
+
+### Patch Changes
+
+- [#2955](https://github.com/withastro/starlight/pull/2955) [`77b6a41`](https://github.com/withastro/starlight/commit/77b6a412c9daba8e6b856f3640204a1ca61c93b9) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds 5 new icons: `figma`, `sketch`, `vim`, `vscode`, and `zed`.
+
+- [#2961](https://github.com/withastro/starlight/pull/2961) [`da57fab`](https://github.com/withastro/starlight/commit/da57fab3027048825e048384fe4aa773b5db3ebf) Thanks [@ematipico](https://github.com/ematipico)! - Adds 1 new icon: `jetbrains`.
+
 ## 0.32.2
 
 ### Patch Changes
