@@ -5,11 +5,7 @@ import { select } from 'hast-util-select';
 import { toString } from 'hast-util-to-string';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import {
-	isBuiltInIcon,
-	getBuiltInIconHastTree,
-	type StarlightBuiltInIcon,
-} from '../components/Icons';
+import { isBuiltInIcon, getBuiltInIconHastTree, type StarlightBuiltInIcon } from '../utils/icons';
 import { definitions } from './file-tree-icons';
 
 declare module 'vfile' {

@@ -21,7 +21,7 @@ import {
 	getIconifyIconHastTree,
 	isBuiltInIcon,
 	loadIconifyCollections,
-} from '../components/Icons';
+} from '../utils/icons';
 
 export const AsideVariants = ['note', 'tip', 'caution', 'danger'] as const;
 export type AsideVariant = (typeof AsideVariants)[number];
