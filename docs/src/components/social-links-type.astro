@@ -1,7 +1,4 @@
 ---
-import { socialLinks } from '../../../packages/starlight/schemas/social';
-
-const socials = [...socialLinks].sort((a, b) => a.localeCompare(b, 'en'));
 ---
 
-<code>{`Partial<Record<${socials.map((social) => `'${social}'`).join(' | ')}, string>>`}</code>
+<code set:text="Array<{ label: string; icon: string; href: string }>" />
