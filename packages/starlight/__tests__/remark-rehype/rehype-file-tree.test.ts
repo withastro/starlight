@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { processFileTree } from '../../user-components/rehype-file-tree';
-import { Icons, type StarlightIcon } from '../../utils/icons';
+import { Icons, type StarlightBuiltInIcon } from '../../utils/icons';
 
 describe('validation', () => {
 	test('throws an error with no content', () => {
@@ -176,6 +176,6 @@ function extractFileTree(html: string, stripIcons = true) {
 	return tree;
 }
 
-function expectHtmlToIncludeIcon(html: string, icon: (typeof Icons)[StarlightIcon]) {
+function expectHtmlToIncludeIcon(html: string, icon: (typeof Icons)[StarlightBuiltInIcon]) {
 	return expect(extractFileTree(html, false)).toContain(icon.replace('/>', '>'));
 }
