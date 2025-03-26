@@ -1,5 +1,3 @@
-// TODO(HiDeoo) move/rename this file?
-
 import fs from 'node:fs/promises';
 import { stringToIcon } from '@iconify/utils';
 import { loadCollectionFromFS } from '@iconify/utils/lib/loader/fs';

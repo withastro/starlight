@@ -2,13 +2,7 @@
 import { Icon as AstroIcon } from 'astro-icon/components';
 import { Icons, isBuiltInIcon, type StarlightIcon } from '../utils/icons';
 
-// TODO(HiDeoo) global astro-icon options?
-// TODO(HiDeoo) Can we support icons from `src/icons/` in a remark plugin?
-
-// TODO(HiDeoo) Review all props
 interface Props {
-	// TODO(HiDeoo) improve type to support string but keep autocomplete
-	// TODO(HiDeoo) It should not be done here but in the `StarlightIcon` type itself so it's reflected everywhere
 	name: StarlightIcon;
 	label?: string;
 	color?: string;
