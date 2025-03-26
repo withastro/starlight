@@ -99,6 +99,9 @@ importers:
       '@astrojs/starlight-markdoc':
         specifier: ^0.3.0
         version: link:../../packages/markdoc
+      '@iconify-json/mdi':
+        specifier: ^1.2.3
+        version: 1.2.3
       astro:
         specifier: ^5.1.5
         version: 5.1.5(@types/node@18.16.19)(typescript@5.6.3)
