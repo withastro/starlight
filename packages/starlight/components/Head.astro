@@ -84,12 +84,13 @@ if (Astro.site) {
 }
 
 // Link to Twitter account if set in Starlight config.
-if (config.social?.twitter) {
+const twitterLink = config.social?.find(({ icon }) => icon === 'twitter' || icon === 'x.com');
+if (twitterLink) {
 	headDefaults.push({
 		tag: 'meta',
 		attrs: {
 			name: 'twitter:site',
-			content: new URL(config.social.twitter.url).pathname,
+			content: new URL(twitterLink.href).pathname,
 		},
 	});
 }
