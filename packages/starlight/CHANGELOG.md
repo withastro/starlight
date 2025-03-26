@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.32.5
+
+### Patch Changes
+
+- [#3021](https://github.com/withastro/starlight/pull/3021) [`e3f881e`](https://github.com/withastro/starlight/commit/e3f881ec23019689b821c638b8f0863b8ced6908) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean language support
+
+- [#3020](https://github.com/withastro/starlight/pull/3020) [`58e3e84`](https://github.com/withastro/starlight/commit/58e3e84662167e43c4a8b707453898e047aa18fc) Thanks [@ayoayco](https://github.com/ayoayco)! - Add SourceHut social icon
+
+- [#3013](https://github.com/withastro/starlight/pull/3013) [`5b599dd`](https://github.com/withastro/starlight/commit/5b599dd6190d3b57f61ae48c8614395dda23ef13) Thanks [@oluwatobiss](https://github.com/oluwatobiss)! - Adds Substack icon to social links list
+
 ## 0.32.4
 
 ### Patch Changes
