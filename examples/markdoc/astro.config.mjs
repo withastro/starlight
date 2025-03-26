@@ -9,9 +9,7 @@ export default defineConfig({
 		markdoc(),
 		starlight({
 			title: 'My Docs',
-			social: {
-				github: 'https://github.com/withastro/starlight',
-			},
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{
 					label: 'Guides',
