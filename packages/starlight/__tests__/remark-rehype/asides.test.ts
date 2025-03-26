@@ -113,6 +113,17 @@ Some text
 			'./snapshots/generates-aside-custom-label-icon.html'
 		);
 	});
+
+	test('generates aside with custom built-in icons with multiple `<path>`', async () => {
+		const res = await renderMarkdown(`
+:::note{icon="external"}
+Some text
+:::
+`);
+		await expect(res.code).toMatchFileSnapshot(
+			'./snapshots/generates-aside-custom-icon-multiple-paths.html'
+		);
+	});
 });
 
 describe('custom labels with nested markdown', () => {
