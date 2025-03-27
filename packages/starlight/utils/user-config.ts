@@ -235,14 +235,9 @@ const UserConfigSchema = z.object({
 		.default([])
 		.refine(
 			(middlewares) => {
-				// Ensure the middleware paths don't match the invalid ones
-				const invalidPaths = [
-					'src/middleware.js',
-					'src/middleware.ts',
-					'src/middleware/index.js',
-					'src/middleware/index.ts',
-				];
-				return !middlewares.some((middleware) => invalidPaths.includes(middleware));
+				// Regex pattern to match invalid middleware paths: https://regex101.com/r/HgYWAm/1
+				const invalidPathRegex = /^(?:.?\/)?src\/middleware(?:\/index)?\.[jt]s$/;
+				return !middlewares.some((middleware) => invalidPathRegex.test(middleware));
 			},
 			{
 				message:
