@@ -11,7 +11,10 @@ function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
 }
 
 test('parses valid config successfully', () => {
-	const data = parseStarlightConfigWithFriendlyErrors({ title: '' });
+	const data = parseStarlightConfigWithFriendlyErrors({
+		title: '',
+		routeMiddleware: './src/routeData.ts',
+	});
 	expect(data).toMatchInlineSnapshot(`
 		{
 		  "components": {
@@ -73,7 +76,9 @@ test('parses valid config successfully', () => {
 		  },
 		  "pagination": true,
 		  "prerender": true,
-		  "routeMiddleware": [],
+		  "routeMiddleware": [
+		    "./src/routeData.ts",
+		  ],
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
@@ -252,4 +257,20 @@ test('errors with sidebar entry that includes `items` and `autogenerate`', () =>
 		Hint:
 			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
 	`);
+});
+
+test("errors if route middleware is conflicting path with Astro' middleware", () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			routeMiddleware: ['src/middleware.ts', 'src/routeData.ts'],
+		})
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			Middleware path cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts" because they would conflict with Astro’s middleware. Read more about Astro’s middleware: https://docs.astro.build/en/guides/middleware/"
+		`
+	);
 });
