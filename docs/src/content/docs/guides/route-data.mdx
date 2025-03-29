@@ -62,6 +62,8 @@ This is a function that is called every time Starlight renders a page and can mo
    export const onRequest = defineRouteMiddleware(() => {});
    ```
 
+   This file's name and location must not conflict with [Astro's middleware](https://docs.astro.build/en/guides/middleware/).
+
 2. Tell Starlight where your route data middleware file is located in `astro.config.mjs`:
 
    ```js ins={9}
