@@ -26,6 +26,7 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
+import { starlightPluginAutolinkHeadings } from './integrations/heading-links';
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -36,7 +37,8 @@ export default function StarlightIntegration(
 			`The Starlight integration expects a configuration object with at least a \`title\` property.\n\n` +
 				`See more details in the [Starlight configuration reference](https://starlight.astro.build/reference/configuration/)\n`
 		);
-	const { plugins, ...opts } = userOpts;
+	const { plugins = [], ...opts } = userOpts;
+	plugins.unshift(starlightPluginAutolinkHeadings());
 	let userConfig: StarlightConfig;
 	let pluginTranslations: PluginTranslations = {};
 	return {

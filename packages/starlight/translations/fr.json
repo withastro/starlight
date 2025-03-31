@@ -28,5 +28,6 @@
   "expressiveCode.copyButtonTooltip": "Copier dans le presse-papiers",
   "expressiveCode.terminalWindowFallbackTitle": "Fenêtre de terminal",
   "fileTree.directory": "Répertoire",
-  "builtWithStarlight.label": "Créé avec Starlight"
+  "builtWithStarlight.label": "Créé avec Starlight",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }
