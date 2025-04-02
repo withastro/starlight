@@ -76,12 +76,19 @@ const validateSidebarProp = (
  */
 export type StarlightPageProps = Prettify<
 	// Remove the index signature from `Route`, omit undesired properties and make the rest optional.
-	Partial<Omit<RemoveIndexSignature<PageProps>, 'entry' | 'entryMeta' | 'id' | 'locale' | 'slug'>> &
+	Partial<
+		Omit<
+			RemoveIndexSignature<PageProps>,
+			'entry' | 'entryMeta' | 'id' | 'locale' | 'slug' | 'isFallback'
+		>
+	> &
 		// Add the sidebar definitions for a Starlight page.
 		Partial<Pick<StarlightRouteData, 'hasSidebar'>> & {
 			sidebar?: StarlightUserConfig['sidebar'];
 			// And finally add the Starlight page frontmatter properties in a `frontmatter` property.
 			frontmatter: StarlightPageFrontmatter;
+			// Modified to accept any boolean value instead of just `true`
+			isFallback?: boolean;
 		}
 >;
 
