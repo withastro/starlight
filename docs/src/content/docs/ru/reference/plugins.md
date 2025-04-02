@@ -16,6 +16,7 @@ tableOfContents:
 Подробнее о различных свойствах и параметрах хуков см. ниже.
 
 <!-- prettier-ignore-start -->
+
 ```ts
 interface StarlightPlugin {
   name: string;
@@ -29,7 +30,10 @@ interface StarlightPlugin {
       config: StarlightUserConfig;
       updateConfig: (newConfig: StarlightUserConfig) => void;
       addIntegration: (integration: AstroIntegration) => void;
-      addRouteMiddleware: (config: { entrypoint: string; order?: 'pre' | 'post' | 'default' }) => void;
+      addRouteMiddleware: (config: {
+        entrypoint: string;
+        order?: 'pre' | 'post' | 'default';
+      }) => void;
       astroConfig: AstroConfig;
       command: 'dev' | 'build' | 'preview';
       isRestart: boolean;
@@ -40,6 +44,7 @@ interface StarlightPlugin {
   };
 }
 ```
+
 <!-- prettier-ignore-start -->
 
 ## `name`
