@@ -273,9 +273,9 @@ test("errors if one route middleware is conflicting path with Astro' middleware"
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			A \`routeMiddleware\` file path in your Starlight config conflicts with Astro’s middleware locations. It cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts".
+			The \`"./src/middleware.ts"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.
 			
-			You should move your Starlight route middleware file \`src/middleware.ts\` somewhere else like \`src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.
+			You should rename \`./src/middleware.ts\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.
 			
 			- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data
 			- More about Astro middleware: https://docs.astro.build/en/guides/middleware/"
