@@ -10,11 +10,8 @@ function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
 	);
 }
 
-test('parses valid config successfully', () => {
-	const data = parseStarlightConfigWithFriendlyErrors({
-		title: '',
-		routeMiddleware: './src/routeData.ts',
-	});
+test('parses bare minimum valid config successfully', () => {
+	const data = parseStarlightConfigWithFriendlyErrors({ title: '' });
 	expect(data).toMatchInlineSnapshot(`
 		{
 		  "components": {
@@ -76,9 +73,7 @@ test('parses valid config successfully', () => {
 		  },
 		  "pagination": true,
 		  "prerender": true,
-		  "routeMiddleware": [
-		    "./src/routeData.ts",
-		  ],
+		  "routeMiddleware": [],
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
@@ -257,6 +252,14 @@ test('errors with sidebar entry that includes `items` and `autogenerate`', () =>
 		Hint:
 			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
 	`);
+});
+
+test('parses route middleware config successfully', () => {
+	const data = parseStarlightConfigWithFriendlyErrors({
+		title: '',
+		routeMiddleware: './src/routeData.ts',
+	});
+	expect(data.routeMiddleware).toEqual(['./src/routeData.ts']);
 });
 
 test("errors if route middleware is conflicting path with Astro' middleware", () => {
