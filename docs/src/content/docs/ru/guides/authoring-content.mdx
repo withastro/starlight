@@ -242,18 +242,39 @@ Expressive Code предоставляет несколько вариантов
   ```js {2-3}
   function demo() {
   	// Эта строка (#2) и следующая выделены
-  	return 'Это строка №3 этого фрагмента.';
+  	return 'Это строка №3 этого фрагмента';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js {2-3}
   function demo() {
   	// Эта строка (#2) и следующая выделены
-  	return 'Это строка №3 этого фрагмента.';
+  	return 'Это строка №3 этого фрагмента';
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+    // Эта строка (#2) и следующая выделены
+    return 'Это строка №3 этого фрагмента';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Пометка выделенного текста с помощью маркера `" "` или регулярных выражений](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
@@ -264,6 +285,10 @@ Expressive Code предоставляет несколько вариантов
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "Отдельные термины" /даже.*выражения/
   // Отдельные термины также могут быть выделены
@@ -272,6 +297,23 @@ Expressive Code предоставляет несколько вариантов
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'Отдельные термины' /даже.*выражения/" %}
+  // Отдельные термины также могут быть выделены
+  function demo() {
+    return 'Поддерживаются даже регулярные выражения';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Пометка текста или строк как вставленных или удалённых с помощью `ins` или `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
@@ -283,6 +325,10 @@ Expressive Code предоставляет несколько вариантов
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "return true;" ins="вставленные" del="удалённые"
   function demo() {
@@ -292,6 +338,24 @@ Expressive Code предоставляет несколько вариантов
   }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='вставленные' del='удалённые'" %}
+  function demo() {
+    console.log('Это вставленные и удалённые типы маркеров');
+    // Оператор return использует тип маркера по умолчанию
+    return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Объединение подсветки синтаксиса с синтаксисом типа `diff`](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
@@ -304,16 +368,39 @@ Expressive Code предоставляет несколько вариантов
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function thisIsJavaScript() {
       // Весь этот блок выделяется как JavaScript,
       // и мы можем добавить к нему маркеры различий!
-  -   console.log('Старый код, который нужно удалить')
-  +   console.log('Новый и блестящий код!')
+  -   console.log('Устаревший код, который нужно удалить')
+  +   console.log('Обновлённый и крутой код!')
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // Весь этот блок выделяется как JavaScript,
+      // и мы можем добавить к нему маркеры различий!
+  -   console.log('Устаревший код, который нужно удалить')
+  +   console.log('Обновлённый и крутой код!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Рамки и заголовки
 
@@ -330,6 +417,10 @@ Expressive Code предоставляет несколько вариантов
   console.log('Привет, мир!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // my-test-file.js
@@ -337,17 +428,50 @@ Expressive Code предоставляет несколько вариантов
   ```
   ````
 
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Привет, мир!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
 - [Добавление заголовка в окне терминала](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="Установка зависимостей…"
   npm install
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```bash title="Установка зависимостей…"
   npm install
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Установка зависимостей…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 - [Отключение оконных рамок с помощью `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
@@ -355,11 +479,29 @@ Expressive Code предоставляет несколько вариантов
   echo "Это не отображается как терминал, несмотря на использование языка bash"
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```bash frame="none"
   echo "Это не отображается как терминал, несмотря на использование языка bash"
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "Это не отображается как терминал, несмотря на использование языка bash"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Спойлеры
 
