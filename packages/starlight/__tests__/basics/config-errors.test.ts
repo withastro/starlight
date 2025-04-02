@@ -266,7 +266,7 @@ test("errors if one route middleware is conflicting path with Astro' middleware"
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({
 			title: 'Test',
-			routeMiddleware: ['src/middleware.ts', 'src/routeData.ts'],
+			routeMiddleware: ['./src/middleware.ts', './src/routeData.ts'],
 		})
 	).toThrowErrorMatchingInlineSnapshot(
 		`
