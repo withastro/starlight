@@ -234,8 +234,8 @@ const UserConfigSchema = z.object({
 		.or(z.string().array())
 		.default([])
 		.superRefine((middlewares, ctx) => {
-			// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/1
-			const invalidPathRegex = /^(?:.?\/)?src\/middleware(?:\/index)?\.[jt]s$/;
+			// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/2
+			const invalidPathRegex = /^\.?\/src\/middleware(?:\/index)?\.[jt]s$/;
 			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
 			for (const invalidPath of invalidPaths) {
 				ctx.addIssue({
