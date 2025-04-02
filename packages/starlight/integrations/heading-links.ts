@@ -1,3 +1,4 @@
+import type { AstroUserConfig } from 'astro';
 import type { Root } from 'hast';
 import { toString } from 'hast-util-to-string';
 import { h } from 'hastscript';
@@ -5,11 +6,11 @@ import rehypeAutolinkHeadings, { type Options as AutolinkOptions } from 'rehype-
 import rehypeSlug from 'rehype-slug';
 import type { Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { HookParameters, StarlightPlugin } from '../types';
+import type { HookParameters, StarlightConfig } from '../types';
 
 const AnchorLinkIcon = h(
 	'span',
-	{ ariaHidden: 'true', class: 'anchor-icon' },
+	{ ariaHidden: 'true', class: 'sl-anchor-icon' },
 	h(
 		'svg',
 		{ width: 16, height: 16, viewBox: '0 0 24 24' },
@@ -20,25 +21,25 @@ const AnchorLinkIcon = h(
 	)
 );
 
+/** Placeholder string to be replaced with a localized string when translations are available. */
 const ANCHOR_LABEL_PLACEHOLDER = '__ANCHOR_LABEL_PLACEHOLDER__';
+
 /**
  * Configuration for the `rehype-autolink-headings` plugin.
  * This set-up was informed by https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
  */
-const makeAutolinkConfig = (): AutolinkOptions => {
-	return {
-		properties: { class: 'anchor-link' },
-		behavior: 'after',
-		group: ({ tagName }) => h('div', { tabIndex: -1, class: `heading-wrapper level-${tagName}` }),
-		content: (heading) => [
-			AnchorLinkIcon,
-			h(
-				'span',
-				{ 'is:raw': true, class: 'sr-only' },
-				`${ANCHOR_LABEL_PLACEHOLDER} ${toString(heading)}`
-			),
-		],
-	};
+const autolinkConfig: AutolinkOptions = {
+	properties: { class: 'sl-anchor-link' },
+	behavior: 'after',
+	group: ({ tagName }) => h('div', { tabIndex: -1, class: `sl-heading-wrapper level-${tagName}` }),
+	content: (heading) => [
+		AnchorLinkIcon,
+		h(
+			'span',
+			{ 'is:raw': true, class: 'sr-only' },
+			`${ANCHOR_LABEL_PLACEHOLDER} ${toString(heading)}`
+		),
+	],
 };
 
 /**
@@ -80,28 +81,22 @@ function rehypePostProcessAutolinkHeadings(
 // 	</a>
 // </div>
 
-export const starlightPluginAutolinkHeadings = () =>
-	({
-		name: 'starlight-plugin-autolink-headings',
-		hooks: {
-			setup({ addIntegration, useTranslations, absolutePathToLang }) {
-				/** Integration to add the required rehype plugins. */
-				addIntegration({
-					name: 'astro-integration-autolink-headings',
-					hooks: {
-						'astro:config:setup'({ updateConfig }) {
-							updateConfig({
-								markdown: {
-									rehypePlugins: [
-										rehypeSlug,
-										[rehypeAutolinkHeadings, makeAutolinkConfig()],
-										rehypePostProcessAutolinkHeadings(useTranslations, absolutePathToLang),
-									],
-								},
-							});
-						},
-					},
-				});
-			},
-		},
-	}) satisfies StarlightPlugin;
+interface AutolinkHeadingsOptions {
+	starlightConfig: Pick<StarlightConfig, 'markdown'>;
+	useTranslations: HookParameters<'config:setup'>['useTranslations'];
+	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
+}
+type RehypePlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['rehypePlugins']>;
+
+export const starlightAutolinkHeadings = ({
+	starlightConfig,
+	useTranslations,
+	absolutePathToLang,
+}: AutolinkHeadingsOptions): RehypePlugins =>
+	starlightConfig.markdown.headingLinks
+		? [
+				rehypeSlug,
+				[rehypeAutolinkHeadings, autolinkConfig],
+				rehypePostProcessAutolinkHeadings(useTranslations, absolutePathToLang),
+			]
+		: [];

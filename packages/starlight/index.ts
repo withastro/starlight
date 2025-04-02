@@ -26,7 +26,7 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
-import { starlightPluginAutolinkHeadings } from './integrations/heading-links';
+import { starlightAutolinkHeadings } from './integrations/heading-links';
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -38,7 +38,6 @@ export default function StarlightIntegration(
 				`See more details in the [Starlight configuration reference](https://starlight.astro.build/reference/configuration/)\n`
 		);
 	const { plugins = [], ...opts } = userOpts;
-	plugins.unshift(starlightPluginAutolinkHeadings());
 	let userConfig: StarlightConfig;
 	let pluginTranslations: PluginTranslations = {};
 	return {
@@ -129,7 +128,15 @@ export default function StarlightIntegration(
 								absolutePathToLang,
 							}),
 						],
-						rehypePlugins: [rehypeRtlCodeSupport()],
+						rehypePlugins: [
+							rehypeRtlCodeSupport(),
+							// Process headings and add anchor links.
+							...starlightAutolinkHeadings({
+								starlightConfig,
+								useTranslations,
+								absolutePathToLang,
+							}),
+						],
 						shikiConfig:
 							// Configure Shiki theme if the user is using the default github-dark theme.
 							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },

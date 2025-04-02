@@ -379,6 +379,22 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**type:** `{ headingLinks?: boolean }`  
+**default:** `{ headingLinks: true }`
+
+Configure Starlight’s Markdown processing.
+
+```js
+starlight({
+	markdown: {
+		// Disable Starlight’s clickable heading anchor links.
+		headingLinks: false,
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **type:** `StarlightExpressiveCodeOptions | boolean`  
