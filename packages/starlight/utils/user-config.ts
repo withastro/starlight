@@ -233,20 +233,21 @@ const UserConfigSchema = z.object({
 		.transform((string) => [string])
 		.or(z.string().array())
 		.default([])
-		.refine(
-			(middlewares) => {
-				// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/1
-				const invalidPathRegex = /^(?:.?\/)?src\/middleware(?:\/index)?\.[jt]s$/;
-				return !middlewares.some((middleware) => invalidPathRegex.test(middleware));
-			},
-			{
-				message:
-					'A `routeMiddleware` file path in your Starlight config conflicts with Astro’s middleware locations. It cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts".\n\n' +
-						'You should move your Starlight route middleware file somewhere else like `src/starlightRouteData.ts` and update the `routeMiddleware` file path to match.\n\n' +
+		.superRefine((middlewares, ctx) => {
+			// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/1
+			const invalidPathRegex = /^(?:.?\/)?src\/middleware(?:\/index)?\.[jt]s$/;
+			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
+			if (invalidPaths.length > 0) {
+				ctx.addIssue({
+					code: 'custom',
+					message:
+						'A `routeMiddleware` file path in your Starlight config conflicts with Astro’s middleware locations. It cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts".\n\n' +
+						`You should move your Starlight route middleware file${invalidPaths.length === 1 ? ` \`${invalidPaths.join('`, `')}\`` : `s (\`${invalidPaths.join('`, `')}\`)`} somewhere else like \`src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.\n\n` +
 						'- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data\n' +
 						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
+				});
 			}
-		)
+		})
 		.describe('Add middleware to process Starlight’s route data for each page.'),
 });
 

@@ -262,7 +262,7 @@ test('parses route middleware config successfully', () => {
 	expect(data.routeMiddleware).toEqual(['./src/routeData.ts']);
 });
 
-test("errors if route middleware is conflicting path with Astro' middleware", () => {
+test("errors if one route middleware is conflicting path with Astro' middleware", () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({
 			title: 'Test',
@@ -273,7 +273,33 @@ test("errors if route middleware is conflicting path with Astro' middleware", ()
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			Middleware path cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts" because they would conflict with Astro’s middleware. Read more about Astro’s middleware: https://docs.astro.build/en/guides/middleware/"
+			A \`routeMiddleware\` file path in your Starlight config conflicts with Astro’s middleware locations. It cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts".
+			
+			You should move your Starlight route middleware file \`src/middleware.ts\` somewhere else like \`src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.
+			
+			- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data
+			- More about Astro middleware: https://docs.astro.build/en/guides/middleware/"
+		`
+	);
+});
+
+test("errors if multiple route middlewares are conflicting paths with Astro' middleware", () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			routeMiddleware: ['src/middleware.ts', 'src/middleware.js', 'src/middleware/index.ts'],
+		})
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			A \`routeMiddleware\` file path in your Starlight config conflicts with Astro’s middleware locations. It cannot be one of the following: "src/middleware.js", "src/middleware.ts", "src/middleware/index.js", "src/middleware/index.ts".
+			
+			You should move your Starlight route middleware files (\`src/middleware.ts\`, \`src/middleware.js\`, \`src/middleware/index.ts\`) somewhere else like \`src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.
+			
+			- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data
+			- More about Astro middleware: https://docs.astro.build/en/guides/middleware/"
 		`
 	);
 });
