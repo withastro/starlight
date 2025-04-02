@@ -68,7 +68,7 @@ export interface Route extends LocaleData {
 	/** The slug or unique ID if using the `legacy.collections` flag. */
 	id: string;
 	/** True if this page is untranslated in the current language and using fallback content from the default locale. */
-	isFallback?: true;
+	isFallback?: boolean;
 	[key: string]: unknown;
 }
 
