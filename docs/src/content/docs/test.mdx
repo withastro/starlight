@@ -60,6 +60,22 @@ Icons from the user-installed Iconify `mdi` set:
 
 </Preview>
 
+Icons from the user `src/icons/` directory:
+
+<Preview>
+
+```mdx
+<Icon name="test" />
+<Icon name="test" color="chartreuse" size="2rem" />
+```
+
+<Fragment slot="preview">
+	<Icon name="test" />
+	<Icon name="test" color="chartreuse" size="2rem" />
+</Fragment>
+
+</Preview>
+
 ## `<Card>` component
 
 import { Card } from '@astrojs/starlight/components';
@@ -118,6 +134,24 @@ Card component with icon from the user-installed Iconify `mdi` set:
 
 </Preview>
 
+Card component with icon from the user `src/icons/` directory:
+
+<Preview>
+
+```mdx
+<Card icon="test" title="Example">
+	A card with an icon from the user `src/icons/` directory.
+</Card>
+```
+
+<Fragment slot="preview">
+	<Card icon="test" title="Example">
+		A card with an icon from the user `src/icons/` directory.
+	</Card>
+</Fragment>
+
+</Preview>
+
 ## `<Aside>` component
 
 import { Aside } from '@astrojs/starlight/components';
@@ -167,6 +201,24 @@ Aside component with icon from the user-installed Iconify `mdi` set:
 <Fragment slot="preview">
 	<Aside icon="mdi:emoticon-cool" type="caution">
 		Aside with an icon from the user-installed Iconify `mdi` set.
+	</Aside>
+</Fragment>
+
+</Preview>
+
+Aside component with icon from the user `src/icons/` directory:
+
+<Preview>
+
+```mdx
+<Aside icon="test" type="danger">
+	Aside with an icon from the user `src/icons/` directory.
+</Aside>
+```
+
+<Fragment slot="preview">
+	<Aside icon="test" type="danger">
+		Aside with an icon from the user `src/icons/` directory.
 	</Aside>
 </Fragment>
 
