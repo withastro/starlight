@@ -76,19 +76,12 @@ const validateSidebarProp = (
  */
 export type StarlightPageProps = Prettify<
 	// Remove the index signature from `Route`, omit undesired properties and make the rest optional.
-	Partial<
-		Omit<
-			RemoveIndexSignature<PageProps>,
-			'entry' | 'entryMeta' | 'id' | 'locale' | 'slug' | 'isFallback'
-		>
-	> &
+	Partial<Omit<RemoveIndexSignature<PageProps>, 'entry' | 'entryMeta' | 'id' | 'locale' | 'slug'>> &
 		// Add the sidebar definitions for a Starlight page.
 		Partial<Pick<StarlightRouteData, 'hasSidebar'>> & {
 			sidebar?: StarlightUserConfig['sidebar'];
 			// And finally add the Starlight page frontmatter properties in a `frontmatter` property.
 			frontmatter: StarlightPageFrontmatter;
-			// Modified to accept any boolean value instead of just `true`
-			isFallback?: boolean;
 		}
 >;
 
@@ -112,7 +105,7 @@ export async function generateStarlightPageRouteData({
 	props: StarlightPageProps;
 	url: URL;
 }): Promise<StarlightRouteData> {
-	const { isFallback, frontmatter, ...routeProps } = props;
+	const { frontmatter, ...routeProps } = props;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
 	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
@@ -170,9 +163,6 @@ export async function generateStarlightPageRouteData({
 			slug,
 		}),
 	};
-	if (isFallback) {
-		routeData.isFallback = true;
-	}
 	return routeData;
 }
 
