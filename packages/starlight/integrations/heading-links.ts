@@ -54,8 +54,7 @@ function rehypePostProcessAutolinkHeadings(
 
 		// Find anchor links
 		visit(tree, 'element', (node) => {
-			// console.log('Transforming', { lang: pageLang, path: file.path });
-			if (node.tagName === 'a' && node.properties?.class === 'anchor-link') {
+			if (node.tagName === 'a' && node.properties?.class === 'sl-anchor-link') {
 				// Find a11y text labels
 				visit(node, 'text', (text) => {
 					const title = text.value.replace(ANCHOR_LABEL_PLACEHOLDER, '').trim();
