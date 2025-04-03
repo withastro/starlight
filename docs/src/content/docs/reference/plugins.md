@@ -226,7 +226,7 @@ In the following example, a plugin published as `@example/starlight-plugin` adds
 export default {
   name: '@example/starlight-plugin',
   hooks: {
-    setup({ addRouteMiddleware }) {
+    'config:setup'({ addRouteMiddleware }) {
       addRouteMiddleware({
         entrypoint: '@example/starlight-plugin/route-middleware',
       });

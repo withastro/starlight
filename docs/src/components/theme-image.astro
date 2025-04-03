@@ -1,0 +1,37 @@
+---
+import { AstroError } from 'astro/errors';
+import { Image } from 'astro:assets';
+
+interface Props {
+	src: string;
+	class: 'light' | 'dark';
+}
+
+const thumbnails = import.meta.glob<{ default: ImageMetadata }>(
+	'../assets/themes/*{.png,.jpg,.jpeg,.webp,.avif}'
+);
+
+const thumbnail = thumbnails[`../assets/themes/${Astro.props.src}`];
+if (!thumbnail) {
+	throw new Error(`Could not resolve showcase thumbnail: ${Astro.props.src}`);
+}
+const src = (await thumbnail()).default;
+
+if (src.width !== 1280 || src.height !== 720) {
+	let fileName = src.src.split('/').pop();
+	const queryIndex = fileName?.indexOf('?');
+	if (queryIndex !== undefined && queryIndex > -1) {
+		fileName = fileName?.slice(0, queryIndex);
+	}
+	throw new AstroError(
+		'Theme screenshots must be **1280×720px**',
+		`Dimensions of **${src.width}×${src.height}px** found for theme image \`${fileName || src.src}\`\n\n` +
+			`For best results:\n\n` +
+			`1. Take a screenshot of the site using a browser resized to **1280×720px**. The responsive view in dev tools can be helpful for this.\n\n` +
+			`2. Resize the screenshot to **1280×720px** if necessary and make sure it is saved as a PNG. An online tool like [Squoosh](https://squoosh.app/) can help here.\n\n` +
+			`See more details in the [Starlight contributing guide](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md#themes)\n`
+	);
+}
+---
+
+<Image {src} alt="" width="960" class={Astro.props.class} />

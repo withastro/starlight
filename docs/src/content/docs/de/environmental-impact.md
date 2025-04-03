@@ -1,13 +1,13 @@
 ---
-title: Umweltfreundliche Dokumente
+title: Umweltfreundliche Dokumentation
 description: Erfahre, wie Starlight dir helfen kann, umweltfreundlichere Dokumentationen zu erstellen und deinen ökologischen Fußabdruck zu verringern.
 ---
 
-Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2 %][sf] und [4 % der weltweiten Kohlenstoffemissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
+Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwischen [2%][sf] und [4% der weltweiten Kohlenstoff&shy;emissionen][bbc], was in etwa den Emissionen der Luftfahrtindustrie entspricht.
 Es gibt viele komplexe Faktoren bei der Berechnung der ökologischen Auswirkungen einer Website, aber dieser Leitfaden enthält einige Tipps, wie du den ökologischen Fußabdruck deiner Docs-Website verringern kannst.
 
 Die gute Nachricht ist, dass die Wahl von Starlight ein guter Anfang ist.
-Laut dem Website Carbon Calculator ist diese Website [sauberer als 99 % der getesteten Websiten][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
+Laut dem Website Carbon Calculator ist diese Website [sauberer als 99% der getesteten Websites][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
 
 ## Seitengewicht
 
@@ -15,17 +15,17 @@ Je mehr Daten eine Website überträgt, desto mehr Energieressourcen benötigt s
 Im April 2023 musste ein Nutzer laut [Daten aus dem HTTP-Archiv][http] für die durchschnittliche Website mehr als 2.000 KB herunterladen.
 
 Starlight erstellt Seiten, die so leicht wie möglich sind.
-So lädt ein Benutzer beim ersten Besuch weniger als 50 KB an komprimierten Daten herunter - nur 2,5 % des Medianwerts des HTTP-Archivs.
+So lädt ein Benutzer beim ersten Besuch weniger als 50 KB an komprimierten Daten herunter - nur 2,5% des Medianwerts des HTTP-Archivs.
 Mit einer guten Caching-Strategie können nachfolgende Besuche sogar nur 10 KB herunterladen.
 
 ### Bilder
 
-Während Starlight eine gute Grundlage bietet, können Bilder, die du deinen Dokumentseiten hinzufügst, das Seitengewicht schnell erhöhen.
+Während Starlight eine gute Grundlage bietet, können Bilder, die du deinen Dokumentationsseiten hinzufügst, das Seitengewicht schnell erhöhen.
 Starlight nutzt die [optimierte Asset-Unterstützung][Assets] von Astro, um lokale Bilder in deinen Markdown- und MDX-Dateien zu optimieren.
 
 ### UI-Komponenten
 
-Komponenten, die mit UI-Frameworks wie React oder Vue erstellt wurden, können leicht große Mengen an JavaScript zu einer Seite hinzufügen.
+Komponenten, die mit UI-Frameworks wie React oder Vue erstellt wurden, können leicht große Mengen an JavaScript zu einer Website hinzufügen.
 Da Starlight auf Astro aufbaut, laden Komponenten wie diese dank [Astro Islands][islands] standardmäßig **kein clientseitiges JavaScript**.
 
 ### Caching
@@ -64,7 +64,7 @@ Einbettungen wie YouTube- und Vimeo-Videos können verbessert werden, indem man 
 Pakete wie [`astro-embed`][embed] können bei gängigen Diensten helfen.
 
 :::tip[Wusstest du schon?]
-Das Parsen und Kompilieren von JavaScript ist eine der aufwändigsten Aufgaben, die ein Browser zu erledigen hat.
+Das Analysieren und Kompilieren von JavaScript ist eine der aufwändigsten Aufgaben, die ein Browser zu erledigen hat.
 Verglichen mit dem Rendern eines JPEG-Bildes derselben Größe kann die [Verarbeitung von JavaScript mehr als 30 Mal so lange dauern][cost-of-js].
 :::
 
@@ -77,16 +77,16 @@ Verglichen mit dem Rendern eines JPEG-Bildes derselben Größe kann die [Verarbe
 
 ## Hosting
 
-Wo eine Website gehostet wird, kann einen großen Einfluss darauf haben, wie umweltfreundlich deine Dokumentationsseite ist.
+Wo eine Website gehostet wird, kann einen großen Einfluss darauf haben, wie umweltfreundlich deine Dokumentationswebsite ist.
 Rechenzentren und Serveranlagen können große ökologische Auswirkungen haben, einschließlich eines hohen Stromverbrauchs und eines intensiven Wasserverbrauchs.
 
-Wenn du dich für einen Hoster entscheidest, der erneuerbare Energien einsetzt, wird deine Website weniger Kohlenstoffemissionen verursachen. Das [Green Web Directory][gwb] ist ein Tool, das dir helfen kann, Hosting-Unternehmen zu finden.
+Wenn du dich für einen Hoster entscheidest, der erneuerbare Energien einsetzt, wird deine Website weniger Kohlenstoff&shy;emissionen verursachen. Das [Green Web Directory][gwb] ist ein Tool, das dir helfen kann, Hosting-Unternehmen zu finden.
 
 [gwb]: https://www.thegreenwebfoundation.org/directory/
 
-## Vergleiche
+## Gegenüberstellungen
 
-Bist du neugierig, wie andere Docs-Frameworks im Vergleich abschneiden?
+Bist du neugierig, wie andere Dokumentations-Frameworks im Vergleich abschneiden?
 Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seiten, die mit verschiedenen Tools erstellt wurden.
 
 | Framework                   | CO₂ pro Seitenaufruf | Bewertung |
@@ -124,15 +124,15 @@ Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seite
 - [Website Carbon Calculator][wcc]
 - [GreenFrame](https://greenframe.io/)
 - [Ecograder](https://ecograder.com/)
-- [WebPageTest Kohlenstoffkontrolle](https://www.webpagetest.org/carbon-control/)
+- [WebPageTest Kohlenstoff&shy;kontrolle](https://www.webpagetest.org/carbon-control/)
 - [Ecoping](https://ecoping.earth/)
 
 ### Artikel und Vorträge
 
-- ["Building a greener web"](https://youtu.be/EfPoOt7T5lg), Vortrag von Michelle Barker
-- ["Sustainable Web Development Strategies Within An Organization"](https://www.smashingmagazine.com/2022/10/sustainable-web-development-strategies-organization/), Artikel von Michelle Barker
-- ["A sustainable web for everyone"](https://2021.stateofthebrowser.com/speakers/tom-greenwood/), Vortrag von Tom Greenwood
-- ["How Web Content Can Affect Power Usage"](https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/), Artikel von Benjamin Poulain und Simon Fraser
+- [„Building a greener web“](https://youtu.be/EfPoOt7T5lg), Vortrag von Michelle Barker
+- [„Sustainable Web Development Strategies Within An Organization“](https://www.smashingmagazine.com/2022/10/sustainable-web-development-strategies-organization/), Artikel von Michelle Barker
+- [„A sustainable web for everyone“](https://2021.stateofthebrowser.com/speakers/tom-greenwood/), Vortrag von Tom Greenwood
+- [„How Web Content Can Affect Power Usage“](https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/), Artikel von Benjamin Poulain und Simon Fraser
 
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
