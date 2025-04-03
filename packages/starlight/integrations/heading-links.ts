@@ -34,11 +34,7 @@ const autolinkConfig: AutolinkOptions = {
 	group: ({ tagName }) => h('div', { tabIndex: -1, class: `sl-heading-wrapper level-${tagName}` }),
 	content: (heading) => [
 		AnchorLinkIcon,
-		h(
-			'span',
-			{ 'is:raw': true, class: 'sr-only' },
-			`${ANCHOR_LABEL_PLACEHOLDER} ${toString(heading)}`
-		),
+		h('span', { class: 'sr-only' }, `${ANCHOR_LABEL_PLACEHOLDER} ${toString(heading)}`),
 	],
 };
 
