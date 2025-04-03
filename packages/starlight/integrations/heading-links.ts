@@ -55,7 +55,7 @@ function rehypePostProcessAutolinkHeadings(
 				visit(node, 'text', (text) => {
 					const title = text.value.replace(ANCHOR_LABEL_PLACEHOLDER, '').trim();
 					const t = useTranslationsForLang(pageLang);
-					text.value = t('heading.anchorLabel', { title });
+					text.value = t('heading.anchorLabel', { title, interpolation: { escapeValue: false } });
 				});
 			}
 		});
