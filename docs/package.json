@@ -21,7 +21,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@lunariajs/core": "^0.1.1",
     "@types/culori": "^2.1.1",
-    "astro": "^5.1.5",
+    "astro": "^5.5.3",
     "culori": "^4.0.1",
     "sharp": "^0.32.5"
   },

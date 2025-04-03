@@ -5,6 +5,6 @@
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
     "@iconify-json/mdi": "^1.2.3",
-    "astro": "^5.1.5"
+    "astro": "^5.5.3"
   }
 }
