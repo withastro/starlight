@@ -4,7 +4,7 @@ description: An overview of all the icons available in Starlight.
 ---
 
 Starlight provides a set of built-in icons that you can display in your content using the `<Icon>` component.
-Icon sets from [Iconify](https://iconify.design/) are also supported and can be used similarly.
+Icon sets from [Iconify](https://iconify.design/) and local icons are also supported and can be used similarly.
 
 ## Use icons
 
@@ -88,3 +88,47 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
     ```
 
 </Steps>
+
+### Local icons
+
+Local icons are SVG files stored in a directory of your choice within your project, optimized using [SVGO](https://svgo.dev/) and usable just like any other icon.
+Starlight uses [Astro Icon](https://www.astroicon.dev/) to support local icons.
+
+By default, local icons are expected to be in the `src/icons/` directory of your project.
+SVGO options and the icon directory can be configured using the [`starlight.icons`](/reference/configuration/#icons) property in `astro.config.mjs`.
+
+The following example shows how to use a `logo.svg` SVG file as an icon.
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<Steps>
+
+1.  Copy the `logo.svg` SVG file to the `src/icons/` directory of your project.
+
+    <FileTree>
+
+    - src/
+      - content/
+        - docs/
+          - guides/
+            - guide.md
+            - index.md
+        - icons/
+          - **logo.svg**
+    - astro.config.mjs
+
+    </FileTree>
+
+2.  Use the icon in any use-case that supports built-in icons by using the slug of the icon file.
+
+    For example, to use the `logo.svg` SVG file with the `<Icon>` component, set the `name` attribute to `logo`.
+
+    ```mdx
+    import { Icon } from '@astrojs/starlight/components';
+
+    <Icon name="logo" />
+    ```
+
+</Steps>
+
+To learn more about how to use local icons, check out the [“Local icons”](https://www.astroicon.dev/guides/customization/#local-icons) guide in the Astro Icon docs.
