@@ -1,9 +1,9 @@
-import type { AstroUserConfig } from 'astro';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import type { AstroConfig, AstroUserConfig } from 'astro';
 import type { Root } from 'hast';
 import { toString } from 'hast-util-to-string';
 import { h } from 'hastscript';
 import rehypeAutolinkHeadings, { type Options as AutolinkOptions } from 'rehype-autolink-headings';
-import rehypeSlug from 'rehype-slug';
 import type { Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { HookParameters, StarlightConfig } from '../types';
@@ -68,6 +68,7 @@ function rehypePostProcessAutolinkHeadings(
 
 interface AutolinkHeadingsOptions {
 	starlightConfig: Pick<StarlightConfig, 'markdown'>;
+	astroConfig: { experimental: Pick<AstroConfig['experimental'], 'headingIdCompat'> };
 	useTranslations: HookParameters<'config:setup'>['useTranslations'];
 	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
 }
@@ -75,12 +76,16 @@ type RehypePlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['rehyp
 
 export const starlightAutolinkHeadings = ({
 	starlightConfig,
+	astroConfig,
 	useTranslations,
 	absolutePathToLang,
 }: AutolinkHeadingsOptions): RehypePlugins =>
 	starlightConfig.markdown.headingLinks
 		? [
-				rehypeSlug,
+				[
+					rehypeHeadingIds,
+					{ experimentalHeadingIdCompat: astroConfig.experimental?.headingIdCompat },
+				],
 				[rehypeAutolinkHeadings, autolinkConfig],
 				rehypePostProcessAutolinkHeadings(useTranslations, absolutePathToLang),
 			]
