@@ -37,7 +37,7 @@ export default function StarlightIntegration(
 			`The Starlight integration expects a configuration object with at least a \`title\` property.\n\n` +
 				`See more details in the [Starlight configuration reference](https://starlight.astro.build/reference/configuration/)\n`
 		);
-	const { plugins = [], ...opts } = userOpts;
+	const { plugins, ...opts } = userOpts;
 	let userConfig: StarlightConfig;
 	let pluginTranslations: PluginTranslations = {};
 	return {
