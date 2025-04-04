@@ -31,7 +31,7 @@ const ANCHOR_LABEL_PLACEHOLDER = '__ANCHOR_LABEL_PLACEHOLDER__';
 const autolinkConfig: AutolinkOptions = {
 	properties: { class: 'sl-anchor-link' },
 	behavior: 'after',
-	group: ({ tagName }) => h('div', { tabIndex: -1, class: `sl-heading-wrapper level-${tagName}` }),
+	group: ({ tagName }) => h('div', { class: `sl-heading-wrapper level-${tagName}` }),
 	content: (heading) => [
 		AnchorLinkIcon,
 		h('span', { class: 'sr-only' }, `${ANCHOR_LABEL_PLACEHOLDER} ${toString(heading)}`),

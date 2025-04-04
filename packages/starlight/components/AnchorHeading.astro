@@ -35,7 +35,7 @@ const headingHTML = await Astro.slots.render('default');
 const headingString = await transform(headingHTML, [sanitize({ unblockElements: [] })]);
 ---
 
-<div tabindex="-1" class={`sl-heading-wrapper level-h${level}`}>
+<div class={`sl-heading-wrapper level-h${level}`}>
 	<HeadingElement {id} {...attrs} set:html={headingHTML} /><a class="sl-anchor-link" href={`#${id}`}
 		><span aria-hidden="true" class="sl-anchor-icon"
 			><svg width="16" height="16" viewBox="0 0 24 24"
