@@ -164,6 +164,9 @@ importers:
 
   packages/starlight:
     dependencies:
+      '@astrojs/markdown-remark':
+        specifier: ^6.3.1
+        version: 6.3.1
       '@astrojs/mdx':
         specifier: ^4.0.5
         version: 4.0.5(astro@5.5.3)
@@ -246,9 +249,6 @@ importers:
         specifier: ^6.0.2
         version: 6.0.3
     devDependencies:
-      '@astrojs/markdown-remark':
-        specifier: ^6.0.1
-        version: 6.3.1
       '@playwright/test':
         specifier: ^1.45.0
         version: 1.45.0
