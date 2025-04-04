@@ -63,6 +63,9 @@ test('parses valid config successfully', () => {
 		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,
 		  "locales": undefined,
+		  "markdown": {
+		    "headingLinks": true,
+		  },
 		  "pagefind": {
 		    "ranking": {
 		      "pageLength": 0.1,
