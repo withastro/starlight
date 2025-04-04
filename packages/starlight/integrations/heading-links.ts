@@ -1,11 +1,10 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import type { AstroConfig, AstroUserConfig } from 'astro';
-import type { Root } from 'hast';
+import type { Nodes, Root } from 'hast';
 import { toString } from 'hast-util-to-string';
 import { h } from 'hastscript';
-import rehypeAutolinkHeadings, { type Options as AutolinkOptions } from 'rehype-autolink-headings';
 import type { Transformer } from 'unified';
-import { visit } from 'unist-util-visit';
+import { SKIP, visit } from 'unist-util-visit';
 import type { HookParameters, StarlightConfig } from '../types';
 
 const AnchorLinkIcon = h(
@@ -21,43 +20,43 @@ const AnchorLinkIcon = h(
 	)
 );
 
-/** Placeholder string to be replaced with a localized string when translations are available. */
-const ANCHOR_LABEL_PLACEHOLDER = '__ANCHOR_LABEL_PLACEHOLDER__';
-
 /**
- * Configuration for the `rehype-autolink-headings` plugin.
- * This set-up was informed by https://amberwilson.co.uk/blog/are-your-anchor-links-accessible/
+ * Add anchor links to headings.
  */
-const autolinkConfig: AutolinkOptions = {
-	properties: { class: 'sl-anchor-link' },
-	behavior: 'after',
-	group: ({ tagName }) => h('div', { class: `sl-heading-wrapper level-${tagName}` }),
-	content: (heading) => [
-		AnchorLinkIcon,
-		h('span', { class: 'sr-only' }, `${ANCHOR_LABEL_PLACEHOLDER} ${toString(heading)}`),
-	],
-};
-
-/**
- * Rehype plugin to translate the headings' anchors according to the currently selected language.
- */
-function rehypePostProcessAutolinkHeadings(
+export default function rehypeAutolinkHeadings(
 	useTranslationsForLang: HookParameters<'config:setup'>['useTranslations'],
 	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang']
 ) {
 	const transformer: Transformer<Root> = (tree, file) => {
 		const pageLang = absolutePathToLang(file.path);
+		const t = useTranslationsForLang(pageLang);
 
-		// Find anchor links
-		visit(tree, 'element', (node) => {
-			if (node.tagName === 'a' && node.properties?.class === 'sl-anchor-link') {
-				// Find a11y text labels
-				visit(node, 'text', (text) => {
-					const title = text.value.replace(ANCHOR_LABEL_PLACEHOLDER, '').trim();
-					const t = useTranslationsForLang(pageLang);
-					text.value = t('heading.anchorLabel', { title, interpolation: { escapeValue: false } });
-				});
+		visit(tree, 'element', function (node, index, parent) {
+			if (!headingRank(node) || !node.properties.id || typeof index !== 'number' || !parent) {
+				return;
 			}
+
+			const accessibleLabel = t('heading.anchorLabel', {
+				title: toString(node),
+				interpolation: { escapeValue: false },
+			});
+
+			// Wrap the heading in a div and append the anchor link.
+			parent.children[index] = h(
+				'div',
+				{ class: `sl-heading-wrapper level-${node.tagName}` },
+				// Heading
+				node,
+				// Anchor link
+				{
+					type: 'element',
+					tagName: 'a',
+					properties: { class: 'sl-anchor-link', href: '#' + node.properties.id },
+					children: [AnchorLinkIcon, h('span', { class: 'sr-only' }, accessibleLabel)],
+				}
+			);
+
+			return SKIP;
 		});
 	};
 
@@ -86,7 +85,20 @@ export const starlightAutolinkHeadings = ({
 					rehypeHeadingIds,
 					{ experimentalHeadingIdCompat: astroConfig.experimental?.headingIdCompat },
 				],
-				[rehypeAutolinkHeadings, autolinkConfig],
-				rehypePostProcessAutolinkHeadings(useTranslations, absolutePathToLang),
+				rehypeAutolinkHeadings(useTranslations, absolutePathToLang),
 			]
 		: [];
+
+// This utility is inlined from https://github.com/syntax-tree/hast-util-heading-rank
+// Copyright (c) 2020 Titus Wormer <tituswormer@gmail.com>
+// MIT License: https://github.com/syntax-tree/hast-util-heading-rank/blob/main/license
+/**
+ * Get the rank (`1` to `6`) of headings (`h1` to `h6`).
+ * @param node Node to check.
+ * @returns Rank of the heading or `undefined` if not a heading.
+ */
+function headingRank(node: Nodes): number | undefined {
+	const name = node.type === 'element' ? node.tagName.toLowerCase() : '';
+	const code = name.length === 2 && name.charCodeAt(0) === 104 /* `h` */ ? name.charCodeAt(1) : 0;
+	return code > 48 /* `0` */ && code < 55 /* `7` */ ? code - 48 /* `0` */ : undefined;
+}
