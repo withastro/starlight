@@ -109,6 +109,10 @@
       "types": "./components/StarlightPage.astro.tsx",
       "import": "./components/StarlightPage.astro"
     },
+    "./components/AnchorHeading.astro": {
+      "types": "./components/AnchorHeading.astro.tsx",
+      "import": "./components/AnchorHeading.astro"
+    },
     "./components/Footer.astro": {
       "types": "./components/Footer.astro.tsx",
       "import": "./components/Footer.astro"
@@ -215,6 +219,7 @@
     "rehype-format": "^5.0.0",
     "rehype-slug": "^6.0.0",
     "remark-directive": "^3.0.0",
+    "ultrahtml": "^1.6.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.2"
