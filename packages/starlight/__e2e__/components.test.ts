@@ -342,10 +342,10 @@ test.describe('tabs', () => {
 	});
 });
 
-test.describe('Iconify icons', () => {
+test.describe('custom icons', () => {
 	test('renders Iconify icons', async ({ page, getProdServer }) => {
 		const starlight = await getProdServer();
-		await starlight.goto('/iconify');
+		await starlight.goto('/icons');
 
 		const expectedPath =
 			'<path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path>';
@@ -353,20 +353,46 @@ test.describe('Iconify icons', () => {
 		const expectedUse = '<use href="#ai:mdi:checkbox-blank-circle"></use>';
 
 		// First Iconify icon: symbol with path + use
-		const iconComponentIcon = await getSvgByTestid(page, 'icon-component');
+		const iconComponentIcon = await getSvgByTestid(page, 'iconify-icon-component');
 		expect(iconComponentIcon).toBe(expectedSymbol + expectedUse);
 
 		// Second Iconify icon: use only
-		const cardComponentIcon = await getSvgByTestid(page, 'card-component');
+		const cardComponentIcon = await getSvgByTestid(page, 'iconify-card-component');
 		expect(cardComponentIcon).toBe(expectedUse);
 
 		// Third Iconify icon: use only
-		const asideComponentIcon = await getSvgByTestid(page, 'aside-component');
+		const asideComponentIcon = await getSvgByTestid(page, 'iconify-aside-component');
 		expect(asideComponentIcon).toBe(expectedUse);
 
 		// Fourth Iconify icon from a directive: path only
-		const asideDirectiveIcon = await getSvgByTestid(page, 'aside-directive');
+		const asideDirectiveIcon = await getSvgByTestid(page, 'iconify-aside-directive');
 		expect(asideDirectiveIcon).toBe(expectedPath);
+	});
+
+	test('renders local icons', async ({ page, getProdServer }) => {
+		const starlight = await getProdServer();
+		await starlight.goto('/icons');
+
+		const expectedPaths =
+			'<g fill="currentColor"><path d="M11.84 22.52a7.35 7.35 0 0 1-3.2-14 .75.75 0 0 1 .65 1.35 5.83 5.83 0 1 0 4.85-.13.75.75 0 1 1 .59-1.37 7.35 7.35 0 0 1-2.89 14.11z"></path><path d="M9 10a.74.74 0 0 1-.75-.75V5.38A.75.75 0 0 1 9 4.63h5.46a.75.75 0 0 1 .75.75V9.1a.75.75 0 1 1-1.5 0v-3h-4v3.1A.75.75 0 0 1 9 10m1.78 7.76a29 29 0 0 1-5.55-.56.75.75 0 0 1-.62-.73.76.76 0 0 1 .91-.74c.37.08 9.06 1.85 12.36-1.56a.76.76 0 0 1 1.06 0 .73.73 0 0 1 0 1v.05c-1.94 2.02-5.27 2.54-8.16 2.54"></path><path d="M13.58 6.13H10a.74.74 0 0 1-.75-.75V2.53a.75.75 0 0 1 .75-.75h3.63a.75.75 0 0 1 .75.75v2.85a.74.74 0 0 1-.8.75m-2.88-1.5h2.13V3.28H10.7z"></path></g>';
+		const expectedSymbol = `<symbol id="ai:local:test" viewBox="0 0 24 24">${expectedPaths}</symbol>`;
+		const expectedUse = '<use href="#ai:local:test"></use>';
+
+		// First local icon: symbol with path + use
+		const iconComponentIcon = await getSvgByTestid(page, 'local-icon-component');
+		expect(iconComponentIcon).toBe(expectedSymbol + expectedUse);
+
+		// Second local icon: use only
+		const cardComponentIcon = await getSvgByTestid(page, 'local-card-component');
+		expect(cardComponentIcon).toBe(expectedUse);
+
+		// Third local icon: use only
+		const asideComponentIcon = await getSvgByTestid(page, 'local-aside-component');
+		expect(asideComponentIcon).toBe(expectedUse);
+
+		// Fourth local icon from a directive: path only
+		const asideDirectiveIcon = await getSvgByTestid(page, 'local-aside-directive');
+		expect(asideDirectiveIcon).toBe(expectedPaths);
 	});
 
 	async function getSvgByTestid(page: Page, testId: string) {

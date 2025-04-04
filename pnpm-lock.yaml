@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   astro-icon@1.1.5:
-    hash: sbd2kgdsncenxfz6iwt3ojmeny
+    hash: 6lkbweb2hkud7dy3nsn2shgvlm
     path: patches/astro-icon@1.1.5.patch
 
 importers:
@@ -181,6 +181,9 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
+      '@iconify/tools':
+        specifier: ^4.1.2
+        version: 4.1.2
       '@iconify/utils':
         specifier: ^2.3.0
         version: 2.3.0
@@ -201,7 +204,7 @@ importers:
         version: 0.40.0(astro@5.5.3)
       astro-icon:
         specifier: ^1.1.5
-        version: 1.1.5(patch_hash=sbd2kgdsncenxfz6iwt3ojmeny)
+        version: 1.1.5(patch_hash=6lkbweb2hkud7dy3nsn2shgvlm)
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -2594,7 +2597,7 @@ packages:
       rehype-expressive-code: 0.40.0
     dev: false
 
-  /astro-icon@1.1.5(patch_hash=sbd2kgdsncenxfz6iwt3ojmeny):
+  /astro-icon@1.1.5(patch_hash=6lkbweb2hkud7dy3nsn2shgvlm):
     resolution: {integrity: sha512-CJYS5nWOw9jz4RpGWmzNQY7D0y2ZZacH7atL2K9DeJXJVaz7/5WrxeyIxO8KASk1jCM96Q4LjRx/F3R+InjJrw==}
     dependencies:
       '@iconify/tools': 4.1.2

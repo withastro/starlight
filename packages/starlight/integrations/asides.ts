@@ -18,9 +18,8 @@ import type { HookParameters, StarlightConfig, StarlightIcon } from '../types';
 import {
 	AsideDefaultIcons,
 	getBuiltInIconHastTree,
-	getIconifyIconHastTree,
+	getCollectionIconHastTree,
 	isBuiltInIcon,
-	loadIconifyCollections,
 } from '../utils/icons';
 
 export const AsideVariants = ['note', 'tip', 'caution', 'danger'] as const;
@@ -58,16 +57,15 @@ function s(el: string, attrs: Properties = {}, children: any[] = []): P {
 }
 
 /** Hacky function that generates the children of an mdast SVG tree. */
-function makeSvgChildNodes(children: Result['children']): P[] {
+function makeSvgChildNodes(children: Result['children']): any[] {
 	const nodes: P[] = [];
 	for (const child of children) {
 		if (child.type !== 'element') continue;
 		nodes.push({
 			type: 'paragraph',
 			data: { hName: child.tagName, hProperties: child.properties },
-			children: [],
+			children: makeSvgChildNodes(child.children),
 		});
-		nodes.push(...makeSvgChildNodes(child.children));
 	}
 	return nodes;
 }
@@ -120,7 +118,7 @@ function transformUnhandledDirective(
 function makeSVGIcon(icon: StarlightIcon) {
 	const iconHastTree = isBuiltInIcon(icon)
 		? getBuiltInIconHastTree(icon)
-		: getIconifyIconHastTree(icon);
+		: getCollectionIconHastTree(icon);
 
 	return s(
 		'svg',
@@ -160,8 +158,7 @@ function makeSVGIcon(icon: StarlightIcon) {
  * ```
  */
 function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
-	const transformer: Transformer<Root> = async (tree, file) => {
-		await loadIconifyCollections(options.astroConfig.root);
+	const transformer: Transformer<Root> = (tree, file) => {
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {

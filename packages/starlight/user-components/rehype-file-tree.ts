@@ -150,7 +150,7 @@ function makeSVGIcon(icon: StarlightBuiltInIcon) {
 			'aria-hidden': 'true',
 			viewBox: '0 0 24 24',
 		},
-		getBuiltInIconHastTree(icon)
+		getBuiltInIconHastTree(icon).children
 	);
 }
 

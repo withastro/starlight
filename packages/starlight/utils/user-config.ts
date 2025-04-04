@@ -1,5 +1,6 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
+import { AstroIconSchema } from '../schemas/astroIcon';
 import { ComponentConfigSchema } from '../schemas/components';
 import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
@@ -234,6 +235,12 @@ const UserConfigSchema = z.object({
 		.or(z.string().array())
 		.default([])
 		.describe('Add middleware to process Starlight’s route data for each page.'),
+
+	/**
+	 * Astro Icon options used to load and render local and Iconify icons.
+	 * @see https://www.astroicon.dev/reference/configuration/
+	 */
+	icons: AstroIconSchema(),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict()

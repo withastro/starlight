@@ -27,6 +27,7 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
+import { loadIcons } from './utils/icons';
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -88,6 +89,9 @@ export default function StarlightIntegration(
 					prerender: starlightConfig.prerender,
 				});
 
+				// Load local and Iconify icons that should be available in remark and rehype plugins.
+				await loadIcons(config.root, userConfig.icons);
+
 				// Add built-in integrations only if they are not already added by the user through the
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
@@ -101,7 +105,7 @@ export default function StarlightIntegration(
 					integrations.push(mdx({ optimize: true }));
 				}
 				if (!allIntegrations.find(({ name }) => name === 'astro-icon')) {
-					integrations.push(astroIcon());
+					integrations.push(astroIcon(userConfig.icons));
 				}
 
 				// Add Starlight directives restoration integration at the end of the list so that remark
