@@ -133,6 +133,7 @@ export default function StarlightIntegration(
 							// Process headings and add anchor links.
 							...starlightAutolinkHeadings({
 								starlightConfig,
+								astroConfig: config,
 								useTranslations,
 								absolutePathToLang,
 							}),
