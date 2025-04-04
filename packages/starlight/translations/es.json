@@ -39,5 +39,5 @@
   "pagefind.alt_search": "Ningún resultado para [SEARCH_TERM]. Mostrando resultados para: [DIFFERENT_TERM]",
   "pagefind.search_suggestion": "Ningún resultado para [SEARCH_TERM]. Prueba alguna de estas búsquedas:",
   "pagefind.searching": "Buscando [SEARCH_TERM]...",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Sección titulada «{{title}}»"
 }

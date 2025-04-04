@@ -29,5 +29,5 @@
   "expressiveCode.copyButtonTooltip": "Копировать",
   "expressiveCode.terminalWindowFallbackTitle": "Окно терминала",
   "builtWithStarlight.label": "Сделано с помощью Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Заголовок раздела «{{title}}»"
 }
