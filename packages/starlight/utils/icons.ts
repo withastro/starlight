@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import {
 	cleanupSVG,
 	importDirectory,
@@ -268,7 +269,7 @@ export async function loadIcons(root: URL, config: StarlightConfig['icons']) {
  */
 async function loadLocalIcons(root: URL, config: StarlightConfig['icons']) {
 	try {
-		const iconSet = await importDirectory(new URL(config.iconDir, root).pathname, {
+		const iconSet = await importDirectory(fileURLToPath(new URL(config.iconDir, root)), {
 			ignoreImportErrors: 'warn',
 			keepTitles: true,
 			keyword: (file) => file.subdir + file.file,

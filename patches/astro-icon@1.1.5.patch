@@ -25,18 +25,25 @@ index b94f53885887bed93031a5ac1353ef16cd860c86..2a4ae126512103f4ebd17ffc213f10ce
  async function detectInstalledCollections(root) {
      try {
 diff --git a/dist/vite-plugin-astro-icon.js b/dist/vite-plugin-astro-icon.js
-index 2181966a939e3bbb47b279799706235fbf32695d..3d72900e19919d9cea91d0e20081cf7a5cd6cd24 100644
+index 2181966a939e3bbb47b279799706235fbf32695d..a97a9c40367a68bbb9f10068c5f38c92b2de003c 100644
 --- a/dist/vite-plugin-astro-icon.js
 +++ b/dist/vite-plugin-astro-icon.js
-@@ -8,6 +8,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
+@@ -1,5 +1,6 @@
+ import { createHash } from "node:crypto";
+ import { parse, resolve } from "node:path";
++import { fileURLToPath } from "node:url";
+ import { mkdir, readFile, writeFile } from "node:fs/promises";
+ import loadLocalCollection from "./loaders/loadLocalCollection.js";
+ import loadIconifyCollections from "./loaders/loadIconifyCollections.js";
+@@ -8,6 +9,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
      const { root } = ctx;
      const virtualModuleId = "virtual:astro-icon";
      const resolvedVirtualModuleId = "\0" + virtualModuleId;
-+    const iconDirPath = new URL(iconDir, root).pathname;
++    const iconDirPath = fileURLToPath(new URL(iconDir, root));
      return {
          name: "astro-icon",
          resolveId(id) {
-@@ -21,7 +22,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
+@@ -21,7 +23,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
                      if (!collections) {
                          collections = await loadIconifyCollections({ root, include });
                      }
@@ -45,7 +52,7 @@ index 2181966a939e3bbb47b279799706235fbf32695d..3d72900e19919d9cea91d0e20081cf7a
                      collections["local"] = local;
                      logCollections(collections, { ...ctx, iconDir });
                      await generateIconTypeDefinitions(Object.values(collections), root);
-@@ -47,7 +48,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
+@@ -47,7 +49,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
                      if (!collections) {
                          collections = await loadIconifyCollections({ root, include });
                      }
