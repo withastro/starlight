@@ -29,5 +29,5 @@
   "expressiveCode.terminalWindowFallbackTitle": "Fenêtre de terminal",
   "fileTree.directory": "Répertoire",
   "builtWithStarlight.label": "Créé avec Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Section intitulée « {{title}} »"
 }
