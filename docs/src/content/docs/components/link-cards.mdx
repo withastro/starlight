@@ -1,0 +1,125 @@
+---
+title: Link Cards
+description: Learn how to display links prominently as cards in Starlight.
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+To display links to different pages prominently, use the `<LinkCard>` component.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="Customizing Starlight"
+	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+	href="/guides/customization/"
+/>
+
+</Preview>
+
+## Import
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## Usage
+
+Display a link prominently using the `<LinkCard>` component.
+Each `<LinkCard>` requires a [`title`](#title) and an [`href`](#href) attribute.
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Authoring Markdown" href="/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Authoring Markdown"
+	href="/guides/authoring-content/"
+/>
+
+</Preview>
+
+### Add a link description
+
+Add a short description to a link card using the [`description`](#description) attribute.
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Internationalization"
+	href="/guides/i18n/"
+	description="Configure Starlight to support multiple languages."
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="Internationalization"
+	 href="/guides/i18n/"
+	 description="Configure Starlight to support multiple languages." /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Internationalization"
+	href="/guides/i18n/"
+	description="Configure Starlight to support multiple languages."
+/>
+
+</Preview>
+
+### Group link cards
+
+Display multiple link cards side-by-side when there’s enough space by grouping them using the [`<CardGrid>`](/components/card-grids/) component.
+See the [“Group link cards”](/components/card-grids/#group-link-cards) guide for an example.
+
+## `<LinkCard>` Props
+
+**Implementation:** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+The `<LinkCard>` component accepts the following props, as well as all other [`<a>` element attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a):
+
+### `title`
+
+**required**  
+**type:** `string`
+
+The title of the link card to display.
+
+### `href`
+
+**required**  
+**type:** `string`
+
+The URL to link to when the card is interacted with.
+
+### `description`
+
+**type:** `string`
+
+An optional description to display below the title.

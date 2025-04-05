@@ -1,16 +1,18 @@
 import { z } from 'astro/zod';
 import { type ContentConfig, type SchemaContext } from 'astro:content';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { parseWithFriendlyErrors } from './error-map';
+import { getCollectionPathFromRoot } from './collection';
+import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
-import { getToC, type PageProps, type StarlightRouteData } from './route-data';
-import type { StarlightDocsEntry } from './routing';
+import { getSiteTitle, getSiteTitleHref, getToC, type PageProps } from './routing/data';
+import type { StarlightDocsEntry, StarlightRouteData } from './routing/types';
 import { slugToLocaleData, urlToSlug } from './slugs';
-import { getPrevNextLinks, getSidebar } from './navigation';
-import { useTranslations } from './translations';
+import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { docsSchema } from '../schema';
-import { BadgeConfigSchema } from '../schemas/badge';
-import { SidebarLinkItemHTMLAttributesSchema } from '../schemas/sidebar';
+import type { Prettify, RemoveIndexSignature } from './types';
+import { SidebarItemSchema } from '../schemas/sidebar';
+import type { StarlightConfig, StarlightUserConfig } from './user-config';
 
 /**
  * The frontmatter schema for Starlight pages derived from the default schema for Starlight’s
@@ -58,88 +60,12 @@ type StarlightPageFrontmatter = Omit<
 	'editUrl' | 'sidebar'
 > & { editUrl?: string | false };
 
-/**
- * Link configuration schema for `<StarlightPage>`.
- * Sets default values where possible to be more user friendly than raw `SidebarEntry` type.
- */
-const LinkSchema = z
-	.object({
-		/** @deprecated Specifying `type` is no longer required. */
-		type: z.literal('link').default('link'),
-		label: z.string(),
-		href: z.string(),
-		isCurrent: z.boolean().default(false),
-		badge: BadgeConfigSchema(),
-		attrs: SidebarLinkItemHTMLAttributesSchema(),
-	})
-	// Make sure badge is in the object even if undefined — Zod doesn’t seem to have a way to set `undefined` as a default.
-	.transform((item) => ({ badge: undefined, ...item }));
-
-/** Base schema for link groups without the recursive `items` array. */
-const LinkGroupBase = z.object({
-	/** @deprecated Specifying `type` is no longer required. */
-	type: z.literal('group').default('group'),
-	label: z.string(),
-	collapsed: z.boolean().default(false),
-	badge: BadgeConfigSchema(),
-});
-
-//  These manual types are needed to correctly type the recursive link group type.
-type ManualLinkGroupInput = Prettify<
-	z.input<typeof LinkGroupBase> &
-		// The original implementation of `<StarlightPage>` in v0.19.0 used `entries`.
-		// We want to use `items` so it matches the sidebar config in `astro.config.mjs`.
-		// Keeping `entries` support for now to not break anyone.
-		// TODO: warn about `entries` usage in a future version
-		// TODO: remove support for `entries` in a future version
-		(| {
-					/** Array of links and subcategories to display in this category. */
-					items: Array<z.input<typeof LinkSchema> | ManualLinkGroupInput>;
-			  }
-			| {
-					/**
-					 * @deprecated Use `items` instead of `entries`.
-					 * Support for `entries` will be removed in a future version of Starlight.
-					 */
-					entries: Array<z.input<typeof LinkSchema> | ManualLinkGroupInput>;
-			  }
-		)
->;
-type ManualLinkGroupOutput = z.output<typeof LinkGroupBase> & {
-	entries: Array<z.output<typeof LinkSchema> | ManualLinkGroupOutput>;
-	badge: z.output<typeof LinkGroupBase>['badge'];
-};
-type LinkGroupSchemaType = z.ZodType<ManualLinkGroupOutput, z.ZodTypeDef, ManualLinkGroupInput>;
-/**
- * Link group configuration schema for `<StarlightPage>`.
- * Sets default values where possible to be more user friendly than raw `SidebarEntry` type.
- */
-const LinkGroupSchema: LinkGroupSchemaType = z.preprocess(
-	// Map `items` to `entries` as expected by the `SidebarEntry` type.
-	(arg) => {
-		if (arg && typeof arg === 'object' && 'items' in arg) {
-			const { items, ...rest } = arg;
-			return { ...rest, entries: items };
-		}
-		return arg;
-	},
-	LinkGroupBase.extend({
-		entries: z.lazy(() => z.union([LinkSchema, LinkGroupSchema]).array()),
-	})
-		// Make sure badge is in the object even if undefined.
-		.transform((item) => ({ badge: undefined, ...item }))
-) as LinkGroupSchemaType;
-
-/** Sidebar configuration schema for `<StarlightPage>` */
-const StarlightPageSidebarSchema = z.union([LinkSchema, LinkGroupSchema]).array();
-type StarlightPageSidebarUserConfig = z.input<typeof StarlightPageSidebarSchema>;
-
-/** Parse sidebar prop to ensure all required defaults are in place. */
-const normalizeSidebarProp = (
-	sidebarProp: StarlightPageSidebarUserConfig
-): StarlightRouteData['sidebar'] => {
+/** Parse sidebar prop to ensure it's valid. */
+const validateSidebarProp = (
+	sidebarProp: StarlightUserConfig['sidebar']
+): StarlightConfig['sidebar'] => {
 	return parseWithFriendlyErrors(
-		StarlightPageSidebarSchema,
+		SidebarItemSchema.array().optional(),
 		sidebarProp,
 		'Invalid sidebar prop passed to the `<StarlightPage/>` component.'
 	);
@@ -153,7 +79,7 @@ export type StarlightPageProps = Prettify<
 	Partial<Omit<RemoveIndexSignature<PageProps>, 'entry' | 'entryMeta' | 'id' | 'locale' | 'slug'>> &
 		// Add the sidebar definitions for a Starlight page.
 		Partial<Pick<StarlightRouteData, 'hasSidebar'>> & {
-			sidebar?: StarlightPageSidebarUserConfig;
+			sidebar?: StarlightUserConfig['sidebar'];
 			// And finally add the Starlight page frontmatter properties in a `frontmatter` property.
 			frontmatter: StarlightPageFrontmatter;
 		}
@@ -166,8 +92,8 @@ export type StarlightPageProps = Prettify<
  */
 type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 	/**
-	 * The unique ID for this Starlight page which cannot be inferred from codegen like content
-	 * collection entries.
+	 * The unique ID if using the `legacy.collections` for this Starlight page which cannot be
+	 * inferred from codegen like content collection entries or the slug.
 	 */
 	id: string;
 };
@@ -179,13 +105,13 @@ export async function generateStarlightPageRouteData({
 	props: StarlightPageProps;
 	url: URL;
 }): Promise<StarlightRouteData> {
-	const { isFallback, frontmatter, ...routeProps } = props;
+	const { frontmatter, ...routeProps } = props;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
+	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar
-		? normalizeSidebarProp(props.sidebar)
+		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
 		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const pageDocsEntry: StarlightPageDocsEntry = {
@@ -193,6 +119,7 @@ export async function generateStarlightPageRouteData({
 		slug,
 		body: '',
 		collection: 'docs',
+		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(slug)}.md`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {
@@ -219,10 +146,11 @@ export async function generateStarlightPageRouteData({
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
 		headings,
-		labels: useTranslations(localeData.locale).all(),
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
+		siteTitle: getSiteTitle(localeData.lang),
+		siteTitleHref: getSiteTitleHref(localeData.locale),
 		slug,
 		toc: getToC({
 			...routeProps,
@@ -235,9 +163,6 @@ export async function generateStarlightPageRouteData({
 			slug,
 		}),
 	};
-	if (isFallback) {
-		routeData.isFallback = true;
-	}
 	return routeData;
 }
 
@@ -264,7 +189,9 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			}),
 	});
 
-	return parseWithFriendlyErrors(
+	// Starting with Astro 4.14.0, a frontmatter schema that contains collection references will
+	// contain an async transform.
+	return parseAsyncWithFriendlyErrors(
 		schema,
 		frontmatter,
 		'Invalid frontmatter props passed to the `<StarlightPage/>` component.'
@@ -278,20 +205,3 @@ async function getUserDocsSchema(): Promise<
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
 	return userCollections?.docs.schema ?? docsSchema();
 }
-
-// https://stackoverflow.com/a/66252656/1945960
-type RemoveIndexSignature<T> = {
-	[K in keyof T as string extends K
-		? never
-		: number extends K
-		? never
-		: symbol extends K
-		? never
-		: K]: T[K];
-};
-
-// https://www.totaltypescript.com/concepts/the-prettify-helper
-type Prettify<T> = {
-	[K in keyof T]: T[K];
-	// eslint-disable-next-line @typescript-eslint/ban-types
-} & {};

@@ -1,0 +1,14 @@
+---
+import { getRouteBySlugParam } from '../../utils/routing';
+import CommonPage from '../common.astro';
+
+export const prerender = false;
+
+const route = getRouteBySlugParam(Astro.params.slug);
+
+if (route === undefined) {
+	return new Response(null, { status: 404 });
+}
+---
+
+<CommonPage />

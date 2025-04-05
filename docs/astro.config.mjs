@@ -1,6 +1,8 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -21,13 +23,12 @@ export const locales = {
 	uk: { label: 'Українська', lang: 'uk' },
 };
 
-/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
-const VERCEL_PREVIEW_SITE =
-	process.env.VERCEL_ENV !== 'production' &&
-	process.env.VERCEL_URL &&
-	`https://${process.env.VERCEL_URL}`;
+/* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
+const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
 
-const site = VERCEL_PREVIEW_SITE || 'https://starlight.astro.build/';
+const site = NETLIFY_PREVIEW_SITE || 'https://starlight.astro.build/';
+const ogUrl = new URL('og.jpg?v=1', site).href;
+const ogImageAlt = 'Make your docs shine with Starlight';
 
 export default defineConfig({
 	site,
@@ -40,6 +41,7 @@ export default defineConfig({
 				dark: '/src/assets/logo-dark.svg',
 				replacesTitle: true,
 			},
+			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
@@ -58,14 +60,14 @@ export default defineConfig({
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: site + 'og.jpg?v=1' },
+					attrs: { property: 'og:image', content: ogUrl },
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'twitter:image', content: site + 'og.jpg?v=1' },
+					attrs: { property: 'og:image:alt', content: ogImageAlt },
 				},
 			],
-			customCss: process.env.NO_GRADIENTS ? [] : ['./src/assets/landing.css'],
+			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
 				{
@@ -82,54 +84,16 @@ export default defineConfig({
 						'pt-PT': 'Comece Aqui',
 						ko: '여기서부터',
 						tr: 'Buradan Başlayın',
-						ru: 'Начать отсюда',
+						ru: 'Первые шаги',
 						hi: 'यहाँ से शुरू करे',
 						uk: 'Почніть звідси',
 					},
 					items: [
-						{
-							label: 'Getting Started',
-							link: 'getting-started',
-							translations: {
-								de: 'Erste Schritte',
-								es: 'Empezando',
-								ja: '入門',
-								fr: 'Mise en route',
-								it: 'Iniziamo',
-								id: 'Memulai',
-								'zh-CN': '开始使用',
-								'pt-BR': 'Introdução',
-								'pt-PT': 'Introdução',
-								ko: '시작하기',
-								tr: 'Başlarken',
-								ru: 'Введение',
-								hi: 'पहले कदम',
-								uk: 'Вступ',
-							},
-						},
-						{
-							label: 'Manual Setup',
-							link: 'manual-setup',
-							translations: {
-								de: 'Manuelle Einrichtung',
-								es: 'Configuración Manual',
-								ja: '手動セットアップ',
-								fr: 'Installation manuelle',
-								// it: 'Manual Setup',
-								id: 'Instalasi Manual',
-								'zh-CN': '手动配置',
-								'pt-BR': 'Instalação Manual',
-								'pt-PT': 'Instalação Manual',
-								ko: '수동으로 설정하기',
-								tr: 'Elle Kurulum',
-								ru: 'Установка вручную',
-								hi: 'मैनुअल सेटअप',
-								uk: 'Ручне встановлення',
-							},
-						},
+						'getting-started',
+						'manual-setup',
 						{
 							label: 'Environmental Impact',
-							link: 'environmental-impact',
+							slug: 'environmental-impact',
 							translations: {
 								de: 'Umweltbelastung',
 								es: 'Documentación ecológica',
@@ -160,6 +124,7 @@ export default defineConfig({
 						id: 'Panduan',
 						'zh-CN': '指南',
 						'pt-BR': 'Guias',
+						'pt-PT': 'Guias',
 						ko: '가이드',
 						tr: 'Rehber',
 						ru: 'Руководства',
@@ -169,9 +134,22 @@ export default defineConfig({
 					autogenerate: { directory: 'guides' },
 				},
 				{
+					label: 'Components',
+					translations: {
+						de: 'Komponenten',
+						fr: 'Composants',
+						ru: 'Компоненты',
+						ko: '컴포넌트',
+						ja: 'コンポーネント',
+						'zh-CN': '组件',
+						uk: 'Компоненти',
+					},
+					autogenerate: { directory: 'components' },
+				},
+				{
 					label: 'Reference',
 					translations: {
-						de: 'Referenz',
+						de: 'Referenzen',
 						es: 'Referencias',
 						ja: 'リファレンス',
 						fr: 'Référence',
@@ -189,23 +167,28 @@ export default defineConfig({
 				},
 				{
 					label: 'Resources',
-					badge: 'New',
 					translations: {
+						de: 'Ressourcen',
 						'zh-CN': '资源',
 						fr: 'Ressources',
 						'pt-BR': 'Recursos',
+						'pt-PT': 'Recursos',
 						ja: 'リソース',
+						ru: 'Ресурсы',
+						ko: '리소스',
+						uk: 'Ресурси',
 					},
 					autogenerate: { directory: 'resources' },
 				},
 			],
+			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
 				? [
 						starlightLinksValidator({
 							errorOnFallbackPages: false,
 							errorOnInconsistentLocale: true,
 						}),
-				  ]
+					]
 				: [],
 		}),
 	],

@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Skip to content",
   "search.label": "Search",
-  "search.shortcutLabel": "(Press / to Search)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Cancel",
   "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
   "themeSelect.accessibleLabel": "Select theme",
@@ -18,10 +18,12 @@
   "page.lastUpdated": "Last updated:",
   "page.previousLink": "Previous",
   "page.nextLink": "Next",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Page not found. Check the URL or try using the search bar.",
   "aside.note": "Note",
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

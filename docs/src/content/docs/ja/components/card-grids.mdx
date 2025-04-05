@@ -1,0 +1,173 @@
+---
+title: カードグリッド
+description: Starlightで複数のカードをグリッドにラップする方法を学びます。
+sidebar:
+  order: 4
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+複数の[`<Card>`](/ja/components/cards/)または[`<LinkCard>`](/ja/components/link-cards/)コンポーネントをグリッドにラップするには、`<CardGrid>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<CardGrid slot="preview">
+	<Card title="恒星" icon="star">
+		シリウス、ベガ、ベテルギウス
+	</Card>
+	<Card title="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## インポート
+
+```tsx
+import { CardGrid } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+### カードをグループ化する
+
+`<CardGrid>`コンポーネントを使用してグループ化することで、十分なスペースがある場合に複数の[`<Card>`](/ja/components/cards/)コンポーネントを並べて表示します。
+
+<Preview>
+
+```mdx {3,10}
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="これをチェック" icon="open-book">
+		強調したい興味深いコンテンツ。
+	</Card>
+	<Card title="その他の機能" icon="information">
+		共有したいその他の情報。
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,9}
+{% cardgrid %}
+{% card title="これをチェック" icon="open-book" %}
+強調したい興味深いコンテンツ。
+{% /card %}
+
+{% card title="その他の機能" icon="information" %}
+共有したいその他の情報。
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<Card title="これをチェック" icon="open-book">
+		強調したい興味深いコンテンツ。
+	</Card>
+	<Card title="その他の機能" icon="information">
+		共有したいその他の情報。
+	</Card>
+</CardGrid>
+
+</Preview>
+
+### リンクカードをグループ化する
+
+`<CardGrid>`コンポーネントを使用してグループ化することで、十分なスペースがある場合に複数の[`<LinkCard>`](/ja/components/link-cards/)コンポーネントを並べて表示します。
+
+<Preview>
+
+```mdx {3,6}
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard title="Markdownの作成" href="/ja/guides/authoring-content/" />
+	<LinkCard title="コンポーネント" href="/ja/components/using-components/" />
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {1,5}
+{% cardgrid %}
+{% linkcard title="Markdownの作成" href="/ja/guides/authoring-content/" /%}
+
+{% linkcard title="コンポーネント" href="/ja/components/using-components/" /%}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview">
+	<LinkCard title="Markdownの作成" href="/ja/guides/authoring-content/" />
+	<LinkCard title="コンポーネント" href="/ja/components/using-components/" />
+</CardGrid>
+
+</Preview>
+
+### カードをずらす
+
+視覚的な興味を加えるために、`<CardGrid>`コンポーネントに[`stagger`](#カードをずらす)属性を追加してグリッドの2列目を垂直方向にずらします。
+
+この属性は、プロジェクトの主要な機能を表示するホームページで便利です。
+
+<Preview>
+
+```mdx "stagger"
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="これをチェック" icon="open-book">
+		強調したい興味深いコンテンツ。
+	</Card>
+	<Card title="その他の機能" icon="information">
+		共有したいその他の情報。
+	</Card>
+</CardGrid>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc "stagger=true"
+{% cardgrid stagger=true %}
+{% card title="これをチェック" icon="open-book" %}
+強調したい興味深いコンテンツ。
+{% /card %}
+
+{% card title="その他の機能" icon="information" %}
+共有したいその他の情報。
+{% /card %}
+{% /cardgrid %}
+```
+
+</Fragment>
+
+<CardGrid slot="preview" stagger>
+	<Card title="これをチェック" icon="open-book">
+		強調したい興味深いコンテンツ。
+	</Card>
+	<Card title="その他の機能" icon="information">
+		共有したいその他の情報。
+	</Card>
+</CardGrid>
+
+</Preview>
+
+## `<CardGrid>` プロパティ
+
+**実装:** [`CardGrid.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/CardGrid.astro)
+
+`<CardGrid>`コンポーネントは以下のプロパティを受け入れます：
+
+### `stagger`
+
+**型:** `boolean`
+
+グリッド内のカードをずらすかどうかを定義します。

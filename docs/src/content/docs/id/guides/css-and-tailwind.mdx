@@ -3,11 +3,15 @@ title: CSS dan Styling
 description: Pelajari bagaimana cara styling website Starlight Anda dengan custom css dan mengintegrasikannya dengan Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Anda dapat menggunakan custom CSS atau menggunakan plugin Tailwind Starlight untuk styling website Starlight Anda.
 
 ## Custom CSS styles
 
 Sesuaikan style yang diterapkan pada website Starlight Anda dengan memberikan file CSS tambahan untuk memodifikasi atau menambahkan style ke style default dari Starlight.
+
+<Steps>
 
 1. Tambakan sebuah file CSS ke direktori `src/` Anda.
    Sebagai contoh, Anda dapat mengatur lebar kolom default yang lebih lebar dan ukuran teks yang lebih besar untuk judul halaman:
@@ -22,7 +26,7 @@ Sesuaikan style yang diterapkan pada website Starlight Anda dengan memberikan fi
 
 2. Tambahkan path file CSS Anda ke dalam array `customCss` pada config Starlight di `astro.config.mjs`.
 
-   ```js
+   ```diff lang="js"
    // astro.config.mjs
    import { defineConfig } from 'astro/config';
    import starlight from '@astrojs/starlight';
@@ -32,13 +36,15 @@ Sesuaikan style yang diterapkan pada website Starlight Anda dengan memberikan fi
    		starlight({
    			title: 'Website Dokumentasi Dengan Custom CSS',
    			customCss: [
-   				// Path relative ke custom CSS file Anda
-   				'./src/styles/custom.css',
+   +				// Path relative ke custom CSS file Anda
+   +				'./src/styles/custom.css',
    			],
    		}),
    	],
    });
    ```
+
+</Steps>
 
 Anda dapat melihat semua properti custom CSS yang dapat Anda atur yang digunakan oleh Starlight untuk menyesuaikan website dokumentasi Anda di dalam file [`props.css` di GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
@@ -55,11 +61,9 @@ Plugin Tailwind Starlight menerapkan konfigurasi berikut:
 
 ### Membuat proyek baru dengan Tailwind
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
 Mulai proyek Starlight baru dengan konfigurasi awal Tailwind CSS menggunakan `create astro`:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -87,9 +91,11 @@ yarn create astro --template starlight/tailwind
 
 Jika Anda sudah memiliki website Starlight dan ingin menambahkan Tailwind CSS, ikuti langkah-langkah berikut.
 
+<Steps>
+
 1.  Tambahkan Integrasi Tailwind Astro
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -119,7 +125,7 @@ Jika Anda sudah memiliki website Starlight dan ingin menambahkan Tailwind CSS, i
 
 2.  Instal plugin Tailwind Starlight
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -194,6 +200,8 @@ Jika Anda sudah memiliki website Starlight dan ingin menambahkan Tailwind CSS, i
     };
     ```
 
+</Steps>
+
 ### Styling Starlight dengan Tailwind
 
 Starlight akan menggunakan nilai-nilai dari konfigurasi tema [Tailwind Anda](https://tailwindcss.com/docs/theme) di dalam UI-nya.
@@ -243,6 +251,8 @@ Variabel-variabel ini digunakan di seluruh UI dengan berbagai nuansa abu-abu yan
 Gunakan slider di bawah ini untuk mengubah palet warna aksen dan abu-abu Starlight.
 Preview gelap dan terang akan menampilkan warna-warna hasilnya, dan seluruh halaman juga akan diperbarui untuk menyesuaikan dengan perubahan yang Anda lakukan.
 
+Gunakan opsi Tingkat Kontras untuk menentukan [standar kontras warna](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) Pedoman Aksesibilitas Konten Web mana yang dipenuhi.
+
 Saat Anda puas dengan perubahan Anda, salin CSS atau kode Tailwind di bawah ini dan gunakan di proyek Anda.
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -257,6 +267,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'Nebula',
 			default: 'Default',
 			random: 'Acak',
+		},
+		contrast: {
+			label: 'Tingkat Kontras',
 		},
 		editor: {
 			accentColor: 'Aksen',

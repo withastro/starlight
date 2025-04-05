@@ -63,7 +63,7 @@ El plugin Starlight Tailwind aplica la siguiente configuración:
 
 Empieza un nuevo proyecto en Starlight con Tailwind CSS preconfigurado usando `create astro`:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -95,7 +95,7 @@ Si ya tienes un sitio en Starlight y quieres agregar Tailwind CSS, sigue estos p
 
 1.  Agrega la integración de Tailwind de Astro:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -125,7 +125,7 @@ Si ya tienes un sitio en Starlight y quieres agregar Tailwind CSS, sigue estos p
 
 2.  Instala el plugin Starlight Tailwind:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -251,6 +251,8 @@ Estas variables son utilizadas en toda la UI con una gama de tonos grises utiliz
 Usa los controles deslizantes a continuación para modificar las paletas de colores de acento y gris de Starlight.
 Las áreas de vista previa oscura y clara mostrarán los colores resultantes, y toda la página también se actualizará para obtener una vista previa de tus cambios.
 
+Usa la opción Nivel de Contraste para especificar qué estándares de contraste de color de las [pautas de accesibilidad de contenido web](https://developer.mozilla.org/es/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) debe cumplir.
+
 Cuando estés satisfecho con tus cambios, copia el código CSS o Tailwind a continuación y úsalo en tu proyecto.
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -265,6 +267,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'Nebulosa',
 			default: 'Por defecto',
 			random: 'Aleatorio',
+		},
+		contrast: {
+			label: 'Nivel de Contraste',
 		},
 		editor: {
 			accentColor: 'Acento',

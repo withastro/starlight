@@ -1,6 +1,8 @@
-import type { AstroConfig, AstroUserConfig } from 'astro';
+/// <reference types="mdast-util-directive" />
+
+import type { AstroConfig, AstroIntegration, AstroUserConfig } from 'astro';
 import { h as _h, s as _s, type Properties } from 'hastscript';
-import type { Node, Paragraph as P, Parent, Root } from 'mdast';
+import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
 	type Directives,
 	directiveToMarkdown,
@@ -8,18 +10,17 @@ import {
 	type LeafDirective,
 } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
+import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
-import { remove } from 'unist-util-remove';
 import { visit } from 'unist-util-visit';
-import type { StarlightConfig } from '../types';
-import type { createTranslationSystemFromFs } from '../utils/translations-fs';
-import { pathToLocale } from './shared/pathToLocale';
+import type { HookParameters, StarlightConfig } from '../types';
 
 interface AsidesOptions {
-	starlightConfig: { locales: StarlightConfig['locales'] };
+	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
 	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>;
+	useTranslations: HookParameters<'config:setup'>['useTranslations'];
+	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
@@ -62,10 +63,20 @@ function transformUnhandledDirective(
 	index: number,
 	parent: Parent
 ) {
-	const textNode = {
-		type: 'text',
-		value: toMarkdown(node, { extensions: [directiveToMarkdown()] }),
-	} as const;
+	let markdown = toMarkdown(node, { extensions: [directiveToMarkdown()] });
+	/**
+	 * `mdast-util-to-markdown` assumes that the tree represents a complete document (as it's an AST
+	 * and not a CST) and to follow the POSIX definition of a line (a sequence of zero or more
+	 * non- <newline> characters plus a terminating <newline> character), a newline is automatically
+	 * added at the end of the output so that the output is a valid file.
+	 * In this specific case, we can safely remove the newline character at the end of the output
+	 * before replacing the directive with its value.
+	 *
+	 * @see https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206
+	 * @see https://github.com/syntax-tree/mdast-util-to-markdown/blob/fd6a508cc619b862f75b762dcf876c6b8315d330/lib/index.js#L79-L85
+	 */
+	if (markdown.at(-1) === '\n') markdown = markdown.slice(0, -1);
+	const textNode = { type: 'text', value: markdown } as const;
 	if (node.type === 'textDirective') {
 		parent.children[index] = textNode;
 	} else {
@@ -94,10 +105,10 @@ function transformUnhandledDirective(
  * ```astro
  * <aside class="starlight-aside starlight-aside--tip" aria-label="Did you know?">
  *   <p class="starlight-aside__title" aria-hidden="true">Did you know?</p>
- *   <section class="starlight-aside__content">
+ *   <div class="starlight-aside__content">
  *     <p>Astro helps you build faster websites with “Islands Architecture”.</p>
- *   </section>
- * </Aside>
+ *   </div>
+ * </aside>
  * ```
  */
 function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
@@ -138,36 +149,36 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	};
 
 	const transformer: Transformer<Root> = (tree, file) => {
-		const locale = pathToLocale(file.history[0], options);
-		const t = options.useTranslations(locale);
+		const lang = options.absolutePathToLang(file.path);
+		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === undefined || !isNodeDirective(node)) {
 				return;
 			}
 			if (node.type === 'textDirective' || node.type === 'leafDirective') {
-				transformUnhandledDirective(node, index, parent);
 				return;
 			}
 			const variant = node.name;
 			if (!isAsideVariant(variant)) return;
 
-			// remark-directive converts a container’s “label” to a paragraph in
-			// its children, but we want to pass it as the title prop to <Aside>, so
-			// we iterate over the children, find a directive label, store it for the
-			// title prop, and remove the paragraph from children.
-			let title = t(`aside.${variant}`);
-			remove(node, (child): boolean | void => {
-				if (child.data && 'directiveLabel' in child.data && child.data.directiveLabel) {
-					if (
-						'children' in child &&
-						Array.isArray(child.children) &&
-						'value' in child.children[0]
-					) {
-						title = (child.children[0] as { value: string }).value;
-					}
-					return true;
-				}
-			});
+			// remark-directive converts a container’s “label” to a paragraph added as the head of its
+			// children with the `directiveLabel` property set to true. We want to pass it as the title
+			// prop to <Aside>, so when we find a directive label, we store it for the title prop and
+			// remove the paragraph from the container’s children.
+			let title: string = t(`aside.${variant}`);
+			let titleNode: PhrasingContent[] = [{ type: 'text', value: title }];
+			const firstChild = node.children[0];
+			if (
+				firstChild?.type === 'paragraph' &&
+				firstChild.data &&
+				'directiveLabel' in firstChild.data &&
+				firstChild.children.length > 0
+			) {
+				titleNode = firstChild.children;
+				title = toString(firstChild.children);
+				// The first paragraph contains a directive label, we can safely remove it.
+				node.children.splice(0, 1);
+			}
 
 			const aside = h(
 				'aside',
@@ -188,9 +199,9 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 							},
 							iconPaths[variant]
 						),
-						{ type: 'text', value: title },
+						...titleNode,
 					]),
-					h('section', { class: 'starlight-aside__content' }, node.children),
+					h('div', { class: 'starlight-aside__content' }, node.children),
 				]
 			);
 
@@ -207,4 +218,45 @@ type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remar
 
 export function starlightAsides(options: AsidesOptions): RemarkPlugins {
 	return [remarkDirective, remarkAsides(options)];
+}
+
+export function remarkDirectivesRestoration() {
+	return function transformer(tree: Root) {
+		visit(tree, (node, index, parent) => {
+			if (
+				index !== undefined &&
+				parent &&
+				(node.type === 'textDirective' || node.type === 'leafDirective') &&
+				node.data === undefined
+			) {
+				transformUnhandledDirective(node, index, parent);
+				return;
+			}
+		});
+	};
+}
+
+/**
+ * Directives not handled by Starlight are transformed back to their original form to avoid
+ * breaking user content.
+ * To allow remark plugins injected by Starlight plugins through Astro integrations to handle
+ * such directives, we need to restore unhandled text and leaf directives back to their original
+ * form only after all these other plugins have run.
+ * To do so, we run a remark plugin restoring these directives back to their original form from
+ * another Astro integration that runs after all the ones that may have been injected by Starlight
+ * plugins.
+ */
+export function starlightDirectivesRestorationIntegration(): AstroIntegration {
+	return {
+		name: 'starlight-directives-restoration',
+		hooks: {
+			'astro:config:setup': ({ updateConfig }) => {
+				updateConfig({
+					markdown: {
+						remarkPlugins: [remarkDirectivesRestoration],
+					},
+				});
+			},
+		},
+	};
 }

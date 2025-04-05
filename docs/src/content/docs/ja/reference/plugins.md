@@ -50,7 +50,7 @@ interface StarlightPlugin {
 
 **type:** `StarlightUserConfig`
 
-ユーザーが提供した[Starlightの設定](/ja/reference/configuration)の、読み取り専用の複製です。この設定は、現在のプラグインより前に置かれた他のプラグインによって更新されている可能性があります。
+ユーザーが提供した[Starlightの設定](/ja/reference/configuration/)の、読み取り専用の複製です。この設定は、現在のプラグインより前に置かれた他のプラグインによって更新されている可能性があります。
 
 #### `updateConfig`
 
@@ -92,7 +92,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -139,7 +139,7 @@ Starlightを実行するために使用されたコマンドです。
 export default {
   name: 'long-process-plugin',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info('時間が掛かる処理を開始します…');
       // 何らかの時間が掛かる処理…
     },

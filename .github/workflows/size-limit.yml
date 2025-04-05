@@ -17,8 +17,8 @@ jobs:
     name: Check build output is within performance budget (forks)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
       - run: pnpm i
       - run: 'pnpm build:examples'
       - run: pnpm size
@@ -30,10 +30,10 @@ jobs:
     name: Check build output is within performance budget
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
       - name: Run size-limit
-        uses: andresz1/size-limit-action@dd31dce7dcc72a041fd3e49abf0502b13fc4ce05
+        uses: andresz1/size-limit-action@94bc357df29c36c8f8d50ea497c3e225c3c95d1d # v1.8.0
         with:
           github_token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
           build_script: 'build:examples'

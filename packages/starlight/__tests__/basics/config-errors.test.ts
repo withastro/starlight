@@ -10,13 +10,14 @@ function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
 	);
 }
 
-test('parses valid config successfully', () => {
+test('parses bare minimum valid config successfully', () => {
 	const data = parseStarlightConfigWithFriendlyErrors({ title: '' });
 	expect(data).toMatchInlineSnapshot(`
 		{
 		  "components": {
 		    "Banner": "@astrojs/starlight/components/Banner.astro",
 		    "ContentPanel": "@astrojs/starlight/components/ContentPanel.astro",
+		    "DraftContentNotice": "@astrojs/starlight/components/DraftContentNotice.astro",
 		    "EditLink": "@astrojs/starlight/components/EditLink.astro",
 		    "FallbackContentNotice": "@astrojs/starlight/components/FallbackContentNotice.astro",
 		    "Footer": "@astrojs/starlight/components/Footer.astro",
@@ -43,6 +44,7 @@ test('parses valid config successfully', () => {
 		    "ThemeSelect": "@astrojs/starlight/components/ThemeSelect.astro",
 		    "TwoColumnContent": "@astrojs/starlight/components/TwoColumnContent.astro",
 		  },
+		  "credits": false,
 		  "customCss": [],
 		  "defaultLocale": {
 		    "dir": "ltr",
@@ -58,15 +60,27 @@ test('parses valid config successfully', () => {
 		  },
 		  "head": [],
 		  "isMultilingual": false,
+		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,
 		  "locales": undefined,
-		  "pagefind": true,
+		  "pagefind": {
+		    "ranking": {
+		      "pageLength": 0.1,
+		      "termFrequency": 0.1,
+		      "termSaturation": 2,
+		      "termSimilarity": 9,
+		    },
+		  },
 		  "pagination": true,
+		  "prerender": true,
+		  "routeMiddleware": [],
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
 		  },
-		  "title": "",
+		  "title": {
+		    "en": "",
+		  },
 		  "titleDelimiter": "|",
 		}
 	`);
@@ -81,12 +95,13 @@ test('errors if title is missing', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Required"
-	`
+			**title**: Did not match union.
+			> Required"
+		`
 	);
 });
 
-test('errors if title value is not a string', () => {
+test('errors if title value is not a string or an Object', () => {
 	expect(() =>
 		// @ts-expect-error Testing invalid config
 		parseStarlightConfigWithFriendlyErrors({ title: 5 })
@@ -95,7 +110,8 @@ test('errors if title value is not a string', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**title**: Expected type \`"string"\`, received \`"number"\`"
+			**title**: Did not match union.
+			> Expected type \`"string" | "object"\`, received \`"number"\`"
 	`
 	);
 });
@@ -109,7 +125,7 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'slack' | 'matrix' | 'openCollective', received 'unknown'
+			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'azureDevOps' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne' | 'blueSky' | 'discourse' | 'zulip' | 'pinterest' | 'tiktok' | 'nostr' | 'backstage' | 'farcaster' | 'confluence' | 'jira' | 'storybook' | 'npm' | 'sourcehut' | 'substack', received 'unknown'
 			**social.unknown**: Invalid url"
 	`
 	);
@@ -164,7 +180,7 @@ test('errors with bad sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string;  } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "href": "/" }\`"
 	`
 	);
@@ -190,7 +206,86 @@ test('errors with bad nested sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0.items.1**: Did not match union.
-			> Expected type \`{ link: string } | { items: array } | { autogenerate: object }\`
+			> Expected type \`{ link: string } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "items": [ { "label": "Nested Example 1", "link": "/" }, { "label": "Nested Example 2", "link": true } ] }\`"
 	`);
+});
+
+test('errors with sidebar entry that includes `link` and `items`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{ label: 'Parent', link: '/parent', items: [{ label: 'Child', link: '/parent/child' }] },
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'items'"
+	`);
+});
+
+test('errors with sidebar entry that includes `link` and `autogenerate`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [{ label: 'Parent', link: '/parent', autogenerate: { directory: 'test' } }],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
+	`);
+});
+
+test('errors with sidebar entry that includes `items` and `autogenerate`', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			sidebar: [
+				{
+					label: 'Parent',
+					items: [{ label: 'Child', link: '/parent/child' }],
+					autogenerate: { directory: 'test' },
+				},
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
+	`);
+});
+
+test('parses route middleware config successfully', () => {
+	const data = parseStarlightConfigWithFriendlyErrors({
+		title: '',
+		routeMiddleware: './src/routeData.ts',
+	});
+	expect(data.routeMiddleware).toEqual(['./src/routeData.ts']);
+});
+
+test('errors if a route middleware path will conflict with Astro middleware', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			routeMiddleware: ['./src/middleware.ts', './src/routeData.ts'],
+		})
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			The \`"./src/middleware.ts"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.
+			
+			You should rename \`./src/middleware.ts\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.
+			
+			- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data
+			- More about Astro middleware: https://docs.astro.build/en/guides/middleware/"
+		`
+	);
 });

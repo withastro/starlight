@@ -6,7 +6,7 @@ import { fromHtml } from 'hast-util-from-html';
 import { toString } from 'hast-util-to-string';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import { Icons } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components/Icons';
 import { definitions } from './file-tree-icons';
 
 declare module 'vfile' {
@@ -160,7 +160,7 @@ function getFileIcon(fileName: string) {
 	const name = getFileIconName(fileName);
 	if (!name) return defaultFileIcon;
 	if (name in Icons) {
-		const path = Icons[name as keyof typeof Icons];
+		const path = Icons[name as StarlightIcon];
 		return makeSVGIcon(path);
 	}
 	return defaultFileIcon;
@@ -168,7 +168,7 @@ function getFileIcon(fileName: string) {
 
 /** Return the icon name for a file based on its file name. */
 function getFileIconName(fileName: string) {
-	let icon = definitions.files[fileName];
+	let icon: string | undefined = definitions.files[fileName];
 	if (icon) return icon;
 	icon = getFileIconTypeFromExtension(fileName);
 	if (icon) return icon;
@@ -240,7 +240,7 @@ function isElementNode(node: ElementContent): node is Element {
 function throwFileTreeValidationError(message: string): never {
 	throw new AstroError(
 		message,
-		'To learn more about the `<FileTree>` component, see https://starlight.astro.build/guides/components/#file-tree'
+		'To learn more about the `<FileTree>` component, see https://starlight.astro.build/components/file-tree/'
 	);
 }
 

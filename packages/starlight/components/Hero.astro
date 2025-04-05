@@ -1,10 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { PAGE_TITLE_ID } from '../constants';
-import type { Props } from '../props';
-import CallToAction from './CallToAction.astro';
+import LinkButton from '../user-components/LinkButton.astro';
 
-const { data } = Astro.props.entry;
+const { data } = Astro.locals.starlightRoute.entry;
 const { title = data.title, tagline, image, actions = [] } = data.hero || {};
 
 const imageAttrs = {
@@ -50,9 +49,14 @@ if (image) {
 		{
 			actions.length > 0 && (
 				<div class="sl-flex actions">
-					{actions.map(({ text, ...attrs }) => (
-						<CallToAction {...attrs} set:html={text} />
-					))}
+					{actions.map(
+						({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
+							<LinkButton {href} {variant} icon={icon?.name} class:list={[className]} {...attrs}>
+								{text}
+								{icon?.html && <Fragment set:html={icon.html} />}
+							</LinkButton>
+						)
+					)}
 				</div>
 			)
 		}

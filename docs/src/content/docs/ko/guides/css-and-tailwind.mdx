@@ -7,6 +7,8 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 사용자 정의 CSS 파일을 사용하여 Starlight 사이트의 스타일을 지정하거나 Starlight Tailwind 플러그인을 사용할 수 있습니다.
 
+사이트의 기본 스타일을 빠르게 변경하려면 [커뮤니티 테마](/ko/resources/themes/)를 확인하세요.
+
 ## 사용자 정의 CSS 스타일
 
 Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일을 제공하여 사이트에 적용된 스타일을 원하는대로 변경할 수 있습니다.
@@ -62,7 +64,7 @@ Starlight Tailwind 플러그인은 다음 구성을 적용합니다.
 
 `create astro`를 사용하여 Tailwind CSS가 사전 구성된 새 Starlight 프로젝트를 시작하세요.
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -94,7 +96,7 @@ yarn create astro --template starlight/tailwind
 
 1.  Astro의 Tailwind 통합 추가
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -124,7 +126,7 @@ yarn create astro --template starlight/tailwind
 
 2.  Starlight Tailwind 플러그인을 설치하세요.
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -249,6 +251,8 @@ export default {
 
 아래 슬라이더를 사용하여 Starlight의 강조 및 회색 색상 팔레트를 수정하세요. 어둡고 밝은 미리보기 영역에는 결과 색상이 표시되며 전체 페이지도 업데이트되어 변경 사항을 미리 확인할 수 있습니다.
 
+대비 수준 옵션을 사용하여 웹 콘텐츠 접근성 가이드라인 [색상 대비 표준](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) 중 어느 것을 충족할지 지정합니다.
+
 변경 사항이 만족스러우면 아래 CSS 또는 Tailwind 코드를 복사하여 프로젝트에 사용하세요.
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -263,6 +267,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: '성운',
 			default: '기본값',
 			random: '무작위',
+		},
+		contrast: {
+			label: '대비 수준',
 		},
 		editor: {
 			accentColor: '강조',

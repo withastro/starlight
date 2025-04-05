@@ -1,32 +1,56 @@
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry, type DataCollectionKey } from 'astro:content';
 import config from 'virtual:starlight/user-config';
+import project from 'virtual:starlight/project-context';
+import pluginTranslations from 'virtual:starlight/plugin-translations';
 import type { i18nSchemaOutput } from '../schemas/i18n';
 import { createTranslationSystem } from './createTranslationSystem';
+import type { RemoveIndexSignature } from './types';
+import { getCollectionPathFromRoot } from './collection';
+import { stripExtension, stripLeadingSlash } from './path';
 
-/** Get all translation data from the i18n collection, keyed by `id`, which matches locale. */
+// @ts-ignore - This may be a type error in projects without an i18n collection and running
+// `tsc --noEmit` in their project. Note that it is not possible to inline this type in
+// `UserI18nSchema` because this would break types for users having multiple data collections.
+type i18nCollection = CollectionEntry<'i18n'>;
+
+const i18nCollectionPathFromRoot = getCollectionPathFromRoot('i18n', project);
+
+export type UserI18nSchema = 'i18n' extends DataCollectionKey
+	? i18nCollection extends { data: infer T }
+		? i18nSchemaOutput & T
+		: i18nSchemaOutput
+	: i18nSchemaOutput;
+export type UserI18nKeys = keyof RemoveIndexSignature<UserI18nSchema>;
+
+/** Get all translation data from the i18n collection, keyed by `lang`, which are BCP-47 language tags. */
 async function loadTranslations() {
-	let userTranslations: Record<string, i18nSchemaOutput> = {};
 	// Briefly override `console.warn()` to silence logging when a project has no i18n collection.
 	const warn = console.warn;
 	console.warn = () => {};
-	try {
-		// Load the user’s i18n collection while ignoring type errors if it doesn’t exist.
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-		const i18n = await getCollection('i18n' as Parameters<typeof getCollection>[0]) as { id: string; data: i18nSchemaOutput }[];
-		userTranslations = Object.fromEntries(i18n.map(({ id, data }) => [id, data]));
-	} catch {
-		// Ignore runtime errors if the i18n collection doesn’t exist.
-	}
+	const userTranslations: Record<string, UserI18nSchema> = Object.fromEntries(
+		// @ts-ignore — may be a type error in projects without an i18n collection
+		(await getCollection('i18n')).map(({ id, data, filePath }) => {
+			const lang =
+				project.legacyCollections || !filePath
+					? id
+					: stripExtension(stripLeadingSlash(filePath.replace(i18nCollectionPathFromRoot, '')));
+			return [lang, data] as const;
+		})
+	);
 	// Restore the original warn implementation.
 	console.warn = warn;
 	return userTranslations;
 }
 
 /**
- * Generate a utility function that returns UI strings for the given `locale`.
- * @param {string | undefined} [locale]
+ * Generate a utility function that returns UI strings for the given language.
+ * @param {string | undefined} [lang]
  * @example
  * const t = useTranslations('en');
  * const label = t('search.label'); // => 'Search'
  */
-export const useTranslations = createTranslationSystem(await loadTranslations(), config);
+export const useTranslations = createTranslationSystem(
+	config,
+	await loadTranslations(),
+	pluginTranslations
+);

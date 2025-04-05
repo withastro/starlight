@@ -49,6 +49,16 @@ const StarlightTailwindPlugin = () =>
 					? theme(`colors.accent.${shade}`, theme(`colors.accent.900`, fallback))
 					: theme(`colors.accent.${shade}`, fallback);
 
+			let white: string = theme('colors.white');
+			if (typeof white !== 'string') {
+				console.warn(
+					`Expected \`colors.white\` in Tailwind theme to be a string, received ${typeof white}.\n` +
+						`Try setting a single value, for example \`white: '#fafaf9'\` or \`white: colors.stone[50]\`.`
+				);
+				// Ensure a usable value for white if the user-configured one is wrong.
+				white = '#fff';
+			}
+
 			addBase({
 				// Restore crucial styles from Tailwind Preflight: https://tailwindcss.com/docs/preflight
 				// Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -58,6 +68,9 @@ const StarlightTailwindPlugin = () =>
 					borderColor: theme('borderColor.DEFAULT', 'currentColor'),
 				},
 				'::before, ::after': { '--tw-content': '' },
+				// Keep base font-family styles even in non-Starlight pages.
+				'html, :host': { 'font-family': theme('fontFamily.sans') },
+				'code, kbd, samp, pre': { 'font-family': theme('fontFamily.mono') },
 
 				// Wire up Starlight theme to use Tailwind config.
 				':root': {
@@ -65,7 +78,7 @@ const StarlightTailwindPlugin = () =>
 					'--sl-font': theme('fontFamily.sans'),
 					'--sl-font-mono': theme('fontFamily.mono'),
 					// Dark mode Starlight theme variables.
-					'--sl-color-white': theme('colors.white'),
+					'--sl-color-white': white,
 					'--sl-color-gray-1': theme('colors.gray.200'),
 					'--sl-color-gray-2': theme('colors.gray.300'),
 					'--sl-color-gray-3': theme('colors.gray.400'),
@@ -86,7 +99,7 @@ const StarlightTailwindPlugin = () =>
 						'--sl-color-gray-5': theme('colors.gray.300'),
 						'--sl-color-gray-6': theme('colors.gray.200'),
 						'--sl-color-gray-7': theme('colors.gray.100'),
-						'--sl-color-black': theme('colors.white'),
+						'--sl-color-black': white,
 						'--sl-color-accent-low': themeAccent(200, '#c7d2fe'),
 						'--sl-color-accent': themeAccent(600, '#4f46e5'),
 						'--sl-color-accent-high': themeAccent(900, '#312e81'),

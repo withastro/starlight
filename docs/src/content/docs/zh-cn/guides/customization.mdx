@@ -106,6 +106,8 @@ export default defineConfig({
 });
 ```
 
+在 Astro 文档中，了解如何 [将站点地图链接添加到 `robots.txt`](https://docs.astro.build/zh-cn/guides/integrations-guide/sitemap/#robotstxt-中的站点地图链接)。
+
 ## 页面布局
 
 默认情况下，Starlight 页面使用带有全局导航侧边栏和显示当前页面标题的目录的布局。
@@ -128,7 +130,7 @@ Starlight 在每个页面上显示目录，使读者更容易跳转到他们正�
 
 默认情况下，目录中包含 `<h2>` 和 `<h3>` 标题。使用全局 `tableOfContents` 中的 `minHeadingLevel` 和 `maxHeadingLevel` 选项更改要包含的标题级别。通过添加相应的 frontmatter 中的 `tableOfContents` 属性，在单个页面上覆盖这些默认值：
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4-6}
@@ -162,8 +164,8 @@ defineConfig({
 
 通过将 `tableOfContents` 选项设置为 `false` 来完全禁用目录：
 
-<Tabs>
-  <TabItem label=" frontmatter ">
+<Tabs syncKey="config-type">
+  <TabItem label="Frontmatter ">
 
 ```md {4}
 ---
@@ -371,7 +373,7 @@ export default defineConfig({
 
 2.  安装所选字体的包。你可以通过在 Fontsource 字体页面上点击 “Install” 按钮来找到包名称。
 
-         <Tabs>
+         <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 

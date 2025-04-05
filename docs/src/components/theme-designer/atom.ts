@@ -29,3 +29,7 @@ export function map<T extends Record<string, unknown>>(value: T): MapStore<T> {
 	};
 	return atom;
 }
+
+export function atom<T extends unknown>(value: T): Atom<T> {
+	return new Atom(value);
+}

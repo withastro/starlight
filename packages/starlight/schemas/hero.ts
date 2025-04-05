@@ -1,9 +1,8 @@
 import { z } from 'astro/zod';
 import type { SchemaContext } from 'astro:content';
-import { Icons } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components/Icons';
 
-type IconName = keyof typeof Icons;
-const iconNames = Object.keys(Icons) as [IconName, ...IconName[]];
+const iconNames = Object.keys(Icons) as [StarlightIcon, ...StarlightIcon[]];
 
 export const HeroSchema = ({ image }: SchemaContext) =>
 	z.object({
@@ -49,8 +48,8 @@ export const HeroSchema = ({ image }: SchemaContext) =>
 				text: z.string(),
 				/** Value for the link’s `href` attribute, e.g. `/page` or `https://mysite.com`. */
 				link: z.string(),
-				/** Button style to use. One of `primary`, `secondary`, or `minimal` (the default). */
-				variant: z.enum(['primary', 'secondary', 'minimal']).default('minimal'),
+				/** Button style to use. One of `primary` (the default), `secondary`, or `minimal`. */
+				variant: z.enum(['primary', 'secondary', 'minimal']).default('primary'),
 				/**
 				 * An optional icon to display alongside the link text.
 				 * Can be an inline `<svg>` or the name of one of Starlight’s built-in icons.

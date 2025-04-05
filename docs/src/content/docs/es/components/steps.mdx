@@ -1,0 +1,120 @@
+---
+title: Pasos
+description: Aprende como dar estilo a listas numeradas de tareas para crear guías paso a paso en Starlight.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Para estilar una lista numerada de tareas para crear guías paso a paso, utiliza el componente `<Steps>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Steps slot="preview">
+
+1. Crea un nuevo proyecto de Starlight:
+
+   <Tabs syncKey="pkg">
+
+   <TabItem label="npm">
+
+   ```sh
+   npm create astro@latest -- --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="pnpm">
+
+   ```sh
+   pnpm create astro --template starlight
+   ```
+
+   </TabItem>
+
+   <TabItem label="Yarn">
+
+   ```sh
+   yarn create astro --template starlight
+   ```
+
+   </TabItem>
+
+   </Tabs>
+
+2. Escribe tu primera página de documentación.
+
+</Steps>
+
+</Preview>
+
+## Importación
+
+```tsx
+import { Steps } from '@astrojs/starlight/components';
+```
+
+## Uso
+
+Usa el componente `<Steps>` para estilar listas numeradas de tareas.
+Esto es útil para guías paso a paso más complejas donde cada paso necesita ser claramente resaltado.
+
+Envuelve `<Steps>` alrededor de una lista ordenada de Markdown estándar.
+Toda la sintaxis de Markdown estándar es aplicable dentro de `<Steps>`.
+
+<Preview>
+
+````mdx
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. Importa el componente en tu archivo MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Envuelve `<Steps>` alrededor de tus elementos de lista ordenada.
+
+</Steps>
+````
+
+<Fragment slot="markdoc">
+
+````markdoc
+{% steps %}
+
+1. Importa el componente en tu archivo MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Envuelve `<Steps>` alrededor de tus elementos de lista ordenada.
+
+{% /steps %}
+````
+
+</Fragment>
+
+<Steps slot="preview">
+
+1. Importa el componente en tu archivo MDX:
+
+   ```js
+   import { Steps } from '@astrojs/starlight/components';
+   ```
+
+2. Envuelve `<Steps>` alrededor de tus elementos de lista ordenada.
+
+</Steps>
+
+</Preview>
+
+## Props de `<Steps>`
+
+**Implementación:** [`Steps.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Steps.astro)
+
+El componente `<Steps>` no acepta ninguna propiedad.

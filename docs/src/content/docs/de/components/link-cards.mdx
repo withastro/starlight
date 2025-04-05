@@ -1,0 +1,128 @@
+---
+title: Link-Karten
+description: Erfahre, wie du in Starlight Links prominent als Karten anzeigst.
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Um Links zu verschiedenen Seiten prominent anzuzeigen, verwende die Komponente `<LinkCard>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="Starlight anpassen"
+	description="Lerne, wie du deine Starlight-Website mit deinem Logo, eigenen Schriftarten, Landing-Page-Design und vielem mehr zu deiner eigenen machen kannst."
+	href="/de/guides/customization/"
+/>
+
+</Preview>
+
+## Import
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## Verwendung
+
+Zeige einen Link mithilfe der Komponente `<LinkCard>` deutlich sichtbar an.
+Jede `<LinkCard>` erfodert ein [`title`](#title) und ein [`href`](#href)-Attribut.
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Inhalte in Markdown verfassen"
+	href="/de/guides/authoring-content/"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Inhalte in Markdown verfassen" href="/de/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Inhalte in Markdown verfassen"
+	href="/de/guides/authoring-content/"
+/>
+
+</Preview>
+
+### Füge eine Linkbeschreibung hinzu
+
+Füge einer Link-Karte mit dem Attribut [`description`](#description) eine kurze Beschreibung hinzu.
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Internationalisierung"
+	href="/de/guides/i18n/"
+	description="Konfiguriere Starlight zur Unterstützung mehrerer Sprachen."
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="Internationalisierung"
+	 href="/de/guides/i18n/"
+	 description="Konfiguriere Starlight zur Unterstützung mehrerer Sprachen." /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Internationalisierung"
+	href="/de/guides/i18n/"
+	description="Konfiguriere Starlight zur Unterstützung mehrerer Sprachen."
+/>
+
+</Preview>
+
+### Gruppiere Link-Karten
+
+Zeige mehrere Link-Karten nebeneinander an, wenn genügend Platz vorhanden ist, indem du sie mit der Komponente [`<CardGrid>`](/de/components/card-grids/) gruppierst.
+Ein Beispiel findest du im Handbuch [“Gruppiere Link-Karten”](/de/components/card-grids/#link-karten-gruppieren).
+
+## `<LinkCard>`-Eigenschaften
+
+**Implementation:** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+Die Komponente `<LinkCard>` akzeptiert die folgenden Eigenschaften sowie alle anderen [`<a>`-Elementattribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a):
+
+### `title`
+
+**Erforderlich**  
+**Typ:** `string`
+
+Der Titel der anzuzeigenden Link-Karte.
+
+### `href`
+
+**Erforderlich**  
+**Typ:** `string`
+
+Die URL, auf die bei Interaktion mit der Karte verwiesen werden soll.
+
+### `description`
+
+**Typ:** `string`
+
+Eine optionale Beschreibung, welche unter dem Titel angezeigt wird.

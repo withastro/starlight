@@ -1,5 +1,4 @@
-declare global {
-	// eslint-disable-next-line no-var
+export declare global {
 	var StarlightThemeProvider: {
 		updatePickers(theme?: string): void;
 	};

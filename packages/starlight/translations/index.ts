@@ -2,6 +2,7 @@ import { builtinI18nSchema } from '../schemas/i18n';
 import cs from './cs.json';
 import en from './en.json';
 import es from './es.json';
+import ca from './ca.json';
 import de from './de.json';
 import ja from './ja.json';
 import pt from './pt.json';
@@ -26,6 +27,8 @@ import uk from './uk.json';
 import hi from './hi.json';
 import zhTW from './zh-TW.json';
 import pl from './pl.json';
+import sk from './sk.json';
+import lv from './lv.json';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { parse } = builtinI18nSchema();
@@ -35,6 +38,7 @@ export default Object.fromEntries(
 		cs,
 		en,
 		es,
+		ca,
 		de,
 		ja,
 		pt,
@@ -59,5 +63,7 @@ export default Object.fromEntries(
 		hi,
 		'zh-TW': zhTW,
 		pl,
+		sk,
+		lv,
 	}).map(([key, dict]) => [key, parse(dict)])
 );

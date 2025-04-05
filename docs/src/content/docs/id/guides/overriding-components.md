@@ -101,7 +101,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-Pelajari lebih lanjut tentang semua prop yang tersedia di [Referensi Penggantian](/id/reference/overrides/#component-props).
+Pelajari lebih lanjut tentang semua prop yang tersedia di [Referensi Penggantian](/id/reference/route-data/).
 
 ### Mengganti komponen hanya pada halaman tertentu
 

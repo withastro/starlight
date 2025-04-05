@@ -73,7 +73,8 @@
   "files": [
     {
       "location": "src/content/docs/**/*.{md,mdx}",
-      "pattern": "src/content/docs/@lang/@path"
+      "pattern": "src/content/docs/@lang/@path",
+      "type": "universal"
     }
   ],
   "dashboard": {

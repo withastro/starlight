@@ -53,14 +53,14 @@ Questo hook viene chiamato con le seguenti opzioni:
 
 **tipo:** `StarlightUserConfig`
 
-Una copia di sola lettura della [configurazione Starlight](/it/reference/configuration) fornita all'utente.
+Una copia di sola lettura della [configurazione Starlight](/it/reference/configuration/) fornita all'utente.
 Questa configurazione potrebbe essere stata aggiornata da altri plugin configurati prima di quello corrente.
 
 #### `updateConfig`
 
 **tipo:** `(newConfig: StarlightUserConfig) => void`
 
-Una funzione di callback per aggiornare la [configurazione Starlight](/it/reference/configuration) fornita all'utente.
+Una funzione di callback per aggiornare la [configurazione Starlight](/it/reference/configuration/) fornita all'utente.
 Fornisci le chiavi di configurazione di livello root che vuoi sovrascrivere.
 Per aggiornare valori di configurazione annidati, devi fornire l'intero oggetto annidato.
 
@@ -99,7 +99,7 @@ import react from '@astrojs/react';
 export default {
   name: 'plugin-using-react',
   hooks: {
-    plugin({ addIntegration, astroConfig }) {
+    setup({ addIntegration, astroConfig }) {
       const isReactLoaded = astroConfig.integrations.find(
         ({ name }) => name === '@astrojs/react'
       );
@@ -148,7 +148,7 @@ Tutti i messaggi registrati saranno prefissati con il nome del plugin.
 export default {
   name: 'long-process-plugin',
   hooks: {
-    plugin({ logger }) {
+    setup({ logger }) {
       logger.info('Inizio di un processo lungo...');
       // Un processo lungo...
     },

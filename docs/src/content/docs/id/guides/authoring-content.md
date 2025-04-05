@@ -147,7 +147,7 @@ Pengguna Anda mungkin lebih produktif dan menemukan produk Anda lebih mudah digu
 
 - Navigasi yang jelas
 - Tema warna yang dapat dikonfigurasi oleh pengguna
-- [Dukungan i18n](/id/guides/i18n)
+- [Dukungan i18n](/id/guides/i18n/)
 
 :::
 
@@ -161,7 +161,7 @@ Pengguna Anda mungkin lebih produktif dan menemukan produk Anda lebih mudah digu
 
 - Navigasi yang jelas
 - Tema warna yang dapat dikonfigurasi oleh pengguna
-- [Dukungan i18n](/id/guides/i18n)
+- [Dukungan i18n](/id/guides/i18n/)
 
 :::
 ```

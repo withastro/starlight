@@ -1,21 +1,24 @@
 ---
 title: Başlarken
-description: Sıradaki dokümantasyon site Astro'nun Starlight'ı ile nasıl oluşturacağını öğren.
+description: Sıradaki dokümantasyon siteni Astro'nun Starlight'ı ile nasıl oluşturacağını öğren.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Yeni Proje Oluşturma
+Starlight, [Astro](https://astro.build) çerçevesi üstüne kurulmuş çok özellikli bir dokümantasyon temasıdır.
+Bu rehber, yeni projeye başlamanda yardımcı olacak.
+Mevcut Astro projesine Starlight eklemek için [elle kurulum talimatlarını](/tr/manual-setup/) incele.
 
-Starlight, Astro çerçevesi üstüne kurulmuş çok özellikli bir dokümantasyon temasıdır.
+## Hızlı Başlangıç
 
-Aşağıdaki komutları kullanarak yeni bir Astro + Starlight projesi oluşturabilirsin:
+### Yeni Proje Oluşturma
 
-<Tabs>
+Aşağıdaki komutu terminalinde çalıştırarak yeni bir Astro + Starlight projesi oluştur:
+
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
-# npm ile yeni bir proje oluştur
 npm create astro@latest -- --template starlight
 ```
 
@@ -23,7 +26,6 @@ npm create astro@latest -- --template starlight
 <TabItem label="pnpm">
 
 ```sh
-# pnpm ile yeni bir proje oluştur
 pnpm create astro --template starlight
 ```
 
@@ -31,7 +33,6 @@ pnpm create astro --template starlight
 <TabItem label="Yarn">
 
 ```sh
-# yarn ile yeni bir proje oluştur
 yarn create astro --template starlight
 ```
 
@@ -45,72 +46,82 @@ Starlight'ı tarayıcında dene:
 [StackBlitz'deki taslağı aç](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
 :::
 
-## Starlight ile İçerik Oluşturmak
+### Geliştirme sunucusunu başlat
 
-Starlight, yeni bir içerik eklemen ya da var olan dosyalarını getirmen için hazır!
+[Astro’nun geliştirme sunucusu](https://docs.astro.build/en/reference/cli-reference/#astro-dev) lokalinizde çalışırken, çalışmanızı önizlemeye ve otomatik olarak tarayıcınızın değişiklik yaptığınızda yenilenmesine olanak tanır.
 
-### Dosya Formatları
+Geliştirme sunucusunu başlatmak için aşağıdaki komutu proje dizininizde çalıştırın:
 
-Starlight, içerik yazmada Markdown ve MDX formatlarını destekler. (Deneysel [Astro Markdoc entegrasyonu](https://docs.astro.build/en/guides/integrations-guide/markdoc/)'nu yükleyerek Markdoc formatı için destek ekleyebilirsin.)
-
-### Sayfa Ekle
-
-`src/content/docs/` dizini altında `.md` or `.mdx` uzantılı dosya ekleyerek otomatik olarak sitene yeni sayfalar ekle. Dosyalarını organize etmek ve çoklu dizim bölümleri oluşturmak için yeni alt klasörler ekle:
-
-```
-src/content/docs/hello-world.md => your-site.com/hello-world
-src/content/docs/guides/faq.md => your-site.com/guides/faq
-```
-
-### Tip-korumalı Ön BÖlüm
-
-Tüm Starlight sayfaları özelleştirilebilir [ortak ön-bölüm mülkleri seti](/tr/reference/frontmatter/)'ni, sayfaların nasıl görüntüleneceğini kontrol etmek için paylaşır:
-
-```md
----
-title: Merhaba, Dünya!
-description: Bu, Starlight'la hazırlanmış sitemdeki bir sayfadır.
----
-```
-
-Herhangi önemli bir şeyi unutursan, Starlight sana hatırlatacaktır.
-
-## Starlight Web Siteni Yayına Al
-
-Starlight websiteni oluşturduktan ve özelleştirdikten sonra; bir web sunucusunda ya da Netlify, Vercel, GitHub Pages ve daha fazla barındırma platformundan herhangi birinde yayına alabilirsin.
-
-[Astro dokümantasyonunda, bir Astro sitenin nasıl yayına alındığını öğren.](https://docs.astro.build/en/guides/deploy/)
-
-## Starlight'ı Güncelleme
-
-:::tip
-Starlight, beta sürümünde olduğundan dolayı sıklıkla güncelleme ve geliştirmeler yapılacak. Starlight'ı güncel tuttuğuna emin ol!
-:::
-
-Starlight bir Astro entegrasyonudur ve herhangi bir `@astrojs/*` entegrasyonu gibi güncellenir:
-
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
-# npm ile Starlight'ı güncelle
-npm install @astrojs/starlight@latest
+npm run dev
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-# pnpm ile Starlight'ı güncelle
-pnpm upgrade @astrojs/starlight --latest
+pnpm dev
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-# yarn ile Starlight'ı güncelle
-yarn upgrade @astrojs/starlight --latest
+yarn dev
+```
+
+</TabItem>
+</Tabs>
+
+Bu, terminalinizde lokal önizleme bağlantılı bir mesaj gösterecektir.
+Sitenizi tarayıcıda görüntülemek için bu bağlantıyı açın.
+
+### İçerik Ekle
+
+Starlight, yeni bir içerik eklemen ya da var olan dosyalarını getirmen için hazır!
+
+`src/content/docs/` dizini içerisinde yeni Markdown dosyaları oluşturarak yeni sayfalar ekleyin.
+
+Dosya bazlı gezinim ve MDX ile Markdoc dosya desteği hakkında daha fazlası için [“Sayfalar”](/tr/guides/pages/) rehberini okuyun.
+
+### Sonraki Adımlar
+
+- **Yapılandır:** [“Starlight'ı özelleştirmek”](/tr/guides/customization/) rehberinde ortak ayarlar hakkında öğren.
+- **Gezinme:** [“Kenar Çubuğu Gezinimi”](/tr/guides/sidebar/) rehberi ile kenar çubuğunu ayarla.
+- **Bileşenler:** [“Bileşenler”](/tr/components/using-components/) rehberinde hazır yapılmış kartlar, tablar ve daha fazlasını keşfet.
+- **Yayına al:** Astro dokümantayonu içerisindeki [“Siteni yayına al”](https://docs.astro.build/en/guides/deploy/) rehberi ile çalışmanı yayınla.
+
+## Starlight'ı Güncelleme
+
+:::tip
+Starlight, beta sürümünde olduğundan dolayı sıklıkla güncelleme ve geliştirmeler yapılacak.
+Starlight'ı güncel tuttuğuna emin ol!
+:::
+
+Starlight bir Astro entegrasyonudur. Bunu ve diğer Astro paketlerini, terminalinde aşağıdaki komutu çalıştırarak güncelleyebilirsin:
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npx @astrojs/upgrade
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm dlx @astrojs/upgrade
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>

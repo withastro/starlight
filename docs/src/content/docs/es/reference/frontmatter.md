@@ -115,10 +115,10 @@ hero:
     - text: Cuéntame más
       link: /getting-started/
       icon: right-arrow
-      variant: primary
     - text: View on GitHub
       link: https://github.com/astronaut/my-project
       icon: external
+      variant: minimal
       attrs:
         rel: me
 ---
@@ -166,8 +166,8 @@ interface HeroConfig {
   actions?: Array<{
     text: string;
     link: string;
-    variant: 'primary' | 'secondary' | 'minimal';
-    icon: string;
+    variant?: 'primary' | 'secondary' | 'minimal';
+    icon?: string;
     attrs?: Record<string, string | number | boolean>;
   }>;
 }
@@ -270,6 +270,21 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**tipo:** `boolean`  
+**por defecto:** `false`
+
+Establece si esta página debe considerarse como un borrador y no incluirse en las [compilaciones de producción](https://docs.astro.build/es/reference/cli-reference/#astro-build) y [grupos de enlaces autogenerados](/es/guides/sidebar/#grupos-autogenerados). Establece en `true` para marcar una página como borrador y hacerla visible solo durante el desarrollo.
+
+```md
+---
+# src/content/docs/example.md
+# Excluye esta página de las compilaciones de producción
+draft: true
+---
+```
+
 ### `sidebar`
 
 **tipo:** [`SidebarConfig`](#sidebarconfig)
@@ -342,7 +357,7 @@ sidebar:
 
 Agrega una insignia a la página en la barra lateral cuando se muestra en un grupo de enlaces generado automáticamente.
 Cuando se usa un string, la insignia se mostrará con el color de acento predeterminado.
-Opcionalmente, pasa un objeto [`BadgeConfig`](/es/reference/configuration/#badgeconfig) con los campos `text` y `variant` para personalizar la insignia.
+Opcionalmente, pasa un objeto [`BadgeConfig`](/es/reference/configuration/#badgeconfig) con los campos `text`, `variant` y `class` para personalizar la insignia.
 
 ```md
 ---

@@ -1,4 +1,5 @@
 export { default as Aside } from './user-components/Aside.astro';
+export { default as Badge } from './user-components/Badge.astro';
 export { default as Card } from './user-components/Card.astro';
 export { default as CardGrid } from './user-components/CardGrid.astro';
 export { default as Icon } from './user-components/Icon.astro';
@@ -7,4 +8,5 @@ export { default as TabItem } from './user-components/TabItem.astro';
 export { default as LinkCard } from './user-components/LinkCard.astro';
 export { default as Steps } from './user-components/Steps.astro';
 export { default as FileTree } from './user-components/FileTree.astro';
+export { default as LinkButton } from './user-components/LinkButton.astro';
 export { Code } from 'astro-expressive-code/components';

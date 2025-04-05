@@ -1,0 +1,128 @@
+---
+title: 링크 카드
+description: Starlight에서 링크를 카드로 눈에 잘 띄게 표시하는 방법을 알아보세요.
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+다른 페이지로 연결되는 링크를 눈에 잘 띄게 표시하려면 `<LinkCard>` 컴포넌트를 사용하세요.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="Starlight 사용자 정의"
+	description="사용자 정의 스타일, 글꼴 등을 사용하여 스타라이트 사이트를 나만의 사이트로 만드는 방법을 알아보세요."
+	href="/ko/guides/customization/"
+/>
+
+</Preview>
+
+## 가져오기
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## 사용
+
+`<LinkCard>` 컴포넌트를 사용하여 링크를 눈에 잘 띄게 표시합니다.
+각 `<LinkCard>`에는 [`title`](#title) 및 [`href`](#href) 속성이 필요합니다.
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Markdown으로 콘텐츠 작성"
+	href="/ko/guides/authoring-content/"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Markdown으로 콘텐츠 작성" href="/ko/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Markdown으로 콘텐츠 작성"
+	href="/ko/guides/authoring-content/"
+/>
+
+</Preview>
+
+### 링크 설명 추가
+
+[`description`](#description) 속성을 사용하여 링크 카드에 간단한 설명을 추가합니다.
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="국제화"
+	href="/ko/guides/i18n/"
+	description="여러 언어를 지원하도록 Starlight를 구성합니다."
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="국제화"
+	 href="/ko/guides/i18n/"
+	 description="여러 언어를 지원하도록 Starlight를 구성합니다." /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="국제화"
+	href="/ko/guides/i18n/"
+	description="여러 언어를 지원하도록 Starlight를 구성합니다."
+/>
+
+</Preview>
+
+### 링크 카드 그룹화
+
+[`<CardGrid>`](/ko/components/card-grids/) 컴포넌트를 사용해 여러 개의 링크 카드를 그룹화하여 충분한 공간이 있을 때 나란히 표시합니다.
+예시는 [“링크 카드 그룹화”](/ko/components/card-grids/#링크-카드-그룹화) 가이드를 참조하세요.
+
+## `<LinkCard>` 속성
+
+**구현:** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+`<LinkCard>` 컴포넌트는 다음 속성과 기타 [`<a>` 요소의 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Element/a)도 허용합니다:
+
+### `title`
+
+**필수**  
+**타입:** `string`
+
+표시할 링크 카드의 제목입니다.
+
+### `href`
+
+**필수**  
+**타입:** `string`
+
+카드와 상호 작용할 때 연결할 URL입니다.
+
+### `description`
+
+**타입:** `string`
+
+제목 아래에 표시할 설명 (선택 사항)입니다.

@@ -18,14 +18,33 @@ interface i18nSchemaOpts<T extends z.AnyZodObject = z.SomeZodObject> {
 	extend?: T;
 }
 
+const defaultI18nSchema = () =>
+	starlightI18nSchema().merge(pagefindI18nSchema()).merge(expressiveCodeI18nSchema());
+/** Type of Starlight’s default i18n schema, including extensions from Pagefind and Expressive Code. */
+type DefaultI18nSchema = ReturnType<typeof defaultI18nSchema>;
+
+/**
+ * Based on the the return type of Zod’s `merge()` method. Merges the type of two `z.object()` schemas.
+ * Also sets them as “passthrough” schemas as that’s how we use them. In practice whether or not the types
+ * are passthrough or not doesn’t matter too much.
+ *
+ * @see https://github.com/colinhacks/zod/blob/3032e240a0c227692bb96eedf240ed493c53f54c/src/types.ts#L2656-L2660
+ */
+type MergeSchemas<A extends z.AnyZodObject, B extends z.AnyZodObject> = z.ZodObject<
+	z.objectUtil.extendShape<A['shape'], B['shape']>,
+	'passthrough',
+	B['_def']['catchall']
+>;
+/** Type that extends Starlight’s default i18n schema with an optional, user-defined schema. */
+type ExtendedSchema<T extends z.AnyZodObject> = T extends z.AnyZodObject
+	? MergeSchemas<DefaultI18nSchema, T>
+	: DefaultI18nSchema;
+
 /** Content collection schema for Starlight’s optional `i18n` collection. */
 export function i18nSchema<T extends z.AnyZodObject = z.SomeZodObject>({
 	extend = z.object({}) as T,
-}: i18nSchemaOpts<T> = {}) {
-	return starlightI18nSchema()
-		.merge(pagefindI18nSchema())
-		.merge(expressiveCodeI18nSchema())
-		.merge(extend);
+}: i18nSchemaOpts<T> = {}): ExtendedSchema<T> {
+	return defaultI18nSchema().merge(extend).passthrough() as ExtendedSchema<T>;
 }
 export type i18nSchemaOutput = z.output<ReturnType<typeof i18nSchema>>;
 
@@ -48,9 +67,11 @@ function starlightI18nSchema() {
 
 			'search.label': z.string().describe('Text displayed in the search bar.'),
 
-			'search.shortcutLabel': z
+			'search.ctrlKey': z
 				.string()
-				.describe('Accessible label for the shortcut key to open the search modal.'),
+				.describe(
+					'Visible representation of the Control key potentially used in the shortcut key to open the search modal.'
+				),
 
 			'search.cancelLabel': z
 				.string()
@@ -116,6 +137,12 @@ function starlightI18nSchema() {
 				.string()
 				.describe('Label shown on the “next page” pagination arrow in the page footer.'),
 
+			'page.draft': z
+				.string()
+				.describe(
+					'Development-only notice informing users they are on a page that is a draft which will not be included in production builds.'
+				),
+
 			'404.text': z.string().describe('Text shown on Starlight’s default 404 page'),
 			'aside.tip': z.string().describe('Text shown on the tip aside variant'),
 			'aside.note': z.string().describe('Text shown on the note aside variant'),
@@ -125,6 +152,12 @@ function starlightI18nSchema() {
 			'fileTree.directory': z
 				.string()
 				.describe('Label for the directory icon in the file tree component.'),
+
+			'builtWithStarlight.label': z
+				.string()
+				.describe(
+					'Label for the “Built with Starlight” badge optionally displayed in the site footer.'
+				),
 		})
 		.partial();
 }

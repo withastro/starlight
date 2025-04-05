@@ -1,9 +1,15 @@
 import config from 'virtual:starlight/user-config';
+import { stripTrailingSlash } from './path';
+import type { AstroConfig } from 'astro';
 
 /**
  * Get the equivalent of the passed URL for the passed locale.
  */
-export function localizedUrl(url: URL, locale: string | undefined): URL {
+export function localizedUrl(
+	url: URL,
+	locale: string | undefined,
+	trailingSlash: AstroConfig['trailingSlash']
+): URL {
 	// Create a new URL object to void mutating the global.
 	url = new URL(url);
 	if (!config.locales) {
@@ -12,7 +18,7 @@ export function localizedUrl(url: URL, locale: string | undefined): URL {
 	}
 	if (locale === 'root') locale = '';
 	/** Base URL with trailing `/` stripped. */
-	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const base = stripTrailingSlash(import.meta.env.BASE_URL);
 	const hasBase = url.pathname.startsWith(base);
 	// Temporarily remove base to simplify
 	if (hasBase) url.pathname = url.pathname.replace(base, '');
@@ -40,5 +46,6 @@ export function localizedUrl(url: URL, locale: string | undefined): URL {
 	}
 	// Restore base
 	if (hasBase) url.pathname = base + url.pathname;
+	if (trailingSlash === 'never') url.pathname = stripTrailingSlash(url.pathname);
 	return url;
 }

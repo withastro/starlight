@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Ga naar inhoud",
   "search.label": "Zoeken",
-  "search.shortcutLabel": "(Druk op / om te zoeken)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Annuleren",
   "search.devWarning": "Zoeken is alleen beschikbaar tijdens productie. \nProbeer om de site te builden en er een preview van te bekijken om lokaal te testen.",
   "themeSelect.accessibleLabel": "Selecteer thema",
@@ -18,10 +18,12 @@
   "page.lastUpdated": "Laatst bewerkt:",
   "page.previousLink": "Vorige",
   "page.nextLink": "Volgende",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Pagina niet gevonden. Controleer de URL of probeer de zoekbalk.",
   "aside.note": "Opmerking",
   "aside.tip": "Tip",
   "aside.caution": "Opgepast",
   "aside.danger": "Gevaar",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

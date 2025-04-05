@@ -67,6 +67,8 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
 </Steps>
 
+For more advanced i18n scenarios, Starlight also supports configuring internationalization using the [Astro’s `i18n` config](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing) option.
+
 ### Use a root locale
 
 You can use a “root” locale to serve a language without any i18n prefix in its path. For example, if English is your root locale, an English page path would look like `/about` instead of `/en/about`.
@@ -143,6 +145,34 @@ Starlight expects you to create equivalent pages in all your languages. For exam
 
 If a translation is not yet available for a language, Starlight will show readers the content for that page in the default language (set via `defaultLocale`). For example, if you have not yet created a French version of your About page and your default language is English, visitors to `/fr/about` will see the English content from `/en/about` with a notice that this page has not yet been translated. This helps you add content in your default language and then progressively translate it when your translators have time.
 
+## Translate the site title
+
+By default, Starlight will use the same site title for all languages.
+If you need to customize the title for each locale, you can pass an object to [`title`](/reference/configuration/#title-required) in Starlight’s options:
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'My Docs',
++			title: {
++				en: 'My Docs',
++				'zh-CN': '我的文档',
++			},
+			defaultLocale: 'en',
+			locales: {
+				en: { label: 'English' },
+				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+			},
+		}),
+	],
+});
+```
+
 ## Translate Starlight's UI
 
 import LanguagesList from '~/components/languages-list.astro';
@@ -150,23 +180,25 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 In addition to hosting translated content files, Starlight allows you to translate the default UI strings (e.g. the "On this page" heading in the table of contents) so that your readers can experience your site entirely in the selected language.
 
-<LanguagesList startsSentence /> translated UI strings are provided out of the box,
-and we welcome [contributions to add more default languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+<LanguagesList startsSentence /> translated UI strings are provided out of the
+box, and we welcome [contributions to add more default
+languages](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 You can provide translations for additional languages you support — or override our default labels — via the `i18n` data collection.
 
 <Steps>
 
-1. Configure the `i18n` data collection in `src/content/config.ts` if it isn’t configured already:
+1. Configure the `i18n` data collection in `src/content.config.ts` if it isn’t configured already:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -189,7 +221,7 @@ You can provide translations for additional languages you support — or overrid
 
    <UIStringsList />
 
-   Starlight’s code blocks are powered by the [Expressive Code](https://github.com/expressive-code/expressive-code) library.
+   Starlight’s code blocks are powered by the [Expressive Code](https://expressive-code.com/) library.
    You can set translations for its UI strings in the same JSON file using `expressiveCode` keys:
 
    ```json
@@ -226,14 +258,15 @@ Add custom keys to your site’s translation dictionaries by setting `extend` in
 In the following example, a new, optional `custom.label` key is added to the default keys:
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -243,4 +276,134 @@ export const collections = {
 };
 ```
 
-Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema) in the Astro docs.
+Learn more about content collection schemas in [“Defining a collection schema”](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema) in the Astro docs.
+
+## Using UI translations
+
+You can access Starlight’s [built-in UI strings](/guides/i18n/#translate-starlights-ui) as well as [user-defined](/guides/i18n/#extend-translation-schema), and [plugin-provided](/reference/plugins/#injecttranslations) UI strings through a unified API powered by [i18next](https://www.i18next.com/).
+This includes support for features like [interpolation](https://www.i18next.com/translation-function/interpolation) and [pluralization](https://www.i18next.com/translation-function/plurals).
+
+In Astro components, this API is available as part of the [global `Astro` object](https://docs.astro.build/en/reference/api-reference/#locals) as `Astro.locals.t`:
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+You can also use the API in [endpoints](https://docs.astro.build/en/guides/endpoints/), where the `locals` object is available as part of the [endpoint context](https://docs.astro.build/en/reference/api-reference/#locals):
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+In the context of a Starlight plugin, you can use the [`useTranslations()`](/reference/plugins/#usetranslations) helper to access this API for a specific language.
+See the [plugins reference](/reference/plugins/) for more information.
+
+### Rendering a UI string
+
+Render UI strings using the `locals.t()` function.
+This is an instance of i18next’s `t()` function, which takes a UI string key as its first argument and returns the corresponding translation for the current language.
+
+For example, given a custom translation file with the following content:
+
+```json title="src/content/i18n/en.json"
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+The first UI string can be rendered by passing `'link.astro'` to the `t()` function:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- Renders: <a href="...">Astro documentation</a> -->
+```
+
+The second UI string uses i18next’s [interpolation syntax](https://www.i18next.com/translation-function/interpolation) for the `{{feature}}` placeholder.
+The value for `feature` must be set in an options object passed as the second argument to `t()`:
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- Renders: <a href="...">Astro documentation for Astro DB</a> -->
+```
+
+See the [i18next documentation](https://www.i18next.com/overview/api#t) for more information on how to use the `t()` function with interpolation, formatting, and more.
+
+### Advanced APIs
+
+#### `t.all()`
+
+The `locals.t.all()` function returns an object containing all UI strings available for the current locale.
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Skip to content",
+//      "search.label": "Search",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+To check if a translation key exists for a locale, use the `locals.t.exists()` function with the translation key as first argument.
+Pass an optional second argument if you need to override the current locale.
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+See the [`exists()` reference in the i18next documentation](https://www.i18next.com/overview/api#exists) for more information.
+
+#### `t.dir()`
+
+The `locals.t.dir()` function returns the text direction of the current or a specific locale.
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+See the [`dir()` reference in the i18next documentation](https://www.i18next.com/overview/api#dir) for more information.
+
+## Accessing the current locale
+
+You can use [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#currentlocale) to read the current locale in `.astro` components.
+
+The following example reads the current locale and uses it with the [`getRelativeLocaleUrl()`](https://docs.astro.build/en/reference/modules/astro-i18n/#getrelativelocaleurl) helper to generate a link to an about page in the current language:
+
+```astro
+---
+// src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+---
+
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>About</a>
+```

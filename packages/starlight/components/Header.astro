@@ -1,6 +1,5 @@
 ---
 import config from 'virtual:starlight/user-config';
-import type { Props } from '../props';
 
 import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
 import Search from 'virtual:starlight/components/Search';
@@ -17,17 +16,17 @@ const shouldRenderSearch =
 
 <div class="header sl-flex">
 	<div class="title-wrapper sl-flex">
-		<SiteTitle {...Astro.props} />
+		<SiteTitle />
 	</div>
-	<div class="sl-flex">
-		{shouldRenderSearch && <Search {...Astro.props} />}
+	<div class="sl-flex print:hidden">
+		{shouldRenderSearch && <Search />}
 	</div>
-	<div class="sl-hidden md:sl-flex right-group">
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
 		<div class="sl-flex social-icons">
-			<SocialIcons {...Astro.props} />
+			<SocialIcons />
 		</div>
-		<ThemeSelect {...Astro.props} />
-		<LanguageSelect {...Astro.props} />
+		<ThemeSelect />
+		<LanguageSelect />
 	</div>
 </div>
 
@@ -41,7 +40,11 @@ const shouldRenderSearch =
 
 	.title-wrapper {
 		/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
-		overflow: hidden;
+		overflow: clip;
+		/* Avoid clipping focus ring around link inside title wrapper. */
+		padding: 0.25rem;
+		margin: -0.25rem;
+		min-width: 0;
 	}
 
 	.right-group,

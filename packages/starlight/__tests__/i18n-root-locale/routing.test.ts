@@ -1,20 +1,19 @@
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { assert, expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
-import { generateRouteData } from '../../utils/route-data';
-import * as git from '../../utils/git';
+import { generateRouteData } from '../../utils/routing/data';
+import * as git from 'virtual:starlight/git-info';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
 		docs: [
 			['404.md', { title: 'Page introuvable' }],
 			['index.mdx', { title: 'Accueil' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/index.mdx', { title: 'Home page' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['ar/index.mdx', { title: 'الصفحة الرئيسية' }],
 			[
-				'guides/authoring-content.md',
+				'guides/authoring-content.mdx',
 				{ title: 'Création de contenu en Markdown', lastUpdated: true },
 			],
 		],
@@ -22,7 +21,7 @@ vi.mock('astro:content', async () =>
 );
 
 test('test suite is using correct env', () => {
-	expect(config.title).toBe('i18n with root locale');
+	expect(config.title).toMatchObject({ fr: 'i18n with root locale' });
 });
 
 test('routes includes fallback entries for untranslated pages', () => {
@@ -61,8 +60,15 @@ test('fallback routes have fallback locale data in entryMeta', () => {
 });
 
 test('fallback routes use their own locale data', () => {
-	const enGuide = routes.find((route) => route.id === 'en/guides/authoring-content.md');
-	if (!enGuide) throw new Error('Expected to find English fallback route for authoring-content.md');
+	const enGuide = routes.find(
+		(route) =>
+			route.id ===
+			(project.legacyCollections
+				? 'en/guides/authoring-content.mdx'
+				: 'en/guides/authoring-content')
+	);
+	if (!enGuide)
+		throw new Error('Expected to find English fallback route for authoring-content.mdx');
 	expect(enGuide.locale).toBe('en');
 	expect(enGuide.lang).toBe('en-US');
 });
@@ -70,7 +76,7 @@ test('fallback routes use their own locale data', () => {
 test('fallback routes use fallback entry last updated dates', () => {
 	const getNewestCommitDate = vi.spyOn(git, 'getNewestCommitDate');
 	const route = routes.find((route) => route.entry.id === routes[4]!.id && route.locale === 'en');
-	assert(route, 'Expected to find English fallback route for `guides/authoring-content.md`.');
+	assert(route, 'Expected to find English fallback route for `guides/authoring-content.mdx`.');
 
 	generateRouteData({
 		props: {

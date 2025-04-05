@@ -1,0 +1,106 @@
+---
+title: カード
+description: Starlightでコンテンツをボックス内に表示するためのカードの使用方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Starlightのスタイルに合わせてコンテンツをボックス内に表示するには、`<Card>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+	<Card slot="preview" title="衛星" icon="moon">
+		イオ、エウロパ、ガニメデ
+	</Card>
+</Preview>
+
+## インポート
+
+```tsx
+import { Card } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<Card>`コンポーネントを使用してカードを表示し、カードの[`title`](#title)を提供します。
+
+<Preview>
+
+```mdx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="これをチェック">強調したい興味深いコンテンツ。</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% card title="これをチェック" %}
+強調したい興味深いコンテンツ。
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="これをチェック">
+	強調したい興味深いコンテンツ。
+</Card>
+
+</Preview>
+
+### カードにアイコンを追加する
+
+[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前を[`icon`](#icon)属性に設定して、カードにアイコンを含めることができます。
+
+<Preview>
+
+```mdx 'icon="star"'
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="恒星" icon="star">
+	シリウス、ベガ、ベテルギウス
+</Card>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="star"'
+{% card title="恒星" icon="star" %}
+シリウス、ベガ、ベテルギウス
+{% /card %}
+```
+
+</Fragment>
+
+<Card slot="preview" title="恒星" icon="star">
+	シリウス、ベガ、ベテルギウス
+</Card>
+  
+</Preview>
+
+### カードをグループ化する
+
+[`<CardGrid>`](/ja/components/card-grids/)コンポーネントを使用してグループ化することで、十分なスペースがある場合に複数のカードを並べて表示できます。
+例については、["カードのグループ化"](/ja/components/card-grids/#カードをグループ化する)ガイドを参照してください。
+
+## `<Card>` プロパティ
+
+**実装:** [`Card.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Card.astro)
+
+`<Card>`コンポーネントは以下のプロパティを受け入れます：
+
+### `title`
+
+**必須**  
+**型:** `string`
+
+表示するカードのタイトル。
+
+### `icon`
+
+**型:** `string`
+
+カードには[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の名前に設定された`icon`属性を含めることができます。

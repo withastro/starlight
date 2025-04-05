@@ -1,13 +1,14 @@
 import {
 	astroExpressiveCode,
 	type AstroExpressiveCodeOptions,
-	addClassName,
 	type CustomConfigPreprocessors,
 } from 'astro-expressive-code';
+import { addClassName } from 'astro-expressive-code/hast';
 import type { AstroIntegration } from 'astro';
-import type { StarlightConfig } from '../../types';
-import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { pathToLocale } from '../shared/pathToLocale';
+import type { HookParameters, StarlightConfig } from '../../types';
+import { absolutePathToLang } from '../shared/absolutePathToLang';
+import { slugToLocale } from '../shared/slugToLocale';
+import { localeToLang } from '../shared/localeToLang';
 import {
 	applyStarlightUiThemeColors,
 	preprocessThemes,
@@ -19,7 +20,7 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 	/**
 	 * Set the themes used to style code blocks.
 	 *
-	 * See the [Expressive Code `themes` documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)
+	 * See the [Expressive Code `themes` documentation](https://expressive-code.com/guides/themes/)
 	 * for details of the supported theme formats.
 	 *
 	 * Starlight uses the dark and light variants of Sarah Drasner’s
@@ -63,7 +64,7 @@ export type StarlightExpressiveCodeOptions = Omit<AstroExpressiveCodeOptions, 't
 
 type StarlightEcIntegrationOptions = {
 	starlightConfig: StarlightConfig;
-	useTranslations?: ReturnType<typeof createTranslationSystemFromFs> | undefined;
+	useTranslations: HookParameters<'config:setup'>['useTranslations'];
 };
 
 /**
@@ -77,7 +78,6 @@ export function getStarlightEcConfigPreprocessor({
 	return (input): AstroExpressiveCodeOptions => {
 		const astroConfig = input.astroConfig;
 		const ecConfig = input.ecConfig as StarlightExpressiveCodeOptions;
-		const { locales } = starlightConfig;
 
 		const {
 			themes: themesInput,
@@ -110,8 +110,8 @@ export function getStarlightEcConfigPreprocessor({
 			},
 		});
 
-		// Add Expressive Code UI translations (if any) for all defined locales
-		if (useTranslations) addTranslations(locales, useTranslations);
+		// Add Expressive Code UI translations for all defined locales
+		addTranslations(starlightConfig, useTranslations);
 
 		return {
 			themes,
@@ -124,6 +124,7 @@ export function getStarlightEcConfigPreprocessor({
 				}
 				return theme;
 			},
+			defaultLocale: starlightConfig.defaultLocale?.lang ?? starlightConfig.defaultLocale?.locale,
 			themeCssSelector: (theme, { styleVariants }) => {
 				// If one dark and one light theme are available, and the user has not disabled it,
 				// generate theme CSS selectors compatible with Starlight's dark mode switch
@@ -152,11 +153,15 @@ export function getStarlightEcConfigPreprocessor({
 				},
 				...otherStyleOverrides,
 			},
-			getBlockLocale: ({ file }) =>
-				pathToLocale((file as { path?: string | undefined }).path, {
-					starlightConfig,
-					astroConfig,
-				}),
+			getBlockLocale: ({ file }) => {
+				if (file.url) {
+					const locale = slugToLocale(file.url.pathname.slice(1), starlightConfig);
+					return localeToLang(starlightConfig, locale);
+				}
+				// Note that EC cannot use the `absolutePathToLang` helper passed down to plugins as this callback
+				// is also called in the context of the `<Code>` component.
+				return absolutePathToLang(file.path, { starlightConfig, astroConfig });
+			},
 			plugins,
 			...rest,
 		};

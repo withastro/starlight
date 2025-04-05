@@ -7,6 +7,12 @@ description: Starlight helps you build beautiful, high-performance documentation
 template: splash
 editUrl: false
 lastUpdated: false
+banner:
+  content: |
+    Updating to Astro 5?
+    <a href="https://github.com/withastro/starlight/releases/tag/%40astrojs/starlight%400.30.0">
+      Learn how to upgrade
+    </a>
 hero:
   title: Make your docs shine with Starlight
   tagline: Everything you need to build a stellar documentation website. Fast, accessible, and easy-to-use.
@@ -15,10 +21,10 @@ hero:
   actions:
     - text: Get started
       icon: right-arrow
-      variant: primary
       link: /getting-started/
     - text: View on GitHub
       icon: external
+      variant: minimal
       link: https://github.com/withastro/starlight
 ---
 
@@ -69,8 +75,9 @@ import Testimonial from '~/components/testimonial.astro';
     Starlight is our go-to example of a great DX: the speed, convenience, and
     attention to details is inspiring. It takes care of the tech and the looks,
     so you can focus on your content 👏
-     
+
     StackBlitz team absolutely loves it!
+
   </Testimonial>
   <Testimonial
     name="Roberto"

@@ -5,9 +5,12 @@ import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
+import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
 import { SidebarItemSchema } from '../schemas/sidebar';
+import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
@@ -33,9 +36,7 @@ const LocaleSchema = z.object({
 
 const UserConfigSchema = z.object({
 	/** Title for your website. Will be used in metadata and as browser tab title. */
-	title: z
-		.string()
-		.describe('Title for your website. Will be used in metadata and as browser tab title.'),
+	title: TitleConfigSchema(),
 
 	/** Description metadata for your website. Can be used in page metadata. */
 	description: z
@@ -191,11 +192,15 @@ const UserConfigSchema = z.object({
 	expressiveCode: ExpressiveCodeSchema(),
 
 	/**
-	 * Define whether Starlight’s default site search provider Pagefind is enabled.
-	 * Set to `false` to disable indexing your site with Pagefind.
-	 * This will also hide the default search UI if in use.
+	 * Configure Starlight’s default site search provider Pagefind. Set to `false` to disable indexing
+	 * your site with Pagefind, which will also hide the default search UI if in use.
 	 */
-	pagefind: z.boolean().default(true),
+	pagefind: z
+		.boolean()
+		// Transform `true` to our default config object.
+		.transform((val) => val && PagefindConfigDefaults())
+		.or(PagefindConfigSchema())
+		.optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
@@ -208,20 +213,75 @@ const UserConfigSchema = z.object({
 
 	/** Disable Starlight's default 404 page. */
 	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
+
+	/**
+	 * Define whether Starlight pages should be prerendered or not.
+	 * Defaults to always prerender Starlight pages, even when the project is
+	 * set to "server" output mode.
+	 */
+	prerender: z.boolean().default(true),
+
+	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
+	credits: z
+		.boolean()
+		.default(false)
+		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
+
+	/** Add middleware to process Starlight’s route data for each page. */
+	routeMiddleware: z
+		.string()
+		.transform((string) => [string])
+		.or(z.string().array())
+		.default([])
+		.superRefine((middlewares, ctx) => {
+			// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/2
+			const invalidPathRegex = /^\.?\/src\/middleware(?:\/index)?\.[jt]s$/;
+			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
+			for (const invalidPath of invalidPaths) {
+				ctx.addIssue({
+					code: 'custom',
+					message:
+						`The \`"${invalidPath}"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.\n\n` +
+						`You should rename \`${invalidPath}\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.\n\n` +
+						'- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data\n' +
+						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
+				});
+			}
+		})
+		.describe('Add middleware to process Starlight’s route data for each page.'),
 });
 
-export const StarlightConfigSchema = UserConfigSchema.strict().transform(
-	({ locales, defaultLocale, ...config }, ctx) => {
-		if (locales !== undefined && Object.keys(locales).length > 1) {
-			// This is a multilingual site (more than one locale configured).
+export const StarlightConfigSchema = UserConfigSchema.strict()
+	.transform((config) => ({
+		...config,
+		// Pagefind only defaults to true if prerender is also true.
+		pagefind:
+			typeof config.pagefind === 'undefined'
+				? config.prerender && PagefindConfigDefaults()
+				: config.pagefind,
+	}))
+	.refine((config) => !(!config.prerender && config.pagefind), {
+		message: 'Pagefind search is not supported with prerendering disabled.',
+	})
+	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
+		const configuredLocales = Object.keys(locales ?? {});
+
+		// This is a multilingual site (more than one locale configured) or a monolingual site with
+		// only one locale configured (not a root locale).
+		// Monolingual sites with only one non-root locale needs their configuration to be defined in
+		// `config.locales` so that slugs can be correctly generated by taking into consideration the
+		// base path at which a language is served which is the key of the `config.locales` object.
+		if (
+			locales !== undefined &&
+			(configuredLocales.length > 1 ||
+				(configuredLocales.length === 1 && locales.root === undefined))
+		) {
 			// Make sure we can find the default locale and if not, help the user set it.
 			// We treat the root locale as the default if present and no explicit default is set.
 			const defaultLocaleConfig = locales[defaultLocale || 'root'];
 
 			if (!defaultLocaleConfig) {
-				const availableLocales = Object.keys(locales)
-					.map((l) => `"${l}"`)
-					.join(', ');
+				const availableLocales = configuredLocales.map((l) => `"${l}"`).join(', ');
 				ctx.addIssue({
 					code: 'custom',
 					message:
@@ -232,33 +292,47 @@ export const StarlightConfigSchema = UserConfigSchema.strict().transform(
 				return z.NEVER;
 			}
 
+			// Transform the title
+			const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang as string);
+			const parsedTitle = TitleSchema.parse(title);
+
 			return {
 				...config,
+				title: parsedTitle,
 				/** Flag indicating if this site has multiple locales set up. */
-				isMultilingual: true,
+				isMultilingual: configuredLocales.length > 1,
+				/** Flag indicating if the Starlight built-in default locale is used. */
+				isUsingBuiltInDefaultLocale: false,
 				/** Full locale object for this site’s default language. */
 				defaultLocale: { ...defaultLocaleConfig, locale: defaultLocale },
 				locales,
 			} as const;
 		}
 
-		// This is a monolingual site, so things are pretty simple.
+		// This is a monolingual site with no locales configured or only a root locale, so things are
+		// pretty simple.
+		/** Full locale object for this site’s default language. */
+		const defaultLocaleConfig = {
+			label: BuiltInDefaultLocale.label,
+			lang: BuiltInDefaultLocale.lang,
+			dir: BuiltInDefaultLocale.dir,
+			locale: undefined,
+			...locales?.root,
+		};
+		/** Transform the title */
+		const TitleSchema = TitleTransformConfigSchema(defaultLocaleConfig.lang);
+		const parsedTitle = TitleSchema.parse(title);
 		return {
 			...config,
+			title: parsedTitle,
 			/** Flag indicating if this site has multiple locales set up. */
 			isMultilingual: false,
-			/** Full locale object for this site’s default language. */
-			defaultLocale: {
-				label: 'English',
-				lang: 'en',
-				dir: 'ltr',
-				locale: undefined,
-				...locales?.root,
-			},
+			/** Flag indicating if the Starlight built-in default locale is used. */
+			isUsingBuiltInDefaultLocale: locales?.root === undefined,
+			defaultLocale: defaultLocaleConfig,
 			locales: undefined,
 		} as const;
-	}
-);
+	});
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
 export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;

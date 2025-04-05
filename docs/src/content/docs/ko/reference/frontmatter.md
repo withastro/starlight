@@ -1,9 +1,9 @@
 ---
-title: 프론트매터 참조
-description: Starlight가 지원하는 기본 프론트매터 필드에 대한 개요입니다.
+title: 프런트매터 참조
+description: Starlight가 지원하는 기본 프런트매터 필드에 대한 개요입니다.
 ---
 
-프론트매터의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
+프런트매터의 값을 설정하여 Starlight에서 개별 Markdown 및 MDX 페이지를 변경할 수 있습니다. 예를 들어 일반 페이지에서는 `title` 및 `description` 필드를 설정할 수 있습니다.
 
 ```md {3-4}
 ---
@@ -15,7 +15,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 나를 소개하는 페이지에 오신 것을 환영합니다!
 ```
 
-## 프론트매터 필드
+## 프런트매터 필드
 
 ### `title` (필수)
 
@@ -33,7 +33,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 **타입**: `string`
 
-페이지의 슬러그를 재정의합니다. 자세한 내용은 Astro 공식문서의 [“사용자 정의 슬러그 정의”](https://docs.astro.build/ko/guides/content-collections/#defining-custom-slugs)를 참조하세요.
+페이지의 슬러그를 재정의합니다. 자세한 내용은 Astro 공식문서의 [“사용자 지정 ID 정의”](https://docs.astro.build/ko/guides/content-collections/#사용자-지정-id-정의)를 참조하세요.
 
 ### `editUrl`
 
@@ -45,7 +45,7 @@ description: 내가 진행 중인 프로젝트에 대해 자세히 알아보세�
 
 **타입:** [`HeadConfig[]`](/ko/reference/configuration/#headconfig)
 
-`head` 프론트매터 필드를 사용하여 페이지의 `<head>`에 태그를 추가할 수 있습니다. 이는 사용자 정의 스타일, 메타데이터 또는 기타 태그를 단일 페이지에 추가할 수 있음을 의미합니다. [전역 `head` 옵션](/ko/reference/configuration/#head)과 유사합니다.
+`head` 프런트매터 필드를 사용하여 페이지의 `<head>`에 태그를 추가할 수 있습니다. 이는 사용자 정의 스타일, 메타데이터 또는 기타 태그를 단일 페이지에 추가할 수 있음을 의미합니다. [전역 `head` 옵션](/ko/reference/configuration/#head)과 유사합니다.
 
 ```md
 ---
@@ -113,10 +113,10 @@ hero:
     - text: 더보기
       link: /getting-started/
       icon: right-arrow
-      variant: primary
     - text: Github에서 보기
       link: https://github.com/astronaut/my-project
       icon: external
+      variant: minimal
       attrs:
         rel: me
 ---
@@ -164,8 +164,8 @@ interface HeroConfig {
   actions?: Array<{
     text: string;
     link: string;
-    variant: 'primary' | 'secondary' | 'minimal';
-    icon: string;
+    variant?: 'primary' | 'secondary' | 'minimal';
+    icon?: string;
     attrs?: Record<string, string | number | boolean>;
   }>;
 }
@@ -266,6 +266,24 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**타입:** `boolean`  
+**기본값:** `false`
+
+이 페이지를 초안으로 간주하여 [프로덕션 빌드](https://docs.astro.build/ko/reference/cli-reference/#astro-build)에서 제외할지 설정합니다. 페이지를 초안으로 표시하여 개발 중에만 표시하려면 `true`로 설정하세요.
+
+```md
+---
+# src/content/docs/example.md
+# 프로덕션 빌드에서 이 페이지 제외
+draft: true
+---
+```
+
+초안 페이지는 빌드 출력에 포함되지 않으므로 [슬러그](/ko/guides/sidebar/#내부-링크)를 사용하여 사이트 사이드바 구성에 직접 초안 페이지를 추가할 수 없습니다.
+[자동 생성된 사이드바 그룹](/ko/guides/sidebar/#자동-생성-그룹)에 사용되는 디렉터리의 초안 페이지는 프로덕션 빌드에서 자동으로 제외됩니다.
+
 ### `sidebar`
 
 **타입:** [`SidebarConfig`](#sidebarconfig)
@@ -335,7 +353,7 @@ sidebar:
 
 **타입:** <code>string | <a href="/ko/reference/configuration/#badgeconfig">BadgeConfig</a></code>
 
-자동 생성된 링크 그룹에 표시될 때 사이드바의 페이지에 배지를 추가합니다. 문자열을 사용하면 배지가 기본 강조 색상으로 표시됩니다. 선택적으로, `text` 및 `variant`필드가 포함된 [BadgeConfig 객체](/ko/reference/configuration/#badgeconfig)를 전달하여 배지를 사용자가 원하는대로 변경할 수 있습니다.
+자동 생성된 링크 그룹에 표시될 때 사이드바의 페이지에 배지를 추가합니다. 문자열을 사용하면 배지가 기본 강조 색상으로 표시됩니다. 선택적으로, `text`, `variant`, `class` 필드가 포함된 [BadgeConfig 객체](/ko/reference/configuration/#badgeconfig)를 전달하여 배지를 사용자가 원하는대로 변경할 수 있습니다.
 
 ```md
 ---
@@ -375,21 +393,22 @@ sidebar:
 ---
 ```
 
-## 프런트매터 스키마 맞춤설정
+## 프런트매터 스키마 사용자 정의
 
-Starlight의 `docs` 콘텐츠 컬렉션에 대한 프런트매터 스키마는 `docsSchema()` 도우미를 사용하여 `src/content/config.ts`에 구성됩니다.
+Starlight의 `docs` 콘텐츠 컬렉션에 대한 프런트매터 스키마는 `docsSchema()` 도우미를 사용하여 `src/content.config.ts`에 구성됩니다.
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#defining-a-collection-schema)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
+Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko/guides/content-collections/#컬렉션-스키마-정의)에서 콘텐츠 컬렉션 스키마에 대해 자세히 알아보세요.
 
 `docsSchema()`는 다음 옵션을 사용합니다:
 
@@ -399,17 +418,19 @@ Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko
 **기본값:** `z.object({})`
 
 `docsSchema()` 옵션에서 `extend`를 설정하여 추가 필드로 Starlight의 스키마를 확장하세요.
-값은 [Zod 스키마](https://docs.astro.build/ko/guides/content-collections/#defining-datatypes-with-zod)여야 합니다.
+값은 [Zod 스키마](https://docs.astro.build/ko/guides/content-collections/#zod를-사용한-데이터-타입-정의)여야 합니다.
 
 다음 예시에서는 `description` 필드에 더 엄격한 타입을 제공하여 필수 항목으로 만들고, 새로운 선택적 필드인 `category`를 추가합니다.
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // 기본 제공 필드를 선택 사항이 아닌 필수 항목으로 변경합니다.
@@ -422,15 +443,17 @@ export const collections = {
 };
 ```
 
-[Astro `image()` 도우미](https://docs.astro.build/ko/guides/images/#images-in-content-collections)를 활용하려면 스키마 확장을 반환하는 함수를 사용하세요.
+[Astro `image()` 도우미](https://docs.astro.build/ko/guides/images/#콘텐츠-컬렉션의-이미지)를 활용하려면 스키마 확장을 반환하는 함수를 사용하세요.
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({

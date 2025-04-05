@@ -1,19 +1,4 @@
-import { defineConfig } from 'vitest/config';
-
-// Copy of https://github.com/vitest-dev/vitest/blob/8693449b412743f20a63fd9bfa1a9054aa74613f/packages/vitest/src/defaults.ts#L13C1-L26C1
-const defaultCoverageExcludes = [
-	'coverage/**',
-	'dist/**',
-	'packages/*/test?(s)/**',
-	'**/*.d.ts',
-	'cypress/**',
-	'test?(s)/**',
-	'test?(-*).?(c|m)[jt]s?(x)',
-	'**/*{.,-}{test,spec}.?(c|m)[jt]s?(x)',
-	'**/__tests__/**',
-	'**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
-	'**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
-];
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	test: {
@@ -21,7 +6,9 @@ export default defineConfig({
 			all: true,
 			reportsDirectory: './__coverage__',
 			exclude: [
-				...defaultCoverageExcludes,
+				...coverageConfigDefaults.exclude,
+				'**/__e2e__/**',
+				'playwright.config.*',
 				'**/vitest.*',
 				'components.ts',
 				'types.ts',
@@ -31,13 +18,14 @@ export default defineConfig({
 				'props.ts',
 				// Main integration entrypoint — don’t think we’re able to test this directly currently.
 				'index.ts',
+				// Since Vitest 2.1.2, coverage is collected for `*.astro` files.
+				'**/*.astro',
 			],
 			thresholds: {
-				autoUpdate: true,
-				lines: 80.11,
-				functions: 93.61,
-				branches: 91.23,
-				statements: 80.11,
+				lines: 87,
+				functions: 90,
+				branches: 90,
+				statements: 87,
 			},
 		},
 	},

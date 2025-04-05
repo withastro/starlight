@@ -1,0 +1,128 @@
+---
+title: Карточки-ссылки
+description: Узнайте, как отображать ссылки в виде карточек в Starlight.
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Для создания карточек-ссылок на разные страницы используйте компонент `<LinkCard>`.
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="Кастомизация Starlight"
+	description="Узнайте, как сделать ваш сайт на Starlight уникальным с помощью пользовательских стилей, шрифтов и многого другого."
+	href="/ru/guides/customization/"
+/>
+
+</Preview>
+
+## Импорт
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## Использование
+
+Отображайте карточку-ссылку с помощью компонента `<LinkCard>`.
+Каждый компонент `<LinkCard>` требует использования атрибутов [`title`](#title) и [`href`](#href).
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Создание контента в Markdown"
+	href="/ru/guides/authoring-content/"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Создание контента в Markdown" href="/ru/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Создание контента в Markdown"
+	href="/ru/guides/authoring-content/"
+/>
+
+</Preview>
+
+### Добавление описания ссылки
+
+Добавьте краткое описание к карточке-ссылке с помощью атрибута [`description`](#description).
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Интернационализация"
+	href="/ru/guides/i18n/"
+	description="Настройте Starlight для поддержки нескольких языков."
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="Интернационализация"
+	 href="/ru/guides/i18n/"
+	 description="Настройте Starlight для поддержки нескольких языков." /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Интернационализация"
+	href="/ru/guides/i18n/"
+	description="Настройте Starlight для поддержки нескольких языков."
+/>
+
+</Preview>
+
+### Группировка карточек-ссылок
+
+Отображайте несколько карточек-ссылок рядом друг с другом при наличии свободного места, группируя их с помощью компонента [`<CardGrid>`](/ru/components/card-grids/).
+См. пример в статье [Группировка карточек](/ru/components/card-grids/#группировка-карточек).
+
+## Параметры `<LinkCard>`
+
+**Реализация:** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+Компонент `<LinkCard>` принимает следующие параметры, а также все остальные атрибуты элементов [`<a>`](https://developer.mozilla.org/ru/docs/Web/HTML/Element/a):
+
+### `title`
+
+**обязательный**  
+**тип:** `string`
+
+Заголовок карточки-ссылки.
+
+### `href`
+
+**обязательный**  
+**тип:** `string`
+
+URL-адрес, на который нужно ссылаться при взаимодействии с карточкой.
+
+### `description`
+
+**тип:** `string`
+
+Необязательное описание для отображения под заголовком.

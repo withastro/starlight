@@ -25,9 +25,21 @@ Vous pouvez passer les options suivantes à l'intégration `starlight`.
 
 ### `title` (obligatoire)
 
-**Type :** `string`
+**Type :** `string | Record<string, string>`
 
 Définissez le titre de votre site web. Il sera utilisé dans les métadonnées et dans le titre de l'onglet du navigateur.
+
+La valeur peut être une chaîne de caractères, ou pour les sites multilingues, un objet avec des valeurs pour chacune des différentes locales.
+Lorsque vous utilisez la forme objet, les clés doivent être des étiquettes d'identification BCP-47 (par exemple `fr`, `ar`, ou `zh-CN`) :
+
+```ts
+starlight({
+	title: {
+		fr: 'Mon délicieux site de docs',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -88,25 +100,33 @@ Avec cette configuration, une page `/introduction` aurait un lien d'édition poi
 Configure les éléments de navigation de la barre latérale de votre site.
 
 Une barre latérale est un tableau de liens et de groupes de liens.
-Chaque élément doit comporter un `label` et l'une des propriétés suivantes :
+À l'exception des éléments utilisant `slug`, chaque élément doit comporter un `label` et l'une des propriétés suivantes :
 
 - `link` — un lien uninque vers une URL spécifique, comme `'/home'` ou `'https://example.com'`.
+
+- `slug` — une référence à une page interne, par exemple `'guides/getting-started'`.
 
 - `items` — un tableau contenant plus de liens et des sous-groupes.
 
 - `autogenerate` — un objet indiquant un répertoire de vos docs depuis lequel générer automatiquement un groupe de liens.
+
+Les liens internes peuvent également être spécifiés sous forme de chaîne de caractères au lieu d'un objet avec une propriété `slug`.
 
 ```js
 starlight({
 	sidebar: [
 		// Un lien unique étiqueté “Accueil”.
 		{ label: 'Accueil', link: '/' },
-		// Un groupe étiqueté “Débuter ici” contenant deux liens.
+		// Un groupe étiqueté “Débuter ici” contenant quatre liens.
 		{
 			label: 'Débuter ici',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Prochaines étapes', link: '/next-steps' },
+				// Utilisation de `slug` pour les liens internes.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// Ou la forme simplifiée pour les liens internes.
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// Un groupe liant toutes les pages présentes dans le répertoire reference.
@@ -129,16 +149,13 @@ Les groupes de liens sont développés par défaut. Vous pouvez modifier ce comp
 
 Les sous-groupes générés automatiquement respectent la propriété `collapsed` de leur groupe parent par défaut. Définissez la propriété `autogenerate.collapsed` pour remplacer ce comportement.
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // Un groupe rétractable de liens.
   {
     label: 'Collapsed Links',
     collapsed: true,
-    items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // Un groupe développé contenant des sous-groupes générés automatiquement rétractés.
   {
@@ -180,21 +197,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Lien
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Lien interne
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Groupe de liens
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Groupe de liens généré automatiquement
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -202,7 +235,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -277,7 +311,7 @@ Le sens d'écriture de cette langue ; `"ltr"` pour gauche à droite (par défaut
 
 #### Locale racine
 
-Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale `root` :
+Vous pouvez servir la langue par défaut sans répertoire `/lang/` en définissant une locale avec la clé `root` :
 
 ```js {3-6}
 starlight({
@@ -301,7 +335,7 @@ Par exemple, cela vous permet de servir `/getting-started/` comme une route angl
 
 Définit la langue par défaut pour ce site.
 La valeur doit correspondre à l'une des clés de votre objet [`locales`](#locales).
-(Si votre langue par défaut est votre [root locale](#locale-racine), vous pouvez sauter cette étape).
+(Si votre langue par défaut est votre [locale racine](#locale-racine), vous pouvez sauter cette étape).
 
 La locale par défaut sera utilisée pour fournir un contenu de remplacement lorsque les traductions sont manquantes.
 
@@ -350,10 +384,10 @@ starlight({
 **Type :** `StarlightExpressiveCodeOptions | boolean`  
 **Par défaut :** `true`
 
-Starlight utilise [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
+Starlight utilise [Expressive Code](https://expressive-code.com) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
 Consultez le [guide « Blocs de code »](/fr/guides/authoring-content/#blocs-de-code) pour apprendre à utiliser la syntaxe d'Expressive Code dans votre contenu Markdown et MDX.
 
-Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
+Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://expressive-code.com/reference/configuration/) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
 Par exemple, définissez l'option `styleOverrides` d'Expressive Code pour remplacer le CSS par défaut. Cela permet des personnalisations comme donner à vos blocs de code des coins arrondis :
 
 ```js ins={2-4}
@@ -380,7 +414,7 @@ En plus des options standard d'Expressive Code, vous pouvez également définir 
 **Par défaut :** `['starlight-dark', 'starlight-light']`
 
 Définit les thèmes utilisés pour styliser les blocs de code.
-Consultez la [documentation des `themes` d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) pour plus de détails sur les formats de thème pris en charge.
+Consultez la [documentation des `themes` d'Expressive Code](https://expressive-code.com/guides/themes/) pour plus de détails sur les formats de thème pris en charge.
 
 Starlight utilise les variantes claires et sombres du [thème Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner par défaut.
 
@@ -413,13 +447,58 @@ Lorsque des thèmes personnalisés sont utilisés et que cette option est défin
 
 ### `pagefind`
 
-**Type :** `boolean`  
+**Type :** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **Par défaut :** `false`
 
-Définit si le système de recherche du site par défaut de Starlight, [Pagefind](https://pagefind.app/), est activé.
+Configure le système de recherche du site par défaut de Starlight, [Pagefind](https://pagefind.app/).
 
 Utilisez la valeur `false` pour désactiver l'indexation de votre site avec Pagefind.
 Cela désactivera également l'interface de recherche par défaut de Starlight si utilisée.
+
+Pagefind ne peut pas être activé lorsque l'option [`prerender`](#prerender) est définie à `false`.
+
+Définissez `pagefind` avec un objet pour configurer le client de recherche Pagefind :
+
+- Consultez [« Personnaliser le classement des résultats de Pagefind »](https://pagefind.app/docs/ranking/) dans la documentation de Pagefind pour plus de détails sur l'utilisation de l'option `pagefind.ranking` pour contrôler comment le classement des résultats de recherche est calculé
+- Consultez [« Recherche sur plusieurs sites »](https://pagefind.app/docs/multisite/) dans la documentation de Pagefind pour plus de détails sur l'utilisation de l'option `pagefind.mergeIndex` pour contrôler comment rechercher sur plusieurs sites
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
+
+### `prerender`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Définit si les pages générées par Starlight doivent être pré-rendues en HTML statique ou rendues à la demande par un [adaptateur SSR](https://docs.astro.build/fr/guides/on-demand-rendering/).
+
+Les pages Starlight sont pré-rendues par défaut.
+Si vous utilisez un adaptateur SSR et que vous souhaitez générer les pages Starlight à la demande, définissez `prerender: false`.
 
 ### `head`
 
@@ -443,6 +522,9 @@ starlight({
 	],
 });
 ```
+
+Les entrées dans `head` sont converties directement en éléments HTML et ne passent pas par le traitement de [script](https://docs.astro.build/fr/guides/client-side-scripts/#regroupement-de-script) ou de [style](https://docs.astro.build/fr/guides/styling/#styliser-avec-astro) d'Astro.
+Si vous avez besoin d'importer des ressources locales comme des scripts, des styles ou des images, [redéfinissez le composant Head](/fr/guides/overriding-components/#réutiliser-un-composant-intégré).
 
 #### `HeadConfig`
 
@@ -477,7 +559,7 @@ Une page peut remplacer ce paramètre ou le texte du lien et/ou l'URL en utilisa
 **Type :** `string`  
 **Par défaut :** `'/favicon.svg'`
 
-Définnissez le chemin de l'icône par défaut pour votre site Web qui doit être situé dans le répertoire `public/` et être un fichier d'icône valide (`.ico`, `.gif`, `.jpg`, `.png` ou `.svg`).
+Définissez le chemin de l'icône par défaut pour votre site Web qui doit être situé dans le répertoire `public/` et être un fichier d'icône valide (`.ico`, `.gif`, `.jpg`, `.png` ou `.svg`).
 
 ```js
 starlight({
@@ -489,18 +571,18 @@ Si vous avez besoin de définir des variantes supplémentaires ou des icônes de
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // Ajouter une icône ICO de secours pour Safari.
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// Ajouter une icône ICO de secours pour Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
@@ -519,7 +601,7 @@ Par example, cette page a pour titre « Référence de configuration » et ce si
 **Type :** `boolean`  
 **Par défaut :** `false`
 
-Désactive l'injection de la [page 404](https://docs.astro.build/fr/core-concepts/astro-pages/#page-derreur-404-personnalis%C3%A9e) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, définissez cette option à `true`.
+Désactive l'injection de la [page 404](https://docs.astro.build/fr/basics/astro-pages/#page-derreur-404-personnalis%C3%A9e) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, définissez cette option à `true`.
 
 ### `components`
 
@@ -553,3 +635,13 @@ starlight({
 ```
 
 Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus de détails pour créer vos propres modules d'extension.
+
+### `credits`
+
+Permet l'affichage d'un lien "Créé avec Starlight" dans le pied de page de votre site.
+
+```js
+starlight({
+	credits: true,
+});
+```

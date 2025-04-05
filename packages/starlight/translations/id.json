@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Lewati ke konten",
   "search.label": "Pencarian",
-  "search.shortcutLabel": "(Tekan / untuk mencari)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Batal",
   "search.devWarning": "Pencarian hanya tersedia pada build produksi. \nLakukan proses build dan pratinjau situs Anda sebelum mencoba di lingkungan lokal.",
   "themeSelect.accessibleLabel": "Pilih tema",
@@ -18,10 +18,12 @@
   "page.lastUpdated": "Terakhir diperbaharui:",
   "page.previousLink": "Sebelumnya",
   "page.nextLink": "Selanjutnya",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Halaman tidak ditemukan. Cek kembali kolom URL atau gunakan fitur pencarian.",
   "aside.note": "Catatan",
   "aside.tip": "Tips",
   "aside.caution": "Perhatian",
   "aside.danger": "Bahaya",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

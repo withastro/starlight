@@ -1,56 +1,120 @@
-import { useMode, modeOklch, modeRgb, formatHex, clampChroma } from 'culori/fn';
+import {
+	clampChroma,
+	formatHex,
+	modeLrgb,
+	modeOklch,
+	modeRgb,
+	useMode,
+	wcagContrast,
+	type Oklch,
+} from 'culori/fn';
 
 const rgb = useMode(modeRgb);
 export const oklch = useMode(modeOklch);
+// We need to initialise LRGB support for culori’s `wcagContrast()` method.
+useMode(modeLrgb);
 
-/** Convert an OKLCH color to an RGB hex code. */
-export const oklchToHex = (l: number, c: number, h: number) => {
-	const okLchColor = oklch(`oklch(${l}% ${c} ${h})`)!;
+/** Convert a culori OKLCH color object to an RGB hex code. */
+const oklchColorToHex = (okLchColor: Oklch) => {
 	const rgbColor = rgb(clampChroma(okLchColor, 'oklch'));
 	return formatHex(rgbColor);
+};
+/** Construct a culori OKLCH color object from LCH parameters. */
+const oklchColorFromParts = (l: number, c: number, h: number) => oklch(`oklch(${l}% ${c} ${h})`)!;
+/** Convert OKLCH parameters to an RGB hex code. */
+export const oklchToHex = (l: number, c: number, h: number) =>
+	oklchColorToHex(oklchColorFromParts(l, c, h));
+
+/**
+ * Ensure a text colour passes a contrast threshold against a specific background colour.
+ * If necessary, colours will be darkened/lightened to increase contrast until the threshold is passed.
+ *
+ * @param text The text colour to adjust if necessary.
+ * @param bg The background colour to test contrast against.
+ * @param threshold The minimum contrast ratio required. Defaults to `4.5` to meet WCAG AA standards.
+ * @returns The adjusted text colour as a culori OKLCH color object.
+ */
+const contrastColor = (text: Oklch, bg: Oklch, threshold = 4.5): Oklch => {
+	/** Clone of the input foreground colour to mutate. */
+	const fgColor = { ...text };
+	// Brighten text in dark mode, darken text in light mode.
+	const increment = fgColor.l > bg.l ? 0.005 : -0.005;
+	while (wcagContrast(fgColor, bg) < threshold && fgColor.l < 100 && fgColor.l > 0) {
+		fgColor.l += increment;
+	}
+	return fgColor;
 };
 
 /** Generate dark and light palettes based on user-selected hue and chroma values. */
 export function getPalettes(config: {
 	accent: { hue: number; chroma: number };
 	gray: { hue: number; chroma: number };
+	minimumContrast?: number;
 }) {
 	const {
 		accent: { hue: ah, chroma: ac },
 		gray: { hue: gh, chroma: gc },
+		minimumContrast: mc,
 	} = config;
-	return {
+
+	const palettes = {
 		dark: {
 			// Accents
-			'accent-low': oklchToHex(25.94, ac / 3, ah),
-			accent: oklchToHex(52.28, ac, ah),
-			'accent-high': oklchToHex(83.38, ac / 3, ah),
+			'accent-low': oklchColorFromParts(25.94, ac / 3, ah),
+			accent: oklchColorFromParts(52.28, ac, ah),
+			'accent-high': oklchColorFromParts(83.38, ac / 3, ah),
 			// Grays
-			white: oklchToHex(100, 0, 0),
-			'gray-1': oklchToHex(94.77, gc / 2.5, gh),
-			'gray-2': oklchToHex(81.34, gc / 2, gh),
-			'gray-3': oklchToHex(63.78, gc, gh),
-			'gray-4': oklchToHex(46.01, gc, gh),
-			'gray-5': oklchToHex(34.09, gc, gh),
-			'gray-6': oklchToHex(27.14, gc, gh),
-			black: oklchToHex(20.94, gc / 2, gh),
+			white: oklchColorFromParts(100, 0, 0),
+			'gray-1': oklchColorFromParts(94.77, gc / 2.5, gh),
+			'gray-2': oklchColorFromParts(81.34, gc / 2, gh),
+			'gray-3': oklchColorFromParts(63.78, gc, gh),
+			'gray-4': oklchColorFromParts(46.01, gc, gh),
+			'gray-5': oklchColorFromParts(34.09, gc, gh),
+			'gray-6': oklchColorFromParts(27.14, gc, gh),
+			black: oklchColorFromParts(20.94, gc / 2, gh),
 		},
 		light: {
 			// Accents
-			'accent-low': oklchToHex(87.81, ac / 4, ah),
-			accent: oklchToHex(52.95, ac, ah),
-			'accent-high': oklchToHex(31.77, ac / 2, ah),
+			'accent-low': oklchColorFromParts(87.81, ac / 4, ah),
+			accent: oklchColorFromParts(52.95, ac, ah),
+			'accent-high': oklchColorFromParts(31.77, ac / 2, ah),
 			// Grays
-			white: oklchToHex(20.94, gc / 2, gh),
-			'gray-1': oklchToHex(27.14, gc, gh),
-			'gray-2': oklchToHex(34.09, gc, gh),
-			'gray-3': oklchToHex(46.01, gc, gh),
-			'gray-4': oklchToHex(63.78, gc, gh),
-			'gray-5': oklchToHex(81.34, gc / 2, gh),
-			'gray-6': oklchToHex(94.77, gc / 2.5, gh),
-			'gray-7': oklchToHex(97.35, gc / 5, gh),
-			black: oklchToHex(100, 0, 0),
+			white: oklchColorFromParts(20.94, gc / 2, gh),
+			'gray-1': oklchColorFromParts(27.14, gc, gh),
+			'gray-2': oklchColorFromParts(34.09, gc, gh),
+			'gray-3': oklchColorFromParts(46.01, gc, gh),
+			'gray-4': oklchColorFromParts(63.78, gc, gh),
+			'gray-5': oklchColorFromParts(81.34, gc / 2, gh),
+			'gray-6': oklchColorFromParts(94.77, gc / 2.5, gh),
+			'gray-7': oklchColorFromParts(97.35, gc / 5, gh),
+			black: oklchColorFromParts(100, 0, 0),
 		},
+	};
+
+	// Ensure text shades have sufficient contrast against common background colours.
+
+	// Dark mode:
+	// `gray-2` is used against `gray-5` in inline code snippets.
+	palettes.dark['gray-2'] = contrastColor(palettes.dark['gray-2'], palettes.dark['gray-5'], mc);
+	// `gray-3` is used in the table of contents.
+	palettes.dark['gray-3'] = contrastColor(palettes.dark['gray-3'], palettes.dark.black, mc);
+
+	// Light mode:
+	// `accent` is used for links and link buttons and can be slightly under 7:1 for some hues.
+	palettes.light.accent = contrastColor(palettes.light.accent, palettes.light['gray-6'], mc);
+	// `gray-2` is used against `gray-6` in inline code snippets.
+	palettes.light['gray-2'] = contrastColor(palettes.light['gray-2'], palettes.light['gray-6'], mc);
+	// `gray-3` is used in the table of contents.
+	palettes.light['gray-3'] = contrastColor(palettes.light['gray-3'], palettes.light.black, mc);
+
+	// Convert the palette from OKLCH to RGB hex codes.
+	return {
+		dark: Object.fromEntries(
+			Object.entries(palettes.dark).map(([key, color]) => [key, oklchColorToHex(color)])
+		) as Record<keyof typeof palettes.dark, string>,
+		light: Object.fromEntries(
+			Object.entries(palettes.light).map(([key, color]) => [key, oklchColorToHex(color)])
+		) as Record<keyof typeof palettes.light, string>,
 	};
 }
 

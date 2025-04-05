@@ -1,0 +1,32 @@
+---
+title: 아이콘 참조
+description: Starlight에서 사용할 수 있는 모든 아이콘에 대한 개요입니다.
+---
+
+Starlight는 `<Icon>` 컴포넌트를 사용하여 콘텐츠에 표시할 수 있는 내장 아이콘 세트를 제공합니다.
+
+## 아이콘 사용
+
+아이콘은 [`<Icon>`](/ko/components/icons/) 컴포넌트를 사용하여 표시할 수 있습니다.
+또한 [카드](/ko/components/cards/)와 같은 다른 컴포넌트나 [히어로 액션](/ko/reference/frontmatter/#hero)과 같은 설정에서도 자주 사용됩니다.
+
+## `StarlightIcon` 타입
+
+`StarlightIcon` TypeScript 타입을 사용하여 [Starlight의 기본 제공 아이콘](#모든-아이콘)의 이름을 참조할 수 있습니다.
+
+```ts {2} /icon: (StarlightIcon)/
+// src/icon.ts
+import type { StarlightIcon } from '@astrojs/starlight/types';
+
+function getIconLabel(icon: StarlightIcon) {
+	// …
+}
+```
+
+## 모든 아이콘
+
+사용 가능한 모든 아이콘의 목록과 관련 이름이 아래에 나와 있습니다. 아이콘을 클릭하면 해당 이름을 클립보드에 복사할 수 있습니다.
+
+import IconsList from '~/components/icons-list.astro';
+
+<IconsList labels={{ copied: '복사되었습니다!' }} />

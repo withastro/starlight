@@ -1,0 +1,124 @@
+---
+title: アイコン
+description: Starlightでアイコンを表示する方法を学びましょう。
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+Starlightの[組み込みアイコンセット](/ja/reference/icons/#すべてのアイコン)からアイコンを表示するには、`<Icon>`コンポーネントを使用します。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<Icon
+	slot="preview"
+	name="open-book"
+	color="var(--sl-color-text-accent)"
+	size="4rem"
+/>
+
+</Preview>
+
+## インポート
+
+```tsx
+import { Icon } from '@astrojs/starlight/components';
+```
+
+## 使用方法
+
+`<Icon>`コンポーネントを使用してアイコンを表示します。アイコンには[`name`](#name)が必要で、これは[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)のいずれかに設定されます。また、オプションでスクリーンリーダー向けに[`label`](#label)を追加して文脈を提供することができます。
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" />
+<Icon name="starlight" label="Starlightのロゴ" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" /%}
+{% icon name="starlight" label="Starlightのロゴ" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" />
+	<Icon name="starlight" label="Starlightのロゴ" />
+</Fragment>
+
+</Preview>
+
+### アイコンのカスタマイズ
+
+[`size`](#size)や[`color`](#color)属性を使用して、CSS単位やカラーバリューを使ってアイコンの外観を調整できます。また、[`class`](#class)属性を使用してカスタムCSSクラスをアイコンに追加することができます。
+
+<Preview>
+
+```mdx
+import { Icon } from '@astrojs/starlight/components';
+
+<Icon name="star" color="goldenrod" size="2rem" />
+<Icon name="rocket" color="var(--sl-color-text-accent)" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% icon name="star" color="goldenrod" size="2rem" /%}
+{% icon name="rocket" color="var(--sl-color-text-accent)" /%}
+```
+
+</Fragment>
+
+<Fragment slot="preview">
+	<Icon name="star" color="goldenrod" size="2rem" />
+	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+</Fragment>
+
+</Preview>
+
+## `<Icon>` プロパティ
+
+**実装:** [`Icon.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Icon.astro)
+
+`<Icon>`コンポーネントは以下のプロパティを受け付けます。
+
+### `name`
+
+**必須**  
+**型:** `string`
+
+表示するアイコンの名前を[Starlightの組み込みアイコン](/ja/reference/icons/#すべてのアイコン)の1つに設定します。
+
+### `label`
+
+**型:** `string`
+
+スクリーンリーダーなどの支援技術に文脈を提供するためのオプションのラベル。
+
+`label`が設定されていない場合、アイコンは支援技術から完全に隠されます。この場合、アイコンがなくても文脈が理解できることを確認してください。例えば、アイコンのみが含まれるリンクには、アクセシビリティを確保するために`label`属性が**必ず**含まれている必要がありますが、リンクにテキストが含まれ、アイコンが純粋に装飾的なものである場合は、`label`を省略することが理にかなっています。
+
+### `size`
+
+**型:** `string`
+
+CSS単位でアイコンのサイズを指定します。
+
+### `color`
+
+**型:** `string`
+
+CSSカラーバリューを使用してアイコンの色を指定します。
+
+### `class`
+
+**型:** `string`
+
+アイコンにカスタムCSSクラスを追加します。

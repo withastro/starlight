@@ -1,14 +1,14 @@
 ---
 import type { z } from 'astro/zod';
+import context from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { version } from '../package.json';
 import type { HeadConfigSchema } from '../schemas/head';
 import { fileWithBase } from '../utils/base';
 import { createHead } from '../utils/head';
 import { localizedUrl } from '../utils/localizedUrl';
-import type { Props } from '../props';
 
-const { entry, lang } = Astro.props;
+const { entry, lang, siteTitle } = Astro.locals.starlightRoute;
 const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
@@ -20,7 +20,7 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 		tag: 'meta',
 		attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 	},
-	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${config.title}` },
+	{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${siteTitle}` },
 	{ tag: 'link', attrs: { rel: 'canonical', href: canonical?.href } },
 	{ tag: 'meta', attrs: { name: 'generator', content: Astro.generator } },
 	{
@@ -42,14 +42,12 @@ const headDefaults: z.input<ReturnType<typeof HeadConfigSchema>> = [
 	{ tag: 'meta', attrs: { property: 'og:url', content: canonical?.href } },
 	{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
 	{ tag: 'meta', attrs: { property: 'og:description', content: description } },
-	{ tag: 'meta', attrs: { property: 'og:site_name', content: config.title } },
+	{ tag: 'meta', attrs: { property: 'og:site_name', content: siteTitle } },
 	// Twitter Tags
 	{
 		tag: 'meta',
 		attrs: { name: 'twitter:card', content: 'summary_large_image' },
 	},
-	{ tag: 'meta', attrs: { name: 'twitter:title', content: data.title } },
-	{ tag: 'meta', attrs: { name: 'twitter:description', content: description } },
 ];
 
 if (description)
@@ -68,7 +66,7 @@ if (canonical && config.isMultilingual) {
 			attrs: {
 				rel: 'alternate',
 				hreflang: localeOpts.lang,
-				href: localizedUrl(canonical, locale).href,
+				href: localizedUrl(canonical, locale, context.trailingSlash).href,
 			},
 		});
 	}

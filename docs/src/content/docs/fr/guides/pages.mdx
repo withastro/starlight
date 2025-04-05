@@ -14,7 +14,7 @@ Ce guide montre comment fonctionne la génération de pages dans Starlight.
 ### Formats de fichiers
 
 Starlight prend en charge la création de contenu en Markdown et MDX sans aucune configuration requise.
-Vous pouvez ajouter la prise en charge de Markdoc en installant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).
+Vous pouvez ajouter la prise en charge de Markdoc en suivant le [guide « Markdoc »](/fr/guides/authoring-content/#markdoc).
 
 ### Ajouter des pages
 
@@ -105,31 +105,31 @@ Les propriétés suivantes diffèrent du frontmatter en Markdown :
 - La propriété [`slug`](/fr/reference/frontmatter/#slug) n'est pas supportée et est automatiquement définie en fonction de l'URL de la page personnalisée.
 - L'option [`editUrl`](/fr/reference/frontmatter/#editurl) nécessite une URL pour afficher un lien d'édition.
 - La propriété [`sidebar`](/fr/reference/frontmatter/#sidebar) du frontmatter permettant de personnaliser l'affichage de la page dans les [groupes de liens autogénérés](/fr/reference/configuration/#sidebar) n'est pas disponible. Les pages utilisant le composant `<StarlightPage />` ne font pas partie d'une collection et ne peuvent pas être ajoutées à un groupe de liens autogénérés.
+- L'option [`draft`](/fr/reference/frontmatter/#draft) affiche uniquement une [note](/fr/reference/overrides/#draftcontentnotice) indiquant que la page est une ébauche, mais ne l'exclut pas automatiquement des déploiements en production.
 
 ##### `sidebar`
 
-**Type :** `SidebarEntry[]`  
+**Type :** [`SidebarItem[]`](/fr/reference/configuration/#sidebaritem)  
 **Par défaut :** la barre latérale générée en fonction de la [configuration globale `sidebar`](/fr/reference/configuration/#sidebar)
 
 Fournit une barre latérale de navigation personnalisée pour cette page.
 Si elle n'est pas définie, la page utilisera la barre latérale globale par défaut.
 
-Par exemple, la page suivante remplace la barre latérale par défaut par un lien vers la page d'accueil et un groupe de liens vers différentes constellations.
-La page courante dans la barre latérale est définie à l'aide de la propriété `isCurrent` et un `badge` optionnel a été ajouté à un élément de lien.
+Par exemple, la page suivante remplace la barre latérale par défaut par un lien vers la page d'accueil et un groupe de liens vers diverses autres pages personnalisées.
 
-```astro {3-13}
+```astro {3-17}
 <StarlightPage
 	frontmatter={{ title: 'Orion' }}
 	sidebar={[
-		{ label: 'Accueil', href: '/' },
+		{ label: 'Accueil', link: '/' },
 		{
 			label: 'Constellations',
 			items: [
-				{ label: 'Andromède', href: '/andromède/' },
-				{ label: 'Orion', href: '/orion/', isCurrent: true },
+				{ label: 'Andromède', link: '/andromède/' },
+				{ label: 'Orion', link: '/orion/' },
 				{
 					label: 'La Petite Ourse',
-					href: '/la-petite-ourse/',
+					link: '/la-petite-ourse/',
 					badge: 'Ébauche',
 				},
 			],
@@ -139,6 +139,8 @@ La page courante dans la barre latérale est définie à l'aide de la propriét�
 	Exemple de contenu.
 </StarlightPage>
 ```
+
+Consultez le guide [« Barre latérale de navigation »](/fr/guides/sidebar/) pour en savoir plus sur les options disponibles pour personnaliser la barre latérale.
 
 ##### `hasSidebar`
 

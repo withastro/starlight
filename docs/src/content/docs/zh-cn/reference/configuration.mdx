@@ -25,9 +25,21 @@ export default defineConfig({
 
 ### `title` (必填)
 
-**类型：** `string`
+**类型：** `string | Record<string, string>`
 
 设置你的网站标题。将用于元数据和浏览器标签标题。
+
+这个值可以是一个字符串，或者对于多语言网站，可以是一个包含每种不同语言值的对象。
+当使用对象形式时，键必须是 BCP-47 标签（例如 `en`，`ar` 或 `zh-CN`）：
+
+```ts
+starlight({
+	title: {
+		en: 'My delightful docs site',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -87,25 +99,34 @@ starlight({
 
 配置你的网站的侧边栏导航项目。
 
-侧边栏是包含链接和链接组的数组。每个项目都必须具有 `label` 和以下属性之一：
+侧边栏是包含链接和链接组的数组。
+除了使用 `slug` 的项目之外，每个项目都必须具有 `label` 和以下属性之一：
 
 - `link` — 指向特定 URL 的单个链接，例如 `'/home'` 或 `'https://example.com'`。
+
+- `slug` — 指向一个内部页面的引用， 例如 `'guides/getting-started'`。
 
 - `items` — 包含更多侧边栏链接和子组的数组。
 
 - `autogenerate` — 指定要从中自动生成一组链接的文档目录的对象。
+
+内部链接也可以被指定为字符串，而不是带有 `slug` 属性的对象。
 
 ```js
 starlight({
 	sidebar: [
 		// 标记为“Home”的单个链接项。
 		{ label: 'Home', link: '/' },
-		// 一个标记为“Start Here”的组，其中包含两个链接。
+		// 一个标记为“Start Here”的组，其中包含四个链接。
 		{
 			label: 'Start Here',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Next Steps', link: '/next-steps' },
+				// 在内部链接中使用 `slug`。
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// 或者使用内部链接的简易写法。
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// 一个链接到参考目录中所有页面的组。
@@ -127,16 +148,13 @@ starlight({
 
 自动生成的子组默认情况下会遵守其父组的 `collapsed` 属性。设置 `autogenerate.collapsed` 属性以覆盖此行为。
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // 一个折叠的链接组。
   {
     label: 'Collapsed Links',
     collapsed: true,
-    items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // 一个展开的组，其中包含折叠的自动生成的子组。
   {
@@ -178,21 +196,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// 链接
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// 内部链接
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// 链接组
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// 自动生成的链接组
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -200,7 +234,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -348,10 +383,10 @@ starlight({
 **类型：** `StarlightExpressiveCodeOptions | boolean`  
 **默认值：** `true`
 
-Starlight 使用 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) 来渲染代码块，并添加对代码示例的高亮支持，向代码块添加文件名等。
+Starlight 使用 [Expressive Code](https://expressive-code.com) 来渲染代码块，并添加对代码示例的高亮支持，向代码块添加文件名等。
 请参阅 [“代码块”指南](/zh-cn/guides/authoring-content/#代码块) 以了解如何在你的 Markdown 和 MDX 内容中使用 Expressive Code 语法。
 
-你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration)以及一些特定于 Starlight 的属性。比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
+你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://expressive-code.com/reference/configuration/) 以及一些特定于 Starlight 的属性。比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
 
 ```js ins={2-4}
 starlight({
@@ -376,7 +411,7 @@ starlight({
 **类型：** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **默认值：** `['starlight-dark', 'starlight-light']`
 
-设置用于代码块样式的主题。有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)。
+设置用于代码块样式的主题。有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://expressive-code.com/guides/themes/)。
 
 Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/sdras/night-owl-vscode-theme) 的深色和浅色变体。
 
@@ -409,12 +444,57 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 ### `pagefind`
 
+**类型：** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
+**默认值：** `true`
+
+配置 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/)。
+
+将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
+
+当 [`prerender`](#prerender) 选项设置为 `false` 时，无法启用 Pagefind。
+
+将 `pagefind` 设置为对象，以配置 Pagefind 搜索客户端。
+
+- 查看 Pagefind 文档中的 [“自定义 Pagefind 的结果排序”](https://pagefind.app/docs/ranking/)，了解如何使用 `pagefind.ranking` 选项来控制搜索结果排序的计算。
+- 查看 Pagefind 文档中的 [“搜索多个站点”](https://pagefind.app/docs/multisite/)，了解如何使用 `pagefind.mergeIndex` 选项来控制如何跨多个站点搜索。
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
+
+### `prerender`
+
 **类型：** `boolean`  
 **默认值：** `true`
 
-定义 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/) 是否启用。
+定义 Starlight 页面是应预渲染为静态 HTML 还是由 [SSR 适配器](https://docs.astro.build/zh-cn/guides/on-demand-rendering/) 按需渲染。
 
-将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
+默认情况下，Starlight 页面是预渲染的。
+如果你正在使用 SSR 适配器并希望按需渲染 Starlight 页面，请设置为 `prerender: false`。
 
 ### `head`
 
@@ -438,6 +518,8 @@ starlight({
 	],
 });
 ```
+
+在 `head` 中的条目会直接转换为 HTML 元素，并不会经过 Astro 的 [脚本](https://docs.astro.build/zh-cn/guides/client-side-scripts/#脚本处理) 或 [样式](https://docs.astro.build/zh-cn/guides/styling/#在-astro-进行设计) 处理。如果你需要导入本地资源，如脚本、样式或图片，请[重写 Head 组件](/zh-cn/guides/overriding-components/#复用内置组件)。
 
 #### `HeadConfig`
 
@@ -484,18 +566,18 @@ starlight({
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // 为 Safari 添加 ICO favicon 回退。
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// 为 Safari 添加 ICO favicon 回退。
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
@@ -514,7 +596,7 @@ starlight({
 **类型：** `boolean`  
 **默认值：** `false`
 
-禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/core-concepts/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
+禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/basics/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
 
 ### `components`
 
@@ -548,3 +630,13 @@ starlight({
 ```
 
 有关创建自己的插件的详细信息，请参阅[插件参考](/zh-cn/reference/plugins/)。
+
+### `credits`
+
+启用在你的网站页脚显示 “基于 Starlight 构建” 的链接。
+
+```js
+starlight({
+	credits: true,
+});
+```

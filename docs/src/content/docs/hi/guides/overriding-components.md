@@ -100,7 +100,7 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-[ओवरराइड्स संदर्भ](/hi/reference/overrides/#component-props) में सभी उपलब्ध प्रॉप्स के बारे में और जानें।
+[ओवरराइड्स संदर्भ](/hi/reference/route-data/) में सभी उपलब्ध प्रॉप्स के बारे में और जानें।
 
 ### केवल विशिष्ट पृष्ठों पर ही ओवरराइड करें
 

@@ -1,13 +1,20 @@
 ---
-import type { AutoSidebarGroup, SidebarItem } from '../../../packages/starlight/schemas/sidebar';
+import type {
+	AutoSidebarGroup,
+	SidebarItem,
+	InternalSidebarLinkItem,
+} from '../../../packages/starlight/schemas/sidebar';
 import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
-import type { SidebarEntry } from '../../../packages/starlight/utils/navigation';
+import type { Badge } from '../../../packages/starlight/schemas/badge';
+import type { SidebarEntry } from '../../../packages/starlight/utils/routing/types';
 
 interface Props {
 	config: SidebarConfig;
 }
 
-type SidebarConfig = Exclude<SidebarItem, AutoSidebarGroup>[];
+type SidebarConfig = (Exclude<SidebarItem, AutoSidebarGroup | InternalSidebarLinkItem> & {
+	badge?: Badge;
+})[];
 
 const { config } = Astro.props;
 
@@ -17,7 +24,10 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 			return {
 				type: 'link',
 				label: item.label,
-				href: item.link,
+				// Empty hrefs are used to represent internal links that do not exist in the Starlight
+				// docs. Using a non-existing anchor link like `#_` will not trigger a page reload or any
+				// scrolling.
+				href: item.link.length > 0 ? item.link : '#_',
 				isCurrent: false,
 				badge: item.badge,
 				attrs: item.attrs ?? {},
@@ -44,6 +54,7 @@ function makeEntries(items: SidebarConfig): SidebarEntry[] {
 		background-color: var(--sl-color-bg-sidebar);
 		border: 1px solid var(--sl-color-gray-5);
 		padding: 1rem var(--sl-sidebar-pad-x);
-		max-width: var(--sl-sidebar-width);
+		/* Matches `var(--sl-sidebar-width)`, but hardcoded to avoid being overridden when printing the page. */
+		max-width: 18.75rem;
 	}
 </style>

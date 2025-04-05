@@ -3,11 +3,15 @@ title: CSS e Estilização
 description: Aprenda como estilizar seu site Starlight com CSS customizado ou integrá-lo com Tailwind CSS.
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 Você pode estilizar seu site Starlight com arquivos CSS customizados ou utilizar o plugin Starlight Tailwind.
 
 ## Estilos CSS customizados
 
 Customize os estilos aplicados ao seu site Starlight ao fornecer arquivos CSS adicionais para modificar ou estender os estilos padrões do Starlight.
+
+<Steps>
 
 1. Adicione um arquivo CSS ao seu diretório `src/`.
    Por exemplo, você poderia definir uma largura padrão de coluna mais larga e um tamanho de texto maior para títulos da página:
@@ -40,6 +44,8 @@ Customize os estilos aplicados ao seu site Starlight ao fornecer arquivos CSS ad
    });
    ```
 
+</Steps>
+
 Você pode ver todas as propriedades CSS customizadas utilizadas pelo Starlight que você pode definir para customizar o seu site no [arquivo `props.css` no GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
 ## Tailwind CSS
@@ -51,15 +57,13 @@ O plugin Starlight Tailwind plugin aplica a seguinte configuração:
 
 - Configura as variantes `dark:` do Tailwind para funcionarem com o modo escuro do Starlight.
 - Utiliza [cores de tema e fontes](#estilizando-starlight-com-tailwind) do Tailwind na UI do Starlight.
-- Desabilita os estilos de reset [Preflight](https://tailwindcss.com/docs/preflight) do Tailwind enquanto seletivamente restora partes essenciais do Preflight necessárias para o as classes utilitárias de borda do Tailwind.
+- Desabilita os estilos de reset [Preflight](https://tailwindcss.com/docs/preflight) do Tailwind enquanto seletivamente restaura partes essenciais do Preflight necessárias para o as classes utilitárias de borda do Tailwind.
 
 ### Crie um novo projeto com Tailwind
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
 Comece um novo projeto Starlight com Tailwind CSS pré-configurado utilizando `create astro`:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -87,9 +91,11 @@ yarn create astro --template starlight/tailwind
 
 Se você já tem um site Starlight e quer adicionar Tailwind CSS, siga estes passos.
 
+<Steps>
+
 1.  Adicione a integração Astro Tailwind:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -119,7 +125,7 @@ Se você já tem um site Starlight e quer adicionar Tailwind CSS, siga estes pas
 
 2.  Instale o plugin Starlight Tailwind:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -194,6 +200,8 @@ Se você já tem um site Starlight e quer adicionar Tailwind CSS, siga estes pas
     };
     ```
 
+</Steps>
+
 ### Estilizando Starlight com Tailwind
 
 Starlight irá utilizar os valores da sua [configuração de tema do Tailwind](https://tailwindcss.com/docs/theme) em sua UI.
@@ -235,7 +243,7 @@ export default {
 
 ## Tema
 
-O tema de cores do Starlight pode ser controlado ao sobreescrever suas propriedades customizada padrões.
+O tema de cores do Starlight pode ser controlado sobrescrevendo suas propriedades customizadas padrão.
 Essas variáveis são usadas na UI com uma variedade de tons de cinza usados como cores de texto e fundo e uma cor de destaque usada para links e para destacar itens atuais da navegação.
 
 ### Editor de tema de cores

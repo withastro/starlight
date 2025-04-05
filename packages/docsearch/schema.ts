@@ -3,17 +3,18 @@ import { z } from 'astro/zod';
 /**
  * Schema for the Algolia DocSearch modal’s strings.
  *
- * Add this to your `src/content/config.ts`:
+ * Add this to your `src/content.config.ts`:
  *
  * ```js
  * import { defineCollection } from 'astro:content';
+ * import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
  * import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
  * import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
  *
  * export const collections = {
- * 		docs: defineCollection({ schema: docsSchema() }),
+ * 		docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
  * 		i18n: defineCollection({
- * 			type: 'data',
+ * 			loader: i18nLoader(),
  * 			schema: i18nSchema({ extend: docSearchI18nSchema() }),
  * 		}),
  * };
@@ -58,6 +59,8 @@ export const docSearchI18nSchema = () =>
 			'docsearch.searchBox.cancelButtonText': z.string(),
 			/** Default: `Cancel` */
 			'docsearch.searchBox.cancelButtonAriaLabel': z.string(),
+			/** Default: `Search` */
+			'docsearch.searchBox.searchInputLabel': z.string(),
 
 			// START SCREEN
 			/** Default: `Recent` */

@@ -7,6 +7,8 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 You can style your Starlight site with custom CSS files or use the Starlight Tailwind plugin.
 
+For a quick way to change the default style of your site, check out [community themes](/resources/themes/).
+
 ## Custom CSS styles
 
 Customize the styles applied to your Starlight site by providing additional CSS files to modify or extend Starlight’s default styles.
@@ -63,7 +65,7 @@ The Starlight Tailwind plugin applies the following configuration:
 
 Start a new Starlight project with Tailwind CSS pre-configured using `create astro`:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -95,7 +97,7 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
 1.  Add Astro’s Tailwind integration:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -125,7 +127,7 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
 2.  Install the Starlight Tailwind plugin:
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -251,6 +253,8 @@ These variables are used throughout the UI with a range of gray shades used for 
 Use the sliders below to modify Starlight’s accent and gray color palettes.
 The dark and light preview areas will show the resulting colors, and the whole page will also update to preview your changes.
 
+Use the Contrast Level option to specify which of the Web Content Accessibility Guideline [colour contrast standards](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) to meet.
+
 When you’re happy with your changes, copy the CSS or Tailwind code below and use it in your project.
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -265,6 +269,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'Nebula',
 			default: 'Default',
 			random: 'Random',
+		},
+		contrast: {
+			label: 'Contrast Level',
 		},
 		editor: {
 			accentColor: 'Accent',

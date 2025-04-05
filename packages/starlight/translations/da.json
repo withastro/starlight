@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Gå til indhold",
   "search.label": "Søg",
-  "search.shortcutLabel": "(Tryk / for at søge)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Annuller",
   "search.devWarning": "Søgning er kun tilgængeligt i produktions versioner. \nPrøv at bygge siden og forhåndsvis den for at teste det lokalt.",
   "themeSelect.accessibleLabel": "Vælg tema",
@@ -18,10 +18,12 @@
   "page.lastUpdated": "Sidst opdateret:",
   "page.previousLink": "Forrige",
   "page.nextLink": "Næste",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Siden er ikke fundet. Tjek din URL eller prøv søgelinjen.",
   "aside.note": "Note",
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

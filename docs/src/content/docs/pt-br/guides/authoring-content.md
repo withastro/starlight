@@ -22,7 +22,7 @@ Conteúdo da página vem depois do segundo `---`.
 ```
 
 Toda página deve incluir ao menos o `title` (título).
-Veja a [referência do frontmatter](/pt-br/reference/frontmatter) para todos os campos disponíveis e como adicionar campos customizados.
+Veja a [referência do frontmatter](/pt-br/reference/frontmatter/) para todos os campos disponíveis e como adicionar campos customizados.
 
 ## Estilos Inline
 
@@ -166,7 +166,7 @@ Seus usuários podem ser mais produtivos e considerar seu produto mais fácil de
 
 - Navegação compreensível
 - Tema de cores configurável pelo usuário
-- [Suporte a internacionalização](/pt-br/guides/i18n)
+- [Suporte a internacionalização](/pt-br/guides/i18n/)
 
 :::
 
@@ -180,7 +180,7 @@ Seus usuários podem ser mais produtivos e considerar seu produto mais fácil de
 
 - Navegação compreensível
 - Tema de cores configurável pelo usuário
-- [Suporte a internacionalização](/pt-br/guides/i18n)
+- [Suporte a internacionalização](/pt-br/guides/i18n/)
 
 :::
 ```

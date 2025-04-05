@@ -15,7 +15,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Starlightは[Astroのインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/)です。プロジェクトのルートディレクトリで`astro add`コマンドを実行してサイトに追加します。
 
-<Tabs>
+<Tabs syncKey="pkg">
     <TabItem label="npm">
         ```sh
         npx astro add starlight
@@ -122,6 +122,6 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### StarlightとSSR
 
-Astroドキュメントの「[オンデマンドレンダリングアダプタ](https://docs.astro.build/ja/guides/server-side-rendering/)」ガイドに従うことで、Starlightをカスタムのオンデマンドレンダリングページと併用できます。
+SSRを有効にするには、Astroドキュメントの「[オンデマンドレンダリングアダプター](https://docs.astro.build/ja/guides/server-side-rendering/)」ガイドに従い、Starlightプロジェクトにサーバーアダプターを追加します。
 
-現在、Starlightによって生成されるドキュメントページは、プロジェクトの出力モードに関係なく常にプリレンダリングされます。近い内にStarlightページのオンデマンドレンダリングをサポートしたいと考えています。
+Starlightによって生成されるドキュメントページは、プロジェクトの出力モードに関係なくデフォルトでプリレンダリングされます。Starlightページのプリレンダリングを無効にするには、[`prerender`設定オプション](/ja/reference/configuration/#prerender)を`false`に設定します。

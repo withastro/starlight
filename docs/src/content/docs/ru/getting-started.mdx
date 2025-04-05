@@ -1,21 +1,24 @@
 ---
 title: Введение
-description: Узнайте, как начать создание вашего следующего сайта с документацией с помощью Starlight от Astro
+description: Узнайте, как начать создание вашего следующего сайта с документацией с помощью Starlight от Astro.
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Создание нового проекта
-
 Starlight — это полнофункциональная тема для документации, созданная на основе фреймворка [Astro](https://astro.build).
+Это руководство поможет вам начать работу над новым проектом.
+См. [инструкции по ручной настройке](/ru/manual-setup/), чтобы добавить Starlight в существующий проект Astro.
+
+## Быстрый старт
+
+### Создание нового проекта
 
 Вы можете создать новый проект на базе Astro + Starlight, используя следующую команду:
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
-# создать новый проект с помощью npm
 npm create astro@latest -- --template starlight
 ```
 
@@ -23,7 +26,6 @@ npm create astro@latest -- --template starlight
 <TabItem label="pnpm">
 
 ```sh
-# создать новый проект с помощью pnpm
 pnpm create astro --template starlight
 ```
 
@@ -31,7 +33,6 @@ pnpm create astro --template starlight
 <TabItem label="Yarn">
 
 ```sh
-# создать новый проект с помощью yarn
 yarn create astro --template starlight
 ```
 
@@ -45,93 +46,96 @@ yarn create astro --template starlight
 [откройте шаблон на StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
 :::
 
-## Создание контента с Starlight
+### Запуск сервера разработки
 
-Starlight готов к созданию нового контента или к интеграции уже существующих файлов!
+При локальной работе [сервер разработки Astro](https://docs.astro.build/ru/reference/cli-reference/#astro-dev) позволяет предварительно просмотреть вашу работу и автоматически обновляет ваш браузер при внесении изменений.
 
-### Форматы файлов
+Внутри каталога вашего проекта выполните следующую команду, чтобы запустить сервер разработки:
 
-Starlight поддерживает создание контента в форматах Markdown и MDX. (Вы можете добавить поддержку Markdoc, установив экспериментальную [интеграцию Astro Markdoc](https://docs.astro.build/ru/guides/integrations-guide/markdoc/).)
-
-### Добавить страницы
-
-Автоматически добавляйте новые страницы на ваш сайт, создавая файлы `.md` или `.mdx` в директории `src/content/docs/`.
-Добавляйте подпапки для организации ваших файлов и создания множественных сегментов пути:
-
-```
-src/content/docs/hello-world.md => ваш-сайт.com/hello-world
-src/content/docs/guides/faq.md => ваш-сайт.com/guides/faq
-```
-
-### Типобезопасные метаданные
-
-Все страницы Starlight используют настраиваемый [общий набор свойств метаданных](/ru/reference/frontmatter/) для контроля отображения страницы:
-
-```md
----
-title: Привет, мир!
-description: Это страница на моем сайте, работающем на Starlight
----
-```
-
-Если вы что-то забудете, Starlight сообщит вам об этом
-
-## Развертывание вашего сайта на Starlight
-
-После того как вы создали и настроили свой сайт на Starlight, вы можете развернуть его на веб-сервере или
-платформе хостинга по вашему выбору, включая Netlify, Vercel, GitHub Pages и так далее.
-
-[Узнайте о развертывании сайта на Astro из документации Astro.](https://docs.astro.build/ru/guides/deploy/)
-
-## Обновление Starlight
-
-:::tip
-Поскольку Starlight еще в beta, будут частые обновления и улучшения.
-Не забывайте регулярно обновлять Starlight!
-:::
-
-Starlight является интеграцией Astro и обновляется так же, как любая интеграция @astrojs/\*:
-
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
-# Обновление Starlight с npm
-npm install @astrojs/starlight@latest
+npm run dev
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-# Обновление Starlight с pnpm
-pnpm upgrade @astrojs/starlight --latest
+pnpm dev
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-# Обновление Starlight с yarn
-yarn upgrade @astrojs/starlight --latest
+yarn dev
 ```
 
 </TabItem>
 </Tabs>
 
-Вы можете увидеть полный список изменений, сделанных в каждом релизе,
-в [списке изменений Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+На ваш терминал будет отправлено сообщение с URL-адресом вашего локального предварительного просмотра.
+Откройте этот URL-адрес, чтобы начать просмотр вашего сайта.
 
-## Устранение проблем с Starlight
+### Добавление контента
 
-Информация о [конфигурации проекта Starlight](/ru/reference/configuration/)
-и [конфигурации метаданных отдельной страницы](/ru/reference/frontmatter/) доступна в разделе Справочник этого сайта.
-Используйте эти страницы, чтобы убедиться, что ваш сайт на Starlight настроен и работает корректно.
+Starlight готов к созданию нового контента или к интеграции уже существующих файлов!
 
-Смотрите пополняющийся список руководств в боковой панели для помощи в добавлении контента и настройке вашего сайта на Starlight.
+Добавляйте новые страницы на свой сайт, создавая файлы Markdown в каталоге `src/content/docs/`.
+
+Подробнее о файловой маршрутизации и поддержке файлов MDX и Markdoc читайте в руководстве [Страницы](/ru/guides/pages/).
+
+### Следующие шаги
+
+- **Настройка:** Узнайте об общих опциях в главе [Настройка Starlight](/ru/guides/customization/).
+- **Навигация.** Настройте боковую панель с помощью руководства [Навигация по боковой панели](/ru/guides/sidebar/).
+- **Компоненты.** Узнайте о встроенных карточках, вкладках и многом другом в руководстве [Компоненты](/ru/components/using-components/).
+- **Развёртывание.** Опубликуйте свою работу с помощью руководства [Развёртывание вашего сайта](https://docs.astro.build/ru/guides/deploy/) в документации Astro.
+
+## Обновление Starlight
+
+:::tip
+Поскольку Starlight ещё в статусе beta, будут частые обновления и улучшения.
+Не забывайте регулярно обновлять Starlight!
+:::
+
+Starlight является интеграцией Astro и обновляется так же, как любая интеграция @astrojs/\*:
+
+<Tabs syncKey="pkg">
+<TabItem label="npm">
+
+```sh
+npx @astrojs/upgrade
+```
+
+</TabItem>
+<TabItem label="pnpm">
+
+```sh
+pnpm dlx @astrojs/upgrade
+```
+
+</TabItem>
+<TabItem label="Yarn">
+
+```sh
+yarn dlx @astrojs/upgrade
+```
+
+</TabItem>
+</Tabs>
+
+Вы можете увидеть полный список изменений, сделанных в каждом релизе, в [списке изменений Starlight](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md).
+
+## Устранение проблем со Starlight
+
+Используйте справочные страницы [конфигурация проекта](/ru/reference/configuration/) и [конфигурация метаданных отдельной страницы](/ru/reference/frontmatter/), чтобы убедиться, что ваш сайт Starlight настроен и работает правильно.
+См. руководства на боковой панели, чтобы получить помощь в добавлении контента и настройке вашего сайта Starlight.
 
 Если вы не можете найти ответ в этой документации, пожалуйста, посетите [полную документацию Astro](https://docs.astro.build/ru/).
-Ваш вопрос может быть решен узнав как в целом работает Astro под темой Starlight.
+На ваш вопрос можно ответить, если вы поймете, как работает Astro в целом в рамках темы Starlight.
 
 Вы также можете узнать про любые известные [проблемы Starlight на GitHub](https://github.com/withastro/starlight/issues) и получить помощь в
 [Discord Astro](https://astro.build/chat/) от нашего активного, дружелюбного сообщества!

@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Starlightの[`components`](/ja/reference/configuration#components)設定オプションに置き換え対象のコンポーネントへのパスを指定することで、Starlightの組み込みコンポーネントをオーバーライドできます。このページでは、オーバーライド可能なすべてのコンポーネントと、GitHub上にあるコンポーネントのデフォルト実装へのリンクの一覧を記載しています。
+Starlightの[`components`](/ja/reference/configuration/#components)設定オプションに置き換え対象のコンポーネントへのパスを指定することで、Starlightの組み込みコンポーネントをオーバーライドできます。このページでは、オーバーライド可能なすべてのコンポーネントと、GitHub上にあるコンポーネントのデフォルト実装へのリンクの一覧を記載しています。
 
 [コンポーネントのオーバーライドガイド](/ja/guides/overriding-components/)も参照してください。
 
@@ -49,6 +49,18 @@ Starlightは、以下のpropsをカスタムコンポーネントに渡します
 
 言語が配信されるベースパス。ルートロケールスラグの場合は`undefined`となります。
 
+#### `siteTitle`
+
+**Type:** `string`
+
+このページのロケールのサイトタイトル。
+
+#### `siteTitleHref`
+
+**Type:** `string`
+
+サイトタイトルの`href`属性の値。たとえば`/`など、ホームページへのリンクとなります。多言語サイトの場合、たとえば`/en/`や`/zh-cn/`など、現在のロケールが含まれます。
+
 #### `slug`
 
 **Type:** `string`
@@ -87,7 +99,7 @@ entry: {
 }
 ```
 
-このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/api-reference/#collection-entry-type)リファレンスを参照してください。
+このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/modules/astro-content/#collectionentry)リファレンスを参照してください。
 
 #### `sidebar`
 
@@ -131,12 +143,6 @@ entry: {
 
 ページの編集設定が有効な場合、このページを編集可能なアドレスの`URL`オブジェクト。
 
-#### `labels`
-
-**Type:** `Record<string, string>`
-
-現在のページのローカライズされたUI文字列を含んだオブジェクト。利用可能なすべてのキーの一覧については、[「StarlightのUIを翻訳する」](/ja/guides/i18n/#starlightのuiを翻訳する)ガイドを参照してください。
-
 ---
 
 ## コンポーネント
@@ -151,7 +157,7 @@ entry: {
 
 各ページの`<head>`内にレンダリングされるコンポーネント。`<title>`や`<meta charset="utf-8">`などの重要なタグが含まれます。
 
-このコンポーネントをオーバーライドするのは最後の手段としてください。可能な限り、Starlightの設定オプション[`head`](/ja/reference/configuration#head)を使用してください。
+このコンポーネントをオーバーライドするのは最後の手段としてください。可能な限り、Starlightの設定オプション[`head`](/ja/reference/configuration/#head)を使用してください。
 
 #### `ThemeProvider`
 
@@ -203,7 +209,7 @@ entry: {
 
 **デフォルトコンポーネント:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
-すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
+すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle-1)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
 
 #### `SiteTitle`
 
@@ -223,7 +229,7 @@ Starlightの検索UIをレンダリングするために使用されるコンポ
 
 **デフォルトコンポーネント:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
-ソーシャルアイコンへのリンクを含む、サイトヘッダーにレンダリングされるコンポーネント。デフォルトの実装では、Starlightの設定の[`social`](/ja/reference/configuration#social)オプションを使用して、アイコンとリンクをレンダリングします。
+ソーシャルアイコンへのリンクを含む、サイトヘッダーにレンダリングされるコンポーネント。デフォルトの実装では、Starlightの設定の[`social`](/ja/reference/configuration/#social)オプションを使用して、アイコンとリンクをレンダリングします。
 
 #### `ThemeSelect`
 
@@ -289,7 +295,7 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 
 **デフォルトコンポーネント:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
-各ページの上部にレンダリングされるバナーコンポーネント。デフォルトの実装では、ページの[`banner`](/ja/reference/frontmatter#banner)フロントマターの値を使用して、レンダリングするかどうかを決定します。
+各ページの上部にレンダリングされるバナーコンポーネント。デフォルトの実装では、ページの[`banner`](/ja/reference/frontmatter/#banner)フロントマターの値を使用して、レンダリングするかどうかを決定します。
 
 #### `ContentPanel`
 
@@ -305,6 +311,12 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 
 デフォルトの実装と同様に、`<h1>`要素に`id="_top"`を設定する必要があります。
 
+#### `DraftContentNotice`
+
+**デフォルトコンポーネント:** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+現在のページがドラフトとしてマークされている場合、開発中にユーザーに表示される通知。
+
 #### `FallbackContentNotice`
 
 **デフォルトコンポーネント:** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
@@ -315,7 +327,7 @@ Starlightのページサイドバーは、現在のページの見出しを列�
 
 **デフォルトコンポーネント:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-フロントマターで[`hero`](/ja/reference/frontmatter#hero)が設定されている場合に、ページの上部にレンダリングされるコンポーネント。デフォルトの実装では、大きなタイトル、タグライン、コールトゥアクション（call-to-action）リンク、オプションの画像を表示します。
+フロントマターで[`hero`](/ja/reference/frontmatter/#hero)が設定されている場合に、ページの上部にレンダリングされるコンポーネント。デフォルトの実装では、大きなタイトル、タグライン、コールトゥアクション（call-to-action）リンク、オプションの画像を表示します。
 
 #### `MarkdownContent`
 

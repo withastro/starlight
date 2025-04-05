@@ -1,0 +1,125 @@
+---
+title: 链接卡片
+description: 了解如何在 Starlight 中将链接突出显示为卡片。
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+要突出显示不同页面的链接，请使用 `<LinkCard>` 组件。
+
+import Preview from '~/components/component-preview.astro';
+
+<Preview>
+
+<LinkCard
+	slot="preview"
+	title="自定义 Starlight"
+	description="学习如何通过自定义样式、字体等使你的 Starlight 网站变得与众不同。"
+	href="/zh-cn/guides/customization/"
+/>
+
+</Preview>
+
+## 导入
+
+```tsx
+import { LinkCard } from '@astrojs/starlight/components';
+```
+
+## 用法
+
+使用 `<LinkCard>` 组件来突出显示链接。
+每个 `<LinkCard>` 都需要一个 [`title`](#title) 和一个 [`href`](#href) 属性。
+
+<Preview>
+
+```mdx
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard title="Markdown 创作" href="/zh-cn/guides/authoring-content/" />
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% linkcard title="Markdown 创作" href="/zh-cn/guides/authoring-content/" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Markdown 创作"
+	href="/zh-cn/guides/authoring-content/"
+/>
+
+</Preview>
+
+### 添加链接描述
+
+使用 [`description`](#description) 属性向链接卡片添加一个简短的描述。
+
+<Preview>
+
+```mdx {6}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="国际化"
+	href="/zh-cn/guides/i18n/"
+	description="配置 Starlight 以支持多种语言。"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {4}
+{% linkcard
+   title="国际化"
+	 href="/zh-cn/guides/i18n/"
+	 description="配置 Starlight 以支持多种语言。" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="国际化"
+	href="/zh-cn/guides/i18n/"
+	description="配置 Starlight 以支持多种语言。"
+/>
+
+</Preview>
+
+### 分组链接卡片
+
+当有足够大的空间时，可以使用 [`<CardGrid>`](/zh-cn/components/card-grids/) 组件对链接卡片进行分组，来并排显示多个链接卡片。
+有关示例，请参阅 [“分组链接卡片”](/zh-cn/components/card-grids/#分组链接卡片) 指南。
+
+## `<LinkCard>` 的属性
+
+**实现：** [`LinkCard.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/LinkCard.astro)
+
+`<LinkCard>` 组件接受以下属性，以及其他所有的 [`<a>` 元素属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a)：
+
+### `title`
+
+**必要属性**  
+**类型：** `string`
+
+要显示的链接卡片的标题。
+
+### `href`
+
+**必要属性**  
+**类型：** `string`
+
+与卡片交互时所链接到的 URL。
+
+### `description`
+
+**类型：** `string`
+
+一个可选描述，显示在标题的下方。

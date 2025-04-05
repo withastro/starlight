@@ -106,6 +106,8 @@ export default defineConfig({
 });
 ```
 
+Aprende cómo [agregar un enlace del mapa del sitio a `robots.txt`](https://docs.astro.build/es/guides/integrations-guide/sitemap/#enlace-de-sitemap-en-robotstxt) en la documentación de Astro.
+
 ## Diseño de página
 
 De forma predeterminada, las páginas de Starlight utilizan un diseño con una barra lateral de navegación global y una tabla de contenidos que muestra los encabezados de la página actual.
@@ -127,7 +129,7 @@ Starlight muestra una tabla de contenidos en cada página para facilitar que los
 
 De forma predeterminada, los encabezados `<h2>` y `<h3>` se incluyen en la tabla de contenidos. Puedes cambiar qué niveles de encabezados se incluyen en toda la página utilizando las opciones `minHeadingLevel` y `maxHeadingLevel` en tu configuración [global de `tableOfContents`](/es/reference/configuration/#tableofcontents). Puedes anular estas configuraciones predeterminadas en una página individual agregando las propiedades correspondientes de [`tableOfContents` en el frontmatter](/es/reference/frontmatter/#tableofcontents):
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4-6}
@@ -161,7 +163,7 @@ defineConfig({
 
 Desactiva completamente la tabla de contenidos estableciendo la opción `tableOfContents` en `false`:
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
 
 ```md {4}
@@ -376,7 +378,7 @@ Proporciona módulos npm que puedes instalar para las fuentes que deseas utiliza
 2.  Instala el paquete para la fuente que has elegido.
     Puedes encontrar el nombre del paquete haciendo clic en “Install” en la página de la fuente de Fontsource.
 
-             <Tabs>
+             <Tabs syncKey="pkg">
 
         <TabItem label="npm">
 

@@ -1,7 +1,9 @@
 ---
-import { flattenSidebar, type SidebarEntry } from '../utils/navigation';
+import { flattenSidebar } from '../utils/navigation';
+import type { SidebarEntry } from '../utils/routing/types';
 import Icon from '../user-components/Icon.astro';
-import Badge from './Badge.astro';
+import Badge from '../user-components/Badge.astro';
+import SidebarRestorePoint from './SidebarRestorePoint.astro';
 
 interface Props {
 	sublist: SidebarEntry[];
@@ -24,27 +26,27 @@ const { sublist, nested } = Astro.props;
 					>
 						<span>{entry.label}</span>
 						{entry.badge && (
-							<>
-								{' '}
-								<Badge
-									text={entry.badge.text}
-									variant={entry.isCurrent ? 'outline' : entry.badge.variant}
-								/>
-							</>
+							<Badge
+								variant={entry.badge.variant}
+								class={entry.badge.class}
+								text={entry.badge.text}
+							/>
 						)}
 					</a>
 				) : (
 					<details
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
+						<SidebarRestorePoint />
 						<summary>
 							<div class="group-label">
 								<span class="large">{entry.label}</span>
 								{entry.badge && (
-									<>
-										{' '}
-										<Badge text={entry.badge.text} variant={entry.badge.variant} />
-									</>
+									<Badge
+										variant={entry.badge.variant}
+										class={entry.badge.class}
+										text={entry.badge.text}
+									/>
 								)}
 							</div>
 							<Icon name="right-caret" class="caret" size="1.25rem" />

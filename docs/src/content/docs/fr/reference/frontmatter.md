@@ -33,7 +33,7 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type**: `string`
 
-Remplace le slug de la page. Consultez [« Définition d’un slug personnalisé »](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-slug-personnalis%C3%A9e) dans la documentation d'Astro pour plus de détails.
+Remplace le slug de la page. Consultez [« Définition d’identifiants personnalisés »](https://docs.astro.build/fr/guides/content-collections/#définition-didentifiants-personnalisés) dans la documentation d'Astro pour plus de détails.
 
 ### `editUrl`
 
@@ -115,10 +115,10 @@ hero:
     - text: En savoir plus
       link: /getting-started/
       icon: right-arrow
-      variant: primary
     - text: Voir sur GitHub
       link: https://github.com/astronaut/my-project
       icon: external
+      variant: minimal
       attrs:
         rel: me
 ---
@@ -166,8 +166,8 @@ interface HeroConfig {
   actions?: Array<{
     text: string;
     link: string;
-    variant: 'primary' | 'secondary' | 'minimal';
-    icon: string;
+    variant?: 'primary' | 'secondary' | 'minimal';
+    icon?: string;
     attrs?: Record<string, string | number | boolean>;
   }>;
 }
@@ -268,6 +268,24 @@ pagefind: false
 ---
 ```
 
+### `draft`
+
+**Type :** `boolean`  
+**Par défaut :** `false`
+
+Définit si cette page doit être considérée comme une ébauche et ne pas être incluse dans les [déploiements en production](https://docs.astro.build/fr/reference/cli-reference/#astro-build). Définissez la valeur à `true` pour marquer une page comme une ébauche et la rendre visible uniquement pendant le développement.
+
+```md
+---
+# src/content/docs/exemple.md
+# Exclure cette page des déploiements en production
+draft: true
+---
+```
+
+Puisque les ébauches ne sont pas incluses lors d'un déploiement, vous ne pouvez pas ajouter des ébauches directement à la configuration de la barre latérale de navigation de votre site en utilisant des [slugs](/fr/guides/sidebar/#liens-internes).
+Les ébauches situées dans des répertoires utilisés dans des [groupes de barre latérale générés automatiquement](/fr/guides/sidebar/#groupes-générés-automatiquement) sont automatiquement exclues des déploiements en production.
+
 ### `sidebar`
 
 **Type :** [`SidebarConfig`](#sidebarconfig)
@@ -340,7 +358,7 @@ sidebar:
 
 Ajoute un badge à la page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
 Lors de l'utilisation d'une chaîne de caractères, le badge sera affiché avec une couleur d'accentuation par défaut.
-Passez éventuellement un [objet `BadgeConfig`](/fr/reference/configuration/#badgeconfig) avec les propriétés `text` et `variant` pour personnaliser le badge.
+Passez éventuellement un [objet `BadgeConfig`](/fr/reference/configuration/#badgeconfig) avec les propriétés `text`, `variant`, et `class` pour personnaliser le badge.
 
 ```md
 ---
@@ -382,19 +400,20 @@ sidebar:
 
 ## Personnaliser le schéma du frontmatter
 
-Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content/config.ts` en utilisant l'utilitaire `docsSchema()` :
+Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content.config.ts` en utilisant l'utilitaire `docsSchema()` :
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
+Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#définition-dun-schéma-de-collection) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
 
 `docsSchema()` accepte les options suivantes :
 
@@ -408,13 +427,15 @@ La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content
 
 Dans l'exemple suivant, nous définissons un type plus strict pour `description` pour le rendre obligatoire et ajouter un nouveau champ `category` facultatif :
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // Rend un champ de base obligatoire au lieu de facultatif.
@@ -429,13 +450,15 @@ export const collections = {
 
 Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-in-content-collections), utilisez une fonction qui retourne votre extension de schéma :
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({

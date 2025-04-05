@@ -67,6 +67,8 @@ Starlight 提供了内置的多语言支持，包括路由、回退内容和完�
 
 </Steps>
 
+对于更高级的 i18n 场景，Starlight 也支持使用 [Astro 的 `i18n` 配置](https://docs.astro.build/zh-cn/guides/internationalization/#配置-i18n-路由)选项来配置国际化。
+
 ### 使用 `root` 语言
 
 你可以使用“root”语言来提供没有任何 i18n 前缀的语言。例如，如果英语是你的 root 语言，那么英语页面的路径将是 `/about` 而不是 `/en/about`。
@@ -113,7 +115,7 @@ export default defineConfig({
 
 #### 单语言网站
 
-默认情况查下，Starlight 是一个单语言（英语）网站。要在其他语言中创建单语言网站，请将其设置为 `locales` 配置中的 `root`：
+默认情况下，Starlight 是一个单语言（英语）网站。要在其他语言中创建单语言网站，请将其设置为 `locales` 配置中的 `root`：
 
 ```diff lang="js" {10-13}
 // astro.config.mjs
@@ -143,6 +145,34 @@ Starlight 期望你在所有语言中创建等效的页面。例如，如果你�
 
 如果某种语言尚未提供翻译，Starlight 将为读者显示该页面的默认语言（通过 `defaultLocale` 设置）的内容。例如，如果你尚未创建关于你的法语版本，并且你的默认语言是英语，那么访问 `/fr/about` 的访问者将看到来自 `/en/about` 的英语内容，并显示该页面尚未翻译的通知。这有助于你在默认语言中添加内容，然后在翻译人员有时间时逐步翻译它。
 
+## 翻译网站标题
+
+默认情况下，Starlight 会为所有语言使用相同的站点标题。
+如果你需要为每种语言自定义标题，你可以在 Starlight 的选项中将一个对象传递给 [`title`](/zh-cn/reference/configuration/#title-必填)：
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'My Docs',
++			title: {
++				en: 'My Docs',
++				'zh-CN': '我的文档',
++			},
+			defaultLocale: 'en',
+			locales: {
+				en: { label: 'English' },
+				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+			},
+		}),
+	],
+});
+```
+
 ## 翻译 Starlight 的 UI
 
 import LanguagesList from '~/components/languages-list.astro';
@@ -157,16 +187,17 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 <Steps>
 
-1. 如果尚未配置，请在 `src/content/config.ts` 中配置 `i18n` 数据集合：
+1. 如果尚未配置，请在 `src/content.config.ts` 中配置 `i18n` 数据集合：
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -189,7 +220,7 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
    <UIStringsList />
 
-   Starlight 的代码块使用了 [Expressive Code](https://github.com/expressive-code/expressive-code)。
+   Starlight 的代码块使用了 [Expressive Code](https://expressive-code.com/)。
    你可以在同一个 JSON 文件中使用 `expressiveCode` 键来设置它的 UI 字符串翻译。
 
    ```json
@@ -226,14 +257,15 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 在下面的示例中添加了一个新的可选的 `custom.label` 键：
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -243,4 +275,134 @@ export const collections = {
 };
 ```
 
-在 Astro 文档的[“定义集合模式”](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式)中了解有关内容集合 schema 的更多信息。
+在 Astro 文档的[“定义集合模式”](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式schema)中了解有关内容集合 schema 的更多信息。
+
+## 使用 UI 翻译
+
+你可以使用由 [i18next](https://www.i18next.com/) 提供支持的统一 API 访问 Starlight 的 [内置 UI 字符串](/zh-cn/guides/i18n/#翻译-starlight-的-ui) 以及 [用户定义](/zh-cn/guides/i18n/#拓展翻译-schema) 和 [插件提供](/zh-cn/reference/plugins/#injecttranslations) 的 UI 字符串。
+其中包括了对 [插值](https://www.i18next.com/translation-function/interpolation) 和 [多元化](https://www.i18next.com/translation-function/plurals) 等功能的支持。
+
+在 Astro 组件中，此 API 作为 [全局 `Astro` 对象](https://docs.astro.build/zh-cn/reference/api-reference/#locals) 的一部分提供，即 `Astro.locals.t`：
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+你还可以在 [端点](https://docs.astro.build/zh-cn/guides/endpoints/) 中使用 API，其中的 `locals` 对象可作为 [端点上下文](https://docs.astro.build/zh-cn/reference/api-reference/#locals) 的一部分使用：
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+在 Starlight 插件的上下文中，你可以使用 [`useTranslations()`](/zh-cn/reference/plugins/#usetranslations) 助手函数来访问特定语言的此 API。
+有关更多信息，请参阅 [插件参考](/zh-cn/reference/plugins/)。
+
+### 渲染 UI 字符串
+
+使用 `locals.t()` 函数以渲染 UI 字符串。
+这是 i18next 的 `t()` 函数的一个实例，该函数将 UI 字符串键作为其第一个参数，并返回当前语言的相应翻译。
+
+例如，给定一个包含以下内容的自定义翻译文件：
+
+```json title="src/content/i18n/en.json"
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+第一个 UI 字符串可以通过将 `'link.astro'` 传递给 `t()` 函数来渲染：
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- 渲染结果：<a href="...">Astro documentation</a> -->
+```
+
+第二个 UI 字符串对 `{{feature}}` 占位符使用了 i18next 的 [插值语法](https://www.i18next.com/translation-function/interpolation)。
+`feature` 的值在被作为第二个参数传递给 `t()` 时，必须被设置在一个选项对象中：
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- 渲染结果：<a href="...">Astro documentation for Astro DB</a> -->
+```
+
+有关如何使用 `t()` 函数进行插值、格式化等更多信息，请参阅 [i18next 文档](https://www.i18next.com/overview/api#t)。
+
+### 高级 API
+
+#### `t.all()`
+
+`locals.t.all()` 函数可返回一个对象，返回的对象中包含当前区域设置下所有可用的 UI 字符串。
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Skip to content",
+//      "search.label": "Search",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+要检查某个区域设置是否存在某个翻译键，请使用 `locals.t.exists()` 函数，并将该翻译键作为第一个参数。
+如需覆盖当前的区域设置，请传递第二个可选参数。
+
+```astro
+---
+// src/components/Example.astro
+const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+//    ^ false
+---
+```
+
+有关详细信息，请参阅 [i18next 文档中的 `exists()` 参考](https://www.i18next.com/overview/api#exists)。
+
+#### `t.dir()`
+
+`locals.t.dir()` 函数可返回当前或特定语言环境的文本方向。
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+有关详细信息，请参阅 [i18next 文档中的 `dir()` 参考](https://www.i18next.com/overview/api#dir)。
+
+## 访问当前语言环境
+
+你可以使用 [`Astro.currentLocale`](https://docs.astro.build/zh-cn/reference/api-reference/#currentlocale) 在 `.astro` 组件中读取当前的语言环境。
+
+下面的示例读取当前语言环境，并使用它和 [`getRelativeLocaleUrl()`](https://docs.astro.build/zh-cn/reference/modules/astro-i18n/#getrelativelocaleurl) 助手函数以生成一个当前语言的关于页面的链接：
+
+```astro
+---
+// src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+---
+
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>About</a>
+```

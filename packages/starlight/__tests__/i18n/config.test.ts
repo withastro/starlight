@@ -2,7 +2,7 @@ import config from 'virtual:starlight/user-config';
 import { expect, test } from 'vitest';
 
 test('test suite is using correct env', () => {
-	expect(config.title).toBe('i18n with no root locale');
+	expect(config.title).toMatchObject({ 'en-US': 'i18n with no root locale' });
 });
 
 test('config.isMultilingual is true with multiple locales', () => {

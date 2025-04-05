@@ -121,11 +121,11 @@ You should then be able to open <http://localhost:4321> and see your changes.
 When adding or translating content in the Starlight docs site, you can check all internal links are valid.
 All GitHub PRs are checked this way automatically, but testing locally can help if you want to confirm changes are correct before committing them.
 
-To do this, move into the `docs/` directory from the root of the repo and then build the site with the `CHECK_LINKS` environment variable:
+To do this, move into the `docs/` directory from the root of the repo and then run `pnpm linkcheck`:
 
 ```sh
 cd docs
-CHECK_LINKS=true pnpm build
+pnpm linkcheck
 ```
 
 If there are any broken links, the build will fail and log which pages need to be fixed.
@@ -187,9 +187,41 @@ pnpm test:coverage
 
 This will print a table to your terminal and also generate an HTML report you can load in a web browser by opening [`packages/starlight/__coverage__/index.html`](./packages/starlight/__coverage__/index.html).
 
+### End-to-end (E2E) tests
+
+Starlight also includes E2E tests in [`packages/starlight/__e2e__/`](./packages/starlight/__e2e__/), which are run using [Playwright][playwright].
+
+To run these tests, move into the Starlight package and then run `pnpm test:e2e`:
+
+```sh
+cd packages/starlight
+pnpm test:e2e
+```
+
+#### Test fixtures
+
+Each subdirectory of `packages/starlight/__e2e__/fixtures` should contain the basic files needed to run Starlight (`package.json`, `astro.config.mjs`, a content collection configuration in `src/content.config.ts` and some content to render in `src/content/docs/`).
+
+The `testFactory()` helper can be used in a test file to define the fixture which will be built and loaded in a preview server during a set of tests.
+
+```ts
+// packages/starlight/__e2e__/feature.test.ts
+import { testFactory } from './test-utils';
+
+const test = await testFactory('./fixtures/basics/');
+```
+
+This allows you to run tests against different combinations of Astro and Starlight configuration options for various content.
+
+#### When to add E2E tests?
+
+E2E are most useful for testing what happens on a page after it has been loaded by a browser. They run slower than unit tests so they should be used sparingly when unit tests aren’t sufficient.
+
 ## Translations
 
 Translations help make Starlight accessible to more people.
+
+Check out the dedicated [i18n contribution guidelines](https://contribute.docs.astro.build/guides/i18n/#quality-standards--adaptation) in the Astro docs contributor guide for more details regarding our translation process and quality standards.
 
 ### Translating Starlight’s UI
 
@@ -214,12 +246,12 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 
 #### Adding a new language to Starlight’s docs
 
-To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
+To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs contributor guide for some helpful tips around choosing these.
 
 - Add your language to the `locales` config in `docs/astro.config.mjs`
 - Add your language to the `locales` config in `docs/lunaria.config.json`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
-- Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
+- Add your language to the `config.sitemap.exclude` option in `docs/__a11y__/test-utils.ts`
 - Create the first translated page for your language.
   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
 - Open a pull request on GitHub to add your changes to Starlight!
@@ -254,3 +286,71 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [gfi]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+
 [api-docs]: https://docs.astro.build/en/reference/integrations-reference/
 [vitest]: https://vitest.dev/
+[playwright]: https://playwright.dev/
+
+## Showcase
+
+### Sites
+
+We love to see websites built with Starlight and share them with the community on our [showcase](https://starlight.astro.build/resources/showcase/) page.
+If you’ve built a documentation site with Starlight, adding it to the showcase is just a pull request away!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. Add a screenshot of your site to the `docs/src/assets/showcase/` directory. The image file must:
+   - Be a `.png` file and named after your site’s domain, e.g. `example.com.png`.
+   - Have the dimensions of 800 × 450 pixels.
+3. Add a new entry for your website in `docs/src/components/showcase-sites.astro`.
+
+   - The new entry must be appended at the end of the existing list of sites.
+   - The `title` attribute must be the name of your site with no extra details.
+   - The `href` attribute must be the URL of your Starlight site. If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
+   - The `thumbnail` attribute must be the filename of the screenshot you added in step 2.
+
+   ```diff
+     <Card title="Example" href="https://example.net" thumbnail="example.net.png" />
+     <Card title="Last Example" href="https://example.org" thumbnail="example.org.png" />
+   + <Card title="New Example" href="https://example.com" thumbnail="example.com.png" />
+   </FluidGrid>
+   ```
+
+4. Open a pull request on GitHub to add your changes.
+
+### Themes
+
+Share themes for Starlight you built by adding them to our [themes](https://starlight.astro.build/resources/themes/) page. Here’s how!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+
+2. Take screenshots of your theme’s light and dark modes using our demo project.
+
+   1. Open the [theme demo project](https://stackblitz.com/edit/github-jj1kzx5x?file=astro.config.mjs) on StackBlitz.
+
+   2. Install your theme using StackBlitz’s integrated terminal:
+
+      ```sh
+      npm i your-theme-name
+      ```
+
+   3. Update `astro.config.mjs` to import your theme and add it to Starlight’s `plugins` array.
+
+   4. Run the dev server:
+
+      ```sh
+      npm run dev
+      ```
+
+   5. Open the theme preview in a new tab and use dev tools’ responsive view to take screenshots with the screen sized to 1280×720 pixels.
+
+3. Add your screenshots of the theme’s light and dark modes to the `docs/src/assets/themes/` directory. The images must:
+
+   - be PNG files with your theme’s name and the color variant, e.g. a theme named “Moon” would have files named `moon-light.png` and `moon-dark.png`
+   - have dimensions of 1280×720 pixels
+
+4. Add a new entry for your website in `docs/src/content/docs/resources/themes.mdx`.
+   You can look at existing entries to see how to format this.
+
+   - The new entry must be appended at the end of the existing list of sites.
+   - The `title` attribute must be the name of your theme.
+   - The `description` attribute should briefly describe your theme’s aesthetic, inspiration, or key features.
+   - The `href` attribute must be the URL of your theme’s website demonstrating what the theme looks like.
+   - The `previews` attribute must be an object listing the filenames of the screenshots you added in step 3.

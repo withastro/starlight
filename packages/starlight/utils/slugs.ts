@@ -1,13 +1,8 @@
 import config from 'virtual:starlight/user-config';
-
-export interface LocaleData {
-	/** Writing direction. */
-	dir: 'ltr' | 'rtl';
-	/** BCP-47 language tag. */
-	lang: string;
-	/** The base path at which a language is served. `undefined` for root locale slugs. */
-	locale: string | undefined;
-}
+import { slugToLocale as getLocaleFromSlug } from '../integrations/shared/slugToLocale';
+import { BuiltInDefaultLocale } from './i18n';
+import { stripTrailingSlash } from './path';
+import type { LocaleData } from './routing/types';
 
 /**
  * Get the “locale” of a slug. This is the base path at which a language is served.
@@ -16,10 +11,7 @@ export interface LocaleData {
  * @param slug A collection entry slug
  */
 function slugToLocale(slug: string): string | undefined {
-	const locales = Object.keys(config.locales || {});
-	const baseSegment = slug.split('/')[0];
-	if (baseSegment && locales.includes(baseSegment)) return baseSegment;
-	return undefined;
+	return getLocaleFromSlug(slug, config);
 }
 
 /** Get locale information for a given slug. */
@@ -35,7 +27,7 @@ export function slugToLocaleData(slug: string): LocaleData {
 export function localeToLang(locale: string | undefined): string {
 	const lang = locale ? config.locales?.[locale]?.lang : config.locales?.root?.lang;
 	const defaultLang = config.defaultLocale?.lang || config.defaultLocale?.locale;
-	return lang || defaultLang || 'en';
+	return lang || defaultLang || BuiltInDefaultLocale.lang;
 }
 
 /**
@@ -51,8 +43,8 @@ export function slugToParam(slug: string): string | undefined {
 	return slug === 'index' || slug === ''
 		? undefined
 		: slug.endsWith('/index')
-		? slug.replace(/\/index$/, '')
-		: slug;
+			? slug.slice(0, -6)
+			: slug;
 }
 
 export function slugToPathname(slug: string): string {
@@ -76,13 +68,14 @@ export function localizedSlug(slug: string, locale: string | undefined): string 
 	locale = locale || '';
 	if (slugLocale === slug) return locale;
 	if (slugLocale) {
-		return slug.replace(slugLocale + '/', locale ? locale + '/' : '').replace(/\/$/, '');
+		return stripTrailingSlash(slug.replace(slugLocale + '/', locale ? locale + '/' : ''));
 	}
 	return slug ? locale + '/' + slug : locale;
 }
 
 /**
- * Convert a collection entry ID to a different locale.
+ * Convert a legacy collection entry ID or filePath relative to the collection root to a different
+ * locale.
  * For example, passing an ID of `en/home.md` and a locale of `fr` results in `fr/home.md`.
  * An undefined locale is treated as the root locale, resulting in `home.md`.
  * @param id A collection entry ID
@@ -105,7 +98,7 @@ export function localizedId(id: string, locale: string | undefined): string {
 /** Extract the slug from a URL. */
 export function urlToSlug(url: URL): string {
 	let pathname = url.pathname;
-	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const base = stripTrailingSlash(import.meta.env.BASE_URL);
 	if (pathname.startsWith(base)) pathname = pathname.replace(base, '');
 	const segments = pathname.split('/');
 	const htmlExt = '.html';

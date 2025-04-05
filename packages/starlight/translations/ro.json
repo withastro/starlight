@@ -1,7 +1,7 @@
 {
   "skipLink.label": "Sari la conținut",
   "search.label": "Caută",
-  "search.shortcutLabel": "(Apasă pe / ca să cauți)",
+  "search.ctrlKey": "Ctrl",
   "search.cancelLabel": "Anulează",
   "search.devWarning": "Căutarea este disponibilă numai în versiunea de producție. \nÎncercă să construiești și să previzualizezi site-ul pentru a-l testa local.",
   "themeSelect.accessibleLabel": "Selectează tema",
@@ -18,10 +18,12 @@
   "page.lastUpdated": "Ultima actualizare:",
   "page.previousLink": "Pagina precendentă",
   "page.nextLink": "Pagina următoare",
+  "page.draft": "This content is a draft and will not be included in production builds.",
   "404.text": "Pagina nu a fost găsită. Verifică adresa URL sau încercă să folosești bara de căutare.",
   "aside.note": "Mențiune",
   "aside.tip": "Sfat",
   "aside.caution": "Atenție",
   "aside.danger": "Pericol",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "builtWithStarlight.label": "Built with Starlight"
 }

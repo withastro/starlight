@@ -89,20 +89,21 @@ Scegliere un host che usi energia da fonti rinnovabili significa ridurre le emis
 Curioso di come altri framework per documentazioni si comparano?
 Questi test eseguiti con [Website Carbon Calculator][wcc] confrontano pagine simili costruite con diversi framework.
 
-| Framework                   | CO₂ per visita |
-| --------------------------- | -------------- |
-| [Starlight][sl-carbon]      | 0,01 g         |
-| [VitePress][vp-carbon]      | 0,05 g         |
-| [Docus][dc-carbon]          | 0,05 g         |
-| [Sphinx][sx-carbon]         | 0,07 g         |
-| [MkDocs][mk-carbon]         | 0,10 g         |
-| [Nextra][nx-carbon]         | 0,11 g         |
-| [docsify][dy-carbon]        | 0,11 g         |
-| [Docusaurus][ds-carbon]     | 0,24 g         |
-| [Read the Docs][rtd-carbon] | 0,24 g         |
-| [GitBook][gb-carbon]        | 0,71 g         |
+| Framework                   | CO₂ per visita | Voto |
+| --------------------------- | -------------- | :--: |
+| [Starlight][sl-carbon]      | 0.01g          |  A+  |
+| [Read the Docs][rtd-carbon] | 0.05g          |  A+  |
+| [Sphinx][sx-carbon]         | 0.06g          |  A+  |
+| [VitePress][vp-carbon]      | 0.07g          |  A+  |
+| [Docus][dc-carbon]          | 0.09g          |  A+  |
+| [docsify][dy-carbon]        | 0.10g          |  A   |
+| [Nextra][nx-carbon]         | 0.11g          |  A   |
+| [MkDocs][mk-carbon]         | 0.19g          |  B   |
+| [Docusaurus][ds-carbon]     | 0.21g          |  B   |
+| [GitBook][gb-carbon]        | 0.43g          |  C   |
+| [Mintlify][mt-carbon]       | 1.22g          |  F   |
 
-<small>Dati collezionati il 14 Maggio 2023. Clicca i link per vedere i dati aggiornati.</small>
+<small>Dati collezionati il 22 Luglio 2024. Clicca i link per vedere i dati aggiornati.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
@@ -114,6 +115,7 @@ Questi test eseguiti con [Website Carbon Calculator][wcc] confrontano pagine sim
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Altre risorse
 

@@ -24,9 +24,21 @@ Puedes pasar las siguientes opciones a la integración `starlight`.
 
 ### `title` (requerido)
 
-**tipo:** `string`
+**tipo:** `string | Record<string, string>`
 
 Establece el título de tu sitio web. Se utilizará en los metadatos y en el título de la pestaña del navegador.
+
+El valor puede ser un string o para sitios multilingües, un objeto con valores para cada idioma diferente.
+Cuando se usa la forma de objeto, las claves deben ser etiquetas BCP-47 (por ejemplo, `en`, `ar` o `zh-CN`):
+
+```ts
+starlight({
+	title: {
+		es: 'Mi encantador sitio de documentación',
+		de: 'Meine bezaubernde Dokumentationsseite',
+	},
+});
+```
 
 ### `description`
 
@@ -87,25 +99,33 @@ Con esta configuración, una página `/introduction` tendría un enlace de edici
 Configura los elementos de navegación de la barra lateral de tu sitio.
 
 Una barra lateral es un conjunto de enlaces y grupos de enlaces.
-Cada elemento debe tener una propiedad `label` y una de las siguientes propiedades:
+Con la excepción de los elementos que usan `slug`, cada elemento debe tener una `label` y una de las siguientes propiedades:
 
 - `link` — Un solo enlace a una URL específica, p. ej. `'/home'` o `'https://example.com'`.
+
+- `slug` — una referencia a una página interna, p. ej. `'guides/getting-started'`.
 
 - `items` — Un array que contiene más enlaces de la barra lateral y subgrupos.
 
 - `autogenerate` — Un objeto que especifica un directorio de tus documentos para generar automáticamente un grupo de enlaces.
+
+Los enlaces internos también se pueden especificar como una cadena en lugar de un objeto con una propiedad `slug`.
 
 ```js
 starlight({
 	sidebar: [
 		// Un solo elemento de enlace etiquetado como “Home”.
 		{ label: 'Home', link: '/' },
-		// Un grupo etiquetado como "Start Here" que contiene dos enlaces.
+		// Un grupo etiquetado como "Start Here" que contiene cuatro enlaces.
 		{
 			label: 'Start Here',
 			items: [
-				{ label: 'Introduction', link: '/intro' },
-				{ label: 'Next Steps', link: '/next-steps' },
+				// Usando `slug` para enlaces internos.
+				{ slug: 'intro' },
+				{ slug: 'installation' },
+				// O usando la forma abreviada para enlaces internos.
+				'tutorial',
+				'next-steps',
 			],
 		},
 		// Un grupo que enlaza a todas las páginas del directorio de referencia.
@@ -130,16 +150,13 @@ Los grupos de enlaces se expanden de forma predeterminada. Puedes cambiar este c
 
 Los subgrupos generados automáticamente respetan por defecto la propiedad `collapsed` de su grupo padre. Puedes establecer la propiedad `autogenerate.collapsed` para anular esto.
 
-```js {5,16}
+```js {5,13}
 sidebar: [
   // Un grupo colapsado de enlaces.
   {
     label: 'Collapsed Links',
     collapsed: true,
-    items: [
-      { label: 'Introduction', link: '/intro' },
-      { label: 'Next Steps', link: '/next-steps' },
-    ],
+    items: ['intro', 'next-steps'],
   },
   // Un grupo expandido que contiene subgrupos generados automáticamente colapsados.
   {
@@ -181,21 +198,37 @@ sidebar: [
 #### `SidebarItem`
 
 ```ts
-type SidebarItem = {
-	label: string;
-	translations?: Record<string, string>;
-	badge?: string | BadgeConfig;
-} & (
-	| {
-			link: string;
-			attrs?: Record<string, string | number | boolean | undefined>;
-	  }
-	| { items: SidebarItem[]; collapsed?: boolean }
-	| {
-			autogenerate: { directory: string; collapsed?: boolean };
-			collapsed?: boolean;
-	  }
-);
+type SidebarItem =
+	| string
+	| ({
+			translations?: Record<string, string>;
+			badge?: string | BadgeConfig;
+	  } & (
+			| {
+					// Enlace
+					link: string;
+					label: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Enlace interno
+					slug: string;
+					label?: string;
+					attrs?: Record<string, string | number | boolean | undefined>;
+			  }
+			| {
+					// Grupo de enlaces
+					label: string;
+					items: SidebarItem[];
+					collapsed?: boolean;
+			  }
+			| {
+					// Grupo de enlaces autogenerado
+					label: string;
+					autogenerate: { directory: string; collapsed?: boolean };
+					collapsed?: boolean;
+			  }
+	  ));
 ```
 
 #### `BadgeConfig`
@@ -203,7 +236,8 @@ type SidebarItem = {
 ```ts
 interface BadgeConfig {
 	text: string;
-	variant: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+	class?: string;
 }
 ```
 
@@ -421,6 +455,18 @@ Define si el proveedor de búsqueda predeterminado de Starlight [Pagefind](https
 Establece esta opción a `false` para excluir una página de los resultados de búsqueda.
 Esto también ocultará la interfaz de usuario de búsqueda predeterminada si está en uso.
 
+Pagefind no puede estar habilitado cuando la opción [`prerender`](#prerender) está establecida en `false`.
+
+### `prerender`
+
+**tipo:** `boolean`  
+**por defecto:** `true`
+
+Define si las páginas de Starlight deben ser pre-renderizadas a HTML estático o renderizadas bajo demanda por un [adaptador SSR](https://docs.astro.build/es/guides/server-side-rendering/).
+
+Las páginas de Starlight se pre-renderizan de forma predeterminada.
+Si estás usando un adaptador SSR y deseas renderizar las páginas de Starlight bajo demanda, establece `prerender: false`.
+
 ### `head`
 
 **tipo:** [`HeadConfig[]`](#headconfig)
@@ -443,6 +489,9 @@ starlight({
 	],
 });
 ```
+
+Las entradas en el `head` son convertidas directamente a elementos HTML y no pasan por el [procesamiento de script](https://docs.astro.build/es/guides/client-side-scripts/#procesamiento-de-scripts) o [estilo](https://docs.astro.build/es/guides/styling/#estilando-en-astro) de Astro.
+Si necesitas importar activos locales como scripts, estilos o imágenes, [anula el componente Head](/es/guides/overriding-components/#reusa-un-componente-integrado).
 
 #### `HeadConfig`
 
@@ -489,18 +538,18 @@ Si necesitas establecer variantes adicionales o favicons de respaldo, puedes agr
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // Agregar un favicon ICO de respaldo para Safari.
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// Agregar un favicon ICO de respaldo para Safari.
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
@@ -553,3 +602,13 @@ starlight({
 ```
 
 Consulta la [Referencia de Plugins](/es/reference/plugins/) para obtener detalles sobre cómo crear tus propios plugins.
+
+### `credits`
+
+Habilita la visualización de un enlace “Hecho con Starlight” en el pie de página de tu sitio.
+
+```js
+starlight({
+	credits: true,
+});
+```

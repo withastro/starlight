@@ -1,0 +1,11 @@
+---
+import Page from '../components/Page.astro';
+import { useRouteData } from '../utils/routing/data';
+import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
+
+await attachRouteDataAndRunMiddleware(Astro, await useRouteData(Astro));
+
+const { Content, entry } = Astro.locals.starlightRoute;
+---
+
+<Page>{Content && <Content frontmatter={entry.data} />}</Page>

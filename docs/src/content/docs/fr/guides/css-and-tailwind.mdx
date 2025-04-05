@@ -7,6 +7,8 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Vous pouvez mettre en forme votre site Starlight avec du CSS personnalisé ou utiliser le module d'extension Tailwind de Starlight.
 
+Pour changer rapidement l'apparence par défaut de votre site, consultez les [thèmes communautaires](/fr/resources/themes/).
+
 ## Styles CSS personnalisés
 
 Personnalisez les styles appliqués à votre site Starlight en fournissant des fichiers CSS supplémentaires pour modifier ou étendre les styles par défaut de Starlight.
@@ -63,7 +65,7 @@ Le module d'extension Tailwind de Starlight applique la configuration suivante :
 
 Démarrez un nouveau projet Starlight avec Tailwind CSS préconfiguré en utilisant `create astro` :
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -95,7 +97,7 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
 
 1.  Ajoutez l'intégration Astro pour Tailwind :
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -125,7 +127,7 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
 
 2.  Installez le module d'extension Tailwind de Starlight :
 
-    <Tabs>
+    <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 
@@ -252,8 +254,10 @@ Ces variables sont utilisées dans toute l'interface utilisateur avec une gamme 
 
 ### Éditeur de thème de couleur
 
-Utiliser les contrôles ci-dessous pour modifier les palettes de couleurs d'accentuation et de gris de Starlight.
+Utilisez les contrôles ci-dessous pour modifier les palettes de couleurs d'accentuation et de gris de Starlight.
 Les zones d'aperçu sombre et clair afficheront les couleurs résultantes, et la page entière sera également mise à jour pour prévisualiser vos modifications.
+
+Utilisez l'option Niveau de contraste pour spécifier lequel des [standards de contraste de couleur](https://developer.mozilla.org/fr/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) des règles pour l’accessibilité des contenus Web à respecter.
 
 Quand vous êtes satisfait de vos modifications, copiez le code CSS ou Tailwind ci-dessous et utilisez-le dans votre projet.
 
@@ -269,6 +273,9 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			nebula: 'Nébuleuse',
 			default: 'Par défaut',
 			random: 'Aléatoire',
+		},
+		contrast: {
+			label: 'Niveau de contraste',
 		},
 		editor: {
 			accentColor: 'Accentuation',

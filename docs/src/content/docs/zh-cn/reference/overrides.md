@@ -10,139 +10,6 @@ tableOfContents:
 
 在[重写组件指南](/zh-cn/guides/overriding-components/)中了解更多。
 
-## 组件参数
-
-所有组件都可以使用标准的 `Astro.props` 对象，该对象包含有关当前页面的信息。
-
-从 Starlight 导入 `Props` 类型来为你的自定义组件定义类型：
-
-```astro
----
-// src/components/Custom.astro
-import type { Props } from '@astrojs/starlight/props';
-
-const { hasSidebar } = Astro.props;
-//      ^ type: boolean
----
-```
-
-这样当使用 `Astro.props` 时就会有自动补全和类型提示。
-
-### 参数
-
-Starlight 会将以下参数传递给你的自定义组件。
-
-#### `dir`
-
-**类型：** `'ltr' | 'rtl'`
-
-当前页面的文本方向。
-
-#### `lang`
-
-**类型：** `string`
-
-当前页面的 BCP-47 语言标签，例如 `en`、`zh-CN` 或 `pt-BR`。
-
-#### `locale`
-
-**类型：** `string | undefined`
-
-当前语言的根路径。对于默认语言来说是 `undefined`。
-
-#### `slug`
-
-**类型：** `string`
-
-从内容文件名生成的页面 slug。
-
-#### `id`
-
-**类型：** `string`
-
-基于内容文件名的页面的唯一 ID。
-
-#### `isFallback`
-
-**类型：** `true | undefined`
-
-如果此页面在当前语言中未翻译，回退到使用默认语言的内容，则为 `true`。
-仅在多语言站点中使用。
-
-#### `entryMeta`
-
-**类型：** `{ dir: 'ltr' | 'rtl'; lang: string }`
-
-页面内容的语言环境元数据 (locale metadata)。当页面使用回退内容时可以与顶级语言环境设置值不同。
-
-#### `entry`
-
-当前页面所对应的 Astro 内容集合条目。
-在 `entry.data` 中包含当前页面的 frontmatter 内容。
-
-```ts
-entry: {
-  data: {
-    title: string;
-    description: string | undefined;
-    // 等
-  }
-}
-```
-
-在 [Astro 的集合条目类型](https://docs.astro.build/zh-cn/reference/api-reference/#集合条目类型)参考中了解更多关于此对象的信息。
-
-#### `sidebar`
-
-**类型：** `SidebarEntry[]`
-
-当前页面的侧边栏条目。
-
-#### `hasSidebar`
-
-**类型：** `boolean`
-
-当前页面是否应该显示侧边栏。
-
-#### `pagination`
-
-**类型：** `{ prev?: Link; next?: Link }`
-
-如果启用了，当前页面在侧边栏中的上一页和下一页的链接。
-
-#### `toc`
-
-**类型：** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
-
-如果启用了，当前页面的目录 (table of contents)。
-
-#### `headings`
-
-**类型：** `{ depth: number; slug: string; text: string }[]`
-
-从当前页面提取的所有 Markdown 标题的数组。
-如果你想要构建一个遵循 Starlight 配置选项的目录组件，请使用 [`toc`](#toc)。
-
-#### `lastUpdated`
-
-**类型：** `Date | undefined`
-
-如果启用了，表示此页面最后更新时间的 JavaScript `Date` 对象。
-
-#### `editUrl`
-
-**类型：** `URL | undefined`
-
-如果启用了，表示可以编辑此页面的地址的 JavaScript `URL` 对象。
-
-#### `labels`
-
-**类型：** `Record<string, string>`
-
-一个包含为当前页面本地化的 UI 字符串的对象。请参阅 [“翻译 Starlight UI”](/zh-cn/guides/i18n/#翻译-starlight-的-ui) 指南以获取所有可用键的列表。
-
----
-
 ## 组件
 
 ### 头部
@@ -188,7 +55,8 @@ entry: {
 
 #### `PageFrame`
 
-**默认组件：** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**默认组件：** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**命名插槽：** `header`, `sidebar`
 
 包在绝大部分页面内容外的布局组件。
 默认实现提供了头部—侧边栏—主内容的布局，并包含 `header` 和 `sidebar` 命名插槽以及主内容的默认插槽。
@@ -202,7 +70,8 @@ entry: {
 
 #### `TwoColumnContent`
 
-**默认组件：** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**默认组件：** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**命名插槽：** `right-sidebar`
 
 包在主内容列和右侧栏 (目录) 外的布局组件。
 默认实现实现了在单列、小视口布局和两列、较大视口布局之间的切换。
@@ -316,7 +185,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 **默认组件：** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 横幅 (Banner) 组件在每个页面的顶部渲染。
-默认实现使用页面的 [`banner`](/zh-cn/reference/frontmatter#banner) frontmatter 值来决定是否渲染。
+默认实现使用页面的 [`banner`](/zh-cn/reference/frontmatter/#banner) frontmatter 值来决定是否渲染。
 
 #### `ContentPanel`
 
@@ -332,6 +201,12 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 
 自定义实现应确保在 `<h1>` 元素上设置 `id="_top"`，就像默认实现中一样。
 
+#### `DraftContentNotice`
+
+**默认组件：** [`DraftContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro)
+
+在开发过程中，当当前页面被标记为草稿时，向用户显示的通知。
+
 #### `FallbackContentNotice`
 
 **默认组件：** [`FallbackContentNotice.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro)
@@ -343,7 +218,7 @@ Starlight 的页面侧边栏负责显示当前页面的子标题的目录。
 
 **默认组件：** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-当设置了 frontmatter 中的 [`hero`](/zh-cn/reference/frontmatter#hero) 时在页面顶部渲染的组件。
+当设置了 frontmatter 中的 [`hero`](/zh-cn/reference/frontmatter/#hero) 时在页面顶部渲染的组件。
 默认实现显示了一个大标题、标语、动作链接 (call-to-action links) 和可选的图片。
 
 #### `MarkdownContent`

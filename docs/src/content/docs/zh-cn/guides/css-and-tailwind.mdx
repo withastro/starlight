@@ -7,6 +7,8 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 你可以使用自定义 CSS 设置你的 Starlight 网站的样式或者使用 Starlight Tailwind 插件。
 
+有一种快速的方法可以更改你的网站的默认样式，请查看 [社区主题](/zh-cn/resources/themes/)。
+
 ## 自定义 CSS 样式
 
 通过提供额外的 CSS 文件来修改或扩展 Starlight 的默认样式，从而自定义应用于 Starlight 网站的样式。
@@ -63,7 +65,7 @@ Starlight Tailwind 插件应用了以下配置：
 
 使用 `create astro` 创建一个预配置了 Tailwind CSS 的新 Starlight 项目：
 
-<Tabs>
+<Tabs syncKey="pkg">
 <TabItem label="npm">
 
 ```sh
@@ -95,7 +97,7 @@ yarn create astro --template starlight/tailwind
 
 1. 将 Astro 的 Tailwind 集成添加到项目中：
 
-   <Tabs>
+   <Tabs syncKey="pkg">
 
    <TabItem label="npm">
 
@@ -125,7 +127,7 @@ yarn create astro --template starlight/tailwind
 
 2. 安装 Starlight Tailwind 插件：
 
-   <Tabs>
+   <Tabs syncKey="pkg">
 
    <TabItem label="npm">
 
@@ -250,6 +252,8 @@ Starlight 的颜色主题可以通过覆盖其默认的自定义属性来控制�
 
 使用下面的滑块来修改 Starlight 的强调色和灰色调色板。暗色和亮色的预览区域将显示结果颜色，整个页面也会更新以预览你的更改。
 
+使用“对比度级别”选项来指定要满足的 Web 内容无障碍功能指南的[颜色对比度标准](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast)。
+
 当你对你的更改满意时，复制下面的 CSS 或 Tailwind 代码并在你的项目中使用。
 
 import ThemeDesigner from '~/components/theme-designer.astro';
@@ -265,11 +269,14 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 			default: '默认',
 			random: '随机',
 		},
+		contrast: {
+			label: '对比度级别',
+		},
 		editor: {
-			accentColor: 'Accent',
-			grayColor: 'Gray',
-			hue: '颜色',
-			chroma: '色度',
+			accentColor: '强调色',
+			grayColor: '灰色',
+			hue: '色调',
+			chroma: '饱和度',
 			pickColor: '选择颜色',
 		},
 		preview: {

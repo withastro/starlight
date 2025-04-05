@@ -1,0 +1,47 @@
+---
+title: Tabs
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A set of tabs using the `pkg` sync key with some nested tabs using an `os` sync key.
+
+<Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    	npm content
+
+    	<Tabs syncKey="os">
+    		<TabItem label="macos">npm macOS</TabItem>
+    		<TabItem label="windows">npm Windows</TabItem>
+    		<TabItem label="linux">npm GNU/Linux</TabItem>
+    	</Tabs>
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    		pnpm content
+
+    		<Tabs syncKey="os">
+    				<TabItem label="macos">pnpm macOS</TabItem>
+    				<TabItem label="windows">pnpm Windows</TabItem>
+    				<TabItem label="linux">pnpm GNU/Linux</TabItem>
+    			</Tabs>
+
+    	</TabItem>
+
+    <TabItem label="yarn">
+
+    		yarn content
+
+    		<Tabs syncKey="os">
+    				<TabItem label="macos">yarn macOS</TabItem>
+    				<TabItem label="windows">yarn Windows</TabItem>
+    				<TabItem label="linux">yarn GNU/Linux</TabItem>
+    			</Tabs>
+
+    	</TabItem>
+
+</Tabs>

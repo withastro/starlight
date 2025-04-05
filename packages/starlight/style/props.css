@@ -58,6 +58,7 @@
 		0px 4px 2px hsla(0, 0%, 0%, 0.25);
 
 	/* Text size and line height */
+	--sl-text-2xs: 0.75rem; /* 12px */
 	--sl-text-xs: 0.8125rem; /* 13px */
 	--sl-text-sm: 0.875rem; /* 14px */
 	--sl-text-base: 1rem; /* 16px */
@@ -79,7 +80,7 @@
 	--sl-text-h4: var(--sl-text-xl);
 	--sl-text-h5: var(--sl-text-lg);
 
-	--sl-line-height: 1.8;
+	--sl-line-height: 1.75;
 	--sl-line-height-headings: 1.2;
 
 	--sl-font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,

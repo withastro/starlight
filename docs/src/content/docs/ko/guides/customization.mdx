@@ -104,11 +104,13 @@ export default defineConfig({
 });
 ```
 
+Astro 문서에서 [`robots.txt`에 사이트맵 링크를 추가](https://docs.astro.build/ko/guides/integrations-guide/sitemap/#robotstxt-내-사이트맵-링크)하는 방법을 알아보세요.
+
 ## 페이지 레이아웃
 
 기본적으로 Starlight 페이지는 전역 탐색 사이드바와 현재 페이지 제목의 목차가 포함된 레이아웃을 사용합니다.
 
-프론트매터에 [`template: splash`](/ko/reference/frontmatter/#template)를 설정하여 사이드바 없이 더 넓은 페이지 레이아웃을 적용할 수 있습니다. 주로 랜딩 페이지에서 사용되며, [이 사이트의 홈페이지](/ko)에서 실제로 작동하는 것을 확인할 수 있습니다.
+프론트매터에 [`template: splash`](/ko/reference/frontmatter/#template)를 설정하여 사이드바 없이 더 넓은 페이지 레이아웃을 적용할 수 있습니다. 주로 랜딩 페이지에서 사용되며, [이 사이트의 홈페이지](/ko/)에서 실제로 작동하는 것을 확인할 수 있습니다.
 
 ```md {5}
 ---
@@ -125,7 +127,7 @@ Starlight는 독자가 원하는 제목으로 쉽게 이동할 수 있도록 각
 
 기본적으로 `<h2>` 및 `<h3>` 제목이 목차에 포함됩니다. [`tableOfContents`](/ko/reference/configuration/#tableofcontents) 의 `minHeadingLevel` 및 `maxHeadingLevel` 옵션을 사용하여 모든 페이지의 목차를 변경할 수 있습니다. 개별 페이지의 기본 목차를 변경하기 위해서는 [프론트매터에 `tableOfContents`](/ko/reference/frontmatter/#tableofcontents) 속성을 추가하세요.
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="개별 페이지 설정">
 
 ```md {4-6}
@@ -159,7 +161,7 @@ defineConfig({
 
 `tableOfContents` 옵션의 값을 `false`로 설정하여 모든 페이지의 목차를 비활성화 할 수 있습니다.
 
-<Tabs>
+<Tabs syncKey="config-type">
   <TabItem label="개별 페이지 설정">
 
 ```md {4}
@@ -368,7 +370,7 @@ Starlight 사이트에 사용자 정의 글꼴을 추가해야 하는 경우, �
 
 2.  선택한 글꼴에 대한 패키지를 설치합니다. Fontsource 글꼴 페이지에서 “Install”을 클릭하면 패키지 이름을 찾을 수 있습니다.
 
-         <Tabs>
+         <Tabs syncKey="pkg">
 
     <TabItem label="npm">
 

@@ -1,11 +1,9 @@
 ---
 title: Pencarian Situs
 description: Pelajari tentang fitur pencarian situs bawaan Starlight dan cara mengkustomisasinya.
-sidebar:
-  badge: Baru
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Secara default, situs Starlight termasuk pencarian teks lengkap yang didukung oleh [Pagefind](https://pagefind.app/), yang merupakan alat pencarian cepat dan bandwidth rendah untuk situs statis.
 
@@ -50,9 +48,11 @@ Teks ini akan disembunyikan dari pencarian.
 
 Jika Anda memiliki akses ke [Algolia’s DocSearch program](https://docsearch.algolia.com/) dan ingin menggunakannya sebagai gantinya Pagefind, Anda dapat menggunakan plugin DocSearch Starlight resmi.
 
+<Steps>
+
 1. Install `@astrojs/starlight-docsearch`:
 
-   <Tabs>
+   <Tabs syncKey="pkg">
 
    <TabItem label="npm">
 
@@ -104,12 +104,16 @@ Jika Anda memiliki akses ke [Algolia’s DocSearch program](https://docsearch.al
    });
    ```
 
+</Steps>
+
 Dengan konfigurasi yang diperbarui ini, bilah pencarian di situs Anda sekarang akan membuka modal Algolia sebagai gantinya modal pencarian bawaan.
 
 #### Menerjemahkan UI DocSearch
 
 Secara default, DocSearch hanya menyediakan string UI dalam Bahasa Inggris.
 Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalization system](/id/guides/i18n/#terjemahkan-ui-starlight) bawaan Starlight.
+
+<Steps>
 
 1. Perluas definisi koleksi konten `i18n` Starlight dengan skema DocSearch di `src/content/config.ts`:
 
@@ -138,6 +142,7 @@ Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalizatio
    	"docsearch.searchBox.resetButtonAriaLabel": "Clear the query",
    	"docsearch.searchBox.cancelButtonText": "Cancel",
    	"docsearch.searchBox.cancelButtonAriaLabel": "Cancel",
+   	"docsearch.searchBox.searchInputLabel": "Search",
 
    	"docsearch.startScreen.recentSearchesTitle": "Recent",
    	"docsearch.startScreen.noRecentSearchesText": "No recent searches",
@@ -164,3 +169,5 @@ Tambahkan terjemahan UI modal untuk bahasa Anda menggunakan [internationalizatio
    	"docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
    }
    ```
+
+</Steps>

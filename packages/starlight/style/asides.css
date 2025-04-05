@@ -1,26 +1,26 @@
 .starlight-aside {
 	padding: 1rem;
-	border-inline-start: 0.25rem solid;
+	border-inline-start: 0.25rem solid var(--sl-color-asides-border);
 	color: var(--sl-color-white);
 }
 .starlight-aside--note {
 	--sl-color-asides-text-accent: var(--sl-color-blue-high);
-	border-color: var(--sl-color-blue);
+	--sl-color-asides-border: var(--sl-color-blue);
 	background-color: var(--sl-color-blue-low);
 }
 .starlight-aside--tip {
 	--sl-color-asides-text-accent: var(--sl-color-purple-high);
-	border-color: var(--sl-color-purple);
+	--sl-color-asides-border: var(--sl-color-purple);
 	background-color: var(--sl-color-purple-low);
 }
 .starlight-aside--caution {
 	--sl-color-asides-text-accent: var(--sl-color-orange-high);
-	border-color: var(--sl-color-orange);
+	--sl-color-asides-border: var(--sl-color-orange);
 	background-color: var(--sl-color-orange-low);
 }
 .starlight-aside--danger {
 	--sl-color-asides-text-accent: var(--sl-color-red-high);
-	border-color: var(--sl-color-red);
+	--sl-color-asides-border: var(--sl-color-red);
 	background-color: var(--sl-color-red-low);
 }
 
