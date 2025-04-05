@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.32.6
+
+### Patch Changes
+
+- [#3030](https://github.com/withastro/starlight/pull/3030) [`5bdf139`](https://github.com/withastro/starlight/commit/5bdf139191a20f19458b027617877c1063b46724) Thanks [@trueberryless](https://github.com/trueberryless)! - Updates the type of the `isFallback` field in route data from `true` to `boolean`, keeping it optional but allowing `false` as a possible value.
+
+- [#3018](https://github.com/withastro/starlight/pull/3018) [`188b8cf`](https://github.com/withastro/starlight/commit/188b8cfa8ad8761365b8b557c4b9fea671050ed6) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds validation for user config `routeMiddleware` so it does not conflict with [Astro's middleware](https://docs.astro.build/en/guides/middleware/).
+
 ## 0.32.5
 
 ### Patch Changes
