@@ -1,11 +1,11 @@
 ---
 title: Komponenten ersetzen
-description: In Starlight kannst du eingebauten Komponenten ersetzen, um eigene Elemente in die Benutzeroberfläche deiner Dokumentationsseite einzufügen.
+description: In Starlight kannst du eingebauten Komponenten ersetzen, um eigene Elemente in die Benutzeroberfläche deiner Dokumentationswebsite einzufügen.
 ---
 
 import { Steps } from '@astrojs/starlight/components';
 
-Starlights Standard-UI und Konfigurationsoptionen sind so gestaltet, dass sie flexibel sind und für eine Reihe von Inhalten funktionieren. Ein Großteil des Standardaussehens von Starlight kann mit [CSS](/de/guides/css-and-tailwind/) und [Konfigurationsoptionen](/de/guides/customization/) angepasst werden.
+Starlights Standard-UI und Konfigurations&shy;optionen sind so gestaltet, dass sie flexibel sind und für eine Reihe von Inhalten funktionieren. Ein Großteil des Standardaussehens von Starlight kann mit [CSS](/de/guides/css-and-tailwind/) und [Konfigurations&shy;optionen](/de/guides/customization/) angepasst werden.
 
 Wenn du mehr brauchst als das, was von Haus aus möglich ist, unterstützt Starlight die Erstellung eigener Komponenten, um die Standardkomponenten zu erweitern oder zu ersetzen.
 
@@ -28,7 +28,7 @@ Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wen
    Du bist dir nicht sicher, welche Komponente du überschreiben musst? Benutze die [interaktive Starlight Overrides Map](https://starlight-overrides-map.netlify.app/), um die Namen von Starlights UI-Komponenten zu erfahren.
    :::
 
-   In diesem Beispiel wird die Starlight-Komponente [`SocialIcons`](/de/reference/overrides/#socialicons) in der Navigationsleiste der Seite außer Kraft gesetzt.
+   In diesem Beispiel wird die Starlight-Komponente [`SocialIcons`](/de/reference/overrides/#socialicons) in der Navigationsleiste der Website außer Kraft gesetzt.
 
 2. Erstelle eine Astro-Komponente, mit der du die Starlight-Komponente ersetzt.
    Dieses Beispiel rendert einen Kontakt-Link.
@@ -43,7 +43,7 @@ Die Standardkomponenten von Starlight zu überschreiben kann nützlich sein, wen
    <a href=`mailto:${email}`>Schreib mir</a>
    ```
 
-3. Sage Starlight, dass deine benutzerdefinierte Komponente in der Konfigurationsoption [`components`](/de/reference/configuration/#components) in `astro.config.mjs` verwendet werden soll:
+3. Sage Starlight, dass deine benutzerdefinierte Komponente in der Konfigurations&shy;option [`components`](/de/reference/configuration/#components) in `astro.config.mjs` verwendet werden soll:
 
    ```js {9-12}
    // astro.config.mjs
@@ -126,7 +126,7 @@ Weitere Informationen zu allen verfügbaren Eigenschaften findest du in der [Rou
 
 ### Nur auf bestimmten Seiten überschreiben
 
-Komponentenüberschreibungen gelten für alle Seiten. Du kannst jedoch bedingt mit Werten aus `starlightRoute` rendern, um zu bestimmen, wann deine benutzerdefinierte Benutzeroberfläche, wann die Standardbenutzeroberfläche von Starlight oder sogar etwas völlig anderes angezeigt werden soll.
+Komponenten&shy;überschreibungen gelten für alle Seiten. Du kannst jedoch bedingt mit Werten aus `starlightRoute` rendern, um zu bestimmen, wann deine benutzerdefinierte Benutzeroberfläche, wann die Standard&shy;benutzeroberfläche von Starlight oder sogar etwas völlig anderes angezeigt werden soll.
 
 Im folgenden Beispiel zeigt eine Komponente, die Starlights [`Footer`](/de/reference/overrides/#fußzeile) überschreibt, nur auf der Startseite „Verwendet Starlight 🌟“ an und zeigt ansonsten auf allen anderen Seiten die Standardfußzeile an:
 

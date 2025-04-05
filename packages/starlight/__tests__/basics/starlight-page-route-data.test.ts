@@ -64,11 +64,13 @@ test('adds custom data to route shape', async () => {
 		hasSidebar: false,
 		dir: 'rtl',
 		lang: 'ks',
+		isFallback: true,
 	};
 	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
+	expect(data.isFallback).toBe(props.isFallback);
 });
 
 test('adds custom frontmatter data to route shape', async () => {
@@ -238,7 +240,7 @@ test('uses provided sidebar if any', async () => {
 		  {
 		    "attrs": {},
 		    "badge": undefined,
-		    "href": "/reference/frontmatter",
+		    "href": "/reference/frontmatter/",
 		    "isCurrent": false,
 		    "label": "Frontmatter Reference",
 		    "type": "link",
