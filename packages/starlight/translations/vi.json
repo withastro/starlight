@@ -25,5 +25,6 @@
   "aside.caution": "Thận trọng",
   "aside.danger": "Nguy hiểm",
   "fileTree.directory": "Danh mục",
-  "builtWithStarlight.label": "Tạo với Starlight"
+  "builtWithStarlight.label": "Tạo với Starlight",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

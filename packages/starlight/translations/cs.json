@@ -38,5 +38,6 @@
   "pagefind.one_result": "[COUNT] výsledek pro: [SEARCH_TERM]",
   "pagefind.alt_search": "Žádné výsledky pro [SEARCH_TERM]. Namísto toho zobrazuji výsledky pro: [DIFFERENT_TERM]",
   "pagefind.search_suggestion": "Žádný výsledek pro [SEARCH_TERM]. Zkus nějaké z těchto hledání:",
-  "pagefind.searching": "Hledám [SEARCH_TERM]..."
+  "pagefind.searching": "Hledám [SEARCH_TERM]...",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

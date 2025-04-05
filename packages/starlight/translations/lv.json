@@ -25,5 +25,6 @@
   "aside.caution": "Uzmanību",
   "aside.danger": "Bīstamība",
   "fileTree.directory": "Direktorija",
-  "builtWithStarlight.label": "Veidots ar Starlight"
+  "builtWithStarlight.label": "Veidots ar Starlight",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

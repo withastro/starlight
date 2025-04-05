@@ -25,5 +25,6 @@
   "aside.caution": "注意",
   "aside.danger": "危険",
   "fileTree.directory": "ディレクトリ",
-  "builtWithStarlight.label": "Starlightで作成"
+  "builtWithStarlight.label": "Starlightで作成",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

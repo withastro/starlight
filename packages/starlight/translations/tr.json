@@ -25,5 +25,6 @@
   "aside.caution": "Dikkat",
   "aside.danger": "Tehlike",
   "fileTree.directory": "Dizin",
-  "builtWithStarlight.label": "Built with Starlight"
+  "builtWithStarlight.label": "Built with Starlight",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }
