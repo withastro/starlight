@@ -596,6 +596,15 @@ For example, this page is titled “Configuration Reference” and this site is 
 
 Disables injecting Starlight's default [404 page](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page). To use a custom `src/pages/404.astro` route in your project, set this option to `true`.
 
+### `routeMiddleware`
+
+**type:** `string | string[]`
+
+Provide paths to route middleware that can modify how Starlight processes your data.
+These file paths must not conflict with [Astro’s middleware](https://docs.astro.build/en/guides/middleware/).
+
+See the [Route Data guide](/guides/route-data/#customizing-route-data) for details about how to create route middleware.
+
 ### `components`
 
 **type:** `Record<string, string>`
@@ -630,6 +639,9 @@ starlight({
 See the [Plugins Reference](/reference/plugins/) for details about creating your own plugins.
 
 ### `credits`
+
+**type:** `boolean`  
+**default:** `false`
 
 Enable displaying a “Built with Starlight” link in your site’s footer.
 
