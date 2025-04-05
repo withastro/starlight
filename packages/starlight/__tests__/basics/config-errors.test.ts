@@ -122,6 +122,9 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
+			Starlight v0.33.0 changed the \`social\` configuration syntax. Please specify an array of link items instead of an object.
+			See the Starlight changelog for details: https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0330
+			
 			**social**: Expected type \`"array"\`, received \`"object"\`"
 	`
 	);
