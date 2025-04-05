@@ -262,7 +262,7 @@ test('parses route middleware config successfully', () => {
 	expect(data.routeMiddleware).toEqual(['./src/routeData.ts']);
 });
 
-test("errors if one route middleware is conflicting path with Astro' middleware", () => {
+test('errors if a route middleware path will conflict with Astro middleware', () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({
 			title: 'Test',
