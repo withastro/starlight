@@ -27,7 +27,7 @@ describe('@tailwind base;', async () => {
 	// Generate base CSS with no core Tailwind plugins running to see just Starlight’s output.
 	const base = await generatePluginCss({ config: { corePlugins: [] } });
 
-	test('generates Starlight base CSS', async () => {
+	test('generates Starlight base CSS', () => {
 		expect(base).toMatchInlineSnapshot(`
 			"*, ::before, ::after {
 			    border-width: 0;
