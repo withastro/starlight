@@ -16,9 +16,14 @@ const {
 	Astro.props,
 	'Invalid prop passed to the `<Badge/>` component.'
 );
+
+/**
+ * The fragment around the element is used as a workaround to avoid a trailing whitespace in the output.
+ * @see https://github.com/withastro/compiler/issues/1003
+ */
 ---
 
-<span class:list={['sl-badge', variant, size, customClass]} {...attrs}>{text}</span>
+<><span class:list={['sl-badge', variant, size, customClass]} {...attrs}>{text}</span></>
 
 <style>
 	:global(:root) {
