@@ -8,9 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Docs with Tailwind',
-			social: {
-				github: 'https://github.com/withastro/starlight',
-			},
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{
 					label: 'Guides',
