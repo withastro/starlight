@@ -93,6 +93,39 @@ Some text
 	});
 });
 
+describe('custom icons', () => {
+	test('generates aside with custom built-in icons', async () => {
+		const res = await renderMarkdown(`
+:::note{icon="magnifier"}
+Some text
+:::
+`);
+		await expect(res.code).toMatchFileSnapshot('./snapshots/generates-aside-custom-icon.html');
+	});
+
+	test('generates aside with custom labels and built-in icons', async () => {
+		const res = await renderMarkdown(`
+:::note[Test]{icon="bars"}
+Some text
+:::
+`);
+		await expect(res.code).toMatchFileSnapshot(
+			'./snapshots/generates-aside-custom-label-icon.html'
+		);
+	});
+
+	test('generates aside with custom built-in icons with multiple `<path>`', async () => {
+		const res = await renderMarkdown(`
+:::note{icon="external"}
+Some text
+:::
+`);
+		await expect(res.code).toMatchFileSnapshot(
+			'./snapshots/generates-aside-custom-icon-multiple-paths.html'
+		);
+	});
+});
+
 describe('custom labels with nested markdown', () => {
 	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom code label', async (type) => {
 		const label = 'Custom `code` Label';

@@ -1,6 +1,6 @@
 import { z } from 'astro/zod';
 import type { SchemaContext } from 'astro:content';
-import { Icons, type StarlightIcon } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../utils/icons';
 
 const iconNames = Object.keys(Icons) as [StarlightIcon, ...StarlightIcon[]];
 

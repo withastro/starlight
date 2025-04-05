@@ -53,6 +53,9 @@
         "playwright",
         "search-insights"
       ]
+    },
+    "patchedDependencies": {
+      "astro-icon@1.1.5": "patches/astro-icon@1.1.5.patch"
     }
   }
 }

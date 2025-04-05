@@ -59,6 +59,14 @@ test('parses bare minimum valid config successfully', () => {
 		    "type": "image/svg+xml",
 		  },
 		  "head": [],
+		  "icons": {
+		    "iconDir": "src/icons",
+		    "svgoOptions": {
+		      "plugins": [
+		        "preset-default",
+		      ],
+		    },
+		  },
 		  "isMultilingual": false,
 		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,

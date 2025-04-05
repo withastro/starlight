@@ -70,6 +70,8 @@ export default defineConfig({
 			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
+				// TODO(HiDeoo) Remove me
+				{ slug: 'test', badge: { text: 'Remove me', variant: 'danger' } },
 				{
 					label: 'Start Here',
 					translations: {
