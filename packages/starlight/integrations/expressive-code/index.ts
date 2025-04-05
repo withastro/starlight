@@ -81,6 +81,7 @@ export function getStarlightEcConfigPreprocessor({
 
 		const {
 			themes: themesInput,
+			cascadeLayer,
 			customizeTheme,
 			styleOverrides: { textMarkers: textMarkersStyleOverrides, ...otherStyleOverrides } = {},
 			useStarlightDarkModeSwitch,
@@ -136,6 +137,7 @@ export function getStarlightEcConfigPreprocessor({
 				// Return the default selector
 				return `[data-theme='${theme.name}']`;
 			},
+			cascadeLayer: cascadeLayer ?? 'starlight.components',
 			styleOverrides: {
 				borderRadius: '0px',
 				borderWidth: '1px',
