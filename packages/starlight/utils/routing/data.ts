@@ -117,7 +117,7 @@ export function getSiteTitleHref(locale: string | undefined): string {
 }
 
 /** Generate a route object for Starlight’s 404 page. */
-async function get404Route(locals: App.Locals): Promise<Route> {
+export async function get404Route(locals: App.Locals): Promise<Route> {
 	const { lang = BuiltInDefaultLocale.lang, dir = BuiltInDefaultLocale.dir } =
 		config.defaultLocale || {};
 	let locale = config.defaultLocale?.locale;
