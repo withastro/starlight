@@ -65,6 +65,7 @@ test('adds custom data to route shape', async () => {
 		hasSidebar: false,
 		dir: 'rtl',
 		lang: 'ks',
+		isFallback: true,
 	};
 	const data = await generateStarlightPageRouteData({
 		props,
@@ -73,6 +74,7 @@ test('adds custom data to route shape', async () => {
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
+	expect(data.isFallback).toBe(props.isFallback);
 });
 
 test('adds custom frontmatter data to route shape', async () => {

@@ -1,5 +1,23 @@
 # @astrojs/starlight
 
+## 0.32.6
+
+### Patch Changes
+
+- [#3030](https://github.com/withastro/starlight/pull/3030) [`5bdf139`](https://github.com/withastro/starlight/commit/5bdf139191a20f19458b027617877c1063b46724) Thanks [@trueberryless](https://github.com/trueberryless)! - Updates the type of the `isFallback` field in route data from `true` to `boolean`, keeping it optional but allowing `false` as a possible value.
+
+- [#3018](https://github.com/withastro/starlight/pull/3018) [`188b8cf`](https://github.com/withastro/starlight/commit/188b8cfa8ad8761365b8b557c4b9fea671050ed6) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds validation for user config `routeMiddleware` so it does not conflict with [Astro's middleware](https://docs.astro.build/en/guides/middleware/).
+
+## 0.32.5
+
+### Patch Changes
+
+- [#3021](https://github.com/withastro/starlight/pull/3021) [`e3f881e`](https://github.com/withastro/starlight/commit/e3f881ec23019689b821c638b8f0863b8ced6908) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean language support
+
+- [#3020](https://github.com/withastro/starlight/pull/3020) [`58e3e84`](https://github.com/withastro/starlight/commit/58e3e84662167e43c4a8b707453898e047aa18fc) Thanks [@ayoayco](https://github.com/ayoayco)! - Add SourceHut social icon
+
+- [#3013](https://github.com/withastro/starlight/pull/3013) [`5b599dd`](https://github.com/withastro/starlight/commit/5b599dd6190d3b57f61ae48c8614395dda23ef13) Thanks [@oluwatobiss](https://github.com/oluwatobiss)! - Adds Substack icon to social links list
+
 ## 0.32.4
 
 ### Patch Changes

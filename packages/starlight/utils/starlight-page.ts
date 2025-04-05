@@ -112,7 +112,7 @@ export async function generateStarlightPageRouteData({
 	props: StarlightPageProps;
 	context: RouteDataContext;
 }): Promise<StarlightRouteData> {
-	const { isFallback, frontmatter, ...routeProps } = props;
+	const { frontmatter, ...routeProps } = props;
 	const { url } = context;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
@@ -174,9 +174,6 @@ export async function generateStarlightPageRouteData({
 		slug,
 		toc: getToC(pageProps),
 	};
-	if (isFallback) {
-		routeData.isFallback = true;
-	}
 	return routeData;
 }
 
