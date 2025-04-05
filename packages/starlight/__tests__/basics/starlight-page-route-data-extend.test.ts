@@ -1,4 +1,5 @@
 import { expect, test, vi } from 'vitest';
+import { getRouteDataTestContext } from '../test-utils';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
@@ -26,7 +27,7 @@ test('throws a validation error if a built-in field required by the user schema 
 	await expect(() =>
 		generateStarlightPageRouteData({
 			props: starlightPageProps,
-			url: new URL('https://example.com/test-slug'),
+			context: getRouteDataTestContext('/test-slug'),
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -48,7 +49,7 @@ test('returns new field defined in the user schema', async () => {
 				category,
 			},
 		},
-		url: new URL('https://example.com/test-slug'),
+		context: getRouteDataTestContext('/test-slug'),
 	});
 	// @ts-expect-error - Custom field defined in the user schema.
 	expect(data.entry.data.category).toBe(category);
