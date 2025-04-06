@@ -44,6 +44,7 @@ export const socialLinks = [
 	'npm',
 	'sourcehut',
 	'substack',
+	'home',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -103,6 +104,7 @@ export const SocialLinksSchema = () =>
 					npm: 'npm',
 					sourcehut: 'SourceHut',
 					substack: 'Substack',
+					home: 'Homepage',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
