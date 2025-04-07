@@ -23,6 +23,18 @@ test('includes custom tags defined in the Starlight configuration', () => {
 	});
 });
 
+test('includes `twitter:site` based on Starlight `social` configuration', () => {
+	const head = getTestHead();
+	expect(head).toContainEqual({
+		tag: 'meta',
+		attrs: {
+			name: 'twitter:site',
+			content: '@astrodotbuild',
+		},
+		content: '',
+	});
+});
+
 test('merges two <title> tags', () => {
 	const head = getTestHead([{ tag: 'title', content: 'Override', attrs: {} }]);
 	expect(head.filter((tag) => tag.tag === 'title')).toEqual([

@@ -122,8 +122,10 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'azureDevOps' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne' | 'blueSky' | 'discourse' | 'zulip' | 'pinterest' | 'tiktok' | 'nostr' | 'backstage' | 'farcaster' | 'confluence' | 'jira' | 'storybook' | 'npm' | 'sourcehut' | 'substack', received 'unknown'
-			**social.unknown**: Invalid url"
+			Starlight v0.33.0 changed the \`social\` configuration syntax. Please specify an array of link items instead of an object.
+			See the Starlight changelog for details: https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0330
+			
+			**social**: Expected type \`"array"\`, received \`"object"\`"
 	`
 	);
 });
