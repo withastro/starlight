@@ -79,7 +79,7 @@ export function getHead(
 			tag: 'meta',
 			attrs: {
 				name: 'twitter:site',
-				content: new URL(twitterLink.href).pathname,
+				content: new URL(twitterLink.href).pathname.replace('/', '@'),
 			},
 		});
 	}
