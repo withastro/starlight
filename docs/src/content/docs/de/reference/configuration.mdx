@@ -605,6 +605,15 @@ Zum Beispiel heißt diese Seite „Konfigurations&shy;referenz“ und diese Webs
 
 Deaktiviert die Einspeisung von Starlights Standard [404-Seite](https://docs.astro.build/de/basics/astro-pages/#benutzerdefinierte-404-fehlerseite). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
 
+### `routeMiddleware`
+
+**Typ:** `string | string[]`
+
+Gib Pfade zu Route-Middleware an, welche die Verarbeitung deiner Daten durch Starlight verändern kann.
+Diese Dateipfade dürfen nicht mit [Astros Middleware](https://docs.astro.build/de/guides/middleware/) kollidieren.
+
+In der [Routendaten-Anleitung](/de/guides/route-data/#anpassen-der-routendaten) findest du weitere Informationen zur Erstellung von Route-Middleware.
+
 ### `components`
 
 **Typ:** `Record<string, string>`
@@ -639,6 +648,9 @@ starlight({
 Siehe die [Referenz für Plugins](/de/reference/plugins/) für Details zur Erstellung eigener Plugins.
 
 ### `credits`
+
+**Typ:** `boolean`  
+**Standard:** `false`
 
 Aktiviere die Anzeige eines „Erstellt mit Starlight“-Links in der Fußzeile deiner Website.
 
