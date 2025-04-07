@@ -22,10 +22,9 @@ They should only include [elements permitted inside `<head>`](https://developer.
 **Default component:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 Component rendered inside each page’s `<head>`.
-Includes important tags including `<title>`, and `<meta charset="utf-8">`.
 
 Override this component as a last resort.
-Prefer the [`head`](/reference/configuration/#head) option Starlight config if possible.
+Prefer the [`head` config option](/reference/configuration/#head), the [`head` frontmatter field](/reference/frontmatter/#head), or a [route data middleware](/guides/route-data/#customizing-route-data) to customize the route data rendered by the default component if possible.
 
 #### `ThemeProvider`
 
