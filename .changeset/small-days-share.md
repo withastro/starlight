@@ -1,5 +1,5 @@
 ---
-'@astrojs/starlight': patch
+'@astrojs/starlight': minor
 ---
 
-Improve visual styling of mobile menu toggle when menu is open
+Updates mobile menu toggle styles to display a close icon while the menu is open
