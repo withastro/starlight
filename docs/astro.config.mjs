@@ -41,13 +41,14 @@ export default defineConfig({
 				dark: '/src/assets/logo-dark.svg',
 				replacesTitle: true,
 			},
+			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
-			social: {
-				github: 'https://github.com/withastro/starlight',
-				discord: 'https://astro.build/chat',
-			},
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+			],
 			head: [
 				{
 					tag: 'script',

@@ -1,97 +1,22 @@
 import { z } from 'astro/zod';
+import { IconSchema } from './icon';
 
-export const socialLinks = [
-	'twitter',
-	'mastodon',
-	'github',
-	'gitlab',
-	'bitbucket',
-	'discord',
-	'gitter',
-	'codeberg',
-	'codePen',
-	'youtube',
-	'threads',
-	'linkedin',
-	'twitch',
-	'azureDevOps',
-	'microsoftTeams',
-	'instagram',
-	'stackOverflow',
-	'x.com',
-	'telegram',
-	'rss',
-	'facebook',
-	'email',
-	'reddit',
-	'patreon',
-	'signal',
-	'slack',
-	'matrix',
-	'openCollective',
-	'hackerOne',
-	'blueSky',
-	'discourse',
-	'zulip',
-	'pinterest',
-	'tiktok',
-	'nostr',
-	'backstage',
-] as const;
+const LinksSchema = z
+	.object({ icon: IconSchema(), label: z.string().min(1), href: z.string() })
+	.array()
+	.optional();
 
 export const SocialLinksSchema = () =>
-	z
-		.record(
-			z.enum(socialLinks),
-			// Link to the respective social profile for this site
-			z.string().url()
-		)
-		.transform((links) => {
-			const labelledLinks: Partial<Record<keyof typeof links, { label: string; url: string }>> = {};
-			for (const _k in links) {
-				const key = _k as keyof typeof links;
-				const url = links[key];
-				if (!url) continue;
-				const label = {
-					github: 'GitHub',
-					gitlab: 'GitLab',
-					bitbucket: 'Bitbucket',
-					discord: 'Discord',
-					gitter: 'Gitter',
-					twitter: 'Twitter',
-					mastodon: 'Mastodon',
-					codeberg: 'Codeberg',
-					codePen: 'CodePen',
-					youtube: 'YouTube',
-					threads: 'Threads',
-					linkedin: 'LinkedIn',
-					twitch: 'Twitch',
-					azureDevOps: 'Azure DevOps',
-					microsoftTeams: 'Microsoft Teams',
-					instagram: 'Instagram',
-					stackOverflow: 'Stack Overflow',
-					'x.com': 'X',
-					telegram: 'Telegram',
-					rss: 'RSS',
-					facebook: 'Facebook',
-					email: 'Email',
-					reddit: 'Reddit',
-					patreon: 'Patreon',
-					signal: 'Signal',
-					slack: 'Slack',
-					matrix: 'Matrix',
-					openCollective: 'Open Collective',
-					hackerOne: 'Hacker One',
-					blueSky: 'BlueSky',
-					discourse: 'Discourse',
-					zulip: 'Zulip',
-					pinterest: 'Pinterest',
-					tiktok: 'TikTok',
-					nostr: 'Nostr',
-					backstage: 'Backstage',
-				}[key];
-				labelledLinks[key] = { label, url };
-			}
-			return labelledLinks;
-		})
-		.optional();
+	// Add a more specific error message to help people migrate from the old object syntax.
+	// TODO: remove once most people have updated to v0.33 or higher (e.g. when releasing Starlight v1)
+	z.preprocess((value, ctx) => {
+		if (value && typeof value === 'object' && !Array.isArray(value)) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message:
+					'Starlight v0.33.0 changed the `social` configuration syntax. Please specify an array of link items instead of an object.\n' +
+					'See the Starlight changelog for details: https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0330\n',
+			});
+		}
+		return value;
+	}, LinksSchema) as unknown as typeof LinksSchema;

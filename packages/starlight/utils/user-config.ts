@@ -5,10 +5,11 @@ import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
+import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
 import { SidebarItemSchema } from '../schemas/sidebar';
+import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { SocialLinksSchema } from '../schemas/social';
 import { TableOfContentsSchema } from '../schemas/tableOfContents';
-import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
@@ -191,11 +192,15 @@ const UserConfigSchema = z.object({
 	expressiveCode: ExpressiveCodeSchema(),
 
 	/**
-	 * Define whether Starlight’s default site search provider Pagefind is enabled.
-	 * Set to `false` to disable indexing your site with Pagefind.
-	 * This will also hide the default search UI if in use.
+	 * Configure Starlight’s default site search provider Pagefind. Set to `false` to disable indexing
+	 * your site with Pagefind, which will also hide the default search UI if in use.
 	 */
-	pagefind: z.boolean().optional(),
+	pagefind: z
+		.boolean()
+		// Transform `true` to our default config object.
+		.transform((val) => val && PagefindConfigDefaults())
+		.or(PagefindConfigSchema())
+		.optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
@@ -221,16 +226,42 @@ const UserConfigSchema = z.object({
 		.boolean()
 		.default(false)
 		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
+
+	/** Add middleware to process Starlight’s route data for each page. */
+	routeMiddleware: z
+		.string()
+		.transform((string) => [string])
+		.or(z.string().array())
+		.default([])
+		.superRefine((middlewares, ctx) => {
+			// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/2
+			const invalidPathRegex = /^\.?\/src\/middleware(?:\/index)?\.[jt]s$/;
+			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
+			for (const invalidPath of invalidPaths) {
+				ctx.addIssue({
+					code: 'custom',
+					message:
+						`The \`"${invalidPath}"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.\n\n` +
+						`You should rename \`${invalidPath}\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.\n\n` +
+						'- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data\n' +
+						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
+				});
+			}
+		})
+		.describe('Add middleware to process Starlight’s route data for each page.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict()
 	.transform((config) => ({
 		...config,
 		// Pagefind only defaults to true if prerender is also true.
-		pagefind: config.pagefind ?? config.prerender,
+		pagefind:
+			typeof config.pagefind === 'undefined'
+				? config.prerender && PagefindConfigDefaults()
+				: config.pagefind,
 	}))
 	.refine((config) => !(!config.prerender && config.pagefind), {
-		message: 'Pagefind search is not support with prerendering disabled.',
+		message: 'Pagefind search is not supported with prerendering disabled.',
 	})
 	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});

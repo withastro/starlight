@@ -1,50 +1,48 @@
-import type { MarkdownHeading } from 'astro';
+import type { APIContext, MarkdownHeading } from 'astro';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
-import { generateToC, type TocItem } from './generateToC';
+import { generateToC } from '../generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
-import { getPrevNextLinks, getSidebar, type SidebarEntry } from './navigation';
-import { ensureTrailingSlash } from './path';
-import type { Route } from './routing';
-import { formatPath } from './format-path';
-import { useTranslations } from './translations';
-import { DeprecatedLabelsPropProxy } from './i18n';
+import { getPrevNextLinks, getSidebar } from '../navigation';
+import { ensureTrailingSlash } from '../path';
+import { getRouteBySlugParam, normalizeCollectionEntry } from '../routing';
+import type {
+	Route,
+	StarlightDocsCollectionEntry,
+	StarlightDocsEntry,
+	StarlightRouteData,
+} from './types';
+import { formatPath } from '../format-path';
+import { useTranslations } from '../translations';
+import { BuiltInDefaultLocale } from '../i18n';
+import { getEntry, render } from 'astro:content';
+import { getCollectionPathFromRoot } from '../collection';
+import { getHead } from '../head';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
 }
 
-export interface StarlightRouteData extends Route {
-	/** Title of the site. */
-	siteTitle: string;
-	/** URL or path used as the link when clicking on the site title. */
-	siteTitleHref: string;
-	/** Array of Markdown headings extracted from the current page. */
-	headings: MarkdownHeading[];
-	/** Site navigation sidebar entries for this page. */
-	sidebar: SidebarEntry[];
-	/** Whether or not the sidebar should be displayed on this page. */
-	hasSidebar: boolean;
-	/** Links to the previous and next page in the sidebar if enabled. */
-	pagination: ReturnType<typeof getPrevNextLinks>;
-	/** Table of contents for this page if enabled. */
-	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
-	/** JS Date object representing when this page was last updated if enabled. */
-	lastUpdated: Date | undefined;
-	/** URL object for the address where this page can be edited if enabled. */
-	editUrl: URL | undefined;
-	/** @deprecated Use `Astro.locals.t()` instead. */
-	labels: Record<string, never>;
+export type RouteDataContext = Pick<APIContext, 'generator' | 'site' | 'url'>;
+
+export async function useRouteData(context: APIContext): Promise<StarlightRouteData> {
+	const route =
+		('slug' in context.params && getRouteBySlugParam(context.params.slug)) ||
+		(await get404Route(context.locals));
+	const { Content, headings } = await render(route.entry);
+	const routeData = generateRouteData({ props: { ...route, headings }, context });
+	return { ...routeData, Content };
 }
 
 export function generateRouteData({
 	props,
-	url,
+	context,
 }: {
 	props: PageProps;
-	url: URL;
+	context: RouteDataContext;
 }): StarlightRouteData {
 	const { entry, locale, lang } = props;
-	const sidebar = getSidebar(url.pathname, locale);
+	const sidebar = getSidebar(context.url.pathname, locale);
 	const siteTitle = getSiteTitle(lang);
 	return {
 		...props,
@@ -56,7 +54,7 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
-		labels: DeprecatedLabelsPropProxy,
+		head: getHead(props, context, siteTitle),
 	};
 }
 
@@ -120,4 +118,36 @@ export function getSiteTitle(lang: string): string {
 
 export function getSiteTitleHref(locale: string | undefined): string {
 	return formatPath(locale || '/');
+}
+
+/** Generate a route object for Starlight’s 404 page. */
+async function get404Route(locals: App.Locals): Promise<Route> {
+	const { lang = BuiltInDefaultLocale.lang, dir = BuiltInDefaultLocale.dir } =
+		config.defaultLocale || {};
+	let locale = config.defaultLocale?.locale;
+	if (locale === 'root') locale = undefined;
+
+	const entryMeta = { dir, lang, locale };
+
+	const fallbackEntry: StarlightDocsEntry = {
+		slug: '404',
+		id: '404',
+		body: '',
+		collection: 'docs',
+		data: {
+			title: '404',
+			template: 'splash',
+			editUrl: false,
+			head: [],
+			hero: { tagline: locals.t('404.text'), actions: [] },
+			pagefind: false,
+			sidebar: { hidden: false, attrs: {} },
+			draft: false,
+		},
+		filePath: `${getCollectionPathFromRoot('docs', project)}/404.md`,
+	};
+
+	const userEntry = (await getEntry('docs', '404')) as StarlightDocsCollectionEntry;
+	const entry = userEntry ? normalizeCollectionEntry(userEntry) : fallbackEntry;
+	return { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
 }

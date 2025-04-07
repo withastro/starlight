@@ -1,0 +1,204 @@
+---
+title: Route Data Reference
+description: The full reference documentation for Starlight’s route data object.
+---
+
+Starlight’s route data object contains information about the current page.
+Learn more about how Starlight’s data model works in the [“Route Data” guide](/guides/route-data/).
+
+In Astro components, access route data from `Astro.locals.starlightRoute`:
+
+```astro {4}
+---
+// src/components/Custom.astro
+
+const { hasSidebar } = Astro.locals.starlightRoute;
+---
+```
+
+In [route middleware](/guides/route-data/#customizing-route-data), access route data from the context object passed to your middleware function:
+
+```ts {5}
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	const { hasSidebar } = context.locals.starlightRoute;
+});
+```
+
+## `starlightRoute`
+
+The `starlightRoute` object has the following properties:
+
+### `dir`
+
+**Type:** `'ltr' | 'rtl'`
+
+Page writing direction.
+
+### `lang`
+
+**Type:** `string`
+
+BCP-47 language tag for this page’s locale, e.g. `en`, `zh-CN`, or `pt-BR`.
+
+### `locale`
+
+**Type:** `string | undefined`
+
+The base path at which a language is served. `undefined` for root locale slugs.
+
+### `siteTitle`
+
+**Type:** `string`
+
+The site title for this page’s locale.
+
+### `siteTitleHref`
+
+**Type:** `string`
+
+The value for the site title’s `href` attribute, linking back to the homepage, e.g. `/`.
+For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-cn/`.
+
+### `slug`
+
+**Type:** `string`
+
+The slug for this page generated from the content filename.
+
+This property is deprecated and will be removed in a future version of Starlight.
+Migrate to the new Content Layer API by using [Starlight’s `docsLoader`](/manual-setup/#configure-content-collections) and use the [`id`](#id) property instead.
+
+### `id`
+
+**Type:** `string`
+
+The slug for this page or the unique ID for this page based on the content filename if using the [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections) flag.
+
+### `isFallback`
+
+**Type:** `boolean | undefined`
+
+`true` if this page is untranslated in the current language and using fallback content from the default locale.
+Only used in multilingual sites.
+
+### `entryMeta`
+
+**Type:** `{ dir: 'ltr' | 'rtl'; lang: string }`
+
+Locale metadata for the page content. Can be different from top-level locale values when a page is using fallback content.
+
+### `entry`
+
+The Astro content collection entry for the current page.
+Includes frontmatter values for the current page at `entry.data`.
+
+```ts
+entry: {
+	data: {
+		title: string;
+		description: string | undefined;
+		// etc.
+	}
+}
+```
+
+Learn more about the shape of this object in [Astro’s Collection Entry Type](https://docs.astro.build/en/reference/modules/astro-content/#collectionentry) reference.
+
+### `sidebar`
+
+**Type:** `SidebarEntry[]`
+
+Site navigation sidebar entries for this page.
+
+### `hasSidebar`
+
+**Type:** `boolean`
+
+Whether or not the sidebar should be displayed on this page.
+
+### `pagination`
+
+**Type:** `{ prev?: Link; next?: Link }`
+
+Links to the previous and next page in the sidebar if enabled.
+
+### `toc`
+
+**Type:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+
+Table of contents for this page if enabled.
+
+### `headings`
+
+**Type:** `{ depth: number; slug: string; text: string }[]`
+
+Array of all Markdown headings extracted from the current page.
+Use [`toc`](#toc) instead if you want to build a table of contents component that respects Starlight’s configuration options.
+
+### `lastUpdated`
+
+**Type:** `Date | undefined`
+
+JavaScript `Date` object representing when this page was last updated if enabled.
+
+### `editUrl`
+
+**Type:** `URL | undefined`
+
+`URL` object for the address where this page can be edited if enabled.
+
+### `head`
+
+**type:** [`HeadConfig[]`](/reference/configuration/#headconfig)
+
+Array of all tags to include in the `<head>` of the current page.
+Includes important tags such as `<title>` and `<meta charset="utf-8">`.
+
+## Utilities
+
+### `defineRouteMiddleware()`
+
+Use the `defineRouteMiddleware()` utility to help type your route middleware module:
+
+```ts "defineRouteMiddleware"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	// ...
+});
+```
+
+### `StarlightRouteData` type
+
+If you are writing code that needs to work with Starlight’s route data, you can import the `StarlightRouteData` type to match the shape of `Astro.locals.starlightRoute`.
+
+In the following example, a `usePageTitleInTOC()` function updates route data to use the current page’s title as the label for the first item in the table of contents, replacing the default “Overview” label.
+The `StarlightRouteData` type allows you to check whether the route data changes are valid.
+
+```ts "StarlightRouteData"
+// src/route-utils.ts
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+export function usePageTitleInTOC(starlightRoute: StarlightRouteData) {
+	const overviewLink = starlightRoute.toc?.items[0];
+	if (overviewLink) {
+		overviewLink.text = starlightRoute.entry.data.title;
+	}
+}
+```
+
+This function can then be called from a route middleware:
+
+```ts {3,6}
+// src/route-middleware.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { usePageTitleInTOC } from './route-utils';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	usePageTitleInTOC(context.locals.starlightRoute);
+});
+```

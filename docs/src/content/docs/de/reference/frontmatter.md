@@ -41,7 +41,7 @@ Setzt den Slug der Seite außer Kraft. Siehe [„Benutzerdefinierte IDs definier
 
 **Typ:** `string | boolean`
 
-Überschreibt die [globale `editLink`-Konfiguration](/de/reference/configuration/#editlink). Setze die Konfiguration auf `false`, um den Link `Seite bearbeiten` für eine bestimmte Seite zu deaktivieren oder gibt eine alternative URL an, unter der der Inhalt dieser Seite bearbeitet werden kann.
+Überschreibt die [globale `editLink`-Konfiguration](/de/reference/configuration/#editlink). Setze die Konfiguration auf `false`, um den Link `Seite bearbeiten` für eine bestimmte Seite zu deaktivieren oder gibt eine alternative URL an, unter welcher der Inhalt dieser Seite bearbeitet werden kann.
 
 ### `head`
 
@@ -275,7 +275,7 @@ pagefind: false
 **Typ:** `boolean`  
 **Standard:** `false`
 
-Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build) und [Autogenerierte Link-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) aufgenommen werden soll. Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
+Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produktions-Builds](https://docs.astro.build/de/reference/cli-reference/#astro-build). Setze die Eigenschaft auf `true`, um eine Seite als Entwurf zu markieren und sie nur während der Entwicklung sichtbar zu machen.
 
 ```md
 ---
@@ -284,6 +284,9 @@ Legt fest, ob diese Seite als Entwurf betrachtet werden soll und nicht in [Produ
 draft: true
 ---
 ```
+
+Da Entwurfsseiten nicht in die Build-Ausgabe aufgenommen werden, kannst du keine Entwurfsseiten direkt mit [Slugs](/de/guides/sidebar/#interne-links) zu deiner Seitenleisten&shy;konfiguration hinzufügen.
+Entwurfsseiten in Verzeichnissen, die für [autogenerierte Seitenleisten-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) verwendet werden, werden bei Produktions-Builds automatisch ausgeschlossen.
 
 ### `sidebar`
 
@@ -412,7 +415,7 @@ export const collections = {
 };
 ```
 
-Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in den Astro-Dokumenten.
+Mehr über Schemata für Inhaltssammlungen erfährst du in [„Definieren eines Sammelschemas“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
 
 `docsSchema()` nimmt die folgenden Optionen an:
 

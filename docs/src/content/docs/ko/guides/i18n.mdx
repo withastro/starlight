@@ -193,6 +193,7 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
    ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
    // src/content.config.ts
+   import { defineCollection } from 'astro:content';
    import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -220,7 +221,7 @@ Starlight를 사용하면 번역된 콘텐츠 파일을 호스팅하는 것 외�
 
    <UIStringsList />
 
-   Starlight의 코드 블록은 [Expressive Code](https://github.com/expressive-code/expressive-code) 라이브러리에 의해 구동됩니다.
+   Starlight의 코드 블록은 [Expressive Code](https://expressive-code.com/) 라이브러리에 의해 구동됩니다.
    `expressiveCode` 키를 사용하여 동일한 JSON 파일에서 UI 문자열에 대한 번역을 설정할 수 있습니다.
 
    ```json
@@ -296,6 +297,9 @@ export const GET = (context) => {
 	return new Response(context.locals.t('404.text'));
 };
 ```
+
+Starlight 플러그인 컨텍스트에서 [`useTranslations()`](/ko/reference/plugins/#usetranslations) 도우미를 사용하여 특정 언어에 대한 이 API에 접근할 수 있습니다.
+자세한 내용은 [플러그인 참조](/ko/reference/plugins/)를 확인하세요.
 
 ### UI 문자열 렌더링
 

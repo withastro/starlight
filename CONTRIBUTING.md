@@ -275,7 +275,7 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 
 - Components that require client-side JavaScript or CSS should use JavaScript/CSS features that are well-supported by browsers.
 
-  You can find a list of supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+88%2C+Edge+%3E%3D+88%2C+Firefox+%3E%3D+98%2C+Safari+%3E%3D+15.4%2C+iOS+%3E%3D+15.4%2C+not+op_mini+all). To check whether or not a feature is supported, you can visit the [Can I use](https://caniuse.com) website and search for the feature.
+  You can find a list of supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+105%2C+Edge+%3E%3D+105%2C+Firefox+%3E%3D+121%2C+Safari+%3E%3D+15.4%2C+iOS+%3E%3D+15.4%2C+not+op_mini+all). To check whether or not a feature is supported, you can visit the [Can I use](https://caniuse.com) website and search for the feature.
 
 [discord]: https://astro.build/chat
 [issues]: https://github.com/withastro/starlight/issues
@@ -289,6 +289,8 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [playwright]: https://playwright.dev/
 
 ## Showcase
+
+### Sites
 
 We love to see websites built with Starlight and share them with the community on our [showcase](https://starlight.astro.build/resources/showcase/) page.
 If you’ve built a documentation site with Starlight, adding it to the showcase is just a pull request away!
@@ -312,3 +314,43 @@ If you’ve built a documentation site with Starlight, adding it to the showcase
    ```
 
 4. Open a pull request on GitHub to add your changes.
+
+### Themes
+
+Share themes for Starlight you built by adding them to our [themes](https://starlight.astro.build/resources/themes/) page. Here’s how!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+
+2. Take screenshots of your theme’s light and dark modes using our demo project.
+
+   1. Open the [theme demo project](https://stackblitz.com/edit/github-jj1kzx5x?file=astro.config.mjs) on StackBlitz.
+
+   2. Install your theme using StackBlitz’s integrated terminal:
+
+      ```sh
+      npm i your-theme-name
+      ```
+
+   3. Update `astro.config.mjs` to import your theme and add it to Starlight’s `plugins` array.
+
+   4. Run the dev server:
+
+      ```sh
+      npm run dev
+      ```
+
+   5. Open the theme preview in a new tab and use dev tools’ responsive view to take screenshots with the screen sized to 1280×720 pixels.
+
+3. Add your screenshots of the theme’s light and dark modes to the `docs/src/assets/themes/` directory. The images must:
+
+   - be PNG files with your theme’s name and the color variant, e.g. a theme named “Moon” would have files named `moon-light.png` and `moon-dark.png`
+   - have dimensions of 1280×720 pixels
+
+4. Add a new entry for your website in `docs/src/content/docs/resources/themes.mdx`.
+   You can look at existing entries to see how to format this.
+
+   - The new entry must be appended at the end of the existing list of sites.
+   - The `title` attribute must be the name of your theme.
+   - The `description` attribute should briefly describe your theme’s aesthetic, inspiration, or key features.
+   - The `href` attribute must be the URL of your theme’s website demonstrating what the theme looks like.
+   - The `previews` attribute must be an object listing the filenames of the screenshots you added in step 3.

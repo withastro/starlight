@@ -341,28 +341,21 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**type:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/reference/icons/){`; href: string }>`}</code>
 
-**type:** <SocialLinksType />
-
-Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
+Optional details about the social media accounts for this site.
+Each entry will be displayed as an icon link in the site header.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -384,10 +377,10 @@ starlight({
 **type:** `StarlightExpressiveCodeOptions | boolean`  
 **default:** `true`
 
-Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
+Starlight uses [Expressive Code](https://expressive-code.com) to render code blocks and add support for highlighting parts of code examples, adding filenames to code blocks, and more.
 See the [“Code blocks” guide](/guides/authoring-content/#code-blocks) to learn how to use Expressive Code syntax in your Markdown and MDX content.
 
-You can use any of the standard [Expressive Code configuration options](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) as well as some Starlight-specific properties, by setting them in Starlight’s `expressiveCode` option.
+You can use any of the standard [Expressive Code configuration options](https://expressive-code.com/reference/configuration/) as well as some Starlight-specific properties, by setting them in Starlight’s `expressiveCode` option.
 For example, set Expressive Code’s `styleOverrides` option to override the default CSS. This enables customizations like giving your code blocks rounded corners:
 
 ```js ins={2-4}
@@ -414,7 +407,7 @@ In addition to the standard Expressive Code options, you can also set the follow
 **default:** `['starlight-dark', 'starlight-light']`
 
 Set the themes used to style code blocks.
-See the [Expressive Code `themes` documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) for details of the supported theme formats.
+See the [Expressive Code `themes` documentation](https://expressive-code.com/guides/themes/) for details of the supported theme formats.
 
 Starlight uses the dark and light variants of Sarah Drasner’s [Night Owl theme](https://github.com/sdras/night-owl-vscode-theme) by default.
 
@@ -447,15 +440,48 @@ When using custom themes and setting this to `true`, you must provide at least o
 
 ### `pagefind`
 
-**type:** `boolean`  
+**type:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **default:** `true`
 
-Define whether Starlight’s default site search provider [Pagefind](https://pagefind.app/) is enabled.
+Configure Starlight’s default site search provider [Pagefind](https://pagefind.app/).
 
 Set to `false` to disable indexing your site with Pagefind.
 This will also hide the default search UI if in use.
 
 Pagefind cannot be enabled when the [`prerender`](#prerender) option is set to `false`.
+
+Set `pagefind` to an object to configure the Pagefind search client:
+
+- See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated
+- See [“Searching multiple sites”](https://pagefind.app/docs/multisite/) in the Pagefind documentation for more details about using the `pagefind.mergeIndex` option to control how to search accros multiple sites
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
 
 ### `prerender`
 
@@ -570,6 +596,15 @@ For example, this page is titled “Configuration Reference” and this site is 
 
 Disables injecting Starlight's default [404 page](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page). To use a custom `src/pages/404.astro` route in your project, set this option to `true`.
 
+### `routeMiddleware`
+
+**type:** `string | string[]`
+
+Provide paths to route middleware that can modify how Starlight processes your data.
+These file paths must not conflict with [Astro’s middleware](https://docs.astro.build/en/guides/middleware/).
+
+See the [Route Data guide](/guides/route-data/#customizing-route-data) for details about how to create route middleware.
+
 ### `components`
 
 **type:** `Record<string, string>`
@@ -604,6 +639,9 @@ starlight({
 See the [Plugins Reference](/reference/plugins/) for details about creating your own plugins.
 
 ### `credits`
+
+**type:** `boolean`  
+**default:** `false`
 
 Enable displaying a “Built with Starlight” link in your site’s footer.
 

@@ -384,10 +384,10 @@ starlight({
 **Type :** `StarlightExpressiveCodeOptions | boolean`  
 **Par défaut :** `true`
 
-Starlight utilise [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
+Starlight utilise [Expressive Code](https://expressive-code.com) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
 Consultez le [guide « Blocs de code »](/fr/guides/authoring-content/#blocs-de-code) pour apprendre à utiliser la syntaxe d'Expressive Code dans votre contenu Markdown et MDX.
 
-Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
+Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://expressive-code.com/reference/configuration/) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
 Par exemple, définissez l'option `styleOverrides` d'Expressive Code pour remplacer le CSS par défaut. Cela permet des personnalisations comme donner à vos blocs de code des coins arrondis :
 
 ```js ins={2-4}
@@ -414,7 +414,7 @@ En plus des options standard d'Expressive Code, vous pouvez également définir 
 **Par défaut :** `['starlight-dark', 'starlight-light']`
 
 Définit les thèmes utilisés pour styliser les blocs de code.
-Consultez la [documentation des `themes` d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) pour plus de détails sur les formats de thème pris en charge.
+Consultez la [documentation des `themes` d'Expressive Code](https://expressive-code.com/guides/themes/) pour plus de détails sur les formats de thème pris en charge.
 
 Starlight utilise les variantes claires et sombres du [thème Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner par défaut.
 
@@ -447,15 +447,48 @@ Lorsque des thèmes personnalisés sont utilisés et que cette option est défin
 
 ### `pagefind`
 
-**Type :** `boolean`  
+**Type :** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **Par défaut :** `false`
 
-Définit si le système de recherche du site par défaut de Starlight, [Pagefind](https://pagefind.app/), est activé.
+Configure le système de recherche du site par défaut de Starlight, [Pagefind](https://pagefind.app/).
 
 Utilisez la valeur `false` pour désactiver l'indexation de votre site avec Pagefind.
 Cela désactivera également l'interface de recherche par défaut de Starlight si utilisée.
 
 Pagefind ne peut pas être activé lorsque l'option [`prerender`](#prerender) est définie à `false`.
+
+Définissez `pagefind` avec un objet pour configurer le client de recherche Pagefind :
+
+- Consultez [« Personnaliser le classement des résultats de Pagefind »](https://pagefind.app/docs/ranking/) dans la documentation de Pagefind pour plus de détails sur l'utilisation de l'option `pagefind.ranking` pour contrôler comment le classement des résultats de recherche est calculé
+- Consultez [« Recherche sur plusieurs sites »](https://pagefind.app/docs/multisite/) dans la documentation de Pagefind pour plus de détails sur l'utilisation de l'option `pagefind.mergeIndex` pour contrôler comment rechercher sur plusieurs sites
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
 
 ### `prerender`
 
@@ -570,6 +603,15 @@ Par example, cette page a pour titre « Référence de configuration » et ce si
 
 Désactive l'injection de la [page 404](https://docs.astro.build/fr/basics/astro-pages/#page-derreur-404-personnalis%C3%A9e) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, définissez cette option à `true`.
 
+### `routeMiddleware`
+
+**Type :** `string | string[]`
+
+Fournit les chemins vers les middlewares de route qui peuvent modifier la manière dont Starlight transforme vos données.
+Ces chemins de fichiers ne doivent pas entrer en conflit avec les [middlewares d'Astro](https://docs.astro.build/fr/guides/middleware/).
+
+Consultez le [guide des données de route](/fr/guides/route-data/#personnalisation-des-données-de-route) pour plus de détails sur la création de middlewares de route.
+
 ### `components`
 
 **Type :** `Record<string, string>`
@@ -588,7 +630,7 @@ Consultez la [référence des redéfinitions](/fr/reference/overrides/) pour plu
 
 ### `plugins`
 
-**type:** [`StarlightPlugin[]`](/fr/reference/plugins/#référence-rapide-de-lapi)
+**Type :** [`StarlightPlugin[]`](/fr/reference/plugins/#référence-rapide-de-lapi)
 
 Étendez Starlight avec des modules d'extension personnalisés.
 Les modules d'extension appliquent des changements à votre projet pour modifier ou ajouter des fonctionnalités à Starlight.
@@ -604,6 +646,9 @@ starlight({
 Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus de détails pour créer vos propres modules d'extension.
 
 ### `credits`
+
+**Type :** `boolean`  
+**Par défaut :** `false`
 
 Permet l'affichage d'un lien "Créé avec Starlight" dans le pied de page de votre site.
 

@@ -1,4 +1,5 @@
 ---
+import { attachRouteDataAndRunMiddleware } from '../utils/routing/middleware';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps as Props,
@@ -6,8 +7,11 @@ import {
 import Page from './Page.astro';
 
 export type StarlightPageProps = Props;
+
+await attachRouteDataAndRunMiddleware(
+	Astro,
+	await generateStarlightPageRouteData({ props: Astro.props, context: Astro })
+);
 ---
 
-<Page {...await generateStarlightPageRouteData({ props: Astro.props, url: Astro.url })}>
-	<slot />
-</Page>
+<Page><slot /></Page>

@@ -10,7 +10,7 @@ function parseStarlightConfigWithFriendlyErrors(config: StarlightUserConfig) {
 	);
 }
 
-test('parses valid config successfully', () => {
+test('parses bare minimum valid config successfully', () => {
 	const data = parseStarlightConfigWithFriendlyErrors({ title: '' });
 	expect(data).toMatchInlineSnapshot(`
 		{
@@ -63,9 +63,17 @@ test('parses valid config successfully', () => {
 		  "isUsingBuiltInDefaultLocale": true,
 		  "lastUpdated": false,
 		  "locales": undefined,
-		  "pagefind": true,
+		  "pagefind": {
+		    "ranking": {
+		      "pageLength": 0.1,
+		      "termFrequency": 0.1,
+		      "termSaturation": 2,
+		      "termSimilarity": 9,
+		    },
+		  },
 		  "pagination": true,
 		  "prerender": true,
+		  "routeMiddleware": [],
 		  "tableOfContents": {
 		    "maxHeadingLevel": 3,
 		    "minHeadingLevel": 2,
@@ -114,8 +122,10 @@ test('errors with bad social icon config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**social.unknown**: Invalid enum value. Expected 'twitter' | 'mastodon' | 'github' | 'gitlab' | 'bitbucket' | 'discord' | 'gitter' | 'codeberg' | 'codePen' | 'youtube' | 'threads' | 'linkedin' | 'twitch' | 'azureDevOps' | 'microsoftTeams' | 'instagram' | 'stackOverflow' | 'x.com' | 'telegram' | 'rss' | 'facebook' | 'email' | 'reddit' | 'patreon' | 'signal' | 'slack' | 'matrix' | 'openCollective' | 'hackerOne' | 'blueSky' | 'discourse' | 'zulip' | 'pinterest' | 'tiktok' | 'nostr' | 'backstage', received 'unknown'
-			**social.unknown**: Invalid url"
+			Starlight v0.33.0 changed the \`social\` configuration syntax. Please specify an array of link items instead of an object.
+			See the Starlight changelog for details: https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0330
+			
+			**social**: Expected type \`"array"\`, received \`"object"\`"
 	`
 	);
 });
@@ -244,4 +254,33 @@ test('errors with sidebar entry that includes `items` and `autogenerate`', () =>
 		Hint:
 			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
 	`);
+});
+
+test('parses route middleware config successfully', () => {
+	const data = parseStarlightConfigWithFriendlyErrors({
+		title: '',
+		routeMiddleware: './src/routeData.ts',
+	});
+	expect(data.routeMiddleware).toEqual(['./src/routeData.ts']);
+});
+
+test('errors if a route middleware path will conflict with Astro middleware', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			routeMiddleware: ['./src/middleware.ts', './src/routeData.ts'],
+		})
+	).toThrowErrorMatchingInlineSnapshot(
+		`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			The \`"./src/middleware.ts"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.
+			
+			You should rename \`./src/middleware.ts\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.
+			
+			- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data
+			- More about Astro middleware: https://docs.astro.build/en/guides/middleware/"
+		`
+	);
 });

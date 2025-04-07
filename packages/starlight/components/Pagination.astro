@@ -1,13 +1,12 @@
 ---
 import Icon from '../user-components/Icon.astro';
-import type { Props } from '../props';
 
-const { dir, pagination } = Astro.props;
+const { dir, pagination } = Astro.locals.starlightRoute;
 const { prev, next } = pagination;
 const isRtl = dir === 'rtl';
 ---
 
-<div class="pagination-links" dir={dir}>
+<div class="pagination-links print:hidden" dir={dir}>
 	{
 		prev && (
 			<a href={prev.href} rel="prev">

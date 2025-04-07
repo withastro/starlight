@@ -81,14 +81,14 @@ Starlight는 요소 사이에 여백을 추가하는 등 Markdown 콘텐츠에 �
 컴포넌트 자체에서 내보내지 않더라도 컴포넌트에서 허용하는 `Props`를 참조하려면 `astro/types`의 [`ComponentProps`](https://docs.astro.build/ko/guides/typescript/#componentprops-타입) 타입을 사용합니다.
 이는 기존 컴포넌트를 래핑하거나 확장할 때 유용할 수 있습니다.
 
-다음 예시는 `ComponentProps`를 사용하여 Starlight의 내장 `Icon` 컴포넌트가 허용하는 속성의 타입을 가져옵니다:
+다음 예시는 `ComponentProps`를 사용하여 Starlight의 내장 `Badge` 컴포넌트가 허용하는 속성의 타입을 가져옵니다:
 
 ```astro
 ---
 // src/components/Example.astro
 import type { ComponentProps } from 'astro/types';
-import { Icon } from '@astrojs/starlight/icon';
+import { Badge } from '@astrojs/starlight/components';
 
-type IconProps = ComponentProps<typeof Icon>;
+type BadgeProps = ComponentProps<typeof Badge>;
 ---
 ```

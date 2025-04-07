@@ -1,9 +1,6 @@
 import { z } from 'astro/zod';
 import type { SchemaContext } from 'astro:content';
-import { Icons } from '../components/Icons';
-
-type IconName = keyof typeof Icons;
-const iconNames = Object.keys(Icons) as [IconName, ...IconName[]];
+import { IconSchema } from './icon';
 
 export const HeroSchema = ({ image }: SchemaContext) =>
 	z.object({
@@ -56,9 +53,9 @@ export const HeroSchema = ({ image }: SchemaContext) =>
 				 * Can be an inline `<svg>` or the name of one of Starlight’s built-in icons.
 				 */
 				icon: z
-					.union([z.enum(iconNames), z.string().startsWith('<svg')])
+					.union([IconSchema(), z.string().startsWith('<svg')])
 					.transform((icon) => {
-						const parsedIcon = z.enum(iconNames).safeParse(icon);
+						const parsedIcon = IconSchema().safeParse(icon);
 						return parsedIcon.success
 							? ({ type: 'icon', name: parsedIcon.data } as const)
 							: ({ type: 'raw', html: icon } as const);

@@ -100,6 +100,34 @@ export function vitePluginStarlightUserConfig(
 			} catch {}
 			export const collections = userCollections;`,
 		'virtual:starlight/plugin-translations': `export default ${JSON.stringify(pluginTranslations)}`,
+		/**
+		 * Exports an array of route middleware functions.
+		 * For example, might generate a module that looks like:
+		 *
+		 * ```js
+		 * import { onRequest as routeMiddleware0 } from "/users/houston/docs/src/middleware";
+		 * import { onRequest as routeMiddleware1 } from "@houston-inc/plugin/middleware";
+		 *
+		 * export const routeMiddleware = [
+		 * 	routeMiddleware0,
+		 * 	routeMiddleware1,
+		 * ];
+		 * ```
+		 */
+		'virtual:starlight/route-middleware':
+			opts.routeMiddleware
+				.reduce(
+					([imports, entries], id, index) => {
+						const importName = `routeMiddleware${index}`;
+						imports += `import { onRequest as ${importName} } from ${resolveId(id)};\n`;
+						entries += `\t${importName},\n`;
+						return [imports, entries] as [string, string];
+					},
+					['', 'export const routeMiddleware = [\n'] as [string, string]
+				)
+				.join('\n') + '];',
+		/** Map of modules exporting Starlight’s templating components. */
+		'virtual:starlight/pagefind-config': `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind || {})}`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 

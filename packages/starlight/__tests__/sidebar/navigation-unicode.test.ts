@@ -6,6 +6,8 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
+			['resources/plugins.mdx', { title: 'Plugins' }],
+			['resources/themes.mdx', { title: 'Themes' }],
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference' }],
 			['api/v1/用户.md', { title: 'Path with non-ASCII characters' }],
@@ -66,6 +68,30 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "Start Here",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/resources/plugins/",
+			        "isCurrent": false,
+			        "label": "Plugins",
+			        "type": "link",
+			      },
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/resources/themes/",
+			        "isCurrent": false,
+			        "label": "Themes",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "Resources",
 			    "type": "group",
 			  },
 			  {

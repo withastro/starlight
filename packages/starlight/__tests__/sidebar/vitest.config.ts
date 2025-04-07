@@ -25,6 +25,11 @@ export default defineVitestConfig({
 				},
 			],
 		},
+		// A group containing internal links using the `slug` property or its shorthand string syntax.
+		{
+			label: 'Resources',
+			items: ['resources/plugins', { slug: 'resources/themes' }],
+		},
 		// A group linking to all pages in the `reference` directory.
 		{
 			label: 'Reference',

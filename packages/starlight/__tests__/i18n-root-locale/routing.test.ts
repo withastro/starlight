@@ -1,8 +1,9 @@
 import project from 'virtual:starlight/project-context';
+import { getRouteDataTestContext } from '../test-utils';
 import config from 'virtual:starlight/user-config';
 import { assert, expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
-import { generateRouteData } from '../../utils/route-data';
+import { generateRouteData } from '../../utils/routing/data';
 import * as git from 'virtual:starlight/git-info';
 
 vi.mock('astro:content', async () =>
@@ -83,7 +84,7 @@ test('fallback routes use fallback entry last updated dates', () => {
 			...route,
 			headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }],
 		},
-		url: new URL('https://example.com/en'),
+		context: getRouteDataTestContext('/en'),
 	});
 
 	expect(getNewestCommitDate).toHaveBeenCalledOnce();
