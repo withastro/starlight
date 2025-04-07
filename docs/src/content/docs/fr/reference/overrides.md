@@ -22,10 +22,9 @@ Ils ne doivent inclure que des [éléments autorisés à l'intérieur de `<head>
 **Composant par défaut :** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 Composant utilisé à l'intérieur de l'élément `<head>` de chaque page.
-Inclut des balises importantes comme `<title>` et `<meta charset="utf-8">`.
 
 Redéfinissez ce composant en dernier recours.
-Préférez l'option [`head`](/fr/reference/configuration/#head) de la configuration de Starlight si possible.
+Préférez [l'option de configuration `head`](/fr/reference/configuration/#head), le [champ `head` du frontmatter](/fr/reference/frontmatter/#head) , ou un [middleware de données de route](/fr/guides/route-data/#personnalisation-des-données-de-route) pour personnaliser les données de route affichées par le composant par défaut si possible.
 
 #### `ThemeProvider`
 
