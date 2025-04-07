@@ -17,4 +17,5 @@ export default defineVitestConfig({
 			},
 		},
 	],
+	social: [{ icon: 'twitter', label: 'Twitter', href: 'https://twitter.com/astrodotbuild' }],
 });
