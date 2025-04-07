@@ -42,6 +42,8 @@ export const socialLinks = [
 	'jira',
 	'storybook',
 	'npm',
+	'sourcehut',
+	'substack',
 ] as const;
 
 export const SocialLinksSchema = () =>
@@ -99,6 +101,8 @@ export const SocialLinksSchema = () =>
 					jira: 'Jira',
 					storybook: 'Storybook',
 					npm: 'npm',
+					sourcehut: 'SourceHut',
+					substack: 'Substack',
 				}[key];
 				labelledLinks[key] = { label, url };
 			}
