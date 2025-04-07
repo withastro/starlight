@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 3.0.1
+
+### Patch Changes
+
+- [#2991](https://github.com/withastro/starlight/pull/2991) [`b8a4800`](https://github.com/withastro/starlight/commit/b8a480054aba2b39414ef7942db1a6110b800540) Thanks [@florian-lefebvre](https://github.com/florian-lefebvre)! - Adds support for `@astrojs/tailwind` v6
+
 ## 3.0.0
 
 ### Major Changes

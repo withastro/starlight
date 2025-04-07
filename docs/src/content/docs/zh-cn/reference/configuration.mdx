@@ -383,10 +383,10 @@ starlight({
 **类型：** `StarlightExpressiveCodeOptions | boolean`  
 **默认值：** `true`
 
-Starlight 使用 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) 来渲染代码块，并添加对代码示例的高亮支持，向代码块添加文件名等。
+Starlight 使用 [Expressive Code](https://expressive-code.com) 来渲染代码块，并添加对代码示例的高亮支持，向代码块添加文件名等。
 请参阅 [“代码块”指南](/zh-cn/guides/authoring-content/#代码块) 以了解如何在你的 Markdown 和 MDX 内容中使用 Expressive Code 语法。
 
-你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration)以及一些特定于 Starlight 的属性。比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
+你可以通过在 Starlight 的 `expressiveCode` 选项中设置任何标准的 [Expressive Code 配置选项](https://expressive-code.com/reference/configuration/) 以及一些特定于 Starlight 的属性。比如，设置 Expressive Code 的 `styleOverrides` 选项来覆盖默认的 CSS。这样就可以自定义代码块，比如给你的代码块添加圆角：
 
 ```js ins={2-4}
 starlight({
@@ -411,7 +411,7 @@ starlight({
 **类型：** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **默认值：** `['starlight-dark', 'starlight-light']`
 
-设置用于代码块样式的主题。有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)。
+设置用于代码块样式的主题。有关支持的主题格式的详细信息，请参阅 [Expressive Code `themes` 文档](https://expressive-code.com/guides/themes/)。
 
 Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/sdras/night-owl-vscode-theme) 的深色和浅色变体。
 
@@ -444,21 +444,54 @@ Starlight 默认使用 Sarah Drasner 的 [Night Owl 主题](https://github.com/s
 
 ### `pagefind`
 
-**类型：** `boolean`  
+**类型：** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **默认值：** `true`
 
-定义 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/) 是否启用。
+配置 Starlight 的默认站点搜索 provider [Pagefind](https://pagefind.app/)。
 
 将其设置为 `false` 以禁用使用 Pagefind 索引你的网站。这也将隐藏默认的搜索 UI。
 
 当 [`prerender`](#prerender) 选项设置为 `false` 时，无法启用 Pagefind。
+
+将 `pagefind` 设置为对象，以配置 Pagefind 搜索客户端。
+
+- 查看 Pagefind 文档中的 [“自定义 Pagefind 的结果排序”](https://pagefind.app/docs/ranking/)，了解如何使用 `pagefind.ranking` 选项来控制搜索结果排序的计算。
+- 查看 Pagefind 文档中的 [“搜索多个站点”](https://pagefind.app/docs/multisite/)，了解如何使用 `pagefind.mergeIndex` 选项来控制如何跨多个站点搜索。
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
 
 ### `prerender`
 
 **类型：** `boolean`  
 **默认值：** `true`
 
-定义 Starlight 页面是应预渲染为静态 HTML 还是由 [SSR 适配器](https://docs.astro.build/zh-cn/guides/server-side-rendering/) 按需渲染。
+定义 Starlight 页面是应预渲染为静态 HTML 还是由 [SSR 适配器](https://docs.astro.build/zh-cn/guides/on-demand-rendering/) 按需渲染。
 
 默认情况下，Starlight 页面是预渲染的。
 如果你正在使用 SSR 适配器并希望按需渲染 Starlight 页面，请设置为 `prerender: false`。
@@ -563,7 +596,7 @@ starlight({
 **类型：** `boolean`  
 **默认值：** `false`
 
-禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/core-concepts/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
+禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/basics/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
 
 ### `components`
 

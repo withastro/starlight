@@ -1,9 +1,16 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
 import type docsearch from '@docsearch/js';
 import type { AstroUserConfig, ViteUserConfig } from 'astro';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { z } from 'astro/zod';
 
-type SearchOptions = Parameters<typeof docsearch>[0]['searchParameters'];
+export type DocSearchClientOptions = Omit<
+	Parameters<typeof docsearch>[0],
+	'container' | 'translations'
+>;
+
+type SearchOptions = DocSearchClientOptions['searchParameters'];
 
 /** DocSearch configuration options. */
 const DocSearchConfigSchema = z
@@ -37,10 +44,50 @@ const DocSearchConfigSchema = z
 		 */
 		searchParameters: z.custom<SearchOptions>(),
 	})
-	.strict();
+	.strict()
+	.or(
+		z
+			.object({
+				/**
+				 * The path to a JavaScript or TypeScript file containing a default export of options to
+				 * pass to the DocSearch client.
+				 *
+				 * The value can be a path to a local JS/TS file relative to the root of your project,
+				 * e.g. `'/src/docsearch.js'`, or an npm module specifier for a package you installed,
+				 * e.g. `'@company/docsearch-config'`.
+				 *
+				 * Use `clientOptionsModule` when you need to configure options that are not serializable,
+				 * such as `transformSearchClient()` or `resultsFooterComponent()`.
+				 *
+				 * When `clientOptionsModule` is set, all options must be set via the module file. Other
+				 * inline options passed to the plugin in `astro.config.mjs` will be ignored.
+				 *
+				 * @see https://docsearch.algolia.com/docs/api
+				 *
+				 * @example
+				 * // astro.config.mjs
+				 * // ...
+				 * starlightDocSearch({ clientOptionsModule: './src/config/docsearch.ts' }),
+				 * // ...
+				 *
+				 * // src/config/docsearch.ts
+				 * import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+				 *
+				 * export default {
+				 *   appId: '...',
+				 *   apiKey: '...',
+				 *   indexName: '...',
+				 *   getMissingResultsUrl({ query }) {
+				 *     return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+				 *   },
+				 * } satisfies DocSearchClientOptions;
+				 */
+				clientOptionsModule: z.string(),
+			})
+			.strict()
+	);
 
-type DocSearchUserConfig = z.input<typeof DocSearchConfigSchema>;
-export type DocSearchConfig = z.output<typeof DocSearchConfigSchema>;
+type DocSearchUserConfig = z.infer<typeof DocSearchConfigSchema>;
 
 /** Starlight DocSearch plugin. */
 export default function starlightDocSearch(userConfig: DocSearchUserConfig): StarlightPlugin {
@@ -48,7 +95,7 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 	return {
 		name: 'starlight-docsearch',
 		hooks: {
-			setup({ addIntegration, config, logger, updateConfig }) {
+			'config:setup'({ addIntegration, config, logger, updateConfig }) {
 				// If the user has already has a custom override for the Search component, don't override it.
 				if (config.components?.Search) {
 					logger.warn(
@@ -73,10 +120,10 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 				addIntegration({
 					name: 'starlight-docsearch',
 					hooks: {
-						'astro:config:setup': ({ updateConfig }) => {
+						'astro:config:setup': ({ config, updateConfig }) => {
 							updateConfig({
 								vite: {
-									plugins: [vitePluginDocSearch(opts)],
+									plugins: [vitePluginDocSearch(config.root, opts)],
 								},
 							} satisfies AstroUserConfig);
 						},
@@ -88,10 +135,20 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 }
 
 /** Vite plugin that exposes the DocSearch config via virtual modules. */
-function vitePluginDocSearch(config: DocSearchConfig): VitePlugin {
+function vitePluginDocSearch(root: URL, config: DocSearchUserConfig): VitePlugin {
 	const moduleId = 'virtual:starlight/docsearch-config';
 	const resolvedModuleId = `\0${moduleId}`;
-	const moduleContent = `export default ${JSON.stringify(config)}`;
+
+	const resolveId = (id: string, base = root) =>
+		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
+
+	const moduleContent = `
+	${
+		'clientOptionsModule' in config
+			? `export { default } from ${resolveId(config.clientOptionsModule)};`
+			: `export default ${JSON.stringify(config)};`
+	}
+	`;
 
 	return {
 		name: 'vite-plugin-starlight-docsearch-config',

@@ -221,7 +221,7 @@ You can provide translations for additional languages you support — or overrid
 
    <UIStringsList />
 
-   Starlight’s code blocks are powered by the [Expressive Code](https://github.com/expressive-code/expressive-code) library.
+   Starlight’s code blocks are powered by the [Expressive Code](https://expressive-code.com/) library.
    You can set translations for its UI strings in the same JSON file using `expressiveCode` keys:
 
    ```json
@@ -298,6 +298,9 @@ export const GET = (context) => {
 	return new Response(context.locals.t('404.text'));
 };
 ```
+
+In the context of a Starlight plugin, you can use the [`useTranslations()`](/reference/plugins/#usetranslations) helper to access this API for a specific language.
+See the [plugins reference](/reference/plugins/) for more information.
 
 ### Rendering a UI string
 

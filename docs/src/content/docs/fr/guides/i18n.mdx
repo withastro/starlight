@@ -221,7 +221,7 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
 
    <UIStringsList />
 
-   Les blocs de code de Starlight fonctionnent grâce à la librairie [Expressive Code](https://github.com/expressive-code/expressive-code).
+   Les blocs de code de Starlight fonctionnent grâce à la librairie [Expressive Code](https://expressive-code.com/).
    Vous pouvez définir des traductions pour les textes de l'interface utilisateur utilisés dans le même fichier JSON en utilisant les clés `expressiveCode` :
 
    ```json
@@ -298,6 +298,9 @@ export const GET = (context) => {
 	return new Response(context.locals.t('404.text'));
 };
 ```
+
+Dans le contexte d'un module d'extension Starlight, vous pouvez utiliser l'utilitaire [`useTranslations()`](/fr/reference/plugins/#usetranslations) pour accéder à cette API pour une langue spécifique.
+Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus d'informations.
 
 ### Afficher une chaîne de l'interface utilisateur
 

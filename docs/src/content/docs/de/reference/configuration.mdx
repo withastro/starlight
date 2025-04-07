@@ -1,6 +1,6 @@
 ---
-title: Konfigurationsreferenz
-description: Ein Überblick über alle von Starlight unterstützten Konfigurationsoptionen.
+title: Konfigurations&shy;referenz
+description: Ein Überblick über alle von Starlight unterstützten Konfigurations&shy;optionen.
 sidebar:
   label: Konfiguration
 ---
@@ -38,7 +38,7 @@ Wenn die Objektform verwendet wird, müssen die Schlüssel BCP-47-Tags sein (z. 
 starlight({
 	title: {
 		en: 'My delightful docs site',
-		de: 'Meine bezaubernde Dokumentationsseite',
+		de: 'Meine bezaubernde Dokumentationswebsite',
 	},
 });
 ```
@@ -303,7 +303,7 @@ Die Bezeichnung für diese Sprache, die den Benutzern angezeigt werden soll, z. 
 
 **Typ:** `string`
 
-Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regionalspezifischen Übersetzungen gefunden werden.
+Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regional&shy;spezifischen Übersetzungen gefunden werden.
 
 ##### `dir`
 
@@ -347,7 +347,7 @@ import SocialLinksType from '~/components/social-links-type.astro';
 
 **Typ:** <SocialLinksType />
 
-Optionale Angaben zu den Social-Media-Konten für diese Site. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
+Optionale Angaben zu den Social-Media-Konten für diese Website. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
 
 ```js
 starlight({
@@ -386,10 +386,10 @@ starlight({
 **Typ:** `StarlightExpressiveCodeOptions | boolean`  
 **Standard:** `true`
 
-Starlight verwendet [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
+Starlight verwendet [Expressive Code](https://expressive-code.com), um Codeblöcke zu rendern und Unterstützung für das Hervorheben von Teilen von Codebeispielen, das Hinzufügen von Dateinamen zu Codeblöcken und mehr hinzuzufügen.
 Im [Handbuch „Codeblöcke“](/de/guides/authoring-content/#codeblöcke) erfährst du, wie du die Expressive Code-Syntax in deinen Markdown- und MDX-Inhalten verwendest.
 
-Du kannst alle standardmäßigen [Expressive Code-Konfigurationsoptionen](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
+Du kannst alle standardmäßigen [Expressive Code-Konfigurations&shy;optionen](https://expressive-code.com/reference/configuration/) sowie einige Starlight-spezifische Eigenschaften verwenden, indem du sie in der Option `expressiveCode` von Starlight festlegst.
 Lege beispielsweise die Option `styleOverrides` von Expressive Code fest, um das Standard-CSS zu überschreiben. Dadurch sind Anpassungen möglich, beispielsweise das Hinzufügen abgerundeter Ecken zu deinen Codeblöcken:
 
 ```js ins={2-4}
@@ -416,11 +416,11 @@ Zusätzlich zu den standardmäßigen Expressive Code-Optionen kannst du in deine
 **Standard:** `['starlight-dark', 'starlight-light']`
 
 Lege die Designs fest, die zum Stylen von Codeblöcken verwendet werden.
-Weitere Informationen zu den unterstützten Designformaten findest du in der [Expressive Code-Dokumentation zu Designs](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes).
+Weitere Informationen zu den unterstützten Designformaten findest du in der [Expressive Code-Dokumentation zu Designs](https://expressive-code.com/guides/themes/).
 
 Starlight verwendet standardmäßig die dunkle und helle Variante von Sarah Drasners [Night Owl-Thema](https://github.com/sdras/night-owl-vscode-theme).
 
-Wenn du mindestens ein dunkles und ein helles Design angibst, wird Starlight das aktive Codeblock-Design automatisch mit dem aktuellen Site-Design synchron halten.
+Wenn du mindestens ein dunkles und ein helles Design angibst, wird Starlight das aktive Codeblock-Design automatisch mit dem aktuellen Website-Design synchron halten.
 Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#usestarlightdarkmodeswitch).
 
 #### `useStarlightDarkModeSwitch`
@@ -428,8 +428,8 @@ Konfiguriere dieses Verhalten mit der Option [`useStarlightDarkModeSwitch`](#use
 **Typ:** `boolean`  
 **Standard:** `true`
 
-Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Site-Design ändert.
-Falls `false`, müssen Sie manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
+Falls `true`, wechseln Codeblöcke automatisch zwischen hellen und dunklen Designs, wenn sich das Website-Design ändert.
+Falls `false`, musst du manuell CSS hinzufügen, um das Wechseln zwischen mehreren Designs zu handhaben.
 
 :::note
 Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Design angeben, damit der Wechsel zum Starlight-Dunkelmodus funktioniert.
@@ -440,8 +440,8 @@ Beim Festlegen von `themes` musst du mindestens ein dunkles und ein helles Desig
 **Typ:** `boolean`  
 **Standard:** `true` wenn `themes` nicht gesetzt ist, andernfalls `false`
 
-Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Site-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
-Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungsdesign bereitgestellten Farben verwendet.
+Falls `true`, werden Starlights CSS-Variablen für die Farben von Codeblock-UI-Elementen (Hintergründe, Schaltflächen, Schatten usw.) verwendet, die dem [Website-Farbdesign](/de/guides/css-and-tailwind/#themes) entsprechen.
+Falls `false`, werden für diese Elemente die vom aktiven Syntaxhervorhebungs&shy;design bereitgestellten Farben verwendet.
 
 :::note
 Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du mindestens ein dunkles und ein helles Theme bereitstellen, um den richtigen Farbkontrast zu gewährleisten.
@@ -449,15 +449,48 @@ Wenn du benutzerdefinierte Themes verwendest und dies auf `true` setzt, musst du
 
 ### `pagefind`
 
-**Typ:** `boolean`  
+**Typ:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **Standard:** `true`
 
-Lege fest, ob Starlights Standard-Site-Search-Anbieter [Pagefind](https://pagefind.app/) aktiviert ist.
+Konfiguriere den Standard-Site-Suchanbieter von Starlight [Pagefind](https://pagefind.app/).
 
 Setze diese Option auf `false`, um die Indizierung deiner Website mit Pagefind zu deaktivieren.
 Dadurch wird auch die Standard-Suchoberfläche ausgeblendet, falls sie verwendet wird.
 
 Pagefind kann nicht aktiviert werden, wenn die Option [`prerender`](#prerender) auf `false` gesetzt ist.
+
+Setze `pagefind` auf ein Objekt, um den Pagefind-Suchclient zu konfigurieren:
+
+- Siehe [„Anpassen des Pagefind-Rankings (EN)“](https://pagefind.app/docs/ranking/) in der Pagefind-Dokumentation für weitere Details über die Verwendung der Option `pagefind.ranking`, um zu kontrollieren, wie die Rangfolge der Suchergebnisse berechnet wird
+- Siehe [„Mehrere Websites durchsuchen (EN)“](https://pagefind.app/docs/multisite/) in der Pagefind-Dokumentation für weitere Informationen über die Verwendung der Option `pagefind.mergeIndex` zur Steuerung der Suche über mehrere Websites
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
 
 ### `prerender`
 
@@ -512,7 +545,7 @@ interface HeadConfig {
 
 Legt fest, ob in der Fußzeile angezeigt werden soll, wann die Seite zuletzt aktualisiert wurde.
 
-Standardmäßig verwendet diese Funktion die Git-Historie deines Repositorys und kann auf einigen Bereitstellungsplattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
+Standardmäßig verwendet diese Funktion die Git-Historie deines Repositorys und kann auf einigen Bereitstellungs&shy;plattformen, die [shallow clones](https://git-scm.com/docs/git-clone/de#git-clone---depthltTiefegt) durchführen, nicht genau sein. Eine Seite kann diese Einstellung oder das Git-basierte Datum mit dem [`lastUpdated` Frontmatter-Feld](/de/reference/frontmatter/#lastupdated) überschreiben.
 
 ### `pagination`
 
@@ -562,21 +595,30 @@ starlight({
 
 Legt das Trennzeichen zwischen Seitentitel und dem Titel der Website im `<title>`-Tag der Website fest, welches in den Browser-Tabs angezeigt wird.
 
-Standardmäßig hat jede Seite einen `<title>` von `Seiten Überschrift | Webseitenname`.
-Zum Beispiel heißt diese Seite „Konfigurationsreferenz“ und diese Website heißt „Starlight“, also ist der `<titel>` für diese Seite „Konfigurationsreferenz | Starlight“.
+Standardmäßig hat jede Seite einen `<title>` von `Seiten-Titel | Websitename`.
+Zum Beispiel heißt diese Seite „Konfigurations&shy;referenz“ und diese Website heißt „Starlight“, also ist der `<titel>` für diese Seite „Konfigurations&shy;referenz | Starlight“.
 
 ### `disable404Route`
 
 **Typ:** `Boolean`  
 **Standard:** `false`
 
-Deaktiviert die Einspeisung von Starlights Standard [404 Seite](https://docs.astro.build/de/basics/astro-pages/#benutzerdefinierte-404-fehlerseite). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
+Deaktiviert die Einspeisung von Starlights Standard [404-Seite](https://docs.astro.build/de/basics/astro-pages/#benutzerdefinierte-404-fehlerseite). Um eine eigene `src/pages/404.astro`-Route in deinem Projekt zu verwenden, setze diese Option auf `true`.
+
+### `routeMiddleware`
+
+**Typ:** `string | string[]`
+
+Gib Pfade zu Route-Middleware an, welche die Verarbeitung deiner Daten durch Starlight verändern kann.
+Diese Dateipfade dürfen nicht mit [Astros Middleware](https://docs.astro.build/de/guides/middleware/) kollidieren.
+
+In der [Routendaten-Anleitung](/de/guides/route-data/#anpassen-der-routendaten) findest du weitere Informationen zur Erstellung von Route-Middleware.
 
 ### `components`
 
 **Typ:** `Record<string, string>`
 
-Gib die Pfade zu den Komponenten an, um die Standardimplementierungen von Starlight zu ersetzen.
+Gib die Pfade zu den Komponenten an, um die Standard&shy;implementierungen von Starlight zu ersetzen.
 
 ```js
 starlight({
@@ -606,6 +648,9 @@ starlight({
 Siehe die [Referenz für Plugins](/de/reference/plugins/) für Details zur Erstellung eigener Plugins.
 
 ### `credits`
+
+**Typ:** `boolean`  
+**Standard:** `false`
 
 Aktiviere die Anzeige eines „Erstellt mit Starlight“-Links in der Fußzeile deiner Website.
 

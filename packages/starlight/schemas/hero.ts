@@ -1,9 +1,8 @@
 import { z } from 'astro/zod';
 import type { SchemaContext } from 'astro:content';
-import { Icons } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components/Icons';
 
-type IconName = keyof typeof Icons;
-const iconNames = Object.keys(Icons) as [IconName, ...IconName[]];
+const iconNames = Object.keys(Icons) as [StarlightIcon, ...StarlightIcon[]];
 
 export const HeroSchema = ({ image }: SchemaContext) =>
 	z.object({

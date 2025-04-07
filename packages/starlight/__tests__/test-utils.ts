@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 import project from 'virtual:starlight/project-context';
 import { docsSchema, i18nSchema } from '../schema';
-import type { StarlightDocsCollectionEntry } from '../utils/routing';
+import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
 import { vi } from 'vitest';
 
 const frontmatterSchema = docsSchema()({
@@ -52,8 +52,9 @@ function mockDoc(
 
 function mockDict(id: string, data: z.input<ReturnType<typeof i18nSchema>>) {
 	return {
-		id,
+		id: project.legacyCollections ? id : id.toLocaleLowerCase(),
 		data: i18nSchema().parse(data),
+		filePath: project.legacyCollections ? undefined : `src/content/i18n/${id}.yml`,
 	};
 }
 

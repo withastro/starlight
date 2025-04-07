@@ -219,13 +219,13 @@ var fun = function lang(l) {
 
 ### Fonctionnalités d'Expressive Code
 
-Starlight utilise [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) pour étendre les possibilités de formatage des blocs de code.
+Starlight utilise [Expressive Code](https://expressive-code.com/) pour étendre les possibilités de formatage des blocs de code.
 Les plugins Expressive Code de marqueurs de texte et de cadres de fenêtre sont activés par défaut.
 L'affichage des blocs de code peut être configuré à l'aide de [l'option de configuration `expressiveCode`](/fr/reference/configuration/#expressivecode) de Starlight.
 
 #### Marqueurs de texte
 
-Vous pouvez mettre en évidence des lignes ou des portions spécifiques de vos blocs de code à l'aide des [marqueurs de texte d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) sur la première ligne de votre bloc de code.
+Vous pouvez mettre en évidence des lignes ou des portions spécifiques de vos blocs de code à l'aide des [marqueurs de texte d'Expressive Code](https://expressive-code.com/key-features/text-markers/) sur la première ligne de votre bloc de code.
 Utilisez des accolades (`{ }`) pour mettre en évidence des lignes entières, et des guillemets pour mettre en évidence des chaînes de texte.
 
 Il existe trois styles de mise en évidence : neutre pour attirer l'attention sur le code, vert pour indiquer du code inséré, et rouge pour indiquer du code supprimé.
@@ -233,10 +233,10 @@ Du texte et des lignes entières peuvent être marqués à l'aide du marqueur pa
 
 Expressive Code fournit plusieurs options pour personnaliser l'apparence visuelle de vos exemples de code.
 Beaucoup d'entre elles peuvent être combinées pour obtenir des exemples de code très illustratifs.
-Merci d'explorer la [documentation d'Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) pour obtenir une liste complète des options disponibles.
+Merci d'explorer la [documentation d'Expressive Code](https://expressive-code.com/key-features/text-markers/#configuration) pour obtenir une liste complète des options disponibles.
 Certaines des options les plus courantes sont présentées ci-dessous :
 
-- [Marquer des lignes entières et des plages de lignes à l'aide du marqueur `{ }`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges) :
+- [Marquer des lignes entières et des plages de lignes à l'aide du marqueur `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges) :
 
   ```js {2-3}
   function demo() {
@@ -244,6 +244,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   	return 'Ceci est la ligne #3 de cet exemple';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js {2-3}
@@ -254,7 +258,24 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   ```
   ````
 
-- [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines) :
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// Cette ligne (#2) et la suivante sont mises en évidence
+  	return 'Ceci est la ligne #3 de cet exemple';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Marquer des sélections de texte à l'aide du marqueur `" "` ou d'expressions régulières](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines) :
 
   ```js "termes individuels" /Même.*charge/
   // Des termes individuels peuvent également être mis en évidence
@@ -262,6 +283,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   	return 'Même les expressions régulières sont prises en charge';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js "termes individuels" /Même.*charge/
@@ -272,7 +297,24 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   ```
   ````
 
-- [Marquer du texte ou des lignes comme insérés ou supprimés avec `ins` ou `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del) :
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'termes individuels' /Même.*charge/" %}
+  // Des termes individuels peuvent également être mis en évidence
+  function demo() {
+  	return 'Même les expressions régulières sont prises en charge';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Marquer du texte ou des lignes comme insérés ou supprimés avec `ins` ou `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del) :
 
   ```js "return true;" ins="insertion" del="suppression"
   function demo() {
@@ -282,6 +324,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "return true;" ins="insertion" del="suppression"
   function demo() {
@@ -292,7 +338,25 @@ Certaines des options les plus courantes sont présentées ci-dessous :
   ```
   ````
 
-- [Combiner coloration syntaxique et syntaxe de type `diff`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax) :
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='insertion' del='suppression'" %}
+  function demo() {
+  	console.log("Voici des marqueurs d'insertion et de suppression");
+  	// La déclaration return utilise le type de marqueur par défaut
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Combiner coloration syntaxique et syntaxe de type `diff`](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax) :
 
   ```diff lang="js"
     function ceciEstDuJavaScript() {
@@ -303,6 +367,10 @@ Certaines des options les plus courantes sont présentées ci-dessous :
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function ceciEstDuJavaScript() {
@@ -313,6 +381,25 @@ Certaines des options les plus courantes sont présentées ci-dessous :
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function ceciEstDuJavaScript() {
+      // Ce bloc entier utilise la coloration syntaxique JavaScript,
+      // et nous pouvons toujours y ajouter des marqueurs de différence !
+  -   console.log('Ancien code à supprimer')
+  +   console.log('Nouveau code brillant !')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Cadres et titres
 
@@ -322,13 +409,17 @@ Les autres langages s'affichent dans un cadre de style éditeur de code s'ils in
 
 Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `title="..."` après les accents graves d'ouverture et l'identifiant de langage, ou avec un nom de fichier en commentaire sur la première ligne du bloc de code.
 
-- [Ajouter un nom de fichier avec un commentaire](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title) :
+- [Ajouter un nom de fichier avec un commentaire](https://expressive-code.com/key-features/frames/#code-editor-frames) :
 
   ```js
   // mon-fichier-de-test.js
   console.log('Hello World!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // mon-fichier-de-test.js
@@ -336,11 +427,30 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   ```
   ````
 
-- [Ajouer un title à une fenêtre de terminal](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title) :
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // mon-fichier-de-test.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Ajouter un titre à une fenêtre de terminal](https://expressive-code.com/key-features/frames/#terminal-frames) :
 
   ```bash title="Installation des dépendances…"
   npm install
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash title="Installation des dépendances…"
@@ -348,17 +458,49 @@ Le titre optionnel d'un bloc de code peut être défini soit avec un attribut `t
   ```
   ````
 
-- [Désactiver les cadres de fenêtre avec `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types) :
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Installation des dépendances…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Désactiver les cadres de fenêtre avec `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types) :
 
   ```bash frame="none"
   echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash frame="none"
   echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "Ceci n'est pas affiché comme un terminal malgré l'utilisation du langage bash"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Détails
 

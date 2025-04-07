@@ -33,7 +33,7 @@ description: 了解更多关于此项目的信息。
 
 **类型：** `string`
 
-覆盖页面的slug。有关更多详细信息，请参阅 Astro文档中的 [ "定义自定义slugs"](https://docs.astro.build/zh-cn/guides/content-collections/#定义自定义-slugs) 部分。
+覆盖页面的slug。有关更多详细信息，请参阅 Astro文档中的 [ "定义自定义 ID"](https://docs.astro.build/zh-cn/guides/content-collections/#定义自定义-id) 部分。
 
 ### `editUrl`
 
@@ -272,7 +272,7 @@ pagefind: false
 **类型：** `boolean`  
 **默认值：** `false`
 
-设置此页面是否应被视为草稿，并且不包含在 [生产版本](https://docs.astro.build/zh-cn/reference/cli-reference/#astro-build) 和 [自动生成的链接组](/zh-cn/guides/sidebar/#自动生成的分组) 中。设置为 `true` 可将页面标记为草稿，并使其仅在开发过程中可见。
+设置此页面是否应被视为草稿，并且不包含在 [生产版本](https://docs.astro.build/zh-cn/reference/cli-reference/#astro-build)。设置为 `true` 可将页面标记为草稿，并使其仅在开发过程中可见。
 
 ```md
 ---
@@ -281,6 +281,8 @@ pagefind: false
 draft: true
 ---
 ```
+
+因为草稿页面并不包含在构建输出中，所以你无法使用 [slug](/zh-cn/guides/sidebar/#内部链接) 直接将草稿页面添加到网页中。目录中用于 [自动生成侧边栏](/zh-cn/guides/sidebar/#自动生成的分组) 的草稿页面在生产版本中自动排除。
 
 ### `sidebar`
 
@@ -334,7 +336,7 @@ sidebar:
 
 #### `hidden`
 
-**类型：** `boolean`
+**类型：** `boolean`  
 **默认值：** `false`
 
 防止此页面包含在自动生成的侧边栏组中。
@@ -396,19 +398,20 @@ sidebar:
 
 ## 自定义 frontmatter schema
 
-Starlight 的 `docs` 内容集合的 frontmatter schema 在 `src/content/config.ts` 中使用 `docsSchema()` 辅助函数进行配置：
+Starlight 的 `docs` 内容集合的 frontmatter schema 在 `src/content.config.ts` 中使用 `docsSchema()` 辅助函数进行配置：
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-了解更多关于内容集合模式的信息，请参阅 Astro 文档中的 [“定义集合模式”](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式) 部分。
+了解更多关于内容集合模式的信息，请参阅 Astro 文档中的 [“定义集合模式”](https://docs.astro.build/zh-cn/guides/content-collections/#定义集合模式schema) 部分。
 
 `docsSchema()` 采用以下选项：
 
@@ -422,13 +425,15 @@ export const collections = {
 
 在下面的示例中，我们为 `description` 提供了一个更严格的类型，使其成为必填项，并添加了一个新的可选的 `category` 字段：
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // 将内置字段设置为必填项。
@@ -443,13 +448,15 @@ export const collections = {
 
 要利用 [Astro `image()` 辅助函数](https://docs.astro.build/zh-cn/guides/images/#内容集合中的图像)，请使用返回 schema 扩展的函数：
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({

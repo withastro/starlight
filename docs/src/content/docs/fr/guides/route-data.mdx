@@ -1,0 +1,139 @@
+---
+title: Données de route
+description: Apprenez comment le modèle de données de page de Starlight est utilisé pour afficher vos pages et comment vous pouvez le personnaliser.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Lorsque Starlight affiche une page dans votre documentation, un objet de données de route est d'abord créé pour représenter ce qui se trouve sur cette page.
+Ce guide explique comment les données de route sont générées, comment les utiliser et comment vous pouvez les personnaliser pour modifier le comportement par défaut de Starlight.
+
+Consultez la [« Référence des données de route »](/fr/reference/route-data/) pour une liste complète des propriétés disponibles.
+
+## Qu'est-ce que les données de route?
+
+Les données de route de Starlight sont un objet contenant toutes les informations nécessaires pour afficher une seule page.
+Il inclut des informations pour la page courante ainsi que des données générées à partir de votre configuration de Starlight.
+
+## Utilisation des données de route
+
+Tous les composants de Starlight utilisent les données de route pour décider de ce qui doit être affiché pour chaque page.
+Par exemple, la chaîne de caractères [`siteTitle`](/fr/reference/route-data/#sitetitle) est utilisée pour afficher le titre du site et le tableau [`sidebar`](/fr/reference/route-data/#sidebar) est utilisé pour afficher la barre latérale de navigation.
+
+Vous pouvez accéder à ces données à partir de la variable globale `Astro.locals.starlightRoute` dans les composants Astro :
+
+```astro title="exemple.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>Le titre de ce site est « {siteTitle} »</p>
+```
+
+Cela peut être utile, par exemple, lors de la mise en place de redéfinitions de composants pour personnaliser ce que vous affichez.
+
+## Personnalisation des données de route
+
+Les données de route de Starlight sont prêtes à l'emploi et ne nécessitent aucune configuration.
+Cependant, pour des cas d'utilisation avancés, vous pourriez vouloir personnaliser les données de route pour certaines ou toutes les pages afin de modifier le rendu de votre site.
+
+Il s'agit d'un concept similaire aux [redéfinitions de composants](/fr/guides/overriding-components/), mais au lieu de modifier la façon dont Starlight affiche vos données, vous modifiez les données que Starlight affiche.
+
+### Quand personnaliser les données de route
+
+Personnaliser les données de route peut être utile lorsque vous souhaitez modifier la façon dont Starlight traite vos données d'une manière qui n'est pas possible avec les options de configuration existantes.
+
+Par exemple, vous pourriez vouloir filtrer les éléments de la barre latérale de navigation ou personnaliser les titres de certaines pages.
+Ce type de modification ne nécessite pas de modifier les composants par défaut de Starlight, seulement les données transmises à ces composants.
+
+### Comment personnaliser les données de route
+
+Vous pouvez personnaliser les données de route en utilisant une forme spéciale de « middleware ».
+C'est une fonction qui est appelée à chaque fois que Starlight affiche une page et peut modifier les valeurs contenues dans l'objet de données de route.
+
+<Steps>
+
+1. Créez un nouveau fichier exportant une fonction `onRequest` en utilisant l'utilitaire `defineRouteMiddleware()` de Starlight :
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware(() => {});
+   ```
+
+2. Indiquez à Starlight où se trouve le fichier contenant votre middleware de données de route dans `astro.config.mjs` :
+
+   ```js ins={9}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Mon ravissant site de documentation',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
+   });
+   ```
+
+3. Mettez à jour votre fonction `onRequest` pour modifier les données de route.
+
+   Le premier argument que votre middleware recevra est [l'objet `context` d'Astro](https://docs.astro.build/fr/reference/api-reference/).
+   Celui-ci contient toutes les informations concernant le rendu de la page courante, y compris l'URL actuelle et les `locals`.
+
+   Dans cet exemple, nous allons rendre notre documentation plus passionnante en ajoutant un point d'exclamation à la fin du titre de chaque page.
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware((context) => {
+   	// Récupérer l'entrée de la collection de contenus pour cette page.
+   	const { entry } = context.locals.starlightRoute;
+   	// Mettre à jour le titre pour ajouter un point d'exclamation.
+   	entry.data.title = entry.data.title + ' !';
+   });
+   ```
+
+</Steps>
+
+#### Plusieurs middleware de route
+
+Starlight accepte également d'utiliser plusieurs middlewares.
+Définissez `routeMiddleware` comme un tableau de chemins pour ajouter plus d'un middleware :
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Mon site avec plusieurs middlewares',
+			routeMiddleware: ['./src/middleware-un.ts', './src/middleware-deux.ts'],
+		}),
+	],
+});
+```
+
+#### Attendre des middlewares de route ultérieurs
+
+Pour attendre que des middlewares ultérieurs s'exécutent avant d'exécuter votre code, vous pouvez attendre la fin de l'appel à `next()` passé en deuxième argument à votre fonction middleware.
+Cela peut être utile pour attendre que le middleware d'un module d'extension s'exécute avant de faire des modifications par exemple.
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// Attendre que des middlewares ultérieurs s'exécutent.
+	await next();
+	// Modifier les données de route.
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + ' !';
+});
+```

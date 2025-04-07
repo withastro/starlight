@@ -1,6 +1,8 @@
 ---
 title: 全站搜索
 description: 了解 Starlight 的内置全站搜索功能和如何自定义它们。
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
@@ -110,12 +112,61 @@ title: 部分索引的页面
 
 #### DocSearch 配置
 
-Starlight DocSearch 插件还支持通过下面这些附加的选项来自定义 DocSearch 组件：
+Starlight DocSearch 插件支持通过下面这些内联的选项来自定义 DocSearch 组件：
 
 - `maxResultsPerGroup`：限制每个搜索组所显示的结果数。默认值为 `5`。
 - `disableUserPersonalization`：阻止 DocSearch 将用户的最近搜索和收藏夹保存到本地存储。默认值为 `false`。
 - `insights`：启用 Algolia Insights 插件并将搜索事件发送到你的 DocSearch 索引。默认值为 `false`。
 - `searchParameters`：一个可用于自定义 [Algolia 搜索参数](https://www.algolia.com/doc/api-reference/search-api-parameters/)的对象。
+
+##### 其他 DocSearch 选项
+
+为了将函数选项（如 `transformItems()` 或 `resultsFooterComponent()`）传递给 DocSearch 组件，需要创建一个单独的配置文件。
+
+<Steps>
+
+1. 创建一个 TypeScript 文件，导出 DocSearch 选项。
+
+   ```ts
+   // src/config/docsearch.ts
+   import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+
+   export default {
+   	appId: 'YOUR_APP_ID',
+   	apiKey: 'YOUR_SEARCH_API_KEY',
+   	indexName: 'YOUR_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
+   } satisfies DocSearchClientOptions;
+   ```
+
+2. 在 `astro.config.mjs` 中将你的配置文件路径传递给 Starlight DocSearch 插件。
+
+   ```js {11-13}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: '使用 DocSearch 的网站',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+请参阅 [DocSearch JavaScript 客户端 API 参考](https://docsearch.algolia.com/docs/api/) 以了解所有支持的选项。
 
 #### 翻译 DocSearch UI
 
@@ -124,18 +175,19 @@ DocSearch 默认只提供了英语 UI 文本。
 
 <Steps>
 
-1. 在 `src/content/config.ts` 中给 Starlight 的 `i18n` 内容集合定义添加 DocSearch schema：
+1. 在 `src/content.config.ts` 中给 Starlight 的 `i18n` 内容集合定义添加 DocSearch schema：
 
-   ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
    	i18n: defineCollection({
-   		type: 'data',
+   		loader: i18nLoader(),
    		schema: i18nSchema({ extend: docSearchI18nSchema() }),
    	}),
    };
