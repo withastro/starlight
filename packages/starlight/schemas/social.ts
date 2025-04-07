@@ -19,4 +19,4 @@ export const SocialLinksSchema = () =>
 			});
 		}
 		return value;
-	}, LinksSchema);
+	}, LinksSchema) as unknown as typeof LinksSchema;
