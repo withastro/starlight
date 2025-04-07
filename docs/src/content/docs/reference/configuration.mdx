@@ -657,3 +657,21 @@ starlight({
 	credits: true,
 });
 ```
+
+### `icons`
+
+**type:** `AstroIconOptions`
+
+Starlight uses [Astro Icon](https://www.astroicon.dev/) to render Iconify and local icons.
+See the [“Iconify icons”](/reference/icons/#iconify-icons) and [“Local icons”](/reference/icons/#local-icons) guides to learn how to use custom icons in your project.
+
+You can use any of the standard [Astro Icon configuration options](https://www.astroicon.dev/reference/configuration/) by setting them in Starlight’s `icons` option.
+For example, set Astro Icon’s `iconDir` option to override the default location for local icons:
+
+```js ins={2-4}
+starlight({
+	icons: {
+		iconDir: 'src/logos',
+	},
+});
+```

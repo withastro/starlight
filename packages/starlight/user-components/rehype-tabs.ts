@@ -2,7 +2,7 @@ import type { Element } from 'hast';
 import { select } from 'hast-util-select';
 import { rehype } from 'rehype';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import type { StarlightIcon } from '../components/Icons';
+import type { StarlightIcon } from '../utils/icons';
 
 interface Panel {
 	panelId: string;

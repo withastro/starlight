@@ -1,4 +1,23 @@
+import fs from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import {
+	cleanupSVG,
+	importDirectory,
+	isEmptyColor,
+	parseColors,
+	runSVGO,
+	type SVG,
+} from '@iconify/tools';
+import { stringToIcon, type IconifyIconName } from '@iconify/utils';
+import type { Color } from '@iconify/utils/lib/colors/types';
+import { loadCollectionFromFS } from '@iconify/utils/lib/loader/fs';
+import { AstroError } from 'astro/errors';
+import type { Element } from 'hast';
+import { fromHtml } from 'hast-util-from-html';
+
+import type { StarlightConfig } from './user-config';
 import { FileIcons } from '../user-components/file-tree-icons';
+import type { AsideVariant } from '../integrations/asides';
 
 export const BuiltInIcons = {
 	'up-caret':
@@ -200,4 +219,211 @@ export const Icons = {
 	...FileIcons,
 };
 
-export type StarlightIcon = keyof typeof Icons;
+export const AsideDefaultIcons: Record<AsideVariant, StarlightBuiltInIcon> = {
+	note: 'information',
+	tip: 'rocket',
+	caution: 'warning',
+	danger: 'error',
+} as const;
+
+export type StarlightBuiltInIcon = keyof typeof Icons;
+// Add any string to the type to support local and Iconify icons while preserving autocomplete for built-in icons.
+export type StarlightIcon = StarlightBuiltInIcon | (string & {});
+
+/** Determine if the given name matches a built-in icon. */
+export function isBuiltInIcon(name: string): name is StarlightBuiltInIcon {
+	return name in Icons;
+}
+
+/** Return the HAST tree for the given built-in icon. */
+export function getBuiltInIconHastTree(name: StarlightBuiltInIcon) {
+	return getIconHastTree(Icons[name]);
+}
+
+/** Return the HAST tree for a given local or Iconify icon. */
+export function getCollectionIconHastTree(name: string) {
+	return getIconHastTree(getCollectionIcon(name).body);
+}
+
+/** Return the HAST tree for the given SVG icon based on the given HTML body. */
+function getIconHastTree(html: string) {
+	// Omit the root node and return only the first child which is the SVG element.
+	return fromHtml(`<svg>${html}</svg>`, { fragment: true, space: 'svg' }).children[0] as Element;
+}
+
+/** A map of all local and Iconify collections loaded in a remark context keyed by collection name. */
+const iconCollections = new Map<string, IconifyJSON>();
+
+/** Collection prefix used for local icons. */
+const localIconCollectionPrefix = 'starlight-local-icons';
+
+/** Load and cache all local icons and Iconify collections. */
+export async function loadIcons(root: URL, config: StarlightConfig['icons']) {
+	await loadLocalIcons(root, config);
+	await loadIconifyCollections(root);
+}
+
+/**
+ * Load and cache local icons.
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadLocalCollection.ts#L11
+ */
+async function loadLocalIcons(root: URL, config: StarlightConfig['icons']) {
+	try {
+		const iconSet = await importDirectory(fileURLToPath(new URL(config.iconDir, root)), {
+			ignoreImportErrors: 'warn',
+			keepTitles: true,
+			keyword: (file) => file.subdir + file.file,
+			prefix: localIconCollectionPrefix,
+		});
+
+		await iconSet.forEach(async (name, type) => {
+			if (type !== 'icon') return;
+
+			const svg = iconSet.toSVG(name);
+
+			if (!svg) {
+				iconSet.remove(name);
+				return;
+			}
+
+			try {
+				cleanupSVG(svg, { keepTitles: true });
+
+				if (isMonochrome(svg)) {
+					convertToCurrentColor(svg);
+				}
+
+				runSVGO(svg, config.svgoOptions);
+			} catch (error) {
+				// An warning is not logged here like Astro Icon does because this would be a duplicated
+				// warning as Astro Icon will also try to load the local icon.
+				iconSet.remove(name);
+				return;
+			}
+
+			iconSet.fromSVG(name, svg);
+		});
+
+		iconCollections.set(localIconCollectionPrefix, iconSet.export(true));
+	} catch (error) {
+		// The local icon directory may not exist.
+	}
+}
+
+/** Load and cache all detected Iconify collections. */
+async function loadIconifyCollections(root: URL) {
+	const collections = await detectIconifyCollections(root);
+
+	for (const collection of collections) {
+		const collectionData = await loadCollectionFromFS(collection, false, undefined, root.pathname);
+		if (collectionData) {
+			iconCollections.set(collection, collectionData);
+		}
+	}
+}
+
+/**
+ * Detect all user-installed Iconify collections in a project.
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadIconifyCollections.ts#L88
+ */
+async function detectIconifyCollections(root: URL) {
+	const collections: string[] = [];
+	try {
+		const text = await fs.readFile(new URL('./package.json', root), { encoding: 'utf8' });
+		const { dependencies = {}, devDependencies = {} } = JSON.parse(text);
+		for (const dep of [...Object.keys(dependencies), ...Object.keys(devDependencies)]) {
+			if (!dep.startsWith('@iconify-json/')) continue;
+			collections.push(dep.replace('@iconify-json/', ''));
+		}
+	} catch {
+		// Return an empty array if we fail to properly detect Iconify collections.
+	}
+	return collections;
+}
+
+/** Returns an Iconify icon object from the given icon name for a local or Iconify icon. */
+function getCollectionIcon(name: string) {
+	let iconName: IconifyIconName | null = null;
+	let [inferredPrefix, inferredName] = name.split(':');
+	const isLocalIcon = inferredPrefix && !inferredName;
+
+	if (isLocalIcon) {
+		iconName = { name, prefix: localIconCollectionPrefix, provider: '' };
+	} else {
+		iconName = stringToIcon(name);
+	}
+
+	if (!iconName) {
+		throw new AstroError(
+			`Failed to parse \`${name}\` Iconify icon name.`,
+			'Make sure the icon name is a valid Iconify icon name.'
+		);
+	}
+
+	const icon = iconCollections.get(iconName.prefix)?.icons[iconName.name];
+
+	if (!icon) {
+		throw new AstroError(
+			`Failed to locate \`${name}\` ${isLocalIcon ? 'local' : 'Iconify'} icon.`,
+			isLocalIcon
+				? `Make sure the that the \`${iconName.name}\` local icon exists.`
+				: `Make sure the Iconify \`${iconName.prefix}\` collection is installed and that the \`${iconName.name}\` icon exists.`
+		);
+	}
+
+	return icon;
+}
+
+/**
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadLocalCollection.ts#L65
+ */
+function convertToCurrentColor(svg: SVG) {
+	parseColors(svg, {
+		defaultColor: 'currentColor',
+		callback: (_, colorStr, color) => {
+			return color === null || isEmptyColor(color) || isWhite(color) ? colorStr : 'currentColor';
+		},
+	});
+}
+
+/**
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadLocalCollection.ts#L76
+ */
+function isMonochrome(svg: SVG): boolean {
+	let monochrome = true;
+
+	parseColors(svg, {
+		defaultColor: 'currentColor',
+		callback: (_, colorStr, color) => {
+			if (!monochrome) return colorStr;
+			monochrome = !color || isEmptyColor(color) || isWhite(color) || isBlack(color);
+			return colorStr;
+		},
+	});
+
+	return monochrome;
+}
+
+/**
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadLocalCollection.ts#L91
+ */
+function isBlack(color: Color): boolean {
+	switch (color.type) {
+		case 'rgb':
+			return color.r === 0 && color.r === color.g && color.g === color.b;
+	}
+	return false;
+}
+
+/**
+ * @see https://github.com/natemoo-re/astro-icon/blob/85cfae2426b8a94ca7f25429dba307558f232345/packages/core/src/loaders/loadLocalCollection.ts#L99
+ */
+function isWhite(color: Color): boolean {
+	switch (color.type) {
+		case 'rgb':
+			return color.r === 255 && color.r === color.g && color.g === color.b;
+	}
+	return false;
+}
+
+type IconifyJSON = NonNullable<Awaited<ReturnType<typeof loadCollectionFromFS>>>;

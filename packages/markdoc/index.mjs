@@ -67,6 +67,10 @@ export const StarlightMarkdocPreset = {
 		aside: {
 			render: component('@astrojs/starlight/components', 'Aside'),
 			attributes: {
+				icon: {
+					type: String,
+					required: false,
+				},
 				title: {
 					type: String,
 					required: false,

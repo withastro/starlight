@@ -1,0 +1,63 @@
+diff --git a/dist/loaders/loadIconifyCollections.js b/dist/loaders/loadIconifyCollections.js
+index b94f53885887bed93031a5ac1353ef16cd860c86..2a4ae126512103f4ebd17ffc213f10cec1e48422 100644
+--- a/dist/loaders/loadIconifyCollections.js
++++ b/dist/loaders/loadIconifyCollections.js
+@@ -12,7 +12,7 @@ export default async function loadIconifyCollections({ root, include = {}, }) {
+             continue;
+         include[name] = ["*"];
+     }
+-    const possibleCollections = await Promise.all(installedCollections.map((collectionName) => loadCollection(collectionName).then((possibleCollection) => [collectionName, possibleCollection])));
++    const possibleCollections = await Promise.all(installedCollections.map((collectionName) => loadCollection(collectionName, false, root).then((possibleCollection) => [collectionName, possibleCollection])));
+     const collections = possibleCollections.reduce((acc, [name, collection]) => {
+         if (!collection) {
+             console.error(`[astro-icon] "${name}" does not appear to be a valid iconify collection! Did you install the "@iconify-json/${name}" dependency?`);
+@@ -37,10 +37,10 @@ export default async function loadIconifyCollections({ root, include = {}, }) {
+     }, {});
+     return collections;
+ }
+-export async function loadCollection(name, autoInstall) {
++export async function loadCollection(name, autoInstall, root) {
+     if (!name)
+         return;
+-    return loadCollectionFromFS(name, autoInstall);
++    return loadCollectionFromFS(name, autoInstall, undefined, root.pathname);
+ }
+ async function detectInstalledCollections(root) {
+     try {
+diff --git a/dist/vite-plugin-astro-icon.js b/dist/vite-plugin-astro-icon.js
+index 2181966a939e3bbb47b279799706235fbf32695d..a97a9c40367a68bbb9f10068c5f38c92b2de003c 100644
+--- a/dist/vite-plugin-astro-icon.js
++++ b/dist/vite-plugin-astro-icon.js
+@@ -1,5 +1,6 @@
+ import { createHash } from "node:crypto";
+ import { parse, resolve } from "node:path";
++import { fileURLToPath } from "node:url";
+ import { mkdir, readFile, writeFile } from "node:fs/promises";
+ import loadLocalCollection from "./loaders/loadLocalCollection.js";
+ import loadIconifyCollections from "./loaders/loadIconifyCollections.js";
+@@ -8,6 +9,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
+     const { root } = ctx;
+     const virtualModuleId = "virtual:astro-icon";
+     const resolvedVirtualModuleId = "\0" + virtualModuleId;
++    const iconDirPath = fileURLToPath(new URL(iconDir, root));
+     return {
+         name: "astro-icon",
+         resolveId(id) {
+@@ -21,7 +23,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
+                     if (!collections) {
+                         collections = await loadIconifyCollections({ root, include });
+                     }
+-                    const local = await loadLocalCollection(iconDir, svgoOptions);
++                    const local = await loadLocalCollection(iconDirPath, svgoOptions);
+                     collections["local"] = local;
+                     logCollections(collections, { ...ctx, iconDir });
+                     await generateIconTypeDefinitions(Object.values(collections), root);
+@@ -47,7 +49,7 @@ export function createPlugin({ include = {}, iconDir = "src/icons", svgoOptions
+                     if (!collections) {
+                         collections = await loadIconifyCollections({ root, include });
+                     }
+-                    const local = await loadLocalCollection(iconDir, svgoOptions);
++                    const local = await loadLocalCollection(iconDirPath, svgoOptions);
+                     collections["local"] = local;
+                     logCollections(collections, { ...ctx, iconDir });
+                     await generateIconTypeDefinitions(Object.values(collections), root);

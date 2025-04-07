@@ -14,6 +14,7 @@
     "@astrojs/markdoc": "^0.12.4",
     "@astrojs/starlight": "^0.32.6",
     "@astrojs/starlight-markdoc": "^0.3.0",
+    "@iconify-json/mdi": "^1.2.3",
     "astro": "^5.5.3",
     "sharp": "^0.32.5"
   }

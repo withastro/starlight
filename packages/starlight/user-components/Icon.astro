@@ -1,5 +1,6 @@
 ---
-import { Icons, type StarlightIcon } from '../components/Icons';
+import { Icon as AstroIcon } from 'astro-icon/components';
+import { Icons, isBuiltInIcon, type StarlightIcon } from '../utils/icons';
 
 interface Props {
 	name: StarlightIcon;
@@ -13,15 +14,26 @@ const { name, label, size = '1em', color } = Astro.props;
 const a11yAttrs = label ? ({ 'aria-label': label } as const) : ({ 'aria-hidden': 'true' } as const);
 ---
 
-<svg
-	{...a11yAttrs}
-	class={Astro.props.class}
-	width="16"
-	height="16"
-	viewBox="0 0 24 24"
-	fill="currentColor"
-	set:html={Icons[name]}
-/>
+{
+	isBuiltInIcon(name) ? (
+		<svg
+			{...a11yAttrs}
+			class={Astro.props.class}
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			set:html={Icons[name]}
+		/>
+	) : (
+		<AstroIcon
+			{...a11yAttrs}
+			class={Astro.props.class}
+			{name}
+			style={`${color ? `--sl-icon-color: ${color};` : ''}--sl-icon-size: ${size};`}
+		/>
+	)
+}
 
 <style define:vars={{ 'sl-icon-color': color, 'sl-icon-size': size }}>
 	svg {

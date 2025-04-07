@@ -4,6 +4,7 @@ description: An overview of all the icons available in Starlight.
 ---
 
 Starlight provides a set of built-in icons that you can display in your content using the `<Icon>` component.
+Icon sets from [Iconify](https://iconify.design/) and local icons are also supported and can be used similarly.
 
 ## Use icons
 
@@ -12,7 +13,7 @@ They are also often used in other components, such as [cards](/components/cards/
 
 ## `StarlightIcon` type
 
-Use the `StarlightIcon` TypeScript type to reference the names of [Starlight’s built-in icons](#all-icons).
+Use the `StarlightIcon` TypeScript type to reference the names of [Starlight’s supported icons](#all-icons).
 
 ```ts {2} /icon: (StarlightIcon)/
 // src/icon.ts
@@ -25,8 +26,109 @@ function getIconLabel(icon: StarlightIcon) {
 
 ## All icons
 
-A list of all available icons is shown below with their associated names. Click an icon to copy its name to your clipboard.
+### Built-in icons
+
+A list of all built-in icons is shown below with their associated names. Click an icon to copy its name to your clipboard.
 
 import IconsList from '~/components/icons-list.astro';
 
 <IconsList labels={{ copied: 'Copied!' }} />
+
+### Iconify icons
+
+[Iconify](https://iconify.design/) distributes a wide range of icon sets that can also be used in Starlight just like the built-in icons.
+Starlight uses [Astro Icon](https://www.astroicon.dev/) to support Iconify icons.
+
+To get started, visit the [Iconify icon sets library](https://icon-sets.iconify.design/) or the [Icônes website](https://icones.js.org/) to find the icon set you want to use.
+
+The following example shows how to use the [`music` icon](https://icones.js.org/collection/lucide?s=music&icon=lucide:music) from the [Lucide](https://lucide.dev/) icon set.
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1.  Install the Iconify Lucide icon set:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @iconify-json/lucide
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @iconify-json/lucide
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @iconify-json/lucide
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+2.  Use the icon in any use-case that supports built-in icons by using the Iconify icon identifier.
+
+    For example, to use the Iconify icon with the `<Icon>` component, set the `name` attribute to `lucide:music`.
+
+    ```mdx
+    import { Icon } from '@astrojs/starlight/components';
+
+    <Icon name="lucide:music" />
+    ```
+
+</Steps>
+
+### Local icons
+
+Local icons are SVG files stored in a directory of your choice within your project, optimized using [SVGO](https://svgo.dev/) and usable just like any other icon.
+Starlight uses [Astro Icon](https://www.astroicon.dev/) to support local icons.
+
+By default, local icons are expected to be in the `src/icons/` directory of your project.
+SVGO options and the icon directory can be configured using the [`starlight.icons`](/reference/configuration/#icons) property in `astro.config.mjs`.
+
+The following example shows how to use a `logo.svg` SVG file as an icon.
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<Steps>
+
+1.  Copy the `logo.svg` SVG file to the `src/icons/` directory of your project.
+
+    <FileTree>
+
+    - src/
+      - content/
+        - docs/
+          - guides/
+            - guide.md
+            - index.md
+        - icons/
+          - **logo.svg**
+    - astro.config.mjs
+
+    </FileTree>
+
+2.  Use the icon in any use-case that supports built-in icons by using the slug of the icon file.
+
+    For example, to use the `logo.svg` SVG file with the `<Icon>` component, set the `name` attribute to `logo`.
+
+    ```mdx
+    import { Icon } from '@astrojs/starlight/components';
+
+    <Icon name="logo" />
+    ```
+
+</Steps>
+
+To learn more about how to use local icons, check out the [“Local icons”](https://www.astroicon.dev/guides/customization/#local-icons) guide in the Astro Icon docs.
