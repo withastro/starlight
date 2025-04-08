@@ -24,7 +24,7 @@ Ils ne doivent inclure que des [éléments autorisés à l'intérieur de `<head>
 Composant utilisé à l'intérieur de l'élément `<head>` de chaque page.
 
 Redéfinissez ce composant en dernier recours.
-Préférez [l'option de configuration `head`](/fr/reference/configuration/#head), le [champ `head` du frontmatter](/fr/reference/frontmatter/#head) , ou un [middleware de données de route](/fr/guides/route-data/#personnalisation-des-données-de-route) pour personnaliser les données de route affichées par le composant par défaut si possible.
+Préférez [l'option de configuration `head`](/fr/reference/configuration/#head), le [champ `head` du frontmatter](/fr/reference/frontmatter/#head), ou un [middleware de données de route](/fr/guides/route-data/#personnalisation-des-données-de-route) pour personnaliser les données de route affichées par le composant par défaut si possible.
 
 #### `ThemeProvider`
 
