@@ -51,18 +51,13 @@ const UserConfigSchema = z.object({
 	 * Optional details about the social media accounts for this site.
 	 *
 	 * @example
-	 * social: {
-	 *   codeberg: 'https://codeberg.org/knut/examples',
-	 *   discord: 'https://astro.build/chat',
-	 *   github: 'https://github.com/withastro/starlight',
-	 *   gitlab: 'https://gitlab.com/delucis',
-	 *   linkedin: 'https://www.linkedin.com/company/astroinc',
-	 *   mastodon: 'https://m.webtoo.ls/@astro',
-	 *   threads: 'https://www.threads.net/@nmoodev',
-	 *   twitch: 'https://www.twitch.tv/bholmesdev',
-	 *   twitter: 'https://twitter.com/astrodotbuild',
-	 *   youtube: 'https://youtube.com/@astrodotbuild',
-	 * }
+	 * social: [
+	 *   { icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+	 *   { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+	 *   { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+	 *   { icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+	 *   { icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	 * ]
 	 */
 	social: SocialLinksSchema(),
 
