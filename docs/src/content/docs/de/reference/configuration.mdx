@@ -343,28 +343,21 @@ Das standard Locale wird verwendet, um Ersatzinhalte bereitzustellen, wenn Über
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**Typ:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/de/reference/icons/){`; href: string }>`}</code>
 
-**Typ:** <SocialLinksType />
-
-Optionale Angaben zu den Social-Media-Konten für diese Website. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
+Optionale Angaben zu den Social-Media-Konten für diese Website.
+Jeder Eintrag wird als Symbol-Link in der Kopfzeile der Seite angezeigt.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
