@@ -200,10 +200,15 @@ defineConfig({
 
 Starlight bietet integrierte Unterstützung für das Hinzufügen von Links zu deinen Social-Media-Accounts in der Kopfzeile der Website über die Option [`social`](/de/reference/configuration/#social) in der Starlight-Integration.
 
-Eine vollständige Liste der unterstützten Dienste findest du in der [Konfigurations&shy;referenz](/de/reference/configuration/#social).
-Lasse uns auf GitHub oder Discord wissen, wenn du Unterstützung für einen anderen Dienst benötigst!
+Jeder Eintrag im Array `social` muss ein Objekt mit drei Eigenschaften sein:
 
-```js {9-12}
+- `icon`: eines der [eingebauten Symbolen](/de/reference/icons/) von Starlight, z.&nbsp;B. `„github“`.
+- `label`: eine zugängliche Bezeichnung für den Link, z.&nbsp;B. `GitHub"`.
+- `href`: die URL für den Link, z.&nbsp;B. `„https://github.com/withastro/starlight“`.
+
+Das folgende Beispiel fügt Links zum Astro Discord Chat und zum Starlight GitHub Repository hinzu:
+
+```js {9-16}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -211,11 +216,15 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Dokumentation mit social Links',
-			social: {
-				discord: 'https://astro.build/chat',
-				github: 'https://github.com/withastro/starlight',
-			},
+			title: 'Dokumentation mit sozialen Links',
+			social: [
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/withastro/starlight',
+				},
+			],
 		}),
 	],
 });
