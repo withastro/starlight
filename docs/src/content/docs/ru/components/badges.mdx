@@ -33,31 +33,31 @@ import { Badge } from '@astrojs/starlight/components';
 ```mdx
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Примечание" variant="note" />
-<Badge text="Успешно" variant="success" />
-<Badge text="Совет" variant="tip" />
-<Badge text="Внимание" variant="caution" />
-<Badge text="Опасность" variant="danger" />
+- <Badge text="Примечание" variant="note" />
+- <Badge text="Успешно" variant="success" />
+- <Badge text="Совет" variant="tip" />
+- <Badge text="Внимание" variant="caution" />
+- <Badge text="Опасность" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% badge text="Примечание" variant="note" /%}
-{% badge text="Успешно" variant="success" /%}
-{% badge text="Совет" variant="tip" /%}
-{% badge text="Внимание" variant="caution" /%}
-{% badge text="Опасность" variant="danger" /%}
+- {% badge text="Примечание" variant="note" /%}
+- {% badge text="Успешно" variant="success" /%}
+- {% badge text="Совет" variant="tip" /%}
+- {% badge text="Внимание" variant="caution" /%}
+- {% badge text="Опасность" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Примечание" variant="note" />
-	<Badge text="Успешно" variant="success" />
-	<Badge text="Совет" variant="tip" />
-	<Badge text="Внимание" variant="caution" />
-	<Badge text="Опасность" variant="danger" />
+	- <Badge text="Примечание" variant="note" />
+	- <Badge text="Успешно" variant="success" />
+	- <Badge text="Совет" variant="tip" />
+	- <Badge text="Внимание" variant="caution" />
+	- <Badge text="Опасность" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -71,25 +71,25 @@ import { Badge } from '@astrojs/starlight/components';
 ```mdx /size="\w+"/
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Новинки" size="small" />
-<Badge text="Новинки и улучшения" size="medium" />
-<Badge text="Новинки, улучшения и другое" size="large" />
+- <Badge text="Новинки" size="small" />
+- <Badge text="Новинки и улучшения" size="medium" />
+- <Badge text="Новинки, улучшения и другое" size="large" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-{% badge text="Новинки" size="small" /%}
-{% badge text="Новинки и улучшения" size="medium" /%}
-{% badge text="Новинки, улучшения и другое" size="large" /%}
+- {% badge text="Новинки" size="small" /%}
+- {% badge text="Новинки и улучшения" size="medium" /%}
+- {% badge text="Новинки, улучшения и другое" size="large" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Новинки" size="small" />
-	<Badge text="Новинки и улучшения" size="medium" />
-	<Badge text="Новинки, улучшения и другое" size="large" />
+	- <Badge text="Новинки" size="small" />
+	- <Badge text="Новинки и улучшения" size="medium" />
+	- <Badge text="Новинки, улучшения и другое" size="large" />
 </Fragment>
 
 </Preview>
