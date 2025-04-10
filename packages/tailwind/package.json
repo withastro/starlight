@@ -13,7 +13,7 @@
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "files": [
-    "index.ts"
+    "tailwind.css"
   ],
   "exports": {
     ".": "./tailwind.css"
