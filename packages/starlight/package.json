@@ -183,7 +183,7 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "^5.1.5"
+    "astro": "^5.5.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.0",
