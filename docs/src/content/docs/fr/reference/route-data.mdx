@@ -79,7 +79,7 @@ Le slug de cette page ou l'identifiant unique de cette page basé sur le nom du 
 
 ### `isFallback`
 
-**Type :** `true | undefined`
+**Type :** `boolean | undefined`
 
 `true` si cette page n'est pas traduite dans la langue actuelle et utilise le contenu de la langue par défaut en tant que repli.
 Utilisé uniquement dans les sites multilingues.
@@ -149,6 +149,13 @@ Un objet JavaScript de type `Date` représentant la date de dernière mise à jo
 **Type :** `URL | undefined`
 
 Un objet `URL` de l'adresse où cette page peut être modifiée si cette fonctionnalité est activée.
+
+### `head`
+
+**Type :** [`HeadConfig[]`](/fr/reference/configuration/#headconfig)
+
+Tableau de toutes les balises à inclure à l’intérieur de l’élément `<head>` de la page courante.
+Inclut des balises importantes comme `<title>` et `<meta charset="utf-8">`.
 
 ## Utilitaires
 

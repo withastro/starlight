@@ -32,7 +32,7 @@ Du kannst die folgenden Optionen an die `starlight` Integration übergeben.
 Lege den Titel für deine Website fest. Wird in den Metadaten und im Titel der Browser-Tabs verwendet.
 
 Der Wert kann eine Zeichenkette sein, oder für mehrsprachige Websites ein Objekt mit Werten für jedes Gebietsschema.
-Wenn die Objektform verwendet wird, müssen die Schlüssel BCP-47-Tags sein (z. B. `en`, `ar` oder `zh-CN`):
+Wenn die Objektform verwendet wird, müssen die Schlüssel BCP-47-Tags sein (z.&nbsp;B. `en`, `ar` oder `zh-CN`):
 
 ```ts
 starlight({
@@ -104,9 +104,9 @@ Konfiguriere die Navigationselemente der Seitenleiste deiner Website.
 Eine Seitenleiste ist eine Array von Links und Linkgruppen.
 Mit Ausnahme von Einträgen, die `slug` verwenden, muss jeder Eintrag ein `label` und eine der folgenden Eigenschaften haben:
 
-- `link` - ein einzelner Link zu einer bestimmten URL, z.B. `'/home'` oder `'https://example.com'`.
+- `link` - ein einzelner Link zu einer bestimmten URL, z.&nbsp;B. `'/home'` oder `'https://example.com'`.
 
-- `slug` - ein Verweis auf eine interne Seite, z.B. `'guides/getting-started'`.
+- `slug` - ein Verweis auf eine interne Seite, z.&nbsp;B. `'guides/getting-started'`.
 
 - `items` - ein Array, das weitere Links und Untergruppen enthält.
 
@@ -297,13 +297,13 @@ Du kannst die folgenden Optionen für jedes Locale-Schema festlegen:
 
 **Typ:** `string`
 
-Die Bezeichnung für diese Sprache, die den Benutzern angezeigt werden soll, z. B. im Sprachumschalter. Meistens wird dies der Name der Sprache sein, wie ihn ein Benutzer dieser Sprache erwarten würde, z.B. `"English"`, `"العربية"`, oder `"简体中文"`.
+Die Bezeichnung für diese Sprache, die den Benutzern angezeigt werden soll, z.&nbsp;B. im Sprachumschalter. Meistens wird dies der Name der Sprache sein, wie ihn ein Benutzer dieser Sprache erwarten würde, z.&nbsp;B. `"English"`, `"العربية"`, oder `"简体中文"`.
 
 ##### `lang`
 
 **Typ:** `string`
 
-Das BCP-47-Tag für diese Sprache, z. B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regional&shy;spezifischen Übersetzungen gefunden werden.
+Das BCP-47-Tag für diese Sprache, z.&nbsp;B. `"en"`, `"ar"` oder `"zh-CN"`. Wenn nicht gesetzt, wird standardmäßig der Verzeichnisname der Sprache verwendet. Sprach-Tags mit regionalen Unter-Tags (z.&nbsp;B. `"pt-BR"` oder `"en-US"`) verwenden integrierte UI-Übersetzungen für deine Basissprache, wenn keine regional&shy;spezifischen Übersetzungen gefunden werden.
 
 ##### `dir`
 
@@ -347,7 +347,7 @@ import SocialLinksType from '~/components/social-links-type.astro';
 
 **Typ:** <SocialLinksType />
 
-Optionale Angaben zu den Social-Media-Konten für diese Website. Wenn du eines dieser Konten hinzufügst, werden sie als Icon-Links in der Kopfzeile der Website angezeigt.
+Optionale Angaben zu den Social-Media-Konten für diese Website. Wenn du eines dieser Konten hinzufügst, werden sie als Symbol-Links in der Kopfzeile der Website angezeigt.
 
 ```js
 starlight({
@@ -373,7 +373,7 @@ starlight({
 
 Stellen CSS-Dateien zur Verfügung, um das Aussehen deines Starlight-Projekts anzupassen.
 
-Unterstützt lokale CSS-Dateien relativ zum Stammverzeichnis deines Projekts, z.B. `'./src/custom.css'`, und CSS, die du als npm-Modul installiert hast, z.B. `'@fontsource/roboto'`.
+Unterstützt lokale CSS-Dateien relativ zum Stammverzeichnis deines Projekts, z.&nbsp;B. `'./src/custom.css'`, und CSS, die du als npm-Modul installiert hast, z.&nbsp;B. `'@fontsource/roboto'`.
 
 ```js
 starlight({
@@ -561,7 +561,7 @@ Eine Seite kann diese Einstellung oder den Linktext und/oder die URL mit Hilfe d
 **Typ:** `string`  
 **Standard:** `'/favicon.svg'`
 
-Legt den Pfad des Standard-Favicons für deine Website fest. Dieses sollte sich im Verzeichnis `public/` befinden und eine gültige Icon-Datei (`.ico`, `.gif`, `.jpg`, `.png` oder `.svg`) sein.
+Legt den Pfad des Standard-Favicons für deine Website fest. Dieses sollte sich im Verzeichnis `public/` befinden und eine gültige Symbol-Datei (`.ico`, `.gif`, `.jpg`, `.png` oder `.svg`) sein.
 
 ```js
 starlight({
