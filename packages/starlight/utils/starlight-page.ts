@@ -5,7 +5,13 @@ import config from 'virtual:starlight/user-config';
 import { getCollectionPathFromRoot } from './collection';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
-import { getSiteTitle, getSiteTitleHref, getToC, type PageProps } from './routing/data';
+import {
+	getSiteTitle,
+	getSiteTitleHref,
+	getToC,
+	type PageProps,
+	type RouteDataContext,
+} from './routing/data';
 import type { StarlightDocsEntry, StarlightRouteData } from './routing/types';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
@@ -13,6 +19,7 @@ import { docsSchema } from '../schema';
 import type { Prettify, RemoveIndexSignature } from './types';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import type { StarlightConfig, StarlightUserConfig } from './user-config';
+import { getHead } from './head';
 
 /**
  * The frontmatter schema for Starlight pages derived from the default schema for Starlight’s
@@ -100,12 +107,13 @@ type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 
 export async function generateStarlightPageRouteData({
 	props,
-	url,
+	context,
 }: {
 	props: StarlightPageProps;
-	url: URL;
+	context: RouteDataContext;
 }): Promise<StarlightRouteData> {
-	const { isFallback, frontmatter, ...routeProps } = props;
+	const { frontmatter, ...routeProps } = props;
+	const { url } = context;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
 	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
@@ -137,6 +145,17 @@ export async function generateStarlightPageRouteData({
 	const editUrl = pageFrontmatter.editUrl ? new URL(pageFrontmatter.editUrl) : undefined;
 	const lastUpdated =
 		pageFrontmatter.lastUpdated instanceof Date ? pageFrontmatter.lastUpdated : undefined;
+	const pageProps: PageProps = {
+		...routeProps,
+		...localeData,
+		entry,
+		entryMeta,
+		headings,
+		id,
+		locale: localeData.locale,
+		slug,
+	};
+	const siteTitle = getSiteTitle(localeData.lang);
 	const routeData: StarlightRouteData = {
 		...routeProps,
 		...localeData,
@@ -145,27 +164,16 @@ export async function generateStarlightPageRouteData({
 		entry,
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
+		head: getHead(pageProps, context, siteTitle),
 		headings,
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
-		siteTitle: getSiteTitle(localeData.lang),
+		siteTitle,
 		siteTitleHref: getSiteTitleHref(localeData.locale),
 		slug,
-		toc: getToC({
-			...routeProps,
-			...localeData,
-			entry,
-			entryMeta,
-			headings,
-			id,
-			locale: localeData.locale,
-			slug,
-		}),
+		toc: getToC(pageProps),
 	};
-	if (isFallback) {
-		routeData.isFallback = true;
-	}
 	return routeData;
 }
 

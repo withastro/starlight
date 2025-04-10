@@ -1,5 +1,92 @@
 # @astrojs/starlight
 
+## 0.33.0
+
+### Minor Changes
+
+- [#3026](https://github.com/withastro/starlight/pull/3026) [`82deb84`](https://github.com/withastro/starlight/commit/82deb847418aedb9c01e05bb9de4b9bd10a1a885) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential list styling issue if the last element of a list item is a `<script>` tag.
+
+  ⚠️ **BREAKING CHANGE:**
+
+  This release drops official support for Chromium-based browsers prior to version 105 (released 30 August 2022) and Firefox-based browsers prior to version 121 (released 19 December 2023). You can find a list of currently supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+105%2C+Edge+%3E%3D+105%2C+Firefox+%3E%3D+121%2C+Safari+%3E%3D+15.4%2C+iOS+%3E%3D+15.4%2C+not+op_mini+all).
+
+  With this release, Starlight-generated sites will still work fine on those older browsers except for this small detail in list item styling, but future releases may introduce further breaking changes for impacted browsers, including in patch releases.
+
+- [#3025](https://github.com/withastro/starlight/pull/3025) [`f87e9ac`](https://github.com/withastro/starlight/commit/f87e9acbf5090a31858c1cde568cc798140f1366) Thanks [@delucis](https://github.com/delucis)! - Makes `social` configuration more flexible.
+
+  ⚠️ **BREAKING CHANGE:** The `social` configuration option has changed syntax. You will need to update this in `astro.config.mjs` when upgrading.
+
+  Previously, a limited set of platforms were supported using a shorthand syntax with labels built in to Starlight. While convenient, this approach was less flexible and required dedicated code for each social platform added.
+
+  Now, you must specify the icon and label for each social link explicitly and you can use any of [Starlight’s built-in icons](https://starlight.astro.build/reference/icons/) for social links.
+
+  The following example shows updating the old `social` syntax to the new:
+
+  ```diff
+  - social: {
+  -   github: 'https://github.com/withastro/starlight',
+  -   discord: 'https://astro.build/chat',
+  - },
+  + social: [
+  +   { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
+  +   { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+  + ],
+  ```
+
+- [#2927](https://github.com/withastro/starlight/pull/2927) [`c46904c`](https://github.com/withastro/starlight/commit/c46904c4a16cf1c7f4f895e42cb164474b2301b3) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds the [`head`](https://starlight.astro.build/reference/route-data/#head) route data property which contains an array of all tags to include in the `<head>` of the current page.
+
+  Previously, the [`<Head>`](https://starlight.astro.build/reference/overrides/#head-1) component was responsible for generating a list of tags to include in the `<head>` of the current page and rendering them.
+  This data is now available as `Astro.locals.starlightRoute.head` instead and can be modified using [route data middleware](https://starlight.astro.build/guides/route-data/#customizing-route-data).
+  The `<Head>` component now only renders the tags provided in `Astro.locals.starlightRoute.head`.
+
+- [#2924](https://github.com/withastro/starlight/pull/2924) [`6a56d1b`](https://github.com/withastro/starlight/commit/6a56d1b80d9d67e63e930177cf085a25864e1952) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** Ensures that the `<Badge>` and `<Icon>` components no longer render with a trailing space.
+
+  In Astro, components that include styles render with a trailing space which can prevent some use cases from working as expected, e.g. when using such components inlined with text. This change ensures that the `<Badge>` and `<Icon>` components no longer render with a trailing space.
+
+  If you were previously relying on that implementation detail, you may need to update your code to account for this change. For example, considering the following code:
+
+  ```mdx
+  <Badge text="New" />
+  Feature
+  ```
+
+  The rendered text would previously include a space between the badge and the text due to the trailing space automatically added by the component:
+
+  ```
+  New Feature
+  ```
+
+  Such code will now render the badge and text without a space:
+
+  ```
+  NewFeature
+  ```
+
+  To fix this, you can add a space between the badge and the text:
+
+  ```diff
+  - <Badge text="New" />Feature
+  + <Badge text="New" /> Feature
+  ```
+
+- [#2727](https://github.com/withastro/starlight/pull/2727) [`7c8fa30`](https://github.com/withastro/starlight/commit/7c8fa30f0ac2459c83b71a8a7b705b16dcf98d6f) Thanks [@techfg](https://github.com/techfg)! - Updates mobile menu toggle styles to display a close icon while the menu is open
+
+### Patch Changes
+
+- [#2927](https://github.com/withastro/starlight/pull/2927) [`c46904c`](https://github.com/withastro/starlight/commit/c46904c4a16cf1c7f4f895e42cb164474b2301b3) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where overriding the [canonical URL](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#canonical) of a page using the [`head` configuration option](https://starlight.astro.build/reference/configuration/#head) or [`head` frontmatter field](https://starlight.astro.build/reference/frontmatter/#head) would strip any other `<link>` tags from the `<head>`.
+
+- [#2927](https://github.com/withastro/starlight/pull/2927) [`c46904c`](https://github.com/withastro/starlight/commit/c46904c4a16cf1c7f4f895e42cb164474b2301b3) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where generated [canonical URLs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#canonical) would include a trailing slash when using the [`trailingSlash` Astro option](https://docs.astro.build/en/reference/configuration-reference/#trailingslash) is set to `'never'`.
+
+- [#3025](https://github.com/withastro/starlight/pull/3025) [`f87e9ac`](https://github.com/withastro/starlight/commit/f87e9acbf5090a31858c1cde568cc798140f1366) Thanks [@delucis](https://github.com/delucis)! - Fixes Starlight’s autogenerated `<meta name="twitter:site">` tags when a Twitter link is set in `social` config. Previously these incorrectly rendered `content="/username"` and now correctly render `content="@username"`.
+
+## 0.32.6
+
+### Patch Changes
+
+- [#3030](https://github.com/withastro/starlight/pull/3030) [`5bdf139`](https://github.com/withastro/starlight/commit/5bdf139191a20f19458b027617877c1063b46724) Thanks [@trueberryless](https://github.com/trueberryless)! - Updates the type of the `isFallback` field in route data from `true` to `boolean`, keeping it optional but allowing `false` as a possible value.
+
+- [#3018](https://github.com/withastro/starlight/pull/3018) [`188b8cf`](https://github.com/withastro/starlight/commit/188b8cfa8ad8761365b8b557c4b9fea671050ed6) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds validation for user config `routeMiddleware` so it does not conflict with [Astro's middleware](https://docs.astro.build/en/guides/middleware/).
+
 ## 0.32.5
 
 ### Patch Changes

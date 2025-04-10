@@ -1,7 +1,10 @@
 ---
-import { socialLinks } from '../../../packages/starlight/schemas/social';
-
-const socials = [...socialLinks].sort((a, b) => a.localeCompare(b, 'en'));
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const href = getRelativeLocaleUrl(Astro.currentLocale ?? 'en', '/reference/icons/');
 ---
 
-<code>{`Partial<Record<${socials.map((social) => `'${social}'`).join(' | ')}, string>>`}</code>
+<code>
+	<Fragment set:text="Array<{" />
+	label: string; icon: <a {href}>StarlightIcon</a>; href: string
+	<Fragment set:text="}>" />
+</code>

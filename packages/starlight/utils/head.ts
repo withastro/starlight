@@ -1,9 +1,94 @@
+import config from 'virtual:starlight/user-config';
+import project from 'virtual:starlight/project-context';
+import { version } from '../package.json';
 import { type HeadConfig, HeadConfigSchema, type HeadUserConfig } from '../schemas/head';
+import type { PageProps, RouteDataContext } from './routing/data';
+import { fileWithBase } from './base';
+import { formatCanonical } from './canonical';
 
 const HeadSchema = HeadConfigSchema();
 
+/** Get the head for the current page. */
+export function getHead(
+	{ entry, lang }: PageProps,
+	context: RouteDataContext,
+	siteTitle: string
+): HeadConfig {
+	const { data } = entry;
+
+	const canonical = context.site ? new URL(context.url.pathname, context.site) : undefined;
+	const canonicalHref = canonical?.href
+		? formatCanonical(canonical.href, {
+				format: project.build.format,
+				trailingSlash: project.trailingSlash,
+			})
+		: undefined;
+	const description = data.description || config.description;
+
+	const headDefaults: HeadUserConfig = [
+		{ tag: 'meta', attrs: { charset: 'utf-8' } },
+		{
+			tag: 'meta',
+			attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+		},
+		{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${siteTitle}` },
+		{ tag: 'link', attrs: { rel: 'canonical', href: canonicalHref } },
+		{ tag: 'meta', attrs: { name: 'generator', content: context.generator } },
+		{
+			tag: 'meta',
+			attrs: { name: 'generator', content: `Starlight v${version}` },
+		},
+		// Favicon
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'shortcut icon',
+				href: fileWithBase(config.favicon.href),
+				type: config.favicon.type,
+			},
+		},
+		// OpenGraph Tags
+		{ tag: 'meta', attrs: { property: 'og:title', content: data.title } },
+		{ tag: 'meta', attrs: { property: 'og:type', content: 'article' } },
+		{ tag: 'meta', attrs: { property: 'og:url', content: canonicalHref } },
+		{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
+		{ tag: 'meta', attrs: { property: 'og:description', content: description } },
+		{ tag: 'meta', attrs: { property: 'og:site_name', content: siteTitle } },
+		// Twitter Tags
+		{
+			tag: 'meta',
+			attrs: { name: 'twitter:card', content: 'summary_large_image' },
+		},
+	];
+
+	// Link to sitemap, but only when `site` is set.
+	if (context.site) {
+		headDefaults.push({
+			tag: 'link',
+			attrs: {
+				rel: 'sitemap',
+				href: fileWithBase('/sitemap-index.xml'),
+			},
+		});
+	}
+
+	// Link to Twitter account if set in Starlight config.
+	const twitterLink = config.social?.find(({ icon }) => icon === 'twitter' || icon === 'x.com');
+	if (twitterLink) {
+		headDefaults.push({
+			tag: 'meta',
+			attrs: {
+				name: 'twitter:site',
+				content: new URL(twitterLink.href).pathname.replace('/', '@'),
+			},
+		});
+	}
+
+	return createHead(headDefaults, config.head, data.head);
+}
+
 /** Create a fully parsed, merged, and sorted head entry array from multiple sources. */
-export function createHead(defaults: HeadUserConfig, ...heads: HeadConfig[]) {
+function createHead(defaults: HeadUserConfig, ...heads: HeadConfig[]) {
 	let head = HeadSchema.parse(defaults);
 	for (const next of heads) {
 		head = mergeHead(head, next);
@@ -26,7 +111,7 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 		case 'meta':
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		case 'link':
-			return head.some(({ attrs }) => attrs.rel === 'canonical');
+			return head.some(({ attrs }) => entry.attrs.rel === 'canonical' && attrs.rel === 'canonical');
 		default:
 			return false;
 	}

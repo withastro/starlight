@@ -163,19 +163,23 @@ Provide the root-level configuration keys you want to override.
 To update nested configuration values, you must provide the entire nested object.
 
 To extend an existing config option without overriding it, spread the existing value into your new value.
-In the following example, a new [`social`](/reference/configuration/#social) media account is added to the existing configuration by spreading `config.social` into the new `social` object:
+In the following example, a new [`social`](/reference/configuration/#social) media account is added to the existing configuration by spreading `config.social` into the new `social` array:
 
-```ts {6-11}
+```ts {6-15}
 // plugin.ts
 export default {
   name: 'add-twitter-plugin',
   hooks: {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
-        social: {
+        social: [
           ...config.social,
-          twitter: 'https://twitter.com/astrodotbuild',
-        },
+          {
+            icon: 'twitter',
+            label: 'Twitter',
+            href: 'https://twitter.com/astrodotbuild',
+          },
+        ],
       });
     },
   },

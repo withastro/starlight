@@ -341,28 +341,21 @@ The default locale will be used to provide fallback content where translations a
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**type:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/reference/icons/){`; href: string }>`}</code>
 
-**type:** <SocialLinksType />
-
-Optional details about the social media accounts for this site. Adding any of these will display them as icon links in the site header.
+Optional details about the social media accounts for this site.
+Each entry will be displayed as an icon link in the site header.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -626,6 +619,15 @@ For example, this page is titled “Configuration Reference” and this site is 
 
 Disables injecting Starlight's default [404 page](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page). To use a custom `src/pages/404.astro` route in your project, set this option to `true`.
 
+### `routeMiddleware`
+
+**type:** `string | string[]`
+
+Provide paths to route middleware that can modify how Starlight processes your data.
+These file paths must not conflict with [Astro’s middleware](https://docs.astro.build/en/guides/middleware/).
+
+See the [Route Data guide](/guides/route-data/#customizing-route-data) for details about how to create route middleware.
+
 ### `components`
 
 **type:** `Record<string, string>`
@@ -660,6 +662,9 @@ starlight({
 See the [Plugins Reference](/reference/plugins/) for details about creating your own plugins.
 
 ### `credits`
+
+**type:** `boolean`  
+**default:** `false`
 
 Enable displaying a “Built with Starlight” link in your site’s footer.
 
