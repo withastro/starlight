@@ -9,9 +9,8 @@ import '../style/anchor-links.css';
 import { AstroError } from 'astro/errors';
 
 const headingLevels = [1, 2, 3, 4, 5, 6, '1', '2', '3', '4', '5', '6'] as const;
-type HeadingLevel = (typeof headingLevels)[number];
 interface Props extends HTMLAttributes<'h1'> {
-	level: HeadingLevel;
+	level: 1 | 2 | 3 | 4 | 5 | 6 | `${1 | 2 | 3 | 4 | 5 | 6}`;
 	id: string;
 }
 
