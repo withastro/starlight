@@ -163,19 +163,23 @@ Spécifiez les clés de configuration de niveau racine que vous souhaitez rempla
 Pour mettre à jour des valeurs de configuration imbriquées, vous devez fournir l'objet imbriqué entier.
 
 Pour étendre une option de configuration existante sans la remplacer, étendez la valeur existante dans votre nouvelle valeur.
-Dans l'exemple suivant, un nouveau compte de média [`social`](/fr/reference/configuration/#social) est ajouté à la configuration existante en étendant `config.social` dans le nouvel objet `social` :
+Dans l'exemple suivant, un nouveau compte de média [`social`](/fr/reference/configuration/#social) est ajouté à la configuration existante en étendant `config.social` dans le nouveau tableau `social` :
 
-```ts {6-11}
+```ts {6-15}
 // module-extension.ts
 export default {
   name: 'ajout-twitter-plugin',
   hooks: {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
-        social: {
+        social: [
           ...config.social,
-          twitter: 'https://twitter.com/astrodotbuild',
-        },
+          {
+            icon: 'twitter',
+            label: 'Twitter',
+            href: 'https://twitter.com/astrodotbuild',
+          },
+        ],
       });
     },
   },
