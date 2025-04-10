@@ -351,7 +351,7 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 
 Passe das Design des Abzeichens mit einem Objekt mit den Eigenschaften `text`, `variant` und `class` an.
 
-Der `text` steht für den anzuzeigenden Inhalt (z.B. "Neu").
+Der `text` steht für den anzuzeigenden Inhalt (z.&nbsp;B. "Neu").
 Überschreibe das `default`-Styling, das die Akzentfarbe deiner Website verwendet, indem du die Eigenschaft `variant` auf einen der folgenden Werte setzt: `note`, `tip`, `danger`, `caution` oder `success`.
 
 Optional kannst du einen benutzerdefinierten Abzeichenstil erstellen, indem du die Eigenschaft `class` auf einen CSS-Klassennamen setzt.
@@ -438,7 +438,7 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 
 ## Internationalisierung
 
-Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um die Link- oder Gruppenbeschriftung für jede unterstützte Sprache zu übersetzen, indem du ein [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Sprach-Tag, z.B. `"en"`, `"ar"`, oder `"zh-CN"`, als Schlüssel und die übersetzte Beschriftung als Wert angibst.
+Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um die Link- oder Gruppenbeschriftung für jede unterstützte Sprache zu übersetzen, indem du ein [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Sprach-Tag, z.&nbsp;B. `"en"`, `"ar"`, oder `"zh-CN"`, als Schlüssel und die übersetzte Beschriftung als Wert angibst.
 Die Eigenschaft `label` wird für das Standard&shy;gebietsschema und für Sprachen ohne Übersetzung verwendet.
 
 ```js {5-7,11-13,18-20}
@@ -525,7 +525,7 @@ Wenn du zum Beispiel Seiten unter `en/intro` und `pt-br/intro` hast, ist der Slu
 ### Internationalisierung mit Badges
 
 Für [Abzeichen](#abzeichen) kann die Eigenschaft `text` ein String sein oder für mehrsprachige Seiten ein Objekt mit Werten für jedes unterschiedliche Gebietsschema.
-Wenn du die Objektform verwendest, müssen die Schlüssel [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Tags sein (z.B. `en`, `ar` oder `zh-CN`):
+Wenn du die Objektform verwendest, müssen die Schlüssel [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Tags sein (z.&nbsp;B. `en`, `ar` oder `zh-CN`):
 
 ```js {11-16}
 starlight({

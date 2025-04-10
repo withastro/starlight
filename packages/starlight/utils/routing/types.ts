@@ -3,6 +3,7 @@ import type { CollectionEntry, RenderResult } from 'astro:content';
 import type { TocItem } from '../generateToC';
 import type { LinkHTMLAttributes } from '../../schemas/sidebar';
 import type { Badge } from '../../schemas/badge';
+import type { HeadConfig } from '../../schemas/head';
 
 export interface LocaleData {
 	/** Writing direction. */
@@ -67,8 +68,8 @@ export interface Route extends LocaleData {
 	slug: string;
 	/** The slug or unique ID if using the `legacy.collections` flag. */
 	id: string;
-	/** True if this page is untranslated in the current language and using fallback content from the default locale. */
-	isFallback?: true;
+	/** Whether this page is untranslated in the current language and using fallback content from the default locale. */
+	isFallback?: boolean;
 	[key: string]: unknown;
 }
 
@@ -93,4 +94,6 @@ export interface StarlightRouteData extends Route {
 	editUrl: URL | undefined;
 	/** An Astro component to render the current page’s content if this route is a Markdown page. */
 	Content?: RenderResult['Content'];
+	/** Array of tags to include in the `<head>` of the current page. */
+	head: HeadConfig;
 }

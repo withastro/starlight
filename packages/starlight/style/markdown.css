@@ -24,21 +24,30 @@
 	}
 
 	.sl-markdown-content
-		li
-		> :last-child:not(
-			li,
-			ul,
-			ol,
-			a,
-			strong,
-			em,
-			del,
-			span,
-			input,
-			code,
-			br,
-			:where(.not-content *)
-		) {
+	li
+	> :is(
+		:last-child:not(
+				li,
+				ul,
+				ol,
+				a,
+				strong,
+				em,
+				del,
+				span,
+				input,
+				code,
+				br,
+				script,
+				:where(.not-content *)
+			),
+			/**
+			 * For list items ending with 1 or multiple script elements (`:has(~ script:last-child)`), we
+			 * need to style the last non-script element (`:not(script)`) that doesn't have a subsequent
+			 * sibling that is not a script (`:not(:has(~ :not(script)))`).
+			 */
+		:not(script):has(~ script:last-child):not(:has(~ :not(script)))
+	) {
 		margin-bottom: 1.25rem;
 	}
 

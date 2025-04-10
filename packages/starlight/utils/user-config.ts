@@ -51,18 +51,13 @@ const UserConfigSchema = z.object({
 	 * Optional details about the social media accounts for this site.
 	 *
 	 * @example
-	 * social: {
-	 *   codeberg: 'https://codeberg.org/knut/examples',
-	 *   discord: 'https://astro.build/chat',
-	 *   github: 'https://github.com/withastro/starlight',
-	 *   gitlab: 'https://gitlab.com/delucis',
-	 *   linkedin: 'https://www.linkedin.com/company/astroinc',
-	 *   mastodon: 'https://m.webtoo.ls/@astro',
-	 *   threads: 'https://www.threads.net/@nmoodev',
-	 *   twitch: 'https://www.twitch.tv/bholmesdev',
-	 *   twitter: 'https://twitter.com/astrodotbuild',
-	 *   youtube: 'https://youtube.com/@astrodotbuild',
-	 * }
+	 * social: [
+	 *   { icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+	 *   { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+	 *   { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+	 *   { icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+	 *   { icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	 * ]
 	 */
 	social: SocialLinksSchema(),
 
@@ -233,6 +228,21 @@ const UserConfigSchema = z.object({
 		.transform((string) => [string])
 		.or(z.string().array())
 		.default([])
+		.superRefine((middlewares, ctx) => {
+			// Regex pattern to match invalid middleware paths: https://regex101.com/r/kQH7xm/2
+			const invalidPathRegex = /^\.?\/src\/middleware(?:\/index)?\.[jt]s$/;
+			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
+			for (const invalidPath of invalidPaths) {
+				ctx.addIssue({
+					code: 'custom',
+					message:
+						`The \`"${invalidPath}"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.\n\n` +
+						`You should rename \`${invalidPath}\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.\n\n` +
+						'- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data\n' +
+						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
+				});
+			}
+		})
 		.describe('Add middleware to process Starlight’s route data for each page.'),
 });
 
