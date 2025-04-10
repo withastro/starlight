@@ -101,6 +101,18 @@ import CustomComponent from './CustomComponent.astro';
 
 #### `<StarlightPage>` component
 
+The `<StarlightPage />` component renders a full page of content using Starlight’s layout and styles.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'My custom page' }}>
+	<!-- Custom page content -->
+</StarlightPage>
+```
+
 The `<StarlightPage />` component accepts the following props.
 
 ##### `frontmatter` (required)
@@ -187,6 +199,14 @@ Indicate if this page is using [fallback content](/guides/i18n/#fallback-content
 #### `<AnchorHeading>` component
 
 The `<AnchorHeading />` component renders an HTML heading element with a clickable anchor link that matches Starlight’s Markdown styles.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">Sub heading</AnchorHeading>
+```
 
 It accepts the following props as well as any other valid [global HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
 
