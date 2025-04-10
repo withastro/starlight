@@ -53,26 +53,13 @@ You can see all the CSS custom properties used by Starlight that you can set to 
 ### Cascade layers
 
 Starlight uses [cascade layers](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) internally so that any custom unlayered CSS will override the default styles.
+
 If you are using cascade layers in your custom CSS, you can use the [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) CSS at-rule to define the order of precedence for different layers including the ones used by Starlight.
 
-The following example shows how to use the `@layer` at-rule to define a custom layer named `my-layer` that will be applied after all Starlight layers and have precedence over them:
+The following example shows how to use the `@layer` at-rule to define a custom layer named `my-reset` applied before all Starlight layers and another custom layer named `my-overrides` that will be applied after all Starlight layers and have precedence over them:
 
-```css "my-layer"
-@layer starlight, my-layer;
-```
-
-For more fine-grained control, you can also include your custom layers between Starlight’s layers.
-The following example adds a custom layer named `my-reset` before Starlight’s `starlight.reset` layer and a custom layer named `my-layer` after all other Starlight layers:
-
-```css /(my-(?:reset|layer))/
-@layer starlight.base,
-	starlight.reset,
-	my-reset,
-	starlight.core,
-	starlight.content,
-	starlight.components,
-	starlight.utils,
-	my-layer;
+```css "my-reset" "my-overrides"
+@layer my-reset, starlight, my-overrides;
 ```
 
 ## Tailwind CSS
