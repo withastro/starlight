@@ -4,7 +4,7 @@
 
 Adds support for generating clickable anchor links for headings.
 
-By default, The Starlight Markdoc preset now includes a default `heading` node, which renders an anchor link beside headings in your Markdoc content.
+By default, the Starlight Markdoc preset now includes a default `heading` node, which renders an anchor link beside headings in your Markdoc content.
 
 If you want to disable this new feature, pass `headingLinks: false` in your Markdoc config:
 
