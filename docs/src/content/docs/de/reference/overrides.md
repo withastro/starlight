@@ -115,7 +115,7 @@ So kannst du eine Benutzeroberfläche für alternative Suchanbieter hinzufügen,
 
 **Standardkomponente:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
-Diese Komponente wird in der Kopfzeile der Website gerendert und enthält soziale Symbol-Links.
+Diese Komponente wird in der Kopfzeile der Website gerendert und enthält Symbol-Links zu sozialen Netzwerken.
 Die Standard&shy;implementierung verwendet die Option [`social`](/de/reference/configuration/#social) in der Starlight-Konfiguration, um Symbole und Links darzustellen.
 
 #### `ThemeSelect`
