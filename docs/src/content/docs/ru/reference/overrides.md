@@ -12,7 +12,7 @@ tableOfContents:
 
 ## Компоненты
 
-### Элемент `head` страницы
+### Элемент `head`
 
 Эти компоненты отображаются внутри элемента `<head>` каждой страницы.
 Они должны включать только [элементы, разрешённые внутри `<head>`](https://developer.mozilla.org/ru/docs/Web/HTML/Element/head#%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B8%D1%82%D0%B5_%D1%82%D0%B0%D0%BA%D0%B6%D0%B5).
@@ -22,10 +22,9 @@ tableOfContents:
 **Стандартный компонент:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 Компонент, отображаемый внутри `<head>` каждой страницы.
-Включает важные теги, в том числе `<title>` и `<meta charset="utf-8">`.
 
-В крайнем случае переопределите этот компонент.
-По возможности предпочитайте опцию [`head`](/ru/reference/configuration/#head) в конфигурации Starlight.
+Переопределяйте этот компонент только в крайнем случае.
+По возможности используйте [параметр `head` в конфигурации](/ru/reference/configuration/#head), [поле `head` в метаданных](/ru/reference/frontmatter/#head) или [мидлвар для данных маршрута](/ru/guides/route-data/#настройка-данных-маршрута), чтобы настроить данные маршрута, отображаемые компонентом по умолчанию.
 
 #### `ThemeProvider`
 
@@ -78,7 +77,7 @@ tableOfContents:
 
 ---
 
-### Верхняя панель навигации
+### Шапка
 
 Эти компоненты отображают верхнюю навигационную панель Starlight.
 

@@ -195,10 +195,15 @@ defineConfig({
 
 Starlight에는 [`social`](/ko/reference/configuration/#social) 옵션을 사용하여 사이트 헤더에 소셜 미디어 계정을 링크하는 기능이 내장되어 있습니다.
 
-[구성 참조](/ko/reference/configuration/#social)에서 지원되는 링크 아이콘의 전체 목록을 확인할 수 있습니다.
-다른 서비스에 대한 지원이 필요하면 GitHub나 Discord를 통해 알려주세요!
+`social` 배열의 각 항목은 세 가지 속성을 가진 객체여야 합니다:
 
-```js {9-12}
+- `icon`: Starlight의 [내장 아이콘](/ko/reference/icons/) 중 하나, 예: `"github"`
+- `label`: 링크에 대한 접근성이 있는 레이블, 예: `"GitHub"`
+- `href`: 해당 링크의 URL, 예: `"https://github.com/withastro/starlight"`
+
+다음 예시는 Astro Discord 채팅과 Starlight GitHub 리포지토리 링크를 추가합니다:
+
+```js {9-16}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -207,10 +212,14 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: '소셜 링크를 사용하는 문서',
-			social: {
-				discord: 'https://astro.build/chat',
-				github: 'https://github.com/withastro/starlight',
-			},
+			social: [
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/withastro/starlight',
+				},
+			],
 		}),
 	],
 });
