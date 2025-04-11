@@ -346,28 +346,21 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**타입:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/ko/reference/icons/){`; href: string }>`}</code>
 
-**타입:** <SocialLinksType />
-
-이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다. 이 중 하나를 추가하면 사이트 헤더에 아이콘 링크로 표시됩니다.
+이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다.
+각 항목은 사이트 헤더에 아이콘 링크로 표시됩니다.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+  social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
