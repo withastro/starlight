@@ -5,6 +5,7 @@ import { type HeadConfig, HeadConfigSchema, type HeadUserConfig } from '../schem
 import type { PageProps, RouteDataContext } from './routing/data';
 import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
+import { localizedUrl } from './localizedUrl';
 
 const HeadSchema = HeadConfigSchema();
 
@@ -60,6 +61,28 @@ export function getHead(
 			attrs: { name: 'twitter:card', content: 'summary_large_image' },
 		},
 	];
+
+	if (description)
+		headDefaults.push({
+			tag: 'meta',
+			attrs: { name: 'description', content: description },
+		});
+
+	// Link to language alternates.
+	if (canonical && config.isMultilingual) {
+		for (const locale in config.locales) {
+			const localeOpts = config.locales[locale];
+			if (!localeOpts) continue;
+			headDefaults.push({
+				tag: 'link',
+				attrs: {
+					rel: 'alternate',
+					hreflang: localeOpts.lang,
+					href: localizedUrl(canonical, locale, project.trailingSlash).href,
+				},
+			});
+		}
+	}
 
 	// Link to sitemap, but only when `site` is set.
 	if (context.site) {

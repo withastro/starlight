@@ -33,31 +33,31 @@ import { Badge } from '@astrojs/starlight/components';
 ```mdx
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="노트" variant="note" />
-<Badge text="성공" variant="success" />
-<Badge text="팁" variant="tip" />
-<Badge text="주의" variant="caution" />
-<Badge text="위험" variant="danger" />
+- <Badge text="노트" variant="note" />
+- <Badge text="성공" variant="success" />
+- <Badge text="팁" variant="tip" />
+- <Badge text="주의" variant="caution" />
+- <Badge text="위험" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% badge text="노트" variant="note" /%}
-{% badge text="성공" variant="success" /%}
-{% badge text="팁" variant="tip" /%}
-{% badge text="주의" variant="caution" /%}
-{% badge text="위험" variant="danger" /%}
+- {% badge text="노트" variant="note" /%}
+- {% badge text="성공" variant="success" /%}
+- {% badge text="팁" variant="tip" /%}
+- {% badge text="주의" variant="caution" /%}
+- {% badge text="위험" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="노트" variant="note" />
-	<Badge text="성공" variant="success" />
-	<Badge text="팁" variant="tip" />
-	<Badge text="주의" variant="caution" />
-	<Badge text="위험" variant="danger" />
+	- <Badge text="노트" variant="note" />
+	- <Badge text="성공" variant="success" />
+	- <Badge text="팁" variant="tip" />
+	- <Badge text="주의" variant="caution" />
+	- <Badge text="위험" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -71,25 +71,25 @@ import { Badge } from '@astrojs/starlight/components';
 ```mdx /size="\w+"/
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="새 항목" size="small" />
-<Badge text="개선된 새 항목" size="medium" />
-<Badge text="더 큰 개선된 새 항목" size="large" />
+- <Badge text="새 항목" size="small" />
+- <Badge text="개선된 새 항목" size="medium" />
+- <Badge text="더 큰 개선된 새 항목" size="large" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-{% badge text="새 항목" size="small" /%}
-{% badge text="개선된 새 항목" size="medium" /%}
-{% badge text="더 큰 개선된 새 항목" size="large" /%}
+- {% badge text="새 항목" size="small" /%}
+- {% badge text="개선된 새 항목" size="medium" /%}
+- {% badge text="더 큰 개선된 새 항목" size="large" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="새 항목" size="small" />
-	<Badge text="개선된 새 항목" size="medium" />
-	<Badge text="더 큰 개선된 새 항목" size="large" />
+	- <Badge text="새 항목" size="small" />
+	- <Badge text="개선된 새 항목" size="medium" />
+	- <Badge text="더 큰 개선된 새 항목" size="large" />
 </Fragment>
 
 </Preview>
