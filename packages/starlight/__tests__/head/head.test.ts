@@ -6,7 +6,17 @@ import type { HeadConfig } from '../../schemas/head';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
-		docs: [['index.mdx', { title: 'Home Page' }]],
+		docs: [
+			['index.mdx', { title: 'Home Page' }],
+			[
+				'environmental-impact.md',
+				{
+					title: 'Eco-friendly docs',
+					description:
+						'Learn how Starlight can help you build greener documentation sites and reduce your carbon footprint.',
+				},
+			],
+		],
 	})
 );
 
@@ -20,6 +30,31 @@ test('includes custom tags defined in the Starlight configuration', () => {
 		},
 		content: '',
 		tag: 'script',
+	});
+});
+
+test('includes description based on Starlight `description` configuration', () => {
+	const head = getTestHead();
+	expect(head).toContainEqual({
+		tag: 'meta',
+		attrs: {
+			name: 'description',
+			content: 'Docs with a custom head',
+		},
+		content: '',
+	});
+});
+
+test('includes description based on page `description` frontmatter field if provided', () => {
+	const head = getTestHead([], routes[1]!);
+	expect(head).toContainEqual({
+		tag: 'meta',
+		attrs: {
+			name: 'description',
+			content:
+				'Learn how Starlight can help you build greener documentation sites and reduce your carbon footprint.',
+		},
+		content: '',
 	});
 });
 
@@ -151,8 +186,7 @@ test('places the default favicon below any user provided icons', () => {
 	expect(defaultFaviconIndex).toBeGreaterThan(userFaviconIndex);
 });
 
-function getTestHead(heads: HeadConfig = []): HeadConfig {
-	const route = routes[0]!;
+function getTestHead(heads: HeadConfig = [], route = routes[0]!): HeadConfig {
 	return generateRouteData({
 		props: {
 			...route,
