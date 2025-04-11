@@ -26,10 +26,9 @@ Sie sollten nur [innerhalb von `<head>` erlaubte Elemente](https://developer.moz
 **Standardkomponente:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 Diese Komponente wird innerhalb des `<head>` einer jeden Seite gerendert.
-Enthält wichtige Tags wie `<title>`, und `<meta charset="utf-8">`.
 
 Überschreibe diese Komponente nur, wenn es unbedingt notwendig ist.
-Bevorzuge die [`head`](/de/reference/configuration/#head) Option der Starlight-Konfiguration wenn möglich.
+Bevorzuge die [Konfigurationsoption `head`](/de/reference/configuration/#head), das [Frontmatter-Feld `head`](/de/reference/frontmatter/#head) oder eine [Routendaten-Middleware](/de/guides/route-data/#anpassen-der-routendaten), um die von der Standardkomponente dargestellten Routendaten nach Möglichkeit anzupassen.
 
 #### `ThemeProvider`
 
