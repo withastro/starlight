@@ -28,7 +28,7 @@
     "vitest": "^3.0.5"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.33.0",
+    "@astrojs/starlight": ">=0.34.0",
     "tailwindcss": "^4.0.0"
   },
   "publishConfig": {
