@@ -165,19 +165,23 @@ Gib die Konfigurations&shy;schlüssel der root-Ebene an, die du überschreiben m
 Um verschachtelte Konfigurationswerte zu aktualisieren, musst du das gesamte verschachtelte Objekt bereitstellen.
 
 Um eine vorhandene Konfigurations&shy;option zu erweitern, ohne sie außer Kraft zu setzen, wird der vorhandene Wert in den neuen Wert übertragen.
-Im folgenden Beispiel wird ein neues [`social`](/de/reference/configuration/#social) Medienkonto zur bestehenden Konfiguration hinzugefügt, indem `config.social` in das neue `social` Objekt übertragen wird:
+Im folgenden Beispiel wird ein neues [`social`](/de/reference/configuration/#social) Medienkonto zur bestehenden Konfiguration hinzugefügt, indem `config.social` in das neue `social`-Array übertragen wird:
 
-```ts {6-11}
+```ts {6-15}
 // plugin.ts
 export default {
   name: 'add-twitter-plugin',
   hooks: {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
-        social: {
+        social: [
           ...config.social,
-          twitter: 'https://twitter.com/astrodotbuild',
-        },
+          {
+            icon: 'twitter',
+            label: 'Twitter',
+            href: 'https://twitter.com/astrodotbuild',
+          },
+        ],
       });
     },
   },
