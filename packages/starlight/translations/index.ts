@@ -30,6 +30,7 @@ import pl from './pl.json';
 import sk from './sk.json';
 import lv from './lv.json';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { parse } = builtinI18nSchema();
 
 export default Object.fromEntries(

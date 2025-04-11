@@ -464,7 +464,7 @@ test('disables table of contents for splash template', async () => {
 });
 
 test('hides the sidebar if the `hasSidebar` option is not specified and the splash template is used', async () => {
-	const { hasSidebar, ...otherProps } = starlightPageProps;
+	const { hasSidebar: _, ...otherProps } = starlightPageProps;
 	const data = await generateStarlightPageRouteData({
 		props: {
 			...otherProps,
