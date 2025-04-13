@@ -91,7 +91,6 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 
 | Framework                   | CO₂ per page visit | Rating |
 | --------------------------- | ------------------ | :----: |
-| [Zola][zo-carbon]           | 0.00g              |   A+   |
 | [Starlight][sl-carbon]      | 0.01g              |   A+   |
 | [Read the Docs][rtd-carbon] | 0.07g              |   A+   |
 | [Sphinx][sx-carbon]         | 0.07g              |   A+   |
@@ -121,7 +120,6 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
 [gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
-[zo-carbon]: https://www.websitecarbon.com/website/getzola-org-documentation-getting-started-overview/
 
 ## More resources
 
