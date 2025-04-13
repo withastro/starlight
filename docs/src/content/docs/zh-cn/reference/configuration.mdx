@@ -340,27 +340,20 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**类型：** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/zh-cn/reference/icons/){`; href: string }>`}</code>
 
-**类型：** <SocialLinksType />
-
-可选的社交媒体账户详情。添加任何一个都会在网站标题中显示它们作为图标链接。
+可选的社交媒体账户详情。
+每个条目将显示为网站 header 中的图标链接。
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
 });
 ```
 
@@ -598,6 +591,15 @@ starlight({
 
 禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/basics/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
 
+### `routeMiddleware`
+ 
+ **类型：** `string | string[]`
+ 
+ 提供路由中间件的路径，可以修改 Starlight 处理数据的方式。
+ 这些文件路径不能与 [Astro 的中间件](https://docs.astro.build/zh-cn/guides/middleware/) 冲突。
+ 
+ 在 [路由数据指南](/zh-cn/guides/route-data/#自定义路由数据) 中查看有关如何创建路由中间件的详细信息。
+
 ### `components`
 
 **类型：** `Record<string, string>`
@@ -632,6 +634,9 @@ starlight({
 有关创建自己的插件的详细信息，请参阅[插件参考](/zh-cn/reference/plugins/)。
 
 ### `credits`
+
+**类型：** `boolean`  
+**默认值：** `false`
 
 启用在你的网站页脚显示 “基于 Starlight 构建” 的链接。
 
