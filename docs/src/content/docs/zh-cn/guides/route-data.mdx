@@ -90,9 +90,9 @@ Starlight 的路由数据是开箱即用的，不需要任何配置。但是，�
    import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
    export const onRequest = defineRouteMiddleware((context) => {
-    // 获取此页面的内容集合条目。
+   	// 获取此页面的内容集合条目。
    	const { entry } = context.locals.starlightRoute;
-    // 更新标题以添加感叹号。
+   	// 更新标题以添加感叹号。
    	entry.data.title = entry.data.title + '!';
    });
    ```
