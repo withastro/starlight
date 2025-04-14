@@ -52,7 +52,7 @@ You can see all the CSS custom properties used by Starlight that you can set to 
 
 ### Cascade layers
 
-Starlight uses [cascade layers](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) internally so that any custom unlayered CSS will override the default styles.
+Starlight uses [cascade layers](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) internally for managing the order of styles. This results in a more predictable CSS order and allows for easier overrides. Any custom unlayered CSS will override the default styles from the `starlight` layer.
 
 If you are using cascade layers in your custom CSS, you can use the [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) CSS at-rule to define the order of precedence for different layers including the ones used by Starlight.
 
