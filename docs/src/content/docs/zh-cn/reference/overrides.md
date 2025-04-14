@@ -22,10 +22,9 @@ tableOfContents:
 **默认组件：** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 在每个页面的 `<head>` 元素内渲染的组件。
-包含 `<title>` 和 `<meta charset="utf-8">` 等重要标签。
 
 重写此组件应作为最后手段。
-如果可能，请优先使用 Starlight 配置中的 [`head`](/zh-cn/reference/configuration/#head) 选项。
+如果可能，请优先使用 [`head` 配置项](/zh-cn/reference/configuration/#head)，[`head` frontmatter 字段](/zh-cn/reference/frontmatter/#head)，或者使用 [路由数据中间件](/zh-cn/guides/route-data/#自定义路由数据) 来自定义默认组件渲染的路由数据。
 
 #### `ThemeProvider`
 

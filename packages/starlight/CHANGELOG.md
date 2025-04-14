@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.33.2
+
+### Patch Changes
+
+- [#3090](https://github.com/withastro/starlight/pull/3090) [`fc3ffa8`](https://github.com/withastro/starlight/commit/fc3ffa8e27a3113a8eb70a3d8e7bf69c2bb214e5) Thanks [@delucis](https://github.com/delucis)! - Updates internal `@astrojs/mdx`, `@astrojs/sitemap`, and `astro-expressive-code` dependencies
+
+- [#3109](https://github.com/withastro/starlight/pull/3109) [`b5cc1b4`](https://github.com/withastro/starlight/commit/b5cc1b4d4ee7dc737616c6ada893369b13ddb9c6) Thanks [@dhruvkb](https://github.com/dhruvkb)! - Updates Expressive Code to v0.41.1
+
+## 0.33.1
+
+### Patch Changes
+
+- [#3088](https://github.com/withastro/starlight/pull/3088) [`1885049`](https://github.com/withastro/starlight/commit/18850491905fc1bf9e467b1d65c7f1709daf3c30) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression in Starlight version `0.33.0` that caused the description and links to language alternates for multilingual websites to be missing from the` <head>` of the page.
+
+- [#3065](https://github.com/withastro/starlight/pull/3065) [`463adf5`](https://github.com/withastro/starlight/commit/463adf53b263a963736cb441bc1dd515f3c81894) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the `social` configuration option TSDoc example to match the shape of the expected value.
+
 ## 0.33.0
 
 ### Minor Changes

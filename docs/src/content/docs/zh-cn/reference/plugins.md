@@ -163,19 +163,23 @@ declare namespace StarlightApp {
 要更新嵌套的配置值，你必须提供整个嵌套对象。
 
 要扩展现有的配置选项而不是覆盖它，可以将现有值展开到新值中。
-在下面的例子中，通过将 `config.social` 展开到新的 `social` 对象中，向现有配置添加了一个新的 [`social`](/zh-cn/reference/configuration/#social) 媒体账号：
+在下面的例子中，通过将 `config.social` 展开到新的 `social` 数组中，向现有配置添加了一个新的 [`social`](/zh-cn/reference/configuration/#social) 媒体账号：
 
-```ts {6-11}
+```ts {6-15}
 // plugin.ts
 export default {
   name: 'add-twitter-plugin',
   hooks: {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
-        social: {
+        social: [
           ...config.social,
-          twitter: 'https://twitter.com/astrodotbuild',
-        },
+          {
+            icon: 'twitter',
+            label: 'Twitter',
+            href: 'https://twitter.com/astrodotbuild',
+          },
+        ],
       });
     },
   },
