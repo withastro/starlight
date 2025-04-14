@@ -210,8 +210,8 @@ If set, the following CSS custom properties will override Starlight’s default 
 
 - `--color-accent-*` — used for links and current item highlighting
 - `--color-gray-*` — used for background colors and borders
-- `--sl-font` — used for UI and content text
-- `--sl-font-mono` — used for code examples
+- `--font-sans` — used for UI and content text
+- `--font-mono` — used for code examples
 
 ```css {10-20,22-32,34,36}
 /* src/tailwind.css */
@@ -247,9 +247,9 @@ If set, the following CSS custom properties will override Starlight’s default 
 	--color-gray-900: var(--color-zinc-900);
 	--color-gray-950: var(--color-zinc-950);
 	/* Your preferred text font. Starlight uses a system font stack by default. */
-	--sl-font: 'Atkinson Hyperlegible';
+	--font-sans: 'Atkinson Hyperlegible';
 	/* Your preferred code font. Starlight uses system monospace fonts by default. */
-	--sl-font-mono: 'IBM Plex Mono';
+	--font-mono: 'IBM Plex Mono';
 }
 ```
 

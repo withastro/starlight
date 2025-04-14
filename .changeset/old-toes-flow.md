@@ -156,9 +156,9 @@ If you previously [customized your Tailwind theme configuration](https://starlig
    	--color-gray-900: var(--color-slate-900);
    	--color-gray-950: var(--color-slate-950);
     /* Custom text font. */
-    --sl-font: 'Atkinson Hyperlegible';
+    --font-sans: 'Atkinson Hyperlegible';
     /* Custom code font. */
-    --sl-font-mono: 'IBM Plex Mono';
+    --font-mono: 'IBM Plex Mono';
    }
    ```
 
