@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.33.2
+
+### Patch Changes
+
+- [#3090](https://github.com/withastro/starlight/pull/3090) [`fc3ffa8`](https://github.com/withastro/starlight/commit/fc3ffa8e27a3113a8eb70a3d8e7bf69c2bb214e5) Thanks [@delucis](https://github.com/delucis)! - Updates internal `@astrojs/mdx`, `@astrojs/sitemap`, and `astro-expressive-code` dependencies
+
+- [#3109](https://github.com/withastro/starlight/pull/3109) [`b5cc1b4`](https://github.com/withastro/starlight/commit/b5cc1b4d4ee7dc737616c6ada893369b13ddb9c6) Thanks [@dhruvkb](https://github.com/dhruvkb)! - Updates Expressive Code to v0.41.1
+
 ## 0.33.1
 
 ### Patch Changes

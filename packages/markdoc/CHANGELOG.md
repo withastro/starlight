@@ -1,5 +1,13 @@
 # @astrojs/starlight-markdoc
 
+## 0.3.1
+
+### Patch Changes
+
+- [#3090](https://github.com/withastro/starlight/pull/3090) [`fc3ffa8`](https://github.com/withastro/starlight/commit/fc3ffa8e27a3113a8eb70a3d8e7bf69c2bb214e5) Thanks [@delucis](https://github.com/delucis)! - Adds support for newer versions of `@astrojs/markdoc`
+
+- [#3109](https://github.com/withastro/starlight/pull/3109) [`b5cc1b4`](https://github.com/withastro/starlight/commit/b5cc1b4d4ee7dc737616c6ada893369b13ddb9c6) Thanks [@dhruvkb](https://github.com/dhruvkb)! - Updates Expressive Code to v0.41.1
+
 ## 0.3.0
 
 ### Minor Changes
