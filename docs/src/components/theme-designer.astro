@@ -115,7 +115,7 @@ const {
 		}
 
 		#updateTailwindConfig({ dark, light }: ReturnType<typeof getPalettes>) {
-			const config = `@layer base, starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, components, utilities;
+			const config = `@layer base, starlight, theme, components, utilities;
 
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);

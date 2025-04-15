@@ -40,7 +40,7 @@ Adds support for Tailwind v4, drops support for Tailwind v3.
    -@tailwind base;
    -@tailwind components;
    -@tailwind utilities;
-   +@layer base, starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, components, utilities;
+   +@layer base, starlight, theme, components, utilities;
    +
    +@import '@astrojs/starlight-tailwind';
    +@import 'tailwindcss/theme.css' layer(theme);
@@ -95,7 +95,7 @@ If you previously [customized your Tailwind theme configuration](https://starlig
 
    ```css
    /* src/tailwind.css */
-   @layer base, starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, components, utilities;
+   @layer base, starlight, theme, components, utilities;
    
    @import '@astrojs/starlight-tailwind';
    @import 'tailwindcss/theme.css' layer(theme);

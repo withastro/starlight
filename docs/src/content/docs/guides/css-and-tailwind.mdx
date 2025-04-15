@@ -171,7 +171,7 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
 
     ```css {4}
     /* src/tailwind.css */
-    @layer base, starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, components, utilities;
+    @layer base, starlight, theme, components, utilities;
 
     @import '@astrojs/starlight-tailwind';
     @import 'tailwindcss/theme.css' layer(theme);
@@ -215,7 +215,7 @@ If set, the following CSS custom properties will override Starlight’s default 
 
 ```css {10-20,22-32,34,36}
 /* src/tailwind.css */
-@layer base, starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils, theme, components, utilities;
+@layer base, starlight, theme, components, utilities;
 
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
