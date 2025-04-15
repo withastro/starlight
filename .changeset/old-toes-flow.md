@@ -27,40 +27,11 @@ Adds support for Tailwind v4, drops support for Tailwind v3.
 
 1. **Install Tailwind v4.** Install the latest version of the `tailwindcss` and `@tailwindcss/vite` packages.
 
-   In Astro `>=5.2.0`, use the `astro add tailwind` command to install and configure both packages:
+   Use the `astro add tailwind` command to install and configure both packages:
 
    ```sh
    npx astro add tailwind
    ```
-
-   For earlier versions of Astro, follow the steps below to install and configure Tailwind v4:
-
-   1. Install the packages manually using your package manager, for example using npm:
-
-      ```sh
-      npm install tailwindcss @tailwindcss/vite
-      ```
-
-   1. Add the `@tailwindcss/vite` plugin to your Vite plugins configuration in your Astro config file.
-
-      ```diff
-       // astro.config.mjs
-       import { defineConfig } from "astro/config";
-       import starlight from "@astrojs/starlight";
-      +import tailwindcss from "@tailwindcss/vite";
-   
-       export default defineConfig({
-         integrations: [
-           starlight({
-             title: "Docs with Tailwind",
-             customCss: ["./src/tailwind.css"],
-           }),
-         ],
-      +  vite: {
-      +    plugins: [tailwindcss()],
-      +  },
-       });
-      ```
   
 1. **Update Tailwind base styles.** Tailwind CSS base styles needs to be updated for Tailwind v4 and also to use Starlight Tailwind CSS.
 
