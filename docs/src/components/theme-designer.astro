@@ -115,28 +115,20 @@ const {
 		}
 
 		#updateTailwindConfig({ dark, light }: ReturnType<typeof getPalettes>) {
-			const config = `@layer base, starlight, theme, components, utilities;
-
-@import '@astrojs/starlight-tailwind';
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
-
-@theme {
-	/* Generated accent color palettes. */
-	--color-accent-200: ${dark['accent-high']};
-	--color-accent-600: ${light.accent};
-	--color-accent-900: ${light['accent-high']};
-	--color-accent-950: ${dark['accent-low']};
-	/* Generated gray color palettes. */
-	--color-gray-100: ${light['gray-7']};
-	--color-gray-200: ${light['gray-6']};
-	--color-gray-300: ${light['gray-5']};
-	--color-gray-400: ${light['gray-4']};
-	--color-gray-500: ${light['gray-3']};
-	--color-gray-700: ${light['gray-2']};
-	--color-gray-800: ${light['gray-1']};
-	--color-gray-900: ${light.white};
-}`;
+			const config = `/* Generated accent color palettes. */
+--color-accent-200: ${dark['accent-high']};
+--color-accent-600: ${light.accent};
+--color-accent-900: ${light['accent-high']};
+--color-accent-950: ${dark['accent-low']};
+/* Generated gray color palettes. */
+--color-gray-100: ${light['gray-7']};
+--color-gray-200: ${light['gray-6']};
+--color-gray-300: ${light['gray-5']};
+--color-gray-400: ${light['gray-4']};
+--color-gray-500: ${light['gray-3']};
+--color-gray-700: ${light['gray-2']};
+--color-gray-800: ${light['gray-1']};
+--color-gray-900: ${light.white};`;
 			const codePreview = this.querySelector('[data-theme-tailwind]');
 			if (codePreview) codePreview.innerHTML = config;
 		}
