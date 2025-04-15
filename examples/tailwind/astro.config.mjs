@@ -22,7 +22,7 @@ export default defineConfig({
 					autogenerate: { directory: 'reference' },
 				},
 			],
-			customCss: ['./src/tailwind.css'],
+			customCss: ['./src/styles/global.css'],
 		}),
 	],
 	vite: {
