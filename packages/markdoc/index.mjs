@@ -134,6 +134,10 @@ export const StarlightMarkdocPreset = {
 					type: String,
 					required: true,
 				},
+				hangingIndent: {
+					type: Number,
+					required: false,
+				},
 				lang: {
 					type: String,
 					required: false,
