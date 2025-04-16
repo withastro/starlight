@@ -105,7 +105,7 @@ Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaire
 | [Mintlify][mt-carbon]       | 0.99g                |    F     |
 | [GitBook][gb-carbon]        | 1.19g                |    F     |
 
-<small>Données collectées le 22 juillet 2024. Cliquez sur un lien pour voir les chiffres actualisés.</small>
+<small>Données collectées le 12 avril 2025. Cliquez sur un lien pour voir les chiffres actualisés.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
