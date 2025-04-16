@@ -109,98 +109,97 @@ yarn create astro --template starlight/tailwind
 
 1. 다음 명령을 실행하고 터미널의 지침에 따라 프로젝트에 Tailwind를 설정합니다.
 
+   <Tabs syncKey="pkg">
 
-    <Tabs syncKey="pkg">
+   <TabItem label="npm">
 
-    <TabItem label="npm">
+   ```sh
+   npx astro add tailwind
+   ```
 
-    ```sh
-    npx astro add tailwind
-    ```
+   </TabItem>
 
-    </TabItem>
+   <TabItem label="pnpm">
 
-    <TabItem label="pnpm">
+   ```sh
+   pnpm astro add tailwind
+   ```
 
-    ```sh
-    pnpm astro add tailwind
-    ```
+   </TabItem>
 
-    </TabItem>
+   <TabItem label="Yarn">
 
-    <TabItem label="Yarn">
+   ```sh
+   yarn astro add tailwind
+   ```
 
-    ```sh
-    yarn astro add tailwind
-    ```
+   </TabItem>
 
-    </TabItem>
-
-    </Tabs>
+   </Tabs>
 
 2. Starlight의 Tailwind 호환성 패키지를 설치합니다.
 
-    <Tabs syncKey="pkg">
+   <Tabs syncKey="pkg">
 
-    <TabItem label="npm">
+   <TabItem label="npm">
 
-    ```sh
-    npm install @astrojs/starlight-tailwind
-    ```
+   ```sh
+   npm install @astrojs/starlight-tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="pnpm">
+   <TabItem label="pnpm">
 
-    ```sh
-    pnpm add @astrojs/starlight-tailwind
-    ```
+   ```sh
+   pnpm add @astrojs/starlight-tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="Yarn">
+   <TabItem label="Yarn">
 
-    ```sh
-    yarn add @astrojs/starlight-tailwind
-    ```
+   ```sh
+   yarn add @astrojs/starlight-tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    </Tabs>
+   </Tabs>
 
 3. Astro가 스캐폴딩한 `src/styles/global.css` 파일의 콘텐츠를 Starlight와의 호환성을 위해 다음 코드로 교체합니다.
 
-    ```css
-    /* src/styles/global.css */
-    @layer base, starlight, theme, components, utilities;
+   ```css
+   /* src/styles/global.css */
+   @layer base, starlight, theme, components, utilities;
 
-    @import '@astrojs/starlight-tailwind';
-    @import 'tailwindcss/theme.css' layer(theme);
-    @import 'tailwindcss/utilities.css' layer(utilities);
-    ```
+   @import '@astrojs/starlight-tailwind';
+   @import 'tailwindcss/theme.css' layer(theme);
+   @import 'tailwindcss/utilities.css' layer(utilities);
+   ```
 
 4. Tailwind CSS 파일을 사용하도록 Starlight 구성을 업데이트합니다.
 
-    ```js ins={11-12}
-    // astro.config.mjs
-    import { defineConfig } from 'astro/config';
-    import starlight from '@astrojs/starlight';
-    import tailwindcss from '@tailwindcss/vite';
+   ```js ins={11-12}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import tailwindcss from '@tailwindcss/vite';
 
-    export default defineConfig({
-    	integrations: [
-    		starlight({
-    			title: 'Tailwind를 사용한 문서',
-    			customCss: [
-            // Tailwind 기본 스타일의 경로입니다.
-    				'./src/styles/global.css',
-    			],
-    		}),
-    	],
-    	vite: { plugins: [tailwindcss()] },
-    });
-    ```
-    
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Tailwind를 사용한 문서',
+   			customCss: [
+   				// Tailwind 기본 스타일의 경로입니다.
+   				'./src/styles/global.css',
+   			],
+   		}),
+   	],
+   	vite: { plugins: [tailwindcss()] },
+   });
+   ```
+
 </Steps>
 
 ### Tailwind로 Starlight 스타일링하기
