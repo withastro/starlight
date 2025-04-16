@@ -128,9 +128,6 @@ export default function StarlightIntegration(
 							}),
 						],
 						rehypePlugins: [rehypeRtlCodeSupport()],
-						shikiConfig:
-							// Configure Shiki theme if the user is using the default github-dark theme.
-							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
