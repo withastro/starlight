@@ -99,7 +99,6 @@ test('adds custom frontmatter data to route shape', async () => {
 		      "content": "test",
 		      "name": "og:test",
 		    },
-		    "content": "",
 		    "tag": "meta",
 		  },
 		]
