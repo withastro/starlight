@@ -1,11 +1,12 @@
+import type { ImageMetadata } from 'astro';
 import { expect, test, vi } from 'vitest';
-import { getRouteDataTestContext } from '../test-utils';
-import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
+import { generateRouteData } from '../../utils/routing/data';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
 } from '../../utils/starlight-page';
+import { getRouteDataTestContext } from '../test-utils';
 
 vi.mock('virtual:starlight/collection-config', async () =>
 	(await import('../test-utils')).mockedCollectionConfig()
@@ -523,4 +524,90 @@ test('generates data with a similar root shape to regular route data', async () 
 	});
 
 	expect(Object.keys(data).sort()).toEqual(Object.keys(starlightPageData).sort());
+});
+
+test('parses an ImageMetadata object successfully', async () => {
+	const fakeImportedImage: ImageMetadata = {
+		src: '/image-src.png',
+		width: 100,
+		height: 100,
+		format: 'png',
+	};
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			frontmatter: {
+				...starlightPageProps.frontmatter,
+				hero: {
+					image: { file: fakeImportedImage },
+				},
+			},
+		},
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
+	expect(data.entry.data.hero?.image).toBeDefined();
+	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
+	expect(data.entry.data.hero?.image!['file']).toMatchInlineSnapshot(`
+		{
+		  "format": "png",
+		  "height": 100,
+		  "src": "/image-src.png",
+		  "width": 100,
+		}
+	`);
+});
+
+test('parses an image that is also a function successfully', async () => {
+	const fakeImportedSvg = (() => {}) as unknown as ImageMetadata;
+	Object.assign(fakeImportedSvg, { src: '/image-src.svg', width: 100, height: 100, format: 'svg' });
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			frontmatter: {
+				...starlightPageProps.frontmatter,
+				hero: {
+					image: { file: fakeImportedSvg },
+				},
+			},
+		},
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
+	expect(data.entry.data.hero?.image).toBeDefined();
+	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
+	expect(data.entry.data.hero?.image!['file']).toMatchInlineSnapshot(`[Function]`);
+	// @ts-expect-error
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('src');
+	// @ts-expect-error
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('width');
+	// @ts-expect-error
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('height');
+	// @ts-expect-error
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('format');
+});
+
+test('fails to parse an image without the expected metadata properties', async () => {
+	await expect(() =>
+		generateStarlightPageRouteData({
+			props: {
+				...starlightPageProps,
+				frontmatter: {
+					...starlightPageProps.frontmatter,
+					hero: {
+						image: {
+							// @ts-expect-error intentionally incorrect input
+							file: () => {},
+						},
+					},
+				},
+			},
+			context: getRouteDataTestContext(starlightPagePathname),
+		})
+	).rejects.toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid frontmatter props passed to the \`<StarlightPage/>\` component.
+		Hint:
+			**hero.image**: Did not match union.
+			> Expected type \`file | { dark; light } | { html: string }\`
+			> Received \`{}\`"
+	`);
 });
