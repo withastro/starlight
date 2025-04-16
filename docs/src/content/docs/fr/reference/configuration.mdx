@@ -372,6 +372,29 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**Type :** `{ headingLinks?: boolean }`  
+**Par défaut :** `{ headingLinks: true }`
+
+Configure le traitement de contenu Markdown par Starlight.
+
+#### `headingLinks`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Définit si les en-têtes sont affichés avec des liens d'ancrage cliquables ou non.
+
+```js
+starlight({
+	markdown: {
+		// Désactive les liens d'ancrage cliquables pour les en-têtes.
+		headingLinks: false,
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **Type :** `StarlightExpressiveCodeOptions | boolean`  
