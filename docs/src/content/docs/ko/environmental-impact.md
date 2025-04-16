@@ -91,20 +91,20 @@ JavaScript를 분석하고 컴파일하는 것은 브라우저가 수행해야 �
 [Website Carbon Calculator][wcc]를 사용한 이러한 테스트는 서로 다른 도구로 작성된 유사한 페이지를 비교합니다.
 
 | 프레임워크                  | 페이지 방문당 CO₂ | 등급 |
-| --------------------------- | ------------------ | :----: |
-| [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.07g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.07g              |   A+   |
-| [VitePress][vp-carbon]      | 0.07g              |   A+   |
-| [Docus][dc-carbon]          | 0.10g              |   A    |
-| [docsify][dy-carbon]        | 0.11g              |   A    |
-| [mdBook][md-carbon]         | 0.13g              |   A    |
-| [MkDocs][mk-carbon]         | 0.15g              |   A    |
-| [Fumadocs][fs-carbon]       | 0.16g              |   A    |
-| [Nextra][nx-carbon]         | 0.16g              |   A    |
-| [Docusaurus][ds-carbon]     | 0.25g              |   B    |
-| [Mintlify][mt-carbon]       | 0.99g              |   F    |
-| [GitBook][gb-carbon]        | 1.19g              |   F    |
+| --------------------------- | ----------------- | :--: |
+| [Starlight][sl-carbon]      | 0.01g             |  A+  |
+| [Read the Docs][rtd-carbon] | 0.07g             |  A+  |
+| [Sphinx][sx-carbon]         | 0.07g             |  A+  |
+| [VitePress][vp-carbon]      | 0.07g             |  A+  |
+| [Docus][dc-carbon]          | 0.10g             |  A   |
+| [docsify][dy-carbon]        | 0.11g             |  A   |
+| [mdBook][md-carbon]         | 0.13g             |  A   |
+| [MkDocs][mk-carbon]         | 0.15g             |  A   |
+| [Fumadocs][fs-carbon]       | 0.16g             |  A   |
+| [Nextra][nx-carbon]         | 0.16g             |  A   |
+| [Docusaurus][ds-carbon]     | 0.25g             |  B   |
+| [Mintlify][mt-carbon]       | 0.99g             |  F   |
+| [GitBook][gb-carbon]        | 1.19g             |  F   |
 
 <small>2025년 4월 12일에 수집된 데이터. 최신 수치를 보려면 링크를 클릭하세요.</small>
 
