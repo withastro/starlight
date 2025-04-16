@@ -1,6 +1,6 @@
 {
   "name": "@astrojs/starlight-tailwind",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Tailwind CSS plugin for the Starlight documentation theme for Astro",
   "author": "Chris Swithinbank <swithinbank@gmail.com>",
   "license": "MIT",

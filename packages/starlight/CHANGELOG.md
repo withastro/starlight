@@ -1,5 +1,103 @@
 # @astrojs/starlight
 
+## 0.34.0
+
+### Minor Changes
+
+- [#2322](https://github.com/withastro/starlight/pull/2322) [`f14eb0c`](https://github.com/withastro/starlight/commit/f14eb0cd7baa0391d6124379f6c5df4b9ab7cc44) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Groups all of Starlight's CSS declarations into a single `starlight` [cascade layer](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers).
+
+  This change allows for easier customization of Starlight's CSS as any custom unlayered CSS will override the default styles. If you are using cascade layers in your custom CSS, you can use the [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) CSS at-rule to define the order of precedence for different layers including the ones used by Starlight.
+
+  We recommend checking your site’s appearance when upgrading to make sure there are no style regressions caused by this change.
+
+- [#3122](https://github.com/withastro/starlight/pull/3122) [`3a087d8`](https://github.com/withastro/starlight/commit/3a087d8fbcd946336f8a0423203967e53e5678fe) Thanks [@delucis](https://github.com/delucis)! - Removes default `attrs` and `content` values from head entries parsed using Starlight’s schema.
+
+  Previously when adding `head` metadata via frontmatter or user config, Starlight would automatically add values for `attrs` and `content` if not provided. Now, these properties are left `undefined`.
+
+  This makes it simpler to add tags in route middleware for example as you no longer need to provide empty values for `attrs` and `content`:
+
+  ```diff
+  head.push({
+    tag: 'style',
+    content: 'div { color: red }'
+  - attrs: {},
+  });
+  head.push({
+    tag: 'link',
+  - content: ''
+    attrs: { rel: 'me', href: 'https://example.com' },
+  });
+  ```
+
+  This is mostly an internal API but if you are overriding Starlight’s `Head` component or processing head entries in some way, you may wish to double check your handling of `Astro.locals.starlightRoute.head` is compatible with `attrs` and `content` potentially being `undefined`.
+
+- [#3033](https://github.com/withastro/starlight/pull/3033) [`8c19678`](https://github.com/withastro/starlight/commit/8c19678e57c0270d3d80d4678f23a6fc287ebf12) Thanks [@delucis](https://github.com/delucis)! - Adds support for generating clickable anchor links for headings.
+
+  By default, Starlight now renders an anchor link beside headings in Markdown and MDX content. A new `<AnchorHeading>` component is available to achieve the same thing in custom pages built using `<StarlightPage>`.
+
+  If you want to disable this new Markdown processing set the `markdown.headingLinks` option in your Starlight config to `false`:
+
+  ```js
+  starlight({
+    title: 'My docs',
+    markdown: {
+      headingLinks: false,
+    },
+  }),
+  ```
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v5.5.0.
+
+  Please update Starlight and Astro together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+- [#2322](https://github.com/withastro/starlight/pull/2322) [`f14eb0c`](https://github.com/withastro/starlight/commit/f14eb0cd7baa0391d6124379f6c5df4b9ab7cc44) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes Shiki `css-variables` theme fallback.
+
+  ⚠️ **Breaking change:**
+
+  Previously, Starlight used to automatically provide a fallback theme for Shiki, the default syntax highlighter built into Astro if the configured Shiki theme was not `github-dark`.
+
+  This fallback was only relevant when the default Starlight code block renderer, Expressive Code, was disabled and Shiki was used. Starlight no longer provides this fallback.
+
+  If you were relying on this behavior, you now manually need to update your Astro configuration to use the Shiki `css-variables` theme to match the previous behavior.
+
+  ```diff
+  import { defineConfig } from 'astro/config';
+
+  export default defineConfig({
+  + markdown: {
+  +   shikiConfig: {
+  +     theme: 'css-variables',
+  +   },
+  + },
+  });
+  ```
+
+  Additionally, you can use [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to control the appearance of the code blocks. Here are the previously used CSS variables for the fallback theme:
+
+  ```css
+  :root {
+    --astro-code-foreground: var(--sl-color-white);
+    --astro-code-background: var(--sl-color-gray-6);
+    --astro-code-token-constant: var(--sl-color-blue-high);
+    --astro-code-token-string: var(--sl-color-green-high);
+    --astro-code-token-comment: var(--sl-color-gray-2);
+    --astro-code-token-keyword: var(--sl-color-purple-high);
+    --astro-code-token-parameter: var(--sl-color-red-high);
+    --astro-code-token-function: var(--sl-color-red-high);
+    --astro-code-token-string-expression: var(--sl-color-green-high);
+    --astro-code-token-punctuation: var(--sl-color-gray-2);
+    --astro-code-token-link: var(--sl-color-blue-high);
+  }
+  ```
+
+### Patch Changes
+
+- [#3118](https://github.com/withastro/starlight/pull/3118) [`77a1104`](https://github.com/withastro/starlight/commit/77a110461dffacd1d3ee3b8934fd48b20111f3c4) Thanks [@delucis](https://github.com/delucis)! - Fixes passing imported SVGs to the `frontmatter` prop of the `<StarlightPage>` component in Astro ≥5.7.0
+
 ## 0.33.2
 
 ### Patch Changes

@@ -1,5 +1,30 @@
 # @astrojs/starlight-markdoc
 
+## 0.4.0
+
+### Minor Changes
+
+- [#3033](https://github.com/withastro/starlight/pull/3033) [`8c19678`](https://github.com/withastro/starlight/commit/8c19678e57c0270d3d80d4678f23a6fc287ebf12) Thanks [@delucis](https://github.com/delucis)! - Adds support for generating clickable anchor links for headings.
+
+  By default, the Starlight Markdoc preset now includes a default `heading` node, which renders an anchor link beside headings in your Markdoc content.
+
+  If you want to disable this new feature, pass `headingLinks: false` in your Markdoc config:
+
+  ```js
+  export default defineMarkdocConfig({
+    // Disable the default heading anchor link support
+    extends: [starlightMarkdoc({ headingLinks: false })],
+  });
+  ```
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported peer version of Starlight is now v0.34.0.
+
+  Please update Starlight and the Starlight Markdoc preset together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
 ## 0.3.1
 
 ### Patch Changes
