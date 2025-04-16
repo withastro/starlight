@@ -28,7 +28,7 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 			</>
 		)
 	}
-	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no">
+	<span class:list={[{ 'sr-only': config.logo?.replacesTitle }, 'site-title-text']} translate="no">
 		{siteTitle}
 	</span>
 </a>
@@ -42,6 +42,12 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 		color: var(--sl-color-text-accent);
 		text-decoration: none;
 		white-space: nowrap;
+		min-width: 0;
+	}
+	.site-title-text {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-wrap: nowrap;
 	}
 	img {
 		height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
