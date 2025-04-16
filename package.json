@@ -42,7 +42,7 @@
         "examples/basics/dist/_astro/*.css",
         "!examples/basics/dist/_astro/print.*.css"
       ],
-      "limit": "14.5 kB",
+      "limit": "14.75 kB",
       "gzip": true
     }
   ],

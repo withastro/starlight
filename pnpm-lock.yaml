@@ -164,6 +164,9 @@ importers:
 
   packages/starlight:
     dependencies:
+      '@astrojs/markdown-remark':
+        specifier: ^6.3.1
+        version: 6.3.1
       '@astrojs/mdx':
         specifier: ^4.2.3
         version: 4.2.4(astro@5.6.2(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@4.36.0)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.6.1))
@@ -230,6 +233,9 @@ importers:
       remark-directive:
         specifier: ^3.0.0
         version: 3.0.0
+      ultrahtml:
+        specifier: ^1.6.0
+        version: 1.6.0
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -240,9 +246,6 @@ importers:
         specifier: ^6.0.2
         version: 6.0.3
     devDependencies:
-      '@astrojs/markdown-remark':
-        specifier: ^6.3.1
-        version: 6.3.1
       '@playwright/test':
         specifier: ^1.45.0
         version: 1.45.0

@@ -23,7 +23,7 @@
   },
   "peerDependencies": {
     "@astrojs/markdoc": ">=0.12.1",
-    "@astrojs/starlight": ">=0.30.0"
+    "@astrojs/starlight": ">=0.34.0"
   },
   "publishConfig": {
     "provenance": true

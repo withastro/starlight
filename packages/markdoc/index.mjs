@@ -1,4 +1,4 @@
-import { component } from '@astrojs/markdoc/config';
+import { component, nodes } from '@astrojs/markdoc/config';
 import { WellKnownElementAttributes, WellKnownAnchorAttributes } from './html.mjs';
 
 /**
@@ -287,7 +287,23 @@ export const StarlightMarkdocPreset = {
 	},
 };
 
-/** @return {import('@astrojs/markdoc/config').AstroMarkdocConfig} */
-export default function starlightMarkdoc() {
-	return StarlightMarkdocPreset;
+/**
+ * Markdoc preset that configures Starlight’s built-in components.
+ * @return {import('@astrojs/markdoc/config').AstroMarkdocConfig}
+ */
+export default function starlightMarkdoc({ headingLinks = true } = {}) {
+	return {
+		...StarlightMarkdocPreset,
+		nodes: {
+			...StarlightMarkdocPreset.nodes,
+			...(headingLinks
+				? {
+						heading: {
+							...nodes.heading,
+							render: component('@astrojs/starlight-markdoc/components', 'Heading'),
+						},
+					}
+				: {}),
+		},
+	};
 }

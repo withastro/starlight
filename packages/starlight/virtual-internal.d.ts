@@ -4,6 +4,8 @@ declare module 'virtual:starlight/git-info' {
 
 declare module 'virtual:starlight/user-css' {}
 
+declare module 'virtual:starlight/optional-css' {}
+
 declare module 'virtual:starlight/user-images' {
 	type ImageMetadata = import('astro').ImageMetadata;
 	export const logos: {
