@@ -28,7 +28,7 @@ const { siteTitle } = Astro.locals.starlightRoute;
 ---
 
 <p>El título de este sitio es “{siteTitle}”</p>
-````
+```
 
 Esto puede ser útil, por ejemplo, al construir [sustituciones de componentes](/es/guides/overriding-components/) para personalizar lo que se muestra.
 
@@ -70,12 +70,12 @@ Esta es una función que se llama cada vez que Starlight renderiza una página y
     import starlight from '@astrojs/starlight';
 
     export default defineConfig({
-     integrations: [
-      starlight({
-       title: 'Mi increíble sitio de documentación',
-       routeMiddleware: './src/routeData.ts',
-      }),
-     ],
+    	integrations: [
+    		starlight({
+    			title: 'Mi increíble sitio de documentación',
+    			routeMiddleware: './src/routeData.ts',
+    		}),
+    	],
     });
     ```
 
@@ -91,10 +91,10 @@ Esta es una función que se llama cada vez que Starlight renderiza una página y
     import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 
     export const onRequest = defineRouteMiddleware((context) => {
-     // Obtiene la entrada de la colección de contenido para esta página.
-     const { entry } = context.locals.starlightRoute;
-     // Actualiza el título para añadir un signo de exclamación.
-     entry.data.title = entry.data.title + '!';
+    	// Obtiene la entrada de la colección de contenido para esta página.
+    	const { entry } = context.locals.starlightRoute;
+    	// Actualiza el título para añadir un signo de exclamación.
+    	entry.data.title = entry.data.title + '!';
     });
     ```
 
