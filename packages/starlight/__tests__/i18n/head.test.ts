@@ -24,7 +24,6 @@ test('includes links to language alternates', () => {
 				href: `https://example.com/${locale}/`,
 				hreflang: localeConfig?.lang,
 			},
-			content: '',
 		});
 	}
 });
