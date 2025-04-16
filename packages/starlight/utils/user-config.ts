@@ -244,6 +244,20 @@ const UserConfigSchema = z.object({
 			}
 		})
 		.describe('Add middleware to process Starlight’s route data for each page.'),
+
+	/** Configure features that impact Starlight’s Markdown processing. */
+	markdown: z
+		.object({
+			/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
+			headingLinks: z
+				.boolean()
+				.default(true)
+				.describe(
+					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
+				),
+		})
+		.default({})
+		.describe('Configure features that impact Starlight’s Markdown processing.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict()
