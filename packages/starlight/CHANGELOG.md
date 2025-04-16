@@ -56,7 +56,7 @@
 
 - [#2322](https://github.com/withastro/starlight/pull/2322) [`f14eb0c`](https://github.com/withastro/starlight/commit/f14eb0cd7baa0391d6124379f6c5df4b9ab7cc44) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes Shiki `css-variables` theme fallback.
 
-  ⚠️ **Breaking change:**
+  ⚠️ **BREAKING CHANGE:**
 
   Previously, Starlight used to automatically provide a fallback theme for Shiki, the default syntax highlighter built into Astro if the configured Shiki theme was not `github-dark`.
 
