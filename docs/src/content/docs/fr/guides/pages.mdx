@@ -3,6 +3,8 @@ title: Pages
 description: Apprenez à créer et à gérer les pages de votre site de documentation avec Starlight.
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlight génère les pages HTML de votre site en fonction de votre contenu, avec des options flexibles fournies par le biais du frontmatter en Markdown.
@@ -73,28 +75,51 @@ Pour en savoir plus, consultez le guide [« Pages » dans la documentation d'Ast
 
 ### Utiliser le design de Starlight dans des pages personnalisées
 
-Pour utiliser la mise en page Starlight dans des pages personnalisées, englobez le contenu de votre page avec le composant `<StarlightPage />`.
+Pour utiliser la mise en page Starlight dans des pages personnalisées, englobez le contenu de votre page avec le [composant `<StarlightPage />`](#composant-starlightpage).
 Cela peut s'avérer utile si vous générez du contenu de manière dynamique, mais que vous souhaitez tout de même utiliser le design de Starlight.
+
+Pour ajouter des liens d'ancrage vers des en-têtes avec une apparence équivalente aux liens d'ancrage Markdown de Starlight, vous pouvez utiliser le [composant `<AnchorHeading>`](#composant-anchorheading) dans vos pages personnalisées.
 
 ```astro
 ---
 // src/pages/page-perso/exemple.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: 'Ma page personnalisée' }}>
 	<p>Il s'agit d'une page personnalisée avec un composant personnalisé :</p>
 	<CustomComponent />
+
+	<AnchorHeading level="2" id="learn-more">En savoir plus</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">
+			Consulter la documentation de Starlight
+		</a>
+	</p>
 </StarlightPage>
 ```
 
-#### Props
+#### Composant `<StarlightPage>`
+
+Le composant `<StarlightPage />` affiche une page complète de contenu en utilisant la mise en page et les styles de Starlight.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Ma page personnalisée' }}>
+	<!-- Contenu de la page personnalisée -->
+</StarlightPage>
+```
 
 Le composant `<StarlightPage />` accepte les props suivantes.
 
-##### `frontmatter` (obligatoire)
+##### `frontmatter`
 
+**Obligatoire**  
 **Type :** `StarlightPageFrontmatter`
 
 Définit les [propriétés du frontmatter](/fr/reference/frontmatter/) pour cette page, similaire au frontmatter dans les pages Markdown.
@@ -177,3 +202,33 @@ Définit l'étiquette d’identification BCP-47 pour le contenu de cette page, p
 **Par défaut :** `false`
 
 Indique si cette page utilise un [contenu de repli](/fr/guides/i18n/#contenu-de-repli) parce qu'il n'y a pas de traduction pour la langue actuelle.
+
+#### Composant `<AnchorHeading>`
+
+Le composant `<AnchorHeading>` affiche un élément d'en-tête HTML avec un lien d'ancrage cliquable avec une apparence équivalente aux styles Markdown de Starlight.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">Sous paragraphe</AnchorHeading>
+```
+
+Il accepte les props suivantes ainsi que n'importe quel autre [attribut HTML universel valide](https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Global_attributes).
+
+##### `level`
+
+**Obligatoire**  
+**Type :** `1 | 2 | 3 | 4 | 5 | 6`
+
+Le niveau d'en-tête à afficher.
+Par exemple, `level="1"` afficherait un élément `<h1>`.
+
+##### `id`
+
+**Obligatoire**  
+**Type :** `string`
+
+Un identifiant unique pour cet en-tête.
+Celui-ci sera utilisé comme attribut `id` de l'en-tête affiché et l'icône d'ancrage rendirigera vers celui-ci.
