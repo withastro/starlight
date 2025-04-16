@@ -29,6 +29,12 @@
 
 @layer base {
 	/* Restore crucial styles from Tailwind Preflight: https://tailwindcss.com/docs/preflight */
+	/* Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116) */
+	*,
+	::after,
+	::before {
+		border: 0 solid;
+	}
 	/* Keep base font-family styles even in non-Starlight pages. */
 	html,
 	:host {
