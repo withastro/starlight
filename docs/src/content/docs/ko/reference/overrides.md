@@ -22,10 +22,9 @@ Starlight의 [`components`](/ko/reference/configuration/#components) 구성 옵�
 **기본 컴포넌트:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 각 페이지의 `<head>` 내에서 렌더링되는 컴포넌트입니다.
-`<title>`, `<meta charset="utf-8">`를 포함하여 중요한 태그들이 포함합니다.
 
 최후의 수단으로 이 컴포넌트를 재정의합니다.
-가능하면 Starlight 구성의 [`head`](/ko/reference/configuration/#head) 옵션을 사용하는 것이 좋습니다.
+기본 컴포넌트에서 렌더링되는 라우트 데이터를 사용자 정의하려면 [`head` 구성 옵션](/ko/reference/configuration/#head), [`head` 프런트매터 필드](/ko/reference/frontmatter/#head), 또는 [라우트 데이터 미들웨어](/ko/guides/route-data/#경로-데이터-사용자-정의)를 사용하는 것이 좋습니다.
 
 #### `ThemeProvider`
 

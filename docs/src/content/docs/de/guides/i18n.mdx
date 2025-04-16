@@ -137,13 +137,13 @@ export default defineConfig({
 });
 ```
 
-Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungs&shy;funktionen für mehrsprachige Websites zu aktivieren, wie z.B. die Sprachauswahl.
+Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungs&shy;funktionen für mehrsprachige Websites zu aktivieren, wie z.&nbsp;B. die Sprachauswahl.
 
 ## Fallback-Inhalt
 
 Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `de/about.md` Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Ersatzinhalte für Seiten zu liefern, die noch nicht übersetzt wurden.
 
-Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.B. noch keine französische Version deiner "About"-Seite erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
+Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.&nbsp;B. noch keine französische Version deiner "About"-Seite erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
 
 ## Übersetze den Seitentitel
 
@@ -178,7 +178,7 @@ export default defineConfig({
 import LanguagesList from '~/components/languages-list.astro';
 import UIStringsList from '~/components/ui-strings-list.astro';
 
-Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.B. die Überschrift "Auf dieser Seite" im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
+Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.&nbsp;B. die Überschrift "Auf dieser Seite" im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
 
 <LanguagesList startsSentence /> werden standardmäßig übersetzt, und wir freuen
 uns über [Beiträge zur Aufnahme weiterer
@@ -215,7 +215,7 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
 
    </FileTree>
 
-3. Füge Übersetzungen für die Schlüssel hinzu, die in den JSON-Dateien übersetzt werden sollen. Übersetze nur die Werte und belasse die Schlüssel auf Englisch (z.B. `"search.label": "Buscar"`).
+3. Füge Übersetzungen für die Schlüssel hinzu, die in den JSON-Dateien übersetzt werden sollen. Übersetze nur die Werte und belasse die Schlüssel auf Englisch (z.&nbsp;B. `"search.label": "Buscar"`).
 
    Dies sind die englischen Standardwerte der vorhandenen Strings, mit denen Starlight ausgeliefert wird:
 

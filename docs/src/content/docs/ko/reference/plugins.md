@@ -163,19 +163,23 @@ Starlight가 초기화될 때 호출되는 플러그인 구성 설정 함수입�
 중첩된 구성 값을 업데이트하려면 전체 중첩 객체를 제공해야 합니다.
 
 기존 구성 옵션을 재정의하지 않고 확장하려면 기존 값을 새 값에 전개하여 확장하세요.
-다음 예시에서는 `config.social`에 전개 연산자를 사용하여 새로운 `social` 객체를 확장합니다. 이를 통해, 새로운 [`social`](/ko/reference/configuration/#social) 미디어 계정을 기존 구성에 추가합니다.
+다음 예시에서는 `config.social`에 전개 연산자를 사용하여 새로운 `social` 배열을 확장합니다. 이를 통해, 새로운 [`social`](/ko/reference/configuration/#social) 미디어 계정을 기존 구성에 추가합니다.
 
-```ts {6-11}
+```ts {6-15}
 // plugin.ts
 export default {
   name: 'add-twitter-plugin',
   hooks: {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
-        social: {
+        social: [
           ...config.social,
-          twitter: 'https://twitter.com/astrodotbuild',
-        },
+          {
+            icon: 'twitter',
+            label: 'Twitter',
+            href: 'https://twitter.com/astrodotbuild',
+          },
+        ],
       });
     },
   },

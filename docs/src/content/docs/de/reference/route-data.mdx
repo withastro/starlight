@@ -43,7 +43,7 @@ Schreibrichtung der Seite.
 
 **Typ:** `string`
 
-BCP-47-Sprachkennzeichen für das Gebietsschema dieser Seite, z.B. `de`, `zh-CN` oder `pt-BR`.
+BCP-47-Sprachkennzeichen für das Gebietsschema dieser Seite, z.&nbsp;B. `de`, `zh-CN` oder `pt-BR`.
 
 ### `locale`
 
@@ -61,8 +61,8 @@ Der Seitentitel für das Gebietsschema dieser Seite.
 
 **Typ:** `string`
 
-Der Wert für das Attribut `href` des Seitentitels, der auf die Homepage zurückverweist, z. B. `/`.
-Bei mehrsprachigen Websites wird hier das aktuelle Gebietsschema angegeben, z. B. `/en/` oder `/zh-cn/`.
+Der Wert für das Attribut `href` des Seitentitels, der auf die Homepage zurückverweist, z.&nbsp;B. `/`.
+Bei mehrsprachigen Websites wird hier das aktuelle Gebietsschema angegeben, z.&nbsp;B. `/en/` oder `/zh-cn/`.
 
 ### `slug`
 
@@ -151,6 +151,13 @@ JavaScript `Date` Objekt, welches angibt, wann diese Seite zuletzt aktualisiert 
 **Typ:** `URL | undefined`
 
 `URL`-Objekt für die Adresse, unter der diese Seite bearbeitet werden kann, falls aktiviert.
+
+### `head`
+
+**Typ:** [`HeadConfig[]`](/de/reference/configuration/#headconfig)
+
+Array mit allen Tags, die in den `<head>` der aktuellen Seite aufgenommen werden sollen.
+Enthält wichtige Tags wie `<title>` und `<meta charset="utf-8">`.
 
 ## Hilfsmittel
 
