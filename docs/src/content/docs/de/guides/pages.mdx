@@ -3,6 +3,8 @@ title: Seiten
 description: Lerne, wie du mit Starlight die Seiten deiner Dokumentationswebsite erstellst und verwaltest.
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlight generiert die HTML-Seiten deiner Website auf der Grundlage deines Inhalts, wobei flexible Optionen über das Markdown-Frontmatter bereitgestellt werden.
@@ -73,13 +75,16 @@ Mehr dazu findest du in der [„Seiten“-Anleitung in der Astro-Dokumentation](
 
 ### Das Starlight-Design in eigenen Seiten verwenden
 
-Um das Starlight-Layout in benutzerdefinierten Seiten zu verwenden, umhüllst du deinen Seiteninhalt mit der Komponente `<StarlightPage />`.
+Um das Starlight-Layout in benutzerdefinierten Seiten zu verwenden, umhüllst du deinen Seiteninhalt mit der [Komponente `<StarlightPage />`](#starlightpage-komponente).
 Das kann hilfreich sein, wenn du Inhalte dynamisch generierst, aber trotzdem das Starlight-Design verwenden willst.
+
+Um Ankerlinks zu Überschriften hinzuzufügen, die den Markdown-Ankerlinkstilen von Starlight entsprechen, kannst du die [`<AnchorHeading>`-Komponente](#anchorheading-komponente) in deinen eigenen Seiten verwenden.
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
@@ -89,15 +94,35 @@ import CustomComponent from './CustomComponent.astro';
 		Komponente:
 	</p>
 	<CustomComponent />
+
+	<AnchorHeading level="2" id="erfahre-menr">Erfahre mehr</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/"
+			>Lies mehr in der Starlight-Dokumentation</a
+		>
+	</p>
 </StarlightPage>
 ```
 
-#### Eigenschaften
+#### `<StarlightPage>`-Komponente
+
+Die Komponente `<StarlightPage />` rendert eine ganze Seite mit dem Layout und den Stilen von Starlight.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Meine eigene Seite' }}>
+	<!-- Benutzerdefinierter Seiteninhalt -->
+</StarlightPage>
+```
 
 Die Komponente `<StarlightPage />` akzeptiert die folgenden Eigenschaften.
 
-##### `frontmatter` (erforderlich)
+##### `frontmatter`
 
+**erforderlich**  
 **Typ:** `StarlightPageFrontmatter`
 
 Setzt die [Frontmatter Eigenschaften](/de/reference/frontmatter/) für diese Seite, ähnlich wie Frontmatter in Markdown-Seiten.
@@ -176,3 +201,33 @@ Setzt das BCP-47 Sprach-Tag für den Inhalt dieser Seite, z.&nbsp;B. `en`, `zh-C
 **Standard:** `false`
 
 Gibt an, ob diese Seite [Fallback-Inhalt](/de/guides/i18n/#fallback-inhalt) verwendet, weil es für die aktuelle Sprache keine Übersetzung gibt.
+
+#### `<AnchorHeading>`-Komponente
+
+Die Komponente `<AnchorHeading />` rendert ein HTML-Überschriftenelement mit einem klickbaren Anker-Link, der den Markdown-Styles von Starlight entspricht.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="unterüberschrift">Unterüberschrift</AnchorHeading>
+```
+
+Sie akzeptiert die folgenden Requisiten sowie alle anderen gültigen [globalen HTML-Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+
+##### `level`
+
+**erforderlich**  
+**Typ:** `1 | 2 | 3 | 4 | 5 | 6`
+
+Die zu rendernde Überschriftsebene.
+Zum Beispiel würde `level="1"` ein `<h1>`-Element darstellen.
+
+##### `id`
+
+**erforderlich**  
+**Typ:** `string`
+
+Die eindeutige ID für diese Überschrift.
+Dieser wird als `id`-Attribut der gerenderten Überschrift verwendet und das Ankersymbol verlinkt darauf.
