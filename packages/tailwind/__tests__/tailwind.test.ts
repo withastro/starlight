@@ -14,6 +14,10 @@ test('generates base and utilities CSS layers and defines default theme values',
 		"@layer theme;
 
 		@layer base {
+		  *, :after, :before {
+		    border: 0 solid;
+		  }
+
 		  html, :host {
 		    font-family: var(--font-sans);
 		  }
