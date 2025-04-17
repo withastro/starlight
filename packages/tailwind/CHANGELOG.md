@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 4.0.1
+
+### Patch Changes
+
+- [#3132](https://github.com/withastro/starlight/pull/3132) [`5959919`](https://github.com/withastro/starlight/commit/595991952be1a76cdf54f457c6e4d23b3f2ffec7) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all border styles were not reset by the Starlight’s Tailwind compatibility package like in [Tailwind base styles](https://tailwindcss.com/docs/preflight#border-styles-are-reset).
+
 ## 4.0.0
 
 ### Major Changes
