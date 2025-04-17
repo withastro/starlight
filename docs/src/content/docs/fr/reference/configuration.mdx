@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**Par défaut :** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**Par défaut :** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 Configurez la table des matières affichée à droite de chaque page. Par défaut, les titres `<h2>` et `<h3>` seront inclus dans cette table des matières.
 
@@ -370,6 +370,29 @@ Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, p
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**Type :** `{ headingLinks?: boolean }`  
+**Par défaut :** `{ headingLinks: true }`
+
+Configure le traitement de contenu Markdown par Starlight.
+
+#### `headingLinks`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Définit si les en-têtes sont affichés avec des liens d'ancrage cliquables ou non.
+
+```js
+starlight({
+	markdown: {
+		// Désactive les liens d'ancrage cliquables pour les en-têtes.
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`
