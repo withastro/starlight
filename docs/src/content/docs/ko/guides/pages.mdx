@@ -3,6 +3,8 @@ title: 페이지
 description: Starlight를 사용하여 문서 사이트의 페이지를 만들고 관리하는 방법을 알아보세요.
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlight는 Markdown Frontmatter를 통해 제공되는 유연한 옵션을 사용하여 콘텐츠를 기반으로 사이트의 HTML 페이지를 생성합니다.
@@ -73,28 +75,51 @@ description: 이것은 내 Starlight 기반 사이트의 페이지입니다.
 
 ### 사용자 정의 페이지에서 Starlight 디자인 사용
 
-사용자 정의 페이지에서 Starlight 레이아웃을 사용하려면 `<StarlightPage />` 컴포넌트로 페이지 콘텐츠를 감싸세요.
+사용자 정의 페이지에서 Starlight 레이아웃을 사용하려면 [`<StarlightPage>` 컴포넌트](#starlightpage-컴포넌트)로 페이지 콘텐츠를 감싸세요.
 이는 콘텐츠를 동적으로 생성하지만 여전히 Starlight의 디자인을 사용하려는 경우 유용할 수 있습니다.
+
+사용자 정의 페이지에서 [`<AnchorHeading>` 컴포넌트](#anchorheading-컴포넌트)를 사용하여 Starlight의 Markdown 앵커 링크 스타일과 일치하는 앵커 링크를 제목에 추가할 수 있습니다.
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: '사용자 정의 페이지' }}>
-	<p>이것은 사용자 정의 컴포넌트가 있는 사용자 정의 페이지입니다.</p>
+	<p>사용자 정의 컴포넌트가 있는 사용자 정의 페이지입니다.</p>
 	<CustomComponent />
+
+	<AnchorHeading level="2" id="learn-more">자세히 알아보기</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/"
+			>Starlight 문서에서 자세히 알아보기</a
+		>
+	</p>
 </StarlightPage>
 ```
 
-#### Props
+#### `<StarlightPage>` 컴포넌트
+
+`<StarlightPage />` 컴포넌트는 Starlight의 레이아웃과 스타일을 사용하여 전체 페이지 콘텐츠를 렌더링합니다.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<StarlightPage frontmatter={{ title: '사용자 정의 페이지' }}>
+	<!-- 사용자 정의 페이지 콘텐츠 -->
+</StarlightPage>
+```
 
 `<StarlightPage />` 컴포넌트는 다음 props를 허용합니다.
 
-##### `frontmatter` (필수)
+##### `frontmatter`
 
+**필수**  
 **타입:** `StarlightPageFrontmatter`
 
 Markdown 페이지의 프론트매터와 유사하게 이 페이지에 대한 [프론트매터 속성](/ko/reference/frontmatter/)을 설정합니다.
@@ -173,3 +198,33 @@ Markdown 페이지의 프론트매터와 유사하게 이 페이지에 대한 [�
 **기본값:** `false`
 
 현재 언어에 대한 번역이 존재하지 않아 이 페이지가 [대체 콘텐츠](/ko/guides/i18n/#대체-콘텐츠)를 사용하고 있는지 표시합니다.
+
+#### `<AnchorHeading>` 컴포넌트
+
+`<AnchorHeading />` 컴포넌트는 Starlight의 Markdown 스타일과 일치하는 클릭 가능한 앵커 링크가 있는 HTML 제목 요소를 렌더링합니다.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">하위 제목</AnchorHeading>
+```
+
+이 컴포넌트는 다음과 같은 props 뿐만 아니라 다른 유효한 [전역 HTML 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Reference/Global_attributes)도 허용합니다.
+
+##### `level`
+
+**필수**  
+**타입:** `1 | 2 | 3 | 4 | 5 | 6`
+
+렌더링할 제목 수준입니다.
+예를 들어, `level="1"`은 `<h1>` 요소를 렌더링합니다.
+
+##### `id`
+
+**필수**  
+**타입:** `string`
+
+이 제목의 고유 ID입니다.
+이는 렌더링된 제목의 `id` 속성으로 사용되며, 앵커 아이콘은 이 ID로 연결됩니다.
