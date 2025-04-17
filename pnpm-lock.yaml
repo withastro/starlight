@@ -109,7 +109,7 @@ importers:
         specifier: ^0.34.0
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: link:../../packages/tailwind
       '@tailwindcss/vite':
         specifier: ^4.0.7
