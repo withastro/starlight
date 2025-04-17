@@ -374,6 +374,29 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**Typ:** `{ headingLinks?: boolean }`  
+**Standard:** `{ headingLinks: true }`
+
+Konfiguriere die Markdown-Verarbeitung von Starlight.
+
+#### `headingLinks`
+
+**Typ:** `boolean`  
+**Standard:** `true`
+
+Steuert, ob Überschriften mit einem anklickbaren Ankerlink dargestellt werden oder nicht.
+
+```js
+starlight({
+	markdown: {
+		// Deaktiviere die anklickbaren Überschrift-Ankerlinks von Starlight.
+		headingLinks: false,
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **Typ:** `StarlightExpressiveCodeOptions | boolean`  
