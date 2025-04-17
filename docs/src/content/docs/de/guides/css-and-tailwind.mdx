@@ -185,24 +185,24 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
 4.  Aktualisiere die Starlight-Konfiguration, um die Tailwind-CSS-Datei zu verwenden:
 
         ```js ins={11-12}
-    // astro.config.mjs
-    import { defineConfig } from 'astro/config';
-    import starlight from '@astrojs/starlight';
-    import tailwindcss from '@tailwindcss/vite';
+        // astro.config.mjs
+        import { defineConfig } from 'astro/config';
+        import starlight from '@astrojs/starlight';
+        import tailwindcss from '@tailwindcss/vite';
 
-    export default defineConfig({
-    	integrations: [
-    		starlight({
-    			title: 'Docs with Tailwind',
-    			customCss: [
-    				// Pfad zu deinen grundlegenden Tailwind-Styles
-    				'./src/styles/global.css',
-    			],
-    		}),
-    	],
-    	vite: { plugins: [tailwindcss()] },
-    });
-    ```
+        export default defineConfig({
+          integrations: [
+            starlight({
+              title: 'Dokumentation mit Tailwind',
+              customCss: [
+                // Pfad zu deinen grundlegenden Tailwind-Styles
+                './src/styles/global.css',
+              ],
+            }),
+          ],
+          vite: { plugins: [tailwindcss()] },
+        });
+        ```
 
 </Steps>
 
@@ -217,7 +217,7 @@ Wenn diese Option aktiviert ist, überschreiben die folgenden benutzerdefinierte
 - `--font-sans` - wird für UI und Inhaltstext verwendet
 - `--font-mono` - wird für Code-Beispiele verwendet
 
-```css {9,11,13,25}
+```css {9-12,14-17,19-22,34-37}
 /* src/styles/global.css */
 @layer base, starlight, theme, components, utilities;
 
@@ -226,11 +226,20 @@ Wenn diese Option aktiviert ist, überschreiben die folgenden benutzerdefinierte
 @import 'tailwindcss/utilities.css' layer(utilities);
 
 @theme {
-	/* Deine bevorzugte Schriftart. Starlight verwendet standardmäßig eine Systemschriftart. */
+	/* 
+  Deine bevorzugte Schriftart.
+  Starlight verwendet standardmäßig eine Systemschriftart.
+  */
 	--font-sans: 'Atkinson Hyperlegible';
-	/* Deine bevorzugte Code-Schriftart. Starlight verwendet standardmäßig die Systemschriftart Monospace. */
+	/* 
+  Deine bevorzugte Code-Schriftart.
+  Starlight verwendet standardmäßig die Systemschriftart Monospace.
+  */
 	--font-mono: 'IBM Plex Mono';
-	/* Deine bevorzugte Akzentfarbe. Indigo entspricht am ehesten den Standard&shy;einstellungen von Starlight. */
+	/* 
+  Deine bevorzugte Akzentfarbe.
+  Indigo entspricht am ehesten den Standard&shy;einstellungen von Starlight.
+  */
 	--color-accent-50: var(--color-indigo-50);
 	--color-accent-100: var(--color-indigo-100);
 	--color-accent-200: var(--color-indigo-200);
@@ -242,7 +251,10 @@ Wenn diese Option aktiviert ist, überschreiben die folgenden benutzerdefinierte
 	--color-accent-800: var(--color-indigo-800);
 	--color-accent-900: var(--color-indigo-900);
 	--color-accent-950: var(--color-indigo-950);
-	/* Deine bevorzugte Grauskala. Zink kommt den Standard&shy;einstellungen von Starlight am nächsten. */
+	/* 
+  Deine bevorzugte Grauskala.
+  Zink kommt den Standard&shy;einstellungen von Starlight am nächsten.
+  */
 	--color-gray-50: var(--color-zinc-50);
 	--color-gray-100: var(--color-zinc-100);
 	--color-gray-200: var(--color-zinc-200);
