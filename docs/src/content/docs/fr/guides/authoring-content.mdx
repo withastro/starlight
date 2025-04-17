@@ -649,3 +649,22 @@ Si vous disposez déjà d'un site Starlight et que vous souhaitez ajouter Markdo
 </Steps>
 
 Pour en savoir plus sur la syntaxe et les fonctionnalités de Markdoc, consultez la [documentation Markdoc](https://markdoc.dev/docs/syntax) ou le [guide de l'intégration Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).
+
+### Paramétrage de la préconfiguration Markdoc
+
+La préconfiguration `starlightMarkdoc()` accepte les options de configuration suivantes :
+
+#### `headingLinks`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Contrôle si les en-têtes sont affichés avec des liens d'ancrage cliquables ou non.
+Équivaut à l'option [`markdown.headingLinks`](/fr/reference/configuration/#markdown) qui s'applique aux fichiers Markdown et MDX.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Désactive les liens d'ancrage par défaut pour les en-têtes
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```
