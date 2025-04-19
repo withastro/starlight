@@ -88,6 +88,9 @@ how we do it.
 		position: relative;
 		/* Move the anchor link over the heading element’s end-of-line padding. */
 		margin-inline-start: calc(-1 * var(--sl-anchor-icon-size));
+		/* Prevent double or triple clicks from potentially selecting the anchor link a11y text. */
+		-webkit-user-select: none;
+		user-select: none;
 	}
 
 	/* Increase clickable area for anchor links with a pseudo element that doesn’t impact layout. */
