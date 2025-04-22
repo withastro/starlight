@@ -1,4 +1,7 @@
 ---
+// Ensure proper cascade layers order by importing user and Starlight CSS layer definitions first.
+import '../utils/css-layers';
+
 import type { HTMLAttributes } from 'astro/types';
 import { transform } from 'ultrahtml';
 import sanitize from 'ultrahtml/transformers/sanitize';

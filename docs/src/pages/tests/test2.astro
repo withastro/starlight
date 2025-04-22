@@ -1,0 +1,22 @@
+---
+import { LinkButton } from '@astrojs/starlight/components';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+
+// TODO(HiDeoo) Remove this file
+---
+
+<StarlightPage frontmatter={{ title: 'Test 2' }}>
+	<AnchorHeading level="2" id="test">Test</AnchorHeading>
+
+	<p>
+		<a href="https://starlight.astro.build/">Read more in the Starlight docs</a>
+	</p>
+
+	<p>
+		<LinkButton href="/getting-started/">Get started</LinkButton>
+		<LinkButton href="/reference/configuration/" variant="secondary">
+			Configuration Reference
+		</LinkButton>
+	</p>
+</StarlightPage>

@@ -1,3 +1,6 @@
+// Ensure proper cascade layers order by importing user and Starlight CSS layer definitions first.
+import './utils/css-layers';
+
 export { default as Aside } from './user-components/Aside.astro';
 export { default as Badge } from './user-components/Badge.astro';
 export { default as Card } from './user-components/Card.astro';

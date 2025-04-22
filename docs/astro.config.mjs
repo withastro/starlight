@@ -70,6 +70,23 @@ export default defineConfig({
 			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
+				// TODO(HiDeoo) Remove this sidebar group
+				{
+					label: 'Tests',
+					items: [
+						{ link: '/tests/test1/', label: 'Test 1', badge: { text: 'OK', variant: 'success' } },
+						{
+							link: '/tests/test2/',
+							label: 'Test 2',
+							badge: { text: 'Broken', variant: 'danger' },
+						},
+						{
+							link: '/tests/test3/',
+							label: 'Test 3',
+							badge: { text: 'Broken', variant: 'danger' },
+						},
+					],
+				},
 				{
 					label: 'Start Here',
 					translations: {

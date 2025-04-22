@@ -1,9 +1,6 @@
 ---
-// Important that this is the first import so it can override cascade layers order.
-import 'virtual:starlight/user-css';
-
-// Starlight nested cascade layers definitions which specify the default order of internal layers.
-import '../style/layers.css';
+// Ensure proper cascade layers order by importing user and Starlight CSS layer definitions first.
+import '../utils/css-layers';
 
 // Built-in CSS styles.
 import '../style/props.css';
