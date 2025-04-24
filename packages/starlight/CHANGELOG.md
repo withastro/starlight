@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.34.1
+
+### Patch Changes
+
+- [#3140](https://github.com/withastro/starlight/pull/3140) [`f6eb1d5`](https://github.com/withastro/starlight/commit/f6eb1d5a776b007bec0f4b5fd7b160851daac9fc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a text selection issue for heading with a clickable anchor link when using double or triple click to select text.
+
+- [#3148](https://github.com/withastro/starlight/pull/3148) [`dc8b6d5`](https://github.com/withastro/starlight/commit/dc8b6d5561eb90be9d31396ed1dc8f8258c9cbf7) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression of the Starlight icon color when using the [`credits`](https://starlight.astro.build/reference/configuration/#credits) configuration option.
+
 ## 0.34.0
 
 ### Minor Changes
