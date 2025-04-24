@@ -48,11 +48,14 @@ import { Icon } from '../components';
 			text-decoration: none;
 			color: var(--sl-color-gray-3);
 		}
-		.kudos :global(svg) {
-			color: var(--sl-color-orange);
-		}
 		.kudos:hover {
 			color: var(--sl-color-white);
+		}
+	}
+
+	@layer starlight.components {
+		.kudos :global(svg) {
+			color: var(--sl-color-orange);
 		}
 	}
 </style>
