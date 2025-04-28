@@ -74,8 +74,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**Standard:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**Typ:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**Standard:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 Konfiguriere das Inhaltsverzeichnis, das rechts auf jeder Seite angezeigt wird. Standardmäßig werden `<h2>` und `<h3>` Überschriften in dieses Inhaltsverzeichnis aufgenommen.
 
@@ -372,6 +372,29 @@ Unterstützt lokale CSS-Dateien relativ zum Stammverzeichnis deines Projekts, z.
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**Typ:** `{ headingLinks?: boolean }`  
+**Standard:** `{ headingLinks: true }`
+
+Konfiguriere die Markdown-Verarbeitung von Starlight.
+
+#### `headingLinks`
+
+**Typ:** `boolean`  
+**Standard:** `true`
+
+Steuert, ob Überschriften mit einem anklickbaren Ankerlink dargestellt werden oder nicht.
+
+```js
+starlight({
+	markdown: {
+		// Deaktiviere die anklickbaren Überschrift-Ankerlinks von Starlight.
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`

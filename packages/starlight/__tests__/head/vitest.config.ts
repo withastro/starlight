@@ -2,6 +2,7 @@ import { defineVitestConfig } from '../test-config';
 
 export default defineVitestConfig({
 	title: 'Docs With Custom Head',
+	description: 'Docs with a custom head',
 	head: [
 		{ tag: 'link', attrs: { rel: 'canonical', href: 'https://example.com/test' } },
 		{ tag: 'link', attrs: { rel: 'stylesheet', href: 'primary.css' } },

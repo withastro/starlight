@@ -537,7 +537,7 @@ Starlight utilise le moteur de rendu Markdown et MDX d'Astro basé sur remark et
 
 ## Markdoc
 
-Starlight supporte la création de contenu en Markdoc en utilisant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) et la préconfiguration Markdoc de Starlight.
+Starlight supporte la création de contenu en Markdoc en utilisant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) et le préréglage Markdoc de Starlight.
 
 ### Créer un nouveau projet avec Markdoc
 
@@ -605,7 +605,7 @@ Si vous disposez déjà d'un site Starlight et que vous souhaitez ajouter Markdo
 
     </Tabs>
 
-2.  Installez la préconfiguration Markdoc de Starlight :
+2.  Installez le préréglage Markdoc de Starlight :
 
     <Tabs syncKey="pkg">
 
@@ -635,7 +635,7 @@ Si vous disposez déjà d'un site Starlight et que vous souhaitez ajouter Markdo
 
     </Tabs>
 
-3.  Créez une configuration Markdoc dans le fichier `markdoc.config.mjs` et utilisez la préconfiguration Markdoc de Starlight :
+3.  Créez une configuration Markdoc dans le fichier `markdoc.config.mjs` et utilisez le préréglage Markdoc de Starlight :
 
     ```js
     import { defineMarkdocConfig } from '@astrojs/markdoc/config';
@@ -649,3 +649,22 @@ Si vous disposez déjà d'un site Starlight et que vous souhaitez ajouter Markdo
 </Steps>
 
 Pour en savoir plus sur la syntaxe et les fonctionnalités de Markdoc, consultez la [documentation Markdoc](https://markdoc.dev/docs/syntax) ou le [guide de l'intégration Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/).
+
+### Configuration du préréglage Markdoc
+
+Le préréglage `starlightMarkdoc()` accepte les options de configuration suivantes :
+
+#### `headingLinks`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Contrôle si les en-têtes sont affichés avec des liens d'ancrage cliquables ou non.
+Équivaut à l'option [`markdown.headingLinks`](/fr/reference/configuration/#markdown) qui s'applique aux fichiers Markdown et MDX.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Désactive les liens d'ancrage par défaut pour les en-têtes
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

@@ -198,10 +198,15 @@ defineConfig({
 
 Starlight 内置了对通过 Starlight 集成中的 [`social`](/zh-cn/reference/configuration/#social) 选项将链接添加到网站标题的社交媒体账户的支持。
 
-你可以在 [配置参考](/zh-cn/reference/configuration/#social) 中找到完整的支持链接图标列表。
-如果你需要支持其他服务，请在 GitHub 或 Discord 上告诉我们！
+`social`数组中的每个条目都必须是具有以下三个属性的对象：
 
-```js {9-12}
+- `icon`：Starlight [内置的图标](/zh-cn/reference/icons/)之一，例如 `"github"`。
+- `label`：链接的可访问标签，例如 `"GitHub"`。
+- `href`: 链接的 URL，例如 `"https://github.com/withastro/starlight"`。
+
+以下示例添加了指向 Astro Discord 和 Starlight GitHub 仓库的链接：
+
+```js {9-16}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -210,10 +215,14 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: '带有社交链接的页面',
-			social: {
-				discord: 'https://astro.build/chat',
-				github: 'https://github.com/withastro/starlight',
-			},
+			social: [
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/withastro/starlight',
+				},
+			],
 		}),
 	],
 });

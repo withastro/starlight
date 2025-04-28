@@ -5,6 +5,7 @@ import { type HeadConfig, HeadConfigSchema, type HeadUserConfig } from '../schem
 import type { PageProps, RouteDataContext } from './routing/data';
 import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
+import { localizedUrl } from './localizedUrl';
 
 const HeadSchema = HeadConfigSchema();
 
@@ -61,6 +62,28 @@ export function getHead(
 		},
 	];
 
+	if (description)
+		headDefaults.push({
+			tag: 'meta',
+			attrs: { name: 'description', content: description },
+		});
+
+	// Link to language alternates.
+	if (canonical && config.isMultilingual) {
+		for (const locale in config.locales) {
+			const localeOpts = config.locales[locale];
+			if (!localeOpts) continue;
+			headDefaults.push({
+				tag: 'link',
+				attrs: {
+					rel: 'alternate',
+					hreflang: localeOpts.lang,
+					href: localizedUrl(canonical, locale, project.trailingSlash).href,
+				},
+			});
+		}
+	}
+
 	// Link to sitemap, but only when `site` is set.
 	if (context.site) {
 		headDefaults.push({
@@ -111,7 +134,9 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 		case 'meta':
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		case 'link':
-			return head.some(({ attrs }) => entry.attrs.rel === 'canonical' && attrs.rel === 'canonical');
+			return head.some(
+				({ attrs }) => entry.attrs?.rel === 'canonical' && attrs?.rel === 'canonical'
+			);
 		default:
 			return false;
 	}
@@ -125,7 +150,7 @@ function hasOneOf(head: HeadConfig, entry: HeadConfig[number], keys: string[]): 
 	const attr = getAttr(keys, entry);
 	if (!attr) return false;
 	const [key, val] = attr;
-	return head.some(({ tag, attrs }) => tag === entry.tag && attrs[key] === val);
+	return head.some(({ tag, attrs }) => tag === entry.tag && attrs?.[key] === val);
 }
 
 /** Find the first matching key–value pair in a head entry’s attributes. */
@@ -135,7 +160,7 @@ function getAttr(
 ): [key: string, value: string | boolean] | undefined {
 	let attr: [string, string | boolean] | undefined;
 	for (const key of keys) {
-		const val = entry.attrs[key];
+		const val = entry.attrs?.[key];
 		if (val) {
 			attr = [key, val];
 			break;
@@ -163,6 +188,7 @@ function getImportance(entry: HeadConfig[number]) {
 	// 1. Important meta tags.
 	if (
 		entry.tag === 'meta' &&
+		entry.attrs &&
 		('charset' in entry.attrs || 'http-equiv' in entry.attrs || entry.attrs.name === 'viewport')
 	) {
 		return 100;
@@ -174,7 +200,12 @@ function getImportance(entry: HeadConfig[number]) {
 		// The default favicon should be below any extra icons that the user may have set
 		// because if several icons are equally appropriate, the last one is used and we
 		// want to use the SVG icon when supported.
-		if (entry.tag === 'link' && 'rel' in entry.attrs && entry.attrs.rel === 'shortcut icon') {
+		if (
+			entry.tag === 'link' &&
+			entry.attrs &&
+			'rel' in entry.attrs &&
+			entry.attrs.rel === 'shortcut icon'
+		) {
 			return 70;
 		}
 		return 80;

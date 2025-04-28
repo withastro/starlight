@@ -650,3 +650,22 @@ Wenn du bereits eine Starlight-Website hast und Markdoc hinzufügen möchtest, b
 </Steps>
 
 Weitere Informationen zur Syntax und den Funktionen von Markdoc findest du in der [Markdoc-Dokumentation](https://markdoc.dev/docs/syntax) oder im [Astro Markdoc-Integrations&shy;handbuch](https://docs.astro.build/de/guides/integrations-guide/markdoc/).
+
+### Konfigurieren der Markdoc-Voreinstellung
+
+Die Voreinstellung `starlightMarkdoc()` akzeptiert die folgenden Konfigurationsoptionen:
+
+#### `headingLinks`
+
+**Typ:** `boolean`  
+**Standard:** `true`
+
+Legt fest, ob Überschriften mit einem anklickbaren Ankerlink dargestellt werden oder nicht.
+Entspricht der Option [`markdown.headingLinks`](/de/reference/configuration/#markdown), die für Markdown- und MDX-Dateien gilt.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Deaktiviere die Standardunterstützung für Überschrift-Ankerlinks
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

@@ -1,5 +1,5 @@
 import { z } from 'astro/zod';
-import { type ContentConfig, type SchemaContext } from 'astro:content';
+import { type ContentConfig, type ImageFunction, type SchemaContext } from 'astro:content';
 import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { getCollectionPathFromRoot } from './collection';
@@ -179,25 +179,22 @@ export async function generateStarlightPageRouteData({
 
 /** Validates the Starlight page frontmatter properties from the props received by a Starlight page. */
 async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter) {
-	// This needs to be in sync with ImageMetadata.
-	// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
 	const schema = await StarlightPageFrontmatterSchema({
-		image: () =>
-			z.object({
-				src: z.string(),
-				width: z.number(),
-				height: z.number(),
-				format: z.union([
-					z.literal('png'),
-					z.literal('jpg'),
-					z.literal('jpeg'),
-					z.literal('tiff'),
-					z.literal('webp'),
-					z.literal('gif'),
-					z.literal('svg'),
-					z.literal('avif'),
-				]),
-			}),
+		image: (() =>
+			// Mock validator for ImageMetadata.
+			// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
+			// It uses a custom validation approach because imported SVGs have a type of `function` as
+			// well as containing the metadata properties and this ensures we handle those correctly.
+			z.custom(
+				(value) =>
+					value &&
+					(typeof value === 'function' || typeof value === 'object') &&
+					'src' in value &&
+					'width' in value &&
+					'height' in value &&
+					'format' in value,
+				'Invalid image passed to `<StarlightPage>` component. Expected imported `ImageMetadata` object.'
+			)) as ImageFunction,
 	});
 
 	// Starting with Astro 4.14.0, a frontmatter schema that contains collection references will

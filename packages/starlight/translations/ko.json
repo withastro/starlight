@@ -25,5 +25,6 @@
   "aside.caution": "주의",
   "aside.danger": "위험",
   "fileTree.directory": "디렉터리",
-  "builtWithStarlight.label": "Starlight로 제작됨"
+  "builtWithStarlight.label": "Starlight로 제작됨",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

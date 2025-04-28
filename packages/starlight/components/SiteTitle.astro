@@ -34,26 +34,28 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 </a>
 
 <style>
-	.site-title {
-		align-items: center;
-		gap: var(--sl-nav-gap);
-		font-size: var(--sl-text-h4);
-		font-weight: 600;
-		color: var(--sl-color-text-accent);
-		text-decoration: none;
-		white-space: nowrap;
-		min-width: 0;
-	}
-	.site-title-text {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		text-wrap: nowrap;
-	}
-	img {
-		height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
-		width: auto;
-		max-width: 100%;
-		object-fit: contain;
-		object-position: 0 50%;
+	@layer starlight.core {
+		.site-title {
+			align-items: center;
+			gap: var(--sl-nav-gap);
+			font-size: var(--sl-text-h4);
+			font-weight: 600;
+			color: var(--sl-color-text-accent);
+			text-decoration: none;
+			white-space: nowrap;
+			min-width: 0;
+		}
+		.site-title-text {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-wrap: nowrap;
+		}
+		img {
+			height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+			width: auto;
+			max-width: 100%;
+			object-fit: contain;
+			object-position: 0 50%;
+		}
 	}
 </style>

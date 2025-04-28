@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**기본값:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**기본값:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 각 페이지 오른쪽에 표시되는 목차를 구성합니다. 기본적으로 `<h2>` 및 `<h3>` 제목이 이 목차에 포함됩니다.
 
@@ -375,6 +375,29 @@ Starlight 사이트의 모양과 느낌을 변경하려면 CSS 파일을 제공�
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**타입:** `{ headingLinks?: boolean }`  
+**기본값:** `{ headingLinks: true }`
+
+Starlight의 Markdown 처리를 구성합니다.
+
+#### `headingLinks`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+제목이 클릭 가능한 앵커 링크와 함께 렌더링될지 여부를 제어합니다.
+
+```js
+starlight({
+	markdown: {
+		// Starlight의 클릭 가능한 제목 앵커 링크를 비활성화합니다.
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`
