@@ -56,6 +56,7 @@ const html = processFileTree(fileTreeHtml, Astro.locals.t('fileTree.directory'))
 		}
 
 		starlight-file-tree :global(.directory > details > summary:hover .highlight .tree-icon) {
+			color: var(--sl-color-text-invert);
 			fill: currentColor;
 		}
 
