@@ -5,7 +5,7 @@ description: Lerne, wie du in Starlight Abzeichen verwenden kannst, um zusätzli
 
 import { Badge } from '@astrojs/starlight/components';
 
-Um wenige Informationen, wie z.B. einen Status oder eine Kategorie, anzuzeigen, verwende die Komponente `<Badge>`.
+Um wenige Informationen, wie z.&nbsp;B. einen Status oder eine Kategorie, anzuzeigen, verwende die Komponente `<Badge>`.
 
 import Preview from '~/components/component-preview.astro';
 
@@ -33,31 +33,31 @@ Um eine eingebaute Abzeichen-Farbe zu verwenden, setze das Attribut [`variant`](
 ```mdx
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Hinweis" variant="note" />
-<Badge text="Erfolg" variant="success" />
-<Badge text="Tipp" variant="tip" />
-<Badge text="Warnung" variant="caution" />
-<Badge text="Gefahr" variant="danger" />
+- <Badge text="Hinweis" variant="note" />
+- <Badge text="Erfolg" variant="success" />
+- <Badge text="Tipp" variant="tip" />
+- <Badge text="Warnung" variant="caution" />
+- <Badge text="Gefahr" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% badge text="Hinweis" variant="note" /%}
-{% badge text="Erfolg" variant="success" /%}
-{% badge text="Tipp" variant="tip" /%}
-{% badge text="Warnung" variant="caution" /%}
-{% badge text="Gefahr" variant="danger" /%}
+- {% badge text="Hinweis" variant="note" /%}
+- {% badge text="Erfolg" variant="success" /%}
+- {% badge text="Tipp" variant="tip" /%}
+- {% badge text="Warnung" variant="caution" /%}
+- {% badge text="Gefahr" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Hinweis" variant="note" />
-	<Badge text="Erfolg" variant="success" />
-	<Badge text="Tipp" variant="tip" />
-	<Badge text="Warnung" variant="caution" />
-	<Badge text="Gefahr" variant="danger" />
+	- <Badge text="Hinweis" variant="note" />
+	- <Badge text="Erfolg" variant="success" />
+	- <Badge text="Tipp" variant="tip" />
+	- <Badge text="Warnung" variant="caution" />
+	- <Badge text="Gefahr" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -71,25 +71,25 @@ Verwende das Attribut [`size`](#size), um die Größe des Abzeichentextes zu ste
 ```mdx /size="\w+"/
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Neu" size="small" />
-<Badge text="Neu und verbessert" size="medium" />
-<Badge text="Neu, verbessert und größer" size="large" />
+- <Badge text="Neu" size="small" />
+- <Badge text="Neu und verbessert" size="medium" />
+- <Badge text="Neu, verbessert und größer" size="large" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-{% badge text="Neu" size="small" /%}
-{% badge text="Neu und verbessert" size="medium" /%}
-{% badge text="Neu, verbessert und größer" size="large" /%}
+- {% badge text="Neu" size="small" /%}
+- {% badge text="Neu und verbessert" size="medium" /%}
+- {% badge text="Neu, verbessert und größer" size="large" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Neu" size="small" />
-	<Badge text="Neu und verbessert" size="medium" />
-	<Badge text="Neu, verbessert und größer" size="large" />
+	- <Badge text="Neu" size="small" />
+	- <Badge text="Neu und verbessert" size="medium" />
+	- <Badge text="Neu, verbessert und größer" size="large" />
 </Fragment>
 
 </Preview>

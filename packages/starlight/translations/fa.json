@@ -25,5 +25,6 @@
   "aside.caution": "احتیاط",
   "aside.danger": "خطر",
   "fileTree.directory": "فهرست",
-  "builtWithStarlight.label": "Built with Starlight"
+  "builtWithStarlight.label": "Built with Starlight",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

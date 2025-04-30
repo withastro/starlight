@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**기본값:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**기본값:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 각 페이지 오른쪽에 표시되는 목차를 구성합니다. 기본적으로 `<h2>` 및 `<h3>` 제목이 이 목차에 포함됩니다.
 
@@ -346,28 +346,21 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**타입:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/ko/reference/icons/){`; href: string }>`}</code>
 
-**타입:** <SocialLinksType />
-
-이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다. 이 중 하나를 추가하면 사이트 헤더에 아이콘 링크로 표시됩니다.
+이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다.
+각 항목은 사이트 헤더에 아이콘 링크로 표시됩니다.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+  social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -382,6 +375,29 @@ Starlight 사이트의 모양과 느낌을 변경하려면 CSS 파일을 제공�
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**타입:** `{ headingLinks?: boolean }`  
+**기본값:** `{ headingLinks: true }`
+
+Starlight의 Markdown 처리를 구성합니다.
+
+#### `headingLinks`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+제목이 클릭 가능한 앵커 링크와 함께 렌더링될지 여부를 제어합니다.
+
+```js
+starlight({
+	markdown: {
+		// Starlight의 클릭 가능한 제목 앵커 링크를 비활성화합니다.
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`
@@ -607,6 +623,15 @@ starlight({
 
 Starlight의 기본 [404 페이지](https://docs.astro.build/ko/basics/astro-pages/#사용자-정의-404-오류-페이지) 삽입을 비활성화합니다. 프로젝트에서 사용자 정의 `src/pages/404.astro` 경로를 사용하려면 이 옵션을 `true`로 설정하세요.
 
+### `routeMiddleware`
+
+**타입:** `string | string[]`
+
+Starlight가 데이터를 처리하는 방식을 수정할 수 있는 라우트 미들웨어 경로를 제공합니다.
+이 파일 경로는 [Astro의 미들웨어](https://docs.astro.build/ko/guides/middleware/)와 충돌해서는 안 됩니다.
+
+라우트 미들웨어를 만드는 방법에 대한 자세한 내용은 [라우트 데이터 가이드](/ko/guides/route-data/#경로-데이터-사용자-정의)를 참조하세요.
+
 ### `components`
 
 **타입:** `Record<string, string>`
@@ -641,6 +666,9 @@ starlight({
 나만의 플러그인을 만드는 방법에 대한 자세한 내용은 [플러그인 참조](/ko/reference/plugins/)를 확인하세요.
 
 ### `credits`
+
+**타입:** `boolean`  
+**기본값:** `false`
 
 사이트 바닥글에 “Starlight로 제작됨” 링크 표시를 활성화합니다.
 

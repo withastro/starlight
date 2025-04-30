@@ -51,18 +51,13 @@ const UserConfigSchema = z.object({
 	 * Optional details about the social media accounts for this site.
 	 *
 	 * @example
-	 * social: {
-	 *   codeberg: 'https://codeberg.org/knut/examples',
-	 *   discord: 'https://astro.build/chat',
-	 *   github: 'https://github.com/withastro/starlight',
-	 *   gitlab: 'https://gitlab.com/delucis',
-	 *   linkedin: 'https://www.linkedin.com/company/astroinc',
-	 *   mastodon: 'https://m.webtoo.ls/@astro',
-	 *   threads: 'https://www.threads.net/@nmoodev',
-	 *   twitch: 'https://www.twitch.tv/bholmesdev',
-	 *   twitter: 'https://twitter.com/astrodotbuild',
-	 *   youtube: 'https://youtube.com/@astrodotbuild',
-	 * }
+	 * social: [
+	 *   { icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+	 *   { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+	 *   { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+	 *   { icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+	 *   { icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	 * ]
 	 */
 	social: SocialLinksSchema(),
 
@@ -249,6 +244,20 @@ const UserConfigSchema = z.object({
 			}
 		})
 		.describe('Add middleware to process Starlight’s route data for each page.'),
+
+	/** Configure features that impact Starlight’s Markdown processing. */
+	markdown: z
+		.object({
+			/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
+			headingLinks: z
+				.boolean()
+				.default(true)
+				.describe(
+					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
+				),
+		})
+		.default({})
+		.describe('Configure features that impact Starlight’s Markdown processing.'),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict()

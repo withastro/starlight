@@ -25,5 +25,6 @@
   "aside.caution": "Achtung",
   "aside.danger": "Gefahr",
   "fileTree.directory": "Directory",
-  "builtWithStarlight.label": "Erstellt mit Starlight"
+  "builtWithStarlight.label": "Erstellt mit Starlight",
+  "heading.anchorLabel": "Abschnitt betitelt „{{title}}“"
 }

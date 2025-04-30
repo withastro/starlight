@@ -1,5 +1,214 @@
 # @astrojs/starlight
 
+## 0.34.1
+
+### Patch Changes
+
+- [#3140](https://github.com/withastro/starlight/pull/3140) [`f6eb1d5`](https://github.com/withastro/starlight/commit/f6eb1d5a776b007bec0f4b5fd7b160851daac9fc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a text selection issue for heading with a clickable anchor link when using double or triple click to select text.
+
+- [#3148](https://github.com/withastro/starlight/pull/3148) [`dc8b6d5`](https://github.com/withastro/starlight/commit/dc8b6d5561eb90be9d31396ed1dc8f8258c9cbf7) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression of the Starlight icon color when using the [`credits`](https://starlight.astro.build/reference/configuration/#credits) configuration option.
+
+## 0.34.0
+
+### Minor Changes
+
+- [#2322](https://github.com/withastro/starlight/pull/2322) [`f14eb0c`](https://github.com/withastro/starlight/commit/f14eb0cd7baa0391d6124379f6c5df4b9ab7cc44) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Groups all of Starlight's CSS declarations into a single `starlight` [cascade layer](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers).
+
+  This change allows for easier customization of Starlight's CSS as any custom unlayered CSS will override the default styles. If you are using cascade layers in your custom CSS, you can use the [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) CSS at-rule to define the order of precedence for different layers including the ones used by Starlight.
+
+  We recommend checking your site’s appearance when upgrading to make sure there are no style regressions caused by this change.
+
+- [#3122](https://github.com/withastro/starlight/pull/3122) [`3a087d8`](https://github.com/withastro/starlight/commit/3a087d8fbcd946336f8a0423203967e53e5678fe) Thanks [@delucis](https://github.com/delucis)! - Removes default `attrs` and `content` values from head entries parsed using Starlight’s schema.
+
+  Previously when adding `head` metadata via frontmatter or user config, Starlight would automatically add values for `attrs` and `content` if not provided. Now, these properties are left `undefined`.
+
+  This makes it simpler to add tags in route middleware for example as you no longer need to provide empty values for `attrs` and `content`:
+
+  ```diff
+  head.push({
+    tag: 'style',
+    content: 'div { color: red }'
+  - attrs: {},
+  });
+  head.push({
+    tag: 'link',
+  - content: ''
+    attrs: { rel: 'me', href: 'https://example.com' },
+  });
+  ```
+
+  This is mostly an internal API but if you are overriding Starlight’s `Head` component or processing head entries in some way, you may wish to double check your handling of `Astro.locals.starlightRoute.head` is compatible with `attrs` and `content` potentially being `undefined`.
+
+- [#3033](https://github.com/withastro/starlight/pull/3033) [`8c19678`](https://github.com/withastro/starlight/commit/8c19678e57c0270d3d80d4678f23a6fc287ebf12) Thanks [@delucis](https://github.com/delucis)! - Adds support for generating clickable anchor links for headings.
+
+  By default, Starlight now renders an anchor link beside headings in Markdown and MDX content. A new `<AnchorHeading>` component is available to achieve the same thing in custom pages built using `<StarlightPage>`.
+
+  If you want to disable this new Markdown processing set the `markdown.headingLinks` option in your Starlight config to `false`:
+
+  ```js
+  starlight({
+    title: 'My docs',
+    markdown: {
+      headingLinks: false,
+    },
+  }),
+  ```
+
+  ⚠️ **BREAKING CHANGE:** The minimum supported version of Astro is now v5.5.0.
+
+  Please update Starlight and Astro together:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+- [#2322](https://github.com/withastro/starlight/pull/2322) [`f14eb0c`](https://github.com/withastro/starlight/commit/f14eb0cd7baa0391d6124379f6c5df4b9ab7cc44) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Removes Shiki `css-variables` theme fallback.
+
+  ⚠️ **BREAKING CHANGE:**
+
+  Previously, Starlight used to automatically provide a fallback theme for Shiki, the default syntax highlighter built into Astro if the configured Shiki theme was not `github-dark`.
+
+  This fallback was only relevant when the default Starlight code block renderer, Expressive Code, was disabled and Shiki was used. Starlight no longer provides this fallback.
+
+  If you were relying on this behavior, you now manually need to update your Astro configuration to use the Shiki `css-variables` theme to match the previous behavior.
+
+  ```diff
+  import { defineConfig } from 'astro/config';
+
+  export default defineConfig({
+  + markdown: {
+  +   shikiConfig: {
+  +     theme: 'css-variables',
+  +   },
+  + },
+  });
+  ```
+
+  Additionally, you can use [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to control the appearance of the code blocks. Here are the previously used CSS variables for the fallback theme:
+
+  ```css
+  :root {
+    --astro-code-foreground: var(--sl-color-white);
+    --astro-code-background: var(--sl-color-gray-6);
+    --astro-code-token-constant: var(--sl-color-blue-high);
+    --astro-code-token-string: var(--sl-color-green-high);
+    --astro-code-token-comment: var(--sl-color-gray-2);
+    --astro-code-token-keyword: var(--sl-color-purple-high);
+    --astro-code-token-parameter: var(--sl-color-red-high);
+    --astro-code-token-function: var(--sl-color-red-high);
+    --astro-code-token-string-expression: var(--sl-color-green-high);
+    --astro-code-token-punctuation: var(--sl-color-gray-2);
+    --astro-code-token-link: var(--sl-color-blue-high);
+  }
+  ```
+
+### Patch Changes
+
+- [#3118](https://github.com/withastro/starlight/pull/3118) [`77a1104`](https://github.com/withastro/starlight/commit/77a110461dffacd1d3ee3b8934fd48b20111f3c4) Thanks [@delucis](https://github.com/delucis)! - Fixes passing imported SVGs to the `frontmatter` prop of the `<StarlightPage>` component in Astro ≥5.7.0
+
+## 0.33.2
+
+### Patch Changes
+
+- [#3090](https://github.com/withastro/starlight/pull/3090) [`fc3ffa8`](https://github.com/withastro/starlight/commit/fc3ffa8e27a3113a8eb70a3d8e7bf69c2bb214e5) Thanks [@delucis](https://github.com/delucis)! - Updates internal `@astrojs/mdx`, `@astrojs/sitemap`, and `astro-expressive-code` dependencies
+
+- [#3109](https://github.com/withastro/starlight/pull/3109) [`b5cc1b4`](https://github.com/withastro/starlight/commit/b5cc1b4d4ee7dc737616c6ada893369b13ddb9c6) Thanks [@dhruvkb](https://github.com/dhruvkb)! - Updates Expressive Code to v0.41.1
+
+## 0.33.1
+
+### Patch Changes
+
+- [#3088](https://github.com/withastro/starlight/pull/3088) [`1885049`](https://github.com/withastro/starlight/commit/18850491905fc1bf9e467b1d65c7f1709daf3c30) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression in Starlight version `0.33.0` that caused the description and links to language alternates for multilingual websites to be missing from the` <head>` of the page.
+
+- [#3065](https://github.com/withastro/starlight/pull/3065) [`463adf5`](https://github.com/withastro/starlight/commit/463adf53b263a963736cb441bc1dd515f3c81894) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Updates the `social` configuration option TSDoc example to match the shape of the expected value.
+
+## 0.33.0
+
+### Minor Changes
+
+- [#3026](https://github.com/withastro/starlight/pull/3026) [`82deb84`](https://github.com/withastro/starlight/commit/82deb847418aedb9c01e05bb9de4b9bd10a1a885) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential list styling issue if the last element of a list item is a `<script>` tag.
+
+  ⚠️ **BREAKING CHANGE:**
+
+  This release drops official support for Chromium-based browsers prior to version 105 (released 30 August 2022) and Firefox-based browsers prior to version 121 (released 19 December 2023). You can find a list of currently supported browsers and their versions using this [browserslist query](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+105%2C+Edge+%3E%3D+105%2C+Firefox+%3E%3D+121%2C+Safari+%3E%3D+15.4%2C+iOS+%3E%3D+15.4%2C+not+op_mini+all).
+
+  With this release, Starlight-generated sites will still work fine on those older browsers except for this small detail in list item styling, but future releases may introduce further breaking changes for impacted browsers, including in patch releases.
+
+- [#3025](https://github.com/withastro/starlight/pull/3025) [`f87e9ac`](https://github.com/withastro/starlight/commit/f87e9acbf5090a31858c1cde568cc798140f1366) Thanks [@delucis](https://github.com/delucis)! - Makes `social` configuration more flexible.
+
+  ⚠️ **BREAKING CHANGE:** The `social` configuration option has changed syntax. You will need to update this in `astro.config.mjs` when upgrading.
+
+  Previously, a limited set of platforms were supported using a shorthand syntax with labels built in to Starlight. While convenient, this approach was less flexible and required dedicated code for each social platform added.
+
+  Now, you must specify the icon and label for each social link explicitly and you can use any of [Starlight’s built-in icons](https://starlight.astro.build/reference/icons/) for social links.
+
+  The following example shows updating the old `social` syntax to the new:
+
+  ```diff
+  - social: {
+  -   github: 'https://github.com/withastro/starlight',
+  -   discord: 'https://astro.build/chat',
+  - },
+  + social: [
+  +   { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
+  +   { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+  + ],
+  ```
+
+- [#2927](https://github.com/withastro/starlight/pull/2927) [`c46904c`](https://github.com/withastro/starlight/commit/c46904c4a16cf1c7f4f895e42cb164474b2301b3) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds the [`head`](https://starlight.astro.build/reference/route-data/#head) route data property which contains an array of all tags to include in the `<head>` of the current page.
+
+  Previously, the [`<Head>`](https://starlight.astro.build/reference/overrides/#head-1) component was responsible for generating a list of tags to include in the `<head>` of the current page and rendering them.
+  This data is now available as `Astro.locals.starlightRoute.head` instead and can be modified using [route data middleware](https://starlight.astro.build/guides/route-data/#customizing-route-data).
+  The `<Head>` component now only renders the tags provided in `Astro.locals.starlightRoute.head`.
+
+- [#2924](https://github.com/withastro/starlight/pull/2924) [`6a56d1b`](https://github.com/withastro/starlight/commit/6a56d1b80d9d67e63e930177cf085a25864e1952) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** Ensures that the `<Badge>` and `<Icon>` components no longer render with a trailing space.
+
+  In Astro, components that include styles render with a trailing space which can prevent some use cases from working as expected, e.g. when using such components inlined with text. This change ensures that the `<Badge>` and `<Icon>` components no longer render with a trailing space.
+
+  If you were previously relying on that implementation detail, you may need to update your code to account for this change. For example, considering the following code:
+
+  ```mdx
+  <Badge text="New" />
+  Feature
+  ```
+
+  The rendered text would previously include a space between the badge and the text due to the trailing space automatically added by the component:
+
+  ```
+  New Feature
+  ```
+
+  Such code will now render the badge and text without a space:
+
+  ```
+  NewFeature
+  ```
+
+  To fix this, you can add a space between the badge and the text:
+
+  ```diff
+  - <Badge text="New" />Feature
+  + <Badge text="New" /> Feature
+  ```
+
+- [#2727](https://github.com/withastro/starlight/pull/2727) [`7c8fa30`](https://github.com/withastro/starlight/commit/7c8fa30f0ac2459c83b71a8a7b705b16dcf98d6f) Thanks [@techfg](https://github.com/techfg)! - Updates mobile menu toggle styles to display a close icon while the menu is open
+
+### Patch Changes
+
+- [#2927](https://github.com/withastro/starlight/pull/2927) [`c46904c`](https://github.com/withastro/starlight/commit/c46904c4a16cf1c7f4f895e42cb164474b2301b3) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where overriding the [canonical URL](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#canonical) of a page using the [`head` configuration option](https://starlight.astro.build/reference/configuration/#head) or [`head` frontmatter field](https://starlight.astro.build/reference/frontmatter/#head) would strip any other `<link>` tags from the `<head>`.
+
+- [#2927](https://github.com/withastro/starlight/pull/2927) [`c46904c`](https://github.com/withastro/starlight/commit/c46904c4a16cf1c7f4f895e42cb164474b2301b3) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where generated [canonical URLs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#canonical) would include a trailing slash when using the [`trailingSlash` Astro option](https://docs.astro.build/en/reference/configuration-reference/#trailingslash) is set to `'never'`.
+
+- [#3025](https://github.com/withastro/starlight/pull/3025) [`f87e9ac`](https://github.com/withastro/starlight/commit/f87e9acbf5090a31858c1cde568cc798140f1366) Thanks [@delucis](https://github.com/delucis)! - Fixes Starlight’s autogenerated `<meta name="twitter:site">` tags when a Twitter link is set in `social` config. Previously these incorrectly rendered `content="/username"` and now correctly render `content="@username"`.
+
+## 0.32.6
+
+### Patch Changes
+
+- [#3030](https://github.com/withastro/starlight/pull/3030) [`5bdf139`](https://github.com/withastro/starlight/commit/5bdf139191a20f19458b027617877c1063b46724) Thanks [@trueberryless](https://github.com/trueberryless)! - Updates the type of the `isFallback` field in route data from `true` to `boolean`, keeping it optional but allowing `false` as a possible value.
+
+- [#3018](https://github.com/withastro/starlight/pull/3018) [`188b8cf`](https://github.com/withastro/starlight/commit/188b8cfa8ad8761365b8b557c4b9fea671050ed6) Thanks [@trueberryless](https://github.com/trueberryless)! - Adds validation for user config `routeMiddleware` so it does not conflict with [Astro's middleware](https://docs.astro.build/en/guides/middleware/).
+
 ## 0.32.5
 
 ### Patch Changes

@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**Par défaut :** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**Par défaut :** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 Configurez la table des matières affichée à droite de chaque page. Par défaut, les titres `<h2>` et `<h3>` seront inclus dans cette table des matières.
 
@@ -341,28 +341,21 @@ La locale par défaut sera utilisée pour fournir un contenu de remplacement lor
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**Type :** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/fr/reference/icons/){`; href: string }>`}</code>
 
-**Type :** <SocialLinksType />
-
-Détails optionnels sur les comptes de médias sociaux pour ce site. L'ajout de l'un d'entre eux les affichera sous forme de liens iconiques dans l'en-tête du site.
+Détails optionnels sur les comptes de médias sociaux pour ce site.
+Chaque entrée sera affichée sous forme de lien iconisé dans l'en-tête du site.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -377,6 +370,29 @@ Prend en charge les fichiers CSS locaux relatifs à la racine de votre projet, p
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**Type :** `{ headingLinks?: boolean }`  
+**Par défaut :** `{ headingLinks: true }`
+
+Configure le traitement de contenu Markdown par Starlight.
+
+#### `headingLinks`
+
+**Type :** `boolean`  
+**Par défaut :** `true`
+
+Définit si les en-têtes sont affichés avec des liens d'ancrage cliquables ou non.
+
+```js
+starlight({
+	markdown: {
+		// Désactive les liens d'ancrage cliquables pour les en-têtes.
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`
@@ -603,6 +619,15 @@ Par example, cette page a pour titre « Référence de configuration » et ce si
 
 Désactive l'injection de la [page 404](https://docs.astro.build/fr/basics/astro-pages/#page-derreur-404-personnalis%C3%A9e) par défaut de Starlight. Pour utiliser une route personnalisée `src/pages/404.astro` dans votre projet, définissez cette option à `true`.
 
+### `routeMiddleware`
+
+**Type :** `string | string[]`
+
+Fournit les chemins vers les middlewares de route qui peuvent modifier la manière dont Starlight transforme vos données.
+Ces chemins de fichiers ne doivent pas entrer en conflit avec les [middlewares d'Astro](https://docs.astro.build/fr/guides/middleware/).
+
+Consultez le [guide des données de route](/fr/guides/route-data/#personnalisation-des-données-de-route) pour plus de détails sur la création de middlewares de route.
+
 ### `components`
 
 **Type :** `Record<string, string>`
@@ -621,7 +646,7 @@ Consultez la [référence des redéfinitions](/fr/reference/overrides/) pour plu
 
 ### `plugins`
 
-**type:** [`StarlightPlugin[]`](/fr/reference/plugins/#référence-rapide-de-lapi)
+**Type :** [`StarlightPlugin[]`](/fr/reference/plugins/#référence-rapide-de-lapi)
 
 Étendez Starlight avec des modules d'extension personnalisés.
 Les modules d'extension appliquent des changements à votre projet pour modifier ou ajouter des fonctionnalités à Starlight.
@@ -637,6 +662,9 @@ starlight({
 Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour plus de détails pour créer vos propres modules d'extension.
 
 ### `credits`
+
+**Type :** `boolean`  
+**Par défaut :** `false`
 
 Permet l'affichage d'un lien "Créé avec Starlight" dans le pied de page de votre site.
 

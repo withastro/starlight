@@ -647,3 +647,21 @@ yarn create astro --template starlight/markdoc
 </Steps>
 
 Markdoc 구문 및 기능에 대한 자세한 내용은 [Markdoc 문서](https://markdoc.dev/docs/syntax) 또는 [Astro Markdoc 통합 가이드](https://docs.astro.build/ko/guides/integrations-guide/markdoc/)를 참조하세요.
+
+### Markdoc 프리셋 구성
+
+다음은 `starlightMarkdoc()` 프리셋이 허용하는 구성 옵션입니다.
+
+#### `headingLinks`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+제목이 클릭 가능한 앵커 링크와 함께 렌더링될지 여부를 제어합니다. Markdown 및 MDX 파일에 적용되는 [`markdown.headingLinks`](/ko/reference/configuration/#markdown) 옵션과 동일합니다.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// 기본 제목 앵커 링크 지원을 비활성화합니다.
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

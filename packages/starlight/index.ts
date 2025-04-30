@@ -26,6 +26,7 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
+import { starlightAutolinkHeadings } from './integrations/heading-links';
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -127,10 +128,16 @@ export default function StarlightIntegration(
 								absolutePathToLang,
 							}),
 						],
-						rehypePlugins: [rehypeRtlCodeSupport()],
-						shikiConfig:
-							// Configure Shiki theme if the user is using the default github-dark theme.
-							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
+						rehypePlugins: [
+							rehypeRtlCodeSupport(),
+							// Process headings and add anchor links.
+							...starlightAutolinkHeadings({
+								starlightConfig,
+								astroConfig: config,
+								useTranslations,
+								absolutePathToLang,
+							}),
+						],
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.

@@ -79,7 +79,7 @@ The slug for this page or the unique ID for this page based on the content filen
 
 ### `isFallback`
 
-**Type:** `true | undefined`
+**Type:** `boolean | undefined`
 
 `true` if this page is untranslated in the current language and using fallback content from the default locale.
 Only used in multilingual sites.
@@ -149,6 +149,13 @@ JavaScript `Date` object representing when this page was last updated if enabled
 **Type:** `URL | undefined`
 
 `URL` object for the address where this page can be edited if enabled.
+
+### `head`
+
+**type:** [`HeadConfig[]`](/reference/configuration/#headconfig)
+
+Array of all tags to include in the `<head>` of the current page.
+Includes important tags such as `<title>` and `<meta charset="utf-8">`.
 
 ## Utilities
 

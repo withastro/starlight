@@ -17,29 +17,32 @@ import { useTranslations } from '../translations';
 import { BuiltInDefaultLocale } from '../i18n';
 import { getEntry, render } from 'astro:content';
 import { getCollectionPathFromRoot } from '../collection';
+import { getHead } from '../head';
 
 export interface PageProps extends Route {
 	headings: MarkdownHeading[];
 }
+
+export type RouteDataContext = Pick<APIContext, 'generator' | 'site' | 'url'>;
 
 export async function useRouteData(context: APIContext): Promise<StarlightRouteData> {
 	const route =
 		('slug' in context.params && getRouteBySlugParam(context.params.slug)) ||
 		(await get404Route(context.locals));
 	const { Content, headings } = await render(route.entry);
-	const routeData = generateRouteData({ props: { ...route, headings }, url: context.url });
+	const routeData = generateRouteData({ props: { ...route, headings }, context });
 	return { ...routeData, Content };
 }
 
 export function generateRouteData({
 	props,
-	url,
+	context,
 }: {
 	props: PageProps;
-	url: URL;
+	context: RouteDataContext;
 }): StarlightRouteData {
 	const { entry, locale, lang } = props;
-	const sidebar = getSidebar(url.pathname, locale);
+	const sidebar = getSidebar(context.url.pathname, locale);
 	const siteTitle = getSiteTitle(lang);
 	return {
 		...props,
@@ -51,6 +54,7 @@ export function generateRouteData({
 		toc: getToC(props),
 		lastUpdated: getLastUpdated(props),
 		editUrl: getEditUrl(props),
+		head: getHead(props, context, siteTitle),
 	};
 }
 
