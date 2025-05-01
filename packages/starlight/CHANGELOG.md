@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.34.2
+
+### Patch Changes
+
+- [#3153](https://github.com/withastro/starlight/pull/3153) [`ea31f46`](https://github.com/withastro/starlight/commit/ea31f46be4d43339417dac7fc135d2be97080c58) Thanks [@SuperKXT](https://github.com/SuperKXT)! - Fixes hover styles for highlighted directory in FileTree component.
+
+- [#2905](https://github.com/withastro/starlight/pull/2905) [`b5232bc`](https://github.com/withastro/starlight/commit/b5232bcd201c2e3904bde2d7717fe6cfa06d6c82) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential issue for projects with dynamic routes added by an user, an Astro integration, or a Starlight plugin where some styles could end up being missing.
+
+- [#3165](https://github.com/withastro/starlight/pull/3165) [`80a7871`](https://github.com/withastro/starlight/commit/80a7871ccad17aef8567a416a419669de6d5d3fd) Thanks [@KianNH](https://github.com/KianNH)! - Increases `maxBuffer` for an internal `spawnSync()` call to support larger Git commit histories when using Starlight's [`lastUpdated`](https://starlight.astro.build/reference/configuration/#lastupdated) feature.
+
+- [#3158](https://github.com/withastro/starlight/pull/3158) [`d1f3c8b`](https://github.com/withastro/starlight/commit/d1f3c8b6583b93968af3c568f7af44b1b10326ec) Thanks [@heisenberg0924](https://github.com/heisenberg0924)! - Adds Hungarian language support
+
 ## 0.34.1
 
 ### Patch Changes
