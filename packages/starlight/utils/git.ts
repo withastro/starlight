@@ -72,6 +72,7 @@ export function getAllNewestCommitDate(rootPath: string, docsPath: string): [str
 		{
 			cwd: repoRoot,
 			encoding: 'utf-8',
+			maxBuffer: 10 * 1024 * 1024,
 		}
 	);
 
