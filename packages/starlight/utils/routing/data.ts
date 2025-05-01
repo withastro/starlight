@@ -15,7 +15,7 @@ import type {
 import { formatPath } from '../format-path';
 import { useTranslations } from '../translations';
 import { BuiltInDefaultLocale } from '../i18n';
-import { getEntry, render } from 'astro:content';
+import { getEntry, type RenderResult } from 'astro:content';
 import { getCollectionPathFromRoot } from '../collection';
 import { getHead } from '../head';
 
@@ -25,11 +25,18 @@ export interface PageProps extends Route {
 
 export type RouteDataContext = Pick<APIContext, 'generator' | 'site' | 'url'>;
 
-export async function useRouteData(context: APIContext): Promise<StarlightRouteData> {
-	const route =
+export async function getRoute(context: APIContext): Promise<Route> {
+	return (
 		('slug' in context.params && getRouteBySlugParam(context.params.slug)) ||
-		(await get404Route(context.locals));
-	const { Content, headings } = await render(route.entry);
+		(await get404Route(context.locals))
+	);
+}
+
+export async function useRouteData(
+	context: APIContext,
+	route: Route,
+	{ Content, headings }: RenderResult
+): Promise<StarlightRouteData> {
 	const routeData = generateRouteData({ props: { ...route, headings }, context });
 	return { ...routeData, Content };
 }
