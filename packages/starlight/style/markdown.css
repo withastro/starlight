@@ -26,7 +26,7 @@
 	.sl-markdown-content
 	li
 	> :is(
-		:last-child:not(
+		:last-child:not(:only-child):not(
 				li,
 				ul,
 				ol,
@@ -41,6 +41,23 @@
 				script,
 				:where(.not-content *)
 			),
+
+    /* < Li>is the last one in the list, even if there is only one<p>, it still takes effect*/
+    :last-child:where(li:last-child > :last-child):not(
+        li,
+        ul,
+        ol,
+        a,
+        strong,
+        em,
+        del,
+        span,
+        input,
+        code,
+        br,
+        script,
+        :where(.not-content *)),
+
 			/**
 			 * For list items ending with 1 or multiple script elements (`:has(~ script:last-child)`), we
 			 * need to style the last non-script element (`:not(script)`) that doesn't have a subsequent
