@@ -402,7 +402,7 @@ test.describe('head propagation', () => {
 	 *
 	 * @see https://github.com/withastro/astro/issues/13724
 	 */
-	test('does not prevent head propagation when rendering a dynamic route using the `<StarlightPage>` component', async ({
+	test('does not prevent head propagation in dev mode when rendering a dynamic route using the `<StarlightPage>` component', async ({
 		page,
 		makeServer,
 	}) => {
