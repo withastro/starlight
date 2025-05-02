@@ -54,9 +54,9 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 Starlight использует [каскадные слои](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) внутри для управления порядком своих стилей.
 Это обеспечивает предсказуемый порядок CSS и упрощает переопределение стилей.
-Любой пользовательский CSS без слоёв будет переопределять стили по умолчанию из слоя `starlight`.
+Любые пользовательские CSS-стили без слоёв переопределят стандартные стили Starlight.
 
-Если вы используете каскадные слои, вы можете использовать [`@layer`](https://developer.mozilla.org/ru/docs/Web/CSS/@layer) в вашем пользовательском CSS для определения порядка приоритета различных слоёв относительно стилей Starlight:
+Если вы используете каскадные слои, вы можете применить [`@layer`](https://developer.mozilla.org/ru/docs/Web/CSS/@layer) в вашем пользовательском CSS для определения порядка приоритета различных слоёв относительно стилей из слоя `starlight`:
 
 ```css "starlight"
 /* src/styles/custom.css */
