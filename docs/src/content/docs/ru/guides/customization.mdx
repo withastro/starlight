@@ -200,24 +200,33 @@ defineConfig({
 
 Starlight имеет встроенную поддержку для добавления ссылок на ваши аккаунты в социальных сетях в заголовок сайта через параметр [`social`](/ru/reference/configuration/#social) в интеграции Starlight.
 
-Вы можете найти полный список поддерживаемых иконок для ссылок в [Справочнике по конфигурации](/ru/reference/configuration/#social).
-Дайте нам знать на GitHub или Discord, если вам нужна поддержка для другого сервиса!
+Каждый элемент массива `social` должен быть объектом с тремя свойствами:
 
-```js {9-12}
+- `icon`: одна из [встроенных иконок](/ru/reference/icons/) Starlight, например `"github"`.
+- `label`: доступная подпись для ссылки, например `"GitHub"`.
+- `href`: URL-адрес ссылки, например `"https://github.com/withastro/starlight"`.
+
+Следующий пример добавляет ссылки на чат Astro в Discord и репозиторий Starlight на GitHub:
+
+```js {9-16}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-	integrations: [
-		starlight({
-			title: 'Документация со ссылками на социальные сети',
-			social: {
-				discord: 'https://astro.build/chat',
-				github: 'https://github.com/withastro/starlight',
-			},
-		}),
-	],
+  integrations: [
+    starlight({
+      title: 'Документация с социальными ссылками',
+      social: [
+        { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/withastro/starlight',
+        },
+      ],
+    }),
+  ],
 });
 ```
 
