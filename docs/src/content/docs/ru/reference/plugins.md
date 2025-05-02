@@ -168,19 +168,23 @@ declare namespace StarlightApp {
 Чтобы обновить значения вложенной конфигурации, необходимо предоставить весь вложенный объект.
 
 Чтобы расширить существующий параметр конфигурации, не переопределяя его, добавьте существующее значение в новое.
-В следующем примере к существующей конфигурации добавляется новый медиааккаунт [`social`](/ru/reference/configuration/#social) путём распространения `config.social` на новый объект `social`:
+В следующем примере новый аккаунт в [`social`](/ru/reference/configuration/#social) добавляется в существующую конфигурацию путем расширения `config.social` в новом массиве `social`:
 
-```ts {6-11}
+```ts {6-15}
 // plugin.ts
 export default {
   name: 'add-twitter-plugin',
   hooks: {
     'config:setup'({ config, updateConfig }) {
       updateConfig({
-        social: {
+        social: [
           ...config.social,
-          twitter: 'https://twitter.com/astrodotbuild',
-        },
+          {
+            icon: 'twitter',
+            label: 'Twitter',
+            href: 'https://twitter.com/astrodotbuild',
+          },
+        ],
       });
     },
   },
