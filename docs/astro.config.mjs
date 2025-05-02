@@ -82,7 +82,7 @@ export default defineConfig({
 						'zh-CN': '从这里开始',
 						'pt-BR': 'Comece Aqui',
 						'pt-PT': 'Comece Aqui',
-						ko: '여기서부터',
+						ko: '시작 안내',
 						tr: 'Buradan Başlayın',
 						ru: 'Первые шаги',
 						hi: 'यहाँ से शुरू करे',
