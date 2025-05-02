@@ -650,3 +650,22 @@ yarn create astro --template starlight/markdoc
 </Steps>
 
 Чтобы узнать больше о синтаксисе и возможностях Markdoc, смотрите [документацию](https://markdoc.dev/docs/syntax) или [Руководство по интеграции Markdoc в Astro](https://docs.astro.build/ru/guides/integrations-guide/markdoc/).
+
+### Настройка пресета Markdoc
+
+Пресет `starlightMarkdoc()` принимает следующие параметры конфигурации:
+
+#### `headingLinks`
+
+**тип:** `boolean`  
+**по умолчанию:** `true`
+
+Определяет, будут ли заголовки отображаться с кликабельной ссылкой-якорем.
+Эквивалентно опции [`markdown.headingLinks`](/ru/reference/configuration/#markdown), которая применяется к файлам Markdown и MDX.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+  // Отключение поддержки ссылок-якорей для заголовков по умолчанию
+  extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```
