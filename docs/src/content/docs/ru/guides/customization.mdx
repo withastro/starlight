@@ -214,19 +214,19 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  integrations: [
-    starlight({
-      title: 'Документация с социальными ссылками',
-      social: [
-        { icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
-        {
-          icon: 'github',
-          label: 'GitHub',
-          href: 'https://github.com/withastro/starlight',
-        },
-      ],
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Документация с социальными ссылками',
+			social: [
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/withastro/starlight',
+				},
+			],
+		}),
+	],
 });
 ```
 
