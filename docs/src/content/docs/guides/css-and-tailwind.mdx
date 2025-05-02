@@ -54,9 +54,9 @@ You can see all the CSS custom properties used by Starlight that you can set to 
 
 Starlight uses [cascade layers](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) internally to manage the order of its styles.
 This ensures a predictable CSS order and allows for simpler overrides.
-Any custom unlayered CSS will override the default styles from the `starlight` layer.
+Any custom unlayered CSS will override the default Starlight styles.
 
-If you are using cascade layers, you can use [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in your custom CSS to define the order of precedence for different layers relative to Starlight’s styles:
+If you are using cascade layers, you can use [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in your custom CSS to define the order of precedence for different layers relative to styles from the `starlight` layer:
 
 ```css "starlight"
 /* src/styles/custom.css */
@@ -182,7 +182,7 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-4.  Update the Starlight config to use the Tailwind CSS file:
+4.  Update the Starlight config to add the Tailwind CSS file as the first item in the `customCss` array:
 
     ```js ins={11-12}
     // astro.config.mjs
