@@ -54,9 +54,9 @@ Vous pouvez retrouver toutes les propriétés CSS personnalisées utilisées par
 
 Starlight utilise [les couches de cascade](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) en interne pour gérer l'ordre de ses styles.
 Cela garantit un ordre CSS prévisible et permet des redéfinitions plus simples.
-N'importe quel CSS personnalisé ne faisant pas partie d'une couche de cascade redéfinira les styles par défaut de la couche `starlight`.
+N'importe quel CSS personnalisé ne faisant pas partie d'une couche de cascade redéfinira les styles par défaut de Starlight.
 
-Si vous utilisez des couches de cascade, vous pouvez utiliser [`@layer`](https://developer.mozilla.org/fr/docs/Web/CSS/@layer) dans votre CSS personnalisé pour définir l'ordre de priorité pour différentes couches par rapport aux styles de Starlight :
+Si vous utilisez des couches de cascade, vous pouvez utiliser [`@layer`](https://developer.mozilla.org/fr/docs/Web/CSS/@layer) dans votre CSS personnalisé pour définir l'ordre de priorité pour différentes couches par rapport aux styles de la couche `starlight` :
 
 ```css "starlight"
 /* src/styles/custom.css */
