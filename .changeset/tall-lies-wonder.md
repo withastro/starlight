@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-update translations of Korean UI strings
+Updates Korean langage support with improvements and missing translations
