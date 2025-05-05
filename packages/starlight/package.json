@@ -28,6 +28,7 @@
   "exports": {
     ".": "./index.ts",
     "./locals": "./locals.ts",
+    "./constants": "./constants.ts",
     "./components": "./components.ts",
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",
