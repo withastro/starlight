@@ -6,7 +6,7 @@ import { h } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import type { HookParameters, StarlightConfig } from '../types';
-import { getCollectionPath } from '../utils/collection';
+import { resolveCollectionPath } from '../utils/collection';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -93,7 +93,7 @@ export const starlightAutolinkHeadings = ({
 					{ experimentalHeadingIdCompat: astroConfig.experimental?.headingIdCompat },
 				],
 				rehypeAutolinkHeadings(
-					normalizePath(getCollectionPath('docs', astroConfig.srcDir)),
+					normalizePath(resolveCollectionPath('docs', astroConfig.srcDir)),
 					useTranslations,
 					absolutePathToLang
 				),
