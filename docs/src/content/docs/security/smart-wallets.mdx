@@ -1,0 +1,59 @@
+---
+title: Smart Wallets
+description: How Axal implements ERC-4337 account abstraction with Privy and Alchemy
+sidebar:
+  order: 2
+---
+
+## Smart Wallet Infrastructure
+
+### Privy Authentication Foundation
+
+Similar to our yield product, Axal Autopilot uses Privy for the initial authentication layer. This provides:
+
+- Seamless onboarding with social logins, email, or existing wallets
+- Self-custodial security where you maintain full control of your private keys
+- Familiar authentication flow that doesn't require crypto knowledge
+
+However, Autopilot takes wallet functionality further with ERC-4337 account abstraction.
+
+### Alchemy 4337 Smart Wallets
+
+Autopilot leverages Alchemy's implementation of ERC-4337 smart contract wallets to enable powerful automation features:
+
+#### What is ERC-4337?
+
+ERC-4337 is a standard for "account abstraction" that turns your wallet from a simple key pair into a programmable smart contract with advanced capabilities.
+
+#### Benefits of Alchemy Smart Wallets in Autopilot
+
+1. **Automatic Gas Sponsorship**
+   - Execute transactions without needing ETH for gas
+   - Seamlessly interact with DeFi protocols without gas concerns
+   - Trade, swap, and manage positions without the friction of gas management
+
+2. **Batched Transactions**
+   - Execute multiple DeFi operations in a single confirmation
+   - Significantly reduce the number of approval prompts you need to confirm
+   - Optimize complex trading strategies with lower overall gas costs
+
+3. **Scheduled Operations**
+   - Set up time-based triggers for portfolio management
+   - Pre-approve specific operations within defined parameters
+   - Enable true "set and forget" DeFi management
+
+4. **Security Guardrails**
+   - Set spending limits per session or per application
+   - Implement time-locks for large withdrawals
+   - Create recovery mechanisms beyond seed phrases
+
+### How It Works Behind the Scenes
+
+When you use Autopilot, we create a smart contract wallet for you that:
+
+1. Is fully controlled by your private key (via Privy)
+2. Can execute bundled transactions (UserOperations) through a "bundler"
+3. Allows gas to be paid by a separate account (Axal's gas sponsorship)
+4. Maintains persistent addresses even as you upgrade wallet functionality
+
+This infrastructure enables Autopilot to provide automation that would be impossible with traditional EOA wallets, all while maintaining the self-custodial principles that are core to our philosophy.

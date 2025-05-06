@@ -1,0 +1,116 @@
+---
+title: Methodology
+description: Our approach to protocol selection and position management.
+sidebar:
+  order: 2
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+## Protocol Selection
+
+Our methodology for selecting protocols follows a rigorous evaluation process based on four key criteria:
+
+<div className="criteria-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="criteria safety">Safety Score</td>
+        <td>Audit history, TVL persistence, oracle robustness.</td>
+      </tr>
+      <tr>
+        <td className="criteria yield">Yield Sustainability</td>
+        <td>Source of yield (fees vs. emissions), incentive decay curves.</td>
+      </tr>
+      <tr>
+        <td className="criteria diversification">Diversification Value</td>
+        <td>Correlation to existing asset exposure.</td>
+      </tr>
+      <tr>
+        <td className="criteria operational">Operational Fit</td>
+        <td>Availability of programmatic rebalancing hooks and granular APIs.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+## Position Management
+
+We employ sophisticated position management techniques to optimize yield while protecting your capital:
+
+### Smart Rebalancer
+
+An on‑chain agent that tilts allocations toward the best Sharpe‑adjusted opportunities every epoch.
+
+### Auto‑Deleverage 
+
+If LTV on any leveraged leg drifts > 70%, collateral is partially unwound using flash-loans before liquidation triggers.
+
+### Cross‑Platform Hedging
+
+Surplus fees from Conservative vaults can be routed to backstop Aggressive vault liquidations during tail events.
+
+## Security & Audits
+
+All integration points with third-party protocols undergo rigorous security reviews before deployment. Our security measures include:
+
+- Independent security audits for all vaults
+- Multi-signature controls on key operations
+- Continuous monitoring of integrated protocols
+- Regular stress testing of liquidation scenarios
+
+## Transparency & Reporting
+
+We prioritize complete transparency in all our operations:
+
+- Real‑time strategy weights and vault addresses are published on the Transparency Hub.
+- APY is reported net of fees and follows the same time‑weighted method disclosed in our docs.
+- Historical performance CSVs can be downloaded for independent analysis.
+
+<style>
+  {`
+    .criteria-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    
+    .criteria-table th,
+    .criteria-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+    }
+    
+    .criteria-table th {
+      background-color: var(--color-background-secondary);
+      font-weight: 600;
+      text-align: left;
+    }
+    
+    .criteria {
+      font-weight: 600;
+    }
+    
+    .safety {
+      color: #2e7d32;
+    }
+    
+    .yield {
+      color: #0277bd;
+    }
+    
+    .diversification {
+      color: #f57c00;
+    }
+    
+    .operational {
+      color: #8e24aa;
+    }
+  `}
+</style> 

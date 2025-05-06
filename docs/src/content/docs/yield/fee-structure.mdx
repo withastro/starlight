@@ -1,0 +1,79 @@
+---
+title: Fee Structure
+description: Transparent explanation of our fee model for yield strategies.
+sidebar:
+  order: 5
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+## Fee Overview
+
+We maintain a simple and transparent fee structure designed to align our incentives with your success:
+
+<div className="fee-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Fee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Performance (paid only on positive epochs)</td>
+        <td>15% of yield</td>
+      </tr>
+      <tr>
+        <td>Withdrawal (if done within 72h of deposit)</td>
+        <td>0.1%</td>
+      </tr>
+      <tr>
+        <td>Flash‑loan unwind in emergency deleverage</td>
+        <td>Gas + 5 bps</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+## Fee Principles
+
+### Performance Fee
+
+- Only charged on positive yield (no yield = no fee)
+- Calculated and collected at the end of each epoch
+- Applied after all gas and operational costs are accounted for
+
+### Early Withdrawal Fee
+
+- Designed to discourage liquidity sniping
+- Waived for withdrawals made after 72 hours from deposit
+- Directly added to the pool to benefit remaining depositors
+
+### Emergency Deleverage Fee
+
+- Covers the cost of flash-loans needed during emergency unwinding
+- Only applied when automatic deleveraging is triggered by market conditions
+- Represents the actual cost of the operation plus a minimal service fee
+
+<style>
+  {`
+    .fee-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    
+    .fee-table th,
+    .fee-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+    }
+    
+    .fee-table th {
+      background-color: var(--color-background-secondary);
+      font-weight: 600;
+      text-align: left;
+    }
+  `}
+</style>

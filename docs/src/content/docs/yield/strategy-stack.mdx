@@ -1,0 +1,83 @@
+---
+title: Strategies
+description: Our strategy stack at a glance.
+sidebar:
+  order: 1
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+## Strategy Stack
+
+Our strategies are categorized into three tiers based on risk profile and potential returns.
+
+<div className="strategy-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Target APY (net)</th>
+        <th>Core Protocols</th>
+        <th>Typical User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="tier conservative">Conservative</td>
+        <td>5-10%</td>
+        <td>Aave, Morpho Blue</td>
+        <td>Stable‑yield seekers</td>
+      </tr>
+      <tr>
+        <td className="tier balanced">Balanced</td>
+        <td>11-25%</td>
+        <td>Kamino Single‑Sided LP, HyperEVM liquidity, Felix Liquidation Premium</td>
+        <td>Yield hunters comfortable with moderate smart‑contract risk</td>
+      </tr>
+      <tr>
+        <td className="tier aggressive">Aggressive</td>
+        <td>26-100%+</td>
+        <td>Kamino Multiply (leveraged JLP), looping & LSDFi stacks</td>
+        <td>Users pursuing outsized gains and accepting liquidation risk</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  {`
+    .strategy-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    
+    .strategy-table th,
+    .strategy-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+    }
+    
+    .strategy-table th {
+      background-color: var(--color-background-secondary);
+      font-weight: 600;
+      text-align: left;
+    }
+    
+    .tier {
+      font-weight: 600;
+    }
+    
+    .conservative {
+      color: #2e7d32;
+    }
+    
+    .balanced {
+      color: #f57c00;
+    }
+    
+    .aggressive {
+      color: #d32f2f;
+    }
+  `}
+</style>

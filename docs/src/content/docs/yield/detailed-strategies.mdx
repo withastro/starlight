@@ -1,0 +1,66 @@
+---
+title: Detailed Strategies
+description: In-depth explanations of our strategy tiers and how they work.
+sidebar:
+  order: 3
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+## Conservative • Aave & Morpho
+
+### What happens with your deposit?
+
+- USDC or blue‑chip collateral is supplied to Aave V3.
+- Interest plus liquidity‑mining incentives (if any) are auto‑compounded.
+- A rotating slice (≤60%) is bridged to Morpho Blue pools curated by Gauntlet and Moonwell for a slight yield bump.
+
+### Primary Risks
+
+- Smart‑contract or oracle failure on Aave/Morpho.
+- USDC de‑peg (mitigated by multi‑stable distribution).
+
+## Balanced • Fee‑Rich & Delta‑Neutral Plays
+
+### Instruments used
+
+- HyperEVM single‑sided liquidity vaults (fee capture on concentrated pools).
+- Felix Protocol liquidation auctions (earn liquidation discount + backstop fee).
+- Optional delta‑neutral hedges using perpetual futures.
+
+### Risk Notes
+
+- Over‑collateralised stablecoins, collateralized debt positions (feUSD, USDXL) could break peg under extreme market conditions.
+- Oracle manipulation. We use multiple oracles with data from on-chain and off-chain sources to minimize risk.
+
+## Aggressive • Kamino Multiply (Leveraged JLP)
+
+### How Multiply works
+
+- Flash‑loans build a leveraged JLP stack in one click, slashing slippage and gas.
+- Target LTV is set on deposit; the vault self‑rebalances whenever LTV drifts ±5%.
+- Current gross yield at 3× leverage: ≈ 50% APY (18% base + amplified fees).
+
+### Main Risk
+
+Liquidation if LTV > 85%. Our Auto‑Deleverage bot monitors this 24/7.
+
+### Roadmap
+
+- **Auto‑Delta‑Neutral**: Pair JLP long with SOL‑perpetual short to isolate funding‑rate yield.
+- **High-Yield LP**: Provide liquidity on aggressive token pairs with potential for outsized gains.
+
+<style>
+  {`
+    h2 {
+      margin-top: 2.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    h3 {
+      margin-top: 1.5rem;
+      color: var(--color-text-accent);
+    }
+  `}
+</style> 

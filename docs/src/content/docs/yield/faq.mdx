@@ -1,0 +1,100 @@
+---
+title: FAQ
+description: Frequently asked questions about Axal AutoYield strategies.
+sidebar:
+  order: 7
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+## Frequently Asked Questions
+
+<div className="faq-container">
+  <div className="faq-item">
+    <h3>Is yield fixed or variable?</h3>
+    <p>Variable. Displayed APYs are rolling 7‑day averages, net of fees.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>Where can I see proof of reserves?</h3>
+    <p>All vault addresses are viewable on‑chain and linked in the Transparency Hub.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>Are funds ever custodied off‑chain?</h3>
+    <p>No. Capital moves only through Privy session keys to and from audited smart contracts from battle‑tested third‑party protocols.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>Can I lose more than I deposit?</h3>
+    <p>No. Positions are non‑recourse; the worst‑case outcome is your balance going to zero.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>What happens during protocol emergencies?</h3>
+    <p>A 3‑of‑5 Emergency Council can pause new deposits and trigger a full unwinding script to return collateral to users.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>How is APY calculated?</h3>
+    <p>APY is calculated using a time-weighted average of returns, including all fees and costs, and annualized to show expected yearly return.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>What chains are supported?</h3>
+    <p>We currently support strategies on Ethereum, Solana, and select L2s with established security and liquidity.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>Can I use multiple strategies simultaneously?</h3>
+    <p>Yes, you can deposit into multiple strategies across different risk tiers to diversify your yield approach.</p>
+  </div>
+  
+  <div className="faq-item">
+    <h3>What if I need my funds urgently?</h3>
+    <p>All strategies allow immediate withdrawals (subject to a small fee if within 72h of deposit), though underlying protocols may occasionally have their own withdrawal periods.</p>
+  </div>
+</div>
+<style>
+  {`
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .faq-item {
+      padding: 1.25rem;
+      border-radius: 8px;
+      background-color: var(--color-background-secondary);
+    }
+    
+    .faq-item h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-accent);
+    }
+    
+    .faq-item p {
+      margin: 0;
+    }
+    
+    .glossary-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    
+    .glossary-table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+    }
+    
+    .term {
+      font-weight: 600;
+      color: var(--color-text-accent);
+      width: 25%;
+    }
+  `}
+</style>

@@ -1,0 +1,54 @@
+---
+title: Wallet Authentication
+description: How we create and manage crypto wallets for our users with Privy
+sidebar:
+  order: 1
+---
+
+## Wallet Authentication with Privy
+
+### What is Privy?
+
+Privy is the wallet infrastructure embedded inside Axal AutoYield. Think of it as the secure plumbing that lets you use the dApp without installing a separate browser extension or juggling seed phrases.
+
+Privy spins up a self-custodial wallet the moment you sign in (with email, passkey, or an external wallet). You alone control that wallet's private key; neither Axal nor Privy can touch your funds.
+
+### Trusted Execution Environments (TEEs)
+
+Privy utilizes Trusted Execution Environments (TEEs) to ensure the highest level of security for your private keys:
+
+- **Isolated Processing:** Your keys are generated and stored in hardware-level isolated environments that are separated from the main operating system
+- **Encrypted Memory:** Keys are processed in encrypted memory regions that cannot be accessed by any external processes
+- **Hardware Security:** TEEs leverage hardware-based security features similar to those used in secure banking systems
+- **Zero Knowledge Design:** The architecture ensures that neither Axal nor Privy staff can ever access your keys, even for debugging purposes
+
+This means your private keys remain completely under your control at all times. Even if our servers were compromised, your wallet keys would remain secure within the TEE infrastructure.
+
+### Full Wallet Ownership
+
+You always maintain complete ownership and portability of your wallet:
+
+- **Export Options:** You can export your wallet's private key or seed phrase at any time through your account settings
+- **Standard Compatibility:** Exported wallets are fully compatible with any standard Ethereum wallet like MetaMask, Rainbow, or hardware wallets
+- **No Lock-In:** Your funds are never tied to the Axal platform - you can access them directly through any compatible wallet
+- **Persistent Access:** Even if Axal were to shut down, you would still have full access to your funds through your exported wallet credentials
+
+We believe true self-custody means you should never be dependent on our platform to access your assets.
+
+### Gas Sponsorship for Yield Strategies
+
+With Privy-generated wallets, we're able to implement gas sponsorship for specific operations within our yield product. This means:
+
+1. Your deposits and withdrawals can often be executed without you paying for gas
+2. Rebalancing operations use sponsored gas to maintain optimal positions
+3. Critical safety operations like auto-deleveraging happen seamlessly
+
+### Server Actions with Smart Contracts
+
+Our backend infrastructure interacts with smart contracts to perform various yield-optimizing actions:
+
+- Automatically harvesting yield rewards
+- Rebalancing positions when market conditions change
+- Executing complex multi-step transactions that would be difficult to manage manually
+
+In short, Privy's secure wallet infrastructure lets Axal offer powerful automation while keeping custody fully in your hands.

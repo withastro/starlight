@@ -1,0 +1,269 @@
+---
+title: Risk Overview
+description: A clear explanation of the risks associated with using our yield strategies.
+sidebar:
+  order: 4
+tableOfContents:
+  maxHeadingLevel: 4
+---
+
+## Risk Overview
+
+Before using our yield strategies, it's important to understand the potential risks:
+
+- **Smart‑Contract Risk**: Code vulnerabilities in any integrated protocol.
+- **Market Risk**: Price swings that devalue collateral or vault tokens.
+- **Liquidation Risk**: Leveraged legs can be forcibly closed if collateral falls.
+- **Stablecoin De‑Peg**: Over‑collateralised stables may not redeem 1:1 in a bank run.
+- **Counterparty Risk**: Failure of off‑chain or oracle services that feed data on‑chain.
+- **Operational Risk**: Downtime in our rebalancing bots or governance failures.
+
+Always size positions according to personal risk tolerance. Past performance ≠ future returns.
+
+## Enhanced Risk Disclosure
+
+Below is a more granular view of the risks already listed, plus the specific ways Axal AutoYield attempts to mitigate them. Use this to decide whether a given tier matches your personal risk budget.
+
+<div className="risk-table">
+	<table>
+		<thead>
+			<tr>
+				<th>Risk Category</th>
+				<th>Description</th>
+				<th>Who/What is Exposed?</th>
+				<th>Mitigation at Axal</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td className="risk-category">Smart‑Contract & Protocol Risk</td>
+				<td>
+					Bugs or economic exploits in any integrated protocol (Aave, Morpho,
+					Kamino, HyperEVM, Felix).
+				</td>
+				<td>All tiers (severity rises with Aggressive).</td>
+				<td>
+					‑ Curated where protocol requires at least two independent audits per
+					contract;
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Third‑Party Integration Risk</td>
+				<td>
+					Failures in routers, bridges, relayers, or any other external services
+					our strategies tap into.
+				</td>
+				<td>Primarily Balanced & Aggressive.</td>
+				<td>
+					‑ Prefer "battle‑tested" adapters;
+					<br />‑ Circuit‑breaker that pauses deposits if an adapter reverts
+					beyond a set threshold.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Counterparty & Custody Risk</td>
+				<td>
+					Losses arising from another entity having control over user funds or
+					recovery keys.
+				</td>
+				<td>Minimal for all tiers (Axal is non‑custodial).</td>
+				<td>
+					‑ Privy self‑custodial wallets;
+					<br />‑ Session keys limited in scope/time;
+					<br />‑ No Axal or relayer signing rights;
+					<br />‑ 3‑of‑5 Emergency Council can only pause contracts, never move
+					user funds.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Market & Liquidity Risk</td>
+				<td>
+					Volatility or thin liquidity may drive collateral prices below safety
+					thresholds, causing liquidations or impermanent loss.
+				</td>
+				<td>
+					Balanced & Aggressive (Conservative protected by blue‑chip and
+					stables).
+				</td>
+				<td>
+					‑ Auto‑Deleverage if LTV > 70%;
+					<br />‑ Multi‑stable distribution (USDC/USDT/DAI) in Conservative
+					vaults.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Stablecoin De‑Peg Risk</td>
+				<td>
+					Over‑collateralised stables (feUSD, USDXL) lose their dollar peg
+					during a bank run.
+				</td>
+				<td>Balanced.</td>
+				<td>
+					‑ Hard caps per stablecoin;
+					<br />‑ Peg‑watch oracle that forces a strategy pause if deviation >
+					3%.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Oracle/Data Risk</td>
+				<td>
+					Bad price feeds can trigger false liquidations or erroneous
+					rebalances.
+				</td>
+				<td>All tiers.</td>
+				<td>
+					‑ Multiple oracle sources (Chainlink, Pyth, on‑chain TWAP) with
+					medianisation.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Execution & Automation Risk</td>
+				<td>
+					Downtime in our rebalancer or MEV front‑running can widen slippage.
+				</td>
+				<td>Mostly Aggressive.</td>
+				<td>
+					‑ Redundant keeper network in three regions;
+					<br />‑ Transactions sent with MEV‑blocker relay.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Regulatory/Policy Risk</td>
+				<td>
+					Changing rules around DeFi, leverage, or stablecoins could affect
+					access or taxation.
+				</td>
+				<td>All tiers.</td>
+				<td>
+					‑ Geofencing where legally required;
+					<br />‑ Regular counsel review of new regulations.
+				</td>
+			</tr>
+			<tr>
+				<td className="risk-category">Systemic / Chain Risk</td>
+				<td>
+					L1/L2 outage, consensus failure, or cross‑chain bridge hack causes
+					widespread contagion.
+				</td>
+				<td>All tiers.</td>
+				<td>
+					‑ Diversified chain exposure;
+					<br />‑ Rapid exit scripts for conservative assets;
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+## Risk‑by‑Tier Heat Map
+
+<div className="heatmap-table">
+	<table>
+		<thead>
+			<tr>
+				<th>Tier</th>
+				<th>Smart‑Contract</th>
+				<th>Counter‑party</th>
+				<th>Market/Price</th>
+				<th>Liquidation</th>
+				<th>Oracle</th>
+				<th>Systemic</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td className="tier conservative">Conservative</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk minimal">🟢 Minimal</td>
+			</tr>
+			<tr>
+				<td className="tier balanced">Balanced</td>
+				<td className="risk medium">🟡 Medium</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk medium">🟡 Medium</td>
+				<td className="risk medium">🟡 Medium</td>
+				<td className="risk medium">🟡 Medium</td>
+				<td className="risk minimal">🟢 Minimal</td>
+			</tr>
+			<tr>
+				<td className="tier aggressive">Aggressive</td>
+				<td className="risk high">🔴 High</td>
+				<td className="risk minimal">🟢 Minimal</td>
+				<td className="risk high">🔴 High</td>
+				<td className="risk high">🔴 High</td>
+				<td className="risk high">🔴 High</td>
+				<td className="risk minimal">🟢 Minimal</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+## How You Can Mitigate Risk Personally
+
+- **Size sensibly**: Never allocate funds you cannot afford to lose.
+- **Diversify tiers**: Split capital across Conservative, Balanced, and Aggressive instead of going "all‑in" on one.
+- **Review session keys**: Revoke or shorten session‑key duration if you won't be actively monitoring.
+- **Monitor dashboards**: Enable push or email alerts for LTV and peg deviations (coming soon).
+- **Stay informed**: Follow our Transparency Hub and Discord for audit reports, incident updates, and governance changes.
+
+<style>
+	{`
+    .risk-table table, .heatmap-table table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    
+    .risk-table th, .risk-table td, .heatmap-table th, .heatmap-table td {
+      padding: 0.75rem 0.75rem;
+      border: 1px solid var(--color-border);
+    }
+    
+    .risk-table th, .heatmap-table th {
+      background-color: var(--color-background-secondary);
+      font-weight: 600;
+      text-align: left;
+    }
+    
+    .risk-category {
+      font-weight: 600;
+    }
+    
+    .tier {
+      font-weight: 600;
+    }
+    
+    .conservative {
+      color: #2e7d32;
+    }
+    
+    .balanced {
+      color: #f57c00;
+    }
+    
+    .aggressive {
+      color: #d32f2f;
+    }
+    
+    .risk {
+      text-align: center;
+    }
+    
+    .minimal {
+      background-color: rgba(46, 125, 50, 0.1);
+    }
+    
+    .medium {
+      background-color: rgba(245, 124, 0, 0.1);
+    }
+    
+    .high {
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+  `}
+</style>
