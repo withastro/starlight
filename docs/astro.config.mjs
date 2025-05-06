@@ -34,6 +34,7 @@ const ogImageAlt = 'Make your docs shine with Starlight';
 
 export default defineConfig({
 	site,
+	base: '/docs/',
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
