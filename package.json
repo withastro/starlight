@@ -1,8 +1,8 @@
 {
-  "name": "starlight-root",
+  "name": "axal-root",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Axal documentation",
   "scripts": {
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "size": "size-limit",

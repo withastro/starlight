@@ -28,7 +28,7 @@ export const locales = {
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
 const NETLIFY_PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
 
-const site = NETLIFY_PREVIEW_SITE || 'https://starlight.astro.build/';
+const site = 'https://ax.al/';
 const ogUrl = new URL('og.jpg?v=1', site).href;
 const ogImageAlt = 'Make your docs shine with Starlight';
 
