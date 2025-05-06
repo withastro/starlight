@@ -30,7 +30,10 @@ const processor = await createMarkdownProcessor({
 	rehypePlugins: [
 		...starlightAutolinkHeadings({
 			starlightConfig,
-			astroConfig: { experimental: { headingIdCompat: false } },
+			astroConfig: {
+				srcDir: astroConfig.srcDir,
+				experimental: { headingIdCompat: false },
+			},
 			useTranslations,
 			absolutePathToLang,
 		}),

@@ -6,6 +6,7 @@ import { h } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import type { HookParameters, StarlightConfig } from '../types';
+import { getCollectionPath } from '../utils/collection';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -24,10 +25,14 @@ const AnchorLinkIcon = h(
  * Add anchor links to headings.
  */
 export default function rehypeAutolinkHeadings(
-	useTranslationsForLang: HookParameters<'config:setup'>['useTranslations'],
-	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang']
+	docsCollectionPath: string,
+	useTranslationsForLang: AutolinkHeadingsOptions['useTranslations'],
+	absolutePathToLang: AutolinkHeadingsOptions['absolutePathToLang']
 ) {
 	const transformer: Transformer<Root> = (tree, file) => {
+		// If the document is not part of the Starlight docs collection, skip it.
+		if (!normalizePath(file.path).startsWith(docsCollectionPath)) return;
+
 		const pageLang = absolutePathToLang(file.path);
 		const t = useTranslationsForLang(pageLang);
 
@@ -67,7 +72,9 @@ export default function rehypeAutolinkHeadings(
 
 interface AutolinkHeadingsOptions {
 	starlightConfig: Pick<StarlightConfig, 'markdown'>;
-	astroConfig: { experimental: Pick<AstroConfig['experimental'], 'headingIdCompat'> };
+	astroConfig: Pick<AstroConfig, 'srcDir'> & {
+		experimental: Pick<AstroConfig['experimental'], 'headingIdCompat'>;
+	};
 	useTranslations: HookParameters<'config:setup'>['useTranslations'];
 	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
 }
@@ -85,9 +92,23 @@ export const starlightAutolinkHeadings = ({
 					rehypeHeadingIds,
 					{ experimentalHeadingIdCompat: astroConfig.experimental?.headingIdCompat },
 				],
-				rehypeAutolinkHeadings(useTranslations, absolutePathToLang),
+				rehypeAutolinkHeadings(
+					normalizePath(getCollectionPath('docs', astroConfig.srcDir)),
+					useTranslations,
+					absolutePathToLang
+				),
 			]
 		: [];
+
+/**
+ * File path sepators seems to be inconsistent on Windows when the rehype plugin is used on
+ * Markdown vs MDX files.
+ * For the time being, we normalize the path to unix style path.
+ */
+const backSlashRegex = /\\/g;
+function normalizePath(path: string) {
+	return path.replace(backSlashRegex, '/');
+}
 
 // This utility is inlined from https://github.com/syntax-tree/hast-util-heading-rank
 // Copyright (c) 2020 Titus Wormer <tituswormer@gmail.com>
