@@ -101,7 +101,7 @@ export const starlightAutolinkHeadings = ({
 		: [];
 
 /**
- * File path sepators seems to be inconsistent on Windows when the rehype plugin is used on
+ * File path separators seems to be inconsistent on Windows when the rehype plugin is used on
  * Markdown vs MDX files.
  * For the time being, we normalize the path to unix style path.
  */
