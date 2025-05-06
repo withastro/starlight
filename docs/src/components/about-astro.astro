@@ -2,10 +2,9 @@
 import { Icon } from 'astro-icon/components';
 interface Props {
 	title: string;
-	theme: string;
 }
 
-const { title, theme } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <article class="sl-flex" aria-labelledby="about-astro-heading">
@@ -13,13 +12,8 @@ const { title, theme } = Astro.props;
 		{title}
 		<span class="sr-only">Axal</span>
 	</small>
-	{theme === 'dark' ? (
-		<img src = "/src/assets/axal-light.svg" class="axal-img" alt="Axal" />
-		<img src="/src/assets/axal-worm-light.svg" class="axal-img" alt="Axal" />
-	) : (
-		<img src="/src/assets/axal-dark.svg" class="axal-img" alt="Axal" />
-		<img src="/src/assets/axal-worm-dark.svg" class="axal-img" alt="Axal" />
-	)}
+	<img src="/axal-light.svg" class="axal-img" alt="Axal" />
+	<img src="/axal-worm-light.svg" class="axal-img" alt="Axal" />
 
 	<p>
 		Axal is the best way to get the best yield from your crypto investments.
