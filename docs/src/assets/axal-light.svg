@@ -1,0 +1,20 @@
+<svg width="2500" height="2500" viewBox="0 0 2500 2500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(0.523946 0.851751 -0.8548 0.518957 943.396 1036.51)" stroke="black" stroke-width="75"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1295.32 1486.01)" stroke="black" stroke-width="75"/>
+<rect x="1219.9" y="1461.04" width="75.4114" height="24.9725" fill="black"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(-0.523946 -0.851751 0.8548 -0.518957 1571.83 1036.51)" stroke="black" stroke-width="75"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(-0.523953 0.851747 -0.854797 -0.518963 1219.91 587)" stroke="black" stroke-width="75"/>
+<rect x="1295.32" y="611.973" width="75.4114" height="24.9725" transform="rotate(-180 1295.32 611.973)" fill="black"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(0.523946 0.851751 -0.8548 0.518957 666.878 1486.01)" stroke="black" stroke-width="75"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1018.8 1935.51)" stroke="black" stroke-width="75"/>
+<rect x="943.39" y="1910.54" width="75.4114" height="24.9725" fill="black"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(-0.523946 -0.851751 0.8548 -0.518957 1295.31 1486.01)" stroke="black" stroke-width="75"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(-0.523953 0.851747 -0.854797 -0.518963 943.396 1036.5)" stroke="black" stroke-width="75"/>
+<rect x="1018.8" y="1061.48" width="75.4114" height="24.9725" transform="rotate(-180 1018.8 1061.48)" fill="black"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(0.523946 0.851751 -0.8548 0.518957 1219.9 1486.01)" stroke="black" stroke-width="75"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1571.82 1935.51)" stroke="black" stroke-width="75"/>
+<rect x="1496.41" y="1910.54" width="75.4114" height="24.9725" fill="black"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(-0.523946 -0.851751 0.8548 -0.518957 1848.33 1486.01)" stroke="black" stroke-width="75"/>
+<line y1="-37.5" x2="527.742" y2="-37.5" transform="matrix(-0.523953 0.851747 -0.854797 -0.518963 1496.41 1036.5)" stroke="black" stroke-width="75"/>
+<rect x="1571.82" y="1061.48" width="75.4114" height="24.9725" transform="rotate(-180 1571.82 1061.48)" fill="black"/>
+</svg>

@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
+import tailwindcss from '@tailwindcss/vite';
+import icon from 'astro-icon';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -35,10 +37,10 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
-			title: 'Starlight',
+			title: 'Axal',
 			logo: {
-				light: '/src/assets/logo-light.svg',
-				dark: '/src/assets/logo-dark.svg',
+				light: '/src/assets/axal-light.svg',
+				dark: '/src/assets/axal-dark.svg',
 				replacesTitle: true,
 			},
 			lastUpdated: true,
@@ -191,5 +193,9 @@ export default defineConfig({
 					]
 				: [],
 		}),
+		icon(),
 	],
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });

@@ -1,0 +1,64 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="2500" height="2500">
+<g style="fill:black;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:0;fill-rule:nonzero;fill:none;">
+<g style="fill:black;">
+  <rect x="125" y="125" width="2250" height="2250"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(0.523946 0.851751 -0.8548 0.518957 943.396 1036.51)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1295.32 1486.01)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="fill:white;" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1295.32 1486.01)">
+  <rect x="1219.9" y="1461.04" width="75.41" height="24.97"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(-0.523946 -0.851751 0.8548 -0.518957 1571.83 1036.51)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(-0.523953 0.851747 -0.854797 -0.518963 1219.91 587)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="fill:white;" transform="matrix(-1 -1.22465e-16 1.22465e-16 -1 1295.32 611.973)">
+  <rect x="1295.32" y="611.973" width="75.41" height="24.972"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(0.523946 0.851751 -0.8548 0.518957 666.878 1486.01)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1018.8 1935.51)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="fill:white;" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1018.8 1935.51)">
+  <rect x="943.39" y="1910.54" width="75.41" height="24.97"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(-0.523946 -0.851751 0.8548 -0.518957 1295.31 1486.01)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(-0.523953 0.851747 -0.854797 -0.518963 943.396 1036.5)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="fill:white;" transform="matrix(-1 -1.22465e-16 1.22465e-16 -1 1018.8 1061.48)">
+  <rect x="1018.8" y="1061.48" width="75.41" height="24.97"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(0.523946 0.851751 -0.8548 0.518957 1219.9 1486.01)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1571.82 1935.51)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="fill:white;" transform="matrix(0.523953 -0.851747 0.854797 0.518963 1571.82 1935.51)">
+  <rect x="1496.41" y="1910.54" width="75.41" height="24.97"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(-0.523946 -0.851751 0.8548 -0.518957 1848.33 1486.01)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="stroke:white;stroke-width:75;" transform="matrix(-0.523953 0.851747 -0.854797 -0.518963 1496.41 1036.5)">
+  <line x1="0" y1="-37.5" x2="527.742" y2="-37.5"/>
+</g>
+<g style="fill:white;" transform="matrix(-1 -1.22465e-16 1.22465e-16 -1 1571.82 1061.48)">
+  <rect x="1571.82" y="1061.48" width="75.41" height="24.97"/>
+</g>
+</g>
+</svg>
