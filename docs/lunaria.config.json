@@ -83,7 +83,7 @@
     "favicon": {
       "external": [
         {
-          "link": "https://starlight.astro.build/favicon.svg",
+          "link": "https://ax.al/favicon.svg",
           "type": "image/svg+xml"
         }
       ]
