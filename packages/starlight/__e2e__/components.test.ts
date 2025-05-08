@@ -391,6 +391,21 @@ test.describe('anchor headings', () => {
 
 		expect(markdownHtml).toEqual(componentHtml);
 	});
+
+	test('does not render headings anchor links for individual Markdown pages and entries not part of the `docs` collection', async ({
+		getProdServer,
+		page,
+	}) => {
+		const starlight = await getProdServer();
+
+		// Individual Markdown page
+		await starlight.goto('/markdown-page');
+		await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
+
+		// Content entry from the `reviews` content collection
+		await starlight.goto('/reviews/alice');
+		await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
+	});
 });
 
 test.describe('head propagation', () => {
