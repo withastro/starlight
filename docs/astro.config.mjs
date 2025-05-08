@@ -101,6 +101,10 @@ export default defineConfig({
 					autogenerate: { directory: 'yield' },
 				},
 				{
+					label: 'Points',
+					autogenerate: { directory: 'axal-points' },
+				},
+				{
 					label: 'Autopilot',
 					autogenerate: { directory: 'autopilot' },
 				},
