@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.34.3
+
+### Patch Changes
+
+- [#3058](https://github.com/withastro/starlight/pull/3058) [`274cc06`](https://github.com/withastro/starlight/commit/274cc06112824384771b944f504ab0faab45e2b9) Thanks [@techfg](https://github.com/techfg)! - Fixes display of focus indicator around site title
+
+- [#3181](https://github.com/withastro/starlight/pull/3181) [`449c822`](https://github.com/withastro/starlight/commit/449c8229effaab19ece3c0a34e32595809c33cc8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all headings in Markdown and MDX content were rendered with a [clickable anchor link](https://starlight.astro.build/reference/configuration/#headinglinks), even in non-Starlight pages.
+
+- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean langage support with improvements and missing translations
+
 ## 0.34.2
 
 ### Patch Changes
