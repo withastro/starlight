@@ -1,0 +1,74 @@
+---
+title: Terms of Service
+description: Learn about the terms of service for Axal Yield.
+sidebar:
+  order: 1
+---
+
+## Terms of Service
+##### General Risk Disclosure Statement for Axal Yield
+**Last Updated: 8 May 2025**
+
+### Overview
+This Risk Disclosure Statement aims to inform users ("Users") of the potential risks involved with interacting with Axal Yield ("Platform"), an automated yield-generation product within the decentralized finance (DeFi) ecosystem. By using Axal Yield, Users acknowledge and accept the risks described herein. This document does not capture all possible risks. The Risk Overview Document attempts to provide an overview of more granular risks. Users should consult with financial, legal, and technical advisors before participating.
+
+### 1. General Platform Risks
+#### 1.1. DeFi and Blockchain Risks
+Axal Yield operates on multiple public blockchains and integrates with third-party DeFi protocols. Blockchain technology remains experimental and may involve risks such as consensus failures, network congestion, or transaction irreversibility. Users must understand that DeFi platforms differ fundamentally from traditional financial services.
+#### 1.2. "As-Is" Basis
+Axal Yield is provided on an "as-is" and "as-available" basis without warranties of any kind. Axal makes no representations regarding performance, uptime, or security and disclaims liability for interruptions or losses.
+
+### 2. Financial and Market Risks
+#### 2.1. Market Volatility
+Crypto markets are highly volatile. Sudden and significant changes in token prices may impact the performance of yield strategies, including losses on deposited collateral.
+#### 2.2. Liquidation Risk
+Strategies that utilize leverage or lending are exposed to collateral shortfall risk. If the loan-to-value (LTV) ratio breaches predefined thresholds, assets may be liquidated automatically and without notice.
+#### 2.3. Liquidity Risk
+Low liquidity in integrated protocols or assets may result in slippage, failed withdrawals, or difficulty unwinding positions during turbulent markets.
+#### 2.4. Stablecoin De-Peg Risk
+Even over-collateralized stablecoins may lose their peg during high-stress events ("bank runs"), potentially causing losses or liquidity bottlenecks. Axal sets hard caps and deploys peg-watchers to halt risky exposure.
+
+### 3. Technology and Security Risks
+#### 3.1. Smart Contract Vulnerabilities
+Axal integrates with third-party protocols such as Aave, Kamino, Morpho, and others. Despite code audits and reviews, smart contracts are subject to bugs, exploits, or unintended economic behaviors. Interactions with these contracts are inherently risky.
+#### 3.2. Oracle and Data Risks
+Incorrect or delayed pricing data from on-chain oracles (e.g., Chainlink, Pyth) can result in erroneous liquidations or rebalances. Axal employs multiple oracle sources and medianised price feeds to mitigate this.
+#### 3.3. Automation and Rebalancing Risks
+Downtime in rebalancing bots may degrade performance. Axal utilizes redundant keeper infrastructure and MEV-resistant transaction routing to reduce this risk.
+#### 3.4. Cybersecurity Threats
+Although Axal does not custody user funds, relayers and frontends could be targeted by phishing, denial-of-service attacks, or exploits. Users should follow best practices for wallet security and avoid signing unknown messages.
+
+### 4. Operational and Third-Party Risks
+#### 4.1. Third-Party Dependencies
+Strategies rely on external services, including bridges, routers, and protocol adapters. Failures or exploits in these components can cascade and affect strategy performance. Axal deploys circuit breakers to pause strategies if adapters misbehave beyond a threshold.
+#### 4.2. Custody and Counterparty Risk
+Axal is non-custodial. All wallets are user-controlled via Privy. Session keys are limited in time/scope, and no relayer or admin can sign on behalf of a user. 
+#### 4.3. Platform Downtime
+Axal may undergo maintenance or experience technical outages. Strategies are designed to act autonomously on-chain without requiring constant frontend access, but extreme conditions could delay interactions.
+
+### 5. Legal and Regulatory Risks
+#### 5.1. Jurisdictional Restrictions
+Access may be restricted in jurisdictions where DeFi is prohibited or heavily regulated – such as nations on the OFAC sanctions list. Users are responsible for complying with local laws before using the Platform. Axal employs geofencing where required.
+#### 5.2. Regulatory Changes
+Future legal developments could limit functionality, tax treatment, or platform accessibility. Axal monitors regulatory developments but cannot guarantee immunity from future legal shifts.
+#### 5.3. Tax Responsibilities
+Users are solely responsible for assessing and paying any taxes related to their use of Axal Yield. The Platform does not provide tax advice and urges consultation with qualified professionals.
+
+### 6. User Responsibilities
+#### 6.1. Due Diligence
+Users are expected to understand the mechanics and risks of DeFi, including yield strategy logic, collateral dynamics, and smart contract execution. Axal provides documentation, but usage implies full personal responsibility.
+#### 6.2. No Financial Advice
+All material published by Axal is for informational purposes only and does not constitute investment, legal, or financial advice. Users are encouraged to make decisions independently and consult advisors.
+#### 6.3. Private Key Management
+Users are solely responsible for wallet access and key custody. Axal cannot recover lost keys or intervene in compromised accounts.
+
+### 7. Platform Modifications and Strategy Risks
+#### 7.1. Strategy Composition Risks
+Each yield strategy bundles actions across protocols, sometimes involving leverage or synthetic assets. Aggressive tiers carry higher complexity and more potential downside from liquidation, market, or operational risks.
+#### 7.2. Updates and Governance
+The platform may update strategy logic, adapters, or strategy parameters at any time. Axal will signal major changes via the frontend or Discord, but continued usage implies consent to these changes.
+#### 7.3. Strategy-Specific Risks
+Strategies are categorized as Conservative, Balanced, or Aggressive to reflect different risk exposures. Users must understand the risk tier before allocating funds. Axal disclaims responsibility for mismatched expectations.
+
+### 8. Acknowledgement of Risk and Waiver of Liability
+By using Axal Yield, Users acknowledge and accept all associated risks and understand that Axal, its contributors, and affiliated entities are not liable for any financial, legal, or technical losses incurred. Users waive any claims against the Platform in connection with their activity.

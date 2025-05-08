@@ -112,6 +112,10 @@ export default defineConfig({
 					label: 'Security and Account Abstraction',
 					autogenerate: { directory: 'security' },
 				},
+				{
+					label: 'Terms of Service',
+					autogenerate: { directory: 'terms' },
+				},
 			],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
 			plugins: process.env.CHECK_LINKS
