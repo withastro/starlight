@@ -391,6 +391,41 @@ test.describe('anchor headings', () => {
 
 		expect(markdownHtml).toEqual(componentHtml);
 	});
+
+	test('does not render headings anchor links for individual Markdown pages and entries not part of the `docs` collection', async ({
+		getProdServer,
+		page,
+	}) => {
+		const starlight = await getProdServer();
+
+		// Individual Markdown page
+		await starlight.goto('/markdown-page');
+		await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
+
+		// Content entry from the `reviews` content collection
+		await starlight.goto('/reviews/alice');
+		await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
+	});
+});
+
+test.describe('head propagation', () => {
+	/**
+	 * Due to a head propagation issue in development mode, dynamic routes alphabetically sorted
+	 * before Starlight route (`[...slug]`) rendering the `<StarlightPage>` component can result in
+	 * missing styles. The issue is workaround by having our call to `render` from `astro:content` to
+	 * be in a specific file.
+	 *
+	 * @see https://github.com/withastro/astro/issues/13724
+	 */
+	test('does not prevent head propagation in dev mode when rendering a dynamic route using the `<StarlightPage>` component', async ({
+		page,
+		makeServer,
+	}) => {
+		const starlight = await makeServer('dev', { mode: 'dev' });
+		await starlight.goto('/head-propagation');
+
+		await expect(page.getByTestId('purple-card')).toHaveCSS('background-color', 'rgb(128, 0, 128)');
+	});
 });
 
 async function expectSelectedTab(tabs: Locator, label: string, panel?: string) {

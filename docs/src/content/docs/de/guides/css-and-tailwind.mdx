@@ -54,9 +54,9 @@ Du kannst dir alle CSS-Eigenschaften, die von Starlight verwendet werden und die
 
 Starlight verwendet intern [Kaskadenschichten](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers), um die Reihenfolge der Stile zu verwalten.
 Dies gewährleistet eine vorhersehbare CSS-Reihenfolge und ermöglicht einfachere Überschreibungen.
-Jedes benutzerdefinierte CSS ohne Schichten überschreibt die Standardstile der Schicht `starlight`.
+Jedes benutzerdefinierte CSS ohne Schichten überschreibt die Standardstile von Starlight.
 
-Wenn du Kaskadenschichten verwendest, kannst du [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in deinem benutzerdefinierten CSS verwenden, um die Rangfolge der verschiedenen Schichten in Bezug auf die Stile von Starlight festzulegen:
+Wenn du Kaskadenschichten verwendest, kannst du [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) in deinem benutzerdefinierten CSS verwenden, um die Rangfolge der verschiedenen Schichten in Bezug auf die Stile der Schicht `starlight` festzulegen:
 
 ```css "starlight"
 /* src/styles/custom.css */
@@ -182,7 +182,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-4.  Aktualisiere die Starlight-Konfiguration, um die Tailwind-CSS-Datei zu verwenden:
+4.  Aktualisiere die Starlight-Konfiguration, um die Tailwind-CSS-Datei als erstes Element im Array `customCss` hinzuzufügen:
 
         ```js ins={11-12}
         // astro.config.mjs

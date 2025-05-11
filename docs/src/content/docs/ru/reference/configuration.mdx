@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**тип:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**по умолчанию:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**тип:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**по умолчанию:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 Настройте оглавление, отображаемое справа на каждой странице. По умолчанию в оглавление будут включены заголовки `<h2>` и `<h3>`.
 
@@ -345,28 +345,21 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**тип:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/ru/reference/icons/){`; href: string }>`}</code>
 
-**тип:** <SocialLinksType />
-
-Дополнительные сведения об аккаунтах в социальных сетях для этого сайта. При добавлении любого из них они будут отображаться в виде ссылок-иконок в шапке сайта.
+Необязательные данные об аккаунтах в социальных сетях для этого сайта.
+Каждая запись будет отображаться в виде иконки-ссылки в шапке сайта.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -381,6 +374,29 @@ starlight({
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**тип:** `{ headingLinks?: boolean }`  
+**по умолчанию:** `{ headingLinks: true }`
+
+Настройте обработку Markdown в Starlight.
+
+#### `headingLinks`
+
+**тип:** `boolean`  
+**по умолчанию:** `true`
+
+Определяет, будут ли заголовки отображаться с кликабельной якорной ссылкой.
+
+```js
+starlight({
+	markdown: {
+		// Отключаем кликабельные якорные ссылки заголовков в Starlight.
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`
@@ -607,6 +623,15 @@ starlight({
 
 Отключает внедрение стандартной [страницы 404](https://docs.astro.build/ru/basics/astro-pages/#custom-404-error-page) Starlight. Чтобы использовать в своем проекте собственный маршрут `src/pages/404.astro`, установите для этого параметра значение `true`.
 
+### `routeMiddleware`
+
+**тип:** `string | string[]`
+
+Укажите пути к мидлвару маршрута, который может изменять обработку данных в Starlight.  
+Эти пути к файлам не должны конфликтовать с [мидлварами Astro](https://docs.astro.build/ru/guides/middleware/).
+
+Подробнее о создании мидлваров маршрута см. в [руководстве по данным маршрута](/ru/guides/route-data/#настройка-данных-маршрута).
+
 ### `components`
 
 **тип:** `Record<string, string>`
@@ -641,6 +666,9 @@ starlight({
 См. [Справочник по плагинам](/ru/reference/plugins/) для получения подробной информации о создании собственных плагинов.
 
 ### `credits`
+
+**тип:** `boolean`  
+**по умолчанию:** `false`
 
 Включите отображение ссылки «Сделано с помощью Starlight» в подвале вашего сайта.
 
