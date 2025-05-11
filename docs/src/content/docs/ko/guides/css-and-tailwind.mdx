@@ -51,9 +51,10 @@ Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일�
 
 ### 캐스케이드 레이어
 
-Starlight는 스타일 순서를 관리하기 위해 내부적으로 [캐스케이드 레이어](https://developer.mozilla.org/ko/docs/Learn_web_development/Core/Styling_basics/Cascade_layers)를 사용합니다. 이를 통해 예측 가능한 CSS 순서를 보장하고 더 간단한 재정의를 할 수 있습니다. 레이어가 지정되지 않은 사용자 정의 CSS는 `starlight` 레이어의 기본 스타일을 재정의합니다.
+Starlight는 스타일 순서를 관리하기 위해 내부적으로 [캐스케이드 레이어](https://developer.mozilla.org/ko/docs/Learn_web_development/Core/Styling_basics/Cascade_layers)를 사용합니다. 이를 통해 예측 가능한 CSS 순서를 보장하고 더 간단한 재정의를 할 수 있습니다.
+레이어가 지정되지 않은 사용자 정의 CSS는 기본 Starlight 스타일을 재정의합니다.
 
-캐스케이드 레이어를 사용하고 있다면, 사용자 정의 CSS에서 [`@layer`](https://developer.mozilla.org/ko/docs/Web/CSS/@layer)를 사용하여 Starlight 스타일을 기준으로 서로 다른 레이어의 우선순위를 정의할 수 있습니다.
+캐스케이드 레이어를 사용하고 있다면, 사용자 정의 CSS에서 [`@layer`](https://developer.mozilla.org/ko/docs/Web/CSS/@layer)를 사용하여 `starlight` 레이어의 스타일을 기준으로 서로 다른 레이어의 우선순위를 정의할 수 있습니다.
 
 ```css "starlight"
 /* src/styles/custom.css */
@@ -178,7 +179,7 @@ yarn create astro --template starlight/tailwind
    @import 'tailwindcss/utilities.css' layer(utilities);
    ```
 
-4. Tailwind CSS 파일을 사용하도록 Starlight 구성을 업데이트합니다.
+4. `customCss` 배열의 첫 번째 항목으로 Tailwind CSS 파일을 추가하도록 Starlight 구성을 업데이트합니다.
 
    ```js ins={11-12}
    // astro.config.mjs
