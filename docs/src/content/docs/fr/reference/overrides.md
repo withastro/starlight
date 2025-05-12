@@ -55,10 +55,10 @@ Lorsque cela est possible, préférez redéfinir un composant de plus bas niveau
 #### `PageFrame`
 
 **Composant par défaut :** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
-**Emplacements (slots) nommés :** `header`, `sidebar`
+**Slots nommés :** `header`, `sidebar`
 
 Composant de mise en page contenant la plupart du contenu de la page.
-L'implémentation par défaut configure la mise en page de l'en-tête, de la barre latérale et du contenu principal et inclut des emplacements (slots) nommés `header` et `sidebar` en plus de l'emplacement par défaut pour le contenu principal.
+L'implémentation par défaut configure la mise en page de l'en-tête, de la barre latérale et du contenu principal et inclut des slots nommés `header` et `sidebar` en plus du slot par défaut pour le contenu principal.
 Il affiche également [`<MobileMenuToggle />`](#mobilemenutoggle) qui prend en charge l'affichage de la barre latérale de navigation sur petits écrans (mobiles).
 
 #### `MobileMenuToggle`
@@ -70,7 +70,7 @@ Composant utilisé à l'intérieur de [`<PageFrame>`](#pageframe) qui est respon
 #### `TwoColumnContent`
 
 **Composant par défaut :** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
-**Emplacement (slot) nommé :** `right-sidebar`
+**Slot nommé :** `right-sidebar`
 
 Composant de mise en page enveloppant le contenu principal de la page et la barre latérale de droite (table des matières).
 L'implémentation par défaut prend en charge le changement entre une mise en page à une seule colonne pour petits écrans et une mise en page à deux colonnes pour écrans plus larges.
