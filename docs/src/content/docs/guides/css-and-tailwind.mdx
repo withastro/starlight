@@ -71,6 +71,8 @@ Any styles in the `my-overrides` layer would take precedence over Starlight’s 
 Tailwind CSS support in Astro projects is provided by the [Tailwind Vite plugin](https://tailwindcss.com/docs/installation/using-vite).
 Starlight provides complementary CSS to help configure Tailwind for compatibility with Starlight’s styles.
 
+You can [create a new project with Tailwind](#create-a-new-project-with-tailwind), [add Tailwind to an existing project](#create-a-new-project-with-tailwind), or [add site-wide Tailwind support to an existing project with different Tailwind CSS configurations](#add-site-wide-tailwind-support-to-an-existing-project) when using custom pages or Starlight at a subpath.
+
 The Starlight Tailwind CSS applies the following configuration:
 
 - Configures Tailwind’s `dark:` variants to work with Starlight’s dark mode.
@@ -197,6 +199,81 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
     			customCss: [
     				// Path to your Tailwind base styles:
     				'./src/styles/global.css',
+    			],
+    		}),
+    	],
+    	vite: { plugins: [tailwindcss()] },
+    });
+    ```
+
+</Steps>
+
+### Add site-wide Tailwind support to an existing project
+
+If you are using [custom pages](/guides/pages/#custom-pages) with you Starlight site, or if you are using [Starlight at a subpath](/manual-setup/#use-starlight-at-a-subpath), and want to add site-wide Tailwind support with different Tailwind CSS configurations, follow these steps.
+
+<Steps>
+
+1.  [Enable Tailwind support](https://docs.astro.build/en/guides/styling/#add-tailwind-4) in your Astro project if you have not already done so.
+
+    The `src/styles/global.css` file scaffolded during this process will be used to provide Tailwind support for all your non-Starlight pages.
+
+2.  Install Starlight’s Tailwind compatibility package:
+
+    <Tabs syncKey="pkg">
+
+    <TabItem label="npm">
+
+    ```sh
+    npm install @astrojs/starlight-tailwind
+    ```
+
+    </TabItem>
+
+    <TabItem label="pnpm">
+
+    ```sh
+    pnpm add @astrojs/starlight-tailwind
+    ```
+
+    </TabItem>
+
+    <TabItem label="Yarn">
+
+    ```sh
+    yarn add @astrojs/starlight-tailwind
+    ```
+
+    </TabItem>
+
+    </Tabs>
+
+3.  Create a new Tailwind CSS file in `src/styles/starlight.css` which will be used to provide Tailwind support for all your Starlight pages.
+
+    ```css
+    /* src/styles/starlight.css */
+    @layer base, starlight, theme, components, utilities;
+
+    @import '@astrojs/starlight-tailwind';
+    @import 'tailwindcss/theme.css' layer(theme);
+    @import 'tailwindcss/utilities.css' layer(utilities);
+    ```
+
+4.  Update the Starlight config to add this newly created Tailwind CSS file as the first item in the `customCss` array:
+
+    ```js ins={11-12}
+    // astro.config.mjs
+    import { defineConfig } from 'astro/config';
+    import starlight from '@astrojs/starlight';
+    import tailwindcss from '@tailwindcss/vite';
+
+    export default defineConfig({
+    	integrations: [
+    		starlight({
+    			title: 'Docs with Tailwind',
+    			customCss: [
+    				// Path to your Tailwind base styles for Starlight:
+    				'./src/styles/starlight.css',
     			],
     		}),
     	],
