@@ -67,7 +67,7 @@ Redéfinir les composants par défaut de Starlight peut être utile lorsque :
 
 ## Réutiliser un composant intégré
 
-Vous pouvez utiliser avec les composants par défaut de Starlight comme vous le feriez avec les vôtres : en les important et en les affichant dans vos propres composants personnalisés. Cela vous permet de conserver toute l'interface utilisateur de base de Starlight dans votre design, tout en ajoutant des éléments supplémentaires à côté.
+Vous pouvez utiliser les composants par défaut de Starlight de la même manière que les vôtres : en les important et en les affichant dans vos propres composants personnalisés. Cela vous permet de conserver toute l'interface utilisateur de base de Starlight dans votre design, tout en ajoutant des éléments supplémentaires à côté.
 
 L'exemple ci-dessous montre un composant personnalisé qui affiche un lien de courriel suivi du composant `SocialIcons` par défaut :
 
@@ -81,11 +81,11 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 <Default><slot /></Default>
 ```
 
-Lorsque vous affichez un composant intégré dans un composant personnalisé, ajoutez un élément [`<slot />`](https://docs.astro.build/fr/basics/astro-components/#les-emplacements-slots) à l'intérieur du composant par défaut. Cela permet de s'assurer que si le composant reçoit des éléments enfants, Astro sait où les afficher.
+Lorsque vous affichez un composant intégré dans un composant personnalisé, ajoutez un élément [`<slot />`](https://docs.astro.build/fr/basics/astro-components/#les-slots) à l'intérieur du composant par défaut. Cela permet de s'assurer que si le composant reçoit des éléments enfants, Astro sait où les afficher.
 
-Si vous réutilisez les composants [`PageFrame`](/fr/reference/overrides/#pageframe) ou [`TwoColumnContent`](/fr/reference/overrides/#twocolumncontent) qui contiennent des [emplacements (slots) nommés](https://docs.astro.build/fr/basics/astro-components/#les-emplacements-slots-nomm%C3%A9s), vous devez également [transférer](https://docs.astro.build/fr/basics/astro-components/#transf%C3%A9rer-les-emplacements) ces emplacements.
+Si vous réutilisez les composants [`PageFrame`](/fr/reference/overrides/#pageframe) ou [`TwoColumnContent`](/fr/reference/overrides/#twocolumncontent) qui contiennent des [slots nommés](https://docs.astro.build/fr/basics/astro-components/#les-slots-nomm%C3%A9s), vous devez également [transférer](https://docs.astro.build/fr/basics/astro-components/#transf%C3%A9rer-des-slots) ces slots.
 
-L'exemple ci-dessous montre un composant personnalisé qui réutilise le composant `TwoColumnContent` qui contient un emplacement supplémentaire nommé `right-sidebar` qui doit être transféré :
+L'exemple ci-dessous montre un composant personnalisé qui réutilise le composant `TwoColumnContent` qui contient un slot supplémentaire nommé `right-sidebar` qui doit être transféré :
 
 ```astro {8}
 ---
@@ -128,7 +128,7 @@ Pour en savoir plus sur les propriétés disponibles, consultez la [référence 
 
 Les redéfinitions de composants s'appliquent à toutes les pages. Cependant, vous pouvez les utiliser conditionnellement grâce aux valeurs de `starlightRoute` pour déterminer quand afficher votre interface utilisateur personnalisée, quand afficher l'interface utilisateur par défaut de Starlight, ou même quand afficher quelque chose de complètement différent.
 
-Dans l'exemple suivant, un composant redéfinissant le composant [`Footer`](/fr/reference/overrides/#footer) de Starlight affiche "Construit avec Starlight 🌟" sur la page d'accueil uniquement, et affiche sinon le pied de page par défaut sur toutes les autres pages :
+Dans l'exemple suivant, un composant redéfinissant le composant [`Footer`](/fr/reference/overrides/#footer) de Starlight affiche « Construit avec Starlight 🌟 » sur la page d'accueil uniquement, et affiche sinon le pied de page par défaut sur toutes les autres pages :
 
 ```astro
 ---
