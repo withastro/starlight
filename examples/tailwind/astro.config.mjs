@@ -1,16 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Docs with Tailwind',
-			social: {
-				github: 'https://github.com/withastro/starlight',
-			},
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
 			sidebar: [
 				{
 					label: 'Guides',
@@ -24,8 +22,10 @@ export default defineConfig({
 					autogenerate: { directory: 'reference' },
 				},
 			],
-			customCss: ['./src/tailwind.css'],
+			customCss: ['./src/styles/global.css'],
 		}),
-		tailwind({ applyBaseStyles: false }),
 	],
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });

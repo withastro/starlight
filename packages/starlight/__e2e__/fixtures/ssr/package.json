@@ -5,6 +5,6 @@
   "dependencies": {
     "@astrojs/node": "^9.0.0",
     "@astrojs/starlight": "workspace:*",
-    "astro": "^5.5.3"
+    "astro": "^5.6.1"
   }
 }

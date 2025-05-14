@@ -25,5 +25,6 @@
   "aside.caution": "Advarsel",
   "aside.danger": "Fare",
   "fileTree.directory": "Mappe",
-  "builtWithStarlight.label": "Laget med Starlight"
+  "builtWithStarlight.label": "Laget med Starlight",
+  "heading.anchorLabel": "Section titled “{{title}}”"
 }

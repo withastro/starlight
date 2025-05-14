@@ -50,16 +50,32 @@ Personnalisez les styles appliqués à votre site Starlight en fournissant des f
 
 Vous pouvez retrouver toutes les propriétés CSS personnalisées utilisées par Starlight que vous pouvez définir pour personnaliser votre site dans le fichier [`props.css` sur GitHub](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css).
 
+### Couche de cascade
+
+Starlight utilise [les couches de cascade](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers) en interne pour gérer l'ordre de ses styles.
+Cela garantit un ordre CSS prévisible et permet des redéfinitions plus simples.
+N'importe quel CSS personnalisé ne faisant pas partie d'une couche de cascade redéfinira les styles par défaut de Starlight.
+
+Si vous utilisez des couches de cascade, vous pouvez utiliser [`@layer`](https://developer.mozilla.org/fr/docs/Web/CSS/@layer) dans votre CSS personnalisé pour définir l'ordre de priorité pour différentes couches par rapport aux styles de la couche `starlight` :
+
+```css "starlight"
+/* src/styles/custom.css */
+@layer ma-reinitialisation, starlight, mes-redefinitions;
+```
+
+L'exemple ci-dessus définit une couche personnalisée nommée `ma-reinitialisation`, appliquée avant toutes les couches de Starlight, et une autre nommée `mes-redefinitions`, appliquée après toutes les couches de Starlight.
+N'importe quel style dans la couche `mes-redefinitions` aurait priorité sur les styles de Starlight, mais Starlight pourrait toujours changer les styles définis dans la couche `ma-reinitialisation`.
+
 ## Tailwind CSS
 
-Le support de Tailwind CSS dans les projets Astro est fourni par [l'intégration Astro pour Tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
-Starlight fournit un module d'extension Tailwind complémentaire pour aider à configurer Tailwind pour une meilleure compatibilité avec les styles de Starlight.
+Le support de Tailwind CSS dans les projets Astro est fourni par le [module d'extension Vite pour Tailwind](https://tailwindcss.com/docs/installation/using-vite).
+Starlight fournit du CSS additionnel pour aider à configurer Tailwind pour une compatibilité avec les styles de Starlight.
 
-Le module d'extension Tailwind de Starlight applique la configuration suivante :
+Le CSS Tailwind de Starlight applique la configuration suivante :
 
 - Configure les variantes `dark:` de Tailwind pour fonctionner avec le mode sombre de Starlight.
 - Utilise les [couleurs et polices de thème](#mettre-en-forme-starlight-avec-tailwind) de Tailwind dans l'interface utilisateur de Starlight.
-- Désactive les styles de réinitialisation [Preflight](https://tailwindcss.com/docs/preflight) de Tailwind tout en restaurant sélectivement les parties essentielles de Preflight requises pour les classes utilitaires de bordure de Tailwind.
+- Restaure des parties essentielles des styles de réinitialisation Preflight de Tailwind.
 
 ### Créer un nouveau projet avec Tailwind
 
@@ -95,7 +111,7 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
 
 <Steps>
 
-1.  Ajoutez l'intégration Astro pour Tailwind :
+1.  Initialisez Tailwind dans votre projet en exécutant la commande suivante et en suivant les instructions dans votre terminal :
 
     <Tabs syncKey="pkg">
 
@@ -125,7 +141,7 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
 
     </Tabs>
 
-2.  Installez le module d'extension Tailwind de Starlight :
+2.  Installez le paquet de compatibilité Tailwind de Starlight :
 
     <Tabs syncKey="pkg">
 
@@ -155,22 +171,24 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
 
     </Tabs>
 
-3.  Créez un fichier CSS pour les styles de base de Tailwind, par exemple dans `src/tailwind.css` :
+3.  Remplacez le contenu du fichier `src/styles/global.css` créé par Astro pour une compatibilité avec Starlight :
 
     ```css
-    /* src/tailwind.css */
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+    /* src/styles/global.css */
+    @layer base, starlight, theme, components, utilities;
+
+    @import '@astrojs/starlight-tailwind';
+    @import 'tailwindcss/theme.css' layer(theme);
+    @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-4.  Mettez à jour votre fichier de configuration Astro pour utiliser vos styles de base de Tailwind et désactiver les styles de base par défaut :
+4.  Mettez à jour la configuration de Starlight pour ajouter le fichier CSS Tailwind en tant que premier élément du tableau `customCss` :
 
-    ```js {11-12,16-17}
+    ```js ins={11-12}
     // astro.config.mjs
     import { defineConfig } from 'astro/config';
     import starlight from '@astrojs/starlight';
-    import tailwind from '@astrojs/tailwind';
+    import tailwindcss from '@tailwindcss/vite';
 
     export default defineConfig({
     	integrations: [
@@ -178,28 +196,12 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
     			title: 'Documentation avec Tailwind',
     			customCss: [
     				// Chemin vers vos style de base de Tailwind:
-    				'./src/tailwind.css',
+    				'./src/styles/global.css',
     			],
     		}),
-    		tailwind({
-    			// Désactive les styles de base par défaut:
-    			applyBaseStyles: false,
-    		}),
     	],
+    	vite: { plugins: [tailwindcss()] },
     });
-    ```
-
-5.  Ajoutez le module d'extension Tailwind de Starlight au fichier `tailwind.config.mjs` :
-
-    ```js ins={2,7}
-    // tailwind.config.mjs
-    import starlightPlugin from '@astrojs/starlight-tailwind';
-
-    /** @type {import('tailwindcss').Config} */
-    export default {
-    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-    	plugins: [starlightPlugin()],
-    };
     ```
 
 </Steps>
@@ -208,43 +210,63 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
 
 Starlight utilise les valeurs de votre [configuration de thème Tailwind](https://tailwindcss.com/docs/theme) dans son interface utilisateur.
 
-Si définies, les options suivantes remplaceront les styles par défaut de Starlight :
+Si définies, les propriétés personnalisées CSS suivantes remplaceront les styles par défaut de Starlight :
 
-- `colors.accent` — utilisé pour les liens et la mise en évidence de l'élément courant
-- `colors.gray` — utilisé pour les couleurs d'arrière-plan et les bordures
-- `fontFamily.sans` — utilisé pour le texte de l'interface utilisateur et du contenu
-- `fontFamily.mono` — utilisé pour les exemples de code
+- `--color-accent-*` — utilisé pour les liens et la mise en évidence de l'élément courant
+- `--color-gray-*` — utilisé pour les couleurs d'arrière-plan et les bordures
+- `--font-sans` — utilisé pour le texte de l'interface utilisateur et du contenu
+- `--font-mono` — utilisé pour les exemples de code
 
-```js {13,16,21,24}
-// tailwind.config.mjs
-import starlightPlugin from '@astrojs/starlight-tailwind';
-import colors from 'tailwindcss/colors';
+```css {9-12,14-17,19-22,34-37}
+/* src/styles/global.css */
+@layer base, starlight, theme, components, utilities;
 
-/** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-	theme: {
-		extend: {
-			colors: {
-				// Votre couleur d'accentuation préférée.
-				// Indigo est la plus proche des valeurs par défaut de Starlight.
-				accent: colors.indigo,
-				// Votre échelle de gris préférée.
-				// Zinc est la plus proche des valeurs par défaut de Starlight.
-				gray: colors.zinc,
-			},
-			fontFamily: {
-				// Votre police de texte préférée.
-				// Starlight utilise une pile de polices système par défaut.
-				sans: ['"Atkinson Hyperlegible"'],
-				// Votre police de code préférée.
-				// Starlight utilise des polices système à chasse fixe par défaut.
-				mono: ['"IBM Plex Mono"'],
-			},
-		},
-	},
-	plugins: [starlightPlugin()],
-};
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	/*
+	Votre police de texte préférée.
+	Starlight utilise une pile de polices système par défaut.
+	*/
+	--font-sans: 'Atkinson Hyperlegible';
+	/*
+	Votre police de code préférée.
+	Starlight utilise des polices système à chasse fixe par défaut.
+	*/
+	--font-mono: 'IBM Plex Mono';
+	/*
+	Votre couleur d'accentuation préférée.
+	Indigo est la plus proche des valeurs par défaut de Starlight.
+	*/
+	--color-accent-50: var(--color-indigo-50);
+	--color-accent-100: var(--color-indigo-100);
+	--color-accent-200: var(--color-indigo-200);
+	--color-accent-300: var(--color-indigo-300);
+	--color-accent-400: var(--color-indigo-400);
+	--color-accent-500: var(--color-indigo-500);
+	--color-accent-600: var(--color-indigo-600);
+	--color-accent-700: var(--color-indigo-700);
+	--color-accent-800: var(--color-indigo-800);
+	--color-accent-900: var(--color-indigo-900);
+	--color-accent-950: var(--color-indigo-950);
+	/*
+	Votre échelle de gris préférée.
+	Zinc est la plus proche des valeurs par défaut de Starlight.
+	*/
+	--color-gray-50: var(--color-zinc-50);
+	--color-gray-100: var(--color-zinc-100);
+	--color-gray-200: var(--color-zinc-200);
+	--color-gray-300: var(--color-zinc-300);
+	--color-gray-400: var(--color-zinc-400);
+	--color-gray-500: var(--color-zinc-500);
+	--color-gray-600: var(--color-zinc-600);
+	--color-gray-700: var(--color-zinc-700);
+	--color-gray-800: var(--color-zinc-800);
+	--color-gray-900: var(--color-zinc-900);
+	--color-gray-950: var(--color-zinc-950);
+}
 ```
 
 ## Personnalisation du thème
@@ -302,9 +324,8 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 		site.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		Le fichier d'exemple de [configuration
-		Tailwind](#mettre-en-forme-starlight-avec-tailwind) ci-dessous inclut les
-		palettes de couleurs `accent` et `gray` générées à utiliser dans l'objet de
-		configuration `theme.extend.colors`.
+		Ajouter les propriétés personnalisées CSS suivantes au bloc `@theme` dans
+		votre [fichier CSS Tailwind](#mettre-en-forme-starlight-avec-tailwind) pour
+		appliquer ce thème à votre site.
 	</Fragment>
 </ThemeDesigner>

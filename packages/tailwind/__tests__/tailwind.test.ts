@@ -1,284 +1,263 @@
-import tailwindcss, { type Config } from 'tailwindcss';
-import colors from 'tailwindcss/colors';
-import postcss from 'postcss';
-import { test, expect, describe, vi } from 'vitest';
-import StarlightTailwindPlugin from '..';
+import { compile } from 'tailwindcss';
+import { transform } from 'lightningcss';
+import { test, expect, describe } from 'vitest';
+import starlightTailwindCss from '../tailwind.css?raw';
 
-/** Generate a CSS string based on the passed CSS and HTML content. */
-const generatePluginCss = async ({
-	css = '@tailwind base;',
-	html = '',
-	config = {},
-}: { css?: string; html?: string; config?: Partial<Config> } = {}): Promise<string> => {
-	const result = await postcss(
-		tailwindcss({
-			// Enable Starlight plugin.
-			plugins: [StarlightTailwindPlugin()],
-			// Provide content for Tailwind to scan for class names.
-			content: [{ raw: html, extension: 'html' }],
-			// Spread in any custom Tailwind config.
-			...config,
-		})
-	).process(css, { from: '' });
-	return result.css;
-};
+const css = String.raw;
 
-describe('@tailwind base;', async () => {
-	// Generate base CSS with no core Tailwind plugins running to see just Starlight’s output.
-	const base = await generatePluginCss({ config: { corePlugins: [] } });
+test('generates base and utilities CSS layers and defines default theme values', async () => {
+	const output = await render();
 
-	test('generates Starlight base CSS', () => {
-		expect(base).toMatchInlineSnapshot(`
-			"*, ::before, ::after {
-			    border-width: 0;
-			    border-style: solid;
-			    border-color: #e5e7eb;
-			}
-			::before, ::after {
-			    --tw-content: ;
-			}
-			html, :host {
-			    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			}
-			code, kbd, samp, pre {
-			    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-			}
-			:root {
-			    --sl-font: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			    --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-			    --sl-color-white: #fff;
-			    --sl-color-gray-1: #e5e7eb;
-			    --sl-color-gray-2: #d1d5db;
-			    --sl-color-gray-3: #9ca3af;
-			    --sl-color-gray-4: #4b5563;
-			    --sl-color-gray-5: #374151;
-			    --sl-color-gray-6: #1f2937;
-			    --sl-color-black: #111827;
-			    --sl-color-accent-low: #1e1b4b;
-			    --sl-color-accent: #4f46e5;
-			    --sl-color-accent-high: #c7d2fe;
-			}
-			:root[data-theme="light"] {
-			    --sl-color-white: #111827;
-			    --sl-color-gray-1: #1f2937;
-			    --sl-color-gray-2: #374151;
-			    --sl-color-gray-3: #6b7280;
-			    --sl-color-gray-4: #9ca3af;
-			    --sl-color-gray-5: #d1d5db;
-			    --sl-color-gray-6: #e5e7eb;
-			    --sl-color-gray-7: #f3f4f6;
-			    --sl-color-black: #fff;
-			    --sl-color-accent-low: #c7d2fe;
-			    --sl-color-accent: #4f46e5;
-			    --sl-color-accent-high: #312e81;
-			}"
+	// The first line includes Tailwind version so we skip it.
+	const outputWithoutVersion = output.split('\n').slice(1).join('\n');
+	expect(outputWithoutVersion).toMatchInlineSnapshot(`
+		"@layer theme;
+
+		@layer base {
+		  *, :after, :before {
+		    border: 0 solid;
+		  }
+
+		  html, :host {
+		    font-family: var(--font-sans);
+		  }
+
+		  code, kbd, samp, pre {
+		    font-family: var(--font-mono);
+		  }
+		}
+
+		@layer components;
+
+		@layer utilities {
+		  :root {
+		    --sl-font: var(--font-sans);
+		    --sl-font-mono: var(--font-mono);
+		    --sl-color-white: var(--color-white);
+		    --sl-color-gray-1: var(--color-gray-200);
+		    --sl-color-gray-2: var(--color-gray-300);
+		    --sl-color-gray-3: var(--color-gray-400);
+		    --sl-color-gray-4: var(--color-gray-600);
+		    --sl-color-gray-5: var(--color-gray-700);
+		    --sl-color-gray-6: var(--color-gray-800);
+		    --sl-color-black: var(--color-gray-900);
+		    --sl-color-accent-low: var(--color-accent-950, var(--color-accent-900, #1e1b4b));
+		    --sl-color-accent: var(--color-accent-600, #4f46e5);
+		    --sl-color-accent-high: var(--color-accent-200, #c7d2fe);
+
+		    &[data-theme="light"] {
+		      --sl-color-white: var(--color-gray-900);
+		      --sl-color-gray-1: var(--color-gray-800);
+		      --sl-color-gray-2: var(--color-gray-700);
+		      --sl-color-gray-3: var(--color-gray-500);
+		      --sl-color-gray-4: var(--color-gray-400);
+		      --sl-color-gray-5: var(--color-gray-300);
+		      --sl-color-gray-6: var(--color-gray-200);
+		      --sl-color-gray-7: var(--color-gray-100);
+		      --sl-color-black: var(--color-white);
+		      --sl-color-accent-low: var(--color-accent-200, #c7d2fe);
+		      --sl-color-accent: var(--color-accent-600, #4f46e5);
+		      --sl-color-accent-high: var(--color-accent-900, #312e81);
+		    }
+		  }
+		}
+
+		:root, :host {
+		  --color-accent-200: var(--color-indigo-200);
+		  --color-accent-600: var(--color-indigo-600);
+		  --color-accent-900: var(--color-indigo-900);
+		  --color-accent-950: var(--color-indigo-950);
+		  --color-gray-100: var(--color-zinc-100);
+		  --color-gray-200: var(--color-zinc-200);
+		  --color-gray-300: var(--color-zinc-300);
+		  --color-gray-400: var(--color-zinc-400);
+		  --color-gray-500: var(--color-zinc-500);
+		  --color-gray-600: var(--color-zinc-600);
+		  --color-gray-700: var(--color-zinc-700);
+		  --color-gray-800: var(--color-zinc-800);
+		  --color-gray-900: var(--color-zinc-900);
+		}
+		"
+	`);
+});
+
+describe('@theme', () => {
+	function getRootVariables(output: string) {
+		return output.match(/:root, :host {(.*?)}\n*$/s)?.[1];
+	}
+
+	test('defines Tailwind variables with Starlight defaults', async () => {
+		const output = await render();
+		const rootVariables = getRootVariables(output);
+
+		expect(rootVariables).toMatchInlineSnapshot(`
+			"
+			  --color-accent-200: var(--color-indigo-200);
+			  --color-accent-600: var(--color-indigo-600);
+			  --color-accent-900: var(--color-indigo-900);
+			  --color-accent-950: var(--color-indigo-950);
+			  --color-gray-100: var(--color-zinc-100);
+			  --color-gray-200: var(--color-zinc-200);
+			  --color-gray-300: var(--color-zinc-300);
+			  --color-gray-400: var(--color-zinc-400);
+			  --color-gray-500: var(--color-zinc-500);
+			  --color-gray-600: var(--color-zinc-600);
+			  --color-gray-700: var(--color-zinc-700);
+			  --color-gray-800: var(--color-zinc-800);
+			  --color-gray-900: var(--color-zinc-900);
+			"
 		`);
 	});
+
+	test('defines Tailwind variables with custom values', async () => {
+		// const output = await render();
+		const output = await render(
+			['dark:bg-black'],
+			css`
+				@theme {
+					/* Custom accent color. */
+					--color-accent-50: var(--color-orange-50);
+					--color-accent-100: var(--color-orange-100);
+					--color-accent-200: var(--color-orange-200);
+					--color-accent-300: var(--color-orange-300);
+					--color-accent-400: var(--color-orange-400);
+					--color-accent-500: var(--color-orange-500);
+					--color-accent-600: var(--color-orange-600);
+					--color-accent-700: var(--color-orange-700);
+					--color-accent-800: var(--color-orange-800);
+					--color-accent-900: var(--color-orange-900);
+					--color-accent-950: var(--color-orange-950);
+					/* Custom gray scale. */
+					--color-gray-50: var(--color-violet-50);
+					--color-gray-100: var(--color-violet-100);
+					--color-gray-200: var(--color-violet-200);
+					--color-gray-300: var(--color-violet-300);
+					--color-gray-400: var(--color-violet-400);
+					--color-gray-500: var(--color-violet-500);
+					--color-gray-600: var(--color-violet-600);
+					--color-gray-700: var(--color-violet-700);
+					--color-gray-800: var(--color-violet-800);
+					--color-gray-900: var(--color-violet-900);
+					--color-gray-950: var(--color-violet-950);
+					/* Custom text font. */
+					--font-sans: 'Atkinson Hyperlegible';
+					/* Custom code font. */
+					--font-mono: 'IBM Plex Mono';
+				}
+			`
+		);
+		const rootVariables = getRootVariables(output);
+
+		expect(rootVariables).toMatchInlineSnapshot(`
+			"
+			  --color-accent-200: var(--color-orange-200);
+			  --color-accent-600: var(--color-orange-600);
+			  --color-accent-900: var(--color-orange-900);
+			  --color-accent-950: var(--color-orange-950);
+			  --color-gray-100: var(--color-violet-100);
+			  --color-gray-200: var(--color-violet-200);
+			  --color-gray-300: var(--color-violet-300);
+			  --color-gray-400: var(--color-violet-400);
+			  --color-gray-500: var(--color-violet-500);
+			  --color-gray-600: var(--color-violet-600);
+			  --color-gray-700: var(--color-violet-700);
+			  --color-gray-800: var(--color-violet-800);
+			  --color-gray-900: var(--color-violet-900);
+			  --font-sans: "Atkinson Hyperlegible";
+			  --font-mono: "IBM Plex Mono";
+			"
+		`);
+	});
+});
+
+describe('@layer base', async () => {
+	const output = await render();
+	const baseLayer = output.match(/@layer base {(.*?)}[\s\n]*@layer/s)?.[1];
+
+	test('restores some styles from Tailwind Preflight in the base layer', () => {
+		expect(baseLayer).toMatch(/html, :host {[\s\n]+font-family: var\(--font-sans\);[\s\n]+}/);
+		expect(baseLayer).toMatch(
+			/code, kbd, samp, pre {[\s\n]+font-family: var\(--font-mono\);[\s\n]+}/
+		);
+	});
+});
+
+describe('@layer utilities', async () => {
+	const output = await render(
+		['dark:bg-black'],
+		css`
+			@theme {
+				--color-black: #000;
+			}
+		`
+	);
+	const utilitiesLayer = output.match(/@layer utilities {(.*?)}[\s\n]*:root, :host/s)?.[1];
 
 	test('configures `--sl-color-*` variables', () => {
-		expect(base).includes('--sl-color-gray-1: #e5e7eb;');
-		expect(base).includes('--sl-color-accent: #4f46e5;');
+		expect(utilitiesLayer).includes('--sl-color-gray-1: var(--color-gray-200);');
+		expect(utilitiesLayer).includes('--sl-color-accent: var(--color-accent-600, #4f46e5);');
 	});
 
-	describe('with user theme config', async () => {
-		const baseWithConfig = await generatePluginCss({
-			config: {
-				corePlugins: [],
-				theme: { extend: { colors: { accent: colors.amber, gray: colors.slate } } },
-			},
-		});
-
-		test('generates different CSS from base without user config', () => {
-			expect(baseWithConfig).not.toEqual(base);
-		});
-
-		test('uses theme values for Starlight colours', () => {
-			expect(baseWithConfig).includes('--sl-color-gray-1: #e2e8f0;');
-			expect(baseWithConfig).includes('--sl-color-accent: #d97706;');
-		});
-	});
-
-	test('disables Tailwind preflight', async () => {
-		const baseWithDefaultPlugins = await generatePluginCss();
-		expect(baseWithDefaultPlugins).not.includes('line-height: 1.5;');
-		expect(baseWithDefaultPlugins).includes('--tw-');
-		expect(baseWithDefaultPlugins).toMatchInlineSnapshot(`
-			"*, ::before, ::after {
-			    --tw-border-spacing-x: 0;
-			    --tw-border-spacing-y: 0;
-			    --tw-translate-x: 0;
-			    --tw-translate-y: 0;
-			    --tw-rotate: 0;
-			    --tw-skew-x: 0;
-			    --tw-skew-y: 0;
-			    --tw-scale-x: 1;
-			    --tw-scale-y: 1;
-			    --tw-pan-x:  ;
-			    --tw-pan-y:  ;
-			    --tw-pinch-zoom:  ;
-			    --tw-scroll-snap-strictness: proximity;
-			    --tw-gradient-from-position:  ;
-			    --tw-gradient-via-position:  ;
-			    --tw-gradient-to-position:  ;
-			    --tw-ordinal:  ;
-			    --tw-slashed-zero:  ;
-			    --tw-numeric-figure:  ;
-			    --tw-numeric-spacing:  ;
-			    --tw-numeric-fraction:  ;
-			    --tw-ring-inset:  ;
-			    --tw-ring-offset-width: 0px;
-			    --tw-ring-offset-color: #fff;
-			    --tw-ring-color: rgb(59 130 246 / 0.5);
-			    --tw-ring-offset-shadow: 0 0 #0000;
-			    --tw-ring-shadow: 0 0 #0000;
-			    --tw-shadow: 0 0 #0000;
-			    --tw-shadow-colored: 0 0 #0000;
-			    --tw-blur:  ;
-			    --tw-brightness:  ;
-			    --tw-contrast:  ;
-			    --tw-grayscale:  ;
-			    --tw-hue-rotate:  ;
-			    --tw-invert:  ;
-			    --tw-saturate:  ;
-			    --tw-sepia:  ;
-			    --tw-drop-shadow:  ;
-			    --tw-backdrop-blur:  ;
-			    --tw-backdrop-brightness:  ;
-			    --tw-backdrop-contrast:  ;
-			    --tw-backdrop-grayscale:  ;
-			    --tw-backdrop-hue-rotate:  ;
-			    --tw-backdrop-invert:  ;
-			    --tw-backdrop-opacity:  ;
-			    --tw-backdrop-saturate:  ;
-			    --tw-backdrop-sepia:  ;
-			    --tw-contain-size:  ;
-			    --tw-contain-layout:  ;
-			    --tw-contain-paint:  ;
-			    --tw-contain-style:  ;
-			}
-			::backdrop {
-			    --tw-border-spacing-x: 0;
-			    --tw-border-spacing-y: 0;
-			    --tw-translate-x: 0;
-			    --tw-translate-y: 0;
-			    --tw-rotate: 0;
-			    --tw-skew-x: 0;
-			    --tw-skew-y: 0;
-			    --tw-scale-x: 1;
-			    --tw-scale-y: 1;
-			    --tw-pan-x:  ;
-			    --tw-pan-y:  ;
-			    --tw-pinch-zoom:  ;
-			    --tw-scroll-snap-strictness: proximity;
-			    --tw-gradient-from-position:  ;
-			    --tw-gradient-via-position:  ;
-			    --tw-gradient-to-position:  ;
-			    --tw-ordinal:  ;
-			    --tw-slashed-zero:  ;
-			    --tw-numeric-figure:  ;
-			    --tw-numeric-spacing:  ;
-			    --tw-numeric-fraction:  ;
-			    --tw-ring-inset:  ;
-			    --tw-ring-offset-width: 0px;
-			    --tw-ring-offset-color: #fff;
-			    --tw-ring-color: rgb(59 130 246 / 0.5);
-			    --tw-ring-offset-shadow: 0 0 #0000;
-			    --tw-ring-shadow: 0 0 #0000;
-			    --tw-shadow: 0 0 #0000;
-			    --tw-shadow-colored: 0 0 #0000;
-			    --tw-blur:  ;
-			    --tw-brightness:  ;
-			    --tw-contrast:  ;
-			    --tw-grayscale:  ;
-			    --tw-hue-rotate:  ;
-			    --tw-invert:  ;
-			    --tw-saturate:  ;
-			    --tw-sepia:  ;
-			    --tw-drop-shadow:  ;
-			    --tw-backdrop-blur:  ;
-			    --tw-backdrop-brightness:  ;
-			    --tw-backdrop-contrast:  ;
-			    --tw-backdrop-grayscale:  ;
-			    --tw-backdrop-hue-rotate:  ;
-			    --tw-backdrop-invert:  ;
-			    --tw-backdrop-opacity:  ;
-			    --tw-backdrop-saturate:  ;
-			    --tw-backdrop-sepia:  ;
-			    --tw-contain-size:  ;
-			    --tw-contain-layout:  ;
-			    --tw-contain-paint:  ;
-			    --tw-contain-style:  ;
-			}
-			*, ::before, ::after {
-			    border-width: 0;
-			    border-style: solid;
-			    border-color: #e5e7eb;
-			}
-			::before, ::after {
-			    --tw-content: ;
-			}
-			html, :host {
-			    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			}
-			code, kbd, samp, pre {
-			    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-			}
-			:root {
-			    --sl-font: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			    --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-			    --sl-color-white: #fff;
-			    --sl-color-gray-1: #e5e7eb;
-			    --sl-color-gray-2: #d1d5db;
-			    --sl-color-gray-3: #9ca3af;
-			    --sl-color-gray-4: #4b5563;
-			    --sl-color-gray-5: #374151;
-			    --sl-color-gray-6: #1f2937;
-			    --sl-color-black: #111827;
-			    --sl-color-accent-low: #1e1b4b;
-			    --sl-color-accent: #4f46e5;
-			    --sl-color-accent-high: #c7d2fe;
-			}
-			:root[data-theme="light"] {
-			    --sl-color-white: #111827;
-			    --sl-color-gray-1: #1f2937;
-			    --sl-color-gray-2: #374151;
-			    --sl-color-gray-3: #6b7280;
-			    --sl-color-gray-4: #9ca3af;
-			    --sl-color-gray-5: #d1d5db;
-			    --sl-color-gray-6: #e5e7eb;
-			    --sl-color-gray-7: #f3f4f6;
-			    --sl-color-black: #fff;
-			    --sl-color-accent-low: #c7d2fe;
-			    --sl-color-accent: #4f46e5;
-			    --sl-color-accent-high: #312e81;
-			}"
-		`);
-	});
-});
-
-describe('@tailwind utilities;', () => {
 	test('uses [data-theme="dark"] for dark: utility classes', async () => {
-		const utils = await generatePluginCss({
-			css: '@tailwind utilities;',
-			html: '<div class="dark:text-red-50"></div>',
-		});
-		expect(utils).includes('.dark\\:text-red-50:is([data-theme="dark"] *)');
-		expect(utils).toMatchInlineSnapshot(`
-			".dark\\:text-red-50:is([data-theme="dark"] *) {
-			    --tw-text-opacity: 1;
-			    color: rgb(254 242 242 / var(--tw-text-opacity))
-			}"
+		expect(utilitiesLayer).toMatchInlineSnapshot(`
+			"
+			  .dark\\:bg-black {
+			    &:where([data-theme="dark"], [data-theme="dark"] *) {
+			      background-color: var(--color-black);
+			    }
+			  }
+
+			  :root {
+			    --sl-font: var(--font-sans);
+			    --sl-font-mono: var(--font-mono);
+			    --sl-color-white: var(--color-white);
+			    --sl-color-gray-1: var(--color-gray-200);
+			    --sl-color-gray-2: var(--color-gray-300);
+			    --sl-color-gray-3: var(--color-gray-400);
+			    --sl-color-gray-4: var(--color-gray-600);
+			    --sl-color-gray-5: var(--color-gray-700);
+			    --sl-color-gray-6: var(--color-gray-800);
+			    --sl-color-black: var(--color-gray-900);
+			    --sl-color-accent-low: var(--color-accent-950, var(--color-accent-900, #1e1b4b));
+			    --sl-color-accent: var(--color-accent-600, #4f46e5);
+			    --sl-color-accent-high: var(--color-accent-200, #c7d2fe);
+
+			    &[data-theme="light"] {
+			      --sl-color-white: var(--color-gray-900);
+			      --sl-color-gray-1: var(--color-gray-800);
+			      --sl-color-gray-2: var(--color-gray-700);
+			      --sl-color-gray-3: var(--color-gray-500);
+			      --sl-color-gray-4: var(--color-gray-400);
+			      --sl-color-gray-5: var(--color-gray-300);
+			      --sl-color-gray-6: var(--color-gray-200);
+			      --sl-color-gray-7: var(--color-gray-100);
+			      --sl-color-black: var(--color-white);
+			      --sl-color-accent-low: var(--color-accent-200, #c7d2fe);
+			      --sl-color-accent: var(--color-accent-600, #4f46e5);
+			      --sl-color-accent-high: var(--color-accent-900, #312e81);
+			    }
+			  }
+			"
 		`);
 	});
 });
 
-test('warns when a prefix of "sl-" is set', async () => {
-	const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-	await generatePluginCss({ config: { prefix: 'sl-' } });
-	expect(warn).toBeCalledTimes(1);
-	expect(warn.mock.lastCall?.[0]).toMatchInlineSnapshot(`
-		"A Tailwind prefix of "sl-" will clash with Starlight’s built-in styles.
-		Please set a different prefix in your Tailwind config file."
+// https://github.com/tailwindlabs/tailwindcss/blob/61af484ff4f34464b317895598c49966c132b410/packages/tailwindcss/src/test-utils/run.ts
+async function render(candidates: string[] = [], theme: string = '') {
+	let { build } = await compile(css`
+		@layer theme, base, components, utilities;
+
+		@layer utilities {
+			@tailwind utilities;
+		}
+
+		${starlightTailwindCss}
+
+		${theme}
 	`);
-	warn.mockRestore();
-});
+
+	return transform({
+		code: Uint8Array.from(Buffer.from(build(candidates))),
+		filename: 'test.css',
+	}).code.toString();
+}

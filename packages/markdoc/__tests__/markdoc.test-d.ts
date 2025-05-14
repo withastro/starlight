@@ -45,6 +45,7 @@ describe('nodes', () => {
 			| 'lang'
 			/** Not all `<Code>` component props are supported in code fences. */
 			| 'class'
+			| 'hangingIndent'
 			| 'locale'
 			| 'preserveIndent'
 			| 'useDiffSyntax'

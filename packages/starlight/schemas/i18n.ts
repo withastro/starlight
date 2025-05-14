@@ -158,6 +158,8 @@ function starlightI18nSchema() {
 				.describe(
 					'Label for the “Built with Starlight” badge optionally displayed in the site footer.'
 				),
+
+			'heading.anchorLabel': z.string().describe('Label for anchor links in Markdown content.'),
 		})
 		.partial();
 }

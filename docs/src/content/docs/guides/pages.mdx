@@ -3,6 +3,8 @@ title: Pages
 description: Learn how to create and manage your documentation site’s pages with Starlight.
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlight generates your site’s HTML pages based on your content, with flexible options provided via Markdown frontmatter.
@@ -73,28 +75,49 @@ Read more in the [“Pages” guide in the Astro docs](https://docs.astro.build/
 
 ### Using Starlight’s design in custom pages
 
-To use the Starlight layout in custom pages, wrap your page content with the `<StarlightPage />` component.
+To use the Starlight layout in custom pages, wrap your page content with the [`<StarlightPage>` component](#starlightpage-component).
 This can be helpful if you are generating content dynamically but still want to use Starlight’s design.
+
+To add anchor links to headings that match Starlight’s Markdown anchor link styles, you can use the [`<AnchorHeading>` component](#anchorheading-component) in your custom pages.
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: 'My custom page' }}>
 	<p>This is a custom page with a custom component:</p>
 	<CustomComponent />
+
+	<AnchorHeading level="2" id="learn-more">Learn more</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">Read more in the Starlight docs</a>
+	</p>
 </StarlightPage>
 ```
 
-#### Props
+#### `<StarlightPage>` component
+
+The `<StarlightPage />` component renders a full page of content using Starlight’s layout and styles.
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'My custom page' }}>
+	<!-- Custom page content -->
+</StarlightPage>
+```
 
 The `<StarlightPage />` component accepts the following props.
 
-##### `frontmatter` (required)
+##### `frontmatter`
 
+**required**  
 **type:** `StarlightPageFrontmatter`
 
 Set the [frontmatter properties](/reference/frontmatter/) for this page, similar to frontmatter in Markdown pages.
@@ -173,3 +196,33 @@ Set the BCP-47 language tag for this page’s content, e.g. `en`, `zh-CN`, or `p
 **default:** `false`
 
 Indicate if this page is using [fallback content](/guides/i18n/#fallback-content) because there is no translation for the current language.
+
+#### `<AnchorHeading>` component
+
+The `<AnchorHeading />` component renders an HTML heading element with a clickable anchor link that matches Starlight’s Markdown styles.
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">Sub heading</AnchorHeading>
+```
+
+It accepts the following props as well as any other valid [global HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+
+##### `level`
+
+**required**  
+**type:** `1 | 2 | 3 | 4 | 5 | 6`
+
+The heading level to render.
+For example, `level="1"` would render an `<h1>` element.
+
+##### `id`
+
+**required**  
+**type:** `string`
+
+The unique ID for this heading.
+This will be used as the `id` attribute of the rendered heading and the anchor icon will link to it.

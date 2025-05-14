@@ -49,16 +49,30 @@ Starlight의 기본 스타일을 수정하거나 확장하기 위한 CSS 파일�
 
 사이트를 스타일링하기 위해 Starlight에서 사용되는 모든 CSS 속성을 [`props.css` 파일](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)에서 확인할 수 있습니다.
 
+### 캐스케이드 레이어
+
+Starlight는 스타일 순서를 관리하기 위해 내부적으로 [캐스케이드 레이어](https://developer.mozilla.org/ko/docs/Learn_web_development/Core/Styling_basics/Cascade_layers)를 사용합니다. 이를 통해 예측 가능한 CSS 순서를 보장하고 더 간단한 재정의를 할 수 있습니다.
+레이어가 지정되지 않은 사용자 정의 CSS는 기본 Starlight 스타일을 재정의합니다.
+
+캐스케이드 레이어를 사용하고 있다면, 사용자 정의 CSS에서 [`@layer`](https://developer.mozilla.org/ko/docs/Web/CSS/@layer)를 사용하여 `starlight` 레이어의 스타일을 기준으로 서로 다른 레이어의 우선순위를 정의할 수 있습니다.
+
+```css "starlight"
+/* src/styles/custom.css */
+@layer my-reset, starlight, my-overrides;
+```
+
+위 예시는 `my-reset`이라는 사용자 정의 레이어를 정의하며, 이는 모든 Starlight 레이어보다 먼저 적용됩니다. 또 다른 레이어인 `my-overrides`는 모든 Starlight 레이어 이후에 적용됩니다. `my-overrides` 레이어의 모든 스타일은 Starlight의 스타일보다 우선 적용되지만, Starlight는 여전히 `my-reset` 레이어에 설정된 스타일을 변경할 수 있습니다.
+
 ## Tailwind CSS
 
-Astro 프로젝트의 Tailwind CSS 지원은 [Astro Tailwind 통합](https://docs.astro.build/ko/guides/integrations-guide/tailwind/)을 통해 제공됩니다.
-Starlight는 Starlight 스타일과 호환되도록 Tailwind를 구성하는 데 도움이 되는 보완 Tailwind 플러그인을 제공합니다.
+Astro 프로젝트의 Tailwind CSS 지원은 [Tailwind Vite 플러그인](https://tailwindcss.com/docs/installation/using-vite)을 통해 제공됩니다.
+Starlight는 Starlight 스타일과 호환되도록 Tailwind를 구성하는 데 도움이 되는 보완 CSS를 제공합니다.
 
-Starlight Tailwind 플러그인은 다음 구성을 적용합니다.
+Starlight Tailwind CSS는 다음 구성을 적용합니다.
 
 - Starlight의 다크 모드와 작동하도록 Tailwind의 `dark:` 변형을 구성합니다.
 - Starlight UI에서 Tailwind [테마 색상 및 글꼴](#tailwind로-starlight-스타일링하기)을 사용합니다.
-- Tailwind의 [Preflight](https://tailwindcss.com/docs/preflight) 초기화 스타일을 비활성화하는 동시에 Tailwind의 테두리 유틸리티 클래스에 필요한 Preflight의 필수 부분을 선택적으로 복원합니다.
+- Tailwind Preflight 리셋 스타일의 필수적인 부분을 복원합니다.
 
 ### Tailwind가 포함된 새 프로젝트 만들기
 
@@ -94,112 +108,98 @@ yarn create astro --template starlight/tailwind
 
 <Steps>
 
-1.  Astro의 Tailwind 통합 추가
+1. 다음 명령을 실행하고 터미널의 지침에 따라 프로젝트에 Tailwind를 설정합니다.
 
-    <Tabs syncKey="pkg">
+   <Tabs syncKey="pkg">
 
-    <TabItem label="npm">
+   <TabItem label="npm">
 
-    ```sh
-    npx astro add tailwind
-    ```
+   ```sh
+   npx astro add tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="pnpm">
+   <TabItem label="pnpm">
 
-    ```sh
-    pnpm astro add tailwind
-    ```
+   ```sh
+   pnpm astro add tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="Yarn">
+   <TabItem label="Yarn">
 
-    ```sh
-    yarn astro add tailwind
-    ```
+   ```sh
+   yarn astro add tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    </Tabs>
+   </Tabs>
 
-2.  Starlight Tailwind 플러그인을 설치하세요.
+2. Starlight의 Tailwind 호환성 패키지를 설치합니다.
 
-    <Tabs syncKey="pkg">
+   <Tabs syncKey="pkg">
 
-    <TabItem label="npm">
+   <TabItem label="npm">
 
-    ```sh
-    npm install @astrojs/starlight-tailwind
-    ```
+   ```sh
+   npm install @astrojs/starlight-tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="pnpm">
+   <TabItem label="pnpm">
 
-    ```sh
-    pnpm add @astrojs/starlight-tailwind
-    ```
+   ```sh
+   pnpm add @astrojs/starlight-tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    <TabItem label="Yarn">
+   <TabItem label="Yarn">
 
-    ```sh
-    yarn add @astrojs/starlight-tailwind
-    ```
+   ```sh
+   yarn add @astrojs/starlight-tailwind
+   ```
 
-    </TabItem>
+   </TabItem>
 
-    </Tabs>
+   </Tabs>
 
-3.  `src/tailwind.css` 파일과 같은 Tailwind의 기본 스타일에 대한 CSS 파일을 만드세요.
+3. Astro가 스캐폴딩한 `src/styles/global.css` 파일의 콘텐츠를 Starlight와의 호환성을 위해 다음 코드로 교체합니다.
 
-    ```css
-    /* src/tailwind.css */
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-    ```
+   ```css
+   /* src/styles/global.css */
+   @layer base, starlight, theme, components, utilities;
 
-4.  Tailwind 기반 스타일을 사용하고 기본 스타일을 비활성화하려면 Astro 구성 파일을 업데이트하세요.
+   @import '@astrojs/starlight-tailwind';
+   @import 'tailwindcss/theme.css' layer(theme);
+   @import 'tailwindcss/utilities.css' layer(utilities);
+   ```
 
-    ```js {11-12,16-17}
-    // astro.config.mjs
-    import { defineConfig } from 'astro/config';
-    import starlight from '@astrojs/starlight';
-    import tailwind from '@astrojs/tailwind';
+4. `customCss` 배열의 첫 번째 항목으로 Tailwind CSS 파일을 추가하도록 Starlight 구성을 업데이트합니다.
 
-    export default defineConfig({
-    	integrations: [
-    		starlight({
-    			title: 'Tailwind를 사용한 문서',
-    			customCss: [
-    				// Tailwind 기반 스타일 경로
-    				'./src/tailwind.css',
-    			],
-    		}),
-    		tailwind({
-    			// 기본 스타일을 비활성화합니다.
-    			applyBaseStyles: false,
-    		}),
-    	],
-    });
-    ```
+   ```js ins={11-12}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import tailwindcss from '@tailwindcss/vite';
 
-5.  `tailwind.config.mjs` 파일에 Starlight Tailwind 플러그인을 추가하세요.
-
-    ```js ins={2,7}
-    // tailwind.config.mjs
-    import starlightPlugin from '@astrojs/starlight-tailwind';
-
-    /** @type {import('tailwindcss').Config} */
-    export default {
-    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-    	plugins: [starlightPlugin()],
-    };
-    ```
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Tailwind를 사용한 문서',
+   			customCss: [
+   				// Tailwind 기본 스타일의 경로입니다.
+   				'./src/styles/global.css',
+   			],
+   		}),
+   	],
+   	vite: { plugins: [tailwindcss()] },
+   });
+   ```
 
 </Steps>
 
@@ -207,39 +207,51 @@ yarn create astro --template starlight/tailwind
 
 Starlight는 UI에서 [Tailwind 테마 구성](https://tailwindcss.com/docs/theme) 값을 사용합니다.
 
-설정된 경우 다음 옵션이 Starlight의 기본 스타일을 재정의합니다.
+설정되면 다음 CSS 사용자 정의 속성이 Starlight의 기본 스타일을 재정의합니다.
 
-- `colors.accent` — 링크 및 현재 항목 강조에 사용됩니다.
-- `colors.gray` — 배경색과 테두리에 사용됩니다.
-- `fontFamily.sans` — UI 및 콘텐츠 텍스트에 사용됩니다.
-- `fontFamily.mono` — 코드 예제에 사용됩니다.
+- `--color-accent-*` — 링크 및 현재 항목 강조 표시에 사용됩니다.
+- `--color-gray-*` — 배경색 및 테두리에 사용됩니다.
+- `--font-sans` — UI 및 콘텐츠 텍스트에 사용됩니다.
+- `--font-mono` — 코드 예시에 사용됩니다.
 
-```js {12,14,18,20}
-// tailwind.config.mjs
-import starlightPlugin from '@astrojs/starlight-tailwind';
-import colors from 'tailwindcss/colors';
+```css {9,11,13,25}
+/* src/styles/global.css */
+@layer base, starlight, theme, components, utilities;
 
-/** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-	theme: {
-		extend: {
-			colors: {
-				// 선호하는 강조 색상입니다. Indigo는 Starlight의 기본값에 가장 가깝습니다.
-				accent: colors.indigo,
-				// 선호하는 회색조입니다. Zinc는 Starlight의 기본값에 가장 가깝습니다.
-				gray: colors.zinc,
-			},
-			fontFamily: {
-				// 선호하는 텍스트 글꼴입니다. Starlight는 기본적으로 시스템 글꼴 스택을 사용합니다.
-				sans: ['"Atkinson Hyperlegible"'],
-				// 선호하는 코드 글꼴입니다. Starlight는 기본적으로 시스템 고정 폭 글꼴을 사용합니다.
-				mono: ['"IBM Plex Mono"'],
-			},
-		},
-	},
-	plugins: [starlightPlugin()],
-};
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	/* 선호하는 텍스트 글꼴입니다. Starlight는 기본적으로 시스템 글꼴 스택을 사용합니다. */
+	--font-sans: 'Atkinson Hyperlegible';
+	/* 선호하는 코드 글꼴입니다. Starlight는 기본적으로 시스템 고정폭 글꼴을 사용합니다. */
+	--font-mono: 'IBM Plex Mono';
+	/* 선호하는 강조 색상입니다. 남색(indigo)이 Starlight의 기본값과 가장 유사합니다. */
+	--color-accent-50: var(--color-indigo-50);
+	--color-accent-100: var(--color-indigo-100);
+	--color-accent-200: var(--color-indigo-200);
+	--color-accent-300: var(--color-indigo-300);
+	--color-accent-400: var(--color-indigo-400);
+	--color-accent-500: var(--color-indigo-500);
+	--color-accent-600: var(--color-indigo-600);
+	--color-accent-700: var(--color-indigo-700);
+	--color-accent-800: var(--color-indigo-800);
+	--color-accent-900: var(--color-indigo-900);
+	--color-accent-950: var(--color-indigo-950);
+	/* 선호하는 회색조입니다. 아연색(zinc)이 Starlight의 기본값과 가장 유사합니다. */
+	--color-gray-50: var(--color-zinc-50);
+	--color-gray-100: var(--color-zinc-100);
+	--color-gray-200: var(--color-zinc-200);
+	--color-gray-300: var(--color-zinc-300);
+	--color-gray-400: var(--color-zinc-400);
+	--color-gray-500: var(--color-zinc-500);
+	--color-gray-600: var(--color-zinc-600);
+	--color-gray-700: var(--color-zinc-700);
+	--color-gray-800: var(--color-zinc-800);
+	--color-gray-900: var(--color-zinc-900);
+	--color-gray-950: var(--color-zinc-950);
+}
 ```
 
 ## 테마
@@ -292,7 +304,7 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 		[사용자 정의 CSS파일](#사용자-정의-css-스타일)에 아래 코드를 추가하여 현재 테마를 프로젝트에 적용하세요.
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		아래 [Tailwind 구성 파일](#tailwind로-starlight-스타일링하기)의 예시는 `theme.extend.colors`에서 사용할 `accent` 및 `gray` 색상 팔레트를 포함합니다.
-    </Fragment>
+		사이트에 이 테마를 적용하려면 [Tailwind CSS 파일](#tailwind로-starlight-스타일링하기)의 `@theme` 블록에 다음 CSS 변수를 추가하세요.
+	</Fragment>
 
 </ThemeDesigner>

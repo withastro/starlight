@@ -19,7 +19,7 @@
     "@size-limit/file": "^11.1.6",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
-    "astro": "^5.5.3",
+    "astro": "^5.6.1",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-only-tests": "^3.1.0",
@@ -28,7 +28,7 @@
     "size-limit": "^11.1.6",
     "typescript": "^5.6.3"
   },
-  "packageManager": "pnpm@8.7.4",
+  "packageManager": "pnpm@9.15.9",
   "size-limit": [
     {
       "name": "/index.html",
@@ -48,7 +48,7 @@
         "examples/basics/dist/_astro/*.css",
         "!examples/basics/dist/_astro/print.*.css"
       ],
-      "limit": "14.5 kB",
+      "limit": "14.75 kB",
       "gzip": true
     }
   ],
