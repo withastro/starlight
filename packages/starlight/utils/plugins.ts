@@ -51,7 +51,7 @@ export async function runPlugins(
 					// Merge the translations injected by the plugin.
 					for (const [locale, localeTranslations] of Object.entries(translations)) {
 						pluginTranslations[locale] ??= {};
-						Object.assign(pluginTranslations[locale]!, localeTranslations);
+						Object.assign(pluginTranslations[locale], localeTranslations);
 					}
 				},
 			});
@@ -432,7 +432,7 @@ export type StarlightPlugin = z.input<typeof starlightPluginSchema>;
 export type HookParameters<
 	Hook extends keyof StarlightPlugin['hooks'],
 	HookFn = StarlightPlugin['hooks'][Hook],
-> = HookFn extends (...args: any) => any ? Parameters<HookFn>[0] : never;
+> = HookFn extends (...args: any[]) => unknown ? Parameters<HookFn>[0] : never;
 
 export type StarlightUserConfigWithPlugins = StarlightUserConfig & {
 	/**

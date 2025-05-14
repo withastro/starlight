@@ -15,7 +15,7 @@
 
 export * from 'astro-expressive-code';
 
-// @ts-ignore - Types are provided by the separate `expressive-code.d.ts` file
+// @ts-expect-error - Types are provided by the separate `expressive-code.d.ts` file
 export function defineEcConfig(config) {
 	return config;
 }

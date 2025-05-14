@@ -29,7 +29,7 @@ describe('useTranslations()', () => {
 	});
 });
 
-describe('t.dir()', async () => {
+describe('t.dir()', () => {
 	test('returns text directions', () => {
 		expect(useTranslations(undefined).dir()).toBe('ltr');
 		expect(useTranslations('fr').dir()).toBe('ltr');

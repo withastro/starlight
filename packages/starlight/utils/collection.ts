@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const collectionNames = ['docs', 'i18n'] as const;
-export type StarlightCollection = (typeof collectionNames)[number];
+const _collectionNames = ['docs', 'i18n'] as const;
+export type StarlightCollection = (typeof _collectionNames)[number];
 
 /**
  * We still rely on the content collection folder structure to be fixed for now:

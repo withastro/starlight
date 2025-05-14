@@ -25,7 +25,7 @@ export function parseWithFriendlyErrors<T extends z.Schema>(
 	input: z.input<T>,
 	message: string
 ): z.output<T> {
-	return processParsedData(schema.safeParse(input, { errorMap }), message);
+	return processParsedData<T>(schema.safeParse(input, { errorMap }), message);
 }
 
 /**
@@ -42,10 +42,13 @@ export async function parseAsyncWithFriendlyErrors<T extends z.Schema>(
 	input: z.input<T>,
 	message: string
 ): Promise<z.output<T>> {
-	return processParsedData(await schema.safeParseAsync(input, { errorMap }), message);
+	return processParsedData<T>(await schema.safeParseAsync(input, { errorMap }), message);
 }
 
-function processParsedData(parsedData: z.SafeParseReturnType<any, any>, message: string) {
+function processParsedData<T extends z.Schema>(
+	parsedData: z.SafeParseReturnType<T, T>,
+	message: string
+) {
 	if (!parsedData.success) {
 		throw new AstroError(message, parsedData.error.issues.map((i) => i.message).join('\n'));
 	}

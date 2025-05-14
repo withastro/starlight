@@ -26,7 +26,7 @@ export async function getIconSvgPaths(repoPath: string, icons: string[], definit
 		try {
 			// Find the glyph matching the icon name.
 			glyph = font.nameToGlyph(icon);
-		} catch (error) {
+		} catch {
 			// If the glyph is not found, this means that multiple icons share the same glyph and we have
 			// a mapping for such case.
 			const alias = getFontGlyphAlias(icon);

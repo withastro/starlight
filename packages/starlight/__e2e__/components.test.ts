@@ -174,7 +174,7 @@ test.describe('tabs', () => {
 		await expectSelectedTab(pkgTabsB, 'pnpm', 'another pnpm command');
 		await expectSelectedTab(pkgTabsC, 'pnpm', 'another pnpm command');
 
-		page.reload();
+		await page.reload();
 
 		// The synced tabs with a persisted state should be restored.
 		await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
@@ -203,7 +203,7 @@ test.describe('tabs', () => {
 
 		await expectSelectedTab(styleTabs, 'tailwind', 'tailwind code');
 
-		page.reload();
+		await page.reload();
 
 		// The synced tabs with a persisted state should be restored.
 		await expectSelectedTab(styleTabs, 'tailwind', 'tailwind code');
@@ -233,7 +233,7 @@ test.describe('tabs', () => {
 		// Select the windows tab in the set of tabs synced with the 'os' key.
 		await osTabsB.getByRole('tab').filter({ hasText: 'windows' }).click();
 
-		page.reload();
+		await page.reload();
 
 		// The synced tabs with a persisted state for the `pkg` sync key should be restored.
 		await expectSelectedTab(pkgTabsA, 'pnpm', 'pnpm command');
@@ -297,7 +297,7 @@ test.describe('tabs', () => {
 			'invalid-value'
 		);
 
-		page.reload();
+		await page.reload();
 
 		// The synced tabs should not be restored due to the invalid persisted state.
 		await expectSelectedTab(pkgTabsA, 'npm', 'npm command');
@@ -333,7 +333,7 @@ test.describe('tabs', () => {
 		await expectSelectedTab(pkgTabs, 'pnpm');
 		await expectSelectedTab(osTabsB, 'linux', 'pnpm GNU/Linux');
 
-		page.reload();
+		await page.reload();
 
 		// The synced tabs should be restored.
 		await expectSelectedTab(pkgTabs, 'pnpm');

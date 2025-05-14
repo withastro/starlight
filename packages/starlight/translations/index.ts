@@ -31,7 +31,6 @@ import sk from './sk.json';
 import lv from './lv.json';
 import hu from './hu.json';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { parse } = builtinI18nSchema();
 
 export default Object.fromEntries(

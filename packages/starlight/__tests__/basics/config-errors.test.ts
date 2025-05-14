@@ -91,7 +91,7 @@ test('parses bare minimum valid config successfully', () => {
 
 test('errors if title is missing', () => {
 	expect(() =>
-		// @ts-expect-error Testing invalid config
+		// @ts-expect-error - Testing invalid config
 		parseStarlightConfigWithFriendlyErrors({})
 	).toThrowErrorMatchingInlineSnapshot(
 		`
@@ -106,7 +106,7 @@ test('errors if title is missing', () => {
 
 test('errors if title value is not a string or an Object', () => {
 	expect(() =>
-		// @ts-expect-error Testing invalid config
+		// @ts-expect-error - Testing invalid config
 		parseStarlightConfigWithFriendlyErrors({ title: 5 })
 	).toThrowErrorMatchingInlineSnapshot(
 		`
@@ -121,7 +121,7 @@ test('errors if title value is not a string or an Object', () => {
 
 test('errors with bad social icon config', () => {
 	expect(() =>
-		// @ts-expect-error Testing invalid config
+		// @ts-expect-error - Testing invalid config
 		parseStarlightConfigWithFriendlyErrors({ title: 'Test', social: { unknown: '' } })
 	).toThrowErrorMatchingInlineSnapshot(
 		`
@@ -138,7 +138,7 @@ test('errors with bad social icon config', () => {
 
 test('errors with bad logo config', () => {
 	expect(() =>
-		// @ts-expect-error Testing invalid config
+		// @ts-expect-error - Testing invalid config
 		parseStarlightConfigWithFriendlyErrors({ title: 'Test', logo: { html: '' } })
 	).toThrowErrorMatchingInlineSnapshot(
 		`
@@ -156,7 +156,7 @@ test('errors with bad head config', () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({
 			title: 'Test',
-			// @ts-expect-error Testing invalid config
+			// @ts-expect-error - Testing invalid config
 			head: [{ tag: 'unknown', attrs: { prop: null }, content: 20 }],
 		})
 	).toThrowErrorMatchingInlineSnapshot(
@@ -176,7 +176,7 @@ test('errors with bad sidebar config', () => {
 	expect(() =>
 		parseStarlightConfigWithFriendlyErrors({
 			title: 'Test',
-			// @ts-expect-error Testing invalid config
+			// @ts-expect-error - Testing invalid config
 			sidebar: [{ label: 'Example', href: '/' }],
 		})
 	).toThrowErrorMatchingInlineSnapshot(
@@ -200,7 +200,7 @@ test('errors with bad nested sidebar config', () => {
 					label: 'Example',
 					items: [
 						{ label: 'Nested Example 1', link: '/' },
-						// @ts-expect-error Testing invalid config
+						// @ts-expect-error - Testing invalid config
 						{ label: 'Nested Example 2', link: true },
 					],
 				},
