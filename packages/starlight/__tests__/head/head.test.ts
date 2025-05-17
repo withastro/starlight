@@ -44,7 +44,7 @@ test('includes description based on Starlight `description` configuration', () =
 });
 
 test('includes description based on page `description` frontmatter field if provided', () => {
-	const head = getTestHead([], routes[1]!);
+	const head = getTestHead([], routes[1]);
 	expect(head).toContainEqual({
 		tag: 'meta',
 		attrs: {
@@ -128,6 +128,8 @@ describe.each([['name'], ['property'], ['http-equiv']])(
 test('sorts head by tag importance', () => {
 	const head = getTestHead();
 
+	// `expect.objectContaining` returns `any`.
+	/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 	const expectedHeadStart = [
 		// Important meta tags
 		{ tag: 'meta', attrs: { charset: 'utf-8' } },
@@ -150,6 +152,7 @@ test('sorts head by tag importance', () => {
 		{ tag: 'meta', attrs: expect.objectContaining({ name: 'x' }) },
 		{ tag: 'meta', attrs: expect.objectContaining({ property: 'x' }) },
 	];
+	/* eslint-enable @typescript-eslint/no-unsafe-assignment */
 
 	expect(head.slice(-expectedHeadEnd.length)).toEqual(expectedHeadEnd);
 });
