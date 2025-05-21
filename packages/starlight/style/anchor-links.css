@@ -91,6 +91,9 @@ how we do it.
 		/* Prevent double or triple clicks from potentially selecting the anchor link a11y text. */
 		-webkit-user-select: none;
 		user-select: none;
+		/* Prevent double clicks on the last word (or single word) of a heading to include an extra new
+     line in Chrome and Safari. */
+		display: inline-flex;
 	}
 
 	/* Increase clickable area for anchor links with a pseudo element that doesn’t impact layout. */
