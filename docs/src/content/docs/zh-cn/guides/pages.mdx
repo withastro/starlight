@@ -3,6 +3,8 @@ title: 页面
 description: 了解如何使用 Starlight 创建和管理文档站点页面。
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlight 根据你的内容生成站点的 HTML 页面，并通过 Markdown frontmatter 提供灵活的选项。
@@ -74,29 +76,50 @@ description: 这是我的 Starlight 网站中的一个页面
 
 ### 在自定义页面中使用 Starlight 的设计
 
-要在自定义页面中使用 Starlight 布局，请使用 `<StarlightPage />` 组件包装页面内容。
+要在自定义页面中使用 Starlight 布局，请使用 [`<StarlightPage />` 组件](#starlightpage-组件)包装页面内容。
 
 如果你正在动态生成内容但仍想使用 Starlight 的设计，这会很有帮助。
+
+要在标题中添加和 Starlight 的 Markdown 锚点链接样式一样的锚点链接，你可以在自定义页面中使用 [`<AnchorHeading>` 组件](#anchorheading-组件)。
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: '我的自定义页面' }}>
 	<p>这是一个有自定义组件的自定义页面：</p>
 	<CustomComponent />
+
+  <AnchorHeading level="2" id="learn-more">了解更多</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">在 Starlight 文档中阅读更多</a>
+	</p>
 </StarlightPage>
 ```
 
-#### Props
+#### `<StarlightPage>` 组件
+
+`<StarlightPage />` 组件使用 Starlight 的布局和样式渲染完整页面内容。
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: '我的自定义页面' }}>
+	<!-- 自定义页面内容 -->
+</StarlightPage>
+```
 
 `<StarlightPage />` 组件接受以下 props。
 
-##### `frontmatter` (必填)
+##### `frontmatter`
 
+**必填**  
 **类型：** `StarlightPageFrontmatter`
 
 为此页面设置 [frontmatter 属性](/zh-cn/reference/frontmatter/)，类似于 Markdown 页面中的 frontmatter。
@@ -175,3 +198,33 @@ import CustomComponent from './CustomComponent.astro';
 **默认值：** `false`
 
 表示此页面是否使用了[回退内容](/zh-cn/guides/i18n/#回退内容)，因为当前语言没有翻译。
+
+#### `<AnchorHeading>` 组件
+
+`<AnchorHeading />` 组件渲染一个 HTML 标题元素，并带有一个可点击的锚点链接，样式与 Starlight 的 Markdown 样式一样。
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">子标题</AnchorHeading>
+```
+
+它接受以下属性以及任何其他有效的[全局 HTML 属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes)。
+
+##### `level`
+
+**必填**  
+**类型：** `1 | 2 | 3 | 4 | 5 | 6`
+
+要渲染的标题级别。
+例如，`level="1"` 将渲染一个 `<h1>` 元素。
+
+##### `id`
+
+**必填**  
+**类型：** `string`
+
+用于此标题的唯一 ID。
+这将用作渲染标题的 `id` 属性，并且锚点图标将链接到它。
