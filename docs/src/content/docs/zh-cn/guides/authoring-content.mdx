@@ -648,3 +648,22 @@ yarn create astro --template starlight/markdoc
 </Steps>
 
 要了解有关 Markdoc 语法和功能的更多信息，请参阅 [Markdoc 文档](https://markdoc.dev/docs/syntax) 或 [Astro Markdoc 集成指南](https://docs.astro.build/zh-cn/guides/integrations-guide/markdoc/)。
+
+### 配置 Markdoc 预设
+
+`starlightMarkdoc()` 预设接受以下配置选项：
+
+#### `headingLinks`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+控制是否使用可点击的锚链接渲染标题。
+等同于适用于 Markdown 和 MDX 文件的 [`markdown.headingLinks`](/zh-cn/reference/configuration/#markdown) 选项。
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+  // 禁用默认的标题锚点链接支持
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```
