@@ -73,7 +73,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 ### `tableOfContents`
 
 **类型：** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**默认值：** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**默认值：** `{ minHeadingLevel: 2, maxHeadingLevel: 3; }`
 
 配置每个页面右侧显示的目录。默认情况下，`<h2>` 和 `<h3>` 标题将包含在此目录中。
 
@@ -369,6 +369,29 @@ starlight({
 starlight({
 	customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
+```
+
+### `markdown`
+
+**类型：** `{ headingLinks?: boolean }`  
+**默认值：** `{ headingLinks: true }`
+
+配置 Starlight 的 Markdown 处理。
+
+#### `headingLinks`
+
+**类型：** `boolean`  
+**默认值：** `true`
+
+控制标题是否渲染为可点击的锚点链接。
+
+```js
+starlight({
+	markdown: {
+    // 禁用 Starlight 的可点击标题锚点链接。
+		headingLinks: false,
+	},
+}),
 ```
 
 ### `expressiveCode`
