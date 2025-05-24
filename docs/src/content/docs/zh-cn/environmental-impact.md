@@ -91,19 +91,19 @@ Cache-Control: public, max-age=604800, immutable
 
 | 框架                        | 每页访问量产生的 CO₂ | 评级 |
 | --------------------------- | -------------------- | :--: |
-| [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.07g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.07g              |   A+   |
-| [VitePress][vp-carbon]      | 0.07g              |   A+   |
-| [Docus][dc-carbon]          | 0.10g              |   A    |
-| [docsify][dy-carbon]        | 0.11g              |   A    |
-| [mdBook][md-carbon]         | 0.13g              |   A    |
-| [MkDocs][mk-carbon]         | 0.15g              |   A    |
-| [Fumadocs][fs-carbon]       | 0.16g              |   A    |
-| [Nextra][nx-carbon]         | 0.16g              |   A    |
-| [Docusaurus][ds-carbon]     | 0.25g              |   B    |
-| [Mintlify][mt-carbon]       | 0.99g              |   F    |
-| [GitBook][gb-carbon]        | 1.19g              |   F    |
+| [Starlight][sl-carbon]      | 0.01g                |  A+  |
+| [Read the Docs][rtd-carbon] | 0.07g                |  A+  |
+| [Sphinx][sx-carbon]         | 0.07g                |  A+  |
+| [VitePress][vp-carbon]      | 0.07g                |  A+  |
+| [Docus][dc-carbon]          | 0.10g                |  A   |
+| [docsify][dy-carbon]        | 0.11g                |  A   |
+| [mdBook][md-carbon]         | 0.13g                |  A   |
+| [MkDocs][mk-carbon]         | 0.15g                |  A   |
+| [Fumadocs][fs-carbon]       | 0.16g                |  A   |
+| [Nextra][nx-carbon]         | 0.16g                |  A   |
+| [Docusaurus][ds-carbon]     | 0.25g                |  B   |
+| [Mintlify][mt-carbon]       | 0.99g                |  F   |
+| [GitBook][gb-carbon]        | 1.19g                |  F   |
 
 <small>数据收集于 2025 年 4 月 12 日。点击链接查看最新数据。</small>
 
