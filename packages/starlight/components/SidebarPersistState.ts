@@ -19,11 +19,11 @@ interface SidebarState {
  * and `hash` are read from the current page.
  */
 const getState = (): SidebarState => {
-	let open = [];
+	let open: SidebarState['open'] = [];
 	const hash = target?.dataset.hash || '';
 	try {
 		const rawStoredState = sessionStorage.getItem(storageKey);
-		const storedState = JSON.parse(rawStoredState || '{}');
+		const storedState = JSON.parse(rawStoredState || '{}') as SidebarState;
 		if (Array.isArray(storedState.open) && storedState.hash === hash) open = storedState.open;
 	} catch {}
 	return {

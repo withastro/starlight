@@ -120,7 +120,7 @@ describe('getAllNewestCommitDate', () => {
 		for (const [file, date] of latestDates.entries()) {
 			const expectedDate = expectedDates.get(file);
 			assert.ok(expectedDate, `Unexpected tracked file: ${file}`);
-			expectCommitDateToEqual(new Date(date), expectedDate!);
+			expectCommitDateToEqual(new Date(date), expectedDate);
 		}
 
 		for (const file of expectedDates.keys()) {
