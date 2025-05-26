@@ -77,10 +77,13 @@ export function testFactory(fixturePath: string) {
 
 // A Playwright test fixture accessible from within all tests.
 class StarlightPage {
-	constructor(
-		private readonly server: Server,
-		private readonly page: Page
-	) {}
+	private readonly server: Server;
+	private readonly page: Page;
+
+	constructor(server: Server, page: Page) {
+		this.server = server;
+		this.page = page;
+	}
 
 	// Navigate to a URL relative to the server used during a test run and return the resource response.
 	goto(url: string) {

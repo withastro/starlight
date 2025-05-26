@@ -90,7 +90,7 @@ tableOfContents: false
 
 Définit le modèle de mise en page pour cette page.
 Les pages utilisent la mise en page `'doc'`' par défaut.
-La valeur `'splash''` permet d'utiliser une mise en page plus large, sans barres latérales, conçue pour les pages d'atterrissage.
+La valeur `'splash'` permet d'utiliser une mise en page plus large, sans barres latérales, conçue pour les pages d'atterrissage.
 
 ### `hero`
 
@@ -159,7 +159,7 @@ interface HeroConfig {
         alt?: string;
       }
     | {
-        // HTML brut à utiliser dans l'emplacement (slot) de l'image.
+        // HTML brut à utiliser dans le slot de l'image.
         // Peut être une balise `<img>` personnalisée ou une balise `<svg>` en ligne.
         html: string;
       };

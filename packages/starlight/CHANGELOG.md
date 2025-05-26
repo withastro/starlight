@@ -1,5 +1,35 @@
 # @astrojs/starlight
 
+## 0.34.3
+
+### Patch Changes
+
+- [#3058](https://github.com/withastro/starlight/pull/3058) [`274cc06`](https://github.com/withastro/starlight/commit/274cc06112824384771b944f504ab0faab45e2b9) Thanks [@techfg](https://github.com/techfg)! - Fixes display of focus indicator around site title
+
+- [#3181](https://github.com/withastro/starlight/pull/3181) [`449c822`](https://github.com/withastro/starlight/commit/449c8229effaab19ece3c0a34e32595809c33cc8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all headings in Markdown and MDX content were rendered with a [clickable anchor link](https://starlight.astro.build/reference/configuration/#headinglinks), even in non-Starlight pages.
+
+- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean langage support with improvements and missing translations
+
+## 0.34.2
+
+### Patch Changes
+
+- [#3153](https://github.com/withastro/starlight/pull/3153) [`ea31f46`](https://github.com/withastro/starlight/commit/ea31f46be4d43339417dac7fc135d2be97080c58) Thanks [@SuperKXT](https://github.com/SuperKXT)! - Fixes hover styles for highlighted directory in FileTree component.
+
+- [#2905](https://github.com/withastro/starlight/pull/2905) [`b5232bc`](https://github.com/withastro/starlight/commit/b5232bcd201c2e3904bde2d7717fe6cfa06d6c82) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential issue for projects with dynamic routes added by an user, an Astro integration, or a Starlight plugin where some styles could end up being missing.
+
+- [#3165](https://github.com/withastro/starlight/pull/3165) [`80a7871`](https://github.com/withastro/starlight/commit/80a7871ccad17aef8567a416a419669de6d5d3fd) Thanks [@KianNH](https://github.com/KianNH)! - Increases `maxBuffer` for an internal `spawnSync()` call to support larger Git commit histories when using Starlight's [`lastUpdated`](https://starlight.astro.build/reference/configuration/#lastupdated) feature.
+
+- [#3158](https://github.com/withastro/starlight/pull/3158) [`d1f3c8b`](https://github.com/withastro/starlight/commit/d1f3c8b6583b93968af3c568f7af44b1b10326ec) Thanks [@heisenberg0924](https://github.com/heisenberg0924)! - Adds Hungarian language support
+
+## 0.34.1
+
+### Patch Changes
+
+- [#3140](https://github.com/withastro/starlight/pull/3140) [`f6eb1d5`](https://github.com/withastro/starlight/commit/f6eb1d5a776b007bec0f4b5fd7b160851daac9fc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a text selection issue for heading with a clickable anchor link when using double or triple click to select text.
+
+- [#3148](https://github.com/withastro/starlight/pull/3148) [`dc8b6d5`](https://github.com/withastro/starlight/commit/dc8b6d5561eb90be9d31396ed1dc8f8258c9cbf7) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression of the Starlight icon color when using the [`credits`](https://starlight.astro.build/reference/configuration/#credits) configuration option.
+
 ## 0.34.0
 
 ### Minor Changes
