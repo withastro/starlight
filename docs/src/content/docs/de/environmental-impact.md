@@ -7,7 +7,7 @@ Schätzungen über die Auswirkungen der Webindustrie auf das Klima liegen zwisch
 Es gibt viele komplexe Faktoren bei der Berechnung der ökologischen Auswirkungen einer Website, aber dieser Leitfaden enthält einige Tipps, wie du den ökologischen Fußabdruck deiner Docs-Website verringern kannst.
 
 Die gute Nachricht ist, dass die Wahl von Starlight ein guter Anfang ist.
-Laut dem Website Carbon Calculator ist diese Website [sauberer als 99% der getesteten Websites][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
+Laut dem Website Carbon Calculator ist diese Website [sauberer als 98% der getesteten Websites][sl-carbon] und erzeugt 0,01g CO₂ pro Seitenbesuch.
 
 ## Seitengewicht
 
