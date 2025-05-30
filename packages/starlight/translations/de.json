@@ -3,7 +3,7 @@
   "search.label": "Suchen",
   "search.ctrlKey": "Strg",
   "search.cancelLabel": "Abbrechen",
-  "search.devWarning": "Search is only available in production builds. \nTry building and previewing the site to test it out locally.",
+  "search.devWarning": "Die Suche ist nur in Produktions-Builds verfügbar. \nVersuchen Sie, die Seite zu bauen und in der Vorschau anzusehen, um sie lokal zu testen.",
   "themeSelect.accessibleLabel": "Farbschema wählen",
   "themeSelect.dark": "Dunkel",
   "themeSelect.light": "Hell",
