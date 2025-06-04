@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Decoded | Relationship Insights for Every Stage</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #5f27cd;
+            --light: #f9f7f7;
+            --dark: #333;
+            --accent: #ff9ff3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .email-signup {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .email-signup input {
+            flex-grow: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+        }
+        
+        .email-signup button {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        /* Featured Posts */
+        .featured-posts {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: var(--secondary);
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .post-image {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .post-content {
+            padding: 20px;
+        }
+        
+        .post-category {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .post-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .post-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more:after {
+            content: "→";
+            margin-left: 5px;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+            background-color: #f0f0f0;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .category-card {
+            background: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .category-card:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .category-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .category-name {
+            font-weight: 600;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .about-text {
+            margin-bottom: 30px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .author-name {
+            font-weight: 600;
+        }
+        
+        .author-title {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-content {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .buy-button {
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        /* Email Subscription */
+        .subscribe {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .subscribe-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .subscribe-text {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-links a {
+            display: block;
+            color: #ddd;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .posts-grid, .categories-grid, .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .posts-grid, .categories-grid, .products-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Love<span>Decoded</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Articles</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#" class="cta-button">Subscribe</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Navigate Love's Journey Together</h1>
+            <p>Expert advice, real stories, and actionable insights for every stage of your relationship – from first dates to forever after.</p>
+            <div class="email-signup">
+                <input type="email" placeholder="Enter your email for weekly love insights">
+                <button>Join Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Posts -->
+    <section class="featured-posts container">
+        <h2 class="section-title">Latest Insights</h2>
+        <div class="posts-grid">
+            <div class="post-card">
+                <div class="post-image">Featured Post Image</div>
+                <div class="post-content">
+                    <span class="post-category">Dating</span>
+                    <h3 class="post-title">5 Communication Secrets Happy Couples Know</h3>
+                    <p class="post-excerpt">Discover the proven techniques that help couples maintain clear, loving communication even during conflicts...</p>
+                    <a href="#" class="read-more">Read Article</a>
+                </div>
+            </div>
+            <div class="post-card">
+                <div class="post-image">Featured Post Image</div>  
+                <div class="post-content">
+                    <span class="post-category">Intimacy</span>
+                    <h3 class="post-title">Rekindling Passion: Beyond the Honeymoon Phase</h3>
+                    <p class="post-excerpt">Long-term relationships require intentional romance. Here's how to keep the spark alive year after year...</p>
+                    <a href="#" class="read-more">Read Article</a>
+                </div>
+            </div>
+            <div class="post-card">
+                <div class="post-image">Featured Post Image</div>
+                <div class="post-content">
+                    <span class="post-category">Personal Growth</span>
+                    <h3 class="post-title">Loving Yourself First: The Foundation of Healthy Relationships</h3>
+                    <p class="post-excerpt">Why self-love isn't selfish, and how developing a strong relationship with yourself transforms your connections...</p>
+                    <a href="#" class="read-more">Read Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Explore Relationship Topics</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">❤️</div>
+                    <div class="category-name">Dating & Romance</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💬</div>
+                    <div class="category-name">Communication</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🔥</div>
+                    <div class="category-name">Intimacy</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🧠</div>
+                    <div class="category-name">Psychology</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💔</div>
+                    <div class="category-name">Conflict Resolution</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🏡</div>
+                    <div class="category-name">Family Dynamics</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💯</div>
+                    <div class="category-name">Personal Growth</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💍</div>
+                    <div class="category-name">Long-term Commitment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about container">
+        <div class="about-image">Author Image</div>
+        <div class="about-content">
+            <h2 class="about-title">Meet Your Relationship Guide</h2>
+            <p class="about-text">Hi! I'm Jessica Palmer, a certified relationship coach with over 10 years of experience helping couples transform their relationships. After working with hundreds of couples and conducting extensive research in relationship psychology, I created Love Decoded to share practical, evidence-based advice that actually works.</p>
+            <p class="about-text">My approach combines the latest research in attachment theory, neuroscience, and positive psychology with real-world experience to help you create the relationship you deserve.</p>
+            <a href="#" class="cta-button">Learn More About Me</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Reader Success Stories</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The conflict resolution techniques from Jessica's blog completely transformed how my partner and I handle disagreements. We haven't had a major fight in months!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div>
+                            <div class="author-name">Michael T.</div>
+                            <div class="author-title">Reader for 2 years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"After 12 years of marriage, I thought passion was just supposed to fade. The intimacy exercises from Love Decoded helped us rediscover each other in ways I never thought possible."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <div class="author-name">Sarah K.</div>
+                            <div class="author-title">Premium Member</div>
+                        </div>
+                    </div>
+                </div>we
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Jessica's dating advice helped me recognize my patterns of choosing unavailable partners. Now I'm in the healthiest relationship of my life!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div>
+                            <div class="author-name">Aisha J.</div>
+                            <div class="author-title">Workshop Participant</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The weekly newsletter has be
