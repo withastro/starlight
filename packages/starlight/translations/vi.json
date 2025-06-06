@@ -18,7 +18,7 @@
   "page.lastUpdated": "Cập nhật lần cuối:",
   "page.previousLink": "Tiếp",
   "page.nextLink": "Trước",
-  "page.draft": "This content is a draft and will not be included in production builds.",
+  "page.draft": "Nội dung này là bản nháp và sẽ không được đưa vào xuất bản chính thức.",
   "404.text": "Không tìm thấy trang. Kiểm tra URL hoặc thử sử dụng thanh tìm kiếm.",
   "aside.note": "Ghi chú",
   "aside.tip": "Mẹo",
@@ -26,5 +26,5 @@
   "aside.danger": "Nguy hiểm",
   "fileTree.directory": "Danh mục",
   "builtWithStarlight.label": "Tạo với Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "heading.anchorLabel": "Phần có tiêu đề “{{title}}”"
 }
