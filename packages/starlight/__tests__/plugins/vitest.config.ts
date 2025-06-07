@@ -16,7 +16,7 @@ export default defineVitestConfig({
 			hooks: {
 				'config:setup'({ config, updateConfig }) {
 					updateConfig({
-						title: `${config.title} - Custom`,
+						title: `${typeof config.title === 'string' ? config.title : ''} - Custom`,
 						description: 'plugin 1',
 						/**
 						 * The configuration received by a plugin should be the user provided configuration as-is

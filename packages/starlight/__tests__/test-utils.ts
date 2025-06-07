@@ -30,7 +30,7 @@ function mockDoc(
 	body = ''
 ): StarlightDocsCollectionEntry {
 	const slug = docsFilePath
-		.replace(/\.[^\.]+$/, '')
+		.replace(/\.[^.]+$/, '')
 		.replace(/\s/, '-')
 		.replace(/\/index$/, '')
 		.toLowerCase();
