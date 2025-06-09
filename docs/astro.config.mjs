@@ -105,6 +105,10 @@ export default defineConfig({
 					autogenerate: { directory: 'axal-points' },
 				},
 				{
+					label: 'Referrals',
+					autogenerate: { directory: 'referrals' },
+				},
+				{
 					label: 'Autopilot',
 					autogenerate: { directory: 'autopilot' },
 				},
