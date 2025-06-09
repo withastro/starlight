@@ -11,6 +11,9 @@ importers:
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
+      pnpm:
+        specifier: ^10.12.1
+        version: 10.12.1
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.4
@@ -3218,6 +3221,11 @@ packages:
   playwright@1.45.0:
     resolution: {integrity: sha512-4z3ac3plDfYzGB6r0Q3LF8POPR20Z8D0aXcxbJvmfMgSSq1hkcgvFRXJk9rUq5H/MJ0Ktal869hhOdI/zUTeLA==}
     engines: {node: '>=18'}
+    hasBin: true
+
+  pnpm@10.12.1:
+    resolution: {integrity: sha512-8N2oWA8O6UgcXHmh2Se5Fk8sR46QmSrSaLuyRlpzaYQ5HWMz0sMnkTV4soBK8zR0ylVLopwEqLEwYKcXZ1rjrA==}
+    engines: {node: '>=18.12'}
     hasBin: true
 
   postcss-nested@6.0.1:
@@ -7663,6 +7671,8 @@ snapshots:
       playwright-core: 1.45.0
     optionalDependencies:
       fsevents: 2.3.2
+
+  pnpm@10.12.1: {}
 
   postcss-nested@6.0.1(postcss@8.5.3):
     dependencies:

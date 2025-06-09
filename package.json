@@ -56,6 +56,7 @@
     }
   },
   "dependencies": {
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "pnpm": "^10.12.1"
   }
 }
