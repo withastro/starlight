@@ -182,7 +182,7 @@ yarn create astro --template starlight/tailwind
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-4.  Обновите конфигурацию Starlight для использования файла CSS Tailwind:
+4.  Обновите конфигурацию Starlight, добавив файл Tailwind CSS как первый элемент массива `customCss`:
 
     ```js ins={11-12}
     // astro.config.mjs
