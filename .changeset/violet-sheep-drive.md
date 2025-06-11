@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Adds missing translations in `translations/de.json`
+Updates German UI translations
