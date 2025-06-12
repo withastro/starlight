@@ -218,7 +218,7 @@ describe('translated labels in French', async () => {
 Some text
 :::
 `,
-      { fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
+      new URL('./_src/content/docs/fr/index.md', import.meta.url)
     );
     expect(res.code).includes(`aria-label="${label}"`);
     expect(res.code).includes(`</svg>${label}</p>`);
@@ -277,7 +277,7 @@ test('does not add any whitespace character after any unhandled directive', asyn
 
 test('lets remark plugin injected by Starlight plugins handle text and leaf directives', async () => {
   const starlightConfig = StarlightConfigSchema.parse({
-    title: 'Asides Tests',
+    title,
     locales: { en: { label: 'English' }, fr: { label: 'French' } },
     defaultLocale: 'en',
   } satisfies StarlightUserConfig);
@@ -298,7 +298,6 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
   }
 
   const { renderMarkdown } = await createMarkdownTestHelper({
-    userConfig: { title },
     astroMarkdownOptions,
     remarkPlugins: [
       ...starlightAsides({
@@ -336,7 +335,7 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 
 test('does not transform back directive nodes with data', async () => {
   const starlightConfig = StarlightConfigSchema.parse({
-    title: 'Asides Tests',
+    title,
     locales: { en: { label: 'English' }, fr: { label: 'French' } },
     defaultLocale: 'en',
   } satisfies StarlightUserConfig);
@@ -357,7 +356,6 @@ test('does not transform back directive nodes with data', async () => {
   }
 
   const { renderMarkdown } = await createMarkdownTestHelper({
-    userConfig: { title },
     astroMarkdownOptions,
     remarkPlugins: [
       ...starlightAsides({

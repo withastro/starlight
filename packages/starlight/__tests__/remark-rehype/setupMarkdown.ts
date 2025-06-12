@@ -1,4 +1,4 @@
-import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import { createMarkdownProcessor, type MarkdownProcessorRenderOptions } from '@astrojs/markdown-remark';
 import { starlightAutolinkHeadings } from '../../integrations/heading-links';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
@@ -16,7 +16,7 @@ export async function createMarkdownTestHelper({
   userConfig?: Partial<StarlightUserConfig>;
   remarkPlugins?: any[] | undefined;
   rehypePlugins?: any[] | undefined;
-    astroMarkdownOptions: AstroMarkdownOptions;
+  astroMarkdownOptions: AstroMarkdownOptions;
 }) {
   const starlightConfig = StarlightConfigSchema.parse({
     title: 'Markdown render Tests',
@@ -75,17 +75,9 @@ export async function createMarkdownTestHelper({
 
   function renderMarkdown(
     content: string,
-    options: { fileURL?: URL } = {}
+    fileURL?: URL
   ) {
-    return processor.render(
-      content,
-      {
-        // @ts-expect-error fileURL is part of MarkdownProcessor's options
-        fileURL:
-          options.fileURL ??
-          new URL(`./_src/content/docs/index.md`, import.meta.url),
-      }
-    );
+    return processor.render(content, { fileURL } as unknown as MarkdownProcessorRenderOptions);
   }
 
   return { renderMarkdown, starlightConfig, processor };
