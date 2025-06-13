@@ -7,7 +7,7 @@ description: 了解 Starlight 如何帮助你构建更环保的文档站点并�
 计算网站生态影响的因素很多，但本指南包含了一些减少文档站点环境足迹的技巧。
 
 好消息是，选择 Starlight 是一个很好的开始。
-根据网站碳计算器的数据，本站点[比 99% 的网页更环保][sl-carbon]，每个页面访问产生 0.01g 的 CO₂。
+根据网站碳计算器的数据，本站点[比 98% 的网页更环保][sl-carbon]，每个页面访问产生 0.01g 的 CO₂。
 
 ## 页面大小
 
@@ -92,25 +92,29 @@ Cache-Control: public, max-age=604800, immutable
 | 框架                        | 每页访问量产生的 CO₂ | 评级 |
 | --------------------------- | -------------------- | :--: |
 | [Starlight][sl-carbon]      | 0.01g                |  A+  |
-| [Read the Docs][rtd-carbon] | 0.05g                |  A+  |
-| [Sphinx][sx-carbon]         | 0.06g                |  A+  |
+| [Read the Docs][rtd-carbon] | 0.07g                |  A+  |
+| [Sphinx][sx-carbon]         | 0.07g                |  A+  |
 | [VitePress][vp-carbon]      | 0.07g                |  A+  |
-| [Docus][dc-carbon]          | 0.09g                |  A+  |
-| [docsify][dy-carbon]        | 0.10g                |  A   |
-| [Nextra][nx-carbon]         | 0.11g                |  A   |
-| [MkDocs][mk-carbon]         | 0.19g                |  B   |
-| [Docusaurus][ds-carbon]     | 0.21g                |  B   |
-| [GitBook][gb-carbon]        | 0.43g                |  C   |
-| [Mintlify][mt-carbon]       | 1.22g                |  F   |
+| [Docus][dc-carbon]          | 0.10g                |  A   |
+| [docsify][dy-carbon]        | 0.11g                |  A   |
+| [mdBook][md-carbon]         | 0.13g                |  A   |
+| [MkDocs][mk-carbon]         | 0.15g                |  A   |
+| [Fumadocs][fs-carbon]       | 0.16g                |  A   |
+| [Nextra][nx-carbon]         | 0.16g                |  A   |
+| [Docusaurus][ds-carbon]     | 0.25g                |  B   |
+| [Mintlify][mt-carbon]       | 0.99g                |  F   |
+| [GitBook][gb-carbon]        | 1.19g                |  F   |
 
-<small>数据收集于 2024 年 7 月 22 日。点击链接查看最新数据。</small>
+<small>数据收集于 2025 年 4 月 12 日。点击链接查看最新数据。</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
 [dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
+[md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/

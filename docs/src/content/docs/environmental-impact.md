@@ -7,7 +7,7 @@ Estimates for the climate impact of the web industry range from between [2%][sf]
 There are many complex factors in calculating the ecological impact of a website, but this guide includes a few tips for reducing the environmental footprint of your docs site.
 
 The good news is, choosing Starlight is a great start.
-According to the Website Carbon Calculator, this site is [cleaner than 99% of web pages tested][sl-carbon], producing 0.01g of CO₂ per page visit.
+According to the Website Carbon Calculator, this site is [cleaner than 98% of web pages tested][sl-carbon], producing 0.01g of CO₂ per page visit.
 
 ## Page weight
 
