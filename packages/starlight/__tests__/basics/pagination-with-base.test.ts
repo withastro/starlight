@@ -16,7 +16,7 @@ vi.mock('astro:content', async () =>
 	})
 );
 
-describe('without base', async () => {
+describe('without base', () => {
 	let getPrevNextLinks: typeof getPrevNextLinksType;
 	let getSidebar: typeof getSidebarType;
 	let sidebar: ReturnType<typeof getSidebar>;
