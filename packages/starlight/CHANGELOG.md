@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.34.4
+
+### Patch Changes
+
+- [#3205](https://github.com/withastro/starlight/pull/3205) [`95d124a`](https://github.com/withastro/starlight/commit/95d124ae99f207afd83f305943fa29df32cbbfc9) Thanks [@sgalcheung](https://github.com/sgalcheung)! - Fixes an issue preventing to use the `<StarlightPage>` component when the `docs` content collection that Starlight uses does not exist.
+
+- [#3206](https://github.com/withastro/starlight/pull/3206) [`e6ea584`](https://github.com/withastro/starlight/commit/e6ea5848b20afbb654fd6684956336491b974dc7) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a text selection issue for heading with a clickable anchor link when using double click to select text in Chrome and Safari.
+
+- [#3233](https://github.com/withastro/starlight/pull/3233) [`3064c40`](https://github.com/withastro/starlight/commit/3064c40b54227b6309b35b6e44e397fae8f284a4) Thanks [@torn4dom4n](https://github.com/torn4dom4n)! - Updates Vietnamese UI translations.
+
+- [#3248](https://github.com/withastro/starlight/pull/3248) [`16c1239`](https://github.com/withastro/starlight/commit/16c1239b36346e84b794fab819d6ad7a9854a244) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Prevents [icons in the `<Card>` component](https://starlight.astro.build/components/cards/#add-icons-to-cards) from being shrunk in some narrow viewports.
+
+- [#3225](https://github.com/withastro/starlight/pull/3225) [`21b93b8`](https://github.com/withastro/starlight/commit/21b93b8ac1894c5ada99a641e516086ebee6ea37) Thanks [@randomguy-2650](https://github.com/randomguy-2650)! - Updates German UI translations
+
 ## 0.34.3
 
 ### Patch Changes
