@@ -610,3 +610,17 @@ test('fails to parse an image without the expected metadata properties', async (
 			> Received \`{}\`"
 	`);
 });
+
+test('adds data to route shape when the `docs` collection is not defined', async () => {
+  // Mock the collection config in this test to simulate the absence of the `docs` collection.
+  vi.doMock('virtual:starlight/collection-config', () => ({ collections: {} }));
+
+  const data = await generateStarlightPageRouteData({
+    props: starlightPageProps,
+    context: getRouteDataTestContext(starlightPagePathname),
+  });
+  expect(data.entry.data.title).toBe(starlightPageProps.frontmatter.title);
+
+  // Undo the mock to restore the original behavior.
+  vi.doUnmock('virtual:starlight/collection-config');
+});
