@@ -1,0 +1,125 @@
+header class="bg-gray-800 p-6 shadow-lg flex flex-col md:flex-row justify-between items-center">
+  <div class="flex items-center space-x-4">
+    <div class="text-3xl font-extrabold text-green-400 tracking-wide">
+      📊 TRADING <span class="text-purple-400">YOU</span>
+    </div>
+    <span class="text-sm text-gray-400">Potencia tu futuro financiero</span>
+  </div>
+  <div class="mt-4 md:mt-0">
+    <a href="#contacto" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-xl">Contacto</a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-indigo-700 to-purple-900 p-10 text-center">
+    <h2 class="text-4xl font-bold mb-4">Explora todos los mercados financieros desde un solo lugar</h2>
+    <p class="text-lg mb-6">Forex, Índices, Criptomonedas, Commodities - Apalancamiento hasta 1:200</p>
+    <div class="flex flex-col md:flex-row justify-center gap-4">
+      <a href="#formularioCuenta" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl">Abrir Cuenta Real</a>
+      <a href="#formularioCuenta" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-xl">Probar Cuenta Demo</a>
+    </div>
+  </section>
+
+  <!-- Mercados Disponibles -->
+  <section class="p-10">
+    <h2 class="text-3xl font-bold mb-6 text-center">Mercados en Tiempo Real</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-800 p-5 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">Forex</h3>
+        <p class="text-sm text-gray-400 mb-4">Apalancamiento: 1:200</p>
+        <div id="forex-chart"></div>
+      </div>
+      <div class="bg-gray-800 p-5 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">Índices</h3>
+        <p class="text-sm text-gray-400 mb-4">S&P 500, NASDAQ, DAX</p>
+        <div id="indices-chart"></div>
+      </div>
+      <div class="bg-gray-800 p-5 rounded-xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">Criptomonedas</h3>
+        <p class="text-sm text-gray-400 mb-4">BTC/USD, ETH/USD, XRP/USD</p>
+        <div id="crypto-chart"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Herramientas Profesionales -->
+  <section class="p-10 bg-gray-800">
+    <h2 class="text-3xl font-bold mb-6 text-center">Herramientas Profesionales</h2>
+    <div class="grid md:grid-cols-2 gap-6 text-lg">
+      <div>📈 Gráficos en vivo con TradingView</div>
+      <div>🔔 Alertas y notificaciones inteligentes</div>
+      <div>📅 Calendario económico en tiempo real</div>
+      <div>📊 Señales de trading diario</div>
+    </div>
+  </section>
+
+  <!-- Formulario para Abrir Cuenta -->
+  <section id="formularioCuenta" class="p-10">
+    <h2 class="text-3xl font-bold text-center mb-6">Abre tu Cuenta de Trading</h2>
+    <form class="max-w-xl mx-auto grid gap-4">
+      <input class="p-3 rounded bg-gray-800 border border-gray-600" type="text" placeholder="Nombre completo" required />
+      <input class="p-3 rounded bg-gray-800 border border-gray-600" type="email" placeholder="Correo electrónico" required />
+      <input class="p-3 rounded bg-gray-800 border border-gray-600" type="tel" placeholder="Teléfono" />
+      <select class="p-3 rounded bg-gray-800 border border-gray-600">
+        <option>Tipo de Cuenta</option>
+        <option>Real</option>
+        <option>Demo</option>
+      </select>
+      <textarea class="p-3 rounded bg-gray-800 border border-gray-600" rows="4" placeholder="Mensaje adicional (opcional)"></textarea>
+      <button class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-xl">Enviar solicitud</button>
+    </form>
+  </section>
+
+  <!-- Contacto y WhatsApp -->
+  <section id="contacto" class="p-10 bg-gray-800 text-center">
+    <h2 class="text-2xl font-bold mb-4">¿Tienes preguntas?</h2>
+    <p class="mb-4">Contáctanos vía correo o WhatsApp, estamos para ayudarte.</p>
+    <div class="flex justify-center gap-4">
+      <a href="mailto:info@tradingyou.com" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Correo</a>
+      <a href="https://wa.me/18497011169" target="_blank" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-gray-900 text-center py-6 border-t border-gray-700 text-sm">
+  <div class="mb-2">
+    <a href="#" class="text-gray-400 hover:text-white mx-2">Instagram</a>
+    <a href="#" class="text-gray-400 hover:text-white mx-2">Facebook</a>
+    <a href="#" class="text-gray-400 hover:text-white mx-2">LinkedIn</a>
+  </div>
+  <p class="text-gray-500">&copy; 2025 TRADING YOU. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  new TradingView.widget({
+    container_id: "forex-chart",
+    symbol: "OANDA:EURUSD",
+    interval: "30",
+    theme: "dark",
+    style: "1",
+    locale: "es",
+    width: "100%",
+    height: 300
+  });
+  new TradingView.widget({
+    container_id: "indices-chart",
+    symbol: "NASDAQ:NDX",
+    interval: "30",
+    theme: "dark",
+    style: "1",
+    locale: "es",
+    width: "100%",
+    height: 300
+  });
+  new TradingView.widget({
+    container_id: "crypto-chart",
+    symbol: "BINANCE:BTCUSDT",
+    interval: "30",
+    theme: "dark",
+    style: "1",
+    locale: "es",
+    width: "100%",
+    height: 300
+  });
+</script>
