@@ -81,7 +81,6 @@ Diese Komponente muss als erstes in deine Datei importiert werden, um [Kaskadens
 
 Um Ankerlinks zu Überschriften hinzuzufügen, die den Markdown-Ankerlinkstilen von Starlight entsprechen, kannst du die [`<AnchorHeading>`-Komponente](#anchorheading-komponente) in deinen eigenen Seiten verwenden.
 
-{/* prettier-ignore-start */}
 ```astro
 ---
 // src/pages/custom-page/example.astro
@@ -94,16 +93,20 @@ import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: 'Meine eigene Seite' }}>
-	<p>Dies ist eine benutzerdefinierte Seite mit einer benutzerdefinierten Komponente:</p>
+	<p>
+		Dies ist eine benutzerdefinierte Seite mit einer benutzerdefinierten
+		Komponente:
+	</p>
 	<CustomComponent />
 
 	<AnchorHeading level="2" id="erfahre-menr">Erfahre mehr</AnchorHeading>
 	<p>
-		<a href="https://starlight.astro.build/">Lies mehr in der Starlight-Dokumentation</a>
+		<a href="https://starlight.astro.build/">
+			Lies mehr in der Starlight-Dokumentation
+		</a>
 	</p>
 </StarlightPage>
 ```
-{/* prettier-ignore-end */}
 
 #### `<StarlightPage>`-Komponente
 
