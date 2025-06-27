@@ -7,7 +7,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Starlight génère les pages HTML de votre site en fonction de votre contenu, avec des options flexibles fournies par le biais du frontmatter en Markdown.
+Starlight génère les pages HTML de votre site en fonction de votre contenu, avec des options flexibles fournies via le frontmatter du fichier Markdown.
 En outre, les projets Starlight bénéficient d'un accès complet aux [puissants outils de génération de pages d'Astro](https://docs.astro.build/fr/basics/astro-pages/).
 Ce guide montre comment fonctionne la génération de pages dans Starlight.
 
@@ -40,7 +40,7 @@ import { FileTree } from '@astrojs/starlight/components';
 
 ### Frontmatter avec sûreté du typage
 
-Toutes les pages Starlight partagent un [ensemble commun de propriétés du frontmatter](/fr/reference/frontmatter/) personnalisable qui permet de contrôler l'apparence de la page :
+Toutes les pages Starlight partagent un [ensemble commun de propriétés de frontmatter](/fr/reference/frontmatter/) personnalisable pour contrôler l'apparence de la page :
 
 ```md
 ---
@@ -54,8 +54,8 @@ Si vous oubliez quelque chose d'important, Starlight vous le fera savoir.
 ## Pages personnalisées
 
 Pour les cas d'utilisation avancés, vous pouvez ajouter des pages personnalisées en créant un répertoire `src/pages/`.
-Le répertoire `src/pages/` utilise le [routage basé sur les fichiers d'Astro](https://docs.astro.build/fr/basics/astro-pages/#routage-basé-sur-les-fichiers) et inclut le support des fichiers `.astro` parmi d'autres formats de pages.
-Ceci est utile si vous avez besoin de construire des pages avec une mise en page complètement personnalisée ou de générer une page à partir d'une source de données alternative.
+Le répertoire `src/pages/` utilise le [routage basé sur les fichiers d'Astro](https://docs.astro.build/fr/basics/astro-pages/#routage-basé-sur-les-fichiers) et inclut la prise en charge des fichiers `.astro` parmi d'autres formats de pages.
+Ceci est utile si vous avez besoin de créer des pages avec une mise en page complètement personnalisée ou de générer une page à partir d'une source de données alternative.
 
 Par exemple, ce projet mélange du contenu Markdown dans `src/content/docs/` avec des routes Astro et HTML dans `src/pages/` :
 
@@ -75,15 +75,19 @@ Pour en savoir plus, consultez le guide [« Pages » dans la documentation d'Ast
 
 ### Utiliser le design de Starlight dans des pages personnalisées
 
-Pour utiliser la mise en page Starlight dans des pages personnalisées, englobez le contenu de votre page avec le [composant `<StarlightPage />`](#composant-starlightpage).
+Pour utiliser la mise en page de Starlight dans des pages personnalisées, englobez le contenu de votre page avec le [composant `<StarlightPage />`](#composant-starlightpage).
 Cela peut s'avérer utile si vous générez du contenu de manière dynamique, mais que vous souhaitez tout de même utiliser le design de Starlight.
+Ce composant doit être la première importation dans votre fichier pour configurer les [couches de cascade](/fr/guides/css-and-tailwind/#couche-de-cascade) et garantir un ordre prévisible pour le CSS.
 
 Pour ajouter des liens d'ancrage vers des en-têtes avec une apparence équivalente aux liens d'ancrage Markdown de Starlight, vous pouvez utiliser le [composant `<AnchorHeading>`](#composant-anchorheading) dans vos pages personnalisées.
 
 ```astro
 ---
 // src/pages/page-perso/exemple.astro
+// Importer le composant `<StarlightPage>` en premier pour configurer les couches de cascade.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+// Importer tous les autres composants que vous souhaitez utiliser dans votre page personnalisée.
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
@@ -94,9 +98,7 @@ import CustomComponent from './CustomComponent.astro';
 
 	<AnchorHeading level="2" id="en-savoir-plus">En savoir plus</AnchorHeading>
 	<p>
-		<a href="https://starlight.astro.build/">
-			Consulter la documentation de Starlight
-		</a>
+		<a href="https://starlight.astro.build/">Consulter la documentation de Starlight</a>
 	</p>
 </StarlightPage>
 ```
@@ -107,6 +109,7 @@ Le composant `<StarlightPage />` affiche une page complète de contenu en utilis
 
 ```astro
 ---
+// Importer le composant `<StarlightPage>` en premier pour configurer les couches de cascade.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
@@ -114,6 +117,8 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 	<!-- Contenu de la page personnalisée -->
 </StarlightPage>
 ```
+
+En raison du fonctionnement de [l'ordre d'importation](https://docs.astro.build/fr/guides/styling/#ordre-dimportation) dans Astro, le composant `<StarlightPage />` doit être la première importation dans votre fichier pour configurer les [couches de cascade](/fr/guides/css-and-tailwind/#couche-de-cascade) utilisées en interne par Starlight pour gérer l'ordre de ses styles.
 
 Le composant `<StarlightPage />` accepte les props suivantes.
 
@@ -125,9 +130,9 @@ Le composant `<StarlightPage />` accepte les props suivantes.
 Définit les [propriétés du frontmatter](/fr/reference/frontmatter/) pour cette page, similaire au frontmatter dans les pages Markdown.
 La propriété [`title`](/fr/reference/frontmatter/#title-obligatoire) est obligatoire et toutes les autres propriétés sont optionnelles.
 
-Les propriétés suivantes diffèrent du frontmatter en Markdown :
+Les propriétés suivantes diffèrent du frontmatter des fichiers Markdown :
 
-- La propriété [`slug`](/fr/reference/frontmatter/#slug) n'est pas supportée et est automatiquement définie en fonction de l'URL de la page personnalisée.
+- La propriété [`slug`](/fr/reference/frontmatter/#slug) n'est pas prise en charge et est automatiquement définie en fonction de l'URL de la page personnalisée.
 - L'option [`editUrl`](/fr/reference/frontmatter/#editurl) nécessite une URL pour afficher un lien d'édition.
 - La propriété [`sidebar`](/fr/reference/frontmatter/#sidebar) du frontmatter permettant de personnaliser l'affichage de la page dans les [groupes de liens autogénérés](/fr/reference/configuration/#sidebar) n'est pas disponible. Les pages utilisant le composant `<StarlightPage />` ne font pas partie d'une collection et ne peuvent pas être ajoutées à un groupe de liens autogénérés.
 - L'option [`draft`](/fr/reference/frontmatter/#draft) affiche uniquement une [note](/fr/reference/overrides/#draftcontentnotice) indiquant que la page est une ébauche, mais ne l'exclut pas automatiquement des déploiements en production.
@@ -179,8 +184,8 @@ Contrôle l'affichage ou non de la barre latérale sur cette page.
 **Type :** `{ depth: number; slug: string; text: string }[]`  
 **Par défaut :** `[]`
 
-Fournit un tableau de tous les titres de cette page.
-Starlight générera la table des matières de la page à partir de ces titres s'ils sont fournis.
+Fournit un tableau de tous les en-têtes de cette page.
+Starlight générera la table des matières de la page à partir de ces en-têtes s'ils sont fournis.
 
 ##### `dir`
 
