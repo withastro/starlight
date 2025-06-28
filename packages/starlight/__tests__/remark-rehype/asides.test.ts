@@ -126,6 +126,78 @@ Some text
 	);
 });
 
+const testCustomIcons = async (type: string) => {
+	const res = await processor.render(`
+:::${type}{icon="heart"}
+Some text
+:::
+  `);
+	await expect(res.code).toMatchFileSnapshot(
+		`./snapshots/generates-aside-${type}-custom-icon.html`
+	);
+
+	await expect(async () =>
+		processor.render(
+			`
+:::${type}{icon="invalid-icon-name"}
+Some text
+:::
+	`
+		)
+	).rejects.toThrowErrorMatchingInlineSnapshot(
+		`
+			"[AstroUserError]:
+				Failed to parse Markdown file "undefined":
+				Invalid aside icon
+			Hint:
+				An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`invalid-icon-name\`.
+				
+				See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons."
+			`
+	);
+};
+
+describe('custom icons', () => {
+	// We cannot use test.each here since toThrowErrorMatchingInlineSnapshot
+	// cannot be used inside test.each.
+	// See: https://github.com/vitest-dev/vitest/issues/3329
+	test('note with custom icons', async () => testCustomIcons('note'));
+	test('tip with custom icons', async () => testCustomIcons('tip'));
+	test('caution with custom icons', async () => testCustomIcons('caution'));
+	test('danger with custom icons', async () => testCustomIcons('danger'));
+
+	test('test icon with multiple paths inside the svg', async () => {
+		const res = await processor.render(`
+:::note{icon="external"}
+Some text
+:::
+  `);
+		await expect(res.code).toMatchFileSnapshot(
+			`./snapshots/generates-aside-note-multiple-path-custom-icon.html`
+		);
+		const pathCount = (res.code.match(/path/g) || []).length;
+		// If we have two pairs of opening and closing tags of path,
+		// we will have 4 occurences of that word.
+		expect(pathCount).eq(4);
+	});
+});
+
+describe('custom labels with custom icons', () => {
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom label', async (type) => {
+		const label = 'Custom Label';
+		const res = await renderMarkdown(`
+:::${type}[${label}]{icon="heart"}
+Some text
+:::
+  `);
+		expect(res.code).includes(`aria-label="${label}"`);
+		expect(res.code).includes(`</svg>${label}</p>`);
+		await expect(res.code).toMatchFileSnapshot(
+			`./snapshots/generates-aside-${type}-custom-label-and-icon.html`
+		);
+	});
+});
+
 test('ignores unknown directive variants', async () => {
 	const res = await renderMarkdown(`
 :::unknown
