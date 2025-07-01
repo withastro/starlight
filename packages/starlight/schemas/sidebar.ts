@@ -14,6 +14,14 @@ const SidebarBaseSchema = z.object({
 });
 
 const SidebarGroupSchema = SidebarBaseSchema.extend({
+	/**
+	 * Explicitly prevent custom attributes on groups as the final type for supported sidebar item
+	 * is a non-discriminated union where TypeScript will not perform excess property checks.
+	 * This means that a user could define a sidebar group with custom attributes, not getting a
+	 * TypeScript error, and only have it fail at runtime.
+	 * @see https://github.com/microsoft/TypeScript/issues/20863
+	 */
+	attrs: z.never().optional(),
 	/** Whether this item should be collapsed by default. */
 	collapsed: z.boolean().default(false),
 });
