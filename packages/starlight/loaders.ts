@@ -6,6 +6,9 @@ import { getCollectionPathFromRoot, type StarlightCollection } from './utils/col
 const docsExtensions = ['markdown', 'mdown', 'mkdn', 'mkd', 'mdwn', 'md', 'mdx'];
 const i18nExtensions = ['json', 'yml', 'yaml'];
 
+/**
+ * Loads content files from the `src/content/docs/` directory, ignoring filenames starting with `_`.
+ */
 export function docsLoader({ generateId }: LoaderOptions = {}): Loader {
 	return {
 		name: 'starlight-docs-loader',
@@ -13,6 +16,9 @@ export function docsLoader({ generateId }: LoaderOptions = {}): Loader {
 	};
 }
 
+/**
+ * Loads data files from the `src/content/i18n/` directory, ignoring filenames starting with `_`.
+ */
 export function i18nLoader(): Loader {
 	return {
 		name: 'starlight-i18n-loader',
