@@ -361,13 +361,15 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			padding: 0;
 		}
 
-		#starlight__search .pagefind-ui__result-nested {
+		#starlight__search .pagefind-ui__result-nested,
+		#starlight__search .pagefind-ui__result-excerpt:not(:where(.pagefind-ui__result-nested *)) {
 			position: relative;
 			padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
 			padding-inline-start: var(--sl-search-result-pad-inline-start);
 		}
 
 		#starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
+		#starlight__search .pagefind-ui__result-excerpt:not(:where(.pagefind-ui__result-nested *)),
 		#starlight__search .pagefind-ui__result-nested {
 			position: relative;
 			background-color: var(--sl-color-black);
@@ -387,6 +389,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			background-color: var(--sl-color-accent-low);
 		}
 
+		#starlight__search .pagefind-ui__result-excerpt:not(:where(.pagefind-ui__result-nested *)),
 		#starlight__search .pagefind-ui__result-thumb,
 		#starlight__search .pagefind-ui__result-inner {
 			margin-top: 0;
@@ -435,6 +438,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			content: unset;
 		}
 
+		#starlight__search
+			.pagefind-ui__result-excerpt:not(:where(.pagefind-ui__result-nested *))::before,
 		#starlight__search .pagefind-ui__result-nested::before {
 			content: '';
 			position: absolute;
@@ -450,6 +455,18 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		#starlight__search .pagefind-ui__result-nested:last-of-type::before {
 			-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
+		}
+
+		#starlight__search
+			.pagefind-ui__result-excerpt:not(:where(.pagefind-ui__result-nested *))::before {
+			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000'/%3E%3C/svg%3E")
+				0% 0% / 100% no-repeat;
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000'/%3E%3C/svg%3E")
+				0% 0% / 100% no-repeat;
+		}
+		#starlight__search
+			.pagefind-ui__result-excerpt:not(:where(.pagefind-ui__result-nested *)):last-child::before {
+			content: unset;
 		}
 
 		/* Flip page and tree icons around the vertical axis when in an RTL layout. */
