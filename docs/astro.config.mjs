@@ -35,6 +35,8 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		starlight({
+			// TODO(HiDeoo) Remove
+			routeMiddleware: './src/routeData.ts',
 			title: 'Starlight',
 			logo: {
 				light: '/src/assets/logo-light.svg',
