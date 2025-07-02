@@ -6,10 +6,21 @@ import { getCollectionPathFromRoot, type StarlightCollection } from './utils/col
 const docsExtensions = ['markdown', 'mdown', 'mkdn', 'mkd', 'mdwn', 'md', 'mdx'];
 const i18nExtensions = ['json', 'yml', 'yaml'];
 
+type GlobOptions = Parameters<typeof glob>[0];
+type GenerateIdFunction = NonNullable<GlobOptions['generateId']>;
+
 /**
  * Loads content files from the `src/content/docs/` directory, ignoring filenames starting with `_`.
  */
-export function docsLoader({ generateId }: LoaderOptions = {}): Loader {
+export function docsLoader({
+	generateId,
+}: {
+	/**
+	 * Function that generates an ID for an entry. Default implementation generates a slug from the entry path.
+	 * @returns The ID of the entry. Must be unique per collection.
+	 **/
+	generateId?: GenerateIdFunction;
+} = {}): Loader {
 	return {
 		name: 'starlight-docs-loader',
 		load: createGlobLoadFn('docs', generateId),
@@ -49,14 +60,4 @@ function createGlobLoadFn(
 
 		return glob(options).load(context);
 	};
-}
-
-type GlobOptions = Parameters<typeof glob>[0];
-type GenerateIdFunction = NonNullable<GlobOptions['generateId']>;
-interface LoaderOptions {
-	/**
-	 * Function that generates an ID for an entry. Default implementation generates a slug from the entry path.
-	 * @returns The ID of the entry. Must be unique per collection.
-	 **/
-	generateId?: GenerateIdFunction;
 }
