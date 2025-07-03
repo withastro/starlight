@@ -6,13 +6,30 @@ import { getCollectionPathFromRoot, type StarlightCollection } from './utils/col
 const docsExtensions = ['markdown', 'mdown', 'mkdn', 'mkd', 'mdwn', 'md', 'mdx'];
 const i18nExtensions = ['json', 'yml', 'yaml'];
 
-export function docsLoader(): Loader {
+type GlobOptions = Parameters<typeof glob>[0];
+type GenerateIdFunction = NonNullable<GlobOptions['generateId']>;
+
+/**
+ * Loads content files from the `src/content/docs/` directory, ignoring filenames starting with `_`.
+ */
+export function docsLoader({
+	generateId,
+}: {
+	/**
+	 * Function that generates an ID for an entry. Default implementation generates a slug from the entry path.
+	 * @returns The ID of the entry. Must be unique per collection.
+	 **/
+	generateId?: GenerateIdFunction;
+} = {}): Loader {
 	return {
 		name: 'starlight-docs-loader',
-		load: createGlobLoadFn('docs'),
+		load: createGlobLoadFn('docs', generateId),
 	};
 }
 
+/**
+ * Loads data files from the `src/content/i18n/` directory, ignoring filenames starting with `_`.
+ */
 export function i18nLoader(): Loader {
 	return {
 		name: 'starlight-i18n-loader',
@@ -20,7 +37,10 @@ export function i18nLoader(): Loader {
 	};
 }
 
-function createGlobLoadFn(collection: StarlightCollection): Loader['load'] {
+function createGlobLoadFn(
+	collection: StarlightCollection,
+	generateId?: GenerateIdFunction
+): Loader['load'] {
 	return (context: LoaderContext) => {
 		const extensions = collection === 'docs' ? docsExtensions : i18nExtensions;
 
@@ -32,9 +52,12 @@ function createGlobLoadFn(collection: StarlightCollection): Loader['load'] {
 			extensions.push('mdoc');
 		}
 
-		return glob({
+		const options: GlobOptions = {
 			base: getCollectionPathFromRoot(collection, context.config),
 			pattern: `**/[^_]*.{${extensions.join(',')}}`,
-		}).load(context);
+		};
+		if (generateId) options.generateId = generateId;
+
+		return glob(options).load(context);
 	};
 }
