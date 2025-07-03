@@ -30,6 +30,9 @@ export default function rehypeAutolinkHeadings(
 	absolutePathToLang: AutolinkHeadingsOptions['absolutePathToLang']
 ) {
 	const transformer: Transformer<Root> = (tree, file) => {
+		// If the content is remote Markdown, skip it.
+		if (!file?.path) return;
+
 		// If the document is not part of the Starlight docs collection, skip it.
 		if (!normalizePath(file.path).startsWith(docsCollectionPath)) return;
 
