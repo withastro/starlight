@@ -716,6 +716,17 @@ import { docsLoader } from '@astrojs/starlight/loaders';
 By default, pages generated using `docsLoader()` process your file names using a sluggifier, which removes special characters and lowercases the file name.
 If you want to override this default, provide your own custom `generateId()` function.
 
+For example, this can be useful to preserve special characters that would be removed.
+By default, `Example.File.md` would be served at `/examplefile`.
+If you wanted to serve it at `/Example.File`, you could do so by defining a custom `generateId()` function:
+
+```js
+docsLoader({
+	// Remove the `.md` or `.mdx` extension, but otherwise don’t process filenames.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
 See [`generateId()` in the Astro docs](https://docs.astro.build/en/reference/content-loader-reference/#generateid) for more details.
 
 #### `i18nLoader()`
