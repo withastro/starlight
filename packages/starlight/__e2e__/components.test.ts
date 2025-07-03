@@ -409,6 +409,24 @@ test.describe('anchor headings', () => {
 });
 
 test.describe('asides', () => {
+	test('does not render Markdown asides for individual Markdown pages and entries not part of the `docs` collection', async ({
+		getProdServer,
+		page,
+	}) => {
+		const starlight = await getProdServer();
+
+		// Individual Markdown page
+		await starlight.goto('/markdown-page');
+		await expect(page.locator('.starlight-aside')).not.toBeAttached();
+		await page.pause();
+
+		// Content entry from the `reviews` content collection
+		await starlight.goto('/reviews/alice');
+		await expect(page.locator('.starlight-aside')).not.toBeAttached();
+	});
+});
+
+test.describe('RTL support', () => {
 	test('does not add RTL support to code and preformatted text elements for individual Markdown pages and entries not part of the `docs` collection', async ({
 		getProdServer,
 		page,
