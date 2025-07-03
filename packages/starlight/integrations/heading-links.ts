@@ -6,7 +6,7 @@ import { h } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import type { HookParameters, StarlightConfig } from '../types';
-import { resolveCollectionPath } from '../utils/collection';
+import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark-rehype-utils';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -30,11 +30,7 @@ export default function rehypeAutolinkHeadings(
 	absolutePathToLang: AutolinkHeadingsOptions['absolutePathToLang']
 ) {
 	const transformer: Transformer<Root> = (tree, file) => {
-		// If the content is remote Markdown, skip it.
-		if (!file?.path) return;
-
-		// If the document is not part of the Starlight docs collection, skip it.
-		if (!normalizePath(file.path).startsWith(docsCollectionPath)) return;
+		if (!shouldTransformFile(file, docsCollectionPath)) return;
 
 		const pageLang = absolutePathToLang(file.path);
 		const t = useTranslationsForLang(pageLang);
@@ -96,22 +92,12 @@ export const starlightAutolinkHeadings = ({
 					{ experimentalHeadingIdCompat: astroConfig.experimental?.headingIdCompat },
 				],
 				rehypeAutolinkHeadings(
-					normalizePath(resolveCollectionPath('docs', astroConfig.srcDir)),
+					getRemarkRehypeDocsCollectionPath(astroConfig.srcDir),
 					useTranslations,
 					absolutePathToLang
 				),
 			]
 		: [];
-
-/**
- * File path separators seems to be inconsistent on Windows when the rehype plugin is used on
- * Markdown vs MDX files.
- * For the time being, we normalize the path to unix style path.
- */
-const backSlashRegex = /\\/g;
-function normalizePath(path: string) {
-	return path.replace(backSlashRegex, '/');
-}
 
 // This utility is inlined from https://github.com/syntax-tree/hast-util-heading-rank
 // Copyright (c) 2020 Titus Wormer <tituswormer@gmail.com>
