@@ -182,7 +182,7 @@ If you already have a Starlight site and want to add Tailwind CSS, follow these 
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-    This Tailwind theme config defines Starlight [cascade layers](#cascade-layers) order, imports Starlight’s Tailwind complementary CSS, and imports Tailwind’s theme and utility styles.
+    This Tailwind theme config defines Starlight's [cascade layers](#cascade-layers) order, imports Starlight’s Tailwind complementary CSS, and imports Tailwind’s theme and utility styles.
     If your project requires additional Tailwind configuration, check out the [“Use multiple Tailwind configurations”](#use-multiple-tailwind-configurations) section.
 
 4.  Update the Starlight config to add the Tailwind CSS file as the first item in the `customCss` array:
@@ -264,7 +264,7 @@ If set, the following CSS custom properties will override Starlight’s default 
 
 When [creating a new Starlight project with Tailwind](#create-a-new-project-with-tailwind), or when [adding Tailwind to an existing Starlight project](#add-tailwind-to-an-existing-project), Starlight will use values from your [Tailwind theme config](https://tailwindcss.com/docs/theme) located in the `src/styles/global.css` file to style its UI.
 
-Additional theme config files can also be used to apply different configurations to different parts of your site, e.g. when [using Starlight at a subpath](/manual-setup/#use-starlight-at-a-subpath) or when adding [custom page](/guides/pages/#custom-pages) to your site, where you may want for example to use Tailwind’s Preflight reset styles that Starlight only use partially.
+Additional theme config files can also be used to apply different configurations to different parts of your site, e.g. when [using Starlight at a subpath](/manual-setup/#use-starlight-at-a-subpath) or when adding [custom pages](/guides/pages/#custom-pages) to your site, where you may want for example to use Tailwind’s Preflight reset styles that Starlight only use partially.
 
 When creating new Tailwind config CSS files, import them in the pages where you want this specific configuration to apply, which is often done in a layout component so that Tailwind styles can be used on all pages sharing that layout.
 
@@ -275,7 +275,7 @@ The following Tailwind theme config file is used to import Tailwind without any 
 @import 'tailwindcss';
 ```
 
-Such CSS file can then be imported in a layout component to apply Tailwind styles to all custom pages using that layout:
+Such a CSS file can then be imported in a layout component to apply Tailwind styles to all custom pages using that layout:
 
 ```astro
 ---
@@ -284,7 +284,7 @@ import '../styles/custom.css';
 ---
 ```
 
-To learn more about Tailwind theme config, check out the [Tailwind CSS documentation](https://tailwindcss.com/docs/theme).
+To learn more about Tailwind theme configurations, check out the [Tailwind CSS documentation](https://tailwindcss.com/docs/theme).
 
 ## Theming
 
