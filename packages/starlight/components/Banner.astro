@@ -2,7 +2,7 @@
 const { banner } = Astro.locals.starlightRoute.entry.data;
 ---
 
-{banner && <div class="sl-banner" set:html={banner.content} />}
+{banner && <div class="sl-banner" data-pagefind-ignore set:html={banner.content} />}
 
 <style>
 	@layer starlight.core {
