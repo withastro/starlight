@@ -86,3 +86,16 @@ test('localizes accessible label for the current language', async () => {
 	);
 	expect(res.code).includes('<span class="sr-only">Section intitulée « Some text »</span>');
 });
+
+test('does not generate anchor links for documents without a file path', async () => {
+	const res = await processor.render(
+		`
+## Some text
+`,
+		// Rendering Markdown content using the content loader `renderMarkdown()` API does not provide
+		// a `fileURL` option.
+		{}
+	);
+
+	expect(res.code).not.includes('Section titled');
+});

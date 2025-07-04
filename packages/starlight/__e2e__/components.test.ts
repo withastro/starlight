@@ -408,6 +408,41 @@ test.describe('anchor headings', () => {
 	});
 });
 
+test.describe('asides', () => {
+	test('does not render Markdown asides for individual Markdown pages and entries not part of the `docs` collection', async ({
+		getProdServer,
+		page,
+	}) => {
+		const starlight = await getProdServer();
+
+		// Individual Markdown page
+		await starlight.goto('/markdown-page');
+		await expect(page.locator('.starlight-aside')).not.toBeAttached();
+		await page.pause();
+
+		// Content entry from the `reviews` content collection
+		await starlight.goto('/reviews/alice');
+		await expect(page.locator('.starlight-aside')).not.toBeAttached();
+	});
+});
+
+test.describe('RTL support', () => {
+	test('does not add RTL support to code and preformatted text elements for individual Markdown pages and entries not part of the `docs` collection', async ({
+		getProdServer,
+		page,
+	}) => {
+		const starlight = await getProdServer();
+
+		// Individual Markdown page
+		await starlight.goto('/markdown-page');
+		await expect(page.locator('code[dir="auto"]')).not.toBeAttached();
+
+		// Content entry from the `reviews` content collection
+		await starlight.goto('/reviews/alice');
+		await expect(page.locator('code[dir="auto"]')).not.toBeAttached();
+	});
+});
+
 test.describe('head propagation', () => {
 	/**
 	 * Due to a head propagation issue in development mode, dynamic routes alphabetically sorted
