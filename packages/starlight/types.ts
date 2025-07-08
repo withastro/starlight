@@ -5,3 +5,4 @@ export type {
 	HookParameters,
 } from './utils/plugins';
 export type { StarlightIcon } from './components/Icons';
+import type { SidebarEntry } from './utils/routing/types';
