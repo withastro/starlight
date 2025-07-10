@@ -30,7 +30,7 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 // `Record<string, string | number | boolean | undefined>` but typed as `HTMLAttributes<'a'>`
 // for user convenience.
 const linkHTMLAttributesSchema = z.record(
-	z.union([z.string(), z.number(), z.boolean(), z.undefined()])
+	z.union([z.string(), z.number(), z.boolean(), z.undefined(), z.null()])
 ) as z.Schema<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>;
 export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
 

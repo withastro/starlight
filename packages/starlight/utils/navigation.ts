@@ -279,7 +279,7 @@ function linkFromRoute(route: Route, attrs?: LinkHTMLAttributes): SidebarLink {
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		route.entry.data.sidebar.badge,
-		Object.keys(route.entry.data.sidebar.attrs).length > 0 ? route.entry.data.sidebar.attrs : attrs
+		{ ...attrs, ...route.entry.data.sidebar.attrs }
 	);
 }
 

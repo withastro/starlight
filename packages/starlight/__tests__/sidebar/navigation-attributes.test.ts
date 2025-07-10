@@ -20,8 +20,12 @@ vi.mock('astro:content', async () =>
 			['api/v1/products/add.md', { title: 'Add Product' }],
 			[
 				'api/v1/products/remove.md',
-				// A page in the `api/v1/` directory can override default attributes using the frontmatter.
-				{ title: 'Remove Product', sidebar: { attrs: { class: 'deprecated' } } },
+				// A page in the `api/v1/` directory can specify custom attributes to be merged with the
+				// default ones.
+				{
+					title: 'Remove Product',
+					sidebar: { attrs: { 'data-experimental': true } },
+				},
 			],
 			['Deprecated API/users.md', { title: 'Deprecated Users API' }],
 		],
@@ -148,7 +152,9 @@ describe('getSidebar', () => {
 			          },
 			          {
 			            "attrs": {
-			              "class": "deprecated",
+			              "class": "current",
+			              "data-experimental": true,
+			              "data-version": "1",
 			            },
 			            "badge": undefined,
 			            "href": "/api/v1/products/remove/",
