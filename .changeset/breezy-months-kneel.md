@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Added a new 'sl-sidebar-link' class to sidebar links.
+Adds a `sl-sidebar-link` class to sidebar links
