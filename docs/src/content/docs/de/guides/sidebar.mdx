@@ -12,7 +12,7 @@ Eine gut organisierte Seitenleiste ist der Schlüssel zu einer guten Dokumentati
 
 Standardmäßig erzeugt Starlight automatisch eine Seitenleiste, die auf der Dateistruktur deiner Dokumentation basiert und die Eigenschaft `title` jeder Datei als Seitenleisten&shy;eintrag verwendet.
 
-Zum Beispiel, wenn du die folgende Dateistruktur hast:
+Zum Beispiel wird mit der folgenden Datenstruktur:
 
 <FileTree>
 
@@ -27,25 +27,25 @@ Zum Beispiel, wenn du die folgende Dateistruktur hast:
 
 </FileTree>
 
-Wird die folgende Seitenleiste automatisch generiert:
+Die folgende Seitenleiste automatisch generiert:
 
 <SidebarPreview
 	config={[
 		{
-			label: 'constellations',
+			label: 'Konstellationen',
 			items: [
 				{ label: 'Andromeda', link: '' },
 				{ label: 'Orion', link: '' },
 			],
 		},
 		{
-			label: 'stars',
+			label: 'Sterne',
 			items: [{ label: 'Beteigeuze', link: '' }],
 		},
 	]}
 />
 
-Erfahre mehr über autogenerierte Seitenleisten im Abschnitt [autogenerierte Gruppen](#automatisch-erzeugte-gruppen).
+Erfahre mehr über autogenerierte Seitenleisten im Abschnitt [autogenerierte Gruppen](#automatisch-generierte-gruppen).
 
 ## Links und Linkgruppen hinzufügen
 
@@ -58,7 +58,7 @@ Durch die Kombination von Links und Gruppen kannst du eine Vielzahl von Seitenle
 Füge einen Link zu einer Seite in `src/content/docs/` mit Hilfe eines Objekts mit der Eigenschaft `slug` hinzu.
 Der Titel der verlinkten Seite wird standardmäßig als Bezeichnung verwendet.
 
-Zum Beispiel mit der folgenden Konfiguration:
+Zum Beispiel wird mit der folgenden Konfiguration:
 
 ```js "slug:"
 starlight({
@@ -69,7 +69,7 @@ starlight({
 });
 ```
 
-Und die folgende Dateistruktur:
+Und der folgende Dateistruktur:
 
 <FileTree>
 
@@ -82,7 +82,7 @@ Und die folgende Dateistruktur:
 
 </FileTree>
 
-Die folgende Seitenleiste wird erstellt:
+Die folgende Seitenleiste erstellt:
 
 <SidebarPreview
 	config={[
@@ -143,7 +143,7 @@ Füge Links oder Untergruppen zu dem `items` Array hinzu.
 ```js /^\s*(label:|items:)/
 starlight({
 	sidebar: [
-		// Eine Gruppe von Links mit der Bezeichnung "Konstellationen".
+		// Eine Gruppe von Links mit der Bezeichnung 'Konstellationen'.
 		{
 			label: 'Konstellationen',
 			items: [
@@ -186,14 +186,16 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 	]}
 />
 
-### Automatisch erzeugte Gruppen
+### Automatisch generierte Gruppen
 
 Starlight kann automatisch eine Gruppe in deiner Seitenleiste erzeugen, die auf einem Verzeichnis deiner Dokumente basiert.
 Dies ist hilfreich, wenn du nicht jedes Element der Seitenleiste manuell in eine Gruppe eintragen willst.
 
 Standardmäßig werden die Seiten in alphabetischer Reihenfolge nach der Datei [`slug`](/de/reference/route-data/#slug) sortiert.
 
-Füge eine automatisch generierte Gruppe hinzu, indem du ein Objekt mit den Eigenschaften `label` und `autogenerate` verwendest. In der Konfiguration von `autogenerate` muss das `directory` angegeben werden, das für die Einträge in der Seitenleiste verwendet werden soll. Zum Beispiel, mit der folgenden Konfiguration:
+Füge eine automatisch generierte Gruppe hinzu, indem du ein Objekt mit den Eigenschaften `label` und `autogenerate` verwendest. In der Konfiguration von `autogenerate` muss das `directory` angegeben werden, das für die Einträge in der Seitenleiste verwendet werden soll.
+
+Zum Beispiel wird mit der folgenden Konfiguration:
 
 ```js "label:" "autogenerate:"
 starlight({
@@ -207,7 +209,7 @@ starlight({
 });
 ```
 
-Und die folgende Dateistruktur:
+Und der folgende Dateistruktur:
 
 <FileTree>
 
@@ -222,7 +224,7 @@ Und die folgende Dateistruktur:
 
 </FileTree>
 
-Wird die folgende Seitenleiste erzeugt:
+Die folgende Seitenleiste erzeugt:
 
 <SidebarPreview
 	config={[
@@ -240,11 +242,11 @@ Wird die folgende Seitenleiste erzeugt:
 	]}
 />
 
-#### Autogenerierte Links im Frontmatter anpassen
+## Autogenerierte Links im Frontmatter anpassen
 
 Verwende das [`sidebar`-Frontmatter-Feld](/de/reference/frontmatter/#sidebar) in einzelnen Seiten, um automatisch generierte Links anzupassen.
 
-Mit den Frontmatter-Optionen in der Seitenleiste kannst du einem Link eine [eigenen Bezeichnung](/de/reference/frontmatter/#label) oder ein [Abzeichen](/de/reference/frontmatter/#badge) hinzufügen, einen Link aus der Seitenleiste [verstecken](/de/reference/frontmatter/#hidden), oder eine [eigene Reihenfolge](/de/reference/frontmatter/#order) definieren.
+Mit den Frontmatter-Optionen in der Seitenleiste kannst du eine [benutzerdefinierte Bezeichnung](/de/reference/frontmatter/#label) festlegen, [benutzerdefinierte Attribute](/de/reference/frontmatter/#attrs) verwenden, ein [Abzeichen](/de/reference/frontmatter/#badge) zu einem Link hinzufügen, einen Link aus der Seitenleiste [verstecken](/de/reference/frontmatter/#hidden) oder eine [eigene Reihenfolge](/de/reference/frontmatter/#order) definieren.
 
 ```md "sidebar:"
 ---
@@ -436,6 +438,77 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 	]}
 />
 
+### Benutzerdefinierte HTML-Attribute für automatisch generierte Links
+
+Du kannst die HTML-Attribute aller Links in [automatisch generierten Gruppen](#automatisch-generierte-gruppen) anpassen, indem du die Eigenschaft `attrs` in der Konfiguration `autogenerate` festlegst.
+Einzelne Seiten können eigene Attribute über das [`sidebar.attrs`-Frontmatter-Feld](/de/reference/frontmatter/#attrs) festlegen, welches mit der `autogenerate.attrs`-Konfiguration zusammengeführt wird.
+
+Zum Beispiel wird mit der folgenden Konfiguration:
+
+```js {10}
+starlight({
+	sidebar: [
+		{
+			label: 'Konstellationen',
+			autogenerate: {
+				// Erstelle automatisch eine Gruppe von Links
+				// für das Verzeichnis 'constellations'.
+				directory: 'constellations',
+				// Alle Link-Bezeichnungen in dieser Gruppe kursiv darstellen.
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+Und der folgenden Dateistruktur:
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+Die folgende Seitenleiste mit allen automatisch generierten Links in Kursivschrift erstellt:
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Konstellationen',
+			items: [
+				{
+					label: 'Kiel des Schiffes',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'Zentaur',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'seasonal',
+					items: [
+						{
+							label: 'Andromeda',
+							link: '',
+							attrs: { style: 'font-style: italic' },
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
 ## Internationalisierung
 
 Verwende die Eigenschaft `translations` für Link- und Gruppeneinträge, um die Link- oder Gruppenbeschriftung für jede unterstützte Sprache zu übersetzen, indem du ein [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) Sprach-Tag, z.&nbsp;B. `"en"`, `"ar"`, oder `"zh-CN"`, als Schlüssel und die übersetzte Beschriftung als Wert angibst.
@@ -600,14 +673,15 @@ Die obige Konfiguration erzeugt die folgende Seitenleiste:
 	]}
 />
 
-[Autogenerierte Gruppen](#automatisch-erzeugte-gruppen) respektieren den `collapsed` Wert ihrer Elterngruppe:
+[Autogenerierte Gruppen](#automatisch-generierte-gruppen) respektieren den `collapsed` Wert ihrer Elterngruppe:
 
-```js {5-6}
+```js {5-7}
 starlight({
 	sidebar: [
 		{
 			label: 'Konstellationen',
-			// Die Gruppe und ihre automatisch erzeugten Untergruppen standardmäßig einklappen.
+			// Die Gruppe und ihre automatisch generierte
+			// Untergruppen standardmäßig einklappen.
 			collapsed: true,
 			autogenerate: { directory: 'constellations' },
 		},
@@ -643,7 +717,7 @@ starlight({
 		{
 			label: 'Konstellationen',
 			// Die Gruppe "Konstellationen" nicht einklappen, aber ihre
-			// automatisch erzeugten Untergruppen.
+			// automatisch generierten Untergruppen.
 			collapsed: false,
 			autogenerate: { directory: 'constellations', collapsed: true },
 		},
