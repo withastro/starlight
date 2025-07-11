@@ -21,7 +21,7 @@ const { sublist, nested } = Astro.props;
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}
-						class:list={['sl-sidebar-link', { large: !nested }, entry.attrs.class]}
+						class:list={[{ large: !nested }, entry.attrs.class]}
 						{...entry.attrs}
 					>
 						<span>{entry.label}</span>
