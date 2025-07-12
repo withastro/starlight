@@ -129,7 +129,7 @@ export default function StarlightIntegration(
 							}),
 						],
 						rehypePlugins: [
-							rehypeRtlCodeSupport(),
+							rehypeRtlCodeSupport({ astroConfig: config }),
 							// Process headings and add anchor links.
 							...starlightAutolinkHeadings({
 								starlightConfig,
