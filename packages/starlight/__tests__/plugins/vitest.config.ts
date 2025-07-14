@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineVitestConfig } from '../test-config';
 
 export default defineVitestConfig({
@@ -77,9 +78,10 @@ export default defineVitestConfig({
 							useTranslations('en')('testPlugin3.doThing'),
 						],
 						langs: [
-							absolutePathToLang(new URL('./en/index.md', docsUrl).pathname),
-							absolutePathToLang(new URL('./pt-br/index.md', docsUrl).pathname),
-							absolutePathToLang(new URL('./index.md', docsUrl).pathname),
+							absolutePathToLang(fileURLToPath(new URL('./en/index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./pt-br/index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./ar/path with spaces/index.md', docsUrl))),
 						],
 					};
 
