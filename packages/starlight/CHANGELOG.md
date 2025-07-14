@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.34.6
+
+### Patch Changes
+
+- [#3293](https://github.com/withastro/starlight/pull/3293) [`88f0d34`](https://github.com/withastro/starlight/commit/88f0d349ee4e8c42bd38adc01031edf4c7b92342) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing to override the slug of a page with the [`slug` frontmatter property](https://starlight.astro.build/reference/frontmatter/#slug) using the `/` value.
+
 ## 0.34.5
 
 ### Patch Changes
