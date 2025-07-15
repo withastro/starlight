@@ -1,5 +1,19 @@
 # @astrojs/starlight
 
+## 0.34.6
+
+### Patch Changes
+
+- [#3293](https://github.com/withastro/starlight/pull/3293) [`88f0d34`](https://github.com/withastro/starlight/commit/88f0d349ee4e8c42bd38adc01031edf4c7b92342) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue preventing to override the slug of a page with the [`slug` frontmatter property](https://starlight.astro.build/reference/frontmatter/#slug) using the `/` value.
+
+## 0.34.5
+
+### Patch Changes
+
+- [#3282](https://github.com/withastro/starlight/pull/3282) [`7680e87`](https://github.com/withastro/starlight/commit/7680e878fc55eba3fe0cf90e793970d3b72d166a) Thanks [@alvinometric](https://github.com/alvinometric)! - Moves padding of `<main>` element to a `--sl-main-pad` CSS custom property to simplify setting custom values
+
+- [#3288](https://github.com/withastro/starlight/pull/3288) [`131371e`](https://github.com/withastro/starlight/commit/131371e0c897f9c7ea673d93e8f405200d04d312) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential configuration issue for multilingual sites with a default language including a regional subtag.
+
 ## 0.34.4
 
 ### Patch Changes

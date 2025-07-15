@@ -360,15 +360,15 @@ const allStrings = Astro.locals.t.all();
 
 #### `t.exists()`
 
-Pour vérifier si une clé de traduction existe pour une langue, utilisez la fonction `locals.t.exists()` avec la clé de traduction comme premier argument.
-Passez un deuxième argument facultatif si vous avez besoin de re-définir la langue actuelle.
+Pour vérifier si une clé de traduction existe, utilisez la fonction `locals.t.exists()` avec la clé de traduction comme premier argument.
+Passez un deuxième argument facultatif si vous avez besoin de vérifier qu'une traduction existe pour une langue spécifique.
 
 ```astro
 ---
 // src/components/Exemple.astro
-const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+const keyExists = Astro.locals.t.exists('a.key');
 //    ^ true
-const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+const keyExistsInFrench = Astro.locals.t.exists('other.key', { lngs: ['fr'] });
 //    ^ false
 ---
 ```

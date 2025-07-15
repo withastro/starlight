@@ -101,6 +101,7 @@
 		--sl-sidebar-pad-x: 1rem;
 		--sl-content-width: 45rem;
 		--sl-content-pad-x: 1rem;
+		--sl-main-pad: 0 0 3vh 0;
 		--sl-menu-button-size: 2rem;
 		--sl-nav-gap: var(--sl-content-pad-x);
 		/* Offset required to show outline inside an element instead of round the outside */
