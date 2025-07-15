@@ -1,7 +1,7 @@
 import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { starlightAsides, remarkDirectivesRestoration } from '../../integrations/asides';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
@@ -136,6 +136,11 @@ Some text
 		`./snapshots/generates-aside-${type}-custom-icon.html`
 	);
 
+	// Temporarily mock console.error to avoid cluttering test output when the Astro Markdown
+	// processor logs an error before rethrowing it.
+	// https://github.com/withastro/astro/blob/98853ce7e31a8002fd7be83d7932a53cfec84d27/packages/markdown/remark/src/index.ts#L161
+	const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+
 	await expect(async () =>
 		processor.render(
 			`
@@ -155,6 +160,9 @@ Some text
 				See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons."
 			`
 	);
+
+	// Restore the original console.error implementation.
+	consoleError.mockRestore();
 };
 
 describe('custom icons', () => {
