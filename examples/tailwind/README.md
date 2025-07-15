@@ -24,10 +24,11 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 │   ├── assets/
 │   ├── content/
 │   │   ├── docs/
+│   ├── styles/
+│   │   ├── global.css
 │   └── content.config.ts
 ├── astro.config.mjs
 ├── package.json
-├── tailwind.config.mjs
 └── tsconfig.json
 ```
 
