@@ -1,7 +1,7 @@
 /// <reference types="mdast-util-directive" />
 
 import type { AstroConfig, AstroIntegration, AstroUserConfig } from 'astro';
-import { h as _h, s as _s, type Properties } from 'hastscript';
+import { h as _h, s as _s, type Properties, type Result } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
 	type Directives,
