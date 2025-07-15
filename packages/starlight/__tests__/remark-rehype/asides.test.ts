@@ -161,12 +161,12 @@ describe('custom icons', () => {
 	// We cannot use test.each here since toThrowErrorMatchingInlineSnapshot
 	// cannot be used inside test.each.
 	// See: https://github.com/vitest-dev/vitest/issues/3329
-	test('note with custom icons', async () => testCustomIcons('note'));
-	test('tip with custom icons', async () => testCustomIcons('tip'));
-	test('caution with custom icons', async () => testCustomIcons('caution'));
-	test('danger with custom icons', async () => testCustomIcons('danger'));
+	test('note with custom valid and invalid icons', async () => testCustomIcons('note'));
+	test('tip with custom valid and invalid icons', async () => testCustomIcons('tip'));
+	test('caution with custom valid and invalid icons', async () => testCustomIcons('caution'));
+	test('danger with custom valid and invalid icons', async () => testCustomIcons('danger'));
 
-	test('test icon with multiple paths inside the svg', async () => {
+	test('test custom icon with multiple paths inside the svg', async () => {
 		const res = await processor.render(`
 :::note{icon="external"}
 Some text
