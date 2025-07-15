@@ -388,7 +388,7 @@ sidebar:
 **Typ:** `Record<string, string | number | boolean | undefined>`
 
 HTML-Attribute, die dem Seitenlink in der Seitenleiste hinzugefügt werden, wenn er in einer automatisch generierten Gruppe von Links angezeigt wird.
-Solche Attribute werden mit der Option [`autogenerate.attrs`](/de/guides/sidebar/#benutzerdefinierte-html-attribute-für-automatisch-generierte-links) der automatisch generierten Gruppe zusammengeführt, zu der diese Seite gehört.
+Wenn [`autogenerate.attrs`](/de/guides/sidebar/#benutzerdefinierte-html-attribute-für-automatisch-generierte-links) für die automatisch generierte Gruppe, zu welcher diese Seite gehört, festgelegt ist, werden Frontmatter-Attribute mit den Gruppenattributen zusammengeführt.
 
 ```md
 ---
