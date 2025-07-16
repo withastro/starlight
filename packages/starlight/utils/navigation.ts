@@ -96,7 +96,7 @@ function groupFromAutogenerateConfig(
 	routes: Route[],
 	currentPathname: string
 ): SidebarGroup {
-	const { collapsed: subgroupCollapsed, directory } = item.autogenerate;
+	const { attrs, collapsed: subgroupCollapsed, directory } = item.autogenerate;
 	const localeDir = locale ? locale + '/' + directory : directory;
 	const dirDocs = routes.filter((doc) => {
 		const filePathFromContentDir = getRoutePathRelativeToCollectionRoot(doc, locale);
@@ -112,7 +112,13 @@ function groupFromAutogenerateConfig(
 	return {
 		type: 'group',
 		label,
-		entries: sidebarFromDir(tree, currentPathname, locale, subgroupCollapsed ?? item.collapsed),
+		entries: sidebarFromDir(
+			tree,
+			currentPathname,
+			locale,
+			subgroupCollapsed ?? item.collapsed,
+			attrs
+		),
 		collapsed: item.collapsed,
 		badge: getSidebarBadge(item.badge, locale, label),
 	};
@@ -268,12 +274,12 @@ function treeify(routes: Route[], locale: string | undefined, baseDir: string): 
 }
 
 /** Create a link entry for a given content collection entry. */
-function linkFromRoute(route: Route): SidebarLink {
+function linkFromRoute(route: Route, attrs?: LinkHTMLAttributes): SidebarLink {
 	return makeSidebarLink(
 		slugToPathname(route.slug),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		route.entry.data.sidebar.badge,
-		route.entry.data.sidebar.attrs
+		{ ...attrs, ...route.entry.data.sidebar.attrs }
 	);
 }
 
@@ -307,10 +313,11 @@ function groupFromDir(
 	dirName: string,
 	currentPathname: string,
 	locale: string | undefined,
-	collapsed: boolean
+	collapsed: boolean,
+	attrs?: LinkHTMLAttributes
 ): SidebarGroup {
 	const entries = sortDirEntries(Object.entries(dir)).map(([key, dirOrRoute]) =>
-		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed)
+		dirToItem(dirOrRoute, `${fullPath}/${key}`, key, currentPathname, locale, collapsed, attrs)
 	);
 	return {
 		type: 'group',
@@ -328,11 +335,12 @@ function dirToItem(
 	dirName: string,
 	currentPathname: string,
 	locale: string | undefined,
-	collapsed: boolean
+	collapsed: boolean,
+	attrs?: LinkHTMLAttributes
 ): SidebarEntry {
 	return isDir(dirOrRoute)
-		? groupFromDir(dirOrRoute, fullPath, dirName, currentPathname, locale, collapsed)
-		: linkFromRoute(dirOrRoute);
+		? groupFromDir(dirOrRoute, fullPath, dirName, currentPathname, locale, collapsed, attrs)
+		: linkFromRoute(dirOrRoute, attrs);
 }
 
 /** Create a sidebar entry for a given content directory. */
@@ -340,10 +348,11 @@ function sidebarFromDir(
 	tree: Dir,
 	currentPathname: string,
 	locale: string | undefined,
-	collapsed: boolean
+	collapsed: boolean,
+	attrs?: LinkHTMLAttributes
 ) {
 	return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
-		dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed)
+		dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed, attrs)
 	);
 }
 
