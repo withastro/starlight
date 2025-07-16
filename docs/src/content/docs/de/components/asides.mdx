@@ -132,6 +132,36 @@ Ein Warnhinweis *mit* einem benutzerdefinierten Titel.
 
 </Preview>
 
+### Benutzerdefinierte Symbole verwenden
+
+Überschreibe die Standard-Symbole der Nebenbemerkungen, indem du das Attribut [`icon`](#icon) auf den Namen [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) setzt.
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	Ein Hinweis *mit* einem benutzerdefinierten Symbol.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+Ein Hinweis *mit* einem benutzerdefinierten Symbol.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	Ein Hinweis *mit* einem benutzerdefinierten Symbol.
+</Aside>
+
+</Preview>
+
 ## `<Aside>`-Eigenschaften
 
 **Implementation:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
@@ -145,10 +175,10 @@ Die Komponente `<Aside>` akzeptiert die folgenden Eigenschaften:
 
 Die Art der Nebenbemerkung, die angezeigt werden soll:
 
-- `note` Hinweise (die Standardeinstellung) sind blau und zeigen ein Informationssymbol an.
-- `tip` Hinweise sind violett und zeigen ein Raketensymbol an.
-- `caution` Hinweise sind gelb und zeigen ein dreieckiges Warnsymbol an.
-- `danger` Hinweise sind rot und zeigen ein achteckiges Warnsymbol an.
+- `note`-Hinweise (die Standardeinstellung) sind blau und zeigen ein Informationssymbol an.
+- `tip`-Hinweise sind violett und zeigen ein Raketensymbol an.
+- `caution`-Hinweise sind gelb und zeigen ein dreieckiges Warnsymbol an.
+- `danger`-Hinweise sind rot und zeigen ein achteckiges Warnsymbol an.
 
 ### `title`
 
@@ -156,3 +186,9 @@ Die Art der Nebenbemerkung, die angezeigt werden soll:
 
 Die Überschrift der anzuzeigenden Nebenbemerkung.
 Wenn `title` nicht gesetzt ist, wird der Standardtitel für den aktuellen `type` der Nebenbemerkung verwendet.
+
+### `icon`
+
+**Typ:** [`StarlightIcon`](/de/reference/icons/#starlighticon-typ)
+
+Eine Nebenbemerkung kann ein `icon`-Attribut enthalten, das auf den Namen [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) gesetzt ist.
