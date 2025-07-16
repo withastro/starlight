@@ -68,4 +68,6 @@ test('can infer langs from an absolute path in the plugin context using absolute
 	expect(langs[1]).toBe('pt-BR');
 	// A page not matching any language defaults to the default language.
 	expect(langs[2]).toBe('en');
+	// A known language and an absolute path containing spaces.
+	expect(langs[3]).toBe('ar');
 });

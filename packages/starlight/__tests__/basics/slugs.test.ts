@@ -31,6 +31,9 @@ describe('slugToParam', () => {
 	test('returns undefined for root index', () => {
 		expect(slugToParam('index')).toBeUndefined();
 	});
+	test('returns undefined for /', () => {
+		expect(slugToParam('/')).toBeUndefined();
+	});
 	test('strips index from end of nested slug', () => {
 		expect(slugToParam('dir/index')).toBe('dir');
 		expect(slugToParam('dir/index/sub-dir/index')).toBe('dir/index/sub-dir');
