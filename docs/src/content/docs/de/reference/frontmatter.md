@@ -286,7 +286,7 @@ draft: true
 ```
 
 Da Entwurfsseiten nicht in die Build-Ausgabe aufgenommen werden, kannst du keine Entwurfsseiten direkt mit [Slugs](/de/guides/sidebar/#interne-links) zu deiner Seitenleisten&shy;konfiguration hinzufügen.
-Entwurfsseiten in Verzeichnissen, die für [autogenerierte Seitenleisten-Gruppen](/de/guides/sidebar/#automatisch-erzeugte-gruppen) verwendet werden, werden bei Produktions-Builds automatisch ausgeschlossen.
+Entwurfsseiten in Verzeichnissen, die für [autogenerierte Seitenleisten-Gruppen](/de/guides/sidebar/#automatisch-generierte-gruppen) verwendet werden, werden bei Produktions-Builds automatisch ausgeschlossen.
 
 ### `sidebar`
 
@@ -311,7 +311,7 @@ interface SidebarConfig {
 **Typ:** `string`  
 **Standard:** der Seitentitel ([`title`](#title-erforderlich))
 
-Legt die Bezeichnung für diese Seite in der Seitenleiste fest, wenn sie in einer automatisch erzeugten Linkgruppe angezeigt wird.
+Legt die Bezeichnung für diese Seite in der Seitenleiste fest, wenn sie in einer automatisch generierten Linkgruppe angezeigt wird.
 
 ```md
 ---
@@ -388,6 +388,7 @@ sidebar:
 **Typ:** `Record<string, string | number | boolean | undefined>`
 
 HTML-Attribute, die dem Seitenlink in der Seitenleiste hinzugefügt werden, wenn er in einer automatisch generierten Gruppe von Links angezeigt wird.
+Wenn [`autogenerate.attrs`](/de/guides/sidebar/#benutzerdefinierte-html-attribute-für-automatisch-generierte-links) für die automatisch generierte Gruppe, zu welcher diese Seite gehört, festgelegt ist, werden Frontmatter-Attribute mit den Gruppenattributen zusammengeführt.
 
 ```md
 ---
