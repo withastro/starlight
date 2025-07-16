@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url';
 import type { AstroConfig } from 'astro';
 import type { StarlightConfig } from '../../types';
 import { localeToLang } from './localeToLang';
@@ -16,8 +17,8 @@ export function absolutePathToLang(
 	}
 ): string {
 	const docsPath = getCollectionPath('docs', astroConfig.srcDir);
-	// Format path to unix style path.
-	path = path?.replace(/\\/g, '/');
+	// Format path to URL-encoded path.
+	path = pathToFileURL(path).pathname;
 	// Ensure that the page path starts with a slash if the docs directory also does,
 	// which makes stripping the docs path in the next step work on Windows, too.
 	if (path && !path.startsWith('/') && docsPath.startsWith('/')) path = '/' + path;

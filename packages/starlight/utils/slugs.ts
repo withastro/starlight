@@ -40,7 +40,7 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
 }
 
 export function slugToParam(slug: string): string | undefined {
-	return slug === 'index' || slug === ''
+	return slug === 'index' || slug === '' || slug === '/'
 		? undefined
 		: slug.endsWith('/index')
 			? slug.slice(0, -6)
