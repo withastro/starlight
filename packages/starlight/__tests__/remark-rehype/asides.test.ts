@@ -1,7 +1,7 @@
 import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { starlightAsides, remarkDirectivesRestoration } from '../../integrations/asides';
 import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
@@ -124,6 +124,80 @@ Some text
 			expect(res.code).includes(`</svg>${labelHtml}</p>`);
 		}
 	);
+});
+
+describe('custom icons', () => {
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom icon', async (type) => {
+		const res = await renderMarkdown(`
+:::${type}{icon="heart"}
+Some text
+:::
+  `);
+		await expect(res.code).toMatchFileSnapshot(
+			`./snapshots/generates-aside-${type}-custom-icon.html`
+		);
+	});
+
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with invalid custom icon', async (type) => {
+		// Temporarily mock console.error to avoid cluttering test output when the Astro Markdown
+		// processor logs an error before rethrowing it.
+		// https://github.com/withastro/astro/blob/98853ce7e31a8002fd7be83d7932a53cfec84d27/packages/markdown/remark/src/index.ts#L161
+		const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+		await expect(async () =>
+			renderMarkdown(
+				`
+:::${type}{icon="invalid-icon-name"}
+Some text
+:::
+		`
+			)
+		).rejects.toThrowError(
+			// We are not relying on `toThrowErrorMatchingInlineSnapshot()` and our custom snapshot
+			// serializer in this specific test as error thrown in a remark plugin includes a dynamic file
+			// path.
+			expect.objectContaining({
+				type: 'AstroUserError',
+				hint: expect.stringMatching(
+					/An aside custom icon must be set to the name of one of Starlight’s built-in icons, but received `invalid-icon-name`/
+				),
+			})
+		);
+
+		// Restore the original console.error implementation.
+		consoleError.mockRestore();
+	});
+
+	test('test custom icon with multiple paths inside the svg', async () => {
+		const res = await renderMarkdown(`
+:::note{icon="external"}
+Some text
+:::
+  `);
+		await expect(res.code).toMatchFileSnapshot(
+			`./snapshots/generates-aside-note-multiple-path-custom-icon.html`
+		);
+		const pathCount = (res.code.match(/path/g) || []).length;
+		// If we have two pairs of opening and closing tags of path,
+		// we will have 4 occurences of that word.
+		expect(pathCount).eq(4);
+	});
+});
+
+describe('custom labels with custom icons', () => {
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom label', async (type) => {
+		const label = 'Custom Label';
+		const res = await renderMarkdown(`
+:::${type}[${label}]{icon="heart"}
+Some text
+:::
+  `);
+		expect(res.code).includes(`aria-label="${label}"`);
+		expect(res.code).includes(`</svg>${label}</p>`);
+		await expect(res.code).toMatchFileSnapshot(
+			`./snapshots/generates-aside-${type}-custom-label-and-icon.html`
+		);
+	});
 });
 
 test('ignores unknown directive variants', async () => {
