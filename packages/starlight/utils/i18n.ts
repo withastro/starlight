@@ -57,7 +57,10 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 		// In Starlight, this matches the `locale` property if defined, and we fallback to the `lang`
 		// property if not (which would be set to the language’s directory name by default).
 		defaultLocale:
-			config.defaultLocale.locale ?? config.defaultLocale.lang ?? BuiltInDefaultLocale.lang,
+			// If the default locale is explicitly set to `root`, we use the `lang` property instead.
+			(config.defaultLocale.locale === 'root'
+				? config.defaultLocale.lang
+				: (config.defaultLocale.locale ?? config.defaultLocale.lang)) ?? BuiltInDefaultLocale.lang,
 		locales: config.locales
 			? Object.entries(config.locales).map(([locale, localeConfig]) => {
 					return {
