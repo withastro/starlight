@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.34.8
+
+### Patch Changes
+
+- [#3306](https://github.com/withastro/starlight/pull/3306) [`21fcd94`](https://github.com/withastro/starlight/commit/21fcd944d528557b89fc8b351579beabdcc06ff6) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a regression in Starlight version `0.34.5` that caused multilingual sites with a default locale explicitly set to `root` to report a configuration error.
+
 ## 0.34.7
 
 ### Patch Changes
