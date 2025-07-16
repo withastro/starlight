@@ -23,7 +23,7 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 ├── src/
 │   ├── assets/
 │   ├── content/
-│   │   ├── docs/
+│   │   └── docs/
 │   └── content.config.ts
 ├── astro.config.mjs
 ├── markdoc.config.mjs
