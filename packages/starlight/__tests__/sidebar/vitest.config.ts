@@ -39,7 +39,7 @@ export default defineVitestConfig({
 		// A group linking to all pages in the `api/v1` directory.
 		{
 			label: 'API v1',
-			autogenerate: { directory: '/api/v1/' },
+			autogenerate: { directory: '/api/v1/', attrs: { class: 'current', 'data-version': '1' } },
 		},
 		// A group linking to all pages in the `Deprecated API/` directory.
 		{
