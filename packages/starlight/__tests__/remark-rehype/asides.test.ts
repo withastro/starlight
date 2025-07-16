@@ -126,56 +126,50 @@ Some text
 	);
 });
 
-const testCustomIcons = async (type: string) => {
-	const res = await processor.render(`
+describe('custom icons', () => {
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with custom icon', async (type) => {
+		const res = await renderMarkdown(`
 :::${type}{icon="heart"}
 Some text
 :::
   `);
-	await expect(res.code).toMatchFileSnapshot(
-		`./snapshots/generates-aside-${type}-custom-icon.html`
-	);
+		await expect(res.code).toMatchFileSnapshot(
+			`./snapshots/generates-aside-${type}-custom-icon.html`
+		);
+	});
 
-	// Temporarily mock console.error to avoid cluttering test output when the Astro Markdown
-	// processor logs an error before rethrowing it.
-	// https://github.com/withastro/astro/blob/98853ce7e31a8002fd7be83d7932a53cfec84d27/packages/markdown/remark/src/index.ts#L161
-	const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+	test.each(['note', 'tip', 'caution', 'danger'])('%s with invalid custom icon', async (type) => {
+		// Temporarily mock console.error to avoid cluttering test output when the Astro Markdown
+		// processor logs an error before rethrowing it.
+		// https://github.com/withastro/astro/blob/98853ce7e31a8002fd7be83d7932a53cfec84d27/packages/markdown/remark/src/index.ts#L161
+		const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-	await expect(async () =>
-		processor.render(
-			`
+		await expect(async () =>
+			renderMarkdown(
+				`
 :::${type}{icon="invalid-icon-name"}
 Some text
 :::
-	`
-		)
-	).rejects.toThrowErrorMatchingInlineSnapshot(
 		`
-			"[AstroUserError]:
-				Failed to parse Markdown file "undefined":
-				Invalid aside icon
-			Hint:
-				An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`invalid-icon-name\`.
-				
-				See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons."
-			`
-	);
+			)
+		).rejects.toThrowError(
+			// We are not relying on `toThrowErrorMatchingInlineSnapshot()` and our custom snapshot
+			// serializer in this specific test as error thrown in a remark plugin includes a dynamic file
+			// path.
+			expect.objectContaining({
+				type: 'AstroUserError',
+				hint: expect.stringMatching(
+					/An aside custom icon must be set to the name of one of Starlight’s built-in icons, but received `invalid-icon-name`/
+				),
+			})
+		);
 
-	// Restore the original console.error implementation.
-	consoleError.mockRestore();
-};
-
-describe('custom icons', () => {
-	// We cannot use test.each here since toThrowErrorMatchingInlineSnapshot
-	// cannot be used inside test.each.
-	// See: https://github.com/vitest-dev/vitest/issues/3329
-	test('note with custom valid and invalid icons', async () => testCustomIcons('note'));
-	test('tip with custom valid and invalid icons', async () => testCustomIcons('tip'));
-	test('caution with custom valid and invalid icons', async () => testCustomIcons('caution'));
-	test('danger with custom valid and invalid icons', async () => testCustomIcons('danger'));
+		// Restore the original console.error implementation.
+		consoleError.mockRestore();
+	});
 
 	test('test custom icon with multiple paths inside the svg', async () => {
-		const res = await processor.render(`
+		const res = await renderMarkdown(`
 :::note{icon="external"}
 Some text
 :::
