@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.34.7
+
+### Patch Changes
+
+- [#3298](https://github.com/withastro/starlight/pull/3298) [`7bd02e3`](https://github.com/withastro/starlight/commit/7bd02e37650da59ed6cdfe275473ae2dac6a2d48) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes a potential issue with [`absolutePathToLang()`](https://starlight.astro.build/reference/plugins/#absolutepathtolang) plugin API not handling paths with spaces correctly.
+
 ## 0.34.6
 
 ### Patch Changes
