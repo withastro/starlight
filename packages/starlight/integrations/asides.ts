@@ -15,6 +15,7 @@ import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { HookParameters, StarlightConfig, StarlightIcon } from '../types';
+import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark-rehype-utils';
 import { Icons } from '../components/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
@@ -166,7 +167,11 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 		],
 	};
 
+	const docsCollectionPath = getRemarkRehypeDocsCollectionPath(options.astroConfig.srcDir);
+
 	const transformer: Transformer<Root> = (tree, file) => {
+		if (!shouldTransformFile(file, docsCollectionPath)) return;
+
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {

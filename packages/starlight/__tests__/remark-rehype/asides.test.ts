@@ -408,3 +408,19 @@ test('does not transform back directive nodes with data', async () => {
 		`"<p>This method is available in the <span class="api">thing</span> API.</p>"`
 	);
 });
+
+test('does not generate asides for documents without a file path', async () => {
+	const res = await processor.render(
+		`
+:::note
+Some text
+:::
+`,
+		// Rendering Markdown content using the content loader `renderMarkdown()` API does not provide
+		// a `fileURL` option.
+		{}
+	);
+
+	expect(res.code).not.includes(`aside`);
+	expect(res.code).not.includes(`</svg>Note</p>`);
+});
