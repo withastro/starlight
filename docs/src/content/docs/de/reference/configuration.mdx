@@ -679,3 +679,120 @@ starlight({
 	credits: true,
 });
 ```
+
+## Inhaltssammlungen konfigurieren
+
+Starlight nutzt Astro [Inhaltssammlungen](https://docs.astro.build/de/guides/content-collections/), um deine Inhalte zu laden.
+Die Inhaltslader und Schemata von Starlight helfen dir dabei, die Sammlungen nach Bedarf zu konfigurieren.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// Optional: Die i18n-Sammlung wird verwendet,
+	// um die Benutzeroberfläche auf mehrsprachigen Websites zu übersetzen
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Inhaltslader
+
+Starlight exportiert die folgenden [Astro-Lader](https://docs.astro.build/de/reference/content-loader-reference/) aus dem Modul `@astrojs/starlight/loaders`, um die Konfiguration von Inhaltssammlungen zu vereinfachen.
+
+#### `docsLoader()`
+
+Der `docsLoader()` lädt lokale Markdown-, MDX- und Markdoc-Dateien aus dem Verzeichnis `src/content/docs/`.
+Dateinamen, die mit einem Unterstrich (`_`) beginnen, werden ignoriert.
+
+##### Import
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Optionen
+
+###### `generateId()`
+
+**Typ:** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+Standardmäßig werden mit `docsLoader()` erstellte Seiten so verarbeitet, dass Sonderzeichen entfernt und Dateinamen in Kleinbuchstaben umgewandelt werden.
+Wenn du diese Standardeinstellung überschreiben möchtest, gib deine eigene `generateId()`-Funktion an.
+
+Dies kann beispielsweise nützlich sein, um Sonderzeichen zu erhalten, die sonst entfernt würden.
+Standardmäßig würde `Beispiel.Datei.md` unter `/beispieldatei` bereitgestellt werden.
+Wenn du die Datei unter `/Beispiel.Datei` bereitstellen möchtest, kannst du dies tun, indem du eine benutzerdefinierte `generateId()`-Funktion definierst:
+
+```js
+docsLoader({
+	// Entferne die Erweiterung `.md` oder `.mdx`,
+	// aber verarbeite ansonsten die Dateinamen nicht.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+Weitere Infos findest du unter [`generateId()` in der Astro-Dokumentation](https://docs.astro.build/de/reference/content-loader-reference/#generateid).
+
+#### `i18nLoader()`
+
+`i18nLoader()` lädt lokale JSON- und YAML-Dateien aus dem Verzeichnis `src/content/i18n/`.
+Dateinamen, die mit einem Unterstrich (`_`) beginnen, werden ignoriert.
+
+##### Import
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Optionen
+
+Derzeit gibt es keine Optionen zum Konfigurieren von `i18nLoader()`.
+
+### Schemata
+
+Starlight stellt die folgenden [Inhaltssammlungs&shy;schemata](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) aus dem Modul `@astrojs/starlight/schema` zur Verfügung.
+Diese Schemata müssen für die Sammlungen `docs` und `i18n` verwendet werden, von denen Starlight abhängt.
+
+#### `docsSchema()`
+
+`docsSchema()` analysiert die Frontmatter für alle deine Inhalte in der Sammlung `docs`.
+
+##### Import
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### Optionen
+
+###### `extend`
+
+**Typ:** Zod-Schema oder Funktion, die ein Zod-Schema zurückgibt
+**Standard:** `z.object({})`
+
+Erweitere das Frontmatter-Schema von Starlight um zusätzliche Felder.
+Weitere Infos zur Verwendung der Option `extend` findest du unter [„Frontmatter-Schema anpassen“](/de/reference/frontmatter/#frontmatter-schema-anpassen).
+
+#### `i18nSchema()`
+
+`i18nSchema()` analysiert alle Dateien, die Daten enthalten, in der `i18n`-Sammlung.
+
+##### Import
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### Optionen
+
+###### `extend`
+
+**Typ:** Zod-Objekt
+**Standard:** `z.object({})`
+
+Erweitere das i18n-Schema von Starlight um zusätzliche Felder.
+Weitere Infos zur Verwendung der Option `extend` findest du unter [„Übersetzungsschema erweitern“](/de/guides/i18n/#übersetzungsschema-erweitern).
