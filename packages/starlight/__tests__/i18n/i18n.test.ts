@@ -7,7 +7,8 @@ describe('processI18nConfig', () => {
 	test('returns the Astro i18n config for a multilingual site with no root locale', () => {
 		const { astroI18nConfig, starlightConfig } = processI18nConfig(config, undefined);
 
-		expect(astroI18nConfig.defaultLocale).toBe('en-US');
+		// The default locale should match its associated custom locale `path`.
+		expect(astroI18nConfig.defaultLocale).toBe('en');
 		expect(astroI18nConfig.locales).toMatchInlineSnapshot(`
 			[
 			  {

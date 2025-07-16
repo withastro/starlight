@@ -23,11 +23,12 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 ├── src/
 │   ├── assets/
 │   ├── content/
-│   │   ├── docs/
+│   │   └── docs/
+│   ├── styles/
+│   │   └── global.css
 │   └── content.config.ts
 ├── astro.config.mjs
 ├── package.json
-├── tailwind.config.mjs
 └── tsconfig.json
 ```
 
@@ -36,6 +37,8 @@ Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. 
 Images can be added to `src/assets/` and embedded in Markdown with a relative link.
 
 Static assets, like favicons, can be placed in the `public/` directory.
+
+The project includes [Tailwind CSS](https://starlight.astro.build/guides/css-and-tailwind/#tailwind-css) for styling. Customize your design by modifying `src/styles/global.css`.
 
 ## 🧞 Commands
 
