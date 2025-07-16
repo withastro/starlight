@@ -224,7 +224,11 @@ type SidebarItem =
 			| {
 					// Groupe de liens généré automatiquement
 					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
+					autogenerate: {
+						directory: string;
+						collapsed?: boolean;
+						attrs?: Record<string, string | number | boolean | undefined>;
+					};
 					collapsed?: boolean;
 			  }
 	  ));
@@ -673,3 +677,119 @@ starlight({
 	credits: true,
 });
 ```
+
+## Configuration des collections de contenu
+
+Starlight utilise les [collections de contenu d'Astro](https://docs.astro.build/fr/guides/content-collections/) pour charger votre contenu.
+Les chargeurs (également connus sous le nom de « loaders » en anglais) et schémas de collection de Starlight aident à configurer les collections comme nécessaire.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// Optionel : la collection i18n est utilisée pour traduire l'interface
+	// utilisateur dans les sites multilingues
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Chargeurs
+
+Starlight exporte les [chargeurs Astro](https://docs.astro.build/fr/reference/content-loader-reference/) suivants depuis le module `@astrojs/starlight/loaders` pour simplifier la configuration des collections de contenu.
+
+#### `docsLoader()`
+
+Le chargeur `docsLoader()` charge les fichiers Markdown, MDX et Markdoc locaux du répertoire `src/content/docs/`.
+Les fichiers commençant par un tiret bas (`_`) sont ignorés.
+
+##### Importation
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Options
+
+###### `generateId()`
+
+**Type :** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+Par défaut, les pages générées en utilisant `docsLoader()` transforment les noms de fichiers en utilisant un générateur de slug qui supprime les caractères spéciaux et met le nom de fichier en minuscules.
+Si vous souhaitez remplacer ce comportement par défaut, spécifiez votre propre fonction `generateId()`.
+
+Par example, cela peut être utile pour préserver des caractères spéciaux qui seraient supprimés.
+Par défaut, `Exemple.Fichier.md` serait diponible à l'URL `/exemplefichier`.
+Si vous souhaitez le rendre disponible à l'URL `/Exemple.Fichier`, vous pouvez le faire en définissant une fonction `generateId()` personnalisée :
+
+```js
+docsLoader({
+	// Supprime les extension `.md` ou `.mdx` sans modifier les noms de fichiers.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+Consultez [`generateId()` dans la documentation d'Astro](https://docs.astro.build/fr/reference/content-loader-reference/#generateid) pour plus de détails.
+
+#### `i18nLoader()`
+
+Le chargeur `i18nLoader()` charge les fichiers JSON et YAML locaux du répertoire `src/content/i18n/`.
+Les fichiers commençant par un tiret bas (`_`) sont ignorés.
+
+##### Importation
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Options
+
+Il n'y a pour le moment aucune option pour configurer `i18nLoader()`.
+
+### Schémas
+
+Starlight fournit les [schémas de collection de contenu](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-sch%C3%A9ma-de-collection) suivants depuis le module `@astrojs/starlight/schema`.
+Ces schémas doivent être utilisés pour les collections `docs` et `i18n` dont Starlight dépend.
+
+#### `docsSchema()`
+
+Le chargeur `docsSchema()` analyse (opération également appelée « parse » en anglais) le frontmatter de tout le contenu de la collection `docs`.
+
+##### Import
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### Options
+
+###### `extend`
+
+**Type :** Schéma Zod ou fonction qui retourne un schéma Zod  
+**Par défaut :** `z.object({})`
+
+Étendez le schéma du frontmatter de Starlight avec des champs supplémentaires.
+Consultez [« Personnaliser le schéma du frontmatter »](/fr/reference/frontmatter/#personnaliser-le-schéma-du-frontmatter) pour plus de détails sur l'utilisation de l'option `extend`.
+
+#### `i18nSchema()`
+
+Le chargeur `i18nSchema()` analyse tous les fichiers de données dans la collection `i18n`.
+
+##### Import
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### Options
+
+###### `extend`
+
+**Type :** Objet Zod  
+**Par défaut :** `z.object({})`
+
+Étendez le schéma de traduction de Starlight avec des champs supplémentaires.
+Consultez [« Étendre le schéma de traduction »](/fr/guides/i18n/#étendre-le-schéma-de-traduction) pour plus de détails sur l'utilisation de l'option `extend`.
