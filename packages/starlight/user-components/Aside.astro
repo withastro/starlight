@@ -1,7 +1,8 @@
 ---
 import { AstroError } from 'astro/errors';
 import Icon from './Icon.astro';
-import type { StarlightIcon } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components/Icons';
+import { throwInvalidAsideIconError } from '../integrations/asides';
 
 const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
 const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 'error' } as const;
@@ -21,6 +22,8 @@ if (!asideVariants.includes(type)) {
 			`Expected one of ${asideVariants.map((i) => JSON.stringify(i)).join(', ')}`
 	);
 }
+
+if (icon && !Icons[icon]) throwInvalidAsideIconError(icon);
 
 if (!title) {
 	title = Astro.locals.t(`aside.${type}`);

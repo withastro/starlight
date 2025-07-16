@@ -204,13 +204,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 			if (attributes?.['icon']) {
 				const iconName = attributes['icon'] as StarlightIcon;
 				const icon = Icons[iconName];
-				if (!icon) {
-					throw new AstroError(
-						'Invalid aside icon',
-						`An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`${iconName}\`.\n\n` +
-							'See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons.'
-					);
-				}
+				if (!icon) throwInvalidAsideIconError(iconName);
 				// Omit the root node and return only the first child which is the SVG element.
 				const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
 					.children[0] as Element;
@@ -253,6 +247,14 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 }
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
+
+export function throwInvalidAsideIconError(icon: string) {
+	throw new AstroError(
+		'Invalid aside icon',
+		`An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`${icon}\`.\n\n` +
+			'See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons.'
+	);
+}
 
 export function starlightAsides(options: AsidesOptions): RemarkPlugins {
 	return [remarkDirective, remarkAsides(options)];
