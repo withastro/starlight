@@ -91,9 +91,9 @@ starlight({
 	]}
 />
 
-링크된 페이지의 프론트매터에서 추론된 값을 재정의하기 위해 `label`, [`translations`](#국제화) 및 [`attrs`](#사용자-정의-html-속성) 속성을 추가할 수 있습니다.
+링크된 페이지의 프런트매터에서 추론된 값을 재정의하기 위해 `label`, [`translations`](#국제화) 및 [`attrs`](#사용자-정의-html-속성) 속성을 추가할 수 있습니다.
 
-페이지 프론트매터에서 사이드바 모양을 제어하는 ​​방법에 대한 자세한 내용은 ["자동 생성된 링크 사용자 정의"](#프론트매터에서-자동-생성된-링크-사용자-정의)를 참조하세요.
+페이지 프런트매터에서 사이드바 모양을 제어하는 방법에 대한 자세한 내용은 ["자동 생성된 링크 사용자 정의"](#프런트매터에서-자동-생성된-링크-사용자-정의)를 참조하세요.
 
 #### 내부 링크의 약어
 
@@ -236,11 +236,11 @@ starlight({
 	]}
 />
 
-## 프론트매터에서 자동 생성된 링크 사용자 정의
+## 프런트매터에서 자동 생성된 링크 사용자 정의
 
-자동으로 생성된 링크를 변경하려면 개별 페이지의 [`sidebar` 프론트매터 필드](/ko/reference/frontmatter/#sidebar)를 사용하세요.
+자동으로 생성된 링크를 변경하려면 개별 페이지의 [`sidebar` 프런트매터 필드](/ko/reference/frontmatter/#sidebar)를 사용하세요.
 
-프론트매터에서 sidebar 옵션을 사용하면 [사용자 정의 라벨](/ko/reference/frontmatter/#label)을 설정하거나 링크에 [배지](/ko/reference/frontmatter/#badge)를 추가하거나 사이드바에서 링크를 [숨기거나](/ko/reference/frontmatter/#hidden) [사용자 정의 정렬 기준](/ko/reference/frontmatter/#order)을 설정할 수 있습니다.
+프런트매터에서 sidebar 옵션을 사용하면 [사용자 정의 라벨](/ko/reference/frontmatter/#label)을 설정, [사용자 정의 속성](/ko/reference/frontmatter/#attrs) 사용, 링크에 [배지](/ko/reference/frontmatter/#badge) 추가, 사이드바에서 링크를 [숨기거나](/ko/reference/frontmatter/#hidden) [사용자 정의 정렬 기준](/ko/reference/frontmatter/#order)을 정의할 수 있습니다.
 
 ```md "sidebar:"
 ---
@@ -258,7 +258,7 @@ sidebar:
 ---
 ```
 
-위 프론트매터가 있는 페이지를 포함하는 자동 생성 그룹은 다음 사이드바를 생성합니다.
+위 프런트매터가 있는 페이지를 포함하는 자동 생성 그룹은 다음 사이드바를 생성합니다.
 
 <SidebarPreview
 	config={[
@@ -278,7 +278,7 @@ sidebar:
 />
 
 :::note
-`sidebar` 프론트매터 구성은 `slug` 속성으로 정의된 자동으로 생성된 그룹의 링크 및 문서 링크에만 사용됩니다. `link` 속성으로 정의된 링크에는 적용되지 않습니다.
+`sidebar` 프런트매터 구성은 `slug` 속성으로 정의된 자동으로 생성된 그룹의 링크 및 문서 링크에만 사용됩니다. `link` 속성으로 정의된 링크에는 적용되지 않습니다.
 :::
 
 ## 배지
@@ -434,6 +434,72 @@ starlight({
 	]}
 />
 
+### 자동 생성 링크의 사용자 정의 HTML 속성
+
+`autogenerate` 구성의 `attrs` 속성을 정의하여 [자동 생성 그룹](#자동-생성-그룹)에 있는 모든 링크의 HTML 속성을 사용자 정의합니다.
+개별 페이지에서는 [`sidebar.attrs` 프런트매터 필드](/ko/reference/frontmatter/#attrs)를 사용하여 사용자 정의 속성을 지정할 수 있으며, 이는 `autogenerate.attrs` 구성과 병합됩니다.
+
+예를 들어, 다음과 같은 구성을 사용할 수 있습니다.
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: '별자리',
+			autogenerate: {
+				// 'constellations' 디렉터리에 대한 링크 그룹을 자동으로 생성합니다.
+				directory: 'constellations',
+				// 이 그룹의 모든 링크 라벨을 이탤릭체로 표시합니다.
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+그리고 파일 구조는 다음과 같습니다.
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+다음과 같이 모든 자동 생성 링크가 이탤릭체로 표시된 사이드바가 생성됩니다.
+
+<SidebarPreview
+	config={[
+		{
+			label: '별자리',
+			items: [
+				{ label: 'Carina', link: '', attrs: { style: 'font-style: italic' } },
+				{
+					label: 'Centaurus',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'seasonal',
+					items: [
+						{
+							label: 'Andromeda',
+							link: '',
+							attrs: { style: 'font-style: italic' },
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
+
 ## 국제화
 
 [BCP-47](https://www.w3.org/International/questions/qa-choosing-language-tags) 언어 태그를 지정하여 지원되는 각 언어에 대한 링크 또는 그룹 라벨을 번역하려면 링크 및 그룹 항목의 `translations` 속성을 사용하세요. `"en"`, `"ar"` 또는 `"zh-CN"`을 키로, 번역된 라벨을 값으로 사용합니다.
@@ -484,7 +550,7 @@ starlight({
 
 ### 내부 링크 국제화
 
-[내부 링크](#내부-링크)는 기본적으로 콘텐츠 프론트매터의 번역된 페이지 제목을 자동으로 사용합니다.
+[내부 링크](#내부-링크)는 기본적으로 콘텐츠 프런트매터의 번역된 페이지 제목을 자동으로 사용합니다.
 
 ```js {9-10}
 starlight({
