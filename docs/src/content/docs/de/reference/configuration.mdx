@@ -226,7 +226,11 @@ type SidebarItem =
 			| {
 					// Automatisch generierte Linkgruppe
 					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
+					autogenerate: {
+						directory: string;
+						collapsed?: boolean;
+						attrs?: Record<string, string | number | boolean | undefined>;
+					};
 					collapsed?: boolean;
 			  }
 	  ));
