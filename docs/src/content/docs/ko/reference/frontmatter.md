@@ -381,6 +381,7 @@ sidebar:
 **타입:** `Record<string, string | number | boolean | undefined>`
 
 사이드바에서 자동 생성된 링크 그룹을 사용할 때, 이 페이지의 링크에 추가할 HTML 속성을 설정합니다.
+이 페이지가 속한 자동 생성 그룹에 [`autogenerate.attrs`](/ko/guides/sidebar/#자동-생성-링크의-사용자-정의-html-속성)가 설정되어 있으면 프런트매터 속성이 그룹 속성과 병합됩니다.
 
 ```md
 ---
