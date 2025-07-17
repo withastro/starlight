@@ -721,7 +721,7 @@ import { docsLoader } from '@astrojs/starlight/loaders';
 Par défaut, les pages générées en utilisant `docsLoader()` transforment les noms de fichiers en utilisant un générateur de slug qui supprime les caractères spéciaux et met le nom de fichier en minuscules.
 Si vous souhaitez remplacer ce comportement par défaut, spécifiez votre propre fonction `generateId()`.
 
-Par example, cela peut être utile pour préserver des caractères spéciaux qui seraient supprimés.
+Par exemple, cela peut être utile pour préserver des caractères spéciaux qui seraient supprimés.
 Par défaut, `Exemple.Fichier.md` serait diponible à l'URL `/exemplefichier`.
 Si vous souhaitez le rendre disponible à l'URL `/Exemple.Fichier`, vous pouvez le faire en définissant une fonction `generateId()` personnalisée :
 
@@ -758,7 +758,7 @@ Ces schémas doivent être utilisés pour les collections `docs` et `i18n` dont 
 
 Le chargeur `docsSchema()` analyse (opération également appelée « parse » en anglais) le frontmatter de tout le contenu de la collection `docs`.
 
-##### Import
+##### Importation
 
 ```js
 import { docsSchema } from '@astrojs/starlight/schema';
@@ -778,7 +778,7 @@ Consultez [« Personnaliser le schéma du frontmatter »](/fr/reference/frontm
 
 Le chargeur `i18nSchema()` analyse tous les fichiers de données dans la collection `i18n`.
 
-##### Import
+##### Importation
 
 ```js
 import { i18nSchema } from '@astrojs/starlight/schema';
