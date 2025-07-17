@@ -132,6 +132,36 @@ import { Aside } from '@astrojs/starlight/components';
 
 </Preview>
 
+### 사용자 정의 아이콘 사용
+
+[Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 [`icon`](#icon) 속성을 사용하여 기본 아이콘을 재정의합니다.
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	사용자 정의 아이콘을 *사용하는* 보조 팁입니다.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+사용자 정의 아이콘을 *사용하는* 보조 팁입니다.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	사용자 정의 아이콘을 *사용하는* 보조 팁입니다.
+</Aside>
+
+</Preview>
+
 ## `<Aside>` 속성
 
 **구현:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
@@ -156,3 +186,9 @@ import { Aside } from '@astrojs/starlight/components';
 
 표시할 보조 내용의 제목입니다.
 `title`이 설정되어 있지 않으면 현재 보조 내용의 `type`이 기본 제목으로 사용됩니다.
+
+### `icon`
+
+**타입:** [`StarlightIcon`](/ko/reference/icons/#starlighticon-타입)
+
+보조 내용은 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정된 `icon` 속성을 포함할 수 있습니다.
