@@ -481,3 +481,15 @@ test.describe('components', () => {
 		}
 	}
 });
+
+test.describe('param normalization', () => {
+	test('renders the correct content for a file with Arabic diacritics', async ({
+		page,
+		getProdServer,
+	}) => {
+		const starlight = await getProdServer();
+		await starlight.goto('/اللُّغَةُ-الْعَرَبِيَّةُ');
+		const content = page.locator('main');
+		await expect(content).toHaveText(/This file contains Arabic diacritics in the file name./);
+	});
+});
