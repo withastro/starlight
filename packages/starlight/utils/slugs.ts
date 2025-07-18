@@ -39,12 +39,18 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
 	return dir || config.defaultLocale.dir;
 }
 
+/**
+ * Convert a content collection slug to a param as expected by Astro’s router.
+ * This utility handles stripping `index` from file names and matches
+ * [Astro’s param sanitization logic](https://github.com/withastro/astro/blob/687d25365a41ff8a9e6da155d3527f841abb70dd/packages/astro/src/core/routing/manifest/generator.ts#L4-L18)
+ * by normalizing strings to their canonical representations.
+ * @param slug Content collection slug
+ * @returns Param compatible with Astro’s router
+ */
 export function slugToParam(slug: string): string | undefined {
 	return slug === 'index' || slug === '' || slug === '/'
 		? undefined
-		: slug.endsWith('/index')
-			? slug.slice(0, -6)
-			: slug;
+		: (slug.endsWith('/index') ? slug.slice(0, -6) : slug).normalize();
 }
 
 export function slugToPathname(slug: string): string {

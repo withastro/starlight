@@ -43,6 +43,12 @@ describe('slugToParam', () => {
 		expect(slugToParam('dir/page')).toBe('dir/page');
 		expect(slugToParam('dir/sub-dir/page')).toBe('dir/sub-dir/page');
 	});
+	test('normalizes unnormalized strings', () => {
+		// The input and output contain visually indistinguishable glyphs with different code point
+		// representation that are canonically equivalent that should be normalized using NFC
+		// normalization matching Astro's behavior.
+		expect(slugToParam('اللُّغَةُ-الْعَرَبِيَّةُ')).toBe('اللُّغَةُ-الْعَرَبِيَّةُ');
+	});
 });
 
 describe('slugToPathname', () => {
