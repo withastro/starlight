@@ -43,6 +43,9 @@ describe('slugToParam', () => {
 		expect(slugToParam('dir/page')).toBe('dir/page');
 		expect(slugToParam('dir/sub-dir/page')).toBe('dir/sub-dir/page');
 	});
+	test('normalizes unnormalized strings', () => {
+		expect(slugToParam('اللُّغَةُ-الْعَرَبِيَّةُ')).toBe('اللُّغَةُ-الْعَرَبِيَّةُ');
+	});
 });
 
 describe('slugToPathname', () => {
