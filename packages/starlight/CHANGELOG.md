@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.35.2
+
+### Patch Changes
+
+- [#3327](https://github.com/withastro/starlight/pull/3327) [`bf58c60`](https://github.com/withastro/starlight/commit/bf58c60b9c3d5f5efdafbdba83cefa0566a367dc) Thanks [@delucis](https://github.com/delucis)! - Fixes a routing bug for docs pages with a slug authored with non-normalized composition. This could occur for filenames containing diacritics in some circumstances, causing 404s.
+
 ## 0.35.1
 
 ### Patch Changes
