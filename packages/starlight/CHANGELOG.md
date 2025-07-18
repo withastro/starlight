@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.35.1
+
+### Patch Changes
+
+- [#3325](https://github.com/withastro/starlight/pull/3325) [`4cf28f2`](https://github.com/withastro/starlight/commit/4cf28f2afd50fb2a3f8c9149a824aaac47c12af6) Thanks [@mniinio](https://github.com/mniinio)! - Adds Finnish language support
+
 ## 0.35.0
 
 ### Minor Changes
