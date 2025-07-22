@@ -1,3 +1,5 @@
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { AstroConfig } from 'astro';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import type { Root as RehypeRoot } from 'hast';
@@ -33,7 +35,7 @@ export function starlightRehypePlugins(options: RemarkRehypePluginOptions): Rehy
 
 /** Remark plugin applying other Starlight remark plugins if necessary. */
 function remarkPlugins(options: RemarkRehypePluginOptions): RemarkPlugin {
-	const docsCollectionPath = getRemarkRehypeDocsCollectionPath(options.astroConfig.srcDir);
+	const remarkRehypePaths = getRemarkRehypePaths(options);
 
 	return function attacher(this) {
 		const remarkAsidesTransformer = remarkAsides(options).call(this)!;
@@ -41,7 +43,7 @@ function remarkPlugins(options: RemarkRehypePluginOptions): RemarkPlugin {
 		return function transformer(...args) {
 			const [, file] = args;
 
-			if (!shouldTransformFile(file, docsCollectionPath)) return;
+			if (!shouldTransformFile(file, remarkRehypePaths)) return;
 
 			remarkAsidesTransformer(...args);
 		};
@@ -50,7 +52,7 @@ function remarkPlugins(options: RemarkRehypePluginOptions): RemarkPlugin {
 
 /** Rehype plugin applying other Starlight rehype plugins if necessary. */
 function rehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin {
-	const docsCollectionPath = getRemarkRehypeDocsCollectionPath(options.astroConfig.srcDir);
+	const remarkRehypePaths = getRemarkRehypePaths(options);
 
 	return function attacher(this) {
 		const rehypeRtlCodeSupportTransformer = rehypeRtlCodeSupport(options).call(this)!;
@@ -59,7 +61,7 @@ function rehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin {
 		return function transformer(...args) {
 			const [, file] = args;
 
-			if (!shouldTransformFile(file, docsCollectionPath)) return;
+			if (!shouldTransformFile(file, remarkRehypePaths)) return;
 
 			rehypeRtlCodeSupportTransformer(...args);
 			if (options.starlightConfig.markdown.headingLinks) rehypeAutolinkHeadingsTransformer(...args);
@@ -68,28 +70,34 @@ function rehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin {
 }
 
 /**
- * Returns the path to the Starlight docs collection ready to be used in remark/rehype plugins,
- * e.g. with the `shouldTransformFile()` utility to determine if a file should be transformed
- * by a plugin or not.
+ * Returns the paths to the Starlight docs collection and any additional paths defined in the
+ * `starlightConfig.markdown.processedDirs` option that can be with the `shouldTransformFile()`
+ * utility to determine if a file should be transformed by a plugin or not.
  */
-function getRemarkRehypeDocsCollectionPath(srcDir: AstroConfig['srcDir']) {
-	return normalizePath(resolveCollectionPath('docs', srcDir));
+function getRemarkRehypePaths(options: RemarkRehypePluginOptions): string[] {
+	const paths = [normalizePath(resolveCollectionPath('docs', options.astroConfig.srcDir))];
+
+	for (const processedDir of options.starlightConfig.markdown.processedDirs) {
+		paths.push(normalizePath(resolve(fileURLToPath(options.astroConfig.root), processedDir)));
+	}
+
+	return paths;
 }
 
 /**
  * Determines if a file should be transformed by a remark/rehype plugin, e.g. files without a known
- * path or files that are not part of the Starlight docs collection should be skipped.
+ * path or files that are not part of the allowed remark/rehype paths are skipped.
  */
-function shouldTransformFile(file: VFile, docsCollectionPath: string) {
+function shouldTransformFile(file: VFile, remarkRehypePaths: string[]) {
 	// If the content is rendered using the content loader `renderMarkdown()` API, a file path
 	// is not provided.
 	// In that case, we skip the file.
 	if (!file?.path) return false;
 
-	// If the document is not part of the Starlight docs collection, skip it.
-	if (!normalizePath(file.path).startsWith(docsCollectionPath)) return false;
+	const normalizedPath = normalizePath(file.path);
 
-	return true;
+	// If the document is not part of the allowed remark/rehype paths, skip it.
+	return remarkRehypePaths.some((path) => normalizedPath.startsWith(path));
 }
 
 /**
