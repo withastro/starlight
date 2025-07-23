@@ -6,6 +6,10 @@
   "scripts": {
     "test": "playwright install --with-deps chromium && playwright test",
     "dev": "astro dev",
+    "comment": "// TODO(HiDeoo) Remove these pagefind related scripts",
+    "pagefind": "pnpm run --stream /^pagefind:/",
+    "pagefind:build": "astro build && astro preview",
+    "pagefind:dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

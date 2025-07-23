@@ -107,3 +107,5 @@ const pagefindSchema = z.object({
 
 export const PagefindConfigSchema = () => pagefindSchema;
 export const PagefindConfigDefaults = () => pagefindSchema.parse({});
+
+export type PagefindConfig = z.output<typeof pagefindSchema>;

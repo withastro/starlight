@@ -18,8 +18,7 @@ interface i18nSchemaOpts<T extends z.AnyZodObject = z.ZodObject<{}>> {
 	extend?: T;
 }
 
-const defaultI18nSchema = () =>
-	starlightI18nSchema().merge(pagefindI18nSchema()).merge(expressiveCodeI18nSchema());
+const defaultI18nSchema = () => starlightI18nSchema().merge(expressiveCodeI18nSchema());
 /** Type of Starlight’s default i18n schema, including extensions from Pagefind and Expressive Code. */
 type DefaultI18nSchema = ReturnType<typeof defaultI18nSchema>;
 
@@ -49,11 +48,7 @@ export function i18nSchema<T extends z.AnyZodObject = z.ZodObject<{}>>({
 export type i18nSchemaOutput = z.output<ReturnType<typeof i18nSchema>>;
 
 export function builtinI18nSchema() {
-	return starlightI18nSchema()
-		.required()
-		.strict()
-		.merge(pagefindI18nSchema())
-		.merge(expressiveCodeI18nSchema());
+	return starlightI18nSchema().required().strict().merge(expressiveCodeI18nSchema());
 }
 
 function starlightI18nSchema() {
@@ -80,6 +75,34 @@ function starlightI18nSchema() {
 			'search.devWarning': z
 				.string()
 				.describe('Warning displayed when opening the Search in a dev environment.'),
+
+			'search.pagefind.clear': z
+				.string()
+				.describe('Text for the “Clear” input button in the search modal.'),
+
+			'search.pagefind.filters': z
+				.string()
+				.describe('Title for the filters section in the search modal.'),
+
+			'search.pagefind.loadMore': z
+				.string()
+				.describe('Text for the “Load more results” button in the search modal.'),
+
+			'search.pagefind.client.searching': z
+				.string()
+				.describe('Status text displayed in the search modal while searching.'),
+
+			'search.pagefind.client.results_zero': z
+				.string()
+				.describe('Status text displayed in the search modal when there are no results.'),
+
+			'search.pagefind.client.results_one': z
+				.string()
+				.describe('Status text displayed in the search modal when there is exactly one result.'),
+
+			'search.pagefind.client.results_other': z
+				.string()
+				.describe('Status text displayed in the search modal when there are more than one result.'),
 
 			'themeSelect.accessibleLabel': z
 				.string()
@@ -160,72 +183,6 @@ function starlightI18nSchema() {
 				),
 
 			'heading.anchorLabel': z.string().describe('Label for anchor links in Markdown content.'),
-		})
-		.partial();
-}
-
-function pagefindI18nSchema() {
-	return z
-		.object({
-			'pagefind.clear_search': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"Clear"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.load_more': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"Load more results"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.search_label': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"Search this site"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.filters_label': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"Filters"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.zero_results': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.many_results': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"[COUNT] results for [SEARCH_TERM]"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.one_result': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"[COUNT] result for [SEARCH_TERM]"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.alt_search': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.search_suggestion': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"No results for [SEARCH_TERM]. Try one of the following searches:"`. See https://pagefind.app/docs/ui/#translations'
-				),
-
-			'pagefind.searching': z
-				.string()
-				.describe(
-					'Pagefind UI translation. English default value: `"Searching for [SEARCH_TERM]..."`. See https://pagefind.app/docs/ui/#translations'
-				),
 		})
 		.partial();
 }
