@@ -3,7 +3,8 @@
   "include": ["docs/.astro/types.d.ts", "**/*"],
   "exclude": ["**/dist/**", "**/__coverage__/**", "**/build/**"],
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "checkJs": true
   }
 }

@@ -5,6 +5,23 @@
 		margin-top: 1rem;
 	}
 
+	/* TODO(HiDeoo) Remove these debug rules */
+	astro-island > :first-child {
+		border: 1px dashed var(--sl-color-red);
+	}
+	[data-theme='light'] astro-island > :first-child {
+		border-color: var(--sl-color-red-high);
+	}
+
+	.sl-markdown-content
+		:not(a, strong, em, del, span, input, code, br)
+		+ :is(astro-island, astro-slot)
+		> :not(a, strong, em, del, span, input, code, br, :where(.not-content *)):first-child {
+		margin-top: 1rem;
+		/* TODO(HiDeoo) Remove this debug rule */
+		background-color: var(--sl-color-green-low);
+	}
+
 	/* Headings after non-headings have more spacing. */
 	.sl-markdown-content
 		:not(h1, h2, h3, h4, h5, h6)
