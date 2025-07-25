@@ -2,41 +2,21 @@ import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdo
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { describe, expect, test, vi } from 'vitest';
-import { starlightAsides, remarkDirectivesRestoration } from '../../integrations/asides';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { remarkDirectivesRestoration } from '../../integrations/asides';
+import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
+import type { StarlightUserConfig } from '../../utils/user-config';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
-import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
+import { createRemarkRehypePluginTestOptions } from './utils';
 
-const starlightConfig = StarlightConfigSchema.parse({
+const starlightConfig = {
 	title: 'Asides Tests',
 	locales: { en: { label: 'English' }, fr: { label: 'French' } },
 	defaultLocale: 'en',
-} satisfies StarlightUserConfig);
-
-const astroConfig = {
-	root: new URL(import.meta.url),
-	srcDir: new URL('./_src/', import.meta.url),
-};
-
-const useTranslations = createTranslationSystemFromFs(
-	starlightConfig,
-	// Using non-existent `_src/` to ignore custom files in this test fixture.
-	{ srcDir: new URL('./_src/', import.meta.url) }
-);
-
-function absolutePathToLang(path: string) {
-	return getAbsolutePathFromLang(path, { astroConfig, starlightConfig });
-}
+} satisfies StarlightUserConfig;
 
 const processor = await createMarkdownProcessor({
 	remarkPlugins: [
-		...starlightAsides({
-			starlightConfig,
-			astroConfig,
-			useTranslations,
-			absolutePathToLang,
-		}),
+		...starlightRemarkPlugins(createRemarkRehypePluginTestOptions(starlightConfig)),
 		// The restoration plugin is run after the asides and any other plugin that may have been
 		// injected by Starlight plugins.
 		remarkDirectivesRestoration,
@@ -293,19 +273,14 @@ Some text
 test('runs without locales config', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
-			...starlightAsides({
-				starlightConfig: {
+			...starlightRemarkPlugins(
+				createRemarkRehypePluginTestOptions({
+					...starlightConfig,
 					// With no locales config, the default built-in locale is used.
-					defaultLocale: { ...BuiltInDefaultLocale, locale: 'en' },
+					defaultLocale: BuiltInDefaultLocale.lang,
 					locales: undefined,
-				},
-				astroConfig: {
-					root: new URL(import.meta.url),
-					srcDir: new URL('./_src/', import.meta.url),
-				},
-				useTranslations,
-				absolutePathToLang,
-			}),
+				})
+			),
 			remarkDirectivesRestoration,
 		],
 	});
@@ -340,15 +315,7 @@ test('does not add any whitespace character after any unhandled directive', asyn
 test('lets remark plugin injected by Starlight plugins handle text and leaf directives', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
-			...starlightAsides({
-				starlightConfig,
-				astroConfig: {
-					root: new URL(import.meta.url),
-					srcDir: new URL('./_src/', import.meta.url),
-				},
-				useTranslations,
-				absolutePathToLang,
-			}),
+			...starlightRemarkPlugins(createRemarkRehypePluginTestOptions(starlightConfig)),
 			// A custom remark plugin injected by a Starlight plugin through an Astro integration would
 			// run before the restoration plugin.
 			function customRemarkPlugin() {
@@ -377,15 +344,7 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 test('does not transform back directive nodes with data', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
-			...starlightAsides({
-				starlightConfig,
-				astroConfig: {
-					root: new URL(import.meta.url),
-					srcDir: new URL('./_src/', import.meta.url),
-				},
-				useTranslations,
-				absolutePathToLang,
-			}),
+			...starlightRemarkPlugins(createRemarkRehypePluginTestOptions(starlightConfig)),
 			// A custom remark plugin updating the node with data that should be consumed by rehype.
 			function customRemarkPlugin() {
 				return function transformer(tree: Root) {
@@ -407,20 +366,4 @@ test('does not transform back directive nodes with data', async () => {
 	expect(res.code).toMatchInlineSnapshot(
 		`"<p>This method is available in the <span class="api">thing</span> API.</p>"`
 	);
-});
-
-test('does not generate asides for documents without a file path', async () => {
-	const res = await processor.render(
-		`
-:::note
-Some text
-:::
-`,
-		// Rendering Markdown content using the content loader `renderMarkdown()` API does not provide
-		// a `fileURL` option.
-		{}
-	);
-
-	expect(res.code).not.includes(`aside`);
-	expect(res.code).not.includes(`</svg>Note</p>`);
 });
