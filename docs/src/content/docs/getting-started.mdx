@@ -3,6 +3,44 @@ title: Getting Started
 description: Learn how to start building your next documentation site with Starlight by Astro.
 ---
 
+{/* TODO(HiDeoo)  Remove this debug section */}
+
+## Debug
+
+import {
+	IslandBlock,
+	IslandInline,
+	IslandBlocks,
+	IslandSlot,
+} from '../../components/Debug';
+
+This is a debug section.
+
+<IslandBlock client:idle />
+
+And this is an <IslandInline client:idle />.
+
+<IslandBlock client:idle />
+<IslandBlock client:idle />
+
+And multiple blocks:
+
+<IslandBlocks client:idle />
+
+Wrapped (not broken):
+
+<div>
+	<IslandBlock client:idle />
+</div>
+
+With slot:
+
+<IslandSlot client:idle>
+	<p>This is the slot content.</p>
+</IslandSlot>
+
+{/* TODO(HiDeoo)  End of debug section */}
+
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Starlight is a full-featured documentation theme built on top of the [Astro](https://astro.build) framework.
