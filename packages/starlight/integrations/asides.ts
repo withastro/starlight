@@ -19,7 +19,7 @@ import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark
 import { Icons } from '../components/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
-import { AstroError } from 'astro/errors';
+import { throwInvalidAsideIconError } from './asides-error';
 
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
@@ -252,14 +252,6 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 }
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
-
-export function throwInvalidAsideIconError(icon: string) {
-	throw new AstroError(
-		'Invalid aside icon',
-		`An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`${icon}\`.\n\n` +
-			'See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons.'
-	);
-}
 
 export function starlightAsides(options: AsidesOptions): RemarkPlugins {
 	return [remarkDirective, remarkAsides(options)];

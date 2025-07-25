@@ -1,6 +1,6 @@
 import type { AstroConfig } from 'astro';
 import type { VFile } from 'vfile';
-import { resolveCollectionPath } from '../utils/collection';
+import { resolveCollectionPath } from '../utils/collection-fs';
 
 /**
  * Returns the path to the Starlight docs collection ready to be used in remark/rehype plugins,

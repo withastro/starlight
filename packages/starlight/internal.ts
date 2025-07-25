@@ -3,4 +3,4 @@
  */
 
 export { useTranslations } from './utils/translations';
-export { getStarlightEcConfigPreprocessor } from './integrations/expressive-code';
+export { getStarlightEcConfigPreprocessor } from './integrations/expressive-code/preprocessor';
