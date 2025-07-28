@@ -1,12 +1,113 @@
 ---
 import '@docsearch/css/dist/modal.css';
-import type docsearch from '@docsearch/js';
 import './variables.css';
 
-type DocSearchTranslationProps = Pick<
-	Parameters<typeof docsearch>[0],
-	'placeholder' | 'translations'
->;
+export interface DocSearchTranslations {
+	button?: ButtonTranslations;
+	modal?: ModalTranslations;
+}
+
+export interface ButtonTranslations {
+	buttonText?: string;
+	buttonAriaLabel?: string;
+}
+
+export interface ModalTranslations extends ScreenStateTranslations {
+	searchBox?: SearchBoxTranslations;
+	footer?: FooterTranslations;
+}
+
+export interface ScreenStateTranslations {
+	errorScreen?: ErrorScreenTranslations;
+	startScreen?: StartScreenTranslations;
+	resultsScreen?: ResultsScreenTranslations;
+	noResultsScreen?: NoResultsScreenTranslations;
+	askAiScreen?: AskAiScreenTranslations;
+}
+
+export interface SearchBoxTranslations {
+	clearButtonTitle?: string;
+	clearButtonAriaLabel?: string;
+	closeButtonText?: string;
+	closeButtonAriaLabel?: string;
+	placeholderText?: string;
+	placeholderTextAskAi?: string;
+	searchInputLabel?: string;
+	placeholderTextAskAiStreaming?: string;
+	backToKeywordSearchButtonText?: string;
+	backToKeywordSearchButtonAriaLabel?: string;
+}
+
+export interface FooterTranslations {
+	selectText?: string;
+	submitQuestionText?: string;
+	selectKeyAriaLabel?: string;
+	navigateText?: string;
+	navigateUpKeyAriaLabel?: string;
+	backToSearchText?: string;
+	navigateDownKeyAriaLabel?: string;
+	closeText?: string;
+	closeKeyAriaLabel?: string;
+	poweredByText?: string;
+}
+
+export interface ErrorScreenTranslations {
+	titleText?: string;
+	helpText?: string;
+}
+
+export interface StartScreenTranslations {
+	recentSearchesTitle?: string;
+	noRecentSearchesText?: string;
+	saveRecentSearchButtonTitle?: string;
+	removeRecentSearchButtonTitle?: string;
+	favoriteSearchesTitle?: string;
+	removeFavoriteSearchButtonTitle?: string;
+	recentConversationsTitle?: string;
+	removeRecentConversationButtonTitle?: string;
+}
+
+export interface ResultsScreenTranslations {
+	askAiPlaceholder?: string;
+}
+
+export interface NoResultsScreenTranslations {
+	noResultsText?: string;
+	suggestedQueryText?: string;
+	reportMissingResultsText?: string;
+	reportMissingResultsLinkText?: string;
+}
+
+export interface AskAiScreenTranslations {
+	disclaimerText?: string;
+	relatedSourcesText?: string;
+	thinkingText?: string;
+	copyButtonText?: string;
+	copyButtonCopiedText?: string;
+	copyButtonTitle?: string;
+	likeButtonTitle?: string;
+	dislikeButtonTitle?: string;
+	thanksForFeedbackText?: string;
+	preToolCallText?: string;
+	duringToolCallText?: string;
+	afterToolCallText?: string;
+	aggregatedToolCallText?: string;
+}
+
+export interface DocSearchProps {
+	appId: string;
+	apiKey: string;
+	indexName: string;
+	placeholder?: string;
+	searchParameters?: any;
+	disableUserPersonalization?: boolean;
+	initialQuery?: string;
+	insights?: boolean;
+	translations?: DocSearchTranslations;
+	askAi?: any;
+	theme?: 'dark' | 'light';
+}
+type DocSearchTranslationProps = Pick<DocSearchProps, 'placeholder' | 'translations'>;
 
 const pick = (keyStart: string) =>
 	Object.fromEntries(
@@ -130,12 +231,59 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
 				const { default: docsearch } = await import('@docsearch/js');
-				const options = { ...config, container: 'sl-doc-search' };
+				let translations;
 				try {
-					const translations = JSON.parse(this.dataset.translations || '{}');
-					Object.assign(options, translations);
+					translations = JSON.parse(this.dataset.translations || '{}');
 				} catch {}
-				docsearch(options);
+
+				// Extract the page language (e.g. <html lang="en">) and pass it to DocSearch
+				// as an Algolia facet filter so that the search results are scoped to the current
+				// language. If users already defined facet filters we preserve them while appending
+				// the new one.
+				let searchParameters: Record<string, any> | undefined;
+
+				// Rebuild the askAi prop as an object:
+				// If the askAi prop is a string, treat it as the assistantId and use
+				// the default indexName, apiKey and appId from the main options.
+				// If the askAi prop is an object, spread its explicit values.
+				const askAiProp = config.askAi;
+				const isAskAiString = typeof askAiProp === 'string';
+
+				const askAi = askAiProp
+					? {
+							indexName: isAskAiString ? config.indexName : askAiProp.indexName,
+							apiKey: isAskAiString ? config.apiKey : askAiProp.apiKey,
+							appId: isAskAiString ? config.appId : askAiProp.appId,
+							assistantId: isAskAiString ? askAiProp : askAiProp.assistantId,
+							searchParameters: {},
+						}
+					: undefined;
+
+				const pageLang = document.documentElement.getAttribute('lang');
+				if (pageLang) {
+					searchParameters = config.searchParameters || {};
+					const existingFilters = searchParameters?.facetFilters ?? [];
+					// Ensure facetFilters is always an array of strings for simplicity.
+					searchParameters.facetFilters = Array.isArray(existingFilters)
+						? [...existingFilters, `lang:${pageLang}`]
+						: [existingFilters, `lang:${pageLang}`].filter(Boolean);
+
+					if (askAi) {
+						// Re-use the merged facetFilters from the search parameters so that
+						// Ask AI uses the same language filtering as the regular search.
+						askAi.searchParameters = { facetFilters: searchParameters.facetFilters };
+					}
+
+					const options = {
+						...config,
+						container: 'sl-doc-search',
+						translations,
+						searchParameters,
+						askAi,
+					};
+
+					docsearch(options);
+				}
 			});
 		}
 	}
