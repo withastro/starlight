@@ -3,6 +3,7 @@
   "version": "0.34.2",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
+    "build": "echo 'Starlight package is already built'",
     "test": "vitest",
     "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
