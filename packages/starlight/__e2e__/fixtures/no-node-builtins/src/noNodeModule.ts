@@ -1,4 +1,7 @@
 import type { ViteUserConfig } from 'astro';
+import { builtinModules } from 'node:module';
+
+const nodeModules = builtinModules.map((name) => [name, `node:${name}`]).flat();
 
 /**
  * A Vite plugin used to verify that the final bundle does not have a hard dependency on Node.js
@@ -13,7 +16,6 @@ export function preventNodeBuiltinDependencyPlugin(): NonNullable<
 	return {
 		name: 'verify-no-node-stuff',
 		generateBundle() {
-			const nodeModules = ['node:fs', 'node:url', 'node:worker_threads', 'node:path'];
 			nodeModules.forEach((name) => {
 				const importers = this.getModuleInfo(name)?.importers || [];
 				const starlightPath = new URL('../../../../', import.meta.url).pathname;
