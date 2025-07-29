@@ -7,7 +7,7 @@ import { getCollectionUrl, type StarlightCollection } from './collection';
  *
  * Below are various functions to easily get paths to collections used in Starlight that rely on
  * Node.js builtins. They exist in a separate file from {@link file://./collection.ts} to avoid
- * to potentially importing Node.js builtins in the final bundle.
+ * potentially importing Node.js builtins in the final bundle.
  */
 
 export function resolveCollectionPath(collection: StarlightCollection, srcDir: URL) {
