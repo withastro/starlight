@@ -92,12 +92,10 @@ export default defineConfig({
 					},
 					items: [
 						'getting-started',
-						'autopilot-yield',
-						'autopilot-portfolio',
 					],
 				},
 				{
-					label: 'Yield',
+					label: 'About Axal',
 					autogenerate: { directory: 'yield' },
 				},
 				{

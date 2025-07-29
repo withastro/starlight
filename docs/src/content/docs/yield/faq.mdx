@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Frequently asked questions about Axal Yield strategies.
+description: Frequently asked questions about Axal strategies.
 sidebar:
   order: 7
 tableOfContents:
@@ -11,48 +11,56 @@ tableOfContents:
 
 <div className="faq-container">
   <div className="faq-item">
-    <h3>Is yield fixed or variable?</h3>
-    <p>Variable. Displayed APYs are rolling 7‑day averages, net of fees.</p>
+    <h3>What is Axal, and how is it different from a traditional savings account?</h3>
+    <p>Axal is a non-custodial, crypto-native savings platform that helps you earn 6–10% APY on stablecoins. This is far higher than most traditional banks. Axal automatically rebalances your funds to top DeFi lending protocols for optimal returns.</p>
   </div>
   
   <div className="faq-item">
-    <h3>Where can I see proof of reserves?</h3>
-    <p>All vault addresses are viewable on‑chain and linked in the Transparency Hub.</p>
+    <h3>Can I use Axal if I'm new to crypto or don't have a wallet?</h3>
+    <p>Absolutely. You can purchase stablecoins directly through Axal using Moonpay, which supports debit cards and bank transfers. No prior crypto experience or separate wallet required. If you already own crypto, you can also transfer your existing USDC on Base to your Axal wallet.</p>
   </div>
   
   <div className="faq-item">
-    <h3>Are funds ever custodied off‑chain?</h3>
-    <p>No. Capital moves only through Privy session keys to and from audited smart contracts from battle‑tested third‑party protocols.</p>
+    <h3>How is the yield (APY) generated?</h3>
+    <p>Your funds are automatically allocated to tier-1, overcollateralized DeFi lending platforms like Morpho and Aave. Axal continuously monitors and rebalances your portfolio to maintain APY targets and minimize risk. This is similar to what banks do with your money, but with code to enforce collateral rules and liquidations for efficiency and stability.</p>
   </div>
   
   <div className="faq-item">
-    <h3>Can I lose more than I deposit?</h3>
-    <p>No. Positions are non‑recourse; the worst‑case outcome is your balance going to zero.</p>
+    <h3>Why are these returns higher than what my bank is offering?</h3>
+    <p>DeFi markets have no middleman, so more value accrues to users. The spread between lending APY and borrowed APY is much smaller than that of a traditional bank. Some protocols also offer short-term rewards to bootstrap adoption. Axal helps you capture these bonus windows while actively managing risk.</p>
   </div>
   
   <div className="faq-item">
-    <h3>What happens during protocol emergencies?</h3>
-    <p>A 3‑of‑5 Emergency Council can pause new deposits and trigger a full unwinding script to return collateral to users.</p>
+    <h3>What are the risks of high-yield crypto strategies?</h3>
+    <p>Because the main asset is tied to the dollar, the main risks aren't price swings, but technical or structural vulnerabilities.</p>
+    <ul>
+      <li><strong>Smart contract failures</strong> – Bugs or hacks can drain pools instantly.</li>
+      <li><strong>Stablecoin de-pegs</strong> – If your dollar-backed coin loses its peg, your balance is impacted.</li>
+      <li><strong>Market volatility</strong> – Leverage and sudden price moves can cause liquidations.</li>
+      <li><strong>Oracle issues</strong> – Incorrect data can trigger false trades or bad exits.</li>
+      <li><strong>Reward token inflation</strong> – Tokens often drop in value after promotional periods.</li>
+      <li><strong>Regulatory shifts</strong> – New rules may limit access or liquidity.</li>
+    </ul>
   </div>
   
   <div className="faq-item">
-    <h3>How is APY calculated?</h3>
-    <p>APY is calculated using a time-weighted average of returns, including all fees and costs, and annualized to show expected yearly return.</p>
+    <h3>What is Axal doing to mitigate these risks?</h3>
+    <p>Axal does not introduce any additional smart contracts that can be exploited. Axal only uses battle tested and audited stablecoins and protocols. USDC, for example, is issued by a publicly traded company with stringent disclosure requirements. We cross-verify price feeds to prevent errors from faulty oracles. Lastly, Axal is monitoring key metrics of every pool such as TVL volatility, APY volatility, and whale activity, reallocating funds if a pool becomes too risky.</p>
   </div>
   
   <div className="faq-item">
-    <h3>What chains are supported?</h3>
-    <p>We currently support strategies on Ethereum, Solana, and select L2s with established security and liquidity.</p>
+    <h3>Is yield variable or fixed?</h3>
+    <p>Yield is variable. APY may periodically go above 10% or below 6% in extreme market conditions.</p>
   </div>
   
   <div className="faq-item">
-    <h3>Can I use multiple strategies simultaneously?</h3>
-    <p>Yes, you can deposit into multiple strategies across different risk tiers to diversify your yield approach.</p>
+    <h3>Is Axal safe to use?</h3>
+    <p>Axal created a custom Trusted Execution Environment (TEEs), the same technology used by Face ID, to keep user funds safe. Your session keys and private keys are encrypted inside hardware-isolated chips and never leave the secure enclave. Not even Axal can access them. This is a major upgrade from crypto products, which often store keys on servers or browsers which are both vulnerable to hacks.</p>
   </div>
   
   <div className="faq-item">
-    <h3>What if I need my funds urgently?</h3>
-    <p>All strategies allow immediate withdrawals (subject to a small fee if within 72h of deposit), though underlying protocols may occasionally have their own withdrawal periods.</p>
+    <h3>Are there any fees for using Axal?</h3>
+    <p>Axal charges a small percentage of the yield earned, only when you earn. There are no hidden fees or subscription charges.</p>
   </div>
 </div>
 <style>

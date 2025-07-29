@@ -9,61 +9,9 @@ tableOfContents:
 
 ## Fee Overview
 
-We maintain a simple and transparent, tiered fee structure designed to align our incentives with your success and the risk level of your chosen strategy:
+We maintain a simple and transparent fee structure designed to align our incentives with your success. Axal takes a 15% fee of yield generated through the platform. Axal does not take any up front fees nor does it take any withdrawal fee. Fees are only generated when users generate returns.
 
-<div className="fee-table">
-  <table>
-    <thead>
-      <tr>
-        <th>Action</th>
-        <th>Fee</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Performance (Conservative)</td>
-        <td>15% of yield</td>
-      </tr>
-      <tr>
-        <td>Performance (Moderate)</td>
-        <td>20% of yield</td>
-      </tr>
-      <tr>
-        <td>Performance (Aggressive)</td>
-        <td>25% of yield</td>
-      </tr>
-      <tr>
-        <td>Withdrawal (if done within 72h of deposit)</td>
-        <td>0.1%</td>
-      </tr>
-      <tr>
-        <td>Flash‑loan unwind in emergency deleverage</td>
-        <td>Gas + 5 bps</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-## Fee Principles
-
-### Performance Fee
-
-- Tiered by strategy: Conservative (15%), Moderate (20%), Aggressive (25%)
-- Only charged on positive yield (no yield = no fee)
-- Calculated and collected at the end of each epoch
-- Applied after all gas and operational costs are accounted for
-
-### Early Withdrawal Fee
-
-- Designed to discourage liquidity sniping
-- Waived for withdrawals made after 72 hours from deposit
-- Directly added to the pool to benefit remaining depositors
-
-### Emergency Deleverage Fee
-
-- Covers the cost of flash-loans needed during emergency unwinding
-- Only applied when automatic deleveraging is triggered by market conditions
-- Represents the actual cost of the operation plus a minimal service fee
+Axal reserves the right to update its fee structure as necessary.
 
 <style>
   {`

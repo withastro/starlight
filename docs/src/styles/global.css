@@ -110,6 +110,62 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Custom sage mint color overrides */
+:root {
+  /* Override Tailwind accent colors */
+  --color-accent-50: #f7fdf4;
+  --color-accent-100: #eefbe8;
+  --color-accent-200: #def2cc;
+  --color-accent-300: #c8e8a8;
+  --color-accent-400: #a8d87a;
+  --color-accent-500: #8ac84d;
+  --color-accent-600: #6ba83a;
+  --color-accent-700: #54852e;
+  --color-accent-800: #456a28;
+  --color-accent-900: #3b5724;
+  --color-accent-950: #1e2f12;
+  
+  /* Override Starlight accent colors */
+  --sl-color-accent: #DEF2CC !important;
+  --sl-color-accent-high: #DEF2CC !important;
+  --sl-color-accent-low: #DEF2CC !important;
+  --sl-color-bg-accent: #DEF2CC !important;
+  --sl-color-text-accent: #DEF2CC !important;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent: #DEF2CC !important;
+  --sl-color-accent-high: #DEF2CC !important;
+  --sl-color-accent-low: #DEF2CC !important;
+  --sl-color-bg-accent: #DEF2CC !important;
+  --sl-color-text-accent: #DEF2CC !important;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent: #DEF2CC !important;
+  --sl-color-accent-high: #DEF2CC !important;
+  --sl-color-accent-low: #DEF2CC !important;
+  --sl-color-bg-accent: #DEF2CC !important;
+  --sl-color-text-accent: #DEF2CC !important;
+}
+
+/* Override the purple gradient background */
+[data-has-hero] .page {
+  background: linear-gradient(215deg, #DEF2CC, transparent 40%),
+    radial-gradient(#DEF2CC, transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
+    radial-gradient(#DEF2CC, transparent 65%) no-repeat 50% calc(100% + 20rem) / 60rem 30rem !important;
+}
+
+/* Override purple overlay */
+:root {
+  --purple-hsl: 120, 60%, 85% !important;
+  --overlay-blurple: hsla(120, 60%, 85%, 0.2) !important;
+}
+
+:root[data-theme='light'] {
+  --purple-hsl: 120, 60%, 85% !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
