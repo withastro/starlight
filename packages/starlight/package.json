@@ -210,6 +210,7 @@
     "i18next": "^23.11.5",
     "js-yaml": "^4.1.0",
     "klona": "^2.0.6",
+    "magic-string": "^0.30.17",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.0",
     "mdast-util-to-string": "^4.0.0",

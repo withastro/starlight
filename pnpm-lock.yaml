@@ -215,6 +215,9 @@ importers:
       klona:
         specifier: ^2.0.6
         version: 2.0.6
+      magic-string:
+        specifier: ^0.30.17
+        version: 0.30.17
       mdast-util-directive:
         specifier: ^3.0.0
         version: 3.0.0
