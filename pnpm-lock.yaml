@@ -301,6 +301,15 @@ importers:
         specifier: ^5.6.1
         version: 5.6.2(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@4.36.0)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.6.1)
 
+  packages/starlight/__e2e__/fixtures/no-node-builtins:
+    dependencies:
+      '@astrojs/starlight':
+        specifier: workspace:*
+        version: link:../../..
+      astro:
+        specifier: ^5.6.1
+        version: 5.6.2(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@4.36.0)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.6.1)
+
   packages/starlight/__e2e__/fixtures/ssr:
     dependencies:
       '@astrojs/node':
@@ -592,9 +601,6 @@ packages:
 
   '@emmetio/stream-reader@2.2.0':
     resolution: {integrity: sha512-fXVXEyFA5Yv3M3n8sUGT7+fvecGrZP4k6FnWWMSZVQf69kAq0LLpaBQLGcPR30m3zMmKYhECP4k/ZkzvhEW5kw==}
-
-  '@emnapi/runtime@1.1.1':
-    resolution: {integrity: sha512-3bfqkzuR1KLx57nZfjr2NLnFOobvyS0aTszaEGCGqmYMVDRaGvgIZbjGSV/MHSSmLgQ/b9JFHQ5xm5WRZYd+XQ==}
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
@@ -4431,11 +4437,6 @@ snapshots:
 
   '@emmetio/stream-reader@2.2.0': {}
 
-  '@emnapi/runtime@1.1.1':
-    dependencies:
-      tslib: 2.5.0
-    optional: true
-
   '@emnapi/runtime@1.4.3':
     dependencies:
       tslib: 2.5.0
@@ -4743,7 +4744,7 @@ snapshots:
 
   '@img/sharp-wasm32@0.33.3':
     dependencies:
-      '@emnapi/runtime': 1.1.1
+      '@emnapi/runtime': 1.4.3
     optional: true
 
   '@img/sharp-wasm32@0.34.2':
@@ -5384,7 +5385,7 @@ snapshots:
       picomatch: 4.0.2
       prompts: 2.4.2
       rehype: 13.0.2
-      semver: 7.7.1
+      semver: 7.7.2
       shiki: 3.2.2
       tinyexec: 0.3.2
       tinyglobby: 0.2.12
@@ -7483,8 +7484,8 @@ snapshots:
   sharp@0.33.3:
     dependencies:
       color: 4.2.3
-      detect-libc: 2.0.3
-      semver: 7.7.1
+      detect-libc: 2.0.4
+      semver: 7.7.2
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.33.3
       '@img/sharp-darwin-x64': 0.33.3
@@ -7758,7 +7759,7 @@ snapshots:
 
   typescript-auto-import-cache@0.3.5:
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   typescript@5.6.3: {}
 
