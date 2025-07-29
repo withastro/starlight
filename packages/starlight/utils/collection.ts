@@ -23,10 +23,6 @@ export function getCollectionUrl(collection: StarlightCollection, srcDir: URL) {
 	return new URL(`content/${collection}/`, srcDir);
 }
 
-export function getCollectionPath(collection: StarlightCollection, srcDir: URL) {
-	return getCollectionUrl(collection, srcDir).pathname;
-}
-
 export function getCollectionPathFromRoot(
 	collection: StarlightCollection,
 	{ root, srcDir }: { root: URL | string; srcDir: URL | string }
