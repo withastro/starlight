@@ -1,0 +1,85 @@
+:root {
+	--spacing: 0.25rem;
+	--radius-sm: 0.25rem;
+	--tw-border-style: solid;
+	--color-black: var(--sl-color-white);
+	--color-accent: var(--sl-color-orange);
+}
+
+.grid {
+	display: grid;
+}
+
+.grid-cols-2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-4 {
+	gap: calc(var(--spacing) * 4);
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
+.gap-2 {
+	gap: calc(var(--spacing) * 2);
+}
+
+.rounded-sm {
+	border-radius: var(--radius-sm);
+}
+
+.border {
+	border-style: var(--tw-border-style);
+	border-width: 1px;
+}
+
+.border-solid {
+	--tw-border-style: solid;
+	border-style: solid;
+}
+
+.border-gray-200 {
+	border-color: var(--color-gray-200);
+}
+
+.p-6 {
+	padding: calc(var(--spacing) * 6);
+}
+
+.text-black {
+	color: var(--color-black);
+}
+
+.no-underline {
+	text-decoration-line: none;
+}
+
+.underline {
+	text-decoration-line: underline;
+}
+
+.decoration-accent {
+	-webkit-text-decoration-color: var(--color-accent);
+	text-decoration-color: var(--color-accent);
+}
+
+.decoration-2 {
+	text-decoration-thickness: 2px;
+}
+
+.underline-offset-4 {
+	text-underline-offset: 4px;
+}
+
+.line-clamp-3 {
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
+}

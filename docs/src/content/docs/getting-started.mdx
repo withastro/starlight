@@ -12,6 +12,11 @@ import {
 	IslandInline,
 	IslandBlocks,
 	IslandSlot,
+	IslandCfExample,
+	IslandGraph,
+	IslandQuizz,
+	IslandAside,
+	IslandNewsletter,
 } from '../../components/Debug';
 
 This is a debug section.
@@ -38,6 +43,43 @@ With slot:
 <IslandSlot client:idle>
 	<p>This is the slot content.</p>
 </IslandSlot>
+
+An example from the Cloudflare docs:
+
+<IslandCfExample client:load />
+
+An example with a graph:
+
+<IslandGraph client:idle />
+
+An example with a quiz:
+
+<IslandQuizz client:idle>
+	<p>What is the answer?</p>
+	<span slot="answer-1">Answer 1</span>
+	<span slot="answer-2">Answer 2</span>
+	<span slot="answer-3">Answer 3</span>
+</IslandQuizz>
+
+An aside example:
+
+<IslandAside client:idle>
+	<Fragment slot="title">This is an aside title</Fragment>
+	<p>This is an aside example.</p>
+	<p>This is an aside example.</p>
+	<p>This is an aside example.</p>
+	<Fragment slot="footer">
+		<ul>
+			<li>Item 1</li>
+			<li>Item 2</li>
+			<li>Item 3</li>
+		</ul>
+	</Fragment>
+</IslandAside>
+
+And a newsletter example:
+
+<IslandNewsletter client:idle />
 
 {/* TODO(HiDeoo)  End of debug section */}
 
