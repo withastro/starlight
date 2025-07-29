@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.35.2
+
+### Patch Changes
+
+- [#3341](https://github.com/withastro/starlight/pull/3341) [`10f6fe2`](https://github.com/withastro/starlight/commit/10f6fe22a981247293ee4de106736f1a6ae24b6a) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Prevents potential build issues with the Astro Cloudflare adapter due to the dependency on Node.js builtins.
+
+- [#3327](https://github.com/withastro/starlight/pull/3327) [`bf58c60`](https://github.com/withastro/starlight/commit/bf58c60b9c3d5f5efdafbdba83cefa0566a367dc) Thanks [@delucis](https://github.com/delucis)! - Fixes a routing bug for docs pages with a slug authored with non-normalized composition. This could occur for filenames containing diacritics in some circumstances, causing 404s.
+
 ## 0.35.1
 
 ### Patch Changes
