@@ -1,0 +1,34 @@
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+import { Aside, LinkButton } from '@astrojs/starlight/components';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'My custom page (plugin)' }}>
+	<AnchorHeading level="2" id="sub-heading">My Sub heading</AnchorHeading>
+
+	<p>My custom page content and a <a href="/">link</a> to the home page.</p>
+
+	<p>
+		<LinkButton href="/getting-started/">Get started</LinkButton>
+		<LinkButton href="/reference/configuration/" variant="secondary">
+			Configuration Reference
+		</LinkButton>
+	</p>
+
+	<Aside>Some content in an aside with a <a href="/">link</a> to the home page.</Aside>
+
+	<aside>
+		This page imports the StarlightPage component after <code>AnchorHeading</code>, <code
+			>Aside</code
+		>, and <code>LinkButton</code> respectively and get an invalid layer order.
+	</aside>
+</StarlightPage>
+
+<style>
+	aside {
+		border: 1px dashed var(--sl-color-gray-1);
+		padding: 1rem;
+		font-style: italic;
+	}
+</style>

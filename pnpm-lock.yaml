@@ -59,6 +59,9 @@ importers:
       sharp:
         specifier: ^0.34.2
         version: 0.34.2
+      starlight-plugin-demo:
+        specifier: workspace:*
+        version: link:../packages/starlight-plugin-demo
     devDependencies:
       '@playwright/test':
         specifier: ^1.45.0
@@ -264,6 +267,12 @@ importers:
       vitest:
         specifier: ^3.0.5
         version: 3.1.1(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.6.1)
+
+  packages/starlight-plugin-demo:
+    devDependencies:
+      '@astrojs/starlight':
+        specifier: ^0.35.2
+        version: link:../starlight
 
   packages/starlight/__e2e__/fixtures/basics:
     dependencies:
