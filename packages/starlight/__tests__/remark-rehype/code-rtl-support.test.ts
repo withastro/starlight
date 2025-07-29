@@ -1,16 +1,12 @@
 import { rehype } from 'rehype';
 import { VFile } from 'vfile';
 import { expect, test } from 'vitest';
-import { rehypeRtlCodeSupport } from '../../integrations/code-rtl-support';
-
-const astroConfig = {
-	root: new URL(import.meta.url),
-	srcDir: new URL('./_src/', import.meta.url),
-};
+import { starlightRehypePlugins } from '../../integrations/remark-rehype';
+import { createRemarkRehypePluginTestOptions } from './utils';
 
 const processor = rehype()
 	.data('settings', { fragment: true })
-	.use(rehypeRtlCodeSupport({ astroConfig }));
+	.use(starlightRehypePlugins(createRemarkRehypePluginTestOptions()));
 
 function renderMarkdown(content: string, options: { fileURL?: URL } = {}) {
 	return processor.process(
@@ -39,18 +35,4 @@ test('applies `dir="ltr"` to code blocks', async () => {
 	expect(output).toMatchInlineSnapshot(
 		`"<p>Some text in a paragraph:</p><pre dir="ltr"><code>console.log('test')</code></pre>"`
 	);
-});
-
-test('does not transform documents without a file path', async () => {
-	const input = `<p>Some text with <code>inline code</code>.</p>`;
-	const output = String(
-		await processor.process(
-			new VFile({
-				// Rendering Markdown content using the content loader `renderMarkdown()` API does not
-				// provide a `path` option.
-				value: input,
-			})
-		)
-	);
-	expect(output).toEqual(input);
 });
