@@ -36,7 +36,7 @@ const { t } = Astro.locals;
 				<legend class="sr-only">{t('search.pagefind.filters')}</legend>
 			</fieldset>
 			<div>
-				<p aria-live="polite" class="sl-pagefind-status"></p>
+				<p aria-atomic="true" aria-live="polite" class="sl-pagefind-status"></p>
 				<ul id="sl-pagefind-results" role="listbox"></ul>
 				<button class="sl-pagefind-show-more sl-hidden">{t('search.pagefind.loadMore')}</button>
 			</div>
