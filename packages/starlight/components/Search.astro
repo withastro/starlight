@@ -176,7 +176,14 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 <style>
 	@layer starlight.core {
 		site-search {
+			--sl-pagefind-ui-pad: 1rem;
+
 			display: contents;
+		}
+		@media (min-width: 50rem) {
+			site-search {
+				--sl-pagefind-ui-pad: 1.5rem;
+			}
 		}
 		button[data-open-modal] {
 			display: flex;
@@ -246,11 +253,10 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 		.dialog-frame {
 			position: relative;
-			overflow: auto;
+			overflow: hidden;
 			flex-direction: column;
 			flex-grow: 1;
 			gap: 1rem;
-			padding: 1rem;
 		}
 
 		button[data-close-modal] {
@@ -258,12 +264,14 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			z-index: 1;
 			align-items: center;
 			align-self: flex-end;
-			height: calc(64px * var(--pagefind-ui-scale));
+			height: 3.2rem;
 			padding: 0.25rem;
 			border: 0;
 			background: transparent;
 			cursor: pointer;
 			color: var(--sl-color-text-accent);
+			margin-block-start: var(--sl-pagefind-ui-pad);
+			margin-inline-end: var(--sl-pagefind-ui-pad);
 		}
 
 		:global(starlight-pagefind) {
@@ -283,10 +291,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				height: max-content;
 				min-height: 10rem;
 				max-height: calc(100% - 28rem);
-			}
-
-			.dialog-frame {
-				padding: 1.5rem;
 			}
 		}
 	}

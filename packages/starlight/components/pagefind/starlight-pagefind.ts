@@ -672,7 +672,7 @@ export class StarlightPagefind extends HTMLElement {
 	#scrollSelectionIntoView() {
 		if (!this.#selectedResult) return;
 
-		const scrollable = this.#dialog.querySelector('.dialog-frame')!;
+		const scrollable = this.#dialog.querySelector('.sl-pagefind-content')!;
 
 		const selectionRect = this.#selectedResult.getBoundingClientRect();
 		const scrollableRect = scrollable.getBoundingClientRect();

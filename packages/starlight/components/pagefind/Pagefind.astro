@@ -5,32 +5,35 @@ const { t } = Astro.locals;
 ---
 
 <starlight-pagefind>
-	<form>
-		<label id="sl-pagefind-label" for="sl-pagefind-input" class="sr-only">{t('search.label')}</label
-		>
-		<Icon name="magnifier" class="sl-pagefind-input-search-icon" />
-		<input
-			id="sl-pagefind-input"
-			type="search"
-			role="combobox"
-			aria-autocomplete="list"
-			aria-controls="sl-pagefind-results"
-			aria-labelledby="sl-pagefind-label"
-			autocapitalize="off"
-			autocomplete="off"
-			autocorrect="off"
-			enterkeyhint="go"
-			placeholder={t('search.label')}
-			spellcheck="false"
-		/>
-		<button
-			aria-label={t('search.pagefind.clear')}
-			class="sl-pagefind-clear sl-hidden"
-			title={t('search.pagefind.clear')}
-			type="reset"
-		>
-			<Icon name="close" size="1.5rem" class="sl-pagefind-input-clear-icon" />
-		</button>
+	<form class="sl-flex">
+		<header>
+			<label id="sl-pagefind-label" for="sl-pagefind-input" class="sr-only"
+				>{t('search.label')}</label
+			>
+			<Icon name="magnifier" class="sl-pagefind-input-search-icon" />
+			<input
+				id="sl-pagefind-input"
+				type="search"
+				role="combobox"
+				aria-autocomplete="list"
+				aria-controls="sl-pagefind-results"
+				aria-labelledby="sl-pagefind-label"
+				autocapitalize="off"
+				autocomplete="off"
+				autocorrect="off"
+				enterkeyhint="go"
+				placeholder={t('search.label')}
+				spellcheck="false"
+			/>
+			<button
+				aria-label={t('search.pagefind.clear')}
+				class="sl-pagefind-clear sl-hidden"
+				title={t('search.pagefind.clear')}
+				type="reset"
+			>
+				<Icon name="close" size="1.5rem" class="sl-pagefind-input-clear-icon" />
+			</button>
+		</header>
 		<div class="sl-pagefind-content sl-flex">
 			<fieldset class="sl-pagefind-filters sl-hidden">
 				<legend class="sr-only">{t('search.pagefind.filters')}</legend>
@@ -93,21 +96,32 @@ const { t } = Astro.locals;
 			--sl-pagefind-sub-result-icon-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E");
 			--sl-pagefind-sub-result-last-icon-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
 			--sl-pagefind-filter-marker-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
+
+			overflow-y: hidden;
 		}
 
 		form {
 			color: var(--sl-color-text);
+			flex-direction: column;
+			height: 100%;
 			position: relative;
 		}
 
+		header {
+			background-color: var(--sl-color-black);
+			border-bottom: var(--sl-pagefind-ui-border);
+			padding: var(--sl-pagefind-ui-pad);
+		}
+
 		.sl-pagefind-input-search-icon {
-			inset-block-start: 1.15rem;
-			inset-inline-start: 1rem;
+			inset-block-start: calc(var(--sl-pagefind-ui-pad) + 1.15rem);
+			inset-inline-start: calc(var(--sl-pagefind-ui-pad) + 1rem);
 			position: absolute;
 		}
 
 		input[type='search'] {
 			background-color: var(--sl-pagefind-ui-bg);
+			background-color: var(--sl-color-gray-6);
 			border: var(--sl-pagefind-ui-border);
 			border-radius: 0.5rem;
 			color: var(--sl-color-white);
@@ -130,8 +144,11 @@ const { t } = Astro.locals;
 			background-color: transparent;
 			border: 0;
 			border-radius: calc(0.5rem - 2px);
-			inset-inline-end: max(0.15rem, var(--sl-search-cancel-space));
-			inset-block-start: 0.15rem;
+			inset-inline-end: max(
+				calc(var(--sl-pagefind-ui-pad) + 0.15rem),
+				calc(var(--sl-pagefind-ui-pad) + var(--sl-search-cancel-space))
+			);
+			inset-block-start: calc(var(--sl-pagefind-ui-pad) + 0.15rem);
 			justify-content: center;
 			height: 2.9rem;
 			padding: 0;
@@ -150,11 +167,21 @@ const { t } = Astro.locals;
 		.sl-pagefind-content {
 			flex-direction: column;
 			gap: 1rem;
+			overflow-y: auto;
+			padding: var(--sl-pagefind-ui-pad);
+			padding-block-start: 0;
 		}
 
 		@media (min-width: 38rem) {
 			.sl-pagefind-content {
 				flex-direction: row;
+			}
+
+			.sl-pagefind-content > fieldset::after,
+			.sl-pagefind-content > div:after {
+				content: '';
+				display: block;
+				height: var(--sl-pagefind-ui-pad);
 			}
 		}
 
