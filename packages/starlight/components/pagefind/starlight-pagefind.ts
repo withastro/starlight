@@ -302,7 +302,6 @@ export class StarlightPagefind extends HTMLElement {
 		this.#isPerformingSearch = false;
 
 		this.#render(true);
-		this.#updateSelectedResult('first');
 	}
 
 	/** Reset results and render the component with no results. */
