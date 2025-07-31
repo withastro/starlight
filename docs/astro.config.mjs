@@ -99,16 +99,8 @@ export default defineConfig({
 					autogenerate: { directory: 'yield' },
 				},
 				{
-					label: 'Points',
-					autogenerate: { directory: 'axal-points' },
-				},
-				{
-					label: 'Referrals',
-					autogenerate: { directory: 'referrals' },
-				},
-				{
-					label: 'Autopilot',
-					autogenerate: { directory: 'autopilot' },
+					label: 'Rewards',
+					autogenerate: { directory: 'rewards' },
 				},
 				{
 					label: 'Security and Account Abstraction',
