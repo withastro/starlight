@@ -107,7 +107,7 @@ export default defineConfig({
 					autogenerate: { directory: 'security' },
 				},
 				{
-					label: 'Terms of Service',
+					label: 'Disclosures',
 					autogenerate: { directory: 'terms' },
 				},
 			],
