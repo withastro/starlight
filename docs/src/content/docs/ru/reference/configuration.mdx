@@ -224,7 +224,11 @@ type SidebarItem =
 			| {
 					// Автоматически созданная группа ссылок
 					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
+					autogenerate: {
+						directory: string;
+						collapsed?: boolean;
+						attrs?: Record<string, string | number | boolean | undefined>;
+					};
 					collapsed?: boolean;
 			  }
 	  ));
@@ -677,3 +681,118 @@ starlight({
 	credits: true,
 });
 ```
+
+## Настройка коллекций контента
+
+Starlight использует [коллекции контента](https://docs.astro.build/ru/guides/content-collections/) Astro для загрузки вашего контента.
+Загрузчики контента и схемы Starlight помогают настроить коллекции в соответствии с вашими потребностями.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// Необязательно: коллекция i18n используется для перевода
+	// пользовательского интерфейса на многоязычных сайтах
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Загрузчики
+
+Starlight экспортирует следующие [загрузчики Astro](https://docs.astro.build/ru/reference/content-loader-reference/) из модуля `@astrojs/starlight/loaders`, чтобы упростить настройку коллекций контента.
+
+#### `docsLoader()`
+
+Загрузчик `docsLoader()` загружает локальные файлы Markdown, MDX и Markdoc из директории `src/content/docs/`. Файлы, названия которых начинаются с подчёркивания (`_`), игнорируются.
+
+##### Импорт
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Параметры
+
+###### `generateId()`
+
+**тип:** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+По умолчанию страницы, созданные с помощью `docsLoader()`, обрабатывают имена файлов с помощью «слагификатора» (sluggifier), который удаляет специальные символы и приводит имя к нижнему регистру.  
+Если вы хотите переопределить это поведение, можно предоставить собственную функцию `generateId()`.  
+
+Например, это может быть полезно для сохранения специальных символов, которые в противном случае были бы удалены.  
+По умолчанию файл `Example.File.md` будет доступен по пути `/examplefile`.  
+Если нужно, чтобы он был доступен по пути `/Example.File`, можно определить кастомную функцию `generateId()`: 
+
+```js
+docsLoader({
+	// Удаляет расширение `.md` или `.mdx`, но в остальном не изменяет названия файлов.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+Подробнее см. [`generateId()` в документации Astro](https://docs.astro.build/ru/reference/content-loader-reference/#generateid).
+
+#### `i18nLoader()`
+
+Загрузчик `i18nLoader()` загружает локальные файлы JSON и YAML из директории `src/content/i18n/`.  
+Файлы, названия которых начинаются с подчёркивания (`_`), игнорируются.
+
+##### Импорт
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Параметры
+
+На данный момент у `i18nLoader()` нет доступных параметров.
+
+### Схемы
+
+Starlight предоставляет следующие [схемы для коллекций контента](https://docs.astro.build/ru/guides/content-collections/#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%85%D0%B5%D0%BC%D1%8B-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8) из модуля `@astrojs/starlight/schema`.  
+Эти схемы обязательны для использования в коллекциях `docs` и `i18n`, от которых зависит Starlight.
+
+#### `docsSchema()`
+
+`schema()` обрабатывает метаданные для всего контента в коллекции `docs`.
+
+##### Импорт
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### Параметры
+
+###### `extend`
+
+**тип:** схема Zod или функция, возвращающая схему Zod  
+**по умолчанию:** `z.object({})`
+
+Расширяет схему метаданных Starlight дополнительными полями.  
+Подробнее об использовании опции `extend` см. в разделе [Настройка схемы метаданных](/ru/reference/frontmatter/#настройка-схемы-метаданных).  
+
+#### `i18nSchema()`
+
+Схема `i18nSchema()` обрабатывает все файлы данных в коллекции `i18n`.
+
+##### Импорт
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### Параметры
+
+###### `extend`
+
+**тип:** объект Zod  
+**по умолчанию:** `z.object({})`
+
+Расширяет схему интернационализации (i18n) Starlight дополнительными полями.  
+Подробнее об использовании опции `extend` см. в разделе [Расширение схемы переводов](/ru/guides/i18n/#расширение-схемы-переводов).  
