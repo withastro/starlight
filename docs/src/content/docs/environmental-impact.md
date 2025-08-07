@@ -100,8 +100,8 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 | [Nextra][nx-carbon]         | 0.05g              |   A    |
 | [MkDocs][mk-carbon]         | 0.07g              |   A    |
 | [Fumadocs][fs-carbon]       | 0.07g              |   A    |
-| [Docus][dc-carbon]          | 0.10g              |   B    |
 | [Docusaurus][ds-carbon]     | 0.10g              |   B    |
+| [Docus][dc-carbon]          | 0.11g              |   B    |
 | [GitBook][gb-carbon]        | 0.42g              |   F    |
 | [Mintlify][mt-carbon]       | 0.48g              |   F    |
 
