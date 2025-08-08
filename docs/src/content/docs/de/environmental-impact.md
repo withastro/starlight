@@ -92,33 +92,33 @@ Diese Tests mit dem [Website Carbon Calculator][wcc] vergleichen ähnliche Seite
 | Framework                   | CO₂ pro Seitenaufruf | Bewertung |
 | --------------------------- | -------------------- | :-------: |
 | [Starlight][sl-carbon]      | 0.01g                |    A+     |
-| [Read the Docs][rtd-carbon] | 0.07g                |    A+     |
-| [Sphinx][sx-carbon]         | 0.07g                |    A+     |
-| [VitePress][vp-carbon]      | 0.07g                |    A+     |
-| [Docus][dc-carbon]          | 0.10g                |     A     |
-| [docsify][dy-carbon]        | 0.11g                |     A     |
-| [mdBook][md-carbon]         | 0.13g                |     A     |
-| [MkDocs][mk-carbon]         | 0.15g                |     A     |
-| [Fumadocs][fs-carbon]       | 0.16g                |     A     |
-| [Nextra][nx-carbon]         | 0.16g                |     A     |
-| [Docusaurus][ds-carbon]     | 0.25g                |     B     |
-| [Mintlify][mt-carbon]       | 0.99g                |     F     |
-| [GitBook][gb-carbon]        | 1.19g                |     F     |
+| [Sphinx][sx-carbon]         | 0.01g                |    A+     |
+| [Read the Docs][rtd-carbon] | 0.03g                |    A+     |
+| [VitePress][vp-carbon]      | 0.04g                |    A      |
+| [docsify][dy-carbon]        | 0.05g                |    A      |
+| [mdBook][md-carbon]         | 0.05g                |    A      |
+| [Nextra][nx-carbon]         | 0.05g                |    A      |
+| [MkDocs][mk-carbon]         | 0.07g                |    A      |
+| [Fumadocs][fs-carbon]       | 0.07g                |    A      |
+| [Docusaurus][ds-carbon]     | 0.10g                |    B      |
+| [Docus][dc-carbon]          | 0.11g                |    B      |
+| [GitBook][gb-carbon]        | 0.42g                |    F      |
+| [Mintlify][mt-carbon]       | 0.48g                |    F      |
 
-<small>Daten erhoben am 12. April 2025. Klicke auf einen Link, um aktuelle Zahlen zu sehen.</small>
+<small>Daten erhoben am 7. August 2025. Klicke auf einen Link, um aktuelle Zahlen zu sehen.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Weitere Ressourcen
