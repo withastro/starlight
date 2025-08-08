@@ -91,19 +91,19 @@ Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaire
 
 | Framework                   | CO₂ par page visitée | Notation |
 | --------------------------- | -------------------- | :------: |
-| [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.03g              |   A+   |
-| [VitePress][vp-carbon]      | 0.04g              |   A    |
-| [docsify][dy-carbon]        | 0.05g              |   A    |
-| [mdBook][md-carbon]         | 0.05g              |   A    |
-| [Nextra][nx-carbon]         | 0.05g              |   A    |
-| [MkDocs][mk-carbon]         | 0.07g              |   A    |
-| [Fumadocs][fs-carbon]       | 0.07g              |   A    |
-| [Docusaurus][ds-carbon]     | 0.10g              |   B    |
-| [Docus][dc-carbon]          | 0.11g              |   B    |
-| [GitBook][gb-carbon]        | 0.42g              |   F    |
-| [Mintlify][mt-carbon]       | 0.48g              |   F    |
+| [Starlight][sl-carbon]      | 0.01g                |    A+    |
+| [Sphinx][sx-carbon]         | 0.01g                |    A+    |
+| [Read the Docs][rtd-carbon] | 0.03g                |    A+    |
+| [VitePress][vp-carbon]      | 0.04g                |    A     |
+| [docsify][dy-carbon]        | 0.05g                |    A     |
+| [mdBook][md-carbon]         | 0.05g                |    A     |
+| [Nextra][nx-carbon]         | 0.05g                |    A     |
+| [MkDocs][mk-carbon]         | 0.07g                |    A     |
+| [Fumadocs][fs-carbon]       | 0.07g                |    A     |
+| [Docusaurus][ds-carbon]     | 0.10g                |    B     |
+| [Docus][dc-carbon]          | 0.11g                |    B     |
+| [GitBook][gb-carbon]        | 0.42g                |    F     |
+| [Mintlify][mt-carbon]       | 0.48g                |    F     |
 
 <small>Données collectées le 7 août 2025. Cliquez sur un lien pour voir les chiffres actualisés.</small>
 
