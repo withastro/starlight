@@ -1,0 +1,21 @@
+---
+import { LinkButton } from '@astrojs/starlight/components';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+/**
+ * This page is used to test the CSS layer order in custom pages using the StarlightPage> component
+ * where we cannot ensure a correct import order of CSS.
+ * Note that the order of imports in this file is important and should not be changed.
+ */
+---
+
+<StarlightPage frontmatter={{ title: 'A custom page' }}>
+	<AnchorHeading level="2" id="a-sub-heading">A Sub heading</AnchorHeading>
+
+	<p>Custom page content and a <a href="/tabs">link</a> to another page.</p>
+
+	<p>
+		<LinkButton href="/tabs">Tabs link button</LinkButton>
+	</p>
+</StarlightPage>

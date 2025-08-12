@@ -467,6 +467,28 @@ test.describe('components', () => {
 		});
 	});
 
+	test.describe('css layer order', () => {
+		test('ensures that the StarlightPage component is always imported first to ensure a predictable CSS layer order in custom pages', async ({
+			page,
+			makeServer,
+		}) => {
+			const starlight = await makeServer('dev', { mode: 'dev' });
+			await starlight.goto('/starlight-page-css-layer-order');
+
+			const linkButton = page.getByRole('link', { name: 'Tabs link button' });
+			await linkButton.highlight();
+
+			const [bgColor, textColor] = await linkButton.evaluate((element) => {
+				const styles = window.getComputedStyle(element);
+				return [styles.getPropertyValue('background-color'), styles.getPropertyValue('color')];
+			});
+
+			// If the background color and text color are the same, the text is not readable and the CSS
+			// layer order is incorrect.
+			expect(bgColor).not.toBe(textColor);
+		});
+	});
+
 	async function expectSelectedTab(tabs: Locator, label: string, panel?: string) {
 		expect(
 			(
