@@ -1,0 +1,78 @@
+---
+title: Authenticator app
+description: How we create and manage crypto wallets for our users with Privy
+sidebar:
+  order: 1
+---
+
+### Two-Factor Authentication for Wallet Export
+
+To ensure maximum security when exporting your wallet credentials, Axal requires two-factor authentication (2FA) using Google Authenticator. This additional security layer protects against unauthorized access to your private keys and seed phrases.
+
+#### Why Google Authenticator is Required
+
+Exporting wallet details grants complete access to your funds, making it one of the most sensitive operations on the platform. Google Authenticator provides:
+
+- **Time-based Security:** Codes expire every 30 seconds, preventing replay attacks
+- **Offline Protection:** Works without internet connection, protecting against phishing
+- **Device-bound Security:** Codes are generated locally on your device, not transmitted over networks
+- **Industry Standard:** Widely adopted security practice used by major financial institutions
+
+#### Installing Google Authenticator
+
+**For iOS devices:**
+1. Open the App Store on your iPhone or iPad
+2. Search for "Google Authenticator"
+3. Tap "Get" to download the official Google Authenticator app
+4. Once installed, open the app and follow the setup prompts
+
+**For Android devices:**
+1. Open Google Play Store on your Android device
+2. Search for "Google Authenticator"
+3. Tap "Install" to download the official Google Authenticator app
+4. Launch the app after installation completes
+
+#### Setting Up 2FA for Wallet Export
+
+1. **Access Security Settings:**
+   - Navigate to your account settings in the Axal dashboard
+   - Select "Security" from the menu options
+   - Find the "Two-Factor Authentication" section
+
+2. **Initialize 2FA Setup:**
+   - Click "Enable 2FA" or "Setup Authenticator"
+   - You'll see a QR code displayed on your screen
+
+3. **Scan the QR Code:**
+   - Open Google Authenticator on your mobile device
+   - Tap the "+" button or "Add Account"
+   - Select "Scan QR Code" 
+   - Point your camera at the QR code displayed on your computer screen
+   - The app will automatically detect and add your Axal account
+
+4. **Verify Setup:**
+   - Google Authenticator will generate a 6-digit code for Axal
+   - Enter this code in the verification field on the Axal website
+   - Click "Verify" to complete the setup
+
+5. **Save Backup Codes:**
+   - After successful verification, you'll receive backup recovery codes
+   - Store these codes securely offline (not on your computer or cloud storage)
+   - These codes can be used if you lose access to your authenticator device
+
+#### Using 2FA for Wallet Export
+
+When you want to export your wallet credentials:
+
+1. Navigate to "Wallet Export" in your account settings
+2. Enter your account password when prompted
+3. Open Google Authenticator on your mobile device
+4. Find your Axal account and note the current 6-digit code
+5. Enter the code in the 2FA verification field
+6. Complete the export process to receive your private key or seed phrase
+
+**Important Security Notes:**
+- Never share your authenticator codes with anyone
+- Keep your mobile device secure and updated
+- Store backup codes in a secure, offline location
+- If you lose your device, use backup codes to regain access and re-setup 2FA immediately
