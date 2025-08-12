@@ -52,15 +52,22 @@ export const docSearchI18nSchema = () =>
 		.object({
 			// SEARCH BOX
 			/** Default: `Clear the query` */
-			'docsearch.searchBox.resetButtonTitle': z.string(),
-			/** Default: `Clear the query` */
-			'docsearch.searchBox.resetButtonAriaLabel': z.string(),
-			/** Default: `Cancel` */
-			'docsearch.searchBox.cancelButtonText': z.string(),
-			/** Default: `Cancel` */
+			'docsearch.searchBox.clearButtonTitle': z.string(),
+			'docsearch.searchBox.clearButtonAriaLabel': z.string(),
+			/** Default: `Close` */
+			'docsearch.searchBox.closeButtonText': z.string(),
 			'docsearch.searchBox.cancelButtonAriaLabel': z.string(),
 			/** Default: `Search` */
+			'docsearch.searchBox.placeholderText': z.string(),
+			/** Default: `Ask AI` placeholder */
+			'docsearch.searchBox.placeholderTextAskAi': z.string(),
+			/** Default: `Answering…` placeholder while streaming */
+			'docsearch.searchBox.placeholderTextAskAiStreaming': z.string(),
+			/** Default: `Search` */
 			'docsearch.searchBox.searchInputLabel': z.string(),
+			/** Back navigation from Ask AI to keyword search */
+			'docsearch.searchBox.backToKeywordSearchButtonText': z.string(),
+			'docsearch.searchBox.backToKeywordSearchButtonAriaLabel': z.string(),
 
 			// START SCREEN
 			/** Default: `Recent` */
@@ -75,6 +82,8 @@ export const docSearchI18nSchema = () =>
 			'docsearch.startScreen.favoriteSearchesTitle': z.string(),
 			/** Default: `Remove this search from favorites` */
 			'docsearch.startScreen.removeFavoriteSearchButtonTitle': z.string(),
+			'docsearch.startScreen.recentConversationsTitle': z.string(),
+			'docsearch.startScreen.removeRecentConversationButtonTitle': z.string(),
 
 			// ERROR SCREEN
 			/** Default: `Unable to fetch results` */
@@ -98,7 +107,9 @@ export const docSearchI18nSchema = () =>
 			/** Default: `Escape key` */
 			'docsearch.footer.closeKeyAriaLabel': z.string(),
 			/** Default: `Search by` */
-			'docsearch.footer.searchByText': z.string(),
+			'docsearch.footer.submitQuestionText': z.string(),
+			'docsearch.footer.backToSearchText': z.string(),
+			'docsearch.footer.poweredByText': z.string(),
 
 			// NO RESULTS SCREEN
 			/** Default: `No results for` */
@@ -109,5 +120,23 @@ export const docSearchI18nSchema = () =>
 			'docsearch.noResultsScreen.reportMissingResultsText': z.string(),
 			/** Default: `Let us know.` */
 			'docsearch.noResultsScreen.reportMissingResultsLinkText': z.string(),
+
+			// RESULTS SCREEN (Ask AI entry point)
+			'docsearch.resultsScreen.askAiPlaceholder': z.string(),
+
+			// ASK AI SCREEN translations
+			'docsearch.askAiScreen.disclaimerText': z.string(),
+			'docsearch.askAiScreen.relatedSourcesText': z.string(),
+			'docsearch.askAiScreen.thinkingText': z.string(),
+			'docsearch.askAiScreen.copyButtonText': z.string(),
+			'docsearch.askAiScreen.copyButtonCopiedText': z.string(),
+			'docsearch.askAiScreen.copyButtonTitle': z.string(),
+			'docsearch.askAiScreen.likeButtonTitle': z.string(),
+			'docsearch.askAiScreen.dislikeButtonTitle': z.string(),
+			'docsearch.askAiScreen.thanksForFeedbackText': z.string(),
+			'docsearch.askAiScreen.preToolCallText': z.string(),
+			'docsearch.askAiScreen.duringToolCallText': z.string(),
+			'docsearch.askAiScreen.afterToolCallText': z.string(),
+			'docsearch.askAiScreen.aggregatedToolCallText': z.string(),
 		})
 		.partial();
