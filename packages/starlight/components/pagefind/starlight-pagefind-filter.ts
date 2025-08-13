@@ -13,6 +13,7 @@ export class StarlightPagefindFilter extends HTMLElement {
 	#selectedValues: PagefindFilters['selected'][string] = [];
 	#defaultOpen?: boolean;
 	#onToggleOpen?: (opened: boolean) => void;
+	#showEmptyValues?: boolean;
 
 	/** Various references to elements commonly used in this component. */
 	#details = this.querySelector('details')!;
@@ -30,12 +31,14 @@ export class StarlightPagefindFilter extends HTMLElement {
 		selectedValues: PagefindFilters['selected'][string];
 		defaultOpen?: boolean;
 		onToggleOpen: (opened: boolean) => void;
+		showEmptyValues: boolean;
 	}) {
 		this.#name = filter.name;
 		this.#values = filter.values;
 		this.#selectedValues = filter.selectedValues;
 		this.#defaultOpen = filter.defaultOpen ?? false;
 		this.#onToggleOpen = filter.onToggleOpen;
+		this.#showEmptyValues = filter.showEmptyValues;
 
 		this.#render();
 	}
@@ -58,6 +61,8 @@ export class StarlightPagefindFilter extends HTMLElement {
 		}
 
 		for (const [value, count] of Object.entries(this.#values)) {
+			if (!this.#showEmptyValues && count === 0) continue;
+
 			const container = document.createElement('div');
 
 			const input = document.createElement('input');

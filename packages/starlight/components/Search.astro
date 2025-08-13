@@ -138,7 +138,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
 			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
 
-			const { mergeIndex, ...pagefindOptions } = pagefindUserConfig;
+			const { mergeIndex, showEmptyFilters, ...pagefindOptions } = pagefindUserConfig;
 
 			window.addEventListener('DOMContentLoaded', () => {
 				// TODO(HiDeoo) Restore dev mode check.
@@ -163,6 +163,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 								});
 								return result;
 							},
+							showEmptyFilters,
 							translations,
 						},
 						{

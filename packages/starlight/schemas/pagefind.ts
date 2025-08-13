@@ -103,6 +103,12 @@ const pagefindSchema = z.object({
 			})
 		)
 		.optional(),
+	/**
+	 * Configure if filter values with no results should be visible or not.
+	 *
+	 * @default true
+	 */
+	showEmptyFilters: z.boolean().optional(),
 });
 
 export const PagefindConfigSchema = () => pagefindSchema;

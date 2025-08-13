@@ -578,6 +578,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 				onToggleOpen: (opened) => {
 					this.#pagefindFilters.opened[name] = opened;
 				},
+				showEmptyValues: this.#options.showEmptyFilters ?? true,
 			};
 		}
 
@@ -725,8 +726,14 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 
 customElements.define('starlight-pagefind', StarlightPagefind);
 
+/** Starlight Pagefind options user-defined in the Starlight `pagefind` configuration. */
+type StarlightPagefindOptionsFromPagefindConfig = 'mergeIndex' | 'showEmptyFilters';
+
 /** Options specific to the Starlight Pagefind component. */
-export type StarlightPagefindOptions = Pick<PagefindConfig, 'mergeIndex'> & {
+export type StarlightPagefindOptions = Pick<
+	PagefindConfig,
+	StarlightPagefindOptionsFromPagefindConfig
+> & {
 	/**
 	 * The Pagefind bundle directory path.
 	 * @see {@link https://pagefind.app/docs/ui/#bundle-path | the Pagefind documentation} for more
@@ -744,7 +751,7 @@ export type StarlightPagefindOptions = Pick<PagefindConfig, 'mergeIndex'> & {
 };
 
 /** Pagefind specific options that can be overridden in Starlight. */
-type PagefindOptions = Partial<Omit<PagefindConfig, 'mergeIndex'>> &
+type PagefindOptions = Partial<Omit<PagefindConfig, StarlightPagefindOptionsFromPagefindConfig>> &
 	Pick<PagefindIndexOptions, 'baseUrl'>;
 
 /**
