@@ -253,13 +253,19 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 			return;
 		}
 
+		// Process the term before performing or preloading a search (the original Pagefind UI
+		// implementation only does this when performing a search which seems to be a bug).
+		const query = this.#options.processTerm
+			? this.#options.processTerm(this.#pagefindQuery)
+			: this.#pagefindQuery;
+
 		this.#searchTimeout = setTimeout(async () => {
 			this.#seachAbortController?.abort();
 			this.#seachAbortController = new AbortController();
 			const signal = this.#seachAbortController.signal;
 
 			try {
-				await this.#performSearch(this.#pagefindQuery, this.#pagefindFilters.selected, signal);
+				await this.#performSearch(query, this.#pagefindFilters.selected, signal);
 			} catch (error) {
 				if (error instanceof DOMException && error.name === 'AbortError') {
 					// Skip aborted searches.
@@ -272,7 +278,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 
 		// Even if the search is debounced, preload results for the query.
 		const pagefind = await this.#getOrWaitForPagefind();
-		pagefind.preload(this.#pagefindQuery, { filters: this.#pagefindFilters.selected });
+		pagefind.preload(query, { filters: this.#pagefindFilters.selected });
 	}
 
 	/**
@@ -731,7 +737,11 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 customElements.define('starlight-pagefind', StarlightPagefind);
 
 /** Starlight Pagefind options user-defined in the Starlight `pagefind` configuration. */
-type StarlightPagefindOptionsFromPagefindConfig = 'mergeIndex' | 'openFilters' | 'showEmptyFilters';
+type StarlightPagefindOptionsFromPagefindConfig =
+	| 'mergeIndex'
+	| 'openFilters'
+	| 'processTerm'
+	| 'showEmptyFilters';
 
 /** Options specific to the Starlight Pagefind component. */
 export type StarlightPagefindOptions = Pick<
