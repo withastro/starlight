@@ -5,3 +5,4 @@ export type {
 	HookParameters,
 } from './utils/plugins';
 export type { StarlightIcon } from './components/Icons';
+export type { StarlightPagefindWebComponent as StarlightPagefind } from './components/pagefind/starlight-pagefind-public';

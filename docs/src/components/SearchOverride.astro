@@ -1,0 +1,41 @@
+---
+import Default from '@astrojs/starlight/components/Search.astro';
+
+// TODO(HiDeoo) Delete this override.
+
+const shouldOverride = Astro.locals.starlightRoute.id === 'demo/trigger-filters';
+---
+
+{
+	shouldOverride ? (
+		<custom-site-search>
+			<Default>
+				<slot />
+			</Default>
+		</custom-site-search>
+	) : (
+		<Default>
+			<slot />
+		</Default>
+	)
+}
+
+<script>
+	import type { StarlightPagefind } from '@astrojs/starlight/types';
+
+	customElements.define(
+		'custom-site-search',
+		class CustomSiteSearch extends HTMLElement {
+			constructor() {
+				super();
+				this.querySelector<StarlightPagefind>('site-search')?.triggerFilters({ author: ['Alice'] });
+			}
+		}
+	);
+</script>
+
+<style>
+	custom-site-search {
+		display: contents;
+	}
+</style>

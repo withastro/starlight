@@ -77,8 +77,12 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 <script>
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 	import type { StarlightPagefind } from './pagefind/starlight-pagefind';
+	import type { StarlightPagefindPublicApi } from './pagefind/starlight-pagefind-public';
 
-	class SiteSearch extends HTMLElement {
+	class SiteSearch extends HTMLElement implements StarlightPagefindPublicApi {
+		/** Starlight Pagefind instance. */
+		#starlightPagefind: StarlightPagefind | null = null;
+
 		constructor() {
 			super();
 			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
@@ -142,8 +146,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 				onIdle(async () => {
 					await customElements.whenDefined('starlight-pagefind');
-					const starlightPagefind = document.querySelector<StarlightPagefind>('starlight-pagefind');
-					starlightPagefind?.init(
+					this.#starlightPagefind = document.querySelector<StarlightPagefind>('starlight-pagefind');
+					this.#starlightPagefind?.init(
 						{
 							// TODO(HiDeoo) Restore `bundlePath` to its original value.
 							// bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
@@ -169,6 +173,27 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				});
 			});
 		}
+
+		/** Return a fully initialized Starlight Pagefind instance, waiting for it to be ready if necessary. */
+		#getOrWaitForStarlightPagefind() {
+			if (this.#starlightPagefind) return this.#starlightPagefind;
+
+			return new Promise<StarlightPagefind>((resolve) => {
+				const interval = setInterval(() => {
+					if (this.#starlightPagefind) {
+						clearInterval(interval);
+						resolve(this.#starlightPagefind);
+					}
+				}, 50);
+			});
+		}
+
+		/** Set Pagefind selected filters to use in the search results. */
+		triggerFilters: StarlightPagefindPublicApi['triggerFilters'] = async (...args) => {
+			const starlightPagefind = await this.#getOrWaitForStarlightPagefind();
+
+			starlightPagefind.triggerFilters(...args);
+		};
 	}
 	customElements.define('site-search', SiteSearch);
 </script>
