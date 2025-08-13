@@ -287,3 +287,60 @@ test('errors if a route middleware path will conflict with Astro middleware', ()
 		`
 	);
 });
+
+test('errors with head `meta` tag with `content` and attributes', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			head: [
+				{
+					tag: 'meta',
+					attrs: { property: 'test:id' },
+					content: '1234',
+				},
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
+			You should instead use a \`content\` attribute in the \`attrs\` object:
+			
+			{
+			  "tag": "meta",
+			  "attrs": {
+			    "property": "test:id",
+			    "content": "1234"
+			  }
+			}"
+	`);
+});
+
+test('errors with head `meta` tag with `content` and no attributes', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			head: [
+				{
+					tag: 'meta',
+					content: '1234',
+				},
+			],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
+			You should instead use a \`content\` attribute with an additional attribute to identify the kind of metadata it represents in the \`attrs\` object:
+			
+			{
+			  "tag": "meta",
+			  "attrs": {
+			    "name": "identifier",
+			    "content": "1234"
+			  }
+			}"
+	`);
+});
