@@ -34,7 +34,6 @@ const starlightPagefindConfig = {
 
 /**
  * A Starlight-specific rewrite of the original Pagefind UI.
- * Currently, only features and options that can be used or overridden in Starlight are implemented.
  *
  * @see {@link https://github.com/Pagefind/pagefind/tree/main/pagefind_ui/default}
  * @see {@link https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/}
