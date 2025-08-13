@@ -7,6 +7,8 @@ export interface StarlightPagefindPublicApi {
 	 * Filter names and values supplied are case-sensitive.
 	 */
 	triggerFilters: (filters: PagefindSearchFragment['filters']) => Promise<void>;
+	/** Perform a search with the given query. */
+	triggerSearch: (query: string) => Promise<void>;
 }
 
 /** Starlight Pagefind web component, useful when querying the DOM for it with `querySelector`. */

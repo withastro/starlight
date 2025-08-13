@@ -715,6 +715,12 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 
 		this.#pagefindFilters.selected = selected;
 	}
+
+	/** Perform a search with the given query. */
+	async triggerSearch(query: string) {
+		this.#queryInput.value = query;
+		this.#queryInput.dispatchEvent(new InputEvent('input'));
+	}
 }
 
 customElements.define('starlight-pagefind', StarlightPagefind);
