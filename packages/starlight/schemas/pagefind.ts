@@ -104,6 +104,13 @@ const pagefindSchema = z.object({
 		)
 		.optional(),
 	/**
+	 * Define a list of filters that should be open by default when the search results are displayed.
+	 * By default, a filter is open only if it's the only filter available.
+	 *
+	 * @default []
+	 */
+	openFilters: z.string().array().optional(),
+	/**
 	 * Configure if filter values with no results should be visible or not.
 	 *
 	 * @default true

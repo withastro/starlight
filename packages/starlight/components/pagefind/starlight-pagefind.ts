@@ -573,8 +573,12 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 				name,
 				values,
 				selectedValues: this.#pagefindFilters.selected[name] ?? [],
-				// Open by default if there is only one filter or if the filter was previously opened.
-				defaultOpen: filters.length === 1 || (this.#pagefindFilters.opened[name] ?? false),
+				// Open by default if there is only one filter, if the filter was previously opened, or if
+				// it is configured to be open by default.
+				defaultOpen:
+					filters.length === 1 ||
+					(this.#pagefindFilters.opened[name] ?? false) ||
+					(this.#options.openFilters ?? []).includes(name),
 				onToggleOpen: (opened) => {
 					this.#pagefindFilters.opened[name] = opened;
 				},
@@ -727,7 +731,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 customElements.define('starlight-pagefind', StarlightPagefind);
 
 /** Starlight Pagefind options user-defined in the Starlight `pagefind` configuration. */
-type StarlightPagefindOptionsFromPagefindConfig = 'mergeIndex' | 'showEmptyFilters';
+type StarlightPagefindOptionsFromPagefindConfig = 'mergeIndex' | 'openFilters' | 'showEmptyFilters';
 
 /** Options specific to the Starlight Pagefind component. */
 export type StarlightPagefindOptions = Pick<
