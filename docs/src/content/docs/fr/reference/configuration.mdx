@@ -5,7 +5,7 @@ description: Une vue d'ensemble de toutes les options de configuration prises en
 
 ## Configuration de l'intégration `starlight`
 
-Starlight est une intégration construite sur le framework web [Astro](https://astro.build). Vous pouvez configurer votre projet dans le fichier de configuration `astro.config.mjs` :
+Starlight est une intégration basée sur le framework web [Astro](https://astro.build). Vous pouvez configurer votre projet dans le fichier de configuration `astro.config.mjs` :
 
 ```js
 // astro.config.mjs
@@ -81,7 +81,7 @@ Configurez la table des matières affichée à droite de chaque page. Par défau
 
 **Type :** `{ baseUrl: string }`
 
-Permet d'activer les liens "Modifier cette page" en définissant l'URL de base qu'ils doivent utiliser. Le lien final sera `editLink.baseUrl` + le chemin de la page actuelle. Par exemple, pour permettre l'édition de pages dans le repo `withastro/starlight` sur GitHub :
+Active les liens « Modifier cette page » en définissant l'URL de base qu'ils doivent utiliser. Le lien final sera `editLink.baseUrl` + le chemin de la page actuelle. Par exemple, pour permettre l'édition de pages dans le dépôt `withastro/starlight` sur GitHub :
 
 ```js
 starlight({
@@ -108,16 +108,16 @@ Une barre latérale est un tableau de liens et de groupes de liens.
 
 - `items` — un tableau contenant plus de liens et des sous-groupes.
 
-- `autogenerate` — un objet indiquant un répertoire de vos docs depuis lequel générer automatiquement un groupe de liens.
+- `autogenerate` — un objet spécifiant un répertoire de votre documentation à partir duquel générer automatiquement un groupe de liens.
 
 Les liens internes peuvent également être spécifiés sous forme de chaîne de caractères au lieu d'un objet avec une propriété `slug`.
 
 ```js
 starlight({
 	sidebar: [
-		// Un lien unique étiqueté “Accueil”.
+		// Un lien unique étiqueté « Accueil ».
 		{ label: 'Accueil', link: '/' },
-		// Un groupe étiqueté “Débuter ici” contenant quatre liens.
+		// Un groupe étiqueté « Débuter ici » contenant quatre liens.
 		{
 			label: 'Débuter ici',
 			items: [
@@ -153,13 +153,13 @@ Les sous-groupes générés automatiquement respectent la propriété `collapsed
 sidebar: [
   // Un groupe rétractable de liens.
   {
-    label: 'Collapsed Links',
+    label: 'Liens rétractés',
     collapsed: true,
     items: ['intro', 'next-steps'],
   },
   // Un groupe développé contenant des sous-groupes générés automatiquement rétractés.
   {
-    label: 'Reference',
+    label: 'Référence',
     autogenerate: {
       directory: 'reference',
       collapsed: true,
@@ -170,7 +170,7 @@ sidebar: [
 
 #### Traduire les étiquettes
 
-Si votre site est multilingue, le `label` de chaque élément est considéré comme étant dans la locale par défaut. Vous pouvez définir une propriété `translations` pour fournir des étiquettes pour les autres langues supportées :
+Si votre site est multilingue, le `label` de chaque élément est considéré comme étant dans la locale par défaut. Vous pouvez définir une propriété `translations` pour fournir des étiquettes pour les autres langues prises en charge :
 
 ```js {5,9,14}
 sidebar: [
@@ -224,7 +224,11 @@ type SidebarItem =
 			| {
 					// Groupe de liens généré automatiquement
 					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
+					autogenerate: {
+						directory: string;
+						collapsed?: boolean;
+						attrs?: Record<string, string | number | boolean | undefined>;
+					};
 					collapsed?: boolean;
 			  }
 	  ));
@@ -244,7 +248,7 @@ interface BadgeConfig {
 
 **Type :** <code>\{ \[dir: string\]: [LocaleConfig](#localeconfig) \}</code>
 
-[Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` supportées.
+[Configurez l'internationalisation (i18n)](/fr/guides/i18n/) de votre site en définissant les `locales` prises en charge.
 
 Chaque entrée doit utiliser comme clé le répertoire dans lequel les fichiers de cette langue sont sauvegardés.
 
@@ -259,16 +263,16 @@ export default defineConfig({
 			// Définit l'anglais comme langue par défaut pour ce site.
 			defaultLocale: 'en',
 			locales: {
-				// Documentations en anglais danse trouve dans `src/content/docs/en/`
+				// Documentation en anglais située dans `src/content/docs/en/`
 				en: {
 					label: 'English',
 				},
-				// Documentations en Chinois simplifié se trouve dans `src/content/docs/zh-cn/`
+				// Documentation en Chinois simplifié située dans `src/content/docs/zh-cn/`
 				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
 				},
-				// Documentations en Arabe se trouve dans `src/content/docs/ar/`
+				// Documentation en Arabe située dans `src/content/docs/ar/`
 				ar: {
 					label: 'العربية',
 					dir: 'rtl',
@@ -400,7 +404,7 @@ starlight({
 **Type :** `StarlightExpressiveCodeOptions | boolean`  
 **Par défaut :** `true`
 
-Starlight utilise [Expressive Code](https://expressive-code.com) pour afficher les blocs de code et ajouter le support pour mettre en évidence des portions d'exemples de code, ajouter des noms de fichiers aux blocs de code, et plus encore.
+Starlight utilise [Expressive Code](https://expressive-code.com) pour afficher les blocs de code et ajouter la prise en charge de la mise en évidence des portions d'exemples de code, de l'ajout de noms de fichiers aux blocs de code, et plus encore.
 Consultez le [guide « Blocs de code »](/fr/guides/authoring-content/#blocs-de-code) pour apprendre à utiliser la syntaxe d'Expressive Code dans votre contenu Markdown et MDX.
 
 Vous pouvez utiliser n'importe laquelle des [options de configuration standard d'Expressive Code](https://expressive-code.com/reference/configuration/) ainsi que certaines propriétés spécifiques à Starlight, en les définissant dans l'option `expressiveCode` de Starlight.
@@ -429,7 +433,7 @@ En plus des options standard d'Expressive Code, vous pouvez également définir 
 **Type :** `Array<string | ThemeObject | ExpressiveCodeTheme>`  
 **Par défaut :** `['starlight-dark', 'starlight-light']`
 
-Définit les thèmes utilisés pour styliser les blocs de code.
+Définit les thèmes utilisés pour mettre en forme les blocs de code.
 Consultez la [documentation des `themes` d'Expressive Code](https://expressive-code.com/guides/themes/) pour plus de détails sur les formats de thème pris en charge.
 
 Starlight utilise les variantes claires et sombres du [thème Night Owl](https://github.com/sdras/night-owl-vscode-theme) de Sarah Drasner par défaut.
@@ -539,7 +543,7 @@ starlight({
 });
 ```
 
-Les entrées dans `head` sont converties directement en éléments HTML et ne passent pas par le traitement de [script](https://docs.astro.build/fr/guides/client-side-scripts/#regroupement-de-script) ou de [style](https://docs.astro.build/fr/guides/styling/#styliser-avec-astro) d'Astro.
+Les entrées dans `head` sont converties directement en éléments HTML et ne passent pas par le traitement de [script](https://docs.astro.build/fr/guides/client-side-scripts/#regroupement-de-script) ou de [style](https://docs.astro.build/fr/guides/styling/#mettre-en-forme-avec-astro) d'Astro.
 Si vous avez besoin d'importer des ressources locales comme des scripts, des styles ou des images, [redéfinissez le composant Head](/fr/guides/overriding-components/#réutiliser-un-composant-intégré).
 
 #### `HeadConfig`
@@ -666,10 +670,126 @@ Consultez la [référence des modules d'extension](/fr/reference/plugins/) pour 
 **Type :** `boolean`  
 **Par défaut :** `false`
 
-Permet l'affichage d'un lien "Créé avec Starlight" dans le pied de page de votre site.
+Permet l'affichage d'un lien « Créé avec Starlight » dans le pied de page de votre site.
 
 ```js
 starlight({
 	credits: true,
 });
 ```
+
+## Configuration des collections de contenu
+
+Starlight utilise les [collections de contenu d'Astro](https://docs.astro.build/fr/guides/content-collections/) pour charger votre contenu.
+Les chargeurs (également connus sous le nom de « loaders » en anglais) et schémas de collection de Starlight aident à configurer les collections comme nécessaire.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// Optionel : la collection i18n est utilisée pour traduire l'interface
+	// utilisateur dans les sites multilingues
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Chargeurs
+
+Starlight exporte les [chargeurs Astro](https://docs.astro.build/fr/reference/content-loader-reference/) suivants depuis le module `@astrojs/starlight/loaders` pour simplifier la configuration des collections de contenu.
+
+#### `docsLoader()`
+
+Le chargeur `docsLoader()` charge les fichiers Markdown, MDX et Markdoc locaux du répertoire `src/content/docs/`.
+Les fichiers commençant par un tiret bas (`_`) sont ignorés.
+
+##### Importation
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Options
+
+###### `generateId()`
+
+**Type :** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+Par défaut, les pages générées en utilisant `docsLoader()` transforment les noms de fichiers en utilisant un générateur de slug qui supprime les caractères spéciaux et met le nom de fichier en minuscules.
+Si vous souhaitez remplacer ce comportement par défaut, spécifiez votre propre fonction `generateId()`.
+
+Par exemple, cela peut être utile pour préserver des caractères spéciaux qui seraient supprimés.
+Par défaut, `Exemple.Fichier.md` serait diponible à l'URL `/exemplefichier`.
+Si vous souhaitez le rendre disponible à l'URL `/Exemple.Fichier`, vous pouvez le faire en définissant une fonction `generateId()` personnalisée :
+
+```js
+docsLoader({
+	// Supprime les extension `.md` ou `.mdx` sans modifier les noms de fichiers.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+Consultez [`generateId()` dans la documentation d'Astro](https://docs.astro.build/fr/reference/content-loader-reference/#generateid) pour plus de détails.
+
+#### `i18nLoader()`
+
+Le chargeur `i18nLoader()` charge les fichiers JSON et YAML locaux du répertoire `src/content/i18n/`.
+Les fichiers commençant par un tiret bas (`_`) sont ignorés.
+
+##### Importation
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Options
+
+Il n'y a pour le moment aucune option pour configurer `i18nLoader()`.
+
+### Schémas
+
+Starlight fournit les [schémas de collection de contenu](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-sch%C3%A9ma-de-collection) suivants depuis le module `@astrojs/starlight/schema`.
+Ces schémas doivent être utilisés pour les collections `docs` et `i18n` dont Starlight dépend.
+
+#### `docsSchema()`
+
+Le chargeur `docsSchema()` analyse (opération également appelée « parse » en anglais) le frontmatter de tout le contenu de la collection `docs`.
+
+##### Importation
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### Options
+
+###### `extend`
+
+**Type :** Schéma Zod ou fonction qui retourne un schéma Zod  
+**Par défaut :** `z.object({})`
+
+Étendez le schéma du frontmatter de Starlight avec des champs supplémentaires.
+Consultez [« Personnaliser le schéma du frontmatter »](/fr/reference/frontmatter/#personnaliser-le-schéma-du-frontmatter) pour plus de détails sur l'utilisation de l'option `extend`.
+
+#### `i18nSchema()`
+
+Le chargeur `i18nSchema()` analyse tous les fichiers de données dans la collection `i18n`.
+
+##### Importation
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### Options
+
+###### `extend`
+
+**Type :** Objet Zod  
+**Par défaut :** `z.object({})`
+
+Étendez le schéma de traduction de Starlight avec des champs supplémentaires.
+Consultez [« Étendre le schéma de traduction »](/fr/guides/i18n/#étendre-le-schéma-de-traduction) pour plus de détails sur l'utilisation de l'option `extend`.

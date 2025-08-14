@@ -1,5 +1,11 @@
 # @astrojs/starlight-markdoc
 
+## 0.5.0
+
+### Minor Changes
+
+- [#2261](https://github.com/withastro/starlight/pull/2261) [`778b743`](https://github.com/withastro/starlight/commit/778b743cdb832551ed576c745728358d8bbf9d7a) Thanks [@shubham-padia](https://github.com/shubham-padia)! - Adds support for the `icon` attribute in the `aside` tag, allowing the use of any of Starlight’s built-in icons.
+
 ## 0.4.0
 
 ### Minor Changes

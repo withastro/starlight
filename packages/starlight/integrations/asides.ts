@@ -1,7 +1,7 @@
 /// <reference types="mdast-util-directive" />
 
 import type { AstroConfig, AstroIntegration, AstroUserConfig } from 'astro';
-import { h as _h, s as _s, type Properties } from 'hastscript';
+import { h as _h, s as _s, type Properties, type Result } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
 	type Directives,
@@ -14,7 +14,12 @@ import { toString } from 'mdast-util-to-string';
 import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { HookParameters, StarlightConfig } from '../types';
+import type { HookParameters, StarlightConfig, StarlightIcon } from '../types';
+import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark-rehype-utils';
+import { Icons } from '../components/Icons';
+import { fromHtml } from 'hast-util-from-html';
+import type { Element } from 'hast';
+import { throwInvalidAsideIconError } from './asides-error';
 
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
@@ -87,6 +92,20 @@ function transformUnhandledDirective(
 	}
 }
 
+/** Hacky function that generates the children of an mdast SVG tree. */
+function makeSvgChildNodes(children: Result['children']): any[] {
+	const nodes: P[] = [];
+	for (const child of children) {
+		if (child.type !== 'element') continue;
+		nodes.push({
+			type: 'paragraph',
+			data: { hName: child.tagName, hProperties: child.properties },
+			children: makeSvgChildNodes(child.children),
+		});
+	}
+	return nodes;
+}
+
 /**
  * remark plugin that converts blocks delimited with `:::` into styled
  * asides (a.k.a. “callouts”, “admonitions”, etc.). Depends on the
@@ -148,7 +167,11 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 		],
 	};
 
+	const docsCollectionPath = getRemarkRehypeDocsCollectionPath(options.astroConfig.srcDir);
+
 	const transformer: Transformer<Root> = (tree, file) => {
+		if (!shouldTransformFile(file, docsCollectionPath)) return;
+
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
@@ -159,6 +182,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				return;
 			}
 			const variant = node.name;
+			const attributes = node.attributes;
 			if (!isAsideVariant(variant)) return;
 
 			// remark-directive converts a container’s “label” to a paragraph added as the head of its
@@ -180,6 +204,19 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 				node.children.splice(0, 1);
 			}
 
+			let iconPath = iconPaths[variant];
+
+			if (attributes?.['icon']) {
+				const iconName = attributes['icon'] as StarlightIcon;
+				const icon = Icons[iconName];
+				if (!icon) throwInvalidAsideIconError(iconName);
+				// Omit the root node and return only the first child which is the SVG element.
+				const iconHastTree = fromHtml(`<svg>${icon}</svg>`, { fragment: true, space: 'svg' })
+					.children[0] as Element;
+				// Render all SVG child nodes.
+				iconPath = makeSvgChildNodes(iconHastTree.children);
+			}
+
 			const aside = h(
 				'aside',
 				{
@@ -197,7 +234,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 								fill: 'currentColor',
 								class: 'starlight-aside__icon',
 							},
-							iconPaths[variant]
+							iconPath
 						),
 						...titleNode,
 					]),

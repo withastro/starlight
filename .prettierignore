@@ -3,6 +3,7 @@
 
 # Generated Directories
 **/dist
+**/build
 **/.astro
 **/__coverage__
 

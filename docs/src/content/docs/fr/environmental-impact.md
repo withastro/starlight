@@ -1,32 +1,32 @@
 ---
-title: Documents écologiques
+title: Documentations écologiques
 description: Découvrez comment Starlight peut vous aider à créer des documentations plus écologiques et à réduire votre empreinte carbone.
 ---
 
 Les estimations de l'impact climatique de l'industrie du web varient entre [2 %][sf] et [4 % des émissions mondiales de carbone][bbc], ce qui équivaut à peu près aux émissions de l'industrie du transport aérien.
-Le calcul de l'impact écologique d'un site web repose sur de nombreux facteurs complexes, mais ce guide contient quelques conseils pour réduire l'empreinte écologique de votre site documentaire.
+Le calcul de l'impact écologique d'un site web repose sur de nombreux facteurs complexes, mais ce guide contient quelques conseils pour réduire l'empreinte écologique de votre site de documentation.
 
 La bonne nouvelle, c'est que le choix de Starlight est un excellent début.
-Selon le Website Carbon Calculator, ce site est [plus propre que 99 % des pages web testées][sl-carbon], produisant 0,01 g de CO₂ par page visitée.
+Selon le Website Carbon Calculator, ce site est [plus propre que 98 % des pages web testées][sl-carbon], produisant 0,01 g de CO₂ par page visitée.
 
 ## Poids de la page
 
 Plus une page web transfère de données, plus elle nécessite de ressources énergétiques.
 En avril 2023, la page web médiane demandait à l'utilisateur de télécharger plus de 2 000 Ko selon les [données de l'archive HTTP][http].
 
-Starlight construit des pages aussi légères que possible.
+Starlight crée des pages aussi légères que possible.
 Par exemple, lors de sa première visite, un utilisateur téléchargera moins de 50 Ko de données compressées, soit seulement 2,5 % de la médiane des archives HTTP.
 Avec une bonne stratégie de mise en cache, les navigations suivantes peuvent télécharger jusqu'à 10 Ko.
 
 ### Images
 
 Bien que Starlight fournisse une bonne base de référence, les images que vous ajoutez à vos pages de documentation peuvent rapidement augmenter le poids de vos pages.
-Starlight utilise le [support d'actifs optimisés][assets] d'Astro pour optimiser les images locales dans vos fichiers Markdown et MDX.
+Starlight utilise la [prise en charge des ressources optimisées][assets] d'Astro pour optimiser les images locales dans vos fichiers Markdown et MDX.
 
 ### Composants d'interface utilisateur
 
-Les composants construits avec des frameworks d'interface utilisateur tels que React ou Vue peuvent facilement ajouter de grandes quantités de JavaScript à une page.
-Starlight étant construit sur Astro, les composants de ce type chargent **zéro JavaScript côté client par défaut** grâce à [Astro Islands][islands].
+Les composants créés avec des frameworks d'interface utilisateur tels que React ou Vue peuvent facilement ajouter de grandes quantités de JavaScript à une page.
+Starlight étant construit sur Astro, les composants de ce type chargent **zéro JavaScript côté client par défaut** grâce aux [îlots d'Astro][islands].
 
 ### Mise en cache
 
@@ -35,7 +35,7 @@ Une bonne stratégie de mise en cache permet à l'utilisateur d'obtenir un nouve
 
 La façon la plus courante de configurer la mise en cache est d'utiliser l'en-tête HTTP [`Cache-Control`][cache].
 Lorsque vous utilisez Starlight, vous pouvez définir une longue durée de mise en cache pour tout ce qui se trouve dans le répertoire `/_astro/`.
-Ce répertoire contient des fichiers CSS, JavaScript, et d'autres actifs intégrés qui peuvent être mis en cache pour toujours, réduisant ainsi les téléchargements inutiles :
+Ce répertoire contient des fichiers CSS, JavaScript, et d'autres ressources intégrées qui peuvent être mises en cache pour toujours, réduisant ainsi les téléchargements inutiles :
 
 ```
 Cache-Control: public, max-age=604800, immutable
@@ -92,33 +92,33 @@ Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaire
 | Framework                   | CO₂ par page visitée | Notation |
 | --------------------------- | -------------------- | :------: |
 | [Starlight][sl-carbon]      | 0.01g                |    A+    |
-| [Read the Docs][rtd-carbon] | 0.07g                |    A+    |
-| [Sphinx][sx-carbon]         | 0.07g                |    A+    |
-| [VitePress][vp-carbon]      | 0.07g                |    A+    |
-| [Docus][dc-carbon]          | 0.10g                |    A     |
-| [docsify][dy-carbon]        | 0.11g                |    A     |
-| [mdBook][md-carbon]         | 0.13g                |    A     |
-| [MkDocs][mk-carbon]         | 0.15g                |    A     |
-| [Fumadocs][fs-carbon]       | 0.16g                |    A     |
-| [Nextra][nx-carbon]         | 0.16g                |    A     |
-| [Docusaurus][ds-carbon]     | 0.25g                |    B     |
-| [Mintlify][mt-carbon]       | 0.99g                |    F     |
-| [GitBook][gb-carbon]        | 1.19g                |    F     |
+| [Sphinx][sx-carbon]         | 0.01g                |    A+    |
+| [Read the Docs][rtd-carbon] | 0.03g                |    A+    |
+| [VitePress][vp-carbon]      | 0.04g                |    A     |
+| [docsify][dy-carbon]        | 0.05g                |    A     |
+| [mdBook][md-carbon]         | 0.05g                |    A     |
+| [Nextra][nx-carbon]         | 0.05g                |    A     |
+| [MkDocs][mk-carbon]         | 0.07g                |    A     |
+| [Fumadocs][fs-carbon]       | 0.07g                |    A     |
+| [Docusaurus][ds-carbon]     | 0.10g                |    B     |
+| [Docus][dc-carbon]          | 0.11g                |    B     |
+| [GitBook][gb-carbon]        | 0.42g                |    F     |
+| [Mintlify][mt-carbon]       | 0.48g                |    F     |
 
-<small>Données collectées le 12 avril 2025. Cliquez sur un lien pour voir les chiffres actualisés.</small>
+<small>Données collectées le 7 août 2025. Cliquez sur un lien pour voir les chiffres actualisés.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Plus de ressources

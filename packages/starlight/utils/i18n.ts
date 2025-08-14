@@ -53,8 +53,14 @@ export function processI18nConfig(
 /** Generate an Astro i18n configuration based on a Starlight configuration. */
 function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i18n']> {
 	return {
+		// When using custom locale `path`s, the default locale must match one of these paths.
+		// In Starlight, this matches the `locale` property if defined, and we fallback to the `lang`
+		// property if not (which would be set to the language’s directory name by default).
 		defaultLocale:
-			config.defaultLocale.lang ?? config.defaultLocale.locale ?? BuiltInDefaultLocale.lang,
+			// If the default locale is explicitly set to `root`, we use the `lang` property instead.
+			(config.defaultLocale.locale === 'root'
+				? config.defaultLocale.lang
+				: (config.defaultLocale.locale ?? config.defaultLocale.lang)) ?? BuiltInDefaultLocale.lang,
 		locales: config.locales
 			? Object.entries(config.locales).map(([locale, localeConfig]) => {
 					return {

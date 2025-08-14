@@ -18,13 +18,13 @@
   "page.lastUpdated": "Sidst opdateret:",
   "page.previousLink": "Forrige",
   "page.nextLink": "Næste",
-  "page.draft": "This content is a draft and will not be included in production builds.",
+  "page.draft": "Indholdet er en kladde og vil ikke blive inkluderet i produktions versioner.",
   "404.text": "Siden er ikke fundet. Tjek din URL eller prøv søgelinjen.",
   "aside.note": "Note",
   "aside.tip": "Tip",
-  "aside.caution": "Caution",
-  "aside.danger": "Danger",
-  "fileTree.directory": "Directory",
-  "builtWithStarlight.label": "Built with Starlight",
-  "heading.anchorLabel": "Section titled “{{title}}”"
+  "aside.caution": "Bemærk",
+  "aside.danger": "Advarsel",
+  "fileTree.directory": "Mappe",
+  "builtWithStarlight.label": "Bygget med Starlight",
+  "heading.anchorLabel": "Sektion kaldt “{{title}}”"
 }

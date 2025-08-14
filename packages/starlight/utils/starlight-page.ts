@@ -211,5 +211,5 @@ async function getUserDocsSchema(): Promise<
 	NonNullable<ContentConfig['collections']['docs']['schema']>
 > {
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
-	return userCollections?.docs.schema ?? docsSchema();
+	return userCollections?.docs?.schema ?? docsSchema();
 }

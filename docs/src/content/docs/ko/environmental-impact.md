@@ -7,7 +7,7 @@ description: Starlight가 어떻게 친환경 문서 사이트를 구축하고 �
 웹 사이트의 생태학적 영향을 계산하기 위한 여러 복잡한 요소가 존재하지만, 이 가이드는 문서 사이트의 환경적 영향을 줄이기 위한 몇 가지 팁을 포함합니다.
 
 좋은 소식은 Starlight를 선택하는 것이 좋은 시작이라는 것입니다.
-Website Carbon Calculator에 따르면 이 사이트는 [테스트된 웹페이지의 99%보다 깨끗하며][sl-carbon] 페이지 방문당 0.01g의 CO₂를 배출합니다.
+Website Carbon Calculator에 따르면 이 사이트는 [테스트된 웹페이지의 98%보다 깨끗하며][sl-carbon] 페이지 방문당 0.01g의 CO₂를 배출합니다.
 
 ## 페이지 크기
 
@@ -93,33 +93,33 @@ JavaScript를 분석하고 컴파일하는 것은 브라우저가 수행해야 �
 | 프레임워크                  | 페이지 방문당 CO₂ | 등급 |
 | --------------------------- | ----------------- | :--: |
 | [Starlight][sl-carbon]      | 0.01g             |  A+  |
-| [Read the Docs][rtd-carbon] | 0.07g             |  A+  |
-| [Sphinx][sx-carbon]         | 0.07g             |  A+  |
-| [VitePress][vp-carbon]      | 0.07g             |  A+  |
-| [Docus][dc-carbon]          | 0.10g             |  A   |
-| [docsify][dy-carbon]        | 0.11g             |  A   |
-| [mdBook][md-carbon]         | 0.13g             |  A   |
-| [MkDocs][mk-carbon]         | 0.15g             |  A   |
-| [Fumadocs][fs-carbon]       | 0.16g             |  A   |
-| [Nextra][nx-carbon]         | 0.16g             |  A   |
-| [Docusaurus][ds-carbon]     | 0.25g             |  B   |
-| [Mintlify][mt-carbon]       | 0.99g             |  F   |
-| [GitBook][gb-carbon]        | 1.19g             |  F   |
+| [Sphinx][sx-carbon]         | 0.01g             |  A+  |
+| [Read the Docs][rtd-carbon] | 0.03g             |  A+  |
+| [VitePress][vp-carbon]      | 0.04g             |  A   |
+| [docsify][dy-carbon]        | 0.05g             |  A   |
+| [mdBook][md-carbon]         | 0.05g             |  A   |
+| [Nextra][nx-carbon]         | 0.05g             |  A   |
+| [MkDocs][mk-carbon]         | 0.07g             |  A   |
+| [Fumadocs][fs-carbon]       | 0.07g             |  A   |
+| [Docusaurus][ds-carbon]     | 0.10g             |  B   |
+| [Docus][dc-carbon]          | 0.11g             |  B   |
+| [GitBook][gb-carbon]        | 0.42g             |  F   |
+| [Mintlify][mt-carbon]       | 0.48g             |  F   |
 
-<small>2025년 4월 12일에 수집된 데이터. 최신 수치를 보려면 링크를 클릭하세요.</small>
+<small>2025년 8월 7일에 수집된 데이터. 최신 수치를 보려면 링크를 클릭하세요.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## 더 많은 자료

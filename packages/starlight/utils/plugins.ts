@@ -10,6 +10,7 @@ import {
 import type { UserI18nSchema } from './translations';
 import { createTranslationSystemFromFs } from './translations-fs';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from './collection-fs';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -65,7 +66,10 @@ export async function runPlugins(
 	);
 
 	function absolutePathToLang(path: string) {
-		return getAbsolutePathFromLang(path, { astroConfig: context.config, starlightConfig });
+		return getAbsolutePathFromLang(path, {
+			docsPath: getCollectionPosixPath('docs', context.config.srcDir),
+			starlightConfig,
+		});
 	}
 
 	// A list of Astro integrations added by the various plugins.

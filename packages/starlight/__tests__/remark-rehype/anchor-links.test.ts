@@ -4,6 +4,7 @@ import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
 import { starlightAutolinkHeadings } from '../../integrations/heading-links';
+import { getCollectionPosixPath } from '../../utils/collection-fs';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Anchor Links Tests',
@@ -23,7 +24,10 @@ const useTranslations = createTranslationSystemFromFs(
 );
 
 function absolutePathToLang(path: string) {
-	return getAbsolutePathFromLang(path, { astroConfig, starlightConfig });
+	return getAbsolutePathFromLang(path, {
+		docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+		starlightConfig,
+	});
 }
 
 const processor = await createMarkdownProcessor({
@@ -85,4 +89,17 @@ test('localizes accessible label for the current language', async () => {
 		{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
 	);
 	expect(res.code).includes('<span class="sr-only">Section intitulée « Some text »</span>');
+});
+
+test('does not generate anchor links for documents without a file path', async () => {
+	const res = await processor.render(
+		`
+## Some text
+`,
+		// Rendering Markdown content using the content loader `renderMarkdown()` API does not provide
+		// a `fileURL` option.
+		{}
+	);
+
+	expect(res.code).not.includes('Section titled');
 });

@@ -7,7 +7,7 @@ Estimates for the climate impact of the web industry range from between [2%][sf]
 There are many complex factors in calculating the ecological impact of a website, but this guide includes a few tips for reducing the environmental footprint of your docs site.
 
 The good news is, choosing Starlight is a great start.
-According to the Website Carbon Calculator, this site is [cleaner than 99% of web pages tested][sl-carbon], producing 0.01g of CO₂ per page visit.
+According to the Website Carbon Calculator, this site is [cleaner than 98% of web pages tested][sl-carbon], producing 0.01g of CO₂ per page visit.
 
 ## Page weight
 
@@ -92,33 +92,33 @@ These tests with the [Website Carbon Calculator][wcc] compare similar pages buil
 | Framework                   | CO₂ per page visit | Rating |
 | --------------------------- | ------------------ | :----: |
 | [Starlight][sl-carbon]      | 0.01g              |   A+   |
-| [Read the Docs][rtd-carbon] | 0.07g              |   A+   |
-| [Sphinx][sx-carbon]         | 0.07g              |   A+   |
-| [VitePress][vp-carbon]      | 0.07g              |   A+   |
-| [Docus][dc-carbon]          | 0.10g              |   A    |
-| [docsify][dy-carbon]        | 0.11g              |   A    |
-| [mdBook][md-carbon]         | 0.13g              |   A    |
-| [MkDocs][mk-carbon]         | 0.15g              |   A    |
-| [Fumadocs][fs-carbon]       | 0.16g              |   A    |
-| [Nextra][nx-carbon]         | 0.16g              |   A    |
-| [Docusaurus][ds-carbon]     | 0.25g              |   B    |
-| [Mintlify][mt-carbon]       | 0.99g              |   F    |
-| [GitBook][gb-carbon]        | 1.19g              |   F    |
+| [Sphinx][sx-carbon]         | 0.01g              |   A+   |
+| [Read the Docs][rtd-carbon] | 0.03g              |   A+   |
+| [VitePress][vp-carbon]      | 0.04g              |   A    |
+| [docsify][dy-carbon]        | 0.05g              |   A    |
+| [mdBook][md-carbon]         | 0.05g              |   A    |
+| [Nextra][nx-carbon]         | 0.05g              |   A    |
+| [MkDocs][mk-carbon]         | 0.07g              |   A    |
+| [Fumadocs][fs-carbon]       | 0.07g              |   A    |
+| [Docusaurus][ds-carbon]     | 0.10g              |   B    |
+| [Docus][dc-carbon]          | 0.11g              |   B    |
+| [GitBook][gb-carbon]        | 0.42g              |   F    |
+| [Mintlify][mt-carbon]       | 0.48g              |   F    |
 
-<small>Data collected on 12 April 2025. Click a link to see up-to-date figures.</small>
+<small>Data collected on 7 August 2025. Click a link to see up-to-date figures.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## More resources
