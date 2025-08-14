@@ -160,8 +160,12 @@ Some text
 			// We are not relying on `toThrowErrorMatchingInlineSnapshot()` and our custom snapshot
 			// serializer in this specific test as error thrown in a remark plugin includes a dynamic file
 			// path.
+			// `expect.objectContaining` returns `any`.
+			/* eslint-disable @typescript-eslint/no-unsafe-argument */
 			expect.objectContaining({
 				type: 'AstroUserError',
+				// `expect.stringMatching` returns `any`.
+				/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 				hint: expect.stringMatching(
 					/An aside custom icon must be set to the name of one of Starlight’s built-in icons, but received `invalid-icon-name`/
 				),

@@ -93,14 +93,16 @@ function transformUnhandledDirective(
 }
 
 /** Hacky function that generates the children of an mdast SVG tree. */
-function makeSvgChildNodes(children: Result['children']): any[] {
+function makeSvgChildNodes(children: Result['children']): P[] {
 	const nodes: P[] = [];
 	for (const child of children) {
 		if (child.type !== 'element') continue;
 		nodes.push({
 			type: 'paragraph',
 			data: { hName: child.tagName, hProperties: child.properties },
-			children: makeSvgChildNodes(child.children),
+			// We are explicitly casting to the expected type here due to the hacky nature of this
+			// function which only works with SVG elements.
+			children: makeSvgChildNodes(child.children) as unknown as P['children'],
 		});
 	}
 	return nodes;

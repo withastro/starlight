@@ -102,7 +102,7 @@ export const starlightExpressiveCode = ({
 			? (starlightConfig.expressiveCode as AstroExpressiveCodeOptions)
 			: {};
 
-	let docsPath = getCollectionPosixPath('docs', astroConfig.srcDir);
+	const docsPath = getCollectionPosixPath('docs', astroConfig.srcDir);
 
 	return [
 		astroExpressiveCode({
