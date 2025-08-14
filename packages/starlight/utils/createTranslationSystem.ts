@@ -12,7 +12,7 @@ import type { UserI18nKeys, UserI18nSchema } from './translations';
  */
 export const I18nextNamespace = 'starlight' as const;
 
-export function createTranslationSystem<T extends i18nSchemaOutput>(
+export async function createTranslationSystem<T extends i18nSchemaOutput>(
 	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	userTranslations: Record<string, T>,
 	pluginTranslations: Record<string, T> = {}
@@ -42,7 +42,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	}
 
 	const i18n = i18next.createInstance();
-	void i18n.init({
+	await i18n.init({
 		resources: translations,
 		fallbackLng:
 			config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang,

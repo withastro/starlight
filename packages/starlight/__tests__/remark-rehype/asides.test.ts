@@ -20,7 +20,7 @@ const astroConfig = {
 	srcDir: new URL('./_src/', import.meta.url),
 };
 
-const useTranslations = createTranslationSystemFromFs(
+const useTranslations = await createTranslationSystemFromFs(
 	starlightConfig,
 	// Using non-existent `_src/` to ignore custom files in this test fixture.
 	{ srcDir: new URL('./_src/', import.meta.url) }

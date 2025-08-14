@@ -51,7 +51,7 @@ async function loadTranslations() {
  * const t = useTranslations('en');
  * const label = t('search.label'); // => 'Search'
  */
-export const useTranslations = createTranslationSystem(
+export const useTranslations = await createTranslationSystem(
 	config,
 	await loadTranslations(),
 	pluginTranslations

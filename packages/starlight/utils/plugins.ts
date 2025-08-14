@@ -59,7 +59,7 @@ export async function runPlugins(
 		}
 	}
 
-	const useTranslations = createTranslationSystemFromFs(
+	const useTranslations = await createTranslationSystemFromFs(
 		starlightConfig,
 		context.config,
 		pluginTranslations
@@ -319,7 +319,9 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				useTranslations: z.any() as z.Schema<ReturnType<typeof createTranslationSystemFromFs>>,
+				useTranslations: z.any() as z.Schema<
+					Awaited<ReturnType<typeof createTranslationSystemFromFs>>
+				>,
 				/**
 				 * A callback function to get the language for a given absolute file path. The returned
 				 * language can be used with the `useTranslations` helper to get UI strings for that

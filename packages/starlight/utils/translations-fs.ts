@@ -16,7 +16,7 @@ const contentCollectionFileExtensions = ['.json', '.yaml', '.yml'];
  *
  * @see [`./translations.ts`](./translations.ts)
  */
-export function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
+export async function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 	opts: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	{ srcDir }: Pick<AstroConfig, 'srcDir'>,
 	pluginTranslations: Record<string, T> = {}
