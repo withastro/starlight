@@ -1,6 +1,15 @@
 import { z } from 'astro/zod';
+import yaml from 'js-yaml';
 
-export const HeadConfigSchema = () =>
+export const HeadConfigSchema = ({
+	source,
+}: {
+	/**
+	 * Depending on the content being validated, either a user's config or a page's frontmatter,
+	 * different error messages will be shown.
+	 */
+	source: 'config' | 'content';
+}) =>
 	z
 		.array(
 			z
@@ -15,6 +24,12 @@ export const HeadConfigSchema = () =>
 				.superRefine((config, ctx) => {
 					if (config.tag !== 'meta' || config.content === undefined) return;
 					const { content, ...rest } = config;
+					const correctTag = {
+						...rest,
+						attrs: { ...(config.attrs ?? { name: 'identifier' }), content: config.content },
+					};
+					const code =
+						source === 'config' ? JSON.stringify(correctTag, null, 2) : yaml.dump(correctTag);
 					ctx.addIssue({
 						code: 'custom',
 						message:
@@ -24,14 +39,7 @@ export const HeadConfigSchema = () =>
 								? 'with an additional attribute such as `name`, `property`, or `http-equiv` to identify the kind of metadata it represents '
 								: '') +
 							`in the \`attrs\` object:\n\n` +
-							JSON.stringify(
-								{
-									...rest,
-									attrs: { ...(config.attrs ?? { name: 'identifier' }), content: config.content },
-								},
-								null,
-								2
-							),
+							code,
 					});
 				})
 		)

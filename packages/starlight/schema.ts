@@ -30,7 +30,7 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 		editUrl: z.union([z.string().url(), z.boolean()]).optional().default(true),
 
 		/** Set custom `<head>` tags just for this page. */
-		head: HeadConfigSchema(),
+		head: HeadConfigSchema({ source: 'content' }),
 
 		/** Override global table of contents configuration for this page. */
 		tableOfContents: TableOfContentsSchema().optional(),
