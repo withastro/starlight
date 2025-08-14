@@ -3,8 +3,8 @@ import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { YAMLException } from 'js-yaml';
 
 describe('createTranslationSystemFromFs', () => {
-	test('creates a translation system that returns default strings', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('creates a translation system that returns default strings', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: { en: { label: 'English', dir: 'ltr' } },
 				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
@@ -16,8 +16,8 @@ describe('createTranslationSystemFromFs', () => {
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Edit page"');
 	});
 
-	test('creates a translation system that uses custom strings', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('creates a translation system that uses custom strings', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: {
 					en: { label: 'English', dir: 'ltr', lang: 'en' },
@@ -36,8 +36,8 @@ describe('createTranslationSystemFromFs', () => {
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Rendre cette page différente"');
 	});
 
-	test('supports root locale', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('supports root locale', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: { root: { label: 'English', dir: 'ltr', lang: 'en' } },
 				defaultLocale: { label: 'English', locale: 'root', lang: 'en', dir: 'ltr' },
@@ -49,8 +49,8 @@ describe('createTranslationSystemFromFs', () => {
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
 	});
 
-	test('returns translation for unknown language', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('returns translation for unknown language', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: { root: { label: 'English', dir: 'ltr', lang: 'en' } },
 				defaultLocale: { label: 'English', locale: undefined, dir: 'ltr' },
@@ -62,8 +62,8 @@ describe('createTranslationSystemFromFs', () => {
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page different"');
 	});
 
-	test('handles empty i18n directory', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('handles empty i18n directory', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
 			// Using `empty-src/` to emulate empty `src/content/i18n/` directory.
 			{ srcDir: new URL('./empty-src/', import.meta.url) }
@@ -72,28 +72,28 @@ describe('createTranslationSystemFromFs', () => {
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Edit page"');
 	});
 
-	test('throws on malformed i18n JSON', () => {
-		expect(() =>
+	test('throws on malformed i18n JSON', async () => {
+		await expect(() =>
 			createTranslationSystemFromFs(
 				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
 				// Using `malformed-json-src/` to trigger syntax error in bad JSON file.
 				{ srcDir: new URL('./malformed-json-src/', import.meta.url) }
 			)
-		).toThrow(SyntaxError);
+		).rejects.toThrow(SyntaxError);
 	});
 
-	test('throws on malformed i18n YAML', () => {
-		expect(() =>
+	test('throws on malformed i18n YAML', async () => {
+		await expect(() =>
 			createTranslationSystemFromFs(
 				{ locales: {}, defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' } },
 				// Using `malformed-yaml-src/` to trigger syntax error in bad YAML file.
 				{ srcDir: new URL('./malformed-yaml-src/', import.meta.url) }
 			)
-		).toThrow(YAMLException);
+		).rejects.toThrow(YAMLException);
 	});
 
-	test('creates a translation system that uses custom strings injected by plugins', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('creates a translation system that uses custom strings injected by plugins', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: { en: { label: 'English', dir: 'ltr' } },
 				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
@@ -106,8 +106,8 @@ describe('createTranslationSystemFromFs', () => {
 		expect(t('page.editLink')).toMatchInlineSnapshot('"Make this page even more different"');
 	});
 
-	test('creates a translation system that prioritizes user translations over plugin translations', () => {
-		const useTranslations = createTranslationSystemFromFs(
+	test('creates a translation system that prioritizes user translations over plugin translations', async () => {
+		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: { en: { label: 'English', dir: 'ltr' } },
 				defaultLocale: { label: 'English', locale: 'en', dir: 'ltr' },
