@@ -333,7 +333,7 @@ test('errors with head `meta` tag with `content` and no attributes', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
-			You should instead use a \`content\` attribute with an additional attribute to identify the kind of metadata it represents in the \`attrs\` object:
+			You should instead use a \`content\` attribute with an additional attribute such as \`name\`, \`property\`, or \`http-equiv\` to identify the kind of metadata it represents in the \`attrs\` object:
 			
 			{
 			  "tag": "meta",

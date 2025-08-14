@@ -21,7 +21,7 @@ export const HeadConfigSchema = () =>
 							`The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.\n` +
 							`You should instead use a \`content\` attribute ` +
 							(Object.keys(rest.attrs ?? {}).length === 0
-								? 'with an additional attribute to identify the kind of metadata it represents '
+								? 'with an additional attribute such as `name`, `property`, or `http-equiv` to identify the kind of metadata it represents '
 								: '') +
 							`in the \`attrs\` object:\n\n` +
 							JSON.stringify(
