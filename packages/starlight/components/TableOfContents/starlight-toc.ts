@@ -64,6 +64,8 @@ export class StarlightTOC extends HTMLElement {
 
 		/** Handle intersections and set the current link to the heading for the current intersection. */
 		const setCurrent: IntersectionObserverCallback = (entries) => {
+			let found = false;
+
 			for (const { isIntersecting, target } of entries) {
 				if (!isIntersecting) continue;
 				const heading = getElementHeading(target);
@@ -71,8 +73,30 @@ export class StarlightTOC extends HTMLElement {
 				const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
 				if (link) {
 					this.current = link;
+					found = true;
 					break;
 				}
+			}
+
+			// Fallback: if no heading intersects (because the banner is higher and moves the content down too much),
+			// create a temporal IntersectionObserver without rootMargin that finds the nearest heading.
+			// See https://github.com/withastro/starlight/issues/3047
+			if (!found) {
+				const tempObserver = new IntersectionObserver((tempEntries) => {
+					for (const { isIntersecting, target } of tempEntries) {
+						if (!isIntersecting) continue;
+						const heading = getElementHeading(target);
+						if (!heading) continue;
+						const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
+						if (link) {
+							this.current = link;
+							break;
+						}
+					}
+					tempObserver.disconnect();
+				});
+
+				document.querySelectorAll('main [id]').forEach((el) => tempObserver.observe(el));
 			}
 		};
 
