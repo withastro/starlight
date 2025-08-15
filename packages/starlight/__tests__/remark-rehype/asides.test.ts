@@ -7,6 +7,7 @@ import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 import { BuiltInDefaultLocale } from '../../utils/i18n';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from '../../utils/collection-fs';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Asides Tests',
@@ -26,7 +27,10 @@ const useTranslations = createTranslationSystemFromFs(
 );
 
 function absolutePathToLang(path: string) {
-	return getAbsolutePathFromLang(path, { astroConfig, starlightConfig });
+	return getAbsolutePathFromLang(path, {
+		docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+		starlightConfig,
+	});
 }
 
 const processor = await createMarkdownProcessor({
