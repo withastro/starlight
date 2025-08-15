@@ -27,5 +27,11 @@
 			matchDepTypes: ['packageManager'],
 			enabled: false,
 		},
+		{
+			description: 'Disable Node.js version updates with actions/setup-node',
+			matchDepNames: ['node'],
+			matchDepTypes: ['uses-with'],
+			enabled: false,
+		},
 	],
 }
