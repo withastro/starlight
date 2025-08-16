@@ -29,7 +29,7 @@ export const HeadConfigSchema = ({
 						attrs: { ...(config.attrs ?? { name: 'identifier' }), content: config.content },
 					};
 					const code =
-						source === 'config' ? JSON.stringify(correctTag, null, 2) : yaml.dump(correctTag);
+						source === 'config' ? JSON.stringify(correctTag, null, 2) : yaml.dump([correctTag]);
 					ctx.addIssue({
 						code: 'custom',
 						message:

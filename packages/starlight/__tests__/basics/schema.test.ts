@@ -99,9 +99,8 @@ describe('HeadConfigSchema', () => {
 
 	describe('source: config', () => {
 		test('errors with head `meta` tag with `content` and attributes', () => {
-			expect(() =>
-				parseHeadConfigWithFriendlyErrors('config', headConfigWithoutAttrs)
-			).toThrowErrorMatchingInlineSnapshot(`
+			expect(() => parseHeadConfigWithFriendlyErrors('config', headConfigWithoutAttrs))
+				.toThrowErrorMatchingInlineSnapshot(`
 				"[AstroUserError]:
 					Data does not match schema
 				Hint:
@@ -139,37 +138,36 @@ describe('HeadConfigSchema', () => {
 
 	describe('source: content', () => {
 		test('errors with head `meta` tag with `content` and attributes', () => {
-			expect(() =>
-				parseHeadConfigWithFriendlyErrors('content', headConfigWithoutAttrs)
-			).toThrowErrorMatchingInlineSnapshot(`
+			expect(() => parseHeadConfigWithFriendlyErrors('content', headConfigWithoutAttrs))
+				.toThrowErrorMatchingInlineSnapshot(`
 				"[AstroUserError]:
 					Data does not match schema
 				Hint:
 					The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
 					You should instead use a \`content\` attribute with an additional attribute such as \`name\`, \`property\`, or \`http-equiv\` to identify the kind of metadata it represents in the \`attrs\` object:
 					
-					tag: meta
-					attrs:
-					  name: identifier
-					  content: '1234'
+					- tag: meta
+					  attrs:
+					    name: identifier
+					    content: '1234'
 					"
 			`);
 		});
 		test('errors with head `meta` tag with `content` and no attributes', () => {
 			expect(() => parseHeadConfigWithFriendlyErrors('content', headConfigWithAttrs))
 				.toThrowErrorMatchingInlineSnapshot(`
-					"[AstroUserError]:
-						Data does not match schema
-					Hint:
-						The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
-						You should instead use a \`content\` attribute in the \`attrs\` object:
-						
-						tag: meta
-						attrs:
-						  property: test:id
-						  content: '1234'
-						"
-				`);
+				"[AstroUserError]:
+					Data does not match schema
+				Hint:
+					The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.
+					You should instead use a \`content\` attribute in the \`attrs\` object:
+					
+					- tag: meta
+					  attrs:
+					    property: test:id
+					    content: '1234'
+					"
+			`);
 		});
 	});
 });
