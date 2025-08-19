@@ -1,5 +1,5 @@
 ---
-title: 마크다운으로 콘텐츠 작성
+title: Markdown으로 콘텐츠 작성
 description: Starlight가 지원하는 Markdown 구문의 개요입니다.
 ---
 
@@ -149,6 +149,21 @@ Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/isla
 
 ```md
 :::tip[알고 계셨나요?]
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+:::
+```
+
+### 사용자 정의 보조 내용 아이콘
+
+보조 내용 유형 또는 [사용자 정의 제목](#사용자-정의-보조-내용-제목) 뒤에 오는 중괄호에 보조 내용에 대한 사용자 정의 아이콘을 지정할 수 있습니다. (예: `:::tip{icon="heart"}` 또는 `:::tip[알고 계셨나요?]{icon="heart"}`).
+아이콘 이름은 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정해야 합니다.
+
+:::tip{icon="heart"}
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+:::
+
+```md
+:::tip{icon="heart"}
 Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 ```

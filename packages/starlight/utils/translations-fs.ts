@@ -16,13 +16,13 @@ const contentCollectionFileExtensions = ['.json', '.yaml', '.yml'];
  *
  * @see [`./translations.ts`](./translations.ts)
  */
-export function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
+export async function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 	opts: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	{ srcDir }: Pick<AstroConfig, 'srcDir'>,
 	pluginTranslations: Record<string, T> = {}
 ) {
 	/** All translation data from the i18n collection, keyed by `id`, which matches locale. */
-	let userTranslations: Record<string, i18nSchemaOutput> = {};
+	const userTranslations: Record<string, i18nSchemaOutput> = {};
 	try {
 		const i18nDir = new URL('content/i18n/', srcDir);
 		// Load the user’s i18n directory
@@ -34,11 +34,12 @@ export function createTranslationSystemFromFs<T extends i18nSchemaOutput>(
 			const id = filePath.name;
 			const url = new URL(filePath.base, i18nDir);
 			const content = fs.readFileSync(new URL(file, i18nDir), 'utf-8');
-			const data =
+			const data = (
 				filePath.ext === '.json'
 					? JSON.parse(content)
-					: yaml.load(content, { filename: fileURLToPath(url) });
-			userTranslations[id] = data as i18nSchemaOutput;
+					: yaml.load(content, { filename: fileURLToPath(url) })
+			) as i18nSchemaOutput;
+			userTranslations[id] = data;
 		}
 	} catch (e: unknown) {
 		if (e instanceof Error && 'code' in e && e.code === 'ENOENT') {

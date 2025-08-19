@@ -31,6 +31,9 @@ describe('slugToParam', () => {
 	test('returns undefined for root index', () => {
 		expect(slugToParam('index')).toBeUndefined();
 	});
+	test('returns undefined for /', () => {
+		expect(slugToParam('/')).toBeUndefined();
+	});
 	test('strips index from end of nested slug', () => {
 		expect(slugToParam('dir/index')).toBe('dir');
 		expect(slugToParam('dir/index/sub-dir/index')).toBe('dir/index/sub-dir');
@@ -39,6 +42,12 @@ describe('slugToParam', () => {
 		expect(slugToParam('slug')).toBe('slug');
 		expect(slugToParam('dir/page')).toBe('dir/page');
 		expect(slugToParam('dir/sub-dir/page')).toBe('dir/sub-dir/page');
+	});
+	test('normalizes unnormalized strings', () => {
+		// The input and output contain visually indistinguishable glyphs with different code point
+		// representation that are canonically equivalent that should be normalized using NFC
+		// normalization matching Astro's behavior.
+		expect(slugToParam('اللُّغَةُ-الْعَرَبِيَّةُ')).toBe('اللُّغَةُ-الْعَرَبِيَّةُ');
 	});
 });
 
