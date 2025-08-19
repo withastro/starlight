@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineVitestConfig } from '../test-config';
 
 export default defineVitestConfig({
@@ -16,7 +17,7 @@ export default defineVitestConfig({
 			hooks: {
 				'config:setup'({ config, updateConfig }) {
 					updateConfig({
-						title: `${config.title} - Custom`,
+						title: `${typeof config.title === 'string' ? config.title : ''} - Custom`,
 						description: 'plugin 1',
 						/**
 						 * The configuration received by a plugin should be the user provided configuration as-is
@@ -77,9 +78,12 @@ export default defineVitestConfig({
 							useTranslations('en')('testPlugin3.doThing'),
 						],
 						langs: [
-							absolutePathToLang(new URL('./en/index.md', docsUrl).pathname),
-							absolutePathToLang(new URL('./pt-br/index.md', docsUrl).pathname),
-							absolutePathToLang(new URL('./index.md', docsUrl).pathname),
+							// We convert URLs to file paths to avoid potential issues with URL encoded paths,
+							// e.g. running tests with a path that contains spaces and would be `%20` encoded.
+							absolutePathToLang(fileURLToPath(new URL('./en/index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./pt-br/index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./ar/path with spaces/index.md', docsUrl))),
 						],
 					};
 

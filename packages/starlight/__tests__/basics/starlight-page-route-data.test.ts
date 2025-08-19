@@ -574,13 +574,13 @@ test('parses an image that is also a function successfully', async () => {
 	expect(data.entry.data.hero?.image).toBeDefined();
 	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
 	expect(data.entry.data.hero?.image!['file']).toMatchInlineSnapshot(`[Function]`);
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('src');
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('width');
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('height');
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('format');
 });
 

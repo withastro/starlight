@@ -1,8 +1,4 @@
-import { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const collectionNames = ['docs', 'i18n'] as const;
-export type StarlightCollection = (typeof collectionNames)[number];
+export type StarlightCollection = 'docs' | 'i18n';
 
 /**
  * We still rely on the content collection folder structure to be fixed for now:
@@ -22,12 +18,8 @@ export type StarlightCollection = (typeof collectionNames)[number];
  * these helper functions should be updated to reflect that in one place.
  */
 
-export function getCollectionPath(collection: StarlightCollection, srcDir: URL) {
-	return new URL(`content/${collection}/`, srcDir).pathname;
-}
-
-export function resolveCollectionPath(collection: StarlightCollection, srcDir: URL) {
-	return resolve(fileURLToPath(srcDir), `content/${collection}`);
+export function getCollectionUrl(collection: StarlightCollection, srcDir: URL) {
+	return new URL(`content/${collection}/`, srcDir);
 }
 
 export function getCollectionPathFromRoot(
