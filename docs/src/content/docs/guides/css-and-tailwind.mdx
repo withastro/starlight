@@ -265,10 +265,10 @@ If set, the following CSS custom properties will override Starlight’s default 
 Multiple Tailwind configurations can be used to apply different styles to different parts of your site, e.g. when [using Starlight at a subpath](/manual-setup/#use-starlight-at-a-subpath) or when adding [custom pages](/guides/pages/#custom-pages) to your site.
 For example, you may want to use Tailwind’s Preflight reset styles in your custom pages, while still applying Starlight’s compatibility layer to Starlight pages.
 
-The following Tailwind CSS configuration sets up Tailwind without any plugin or extra configuration and can be used as a starting point for non-Starlight pages:
+The following Tailwind CSS configuration sets up Tailwind without any plugins or extra configuration and can be used as a starting point for non-Starlight pages:
 
 ```css title="src/styles/custom-pages-tailwind.css"
-/* Load Tailwind entirely without any Starlight's complementary CSS. */
+/* Load Tailwind without any of Starlight's complementary CSS. */
 @import 'tailwindcss';
 ```
 
@@ -276,7 +276,7 @@ The following Tailwind CSS configuration sets up Tailwind without any plugin or 
 
 1. For Starlight pages, apply your preferred Tailwind CSS configuration by following [“Add Tailwind to an existing project”](#add-tailwind-to-an-existing-project).
 
-2. For other pages, apply your preferred Tailwind CSS configuration by importing it in those pages. This is often done in a shared layout component so that Tailwind styles can be used on all pages sharing that layout.
+2. For other pages, apply your preferred Tailwind CSS configuration by importing it in those pages. This is often done in a layout component so that Tailwind styles can be used on all pages sharing that layout.
    ```astro
    ---
    // src/layouts/CustomPageLayout.astro
