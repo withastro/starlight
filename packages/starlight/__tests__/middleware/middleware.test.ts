@@ -1,11 +1,14 @@
 import type { APIContext } from 'astro';
 import { expect, test } from 'vitest';
 import { onRequest } from '../../locals';
+import type { StarlightRouteData } from '../../route-data';
 
 test('starlightRoute throws when accessed outside of a Starlight page', async () => {
 	const context = { locals: {}, currentLocale: 'en' } as APIContext;
-	await onRequest(context, async () => new Response());
+	await onRequest(context, () => Promise.resolve(new Response()));
 	expect(() => {
+		// We are testing that accessing `starlightRoute` outside of a Starlight page throws.
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		context.locals.starlightRoute;
 	}).toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -24,7 +27,7 @@ test('starlightRoute throws when accessed outside of a Starlight page', async ()
 
 test('starlightRoute returns as expected if it has been set', async () => {
 	const context = { locals: {}, currentLocale: 'en' } as APIContext;
-	await onRequest(context, async () => new Response());
-	context.locals.starlightRoute = { siteTitle: 'Test title' } as any;
+	await onRequest(context, () => Promise.resolve(new Response()));
+	context.locals.starlightRoute = { siteTitle: 'Test title' } as StarlightRouteData;
 	expect(context.locals.starlightRoute.siteTitle).toBe('Test title');
 });

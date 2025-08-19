@@ -13,7 +13,8 @@ describe('pickLang', () => {
 	});
 
 	test('returns undefined for unknown languages', () => {
-		expect(pickLang(dictionary, 'ar' as any)).toBeUndefined();
+		// @ts-expect-error - Testing unknown language
+		expect(pickLang(dictionary, 'ar')).toBeUndefined();
 	});
 });
 
@@ -271,7 +272,7 @@ describe('getLocaleDir', () => {
 		expect(starlightConfig.defaultLocale.dir).toBe('ltr');
 	});
 
-	test('uses `getTextInfo()` when `textInfo` is not available', async () => {
+	test('uses `getTextInfo()` when `textInfo` is not available', () => {
 		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
 		vi.spyOn(global.Intl, 'Locale').mockImplementation(() => ({
 			getTextInfo: () => ({ direction: 'rtl' }),
@@ -288,7 +289,7 @@ describe('getLocaleDir', () => {
 		expect(starlightConfig.defaultLocale.dir).toBe('rtl');
 	});
 
-	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', async () => {
+	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', () => {
 		// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
 		vi.spyOn(global.Intl, 'Locale').mockImplementation((tag) => ({ language: tag }));
 
