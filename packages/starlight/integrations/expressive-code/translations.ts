@@ -3,10 +3,7 @@ import type { StarlightConfig } from '../../types';
 import type { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { localeToLang } from '../shared/localeToLang';
 
-export function addTranslations(
-	config: StarlightConfig,
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
-) {
+export function addTranslations(config: StarlightConfig, useTranslations: UseTranslations) {
 	addTranslationsForLocale(config.defaultLocale.locale, config, useTranslations);
 	if (config.isMultilingual) {
 		for (const locale in config.locales) {
@@ -19,7 +16,7 @@ export function addTranslations(
 function addTranslationsForLocale(
 	locale: string | undefined,
 	config: StarlightConfig,
-	useTranslations: ReturnType<typeof createTranslationSystemFromFs>
+	useTranslations: UseTranslations
 ) {
 	const lang = localeToLang(config, locale);
 	const t = useTranslations(lang);
@@ -35,3 +32,5 @@ function addTranslationsForLocale(
 		pluginFramesTexts.overrideTexts(lang, { [ecId]: translation });
 	});
 }
+
+type UseTranslations = Awaited<ReturnType<typeof createTranslationSystemFromFs>>;

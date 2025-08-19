@@ -1,5 +1,4 @@
-const collectionNames = ['docs', 'i18n'] as const;
-export type StarlightCollection = (typeof collectionNames)[number];
+export type StarlightCollection = 'docs' | 'i18n';
 
 /**
  * We still rely on the content collection folder structure to be fixed for now:

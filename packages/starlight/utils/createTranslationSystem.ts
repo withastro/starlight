@@ -12,7 +12,7 @@ import type { UserI18nKeys, UserI18nSchema } from './translations';
  */
 export const I18nextNamespace = 'starlight' as const;
 
-export function createTranslationSystem<T extends i18nSchemaOutput>(
+export async function createTranslationSystem<T extends i18nSchemaOutput>(
 	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	userTranslations: Record<string, T>,
 	pluginTranslations: Record<string, T> = {}
@@ -42,7 +42,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 	}
 
 	const i18n = i18next.createInstance();
-	i18n.init({
+	await i18n.init({
 		resources: translations,
 		fallbackLng:
 			config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang,
@@ -72,7 +72,7 @@ export function createTranslationSystem<T extends i18nSchemaOutput>(
 		lang ??= config.defaultLocale?.lang || BuiltInDefaultLocale.lang;
 
 		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
-		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace);
+		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace) as ReturnType<I18nT['all']>;
 		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options });
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 

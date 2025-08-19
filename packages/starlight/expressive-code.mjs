@@ -15,7 +15,9 @@
 
 export * from 'astro-expressive-code';
 
-// @ts-ignore - Types are provided by the separate `expressive-code.d.ts` file
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - Types are provided by the separate `expressive-code.d.ts` file and this may not be
+// a type error for some users running `tsc --noEmit` depending on their `tsconfig.json` settings.
 export function defineEcConfig(config) {
 	return config;
 }
