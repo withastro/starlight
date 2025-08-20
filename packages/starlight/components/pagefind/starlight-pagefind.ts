@@ -10,7 +10,7 @@ import type {
 import type { StarlightPagefindResult } from './starlight-pagefind-result';
 import type { StarlightPagefindMeta } from './starlight-pagefind-meta';
 import type { StarlightPagefindFilter } from './starlight-pagefind-filter';
-import type { StarlightPagefindPublicApi } from './starlight-pagefind-public';
+import type { StarlightPagefindApi } from './starlight-pagefind-api';
 
 /**
  * Various configuration options for the Starlight Pagefind component that are either not
@@ -39,7 +39,7 @@ const starlightPagefindConfig = {
  * @see {@link https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/}
  * @see {@link https://www.makethingsaccessible.com/guides/accessible-site-search-with-combobox-suggestions/}
  */
-export class StarlightPagefind extends HTMLElement implements StarlightPagefindPublicApi {
+export class StarlightPagefind extends HTMLElement implements StarlightPagefindApi {
 	/** Options for the Starlight Pagefind component. */
 	#options: StarlightPagefindOptions = { bundlePath: '/pagefind/' };
 	/** Pagefind options. */

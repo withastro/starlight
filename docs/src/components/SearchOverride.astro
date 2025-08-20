@@ -24,8 +24,6 @@ const triggerType =
 }
 
 <script>
-	import type { StarlightPagefind } from '@astrojs/starlight/types';
-
 	customElements.define(
 		'custom-site-search',
 		class CustomSiteSearch extends HTMLElement {
@@ -35,15 +33,22 @@ const triggerType =
 				const triggerType = this.dataset.triggerType;
 				if (!triggerType) return;
 
+				this.#applyTrigger(triggerType);
+			}
+
+			async #applyTrigger(triggerType: string) {
+				const { getPagefindApi } = await import('@astrojs/starlight/pagefind');
+				const starlightPagefindApi = await getPagefindApi();
+
 				switch (triggerType) {
 					case 'filters': {
-						this.querySelector<StarlightPagefind>('site-search')?.triggerFilters({
+						starlightPagefindApi.triggerFilters({
 							author: ['Alice'],
 						});
 						break;
 					}
 					case 'search': {
-						this.querySelector<StarlightPagefind>('site-search')?.triggerSearch('test');
+						starlightPagefindApi.triggerSearch('test');
 						break;
 					}
 				}

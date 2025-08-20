@@ -148,7 +148,7 @@ const pagefindModuleSchema = z
 		 * // ...
 		 *
 		 * // src/config/pagefind.ts
-		 * import type { StarlightPagefindOptions } from '@astrojs/starlight/types';
+		 * import type { StarlightPagefindOptions } from '@astrojs/starlight/pagefind';
 		 *
 		 * export default {
 		 *   openFilters: ['author'],

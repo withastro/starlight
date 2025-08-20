@@ -171,6 +171,7 @@
     "./loaders": "./loaders.ts",
     "./route-data": "./route-data.ts",
     "./types": "./types.ts",
+    "./pagefind": "./components/pagefind/starlight-pagefind-api.ts",
     "./expressive-code": {
       "types": "./expressive-code.d.ts",
       "default": "./expressive-code.mjs"
