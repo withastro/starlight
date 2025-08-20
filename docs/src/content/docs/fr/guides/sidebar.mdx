@@ -244,7 +244,7 @@ La barre latérale suivante sera générée :
 
 Utilisez le [champ `sidebar` du frontmatter](/fr/reference/frontmatter/#sidebar) dans différentes pages pour personnaliser les liens générés automatiquement.
 
-Les options du frontmatter pour la barre latérale vous permettent de définir une [étiquette personnalisée](/fr/reference/frontmatter/#label) ou d'ajouter un [badge](/fr/reference/frontmatter/#badge) à un lien, de [masquer](/fr/reference/frontmatter/#hidden) un lien de la barre latérale, ou de définir une [pondération de tri personnalisée](/fr/reference/frontmatter/#order).
+Les options du frontmatter pour la barre latérale vous permettent de définir une [étiquette personnalisée](/fr/reference/frontmatter/#label), d'utiliser des [attributs personnalisés](/fr/reference/frontmatter/#attrs), d'ajouter un [badge](/fr/reference/frontmatter/#badge) à un lien, de [masquer](/fr/reference/frontmatter/#hidden) un lien de la barre latérale, ou de définir une [pondération de tri personnalisée](/fr/reference/frontmatter/#order).
 
 ```md "sidebar:"
 ---
@@ -432,6 +432,72 @@ La configuration ci-dessus génère la barre latérale suivante :
 						target: '_blank',
 						style: 'font-style: italic',
 					},
+				},
+			],
+		},
+	]}
+/>
+
+### Attributs HTML personnalisés pour les liens générés automatiquement
+
+Personnalisez les attributs HTML de tous les liens dans des [groupes générés automatiquement](#groupes-générés-automatiquement) en définissant la propriété `attrs` dans la configuration `autogenerate`.
+Différentes pages peuvent individuellement spécifier des attributs personnalisés en utilisant le [champ `sidebar.attrs` du frontmatter](/fr/reference/frontmatter/#attrs) qui sera fusionné avec la configuration `autogenerate.attrs`.
+
+Par exemple, avec la configuration suivante :
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			autogenerate: {
+				// Génère automatiquement un groupe de liens pour le répertoire "constellations".
+				directory: 'constellations',
+				// Met en italique tous les labels de liens dans ce groupe.
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+Et la structure de fichiers suivante :
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carene.md
+        - centaure.md
+        - saisonnieres/
+          - andromede.md
+
+</FileTree>
+
+La barre latérale suivante sera générée avec tous les liens générés automatiquement en italique :
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constellations',
+			items: [
+				{ label: 'Carène', link: '', attrs: { style: 'font-style: italic' } },
+				{
+					label: 'Centaure',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'saisonnieres',
+					items: [
+						{
+							label: 'Andromède',
+							link: '',
+							attrs: { style: 'font-style: italic' },
+						},
+					],
 				},
 			],
 		},

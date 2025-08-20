@@ -198,7 +198,7 @@ describe('@layer utilities', async () => {
 		expect(utilitiesLayer).includes('--sl-color-accent: var(--color-accent-600, #4f46e5);');
 	});
 
-	test('uses [data-theme="dark"] for dark: utility classes', async () => {
+	test('uses [data-theme="dark"] for dark: utility classes', () => {
 		expect(utilitiesLayer).toMatchInlineSnapshot(`
 			"
 			  .dark\\:bg-black {
@@ -244,7 +244,7 @@ describe('@layer utilities', async () => {
 
 // https://github.com/tailwindlabs/tailwindcss/blob/61af484ff4f34464b317895598c49966c132b410/packages/tailwindcss/src/test-utils/run.ts
 async function render(candidates: string[] = [], theme: string = '') {
-	let { build } = await compile(css`
+	const { build } = await compile(css`
 		@layer theme, base, components, utilities;
 
 		@layer utilities {

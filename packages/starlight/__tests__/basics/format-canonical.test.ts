@@ -68,7 +68,7 @@ describe.each<{
 ])(
 	'formatCanonical() with { format: $options.format, trailingSlash: $options.trailingSlash }',
 	({ options, tests }) => {
-		test.each(tests)('returns $expected for $href', async ({ href, expected }) => {
+		test.each(tests)('returns $expected for $href', ({ href, expected }) => {
 			expect(formatCanonical(href, options)).toBe(expected);
 		});
 	}

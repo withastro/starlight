@@ -49,7 +49,7 @@ describe('can access UI string in an Astro context', () => {
 });
 
 test('can access UI strings in the plugin context using useTranslations()', () => {
-	const { uiStrings } = JSON.parse(config.titleDelimiter);
+	const { uiStrings } = JSON.parse(config.titleDelimiter) as { uiStrings: string[] };
 
 	// A built-in UI string.
 	expect(uiStrings[0]).toBe('Skip to content');
@@ -60,7 +60,7 @@ test('can access UI strings in the plugin context using useTranslations()', () =
 });
 
 test('can infer langs from an absolute path in the plugin context using absolutePathToLang()', () => {
-	const { langs } = JSON.parse(config.titleDelimiter);
+	const { langs } = JSON.parse(config.titleDelimiter) as { langs: string[] };
 
 	// The default language.
 	expect(langs[0]).toBe('en');
@@ -68,4 +68,6 @@ test('can infer langs from an absolute path in the plugin context using absolute
 	expect(langs[1]).toBe('pt-BR');
 	// A page not matching any language defaults to the default language.
 	expect(langs[2]).toBe('en');
+	// A known language and an absolute path containing spaces.
+	expect(langs[3]).toBe('ar');
 });

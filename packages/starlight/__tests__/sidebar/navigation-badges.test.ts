@@ -143,7 +143,10 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": {},
+			        "attrs": {
+			          "class": "current",
+			          "data-version": "1",
+			        },
 			        "badge": undefined,
 			        "href": "/api/v1/users/",
 			        "isCurrent": false,

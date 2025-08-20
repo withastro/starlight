@@ -10,6 +10,7 @@ import {
 import type { UserI18nSchema } from './translations';
 import { createTranslationSystemFromFs } from './translations-fs';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from './collection-fs';
 
 /**
  * Runs Starlight plugins in the order that they are configured after validating the user-provided
@@ -51,21 +52,24 @@ export async function runPlugins(
 					// Merge the translations injected by the plugin.
 					for (const [locale, localeTranslations] of Object.entries(translations)) {
 						pluginTranslations[locale] ??= {};
-						Object.assign(pluginTranslations[locale]!, localeTranslations);
+						Object.assign(pluginTranslations[locale], localeTranslations);
 					}
 				},
 			});
 		}
 	}
 
-	const useTranslations = createTranslationSystemFromFs(
+	const useTranslations = await createTranslationSystemFromFs(
 		starlightConfig,
 		context.config,
 		pluginTranslations
 	);
 
 	function absolutePathToLang(path: string) {
-		return getAbsolutePathFromLang(path, { astroConfig: context.config, starlightConfig });
+		return getAbsolutePathFromLang(path, {
+			docsPath: getCollectionPosixPath('docs', context.config.srcDir),
+			starlightConfig,
+		});
 	}
 
 	// A list of Astro integrations added by the various plugins.
@@ -315,7 +319,9 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				useTranslations: z.any() as z.Schema<ReturnType<typeof createTranslationSystemFromFs>>,
+				useTranslations: z.any() as z.Schema<
+					Awaited<ReturnType<typeof createTranslationSystemFromFs>>
+				>,
 				/**
 				 * A callback function to get the language for a given absolute file path. The returned
 				 * language can be used with the `useTranslations` helper to get UI strings for that
@@ -432,7 +438,7 @@ export type StarlightPlugin = z.input<typeof starlightPluginSchema>;
 export type HookParameters<
 	Hook extends keyof StarlightPlugin['hooks'],
 	HookFn = StarlightPlugin['hooks'][Hook],
-> = HookFn extends (...args: any) => any ? Parameters<HookFn>[0] : never;
+> = HookFn extends (...args: any[]) => unknown ? Parameters<HookFn>[0] : never;
 
 export type StarlightUserConfigWithPlugins = StarlightUserConfig & {
 	/**

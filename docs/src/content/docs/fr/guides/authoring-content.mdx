@@ -137,17 +137,32 @@ npm run create astro@latest --template starlight
 :::
 ````
 
-### Titres personnalisés dans les encarts
+### Titres d'encarts personnalisés
 
-Vous pouvez spécifier un titre personnalisé pour l'encart entre crochets après le type d'encarts, par exemple `:::tip[Le saviez-vous ?]`.
+Vous pouvez spécifier un titre personnalisé pour un encart entre crochets après le type d'encart, par exemple `:::tip[Le saviez-vous ?]`.
 
 :::tip[Le saviez-vous ?]
-Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Architecture"](https://docs.astro.build/fr/concepts/islands/).
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
 :::
 
 ```md
 :::tip[Le saviez-vous ?]
-Astro vous aide à construire des sites Web plus rapides grâce à ["Islands Architecture"](https://docs.astro.build/fr/concepts/islands/).
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
+:::
+```
+
+### Icônes d'encarts personnalisées
+
+Vous pouvez spécifier une icône personnalisée pour un encart en utilisant des accolades après le type d'encart ou le [titre personnalisé](#titres-dencarts-personnalisés), par exemple `:::tip{icon="heart"}` ou `:::tip[Le saviez-vous ?]{icon="heart"}` respectivement.
+Le nom de l'icône doit être défini avec le nom de [l'une des icônes intégrées à Starlight](/fr/reference/icons/#toutes-les-icônes).
+
+:::tip{icon="heart"}
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
+:::
+
+```md
+:::tip{icon="heart"}
+Astro vous aide à construire des sites Web plus rapides grâce à [« l'Architecture en îlots »](https://docs.astro.build/fr/concepts/islands/).
 :::
 ```
 
