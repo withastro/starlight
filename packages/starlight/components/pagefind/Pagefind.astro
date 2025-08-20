@@ -41,9 +41,11 @@ const { t } = Astro.locals;
 			<div>
 				<p aria-atomic="true" aria-live="polite" class="sl-pagefind-status"></p>
 				<ul id="sl-pagefind-results" role="listbox" aria-labelledby="sl-pagefind-label"></ul>
-				<button class="sl-pagefind-show-more sl-hidden">{t('search.pagefind.loadMore')}</button>
 			</div>
 		</div>
+		<footer>
+			<button class="sl-pagefind-show-more sl-hidden">{t('search.pagefind.loadMore')}</button>
+		</footer>
 	</form>
 
 	<template id="sl-pagefind-result-tpl">
@@ -107,10 +109,14 @@ const { t } = Astro.locals;
 			position: relative;
 		}
 
-		header {
+		header,
+		footer {
 			background-color: var(--sl-color-black);
-			border-bottom: var(--sl-pagefind-ui-border);
 			padding: var(--sl-pagefind-ui-pad);
+		}
+
+		header {
+			border-bottom: var(--sl-pagefind-ui-border);
 		}
 
 		.sl-pagefind-input-search-icon {
@@ -120,7 +126,6 @@ const { t } = Astro.locals;
 		}
 
 		input[type='search'] {
-			background-color: var(--sl-pagefind-ui-bg);
 			background-color: var(--sl-color-gray-6);
 			border: var(--sl-pagefind-ui-border);
 			border-radius: 0.5rem;
@@ -375,15 +380,22 @@ const { t } = Astro.locals;
 			background-color: var(--sl-color-gray-6);
 		}
 
+		footer {
+			border-top: var(--sl-pagefind-ui-border);
+		}
+
+		footer:has(> .sl-pagefind-show-more.sl-hidden) {
+			display: none;
+		}
+
 		.sl-pagefind-show-more {
-			background-color: var(--sl-pagefind-ui-bg);
+			background-color: var(--sl-color-gray-6);
 			border: var(--sl-pagefind-ui-border);
 			border-radius: var(--sl-pagefind-results-corners);
 			color: var(--sl-color-text);
 			cursor: pointer;
 			font-size: var(--sl-text-xs);
 			font-weight: 700;
-			margin-top: 1rem;
 			padding-block: 0.5rem;
 			width: 100%;
 		}
