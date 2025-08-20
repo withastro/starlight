@@ -65,7 +65,7 @@ Starlight는 스타일 순서를 관리하기 위해 내부적으로 [캐스케�
 
 ## Tailwind CSS
 
-Astro 프로젝트의 Tailwind CSS 지원은 [Tailwind Vite 플러그인](https://tailwindcss.com/docs/installation/using-vite)을 통해 제공됩니다.
+Astro 프로젝트의 Tailwind CSS v4 지원은 [Tailwind Vite 플러그인](https://tailwindcss.com/docs/installation/using-vite)을 통해 제공됩니다.
 Starlight는 Starlight 스타일과 호환되도록 Tailwind를 구성하는 데 도움이 되는 보완 CSS를 제공합니다.
 
 Starlight Tailwind CSS는 다음 구성을 적용합니다.
@@ -102,7 +102,7 @@ yarn create astro --template starlight/tailwind
 </TabItem>
 </Tabs>
 
-### 기존 프로젝트에 Tailwind 추가
+### 기존 프로젝트에 Tailwind 추가하기
 
 이미 Starlight 사이트가 존재할때, Tailwind CSS를 추가하려면 다음 단계를 따르세요.
 
@@ -178,6 +178,8 @@ yarn create astro --template starlight/tailwind
    @import 'tailwindcss/theme.css' layer(theme);
    @import 'tailwindcss/utilities.css' layer(utilities);
    ```
+   
+   이 Tailwind 테마 구성은 Starlight의 [캐스케이드 레이어](#캐스케이드-레이어) 순서를 정의하고, Starlight의 Tailwind 보완 CSS와 Tailwind 테마, 유틸리티 스타일을 가져옵니다. 프로젝트에 추가 Tailwind 구성이 필요한 경우 ["여러 Tailwind 구성 사용하기"](#여러-tailwind-구성-사용하기) 섹션을 확인하세요.
 
 4. `customCss` 배열의 첫 번째 항목으로 Tailwind CSS 파일을 추가하도록 Starlight 구성을 업데이트합니다.
 
@@ -205,7 +207,7 @@ yarn create astro --template starlight/tailwind
 
 ### Tailwind로 Starlight 스타일링하기
 
-Starlight는 UI에서 [Tailwind 테마 구성](https://tailwindcss.com/docs/theme) 값을 사용합니다.
+[Tailwind를 사용하여 새 Starlight 프로젝트를 만들거나](#tailwind가-포함된-새-프로젝트-만들기) [기존 Starlight 프로젝트에 Tailwind를 추가할 때](#기존-프로젝트에-tailwind-추가하기), Starlight는 `src/styles/global.css` 파일에 있는 [Tailwind 테마 구성](https://tailwindcss.com/docs/theme)의 값을 사용하여 UI의 스타일을 지정합니다.
 
 설정되면 다음 CSS 사용자 정의 속성이 Starlight의 기본 스타일을 재정의합니다.
 
@@ -253,6 +255,34 @@ Starlight는 UI에서 [Tailwind 테마 구성](https://tailwindcss.com/docs/them
 	--color-gray-950: var(--color-zinc-950);
 }
 ```
+
+### 여러 Tailwind 구성 사용하기
+
+[하위 경로에서 Starlight를 사용](/ko/manual-setup/#하위-경로에서-starlight-사용)하거나 사이트에 [사용자 정의 페이지](/ko/guides/pages/#사용자-정의-페이지)를 추가할 때와 같이 사이트의 여러 부분에 서로 다른 스타일을 적용하기 위해 여러 Tailwind 구성을 사용할 수 있습니다.
+예를 들어 사용자 정의 페이지에 Tailwind의 Preflight 재설정 스타일을 사용하면서 Starlight 페이지에는 Starlight의 호환성 레이어를 적용하고 싶을 수 있습니다.
+
+다음 Tailwind CSS 구성은 플러그인이나 추가 구성 없이 Tailwind를 설정하며, Starlight가 아닌 페이지의 시작점으로 사용할 수 있습니다.
+
+```css title="src/styles/custom-pages-tailwind.css"
+/* Starlight의 보완 CSS 없이 Tailwind를 로드합니다. */
+@import 'tailwindcss';
+```
+
+<Steps>
+
+1. Starlight 페이지의 경우 ["기존 프로젝트에 Tailwind 추가하기"](#기존-프로젝트에-tailwind-추가하기)에 따라 원하는 Tailwind CSS 구성을 적용합니다.
+
+2. 다른 페이지의 경우 해당 페이지에서 원하는 Tailwind CSS 구성을 가져와서 적용하세요. 이 작업은 레이아웃 컴포넌트에서 수행되는 경우가 많으므로 해당 레이아웃을 공유하는 모든 페이지에서 Tailwind 스타일을 사용할 수 있습니다.
+   ```astro
+   ---
+   // src/layouts/CustomPageLayout.astro
+   import '../styles/custom-pages-tailwind.css';
+   ---
+   ```
+
+</Steps>
+
+Tailwind 테마 구성에 대해 자세히 알아보려면 [Tailwind CSS 문서](https://tailwindcss.com/docs/theme)를 확인하세요.
 
 ## 테마
 
