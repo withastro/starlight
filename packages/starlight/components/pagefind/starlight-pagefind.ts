@@ -146,6 +146,9 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindP
 				this.#updateSelectedResult('prev');
 				break;
 			}
+			// The Home and End keys place the editing cursor at the beginning/end of the field.
+			// The wrapping behavior of the Up and Down arrows is used as a substitute for this.
+			// https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-both/#kbd_label_listbox
 			case 'Enter': {
 				event.preventDefault();
 				this.#openSelection();
