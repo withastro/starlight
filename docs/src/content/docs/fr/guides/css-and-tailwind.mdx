@@ -182,7 +182,7 @@ Si vous avez déjà un site Starlight et que vous souhaitez ajouter Tailwind CSS
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-    Cette configuration de thème Tailwind définit l'ordre des [couches en cascade](#cascade-layers) de Starlight, importe le CSS complémentaire de Starlight pour Tailwind et importe les styles des thèmes et utilitaires de Tailwind.
+    Cette configuration de thème Tailwind définit l'ordre des [couches de cascade](#couche-de-cascade) de Starlight, importe le CSS complémentaire de Starlight pour Tailwind et importe les styles des thèmes et utilitaires de Tailwind.
     Si votre projet nécessite une configuration Tailwind supplémentaire, consultez la section [« Utiliser plusieurs configurations Tailwind »](#utiliser-plusieurs-configurations-tailwind).
 
 4.  Mettez à jour la configuration de Starlight pour ajouter le fichier CSS Tailwind en tant que premier élément du tableau `customCss` :
@@ -274,7 +274,7 @@ Si définies, les propriétés personnalisées CSS suivantes remplaceront les st
 
 ### Utiliser plusieurs configurations Tailwind
 
-Plusieurs configurations Tailwind peuvent être utilisées pour appliquer différents styles à différentes parties de votre site, par exemple lorsque vous [utilisez Starlight dans un sous-chemin](/manual-setup/#utiliser-starlight-dans-un-sous-chemin) ou lorsque vous ajoutez des [pages personnalisées](/guides/pages/#pages-personnalisées) à votre site.
+Plusieurs configurations Tailwind peuvent être utilisées pour appliquer différents styles à différentes parties de votre site, par exemple lorsque vous [utilisez Starlight dans un sous-chemin](/fr/manual-setup/#utiliser-starlight-dans-un-sous-chemin) ou lorsque vous ajoutez des [pages personnalisées](/fr/guides/pages/#pages-personnalisées) à votre site.
 Par exemple, vous souhaiterez peut-être utiliser les styles de réinitialisation Preflight de Tailwind dans vos pages personnalisées, tout en appliquant la couche de compatibilité de Starlight aux pages Starlight.
 
 La configuration Tailwind CSS suivante configure Tailwind sans aucun module d'extension ni configuration supplémentaire et peut être utilisée comme point de départ pour les pages non Starlight :
