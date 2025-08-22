@@ -9,7 +9,7 @@ import Icon from '../user-components/Icon.astro';
 			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
 		const theme =
 			storedTheme ||
-			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+			'light'; // Default to light mode instead of system preference
 		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
 		return {
 			updatePickers(theme = storedTheme || 'auto') {

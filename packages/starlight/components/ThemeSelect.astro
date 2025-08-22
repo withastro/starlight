@@ -5,13 +5,12 @@ import Select from './Select.astro';
 <starlight-theme-select>
 	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
 	<Select
-		icon="laptop"
+		icon="sun"
 		label={Astro.locals.t('themeSelect.accessibleLabel')}
-		value="auto"
+		value="light"
 		options={[
 			{ label: Astro.locals.t('themeSelect.dark'), selected: false, value: 'dark' },
-			{ label: Astro.locals.t('themeSelect.light'), selected: false, value: 'light' },
-			{ label: Astro.locals.t('themeSelect.auto'), selected: true, value: 'auto' },
+			{ label: Astro.locals.t('themeSelect.light'), selected: true, value: 'light' },
 		]}
 		width="6.25em"
 	/>
@@ -28,9 +27,9 @@ import Select from './Select.astro';
 	/** Key in `localStorage` to store color theme preference at. */
 	const storageKey = 'starlight-theme';
 
-	/** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
+	/** Get a typesafe theme string from any JS value (unknown values are coerced to `'light'`). */
 	const parseTheme = (theme: unknown): Theme =>
-		theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+		theme === 'dark' || theme === 'light' ? theme : 'light';
 
 	/** Load the user’s preference from `localStorage`. */
 	const loadTheme = (): Theme =>

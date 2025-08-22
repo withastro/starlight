@@ -1,0 +1,62 @@
+---
+// Earn Now Button Component
+---
+
+<a href="https://www.getaxal.com" class="earn-now-button" target="_blank" rel="noopener noreferrer">
+  <div class="button-content">
+    <div class="icon-circle">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z" fill="#264450"/>
+      </svg>
+    </div>
+    <span class="button-text">Earn Now</span>
+  </div>
+</a>
+
+<style>
+  .earn-now-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #DEF2CC;
+    border: 0.53px solid rgba(38, 68, 80, 0.5);
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #264450;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .earn-now-button:hover {
+    background-color: #c8e8a8;
+    transform: translateY(-1px);
+  }
+
+  .earn-now-button:active {
+    transform: translateY(0);
+  }
+
+  .button-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .button-text {
+    font-family: inherit;
+  }
+</style>

@@ -35,14 +35,19 @@ const ogImageAlt = 'Make your docs shine with Starlight';
 export default defineConfig({
 	site,
 	trailingSlash: 'always',
-	integrations: [
-		starlight({
-			title: 'Axal',
-			logo: {
-				light: '/src/assets/axal-light.svg',
-				dark: '/src/assets/axal-dark.svg',
-				replacesTitle: true,
-			},
+			integrations: [
+			starlight({
+				title: 'Axal',
+				logo: {
+					light: '/src/assets/axal-light.svg',
+					dark: '/src/assets/axal-dark.svg',
+					replacesTitle: true,
+				},
+				components: {
+					Header: './src/components/CustomHeader.astro',
+					MobileMenuFooter: './src/components/CustomMobileMenuFooter.astro',
+					PageTitle: './src/components/CustomPageTitle.astro',
+				},
 			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/getaxal/',
@@ -73,42 +78,45 @@ export default defineConfig({
 			locales,
 			sidebar: [
 				{
-					label: 'Start Here',
-					translations: {
-						de: 'Beginne hier',
-						es: 'Comienza aqui',
-						ja: 'ここからはじめる',
-						fr: 'Commencez ici',
-						it: 'Inizia qui',
-						id: 'Mulai dari sini',
-						'zh-CN': '从这里开始',
-						'pt-BR': 'Comece Aqui',
-						'pt-PT': 'Comece Aqui',
-						ko: '시작 안내',
-						tr: 'Buradan Başlayın',
-						ru: 'Первые шаги',
-						hi: 'यहाँ से शुरू करे',
-						uk: 'Почніть звідси',
-					},
+					label: 'Getting started',
 					items: [
-						'getting-started',
+						'getting-started/introduction',
+						'getting-started/depositing-crypto',
+						'getting-started/depositing-from-bank',
+						'getting-started/starting-to-earn',
+						'getting-started/withdrawing-funds',
+						'getting-started/portfolio-performance',
 					],
 				},
 				{
-					label: 'About Axal',
-					autogenerate: { directory: 'yield' },
+					label: 'How it works',
+					items: [
+						'how-it-works/on-ramping',
+						'how-it-works/self-custodied-wallets',
+						'how-it-works/optimizing-portfolio',
+						'how-it-works/7702-transactions',
+						'how-it-works/verified-signing',
+						'how-it-works/strategies',
+						'how-it-works/contracts',
+					],
 				},
 				{
-					label: 'Rewards',
-					autogenerate: { directory: 'rewards' },
+					label: 'Referrals',
+					items: [
+						'referrals/overview',
+					],
 				},
 				{
-					label: 'Security and Account Abstraction',
-					autogenerate: { directory: 'security' },
+					label: 'Security',
+					items: [
+						'security/audits',
+						'security/bug-bounties',
+						'security/partners',
+					],
 				},
 				{
-					label: 'Disclosures',
-					autogenerate: { directory: 'terms' },
+					label: 'API [coming soon]',
+					link: '/api/coming-soon',
 				},
 			],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },

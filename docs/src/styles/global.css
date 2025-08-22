@@ -139,6 +139,7 @@
   --sl-color-accent-low: #DEF2CC !important;
   --sl-color-bg-accent: #DEF2CC !important;
   --sl-color-text-accent: #DEF2CC !important;
+  --sl-color-bg-sidebar: transparent !important;
 }
 
 :root[data-theme='dark'] {
@@ -166,6 +167,31 @@
   --purple-hsl: 120, 60%, 85% !important;
 }
 
+/* Sidebar gradient */
+:root[data-theme='light'] .sidebar-pane {
+  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
+}
+
+/* Ensure gradient shows on both mobile and desktop */
+:root[data-theme='light'] nav.sidebar .sidebar-pane {
+  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
+}
+
+/* Override any other sidebar background styles */
+:root[data-theme='light'] [data-has-sidebar] .sidebar-pane {
+  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
+}
+
+/* Force gradient override with higher specificity */
+:root[data-theme='light'] .page .sidebar .sidebar-pane {
+  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
+}
+
+/* Additional override for mobile */
+:root[data-theme='light'] .sidebar-pane[style*="background"] {
+  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -173,4 +199,82 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Apply Test Söhne fonts */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Test Söhne Kraftig', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  }
+  
+  /* Apply Test Söhne Buch to body content */
+  body, p, div, span, a, li, td, th {
+    font-family: 'Test Söhne Buch', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  }
+}
+
+/* Starlight specific font overrides */
+:root {
+  --sl-font: 'Test Söhne Buch', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+}
+
+/* Apply Test Söhne Kraftig to Starlight headings */
+.sl-text-h1, .sl-text-h2, .sl-text-h3, .sl-text-h4, .sl-text-h5,
+h1, h2, h3, h4, h5, h6,
+.site-title,
+.large {
+  font-family: 'Test Söhne Kraftig', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif !important;
+}
+
+/* Apply Test Söhne Buch to Starlight content */
+.sl-markdown-content,
+.sl-markdown-content p,
+.sl-markdown-content div,
+.sl-markdown-content span,
+.sl-markdown-content a,
+.sl-markdown-content li,
+.sl-markdown-content td,
+.sl-markdown-content th {
+  font-family: 'Test Söhne Buch', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif !important;
+}
+
+/* Make all subheadings 8px smaller than page title */
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+  font-size: calc(var(--sl-text-h1) - 8px) !important;
+  font-family: 'Test Söhne Kraftig', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif !important;
+}
+
+/* Custom sidebar styling */
+.sidebar-pane a {
+  padding: 0.75rem 0.5rem !important;
+  margin: 0.25rem 0 !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.sidebar-pane a:hover,
+.sidebar-pane a:focus {
+  background-color: rgba(222, 242, 204, 0.3) !important;
+  color: #264450 !important;
+}
+
+/* Active/highlighted sidebar link */
+.sidebar-pane a[aria-current='page'],
+.sidebar-pane a[aria-current='page']:hover,
+.sidebar-pane a[aria-current='page']:focus {
+  background-color: #DEF2CC !important;
+  color: #264450 !important;
+  font-weight: 600 !important;
+}
+
+/* Make subsections thicker */
+.sidebar-pane ul ul li {
+  margin: 0.5rem 0 !important;
+}
+
+.sidebar-pane ul ul a {
+  padding: 0.875rem 0.75rem !important;
+  margin: 0.375rem 0 !important;
 }
