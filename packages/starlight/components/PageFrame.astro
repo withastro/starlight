@@ -54,7 +54,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			inset-block: var(--sl-nav-height) 0;
 			inset-inline-start: 0;
 			width: 100%;
-			background-color: var(--sl-color-black);
+			background: var(--sl-color-bg-sidebar);
 			overflow-y: auto;
 		}
 
@@ -89,7 +89,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 			.sidebar-pane {
 				--sl-sidebar-visibility: visible;
 				width: var(--sl-sidebar-width);
-				background-color: var(--sl-color-bg-sidebar);
+				background: var(--sl-color-bg-sidebar);
 				border-inline-end: 1px solid var(--sl-color-hairline-shade);
 			}
 		}

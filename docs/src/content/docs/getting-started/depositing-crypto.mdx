@@ -4,36 +4,60 @@ description: "Learn how to deposit cryptocurrency into your Axal account"
 tags: ["Getting Started", "Deposits"]
 ---
 
-# Depositing Crypto
+This guide walks you through depositing crypto into Axal based on the product flow shown in the demo. You will create or sign in to your account, your smart wallet will be created for you, then you will fund it and see funds invested without manual signing.
 
-Learn how to safely deposit cryptocurrency into your Axal account.
+## What you need
 
-## Supported Cryptocurrencies
+* An Axal account
+* USDC on the Base network
+* A wallet or exchange that can send USDC on Base
 
-We support a wide range of cryptocurrencies including:
-- Bitcoin (BTC)
-- Ethereum (ETH)
-- USDC
-- USDT
-- And many more
+## Create your account and wallet
 
-## How to Deposit
+1. Open the app and select Launch.
+2. Enter your email or continue with Google.
+3. Axal creates a smart wallet for you. You will see your wallet address on screen.
+4. Optionally enable two factor authentication. When enabled, sensitive actions such as exporting the wallet or moving funds out require a code from your authenticator app.
 
-1. Navigate to your wallet
-2. Select "Deposit"
-3. Choose your cryptocurrency
-4. Copy the deposit address
-5. Send funds from your external wallet
+## Deposit with crypto
 
-## Security Considerations
+1. From the Deposit view, choose Crypto.
+2. Asset is USDC.
+3. Network is Base.
+4. Ensure the amount is at least thirty five USDC to continue.
+5. Copy your Axal wallet address or scan the QR code.
+6. In your external wallet or exchange, paste the address, enter the amount, and send.
+7. Return to Axal. You will see the transfer appear as pending until network confirmations complete.
 
-- Always double-check the deposit address
-- Start with small amounts for testing
-- Use only supported networks
-- Keep your private keys secure
+## What happens after you deposit
 
-## Processing Times
+* Axal handles allocation into yield strategies for you.
+* No manual signing is needed for deposit and allocation steps in the app flow.
+* The dashboard shows your current APY and that funds are fully invested.
+* You can view where the funds are allocated across supported strategies.
 
-Deposits are typically processed within:
-- 1-3 confirmations for most cryptocurrencies
-- Up to 30 minutes for slower networks
+## Withdraw at any time
+
+1. Open the dashboard and select Withdraw.
+2. Confirm the amount you want to redeem back to cash or to your external wallet depending on your chosen path.
+3. Axal handles gas and execution. You focus on the amount you want to move.
+4. After completion, positions are closed and the balance appears as uninvested cash. You can redeposit again at any time.
+
+## Security and control
+
+* Your wallet is non custodial. You control it through Privy smart wallets.
+* Two factor authentication protects high value actions such as exporting the wallet or moving funds out.
+* Axal automates strategy allocation while keeping full user control of funds.
+
+## Tips for a smooth deposit
+
+* Send on the same network you selected in Axal.
+* If this is your first time, send a small test amount.
+* Use the QR code to avoid address mistakes.
+* Keep your wallet connected until the transaction is broadcast.
+
+## Troubleshooting
+
+* Deposit not showing: verify the transaction hash on the correct network explorer and allow for confirmations.
+* Sent on the wrong network: contact support with the transaction hash so the team can advise on recovery options.
+* Stuck transaction: try resubmitting with a higher gas setting if your wallet supports it.

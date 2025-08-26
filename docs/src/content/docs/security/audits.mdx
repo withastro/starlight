@@ -1,53 +1,25 @@
 ---
 title: "Audits"
 description: "Learn about security audits and compliance on Axal"
-tags: ["Security", "Audits"]
+tags: ["Security", "Audits", "Sherlock", "Compliance"]
 ---
 
-# Audits
+Axal has partnered with Sherlock, a web3 auditing and security firm, to help ensure the safety of users funds through rigorous and repeatable reviews. We conducted a white box audit of our Trusted Execution Environment based signer and a black box audit of our production servers. You can read more about the distinction between white box and black box methodologies [here](https://www.geeksforgeeks.org/software-testing/differences-between-black-box-testing-vs-white-box-testing/).
 
-Comprehensive security audits ensure the safety of your assets on Axal.
+## How a web3 audit works at Axal
 
-## Audit Partners
+Web3 systems span on chain code, off chain services, and the seams between them. Our audits therefore combine multiple lenses into a single narrative assessment:
 
-We work with leading security firms to conduct thorough audits:
+* Design review and threat modeling to map assets, trust boundaries, and failure modes across smart contracts, TEEs, services, and wallets.
+* Deep source review of critical components with static analysis, invariant and property checks, and targeted fuzzing where applicable.
+* Environment hardening review, including identity and access management, build pipelines, artifact signing, logging, and secrets handling.
+* Behavioral testing of the full system using pre production configurations and on chain simulations to exercise edge cases, pause paths, and kill switches.
+* Remediation, retesting, and documentation to verify issues are fixed and controls are durable.
 
-### Smart Contract Audits
-- **Trail of Bits**: Comprehensive smart contract security
-- **OpenZeppelin**: Industry-standard security practices
-- **Consensys Diligence**: Ethereum ecosystem expertise
-- **Quantstamp**: Automated and manual security analysis
+## Audit results
 
-### Infrastructure Audits
-- **Penetration Testing**: Regular security assessments
-- **Code Reviews**: Continuous code security analysis
-- **Architecture Reviews**: System design security validation
-- **Compliance Audits**: Regulatory requirement verification
+Axal’s audit report can be found [here](/pdfs/Sherlock%20Audit%20-%20Axal.pdf). All identified issues have been addressed. We have open sourced our signer and welcome community review and bug reports.
 
-## Audit Scope
+## Continuous assurance
 
-### Smart Contracts
-- **Code Review**: Manual and automated analysis
-- **Vulnerability Assessment**: Identify security weaknesses
-- **Gas Optimization**: Efficiency and cost analysis
-- **Upgrade Safety**: Secure upgrade mechanisms
-
-### Infrastructure
-- **Network Security**: DDoS protection and monitoring
-- **Data Protection**: Encryption and privacy measures
-- **Access Controls**: Authentication and authorization
-- **Incident Response**: Security incident procedures
-
-## Audit Reports
-
-- **Public Reports**: Transparent security documentation
-- **Remediation Tracking**: Follow-up on identified issues
-- **Continuous Monitoring**: Ongoing security assessment
-- **Third-Party Validation**: Independent verification
-
-## Security Standards
-
-- **Industry Best Practices**: Following established standards
-- **Regulatory Compliance**: Meeting legal requirements
-- **Continuous Improvement**: Regular security updates
-- **Community Feedback**: Open to security researcher input
+Security does not end with a single audit. We pair audits with hardening work, continuous monitoring, and a live bug bounty so researchers can report emergent issues quickly.

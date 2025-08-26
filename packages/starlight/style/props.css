@@ -154,7 +154,7 @@
 		--sl-color-text-accent: var(--sl-color-accent);
 		--sl-color-text-invert: var(--sl-color-black);
 		--sl-color-bg-nav: var(--sl-color-gray-7);
-		--sl-color-bg-sidebar: var(--sl-color-bg);
+		--sl-color-bg-sidebar: linear-gradient(to bottom, rgba(255, 252, 241, 0.4) 33%, rgba(222, 242, 204, 0.4) 100%);
 		--sl-color-bg-inline-code: var(--sl-color-gray-6);
 		--sl-color-bg-accent: var(--sl-color-accent);
 		--sl-color-hairline-light: var(--sl-color-gray-6);

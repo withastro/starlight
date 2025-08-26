@@ -1,40 +1,93 @@
 ---
 title: "Starting to Earn"
-description: "Learn how to start earning yields on your deposits"
-tags: ["Getting Started", "Earning"]
+description: "Automated stablecoin savings with 6–10% APY"
+tags: ["Yield", "Stablecoins", "Strategies", "LP Fees"]
 ---
 
-# Starting to Earn
+Axal offers automated stablecoin savings with 6-10% APY through strategic allocation across battle-tested DeFi protocols. Our approach focuses on safety, diversification, and automated optimization.
 
-Begin earning competitive yields on your crypto and fiat deposits.
+## Current Protocols & Networks
 
-## How Yields Work
+### Phase 1
+- **Assets**: USDC
+- **Networks**: Base
+- **Protocols**: Morpho, Euler
+- **Strategy**: USDC lending across all Base pools in Morpho and Euler.
 
-Axal generates yields through various DeFi strategies and traditional investments.
+### Phase 2
+- **Networks**: ETH Mainnet, Polygon, Arbitrum, Stellar, BNB, Solana, Hyperliquid, Aptos
+- **Protocols**: Morpho, Euler, Maple
+- **Strategy**: USDC lending and yield-bearing stablecoins with enhanced incentives on the above networks.
 
-## Getting Started
+## Strategy Categories
 
-1. Deposit funds (crypto or fiat)
-2. Choose your earning strategy
-3. Set your risk tolerance
-4. Start earning immediately
+### No Principal Asset Risk
 
-## Available Strategies
+#### DeFi Lending Marketplaces
+- Aave — Blue-chip lending protocol
+- Morpho — Optimized lending with enhanced yields
+- Euler — Advanced lending with risk management
+- Pendle — Fixed-rate yield strategies
+- Maple — Conservative strategy with withdrawal lockups
 
-- **Conservative**: Lower risk, stable returns
-- **Balanced**: Moderate risk and returns
-- **Aggressive**: Higher risk, higher potential returns
+#### CDPs (Collateralized Debt Positions)
+- Ethena
+- Felix
+- feUSD
+- USDhl
+- Perena
 
-## Yield Rates
+## Security & Transparency
+- **Trusted Execution Environment**: All transactions filtered for protection
+- **Non-Custodial**: Powered by Privy smart wallets
+- **Chain & Gas Abstracted**: No crypto experience necessary
+- **Real-time Monitoring**: 24/7 position management
+- **Transparent Reporting**: All vault addresses publicly viewable
 
-Current APY rates vary by strategy:
-- Conservative: 3-5%
-- Balanced: 5-8%
-- Aggressive: 8-15%
+## What happens with your deposit?
+USDC or blue‑chip collateral is supplied using algorithmically optimized weightings to lending protocols. Interest plus liquidity‑mining incentives (if any) are auto‑compounded.
 
-## Risk Management
+## Primary Risks
+- Smart‑contract or oracle failure on lending protocols such as Morpho, Euler, etc.
+- USDC de‑peg.
 
-- Diversified portfolio approach
-- Regular rebalancing
-- Risk monitoring tools
-- Insurance coverage
+## Benefits
+- **Automatic Optimization**: Axal automatically allocates your funds across the best-yielding protocols
+- **Real-Time Updates**: Your dashboard updates with live performance data
+- **Compound Earnings**: Your yield is automatically reinvested to maximize returns
+- **No Lock-ups**: Withdraw your funds anytime with no penalties
+
+## How Liquidity Provider (LP) Fees Generate Yield
+Providing liquidity means depositing assets into an automated market maker (AMM) pool (e.g., a USDC/ETH or stablecoin/stablecoin pair). Traders swap against the pool and pay a small fee on each trade. Those fees are distributed pro‑rata to liquidity providers (LPs), including Axal’s vault.
+
+### Where the fees come from
+- Every swap in the pool incurs a fee (commonly 0.01%–0.3%, depending on the pool).
+- Fees are automatically retained by the pool and added to the pool’s assets.
+- As an LP, your share of the pool increases in value as fees accrue.
+
+### Flow of funds (at a high level)
+1. Vault allocates a portion of deposits to selected, audited AMM pools.
+2. Users trade against those pools and pay swap fees.
+3. Fees accumulate in the pool and increase the total pool value.
+4. Your vault shares track that value; the vault periodically compounds fees and rebalances.
+
+### Example calculation
+- Suppose a USDC/USDT pool charges a 0.01% fee and handles $100,000,000 in daily volume.
+- Daily fees = $100,000,000 × 0.01% = $10,000.
+- If Axal’s position represents 2% of pool liquidity, the pro‑rata share of fees is ~$200/day before compounding and rebalancing.
+- Actual returns depend on volume, fee tier, pool depth, and time‑in‑market.
+
+### Managing LP risks
+- **Impermanent loss**: In volatile pairs, relative price moves can reduce LP value versus holding. Axal focuses on stable/stable or closely‑pegged pairs to minimize this.
+- **Smart‑contract risk**: We use audited protocols and TEEs for signing, and we diversify across pools.
+- **Concentrated liquidity risk**: In CLMMs (e.g., Uniswap v3‑style), liquidity must be positioned in an active price range; Axal monitors and repositions programmatically.
+
+### Why LP fees complement lending yield
+LP fees are driven by trading activity, while lending yields are driven by borrowing demand. Combining the two creates diversified, uncorrelated sources of return. Our optimizer continuously evaluates both to improve risk‑adjusted yield.
+
+## Withdrawal Availability & Notifications
+Some protocols include brief exit queues or withdrawal windows (e.g., epoch‑based redemptions or settlement periods). When part of your balance sits in a non‑instant protocol:
+- We display a clear status in your dashboard and show which portion is queued for withdrawal.
+- You receive a notification with an estimated number of days until funds are available.
+- During the waiting period, your position continues to accrue any eligible yield per protocol rules; we show an estimate of earnings until the expected release date.
+- As soon as the window opens and funds settle, we convert them to Uninvested Cash or proceed with your transfer based on your selection.

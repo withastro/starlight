@@ -139,7 +139,23 @@
   --sl-color-accent-low: #DEF2CC !important;
   --sl-color-bg-accent: #DEF2CC !important;
   --sl-color-text-accent: #DEF2CC !important;
-  --sl-color-bg-sidebar: transparent !important;
+}
+
+/* Make markdown headings smaller in content area */
+.sl-markdown-content h1 {
+  font-size: var(--sl-text-h3);
+}
+.sl-markdown-content .sl-heading-wrapper.level-h1 {
+  display: none;
+}
+.sl-markdown-content h2 {
+  font-size: var(--sl-text-h4);
+}
+.sl-markdown-content h3 {
+  font-size: var(--sl-text-lg);
+}
+.sl-markdown-content h4 {
+  font-size: var(--sl-text-base);
 }
 
 :root[data-theme='dark'] {
@@ -167,30 +183,7 @@
   --purple-hsl: 120, 60%, 85% !important;
 }
 
-/* Sidebar gradient */
-:root[data-theme='light'] .sidebar-pane {
-  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
-}
 
-/* Ensure gradient shows on both mobile and desktop */
-:root[data-theme='light'] nav.sidebar .sidebar-pane {
-  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
-}
-
-/* Override any other sidebar background styles */
-:root[data-theme='light'] [data-has-sidebar] .sidebar-pane {
-  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
-}
-
-/* Force gradient override with higher specificity */
-:root[data-theme='light'] .page .sidebar .sidebar-pane {
-  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
-}
-
-/* Additional override for mobile */
-:root[data-theme='light'] .sidebar-pane[style*="background"] {
-  background: linear-gradient(to bottom, #FFFCF1 33%, #DEF2CC 100%) !important;
-}
 
 @layer base {
   * {
@@ -277,4 +270,15 @@ h1, h2, h3, h4, h5, h6,
 .sidebar-pane ul ul a {
   padding: 0.875rem 0.75rem !important;
   margin: 0.375rem 0 !important;
+}
+
+/* Deep blue, underlined links sitewide */
+a, a:visited {
+  color: #264450 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+a:hover, a:focus {
+  color: #264450 !important;
 }

@@ -6,7 +6,7 @@ const title = data.title;
 const description = data.description;
 const lastUpdated = data.lastUpdated;
 const editUrl = data.editUrl;
-const tags = data.tags || ['Getting Started', 'Intro to Axal'];
+const tags = Array.isArray(data.tags) ? data.tags : [];
 
 // Calculate reading time (rough estimate: 200 words per minute)
 // For now, use a default reading time since we can't easily access the content
@@ -24,21 +24,7 @@ const currentDate = new Date().toLocaleDateString('en-US', {
   <!-- Main title -->
   <h1 id={PAGE_TITLE_ID} class="page-title">{title}</h1>
   
-  <!-- Tags underneath title -->
-  <div class="page-tags">
-    {tags.map((tag) => (
-      <span class="tag">{tag}</span>
-    ))}
-  </div>
-  
-  <!-- Subtitle -->
-  {description && (
-    <div class="page-subtitle">
-      <p class="subtitle-text">{description}</p>
-    </div>
-  )}
-  
-  <!-- Metadata below title -->
+  <!-- Metadata right below title -->
   <div class="page-metadata">
     <div class="metadata-item">
       <span class="metadata-label">Last updated:</span>
@@ -49,6 +35,22 @@ const currentDate = new Date().toLocaleDateString('en-US', {
       <span class="metadata-value">{readingTime} min read</span>
     </div>
   </div>
+  
+  <!-- Subtitle -->
+  {description && (
+    <div class="page-subtitle">
+      <p class="subtitle-text">{description}</p>
+    </div>
+  )}
+  
+  <!-- Tags underneath subtitle -->
+  {tags.length > 0 && (
+    <div class="page-tags">
+      {tags.map((tag) => (
+        <span class="tag">{tag}</span>
+      ))}
+    </div>
+  )}
 </div>
 
 <style>
@@ -60,6 +62,7 @@ const currentDate = new Date().toLocaleDateString('en-US', {
   .page-tags {
     display: flex;
     gap: 0.5rem;
+    margin-top: 1rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
   }
@@ -100,6 +103,7 @@ const currentDate = new Date().toLocaleDateString('en-US', {
     display: flex;
     gap: 2rem;
     padding: 0.5rem 0;
+    margin-bottom: 1rem;
     font-family: 'Test Söhne Buch', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
   }
   
