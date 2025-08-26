@@ -3,63 +3,66 @@ import type { AstroUserConfig, ViteUserConfig } from 'astro';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'astro/zod';
+import docsearch from '@docsearch/js';
+
+export type DocSearchProps = Parameters<typeof docsearch>[0];
+
+type SearchOptions = Pick<DocSearchProps, 'searchParameters'>;
+
+// Base schema for shared Algolia configuration properties.
+const AlgoliaConfigSchema = z.object({
+	/** Your Algolia application ID. */
+	appId: z.string(),
+	/** Your Algolia Search API key. */
+	apiKey: z.string(),
+	/** Your Algolia index name. */
+	indexName: z.string(),
+	/**
+	 * The Algolia Search Parameters.
+	 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
+	 */
+	searchParameters: z.custom<SearchOptions>().optional(),
+});
 
 // Schema for inline DocSearch client options (without `clientOptionsModule`).
-const InlineDocSearchConfigSchema = z
-	.object({
-		// Required config without which DocSearch won’t work.
-		/** Your Algolia application ID. */
-		appId: z.string(),
-		/** Your Algolia Search API key. */
-		apiKey: z.string(),
-		/** Your Algolia index name. */
-		indexName: z.string(),
-		// Optional DocSearch component config (only the serializable properties can be included here)
-		/**
-		 * The maximum number of results to display per search group.
-		 * @default 5
-		 */
-		maxResultsPerGroup: z.number().optional(),
-		/**
-		 * Disable saving recent searches and favorites to the local storage.
-		 * @default false
-		 */
-		disableUserPersonalization: z.boolean().optional(),
-		/**
-		 * Whether to enable the Algolia Insights plugin and send search events to your DocSearch index.
-		 * @default false
-		 */
-		insights: z.boolean().optional(),
-		/**
-		 * Optional: Enable Algolia Ask AI.
-		 * Can be provided as a string (your `assistantId`) or an object allowing
-		 * per-assistant overrides.
-		 */
-		askAi: z
-			.union([
-				z.string(),
-				z
+const InlineDocSearchConfigSchema = AlgoliaConfigSchema.extend({
+	// Make searchParameters required for the main config
+	searchParameters: z.custom<SearchOptions>(),
+	// Optional DocSearch component config (only the serializable properties can be included here)
+	/**
+	 * The maximum number of results to display per search group.
+	 * @default 5
+	 */
+	maxResultsPerGroup: z.number().optional(),
+	/**
+	 * Disable saving recent searches and favorites to the local storage.
+	 * @default false
+	 */
+	disableUserPersonalization: z.boolean().optional(),
+	/**
+	 * Whether to enable the Algolia Insights plugin and send search events to your DocSearch index.
+	 * @default false
+	 */
+	insights: z.boolean().optional(),
+	/**
+	 * Optional: Enable Algolia Ask AI.
+	 * Can be provided as a string (your `assistantId`) or an object allowing
+	 * per-assistant overrides.
+	 */
+	askAi: z
+		.union([
+			z.string(),
+			AlgoliaConfigSchema.partial().extend({
+				assistantId: z.string().nullable().optional(),
+				searchParameters: z
 					.object({
-						assistantId: z.string().nullable().optional(),
-						indexName: z.string().optional(),
-						apiKey: z.string().optional(),
-						appId: z.string().optional(),
-						searchParameters: z
-							.object({
-								facetFilters: z.any().optional(),
-							})
-							.optional(),
+						facetFilters: z.any().optional(),
 					})
-					.strict(),
-			])
-			.optional(),
-		/**
-		 * The Algolia Search Parameters.
-		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
-		 */
-		searchParameters: z.record(z.string(), z.any()).optional(),
-	})
-	.strict();
+					.optional(),
+			}).strict(),
+		])
+		.optional(),
+}).strict();
 
 // Full schema that also allows referencing an external module via `clientOptionsModule`.
 const DocSearchConfigSchema = InlineDocSearchConfigSchema.or(
@@ -106,7 +109,6 @@ const DocSearchConfigSchema = InlineDocSearchConfigSchema.or(
 
 // Export the inline client options type (does NOT include `clientOptionsModule`).
 export type DocSearchClientOptions = z.infer<typeof InlineDocSearchConfigSchema>;
-
 type DocSearchUserConfig = z.infer<typeof DocSearchConfigSchema>;
 
 /** Starlight DocSearch plugin. */

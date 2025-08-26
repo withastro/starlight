@@ -1,112 +1,10 @@
 ---
 import '@docsearch/css/dist/modal.css';
+import type docsearch from '@docsearch/js';
 import './variables.css';
 
-export interface DocSearchTranslations {
-	button?: ButtonTranslations;
-	modal?: ModalTranslations;
-}
+type DocSearchProps = Parameters<typeof docsearch>[0];
 
-export interface ButtonTranslations {
-	buttonText?: string;
-	buttonAriaLabel?: string;
-}
-
-export interface ModalTranslations extends ScreenStateTranslations {
-	searchBox?: SearchBoxTranslations;
-	footer?: FooterTranslations;
-}
-
-export interface ScreenStateTranslations {
-	errorScreen?: ErrorScreenTranslations;
-	startScreen?: StartScreenTranslations;
-	resultsScreen?: ResultsScreenTranslations;
-	noResultsScreen?: NoResultsScreenTranslations;
-	askAiScreen?: AskAiScreenTranslations;
-}
-
-export interface SearchBoxTranslations {
-	clearButtonTitle?: string;
-	clearButtonAriaLabel?: string;
-	closeButtonText?: string;
-	closeButtonAriaLabel?: string;
-	placeholderText?: string;
-	placeholderTextAskAi?: string;
-	searchInputLabel?: string;
-	placeholderTextAskAiStreaming?: string;
-	backToKeywordSearchButtonText?: string;
-	backToKeywordSearchButtonAriaLabel?: string;
-}
-
-export interface FooterTranslations {
-	selectText?: string;
-	submitQuestionText?: string;
-	selectKeyAriaLabel?: string;
-	navigateText?: string;
-	navigateUpKeyAriaLabel?: string;
-	backToSearchText?: string;
-	navigateDownKeyAriaLabel?: string;
-	closeText?: string;
-	closeKeyAriaLabel?: string;
-	poweredByText?: string;
-}
-
-export interface ErrorScreenTranslations {
-	titleText?: string;
-	helpText?: string;
-}
-
-export interface StartScreenTranslations {
-	recentSearchesTitle?: string;
-	noRecentSearchesText?: string;
-	saveRecentSearchButtonTitle?: string;
-	removeRecentSearchButtonTitle?: string;
-	favoriteSearchesTitle?: string;
-	removeFavoriteSearchButtonTitle?: string;
-	recentConversationsTitle?: string;
-	removeRecentConversationButtonTitle?: string;
-}
-
-export interface ResultsScreenTranslations {
-	askAiPlaceholder?: string;
-}
-
-export interface NoResultsScreenTranslations {
-	noResultsText?: string;
-	suggestedQueryText?: string;
-	reportMissingResultsText?: string;
-	reportMissingResultsLinkText?: string;
-}
-
-export interface AskAiScreenTranslations {
-	disclaimerText?: string;
-	relatedSourcesText?: string;
-	thinkingText?: string;
-	copyButtonText?: string;
-	copyButtonCopiedText?: string;
-	copyButtonTitle?: string;
-	likeButtonTitle?: string;
-	dislikeButtonTitle?: string;
-	thanksForFeedbackText?: string;
-	preToolCallText?: string;
-	duringToolCallText?: string;
-	afterToolCallText?: string;
-	aggregatedToolCallText?: string;
-}
-
-export interface DocSearchProps {
-	appId: string;
-	apiKey: string;
-	indexName: string;
-	placeholder?: string;
-	searchParameters?: any;
-	disableUserPersonalization?: boolean;
-	initialQuery?: string;
-	insights?: boolean;
-	translations?: DocSearchTranslations;
-	askAi?: any;
-	theme?: 'dark' | 'light';
-}
 type DocSearchTranslationProps = Pick<DocSearchProps, 'placeholder' | 'translations'>;
 
 const pick = (keyStart: string) =>
@@ -127,8 +25,10 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			searchBox: pick('docsearch.searchBox.'),
 			startScreen: pick('docsearch.startScreen.'),
 			errorScreen: pick('docsearch.errorScreen.'),
-			footer: pick('docsearch.footer.'),
+			askAiScreen: pick('docsearch.askAiScreen.'),
+			resultsScreen: pick('docsearch.resultsScreen.'),
 			noResultsScreen: pick('docsearch.noResultsScreen.'),
+			footer: pick('docsearch.footer.'),
 		},
 	},
 };
