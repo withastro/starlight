@@ -2,7 +2,7 @@
 import { AstroError } from 'astro/errors';
 import Icon from './Icon.astro';
 import { Icons, type StarlightIcon } from '../components/Icons';
-import { throwInvalidAsideIconError } from '../integrations/asides';
+import { throwInvalidAsideIconError } from '../integrations/asides-error';
 
 const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
 const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 'error' } as const;

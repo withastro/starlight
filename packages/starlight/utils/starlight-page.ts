@@ -187,12 +187,12 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			// well as containing the metadata properties and this ensures we handle those correctly.
 			z.custom(
 				(value) =>
-					value &&
-					(typeof value === 'function' || typeof value === 'object') &&
-					'src' in value &&
-					'width' in value &&
-					'height' in value &&
-					'format' in value,
+					(value &&
+						(typeof value === 'function' || typeof value === 'object') &&
+						'src' in value &&
+						'width' in value &&
+						'height' in value &&
+						'format' in value) as ReturnType<ImageFunction>,
 				'Invalid image passed to `<StarlightPage>` component. Expected imported `ImageMetadata` object.'
 			)) as ImageFunction,
 	});
