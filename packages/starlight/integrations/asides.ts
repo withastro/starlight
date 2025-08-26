@@ -19,7 +19,7 @@ import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark
 import { Icons } from '../components/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
-import { AstroError } from 'astro/errors';
+import { throwInvalidAsideIconError } from './asides-error';
 
 interface AsidesOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
@@ -29,22 +29,22 @@ interface AsidesOptions {
 }
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
-function h(el: string, attrs: Properties = {}, children: any[] = []): P {
+function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
 	const { tagName, properties } = _h(el, attrs);
 	return {
 		type: 'paragraph',
 		data: { hName: tagName, hProperties: properties },
-		children,
+		children: children as P['children'],
 	};
 }
 
 /** Hacky function that generates an mdast SVG tree ready for conversion to HTML by rehype. */
-function s(el: string, attrs: Properties = {}, children: any[] = []): P {
+function s(el: string, attrs: Properties = {}, children: unknown[] = []): P {
 	const { tagName, properties } = _s(el, attrs);
 	return {
 		type: 'paragraph',
 		data: { hName: tagName, hProperties: properties },
-		children,
+		children: children as P['children'],
 	};
 }
 
@@ -93,14 +93,16 @@ function transformUnhandledDirective(
 }
 
 /** Hacky function that generates the children of an mdast SVG tree. */
-function makeSvgChildNodes(children: Result['children']): any[] {
+function makeSvgChildNodes(children: Result['children']): P[] {
 	const nodes: P[] = [];
 	for (const child of children) {
 		if (child.type !== 'element') continue;
 		nodes.push({
 			type: 'paragraph',
 			data: { hName: child.tagName, hProperties: child.properties },
-			children: makeSvgChildNodes(child.children),
+			// We are explicitly casting to the expected type here due to the hacky nature of this
+			// function which only works with SVG elements.
+			children: makeSvgChildNodes(child.children) as unknown as P['children'],
 		});
 	}
 	return nodes;
@@ -252,14 +254,6 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 }
 
 type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
-
-export function throwInvalidAsideIconError(icon: string) {
-	throw new AstroError(
-		'Invalid aside icon',
-		`An aside custom icon must be set to the name of one of Starlight\’s built-in icons, but received \`${icon}\`.\n\n` +
-			'See https://starlight.astro.build/reference/icons/#all-icons for a list of available icons.'
-	);
-}
 
 export function starlightAsides(options: AsidesOptions): RemarkPlugins {
 	return [remarkDirective, remarkAsides(options)];

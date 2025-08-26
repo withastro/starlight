@@ -32,11 +32,11 @@ export async function getRoute(context: APIContext): Promise<Route> {
 	);
 }
 
-export async function useRouteData(
+export function useRouteData(
 	context: APIContext,
 	route: Route,
 	{ Content, headings }: RenderResult
-): Promise<StarlightRouteData> {
+): StarlightRouteData {
 	const routeData = generateRouteData({ props: { ...route, headings }, context });
 	return { ...routeData, Content };
 }
@@ -118,7 +118,7 @@ function getEditUrl({ entry }: PageProps): URL | undefined {
 export function getSiteTitle(lang: string): string {
 	const defaultLang = config.defaultLocale.lang as string;
 	if (lang && config.title[lang]) {
-		return config.title[lang] as string;
+		return config.title[lang];
 	}
 	return config.title[defaultLang] as string;
 }

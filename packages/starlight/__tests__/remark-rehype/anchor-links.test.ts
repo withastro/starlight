@@ -4,6 +4,7 @@ import { createTranslationSystemFromFs } from '../../utils/translations-fs';
 import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
 import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
 import { starlightAutolinkHeadings } from '../../integrations/heading-links';
+import { getCollectionPosixPath } from '../../utils/collection-fs';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Anchor Links Tests',
@@ -16,14 +17,17 @@ const astroConfig = {
 	srcDir: new URL('./_src/', import.meta.url),
 };
 
-const useTranslations = createTranslationSystemFromFs(
+const useTranslations = await createTranslationSystemFromFs(
 	starlightConfig,
 	// Using non-existent `_src/` to ignore custom files in this test fixture.
 	{ srcDir: new URL('./_src/', import.meta.url) }
 );
 
 function absolutePathToLang(path: string) {
-	return getAbsolutePathFromLang(path, { astroConfig, starlightConfig });
+	return getAbsolutePathFromLang(path, {
+		docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
+		starlightConfig,
+	});
 }
 
 const processor = await createMarkdownProcessor({
