@@ -3,8 +3,6 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
-// TODO(HiDeoo) Remove
-import preact from '@astrojs/preact';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -36,8 +34,6 @@ export default defineConfig({
 	site,
 	trailingSlash: 'always',
 	integrations: [
-		// TODO(HiDeoo) Remove
-		preact(),
 		starlight({
 			title: 'Starlight',
 			logo: {
