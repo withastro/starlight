@@ -7,7 +7,7 @@ import docsearch from '@docsearch/js';
 
 export type DocSearchProps = Parameters<typeof docsearch>[0];
 
-type SearchOptions = Pick<DocSearchProps, 'searchParameters'>;
+type SearchOptions = DocSearchProps['searchParameters'];
 
 // Base schema for shared Algolia configuration properties.
 const AlgoliaConfigSchema = z.object({
@@ -17,17 +17,10 @@ const AlgoliaConfigSchema = z.object({
 	apiKey: z.string(),
 	/** Your Algolia index name. */
 	indexName: z.string(),
-	/**
-	 * The Algolia Search Parameters.
-	 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
-	 */
-	searchParameters: z.custom<SearchOptions>().optional(),
 });
 
 // Schema for inline DocSearch client options (without `clientOptionsModule`).
 const InlineDocSearchConfigSchema = AlgoliaConfigSchema.extend({
-	// Make searchParameters required for the main config
-	searchParameters: z.custom<SearchOptions>(),
 	// Optional DocSearch component config (only the serializable properties can be included here)
 	/**
 	 * The maximum number of results to display per search group.
@@ -45,6 +38,11 @@ const InlineDocSearchConfigSchema = AlgoliaConfigSchema.extend({
 	 */
 	insights: z.boolean().optional(),
 	/**
+	 * The Algolia Search Parameters.
+	 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
+	 */
+	searchParameters: z.custom<SearchOptions>().optional(),
+	/**
 	 * Optional: Enable Algolia Ask AI.
 	 * Can be provided as a string (your `assistantId`) or an object allowing
 	 * per-assistant overrides.
@@ -56,7 +54,7 @@ const InlineDocSearchConfigSchema = AlgoliaConfigSchema.extend({
 				assistantId: z.string().nullable().optional(),
 				searchParameters: z
 					.object({
-						facetFilters: z.any().optional(),
+						facetFilters: z.custom<NonNullable<SearchOptions>['facetFilters']>(),  
 					})
 					.optional(),
 			}).strict(),

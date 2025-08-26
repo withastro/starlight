@@ -131,6 +131,8 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
 				const { default: docsearch } = await import('@docsearch/js');
+				type DocSearchProps = Parameters<typeof docsearch>[0];
+
 				let translations;
 				try {
 					translations = JSON.parse(this.dataset.translations || '{}');
@@ -140,7 +142,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 				// as an Algolia facet filter so that the search results are scoped to the current
 				// language. If users already defined facet filters we preserve them while appending
 				// the new one.
-				let searchParameters: Record<string, any> | undefined;
+				let searchParameters: DocSearchProps['searchParameters'];
 
 				// Rebuild the askAi prop as an object:
 				// If the askAi prop is a string, treat it as the assistantId and use
@@ -181,8 +183,7 @@ const docsearchTranslations: DocSearchTranslationProps = {
 						searchParameters,
 						askAi,
 					};
-
-					docsearch(options);
+					docsearch(options as DocSearchProps);
 				}
 			});
 		}
