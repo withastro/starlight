@@ -3,12 +3,6 @@ title: Eco-friendly docs
 description: Learn how Starlight can help you build greener documentation sites and reduce your carbon footprint.
 ---
 
-<!-- // TODO(HiDeoo) Remove this filter. -->
-<p>
-	Author:
-	<span data-pagefind-filter="author">Alice</span>
-</p>
-
 Estimates for the climate impact of the web industry range from between [2%][sf] and [4% of global carbon emissions][bbc], roughly equivalent to the emissions of the airline industry.
 There are many complex factors in calculating the ecological impact of a website, but this guide includes a few tips for reducing the environmental footprint of your docs site.
 
