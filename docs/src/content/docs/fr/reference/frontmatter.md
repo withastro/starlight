@@ -386,6 +386,7 @@ sidebar:
 **Type :** `Record<string, string | number | boolean | undefined>`
 
 Attributs HTML à ajouter au lien de la page dans la barre latérale lorsqu'il est affiché dans un groupe de liens généré automatiquement.
+Si [`autogenerate.attrs`](/fr/guides/sidebar/#attributs-html-personnalisés-pour-les-liens-générés-automatiquement) est défini pour le groupe généré automatiquement auquel cette page appartient, les attributs du frontmatter seront fusionnés avec les attributs du groupe.
 
 ```md
 ---

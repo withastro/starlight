@@ -1,0 +1,9 @@
+{
+  "name": "@e2e/no-node-builtins",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@astrojs/starlight": "workspace:*",
+    "astro": "^5.6.1"
+  }
+}

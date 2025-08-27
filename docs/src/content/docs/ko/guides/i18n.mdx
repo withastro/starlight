@@ -359,15 +359,15 @@ const allStrings = Astro.locals.t.all();
 
 #### `t.exists()`
 
-로케일에 대한 번역 키가 존재하는지 확인하려면 번역 키를 첫 번째 인수로 전달하여 `locals.t.exists()` 함수를 사용합니다.
-현재 로케일을 재정의해야 하는 경우 선택적 두 번째 인수를 전달합니다.
+번역 키가 존재하는지 확인하려면 번역 키를 첫 번째 인수로 전달하여 `locals.t.exists()` 함수를 사용합니다.
+특정 로케일에 대한 번역이 존재하는지 확인해야 하는 경우 선택적으로 두 번째 인수를 전달합니다.
 
 ```astro
 ---
 // src/components/Example.astro
-const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+const keyExists = Astro.locals.t.exists('a.key');
 //    ^ true
-const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+const keyExistsInFrench = Astro.locals.t.exists('other.key', { lngs: ['fr'] });
 //    ^ false
 ---
 ```

@@ -4,7 +4,9 @@ import type { StarlightExpressiveCodeOptions } from '../integrations/expressive-
 export const ExpressiveCodeSchema = () =>
 	z
 		.union([
-			z.custom<StarlightExpressiveCodeOptions>((value) => typeof value === 'object' && value),
+			z.custom<StarlightExpressiveCodeOptions>(
+				(value) => typeof value === 'object' && (value as StarlightExpressiveCodeOptions)
+			),
 			z.boolean(),
 		])
 		.describe(

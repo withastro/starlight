@@ -574,13 +574,13 @@ test('parses an image that is also a function successfully', async () => {
 	expect(data.entry.data.hero?.image).toBeDefined();
 	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
 	expect(data.entry.data.hero?.image!['file']).toMatchInlineSnapshot(`[Function]`);
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('src');
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('width');
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('height');
-	// @ts-expect-error
+	// @ts-expect-error — see above
 	expect(data.entry.data.hero?.image!['file']).toHaveProperty('format');
 });
 
@@ -609,4 +609,18 @@ test('fails to parse an image without the expected metadata properties', async (
 			> Expected type \`file | { dark; light } | { html: string }\`
 			> Received \`{}\`"
 	`);
+});
+
+test('adds data to route shape when the `docs` collection is not defined', async () => {
+	// Mock the collection config in this test to simulate the absence of the `docs` collection.
+	vi.doMock('virtual:starlight/collection-config', () => ({ collections: {} }));
+
+	const data = await generateStarlightPageRouteData({
+		props: starlightPageProps,
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
+	expect(data.entry.data.title).toBe(starlightPageProps.frontmatter.title);
+
+	// Undo the mock to restore the original behavior.
+	vi.doUnmock('virtual:starlight/collection-config');
 });
