@@ -8,21 +8,6 @@ import icon from 'astro-icon';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
-	// de: { label: 'Deutsch', lang: 'de' },
-	// es: { label: 'Español', lang: 'es' },
-	// ja: { label: '日本語', lang: 'ja' },
-	// fr: { label: 'Français', lang: 'fr' },
-	// it: { label: 'Italiano', lang: 'it' },
-	// id: { label: 'Bahasa Indonesia', lang: 'id' },
-	// 'zh-cn': { label: '简体中文', lang: 'zh-CN' },
-	// 'pt-br': { label: 'Português do Brasil', lang: 'pt-BR' },
-	// 'pt-pt': { label: 'Português', lang: 'pt-PT' },
-	// ko: { label: '한국어', lang: 'ko' },
-	// tr: { label: 'Türkçe', lang: 'tr' },
-	// ru: { label: 'Русский', lang: 'ru' },
-	// hi: { label: 'हिंदी', lang: 'hi' },
-	// da: { label: 'Dansk', lang: 'da' },
-	// uk: { label: 'Українська', lang: 'uk' },
 };
 
 /* https://docs.netlify.com/configure-builds/environment-variables/#read-only-variables */
@@ -54,7 +39,9 @@ export default defineConfig({
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/getaxal/' },
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/d7Urwwk3' },
+				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/pdDDC2By' },
+				{ icon: 'twitter', label: 'Twitter', href: 'https://x.com/getaxal' },
+				{ icon: 'substack', label: 'Substack', href: 'https://axal.substack.com/' },
 			],
 			head: [
 				{
@@ -132,6 +119,6 @@ export default defineConfig({
 		icon(),
 	],
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [/** @type {any} */ (tailwindcss())],
 	},
 });
