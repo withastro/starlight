@@ -1,0 +1,45 @@
+---
+title: "Verified Signing"
+description: "Learn about TEE-based verified signing technology"
+tags: ["How it Works", "TEE"]
+---
+
+## Verified Signing 
+Axal carries out onchain actions on the behalf of a user through the use of a verified signer. The verified signer is software between Axal's servers and Privy's servers that verifies all transactions before signing the request. 
+This way, Axal can only sign transactions on the behalf of the user if they follow a set of rules. Currently, these rules are fixed by Axal. However, soon we will also allow user specified rules. An example of such a rule would be "Axal can only deposit to pools with a 7D APY greater than 5%". 
+
+To make this clear, the verified signer performs checks before any signing request can move forward, so the user benefits from consistent policy enforcement and clear guarantees about what can be signed.
+
+## Trusted Execution Environments
+Axal uses Trusted Execution Environments (TEEs) in order to ensure transparency of signing code as well as to ensure nobody at Axal can tamper with any signing software. TEEs are the same technology behind faceID and passkeys used by Apple. In particular, Axal uses AWS Nitro Enclaves to run its signing software. Find out more about nitro enclaves here.
+You can think of TEEs like a tamper proof and fully encrypted computer that nobody can look into. This means that all keys within the TEE cannot be manipulated or observed by anyone. In addition, the TEE provides attestations, cryptographic signatures that attest to the software in the TEE. This attestation can be used to verify the code running within the TEE is what we say it is. An example attestation is shown below
+```json
+{
+  "Measurements": {
+    "HashAlgorithm": "Sha384 { ... }",
+    "PCR0": "7fb5c55bc2ecbb68ed99a13d7122abfc0666b926a79d5379bc58b9445c84217f59cfdd36c08b2c79552928702efe23e4",
+    "PCR1": "235c9e6050abf6b993c915505f3220e2d82b51aff830ad14cbecc2eec1bf0b4ae749d311c663f464cde9f718acca5286",
+    "PCR2": "0f0ac32c300289e872e6ac4d19b0b5ac4a9b020c98295643ff3978610750ce6a86f7edff24e3c0a4a445f2ff8a9ea79d"
+  }
+}
+```
+In particular, the "PCR2" field is a hash of the binary being run within the TEE. By building our code and generating your own attestation, you can verify that they are in fact the same. We will release a guide on this soon.
+We have open sourced our signer code base so that anybody can build and verify the code in the TEE. You can find our code repository here.
+
+To elaborate, attestations allow anyone to compare the cryptographic measurement of our running code with the measurement produced from a local build. If the values match, it confirms the same software is running inside the enclave that we claim to run.
+
+## Delegated Signing
+Axal signs transactions on behalf of users through the use of delegated action keys as part of the Privy SDK. You can find out more in the Privy docs here. 
+Axal uses delegated signing only for two reasons. Firstly, it is to rebalance the users portfolio, and ensure the user is getting the best return on their dollar. Secondly, it is panic exiting the users' positions in case of malicious behaviour being detected in any of the pools we support. 
+The use of delegated actions means a user doesn't need to constantly be monitoring their portfolio and moving their money, it is all managed for them.
+Axal does not see the users private keys at any time, and the delegated all signing API requests to privy are executed in A TEE through HTTPS, so neither Axal nor any malicious attacker can sniff any of these requests.
+This content is only supported in a Lark Docs
+
+In practice, delegated signing gives users the convenience of automatic portfolio management with clear boundaries: only rebalancing and emergency exits are permitted, and requests are confined to a secure enclave.
+
+## Transaction Verification
+In order to ensure Axal follows rules, and to ensure that malicious transactions are dropped, the TEE has a verification layer prior to sending transactions to Privy. Currently, we support a whitelist of pools that the user can interact with as well as withdrawals to their own address. 
+This content is only supported in a Lark Docs
+In the future, we will allow users themselves to further specify rules for their Axal accounts, in order to allow users to have a greater degree of control over their wallets.
+
+Said simply, every outbound request is checked against a policy before it can be signed. Today those policies enforce a safe allow list and self withdrawals. Future user supplied policies will let people define additional constraints that match their needs.

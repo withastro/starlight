@@ -1,0 +1,75 @@
+---
+import config from 'virtual:starlight/user-config';
+
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import EarnNowButton from './EarnNowButton.astro';
+---
+
+<div class="header">
+	<div class="title-wrapper sl-flex">
+		<SiteTitle />
+	</div>
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
+		<div class="sl-flex social-icons">
+			<SocialIcons />
+		</div>
+		<ThemeSelect />
+		<LanguageSelect />
+		<EarnNowButton />
+	</div>
+	<div class="md:sl-hidden print:hidden mobile-earn-button">
+		<EarnNowButton />
+	</div>
+</div>
+
+<style>
+	@layer starlight.core {
+		.header {
+			display: flex;
+			gap: var(--sl-nav-gap);
+			justify-content: space-between;
+			align-items: center;
+			height: 100%;
+			position: relative;
+		}
+
+		.title-wrapper {
+			/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
+			overflow: clip;
+			/* Avoid clipping focus ring around link inside title wrapper. */
+			padding: 0.25rem;
+			margin: -0.25rem;
+			min-width: 0;
+		}
+
+		.right-group,
+		.social-icons {
+			gap: 1rem;
+			align-items: center;
+		}
+		.social-icons::after {
+			content: '';
+			height: 2rem;
+			border-inline-end: 1px solid var(--sl-color-gray-5);
+		}
+		
+		.mobile-earn-button {
+			position: absolute;
+			right: calc(var(--sl-menu-button-size) + var(--sl-nav-pad-x) + 1rem);
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		@media (min-width: 50rem) {
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				align-content: center;
+			}
+		}
+	}
+</style>

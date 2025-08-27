@@ -1,0 +1,52 @@
+---
+// Earn Now Button Component
+---
+
+<a href="https://www.getaxal.com" class="earn-now-button" target="_blank" rel="noopener noreferrer">
+  <div class="button-content">
+    <span class="button-text">Earn Now</span>
+  </div>
+</a>
+
+<style>
+  .earn-now-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #DEF2CC;
+    border: 0.53px solid rgba(38, 68, 80, 0.5);
+    border-radius: 10px;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: #264450;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  /* Dark mode styling */
+  :global([data-theme='dark']) .earn-now-button {
+    background-color: transparent;
+    border: 0.53px solid rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+
+  .earn-now-button:hover {
+    background-color: #c8e8a8;
+    transform: translateY(-1px);
+  }
+
+  .earn-now-button:active {
+    transform: translateY(0);
+  }
+
+  .button-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .button-text {
+    font-family: inherit;
+  }
+</style>

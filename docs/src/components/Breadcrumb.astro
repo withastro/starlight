@@ -1,0 +1,90 @@
+---
+import { getEntryBySlug } from 'astro:content';
+
+const { data } = Astro.locals.starlightRoute;
+
+// Get the current page path
+const currentPath = Astro.url.pathname;
+const pathSegments = currentPath.split('/').filter(segment => segment !== '');
+
+// Build breadcrumb items
+const breadcrumbItems = [];
+let currentPathBuilder = '';
+
+for (const segment of pathSegments) {
+  currentPathBuilder += `/${segment}`;
+  
+  // Skip the first segment (usually 'docs')
+  if (currentPathBuilder === '/docs') continue;
+  
+  // Convert segment to readable title
+  const title = segment
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+  
+  breadcrumbItems.push({
+    title,
+    href: currentPathBuilder,
+    isCurrent: currentPathBuilder === currentPath
+  });
+}
+---
+
+{breadcrumbItems.length > 0 && (
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      {breadcrumbItems.map((item, index) => (
+        <li>
+          {index > 0 && <span class="separator">/</span>}
+          {item.isCurrent ? (
+            <span class="current">{item.title}</span>
+          ) : (
+            <a href={item.href}>{item.title}</a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .breadcrumb {
+    margin-bottom: 1rem;
+  }
+  
+  .breadcrumb ol {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+  }
+  
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+  }
+  
+  .breadcrumb a {
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .breadcrumb a:hover {
+    color: var(--sl-color-text-accent);
+  }
+  
+  .breadcrumb .current {
+    color: var(--sl-color-text);
+    font-weight: 500;
+  }
+  
+  .breadcrumb .separator {
+    margin: 0 0.5rem;
+    color: var(--sl-color-gray-4);
+  }
+</style>

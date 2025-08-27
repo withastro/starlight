@@ -1,0 +1,37 @@
+---
+title: "7702 Transactions"
+description: "Understanding 7702 transactions and their benefits"
+tags: ["How it Works", "7702"]
+---
+
+An introduction to EIP 7702 and how it brings smart account capabilities to a classic wallet when needed.
+
+## What is EIP 7702
+
+EIP 7702 allows a standard key controlled account to adopt smart account behavior on demand. Your account behaves like a normal wallet by default. When you need advanced features the wallet adds a short lived authorization that lets your account execute code for that action. After the action completes your account returns to normal.
+
+## Why this matters
+
+People want the ease of a familiar wallet and the safety and flexibility of code based controls. EIP 7702 gives you both without making you deploy a dedicated contract for your account or carry ongoing overhead.
+
+## How it works at a glance
+
+1. Normal state: your account acts like any other standard wallet.
+2. Upgrade step: your wallet sends a transaction that includes an authorization referencing code to run.
+3. Enhanced state: your account can validate and execute advanced logic for that action.
+4. Back to normal: once done, the account returns to standard behavior.
+
+## Practical benefits
+
+* No separate contract deployment for your account
+* Works with existing wallets and applications
+* Turn on advanced features only when you need them
+* Avoid always on overhead and save gas
+
+## Examples of advanced features
+
+* Batch several operations into one transaction
+* Add extra approval rules like multiple approvals or time locks
+* Use a paymaster to sponsor gas or pay in a token
+
+ 

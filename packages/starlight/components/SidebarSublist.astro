@@ -91,10 +91,26 @@ const { sublist, nested } = Astro.props;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 0.2em var(--sl-sidebar-item-padding-inline);
+			padding: 0.75rem var(--sl-sidebar-item-padding-inline);
 			line-height: 1.4;
 			cursor: pointer;
 			user-select: none;
+			margin: 0.25rem 0;
+			border-radius: 0.5rem;
+			transition: all 0.2s ease;
+		}
+		
+		summary:hover,
+		summary:focus {
+			color: #264450;
+			background-color: rgba(222, 242, 204, 0.3);
+		}
+
+		/* Dark mode summary hover */
+		:global([data-theme='dark']) summary:hover,
+		:global([data-theme='dark']) summary:focus {
+			color: white;
+			background-color: rgba(255, 255, 255, 0.1);
 		}
 		summary::marker,
 		summary::-webkit-details-marker {
@@ -117,21 +133,41 @@ const { sublist, nested } = Astro.props;
 			border-radius: 0.25rem;
 			text-decoration: none;
 			color: var(--sl-color-gray-2);
-			padding: 0.3em var(--sl-sidebar-item-padding-inline);
+			padding: 0.75rem var(--sl-sidebar-item-padding-inline);
 			line-height: 1.4;
+			margin: 0.25rem 0;
 		}
 
 		a:hover,
 		a:focus {
-			color: var(--sl-color-white);
+			color: #264450;
+			background-color: rgba(222, 242, 204, 0.3);
+			border-radius: 0.5rem;
+		}
+
+		/* Dark mode link hover */
+		:global([data-theme='dark']) a:hover,
+		:global([data-theme='dark']) a:focus {
+			color: white;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 0.5rem;
 		}
 
 		[aria-current='page'],
 		[aria-current='page']:hover,
 		[aria-current='page']:focus {
-			font-weight: 600;
-			color: var(--sl-color-text-invert);
-			background-color: var(--sl-color-text-accent);
+			font-weight: 700;
+			color: #264450;
+			background-color: transparent;
+		}
+
+		/* Dark mode selected page */
+		:global([data-theme='dark']) [aria-current='page'],
+		:global([data-theme='dark']) [aria-current='page']:hover,
+		:global([data-theme='dark']) [aria-current='page']:focus {
+			font-weight: 700;
+			color: white;
+			background-color: rgba(255, 255, 255, 0.15);
 		}
 
 		a > *:not(:last-child),

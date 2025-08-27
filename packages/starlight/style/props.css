@@ -32,12 +32,12 @@
 		--sl-color-red: hsl(var(--sl-hue-red), 82%, 63%);
 		--sl-color-red-high: hsl(var(--sl-hue-red), 82%, 87%);
 
-		--sl-color-accent-low: hsl(224, 54%, 20%);
-		--sl-color-accent: hsl(224, 100%, 60%);
-		--sl-color-accent-high: hsl(224, 100%, 85%);
+		--sl-color-accent-low: #DEF2CC;
+		--sl-color-accent: #DEF2CC;
+		--sl-color-accent-high: #DEF2CC;
 
 		--sl-color-text: var(--sl-color-gray-2);
-		--sl-color-text-accent: var(--sl-color-accent-high);
+		--sl-color-text-accent: #264450;
 		--sl-color-text-invert: var(--sl-color-accent-low);
 		--sl-color-bg: var(--sl-color-black);
 		--sl-color-bg-nav: var(--sl-color-gray-6);
@@ -84,12 +84,16 @@
 		--sl-line-height: 1.75;
 		--sl-line-height-headings: 1.2;
 
-		--sl-font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		--sl-font-system: 'Test Söhne Buch', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+			Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+			'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+		--sl-font-headings: 'Test Söhne Kraftig', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
 			Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
 			'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 		--sl-font-system-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
 			'Courier New', monospace;
 		--__sl-font: var(--sl-font, var(--sl-font-system)), var(--sl-font-system);
+		--__sl-font-headings: var(--sl-font-headings);
 		--__sl-font-mono: var(--sl-font-mono, var(--sl-font-system-mono)), var(--sl-font-system-mono);
 
 		/** Key layout values */
@@ -116,12 +120,12 @@
 	:root[data-theme='light'],
 	[data-theme='light'] ::backdrop {
 		/* Colours (light mode) */
-		--sl-color-white: hsl(224, 10%, 10%);
-		--sl-color-gray-1: hsl(224, 14%, 16%);
-		--sl-color-gray-2: hsl(224, 10%, 23%);
-		--sl-color-gray-3: hsl(224, 7%, 36%);
-		--sl-color-gray-4: hsl(224, 6%, 56%);
-		--sl-color-gray-5: hsl(224, 6%, 77%);
+		--sl-color-white: #264450; /* Dark text color */
+		--sl-color-gray-1: #264450;
+		--sl-color-gray-2: #264450;
+		--sl-color-gray-3: #264450;
+		--sl-color-gray-4: #264450;
+		--sl-color-gray-5: #264450;
 		--sl-color-gray-6: hsl(224, 20%, 94%);
 		--sl-color-gray-7: hsl(224, 19%, 97%);
 		--sl-color-black: hsl(0, 0%, 100%);
@@ -142,14 +146,15 @@
 		--sl-color-red: hsl(var(--sl-hue-red), 90%, 60%);
 		--sl-color-red-low: hsl(var(--sl-hue-red), 80%, 90%);
 
-		--sl-color-accent-high: hsl(234, 80%, 30%);
-		--sl-color-accent: hsl(234, 90%, 60%);
-		--sl-color-accent-low: hsl(234, 88%, 90%);
+		--sl-color-accent-high: #DEF2CC;
+		--sl-color-accent: #DEF2CC;
+		--sl-color-accent-low: #DEF2CC;
 
-		--sl-color-text-accent: var(--sl-color-accent);
+		--sl-color-text: #264450; /* Dark text color for light mode */
+		--sl-color-text-accent: #1e40af;
 		--sl-color-text-invert: var(--sl-color-black);
-		--sl-color-bg-nav: var(--sl-color-gray-7);
-		--sl-color-bg-sidebar: var(--sl-color-bg);
+		--sl-color-bg-nav: var(--sl-color-black);
+		--sl-color-bg-sidebar: linear-gradient(to bottom, rgba(255, 252, 241, 0.4) 33%, rgba(222, 242, 204, 0.4) 100%);
 		--sl-color-bg-inline-code: var(--sl-color-gray-6);
 		--sl-color-bg-accent: var(--sl-color-accent);
 		--sl-color-hairline-light: var(--sl-color-gray-6);

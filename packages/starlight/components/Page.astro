@@ -28,6 +28,7 @@ import Sidebar from 'virtual:starlight/components/Sidebar';
 import SkipLink from 'virtual:starlight/components/SkipLink';
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
 import TwoColumnContent from 'virtual:starlight/components/TwoColumnContent';
+import Breadcrumb from './Breadcrumb.astro';
 
 import printHref from '../style/print.css?url&no-inline';
 
@@ -106,6 +107,7 @@ if (pagefindEnabled) mainDataAttributes['data-pagefind-body'] = '';
 						) : (
 							<>
 								<ContentPanel>
+									<Breadcrumb />
 									<PageTitle />
 									{starlightRoute.entry.data.draft && <DraftContentNotice />}
 									{starlightRoute.isFallback && <FallbackContentNotice />}
