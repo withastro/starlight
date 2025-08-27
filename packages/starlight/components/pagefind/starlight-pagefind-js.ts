@@ -36,7 +36,7 @@ export type PagefindIndexOptions = {
 	 *
 	 * Only applies in multisite setups.
 	 */
-	mergeFilter?: Object | undefined;
+	mergeFilter?: object | undefined;
 	/**
 	 * If set, will ass the search term as a query parameter under this key, for use with Pagefind's highlighting script.
 	 */
@@ -61,20 +61,20 @@ type PagefindRankingWeights = {
 	 * e.g. if searching for `part` then `party` will boost a page higher than one containing `partition`.
 	 * Minimum value is 0.0, where `party` and `partition` would be viewed equally.
 	 */
-	termSimilarity?: Number;
+	termSimilarity?: number;
 	/**
 	 * Controls how much effect the average page length has on ranking.
 	 * Maximum value is 1.0, where ranking will strongly favour pages that are shorter than the average page on the site.
 	 * Minimum value is 0.0, where ranking will exclusively look at term frequency, regardless of how long a document is.
 	 */
-	pageLength?: Number;
+	pageLength?: number;
 	/**
 	 * Controls how quickly a term saturates on the page and reduces impact on the ranking.
 	 * Maximum value is 2.0, where pages will take a long time to saturate, and pages with very high term frequencies will take over.
 	 * As this number trends to 0, it does not take many terms to saturate and allow other paramaters to influence the ranking.
 	 * Minimum value is 0.0, where terms will saturate immediately and results will not distinguish between one term and many.
 	 */
-	termSaturation?: Number;
+	termSaturation?: number;
 	/**
 	 * Controls how much ranking uses term frequency versus raw term count.
 	 * Maximum value is 1.0, where term frequency fully applies and is the main ranking factor.
@@ -82,7 +82,7 @@ type PagefindRankingWeights = {
 	 * Values between 0.0 and 1.0 will interpolate between the two ranking methods.
 	 * Reducing this number is a good way to boost longer documents in your search results, as they no longer get penalized for having a low term frequency.
 	 */
-	termFrequency?: Number;
+	termFrequency?: number;
 };
 
 /** Filter counts returned from pagefind.filters(), and alongside results from pagefind.search() */

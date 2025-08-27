@@ -107,7 +107,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	}
 
 	/** Handle form changes, specifically checkbox inputs for filters. */
-	#onFormChange = (event: Event) => {
+	#onFormChange = async (event: Event) => {
 		if (!(event.target instanceof HTMLInputElement) || event.target.type !== 'checkbox') return;
 
 		const filters: PagefindFilters['selected'] = {};
@@ -127,7 +127,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 		}
 
 		this.#pagefindFilters.selected = filters;
-		this.#search();
+		await this.#search();
 	};
 
 	/** Handle keydown events on the query input. */
@@ -158,11 +158,11 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	};
 
 	/** Handle query input changes. */
-	#onQueryInputChange = (event: Event) => {
+	#onQueryInputChange = async (event: Event) => {
 		if (!(event.target instanceof HTMLInputElement)) return;
 		this.#pagefindQuery = event.target.value;
 		this.#renderClearButton();
-		this.#search();
+		await this.#search();
 	};
 
 	/** Handle clicks on the button to show more results. */
@@ -201,8 +201,8 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 		const pagefindPath = `${this.#options.bundlePath}pagefind.js`;
 
 		try {
-			pagefind = await import(pagefindPath);
-		} catch (error) {
+			pagefind = (await import(pagefindPath)) as Pagefind;
+		} catch {
 			console.error(`Failed to load Pagefind from ${pagefindPath}`);
 		}
 
@@ -280,7 +280,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 
 		// Even if the search is debounced, preload results for the query.
 		const pagefind = await this.#getOrWaitForPagefind();
-		pagefind.preload(query, { filters: this.#pagefindFilters.selected });
+		await pagefind.preload(query, { filters: this.#pagefindFilters.selected });
 	}
 
 	/**
@@ -616,7 +616,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	}
 
 	/** Render a root result, which may or may also render sub-results. */
-	async #renderRootResult(starlightPagefindResult: StarlightPagefindSearchResult) {
+	#renderRootResult(starlightPagefindResult: StarlightPagefindSearchResult) {
 		this.#appendResult(starlightPagefindResult);
 
 		if (!starlightPagefindResult.subResults) return;
@@ -716,7 +716,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	/* -------------- Public API -------------- */
 
 	/** Set Pagefind selected filters. */
-	async triggerFilters(filters: PagefindSearchFragment['filters']) {
+	triggerFilters(filters: PagefindSearchFragment['filters']) {
 		const selected: PagefindFilters['selected'] = {};
 
 		for (const [name, values] of Object.entries(filters)) {
@@ -730,7 +730,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	}
 
 	/** Perform a search with the given query. */
-	async triggerSearch(query: string) {
+	triggerSearch(query: string) {
 		this.#queryInput.value = query;
 		this.#queryInput.dispatchEvent(new InputEvent('input'));
 	}

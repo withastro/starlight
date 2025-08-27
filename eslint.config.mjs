@@ -43,11 +43,6 @@ export default tseslint.config(
 			},
 		},
 	},
-	// Disabled typed linting in JavaScript files.
-	{
-		files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
-		extends: [tseslint.configs.disableTypeChecked],
-	},
 
 	// Disable all formatting rules.
 	prettierConfig,
@@ -77,6 +72,14 @@ export default tseslint.config(
 			// fallbacks for some types that may not be accessible in some user environments, e.g. i18n
 			// keys for plugins.
 			'@typescript-eslint/no-redundant-type-constituents': 'off',
+			// Allow for using async event handlers without needing to use an async IIFE.
+			'@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
 		},
+	},
+
+	// Disabled typed linting in JavaScript files.
+	{
+		files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
+		extends: [tseslint.configs.disableTypeChecked],
 	}
 );
