@@ -42,12 +42,16 @@
 			}
 
 			:global([data-has-sidebar][data-has-toc]) .main-pane {
-				--sl-content-margin-inline: auto 0;
+				--sl-content-margin-inline: 0 0;
 
 				order: 1;
 				width: calc(
 					var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
 				);
+			}
+
+			:global([data-has-sidebar]:not([data-has-toc])) .main-pane {
+				--sl-content-margin-inline: 0 0;
 			}
 		}
 	}

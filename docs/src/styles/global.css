@@ -262,6 +262,21 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 600 !important;
 }
 
+/* Dark mode sidebar styling */
+:global([data-theme='dark']) .sidebar-pane a:hover,
+:global([data-theme='dark']) .sidebar-pane a:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+:global([data-theme='dark']) .sidebar-pane a[aria-current='page'],
+:global([data-theme='dark']) .sidebar-pane a[aria-current='page']:hover,
+:global([data-theme='dark']) .sidebar-pane a[aria-current='page']:focus {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  font-weight: 700 !important;
+}
+
 /* Make subsections thicker */
 .sidebar-pane ul ul li {
   margin: 0.5rem 0 !important;

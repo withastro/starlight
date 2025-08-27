@@ -43,6 +43,12 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 			font-weight: 700;
 			color: #264450;
 		}
+
+		/* Dark mode active anchor styling */
+		:global([data-theme='dark']) a[aria-current='true'] {
+			font-weight: 700;
+			color: white;
+		}
 		.isMobile a {
 			--pad-inline: 1rem;
 			display: flex;
@@ -64,6 +70,15 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 		.isMobile a[aria-current='true']:focus {
 			font-weight: 700;
 			color: #264450;
+			background-color: unset;
+		}
+
+		/* Dark mode mobile active anchor styling */
+		:global([data-theme='dark']) .isMobile a[aria-current='true'],
+		:global([data-theme='dark']) .isMobile a[aria-current='true']:hover,
+		:global([data-theme='dark']) .isMobile a[aria-current='true']:focus {
+			font-weight: 700;
+			color: white;
 			background-color: unset;
 		}
 		.isMobile a[aria-current='true']::after {

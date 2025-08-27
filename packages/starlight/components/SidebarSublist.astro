@@ -105,6 +105,13 @@ const { sublist, nested } = Astro.props;
 			color: #264450;
 			background-color: rgba(222, 242, 204, 0.3);
 		}
+
+		/* Dark mode summary hover */
+		:global([data-theme='dark']) summary:hover,
+		:global([data-theme='dark']) summary:focus {
+			color: white;
+			background-color: rgba(255, 255, 255, 0.1);
+		}
 		summary::marker,
 		summary::-webkit-details-marker {
 			display: none;
@@ -138,12 +145,29 @@ const { sublist, nested } = Astro.props;
 			border-radius: 0.5rem;
 		}
 
+		/* Dark mode link hover */
+		:global([data-theme='dark']) a:hover,
+		:global([data-theme='dark']) a:focus {
+			color: white;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 0.5rem;
+		}
+
 		[aria-current='page'],
 		[aria-current='page']:hover,
 		[aria-current='page']:focus {
 			font-weight: 700;
 			color: #264450;
 			background-color: transparent;
+		}
+
+		/* Dark mode selected page */
+		:global([data-theme='dark']) [aria-current='page'],
+		:global([data-theme='dark']) [aria-current='page']:hover,
+		:global([data-theme='dark']) [aria-current='page']:focus {
+			font-weight: 700;
+			color: white;
+			background-color: rgba(255, 255, 255, 0.15);
 		}
 
 		a > *:not(:last-child),
