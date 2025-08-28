@@ -25,7 +25,7 @@ export function parseWithFriendlyErrors<T extends z.Schema>(
 	input: z.input<T>,
 	message: string
 ): z.output<T> {
-	return processParsedData(schema.safeParse(input, { errorMap }), message);
+	return processParsedData<T>(schema.safeParse(input, { errorMap }), message);
 }
 
 /**
@@ -42,10 +42,13 @@ export async function parseAsyncWithFriendlyErrors<T extends z.Schema>(
 	input: z.input<T>,
 	message: string
 ): Promise<z.output<T>> {
-	return processParsedData(await schema.safeParseAsync(input, { errorMap }), message);
+	return processParsedData<T>(await schema.safeParseAsync(input, { errorMap }), message);
 }
 
-function processParsedData(parsedData: z.SafeParseReturnType<any, any>, message: string) {
+function processParsedData<T extends z.Schema>(
+	parsedData: z.SafeParseReturnType<T, T>,
+	message: string
+) {
 	if (!parsedData.success) {
 		throw new AstroError(message, parsedData.error.issues.map((i) => i.message).join('\n'));
 	}
@@ -60,7 +63,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 		// raise a single error when `key` does not match:
 		// > Did not match union.
 		// > key: Expected `'tutorial' | 'blog'`, received 'foo'
-		let typeOrLiteralErrByPath: Map<string, TypeOrLiteralErrByPathEntry> = new Map();
+		const typeOrLiteralErrByPath: Map<string, TypeOrLiteralErrByPathEntry> = new Map();
 		for (const unionError of baseError.unionErrors.map((e) => e.errors).flat()) {
 			if (unionError.code === 'invalid_type' || unionError.code === 'invalid_literal') {
 				const flattenedErrorPath = flattenErrorPath(unionError.path);
@@ -69,7 +72,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 				} else {
 					typeOrLiteralErrByPath.set(flattenedErrorPath, {
 						code: unionError.code,
-						received: (unionError as any).received,
+						received: unionError.received,
 						expected: [unionError.expected],
 					});
 				}
@@ -130,7 +133,7 @@ const errorMap: z.ZodErrorMap = (baseError, ctx) => {
 				baseErrorPath,
 				getTypeOrLiteralMsg({
 					code: baseError.code,
-					received: (baseError as any).received,
+					received: baseError.received,
 					expected: [baseError.expected],
 				})
 			),

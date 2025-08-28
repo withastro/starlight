@@ -91,6 +91,23 @@ jobs:
       - name: Type check packages
         run: pnpm typecheck
 
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm i
+      - name: Generate types
+        working-directory: ./docs
+        run: pnpm astro sync
+      - name: Run linter
+        run: pnpm lint
+
   a11y:
     name: Check for accessibility issues
     runs-on: ubuntu-latest

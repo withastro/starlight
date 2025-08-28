@@ -68,7 +68,7 @@ Alle Stile in der Schicht `my-overrides` haben Vorrang vor den Stilen von Starli
 
 ## Tailwind CSS
 
-Tailwind CSS-Unterstützung in Astro-Projekten wird durch die [Tailwind Vite-Plugin](https://tailwindcss.com/docs/installation/using-vite) bereitgestellt.
+Die Unterstützung für Tailwind CSS v4 in Astro-Projekten wird durch das [Tailwind Vite-Plugin](https://tailwindcss.com/docs/installation/using-vite) bereitgestellt.
 Starlight bietet komplementäres CSS, um Tailwind für die Kompatibilität mit den Styles von Starlight zu konfigurieren.
 
 Das Starlight Tailwind CSS wendet die folgende Konfiguration an:
@@ -182,6 +182,9 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
+    Diese Tailwind-Theme-Konfiguration legt die Reihenfolge der [Kaskadenschichten](#kaskadenschichten) von Starlight fest, importiert das ergänzende CSS von Starlight für Tailwind und importiert die Theme- und Utility-Stile von Tailwind.
+    Wenn dein Projekt eine zusätzliche Tailwind-Konfiguration erfordert, schau dir den Abschnitt [„Mehrere Tailwind-Konfigurationen verwenden“](#mehrere-tailwind-konfigurationen-verwenden) an.
+
 4.  Aktualisiere die Starlight-Konfiguration, um die Tailwind-CSS-Datei als erstes Element im Array `customCss` hinzuzufügen:
 
         ```js ins={11-12}
@@ -208,7 +211,7 @@ Wenn du bereits eine Starlight-Website hast und Tailwind CSS hinzufügen möchte
 
 ### Starlight mit Tailwind designen
 
-Starlight verwendet Werte aus deiner [Tailwind-Theme-Konfiguration](https://tailwindcss.com/docs/theme) in der Benutzeroberfläche.
+Wenn du ein [neues Starlight-Projekt mit Tailwind erstellst](#erstelle-ein-neues-projekt-mit-tailwind) oder [Tailwind zu einem bestehenden Starlight-Projekt hinzufügst](#tailwind-zu-einem-bestehenden-projekt-hinzufügen), verwendet Starlight die Werte aus deiner [Tailwind-Themenkonfiguration](https://tailwindcss.com/docs/theme) in der Datei `src/styles/global.css`, um die Benutzeroberfläche zu gestalten.
 
 Wenn diese Option aktiviert ist, überschreiben die folgenden benutzerdefinierten CSS-Eigenschaften die Standardstile von Starlight:
 
@@ -268,6 +271,34 @@ Wenn diese Option aktiviert ist, überschreiben die folgenden benutzerdefinierte
 	--color-gray-950: var(--color-zinc-950);
 }
 ```
+
+### Mehrere Tailwind-Konfigurationen verwenden
+
+Mehrere Tailwind-Konfigurationen können verwendet werden, um verschiedene Stile auf verschiedene Teile deiner Website anzuwenden, z.&nbsp;B. wenn du [Starlight in einem Unterpfad verwendest](/de/manual-setup/#starlight-mit-einem-anderen-pfad-verwenden) oder wenn du [benutzerdefinierte Seiten](/de/guides/pages/#benutzerdefinierte-seiten) zu deiner Website hinzufügst.
+Du möchtest vielleicht die Preflight-Reset-Stile von Tailwind auf deinen benutzerdefinierten Seiten verwenden und trotzdem die Kompatibilitätsschicht von Starlight auf Starlight-Seiten anwenden.
+
+Die folgende Tailwind-CSS-Konfiguration richtet Tailwind ohne Plugins oder zusätzliche Einstellungen ein und kann als Ausgangspunkt für Seiten verwendet werden, die nicht mit Starlight erstellt wurden:
+
+```css title="src/styles/custom-pages-tailwind.css"
+/* Lade Tailwind ohne die zusätzlichen CSS-Dateien von Starlight. */
+@import 'tailwindcss';
+```
+
+<Steps>
+
+1. Nimm für Starlight-Seiten deine bevorzugte Tailwind-CSS-Konfiguration, indem du [„Tailwind zu einem bestehenden Projekt hinzufügen“](#tailwind-zu-einem-bestehenden-projekt-hinzufügen) befolgst.
+
+2. Für andere Seiten nimm einfach deine Tailwind CSS-Einstellungen, indem du sie dort importierst. Das macht man oft in einer Layout-Komponente, damit die Tailwind-Stile auf allen Seiten mit dem gleichen Layout funktionieren.
+   ```astro
+   ---
+   // src/layouts/CustomPageLayout.astro
+   import '../styles/custom-pages-tailwind.css';
+   ---
+   ```
+
+</Steps>
+
+Weitere Infos zu Tailwind-Theme-Konfigurationen findest du in der [Tailwind CSS-Dokumentation](https://tailwindcss.com/docs/theme).
 
 ## Themes
 
