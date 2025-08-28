@@ -37,9 +37,25 @@ This content is only supported in a Lark Docs
 
 In practice, delegated signing gives users the convenience of automatic portfolio management with clear boundaries: only rebalancing and emergency exits are permitted, and requests are confined to a secure enclave.
 
+<div style="margin: 2rem 0; text-align: center;">
+  <img 
+    src="/Delegated Signing.png" 
+    alt="Delegated Signing Diagram" 
+    style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"
+  />
+</div>
+
 ## Transaction Verification
 In order to ensure Axal follows rules, and to ensure that malicious transactions are dropped, the TEE has a verification layer prior to sending transactions to Privy. Currently, we support a whitelist of pools that the user can interact with as well as withdrawals to their own address. 
 This content is only supported in a Lark Docs
 In the future, we will allow users themselves to further specify rules for their Axal accounts, in order to allow users to have a greater degree of control over their wallets.
 
 Said simply, every outbound request is checked against a policy before it can be signed. Today those policies enforce a safe allow list and self withdrawals. Future user supplied policies will let people define additional constraints that match their needs.
+
+<div style="margin: 2rem 0; text-align: center;">
+  <img 
+    src="/Transaction Verificaiton.png" 
+    alt="Transaction Verification Diagram" 
+    style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);"
+  />
+</div>
