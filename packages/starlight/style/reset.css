@@ -20,10 +20,13 @@
 
 	body {
 		font-family: var(--__sl-font);
-		line-height: var(--sl-line-height);
 		-webkit-font-smoothing: antialiased;
 		color: var(--sl-color-text);
 		background-color: var(--sl-color-bg);
+	}
+
+	body:not(:where(.not-content *)) {
+		line-height: var(--sl-line-height);
 	}
 
 	input,
