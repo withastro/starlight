@@ -91,7 +91,8 @@ Cache-Control: public, max-age=604800, immutable
 
 | Фреймворк                   | CO₂ на каждое посещение стр. | Рейтинг |
 | --------------------------- | ---------------------------- | :-----: |
-| [Sphinx][sx-carbon]         | 0.01g                        |   A+    |
+| [Starlight][sl-carbon]      | 0.01g              |   A+   |
+| [Sphinx][sx-carbon]         | 0.01g              |   A+   |
 | [Read the Docs][rtd-carbon] | 0.03g                        |   A+    |
 | [VitePress][vp-carbon]      | 0.04g                        |    A    |
 | [docsify][dy-carbon]        | 0.05g                        |    A    |
