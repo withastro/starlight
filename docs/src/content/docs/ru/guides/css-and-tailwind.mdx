@@ -68,7 +68,7 @@ Starlight использует [каскадные слои](https://developer.m
 
 ## Tailwind CSS
 
-Поддержка Tailwind CSS в проектах Astro обеспечивается [плагином Tailwind Vite](https://tailwindcss.com/docs/installation/using-vite).
+Поддержка Tailwind CSS v4 в проектах Astro обеспечивается [плагином Tailwind Vite](https://tailwindcss.com/docs/installation/using-vite).
 Starlight предоставляет дополнительный CSS для настройки Tailwind, обеспечивающий совместимость со стилями Starlight.
 
 CSS Tailwind от Starlight применяет следующую конфигурацию:
@@ -182,6 +182,9 @@ yarn create astro --template starlight/tailwind
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
+    Эта конфигурация темы Tailwind определяет порядок [каскадных слоев](#каскадные-слои) Starlight, импортирует дополнительные стили Tailwind от Starlight, а также стили темы и утилиты Tailwind.
+	Если вашему проекту требуется дополнительная конфигурация Tailwind, ознакомьтесь с разделом [Использование нескольких конфигураций Tailwind](#использование-нескольких-конфигураций-tailwind).
+
 4.  Обновите конфигурацию Starlight, добавив файл Tailwind CSS как первый элемент массива `customCss`:
 
     ```js ins={11-12}
@@ -208,7 +211,7 @@ yarn create astro --template starlight/tailwind
 
 ### Стилизация Starlight с использованием Tailwind
 
-Starlight будет использовать значения из вашей [конфигурации темы Tailwind](https://tailwindcss.ru/docs/theme) в своем интерфейсе.
+При [создании нового проекта Starlight с Tailwind](#создание-нового-проекта-с-tailwind) или при [добавлении Tailwind в существующий проект Starlight](#добавление-tailwind-в-существующий-проект), Starlight будет использовать значения из вашей [конфигурации темы Tailwind](https://tailwindcss.com/docs/theme), расположенной в файле `src/styles/global.css`, для стилизации своего пользовательского интерфейса.
 
 Если установлены, следующие пользовательские свойства CSS переопределят стили Starlight по умолчанию:
 
@@ -226,11 +229,11 @@ Starlight будет использовать значения из вашей [
 @import 'tailwindcss/utilities.css' layer(utilities);
 
 @theme {
-	/* Ваш предпочтительный шрифт для текста. По умолчанию Starlight использует системный стек шрифтов. */
+	/* Предпочитаемый шрифт для текста. По умолчанию Starlight использует системный стек шрифтов. */
 	--font-sans: 'Atkinson Hyperlegible';
-	/* Ваш предпочтительный шрифт для кода. По умолчанию Starlight использует системные моноширинные шрифты. */
+	/* Предпочитаемый шрифт для кода. По умолчанию Starlight использует системные моноширинные шрифты. */
 	--font-mono: 'IBM Plex Mono';
-	/* Ваш предпочтительный акцентный цвет. Indigo наиболее близок к цветам по умолчанию в Starlight. */
+	/* Предпочитаемый акцентный цвет. Indigo наиболее близок к цветам по умолчанию в Starlight. */
 	--color-accent-50: var(--color-indigo-50);
 	--color-accent-100: var(--color-indigo-100);
 	--color-accent-200: var(--color-indigo-200);
@@ -242,7 +245,7 @@ Starlight будет использовать значения из вашей [
 	--color-accent-800: var(--color-indigo-800);
 	--color-accent-900: var(--color-indigo-900);
 	--color-accent-950: var(--color-indigo-950);
-	/* Ваша предпочтительная серая палитра. Zinc наиболее близок к значениям по умолчанию в Starlight. */
+	/* Предпочитаемая серая палитра. Zinc наиболее близок к значениям по умолчанию в Starlight. */
 	--color-gray-50: var(--color-zinc-50);
 	--color-gray-100: var(--color-zinc-100);
 	--color-gray-200: var(--color-zinc-200);
@@ -256,6 +259,34 @@ Starlight будет использовать значения из вашей [
 	--color-gray-950: var(--color-zinc-950);
 }
 ```
+
+### Использование нескольких конфигураций Tailwind
+
+Несколько конфигураций Tailwind могут быть использованы для применения различных стилей к разным частям вашего сайта, например, при [использовании Starlight с подкаталогами](/ru/manual-setup/#использование-starlight-с-подкаталогами) или при добавлении [пользовательских страниц](/ru/guides/pages/#пользовательские-страницы) на ваш сайт.
+Например, вы можете захотеть использовать стили сброса Preflight от Tailwind на пользовательских страницах, сохраняя при этом слой совместимости Starlight для страниц Starlight.
+
+Следующая конфигурация Tailwind CSS настраивает Tailwind без каких-либо плагинов или дополнительной конфигурации и может использоваться как отправная точка для страниц, не относящихся к Starlight:
+
+```css title="src/styles/custom-pages-tailwind.css"
+/* Загрузка Tailwind без дополнительных стилей от Starlight. */
+@import 'tailwindcss';
+```
+
+<Steps>
+
+1. Для страниц Starlight примените предпочитаемую конфигурацию Tailwind CSS, следуя инструкциям из раздела [Добавление Tailwind в существующий проект](#добавление-tailwind-в-существующий-проект).
+
+2. Для других страниц примените предпочитаемую конфигурацию Tailwind CSS, импортируя её на этих страницах. Это часто делается в компоненте макета, чтобы стили Tailwind могли использоваться на всех страницах, использующих этот макет.
+   ```astro
+   ---
+   // src/layouts/CustomPageLayout.astro
+   import '../styles/custom-pages-tailwind.css';
+   ---
+   ```
+
+</Steps>
+
+Чтобы узнать больше о конфигурациях тем Tailwind, ознакомьтесь с [документацией Tailwind CSS](https://tailwindcss.com/docs/theme).
 
 ## Темизация
 
