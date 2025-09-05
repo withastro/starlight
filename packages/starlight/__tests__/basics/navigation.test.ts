@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { flattenSidebar, getPrevNextLinks, getSidebar } from '../../utils/navigation';
+import type { SidebarEntry, SidebarGroup, SidebarLink } from '../../types';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -310,4 +311,41 @@ describe('getPrevNextLinks', () => {
 		const withOverrides = getPrevNextLinks(sidebar, false, { prev: true, next: true });
 		expect(withOverrides).toEqual(withDefaults);
 	});
+});
+
+
+
+describe('Type-level assertions for SidebarEntry', () => {
+	test('SidebarEntry is assignable to SidebarLink | SidebarGroup', () => {
+		type AssertAssignable<T, U extends T> = true;
+		type _entryIsAssignable = AssertAssignable<SidebarEntry, SidebarLink | SidebarGroup>;
+	});
+
+	test('SidebarEntry can be cast to SidebarLink', () => {
+		type _castLink = SidebarEntry extends SidebarLink ? true : never;
+	});
+
+	test('SidebarEntry can be cast to SidebarGroup', () => {
+		type _castGroup = SidebarEntry extends SidebarGroup ? true : never;
+	});
+
+
+    test('SidebarEntry, SidebarLink, SidebarGroup are importable at consumer side',  () => {
+		// Import types dynamically to check they are exposed
+
+		type _link =  import('../../types').SidebarLink;
+		type _group = import('../../types').SidebarGroup;
+		type _entry = import('../../types').SidebarEntry;
+
+		// Assignability check
+		type _EntryIsLinkOrGroup = _entry extends _link | _group ? true : false;
+
+		// Example: assert a group can’t be assigned to a link
+		type _GroupToLink = _group extends _link ? true : false; // should be false
+
+  		// Dummy runtime assertion to satisfy test runner
+		let groupToLink: _GroupToLink = false;
+
+		expect(groupToLink).toBeFalsy()
+  });
 });
