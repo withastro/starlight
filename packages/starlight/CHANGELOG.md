@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.35.3
+
+### Patch Changes
+
+- [#1640](https://github.com/withastro/starlight/pull/1640) [`d1b3828`](https://github.com/withastro/starlight/commit/d1b3828cdfe8114884ab65049581e37624422ac4) Thanks [@hippotastic](https://github.com/hippotastic)! - Refactors various internal systems, improving code quality and maintainability.
+
 ## 0.35.2
 
 ### Patch Changes
