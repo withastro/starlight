@@ -5,7 +5,11 @@ import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
 import { FaviconSchema } from '../schemas/favicon';
 import { HeadConfigSchema } from '../schemas/head';
 import { LogoConfigSchema } from '../schemas/logo';
-import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
+import {
+	PagefindConfigDefaults,
+	PagefindConfigSchema,
+	PagefindModuleConfigSchema,
+} from '../schemas/pagefind';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { SocialLinksSchema } from '../schemas/social';
@@ -195,6 +199,7 @@ const UserConfigSchema = z.object({
 		// Transform `true` to our default config object.
 		.transform((val) => val && PagefindConfigDefaults())
 		.or(PagefindConfigSchema())
+		.or(PagefindModuleConfigSchema())
 		.optional(),
 
 	/** Specify paths to components that should override Starlight’s default components */
