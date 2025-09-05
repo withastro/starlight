@@ -2,6 +2,8 @@
 
 Algolia DocSearch plugin for the [Starlight][starlight] documentation theme for [Astro][astro].
 
+Supports DocSearch v4 with optional **Ask AI** conversational search.
+
 ## Documentation
 
 See the [Starlight site search guide][docs] for how to use this plugin.
