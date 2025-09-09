@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Refactors various internal systems, improving code quality and maintainability.
+Updates German UI translations to be more idiomatic.
