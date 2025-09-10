@@ -67,29 +67,25 @@ export default defineConfig({
 				{
 					label: 'Getting started',
 					items: [
-						'getting-started/introduction',
+						'getting-started/quick-start',
 						'getting-started/depositing-crypto',
-						'getting-started/depositing-from-bank',
-						'getting-started/starting-to-earn',
-						'getting-started/withdrawing-funds',
-						'getting-started/portfolio-performance',
+						'getting-started/depositing-with-card-bank',
+					],
+				},
+				{
+					label: 'Start Earning',
+					items: [
+						'how-it-works/tracking-your-portfolio',
+						'how-it-works/optimizing-portfolio',
+						'how-it-works/strategies',
 					],
 				},
 				{
 					label: 'How it works',
 					items: [
-						'how-it-works/on-ramping',
-						'how-it-works/self-custodied-wallets',
-						'how-it-works/optimizing-portfolio',
 						'how-it-works/7702-transactions',
 						'how-it-works/verified-signing',
-						'how-it-works/strategies',
 						'how-it-works/contracts',
-					],
-				},
-				{
-					label: 'Referrals',
-					items: [
 						'referrals/overview',
 					],
 				},
@@ -97,13 +93,8 @@ export default defineConfig({
 					label: 'Security',
 					items: [
 						'security/audits',
-						'security/bug-bounties',
 						'security/partners',
 					],
-				},
-				{
-					label: 'API [coming soon]',
-					link: '/api/coming-soon',
 				},
 			],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
