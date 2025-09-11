@@ -37,8 +37,8 @@ const { sublist, nested } = Astro.props;
 					<details
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
-						<SidebarRestorePoint />
 						<summary>
+							<SidebarRestorePoint />
 							<span class="group-label">
 								<span class="large">{entry.label}</span>
 								{entry.badge && (
