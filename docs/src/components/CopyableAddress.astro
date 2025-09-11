@@ -1,0 +1,131 @@
+---
+export interface Props {
+  address: string;
+}
+
+const { address } = Astro.props;
+---
+
+<div class="copyable-address">
+  <code>{address}</code>
+  <button 
+    class="copy-button" 
+    data-address={address}
+    title="Copy address"
+    aria-label="Copy address to clipboard"
+  >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .copyable-address {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  }
+
+  .copyable-address code {
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.875rem;
+    word-break: break-all;
+    flex: 1;
+  }
+
+  .copy-button {
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sl-color-text);
+    transition: all 0.2s ease;
+    min-width: 28px;
+    height: 28px;
+  }
+
+  .copy-button:hover {
+    background: var(--sl-color-hairline);
+    border-color: var(--sl-color-accent);
+  }
+
+  .copy-button:active {
+    transform: scale(0.95);
+  }
+
+  .copy-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .copy-button.copied {
+    background: var(--sl-color-accent);
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-accent);
+  }
+
+  .copy-button.copied svg {
+    display: none;
+  }
+
+  .copy-button.copied::after {
+    content: "✓";
+    font-size: 12px;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButtons = document.querySelectorAll('.copy-button');
+    
+    copyButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const address = button.getAttribute('data-address');
+        if (!address) return;
+        
+        try {
+          await navigator.clipboard.writeText(address);
+          
+          // Visual feedback
+          const originalText = button.innerHTML;
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            button.classList.remove('copied');
+            button.innerHTML = originalText;
+          }, 2000);
+          
+        } catch (err) {
+          console.error('Failed to copy address:', err);
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = address;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          // Visual feedback for fallback
+          const originalText = button.innerHTML;
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            button.classList.remove('copied');
+            button.innerHTML = originalText;
+          }, 2000);
+        }
+      });
+    });
+  });
+</script>

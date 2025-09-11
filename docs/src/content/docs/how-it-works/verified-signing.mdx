@@ -11,7 +11,7 @@ This way, Axal can only sign transactions on the behalf of the user if they foll
 To make this clear, the verified signer performs checks before any signing request can move forward, so the user benefits from consistent policy enforcement and clear guarantees about what can be signed.
 
 ## Trusted Execution Environments
-Axal uses Trusted Execution Environments (TEEs) in order to ensure transparency of signing code as well as to ensure nobody at Axal can tamper with any signing software. TEEs are the same technology behind faceID and passkeys used by Apple. In particular, Axal uses AWS Nitro Enclaves to run its signing software. Find out more about nitro enclaves here.
+Axal uses Trusted Execution Environments (TEEs) in order to ensure transparency of signing code as well as to ensure nobody at Axal can tamper with any signing software. TEEs are the same technology behind faceID and passkeys used by Apple. In particular, Axal uses [AWS Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/) to run its signing software. Find out more about nitro enclaves here.
 You can think of TEEs like a tamper proof and fully encrypted computer that nobody can look into. This means that all keys within the TEE cannot be manipulated or observed by anyone. In addition, the TEE provides attestations, cryptographic signatures that attest to the software in the TEE. This attestation can be used to verify the code running within the TEE is what we say it is. An example attestation is shown below
 ```json
 {

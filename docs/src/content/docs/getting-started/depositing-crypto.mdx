@@ -4,60 +4,44 @@ description: "Learn how to deposit cryptocurrency into your Axal account"
 tags: ["Getting Started", "Deposits"]
 ---
 
-This guide walks you through depositing crypto into Axal based on the product flow shown in the demo. You will create or sign in to your account, your smart wallet will be created for you, then you will fund it and see funds invested without manual signing.
+This guide walks you through depositing crypto into Axal based on the product flow shown in the demo. You will create or sign in to your account, your smart wallet will be created for you, then you will fund it by either connecting your own external wallet like MetaMask or Phantom wallet, or scanning the wallet QR code to transfer in USDC on the Base Network.
 
 ## What you need
 
-* An Axal account
-* USDC on the Base network
-* A wallet or exchange that can send USDC on Base
+- An Axal account
+- USDC on the Base network
+- A wallet or exchange that can send USDC on Base
 
 ## Create your account and wallet
 
 1. Open the app and select Launch.
 2. Enter your email or continue with Google.
-3. Axal creates a smart wallet for you. You will see your wallet address on screen.
+3. Axal creates a special wallet for you. You will see your wallet address on screen.
 4. Optionally enable two factor authentication. When enabled, sensitive actions such as exporting the wallet or moving funds out require a code from your authenticator app.
 
-## Deposit with crypto
+## Deposit with crypto wallet
 
-1. From the Deposit view, choose Crypto.
-2. Asset is USDC.
-3. Network is Base.
-4. Ensure the amount is at least thirty five USDC to continue.
-5. Copy your Axal wallet address or scan the QR code.
-6. In your external wallet or exchange, paste the address, enter the amount, and send.
-7. Return to Axal. You will see the transfer appear as pending until network confirmations complete.
+Depositing with crypto has three methods you can choose from:
 
-## What happens after you deposit
+1. Copy the wallet address and initiate the transaction in your external wallet interface
+2. Connect to an external wallet and transfer the transaction on the Axal site
+3. Scan the wallet QR code to initiate the transaction
 
-* Axal handles allocation into yield strategies for you.
-* No manual signing is needed for deposit and allocation steps in the app flow.
-* The dashboard shows your current APY and that funds are fully invested.
-* You can view where the funds are allocated across supported strategies.
+1. From the Deposit view, choose either connect to an external wallet or expand the wallet QR code. You can also copy your Axal wallet address and directly transfer funds from your external wallet.
 
-## Withdraw at any time
+![Deposit view with wallet options](/Depositting%20Crypto(Images)/Screen%20Shot%202025-09-09%20at%2012.52.41%20AM.png)
 
-1. Open the dashboard and select Withdraw.
-2. Confirm the amount you want to redeem back to cash or to your external wallet depending on your chosen path.
-3. Axal handles gas and execution. You focus on the amount you want to move.
-4. After completion, positions are closed and the balance appears as uninvested cash. You can redeposit again at any time.
+2. When you connect an external wallet, select the amount you'd like to deposit and click "Confirm" and then sign the transaction on your wallet's interface.
 
-## Security and control
+![Connect external wallet](/Depositting%20Crypto(Images)/Screen%20Shot%202025-09-09%20at%2012.54.44%20AM.png)
 
-* Your wallet is non custodial. You control it through Privy smart wallets.
-* Two factor authentication protects high value actions such as exporting the wallet or moving funds out.
-* Axal automates strategy allocation while keeping full user control of funds.
-
-## Tips for a smooth deposit
-
-* Send on the same network you selected in Axal.
-* If this is your first time, send a small test amount.
-* Use the QR code to avoid address mistakes.
-* Keep your wallet connected until the transaction is broadcast.
+3. Please ensure that you're transferring USDC on the base network. The minimum requirement is $35. Your transaction will be confirmed once the wallet balance on the left changes.
 
 ## Troubleshooting
 
-* Deposit not showing: verify the transaction hash on the correct network explorer and allow for confirmations.
-* Sent on the wrong network: contact support with the transaction hash so the team can advise on recovery options.
-* Stuck transaction: try resubmitting with a higher gas setting if your wallet supports it.
+- Deposit not showing: verify the transaction hash on the correct network explorer and allow for confirmations.
+
+![Deposit not showing troubleshooting](/Depositting%20Crypto(Images)/Screen%20Shot%202025-09-09%20at%201.33.12%20AM.png)
+
+- Sent on the wrong network: contact support (email hello@getaxal.com) with the transaction hash so the team can advise on recovery options.
+- Stuck transaction: try resubmitting with a higher gas setting if your wallet supports it.

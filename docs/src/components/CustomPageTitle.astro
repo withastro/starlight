@@ -8,9 +8,7 @@ const lastUpdated = data.lastUpdated;
 const editUrl = data.editUrl;
 const tags = Array.isArray(data.tags) ? data.tags : [];
 
-// Calculate reading time (rough estimate: 200 words per minute)
-// For now, use a default reading time since we can't easily access the content
-const readingTime = 5; // Default 5 minutes
+// Reading time removed as requested
 
 // Get current date for last updated
 const currentDate = new Date().toLocaleDateString('en-US', {
@@ -29,10 +27,6 @@ const currentDate = new Date().toLocaleDateString('en-US', {
     <div class="metadata-item">
       <span class="metadata-label">Last updated:</span>
       <span class="metadata-value">{currentDate}</span>
-    </div>
-    <div class="metadata-item">
-      <span class="metadata-label">Reading time:</span>
-      <span class="metadata-value">{readingTime} min read</span>
     </div>
   </div>
   

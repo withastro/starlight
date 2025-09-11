@@ -1,10 +1,20 @@
 ---
-title: "7702 Transactions"
-description: "Understanding 7702 transactions and their benefits"
-tags: ["How it Works", "7702"]
+title: "7702 Transactions and Wallets"
+description: "Understanding EIP 7702 and how it brings smart account capabilities to classic wallets"
+tags: ["How it Works", "7702", "Wallets", "Self-Custody"]
 ---
 
 An introduction to EIP 7702 and how it brings smart account capabilities to a classic wallet when needed.
+
+ERC-7702 unlocks a set of powerful account features that Axal uses to make the experience faster, simpler, and more secure for users. Instead of being buried as technical details, these are the core benefits that shape how Axal works today.
+
+- **Gasless transactions for speed**: Axal uses ERC-7702's batching and abstraction so you never need to manage gas fees. Deposits and withdrawals happen quickly without the usual blockchain friction.
+
+- **Exportable wallet, still self-custodial**: Your Axal account is built on Privy smart wallets that follow the ERC-7702 standard. You can export your wallet at any time and remain in full control of your funds.
+
+- **Seamless automation**: Axal takes advantage of 7702's transaction flexibility to route your capital across top lending protocols without requiring you to sign or approve each move. This is how Axal optimizes yield while keeping the experience simple.
+
+By building on ERC-7702, Axal combines the usability of a modern high yield savings account with the security and control of self-custody.
 
 ## What is EIP 7702
 
@@ -13,6 +23,8 @@ EIP 7702 allows a standard key controlled account to adopt smart account behavio
 ## Why this matters
 
 People want the ease of a familiar wallet and the safety and flexibility of code based controls. EIP 7702 gives you both without making you deploy a dedicated contract for your account or carry ongoing overhead.
+
+![EIP 7702 process flow](/7702/0_zn_e3bm5cwGfNEpZ.png)
 
 ## How it works at a glance
 
@@ -23,15 +35,42 @@ People want the ease of a familiar wallet and the safety and flexibility of code
 
 ## Practical benefits
 
-* No separate contract deployment for your account
-* Works with existing wallets and applications
-* Turn on advanced features only when you need them
-* Avoid always on overhead and save gas
+![EIP 7702 benefits](/7702/383db264e8c7a67a587adea050975786f3ecd239-1600x900.png)
 
-## Examples of advanced features
+- No separate contract deployment for your account
+- Works with existing wallets and applications
+- Turn on advanced features only when you need them
+- Avoid always on overhead and save gas
 
-* Batch several operations into one transaction
-* Add extra approval rules like multiple approvals or time locks
-* Use a paymaster to sponsor gas or pay in a token
+You can explore more about this protocol through these links:
+- https://www.alchemy.com/blog/eip-7702-metamask-and-wallets
+- https://www.alchemy.com/blog/eip-7702-ethereum-pectra-hardfork
 
- 
+## What is a self custody wallet
+
+A self custody wallet is software that manages your cryptographic keys on your device. These keys prove you own your assets and allow you to authorize actions on chain. The private key must remain secret. The public key is derived from the private key and your address is a short form identifier you share with others. When you send a transaction you create a digital signature using your private key that proves you approved that action.
+
+- **Key concepts**
+  - Private key is your proof of ownership and must stay secret
+  - Public key is derived from the private key
+  - Address is a short identifier derived from the public key
+  - Wallet is the application that manages keys and helps you interact with the chain
+
+- **Account types in simple terms**
+  - **Externally owned accounts**: Self-custody means you maintain full control over your private keys and assets. These are familiar accounts that are controlled directly by a private key. They can initiate transactions and send ETH, but they do not execute code on their own. Gas is paid in ETH. If the key is lost there is no recovery. Each transaction performs a single operation.
+  
+  - **Smart accounts**: These are accounts that are controlled by code. They can enforce rules for how transactions are approved, require multiple approvals, support social recovery, allow gas to be paid in tokens, batch multiple operations in a single transaction, and enforce time delays or spending limits.
+
+- **Bringing it together smoothly**: In practice most people want the simplicity of a key controlled account with the safety and flexibility of code based controls. Axal helps you keep ownership while adding practical protections and convenience, so everyday actions feel simple and important actions can be gated with extra checks.
+
+- **How Axal applies self custody**
+  - Your wallet is non custodial through Privy smart wallets so you remain in control
+  - Security policies are enforced with trusted execution environment based checks
+  - Important actions can require additional approval such as two factor authentication
+  - Axal automates complex steps like batching and gas handling while keeping you in control
+
+- **Good practices for your wallet**
+  - Keep your private key and recovery information safe and offline when possible
+  - Enable two factor authentication for sensitive actions
+  - Review transaction details before approving
+  - Start with small amounts when using a new network or application
