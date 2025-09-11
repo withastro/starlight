@@ -39,7 +39,7 @@ const { sublist, nested } = Astro.props;
 					>
 						<SidebarRestorePoint />
 						<summary>
-							<div class="group-label">
+							<span class="group-label">
 								<span class="large">{entry.label}</span>
 								{entry.badge && (
 									<Badge
@@ -48,7 +48,7 @@ const { sublist, nested } = Astro.props;
 										text={entry.badge.text}
 									/>
 								)}
-							</div>
+							</span>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<Astro.self sublist={entry.entries} nested />

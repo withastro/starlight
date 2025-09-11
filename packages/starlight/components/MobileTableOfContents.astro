@@ -11,10 +11,10 @@ const { toc } = Astro.locals.starlightRoute;
 			<nav aria-labelledby="starlight__on-this-page--mobile">
 				<details id="starlight__mobile-toc">
 					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<div class="toggle sl-flex">
+						<span class="toggle sl-flex">
 							{Astro.locals.t('tableOfContents.onThisPage')}
 							<Icon name={'right-caret'} class="caret" size="1rem" />
-						</div>
+						</span>
 						<span class="display-current" />
 					</summary>
 					<div class="dropdown">
