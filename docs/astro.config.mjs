@@ -86,7 +86,7 @@ export default defineConfig({
 						'how-it-works/7702-transactions',
 						'how-it-works/verified-signing',
 						'how-it-works/contracts',
-						'how-it-works/export-your-wallet',
+						'how-it-works/withdrawal',
 						'referrals/overview',
 					],
 				},
