@@ -32,6 +32,7 @@ export default defineConfig({
 					Header: './src/components/CustomHeader.astro',
 					MobileMenuFooter: './src/components/CustomMobileMenuFooter.astro',
 					PageTitle: './src/components/CustomPageTitle.astro',
+					Sidebar: './src/components/CustomSidebar.astro',
 				},
 			lastUpdated: true,
 			editLink: {
@@ -39,8 +40,7 @@ export default defineConfig({
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/getaxal/' },
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/pdDDC2By' },
-				{ icon: 'twitter', label: 'Twitter', href: 'https://x.com/getaxal' },
+				{ icon: 'x.com', label: 'X', href: 'https://x.com/getaxal' },
 				{ icon: 'substack', label: 'Substack', href: 'https://axal.substack.com/' },
 			],
 			head: [

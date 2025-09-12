@@ -1,0 +1,89 @@
+---
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+import SidebarPersister from '../../../packages/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '../../../packages/starlight/components/SidebarSublist.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+---
+
+<SidebarPersister>
+	<!-- Social Links Section -->
+	<div class="social-links-section">
+		<div class="social-links">
+			<a href="https://axal.substack.com/" target="_blank" rel="noopener noreferrer" class="social-link">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="social-icon">
+					<path d="M22.5 8.2h-21V5.4h21v2.8zm-21 2.6V24L12 18.1 22.5 24V10.8h-21zM22.5 0h-21v2.8h21V0z"/>
+				</svg>
+				<span>Substack</span>
+				<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="external-link">
+					<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+				</svg>
+			</a>
+			
+			<a href="https://x.com/getaxal" target="_blank" rel="noopener noreferrer" class="social-link">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="social-icon">
+					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+				</svg>
+				<span>X</span>
+				<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="external-link">
+					<path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+	
+	<!-- Navigation Section -->
+	<SidebarSublist sublist={sidebar} />
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>
+
+<style>
+	.social-links-section {
+		padding: 1rem var(--sl-sidebar-pad-x);
+		border-bottom: 1px solid var(--sl-color-gray-5);
+		margin-bottom: 1rem;
+	}
+	
+	.social-links {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	
+	.social-link {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.5rem;
+		border-radius: 0.375rem;
+		text-decoration: none;
+		color: var(--sl-color-text);
+		transition: background-color 0.2s ease;
+		font-size: 0.875rem;
+	}
+	
+	.social-link:hover {
+		background-color: var(--sl-color-accent-low);
+		text-decoration: none;
+		color: var(--sl-color-text);
+	}
+	
+	.social-icon {
+		flex-shrink: 0;
+		opacity: 0.8;
+	}
+	
+	.external-link {
+		margin-left: auto;
+		opacity: 0.6;
+		flex-shrink: 0;
+	}
+	
+	.social-link span {
+		flex-grow: 1;
+		font-weight: 500;
+	}
+</style>
