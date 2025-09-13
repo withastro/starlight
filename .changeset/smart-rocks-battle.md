@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Converted invalid `<div>` child of `<summary>` to `<span>`
+Refactors collapsible sidebar sections and “on this page” dropdown to use `<span>` instead of `<div>`
