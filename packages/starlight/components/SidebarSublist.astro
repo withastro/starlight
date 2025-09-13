@@ -37,7 +37,6 @@ const { sublist, nested } = Astro.props;
 					<details
 						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 					>
-						<SidebarRestorePoint />
 						<summary>
 							<span class="group-label">
 								<span class="large">{entry.label}</span>
@@ -51,6 +50,7 @@ const { sublist, nested } = Astro.props;
 							</span>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
+						<SidebarRestorePoint />
 						<Astro.self sublist={entry.entries} nested />
 					</details>
 				)}
