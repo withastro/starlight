@@ -71,39 +71,99 @@ const pagefindIndexOptionsSchema = z.object({
 	ranking: pagefindRankingWeightsSchema.default({}),
 });
 
-const pagefindSchema = z.object({
-	/**
-	 * Configure how search results from the current website are weighted by Pagefind
-	 * compared to results from other sites when using the `mergeIndex` option.
-	 *
-	 * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
-	 */
-	indexWeight: indexWeightSchema,
-	/** Configure how search result rankings are calculated by Pagefind. */
-	ranking: pagefindRankingWeightsSchema.default({}),
-	/**
-	 * Configure how search indexes from different sites are merged by Pagefind.
-	 *
-	 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
-	 */
-	mergeIndex: z
-		.array(
-			/**
-			 * Each entry of this array represents a `PagefindIndexOptions` from pagefind.
-			 *
-			 * @see https://github.com/CloudCannon/pagefind/blob/v1.3.0/pagefind_web_js/lib/coupled_search.ts#L549
-			 */
-			pagefindIndexOptionsSchema.extend({
+const pagefindSchema = z
+	.object({
+		/**
+		 * Configure how search results from the current website are weighted by Pagefind
+		 * compared to results from other sites when using the `mergeIndex` option.
+		 *
+		 * @see https://pagefind.app/docs/multisite/#changing-the-weighting-of-individual-indexes
+		 */
+		indexWeight: indexWeightSchema,
+		/** Configure how search result rankings are calculated by Pagefind. */
+		ranking: pagefindRankingWeightsSchema.default({}),
+		/**
+		 * Configure how search indexes from different sites are merged by Pagefind.
+		 *
+		 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
+		 */
+		mergeIndex: z
+			.array(
 				/**
-				 * Set Pagefind’s `bundlePath` mergeIndex option.
+				 * Each entry of this array represents a `PagefindIndexOptions` from pagefind.
 				 *
-				 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
+				 * @see https://github.com/CloudCannon/pagefind/blob/v1.3.0/pagefind_web_js/lib/coupled_search.ts#L549
 				 */
-				bundlePath: z.string(),
-			})
-		)
-		.optional(),
-});
+				pagefindIndexOptionsSchema.extend({
+					/**
+					 * Set Pagefind’s `bundlePath` mergeIndex option.
+					 *
+					 * @see https://pagefind.app/docs/multisite/#searching-additional-sites-from-pagefind-ui
+					 */
+					bundlePath: z.string(),
+				})
+			)
+			.optional(),
+		/**
+		 * Define a list of filters that should be open by default when the search results are displayed.
+		 * By default, a filter is open only if it's the only filter available.
+		 *
+		 * @default []
+		 */
+		openFilters: z.string().array().optional(),
+		/**
+		 * Defines a function called before performing a search that can be used to normalize the
+		 * search term.
+		 */
+		processTerm: z.function().args(z.string()).returns(z.string()).optional(),
+		/**
+		 * Configure if filter values with no results should be visible or not.
+		 *
+		 * @default true
+		 */
+		showEmptyFilters: z.boolean().optional(),
+	})
+	.strict();
+
+const pagefindModuleSchema = z
+	.object({
+		/**
+		 * The path to a JavaScript or TypeScript file containing a default export of options to
+		 * pass to the Pagefind client.
+		 *
+		 * The value can be a path to a local JS/TS file relative to the root of your project,
+		 * e.g. `'./src/pagefind.js'`, or an npm module specifier for a package you installed,
+		 * e.g. `'@company/pagefind-config'`.
+		 *
+		 * Use `clientOptionsModule` when you need to configure options that are not serializable,
+		 * such as `processTerm()`.
+		 *
+		 * When `clientOptionsModule` is set, all options must be set via the module file. Other
+		 * inline options passed to the plugin in `astro.config.mjs` will be ignored.
+		 *
+		 * @example
+		 * // astro.config.mjs
+		 * // ...
+		 * pagefind: { clientOptionsModule: './src/config/pagefind.ts' }
+		 * // ...
+		 *
+		 * // src/config/pagefind.ts
+		 * import type { StarlightPagefindOptions } from '@astrojs/starlight/pagefind';
+		 *
+		 * export default {
+		 *   openFilters: ['author'],
+		 *   processTerm(term) {
+		 *     return term.replace(/aa/g, 'ā');
+		 *   },
+		 * } satisfies StarlightPagefindOptions;
+		 */
+		clientOptionsModule: z.string(),
+	})
+	.strict();
 
 export const PagefindConfigSchema = () => pagefindSchema;
+export const PagefindModuleConfigSchema = () => pagefindModuleSchema;
 export const PagefindConfigDefaults = () => pagefindSchema.parse({});
+
+export type PagefindUserConfig = z.input<typeof pagefindSchema>;
+export type PagefindConfig = z.output<typeof pagefindSchema>;
