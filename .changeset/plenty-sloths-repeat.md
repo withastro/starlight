@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Removes the invalid `value` attribute from the `<select>` tag
+Removes an invalid `value` attribute from the language and theme selectors
