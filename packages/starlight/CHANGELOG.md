@@ -1,5 +1,17 @@
 # @astrojs/starlight
 
+## 0.35.3
+
+### Patch Changes
+
+- [#3416](https://github.com/withastro/starlight/pull/3416) [`fcc0633`](https://github.com/withastro/starlight/commit/fcc0633ab14fc602f5c540972446e22c79746042) Thanks [@randomguy-2650](https://github.com/randomguy-2650)! - Updates German UI translations to be more idiomatic.
+
+- [#1640](https://github.com/withastro/starlight/pull/1640) [`d1b3828`](https://github.com/withastro/starlight/commit/d1b3828cdfe8114884ab65049581e37624422ac4) Thanks [@hippotastic](https://github.com/hippotastic)! - Refactors various internal systems, improving code quality and maintainability.
+
+- [#3421](https://github.com/withastro/starlight/pull/3421) [`97e8103`](https://github.com/withastro/starlight/commit/97e8103c5793d583931575dbe17924ef88a5b6fd) Thanks [@andersk](https://github.com/andersk)! - Removes an invalid `value` attribute from the language and theme selectors
+
+- [#3422](https://github.com/withastro/starlight/pull/3422) [`9200fac`](https://github.com/withastro/starlight/commit/9200fac71ebe6e7bbbecee3d1893e744db01dc6e) Thanks [@andersk](https://github.com/andersk)! - Refactors collapsible sidebar sections and “on this page” dropdown to use `<span>` instead of `<div>`
+
 ## 0.35.2
 
 ### Patch Changes
