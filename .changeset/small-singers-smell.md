@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Moved `<summary>` to top of `<details>` for validity
+Makes `<summary>` the first child of `<details>` in sidebar groups
