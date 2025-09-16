@@ -26,7 +26,7 @@ L’ajout d’un logo personnalisé à l’en-tête du site est un moyen rapide 
 
    </FileTree>
 
-2. Ajoutez le chemin vers votre logo à votre option de configuration Starlight [`logo.src`](/fr/reference/configuration/#logo) dans `astro.config.mjs`:
+2. Ajoutez le chemin vers votre logo à votre option de configuration Starlight [`logo.src`](/fr/reference/configuration/#logo) dans `astro.config.mjs` :
 
    ```diff lang="js"
    // astro.config.mjs
@@ -67,7 +67,7 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
 
 <Steps>
 
-1. Ajouter un fichier image pour chaque variante dans `src/assets/`:
+1. Ajouter un fichier image pour chaque variante dans `src/assets/` :
 
    <FileTree>
 
@@ -80,7 +80,7 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
 
    </FileTree>
 
-2. Ajouter les chemins vers vos variantes de logo dans les options `light` (clair) et `dark` (sombre) en remplacement de l’option `src` dans `astro.config.mjs`:
+2. Ajouter les chemins vers vos variantes de logo dans les options `light` (clair) et `dark` (sombre) en remplacement de l’option `src` dans `astro.config.mjs` :
 
    ```diff lang="js"
    starlight({
@@ -96,7 +96,7 @@ Vous pouvez afficher différentes versions de votre logo en modes clair et sombr
 
 ## Activer un plan de site
 
-Starlight possède une prise en charge intégrée pour la génération d’un plan de site. Activez la génération du plan de site en définissant votre URL comme `site` dans `astro.config.mjs`:
+Starlight possède une prise en charge intégrée pour la génération d’un plan de site. Activez la génération du plan de site en définissant votre URL comme `site` dans `astro.config.mjs` :
 
 ```js {4}
 // astro.config.mjs
@@ -164,7 +164,7 @@ defineConfig({
   </TabItem>
 </Tabs>
 
-Désactivez la table des matières complètement en définissant l’option `tableOfContents` à `false`:
+Désactivez la table des matières complètement en définissant l’option `tableOfContents` à `false` :
 
 <Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
@@ -198,7 +198,7 @@ defineConfig({
 
 ## Liens sociaux
 
-Starlight supporte par défaut l’ajout de liens vers vos comptes de médias sociaux dans l’en-tête du site via l’option [`social`](/fr/reference/configuration/#social) dans l’intégration Starlight.
+Starlight prend en charge par défaut l’ajout de liens vers vos comptes de médias sociaux dans l’en-tête du site via l’option [`social`](/fr/reference/configuration/#social) dans l’intégration Starlight.
 
 Chaque entrée dans le tableau `social` doit être un objet avec trois propriétés :
 
@@ -232,17 +232,17 @@ export default defineConfig({
 
 ## Liens d’édition de page
 
-Starlight peut afficher un lien "Modifier cette page" dans le pied de page de chaque page.
+Starlight peut afficher un lien « Modifier cette page » dans le pied de page de chaque page.
 Cela permet au lecteur de trouver facilement le fichier à modifier pour améliorer vos documents.
 Pour les projets open source en particulier, cela peut aider à encourager les contributions de votre communauté.
 
-Pour activer les liens de modification, définissez l’option de configuration [`editLink.baseUrl`](/fr/reference/configuration/#editlink) en lui assignant l’URL utilisée pour modifier votre référentiel dans la configuration de l’intégration Starlight.
+Pour activer les liens de modification, définissez l’option de configuration [`editLink.baseUrl`](/fr/reference/configuration/#editlink) en lui assignant l’URL utilisée pour modifier votre dépôt dans la configuration de l’intégration Starlight.
 La valeur de `editLink.baseUrl` sera automatiquement ajoutée au chemin d’accès vers la page actuelle pour former le lien d’édition complet.
 
 Les formes d’URL les plus courantes incluent :
 
-- GitHub: `https://github.com/NOM_UTILISATEUR/NOM_DU_DEPOT/edit/NOM_DE_LA_BRANCHE/`
-- GitLab: `https://gitlab.com/NOM_UTILISATEUR/NOM_DU_DEPOT/-/edit/NOM_DE_LA_BRANCHE/`
+- GitHub : `https://github.com/NOM_UTILISATEUR/NOM_DU_DEPOT/edit/NOM_DE_LA_BRANCHE/`
+- GitLab : `https://gitlab.com/NOM_UTILISATEUR/NOM_DU_DEPOT/-/edit/NOM_DE_LA_BRANCHE/`
 
 Si votre projet Starlight ne se trouve pas à la racine de votre dépôt, incluez le chemin d’accès au projet à la fin de l’URL de base.
 
@@ -319,11 +319,11 @@ export default defineConfig({
 Par défaut, Starlight utilise des polices sans empattement disponibles en local sur la machine du visiteur pour tout les textes.
 Cela garantit que la documentation se charge rapidement dans une police familière à chaque utilisateur, sans nécessiter de bande passante supplémentaire pour télécharger des fichiers de police volumineux.
 
-Si vous souhaitez ajouter une police personnalisée à votre site Starlight, vous pouvez configurer les polices à utiliser dans des fichiers CSS personnalisés ou avec toute autre [technique de style Astro](https://docs.astro.build/en/guides/styling/).
+Si vous souhaitez ajouter une police personnalisée à votre site Starlight, vous pouvez configurer les polices à utiliser dans des fichiers CSS personnalisés ou avec toute autre [technique de style Astro](https://docs.astro.build/fr/guides/styling/).
 
 ### Configurer les polices
 
-Si vous avez déjà des fichiers de polices, suivez le [guide de configuration local](#configurer-les-polices-localement).
+Si vous avez déjà des fichiers de polices, suivez le [guide de configuration locale](#configurer-les-polices-localement).
 Pour utiliser Google Fonts, suivez le [Guide de configuration de Fontsource](#configurer-les-polices-avec-fontsource).
 
 #### Configurer les polices localement
@@ -391,8 +391,8 @@ Il fournit des modules npm que vous pouvez installer pour les polices que vous s
 1.  Trouvez la police que vous souhaitez utiliser dans le [catalogue de Fontsource](https://fontsource.org/).
     Cet exemple utilisera [IBM Plex Serif](https://fontsource.org/fonts/ibm-plex-serif).
 
-2.  Installez le package pour la police choisie.
-    Vous pouvez trouver le nom du package en cliquant sur "Installer" sur la page de police Fontsource.
+2.  Installez le paquet pour la police choisie.
+    Vous pouvez trouver le nom du paquet en cliquant sur « Installer » sur la page de police Fontsource.
 
         <Tabs syncKey="pkg">
 
