@@ -331,7 +331,7 @@ L'exemple ci-dessus affichera un message qui inclut une chaîne d'interface util
 
 Appelez `absolutePathToLang()` avec un chemin de fichier absolu pour obtenir la langue de ce fichier.
 
-Cela peut être particulièrement utile lors de l'ajout de [modules d'extension remark ou rehype](https://docs.astro.build/fr/guides/markdown-content/#plugins-markdown) pour traiter les fichiers Markdown ou MDX.
+Cela peut être particulièrement utile lors de l'ajout de [modules d'extension remark ou rehype](https://docs.astro.build/fr/guides/markdown-content/#modules-dextension-markdown) pour traiter les fichiers Markdown ou MDX.
 Le [format de fichier virtuel](https://github.com/vfile/vfile) utilisé par ces modules d'extension inclut le [chemin absolu](https://github.com/vfile/vfile#filepath) du fichier en cours de traitement, qui peut être utilisé avec `absolutePathToLang()` pour déterminer la langue du fichier.
 La langue retournée peut être utilisé avec l'utilitaire [`useTranslations()`](#usetranslations) pour obtenir des chaînes d'interface utilisateur pour cette langue.
 
