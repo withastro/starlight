@@ -24,6 +24,7 @@ jobs:
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
       packages: ${{ steps.filter.outputs.packages }}
+      ci: ${{ steps.filter.outputs.ci }}
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
@@ -34,11 +35,13 @@ jobs:
               - 'docs/**'
             packages:
               - 'packages/**'
+            ci:
+              - '.github/workflows/ci.yml'
 
   unit-test:
     name: Run unit tests
     needs: changes
-    if: ${{ needs.changes.outputs.packages == 'true' }}
+    if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -57,7 +60,7 @@ jobs:
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'
     needs: changes
-    if: ${{ needs.changes.outputs.packages == 'true' }}
+    if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' }}
     strategy:
       fail-fast: false
       matrix:
@@ -149,7 +152,7 @@ jobs:
   links:
     name: Check for broken links
     needs: changes
-    if: ${{ needs.changes.outputs.docs == 'true' }}
+    if: ${{ needs.changes.outputs.docs == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
