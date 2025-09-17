@@ -20,7 +20,7 @@ import Preview from '~/components/component-preview.astro';
 
 </Preview>
 
-## Import
+## Importation
 
 ```tsx
 import { Icon } from '@astrojs/starlight/components';
@@ -37,21 +37,21 @@ Une icône requiert un attribut [`name`](#name) défini avec [une des icônes di
 import { Icon } from '@astrojs/starlight/components';
 
 <Icon name="star" />
-<Icon name="starlight" label="Le logo Starlight" />
+<Icon name="starlight" label="Le logo de Starlight" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
 {% icon name="star" /%}
-{% icon name="starlight" label="Le logo Starlight" /%}
+{% icon name="starlight" label="Le logo de Starlight" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
 	<Icon name="star" />
-	<Icon name="starlight" label="Le logo Starlight" />
+	<Icon name="starlight" label="Le logo de Starlight" />
 </Fragment>
 
 </Preview>
@@ -103,7 +103,7 @@ Le nom de l'icône à afficher correspondant à [une des icônes disponibles ave
 
 **Type :** `string`
 
-Un label optionnel pour fournir un contexte aux technologies d'assistance, comme les lecteurs d'écran.
+Une étiquette optionnelle pour fournir un contexte aux technologies d'assistance, comme les lecteurs d'écran.
 
 Quand l'attribut `label` n'est pas défini, l'icône sera complètement masquée des technologies d'assistance.
 Dans ce cas, assurez-vous que le contexte reste compréhensible sans l'icône.
