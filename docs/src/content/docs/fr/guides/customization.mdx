@@ -109,9 +109,9 @@ export default defineConfig({
 
 Apprenez comment [ajouter un lien du plan de site au fichier `robots.txt`](https://docs.astro.build/fr/guides/integrations-guide/sitemap/#lien-vers-le-plan-du-site-dans-le-fichier-robotstxt) dans la documentation d'Astro.
 
-## Mise en Page
+## Mise en page
 
-Par défaut, les pages Starlight utilisent une mise en page avec une barre latérale de navigation globale et une table des matières qui affiche les titres de la page courante.
+Par défaut, les pages Starlight utilisent une mise en page avec une barre latérale de navigation globale et une table des matières qui affiche les en-têtes de la page courante.
 
 Vous pouvez appliquer une mise en page plus large sans barres latérales en définissant [`template: splash`](/fr/reference/frontmatter/#template) dans le frontmatter de votre page.
 Cela fonctionne particulièrement bien pour les pages d’atterissage et vous pouvez le voir en action sur la [page d’accueil de ce site](/fr/).
@@ -130,7 +130,7 @@ template: splash
 Starlight affiche une table des matières sur chaque page pour permettre aux lecteurs d’accéder plus facilement à la section qu’ils recherchent.
 Vous pouvez personnaliser - ou même désactiver - la table des matières globalement dans l’intégration Starlight ou page par page dans votre frontmatter.
 
-Par défaut, les titres `<h2>` et `<h3>` sont inclus dans la table des matières. Modifiez les niveaux de titres à inclure à l’échelle du site à l’aide des options `minHeadingLevel` et `maxHeadingLevel` dans votre option de configuration [globale `tableOfContents`](/fr/reference/configuration/#tableofcontents). Remplacez ces valeurs par défaut sur une page individuelle en ajoutant les propriétés [frontmatter `tableOfContents`](/fr/reference/frontmatter/#tableofcontents) correspondantes :
+Par défaut, les en-têtes `<h2>` et `<h3>` sont inclus dans la table des matières. Modifiez les niveaux des en-têtes à inclure à l’échelle du site à l’aide des options `minHeadingLevel` et `maxHeadingLevel` dans votre option de configuration [globale `tableOfContents`](/fr/reference/configuration/#tableofcontents). Remplacez ces valeurs par défaut sur une page individuelle en ajoutant les propriétés [frontmatter `tableOfContents`](/fr/reference/frontmatter/#tableofcontents) correspondantes :
 
 <Tabs syncKey="config-type">
   <TabItem label="Frontmatter">
