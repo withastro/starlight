@@ -16,7 +16,7 @@ import Preview from '~/components/component-preview.astro';
 	slot="preview"
 	code={`## Bienvenue
 
-Bonjour depuis **l'espace**!`}
+Bonjour depuis **l'espace** !`}
 lang="md"
 title="exemple.md"
 ins={3}
@@ -24,7 +24,7 @@ ins={3}
 
 </Preview>
 
-## Import
+## Importation
 
 ```tsx
 import { Code } from '@astrojs/starlight/components';
@@ -76,7 +76,7 @@ export const highlights = ['fichier', 'CMS'];
 
 ### Afficher du code importé
 
-Dans les fichiers MDX et les composants Astro, utilisez le [suffixe d'import `?raw` de Vite](https://vite.dev/guide/assets#importing-asset-as-string) pour importer n'importe quel fichier de code sous forme de chaîne de caractères.
+Dans les fichiers MDX et les composants Astro, utilisez le [suffixe d'importation `?raw` de Vite](https://vite.dev/guide/assets#importing-asset-as-string) pour importer n'importe quel fichier de code sous forme de chaîne de caractères.
 Vous pouvez ensuite passer cette chaîne importée au composant `<Code>` pour l'inclure dans votre page.
 
 <Preview>
