@@ -1,8 +1,8 @@
 import { assert, describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { processI18nConfig, pickLang } from '../../utils/i18n';
-import type { AstroConfig } from 'astro';
-import type { AstroUserConfig } from 'astro/config';
+import type { AstroConfig, AstroUserConfig } from 'astro';
+import type { StarlightConfig } from '../../types';
 
 describe('pickLang', () => {
 	const dictionary = { en: 'Hello', fr: 'Bonjour' };
@@ -13,7 +13,8 @@ describe('pickLang', () => {
 	});
 
 	test('returns undefined for unknown languages', () => {
-		expect(pickLang(dictionary, 'ar' as any)).toBeUndefined();
+		// @ts-expect-error - Testing unknown language
+		expect(pickLang(dictionary, 'ar')).toBeUndefined();
 	});
 });
 
@@ -66,7 +67,15 @@ describe('processI18nConfig', () => {
 			`);
 		});
 
-		test.each([
+		type AstroI18nTestEachConfig = {
+			i18nConfig: AstroUserConfig['i18n'];
+			expected: {
+				defaultLocale: StarlightConfig['defaultLocale'];
+				locales?: StarlightConfig['locales'];
+			};
+		};
+
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: { defaultLocale: 'en', locales: ['en'] },
 				expected: {
@@ -105,7 +114,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
@@ -155,7 +164,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
@@ -203,7 +212,7 @@ describe('processI18nConfig', () => {
 			}
 		);
 
-		test.each([
+		test.each<AstroI18nTestEachConfig>([
 			{
 				i18nConfig: {
 					defaultLocale: 'en',
@@ -263,7 +272,7 @@ describe('getLocaleDir', () => {
 		expect(starlightConfig.defaultLocale.dir).toBe('ltr');
 	});
 
-	test('uses `getTextInfo()` when `textInfo` is not available', async () => {
+	test('uses `getTextInfo()` when `textInfo` is not available', () => {
 		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
 		vi.spyOn(global.Intl, 'Locale').mockImplementation(() => ({
 			getTextInfo: () => ({ direction: 'rtl' }),
@@ -280,7 +289,7 @@ describe('getLocaleDir', () => {
 		expect(starlightConfig.defaultLocale.dir).toBe('rtl');
 	});
 
-	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', async () => {
+	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', () => {
 		// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
 		vi.spyOn(global.Intl, 'Locale').mockImplementation((tag) => ({ language: tag }));
 

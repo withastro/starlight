@@ -19,7 +19,7 @@ afterEach(() => {
 	vi.clearAllMocks();
 });
 
-test('adds default english translations with no i18n config', async () => {
+test('adds default english translations with no i18n config', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations(undefined);
 
 	addTranslations(config, useTranslations);
@@ -27,7 +27,7 @@ test('adds default english translations with no i18n config', async () => {
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en']);
 });
 
-test('adds translations in a monolingual site with english as root locale', async () => {
+test('adds translations in a monolingual site with english as root locale', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations({
 		root: { label: 'English', lang: 'en' },
 	});
@@ -37,7 +37,7 @@ test('adds translations in a monolingual site with english as root locale', asyn
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en']);
 });
 
-test('adds translations in a monolingual site with french as root locale', async () => {
+test('adds translations in a monolingual site with french as root locale', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations({
 		root: { label: 'Français', lang: 'fr' },
 	});
@@ -47,7 +47,7 @@ test('adds translations in a monolingual site with french as root locale', async
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr']);
 });
 
-test('add translations in a multilingual site with english as root locale', async () => {
+test('add translations in a multilingual site with english as root locale', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations({
 		root: { label: 'English', lang: 'en' },
 		fr: { label: 'French' },
@@ -58,7 +58,7 @@ test('add translations in a multilingual site with english as root locale', asyn
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en', 'fr']);
 });
 
-test('add translations in a multilingual site with french as root locale', async () => {
+test('add translations in a multilingual site with french as root locale', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations({
 		root: { label: 'French', lang: 'fr' },
 		ru: { label: 'Русский', lang: 'ru' },
@@ -69,7 +69,7 @@ test('add translations in a multilingual site with french as root locale', async
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr', 'ru']);
 });
 
-test('add translations in a multilingual site with english as default locale', async () => {
+test('add translations in a multilingual site with english as default locale', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations(
 		{
 			en: { label: 'English', lang: 'en' },
@@ -83,7 +83,7 @@ test('add translations in a multilingual site with english as default locale', a
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['en', 'fr']);
 });
 
-test('add translations in a multilingual site with french as default locale', async () => {
+test('add translations in a multilingual site with french as default locale', () => {
 	const [config, useTranslations] = getStarlightConfigAndUseTranslations(
 		{
 			fr: { label: 'French', lang: 'fr' },
@@ -97,7 +97,7 @@ test('add translations in a multilingual site with french as default locale', as
 	expect(getExpressiveCodeOverridenLanguages()).toEqual(['fr', 'ru']);
 });
 
-test('does not add translations if the label does not exist', async () => {
+test('does not add translations if the label does not exist', () => {
 	const [config] = getStarlightConfigAndUseTranslations(undefined);
 
 	addTranslations(config, getUseTranslations(false));

@@ -17,7 +17,7 @@ Incluez des informations supplémentaires non essentielles avec le composant `<A
 
 </Preview>
 
-## Import
+## Importation
 
 ```tsx
 import { Aside } from '@astrojs/starlight/components';
@@ -132,6 +132,36 @@ Un encart d'avertissement *avec* un titre personnalisé.
 
 </Preview>
 
+### Utiliser des icônes personnalisées
+
+Remplacez les icônes par défaut des encarts en utilisant l'attribut [`icon`](#icon) défini avec le nom de [l'une des icônes intégrées à Starlight](/fr/reference/icons/#toutes-les-icônes).
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	Un encart d'astuce *avec* une icône personnalisée.
+</Aside>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+Un encart d'astuce *avec* une icône personnalisée.
+{% /aside %}
+```
+
+</Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	Un encart d'astuce *avec* une icône personnalisée.
+</Aside>
+
+</Preview>
+
 ## Props de `<Aside>`
 
 **Implémentation :** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
@@ -156,3 +186,9 @@ Le type d'encart à afficher :
 
 Le titre de l'encart à afficher.
 Si `title` n'est pas défini, le titre par défaut du `type` de l'encart en cours sera utilisé.
+
+### `icon`
+
+**Type :** [`StarlightIcon`](/fr/reference/icons/#type-starlighticon)
+
+Un encart peut inclure un attribut `icon` défini avec le nom de [l'une des icônes intégrées à Starlight](/fr/reference/icons/#toutes-les-icônes).

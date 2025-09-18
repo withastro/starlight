@@ -1,5 +1,5 @@
 ---
-title: 마크다운으로 콘텐츠 작성
+title: Markdown으로 콘텐츠 작성
 description: Starlight가 지원하는 Markdown 구문의 개요입니다.
 ---
 
@@ -45,7 +45,7 @@ title: 페이지 제목
 
 ## 이미지
 
-Starlight의 이미지는 [Astro에 내장된 최적화된 자산 지원](https://docs.astro.build/ko/guides/assets/)을 사용합니다.
+Starlight의 이미지는 [Astro에 내장된 최적화된 자산 지원](https://docs.astro.build/ko/guides/images/)을 사용합니다.
 
 Markdown 및 MDX는 스크린 리더 및 보조 기술에서 사용되는 대체 텍스트가 포함된 이미지를 표시하기 위한 Markdown 구문을 지원합니다.
 
@@ -105,7 +105,7 @@ description: Starlight에 내장된 링크를 사용하는 방법
 
 레벨 2 (`<h2>`) 및 레벨 3 (`<h3>`) 제목이 페이지 목차에 자동으로 나타납니다.
 
-[Astro 공식 문서](https://docs.astro.build/ko/guides/markdown-content/#heading-ids)에서 Astro가 제목의 `id`를 처리하는 방법에 대해 자세히 알아보세요.
+[Astro 공식 문서](https://docs.astro.build/ko/guides/markdown-content/#제목-id)에서 Astro가 제목의 `id`를 처리하는 방법에 대해 자세히 알아보세요.
 
 ## 보조 내용
 
@@ -144,12 +144,27 @@ npm create astro@latest -- --template starlight
 
 :::tip[알고 계셨나요?]
 
-Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 
 ```md
 :::tip[알고 계셨나요?]
-Astro는 ["Islands Architecture"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+:::
+```
+
+### 사용자 정의 보조 내용 아이콘
+
+보조 내용 유형 또는 [사용자 정의 제목](#사용자-정의-보조-내용-제목) 뒤에 오는 중괄호에 보조 내용에 대한 사용자 정의 아이콘을 지정할 수 있습니다. (예: `:::tip{icon="heart"}` 또는 `:::tip[알고 계셨나요?]{icon="heart"}`).
+아이콘 이름은 [Starlight의 기본 제공 아이콘 중 하나](/ko/reference/icons/#모든-아이콘)의 이름으로 설정해야 합니다.
+
+:::tip{icon="heart"}
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
+:::
+
+```md
+:::tip{icon="heart"}
+Astro는 ["아일랜드 아키텍처"](https://docs.astro.build/ko/concepts/islands/)를 사용하여 더 빠른 웹사이트를 구축할 수 있도록 도와줍니다.
 :::
 ```
 
@@ -221,20 +236,20 @@ var fun = function lang(l) {
 
 ### Expressive Code 기능
 
-Starlight는 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)를 사용하여 코드 블록의 형식 지정 가능성을 확장합니다.
+Starlight는 [Expressive Code](https://expressive-code.com/)를 사용하여 코드 블록의 형식 지정 가능성을 확장합니다.
 기본적으로 Expressive Code의 텍스트 마커와 창 프레임 플러그인은 활성화되어 있습니다.
 코드 블록 렌더링은 Starlight의 [`expressiveCode` 구성 옵션](/ko/reference/configuration/#expressivecode)을 사용하여 구성할 수 있습니다.
 
 #### 텍스트 마커
 
-코드 블록의 시작 줄에 [Expressive Code 텍스트 마커](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents)를 사용하여 코드 블록의 특정 줄이나 부분을 강조 표시할 수 있습니다. 전체 줄을 강조 표시하려면 중괄호(`{ }`)를 사용하고, 텍스트 문자열을 강조 표시하려면 따옴표를 사용하세요.
+코드 블록의 시작 줄에 [Expressive Code 텍스트 마커](https://expressive-code.com/key-features/text-markers/)를 사용하여 코드 블록의 특정 줄이나 부분을 강조 표시할 수 있습니다. 전체 줄을 강조 표시하려면 중괄호(`{ }`)를 사용하고, 텍스트 문자열을 강조 표시하려면 따옴표를 사용하세요.
 
 세 가지 강조 스타일이 있습니다. 코드에 주의를 환기시키는 중립, 삽입된 코드를 나타내는 녹색, 삭제된 코드를 나타내는 빨간색입니다.
 텍스트와 전체 줄 모두 기본 마커를 사용하거나 `ins=` 및 `del=`과 함께 표시하여 원하는 강조 표시를 생성할 수 있습니다.
 
-Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 위한 여러 옵션을 제공합니다. 이들 중 다수는 예시적인 코드 샘플을 위해 결합될 수 있습니다. 사용 가능한 광범위한 옵션을 보려면 [Expressive Code 문서](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md)를 살펴보세요. 가장 일반적인 예시 중 일부는 다음과 같습니다.
+Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 위한 여러 옵션을 제공합니다. 이들 중 다수는 예시적인 코드 샘플을 위해 결합될 수 있습니다. 사용 가능한 광범위한 옵션을 보려면 [Expressive Code 문서](https://expressive-code.com/key-features/text-markers/#configuration)를 살펴보세요. 가장 일반적인 예시 중 일부는 다음과 같습니다.
 
-- [`{ }` 마커를 사용하여 전체 줄과 줄 범위를 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges)
+- [`{ }` 마커를 사용하여 전체 줄과 줄 범위를 표시합니다.](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges)
 
   ```js {2-3}
   function demo() {
@@ -242,6 +257,10 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   	return '이 줄은 이 스니펫의 라인 #3입니다.';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js {2-3}
@@ -252,17 +271,38 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```
   ````
 
-- [`" "` 마커 또는 정규 표현식을 사용하여 텍스트 선택 항목을 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines)
+  </TabItem>
 
-  ```js "Individual terms" /정규.*지원됩니다./
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// 이 줄(#2)과 다음 줄이 강조 표시됩니다.
+  	return '이 줄은 이 스니펫의 라인 #3입니다.';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [`" "` 마커 또는 정규 표현식을 사용하여 텍스트 선택 항목을 표시합니다.](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines)
+
+  ```js "개별 용어" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
   	return '정규 표현식도 지원됩니다.';
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
-  ```js "Individual terms" /정규.*지원됩니다./
+  ```js "개별 용어" /정규.*지원됩니다./
   // 개별 용어도 강조 표시할 수 있습니다.
   function demo() {
   	return '정규 표현식도 지원됩니다.';
@@ -270,7 +310,24 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```
   ````
 
-- [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'개별 용어' /정규.*지원됩니다./" %}
+  // 개별 용어도 강조 표시할 수 있습니다.
+  function demo() {
+  	return '정규 표현식도 지원됩니다.';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [`ins` 또는 `del`을 사용하여 텍스트나 줄을 삽입 또는 삭제된 것으로 표시합니다.](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del)
 
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
@@ -280,6 +337,10 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "return true;" ins="삽입" del="삭제된"
   function demo() {
@@ -290,7 +351,25 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
   ```
   ````
 
-- [구문 강조와 `diff` 유사 구문을 결합합니다.](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='삽입' del='삭제된'" %}
+  function demo() {
+  	console.log('삽입 및 삭제된 마커 타입입니다.');
+  	// return 문은 기본 마커 타입을 사용합니다.
+    return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [구문 강조와 `diff` 유사 구문을 결합합니다.](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax)
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -301,6 +380,10 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -311,6 +394,25 @@ Expressive Code는 코드 샘플의 시각적 모습을 사용자 정의하기 �
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // 이 전체 블록은 JavaScript로 강조표시됩니다.
+      // 그리고 여전히 diff 마커를 추가할 수 있습니다!
+  -   console.log('제거할 이전 코드')
+  +   console.log('새롭고 빛나는 코드!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Frames 및 titles
 
@@ -320,13 +422,17 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
 
 코드 블록의 선택적 제목은 코드 블록을 여는 백틱 및 언어 식별자 뒤에 `title="..."` 속성을 추가하거나 코드 첫 번째 줄에 파일 이름 주석을 추가하여 설정할 수 있습니다.
 
-- [설명과 함께 파일 이름 탭 추가](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [설명과 함께 파일 이름 탭 추가](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // my-test-file.js
   console.log('안녕하세요!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // my-test-file.js
@@ -334,29 +440,80 @@ title이 포함된 다른 언어는 코드 편집기 스타일의 프레임에 �
   ```
   ````
 
-- [터미널 창에 제목 추가](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+  </TabItem>
 
-  ```bash title="종속성 설치 중…"
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('안녕하세요!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [터미널 창에 제목 추가](https://expressive-code.com/key-features/frames/#terminal-frames)
+
+  ```bash title="의존성 설치 중…"
   npm install
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
-  ```bash title="종속성 설치 중…"
+  ```bash title="의존성 설치 중…"
   npm install
   ```
   ````
 
-- [`frame="none"`으로 창 프레임 비활성화](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="의존성 설치 중…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [`frame="none"`으로 창 프레임 비활성화](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```bash frame="none"
   echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "bash 언어를 사용해도 터미널로 렌더링되지 않습니다."
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Details
 
@@ -505,3 +662,21 @@ yarn create astro --template starlight/markdoc
 </Steps>
 
 Markdoc 구문 및 기능에 대한 자세한 내용은 [Markdoc 문서](https://markdoc.dev/docs/syntax) 또는 [Astro Markdoc 통합 가이드](https://docs.astro.build/ko/guides/integrations-guide/markdoc/)를 참조하세요.
+
+### Markdoc 프리셋 구성
+
+다음은 `starlightMarkdoc()` 프리셋이 허용하는 구성 옵션입니다.
+
+#### `headingLinks`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+제목이 클릭 가능한 앵커 링크와 함께 렌더링될지 여부를 제어합니다. Markdown 및 MDX 파일에 적용되는 [`markdown.headingLinks`](/ko/reference/configuration/#markdown) 옵션과 동일합니다.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// 기본 제목 앵커 링크 지원을 비활성화합니다.
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

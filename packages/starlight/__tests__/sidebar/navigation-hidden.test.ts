@@ -6,11 +6,13 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['index.mdx', { title: 'Home Page' }],
 			['environmental-impact.md', { title: 'Eco-friendly docs' }],
+			['resources/plugins.mdx', { title: 'Plugins' }],
+			['resources/themes.mdx', { title: 'Themes' }],
 			['reference/configuration.mdx', { title: 'Config Reference' }],
 			['reference/frontmatter.md', { title: 'Frontmatter Reference', sidebar: { hidden: true } }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['api/v1/users.md', { title: 'Users API' }],
 			['guides/project-structure.mdx', { title: 'Project Structure' }],
+			['Deprecated API/users.md', { title: 'Deprecated Users API' }],
 		],
 	})
 );
@@ -69,6 +71,30 @@ describe('getSidebar', () => {
 			    "type": "group",
 			  },
 			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/resources/plugins/",
+			        "isCurrent": false,
+			        "label": "Plugins",
+			        "type": "link",
+			      },
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/resources/themes/",
+			        "isCurrent": false,
+			        "label": "Themes",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "Resources",
+			    "type": "group",
+			  },
+			  {
 			    "badge": {
 			      "text": "Experimental",
 			      "variant": "default",
@@ -92,7 +118,10 @@ describe('getSidebar', () => {
 			    "collapsed": false,
 			    "entries": [
 			      {
-			        "attrs": {},
+			        "attrs": {
+			          "class": "current",
+			          "data-version": "1",
+			        },
 			        "badge": undefined,
 			        "href": "/api/v1/users/",
 			        "isCurrent": false,
@@ -101,6 +130,22 @@ describe('getSidebar', () => {
 			      },
 			    ],
 			    "label": "API v1",
+			    "type": "group",
+			  },
+			  {
+			    "badge": undefined,
+			    "collapsed": false,
+			    "entries": [
+			      {
+			        "attrs": {},
+			        "badge": undefined,
+			        "href": "/deprecated-api/users/",
+			        "isCurrent": false,
+			        "label": "Deprecated Users API",
+			        "type": "link",
+			      },
+			    ],
+			    "label": "API (deprecated)",
 			    "type": "group",
 			  },
 			]

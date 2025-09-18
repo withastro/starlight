@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineVitestConfig } from '../test-config';
 
 export default defineVitestConfig({
@@ -14,9 +15,9 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-1',
 			hooks: {
-				setup({ config, updateConfig }) {
+				'config:setup'({ config, updateConfig }) {
 					updateConfig({
-						title: `${config.title} - Custom`,
+						title: `${typeof config.title === 'string' ? config.title : ''} - Custom`,
 						description: 'plugin 1',
 						/**
 						 * The configuration received by a plugin should be the user provided configuration as-is
@@ -33,7 +34,7 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-2',
 			hooks: {
-				setup({ config, updateConfig }) {
+				'config:setup'({ config, updateConfig }) {
 					updateConfig({
 						description: `${config.description} - plugin 2`,
 						sidebar: [{ label: 'Showcase', link: 'showcase' }],
@@ -44,11 +45,7 @@ export default defineVitestConfig({
 		{
 			name: 'test-plugin-3',
 			hooks: {
-				async setup({ config, updateConfig, injectTranslations }) {
-					await Promise.resolve();
-					updateConfig({
-						description: `${config.description} - plugin 3`,
-					});
+				'i18n:setup'({ injectTranslations }) {
 					injectTranslations({
 						en: {
 							'search.label': 'Search the thing',
@@ -61,6 +58,38 @@ export default defineVitestConfig({
 						ar: {
 							'testPlugin3.doThing': 'قم بعمل المكون الإضافي 3',
 						},
+					});
+				},
+				async 'config:setup'({ config, updateConfig, useTranslations, absolutePathToLang }) {
+					// Fake an async operation to ensure that the plugin system can handle async hooks.
+					await Promise.resolve();
+
+					const docsUrl = new URL('../src/content/docs/', import.meta.url);
+
+					// To test that a plugin can access UI strings in the plugin context using the
+					// `useTranslations()` helper and also use the `absolutePathToLang()` helper, we generate
+					// a bunch of expected values that are JSON stringified, passed to the config through the
+					// `titleDelimiter` option, and later parsed and verified in a test.
+					const result = {
+						uiStrings: [
+							useTranslations('en')('skipLink.label'),
+							useTranslations('fr')('search.label'),
+							// @ts-expect-error - `testPlugin3.doThing` is a translation key injected by a test plugin
+							useTranslations('en')('testPlugin3.doThing'),
+						],
+						langs: [
+							// We convert URLs to file paths to avoid potential issues with URL encoded paths,
+							// e.g. running tests with a path that contains spaces and would be `%20` encoded.
+							absolutePathToLang(fileURLToPath(new URL('./en/index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./pt-br/index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./index.md', docsUrl))),
+							absolutePathToLang(fileURLToPath(new URL('./ar/path with spaces/index.md', docsUrl))),
+						],
+					};
+
+					updateConfig({
+						description: `${config.description} - plugin 3`,
+						titleDelimiter: JSON.stringify(result),
 					});
 				},
 			},

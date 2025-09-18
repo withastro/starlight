@@ -55,8 +55,8 @@ function getRepoRoot(directory: string): string {
 	}
 }
 
-export function getAllNewestCommitDate(directory: string): [string, number][] {
-	const repoRoot = getRepoRoot(directory);
+export function getAllNewestCommitDate(rootPath: string, docsPath: string): [string, number][] {
+	const repoRoot = getRepoRoot(docsPath);
 
 	const gitLog = spawnSync(
 		'git',
@@ -67,11 +67,18 @@ export function getAllNewestCommitDate(directory: string): [string, number][] {
 			// In each entry include the name and status for each modified file
 			'--name-status',
 			'--',
-			directory,
+			docsPath,
 		],
 		{
 			cwd: repoRoot,
 			encoding: 'utf-8',
+			// The default `maxBuffer` for `spawnSync` is 1024 * 1024 bytes, a.k.a 1 MB. In big projects,
+			// the full git history can be larger than this, so we increase this to ~10 MB. For example,
+			// Cloudflare passed 1 MB with ~4,800 pages and ~17,000 commits. If we get reports of others
+			// hitting ENOBUFS errors here in the future, we may want to switch to streaming the git log
+			// with `spawn` instead.
+			// See https://github.com/withastro/starlight/issues/3154
+			maxBuffer: 10 * 1024 * 1024,
 		}
 	);
 
@@ -105,7 +112,9 @@ export function getAllNewestCommitDate(directory: string): [string, number][] {
 
 	return Array.from(latestDates.entries()).map(([file, date]) => {
 		const fileFullPath = resolve(repoRoot, file);
-		const fileInDirectory = relative(directory, fileFullPath);
+		let fileInDirectory = relative(rootPath, fileFullPath);
+		// Format path to unix style path.
+		fileInDirectory = fileInDirectory?.replace(/\\/g, '/');
 
 		return [fileInDirectory, date];
 	});

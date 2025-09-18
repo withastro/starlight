@@ -1,6 +1,6 @@
 ---
 title: Starlight anpassen
-description: Lerne, wie du deine Starlight-Site mit deinem Logo, eigenen Schriftarten, Landing-Page-Design und vielem mehr zu deiner eigenen machen kannst.
+description: Lerne, wie du deine Starlight-Website mit deinem Logo, eigenen Schriftarten, Landing-Page-Design und vielem mehr zu deiner eigenen machen kannst.
 ---
 
 import { Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
@@ -196,14 +196,19 @@ defineConfig({
   </TabItem>
 </Tabs>
 
-## Social Links
+## Soziale Links
 
 Starlight bietet integrierte Unterstützung für das Hinzufügen von Links zu deinen Social-Media-Accounts in der Kopfzeile der Website über die Option [`social`](/de/reference/configuration/#social) in der Starlight-Integration.
 
-Eine vollständige Liste der unterstützten Dienste findest du in der [Konfigurationsreferenz](/de/reference/configuration/#social).
-Lasse uns auf GitHub oder Discord wissen, wenn du Unterstützung für einen anderen Dienst benötigst!
+Jeder Eintrag im Array `social` muss ein Objekt mit drei Eigenschaften sein:
 
-```js {9-12}
+- `icon`: eines der [eingebauten Symbolen](/de/reference/icons/) von Starlight, z.&nbsp;B. `"github"`.
+- `label`: eine zugängliche Bezeichnung für den Link, z.&nbsp;B. `"GitHub"`.
+- `href`: die URL für den Link, z.&nbsp;B. `"https://github.com/withastro/starlight"`.
+
+Das folgende Beispiel fügt Links zum Astro Discord Chat und zum Starlight GitHub Repository hinzu:
+
+```js {9-16}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -211,11 +216,15 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Dokumentation mit social Links',
-			social: {
-				discord: 'https://astro.build/chat',
-				github: 'https://github.com/withastro/starlight',
-			},
+			title: 'Dokumentation mit sozialen Links',
+			social: [
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/withastro/starlight',
+				},
+			],
 		}),
 	],
 });
@@ -227,7 +236,7 @@ Starlight kann einen "Seite bearbeiten"-Link in der Fußzeile jeder Seite anzeig
 Dies macht es dem Leser leicht, die zu bearbeitende Datei zu finden, um deine Dokumentation zu verbessern.
 Insbesondere bei Open-Source-Projekten kann dies dazu beitragen, Beiträge aus deiner Community zu fördern.
 
-Um Edit-Links zu aktivieren, setze [`editLink.baseUrl`](/de/reference/configuration/#editlink) auf die URL, die du zum Bearbeiten deines Repositorys in der Starlight-Integrationskonfiguration verwendest.
+Um Edit-Links zu aktivieren, setze [`editLink.baseUrl`](/de/reference/configuration/#editlink) auf die URL, die du zum Bearbeiten deines Repositorys in der Starlight-Integrations&shy;konfiguration verwendest.
 Der Wert von `editLink.baseUrl` wird dem Pfad zur aktuellen Seite vorangestellt, um den vollständigen Bearbeitungslink zu bilden.
 
 Übliche Muster sind:
@@ -237,7 +246,7 @@ Der Wert von `editLink.baseUrl` wird dem Pfad zur aktuellen Seite vorangestellt,
 
 Wenn sich dein Starlight-Projekt nicht im Stammverzeichnis deines Repositorys befindet, füge den Pfad zum Projekt am Ende der Basis-URL ein.
 
-Dieses Beispiel zeigt den Bearbeitungslink, der für die Starlight-Dokumente konfiguriert ist, die sich im Unterverzeichnis `docs/` im `main`-Branch des `withastro/starlight`-Repository auf GitHub befinden:
+Dieses Beispiel zeigt den Bearbeitungslink, der für die Starlight-Dokumentation konfiguriert ist, die sich im Unterverzeichnis `docs/` im `main`-Branch des `withastro/starlight`-Repository auf GitHub befinden:
 
 ```js {9-11}
 // astro.config.mjs
@@ -258,7 +267,7 @@ export default defineConfig({
 
 ## Benutzerdefinierte 404-Seite
 
-Starlight-Seiten zeigen standardmäßig eine einfache 404-Seite an.
+Starlight-Websites zeigen standardmäßig eine einfache 404-Seite an.
 Du kannst dies anpassen, indem du eine `404.md` (oder `404.mdx`) Datei zu deinem `src/content/docs/` Verzeichnis hinzufügst:
 
 <FileTree>
@@ -288,7 +297,7 @@ hero:
 
 ### Deaktivieren der Standard-404-Seite
 
-Wenn dein Projekt ein komplett angepasstes 404-Layout benötigt, kannst du eine `src/pages/404.astro`-Route erstellen und die [`disable404Route`](/de/reference/configuration/#disable404route) Konfigurationsoption setzen, um die Standard-Route von Starlight zu deaktivieren:
+Wenn dein Projekt ein komplett angepasstes 404-Layout benötigt, kannst du eine `src/pages/404.astro`-Route erstellen und die [`disable404Route`](/de/reference/configuration/#disable404route) Konfigurations&shy;option setzen, um die Standard-Route von Starlight zu deaktivieren:
 
 ```js {9}
 // astro.config.mjs
@@ -362,7 +371,7 @@ Um Google Fonts zu verwenden, folge der [Anleitung Fontsource einrichten](#einri
    		starlight({
    			title: 'Dokumentation mit benutzerdefinierter Schriftart',
    			customCss: [
-   +				// Relativer Pfad zu Ihrer @font-face CSS-Datei.
+   +				// Relativer Pfad zu deiner @font-face CSS-Datei.
    +				'./src/fonts/font-face.css',
    			],
    		}),

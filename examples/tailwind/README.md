@@ -6,10 +6,14 @@
 npm create astro@latest -- --template starlight/tailwind
 ```
 
+<!-- ASTRO:REMOVE:START -->
+
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/tailwind)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/tailwind)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/withastro/starlight&create_from_path=examples/tailwind)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Ftailwind&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+
+<!-- ASTRO:REMOVE:END -->
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
@@ -23,12 +27,12 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 ├── src/
 │   ├── assets/
 │   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
-│   └── env.d.ts
+│   │   └── docs/
+│   ├── styles/
+│   │   └── global.css
+│   └── content.config.ts
 ├── astro.config.mjs
 ├── package.json
-├── tailwind.config.mjs
 └── tsconfig.json
 ```
 
@@ -37,6 +41,8 @@ Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. 
 Images can be added to `src/assets/` and embedded in Markdown with a relative link.
 
 Static assets, like favicons, can be placed in the `public/` directory.
+
+The project includes [Tailwind CSS](https://starlight.astro.build/guides/css-and-tailwind/#tailwind-css) for styling. Customize your design by modifying `src/styles/global.css`.
 
 ## 🧞 Commands
 

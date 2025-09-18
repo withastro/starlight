@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
@@ -40,13 +41,14 @@ export default defineConfig({
 				dark: '/src/assets/logo-dark.svg',
 				replacesTitle: true,
 			},
+			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/withastro/starlight/edit/main/docs/',
 			},
-			social: {
-				github: 'https://github.com/withastro/starlight',
-				discord: 'https://astro.build/chat',
-			},
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+			],
 			head: [
 				{
 					tag: 'script',
@@ -80,7 +82,7 @@ export default defineConfig({
 						'zh-CN': '从这里开始',
 						'pt-BR': 'Comece Aqui',
 						'pt-PT': 'Comece Aqui',
-						ko: '여기서부터',
+						ko: '시작 안내',
 						tr: 'Buradan Başlayın',
 						ru: 'Первые шаги',
 						hi: 'यहाँ से शुरू करे',

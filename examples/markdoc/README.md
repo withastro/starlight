@@ -6,10 +6,14 @@
 npm create astro@latest -- --template starlight/markdoc
 ```
 
+<!-- ASTRO:REMOVE:START -->
+
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/markdoc)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/markdoc)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/withastro/starlight&create_from_path=examples/markdoc)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fmarkdoc&project-name=my-starlight-docs&repository-name=my-starlight-docs)
+
+<!-- ASTRO:REMOVE:END -->
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
@@ -23,9 +27,8 @@ Inside of your Astro + Starlight project, you'll see the following folders and f
 ├── src/
 │   ├── assets/
 │   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
-│   └── env.d.ts
+│   │   └── docs/
+│   └── content.config.ts
 ├── astro.config.mjs
 ├── markdoc.config.mjs
 ├── package.json

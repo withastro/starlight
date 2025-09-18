@@ -45,7 +45,7 @@ You can highlight `inline code` with backticks.
 
 ## Images
 
-Images in Starlight use [Astro’s built-in optimized asset support](https://docs.astro.build/en/guides/assets/).
+Images in Starlight use [Astro’s built-in optimized asset support](https://docs.astro.build/en/guides/images/).
 
 Markdown and MDX support the Markdown syntax for displaying images that includes alt-text for screen readers and assistive technology.
 
@@ -151,6 +151,21 @@ Astro helps you build faster websites with [“Islands Architecture”](https://
 :::
 ```
 
+### Custom aside icons
+
+You can specify a custom icon for the aside in curly brackets following the aside type or [custom title](#custom-aside-titles), e.g. `:::tip{icon="heart"}` or `:::tip[Did you know?]{icon="heart"}` respectively.
+The icon name must be set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
+
+:::tip{icon="heart"}
+Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
+:::
+
+```md
+:::tip{icon="heart"}
+Astro helps you build faster websites with [“Islands Architecture”](https://docs.astro.build/en/concepts/islands/).
+:::
+```
+
 ### More aside types
 
 Caution and danger asides are helpful for drawing a user’s attention to details that may trip them up.
@@ -220,13 +235,13 @@ var fun = function lang(l) {
 
 ### Expressive Code features
 
-Starlight uses [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) to extend formatting possibilities for code blocks.
+Starlight uses [Expressive Code](https://expressive-code.com/) to extend formatting possibilities for code blocks.
 Expressive Code’s text markers and window frames plugins are enabled by default.
 Code block rendering can be configured using Starlight’s [`expressiveCode` configuration option](/reference/configuration/#expressivecode).
 
 #### Text markers
 
-You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#usage-in-markdown--mdx-documents) on the opening line of your code block.
+You can highlight specific lines or parts of your code blocks using [Expressive Code text markers](https://expressive-code.com/key-features/text-markers/) on the opening line of your code block.
 Use curly braces (`{ }`) to highlight entire lines, and quotation marks to highlight strings of text.
 
 There are three highlighting styles: neutral for calling attention to code, green for indicating inserted code, and red for indicating deleted code.
@@ -234,10 +249,10 @@ Both text and entire lines can be marked using the default marker, or in combina
 
 Expressive Code provides several options for customizing the visual appearance of your code samples.
 Many of these can be combined, for highly illustrative code samples.
-Please explore the [Expressive Code documentation](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md) for the extensive options available.
+Please explore the [Expressive Code documentation](https://expressive-code.com/key-features/text-markers/#configuration) for the extensive options available.
 Some of the most common examples are shown below:
 
-- [Mark entire lines & line ranges using the `{ }` marker](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-entire-lines--line-ranges):
+- [Mark entire lines & line ranges using the `{ }` marker](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges):
 
   ```js {2-3}
   function demo() {
@@ -245,6 +260,10 @@ Some of the most common examples are shown below:
   	return 'This is line #3 of this snippet';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js {2-3}
@@ -255,7 +274,24 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Mark selections of text using the `" "` marker or regular expressions](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#marking-individual-text-inside-lines):
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="{2-3}" %}
+  function demo() {
+  	// This line (#2) and the next one are highlighted
+  	return 'This is line #3 of this snippet';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Mark selections of text using the `" "` marker or regular expressions](https://expressive-code.com/key-features/text-markers/#marking-individual-text-inside-lines):
 
   ```js "Individual terms" /Even.*supported/
   // Individual terms can be highlighted, too
@@ -263,6 +299,10 @@ Some of the most common examples are shown below:
   	return 'Even regular expressions are supported';
   }
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```js "Individual terms" /Even.*supported/
@@ -273,7 +313,24 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Mark text or lines as inserted or deleted with `ins` or `del`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#selecting-marker-types-mark-ins-del):
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'Individual terms' /Even.*supported/" %}
+  // Individual terms can be highlighted, too
+  function demo() {
+  	return 'Even regular expressions are supported';
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Mark text or lines as inserted or deleted with `ins` or `del`](https://expressive-code.com/key-features/text-markers/#selecting-inline-marker-types-mark-ins-del):
 
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
@@ -283,6 +340,10 @@ Some of the most common examples are shown below:
   }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js "return true;" ins="inserted" del="deleted"
   function demo() {
@@ -293,7 +354,25 @@ Some of the most common examples are shown below:
   ```
   ````
 
-- [Combine syntax highlighting with `diff`-like syntax](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-text-markers/README.md#combining-syntax-highlighting-with-diff-like-syntax):
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```js {% meta="'return true;' ins='inserted' del='deleted'" %}
+  function demo() {
+  	console.log('These are inserted and deleted marker types');
+  	// The return statement uses the default marker type
+  	return true;
+  }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Combine syntax highlighting with `diff`-like syntax](https://expressive-code.com/key-features/text-markers/#combining-syntax-highlighting-with-diff-like-syntax):
 
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -304,6 +383,10 @@ Some of the most common examples are shown below:
     }
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```diff lang="js"
     function thisIsJavaScript() {
@@ -314,6 +397,25 @@ Some of the most common examples are shown below:
     }
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```diff {% meta="lang='js'" %}
+    function thisIsJavaScript() {
+      // This entire block gets highlighted as JavaScript,
+      // and we can still add diff markers to it!
+  -   console.log('Old code to be removed')
+  +   console.log('New and shiny code!')
+    }
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 #### Frames and titles
 
@@ -323,13 +425,17 @@ Other languages display inside a code editor-style frame if they include a title
 
 A code block’s optional title can be set either with a `title="..."` attribute following the code block's opening backticks and language identifier, or with a file name comment in the first lines of the code.
 
-- [Add a file name tab with a comment](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+- [Add a file name tab with a comment](https://expressive-code.com/key-features/frames/#code-editor-frames)
 
   ```js
   // my-test-file.js
   console.log('Hello World!');
   ```
 
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
+
   ````md
   ```js
   // my-test-file.js
@@ -337,11 +443,30 @@ A code block’s optional title can be set either with a `title="..."` attribute
   ```
   ````
 
-- [Add a title to a Terminal window](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#adding-titles-open-file-tab-or-terminal-window-title)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````md
+  ```js
+  // my-test-file.js
+  console.log('Hello World!');
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Add a title to a Terminal window](https://expressive-code.com/key-features/frames/#terminal-frames)
 
   ```bash title="Installing dependencies…"
   npm install
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash title="Installing dependencies…"
@@ -349,17 +474,49 @@ A code block’s optional title can be set either with a `title="..."` attribute
   ```
   ````
 
-- [Disable window frames with `frame="none"`](https://github.com/expressive-code/expressive-code/blob/main/packages/%40expressive-code/plugin-frames/README.md#overriding-frame-types)
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% title="Installing dependencies…" %}
+  npm install
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
+
+- [Disable window frames with `frame="none"`](https://expressive-code.com/key-features/frames/#overriding-frame-types)
 
   ```bash frame="none"
   echo "This is not rendered as a terminal despite using the bash language"
   ```
+
+  <Tabs syncKey="content-type">
+
+  <TabItem label="Markdown/MDX">
 
   ````md
   ```bash frame="none"
   echo "This is not rendered as a terminal despite using the bash language"
   ```
   ````
+
+  </TabItem>
+
+  <TabItem label="Markdoc">
+
+  ````markdoc
+  ```bash {% frame="none" %}
+  echo "This is not rendered as a terminal despite using the bash language"
+  ```
+  ````
+
+  </TabItem>
+
+  </Tabs>
 
 ## Details
 
@@ -508,3 +665,22 @@ If you already have a Starlight site and want to add Markdoc, follow these steps
 </Steps>
 
 To learn more about the Markdoc syntax and features, see the [Markdoc documentation](https://markdoc.dev/docs/syntax) or the [Astro Markdoc integration guide](https://docs.astro.build/en/guides/integrations-guide/markdoc/).
+
+### Configuring the Markdoc preset
+
+The `starlightMarkdoc()` preset accepts the following configuration options:
+
+#### `headingLinks`
+
+**type:** `boolean`  
+**default:** `true`
+
+Controls whether or not headings are rendered with a clickable anchor link.
+Equivalent to the [`markdown.headingLinks`](/reference/configuration/#markdown) option, which applies to Markdown and MDX files.
+
+```js "headingLinks: false"
+export default defineMarkdocConfig({
+	// Disable the default heading anchor link support
+	extends: [starlightMarkdoc({ headingLinks: false })],
+});
+```

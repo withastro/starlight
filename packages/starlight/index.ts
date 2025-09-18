@@ -8,7 +8,8 @@
 /// <reference path="./virtual.d.ts" />
 
 import mdx from '@astrojs/mdx';
-import type { AstroIntegration } from 'astro';
+import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
+import { AstroError } from 'astro/errors';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,7 +18,6 @@ import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
-import { createTranslationSystemFromFs } from './utils/translations-fs';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -26,11 +26,18 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
+import { starlightAutolinkHeadings } from './integrations/heading-links';
 
-export default function StarlightIntegration({
-	plugins,
-	...opts
-}: StarlightUserConfigWithPlugins): AstroIntegration {
+export default function StarlightIntegration(
+	userOpts: StarlightUserConfigWithPlugins
+): AstroIntegration {
+	if (typeof userOpts !== 'object' || userOpts === null || Array.isArray(userOpts))
+		throw new AstroError(
+			'Invalid config passed to starlight integration',
+			`The Starlight integration expects a configuration object with at least a \`title\` property.\n\n` +
+				`See more details in the [Starlight configuration reference](https://starlight.astro.build/reference/configuration/)\n`
+		);
+	const { plugins, ...opts } = userOpts;
 	let userConfig: StarlightConfig;
 	let pluginTranslations: PluginTranslations = {};
 	return {
@@ -58,15 +65,9 @@ export default function StarlightIntegration({
 					config.i18n
 				);
 
-				const integrations = pluginResult.integrations;
+				const { integrations, useTranslations, absolutePathToLang } = pluginResult;
 				pluginTranslations = pluginResult.pluginTranslations;
 				userConfig = starlightConfig;
-
-				const useTranslations = createTranslationSystemFromFs(
-					starlightConfig,
-					config,
-					pluginTranslations
-				);
 
 				addMiddleware({ entrypoint: '@astrojs/starlight/locals', order: 'pre' });
 
@@ -91,7 +92,9 @@ export default function StarlightIntegration({
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
 				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
-					integrations.push(...starlightExpressiveCode({ starlightConfig, useTranslations }));
+					integrations.push(
+						...starlightExpressiveCode({ astroConfig: config, starlightConfig, useTranslations })
+					);
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
@@ -120,19 +123,27 @@ export default function StarlightIntegration({
 					},
 					markdown: {
 						remarkPlugins: [
-							...starlightAsides({ starlightConfig, astroConfig: config, useTranslations }),
+							...starlightAsides({
+								starlightConfig,
+								astroConfig: config,
+								useTranslations,
+								absolutePathToLang,
+							}),
 						],
-						rehypePlugins: [rehypeRtlCodeSupport()],
-						shikiConfig:
-							// Configure Shiki theme if the user is using the default github-dark theme.
-							config.markdown.shikiConfig.theme !== 'github-dark' ? {} : { theme: 'css-variables' },
+						rehypePlugins: [
+							rehypeRtlCodeSupport({ astroConfig: config }),
+							// Process headings and add anchor links.
+							...starlightAutolinkHeadings({
+								starlightConfig,
+								astroConfig: config,
+								useTranslations,
+								absolutePathToLang,
+							}),
+						],
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
 					prefetch: config.prefetch ?? { prefetchAll: true },
-					experimental: {
-						globalRoutePriority: true,
-					},
 					i18n: astroI18nConfig,
 				});
 			},
@@ -141,13 +152,14 @@ export default function StarlightIntegration({
 				injectPluginTranslationsTypes(pluginTranslations, injectTypes);
 			},
 
-			'astro:build:done': ({ dir }) => {
+			'astro:build:done': ({ dir, logger }) => {
 				if (!userConfig.pagefind) return;
+				const loglevelFlag = getPagefindLoggingFlags(logger.options.level);
 				const targetDir = fileURLToPath(dir);
 				const cwd = dirname(fileURLToPath(import.meta.url));
 				const relativeDir = relative(cwd, targetDir);
 				return new Promise<void>((resolve) => {
-					spawn('npx', ['-y', 'pagefind', '--site', relativeDir], {
+					spawn('npx', ['-y', 'pagefind', ...loglevelFlag, '--site', relativeDir], {
 						stdio: 'inherit',
 						shell: true,
 						cwd,
@@ -156,4 +168,20 @@ export default function StarlightIntegration({
 			},
 		},
 	};
+}
+
+/** Map the logging level of Astro’s logger to one of Pagefind’s logging level flags. */
+function getPagefindLoggingFlags(level: AstroIntegrationLogger['options']['level']) {
+	switch (level) {
+		case 'silent':
+		case 'error':
+			return ['--silent'];
+		case 'warn':
+			return ['--quiet'];
+		case 'debug':
+			return ['--verbose'];
+		case 'info':
+		default:
+			return [];
+	}
 }

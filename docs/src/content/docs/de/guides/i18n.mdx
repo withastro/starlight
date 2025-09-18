@@ -5,7 +5,7 @@ description: Lerne, wie du deine Starlight-Website so konfigurierst, dass sie me
 
 import { FileTree, Steps } from '@astrojs/starlight/components';
 
-Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschließlich Routing, Fallback-Inhalte und vollständige Unterstützung von rechts-nach-links (RTL) Sprachen.
+Starlight bietet eingebaute Unterstützung für mehrsprachige Websites, einschließlich Routing, Fallback-Inhalte und vollständige Unterstützung von rechts-nach-links (RTL) Sprachen.
 
 ## Konfiguriere i18n
 
@@ -25,16 +25,16 @@ Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschlie�
    			// Lege Englisch als Standardsprache für diese Website fest.
    			defaultLocale: 'en',
    			locales: {
-   				// Englische Dokumente in `src/content/docs/en/`
+   				// Englische Dokumentation in `src/content/docs/en/`
    				en: {
    					label: 'English',
    				},
-   				// Vereinfachte chinesische Dokumente in `src/content/docs/zh-cn/`
+   				// Vereinfachte chinesische Dokumentation in `src/content/docs/zh-cn/`
    				'zh-cn': {
    					label: '简体中文',
    					lang: 'zh-CN',
    				},
-   				// Arabische Dokumente in `src/content/docs/ar/`
+   				// Arabische Dokumentation in `src/content/docs/ar/`
    				ar: {
    					label: 'العربية',
    					dir: 'rtl',
@@ -61,13 +61,13 @@ Starlight bietet eingebaute Unterstützung für mehrsprachige Seiten, einschlie�
 
    </FileTree>
 
-3. Du kannst nun Inhaltsdateien in deinen Sprachverzeichnissen hinzufügen. Verwende den gleichen Dateinamen, um Seiten in verschiedenen Sprachen zuzuordnen und nutze Starlights volle i18n-Funktionen, einschließlich Fallback-Inhalte, Übersetzungshinweise und mehr.
+3. Du kannst nun Inhaltsdateien in deinen Sprach&shy;verzeichnissen hinzufügen. Verwende den gleichen Dateinamen, um Seiten in verschiedenen Sprachen zuzuordnen und nutze Starlights volle i18n-Funktionen, einschließlich Fallback-Inhalte, Übersetzungs&shy;hinweise und mehr.
 
    Erstelle zum Beispiel `ar/index.md` und `en/index.md`, um die Homepage für Arabisch bzw. Englisch darzustellen.
 
 </Steps>
 
-Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit [Astro's `i18n`-Konfigurationsoption](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
+Für fortgeschrittene i18n-Szenarien unterstützt Starlight auch die Konfiguration der Internationalisierung mit [Astro's `i18n`-Konfigurations&shy;option](https://docs.astro.build/de/guides/internationalization/#configure-i18n-routing).
 
 ### Verwende ein Root-Verzeichnis
 
@@ -113,9 +113,9 @@ Wenn du ein `root`-Verzeichnis verwendest, speichere die Seiten für diese Sprac
 
 </FileTree>
 
-#### Einsprachige Seiten
+#### Einsprachige Websites
 
-Standardmäßig ist Starlight eine einsprachige (englische) Website. Um eine einsprachige Website in einer anderen Sprache zu erstellen, setze diese als `root` in Ihrer `locales` Konfiguration:
+Standardmäßig ist Starlight eine einsprachige (englische) Website. Um eine einsprachige Website in einer anderen Sprache zu erstellen, setze diese als `root` in deiner `locales` Konfiguration:
 
 ```diff lang="js" {10-13}
 // astro.config.mjs
@@ -137,13 +137,13 @@ export default defineConfig({
 });
 ```
 
-Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungsfunktionen für mehrsprachige Seiten zu aktivieren, wie z.B. die Sprachauswahl.
+Dies ermöglicht es dir, die Standardsprache von Starlight zu überschreiben, ohne andere Internationalisierungs&shy;funktionen für mehrsprachige Websites zu aktivieren, wie z.&nbsp;B. die Sprachauswahl.
 
 ## Fallback-Inhalt
 
-Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `de/about.md` Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Ersatzinhalte für Websiten zu liefern, die noch nicht übersetzt wurden.
+Starlight erwartet, dass du äquivalente Seiten in allen deinen Sprachen erstellst. Wenn du zum Beispiel eine `de/about.md` Datei hast, erstelle eine `about.md` für jede andere Sprache, die du unterstützt. Dies ermöglicht Starlight, automatisch Ersatzinhalte für Seiten zu liefern, die noch nicht übersetzt wurden.
 
-Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.B. noch keine französische Version Ihrer "About"-Website erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
+Wenn für eine Sprache noch keine Übersetzung verfügbar ist, zeigt Starlight den Lesern den Inhalt dieser Seite in der Standardsprache (eingestellt über `defaultLocale`). Wenn du z.&nbsp;B. noch keine französische Version deiner "About"-Seite erstellt hast und deine Standardsprache Englisch ist, werden Besucher von `/fr/about` den englischen Inhalt von `/en/about` sehen, mit einem Hinweis, dass diese Seite noch nicht übersetzt wurde. Auf diese Weise kannst du Inhalte in deiner Standardsprache hinzufügen und sie dann nach und nach übersetzen, wenn du Lust dazu hast.
 
 ## Übersetze den Seitentitel
 
@@ -178,26 +178,27 @@ export default defineConfig({
 import LanguagesList from '~/components/languages-list.astro';
 import UIStringsList from '~/components/ui-strings-list.astro';
 
-Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.B. die Überschrift "Auf dieser Seite" im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
+Starlight bietet nicht nur übersetzte Inhaltsdateien, sondern auch die Möglichkeit, die Standard-Benutzeroberfläche zu übersetzen (z.&nbsp;B. die Überschrift "Auf dieser Seite" im Inhaltsverzeichnis), so dass deine Leser deine Website vollständig in der ausgewählten Sprache erleben können.
 
 <LanguagesList startsSentence /> werden standardmäßig übersetzt, und wir freuen
 uns über [Beiträge zur Aufnahme weiterer
 Standardsprachen](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über die `i18n` Datensammlung zur Verfügung stellen - oder unsere Standardbezeichnungen überschreiben.
+Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über die `i18n` Datensammlung zur Verfügung stellen - oder unsere Standard&shy;bezeichnungen überschreiben.
 
 <Steps>
 
-1. Konfiguriere die `i18n` Datensammlung in `src/content/config.ts`, wenn sie nicht bereits konfiguriert ist:
+1. Konfiguriere die `i18n` Datensammlung in `src/content.config.ts`, wenn sie nicht bereits konfiguriert ist:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -214,13 +215,13 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
 
    </FileTree>
 
-3. Füge Übersetzungen für die Schlüssel hinzu, die in den JSON-Dateien übersetzt werden sollen. Übersetze nur die Werte und belasse die Schlüssel auf Englisch (z.B. `"search.label": "Buscar"`).
+3. Füge Übersetzungen für die Schlüssel hinzu, die in den JSON-Dateien übersetzt werden sollen. Übersetze nur die Werte und belasse die Schlüssel auf Englisch (z.&nbsp;B. `"search.label": "Buscar"`).
 
    Dies sind die englischen Standardwerte der vorhandenen Strings, mit denen Starlight ausgeliefert wird:
 
    <UIStringsList />
 
-   Die Codeblöcke von Starlight werden von der [Expressive Code](https://github.com/expressive-code/expressive-code) Bibliothek unterstützt.
+   Die Codeblöcke von Starlight werden von der [Expressive Code](https://expressive-code.com/) Bibliothek unterstützt.
    Du kannst die Übersetzungen für die UI-Strings in derselben JSON-Datei mit Hilfe von `expressiveCode`-Schlüsseln festlegen:
 
    ```json
@@ -253,18 +254,19 @@ Du kannst Übersetzungen für zusätzliche Sprachen, die du unterstützt, über 
 
 ### Übersetzungsschema erweitern
 
-Füge benutzerdefinierte Schlüssel zu den Übersetzungswörterbüchern deiner Website hinzu, indem du die Option `extend` in den `i18nSchema()`-Optionen setzt.
+Füge benutzerdefinierte Schlüssel zu den Übersetzungs&shy;wörterbüchern deiner Website hinzu, indem du die Option `extend` in den `i18nSchema()`-Optionen setzt.
 Im folgenden Beispiel wird ein neuer, optionaler Schlüssel `custom.label` zu den Standardschlüsseln hinzugefügt:
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -274,14 +276,14 @@ export const collections = {
 };
 ```
 
-Mehr über Inhaltssammlungsschemata erfährst du in [„Ein Sammelschema definieren“](https://docs.astro.build/de/guides/content-collections/#defining-a-collection-schema) in den Astro-Dokumenten.
+Mehr über Inhaltssammlungs&shy;schemas erfährst du in [„Ein Sammelschema definieren“](https://docs.astro.build/de/guides/content-collections/#defining-the-collection-schema) in der Astro-Dokumentation.
 
 ## UI-Übersetzungen verwenden
 
 Du kannst auf Starlights [eingebaute UI-Strings](/de/guides/i18n/#starlights-ui-übersetzen) sowie auf [benutzerdefinierte](/de/guides/i18n/#übersetzungsschema-erweitern) und [plugin-provided](/de/reference/plugins/#injecttranslations) UI-Strings über eine einheitliche API zugreifen, die von [i18next](https://www.i18next.com/) unterstützt wird.
 Dazu gehört die Unterstützung von Funktionen wie [Interpolation](https://www.i18next.com/translation-function/interpolation) und [Pluralisierung](https://www.i18next.com/translation-function/plurals).
 
-In Astro-Komponenten ist diese API als Teil des [globalen `Astro`-Objekts](https://docs.astro.build/de/reference/api-reference/#astrolocals) als `Astro.locals.t` verfügbar:
+In Astro-Komponenten ist diese API als Teil des [globalen `Astro`-Objekts](https://docs.astro.build/de/reference/api-reference/#locals) als `Astro.locals.t` verfügbar:
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
@@ -289,13 +291,16 @@ In Astro-Komponenten ist diese API als Teil des [globalen `Astro`-Objekts](https
 </p>
 ```
 
-Du kannst die API auch bei [Endpunkten](https://docs.astro.build/de/guides/endpoints/) verwenden, wo das Objekt `locals` als Teil des [Endpunkt-Kontextes](https://docs.astro.build/de/reference/api-reference/#contextlocals) verfügbar ist:
+Du kannst die API auch bei [Endpunkten](https://docs.astro.build/de/guides/endpoints/) verwenden, wo das Objekt `locals` als Teil des [Endpunkt-Kontextes](https://docs.astro.build/de/reference/api-reference/#locals) verfügbar ist:
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
 	return new Response(context.locals.t('404.text'));
 };
 ```
+
+Im Kontext eines Starlight-Plugins kannst du den Helfer [`useTranslations()`](/de/reference/plugins/#usetranslations) verwenden, um auf diese API für eine bestimmte Sprache zuzugreifen.
+Weitere Informationen findest du in der [Plugins Referenz](/de/reference/plugins/).
 
 ### Rendering eines UI-Strings
 
@@ -321,7 +326,7 @@ Der erste UI-String kann gerendert werden, indem man `'link.astro'` an die Funkt
 <!-- Rendert: <a href="...">Astro Dokumentation</a> -->
 ```
 
-Der zweite UI-String verwendet die [Interpolationssyntax](https://www.i18next.com/translation-function/interpolation) von i18next für den Platzhalter `{{feature}}`.
+Der zweite UI-String verwendet die [Interpolations&shy;syntax](https://www.i18next.com/translation-function/interpolation) von i18next für den Platzhalter `{{feature}}`.
 Der Wert für `feature` muss in einem Optionsobjekt gesetzt werden, das als zweites Argument an `t()` übergeben wird:
 
 ```astro {3}
@@ -355,15 +360,15 @@ const allStrings = Astro.locals.t.all();
 
 #### `t.exists()`
 
-Um zu überprüfen, ob ein Übersetzungsschlüssel für eine Sprache existiert, verwende die Funktion `locals.t.exists()` mit dem Übersetzungsschlüssel als erstem Argument.
-Übergib ein optionales zweites Argument, wenn du die aktuelle Sprache neu definieren musst.
+Um zu überprüfen, ob ein Übersetzungs&shy;schlüssel existiert, verwende die Funktion `locals.t.exists()` mit dem Übersetzungs&shy;schlüssel als erstem Argument.
+Gib ein optionales zweites Argument an, wenn du überprüfen möchtest, ob eine Übersetzung für eine bestimmte Sprache vorhanden ist.
 
 ```astro
 ---
 // src/components/Example.astro
-const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+const keyExists = Astro.locals.t.exists('a.key');
 //    ^ true
-const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+const keyExistsInFrench = Astro.locals.t.exists('other.key', { lngs: ['fr'] });
 //    ^ false
 ---
 ```
@@ -390,7 +395,7 @@ Weitere Informationen findest du in der [`dir()`-Referenz in der i18next-Dokumen
 
 ## Zugriff auf das aktuelle Gebietsschema
 
-Du kannst [`Astro.currentLocale`](https://docs.astro.build/de/reference/api-reference/#astrocurrentlocale) verwenden, um das aktuelle Gebietsschema in `.astro` Komponenten zu lesen.
+Du kannst [`Astro.currentLocale`](https://docs.astro.build/de/reference/api-reference/#currentlocale) verwenden, um das aktuelle Gebietsschema in `.astro` Komponenten zu lesen.
 
 Das folgende Beispiel liest das aktuelle Gebietsschema aus und verwendet es mit Hilfe der [`getRelativeLocaleUrl()`](https://docs.astro.build/de/reference/modules/astro-i18n/#getrelativelocaleurl)-Methode, um einen Link zu einer Informationsseite in der aktuellen Sprache zu erzeugen:
 

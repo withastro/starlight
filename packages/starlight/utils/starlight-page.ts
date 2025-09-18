@@ -1,6 +1,8 @@
 import { z } from 'astro/zod';
-import { type ContentConfig, type SchemaContext } from 'astro:content';
+import { type ContentConfig, type ImageFunction, type SchemaContext } from 'astro:content';
+import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
+import { getCollectionPathFromRoot } from './collection';
 import { parseWithFriendlyErrors, parseAsyncWithFriendlyErrors } from './error-map';
 import { stripLeadingAndTrailingSlashes } from './path';
 import {
@@ -8,16 +10,16 @@ import {
 	getSiteTitleHref,
 	getToC,
 	type PageProps,
-	type StarlightRouteData,
-} from './route-data';
-import type { StarlightDocsEntry } from './routing';
+	type RouteDataContext,
+} from './routing/data';
+import type { StarlightDocsEntry, StarlightRouteData } from './routing/types';
 import { slugToLocaleData, urlToSlug } from './slugs';
 import { getPrevNextLinks, getSidebar, getSidebarFromConfig } from './navigation';
 import { docsSchema } from '../schema';
 import type { Prettify, RemoveIndexSignature } from './types';
-import { DeprecatedLabelsPropProxy } from './i18n';
 import { SidebarItemSchema } from '../schemas/sidebar';
 import type { StarlightConfig, StarlightUserConfig } from './user-config';
+import { getHead } from './head';
 
 /**
  * The frontmatter schema for Starlight pages derived from the default schema for Starlight’s
@@ -97,23 +99,24 @@ export type StarlightPageProps = Prettify<
  */
 type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
 	/**
-	 * The unique ID for this Starlight page which cannot be inferred from codegen like content
-	 * collection entries.
+	 * The unique ID if using the `legacy.collections` for this Starlight page which cannot be
+	 * inferred from codegen like content collection entries or the slug.
 	 */
 	id: string;
 };
 
 export async function generateStarlightPageRouteData({
 	props,
-	url,
+	context,
 }: {
 	props: StarlightPageProps;
-	url: URL;
+	context: RouteDataContext;
 }): Promise<StarlightRouteData> {
-	const { isFallback, frontmatter, ...routeProps } = props;
+	const { frontmatter, ...routeProps } = props;
+	const { url } = context;
 	const slug = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = `${stripLeadingAndTrailingSlashes(slug)}.md`;
+	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
 	const localeData = slugToLocaleData(slug);
 	const sidebar = props.sidebar
 		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
@@ -124,6 +127,7 @@ export async function generateStarlightPageRouteData({
 		slug,
 		body: '',
 		collection: 'docs',
+		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(slug)}.md`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {
@@ -141,6 +145,17 @@ export async function generateStarlightPageRouteData({
 	const editUrl = pageFrontmatter.editUrl ? new URL(pageFrontmatter.editUrl) : undefined;
 	const lastUpdated =
 		pageFrontmatter.lastUpdated instanceof Date ? pageFrontmatter.lastUpdated : undefined;
+	const pageProps: PageProps = {
+		...routeProps,
+		...localeData,
+		entry,
+		entryMeta,
+		headings,
+		id,
+		locale: localeData.locale,
+		slug,
+	};
+	const siteTitle = getSiteTitle(localeData.lang);
 	const routeData: StarlightRouteData = {
 		...routeProps,
 		...localeData,
@@ -149,52 +164,37 @@ export async function generateStarlightPageRouteData({
 		entry,
 		entryMeta,
 		hasSidebar: props.hasSidebar ?? entry.data.template !== 'splash',
+		head: getHead(pageProps, context, siteTitle),
 		headings,
-		labels: DeprecatedLabelsPropProxy,
 		lastUpdated,
 		pagination: getPrevNextLinks(sidebar, config.pagination, entry.data),
 		sidebar,
-		siteTitle: getSiteTitle(localeData.lang),
+		siteTitle,
 		siteTitleHref: getSiteTitleHref(localeData.locale),
 		slug,
-		toc: getToC({
-			...routeProps,
-			...localeData,
-			entry,
-			entryMeta,
-			headings,
-			id,
-			locale: localeData.locale,
-			slug,
-		}),
+		toc: getToC(pageProps),
 	};
-	if (isFallback) {
-		routeData.isFallback = true;
-	}
 	return routeData;
 }
 
 /** Validates the Starlight page frontmatter properties from the props received by a Starlight page. */
 async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter) {
-	// This needs to be in sync with ImageMetadata.
-	// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
 	const schema = await StarlightPageFrontmatterSchema({
-		image: () =>
-			z.object({
-				src: z.string(),
-				width: z.number(),
-				height: z.number(),
-				format: z.union([
-					z.literal('png'),
-					z.literal('jpg'),
-					z.literal('jpeg'),
-					z.literal('tiff'),
-					z.literal('webp'),
-					z.literal('gif'),
-					z.literal('svg'),
-					z.literal('avif'),
-				]),
-			}),
+		image: (() =>
+			// Mock validator for ImageMetadata.
+			// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
+			// It uses a custom validation approach because imported SVGs have a type of `function` as
+			// well as containing the metadata properties and this ensures we handle those correctly.
+			z.custom(
+				(value) =>
+					(value &&
+						(typeof value === 'function' || typeof value === 'object') &&
+						'src' in value &&
+						'width' in value &&
+						'height' in value &&
+						'format' in value) as ReturnType<ImageFunction>,
+				'Invalid image passed to `<StarlightPage>` component. Expected imported `ImageMetadata` object.'
+			)) as ImageFunction,
 	});
 
 	// Starting with Astro 4.14.0, a frontmatter schema that contains collection references will
@@ -211,5 +211,5 @@ async function getUserDocsSchema(): Promise<
 	NonNullable<ContentConfig['collections']['docs']['schema']>
 > {
 	const userCollections = (await import('virtual:starlight/collection-config')).collections;
-	return userCollections?.docs.schema ?? docsSchema();
+	return userCollections?.docs?.schema ?? docsSchema();
 }

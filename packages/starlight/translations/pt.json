@@ -25,5 +25,6 @@
   "aside.caution": "Cuidado",
   "aside.danger": "Perigo",
   "fileTree.directory": "Directory",
-  "builtWithStarlight.label": "Feito com Starlight"
+  "builtWithStarlight.label": "Feito com Starlight",
+  "heading.anchorLabel": "Seção intitulada “{{title}}”"
 }

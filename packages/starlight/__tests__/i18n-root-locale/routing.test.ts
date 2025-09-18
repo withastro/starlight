@@ -1,7 +1,9 @@
+import project from 'virtual:starlight/project-context';
+import { getRouteDataTestContext } from '../test-utils';
 import config from 'virtual:starlight/user-config';
 import { assert, expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
-import { generateRouteData } from '../../utils/route-data';
+import { generateRouteData } from '../../utils/routing/data';
 import * as git from 'virtual:starlight/git-info';
 
 vi.mock('astro:content', async () =>
@@ -9,9 +11,7 @@ vi.mock('astro:content', async () =>
 		docs: [
 			['404.md', { title: 'Page introuvable' }],
 			['index.mdx', { title: 'Accueil' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['en/index.mdx', { title: 'Home page' }],
-			// @ts-expect-error — Using a slug not present in Starlight docs site
 			['ar/index.mdx', { title: 'الصفحة الرئيسية' }],
 			[
 				'guides/authoring-content.mdx',
@@ -61,7 +61,13 @@ test('fallback routes have fallback locale data in entryMeta', () => {
 });
 
 test('fallback routes use their own locale data', () => {
-	const enGuide = routes.find((route) => route.id === 'en/guides/authoring-content.mdx');
+	const enGuide = routes.find(
+		(route) =>
+			route.id ===
+			(project.legacyCollections
+				? 'en/guides/authoring-content.mdx'
+				: 'en/guides/authoring-content')
+	);
 	if (!enGuide)
 		throw new Error('Expected to find English fallback route for authoring-content.mdx');
 	expect(enGuide.locale).toBe('en');
@@ -78,13 +84,13 @@ test('fallback routes use fallback entry last updated dates', () => {
 			...route,
 			headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }],
 		},
-		url: new URL('https://example.com/en'),
+		context: getRouteDataTestContext('/en'),
 	});
 
 	expect(getNewestCommitDate).toHaveBeenCalledOnce();
 	expect(getNewestCommitDate).toHaveBeenCalledWith(
-		'guides/authoring-content.mdx'
-		//^ no `en/` prefix
+		'src/content/docs/guides/authoring-content.mdx'
+		//               ^ no `en/` prefix
 	);
 
 	getNewestCommitDate.mockRestore();

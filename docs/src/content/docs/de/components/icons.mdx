@@ -29,7 +29,7 @@ import { Icon } from '@astrojs/starlight/components';
 ## Verwendung
 
 Zeigt ein Symbol mit der Komponente `<Icon>` an.
-Ein Symbole benötigt einen [`name`](#name), der auf [eines der in Starlight eingebauten Icons](/de/reference/icons/#alle-symbole) gesetzt ist, und kann optional ein [`label`](#label) enthalten, um Kontext für Screenreader zu liefern.
+Ein Symbole benötigt einen [`name`](#name), der auf [eines der in Starlight eingebauten Symbolen](/de/reference/icons/#alle-symbole) gesetzt ist, und kann optional ein [`label`](#label) enthalten, um Kontext für Screenreader zu liefern.
 
 <Preview>
 
@@ -95,7 +95,7 @@ Die Komponente `<Icon>` akzeptiert die folgenden Eigenschaften:
 ### `name`
 
 **Erforderlich**  
-**Typ:** `string`
+**Typ:** [`StarlightIcon`](/de/reference/icons/#starlighticon-typ)
 
 Der Name des anzuzeigenden Symbols wird auf [eines der in Starlight integrierten Symbole](/de/reference/icons/#alle-symbole) gesetzt.
 
@@ -103,7 +103,7 @@ Der Name des anzuzeigenden Symbols wird auf [eines der in Starlight integrierten
 
 **Typ:** `string`
 
-Eine optionale Beschriftung, die den Kontext für unterstützende Technologien wie Bildschirmlesegeräte liefert.
+Eine optionale Beschriftung, die den Kontext für unterstützende Technologien wie Bildschirm&shy;lesegeräte liefert.
 
 Wenn `label` nicht gesetzt ist, wird das Symbol von assistiven Technologien vollständig ausgeblendet.
 In diesem Fall ist darauf zu achten, dass der Kontext auch ohne das Symbol verständlich ist.

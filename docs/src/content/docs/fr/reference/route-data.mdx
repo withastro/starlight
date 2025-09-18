@@ -1,0 +1,204 @@
+---
+title: Référence des données de route
+description: La documentation de référence complète pour l'objet de données de route de Starlight.
+---
+
+L'objet de données de route de Starlight contient des informations sur la page courante.
+Apprenez-en plus sur le fonctionnement du modèle de données de Starlight dans le [guide « Données de route »](/fr/guides/route-data/).
+
+Dans les composants Astro, accédez aux données de route à partir de `Astro.locals.starlightRoute` :
+
+```astro {4}
+---
+// src/components/Custom.astro
+
+const { hasSidebar } = Astro.locals.starlightRoute;
+---
+```
+
+Dans un [middleware de route](/fr/guides/route-data/#personnalisation-des-données-de-route), accédez aux données de route à partir de l'objet de contexte passé à votre fonction middleware :
+
+```ts {5}
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	const { hasSidebar } = context.locals.starlightRoute;
+});
+```
+
+## `starlightRoute`
+
+L'objet `starlightRoute` contient les propriétés suivantes :
+
+### `dir`
+
+**Type :** `'ltr' | 'rtl'`
+
+Le sens d’écriture de la page.
+
+### `lang`
+
+**Type :** `string`
+
+L'étiquette d'identification BCP-47 pour la langue de la page, par exemple `en`, `zh-CN` ou `pt-BR`.
+
+### `locale`
+
+**Type :** `string | undefined`
+
+Le chemin de base utilisé pour servir une langue. `undefined` pour les slugs de la locale racine.
+
+### `siteTitle`
+
+**Type :** `string`
+
+Le titre du site pour la langue de cette page.
+
+### `siteTitleHref`
+
+**Type :** `string`
+
+La valeur de l'attribut `href` du titre du site, renvoyant à la page d'accueil, par exemple `/`.
+Pour les sites multilingues, cette valeur inclura la locale actuelle, par exemple `/fr/` ou `/zh-cn/`.
+
+### `slug`
+
+**Type :** `string`
+
+Le slug de la page généré à partir du nom du fichier du contenu.
+
+Cette propriété est dépréciée et sera supprimée dans une version future de Starlight.
+Migrez vers la nouvelle API Content Layer en utilisant le [`docsLoader` de Starlight](/fr/manual-setup/#configurer-les-collections-de-contenu) et utilisez la propriété [`id`](#id) à la place.
+
+### `id`
+
+**Type :** `string`
+
+Le slug de cette page ou l'identifiant unique de cette page basé sur le nom du fichier du contenu si l'option [`legacy.collections`](https://docs.astro.build/fr/reference/legacy-flags/#collections) est utilisée.
+
+### `isFallback`
+
+**Type :** `boolean | undefined`
+
+`true` si cette page n'est pas traduite dans la langue actuelle et utilise le contenu de la langue par défaut en tant que repli.
+Utilisé uniquement dans les sites multilingues.
+
+### `entryMeta`
+
+**Type :** `{ dir: 'ltr' | 'rtl'; lang: string }`
+
+Métadonnées de la locale pour le contenu de la page. Peut être différent des valeurs de locale de premier niveau lorsque la page utilise un contenu de repli.
+
+### `entry`
+
+L'entrée de la collection de contenu Astro pour la page courante.
+Inclut les valeurs du frontmatter pour la page courante dans `entry.data`.
+
+```ts
+entry: {
+	data: {
+		title: string;
+		description: string | undefined;
+		// etc.
+	}
+}
+```
+
+Pour en savoir plus sur le format de cet objet, consultez la [référence du type d'entrée de collection](https://docs.astro.build/fr/reference/modules/astro-content/#collectionentry).
+
+### `sidebar`
+
+**Type :** `SidebarEntry[]`
+
+Les entrées de la barre latérale de navigation du site pour cette page.
+
+### `hasSidebar`
+
+**Type :** `boolean`
+
+Indique si la barre latérale est affichée sur cette page.
+
+### `pagination`
+
+**Type :** `{ prev?: Link; next?: Link }`
+
+Liens vers la page précédente et suivante dans la barre latérale si celle-ci est activée.
+
+### `toc`
+
+**Type :** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+
+Table des matières de la page courante si celle-ci est activée.
+
+### `headings`
+
+**Type :** `{ depth: number; slug: string; text: string }[]`
+
+Un tableau de toutes les en-têtes Markdown extraites de la page courante.
+Utilisez [`toc`](#toc) à la place si vous souhaitez construire un composant de table des matières qui respecte les options de configuration de Starlight.
+
+### `lastUpdated`
+
+**Type :** `Date | undefined`
+
+Un objet JavaScript de type `Date` représentant la date de dernière mise à jour de cette page si cette fonctionnalité est activée.
+
+### `editUrl`
+
+**Type :** `URL | undefined`
+
+Un objet `URL` de l'adresse où cette page peut être modifiée si cette fonctionnalité est activée.
+
+### `head`
+
+**Type :** [`HeadConfig[]`](/fr/reference/configuration/#headconfig)
+
+Tableau de toutes les balises à inclure à l’intérieur de l’élément `<head>` de la page courante.
+Inclut des balises importantes comme `<title>` et `<meta charset="utf-8">`.
+
+## Utilitaires
+
+### `defineRouteMiddleware()`
+
+Utilisez l'utilitaire `defineRouteMiddleware()` pour vous aider à typer votre module de middleware de route :
+
+```ts "defineRouteMiddleware"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	// ...
+});
+```
+
+### Type `StarlightRouteData`
+
+Si vous écrivez du code qui utilise les données de route de Starlight, vous pouvez importer le type `StarlightRouteData` qui correspond au format de `Astro.locals.starlightRoute`.
+
+Dans l'exemple suivant, une fonction `usePageTitleInTOC()` met à jour les données de route pour utiliser le titre de la page courante comme libellé du premier élément de la table des matières, remplaçant le libellé par défaut « Sur cette page ».
+Le type `StarlightRouteData` vous permet de vérifier si les modifications des données de route sont valides.
+
+```ts "StarlightRouteData"
+// src/route-utils.ts
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+export function usePageTitleInTOC(starlightRoute: StarlightRouteData) {
+	const overviewLink = starlightRoute.toc?.items[0];
+	if (overviewLink) {
+		overviewLink.text = starlightRoute.entry.data.title;
+	}
+}
+```
+
+Cette fonction peut ensuite être appelée à partir d'un middleware de route :
+
+```ts {3,6}
+// src/route-middleware.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { usePageTitleInTOC } from './route-utils';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	usePageTitleInTOC(context.locals.starlightRoute);
+});
+```

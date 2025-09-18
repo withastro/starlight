@@ -182,23 +182,24 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 <LanguagesList startsSentence /> — все переведённые строки пользовательского
 интерфейса на указанных языках предоставляются «из коробки», и мы приветствуем
-[вклад в добавление дополнительных языков по
-умолчанию](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
+[вклад в добавление новых
+языков](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
 Вы можете добавить переводы для дополнительных языков, которые вы поддерживаете — или переопределить наши стандартные тексты — через коллекцию данных `i18n`.
 
 <Steps>
 
-1. Сконфигурируйте коллекцию данных `i18n` в `src/content/config.ts`, если она ещё не настроена:
+1. Сконфигурируйте коллекцию данных `i18n` в `src/content.config.ts`, если она ещё не настроена:
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+    docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +  i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -221,7 +222,7 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
    <UIStringsList />
 
-   Блоки кода Starlight основаны на библиотеке [Expressive Code](https://github.com/expressive-code/expressive-code).
+   Блоки кода Starlight основаны на библиотеке [Expressive Code](https://expressive-code.com/).
    Вы можете установить переводы для строк пользовательского интерфейса в том же файле JSON, используя ключи `expressiveCode`:
 
    ```json
@@ -252,20 +253,21 @@ import UIStringsList from '~/components/ui-strings-list.astro';
 
 </Steps>
 
-### Расширение схемы перевода
+### Расширение схемы переводов
 
 Добавьте пользовательские ключи в словари переводов вашего сайта, установив `extend` в опциях `i18nSchema()`.
 В следующем примере к ключам по умолчанию добавляется новый необязательный ключ `custom.label`:
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -277,12 +279,12 @@ export const collections = {
 
 Дополнительную информацию о схемах коллекции контента см. в разделе [Определение схемы коллекции](https://docs.astro.build/ru/guides/content-collections/#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%85%D0%B5%D0%BC%D1%8B-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8) в документации Astro.
 
-## Использование переводов пользовательского интерфейса
+## Использование UI-переводов
 
-Вы можете получить доступ к [встроенным строкам пользовательского интерфейса](/ru/guides/i18n/#перевод-интерфейса-starlight) Starlight, а также к [пользовательским](/ru/guides/i18n/#расширение-схемы-перевода) и [предоставляемым плагинами](/ru/reference/plugins/#injecttranslations) строкам пользовательского интерфейса через единый API на базе [i18next](https://www.i18next.com/).
+Вы можете получить доступ к [встроенным строкам пользовательского интерфейса](/ru/guides/i18n/#перевод-интерфейса-starlight) Starlight, а также к [пользовательским](/ru/guides/i18n/#расширение-схемы-переводов) и [предоставляемым плагинами](/ru/reference/plugins/#injecttranslations) строкам пользовательского интерфейса через единый API на базе [i18next](https://www.i18next.com/).
 Это включает поддержку таких функций, как [интерполяция](https://www.i18next.com/translation-function/interpolation) и [плюрализация](https://www.i18next.com/translation-function/plurals).
 
-В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/ru/reference/api-reference/#astrolocals) в виде `Astro.locals.t`:
+В компонентах Astro этот API доступен как часть [глобального объекта `Astro`](https://docs.astro.build/en/reference/api-reference/#locals) в виде `Astro.locals.t`:
 
 ```astro title="example.astro"
 <p dir={Astro.locals.t.dir()}>
@@ -290,13 +292,16 @@ export const collections = {
 </p>
 ```
 
-Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/ru/reference/api-reference/#contextlocals):
+Вы также можете использовать API в [эндпойнтах](https://docs.astro.build/ru/guides/endpoints/), где объект `locals` доступен как часть контекста [эндпойнта](https://docs.astro.build/en/reference/api-reference/#locals):
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {
 	return new Response(context.locals.t('404.text'));
 };
 ```
+
+В контексте плагина Starlight вы можете использовать хелпер [`useTranslations()`](/ru/reference/plugins/#usetranslations) для доступа к этому API для конкретного языка.
+Дополнительную информацию смотрите в [справочнике по плагинам](/ru/reference/plugins/).
 
 ### Рендеринг строки пользовательского интерфейса
 
@@ -356,15 +361,15 @@ const allStrings = Astro.locals.t.all();
 
 #### `t.exists()`
 
-Чтобы проверить, существует ли ключ перевода для локали, используйте функцию `locals.t.exists()` с ключом перевода в качестве первого аргумента.
-Передайте необязательный второй аргумент, если вам нужно переопределить текущую локаль.
+Чтобы проверить, существует ли ключ перевода, используйте функцию `locals.t.exists()` с ключом перевода в качестве первого аргумента.
+Передайте необязательный второй аргумент, если нужно проверить наличие перевода для определённой локали.
 
 ```astro
 ---
 // src/components/Example.astro
-const keyExistsInCurrentLocale = Astro.locals.t.exists('a.key');
+const keyExists = Astro.locals.t.exists('a.key');
 //    ^ true
-const keyExistsInFrench = Astro.locals.t.exists('another.key', { lng: 'fr' });
+const keyExistsInFrench = Astro.locals.t.exists('other.key', { lngs: ['fr'] });
 //    ^ false
 ---
 ```
@@ -391,7 +396,7 @@ const arabicDirection = Astro.locals.t.dir('ar');
 
 ## Доступ к текущей локали
 
-Вы можете использовать [`Astro.currentLocale`](https://docs.astro.build/ru/reference/api-reference/#astrocurrentlocale) для получения текущей локали в компонентах `.astro`.
+Вы можете использовать [`Astro.currentLocale`](https://docs.astro.build/en/reference/api-reference/#currentlocale) для получения текущей локали в компонентах `.astro`.
 
 Следующий пример считывает текущую локаль и использует её с помощью хелпера [`getRelativeLocaleUrl()`](https://docs.astro.build/ru/reference/modules/astro-i18n/#getrelativelocaleurl) для генерации ссылки на страницу «О сайте» на текущем языке:
 

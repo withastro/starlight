@@ -1,0 +1,139 @@
+---
+title: Routendaten
+description: Erfahre, wie das Seitendatenmodell von Starlight zum Rendern deiner Seiten verwendet wird und wie du es anpassen kannst.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Wenn Starlight eine Seite in deiner Dokumentation rendert, erstellt es zunächst ein Routendatenobjekt, das den Inhalt der Seite darstellt.
+In diesem Leitfaden wird erklärt, wie Routendaten erzeugt werden, wie du sie verwendest und wie du sie anpassen kannst, um das Standardverhalten von Starlight zu ändern.
+
+Eine vollständige Liste der verfügbaren Eigenschaften findest du in der [„Routendaten-Referenz“](/de/reference/route-data/).
+
+## Was sind Routendaten?
+
+Starlight-Routendaten sind in einem Objekt enthalten, welches alle Informationen enthält, die zum Rendern einer einzelnen Seite benötigt werden.
+Es enthält Informationen für die aktuelle Seite sowie Daten, die aus deiner Starlight-Konfiguration generiert werden.
+
+## Routendaten verwenden
+
+Alle Starlight-Komponenten verwenden Routendaten, um zu entscheiden, was für jede Seite gerendert werden soll.
+Zum Beispiel wird die Zeichenkette [`siteTitle`](/de/reference/route-data/#sitetitle) verwendet, um den Titel der Seite anzuzeigen, und das Array [`sidebar`](/de/reference/route-data/#sidebar) wird verwendet, um die globale Navigation der Seitenleiste darzustellen.
+
+Du kannst auf diese Daten über das Global `Astro.locals.starlightRoute` in Astro-Komponenten zugreifen:
+
+```astro title="example.astro" {2}
+---
+const { siteTitle } = Astro.locals.starlightRoute;
+---
+
+<p>Der Titel dieser Seite lautet „{siteTitle}“</p>
+```
+
+Das kann zum Beispiel nützlich sein, wenn du [Komponenten&shy;überschreibungen](/de/guides/overriding-components/) erstellst, um die Anzeige anzupassen.
+
+## Anpassen der Routendaten
+
+Starlights Routendaten funktionieren sofort und müssen nicht konfiguriert werden.
+Für fortgeschrittene Anwendungsfälle möchtest du jedoch vielleicht die Routendaten für einige oder alle Seiten anpassen, um die Darstellung deiner Website zu verändern.
+
+Das ist ein ähnliches Konzept wie die [Komponenten&shy;ersetzung](/de/guides/overriding-components/), aber anstatt zu ändern, wie Starlight deine Daten rendert, änderst du die Daten, die Starlight rendert.
+
+### Wann du die Routendaten anpassen solltest
+
+Das Anpassen von Routendaten kann nützlich sein, wenn du die Art und Weise, wie Starlight deine Daten verarbeitet, auf eine Weise ändern möchtest, die mit den bestehenden Konfigurations&shy;optionen nicht möglich ist.
+
+Du kannst zum Beispiel die Elemente in der Seitenleiste filtern oder die Titel für bestimmte Seiten anpassen.
+Bei Änderungen wie dieser müssen die Standardkomponenten von Starlight nicht geändert werden, sondern nur die Daten, die an diese Komponenten übergeben werden.
+
+### Wie du die Routendaten anpasst
+
+Du kannst die Routendaten mithilfe einer speziellen Form von „Middleware“ anpassen.
+Dies ist eine Funktion, die jedes Mal aufgerufen wird, wenn Starlight eine Seite rendert, und die Werte im Routendatenobjekt ändern kann.
+
+<Steps>
+
+1. Erstelle eine neue Datei, die eine `onRequest`-Funktion mit Starlights `defineRouteMiddleware()`-Dienstprogramm exportiert:
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware(() => {});
+   ```
+
+2. Teile Starlight in der Datei `astro.config.mjs` mit, wo sich deine Routendaten-Middleware-Datei befindet:
+
+   ```js ins={9}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Meine wunderbare Dokumentationswebsite',
+   			routeMiddleware: './src/routeData.ts',
+   		}),
+   	],
+   });
+   ```
+
+3. Aktualisiere deine `onRequest`-Funktion, um die Routendaten zu ändern.
+
+   Das erste Argument, das deine Middleware erhält, ist [Astros `context`-Objekt](https://docs.astro.build/de/reference/api-reference/).
+   Es enthält alle Informationen über die aktuell gerenderte Seite, einschließlich der aktuellen URL und `locals`.
+
+   In diesem Beispiel werden wir unsere Dokumentation spannender machen, indem wir ein Ausrufezeichen am Ende jedes Seitentitels hinzufügen.
+
+   ```ts
+   // src/routeData.ts
+   import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+   export const onRequest = defineRouteMiddleware((context) => {
+   	// Hol dir den Eintrag der Inhaltssammlung für diese Seite.
+   	const { entry } = context.locals.starlightRoute;
+   	// Aktualisiere den Titel, um ein Ausrufezeichen hinzuzufügen.
+   	entry.data.title = entry.data.title + '!';
+   });
+   ```
+
+</Steps>
+
+#### Mehrere Routen-Middleware
+
+Starlight unterstützt auch die Bereitstellung mehrerer Middlewares.
+Setze `routeMiddleware` auf ein Array von Pfaden, um mehr als einen Middleware-Handler hinzuzufügen:
+
+```js {9}
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+			title: 'Meine Website mit mehreren Middlewares',
+			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
+		}),
+	],
+});
+```
+
+#### Warten auf spätere Routen-Middleware
+
+Um darauf zu warten, dass die Middleware später im Stapel ausgeführt wird, bevor du deinen Code ausführst, kannst du den `next()` Callback abwarten, der als zweites Argument an deine Middleware-Funktion übergeben wird.
+Das kann z.&nbsp;B. nützlich sein, um zu warten, bis die Middleware eines Plugins läuft, bevor du Änderungen vornimmst.
+
+```ts "next" "await next();"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware(async (context, next) => {
+	// Warte darauf, dass die spätere Middleware ausgeführt wird.
+	await next();
+	// Ändere die Routendaten.
+	const { entry } = context.locals.starlightRoute;
+	entry.data.title = entry.data.title + '!';
+});
+```

@@ -3,26 +3,6 @@ import { AstroError } from 'astro/errors';
 import type { StarlightConfig } from './user-config';
 
 /**
- * A proxy object that throws an error when a user tries to access the deprecated `labels` prop in
- * a component override.
- *
- * @todo Remove in a future release once people have updated — no later than v1.
- */
-export const DeprecatedLabelsPropProxy = new Proxy<Record<string, never>>(
-	{},
-	{
-		get(_, key) {
-			const label = String(key);
-			throw new AstroError(
-				`The \`labels\` prop in component overrides has been removed.`,
-				`Replace \`Astro.props.labels["${label}"]\` with \`Astro.locals.t("${label}")\` instead.\n` +
-					'For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations'
-			);
-		},
-	}
-);
-
-/**
  * A list of well-known right-to-left languages used as a fallback when determining the text
  * direction of a locale is not supported by the `Intl.Locale` API in the current environment.
  *
@@ -73,8 +53,14 @@ export function processI18nConfig(
 /** Generate an Astro i18n configuration based on a Starlight configuration. */
 function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i18n']> {
 	return {
+		// When using custom locale `path`s, the default locale must match one of these paths.
+		// In Starlight, this matches the `locale` property if defined, and we fallback to the `lang`
+		// property if not (which would be set to the language’s directory name by default).
 		defaultLocale:
-			config.defaultLocale.lang ?? config.defaultLocale.locale ?? BuiltInDefaultLocale.lang,
+			// If the default locale is explicitly set to `root`, we use the `lang` property instead.
+			(config.defaultLocale.locale === 'root'
+				? config.defaultLocale.lang
+				: (config.defaultLocale.locale ?? config.defaultLocale.lang)) ?? BuiltInDefaultLocale.lang,
 		locales: config.locales
 			? Object.entries(config.locales).map(([locale, localeConfig]) => {
 					return {
@@ -90,8 +76,6 @@ function getAstroI18nConfig(config: StarlightConfig): NonNullable<AstroConfig['i
 				// Sites with a single non-root language different from the built-in default locale.
 				(!config.isMultilingual && config.locales !== undefined),
 			redirectToDefaultLocale: false,
-			// TODO: remove this ignore comment for Astro v5
-			// @ts-ignore — Only used in Astro >=4.15.0, but Starlight supports ^4.8.6
 			fallbackType: 'redirect',
 		},
 	};
@@ -185,7 +169,7 @@ function getLocaleInfo(lang: string) {
 			label: label[0]?.toLocaleUpperCase(locale) + label.slice(1),
 			dir: getLocaleDir(locale),
 		};
-	} catch (error) {
+	} catch {
 		throw new AstroError(
 			`Failed to get locale informations for the '${lang}' locale.`,
 			'Make sure to provide a valid BCP-47 tags (e.g. en, ar, or zh-CN).'
@@ -200,9 +184,11 @@ function getLocaleInfo(lang: string) {
 function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
 	if ('textInfo' in locale) {
 		// @ts-expect-error - `textInfo` is not typed but is available in v8 based environments.
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return locale.textInfo.direction;
 	} else if ('getTextInfo' in locale) {
 		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
 		return locale.getTextInfo().direction;
 	}
 	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list

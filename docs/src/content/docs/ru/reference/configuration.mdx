@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**тип:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**по умолчанию:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**тип:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**по умолчанию:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 Настройте оглавление, отображаемое справа на каждой странице. По умолчанию в оглавление будут включены заголовки `<h2>` и `<h3>`.
 
@@ -224,7 +224,11 @@ type SidebarItem =
 			| {
 					// Автоматически созданная группа ссылок
 					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
+					autogenerate: {
+						directory: string;
+						collapsed?: boolean;
+						attrs?: Record<string, string | number | boolean | undefined>;
+					};
 					collapsed?: boolean;
 			  }
 	  ));
@@ -267,6 +271,11 @@ export default defineConfig({
 				'zh-cn': {
 					label: '简体中文',
 					lang: 'zh-CN',
+				},
+				// Арабская документация в `src/content/docs/ar/`
+				ar: {
+					label: 'العربية',
+					dir: 'rtl',
 				},
 				// Русская документация в `src/content/docs/ru/`
 				ru: {
@@ -340,28 +349,21 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**тип:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/ru/reference/icons/){`; href: string }>`}</code>
 
-**тип:** <SocialLinksType />
-
-Дополнительные сведения об аккаунтах в социальных сетях для этого сайта. При добавлении любого из них они будут отображаться в виде ссылок-иконок в шапке сайта.
+Необязательные данные об аккаунтах в социальных сетях для этого сайта.
+Каждая запись будет отображаться в виде иконки-ссылки в шапке сайта.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+	social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -378,15 +380,38 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**тип:** `{ headingLinks?: boolean }`  
+**по умолчанию:** `{ headingLinks: true }`
+
+Настройте обработку Markdown в Starlight.
+
+#### `headingLinks`
+
+**тип:** `boolean`  
+**по умолчанию:** `true`
+
+Определяет, будут ли заголовки отображаться с кликабельной якорной ссылкой.
+
+```js
+starlight({
+	markdown: {
+		// Отключаем кликабельные якорные ссылки заголовков в Starlight.
+		headingLinks: false,
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **тип:** `StarlightExpressiveCodeOptions | boolean`  
 **по умолчанию:** `true`
 
-Starlight использует [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code) для визуализации блоков кода и добавляет поддержку выделения частей примеров кода, добавления имён файлов к блокам кода и многое другое.
+Starlight использует [Expressive Code](https://expressive-code.com) для визуализации блоков кода и добавляет поддержку выделения частей примеров кода, добавления имён файлов к блокам кода и многое другое.
 Смотрите руководство [Блоки кода](/ru/guides/authoring-content/#блоки-кода), чтобы узнать, как использовать синтаксис выразительного кода в Markdown и MDX-содержимом.
 
-Вы также можете использовать любые стандартные [параметры конфигурации Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration), как некоторые свойства, специфичные для Starlight, установив их в опции `expressiveCode` Starlight.
+Вы также можете использовать любые стандартные [параметры конфигурации Expressive Code](https://expressive-code.com/reference/configuration/), как некоторые свойства, специфичные для Starlight, установив их в опции `expressiveCode` Starlight.
 Например, установите опцию `styleOverrides` в Expressive Code, чтобы переопределить CSS по умолчанию. Это позволяет настраивать код, например, сделать блокам кода закругленные углы:
 
 ```js ins={2-4}
@@ -413,7 +438,7 @@ starlight({
 **по умолчанию:** `['starlight-dark', 'starlight-light']`
 
 Установите темы, используемые для оформления блоков кода.
-См. [документацию по темам Expressive Code](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes) для получения подробной информации о поддерживаемых форматах тем.
+См. [документацию по темам Expressive Code](https://expressive-code.com/guides/themes/) для получения подробной информации о поддерживаемых форматах тем.
 
 По умолчанию Starlight использует тёмный и светлый варианты [темы Night Owl](https://github.com/sdras/night-owl-vscode-theme) Сары Драснер.
 
@@ -446,22 +471,55 @@ starlight({
 
 ### `pagefind`
 
-**тип:** `boolean`  
+**тип:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **по умолчанию:** `true`
 
-Определите, включен ли в Starlight поставщик поиска по сайту по умолчанию — [Pagefind](https://pagefind.app/).
+Настройте стандартный поставщик поиска по сайту Starlight — [Pagefind](https://pagefind.app/).
 
 Установите значение `false`, чтобы отключить индексацию вашего сайта с помощью Pagefind.
 Это также скроет стандартный пользовательский интерфейс поиска, если он используется.
 
 Pagefind не может быть включен, если для параметра [`prerender`](#prerender) установлено значение `false`.
 
+Установите объект в качестве значения `pagefind` для настройки клиента поиска Pagefind:
+
+- Смотрите [Настройка ранжирования результатов Pagefind (English)](https://pagefind.app/docs/ranking/) в документации Pagefind для получения дополнительных сведений об использовании опции `pagefind.ranking` для управления порядком сортировки результатов поиска.
+- Смотрите [Поиск по нескольким сайтам (English)](https://pagefind.app/docs/multisite/) в документации Pagefind для получения дополнительных сведений об использовании опции `pagefind.mergeIndex` для управления поиском по нескольким сайтам.
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
+
 ### `prerender`
 
 **тип:** `boolean`  
 **по умолчанию:** `true`
 
-Определите, должны ли страницы Starlight предварительно отрисовываться в статический HTML или отрисовываться по требованию с помощью [SSR-адаптера](https://docs.astro.build/ru/guides/server-side-rendering/).
+Определите, должны ли страницы Starlight предварительно отрисовываться в статический HTML или отрисовываться по требованию с помощью [SSR-адаптера](https://docs.astro.build/ru/guides/on-demand-rendering/).
 
 Страницы Starlight предварительно отрисовываются по умолчанию.
 Если вы используете адаптер SSR и хотите рендерить страницы Starlight по требованию, установите `prerender: false`.
@@ -567,7 +625,16 @@ starlight({
 **тип:** `boolean`  
 **по умолчанию:** `false`
 
-Отключает внедрение стандартной [страницы 404](https://docs.astro.build/ru/core-concepts/astro-pages/#custom-404-error-page) Starlight. Чтобы использовать в своем проекте собственный маршрут `src/pages/404.astro`, установите для этого параметра значение `true`.
+Отключает внедрение стандартной [страницы 404](https://docs.astro.build/ru/basics/astro-pages/#custom-404-error-page) Starlight. Чтобы использовать в своем проекте собственный маршрут `src/pages/404.astro`, установите для этого параметра значение `true`.
+
+### `routeMiddleware`
+
+**тип:** `string | string[]`
+
+Укажите пути к мидлвару маршрута, который может изменять обработку данных в Starlight.  
+Эти пути к файлам не должны конфликтовать с [мидлварами Astro](https://docs.astro.build/ru/guides/middleware/).
+
+Подробнее о создании мидлваров маршрута см. в [руководстве по данным маршрута](/ru/guides/route-data/#настройка-данных-маршрута).
 
 ### `components`
 
@@ -604,6 +671,9 @@ starlight({
 
 ### `credits`
 
+**тип:** `boolean`  
+**по умолчанию:** `false`
+
 Включите отображение ссылки «Сделано с помощью Starlight» в подвале вашего сайта.
 
 ```js
@@ -611,3 +681,118 @@ starlight({
 	credits: true,
 });
 ```
+
+## Настройка коллекций контента
+
+Starlight использует [коллекции контента](https://docs.astro.build/ru/guides/content-collections/) Astro для загрузки вашего контента.
+Загрузчики контента и схемы Starlight помогают настроить коллекции в соответствии с вашими потребностями.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// Необязательно: коллекция i18n используется для перевода
+	// пользовательского интерфейса на многоязычных сайтах
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### Загрузчики
+
+Starlight экспортирует следующие [загрузчики Astro](https://docs.astro.build/ru/reference/content-loader-reference/) из модуля `@astrojs/starlight/loaders`, чтобы упростить настройку коллекций контента.
+
+#### `docsLoader()`
+
+Загрузчик `docsLoader()` загружает локальные файлы Markdown, MDX и Markdoc из директории `src/content/docs/`. Файлы, названия которых начинаются с подчёркивания (`_`), игнорируются.
+
+##### Импорт
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Параметры
+
+###### `generateId()`
+
+**тип:** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+По умолчанию страницы, созданные с помощью `docsLoader()`, обрабатывают имена файлов с помощью «слагификатора» (sluggifier), который удаляет специальные символы и приводит имя к нижнему регистру.  
+Если вы хотите переопределить это поведение, можно предоставить собственную функцию `generateId()`.
+
+Например, это может быть полезно для сохранения специальных символов, которые в противном случае были бы удалены.  
+По умолчанию файл `Example.File.md` будет доступен по пути `/examplefile`.  
+Если нужно, чтобы он был доступен по пути `/Example.File`, можно определить кастомную функцию `generateId()`:
+
+```js
+docsLoader({
+	// Удаляет расширение `.md` или `.mdx`, но в остальном не изменяет названия файлов.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+Подробнее см. [`generateId()` в документации Astro](https://docs.astro.build/ru/reference/content-loader-reference/#generateid).
+
+#### `i18nLoader()`
+
+Загрузчик `i18nLoader()` загружает локальные файлы JSON и YAML из директории `src/content/i18n/`.  
+Файлы, названия которых начинаются с подчёркивания (`_`), игнорируются.
+
+##### Импорт
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### Параметры
+
+На данный момент у `i18nLoader()` нет доступных параметров.
+
+### Схемы
+
+Starlight предоставляет следующие [схемы для коллекций контента](https://docs.astro.build/ru/guides/content-collections/#%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%85%D0%B5%D0%BC%D1%8B-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8) из модуля `@astrojs/starlight/schema`.  
+Эти схемы обязательны для использования в коллекциях `docs` и `i18n`, от которых зависит Starlight.
+
+#### `docsSchema()`
+
+`schema()` обрабатывает метаданные для всего контента в коллекции `docs`.
+
+##### Импорт
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### Параметры
+
+###### `extend`
+
+**тип:** схема Zod или функция, возвращающая схему Zod  
+**по умолчанию:** `z.object({})`
+
+Расширяет схему метаданных Starlight дополнительными полями.  
+Подробнее об использовании опции `extend` см. в разделе [Настройка схемы метаданных](/ru/reference/frontmatter/#настройка-схемы-метаданных).
+
+#### `i18nSchema()`
+
+Схема `i18nSchema()` обрабатывает все файлы данных в коллекции `i18n`.
+
+##### Импорт
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### Параметры
+
+###### `extend`
+
+**тип:** объект Zod  
+**по умолчанию:** `z.object({})`
+
+Расширяет схему интернационализации (i18n) Starlight дополнительными полями.  
+Подробнее об использовании опции `extend` см. в разделе [Расширение схемы переводов](/ru/guides/i18n/#расширение-схемы-переводов).

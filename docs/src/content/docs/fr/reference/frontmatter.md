@@ -33,13 +33,13 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type**: `string`
 
-Remplace le slug de la page. Consultez [« Définition d’un slug personnalisé »](https://docs.astro.build/fr/guides/content-collections/#d%C3%A9finition-dun-slug-personnalis%C3%A9e) dans la documentation d'Astro pour plus de détails.
+Remplace le slug de la page. Consultez [« Définition d’identifiants personnalisés »](https://docs.astro.build/fr/guides/content-collections/#définition-didentifiants-personnalisés) dans la documentation d'Astro pour plus de détails.
 
 ### `editUrl`
 
 **Type :** `string | boolean`
 
-Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Modifier cette page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
+Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien « Modifier cette page » pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
@@ -68,7 +68,7 @@ Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la
 ```md
 ---
 # src/content/docs/exemple.md
-title: Pagee avec seulement des H2s dans la table des matières
+title: Page avec seulement des H2 dans la table des matières
 tableOfContents:
   minHeadingLevel: 2
   maxHeadingLevel: 2
@@ -90,7 +90,7 @@ tableOfContents: false
 
 Définit le modèle de mise en page pour cette page.
 Les pages utilisent la mise en page `'doc'`' par défaut.
-La valeur `'splash''` permet d'utiliser une mise en page plus large, sans barres latérales, conçue pour les pages d'atterrissage.
+La valeur `'splash'` permet d'utiliser une mise en page plus large, sans barres latérales, conçue pour les pages d'atterrissage.
 
 ### `hero`
 
@@ -159,7 +159,7 @@ interface HeroConfig {
         alt?: string;
       }
     | {
-        // HTML brut à utiliser dans l'emplacement (slot) de l'image.
+        // HTML brut à utiliser dans le slot de l'image.
         // Peut être une balise `<img>` personnalisée ou une balise `<svg>` en ligne.
         html: string;
       };
@@ -211,7 +211,7 @@ lastUpdated: 2022-08-09
 
 **Type :** `boolean | string | { link?: string; label?: string }`
 
-Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si un string est spécifié, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
+Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si une chaîne de caractères est spécifiée, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
 
 ```md
 ---
@@ -225,7 +225,7 @@ prev: false
 ---
 # src/content/docs/exemple.md
 # Remplacer le texte du lien de la page
-prev: Poursuivre the tutorial
+prev: Poursuivre le tutoriel
 ---
 ```
 
@@ -273,7 +273,7 @@ pagefind: false
 **Type :** `boolean`  
 **Par défaut :** `false`
 
-Définit si cette page doit être considérée comme une ébauche et ne pas être incluse dans les [déploiements en production](https://docs.astro.build/fr/reference/cli-reference/#astro-build) et les [groupes de liens générés automatiquement](/fr/guides/sidebar/#groupes-générés-automatiquement). Définissez la valeur à `true` pour marquer une page comme une ébauche et la rendre visible uniquement pendant le développement.
+Définit si cette page doit être considérée comme une ébauche et ne pas être incluse dans les [déploiements en production](https://docs.astro.build/fr/reference/cli-reference/#astro-build). Définissez la valeur à `true` pour marquer une page comme une ébauche et la rendre visible uniquement pendant le développement.
 
 ```md
 ---
@@ -282,6 +282,9 @@ Définit si cette page doit être considérée comme une ébauche et ne pas êtr
 draft: true
 ---
 ```
+
+Puisque les ébauches ne sont pas incluses lors d'un déploiement, vous ne pouvez pas ajouter des ébauches directement à la configuration de la barre latérale de navigation de votre site en utilisant des [slugs](/fr/guides/sidebar/#liens-internes).
+Les ébauches situées dans des répertoires utilisés dans des [groupes de barre latérale générés automatiquement](/fr/guides/sidebar/#groupes-générés-automatiquement) sont automatiquement exclues des déploiements en production.
 
 ### `sidebar`
 
@@ -311,9 +314,9 @@ Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affi
 ```md
 ---
 # src/content/docs/exemple.md
-title: About this project
+title: À propos de ce projet
 sidebar:
-  label: About
+  label: À propos
 ---
 ```
 
@@ -383,6 +386,7 @@ sidebar:
 **Type :** `Record<string, string | number | boolean | undefined>`
 
 Attributs HTML à ajouter au lien de la page dans la barre latérale lorsqu'il est affiché dans un groupe de liens généré automatiquement.
+Si [`autogenerate.attrs`](/fr/guides/sidebar/#attributs-html-personnalisés-pour-les-liens-générés-automatiquement) est défini pour le groupe généré automatiquement auquel cette page appartient, les attributs du frontmatter seront fusionnés avec les attributs du groupe.
 
 ```md
 ---
@@ -397,19 +401,20 @@ sidebar:
 
 ## Personnaliser le schéma du frontmatter
 
-Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content/config.ts` en utilisant l'utilitaire `docsSchema()` :
+Le schéma du frontmatter de la collection de contenus `docs` de Starlight est configuré dans `src/content.config.ts` en utilisant l'utilitaire `docsSchema()` :
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#defining-a-collection-schema) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
+Consultez [« Définir un schéma de collection de contenus »](https://docs.astro.build/fr/guides/content-collections/#définition-dun-schéma-de-collection) dans la documentation d'Astro pour en savoir plus sur les schémas de collection de contenus.
 
 `docsSchema()` accepte les options suivantes :
 
@@ -419,17 +424,19 @@ Consultez [« Définir un schéma de collection de contenus »](https://docs.ast
 **Par défaut :** `z.object({})`
 
 Étendez le schéma de Starlight avec des champs supplémentaires en définissant `extend` dans les options de `docsSchema()`.
-La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content-collections/#defining-datatypes-with-zod).
+La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content-collections/#définition-des-types-de-données-avec-zod).
 
 Dans l'exemple suivant, nous définissons un type plus strict pour `description` pour le rendre obligatoire et ajouter un nouveau champ `category` facultatif :
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // Rend un champ de base obligatoire au lieu de facultatif.
@@ -442,15 +449,17 @@ export const collections = {
 };
 ```
 
-Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-in-content-collections), utilisez une fonction qui retourne votre extension de schéma :
+Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-dans-les-collections-de-contenu), utilisez une fonction qui retourne votre extension de schéma :
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({

@@ -1,0 +1,9 @@
+{
+  "name": "@e2e/legacy-collection-config-file",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@astrojs/starlight": "workspace:*",
+    "astro": "^5.6.1"
+  }
+}

@@ -1,6 +1,8 @@
 ---
 title: Site Search
 description: Learn about Starlight’s built-in site search features and how to customize them.
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
@@ -110,12 +112,61 @@ With this updated configuration, the search bar on your site will now open an Al
 
 #### DocSearch configuration
 
-The Starlight DocSearch plugin also supports customizing the DocSearch component with the following additional options:
+The Starlight DocSearch plugin supports customizing the DocSearch component with the following inline options:
 
 - `maxResultsPerGroup`: Limit the number of results displayed for each search group. Default is `5`.
 - `disableUserPersonalization`: Prevent DocSearch from saving a user’s recent searches and favorites to local storage. Default is `false`.
 - `insights`: Enable the Algolia Insights plugin and send search events to your DocSearch index. Default is `false`.
 - `searchParameters`: An object customizing the [Algolia Search Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/).
+
+##### Additional DocSearch options
+
+A separate configuration file is required to pass function options like `transformItems()` or `resultsFooterComponent()` to the DocSearch component.
+
+<Steps>
+
+1. Create a TypeScript file exporting your DocSearch configuration.
+
+   ```ts
+   // src/config/docsearch.ts
+   import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+
+   export default {
+   	appId: 'YOUR_APP_ID',
+   	apiKey: 'YOUR_SEARCH_API_KEY',
+   	indexName: 'YOUR_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
+   } satisfies DocSearchClientOptions;
+   ```
+
+2. Pass the path to your configuration file to the Starlight DocSearch plugin in `astro.config.mjs`.
+
+   ```js {11-13}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'Site with DocSearch',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+See the [DocSearch JavaScript client API Reference](https://docsearch.algolia.com/docs/api/) for all supported options.
 
 #### Translating the DocSearch UI
 
@@ -124,18 +175,19 @@ Add translations of the modal UI for your language using Starlight’s built-in 
 
 <Steps>
 
-1. Extend Starlight’s `i18n` content collection definition with the DocSearch schema in `src/content/config.ts`:
+1. Extend Starlight’s `i18n` content collection definition with the DocSearch schema in `src/content.config.ts`:
 
-   ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
    	i18n: defineCollection({
-   		type: 'data',
+   		loader: i18nLoader(),
    		schema: i18nSchema({ extend: docSearchI18nSchema() }),
    	}),
    };

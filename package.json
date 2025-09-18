@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
+    "lint": "eslint . --max-warnings 0",
     "size": "size-limit",
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile",
     "format": "prettier -w --cache --plugin prettier-plugin-astro .",
@@ -12,17 +13,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@astrojs/check": "^0.7.0",
+    "@astrojs/check": "^0.9.4",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.9",
+    "@eslint/js": "^9.33.0",
     "@size-limit/file": "^11.1.6",
-    "astro": "^4.16.10",
+    "astro": "^5.6.1",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.3.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "size-limit": "^11.1.6",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.39.1"
   },
-  "packageManager": "pnpm@8.7.4",
+  "packageManager": "pnpm@9.15.9",
   "size-limit": [
     {
       "name": "/index.html",
@@ -33,13 +39,16 @@
     {
       "name": "/_astro/*.js",
       "path": "examples/basics/dist/_astro/*.js",
-      "limit": "23 kB",
+      "limit": "27 kB",
       "gzip": true
     },
     {
       "name": "/_astro/*.css",
-      "path": "examples/basics/dist/_astro/*.css",
-      "limit": "14.5 kB",
+      "path": [
+        "examples/basics/dist/_astro/*.css",
+        "!examples/basics/dist/_astro/print.*.css"
+      ],
+      "limit": "14.75 kB",
       "gzip": true
     }
   ],

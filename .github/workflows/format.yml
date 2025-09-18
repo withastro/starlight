@@ -10,21 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code using Git
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: ${{ github.head_ref }}
           # Needs access to push to main
           token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: 18
+          node-version: 18.20.8
           cache: 'pnpm'
       - run: pnpm i
       - name: Format with Prettier
         run: pnpm format
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 # v6.0.1
         with:
           commit_message: '[ci] format'
           branch: ${{ github.head_ref }}

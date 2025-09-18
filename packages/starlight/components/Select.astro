@@ -3,7 +3,6 @@ import Icon from '../user-components/Icon.astro';
 
 interface Props {
 	label: string;
-	value: string;
 	icon: Parameters<typeof Icon>[0]['name'];
 	width?: string;
 	options: Array<{
@@ -12,12 +11,21 @@ interface Props {
 		selected: boolean;
 	}>;
 }
+
+/**
+ * The `autocomplete="off"` attribute is used to prevent the browser from automatically selecting a
+ * value for this input, e.g. based on the user's previous selections, as this could lead to
+ * incorrect values being selected for example when the user switches between languages and uses
+ * the back button.
+ * Note that this attribute is only useful when a value is not restored at a later stage, e.g. the
+ * bfcache that ignores this attribute when restoring the value.
+ */
 ---
 
 <label style={`--sl-select-width: ${Astro.props.width}`}>
 	<span class="sr-only">{Astro.props.label}</span>
 	<Icon name={Astro.props.icon} class="icon label-icon" />
-	<select value={Astro.props.value}>
+	<select autocomplete="off">
 		{
 			Astro.props.options.map(({ value, selected, label }) => (
 				<option value={value} selected={selected} set:html={label} />
@@ -28,60 +36,64 @@ interface Props {
 </label>
 
 <style>
-	label {
-		--sl-label-icon-size: 0.875rem;
-		--sl-caret-size: 1.25rem;
-		--sl-inline-padding: 0.5rem;
-		position: relative;
-		display: flex;
-		align-items: center;
-		gap: 0.25rem;
-		color: var(--sl-color-gray-1);
-	}
+	@layer starlight.core {
+		label {
+			--sl-label-icon-size: 0.875rem;
+			--sl-caret-size: 1.25rem;
+			--sl-inline-padding: 0.5rem;
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			color: var(--sl-color-gray-1);
+		}
 
-	label:hover {
-		color: var(--sl-color-gray-2);
-	}
+		label:hover {
+			color: var(--sl-color-gray-2);
+		}
 
-	.icon {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		pointer-events: none;
-	}
+		.icon {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			pointer-events: none;
+		}
 
-	.label-icon {
-		font-size: var(--sl-label-icon-size);
-		inset-inline-start: 0;
-	}
-
-	.caret {
-		font-size: var(--sl-caret-size);
-		inset-inline-end: 0;
-	}
-
-	select {
-		border: 0;
-		padding-block: 0.625rem;
-		padding-inline: calc(var(--sl-label-icon-size) + var(--sl-inline-padding) + 0.25rem)
-			calc(var(--sl-caret-size) + var(--sl-inline-padding) + 0.25rem);
-		margin-inline: calc(var(--sl-inline-padding) * -1);
-		width: calc(var(--sl-select-width) + var(--sl-inline-padding) * 2);
-		background-color: transparent;
-		text-overflow: ellipsis;
-		color: inherit;
-		cursor: pointer;
-		appearance: none;
-	}
-
-	option {
-		background-color: var(--sl-color-bg-nav);
-		color: var(--sl-color-gray-1);
-	}
-
-	@media (min-width: 50rem) {
 		select {
-			font-size: var(--sl-text-sm);
+			border: 0;
+			padding-block: 0.625rem;
+			padding-inline: calc(var(--sl-label-icon-size) + var(--sl-inline-padding) + 0.25rem)
+				calc(var(--sl-caret-size) + var(--sl-inline-padding) + 0.25rem);
+			margin-inline: calc(var(--sl-inline-padding) * -1);
+			width: calc(var(--sl-select-width) + var(--sl-inline-padding) * 2);
+			background-color: transparent;
+			text-overflow: ellipsis;
+			color: inherit;
+			cursor: pointer;
+			appearance: none;
+		}
+
+		option {
+			background-color: var(--sl-color-bg-nav);
+			color: var(--sl-color-gray-1);
+		}
+
+		@media (min-width: 50rem) {
+			select {
+				font-size: var(--sl-text-sm);
+			}
+		}
+	}
+
+	@layer starlight.components {
+		.label-icon {
+			font-size: var(--sl-label-icon-size);
+			inset-inline-start: 0;
+		}
+
+		.caret {
+			font-size: var(--sl-caret-size);
+			inset-inline-end: 0;
 		}
 	}
 </style>

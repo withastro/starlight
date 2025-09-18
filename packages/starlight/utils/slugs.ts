@@ -1,16 +1,8 @@
 import config from 'virtual:starlight/user-config';
+import { slugToLocale as getLocaleFromSlug } from '../integrations/shared/slugToLocale';
 import { BuiltInDefaultLocale } from './i18n';
 import { stripTrailingSlash } from './path';
-import { slugToLocale as getLocaleFromSlug } from '../integrations/shared/slugToLocale';
-
-export interface LocaleData {
-	/** Writing direction. */
-	dir: 'ltr' | 'rtl';
-	/** BCP-47 language tag. */
-	lang: string;
-	/** The base path at which a language is served. `undefined` for root locale slugs. */
-	locale: string | undefined;
-}
+import type { LocaleData } from './routing/types';
 
 /**
  * Get the “locale” of a slug. This is the base path at which a language is served.
@@ -47,12 +39,18 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
 	return dir || config.defaultLocale.dir;
 }
 
+/**
+ * Convert a content collection slug to a param as expected by Astro’s router.
+ * This utility handles stripping `index` from file names and matches
+ * [Astro’s param sanitization logic](https://github.com/withastro/astro/blob/687d25365a41ff8a9e6da155d3527f841abb70dd/packages/astro/src/core/routing/manifest/generator.ts#L4-L18)
+ * by normalizing strings to their canonical representations.
+ * @param slug Content collection slug
+ * @returns Param compatible with Astro’s router
+ */
 export function slugToParam(slug: string): string | undefined {
-	return slug === 'index' || slug === ''
+	return slug === 'index' || slug === '' || slug === '/'
 		? undefined
-		: slug.endsWith('/index')
-			? slug.slice(0, -6)
-			: slug;
+		: (slug.endsWith('/index') ? slug.slice(0, -6) : slug).normalize();
 }
 
 export function slugToPathname(slug: string): string {
@@ -82,7 +80,8 @@ export function localizedSlug(slug: string, locale: string | undefined): string 
 }
 
 /**
- * Convert a collection entry ID to a different locale.
+ * Convert a legacy collection entry ID or filePath relative to the collection root to a different
+ * locale.
  * For example, passing an ID of `en/home.md` and a locale of `fr` results in `fr/home.md`.
  * An undefined locale is treated as the root locale, resulting in `home.md`.
  * @param id A collection entry ID

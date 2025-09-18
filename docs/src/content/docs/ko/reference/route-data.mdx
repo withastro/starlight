@@ -1,0 +1,203 @@
+---
+title: 경로 데이터 참조
+description: Starlight의 경로 데이터 객체에 대한 전체 참조 문서입니다.
+---
+
+Starlight의 경로 데이터 객체는 현재 페이지에 대한 정보를 담고 있습니다.
+Starlight의 데이터 모델 작동 방식에 대한 자세한 내용은 ["경로 데이터" 가이드](/ko/guides/route-data/)에서 확인하세요.
+
+Astro 컴포넌트에서는 `Astro.locals.starlightRoute`를 통해 경로 데이터에 접근할 수 있습니다.
+
+```astro {4}
+---
+// src/components/Custom.astro
+
+const { hasSidebar } = Astro.locals.starlightRoute;
+---
+```
+
+[경로 미들웨어](/ko/guides/route-data/#경로-데이터-사용자-정의)에서는 미들웨어 함수에 전달된 컨텍스트 객체에서 경로 데이터에 접근합니다.
+
+```ts {5}
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	const { hasSidebar } = context.locals.starlightRoute;
+});
+```
+
+## `starlightRoute`
+
+`starlightRoute` 객체는 다음 속성을 가집니다.
+
+### `dir`
+
+**타입:** `'ltr' | 'rtl'`
+
+페이지 작성 방향입니다.
+
+### `lang`
+
+**타입:** `string`
+
+이 페이지의 로케일에 대한 BCP-47 언어 태그입니다. 예: `en`, `zh-CN` 또는 `pt-BR`
+
+### `locale`
+
+**타입:** `string | undefined`
+
+언어가 제공되는 기본 경로입니다. 루트 로케일 슬러그의 경우 `undefined`입니다.
+
+### `siteTitle`
+
+**타입:** `string`
+
+이 페이지의 로케일에 대한 사이트 제목입니다.
+
+### `siteTitleHref`
+
+**타입:** `string`
+
+`/`처럼 홈페이지와 연결되는 사이트 제목 `href` 속성의 값입니다.
+다국어 사이트의 경우 `/en/` 또는 `/zh-cn/`과 같은 현재 로케일이 포함됩니다.
+
+### `slug`
+
+**타입:** `string`
+
+콘텐츠 파일 이름에서 생성된 이 페이지의 슬러그입니다.
+
+이 속성은 더 이상 사용되지 않으며 향후 버전의 Starlight에서 제거될 예정입니다.
+[Starlight의 `docsLoader`](/ko/manual-setup/#콘텐츠-컬렉션-구성)를 사용하여 새 콘텐츠 레이어 API로 마이그레이션하고 대신 [`id`](#id) 속성을 사용하세요.
+
+### `id`
+
+**타입:** `string`
+
+이 페이지의 슬러그 또는 [`legacy.collections`](https://docs.astro.build/ko/reference/legacy-flags/#collections) 플래그를 사용하는 경우 콘텐츠 파일명을 기준으로 한 이 페이지의 고유 ID입니다.
+
+### `isFallback`
+
+**타입:** `boolean | undefined`
+
+이 페이지가 현재 언어로 번역되지 않고 기본 로케일의 대체 콘텐츠를 사용하는 경우 `true`입니다.
+다국어 사이트에서만 사용됩니다.
+
+### `entryMeta`
+
+**타입:** `{ dir: 'ltr' | 'rtl'; lang: string }`
+
+페이지 콘텐츠의 로케일 메타데이터입니다. 페이지가 대체 콘텐츠를 사용하는 경우 최상위 로케일 값과 다를 수 있습니다.
+
+### `entry`
+
+현재 페이지에 대한 Astro 콘텐츠 컬렉션 항목입니다.
+`entry.data`는 현재 페이지에 대한 프론트매터 값을 포함합니다.
+
+```ts
+entry: {
+	data: {
+		title: string;
+		description: string | undefined;
+		// 기타
+	}
+}
+```
+
+[Astro 컬렉션 엔트리 타입](https://docs.astro.build/ko/reference/modules/astro-content/#collectionentry) 참조에서 이 객체의 형태에 대해 자세히 알아보세요.
+
+### `sidebar`
+
+**타입:** `SidebarEntry[]`
+
+페이지에 대한 사이트 탐색 사이드바 엔트리입니다.
+
+### `hasSidebar`
+
+**타입:** `boolean`
+
+이 페이지에 사이드바를 표시할지 여부입니다.
+
+### `pagination`
+
+**타입:** `{ prev?: Link; next?: Link }`
+
+활성화된 경우 사이드바의 이전 및 다음 페이지로 이동하는 링크를 표시합니다.
+
+### `toc`
+
+**타입:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+
+활성화된 경우 이 페이지의 목차를 표시합니다.
+
+### `headings`
+
+**타입:** `{ depth: number; slug: string; text: string }[]`
+
+현재 페이지에서 추출된 모든 Markdown 제목의 배열입니다.
+Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생성하기 위해서는 [`toc`](#toc)를 사용하세요.
+
+### `lastUpdated`
+
+**타입:** `Date | undefined`
+
+활성화된 경우 이 페이지가 마지막으로 업데이트된 날짜를 나타내기 위해 JavaScript `Date`객체가 사용됩니다.
+
+### `editUrl`
+
+**타입:** `URL | undefined`
+
+활성화된 경우 이 페이지를 편집할 수 있는 주소를 나타내기 위해 `URL` 객체가 사용됩니다.
+
+### `head`
+
+**타입:** [`HeadConfig[]`](/ko/reference/configuration/#headconfig)
+
+현재 페이지의 `<head>`에 포함할 모든 태그의 배열입니다.
+`<title>` 및 `<meta charset="utf-8">`과 같은 중요한 태그를 포함합니다.
+
+## 유틸리티
+
+### `defineRouteMiddleware()`
+
+`defineRouteMiddleware()` 유틸리티를 사용하여 경로 미들웨어 모듈의 타입을 지정하세요:
+
+```ts "defineRouteMiddleware"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	// ...
+});
+```
+
+### `StarlightRouteData` 타입
+
+Starlight의 경로 데이터를 사용해야 하는 코드를 작성하는 경우, `StarlightRouteData` 타입을 가져와 `Astro.locals.starlightRoute`의 형태와 일치시킬 수 있습니다.
+
+다음 예제에서 `usePageTitleInTOC()` 함수는 경로 데이터를 업데이트하여 현재 페이지의 제목을 목차의 첫 번째 항목 레이블로 사용하고 기본 "개요" 레이블을 대체합니다. `StarlightRouteData` 타입을 사용하면 경로 데이터 변경 사항이 유효한지 확인할 수 있습니다.
+
+```ts "StarlightRouteData"
+// src/route-utils.ts
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+export function usePageTitleInTOC(starlightRoute: StarlightRouteData) {
+	const overviewLink = starlightRoute.toc?.items[0];
+	if (overviewLink) {
+		overviewLink.text = starlightRoute.entry.data.title;
+	}
+}
+```
+
+이 함수는 경로 미들웨어에서 호출할 수 있습니다.
+
+```ts {3,6}
+// src/route-middleware.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { usePageTitleInTOC } from './route-utils';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	usePageTitleInTOC(context.locals.starlightRoute);
+});
+```

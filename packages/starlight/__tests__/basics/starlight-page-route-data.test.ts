@@ -1,10 +1,12 @@
+import type { ImageMetadata } from 'astro';
 import { expect, test, vi } from 'vitest';
-import { generateRouteData } from '../../utils/route-data';
 import { routes } from '../../utils/routing';
+import { generateRouteData } from '../../utils/routing/data';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
 } from '../../utils/starlight-page';
+import { getRouteDataTestContext } from '../test-utils';
 
 vi.mock('virtual:starlight/collection-config', async () =>
 	(await import('../test-utils')).mockedCollectionConfig()
@@ -26,12 +28,12 @@ const starlightPageProps: StarlightPageProps = {
 	frontmatter: { title: 'This is a test title' },
 };
 
-const starlightPageUrl = new URL('https://example.com/test-slug');
+const starlightPagePathname = '/test-slug';
 
 test('adds data to route shape', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	// Starlight pages infer the slug from the URL.
 	expect(data.slug).toBe('test-slug');
@@ -64,11 +66,16 @@ test('adds custom data to route shape', async () => {
 		hasSidebar: false,
 		dir: 'rtl',
 		lang: 'ks',
+		isFallback: true,
 	};
-	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
+	const data = await generateStarlightPageRouteData({
+		props,
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
 	expect(data.entryMeta.lang).toBe(props.lang);
+	expect(data.isFallback).toBe(props.isFallback);
 });
 
 test('adds custom frontmatter data to route shape', async () => {
@@ -82,7 +89,10 @@ test('adds custom frontmatter data to route shape', async () => {
 			template: 'splash',
 		},
 	};
-	const data = await generateStarlightPageRouteData({ props, url: starlightPageUrl });
+	const data = await generateStarlightPageRouteData({
+		props,
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
 		[
 		  {
@@ -90,7 +100,6 @@ test('adds custom frontmatter data to route shape', async () => {
 		      "content": "test",
 		      "name": "og:test",
 		    },
-		    "content": "",
 		    "tag": "meta",
 		  },
 		]
@@ -103,7 +112,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: new URL('https://example.com/getting-started/'),
+		context: getRouteDataTestContext('/getting-started/'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -188,7 +197,7 @@ test('uses provided sidebar if any', async () => {
 				'reference/frontmatter',
 			],
 		},
-		url: new URL('https://example.com/test/2'),
+		context: getRouteDataTestContext('/test/2'),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -238,7 +247,7 @@ test('uses provided sidebar if any', async () => {
 		  {
 		    "attrs": {},
 		    "badge": undefined,
-		    "href": "/reference/frontmatter",
+		    "href": "/reference/frontmatter/",
 		    "isCurrent": false,
 		    "label": "Frontmatter Reference",
 		    "type": "link",
@@ -250,7 +259,7 @@ test('uses provided sidebar if any', async () => {
 });
 
 test('throws error if sidebar is malformated', async () => {
-	expect(() =>
+	await expect(() =>
 		generateStarlightPageRouteData({
 			props: {
 				...starlightPageProps,
@@ -262,7 +271,7 @@ test('throws error if sidebar is malformated', async () => {
 					},
 				],
 			},
-			url: starlightPageUrl,
+			context: getRouteDataTestContext(starlightPagePathname),
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -290,7 +299,7 @@ test('uses provided pagination if any', async () => {
 				},
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.pagination).toMatchInlineSnapshot(`
 		{
@@ -321,7 +330,7 @@ test('uses provided headings if any', async () => {
 	];
 	const data = await generateStarlightPageRouteData({
 		props: { ...starlightPageProps, headings },
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.headings).toEqual(headings);
 });
@@ -337,7 +346,7 @@ test('generates the table of contents for provided headings', async () => {
 				{ depth: 4, slug: 'heading-3', text: 'Heading 3' },
 			],
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -386,7 +395,7 @@ test('respects the `tableOfContents` level configuration', async () => {
 				},
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -431,7 +440,7 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 				tableOfContents: false,
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -449,7 +458,7 @@ test('disables table of contents for splash template', async () => {
 				template: 'splash',
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -464,23 +473,9 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 				template: 'splash',
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.hasSidebar).toBe(false);
-});
-
-test('throws when accessing a label using the deprecated `labels` prop', async () => {
-	const data = await generateStarlightPageRouteData({
-		props: starlightPageProps,
-		url: starlightPageUrl,
-	});
-	expect(() => data.labels['any']).toThrowErrorMatchingInlineSnapshot(`
-		"[AstroUserError]:
-			The \`labels\` prop in component overrides has been removed.
-		Hint:
-			Replace \`Astro.props.labels["any"]\` with \`Astro.locals.t("any")\` instead.
-			For more information see https://starlight.astro.build/guides/i18n/#using-ui-translations"
-	`);
 });
 
 test('uses provided edit URL if any', async () => {
@@ -493,7 +488,7 @@ test('uses provided edit URL if any', async () => {
 				editUrl,
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect(data.editUrl).toEqual(new URL(editUrl));
 	expect(data.entry.data.editUrl).toEqual(editUrl);
@@ -509,22 +504,123 @@ test('strips unknown frontmatter properties', async () => {
 				unknown: 'test',
 			},
 		},
-		url: starlightPageUrl,
+		context: getRouteDataTestContext(starlightPagePathname),
 	});
 	expect('unknown' in data.entry.data).toBe(false);
 });
 
 test('generates data with a similar root shape to regular route data', async () => {
 	const route = routes[0]!;
+	const context = getRouteDataTestContext(starlightPagePathname);
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		url: new URL('https://example.com'),
+		context,
 	});
 
 	const starlightPageData = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		url: starlightPageUrl,
+		context,
 	});
 
 	expect(Object.keys(data).sort()).toEqual(Object.keys(starlightPageData).sort());
+});
+
+test('parses an ImageMetadata object successfully', async () => {
+	const fakeImportedImage: ImageMetadata = {
+		src: '/image-src.png',
+		width: 100,
+		height: 100,
+		format: 'png',
+	};
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			frontmatter: {
+				...starlightPageProps.frontmatter,
+				hero: {
+					image: { file: fakeImportedImage },
+				},
+			},
+		},
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
+	expect(data.entry.data.hero?.image).toBeDefined();
+	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
+	expect(data.entry.data.hero?.image!['file']).toMatchInlineSnapshot(`
+		{
+		  "format": "png",
+		  "height": 100,
+		  "src": "/image-src.png",
+		  "width": 100,
+		}
+	`);
+});
+
+test('parses an image that is also a function successfully', async () => {
+	const fakeImportedSvg = (() => {}) as unknown as ImageMetadata;
+	Object.assign(fakeImportedSvg, { src: '/image-src.svg', width: 100, height: 100, format: 'svg' });
+	const data = await generateStarlightPageRouteData({
+		props: {
+			...starlightPageProps,
+			frontmatter: {
+				...starlightPageProps.frontmatter,
+				hero: {
+					image: { file: fakeImportedSvg },
+				},
+			},
+		},
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
+	expect(data.entry.data.hero?.image).toBeDefined();
+	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
+	expect(data.entry.data.hero?.image!['file']).toMatchInlineSnapshot(`[Function]`);
+	// @ts-expect-error — see above
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('src');
+	// @ts-expect-error — see above
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('width');
+	// @ts-expect-error — see above
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('height');
+	// @ts-expect-error — see above
+	expect(data.entry.data.hero?.image!['file']).toHaveProperty('format');
+});
+
+test('fails to parse an image without the expected metadata properties', async () => {
+	await expect(() =>
+		generateStarlightPageRouteData({
+			props: {
+				...starlightPageProps,
+				frontmatter: {
+					...starlightPageProps.frontmatter,
+					hero: {
+						image: {
+							// @ts-expect-error intentionally incorrect input
+							file: () => {},
+						},
+					},
+				},
+			},
+			context: getRouteDataTestContext(starlightPagePathname),
+		})
+	).rejects.toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid frontmatter props passed to the \`<StarlightPage/>\` component.
+		Hint:
+			**hero.image**: Did not match union.
+			> Expected type \`file | { dark; light } | { html: string }\`
+			> Received \`{}\`"
+	`);
+});
+
+test('adds data to route shape when the `docs` collection is not defined', async () => {
+	// Mock the collection config in this test to simulate the absence of the `docs` collection.
+	vi.doMock('virtual:starlight/collection-config', () => ({ collections: {} }));
+
+	const data = await generateStarlightPageRouteData({
+		props: starlightPageProps,
+		context: getRouteDataTestContext(starlightPagePathname),
+	});
+	expect(data.entry.data.title).toBe(starlightPageProps.frontmatter.title);
+
+	// Undo the mock to restore the original behavior.
+	vi.doUnmock('virtual:starlight/collection-config');
 });

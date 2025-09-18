@@ -10,146 +10,6 @@ Starlight의 [`components`](/ko/reference/configuration/#components) 구성 옵�
 
 [컴포넌트 재정의 가이드](/ko/guides/overriding-components/)에서 자세히 알아보세요.
 
-## 컴포넌트 속성
-
-모든 컴포넌트는 현재 페이지의 정보가 포함된 표준 `Astro.props` 객체를 사용할 수 있습니다.
-
-사용자 정의 컴포넌트의 타입을 설정하기 위해 Starlight로부터 `Props` 타입을 가져옵니다.
-
-```astro
----
-// src/components/Custom.astro
-import type { Props } from '@astrojs/starlight/props';
-
-const { hasSidebar } = Astro.props;
-//      ^ type: boolean
----
-```
-
-이는 `Astro.props`에 접근할 때 자동완성과 타입을 제공합니다.
-
-### 속성
-
-Starlight는 사용자 정의 컴포넌트에 다음 속성들을 전달합니다.
-
-#### `dir`
-
-**타입:** `'ltr' | 'rtl'`
-
-페이지 작성 방향입니다.
-
-#### `lang`
-
-**타입:** `string`
-
-이 페이지의 로케일에 대한 BCP-47 언어 태그입니다. 예: `en`, `zh-CN` 또는 `pt-BR`
-
-#### `locale`
-
-**타입:** `string | undefined`
-
-언어가 제공되는 기본 경로입니다. 루트 로케일 슬러그의 경우 `undefined`입니다.
-
-#### `siteTitle`
-
-**타입:** `string`
-
-이 페이지의 로케일에 대한 사이트 제목입니다.
-
-#### `siteTitleHref`
-
-**타입:** `string`
-
-`/`처럼 홈페이지와 연결되는 사이트 제목 `href` 속성의 값입니다.
-다국어 사이트의 경우 `/en/` 또는 `/zh-cn/`과 같은 현재 로케일이 포함됩니다.
-
-#### `slug`
-
-**타입:** `string`
-
-콘텐츠 파일 이름에서 생성된 이 페이지의 슬러그입니다.
-
-#### `id`
-
-**타입:** `string`
-
-콘텐츠 파일 이름을 기반으로 하는 이 페이지의 고유 ID입니다.
-
-#### `isFallback`
-
-**타입:** `true | undefined`
-
-이 페이지가 현재 언어로 번역되지 않고 기본 로케일의 대체 콘텐츠를 사용하는 경우 `true`입니다.
-다국어 사이트에서만 사용됩니다.
-
-#### `entryMeta`
-
-**타입:** `{ dir: 'ltr' | 'rtl'; lang: string }`
-
-페이지 콘텐츠의 로케일 메타데이터입니다. 페이지가 대체 콘텐츠를 사용하는 경우 최상위 로케일 값과 다를 수 있습니다.
-
-#### `entry`
-
-현재 페이지에 대한 Astro 콘텐츠 컬렉션 항목입니다.
-`entry.data`는 현재 페이지에 대한 프론트매터 값을 포함합니다.
-
-```ts
-entry: {
-  data: {
-    title: string;
-    description: string | undefined;
-    // etc.
-  }
-}
-```
-
-[Astro 컬렉션 엔트리 타입](https://docs.astro.build/ko/reference/modules/astro-content/#collectionentry) 참조에서 이 객체의 형태에 대해 자세히 알아보세요.
-
-#### `sidebar`
-
-**타입:** `SidebarEntry[]`
-
-페이지에 대한 사이트 탐색 사이드바 엔트리입니다.
-
-#### `hasSidebar`
-
-**타입:** `boolean`
-
-이 페이지에 사이드바를 표시할지 여부입니다.
-
-#### `pagination`
-
-**타입:** `{ prev?: Link; next?: Link }`
-
-활성화된 경우 사이드바의 이전 및 다음 페이지로 이동하는 링크를 표시합니다.
-
-#### `toc`
-
-**타입:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
-
-활성화된 경우 이 페이지의 목차를 표시합니다.
-
-#### `headings`
-
-**타입:** `{ depth: number; slug: string; text: string }[]`
-
-현재 페이지에서 추출된 모든 Markdown 제목의 배열입니다.
-Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생성하기 위해서는 [`toc`](#toc)를 사용하세요.
-
-#### `lastUpdated`
-
-**타입:** `Date | undefined`
-
-활성화된 경우 이 페이지가 마지막으로 업데이트된 날짜를 나타내기 위해 JavaScript `Date`객체가 사용됩니다.
-
-#### `editUrl`
-
-**타입:** `URL | undefined`
-
-활성화된 경우 이 페이지를 편집할 수 있는 주소를 나타내기 위해 `URL` 객체가 사용됩니다.
-
----
-
 ## 컴포넌트
 
 ### 헤드
@@ -162,10 +22,9 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 **기본 컴포넌트:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 각 페이지의 `<head>` 내에서 렌더링되는 컴포넌트입니다.
-`<title>`, `<meta charset="utf-8">`를 포함하여 중요한 태그들이 포함합니다.
 
 최후의 수단으로 이 컴포넌트를 재정의합니다.
-가능하면 Starlight 구성의 [`head`](/ko/reference/configuration/#head) 옵션을 사용하는 것이 좋습니다.
+기본 컴포넌트에서 렌더링되는 라우트 데이터를 사용자 정의하려면 [`head` 구성 옵션](/ko/reference/configuration/#head), [`head` 프런트매터 필드](/ko/reference/frontmatter/#head), 또는 [라우트 데이터 미들웨어](/ko/guides/route-data/#경로-데이터-사용자-정의)를 사용하는 것이 좋습니다.
 
 #### `ThemeProvider`
 
@@ -194,7 +53,8 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 
 #### `PageFrame`
 
-**기본 컴포넌트:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**기본 컴포넌트:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**명명된 슬롯:** `header`, `sidebar`
 
 대부분의 페이지 콘텐츠를 감싸는 레이아웃 컴포넌트입니다.
 기본적으로 header-sidebar-main 레이아웃을 설정하고 슬롯으로 명명된 `header`와 `sidebar` 및 메인 콘텐츠에 대한 기본 슬롯을 포함합니다.
@@ -208,7 +68,8 @@ Starlight의 구성 옵션을 준수하는 콘텐츠 목차 컴포넌트를 생�
 
 #### `TwoColumnContent`
 
-**기본 컴포넌트:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**기본 컴포넌트:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**명명된 슬롯:** `right-sidebar`
 
 메인 콘텐츠 열과 오른쪽 사이드바 (목차)를 감싸는 레이아웃 컴포넌트입니다.
 기본적으로 작은 뷰포트에서 하나의 열로 이루어진 레이아웃과 큰 뷰포트에서 두 개의 열로 이루어진 레이아웃 간 전환을 처리합니다.
@@ -224,7 +85,7 @@ Starlight의 상단 탐색 바를 렌더링하는 컴포넌트입니다.
 **기본 컴포넌트:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Header 컴포넌트는 모든 페이지 상단에 표시됩니다.
-기본적으로 [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), 와 [`<LanguageSelect />`](#languageselect)를 표시합니다.
+기본적으로 [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect), 와 [`<LanguageSelect />`](#languageselect)를 표시합니다.
 
 #### `SiteTitle`
 

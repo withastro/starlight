@@ -1,0 +1,204 @@
+---
+title: Данные маршрута
+description: Полная справочная документация по объекту данных маршрута Starlight.
+---
+
+Объект данных маршрута Starlight содержит информацию о текущей странице.
+Подробнее о том, как работает модель данных Starlight, читайте в [руководстве «Данные маршрута»](/ru/guides/route-data/).
+
+В компонентах Astro доступ к данным маршрута осуществляется через `Astro.locals.starlightRoute`:
+
+```astro {4}
+---
+// src/components/Custom.astro
+
+const { hasSidebar } = Astro.locals.starlightRoute;
+---
+```
+
+В [мидлварах для маршрутов](/ru/guides/route-data/#настройка-данных-маршрута) доступ к данным маршрута осуществляется через объект `context`, передаваемый в вашу функцию-мидлвар:
+
+```ts {5}
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	const { hasSidebar } = context.locals.starlightRoute;
+});
+```
+
+## `starlightRoute`
+
+Объект `starlightRoute` имеет следующие свойства:
+
+### `dir`
+
+**Тип:** `'ltr' | 'rtl'`
+
+Направление текста страницы.
+
+### `lang`
+
+**Тип:** `string`
+
+Тег языка BCP-47 для локали этой страницы. Например: `en`, `zh-CN` или `pt-BR`.
+
+### `locale`
+
+**Тип:** `string | undefined`
+
+Базовый путь, по которому доступен язык. `undefined` для корневых локалей.
+
+### `siteTitle`
+
+**Тип:** `string`
+
+Заголовок сайта для локали этой страницы.
+
+### `siteTitleHref`
+
+**Тип:** `string`
+
+Значение для атрибута `href` заголовка сайта, ссылающегося на главную страницу, например, `/`.
+Для многоязычных сайтов это будет включать текущую локаль. Например: `/en/` или `/zh-cn/`.
+
+### `slug`
+
+**Тип:** `string`
+
+Слаг для этой страницы, сгенерированный из имени файла контента.
+
+Это свойство устарело и будет удалено в будущей версии Starlight.
+Перейдите на новый API Content Layer, используя [`docsLoader` Starlight](/ru/manual-setup/#настройка-коллекций-контента), и используйте свойство [`id`](#id) вместо этого.
+
+### `id`
+
+**Тип:** `string`
+
+Слаг для этой страницы или уникальный идентификатор для этой страницы, основанный на имени файла контента, если используется флаг [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections).
+
+### `isFallback`
+
+**Тип:** `boolean | undefined`
+
+`true`, если эта страница не переведена на текущий язык и отображает контент по умолчанию из основной локали.
+Используется только на многоязычных сайтах.
+
+### `entryMeta`
+
+**Тип:** `{ dir: 'ltr' | 'rtl'; lang: string }`
+
+Метаданные локали для контента страницы. Могут отличаться от значений локали верхнего уровня, если страница использует контент по умолчанию.
+
+### `entry`
+
+Запись коллекции контента Astro для текущей страницы.
+Включает значения метаданных для текущей страницы в `entry.data`.
+
+```ts
+entry: {
+	data: {
+		title: string;
+		description: string | undefined;
+		// и т. д.
+	}
+}
+```
+
+Узнайте больше о структуре этого объекта в справочнике: [`CollectionEntry`](https://docs.astro.build/en/reference/modules/astro-content/#collectionentry).
+
+### `sidebar`
+
+**Тип:** `SidebarEntry[]`
+
+Элементы боковой панели навигации сайта для этой страницы.
+
+### `hasSidebar`
+
+**Тип:** `boolean`
+
+Отображать ли боковую панель на этой странице.
+
+### `pagination`
+
+**Тип:** `{ prev?: Link; next?: Link }`
+
+Ссылки на предыдущую и следующую страницы в боковой панели, если она включена.
+
+### `toc`
+
+**Тип:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+
+Содержание для этой страницы, если оно включено.
+
+### `headings`
+
+**Тип:** `{ depth: number; slug: string; text: string }[]`
+
+Массив всех заголовков Markdown, извлечённых с текущей страницы.  
+Используйте [`toc`](#toc), если хотите создать компонент содержания, который будет учитывать параметры конфигурации Starlight.
+
+### `lastUpdated`
+
+**Тип:** `Date | undefined`
+
+Объект JavaScript `Date`, представляющий дату последнего обновления этой страницы, если это включено.
+
+### `editUrl`
+
+**Тип:** `URL | undefined`
+
+Объект `URL` для адреса, по которому можно отредактировать эту страницу, если это включено.
+
+### `head`
+
+**Тип:** [`HeadConfig[]`](/ru/reference/configuration/#headconfig)
+
+Массив всех тегов, которые следует включить в `<head>` текущей страницы.
+Включает важные теги, такие как `<title>` и `<meta charset="utf-8">`.
+
+## Утилиты
+
+### `defineRouteMiddleware()`
+
+Используйте утилиту `defineRouteMiddleware()`, чтобы типизировать мидлвар-модуль для маршрута:
+
+```ts "defineRouteMiddleware"
+// src/routeData.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	// ...
+});
+```
+
+### Тип `StarlightRouteData`
+
+Если вы пишете код, который должен работать с данными маршрута Starlight, вы можете импортировать тип `StarlightRouteData`, чтобы соответствовать структуре `Astro.locals.starlightRoute`.
+
+В следующем примере функция `usePageTitleInTOC()` обновляет данные маршрута, чтобы использовать заголовок текущей страницы в качестве метки для первого элемента в содержании, заменяя стандартную метку «Обзор».
+Тип `StarlightRouteData` позволяет проверить, являются ли изменения данных маршрута допустимыми.
+
+```ts "StarlightRouteData"
+// src/route-utils.ts
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+export function usePageTitleInTOC(starlightRoute: StarlightRouteData) {
+	const overviewLink = starlightRoute.toc?.items[0];
+	if (overviewLink) {
+		overviewLink.text = starlightRoute.entry.data.title;
+	}
+}
+```
+
+Эту функцию затем можно вызвать из мидлвара маршрута:
+
+```ts {3,6}
+// src/route-middleware.ts
+import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { usePageTitleInTOC } from './route-utils';
+
+export const onRequest = defineRouteMiddleware((context) => {
+	usePageTitleInTOC(context.locals.starlightRoute);
+});
+```

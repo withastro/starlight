@@ -2,10 +2,12 @@ import { builtinI18nSchema } from '../schemas/i18n';
 import cs from './cs.json';
 import en from './en.json';
 import es from './es.json';
+import ca from './ca.json';
 import de from './de.json';
 import ja from './ja.json';
 import pt from './pt.json';
 import fa from './fa.json';
+import fi from './fi.json';
 import fr from './fr.json';
 import gl from './gl.json';
 import he from './he.json';
@@ -27,6 +29,8 @@ import hi from './hi.json';
 import zhTW from './zh-TW.json';
 import pl from './pl.json';
 import sk from './sk.json';
+import lv from './lv.json';
+import hu from './hu.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -35,10 +39,12 @@ export default Object.fromEntries(
 		cs,
 		en,
 		es,
+		ca,
 		de,
 		ja,
 		pt,
 		fa,
+		fi,
 		fr,
 		gl,
 		he,
@@ -60,5 +66,7 @@ export default Object.fromEntries(
 		'zh-TW': zhTW,
 		pl,
 		sk,
+		lv,
+		hu,
 	}).map(([key, dict]) => [key, parse(dict)])
 );

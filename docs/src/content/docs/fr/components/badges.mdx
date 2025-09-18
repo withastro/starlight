@@ -15,7 +15,7 @@ import Preview from '~/components/component-preview.astro';
 
 </Preview>
 
-## Import
+## Importation
 
 ```tsx
 import { Badge } from '@astrojs/starlight/components';
@@ -33,31 +33,31 @@ Pour utiliser une des couleurs de badge disponibles, définissez l'attribut [`va
 ```mdx
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Note" variant="note" />
-<Badge text="Succès" variant="success" />
-<Badge text="Astuce" variant="tip" />
-<Badge text="Attention" variant="caution" />
-<Badge text="Danger" variant="danger" />
+- <Badge text="Note" variant="note" />
+- <Badge text="Succès" variant="success" />
+- <Badge text="Astuce" variant="tip" />
+- <Badge text="Attention" variant="caution" />
+- <Badge text="Danger" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% badge text="Note" variant="note" /%}
-{% badge text="Succès" variant="success" /%}
-{% badge text="Astuce" variant="tip" /%}
-{% badge text="Attention" variant="caution" /%}
-{% badge text="Danger" variant="danger" /%}
+- {% badge text="Note" variant="note" /%}
+- {% badge text="Succès" variant="success" /%}
+- {% badge text="Astuce" variant="tip" /%}
+- {% badge text="Attention" variant="caution" /%}
+- {% badge text="Danger" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Note" variant="note" />
-	<Badge text="Succès" variant="success" />
-	<Badge text="Astuce" variant="tip" />
-	<Badge text="Attention" variant="caution" />
-	<Badge text="Danger" variant="danger" />
+	- <Badge text="Note" variant="note" />
+	- <Badge text="Succès" variant="success" />
+	- <Badge text="Astuce" variant="tip" />
+	- <Badge text="Attention" variant="caution" />
+	- <Badge text="Danger" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -71,25 +71,25 @@ Utilisez l'attribut [`size`](#size) pour contrôler la taille du texte du badge.
 ```mdx /size="\w+"/
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="Nouveau" size="small" />
-<Badge text="Nouveau et amélioré" size="medium" />
-<Badge text="Nouveau, amélioré et plus grand" size="large" />
+- <Badge text="Nouveau" size="small" />
+- <Badge text="Nouveau et amélioré" size="medium" />
+- <Badge text="Nouveau, amélioré et plus grand" size="large" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-{% badge text="Nouveau" size="small" /%}
-{% badge text="Nouveau et amélioré" size="medium" /%}
-{% badge text="Nouveau, amélioré et plus grand" size="large" /%}
+- {% badge text="Nouveau" size="small" /%}
+- {% badge text="Nouveau et amélioré" size="medium" /%}
+- {% badge text="Nouveau, amélioré et plus grand" size="large" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="Nouveau" size="small" />
-	<Badge text="Nouveau et amélioré" size="medium" />
-	<Badge text="Nouveau, amélioré et plus grand" size="large" />
+	- <Badge text="Nouveau" size="small" />
+	- <Badge text="Nouveau et amélioré" size="medium" />
+	- <Badge text="Nouveau, amélioré et plus grand" size="large" />
 </Fragment>
 
 </Preview>

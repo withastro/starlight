@@ -72,8 +72,8 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 
 ### `tableOfContents`
 
-**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number; }`  
-**기본값:** `{ minHeadingLevel: 2; maxHeadingLevel: 3; }`
+**타입:** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
+**기본값:** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
 각 페이지 오른쪽에 표시되는 목차를 구성합니다. 기본적으로 `<h2>` 및 `<h3>` 제목이 이 목차에 포함됩니다.
 
@@ -223,7 +223,11 @@ type SidebarItem =
 			| {
 					// 자동으로 생성된 링크 그룹
 					label: string;
-					autogenerate: { directory: string; collapsed?: boolean };
+					autogenerate: {
+						directory: string;
+						collapsed?: boolean;
+						attrs?: Record<string, string | number | boolean | undefined>;
+					};
 					collapsed?: boolean;
 			  }
 	  ));
@@ -346,28 +350,21 @@ starlight({
 
 ### `social`
 
-import SocialLinksType from '~/components/social-links-type.astro';
+**타입:** <code>{`Array<{ label: string; icon: `}[StarlightIcon](/ko/reference/icons/){`; href: string }>`}</code>
 
-**타입:** <SocialLinksType />
-
-이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다. 이 중 하나를 추가하면 사이트 헤더에 아이콘 링크로 표시됩니다.
+이 사이트의 소셜 미디어 계정에 대한 선택적 세부 정보입니다.
+각 항목은 사이트 헤더에 아이콘 링크로 표시됩니다.
 
 ```js
 starlight({
-	social: {
-		codeberg: 'https://codeberg.org/knut/examples',
-		discord: 'https://astro.build/chat',
-		github: 'https://github.com/withastro/starlight',
-		gitlab: 'https://gitlab.com/delucis',
-		linkedin: 'https://www.linkedin.com/company/astroinc',
-		mastodon: 'https://m.webtoo.ls/@astro',
-		threads: 'https://www.threads.net/@nmoodev',
-		twitch: 'https://www.twitch.tv/bholmesdev',
-		twitter: 'https://twitter.com/astrodotbuild',
-		'x.com': 'https://x.com/astrodotbuild',
-		youtube: 'https://youtube.com/@astrodotbuild',
-	},
-});
+  social: [
+		{ icon: 'codeberg', label: 'Codeberg', href: 'https://codeberg.org/knut' },
+		{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+		{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro' },
+		{ icon: 'gitlab', label: 'GitLab', href: 'https://gitlab.com/delucis' },
+		{ icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
+	],
+}),
 ```
 
 ### `customCss`
@@ -384,15 +381,38 @@ starlight({
 });
 ```
 
+### `markdown`
+
+**타입:** `{ headingLinks?: boolean }`  
+**기본값:** `{ headingLinks: true }`
+
+Starlight의 Markdown 처리를 구성합니다.
+
+#### `headingLinks`
+
+**타입:** `boolean`  
+**기본값:** `true`
+
+제목이 클릭 가능한 앵커 링크와 함께 렌더링될지 여부를 제어합니다.
+
+```js
+starlight({
+	markdown: {
+		// Starlight의 클릭 가능한 제목 앵커 링크를 비활성화합니다.
+		headingLinks: false,
+	},
+}),
+```
+
 ### `expressiveCode`
 
 **타입:** `StarlightExpressiveCodeOptions | boolean`  
 **기본값:** `true`
 
-Starlight는 [Expressive Code](https://github.com/expressive-code/expressive-code/tree/main/packages/astro-expressive-code)를 사용하여 코드 블록을 렌더링하고 코드 예시의 부분 강조 표시, 코드 블록에 파일 이름 추가 등 다양한 기능을 지원합니다.
+Starlight는 [Expressive Code](https://expressive-code.com)를 사용하여 코드 블록을 렌더링하고 코드 예시의 부분 강조 표시, 코드 블록에 파일 이름 추가 등 다양한 기능을 지원합니다.
 Markdown 및 MDX 콘텐츠에서 Expressive Code 구문을 사용하는 방법을 알아보려면 [“코드 블록” 가이드](/ko/guides/authoring-content/#코드-블록)를 참조하세요.
 
-Starlight의 `expressiveCode` 옵션을 설정하여 표준 [Expressive Code 구성 옵션](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#configuration)과 일부 Starlight 관련 속성을 사용할 수 있습니다.
+Starlight의 `expressiveCode` 옵션을 설정하여 표준 [Expressive Code 구성 옵션](https://expressive-code.com/reference/configuration/)과 일부 Starlight 관련 속성을 사용할 수 있습니다.
 예를 들어, Expressive Code의 `styleOverrides` 옵션을 설정하여 기본 CSS를 재정의할 수 있습니다. 이를 통해 코드 블록에 둥근 모서리를 제공하는 등의 사용자 정의가 가능해집니다.
 
 ```js ins={2-4}
@@ -419,7 +439,7 @@ starlight({
 **기본값:** `['starlight-dark', 'starlight-light']`
 
 코드 블록 스타일을 지정하는 데 사용되는 테마를 설정합니다.
-지원되는 테마 형식에 대한 자세한 내용은 [Expressive Code `themes` 문서](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/README.md#themes)를 참조하세요.
+지원되는 테마 형식에 대한 자세한 내용은 [Expressive Code `themes` 문서](https://expressive-code.com/guides/themes/)를 참조하세요.
 
 Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https://github.com/sdras/night-owl-vscode-theme)의 어둡고 밝은 변형을 사용합니다.
 
@@ -452,22 +472,55 @@ Starlight는 기본적으로 Sarah Drasner가 제작한 [Night Owl theme](https:
 
 ### `pagefind`
 
-**타입:** `boolean`  
+**타입:** <code>boolean | <a href="#pagefindoptions">PagefindOptions</a></code>  
 **기본값:** `true`
 
-Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)가 활성화되어 있는지 정의합니다.
+Starlight의 기본 사이트 검색 공급자인 [Pagefind](https://pagefind.app/)를 구성합니다.
 
 Pagefind로 사이트 색인을 생성하지 않으려면 `false`로 설정하세요.
 또한, 이는 기본 검색 UI도 숨깁니다.
 
 [`prerender`](#prerender) 옵션이 `false`로 설정된 경우 Pagefind를 활성화할 수 없습니다.
 
+`pagefind`를 객체로 설정하여 Pagefind 검색 클라이언트를 구성합니다:
+
+- `pagefind.ranking` 옵션을 사용하여 검색 결과 순위 계산 방법을 제어하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Customize Pagefind's result ranking"](https://pagefind.app/docs/ranking/)을 참조하세요.
+- 여러 사이트에서 검색하는 방법을 제어하기 위해 `pagefind.mergeIndex` 옵션을 사용하는 방법에 대한 자세한 내용은 Pagefind 문서의 ["Searching multiple sites"](https://pagefind.app/docs/multisite/)를 참조하세요.
+
+#### `PagefindOptions`
+
+```ts
+interface PagefindOptions {
+	ranking?: {
+		pageLength?: number;
+		termFrequency?: number;
+		termSaturation?: number;
+		termSimilarity?: number;
+	};
+	indexWeight?: number;
+	mergeIndex?: Array<{
+		bundlePath: string;
+		indexWeight?: number;
+		basePath?: string;
+		baseUrl?: string;
+		mergeFilter?: Record<string, string | string[]>;
+		language?: string;
+		ranking?: {
+			pageLength?: number;
+			termFrequency?: number;
+			termSaturation?: number;
+			termSimilarity?: number;
+		};
+	}>;
+}
+```
+
 ### `prerender`
 
 **타입:** `boolean`  
 **기본값:** `true`
 
-Starlight 페이지를 정적 HTML로 사전 렌더링할지, 아니면 [SSR 어댑터](https://docs.astro.build/ko/guides/server-side-rendering/)를 통해 주문형으로 렌더링할지 정의합니다.
+Starlight 페이지를 정적 HTML로 사전 렌더링할지, 아니면 [SSR 어댑터](https://docs.astro.build/ko/guides/on-demand-rendering/)를 통해 주문형으로 렌더링할지 정의합니다.
 
 Starlight 페이지는 기본적으로 사전 렌더링됩니다.
 SSR 어댑터를 사용 중이고 Starlight 페이지를 주문형으로 렌더링하기를 원한다면 `prerender: false`를 설정하세요.
@@ -572,7 +625,16 @@ starlight({
 **타입:** `boolean`  
 **기본값:** `false`
 
-Starlight의 기본 [404 페이지](https://docs.astro.build/ko/core-concepts/astro-pages/#사용자-정의-404-오류-페이지) 삽입을 비활성화합니다. 프로젝트에서 사용자 정의 `src/pages/404.astro` 경로를 사용하려면 이 옵션을 `true`로 설정하세요.
+Starlight의 기본 [404 페이지](https://docs.astro.build/ko/basics/astro-pages/#사용자-정의-404-오류-페이지) 삽입을 비활성화합니다. 프로젝트에서 사용자 정의 `src/pages/404.astro` 경로를 사용하려면 이 옵션을 `true`로 설정하세요.
+
+### `routeMiddleware`
+
+**타입:** `string | string[]`
+
+Starlight가 데이터를 처리하는 방식을 수정할 수 있는 라우트 미들웨어 경로를 제공합니다.
+이 파일 경로는 [Astro의 미들웨어](https://docs.astro.build/ko/guides/middleware/)와 충돌해서는 안 됩니다.
+
+라우트 미들웨어를 만드는 방법에 대한 자세한 내용은 [라우트 데이터 가이드](/ko/guides/route-data/#경로-데이터-사용자-정의)를 참조하세요.
 
 ### `components`
 
@@ -609,6 +671,9 @@ starlight({
 
 ### `credits`
 
+**타입:** `boolean`  
+**기본값:** `false`
+
 사이트 바닥글에 “Starlight로 제작됨” 링크 표시를 활성화합니다.
 
 ```js
@@ -616,3 +681,117 @@ starlight({
 	credits: true,
 });
 ```
+
+## 콘텐츠 컬렉션 구성
+
+Starlight는 Astro의 [콘텐츠 컬렉션](https://docs.astro.build/ko/guides/content-collections/)을 사용하여 콘텐츠를 로드합니다.
+Starlight의 콘텐츠 로더 및 스키마는 필요에 따라 컬렉션을 구성하는 데 도움이 됩니다.
+
+```js
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
+
+export const collections = {
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+	// 선택 사항: i18n 컬렉션은 다국어 사이트의 UI 번역에 사용됩니다.
+	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
+};
+```
+
+### 로더
+
+Starlight는 콘텐츠 컬렉션 구성을 간소화하기 위해 `@astrojs/starlight/loaders` 모듈에서 다음과 같은 [Astro 로더](https://docs.astro.build/ko/reference/content-loader-reference/)를 내보냅니다.
+
+#### `docsLoader()`
+
+`docsLoader()`는 `src/content/docs/` 디렉터리에서 로컬 Markdown, MDX 및 Markdoc 파일을 로드합니다.
+밑줄 (`_`)로 시작하는 파일 이름은 무시됩니다.
+
+##### 가져오기
+
+```js
+import { docsLoader } from '@astrojs/starlight/loaders';
+```
+
+##### 옵션
+
+###### `generateId()`
+
+**타입:** `({ entry: string; base: URL; data: Record<string, unknown> }) => string`
+
+기본적으로 `docsLoader()`를 사용하여 생성된 페이지는 특수 문자를 제거하고 파일 이름을 소문자로 처리하는 sluggifier를 사용하여 파일 이름을 처리합니다. 이 기본 동작을 재정의하려면 사용자 정의 `generateId()` 함수를 제공하세요.
+
+예를 들어, 이는 제거될 특수 문자를 보존하는 데 유용할 수 있습니다.
+기본적으로 `Example.File.md`는 `/examplefile`에서 제공됩니다.
+이를 `/Example.File`에서 제공하려면 사용자 정의 `generateId()` 함수를 정의하면 됩니다.
+
+```js
+docsLoader({
+	// `.md` 또는 `.mdx` 확장자를 제거하되, 파일 이름은 그대로 유지합니다.
+	generateId: ({ entry }) => entry.split('.').slice(0, -1).join('.'),
+}),
+```
+
+자세한 내용은 [Astro 문서에서 `generateId()`](https://docs.astro.build/ko/reference/content-loader-reference/#generateid)를 참조하세요.
+
+#### `i18nLoader()`
+
+`i18nLoader()`는 `src/content/i18n/` 디렉터리에서 로컬 JSON 및 YAML 파일을 로드합니다.
+밑줄 (`_`)로 시작하는 파일 이름은 무시됩니다.
+
+##### 가져오기
+
+```js
+import { i18nLoader } from '@astrojs/starlight/loaders';
+```
+
+##### 옵션
+
+현재 `i18nLoader()`를 구성하는 옵션은 없습니다.
+
+### 스키마
+
+Starlight는 `@astrojs/starlight/schema` 모듈에서 다음과 같은 [콘텐츠 컬렉션 스키마](https://docs.astro.build/ko/guides/content-collections/#컬렉션-스키마-정의)를 제공합니다.
+이러한 스키마는 Starlight가 의존하는 `docs` 및 `i18n` 컬렉션에 사용해야 합니다.
+
+#### `docsSchema()`
+
+`docsSchema()`는 `docs` 컬렉션의 모든 콘텐츠에 대한 프런트매터를 구문 분석합니다.
+
+##### 가져오기
+
+```js
+import { docsSchema } from '@astrojs/starlight/schema';
+```
+
+##### 옵션
+
+###### `extend`
+
+**타입:** Zod 스키마 또는 Zod 스키마를 반환하는 함수  
+**기본값:** `z.object({})`
+
+추가 필드를 사용하여 Starlight의 프런트매터 스키마를 확장합니다.
+`extend` 옵션 사용에 대한 자세한 내용은 ["프런트매터 스키마 사용자 정의"](/ko/reference/frontmatter/#프런트매터-스키마-사용자-정의)를 참조하세요.
+
+#### `i18nSchema()`
+
+`i18nSchema()`는 `i18n` 컬렉션의 모든 데이터 파일을 구문 분석합니다.
+
+##### 가져오기
+
+```js
+import { i18nSchema } from '@astrojs/starlight/schema';
+```
+
+##### 옵션
+
+###### `extend`
+
+**타입:** Zod 객체  
+**기본값:** `z.object({})`
+
+추가 필드를 사용하여 Starlight의 i18n 스키마를 확장합니다.
+`extend` 옵션 사용에 대한 자세한 내용은 ["번역 스키마 확장하기"](/ko/guides/i18n/#번역-스키마-확장)를 참조하세요.

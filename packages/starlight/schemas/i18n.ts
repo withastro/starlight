@@ -1,6 +1,6 @@
 import { z } from 'astro/zod';
 
-interface i18nSchemaOpts<T extends z.AnyZodObject = z.ZodObject<{}>> {
+interface i18nSchemaOpts<T extends z.AnyZodObject = z.SomeZodObject> {
 	/**
 	 * Extend Starlight’s i18n schema with additional fields.
 	 *
@@ -41,7 +41,7 @@ type ExtendedSchema<T extends z.AnyZodObject> = T extends z.AnyZodObject
 	: DefaultI18nSchema;
 
 /** Content collection schema for Starlight’s optional `i18n` collection. */
-export function i18nSchema<T extends z.AnyZodObject = z.ZodObject<{}>>({
+export function i18nSchema<T extends z.AnyZodObject = z.SomeZodObject>({
 	extend = z.object({}) as T,
 }: i18nSchemaOpts<T> = {}): ExtendedSchema<T> {
 	return defaultI18nSchema().merge(extend).passthrough() as ExtendedSchema<T>;
@@ -158,6 +158,8 @@ function starlightI18nSchema() {
 				.describe(
 					'Label for the “Built with Starlight” badge optionally displayed in the site footer.'
 				),
+
+			'heading.anchorLabel': z.string().describe('Label for anchor links in Markdown content.'),
 		})
 		.partial();
 }

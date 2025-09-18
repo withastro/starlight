@@ -1,6 +1,6 @@
 ---
 title: Référence des redéfinitions
-description: Une vue d'ensemble de tous les composants et les props des composants supportés par les redéfinitions de Starlight.
+description: Une vue d'ensemble de tous les composants et les props des composants compatibles avec les redéfinitions de Starlight.
 tableOfContents:
   maxHeadingLevel: 4
 ---
@@ -9,146 +9,6 @@ Vous pouvez redéfinir les composants intégrés à Starlight en spécifiant des
 Cette page répertorie tous les composants disponibles qui peuvent être redéfinis et fournit des liens vers leurs implémentations par défaut sur GitHub.
 
 Pour en savoir plus, consultez le [guide des redéfinitions de composants](/fr/guides/overriding-components/).
-
-## Props des composants
-
-Tous les composants peuvent accéder à un objet `Astro.props` standard qui contient des informations concernant la page courante.
-
-Pour typer vos composants personnalisés, importez le type `Props` depuis Starlight :
-
-```astro
----
-// src/components/Custom.astro
-import type { Props } from '@astrojs/starlight/props';
-
-const { hasSidebar } = Astro.props;
-//      ^ type: boolean
----
-```
-
-Cela vous permettra d'obtenir de l'autocomplétion et un typage lors de l'utilisation de `Astro.props`.
-
-### Props
-
-Starlight passera les props suivantes à vos composants personnalisés.
-
-#### `dir`
-
-**Type :** `'ltr' | 'rtl'`
-
-Le sens d'écriture de la page.
-
-#### `lang`
-
-**Type :** `string`
-
-L’étiquette d’identification BCP-47 pour la langue de la page, par exemple `en`, `zh-CN` ou `pt-BR`.
-
-#### `locale`
-
-**Type :** `string | undefined`
-
-Le chemin de base utilisé pour servir une langue. `undefined` pour les slugs de la locale racine.
-
-#### `siteTitle`
-
-**Type :** `string`
-
-Le titre du site pour la langue de cette page.
-
-#### `siteTitleHref`
-
-**Type :** `string`
-
-La valeur de l’attribut `href` du titre du site, renvoyant à la page d'accueil, par exemple `/`.
-Pour les sites multilingues, cette valeur inclura la locale actuelle, par exemple `/fr/` ou `/zh-cn/`.
-
-#### `slug`
-
-**Type :** `string`
-
-Le slug de la page généré à partir du nom du fichier du contenu.
-
-#### `id`
-
-**Type :** `string`
-
-L'identifiant unique de cette page basé sur le nom du fichier du contenu.
-
-#### `isFallback`
-
-**Type :** `true | undefined`
-
-`true` si cette page n'est pas traduite dans la langue actuelle et utilise le contenu de la langue par défaut en tant que repli.
-Utilisé uniquement dans les sites multilingues.
-
-#### `entryMeta`
-
-**Type :** `{ dir: 'ltr' | 'rtl'; lang: string }`
-
-Métadonnées de la locale pour le contenu de la page. Peut être différent des valeurs de locale de premier niveau lorsque la page utilise un contenu de repli.
-
-#### `entry`
-
-L'entrée de la collection de contenu Astro pour la page courante.
-Inclut les valeurs du frontmatter pour la page courante dans `entry.data`.
-
-```ts
-entry: {
-  data: {
-    title: string;
-    description: string | undefined;
-    // etc.
-  }
-}
-```
-
-Pour en savoir plus sur le format de cet objet, consultez la [référence du type d'entrée de collection](https://docs.astro.build/fr/reference/modules/astro-content/#collectionentry).
-
-#### `sidebar`
-
-**Type :** `SidebarEntry[]`
-
-Les entrées de la barre latérale de navigation du site pour cette page.
-
-#### `hasSidebar`
-
-**Type :** `boolean`
-
-Indique si la barre latérale est affichée sur cette page.
-
-#### `pagination`
-
-**Type :** `{ prev?: Link; next?: Link }`
-
-Liens vers la page précédente et suivante dans la barre latérale si celle-ci est activée.
-
-#### `toc`
-
-**Type :** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
-
-Table des matières de la page courante si celle-ci est activée.
-
-#### `headings`
-
-**Type :** `{ depth: number; slug: string; text: string }[]`
-
-Un tableau de toutes les en-têtes Markdown extraites de la page courante.
-Utilisez [`toc`](#toc) à la place si vous souhaitez construire un composant de table des matières qui respecte les options de configuration de Starlight.
-
-#### `lastUpdated`
-
-**Type :** `Date | undefined`
-
-Un objet JavaScript de type `Date` représentant la date de dernière mise à jour de cette page si cette fonctionnalité est activée.
-
-#### `editUrl`
-
-**Type :** `URL | undefined`
-
-Un objet `URL` de l'adresse où cette page peut être modifiée si cette fonctionnalité est activée.
-
----
 
 ## Composants
 
@@ -162,10 +22,9 @@ Ils ne doivent inclure que des [éléments autorisés à l'intérieur de `<head>
 **Composant par défaut :** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
 Composant utilisé à l'intérieur de l'élément `<head>` de chaque page.
-Inclut des balises importantes comme `<title>` et `<meta charset="utf-8">`.
 
 Redéfinissez ce composant en dernier recours.
-Préférez l'option [`head`](/fr/reference/configuration/#head) de la configuration de Starlight si possible.
+Préférez [l'option de configuration `head`](/fr/reference/configuration/#head), le [champ `head` du frontmatter](/fr/reference/frontmatter/#head), ou un [middleware de données de route](/fr/guides/route-data/#personnalisation-des-données-de-route) pour personnaliser les données de route affichées par le composant par défaut si possible.
 
 #### `ThemeProvider`
 
@@ -195,10 +54,11 @@ Lorsque cela est possible, préférez redéfinir un composant de plus bas niveau
 
 #### `PageFrame`
 
-**Composant par défaut :** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**Composant par défaut :** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**Slots nommés :** `header`, `sidebar`
 
 Composant de mise en page contenant la plupart du contenu de la page.
-L'implémentation par défaut configure la mise en page de l'en-tête, de la barre latérale et du contenu principal et inclut des emplacements (slots) nommés `header` et `sidebar` en plus de l'emplacement par défaut pour le contenu principal.
+L'implémentation par défaut configure la mise en page de l'en-tête, de la barre latérale et du contenu principal et inclut des slots nommés `header` et `sidebar` en plus du slot par défaut pour le contenu principal.
 Il affiche également [`<MobileMenuToggle />`](#mobilemenutoggle) qui prend en charge l'affichage de la barre latérale de navigation sur petits écrans (mobiles).
 
 #### `MobileMenuToggle`
@@ -209,7 +69,8 @@ Composant utilisé à l'intérieur de [`<PageFrame>`](#pageframe) qui est respon
 
 #### `TwoColumnContent`
 
-**Composant par défaut :** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**Composant par défaut :** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**Slot nommé :** `right-sidebar`
 
 Composant de mise en page enveloppant le contenu principal de la page et la barre latérale de droite (table des matières).
 L'implémentation par défaut prend en charge le changement entre une mise en page à une seule colonne pour petits écrans et une mise en page à deux colonnes pour écrans plus larges.
@@ -225,7 +86,7 @@ Ces composants affichent la barre de navigation supérieure de Starlight.
 **Composant par défaut :** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
 Composant d'en-tête affiché en haut de chaque page.
-L'implémentation par défaut affiche [`<SiteTitle />`](#sitetitle-1), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) et [`<LanguageSelect />`](#languageselect).
+L'implémentation par défaut affiche [`<SiteTitle />`](#sitetitle), [`<Search />`](#search), [`<SocialIcons />`](#socialicons), [`<ThemeSelect />`](#themeselect) et [`<LanguageSelect />`](#languageselect).
 
 #### `SiteTitle`
 

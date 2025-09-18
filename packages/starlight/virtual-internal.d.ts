@@ -1,20 +1,10 @@
-declare module 'virtual:starlight/project-context' {
-	const ProjectContext: {
-		root: string;
-		srcDir: string;
-		trailingSlash: import('astro').AstroConfig['trailingSlash'];
-		build: {
-			format: import('astro').AstroConfig['build']['format'];
-		};
-	};
-	export default ProjectContext;
-}
-
 declare module 'virtual:starlight/git-info' {
 	export function getNewestCommitDate(file: string): Date;
 }
 
 declare module 'virtual:starlight/user-css' {}
+
+declare module 'virtual:starlight/optional-css' {}
 
 declare module 'virtual:starlight/user-images' {
 	type ImageMetadata = import('astro').ImageMetadata;
@@ -26,6 +16,16 @@ declare module 'virtual:starlight/user-images' {
 
 declare module 'virtual:starlight/collection-config' {
 	export const collections: import('astro:content').ContentConfig['collections'] | undefined;
+}
+
+declare module 'virtual:starlight/route-middleware' {
+	export const routeMiddleware: Array<import('./route-data').RouteMiddlewareHandler>;
+}
+
+declare module 'virtual:starlight/pagefind-config' {
+	export const pagefindUserConfig: Partial<
+		Extract<import('./types').StarlightConfig['pagefind'], object>
+	>;
 }
 
 declare module 'virtual:starlight/components/Banner' {
