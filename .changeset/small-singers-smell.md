@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Makes `<summary>` the first child of `<details>` in sidebar groups
+Fixes HTML validity in sidebar groups by ensuring `<summary>` is the first child of `<details>`
