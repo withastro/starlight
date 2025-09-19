@@ -7,7 +7,7 @@ import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
 import { localizedUrl } from './localizedUrl';
 
-const HeadSchema = HeadConfigSchema();
+const HeadSchema = HeadConfigSchema({ source: 'content' });
 
 /** Get the head for the current page. */
 export function getHead(
