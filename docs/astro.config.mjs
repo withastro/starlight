@@ -40,8 +40,9 @@ export default defineConfig({
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/getaxal/' },
-				{ icon: 'x.com', label: 'X', href: 'https://x.com/getaxal' },
-				{ icon: 'substack', label: 'Substack', href: 'https://axal.substack.com/' },
+				{ icon: 'x.com', label: 'X/Twitter', href: 'https://x.com/getaxal' },
+				{ icon: 'substack', label: 'Axal Blog', href: 'https://axal.substack.com/' },
+				{ icon: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/company/getaxal' },
 			],
 			head: [
 				{
