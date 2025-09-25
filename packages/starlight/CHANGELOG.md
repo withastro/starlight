@@ -1,5 +1,55 @@
 # @astrojs/starlight
 
+## 0.36.0
+
+### Minor Changes
+
+- [#3427](https://github.com/withastro/starlight/pull/3427) [`c3b2d0f`](https://github.com/withastro/starlight/commit/c3b2d0fc37bb9b7b6abc6c11b760a4114690ccd4) Thanks [@delucis](https://github.com/delucis)! - Fixes styling of labels that wrap across multiple lines in `<Tabs>` component
+
+  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targetting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
+
+  If you want to preserve the previous styling, you can add the following custom CSS to your site:
+
+  ```css
+  .tab > [role='tab'] {
+    line-height: var(--sl-line-height);
+    padding-block: 0;
+  }
+  ```
+
+- [#3380](https://github.com/withastro/starlight/pull/3380) [`3364af3`](https://github.com/withastro/starlight/commit/3364af31e535d62ee7b045e6d9cf97c7e58df981) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Makes head entry parsing stricter in Starlight config and content frontmatter.
+
+  **⚠️ Potentially breaking change:** Previously Starlight would accept a head entry for a `meta` tag defining some `content` which generates invalid HTML as `<meta>` is a void element which cannot have any child nodes. Now, it is an error to define a `meta` tag including some `content`.
+
+  If you see errors after updating, look for head entries in the Starlight configuration in the `astro.config.mjs` file or in the frontmatter of your content files that include a `content` property for a `meta` tag. To fix the error, move the `content` property to the `attrs` object with at least an additional attribute to identify the kind of metadata it represents:
+
+  ```diff
+  head: {
+    tag: 'meta',
+  - content: 'foo',
+    attrs: {
+      name: 'my-meta',
+  +   content: 'foo',
+    },
+  },
+  ```
+
+- [#3340](https://github.com/withastro/starlight/pull/3340) [`2018c31`](https://github.com/withastro/starlight/commit/2018c31b0f559d51478bfbf9f12cfba76b4e74fc) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds missing vertical spacing between Markdown content and UI Framework components using [client directives](https://docs.astro.build/en/reference/directives-reference/#client-directives).
+
+  **⚠️ Potentially breaking change:** By default, Starlight applies some vertical spacing (`--sl-content-gap-y`) between Markdown content blocks. This change introduces similar spacing between Markdown content blocks and UI Framework components using client directives which was not present before.
+
+  If you were relying on the previous behavior, you can manually override the spacing by manually specifying the top margin on the component using [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles), e.g. by relying on a CSS class to target the component.
+
+  ```css
+  .my-custom-component {
+    margin-top: 0;
+  }
+  ```
+
+### Patch Changes
+
+- [#3423](https://github.com/withastro/starlight/pull/3423) [`a0d0670`](https://github.com/withastro/starlight/commit/a0d0670bce5827b90fd0102fa3517814367760e7) Thanks [@andersk](https://github.com/andersk)! - Fixes HTML validity in sidebar groups by ensuring `<summary>` is the first child of `<details>`
+
 ## 0.35.3
 
 ### Patch Changes
