@@ -59,6 +59,9 @@ importers:
       '@astrojs/starlight':
         specifier: workspace:*
         version: link:../packages/starlight
+      '@astrojs/starlight-docsearch':
+        specifier: workspace:*
+        version: link:../packages/docsearch
       '@lunariajs/core':
         specifier: ^0.1.1
         version: 0.1.1
