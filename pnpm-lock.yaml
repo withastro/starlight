@@ -142,11 +142,11 @@ importers:
   packages/docsearch:
     dependencies:
       '@docsearch/css':
-        specifier: 4.0.0-beta.7
-        version: 4.0.0-beta.7
+        specifier: ^4.1.0
+        version: 4.1.0
       '@docsearch/js':
-        specifier: 4.0.0-beta.7
-        version: 4.0.0-beta.7
+        specifier: ^4.1.0
+        version: 4.1.0
     devDependencies:
       '@astrojs/starlight':
         specifier: workspace:*
@@ -511,11 +511,11 @@ packages:
     resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
     engines: {node: '>=14'}
 
-  '@docsearch/css@4.0.0-beta.7':
-    resolution: {integrity: sha512-hBIwf14yLasrUcDNS7jrneM1ibFD/JFJVDjdxd1h/LUHx7eyLrS726pKHVr3cTdToNXP/7jrTbnC1MAuDHPoow==}
+  '@docsearch/css@4.1.0':
+    resolution: {integrity: sha512-nuNKGjHj/FQeWgE9t+i83QD/V67QiaAmGY7xS9TVCRUiCqSljOgIKlsLoQZKKVwEG8f+OWKdznzZkJxGZ7d06A==}
 
-  '@docsearch/js@4.0.0-beta.7':
-    resolution: {integrity: sha512-0RJALbDpLMuFy3H/26rjms/qwi5KjsGMN8Lu4k/bs6kBfOWHUN6Dzg/ybj8qB2OLdT2UegsavRIDZKW3QrzQ4Q==}
+  '@docsearch/js@4.1.0':
+    resolution: {integrity: sha512-49+CzeGfOiwG85k+dDvKfOsXLd9PQACoY/FLrZfFOKmpWv166u7bAHmBLdzvxlk8nJ289UgpGf0k6GQZtC85Fg==}
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -4557,9 +4557,9 @@ snapshots:
 
   '@ctrl/tinycolor@4.1.0': {}
 
-  '@docsearch/css@4.0.0-beta.7': {}
+  '@docsearch/css@4.1.0': {}
 
-  '@docsearch/js@4.0.0-beta.7': {}
+  '@docsearch/js@4.1.0': {}
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
