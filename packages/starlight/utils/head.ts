@@ -60,6 +60,8 @@ export function getHead(
 			tag: 'meta',
 			attrs: { name: 'twitter:card', content: 'summary_large_image' },
 		},
+		// Disable DarkReader
+		{ tag: 'meta', attrs: { name: 'darkreader-lock' } },
 	];
 
 	if (description)
