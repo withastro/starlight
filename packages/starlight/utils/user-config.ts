@@ -153,7 +153,7 @@ const UserConfigSchema = z.object({
 	 *  ],
 	 * })
 	 */
-	head: HeadConfigSchema(),
+	head: HeadConfigSchema({ source: 'config' }),
 
 	/**
 	 * Provide CSS files to customize the look and feel of your Starlight site.

@@ -15,7 +15,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Mon délicieux site de docs',
+			title: 'Mon ravissant site de docs',
 		}),
 	],
 });
@@ -35,7 +35,7 @@ Lorsque vous utilisez la forme objet, les clés doivent être des étiquettes d'
 ```ts
 starlight({
 	title: {
-		fr: 'Mon délicieux site de docs',
+		fr: 'Mon ravissant site de docs',
 		de: 'Meine bezaubernde Dokumentationsseite',
 	},
 });
@@ -75,7 +75,7 @@ type LogoConfig = { alt?: string; replacesTitle?: boolean } & (
 **Type :** `false | { minHeadingLevel?: number; maxHeadingLevel?: number }`  
 **Par défaut :** `{ minHeadingLevel: 2, maxHeadingLevel: 3 }`
 
-Configurez la table des matières affichée à droite de chaque page. Par défaut, les titres `<h2>` et `<h3>` seront inclus dans cette table des matières.
+Configurez la table des matières affichée à droite de chaque page. Par défaut, les en-têtes `<h2>` et `<h3>` seront inclus dans cette table des matières.
 
 ### `editLink`
 
@@ -102,7 +102,7 @@ Configure les éléments de navigation de la barre latérale de votre site.
 Une barre latérale est un tableau de liens et de groupes de liens.
 À l'exception des éléments utilisant `slug`, chaque élément doit comporter un `label` et l'une des propriétés suivantes :
 
-- `link` — un lien uninque vers une URL spécifique, comme `'/home'` ou `'https://example.com'`.
+- `link` — un lien vers une URL spécifique, comme `'/home'` ou `'https://example.com'`.
 
 - `slug` — une référence à une page interne, par exemple `'guides/getting-started'`.
 
@@ -525,17 +525,17 @@ Si vous utilisez un adaptateur SSR et que vous souhaitez générer les pages Sta
 **Type :** [`HeadConfig[]`](#headconfig)
 
 Ajoute des balises personnalisées au `<head>` de votre site Starlight.
-Cela peut être utile pour ajouter des analyses et d'autres scripts et ressources tiers.
+Cela peut être utile pour ajouter une solution de mesure d'audience ou d'autres ressources et scripts tiers.
 
 ```js
 starlight({
 	head: [
-		// Exemple : ajouter un script d'analyse Fathom tag.
+		// Exemple : ajouter une balise pour le script de suivi de Fathom
 		{
 			tag: 'script',
 			attrs: {
 				src: 'https://cdn.usefathom.com/script.js',
-				'data-site': 'MY-FATHOM-ID',
+				'data-site': 'MON-ID-FATHOM',
 				defer: true,
 			},
 		},
@@ -543,7 +543,7 @@ starlight({
 });
 ```
 
-Les entrées dans `head` sont converties directement en éléments HTML et ne passent pas par le traitement de [script](https://docs.astro.build/fr/guides/client-side-scripts/#regroupement-de-script) ou de [style](https://docs.astro.build/fr/guides/styling/#mettre-en-forme-avec-astro) d'Astro.
+Les entrées dans `head` sont converties directement en éléments HTML et ne passent pas par le traitement de [script](https://docs.astro.build/fr/guides/client-side-scripts/#traitement-des-scripts) ou de [style](https://docs.astro.build/fr/guides/styling/#mettre-en-forme-avec-astro) d'Astro.
 Si vous avez besoin d'importer des ressources locales comme des scripts, des styles ou des images, [redéfinissez le composant Head](/fr/guides/overriding-components/#réutiliser-un-composant-intégré).
 
 #### `HeadConfig`
@@ -691,7 +691,7 @@ import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
 	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
-	// Optionel : la collection i18n est utilisée pour traduire l'interface
+	// Optionnel : la collection i18n est utilisée pour traduire l'interface
 	// utilisateur dans les sites multilingues
 	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
 };
