@@ -52,6 +52,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	#status = this.querySelector('.sl-pagefind-status')!;
 	#filters = this.querySelector('.sl-pagefind-filters')!;
 	#filterTemplate = this.querySelector<HTMLTemplateElement>('#sl-pagefind-filter-tpl')!;
+	#scrollable = this.#dialog.querySelector('.sl-pagefind-content')!;
 	#listbox = this.querySelector('ul')!;
 	#metaTemplate = this.querySelector<HTMLTemplateElement>('#sl-pagefind-meta-tpl')!;
 	#resultTemplate = this.querySelector<HTMLTemplateElement>('#sl-pagefind-result-tpl')!;
@@ -533,6 +534,13 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 		this.#renderFilters();
 		this.#renderResults();
 		this.#renderShowMoreButton();
+
+		// Add keyboard access to the scrollable area if it is scrollable.
+		if (this.#scrollable.scrollHeight > this.#scrollable.clientHeight) {
+			this.#scrollable.setAttribute('tabindex', '0');
+		} else {
+			this.#scrollable.removeAttribute('tabindex');
+		}
 	}
 
 	/** Render a status message based on the current state of the search. */
@@ -686,17 +694,15 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 	#scrollSelectionIntoView() {
 		if (!this.#selectedResult) return;
 
-		const scrollable = this.#dialog.querySelector('.sl-pagefind-content')!;
-
 		const selectionRect = this.#selectedResult.getBoundingClientRect();
-		const scrollableRect = scrollable.getBoundingClientRect();
+		const scrollableRect = this.#scrollable.getBoundingClientRect();
 
 		const isSelectionVisible =
 			selectionRect.top >= scrollableRect.top && selectionRect.bottom <= scrollableRect.bottom;
 
 		if (isSelectionVisible) return;
 
-		let newScrollTop = scrollable.scrollTop;
+		let newScrollTop = this.#scrollable.scrollTop;
 		const scrollOffset = 16; // 1rem
 
 		if (selectionRect.top < scrollableRect.top) {
@@ -707,7 +713,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 			newScrollTop += selectionRect.bottom - scrollableRect.bottom + scrollOffset;
 		}
 
-		scrollable.scrollTo({
+		this.#scrollable.scrollTo({
 			top: newScrollTop,
 			behavior: this.#prefersReducedMotion.matches ? 'instant' : 'smooth',
 		});
