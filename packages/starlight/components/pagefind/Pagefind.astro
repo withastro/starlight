@@ -6,7 +6,7 @@ const { t } = Astro.locals;
 
 <starlight-pagefind>
 	<form class="sl-flex">
-		<header>
+		<div class="sl-pagefind-header">
 			<label id="sl-pagefind-label" for="sl-pagefind-input" class="sr-only"
 				>{t('search.label')}</label
 			>
@@ -33,7 +33,7 @@ const { t } = Astro.locals;
 			>
 				<Icon name="close" size="1.5rem" class="sl-pagefind-input-clear-icon" />
 			</button>
-		</header>
+		</div>
 		<div class="sl-pagefind-content sl-flex">
 			<fieldset class="sl-pagefind-filters sl-hidden">
 				<legend class="sr-only">{t('search.pagefind.filters')}</legend>
@@ -43,9 +43,9 @@ const { t } = Astro.locals;
 				<ul id="sl-pagefind-results" role="listbox" aria-labelledby="sl-pagefind-label"></ul>
 			</div>
 		</div>
-		<footer>
+		<div class="sl-pagefind-footer">
 			<button class="sl-pagefind-show-more sl-hidden">{t('search.pagefind.loadMore')}</button>
-		</footer>
+		</div>
 	</form>
 
 	<template id="sl-pagefind-result-tpl">
@@ -109,13 +109,13 @@ const { t } = Astro.locals;
 			position: relative;
 		}
 
-		header,
-		footer {
+		.sl-pagefind-header,
+		.sl-pagefind-footer {
 			background-color: var(--sl-color-black);
 			padding: var(--sl-pagefind-ui-pad);
 		}
 
-		header {
+		.sl-pagefind-header {
 			border-bottom: var(--sl-pagefind-ui-border);
 		}
 
@@ -380,11 +380,11 @@ const { t } = Astro.locals;
 			background-color: var(--sl-color-gray-6);
 		}
 
-		footer {
+		.sl-pagefind-footer {
 			border-top: var(--sl-pagefind-ui-border);
 		}
 
-		footer:has(> .sl-pagefind-show-more.sl-hidden) {
+		.sl-pagefind-footer:has(> .sl-pagefind-show-more.sl-hidden) {
 			display: none;
 		}
 
