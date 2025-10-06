@@ -135,7 +135,9 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		case 'link':
 			return head.some(
-				({ attrs }) => entry.attrs?.rel === 'canonical' && attrs?.rel === 'canonical'
+				({ attrs }) =>
+					(entry.attrs?.rel === 'canonical' && attrs?.rel === 'canonical') ||
+					(entry.attrs?.rel === 'sitemap' && attrs?.rel === 'sitemap')
 			);
 		default:
 			return false;
