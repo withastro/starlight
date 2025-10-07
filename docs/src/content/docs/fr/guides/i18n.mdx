@@ -67,7 +67,7 @@ Starlight offre une prise en charge intégrée des sites multilingues, y compris
 
 </Steps>
 
-Pour les scénarios i18n plus avancés, Starlight prend également en compte la configuration de l'internationalisation à l'aide de l'option de [configuration `i18n` d'Astro](https://docs.astro.build/fr/guides/internationalization/#configure-i18n-routing).
+Pour les scénarios i18n plus avancés, Starlight prend également en compte la configuration de l'internationalisation à l'aide de l'option de [configuration `i18n` d'Astro](https://docs.astro.build/fr/guides/internationalization/#configurer-le-routage-i18n).
 
 ### Utiliser une locale racine
 
@@ -141,7 +141,7 @@ Cela vous permet de remplacer la langue par défaut de Starlight sans activer d'
 
 ## Contenu de repli
 
-Starlight s'attend à ce que vous créiez des pages équivalentes dans toutes vos langues. Par exemple, si vous avez un fichier `en/about.md`, créez un `about.md` pour chaque autre langue que vous supportez. Cela permet à Starlight de fournir un contenu de repli automatique pour les pages qui n'ont pas encore été traduites.
+Starlight s'attend à ce que vous créiez des pages équivalentes dans toutes vos langues. Par exemple, si vous avez un fichier `en/about.md`, créez un `about.md` pour chaque autre langue que vous prenez en charge. Cela permet à Starlight de fournir un contenu de repli automatique pour les pages qui n'ont pas encore été traduites.
 
 Si une traduction n'est pas encore disponible pour une langue, Starlight affichera aux lecteurs le contenu de cette page dans la langue par défaut (définie via `defaultLocale`). Par exemple, si vous n'avez pas encore créé de version française de votre page À propos et que votre langue par défaut est l'anglais, les visiteurs de `/fr/about` verront le contenu anglais de `/en/about` avec un avis indiquant que cette page n'a pas encore été traduite. Cela vous permet d'ajouter du contenu dans votre langue par défaut et de le traduire progressivement lorsque vos traducteurs en ont le temps.
 
@@ -178,13 +178,13 @@ export default defineConfig({
 import LanguagesList from '~/components/languages-list.astro';
 import UIStringsList from '~/components/ui-strings-list.astro';
 
-En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de traduire les chaînes de l'interface utilisateur par défaut (par exemple, l'en-tête "Sur cette page" dans la table des matières) afin que vos lecteurs puissent découvrir votre site entièrement dans la langue sélectionnée.
+En plus d'héberger des fichiers de contenu traduits, Starlight vous permet de traduire les chaînes de l'interface utilisateur par défaut (par exemple, l'en-tête « Sur cette page » dans la table des matières) afin que vos lecteurs puissent découvrir votre site entièrement dans la langue sélectionnée.
 
 Les textes de l'interface utilisateur traduits en <LanguagesList />
 sont disponibles prêts à l'emploi, et nous acceptons les
 [contributions pour ajouter d'autres langues par défaut](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md).
 
-Vous pouvez fournir des traductions pour les langues supplémentaires que vous supportez - ou remplacer nos étiquettes par défaut - via la collection de contenus `i18n`.
+Vous pouvez fournir des traductions pour les langues supplémentaires que vous prenez en charge — ou remplacer nos étiquettes par défaut — via la collection de contenus `i18n`.
 
 <Steps>
 
@@ -232,7 +232,7 @@ Vous pouvez fournir des traductions pour les langues supplémentaires que vous s
    }
    ```
 
-   La module de recherche de Starlight’s s’appuie sur la librairie [Pagefind](https://pagefind.app/).
+   Le module de recherche de Starlight s’appuie sur la librairie [Pagefind](https://pagefind.app/).
    Vous pouvez définir des traductions pour l’interface utilisateur de Pagefind dans le même fichier JSON en utilisant les clés `pagefind` :
 
    ```json
@@ -281,7 +281,7 @@ Consultez [« Définir un schéma de collection de contenus »](https://docs.ast
 ## Utiliser les traductions de l'interface utilisateur
 
 Vous pouvez accéder aux [chaînes de l'interface utilisateur intégrées](/fr/guides/i18n/#traduire-linterface-utilisateur-de-starlight) à Starlight ainsi qu'aux chaînes de l'interface utilisateur [définies par l'utilisateur](/fr/guides/i18n/#étendre-le-schéma-de-traduction), et celles [fournies par les modules d'extension](/fr/reference/plugins/#injecttranslations) via une API unifiée utilisant [i18next](https://www.i18next.com/).
-Cela inclut le support de fonctionnalités telles que [l'interpolation](https://www.i18next.com/translation-function/interpolation) et [la pluralisation](https://www.i18next.com/translation-function/plurals).
+Cela inclut la prise en charge de fonctionnalités telles que [l'interpolation](https://www.i18next.com/translation-function/interpolation) et [la pluralisation](https://www.i18next.com/translation-function/plurals).
 
 Dans les composants Astro, cette API est disponible via l'[objet global `Astro`](https://docs.astro.build/fr/reference/api-reference/#astrolocals) sous le nom `Astro.locals.t` :
 
@@ -291,7 +291,7 @@ Dans les composants Astro, cette API est disponible via l'[objet global `Astro`]
 </p>
 ```
 
-Vous pouvez également utiliser l'API dans les [points de terminaison](https://docs.astro.build/fr/guides/endpoints/), où l'objet `locals` est disponible dans le cadre du [contexte du point de terminaison](https://docs.astro.build/fr/reference/api-reference/#contextlocals):
+Vous pouvez également utiliser l'API dans les [points de terminaison](https://docs.astro.build/fr/guides/endpoints/), où l'objet `locals` est disponible dans le cadre du [contexte du point de terminaison](https://docs.astro.build/fr/reference/api-reference/#contextlocals) :
 
 ```ts title="src/pages/404.ts"
 export const GET = (context) => {

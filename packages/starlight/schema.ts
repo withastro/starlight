@@ -30,7 +30,7 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 		editUrl: z.union([z.string().url(), z.boolean()]).optional().default(true),
 
 		/** Set custom `<head>` tags just for this page. */
-		head: HeadConfigSchema(),
+		head: HeadConfigSchema({ source: 'content' }),
 
 		/** Override global table of contents configuration for this page. */
 		tableOfContents: TableOfContentsSchema().optional(),
@@ -123,7 +123,7 @@ type BaseSchemaWithoutEffects =
 type BaseSchema = BaseSchemaWithoutEffects | z.ZodEffects<BaseSchemaWithoutEffects>;
 
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
-type ExtendedSchema<T extends BaseSchema | never = never> = [T] extends [never]
+type ExtendedSchema<T extends BaseSchema = never> = [T] extends [never]
 	? DefaultSchema
 	: T extends BaseSchema
 		? z.ZodIntersection<DefaultSchema, T>
@@ -155,7 +155,7 @@ interface DocsSchemaOpts<T extends BaseSchema> {
 }
 
 /** Content collection schema for Starlight’s `docs` collection. */
-export function docsSchema<T extends BaseSchema | never = never>(
+export function docsSchema<T extends BaseSchema = never>(
 	...args: [DocsSchemaOpts<T>?]
 ): (context: SchemaContext) => ExtendedSchema<T> {
 	const [options = {}] = args;

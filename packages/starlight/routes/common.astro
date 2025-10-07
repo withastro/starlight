@@ -15,7 +15,7 @@ const route = await getRoute(Astro);
  */
 const renderResult = await render(route.entry);
 
-await attachRouteDataAndRunMiddleware(Astro, await useRouteData(Astro, route, renderResult));
+await attachRouteDataAndRunMiddleware(Astro, useRouteData(Astro, route, renderResult));
 
 const { Content, entry } = Astro.locals.starlightRoute;
 ---
