@@ -33,7 +33,7 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 				return;
 			}
 
-			let starlightPageImport: StarlightPageImportDeclaration | undefined;
+			let isStarlightPage = false;
 
 			for (const node of ast.body) {
 				if (node.type !== 'ImportDeclaration') continue;
@@ -44,22 +44,16 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 				);
 				if (!importDefaultSpecifier) continue;
 
-				starlightPageImport = {
-					// @ts-expect-error - Not typed, but it has a `start` and `end` property.
-					pos: { start: node.start, end: node.end },
-					specifier: importDefaultSpecifier.local.name,
-				};
-
+				isStarlightPage = true;
 				break;
 			}
 
-			if (!starlightPageImport) return;
+			if (!isStarlightPage) return;
 
 			// Format path to unix style path.
 			const filename = id.replace(/\\/g, '/');
 			const ms = new MagicString(code, { filename });
-			ms.remove(starlightPageImport.pos.start, starlightPageImport.pos.end);
-			ms.prepend(`import ${starlightPageImport.specifier} from "${starlightPageImportSource}";\n`);
+			ms.prepend(`import "${starlightPageImportSource}";\n`);
 
 			return {
 				code: ms.toString(),
@@ -67,11 +61,6 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 			};
 		},
 	};
-}
-
-interface StarlightPageImportDeclaration {
-	pos: { start: number; end: number };
-	specifier: string;
 }
 
 type VitePlugin = NonNullable<ViteUserConfig['plugins']>[number];
