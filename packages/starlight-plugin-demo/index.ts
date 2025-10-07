@@ -6,7 +6,7 @@ export default function starlightPluginDemo(): StarlightPlugin {
 	return {
 		name: 'starlight-plugin-demo',
 		hooks: {
-			'config:setup': async ({ addIntegration }) => {
+			'config:setup': ({ addIntegration }) => {
 				addIntegration({
 					name: 'starlight-plugin-integration',
 					hooks: {

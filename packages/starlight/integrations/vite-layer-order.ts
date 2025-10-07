@@ -29,7 +29,7 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 
 			try {
 				ast = this.parse(code);
-			} catch (error) {
+			} catch {
 				return;
 			}
 

@@ -289,7 +289,7 @@ importers:
   packages/starlight-plugin-demo:
     devDependencies:
       '@astrojs/starlight':
-        specifier: ^0.35.2
+        specifier: workspace:*
         version: link:../starlight
 
   packages/starlight/__e2e__/fixtures/basics:
