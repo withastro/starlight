@@ -28,8 +28,8 @@
     "@astrojs/starlight": ">=0.32.0"
   },
   "dependencies": {
-    "@docsearch/css": "^4.1.0",
-    "@docsearch/js": "^4.1.0"
+    "@docsearch/css": "^4.2.0",
+    "@docsearch/js": "^4.2.0"
   },
   "devDependencies": {
     "@astrojs/starlight": "workspace:*"
