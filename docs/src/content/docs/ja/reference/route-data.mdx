@@ -16,7 +16,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 ---
 ```
 
-[ルートミドルウェア](/ja/guides/route-data/#customizing-route-data) 内では、ミドルウェア関数に渡される context オブジェクトからルートデータにアクセスします。
+[ルートミドルウェア](/ja/guides/route-data/#ルートデータのカスタマイズ) 内では、ミドルウェア関数に渡される context オブジェクトからルートデータにアクセスします。
 
 ```ts {5}
 // src/routeData.ts
@@ -69,7 +69,7 @@ export const onRequest = defineRouteMiddleware((context) => {
 コンテンツファイル名から生成されたこのページのスラッグ。
 
 このプロパティは非推奨であり、今後のバージョンで削除される予定です。  
-[Starlight の `docsLoader`](/ja/manual-setup/#configure-content-collections) を使用して新しいコンテンツレイヤー API に移行し、代わりに [`id`](#id) プロパティを使用してください。
+[Starlight の `docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定) を使用して新しいコンテンツレイヤー API に移行し、代わりに [`id`](#id) プロパティを使用してください。
 
 ### `id`
 
