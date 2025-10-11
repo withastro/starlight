@@ -129,6 +129,37 @@ import { Aside } from '@astrojs/starlight/components';
   
 </Preview>
 
+### カスタムアイコンの使用
+
+[`icon`](#icon)属性を使用して、デフォルトの補足情報アイコンを上書きできます。  
+値には、[Starlightの組み込みアイコン](/ja/reference/icons/#all-icons)の名前を指定します。
+
+<Preview>
+
+```mdx 'icon="starlight"'
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" icon="starlight">
+	カスタムアイコン*付きの*ヒント補足情報。
+</Aside>
+```
+
+ <Fragment slot="markdoc">
+
+```markdoc 'icon="starlight"'
+{% aside type="tip" icon="starlight" %}
+カスタムアイコン*付きの*ヒント補足情報。
+{% /aside %}
+```
+
+ </Fragment>
+
+<Aside slot="preview" type="tip" icon="starlight">
+	カスタムアイコン*付きの*ヒント補足情報。
+</Aside>
+
+</Preview>
+
 ## `<Aside>` プロパティ
 
 **実装:** [`Aside.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro)
@@ -153,3 +184,9 @@ import { Aside } from '@astrojs/starlight/components';
 
 補足情報に表示するタイトル。
 `title`が設定されていない場合、現在の補足情報に`type`のデフォルトタイトルが使用されます。
+
+### `icon`
+
+**型:** [`StarlightIcon`](/ja/reference/icons/#starlighticon-type)
+
+補足情報に`icon`属性を設定して、[Starlightの組み込みアイコン](/ja/reference/icons/#all-icons)の名前を指定できます。
