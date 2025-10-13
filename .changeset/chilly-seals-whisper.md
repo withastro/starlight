@@ -2,4 +2,4 @@
 '@astrojs/starlight-docsearch': minor
 ---
 
-upgrade docsearch to v4
+Upgrades the [docsearch package](https://github.com/algolia/docsearch) to stable v4  
