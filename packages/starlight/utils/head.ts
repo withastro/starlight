@@ -43,7 +43,7 @@ export function getHead(
 		{
 			tag: 'link',
 			attrs: {
-				rel: 'shortcut icon',
+				rel: 'icon',
 				href: fileWithBase(config.favicon.href),
 				type: config.favicon.type,
 			},
@@ -204,7 +204,7 @@ function getImportance(entry: HeadConfig[number]) {
 			entry.tag === 'link' &&
 			entry.attrs &&
 			'rel' in entry.attrs &&
-			entry.attrs.rel === 'shortcut icon'
+			entry.attrs.rel === 'icon'
 		) {
 			return 70;
 		}
