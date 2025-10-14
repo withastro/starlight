@@ -40,12 +40,12 @@ function remarkPlugins(options: RemarkRehypePluginOptions): RemarkPlugin {
 	return function attacher(this) {
 		const remarkAsidesTransformer = remarkAsides(options).call(this)!;
 
-		return function transformer(...args) {
+		return async function transformer(...args) {
 			const [, file] = args;
 
 			if (!shouldTransformFile(file, remarkRehypePaths)) return;
 
-			remarkAsidesTransformer(...args);
+			await remarkAsidesTransformer(...args);
 		};
 	};
 }
@@ -55,16 +55,19 @@ function rehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin {
 	const remarkRehypePaths = getRemarkRehypePaths(options);
 
 	return function attacher(this) {
-		const rehypeRtlCodeSupportTransformer = rehypeRtlCodeSupport(options).call(this)!;
-		const rehypeAutolinkHeadingsTransformer = rehypeAutolinkHeadings(options).call(this)!;
+		const rehypeRtlCodeSupportTransformer = rehypeRtlCodeSupport(options).call(this);
+		const rehypeAutolinkHeadingsTransformer = rehypeAutolinkHeadings(options).call(this);
 
-		return function transformer(...args) {
+		return async function transformer(...args) {
 			const [, file] = args;
 
 			if (!shouldTransformFile(file, remarkRehypePaths)) return;
 
-			rehypeRtlCodeSupportTransformer(...args);
-			if (options.starlightConfig.markdown.headingLinks) rehypeAutolinkHeadingsTransformer(...args);
+			await rehypeRtlCodeSupportTransformer(...args);
+
+			if (options.starlightConfig.markdown.headingLinks) {
+				await rehypeAutolinkHeadingsTransformer(...args);
+			}
 		};
 	};
 }
