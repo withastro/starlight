@@ -170,7 +170,7 @@ test('places the default favicon below any user provided icons', () => {
 	]);
 
 	const defaultFaviconIndex = head.findIndex(
-		(tag) => tag.tag === 'link' && tag.attrs?.rel === 'shortcut icon'
+		(tag) => tag.tag === 'link' && tag.attrs?.rel === 'icon'
 	);
 	const userFaviconIndex = head.findIndex((tag) => tag.tag === 'link' && tag.attrs?.rel === 'icon');
 
