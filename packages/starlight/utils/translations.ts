@@ -8,6 +8,7 @@ import type { RemoveIndexSignature } from './types';
 import { getCollectionPathFromRoot } from './collection';
 import { stripExtension, stripLeadingSlash } from './path';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - This may be a type error in projects without an i18n collection and running
 // `tsc --noEmit` in their project. Note that it is not possible to inline this type in
 // `UserI18nSchema` because this would break types for users having multiple data collections.
@@ -28,6 +29,7 @@ async function loadTranslations() {
 	const warn = console.warn;
 	console.warn = () => {};
 	const userTranslations: Record<string, UserI18nSchema> = Object.fromEntries(
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore — may be a type error in projects without an i18n collection
 		(await getCollection('i18n')).map(({ id, data, filePath }) => {
 			const lang =
@@ -49,7 +51,7 @@ async function loadTranslations() {
  * const t = useTranslations('en');
  * const label = t('search.label'); // => 'Search'
  */
-export const useTranslations = createTranslationSystem(
+export const useTranslations = await createTranslationSystem(
 	config,
 	await loadTranslations(),
 	pluginTranslations

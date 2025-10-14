@@ -6,7 +6,7 @@ import { createRemarkRehypePluginTestOptions } from './utils';
 
 const processor = rehype()
 	.data('settings', { fragment: true })
-	.use(starlightRehypePlugins(createRemarkRehypePluginTestOptions()));
+	.use(starlightRehypePlugins(await createRemarkRehypePluginTestOptions()));
 
 function renderMarkdown(content: string, options: { fileURL?: URL } = {}) {
 	return processor.process(

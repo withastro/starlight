@@ -5,7 +5,7 @@ import { createRemarkRehypePluginTestOptions } from './utils';
 
 test('does not run Starlight remark plugins on documents without a file path', async () => {
 	const processor = await createMarkdownProcessor({
-		remarkPlugins: [...starlightRemarkPlugins(createRemarkRehypePluginTestOptions())],
+		remarkPlugins: [...starlightRemarkPlugins(await createRemarkRehypePluginTestOptions())],
 	});
 
 	const res = await processor.render(
@@ -26,7 +26,7 @@ Some text
 
 test('does not run Starlight rehype plugins on documents without a file path', async () => {
 	const processor = await createMarkdownProcessor({
-		rehypePlugins: [...starlightRehypePlugins(createRemarkRehypePluginTestOptions())],
+		rehypePlugins: [...starlightRehypePlugins(await createRemarkRehypePluginTestOptions())],
 	});
 
 	const res = await processor.render(

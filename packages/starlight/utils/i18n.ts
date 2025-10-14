@@ -169,7 +169,7 @@ function getLocaleInfo(lang: string) {
 			label: label[0]?.toLocaleUpperCase(locale) + label.slice(1),
 			dir: getLocaleDir(locale),
 		};
-	} catch (error) {
+	} catch {
 		throw new AstroError(
 			`Failed to get locale informations for the '${lang}' locale.`,
 			'Make sure to provide a valid BCP-47 tags (e.g. en, ar, or zh-CN).'
@@ -184,9 +184,11 @@ function getLocaleInfo(lang: string) {
 function getLocaleDir(locale: Intl.Locale): 'ltr' | 'rtl' {
 	if ('textInfo' in locale) {
 		// @ts-expect-error - `textInfo` is not typed but is available in v8 based environments.
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return locale.textInfo.direction;
 	} else if ('getTextInfo' in locale) {
 		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
 		return locale.getTextInfo().direction;
 	}
 	// Firefox does not support `textInfo` or `getTextInfo` yet so we fallback to a well-known list

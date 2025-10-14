@@ -11,7 +11,9 @@ const starlightConfig = {
 } satisfies StarlightUserConfig;
 
 const processor = await createMarkdownProcessor({
-	rehypePlugins: [...starlightRehypePlugins(createRemarkRehypePluginTestOptions(starlightConfig))],
+	rehypePlugins: [
+		...starlightRehypePlugins(await createRemarkRehypePluginTestOptions(starlightConfig)),
+	],
 });
 
 function renderMarkdown(

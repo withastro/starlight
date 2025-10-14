@@ -59,7 +59,7 @@ La façon dont une page web est construite peut avoir un impact sur la puissance
 En utilisant un minimum de JavaScript, Starlight réduit la puissance de traitement dont le téléphone, la tablette ou l'ordinateur d'un utilisateur a besoin pour charger et afficher les pages.
 
 Soyez vigilant lorsque vous ajoutez des fonctionnalités telles que des scripts de suivi analytique ou des contenus à forte teneur en JavaScript, comme des vidéos intégrées, car ils peuvent augmenter la consommation d'énergie de la page.
-Si vous avez besoin d'analyses, envisagez de choisir une option légère comme [Cabin][cabin], [Fathom][fathom], ou [Plausible][plausible].
+Si vous avez besoin de mesures d'audience, envisagez de choisir une option légère comme [Cabin][cabin], [Fathom][fathom], ou [Plausible][plausible].
 Les vidéos intégrées comme celles de YouTube et de Vimeo peuvent être améliorées en attendant de [charger la vidéo lors de l'interaction avec l'utilisateur][lazy-video].
 Des paquets comme [`astro-embed`][embed] peuvent aider pour les services communs.
 
@@ -92,33 +92,33 @@ Ces tests avec le [Website Carbon Calculator][wcc] comparent des pages similaire
 | Framework                   | CO₂ par page visitée | Notation |
 | --------------------------- | -------------------- | :------: |
 | [Starlight][sl-carbon]      | 0.01g                |    A+    |
-| [Read the Docs][rtd-carbon] | 0.07g                |    A+    |
-| [Sphinx][sx-carbon]         | 0.07g                |    A+    |
-| [VitePress][vp-carbon]      | 0.07g                |    A+    |
-| [Docus][dc-carbon]          | 0.10g                |    A     |
-| [docsify][dy-carbon]        | 0.11g                |    A     |
-| [mdBook][md-carbon]         | 0.13g                |    A     |
-| [MkDocs][mk-carbon]         | 0.15g                |    A     |
-| [Fumadocs][fs-carbon]       | 0.16g                |    A     |
-| [Nextra][nx-carbon]         | 0.16g                |    A     |
-| [Docusaurus][ds-carbon]     | 0.25g                |    B     |
-| [Mintlify][mt-carbon]       | 0.99g                |    F     |
-| [GitBook][gb-carbon]        | 1.19g                |    F     |
+| [Sphinx][sx-carbon]         | 0.01g                |    A+    |
+| [Read the Docs][rtd-carbon] | 0.03g                |    A+    |
+| [VitePress][vp-carbon]      | 0.04g                |    A     |
+| [docsify][dy-carbon]        | 0.05g                |    A     |
+| [mdBook][md-carbon]         | 0.05g                |    A     |
+| [Nextra][nx-carbon]         | 0.05g                |    A     |
+| [MkDocs][mk-carbon]         | 0.07g                |    A     |
+| [Fumadocs][fs-carbon]       | 0.07g                |    A     |
+| [Docusaurus][ds-carbon]     | 0.10g                |    B     |
+| [Docus][dc-carbon]          | 0.11g                |    B     |
+| [GitBook][gb-carbon]        | 0.42g                |    F     |
+| [Mintlify][mt-carbon]       | 0.48g                |    F     |
 
-<small>Données collectées le 12 avril 2025. Cliquez sur un lien pour voir les chiffres actualisés.</small>
+<small>Données collectées le 7 août 2025. Cliquez sur un lien pour voir les chiffres actualisés.</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
 [md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
-[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-vercel-app-docs-ui/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## Plus de ressources

@@ -49,7 +49,7 @@ export default function rehypeAutolinkHeadings({
 				{
 					type: 'element',
 					tagName: 'a',
-					properties: { class: 'sl-anchor-link', href: '#' + node.properties.id },
+					properties: { class: 'sl-anchor-link', href: '#' + String(node.properties.id) },
 					children: [AnchorLinkIcon, h('span', { class: 'sr-only' }, accessibleLabel)],
 				}
 			);

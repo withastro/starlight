@@ -95,7 +95,9 @@ export default function StarlightIntegration(
 				// config or by a plugin.
 				const allIntegrations = [...config.integrations, ...integrations];
 				if (!allIntegrations.find(({ name }) => name === 'astro-expressive-code')) {
-					integrations.push(...starlightExpressiveCode({ starlightConfig, useTranslations }));
+					integrations.push(
+						...starlightExpressiveCode({ astroConfig: config, starlightConfig, useTranslations })
+					);
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));

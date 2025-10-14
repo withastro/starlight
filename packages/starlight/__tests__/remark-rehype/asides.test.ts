@@ -16,7 +16,7 @@ const starlightConfig = {
 
 const processor = await createMarkdownProcessor({
 	remarkPlugins: [
-		...starlightRemarkPlugins(createRemarkRehypePluginTestOptions(starlightConfig)),
+		...starlightRemarkPlugins(await createRemarkRehypePluginTestOptions(starlightConfig)),
 		// The restoration plugin is run after the asides and any other plugin that may have been
 		// injected by Starlight plugins.
 		remarkDirectivesRestoration,
@@ -136,8 +136,12 @@ Some text
 			// We are not relying on `toThrowErrorMatchingInlineSnapshot()` and our custom snapshot
 			// serializer in this specific test as error thrown in a remark plugin includes a dynamic file
 			// path.
+			// `expect.objectContaining` returns `any`.
+			/* eslint-disable @typescript-eslint/no-unsafe-argument */
 			expect.objectContaining({
 				type: 'AstroUserError',
+				// `expect.stringMatching` returns `any`.
+				/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 				hint: expect.stringMatching(
 					/An aside custom icon must be set to the name of one of Starlight’s built-in icons, but received `invalid-icon-name`/
 				),
@@ -274,7 +278,7 @@ test('runs without locales config', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
 			...starlightRemarkPlugins(
-				createRemarkRehypePluginTestOptions({
+				await createRemarkRehypePluginTestOptions({
 					...starlightConfig,
 					// With no locales config, the default built-in locale is used.
 					defaultLocale: BuiltInDefaultLocale.lang,
@@ -315,7 +319,7 @@ test('does not add any whitespace character after any unhandled directive', asyn
 test('lets remark plugin injected by Starlight plugins handle text and leaf directives', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
-			...starlightRemarkPlugins(createRemarkRehypePluginTestOptions(starlightConfig)),
+			...starlightRemarkPlugins(await createRemarkRehypePluginTestOptions(starlightConfig)),
 			// A custom remark plugin injected by a Starlight plugin through an Astro integration would
 			// run before the restoration plugin.
 			function customRemarkPlugin() {
@@ -344,7 +348,7 @@ test('lets remark plugin injected by Starlight plugins handle text and leaf dire
 test('does not transform back directive nodes with data', async () => {
 	const processor = await createMarkdownProcessor({
 		remarkPlugins: [
-			...starlightRemarkPlugins(createRemarkRehypePluginTestOptions(starlightConfig)),
+			...starlightRemarkPlugins(await createRemarkRehypePluginTestOptions(starlightConfig)),
 			// A custom remark plugin updating the node with data that should be consumed by rehype.
 			function customRemarkPlugin() {
 				return function transformer(tree: Root) {

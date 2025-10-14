@@ -7,7 +7,7 @@ import type { Root as RemarkRoot } from 'mdast';
 import remarkDirective from 'remark-directive';
 import type { Plugin } from 'unified';
 import type { VFile } from 'vfile';
-import { resolveCollectionPath } from '../utils/collection';
+import { resolveCollectionPath } from '../utils/collection-fs';
 import type { HookParameters, StarlightConfig } from '../types';
 import { remarkAsides } from './asides';
 import { rehypeRtlCodeSupport } from './code-rtl-support';
