@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-Enlarges the Farcaster social icon to the correct size.
+Enlarges the Farcaster icon to better match other social icons
