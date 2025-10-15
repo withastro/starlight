@@ -33,7 +33,7 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 				return;
 			}
 
-			let isStarlightPage = false;
+			let hasStarlightPageImport = false;
 
 			for (const node of ast.body) {
 				if (node.type !== 'ImportDeclaration') continue;
@@ -44,11 +44,11 @@ export function vitePluginStarlightCssLayerOrder(): VitePlugin {
 				);
 				if (!importDefaultSpecifier) continue;
 
-				isStarlightPage = true;
+				hasStarlightPageImport = true;
 				break;
 			}
 
-			if (!isStarlightPage) return;
+			if (!hasStarlightPageImport) return;
 
 			// Format path to unix style path.
 			const filename = id.replace(/\\/g, '/');
