@@ -68,18 +68,7 @@ class DocsSite {
 			throw new Error('No URLs found in sitemap.');
 		}
 
-		// TODO(HiDeoo) Revert this change
-		// const urls: string[] = [];
-		const urls: string[] = [
-			'http://localhost:4321/tests/1/',
-			'http://localhost:4321/tests/2/',
-			'http://localhost:4321/tests/3/',
-			'http://localhost:4321/tests/4/',
-			'http://localhost:4321/tests/5/',
-			'http://localhost:4321/tests/6/',
-			'http://localhost:4321/tests/7/',
-			'http://localhost:4321/tests/8/',
-		];
+		const urls: string[] = [];
 
 		for (const site of sites) {
 			const url = site.replace(config.sitemap.replace.query, config.sitemap.replace.value);

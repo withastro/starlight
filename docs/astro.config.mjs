@@ -3,8 +3,6 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
-// TODO(HiDeoo) Delete
-import starlightPluginDemo from 'starlight-plugin-demo';
 
 export const locales = {
 	root: { label: 'English', lang: 'en' },
@@ -72,20 +70,6 @@ export default defineConfig({
 			customCss: ['./src/assets/landing.css'],
 			locales,
 			sidebar: [
-				// TODO(HiDeoo) Delete this group.
-				{
-					label: 'Tests',
-					items: [
-						{ label: '1', link: 'tests/1' },
-						{ label: '2', link: 'tests/2' },
-						{ label: '3', link: 'tests/3' },
-						{ label: '4', link: 'tests/4' },
-						{ label: '5 (plugin)', link: 'tests/5' },
-						{ label: '6 (plugin)', link: 'tests/6' },
-						{ label: '7 (plugin)', link: 'tests/7' },
-						{ label: '8 (plugin)', link: 'tests/8' },
-					],
-				},
 				{
 					label: 'Start Here',
 					translations: {
@@ -205,8 +189,7 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 					]
-				: // TODO(HiDeoo) Delete
-					[starlightPluginDemo()],
+				: [],
 		}),
 	],
 });
