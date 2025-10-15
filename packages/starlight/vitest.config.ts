@@ -20,6 +20,8 @@ export default defineConfig({
 				'index.ts',
 				// Since Vitest 2.1.2, coverage is collected for `*.astro` files.
 				'**/*.astro',
+				// Starlight Pagefind web components.
+				'components/pagefind/**',
 			],
 			thresholds: {
 				lines: 87,

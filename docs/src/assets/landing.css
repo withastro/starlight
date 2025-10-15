@@ -15,7 +15,7 @@
 			60rem 30rem;
 }
 
-[data-has-hero] header {
+[data-has-hero] .page > header {
 	border-bottom: 1px solid transparent;
 	background-color: transparent;
 	-webkit-backdrop-filter: blur(16px);

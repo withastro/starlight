@@ -1,0 +1,64 @@
+---
+import Default from '@astrojs/starlight/components/Search.astro';
+
+// TODO(HiDeoo) Delete this override.
+
+const { id } = Astro.locals.starlightRoute;
+
+const triggerType =
+	id === 'demo/trigger-filters' ? 'filters' : id === 'demo/trigger-search' ? 'search' : undefined;
+---
+
+{
+	triggerType ? (
+		<custom-site-search data-trigger-type={triggerType}>
+			<Default>
+				<slot />
+			</Default>
+		</custom-site-search>
+	) : (
+		<Default>
+			<slot />
+		</Default>
+	)
+}
+
+<script>
+	customElements.define(
+		'custom-site-search',
+		class CustomSiteSearch extends HTMLElement {
+			constructor() {
+				super();
+
+				const triggerType = this.dataset.triggerType;
+				if (!triggerType) return;
+
+				this.#applyTrigger(triggerType);
+			}
+
+			async #applyTrigger(triggerType: string) {
+				const { getPagefindApi } = await import('@astrojs/starlight/pagefind');
+				const starlightPagefindApi = await getPagefindApi();
+
+				switch (triggerType) {
+					case 'filters': {
+						starlightPagefindApi.triggerFilters({
+							author: ['Alice'],
+						});
+						break;
+					}
+					case 'search': {
+						starlightPagefindApi.triggerSearch('test');
+						break;
+					}
+				}
+			}
+		}
+	);
+</script>
+
+<style>
+	custom-site-search {
+		display: contents;
+	}
+</style>
