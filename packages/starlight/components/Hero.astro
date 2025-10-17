@@ -14,14 +14,14 @@ const imageAttrs = {
 	height: 400,
 	alt: image?.alt || '',
 	quality: 'mid',
-	widths: [320, 400, 580, 760],
+	widths: [300, 450, 600],
 	// Matches the CSS layout styles below:
 	// - For the smallest viewport widths, the hero image is roughly 70% of the width.
 	// - Once the viewport is wider than 450px, the hero image is constrained to 320px wide.
 	// - Once the layout switches to two columns, the hero image is roughly 35% of the width (4fr vs 7fr for the text).
 	// - Once the viewport is wider than 1100px, the image is constrained to 380px wide.
 	// User CSS may alter this, but hopefully the heuristics are close enough to roughly match what they change to.
-	sizes: '(min-width: 1100px) 380px, (min-width: 800px) 35vw, (min-width: 450px) 320px, 70vw',
+	sizes: '(min-width: 420px) 300px, 60vw',
 } satisfies Omit<LocalImageProps & RemoteImageProps, 'src'>;
 
 let darkImage: ImageMetadata | undefined;
