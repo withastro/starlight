@@ -84,6 +84,17 @@ test('merges two <link rel="canonical" href="" /> tags', () => {
 	]);
 });
 
+test('merges two <link rel="sitemap" href="" /> tags', () => {
+	const customLink = {
+		tag: 'link',
+		attrs: { rel: 'sitemap', href: '/sitemap-custom.xml' },
+	} as const;
+	const head = getTestHead([customLink]);
+	expect(head.filter((tag) => tag.tag === 'link' && tag.attrs?.rel === 'sitemap')).toEqual([
+		customLink,
+	]);
+});
+
 test('does not merge same link tags', () => {
 	const customLink = {
 		tag: 'link',
