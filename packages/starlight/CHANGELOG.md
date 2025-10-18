@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.36.2
+
+### Patch Changes
+
+- [#3484](https://github.com/withastro/starlight/pull/3484) [`620fb38`](https://github.com/withastro/starlight/commit/620fb3857e40a37a2f8bdf2d0430b106e8f80cdb) Thanks [@gboubeta-uvigo](https://github.com/gboubeta-uvigo)! - Improves Spanish UI translations
+
 ## 0.36.1
 
 ### Patch Changes
