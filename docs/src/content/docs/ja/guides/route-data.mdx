@@ -72,7 +72,7 @@ Starlight のルートデータは、設定なしでそのまま動作します�
    export default defineConfig({
    	integrations: [
    		starlight({
-   			title: 'My delightful docs site',
+   			title: 'カスタムルートデータのページ',
    			routeMiddleware: './src/routeData.ts',
    		}),
    	],
@@ -113,7 +113,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My site with multiple middleware',
+			title: '複数のミドルウェアのページ',
 			routeMiddleware: ['./src/middleware-one.ts', './src/middleware-two.ts'],
 		}),
 	],
