@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.36.1
+
+### Patch Changes
+
+- [#3479](https://github.com/withastro/starlight/pull/3479) [`2fec483`](https://github.com/withastro/starlight/commit/2fec4833d4867db35b77079ce3026b79ba1e0441) Thanks [@gboubeta-uvigo](https://github.com/gboubeta-uvigo)! - Updates Galician UI translations
+
+- [#3457](https://github.com/withastro/starlight/pull/3457) [`c6c0c51`](https://github.com/withastro/starlight/commit/c6c0c5114a659b22ffcc4c2085ad8c1fc4f43a5d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Deduplicates sitemap link tags in the head.
+
+  When [enabling sitemap](https://starlight.astro.build/guides/customization/#enable-sitemap) in Starlight, a `<link rel="sitemap" href="/sitemap-index.xml">` tag is automatically added to the head of each page. Manually specifying sitemap link tags using the Starlight [`head` configuration option](https://starlight.astro.build/reference/configuration/#head) or the [`head` frontmatter field](https://starlight.astro.build/reference/frontmatter/#head) will now override the default sitemap link tag added by Starlight.
+
+  This change ensures that users manually adding the `@astrojs/sitemap` integration to the Astro `integrations` array for more fine-grained control over sitemap generation and also using the [`filenameBase` integration option](https://docs.astro.build/en/guides/integrations-guide/sitemap/#filenamebase) can customize the sitemap link tag in the head.
+
+- [#3448](https://github.com/withastro/starlight/pull/3448) [`1fc7501`](https://github.com/withastro/starlight/commit/1fc7501d16218c7f156c5e90df25ae6fbb8abfea) Thanks [@dionysuzx](https://github.com/dionysuzx)! - Enlarges the Farcaster icon to better match other social icons
+
+- [#3473](https://github.com/withastro/starlight/pull/3473) [`07204dd`](https://github.com/withastro/starlight/commit/07204dd7b8b6ee71bf24ff9c7d70fc7306bf2076) Thanks [@gboubeta](https://github.com/gboubeta)! - Fixes a typo in Galician table of contents label
+
 ## 0.36.0
 
 ### Minor Changes
