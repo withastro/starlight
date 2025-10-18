@@ -1,12 +1,9 @@
-import { rehypeHeadingIds } from '@astrojs/markdown-remark';
-import type { AstroConfig, AstroUserConfig } from 'astro';
 import type { Nodes, Root } from 'hast';
 import { toString } from 'hast-util-to-string';
 import { h } from 'hastscript';
 import type { Transformer } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
-import type { HookParameters, StarlightConfig } from '../types';
-import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark-rehype-utils';
+import type { RemarkRehypePluginOptions } from './remark-rehype';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -24,16 +21,13 @@ const AnchorLinkIcon = h(
 /**
  * Add anchor links to headings.
  */
-export default function rehypeAutolinkHeadings(
-	docsCollectionPath: string,
-	useTranslationsForLang: AutolinkHeadingsOptions['useTranslations'],
-	absolutePathToLang: AutolinkHeadingsOptions['absolutePathToLang']
-) {
+export default function rehypeAutolinkHeadings({
+	absolutePathToLang,
+	useTranslations,
+}: RemarkRehypePluginOptions) {
 	const transformer: Transformer<Root> = (tree, file) => {
-		if (!shouldTransformFile(file, docsCollectionPath)) return;
-
 		const pageLang = absolutePathToLang(file.path);
-		const t = useTranslationsForLang(pageLang);
+		const t = useTranslations(pageLang);
 
 		visit(tree, 'element', function (node, index, parent) {
 			if (!headingRank(node) || !node.properties.id || typeof index !== 'number' || !parent) {
@@ -68,36 +62,6 @@ export default function rehypeAutolinkHeadings(
 		return transformer;
 	};
 }
-
-interface AutolinkHeadingsOptions {
-	starlightConfig: Pick<StarlightConfig, 'markdown'>;
-	astroConfig: Pick<AstroConfig, 'srcDir'> & {
-		experimental: Pick<AstroConfig['experimental'], 'headingIdCompat'>;
-	};
-	useTranslations: HookParameters<'config:setup'>['useTranslations'];
-	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
-}
-type RehypePlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['rehypePlugins']>;
-
-export const starlightAutolinkHeadings = ({
-	starlightConfig,
-	astroConfig,
-	useTranslations,
-	absolutePathToLang,
-}: AutolinkHeadingsOptions): RehypePlugins =>
-	starlightConfig.markdown.headingLinks
-		? [
-				[
-					rehypeHeadingIds,
-					{ experimentalHeadingIdCompat: astroConfig.experimental?.headingIdCompat },
-				],
-				rehypeAutolinkHeadings(
-					getRemarkRehypeDocsCollectionPath(astroConfig.srcDir),
-					useTranslations,
-					absolutePathToLang
-				),
-			]
-		: [];
 
 // This utility is inlined from https://github.com/syntax-tree/hast-util-heading-rank
 // Copyright (c) 2020 Titus Wormer <tituswormer@gmail.com>
