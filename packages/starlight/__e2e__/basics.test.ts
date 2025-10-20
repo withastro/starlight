@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import { expect, testFactory, type Locator } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
@@ -475,17 +476,20 @@ test.describe('components', () => {
 			const starlight = await makeServer('dev', { mode: 'dev' });
 			await starlight.goto('/starlight-page-css-layer-order');
 
-			const linkButton = page.getByRole('link', { name: 'Tabs link button' });
-			await linkButton.highlight();
+			const firstStyleContent = await page.evaluate(
+				() => document.head.querySelector('style')?.textContent ?? ''
+			);
 
-			const [bgColor, textColor] = await linkButton.evaluate((element) => {
-				const styles = window.getComputedStyle(element);
-				return [styles.getPropertyValue('background-color'), styles.getPropertyValue('color')];
-			});
+			const expectedLayersOrder = await fs.readFile(
+				new URL('../style/layers.css', import.meta.url),
+				'utf-8'
+			);
 
-			// If the background color and text color are the same, the text is not readable and the CSS
-			// layer order is incorrect.
-			expect(bgColor).not.toBe(textColor);
+			// Ensure that the first style block in the head contains the expected layers order rather
+			// the styles of the link button wrapped in a `@layer` block at-rule automatically declaring
+			// a new layer and thus potentially breaking the intended layers order as the initial order
+			// in which layers are declared indicates which layer has precedence.
+			expect(firstStyleContent).toBe(expectedLayersOrder);
 		});
 	});
 
