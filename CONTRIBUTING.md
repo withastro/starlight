@@ -64,6 +64,13 @@ You can [develop locally](#developing-locally) or use an online coding developme
    pnpm i
    ```
 
+5. **Run the dev server** to generate types:
+
+   ```sh
+   cd docs
+   pnpm dev
+   ```
+
 #### Developing using Gitpod
 
 **Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
@@ -80,7 +87,7 @@ You can [develop locally](#developing-locally) or use an online coding developme
 
 1. **Create a new codespace** via https://codespaces.new/withastro/starlight
 
-2. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
+2. **Run the dev server** to generate types. Pass the `--host` flag to avoid “502 Bad Gateway” errors:
 
    ```sh
    cd docs
