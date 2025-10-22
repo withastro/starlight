@@ -7,7 +7,7 @@ import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
 import { localizedUrl } from './localizedUrl';
 
-const HeadSchema = HeadConfigSchema();
+const HeadSchema = HeadConfigSchema({ source: 'content' });
 
 /** Get the head for the current page. */
 export function getHead(
@@ -126,7 +126,8 @@ function createHead(defaults: HeadUserConfig, ...heads: HeadConfig[]) {
 }
 
 /**
- * Test if a head config object contains a matching `<title>` or `<meta>` or `<link rel="canonical">` tag.
+ * Test if a head config object contains a matching `<title>`, `<meta>`, `<link rel="canonical">`
+ * or `<link rel="sitemap">` tag.
  *
  * For example, will return true if `head` already contains
  * `<meta name="description" content="A">` and the passed `tag`
@@ -141,7 +142,9 @@ function hasTag(head: HeadConfig, entry: HeadConfig[number]): boolean {
 			return hasOneOf(head, entry, ['name', 'property', 'http-equiv']);
 		case 'link':
 			return head.some(
-				({ attrs }) => entry.attrs?.rel === 'canonical' && attrs?.rel === 'canonical'
+				({ attrs }) =>
+					(entry.attrs?.rel === 'canonical' && attrs?.rel === 'canonical') ||
+					(entry.attrs?.rel === 'sitemap' && attrs?.rel === 'sitemap')
 			);
 		default:
 			return false;

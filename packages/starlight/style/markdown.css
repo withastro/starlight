@@ -2,7 +2,15 @@
 	.sl-markdown-content
 		:not(a, strong, em, del, span, input, code, br)
 		+ :not(a, strong, em, del, span, input, code, br, :where(.not-content *)) {
-		margin-top: 1rem;
+		margin-top: var(--sl-content-gap-y);
+	}
+
+	/* Vertical spacing between Markdown content blocks and UI Framework components using client directives. */
+	.sl-markdown-content
+		:not(a, strong, em, del, span, input, code, br)
+		+ :is(astro-island, astro-slot)
+		> :not(a, strong, em, del, span, input, code, br, :where(.not-content *)):first-child {
+		margin-top: var(--sl-content-gap-y);
 	}
 
 	/* Headings after non-headings have more spacing. */
