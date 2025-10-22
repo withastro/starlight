@@ -188,7 +188,15 @@ test('places the default favicon below any user provided icons', () => {
 	expect(defaultFaviconIndex).toBeGreaterThan(userFaviconIndex);
 });
 
-function getTestHead(heads: HeadConfig = [], route = routes[0]!): HeadConfig {
+test.only('omits meta og:url tag when site is not set', () => {
+	const head = getTestHead(undefined, undefined, false);
+
+	const ogUrlExists = head.some((tag) => tag.tag === 'meta' && tag.attrs?.property === 'og:url');
+
+	expect(ogUrlExists).toBe(false);
+});
+
+function getTestHead(heads: HeadConfig = [], route = routes[0]!, setSite?: boolean): HeadConfig {
 	return generateRouteData({
 		props: {
 			...route,
@@ -201,6 +209,9 @@ function getTestHead(heads: HeadConfig = [], route = routes[0]!): HeadConfig {
 				},
 			},
 		},
-		context: getRouteDataTestContext(),
+		context:
+			setSite === undefined
+				? getRouteDataTestContext()
+				: getRouteDataTestContext(undefined, setSite),
 	}).head;
 }
