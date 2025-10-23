@@ -177,7 +177,7 @@ test('places the default favicon below any user provided icons', () => {
 	expect(defaultFaviconIndex).toBeGreaterThan(userFaviconIndex);
 });
 
-test.only('omits meta og:url tag when site is not set', () => {
+test('omits meta og:url tag when site is not set', () => {
 	const head = getTestHead(undefined, undefined, false);
 
 	const ogUrlExists = head.some((tag) => tag.tag === 'meta' && tag.attrs?.property === 'og:url');
