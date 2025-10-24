@@ -2,7 +2,7 @@
   "name": "@astrojs/starlight-markdoc",
   "version": "0.5.0",
   "description": "Markdoc preset for the Starlight documentation theme for Astro",
-  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "author": "withastro",
   "license": "MIT",
   "repository": {
     "type": "git",

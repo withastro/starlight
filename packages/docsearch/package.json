@@ -2,7 +2,7 @@
   "name": "@astrojs/starlight-docsearch",
   "version": "0.6.0",
   "description": "Algolia DocSearch plugin for the Starlight documentation theme for Astro",
-  "author": "Chris Swithinbank <swithinbank@gmail.com>",
+  "author": "withastro",
   "license": "MIT",
   "repository": {
     "type": "git",
