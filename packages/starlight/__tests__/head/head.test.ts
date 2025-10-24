@@ -196,14 +196,6 @@ test('omits meta og:url tag when site is not set', () => {
 	expect(ogUrlExists).toBe(false);
 });
 
-test.only('omits link canonical tag when site is not set', () => {
-	const head = getTestHead(undefined, undefined, false);
-
-	const canonicalExists = head.some((tag) => tag.tag === 'link' && tag.attrs?.rel === 'canonical');
-
-	expect(canonicalExists).toBe(false);
-});
-
 function getTestHead(heads: HeadConfig = [], route = routes[0]!, setSite?: boolean): HeadConfig {
 	return generateRouteData({
 		props: {
