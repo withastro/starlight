@@ -38,7 +38,7 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
-You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) or [Gitpod](#developing-using-gitpod) to get started quickly.
+You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) to get started quickly.
 
 #### Developing locally
 
@@ -64,23 +64,24 @@ You can [develop locally](#developing-locally) or use an online coding developme
    pnpm i
    ```
 
-#### Developing using Gitpod
-
-**Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
-
-1. **Open the Gitpod URL** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
-
-2. **Install dependencies** with `pnpm`:
+5. **Generate TypeScript types** for all Astro modules:
 
    ```sh
-   pnpm i
+   cd docs
+   pnpm astro sync
    ```
 
 #### Developing using GitHub Codespaces
 
 1. **Create a new codespace** via https://codespaces.new/withastro/starlight
 
-2. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
+2. **Generate TypeScript types** for all Astro modules:
+
+   ```sh
+   pnpm astro sync
+   ```
+
+3. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
 
    ```sh
    cd docs
