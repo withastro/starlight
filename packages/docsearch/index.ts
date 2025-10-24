@@ -43,6 +43,18 @@ const DocSearchConfigSchema = z
 		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 		 */
 		searchParameters: z.custom<SearchOptions>(),
+		/**
+		 * Configuration for keyboard shortcuts that trigger the DocSearch modal.
+		 * @see https://docsearch.algolia.com/docs/api/#keyboardshortcuts
+		 */
+		keyboardShortcuts: z
+			.object({
+				/** Enable/disable Ctrl/Cmd+K shortcut. @default true */
+				'Ctrl/Cmd+K': z.boolean().optional(),
+				/** Enable/disable / shortcut. @default true */
+				'/': z.boolean().optional(),
+			})
+			.optional(),
 	})
 	.strict()
 	.or(
