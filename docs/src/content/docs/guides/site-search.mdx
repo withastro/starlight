@@ -232,3 +232,34 @@ Add translations of the modal UI for your language using Starlight’s built-in 
    ```
 
 </Steps>
+
+### Typesense DocSearch
+
+If you prefer a self-hosted or open-source alternative to Algolia DocSearch, try the [Starlight DocSearch Typesense](https://github.com/typesense/starlight-docsearch-typesense) plugin.
+It integrates the same DocSearch interface with a Typesense backend.
+
+See the full documentation and setup guide at [starlight-docsearch.typesense.org](https://starlight-docsearch.typesense.org/getting-started).
+
+```diff lang="js" ins={4,11-17}
+// astro.config.mjs
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightDocSearchTypesense from 'starlight-docsearch-typesense'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'Site with Typesense Search',
+      plugins: [
+        starlightDocSearchTypesense({
+           typesenseCollectionName: 'TYPESENSE_COLLECTION_NAME',
+           typesenseServerConfig: {
+             nodes: [{ url: 'TYPESENSE_SERVER_URL' }],
+             apiKey: 'TYPESENSE_SEARCH_ONLY_API_KEY',
+           },
+         }),
+       ],
+    }),
+  ],
+})
+```
