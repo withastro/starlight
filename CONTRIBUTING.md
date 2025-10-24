@@ -38,7 +38,7 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
-You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) or [Gitpod](#developing-using-gitpod) to get started quickly.
+You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) to get started quickly.
 
 #### Developing locally
 
