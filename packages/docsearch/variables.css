@@ -9,6 +9,7 @@
 	--docsearch-container-background: var(--sl-color-backdrop-overlay);
 	--docsearch-background-color: var(--sl-color-gray-6);
 	--docsearch-hit-highlight-color: var(--sl-color-accent-low);
+	--docsearch-dropdown-menu-background: var(--sl-color-gray-6);
 
 	/* modal */
 	--docsearch-modal-width: 800px;
