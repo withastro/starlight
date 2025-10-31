@@ -7,9 +7,12 @@
 	--docsearch-highlight-color: var(--docsearch-primary-color);
 	--docsearch-muted-color: var(--sl-color-gray-3);
 	--docsearch-container-background: var(--sl-color-backdrop-overlay);
+	--docsearch-background-color: var(--sl-color-gray-6);
+	--docsearch-hit-highlight-color: var(--sl-color-accent-low);
+	--docsearch-dropdown-menu-background: var(--sl-color-black);
 
 	/* modal */
-	--docsearch-modal-width: 560px;
+	--docsearch-modal-width: 800px;
 	--docsearch-modal-height: 600px;
 	--docsearch-modal-background: var(--sl-color-gray-6);
 	--docsearch-modal-shadow: var(--sl-shadow-lg);
@@ -44,4 +47,7 @@
 }
 .DocSearch-Logo svg * {
 	fill: var(--docsearch-muted-color);
+}
+.DocSearch-Label {
+	color: var(--docsearch-muted-color);
 }
