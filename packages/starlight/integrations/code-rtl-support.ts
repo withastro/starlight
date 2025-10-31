@@ -1,12 +1,7 @@
-import type { AstroConfig } from 'astro';
 import type { Root } from 'hast';
 import { CONTINUE, SKIP, visit } from 'unist-util-visit';
-import type { VFile } from 'vfile';
-import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark-rehype-utils';
-
-interface RtlCodeSupportOptions {
-	astroConfig: Pick<AstroConfig, 'srcDir'>;
-}
+import type { Transformer } from 'unified';
+import type { RemarkRehypePluginOptions } from './remark-rehype';
 
 /**
  * rehype plugin that adds `dir` attributes to `<code>` and `<pre>`
@@ -22,13 +17,9 @@ interface RtlCodeSupportOptions {
  * - `<code>` is often LTR, but could also be RTL. `dir="auto"` ensures the bidirectional
  *   algorithm treats the contents of `<code>` in isolation and gives its best guess.
  */
-export function rehypeRtlCodeSupport({ astroConfig }: RtlCodeSupportOptions) {
-	const docsCollectionPath = getRemarkRehypeDocsCollectionPath(astroConfig.srcDir);
-
-	return () => (root: Root, file: VFile) => {
-		if (!shouldTransformFile(file, docsCollectionPath)) return;
-
-		visit(root, 'element', (el) => {
+export function rehypeRtlCodeSupport(_options: RemarkRehypePluginOptions) {
+	const transformer: Transformer<Root> = (tree) => {
+		visit(tree, 'element', (el) => {
 			if (el.tagName === 'pre' || el.tagName === 'code') {
 				el.properties ||= {};
 				if (!('dir' in el.properties)) {
@@ -38,5 +29,9 @@ export function rehypeRtlCodeSupport({ astroConfig }: RtlCodeSupportOptions) {
 			}
 			return CONTINUE;
 		});
+	};
+
+	return function attacher() {
+		return transformer;
 	};
 }
