@@ -43,6 +43,8 @@ const config: Config = {
 		],
 		// Locale-specific included slugs (non-default locale slugs are excluded by default).
 		locales: {
+			// N.B. If adding more locales here, also update the changed files filters in
+			// `.github/workflows/ci.yml` to ensure tests run when files for those locales change.
 			ja: ['guides/route-data', 'reference/frontmatter'],
 		},
 	},
