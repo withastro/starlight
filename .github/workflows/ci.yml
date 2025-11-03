@@ -37,7 +37,10 @@ jobs:
               - 'docs/src/content/ja/**'
             docs_en:
               - 'docs/src/content/**'
+              # Exclude languages with a two-letter code
               - '!docs/src/content/{a..z}{a..z}/**'
+              # Exclude languages with a region subtag
+              - '!docs/src/content/{a..z}{a..z}-{a..z}{a..z}/**'
             docs_not_content:
               - 'docs/**'
               - '!docs/src/content/**'
