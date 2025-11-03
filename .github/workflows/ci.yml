@@ -33,6 +33,17 @@ jobs:
           filters: |
             docs:
               - 'docs/**'
+            docs_ja:
+              - 'docs/src/content/ja/**'
+            docs_en:
+              - 'docs/src/content/**'
+              # Exclude languages with a two-letter code
+              - '!docs/src/content/{a..z}{a..z}/**'
+              # Exclude languages with a region subtag
+              - '!docs/src/content/{a..z}{a..z}-{a..z}{a..z}/**'
+            docs_not_content:
+              - 'docs/**'
+              - '!docs/src/content/**'
             packages:
               - 'packages/**'
             ci:
@@ -122,6 +133,8 @@ jobs:
 
   a11y:
     name: Check for accessibility issues
+    needs: changes
+    if: ${{ needs.changes.outputs.docs_not_content == 'true' || needs.changes.outputs.docs_ja == 'true' || needs.changes.outputs.docs_en == 'true' || needs.changes.outputs.ci == 'true' || needs.changes.outputs.packages == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
