@@ -52,15 +52,25 @@ export const docSearchI18nSchema = () =>
 		.object({
 			// SEARCH BOX
 			/** Default: `Clear the query` */
-			'docsearch.searchBox.resetButtonTitle': z.string(),
+			'docsearch.searchBox.clearButtonTitle': z.string(),
 			/** Default: `Clear the query` */
-			'docsearch.searchBox.resetButtonAriaLabel': z.string(),
-			/** Default: `Cancel` */
-			'docsearch.searchBox.cancelButtonText': z.string(),
-			/** Default: `Cancel` */
+			'docsearch.searchBox.clearButtonAriaLabel': z.string(),
+			/** Default: `Close` */
+			'docsearch.searchBox.closeButtonText': z.string(),
+			/** Default: `Close` */
 			'docsearch.searchBox.cancelButtonAriaLabel': z.string(),
 			/** Default: `Search` */
+			'docsearch.searchBox.placeholderText': z.string(),
+			/** Default: `Ask AI` placeholder */
+			'docsearch.searchBox.placeholderTextAskAi': z.string(),
+			/** Default: `Answering…` placeholder while streaming */
+			'docsearch.searchBox.placeholderTextAskAiStreaming': z.string(),
+			/** Default: `Search` */
 			'docsearch.searchBox.searchInputLabel': z.string(),
+			/** Default: `Back to keyword search` */
+			'docsearch.searchBox.backToKeywordSearchButtonText': z.string(),
+			/** Default: `Back to keyword search` */
+			'docsearch.searchBox.backToKeywordSearchButtonAriaLabel': z.string(),
 
 			// START SCREEN
 			/** Default: `Recent` */
@@ -75,6 +85,10 @@ export const docSearchI18nSchema = () =>
 			'docsearch.startScreen.favoriteSearchesTitle': z.string(),
 			/** Default: `Remove this search from favorites` */
 			'docsearch.startScreen.removeFavoriteSearchButtonTitle': z.string(),
+			/** Default: `Recent conversations` */
+			'docsearch.startScreen.recentConversationsTitle': z.string(),
+			/** Default: `Remove this conversation from history` */
+			'docsearch.startScreen.removeRecentConversationButtonTitle': z.string(),
 
 			// ERROR SCREEN
 			/** Default: `Unable to fetch results` */
@@ -98,7 +112,11 @@ export const docSearchI18nSchema = () =>
 			/** Default: `Escape key` */
 			'docsearch.footer.closeKeyAriaLabel': z.string(),
 			/** Default: `Search by` */
-			'docsearch.footer.searchByText': z.string(),
+			'docsearch.footer.submitQuestionText': z.string(),
+			/** Default: `Back to search` */
+			'docsearch.footer.backToSearchText': z.string(),
+			/** Default: `Powered by` */
+			'docsearch.footer.poweredByText': z.string(),
 
 			// NO RESULTS SCREEN
 			/** Default: `No results for` */
@@ -109,5 +127,37 @@ export const docSearchI18nSchema = () =>
 			'docsearch.noResultsScreen.reportMissingResultsText': z.string(),
 			/** Default: `Let us know.` */
 			'docsearch.noResultsScreen.reportMissingResultsLinkText': z.string(),
+
+			// RESULTS SCREEN (Ask AI entry point)
+			/** Default: `Ask AI: ` */
+			'docsearch.resultsScreen.askAiPlaceholder': z.string(),
+
+			// ASK AI SCREEN translations
+			/** Default: `Answers are generated with AI which can make mistakes. Verify responses.` */
+			'docsearch.askAiScreen.disclaimerText': z.string(),
+			/** Default: `Related sources` */
+			'docsearch.askAiScreen.relatedSourcesText': z.string(),
+			/** Default: `Thinking...` */
+			'docsearch.askAiScreen.thinkingText': z.string(),
+			/** Default: `Copy` */
+			'docsearch.askAiScreen.copyButtonText': z.string(),
+			/** Default: `Copied!` */
+			'docsearch.askAiScreen.copyButtonCopiedText': z.string(),
+			/** Default: `Copy` */
+			'docsearch.askAiScreen.copyButtonTitle': z.string(),
+			/** Default: `Like` */
+			'docsearch.askAiScreen.likeButtonTitle': z.string(),
+			/** Default: `Dislike` */
+			'docsearch.askAiScreen.dislikeButtonTitle': z.string(),
+			/** Default: `Thanks for your feedback!` */
+			'docsearch.askAiScreen.thanksForFeedbackText': z.string(),
+			/** Default: `Searching...` */
+			'docsearch.askAiScreen.preToolCallText': z.string(),
+			/** Default: `Searching for ` */
+			'docsearch.askAiScreen.duringToolCallText': z.string(),
+			/** Default: `Searched for` */
+			'docsearch.askAiScreen.afterToolCallText': z.string(),
+			/** Default: `Searched for` */
+			'docsearch.askAiScreen.aggregatedToolCallText': z.string(),
 		})
 		.partial();

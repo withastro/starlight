@@ -3,10 +3,9 @@ import '@docsearch/css/dist/modal.css';
 import type docsearch from '@docsearch/js';
 import './variables.css';
 
-type DocSearchTranslationProps = Pick<
-	Parameters<typeof docsearch>[0],
-	'placeholder' | 'translations'
->;
+type DocSearchProps = Parameters<typeof docsearch>[0];
+
+type DocSearchTranslationProps = Pick<DocSearchProps, 'placeholder' | 'translations'>;
 
 const pick = (keyStart: string) =>
 	Object.fromEntries(
@@ -26,8 +25,10 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			searchBox: pick('docsearch.searchBox.'),
 			startScreen: pick('docsearch.startScreen.'),
 			errorScreen: pick('docsearch.errorScreen.'),
-			footer: pick('docsearch.footer.'),
+			askAiScreen: pick('docsearch.askAiScreen.'),
+			resultsScreen: pick('docsearch.resultsScreen.'),
 			noResultsScreen: pick('docsearch.noResultsScreen.'),
+			footer: pick('docsearch.footer.'),
 		},
 	},
 };
@@ -130,12 +131,60 @@ const docsearchTranslations: DocSearchTranslationProps = {
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
 				const { default: docsearch } = await import('@docsearch/js');
-				const options = { ...config, container: 'sl-doc-search' };
+				type DocSearchProps = Parameters<typeof docsearch>[0];
+
+				let translations;
 				try {
-					const translations = JSON.parse(this.dataset.translations || '{}');
-					Object.assign(options, translations);
+					translations = JSON.parse(this.dataset.translations || '{}');
 				} catch {}
-				docsearch(options);
+
+				// Extract the page language (e.g. <html lang="en">) and pass it to DocSearch
+				// as an Algolia facet filter so that the search results are scoped to the current
+				// language. If users already defined facet filters we preserve them while appending
+				// the new one.
+				let searchParameters: DocSearchProps['searchParameters'];
+
+				// Rebuild the askAi prop as an object:
+				// If the askAi prop is a string, treat it as the assistantId and use
+				// the default indexName, apiKey and appId from the main options.
+				// If the askAi prop is an object, spread its explicit values.
+				const askAiProp = config.askAi;
+				const isAskAiString = typeof askAiProp === 'string';
+
+				const askAi = askAiProp
+					? {
+							indexName: isAskAiString ? config.indexName : askAiProp.indexName,
+							apiKey: isAskAiString ? config.apiKey : askAiProp.apiKey,
+							appId: isAskAiString ? config.appId : askAiProp.appId,
+							assistantId: isAskAiString ? askAiProp : askAiProp.assistantId,
+							searchParameters: {},
+						}
+					: undefined;
+
+				const pageLang = document.documentElement.getAttribute('lang');
+				if (pageLang) {
+					searchParameters = config.searchParameters || {};
+					const existingFilters = searchParameters?.facetFilters ?? [];
+					// Ensure facetFilters is always an array of strings for simplicity.
+					searchParameters.facetFilters = Array.isArray(existingFilters)
+						? [...existingFilters, `lang:${pageLang}`]
+						: [existingFilters, `lang:${pageLang}`].filter(Boolean);
+
+					if (askAi) {
+						// Re-use the merged facetFilters from the search parameters so that
+						// Ask AI uses the same language filtering as the regular search.
+						askAi.searchParameters = { facetFilters: searchParameters.facetFilters };
+					}
+
+					const options = {
+						...config,
+						container: 'sl-doc-search',
+						translations,
+						searchParameters,
+						askAi,
+					};
+					docsearch(options as DocSearchProps);
+				}
 			});
 		}
 	}

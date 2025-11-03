@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+import starlightDocSearch from '@astrojs/starlight-docsearch';
 import markdocGrammar from './grammars/markdoc.tmLanguage.json';
 
 export const locales = {
@@ -189,7 +190,14 @@ export default defineConfig({
 							errorOnInconsistentLocale: true,
 						}),
 					]
-				: [],
+				: [
+						starlightDocSearch({
+							appId: 'PMZUYBQDAK',
+							apiKey: '24b09689d5b4223813d9b8e48563c8f6',
+							indexName: '[Demo][Tmp] Astro Starlight',
+							askAi: 'askAIDemo'
+						}),
+				],
 		}),
 	],
 });
