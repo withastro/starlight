@@ -33,6 +33,11 @@ jobs:
           filters: |
             docs:
               - 'docs/**'
+            docs_ja:
+              - 'docs/src/content/ja/**'
+            docs_en:
+              - 'docs/src/content/**'
+              - '!docs/src/content/{a..z}{a..z}/**'
             packages:
               - 'packages/**'
             ci:
@@ -113,6 +118,8 @@ jobs:
 
   a11y:
     name: Check for accessibility issues
+    needs: changes
+    if: ${{ needs.changes.output.docs_ja == 'true' || needs.changes.outputs.docs_en == 'true' || needs.changes.outputs.ci == 'true' || needs.changes.outputs.packages == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
