@@ -23,27 +23,32 @@ jobs:
       pull-requests: read
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
+      docs_ja: ${{ steps.filter.outputs.docs_ja }}
+      docs_en: ${{ steps.filter.outputs.docs_en }}
+      docs_not_content: ${{ steps.filter.outputs.docs_not_content }}
       packages: ${{ steps.filter.outputs.packages }}
       ci: ${{ steps.filter.outputs.ci }}
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
+        # When updating filters here, make sure to also add or remove them from the
+        # outputs block above.
         with:
           filters: |
             docs:
               - 'docs/**'
             docs_ja:
-              - 'docs/src/content/ja/**'
+              - 'docs/src/content/docs/ja/**'
             docs_en:
-              - 'docs/src/content/**'
+              - 'docs/src/content/docs/**'
               # Exclude languages with a two-letter code
-              - '!docs/src/content/{a..z}{a..z}/**'
+              - '!docs/src/content/docs/{a..z}{a..z}/**'
               # Exclude languages with a region subtag
-              - '!docs/src/content/{a..z}{a..z}-{a..z}{a..z}/**'
+              - '!docs/src/content/docs/{a..z}{a..z}-{a..z}{a..z}/**'
             docs_not_content:
               - 'docs/**'
-              - '!docs/src/content/**'
+              - '!docs/src/content/docs/**'
             packages:
               - 'packages/**'
             ci:
