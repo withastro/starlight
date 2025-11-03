@@ -23,6 +23,9 @@ jobs:
       pull-requests: read
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
+      docs_ja: ${{ steps.filter.outputs.docs_ja }}
+      docs_en: ${{ steps.filter.outputs.docs_en }}
+      docs_not_content: ${{ steps.filter.outputs.docs_not_content }}
       packages: ${{ steps.filter.outputs.packages }}
       ci: ${{ steps.filter.outputs.ci }}
     steps:
