@@ -23,7 +23,7 @@ export const seti = {
 		less: 'json',
 	},
 	/**
-	 * Seti UI icons can be overriden to use another Seti UI icon.
+	 * Seti UI icons can be overridden to use another Seti UI icon.
 	 * The key is the icon name to override and the value is the Seti icon name to use instead.
 	 * The reason to support aliasing to another Seti UI icon is that some Seti UI icons can be
 	 * almost identical. For example, the `npm_ignored` icon used for `npm-debug.log` files is
