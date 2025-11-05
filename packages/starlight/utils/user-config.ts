@@ -256,11 +256,7 @@ const UserConfigSchema = z.object({
 					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
 				),
 			/**
-			 * Define additional directories where files should be processed by Starlight’s Markdown pipeline which includes support for:
-			 *
-			 *  - Clickable heading anchor links
-			 *  - Asides Markdown directive syntax
-			 *  - RTL support for code blocks
+			 * Define additional directories where files should be processed by Starlight’s Markdown pipeline.
 			 *
 			 * Supports local directories relative to the root of your project, e.g. './src/data/comments/'.
 			 * Content of the `docs` content collection is always processed by Starlight’s Markdown pipeline.
