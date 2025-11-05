@@ -74,8 +74,8 @@ function rehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin {
 
 /**
  * Returns the paths to the Starlight docs collection and any additional paths defined in the
- * `starlightConfig.markdown.processedDirs` option that can be with the `shouldTransformFile()`
- * utility to determine if a file should be transformed by a plugin or not.
+ * `starlightConfig.markdown.processedDirs` option that can be used with the
+ * `shouldTransformFile()` utility to determine if a file should be transformed by a plugin or not.
  */
 function getRemarkRehypePaths(options: RemarkRehypePluginOptions): string[] {
 	const paths = [normalizePath(resolveCollectionPath('docs', options.astroConfig.srcDir))];
