@@ -39,11 +39,11 @@ yarn create astro --template starlight
 </TabItem>
 </Tabs>
 
-Perintah tersebut akan membuat [direktori proyek](/id/guides/project-structure/) baru berisikan seluruh file dan konfigurasi yang diperlukan untuk website Anda.
+Perintah tersebut akan membuat [direktori proyek](/id/guides/project-structure/) baru berisikan seluruh file dan konfigurasi yang diperlukan untuk situs Anda.
 
-:::tip[Lihat itu beraksi]
+:::tip[Lihat Starlight beraksi]
 Cobalah Starlight di browser Anda:
-[buka dengan StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
+[buka template di StackBlitz](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics).
 :::
 
 ### Mulai server pengembangan
@@ -83,16 +83,17 @@ Buka URL tersebut untuk mulai menjelajahi situs Anda.
 
 Starlight siap untuk ditambahkan konten baru, atau pindahkan konten Anda yang sudah ada!
 
-Tambahkan halaman baru ke website anda dengan membuat file Markdown di direktori `src/content/docs/`.
+Tambahkan halaman baru ke situs Anda dengan membuat file Markdown di direktori `src/content/docs/`.
 
 Baca selengkapnya tentang perutean berbasis file serta dukungan untuk MDX dan Markdoc di panduan [“Halaman”](/id/guides/pages/).
 
 ### Langkah selanjutnya
 
-- **Mengkonfigurasi:** Pelajari tentang opsi umum dalam ["Menyesuaikan Starlight”](/id/guides/customization/).
-- **Navigasi:** Siapkan sidebar Anda dengan panduan ["Navigasi Sidebar”](/id/guides/sidebar/).
-- **Komponen:** Temukan kartu, tab dan bawaan lainnya di dalam panduan ["Komponen”](/id/components/using-components/).
-- **Sebarkan:** Publikasikan karya Anda dengan panduan [“_Deploy_ situs Anda”](https://docs.astro.build/en/guides/deploy/) di dokumentasi Astro.
+- **Konfigurasi:** Pelajari opsi umum di [“Menyesuaikan Starlight”](/id/guides/customization/).
+- **Navigasi:** Siapkan sidebar Anda dengan panduan [“Navigasi Sidebar”](/id/guides/sidebar/).
+- **Komponen:** Temukan kartu, tab, dan komponen bawaan lainnya di panduan [“Komponen”](/id/components/using-components/).
+- **Perluas:** Jelajahi addon komunitas di katalog [“Plugins”](/id/resources/plugins/) dan [“Themes”](/id/resources/themes/).
+- **Sebarkan:** Publikasikan karya Anda dengan panduan [“Sebarkan situs Anda”](https://docs.astro.build/en/guides/deploy/) di dokumentasi Astro.
 
 ## Memperbarui Starlight
 
@@ -101,27 +102,27 @@ Karena Starlight adalah perangkat lunak beta, akan ada pembaruan dan peningkatan
 Pastikan untuk memperbarui Starlight secara teratur!
 :::
 
-Starlight adalah integrasi Astro, dan diperbarui seperti integrasi `@astrojs/*` lainnya:
+Starlight adalah integrasi Astro. Anda dapat memperbaruinya (bersama paket Astro lain) dengan menjalankan:
 
 <Tabs>
 <TabItem label="npm">
 
 ```sh
-npm install @astrojs/starlight@latest
+npx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="pnpm">
 
 ```sh
-pnpm upgrade @astrojs/starlight --latest
+pnpm dlx @astrojs/upgrade
 ```
 
 </TabItem>
 <TabItem label="Yarn">
 
 ```sh
-yarn upgrade @astrojs/starlight --latest
+yarn dlx @astrojs/upgrade
 ```
 
 </TabItem>
