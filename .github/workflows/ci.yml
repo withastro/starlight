@@ -99,8 +99,12 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm i
-      - name: Test packages
-        run: pnpm -r test:e2e
+      - name: Test packages (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: pnpm -r test:e2e:chrome
+      - name: Test packages (Windows)
+        if: matrix.os == 'windows-latest'
+        run: pnpm -r test:e2e:firefox
 
   type-check:
     name: Run type checks
