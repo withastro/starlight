@@ -6,7 +6,9 @@
     "test": "vitest",
     "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "playwright install --with-deps chromium && playwright test"
+    "test:e2e": "pnpm test:e2e:chrome",
+    "test:e2e:chrome": "playwright install --with-deps chromium && playwright test --project chrome",
+    "test:e2e:firefox": "playwright install --with-deps firefox && playwright test --project firefox"
   },
   "keywords": [
     "docs",

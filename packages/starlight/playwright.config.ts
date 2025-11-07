@@ -1,13 +1,23 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Toggle headless mode on/off.
+const headless = true;
+
 export default defineConfig({
 	forbidOnly: !!process.env['CI'],
 	projects: [
 		{
-			name: 'Chrome Stable',
+			name: 'chrome',
 			use: {
 				...devices['Desktop Chrome'],
-				headless: true,
+				headless,
+			},
+		},
+		{
+			name: 'firefox',
+			use: {
+				...devices['Desktop Firefox'],
+				headless,
 			},
 		},
 	],
