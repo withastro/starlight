@@ -99,8 +99,15 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm i
-      - name: Test packages
-        run: pnpm -r test:e2e
+      - name: Test packages (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: pnpm -r test:e2e:chrome
+      # Firefox is used for Windows E2E tests as Chrome on Windows requires the installation of the
+      # Server Media Foundation windows feature, which can take up to 3 minutes to install on CI.
+      # https://github.com/microsoft/playwright/blob/e7bff526433b6dcb02801763ab5b1c6407902d47/packages/playwright-core/src/server/registry/dependencies.ts#L79-L89
+      - name: Test packages (Windows)
+        if: matrix.os == 'windows-latest'
+        run: pnpm -r test:e2e:firefox
 
   type-check:
     name: Run type checks
