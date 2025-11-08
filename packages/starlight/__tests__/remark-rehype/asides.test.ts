@@ -187,7 +187,7 @@ Some text
 		);
 		const pathCount = (res.code.match(/path/g) || []).length;
 		// If we have two pairs of opening and closing tags of path,
-		// we will have 4 occurences of that word.
+		// we will have 4 occurrences of that word.
 		expect(pathCount).eq(4);
 	});
 });
