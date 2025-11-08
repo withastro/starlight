@@ -3,6 +3,7 @@ import { getRouteDataTestContext } from '../test-utils';
 import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 import type { HeadConfig } from '../../schemas/head';
+import { Route } from '../../utils/routing/types';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -196,6 +197,12 @@ test('omits meta og:url tag when site is not set', () => {
 	expect(ogUrlExists).toBe(false);
 });
 
+type _GetTestHeadOptions = {
+	heads: HeadConfig,
+	route: Route,
+	setSite?: boolean
+}
+
 function getTestHead(heads: HeadConfig = [], route = routes[0]!, setSite?: boolean): HeadConfig {
 	return generateRouteData({
 		props: {
@@ -211,7 +218,7 @@ function getTestHead(heads: HeadConfig = [], route = routes[0]!, setSite?: boole
 		},
 		context:
 			setSite === undefined
-				? getRouteDataTestContext()
-				: getRouteDataTestContext(undefined, setSite),
+				? getRouteDataTestContext({})
+				: getRouteDataTestContext({setSite: setSite}),
 	}).head;
 }
