@@ -11,7 +11,7 @@ import type { StarlightConfig } from './user-config';
  */
 const wellKnownRTL = ['ar', 'fa', 'he', 'prs', 'ps', 'syc', 'ug', 'ur'];
 
-/** Informations about the built-in default locale used as a fallback when no locales are defined. */
+/** Information about the built-in default locale used as a fallback when no locales are defined. */
 export const BuiltInDefaultLocale = { ...getLocaleInfo('en'), lang: 'en' };
 
 /**
@@ -135,7 +135,7 @@ function getStarlightI18nConfig(
 	};
 }
 
-/** Infer Starlight locale informations based on a locale from an Astro i18n configuration. */
+/** Infer Starlight locale information based on a locale from an Astro i18n configuration. */
 function inferStarlightLocaleFromAstroLocale(astroLocale: AstroLocale) {
 	const lang = isAstroLocaleExtendedConfig(astroLocale) ? astroLocale.codes[0] : astroLocale;
 	return { ...getLocaleInfo(lang), lang };
@@ -159,7 +159,7 @@ function isAstroLocaleExtendedConfig(locale: AstroLocale): locale is AstroLocale
 	return typeof locale !== 'string';
 }
 
-/** Returns the locale informations such as a label and a direction based on a BCP-47 tag. */
+/** Returns the locale information such as a label and a direction based on a BCP-47 tag. */
 function getLocaleInfo(lang: string) {
 	try {
 		const locale = new Intl.Locale(lang);
@@ -171,7 +171,7 @@ function getLocaleInfo(lang: string) {
 		};
 	} catch {
 		throw new AstroError(
-			`Failed to get locale informations for the '${lang}' locale.`,
+			`Failed to get locale information for the '${lang}' locale.`,
 			'Make sure to provide a valid BCP-47 tags (e.g. en, ar, or zh-CN).'
 		);
 	}
