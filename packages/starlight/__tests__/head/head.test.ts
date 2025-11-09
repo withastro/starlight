@@ -3,7 +3,7 @@ import { getRouteDataTestContext } from '../test-utils';
 import { generateRouteData } from '../../utils/routing/data';
 import { routes } from '../../utils/routing';
 import type { HeadConfig } from '../../schemas/head';
-import { Route } from '../../utils/routing/types';
+import { type Route } from '../../utils/routing/types';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -45,7 +45,7 @@ test('includes description based on Starlight `description` configuration', () =
 });
 
 test('includes description based on page `description` frontmatter field if provided', () => {
-	const head = getTestHead([], routes[1]);
+	const head = getTestHead({heads: [], route: routes[1]});
 	expect(head).toContainEqual({
 		tag: 'meta',
 		attrs: {
@@ -68,7 +68,7 @@ test('includes `twitter:site` based on Starlight `social` configuration', () => 
 });
 
 test('merges two <title> tags', () => {
-	const head = getTestHead([{ tag: 'title', content: 'Override' }]);
+	const head = getTestHead({heads: [{ tag: 'title', content: 'Override' }]});
 	expect(head.filter((tag) => tag.tag === 'title')).toEqual([
 		{ tag: 'title', content: 'Override' },
 	]);
@@ -79,7 +79,7 @@ test('merges two <link rel="canonical" href="" /> tags', () => {
 		tag: 'link',
 		attrs: { rel: 'canonical', href: 'https://astro.build' },
 	} as const;
-	const head = getTestHead([customLink]);
+	const head = getTestHead({heads: [customLink]});
 	expect(head.filter((tag) => tag.tag === 'link' && tag.attrs?.rel === 'canonical')).toEqual([
 		customLink,
 	]);
@@ -90,7 +90,7 @@ test('merges two <link rel="sitemap" href="" /> tags', () => {
 		tag: 'link',
 		attrs: { rel: 'sitemap', href: '/sitemap-custom.xml' },
 	} as const;
-	const head = getTestHead([customLink]);
+	const head = getTestHead({heads: [customLink]});
 	expect(head.filter((tag) => tag.tag === 'link' && tag.attrs?.rel === 'sitemap')).toEqual([
 		customLink,
 	]);
@@ -101,7 +101,7 @@ test('does not merge same link tags', () => {
 		tag: 'link',
 		attrs: { rel: 'stylesheet', href: 'secondary.css' },
 	} as const;
-	const head = getTestHead([customLink]);
+	const head = getTestHead({heads: [customLink]});
 	expect(head.filter((tag) => tag.tag === 'link' && tag.attrs?.rel === 'stylesheet')).toEqual([
 		{ tag: 'link', attrs: { rel: 'stylesheet', href: 'primary.css' } },
 		customLink,
@@ -116,7 +116,7 @@ describe.each([['name'], ['property'], ['http-equiv']])(
 				tag: 'meta',
 				attrs: { [prop]: 'x', content: 'Test' },
 			} as const;
-			const head = getTestHead([customMeta]);
+			const head = getTestHead({heads: [customMeta]});
 			expect(head.filter((tag) => tag.tag === 'meta' && tag.attrs?.[prop] === 'x')).toEqual([
 				customMeta,
 			]);
@@ -127,7 +127,7 @@ describe.each([['name'], ['property'], ['http-equiv']])(
 				tag: 'meta',
 				attrs: { [prop]: 'y', content: 'Test' },
 			} as const;
-			const head = getTestHead([customMeta]);
+			const head = getTestHead({heads: [customMeta]});
 			expect(
 				head.filter(
 					(tag) => tag.tag === 'meta' && (tag.attrs?.[prop] === 'x' || tag.attrs?.[prop] === 'y')
@@ -170,7 +170,7 @@ test('sorts head by tag importance', () => {
 });
 
 test('places the default favicon below any user provided icons', () => {
-	const head = getTestHead([
+	const head = getTestHead({heads: [
 		{
 			tag: 'link',
 			attrs: {
@@ -179,7 +179,7 @@ test('places the default favicon below any user provided icons', () => {
 				sizes: '32x32',
 			},
 		},
-	]);
+	]});
 
 	const defaultFaviconIndex = head.findIndex(
 		(tag) => tag.tag === 'link' && tag.attrs?.rel === 'shortcut icon'
@@ -190,20 +190,22 @@ test('places the default favicon below any user provided icons', () => {
 });
 
 test('omits meta og:url tag when site is not set', () => {
-	const head = getTestHead(undefined, undefined, false);
+	const head = getTestHead({setSite: false});
 
 	const ogUrlExists = head.some((tag) => tag.tag === 'meta' && tag.attrs?.property === 'og:url');
 
 	expect(ogUrlExists).toBe(false);
 });
 
-type _GetTestHeadOptions = {
-	heads: HeadConfig,
-	route: Route,
+type GetTestHeadOptions = {
+	heads?: HeadConfig,
+	route?: Route | undefined,
 	setSite?: boolean
 }
 
-function getTestHead(heads: HeadConfig = [], route = routes[0]!, setSite?: boolean): HeadConfig {
+// function getTestHead(heads: HeadConfig = [], route = routes[0]!, setSite?: boolean): HeadConfig {
+function getTestHead({heads = [], route = routes[0]!, setSite }: GetTestHeadOptions = {}): HeadConfig {
+
 	return generateRouteData({
 		props: {
 			...route,

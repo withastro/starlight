@@ -5,11 +5,6 @@ import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
 import type { RouteDataContext } from '../utils/routing/data';
 import { vi } from 'vitest';
 
-type RouteDataTestContextOptions = {
-	pathname?: string,
-	setSite: boolean
-}
-
 const frontmatterSchema = docsSchema()({
 	image: () =>
 		z.object({
@@ -107,7 +102,12 @@ export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof 
 	};
 }
 
-export function getRouteDataTestContext({pathname, setSite = false}: RouteDataTestContextOptions): RouteDataContext {
+type RouteDataTestContextOptions = {
+	pathname?: string,
+	setSite?: boolean
+}
+
+export function getRouteDataTestContext({pathname, setSite = true}: RouteDataTestContextOptions = {}): RouteDataContext {
 	const site = new URL('https://example.com');
 
 	return {
