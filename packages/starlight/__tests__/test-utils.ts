@@ -103,7 +103,15 @@ export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof 
 }
 
 type RouteDataTestContextOptions = {
+	/**
+	 * The pathname to get route data context for, e.g. `"/getting-started/"`.
+	 * @default "/"
+	 */
 	pathname?: string,
+	/**
+	 * Whether or not the context should include a value for `site`. Set to `false` to test without a `site` value.
+	 * @default true
+	 */
 	setSite?: boolean
 }
 
