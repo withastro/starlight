@@ -102,10 +102,12 @@ export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof 
 	};
 }
 
-export function getRouteDataTestContext(
+type RouteDataTestContextOptions = {
 	pathname?: string,
-	setSite: boolean = true
-): RouteDataContext {
+	setSite?: boolean
+}
+
+export function getRouteDataTestContext({pathname, setSite = true}: RouteDataTestContextOptions = {}): RouteDataContext {
 	const site = new URL('https://example.com');
 
 	return {

@@ -23,7 +23,7 @@ test('omits link canonical tag when site is not set', () => {
 	const route = routes[0]!;
 	const { head } = generateRouteData({
 		props: { ...route, headings: [] },
-		context: getRouteDataTestContext(undefined, false),
+		context: getRouteDataTestContext({ setSite: false }),
 	});
 
 	const canonicalExists = head.some((tag) => tag.tag === 'link' && tag.attrs?.rel === 'canonical');
