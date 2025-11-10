@@ -45,7 +45,7 @@ test('includes description based on Starlight `description` configuration', () =
 });
 
 test('includes description based on page `description` frontmatter field if provided', () => {
-	const head = getTestHead({ heads: [], route: routes[1] });
+	const head = getTestHead({ heads: [], route: routes[1]! });
 	expect(head).toContainEqual({
 		tag: 'meta',
 		attrs: {
@@ -199,7 +199,7 @@ test('omits meta og:url tag when site is not set', () => {
 
 type GetTestHeadOptions = {
 	heads?: HeadConfig,
-	route?: Route | undefined,
+	route?: Route,
 	setSite?: boolean
 }
 
