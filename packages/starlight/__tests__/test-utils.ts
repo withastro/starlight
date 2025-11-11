@@ -102,11 +102,25 @@ export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof 
 	};
 }
 
-export function getRouteDataTestContext(pathname?: string): RouteDataContext {
+type RouteDataTestContextOptions = {
+	/**
+	 * The pathname to get route data context for, e.g. `"/getting-started/"`.
+	 * @default "/"
+	 */
+	pathname?: string,
+	/**
+	 * Whether or not the context should include a value for `site`. Set to `false` to test without a `site` value.
+	 * @default true
+	 */
+	setSite?: boolean
+}
+
+export function getRouteDataTestContext({pathname, setSite = true}: RouteDataTestContextOptions = {}): RouteDataContext {
 	const site = new URL('https://example.com');
+
 	return {
 		generator: 'Astro',
-		site,
 		url: pathname ? new URL(pathname, site) : site,
+		site: setSite ? site : undefined,
 	};
 }
