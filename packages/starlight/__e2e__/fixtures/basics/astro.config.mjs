@@ -7,6 +7,7 @@ export default defineConfig({
 		starlight({
 			title: 'Basics',
 			pagefind: false,
+			markdown: { processedDirs: ['./src/content/comments/'] },
 		}),
 	],
 });
