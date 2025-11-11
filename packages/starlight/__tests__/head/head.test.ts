@@ -127,7 +127,7 @@ describe.each([['name'], ['property'], ['http-equiv']])(
 				tag: 'meta',
 				attrs: { [prop]: 'y', content: 'Test' },
 			} as const;
-			const head = getTestHead({ heads: [customMeta]});
+			const head = getTestHead({ heads: [customMeta] });
 			expect(
 				head.filter(
 					(tag) => tag.tag === 'meta' && (tag.attrs?.[prop] === 'x' || tag.attrs?.[prop] === 'y')
@@ -170,16 +170,18 @@ test('sorts head by tag importance', () => {
 });
 
 test('places the default favicon below any user provided icons', () => {
-	const head = getTestHead({heads: [
-		{
-			tag: 'link',
-			attrs: {
-				rel: 'icon',
-				href: '/favicon.ico',
-				sizes: '32x32',
+	const head = getTestHead({
+		heads: [
+			{
+				tag: 'link',
+				attrs: {
+					rel: 'icon',
+					href: '/favicon.ico',
+					sizes: '32x32',
+				},
 			},
-		},
-	]});
+		],
+	});
 
 	const defaultFaviconIndex = head.findIndex(
 		(tag) => tag.tag === 'link' && tag.attrs?.rel === 'shortcut icon'
@@ -190,7 +192,7 @@ test('places the default favicon below any user provided icons', () => {
 });
 
 test('omits meta og:url tag when site is not set', () => {
-	const head = getTestHead({setSite: false});
+	const head = getTestHead({ setSite: false });
 
 	const ogUrlExists = head.some((tag) => tag.tag === 'meta' && tag.attrs?.property === 'og:url');
 
@@ -198,13 +200,16 @@ test('omits meta og:url tag when site is not set', () => {
 });
 
 type GetTestHeadOptions = {
-	heads?: HeadConfig,
-	route?: Route,
-	setSite?: boolean
-}
+	heads?: HeadConfig;
+	route?: Route;
+	setSite?: boolean;
+};
 
-function getTestHead({heads = [], route = routes[0]!, setSite }: GetTestHeadOptions = {}): HeadConfig {
-
+function getTestHead({
+	heads = [],
+	route = routes[0]!,
+	setSite,
+}: GetTestHeadOptions = {}): HeadConfig {
 	return generateRouteData({
 		props: {
 			...route,

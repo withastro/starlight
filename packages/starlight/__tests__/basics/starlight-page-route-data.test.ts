@@ -33,7 +33,7 @@ const starlightPagePathname = '/test-slug';
 test('adds data to route shape', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		context: getRouteDataTestContext({pathname: starlightPagePathname}),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	// Starlight pages infer the slug from the URL.
 	expect(data.slug).toBe('test-slug');
@@ -112,7 +112,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		context: getRouteDataTestContext({ pathname: '/getting-started/'}),
+		context: getRouteDataTestContext({ pathname: '/getting-started/' }),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -440,7 +440,7 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 				tableOfContents: false,
 			},
 		},
-		context: getRouteDataTestContext({ pathname: starlightPagePathname}),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.toc).toBeUndefined();
 });

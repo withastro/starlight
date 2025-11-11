@@ -107,15 +107,18 @@ type RouteDataTestContextOptions = {
 	 * The pathname to get route data context for, e.g. `"/getting-started/"`.
 	 * @default "/"
 	 */
-	pathname?: string,
+	pathname?: string;
 	/**
 	 * Whether or not the context should include a value for `site`. Set to `false` to test without a `site` value.
 	 * @default true
 	 */
-	setSite?: boolean
-}
+	setSite?: boolean;
+};
 
-export function getRouteDataTestContext({pathname, setSite = true}: RouteDataTestContextOptions = {}): RouteDataContext {
+export function getRouteDataTestContext({
+	pathname,
+	setSite = true,
+}: RouteDataTestContextOptions = {}): RouteDataContext {
 	const site = new URL('https://example.com');
 
 	return {
