@@ -1,3 +1,4 @@
+export type { SidebarEntry, SidebarGroup, SidebarLink } from './utils/routing/types';
 export type { StarlightConfig } from './utils/user-config';
 export type {
 	StarlightPlugin,
