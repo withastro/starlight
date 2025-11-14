@@ -1,10 +1,17 @@
 /**
- * @file This file provides the types for Starlight's `@astrojs/starlight/expressive-code` export.
+ * @file This file is exported by Starlight as `@astrojs/starlight/expressive-code`.
+ *
+ * It is required by the `<Code>` component to access the same configuration preprocessor
+ * function as the one used by the integration.
+ *
+ * It also provides access to all of the Expressive Code classes and functions without having
+ * to install `astro-expressive-code` as an additional dependency into a user's project
+ * (and thereby risiking version conflicts).
  */
 
-export * from 'astro-expressive-code';
-
 import type { StarlightExpressiveCodeOptions } from './integrations/expressive-code';
+
+export * from 'astro-expressive-code';
 
 export type { StarlightExpressiveCodeOptions };
 
@@ -34,4 +41,6 @@ export type { StarlightExpressiveCodeOptions };
  */
 export function defineEcConfig(
 	config: StarlightExpressiveCodeOptions
-): StarlightExpressiveCodeOptions;
+): StarlightExpressiveCodeOptions {
+	return config;
+}

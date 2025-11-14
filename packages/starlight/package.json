@@ -3,6 +3,7 @@
   "version": "0.36.2",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
+    "build": "tsdown",
     "test": "vitest",
     "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
@@ -28,9 +29,18 @@
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "exports": {
-    ".": "./index.ts",
-    "./locals": "./locals.ts",
-    "./components": "./components.ts",
+    ".": {
+      "@starlight/src": "./index.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./locals": {
+      "@starlight/src": "./locals.ts",
+      "default": "./dist/locals.mjs"
+    },
+    "./components": {
+      "@starlight/src": "./components.ts",
+      "default": "./dist/components.ts"
+    },
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",
       "import": "./components/LanguageSelect.astro"
@@ -167,22 +177,46 @@
       "types": "./components/Search.astro.tsx",
       "import": "./components/Search.astro"
     },
-    "./internal": "./internal.ts",
-    "./props": "./props.ts",
-    "./schema": "./schema.ts",
-    "./loaders": "./loaders.ts",
-    "./route-data": "./route-data.ts",
-    "./types": "./types.ts",
+    "./internal": {
+      "@starlight/src": "./internal.ts",
+      "default": "./dist/internal.mjs"
+    },
+    "./props": {
+      "@starlight/src": "./props.ts",
+      "default": "./dist/props.mjs"
+    },
+    "./schema": {
+      "@starlight/src": "./schema.ts",
+      "default": "./dist/schema.mjs"
+    },
+    "./loaders": {
+      "@starlight/src": "./loaders.ts",
+      "default": "./dist/loaders.mjs"
+    },
+    "./route-data": {
+      "@starlight/src": "./route-data.ts",
+      "default": "./dist/route-data.mjs"
+    },
+    "./types": {
+      "@starlight/src": "./types.ts",
+      "default": "./dist/types.mjs"
+    },
     "./expressive-code": {
-      "types": "./expressive-code.d.ts",
-      "default": "./expressive-code.mjs"
+      "@starlight/src": "./expressive-code.ts",
+      "default": "./dist/expressive-code.mjs"
     },
     "./expressive-code/hast": {
-      "types": "./integrations/expressive-code/hast.d.ts",
-      "default": "./integrations/expressive-code/hast.mjs"
+      "@starlight/src": "./integrations/expressive-code/hast.ts",
+      "default": "./dist/integrations/expressive-code/hast.mjs"
     },
-    "./routes/*": "./routes/*",
-    "./style/markdown.css": "./style/markdown.css"
+    "./routes/*": {
+      "@starlight/src": "./routes/*",
+      "default": "./dist/routes/*"
+    },
+    "./style/markdown.css": {
+      "@starlight/src": "./style/markdown.css",
+      "default": "./dist/style/markdown.css"
+    }
   },
   "peerDependencies": {
     "astro": "^5.5.0"
@@ -223,8 +257,5 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.2"
-  },
-  "publishConfig": {
-    "provenance": true
   }
 }

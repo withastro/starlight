@@ -192,4 +192,5 @@ export default defineConfig({
 				: [],
 		}),
 	],
+	vite: { resolve: { conditions: ['@starlight/src'] } },
 });

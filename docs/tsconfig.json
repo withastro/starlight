@@ -2,6 +2,7 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": ".",
+    "customConditions": ["@starlight/src"],
     "paths": {
       "~/*": ["src/*"]
     }
