@@ -59,6 +59,10 @@
       "types": "./components/SidebarPersister.astro.tsx",
       "import": "./components/SidebarPersister.astro"
     },
+    "./components/SidebarRestorePoint.astro": {
+      "types": "./components/SidebarRestorePoint.astro.tsx",
+      "import": "./components/SidebarRestorePoint.astro"
+    },
     "./components/SidebarSublist.astro": {
       "types": "./components/SidebarSublist.astro.tsx",
       "import": "./components/SidebarSublist.astro"
