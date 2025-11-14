@@ -84,7 +84,7 @@
 		--sl-line-height: 1.75;
 		--sl-line-height-headings: 1.2;
 
-		--sl-font-system: ui-sans-serif, system-ui, sans-serif;
+		--sl-font-system: ui-sans-serif, system-ui, Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
 		--sl-font-system-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 		--__sl-font: var(--sl-font, var(--sl-font-system)), var(--sl-font-system);
 		--__sl-font-mono: var(--sl-font-mono, var(--sl-font-system-mono)), var(--sl-font-system-mono);
