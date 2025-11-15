@@ -22,6 +22,11 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 		description: z.string().optional(),
 
 		/**
+		 * Is this page the index of the folder
+		 */
+		isIndex: z.boolean().optional(),
+
+		/**
 		 * Custom URL where a reader can edit this page.
 		 * Overrides the `editLink.baseUrl` global config if set.
 		 *

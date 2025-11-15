@@ -47,14 +47,14 @@ function localeToDir(locale: string | undefined): 'ltr' | 'rtl' {
  * @param slug Content collection slug
  * @returns Param compatible with Astro’s router
  */
-export function slugToParam(slug: string): string | undefined {
-	return slug === 'index' || slug === '' || slug === '/'
+export function slugToParam(slug: string, isIndex: boolean): string | undefined {
+	return isIndex || slug === 'index' || slug === '' || slug === '/'
 		? undefined
 		: (slug.endsWith('/index') ? slug.slice(0, -6) : slug).normalize();
 }
 
-export function slugToPathname(slug: string): string {
-	const param = slugToParam(slug);
+export function slugToPathname(slug: string, isIndex?: boolean): string {
+	const param = slugToParam(slug, isIndex ?? false);
 	return param ? '/' + param + '/' : '/';
 }
 
