@@ -93,7 +93,13 @@ export function vitePluginStarlightUserConfig(
 		/**
 		 * Module containing imports of user-specified custom CSS files.
 		 */
-		'virtual:starlight/user-css': opts.customCss.map((id) => `import ${resolveId(id)};`).join(''),
+		'virtual:starlight/user-css': opts.customCss.map((id) => {
+			try {
+				return `import ${resolveId(id)};`
+			} catch(e) {
+				throw new Error(`${e} or you can use the head params in startlight configuration to include it directly in your pages.`);
+			}
+		}).join(''),
 		'virtual:starlight/user-images': opts.logo
 			? 'src' in opts.logo
 				? `import src from ${resolveId(
