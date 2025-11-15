@@ -172,7 +172,7 @@ function linkFromInternalSidebarLinkItem(
 	const badge = item.badge ?? frontmatter.sidebar?.badge;
 	const attrs = { ...frontmatter.sidebar?.attrs, ...item.attrs };
 	return makeSidebarLink(
-		slugToPathname(route.slug),
+		slugToPathname(route.id, frontmatter.isIndex),
 		label,
 		getSidebarBadge(badge, locale, label),
 		attrs
@@ -275,11 +275,12 @@ function treeify(routes: Route[], locale: string | undefined, baseDir: string): 
 
 /** Create a link entry for a given content collection entry. */
 function linkFromRoute(route: Route, attrs?: LinkHTMLAttributes): SidebarLink {
+	const { sidebar, title, isIndex } = route.entry.data;
 	return makeSidebarLink(
-		slugToPathname(route.slug),
-		route.entry.data.sidebar.label || route.entry.data.title,
-		route.entry.data.sidebar.badge,
-		{ ...attrs, ...route.entry.data.sidebar.attrs }
+		slugToPathname(route.id, isIndex),
+		sidebar.label || title,
+		sidebar.badge,
+		{ ...attrs, ...sidebar.attrs }
 	);
 }
 
