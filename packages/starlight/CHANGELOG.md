@@ -30,7 +30,7 @@
 
 - [#3427](https://github.com/withastro/starlight/pull/3427) [`c3b2d0f`](https://github.com/withastro/starlight/commit/c3b2d0fc37bb9b7b6abc6c11b760a4114690ccd4) Thanks [@delucis](https://github.com/delucis)! - Fixes styling of labels that wrap across multiple lines in `<Tabs>` component
 
-  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targetting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
+  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targeting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
 
   If you want to preserve the previous styling, you can add the following custom CSS to your site:
 
@@ -182,7 +182,7 @@
 
 - [#3181](https://github.com/withastro/starlight/pull/3181) [`449c822`](https://github.com/withastro/starlight/commit/449c8229effaab19ece3c0a34e32595809c33cc8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all headings in Markdown and MDX content were rendered with a [clickable anchor link](https://starlight.astro.build/reference/configuration/#headinglinks), even in non-Starlight pages.
 
-- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean langage support with improvements and missing translations
+- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean language support with improvements and missing translations
 
 ## 0.34.2
 
