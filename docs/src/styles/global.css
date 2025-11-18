@@ -297,3 +297,21 @@ a, a:visited {
 a:hover, a:focus {
   color: #264450 !important;
 }
+
+/* Mobile menu backdrop overlay */
+body[data-mobile-menu-expanded]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  top: var(--sl-nav-height);
+  background-color: var(--sl-color-black);
+  z-index: calc(var(--sl-z-index-menu) - 1);
+  pointer-events: auto;
+}
+
+/* Hide backdrop on desktop */
+@media (min-width: 50rem) {
+  body[data-mobile-menu-expanded]::before {
+    display: none;
+  }
+}

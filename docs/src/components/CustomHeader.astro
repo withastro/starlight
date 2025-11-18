@@ -55,7 +55,7 @@ import EarnNowButton from './EarnNowButton.astro';
 			height: 2rem;
 			border-inline-end: 1px solid var(--sl-color-gray-5);
 		}
-		
+
 		.mobile-earn-button {
 			position: absolute;
 			right: calc(var(--sl-menu-button-size) + var(--sl-nav-pad-x) + 1rem);
@@ -70,6 +70,62 @@ import EarnNowButton from './EarnNowButton.astro';
 				align-items: center;
 				align-content: center;
 			}
+		}
+	}
+</style>
+
+<script is:inline>
+	// Create and manage mobile menu backdrop overlay
+	(function () {
+		// Create backdrop element if it doesn't exist
+		let backdrop = document.getElementById('mobile-menu-backdrop');
+		if (!backdrop) {
+			backdrop = document.createElement('div');
+			backdrop.id = 'mobile-menu-backdrop';
+			backdrop.className = 'mobile-menu-backdrop';
+			document.body.appendChild(backdrop);
+		}
+
+		// Function to update backdrop visibility
+		function updateBackdrop() {
+			const body = document.body;
+			if (body.hasAttribute('data-mobile-menu-expanded')) {
+				backdrop.style.display = 'block';
+			} else {
+				backdrop.style.display = 'none';
+			}
+		}
+
+		// Watch for changes to data-mobile-menu-expanded attribute
+		const observer = new MutationObserver(updateBackdrop);
+		observer.observe(document.body, {
+			attributes: true,
+			attributeFilter: ['data-mobile-menu-expanded'],
+		});
+
+		// Initial check
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', updateBackdrop);
+		} else {
+			updateBackdrop();
+		}
+	})();
+</script>
+
+<style is:global>
+	.mobile-menu-backdrop {
+		display: none;
+		position: fixed;
+		inset: 0;
+		top: var(--sl-nav-height);
+		background-color: var(--sl-color-black);
+		z-index: 4;
+		pointer-events: auto;
+	}
+
+	@media (min-width: 50rem) {
+		.mobile-menu-backdrop {
+			display: none !important;
 		}
 	}
 </style>
