@@ -233,7 +233,7 @@
         "types": "./dist/locals.d.mts",
         "import": "./dist/locals.mjs"
       },
-      "./components": "./src/components.ts",
+      "./components": "./dist/components.ts",
       "./components/LanguageSelect.astro": {
         "types": "./dist/components/LanguageSelect.astro.tsx",
         "import": "./dist/components/LanguageSelect.astro"
