@@ -29,194 +29,155 @@
   "homepage": "https://starlight.astro.build",
   "type": "module",
   "exports": {
-    ".": {
-      "@starlight/src": "./index.ts",
-      "default": "./dist/index.mjs"
-    },
-    "./locals": {
-      "@starlight/src": "./locals.ts",
-      "default": "./dist/locals.mjs"
-    },
-    "./components": {
-      "@starlight/src": "./components.ts",
-      "default": "./dist/components.ts"
-    },
+    ".": "./src/index.ts",
+    "./locals": "./src/locals.ts",
+    "./components": "./src/components.ts",
     "./components/LanguageSelect.astro": {
-      "types": "./components/LanguageSelect.astro.tsx",
-      "import": "./components/LanguageSelect.astro"
+      "types": "./src/components/LanguageSelect.astro.tsx",
+      "import": "./src/components/LanguageSelect.astro"
     },
     "./components/Select.astro": {
-      "types": "./components/Select.astro.tsx",
-      "import": "./components/Select.astro"
+      "types": "./src/components/Select.astro.tsx",
+      "import": "./src/components/Select.astro"
     },
     "./components/Banner.astro": {
-      "types": "./components/Banner.astro.tsx",
-      "import": "./components/Banner.astro"
+      "types": "./src/components/Banner.astro.tsx",
+      "import": "./src/components/Banner.astro"
     },
     "./components/LastUpdated.astro": {
-      "types": "./components/LastUpdated.astro.tsx",
-      "import": "./components/LastUpdated.astro"
+      "types": "./src/components/LastUpdated.astro.tsx",
+      "import": "./src/components/LastUpdated.astro"
     },
     "./components/Sidebar.astro": {
-      "types": "./components/Sidebar.astro.tsx",
-      "import": "./components/Sidebar.astro"
+      "types": "./src/components/Sidebar.astro.tsx",
+      "import": "./src/components/Sidebar.astro"
     },
     "./components/MarkdownContent.astro": {
-      "types": "./components/MarkdownContent.astro.tsx",
-      "import": "./components/MarkdownContent.astro"
+      "types": "./src/components/MarkdownContent.astro.tsx",
+      "import": "./src/components/MarkdownContent.astro"
     },
     "./components/SidebarPersister.astro": {
-      "types": "./components/SidebarPersister.astro.tsx",
-      "import": "./components/SidebarPersister.astro"
+      "types": "./src/components/SidebarPersister.astro.tsx",
+      "import": "./src/components/SidebarPersister.astro"
     },
     "./components/SidebarSublist.astro": {
-      "types": "./components/SidebarSublist.astro.tsx",
-      "import": "./components/SidebarSublist.astro"
+      "types": "./src/components/SidebarSublist.astro.tsx",
+      "import": "./src/components/SidebarSublist.astro"
     },
     "./components/ContentPanel.astro": {
-      "types": "./components/ContentPanel.astro.tsx",
-      "import": "./components/ContentPanel.astro"
+      "types": "./src/components/ContentPanel.astro.tsx",
+      "import": "./src/components/ContentPanel.astro"
     },
     "./components/MobileMenuFooter.astro": {
-      "types": "./components/MobileMenuFooter.astro.tsx",
-      "import": "./components/MobileMenuFooter.astro"
+      "types": "./src/components/MobileMenuFooter.astro.tsx",
+      "import": "./src/components/MobileMenuFooter.astro"
     },
     "./components/SiteTitle.astro": {
-      "types": "./components/SiteTitle.astro.tsx",
-      "import": "./components/SiteTitle.astro"
+      "types": "./src/components/SiteTitle.astro.tsx",
+      "import": "./src/components/SiteTitle.astro"
     },
     "./components/EditLink.astro": {
-      "types": "./components/EditLink.astro.tsx",
-      "import": "./components/EditLink.astro"
+      "types": "./src/components/EditLink.astro.tsx",
+      "import": "./src/components/EditLink.astro"
     },
     "./components/MobileMenuToggle.astro": {
-      "types": "./components/MobileMenuToggle.astro.tsx",
-      "import": "./components/MobileMenuToggle.astro"
+      "types": "./src/components/MobileMenuToggle.astro.tsx",
+      "import": "./src/components/MobileMenuToggle.astro"
     },
     "./components/SkipLink.astro": {
-      "types": "./components/SkipLink.astro.tsx",
-      "import": "./components/SkipLink.astro"
+      "types": "./src/components/SkipLink.astro.tsx",
+      "import": "./src/components/SkipLink.astro"
     },
     "./components/MobileTableOfContents.astro": {
-      "types": "./components/MobileTableOfContents.astro.tsx",
-      "import": "./components/MobileTableOfContents.astro"
+      "types": "./src/components/MobileTableOfContents.astro.tsx",
+      "import": "./src/components/MobileTableOfContents.astro"
     },
     "./components/SocialIcons.astro": {
-      "types": "./components/SocialIcons.astro.tsx",
-      "import": "./components/SocialIcons.astro"
+      "types": "./src/components/SocialIcons.astro.tsx",
+      "import": "./src/components/SocialIcons.astro"
     },
     "./components/FallbackContentNotice.astro": {
-      "types": "./components/FallbackContentNotice.astro.tsx",
-      "import": "./components/FallbackContentNotice.astro"
+      "types": "./src/components/FallbackContentNotice.astro.tsx",
+      "import": "./src/components/FallbackContentNotice.astro"
     },
     "./components/DraftContentNotice.astro": {
-      "types": "./components/DraftContentNotice.astro.tsx",
-      "import": "./components/DraftContentNotice.astro"
+      "types": "./src/components/DraftContentNotice.astro.tsx",
+      "import": "./src/components/DraftContentNotice.astro"
     },
     "./components/Page.astro": {
-      "types": "./components/Page.astro.tsx",
-      "import": "./components/Page.astro"
+      "types": "./src/components/Page.astro.tsx",
+      "import": "./src/components/Page.astro"
     },
     "./components/StarlightPage.astro": {
-      "types": "./components/StarlightPage.astro.tsx",
-      "import": "./components/StarlightPage.astro"
+      "types": "./src/components/StarlightPage.astro.tsx",
+      "import": "./src/components/StarlightPage.astro"
     },
     "./components/AnchorHeading.astro": {
-      "types": "./components/AnchorHeading.astro.tsx",
-      "import": "./components/AnchorHeading.astro"
+      "types": "./src/components/AnchorHeading.astro.tsx",
+      "import": "./src/components/AnchorHeading.astro"
     },
     "./components/Footer.astro": {
-      "types": "./components/Footer.astro.tsx",
-      "import": "./components/Footer.astro"
+      "types": "./src/components/Footer.astro.tsx",
+      "import": "./src/components/Footer.astro"
     },
     "./components/PageFrame.astro": {
-      "types": "./components/PageFrame.astro.tsx",
-      "import": "./components/PageFrame.astro"
+      "types": "./src/components/PageFrame.astro.tsx",
+      "import": "./src/components/PageFrame.astro"
     },
     "./components/TableOfContents.astro": {
-      "types": "./components/TableOfContents.astro.tsx",
-      "import": "./components/TableOfContents.astro"
+      "types": "./src/components/TableOfContents.astro.tsx",
+      "import": "./src/components/TableOfContents.astro"
     },
     "./components/Head.astro": {
-      "types": "./components/Head.astro.tsx",
-      "import": "./components/Head.astro"
+      "types": "./src/components/Head.astro.tsx",
+      "import": "./src/components/Head.astro"
     },
     "./components/PageSidebar.astro": {
-      "types": "./components/PageSidebar.astro.tsx",
-      "import": "./components/PageSidebar.astro"
+      "types": "./src/components/PageSidebar.astro.tsx",
+      "import": "./src/components/PageSidebar.astro"
     },
     "./components/ThemeProvider.astro": {
-      "types": "./components/ThemeProvider.astro.tsx",
-      "import": "./components/ThemeProvider.astro"
+      "types": "./src/components/ThemeProvider.astro.tsx",
+      "import": "./src/components/ThemeProvider.astro"
     },
     "./components/Header.astro": {
-      "types": "./components/Header.astro.tsx",
-      "import": "./components/Header.astro"
+      "types": "./src/components/Header.astro.tsx",
+      "import": "./src/components/Header.astro"
     },
     "./components/PageTitle.astro": {
-      "types": "./components/PageTitle.astro.tsx",
-      "import": "./components/PageTitle.astro"
+      "types": "./src/components/PageTitle.astro.tsx",
+      "import": "./src/components/PageTitle.astro"
     },
     "./components/ThemeSelect.astro": {
-      "types": "./components/ThemeSelect.astro.tsx",
-      "import": "./components/ThemeSelect.astro"
+      "types": "./src/components/ThemeSelect.astro.tsx",
+      "import": "./src/components/ThemeSelect.astro"
     },
     "./components/Hero.astro": {
-      "types": "./components/Hero.astro.tsx",
-      "import": "./components/Hero.astro"
+      "types": "./src/components/Hero.astro.tsx",
+      "import": "./src/components/Hero.astro"
     },
     "./components/Pagination.astro": {
-      "types": "./components/Pagination.astro.tsx",
-      "import": "./components/Pagination.astro"
+      "types": "./src/components/Pagination.astro.tsx",
+      "import": "./src/components/Pagination.astro"
     },
     "./components/TwoColumnContent.astro": {
-      "types": "./components/TwoColumnContent.astro.tsx",
-      "import": "./components/TwoColumnContent.astro"
+      "types": "./src/components/TwoColumnContent.astro.tsx",
+      "import": "./src/components/TwoColumnContent.astro"
     },
     "./components/Search.astro": {
-      "types": "./components/Search.astro.tsx",
-      "import": "./components/Search.astro"
+      "types": "./src/components/Search.astro.tsx",
+      "import": "./src/components/Search.astro"
     },
-    "./internal": {
-      "@starlight/src": "./internal.ts",
-      "default": "./dist/internal.mjs"
-    },
-    "./props": {
-      "@starlight/src": "./props.ts",
-      "default": "./dist/props.mjs"
-    },
-    "./schema": {
-      "@starlight/src": "./schema.ts",
-      "default": "./dist/schema.mjs"
-    },
-    "./loaders": {
-      "@starlight/src": "./loaders.ts",
-      "default": "./dist/loaders.mjs"
-    },
-    "./route-data": {
-      "@starlight/src": "./route-data.ts",
-      "default": "./dist/route-data.mjs"
-    },
-    "./types": {
-      "@starlight/src": "./types.ts",
-      "default": "./dist/types.mjs"
-    },
-    "./expressive-code": {
-      "@starlight/src": "./expressive-code.ts",
-      "default": "./dist/expressive-code.mjs"
-    },
-    "./expressive-code/hast": {
-      "@starlight/src": "./integrations/expressive-code/hast.ts",
-      "default": "./dist/integrations/expressive-code/hast.mjs"
-    },
-    "./routes/*": {
-      "@starlight/src": "./routes/*",
-      "default": "./dist/routes/*"
-    },
-    "./style/markdown.css": {
-      "@starlight/src": "./style/markdown.css",
-      "default": "./dist/style/markdown.css"
-    }
+    "./internal": "./src/internal.ts",
+    "./props": "./src/props.ts",
+    "./schema": "./src/schema.ts",
+    "./loaders": "./src/loaders.ts",
+    "./route-data": "./src/route-data.ts",
+    "./types": "./src/types.ts",
+    "./expressive-code": "./src/expressive-code.ts",
+    "./expressive-code/hast": "./src/integrations/expressive-code/hast.ts",
+    "./routes/*": "./src/routes/*",
+    "./style/markdown.css": "./src/style/markdown.css"
   },
   "peerDependencies": {
     "astro": "^5.5.0"
@@ -227,6 +188,7 @@
     "@vitest/coverage-v8": "^3.0.5",
     "astro": "^5.6.1",
     "linkedom": "^0.18.4",
+    "tinyglobby": "^0.2.15",
     "vitest": "^3.0.5"
   },
   "dependencies": {
@@ -257,5 +219,191 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "import": "./dist/index.mjs"
+      },
+      "./locals": {
+        "types": "./dist/locals.d.mts",
+        "import": "./dist/locals.mjs"
+      },
+      "./components": "./src/components.ts",
+      "./components/LanguageSelect.astro": {
+        "types": "./dist/components/LanguageSelect.astro.tsx",
+        "import": "./dist/components/LanguageSelect.astro"
+      },
+      "./components/Select.astro": {
+        "types": "./dist/components/Select.astro.tsx",
+        "import": "./dist/components/Select.astro"
+      },
+      "./components/Banner.astro": {
+        "types": "./dist/components/Banner.astro.tsx",
+        "import": "./dist/components/Banner.astro"
+      },
+      "./components/LastUpdated.astro": {
+        "types": "./dist/components/LastUpdated.astro.tsx",
+        "import": "./dist/components/LastUpdated.astro"
+      },
+      "./components/Sidebar.astro": {
+        "types": "./dist/components/Sidebar.astro.tsx",
+        "import": "./dist/components/Sidebar.astro"
+      },
+      "./components/MarkdownContent.astro": {
+        "types": "./dist/components/MarkdownContent.astro.tsx",
+        "import": "./dist/components/MarkdownContent.astro"
+      },
+      "./components/SidebarPersister.astro": {
+        "types": "./dist/components/SidebarPersister.astro.tsx",
+        "import": "./dist/components/SidebarPersister.astro"
+      },
+      "./components/SidebarSublist.astro": {
+        "types": "./dist/components/SidebarSublist.astro.tsx",
+        "import": "./dist/components/SidebarSublist.astro"
+      },
+      "./components/ContentPanel.astro": {
+        "types": "./dist/components/ContentPanel.astro.tsx",
+        "import": "./dist/components/ContentPanel.astro"
+      },
+      "./components/MobileMenuFooter.astro": {
+        "types": "./dist/components/MobileMenuFooter.astro.tsx",
+        "import": "./dist/components/MobileMenuFooter.astro"
+      },
+      "./components/SiteTitle.astro": {
+        "types": "./dist/components/SiteTitle.astro.tsx",
+        "import": "./dist/components/SiteTitle.astro"
+      },
+      "./components/EditLink.astro": {
+        "types": "./dist/components/EditLink.astro.tsx",
+        "import": "./dist/components/EditLink.astro"
+      },
+      "./components/MobileMenuToggle.astro": {
+        "types": "./dist/components/MobileMenuToggle.astro.tsx",
+        "import": "./dist/components/MobileMenuToggle.astro"
+      },
+      "./components/SkipLink.astro": {
+        "types": "./dist/components/SkipLink.astro.tsx",
+        "import": "./dist/components/SkipLink.astro"
+      },
+      "./components/MobileTableOfContents.astro": {
+        "types": "./dist/components/MobileTableOfContents.astro.tsx",
+        "import": "./dist/components/MobileTableOfContents.astro"
+      },
+      "./components/SocialIcons.astro": {
+        "types": "./dist/components/SocialIcons.astro.tsx",
+        "import": "./dist/components/SocialIcons.astro"
+      },
+      "./components/FallbackContentNotice.astro": {
+        "types": "./dist/components/FallbackContentNotice.astro.tsx",
+        "import": "./dist/components/FallbackContentNotice.astro"
+      },
+      "./components/DraftContentNotice.astro": {
+        "types": "./dist/components/DraftContentNotice.astro.tsx",
+        "import": "./dist/components/DraftContentNotice.astro"
+      },
+      "./components/Page.astro": {
+        "types": "./dist/components/Page.astro.tsx",
+        "import": "./dist/components/Page.astro"
+      },
+      "./components/StarlightPage.astro": {
+        "types": "./dist/components/StarlightPage.astro.tsx",
+        "import": "./dist/components/StarlightPage.astro"
+      },
+      "./components/AnchorHeading.astro": {
+        "types": "./dist/components/AnchorHeading.astro.tsx",
+        "import": "./dist/components/AnchorHeading.astro"
+      },
+      "./components/Footer.astro": {
+        "types": "./dist/components/Footer.astro.tsx",
+        "import": "./dist/components/Footer.astro"
+      },
+      "./components/PageFrame.astro": {
+        "types": "./dist/components/PageFrame.astro.tsx",
+        "import": "./dist/components/PageFrame.astro"
+      },
+      "./components/TableOfContents.astro": {
+        "types": "./dist/components/TableOfContents.astro.tsx",
+        "import": "./dist/components/TableOfContents.astro"
+      },
+      "./components/Head.astro": {
+        "types": "./dist/components/Head.astro.tsx",
+        "import": "./dist/components/Head.astro"
+      },
+      "./components/PageSidebar.astro": {
+        "types": "./dist/components/PageSidebar.astro.tsx",
+        "import": "./dist/components/PageSidebar.astro"
+      },
+      "./components/ThemeProvider.astro": {
+        "types": "./dist/components/ThemeProvider.astro.tsx",
+        "import": "./dist/components/ThemeProvider.astro"
+      },
+      "./components/Header.astro": {
+        "types": "./dist/components/Header.astro.tsx",
+        "import": "./dist/components/Header.astro"
+      },
+      "./components/PageTitle.astro": {
+        "types": "./dist/components/PageTitle.astro.tsx",
+        "import": "./dist/components/PageTitle.astro"
+      },
+      "./components/ThemeSelect.astro": {
+        "types": "./dist/components/ThemeSelect.astro.tsx",
+        "import": "./dist/components/ThemeSelect.astro"
+      },
+      "./components/Hero.astro": {
+        "types": "./dist/components/Hero.astro.tsx",
+        "import": "./dist/components/Hero.astro"
+      },
+      "./components/Pagination.astro": {
+        "types": "./dist/components/Pagination.astro.tsx",
+        "import": "./dist/components/Pagination.astro"
+      },
+      "./components/TwoColumnContent.astro": {
+        "types": "./dist/components/TwoColumnContent.astro.tsx",
+        "import": "./dist/components/TwoColumnContent.astro"
+      },
+      "./components/Search.astro": {
+        "types": "./dist/components/Search.astro.tsx",
+        "import": "./dist/components/Search.astro"
+      },
+      "./internal": {
+        "types": "./dist/internal.d.mts",
+        "import": "./dist/internal.mjs"
+      },
+      "./props": {
+        "types": "./dist/props.d.mts",
+        "import": "./dist/props.mjs"
+      },
+      "./schema": {
+        "types": "./dist/schema.d.mts",
+        "import": "./dist/schema.mjs"
+      },
+      "./loaders": {
+        "types": "./dist/loaders.d.mts",
+        "import": "./dist/loaders.mjs"
+      },
+      "./route-data": {
+        "types": "./dist/route-data.d.mts",
+        "import": "./dist/route-data.mjs"
+      },
+      "./types": {
+        "types": "./dist/types.d.mts",
+        "import": "./dist/types.mjs"
+      },
+      "./expressive-code": {
+        "types": "./dist/expressive-code.d.mts",
+        "import": "./dist/expressive-code.mjs"
+      },
+      "./expressive-code/hast": {
+        "types": "./dist/integrations/expressive-code/hast.d.mts",
+        "import": "./dist/integrations/expressive-code/hast.mjs"
+      },
+      "./routes/*": "./dist/routes/*",
+      "./style/markdown.css": "./dist/style/markdown.css"
+    }
   }
 }

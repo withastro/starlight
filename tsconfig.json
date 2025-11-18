@@ -4,7 +4,6 @@
   "exclude": ["**/dist/**", "**/__coverage__/**", "**/build/**"],
   "compilerOptions": {
     "jsx": "preserve",
-    "checkJs": true,
-    "customConditions": ["@starlight/src"]
+    "checkJs": true
   }
 }

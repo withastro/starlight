@@ -1,6 +1,6 @@
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
-import { version } from '../package.json';
+import { version } from '../../package.json';
 import { type HeadConfig, HeadConfigSchema, type HeadUserConfig } from '../schemas/head';
 import type { PageProps, RouteDataContext } from './routing/data';
 import { fileWithBase } from './base';
