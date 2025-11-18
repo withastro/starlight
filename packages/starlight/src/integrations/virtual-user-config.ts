@@ -39,9 +39,14 @@ export function vitePluginStarlightUserConfig(
 
 	/**
 	 * Resolves a path to a Starlight file relative to this file.
+	 * When used with TypeScript files, makes sure to not include the `.ts` extension to ensure
+	 * proper resolution when transpiled to JavaScript.
 	 * @example
-	 * resolveLocalPath('../utils/git.ts');
-	 * // => '"/users/houston/docs/node_modules/@astrojs/starlight/utils/git.ts"'
+	 * resolveLocalPath('../utils/git');
+	 * // => '"/users/houston/docs/node_modules/@astrojs/starlight/utils/git"'
+	 * @example
+	 * resolveLocalPath('../style/global.css');
+	 * // => '"/users/houston/docs/node_modules/@astrojs/starlight/style/global.css"'
 	 */
 	const resolveLocalPath = (path: string) =>
 		JSON.stringify(fileURLToPath(new URL(path, import.meta.url)));
@@ -79,9 +84,9 @@ export function vitePluginStarlightUserConfig(
 		})}`,
 		'virtual:starlight/git-info':
 			(command !== 'build'
-				? `import { makeAPI } from ${resolveLocalPath('../utils/git.ts')};` +
+				? `import { makeAPI } from ${resolveLocalPath('../utils/git')};` +
 					`const api = makeAPI(${JSON.stringify(rootPath)});`
-				: `import { makeAPI } from ${resolveLocalPath('../utils/gitInlined.ts')};` +
+				: `import { makeAPI } from ${resolveLocalPath('../utils/gitInlined')};` +
 					`const api = makeAPI(${JSON.stringify(getAllNewestCommitDate(rootPath, docsPath))});`) +
 			'export const getNewestCommitDate = api.getNewestCommitDate;',
 		/**
