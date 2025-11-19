@@ -1,4 +1,4 @@
-import { FileIcons } from '../user-components/file-tree-icons';
+import { FileIcons, type FileIcon } from '../user-components/file-tree-icons';
 
 export const BuiltInIcons = {
 	'up-caret':
@@ -195,9 +195,128 @@ export const BuiltInIcons = {
 		'<path d="M22.5 8.2h-21V5.4h21v2.8zm-21 2.6V24L12 18.1 22.5 24V10.8h-21zM22.5 0h-21v2.8h21V0z"/>',
 };
 
+// The icon names type is hand-written rather than using `keyof typeof Icons` as the latter is an
+// inferred type which would cause TypeScript to inline the resulting union type everywhere it's
+// when emitting declaration files. This gets even worse when a Zod object schema references our
+// `IconSchema`, as in Zod 3, this would cause the entire union type to be inlined 3 times.
+//
+// @see https://github.com/microsoft/TypeScript/issues/37151#issuecomment-756232934
+//
+// To avoid any possible divergence between the actual icon names and this type, we have type tests
+// in place that will fail if they ever get out of sync.
+//
+// @see {@link file://./../../__tests__/basics/icon.test-d.ts}
+export type BuiltInIcon =
+	| 'up-caret'
+	| 'down-caret'
+	| 'right-caret'
+	| 'left-caret'
+	| 'up-arrow'
+	| 'down-arrow'
+	| 'right-arrow'
+	| 'left-arrow'
+	| 'bars'
+	| 'translate'
+	| 'pencil'
+	| 'pen'
+	| 'document'
+	| 'add-document'
+	| 'setting'
+	| 'external'
+	| 'download'
+	| 'cloud-download'
+	| 'moon'
+	| 'sun'
+	| 'laptop'
+	| 'open-book'
+	| 'information'
+	| 'magnifier'
+	| 'forward-slash'
+	| 'close'
+	| 'error'
+	| 'warning'
+	| 'approve-check-circle'
+	| 'approve-check'
+	| 'rocket'
+	| 'star'
+	| 'puzzle'
+	| 'list-format'
+	| 'random'
+	| 'comment'
+	| 'comment-alt'
+	| 'heart'
+	| 'github'
+	| 'gitlab'
+	| 'bitbucket'
+	| 'codePen'
+	| 'farcaster'
+	| 'discord'
+	| 'gitter'
+	| 'twitter'
+	| 'x.com'
+	| 'mastodon'
+	| 'codeberg'
+	| 'youtube'
+	| 'threads'
+	| 'linkedin'
+	| 'twitch'
+	| 'azureDevOps'
+	| 'microsoftTeams'
+	| 'instagram'
+	| 'stackOverflow'
+	| 'telegram'
+	| 'rss'
+	| 'facebook'
+	| 'email'
+	| 'phone'
+	| 'reddit'
+	| 'patreon'
+	| 'signal'
+	| 'slack'
+	| 'matrix'
+	| 'hackerOne'
+	| 'openCollective'
+	| 'blueSky'
+	| 'discourse'
+	| 'zulip'
+	| 'pinterest'
+	| 'tiktok'
+	| 'astro'
+	| 'alpine'
+	| 'pnpm'
+	| 'biome'
+	| 'bun'
+	| 'mdx'
+	| 'apple'
+	| 'linux'
+	| 'homebrew'
+	| 'nix'
+	| 'starlight'
+	| 'pkl'
+	| 'node'
+	| 'cloudflare'
+	| 'vercel'
+	| 'netlify'
+	| 'deno'
+	| 'jsr'
+	| 'nostr'
+	| 'backstage'
+	| 'confluence'
+	| 'jira'
+	| 'storybook'
+	| 'vscode'
+	| 'jetbrains'
+	| 'zed'
+	| 'vim'
+	| 'figma'
+	| 'sketch'
+	| 'npm'
+	| 'sourcehut'
+	| 'substack';
+
 export const Icons = {
 	...BuiltInIcons,
 	...FileIcons,
 };
 
-export type StarlightIcon = keyof typeof Icons;
+export type StarlightIcon = BuiltInIcon | FileIcon;

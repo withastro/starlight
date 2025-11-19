@@ -12,8 +12,6 @@ const outDir = 'dist';
 // TODO(HiDeoo) look for `tsc` comments
 // TODO(HiDeoo) check directives from `index.ts` are present in the .d.ts files
 // TODO(HiDeoo) all existing .d.ts files
-// TODO(HiDeoo) user components
-// TODO(HiDeoo) icon types (no huge union anywhere)
 // TODO(HiDeoo) ensure we don't have js/mjs/cjs files in src
 // TODO(HiDeoo) virtual / triple-slash directives
 // TODO(HiDeoo) virtual-internal.d.ts
