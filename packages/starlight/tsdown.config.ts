@@ -18,25 +18,15 @@ const outDir = 'dist';
 // TODO(HiDeoo) virtual / triple-slash directives
 // TODO(HiDeoo) virtual-internal.d.ts
 // TODO(HiDeoo) global.d.ts
+// TODO(HiDeoo) remove tsc step in docs/
 
 export default defineConfig({
 	copy: ['src/components.ts', 'src/style'],
 	dts: true,
-	// entry: [
-	// 	'./index.ts',
-	// 	'./locals.ts',
-	// 	'./internal.ts',
-	// 	'./props.ts',
-	// 	'./schema.ts',
-	// 	'./loaders.ts',
-	// 	'./route-data.ts',
-	// 	'./types.ts',
-	// 	'./expressive-code.ts',
-	// 	'./integrations/expressive-code/hast.ts',
-	// ],
 	entry: [
 		'src/**/*.ts',
-		// TODO(HiDeoo) comment
+		// The user components barrel file should not be transpiled as it's consumed as-is by Astro.
+		// https://github.com/withastro/astro/blob/c4c99aa7a5e8e45ada0efa4fda6e6fb96f334663/packages/astro/package.json#L55
 		'!src/components.ts',
 	],
 	external: [/^astro:/, /^virtual:starlight\//],
@@ -45,7 +35,13 @@ export default defineConfig({
 	unbundle: true,
 });
 
-// TODO(HiDeoo) comment
+/**
+ * Plugin supporting importing raw file contents using the `?raw` suffix.
+ *
+ * This is a basic implementation suitable for Starlight’s needs as the existing `unplugin-raw`
+ * plugin did not end up working correctly.
+ * Note that this implementation does not support multiple query parameters.
+ */
 function rawImportPlugin() {
 	const rawImportSuffix = '?raw';
 
@@ -63,8 +59,14 @@ function rawImportPlugin() {
 	};
 }
 
-// TODO(HiDeoo) comment
-// TODO(HiDeoo) avoid ts files e.g in `components/`
+/**
+ * Plugin copying files matching given glob patterns to the output directory.
+ *
+ * The tsdown `copy` option does not support glob patterns, which can be useful in the case of
+ * Astro files that we all want to copy over as-is. Specifying each directory containing Astro
+ * files to the `copy` option would be tedious and would also end up copying non-Astro files, e.g.
+ * TypeScript files in the `src/components/` directory that we do not want to copy as-is.
+ */
 function globCopyPlugin(globs: string[], cwd: string) {
 	return {
 		name: 'glob-copy-plugin',
