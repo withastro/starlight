@@ -1,6 +1,8 @@
 import { z } from 'astro/zod';
 import type { StarlightExpressiveCodeOptions } from '../integrations/expressive-code';
 
+export type ExpressiveCodeUserConfig = boolean | StarlightExpressiveCodeOptions | undefined;
+
 export const ExpressiveCodeSchema = () =>
 	z
 		.union([
@@ -9,7 +11,4 @@ export const ExpressiveCodeSchema = () =>
 			),
 			z.boolean(),
 		])
-		.describe(
-			'Define how code blocks are rendered by passing options to Expressive Code, or disable the integration by passing `false`.'
-		)
 		.optional();

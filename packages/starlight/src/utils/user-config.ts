@@ -1,51 +1,51 @@
 import { z } from 'astro/zod';
 import { parse as bcpParse, stringify as bcpStringify } from 'bcp-47';
-import { ComponentConfigSchema } from '../schemas/components';
-import { ExpressiveCodeSchema } from '../schemas/expressiveCode';
-import { FaviconSchema } from '../schemas/favicon';
-import { HeadConfigSchema } from '../schemas/head';
-import { LogoConfigSchema } from '../schemas/logo';
-import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefind';
-import { SidebarItemSchema } from '../schemas/sidebar';
-import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
-import { SocialLinksSchema } from '../schemas/social';
-import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { ComponentConfigSchema, type ComponentUserConfig } from '../schemas/components';
+import { ExpressiveCodeSchema, type ExpressiveCodeUserConfig } from '../schemas/expressiveCode';
+import { FaviconSchema, type FaviconUserConfig } from '../schemas/favicon';
+import { HeadConfigSchema, type HeadUserConfig } from '../schemas/head';
+import { LogoConfigSchema, type LogoUserConfig } from '../schemas/logo';
+import {
+	PagefindConfigDefaults,
+	PagefindConfigSchema,
+	type PagefindUserConfig,
+} from '../schemas/pagefind';
+import { SidebarItemSchema, type SidebarItemUserConfig } from '../schemas/sidebar';
+import {
+	TitleConfigSchema,
+	TitleTransformConfigSchema,
+	type TitleUserConfig,
+} from '../schemas/site-title';
+import { SocialLinksSchema, type SocialLinksUserConfig } from '../schemas/social';
+import { TableOfContentsSchema, type TableOfContentsUserConfig } from '../schemas/tableOfContents';
 import { BuiltInDefaultLocale } from './i18n';
+import { LocaleConfigSchema, type LocaleUserConfig } from '../schemas/locale';
+import type { Prettify } from './types';
 
-const LocaleSchema = z.object({
-	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
-	label: z
-		.string()
-		.describe(
-			'The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`.'
-		),
-	/** The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. */
-	lang: z
-		.string()
-		.optional()
-		.describe('The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`.'),
-	/** The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left. */
-	dir: z
-		.enum(['rtl', 'ltr'])
-		.optional()
-		.default('ltr')
-		.describe(
-			'The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.'
-		),
-});
-
-const UserConfigSchema = z.object({
+// The `StarlightUserConfig` interface is an hand-written type rather than using the
+// `z.input<schema>` helper so that any JSDoc comments are properly preserved when emitting
+// declaration files.
+// Having such comments in the schema only works in pure-TypeScript environments, but due to a TS
+// issues, such comments can be either missing or misplaced in the emitted declaration files.
+//
+// @see https://github.com/microsoft/TypeScript/issues/62309
+//
+// As such approach uses 2 sources of truth (a schema and an hand-written type), we use type tests
+// to ensure that the hand-written type always matches the inferred input type from the schema.
+// Any properties that use a sub-schema also follow the same approach, with type tests ensuring
+// the same consistency there as well.
+// Any new sub-schema used in the configuration should also have corresponding type tests added.
+//
+// @see {@link file://./../../__tests__/basics/schema.test-d.ts}
+export interface StarlightUserConfig {
 	/** Title for your website. Will be used in metadata and as browser tab title. */
-	title: TitleConfigSchema(),
+	title: TitleUserConfig;
 
 	/** Description metadata for your website. Can be used in page metadata. */
-	description: z
-		.string()
-		.optional()
-		.describe('Description metadata for your website. Can be used in page metadata.'),
+	description?: string | undefined;
 
 	/** Set a logo image to show in the navigation bar alongside or instead of the site title. */
-	logo: LogoConfigSchema(),
+	logo?: LogoUserConfig;
 
 	/**
 	 * Optional details about the social media accounts for this site.
@@ -59,30 +59,132 @@ const UserConfigSchema = z.object({
 	 *   { icon: 'mastodon', label: 'Mastodon', href: 'https://m.webtoo.ls/@astro' },
 	 * ]
 	 */
-	social: SocialLinksSchema(),
-
-	/** The tagline for your website. */
-	tagline: z.string().optional().describe('The tagline for your website.'),
+	social?: SocialLinksUserConfig;
 
 	/** Configure the defaults for the table of contents on each page. */
-	tableOfContents: TableOfContentsSchema(),
+	tableOfContents?: TableOfContentsUserConfig;
 
 	/** Enable and configure “Edit this page” links. */
-	editLink: z
-		.object({
-			/** Set the base URL for edit links. The final link will be `baseUrl` + the current page path. */
-			baseUrl: z.string().url().optional(),
-		})
-		.optional()
-		.default({}),
+	editLink?:
+		| {
+				/** Set the base URL for edit links. The final link will be `baseUrl` + the current page path. */
+				baseUrl?: string | undefined;
+		  }
+		| undefined;
 
 	/** Configure locales for internationalization (i18n). */
+	locales?: {
+		root?: Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>;
+	} & Record<string, LocaleUserConfig>;
+
+	/**
+	 * Specify the default language for this site.
+	 *
+	 * The default locale will be used to provide fallback content where translations are missing.
+	 */
+	defaultLocale?: string | undefined;
+
+	/** Configure your site’s sidebar navigation items. */
+	sidebar?: SidebarItemUserConfig[];
+
+	/**
+	 * Add extra tags to your site’s `<head>`.
+	 *
+	 * Can also be set for a single page in a page’s frontmatter.
+	 *
+	 * @example
+	 * // Add Fathom analytics to your site
+	 * starlight({
+	 *  head: [
+	 *    {
+	 *      tag: 'script',
+	 *      attrs: {
+	 *        src: 'https://cdn.usefathom.com/script.js',
+	 *        'data-site': 'MY-FATHOM-ID',
+	 *        defer: true,
+	 *      },
+	 *    },
+	 *  ],
+	 * })
+	 */
+	head?: HeadUserConfig;
+
+	/**
+	 * Provide CSS files to customize the look and feel of your Starlight site.
+	 *
+	 * Supports local CSS files relative to the root of your project,
+	 * e.g. `'/src/custom.css'`, and CSS you installed as an npm
+	 * module, e.g. `'@fontsource/roboto'`.
+	 *
+	 * @example
+	 * starlight({
+	 *  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+	 * })
+	 */
+	customCss?: string[] | undefined;
+
+	/** Define if the last update date should be visible in the page footer. */
+	lastUpdated?: boolean | undefined;
+
+	/** Define if the previous and next page links should be visible in the page footer. */
+	pagination?: boolean | undefined;
+
+	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
+	favicon?: FaviconUserConfig;
+
+	/**
+	 * Define how code blocks are rendered by passing options to Expressive Code,
+	 * or disable the integration by passing `false`.
+	 */
+	expressiveCode?: ExpressiveCodeUserConfig;
+
+	/**
+	 * Configure Starlight’s default site search provider Pagefind. Set to `false` to disable indexing
+	 * your site with Pagefind, which will also hide the default search UI if in use.
+	 */
+	pagefind?: boolean | PagefindUserConfig | undefined;
+
+	/** Specify paths to components that should override Starlight’s default components */
+	components?: ComponentUserConfig;
+
+	/** Will be used as title delimiter in the generated `<title>` tag. */
+	titleDelimiter?: string | undefined;
+
+	/** Disable Starlight's default 404 page. */
+	disable404Route?: boolean | undefined;
+
+	/**
+	 * Define whether Starlight pages should be prerendered or not.
+	 * Defaults to always prerender Starlight pages, even when the project is
+	 * set to "server" output mode.
+	 */
+	prerender?: boolean | undefined;
+
+	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
+	credits?: boolean | undefined;
+
+	/** Add middleware to process Starlight’s route data for each page. */
+	routeMiddleware?: string | string[] | undefined;
+
+	/** Configure features that impact Starlight’s Markdown processing. */
+	markdown?:
+		| {
+				/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
+				headingLinks?: boolean | undefined;
+		  }
+		| undefined;
+}
+
+const UserConfigSchema = z.object({
+	title: TitleConfigSchema(),
+	description: z.string().optional(),
+	logo: LogoConfigSchema(),
+	social: SocialLinksSchema(),
+	tableOfContents: TableOfContentsSchema(),
+	editLink: z.object({ baseUrl: z.string().url().optional() }).optional().default({}),
 	locales: z
-		.object({
-			/** Configure a “root” locale to serve a default language from `/`. */
-			root: LocaleSchema.required({ lang: true }).optional(),
-		})
-		.catchall(LocaleSchema)
+		.object({ root: LocaleConfigSchema().required({ lang: true }).optional() })
+		.catchall(LocaleConfigSchema())
 		.transform((locales, ctx) => {
 			for (const key in locales) {
 				const locale = locales[key]!;
@@ -116,113 +218,26 @@ const UserConfigSchema = z.object({
 			}
 			return locales;
 		})
-		.optional()
-		.describe('Configure locales for internationalization (i18n).'),
-
-	/**
-	 * Specify the default language for this site.
-	 *
-	 * The default locale will be used to provide fallback content where translations are missing.
-	 */
+		.optional(),
 	defaultLocale: z.string().optional(),
-
-	/** Configure your site’s sidebar navigation items. */
 	sidebar: SidebarItemSchema.array().optional(),
-
-	/**
-	 * Add extra tags to your site’s `<head>`.
-	 *
-	 * Can also be set for a single page in a page’s frontmatter.
-	 *
-	 * @example
-	 * // Add Fathom analytics to your site
-	 * starlight({
-	 *  head: [
-	 *    {
-	 *      tag: 'script',
-	 *      attrs: {
-	 *        src: 'https://cdn.usefathom.com/script.js',
-	 *        'data-site': 'MY-FATHOM-ID',
-	 *        defer: true,
-	 *      },
-	 *    },
-	 *  ],
-	 * })
-	 */
 	head: HeadConfigSchema({ source: 'config' }),
-
-	/**
-	 * Provide CSS files to customize the look and feel of your Starlight site.
-	 *
-	 * Supports local CSS files relative to the root of your project,
-	 * e.g. `'/src/custom.css'`, and CSS you installed as an npm
-	 * module, e.g. `'@fontsource/roboto'`.
-	 *
-	 * @example
-	 * starlight({
-	 *  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
-	 * })
-	 */
 	customCss: z.string().array().optional().default([]),
-
-	/** Define if the last update date should be visible in the page footer. */
-	lastUpdated: z
-		.boolean()
-		.default(false)
-		.describe('Define if the last update date should be visible in the page footer.'),
-
-	/** Define if the previous and next page links should be visible in the page footer. */
-	pagination: z
-		.boolean()
-		.default(true)
-		.describe('Define if the previous and next page links should be visible in the page footer.'),
-
-	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
+	lastUpdated: z.boolean().default(false),
+	pagination: z.boolean().default(true),
 	favicon: FaviconSchema(),
-
-	/**
-	 * Define how code blocks are rendered by passing options to Expressive Code,
-	 * or disable the integration by passing `false`.
-	 */
 	expressiveCode: ExpressiveCodeSchema(),
-
-	/**
-	 * Configure Starlight’s default site search provider Pagefind. Set to `false` to disable indexing
-	 * your site with Pagefind, which will also hide the default search UI if in use.
-	 */
 	pagefind: z
 		.boolean()
 		// Transform `true` to our default config object.
 		.transform((val) => val && PagefindConfigDefaults())
 		.or(PagefindConfigSchema())
 		.optional(),
-
-	/** Specify paths to components that should override Starlight’s default components */
 	components: ComponentConfigSchema(),
-
-	/** Will be used as title delimiter in the generated `<title>` tag. */
-	titleDelimiter: z
-		.string()
-		.default('|')
-		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
-
-	/** Disable Starlight's default 404 page. */
-	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
-
-	/**
-	 * Define whether Starlight pages should be prerendered or not.
-	 * Defaults to always prerender Starlight pages, even when the project is
-	 * set to "server" output mode.
-	 */
+	titleDelimiter: z.string().default('|'),
+	disable404Route: z.boolean().default(false),
 	prerender: z.boolean().default(true),
-
-	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
-	credits: z
-		.boolean()
-		.default(false)
-		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
-
-	/** Add middleware to process Starlight’s route data for each page. */
+	credits: z.boolean().default(false),
 	routeMiddleware: z
 		.string()
 		.transform((string) => [string])
@@ -242,22 +257,12 @@ const UserConfigSchema = z.object({
 						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
 				});
 			}
-		})
-		.describe('Add middleware to process Starlight’s route data for each page.'),
-
-	/** Configure features that impact Starlight’s Markdown processing. */
+		}),
 	markdown: z
 		.object({
-			/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
-			headingLinks: z
-				.boolean()
-				.default(true)
-				.describe(
-					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
-				),
+			headingLinks: z.boolean().default(true),
 		})
-		.default({})
-		.describe('Configure features that impact Starlight’s Markdown processing.'),
+		.default({}),
 });
 
 export const StarlightConfigSchema = UserConfigSchema.strict()
@@ -344,4 +349,3 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 	});
 
 export type StarlightConfig = z.infer<typeof StarlightConfigSchema>;
-export type StarlightUserConfig = z.input<typeof StarlightConfigSchema>;

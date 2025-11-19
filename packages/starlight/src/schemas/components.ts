@@ -1,8 +1,7 @@
 import { z } from 'astro/zod';
 
-export function ComponentConfigSchema() {
-	return z
-		.object({
+export type ComponentUserConfig =
+	| {
 			/*
 			HEAD ----------------------------------------------------------------------------------------
 			*/
@@ -15,8 +14,7 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro `Head` default implementation}
 			 */
-			Head: z.string().default('@astrojs/starlight/components/Head.astro'),
-
+			Head?: string | undefined;
 			/**
 			 * Component rendered inside `<head>` that sets up dark/light theme support.
 			 * The default implementation includes an inline script and a `<template>` used by the
@@ -24,7 +22,7 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeProvider.astro `ThemeProvider` default implementation}
 			 */
-			ThemeProvider: z.string().default('@astrojs/starlight/components/ThemeProvider.astro'),
+			ThemeProvider?: string | undefined;
 
 			/*
 			BODY ----------------------------------------------------------------------------------------
@@ -37,7 +35,7 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/SkipLink.astro `SkipLink` default implementation}
 			 */
-			SkipLink: z.string().default('@astrojs/starlight/components/SkipLink.astro'),
+			SkipLink?: string | undefined;
 
 			/*
 			LAYOUT --------------------------------------------------------------------------------------
@@ -52,15 +50,14 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro `PageFrame` default implementation}
 			 */
-			PageFrame: z.string().default('@astrojs/starlight/components/PageFrame.astro'),
+			PageFrame?: string | undefined;
 			/**
 			 * Component rendered inside `<PageFrame>` that is responsible for toggling the
 			 * sidebar navigation on small (mobile) viewports.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuToggle.astro `MobileMenuToggle` default implementation}
 			 */
-			MobileMenuToggle: z.string().default('@astrojs/starlight/components/MobileMenuToggle.astro'),
-
+			MobileMenuToggle?: string | undefined;
 			/**
 			 * Layout component wrapped around the main content column and right sidebar (table of contents).
 			 * The default implementation handles the switch between a single-column, small-viewport layout
@@ -68,7 +65,7 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro `TwoColumnContent` default implementation}
 			 */
-			TwoColumnContent: z.string().default('@astrojs/starlight/components/TwoColumnContent.astro'),
+			TwoColumnContent?: string | undefined;
 
 			/*
 			HEADER --------------------------------------------------------------------------------------
@@ -81,40 +78,40 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro `Header` default implementation}
 			 */
-			Header: z.string().default('@astrojs/starlight/components/Header.astro'),
+			Header?: string | undefined;
 			/**
 			 * Component rendered at the start of the site header to render the site title.
 			 * The default implementation includes logic for rendering logos defined in Starlight config.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/SiteTitle.astro `SiteTitle` default implementation}
 			 */
-			SiteTitle: z.string().default('@astrojs/starlight/components/SiteTitle.astro'),
+			SiteTitle?: string | undefined;
 			/**
 			 * Component used to render Starlight’s search UI. The default implementation includes the
 			 * button in the header and the code for displaying a search modal when it is clicked.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro `Search` default implementation}
 			 */
-			Search: z.string().default('@astrojs/starlight/components/Search.astro'),
+			Search?: string | undefined;
 			/**
 			 * Component rendered in the site header including social icon links. The default
 			 * implementation uses the `social` option in Starlight config to render icons and links.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro `SocialIcons` default implementation}
 			 */
-			SocialIcons: z.string().default('@astrojs/starlight/components/SocialIcons.astro'),
+			SocialIcons?: string | undefined;
 			/**
 			 * Component rendered in the site header that allows users to select their preferred color scheme.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/ThemeSelect.astro `ThemeSelect` default implementation}
 			 */
-			ThemeSelect: z.string().default('@astrojs/starlight/components/ThemeSelect.astro'),
+			ThemeSelect?: string | undefined;
 			/**
 			 * Component rendered in the site header that allows users to switch to a different language.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/LanguageSelect.astro `LanguageSelect` default implementation}
 			 */
-			LanguageSelect: z.string().default('@astrojs/starlight/components/LanguageSelect.astro'),
+			LanguageSelect?: string | undefined;
 
 			/*
 			SIDEBAR -------------------------------------------------------------------------------------
@@ -128,14 +125,14 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Sidebar.astro `Sidebar` default implementation}
 			 */
-			Sidebar: z.string().default('@astrojs/starlight/components/Sidebar.astro'),
+			Sidebar?: string | undefined;
 			/**
 			 * Component rendered at the bottom of the mobile drop-down menu.
 			 * The default implementation renders `<ThemeSelect />` and `<LanguageSelect />`.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileMenuFooter.astro `MobileMenuFooter` default implementation}
 			 */
-			MobileMenuFooter: z.string().default('@astrojs/starlight/components/MobileMenuFooter.astro'),
+			MobileMenuFooter?: string | undefined;
 
 			/*
 			TOC -----------------------------------------------------------------------------------------
@@ -147,21 +144,19 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageSidebar.astro `PageSidebar` default implementation}
 			 */
-			PageSidebar: z.string().default('@astrojs/starlight/components/PageSidebar.astro'),
+			PageSidebar?: string | undefined;
 			/**
 			 * Component that renders the current page’s table of contents on wider viewports.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/TableOfContents.astro `TableOfContents` default implementation}
 			 */
-			TableOfContents: z.string().default('@astrojs/starlight/components/TableOfContents.astro'),
+			TableOfContents?: string | undefined;
 			/**
 			 * Component that renders the current page’s table of contents on small (mobile) viewports.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/MobileTableOfContents.astro `MobileTableOfContents` default implementation}
 			 */
-			MobileTableOfContents: z
-				.string()
-				.default('@astrojs/starlight/components/MobileTableOfContents.astro'),
+			MobileTableOfContents?: string | undefined;
 
 			/*
 			CONTENT HEADER ------------------------------------------------------------------------------
@@ -173,15 +168,13 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro `Banner` default implementation}
 			 */
-			Banner: z.string().default('@astrojs/starlight/components/Banner.astro'),
-
+			Banner?: string | undefined;
 			/**
 			 * Layout component used to wrap sections of the main content column.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/ContentPanel.astro `ContentPanel` default implementation}
 			 */
-			ContentPanel: z.string().default('@astrojs/starlight/components/ContentPanel.astro'),
-
+			ContentPanel?: string | undefined;
 			/**
 			 * Component containing the `<h1>` element for the current page.
 			 *
@@ -190,34 +183,27 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageTitle.astro `PageTitle` default implementation}
 			 */
-			PageTitle: z.string().default('@astrojs/starlight/components/PageTitle.astro'),
-
+			PageTitle?: string | undefined;
 			/**
 			 * Notice displayed to users on pages where a translation for the current language is not
 			 * available. Only used on multilingual sites.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/FallbackContentNotice.astro `FallbackContentNotice` default implementation}
 			 */
-			FallbackContentNotice: z
-				.string()
-				.default('@astrojs/starlight/components/FallbackContentNotice.astro'),
-
+			FallbackContentNotice?: string | undefined;
 			/**
 			 * Notice displayed to users on draft pages. Only used in development mode.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/DraftContentNotice.astro `DraftContentNotice` default implementation}
 			 */
-			DraftContentNotice: z
-				.string()
-				.default('@astrojs/starlight/components/DraftContentNotice.astro'),
-
+			DraftContentNotice?: string | undefined;
 			/**
 			 * Component rendered at the top of the page when `hero` is set in frontmatter. The default
 			 * implementation shows a large title, tagline, and call-to-action links alongside an optional image.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro `Hero` default implementation}
 			 */
-			Hero: z.string().default('@astrojs/starlight/components/Hero.astro'),
+			Hero?: string | undefined;
 
 			/*
 			CONTENT -------------------------------------------------------------------------------------
@@ -229,7 +215,7 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/MarkdownContent.astro `MarkdownContent` default implementation}
 			 */
-			MarkdownContent: z.string().default('@astrojs/starlight/components/MarkdownContent.astro'),
+			MarkdownContent?: string | undefined;
 
 			/*
 			CONTENT FOOTER ------------------------------------------------------------------------------
@@ -241,24 +227,108 @@ export function ComponentConfigSchema() {
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro `Footer` default implementation}
 			 */
-			Footer: z.string().default('@astrojs/starlight/components/Footer.astro'),
+			Footer?: string | undefined;
 			/**
 			 * Component rendered in the page footer to display the last-updated date.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/LastUpdated.astro `LastUpdated` default implementation}
 			 */
-			LastUpdated: z.string().default('@astrojs/starlight/components/LastUpdated.astro'),
+			LastUpdated?: string | undefined;
 			/**
 			 * Component rendered in the page footer to display navigation arrows between previous/next pages.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/Pagination.astro `Pagination` default implementation}
 			 */
-			Pagination: z.string().default('@astrojs/starlight/components/Pagination.astro'),
+			Pagination?: string | undefined;
 			/**
 			 * Component rendered in the page footer to display a link to where the page can be edited.
 			 *
 			 * @see {@link https://github.com/withastro/starlight/blob/main/packages/starlight/components/EditLink.astro `EditLink` default implementation}
 			 */
+			EditLink?: string | undefined;
+	  }
+	| undefined;
+
+export function ComponentConfigSchema() {
+	return z
+		.object({
+			/*
+			HEAD ----------------------------------------------------------------------------------------
+			*/
+
+			Head: z.string().default('@astrojs/starlight/components/Head.astro'),
+			ThemeProvider: z.string().default('@astrojs/starlight/components/ThemeProvider.astro'),
+
+			/*
+			BODY ----------------------------------------------------------------------------------------
+			*/
+
+			SkipLink: z.string().default('@astrojs/starlight/components/SkipLink.astro'),
+
+			/*
+			LAYOUT --------------------------------------------------------------------------------------
+			*/
+
+			PageFrame: z.string().default('@astrojs/starlight/components/PageFrame.astro'),
+			MobileMenuToggle: z.string().default('@astrojs/starlight/components/MobileMenuToggle.astro'),
+			TwoColumnContent: z.string().default('@astrojs/starlight/components/TwoColumnContent.astro'),
+
+			/*
+			HEADER --------------------------------------------------------------------------------------
+			*/
+
+			Header: z.string().default('@astrojs/starlight/components/Header.astro'),
+			SiteTitle: z.string().default('@astrojs/starlight/components/SiteTitle.astro'),
+			Search: z.string().default('@astrojs/starlight/components/Search.astro'),
+			SocialIcons: z.string().default('@astrojs/starlight/components/SocialIcons.astro'),
+			ThemeSelect: z.string().default('@astrojs/starlight/components/ThemeSelect.astro'),
+			LanguageSelect: z.string().default('@astrojs/starlight/components/LanguageSelect.astro'),
+
+			/*
+			SIDEBAR -------------------------------------------------------------------------------------
+			*/
+
+			Sidebar: z.string().default('@astrojs/starlight/components/Sidebar.astro'),
+			MobileMenuFooter: z.string().default('@astrojs/starlight/components/MobileMenuFooter.astro'),
+
+			/*
+			TOC -----------------------------------------------------------------------------------------
+			*/
+
+			PageSidebar: z.string().default('@astrojs/starlight/components/PageSidebar.astro'),
+			TableOfContents: z.string().default('@astrojs/starlight/components/TableOfContents.astro'),
+			MobileTableOfContents: z
+				.string()
+				.default('@astrojs/starlight/components/MobileTableOfContents.astro'),
+
+			/*
+			CONTENT HEADER ------------------------------------------------------------------------------
+			*/
+
+			Banner: z.string().default('@astrojs/starlight/components/Banner.astro'),
+			ContentPanel: z.string().default('@astrojs/starlight/components/ContentPanel.astro'),
+			PageTitle: z.string().default('@astrojs/starlight/components/PageTitle.astro'),
+			FallbackContentNotice: z
+				.string()
+				.default('@astrojs/starlight/components/FallbackContentNotice.astro'),
+			DraftContentNotice: z
+				.string()
+				.default('@astrojs/starlight/components/DraftContentNotice.astro'),
+			Hero: z.string().default('@astrojs/starlight/components/Hero.astro'),
+
+			/*
+			CONTENT -------------------------------------------------------------------------------------
+			*/
+
+			MarkdownContent: z.string().default('@astrojs/starlight/components/MarkdownContent.astro'),
+
+			/*
+			CONTENT FOOTER ------------------------------------------------------------------------------
+			*/
+
+			Footer: z.string().default('@astrojs/starlight/components/Footer.astro'),
+			LastUpdated: z.string().default('@astrojs/starlight/components/LastUpdated.astro'),
+			Pagination: z.string().default('@astrojs/starlight/components/Pagination.astro'),
 			EditLink: z.string().default('@astrojs/starlight/components/EditLink.astro'),
 		})
 		.default({});

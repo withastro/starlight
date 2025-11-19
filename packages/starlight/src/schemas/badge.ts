@@ -32,6 +32,15 @@ export const BadgeConfigSchema = () =>
 		})
 		.optional();
 
+export type I18nBadgeUserConfig =
+	| string
+	| {
+			variant?: 'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default' | undefined;
+			class?: string | undefined;
+			text: string | Record<string, string>;
+	  }
+	| undefined;
+
 export const I18nBadgeConfigSchema = () => z.union([z.string(), i18nBadgeSchema]).optional();
 
 export type Badge = z.output<typeof badgeSchema>;

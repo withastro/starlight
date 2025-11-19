@@ -33,7 +33,7 @@ export async function runPlugins(
 
 	// Validate the user-provided plugins configuration.
 	const pluginsConfig = parseWithFriendlyErrors(
-		starlightPluginsConfigSchema,
+		StarlightPluginsConfigSchema,
 		pluginsUserConfig,
 		'Invalid plugins config passed to starlight integration'
 	);
@@ -186,170 +186,237 @@ const astroIntegrationSchema = z.object({
 	hooks: z.object({}).passthrough().default({}),
 }) as z.Schema<AstroIntegration>;
 
+interface RouteMiddlewareUserConfig {
+	entrypoint: string;
+	order?: 'pre' | 'post' | 'default';
+}
+
 const routeMiddlewareConfigSchema = z.object({
 	entrypoint: z.string(),
 	order: z.enum(['pre', 'post', 'default']).default('default'),
 });
 
-const baseStarlightPluginSchema = z.object({
+interface BaseStarlightPluginUserConfig {
 	/** Name of the Starlight plugin. */
+	name: string;
+}
+
+const baseStarlightPluginSchema = z.object({
 	name: z.string(),
 });
+
+type ConfigSetupHookUserConfig =
+	| ((options: {
+			/**
+			 * A read-only copy of the user-supplied Starlight configuration.
+			 *
+			 * Note that this configuration may have been updated by other plugins configured
+			 * before this one.
+			 */
+			config: StarlightUserConfig & { plugins?: BaseStarlightPluginUserConfig[] };
+			/**
+			 * A callback function to update the user-supplied Starlight configuration.
+			 *
+			 * You only need to provide the configuration values that you want to update but no deep
+			 * merge is performed.
+			 *
+			 * @example
+			 * {
+			 * 	name: 'My Starlight Plugin',
+			 *	hooks: {
+			 * 		'config:setup'({ updateConfig }) {
+			 * 			updateConfig({
+			 * 				description: 'Custom description',
+			 * 			});
+			 * 		}
+			 *	}
+			 * }
+			 */
+			updateConfig: (newConfig: Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>) => void;
+			/**
+			 * A callback function to add an Astro integration required by this plugin.
+			 *
+			 * @see https://docs.astro.build/en/reference/integrations-reference/
+			 *
+			 * @example
+			 * {
+			 * 	name: 'My Starlight Plugin',
+			 * 	hooks: {
+			 * 		'config:setup'({ addIntegration }) {
+			 * 			addIntegration({
+			 * 				name: 'My Plugin Astro Integration',
+			 * 				hooks: {
+			 * 					'astro:config:setup': () => {
+			 * 						// …
+			 * 					},
+			 * 				},
+			 * 			});
+			 * 		}
+			 * 	}
+			 * }
+			 */
+			addIntegration: (integration: AstroIntegration) => void;
+			/**
+			 * A callback function to register additional route middleware handlers.
+			 *
+			 * If the order of execution is important, a plugin can use the `order` option to enforce
+			 * running first or last.
+			 *
+			 * @example
+			 * {
+			 * 	name: 'My Starlight Plugin',
+			 * 	hooks: {
+			 * 		setup({ addRouteMiddleware }) {
+			 * 			addRouteMiddleware({ entrypoint: '@me/my-plugin/route-middleware' });
+			 * 		},
+			 * 	},
+			 * }
+			 */
+			addRouteMiddleware: (config: RouteMiddlewareUserConfig) => void;
+			/**
+			 * A read-only copy of the user-supplied Astro configuration.
+			 *
+			 * Note that this configuration is resolved before any other integrations have run.
+			 *
+			 * @see https://docs.astro.build/en/reference/integrations-reference/#config-option
+			 */
+			astroConfig: StarlightPluginContext['config'];
+			/**
+			 * The command used to run Starlight.
+			 *
+			 * @see https://docs.astro.build/en/reference/integrations-reference/#command-option
+			 */
+			command: StarlightPluginContext['command'];
+			/**
+			 * `false` when the dev server starts, `true` when a reload is triggered.
+			 *
+			 * @see https://docs.astro.build/en/reference/integrations-reference/#isrestart-option
+			 */
+			isRestart: StarlightPluginContext['isRestart'];
+			/**
+			 * An instance of the Astro integration logger with all logged messages prefixed with the
+			 * plugin name.
+			 *
+			 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
+			 */
+			logger: StarlightPluginContext['logger'];
+			/**
+			 * A callback function to generate a utility function to access UI strings for a given
+			 * language.
+			 *
+			 * @see https://starlight.astro.build/guides/i18n/#using-ui-translations
+			 *
+			 * @example
+			 * {
+			 * 	name: 'My Starlight Plugin',
+			 *	hooks: {
+			 * 		'config:setup'({ useTranslations, logger }) {
+			 * 			const t = useTranslations('en');
+			 * 			logger.info(t('builtWithStarlight.label'));
+			 * 		  // ^ Logs 'Built with Starlight' to the console.
+			 * 		}
+			 *	}
+			 * }
+			 */
+			useTranslations: Awaited<ReturnType<typeof createTranslationSystemFromFs>>;
+			/**
+			 * A callback function to get the language for a given absolute file path. The returned
+			 * language can be used with the `useTranslations` helper to get UI strings for that
+			 * language.
+			 *
+			 * This can be particularly useful in remark or rehype plugins to get the language for
+			 * the current file being processed and use it to get the appropriate UI strings for that
+			 * language.
+			 *
+			 * @example
+			 * {
+			 * 	name: 'My Starlight Plugin',
+			 *	hooks: {
+			 * 		'config:setup'({ absolutePathToLang, useTranslations, logger }) {
+			 * 			const lang = absolutePathToLang('/absolute/path/to/project/src/content/docs/fr/index.mdx');
+			 * 			const t = useTranslations(lang);
+			 * 			logger.info(t('aside.tip'));
+			 * 		  // ^ Logs 'Astuce' to the console.
+			 * 		}
+			 *	}
+			 * }
+			 */
+			absolutePathToLang: (path: string) => string;
+	  }) => void | Promise<void>)
+	| undefined;
 
 const configSetupHookSchema = z
 	.function(
 		z.tuple([
 			z.object({
-				/**
-				 * A read-only copy of the user-supplied Starlight configuration.
-				 *
-				 * Note that this configuration may have been updated by other plugins configured
-				 * before this one.
-				 */
 				config: z.any() as z.Schema<
 					// The configuration passed to plugins should contains the list of plugins.
 					StarlightUserConfig & { plugins?: z.input<typeof baseStarlightPluginSchema>[] }
 				>,
-				/**
-				 * A callback function to update the user-supplied Starlight configuration.
-				 *
-				 * You only need to provide the configuration values that you want to update but no deep
-				 * merge is performed.
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 *	hooks: {
-				 * 		'config:setup'({ updateConfig }) {
-				 * 			updateConfig({
-				 * 				description: 'Custom description',
-				 * 			});
-				 * 		}
-				 *	}
-				 * }
-				 */
 				updateConfig: z.function(
 					z.tuple([
 						z.record(z.any()) as z.Schema<Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>>,
 					]),
 					z.void()
 				),
-				/**
-				 * A callback function to add an Astro integration required by this plugin.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 * 	hooks: {
-				 * 		'config:setup'({ addIntegration }) {
-				 * 			addIntegration({
-				 * 				name: 'My Plugin Astro Integration',
-				 * 				hooks: {
-				 * 					'astro:config:setup': () => {
-				 * 						// …
-				 * 					},
-				 * 				},
-				 * 			});
-				 * 		}
-				 * 	}
-				 * }
-				 */
 				addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
-				/**
-				 * A callback function to register additional route middleware handlers.
-				 *
-				 * If the order of execution is important, a plugin can use the `order` option to enforce
-				 * running first or last.
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 * 	hooks: {
-				 * 		setup({ addRouteMiddleware }) {
-				 * 			addRouteMiddleware({ entrypoint: '@me/my-plugin/route-middleware' });
-				 * 		},
-				 * 	},
-				 * }
-				 */
 				addRouteMiddleware: z.function(z.tuple([routeMiddlewareConfigSchema]), z.void()),
-				/**
-				 * A read-only copy of the user-supplied Astro configuration.
-				 *
-				 * Note that this configuration is resolved before any other integrations have run.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/#config-option
-				 */
 				astroConfig: z.any() as z.Schema<StarlightPluginContext['config']>,
-				/**
-				 * The command used to run Starlight.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/#command-option
-				 */
 				command: z.any() as z.Schema<StarlightPluginContext['command']>,
-				/**
-				 * `false` when the dev server starts, `true` when a reload is triggered.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/#isrestart-option
-				 */
 				isRestart: z.any() as z.Schema<StarlightPluginContext['isRestart']>,
-				/**
-				 * An instance of the Astro integration logger with all logged messages prefixed with the
-				 * plugin name.
-				 *
-				 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
-				 */
 				logger: z.any() as z.Schema<StarlightPluginContext['logger']>,
-				/**
-				 * A callback function to generate a utility function to access UI strings for a given
-				 * language.
-				 *
-				 * @see https://starlight.astro.build/guides/i18n/#using-ui-translations
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 *	hooks: {
-				 * 		'config:setup'({ useTranslations, logger }) {
-				 * 			const t = useTranslations('en');
-				 * 			logger.info(t('builtWithStarlight.label'));
-				 * 		  // ^ Logs 'Built with Starlight' to the console.
-				 * 		}
-				 *	}
-				 * }
-				 */
 				useTranslations: z.any() as z.Schema<
 					Awaited<ReturnType<typeof createTranslationSystemFromFs>>
 				>,
-				/**
-				 * A callback function to get the language for a given absolute file path. The returned
-				 * language can be used with the `useTranslations` helper to get UI strings for that
-				 * language.
-				 *
-				 * This can be particularly useful in remark or rehype plugins to get the language for
-				 * the current file being processed and use it to get the appropriate UI strings for that
-				 * language.
-				 *
-				 * @example
-				 * {
-				 * 	name: 'My Starlight Plugin',
-				 *	hooks: {
-				 * 		'config:setup'({ absolutePathToLang, useTranslations, logger }) {
-				 * 			const lang = absolutePathToLang('/absolute/path/to/project/src/content/docs/fr/index.mdx');
-				 * 			const t = useTranslations(lang);
-				 * 			logger.info(t('aside.tip'));
-				 * 		  // ^ Logs 'Astuce' to the console.
-				 * 		}
-				 *	}
-				 * }
-				 */
 				absolutePathToLang: z.function(z.tuple([z.string()]), z.string()),
 			}),
 		]),
 		z.union([z.void(), z.promise(z.void())])
 	)
 	.optional();
+
+interface StarlightPluginUserConfig extends BaseStarlightPluginUserConfig {
+	/** The different hooks available to the plugin. */
+	hooks: {
+		'i18n:setup'?:
+			| ((options: {
+					/**
+					 * A callback function to add or update translations strings.
+					 *
+					 * @see https://starlight.astro.build/guides/i18n/#extend-translation-schema
+					 *
+					 * @example
+					 * {
+					 * 	name: 'My Starlight Plugin',
+					 * 	hooks: {
+					 * 		'i18n:setup'({ injectTranslations }) {
+					 * 			injectTranslations({
+					 * 				en: {
+					 * 					'myPlugin.doThing': 'Do the thing',
+					 * 				},
+					 * 				fr: {
+					 * 					'myPlugin.doThing': 'Faire le truc',
+					 * 				},
+					 * 			});
+					 * 		}
+					 * 	}
+					 * }
+					 */
+					injectTranslations: (translations: Record<string, Record<string, string>>) => void;
+			  }) => void | Promise<void>)
+			| undefined;
+		/**
+		 * Plugin configuration setup function called with an object containing various values that
+		 * can be used by the plugin to interact with Starlight.
+		 */
+		'config:setup'?: ConfigSetupHookUserConfig;
+		/**
+		 * @deprecated Use the `config:setup` hook instead as `setup` will be removed in a future
+		 * version.
+		 */
+		setup?: ConfigSetupHookUserConfig;
+	};
+}
 
 /**
  * A plugin `config` and `updateConfig` argument are purposely not validated using the Starlight
@@ -358,39 +425,11 @@ const configSetupHookSchema = z
  */
 const starlightPluginSchema = baseStarlightPluginSchema
 	.extend({
-		/** The different hooks available to the plugin. */
 		hooks: z.object({
-			/**
-			 * Plugin internationalization setup function allowing to inject translations strings for the
-			 * plugin in various locales. These translations will be available in the `config:setup` hook
-			 * and plugin UI.
-			 */
 			'i18n:setup': z
 				.function(
 					z.tuple([
 						z.object({
-							/**
-							 * A callback function to add or update translations strings.
-							 *
-							 * @see https://starlight.astro.build/guides/i18n/#extend-translation-schema
-							 *
-							 * @example
-							 * {
-							 * 	name: 'My Starlight Plugin',
-							 * 	hooks: {
-							 * 		'i18n:setup'({ injectTranslations }) {
-							 * 			injectTranslations({
-							 * 				en: {
-							 * 					'myPlugin.doThing': 'Do the thing',
-							 * 				},
-							 * 				fr: {
-							 * 					'myPlugin.doThing': 'Faire le truc',
-							 * 				},
-							 * 			});
-							 * 		}
-							 * 	}
-							 * }
-							 */
 							injectTranslations: z.function(
 								z.tuple([z.record(z.string(), z.record(z.string(), z.string()))]),
 								z.void()
@@ -400,15 +439,7 @@ const starlightPluginSchema = baseStarlightPluginSchema
 					z.union([z.void(), z.promise(z.void())])
 				)
 				.optional(),
-			/**
-			 * Plugin configuration setup function called with an object containing various values that
-			 * can be used by the plugin to interact with Starlight.
-			 */
 			'config:setup': configSetupHookSchema,
-			/**
-			 * @deprecated Use the `config:setup` hook instead as `setup` will be removed in a future
-			 * version.
-			 */
 			setup: configSetupHookSchema,
 		}),
 	})
@@ -429,11 +460,11 @@ const starlightPluginSchema = baseStarlightPluginSchema
 		}
 	});
 
-const starlightPluginsConfigSchema = z.array(starlightPluginSchema).default([]);
+type StarlightPluginsUserConfig = StarlightPluginUserConfig[] | undefined;
 
-type StarlightPluginsUserConfig = z.input<typeof starlightPluginsConfigSchema>;
+export const StarlightPluginsConfigSchema = z.array(starlightPluginSchema).default([]);
 
-export type StarlightPlugin = z.input<typeof starlightPluginSchema>;
+export type StarlightPlugin = StarlightPluginUserConfig;
 
 export type HookParameters<
 	Hook extends keyof StarlightPlugin['hooks'],

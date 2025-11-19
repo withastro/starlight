@@ -1,5 +1,7 @@
 import { z } from 'astro/zod';
 
+export type TitleUserConfig = string | Record<string, string>;
+
 export const TitleConfigSchema = () =>
 	z
 		.union([z.string(), z.record(z.string())])

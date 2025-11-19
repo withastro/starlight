@@ -1,5 +1,13 @@
 import { z } from 'astro/zod';
-import { IconSchema } from './icon';
+import { IconSchema, type IconUserConfig } from './icon';
+
+export type SocialLinksUserConfig =
+	| {
+			icon: IconUserConfig;
+			label: string;
+			href: string;
+	  }[]
+	| undefined;
 
 const LinksSchema = z
 	.object({ icon: IconSchema(), label: z.string().min(1), href: z.string() })
