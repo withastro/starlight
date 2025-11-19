@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { seti, starlight } from '../config';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree.ts';
+import type { Definitions } from '../../starlight/src/user-components/rehype-file-tree.ts';
 
 // https://github.com/jesseweed/seti-ui/blob/master/styles/components/icons/mapping.less
 // .icon-set(".bsl", "bsl", @red);
