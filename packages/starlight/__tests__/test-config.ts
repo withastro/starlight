@@ -2,8 +2,8 @@
 
 import type { AstroConfig } from 'astro';
 import { getViteConfig } from 'astro/config';
-import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
-import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
+import { vitePluginStarlightUserConfig } from '../src/integrations/virtual-user-config';
+import { runPlugins, type StarlightUserConfigWithPlugins } from '../src/utils/plugins';
 import { createTestPluginContext } from './test-plugin-utils';
 
 const testLegacyCollections = process.env.LEGACY_COLLECTIONS === 'true';

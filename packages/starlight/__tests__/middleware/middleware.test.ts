@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro';
 import { expect, test } from 'vitest';
-import { onRequest } from '../../locals';
-import type { StarlightRouteData } from '../../route-data';
+import { onRequest } from '../../src/locals';
+import type { StarlightRouteData } from '../../src/route-data';
 
 test('starlightRoute throws when accessed outside of a Starlight page', async () => {
 	const context = { locals: {}, currentLocale: 'en' } as APIContext;

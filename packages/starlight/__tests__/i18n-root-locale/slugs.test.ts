@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { localeToLang, localizedId, localizedSlug, slugToLocaleData } from '../../utils/slugs';
+import { localeToLang, localizedId, localizedSlug, slugToLocaleData } from '../../src/utils/slugs';
 
 describe('slugToLocaleData', () => {
 	test('returns an undefined locale for root locale slugs', () => {

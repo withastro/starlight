@@ -1,8 +1,8 @@
 import { z } from 'astro/zod';
 import project from 'virtual:starlight/project-context';
-import { docsSchema, i18nSchema } from '../schema';
-import type { StarlightDocsCollectionEntry } from '../utils/routing/types';
-import type { RouteDataContext } from '../utils/routing/data';
+import { docsSchema, i18nSchema } from '../src/schema';
+import type { StarlightDocsCollectionEntry } from '../src/utils/routing/types';
+import type { RouteDataContext } from '../src/utils/routing/data';
 import { vi } from 'vitest';
 
 const frontmatterSchema = docsSchema()({
@@ -83,8 +83,8 @@ export async function mockedAstroContent({
 
 export async function mockedCollectionConfig(docsUserSchema?: Parameters<typeof docsSchema>[0]) {
 	const content = await vi.importActual<typeof import('astro:content')>('astro:content');
-	const schemas = await vi.importActual<typeof import('../schema')>('../schema');
-	const loaders = await vi.importActual<typeof import('../loaders')>('../loaders');
+	const schemas = await vi.importActual<typeof import('../src/schema')>('../src/schema');
+	const loaders = await vi.importActual<typeof import('../src/loaders')>('../src/loaders');
 
 	return {
 		collections: {

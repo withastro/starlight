@@ -1,10 +1,10 @@
 import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
-import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
-import { starlightAutolinkHeadings } from '../../integrations/heading-links';
-import { getCollectionPosixPath } from '../../utils/collection-fs';
+import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
+import { absolutePathToLang as getAbsolutePathFromLang } from '../../src/integrations/shared/absolutePathToLang';
+import { starlightAutolinkHeadings } from '../../src/integrations/heading-links';
+import { getCollectionPosixPath } from '../../src/utils/collection-fs';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Anchor Links Tests',

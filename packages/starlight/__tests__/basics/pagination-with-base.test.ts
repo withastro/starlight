@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
 import type {
 	getPrevNextLinks as getPrevNextLinksType,
 	getSidebar as getSidebarType,
-} from '../../utils/navigation';
+} from '../../src/utils/navigation';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -22,7 +22,7 @@ describe('without base', () => {
 	let sidebar: ReturnType<typeof getSidebar>;
 
 	beforeAll(async () => {
-		({ getPrevNextLinks, getSidebar } = await import('../../utils/navigation'));
+		({ getPrevNextLinks, getSidebar } = await import('../../src/utils/navigation'));
 		sidebar = getSidebar('/reference/frontmatter/', undefined);
 	});
 
@@ -52,7 +52,7 @@ describe('with base', () => {
 	beforeAll(async () => {
 		vi.resetModules();
 		vi.stubEnv('BASE_URL', '/test-base/');
-		({ getPrevNextLinks, getSidebar } = await import('../../utils/navigation'));
+		({ getPrevNextLinks, getSidebar } = await import('../../src/utils/navigation'));
 		sidebar = getSidebar('/test-base/reference/frontmatter/', undefined);
 	});
 

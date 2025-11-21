@@ -1,8 +1,8 @@
 import { assert, describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
-import { processI18nConfig, pickLang } from '../../utils/i18n';
+import { processI18nConfig, pickLang } from '../../src/utils/i18n';
 import type { AstroConfig, AstroUserConfig } from 'astro';
-import type { StarlightConfig } from '../../types';
+import type { StarlightConfig } from '../../src/types';
 
 describe('pickLang', () => {
 	const dictionary = { en: 'Hello', fr: 'Bonjour' };

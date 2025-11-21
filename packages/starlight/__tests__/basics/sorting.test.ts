@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { flattenSidebar, getSidebar } from '../../utils/navigation';
+import { flattenSidebar, getSidebar } from '../../src/utils/navigation';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({

@@ -3,9 +3,9 @@ import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import project from 'virtual:starlight/project-context';
 import { expect, test, vi } from 'vitest';
-import { routes, paths, getRouteBySlugParam } from '../../utils/routing';
-import { slugToParam } from '../../utils/slugs';
-import type { Route } from '../../utils/routing/types';
+import { routes, paths, getRouteBySlugParam } from '../../src/utils/routing';
+import { slugToParam } from '../../src/utils/slugs';
+import type { Route } from '../../src/utils/routing/types';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -102,7 +102,7 @@ test('routes includes drafts except in production', async () => {
 	// Set the mode to production.
 	vi.stubEnv('MODE', 'production');
 	// Re-import the module to re-evaluate it.
-	const { routes: prodRoutes } = await import('../../utils/routing');
+	const { routes: prodRoutes } = await import('../../src/utils/routing');
 
 	expect(prodRoutes.find(routeMatcher)).toBeFalsy();
 

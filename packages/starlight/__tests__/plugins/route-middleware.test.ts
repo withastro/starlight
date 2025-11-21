@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { runPlugins } from '../../utils/plugins';
+import { runPlugins } from '../../src/utils/plugins';
 import { createTestPluginContext } from '../test-plugin-utils';
 
 test('adds route middleware entrypoints added by plugins respecting order', async () => {

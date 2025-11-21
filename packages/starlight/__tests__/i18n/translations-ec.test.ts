@@ -1,7 +1,7 @@
 import { pluginFramesTexts } from 'astro-expressive-code';
 import { afterEach, expect, test, vi } from 'vitest';
-import { addTranslations } from '../../integrations/expressive-code/translations';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
+import { addTranslations } from '../../src/integrations/expressive-code/translations';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
 
 vi.mock('astro-expressive-code', async () => {
 	const mod =

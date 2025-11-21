@@ -1,5 +1,5 @@
 import { describe, expectTypeOf, test } from 'vitest';
-import type { StarlightUserConfig } from '../../utils/user-config';
+import type { StarlightUserConfig } from '../../src/utils/user-config';
 
 describe('sidebar', () => {
 	test('emits a type error for custom attributes on groups', () => {

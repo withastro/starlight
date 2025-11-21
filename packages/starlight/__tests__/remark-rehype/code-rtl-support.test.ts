@@ -1,7 +1,7 @@
 import { rehype } from 'rehype';
 import { VFile } from 'vfile';
 import { expect, test } from 'vitest';
-import { rehypeRtlCodeSupport } from '../../integrations/code-rtl-support';
+import { rehypeRtlCodeSupport } from '../../src/integrations/code-rtl-support';
 
 const astroConfig = {
 	root: new URL(import.meta.url),

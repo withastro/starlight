@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
-import { useTranslations } from '../../utils/translations';
+import { useTranslations } from '../../src/utils/translations';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({

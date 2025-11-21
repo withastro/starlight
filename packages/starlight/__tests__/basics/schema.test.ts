@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
-import { FaviconSchema } from '../../schemas/favicon';
-import { TitleTransformConfigSchema } from '../../schemas/site-title';
-import { HeadConfigSchema, type HeadUserConfig } from '../../schemas/head';
-import { parseWithFriendlyErrors } from '../../utils/error-map';
+import { FaviconSchema } from '../../src/schemas/favicon';
+import { TitleTransformConfigSchema } from '../../src/schemas/site-title';
+import { HeadConfigSchema, type HeadUserConfig } from '../../src/schemas/head';
+import { parseWithFriendlyErrors } from '../../src/utils/error-map';
 
 describe('FaviconSchema', () => {
 	test('returns the proper href and type attributes', () => {

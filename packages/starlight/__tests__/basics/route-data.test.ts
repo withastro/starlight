@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { getRouteDataTestContext } from '../test-utils';
-import { generateRouteData } from '../../utils/routing/data';
-import { routes } from '../../utils/routing';
+import { generateRouteData } from '../../src/utils/routing/data';
+import { routes } from '../../src/utils/routing';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({

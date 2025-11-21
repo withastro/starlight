@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { processFileTree } from '../../user-components/rehype-file-tree';
-import { Icons, type StarlightIcon } from '../../components/Icons';
+import { processFileTree } from '../../src/user-components/rehype-file-tree';
+import { Icons, type StarlightIcon } from '../../src/components/Icons';
 
 describe('validation', () => {
 	test('throws an error with no content', () => {

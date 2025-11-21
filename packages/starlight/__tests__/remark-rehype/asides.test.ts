@@ -2,12 +2,12 @@ import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdo
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { describe, expect, test, vi } from 'vitest';
-import { starlightAsides, remarkDirectivesRestoration } from '../../integrations/asides';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
-import { BuiltInDefaultLocale } from '../../utils/i18n';
-import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
-import { getCollectionPosixPath } from '../../utils/collection-fs';
+import { starlightAsides, remarkDirectivesRestoration } from '../../src/integrations/asides';
+import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
+import { StarlightConfigSchema, type StarlightUserConfig } from '../../src/utils/user-config';
+import { BuiltInDefaultLocale } from '../../src/utils/i18n';
+import { absolutePathToLang as getAbsolutePathFromLang } from '../../src/integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from '../../src/utils/collection-fs';
 
 const starlightConfig = StarlightConfigSchema.parse({
 	title: 'Asides Tests',

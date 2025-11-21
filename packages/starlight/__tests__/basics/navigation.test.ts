@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { flattenSidebar, getPrevNextLinks, getSidebar } from '../../utils/navigation';
+import { flattenSidebar, getPrevNextLinks, getSidebar } from '../../src/utils/navigation';
 
 vi.mock('astro:content', async () =>
 	(await import('../test-utils')).mockedAstroContent({
@@ -127,8 +127,8 @@ describe('getSidebar', () => {
 		// Reset the modules registry so that re-importing `utils/navigation.ts` re-evaluates the
 		// module and clears the cache of intermediate sidebars from previous tests in this file.
 		vi.resetModules();
-		const navigation = await import('../../utils/navigation');
-		const routing = await import('../../utils/routing');
+		const navigation = await import('../../src/utils/navigation');
+		const routing = await import('../../src/utils/routing');
 
 		const getLocaleRoutes = vi.spyOn(routing, 'getLocaleRoutes');
 

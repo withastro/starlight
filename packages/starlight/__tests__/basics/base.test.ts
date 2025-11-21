@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import { fileWithBase, pathWithBase } from '../../utils/base';
+import { fileWithBase, pathWithBase } from '../../src/utils/base';
 
 describe('fileWithBase()', () => {
 	describe('with no base', () => {
@@ -20,7 +20,7 @@ describe('fileWithBase()', () => {
 			// Set the base URL.
 			vi.stubEnv('BASE_URL', '/base/');
 			// Re-import the module to re-evaluate it.
-			const { fileWithBase } = await import('../../utils/base');
+			const { fileWithBase } = await import('../../src/utils/base');
 
 			expect(fileWithBase('/img.svg')).toBe('/base/img.svg');
 
@@ -45,7 +45,7 @@ describe('pathWithBase()', () => {
 			// See the first test with a base in this file for an explanation of the environment stubbing.
 			vi.resetModules();
 			vi.stubEnv('BASE_URL', '/base/');
-			const { pathWithBase } = await import('../../utils/base');
+			const { pathWithBase } = await import('../../src/utils/base');
 
 			expect(pathWithBase('/path/')).toBe('/base/path/');
 

@@ -3,7 +3,7 @@ import { getRouteDataTestContext } from '../test-utils';
 import {
 	generateStarlightPageRouteData,
 	type StarlightPageProps,
-} from '../../utils/starlight-page';
+} from '../../src/utils/starlight-page';
 
 vi.mock('virtual:starlight/collection-config', async () => {
 	const { z } = await vi.importActual<typeof import('astro:content')>('astro:content');

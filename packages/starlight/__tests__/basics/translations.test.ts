@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
-import { useTranslations } from '../../utils/translations';
-import translations from '../../translations';
+import { useTranslations } from '../../src/utils/translations';
+import translations from '../../src/translations';
 
 describe('useTranslations()', () => {
 	test('includes localized UI strings', () => {
@@ -38,7 +38,7 @@ describe('t()', async () => {
 	// module and re-computes `useTranslations`. Re-importing the module is necessary because
 	// top-level imports cannot be re-evaluated.
 	vi.resetModules();
-	const { useTranslations } = await import('../../utils/translations');
+	const { useTranslations } = await import('../../src/utils/translations');
 	const t = useTranslations(undefined);
 
 	test('supports using interpolation', () => {
@@ -112,7 +112,7 @@ describe('t.all()', async () => {
 		})
 	);
 	vi.resetModules();
-	const { useTranslations } = await import('../../utils/translations');
+	const { useTranslations } = await import('../../src/utils/translations');
 	const t = useTranslations(undefined);
 
 	test('returns all translations including custom ones', () => {
@@ -129,7 +129,7 @@ describe('t.exists()', async () => {
 		})
 	);
 	vi.resetModules();
-	const { useTranslations } = await import('../../utils/translations');
+	const { useTranslations } = await import('../../src/utils/translations');
 	const t = useTranslations(undefined);
 
 	test('returns `true` for existing translations', () => {
