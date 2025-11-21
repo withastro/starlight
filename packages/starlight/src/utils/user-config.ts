@@ -27,8 +27,11 @@ import type { Prettify } from './types';
 // declaration files.
 // Having such comments in the schema only works in pure-TypeScript environments, but due to a TS
 // issues, such comments can be either missing or misplaced in the emitted declaration files.
+// Such an approach also help reducing the size of the emitted declaration files due to redundancy
+// with Zod 3.
 //
 // @see https://github.com/microsoft/TypeScript/issues/62309
+// @see https://github.com/colinhacks/zod/issues/4227
 //
 // As such approach uses 2 sources of truth (a schema and an hand-written type), we use type tests
 // to ensure that the hand-written type always matches the inferred input type from the schema.

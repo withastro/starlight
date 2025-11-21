@@ -5,14 +5,10 @@ import { defineConfig } from 'tsdown';
 
 const outDir = 'dist';
 
-// https://github.com/colinhacks/zod/issues/4227#issuecomment-2816999823
-
 // TODO(HiDeoo) tsdown/publint
-// TODO(HiDeoo) assets, e.g. json and all
 // TODO(HiDeoo) look for `tsc` comments
-// TODO(HiDeoo) ensure we don't have js/mjs/cjs files in src
 // TODO(HiDeoo) remove tsc step in docs/
-// TODO(HiDeoo) tscconfig exclude dist?
+// TODO(HiDeoo) gitignore/prettierignore/*ignore dist
 
 export default defineConfig({
 	copy: ['src/components.ts', 'src/style'],

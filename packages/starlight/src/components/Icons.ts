@@ -202,6 +202,7 @@ export const BuiltInIcons = {
 // type 3 times), this causes a massive increase in emitted file size.
 //
 // @see https://github.com/microsoft/TypeScript/issues/37151#issuecomment-756232934
+// @see https://github.com/colinhacks/zod/issues/4227
 //
 // To avoid any possible divergence between the actual icon names and this type, we have type tests
 // in place that will fail if they ever get out of sync.
