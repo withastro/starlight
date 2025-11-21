@@ -5,7 +5,6 @@ import { defineConfig } from 'tsdown';
 
 const outDir = 'dist';
 
-// TODO(HiDeoo) tsdown/publint
 // TODO(HiDeoo) look for `tsc` comments
 // TODO(HiDeoo) remove tsc step in docs/
 // TODO(HiDeoo) gitignore/prettierignore/*ignore dist
@@ -22,6 +21,7 @@ export default defineConfig({
 	external: [/^astro:/, /^virtual:starlight\//],
 	outDir,
 	plugins: [rawImportPlugin(), globCopyPlugin(['**/*.astro'], 'src')],
+	publint: { strict: true },
 	unbundle: true,
 });
 
