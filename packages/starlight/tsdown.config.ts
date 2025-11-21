@@ -5,10 +5,6 @@ import { defineConfig } from 'tsdown';
 
 const outDir = 'dist';
 
-// TODO(HiDeoo) look for `tsc` comments
-// TODO(HiDeoo) remove tsc step in docs/
-// TODO(HiDeoo) gitignore/prettierignore/*ignore dist
-
 export default defineConfig({
 	copy: ['src/components.ts', 'src/style'],
 	dts: true,
