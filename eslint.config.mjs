@@ -78,5 +78,15 @@ export default tseslint.config(
 			// keys for plugins.
 			'@typescript-eslint/no-redundant-type-constituents': 'off',
 		},
+	},
+
+	// Disable some rules in Starlight `global.ts` file which is mostly used for type augmentation
+	// and interface merging.
+	{
+		files: ['packages/starlight/src/global.ts'],
+		rules: {
+			'@typescript-eslint/no-empty-object-type': 'off',
+			'@typescript-eslint/no-namespace': 'off',
+		},
 	}
 );

@@ -10,7 +10,8 @@ import type { UserI18nKeys, UserI18nSchema } from './translations';
  * All translations handled by Starlight are stored in the same namespace and Starlight always use
  * a new instance of i18next configured for this namespace.
  */
-export const I18nextNamespace = 'starlight' as const;
+const i18nextNamespace = 'starlight' as const;
+export type I18nextNamespace = typeof i18nextNamespace;
 
 export async function createTranslationSystem<T extends i18nSchemaOutput>(
 	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
@@ -71,9 +72,9 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 	return (lang: string | undefined) => {
 		lang ??= config.defaultLocale?.lang || BuiltInDefaultLocale.lang;
 
-		const t = i18n.getFixedT(lang, I18nextNamespace) as I18nT;
-		t.all = () => i18n.getResourceBundle(lang, I18nextNamespace) as ReturnType<I18nT['all']>;
-		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: I18nextNamespace, ...options });
+		const t = i18n.getFixedT(lang, i18nextNamespace) as I18nT;
+		t.all = () => i18n.getResourceBundle(lang, i18nextNamespace) as ReturnType<I18nT['all']>;
+		t.exists = (key, options) => i18n.exists(key, { lng: lang, ns: i18nextNamespace, ...options });
 		t.dir = (dirLang = lang) => i18n.dir(dirLang);
 
 		return t;
@@ -109,7 +110,7 @@ type BuiltInStrings = (typeof builtinTranslations)['en'];
 /** Build an i18next resources dictionary by layering preferred translation sources. */
 function buildResources<T extends Record<string, string | undefined>>(
 	...dictionaries: (T | BuiltInStrings | undefined)[]
-): { [I18nextNamespace]: BuiltInStrings & T } {
+): { [i18nextNamespace]: BuiltInStrings & T } {
 	const dictionary: Partial<BuiltInStrings> = {};
 	// Iterate over alternate dictionaries to avoid overwriting preceding values with `undefined`.
 	for (const dict of dictionaries) {
@@ -118,7 +119,7 @@ function buildResources<T extends Record<string, string | undefined>>(
 			if (value) dictionary[key as keyof typeof dictionary] = value;
 		}
 	}
-	return { [I18nextNamespace]: dictionary as BuiltInStrings & T };
+	return { [i18nextNamespace]: dictionary as BuiltInStrings & T };
 }
 
 // `keyof BuiltInStrings` and `UserI18nKeys` may contain some identical keys, e.g. the built-in UI

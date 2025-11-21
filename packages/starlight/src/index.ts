@@ -1,11 +1,8 @@
 /**
- * These triple-slash directives defines dependencies to various declaration files that will be
- * loaded when a user imports the Starlight integration in their Astro configuration file. These
- * directives must be first at the top of the file and can only be preceded by this comment.
+ * This import emits declaration that will be loaded when a user imports the Starlight integration
+ * in their Astro configuration file.
  */
-/// <reference path="./locals.d.ts" />
-/// <reference path="./i18n.d.ts" />
-/// <reference path="./virtual.d.ts" />
+import './global';
 
 import mdx from '@astrojs/mdx';
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
