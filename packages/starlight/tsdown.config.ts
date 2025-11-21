@@ -10,13 +10,9 @@ const outDir = 'dist';
 // TODO(HiDeoo) tsdown/publint
 // TODO(HiDeoo) assets, e.g. json and all
 // TODO(HiDeoo) look for `tsc` comments
-// TODO(HiDeoo) check directives from `index.ts` are present in the .d.ts files
-// TODO(HiDeoo) all existing .d.ts files
 // TODO(HiDeoo) ensure we don't have js/mjs/cjs files in src
-// TODO(HiDeoo) virtual / triple-slash directives
-// TODO(HiDeoo) virtual-internal.d.ts
-// TODO(HiDeoo) global.d.ts
 // TODO(HiDeoo) remove tsc step in docs/
+// TODO(HiDeoo) tscconfig exclude dist?
 
 export default defineConfig({
 	copy: ['src/components.ts', 'src/style'],
