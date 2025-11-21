@@ -1,6 +1,6 @@
 import opentype, { type Font, Glyph } from 'opentype.js';
 import { seti, starlight } from '../config';
-import type { Definitions } from '../../starlight/user-components/rehype-file-tree';
+import type { Definitions } from '../../starlight/src/user-components/rehype-file-tree';
 import { getFont, getSetiIconName } from './seti';
 
 // This matches the default precision used by the SVGO default preset.
