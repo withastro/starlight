@@ -128,7 +128,7 @@ test.describe('components', () => {
 			expect((await tabs.boundingBox())?.y).toBe(initialBoundingBox?.y);
 		});
 
-		test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
+		test('syncs tabs with the same sync key if they do not consistently use icons', async ({
 			page,
 			getProdServer,
 		}) => {
