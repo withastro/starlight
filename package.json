@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "pnpm --filter '@astrojs/*' build",
     "build:examples": "pnpm --no-bail --workspace-concurrency 1 --filter '@example/*' build",
     "lint": "eslint . --max-warnings 0",
     "size": "size-limit",
