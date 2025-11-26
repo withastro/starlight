@@ -65,7 +65,7 @@ export const starlight = {
 	prefix: 'seti:',
 	/**
 	 * The Starlight `<Icon>` component viewBox size.
-	 * @see {@link file://../starlight/user-components/Icon.astro}
+	 * @see {@link file://./../starlight/src/user-components/Icon.astro}
 	 */
 	iconViewBoxSize: 24,
 	/**
