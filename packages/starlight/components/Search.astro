@@ -76,89 +76,117 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 <script>
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 
-	class SiteSearch extends HTMLElement {
-		constructor() {
-			super();
-			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
-			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
-			const dialog = this.querySelector('dialog')!;
-			const dialogFrame = this.querySelector('.dialog-frame')!;
+  class SiteSearch extends HTMLElement {
+    openBtn: HTMLButtonElement | null = null;
+    closeBtn: HTMLButtonElement | null = null;
+    dialog: HTMLDialogElement | null = null;
+    dialogFrame: HTMLDivElement | null = null;
+    finder: null | {destroy: () => void} = null;
 
-			/** Close the modal if a user clicks on a link or outside of the modal. */
-			const onClick = (event: MouseEvent) => {
-				const isLink = 'href' in (event.target || {});
-				if (
-					isLink ||
-					(document.body.contains(event.target as Node) &&
-						!dialogFrame.contains(event.target as Node))
-				) {
-					closeModal();
-				}
-			};
+    /** Close the modal if a user clicks on a link or outside of the modal. */
+    onClick = (event: MouseEvent) => {
+      if (!this.dialogFrame) {
+        return;
+      }
+      const isLink = "href" in (event.target || {});
+      if (
+        isLink ||
+        (document.body.contains(event.target as Node) &&
+          !this.dialogFrame.contains(event.target as Node))
+      ) {
+        this.closeModal();
+      }
+    };
 
-			const openModal = (event?: MouseEvent) => {
-				dialog.showModal();
-				document.body.toggleAttribute('data-search-modal-open', true);
-				this.querySelector('input')?.focus();
-				event?.stopPropagation();
-				window.addEventListener('click', onClick);
-			};
+    openModal = (event?: MouseEvent) => {
+      this.dialog?.showModal();
+      document.body.toggleAttribute("data-search-modal-open", true);
+      this.querySelector("input")?.focus();
+      event?.stopPropagation();
+      window.addEventListener("click", this.onClick);
+    };
 
-			const closeModal = () => dialog.close();
+    closeModal = () => this.dialog?.close();
 
-			openBtn.addEventListener('click', openModal);
-			openBtn.disabled = false;
-			closeBtn.addEventListener('click', closeModal);
+    // Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
+    onKeyDown = (e: KeyboardEvent) => {
+      if (!this.dialog) {
+        return;
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        this.dialog.open ? this.closeModal() : this.openModal();
+        e.preventDefault();
+      }
+    };
 
-			dialog.addEventListener('close', () => {
-				document.body.toggleAttribute('data-search-modal-open', false);
-				window.removeEventListener('click', onClick);
-			});
+    disconnectedCallback() {
+      window.removeEventListener("click", this.onClick);
+      window.removeEventListener("keydown", this.onKeyDown);
+      this.finder?.destroy()
+    }
 
-			// Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
-			window.addEventListener('keydown', (e) => {
-				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
-					dialog.open ? closeModal() : openModal();
-					e.preventDefault();
-				}
-			});
+    connectedCallback() {
+      this.openBtn = this.querySelector<HTMLButtonElement>(
+        "button[data-open-modal]",
+      )!;
+      this.closeBtn = this.querySelector<HTMLButtonElement>(
+        "button[data-close-modal]",
+      )!;
+      this.dialog = this.querySelector("dialog")!;
+      this.dialogFrame = this.querySelector(".dialog-frame")!;
 
-			let translations = {};
-			try {
-				translations = JSON.parse(this.dataset.translations || '{}');
-			} catch {}
+      this.openBtn.addEventListener("click", this.openModal);
+      this.openBtn.disabled = false;
+      this.closeBtn.addEventListener("click", this.closeModal);
 
-			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
-			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
+      this.dialog.addEventListener("close", () => {
+        document.body.toggleAttribute("data-search-modal-open", false);
+        window.removeEventListener("click", this.onClick);
+      });
 
-			window.addEventListener('DOMContentLoaded', () => {
-				if (import.meta.env.DEV) return;
-				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-				onIdle(async () => {
-					// @ts-expect-error — Missing types for @pagefind/default-ui package.
-					const { PagefindUI } = await import('@pagefind/default-ui');
-					new PagefindUI({
-						...pagefindUserConfig,
-						element: '#starlight__search',
-						baseUrl: import.meta.env.BASE_URL,
-						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
-						showImages: false,
-						translations,
-						showSubResults: true,
-						processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
-							result.url = formatURL(result.url);
-							result.sub_results = result.sub_results.map((sub_result) => {
-								sub_result.url = formatURL(sub_result.url);
-								return sub_result;
-							});
-						},
-					});
-				});
-			});
-		}
-	}
-	customElements.define('site-search', SiteSearch);
+      window.addEventListener("keydown", this.onKeyDown);
+
+      let translations = {};
+      try {
+        translations = JSON.parse(this.dataset.translations || "{}");
+      } catch {}
+
+      const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+      const stripTrailingSlash = (path: string) =>
+        path.replace(/(.)\/(#.*)?$/, "$1$2");
+      const formatURL = shouldStrip
+        ? stripTrailingSlash
+        : (path: string) => path;
+
+      if (import.meta.env.DEV) return;
+      const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+      onIdle(async () => {
+        // @ts-expect-error — Missing types for @pagefind/default-ui package.
+        const { PagefindUI } = await import("@pagefind/default-ui");
+        this.finder = new PagefindUI({
+          ...pagefindUserConfig,
+          element: "#starlight__search",
+          baseUrl: import.meta.env.BASE_URL,
+          bundlePath:
+            import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+          showImages: false,
+          translations,
+          showSubResults: true,
+          processResult: (result: {
+            url: string;
+            sub_results: Array<{ url: string }>;
+          }) => {
+            result.url = formatURL(result.url);
+            result.sub_results = result.sub_results.map((sub_result) => {
+              sub_result.url = formatURL(sub_result.url);
+              return sub_result;
+            });
+          },
+        });
+      });
+    }
+  }
+  customElements.define("site-search", SiteSearch);
 </script>
 
 <style>
