@@ -543,6 +543,16 @@ The [Andromeda constellation](<https://en.wikipedia.org/wiki/Andromeda_(constell
 </details>
 ```
 
+## Footnotes
+
+Footnotes[^1] are useful for adding brief references or clarifications without interrupting the flow of your content. They appear as superscript links that jump to referenced text collected at the bottom of the page.
+
+```md
+Here is a footnote[^1] with some additional text after it.
+
+[^1]: My reference.
+```
+
 ## Other common Markdown features
 
 Starlight supports all other Markdown authoring syntax, such as lists and tables. See the [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) for a quick overview of all the Markdown syntax elements.
@@ -684,3 +694,5 @@ export default defineMarkdocConfig({
 	extends: [starlightMarkdoc({ headingLinks: false })],
 });
 ```
+
+[^1]: https://www.markdownguide.org/extended-syntax/#footnotes
