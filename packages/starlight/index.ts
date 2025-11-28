@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { starlightAsides, starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
+import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
 import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import {
@@ -118,6 +119,7 @@ export default function StarlightIntegration(
 				updateConfig({
 					vite: {
 						plugins: [
+							vitePluginStarlightCssLayerOrder(),
 							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
 						],
 					},

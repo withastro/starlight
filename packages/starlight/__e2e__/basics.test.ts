@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import { expect, testFactory, type Locator } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
@@ -464,6 +465,31 @@ test.describe('components', () => {
 				'background-color',
 				'rgb(128, 0, 128)'
 			);
+		});
+	});
+
+	test.describe('css layer order', () => {
+		test('ensures that the StarlightPage component is always imported first to ensure a predictable CSS layer order in custom pages', async ({
+			page,
+			makeServer,
+		}) => {
+			const starlight = await makeServer('dev', { mode: 'dev' });
+			await starlight.goto('/starlight-page-css-layer-order');
+
+			const firstStyleContent = await page.evaluate(
+				() => document.head.querySelector('style')?.textContent ?? ''
+			);
+
+			const expectedLayersOrder = await fs.readFile(
+				new URL('../style/layers.css', import.meta.url),
+				'utf-8'
+			);
+
+			// Ensure that the first style block in the head contains the expected layers order rather
+			// the styles of the link button wrapped in a `@layer` block at-rule automatically declaring
+			// a new layer and thus potentially breaking the intended layers order as the initial order
+			// in which layers are declared indicates which layer has precedence.
+			expect(firstStyleContent).toBe(expectedLayersOrder);
 		});
 	});
 
