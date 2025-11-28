@@ -13,7 +13,7 @@ jobs:
     name: Welcome First-Time Contributors
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - uses: zephyrproject-rtos/action-first-interaction@58853996b1ac504b8e0f6964301f369d2bb22e5c
         with:
           repo-token: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}

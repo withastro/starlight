@@ -1,5 +1,26 @@
 # @astrojs/starlight
 
+## 0.36.3
+
+### Patch Changes
+
+- [#3555](https://github.com/withastro/starlight/pull/3555) [`547dc30`](https://github.com/withastro/starlight/commit/547dc30558b388bfc0505ab0fd8269cecaed462a) Thanks [@Its-Just-Nans](https://github.com/Its-Just-Nans)! - Improves the error message thrown when using a file in the `public/` directory with Starlight’s `customCss` configuration option
+
+- [#3496](https://github.com/withastro/starlight/pull/3496) [`b78fda4`](https://github.com/withastro/starlight/commit/b78fda45be17be7a260309251e82504f9ac8e97a) Thanks [@delucis](https://github.com/delucis)! - Fixes invalid `<head>` output when configuration is missing:
+
+  - Omits `<meta property="og:description" />` if Starlight’s `description` option is unset
+  - Omits `<link rel="canonical" />` and `<meta property="og:url" />` if Astro’s `site` option is unset
+
+- [#3511](https://github.com/withastro/starlight/pull/3511) [`8727df1`](https://github.com/withastro/starlight/commit/8727df1a1b1c82f1303613226000afd53ffe4e36) Thanks [@astrobot-houston](https://github.com/astrobot-houston)! - Updates the `seti:gitlab` icon to match latest version from Seti UI Icons
+
+## 0.36.2
+
+### Patch Changes
+
+- [#3500](https://github.com/withastro/starlight/pull/3500) [`7700456`](https://github.com/withastro/starlight/commit/770045663c8ca3cc44983dd0d444955eba441243) Thanks [@delucis](https://github.com/delucis)! - This is the first release published with OIDC trusted publishing.
+
+- [#3484](https://github.com/withastro/starlight/pull/3484) [`620fb38`](https://github.com/withastro/starlight/commit/620fb3857e40a37a2f8bdf2d0430b106e8f80cdb) Thanks [@gboubeta-uvigo](https://github.com/gboubeta-uvigo)! - Improves Spanish UI translations
+
 ## 0.36.1
 
 ### Patch Changes
@@ -22,7 +43,7 @@
 
 - [#3427](https://github.com/withastro/starlight/pull/3427) [`c3b2d0f`](https://github.com/withastro/starlight/commit/c3b2d0fc37bb9b7b6abc6c11b760a4114690ccd4) Thanks [@delucis](https://github.com/delucis)! - Fixes styling of labels that wrap across multiple lines in `<Tabs>` component
 
-  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targetting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
+  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targeting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
 
   If you want to preserve the previous styling, you can add the following custom CSS to your site:
 
@@ -174,7 +195,7 @@
 
 - [#3181](https://github.com/withastro/starlight/pull/3181) [`449c822`](https://github.com/withastro/starlight/commit/449c8229effaab19ece3c0a34e32595809c33cc8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all headings in Markdown and MDX content were rendered with a [clickable anchor link](https://starlight.astro.build/reference/configuration/#headinglinks), even in non-Starlight pages.
 
-- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean langage support with improvements and missing translations
+- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean language support with improvements and missing translations
 
 ## 0.34.2
 

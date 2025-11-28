@@ -1,4 +1,5 @@
 name: Release
+permissions: {}
 
 on:
   push:
@@ -12,13 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
       id-token: write
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup PNPM
         uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
@@ -26,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: 18.20.8
+          node-version: 24.10.0
           cache: 'pnpm'
 
       - name: Install Dependencies
@@ -41,4 +44,4 @@ jobs:
           title: '[ci] release'
         env:
           GITHUB_TOKEN: ${{ secrets.FREDKBOT_GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: "" # See https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
