@@ -272,6 +272,19 @@ const UserConfigSchema = z.object({
 				.describe(
 					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
 				),
+			/**
+			 * Define additional directories where files should be processed by Starlight’s Markdown pipeline.
+			 *
+			 * Supports local directories relative to the root of your project, e.g. './src/data/comments/'.
+			 * Content of the `docs` content collection is always processed by Starlight’s Markdown pipeline.
+			 */
+			processedDirs: z
+				.string()
+				.array()
+				.default([])
+				.describe(
+					'Define additional directories where files should be processed by Starlight’s Markdown pipeline. Default: `[]`.'
+				),
 		})
 		.default({})
 		.describe('Configure features that impact Starlight’s Markdown processing.'),

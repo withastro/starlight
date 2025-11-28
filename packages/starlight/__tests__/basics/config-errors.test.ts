@@ -65,6 +65,7 @@ test('parses bare minimum valid config successfully', () => {
 		  "locales": undefined,
 		  "markdown": {
 		    "headingLinks": true,
+		    "processedDirs": [],
 		  },
 		  "pagefind": {
 		    "ranking": {

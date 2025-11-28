@@ -408,6 +408,17 @@ test.describe('components', () => {
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
 		});
+
+		test('renders headings anchor links for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.sl-anchor-link').first()).toBeAttached();
+		});
 	});
 
 	test.describe('asides', () => {
@@ -420,11 +431,21 @@ test.describe('components', () => {
 			// Individual Markdown page
 			await starlight.goto('/markdown-page');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
-			await page.pause();
 
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
+		});
+
+		test('renders Markdown asides for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.starlight-aside')).toBeAttached();
 		});
 	});
 
@@ -442,6 +463,17 @@ test.describe('components', () => {
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('code[dir="auto"]')).not.toBeAttached();
+		});
+
+		test('adds RTL support to code and preformatted text elements for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('code[dir="auto"]').first()).toBeAttached();
 		});
 	});
 
