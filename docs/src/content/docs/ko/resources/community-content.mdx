@@ -50,6 +50,11 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		title="Starlight 변경 로그"
 		description="@astrojs/starlight 패키지의 모든 릴리스를 한눈에 볼 수 있는 멋진 페이지"
 	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/contributing-to-starlight"
+		title="Starlight에 기여하기"
+		description="Starlight와 같은 오픈 소스 프로젝트에 기여하는 것에 대한 개인적인 경험과 제안"
+	/>
 </CardGrid>
 
 ## 레시피 및 가이드
@@ -134,6 +139,36 @@ Starlight 사용자들이 관리하는 커뮤니티 제작 콘텐츠를 살펴�
 		title="미들웨어를 사용하여 Starlight 사이드바 처리"
 		description="라우트 미들웨어를 사용하여 사이드바 순서와 그룹 레이블을 제어합니다. 이는 Nuxt Content의 규칙에서 영감을 얻었습니다."
 	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-custom-social-links"
+		title="사용자 정의 아이콘을 사용하여 Starlight에 소셜 링크 추가"
+		description="Starlight 웹사이트 헤더에 소셜 링크용 사용자 정의 아이콘을 사용하는 방법을 알아보세요."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-paste-images-with-visual-studio-code"
+		title="Visual Studio Code를 사용하여 Starlight 페이지에 이미지 붙여넣기"
+		description="Visual Studio Code를 사용하여 Starlight 문서 페이지에 이미지를 붙여넣어 Starlight 문서 워크플로를 개선하세요."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-add-diagrams-using-d2"
+		title="D2를 사용하여 Starlight 문서에 다이어그램 추가"
+		description="D2를 사용하여 Starlight 문서에 다이어그램을 추가하는 방법을 알아보세요."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-og-images-cloudinary-astro-sdk"
+		title="Cloudinary Astro SDK를 사용하여 Starlight용 오픈 그래프 이미지 생성"
+		description="Cloudinary Astro SDK를 사용하여 Starlight 문서 웹사이트용 오픈 그래프 이미지를 생성하는 방법을 알아보세요."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-list-recent-github-releases"
+		title="Astro의 Content Layer API를 사용하여 Starlight에 최근 GitHub 릴리스 나열"
+		description="Astro의 Content Layer API를 사용하여 Starlight 프로젝트에 최근 GitHub 릴리스를 나열하는 방법을 알아보세요."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-sitewide-banner"
+		title="Starlight에 사이트 전체 배너 추가"
+		description="Starlight의 페이지별 배너 기능을 사용하여 사이트 전체 배너를 만드는 방법을 알아보세요."
+	/>
 </CardGrid>
 
 ## 영상 콘텐츠
@@ -142,20 +177,20 @@ Starlight 사용자들이 관리하는 커뮤니티 제작 콘텐츠를 살펴�
 
 import YouTubeGrid from '~/components/youtube-grid.astro';
 
-### Astro 동영상
+### 공식 동영상
 
 <YouTubeGrid
 	videos={[
 		{
 			href: 'https://www.youtube.com/watch?v=5u0Ds7wzUeI',
-			title: 'Astro Starlight',
-			description: '공식 Starlight 출시 동영상',
+			title: 'Astro의 Starlight',
+			description: '공식 Starlight 출시 영상을 시청합니다.',
 		},
 		{
-			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
-			title: '🌟 1분 안에 시작하기',
+			href: 'https://www.youtube.com/watch?v=j8K-ESJF814',
+			title: 'Starlight 1주년!',
 			description:
-				'Ben이 1분 안에 새로운 Starlight 사이트를 시작하는 모습을 지켜보세요!',
+				'Sarah가 Astro의 커뮤니티 제작 문서 테마에 대해 이야기합니다.',
 		},
 	]}
 />
@@ -164,6 +199,12 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 
 <YouTubeGrid
 	videos={[
+		{
+			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+			title: '🌟 1분 안에 시작하기',
+			description:
+				'Ben이 1분 안에 새로운 Starlight 사이트를 시작하는 것을 확인하세요!',
+		},
 		{
 			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
 			title: 'Starlight 및 Astro를 사용하여 문서 작성',
