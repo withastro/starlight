@@ -163,7 +163,24 @@ const UserConfigSchema = z.object({
 	 *  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
 	 * })
 	 */
-	customCss: z.string().array().optional().default([]),
+	customCss: z
+		.string()
+		.array()
+		.optional()
+		.default([])
+		.superRefine((paths, ctx) => {
+			const invalidPathRegex = /^\.?\/public\/.+$/;
+			const invalidPaths = paths.filter((path) => invalidPathRegex.test(path));
+			if (invalidPaths.length > 0) {
+				ctx.addIssue({
+					code: 'custom',
+					message:
+						`These paths in your Starlight \`customCss\` config are invalid: ${invalidPaths.map((path) => `\`"${path}"\``).join(', ')}\n\n` +
+						`CSS files specified in \`customCss\` should be in the \`src/\` directory, not the \`public/\` directory.\n\n` +
+						`You should move these CSS files into the \`src/\` directory and update the path in \`customCss\` to match.`,
+				});
+			}
+		}),
 
 	/** Define if the last update date should be visible in the page footer. */
 	lastUpdated: z

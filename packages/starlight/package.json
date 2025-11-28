@@ -1,12 +1,14 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.36.0",
+  "version": "0.36.3",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
     "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "playwright install --with-deps chromium && playwright test"
+    "test:e2e": "pnpm test:e2e:chrome",
+    "test:e2e:chrome": "playwright install --with-deps chromium && playwright test --project chrome",
+    "test:e2e:firefox": "playwright install --with-deps firefox && playwright test --project firefox"
   },
   "keywords": [
     "docs",

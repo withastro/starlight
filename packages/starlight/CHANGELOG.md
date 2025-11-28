@@ -1,12 +1,49 @@
 # @astrojs/starlight
 
+## 0.36.3
+
+### Patch Changes
+
+- [#3555](https://github.com/withastro/starlight/pull/3555) [`547dc30`](https://github.com/withastro/starlight/commit/547dc30558b388bfc0505ab0fd8269cecaed462a) Thanks [@Its-Just-Nans](https://github.com/Its-Just-Nans)! - Improves the error message thrown when using a file in the `public/` directory with Starlight’s `customCss` configuration option
+
+- [#3496](https://github.com/withastro/starlight/pull/3496) [`b78fda4`](https://github.com/withastro/starlight/commit/b78fda45be17be7a260309251e82504f9ac8e97a) Thanks [@delucis](https://github.com/delucis)! - Fixes invalid `<head>` output when configuration is missing:
+
+  - Omits `<meta property="og:description" />` if Starlight’s `description` option is unset
+  - Omits `<link rel="canonical" />` and `<meta property="og:url" />` if Astro’s `site` option is unset
+
+- [#3511](https://github.com/withastro/starlight/pull/3511) [`8727df1`](https://github.com/withastro/starlight/commit/8727df1a1b1c82f1303613226000afd53ffe4e36) Thanks [@astrobot-houston](https://github.com/astrobot-houston)! - Updates the `seti:gitlab` icon to match latest version from Seti UI Icons
+
+## 0.36.2
+
+### Patch Changes
+
+- [#3500](https://github.com/withastro/starlight/pull/3500) [`7700456`](https://github.com/withastro/starlight/commit/770045663c8ca3cc44983dd0d444955eba441243) Thanks [@delucis](https://github.com/delucis)! - This is the first release published with OIDC trusted publishing.
+
+- [#3484](https://github.com/withastro/starlight/pull/3484) [`620fb38`](https://github.com/withastro/starlight/commit/620fb3857e40a37a2f8bdf2d0430b106e8f80cdb) Thanks [@gboubeta-uvigo](https://github.com/gboubeta-uvigo)! - Improves Spanish UI translations
+
+## 0.36.1
+
+### Patch Changes
+
+- [#3479](https://github.com/withastro/starlight/pull/3479) [`2fec483`](https://github.com/withastro/starlight/commit/2fec4833d4867db35b77079ce3026b79ba1e0441) Thanks [@gboubeta-uvigo](https://github.com/gboubeta-uvigo)! - Updates Galician UI translations
+
+- [#3457](https://github.com/withastro/starlight/pull/3457) [`c6c0c51`](https://github.com/withastro/starlight/commit/c6c0c5114a659b22ffcc4c2085ad8c1fc4f43a5d) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Deduplicates sitemap link tags in the head.
+
+  When [enabling sitemap](https://starlight.astro.build/guides/customization/#enable-sitemap) in Starlight, a `<link rel="sitemap" href="/sitemap-index.xml">` tag is automatically added to the head of each page. Manually specifying sitemap link tags using the Starlight [`head` configuration option](https://starlight.astro.build/reference/configuration/#head) or the [`head` frontmatter field](https://starlight.astro.build/reference/frontmatter/#head) will now override the default sitemap link tag added by Starlight.
+
+  This change ensures that users manually adding the `@astrojs/sitemap` integration to the Astro `integrations` array for more fine-grained control over sitemap generation and also using the [`filenameBase` integration option](https://docs.astro.build/en/guides/integrations-guide/sitemap/#filenamebase) can customize the sitemap link tag in the head.
+
+- [#3448](https://github.com/withastro/starlight/pull/3448) [`1fc7501`](https://github.com/withastro/starlight/commit/1fc7501d16218c7f156c5e90df25ae6fbb8abfea) Thanks [@dionysuzx](https://github.com/dionysuzx)! - Enlarges the Farcaster icon to better match other social icons
+
+- [#3473](https://github.com/withastro/starlight/pull/3473) [`07204dd`](https://github.com/withastro/starlight/commit/07204dd7b8b6ee71bf24ff9c7d70fc7306bf2076) Thanks [@gboubeta](https://github.com/gboubeta)! - Fixes a typo in Galician table of contents label
+
 ## 0.36.0
 
 ### Minor Changes
 
 - [#3427](https://github.com/withastro/starlight/pull/3427) [`c3b2d0f`](https://github.com/withastro/starlight/commit/c3b2d0fc37bb9b7b6abc6c11b760a4114690ccd4) Thanks [@delucis](https://github.com/delucis)! - Fixes styling of labels that wrap across multiple lines in `<Tabs>` component
 
-  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targetting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
+  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targeting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
 
   If you want to preserve the previous styling, you can add the following custom CSS to your site:
 
@@ -158,7 +195,7 @@
 
 - [#3181](https://github.com/withastro/starlight/pull/3181) [`449c822`](https://github.com/withastro/starlight/commit/449c8229effaab19ece3c0a34e32595809c33cc8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all headings in Markdown and MDX content were rendered with a [clickable anchor link](https://starlight.astro.build/reference/configuration/#headinglinks), even in non-Starlight pages.
 
-- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean langage support with improvements and missing translations
+- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean language support with improvements and missing translations
 
 ## 0.34.2
 
