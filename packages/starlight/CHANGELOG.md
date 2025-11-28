@@ -11,7 +11,14 @@
   If you want to preserve the previous styling, you can add the following [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to your site:
 
   ```css
-  p, h1, h2, h3, h4, h5, h6, code {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  code {
     overflow-wrap: anywhere;
   }
   ```
