@@ -33,7 +33,7 @@ const starlightPagePathname = '/test-slug';
 test('adds data to route shape', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	// Starlight pages infer the slug from the URL.
 	expect(data.slug).toBe('test-slug');
@@ -70,7 +70,7 @@ test('adds custom data to route shape', async () => {
 	};
 	const data = await generateStarlightPageRouteData({
 		props,
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.hasSidebar).toBe(props.hasSidebar);
 	expect(data.entryMeta.dir).toBe(props.dir);
@@ -91,7 +91,7 @@ test('adds custom frontmatter data to route shape', async () => {
 	};
 	const data = await generateStarlightPageRouteData({
 		props,
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.entry.data.head).toMatchInlineSnapshot(`
 		[
@@ -112,7 +112,7 @@ test('adds custom frontmatter data to route shape', async () => {
 test('uses generated sidebar when no sidebar is provided', async () => {
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		context: getRouteDataTestContext('/getting-started/'),
+		context: getRouteDataTestContext({ pathname: '/getting-started/' }),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -197,7 +197,7 @@ test('uses provided sidebar if any', async () => {
 				'reference/frontmatter',
 			],
 		},
-		context: getRouteDataTestContext('/test/2'),
+		context: getRouteDataTestContext({ pathname: '/test/2' }),
 	});
 	expect(data.sidebar).toMatchInlineSnapshot(`
 		[
@@ -271,7 +271,7 @@ test('throws error if sidebar is malformated', async () => {
 					},
 				],
 			},
-			context: getRouteDataTestContext(starlightPagePathname),
+			context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -299,7 +299,7 @@ test('uses provided pagination if any', async () => {
 				},
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.pagination).toMatchInlineSnapshot(`
 		{
@@ -330,7 +330,7 @@ test('uses provided headings if any', async () => {
 	];
 	const data = await generateStarlightPageRouteData({
 		props: { ...starlightPageProps, headings },
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.headings).toEqual(headings);
 });
@@ -346,7 +346,7 @@ test('generates the table of contents for provided headings', async () => {
 				{ depth: 4, slug: 'heading-3', text: 'Heading 3' },
 			],
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -395,7 +395,7 @@ test('respects the `tableOfContents` level configuration', async () => {
 				},
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.toc).toMatchInlineSnapshot(`
 		{
@@ -440,7 +440,7 @@ test('disables table of contents if frontmatter includes `tableOfContents: false
 				tableOfContents: false,
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -458,7 +458,7 @@ test('disables table of contents for splash template', async () => {
 				template: 'splash',
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.toc).toBeUndefined();
 });
@@ -473,7 +473,7 @@ test('hides the sidebar if the `hasSidebar` option is not specified and the spla
 				template: 'splash',
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.hasSidebar).toBe(false);
 });
@@ -488,7 +488,7 @@ test('uses provided edit URL if any', async () => {
 				editUrl,
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.editUrl).toEqual(new URL(editUrl));
 	expect(data.entry.data.editUrl).toEqual(editUrl);
@@ -504,14 +504,14 @@ test('strips unknown frontmatter properties', async () => {
 				unknown: 'test',
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect('unknown' in data.entry.data).toBe(false);
 });
 
 test('generates data with a similar root shape to regular route data', async () => {
 	const route = routes[0]!;
-	const context = getRouteDataTestContext(starlightPagePathname);
+	const context = getRouteDataTestContext({ pathname: starlightPagePathname });
 	const data = generateRouteData({
 		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
 		context,
@@ -542,7 +542,7 @@ test('parses an ImageMetadata object successfully', async () => {
 				},
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.entry.data.hero?.image).toBeDefined();
 	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
@@ -569,7 +569,7 @@ test('parses an image that is also a function successfully', async () => {
 				},
 			},
 		},
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.entry.data.hero?.image).toBeDefined();
 	// @ts-expect-error — image’s type can be different shapes but we know it’s this one here
@@ -599,7 +599,7 @@ test('fails to parse an image without the expected metadata properties', async (
 					},
 				},
 			},
-			context: getRouteDataTestContext(starlightPagePathname),
+			context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -617,7 +617,7 @@ test('adds data to route shape when the `docs` collection is not defined', async
 
 	const data = await generateStarlightPageRouteData({
 		props: starlightPageProps,
-		context: getRouteDataTestContext(starlightPagePathname),
+		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
 	expect(data.entry.data.title).toBe(starlightPageProps.frontmatter.title);
 

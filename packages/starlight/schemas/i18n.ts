@@ -104,7 +104,7 @@ function starlightI18nSchema() {
 			'sidebarNav.accessibleLabel': z
 				.string()
 				.describe(
-					'Accessible label for the main sidebar `<nav>` element to distinguish it fom other `<nav>` landmarks on the page.'
+					'Accessible label for the main sidebar `<nav>` element to distinguish it from other `<nav>` landmarks on the page.'
 				),
 
 			'tableOfContents.onThisPage': z
