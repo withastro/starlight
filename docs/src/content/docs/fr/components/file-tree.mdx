@@ -218,6 +218,49 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Afficher une icône différente de l’extension de fichier
+
+Ajoutez une barre verticale `|` après le nom du fichier, suivie de l’extension à utiliser, afin de définir une icône différente de celle déduite automatiquement à partir de l’extension.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro basé sur l’extension du nom de fichier
+    - Header.astro|mdx en spécifiant l’extension à utiliser
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro basé sur l’extension du nom de fichier
+    - Header.astro|mdx en spécifiant l’extension à utiliser
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro basé sur l’extension du nom de fichier
+    - Header.astro|mdx en spécifiant l’extension à utiliser
+
+</FileTree>
+
+</Preview>
+
 ## Props de `<FileTree>`
 
 **Implémentation :** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)

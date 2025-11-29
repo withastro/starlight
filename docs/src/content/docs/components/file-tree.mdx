@@ -218,6 +218,49 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Use a different icon than the file extension
+
+Add a pipe `|` to the filename, followed by the extension to use, defines a different icon than the one deduced from the file extension.
+
+<Preview>
+
+```mdx {8}
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro based on the file name extension
+    - Header.astro|mdx by specifying the extension to use
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5}
+{% filetree %}
+- src
+  - components
+    - Header.astro based on the file name extension
+    - Header.astro|mdx by specifying the extension to use
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- src
+  - components
+    - Header.astro based on the file name extension
+    - Header.astro|mdx by specifying the extension to use
+
+</FileTree>
+
+</Preview>
+
 ## `<FileTree>` Props
 
 **Implementation:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
