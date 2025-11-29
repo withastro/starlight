@@ -383,8 +383,8 @@ starlight({
 
 ### `markdown`
 
-**타입:** `{ headingLinks?: boolean }`  
-**기본값:** `{ headingLinks: true }`
+**타입:** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**기본값:** `{ headingLinks: true, processedDirs: [] }`
 
 Starlight의 Markdown 처리를 구성합니다.
 
@@ -400,6 +400,27 @@ starlight({
 	markdown: {
 		// Starlight의 클릭 가능한 제목 앵커 링크를 비활성화합니다.
 		headingLinks: false,
+	},
+}),
+```
+
+#### `processedDirs`
+
+**타입:** `string[]`  
+**기본값:** `[]`
+
+Starlight의 Markdown 파이프라인에 의해 처리되어야 하는 파일들을 포함하는 디렉터리를 추가로 정의합니다.
+기본적으로 Starlight는 [`docsLoader()`](/ko/reference/configuration/#docsloader)를 사용하여 로드된 Markdown 및 MDX 콘텐츠만 처리합니다.
+프로젝트 루트를 기준으로 한 로컬 디렉터리(예: `'./src/data/comments/'`)를 지원합니다.
+
+Starlight의 처리는 [클릭 가능한 제목 앵커 링크](#headinglinks), [Markdown의 asides 지시어 구문](/ko/guides/authoring-content/#보조-내용), 코드 블록에 대한 RTL 지원을 포함합니다.
+이 옵션은 `<StarlightPage>` 컴포넌트를 사용하여 [사용자 정의 페이지](/ko/guides/pages/#사용자-정의-페이지)에서 사용자 정의 콘텐츠 컬렉션의 콘텐츠를 렌더링하고, Starlight의 Markdown 처리가 해당 콘텐츠에도 적용되기를 기대하는 경우에 유용할 수 있습니다.
+
+```js
+starlight({
+	markdown: {
+		// `src/data/reviews/` 디렉터리에 있는 `reviews` 콘텐츠 컬렉션의 Markdown 파일을 처리합니다.
+		processedDirs: ['./src/data/reviews/'],
 	},
 }),
 ```
