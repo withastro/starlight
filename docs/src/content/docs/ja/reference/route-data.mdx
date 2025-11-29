@@ -3,8 +3,7 @@ title: ルートデータ
 description: Starlight のルートデータオブジェクトに関する完全なリファレンスドキュメントです。
 ---
 
-Starlight のルートデータオブジェクトには、現在のページに関する情報が含まれています。  
-Starlight のデータモデルがどのように機能するかについては、[「ルートデータ」ガイド](/ja/guides/route-data/) を参照してください。
+Starlight のルートデータオブジェクトには、現在のページに関する情報が含まれています。Starlight のデータモデルがどのように機能するかについては、[「ルートデータ」ガイド](/ja/guides/route-data/) を参照してください。
 
 Astro コンポーネント内では、`Astro.locals.starlightRoute` からルートデータにアクセスできます。
 
@@ -59,8 +58,7 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 **型:** `string`
 
-サイトタイトルの `href` 属性に設定される値で、トップページへのリンクです。  
-多言語サイトの場合は現在のロケールを含みます（例: `/en/` や `/zh-cn/`）。
+サイトタイトルの `href` 属性に設定される値で、トップページへのリンクです。多言語サイトの場合は現在のロケールを含みます（例: `/en/` や `/zh-cn/`）。
 
 ### `slug`
 
@@ -68,8 +66,7 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 コンテンツファイル名から生成されたこのページのスラッグ。
 
-このプロパティは非推奨であり、今後のバージョンで削除される予定です。  
-[Starlight の `docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定) を使用して新しいコンテンツレイヤー API に移行し、代わりに [`id`](#id) プロパティを使用してください。
+このプロパティは非推奨であり、今後のバージョンで削除される予定です。[Starlight の `docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定) を使用して新しいコンテンツレイヤー API に移行し、代わりに [`id`](#id) プロパティを使用してください。
 
 ### `id`
 
@@ -81,20 +78,17 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 **型:** `boolean | undefined`
 
-現在の言語で未翻訳のページが既定ロケールのフォールバックコンテンツを使用している場合に `true`。  
-多言語サイトでのみ使用されます。
+現在の言語で未翻訳のページが既定ロケールのフォールバックコンテンツを使用している場合に `true`。多言語サイトでのみ使用されます。
 
 ### `entryMeta`
 
 **型:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
-ページコンテンツのロケールメタデータ。  
-ページがフォールバックコンテンツを使用している場合、トップレベルのロケール値とは異なることがあります。
+ページコンテンツのロケールメタデータ。ページがフォールバックコンテンツを使用している場合、トップレベルのロケール値とは異なることがあります。
 
 ### `entry`
 
-現在のページに対応する Astro コンテンツコレクションのエントリ。  
-現在のページの frontmatter 値は `entry.data` に含まれます。
+現在のページに対応する Astro コンテンツコレクションのエントリ。 現在のページの frontmatter 値は `entry.data` に含まれます。
 
 ```ts
 entry: {
@@ -136,8 +130,7 @@ entry: {
 
 **型:** `{ depth: number; slug: string; text: string }[]`
 
-現在のページから抽出されたすべての Markdown 見出しの配列。  
-Starlight の設定に従う目次コンポーネントを作成したい場合は、代わりに [`toc`](#toc) を使用してください。
+現在のページから抽出されたすべての Markdown 見出しの配列。Starlight の設定に従う目次コンポーネントを作成したい場合は、代わりに [`toc`](#toc) を使用してください。
 
 ### `lastUpdated`
 
@@ -155,8 +148,7 @@ Starlight の設定に従う目次コンポーネントを作成したい場合�
 
 **型:** [`HeadConfig[]`](/ja/reference/configuration/#headconfig)
 
-現在のページの `<head>` に含めるすべてのタグの配列。  
-`<title>` や `<meta charset="utf-8">` などの重要なタグが含まれます。
+現在のページの `<head>` に含めるすべてのタグの配列。`<title>` や `<meta charset="utf-8">` などの重要なタグが含まれます。
 
 ## ユーティリティ
 
@@ -175,11 +167,9 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 ### `StarlightRouteData` 型
 
-Starlight のルートデータを扱うコードを書く場合、`StarlightRouteData` 型をインポートして  
-`Astro.locals.starlightRoute` の構造と一致させることができます。
+Starlight のルートデータを扱うコードを書く場合、`StarlightRouteData` 型をインポートして`Astro.locals.starlightRoute` の構造と一致させることができます。
 
-次の例では、`usePageTitleInTOC()` 関数がルートデータを更新し、目次内の最初の項目ラベルをデフォルトの「Overview」から現在のページタイトルに置き換えます。  
-`StarlightRouteData` 型を使うことで、ルートデータの変更が正しいかどうかを検証できます。
+次の例では、`usePageTitleInTOC()` 関数がルートデータを更新し、目次内の最初の項目ラベルをデフォルトの「Overview」から現在のページタイトルに置き換えます。`StarlightRouteData` 型を使うことで、ルートデータの変更が正しいかどうかを検証できます。
 
 ```ts "StarlightRouteData"
 // src/route-utils.ts
