@@ -378,8 +378,8 @@ starlight({
 
 ### `markdown`
 
-**Type :** `{ headingLinks?: boolean }`  
-**Par défaut :** `{ headingLinks: true }`
+**Type :** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**Par défaut :** `{ headingLinks: true, processedDirs: [] }`
 
 Configure le traitement de contenu Markdown par Starlight.
 
@@ -395,6 +395,28 @@ starlight({
 	markdown: {
 		// Désactive les liens d'ancrage cliquables pour les en-têtes.
 		headingLinks: false,
+	},
+}),
+```
+
+#### `processedDirs`
+
+**Type :** `string[]`  
+**Par défaut :** `[]`
+
+Définit les répertoires supplémentaires dans lesquels les fichiers doivent être traités par le pipeline Markdown de Starlight.
+Par défaut, seuls les contenus Markdown et MDX chargés à l'aide de [`docsLoader()`](/fr/reference/configuration/#docsloader) de Starlight sont traités.
+Prend en charge les répertoires locaux relatifs à la racine de votre projet, par exemple `'./src/data/comments/'`.
+
+Le traitement de Starlight inclut la prise en charge les [liens d'ancrage cliquables des en-têtes](#headinglinks), la [syntaxe de directive Markdown pour les encarts](/fr/guides/authoring-content/#encarts) et la prise en charge RTL des blocs de code.
+Cette option peut être utile si vous affichez du contenu provenant d'une collection de contenu personnalisée dans une [page personnalisée](/fr/guides/pages/#pages-personnalisées) à l'aide du composant `<StarlightPage>` et que vous vous attendez à ce que le traitement Markdown de Starlight soit également appliqué à ce contenu.
+
+```js
+starlight({
+	markdown: {
+		// Traiter les fichiers Markdown de la collection de contenu `reviews` située dans le
+		// répertoire `src/data/reviews/`.
+		processedDirs: ['./src/data/reviews/'],
 	},
 }),
 ```
