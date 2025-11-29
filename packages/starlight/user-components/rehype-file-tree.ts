@@ -94,6 +94,14 @@ const fileTreeProcessor = rehype()
 					icon.children.unshift(h('span', { class: 'sr-only' }, directoryLabel));
 				}
 
+				// Remove different extension from the displayed filename (e.g. "file.json|md" -> "file.json")
+				if (firstChild?.type === 'text') {
+					const pipeIndex = firstChild.value.indexOf('|');
+					if (pipeIndex !== -1) {
+						firstChild.value = firstChild.value.slice(0, pipeIndex).trim();
+					}
+				}
+
 				// Add classes and data attributes to the list item node.
 				node.properties.class = isDirectory ? 'directory' : 'file';
 				if (isPlaceholder) node.properties.class += ' empty';
@@ -183,11 +191,31 @@ function getFileIconName(fileName: string) {
  * Note that an extension in Seti is everything after a dot, so `README.md` would be `.md` and
  * `name.with.dots` will try to look for an icon for `.with.dots` and then `.dots` if the first one
  * is not found.
+ * Support different extension using a pipe (e.g. `file.ts|vue` will use `.vue` icon).
  */
 function getFileIconTypeFromExtension(fileName: string) {
 	const firstDotIndex = fileName.indexOf('.');
-	if (firstDotIndex === -1) return;
-	let extension = fileName.slice(firstDotIndex);
+	const firstPipeIndex = fileName.indexOf('|');
+
+	// No extension and no different extension
+	if (firstDotIndex === -1 && firstPipeIndex === -1) return;
+
+	let extension: string;
+
+	// Different extension handling: "name.ext|forced"
+	if (firstPipeIndex !== -1) {
+		const forced = fileName.slice(firstPipeIndex + 1).trim();
+		if (forced.length > 0) {
+			const forcedExt = forced.startsWith('.') ? forced : `.${forced}`;
+			const icon = definitions.extensions[forcedExt];
+			if (icon) return icon;
+		}
+		// If different ext not found, fall back to real extension
+		fileName = fileName.slice(0, firstPipeIndex);
+	}
+
+	extension = fileName.slice(firstDotIndex);
+
 	while (extension !== '') {
 		const icon = definitions.extensions[extension];
 		if (icon) return icon;
