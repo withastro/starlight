@@ -70,6 +70,12 @@ describe('processor', () => {
 		expect(extractFileTree(html)).not.toContain('<span class="comment">');
 	});
 
+	test('custom file extension not displayed', () => {
+		const html = processTestFileTree(`<ul><li>file|vue</li></ul>`);
+
+		expect(extractFileTree(html)).not.toContain('file|vue');
+	});
+
 	test('processes text comments following the file name', async () => {
 		const html = processTestFileTree(`<ul><li>file this is a comment</li></ul>`);
 
@@ -144,6 +150,12 @@ describe('icons', () => {
 		const html = processTestFileTree(`<ul><li>test.astro</li></ul>`);
 
 		expectHtmlToIncludeIcon(html, Icons.astro);
+	});
+
+	test('adds a different icon than the file extension', () => {
+		const html = processTestFileTree(`<ul><li>test.astro|mdx</li></ul>`);
+
+		expectHtmlToIncludeIcon(html, Icons.mdx);
 	});
 
 	test('adds an icon to known file partials', () => {
