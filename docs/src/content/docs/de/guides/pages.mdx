@@ -77,19 +77,13 @@ Mehr dazu findest du in der [„Seiten“-Anleitung in der Astro-Dokumentation](
 
 Um das Starlight-Layout in benutzerdefinierten Seiten zu verwenden, umhüllst du deinen Seiteninhalt mit der [Komponente `<StarlightPage />`](#starlightpage-komponente).
 Das kann hilfreich sein, wenn du Inhalte dynamisch generierst, aber trotzdem das Starlight-Design verwenden willst.
-Diese Komponente muss als erstes in deine Datei importiert werden, um [Kaskadenschichten](/de/guides/css-and-tailwind/#kaskadenschichten) einzurichten und eine vorhersehbare CSS-Reihenfolge sicherzustellen.
 
 Um Ankerlinks zu Überschriften hinzuzufügen, die den Markdown-Ankerlinkstilen von Starlight entsprechen, kannst du die [`<AnchorHeading>`-Komponente](#anchorheading-komponente) in deinen eigenen Seiten verwenden.
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
-// Importiere zuerst die Komponente `<StarlightPage>`,
-// um die Kaskadenschichten einzurichten.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-
-// Importiere alle anderen Komponenten, die du auf
-// deiner benutzerdefinierten Seite verwenden möchtest.
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
@@ -116,8 +110,6 @@ Die Komponente `<StarlightPage />` rendert eine ganze Seite mit dem Layout und d
 
 ```astro
 ---
-// Importiere zuerst die Komponente `<StarlightPage>`,
-// um die Kaskadenschichten einzurichten.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
@@ -125,8 +117,6 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 	<!-- Benutzerdefinierter Seiteninhalt -->
 </StarlightPage>
 ```
-
-Aufgrund der Art und Weise, wie die [Importreihenfolge](https://docs.astro.build/de/guides/styling/#import-reihenfolge) in Astro funktioniert, muss die Komponente `<StarlightPage />` als erstes in deiner Datei importiert werden, um die [Kaskadenschichten](/de/guides/css-and-tailwind/#kaskadenschichten) einzurichten, die Starlight intern verwendet, um die Reihenfolge seiner Stile zu verwalten.
 
 Die Komponente `<StarlightPage />` akzeptiert die folgenden Eigenschaften.
 
