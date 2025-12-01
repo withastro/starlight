@@ -409,14 +409,14 @@ starlight({
 Gib zusätzliche Ordner an, in denen Dateien von Starlights Markdown-Pipeline bearbeitet werden sollen.
 Standardmäßig werden nur Markdown- und MDX-Inhalte verarbeitet, die mit Starlights [`docsLoader()`](/de/reference/configuration/#docsloader) geladen wurden.
 Unterstützt lokale Verzeichnisse, die relativ zum Stammverzeichnis deines Projekts liegen, z. B. `./src/data/comments/`.
-    
+
 Starlight unterstützt [anklickbare Überschriften-Ankerlinks](#headinglinks), die [Markdown-Direktiven-Syntax für Asides](/de/guides/authoring-content/#nebenbemerkungen) und die RTL-Unterstützung für Code-Blöcke.
 Diese Option kann nützlich sein, wenn du Inhalte aus einer benutzerdefinierten Inhaltssammlung in einer [benutzerdefinierten Seite](/de/guides/pages/#benutzerdefinierte-seiten) mit der Komponente `<StarlightPage>` rendern und erwartest, dass die Markdown-Verarbeitung von Starlight auch auf diese Inhalte angewendet wird.
 
 ```js
 starlight({
 	markdown: {
-		// Verarbeite Markdown-Dateien aus der Inhaltssammlung `reviews` 
+		// Verarbeite Markdown-Dateien aus der Inhaltssammlung `reviews`
 		// im Verzeichnis `src/data/reviews/`.
 		processedDirs: ['./src/data/reviews/'],
 	},
