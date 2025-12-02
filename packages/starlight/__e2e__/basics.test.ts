@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import { expect, testFactory, type Locator } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
@@ -407,6 +408,17 @@ test.describe('components', () => {
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
 		});
+
+		test('renders headings anchor links for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.sl-anchor-link').first()).toBeAttached();
+		});
 	});
 
 	test.describe('asides', () => {
@@ -419,11 +431,21 @@ test.describe('components', () => {
 			// Individual Markdown page
 			await starlight.goto('/markdown-page');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
-			await page.pause();
 
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
+		});
+
+		test('renders Markdown asides for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.starlight-aside')).toBeAttached();
 		});
 	});
 
@@ -441,6 +463,17 @@ test.describe('components', () => {
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('code[dir="auto"]')).not.toBeAttached();
+		});
+
+		test('adds RTL support to code and preformatted text elements for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('code[dir="auto"]').first()).toBeAttached();
 		});
 	});
 
@@ -464,6 +497,31 @@ test.describe('components', () => {
 				'background-color',
 				'rgb(128, 0, 128)'
 			);
+		});
+	});
+
+	test.describe('css layer order', () => {
+		test('ensures that the StarlightPage component is always imported first to ensure a predictable CSS layer order in custom pages', async ({
+			page,
+			makeServer,
+		}) => {
+			const starlight = await makeServer('dev', { mode: 'dev' });
+			await starlight.goto('/starlight-page-css-layer-order');
+
+			const firstStyleContent = await page.evaluate(
+				() => document.head.querySelector('style')?.textContent ?? ''
+			);
+
+			const expectedLayersOrder = await fs.readFile(
+				new URL('../style/layers.css', import.meta.url),
+				'utf-8'
+			);
+
+			// Ensure that the first style block in the head contains the expected layers order rather
+			// the styles of the link button wrapped in a `@layer` block at-rule automatically declaring
+			// a new layer and thus potentially breaking the intended layers order as the initial order
+			// in which layers are declared indicates which layer has precedence.
+			expect(firstStyleContent).toBe(expectedLayersOrder);
 		});
 	});
 

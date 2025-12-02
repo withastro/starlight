@@ -77,19 +77,13 @@ Pour en savoir plus, consultez le guide [« Pages » dans la documentation d'Ast
 
 Pour utiliser la mise en page de Starlight dans des pages personnalisées, englobez le contenu de votre page avec le [composant `<StarlightPage />`](#composant-starlightpage).
 Cela peut s'avérer utile si vous générez du contenu de manière dynamique, mais que vous souhaitez tout de même utiliser le design de Starlight.
-Ce composant doit être la première importation dans votre fichier pour configurer les [couches de cascade](/fr/guides/css-and-tailwind/#couche-de-cascade) et garantir un ordre prévisible pour le CSS.
 
 Pour ajouter des liens d'ancrage vers des en-têtes avec une apparence équivalente aux liens d'ancrage Markdown de Starlight, vous pouvez utiliser le [composant `<AnchorHeading>`](#composant-anchorheading) dans vos pages personnalisées.
 
 ```astro
 ---
 // src/pages/page-perso/exemple.astro
-// Importer le composant `<StarlightPage>` en premier pour configurer les
-// couches de cascade.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-
-// Importer tous les autres composants que vous souhaitez utiliser dans votre
-// page personnalisée.
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
@@ -113,8 +107,6 @@ Le composant `<StarlightPage />` affiche une page complète de contenu en utilis
 
 ```astro
 ---
-// Importer le composant `<StarlightPage>` en premier pour configurer les
-// couches de cascade.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
@@ -122,8 +114,6 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 	<!-- Contenu de la page personnalisée -->
 </StarlightPage>
 ```
-
-En raison du fonctionnement de [l'ordre d'importation](https://docs.astro.build/fr/guides/styling/#ordre-dimportation) dans Astro, le composant `<StarlightPage />` doit être la première importation dans votre fichier pour configurer les [couches de cascade](/fr/guides/css-and-tailwind/#couche-de-cascade) utilisées en interne par Starlight pour gérer l'ordre de ses styles.
 
 Le composant `<StarlightPage />` accepte les props suivantes.
 
