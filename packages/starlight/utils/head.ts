@@ -6,6 +6,7 @@ import type { PageProps, RouteDataContext } from './routing/data';
 import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
 import { localizedUrl } from './localizedUrl';
+import { isAbsoluteUrl } from './url';
 
 const HeadSchema = HeadConfigSchema({ source: 'content' });
 
@@ -46,7 +47,7 @@ export function getHead(
 			tag: 'link',
 			attrs: {
 				rel: 'shortcut icon',
-				href: fileWithBase(config.favicon.href),
+				href: isAbsoluteUrl(config.favicon.href) ? config.favicon.href : fileWithBase(config.favicon.href),
 				type: config.favicon.type,
 			},
 		},
