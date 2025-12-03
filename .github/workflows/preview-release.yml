@@ -1,0 +1,90 @@
+name: Preview Release
+permissions: {}
+
+on:
+  pull_request:
+    branches: [main]
+    types: [labeled]
+
+# Automatically cancel in-progress actions on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Preview Release
+    if: ${{ github.repository_owner == 'withastro' && github.event.label.name == 'pr-preview' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          # This makes Actions fetch all Git history so that Changesets can find pending changesets
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+
+      - name: Setup Node
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: 24.10.0
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Get changeset status
+        id: changeset
+        run: |
+          pnpm changeset status --output changeset-status.json
+          echo "status=$(cat changeset-status.json | jq -c .)" >> $GITHUB_OUTPUT
+
+      - name: Get pnpm packages
+        id: pnpm
+        run: echo "packages=$(pnpm list --recursive --depth -1 --json | jq -c .)" >> $GITHUB_OUTPUT
+
+      - name: Get preview packages
+        id: preview
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          CHANGESET: ${{ steps.changeset.outputs.status }}
+          PACKAGES: ${{ steps.pnpm.outputs.packages }}
+        with:
+          script: |
+              const { relative } = require('node:path');
+              const changeset = JSON.parse(process.env.CHANGESET);
+              const packages = JSON.parse(process.env.PACKAGES);
+              # A map of all packages name in the monorepo to their relative paths.
+              const packagePathsMap = Object.fromEntries(packages.map(pkg => [pkg.name, relative(process.cwd(), pkg.path)]));
+              # A list of all relative package paths to publish in this preview release.
+              const previewPackagePaths = [...new Set(changes.changesets.map(change => change.releases.map(release => packagePathsMap[release.name])).flat())]
+              # A space-separated string of all relative package paths to publish in this preview release (or an empty string if none).
+              core.setOutput('packages', previewPackagePaths.join(' '));
+
+      # We remove the preview label before publishing so that the label is always removed even if
+      # publishing fails, so we can retry by only adding the label again.
+      - name: Remove Preview Label
+        uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1.3.0
+        with:
+          labels: pr-preview
+
+      - name: Publish preview packages
+        env:
+          PACKAGES: ${{ steps.preview.outputs.packages }}
+        run: |
+          if [ -z "$PACKAGES" ]; then
+            echo "::error::No packages to publish in this preview release."
+            echo "::error::Make sure the pull request includes a changeset."
+            exit 1
+          fi
+
+          # Note that `--compact` is used for shorter URLs but requires packages to be published on
+          # npm. This means that it's not possible to publish a preview for a new package that has
+          # not yet been published on npm.
+          pnpm dlx pkg-pr-new publish --pnpm --compact --packageManager=pnpm --no-template $packages
