@@ -47,7 +47,9 @@ export function getHead(
 			tag: 'link',
 			attrs: {
 				rel: 'shortcut icon',
-				href: isAbsoluteUrl(config.favicon.href) ? config.favicon.href : fileWithBase(config.favicon.href),
+				href: isAbsoluteUrl(config.favicon.href)
+					? config.favicon.href
+					: fileWithBase(config.favicon.href),
 				type: config.favicon.type,
 			},
 		},
