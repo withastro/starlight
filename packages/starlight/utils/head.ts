@@ -6,6 +6,7 @@ import type { PageProps, RouteDataContext } from './routing/data';
 import { fileWithBase } from './base';
 import { formatCanonical } from './canonical';
 import { localizedUrl } from './localizedUrl';
+import { isAbsoluteUrl } from './url';
 
 const HeadSchema = HeadConfigSchema({ source: 'content' });
 
@@ -33,7 +34,9 @@ export function getHead(
 			attrs: { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 		},
 		{ tag: 'title', content: `${data.title} ${config.titleDelimiter} ${siteTitle}` },
-		{ tag: 'link', attrs: { rel: 'canonical', href: canonicalHref } },
+		...(canonicalHref !== undefined
+			? ([{ tag: 'link', attrs: { rel: 'canonical', href: canonicalHref } }] as const)
+			: []),
 		{ tag: 'meta', attrs: { name: 'generator', content: context.generator } },
 		{
 			tag: 'meta',
@@ -44,16 +47,22 @@ export function getHead(
 			tag: 'link',
 			attrs: {
 				rel: 'shortcut icon',
-				href: fileWithBase(config.favicon.href),
+				href: isAbsoluteUrl(config.favicon.href)
+					? config.favicon.href
+					: fileWithBase(config.favicon.href),
 				type: config.favicon.type,
 			},
 		},
 		// OpenGraph Tags
 		{ tag: 'meta', attrs: { property: 'og:title', content: data.title } },
 		{ tag: 'meta', attrs: { property: 'og:type', content: 'article' } },
-		{ tag: 'meta', attrs: { property: 'og:url', content: canonicalHref } },
+		...(canonicalHref !== undefined
+			? ([{ tag: 'meta', attrs: { property: 'og:url', content: canonicalHref } }] as const)
+			: []),
 		{ tag: 'meta', attrs: { property: 'og:locale', content: lang } },
-		{ tag: 'meta', attrs: { property: 'og:description', content: description } },
+		...(description !== undefined
+			? ([{ tag: 'meta', attrs: { property: 'og:description', content: description } }] as const)
+			: []),
 		{ tag: 'meta', attrs: { property: 'og:site_name', content: siteTitle } },
 		// Twitter Tags
 		{

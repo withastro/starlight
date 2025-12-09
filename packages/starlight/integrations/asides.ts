@@ -1,6 +1,6 @@
 /// <reference types="mdast-util-directive" />
 
-import type { AstroConfig, AstroIntegration, AstroUserConfig } from 'astro';
+import type { AstroIntegration } from 'astro';
 import { h as _h, s as _s, type Properties, type Result } from 'hastscript';
 import type { Node, Paragraph as P, Parent, PhrasingContent, Root } from 'mdast';
 import {
@@ -11,22 +11,14 @@ import {
 } from 'mdast-util-directive';
 import { toMarkdown } from 'mdast-util-to-markdown';
 import { toString } from 'mdast-util-to-string';
-import remarkDirective from 'remark-directive';
 import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { HookParameters, StarlightConfig, StarlightIcon } from '../types';
-import { getRemarkRehypeDocsCollectionPath, shouldTransformFile } from './remark-rehype-utils';
+import type { RemarkRehypePluginOptions } from './remark-rehype';
+import type { StarlightIcon } from '../types';
 import { Icons } from '../components/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';
-
-interface AsidesOptions {
-	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales'>;
-	astroConfig: { root: AstroConfig['root']; srcDir: AstroConfig['srcDir'] };
-	useTranslations: HookParameters<'config:setup'>['useTranslations'];
-	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
-}
 
 /** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
 function h(el: string, attrs: Properties = {}, children: unknown[] = []): P {
@@ -132,7 +124,7 @@ function makeSvgChildNodes(children: Result['children']): P[] {
  * </aside>
  * ```
  */
-function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
+export function remarkAsides(options: RemarkRehypePluginOptions): Plugin<[], Root> {
 	type Variant = 'note' | 'tip' | 'caution' | 'danger';
 	const variants = new Set(['note', 'tip', 'caution', 'danger']);
 	const isAsideVariant = (s: string): s is Variant => variants.has(s);
@@ -169,11 +161,7 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 		],
 	};
 
-	const docsCollectionPath = getRemarkRehypeDocsCollectionPath(options.astroConfig.srcDir);
-
 	const transformer: Transformer<Root> = (tree, file) => {
-		if (!shouldTransformFile(file, docsCollectionPath)) return;
-
 		const lang = options.absolutePathToLang(file.path);
 		const t = options.useTranslations(lang);
 		visit(tree, (node, index, parent) => {
@@ -251,12 +239,6 @@ function remarkAsides(options: AsidesOptions): Plugin<[], Root> {
 	return function attacher() {
 		return transformer;
 	};
-}
-
-type RemarkPlugins = NonNullable<NonNullable<AstroUserConfig['markdown']>['remarkPlugins']>;
-
-export function starlightAsides(options: AsidesOptions): RemarkPlugins {
-	return [remarkDirective, remarkAsides(options)];
 }
 
 export function remarkDirectivesRestoration() {

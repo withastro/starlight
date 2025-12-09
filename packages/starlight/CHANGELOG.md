@@ -1,5 +1,91 @@
 # @astrojs/starlight
 
+## 0.37.1
+
+### Patch Changes
+
+- [#3603](https://github.com/withastro/starlight/pull/3603) [`30f6e7f`](https://github.com/withastro/starlight/commit/30f6e7fa83ca0a248b1b59d616f55a6f933334a2) Thanks [@delucis](https://github.com/delucis)! - Fixes support for providing an absolute URL to Starlight’s `favicon` configuration option
+
+## 0.37.0
+
+### Minor Changes
+
+- [#3491](https://github.com/withastro/starlight/pull/3491) [`28810f0`](https://github.com/withastro/starlight/commit/28810f085faf017f3fedd1407e741bdf6c232848) Thanks [@JusticeMatthew](https://github.com/JusticeMatthew)! - Changes text overflow styling in Markdown content
+
+  ⚠️ **Potentially breaking change:** This release switches the [`overflow-wrap`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap) CSS style for common elements to `break-word`. In most cases, there should be little visual impact, but this change can impact how layouts with implicit sizing (such as tables) look, improving legibility in how words wrap.
+
+  If you want to preserve the previous styling, you can add the following [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to your site:
+
+  ```css
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  code {
+    overflow-wrap: anywhere;
+  }
+  ```
+
+- [#3351](https://github.com/withastro/starlight/pull/3351) [`239698c`](https://github.com/withastro/starlight/commit/239698c53625f5411792e314994d20c20f9ede77) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Ensures that Starlight CSS layer order is predictable in custom pages using the `<StarlightPage>` component.
+
+  Previously, due to how [import order](https://docs.astro.build/en/guides/styling/#import-order) works in Astro, the `<StarlightPage>` component had to be the first import in custom pages to set up [cascade layers](https://starlight.astro.build/guides/css-and-tailwind/#cascade-layers) used internally by Starlight to manage the order of its styles.
+
+  With this change, this restriction no longer applies and Starlight’s styles will be applied correctly regardless of the import order of the `<StarlightPage>` component.
+
+- [#3521](https://github.com/withastro/starlight/pull/3521) [`ca7b771`](https://github.com/withastro/starlight/commit/ca7b771e5bd4da3fe500bbad562e69d5880690ea) Thanks [@shubham-padia](https://github.com/shubham-padia)! - Fixes an issue where a vertical scrollbar could be displayed on the Starlight `<Tabs>` component when zooming the page
+
+  ⚠️ **Potentially breaking change:** The `<Tabs>` component no longer uses `margin-bottom` and `border-bottom` to highlight the current tab. This is now done with a `box-shadow`. If you have custom styling for your tabs, you may need to update it.
+
+  If you want to preserve the previous styling, you can add the following custom CSS to your site:
+
+  ```css
+  starlight-tabs .tab {
+    margin-bottom: -2px;
+  }
+
+  starlight-tabs .tab > [role='tab'] {
+    border-bottom: 2px solid var(--sl-color-gray-5);
+    box-shadow: none;
+  }
+
+  starlight-tabs .tab [role='tab'][aria-selected='true'] {
+    border-color: var(--sl-color-text-accent);
+  }
+  ```
+
+- [#3549](https://github.com/withastro/starlight/pull/3549) [`1cf50eb`](https://github.com/withastro/starlight/commit/1cf50ebb18c0232be581cf0aff0c192e4c421e55) Thanks [@jacobdalamb](https://github.com/jacobdalamb)! - Updates the default sans-serif system font stack, dropping support for the `-apple-system` and `BlinkMacSystemFont` font names used in older browsers. These are no longer needed in [browsers officially supported by Starlight](https://browsersl.ist/#q=%3E+0.5%25%2C+not+dead%2C+Chrome+%3E%3D+105%2C+Edge+%3E%3D+105%2C+Firefox+%3E%3D+121%2C+Safari+%3E%3D+15.4%2C+iOS+%3E%3D+15.4%2C+not+op_mini+all).
+
+  If you still need to support older browsers, you can add the following custom CSS to your site:
+
+  ```css
+  :root {
+    --sl-font-system: ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+      'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+  ```
+
+- [#3332](https://github.com/withastro/starlight/pull/3332) [`f61f99d`](https://github.com/withastro/starlight/commit/f61f99dc09c59d26761ffebc611969e20b866191) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds a new [`markdown.processedDirs`](https://starlight.astro.build/reference/configuration/#processeddirs) configuration option to specify additional directories where files should be processed by Starlight’s Markdown pipeline.
+
+  By default, Starlight’s processing only applies to Markdown and MDX content loaded using Starlight’s `docsLoader()`. This new option allows to extend this processing to other directories, which can be useful if you are rendering content from a custom content collection using the `<StarlightPage>` component and expect Starlight’s Markdown processing to be applied to that content as well.
+
+## 0.36.3
+
+### Patch Changes
+
+- [#3555](https://github.com/withastro/starlight/pull/3555) [`547dc30`](https://github.com/withastro/starlight/commit/547dc30558b388bfc0505ab0fd8269cecaed462a) Thanks [@Its-Just-Nans](https://github.com/Its-Just-Nans)! - Improves the error message thrown when using a file in the `public/` directory with Starlight’s `customCss` configuration option
+
+- [#3496](https://github.com/withastro/starlight/pull/3496) [`b78fda4`](https://github.com/withastro/starlight/commit/b78fda45be17be7a260309251e82504f9ac8e97a) Thanks [@delucis](https://github.com/delucis)! - Fixes invalid `<head>` output when configuration is missing:
+
+  - Omits `<meta property="og:description" />` if Starlight’s `description` option is unset
+  - Omits `<link rel="canonical" />` and `<meta property="og:url" />` if Astro’s `site` option is unset
+
+- [#3511](https://github.com/withastro/starlight/pull/3511) [`8727df1`](https://github.com/withastro/starlight/commit/8727df1a1b1c82f1303613226000afd53ffe4e36) Thanks [@astrobot-houston](https://github.com/astrobot-houston)! - Updates the `seti:gitlab` icon to match latest version from Seti UI Icons
+
 ## 0.36.2
 
 ### Patch Changes
@@ -30,7 +116,7 @@
 
 - [#3427](https://github.com/withastro/starlight/pull/3427) [`c3b2d0f`](https://github.com/withastro/starlight/commit/c3b2d0fc37bb9b7b6abc6c11b760a4114690ccd4) Thanks [@delucis](https://github.com/delucis)! - Fixes styling of labels that wrap across multiple lines in `<Tabs>` component
 
-  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targetting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
+  ⚠️ **Potentially breaking change:** Tab labels now have a narrower line-height and additional vertical padding. If you have custom CSS targeting the `<Tabs>` component, you may want to double check the visual appearance of your tabs when updating.
 
   If you want to preserve the previous styling, you can add the following custom CSS to your site:
 
@@ -182,7 +268,7 @@
 
 - [#3181](https://github.com/withastro/starlight/pull/3181) [`449c822`](https://github.com/withastro/starlight/commit/449c8229effaab19ece3c0a34e32595809c33cc8) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes an issue where all headings in Markdown and MDX content were rendered with a [clickable anchor link](https://starlight.astro.build/reference/configuration/#headinglinks), even in non-Starlight pages.
 
-- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean langage support with improvements and missing translations
+- [#3168](https://github.com/withastro/starlight/pull/3168) [`ca693fe`](https://github.com/withastro/starlight/commit/ca693feb4b6aa9f26b3d536d284288773b788ac6) Thanks [@jsparkdev](https://github.com/jsparkdev)! - Updates Korean language support with improvements and missing translations
 
 ## 0.34.2
 
