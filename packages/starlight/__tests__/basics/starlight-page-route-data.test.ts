@@ -122,7 +122,7 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "href": "/",
 		    "isCurrent": false,
 		    "label": "Home Page",
-		    "type": "link",
+		    "type": "autolink",
 		  },
 		  {
 		    "attrs": {},
@@ -130,7 +130,7 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		    "href": "/getting-started/",
 		    "isCurrent": true,
 		    "label": "Getting Started",
-		    "type": "link",
+		    "type": "autolink",
 		  },
 		  {
 		    "badge": undefined,
@@ -142,7 +142,7 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		        "href": "/guides/authoring-content/",
 		        "isCurrent": false,
 		        "label": "Authoring Markdown",
-		        "type": "link",
+		        "type": "autolink",
 		      },
 		      {
 		        "attrs": {},
@@ -150,11 +150,11 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
 		        "label": "Project Structure",
-		        "type": "link",
+		        "type": "autolink",
 		      },
 		    ],
 		    "label": "guides",
-		    "type": "group",
+		    "type": "autogroup",
 		  },
 		  {
 		    "badge": undefined,
@@ -166,11 +166,11 @@ test('uses generated sidebar when no sidebar is provided', async () => {
 		        "href": "/reference/frontmatter/",
 		        "isCurrent": false,
 		        "label": "Frontmatter Reference",
-		        "type": "link",
+		        "type": "autolink",
 		      },
 		    ],
 		    "label": "reference",
-		    "type": "group",
+		    "type": "autogroup",
 		  },
 		]
 	`);
@@ -192,7 +192,7 @@ test('uses provided sidebar if any', async () => {
 				},
 				{
 					label: 'Guides',
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 				'reference/frontmatter',
 			],
@@ -230,7 +230,7 @@ test('uses provided sidebar if any', async () => {
 		        "href": "/guides/authoring-content/",
 		        "isCurrent": false,
 		        "label": "Authoring Markdown",
-		        "type": "link",
+		        "type": "autolink",
 		      },
 		      {
 		        "attrs": {},
@@ -238,7 +238,7 @@ test('uses provided sidebar if any', async () => {
 		        "href": "/guides/project-structure/",
 		        "isCurrent": false,
 		        "label": "Project Structure",
-		        "type": "link",
+		        "type": "autolink",
 		      },
 		    ],
 		    "label": "Guides",

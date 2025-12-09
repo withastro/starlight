@@ -34,17 +34,21 @@ export default defineVitestConfig({
 		{
 			label: 'Reference',
 			badge: 'Experimental',
-			autogenerate: { directory: 'reference' },
+			items: [{ autogenerate: { directory: 'reference' } }],
 		},
 		// A group linking to all pages in the `api/v1` directory.
 		{
 			label: 'API v1',
-			autogenerate: { directory: '/api/v1/', attrs: { class: 'current', 'data-version': '1' } },
+			items: [
+				{
+					autogenerate: { directory: '/api/v1/', attrs: { class: 'current', 'data-version': '1' } },
+				},
+			],
 		},
 		// A group linking to all pages in the `Deprecated API/` directory.
 		{
 			label: 'API (deprecated)',
-			autogenerate: { directory: '/Deprecated API/' },
+			items: [{ autogenerate: { directory: '/Deprecated API/' } }],
 		},
 	],
 });

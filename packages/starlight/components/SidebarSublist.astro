@@ -17,7 +17,7 @@ const { sublist, nested } = Astro.props;
 	{
 		sublist.map((entry) => (
 			<li>
-				{entry.type === 'link' ? (
+				{entry.type === 'link' || entry.type === 'autolink' ? (
 					<a
 						href={entry.href}
 						aria-current={entry.isCurrent && 'page'}

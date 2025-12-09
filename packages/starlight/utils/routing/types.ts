@@ -14,8 +14,7 @@ export interface LocaleData {
 	locale: string | undefined;
 }
 
-export interface SidebarLink {
-	type: 'link';
+interface BaseSidebarLink {
 	label: string;
 	href: string;
 	isCurrent: boolean;
@@ -23,14 +22,31 @@ export interface SidebarLink {
 	attrs: LinkHTMLAttributes;
 }
 
-export interface SidebarGroup {
-	type: 'group';
+export interface SidebarManualLink extends BaseSidebarLink {
+	type: 'link';
+}
+
+export interface SidebarAutoLink extends BaseSidebarLink {
+	type: 'autolink';
+}
+
+interface BaseSidebarGroup {
 	label: string;
 	entries: (SidebarLink | SidebarGroup)[];
 	collapsed: boolean;
 	badge: Badge | undefined;
 }
 
+export interface SidebarManualGroup extends BaseSidebarGroup {
+	type: 'group';
+}
+
+export interface SidebarAutoGroup extends BaseSidebarGroup {
+	type: 'autogroup';
+}
+
+export type SidebarLink = SidebarManualLink | SidebarAutoLink;
+export type SidebarGroup = SidebarManualGroup | SidebarAutoGroup;
 export type SidebarEntry = SidebarLink | SidebarGroup;
 
 export interface PaginationLinks {

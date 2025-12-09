@@ -27,7 +27,7 @@ describe('getSidebar', () => {
 			    "href": "/en/",
 			    "isCurrent": true,
 			    "label": "Home page",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -35,7 +35,7 @@ describe('getSidebar', () => {
 			    "href": "/en/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "badge": undefined,
@@ -47,11 +47,11 @@ describe('getSidebar', () => {
 			        "href": "/en/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "guides",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			]
 		`);
@@ -66,7 +66,7 @@ describe('getSidebar', () => {
 			    "href": "/fr/",
 			    "isCurrent": true,
 			    "label": "Accueil",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -74,7 +74,7 @@ describe('getSidebar', () => {
 			    "href": "/fr/404/",
 			    "isCurrent": false,
 			    "label": "Not found",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "badge": undefined,
@@ -86,11 +86,11 @@ describe('getSidebar', () => {
 			        "href": "/fr/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "guides",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			  {
 			    "badge": undefined,
@@ -102,7 +102,7 @@ describe('getSidebar', () => {
 			        "href": "/fr/référence/bénéfice/",
 			        "isCurrent": false,
 			        "label": "Bénéfice",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			      {
 			        "attrs": {},
@@ -110,11 +110,11 @@ describe('getSidebar', () => {
 			        "href": "/fr/référence/bricolage/",
 			        "isCurrent": false,
 			        "label": "Bricolage",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "référence",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			  {
 			    "badge": undefined,
@@ -126,7 +126,7 @@ describe('getSidebar', () => {
 			        "href": "/fr/route/décoder/",
 			        "isCurrent": false,
 			        "label": "Décoder",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			      {
 			        "attrs": {},
@@ -134,11 +134,11 @@ describe('getSidebar', () => {
 			        "href": "/fr/route/distribuer/",
 			        "isCurrent": false,
 			        "label": "Distribuer",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "route",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			]
 		`);

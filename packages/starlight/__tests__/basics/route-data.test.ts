@@ -44,7 +44,7 @@ test('adds data to route shape', () => {
 		    "href": "/environmental-impact/",
 		    "isCurrent": false,
 		    "label": "Explicit update date",
-		    "type": "link",
+		    "type": "autolink",
 		  },
 		  "prev": undefined,
 		}

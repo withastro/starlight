@@ -26,7 +26,7 @@ describe('getSidebar', () => {
 			        "href": "/guides/project-structure/",
 			        "isCurrent": false,
 			        "label": "Project Structure",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			      {
 			        "attrs": {},
@@ -34,11 +34,11 @@ describe('getSidebar', () => {
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "guides",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			  {
 			    "attrs": {},
@@ -46,7 +46,7 @@ describe('getSidebar', () => {
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -54,7 +54,7 @@ describe('getSidebar', () => {
 			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home Page",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			]
 		`);

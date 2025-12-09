@@ -109,7 +109,7 @@ describe('getSidebar', () => {
 			        "href": "/reference/configuration/",
 			        "isCurrent": false,
 			        "label": "Config Reference",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			      {
 			        "badge": undefined,
@@ -121,7 +121,7 @@ describe('getSidebar', () => {
 			            "href": "/reference/frontmatter/",
 			            "isCurrent": false,
 			            "label": "Frontmatter Reference",
-			            "type": "link",
+			            "type": "autolink",
 			          },
 			          {
 			            "attrs": {},
@@ -129,11 +129,11 @@ describe('getSidebar', () => {
 			            "href": "/reference/frontmatter/foo/",
 			            "isCurrent": false,
 			            "label": "Foo",
-			            "type": "link",
+			            "type": "autolink",
 			          },
 			        ],
 			        "label": "frontmatter",
-			        "type": "group",
+			        "type": "autogroup",
 			      },
 			    ],
 			    "label": "Reference",
@@ -152,7 +152,7 @@ describe('getSidebar', () => {
 			        "href": "/api/v1/users/",
 			        "isCurrent": false,
 			        "label": "Users API",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "API v1",
@@ -168,7 +168,7 @@ describe('getSidebar', () => {
 			        "href": "/deprecated-api/users/",
 			        "isCurrent": false,
 			        "label": "Deprecated Users API",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "API (deprecated)",
@@ -186,8 +186,9 @@ describe('getSidebar', () => {
 		function includesOnlyLinksWithTrailingSlash(entry: SidebarEntry | undefined): boolean {
 			return (
 				entry !== undefined &&
-				((entry.type === 'link' && entry.href.endsWith('/')) ||
-					(entry.type === 'group' && entry.entries.every(includesOnlyLinksWithTrailingSlash)))
+				(((entry.type === 'link' || entry.type === 'autolink') && entry.href.endsWith('/')) ||
+					((entry.type === 'group' || entry.type === 'autogroup') &&
+						entry.entries.every(includesOnlyLinksWithTrailingSlash)))
 			);
 		}
 

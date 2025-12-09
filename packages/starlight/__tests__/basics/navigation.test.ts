@@ -24,7 +24,7 @@ describe('getSidebar', () => {
 			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home Page",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -32,7 +32,7 @@ describe('getSidebar', () => {
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "badge": undefined,
@@ -44,11 +44,11 @@ describe('getSidebar', () => {
 			        "href": "/getting-started/intro/",
 			        "isCurrent": false,
 			        "label": "Introduction",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "Getting Started",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			  {
 			    "badge": undefined,
@@ -60,7 +60,7 @@ describe('getSidebar', () => {
 			        "href": "/guides/authoring-content/",
 			        "isCurrent": false,
 			        "label": "Authoring Markdown",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			      {
 			        "attrs": {},
@@ -68,11 +68,11 @@ describe('getSidebar', () => {
 			        "href": "/guides/project-structure/",
 			        "isCurrent": false,
 			        "label": "Project Structure",
-			        "type": "link",
+			        "type": "autolink",
 			      },
 			    ],
 			    "label": "guides",
-			    "type": "group",
+			    "type": "autogroup",
 			  },
 			]
 		`);
@@ -82,10 +82,11 @@ describe('getSidebar', () => {
 		'marks current path with isCurrent: %s',
 		(currentPath) => {
 			const items = flattenSidebar(getSidebar(currentPath, undefined));
-			const currentItems = items.filter((item) => item.type === 'link' && item.isCurrent);
+			const currentItems = items.filter((item) => item.type === 'autolink' && item.isCurrent);
 			expect(currentItems).toHaveLength(1);
 			const currentItem = currentItems[0];
-			if (currentItem?.type !== 'link') throw new Error('Expected current item to be link');
+			if (currentItem?.type !== 'link' && currentItem?.type !== 'autolink')
+				throw new Error('Expected current item to be link');
 			expect(currentItem.href).toBe(currentPath);
 		}
 	);
@@ -93,7 +94,7 @@ describe('getSidebar', () => {
 	test('ignore trailing slashes when marking current path with isCurrent', () => {
 		const pathWithTrailingSlash = '/environmental-impact/';
 		const items = flattenSidebar(getSidebar(pathWithTrailingSlash, undefined));
-		const currentItems = items.filter((item) => item.type === 'link' && item.isCurrent);
+		const currentItems = items.filter((item) => item.type === 'autolink' && item.isCurrent);
 		expect(currentItems).toMatchInlineSnapshot(`
 			[
 			  {
@@ -102,7 +103,7 @@ describe('getSidebar', () => {
 			    "href": "/environmental-impact/",
 			    "isCurrent": true,
 			    "label": "Eco-friendly docs",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			]
 		`);
@@ -110,16 +111,21 @@ describe('getSidebar', () => {
 
 	test('nests files in subdirectory in group when autogenerating', () => {
 		const sidebar = getSidebar('/', undefined);
-		expect(sidebar.every((item) => item.type === 'group' || !item.href.startsWith('/guides/')));
-		const guides = sidebar.find((item) => item.type === 'group' && item.label === 'guides');
-		expect(guides?.type).toBe('group');
+		expect(
+			sidebar.every(
+				(item) =>
+					item.type === 'group' || item.type === 'autogroup' || !item.href.startsWith('/guides/')
+			)
+		);
+		const guides = sidebar.find((item) => item.type === 'autogroup' && item.label === 'guides');
+		expect(guides?.type).toBe('autogroup');
 		// @ts-expect-error — TypeScript doesn’t know we know we’re in a group.
 		expect(guides.entries).toHaveLength(2);
 	});
 
 	test('uses page title as label when autogenerating', () => {
 		const sidebar = getSidebar('/', undefined);
-		const homeLink = sidebar.find((item) => item.type === 'link' && item.href === '/');
+		const homeLink = sidebar.find((item) => item.type === 'autolink' && item.href === '/');
 		expect(homeLink?.label).toBe('Home Page');
 	});
 
@@ -147,9 +153,9 @@ describe('flattenSidebar', () => {
 		const sidebar = getSidebar('/', undefined);
 		const flattened = flattenSidebar(sidebar);
 		// Sidebar should include some nested group items.
-		expect(sidebar.some((item) => item.type === 'group')).toBe(true);
+		expect(sidebar.some((item) => item.type === 'autogroup')).toBe(true);
 		// Flattened sidebar should only include link items.
-		expect(flattened.every((item) => item.type === 'link')).toBe(true);
+		expect(flattened.every((item) => item.type === 'link' || item.type === 'autolink')).toBe(true);
 
 		expect(flattened).toMatchInlineSnapshot(`
 			[
@@ -159,7 +165,7 @@ describe('flattenSidebar', () => {
 			    "href": "/",
 			    "isCurrent": true,
 			    "label": "Home Page",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -167,7 +173,7 @@ describe('flattenSidebar', () => {
 			    "href": "/environmental-impact/",
 			    "isCurrent": false,
 			    "label": "Eco-friendly docs",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -175,7 +181,7 @@ describe('flattenSidebar', () => {
 			    "href": "/getting-started/intro/",
 			    "isCurrent": false,
 			    "label": "Introduction",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -183,7 +189,7 @@ describe('flattenSidebar', () => {
 			    "href": "/guides/authoring-content/",
 			    "isCurrent": false,
 			    "label": "Authoring Markdown",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  {
 			    "attrs": {},
@@ -191,7 +197,7 @@ describe('flattenSidebar', () => {
 			    "href": "/guides/project-structure/",
 			    "isCurrent": false,
 			    "label": "Project Structure",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			]
 		`);
@@ -210,7 +216,7 @@ describe('getPrevNextLinks', () => {
 			    "href": "/getting-started/intro/",
 			    "isCurrent": false,
 			    "label": "Introduction",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			  "prev": {
 			    "attrs": {},
@@ -218,7 +224,7 @@ describe('getPrevNextLinks', () => {
 			    "href": "/",
 			    "isCurrent": false,
 			    "label": "Home Page",
-			    "type": "link",
+			    "type": "autolink",
 			  },
 			}
 		`);
