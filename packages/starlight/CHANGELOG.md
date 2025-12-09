@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.37.1
+
+### Patch Changes
+
+- [#3603](https://github.com/withastro/starlight/pull/3603) [`30f6e7f`](https://github.com/withastro/starlight/commit/30f6e7fa83ca0a248b1b59d616f55a6f933334a2) Thanks [@delucis](https://github.com/delucis)! - Fixes support for providing an absolute URL to Starlight’s `favicon` configuration option
+
 ## 0.37.0
 
 ### Minor Changes
