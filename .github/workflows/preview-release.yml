@@ -23,6 +23,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
+          # While releasing with changesets works with a shallow clone, this is not the case of
+          # running `changeset status` which does not extend a shallow clone.
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Setup PNPM
