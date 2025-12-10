@@ -65,6 +65,7 @@ test('parses bare minimum valid config successfully', () => {
 		  "locales": undefined,
 		  "markdown": {
 		    "headingLinks": true,
+		    "processedDirs": [],
 		  },
 		  "pagefind": {
 		    "ranking": {
@@ -293,4 +294,22 @@ test('errors if a route middleware path will conflict with Astro middleware', ()
 			- More about Astro middleware: https://docs.astro.build/en/guides/middleware/"
 		`
 	);
+});
+
+test('errors if an invalid customCss file path is provided', () => {
+	expect(() =>
+		parseStarlightConfigWithFriendlyErrors({
+			title: 'Test',
+			customCss: ['./public/styles.css', '/public/other-styles.css'],
+		})
+	).toThrowErrorMatchingInlineSnapshot(`
+		"[AstroUserError]:
+			Invalid config passed to starlight integration
+		Hint:
+			These paths in your Starlight \`customCss\` config are invalid: \`"./public/styles.css"\`, \`"/public/other-styles.css"\`
+			
+			CSS files specified in \`customCss\` should be in the \`src/\` directory, not the \`public/\` directory.
+			
+			You should move these CSS files into the \`src/\` directory and update the path in \`customCss\` to match."
+	`);
 });

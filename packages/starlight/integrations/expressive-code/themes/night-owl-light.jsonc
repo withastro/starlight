@@ -839,7 +839,7 @@
 			},
 		},
 		{
-			"name": "Backtics(``) in Template Strings",
+			"name": "Backticks(``) in Template Strings",
 			"scope": "string.template punctuation.definition.string",
 			"settings": {
 				"foreground": "#403f53",
@@ -876,14 +876,14 @@
 			},
 		},
 		{
-			"name": "CoffeScript Variable Assignment",
+			"name": "CoffeeScript Variable Assignment",
 			"scope": "variable.assignment.coffee",
 			"settings": {
 				"foreground": "#31e1eb",
 			},
 		},
 		{
-			"name": "CoffeScript Parameter Function",
+			"name": "CoffeeScript Parameter Function",
 			"scope": "variable.parameter.function.coffee",
 			"settings": {
 				"foreground": "#403f53",
@@ -1680,7 +1680,7 @@
 				"keyword.operator.type",
 				"keyword.operator",
 				"keyword",
-				"punctuation.definintion.string",
+				"punctuation.definition.string",
 				"punctuation",
 				"variable.other.readwrite.js",
 				"storage.type",

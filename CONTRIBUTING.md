@@ -38,7 +38,7 @@ This repo is a “monorepo,” meaning it contains several projects in one. It c
 
 ### Setting up a development environment
 
-You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) or [Gitpod](#developing-using-gitpod) to get started quickly.
+You can [develop locally](#developing-locally) or use an online coding development environment like [GitHub Codespaces](#developing-using-github-codespaces) to get started quickly.
 
 #### Developing locally
 
@@ -64,23 +64,24 @@ You can [develop locally](#developing-locally) or use an online coding developme
    pnpm i
    ```
 
-#### Developing using Gitpod
-
-**Prerequisites:** Developing Starlight using Gitpod requires a free [Gitpod account](https://gitpod.io).
-
-1. **Open the Gitpod URL** [https://gitpod.io/#https://github.com/withastro/starlight](https://gitpod.io/#https://github.com/withastro/starlight). You can alternatively install a [Gitpod browser extension](https://www.gitpod.io/docs/configure/user-settings/browser-extension) which will add a "Gitpod" button when viewing [Starlight's repo on GitHub](https://github.com/withastro/starlight).
-
-2. **Install dependencies** with `pnpm`:
+5. **Generate TypeScript types** for all Astro modules:
 
    ```sh
-   pnpm i
+   cd docs
+   pnpm astro sync
    ```
 
 #### Developing using GitHub Codespaces
 
 1. **Create a new codespace** via https://codespaces.new/withastro/starlight
 
-2. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
+2. **Generate TypeScript types** for all Astro modules:
+
+   ```sh
+   pnpm astro sync
+   ```
+
+3. If running the docs site, pass the `--host` flag to avoid “502 Bad Gateway” errors:
 
    ```sh
    cd docs
@@ -354,3 +355,9 @@ Share themes for Starlight you built by adding them to our [themes](https://star
    - The `description` attribute should briefly describe your theme’s aesthetic, inspiration, or key features.
    - The `href` attribute must be the URL of your theme’s website demonstrating what the theme looks like.
    - The `previews` attribute must be an object listing the filenames of the screenshots you added in step 3.
+
+## Preview releases
+
+Maintainers can create preview releases for any pull requests containing pending changesets by adding the `pr-preview` label to such PRs. When doing so, a GitHub Actions workflow will be triggered to create a preview release for all necessary packages and a comment will be added to the PR with instructions on how to install the preview packages.
+
+To update a preview release after making additional changes to the PR, add the `pr-preview` label again to re-trigger the workflow.

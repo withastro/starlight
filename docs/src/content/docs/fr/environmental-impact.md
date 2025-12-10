@@ -59,7 +59,7 @@ La façon dont une page web est construite peut avoir un impact sur la puissance
 En utilisant un minimum de JavaScript, Starlight réduit la puissance de traitement dont le téléphone, la tablette ou l'ordinateur d'un utilisateur a besoin pour charger et afficher les pages.
 
 Soyez vigilant lorsque vous ajoutez des fonctionnalités telles que des scripts de suivi analytique ou des contenus à forte teneur en JavaScript, comme des vidéos intégrées, car ils peuvent augmenter la consommation d'énergie de la page.
-Si vous avez besoin d'analyses, envisagez de choisir une option légère comme [Cabin][cabin], [Fathom][fathom], ou [Plausible][plausible].
+Si vous avez besoin de mesures d'audience, envisagez de choisir une option légère comme [Cabin][cabin], [Fathom][fathom], ou [Plausible][plausible].
 Les vidéos intégrées comme celles de YouTube et de Vimeo peuvent être améliorées en attendant de [charger la vidéo lors de l'interaction avec l'utilisateur][lazy-video].
 Des paquets comme [`astro-embed`][embed] peuvent aider pour les services communs.
 

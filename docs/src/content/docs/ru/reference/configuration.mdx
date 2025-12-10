@@ -382,8 +382,8 @@ starlight({
 
 ### `markdown`
 
-**тип:** `{ headingLinks?: boolean }`  
-**по умолчанию:** `{ headingLinks: true }`
+**тип:** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**по умолчанию:** `{ headingLinks: true, processedDirs: [] }`
 
 Настройте обработку Markdown в Starlight.
 
@@ -399,6 +399,28 @@ starlight({
 	markdown: {
 		// Отключаем кликабельные якорные ссылки заголовков в Starlight.
 		headingLinks: false,
+	},
+}),
+```
+
+#### `processedDirs`
+
+**тип:** `string[]`  
+**по умолчанию:** `[]`
+
+Определяет дополнительные директории, в которых файлы должны обрабатываться конвейером Markdown от Starlight.
+По умолчанию Starlight обрабатывает только Markdown и MDX-файлы, загруженные через [`docsLoader()`](/ru/reference/configuration/#docsloader).
+Поддерживаются локальные директории относительно корня проекта, например `'./src/data/comments/'`.
+
+Обработка Starlight включает [кликабельные якорные ссылки в заголовках](#headinglinks), [синтаксис директивы `<aside>`](/ru/guides/authoring-content/#вставки), и поддержку RTL для блоков кода.
+Эта опция полезна, если вы выводите контент из собственной коллекции в [кастомной странице](/ru/guides/pages/#пользовательские-страницы) с помощью компонента `<StarlightPage>` и хотите, чтобы к этому контенту применялась стандартная обработка Markdown от Starlight.
+
+```js
+starlight({
+	markdown: {
+		// Обработка Markdown-файлов из коллекции `reviews`, расположенной в
+    // директории src/data/reviews/
+		processedDirs: ['./src/data/reviews/'],
 	},
 }),
 ```

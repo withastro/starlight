@@ -1,5 +1,11 @@
 # @astrojs/starlight-tailwind
 
+## 4.0.2
+
+### Patch Changes
+
+- [#3500](https://github.com/withastro/starlight/pull/3500) [`7700456`](https://github.com/withastro/starlight/commit/770045663c8ca3cc44983dd0d444955eba441243) Thanks [@delucis](https://github.com/delucis)! - This is the first release published with OIDC trusted publishing.
+
 ## 4.0.1
 
 ### Patch Changes

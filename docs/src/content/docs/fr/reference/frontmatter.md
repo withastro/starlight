@@ -39,7 +39,7 @@ Remplace le slug de la page. Consultez [« Définition d’identifiants personna
 
 **Type :** `string | boolean`
 
-Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Modifier cette page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
+Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien « Modifier cette page » pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
@@ -68,7 +68,7 @@ Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la
 ```md
 ---
 # src/content/docs/exemple.md
-title: Pagee avec seulement des H2s dans la table des matières
+title: Page avec seulement des H2 dans la table des matières
 tableOfContents:
   minHeadingLevel: 2
   maxHeadingLevel: 2
@@ -211,7 +211,7 @@ lastUpdated: 2022-08-09
 
 **Type :** `boolean | string | { link?: string; label?: string }`
 
-Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si un string est spécifié, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
+Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si une chaîne de caractères est spécifiée, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
 
 ```md
 ---
@@ -225,7 +225,7 @@ prev: false
 ---
 # src/content/docs/exemple.md
 # Remplacer le texte du lien de la page
-prev: Poursuivre the tutorial
+prev: Poursuivre le tutoriel
 ---
 ```
 
@@ -314,9 +314,9 @@ Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affi
 ```md
 ---
 # src/content/docs/exemple.md
-title: About this project
+title: À propos de ce projet
 sidebar:
-  label: About
+  label: À propos
 ---
 ```
 
@@ -424,7 +424,7 @@ Consultez [« Définir un schéma de collection de contenus »](https://docs.ast
 **Par défaut :** `z.object({})`
 
 Étendez le schéma de Starlight avec des champs supplémentaires en définissant `extend` dans les options de `docsSchema()`.
-La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content-collections/#defining-datatypes-with-zod).
+La valeur doit être un [schéma Zod](https://docs.astro.build/fr/guides/content-collections/#définition-des-types-de-données-avec-zod).
 
 Dans l'exemple suivant, nous définissons un type plus strict pour `description` pour le rendre obligatoire et ajouter un nouveau champ `category` facultatif :
 
@@ -449,7 +449,7 @@ export const collections = {
 };
 ```
 
-Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-in-content-collections), utilisez une fonction qui retourne votre extension de schéma :
+Pour tirer parti de l'[utilitaire `image()` d'Astro](https://docs.astro.build/fr/guides/images/#images-dans-les-collections-de-contenu), utilisez une fonction qui retourne votre extension de schéma :
 
 ```ts {10-15}
 // src/content.config.ts

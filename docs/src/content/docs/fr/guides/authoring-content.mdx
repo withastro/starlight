@@ -3,9 +3,9 @@ title: Création de contenu en Markdown
 description: Un aperçu de la syntaxe Markdown prise en charge par Starlight.
 ---
 
-Starlight prend en charge l'ensemble de la syntaxe [Markdown](https://daringfireball.net/projects/markdown/) dans les fichiers `.md` ainsi que la syntaxe frontale [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) pour définir des métadonnées telles qu'un titre et une description.
+Starlight prend en charge l'ensemble de la syntaxe [Markdown](https://daringfireball.net/projects/markdown/) dans les fichiers `.md` ainsi que le frontmatter en [YAML](https://dev.to/paulasantamaria/introduction-to-yaml-125f) pour définir des métadonnées telles qu'un titre et une description.
 
-Veillez à consulter les [MDX docs](https://mdxjs.com/docs/what-is-mdx/#markdown) ou les [Markdoc docs](https://markdoc.dev/docs/syntax) si vous utilisez ces formats de fichiers, car la prise en charge et l'utilisation de Markdown peuvent varier.
+Veillez à consulter la [documentation de MDX](https://mdxjs.com/docs/what-is-mdx/#markdown) ou la [documentation de Markdoc](https://markdoc.dev/docs/syntax) si vous utilisez ces formats de fichiers, car la prise en charge et l'utilisation de Markdown peuvent varier.
 
 ## Frontmatter
 
@@ -23,12 +23,12 @@ Le contenu de la page suit le second `---`.
 Chaque page doit inclure au moins un titre (`title`).
 Consultez la [référence du frontmatter](/fr/reference/frontmatter/) pour connaître tous les champs disponibles et comment ajouter des champs personnalisés.
 
-## Styles en ligne
+## Styles incorporés au texte
 
-Le texte peut être **gras**, _italique_, ou ~~barré~~.
+Le texte peut être en **gras**, en _italique_, ou ~~barré~~.
 
 ```md
-Le texte peut être **gras**, _italique_, ou ~~barré~~.
+Le texte peut être en **gras**, en _italique_, ou ~~barré~~.
 ```
 
 Vous pouvez [faire un lien vers une autre page](/fr/getting-started/).
@@ -37,25 +37,25 @@ Vous pouvez [faire un lien vers une autre page](/fr/getting-started/).
 Vous pouvez [faire un lien vers une autre page](/fr/getting-started/).
 ```
 
-Vous pouvez mettre en évidence le `code en ligne` à l'aide d'un astérisque.
+Vous pouvez mettre en évidence le `code incorporé au texte` en utilisant des accents graves.
 
 ```md
-Vous pouvez mettre en évidence le `code en ligne` à l'aide de barres de défilement.
+Vous pouvez mettre en évidence le `code incorporé au texte` en utilisant des accents graves.
 ```
 
 ## Images
 
 Les images dans Starlight utilisent [la prise en charge intégrée des ressources optimisées d'Astro](https://docs.astro.build/fr/guides/images/).
 
-Markdown et MDX supportent la syntaxe Markdown pour l'affichage des images qui inclut le texte alt pour les lecteurs d'écran et les technologies d'assistance.
+Markdown et MDX prennent en charge la syntaxe Markdown pour l'affichage d'images qui incluent du texte alternatif pour les lecteurs d'écran et les technologies d'assistance.
 
-![Une illustration de planètes et d'étoiles avec le mot "astro"](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+![Une illustration de planètes et d'étoiles avec le mot « astro »](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
 
 ```md
-![Une illustration de planètes et d'étoiles avec le mot "astro"](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
+![Une illustration de planètes et d'étoiles avec le mot « astro »](https://raw.githubusercontent.com/withastro/docs/main/public/default-og-image.png)
 ```
 
-Les chemins d'accès relatifs aux images sont également supportés pour les images stockées localement dans votre projet.
+Les chemins d'accès relatifs aux images sont également pris en charge pour les images stockées localement dans votre projet.
 
 ```md
 // src/content/docs/page-1.md
@@ -65,11 +65,11 @@ Les chemins d'accès relatifs aux images sont également supportés pour les ima
 
 ## En-têtes
 
-Vous pouvez structurer le contenu à l'aide d'un titre. En Markdown, les titres sont indiqués par un nombre de `#` en début de ligne.
+Vous pouvez structurer le contenu à l'aide d'en-têtes. En Markdown, les en-têtes sont indiqués par un certain nombre de `#` en début de ligne.
 
 ### Comment structurer le contenu d'une page dans Starlight
 
-Starlight est configuré pour utiliser automatiquement le titre de votre page comme titre de premier niveau et inclura un titre "Aperçu" en haut de la table des matières de chaque page. Nous vous recommandons de commencer chaque page par un paragraphe de texte normal et d'utiliser des titres de page à partir de `<h2>` :
+Starlight est configuré pour utiliser automatiquement le titre de votre page comme en-tête de premier niveau et inclura un en-tête « Aperçu » en haut de la table des matières de chaque page. Nous vous recommandons de commencer chaque page par un paragraphe de texte normal et d'utiliser des en-têtes de page à partir de `<h2>` :
 
 ```md
 ---
@@ -79,14 +79,14 @@ description: Comment utiliser Markdown dans Starlight
 
 Cette page décrit comment utiliser Markdown dans Starlight.
 
-## Styles en ligne
+## Styles incorporés au texte
 
-## Titres
+## En-têtes
 ```
 
-### Liens d'ancrage automatiques pour les titres
+### Liens d'ancrage automatiques pour les en-têtes
 
-L'utilisation de titres en Markdown vous donnera automatiquement des liens d'ancrage afin que vous puissiez accéder directement à certaines sections de votre page :
+L'utilisation d'en-têtes en Markdown vous donnera automatiquement des liens d'ancrage afin que vous puissiez accéder directement à certaines sections de votre page :
 
 ```md
 ---
@@ -103,9 +103,9 @@ Je peux faire un lien vers [ma conclusion](#conclusion) plus bas sur la même pa
 `https://my-site.com/page1/#introduction` renvoie directement à mon Introduction.
 ```
 
-Les titres de niveau 2 (`<h2>`) et de niveau 3 (`<h3>`) apparaissent automatiquement dans la table des matières de la page.
+Les en-têtes de niveau 2 (`<h2>`) et de niveau 3 (`<h3>`) apparaissent automatiquement dans la table des matières de la page.
 
-Pour en apprendre davantage sur la façon dont Astro traite les attributs `id` des titres de section, consultez la [documentation d'Astro](https://docs.astro.build/fr/guides/markdown-content/#identifiants-den-t%C3%AAte).
+Pour en apprendre davantage sur la façon dont Astro traite les attributs `id` des en-têtes de section, consultez la [documentation d'Astro](https://docs.astro.build/fr/guides/markdown-content/#id-des-titres).
 
 ## Encarts
 
@@ -113,7 +113,7 @@ Les encarts (également connus sous le nom de « admonitions » ou « asides » 
 
 Starlight fournit une syntaxe Markdown personnalisée pour le rendu des encarts. Les blocs d'encarts sont indiqués en utilisant une paire de triples points `:::` pour envelopper votre contenu, et peuvent être de type `note`, `tip`, `caution` ou `danger`.
 
-Vous pouvez imbriquer n'importe quel autre type de contenu Markdown à l'intérieur d'un aparté, mais les aparté sont mieux adaptés à des morceaux de contenu courts et concis.
+Vous pouvez imbriquer n'importe quel autre type de contenu Markdown à l'intérieur d'un encart, mais les encarts sont mieux adaptés à des morceaux de contenu courts et concis.
 
 ### Encart de type note
 
@@ -179,7 +179,7 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 - Navigation claire
 - Thème de couleurs configurable par l'utilisateur
-- [Support i18n](/fr/guides/i18n/)
+- [Prise en charge i18n](/fr/guides/i18n/)
 
 :::
 
@@ -193,21 +193,21 @@ Vos utilisateurs peuvent être plus productifs et trouver votre produit plus fac
 
 - Navigation claire
 - Thème de couleurs configurable par l'utilisateur
-- [Support i18n](/fr/guides/i18n/)
+- [Prise en charge i18n](/fr/guides/i18n/)
 
 :::
 ```
 
-## Blockquotes
+## Blocs de citation
 
-> Il s'agit d'une citation en bloc, couramment utilisée pour citer une autre personne ou un document.
+> Il s'agit d'un bloc de citation, couramment utilisé pour citer une autre personne ou un document.
 >
-> Les guillemets sont indiqués par un `>` au début de chaque ligne.
+> Les blocs de citation sont indiqués par un `>` au début de chaque ligne.
 
 ```md
-> Il s'agit d'une citation en bloc, couramment utilisée pour citer une autre personne ou un document.
+> Il s'agit d'un bloc de citation, couramment utilisé pour citer une autre personne ou un document.
 >
-> Les guillemets sont indiqués par un `>` au début de chaque ligne.
+> Les blocs de citation sont indiqués par un `>` au début de chaque ligne.
 ```
 
 ## Blocs de code
@@ -235,7 +235,7 @@ var fun = function lang(l) {
 ### Fonctionnalités d'Expressive Code
 
 Starlight utilise [Expressive Code](https://expressive-code.com/) pour étendre les possibilités de formatage des blocs de code.
-Les plugins Expressive Code de marqueurs de texte et de cadres de fenêtre sont activés par défaut.
+Les modules d'extension Expressive Code de marqueurs de texte et de cadres de fenêtre sont activés par défaut.
 L'affichage des blocs de code peut être configuré à l'aide de [l'option de configuration `expressiveCode`](/fr/reference/configuration/#expressivecode) de Starlight.
 
 #### Marqueurs de texte
@@ -248,7 +248,7 @@ Du texte et des lignes entières peuvent être marqués à l'aide du marqueur pa
 
 Expressive Code fournit plusieurs options pour personnaliser l'apparence visuelle de vos exemples de code.
 Beaucoup d'entre elles peuvent être combinées pour obtenir des exemples de code très illustratifs.
-Merci d'explorer la [documentation d'Expressive Code](https://expressive-code.com/key-features/text-markers/#configuration) pour obtenir une liste complète des options disponibles.
+Veuillez explorer la [documentation d'Expressive Code](https://expressive-code.com/key-features/text-markers/#configuration) pour obtenir une liste complète des options disponibles.
 Certaines des options les plus courantes sont présentées ci-dessous :
 
 - [Marquer des lignes entières et des plages de lignes à l'aide du marqueur `{ }`](https://expressive-code.com/key-features/text-markers/#marking-full-lines--line-ranges) :
@@ -542,17 +542,29 @@ La [constellation d'Andromède](<https://fr.wikipedia.org/wiki/Androm%C3%A8de_(c
 </details>
 ```
 
+## Notes de bas de page
+
+Les [notes de bas de page](https://www.markdownguide.org/extended-syntax/#footnotes) sont utiles pour ajouter de brèves références ou des précisions sans interrompre la lecture. Elles se présentent sous forme de liens numérotés en exposant qui permettent d'accéder au texte référencé, regroupé en bas de page.
+
+Définissez une note de bas de page à l'aide de crochets contenant un accent circonflexe et une référence numérotée :
+
+```md
+Voici une note de bas de page[^1] avec un texte complémentaire après.
+
+[^1]: Ma référence.
+```
+
 ## Autres fonctionnalités courantes de Markdown
 
 Starlight prend en charge toutes les autres syntaxes de rédaction Markdown, telles que les listes et les tableaux. Voir [Markdown Cheat Sheet from The Markdown Guide](https://www.markdownguide.org/cheat-sheet/) pour un aperçu rapide de tous les éléments de la syntaxe Markdown.
 
 ## Configuration avancée de Markdown et MDX
 
-Starlight utilise le moteur de rendu Markdown et MDX d'Astro basé sur remark et rehype. Vous pouvez ajouter la prise en charge de syntaxe et comportement personnalisés en ajoutant `remarkPlugins` ou `rehypePlugins` dans votre fichier de configuration Astro. Pour en savoir plus, consultez [« Plugins Markdown »](https://docs.astro.build/fr/guides/markdown-content/#plugins-markdown) dans la documentation d'Astro.
+Starlight utilise le moteur de rendu Markdown et MDX d'Astro basé sur remark et rehype. Vous pouvez ajouter la prise en charge de syntaxe et comportement personnalisés en ajoutant `remarkPlugins` ou `rehypePlugins` dans votre fichier de configuration Astro. Pour en savoir plus, consultez [« Modules d’extension Markdown »](https://docs.astro.build/fr/guides/markdown-content/#modules-dextension-markdown) dans la documentation d'Astro.
 
 ## Markdoc
 
-Starlight supporte la création de contenu en Markdoc en utilisant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) et le préréglage Markdoc de Starlight.
+Starlight prend en charge la création de contenu en Markdoc en utilisant l'intégration expérimentale [Astro Markdoc](https://docs.astro.build/fr/guides/integrations-guide/markdoc/) et le préréglage Markdoc de Starlight.
 
 ### Créer un nouveau projet avec Markdoc
 

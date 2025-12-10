@@ -1,0 +1,102 @@
+---
+title: テーマ
+description: Starlightのコミュニティテーマでドキュメントをスタイルできます
+tableOfContents: false
+sidebar:
+  order: 2
+head:
+  - tag: style
+    content: |
+      body { --sl-content-width: 66.75rem; }
+---
+
+import ThemeGrid from '~/components/theme-grid.astro';
+
+テーマはStarlightのプラグインで、[カスタムCSS](/ja/guides/css-and-tailwind/)、[コンポーネントのオーバーライド](/ja/guides/overriding-components/)などによってサイトの見た目を変更できるほか、新しい機能を追加できます。
+
+## コミュニティテーマ
+
+コミュニティが作成したテーマをインストールすると、サイトの見た目や使い心地を手早くカスタマイズできます。
+
+<ThemeGrid
+	labels={{
+		/** テーマ切り替えのアクセシブルラベル。*/
+		legend: 'プレビュー',
+		/** ダークカラースキームのアクセシブルラベル。*/
+		dark: 'ダーク',
+		/** ライトカラースキームのアクセシブルラベル。*/
+		light: 'ライト',
+	}}
+	themes={[
+		{
+			title: 'Starlight Rapide',
+			description:
+				'Visual Studio CodeのVitesseテーマに着想を得たStarlightテーマです。',
+			href: 'https://starlight-theme-rapide.vercel.app/',
+			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
+		},
+		{
+			title: 'Starlight Obsidian Theme',
+			description:
+				'Obsidian Publishサイトのスタイルに着想を得たStarlightテーマです。',
+			href: 'https://fevol.github.io/starlight-theme-obsidian/',
+			previews: { light: 'obsidian-light.png', dark: 'obsidian-dark.png' },
+		},
+		{
+			title: 'Catppuccin for Starlight',
+			description: 'やさしいパステル調のStarlight向けテーマです。',
+			href: 'https://starlight.catppuccin.com/',
+			previews: { light: 'catppuccin-light.png', dark: 'catppuccin-dark.png' },
+		},
+		{
+			title: 'Ion',
+			description: '洗練されたモダンなStarlightテーマです。',
+			href: 'https://louisescher.github.io/starlight-ion-theme/',
+			previews: { light: 'ion-light.png', dark: 'ion-dark.png' },
+		},
+		{
+			title: 'Starlight Black',
+			description: 'shadcnのドキュメントに着想を得たStarlightテーマです。',
+			href: 'https://starlight-theme-black.vercel.app/',
+			previews: { light: 'black-light.png', dark: 'black-dark.png' },
+		},
+		{
+			title: 'Starlight Flexoki',
+			description:
+				'Flexokiカラーパレットに基づく、あたたかく親しみやすいテーマです。',
+			href: 'https://delucis.github.io/starlight-theme-flexoki/',
+			previews: { light: 'flexoki-light.png', dark: 'flexoki-dark.png' },
+		},
+		{
+			title: 'Starlight Nova',
+			description: 'モダンで美しいStarlightテーマです。',
+			href: 'https://starlight-theme-nova.pages.dev/',
+			previews: { light: 'nova-light.png', dark: 'nova-dark.png' },
+		},
+		{
+			title: 'Starlight Next.js',
+			description: 'Next.jsのドキュメントに着想を得たStarlightテーマです。',
+			href: 'https://starlight-theme-next.trueberryless.org/',
+			previews: { light: 'nextjs-light.png', dark: 'nextjs-dark.png' },
+		},
+		{
+			title: 'Starlight Galaxy',
+			description:
+				'ドキュメントや教育コンテンツの公開に特化したAstro Starlightテーマです。',
+			href: 'https://frostybee.github.io/starlight-theme-galaxy/',
+			previews: { light: 'galaxy-light.png', dark: 'galaxy-dark.png' },
+		},
+		{
+			title: 'Starlight Page',
+			description:
+				'スムーズなフロートインアニメーションを備えた直感的でモダンなStarlightテーマです。',
+			href: 'https://pelagornis-page.netlify.app/',
+			previews: { light: 'page-light.png', dark: 'page-dark.png' },
+		},
+	]}
+/>
+
+:::tip[あなたのテーマを追加しませんか？]
+Starlightテーマを作成しましたか？このページにあなたのテーマを追加するPRを作成してください！
+[PRを開く](https://github.com/withastro/starlight/blob/main/CONTRIBUTING.md#themes)
+:::

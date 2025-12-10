@@ -29,6 +29,7 @@ import type {
 	SidebarEntry,
 } from './routing/types';
 import { localeToLang, localizedId, slugToPathname } from './slugs';
+import { isAbsoluteUrl } from './url';
 import type { StarlightConfig } from './user-config';
 
 const DirKey = Symbol('DirKey');
@@ -124,13 +125,10 @@ function groupFromAutogenerateConfig(
 	};
 }
 
-/** Check if a string starts with one of `http://` or `https://`. */
-const isAbsolute = (link: string) => /^https?:\/\//.test(link);
-
 /** Create a link entry from a manual link item in user config. */
 function linkFromSidebarLinkItem(item: SidebarLinkItem, locale: string | undefined) {
 	let href = item.link;
-	if (!isAbsolute(href)) {
+	if (!isAbsoluteUrl(href)) {
 		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
@@ -186,7 +184,7 @@ function makeSidebarLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): SidebarLink {
-	if (!isAbsolute(href)) {
+	if (!isAbsoluteUrl(href)) {
 		href = formatPath(href);
 	}
 	return makeLink({ label, href, badge, attrs });

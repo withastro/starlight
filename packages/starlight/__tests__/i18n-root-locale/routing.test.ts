@@ -84,7 +84,7 @@ test('fallback routes use fallback entry last updated dates', () => {
 			...route,
 			headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }],
 		},
-		context: getRouteDataTestContext('/en'),
+		context: getRouteDataTestContext({ pathname: '/en' }),
 	});
 
 	expect(getNewestCommitDate).toHaveBeenCalledOnce();

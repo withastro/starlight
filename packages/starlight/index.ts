@@ -13,11 +13,16 @@ import { AstroError } from 'astro/errors';
 import { spawn } from 'node:child_process';
 import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { starlightAsides, starlightDirectivesRestorationIntegration } from './integrations/asides';
+import {
+	starlightRehypePlugins,
+	starlightRemarkPlugins,
+	type RemarkRehypePluginOptions,
+} from './integrations/remark-rehype';
+import { starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
 import { starlightSitemap } from './integrations/sitemap';
+import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -26,7 +31,6 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
-import { starlightAutolinkHeadings } from './integrations/heading-links';
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -115,31 +119,23 @@ export default function StarlightIntegration(
 				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
 				config.integrations.splice(selfIndex + 1, 0, ...integrations);
 
+				const remarkRehypeOptions: RemarkRehypePluginOptions = {
+					starlightConfig,
+					astroConfig: config,
+					useTranslations,
+					absolutePathToLang,
+				};
+
 				updateConfig({
 					vite: {
 						plugins: [
+							vitePluginStarlightCssLayerOrder(),
 							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
 						],
 					},
 					markdown: {
-						remarkPlugins: [
-							...starlightAsides({
-								starlightConfig,
-								astroConfig: config,
-								useTranslations,
-								absolutePathToLang,
-							}),
-						],
-						rehypePlugins: [
-							rehypeRtlCodeSupport({ astroConfig: config }),
-							// Process headings and add anchor links.
-							...starlightAutolinkHeadings({
-								starlightConfig,
-								astroConfig: config,
-								useTranslations,
-								absolutePathToLang,
-							}),
-						],
+						remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
+						rehypePlugins: [...starlightRehypePlugins(remarkRehypeOptions)],
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.

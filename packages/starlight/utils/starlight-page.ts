@@ -44,7 +44,7 @@ const StarlightPageFrontmatterSchema = async (context: SchemaContext) => {
 		 * `pick`.
 		 *
 		 * This transformer only sets the `editUrl` default value and removes the `sidebar` property
-		 * from the validated output but does not appply any changes to the input schema type itself so
+		 * from the validated output but does not apply any changes to the input schema type itself so
 		 * this needs to be done manually.
 		 *
 		 * @see StarlightPageFrontmatter

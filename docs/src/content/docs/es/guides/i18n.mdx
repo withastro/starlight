@@ -67,7 +67,7 @@ Starlight proporciona soporte incorporado para sitios multilingües, incluidas l
 
 </Steps>
 
-Para escenarios de i18n más avanzados, Starlight también admite la configuración de internacionalizaciónutlizando la [opción `i18n` de Astro](https://docs.astro.build/es/guides/internationalization/#configuración-de-rutas-i18n).
+Para escenarios de i18n más avanzados, Starlight también admite la configuración de internacionalización utilizando la [opción `i18n` de Astro](https://docs.astro.build/es/guides/internationalization/#configuración-de-rutas-i18n).
 
 ### Usa una raíz de configuración regional
 
@@ -197,7 +197,6 @@ Puedes proprocionar traducciones para idiomas adicionales, o editar nuestras eti
 
    export const collections = {
    	docs: defineCollection({ schema: docsSchema() }),
-   	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
    };
    ```

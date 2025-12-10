@@ -61,7 +61,7 @@ describe('processI18nConfig', () => {
 				)
 			).toThrowErrorMatchingInlineSnapshot(`
 				"[AstroUserError]:
-					Failed to get locale informations for the 'foo' locale.
+					Failed to get locale information for the 'foo' locale.
 				Hint:
 					Make sure to provide a valid BCP-47 tags (e.g. en, ar, or zh-CN)."
 			`);

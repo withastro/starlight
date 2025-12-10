@@ -41,7 +41,7 @@
 	h5,
 	h6,
 	code {
-		overflow-wrap: anywhere;
+		overflow-wrap: break-word;
 	}
 
 	code {

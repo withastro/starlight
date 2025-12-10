@@ -1,6 +1,6 @@
 ---
 title: Référence des redéfinitions
-description: Une vue d'ensemble de tous les composants et les props des composants supportés par les redéfinitions de Starlight.
+description: Une vue d'ensemble de tous les composants et les props des composants compatibles avec les redéfinitions de Starlight.
 tableOfContents:
   maxHeadingLevel: 4
 ---
