@@ -88,4 +88,4 @@ jobs:
           # Note that `--compact` is used for shorter URLs but requires packages to be published on
           # npm. This means that it's not possible to publish a preview for a new package that has
           # not yet been published on npm.
-          pnpm dlx pkg-pr-new publish --pnpm --compact --packageManager=pnpm --no-template $packages
+          pnpm dlx pkg-pr-new publish --pnpm --compact --packageManager=pnpm --no-template $PACKAGES
