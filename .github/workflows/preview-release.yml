@@ -64,7 +64,7 @@ jobs:
               # A map of all packages name in the monorepo to their relative paths.
               const packagePathsMap = Object.fromEntries(packages.map(pkg => [pkg.name, relative(process.cwd(), pkg.path)]));
               # A list of all relative package paths to publish in this preview release.
-              const previewPackagePaths = [...new Set(changes.changesets.map(change => change.releases.map(release => packagePathsMap[release.name])).flat())]
+              const previewPackagePaths = [...new Set(changeset.changesets.map(change => change.releases.map(release => packagePathsMap[release.name])).flat())]
               # A space-separated string of all relative package paths to publish in this preview release (or an empty string if none).
               core.setOutput('packages', previewPackagePaths.join(' '));
 
