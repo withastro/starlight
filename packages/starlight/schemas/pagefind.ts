@@ -57,7 +57,7 @@ const pagefindIndexOptionsSchema = z.object({
 	 *
 	 * @see https://pagefind.app/docs/multisite/#filtering-results-by-index
 	 */
-	mergeFilter: z.record(z.string(), z.string().or(z.array(z.string()).nonempty())).optional(),
+	mergeFilter: z.record(z.string(), z.string().or(z.tuple([z.string()], z.string()))).optional(),
 	/**
 	 * Language of this index.
 	 *
@@ -68,7 +68,7 @@ const pagefindIndexOptionsSchema = z.object({
 	 * Configure how search result rankings are calculated by Pagefind.
 	 */
 	// We apply a default value to merged indexes in order to share the same ranking for them and the current site when not set explicitly.
-	ranking: pagefindRankingWeightsSchema.default({}),
+	ranking: pagefindRankingWeightsSchema.prefault({}),
 });
 
 const pagefindSchema = z.object({
@@ -80,7 +80,7 @@ const pagefindSchema = z.object({
 	 */
 	indexWeight: indexWeightSchema,
 	/** Configure how search result rankings are calculated by Pagefind. */
-	ranking: pagefindRankingWeightsSchema.default({}),
+	ranking: pagefindRankingWeightsSchema.prefault({}),
 	/**
 	 * Configure how search indexes from different sites are merged by Pagefind.
 	 *
@@ -93,7 +93,8 @@ const pagefindSchema = z.object({
 			 *
 			 * @see https://github.com/CloudCannon/pagefind/blob/v1.3.0/pagefind_web_js/lib/coupled_search.ts#L549
 			 */
-			pagefindIndexOptionsSchema.extend({
+			z.object({
+				...pagefindIndexOptionsSchema.shape,
 				/**
 				 * Set Pagefind’s `bundlePath` mergeIndex option.
 				 *

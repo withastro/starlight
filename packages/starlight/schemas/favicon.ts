@@ -20,9 +20,10 @@ export const FaviconSchema = () =>
 			const ext = extname(pathname).toLowerCase();
 
 			if (!isFaviconExt(ext)) {
-				ctx.addIssue({
-					code: z.ZodIssueCode.custom,
+				ctx.issues.push({
+					code: 'custom',
 					message: 'favicon must be a .ico, .gif, .jpg, .png, or .svg file',
+					input: favicon,
 				});
 
 				return z.NEVER;

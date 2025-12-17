@@ -6,7 +6,7 @@ import {
 } from '../../utils/starlight-page';
 
 vi.mock('virtual:starlight/collection-config', async () => {
-	const { z } = await vi.importActual<typeof import('astro:content')>('astro:content');
+	const { z } = await vi.importActual<typeof import('astro/zod')>('astro/zod');
 	return (await import('../test-utils')).mockedCollectionConfig({
 		extend: z.object({
 			// Make the built-in description field required.

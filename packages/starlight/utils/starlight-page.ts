@@ -185,16 +185,16 @@ async function getStarlightPageFrontmatter(frontmatter: StarlightPageFrontmatter
 			// https://github.com/withastro/astro/blob/cf993bc263b58502096f00d383266cd179f331af/packages/astro/src/assets/types.ts#L32
 			// It uses a custom validation approach because imported SVGs have a type of `function` as
 			// well as containing the metadata properties and this ensures we handle those correctly.
-			z.custom(
+			z.custom<ReturnType<ImageFunction>>(
 				(value) =>
-					(value &&
-						(typeof value === 'function' || typeof value === 'object') &&
-						'src' in value &&
-						'width' in value &&
-						'height' in value &&
-						'format' in value) as ReturnType<ImageFunction>,
+					value &&
+					(typeof value === 'function' || typeof value === 'object') &&
+					'src' in value &&
+					'width' in value &&
+					'height' in value &&
+					'format' in value,
 				'Invalid image passed to `<StarlightPage>` component. Expected imported `ImageMetadata` object.'
-			)) as ImageFunction,
+			)) as unknown as ImageFunction,
 	});
 
 	// Starting with Astro 4.14.0, a frontmatter schema that contains collection references will

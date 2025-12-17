@@ -183,7 +183,7 @@ export function injectPluginTranslationsTypes(
 // https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113
 const astroIntegrationSchema = z.object({
 	name: z.string(),
-	hooks: z.object({}).passthrough().default({}),
+	hooks: z.looseObject({}).default({}),
 }) as z.Schema<AstroIntegration>;
 
 const routeMiddlewareConfigSchema = z.object({
@@ -197,8 +197,8 @@ const baseStarlightPluginSchema = z.object({
 });
 
 const configSetupHookSchema = z
-	.function(
-		z.tuple([
+	.function({
+		input: [
 			z.object({
 				/**
 				 * A read-only copy of the user-supplied Starlight configuration.
@@ -228,12 +228,14 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				updateConfig: z.function(
-					z.tuple([
-						z.record(z.any()) as z.Schema<Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>>,
-					]),
-					z.void()
-				),
+				updateConfig: z.function({
+					input: [
+						z.record(z.string(), z.any()) as z.Schema<
+							Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>
+						>,
+					],
+					output: z.void(),
+				}),
 				/**
 				 * A callback function to add an Astro integration required by this plugin.
 				 *
@@ -256,7 +258,10 @@ const configSetupHookSchema = z
 				 * 	}
 				 * }
 				 */
-				addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
+				addIntegration: z.function({
+					input: [astroIntegrationSchema],
+					output: z.void(),
+				}),
 				/**
 				 * A callback function to register additional route middleware handlers.
 				 *
@@ -273,7 +278,10 @@ const configSetupHookSchema = z
 				 * 	},
 				 * }
 				 */
-				addRouteMiddleware: z.function(z.tuple([routeMiddlewareConfigSchema]), z.void()),
+				addRouteMiddleware: z.function({
+					input: [routeMiddlewareConfigSchema],
+					output: z.void(),
+				}),
 				/**
 				 * A read-only copy of the user-supplied Astro configuration.
 				 *
@@ -344,11 +352,24 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				absolutePathToLang: z.function(z.tuple([z.string()]), z.string()),
+				absolutePathToLang: z.function({
+					input: [z.string()],
+					output: z.string(),
+				}),
 			}),
-		]),
-		z.union([z.void(), z.promise(z.void())])
-	)
+		],
+		// We used to validate the hook output using Zod, e.g. by defining it as
+		// `z.union([z.void(), z.promise(z.void())])` but `z.promise()` is now deprecated following
+		// some changes in Zod 4 to `z.function()` no longer returning a Zod schema. Such changes to
+		// `z.function()` were reverted but the `z.promise()` change was not which means that the only
+		// non-deprecated way to define an async function is to use `.implementAsync()` but we don't
+		// want to implement the function using Zod.
+		// Relying on the deprecated `z.promise()` like we used to is also not an option as Zod will
+		// now throw an error when encountering a promise during validation.
+		// Due to these changes, we no longer validate the output of this function.
+		// @see https://github.com/colinhacks/zod/issues/4143
+		// output: z.union([z.void(), z.promise(z.void())]),
+	})
 	.optional();
 
 /**
@@ -356,8 +377,9 @@ const configSetupHookSchema = z
  * user config schema but properly typed for user convenience because we do not want to run any of
  * the Zod `transform`s used in the user config schema when running plugins.
  */
-const starlightPluginSchema = baseStarlightPluginSchema
-	.extend({
+const starlightPluginSchema = z
+	.object({
+		...baseStarlightPluginSchema.shape,
 		/** The different hooks available to the plugin. */
 		hooks: z.object({
 			/**
@@ -366,8 +388,8 @@ const starlightPluginSchema = baseStarlightPluginSchema
 			 * and plugin UI.
 			 */
 			'i18n:setup': z
-				.function(
-					z.tuple([
+				.function({
+					input: [
 						z.object({
 							/**
 							 * A callback function to add or update translations strings.
@@ -391,14 +413,24 @@ const starlightPluginSchema = baseStarlightPluginSchema
 							 * 	}
 							 * }
 							 */
-							injectTranslations: z.function(
-								z.tuple([z.record(z.string(), z.record(z.string(), z.string()))]),
-								z.void()
-							),
+							injectTranslations: z.function({
+								input: [z.record(z.string(), z.record(z.string(), z.string()))],
+								output: z.void(),
+							}),
 						}),
-					]),
-					z.union([z.void(), z.promise(z.void())])
-				)
+					],
+					// We used to validate the hook output using Zod, e.g. by defining it as
+					// `z.union([z.void(), z.promise(z.void())])` but `z.promise()` is now deprecated
+					// following some changes in Zod 4 to `z.function()` no longer returning a Zod schema.
+					// Such changes to `z.function()` were reverted but the `z.promise()` change was not
+					// which means that the only non-deprecated way to define an async function is to use
+					// `.implementAsync()` but we don't want to implement the function using Zod.
+					// Relying on the deprecated `z.promise()` like we used to is also not an option as Zod
+					// will now throw an error when encountering a promise during validation.
+					// Due to these changes, we no longer validate the output of this function.
+					// @see https://github.com/colinhacks/zod/issues/4143
+					// output: z.union([z.void(), z.promise(z.void())]),
+				})
 				.optional(),
 			/**
 			 * Plugin configuration setup function called with an object containing various values that
@@ -414,17 +446,19 @@ const starlightPluginSchema = baseStarlightPluginSchema
 	})
 	.superRefine((plugin, ctx) => {
 		if (!plugin.hooks['config:setup'] && !plugin.hooks.setup) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
+			ctx.issues.push({
+				code: 'custom',
 				message: 'A plugin must define at least a `config:setup` hook.',
+				input: plugin,
 			});
 		} else if (plugin.hooks['config:setup'] && plugin.hooks.setup) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
+			ctx.issues.push({
+				code: 'custom',
 				message:
 					'A plugin cannot define both a `config:setup` and `setup` hook. ' +
 					'As `setup` is deprecated and will be removed in a future version, ' +
 					'consider using `config:setup` instead.',
+				input: plugin,
 			});
 		}
 	});
