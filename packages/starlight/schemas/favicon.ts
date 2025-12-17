@@ -33,10 +33,7 @@ export const FaviconSchema = () =>
 				href: favicon,
 				type: faviconTypeMap[ext],
 			};
-		})
-		.describe(
-			'The default favicon for your site which should be a path to an image in the `public/` directory.'
-		);
+		});
 
 function isFaviconExt(ext: string): ext is keyof typeof faviconTypeMap {
 	return ext in faviconTypeMap;

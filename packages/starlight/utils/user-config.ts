@@ -14,24 +14,11 @@ import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
-	label: z
-		.string()
-		.describe(
-			'The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`.'
-		),
+	label: z.string(),
 	/** The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. */
-	lang: z
-		.string()
-		.optional()
-		.describe('The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`.'),
+	lang: z.string().optional(),
 	/** The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left. */
-	dir: z
-		.enum(['rtl', 'ltr'])
-		.optional()
-		.default('ltr')
-		.describe(
-			'The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.'
-		),
+	dir: z.enum(['rtl', 'ltr']).optional().default('ltr'),
 });
 
 const UserConfigSchema = z.object({
@@ -39,10 +26,7 @@ const UserConfigSchema = z.object({
 	title: TitleConfigSchema(),
 
 	/** Description metadata for your website. Can be used in page metadata. */
-	description: z
-		.string()
-		.optional()
-		.describe('Description metadata for your website. Can be used in page metadata.'),
+	description: z.string().optional(),
 
 	/** Set a logo image to show in the navigation bar alongside or instead of the site title. */
 	logo: LogoConfigSchema(),
@@ -62,7 +46,7 @@ const UserConfigSchema = z.object({
 	social: SocialLinksSchema(),
 
 	/** The tagline for your website. */
-	tagline: z.string().optional().describe('The tagline for your website.'),
+	tagline: z.string().optional(),
 
 	/** Configure the defaults for the table of contents on each page. */
 	tableOfContents: TableOfContentsSchema(),
@@ -117,8 +101,7 @@ const UserConfigSchema = z.object({
 			}
 			return locales;
 		})
-		.optional()
-		.describe('Configure locales for internationalization (i18n).'),
+		.optional(),
 
 	/**
 	 * Specify the default language for this site.
@@ -185,16 +168,10 @@ const UserConfigSchema = z.object({
 		}),
 
 	/** Define if the last update date should be visible in the page footer. */
-	lastUpdated: z
-		.boolean()
-		.default(false)
-		.describe('Define if the last update date should be visible in the page footer.'),
+	lastUpdated: z.boolean().default(false),
 
 	/** Define if the previous and next page links should be visible in the page footer. */
-	pagination: z
-		.boolean()
-		.default(true)
-		.describe('Define if the previous and next page links should be visible in the page footer.'),
+	pagination: z.boolean().default(true),
 
 	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
 	favicon: FaviconSchema(),
@@ -220,13 +197,10 @@ const UserConfigSchema = z.object({
 	components: ComponentConfigSchema(),
 
 	/** Will be used as title delimiter in the generated `<title>` tag. */
-	titleDelimiter: z
-		.string()
-		.default('|')
-		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
+	titleDelimiter: z.string().default('|'),
 
 	/** Disable Starlight's default 404 page. */
-	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
+	disable404Route: z.boolean().default(false),
 
 	/**
 	 * Define whether Starlight pages should be prerendered or not.
@@ -236,10 +210,7 @@ const UserConfigSchema = z.object({
 	prerender: z.boolean().default(true),
 
 	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
-	credits: z
-		.boolean()
-		.default(false)
-		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
+	credits: z.boolean().default(false),
 
 	/** Add middleware to process Starlight’s route data for each page. */
 	routeMiddleware: z
@@ -262,35 +233,22 @@ const UserConfigSchema = z.object({
 					input: middlewares,
 				});
 			}
-		})
-		.describe('Add middleware to process Starlight’s route data for each page.'),
+		}),
 
 	/** Configure features that impact Starlight’s Markdown processing. */
 	markdown: z
 		.object({
 			/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
-			headingLinks: z
-				.boolean()
-				.default(true)
-				.describe(
-					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
-				),
+			headingLinks: z.boolean().default(true),
 			/**
 			 * Define additional directories where files should be processed by Starlight’s Markdown pipeline.
 			 *
 			 * Supports local directories relative to the root of your project, e.g. './src/data/comments/'.
 			 * Content of the `docs` content collection is always processed by Starlight’s Markdown pipeline.
 			 */
-			processedDirs: z
-				.string()
-				.array()
-				.default([])
-				.describe(
-					'Define additional directories where files should be processed by Starlight’s Markdown pipeline. Default: `[]`.'
-				),
+			processedDirs: z.string().array().default([]),
 		})
-		.prefault({})
-		.describe('Configure features that impact Starlight’s Markdown processing.'),
+		.prefault({}),
 });
 
 export const StarlightConfigSchema = z
