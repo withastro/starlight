@@ -83,7 +83,7 @@ const validateSidebarProp = (
  */
 export type StarlightPageProps = Prettify<
 	// Remove the index signature from `Route`, omit undesired properties and make the rest optional.
-	Partial<Omit<RemoveIndexSignature<PageProps>, 'entry' | 'entryMeta' | 'id' | 'locale' | 'slug'>> &
+	Partial<Omit<RemoveIndexSignature<PageProps>, 'entry' | 'entryMeta' | 'id' | 'locale'>> &
 		// Add the sidebar definitions for a Starlight page.
 		Partial<Pick<StarlightRouteData, 'hasSidebar'>> & {
 			sidebar?: StarlightUserConfig['sidebar'];
@@ -97,13 +97,7 @@ export type StarlightPageProps = Prettify<
  * to a `StarlightDocsEntry`.
  * A Starlight page docs entry cannot be rendered like a content collection entry.
  */
-type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'id' | 'render'> & {
-	/**
-	 * The unique ID if using the `legacy.collections` for this Starlight page which cannot be
-	 * inferred from codegen like content collection entries or the slug.
-	 */
-	id: string;
-};
+type StarlightPageDocsEntry = Omit<StarlightDocsEntry, 'render'>;
 
 export async function generateStarlightPageRouteData({
 	props,
@@ -114,20 +108,18 @@ export async function generateStarlightPageRouteData({
 }): Promise<StarlightRouteData> {
 	const { frontmatter, ...routeProps } = props;
 	const { url } = context;
-	const slug = urlToSlug(url);
+	const id = urlToSlug(url);
 	const pageFrontmatter = await getStarlightPageFrontmatter(frontmatter);
-	const id = project.legacyCollections ? `${stripLeadingAndTrailingSlashes(slug)}.md` : slug;
-	const localeData = slugToLocaleData(slug);
+	const localeData = slugToLocaleData(id);
 	const sidebar = props.sidebar
 		? getSidebarFromConfig(validateSidebarProp(props.sidebar), url.pathname, localeData.locale)
 		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
 	const pageDocsEntry: StarlightPageDocsEntry = {
 		id,
-		slug,
 		body: '',
 		collection: 'docs',
-		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(slug)}.md`,
+		filePath: `${getCollectionPathFromRoot('docs', project)}/${stripLeadingAndTrailingSlashes(id)}.md`,
 		data: {
 			...pageFrontmatter,
 			sidebar: {
@@ -153,7 +145,6 @@ export async function generateStarlightPageRouteData({
 		headings,
 		id,
 		locale: localeData.locale,
-		slug,
 	};
 	const siteTitle = getSiteTitle(localeData.lang);
 	const routeData: StarlightRouteData = {
@@ -171,7 +162,6 @@ export async function generateStarlightPageRouteData({
 		sidebar,
 		siteTitle,
 		siteTitleHref: getSiteTitleHref(localeData.locale),
-		slug,
 		toc: getToC(pageProps),
 	};
 	return routeData;

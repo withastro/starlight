@@ -35,10 +35,8 @@ test('adds data to route shape', async () => {
 		props: starlightPageProps,
 		context: getRouteDataTestContext({ pathname: starlightPagePathname }),
 	});
-	// Starlight pages infer the slug from the URL.
-	expect(data.slug).toBe('test-slug');
 	// Starlight pages generate an ID based on their slug.
-	expect(data.id).toBeDefined();
+	expect(data.id).toBe('test-slug');
 	// Starlight pages cannot be fallbacks.
 	expect(data.isFallback).toBeUndefined();
 	// Starlight pages are not editable if no edit URL is passed.

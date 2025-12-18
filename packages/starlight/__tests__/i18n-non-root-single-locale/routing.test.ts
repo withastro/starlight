@@ -1,5 +1,4 @@
 import { expect, test, vi } from 'vitest';
-import project from 'virtual:starlight/project-context';
 import { routes } from '../../utils/routing';
 
 vi.mock('astro:content', async () =>
@@ -13,10 +12,8 @@ vi.mock('astro:content', async () =>
 );
 
 test('route slugs are normalized', () => {
-	const indexRoute = routes.find(
-		(route) => route.entry.id === (project.legacyCollections ? 'fr/index.mdx' : 'fr')
-	);
-	expect(indexRoute?.slug).toBe('fr');
+	const indexRoute = routes.find((route) => route.entry.id === 'fr');
+	expect(indexRoute?.id).toBe('fr');
 });
 
 test('routes for the configured locale have locale data added', () => {

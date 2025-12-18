@@ -7,8 +7,6 @@ import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugin
 import { createTestPluginContext } from './test-plugin-utils';
 import { vitePluginStarlightCssLayerOrder } from '../integrations/vite-layer-order';
 
-const testLegacyCollections = process.env.LEGACY_COLLECTIONS === 'true';
-
 export async function defineVitestConfig(
 	{ plugins, ...config }: StarlightUserConfigWithPlugins,
 	opts?: {
@@ -39,7 +37,6 @@ export async function defineVitestConfig(
 					srcDir,
 					build,
 					trailingSlash,
-					legacy: { collections: testLegacyCollections },
 				},
 				pluginTranslations
 			),

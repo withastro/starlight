@@ -4,7 +4,6 @@
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
-    "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "pnpm test:e2e:chrome",
     "test:e2e:chrome": "playwright install --with-deps chromium && playwright test --project chrome",
