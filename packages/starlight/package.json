@@ -184,13 +184,13 @@
     "./style/markdown.css": "./style/markdown.css"
   },
   "peerDependencies": {
-    "astro": "6.0.0-alpha.2"
+    "astro": "6.0.0-alpha.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.0",
     "@types/node": "^18.16.19",
     "@vitest/coverage-v8": "^3.0.5",
-    "astro": "^6.0.0-alpha.2",
+    "astro": "^6.0.0-alpha.3",
     "linkedom": "^0.18.4",
     "vitest": "^3.1.2"
   },
