@@ -428,9 +428,10 @@ The value should be a [Zod schema](https://docs.astro.build/en/guides/content-co
 
 In the following example, we provide a stricter type for `description` to make it required and add a new optional `category` field:
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
@@ -451,9 +452,10 @@ export const collections = {
 
 To take advantage of the [Astro `image()` helper](https://docs.astro.build/en/guides/images/#images-in-content-collections), use a function that returns your schema extension:
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
