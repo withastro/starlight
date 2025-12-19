@@ -358,17 +358,10 @@ const configSetupHookSchema = z
 				}),
 			}),
 		],
-		// We used to validate the hook output using Zod, e.g. by defining it as
-		// `z.union([z.void(), z.promise(z.void())])` but `z.promise()` is now deprecated following
-		// some changes in Zod 4 to `z.function()` no longer returning a Zod schema. Such changes to
-		// `z.function()` were reverted but the `z.promise()` change was not which means that the only
+		// We still rely on the deprecated `z.promise()` to define the function output as the only
 		// non-deprecated way to define an async function is to use `.implementAsync()` but we don't
 		// want to implement the function using Zod.
-		// Relying on the deprecated `z.promise()` like we used to is also not an option as Zod will
-		// now throw an error when encountering a promise during validation.
-		// Due to these changes, we no longer validate the output of this function.
-		// @see https://github.com/colinhacks/zod/issues/4143
-		// output: z.union([z.void(), z.promise(z.void())]),
+		output: z.promise(z.void()),
 	})
 	.optional();
 
@@ -419,17 +412,10 @@ const starlightPluginSchema = z
 							}),
 						}),
 					],
-					// We used to validate the hook output using Zod, e.g. by defining it as
-					// `z.union([z.void(), z.promise(z.void())])` but `z.promise()` is now deprecated
-					// following some changes in Zod 4 to `z.function()` no longer returning a Zod schema.
-					// Such changes to `z.function()` were reverted but the `z.promise()` change was not
-					// which means that the only non-deprecated way to define an async function is to use
-					// `.implementAsync()` but we don't want to implement the function using Zod.
-					// Relying on the deprecated `z.promise()` like we used to is also not an option as Zod
-					// will now throw an error when encountering a promise during validation.
-					// Due to these changes, we no longer validate the output of this function.
-					// @see https://github.com/colinhacks/zod/issues/4143
-					// output: z.union([z.void(), z.promise(z.void())]),
+					// We still rely on the deprecated `z.promise()` to define the function output as the
+					// only non-deprecated way to define an async function is to use `.implementAsync()` but
+					// we don't want to implement the function using Zod.
+					output: z.promise(z.void()),
 				})
 				.optional(),
 			/**
