@@ -13,6 +13,7 @@ type TypeErrByPathEntry = {
 	code: 'invalid_type';
 	received: unknown;
 	expected: unknown[];
+	message: string | undefined;
 };
 
 /**
@@ -84,6 +85,7 @@ const errorMap: z.core.$ZodErrorMap = (issue) => {
 						code: unionError.code,
 						received: parsedType(issue.input),
 						expected: [unionError.expected],
+						message: unionError.message,
 					});
 				}
 			}
@@ -96,8 +98,8 @@ const errorMap: z.core.$ZodErrorMap = (issue) => {
 			.map(([key, error]) =>
 				key === baseErrorPath
 					? // Avoid printing the key again if it's a base error
-						`> ${getTypeOrLiteralMsg(error)}`
-					: `> ${prefix(key, getTypeOrLiteralMsg(error))}`
+						`> ${getTypeErrMsg(error)}`
+					: `> ${prefix(key, getTypeErrMsg(error))}`
 			);
 
 		if (details.length === 0) {
@@ -138,19 +140,20 @@ const errorMap: z.core.$ZodErrorMap = (issue) => {
 	} else if (issue.code === 'invalid_type') {
 		return prefix(
 			baseErrorPath,
-			getTypeOrLiteralMsg({
+			getTypeErrMsg({
 				code: issue.code,
 				received: parsedType(issue.input),
 				expected: [issue.expected],
+				message: issue.message,
 			})
 		);
 	} else if (issue.message) {
 		return prefix(baseErrorPath, issue.message);
 	} else {
-		// By design, the default Zod error is not provided in Zod 4 error maps. Instead, error maps
-		// are supposed to return `undefined` in order to yield control to the next error map in the
-		// precedence chain. Unfortunately, this prevents us from prefixing all errors with their paths
-		// so we have to manually invoke the default Zod error map here.
+		// By design, the default Zod error may not be provided in Zod 4 error maps. Instead, error
+		// maps are supposed to return `undefined` in order to yield control to the next error map in
+		// the precedence chain. Unfortunately, this prevents us from prefixing all errors with their
+		// paths so we have to manually invoke the default Zod error map here.
 		const defaultError = zodErrorMap(issue);
 		if (!defaultError) return;
 
@@ -161,9 +164,10 @@ const errorMap: z.core.$ZodErrorMap = (issue) => {
 	}
 };
 
-const getTypeOrLiteralMsg = (error: TypeErrByPathEntry): string => {
+const getTypeErrMsg = (error: TypeErrByPathEntry): string => {
 	// received could be `undefined` or the string `'undefined'`
-	if (typeof error.received === 'undefined' || error.received === 'undefined') return 'Required';
+	if (typeof error.received === 'undefined' || error.received === 'undefined')
+		return error.message ?? 'Required';
 	const expectedDeduped = new Set(error.expected);
 	return `Expected type \`${unionExpectedVals(expectedDeduped)}\`, received \`${stringify(
 		error.received
