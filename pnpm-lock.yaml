@@ -174,7 +174,7 @@ importers:
         specifier: workspace:*
         version: link:../starlight
       vitest:
-        specifier: ^3.1.2
+        specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1)
 
   packages/starlight:
@@ -271,8 +271,8 @@ importers:
         specifier: ^18.16.19
         version: 18.16.19
       '@vitest/coverage-v8':
-        specifier: ^3.0.5
-        version: 3.0.5(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1))
+        specifier: ^3.2.4
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1))
       astro:
         specifier: ^6.0.0-alpha.3
         version: 6.0.0-alpha.3(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@4.53.3)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.7.1)
@@ -280,7 +280,7 @@ importers:
         specifier: ^0.18.4
         version: 0.18.4
       vitest:
-        specifier: ^3.1.2
+        specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1)
 
   packages/starlight/__e2e__/fixtures/basics:
@@ -349,7 +349,7 @@ importers:
         specifier: ^4.0.7
         version: 4.0.15
       vitest:
-        specifier: ^3.1.2
+        specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1)
 
 packages:
@@ -1293,8 +1293,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@jridgewell/trace-mapping@0.3.25':
-    resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+  '@jridgewell/trace-mapping@0.3.31':
+    resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
   '@kwsites/file-exists@1.1.1':
     resolution: {integrity: sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==}
@@ -1770,11 +1770,11 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vitest/coverage-v8@3.0.5':
-    resolution: {integrity: sha512-zOOWIsj5fHh3jjGwQg+P+J1FW3s4jBu1Zqga0qW60yutsBtqEqNEJKWYh7cYn1yGD+1bdPsPdC/eL4eVK56xMg==}
+  '@vitest/coverage-v8@3.2.4':
+    resolution: {integrity: sha512-EyF9SXU6kS5Ku/U82E259WSnvg6c8KTjppUncuNdm5QHpe17mwREHnjDzozC8x9MZ0xfBUFSaLkRv4TMA75ALQ==}
     peerDependencies:
-      '@vitest/browser': 3.0.5
-      vitest: 3.0.5
+      '@vitest/browser': 3.2.4
+      vitest: 3.2.4
     peerDependenciesMeta:
       '@vitest/browser':
         optional: true
@@ -1911,6 +1911,9 @@ packages:
   assertion-error@2.0.1:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
     engines: {node: '>=12'}
+
+  ast-v8-to-istanbul@0.3.9:
+    resolution: {integrity: sha512-dSC6tJeOJxbZrPzPbv5mMd6CMiQ1ugaVXXPRad2fXUSsy1kstFn9XQWemV9VW7Y7kpxgQ/4WMoZfwdH8XSU48w==}
 
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
@@ -4526,7 +4529,7 @@ snapshots:
   '@ampproject/remapping@2.3.0':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
-      '@jridgewell/trace-mapping': 0.3.25
+      '@jridgewell/trace-mapping': 0.3.31
 
   '@astro-community/astro-embed-youtube@0.5.6(astro@6.0.0-alpha.3(jiti@2.4.2)(lightningcss@1.29.3)(rollup@4.53.3)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.7.1))':
     dependencies:
@@ -5339,7 +5342,7 @@ snapshots:
     dependencies:
       '@jridgewell/set-array': 1.2.1
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@jridgewell/trace-mapping': 0.3.25
+      '@jridgewell/trace-mapping': 0.3.31
 
   '@jridgewell/resolve-uri@3.1.1': {}
 
@@ -5347,7 +5350,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@jridgewell/trace-mapping@0.3.25':
+  '@jridgewell/trace-mapping@0.3.31':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -5837,10 +5840,11 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitest/coverage-v8@3.0.5(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1))':
+  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.15.2)(yaml@2.7.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
+      ast-v8-to-istanbul: 0.3.9
       debug: 4.4.3
       istanbul-lib-coverage: 3.2.2
       istanbul-lib-report: 3.0.1
@@ -6024,6 +6028,12 @@ snapshots:
   array-union@2.1.0: {}
 
   assertion-error@2.0.1: {}
+
+  ast-v8-to-istanbul@0.3.9:
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.31
+      estree-walker: 3.0.3
+      js-tokens: 9.0.1
 
   astring@1.9.0: {}
 
@@ -7174,7 +7184,7 @@ snapshots:
 
   istanbul-lib-source-maps@5.0.6:
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
+      '@jridgewell/trace-mapping': 0.3.31
       debug: 4.4.3
       istanbul-lib-coverage: 3.2.2
     transitivePeerDependencies:
