@@ -16,7 +16,6 @@ export async function createRemarkRehypePluginTestOptions(
 	const astroConfig = {
 		root: new URL(import.meta.url),
 		srcDir: new URL('./_src/', import.meta.url),
-		experimental: { headingIdCompat: false },
 	};
 
 	return {

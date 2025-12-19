@@ -21,14 +21,7 @@ export function starlightRemarkPlugins(options: RemarkRehypePluginOptions): Rema
 /** List of rehype plugins to apply. */
 export function starlightRehypePlugins(options: RemarkRehypePluginOptions): RehypePlugin[] {
 	return [
-		...(options.starlightConfig.markdown.headingLinks
-			? [
-					[
-						rehypeHeadingIds,
-						{ experimentalHeadingIdCompat: options.astroConfig.experimental?.headingIdCompat },
-					],
-				]
-			: []),
+		...(options.starlightConfig.markdown.headingLinks ? [[rehypeHeadingIds]] : []),
 		rehypePlugins(options),
 	] as RehypePlugin[];
 }
@@ -115,9 +108,7 @@ function normalizePath(path: string) {
 
 export interface RemarkRehypePluginOptions {
 	starlightConfig: Pick<StarlightConfig, 'defaultLocale' | 'locales' | 'markdown'>;
-	astroConfig: Pick<AstroConfig, 'root' | 'srcDir'> & {
-		experimental: Pick<AstroConfig['experimental'], 'headingIdCompat'>;
-	};
+	astroConfig: Pick<AstroConfig, 'root' | 'srcDir'>;
 	useTranslations: HookParameters<'config:setup'>['useTranslations'];
 	absolutePathToLang: HookParameters<'config:setup'>['absolutePathToLang'];
 }
