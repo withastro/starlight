@@ -184,7 +184,7 @@ export function injectPluginTranslationsTypes(
 const astroIntegrationSchema = z.object({
 	name: z.string(),
 	hooks: z.looseObject({}).default({}),
-}) as z.Schema<AstroIntegration>;
+}) as z.ZodType<AstroIntegration, AstroIntegration>;
 
 const routeMiddlewareConfigSchema = z.object({
 	entrypoint: z.string(),
@@ -196,6 +196,9 @@ const baseStarlightPluginSchema = z.object({
 	name: z.string(),
 });
 
+type StarlightConfigUpdate = Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>;
+type StarlightI18nTFactory = Awaited<ReturnType<typeof createTranslationSystemFromFs>>;
+
 const configSetupHookSchema = z
 	.function({
 		input: [
@@ -206,9 +209,10 @@ const configSetupHookSchema = z
 				 * Note that this configuration may have been updated by other plugins configured
 				 * before this one.
 				 */
-				config: z.any() as z.Schema<
+				config: z.any() as z.ZodType<
 					// The configuration passed to plugins should contains the list of plugins.
-					StarlightUserConfig & { plugins?: z.input<typeof baseStarlightPluginSchema>[] }
+					StarlightUserConfigWithPlugins,
+					StarlightUserConfigWithPlugins
 				>,
 				/**
 				 * A callback function to update the user-supplied Starlight configuration.
@@ -230,8 +234,9 @@ const configSetupHookSchema = z
 				 */
 				updateConfig: z.function({
 					input: [
-						z.record(z.string(), z.any()) as z.Schema<
-							Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>
+						z.record(z.string(), z.any()) as z.ZodType<
+							StarlightConfigUpdate,
+							StarlightConfigUpdate
 						>,
 					],
 					output: z.void(),
@@ -289,26 +294,38 @@ const configSetupHookSchema = z
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#config-option
 				 */
-				astroConfig: z.any() as z.Schema<StarlightPluginContext['config']>,
+				astroConfig: z.any() as z.ZodType<
+					StarlightPluginContext['config'],
+					StarlightPluginContext['config']
+				>,
 				/**
 				 * The command used to run Starlight.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#command-option
 				 */
-				command: z.any() as z.Schema<StarlightPluginContext['command']>,
+				command: z.any() as z.ZodType<
+					StarlightPluginContext['command'],
+					StarlightPluginContext['command']
+				>,
 				/**
 				 * `false` when the dev server starts, `true` when a reload is triggered.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#isrestart-option
 				 */
-				isRestart: z.any() as z.Schema<StarlightPluginContext['isRestart']>,
+				isRestart: z.any() as z.ZodType<
+					StarlightPluginContext['isRestart'],
+					StarlightPluginContext['isRestart']
+				>,
 				/**
 				 * An instance of the Astro integration logger with all logged messages prefixed with the
 				 * plugin name.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
 				 */
-				logger: z.any() as z.Schema<StarlightPluginContext['logger']>,
+				logger: z.any() as z.ZodType<
+					StarlightPluginContext['logger'],
+					StarlightPluginContext['logger']
+				>,
 				/**
 				 * A callback function to generate a utility function to access UI strings for a given
 				 * language.
@@ -327,9 +344,7 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				useTranslations: z.any() as z.Schema<
-					Awaited<ReturnType<typeof createTranslationSystemFromFs>>
-				>,
+				useTranslations: z.any() as z.ZodType<StarlightI18nTFactory, StarlightI18nTFactory>,
 				/**
 				 * A callback function to get the language for a given absolute file path. The returned
 				 * language can be used with the `useTranslations` helper to get UI strings for that

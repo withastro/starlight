@@ -24,7 +24,7 @@ type TypeErrByPathEntry = {
  * @param message Error message preamble to use if the input fails to parse.
  * @returns Validated data parsed by Zod.
  */
-export function parseWithFriendlyErrors<T extends z.Schema>(
+export function parseWithFriendlyErrors<T extends z.ZodType>(
 	schema: T,
 	input: z.input<T>,
 	message: string
@@ -44,7 +44,7 @@ export function parseWithFriendlyErrors<T extends z.Schema>(
  * @param message Error message preamble to use if the input fails to parse.
  * @returns Validated data parsed by Zod.
  */
-export async function parseAsyncWithFriendlyErrors<T extends z.Schema>(
+export async function parseAsyncWithFriendlyErrors<T extends z.ZodType>(
 	schema: T,
 	input: z.input<T>,
 	message: string
@@ -55,7 +55,7 @@ export async function parseAsyncWithFriendlyErrors<T extends z.Schema>(
 	);
 }
 
-function processParsedData<T extends z.Schema>(
+function processParsedData<T extends z.ZodType>(
 	parsedData: z.ZodSafeParseResult<z.output<T>>,
 	message: string
 ) {

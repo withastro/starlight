@@ -33,8 +33,11 @@ const SidebarGroupSchema = z.object({
 const linkHTMLAttributesSchema = z.record(
 	z.string(),
 	z.union([z.string(), z.number(), z.boolean(), z.undefined(), z.null()])
-) as z.Schema<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>;
-export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
+) as z.ZodType<LinkHTMLAttributes, LinkHTMLAttributes>;
+export type LinkHTMLAttributes = Omit<
+	HTMLAttributes<'a'>,
+	keyof AstroBuiltinAttributes | 'children'
+>;
 
 export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchema.default({});
 
