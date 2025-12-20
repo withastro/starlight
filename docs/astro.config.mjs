@@ -111,6 +111,17 @@ export default defineConfig({
 								uk: 'Вплив на довкілля',
 							},
 						},
+						{
+							label: 'Accessibility Statement',
+							slug: 'accessibility-statement',
+							translations: {
+								de: 'Zugangserklärung',
+								es: 'Declaración de accesibilidad',
+								ja: 'アクセシビリティステートメント',
+								fr: "Déclaration d'accessibilité",
+								it: 'Dichiarazione di accessibilità',
+							},
+						},
 					],
 				},
 				{
