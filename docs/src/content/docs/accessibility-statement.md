@@ -88,7 +88,7 @@ Learn more about web accessibility:
 
 ---
 
-This statement was last updated on December 2024.
+This statement was last updated on December 2025.
 
 [wcag]: https://www.w3.org/WAI/standards-guidelines/wcag/
 [webaim]: https://webaim.org/
