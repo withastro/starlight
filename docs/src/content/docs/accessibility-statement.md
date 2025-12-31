@@ -3,97 +3,85 @@ title: Accessibility Statement
 description: Our commitment to making Starlight accessible for everyone.
 ---
 
-At Starlight, we believe that documentation should be accessible to everyone, regardless of ability or circumstance. Accessibility is a core value that guides how we build and maintain this documentation theme.
+At Starlight, we believe that documentation should be accessible to everyone, regardless of ability or circumstance. We are continually improving the user experience for everyone and applying the relevant accessibility standards.
 
-## Our commitment
+## Measures to support accessibility
 
-Starlight is designed to conform to the [Web Content Accessibility Guidelines (WCAG) 2.2][wcag], Level AA.
-These guidelines help ensure web content is accessible to people with a wide range of disabilities, including visual, auditory, motor, speech, cognitive, language, learning, and neurological disabilities.
+Starlight takes the following measures to ensure accessibility:
 
-We actively work to meet and exceed these standards because accessible documentation benefits everyone: whether you use a screen reader, navigate with a keyboard, have low vision, or simply prefer high contrast modes.
+- Include accessibility throughout our development process
+- Review accessibility in pull requests and code reviews
+- Maintain issues labeled [`a11y`][a11y-issues] to track accessibility work
+- Welcome and act on community accessibility feedback and audits
 
-## Accessibility features
+## Conformance status
 
-Starlight includes the following accessibility features by default:
+The [Web Content Accessibility Guidelines (WCAG)][wcag] defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA.
 
-### Navigation and structure
-
-- **Skip link**: A "Skip to content" link appears when tabbing, allowing keyboard users to bypass repetitive navigation
-- **Logical heading hierarchy**: Content follows a structured heading order to support screen reader navigation
-- **Landmark regions**: Proper use of HTML5 landmarks (`<nav>`, `<main>`, `<aside>`) helps assistive technologies understand page structure
-- **Consistent navigation**: The sidebar and header remain consistent across pages
-
-### Keyboard support
-
-- **Full keyboard navigability**: All interactive elements are accessible via keyboard
-- **Tab component navigation**: Arrow keys, Home, and End keys navigate between tabs
-- **Escape key support**: Closes modals and menus, returning focus appropriately
-- **Keyboard shortcuts**: Search opens with `Ctrl` + `K` or `⌘` + `K`
-
-### Visual accessibility
-
-- **Color contrast**: Text and interactive elements meet WCAG AA contrast requirements
-- **Dark and light themes**: Choose the theme that works best for you
-- **Responsive design**: Content adapts to different viewport sizes and zoom levels
-- **Focus indicators**: Visible focus states for keyboard navigation
-
-### Screen reader support
-
-- **ARIA attributes**: Used throughout components to convey state and relationships
-- **Accessible labels**: Interactive elements include descriptive labels for assistive technologies
-- **Language attributes**: Proper `lang` attributes support screen reader pronunciation
-- **Text alternatives**: Icons include screen reader text; decorative images are hidden appropriately
-
-### Content accessibility
-
-- **Semantic HTML**: Content uses appropriate HTML elements for meaning, not just appearance
-- **Link text**: Links describe their destination, not just "click here"
-- **Code blocks**: Syntax-highlighted code maintains readability and supports copy functionality
-
-## Areas for improvement
-
-We recognize that accessibility is an ongoing effort and are actively working on the following improvements:
-
-- **Search experience**: Enhancing screen reader feedback for search results and focus management
-- **Interactive elements**: Adding more visual indicators beyond color for hover and focus states
-- **Consistent focus styling**: Implementing uniform focus outlines across all browsers
-- **High zoom support**: Improving the layout when browsers are zoomed to 400%
-
-:::tip[Want to help?]
-These focus areas were identified through [community feedback][audit]. If you spot accessibility issues or have suggestions, we'd love to hear from you!
-:::
+Starlight is partially conformant with WCAG 2.2 level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard.
 
 ## Feedback
 
 We welcome your feedback on the accessibility of Starlight.
-If you encounter barriers or have suggestions for improvement, please let us know:
+Please let us know if you encounter accessibility barriers:
 
-- **GitHub Issues**: [Open an accessibility issue][new-issue] with details about the barrier you encountered
-- **Discord**: Join the [Astro Discord][discord] and share your feedback in the `#starlight` channel
+- **Email**: [accessibility@astro.build](mailto:accessibility@astro.build)
+- **GitHub**: [Open an accessibility issue][new-issue]
+- **Discord**: [Astro Discord][discord] in the `#starlight` channel
 
-When reporting issues, please include:
+We try to respond to accessibility feedback within 5 business days.
 
-- The URL of the page where you experienced the issue
-- A description of the problem and how it affects your use of the documentation
-- The assistive technology you were using (if applicable)
+## Technical specifications
 
-## Resources
+Accessibility of Starlight relies on the following technologies:
 
-Learn more about web accessibility:
+- HTML
+- WAI-ARIA
+- CSS
+- JavaScript
 
-- [Web Content Accessibility Guidelines (WCAG) 2.2][wcag]
-- [WebAIM: Web Accessibility In Mind][webaim]
-- [The A11Y Project][a11y-project]
-- [MDN: Accessibility][mdn-a11y]
+These technologies are used in combination with modern browsers and assistive technologies to provide an accessible experience.
+
+### Accessibility features
+
+Starlight includes the following accessibility features by default:
+
+- **Skip link** to bypass navigation and jump to main content
+- **Logical heading hierarchy** for screen reader navigation
+- **Landmark regions** (`<nav>`, `<main>`, `<aside>`) for assistive technology navigation
+- **Full keyboard navigation** for all interactive elements
+- **Arrow key, Home, and End key support** for tab components
+- **Escape key** closes modals and menus with proper focus management
+- **Keyboard shortcuts** for search (`Ctrl` + `K` or `⌘` + `K`)
+- **Color contrast** meeting WCAG AA requirements
+- **Dark and light themes** with user preference support
+- **Responsive design** adapting to different viewport sizes
+- **Visible focus indicators** for keyboard navigation
+- **ARIA attributes** throughout components
+- **Screen reader labels** for interactive elements
+- **Language attributes** for proper pronunciation
+- **Semantic HTML** for meaningful structure
+
+## Limitations and alternatives
+
+Despite our best efforts to ensure accessibility of Starlight, there may be some limitations. Known limitations are tracked in [issues labeled `a11y` on GitHub][a11y-issues].
+
+Please [contact us](#feedback) if you encounter an issue not listed there.
+
+## Assessment approach
+
+Starlight assesses accessibility through the following approaches:
+
+- Self-evaluation by maintainers
+- Community accessibility audits
+- Automated testing in our CI pipeline
 
 ---
 
-This statement was last updated on December 2025.
+This statement was created on January 2026 using the [W3C Accessibility Statement Generator Tool][wai-generator].
 
 [wcag]: https://www.w3.org/WAI/standards-guidelines/wcag/
-[webaim]: https://webaim.org/
-[a11y-project]: https://www.a11yproject.com/
-[mdn-a11y]: https://developer.mozilla.org/en-US/docs/Web/Accessibility
-[audit]: https://github.com/withastro/starlight/issues/2693
+[wai-generator]: https://www.w3.org/WAI/planning/statements/generator/
+[a11y-issues]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3Aa11y
 [new-issue]: https://github.com/withastro/starlight/issues/new?labels=a11y&template=---02-docs-issue.yml
 [discord]: https://astro.build/chat
