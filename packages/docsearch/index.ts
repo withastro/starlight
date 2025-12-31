@@ -14,7 +14,7 @@ type SearchOptions = DocSearchClientOptions['searchParameters'];
 
 /** DocSearch configuration options. */
 const DocSearchConfigSchema = z
-	.object({
+	.strictObject({
 		// Required config without which DocSearch won’t work.
 		/** Your Algolia application ID. */
 		appId: z.string(),
@@ -44,47 +44,44 @@ const DocSearchConfigSchema = z
 		 */
 		searchParameters: z.custom<SearchOptions>(),
 	})
-	.strict()
 	.or(
-		z
-			.object({
-				/**
-				 * The path to a JavaScript or TypeScript file containing a default export of options to
-				 * pass to the DocSearch client.
-				 *
-				 * The value can be a path to a local JS/TS file relative to the root of your project,
-				 * e.g. `'/src/docsearch.js'`, or an npm module specifier for a package you installed,
-				 * e.g. `'@company/docsearch-config'`.
-				 *
-				 * Use `clientOptionsModule` when you need to configure options that are not serializable,
-				 * such as `transformSearchClient()` or `resultsFooterComponent()`.
-				 *
-				 * When `clientOptionsModule` is set, all options must be set via the module file. Other
-				 * inline options passed to the plugin in `astro.config.mjs` will be ignored.
-				 *
-				 * @see https://docsearch.algolia.com/docs/api
-				 *
-				 * @example
-				 * // astro.config.mjs
-				 * // ...
-				 * starlightDocSearch({ clientOptionsModule: './src/config/docsearch.ts' }),
-				 * // ...
-				 *
-				 * // src/config/docsearch.ts
-				 * import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
-				 *
-				 * export default {
-				 *   appId: '...',
-				 *   apiKey: '...',
-				 *   indexName: '...',
-				 *   getMissingResultsUrl({ query }) {
-				 *     return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
-				 *   },
-				 * } satisfies DocSearchClientOptions;
-				 */
-				clientOptionsModule: z.string(),
-			})
-			.strict()
+		z.strictObject({
+			/**
+			 * The path to a JavaScript or TypeScript file containing a default export of options to
+			 * pass to the DocSearch client.
+			 *
+			 * The value can be a path to a local JS/TS file relative to the root of your project,
+			 * e.g. `'/src/docsearch.js'`, or an npm module specifier for a package you installed,
+			 * e.g. `'@company/docsearch-config'`.
+			 *
+			 * Use `clientOptionsModule` when you need to configure options that are not serializable,
+			 * such as `transformSearchClient()` or `resultsFooterComponent()`.
+			 *
+			 * When `clientOptionsModule` is set, all options must be set via the module file. Other
+			 * inline options passed to the plugin in `astro.config.mjs` will be ignored.
+			 *
+			 * @see https://docsearch.algolia.com/docs/api
+			 *
+			 * @example
+			 * // astro.config.mjs
+			 * // ...
+			 * starlightDocSearch({ clientOptionsModule: './src/config/docsearch.ts' }),
+			 * // ...
+			 *
+			 * // src/config/docsearch.ts
+			 * import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+			 *
+			 * export default {
+			 *   appId: '...',
+			 *   apiKey: '...',
+			 *   indexName: '...',
+			 *   getMissingResultsUrl({ query }) {
+			 *     return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+			 *   },
+			 * } satisfies DocSearchClientOptions;
+			 */
+			clientOptionsModule: z.string(),
+		})
 	);
 
 type DocSearchUserConfig = z.infer<typeof DocSearchConfigSchema>;
