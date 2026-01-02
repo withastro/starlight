@@ -5,6 +5,13 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'astro/zod';
 
+const moduleId = 'virtual:starlight/docsearch-config';
+const resolvedModuleId = `\0${moduleId}`;
+
+// https://vite.dev/guide/api-plugin#hook-filters
+const pluginResolveIdIdFilter = new RegExp(`^${moduleId}$`);
+const pluginLoadIdFilter = new RegExp(`^${resolvedModuleId}$`);
+
 export type DocSearchClientOptions = Omit<
 	Parameters<typeof docsearch>[0],
 	'container' | 'translations'
@@ -133,9 +140,6 @@ export default function starlightDocSearch(userConfig: DocSearchUserConfig): Sta
 
 /** Vite plugin that exposes the DocSearch config via virtual modules. */
 function vitePluginDocSearch(root: URL, config: DocSearchUserConfig): VitePlugin {
-	const moduleId = 'virtual:starlight/docsearch-config';
-	const resolvedModuleId = `\0${moduleId}`;
-
 	const resolveId = (id: string, base = root) =>
 		JSON.stringify(id.startsWith('.') ? resolve(fileURLToPath(base), id) : id);
 
@@ -149,11 +153,17 @@ function vitePluginDocSearch(root: URL, config: DocSearchUserConfig): VitePlugin
 
 	return {
 		name: 'vite-plugin-starlight-docsearch-config',
-		load(id) {
-			return id === resolvedModuleId ? moduleContent : undefined;
+		load: {
+			filter: { id: pluginLoadIdFilter },
+			handler(id) {
+				return id === resolvedModuleId ? moduleContent : undefined;
+			},
 		},
-		resolveId(id) {
-			return id === moduleId ? resolvedModuleId : undefined;
+		resolveId: {
+			filter: { id: pluginResolveIdIdFilter },
+			handler(id) {
+				return id === moduleId ? resolvedModuleId : undefined;
+			},
 		},
 	};
 }

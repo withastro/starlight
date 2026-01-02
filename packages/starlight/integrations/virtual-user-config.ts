@@ -7,6 +7,11 @@ import type { StarlightConfig } from '../utils/user-config';
 import { getAllNewestCommitDate } from '../utils/git';
 import type { PluginTranslations } from '../utils/plugins';
 
+// https://vite.dev/guide/api-plugin#hook-filters
+const pluginResolveIdIdFilter = /^virtual:starlight\//;
+// eslint-disable-next-line no-control-regex -- virtual module prefix
+const pluginLoadIdFilter = /^\x00virtual:starlight\//;
+
 function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 	return `\0${id}`;
 }
@@ -147,12 +152,18 @@ export function vitePluginStarlightUserConfig(
 
 	return {
 		name: 'vite-plugin-starlight-user-config',
-		resolveId(id): string | void {
-			if (id in modules) return resolveVirtualModuleId(id);
+		resolveId: {
+			filter: { id: pluginResolveIdIdFilter },
+			handler(id): string | void {
+				if (id in modules) return resolveVirtualModuleId(id);
+			},
 		},
-		load(id): string | void {
-			const resolution = resolutionMap[id];
-			if (resolution) return modules[resolution];
+		load: {
+			filter: { id: pluginLoadIdFilter },
+			handler(id): string | void {
+				const resolution = resolutionMap[id];
+				if (resolution) return modules[resolution];
+			},
 		},
 	};
 }
