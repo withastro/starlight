@@ -9,7 +9,7 @@ import Sitemapper from 'sitemapper';
 
 // We use the Lunaria config to get the list of languages rather than the Astro config as importing
 // the latter does not play well with Playwright.
-import lunariaConfig from '../lunaria.config.json' assert { type: 'json' };
+import lunariaConfig from '../lunaria.config.json' with { type: 'json' };
 
 export { expect, type Locator } from '@playwright/test';
 
@@ -72,7 +72,11 @@ export const test = baseTest.extend<{
 
 // A Playwright test fixture accessible from within all tests.
 class DocsSite {
-	constructor(private readonly page: Page) {}
+	private readonly page: Page;
+
+	constructor(page: Page) {
+		this.page = page;
+	}
 
 	async getAllUrls() {
 		const sitemap = new Sitemapper({ url: config.sitemap.url });
