@@ -49,7 +49,7 @@ const DocSearchConfigSchema = z
 		 * The Algolia Search Parameters.
 		 * @see https://www.algolia.com/doc/api-reference/search-api-parameters/
 		 */
-		searchParameters: z.custom<SearchOptions>(),
+		searchParameters: z.custom<SearchOptions>().optional(),
 	})
 	.or(
 		z.strictObject({
