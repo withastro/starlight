@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.37.2
+
+### Patch Changes
+
+- [#3647](https://github.com/withastro/starlight/pull/3647) [`9f4efc3`](https://github.com/withastro/starlight/commit/9f4efc3c59ee41038b7c0550230a10bb35ad0e50) Thanks [@gerstenbergit](https://github.com/gerstenbergit)! - Adds Greek language support
+
 ## 0.37.1
 
 ### Patch Changes
