@@ -69,6 +69,6 @@ export default Object.fromEntries(
 		sk,
 		lv,
 		hu,
-        el,
+		el,
 	}).map(([key, dict]) => [key, parse(dict)])
 );
