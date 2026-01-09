@@ -2,6 +2,7 @@
   "name": "@e2e/no-node-builtins",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
     "astro": "^6.0.0-alpha.5"
