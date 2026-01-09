@@ -1,5 +1,4 @@
 import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
-import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveCollectionPath } from '../utils/collection-fs';
@@ -22,11 +21,13 @@ export function vitePluginStarlightUserConfig(
 	opts: StarlightConfig,
 	{
 		build,
+		legacy,
 		root,
 		srcDir,
 		trailingSlash,
 	}: Pick<AstroConfig, 'root' | 'srcDir' | 'trailingSlash'> & {
 		build: Pick<AstroConfig['build'], 'format'>;
+		legacy: Pick<AstroConfig['legacy'], 'collectionsBackwardsCompat'>;
 	},
 	pluginTranslations: PluginTranslations
 ): NonNullable<ViteUserConfig['plugins']>[number] {
@@ -52,16 +53,10 @@ export function vitePluginStarlightUserConfig(
 	const rootPath = fileURLToPath(root);
 	const docsPath = resolveCollectionPath('docs', srcDir);
 
-	let collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content.config.ts');
-	// TODO(HiDeoo) This fs test should be removed and the `legacy.collectionsBackwardsCompat` flag
-	// TODO(HiDeoo) should be used instead when available.
-	// TODO(HiDeoo) @see https://github.com/withastro/astro/pull/14927
-	// If the config doesn't exist, fallback to the legacy location. We need to test this ahead of
-	// time as we cannot `try/catch` a failing import in the virtual module as this would fail at
-	// build time when Rollup tries to resolve a non-existent path.
-	if (!existsSync(collectionConfigImportPath)) {
-		collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content/config.ts');
-	}
+	const collectionConfigImportPath = resolve(
+		fileURLToPath(srcDir),
+		legacy.collectionsBackwardsCompat ? './content/config.ts' : './content.config.ts'
+	);
 
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [

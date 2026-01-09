@@ -37,6 +37,7 @@ export async function defineVitestConfig(
 					srcDir,
 					build,
 					trailingSlash,
+					legacy: { collectionsBackwardsCompat: false },
 				},
 				pluginTranslations
 			),

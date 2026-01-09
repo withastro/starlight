@@ -310,7 +310,7 @@ importers:
         specifier: ^6.0.0-alpha.5
         version: 6.0.0-alpha.5(@types/node@22.19.3)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.3)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.7.1)
 
-  packages/starlight/__e2e__/fixtures/legacy-collection-config-file:
+  packages/starlight/__e2e__/fixtures/legacy-collections-backwards-compat:
     dependencies:
       '@astrojs/starlight':
         specifier: workspace:*
