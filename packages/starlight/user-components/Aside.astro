@@ -4,8 +4,15 @@ import Icon from './Icon.astro';
 import { Icons, type StarlightIcon } from '../components/Icons';
 import { throwInvalidAsideIconError } from '../integrations/asides-error';
 
-const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
-const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 'error' } as const;
+const asideVariants = ['note', 'tip', 'caution', 'danger', 'success', 'minimal'] as const;
+const icons = {
+	note: 'information',
+	tip: 'rocket',
+	caution: 'warning',
+	danger: 'error',
+	success: 'approve-check-circle',
+	minimal: 'right-caret',
+} as const;
 
 interface Props {
 	type?: (typeof asideVariants)[number];

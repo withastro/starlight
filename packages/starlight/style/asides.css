@@ -24,6 +24,16 @@
 		--sl-color-asides-border: var(--sl-color-red);
 		background-color: var(--sl-color-red-low);
 	}
+	.starlight-aside--success {
+		--sl-color-asides-text-accent: var(--sl-color-green-high);
+		--sl-color-asides-border: var(--sl-green-red);
+		background-color: var(--sl-color-green-low);
+	}
+	.starlight-aside--minimal {
+		--sl-color-asides-text-accent: var(--sl-color-gray-1);
+		--sl-color-asides-border: var(--sl-color-gray-3);
+		background-color: var(--sl-color-gray-6);
+	}
 
 	.starlight-aside__title {
 		display: flex;

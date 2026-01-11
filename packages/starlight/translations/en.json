@@ -24,6 +24,8 @@
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
+  "aside.success": "Success",
+  "aside.minimal": "Aside",
   "fileTree.directory": "Directory",
   "builtWithStarlight.label": "Built with Starlight",
   "heading.anchorLabel": "Section titled “{{title}}”"
