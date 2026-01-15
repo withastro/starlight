@@ -5,6 +5,14 @@ export class StarlightTOC extends HTMLElement {
 	private minH = parseInt(this.dataset.minH || '2', 10);
 	private maxH = parseInt(this.dataset.maxH || '3', 10);
 
+	/**
+	 * CSS selector string that matches only headings that can appear in the table of contents.
+	 * Generates a selector like `h1#_top,:where(h2,h3)[id]`.
+	 */
+	private tocHeadingSelector =
+		`h1#${PAGE_TITLE_ID},` +
+		`:where(${[...Array.from({ length: 1 + this.maxH - this.minH }).map((_, index) => `h${this.minH + index}`)].join()})[id]`;
+
 	protected set current(link: HTMLAnchorElement) {
 		if (link === this._current) return;
 		if (this._current) this._current.removeAttribute('aria-current');
@@ -25,28 +33,21 @@ export class StarlightTOC extends HTMLElement {
 		const links = [...this.querySelectorAll('a')];
 
 		/** Test if an element is a table-of-contents heading. */
-		const isHeading = (el: Element): el is HTMLHeadingElement => {
-			if (el instanceof HTMLHeadingElement) {
-				// Special case for page title h1
-				if (el.id === PAGE_TITLE_ID) return true;
-				// Check the heading level is within the user-configured limits for the ToC
-				const level = el.tagName[1];
-				if (level) {
-					const int = parseInt(level, 10);
-					if (int >= this.minH && int <= this.maxH) return true;
-				}
-			}
-			return false;
-		};
+		const isHeading = (el: Element): el is HTMLHeadingElement =>
+			el.matches(this.tocHeadingSelector);
 
 		/** Walk up the DOM to find the nearest heading. */
 		const getElementHeading = (el: Element | null): HTMLHeadingElement | null => {
 			if (!el) return null;
 			const origin = el;
 			while (el) {
+				// Short circuit if we reach the top-level content container.
+				if (el.classList.contains('sl-markdown-content')) {
+					return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement;
+				}
 				if (isHeading(el)) return el;
 				// Find the first heading that is a child of this element, and return it if there is one.
-				const childHeading = el.querySelector<HTMLHeadingElement>('h1, h2, h3, h4, h5, h6');
+				const childHeading = el.querySelector<HTMLHeadingElement>(this.tocHeadingSelector);
 				if (childHeading) return childHeading;
 				// Assign the previous sibling’s last, most deeply nested child to el.
 				el = el.previousElementSibling;
@@ -76,12 +77,14 @@ export class StarlightTOC extends HTMLElement {
 		};
 
 		// Observe the following elements:
-		// - elements with an `id` (most commonly headings)
-		// - siblings of elements with an `id` or with the `sl-heading-wrapper` class added by Starlight’s anchor links feature
+		// - headings that appear in the table of contents
+		// - siblings of those headings or of the `.sl-heading-wrapper` added by Starlight’s anchor links feature
 		// - direct children of `.sl-markdown-content` to include elements before the first subheading
-		// Ignore any elements that themselves contain an element with an `id`, as we are already observing those children.
+		// Ignore any elements that themselves contain a table-of-contents heading, as we are already observing those children.
 		const toObserve = document.querySelectorAll(
-			'main [id], main :where([id], .sl-heading-wrapper) ~ *:not(:has([id])), main .sl-markdown-content > *:not(:has([id]))'
+			`main ${this.tocHeadingSelector},` +
+				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector})),` +
+				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`
 		);
 
 		let observer: IntersectionObserver | undefined;
