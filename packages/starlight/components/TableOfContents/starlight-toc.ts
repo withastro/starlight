@@ -45,6 +45,9 @@ export class StarlightTOC extends HTMLElement {
 			const origin = el;
 			while (el) {
 				if (isHeading(el)) return el;
+				// Find the first heading that is a child of this element, and return it if there is one.
+				const childHeading = el.querySelector<HTMLHeadingElement>('h1, h2, h3, h4, h5, h6');
+				if (childHeading) return childHeading;
 				// Assign the previous sibling’s last, most deeply nested child to el.
 				el = el.previousElementSibling;
 				while (el?.lastElementChild) {
@@ -72,10 +75,14 @@ export class StarlightTOC extends HTMLElement {
 			}
 		};
 
-		// Observe elements with an `id` (most likely headings) and their siblings.
-		// Also observe direct children of `.content` to include elements before
-		// the first heading.
-		const toObserve = document.querySelectorAll('main [id], main [id] ~ *, main .content > *');
+		// Observe the following elements:
+		// - elements with an `id` (most commonly headings)
+		// - siblings of elements with an `id` or with the `sl-heading-wrapper` class added by Starlight’s anchor links feature
+		// - direct children of `.sl-markdown-content` to include elements before the first subheading
+		// Ignore any elements that themselves contain an element with an `id`, as we are already observing those children.
+		const toObserve = document.querySelectorAll(
+			'main [id], main :where([id], .sl-heading-wrapper) ~ *:not(:has([id])), main .sl-markdown-content > *:not(:has([id]))'
+		);
 
 		let observer: IntersectionObserver | undefined;
 		const observe = () => {
