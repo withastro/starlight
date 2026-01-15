@@ -78,25 +78,17 @@ export class StarlightTOC extends HTMLElement {
 				}
 			}
 
-			// Fallback: if no heading intersects (because the banner is higher and moves the content down too much),
-			// create a temporal IntersectionObserver without rootMargin that finds the nearest heading.
+			// Fallback: if no heading intersects (because the banner is higher
+			// and moves the content down too much), set the page title to the current link.
 			// See https://github.com/withastro/starlight/issues/3047
 			if (!found) {
-				const tempObserver = new IntersectionObserver((tempEntries) => {
-					for (const { isIntersecting, target } of tempEntries) {
-						if (!isIntersecting) continue;
-						const heading = getElementHeading(target);
-						if (!heading) continue;
-						const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
-						if (link) {
-							this.current = link;
-							break;
-						}
+				const firstHeading = document.querySelector('main h1');
+				if (firstHeading) {
+					const link = links.find((l) => l.hash === '#' + encodeURIComponent(firstHeading.id));
+					if (link) {
+						this.current = link;
 					}
-					tempObserver.disconnect();
-				});
-
-				document.querySelectorAll('main [id]').forEach((el) => tempObserver.observe(el));
+				}
 			}
 		};
 
