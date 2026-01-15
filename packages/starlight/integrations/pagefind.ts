@@ -12,7 +12,7 @@ export async function starlightPagefind({
 
 	try {
 		const now = performance.now();
-		logger.info('Running Pagefind…');
+		logger.info('Building search index with Pagefind...');
 
 		const newIndexResponse = await pagefind.createIndex();
 
@@ -33,10 +33,10 @@ export async function starlightPagefind({
 
 		const pagefindTime = performance.now() - now;
 		logger.info(
-			`Finished running Pagefind in ${pagefindTime < 750 ? `${Math.round(pagefindTime)}ms` : `${(pagefindTime / 1000).toFixed(2)}s`}.`
+			`Finished building search index in ${pagefindTime < 750 ? `${Math.round(pagefindTime)}ms` : `${(pagefindTime / 1000).toFixed(2)}s`}.`
 		);
-	} catch {
-		throw new Error('Failed to run Pagefind.');
+	} catch (cause) {
+		throw new Error('Failed to run Pagefind.', { cause });
 	} finally {
 		await pagefind.close();
 	}
