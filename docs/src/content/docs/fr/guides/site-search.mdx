@@ -82,7 +82,7 @@ Si vous avez accès au [programme DocSearch d'Algolia](https://docsearch.algolia
 
    </Tabs>
 
-2. Ajouter DocSearch à votre configuration [`plugins`](/fr/reference/configuration/#plugins) de Starlight dans le fichier `astro.config.mjs` et spécifiez votre `appId`, `apiKey` et `indexName` d'Algolia :
+2. Ajouter DocSearch à votre configuration [`plugins`](/fr/reference/configuration/#plugins) de Starlight dans le fichier `astro.config.mjs` et spécifiez vos `appId`, `apiKey` et `indexName` d'Algolia :
 
    ```js ins={4,10-16}
    // astro.config.mjs
@@ -112,11 +112,11 @@ Avec cette configuration mise à jour, la barre de recherche de votre site ouvri
 
 #### Configuration de DocSearch
 
-Le module d’extension DocSearch de Starlight supporte la personnalisation du composant DocSearch avec les options supplémentaires suivantes spécifiées dans la configuration du module d’extension :
+Le module d’extension DocSearch de Starlight prend en charge la personnalisation du composant DocSearch avec les options supplémentaires suivantes spécifiées dans la configuration du module d’extension :
 
 - `maxRecentSearches`: Limite le nombre de résultats affichés pour chaque groupe de recherche. La valeur par défaut est `5`.
 - `disableUserPersonalization`: Empêche DocSearch de sauvegarder les recherches récentes et favorites d'un utilisateur localement. La valeur par défaut est `false`.
-- `insights`: Active le plugin Algolia Insights et envoie les événements liés à toute recherche à votre index DocSearch. La valeur par défaut est `false`.
+- `insights`: Active le module d'extension Algolia Insights et envoie les événements liés à toute recherche à votre index DocSearch. La valeur par défaut est `false`.
 - `searchParameters`: Un objet personnalisant les [paramètres de recherche Algolia](https://www.algolia.com/doc/api-reference/search-api-parameters/).
 
 ##### Options supplémentaires de DocSearch
@@ -232,3 +232,13 @@ Ajoutez des traductions de l'interface utilisateur de la modale pour votre langu
    ```
 
 </Steps>
+
+### Systèmes de recherche communautaires
+
+Les [modules d'extension communautaires](/fr/resources/plugins/#modules-dextension-communautaires) peuvent également fournir des alternatives au système de recherche Pagefind intégré à Starlight.
+
+#### Typesense DocSearch
+
+Le module d'extension communautaire [Starlight DocSearch Typesense](https://starlight-docsearch.typesense.org/) fournit une alternative open-source et auto-hébergeable qui intègre l'interface [DocSearch](https://github.com/typesense/typesense-docsearch.js) avec un backend [Typesense](https://typesense.org/).
+
+Consultez le [guide de démarrage](https://starlight-docsearch.typesense.org/getting-started/) dans la documentation de Starlight DocSearch Typesense pour apprendre comment l’utiliser dans votre projet.

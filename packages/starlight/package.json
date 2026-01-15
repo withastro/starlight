@@ -1,12 +1,14 @@
 {
   "name": "@astrojs/starlight",
-  "version": "0.35.2",
+  "version": "0.37.3",
   "description": "Build beautiful, high-performance documentation websites with Astro",
   "scripts": {
     "test": "vitest",
     "test:legacy": "LEGACY_COLLECTIONS=true vitest",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "playwright install --with-deps chromium && playwright test"
+    "test:e2e": "pnpm test:e2e:chrome",
+    "test:e2e:chrome": "playwright install --with-deps chromium && playwright test --project chrome",
+    "test:e2e:firefox": "playwright install --with-deps firefox && playwright test --project firefox"
   },
   "keywords": [
     "docs",
@@ -210,6 +212,7 @@
     "i18next": "^23.11.5",
     "js-yaml": "^4.1.0",
     "klona": "^2.0.6",
+    "magic-string": "^0.30.17",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.0",
     "mdast-util-to-string": "^4.0.0",

@@ -84,9 +84,9 @@
 		--sl-line-height: 1.75;
 		--sl-line-height-headings: 1.2;
 
-		--sl-font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-			Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-			'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+		--sl-font-system: ui-sans-serif, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+			'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+			'Noto Color Emoji';
 		--sl-font-system-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
 			'Courier New', monospace;
 		--__sl-font: var(--sl-font, var(--sl-font-system)), var(--sl-font-system);
@@ -101,6 +101,7 @@
 		--sl-sidebar-pad-x: 1rem;
 		--sl-content-width: 45rem;
 		--sl-content-pad-x: 1rem;
+		--sl-content-gap-y: 1rem;
 		--sl-main-pad: 0 0 3vh 0;
 		--sl-menu-button-size: 2rem;
 		--sl-nav-gap: var(--sl-content-pad-x);

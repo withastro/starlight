@@ -91,7 +91,7 @@ importers:
   examples/basics:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.35.2
+        specifier: ^0.37.3
         version: link:../../packages/starlight
       astro:
         specifier: ^5.6.1
@@ -106,10 +106,10 @@ importers:
         specifier: ^0.13.3
         version: 0.13.4(astro@5.6.2(@types/node@18.16.19)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@4.36.0)(tsx@4.15.2)(typescript@5.6.3)(yaml@2.6.1))
       '@astrojs/starlight':
-        specifier: ^0.35.2
+        specifier: ^0.37.3
         version: link:../../packages/starlight
       '@astrojs/starlight-markdoc':
-        specifier: ^0.5.0
+        specifier: ^0.5.1
         version: link:../../packages/markdoc
       astro:
         specifier: ^5.6.1
@@ -121,10 +121,10 @@ importers:
   examples/tailwind:
     dependencies:
       '@astrojs/starlight':
-        specifier: ^0.35.2
+        specifier: ^0.37.3
         version: link:../../packages/starlight
       '@astrojs/starlight-tailwind':
-        specifier: ^4.0.1
+        specifier: ^4.0.2
         version: link:../../packages/tailwind
       '@tailwindcss/vite':
         specifier: ^4.0.7
@@ -227,6 +227,9 @@ importers:
       klona:
         specifier: ^2.0.6
         version: 2.0.6
+      magic-string:
+        specifier: ^0.30.17
+        version: 0.30.17
       mdast-util-directive:
         specifier: ^3.0.0
         version: 3.0.0

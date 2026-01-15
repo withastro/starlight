@@ -1,46 +1,18 @@
 import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdown-remark';
 import { expect, test } from 'vitest';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { StarlightConfigSchema, type StarlightUserConfig } from '../../utils/user-config';
-import { absolutePathToLang as getAbsolutePathFromLang } from '../../integrations/shared/absolutePathToLang';
-import { starlightAutolinkHeadings } from '../../integrations/heading-links';
-import { getCollectionPosixPath } from '../../utils/collection-fs';
+import type { StarlightUserConfig } from '../../utils/user-config';
+import { starlightRehypePlugins } from '../../integrations/remark-rehype';
+import { createRemarkRehypePluginTestOptions } from './utils';
 
-const starlightConfig = StarlightConfigSchema.parse({
+const starlightConfig = {
 	title: 'Anchor Links Tests',
 	locales: { en: { label: 'English' }, fr: { label: 'French' } },
 	defaultLocale: 'en',
-} satisfies StarlightUserConfig);
-
-const astroConfig = {
-	root: new URL(import.meta.url),
-	srcDir: new URL('./_src/', import.meta.url),
-};
-
-const useTranslations = await createTranslationSystemFromFs(
-	starlightConfig,
-	// Using non-existent `_src/` to ignore custom files in this test fixture.
-	{ srcDir: new URL('./_src/', import.meta.url) }
-);
-
-function absolutePathToLang(path: string) {
-	return getAbsolutePathFromLang(path, {
-		docsPath: getCollectionPosixPath('docs', astroConfig.srcDir),
-		starlightConfig,
-	});
-}
+} satisfies StarlightUserConfig;
 
 const processor = await createMarkdownProcessor({
 	rehypePlugins: [
-		...starlightAutolinkHeadings({
-			starlightConfig,
-			astroConfig: {
-				srcDir: astroConfig.srcDir,
-				experimental: { headingIdCompat: false },
-			},
-			useTranslations,
-			absolutePathToLang,
-		}),
+		...starlightRehypePlugins(await createRemarkRehypePluginTestOptions(starlightConfig)),
 	],
 });
 
@@ -74,7 +46,7 @@ test('strips HTML markup in accessible link label', async () => {
 ## Some _important nested \`HTML\`_
 `);
 	// Heading renders HTML
-	expect(res.code).includes('Some <em>important nested <code>HTML</code></em>');
+	expect(res.code).includes('Some <em>important nested <code dir="auto">HTML</code></em>');
 	// Visually hidden label renders plain text
 	expect(res.code).includes(
 		'<span class="sr-only">Section titled “Some important nested HTML”</span>'
@@ -89,17 +61,4 @@ test('localizes accessible label for the current language', async () => {
 		{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
 	);
 	expect(res.code).includes('<span class="sr-only">Section intitulée « Some text »</span>');
-});
-
-test('does not generate anchor links for documents without a file path', async () => {
-	const res = await processor.render(
-		`
-## Some text
-`,
-		// Rendering Markdown content using the content loader `renderMarkdown()` API does not provide
-		// a `fileURL` option.
-		{}
-	);
-
-	expect(res.code).not.includes('Section titled');
 });

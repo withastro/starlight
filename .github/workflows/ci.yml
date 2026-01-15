@@ -23,27 +23,46 @@ jobs:
       pull-requests: read
     outputs:
       docs: ${{ steps.filter.outputs.docs }}
+      docs_ja: ${{ steps.filter.outputs.docs_ja }}
+      docs_en: ${{ steps.filter.outputs.docs_en }}
+      docs_not_content: ${{ steps.filter.outputs.docs_not_content }}
       packages: ${{ steps.filter.outputs.packages }}
+      ci: ${{ steps.filter.outputs.ci }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
+        # When updating filters here, make sure to also add or remove them from the
+        # outputs block above.
         with:
           filters: |
             docs:
               - 'docs/**'
+            docs_ja:
+              - 'docs/src/content/docs/ja/**'
+            docs_en:
+              - 'docs/src/content/docs/**'
+              # Exclude languages with a two-letter code
+              - '!docs/src/content/docs/{a..z}{a..z}/**'
+              # Exclude languages with a region subtag
+              - '!docs/src/content/docs/{a..z}{a..z}-{a..z}{a..z}/**'
+            docs_not_content:
+              - 'docs/**'
+              - '!docs/src/content/docs/**'
             packages:
               - 'packages/**'
+            ci:
+              - '.github/workflows/ci.yml'
 
   unit-test:
     name: Run unit tests
     needs: changes
-    if: ${{ needs.changes.outputs.packages == 'true' }}
+    if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -57,30 +76,46 @@ jobs:
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'
     needs: changes
-    if: ${{ needs.changes.outputs.packages == 'true' }}
+    if: ${{ needs.changes.outputs.packages == 'true' || needs.changes.outputs.ci == 'true' }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      # Uninstall man-db to prevent man page updates taking a long time after package installations
+      # on Ubuntu 24.04.
+      # https://github.com/actions/runner/issues/4030
+      # https://github.com/actions/runner-images/issues/10977
+      - name: Uninstall man-db
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get remove man-db
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm i
-      - name: Test packages
-        run: pnpm -r test:e2e
+      - name: Test packages (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: pnpm -r test:e2e:chrome
+      # Firefox is used for Windows E2E tests as Chrome on Windows requires the installation of the
+      # Server Media Foundation windows feature, which can take up to 3 minutes to install on CI.
+      # https://github.com/microsoft/playwright/blob/e7bff526433b6dcb02801763ab5b1c6407902d47/packages/playwright-core/src/server/registry/dependencies.ts#L79-L89
+      - name: Test packages (Windows)
+        if: matrix.os == 'windows-latest'
+        run: pnpm -r test:e2e:firefox
 
   type-check:
     name: Run type checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -95,9 +130,9 @@ jobs:
     name: Lint code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -110,16 +145,27 @@ jobs:
 
   a11y:
     name: Check for accessibility issues
+    needs: changes
+    if: ${{ needs.changes.outputs.docs_not_content == 'true' || needs.changes.outputs.docs_ja == 'true' || needs.changes.outputs.docs_en == 'true' || needs.changes.outputs.ci == 'true' || needs.changes.outputs.packages == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      # Uninstall man-db to prevent man page updates taking a long time after package installations
+      # on Ubuntu 24.04.
+      # https://github.com/actions/runner/issues/4030
+      # https://github.com/actions/runner-images/issues/10977
+      - name: Uninstall man-db
+        run: |
+          sudo apt-get update
+          sudo apt-get remove man-db
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -135,9 +181,9 @@ jobs:
     name: Docs site builds on Windows
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -149,17 +195,17 @@ jobs:
   links:
     name: Check for broken links
     needs: changes
-    if: ${{ needs.changes.outputs.docs == 'true' }}
+    if: ${{ needs.changes.outputs.docs == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'

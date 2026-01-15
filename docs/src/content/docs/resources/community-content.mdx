@@ -50,6 +50,11 @@ Here is a collection of posts and articles to learn more about Starlight and oth
 		title="Starlight Changelog"
 		description="View all releases of the @astrojs/starlight package on a single beautiful page."
 	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/contributing-to-starlight"
+		title="Contributing to Starlight"
+		description="My personal experience and suggestions for contributing to open-source projects like Starlight."
+	/>
 </CardGrid>
 
 ## Recipes and Guides
@@ -62,42 +67,42 @@ Explore community-produced content maintained by Starlight users:
 	<LinkCard
 		href="https://www.webpro.nl/scraps/versioned-docs-with-starlight-and-vercel"
 		title="Versioned documentation with Starlight & Vercel"
-		description="A guide to implementing separate versions of documentation for each major version of a project"
+		description="A guide to implementing separate versions of documentation for each major version of a project."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-heading-links"
 		title="Add links to Starlight headings"
-		description="A guide to using a rehype plugin to share links to specific sections of your documentation"
+		description="A guide to using a rehype plugin to share links to specific sections of your documentation."
 	/>
 	<LinkCard
 		href="https://blog.otterlord.dev/posts/starlight-sponsors/"
 		title="Add sponsors to your Starlight site"
-		description="A guide to implement a custom sponsors component in your documentation sidebar"
+		description="A guide to implement a custom sponsors component in your documentation sidebar."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-og-images"
 		title="Add Open Graph images to Starlight"
-		description="A guide to generating social images and the corresponding meta tags for your pages"
+		description="A guide to generating social images and the corresponding meta tags for your pages."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-third-party-icon-sets"
 		title="Use third-party icon sets in Starlight"
-		description="A guide to using unplugin-icons to expand the selection of available icons for Starlight"
+		description="A guide to using unplugin-icons to expand the selection of available icons for Starlight."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-custom-html-head"
 		title="Edit the HTML head of Starlight pages"
-		description="Learn how to add common head content such as web analytics, fonts, and scripts"
+		description="Learn how to add common head content such as web analytics, fonts, and scripts."
 	/>
 	<LinkCard
 		href="https://dev.to/mrrobot/publishing-documentation-with-astro-starlight-691"
 		title="Publishing Documentation with Astro Starlight"
-		description="Getting started with Starlight documentation"
+		description="Getting started with Starlight documentation."
 	/>
 	<LinkCard
-		href="https://events-3bg.pages.dev/jotter/starlight/guide/"
+		href="https://events-3bg.pages.dev/jotter/starlight/"
 		title="Enable View Transitions"
-		description="Get that SPA-like look and feel with the Bag of Tricks’ view transitions support"
+		description="Add support for view transitions, client-side routing, and SPA-like navigation to your Starlight documentation site."
 	/>
 	<LinkCard
 		href="https://jamcomments.com/posts/structured-data-with-starlight"
@@ -119,6 +124,51 @@ Explore community-produced content maintained by Starlight users:
 		title="Add a reading progress indicator"
 		description="Find out how to add a horizontal reading progress bar to your Starlight site."
 	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-sidebar-whitespace/"
+		title="Apply custom styles to your Starlight sidebar"
+		description="Using a little bit of CSS to adjust fonts, colours and more of the Starlight sidebar."
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-dropdown-and-list-together/"
+		title="Starlight Topics Dropdown on mobile, List on desktop"
+		description="Combine two plugins to have the best of both on desktop and mobile devices."
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-autogenerate-whole-sidebar/"
+		title="Processing Starlight sidebars with middleware"
+		description="Use route middleware to control sidebar ordering and group labels, inspired by Nuxt Content’s conventions."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-custom-social-links"
+		title="Add social links with custom icons to Starlight"
+		description="Learn how to use custom icons for social links in Starlight website header."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-paste-images-with-visual-studio-code"
+		title="Paste images to Starlight pages with Visual Studio Code"
+		description="Improve your Starlight documentation workflow by pasting images to your documentation pages using Visual Studio Code."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-add-diagrams-using-d2"
+		title="Add diagrams to your Starlight documentation using D2"
+		description="Learn how to use D2 to add diagrams to your Starlight documentation."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-og-images-cloudinary-astro-sdk"
+		title="Generate Open Graph images for Starlight using the Cloudinary Astro SDK"
+		description="Learn how to use the Cloudinary Astro SDK to generate Open Graph images for your Starlight documentation website."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-list-recent-github-releases"
+		title="List recent GitHub releases in Starlight using the Astro Content Layer API"
+		description="Learn how to use the Astro Content Layer API to list the recent GitHub releases in a Starlight project."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-sitewide-banner"
+		title="Add a sitewide banner to Starlight"
+		description="Learn how to create a sitewide banner using Starlight's built-in per-page banner feature."
+	/>
 </CardGrid>
 
 ## Video Content
@@ -127,7 +177,7 @@ Discover videos and channels with Starlight content, including live streams and 
 
 import YouTubeGrid from '~/components/youtube-grid.astro';
 
-### Astro Videos
+### Official Videos
 
 <YouTubeGrid
 	videos={[
@@ -137,9 +187,10 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 			description: 'Watch the official Starlight launch video',
 		},
 		{
-			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
-			title: '🌟 SUB 1 MINUTE RUN',
-			description: 'Watch Ben launch a new Starlight site in under a minute!',
+			href: 'https://www.youtube.com/watch?v=j8K-ESJF814',
+			title: 'One year of Starlight!',
+			description:
+				"Sarah talks about Astro's community-built documentation theme",
 		},
 	]}
 />
@@ -148,6 +199,11 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 
 <YouTubeGrid
 	videos={[
+		{
+			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+			title: '🌟 SUB 1 MINUTE RUN',
+			description: 'Watch Ben launch a new Starlight site in under a minute!',
+		},
 		{
 			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
 			title: 'Building docs with Starlight and Astro',
