@@ -1,5 +1,6 @@
+import type { Page } from '@playwright/test';
 import fs from 'node:fs/promises';
-import { expect, testFactory, type Locator } from './test-utils';
+import { expect, testFactory, type Locator, type StarlightPage } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
 
@@ -551,3 +552,278 @@ test.describe('param normalization', () => {
 		await expect(content).toHaveText(/This file contains Arabic diacritics in the file name./);
 	});
 });
+
+test.describe('ToC highlighting', () => {
+	test.describe('highlights overview', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+	});
+
+	test.describe('highlights overview when scrolled to opening paragraph', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+	});
+
+	test.describe('highlights heading 1', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 1 when scrolled to paragraph below', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+	});
+
+	test.describe('highlights heading 3', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 3 from focusing on a list item', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test.describe('highlights h3 above an h4', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+});
+
+/**
+ * Loads the given `path` in a window of the specified `width` and `height` and checks that the
+ * Starlight table of contents is highlighting an item with contents matching `pattern`.
+ * The optional `scrollBy` parameter scrolls the page by that number of pixels before testing.
+ */
+function testTOCHighlighting({
+	width,
+	height,
+	path,
+	pattern,
+	scrollBy,
+}: {
+	width: number;
+	height: number;
+	path: string;
+	pattern: RegExp;
+	scrollBy?: number;
+}) {
+	return async ({
+		page,
+		getProdServer,
+	}: {
+		page: Page;
+		getProdServer: () => Promise<StarlightPage>;
+	}) => {
+		const test = async () => {
+			if (width > 1150) {
+				// On “desktop” viewports check the correct link is set as aria-current in the page sidebar.
+				const overviewLink = page.locator('starlight-toc [aria-current="true"]');
+				await expect(overviewLink).toHaveText(pattern);
+			} else {
+				// On smaller viewports, check the <MobileTableOfContents> component.
+				// The table of contents bar should display the current heading.
+				const currentSectionLabel = page.locator('mobile-starlight-toc .display-current');
+				await expect(currentSectionLabel).toHaveText(pattern);
+				// Within the table of contents drop down, the highlighted link should be correct.
+				const overviewLink = page.locator('mobile-starlight-toc [aria-current="true"]');
+				await expect(overviewLink).toHaveText(pattern);
+			}
+		};
+
+		page.setViewportSize({ width, height });
+		const starlight = await getProdServer();
+		await starlight.goto(path);
+		if (scrollBy) {
+			await page.mouse.wheel(0, scrollBy);
+		}
+
+		// Test highlighting on initial load
+		await test();
+
+		// Test highlighting on page refresh (which maintains scroll position)
+		await page.reload();
+		await test();
+	};
+}
