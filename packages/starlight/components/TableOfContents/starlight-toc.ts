@@ -62,10 +62,10 @@ export class StarlightTOC extends HTMLElement {
 			return getElementHeading(origin.parentElement);
 		};
 
+		let hasIntersectingHeading = false;
+
 		/** Handle intersections and set the current link to the heading for the current intersection. */
 		const setCurrent: IntersectionObserverCallback = (entries) => {
-			let found = false;
-
 			for (const { isIntersecting, target } of entries) {
 				if (!isIntersecting) continue;
 				const heading = getElementHeading(target);
@@ -73,15 +73,15 @@ export class StarlightTOC extends HTMLElement {
 				const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
 				if (link) {
 					this.current = link;
-					found = true;
+					hasIntersectingHeading = true;
 					break;
 				}
 			}
 
-			// Fallback: if no heading intersects (because the banner is higher
-			// and moves the content down too much), set the page title to the current link.
+			// Fallback: if no heading intersects (because the banner is higher and
+			// moves the content down too much), set the page title to the current link.
 			// See https://github.com/withastro/starlight/issues/3047
-			if (!found) {
+			if (!hasIntersectingHeading) {
 				const firstHeading = document.querySelector('main h1');
 				if (firstHeading) {
 					const link = links.find((l) => l.hash === '#' + encodeURIComponent(firstHeading.id));
