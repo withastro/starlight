@@ -812,7 +812,7 @@ function testTOCHighlighting({
 			}
 		};
 
-		page.setViewportSize({ width, height });
+		await page.setViewportSize({ width, height });
 		const starlight = await getProdServer();
 		await starlight.goto(path);
 		if (scrollBy) {
