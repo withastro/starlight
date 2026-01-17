@@ -54,7 +54,7 @@ export default Object.fromEntries(
 		it,
 		nl,
 		da,
-        th,
+		th,
 		tr,
 		ar,
 		nb,
