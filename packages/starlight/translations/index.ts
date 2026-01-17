@@ -15,6 +15,7 @@ import id from './id.json';
 import it from './it.json';
 import nl from './nl.json';
 import da from './da.json';
+import th from './th.json';
 import tr from './tr.json';
 import ar from './ar.json';
 import nb from './nb.json';
@@ -53,6 +54,7 @@ export default Object.fromEntries(
 		it,
 		nl,
 		da,
+        th,
 		tr,
 		ar,
 		nb,
