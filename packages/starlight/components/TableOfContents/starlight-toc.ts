@@ -82,7 +82,7 @@ export class StarlightTOC extends HTMLElement {
 		// - direct children of `.sl-markdown-content` to include elements before the first subheading
 		// Ignore any elements that themselves contain a table-of-contents heading, as we are already observing those children.
 		const toObserve = document.querySelectorAll(
-			`main ${this.tocHeadingSelector},` +
+			`main :where(${this.tocHeadingSelector}),` +
 				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector})),` +
 				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`
 		);
