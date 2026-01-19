@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { PAGE_TITLE_ID } from '../constants';
 import LinkButton from '../user-components/LinkButton.astro';
+import { pathWithBase } from '../utils/base';
 
 const { data } = Astro.locals.starlightRoute.entry;
 const { title = data.title, tagline, image, actions = [] } = data.hero || {};
@@ -51,7 +52,13 @@ if (image) {
 				<div class="sl-flex actions">
 					{actions.map(
 						({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
-							<LinkButton {href} {variant} icon={icon?.name} class:list={[className]} {...attrs}>
+							<LinkButton
+								href={pathWithBase(href)}
+								{variant}
+								icon={icon?.name}
+								class:list={[className]}
+								{...attrs}
+							>
 								{text}
 								{icon?.html && <Fragment set:html={icon.html} />}
 							</LinkButton>
