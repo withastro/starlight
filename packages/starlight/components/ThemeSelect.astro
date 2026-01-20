@@ -5,6 +5,7 @@ import Select from './Select.astro';
 <starlight-theme-select>
 	{/* TODO: Can we give this select a width that works well for each language’s strings? */}
 	<Select
+		name="theme"
 		icon="laptop"
 		label={Astro.locals.t('themeSelect.accessibleLabel')}
 		options={[

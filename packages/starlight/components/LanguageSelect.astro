@@ -16,6 +16,7 @@ function localizedPathname(locale: string | undefined): string {
 	config.isMultilingual && (
 		<starlight-lang-select>
 			<Select
+				name="language"
 				icon="translate"
 				label={Astro.locals.t('languageSelect.accessibleLabel')}
 				options={Object.entries(config.locales).map(([code, locale]) => ({
