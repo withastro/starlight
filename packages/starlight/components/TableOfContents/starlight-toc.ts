@@ -41,8 +41,8 @@ export class StarlightTOC extends HTMLElement {
 			if (!el) return null;
 			const origin = el;
 			while (el) {
-				// Short circuit if we reach the top-level content container.
-				if (el.classList.contains('sl-markdown-content')) {
+				// Short circuit if we reach the top-level content container or one of the other containers in main.
+				if (el.matches('.sl-markdown-content, main > *')) {
 					return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement;
 				}
 				if (isHeading(el)) return el;
@@ -62,8 +62,6 @@ export class StarlightTOC extends HTMLElement {
 			return getElementHeading(origin.parentElement);
 		};
 
-		let hasIntersectingHeading = false;
-
 		/** Handle intersections and set the current link to the heading for the current intersection. */
 		const setCurrent: IntersectionObserverCallback = (entries) => {
 			for (const { isIntersecting, target } of entries) {
@@ -73,21 +71,7 @@ export class StarlightTOC extends HTMLElement {
 				const link = links.find((link) => link.hash === '#' + encodeURIComponent(heading.id));
 				if (link) {
 					this.current = link;
-					hasIntersectingHeading = true;
 					break;
-				}
-			}
-
-			// Fallback: if no heading intersects (because the banner is taller and
-			// moves the content down too much), set the page title to the current link.
-			// See https://github.com/withastro/starlight/issues/3047
-			if (!hasIntersectingHeading) {
-				const firstHeading = document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement;
-				if (firstHeading) {
-					const link = links.find((l) => l.hash === '#' + encodeURIComponent(firstHeading.id));
-					if (link) {
-						this.current = link;
-					}
 				}
 			}
 		};
@@ -96,11 +80,15 @@ export class StarlightTOC extends HTMLElement {
 		// - headings that appear in the table of contents
 		// - siblings of those headings or of the `.sl-heading-wrapper` added by Starlight’s anchor links feature
 		// - direct children of `.sl-markdown-content` to include elements before the first subheading
+		// - direct children of `main` that don’t include headings (mainly to target Starlight’s banner)
 		// Ignore any elements that themselves contain a table-of-contents heading, as we are already observing those children.
 		const toObserve = document.querySelectorAll(
-			`main :where(${this.tocHeadingSelector}),` +
-				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector})),` +
-				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`
+			[
+				`main :where(${this.tocHeadingSelector})`,
+				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector}))`,
+				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`,
+				`main > *:not(:has(${this.tocHeadingSelector}))`,
+			].join()
 		);
 
 		let observer: IntersectionObserver | undefined;
