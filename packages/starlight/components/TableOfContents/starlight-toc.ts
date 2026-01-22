@@ -78,11 +78,11 @@ export class StarlightTOC extends HTMLElement {
 				}
 			}
 
-			// Fallback: if no heading intersects (because the banner is higher and
+			// Fallback: if no heading intersects (because the banner is taller and
 			// moves the content down too much), set the page title to the current link.
 			// See https://github.com/withastro/starlight/issues/3047
 			if (!hasIntersectingHeading) {
-				const firstHeading = document.querySelector('main h1');
+				const firstHeading = document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement;
 				if (firstHeading) {
 					const link = links.find((l) => l.hash === '#' + encodeURIComponent(firstHeading.id));
 					if (link) {

@@ -1,5 +1,5 @@
 ---
-title: Testing table of contents behaviour with a higher banner
+title: Testing table of contents behaviour with a taller banner
 banner:
   content: 'Hello, I am big'
 head:
