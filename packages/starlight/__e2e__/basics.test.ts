@@ -617,6 +617,36 @@ test.describe('ToC highlighting', () => {
 		);
 	});
 
+	test.describe('highlights overview when a high banner is present', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+	});
+
 	test.describe('highlights heading 1', () => {
 		test(
 			'desktop viewport (1280×720)',
