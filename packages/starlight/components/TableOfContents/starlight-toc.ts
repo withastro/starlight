@@ -41,8 +41,8 @@ export class StarlightTOC extends HTMLElement {
 			if (!el) return null;
 			const origin = el;
 			while (el) {
-				// Short circuit if we reach the top-level content container.
-				if (el.classList.contains('sl-markdown-content')) {
+				// Short circuit if we reach the top-level content container or one of the other containers in main.
+				if (el.matches('.sl-markdown-content, main > *')) {
 					return document.getElementById(PAGE_TITLE_ID) as HTMLHeadingElement;
 				}
 				if (isHeading(el)) return el;
@@ -80,11 +80,15 @@ export class StarlightTOC extends HTMLElement {
 		// - headings that appear in the table of contents
 		// - siblings of those headings or of the `.sl-heading-wrapper` added by Starlight’s anchor links feature
 		// - direct children of `.sl-markdown-content` to include elements before the first subheading
+		// - direct children of `main` that don’t include headings (mainly to target Starlight’s banner)
 		// Ignore any elements that themselves contain a table-of-contents heading, as we are already observing those children.
 		const toObserve = document.querySelectorAll(
-			`main :where(${this.tocHeadingSelector}),` +
-				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector})),` +
-				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`
+			[
+				`main :where(${this.tocHeadingSelector})`,
+				`main :where(${this.tocHeadingSelector}, .sl-heading-wrapper) ~ *:not(:has(${this.tocHeadingSelector}))`,
+				`main .sl-markdown-content > *:not(:has(${this.tocHeadingSelector}))`,
+				`main > *:not(:has(${this.tocHeadingSelector}))`,
+			].join()
 		);
 
 		let observer: IntersectionObserver | undefined;
