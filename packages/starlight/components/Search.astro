@@ -77,6 +77,8 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
 
 	class SiteSearch extends HTMLElement {
+		#pagefindLoaded = false;
+
 		constructor() {
 			super();
 			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
@@ -96,7 +98,44 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				}
 			};
 
-			const openModal = (event?: MouseEvent) => {
+			/** Load Pagefind UI on first interaction */
+			const loadPagefind = async () => {
+				if (import.meta.env.DEV || this.#pagefindLoaded) return;
+				this.#pagefindLoaded = true;
+
+				let translations = {};
+				try {
+					translations = JSON.parse(this.dataset.translations || '{}');
+				} catch {}
+
+				const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+				const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
+				const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
+
+				// @ts-expect-error — Missing types for @pagefind/default-ui package.
+				const { PagefindUI } = await import('@pagefind/default-ui');
+				new PagefindUI({
+					...pagefindUserConfig,
+					element: '#starlight__search',
+					baseUrl: import.meta.env.BASE_URL,
+					bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+					showImages: false,
+					translations,
+					showSubResults: true,
+					processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
+						result.url = formatURL(result.url);
+						result.sub_results = result.sub_results.map((sub_result) => {
+							sub_result.url = formatURL(sub_result.url);
+							return sub_result;
+						});
+					},
+				});
+			};
+
+			const openModal = async (event?: MouseEvent) => {
+				// Load Pagefind UI on first open
+				await loadPagefind();
+
 				dialog.showModal();
 				document.body.toggleAttribute('data-search-modal-open', true);
 				this.querySelector('input')?.focus();
@@ -121,40 +160,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 					dialog.open ? closeModal() : openModal();
 					e.preventDefault();
 				}
-			});
-
-			let translations = {};
-			try {
-				translations = JSON.parse(this.dataset.translations || '{}');
-			} catch {}
-
-			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
-			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
-
-			window.addEventListener('DOMContentLoaded', () => {
-				if (import.meta.env.DEV) return;
-				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-				onIdle(async () => {
-					// @ts-expect-error — Missing types for @pagefind/default-ui package.
-					const { PagefindUI } = await import('@pagefind/default-ui');
-					new PagefindUI({
-						...pagefindUserConfig,
-						element: '#starlight__search',
-						baseUrl: import.meta.env.BASE_URL,
-						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
-						showImages: false,
-						translations,
-						showSubResults: true,
-						processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
-							result.url = formatURL(result.url);
-							result.sub_results = result.sub_results.map((sub_result) => {
-								sub_result.url = formatURL(sub_result.url);
-								return sub_result;
-							});
-						},
-					});
-				});
 			});
 		}
 	}
