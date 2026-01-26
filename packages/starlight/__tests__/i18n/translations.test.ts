@@ -9,23 +9,23 @@ describe('built-in translations', () => {
 });
 
 describe('useTranslations()', () => {
-	test('works when no i18n collection is available', () => {
+	test('works when no i18n collection is available', async () => {
 		const t = useTranslations(undefined);
 		expect(t).toBeTypeOf('function');
-		expect(t('page.editLink')).toBe(translations.en?.['page.editLink']);
+		expect(t('page.editLink')).toBe((await translations.en?.())?.['page.editLink']);
 	});
 
-	test('returns default locale for unknown language', () => {
+	test('returns default locale for unknown language', async () => {
 		const locale = 'xx';
 		expect(translations).not.toHaveProperty(locale);
 		const t = useTranslations(locale);
-		expect(t('page.editLink')).toBe(translations.en?.['page.editLink']);
+		expect(t('page.editLink')).toBe((await translations.en?.())?.['page.editLink']);
 	});
 
-	test('uses built-in translations for regional variants', () => {
+	test('uses built-in translations for regional variants', async () => {
 		const t = useTranslations('pt-BR');
-		expect(t('page.nextLink')).toBe(translations.pt?.['page.nextLink']);
-		expect(t('page.nextLink')).not.toBe(translations.en?.['page.nextLink']);
+		expect(t('page.nextLink')).toBe((await translations.pt?.())?.['page.nextLink']);
+		expect(t('page.nextLink')).not.toBe((await translations.en?.())?.['page.nextLink']);
 	});
 });
 

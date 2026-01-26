@@ -115,9 +115,9 @@ describe('t.all()', async () => {
 	const { useTranslations } = await import('../../utils/translations');
 	const t = useTranslations(undefined);
 
-	test('returns all translations including custom ones', () => {
+	test('returns all translations including custom ones', async () => {
 		expect(t.all).toBeTypeOf('function');
-		expect(t.all()).toEqual({ ...translations.en, 'test.foo': 'bar' });
+		expect(t.all()).toEqual({ ...(await translations.en()), 'test.foo': 'bar' });
 	});
 });
 

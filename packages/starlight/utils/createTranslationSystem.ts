@@ -1,6 +1,6 @@
 import i18next, { type ExistsFunction, type TFunction } from 'i18next';
 import type { i18nSchemaOutput } from '../schemas/i18n';
-import builtinTranslations from '../translations/index';
+import builtinTranslationLoaders, { type BuiltInStrings } from '../translations/index';
 import { BuiltInDefaultLocale } from './i18n';
 import type { StarlightConfig } from './user-config';
 import type { UserI18nKeys, UserI18nSchema } from './translations';
@@ -12,6 +12,18 @@ import type { UserI18nKeys, UserI18nSchema } from './translations';
  */
 export const I18nextNamespace = 'starlight' as const;
 
+/**
+ * Loads a built-in translation dictionary for a given language code.
+ * Returns `undefined` if no loader exists for that language.
+ */
+async function loadBuiltinTranslation(lang: string): Promise<BuiltInStrings | undefined> {
+	const loader = builtinTranslationLoaders[lang];
+	if (loader) {
+		return loader();
+	}
+	return undefined;
+}
+
 export async function createTranslationSystem<T extends i18nSchemaOutput>(
 	config: Pick<StarlightConfig, 'defaultLocale' | 'locales'>,
 	userTranslations: Record<string, T>,
@@ -20,10 +32,31 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 	const defaultLocale =
 		config.defaultLocale.lang || config.defaultLocale?.locale || BuiltInDefaultLocale.lang;
 
-	const translations = {
+	// Collect all language codes we need to load translations for.
+	const langsToLoad = new Set<string>();
+	langsToLoad.add(defaultLocale);
+	langsToLoad.add(stripLangRegion(defaultLocale));
+
+	if (config.locales) {
+		for (const locale in config.locales) {
+			const lang = localeToLang(locale, config.locales, config.defaultLocale);
+			langsToLoad.add(lang);
+			langsToLoad.add(stripLangRegion(lang));
+		}
+	}
+
+	// Load only the needed built-in translations.
+	const loadedBuiltins: Record<string, BuiltInStrings | undefined> = {};
+	await Promise.all(
+		[...langsToLoad].map(async (lang) => {
+			loadedBuiltins[lang] = await loadBuiltinTranslation(lang);
+		})
+	);
+
+	const translations: Record<string, { [I18nextNamespace]: BuiltInStrings & T }> = {
 		[defaultLocale]: buildResources(
-			builtinTranslations[defaultLocale],
-			builtinTranslations[stripLangRegion(defaultLocale)],
+			loadedBuiltins[defaultLocale],
+			loadedBuiltins[stripLangRegion(defaultLocale)],
 			pluginTranslations[defaultLocale],
 			userTranslations[defaultLocale]
 		),
@@ -34,7 +67,7 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 			const lang = localeToLang(locale, config.locales, config.defaultLocale);
 
 			translations[lang] = buildResources(
-				builtinTranslations[lang] || builtinTranslations[stripLangRegion(lang)],
+				loadedBuiltins[lang] || loadedBuiltins[stripLangRegion(lang)],
 				pluginTranslations[lang],
 				userTranslations[lang]
 			);
@@ -103,8 +136,6 @@ function localeToLang(
 	const defaultLang = defaultLocale?.lang || defaultLocale?.locale;
 	return lang || defaultLang || BuiltInDefaultLocale.lang;
 }
-
-type BuiltInStrings = (typeof builtinTranslations)['en'];
 
 /** Build an i18next resources dictionary by layering preferred translation sources. */
 function buildResources<T extends Record<string, string | undefined>>(
