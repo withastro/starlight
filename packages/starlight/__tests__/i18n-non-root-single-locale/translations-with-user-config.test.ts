@@ -9,9 +9,9 @@ vi.mock('astro:content', async () =>
 );
 
 describe('useTranslations()', () => {
-	test('uses user-defined translations', () => {
+	test('uses user-defined translations', async () => {
 		const t = useTranslations('fr');
 		expect(t('page.editLink')).toBe('Modifier cette doc!');
-		expect(t('page.editLink')).not.toBe(translations.fr?.['page.editLink']);
+		expect(t('page.editLink')).not.toBe((await translations.fr?.())?.['page.editLink']);
 	});
 });

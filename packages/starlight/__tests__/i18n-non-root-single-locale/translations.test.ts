@@ -9,16 +9,16 @@ describe('built-in translations', () => {
 });
 
 describe('useTranslations()', () => {
-	test('works when no i18n collection is available', () => {
+	test('works when no i18n collection is available', async () => {
 		const t = useTranslations('fr');
 		expect(t).toBeTypeOf('function');
-		expect(t('page.editLink')).toBe(translations.fr?.['page.editLink']);
+		expect(t('page.editLink')).toBe((await translations.fr?.())?.['page.editLink']);
 	});
 
-	test('returns default locale for unknown language', () => {
+	test('returns default locale for unknown language', async () => {
 		const locale = 'xx';
 		expect(translations).not.toHaveProperty(locale);
 		const t = useTranslations(locale);
-		expect(t('page.editLink')).toBe(translations.fr?.['page.editLink']);
+		expect(t('page.editLink')).toBe((await translations.fr?.())?.['page.editLink']);
 	});
 });

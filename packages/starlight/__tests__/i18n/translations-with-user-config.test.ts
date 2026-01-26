@@ -12,15 +12,15 @@ vi.mock('astro:content', async () =>
 );
 
 describe('useTranslations()', () => {
-	test('uses user-defined translations', () => {
+	test('uses user-defined translations', async () => {
 		const t = useTranslations(undefined);
 		expect(t('page.editLink')).toBe('Modify this doc!');
-		expect(t('page.editLink')).not.toBe(translations.en?.['page.editLink']);
+		expect(t('page.editLink')).not.toBe((await translations.en?.())?.['page.editLink']);
 	});
 
-	test('uses user-defined regional translations when available', () => {
+	test('uses user-defined regional translations when available', async () => {
 		const t = useTranslations('pt-BR');
 		expect(t('page.editLink')).toBe('Modifique esse doc!');
-		expect(t('page.editLink')).not.toBe(translations.pt?.['page.editLink']);
+		expect(t('page.editLink')).not.toBe((await translations.pt?.())?.['page.editLink']);
 	});
 });
