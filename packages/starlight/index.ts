@@ -148,7 +148,7 @@ export default function StarlightIntegration(
 
 			'astro:build:done': async (options) => {
 				if (!userConfig.pagefind) return;
-				return starlightPagefind(options);
+				return starlightPagefind(options, userConfig.pagefind);
 			},
 		},
 	};
