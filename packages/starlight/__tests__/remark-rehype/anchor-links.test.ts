@@ -60,6 +60,5 @@ test('localizes accessible label for the current language', async () => {
 `,
 		{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
 	);
-	console.log(res.code);
 	expect(res.code).includes('<span class="sr-only" data-pagefind-ignore="">Section intitulée « Some text »</span>');
 });
