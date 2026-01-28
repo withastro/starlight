@@ -71,6 +71,22 @@ const pagefindIndexOptionsSchema = z.object({
 	ranking: pagefindRankingWeightsSchema.default({}),
 });
 
+const pagefindIndexSchema = z
+	.object({
+		rootSelector: z.string().optional(),
+		excludeSelectors: z.array(z.string()).optional(),
+		forceLanguage: z.string().optional(),
+		// verbose, logfile omitted as they don’t affect the output index
+		// keepIndexUrl omitted for framework convention
+	})
+	// convert value-optional types to strictly property-optional types to satisfy exactOptionalPropertyTypes when passing to pagefind
+	// TODO: once zod>=4.3.0 is available we can use .exactOptional() instead, and remove this
+	.transform(({ rootSelector, excludeSelectors, forceLanguage }) => ({
+		...(rootSelector ? { rootSelector } : {}),
+		...(excludeSelectors ? { excludeSelectors } : {}),
+		...(forceLanguage ? { forceLanguage } : {}),
+	}));
+
 const pagefindSchema = z.object({
 	/**
 	 * Configure how search results from the current website are weighted by Pagefind
@@ -103,6 +119,8 @@ const pagefindSchema = z.object({
 			})
 		)
 		.optional(),
+
+	index: pagefindIndexSchema.optional(),
 });
 
 export const PagefindConfigSchema = () => pagefindSchema;
