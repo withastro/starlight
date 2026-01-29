@@ -4,10 +4,10 @@ import * as pagefind from 'pagefind';
 import type { StarlightConfig } from '../types';
 
 /** Run Pagefind to generate search index files based on the build output directory. */
-export async function starlightPagefind({
-	dir,
-	logger: starlightLogger,
-}: PagefindIntegrationOptions, userConfig: Extract<StarlightConfig['pagefind'], object>) {
+export async function starlightPagefind(
+	{ dir, logger: starlightLogger }: PagefindIntegrationOptions,
+	userConfig: Pick<Extract<StarlightConfig['pagefind'], object>, 'index'>
+) {
 	const logger = starlightLogger.fork('starlight:pagefind');
 	const options = { dir, logger };
 
