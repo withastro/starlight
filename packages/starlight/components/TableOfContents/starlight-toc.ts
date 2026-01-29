@@ -16,7 +16,7 @@ export class StarlightTOC extends HTMLElement {
 	protected set current(link: HTMLAnchorElement) {
 		if (link === this._current) return;
 		if (this._current) this._current.removeAttribute('aria-current');
-		link.setAttribute('aria-current', 'true');
+		link.setAttribute('aria-current', 'location');
 		this._current = link;
 	}
 
