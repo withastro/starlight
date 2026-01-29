@@ -50,7 +50,10 @@ export default function rehypeAutolinkHeadings({
 					type: 'element',
 					tagName: 'a',
 					properties: { class: 'sl-anchor-link', href: '#' + String(node.properties.id) },
-					children: [AnchorLinkIcon, h('span', { class: 'sr-only', 'data-pagefind-ignore': true }, accessibleLabel)],
+					children: [
+						AnchorLinkIcon,
+						h('span', { class: 'sr-only', 'data-pagefind-ignore': true }, accessibleLabel),
+					],
 				}
 			);
 
