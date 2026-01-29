@@ -1,5 +1,21 @@
 # @astrojs/starlight
 
+## 0.37.4
+
+### Patch Changes
+
+- [#3534](https://github.com/withastro/starlight/pull/3534) [`703fab0`](https://github.com/withastro/starlight/commit/703fab085b99303c0c01325c9bb869ea7e1418c4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes support for running builds when `npx` is unavailable.
+
+  Previously, Starlight would spawn a process to run the Pagefind search indexing binary using `npx`. On platforms where `npx` isn’t available, this could cause issues. Starlight now runs Pagefind using its Node.js API to avoid a separate process. As a side effect, you may notice that logging during builds is now less verbose.
+
+- [#3656](https://github.com/withastro/starlight/pull/3656) [`a0e6368`](https://github.com/withastro/starlight/commit/a0e636838092d30cb6b8f80e5535ad842e52d759) Thanks [@delucis](https://github.com/delucis)! - Fixes several edge cases in highlighting the current page heading in Starlight’s table of contents
+
+- [#3663](https://github.com/withastro/starlight/pull/3663) [`00cbf00`](https://github.com/withastro/starlight/commit/00cbf001fee4fd59f351c7a6c0f8c353c7c41f13) Thanks [@lines-of-codes](https://github.com/lines-of-codes)! - Adds Thai language support
+
+- [#3658](https://github.com/withastro/starlight/pull/3658) [`ac79329`](https://github.com/withastro/starlight/commit/ac793290f0dbd21f9b9a5d6f60aa315043815227) Thanks [@delucis](https://github.com/delucis)! - Avoids adding redundant `aria-current="false"` attributes to sidebar entries
+
+- [#3382](https://github.com/withastro/starlight/pull/3382) [`db295c2`](https://github.com/withastro/starlight/commit/db295c2a3d75aad71a41702f33001195d89de5d2) Thanks [@trueberryless](https://github.com/trueberryless)! - Fixes an issue where the mobile table of contents is unable to find the first heading when a page has a tall banner.
+
 ## 0.37.3
 
 ### Patch Changes
