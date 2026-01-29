@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.37.5
+
+### Patch Changes
+
+- [#3675](https://github.com/withastro/starlight/pull/3675) [`0ba556d`](https://github.com/withastro/starlight/commit/0ba556d7d49dd4904f8aa8524c105bf1ceeec85c) Thanks [@controversial](https://github.com/controversial)! - Excludes the accessible labels for heading anchor links from Pagefind results
+
 ## 0.37.4
 
 ### Patch Changes
