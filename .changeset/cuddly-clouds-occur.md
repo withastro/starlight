@@ -2,4 +2,4 @@
 '@astrojs/starlight': patch
 ---
 
-exclude heading anchor screen reader affordance from Pagefind results
+Excludes the accessible labels for heading anchor links from Pagefind results
