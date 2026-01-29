@@ -39,7 +39,7 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 			padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
 			line-height: 1.25;
 		}
-		a[aria-current='true'] {
+		a[aria-current='location'] {
 			color: var(--sl-color-text-accent);
 		}
 		.isMobile a {
@@ -58,13 +58,13 @@ const { toc, isMobile = false, depth = 0 } = Astro.props;
 		.isMobile:first-child > li:first-child > a {
 			border-top: 0;
 		}
-		.isMobile a[aria-current='true'],
-		.isMobile a[aria-current='true']:hover,
-		.isMobile a[aria-current='true']:focus {
+		.isMobile a[aria-current='location'],
+		.isMobile a[aria-current='location']:hover,
+		.isMobile a[aria-current='location']:focus {
 			color: var(--sl-color-white);
 			background-color: unset;
 		}
-		.isMobile a[aria-current='true']::after {
+		.isMobile a[aria-current='location']::after {
 			content: '';
 			width: 1rem;
 			background-color: var(--sl-color-text-accent);
