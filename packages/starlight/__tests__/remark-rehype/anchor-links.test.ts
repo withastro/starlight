@@ -20,11 +20,9 @@ function renderMarkdown(
 	content: string,
 	options: { fileURL?: URL; processor?: MarkdownProcessor } = {}
 ) {
-	return (options.processor ?? processor).render(
-		content,
-		// @ts-expect-error fileURL is part of MarkdownProcessor's options
-		{ fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url) }
-	);
+	return (options.processor ?? processor).render(content, {
+		fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url),
+	});
 }
 
 test('generates anchor link markup', async () => {
