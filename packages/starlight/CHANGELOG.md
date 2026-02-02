@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.37.6
+
+### Patch Changes
+
+- [#3645](https://github.com/withastro/starlight/pull/3645) [`a562096`](https://github.com/withastro/starlight/commit/a562096380287fa7fa925664d04071a5831f274b) Thanks [@mschoeffmann](https://github.com/mschoeffmann)! - Adds icons for Chrome, Edge, Firefox, and Safari
+
 ## 0.37.5
 
 ### Patch Changes
