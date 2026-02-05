@@ -64,7 +64,7 @@ Starlightは内部で[カスケードレイヤー](https://developer.mozilla.org
 
 ## Tailwind CSS
 
-AstroプロジェクトでのTailwind CSSのサポートは、[TailwindのViteプラグインプラグイン](https://tailwindcss.com/docs/installation/using-vite)によって提供されています。また、Starlightは、Starlightのスタイルとの互換性を保ちつつTailwindを設定するのに役立つ、補完的なCSSを提供しています。
+AstroプロジェクトでのTailwind CSS v4のサポートは、[TailwindのViteプラグインプラグイン](https://tailwindcss.com/docs/installation/using-vite)によって提供されています。また、Starlightは、Starlightのスタイルとの互換性を保ちつつTailwindを設定するのに役立つ、補完的なCSSを提供しています。
 
 StarlightのTailwind CSSは、以下の設定を適用します。
 
@@ -177,6 +177,8 @@ yarn create astro --template starlight/tailwind
     @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
+    このTailwindテーマの設定は、Starlightの[カスケードレイヤー](#カスケードレイヤー)の順序を定義し、StarlightのTailwind補完CSSをインポートし、Tailwindのテーマとユーティリティスタイルをインポートします。プロジェクトで追加のTailwindの設定が必要な場合は、[「Tailwindの設定を複数使用する」](#tailwindの設定を複数使用する)セクションを参照してください。
+
 4.  Starlightの設定を更新して、`customCss`配列の最初のアイテムとしてTailwind CSSのファイルを追加します。
 
     ```js ins={11-12}
@@ -203,7 +205,7 @@ yarn create astro --template starlight/tailwind
 
 ### StarlightをTailwindでスタイリングする
 
-Starlightは、[Tailwindのテーマ](https://tailwindcss.com/docs/theme)の設定値をUIで使用します。
+[Tailwindを使用して新しいStarlightプロジェクトを作成した](#tailwindを使用して新しいプロジェクトを作成する)場合、または[既存のStarlightプロジェクトにTailwindを追加した](#tailwindを既存のプロジェクトに追加する)場合、Starlightは`src/styles/global.css`ファイルにある[Tailwindテーマの設定値](https://tailwindcss.com/docs/theme)を使用してUIをスタイリングします。
 
 以下のCSSカスタムプロパティが設定されている場合、Starlightのデフォルトスタイルが上書きされます。
 
@@ -251,6 +253,33 @@ Starlightは、[Tailwindのテーマ](https://tailwindcss.com/docs/theme)の設�
 	--color-gray-950: var(--color-zinc-950);
 }
 ```
+
+### Tailwindの設定を複数使用する
+
+Tailwindの設定を複数使用することで、サイトの各部分に異なるスタイルを適用できます。[Starlightをサブパスで使用する](/ja/manual-setup/#サブパスへのstarlightの追加)場合や、サイトに[カスタムページ](/ja/guides/pages/#カスタムページ)を追加する場合などに便利です。たとえば、カスタムページではTailwindのPreflightリセットスタイルを使用しつつ、StarlightページにはStarlightの互換レイヤーを適用したい場合があるでしょう。
+
+以下のTailwind CSSの設定は、プラグインや追加設定なしでTailwindをセットアップするもので、非Starlightのページの出発点として使用できます。
+
+```css title="src/styles/custom-pages-tailwind.css"
+/* StarlightのCSSなしでTailwindを読み込む */
+@import 'tailwindcss';
+```
+
+<Steps>
+
+1. Starlightページには、[「Tailwindを既存のプロジェクトに追加する」](#tailwindを既存のプロジェクトに追加する)に従って、好みのTailwind CSSの設定を適用します。
+
+2. その他のページには、好みのTailwind CSSの設定をインポートして適用します。これは通常、レイアウトコンポーネントで行われ、そのレイアウトを共有するすべてのページでTailwindのスタイルを使用できるようになります。
+   ```astro
+   ---
+   // src/layouts/CustomPageLayout.astro
+   import '../styles/custom-pages-tailwind.css';
+   ---
+   ```
+
+</Steps>
+
+Tailwindテーマの設定について詳しくは、[Tailwind CSSのドキュメント](https://tailwindcss.com/docs/theme)を参照してください。
 
 ## テーマの設定
 
