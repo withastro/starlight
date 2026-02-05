@@ -14,24 +14,11 @@ import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
 	/** The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`. */
-	label: z
-		.string()
-		.describe(
-			'The label for this language to show in UI, e.g. `"English"`, `"العربية"`, or `"简体中文"`.'
-		),
+	label: z.string(),
 	/** The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`. */
-	lang: z
-		.string()
-		.optional()
-		.describe('The BCP-47 tag for this language, e.g. `"en"`, `"ar"`, or `"zh-CN"`.'),
+	lang: z.string().optional(),
 	/** The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left. */
-	dir: z
-		.enum(['rtl', 'ltr'])
-		.optional()
-		.default('ltr')
-		.describe(
-			'The writing direction of this language; `"ltr"` for left-to-right (the default) or `"rtl"` for right-to-left.'
-		),
+	dir: z.enum(['rtl', 'ltr']).optional().default('ltr'),
 });
 
 const UserConfigSchema = z.object({
@@ -39,10 +26,7 @@ const UserConfigSchema = z.object({
 	title: TitleConfigSchema(),
 
 	/** Description metadata for your website. Can be used in page metadata. */
-	description: z
-		.string()
-		.optional()
-		.describe('Description metadata for your website. Can be used in page metadata.'),
+	description: z.string().optional(),
 
 	/** Set a logo image to show in the navigation bar alongside or instead of the site title. */
 	logo: LogoConfigSchema(),
@@ -62,7 +46,7 @@ const UserConfigSchema = z.object({
 	social: SocialLinksSchema(),
 
 	/** The tagline for your website. */
-	tagline: z.string().optional().describe('The tagline for your website.'),
+	tagline: z.string().optional(),
 
 	/** Configure the defaults for the table of contents on each page. */
 	tableOfContents: TableOfContentsSchema(),
@@ -71,7 +55,7 @@ const UserConfigSchema = z.object({
 	editLink: z
 		.object({
 			/** Set the base URL for edit links. The final link will be `baseUrl` + the current page path. */
-			baseUrl: z.string().url().optional(),
+			baseUrl: z.url().optional(),
 		})
 		.optional()
 		.default({}),
@@ -96,9 +80,10 @@ const UserConfigSchema = z.object({
 
 				// Error if parsing the language tag failed.
 				if (!normalizedLang) {
-					ctx.addIssue({
-						code: z.ZodIssueCode.custom,
+					ctx.issues.push({
+						code: 'custom',
 						message: `Could not validate language tag "${lang}" at locales.${key}.lang.`,
+						input: lang,
 					});
 					return z.NEVER;
 				}
@@ -116,8 +101,7 @@ const UserConfigSchema = z.object({
 			}
 			return locales;
 		})
-		.optional()
-		.describe('Configure locales for internationalization (i18n).'),
+		.optional(),
 
 	/**
 	 * Specify the default language for this site.
@@ -172,27 +156,22 @@ const UserConfigSchema = z.object({
 			const invalidPathRegex = /^\.?\/public\/.+$/;
 			const invalidPaths = paths.filter((path) => invalidPathRegex.test(path));
 			if (invalidPaths.length > 0) {
-				ctx.addIssue({
+				ctx.issues.push({
 					code: 'custom',
 					message:
 						`These paths in your Starlight \`customCss\` config are invalid: ${invalidPaths.map((path) => `\`"${path}"\``).join(', ')}\n\n` +
 						`CSS files specified in \`customCss\` should be in the \`src/\` directory, not the \`public/\` directory.\n\n` +
 						`You should move these CSS files into the \`src/\` directory and update the path in \`customCss\` to match.`,
+					input: paths,
 				});
 			}
 		}),
 
 	/** Define if the last update date should be visible in the page footer. */
-	lastUpdated: z
-		.boolean()
-		.default(false)
-		.describe('Define if the last update date should be visible in the page footer.'),
+	lastUpdated: z.boolean().default(false),
 
 	/** Define if the previous and next page links should be visible in the page footer. */
-	pagination: z
-		.boolean()
-		.default(true)
-		.describe('Define if the previous and next page links should be visible in the page footer.'),
+	pagination: z.boolean().default(true),
 
 	/** The default favicon for your site which should be a path to an image in the `public/` directory. */
 	favicon: FaviconSchema(),
@@ -218,13 +197,10 @@ const UserConfigSchema = z.object({
 	components: ComponentConfigSchema(),
 
 	/** Will be used as title delimiter in the generated `<title>` tag. */
-	titleDelimiter: z
-		.string()
-		.default('|')
-		.describe('Will be used as title delimiter in the generated `<title>` tag.'),
+	titleDelimiter: z.string().default('|'),
 
 	/** Disable Starlight's default 404 page. */
-	disable404Route: z.boolean().default(false).describe("Disable Starlight's default 404 page."),
+	disable404Route: z.boolean().default(false),
 
 	/**
 	 * Define whether Starlight pages should be prerendered or not.
@@ -234,10 +210,7 @@ const UserConfigSchema = z.object({
 	prerender: z.boolean().default(true),
 
 	/** Enable displaying a “Built with Starlight” link in your site’s footer. */
-	credits: z
-		.boolean()
-		.default(false)
-		.describe('Enable displaying a “Built with Starlight” link in your site’s footer.'),
+	credits: z.boolean().default(false),
 
 	/** Add middleware to process Starlight’s route data for each page. */
 	routeMiddleware: z
@@ -250,47 +223,36 @@ const UserConfigSchema = z.object({
 			const invalidPathRegex = /^\.?\/src\/middleware(?:\/index)?\.[jt]s$/;
 			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
 			for (const invalidPath of invalidPaths) {
-				ctx.addIssue({
+				ctx.issues.push({
 					code: 'custom',
 					message:
 						`The \`"${invalidPath}"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.\n\n` +
 						`You should rename \`${invalidPath}\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.\n\n` +
 						'- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data\n' +
 						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
+					input: middlewares,
 				});
 			}
-		})
-		.describe('Add middleware to process Starlight’s route data for each page.'),
+		}),
 
 	/** Configure features that impact Starlight’s Markdown processing. */
 	markdown: z
 		.object({
 			/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
-			headingLinks: z
-				.boolean()
-				.default(true)
-				.describe(
-					'Define whether headings in content should be rendered with clickable anchor links. Default: `true`.'
-				),
+			headingLinks: z.boolean().default(true),
 			/**
 			 * Define additional directories where files should be processed by Starlight’s Markdown pipeline.
 			 *
 			 * Supports local directories relative to the root of your project, e.g. './src/data/comments/'.
 			 * Content of the `docs` content collection is always processed by Starlight’s Markdown pipeline.
 			 */
-			processedDirs: z
-				.string()
-				.array()
-				.default([])
-				.describe(
-					'Define additional directories where files should be processed by Starlight’s Markdown pipeline. Default: `[]`.'
-				),
+			processedDirs: z.string().array().default([]),
 		})
-		.default({})
-		.describe('Configure features that impact Starlight’s Markdown processing.'),
+		.prefault({}),
 });
 
-export const StarlightConfigSchema = UserConfigSchema.strict()
+export const StarlightConfigSchema = z
+	.strictObject({ ...UserConfigSchema.shape })
 	.transform((config) => ({
 		...config,
 		// Pagefind only defaults to true if prerender is also true.
@@ -300,7 +262,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 				: config.pagefind,
 	}))
 	.refine((config) => !(!config.prerender && config.pagefind), {
-		message: 'Pagefind search is not supported with prerendering disabled.',
+		error: 'Pagefind search is not supported with prerendering disabled.',
 	})
 	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});
@@ -321,12 +283,13 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 
 			if (!defaultLocaleConfig) {
 				const availableLocales = configuredLocales.map((l) => `"${l}"`).join(', ');
-				ctx.addIssue({
+				ctx.issues.push({
 					code: 'custom',
 					message:
 						'Could not determine the default locale. ' +
 						'Please make sure `defaultLocale` in your Starlight config is one of ' +
 						availableLocales,
+					input: locales,
 				});
 				return z.NEVER;
 			}
