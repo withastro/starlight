@@ -64,7 +64,7 @@ Starlightは内部で[カスケードレイヤー](https://developer.mozilla.org
 
 ## Tailwind CSS
 
-AstroプロジェクトでのTailwind CSS v4のサポートは、[TailwindのViteプラグインプラグイン](https://tailwindcss.com/docs/installation/using-vite)によって提供されています。また、Starlightは、Starlightのスタイルとの互換性を保ちつつTailwindを設定するのに役立つ、補完的なCSSを提供しています。
+AstroプロジェクトでのTailwind CSS v4のサポートは、[TailwindのViteプラグイン](https://tailwindcss.com/docs/installation/using-vite)によって提供されています。また、Starlightは、Starlightのスタイルとの互換性を保ちつつTailwindを設定するのに役立つ、補完的なCSSを提供しています。
 
 StarlightのTailwind CSSは、以下の設定を適用します。
 
@@ -331,6 +331,7 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 		以下のCSSを[カスタムCSSファイル](#カスタムcssスタイル)に追加して、このテーマをサイトに適用します。
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		以下の[Tailwindの設定ファイル](#starlightをtailwindでスタイリングする)の例には、`theme.extend.colors`の設定で使用するために生成された`accent`と`gray`のカラーパレットが含まれています。
+		以下のCSS変数を[Tailwind
+		CSSファイル](#starlightをtailwindでスタイリングする)の`@theme`ブロックに追加して、このテーマをサイトに適用します。
 	</Fragment>
 </ThemeDesigner>
