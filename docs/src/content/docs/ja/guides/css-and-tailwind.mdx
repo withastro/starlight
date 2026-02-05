@@ -51,9 +51,9 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
 
 ### カスケードレイヤー
 
-Starlightは内部で[カスケードレイヤー](https://developer.mozilla.org/ja/docs/Learn/CSS/Building_blocks/Cascade_layers)を使用して、スタイルの適用順序を管理しています。これにより、CSSの適用順序が予測可能になり、またスタイルの上書きが容易になります。レイヤーに属さないカスタムCSSは、`starlight`レイヤーのデフォルトスタイルを上書きします。
+Starlightは内部で[カスケードレイヤー](https://developer.mozilla.org/ja/docs/Learn/CSS/Building_blocks/Cascade_layers)を使用して、スタイルの適用順序を管理しています。これにより、CSSの適用順序が予測可能になり、またスタイルの上書きが容易になります。レイヤーに属さないカスタムCSSは、Starlightのスタイルを上書きします。
 
-カスケードレイヤーを使用する場合は、カスタムCSSで[`@layer`](https://developer.mozilla.org/ja/docs/Web/CSS/@layer)を使用して、Starlightのスタイルに対する各レイヤーの優先順位を定義できます。
+カスケードレイヤーを使用する場合は、カスタムCSSで[`@layer`](https://developer.mozilla.org/ja/docs/Web/CSS/@layer)を使用して、`starlight`レイヤーのスタイルに対する各レイヤーの優先順位を定義できます。
 
 ```css "starlight"
 /* src/styles/custom.css */
