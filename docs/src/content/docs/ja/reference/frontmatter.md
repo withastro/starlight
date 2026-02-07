@@ -377,7 +377,7 @@ sidebar:
 
 **type:** `Record<string, string | number | boolean | undefined>`
 
-自動生成されるリンクのグループ内に表示されるサイドバーのページリンクに追加するHTML属性。
+自動生成されるリンクのグループ内に表示されるサイドバーのページリンクに追加するHTML属性。このページが属する自動生成グループに[`autogenerate.attrs`](/ja/guides/sidebar/#自動生成されるリンクのカスタムhtml属性)が設定されている場合、フロントマターの属性はグループの属性とマージされます。
 
 ```md
 ---
