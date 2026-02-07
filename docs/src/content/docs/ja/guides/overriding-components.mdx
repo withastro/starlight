@@ -82,7 +82,7 @@ import Default from '@astrojs/starlight/components/SocialIcons.astro';
 組み込みコンポーネントをカスタムコンポーネント内でレンダリングする場合、
 
 - `Astro.props`を展開します。これにより、レンダリングに必要なすべてのデータを受け取ることができます。
-- デフォルトのコンポーネント内に[`<slot />`](https://docs.astro.build/ja/core-concepts/astro-components/#スロット)を追加します。これにより、コンポーネントに子要素が渡された場合、Astroがそれらをどこにレンダリングするかを知ることができます。
+- デフォルトのコンポーネント内に[`<slot />`](https://docs.astro.build/ja/basics/astro-components/#スロット)を追加します。これにより、コンポーネントに子要素が渡された場合、Astroがそれらをどこにレンダリングするかを知ることができます。
 
 [名前付きスロット](https://docs.astro.build/ja/basics/astro-components/#名前付きスロット)を含む[`PageFrame`](/ja/reference/overrides/#pageframe)や[`TwoColumnContent`](/ja/reference/overrides/#twocolumncontent)コンポーネントを再利用する場合は、これらのスロットを[受け渡す](https://docs.astro.build/ja/basics/astro-components/#スロットの受け渡し)必要があります。
 
@@ -152,4 +152,4 @@ const isHomepage = Astro.props.slug === '';
 }
 ```
 
-条件付きレンダリングについて、詳しくは[Astroのテンプレート構文ガイド](https://docs.astro.build/ja/core-concepts/astro-syntax/#動的html)を参照してください。
+条件付きレンダリングについて、詳しくは[Astroのテンプレート構文ガイド](https://docs.astro.build/ja/basics/astro-syntax/#動的html)を参照してください。
