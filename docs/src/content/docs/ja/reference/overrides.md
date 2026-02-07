@@ -67,11 +67,13 @@ Starlightは、以下のpropsをカスタムコンポーネントに渡します
 
 コンテンツファイル名から生成されたページのスラグ。
 
+このプロパティは非推奨であり、Starlightの将来のバージョンで削除される予定です。[Starlightの`docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定)を使用して新しいContent Layer APIに移行し、代わりに[`id`](#id)プロパティを使用してください。
+
 #### `id`
 
 **Type:** `string`
 
-コンテンツファイル名に基づくページの一意のID。
+このページのスラグ。[`legacy.collections`](https://docs.astro.build/ja/reference/legacy-flags/#collections)フラグを使用している場合は、コンテンツファイル名に基づくページの一意のIDとなります。
 
 #### `isFallback`
 
