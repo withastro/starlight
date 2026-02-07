@@ -3,6 +3,8 @@ title: ページ
 description: Starligtでドキュメントサイトのページを作成し管理する方法を学びます。
 sidebar:
   order: 1
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 Starlightは、Markdownのフロントマターにより提供される柔軟なオプションを使用して、コンテンツに基づいてサイトのHTMLページを生成します。さらにStarlightプロジェクトは、[Astroの強力なページ生成ツール](https://docs.astro.build/ja/basics/astro-pages/)に完全にアクセスできます。このガイドでは、Starlightのページ生成の仕組みについて説明します。
@@ -67,27 +69,50 @@ description: これは私のStarlight製サイトのページです
 
 ### カスタムページでStarlightのデザインを使用する
 
-カスタムページでStarlightのデザインを使用するには、ページコンテンツを`<StarlightPage />`コンポーネントでラップします。これは、コンテンツを動的に生成したいものの、Starlightのデザインも使用したいような場合に役立ちます。
+カスタムページでStarlightのデザインを使用するには、ページコンテンツを[`<StarlightPage>`コンポーネント](#starlightpageコンポーネント)でラップします。これは、コンテンツを動的に生成したいものの、Starlightのデザインも使用したいような場合に役立ちます。
+
+StarlightのMarkdownアンカーリンクのスタイルと同じアンカーリンクを見出しに追加するには、カスタムページで[`<AnchorHeading>`コンポーネント](#anchorheadingコンポーネント)を使用します。
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
 
 <StarlightPage frontmatter={{ title: '私のカスタムページ' }}>
 	<p>これはカスタムコンポーネントを用いたカスタムページです:</p>
 	<CustomComponent />
+
+	<AnchorHeading level="2" id="learn-more">詳しく学ぶ</AnchorHeading>
+	<p>
+		<a href="https://starlight.astro.build/">
+			Starlightのドキュメントで詳しく読む
+		</a>
+	</p>
 </StarlightPage>
 ```
 
-#### Props
+#### `<StarlightPage>`コンポーネント
+
+`<StarlightPage />`コンポーネントは、Starlightのレイアウトとスタイルを使用してページ全体のコンテンツをレンダリングします。
+
+```astro
+---
+import StarlightPage from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<StarlightPage frontmatter={{ title: '私のカスタムページ' }}>
+	<!-- カスタムページのコンテンツ -->
+</StarlightPage>
+```
 
 `<StarlightPage />`コンポーネントは以下のpropsを受け付けます。
 
-##### `frontmatter`（必須）
+##### `frontmatter`
 
+**必須**  
 **type:** `StarlightPageFrontmatter`
 
 ページの[フロントマタープロパティ](/ja/reference/frontmatter/)を設定します。これは、Markdownページのフロントマターと同様です。[`title`](/ja/reference/frontmatter/#title必須)プロパティは必須ですが、その他のプロパティは任意です。
@@ -163,3 +188,31 @@ import CustomComponent from './CustomComponent.astro';
 **default:** `false`
 
 現在の言語に対する翻訳がない結果、ページが[フォールバックコンテンツ](/ja/guides/i18n/#フォールバックコンテンツ)を使用しているかどうかを示します。
+
+#### `<AnchorHeading>`コンポーネント
+
+`<AnchorHeading />`コンポーネントは、StarlightのMarkdownスタイルと同じクリック可能なアンカーリンク付きのHTML見出し要素をレンダリングします。
+
+```astro
+---
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
+---
+
+<AnchorHeading level="2" id="sub-heading">小見出し</AnchorHeading>
+```
+
+このコンポーネントは、以下のpropsに加えて、任意の有効な[グローバルHTML属性](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes)を受け付けます。
+
+##### `level`
+
+**必須**  
+**type:** `1 | 2 | 3 | 4 | 5 | 6`
+
+レンダリングする見出しレベルを指定します。たとえば、`level="1"`は`<h1>`要素をレンダリングします。
+
+##### `id`
+
+**必須**  
+**type:** `string`
+
+この見出しユニークなIDを指定します。レンダリングされる見出しの`id`属性として使用され、アンカーアイコンはこのIDにリンクします。
