@@ -123,18 +123,19 @@ DocSearchはデフォルトで英語のUI文字列のみを提供しています
 
 <Steps>
 
-1. `src/content/config.ts`で、Starlightの`i18n`コンテンツコレクション定義をDocSearchスキーマにより拡張します。
+1. `src/content.config.ts`で、Starlightの`i18n`コンテンツコレクション定義をDocSearchスキーマにより拡張します。
 
-   ```js ins={4} ins=/{ extend: .+ }/
-   // src/content/config.ts
+   ```js ins={5} ins=/{ extend: .+ }/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
    import { docSearchI18nSchema } from '@astrojs/starlight-docsearch/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
    	i18n: defineCollection({
-   		type: 'data',
+   		loader: i18nLoader(),
    		schema: i18nSchema({ extend: docSearchI18nSchema() }),
    	}),
    };
