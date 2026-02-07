@@ -108,6 +108,15 @@ title: 部分的にインデックスされるページ
 
 このように設定を更新すると、サイトの検索バーはデフォルトの検索モーダルではなく、Algoliaのモーダルを開きます。
 
+#### DocSearchの設定
+
+Starlight DocSearchプラグインでは、以下の追加オプションによりDocSearchコンポーネントをカスタマイズできます。
+
+- `maxResultsPerGroup`: 各検索グループに表示される結果の最大数を制限します。デフォルトは`5`です。
+- `disableUserPersonalization`: DocSearchがユーザーの最近の検索やお気に入りをローカルストレージに保存しないようにします。デフォルトは`false`です。
+- `insights`: Algolia Insightsプラグインを有効にし、DocSearchインデックスに検索イベントを送信します。デフォルトは`false`です。
+- `searchParameters`: [Algoliaの検索パラメータ](https://www.algolia.com/doc/api-reference/search-api-parameters/)をカスタマイズするオブジェクトです。
+
 #### DocSearch UIを翻訳する
 
 DocSearchはデフォルトで英語のUI文字列のみを提供しています。Starlightの組み込みの[国際化の仕組み](/ja/guides/i18n/#starlightのuiを翻訳する)を使って、モーダルのUIを翻訳できます。
