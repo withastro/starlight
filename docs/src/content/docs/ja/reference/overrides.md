@@ -183,7 +183,8 @@ entry: {
 
 #### `PageFrame`
 
-**デフォルトコンポーネント:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**デフォルトコンポーネント:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**名前付きスロット:** `header`, `sidebar`
 
 ページコンテンツの大部分をラップするレイアウトコンポーネント。デフォルトの実装では、ヘッダー・サイドバー・メインのレイアウトをセットし、`header`と`sidebar`の名前付きスロットと、メインコンテンツのデフォルトスロットを含みます。また、小さな（モバイル）ビューポートでのサイドバーナビゲーションの切り替えをサポートするために、[`<MobileMenuToggle />`](#mobilemenutoggle)をレンダリングします。
 
@@ -195,7 +196,8 @@ entry: {
 
 #### `TwoColumnContent`
 
-**デフォルトコンポーネント:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**デフォルトコンポーネント:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**名前付きスロット:** `right-sidebar`
 
 メインコンテンツのカラムと右サイドバー（目次）をラップするレイアウトコンポーネント。デフォルトの実装では、1カラムの小さなビューポート向けレイアウトと、2カラムの大きなビューポート向けレイアウトの切り替えをおこないます。
 
