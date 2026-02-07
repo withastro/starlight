@@ -12,3 +12,20 @@ test('preserve social config order', () => {
 	});
 	expect((config.social || []).map(({ icon }) => icon)).toEqual(['twitch', 'github', 'discord']);
 });
+
+test('markdown.optimize defaults to true', () => {
+	const config = StarlightConfigSchema.parse({
+		title: 'Test',
+	});
+	expect(config.markdown.optimize).toBe(true);
+});
+
+test('mdxStrictMode can be set to false', () => {
+	const config = StarlightConfigSchema.parse({
+		title: 'Test',
+		markdown: {
+			optimize: false,
+		},
+	});
+	expect(config.markdown.optimize).toBe(false);
+});

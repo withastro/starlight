@@ -285,6 +285,15 @@ const UserConfigSchema = z.object({
 				.describe(
 					'Define additional directories where files should be processed by Starlight’s Markdown pipeline. Default: `[]`.'
 				),
+			/**
+			 * Define whether to optimize the MDX output for faster builds and rendering. Default: `true`.
+			 *
+			 * See https://docs.astro.build/en/guides/integrations-guide/mdx/#optimize
+			 */
+			optimize: z
+				.boolean()
+				.default(true)
+				.describe('Define whether to optimize the MDX output for faster builds and rendering. Default: `true`.'),
 		})
 		.default({})
 		.describe('Configure features that impact Starlight’s Markdown processing.'),
