@@ -33,7 +33,7 @@ description: 私が取り組んでいるプロジェクトについてもっと�
 
 **type**: `string`
 
-ページのスラグを上書きします。詳しくは、Astroドキュメントの[「カスタムスラグの定義」](https://docs.astro.build/ja/guides/content-collections/#カスタムスラグの定義)を参照してください。
+ページのスラグを上書きします。詳しくは、Astroドキュメントの[「カスタムIDの定義」](https://docs.astro.build/ja/guides/content-collections/#defining-custom-ids)を参照してください。
 
 ### `editUrl`
 
@@ -390,19 +390,20 @@ sidebar:
 
 ## フロントマタースキーマをカスタマイズする
 
-Starlightの`docs`コンテンツコレクションのフロントマタースキーマは、`docsSchema()`ヘルパーを使用して`src/content/config.ts`で設定されています。
+Starlightの`docs`コンテンツコレクションのフロントマタースキーマは、`docsSchema()`ヘルパーを使用して`src/content.config.ts`で設定されています。
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#defining-the-collection-schema)を参照してください。
 
 `docsSchema()`は以下のオプションを受け取ります。
 
@@ -415,13 +416,15 @@ export const collections = {
 
 次の例では、`description`を必須にするために厳し目の型を指定し、さらにオプションの`category`フィールドを新規追加しています。
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // 組み込みのフィールドをオプションから必須に変更します。
@@ -436,13 +439,15 @@ export const collections = {
 
 [Astroの`image()`ヘルパー](https://docs.astro.build/ja/guides/images/#コンテンツコレクションと画像)を利用するには、拡張したスキーマを返す関数を使用します。
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({
