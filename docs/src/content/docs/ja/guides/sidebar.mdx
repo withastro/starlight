@@ -49,19 +49,72 @@ Starlightはデフォルトで、ドキュメントのファイルシステム�
 
 ## リンクとリンクグループを追加する
 
-サイドバーの[リンク](#リンク)と（折りたたみ可能なヘッダー内の）[リンクグループ](#グループ)を設定するには、`astro.config.mjs`で[`starlight.sidebar`](/ja/reference/configuration/#sidebar)プロパティを使用します。
+サイドバーのリンクと（折りたたみ可能なヘッダー内の）リンクグループを設定するには、`astro.config.mjs`で[`starlight.sidebar`](/ja/reference/configuration/#sidebar)プロパティを使用します。
 
 リンクとグループを組み合わせることで、さまざまなサイドバーレイアウトを作成できます。
 
-### リンク
+### 内部リンク
 
-`label`と`link`プロパティをもつオブジェクトを使用して、内部または外部ページへのリンクを追加します。
+`slug`プロパティをもつオブジェクトを使用して、`src/content/docs/`内のページへのリンクを追加します。デフォルトでは、リンク先ページのタイトルがラベルとして使用されます。
+
+たとえば、以下の設定があるとします。
+
+```js "slug:"
+starlight({
+	sidebar: [
+		{ slug: 'constellations/andromeda' },
+		{ slug: 'constellations/orion' },
+	],
+});
+```
+
+そして以下のファイル構造であるとします。
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - andromeda.md
+        - orion.md
+
+</FileTree>
+
+すると以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{ label: 'Andromeda', link: '' },
+		{ label: 'Orion', link: '' },
+	]}
+/>
+
+リンク先ページのフロントマターから推測される値をオーバーライドするには、`label`、[`translations`](#国際化)、[`attrs`](#カスタムhtml属性)プロパティを追加します。
+
+ページのフロントマターからサイドバーの表示を制御する方法について、詳しくは[「自動生成されるリンクのカスタマイズ」](#フロントマターで自動生成されるリンクをカスタマイズする)を参照してください。
+
+#### 内部リンクの省略記法
+
+内部リンクは、ページのスラグを文字列として渡すだけの省略記法でも指定できます。
+
+たとえば、以下の設定は上記の`slug`を使用した設定と同等です。
+
+```js "slug:"
+starlight({
+	sidebar: ['constellations/andromeda', 'constellations/orion'],
+});
+```
+
+### その他のリンク
+
+`label`と`link`プロパティをもつオブジェクトを使用して、外部ページやドキュメント以外のページへのリンクを追加します。
 
 ```js "label:" "link:"
 starlight({
 	sidebar: [
-		// ガニメデページへのリンク。
-		{ label: 'ガニメデ', link: '/moons/ganymede/' },
+		// サイト内のドキュメント以外のページへのリンク。
+		{ label: '流星商店', link: '/shop/' },
 		// NASAのウェブサイトへの外部リンク。
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	],
@@ -72,7 +125,7 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'ガニメデ', link: '' },
+		{ label: '流星商店', link: '' },
 		{ label: 'NASA', link: 'https://www.nasa.gov/' },
 	]}
 />
@@ -90,15 +143,15 @@ starlight({
 		{
 			label: '星座',
 			items: [
-				{ label: 'りゅうこつ座', link: '/constellations/carina/' },
-				{ label: 'ケンタウルス座', link: '/constellations/centaurus/' },
+				'constellations/carina',
+				'constellations/centaurus',
 				// 季節の星座の入れ子になったリンクグループ。
 				{
 					label: '季節の星座',
 					items: [
-						{ label: 'アンドロメダ座', link: '/constellations/andromeda/' },
-						{ label: 'オリオン座', link: '/constellations/orion/' },
-						{ label: 'こぐま座', link: '/constellations/ursa-minor/' },
+						'constellations/andromeda',
+						'constellations/orion',
+						'constellations/ursa-minor',
 					],
 				},
 			],
@@ -182,7 +235,7 @@ starlight({
 	]}
 />
 
-#### 自動生成されるリンクをフロントマターでカスタマイズする
+## 自動生成されるリンクをフロントマターでカスタマイズする
 
 個々のページで[`sidebar`フロントマターフィールド](/ja/reference/frontmatter/#sidebar)を使用して、自動生成されるリンクをカスタマイズします。
 
@@ -223,14 +276,14 @@ sidebar:
 />
 
 :::note
-フロントマターの`sidebar`設定は、自動生成されるリンクにのみ使用され、手動で定義されたリンクに対しては無視されます。
+`sidebar`フロントマターの設定は、自動生成されるグループ内のリンクと`slug`プロパティで定義されたドキュメントリンクにのみ使用されます。`link`プロパティで定義されたリンクには適用されません。
 :::
 
 ## バッジ
 
 リンク、グループ、自動生成されるグループには、ラベルの横にバッジを表示するための`badge`プロパティも含められます。
 
-```js {10,17}
+```js {9,16}
 starlight({
 	sidebar: [
 		{
@@ -238,8 +291,7 @@ starlight({
 			items: [
 				// 「超巨星」バッジ付きのリンク。
 				{
-					label: 'ペルセウス座',
-					link: '/stars/persei/',
+					slug: 'stars/persei',
 					badge: '超巨星',
 				},
 			],
@@ -297,7 +349,7 @@ starlight({
 
 また、`class`プロパティにCSSクラス名を設定することで、カスタムバッジスタイルを作成することも可能です。
 
-```js {10}
+```js {9}
 starlight({
 	sidebar: [
 		{
@@ -305,8 +357,7 @@ starlight({
 			items: [
 				// 「準備中」バッジ付きのリンク。
 				{
-					label: 'シリウス',
-					link: '/stars/sirius/',
+					slug: 'stars/sirius',
 					badge: { text: '準備中', variant: 'caution' },
 				},
 			],
@@ -394,14 +445,14 @@ starlight({
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
-					link: '/constellations/andromeda/',
+					slug: 'constellations/andromeda',
 				},
 				{
 					label: 'Scorpius',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
-					link: '/constellations/scorpius/',
+					slug: 'constellations/scorpius',
 				},
 			],
 		},
@@ -423,6 +474,43 @@ starlight({
 	]}
 />
 
+### 内部リンクの国際化
+
+[内部リンク](#内部リンク)は、デフォルトでコンテンツのフロントマターの翻訳されたページタイトルを自動的に使用します。
+
+```js {9-10}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			translations: {
+				'pt-BR': 'Constelações',
+			},
+			items: [
+				{ slug: 'constellations/andromeda' },
+				{ slug: 'constellations/scorpius' },
+			],
+		},
+	],
+});
+```
+
+ブラジルポルトガル語でドキュメントを閲覧すると、以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constelações',
+			items: [
+				{ label: 'Andrômeda', link: '' },
+				{ label: 'Escorpião', link: '' },
+			],
+		},
+	]}
+/>
+
+多言語サイトでは、`slug`の値にURLの言語部分は含まれません。たとえば、`en/intro`と`pt-br/intro`にページがある場合、サイドバーを設定する際のスラグは`intro`となります。
+
 ## グループを折りたたむ
 
 `collapsed`プロパティを`true`に設定することで、リンクのグループをデフォルトで折りたためます。
@@ -434,10 +522,7 @@ starlight({
 			label: 'Constellations',
 			// デフォルトでグループを折りたたみます。
 			collapsed: true,
-			items: [
-				{ label: 'Andromeda', link: '/constellations/andromeda/' },
-				{ label: 'Orion', link: '/constellations/orion/' },
-			],
+			items: ['constellations/andromeda', 'constellations/orion'],
 		},
 	],
 });
