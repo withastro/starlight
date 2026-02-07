@@ -19,9 +19,9 @@ Starlightの[`components`](/ja/reference/configuration/#components)設定オプ�
 
 **デフォルトコンポーネント:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
-各ページの`<head>`内にレンダリングされるコンポーネント。`<title>`や`<meta charset="utf-8">`などの重要なタグが含まれます。
+各ページの`<head>`内にレンダリングされるコンポーネント。
 
-このコンポーネントをオーバーライドするのは最後の手段としてください。可能な限り、Starlightの設定オプション[`head`](/ja/reference/configuration/#head)を使用してください。
+このコンポーネントをオーバーライドするのは最後の手段としてください。可能であれば、[`head`設定オプション](/ja/reference/configuration/#head)、[`head`フロントマターフィールド](/ja/reference/frontmatter/#head)、または[ルートデータミドルウェア](/ja/guides/route-data/#ルートデータのカスタマイズ)を使用して、デフォルトコンポーネントがレンダリングするルートデータをカスタマイズすることをおすすめします。
 
 #### `ThemeProvider`
 
