@@ -102,7 +102,7 @@ export default function StarlightIntegration(
 					integrations.push(starlightSitemap(starlightConfig));
 				}
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
-					integrations.push(mdx({ optimize: true }));
+					integrations.push(mdx({ optimize: starlightConfig.markdown.optimize }));
 				}
 
 				// Add Starlight directives restoration integration at the end of the list so that remark
