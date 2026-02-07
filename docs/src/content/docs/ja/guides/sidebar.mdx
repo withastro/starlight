@@ -239,7 +239,7 @@ starlight({
 
 個々のページで[`sidebar`フロントマターフィールド](/ja/reference/frontmatter/#sidebar)を使用して、自動生成されるリンクをカスタマイズします。
 
-フロントマターのサイドバーオプションにより、[カスタムラベル](/ja/reference/frontmatter/#label)を設定したり、リンクに[バッジ](/ja/reference/frontmatter/#badge)を追加したり、サイドバーからリンクを[非表示](/ja/reference/frontmatter/#hidden)にしたり、[カスタムのソート順](/ja/reference/frontmatter/#order)を定義したりできます。
+フロントマターのサイドバーオプションにより、[カスタムラベル](/ja/reference/frontmatter/#label)の設定、[カスタム属性](/ja/reference/frontmatter/#attrs)の使用、リンクへの[バッジ](/ja/reference/frontmatter/#badge)の追加、サイドバーのリンクの[非表示](/ja/reference/frontmatter/#hidden)、[独自のソート順](/ja/reference/frontmatter/#order)の定義が可能です。
 
 ```md "sidebar:"
 ---
@@ -423,6 +423,71 @@ starlight({
 						target: '_blank',
 						style: 'font-style: italic',
 					},
+				},
+			],
+		},
+	]}
+/>
+
+### 自動生成されるリンクのカスタムHTML属性
+
+`autogenerate`設定で`attrs`プロパティを定義することで、[自動生成されるグループ](#自動生成されるグループ)内のすべてのリンクのHTML属性をカスタマイズできます。個々のページでは[`sidebar.attrs`フロントマターフィールド](/ja/reference/frontmatter/#attrs)を使用してカスタム属性を指定でき、これは`autogenerate.attrs`設定とマージされます。
+
+たとえば、以下の設定があるとします。
+
+```js {9}
+starlight({
+	sidebar: [
+		{
+			label: 'Constellations',
+			autogenerate: {
+				// 'constellations'ディレクトリのリンクグループを自動生成します。
+				directory: 'constellations',
+				// このグループ内のすべてのリンクラベルを斜体にします。
+				attrs: { style: 'font-style: italic' },
+			},
+		},
+	],
+});
+```
+
+そして以下のファイル構造があるとします。
+
+<FileTree>
+
+- src/
+  - content/
+    - docs/
+      - constellations/
+        - carina.md
+        - centaurus.md
+        - seasonal/
+          - andromeda.md
+
+</FileTree>
+
+すると、自動生成されるすべてのリンクが斜体になった以下のサイドバーが生成されます。
+
+<SidebarPreview
+	config={[
+		{
+			label: 'Constellations',
+			items: [
+				{ label: 'Carina', link: '', attrs: { style: 'font-style: italic' } },
+				{
+					label: 'Centaurus',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'seasonal',
+					items: [
+						{
+							label: 'Andromeda',
+							link: '',
+							attrs: { style: 'font-style: italic' },
+						},
+					],
 				},
 			],
 		},
