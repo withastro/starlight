@@ -1,6 +1,8 @@
 ---
 title: サイト内検索
 description: Starlight組み込みのサイト内検索機能と、そのカスタマイズ方法について学びます。
+tableOfContents:
+  maxHeadingLevel: 4
 ---
 
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
@@ -110,12 +112,61 @@ title: 部分的にインデックスされるページ
 
 #### DocSearchの設定
 
-Starlight DocSearchプラグインでは、以下の追加オプションによりDocSearchコンポーネントをカスタマイズできます。
+Starlight DocSearchプラグインでは、以下のインラインオプションによりDocSearchコンポーネントをカスタマイズできます。
 
 - `maxResultsPerGroup`: 各検索グループに表示される結果の最大数を制限します。デフォルトは`5`です。
 - `disableUserPersonalization`: DocSearchがユーザーの最近の検索やお気に入りをローカルストレージに保存しないようにします。デフォルトは`false`です。
 - `insights`: Algolia Insightsプラグインを有効にし、DocSearchインデックスに検索イベントを送信します。デフォルトは`false`です。
 - `searchParameters`: [Algoliaの検索パラメータ](https://www.algolia.com/doc/api-reference/search-api-parameters/)をカスタマイズするオブジェクトです。
+
+##### その他のDocSearchオプション
+
+`transformItems()`や`resultsFooterComponent()`などの関数オプションをDocSearchコンポーネントに渡すには、別の設定ファイルが必要です。
+
+<Steps>
+
+1. DocSearchの設定をエクスポートするTypeScriptファイルを作成します。
+
+   ```ts
+   // src/config/docsearch.ts
+   import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
+
+   export default {
+   	appId: 'YOUR_APP_ID',
+   	apiKey: 'YOUR_SEARCH_API_KEY',
+   	indexName: 'YOUR_INDEX_NAME',
+   	getMissingResultsUrl({ query }) {
+   		return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
+   	},
+   	// ...
+   } satisfies DocSearchClientOptions;
+   ```
+
+2. `astro.config.mjs`で、Starlight DocSearchプラグインに設定ファイルのパスを渡します。
+
+   ```js {11-13}
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+   import starlightDocSearch from '@astrojs/starlight-docsearch';
+
+   export default defineConfig({
+   	integrations: [
+   		starlight({
+   			title: 'DocSearchを使ったサイト',
+   			plugins: [
+   				starlightDocSearch({
+   					clientOptionsModule: './src/config/docsearch.ts',
+   				}),
+   			],
+   		}),
+   	],
+   });
+   ```
+
+</Steps>
+
+サポートされているすべてのオプションについては、[DocSearchのJavaScriptクライアントAPIリファレンス](https://docsearch.algolia.com/docs/api/)を参照してください。
 
 #### DocSearch UIを翻訳する
 
