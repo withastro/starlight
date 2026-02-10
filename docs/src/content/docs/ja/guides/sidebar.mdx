@@ -32,15 +32,15 @@ Starlightはデフォルトで、ドキュメントのファイルシステム�
 <SidebarPreview
 	config={[
 		{
-			label: 'constellations',
+			label: '星座',
 			items: [
-				{ label: 'Andromeda', link: '' },
-				{ label: 'Orion', link: '' },
+				{ label: 'アンドロメダ座', link: '' },
+				{ label: 'オリオン座', link: '' },
 			],
 		},
 		{
-			label: 'stars',
-			items: [{ label: 'Betelgeuse', link: '' }],
+			label: '星',
+			items: [{ label: 'ベテルギウス', link: '' }],
 		},
 	]}
 />
@@ -85,8 +85,8 @@ starlight({
 
 <SidebarPreview
 	config={[
-		{ label: 'Andromeda', link: '' },
-		{ label: 'Orion', link: '' },
+		{ label: 'アンドロメダ座', link: '' },
+		{ label: 'オリオン座', link: '' },
 	]}
 />
 
@@ -194,7 +194,7 @@ Starlightはドキュメントのディレクトリに基づいて、サイド�
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			// constellationsディレクトリのリンクグループを自動生成します。
 			autogenerate: { directory: 'constellations' },
 		},
@@ -222,13 +222,13 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
 				{
 					label: 'seasonal',
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: 'アンドロメダ座', link: '' }],
 				},
 			],
 		},
@@ -439,7 +439,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			autogenerate: {
 				// 'constellations'ディレクトリのリンクグループを自動生成します。
 				directory: 'constellations',
@@ -471,11 +471,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '', attrs: { style: 'font-style: italic' } },
 				{
-					label: 'Centaurus',
+					label: 'りゅうこつ座',
+					link: '',
+					attrs: { style: 'font-style: italic' },
+				},
+				{
+					label: 'ケンタウルス座',
 					link: '',
 					attrs: { style: 'font-style: italic' },
 				},
@@ -483,7 +487,7 @@ starlight({
 					label: 'seasonal',
 					items: [
 						{
-							label: 'Andromeda',
+							label: 'アンドロメダ座',
 							link: '',
 							attrs: { style: 'font-style: italic' },
 						},
@@ -502,20 +506,20 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			translations: {
 				'pt-BR': 'Constelações',
 			},
 			items: [
 				{
-					label: 'Andromeda',
+					label: 'アンドロメダ座',
 					translations: {
 						'pt-BR': 'Andrômeda',
 					},
 					slug: 'constellations/andromeda',
 				},
 				{
-					label: 'Scorpius',
+					label: 'さそり座',
 					translations: {
 						'pt-BR': 'Escorpião',
 					},
@@ -549,7 +553,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			translations: {
 				'pt-BR': 'Constelações',
 			},
@@ -586,7 +590,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			translations: {
 				'pt-BR': 'Constelações',
 			},
@@ -595,7 +599,7 @@ starlight({
 					slug: 'constellations/andromeda',
 					badge: {
 						text: {
-							en: 'New',
+							ja: '新規',
 							'pt-BR': 'Novo',
 						},
 					},
@@ -631,7 +635,7 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
+			label: '星座',
 			// デフォルトでグループを折りたたみます。
 			collapsed: true,
 			items: ['constellations/andromeda', 'constellations/orion'],
@@ -645,11 +649,11 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			collapsed: true,
 			items: [
-				{ label: 'Andromeda', link: '' },
-				{ label: 'Orion', link: '' },
+				{ label: 'アンドロメダ座', link: '' },
+				{ label: 'オリオン座', link: '' },
 			],
 		},
 	]}
@@ -675,15 +679,15 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			collapsed: true,
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
 				{
 					label: 'seasonal',
 					collapsed: true,
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: 'アンドロメダ座', link: '' }],
 				},
 			],
 		},
@@ -696,9 +700,8 @@ starlight({
 starlight({
 	sidebar: [
 		{
-			label: 'Constellations',
-			// 「Constellations」グループは折りたたみませんが、
-			// 自動生成されるサブグループは折りたたみます。
+			label: '星座',
+			// 「星座」グループは折りたたみませんが、自動生成されるサブグループは折りたたみます。
 			collapsed: false,
 			autogenerate: { directory: 'constellations', collapsed: true },
 		},
@@ -711,14 +714,14 @@ starlight({
 <SidebarPreview
 	config={[
 		{
-			label: 'Constellations',
+			label: '星座',
 			items: [
-				{ label: 'Carina', link: '' },
-				{ label: 'Centaurus', link: '' },
+				{ label: 'りゅうこつ座', link: '' },
+				{ label: 'ケンタウルス座', link: '' },
 				{
 					label: 'seasonal',
 					collapsed: true,
-					items: [{ label: 'Andromeda', link: '' }],
+					items: [{ label: 'アンドロメダ座', link: '' }],
 				},
 			],
 		},
