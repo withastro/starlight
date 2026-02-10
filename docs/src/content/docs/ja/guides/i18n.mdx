@@ -269,12 +269,11 @@ export const collections = {
 };
 ```
 
-コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#defining-the-collection-schema)を参照してください。
 
 ## UI翻訳を使用する
 
-Starlightの[組み込みUI文字列](/ja/guides/i18n/#starlightのuiを翻訳する)、[ユーザー定義](/ja/guides/i18n/#翻訳スキーマを拡張する)、[プラグイン提供](/ja/reference/plugins/#injecttranslations)のUI文字列には、[i18next](https://www.i18next.com/)を利用した共通のAPIを通じてアクセスできます。
-この共通のAPIは、[文字列補間](https://www.i18next.com/translation-function/interpolation)や[複数形対応](https://www.i18next.com/translation-function/plurals)などの機能もサポートしています。
+Starlightの[組み込みUI文字列](/ja/guides/i18n/#starlightのuiを翻訳する)、[ユーザー定義のUI文字列](/ja/guides/i18n/#翻訳スキーマを拡張する)、および[プラグインが提供するUI文字列](/ja/reference/plugins/#injecttranslations)には、[i18next](https://www.i18next.com/)を利用した共通のAPIを通じてアクセスできます。この共通のAPIは、[文字列補間](https://www.i18next.com/translation-function/interpolation)や[複数形対応](https://www.i18next.com/translation-function/plurals)などの機能もサポートしています。
 
 Astroコンポーネントにおいて、この共通のAPIは[グローバル`Astro`オブジェクト](https://docs.astro.build/ja/reference/api-reference/#locals)の一部として`Astro.locals.t`から利用できます。
 
