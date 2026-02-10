@@ -66,7 +66,7 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 </Steps>
 
-より高度なi18nシナリオの場合、Starlightは[Astroの`i18n`設定](https://docs.astro.build/ja/guides/internationalization/#configure-i18n-routing)オプションを使用した国際化の設定もサポートしています。
+より高度なi18nシナリオの場合、[Astroの`i18n`設定](https://docs.astro.build/ja/guides/internationalization/#configure-i18n-routing)オプションを使用した国際化の設定も可能です。
 
 ### ルートロケールを使用する
 
@@ -146,10 +146,7 @@ Starlightは、すべての言語で同等のページが作成されること�
 
 ## サイトタイトルを翻訳する
 
-{/* EN: By default, Starlight will use the same site title for all languages. */}
-{/* EN: If you need to customize the title for each locale, you can pass an object to [`title`](/reference/configuration/#title-required) in Starlight's options: */}
-
-デフォルトでは、Starlightはすべての言語で同じサイトタイトルを使用します。各ロケールのタイトルをカスタマイズする必要がある場合は、Starlightのオプションで[`title`](/ja/reference/configuration/#title-required)にオブジェクトを渡すことができます。
+デフォルトでは、Starlightはすべての言語で同じサイトタイトルを使用します。各ロケールのタイトルをカスタマイズする必要がある場合は、Starlightのオプションで[`title`](/ja/reference/configuration/#title必須)にオブジェクトを渡すことができます。
 
 ```diff lang="js"
 // astro.config.mjs
@@ -274,8 +271,6 @@ export const collections = {
 
 コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
 
-{/* EN: ## Using UI translations */}
-
 ## UI翻訳を使用する
 
 Starlightの[組み込みUI文字列](/ja/guides/i18n/#starlightのuiを翻訳する)、[ユーザー定義](/ja/guides/i18n/#翻訳スキーマを拡張する)、[プラグイン提供](/ja/reference/plugins/#injecttranslations)のUI文字列には、[i18next](https://www.i18next.com/)を利用した共通のAPIを通じてアクセスできます。
@@ -319,7 +314,7 @@ Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/
 <a href="https://docs.astro.build/">
 	{Astro.locals.t('link.astro')}
 </a>
-<!-- Renders: <a href="...">Astro documentation</a> -->
+<!-- レンダリング結果: <a href="...">Astro documentation</a> -->
 ```
 
 2番目のUI文字列は、`{{feature}}`のプレースホルダーにi18nextの[補間構文](https://www.i18next.com/translation-function/interpolation)を使用しています。`feature`の値は、`t()`の第2引数として渡すオプションオブジェクトで設定する必要があります。
@@ -329,7 +324,7 @@ Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/
 <a href="https://docs.astro.build/en/guides/astro-db/">
 	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
 </a>
-<!-- Renders: <a href="...">Astro documentation for Astro DB</a> -->
+<!-- レンダリング結果: <a href="...">Astro documentation for Astro DB</a> -->
 ```
 
 補間やフォーマットなどの`t()`関数の使い方について詳しくは、[i18nextのドキュメント](https://www.i18next.com/overview/api#t)を参照してください。
