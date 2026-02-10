@@ -109,7 +109,7 @@ const { toc } = Astro.locals.starlightRoute;
 </style>
 
 <script>
-	import { StarlightTOC } from './TableOfContents/starlight-toc';
+	import { StarlightTOC } from '../components-internals/TableOfContents/starlight-toc';
 
 	class MobileStarlightTOC extends StarlightTOC {
 		override set current(link: HTMLAnchorElement) {
