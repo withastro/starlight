@@ -4,4 +4,4 @@ export type {
 	StarlightUserConfigWithPlugins as StarlightUserConfig,
 	HookParameters,
 } from './utils/plugins';
-export type { StarlightIcon } from './components/Icons';
+export type { StarlightIcon } from './components-internals/Icons';
