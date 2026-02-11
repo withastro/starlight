@@ -1,9 +1,7 @@
 import type { GetStaticPathsItem } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import project from 'virtual:starlight/project-context';
-import { getCollectionPathFromRoot } from '../collection';
-import { localizedId, localizedSlug, slugToLocaleData, slugToParam } from '../slugs';
+import { localizedSlug, slugToLocaleData, slugToParam } from '../slugs';
 import { validateLogoImports } from '../validateLogoImports';
 import { BuiltInDefaultLocale } from '../i18n';
 import type { Route, StarlightDocsCollectionEntry, StarlightDocsEntry } from './types';
@@ -24,17 +22,14 @@ interface Path extends GetStaticPathsItem {
  */
 const normalizeIndexSlug = (slug: string) => (slug === 'index' ? '' : slug);
 
-/** Normalize the different collection entry we can get from a legacy collection or a loader. */
+/** Normalize a collection entry. */
 export function normalizeCollectionEntry(entry: StarlightDocsCollectionEntry): StarlightDocsEntry {
-	const slug = normalizeIndexSlug(entry.slug ?? entry.id);
 	return {
 		...entry,
-		// In a collection with a loader, the `id` is a slug and should be normalized.
-		id: entry.slug ? entry.id : slug,
-		// In a legacy collection, the `filePath` property doesn't exist.
-		filePath: entry.filePath ?? `${getCollectionPathFromRoot('docs', project)}/${entry.id}`,
-		// In a collection with a loader, the `slug` property is replaced by the `id`.
-		slug: normalizeIndexSlug(entry.slug ?? entry.id),
+		// The `id` is a slug and should be normalized.
+		id: normalizeIndexSlug(entry.id),
+		// At the moment, Starlight only supports file-based loaders which always include a `filePath`.
+		filePath: entry.filePath!,
 	};
 }
 
@@ -49,10 +44,9 @@ const docs: StarlightDocsEntry[] = (
 function getRoutes(): Route[] {
 	const routes: Route[] = docs.map((entry) => ({
 		entry,
-		slug: entry.slug,
 		id: entry.id,
-		entryMeta: slugToLocaleData(entry.slug),
-		...slugToLocaleData(entry.slug),
+		entryMeta: slugToLocaleData(entry.id),
+		...slugToLocaleData(entry.id),
 	}));
 
 	// In multilingual sites, add required fallback routes.
@@ -68,19 +62,17 @@ function getRoutes(): Route[] {
 			const locale = key === 'root' ? undefined : key;
 			const localeDocs = getLocaleDocs(locale);
 			for (const fallback of defaultLocaleDocs) {
-				const slug = localizedSlug(fallback.slug, locale);
-				const id = project.legacyCollections ? localizedId(fallback.id, locale) : slug;
-				const doesNotNeedFallback = localeDocs.some((doc) => doc.slug === slug);
+				const id = localizedSlug(fallback.id, locale);
+				const doesNotNeedFallback = localeDocs.some((doc) => doc.id === id);
 				if (doesNotNeedFallback) continue;
 				routes.push({
 					entry: fallback,
-					slug,
 					id,
 					isFallback: true,
 					lang: localeConfig.lang || BuiltInDefaultLocale.lang,
 					locale,
 					dir: localeConfig.dir,
-					entryMeta: slugToLocaleData(fallback.slug),
+					entryMeta: slugToLocaleData(fallback.id),
 				});
 			}
 		}
@@ -93,7 +85,7 @@ export const routes = getRoutes();
 function getParamRouteMapping(): ReadonlyMap<string | undefined, Route> {
 	const map = new Map<string | undefined, Route>();
 	for (const route of routes) {
-		map.set(slugToParam(route.slug), route);
+		map.set(slugToParam(route.id), route);
 	}
 	return map;
 }
@@ -105,7 +97,7 @@ export function getRouteBySlugParam(slugParam: string | undefined): Route | unde
 
 function getPaths(): Path[] {
 	return routes.map((route) => ({
-		params: { slug: slugToParam(route.slug) },
+		params: { slug: slugToParam(route.id) },
 		props: route,
 	}));
 }
@@ -128,15 +120,15 @@ function getLocaleDocs(locale: string | undefined): StarlightDocsEntry[] {
 }
 
 /** Filter an array to find items whose slug matches the passed locale. */
-function filterByLocale<T extends { slug: string }>(items: T[], locale: string | undefined): T[] {
+function filterByLocale<T extends { id: string }>(items: T[], locale: string | undefined): T[] {
 	if (config.locales) {
 		if (locale && locale in config.locales) {
-			return items.filter((i) => i.slug === locale || i.slug.startsWith(locale + '/'));
+			return items.filter((i) => i.id === locale || i.id.startsWith(locale + '/'));
 		} else if (config.locales.root) {
 			const langKeys = Object.keys(config.locales).filter((k) => k !== 'root');
 			const isLangIndex = new RegExp(`^(${langKeys.join('|')})$`);
 			const isLangDir = new RegExp(`^(${langKeys.join('|')})/`);
-			return items.filter((i) => !isLangIndex.test(i.slug) && !isLangDir.test(i.slug));
+			return items.filter((i) => !isLangIndex.test(i.id) && !isLangDir.test(i.id));
 		}
 	}
 	return items;

@@ -27,7 +27,7 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 		 *
 		 * Can also be set to `false` to disable showing an edit link on this page.
 		 */
-		editUrl: z.union([z.string().url(), z.boolean()]).optional().default(true),
+		editUrl: z.union([z.url(), z.boolean()]).optional().default(true),
 
 		/** Set custom `<head>` tags just for this page. */
 		head: HeadConfigSchema({ source: 'content' }),
@@ -91,7 +91,7 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 				/** HTML attributes to add to the sidebar link. */
 				attrs: SidebarLinkItemHTMLAttributesSchema(),
 			})
-			.default({}),
+			.prefault({}),
 
 		/** Display an announcement banner at the top of this page. */
 		banner: z
@@ -113,14 +113,8 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 /** Type of Starlight’s default frontmatter schema. */
 type DefaultSchema = ReturnType<typeof StarlightFrontmatterSchema>;
 
-/** Plain object, union, and intersection Zod types. */
-type BaseSchemaWithoutEffects =
-	| z.AnyZodObject
-	| z.ZodUnion<[BaseSchemaWithoutEffects, ...BaseSchemaWithoutEffects[]]>
-	| z.ZodDiscriminatedUnion<string, z.AnyZodObject[]>
-	| z.ZodIntersection<BaseSchemaWithoutEffects, BaseSchemaWithoutEffects>;
 /** Base subset of Zod types that we support passing to the `extend` option. */
-type BaseSchema = BaseSchemaWithoutEffects | z.ZodEffects<BaseSchemaWithoutEffects>;
+type BaseSchema = z.core.$ZodType;
 
 /** Type that extends Starlight’s default schema with an optional, user-defined schema. */
 type ExtendedSchema<T extends BaseSchema = never> = [T] extends [never]

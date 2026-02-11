@@ -2,6 +2,7 @@ import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	test: {
+		projects: ['__tests__/*/vitest.config.ts'],
 		coverage: {
 			all: true,
 			reportsDirectory: './__coverage__',
