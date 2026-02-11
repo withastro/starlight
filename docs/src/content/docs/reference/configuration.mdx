@@ -503,6 +503,7 @@ Set `pagefind` to an object to configure the Pagefind search client:
 
 - See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated
 - See [“Searching multiple sites”](https://pagefind.app/docs/multisite/) in the Pagefind documentation for more details about using the `pagefind.mergeIndex` option to control how to search across multiple sites
+- See [“pagefind.createIndex”](https://pagefind.app/docs/node-api/#pagefindcreateindex) in the Pagefind documentation for more details about using the `pagefind.index` option to customize what content is indexed.
 
 #### `PagefindOptions`
 
@@ -529,6 +530,10 @@ interface PagefindOptions {
 			termSimilarity?: number;
 		};
 	}>;
+	index?: Pick<
+		pagefind.PagefindServiceConfig,
+		'rootSelector' | 'excludeSelectors' | 'forceLanguage'
+	>;
 }
 ```
 
