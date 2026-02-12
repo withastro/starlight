@@ -289,6 +289,48 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [vitest]: https://vitest.dev/
 [playwright]: https://playwright.dev/
 
+## Plugins, Integrations and Community Content
+
+It's great to see new plugins, integrations, tools, themes or any other content you created being shared with the community on our pages ["Plugins and Integrations"](https://starlight.astro.build/resources/plugins/) and ["Community Content"](https://starlight.astro.build/resources/community-content/).
+If you’ve built a creation that's related to Starlight, adding it to one of these pages is just a pull request away!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. If you have developed any kind of software, add a new entry in `docs/src/content/docs/resources/plugins.mdx`. Articles, guides or video content are welcome in `docs/src/content/docs/resources/community-content.mdx`.
+
+   - The new entry must be appended at the end of an existing list.
+   - The structure of the list can be copied from existing items in this list. Generally speaking, there are two types of items, the `<LinkCard />` HTML element and a `json` object, examples represented below respectfully:
+     <br/>
+
+     ```diff
+       <LinkCard
+         href="https://github.com/ghost/starlight-plugin-example"
+         title="starlight-plugin-example"
+         description="Add blog to your documentation."
+       />
+     + <LinkCard
+     +   href="https://github.com/ghost/starlight-plugin-new-example"
+     +   title="starlight-plugin-new-example"
+     +   description="Add astronaut image to bottom right corner."
+     + />
+     </CardGrid>
+     ```
+
+     ```diff
+       {
+         href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+         title: '🌟 SUB 1 MINUTE RUN',
+         description: 'Watch Ben launch a new Starlight site in under a minute!',
+       },
+     + {
+     +   href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+     +   title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)k',
+     +   description: "The official video for “Never Gonna Give You Up” by Rick Astley.",
+     + },
+     ]}
+     ```
+
+3. Open a pull request on GitHub to add your changes. Just please don't try to add “Never Gonna Give You Up” by Rick Astley to our videos like the example above ;)
+
 ## Showcase
 
 ### Sites
