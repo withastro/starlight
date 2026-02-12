@@ -131,7 +131,7 @@ export default defineConfig({
 						hi: 'गाइड',
 						uk: 'Ґайди',
 					},
-					autogenerate: { directory: 'guides' },
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 				{
 					label: 'Components',
@@ -144,7 +144,7 @@ export default defineConfig({
 						'zh-CN': '组件',
 						uk: 'Компоненти',
 					},
-					autogenerate: { directory: 'components' },
+					items: [{ autogenerate: { directory: 'components' } }],
 				},
 				{
 					label: 'Reference',
@@ -163,7 +163,7 @@ export default defineConfig({
 						hi: 'संदर्भ',
 						uk: 'Довідник',
 					},
-					autogenerate: { directory: 'reference' },
+					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 				{
 					label: 'Resources',
@@ -178,7 +178,7 @@ export default defineConfig({
 						ko: '리소스',
 						uk: 'Ресурси',
 					},
-					autogenerate: { directory: 'resources' },
+					items: [{ autogenerate: { directory: 'resources' } }],
 				},
 			],
 			expressiveCode: { shiki: { langs: [markdocGrammar] } },
