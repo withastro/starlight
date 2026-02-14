@@ -151,7 +151,7 @@ declare namespace StarlightApp {
 
 ユーザーが提供した[Starlightの設定](/ja/reference/configuration/)を更新するためのコールバック関数です。上書きしたいルートレベルの設定キーを指定します。ネストされた設定値を更新するには、ネストされたオブジェクトの全体を指定する必要があります。
 
-既存の設定オプションをオーバーライドせず拡張するには、既存の値を新しい値へと展開します。以下の例では、`config.social`を新しい`social`配列に展開し、既存の設定に新しい[`social`](/ja/reference/configuration/#social)アカウントを追加しています。
+既存の設定オプションをオーバーライドせず拡張するには、既存の値を新しい値へと展開します。以下の例では、`config.social`を新しい`social`配列に展開し、既存の設定に新しい[`social`](/ja/reference/configuration/#social)メディアアカウントを追加しています。
 
 ```ts {6-15}
 // plugin.ts
@@ -270,8 +270,8 @@ export default {
   name: 'long-process-plugin',
   hooks: {
     'config:setup'({ logger }) {
-      logger.info('Starting long process…');
-      // 何らかの長い処理…
+      logger.info('時間が掛かる処理を開始します…');
+      // 何らかの時間が掛かる処理…
     },
   },
 };
@@ -280,14 +280,14 @@ export default {
 上記の例では、指定した`info`レベルのメッセージを含むログが出力されます。
 
 ```shell
-[long-process-plugin] Starting long process…
+[long-process-plugin] 時間が掛かる処理を開始します…
 ```
 
 #### `useTranslations`
 
 **type:** `(lang: string) => I18nT`
 
-BCP-47言語タグを指定して`useTranslations()`を呼び出すと、その言語のUI文字列にアクセスするためのユーティリティ関数が生成されます。`useTranslations()`は、Astroコンポーネントで利用可能な`Astro.locals.t()` APIと同等のものを返します。利用可能なAPIの詳細については、[“UI翻訳の使用“](/ja/guides/i18n/#ui翻訳を使用する)ガイドを参照してください。
+BCP-47言語タグを指定して`useTranslations()`を呼び出すと、その言語のUI文字列にアクセスするためのユーティリティ関数が生成されます。`useTranslations()`は、Astroコンポーネントで利用可能な`Astro.locals.t()`APIと同等のものを返します。利用可能なAPIの詳細については、[“UI翻訳の使用“](/ja/guides/i18n/#ui翻訳を使用する)ガイドを参照してください。
 
 ```ts {6}
 // plugin.ts
