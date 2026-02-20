@@ -76,7 +76,7 @@ export function testFactory(fixturePath: string) {
 }
 
 // A Playwright test fixture accessible from within all tests.
-class StarlightPage {
+export class StarlightPage {
 	private readonly server: Server;
 	private readonly page: Page;
 

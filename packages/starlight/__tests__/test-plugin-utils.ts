@@ -12,7 +12,7 @@ export function createTestPluginContext(): StarlightPluginContext {
 	};
 }
 
-class TestAstroIntegrationLogger {
+export class TestAstroIntegrationLogger {
 	options = {} as AstroIntegrationLogger['options'];
 	constructor(public label = 'test-integration-logger') {}
 	fork = (label: string) => new TestAstroIntegrationLogger(label);

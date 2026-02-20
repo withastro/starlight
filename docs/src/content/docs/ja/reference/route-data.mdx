@@ -1,11 +1,11 @@
 ---
 title: ルートデータ
-description: Starlight のルートデータオブジェクトに関する完全なリファレンスドキュメントです。
+description: Starlightのルートデータオブジェクトに関する完全なリファレンスドキュメントです。
 ---
 
-Starlight のルートデータオブジェクトには、現在のページに関する情報が含まれています。Starlight のデータモデルがどのように機能するかについては、[「ルートデータ」ガイド](/ja/guides/route-data/) を参照してください。
+Starlightのルートデータオブジェクトには、現在のページに関する情報が含まれています。Starlightのデータモデルがどのように機能するかについては、[「ルートデータ」ガイド](/ja/guides/route-data/) を参照してください。
 
-Astro コンポーネント内では、`Astro.locals.starlightRoute` からルートデータにアクセスできます。
+Astroコンポーネント内では、`Astro.locals.starlightRoute`からルートデータにアクセスできます。
 
 ```astro {4}
 ---
@@ -15,7 +15,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
 ---
 ```
 
-[ルートミドルウェア](/ja/guides/route-data/#ルートデータのカスタマイズ) 内では、ミドルウェア関数に渡される context オブジェクトからルートデータにアクセスします。
+[ルートミドルウェア](/ja/guides/route-data/#ルートデータのカスタマイズ)内では、ミドルウェア関数に渡されるcontextオブジェクトからルートデータにアクセスします。
 
 ```ts {5}
 // src/routeData.ts
@@ -28,67 +28,67 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 ## `starlightRoute`
 
-`starlightRoute` オブジェクトには、次のプロパティがあります。
+`starlightRoute`オブジェクトは、以下のプロパティをもちます。
 
 ### `dir`
 
 **型:** `'ltr' | 'rtl'`
 
-ページの文字方向。
+ページの書字方向。
 
 ### `lang`
 
 **型:** `string`
 
-このページのロケールを示す BCP-47 言語タグ。例: `en`, `zh-CN`, `pt-BR`。
+このページのロケールのBCP-47言語タグ。たとえば`en`、`zh-CN`、`pt-BR`など。
 
 ### `locale`
 
 **型:** `string | undefined`
 
-言語が提供されるベースパス。ルートロケールスラッグの場合は `undefined`。
+言語が配信されるベースパス。ルートロケールスラグの場合は`undefined`となります。
 
 ### `siteTitle`
 
 **型:** `string`
 
-このページのロケールに対応するサイトタイトル。
+このページのロケールのサイトタイトル。
 
 ### `siteTitleHref`
 
 **型:** `string`
 
-サイトタイトルの `href` 属性に設定される値で、トップページへのリンクです。多言語サイトの場合は現在のロケールを含みます（例: `/en/` や `/zh-cn/`）。
+サイトタイトルの`href`属性の値。たとえば`/`など、ホームページへのリンクとなります。多言語サイトの場合、たとえば`/en/`や`/zh-cn/`など、現在のロケールが含まれます。
 
 ### `slug`
 
 **型:** `string`
 
-コンテンツファイル名から生成されたこのページのスラッグ。
+コンテンツファイル名から生成されたページのスラグ。
 
-このプロパティは非推奨であり、今後のバージョンで削除される予定です。[Starlight の `docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定) を使用して新しいコンテンツレイヤー API に移行し、代わりに [`id`](#id) プロパティを使用してください。
+このプロパティは非推奨であり、Starlightの将来のバージョンで削除される予定です。[Starlightの`docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定)を使用して新しいコンテンツレイヤーAPIに移行し、代わりに[`id`](#id)プロパティを使用してください。
 
 ### `id`
 
 **型:** `string`
 
-[`legacy.collections`](https://docs.astro.build/ja/reference/legacy-flags/#collections) フラグを使用している場合は、コンテンツファイル名に基づくこのページの一意の ID、またはスラッグ。
+このページのスラグ。[`legacy.collections`](https://docs.astro.build/ja/reference/legacy-flags/#collections)フラグを使用している場合は、コンテンツファイル名に基づくページの一意のIDとなります。
 
 ### `isFallback`
 
 **型:** `boolean | undefined`
 
-現在の言語で未翻訳のページが既定ロケールのフォールバックコンテンツを使用している場合に `true`。多言語サイトでのみ使用されます。
+このページが現在の言語で未翻訳であり、デフォルトロケールのフォールバックコンテンツを使用している場合は`true`となります。多言語サイトでのみ使用されます。
 
 ### `entryMeta`
 
 **型:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
-ページコンテンツのロケールメタデータ。ページがフォールバックコンテンツを使用している場合、トップレベルのロケール値とは異なることがあります。
+ページコンテンツのロケールメタデータ。ページがフォールバックコンテンツを使用している場合、トップレベルのロケール値とは異なる場合があります。
 
 ### `entry`
 
-現在のページに対応する Astro コンテンツコレクションのエントリ。 現在のページの frontmatter 値は `entry.data` に含まれます。
+現在のページのAstroコンテンツコレクションのエントリー。`entry.data`には、現在のページのフロントマターの値が含まれます。
 
 ```ts
 entry: {
@@ -100,61 +100,61 @@ entry: {
 }
 ```
 
-このオブジェクトの構造については、[Astro の Collection Entry Type](https://docs.astro.build/ja/reference/modules/astro-content/#collectionentry) リファレンスを参照してください。
+このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/modules/astro-content/#collectionentry)リファレンスを参照してください。
 
 ### `sidebar`
 
 **型:** `SidebarEntry[]`
 
-このページに対応するサイトナビゲーションサイドバーのエントリ。
+ページのサイトナビゲーション用サイドバーのエントリー。
 
 ### `hasSidebar`
 
 **型:** `boolean`
 
-このページでサイドバーを表示するかどうか。
+ページにサイドバーを表示するかどうか。
 
 ### `pagination`
 
 **型:** `{ prev?: Link; next?: Link }`
 
-サイドバーが有効な場合、前後のページへのリンク。
+ページネーションの設定が有効な場合にサイドバーに表示される、前のページと次のページへのリンク。
 
 ### `toc`
 
 **型:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
 
-このページの目次（有効な場合）。
+目次の設定が有効な場合、このページの目次。
 
 ### `headings`
 
 **型:** `{ depth: number; slug: string; text: string }[]`
 
-現在のページから抽出されたすべての Markdown 見出しの配列。Starlight の設定に従う目次コンポーネントを作成したい場合は、代わりに [`toc`](#toc) を使用してください。
+現在のページから抽出されたすべてのMarkdown見出しの配列。Starlightの設定オプションをもとに目次コンポーネントを作成したい場合は、[`toc`](#toc)を使用してください。
 
 ### `lastUpdated`
 
 **型:** `Date | undefined`
 
-このページが最後に更新された日時を表す JavaScript の `Date` オブジェクト（有効な場合）。
+最終更新日の設定が有効な場合、このページが最後に更新された日時を表わすJavaScriptの`Date`オブジェクト。
 
 ### `editUrl`
 
 **型:** `URL | undefined`
 
-このページを編集できるアドレスの `URL` オブジェクト（有効な場合）。
+ページの編集設定が有効な場合、このページを編集可能なアドレスの`URL`オブジェクト。
 
 ### `head`
 
 **型:** [`HeadConfig[]`](/ja/reference/configuration/#headconfig)
 
-現在のページの `<head>` に含めるすべてのタグの配列。`<title>` や `<meta charset="utf-8">` などの重要なタグが含まれます。
+現在のページの`<head>`に含めるすべてのタグの配列。`<title>`や`<meta charset="utf-8">`などの重要なタグが含まれます。
 
 ## ユーティリティ
 
 ### `defineRouteMiddleware()`
 
-ルートミドルウェアモジュールに型を付けるには、`defineRouteMiddleware()` ユーティリティを使用します。
+ルートミドルウェアモジュールに型を付けるには、`defineRouteMiddleware()`ユーティリティを使用します。
 
 ```ts "defineRouteMiddleware"
 // src/routeData.ts
@@ -165,11 +165,11 @@ export const onRequest = defineRouteMiddleware((context) => {
 });
 ```
 
-### `StarlightRouteData` 型
+### `StarlightRouteData`型
 
-Starlight のルートデータを扱うコードを書く場合、`StarlightRouteData` 型をインポートして`Astro.locals.starlightRoute` の構造と一致させることができます。
+Starlightのルートデータを扱うコードを書く場合は、`StarlightRouteData`型をインポートして`Astro.locals.starlightRoute`の型定義に合わせることができます。
 
-次の例では、`usePageTitleInTOC()` 関数がルートデータを更新し、目次内の最初の項目ラベルをデフォルトの「Overview」から現在のページタイトルに置き換えます。`StarlightRouteData` 型を使うことで、ルートデータの変更が正しいかどうかを検証できます。
+以下の例では、`usePageTitleInTOC()`関数がルートデータを更新し、目次の最初の項目のラベルとして現在のページのタイトルを使用することで、デフォルトの「概要」ラベルを置き換えます。`StarlightRouteData`型により、ルートデータの変更が正しいかどうかを確認できます。
 
 ```ts "StarlightRouteData"
 // src/route-utils.ts

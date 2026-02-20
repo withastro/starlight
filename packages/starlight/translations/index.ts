@@ -15,6 +15,7 @@ import id from './id.json';
 import it from './it.json';
 import nl from './nl.json';
 import da from './da.json';
+import th from './th.json';
 import tr from './tr.json';
 import ar from './ar.json';
 import nb from './nb.json';
@@ -31,6 +32,7 @@ import pl from './pl.json';
 import sk from './sk.json';
 import lv from './lv.json';
 import hu from './hu.json';
+import el from './el.json';
 
 const { parse } = builtinI18nSchema();
 
@@ -52,6 +54,7 @@ export default Object.fromEntries(
 		it,
 		nl,
 		da,
+		th,
 		tr,
 		ar,
 		nb,
@@ -68,5 +71,6 @@ export default Object.fromEntries(
 		sk,
 		lv,
 		hu,
+		el,
 	}).map(([key, dict]) => [key, parse(dict)])
 );
