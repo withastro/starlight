@@ -218,6 +218,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### 특수 문자 이스케이프
+
+파일 이름에 밑줄 또는 공백과 같은 특수 문자가 포함된 경우, 파일 이름을 코드 백틱으로 감싸서 이스케이프하세요.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- `__init__.py`
+- `Hello world.txt`
+- **`READ ME FIRST.md`**
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- `__init__.py`
+- `Hello world.txt`
+- **`READ ME FIRST.md`**
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- `__init__.py`
+- `Hello world.txt`
+- **`READ ME FIRST.md`**
+
+</FileTree>
+
+</Preview>
+
 ## `<FileTree>` 속성
 
 **구현:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
