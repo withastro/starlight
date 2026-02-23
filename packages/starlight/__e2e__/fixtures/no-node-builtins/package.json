@@ -5,6 +5,6 @@
   "type": "module",
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
-    "astro": "^6.0.0-beta.8"
+    "astro": "^6.0.0-beta.14"
   }
 }
