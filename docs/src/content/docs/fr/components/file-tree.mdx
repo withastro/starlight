@@ -218,6 +218,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Échapper les caractères spéciaux
+
+Échappez les caractères spéciaux tels que les traits de soulignement ou les espaces dans les noms de fichiers en enveloppant le nom de fichier avec des accents graves.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- `__init__.py`
+- `Hello world.txt`
+- **`À LIRE EN PREMIER.md`**
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- `__init__.py`
+- `Hello world.txt`
+- **`À LIRE EN PREMIER.md`**
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- `__init__.py`
+- `Hello world.txt`
+- **`À LIRE EN PREMIER.md`**
+
+</FileTree>
+
+</Preview>
+
 ## Props de `<FileTree>`
 
 **Implémentation :** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
