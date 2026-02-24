@@ -18,7 +18,7 @@
     "@changesets/cli": "^2.27.9",
     "@eslint/js": "^9.33.0",
     "@size-limit/file": "^11.1.6",
-    "astro": "^5.6.1",
+    "astro": "^5.17.3",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.3.0",
