@@ -62,6 +62,17 @@ test('component with multiple children throws an error', () => {
 	`);
 });
 
+// This tests a workaround added for https://github.com/withastro/astro/issues/15627
+// See rehype-steps.ts for more details.
+test('component with top-level script child is processed successfully', () => {
+	const { html } = processSteps(
+		'<script type="module" src="/test-script.js"></script><ol><li>List item</li></ol>'
+	);
+	expect(html).toMatchInlineSnapshot(
+		`"<script type="module" src="/test-script.js"></script><ol role="list" class="sl-steps"><li>List item</li></ol>"`
+	);
+});
+
 test('applies `role="list"` to child list', () => {
 	const { html } = processSteps('<ol><li>Step one</li></ol>');
 	expect(html).toMatchInlineSnapshot(`"<ol role="list" class="sl-steps"><li>Step one</li></ol>"`);
