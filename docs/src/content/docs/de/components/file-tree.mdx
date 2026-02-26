@@ -218,6 +218,46 @@ import { FileTree } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Sonderzeichen umgehen
+
+Sichere Sonderzeichen wie Unterstriche oder Leerzeichen in Dateinamen, indem du den Dateinamen in Code-Backticks einschließt.
+
+<Preview>
+
+```mdx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- `__init__.py`
+- `Hallo Welt.txt`
+- **`LIES MICH ZUERST.md`**
+
+</FileTree>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc
+{% filetree %}
+- `__init__.py`
+- `Hallo Welt.txt`
+- **`LIES MICH ZUERST.md`**
+{% /filetree %}
+```
+
+</Fragment>
+
+<FileTree slot="preview">
+
+- `__init__.py`
+- `Hallo Welt.txt`
+- **`LIES MICH ZUERST.md`**
+
+</FileTree>
+
+</Preview>
+
 ## `<FileTree>`-Eigenschaften
 
 **Implementation:** [`FileTree.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/FileTree.astro)
