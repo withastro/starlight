@@ -66,6 +66,8 @@ Starlightは、ルーティング、フォールバックコンテンツ、右�
 
 </Steps>
 
+より高度なi18nシナリオの場合、[Astroの`i18n`設定](https://docs.astro.build/ja/guides/internationalization/#configure-i18n-routing)オプションを使用した国際化の設定も可能です。
+
 ### ルートロケールを使用する
 
 「ルート」ロケールを使用すると、パスにi18nプレフィックスを付けずにある言語を提供できます。たとえば英語をルートロケールとすると、英語のページパスは`/en/about`ではなく`/about`のようになります。
@@ -142,6 +144,33 @@ Starlightは、すべての言語で同等のページが作成されること�
 
 ある言語の翻訳がまだである場合、Starlightはそのページのコンテンツを（`defaultLocale`で設定する）デフォルト言語で表示します。たとえば、概要（about）ページのフランス語版をまだ作成していない場合、デフォルト言語が英語であれば、`/fr/about`を訪れた人には未翻訳であるという通知とともに英語のコンテンツが表示されます。これにより、まずデフォルト言語にコンテンツを追加し、そして翻訳者が時間を掛けて徐々に翻訳していくことが可能となります。
 
+## サイトタイトルを翻訳する
+
+デフォルトでは、Starlightはすべての言語で同じサイトタイトルを使用します。各ロケールのタイトルをカスタマイズする必要がある場合は、Starlightのオプションで[`title`](/ja/reference/configuration/#title必須)にオブジェクトを渡すことができます。
+
+```diff lang="js"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+	integrations: [
+		starlight({
+-			title: 'My Docs',
++			title: {
++				en: 'My Docs',
++				'zh-CN': '我的文档',
++			},
+			defaultLocale: 'en',
+			locales: {
+				en: { label: 'English' },
+				'zh-cn': { label: '简体中文', lang: 'zh-CN' },
+			},
+		}),
+	],
+});
+```
+
 ## StarlightのUIを翻訳する
 
 import LanguagesList from '~/components/languages-list.astro';
@@ -156,16 +185,17 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
 <Steps>
 
-1. 設定がまだであれば、`src/content/config.ts`で`i18n`データコレクションを設定します。
+1. 現状が未設定の場合は、`src/content.config.ts`で`i18n`データコレクションを設定します。
 
-   ```diff lang="js" ins=/, (i18nSchema)/
-   // src/content/config.ts
+   ```diff lang="js" ins=/, (i18nLoader|i18nSchema)/
+   // src/content.config.ts
    import { defineCollection } from 'astro:content';
+   import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
    import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
    export const collections = {
-   	docs: defineCollection({ schema: docsSchema() }),
-   +	i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+   	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
+   +	i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
    };
    ```
 
@@ -187,7 +217,7 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 
    <UIStringsList />
 
-   Starlightのコードブロックは、[Expressive Code](https://github.com/expressive-code/expressive-code)ライブラリによって動作しています。`expressiveCode`キーを使用して、同じJSONファイルでUI文字列の翻訳について設定できます。
+   Starlightのコードブロックは、[Expressive Code](https://expressive-code.com/)ライブラリによって動作しています。`expressiveCode`キーを使用して、同じJSONファイルでUI文字列の翻訳について設定できます。
 
    ```json
    {
@@ -221,14 +251,15 @@ Starlightでは、読者が選択した言語でサイト全体を体験でき�
 `i18nSchema()`オプションの`extend`を設定することで、サイトの翻訳辞書にカスタムキーを追加できます。以下の例では、オプションの`custom.label`キーが新たにデフォルトのキーに追加されています。
 
 ```diff lang="js"
-// src/content/config.ts
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-	docs: defineCollection({ schema: docsSchema() }),
+	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 	i18n: defineCollection({
-		type: 'data',
+		loader: i18nLoader(),
 		schema: i18nSchema({
 +			extend: z.object({
 +				'custom.label': z.string().optional(),
@@ -238,4 +269,129 @@ export const collections = {
 };
 ```
 
-コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#defining-the-collection-schema)を参照してください。
+
+## UI翻訳を使用する
+
+Starlightの[組み込みUI文字列](/ja/guides/i18n/#starlightのuiを翻訳する)、[ユーザー定義のUI文字列](/ja/guides/i18n/#翻訳スキーマを拡張する)、および[プラグインが提供するUI文字列](/ja/reference/plugins/#injecttranslations)には、[i18next](https://www.i18next.com/)を利用した共通のAPIを通じてアクセスできます。この共通のAPIは、[文字列補間](https://www.i18next.com/translation-function/interpolation)や[複数形対応](https://www.i18next.com/translation-function/plurals)などの機能もサポートしています。
+
+Astroコンポーネントにおいて、この共通のAPIは[グローバル`Astro`オブジェクト](https://docs.astro.build/ja/reference/api-reference/#locals)の一部として`Astro.locals.t`から利用できます。
+
+```astro title="example.astro"
+<p dir={Astro.locals.t.dir()}>
+	{Astro.locals.t('404.text')}
+</p>
+```
+
+[エンドポイント](https://docs.astro.build/ja/guides/endpoints/)でもこの共通のAPIを使用できます。`locals`オブジェクトは[エンドポイントコンテキスト](https://docs.astro.build/ja/reference/api-reference/#locals)の一部として利用できます。
+
+```ts title="src/pages/404.ts"
+export const GET = (context) => {
+	return new Response(context.locals.t('404.text'));
+};
+```
+
+Starlightプラグインのコンテキストでは、[`useTranslations()`](/ja/reference/plugins/#usetranslations)ヘルパーを使用して、特定の言語に対するこの共通のAPIにアクセスできます。詳しくは、[プラグインリファレンス](/ja/reference/plugins/)を参照してください。
+
+### UI文字列をレンダリングする
+
+`locals.t()`関数を使用してUI文字列をレンダリングします。これはi18nextの`t()`関数のインスタンスで、最初の引数としてUI文字列のキーを受け取り、現在の言語に対応する翻訳を返します。
+
+たとえば、以下の内容のカスタム翻訳ファイルがあるとします。
+
+```json title="src/content/i18n/en.json"
+{
+	"link.astro": "Astro documentation",
+	"link.astro.custom": "Astro documentation for {{feature}}"
+}
+```
+
+最初のUI文字列は、`t()`関数に`'link.astro'`を渡すことでレンダリングできます。
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/">
+	{Astro.locals.t('link.astro')}
+</a>
+<!-- レンダリング結果: <a href="...">Astro documentation</a> -->
+```
+
+2番目のUI文字列は、`{{feature}}`のプレースホルダーにi18nextの[補間構文](https://www.i18next.com/translation-function/interpolation)を使用しています。`feature`の値は、`t()`の第2引数として渡すオプションオブジェクトで設定する必要があります。
+
+```astro {3}
+<!-- src/components/Example.astro -->
+<a href="https://docs.astro.build/en/guides/astro-db/">
+	{Astro.locals.t('link.astro.custom', { feature: 'Astro DB' })}
+</a>
+<!-- レンダリング結果: <a href="...">Astro documentation for Astro DB</a> -->
+```
+
+補間やフォーマットなどの`t()`関数の使い方について詳しくは、[i18nextのドキュメント](https://www.i18next.com/overview/api#t)を参照してください。
+
+### 高度なAPI
+
+#### `t.all()`
+
+`locals.t.all()`関数は、現在のロケールで利用可能なすべてのUI文字列を含むオブジェクトを返します。
+
+```astro
+---
+// src/components/Example.astro
+const allStrings = Astro.locals.t.all();
+//    ^
+//    {
+//      "skipLink.label": "Skip to content",
+//      "search.label": "Search",
+//      …
+//    }
+---
+```
+
+#### `t.exists()`
+
+翻訳キーが存在するかどうかを確認するには、`locals.t.exists()`関数の最初の引数に翻訳キーを渡します。特定のロケールに対する翻訳が存在するかどうかを確認する必要がある場合は、オプションの第2引数を渡します。
+
+```astro
+---
+// src/components/Example.astro
+const keyExists = Astro.locals.t.exists('a.key');
+//    ^ true
+const keyExistsInFrench = Astro.locals.t.exists('other.key', { lngs: ['fr'] });
+//    ^ false
+---
+```
+
+詳しくは、[i18nextドキュメントの`exists()`リファレンス](https://www.i18next.com/overview/api#exists)を参照してください。
+
+#### `t.dir()`
+
+`locals.t.dir()`関数は、現在のロケールまたは指定したロケールのテキスト方向を返します。
+
+```astro
+---
+// src/components/Example.astro
+const currentDirection = Astro.locals.t.dir();
+//    ^
+//    'ltr'
+const arabicDirection = Astro.locals.t.dir('ar');
+//    ^
+//    'rtl'
+---
+```
+
+詳しくは、[i18nextドキュメントの`dir()`リファレンス](https://www.i18next.com/overview/api#dir)を参照してください。
+
+## 現在のロケールにアクセスする
+
+`.astro`コンポーネントで現在のロケールを読み取るためには、[`Astro.currentLocale`](https://docs.astro.build/ja/reference/api-reference/#currentlocale)を使用できます。
+
+以下の例では、現在のロケールを読み取り、[`getRelativeLocaleUrl()`](https://docs.astro.build/ja/reference/modules/astro-i18n/#getrelativelocaleurl)ヘルパーと組み合わせて、現在の言語での概要ページへのリンクを生成しています。
+
+```astro
+---
+// src/components/AboutLink.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+---
+
+<a href={getRelativeLocaleUrl(Astro.currentLocale ?? 'en', 'about')}>About</a>
+```
