@@ -1,5 +1,5 @@
 import { z } from 'astro/zod';
-import { Icons, type StarlightIcon } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components-internals/Icons';
 
 const iconNames = Object.keys(Icons) as [StarlightIcon, ...StarlightIcon[]];
 
