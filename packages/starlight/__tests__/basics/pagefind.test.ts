@@ -15,7 +15,7 @@ async function runStarlightPagefind(outputDir: URL) {
 
 	vi.mocked(pagefind.createIndex).mockResolvedValue({ index, errors: [] });
 
-	await starlightPagefind({ dir: outputDir, logger: new TestAstroIntegrationLogger() });
+	await starlightPagefind({ dir: outputDir, logger: new TestAstroIntegrationLogger() }, {});
 
 	return index;
 }
@@ -61,7 +61,7 @@ test('logs Pagefind errors and closes Pagefind', async () => {
 		errors: [errorMessage],
 	});
 
-	await expect(starlightPagefind({ dir: outputDir, logger })).rejects.toThrow();
+	await expect(starlightPagefind({ dir: outputDir, logger }, {})).rejects.toThrow();
 
 	expect(logger.error).toHaveBeenCalledWith(`Pagefind error: ${errorMessage}`);
 
