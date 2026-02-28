@@ -62,20 +62,11 @@ The site title for this page’s locale.
 The value for the site title’s `href` attribute, linking back to the homepage, e.g. `/`.
 For multilingual sites this will include the current locale, e.g. `/en/` or `/zh-cn/`.
 
-### `slug`
-
-**Type:** `string`
-
-The slug for this page generated from the content filename.
-
-This property is deprecated and will be removed in a future version of Starlight.
-Migrate to the new Content Layer API by using [Starlight’s `docsLoader`](/manual-setup/#configure-content-collections) and use the [`id`](#id) property instead.
-
 ### `id`
 
 **Type:** `string`
 
-The slug for this page or the unique ID for this page based on the content filename if using the [`legacy.collections`](https://docs.astro.build/en/reference/legacy-flags/#collections) flag.
+The slug for this page.
 
 ### `isFallback`
 

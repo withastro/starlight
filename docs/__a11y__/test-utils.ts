@@ -9,7 +9,7 @@ import Sitemapper from 'sitemapper';
 
 // We use the Lunaria config to get the list of languages rather than the Astro config as importing
 // the latter does not play well with Playwright.
-import lunariaConfig from '../lunaria.config.json' assert { type: 'json' };
+import lunariaConfig from '../lunaria.config.json' with { type: 'json' };
 
 export { expect, type Locator } from '@playwright/test';
 
@@ -72,7 +72,11 @@ export const test = baseTest.extend<{
 
 // A Playwright test fixture accessible from within all tests.
 class DocsSite {
-	constructor(private readonly page: Page) {}
+	private readonly page: Page;
+
+	constructor(page: Page) {
+		this.page = page;
+	}
 
 	async getAllUrls() {
 		const sitemap = new Sitemapper({ url: config.sitemap.url });
@@ -142,18 +146,29 @@ class DocsSite {
 }
 
 function landmarkUniqueNodeMatcher(node: ViolationNode) {
-	/**
-	 * Ignore the `landmark-unique` violation only if the node HTML is an aside.
-	 *
-	 * The best action to fix this violation would be to remove the landmark altogether as it's not
-	 * necessary in this case and switch to the `note` role. Although, this is not possible at the
-	 * moment due to an issue with NVDA not announcing it and also skipping the associated label for
-	 * a role not supported.
-	 *
-	 * @see https://github.com/nvaccess/nvda/issues/10439
-	 * @see https://github.com/withastro/starlight/pull/2503
-	 */
-	return !/^<aside[^>]* class="starlight-aside[^>]*>$/.test(node.html);
+	// Ignore some `landmark-unique` violations.
+	return (
+		/**
+		 * Asides: the best action to fix this violation would be to remove the landmark altogether as
+		 * it's not necessary in this case and switch to the `note` role. Although, this is not possible
+		 * at the moment due to an issue with NVDA not announcing it and also skipping the associated
+		 * label for a role not supported.
+		 *
+		 * @see https://github.com/nvaccess/nvda/issues/10439
+		 * @see https://github.com/withastro/starlight/pull/2503
+		 */
+		!/^<aside[^>]* class="starlight-aside[^>]*>$/.test(node.html) &&
+		/**
+		 * Expressive Code `<pre>` blocks: EC 0.41.3 introduced a change adding the `region` role to
+		 * scrollable code blocks. The best action to fix this violation would potentially to switch to
+		 * another role, e.g. `group`, and adding `aria-label` or `aria-labelledby` to provide a generic
+		 * label, e.g. `'Horizontally scrollable code'`.
+		 *
+		 * @see https://github.com/expressive-code/expressive-code/pull/343
+		 * @see https://github.com/expressive-code/expressive-code/pull/348
+		 */
+		!/^<pre[^>]* data-language[^>]* role="region"[^>]*>$/.test(node.html)
+	);
 }
 
 interface Config {

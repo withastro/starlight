@@ -261,5 +261,5 @@ export function ComponentConfigSchema() {
 			 */
 			EditLink: z.string().default('@astrojs/starlight/components/EditLink.astro'),
 		})
-		.default({});
+		.prefault({});
 }

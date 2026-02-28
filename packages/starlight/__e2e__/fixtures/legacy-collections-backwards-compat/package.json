@@ -1,9 +1,9 @@
 {
-  "name": "@e2e/legacy-collection-config-file",
+  "name": "@e2e/legacy-collections-backwards-compat",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
-    "astro": "^5.6.1"
+    "astro": "^6.0.0-beta.14"
   }
 }

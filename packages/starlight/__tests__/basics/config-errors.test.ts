@@ -115,7 +115,7 @@ test('errors if title value is not a string or an Object', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**title**: Did not match union.
-			> Expected type \`"string" | "object"\`, received \`"number"\`"
+			> Expected type \`"string" | "record"\`, received \`"number"\`"
 	`
 	);
 });
@@ -131,8 +131,7 @@ test('errors with bad social icon config', () => {
 		Hint:
 			Starlight v0.33.0 changed the \`social\` configuration syntax. Please specify an array of link items instead of an object.
 			See the Starlight changelog for details: https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0330
-			
-			**social**: Expected type \`"array"\`, received \`"object"\`"
+			"
 	`
 	);
 });
@@ -165,7 +164,7 @@ test('errors with bad head config', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**head.0.tag**: Invalid enum value. Expected 'title' | 'base' | 'link' | 'style' | 'meta' | 'script' | 'noscript' | 'template', received 'unknown'
+			**head.0.tag**: Invalid option: expected one of "title"|"base"|"link"|"style"|"meta"|"script"|"noscript"|"template"
 			**head.0.attrs.prop**: Did not match union.
 			> Expected type \`"string" | "boolean" | "undefined"\`, received \`"null"\`
 			**head.0.content**: Expected type \`"string"\`, received \`"number"\`"
@@ -186,7 +185,7 @@ test('errors with bad sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0**: Did not match union.
-			> Expected type \`{ link: string;  } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object } | { slug: string } | string\`
 			> Received \`{ "label": "Example", "href": "/" }\`"
 	`
 	);
@@ -212,8 +211,8 @@ test('errors with bad nested sidebar config', () => {
 			Invalid config passed to starlight integration
 		Hint:
 			**sidebar.0.items.1**: Did not match union.
-			> Expected type \`{ link: string } | { items: array;  } | { autogenerate: object;  } | { slug: string } | string\`
-			> Received \`{ "label": "Example", "items": [ { "label": "Nested Example 1", "link": "/" }, { "label": "Nested Example 2", "link": true } ] }\`"
+			> Expected type \`{ link: string } | { items: array } | { autogenerate: object } | { slug: string } | string\`
+			> Received \`{ "label": "Nested Example 2", "link": true }\`"
 	`);
 });
 
@@ -229,7 +228,9 @@ test('errors with sidebar entry that includes `link` and `items`', () => {
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**sidebar.0**: Unrecognized key(s) in object: 'items'"
+			**sidebar.0**: Did not match union.
+			> Expected type \`{ autogenerate: object } | { slug: string } | string\`
+			> Received \`{ "label": "Parent", "link": "/parent", "items": [ { "label": "Child", "link": "/parent/child" } ] }\`"
 	`);
 });
 
@@ -243,7 +244,9 @@ test('errors with sidebar entry that includes `link` and `autogenerate`', () => 
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
+			**sidebar.0**: Did not match union.
+			> Expected type \`{ items: array } | { slug: string } | string\`
+			> Received \`{ "label": "Parent", "link": "/parent", "autogenerate": { "directory": "test" } }\`"
 	`);
 });
 
@@ -263,7 +266,9 @@ test('errors with sidebar entry that includes `items` and `autogenerate`', () =>
 		"[AstroUserError]:
 			Invalid config passed to starlight integration
 		Hint:
-			**sidebar.0**: Unrecognized key(s) in object: 'autogenerate'"
+			**sidebar.0**: Did not match union.
+			> Expected type \`{ link: string } | { slug: string } | string\`
+			> Received \`{ "label": "Parent", "items": [ { "label": "Child", "link": "/parent/child" } ], "autogenerate": { "directory": "test" } }\`"
 	`);
 });
 

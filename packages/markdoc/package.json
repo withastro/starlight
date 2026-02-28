@@ -17,12 +17,12 @@
     "./components": "./components.ts"
   },
   "devDependencies": {
-    "@astrojs/markdoc": "^0.13.3",
+    "@astrojs/markdoc": "^1.0.0-beta.11",
     "@astrojs/starlight": "workspace:*",
-    "vitest": "^3.0.5"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "@astrojs/markdoc": ">=0.12.1",
+    "@astrojs/markdoc": ">=1.0.0-beta",
     "@astrojs/starlight": ">=0.35.0"
   },
   "publishConfig": {

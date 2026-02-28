@@ -6,12 +6,7 @@ import { getNewestCommitDate } from 'virtual:starlight/git-info';
 import { getPrevNextLinks, getSidebar } from '../navigation';
 import { ensureTrailingSlash } from '../path';
 import { getRouteBySlugParam, normalizeCollectionEntry } from '../routing';
-import type {
-	Route,
-	StarlightDocsCollectionEntry,
-	StarlightDocsEntry,
-	StarlightRouteData,
-} from './types';
+import type { Route, StarlightDocsEntry, StarlightRouteData } from './types';
 import { formatPath } from '../format-path';
 import { useTranslations } from '../translations';
 import { BuiltInDefaultLocale } from '../i18n';
@@ -137,7 +132,6 @@ async function get404Route(locals: App.Locals): Promise<Route> {
 	const entryMeta = { dir, lang, locale };
 
 	const fallbackEntry: StarlightDocsEntry = {
-		slug: '404',
 		id: '404',
 		body: '',
 		collection: 'docs',
@@ -154,7 +148,7 @@ async function get404Route(locals: App.Locals): Promise<Route> {
 		filePath: `${getCollectionPathFromRoot('docs', project)}/404.md`,
 	};
 
-	const userEntry = (await getEntry('docs', '404')) as StarlightDocsCollectionEntry;
+	const userEntry = await getEntry('docs', '404');
 	const entry = userEntry ? normalizeCollectionEntry(userEntry) : fallbackEntry;
-	return { ...entryMeta, entryMeta, entry, id: entry.id, slug: entry.slug };
+	return { ...entryMeta, entryMeta, entry, id: entry.id };
 }

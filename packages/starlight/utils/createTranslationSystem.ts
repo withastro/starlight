@@ -107,7 +107,7 @@ function localeToLang(
 type BuiltInStrings = (typeof builtinTranslations)['en'];
 
 /** Build an i18next resources dictionary by layering preferred translation sources. */
-function buildResources<T extends Record<string, string | undefined>>(
+function buildResources<T extends i18nSchemaOutput>(
 	...dictionaries: (T | BuiltInStrings | undefined)[]
 ): { [I18nextNamespace]: BuiltInStrings & T } {
 	const dictionary: Partial<BuiltInStrings> = {};

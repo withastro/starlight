@@ -5,14 +5,12 @@ export const PrevNextLinkConfigSchema = () =>
 		.union([
 			z.boolean(),
 			z.string(),
-			z
-				.object({
-					/** The navigation link URL. */
-					link: z.string().optional(),
-					/** The navigation link text. */
-					label: z.string().optional(),
-				})
-				.strict(),
+			z.strictObject({
+				/** The navigation link URL. */
+				link: z.string().optional(),
+				/** The navigation link text. */
+				label: z.string().optional(),
+			}),
 		])
 		.optional();
 
