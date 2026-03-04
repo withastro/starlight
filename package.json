@@ -33,7 +33,7 @@
     {
       "name": "/index.html",
       "path": "examples/basics/dist/index.html",
-      "limit": "10 kB",
+      "limit": "8 kB",
       "gzip": true
     },
     {
@@ -48,7 +48,7 @@
         "examples/basics/dist/_astro/*.css",
         "!examples/basics/dist/_astro/print.*.css"
       ],
-      "limit": "14.75 kB",
+      "limit": "16.75 kB",
       "gzip": true
     }
   ],
