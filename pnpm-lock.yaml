@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  starlight-links-validator:
+    hash: yizxz5rz2l7hc2wckoqwayuhqe
+    path: patches/starlight-links-validator.patch
+
 importers:
 
   .:
@@ -86,7 +91,7 @@ importers:
         version: 3.2.12
       starlight-links-validator:
         specifier: ^0.14.0
-        version: 0.14.0(@astrojs/starlight@packages+starlight)
+        version: 0.14.0(patch_hash=yizxz5rz2l7hc2wckoqwayuhqe)(@astrojs/starlight@packages+starlight)
 
   examples/basics:
     dependencies:
@@ -8328,7 +8333,7 @@ snapshots:
 
   stackback@0.0.2: {}
 
-  starlight-links-validator@0.14.0(@astrojs/starlight@packages+starlight):
+  starlight-links-validator@0.14.0(patch_hash=yizxz5rz2l7hc2wckoqwayuhqe)(@astrojs/starlight@packages+starlight):
     dependencies:
       '@astrojs/starlight': link:packages/starlight
       '@types/picomatch': 3.0.1
