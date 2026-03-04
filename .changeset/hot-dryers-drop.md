@@ -2,6 +2,10 @@
 '@astrojs/starlight-tailwind': major
 ---
 
-Adds support for Astro v6
+⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.38.0
 
-<!-- TODO: Add more details about breaking changes, migration etc. -->
+Please use the `@astrojs/upgrade` command to upgrade your project:
+
+```sh
+npx @astrojs/upgrade
+```
