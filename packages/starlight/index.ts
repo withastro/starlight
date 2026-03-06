@@ -101,7 +101,7 @@ export default function StarlightIntegration(
 				if (!allIntegrations.find(({ name }) => name === '@astrojs/sitemap')) {
 					integrations.push(starlightSitemap(starlightConfig));
 				}
-				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
+				if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx' || name === 'astro-xmdx')) {
 					integrations.push(mdx({ optimize: true }));
 				}
 
