@@ -135,11 +135,10 @@ export default function StarlightIntegration(
 						plugins: [
 							vitePluginStarlightCssLayerOrder(),
 							vitePluginStarlightUserConfig(
-								command,
+								{ command, isNodeCompatibleEnv },
 								starlightConfig,
 								config,
-								pluginTranslations,
-								isNodeCompatibleEnv
+								pluginTranslations
 							),
 						],
 						ssr: isNodeCompatibleEnv

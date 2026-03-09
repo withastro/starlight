@@ -18,7 +18,13 @@ function resolveVirtualModuleId<T extends string>(id: T): `\0${T}` {
 
 /** Vite plugin that exposes Starlight user config and project context via virtual modules. */
 export function vitePluginStarlightUserConfig(
-	command: HookParameters<'astro:config:setup'>['command'],
+	{
+		command,
+		isNodeCompatibleEnv,
+	}: {
+		command: HookParameters<'astro:config:setup'>['command'];
+		isNodeCompatibleEnv: boolean;
+	},
 	opts: StarlightConfig,
 	{
 		build,
@@ -30,8 +36,7 @@ export function vitePluginStarlightUserConfig(
 		build: Pick<AstroConfig['build'], 'format'>;
 		legacy: Pick<AstroConfig['legacy'], 'collectionsBackwardsCompat'>;
 	},
-	pluginTranslations: PluginTranslations,
-	isNodeCompatibleEnv: boolean
+	pluginTranslations: PluginTranslations
 ): NonNullable<ViteUserConfig['plugins']>[number] {
 	/**
 	 * Resolves module IDs to a usable format:

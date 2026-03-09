@@ -30,7 +30,7 @@ export async function defineVitestConfig(
 		plugins: [
 			vitePluginStarlightCssLayerOrder(),
 			vitePluginStarlightUserConfig(
-				command,
+				{ command, isNodeCompatibleEnv: true },
 				starlightConfig,
 				{
 					root,
