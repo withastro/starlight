@@ -29,7 +29,8 @@ export function vitePluginStarlightUserConfig(
 		build: Pick<AstroConfig['build'], 'format'>;
 		legacy: Pick<AstroConfig['legacy'], 'collectionsBackwardsCompat'>;
 	},
-	pluginTranslations: PluginTranslations
+	pluginTranslations: PluginTranslations,
+	isNodeCompatibleEnv: boolean
 ): NonNullable<ViteUserConfig['plugins']>[number] {
 	/**
 	 * Resolves module IDs to a usable format:
@@ -75,7 +76,7 @@ export function vitePluginStarlightUserConfig(
 			trailingSlash,
 		})}`,
 		'virtual:starlight/git-info':
-			(command !== 'build'
+			(command !== 'build' && isNodeCompatibleEnv
 				? `import { makeAPI } from ${resolveLocalPath('../utils/git.ts')};` +
 					`const api = makeAPI(${JSON.stringify(rootPath)});`
 				: `import { makeAPI } from ${resolveLocalPath('../utils/gitInlined.ts')};` +

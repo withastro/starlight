@@ -124,12 +124,41 @@ export default function StarlightIntegration(
 					absolutePathToLang,
 				};
 
+				// TODO: refactor once there is a reliable way to detect this, rather than relying on the
+				// presence of specific integrations.
+				const isNodeCompatibleEnv = !config.integrations.some(
+					({ name }) => name === '@astrojs/cloudflare'
+				);
+
 				updateConfig({
 					vite: {
 						plugins: [
 							vitePluginStarlightCssLayerOrder(),
-							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
+							vitePluginStarlightUserConfig(
+								command,
+								starlightConfig,
+								config,
+								pluginTranslations,
+								isNodeCompatibleEnv
+							),
 						],
+						ssr: isNodeCompatibleEnv
+							? {}
+							: {
+									optimizeDeps: {
+										include: [
+											// TODO: once Expressive Code is refactored/fixed, remove this workaround for
+											// Expressive Code relying on CJS dependencies like postcss not compatible
+											// with the Cloudflare adapter.
+											'@astrojs/starlight>astro-expressive-code',
+											'@astrojs/starlight>astro-expressive-code/hast',
+											'@astrojs/starlight>astro-expressive-code>css-select',
+											'@astrojs/starlight>astro-expressive-code>nth-check',
+											'@astrojs/starlight>astro-expressive-code>boolbase',
+											'@astrojs/starlight>extend',
+										],
+									},
+								},
 					},
 					markdown: {
 						remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
