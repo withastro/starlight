@@ -1,4 +1,5 @@
 import type { AstroConfig, HookParameters, ViteUserConfig } from 'astro';
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveCollectionPath } from '../utils/collection-fs';
@@ -54,10 +55,14 @@ export function vitePluginStarlightUserConfig(
 	const rootPath = fileURLToPath(root);
 	const docsPath = resolveCollectionPath('docs', srcDir);
 
-	const collectionConfigImportPath = resolve(
-		fileURLToPath(srcDir),
-		legacy.collectionsBackwardsCompat ? './content/config.ts' : './content.config.ts'
-	);
+	let collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content.config.ts');
+	// If using the collections backwards compatibility mode and the config doesn't exist, fallback
+	// to the legacy location. We need to test this ahead of time as we cannot `try/catch` a failing
+	// import in the virtual module as this would fail at build time when Rollup tries to resolve a
+	// non-existent path.
+	if (legacy.collectionsBackwardsCompat && !existsSync(collectionConfigImportPath)) {
+		collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content/config.ts');
+	}
 
 	const virtualComponentModules = Object.fromEntries(
 		Object.entries(opts.components).map(([name, path]) => [
