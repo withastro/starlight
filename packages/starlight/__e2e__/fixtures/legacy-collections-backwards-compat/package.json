@@ -4,6 +4,6 @@
   "private": true,
   "dependencies": {
     "@astrojs/starlight": "workspace:*",
-    "astro": "^6.0.0-beta.14"
+    "astro": "^6.0.0-beta.20"
   }
 }
