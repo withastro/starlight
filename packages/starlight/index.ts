@@ -124,11 +124,12 @@ export default function StarlightIntegration(
 					absolutePathToLang,
 				};
 
-				// TODO: refactor once there is a reliable way to detect this, rather than relying on the
-				// presence of specific integrations.
-				const isNodeCompatibleEnv = !config.integrations.some(
-					({ name }) => name === '@astrojs/cloudflare'
-				);
+				// TODO: refactor once there is a reliable way to detect non-Node.js compatible
+				// environments, rather than relying on the presence of specific adapters/integrations.
+				const isCloudflareEnv =
+					config.adapter?.name === '@astrojs/cloudflare' ||
+					config.integrations.some(({ name }) => name === '@astrojs/cloudflare');
+				const isNodeCompatibleEnv = !isCloudflareEnv;
 
 				updateConfig({
 					vite: {
@@ -146,15 +147,24 @@ export default function StarlightIntegration(
 							: {
 									optimizeDeps: {
 										include: [
+											// Prebundle some dependencies for non-Node.js compatible environments to
+											// speed up dev server start time and prevent restarts.
+											'@astrojs/cloudflare/entrypoints/server',
+											'@astrojs/starlight>i18next',
+											'@astrojs/starlight>js-yaml',
+											'@astrojs/starlight>klona/lite',
 											// TODO: once Expressive Code is refactored/fixed, remove this workaround for
 											// Expressive Code relying on CJS dependencies like postcss not compatible
-											// with the Cloudflare adapter.
-											'@astrojs/starlight>astro-expressive-code',
-											'@astrojs/starlight>astro-expressive-code/hast',
-											'@astrojs/starlight>astro-expressive-code>css-select',
-											'@astrojs/starlight>astro-expressive-code>nth-check',
-											'@astrojs/starlight>astro-expressive-code>boolbase',
-											'@astrojs/starlight>extend',
+											// with non-Node.js compatible environments like Cloudflare.
+											'@astrojs/starlight>astro-expressive-code/components',
+											'@astrojs/starlight>astro-expressive-code>hast-util-select',
+											'@astrojs/starlight>astro-expressive-code>rehype',
+											'@astrojs/starlight>astro-expressive-code>unist-util-visit',
+											'@astrojs/starlight>astro-expressive-code>rehype-format',
+											'@astrojs/starlight>astro-expressive-code>hastscript',
+											'@astrojs/starlight>astro-expressive-code>hast-util-from-html',
+											'@astrojs/starlight>astro-expressive-code>hast-util-to-string',
+											'@astrojs/starlight>astro-expressive-code>@expressive-code/core>postcss',
 										],
 									},
 								},
