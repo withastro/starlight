@@ -6,7 +6,7 @@ Adds support for Astro v6, drops support for Astro v5.
 
 #### Upgrade Astro and dependencies
 
-⚠️ **BREAKING CHANGE:** Astro v5 is no longer supported. Make sure you [update Astro](https://v6.docs.astro.build/en/guides/upgrade-to/v6/) and any other official integrations at the same time as updating Starlight:
+⚠️ **BREAKING CHANGE:** Astro v5 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v6/) and any other official integrations at the same time as updating Starlight:
 
 ```sh
 npx @astrojs/upgrade
@@ -24,4 +24,4 @@ Astro v6.0 now removes this automatic legacy content collections support, along 
 
 If you experience content collections errors after updating to v6, [check your project for any removed legacy features](https://docs.astro.build/en/guides/upgrade-to/v6/#if-you-have) that may need updating to the Content Layer API. See [the Starlight v0.30.0 upgrade guide](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0300) for detailed instructions on upgrading legacy collections to the new Content Layer API.
 
-If you are unable to make any changes to your collections at this time, including Starlight's default `docs` and `i18n` collections, you can enable the [`legacy.collectionsBackwardsCompat` flag](https://v6.docs.astro.build/en/reference/legacy-flags/#collectionsbackwardscompat) to upgrade to v6 without updating your collections. This temporary flag preserves some legacy v4 content collections features, and will allow you to keep your collections in their current state until the legacy flag is no longer supported.
+If you are unable to make any changes to your collections at this time, including Starlight's default `docs` and `i18n` collections, you can enable the [`legacy.collectionsBackwardsCompat` flag](https://docs.astro.build/en/reference/legacy-flags/#collectionsbackwardscompat) to upgrade to v6 without updating your collections. This temporary flag preserves some legacy v4 content collections features, and will allow you to keep your collections in their current state until the legacy flag is no longer supported.
