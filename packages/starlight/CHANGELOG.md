@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.37.7
+
+### Patch Changes
+
+- [#3726](https://github.com/withastro/starlight/pull/3726) [`8a09b60`](https://github.com/withastro/starlight/commit/8a09b60b03ae2b99d3418f41e984ffa46468e3a2) Thanks [@delucis](https://github.com/delucis)! - Fixes an issue using components containing scripts inside Starlight’s steps component in versions of Astro >= 5.16.9
+
 ## 0.37.6
 
 ### Patch Changes
