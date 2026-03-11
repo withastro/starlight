@@ -72,9 +72,10 @@ const shouldRenderSearch =
 				--__main-column-fr: calc(
 					(
 							100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) -
-								(2 * var(--__toc-width, var(--sl-nav-pad-x))) - var(--sl-content-inline-start, 0rem) -
-								var(--sl-content-width)
-						) / 2
+								(2 * var(--__toc-width, var(--sl-nav-pad-x))) -
+								var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
+						) /
+						2
 				);
 				display: grid;
 				grid-template-columns:

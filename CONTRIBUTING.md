@@ -301,7 +301,6 @@ If you’ve built a documentation site with Starlight, adding it to the showcase
    - Be a `.png` file and named after your site’s domain, e.g. `example.com.png`.
    - Have the dimensions of 800 × 450 pixels.
 3. Add a new entry for your website in `docs/src/components/showcase-sites.astro`.
-
    - The new entry must be appended at the end of the existing list of sites.
    - The `title` attribute must be the name of your site with no extra details.
    - The `href` attribute must be the URL of your Starlight site. If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
@@ -323,7 +322,6 @@ Share themes for Starlight you built by adding them to our [themes](https://star
 1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
 
 2. Take screenshots of your theme’s light and dark modes using our demo project.
-
    1. Open the [theme demo project](https://stackblitz.com/edit/github-jj1kzx5x?file=astro.config.mjs) on StackBlitz.
 
    2. Install your theme using StackBlitz’s integrated terminal:
@@ -343,13 +341,11 @@ Share themes for Starlight you built by adding them to our [themes](https://star
    5. Open the theme preview in a new tab and use dev tools’ responsive view to take screenshots with the screen sized to 1280×720 pixels.
 
 3. Add your screenshots of the theme’s light and dark modes to the `docs/src/assets/themes/` directory. The images must:
-
    - be PNG files with your theme’s name and the color variant, e.g. a theme named “Moon” would have files named `moon-light.png` and `moon-dark.png`
    - have dimensions of 1280×720 pixels
 
 4. Add a new entry for your website in `docs/src/content/docs/resources/themes.mdx`.
    You can look at existing entries to see how to format this.
-
    - The new entry must be appended at the end of the existing list of sites.
    - The `title` attribute must be the name of your theme.
    - The `description` attribute should briefly describe your theme’s aesthetic, inspiration, or key features.

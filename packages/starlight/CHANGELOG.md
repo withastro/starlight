@@ -108,10 +108,11 @@
 
   ```css
   :root {
-    --sl-font-system: ui-sans-serif, system-ui, -apple-system,
-      BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-      'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol', 'Noto Color Emoji';
+    --sl-font-system:
+      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
   }
   ```
 
@@ -126,7 +127,6 @@
 - [#3555](https://github.com/withastro/starlight/pull/3555) [`547dc30`](https://github.com/withastro/starlight/commit/547dc30558b388bfc0505ab0fd8269cecaed462a) Thanks [@Its-Just-Nans](https://github.com/Its-Just-Nans)! - Improves the error message thrown when using a file in the `public/` directory with Starlight’s `customCss` configuration option
 
 - [#3496](https://github.com/withastro/starlight/pull/3496) [`b78fda4`](https://github.com/withastro/starlight/commit/b78fda45be17be7a260309251e82504f9ac8e97a) Thanks [@delucis](https://github.com/delucis)! - Fixes invalid `<head>` output when configuration is missing:
-
   - Omits `<meta property="og:description" />` if Starlight’s `description` option is unset
   - Omits `<link rel="canonical" />` and `<meta property="og:url" />` if Astro’s `site` option is unset
 
@@ -588,7 +588,6 @@
   This data is now available as `Astro.locals.starlightRoute` instead.
 
   To update, refactor any component overrides you have:
-
   - Remove imports of `@astrojs/starlight/props`, which is now deprecated.
   - Update code that accesses `Astro.props` to use `Astro.locals.starlightRoute` instead.
   - Remove any spreading of `{...Astro.props}` into child components, which is no longer required.
@@ -783,7 +782,6 @@
   #### Update your collections
 
   ⚠️ **BREAKING CHANGE:** Starlight's internal [content collections](https://docs.astro.build/en/guides/content-collections/), which organize, validate, and render your content, have been updated to use Astro's new Content Layer API and require configuration changes in your project.
-
   1. **Move the content config file.** This file no longer lives within the `src/content/config.ts` folder and should now exist at `src/content.config.ts`.
   1. **Edit the collection definition(s).** To update the `docs` collection, a `loader` is now required:
 
@@ -1672,7 +1670,6 @@
 - [#1376](https://github.com/withastro/starlight/pull/1376) [`8398432`](https://github.com/withastro/starlight/commit/8398432aa4a0f38e2dd4452dfcdf7033c5713334) Thanks [@delucis](https://github.com/delucis)! - Tweaks vertical spacing in Markdown content styles.
 
   This is a subtle change to Starlight’s default content styling that should improve most sites:
-
   - Default vertical spacing between content items is reduced from `1.5rem` to `1rem`.
   - Spacing before headings is now relative to font size, meaning higher-level headings have slightly more spacing and lower-level headings slightly less.
 
@@ -1859,7 +1856,6 @@
   If you were already customizing how code blocks are rendered and don't want to use the [features provided by Expressive Code](https://starlight.astro.build/guides/authoring-content/#expressive-code-features), you can preserve the previous behavior by setting the new config option `expressiveCode` to `false`.
 
   If you had previously added Expressive Code manually to your Starlight project, you can now remove the manual set-up in `astro.config.mjs`:
-
   - Move your configuration to Starlight’s new `expressiveCode` option.
   - Remove the `astro-expressive-code` integration.
 
@@ -2128,7 +2124,6 @@
 - [#529](https://github.com/withastro/starlight/pull/529) [`c2d0e7f`](https://github.com/withastro/starlight/commit/c2d0e7f2699e60a48a3a9074eee6439dee8624a1) Thanks [@delucis](https://github.com/delucis)! - For improved compatibility with Tailwind, some Starlight built-in class names are now prefixed with `"sl-"`.
 
   While not likely, if you were relying on one of these internal class names in your own components or custom CSS, you will need to update to use the prefixed version.
-
   - **Before:** `flex`, `md:flex`, `lg:flex`, `block`, `md:block`, `lg:block`, `hidden`, `md:hidden`, `lg:hidden`.
   - **After:** `sl-flex`, `md:sl-flex`, `lg:sl-flex`, `sl-block`, `md:sl-block`, `lg:sl-block`, `sl-hidden`, `md:sl-hidden`, `lg:sl-hidden`.
 

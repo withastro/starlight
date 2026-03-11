@@ -27,7 +27,6 @@
 - [#2322](https://github.com/withastro/starlight/pull/2322) [`f14eb0c`](https://github.com/withastro/starlight/commit/f14eb0cd7baa0391d6124379f6c5df4b9ab7cc44) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for Tailwind v4, drops support for Tailwind v3.
 
   ⚠️ **BREAKING CHANGE:** Tailwind v3 is no longer supported. Tailwind v4 support in Astro is now provided using a Vite plugin and the Astro Tailwind integration is no longer required.
-
   1. **Remove the Astro Tailwind integration.** The Astro Tailwind integration is no longer required with Tailwind v4.
 
      ```diff
@@ -82,7 +81,6 @@
      ```
 
   1. **Update Tailwind customizations.** If you previously [customized your Tailwind theme configuration](https://starlight.astro.build/guides/css-and-tailwind/#styling-starlight-with-tailwind) in the `tailwind.config.mjs` file, such customizations are now defined through CSS using the `@theme` block in your Tailwind base styles.
-
      1. Locate existing customizations in your `tailwind.config.mjs` file. The following example defines customizations for the accent colors, gray scale, and font families used by Starlight:
 
         ```js
