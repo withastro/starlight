@@ -1,5 +1,75 @@
 # @astrojs/starlight
 
+## 0.38.0
+
+### Minor Changes
+
+- [#3644](https://github.com/withastro/starlight/pull/3644) [`0d2e7ed`](https://github.com/withastro/starlight/commit/0d2e7ed74a604b028fcab0c81b4c35c0c9365343) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Adds support for Astro v6, drops support for Astro v5.
+
+  #### Upgrade Astro and dependencies
+
+  ⚠️ **BREAKING CHANGE:** Astro v5 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v6/) and any other official integrations at the same time as updating Starlight:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+  _Community Starlight plugins and Astro integrations may also need to be manually updated to work with Astro v6. If you encounter any issues, please reach out to the plugin or integration author to see if it is a known issue or if an updated version is being worked on._
+
+  #### Update your collections
+
+  ⚠️ **BREAKING CHANGE:** Drops support for content collections backwards compatibility.
+
+  In Astro 5.x, projects could delay upgrading to the new Content Layer API introduced for content collections because of some existing automatic backwards compatibility that was not previously behind a flag. This meant that it was possible to upgrade from Astro 4 to Astro 5 without updating your content collections, even if you had not enabled the `legacy.collections` flag. Projects would continue to build, and no errors or warnings would be displayed.
+
+  Astro v6.0 now removes this automatic legacy content collections support, along with the `legacy.collections` flag.
+
+  If you experience content collections errors after updating to v6, [check your project for any removed legacy features](https://docs.astro.build/en/guides/upgrade-to/v6/#if-you-have) that may need updating to the Content Layer API. See [the Starlight v0.30.0 upgrade guide](https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md#0300) for detailed instructions on upgrading legacy collections to the new Content Layer API.
+
+  If you are unable to make any changes to your collections at this time, including Starlight's default `docs` and `i18n` collections, you can enable the [`legacy.collectionsBackwardsCompat` flag](https://docs.astro.build/en/reference/legacy-flags/#collectionsbackwardscompat) to upgrade to v6 without updating your collections. This temporary flag preserves some legacy v4 content collections features, and will allow you to keep your collections in their current state until the legacy flag is no longer supported.
+
+- [#3704](https://github.com/withastro/starlight/pull/3704) [`375edcc`](https://github.com/withastro/starlight/commit/375edccde7f8d18e0ce2140de0632c2ad72e3ff8) Thanks [@florian-lefebvre](https://github.com/florian-lefebvre)! - Fixes autocomplete for components exported from `@astrojs/starlight/components/*`
+
+  **⚠️ Potentially breaking change:** This change moves some files used in Starlight’s component internals out of the `components/` directory. Direct use of these files was not and is not officially supported. If you previously imported `TableOfContents/starlight-toc.ts`, `TableOfContents/TableOfContentsList.astro`, `Icons.ts`, or `SidebarPersistState.ts`, please review your code when updating.
+
+- [#3729](https://github.com/withastro/starlight/pull/3729) [`3642625`](https://github.com/withastro/starlight/commit/3642625db19a37abb535e00036414c84e1c16933) Thanks [@delucis](https://github.com/delucis)! - Improves Starlight’s default body font stack to better support languages such as Chinese, Japanese, and Korean on Windows.
+  For most users there should be no visible change.
+
+  If you would prefer to keep the previous font stack, you can add the following custom CSS to your site:
+
+  ```css
+  :root {
+    --sl-font-system: ui-sans-serif, system-ui, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+  ```
+
+- [#3598](https://github.com/withastro/starlight/pull/3598) [`fff38d5`](https://github.com/withastro/starlight/commit/fff38d58b637c78b0563f6b02e44a41c13106cdb) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Makes hover styles consistent in Starlight’s navigation bar
+
+  Previously, the social icon links and language/theme switchers in Starlight’s navigation bar, dimmed on hover.
+  After this change, they now increase in contrast on hover instead.
+  This matches hover behavior elsewhere, for example in the sidebar, table of contents, or search button.
+
+  ⚠️ **Potentially breaking change:** this is a subtle change to the hover style colors.
+  If you want to preserve the previous styling, you can add the following [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to your site:
+
+  ```css
+  starlight-theme-select label,
+  starlight-lang-select label {
+    color: var(--sl-color-gray-1);
+
+    &:hover {
+      color: var(--sl-color-white);
+    }
+  }
+
+  .social-icons a:hover {
+    color: var(--sl-color-text-accent);
+    opacity: 0.66;
+  }
+  ```
+
 ## 0.37.7
 
 ### Patch Changes
