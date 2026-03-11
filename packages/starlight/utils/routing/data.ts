@@ -61,26 +61,12 @@ export function generateRouteData({
 }
 
 export function getToC({ entry, lang, headings }: PageProps) {
-	if (entry.data.template === 'splash') return;
-
-	const frontmatterToC = entry.data.tableOfContents;
-	const globalToC = config.tableOfContents;
-
-	// Resolve the effective ToC config from frontmatter and global settings.
-	let tocConfig: false | { minHeadingLevel: number; maxHeadingLevel: number };
-	if (frontmatterToC === undefined || frontmatterToC === true) {
-		// No override or explicit enable — use global config.
-		tocConfig = globalToC;
-	} else if (typeof frontmatterToC === 'object' && globalToC !== false) {
-		// Partial override — merge with global config for missing values.
-		tocConfig = {
-			minHeadingLevel: frontmatterToC.minHeadingLevel ?? globalToC.minHeadingLevel,
-			maxHeadingLevel: frontmatterToC.maxHeadingLevel ?? globalToC.maxHeadingLevel,
-		};
-	} else {
-		tocConfig = false;
-	}
-
+	const tocConfig =
+		entry.data.template === 'splash'
+			? false
+			: entry.data.tableOfContents !== undefined
+				? entry.data.tableOfContents
+				: config.tableOfContents;
 	if (!tocConfig) return;
 	const t = useTranslations(lang);
 	return {
