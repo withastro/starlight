@@ -273,10 +273,10 @@ describe('getLocaleDir', () => {
 	});
 
 	test('uses `getTextInfo()` when `textInfo` is not available', () => {
-		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
-		vi.spyOn(global.Intl, 'Locale').mockImplementation(() => ({
-			getTextInfo: () => ({ direction: 'rtl' }),
-		}));
+		vi.spyOn(global.Intl, 'Locale').mockImplementation(function () {
+			// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
+			this.getTextInfo = () => ({ direction: 'rtl' });
+		});
 
 		const { starlightConfig } = processI18nConfig(
 			config,
@@ -290,8 +290,10 @@ describe('getLocaleDir', () => {
 	});
 
 	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', () => {
-		// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
-		vi.spyOn(global.Intl, 'Locale').mockImplementation((tag) => ({ language: tag }));
+		vi.spyOn(global.Intl, 'Locale').mockImplementation(function (tag) {
+			// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
+			this.language = tag;
+		});
 
 		const { starlightConfig } = processI18nConfig(
 			config,

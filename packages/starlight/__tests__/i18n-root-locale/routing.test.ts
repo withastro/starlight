@@ -1,4 +1,3 @@
-import project from 'virtual:starlight/project-context';
 import { getRouteDataTestContext } from '../test-utils';
 import config from 'virtual:starlight/user-config';
 import { assert, expect, test, vi } from 'vitest';
@@ -61,13 +60,7 @@ test('fallback routes have fallback locale data in entryMeta', () => {
 });
 
 test('fallback routes use their own locale data', () => {
-	const enGuide = routes.find(
-		(route) =>
-			route.id ===
-			(project.legacyCollections
-				? 'en/guides/authoring-content.mdx'
-				: 'en/guides/authoring-content')
-	);
+	const enGuide = routes.find((route) => route.id === 'en/guides/authoring-content');
 	if (!enGuide)
 		throw new Error('Expected to find English fallback route for authoring-content.mdx');
 	expect(enGuide.locale).toBe('en');

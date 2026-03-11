@@ -183,8 +183,8 @@ export function injectPluginTranslationsTypes(
 // https://github.com/withastro/astro/blob/910eb00fe0b70ca80bd09520ae100e8c78b675b5/packages/astro/src/core/config/schema.ts#L113
 const astroIntegrationSchema = z.object({
 	name: z.string(),
-	hooks: z.object({}).passthrough().default({}),
-}) as z.Schema<AstroIntegration>;
+	hooks: z.looseObject({}).default({}),
+}) as z.ZodType<AstroIntegration, AstroIntegration>;
 
 const routeMiddlewareConfigSchema = z.object({
 	entrypoint: z.string(),
@@ -196,9 +196,12 @@ const baseStarlightPluginSchema = z.object({
 	name: z.string(),
 });
 
+type StarlightConfigUpdate = Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>;
+type StarlightI18nTFactory = Awaited<ReturnType<typeof createTranslationSystemFromFs>>;
+
 const configSetupHookSchema = z
-	.function(
-		z.tuple([
+	.function({
+		input: [
 			z.object({
 				/**
 				 * A read-only copy of the user-supplied Starlight configuration.
@@ -206,9 +209,10 @@ const configSetupHookSchema = z
 				 * Note that this configuration may have been updated by other plugins configured
 				 * before this one.
 				 */
-				config: z.any() as z.Schema<
+				config: z.any() as z.ZodType<
 					// The configuration passed to plugins should contains the list of plugins.
-					StarlightUserConfig & { plugins?: z.input<typeof baseStarlightPluginSchema>[] }
+					StarlightUserConfigWithPlugins,
+					StarlightUserConfigWithPlugins
 				>,
 				/**
 				 * A callback function to update the user-supplied Starlight configuration.
@@ -228,12 +232,15 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				updateConfig: z.function(
-					z.tuple([
-						z.record(z.any()) as z.Schema<Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>>,
-					]),
-					z.void()
-				),
+				updateConfig: z.function({
+					input: [
+						z.record(z.string(), z.any()) as z.ZodType<
+							StarlightConfigUpdate,
+							StarlightConfigUpdate
+						>,
+					],
+					output: z.void(),
+				}),
 				/**
 				 * A callback function to add an Astro integration required by this plugin.
 				 *
@@ -256,7 +263,10 @@ const configSetupHookSchema = z
 				 * 	}
 				 * }
 				 */
-				addIntegration: z.function(z.tuple([astroIntegrationSchema]), z.void()),
+				addIntegration: z.function({
+					input: [astroIntegrationSchema],
+					output: z.void(),
+				}),
 				/**
 				 * A callback function to register additional route middleware handlers.
 				 *
@@ -273,7 +283,10 @@ const configSetupHookSchema = z
 				 * 	},
 				 * }
 				 */
-				addRouteMiddleware: z.function(z.tuple([routeMiddlewareConfigSchema]), z.void()),
+				addRouteMiddleware: z.function({
+					input: [routeMiddlewareConfigSchema],
+					output: z.void(),
+				}),
 				/**
 				 * A read-only copy of the user-supplied Astro configuration.
 				 *
@@ -281,26 +294,38 @@ const configSetupHookSchema = z
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#config-option
 				 */
-				astroConfig: z.any() as z.Schema<StarlightPluginContext['config']>,
+				astroConfig: z.any() as z.ZodType<
+					StarlightPluginContext['config'],
+					StarlightPluginContext['config']
+				>,
 				/**
 				 * The command used to run Starlight.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#command-option
 				 */
-				command: z.any() as z.Schema<StarlightPluginContext['command']>,
+				command: z.any() as z.ZodType<
+					StarlightPluginContext['command'],
+					StarlightPluginContext['command']
+				>,
 				/**
 				 * `false` when the dev server starts, `true` when a reload is triggered.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#isrestart-option
 				 */
-				isRestart: z.any() as z.Schema<StarlightPluginContext['isRestart']>,
+				isRestart: z.any() as z.ZodType<
+					StarlightPluginContext['isRestart'],
+					StarlightPluginContext['isRestart']
+				>,
 				/**
 				 * An instance of the Astro integration logger with all logged messages prefixed with the
 				 * plugin name.
 				 *
 				 * @see https://docs.astro.build/en/reference/integrations-reference/#astrointegrationlogger
 				 */
-				logger: z.any() as z.Schema<StarlightPluginContext['logger']>,
+				logger: z.any() as z.ZodType<
+					StarlightPluginContext['logger'],
+					StarlightPluginContext['logger']
+				>,
 				/**
 				 * A callback function to generate a utility function to access UI strings for a given
 				 * language.
@@ -319,9 +344,7 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				useTranslations: z.any() as z.Schema<
-					Awaited<ReturnType<typeof createTranslationSystemFromFs>>
-				>,
+				useTranslations: z.any() as z.ZodType<StarlightI18nTFactory, StarlightI18nTFactory>,
 				/**
 				 * A callback function to get the language for a given absolute file path. The returned
 				 * language can be used with the `useTranslations` helper to get UI strings for that
@@ -344,11 +367,17 @@ const configSetupHookSchema = z
 				 *	}
 				 * }
 				 */
-				absolutePathToLang: z.function(z.tuple([z.string()]), z.string()),
+				absolutePathToLang: z.function({
+					input: [z.string()],
+					output: z.string(),
+				}),
 			}),
-		]),
-		z.union([z.void(), z.promise(z.void())])
-	)
+		],
+		// We still rely on the deprecated `z.promise()` to define the function output as the only
+		// non-deprecated way to define an async function is to use `.implementAsync()` but we don't
+		// want to implement the function using Zod.
+		output: z.promise(z.void()),
+	})
 	.optional();
 
 /**
@@ -356,8 +385,9 @@ const configSetupHookSchema = z
  * user config schema but properly typed for user convenience because we do not want to run any of
  * the Zod `transform`s used in the user config schema when running plugins.
  */
-const starlightPluginSchema = baseStarlightPluginSchema
-	.extend({
+const starlightPluginSchema = z
+	.object({
+		...baseStarlightPluginSchema.shape,
 		/** The different hooks available to the plugin. */
 		hooks: z.object({
 			/**
@@ -366,8 +396,8 @@ const starlightPluginSchema = baseStarlightPluginSchema
 			 * and plugin UI.
 			 */
 			'i18n:setup': z
-				.function(
-					z.tuple([
+				.function({
+					input: [
 						z.object({
 							/**
 							 * A callback function to add or update translations strings.
@@ -391,14 +421,17 @@ const starlightPluginSchema = baseStarlightPluginSchema
 							 * 	}
 							 * }
 							 */
-							injectTranslations: z.function(
-								z.tuple([z.record(z.string(), z.record(z.string(), z.string()))]),
-								z.void()
-							),
+							injectTranslations: z.function({
+								input: [z.record(z.string(), z.record(z.string(), z.string()))],
+								output: z.void(),
+							}),
 						}),
-					]),
-					z.union([z.void(), z.promise(z.void())])
-				)
+					],
+					// We still rely on the deprecated `z.promise()` to define the function output as the
+					// only non-deprecated way to define an async function is to use `.implementAsync()` but
+					// we don't want to implement the function using Zod.
+					output: z.promise(z.void()),
+				})
 				.optional(),
 			/**
 			 * Plugin configuration setup function called with an object containing various values that
@@ -414,17 +447,19 @@ const starlightPluginSchema = baseStarlightPluginSchema
 	})
 	.superRefine((plugin, ctx) => {
 		if (!plugin.hooks['config:setup'] && !plugin.hooks.setup) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
+			ctx.issues.push({
+				code: 'custom',
 				message: 'A plugin must define at least a `config:setup` hook.',
+				input: plugin,
 			});
 		} else if (plugin.hooks['config:setup'] && plugin.hooks.setup) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
+			ctx.issues.push({
+				code: 'custom',
 				message:
 					'A plugin cannot define both a `config:setup` and `setup` hook. ' +
 					'As `setup` is deprecated and will be removed in a future version, ' +
 					'consider using `config:setup` instead.',
+				input: plugin,
 			});
 		}
 	});

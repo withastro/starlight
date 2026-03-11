@@ -28,7 +28,7 @@ import type {
 	Route,
 	SidebarEntry,
 } from './routing/types';
-import { localeToLang, localizedId, slugToPathname } from './slugs';
+import { localeToLang, localizedFilePath, slugToPathname } from './slugs';
 import { isAbsoluteUrl } from './url';
 import type { StarlightConfig } from './user-config';
 
@@ -145,7 +145,7 @@ function linkFromInternalSidebarLinkItem(
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
 	const slug = item.slug === 'index' ? '' : item.slug;
 	const localizedSlug = locale ? (slug ? locale + '/' + slug : locale) : slug;
-	const route = routes.find((entry) => localizedSlug === entry.slug);
+	const route = routes.find((entry) => localizedSlug === entry.id);
 	if (!route) {
 		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
 		if (hasExternalSlashes) {
@@ -170,7 +170,7 @@ function linkFromInternalSidebarLinkItem(
 	const badge = item.badge ?? frontmatter.sidebar?.badge;
 	const attrs = { ...frontmatter.sidebar?.attrs, ...item.attrs };
 	return makeSidebarLink(
-		slugToPathname(route.slug),
+		slugToPathname(route.id),
 		label,
 		getSidebarBadge(badge, locale, label),
 		attrs
@@ -225,12 +225,13 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 	return relativePath.split('/');
 }
 
-/** Return the path of a route relative to the root of the collection, which is equivalent to legacy IDs. */
+/** Return the path of a route relative to the root of the collection. */
 function getRoutePathRelativeToCollectionRoot(route: Route, locale: string | undefined) {
-	return project.legacyCollections
-		? route.id
-		: // For collections with a loader, use a localized filePath relative to the collection
-			localizedId(route.entry.filePath.replace(`${docsCollectionPathFromRoot}/`, ''), locale);
+	// Use a localized filePath relative to the collection
+	return localizedFilePath(
+		route.entry.filePath.replace(`${docsCollectionPathFromRoot}/`, ''),
+		locale
+	);
 }
 
 /** Turn a flat array of routes into a tree structure. */
@@ -274,7 +275,7 @@ function treeify(routes: Route[], locale: string | undefined, baseDir: string): 
 /** Create a link entry for a given content collection entry. */
 function linkFromRoute(route: Route, attrs?: LinkHTMLAttributes): SidebarLink {
 	return makeSidebarLink(
-		slugToPathname(route.slug),
+		slugToPathname(route.id),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		route.entry.data.sidebar.badge,
 		{ ...attrs, ...route.entry.data.sidebar.attrs }
@@ -300,7 +301,7 @@ function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? a[SlugKey] : a.slug, isDir(b) ? b[SlugKey] : b.slug);
+		return collator.compare(isDir(a) ? a[SlugKey] : a.id, isDir(b) ? b[SlugKey] : b.id);
 	});
 }
 
