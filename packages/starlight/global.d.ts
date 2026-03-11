@@ -1,5 +1,11 @@
+interface StarlightThemeProvider {
+	updatePickers(theme?: string): void;
+}
+
 export declare global {
-	var StarlightThemeProvider: {
-		updatePickers(theme?: string): void;
-	};
+	var StarlightThemeProvider: StarlightThemeProvider;
+
+	interface Window {
+		StarlightThemeProvider: StarlightThemeProvider;
+	}
 }

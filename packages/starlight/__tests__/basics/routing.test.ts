@@ -1,7 +1,6 @@
 import { type GetStaticPathsResult } from 'astro';
 import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
-import project from 'virtual:starlight/project-context';
 import { expect, test, vi } from 'vitest';
 import { routes, paths, getRouteBySlugParam } from '../../utils/routing';
 import { slugToParam } from '../../utils/slugs';
@@ -22,10 +21,8 @@ test('test suite is using correct env', () => {
 });
 
 test('route slugs are normalized', () => {
-	const indexRoute = routes.find(
-		(route) => route.id === (project.legacyCollections ? 'index.mdx' : '')
-	);
-	expect(indexRoute?.slug).toBe('');
+	const indexRoute = routes.find((route) => route.id === '');
+	expect(indexRoute?.id).toBe('');
 });
 
 test('routes contain copy of original doc as entry', async () => {
@@ -33,22 +30,10 @@ test('routes contain copy of original doc as entry', async () => {
 	for (const route of routes) {
 		const doc = docs.find((doc) => doc.id === route.id || (doc.id === 'index' && route.id === ''));
 		if (!doc) throw new Error('Expected to find doc for route ' + route.id);
-		// Compare without slug as slugs can be normalized.
-		const { slug: _, ...entry } = route.entry;
-		if (project.legacyCollections) {
-			// When using legacy collections, the `filePath` property is added to the route entry.
-			expect(entry.filePath).toBeDefined();
-			const { filePath: _, ...legacyEntry } = entry;
-			// @ts-expect-error - When using legacy collections, the `slug` property is available but can
-			// be normalized.
-			const { slug: __, ...legacyInput } = doc;
-			expect(legacyEntry).toEqual(legacyInput);
-		} else {
-			// Compare without ids as ids can be normalized when using loaders.
-			const { id: _, ...loaderEntry } = entry;
-			const { id: __, ...loaderInput } = doc;
-			expect(loaderEntry).toEqual(loaderInput);
-		}
+		// Compare without ids as ids are normalized.
+		const { id: __, ...loaderEntry } = route.entry;
+		const { id: ___, ...loaderInput } = doc;
+		expect(loaderEntry).toEqual(loaderInput);
 	}
 });
 
@@ -81,7 +66,7 @@ test('paths contain normalized slugs for path parameters', () => {
 
 test('routes can be retrieved from their path parameters', () => {
 	for (const route of routes) {
-		const params = slugToParam(route.slug);
+		const params = slugToParam(route.id);
 		const routeFromParams = getRouteBySlugParam(params);
 
 		expect(routeFromParams).toBe(route);
@@ -89,9 +74,7 @@ test('routes can be retrieved from their path parameters', () => {
 });
 
 test('routes includes drafts except in production', async () => {
-	const routeMatcher = (route: Route) =>
-		route.id ===
-		(project.legacyCollections ? 'guides/authoring-content.mdx' : 'guides/authoring-content');
+	const routeMatcher = (route: Route) => route.id === 'guides/authoring-content';
 
 	expect(routes.find(routeMatcher)).toBeTruthy();
 
