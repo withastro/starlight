@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: 18
+  NODE_VERSION: 22
   ASTRO_TELEMETRY_DISABLED: true
 
 jobs:
@@ -69,9 +69,6 @@ jobs:
       - run: pnpm i
       - name: Test packages
         run: pnpm -r test:coverage
-      - name: Test legacy collections support
-        working-directory: packages/starlight
-        run: pnpm test:legacy
 
   e2e-test:
     name: 'Run E2E tests (${{ matrix.os }})'

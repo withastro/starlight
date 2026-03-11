@@ -1,5 +1,10 @@
 import { describe, expect, test } from 'vitest';
-import { localeToLang, localizedId, localizedSlug, slugToLocaleData } from '../../utils/slugs';
+import {
+	localeToLang,
+	localizedFilePath,
+	localizedSlug,
+	slugToLocaleData,
+} from '../../utils/slugs';
 
 describe('slugToLocaleData', () => {
 	test('returns an undefined locale for root locale slugs', () => {
@@ -38,20 +43,20 @@ describe('localeToLang', () => {
 	});
 });
 
-describe('localizedId', () => {
+describe('localizedFilePath', () => {
 	test('returns unchanged when already in requested locale', () => {
-		expect(localizedId('test.md', undefined)).toBe('test.md');
-		expect(localizedId('dir/test.md', undefined)).toBe('dir/test.md');
-		expect(localizedId('en/test.md', 'en')).toBe('en/test.md');
-		expect(localizedId('en/dir/test.md', 'en')).toBe('en/dir/test.md');
-		expect(localizedId('ar/test.md', 'ar')).toBe('ar/test.md');
-		expect(localizedId('ar/dir/test.md', 'ar')).toBe('ar/dir/test.md');
+		expect(localizedFilePath('test.md', undefined)).toBe('test.md');
+		expect(localizedFilePath('dir/test.md', undefined)).toBe('dir/test.md');
+		expect(localizedFilePath('en/test.md', 'en')).toBe('en/test.md');
+		expect(localizedFilePath('en/dir/test.md', 'en')).toBe('en/dir/test.md');
+		expect(localizedFilePath('ar/test.md', 'ar')).toBe('ar/test.md');
+		expect(localizedFilePath('ar/dir/test.md', 'ar')).toBe('ar/dir/test.md');
 	});
 	test('returns localized id for requested locale', () => {
-		expect(localizedId('test.md', 'en')).toBe('en/test.md');
-		expect(localizedId('dir/test.md', 'en')).toBe('en/dir/test.md');
-		expect(localizedId('en/test.md', 'ar')).toBe('ar/test.md');
-		expect(localizedId('en/test.md', undefined)).toBe('test.md');
+		expect(localizedFilePath('test.md', 'en')).toBe('en/test.md');
+		expect(localizedFilePath('dir/test.md', 'en')).toBe('en/dir/test.md');
+		expect(localizedFilePath('en/test.md', 'ar')).toBe('ar/test.md');
+		expect(localizedFilePath('en/test.md', undefined)).toBe('test.md');
 	});
 });
 
