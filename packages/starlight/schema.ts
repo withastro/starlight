@@ -2,7 +2,7 @@ import { z } from 'astro/zod';
 import type { SchemaContext } from 'astro:content';
 import { HeadConfigSchema } from './schemas/head';
 import { PrevNextLinkConfigSchema } from './schemas/prevNextLink';
-import { TableOfContentsSchema } from './schemas/tableOfContents';
+import { FrontmatterTableOfContentsSchema } from './schemas/tableOfContents';
 import { BadgeConfigSchema } from './schemas/badge';
 import { HeroSchema } from './schemas/hero';
 import { SidebarLinkItemHTMLAttributesSchema } from './schemas/sidebar';
@@ -33,7 +33,7 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 		head: HeadConfigSchema({ source: 'content' }),
 
 		/** Override global table of contents configuration for this page. */
-		tableOfContents: TableOfContentsSchema().optional(),
+		tableOfContents: FrontmatterTableOfContentsSchema(),
 
 		/**
 		 * Set the layout style for this page.

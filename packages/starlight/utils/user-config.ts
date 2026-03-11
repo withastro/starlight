@@ -9,7 +9,7 @@ import { PagefindConfigDefaults, PagefindConfigSchema } from '../schemas/pagefin
 import { SidebarItemSchema } from '../schemas/sidebar';
 import { TitleConfigSchema, TitleTransformConfigSchema } from '../schemas/site-title';
 import { SocialLinksSchema } from '../schemas/social';
-import { TableOfContentsSchema } from '../schemas/tableOfContents';
+import { UserConfigTableOfContentsSchema } from '../schemas/tableOfContents';
 import { BuiltInDefaultLocale } from './i18n';
 
 const LocaleSchema = z.object({
@@ -49,7 +49,7 @@ const UserConfigSchema = z.object({
 	tagline: z.string().optional(),
 
 	/** Configure the defaults for the table of contents on each page. */
-	tableOfContents: TableOfContentsSchema(),
+	tableOfContents: UserConfigTableOfContentsSchema(),
 
 	/** Enable and configure “Edit this page” links. */
 	editLink: z
