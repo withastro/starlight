@@ -34,10 +34,11 @@ StarlightのデフォルトのUIと設定オプションは、柔軟に設計さ
    ```astro
    ---
    // src/components/EmailLink.astro
-   import type { Props } from '@astrojs/starlight/props';
+
+   const email = 'houston@example.com';
    ---
 
-   <a href="mailto:houston@example.com">メールしてね</a>
+   <a href=`mailto:${email}`>メールしてね</a>
    ```
 
 3. `astro.config.mjs`の[`components`](/ja/reference/configuration/#components)設定オプションで、カスタムコンポーネントを使用するようStarlightに指示します。
@@ -68,34 +69,45 @@ StarlightのデフォルトのUIコンポーネントを、自分で作ったも
 
 以下の例は、デフォルトの`SocialIcons`コンポーネントと一緒に、メールリンクをレンダリングするカスタムコンポーネントです。
 
-```astro {4,8}
+```astro {3,7}
 ---
 // src/components/EmailLink.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/SocialIcons.astro';
 ---
 
 <a href="mailto:houston@example.com">メールしてね</a>
-<Default {...Astro.props}><slot /></Default>
+<Default><slot /></Default>
 ```
 
-組み込みコンポーネントをカスタムコンポーネント内でレンダリングする場合、
+カスタムコンポーネント内で組み込みコンポーネントをレンダリングする場合は、デフォルトコンポーネント内に[`<slot />`](https://docs.astro.build/ja/basics/astro-components/#スロット)を追加します。これにより、コンポーネントに子要素が渡された場合、Astroがそれらをどこにレンダリングするかを知ることができます。
 
-- `Astro.props`を展開します。これにより、レンダリングに必要なすべてのデータを受け取ることができます。
-- デフォルトのコンポーネント内に[`<slot />`](https://docs.astro.build/ja/core-concepts/astro-components/#スロット)を追加します。これにより、コンポーネントに子要素が渡された場合、Astroがそれらをどこにレンダリングするかを知ることができます。
+[名前付きスロット](https://docs.astro.build/ja/basics/astro-components/#名前付きスロット)を含む[`PageFrame`](/ja/reference/overrides/#pageframe)や[`TwoColumnContent`](/ja/reference/overrides/#twocolumncontent)コンポーネントを再利用する場合は、これらのスロットを[受け渡す](https://docs.astro.build/ja/basics/astro-components/#スロットの受け渡し)必要があります。
+
+以下の例は、受け渡しが必要な`right-sidebar`という名前付きスロットを含む`TwoColumnContent`コンポーネントを再利用するカスタムコンポーネントです。
+
+```astro {8}
+---
+// src/components/CustomContent.astro
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+---
+
+<Default>
+	<slot />
+	<slot name="right-sidebar" slot="right-sidebar" />
+</Default>
+```
 
 ## ページデータを使用する
 
-Starlightコンポーネントをオーバーライドすると、カスタム実装側には、現在のページのすべてのデータを含む、標準の`Astro.props`オブジェクトが渡されます。これらの値を使用して、コンポーネントテンプレートのレンダリング方法を制御することができます。
+Starlightコンポーネントをオーバーライドすると、現在のページのすべてのデータを含むグローバルな[`starlightRoute`オブジェクト](/ja/guides/route-data/)にアクセスできます。これらの値を使用して、コンポーネントテンプレートのレンダリング方法を制御することができます。
 
-たとえば、ページのフロントマターの値を`Astro.props.entry.data`として取得できます。以下の例では、[`PageTitle`](/ja/reference/overrides/#pagetitle)を置き換えるコンポーネントが、現在のページのタイトルを表示するためにこれを使用しています。
+以下の例では、[`PageTitle`](/ja/reference/overrides/#pagetitle)の代替コンポーネントが、コンテンツのフロントマターに設定された現在のページのタイトルを表示します。
 
-```astro {5} "{title}"
+```astro {4} "{title}"
 ---
 // src/components/Title.astro
-import type { Props } from '@astrojs/starlight/props';
 
-const { title } = Astro.props.entry.data;
+const { title } = Astro.locals.starlightRoute.entry.data;
 ---
 
 <h1 id="_top">{title}</h1>
@@ -107,32 +119,31 @@ const { title } = Astro.props.entry.data;
 </style>
 ```
 
-利用可能なすべてのpropsについて、詳しくは[オーバーライドリファレンス](/ja/reference/overrides/#コンポーネントprops)を参照してください。
+利用可能なすべてのプロパティについて、詳しくは[ルートデータリファレンス](/ja/reference/route-data/)を参照してください。
 
 ### 特定ページのみでのオーバーライド
 
-コンポーネントのオーバーライドはすべてのページに適用されます。ただし、`Astro.props`の値を使用して条件に応じてレンダリングすることで、カスタムUIを表示するタイミング、StarlightのデフォルトUIを表示するタイミング、あるいはまったく別のものを表示するタイミングを決定することができます。
+コンポーネントのオーバーライドはすべてのページに適用されます。ただし、`starlightRoute`の値を使用して条件に応じてレンダリングすることで、カスタムUIを表示するタイミング、StarlightのデフォルトUIを表示するタイミング、あるいはまったく別のものを表示するタイミングを決定することができます。
 
 以下は、Starlightの[`Footer`](/ja/reference/overrides/#footer)をオーバーライドするコンポーネントの例です。ホームページでのみ「Starlightで作成 🌟」と表示し、それ以外のすべてのページではデフォルトのフッターを表示します。
 
 ```astro
 ---
 // src/components/ConditionalFooter.astro
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const isHomepage = Astro.props.slug === '';
+const isHomepage = Astro.locals.starlightRoute.id === '';
 ---
 
 {
 	isHomepage ? (
 		<footer>Starlightで作成 🌟</footer>
 	) : (
-		<Default {...Astro.props}>
+		<Default>
 			<slot />
 		</Default>
 	)
 }
 ```
 
-条件付きレンダリングについて、詳しくは[Astroのテンプレート構文ガイド](https://docs.astro.build/ja/core-concepts/astro-syntax/#動的html)を参照してください。
+条件付きレンダリングについて、詳しくは[Astroのテンプレート構文ガイド](https://docs.astro.build/ja/basics/astro-syntax/#動的html)を参照してください。

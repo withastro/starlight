@@ -5,7 +5,7 @@ description: Starlightがどのように環境に優しいドキュメントサ�
 
 ウェブ産業が気候に与える影響は、世界の炭素排出量の[2％][sf]から[4％][bbc]であり、航空業界の排出量にほぼ匹敵すると推定されています。ウェブサイトの生態学的影響の計算には多くの複雑な要因がありますが、このガイドではドキュメントサイトの環境への負荷を減らすためのいくつかのヒントを紹介します。
 
-幸いなことに、Starlightを選ぶことは素晴らしいスタートです。Website Carbon Calculatorによると、このサイトは[テスト対象のウェブページの99％よりもクリーン][sl-carbon]であり、ページ訪問あたり0.01gのCO₂を生成します。
+幸いなことに、Starlightを選ぶことは素晴らしいスタートです。Website Carbon Calculatorによると、このサイトは[テスト対象のウェブページの98％よりもクリーン][sl-carbon]であり、ページ訪問あたり0.01gのCO₂を生成します。
 
 ## ページの重さ
 
@@ -75,29 +75,33 @@ JavaScriptの解析とコンパイルは、ブラウザが実行する最も高�
 | フレームワーク              | ページ訪問ごとのCO₂ | レート |
 | --------------------------- | ------------------- | :----: |
 | [Starlight][sl-carbon]      | 0.01g               |   A+   |
-| [Read the Docs][rtd-carbon] | 0.05g               |   A+   |
-| [Sphinx][sx-carbon]         | 0.06g               |   A+   |
-| [VitePress][vp-carbon]      | 0.07g               |   A+   |
-| [Docus][dc-carbon]          | 0.09g               |   A+   |
-| [docsify][dy-carbon]        | 0.10g               |   A    |
-| [Nextra][nx-carbon]         | 0.11g               |   A    |
-| [MkDocs][mk-carbon]         | 0.19g               |   B    |
-| [Docusaurus][ds-carbon]     | 0.21g               |   B    |
-| [GitBook][gb-carbon]        | 0.43g               |   C    |
-| [Mintlify][mt-carbon]       | 1.22g               |   F    |
+| [Sphinx][sx-carbon]         | 0.01g               |   A+   |
+| [Read the Docs][rtd-carbon] | 0.03g               |   A+   |
+| [VitePress][vp-carbon]      | 0.04g               |   A    |
+| [docsify][dy-carbon]        | 0.05g               |   A    |
+| [mdBook][md-carbon]         | 0.05g               |   A    |
+| [Nextra][nx-carbon]         | 0.05g               |   A    |
+| [MkDocs][mk-carbon]         | 0.07g               |   A    |
+| [Fumadocs][fs-carbon]       | 0.07g               |   A    |
+| [Docusaurus][ds-carbon]     | 0.10g               |   B    |
+| [Docus][dc-carbon]          | 0.11g               |   B    |
+| [GitBook][gb-carbon]        | 0.42g               |   F    |
+| [Mintlify][mt-carbon]       | 0.48g               |   F    |
 
-<small>データは2024年7月22日に収集されたものです。リンクをクリックすると、最新の数値が表示されます。</small>
+<small>データは2025年8月7日に収集されたものです。リンクをクリックすると、最新の数値が表示されます。</small>
 
 [sl-carbon]: https://www.websitecarbon.com/website/starlight-astro-build-getting-started/
 [vp-carbon]: https://www.websitecarbon.com/website/vitepress-dev-guide-what-is-vitepress/
-[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-introduction-getting-started/
+[dc-carbon]: https://www.websitecarbon.com/website/docus-dev-en-getting-started-project-structure/
 [sx-carbon]: https://www.websitecarbon.com/website/sphinx-doc-org-en-master-usage-quickstart-html/
 [mk-carbon]: https://www.websitecarbon.com/website/mkdocs-org-getting-started/
+[md-carbon]: https://www.websitecarbon.com/website/rust-lang-github-io-mdbook/
 [nx-carbon]: https://www.websitecarbon.com/website/nextra-site-docs-docs-theme-start/
+[fs-carbon]: https://www.websitecarbon.com/website/fumadocs-dev-docs-ui/
 [dy-carbon]: https://www.websitecarbon.com/website/docsify-js-org/
 [ds-carbon]: https://www.websitecarbon.com/website/docusaurus-io-docs/
 [rtd-carbon]: https://www.websitecarbon.com/website/docs-readthedocs-io-en-stable-index-html/
-[gb-carbon]: https://www.websitecarbon.com/website/docs-gitbook-com/
+[gb-carbon]: https://www.websitecarbon.com/website/gitbook-com-docs/
 [mt-carbon]: https://www.websitecarbon.com/website/mintlify-com-docs-quickstart/
 
 ## その他のリソース
@@ -120,6 +124,6 @@ JavaScriptの解析とコンパイルは、ブラウザが実行する最も高�
 [sf]: https://www.sciencefocus.com/science/what-is-the-carbon-footprint-of-the-internet/
 [bbc]: https://www.bbc.com/future/article/20200305-why-your-internet-habits-are-not-as-clean-as-you-think
 [http]: https://httparchive.org/reports/state-of-the-web
-[assets]: https://docs.astro.build/ja/guides/assets/
+[assets]: https://docs.astro.build/ja/guides/images/
 [islands]: https://docs.astro.build/ja/concepts/islands/
 [wcc]: https://www.websitecarbon.com/

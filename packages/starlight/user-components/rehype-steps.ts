@@ -12,7 +12,16 @@ const stepsProcessor = rehype()
 	.data('settings', { fragment: true })
 	.use(function steps() {
 		return (tree: Root, vfile: VFile) => {
-			const rootElements = tree.children.filter((item): item is Element => item.type === 'element');
+			const rootElements = tree.children.filter(
+				(item): item is Element =>
+					item.type === 'element' &&
+					// Since Astro 5.16.9, `<script>` elements from nested child elements can end up hoisted
+					// into the `<Steps>` slot due to our use of `Astro.slots.render()`. We can safely ignore
+					// these, so we filter them out here.
+					// TODO: we may be able to remove this in the future if the upstream issue is fixed.
+					// See: https://github.com/withastro/astro/issues/15627
+					item.tagName !== 'script'
+			);
 			const [rootElement] = rootElements;
 
 			if (!rootElement) {

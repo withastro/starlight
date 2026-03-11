@@ -33,7 +33,7 @@ description: 私が取り組んでいるプロジェクトについてもっと�
 
 **type**: `string`
 
-ページのスラグを上書きします。詳しくは、Astroドキュメントの[「カスタムスラグの定義」](https://docs.astro.build/ja/guides/content-collections/#カスタムスラグの定義)を参照してください。
+ページのスラグを上書きします。詳しくは、Astroドキュメントの[「カスタムIDの定義」](https://docs.astro.build/ja/guides/content-collections/#defining-custom-ids)を参照してください。
 
 ### `editUrl`
 
@@ -269,7 +269,7 @@ pagefind: false
 **type:** `boolean`  
 **default:** `false`
 
-このページをドラフトとしてマークし、[本番ビルド](https://docs.astro.build/ja/reference/cli-reference/#astro-build)と[自動生成されるリンクのグループ](/ja/guides/sidebar/#自動生成されるグループ)から除外するかどうかを設定します。ページをドラフトとしてマークし、開発中にのみ表示するには`true`に設定します。
+このページをドラフトとしてマークし、[本番ビルド](https://docs.astro.build/ja/reference/cli-reference/#astro-build)から除外するかどうかを設定します。ページをドラフトとしてマークし、開発中にのみ表示するには`true`に設定します。
 
 ```md
 ---
@@ -278,6 +278,8 @@ pagefind: false
 draft: true
 ---
 ```
+
+ドラフトページはビルド出力に含まれないため、[スラグ](/ja/guides/sidebar/#内部リンク)を使用してサイトのサイドバー設定に直接追加することはできません。[自動生成されるサイドバーグループ](/ja/guides/sidebar/#自動生成されるグループ)に使用されるディレクトリ内のドラフトページは、本番ビルドでは自動的に除外されます。
 
 ### `sidebar`
 
@@ -375,7 +377,7 @@ sidebar:
 
 **type:** `Record<string, string | number | boolean | undefined>`
 
-自動生成されるリンクのグループ内に表示されるサイドバーのページリンクに追加するHTML属性。
+自動生成されるリンクのグループ内に表示されるサイドバーのページリンクに追加するHTML属性。このページが属する自動生成グループに[`autogenerate.attrs`](/ja/guides/sidebar/#自動生成されるリンクのカスタムhtml属性)が設定されている場合、フロントマターの属性はグループの属性とマージされます。
 
 ```md
 ---
@@ -390,19 +392,20 @@ sidebar:
 
 ## フロントマタースキーマをカスタマイズする
 
-Starlightの`docs`コンテンツコレクションのフロントマタースキーマは、`docsSchema()`ヘルパーを使用して`src/content/config.ts`で設定されています。
+Starlightの`docs`コンテンツコレクションのフロントマタースキーマは、`docsSchema()`ヘルパーを使用して`src/content.config.ts`で設定されています。
 
-```ts {3,6}
-// src/content/config.ts
+```ts {4,7}
+// src/content.config.ts
 import { defineCollection } from 'astro:content';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
-  docs: defineCollection({ schema: docsSchema() }),
+  docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
 };
 ```
 
-コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#コレクションスキーマの定義)を参照してください。
+コンテンツコレクションのスキーマについて詳しくは、Astroドキュメントの[「コレクションスキーマの定義」](https://docs.astro.build/ja/guides/content-collections/#defining-the-collection-schema)を参照してください。
 
 `docsSchema()`は以下のオプションを受け取ります。
 
@@ -415,13 +418,15 @@ export const collections = {
 
 次の例では、`description`を必須にするために厳し目の型を指定し、さらにオプションの`category`フィールドを新規追加しています。
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         // 組み込みのフィールドをオプションから必須に変更します。
@@ -436,13 +441,15 @@ export const collections = {
 
 [Astroの`image()`ヘルパー](https://docs.astro.build/ja/guides/images/#コンテンツコレクションと画像)を利用するには、拡張したスキーマを返す関数を使用します。
 
-```ts {8-13}
-// src/content/config.ts
+```ts {10-15}
+// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
   docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: ({ image }) => {
         return z.object({

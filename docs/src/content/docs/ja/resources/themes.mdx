@@ -12,11 +12,13 @@ head:
 
 import ThemeGrid from '~/components/theme-grid.astro';
 
-テーマはStarlightのプラグインで、[カスタムCSS](/ja/guides/css-and-tailwind/)、[コンポーネントのオーバーライド](/ja/guides/overriding-components/)などによってサイトの見た目を変更できるほか、新しい機能を追加できます。
+テーマはStarlightのプラグインで、[カスタムCSS](/ja/guides/css-and-tailwind/)、[コンポーネントのオーバーライド](/ja/guides/overriding-components/)、その他の新機能などによってサイトの見た目を変更します。
 
 ## コミュニティテーマ
 
 コミュニティが作成したテーマをインストールすると、サイトの見た目や使い心地を手早くカスタマイズできます。
+
+以下のリストですべてのテーマをプレビューできるほか、[Starlightテーマのデモサイト](https://starlight-themes.netlify.app/)でインタラクティブに試すこともできます。
 
 <ThemeGrid
 	labels={{
@@ -36,7 +38,7 @@ import ThemeGrid from '~/components/theme-grid.astro';
 			previews: { light: 'rapide-light.png', dark: 'rapide-dark.png' },
 		},
 		{
-			title: 'Starlight Obsidian Theme',
+			title: 'Starlight Obsidian',
 			description:
 				'Obsidian Publishサイトのスタイルに着想を得たStarlightテーマです。',
 			href: 'https://fevol.github.io/starlight-theme-obsidian/',
@@ -92,6 +94,19 @@ import ThemeGrid from '~/components/theme-grid.astro';
 				'スムーズなフロートインアニメーションを備えた直感的でモダンなStarlightテーマです。',
 			href: 'https://pelagornis-page.netlify.app/',
 			previews: { light: 'page-light.png', dark: 'page-dark.png' },
+		},
+		{
+			title: 'Starlight Gruvbox',
+			description: 'レトロでグルーヴィなStarlightテーマです。',
+			href: 'https://starlight-theme-gruvbox.otterlord.dev/',
+			previews: { light: 'gruvbox-light.png', dark: 'gruvbox-dark.png' },
+		},
+		{
+			title: 'Starlight Six',
+			description:
+				'Six TechnologyによるクリーンでモダンなStarlightテーマです。',
+			href: 'https://six-tech.github.io/Six.StarlightTheme/',
+			previews: { light: 'six-light.png', dark: 'six-dark.png' },
 		},
 	]}
 />

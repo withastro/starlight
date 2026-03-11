@@ -8,11 +8,8 @@
 /// <reference path="./virtual.d.ts" />
 
 import mdx from '@astrojs/mdx';
-import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
+import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
-import { spawn } from 'node:child_process';
-import { dirname, relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import {
 	starlightRehypePlugins,
 	starlightRemarkPlugins,
@@ -20,6 +17,7 @@ import {
 } from './integrations/remark-rehype';
 import { starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
+import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
 import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
@@ -148,36 +146,10 @@ export default function StarlightIntegration(
 				injectPluginTranslationsTypes(pluginTranslations, injectTypes);
 			},
 
-			'astro:build:done': ({ dir, logger }) => {
+			'astro:build:done': async (options) => {
 				if (!userConfig.pagefind) return;
-				const loglevelFlag = getPagefindLoggingFlags(logger.options.level);
-				const targetDir = fileURLToPath(dir);
-				const cwd = dirname(fileURLToPath(import.meta.url));
-				const relativeDir = relative(cwd, targetDir);
-				return new Promise<void>((resolve) => {
-					spawn('npx', ['-y', 'pagefind', ...loglevelFlag, '--site', relativeDir], {
-						stdio: 'inherit',
-						shell: true,
-						cwd,
-					}).on('close', () => resolve());
-				});
+				return starlightPagefind(options);
 			},
 		},
 	};
-}
-
-/** Map the logging level of Astro’s logger to one of Pagefind’s logging level flags. */
-function getPagefindLoggingFlags(level: AstroIntegrationLogger['options']['level']) {
-	switch (level) {
-		case 'silent':
-		case 'error':
-			return ['--silent'];
-		case 'warn':
-			return ['--quiet'];
-		case 'debug':
-			return ['--verbose'];
-		case 'info':
-		default:
-			return [];
-	}
 }

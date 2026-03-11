@@ -9,142 +9,6 @@ Starlightの[`components`](/ja/reference/configuration/#components)設定オプ�
 
 [コンポーネントのオーバーライドガイド](/ja/guides/overriding-components/)も参照してください。
 
-## コンポーネントprops
-
-すべてのコンポーネントは、現在のページに関する情報を含んでいる、標準の`Astro.props`オブジェクトにアクセスできます。
-
-カスタムコンポーネントに型を付けるには、Starlightから`Props`型をインポートします。
-
-```astro
----
-// src/components/Custom.astro
-import type { Props } from '@astrojs/starlight/props';
-
-const { hasSidebar } = Astro.props;
-//      ^ type: boolean
----
-```
-
-これにより、`Astro.props`にアクセスする際、オートコンプリートと型が有効になります。
-
-### Props
-
-Starlightは、以下のpropsをカスタムコンポーネントに渡します。
-
-#### `dir`
-
-**Type:** `'ltr' | 'rtl'`
-
-ページの書字方向。
-
-#### `lang`
-
-**Type:** `string`
-
-このページのロケールのBCP-47言語タグ。たとえば`en`、`zh-CN`、`pt-BR`など。
-
-#### `locale`
-
-**Type:** `string | undefined`
-
-言語が配信されるベースパス。ルートロケールスラグの場合は`undefined`となります。
-
-#### `siteTitle`
-
-**Type:** `string`
-
-このページのロケールのサイトタイトル。
-
-#### `siteTitleHref`
-
-**Type:** `string`
-
-サイトタイトルの`href`属性の値。たとえば`/`など、ホームページへのリンクとなります。多言語サイトの場合、たとえば`/en/`や`/zh-cn/`など、現在のロケールが含まれます。
-
-#### `slug`
-
-**Type:** `string`
-
-コンテンツファイル名から生成されたページのスラグ。
-
-#### `id`
-
-**Type:** `string`
-
-コンテンツファイル名に基づくページの一意のID。
-
-#### `isFallback`
-
-**Type:** `true | undefined`
-
-このページが現在の言語で未翻訳であり、デフォルトロケールのフォールバックコンテンツを使用している場合は`true`となります。多言語サイトでのみ使用されます。
-
-#### `entryMeta`
-
-**Type:** `{ dir: 'ltr' | 'rtl'; lang: string }`
-
-ページコンテンツのロケールメタデータ。ページがフォールバックコンテンツを使用している場合、トップレベルのロケール値とは異なる場合があります。
-
-#### `entry`
-
-現在のページのAstroコンテンツコレクションのエントリー。`entry.data`には、現在のページのフロントマターの値が含まれます。
-
-```ts
-entry: {
-  data: {
-    title: string;
-    description: string | undefined;
-    // その他の値
-  }
-}
-```
-
-このオブジェクトの構造については、[Astroのコレクションエントリー型](https://docs.astro.build/ja/reference/modules/astro-content/#collectionentry)リファレンスを参照してください。
-
-#### `sidebar`
-
-**Type:** `SidebarEntry[]`
-
-ページのサイトナビゲーション用サイドバーのエントリー。
-
-#### `hasSidebar`
-
-**Type:** `boolean`
-
-ページにサイドバーを表示するかどうか。
-
-#### `pagination`
-
-**Type:** `{ prev?: Link; next?: Link }`
-
-ページネーションの設定が有効な場合にサイドバーに表示される、前のページと次のページへのリンク。
-
-#### `toc`
-
-**Type:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
-
-目次の設定が有効な場合、このページの目次。
-
-#### `headings`
-
-**Type:** `{ depth: number; slug: string; text: string }[]`
-
-現在のページから抽出されたすべてのMarkdown見出しの配列。Starlightの設定オプションをもとに目次コンポーネントを作成したい場合は、[`toc`](#toc)を使用してください。
-
-#### `lastUpdated`
-
-**Type:** `Date | undefined`
-
-最終更新日の設定が有効な場合、このページが最後に更新された日時を表わすJavaScriptの`Date`オブジェクト。
-
-#### `editUrl`
-
-**Type:** `URL | undefined`
-
-ページの編集設定が有効な場合、このページを編集可能なアドレスの`URL`オブジェクト。
-
----
-
 ## コンポーネント
 
 ### ヘッド
@@ -155,9 +19,9 @@ entry: {
 
 **デフォルトコンポーネント:** [`Head.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Head.astro)
 
-各ページの`<head>`内にレンダリングされるコンポーネント。`<title>`や`<meta charset="utf-8">`などの重要なタグが含まれます。
+各ページの`<head>`内にレンダリングされるコンポーネント。
 
-このコンポーネントをオーバーライドするのは最後の手段としてください。可能な限り、Starlightの設定オプション[`head`](/ja/reference/configuration/#head)を使用してください。
+このコンポーネントをオーバーライドするのは最後の手段としてください。可能であれば、[`head`設定オプション](/ja/reference/configuration/#head)、[`head`フロントマターフィールド](/ja/reference/frontmatter/#head)、または[ルートデータミドルウェア](/ja/guides/route-data/#ルートデータのカスタマイズ)を使用して、デフォルトコンポーネントがレンダリングするルートデータをカスタマイズすることをおすすめします。
 
 #### `ThemeProvider`
 
@@ -183,7 +47,8 @@ entry: {
 
 #### `PageFrame`
 
-**デフォルトコンポーネント:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)
+**デフォルトコンポーネント:** [`PageFrame.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/PageFrame.astro)  
+**名前付きスロット:** `header`, `sidebar`
 
 ページコンテンツの大部分をラップするレイアウトコンポーネント。デフォルトの実装では、ヘッダー・サイドバー・メインのレイアウトをセットし、`header`と`sidebar`の名前付きスロットと、メインコンテンツのデフォルトスロットを含みます。また、小さな（モバイル）ビューポートでのサイドバーナビゲーションの切り替えをサポートするために、[`<MobileMenuToggle />`](#mobilemenutoggle)をレンダリングします。
 
@@ -195,7 +60,8 @@ entry: {
 
 #### `TwoColumnContent`
 
-**デフォルトコンポーネント:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)
+**デフォルトコンポーネント:** [`TwoColumnContent.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/TwoColumnContent.astro)  
+**名前付きスロット:** `right-sidebar`
 
 メインコンテンツのカラムと右サイドバー（目次）をラップするレイアウトコンポーネント。デフォルトの実装では、1カラムの小さなビューポート向けレイアウトと、2カラムの大きなビューポート向けレイアウトの切り替えをおこないます。
 
@@ -209,7 +75,7 @@ entry: {
 
 **デフォルトコンポーネント:** [`Header.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Header.astro)
 
-すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle-1)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
+すべてのページの上部に表示されるヘッダーコンポーネント。デフォルトの実装では、[`<SiteTitle />`](#sitetitle)、[`<Search />`](#search)、[`<SocialIcons />`](#socialicons)、[`<ThemeSelect />`](#themeselect)、[`<LanguageSelect />`](#languageselect)を表示します。
 
 #### `SiteTitle`
 

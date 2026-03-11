@@ -1,5 +1,45 @@
 # @astrojs/starlight
 
+## 0.37.7
+
+### Patch Changes
+
+- [#3726](https://github.com/withastro/starlight/pull/3726) [`8a09b60`](https://github.com/withastro/starlight/commit/8a09b60b03ae2b99d3418f41e984ffa46468e3a2) Thanks [@delucis](https://github.com/delucis)! - Fixes an issue using components containing scripts inside Starlight’s steps component in versions of Astro >= 5.16.9
+
+## 0.37.6
+
+### Patch Changes
+
+- [#3645](https://github.com/withastro/starlight/pull/3645) [`a562096`](https://github.com/withastro/starlight/commit/a562096380287fa7fa925664d04071a5831f274b) Thanks [@mschoeffmann](https://github.com/mschoeffmann)! - Adds icons for Chrome, Edge, Firefox, and Safari
+
+## 0.37.5
+
+### Patch Changes
+
+- [#3675](https://github.com/withastro/starlight/pull/3675) [`0ba556d`](https://github.com/withastro/starlight/commit/0ba556d7d49dd4904f8aa8524c105bf1ceeec85c) Thanks [@controversial](https://github.com/controversial)! - Excludes the accessible labels for heading anchor links from Pagefind results
+
+## 0.37.4
+
+### Patch Changes
+
+- [#3534](https://github.com/withastro/starlight/pull/3534) [`703fab0`](https://github.com/withastro/starlight/commit/703fab085b99303c0c01325c9bb869ea7e1418c4) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Fixes support for running builds when `npx` is unavailable.
+
+  Previously, Starlight would spawn a process to run the Pagefind search indexing binary using `npx`. On platforms where `npx` isn’t available, this could cause issues. Starlight now runs Pagefind using its Node.js API to avoid a separate process. As a side effect, you may notice that logging during builds is now less verbose.
+
+- [#3656](https://github.com/withastro/starlight/pull/3656) [`a0e6368`](https://github.com/withastro/starlight/commit/a0e636838092d30cb6b8f80e5535ad842e52d759) Thanks [@delucis](https://github.com/delucis)! - Fixes several edge cases in highlighting the current page heading in Starlight’s table of contents
+
+- [#3663](https://github.com/withastro/starlight/pull/3663) [`00cbf00`](https://github.com/withastro/starlight/commit/00cbf001fee4fd59f351c7a6c0f8c353c7c41f13) Thanks [@lines-of-codes](https://github.com/lines-of-codes)! - Adds Thai language support
+
+- [#3658](https://github.com/withastro/starlight/pull/3658) [`ac79329`](https://github.com/withastro/starlight/commit/ac793290f0dbd21f9b9a5d6f60aa315043815227) Thanks [@delucis](https://github.com/delucis)! - Avoids adding redundant `aria-current="false"` attributes to sidebar entries
+
+- [#3382](https://github.com/withastro/starlight/pull/3382) [`db295c2`](https://github.com/withastro/starlight/commit/db295c2a3d75aad71a41702f33001195d89de5d2) Thanks [@trueberryless](https://github.com/trueberryless)! - Fixes an issue where the mobile table of contents is unable to find the first heading when a page has a tall banner.
+
+## 0.37.3
+
+### Patch Changes
+
+- [#3648](https://github.com/withastro/starlight/pull/3648) [`292666c`](https://github.com/withastro/starlight/commit/292666cdcb9d81da2ee32ab5a3e83b2c44cea5cd) Thanks [@maxchang3](https://github.com/maxchang3)! - Prevents unwanted font size adjustments on iOS after orientation changes.
+
 ## 0.37.2
 
 ### Patch Changes
