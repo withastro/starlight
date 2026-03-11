@@ -59,9 +59,6 @@
         "playwright",
         "search-insights"
       ]
-    },
-    "patchedDependencies": {
-      "starlight-links-validator": "patches/starlight-links-validator.patch"
     }
   }
 }
