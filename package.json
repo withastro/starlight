@@ -22,7 +22,7 @@
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.3.0",
-    "prettier": "^3.3.3",
+    "prettier": "3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "size-limit": "^11.1.6",
     "typescript": "^5.6.3",
