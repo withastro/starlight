@@ -8,12 +8,13 @@ const SidebarBaseSchema = z.object({
 	/** The visible label for this item in the sidebar. */
 	label: z.string(),
 	/** Translations of the `label` for each supported language. */
-	translations: z.record(z.string()).default({}),
+	translations: z.record(z.string(), z.string()).default({}),
 	/** Adds a badge to the item */
 	badge: I18nBadgeConfigSchema(),
 });
 
-const SidebarGroupSchema = SidebarBaseSchema.extend({
+const SidebarGroupSchema = z.object({
+	...SidebarBaseSchema.shape,
 	/**
 	 * Explicitly prevent custom attributes on groups as the final type for supported sidebar item
 	 * is a non-discriminated union where TypeScript will not perform excess property checks.
@@ -30,21 +31,27 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 // `Record<string, string | number | boolean | undefined>` but typed as `HTMLAttributes<'a'>`
 // for user convenience.
 const linkHTMLAttributesSchema = z.record(
+	z.string(),
 	z.union([z.string(), z.number(), z.boolean(), z.undefined(), z.null()])
-) as z.Schema<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>;
-export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
+) as z.ZodType<LinkHTMLAttributes, LinkHTMLAttributes>;
+export type LinkHTMLAttributes = Omit<
+	HTMLAttributes<'a'>,
+	keyof AstroBuiltinAttributes | 'children'
+>;
 
 export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchema.default({});
 
-const SidebarLinkItemSchema = SidebarBaseSchema.extend({
+const SidebarLinkItemSchema = z.strictObject({
+	...SidebarBaseSchema.shape,
 	/** The link to this item’s content. Can be a relative link to local files or the full URL of an external page. */
 	link: z.string(),
 	/** HTML attributes to add to the link item. */
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
-}).strict();
+});
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
-const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
+const AutoSidebarGroupSchema = z.strictObject({
+	...SidebarGroupSchema.shape,
 	/** Enable autogenerating a sidebar category from a specific docs directory. */
 	autogenerate: z.object({
 		/** The directory to generate sidebar items for. */
@@ -60,7 +67,7 @@ const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
 		/** How many directories deep to include from this directory in the sidebar. Default: `Infinity`. */
 		// depth: z.number().optional(),
 	}),
-}).strict();
+});
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
 type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
@@ -85,26 +92,25 @@ type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
 	>;
 };
 
-const ManualSidebarGroupSchema: z.ZodType<
-	ManualSidebarGroupOutput,
-	z.ZodTypeDef,
-	ManualSidebarGroupInput
-> = SidebarGroupSchema.extend({
-	/** Array of links and subcategories to display in this category. */
-	items: z.lazy(() =>
-		z
-			.union([
-				SidebarLinkItemSchema,
-				ManualSidebarGroupSchema,
-				AutoSidebarGroupSchema,
-				InternalSidebarLinkItemSchema,
-				InternalSidebarLinkItemShorthandSchema,
-			])
-			.array()
-	),
-}).strict();
+const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroupOutput, ManualSidebarGroupInput> =
+	z.strictObject({
+		...SidebarGroupSchema.shape,
+		/** Array of links and subcategories to display in this category. */
+		items: z.lazy(() =>
+			z
+				.union([
+					SidebarLinkItemSchema,
+					ManualSidebarGroupSchema,
+					AutoSidebarGroupSchema,
+					InternalSidebarLinkItemSchema,
+					InternalSidebarLinkItemShorthandSchema,
+				])
+				.array()
+		),
+	});
 
-const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({ label: true }).extend({
+const InternalSidebarLinkItemSchema = z.object({
+	...SidebarBaseSchema.partial({ label: true }).shape,
 	/** The link to this item’s content. Must be a slug of a Content Collection entry. */
 	slug: z.string(),
 	/** HTML attributes to add to the link item. */

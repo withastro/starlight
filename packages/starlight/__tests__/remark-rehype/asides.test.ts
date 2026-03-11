@@ -27,11 +27,9 @@ function renderMarkdown(
 	content: string,
 	options: { fileURL?: URL; processor?: MarkdownProcessor } = {}
 ) {
-	return (options.processor ?? processor).render(
-		content,
-		// @ts-expect-error fileURL is part of MarkdownProcessor's options
-		{ fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url) }
-	);
+	return (options.processor ?? processor).render(content, {
+		fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url),
+	});
 }
 
 test('generates aside', async () => {
@@ -136,8 +134,6 @@ Some text
 			// We are not relying on `toThrowErrorMatchingInlineSnapshot()` and our custom snapshot
 			// serializer in this specific test as error thrown in a remark plugin includes a dynamic file
 			// path.
-			// `expect.objectContaining` returns `any`.
-			/* eslint-disable @typescript-eslint/no-unsafe-argument */
 			expect.objectContaining({
 				type: 'AstroUserError',
 				// `expect.stringMatching` returns `any`.

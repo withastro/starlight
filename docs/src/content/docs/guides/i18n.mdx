@@ -52,12 +52,12 @@ Starlight provides built-in support for multilingual sites, including routing, f
 
    <FileTree>
 
-   - src/
-     - content/
-       - docs/
-         - ar/
-         - en/
-         - zh-cn/
+- src/
+  - content/
+    - docs/
+      - ar/
+      - en/
+      - zh-cn/
 
    </FileTree>
 
@@ -207,11 +207,11 @@ You can provide translations for additional languages you support — or overrid
 
    <FileTree>
 
-   - src/
-     - content/
-       - i18n/
-         - ar.json
-         - zh-CN.json
+- src/
+  - content/
+    - i18n/
+      - ar.json
+      - zh-CN.json
 
    </FileTree>
 
@@ -259,7 +259,8 @@ In the following example, a new, optional `custom.label` key is added to the def
 
 ```diff lang="js"
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
