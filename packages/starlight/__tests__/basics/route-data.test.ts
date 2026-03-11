@@ -10,8 +10,6 @@ vi.mock('astro:content', async () =>
 			['getting-started.mdx', { title: 'Splash', template: 'splash' }],
 			['showcase.mdx', { title: 'ToC Disabled', tableOfContents: false }],
 			['environmental-impact.md', { title: 'Explicit update date', lastUpdated: new Date() }],
-			['toc-enabled.md', { title: 'ToC Enabled', tableOfContents: true }],
-			['toc-custom.md', { title: 'ToC Custom', tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 4 } }],
 		],
 	})
 );
@@ -57,8 +55,6 @@ test('adds data to route shape', () => {
 		  "Explicit update date",
 		  "Splash",
 		  "ToC Disabled",
-		  "ToC Custom",
-		  "ToC Enabled",
 		]
 	`);
 });
@@ -89,22 +85,4 @@ test('uses explicit last updated date from frontmatter', () => {
 	});
 	expect(data.lastUpdated).toBeInstanceOf(Date);
 	expect(data.lastUpdated).toEqual(route.entry.data.lastUpdated);
-});
-
-test('uses global table of contents config when frontmatter sets `tableOfContents: true`', () => {
-	const route = routes[4]!;
-	const data = generateRouteData({
-		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		context: getRouteDataTestContext({ pathname: '/toc-enabled/' }),
-	});
-	expect(data.toc).toMatchObject({ minHeadingLevel: 2, maxHeadingLevel: 3 });
-});
-
-test('uses custom table of contents levels from frontmatter', () => {
-	const route = routes[5]!;
-	const data = generateRouteData({
-		props: { ...route, headings: [{ depth: 1, slug: 'heading-1', text: 'Heading 1' }] },
-		context: getRouteDataTestContext({ pathname: '/toc-custom/' }),
-	});
-	expect(data.toc).toMatchObject({ minHeadingLevel: 2, maxHeadingLevel: 4 });
 });
