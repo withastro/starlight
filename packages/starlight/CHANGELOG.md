@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.38.1
+
+### Patch Changes
+
+- [#3751](https://github.com/withastro/starlight/pull/3751) [`fb955ff`](https://github.com/withastro/starlight/commit/fb955ff39c3244edf808495c557fb84ce2aab260) Thanks [@pyxelr](https://github.com/pyxelr)! - Fixes a regression causing global `tableOfContents` config to be ignored
+
 ## 0.38.0
 
 ### Minor Changes
