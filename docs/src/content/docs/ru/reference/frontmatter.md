@@ -428,9 +428,10 @@ export const collections = {
 
 В следующем примере мы задаем более строгий тип для `description`, чтобы сделать его обязательным, и добавляем новое необязательное поле `category`:
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
@@ -451,9 +452,10 @@ export const collections = {
 
 Чтобы воспользоваться преимуществами [хелпера `image()`](https://docs.astro.build/ru/guides/images/#images-in-content-collections), используйте функцию, которая возвращает расширение вашей схемы:
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
