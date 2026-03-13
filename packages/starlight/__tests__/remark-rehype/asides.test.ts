@@ -130,7 +130,7 @@ Some text
 :::
 		`
 			)
-		).rejects.toThrowError(
+		).rejects.toThrow(
 			// We are not relying on `toThrowErrorMatchingInlineSnapshot()` and our custom snapshot
 			// serializer in this specific test as error thrown in a remark plugin includes a dynamic file
 			// path.

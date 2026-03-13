@@ -1,4 +1,4 @@
-import { assert, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { processI18nConfig, pickLang } from '../../utils/i18n';
 import type { AstroConfig, AstroUserConfig } from 'astro';
@@ -24,7 +24,7 @@ describe('processI18nConfig', () => {
 
 		expect(astroI18nConfig.defaultLocale).toBe('en');
 		expect(astroI18nConfig.locales).toEqual(['en']);
-		assert(typeof astroI18nConfig.routing !== 'string');
+		expect.assert(typeof astroI18nConfig.routing !== 'string');
 		expect(astroI18nConfig.routing?.prefixDefaultLocale).toBe(false);
 
 		// The Starlight configuration should not be modified.
