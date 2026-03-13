@@ -1,6 +1,6 @@
 import { getRouteDataTestContext } from '../test-utils';
 import config from 'virtual:starlight/user-config';
-import { assert, expect, test, vi } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { routes } from '../../utils/routing';
 import { generateRouteData } from '../../utils/routing/data';
 import * as git from 'virtual:starlight/git-info';
@@ -70,7 +70,10 @@ test('fallback routes use their own locale data', () => {
 test('fallback routes use fallback entry last updated dates', () => {
 	const getNewestCommitDate = vi.spyOn(git, 'getNewestCommitDate');
 	const route = routes.find((route) => route.entry.id === routes[4]!.id && route.locale === 'en');
-	assert(route, 'Expected to find English fallback route for `guides/authoring-content.mdx`.');
+	expect.assert(
+		route,
+		'Expected to find English fallback route for `guides/authoring-content.mdx`.'
+	);
 
 	generateRouteData({
 		props: {
