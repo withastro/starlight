@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import {
 	getAllNewestCommitDate,
 	getNewestCommitDate,
@@ -152,9 +152,11 @@ describe('getAllNewestCommitDate', () => {
 	});
 });
 
-function expectCommitDateToEqual(commitDate: CommitDate, expectedDateStr: ISODate) {
-	const expectedDate = new Date(expectedDateStr);
-	expect(commitDate).toStrictEqual(expectedDate);
-}
+const expectCommitDateToEqual = vi.defineHelper(
+	(commitDate: CommitDate, expectedDateStr: ISODate) => {
+		const expectedDate = new Date(expectedDateStr);
+		expect(commitDate).toStrictEqual(expectedDate);
+	}
+);
 
 type CommitDate = ReturnType<typeof getNewestCommitDate>;
