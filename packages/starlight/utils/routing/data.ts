@@ -3,7 +3,7 @@ import project from 'virtual:starlight/project-context';
 import config from 'virtual:starlight/user-config';
 import { generateToC } from '../generateToC';
 import { getNewestCommitDate } from 'virtual:starlight/git-info';
-import { getPrevNextLinks, getSidebar } from '../navigation';
+import { getPrevNextLinks, getSidebar, getSidebarForRender } from '../navigation';
 import { ensureTrailingSlash } from '../path';
 import { getRouteBySlugParam, normalizeCollectionEntry } from '../routing';
 import type { Route, StarlightDocsEntry, StarlightRouteData } from './types';
@@ -44,7 +44,10 @@ export function generateRouteData({
 	context: RouteDataContext;
 }): StarlightRouteData {
 	const { entry, locale, lang } = props;
-	const sidebar = getSidebar(context.url.pathname, locale);
+	const renderSidebar = config.prerender
+		? getSidebarForRender(context.url.pathname, locale)
+		: getSidebar(context.url.pathname, locale);
+	const sidebar = config.prerender ? structuredClone(renderSidebar) : renderSidebar;
 	const siteTitle = getSiteTitle(lang);
 	return {
 		...props,

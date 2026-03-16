@@ -303,4 +303,40 @@ describe('getSidebar', () => {
 
 		getLocaleRoutes.mockRestore();
 	});
+
+	test('reuses the same sidebar tree in getSidebarForRender and resets previous current entries', async () => {
+		vi.resetModules();
+		const navigation = await import('../../utils/navigation');
+
+		const first = navigation.getSidebarForRender('/', undefined);
+		const second = navigation.getSidebarForRender('/environmental-impact/', undefined);
+
+		expect(first).toBe(second);
+
+		const links = navigation.flattenSidebar(second);
+		const currentLinks = links.filter((entry) => entry.isCurrent);
+		expect(currentLinks).toHaveLength(1);
+		expect(currentLinks[0]?.href).toBe('/environmental-impact/');
+		expect(links.find((entry) => entry.href === '/')?.isCurrent).toBe(false);
+	});
+
+	test('tracks current sidebar entry independently per locale in getSidebarForRender', async () => {
+		vi.resetModules();
+		const navigation = await import('../../utils/navigation');
+
+		const enSidebar = navigation.getSidebarForRender('/getting-started/', undefined);
+		const frSidebarFirst = navigation.getSidebarForRender('/fr/getting-started/', 'fr');
+		const frSidebarSecond = navigation.getSidebarForRender('/fr/environmental-impact/', 'fr');
+
+		expect(frSidebarFirst).toBe(frSidebarSecond);
+		expect(enSidebar).not.toBe(frSidebarSecond);
+
+		const enCurrent = navigation.flattenSidebar(enSidebar).filter((entry) => entry.isCurrent);
+		const frCurrent = navigation.flattenSidebar(frSidebarSecond).filter((entry) => entry.isCurrent);
+
+		expect(enCurrent).toHaveLength(1);
+		expect(enCurrent[0]?.href).toBe('/getting-started/');
+		expect(frCurrent).toHaveLength(1);
+		expect(frCurrent[0]?.href).toBe('/fr/environmental-impact/');
+	});
 });
