@@ -32,7 +32,7 @@ describe('createTranslationSystemFromFs', () => {
 		const useTranslations = await createTranslationSystemFromFs(
 			{
 				locales: undefined,
-				defaultLocale: { label: '繁體中文', lang: 'zh-TW', dir: 'ltr' },
+				defaultLocale: { label: '繁體中文', lang: 'zh-TW', dir: 'ltr', locale: undefined },
 			},
 			// Using non-existent `_src/` to ignore custom files in this test fixture.
 			{ srcDir: new URL('./_src/', import.meta.url) }
