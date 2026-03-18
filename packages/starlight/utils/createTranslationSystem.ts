@@ -22,8 +22,7 @@ export async function createTranslationSystem<T extends i18nSchemaOutput>(
 
 	const translations = {
 		[defaultLocale]: buildResources(
-			builtinTranslations[defaultLocale],
-			builtinTranslations[stripLangRegion(defaultLocale)],
+			builtinTranslations[defaultLocale] || builtinTranslations[stripLangRegion(defaultLocale)],
 			pluginTranslations[defaultLocale],
 			userTranslations[defaultLocale]
 		),
