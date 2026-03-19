@@ -365,6 +365,7 @@ function sidebarFromDir(
  * @see getSidebarFromIntermediateSidebar
  */
 const intermediateSidebars = new Map<string | undefined, SidebarEntry[]>();
+const lastCurrentEntryByLocale = new Map<string | undefined, SidebarLink>();
 
 /** Get the sidebar for the current page using the global config. */
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
@@ -373,7 +374,7 @@ export function getSidebar(pathname: string, locale: string | undefined): Sideba
 		intermediateSidebar = getIntermediateSidebarFromConfig(config.sidebar, pathname, locale);
 		intermediateSidebars.set(locale, intermediateSidebar);
 	}
-	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
+	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname, locale);
 }
 
 /** Get the sidebar for the current page using the specified sidebar config. */
@@ -383,7 +384,7 @@ export function getSidebarFromConfig(
 	locale: string | undefined
 ): SidebarEntry[] {
 	const intermediateSidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
-	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
+	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname, locale);
 }
 
 /** Get the intermediate sidebar for the current page using the specified sidebar config. */
@@ -404,29 +405,55 @@ function getIntermediateSidebarFromConfig(
 /** Transform an intermediate sidebar into a sidebar for the current page. */
 function getSidebarFromIntermediateSidebar(
 	intermediateSidebar: SidebarEntry[],
-	pathname: string
+	pathname: string,
+	locale: string | undefined
 ): SidebarEntry[] {
-	const sidebar = structuredClone(intermediateSidebar);
-	setIntermediateSidebarCurrentEntry(sidebar, pathname);
+	let sidebar = intermediateSidebar;
+	if (!config.prerender) {
+		// In non-serverless deployments, this isolates each sidebar object against concurrent requests.
+		sidebar = structuredClone(intermediateSidebar);
+	}
+	setIntermediateSidebarCurrentEntry(sidebar, pathname, locale);
 	return sidebar;
 }
 
-/** Marks the current page as such in an intermediate sidebar. */
+/** Marks the current page in an intermediate sidebar. */
 function setIntermediateSidebarCurrentEntry(
 	intermediateSidebar: SidebarEntry[],
-	pathname: string
-): boolean {
+	pathname: string,
+	locale: string | undefined
+) {
+	// Reset the `isCurrent` flag in this sidebar if it was previously set.
+	const lastCurrentEntry = lastCurrentEntryByLocale.get(locale);
+	if (lastCurrentEntry) {
+		lastCurrentEntry.isCurrent = false;
+	}
+	// Find the new current entry.
+	const entry = getIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
+	// Mark it as current and store it to be reset later.
+	if (entry) {
+		entry.isCurrent = true;
+		lastCurrentEntryByLocale.set(locale, entry);
+	}
+}
+
+/** Finds the current page in an intermediate sidebar. */
+function getIntermediateSidebarCurrentEntry(
+	intermediateSidebar: SidebarEntry[],
+	pathname: string,
+	locale: string | undefined
+): SidebarLink | null {
 	for (const entry of intermediateSidebar) {
 		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
-			entry.isCurrent = true;
-			return true;
+			return entry;
 		}
 
-		if (entry.type === 'group' && setIntermediateSidebarCurrentEntry(entry.entries, pathname)) {
-			return true;
+		if (entry.type === 'group') {
+			const currentEntry = getIntermediateSidebarCurrentEntry(entry.entries, pathname, locale);
+			if (currentEntry) return currentEntry;
 		}
 	}
-	return false;
+	return null;
 }
 
 /** Generates a deterministic string based on the content of the passed sidebar. */
