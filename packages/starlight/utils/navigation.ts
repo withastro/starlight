@@ -417,7 +417,7 @@ function setIntermediateSidebarCurrentEntry(
 	intermediateSidebar: SidebarEntry[],
 	pathname: string,
 	locale: string | undefined
-) {
+): void {
 	// Reset the `isCurrent` flag in this sidebar if it was previously set.
 	const lastCurrentEntry = lastCurrentEntryByLocale.get(locale);
 	if (lastCurrentEntry) {
