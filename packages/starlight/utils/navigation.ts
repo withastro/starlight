@@ -408,13 +408,8 @@ function getSidebarFromIntermediateSidebar(
 	pathname: string,
 	locale: string | undefined
 ): SidebarEntry[] {
-	let sidebar = intermediateSidebar;
-	if (!config.prerender) {
-		// In non-serverless deployments, this isolates each sidebar object against concurrent requests.
-		sidebar = structuredClone(intermediateSidebar);
-	}
-	setIntermediateSidebarCurrentEntry(sidebar, pathname, locale);
-	return sidebar;
+	setIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
+	return intermediateSidebar;
 }
 
 /** Marks the current page in an intermediate sidebar. */
