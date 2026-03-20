@@ -424,7 +424,7 @@ function setIntermediateSidebarCurrentEntry(
 		lastCurrentEntry.isCurrent = false;
 	}
 	// Find the new current entry.
-	const entry = getIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
+	const entry = getIntermediateSidebarCurrentEntry(intermediateSidebar, pathname);
 	// Mark it as current and store it to be reset later.
 	if (entry) {
 		entry.isCurrent = true;
