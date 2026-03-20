@@ -435,8 +435,7 @@ function setIntermediateSidebarCurrentEntry(
 /** Finds the current page in an intermediate sidebar. */
 function getIntermediateSidebarCurrentEntry(
 	intermediateSidebar: SidebarEntry[],
-	pathname: string,
-	locale: string | undefined
+	pathname: string
 ): SidebarLink | null {
 	for (const entry of intermediateSidebar) {
 		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
@@ -444,7 +443,7 @@ function getIntermediateSidebarCurrentEntry(
 		}
 
 		if (entry.type === 'group') {
-			const currentEntry = getIntermediateSidebarCurrentEntry(entry.entries, pathname, locale);
+			const currentEntry = getIntermediateSidebarCurrentEntry(entry.entries, pathname);
 			if (currentEntry) return currentEntry;
 		}
 	}
