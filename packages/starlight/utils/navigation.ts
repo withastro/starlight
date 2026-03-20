@@ -357,10 +357,13 @@ function sidebarFromDir(
 
 /**
  * Intermediate sidebar represents sidebar entries generated from the user config for a specific
- * locale and do not contain any information about the current page.
- * These representations are cached per locale to avoid regenerating them for each page.
- * When generating the final sidebar for a page, the intermediate sidebar is cloned and the current
- * page is marked as such.
+ * locale. These representations are cached per locale to avoid regenerating them for each page.
+ * When generating the final sidebar for a page, the current page entry in the sidebar is marked
+ * with `isCurrent` and cached. Subsequent runs then reset the previous current entry before marking
+ * the new current page.
+ * 
+ * Sidebars, like all route data, are deep cloned before the data is passed to users for mutation,
+ * so optimising with a single mutable object per locale is safe.
  *
  * @see getSidebarFromIntermediateSidebar
  */
