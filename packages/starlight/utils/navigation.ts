@@ -361,7 +361,7 @@ function sidebarFromDir(
  * When generating the final sidebar for a page, the current page entry in the sidebar is marked
  * with `isCurrent` and cached. Subsequent runs then reset the previous current entry before marking
  * the new current page.
- * 
+ *
  * Sidebars, like all route data, are deep cloned before the data is passed to users for mutation,
  * so optimising with a single mutable object per locale is safe.
  *
@@ -377,7 +377,8 @@ export function getSidebar(pathname: string, locale: string | undefined): Sideba
 		intermediateSidebar = getIntermediateSidebarFromConfig(config.sidebar, pathname, locale);
 		intermediateSidebars.set(locale, intermediateSidebar);
 	}
-	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname, locale);
+	setIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
+	return intermediateSidebar;
 }
 
 /** Get the sidebar for the current page using the specified sidebar config. */
@@ -386,8 +387,10 @@ export function getSidebarFromConfig(
 	pathname: string,
 	locale: string | undefined
 ): SidebarEntry[] {
-	const intermediateSidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
-	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname, locale);
+	const sidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
+	const currentEntry = getSidebarCurrentEntry(sidebar, pathname);
+	if (currentEntry) currentEntry.isCurrent = true;
+	return sidebar;
 }
 
 /** Get the intermediate sidebar for the current page using the specified sidebar config. */
@@ -405,16 +408,6 @@ function getIntermediateSidebarFromConfig(
 	}
 }
 
-/** Transform an intermediate sidebar into a sidebar for the current page. */
-function getSidebarFromIntermediateSidebar(
-	intermediateSidebar: SidebarEntry[],
-	pathname: string,
-	locale: string | undefined
-): SidebarEntry[] {
-	setIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
-	return intermediateSidebar;
-}
-
 /** Marks the current page in an intermediate sidebar. */
 function setIntermediateSidebarCurrentEntry(
 	intermediateSidebar: SidebarEntry[],
@@ -427,7 +420,7 @@ function setIntermediateSidebarCurrentEntry(
 		lastCurrentEntry.isCurrent = false;
 	}
 	// Find the new current entry.
-	const entry = getIntermediateSidebarCurrentEntry(intermediateSidebar, pathname);
+	const entry = getSidebarCurrentEntry(intermediateSidebar, pathname);
 	// Mark it as current and store it to be reset later.
 	if (entry) {
 		entry.isCurrent = true;
@@ -435,18 +428,15 @@ function setIntermediateSidebarCurrentEntry(
 	}
 }
 
-/** Finds the current page in an intermediate sidebar. */
-function getIntermediateSidebarCurrentEntry(
-	intermediateSidebar: SidebarEntry[],
-	pathname: string
-): SidebarLink | null {
-	for (const entry of intermediateSidebar) {
+/** Finds the current page in a sidebar. */
+function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): SidebarLink | null {
+	for (const entry of sidebar) {
 		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
 			return entry;
 		}
 
 		if (entry.type === 'group') {
-			const currentEntry = getIntermediateSidebarCurrentEntry(entry.entries, pathname);
+			const currentEntry = getSidebarCurrentEntry(entry.entries, pathname);
 			if (currentEntry) return currentEntry;
 		}
 	}
