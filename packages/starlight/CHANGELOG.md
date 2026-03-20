@@ -1,5 +1,13 @@
 # @astrojs/starlight
 
+## 0.38.2
+
+### Patch Changes
+
+- [#3759](https://github.com/withastro/starlight/pull/3759) [`f24ce99`](https://github.com/withastro/starlight/commit/f24ce99a1a859920152e177f73afddce5c11902e) Thanks [@MilesChou](https://github.com/MilesChou)! - Fixes an issue where monolingual sites using a region-specific locale (e.g., `zh-TW`) as the default would incorrectly display base language translations (e.g., `zh` Simplified Chinese) instead of the region-specific ones (e.g., `zh-TW` Traditional Chinese).
+
+- [#3768](https://github.com/withastro/starlight/pull/3768) [`a4c6c20`](https://github.com/withastro/starlight/commit/a4c6c20e67c76caf1dfdb0c67b0fa1df15ef52b7) Thanks [@delucis](https://github.com/delucis)! - Improves performance of sidebar generation for sites with very large sidebars
+
 ## 0.38.1
 
 ### Patch Changes
