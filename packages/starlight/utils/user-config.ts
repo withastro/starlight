@@ -22,7 +22,15 @@ const LocaleSchema = z.object({
 });
 
 const UserConfigSchema = z.object({
-	/** Title for your website. Will be used in metadata and as browser tab title. */
+	/**
+	 * Title for your website. Will be used in metadata and as browser tab title.
+	 * 
+	 * @example
+	 * title: 'My Docs'
+	 * 
+	 * @example
+	 * title: { en: 'My Docs' }
+	 */
 	title: TitleConfigSchema(),
 
 	/** Description metadata for your website. Can be used in page metadata. */
