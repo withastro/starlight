@@ -2,4 +2,4 @@
 "@astrojs/starlight": patch
 ---
 
-Adds examples to jsdoc for `UserConfigSchema.title`
+Adds examples to the inline documentation for `title` in the Starlight configuration object
