@@ -92,8 +92,7 @@ describe('getSidebar', () => {
 			const currentItems = items.filter((item) => item.type === 'link' && item.isCurrent);
 			expect(currentItems).toHaveLength(1);
 			const currentItem = currentItems[0];
-			if (currentItem?.type !== 'link' && currentItem?.type !== 'link')
-				throw new Error('Expected current item to be link');
+			if (currentItem?.type !== 'link') throw new Error('Expected current item to be link');
 			expect(currentItem.href).toBe(currentPath);
 		}
 	);
@@ -158,7 +157,7 @@ describe('flattenSidebar', () => {
 		// Sidebar should include some nested group items.
 		expect(sidebar.some((item) => item.type === 'group')).toBe(true);
 		// Flattened sidebar should only include link items.
-		expect(flattened.every((item) => item.type === 'link' || item.type === 'link')).toBe(true);
+		expect(flattened.every((item) => item.type === 'link')).toBe(true);
 
 		expect(flattened).toMatchInlineSnapshot(`
 			[
