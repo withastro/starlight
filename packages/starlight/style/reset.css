@@ -12,6 +12,8 @@
 	html {
 		color-scheme: dark;
 		accent-color: var(--sl-color-accent);
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
 	}
 
 	html[data-theme='light'] {

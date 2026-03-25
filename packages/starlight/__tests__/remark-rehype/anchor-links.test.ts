@@ -20,11 +20,9 @@ function renderMarkdown(
 	content: string,
 	options: { fileURL?: URL; processor?: MarkdownProcessor } = {}
 ) {
-	return (options.processor ?? processor).render(
-		content,
-		// @ts-expect-error fileURL is part of MarkdownProcessor's options
-		{ fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url) }
-	);
+	return (options.processor ?? processor).render(content, {
+		fileURL: options.fileURL ?? new URL(`./_src/content/docs/index.md`, import.meta.url),
+	});
 }
 
 test('generates anchor link markup', async () => {
@@ -38,7 +36,9 @@ test('generates an accessible link label', async () => {
 	const res = await renderMarkdown(`
 ## Some text
 `);
-	expect(res.code).includes('<span class="sr-only">Section titled “Some text”</span>');
+	expect(res.code).includes(
+		'<span class="sr-only" data-pagefind-ignore="">Section titled “Some text”</span>'
+	);
 });
 
 test('strips HTML markup in accessible link label', async () => {
@@ -49,7 +49,7 @@ test('strips HTML markup in accessible link label', async () => {
 	expect(res.code).includes('Some <em>important nested <code dir="auto">HTML</code></em>');
 	// Visually hidden label renders plain text
 	expect(res.code).includes(
-		'<span class="sr-only">Section titled “Some important nested HTML”</span>'
+		'<span class="sr-only" data-pagefind-ignore="">Section titled “Some important nested HTML”</span>'
 	);
 });
 
@@ -60,5 +60,7 @@ test('localizes accessible label for the current language', async () => {
 `,
 		{ fileURL: new URL('./_src/content/docs/fr/index.md', import.meta.url) }
 	);
-	expect(res.code).includes('<span class="sr-only">Section intitulée « Some text »</span>');
+	expect(res.code).includes(
+		'<span class="sr-only" data-pagefind-ignore="">Section intitulée « Some text »</span>'
+	);
 });

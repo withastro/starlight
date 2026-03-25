@@ -15,7 +15,7 @@ import type { Plugin, Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 import type { RemarkRehypePluginOptions } from './remark-rehype';
 import type { StarlightIcon } from '../types';
-import { Icons } from '../components/Icons';
+import { Icons } from '../components-internals/Icons';
 import { fromHtml } from 'hast-util-from-html';
 import type { Element } from 'hast';
 import { throwInvalidAsideIconError } from './asides-error';

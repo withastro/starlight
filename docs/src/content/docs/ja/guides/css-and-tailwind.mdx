@@ -7,6 +7,8 @@ import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 カスタムCSSファイルやStarlightのTailwindプラグインを使用して、Starlightサイトをスタイリングできます。
 
+サイトのデフォルトスタイルを手軽に変更するには、[コミュニティテーマ](/ja/resources/themes/)を確認してください。
+
 ## カスタムCSSスタイル
 
 Starlightサイトに適用されるスタイルをカスタマイズするには、追加のCSSファイルを作成し、Starlightのデフォルトスタイルを変更または拡張します。
@@ -47,15 +49,28 @@ Starlightサイトに適用されるスタイルをカスタマイズするに�
 
 [GitHub上の`props.css`ファイル](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)で、サイトをカスタマイズするために設定可能な、Starlightが使用しているすべてのカスタムCSSプロパティを確認できます。
 
+### カスケードレイヤー
+
+Starlightは内部で[カスケードレイヤー](https://developer.mozilla.org/ja/docs/Learn/CSS/Building_blocks/Cascade_layers)を使用して、スタイルの適用順序を管理しています。これにより、CSSの適用順序が予測可能になり、またスタイルの上書きが容易になります。レイヤーに属さないカスタムCSSは、Starlightのスタイルを上書きします。
+
+カスケードレイヤーを使用する場合は、カスタムCSSで[`@layer`](https://developer.mozilla.org/ja/docs/Web/CSS/@layer)を使用して、`starlight`レイヤーのスタイルに対する各レイヤーの優先順位を定義できます。
+
+```css "starlight"
+/* src/styles/custom.css */
+@layer my-reset, starlight, my-overrides;
+```
+
+上の例では、`my-reset`というカスタムレイヤーはすべてのStarlightレイヤーの前に適用され、`my-overrides`というカスタムレイヤーはすべてのStarlightレイヤーの後に適用されます。`my-overrides`レイヤー内のスタイルはStarlightのスタイルよりも優先されますが、`my-reset`レイヤーに設定されたスタイルはStarlightによって変更される可能性があります。
+
 ## Tailwind CSS
 
-AstroプロジェクトでのTailwind CSSのサポートは、[AstroのTailwindインテグレーション](https://docs.astro.build/ja/guides/integrations-guide/tailwind/)によって提供されています。また、Starlightは、Starlightのスタイルとの互換性を保ちつつTailwindを設定するのに役立つ、補完的なTailwindプラグインを提供しています。
+AstroプロジェクトでのTailwind CSS v4のサポートは、[TailwindのViteプラグイン](https://tailwindcss.com/docs/installation/using-vite)によって提供されています。また、Starlightは、Starlightのスタイルとの互換性を保ちつつTailwindを設定するのに役立つ、補完的なCSSを提供しています。
 
-StarlightのTailwindプラグインは、以下の設定を適用します。
+StarlightのTailwind CSSは、以下の設定を適用します。
 
 - Tailwindの`dark:`バリアントをStarlightのダークモードと連携するように設定します。
-- UStarlightのUIでTailwindの[テーマカラーとフォント](#starlightをtailwindでスタイリングする)を使用します。
-- Tailwindの[Preflight](https://tailwindcss.com/docs/preflight)リセットスタイルを無効化した上で、Tailwindのボーダーユーティリティクラスに必要なPreflightの必須部分のみ有効化します。
+- StarlightのUIでTailwindの[テーマカラーとフォント](#starlightをtailwindでスタイリングする)を使用します。
+- TailwindのPreflightリセットスタイルのうち、必要な部分を復元します。
 
 ### Tailwindを使用して新しいプロジェクトを作成する
 
@@ -91,7 +106,7 @@ yarn create astro --template starlight/tailwind
 
 <Steps>
 
-1.  AstroのTailwindインテグレーションを追加します。
+1.  以下のコマンドを実行し、ターミナルの指示に従って、プロジェクトにTailwindをセットアップします。
 
     <Tabs syncKey="pkg">
 
@@ -121,7 +136,7 @@ yarn create astro --template starlight/tailwind
 
     </Tabs>
 
-2.  StarlightのTailwindプラグインをインストールします。
+2.  StarlightのTailwind互換パッケージをインストールします。
 
     <Tabs syncKey="pkg">
 
@@ -151,22 +166,26 @@ yarn create astro --template starlight/tailwind
 
     </Tabs>
 
-3.  Tailwindのベーススタイル用のCSSファイルを、`src/tailwind.css`などの場所に作成します。
+3.  Astroによって生成された`src/styles/global.css`ファイルの内容を、Starlightとの互換性のために以下のように置き換えます。
 
     ```css
-    /* src/tailwind.css */
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+    /* src/styles/global.css */
+    @layer base, starlight, theme, components, utilities;
+
+    @import '@astrojs/starlight-tailwind';
+    @import 'tailwindcss/theme.css' layer(theme);
+    @import 'tailwindcss/utilities.css' layer(utilities);
     ```
 
-4.  上で作成したTailwindのベーススタイルを使用し、またデフォルトのベーススタイルを無効とするように、Astroの設定ファイルを更新します。
+    このTailwindテーマの設定は、Starlightの[カスケードレイヤー](#カスケードレイヤー)の順序を定義し、StarlightのTailwind補完CSSをインポートし、Tailwindのテーマとユーティリティスタイルをインポートします。プロジェクトで追加のTailwindの設定が必要な場合は、[「Tailwindの設定を複数使用する」](#tailwindの設定を複数使用する)セクションを参照してください。
 
-    ```js {11-12,16-17}
+4.  Starlightの設定を更新して、`customCss`配列の最初のアイテムとしてTailwind CSSのファイルを追加します。
+
+    ```js ins={11-12}
     // astro.config.mjs
     import { defineConfig } from 'astro/config';
     import starlight from '@astrojs/starlight';
-    import tailwind from '@astrojs/tailwind';
+    import tailwindcss from '@tailwindcss/vite';
 
     export default defineConfig({
     	integrations: [
@@ -174,70 +193,93 @@ yarn create astro --template starlight/tailwind
     			title: 'Tailwindを使ったドキュメント',
     			customCss: [
     				// Tailwindのベーススタイルへのパス
-    				'./src/tailwind.css',
+    				'./src/styles/global.css',
     			],
     		}),
-    		tailwind({
-    			// デフォルトのベーススタイルを無効にする
-    			applyBaseStyles: false,
-    		}),
     	],
+    	vite: { plugins: [tailwindcss()] },
     });
-    ```
-
-5.  StarlightのTailwindプラグインを`tailwind.config.mjs`に追加します。
-
-    ```js ins={2,7}
-    // tailwind.config.mjs
-    import starlightPlugin from '@astrojs/starlight-tailwind';
-
-    /** @type {import('tailwindcss').Config} */
-    export default {
-    	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-    	plugins: [starlightPlugin()],
-    };
     ```
 
 </Steps>
 
 ### StarlightをTailwindでスタイリングする
 
-Starlightは、[Tailwindのテーマ](https://tailwindcss.com/docs/theme)の設定値をUIで使用します。
+[Tailwindを使用して新しいStarlightプロジェクトを作成した](#tailwindを使用して新しいプロジェクトを作成する)場合、または[既存のStarlightプロジェクトにTailwindを追加した](#tailwindを既存のプロジェクトに追加する)場合、Starlightは`src/styles/global.css`ファイルにある[Tailwindテーマの設定値](https://tailwindcss.com/docs/theme)を使用してUIをスタイリングします。
 
-以下のオプションが設定されている場合、Starlightのデフォルトスタイルが上書きされます。
+以下のCSSカスタムプロパティが設定されている場合、Starlightのデフォルトスタイルが上書きされます。
 
-- `colors.accent` — リンクと現在のアイテムのハイライトに使用されます
-- `colors.gray` — バックグラウンドカラーとボーダーに使用されます
-- `fontFamily.sans` — UIとコンテンツのテキストに使用されます
-- `fontFamily.mono` — コード例に使用されます
+- `--color-accent-*` — リンクと現在のアイテムのハイライトに使用されます
+- `--color-gray-*` — 背景色とボーダーに使用されます
+- `--font-sans` — UIとコンテンツのテキストに使用されます
+- `--font-mono` — コード例に使用されます
 
-```js {12,14,18,20}
-// tailwind.config.mjs
-import starlightPlugin from '@astrojs/starlight-tailwind';
-import colors from 'tailwindcss/colors';
+```css {9,11,13,25}
+/* src/styles/global.css */
+@layer base, starlight, theme, components, utilities;
 
-/** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-	theme: {
-		extend: {
-			colors: {
-				// 好みのアクセントカラー。インディゴはStarlightのデフォルトに最も近い色です。
-				accent: colors.indigo,
-				// 好みのグレースケール。ZincはStarlightのデフォルトに最も近い色です。
-				gray: colors.zinc,
-			},
-			fontFamily: {
-				// 好みのテキストフォント。Starlightはデフォルトでシステムフォントスタックを使用します。
-				sans: ['"Atkinson Hyperlegible"'],
-				// 好みのコードフォント。Starlightはデフォルトでシステムの等幅フォントを使用します。
-				mono: ['"IBM Plex Mono"'],
-			},
-		},
-	},
-	plugins: [starlightPlugin()],
-};
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	/* 好みのテキストフォント。Starlightはデフォルトでシステムフォントスタックを使用します。 */
+	--font-sans: 'Atkinson Hyperlegible';
+	/* 好みのコードフォント。Starlightはデフォルトでシステムの等幅フォントを使用します。 */
+	--font-mono: 'IBM Plex Mono';
+	/* 好みのアクセントカラー。インディゴはStarlightのデフォルトに最も近い色です。 */
+	--color-accent-50: var(--color-indigo-50);
+	--color-accent-100: var(--color-indigo-100);
+	--color-accent-200: var(--color-indigo-200);
+	--color-accent-300: var(--color-indigo-300);
+	--color-accent-400: var(--color-indigo-400);
+	--color-accent-500: var(--color-indigo-500);
+	--color-accent-600: var(--color-indigo-600);
+	--color-accent-700: var(--color-indigo-700);
+	--color-accent-800: var(--color-indigo-800);
+	--color-accent-900: var(--color-indigo-900);
+	--color-accent-950: var(--color-indigo-950);
+	/* 好みのグレースケール。ZincはStarlightのデフォルトに最も近い色です。 */
+	--color-gray-50: var(--color-zinc-50);
+	--color-gray-100: var(--color-zinc-100);
+	--color-gray-200: var(--color-zinc-200);
+	--color-gray-300: var(--color-zinc-300);
+	--color-gray-400: var(--color-zinc-400);
+	--color-gray-500: var(--color-zinc-500);
+	--color-gray-600: var(--color-zinc-600);
+	--color-gray-700: var(--color-zinc-700);
+	--color-gray-800: var(--color-zinc-800);
+	--color-gray-900: var(--color-zinc-900);
+	--color-gray-950: var(--color-zinc-950);
+}
 ```
+
+### Tailwindの設定を複数使用する
+
+Tailwindの設定を複数使用することで、サイトの各部分に異なるスタイルを適用できます。[Starlightをサブパスで使用する](/ja/manual-setup/#サブパスへのstarlightの追加)場合や、サイトに[カスタムページ](/ja/guides/pages/#カスタムページ)を追加する場合などに便利です。たとえば、カスタムページではTailwindのPreflightリセットスタイルを使用しつつ、StarlightページにはStarlightの互換レイヤーを適用したい場合があるでしょう。
+
+以下のTailwind CSSの設定は、プラグインや追加設定なしでTailwindをセットアップするもので、非Starlightのページの出発点として使用できます。
+
+```css title="src/styles/custom-pages-tailwind.css"
+/* StarlightのCSSなしでTailwindを読み込む */
+@import 'tailwindcss';
+```
+
+<Steps>
+
+1. Starlightページには、[「Tailwindを既存のプロジェクトに追加する」](#tailwindを既存のプロジェクトに追加する)に従って、好みのTailwind CSSの設定を適用します。
+
+2. その他のページには、好みのTailwind CSSの設定をインポートして適用します。これは通常、レイアウトコンポーネントで行われ、そのレイアウトを共有するすべてのページでTailwindのスタイルを使用できるようになります。
+   ```astro
+   ---
+   // src/layouts/CustomPageLayout.astro
+   import '../styles/custom-pages-tailwind.css';
+   ---
+   ```
+
+</Steps>
+
+Tailwindテーマの設定について詳しくは、[Tailwind CSSのドキュメント](https://tailwindcss.com/docs/theme)を参照してください。
 
 ## テーマの設定
 
@@ -289,6 +331,7 @@ import ThemeDesigner from '~/components/theme-designer.astro';
 		以下のCSSを[カスタムCSSファイル](#カスタムcssスタイル)に追加して、このテーマをサイトに適用します。
 	</Fragment>
 	<Fragment slot="tailwind-docs">
-		以下の[Tailwindの設定ファイル](#starlightをtailwindでスタイリングする)の例には、`theme.extend.colors`の設定で使用するために生成された`accent`と`gray`のカラーパレットが含まれています。
+		以下のCSS変数を[Tailwind
+		CSSファイル](#starlightをtailwindでスタイリングする)の`@theme`ブロックに追加して、このテーマをサイトに適用します。
 	</Fragment>
 </ThemeDesigner>

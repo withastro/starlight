@@ -1,4 +1,4 @@
-import { assert, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import config from 'virtual:starlight/user-config';
 import { processI18nConfig, pickLang } from '../../utils/i18n';
 import type { AstroConfig, AstroUserConfig } from 'astro';
@@ -24,7 +24,7 @@ describe('processI18nConfig', () => {
 
 		expect(astroI18nConfig.defaultLocale).toBe('en');
 		expect(astroI18nConfig.locales).toEqual(['en']);
-		assert(typeof astroI18nConfig.routing !== 'string');
+		expect.assert(typeof astroI18nConfig.routing !== 'string');
 		expect(astroI18nConfig.routing?.prefixDefaultLocale).toBe(false);
 
 		// The Starlight configuration should not be modified.
@@ -273,10 +273,10 @@ describe('getLocaleDir', () => {
 	});
 
 	test('uses `getTextInfo()` when `textInfo` is not available', () => {
-		// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
-		vi.spyOn(global.Intl, 'Locale').mockImplementation(() => ({
-			getTextInfo: () => ({ direction: 'rtl' }),
-		}));
+		vi.spyOn(global.Intl, 'Locale').mockImplementation(function () {
+			// @ts-expect-error - `getTextInfo` is not typed but is available in some non-v8 based environments.
+			this.getTextInfo = () => ({ direction: 'rtl' });
+		});
 
 		const { starlightConfig } = processI18nConfig(
 			config,
@@ -290,8 +290,10 @@ describe('getLocaleDir', () => {
 	});
 
 	test('fallbacks to a list of well-known RTL languages when `textInfo` and `getTextInfo()` are not available', () => {
-		// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
-		vi.spyOn(global.Intl, 'Locale').mockImplementation((tag) => ({ language: tag }));
+		vi.spyOn(global.Intl, 'Locale').mockImplementation(function (tag) {
+			// @ts-expect-error - We are simulating the absence of `textInfo` and `getTextInfo()`.
+			this.language = tag;
+		});
 
 		const { starlightConfig } = processI18nConfig(
 			config,
