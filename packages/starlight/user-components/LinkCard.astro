@@ -10,7 +10,7 @@ interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	iconPlacement?: 'start' | 'end' | undefined;
 }
 
-const { title, description, ...attributes } = Astro.props;
+const { title, description, icon, iconPlacement = 'start', ...attributes } = Astro.props;
 ---
 
 <div class="sl-link-card">
