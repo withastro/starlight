@@ -93,6 +93,51 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 </Preview>
 
+### Add a link icon
+
+Include an icon in a link card using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
+
+The [`iconPlacement`](#iconplacement) attribute can be used to place the icon before the text by setting it to `start` (defaults to `end`).
+
+
+<Preview>
+
+```mdx {7-8}
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard
+	title="Internationalization"
+	href="/guides/i18n/"
+	description="Configure Starlight to support multiple languages."
+	icon="translate"
+	iconPlacement="start"
+/>
+```
+
+<Fragment slot="markdoc">
+
+```markdoc {5-6}
+{% linkcard
+	 title="Internationalization"
+	 href="/guides/i18n/"
+	 description="Configure Starlight to support multiple languages."
+	 icon="translate"
+	 iconPlacement="start" /%}
+```
+
+</Fragment>
+
+<LinkCard
+	slot="preview"
+	title="Internationalization"
+	href="/guides/i18n/"
+	description="Configure Starlight to support multiple languages."
+	icon="translate"
+	iconPlacement="start"
+/>
+
+</Preview>
+
 ### Group link cards
 
 Display multiple link cards side-by-side when there’s enough space by grouping them using the [`<CardGrid>`](/components/card-grids/) component.
@@ -123,3 +168,16 @@ The URL to link to when the card is interacted with.
 **type:** `string`
 
 An optional description to display below the title.
+
+### `icon`
+
+**type:** `string`
+
+A link card can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
+
+### `iconPlacement`
+
+**type:** `'start' | 'end'`
+**default:** `'end'`
+
+Determines the placement of the icon in relation to the link card text.
