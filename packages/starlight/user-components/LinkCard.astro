@@ -1,10 +1,13 @@
 ---
 import Icon from './Icon.astro';
 import type { HTMLAttributes } from 'astro/types';
+import type { StarlightIcon } from '../components-internals/Icons.ts';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
 	description?: string;
+	icon?: StarlightIcon | undefined;
+	iconPlacement?: 'start' | 'end' | undefined;
 }
 
 const { title, description, ...attributes } = Astro.props;
