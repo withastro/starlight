@@ -76,7 +76,7 @@ export const collections = {
 };
 ```
 
-Starlightは、コレクションがレガシーなコンテンツコレクションの実装で処理される[`legacy.collections`フラグ](https://docs.astro.build/ja/reference/legacy-flags/)もサポートしています。既存のAstroプロジェクトがあり、現時点ではローダーを使用するためにコレクションを変更できない場合に便利です。
+Starlightは、v4までの従来のコンテンツコレクション機能の一部を保持する[`legacy.collectionsBackwardsCompat`フラグ](https://docs.astro.build/ja/reference/legacy-flags/#collectionsbackwardscompat)もサポートしています。これは既存のAstroプロジェクトがあり、v5.0で導入されたContent Layer APIへ移行するために、既存のコレクション設定を現状から変更できない場合に役立ちます。
 
 ### コンテンツの追加
 
@@ -128,3 +128,5 @@ import { FileTree } from '@astrojs/starlight/components';
 SSRを有効にするには、Astroドキュメントの「[オンデマンドレンダリングアダプター](https://docs.astro.build/ja/guides/on-demand-rendering/)」ガイドに従い、Starlightプロジェクトにサーバーアダプターを追加します。
 
 Starlightによって生成されるドキュメントページは、プロジェクトの出力モードに関係なくデフォルトでプリレンダリングされます。Starlightページのプリレンダリングを無効にするには、[`prerender`設定オプション](/ja/reference/configuration/#prerender)を`false`に設定します。
+
+ドキュメントプロジェクトでサーバーサイドレンダリングを有効にするために[Cloudflareアダプター](https://docs.astro.build/ja/guides/integrations-guide/cloudflare/)を使用している場合は、必ず[Wrangler設定ファイルに`nodejs_compat`互換性フラグも追加してください](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started)。
