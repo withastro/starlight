@@ -418,9 +418,10 @@ export const collections = {
 
 次の例では、`description`を必須にするために厳し目の型を指定し、さらにオプションの`category`フィールドを新規追加しています。
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
@@ -441,9 +442,10 @@ export const collections = {
 
 [Astroの`image()`ヘルパー](https://docs.astro.build/ja/guides/images/#コンテンツコレクションと画像)を利用するには、拡張したスキーマを返す関数を使用します。
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
