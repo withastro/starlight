@@ -78,17 +78,12 @@ description: 이것은 내 Starlight 기반 사이트의 페이지입니다.
 사용자 정의 페이지에서 Starlight 레이아웃을 사용하려면 [`<StarlightPage>` 컴포넌트](#starlightpage-컴포넌트)로 페이지 콘텐츠를 감싸세요.
 이는 콘텐츠를 동적으로 생성하지만 여전히 Starlight의 디자인을 사용하려는 경우 유용할 수 있습니다.
 
-이 컴포넌트는 [캐스케이드 레이어](/ko/guides/css-and-tailwind/#캐스케이드-레이어)를 설정하고 예측 가능한 CSS 순서를 보장하기 위해 파일에서 가장 먼저 가져와야 합니다.
-
 사용자 정의 페이지에서 [`<AnchorHeading>` 컴포넌트](#anchorheading-컴포넌트)를 사용하여 Starlight의 Markdown 앵커 링크 스타일과 일치하는 앵커 링크를 제목에 추가할 수 있습니다.
 
 ```astro
 ---
 // src/pages/custom-page/example.astro
-// 캐스케이드 레이어를 설정하기 위해 `<StarlightPage>` 컴포넌트를 가장 먼저 가져옵니다.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-
-// 사용자 정의 페이지에서 사용하려는 다른 모든 컴포넌트를 가져옵니다.
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro';
 import CustomComponent from './CustomComponent.astro';
 ---
@@ -112,7 +107,6 @@ import CustomComponent from './CustomComponent.astro';
 
 ```astro
 ---
-// 캐스케이드 레이어를 설정하기 위해 `<StarlightPage>` 컴포넌트를 가장 먼저 가져옵니다.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
@@ -120,8 +114,6 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 	<!-- 사용자 정의 페이지 콘텐츠 -->
 </StarlightPage>
 ```
-
-Astro에서 [가져오기 순서](https://docs.astro.build/ko/guides/styling/#가져오기-순서)가 작동하는 방식 때문에, Starlight가 스타일 순서를 관리하기 위해 사용하는 [캐스케이드 레이어](/ko/guides/css-and-tailwind/#캐스케이드-레이어)를 설정하기 위해 파일에서 `<StarlightPage />` 컴포넌트를 가장 먼저 가져와야 합니다.
 
 `<StarlightPage />` 컴포넌트는 다음 props를 허용합니다.
 

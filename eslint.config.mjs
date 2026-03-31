@@ -66,7 +66,12 @@ export default tseslint.config(
 			// or starting with `_`.
 			'@typescript-eslint/no-unused-vars': [
 				'error',
-				{ ignoreRestSiblings: true, destructuredArrayIgnorePattern: '^_', varsIgnorePattern: '^_' },
+				{
+					ignoreRestSiblings: true,
+					destructuredArrayIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					argsIgnorePattern: '^_',
+				},
 			],
 			// Allow using `any` in rest parameter arrays, e.g. `(...args: any[]) => void`.
 			'@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],

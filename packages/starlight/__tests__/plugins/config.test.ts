@@ -61,7 +61,7 @@ describe('validation', () => {
 					[],
 					createTestPluginContext()
 				)
-		).rejects.toThrowError(/Invalid config passed to starlight integration/);
+		).rejects.toThrow(/Invalid config passed to starlight integration/);
 	});
 
 	test('validates plugins configuration before running them', async () => {
@@ -73,7 +73,7 @@ describe('validation', () => {
 					[{ name: 'invalid-plugin' }],
 					createTestPluginContext()
 				)
-		).rejects.toThrowError(/Invalid plugins config passed to starlight integration/);
+		).rejects.toThrow(/Invalid plugins config passed to starlight integration/);
 	});
 
 	test('validates configuration updates from plugins do not update the `plugins` config key', async () => {
@@ -94,7 +94,7 @@ describe('validation', () => {
 					],
 					createTestPluginContext()
 				)
-		).rejects.toThrowError(
+		).rejects.toThrow(
 			/The `test-plugin` plugin tried to update the `plugins` config key which is not supported./
 		);
 	});
@@ -117,7 +117,7 @@ describe('validation', () => {
 					],
 					createTestPluginContext()
 				)
-		).rejects.toThrowError(
+		).rejects.toThrow(
 			/The `test-plugin` plugin tried to update the `routeMiddleware` config key which is not supported./
 		);
 	});
@@ -140,7 +140,7 @@ describe('validation', () => {
 					],
 					createTestPluginContext()
 				)
-		).rejects.toThrowError(/Invalid config update provided by the 'test-plugin' plugin/);
+		).rejects.toThrow(/Invalid config update provided by the 'test-plugin' plugin/);
 	});
 });
 

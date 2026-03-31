@@ -2,10 +2,7 @@ import { z } from 'astro/zod';
 
 export type TitleUserConfig = string | Record<string, string>;
 
-export const TitleConfigSchema = () =>
-	z
-		.union([z.string(), z.record(z.string())])
-		.describe('Title for your website. Will be used in metadata and as browser tab title.');
+export const TitleConfigSchema = () => z.union([z.string(), z.record(z.string(), z.string())]);
 
 // transform the title for runtime use
 export const TitleTransformConfigSchema = (defaultLang: string) =>
@@ -14,9 +11,10 @@ export const TitleTransformConfigSchema = (defaultLang: string) =>
 			return { [defaultLang]: title };
 		}
 		if (!title[defaultLang] && title[defaultLang] !== '') {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
+			ctx.issues.push({
+				code: 'custom',
 				message: `Title must have a key for the default language "${defaultLang}"`,
+				input: title,
 			});
 			return z.NEVER;
 		}

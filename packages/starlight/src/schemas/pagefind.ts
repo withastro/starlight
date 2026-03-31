@@ -107,18 +107,19 @@ const pagefindIndexOptionsSchema = z.object({
 	basePath: z.string().optional(),
 	baseUrl: z.string().optional(),
 	indexWeight: indexWeightSchema,
-	mergeFilter: z.record(z.string(), z.string().or(z.array(z.string()).nonempty())).optional(),
+	mergeFilter: z.record(z.string(), z.string().or(z.tuple([z.string()], z.string()))).optional(),
 	language: z.string().optional(),
 	// We apply a default value to merged indexes in order to share the same ranking for them and the current site when not set explicitly.
-	ranking: pagefindRankingWeightsSchema.default({}),
+	ranking: pagefindRankingWeightsSchema.prefault({}),
 });
 
 const pagefindSchema = z.object({
 	indexWeight: indexWeightSchema,
-	ranking: pagefindRankingWeightsSchema.default({}),
+	ranking: pagefindRankingWeightsSchema.prefault({}),
 	mergeIndex: z
 		.array(
-			pagefindIndexOptionsSchema.extend({
+			z.object({
+				...pagefindIndexOptionsSchema.shape,
 				bundlePath: z.string(),
 			})
 		)

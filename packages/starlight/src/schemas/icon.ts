@@ -1,5 +1,5 @@
 import { z } from 'astro/zod';
-import { Icons, type StarlightIcon } from '../components/Icons';
+import { Icons, type StarlightIcon } from '../components-internals/Icons';
 
 /** String that matches the name of one of Starlight’s built-in icons. */
 export type IconUserConfig = StarlightIcon;

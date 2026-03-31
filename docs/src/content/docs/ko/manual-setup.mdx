@@ -76,8 +76,8 @@ export const collections = {
 };
 ```
 
-Starlight는 레거시 콘텐츠 컬렉션 구현을 사용하여 컬렉션을 처리하는 [`legacy.collections` 플래그](https://docs.astro.build/ko/reference/legacy-flags/)도 지원합니다.
-이 플래그는 기존 Astro 프로젝트가 있고 현재 로더를 사용하기 위해 컬렉션을 변경할 수 없는 경우에 유용합니다.
+Starlight는 일부 v4 레거시 콘텐츠 컬렉션 기능을 유지하는 [`legacy.collectionsBackwardsCompat` 플래그](https://docs.astro.build/ko/reference/legacy-flags/#collectionsbackwardscompat)도 지원합니다.
+이미 진행 중인 Astro 프로젝트가 있고, 현재 시점에서 컬렉션을 수정하여 v5.0에서 도입된 Content Layer API로 마이그레이션할 수 없는 경우 이 방법이 유용합니다.
 
 ### 콘텐츠 추가
 
@@ -130,3 +130,5 @@ import { FileTree } from '@astrojs/starlight/components';
 SSR을 사용하려면 Astro 문서에 있는 ["요청 시 렌더링 어댑터"](https://docs.astro.build/ko/guides/on-demand-rendering/) 가이드에 따라 Starlight 프로젝트에 서버 어댑터를 추가하세요.
 
 Starlight에서 생성된 문서 페이지는 프로젝트의 출력 모드에 관계없이 기본적으로 미리 렌더링됩니다. Starlight 페이지의 사전 렌더링을 선택 해제하려면 [`prerender` 구성 옵션](/ko/reference/configuration/#prerender)을 `false`로 설정하세요.
+
+문서 프로젝트에서 서버 렌더링을 활성화하기 위해 [Cloudflare 어댑터](https://docs.astro.build/ko/guides/integrations-guide/cloudflare/)를 사용하고 있다면, [Wrangler 구성 파일에 `nodejs_compat` 호환성 플래그도 추가](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started)했는지 확인하세요.

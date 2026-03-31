@@ -17,7 +17,10 @@ import {
 	type TitleUserConfig,
 } from '../schemas/site-title';
 import { SocialLinksSchema, type SocialLinksUserConfig } from '../schemas/social';
-import { TableOfContentsSchema, type TableOfContentsUserConfig } from '../schemas/tableOfContents';
+import {
+	UserConfigTableOfContentsSchema,
+	type TableOfContentsUserConfig,
+} from '../schemas/tableOfContents';
 import { BuiltInDefaultLocale } from './i18n';
 import { LocaleConfigSchema, type LocaleUserConfig } from '../schemas/locale';
 import type { Prettify } from './types';
@@ -183,7 +186,7 @@ const UserConfigSchema = z.object({
 	description: z.string().optional(),
 	logo: LogoConfigSchema(),
 	social: SocialLinksSchema(),
-	tableOfContents: TableOfContentsSchema(),
+	tableOfContents: UserConfigTableOfContentsSchema(),
 	editLink: z.object({ baseUrl: z.string().url().optional() }).optional().default({}),
 	locales: z
 		.object({ root: LocaleConfigSchema().required({ lang: true }).optional() })
@@ -201,9 +204,10 @@ const UserConfigSchema = z.object({
 
 				// Error if parsing the language tag failed.
 				if (!normalizedLang) {
-					ctx.addIssue({
-						code: z.ZodIssueCode.custom,
+					ctx.issues.push({
+						code: 'custom',
 						message: `Could not validate language tag "${lang}" at locales.${key}.lang.`,
+						input: lang,
 					});
 					return z.NEVER;
 				}
@@ -225,7 +229,25 @@ const UserConfigSchema = z.object({
 	defaultLocale: z.string().optional(),
 	sidebar: SidebarItemSchema.array().optional(),
 	head: HeadConfigSchema({ source: 'config' }),
-	customCss: z.string().array().optional().default([]),
+	customCss: z
+		.string()
+		.array()
+		.optional()
+		.default([])
+		.superRefine((paths, ctx) => {
+			const invalidPathRegex = /^\.?\/public\/.+$/;
+			const invalidPaths = paths.filter((path) => invalidPathRegex.test(path));
+			if (invalidPaths.length > 0) {
+				ctx.issues.push({
+					code: 'custom',
+					message:
+						`These paths in your Starlight \`customCss\` config are invalid: ${invalidPaths.map((path) => `\`"${path}"\``).join(', ')}\n\n` +
+						`CSS files specified in \`customCss\` should be in the \`src/\` directory, not the \`public/\` directory.\n\n` +
+						`You should move these CSS files into the \`src/\` directory and update the path in \`customCss\` to match.`,
+					input: paths,
+				});
+			}
+		}),
 	lastUpdated: z.boolean().default(false),
 	pagination: z.boolean().default(true),
 	favicon: FaviconSchema(),
@@ -251,24 +273,27 @@ const UserConfigSchema = z.object({
 			const invalidPathRegex = /^\.?\/src\/middleware(?:\/index)?\.[jt]s$/;
 			const invalidPaths = middlewares.filter((middleware) => invalidPathRegex.test(middleware));
 			for (const invalidPath of invalidPaths) {
-				ctx.addIssue({
+				ctx.issues.push({
 					code: 'custom',
 					message:
 						`The \`"${invalidPath}"\` path in your Starlight \`routeMiddleware\` config conflicts with Astro’s middleware locations.\n\n` +
 						`You should rename \`${invalidPath}\` to something else like \`./src/starlightRouteData.ts\` and update the \`routeMiddleware\` file path to match.\n\n` +
 						'- More about Starlight route middleware: https://starlight.astro.build/guides/route-data/#how-to-customize-route-data\n' +
 						'- More about Astro middleware: https://docs.astro.build/en/guides/middleware/',
+					input: middlewares,
 				});
 			}
 		}),
 	markdown: z
 		.object({
 			headingLinks: z.boolean().default(true),
+			processedDirs: z.string().array().default([]),
 		})
-		.default({}),
+		.prefault({}),
 });
 
-export const StarlightConfigSchema = UserConfigSchema.strict()
+export const StarlightConfigSchema = z
+	.strictObject({ ...UserConfigSchema.shape })
 	.transform((config) => ({
 		...config,
 		// Pagefind only defaults to true if prerender is also true.
@@ -278,7 +303,7 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 				: config.pagefind,
 	}))
 	.refine((config) => !(!config.prerender && config.pagefind), {
-		message: 'Pagefind search is not supported with prerendering disabled.',
+		error: 'Pagefind search is not supported with prerendering disabled.',
 	})
 	.transform(({ title, locales, defaultLocale, ...config }, ctx) => {
 		const configuredLocales = Object.keys(locales ?? {});
@@ -299,12 +324,13 @@ export const StarlightConfigSchema = UserConfigSchema.strict()
 
 			if (!defaultLocaleConfig) {
 				const availableLocales = configuredLocales.map((l) => `"${l}"`).join(', ');
-				ctx.addIssue({
+				ctx.issues.push({
 					code: 'custom',
 					message:
 						'Could not determine the default locale. ' +
 						'Please make sure `defaultLocale` in your Starlight config is one of ' +
 						availableLocales,
+					input: locales,
 				});
 				return z.NEVER;
 			}

@@ -1,4 +1,4 @@
-import { assert, describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import {
 	getAllNewestCommitDate,
 	getNewestCommitDate,
@@ -119,13 +119,13 @@ describe('getAllNewestCommitDate', () => {
 
 		for (const [file, date] of latestDates.entries()) {
 			const expectedDate = expectedDates.get(file);
-			assert.ok(expectedDate, `Unexpected tracked file: ${file}`);
+			expect.assert(expectedDate, `Unexpected tracked file: ${file}`);
 			expectCommitDateToEqual(new Date(date), expectedDate);
 		}
 
 		for (const file of expectedDates.keys()) {
 			const latestDate = latestDates.get(file);
-			assert.ok(latestDate, `Missing tracked file: ${file}`);
+			expect.assert(latestDate, `Missing tracked file: ${file}`);
 		}
 	});
 
@@ -152,9 +152,11 @@ describe('getAllNewestCommitDate', () => {
 	});
 });
 
-function expectCommitDateToEqual(commitDate: CommitDate, expectedDateStr: ISODate) {
-	const expectedDate = new Date(expectedDateStr);
-	expect(commitDate).toStrictEqual(expectedDate);
-}
+const expectCommitDateToEqual = vi.defineHelper(
+	(commitDate: CommitDate, expectedDateStr: ISODate) => {
+		const expectedDate = new Date(expectedDateStr);
+		expect(commitDate).toStrictEqual(expectedDate);
+	}
+);
 
 type CommitDate = ReturnType<typeof getNewestCommitDate>;

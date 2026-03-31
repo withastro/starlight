@@ -355,3 +355,9 @@ Share themes for Starlight you built by adding them to our [themes](https://star
    - The `description` attribute should briefly describe your theme’s aesthetic, inspiration, or key features.
    - The `href` attribute must be the URL of your theme’s website demonstrating what the theme looks like.
    - The `previews` attribute must be an object listing the filenames of the screenshots you added in step 3.
+
+## Preview releases
+
+Maintainers can create preview releases for any pull requests containing pending changesets by adding the `pr-preview` label to such PRs. When doing so, a GitHub Actions workflow will be triggered to create a preview release for all necessary packages and a comment will be added to the PR with instructions on how to install the preview packages.
+
+To update a preview release after making additional changes to the PR, add the `pr-preview` label again to re-trigger the workflow.

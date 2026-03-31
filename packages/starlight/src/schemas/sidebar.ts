@@ -15,7 +15,7 @@ interface SidebarBaseUserConfig {
 
 const SidebarBaseSchema = z.object({
 	label: z.string(),
-	translations: z.record(z.string()).default({}),
+	translations: z.record(z.string(), z.string()).default({}),
 	badge: I18nBadgeConfigSchema(),
 });
 
@@ -32,7 +32,8 @@ interface SidebarGroupUserConfig extends SidebarBaseUserConfig {
 	collapsed?: boolean | undefined;
 }
 
-const SidebarGroupSchema = SidebarBaseSchema.extend({
+const SidebarGroupSchema = z.object({
+	...SidebarBaseSchema.shape,
 	attrs: z.never().optional(),
 	collapsed: z.boolean().default(false),
 });
@@ -41,9 +42,13 @@ const SidebarGroupSchema = SidebarBaseSchema.extend({
 // `Record<string, string | number | boolean | undefined>` but typed as `HTMLAttributes<'a'>`
 // for user convenience.
 const linkHTMLAttributesSchema = z.record(
+	z.string(),
 	z.union([z.string(), z.number(), z.boolean(), z.undefined(), z.null()])
-) as z.Schema<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>;
-export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>;
+) as z.ZodType<LinkHTMLAttributes, LinkHTMLAttributes>;
+export type LinkHTMLAttributes = Omit<
+	HTMLAttributes<'a'>,
+	keyof AstroBuiltinAttributes | 'children'
+>;
 
 export const SidebarLinkItemHTMLAttributesSchema = () => linkHTMLAttributesSchema.default({});
 
@@ -54,10 +59,10 @@ interface SidebarLinkItemUserConfig extends SidebarBaseUserConfig {
 	attrs?: LinkHTMLAttributes | undefined;
 }
 
-const SidebarLinkItemSchema = SidebarBaseSchema.extend({
-	link: z.string(),
+const SidebarLinkItemSchema = z.strictObject({
+	...SidebarBaseSchema.shape,
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
-}).strict();
+});
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
 
 interface AutoSidebarGroupUserConfig extends SidebarGroupUserConfig {
@@ -78,13 +83,14 @@ interface AutoSidebarGroupUserConfig extends SidebarGroupUserConfig {
 	};
 }
 
-const AutoSidebarGroupSchema = SidebarGroupSchema.extend({
+const AutoSidebarGroupSchema = z.strictObject({
+	...SidebarGroupSchema.shape,
 	autogenerate: z.object({
 		directory: z.string().transform(stripLeadingAndTrailingSlashes),
 		collapsed: z.boolean().optional(),
 		attrs: SidebarLinkItemHTMLAttributesSchema(),
 	}),
-}).strict();
+});
 export type AutoSidebarGroup = z.infer<typeof AutoSidebarGroupSchema>;
 
 type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
@@ -114,24 +120,22 @@ type ManualSidebarGroupUserConfig = SidebarGroupUserConfig & {
 	items: SidebarItemUserConfig[];
 };
 
-const ManualSidebarGroupSchema: z.ZodType<
-	ManualSidebarGroupOutput,
-	z.ZodTypeDef,
-	ManualSidebarGroupInput
-> = SidebarGroupSchema.extend({
-	/** Array of links and subcategories to display in this category. */
-	items: z.lazy(() =>
-		z
-			.union([
-				SidebarLinkItemSchema,
-				ManualSidebarGroupSchema,
-				AutoSidebarGroupSchema,
-				InternalSidebarLinkItemSchema,
-				InternalSidebarLinkItemShorthandSchema,
-			])
-			.array()
-	),
-}).strict();
+const ManualSidebarGroupSchema: z.ZodType<ManualSidebarGroupOutput, ManualSidebarGroupInput> =
+	z.strictObject({
+		...SidebarGroupSchema.shape,
+		/** Array of links and subcategories to display in this category. */
+		items: z.lazy(() =>
+			z
+				.union([
+					SidebarLinkItemSchema,
+					ManualSidebarGroupSchema,
+					AutoSidebarGroupSchema,
+					InternalSidebarLinkItemSchema,
+					InternalSidebarLinkItemShorthandSchema,
+				])
+				.array()
+		),
+	});
 
 interface InternalSidebarLinkItemUserConfig extends Omit<SidebarBaseUserConfig, 'label'> {
 	/** The visible label for this item in the sidebar. */
@@ -142,7 +146,8 @@ interface InternalSidebarLinkItemUserConfig extends Omit<SidebarBaseUserConfig, 
 	attrs?: LinkHTMLAttributes | undefined;
 }
 
-const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({ label: true }).extend({
+const InternalSidebarLinkItemSchema = z.object({
+	...SidebarBaseSchema.partial({ label: true }).shape,
 	slug: z.string(),
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
 });

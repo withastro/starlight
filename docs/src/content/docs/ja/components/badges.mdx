@@ -33,31 +33,31 @@ import { Badge } from '@astrojs/starlight/components';
 ```mdx
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="ノート" variant="note" />
-<Badge text="成功" variant="success" />
-<Badge text="ヒント" variant="tip" />
-<Badge text="注意" variant="caution" />
-<Badge text="危険" variant="danger" />
+- <Badge text="ノート" variant="note" />
+- <Badge text="成功" variant="success" />
+- <Badge text="ヒント" variant="tip" />
+- <Badge text="注意" variant="caution" />
+- <Badge text="危険" variant="danger" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc
-{% badge text="ノート" variant="note" /%}
-{% badge text="危険" variant="success" /%}
-{% badge text="ヒント" variant="tip" /%}
-{% badge text="注意" variant="caution" /%}
-{% badge text="危険" variant="danger" /%}
+- {% badge text="ノート" variant="note" /%}
+- {% badge text="危険" variant="success" /%}
+- {% badge text="ヒント" variant="tip" /%}
+- {% badge text="注意" variant="caution" /%}
+- {% badge text="危険" variant="danger" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="ノート" variant="note" />
-	<Badge text="成功" variant="success" />
-	<Badge text="ヒント" variant="tip" />
-	<Badge text="注意" variant="caution" />
-	<Badge text="危険" variant="danger" />
+	- <Badge text="ノート" variant="note" />
+	- <Badge text="成功" variant="success" />
+	- <Badge text="ヒント" variant="tip" />
+	- <Badge text="注意" variant="caution" />
+	- <Badge text="危険" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -71,25 +71,25 @@ import { Badge } from '@astrojs/starlight/components';
 ```mdx /size="\w+"/
 import { Badge } from '@astrojs/starlight/components';
 
-<Badge text="新着" size="small" />
-<Badge text="新着かつ改良" size="medium" />
-<Badge text="新着、改良、もっと大きく" size="large" />
+- <Badge text="新着" size="small" />
+- <Badge text="新着かつ改良" size="medium" />
+- <Badge text="新着、改良、もっと大きく" size="large" />
 ```
 
 <Fragment slot="markdoc">
 
 ```markdoc /size="\w+"/
-{% badge text="新着" size="small" /%}
-{% badge text="新着かつ改良" size="medium" /%}
-{% badge text="新着、改良、もっと大きく" size="large" /%}
+- {% badge text="新着" size="small" /%}
+- {% badge text="新着かつ改良" size="medium" /%}
+- {% badge text="新着、改良、もっと大きく" size="large" /%}
 ```
 
 </Fragment>
 
 <Fragment slot="preview">
-	<Badge text="新着" size="small" />
-	<Badge text="新着かつ改良" size="medium" />
-	<Badge text="新着、改良、もっと大きく" size="large" />
+	- <Badge text="新着" size="small" />
+	- <Badge text="新着かつ改良" size="medium" />
+	- <Badge text="新着、改良、もっと大きく" size="large" />
 </Fragment>
 
 </Preview>

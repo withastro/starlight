@@ -28,7 +28,8 @@ import type {
 	Route,
 	SidebarEntry,
 } from './routing/types';
-import { localeToLang, localizedId, slugToPathname } from './slugs';
+import { localeToLang, localizedFilePath, slugToPathname } from './slugs';
+import { isAbsoluteUrl } from './url';
 import type { StarlightConfig } from './user-config';
 
 const DirKey = Symbol('DirKey');
@@ -124,13 +125,10 @@ function groupFromAutogenerateConfig(
 	};
 }
 
-/** Check if a string starts with one of `http://` or `https://`. */
-const isAbsolute = (link: string) => /^https?:\/\//.test(link);
-
 /** Create a link entry from a manual link item in user config. */
 function linkFromSidebarLinkItem(item: SidebarLinkItem, locale: string | undefined) {
 	let href = item.link;
-	if (!isAbsolute(href)) {
+	if (!isAbsoluteUrl(href)) {
 		href = ensureLeadingSlash(href);
 		// Inject current locale into link.
 		if (locale) href = '/' + locale + href;
@@ -147,7 +145,7 @@ function linkFromInternalSidebarLinkItem(
 	// Astro passes root `index.[md|mdx]` entries with a slug of `index`
 	const slug = item.slug === 'index' ? '' : item.slug;
 	const localizedSlug = locale ? (slug ? locale + '/' + slug : locale) : slug;
-	const route = routes.find((entry) => localizedSlug === entry.slug);
+	const route = routes.find((entry) => localizedSlug === entry.id);
 	if (!route) {
 		const hasExternalSlashes = item.slug.at(0) === '/' || item.slug.at(-1) === '/';
 		if (hasExternalSlashes) {
@@ -172,7 +170,7 @@ function linkFromInternalSidebarLinkItem(
 	const badge = item.badge ?? frontmatter.sidebar?.badge;
 	const attrs = { ...frontmatter.sidebar?.attrs, ...item.attrs };
 	return makeSidebarLink(
-		slugToPathname(route.slug),
+		slugToPathname(route.id),
 		label,
 		getSidebarBadge(badge, locale, label),
 		attrs
@@ -186,7 +184,7 @@ function makeSidebarLink(
 	badge?: Badge,
 	attrs?: LinkHTMLAttributes
 ): SidebarLink {
-	if (!isAbsolute(href)) {
+	if (!isAbsoluteUrl(href)) {
 		href = formatPath(href);
 	}
 	return makeLink({ label, href, badge, attrs });
@@ -227,12 +225,13 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 	return relativePath.split('/');
 }
 
-/** Return the path of a route relative to the root of the collection, which is equivalent to legacy IDs. */
+/** Return the path of a route relative to the root of the collection. */
 function getRoutePathRelativeToCollectionRoot(route: Route, locale: string | undefined) {
-	return project.legacyCollections
-		? route.id
-		: // For collections with a loader, use a localized filePath relative to the collection
-			localizedId(route.entry.filePath.replace(`${docsCollectionPathFromRoot}/`, ''), locale);
+	// Use a localized filePath relative to the collection
+	return localizedFilePath(
+		route.entry.filePath.replace(`${docsCollectionPathFromRoot}/`, ''),
+		locale
+	);
 }
 
 /** Turn a flat array of routes into a tree structure. */
@@ -276,7 +275,7 @@ function treeify(routes: Route[], locale: string | undefined, baseDir: string): 
 /** Create a link entry for a given content collection entry. */
 function linkFromRoute(route: Route, attrs?: LinkHTMLAttributes): SidebarLink {
 	return makeSidebarLink(
-		slugToPathname(route.slug),
+		slugToPathname(route.id),
 		route.entry.data.sidebar.label || route.entry.data.title,
 		route.entry.data.sidebar.badge,
 		{ ...attrs, ...route.entry.data.sidebar.attrs }
@@ -302,7 +301,7 @@ function sortDirEntries(dir: [string, Dir | Route][]): [string, Dir | Route][] {
 		// Pages are sorted by order in ascending order.
 		if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
 		// If two pages have the same order value they will be sorted by their slug.
-		return collator.compare(isDir(a) ? a[SlugKey] : a.slug, isDir(b) ? b[SlugKey] : b.slug);
+		return collator.compare(isDir(a) ? a[SlugKey] : a.id, isDir(b) ? b[SlugKey] : b.id);
 	});
 }
 
@@ -358,14 +357,18 @@ function sidebarFromDir(
 
 /**
  * Intermediate sidebar represents sidebar entries generated from the user config for a specific
- * locale and do not contain any information about the current page.
- * These representations are cached per locale to avoid regenerating them for each page.
- * When generating the final sidebar for a page, the intermediate sidebar is cloned and the current
- * page is marked as such.
+ * locale. These representations are cached per locale to avoid regenerating them for each page.
+ * When generating the final sidebar for a page, the current page entry in the sidebar is marked
+ * with `isCurrent` and cached. Subsequent runs then reset the previous current entry before marking
+ * the new current page.
+ *
+ * Sidebars, like all route data, are deep cloned before the data is passed to users for mutation,
+ * so optimising with a single mutable object per locale is safe.
  *
  * @see getSidebarFromIntermediateSidebar
  */
 const intermediateSidebars = new Map<string | undefined, SidebarEntry[]>();
+const lastCurrentEntryByLocale = new Map<string | undefined, SidebarLink>();
 
 /** Get the sidebar for the current page using the global config. */
 export function getSidebar(pathname: string, locale: string | undefined): SidebarEntry[] {
@@ -374,7 +377,8 @@ export function getSidebar(pathname: string, locale: string | undefined): Sideba
 		intermediateSidebar = getIntermediateSidebarFromConfig(config.sidebar, pathname, locale);
 		intermediateSidebars.set(locale, intermediateSidebar);
 	}
-	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
+	setIntermediateSidebarCurrentEntry(intermediateSidebar, pathname, locale);
+	return intermediateSidebar;
 }
 
 /** Get the sidebar for the current page using the specified sidebar config. */
@@ -383,8 +387,10 @@ export function getSidebarFromConfig(
 	pathname: string,
 	locale: string | undefined
 ): SidebarEntry[] {
-	const intermediateSidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
-	return getSidebarFromIntermediateSidebar(intermediateSidebar, pathname);
+	const sidebar = getIntermediateSidebarFromConfig(sidebarConfig, pathname, locale);
+	const currentEntry = getSidebarCurrentEntry(sidebar, pathname);
+	if (currentEntry) currentEntry.isCurrent = true;
+	return sidebar;
 }
 
 /** Get the intermediate sidebar for the current page using the specified sidebar config. */
@@ -402,32 +408,39 @@ function getIntermediateSidebarFromConfig(
 	}
 }
 
-/** Transform an intermediate sidebar into a sidebar for the current page. */
-function getSidebarFromIntermediateSidebar(
-	intermediateSidebar: SidebarEntry[],
-	pathname: string
-): SidebarEntry[] {
-	const sidebar = structuredClone(intermediateSidebar);
-	setIntermediateSidebarCurrentEntry(sidebar, pathname);
-	return sidebar;
-}
-
-/** Marks the current page as such in an intermediate sidebar. */
+/** Marks the current page in an intermediate sidebar. */
 function setIntermediateSidebarCurrentEntry(
 	intermediateSidebar: SidebarEntry[],
-	pathname: string
-): boolean {
-	for (const entry of intermediateSidebar) {
+	pathname: string,
+	locale: string | undefined
+): void {
+	// Reset the `isCurrent` flag in this sidebar if it was previously set.
+	const lastCurrentEntry = lastCurrentEntryByLocale.get(locale);
+	if (lastCurrentEntry) {
+		lastCurrentEntry.isCurrent = false;
+	}
+	// Find the new current entry.
+	const entry = getSidebarCurrentEntry(intermediateSidebar, pathname);
+	// Mark it as current and store it to be reset later.
+	if (entry) {
+		entry.isCurrent = true;
+		lastCurrentEntryByLocale.set(locale, entry);
+	}
+}
+
+/** Finds the current page in a sidebar. */
+function getSidebarCurrentEntry(sidebar: SidebarEntry[], pathname: string): SidebarLink | null {
+	for (const entry of sidebar) {
 		if (entry.type === 'link' && pathsMatch(encodeURI(entry.href), pathname)) {
-			entry.isCurrent = true;
-			return true;
+			return entry;
 		}
 
-		if (entry.type === 'group' && setIntermediateSidebarCurrentEntry(entry.entries, pathname)) {
-			return true;
+		if (entry.type === 'group') {
+			const currentEntry = getSidebarCurrentEntry(entry.entries, pathname);
+			if (currentEntry) return currentEntry;
 		}
 	}
-	return false;
+	return null;
 }
 
 /** Generates a deterministic string based on the content of the passed sidebar. */

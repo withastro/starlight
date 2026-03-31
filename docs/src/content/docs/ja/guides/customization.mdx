@@ -195,9 +195,15 @@ defineConfig({
 
 Starlightは、Starlightインテグレーションの[`social`](/ja/reference/configuration/#social)オプションを使用して、サイトヘッダーにソーシャルメディアアカウントへのリンクを追加する機能を備えています。
 
-[設定方法のリファレンス](/ja/reference/configuration/#social)で、サポートされているリンクアイコンの完全なリストを確認できます。他のサービスのサポートが必要な場合は、GitHubかDiscordでお知らせください！
+`social`配列の各エントリは、以下の3つのプロパティをもつオブジェクトです。
 
-```js {9-12}
+- `icon`: Starlightの[組み込みアイコン](/ja/reference/icons/)のいずれか。たとえば`"github"`。
+- `label`: リンクのアクセシブルなラベル。たとえば`"GitHub"`。
+- `href`: リンクのURL。たとえば`"https://github.com/withastro/starlight"`。
+
+以下の例では、AstroのDiscordチャットとStarlightのGitHubリポジトリへのリンクを追加しています。
+
+```js {9-16}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -206,10 +212,14 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'ソーシャルリンクを設定したドキュメント',
-			social: {
-				discord: 'https://astro.build/chat',
-				github: 'https://github.com/withastro/starlight',
-			},
+			social: [
+				{ icon: 'discord', label: 'Discord', href: 'https://astro.build/chat' },
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/withastro/starlight',
+				},
+			],
 		}),
 	],
 });

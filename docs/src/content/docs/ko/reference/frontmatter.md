@@ -423,9 +423,10 @@ Astro 공식문서의 ["컬렉션 스키마 정의"](https://docs.astro.build/ko
 
 다음 예시에서는 `description` 필드에 더 엄격한 타입을 제공하여 필수 항목으로 만들고, 새로운 선택적 필드인 `category`를 추가합니다.
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
@@ -446,9 +447,10 @@ export const collections = {
 
 [Astro `image()` 도우미](https://docs.astro.build/ko/guides/images/#콘텐츠-컬렉션의-이미지)를 활용하려면 스키마 확장을 반환하는 함수를 사용하세요.
 
-```ts {10-15}
+```ts {11-16}
 // src/content.config.ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 

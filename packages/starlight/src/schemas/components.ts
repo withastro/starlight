@@ -331,5 +331,5 @@ export function ComponentConfigSchema() {
 			Pagination: z.string().default('@astrojs/starlight/components/Pagination.astro'),
 			EditLink: z.string().default('@astrojs/starlight/components/EditLink.astro'),
 		})
-		.default({});
+		.prefault({});
 }

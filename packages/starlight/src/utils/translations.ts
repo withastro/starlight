@@ -28,10 +28,9 @@ async function loadTranslations() {
 	console.warn = () => {};
 	const userTranslations: Record<string, UserI18nSchema> = Object.fromEntries(
 		(await getCollection('i18n')).map(({ id, data, filePath }) => {
-			const lang =
-				project.legacyCollections || !filePath
-					? id
-					: stripExtension(stripLeadingSlash(filePath.replace(i18nCollectionPathFromRoot, '')));
+			const lang = !filePath
+				? id
+				: stripExtension(stripLeadingSlash(filePath.replace(i18nCollectionPathFromRoot, '')));
 			return [lang, data] as const;
 		})
 	);

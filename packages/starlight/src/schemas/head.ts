@@ -26,7 +26,9 @@ export const HeadConfigSchema = ({
 			z
 				.object({
 					tag: z.enum(['title', 'base', 'link', 'style', 'meta', 'script', 'noscript', 'template']),
-					attrs: z.record(z.union([z.string(), z.boolean(), z.undefined()])).optional(),
+					/** Attributes to set on the tag, e.g. `{ rel: 'stylesheet', href: '/custom.css' }`. */
+					attrs: z.record(z.string(), z.union([z.string(), z.boolean(), z.undefined()])).optional(),
+					/** Content to place inside the tag (optional). */
 					content: z.string().optional(),
 				})
 				.superRefine((config, ctx) => {
@@ -38,7 +40,7 @@ export const HeadConfigSchema = ({
 					};
 					const code =
 						source === 'config' ? JSON.stringify(correctTag, null, 2) : yaml.dump([correctTag]);
-					ctx.addIssue({
+					ctx.issues.push({
 						code: 'custom',
 						message:
 							`The \`head\` configuration includes a \`meta\` tag with \`content\` which is invalid HTML.\n` +
@@ -48,6 +50,7 @@ export const HeadConfigSchema = ({
 								: '') +
 							`in the \`attrs\` object:\n\n` +
 							code,
+						input: config,
 					});
 				})
 		)
