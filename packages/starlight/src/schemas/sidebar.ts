@@ -61,6 +61,7 @@ interface SidebarLinkItemUserConfig extends SidebarBaseUserConfig {
 
 const SidebarLinkItemSchema = z.strictObject({
 	...SidebarBaseSchema.shape,
+	link: z.string(),
 	attrs: SidebarLinkItemHTMLAttributesSchema(),
 });
 export type SidebarLinkItem = z.infer<typeof SidebarLinkItemSchema>;
