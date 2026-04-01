@@ -321,7 +321,11 @@ export type BuiltInIcon =
 	| 'sketch'
 	| 'npm'
 	| 'sourcehut'
-	| 'substack';
+	| 'substack'
+	| 'chrome'
+	| 'edge'
+	| 'firefox'
+	| 'safari';
 
 export const Icons = {
 	...BuiltInIcons,
