@@ -216,7 +216,7 @@ type ConfigSetupHookUserConfig =
 			 * Note that this configuration may have been updated by other plugins configured
 			 * before this one.
 			 */
-			config: StarlightUserConfig & { plugins?: BaseStarlightPluginUserConfig[] };
+			config: StarlightUserConfig & { plugins?: StarlightPluginUserConfig[] | undefined };
 			/**
 			 * A callback function to update the user-supplied Starlight configuration.
 			 *
