@@ -80,9 +80,11 @@ export interface StarlightUserConfig {
 
 	/** Configure locales for internationalization (i18n). */
 	locales?:
-		| ({
-				root?: Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>;
-		  } & Record<string, LocaleUserConfig>)
+		| Prettify<
+				{
+					root?: Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>;
+				} & Record<string, LocaleUserConfig>
+		  >
 		| undefined;
 
 	/**
@@ -196,7 +198,7 @@ const UserConfigSchema = z.object({
 	logo: LogoConfigSchema(),
 	social: SocialLinksSchema(),
 	tableOfContents: UserConfigTableOfContentsSchema(),
-	editLink: z.object({ baseUrl: z.string().url().optional() }).optional().default({}),
+	editLink: z.object({ baseUrl: z.url().optional() }).optional().default({}),
 	locales: z
 		.object({ root: LocaleConfigSchema().required({ lang: true }).optional() })
 		.catchall(LocaleConfigSchema())
