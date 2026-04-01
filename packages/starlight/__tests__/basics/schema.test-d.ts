@@ -21,7 +21,7 @@ import type { SidebarItemSchema, SidebarItemUserConfig } from '../../src/schemas
 import type { TitleConfigSchema, TitleUserConfig } from '../../src/schemas/site-title';
 import type { SocialLinksSchema, SocialLinksUserConfig } from '../../src/schemas/social';
 import type {
-	TableOfContentsSchema,
+	UserConfigTableOfContentsSchema,
 	TableOfContentsUserConfig,
 } from '../../src/schemas/tableOfContents';
 
@@ -96,9 +96,9 @@ describe('sub-schemas', () => {
 		>().toEqualTypeOf<SocialLinksUserConfig>();
 	});
 
-	test('has matching `TableOfContentsUserConfig` input type for `TableOfContentsSchema`', () => {
+	test('has matching `TableOfContentsUserConfig` input type for `UserConfigTableOfContentsSchema`', () => {
 		expectTypeOf<
-			z.input<ReturnType<typeof TableOfContentsSchema>>
+			z.input<ReturnType<typeof UserConfigTableOfContentsSchema>>
 		>().toEqualTypeOf<TableOfContentsUserConfig>();
 	});
 });
