@@ -514,7 +514,7 @@ test.describe('components', () => {
 			);
 
 			const expectedLayersOrder = await fs.readFile(
-				new URL('../style/layers.css', import.meta.url),
+				new URL('../src/style/layers.css', import.meta.url),
 				'utf-8'
 			);
 
