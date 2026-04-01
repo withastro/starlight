@@ -205,6 +205,9 @@ const baseStarlightPluginSchema = z.object({
 	name: z.string(),
 });
 
+type StarlightConfigUpdate = Partial<Omit<StarlightUserConfig, 'routeMiddleware'>>;
+type StarlightI18nTFactory = Awaited<ReturnType<typeof createTranslationSystemFromFs>>;
+
 type ConfigSetupHookUserConfig =
 	| ((options: {
 			/**
