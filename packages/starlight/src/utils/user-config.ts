@@ -79,9 +79,11 @@ export interface StarlightUserConfig {
 		| undefined;
 
 	/** Configure locales for internationalization (i18n). */
-	locales?: {
-		root?: Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>;
-	} & Record<string, LocaleUserConfig>;
+	locales?:
+		| ({
+				root?: Prettify<LocaleUserConfig & { lang: NonNullable<LocaleUserConfig['lang']> }>;
+		  } & Record<string, LocaleUserConfig>)
+		| undefined;
 
 	/**
 	 * Specify the default language for this site.
@@ -91,7 +93,7 @@ export interface StarlightUserConfig {
 	defaultLocale?: string | undefined;
 
 	/** Configure your site’s sidebar navigation items. */
-	sidebar?: SidebarItemUserConfig[];
+	sidebar?: SidebarItemUserConfig[] | undefined;
 
 	/**
 	 * Add extra tags to your site’s `<head>`.
