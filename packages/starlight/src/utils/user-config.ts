@@ -177,6 +177,13 @@ export interface StarlightUserConfig {
 		| {
 				/** Define whether headings in content should be rendered with clickable anchor links. Default: `true`. */
 				headingLinks?: boolean | undefined;
+				/**
+				 * Define additional directories where files should be processed by Starlight’s Markdown pipeline.
+				 *
+				 * Supports local directories relative to the root of your project, e.g. './src/data/comments/'.
+				 * Content of the `docs` content collection is always processed by Starlight’s Markdown pipeline.
+				 */
+				processedDirs?: string[] | undefined;
 		  }
 		| undefined;
 }
