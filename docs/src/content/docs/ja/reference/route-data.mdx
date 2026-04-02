@@ -60,19 +60,11 @@ export const onRequest = defineRouteMiddleware((context) => {
 
 サイトタイトルの`href`属性の値。たとえば`/`など、ホームページへのリンクとなります。多言語サイトの場合、たとえば`/en/`や`/zh-cn/`など、現在のロケールが含まれます。
 
-### `slug`
-
-**型:** `string`
-
-コンテンツファイル名から生成されたページのスラグ。
-
-このプロパティは非推奨であり、Starlightの将来のバージョンで削除される予定です。[Starlightの`docsLoader`](/ja/manual-setup/#コンテンツコレクションの設定)を使用して新しいコンテンツレイヤーAPIに移行し、代わりに[`id`](#id)プロパティを使用してください。
-
 ### `id`
 
 **型:** `string`
 
-このページのスラグ。[`legacy.collections`](https://docs.astro.build/ja/reference/legacy-flags/#collections)フラグを使用している場合は、コンテンツファイル名に基づくページの一意のIDとなります。
+このページのスラグ。
 
 ### `isFallback`
 
