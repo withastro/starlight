@@ -202,7 +202,7 @@ export class StarlightPagefind extends HTMLElement implements StarlightPagefindA
 		const pagefindPath = `${this.#options.bundlePath}pagefind.js`;
 
 		try {
-			pagefind = (await import(pagefindPath)) as Pagefind;
+			pagefind = (await import(/* @vite-ignore */ pagefindPath)) as Pagefind;
 		} catch {
 			console.error(`Failed to load Pagefind from ${pagefindPath}`);
 		}
