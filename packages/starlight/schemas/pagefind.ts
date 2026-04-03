@@ -116,7 +116,7 @@ const pagefindSchema = z
 		 * Defines a function called before performing a search that can be used to normalize the
 		 * search term.
 		 */
-		processTerm: z.function().args(z.string()).returns(z.string()).optional(),
+		processTerm: z.function({ input: [z.string()], output: z.string() }).optional(),
 		/**
 		 * Configure if filter values with no results should be visible or not.
 		 *
