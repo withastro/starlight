@@ -1,5 +1,11 @@
 # @astrojs/starlight
 
+## 0.38.3
+
+### Patch Changes
+
+- [#3770](https://github.com/withastro/starlight/pull/3770) [`6e7bed1`](https://github.com/withastro/starlight/commit/6e7bed1e6b3b586b9719c620924f60d3678a1f83) Thanks [@gameroman](https://github.com/gameroman)! - Adds examples to the inline documentation for `title` in the Starlight configuration object
+
 ## 0.38.2
 
 ### Patch Changes
