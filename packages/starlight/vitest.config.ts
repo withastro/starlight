@@ -31,6 +31,8 @@ export default defineConfig({
 				 */
 				// Main integration entrypoint — don’t think we’re able to test this directly currently.
 				// 'index.ts',
+				// Starlight Pagefind web components.
+				'components/pagefind/**',
 			],
 			thresholds: {
 				lines: 87,

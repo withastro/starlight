@@ -24,7 +24,7 @@ declare module 'virtual:starlight/route-middleware' {
 
 declare module 'virtual:starlight/pagefind-config' {
 	export const pagefindUserConfig: Partial<
-		Extract<import('./types').StarlightConfig['pagefind'], object>
+		Extract<import('./types').StarlightConfig['pagefind'], { ranking: object }>
 	>;
 }
 

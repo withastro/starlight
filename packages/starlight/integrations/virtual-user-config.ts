@@ -143,8 +143,11 @@ export function vitePluginStarlightUserConfig(
 					['', 'export const routeMiddleware = [\n'] as [string, string]
 				)
 				.join('\n') + '];',
+		'virtual:starlight/pagefind-config':
+			typeof opts.pagefind === 'object' && 'clientOptionsModule' in opts.pagefind
+				? `export { default as pagefindUserConfig } from ${resolveId(opts.pagefind.clientOptionsModule)};`
+				: `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind || {})}`,
 		/** Map of modules exporting Starlight’s templating components. */
-		'virtual:starlight/pagefind-config': `export const pagefindUserConfig = ${JSON.stringify(opts.pagefind || {})}`,
 		...virtualComponentModules,
 	} satisfies Record<string, string>;
 
