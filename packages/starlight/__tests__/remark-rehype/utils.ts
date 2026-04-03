@@ -1,9 +1,9 @@
-import type { StarlightUserConfig } from '../../types';
-import { StarlightConfigSchema } from '../../utils/user-config';
-import type { RemarkRehypePluginOptions } from '../../integrations/remark-rehype';
-import { createTranslationSystemFromFs } from '../../utils/translations-fs';
-import { absolutePathToLang } from '../../integrations/shared/absolutePathToLang';
-import { getCollectionPosixPath } from '../../utils/collection-fs';
+import type { StarlightUserConfig } from '../../src/types';
+import { StarlightConfigSchema } from '../../src/utils/user-config';
+import type { RemarkRehypePluginOptions } from '../../src/integrations/remark-rehype';
+import { createTranslationSystemFromFs } from '../../src/utils/translations-fs';
+import { absolutePathToLang } from '../../src/integrations/shared/absolutePathToLang';
+import { getCollectionPosixPath } from '../../src/utils/collection-fs';
 
 /** Returns options for the Starlight remark-rehype plugins to be used in tests. */
 export async function createRemarkRehypePluginTestOptions(

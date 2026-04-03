@@ -2,10 +2,10 @@ import { createMarkdownProcessor, type MarkdownProcessor } from '@astrojs/markdo
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import { describe, expect, test, vi } from 'vitest';
-import { remarkDirectivesRestoration } from '../../integrations/asides';
-import { starlightRemarkPlugins } from '../../integrations/remark-rehype';
-import type { StarlightUserConfig } from '../../utils/user-config';
-import { BuiltInDefaultLocale } from '../../utils/i18n';
+import { remarkDirectivesRestoration } from '../../src/integrations/asides';
+import { starlightRemarkPlugins } from '../../src/integrations/remark-rehype';
+import type { StarlightUserConfig } from '../../src/utils/user-config';
+import { BuiltInDefaultLocale } from '../../src/utils/i18n';
 import { createRemarkRehypePluginTestOptions } from './utils';
 
 const starlightConfig = {

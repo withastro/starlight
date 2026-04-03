@@ -1,7 +1,7 @@
 import { rehype } from 'rehype';
 import { VFile } from 'vfile';
 import { expect, test } from 'vitest';
-import { starlightRehypePlugins } from '../../integrations/remark-rehype';
+import { starlightRehypePlugins } from '../../src/integrations/remark-rehype';
 import { createRemarkRehypePluginTestOptions } from './utils';
 
 const processor = rehype()

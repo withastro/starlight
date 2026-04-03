@@ -9,7 +9,6 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "typecheck": "tsc --noEmit",
     "linkcheck": "CHECK_LINKS=true pnpm build",
     "astro": "astro",
     "lunaria:build": "lunaria build",
