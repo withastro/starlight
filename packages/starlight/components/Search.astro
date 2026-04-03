@@ -6,7 +6,7 @@ import type { StarlightPagefindOptions } from './pagefind/starlight-pagefind';
 
 const clientTranslations: StarlightPagefindOptions['translations'] = {};
 for (const [key, value] of Object.entries(Astro.locals.t.all())) {
-	if (isClientTranslation(key)) clientTranslations[key] = value;
+	if (isClientTranslation(key)) clientTranslations[key] = value as string;
 }
 function isClientTranslation(key: string): key is keyof StarlightPagefindOptions['translations'] {
 	return key.startsWith('search.pagefind.client.');
