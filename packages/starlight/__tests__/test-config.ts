@@ -5,8 +5,7 @@ import { getViteConfig } from 'astro/config';
 import { vitePluginStarlightUserConfig } from '../integrations/virtual-user-config';
 import { runPlugins, type StarlightUserConfigWithPlugins } from '../utils/plugins';
 import { createTestPluginContext } from './test-plugin-utils';
-
-const testLegacyCollections = process.env.LEGACY_COLLECTIONS === 'true';
+import { vitePluginStarlightCssLayerOrder } from '../integrations/vite-layer-order';
 
 export async function defineVitestConfig(
 	{ plugins, ...config }: StarlightUserConfigWithPlugins,
@@ -29,15 +28,16 @@ export async function defineVitestConfig(
 	);
 	return getViteConfig({
 		plugins: [
+			vitePluginStarlightCssLayerOrder(),
 			vitePluginStarlightUserConfig(
-				command,
+				{ command, isNodeCompatibleEnv: true },
 				starlightConfig,
 				{
 					root,
 					srcDir,
 					build,
 					trailingSlash,
-					legacy: { collections: testLegacyCollections },
+					legacy: { collectionsBackwardsCompat: false },
 				},
 				pluginTranslations
 			),

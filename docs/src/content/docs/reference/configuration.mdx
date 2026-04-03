@@ -378,8 +378,8 @@ starlight({
 
 ### `markdown`
 
-**type:** `{ headingLinks?: boolean }`  
-**default:** `{ headingLinks: true }`
+**type:** `{ headingLinks?: boolean; processedDirs?: string[] }`  
+**default:** `{ headingLinks: true, processedDirs: [] }`
 
 Configure Starlight’s Markdown processing.
 
@@ -395,6 +395,28 @@ starlight({
 	markdown: {
 		// Disable Starlight’s clickable heading anchor links.
 		headingLinks: false,
+	},
+}),
+```
+
+#### `processedDirs`
+
+**type:** `string[]`  
+**default:** `[]`
+
+Define additional directories where files should be processed by Starlight’s Markdown pipeline.
+By default, only Markdown and MDX content loaded using Starlight's [`docsLoader()`](/reference/configuration/#docsloader) is processed.
+Supports local directories relative to the root of your project, e.g. `'./src/data/comments/'`.
+
+Starlight’s processing includes support for [clickable heading anchor links](#headinglinks), [asides Markdown directive syntax](/guides/authoring-content/#asides), and RTL support for code blocks.
+This option can be useful if you are rendering content from a custom content collection in a [custom page](/guides/pages/#custom-pages) using the `<StarlightPage>` component and expect Starlight's Markdown processing to be applied to that content as well.
+
+```js
+starlight({
+	markdown: {
+		// Process Markdown files from the `reviews` content collection located in the
+		// `src/data/reviews/` directory.
+		processedDirs: ['./src/data/reviews/'],
 	},
 }),
 ```
@@ -480,7 +502,7 @@ Pagefind cannot be enabled when the [`prerender`](#prerender) option is set to `
 Set `pagefind` to an object to configure the Pagefind search client:
 
 - See [“Customize Pagefind's result ranking”](https://pagefind.app/docs/ranking/) in the Pagefind documentation for more details about using the `pagefind.ranking` option to control how search result ranking is calculated
-- See [“Searching multiple sites”](https://pagefind.app/docs/multisite/) in the Pagefind documentation for more details about using the `pagefind.mergeIndex` option to control how to search accros multiple sites
+- See [“Searching multiple sites”](https://pagefind.app/docs/multisite/) in the Pagefind documentation for more details about using the `pagefind.mergeIndex` option to control how to search across multiple sites
 
 #### `PagefindOptions`
 

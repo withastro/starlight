@@ -17,7 +17,7 @@ describe('can access UI string in an Astro context', () => {
 		expect(t).toBeTypeOf('function');
 		// Include the default locale strings.
 		expect(t('skipLink.label')).toBe('Skip to content');
-		// Include a built-in translation overriden by a plugin.
+		// Include a built-in translation overridden by a plugin.
 		expect(t('search.label')).toBe('Search the thing');
 		// Include a translation injected by a plugin.
 		// @ts-expect-error - translation key injected by a test plugin.
@@ -28,7 +28,7 @@ describe('can access UI string in an Astro context', () => {
 		const t = useTranslations('fr');
 		// Include the default locale strings.
 		expect(t('skipLink.label')).toBe('Aller au contenu');
-		// Include a built-in translation overriden by a plugin.
+		// Include a built-in translation overridden by a plugin.
 		expect(t('search.label')).toBe('Rechercher le truc');
 		// Include a translation injected by a plugin.
 		// @ts-expect-error - translation key injected by a test plugin.
@@ -53,7 +53,7 @@ test('can access UI strings in the plugin context using useTranslations()', () =
 
 	// A built-in UI string.
 	expect(uiStrings[0]).toBe('Skip to content');
-	// A built-in UI string overriden by a plugin.
+	// A built-in UI string overridden by a plugin.
 	expect(uiStrings[1]).toBe('Rechercher le truc');
 	// A UI string injected by a plugin.
 	expect(uiStrings[2]).toBe('Do the Plugin 3 thing');

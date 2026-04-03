@@ -1,5 +1,23 @@
 # @astrojs/starlight-markdoc
 
+## 0.6.0
+
+### Minor Changes
+
+- [#3644](https://github.com/withastro/starlight/pull/3644) [`0d2e7ed`](https://github.com/withastro/starlight/commit/0d2e7ed74a604b028fcab0c81b4c35c0c9365343) Thanks [@HiDeoo](https://github.com/HiDeoo)! - ⚠️ **BREAKING CHANGE:** The minimum supported version of Starlight is now 0.38.0
+
+  Please use the `@astrojs/upgrade` command to upgrade your project:
+
+  ```sh
+  npx @astrojs/upgrade
+  ```
+
+## 0.5.1
+
+### Patch Changes
+
+- [#3500](https://github.com/withastro/starlight/pull/3500) [`7700456`](https://github.com/withastro/starlight/commit/770045663c8ca3cc44983dd0d444955eba441243) Thanks [@delucis](https://github.com/delucis)! - This is the first release published with OIDC trusted publishing.
+
 ## 0.5.0
 
 ### Minor Changes

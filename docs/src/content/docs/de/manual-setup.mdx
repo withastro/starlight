@@ -77,7 +77,7 @@ export const collections = {
 };
 ```
 
-Starlight unterstützt auch die Option [`legacy.collections`](https://docs.astro.build/de/reference/legacy-flags/), bei dem Sammlungen mit der Legacy-Implementierung von Inhaltssammlungen behandelt werden.
+Starlight unterstützt auch die Option [`legacy.collectionsBackwardsCompat`](https://docs.astro.build/de/reference/legacy-flags/#collectionsbackwardscompat), das einige ältere Funktionen zu Content-Collections aus Version 4 beibehält.
 Dies ist nützlich, wenn du ein bestehendes Astro-Projekt hast und zum jetzigen Zeitpunkt keine Änderungen an den Sammlungen vornehmen kannst, um einen Loader zu verwenden.
 
 ### Inhalte hinzufügen
@@ -132,3 +132,5 @@ Für die Zukunft planen wir, diesen Anwendungsfall besser zu unterstützen, um d
 Um SSR zu aktivieren, folge der Anleitung [„Serverseitiges Rendern (SSR)“](https://docs.astro.build/de/guides/on-demand-rendering/) in der Astro-Dokumentation, um einen Server-Adapter zu deinem Starlight-Projekt hinzuzufügen.
 
 Die von Starlight erzeugten Dokumentations&shy;seiten werden standardmäßig vorgerendert, unabhängig vom Ausgabemodus deines Projekts. Wenn du nicht möchtest, dass deine Starlight-Seiten vorgerendert werden, setze die [Konfigurations&shy;option `prerender`](/de/reference/configuration/#prerender) auf `false`.
+
+Wenn du den [Cloudflare-Adapter](https://docs.astro.build/de/guides/integrations-guide/cloudflare/) verwendest, um Server-Rendering in deinem Dokumentationsprojekt zu aktivieren, achte darauf, auch [das Kompatibilitätsflag `nodejs_compat` zu deiner Wrangler-Konfigurationsdatei hinzuzufügen](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started).

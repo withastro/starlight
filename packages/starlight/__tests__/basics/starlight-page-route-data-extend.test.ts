@@ -6,7 +6,7 @@ import {
 } from '../../utils/starlight-page';
 
 vi.mock('virtual:starlight/collection-config', async () => {
-	const { z } = await vi.importActual<typeof import('astro:content')>('astro:content');
+	const { z } = await vi.importActual<typeof import('astro/zod')>('astro/zod');
 	return (await import('../test-utils')).mockedCollectionConfig({
 		extend: z.object({
 			// Make the built-in description field required.
@@ -27,7 +27,7 @@ test('throws a validation error if a built-in field required by the user schema 
 	await expect(() =>
 		generateStarlightPageRouteData({
 			props: starlightPageProps,
-			context: getRouteDataTestContext('/test-slug'),
+			context: getRouteDataTestContext({ pathname: '/test-slug' }),
 		})
 	).rejects.toThrowErrorMatchingInlineSnapshot(`
 		"[AstroUserError]:
@@ -49,7 +49,7 @@ test('returns new field defined in the user schema', async () => {
 				category,
 			},
 		},
-		context: getRouteDataTestContext('/test-slug'),
+		context: getRouteDataTestContext({ pathname: '/test-slug' }),
 	});
 	// @ts-expect-error - Custom field defined in the user schema.
 	expect(data.entry.data.category).toBe(category);

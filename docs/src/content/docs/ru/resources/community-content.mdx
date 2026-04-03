@@ -47,8 +47,13 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 	/>
 	<LinkCard
 		href="https://starlight-changelog.netlify.app/"
-		title="Starlight Changelog"
+		title="Журнал изменений Starlight"
 		description="Просмотр всех релизов пакета @astrojs/starlight на одной удобной странице."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/contributing-to-starlight"
+		title="Вклад в Starlight"
+		description="Мой личный опыт и рекомендации по внесению вклада в open-source проекты, такие как Starlight."
 	/>
 </CardGrid>
 
@@ -62,52 +67,52 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 	<LinkCard
 		href="https://www.webpro.nl/scraps/versioned-docs-with-starlight-and-vercel"
 		title="Версионированная документация с помощью Starlight и Vercel"
-		description="Руководство по внедрению отдельных версий документации для каждой основной версии проекта"
+		description="Руководство по внедрению отдельных версий документации для каждой основной версии проекта."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-heading-links"
 		title="Добавление ссылок на рубрики Starlight"
-		description="Руководство по использованию плагина rehype для обмена ссылками на определенные разделы вашей документации"
+		description="Руководство по использованию плагина rehype для обмена ссылками на определенные разделы вашей документации."
 	/>
 	<LinkCard
 		href="https://blog.otterlord.dev/posts/starlight-sponsors/"
 		title="Добавление спонсоров на сайт Starlight"
-		description="Руководство по внедрению пользовательского компонента спонсора в боковую панель документации"
+		description="Руководство по внедрению пользовательского компонента спонсора в боковую панель документации."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-og-images"
 		title="Добавление изображений Open Graph к Starlight"
-		description="Руководство по созданию социальных изображений и соответствующих метатегов для ваших страниц"
+		description="Руководство по созданию социальных изображений и соответствующих метатегов для ваших страниц."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-third-party-icon-sets"
 		title="Использование сторонних наборов иконок в Starlight"
-		description="Руководство по использованию unplugin-icons для расширения выбора доступных иконок для Starlight"
+		description="Руководство по использованию unplugin-icons для расширения выбора доступных иконок для Starlight."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notes/starlight-custom-html-head"
 		title="Редактирование HTML-заголовка страниц Starlight"
-		description="Узнайте, как добавлять дополнительные данные в head страницы: веб-аналитику, шрифты и скрипты"
+		description="Узнайте, как добавлять дополнительные данные в head страницы: веб-аналитику, шрифты и скрипты."
 	/>
 	<LinkCard
 		href="https://dev.to/mrrobot/publishing-documentation-with-astro-starlight-691"
 		title="Публикация документации с помощью Astro Starlight"
-		description="Начало работы с документацией в Starlight"
+		description="Начало работы с документацией в Starlight."
 	/>
 	<LinkCard
-		href="https://events-3bg.pages.dev/jotter/starlight/guide/"
+		href="https://events-3bg.pages.dev/jotter/starlight/"
 		title="Включение View Transitions"
-		description="Добейтесь SPA-подобного вида и ощущения с помощью поддержки переходов представлений"
+		description="Добавьте поддержку анимаций переходов между представлениями, клиентской маршрутизации и навигации в стиле SPA на ваш сайт документации Starlight."
 	/>
 	<LinkCard
 		href="https://jamcomments.com/posts/structured-data-with-starlight"
 		title="Добавление структурированных данных на страницы Starlight"
-		description="Узнайте, как создавать динамические структурированные данные JSON-LD для страниц документации"
+		description="Узнайте, как создавать динамические структурированные данные JSON-LD для страниц документации."
 	/>
 	<LinkCard
 		href="https://starlight-examples.netlify.app/"
 		title="Примеры Starlight"
-		description="Коллекция вставок StackBlitz, демонстрирующих практические способы работы с сайтами документации Starlight"
+		description="Коллекция вставок StackBlitz, демонстрирующих практические способы работы с сайтами документации Starlight."
 	/>
 	<LinkCard
 		href="https://hideoo.dev/notebooks/starlight-plugins-by-example"
@@ -119,6 +124,56 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 		title="Добавление индикатора прогресса чтения"
 		description="Узнайте, как добавить горизонтальную полосу прогресса чтения на ваш сайт Starlight."
 	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-sidebar-whitespace/"
+		title="Применяем свои стили к боковой панели Starlight"
+		description="Используем CSS, чтобы настроить шрифты, цвета и другие элементы боковой панели Starlight."
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-dropdown-and-list-together/"
+		title="Выпадающее меню тем на мобильных, обычный список — на десктопе"
+		description="Объединяем два плагина, чтобы на мобильных устройствах было выпадающее меню, а на десктопе — обычный список."
+	/>
+	<LinkCard
+		href="https://blog.trueberryless.org/blog/starlight-autogenerate-whole-sidebar/"
+		title="Обработка боковой панели Starlight через мидлвар"
+		description="Используем мидлвар маршрутов для управления порядком и подписями групп в боковой панели по аналогии с Nuxt Content."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-custom-social-links"
+		title="Добавляем социальные ссылки с собственными иконками в Starlight"
+		description="Узнайте, как добавить в шапку сайта Starlight социальные ссылки с собственными иконками."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-paste-images-with-visual-studio-code"
+		title="Вставляем изображения в страницы Starlight прямо из Visual Studio Code"
+		description="Ускоряем работу с документацией Starlight: вставляем изображения прямо из Visual Studio Code."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-add-diagrams-using-d2"
+		title="Добавляем диаграммы в документацию Starlight с помощью D2"
+		description="Узнайте, как добавлять диаграммы в документацию Starlight с помощью языка D2."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-og-images-cloudinary-astro-sdk"
+		title="Генерируем Open Graph-изображения для Starlight через Cloudinary Astro SDK"
+		description="Узнайте, как использовать Cloudinary Astro SDK для генерации изображений Open Graph для сайта на Starlight."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-list-recent-github-releases"
+		title="Выводим последние GitHub-релизы в Starlight через Astro Content Layer API"
+		description="Узнайте, как использовать Astro Content Layer APIВ для получения списка последних GitHub-релизов в проекте на Starlight."
+	/>
+	<LinkCard
+		href="https://hideoo.dev/notes/starlight-sitewide-banner"
+		title="Добавляем общий баннер на весь сайт Starlight"
+		description="Как сделать общий для всего сайта баннер, используя встроенную функцию Starlight для баннеров на отдельных страницах."
+	/>
+	<LinkCard
+		href="https://lirantal.com/blog/customizing-astro-starlight-sidebar-gated-content-auth"
+		title="Настройка боковой панели Astro Starlight для закрытого контента с аутентификацией"
+		description="Защитите свои учебные материалы, используя Clerk и SSR для динамического скрытия или отображения разделов сайдбара Starlight в зависимости от статуса авторизации пользователя."
+	/>
 </CardGrid>
 
 ## Видеоконтент
@@ -127,7 +182,7 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 import YouTubeGrid from '~/components/youtube-grid.astro';
 
-### Ролики об Astro
+### Официальные видео
 
 <YouTubeGrid
 	videos={[
@@ -137,18 +192,24 @@ import YouTubeGrid from '~/components/youtube-grid.astro';
 			description: 'Смотрите официальное видео запуска Starlight',
 		},
 		{
-			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
-			title: '🌟 ЗАПУСК ЗА 1 МИНУТУ',
+			href: 'https://www.youtube.com/watch?v=j8K-ESJF814',
+			title: 'Starlight один год!',
 			description:
-				'Посмотрите, как Бен запускает новый сайт Starlight менее чем за минуту!',
+				'Sarah рассказывает о созданной сообществом Astro теме для документации',
 		},
 	]}
 />
 
-### Видеоролики и стримы сообщества
+### Видео и стримы от сообщества
 
 <YouTubeGrid
 	videos={[
+		{
+			href: 'https://www.youtube.com/shorts/zjOWezSzd18',
+			title: '🌟 Запуск сайта на Starlight менее чем за минуту',
+			description:
+				'Смотрите, как Ben запускает новый сайт на Starlight меньше чем за минуту!',
+		},
 		{
 			href: 'https://www.youtube.com/watch?v=sF6UcV3moZg',
 			title: 'Создание документов с помощью Starlight и Astro',

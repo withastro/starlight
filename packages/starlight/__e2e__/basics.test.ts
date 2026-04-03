@@ -1,4 +1,6 @@
-import { expect, testFactory, type Locator } from './test-utils';
+import type { Page } from '@playwright/test';
+import fs from 'node:fs/promises';
+import { expect, testFactory, type Locator, type StarlightPage } from './test-utils';
 
 const test = testFactory('./fixtures/basics/');
 
@@ -128,7 +130,7 @@ test.describe('components', () => {
 			expect((await tabs.boundingBox())?.y).toBe(initialBoundingBox?.y);
 		});
 
-		test('syncs tabs with the same sync key if they do not consistenly use icons', async ({
+		test('syncs tabs with the same sync key if they do not consistently use icons', async ({
 			page,
 			getProdServer,
 		}) => {
@@ -407,6 +409,17 @@ test.describe('components', () => {
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.sl-anchor-link')).not.toBeAttached();
 		});
+
+		test('renders headings anchor links for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.sl-anchor-link').first()).toBeAttached();
+		});
 	});
 
 	test.describe('asides', () => {
@@ -419,11 +432,21 @@ test.describe('components', () => {
 			// Individual Markdown page
 			await starlight.goto('/markdown-page');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
-			await page.pause();
 
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('.starlight-aside')).not.toBeAttached();
+		});
+
+		test('renders Markdown asides for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('.starlight-aside')).toBeAttached();
 		});
 	});
 
@@ -441,6 +464,17 @@ test.describe('components', () => {
 			// Content entry from the `reviews` content collection
 			await starlight.goto('/reviews/alice');
 			await expect(page.locator('code[dir="auto"]')).not.toBeAttached();
+		});
+
+		test('adds RTL support to code and preformatted text elements for entries not part of the `docs` collection matching the `markdown.processedDirs` option', async ({
+			getProdServer,
+			page,
+		}) => {
+			const starlight = await getProdServer();
+
+			// Content entry from the `comments` content collection
+			await starlight.goto('/comments/bob');
+			await expect(page.locator('code[dir="auto"]').first()).toBeAttached();
 		});
 	});
 
@@ -464,6 +498,31 @@ test.describe('components', () => {
 				'background-color',
 				'rgb(128, 0, 128)'
 			);
+		});
+	});
+
+	test.describe('css layer order', () => {
+		test('ensures that the StarlightPage component is always imported first to ensure a predictable CSS layer order in custom pages', async ({
+			page,
+			makeServer,
+		}) => {
+			const starlight = await makeServer('dev', { mode: 'dev' });
+			await starlight.goto('/starlight-page-css-layer-order');
+
+			const firstStyleContent = await page.evaluate(
+				() => document.head.querySelector('style')?.textContent ?? ''
+			);
+
+			const expectedLayersOrder = await fs.readFile(
+				new URL('../style/layers.css', import.meta.url),
+				'utf-8'
+			);
+
+			// Ensure that the first style block in the head contains the expected layers order rather
+			// the styles of the link button wrapped in a `@layer` block at-rule automatically declaring
+			// a new layer and thus potentially breaking the intended layers order as the initial order
+			// in which layers are declared indicates which layer has precedence.
+			expect(firstStyleContent).toBe(expectedLayersOrder);
 		});
 	});
 
@@ -493,3 +552,308 @@ test.describe('param normalization', () => {
 		await expect(content).toHaveText(/This file contains Arabic diacritics in the file name./);
 	});
 });
+
+test.describe('ToC highlighting', () => {
+	test.describe('highlights overview', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings',
+				pattern: /Overview/,
+			})
+		);
+	});
+
+	test.describe('highlights overview when scrolled to opening paragraph', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings',
+				pattern: /Overview/,
+				scrollBy: 200,
+			})
+		);
+	});
+
+	test.describe('highlights overview when a high banner is present', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings-banner',
+				pattern: /Overview/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 1', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 1 when scrolled to paragraph below', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-1',
+				pattern: /Heading 1/,
+				scrollBy: 250,
+			})
+		);
+	});
+
+	test.describe('highlights heading 3', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-3',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test.describe('highlights heading 3 from focusing on a list item', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#non-heading-id',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+
+	test.describe('highlights h3 above an h4', () => {
+		test(
+			'desktop viewport (1280×720)',
+			testTOCHighlighting({
+				width: 1280,
+				height: 720,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'tablet viewport (810×1080)',
+			testTOCHighlighting({
+				width: 810,
+				height: 1080,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+		test(
+			'mobile viewport (375×667)',
+			testTOCHighlighting({
+				width: 375,
+				height: 667,
+				path: '/headings#heading-4',
+				pattern: /Heading 3/,
+			})
+		);
+	});
+});
+
+/**
+ * Loads the given `path` in a window of the specified `width` and `height` and checks that the
+ * Starlight table of contents is highlighting an item with contents matching `pattern`.
+ * The optional `scrollBy` parameter scrolls the page by that number of pixels before testing.
+ */
+function testTOCHighlighting({
+	width,
+	height,
+	path,
+	pattern,
+	scrollBy,
+}: {
+	width: number;
+	height: number;
+	path: string;
+	pattern: RegExp;
+	scrollBy?: number;
+}) {
+	return async ({
+		page,
+		getProdServer,
+	}: {
+		page: Page;
+		getProdServer: () => Promise<StarlightPage>;
+	}) => {
+		const test = async () => {
+			if (width > 1150) {
+				// On “desktop” viewports check the correct link is set as aria-current in the page sidebar.
+				const overviewLink = page.locator('starlight-toc [aria-current="true"]');
+				await expect(overviewLink).toHaveText(pattern);
+			} else {
+				// On smaller viewports, check the <MobileTableOfContents> component.
+				// The table of contents bar should display the current heading.
+				const currentSectionLabel = page.locator('mobile-starlight-toc .display-current');
+				await expect(currentSectionLabel).toHaveText(pattern);
+				// Within the table of contents drop down, the highlighted link should be correct.
+				const overviewLink = page.locator('mobile-starlight-toc [aria-current="true"]');
+				await expect(overviewLink).toHaveText(pattern);
+			}
+		};
+
+		await page.setViewportSize({ width, height });
+		const starlight = await getProdServer();
+		await starlight.goto(path);
+		if (scrollBy) {
+			await page.mouse.wheel(0, scrollBy);
+		}
+
+		// Test highlighting on initial load
+		await test();
+
+		// Test highlighting on page refresh (which maintains scroll position)
+		await page.reload();
+		await test();
+	};
+}

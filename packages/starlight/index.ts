@@ -8,16 +8,19 @@
 /// <reference path="./virtual.d.ts" />
 
 import mdx from '@astrojs/mdx';
-import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
+import type { AstroIntegration } from 'astro';
 import { AstroError } from 'astro/errors';
-import { spawn } from 'node:child_process';
-import { dirname, relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { starlightAsides, starlightDirectivesRestorationIntegration } from './integrations/asides';
+import {
+	starlightRehypePlugins,
+	starlightRemarkPlugins,
+	type RemarkRehypePluginOptions,
+} from './integrations/remark-rehype';
+import { starlightDirectivesRestorationIntegration } from './integrations/asides';
 import { starlightExpressiveCode } from './integrations/expressive-code/index';
+import { starlightPagefind } from './integrations/pagefind';
 import { starlightSitemap } from './integrations/sitemap';
+import { vitePluginStarlightCssLayerOrder } from './integrations/vite-layer-order';
 import { vitePluginStarlightUserConfig } from './integrations/virtual-user-config';
-import { rehypeRtlCodeSupport } from './integrations/code-rtl-support';
 import {
 	injectPluginTranslationsTypes,
 	runPlugins,
@@ -26,7 +29,6 @@ import {
 } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
-import { starlightAutolinkHeadings } from './integrations/heading-links';
 
 export default function StarlightIntegration(
 	userOpts: StarlightUserConfigWithPlugins
@@ -115,31 +117,61 @@ export default function StarlightIntegration(
 				const selfIndex = config.integrations.findIndex((i) => i.name === '@astrojs/starlight');
 				config.integrations.splice(selfIndex + 1, 0, ...integrations);
 
+				const remarkRehypeOptions: RemarkRehypePluginOptions = {
+					starlightConfig,
+					astroConfig: config,
+					useTranslations,
+					absolutePathToLang,
+				};
+
+				// TODO: refactor once there is a reliable way to detect non-Node.js compatible
+				// environments, rather than relying on the presence of specific adapters/integrations.
+				const isCloudflareEnv =
+					config.adapter?.name === '@astrojs/cloudflare' ||
+					config.integrations.some(({ name }) => name === '@astrojs/cloudflare');
+				const isNodeCompatibleEnv = !isCloudflareEnv;
+
 				updateConfig({
 					vite: {
 						plugins: [
-							vitePluginStarlightUserConfig(command, starlightConfig, config, pluginTranslations),
+							vitePluginStarlightCssLayerOrder(),
+							vitePluginStarlightUserConfig(
+								{ command, isNodeCompatibleEnv },
+								starlightConfig,
+								config,
+								pluginTranslations
+							),
 						],
+						ssr: isNodeCompatibleEnv
+							? {}
+							: {
+									optimizeDeps: {
+										include: [
+											// Prebundle some dependencies for non-Node.js compatible environments to
+											// speed up dev server start time and prevent restarts.
+											'@astrojs/cloudflare/entrypoints/server',
+											'@astrojs/starlight>i18next',
+											'@astrojs/starlight>js-yaml',
+											'@astrojs/starlight>klona/lite',
+											// TODO: once Expressive Code is refactored/fixed, remove this workaround for
+											// Expressive Code relying on CJS dependencies like postcss not compatible
+											// with non-Node.js compatible environments like Cloudflare.
+											'@astrojs/starlight>astro-expressive-code/components',
+											'@astrojs/starlight>astro-expressive-code>hast-util-select',
+											'@astrojs/starlight>astro-expressive-code>rehype',
+											'@astrojs/starlight>astro-expressive-code>unist-util-visit',
+											'@astrojs/starlight>astro-expressive-code>rehype-format',
+											'@astrojs/starlight>astro-expressive-code>hastscript',
+											'@astrojs/starlight>astro-expressive-code>hast-util-from-html',
+											'@astrojs/starlight>astro-expressive-code>hast-util-to-string',
+											'@astrojs/starlight>astro-expressive-code>@expressive-code/core>postcss',
+										],
+									},
+								},
 					},
 					markdown: {
-						remarkPlugins: [
-							...starlightAsides({
-								starlightConfig,
-								astroConfig: config,
-								useTranslations,
-								absolutePathToLang,
-							}),
-						],
-						rehypePlugins: [
-							rehypeRtlCodeSupport({ astroConfig: config }),
-							// Process headings and add anchor links.
-							...starlightAutolinkHeadings({
-								starlightConfig,
-								astroConfig: config,
-								useTranslations,
-								absolutePathToLang,
-							}),
-						],
+						remarkPlugins: [...starlightRemarkPlugins(remarkRehypeOptions)],
+						rehypePlugins: [...starlightRehypePlugins(remarkRehypeOptions)],
 					},
 					scopedStyleStrategy: 'where',
 					// If not already configured, default to prefetching all links on hover.
@@ -152,36 +184,10 @@ export default function StarlightIntegration(
 				injectPluginTranslationsTypes(pluginTranslations, injectTypes);
 			},
 
-			'astro:build:done': ({ dir, logger }) => {
+			'astro:build:done': async (options) => {
 				if (!userConfig.pagefind) return;
-				const loglevelFlag = getPagefindLoggingFlags(logger.options.level);
-				const targetDir = fileURLToPath(dir);
-				const cwd = dirname(fileURLToPath(import.meta.url));
-				const relativeDir = relative(cwd, targetDir);
-				return new Promise<void>((resolve) => {
-					spawn('npx', ['-y', 'pagefind', ...loglevelFlag, '--site', relativeDir], {
-						stdio: 'inherit',
-						shell: true,
-						cwd,
-					}).on('close', () => resolve());
-				});
+				return starlightPagefind(options);
 			},
 		},
 	};
-}
-
-/** Map the logging level of Astro’s logger to one of Pagefind’s logging level flags. */
-function getPagefindLoggingFlags(level: AstroIntegrationLogger['options']['level']) {
-	switch (level) {
-		case 'silent':
-		case 'error':
-			return ['--silent'];
-		case 'warn':
-			return ['--quiet'];
-		case 'debug':
-			return ['--verbose'];
-		case 'info':
-		default:
-			return [];
-	}
 }

@@ -20,9 +20,10 @@ export const FaviconSchema = () =>
 			const ext = extname(pathname).toLowerCase();
 
 			if (!isFaviconExt(ext)) {
-				ctx.addIssue({
-					code: z.ZodIssueCode.custom,
+				ctx.issues.push({
+					code: 'custom',
 					message: 'favicon must be a .ico, .gif, .jpg, .png, or .svg file',
+					input: favicon,
 				});
 
 				return z.NEVER;
@@ -32,10 +33,7 @@ export const FaviconSchema = () =>
 				href: favicon,
 				type: faviconTypeMap[ext],
 			};
-		})
-		.describe(
-			'The default favicon for your site which should be a path to an image in the `public/` directory.'
-		);
+		});
 
 function isFaviconExt(ext: string): ext is keyof typeof faviconTypeMap {
 	return ext in faviconTypeMap;
