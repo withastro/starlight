@@ -1,19 +1,26 @@
 ---
 import Icon from './Icon.astro';
 import type { HTMLAttributes } from 'astro/types';
+import type { StarlightIcon } from '../components-internals/Icons.ts';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
 	title: string;
 	description?: string;
+	icon?: StarlightIcon | undefined;
+	iconPlacement?: 'start' | 'end' | undefined;
 }
 
-const { title, description, ...attributes } = Astro.props;
+const { title, description, icon, iconPlacement = 'end', ...attributes } = Astro.props;
 ---
 
 <div class="sl-link-card">
 	<span class="sl-flex stack">
 		<a {...attributes}>
-			<span class="title" set:html={title} />
+			<span class="sl-flex title-wrapper">
+				{icon && iconPlacement === 'start' && <Icon name={icon} size="1.2rem" />}
+				<span class="title" set:html={title} />
+				{icon && iconPlacement === 'end' && <Icon name={icon} size="1.2rem" />}
+			</span>
 		</a>
 		{description && <span class="description" set:html={description} />}
 	</span>
@@ -54,6 +61,16 @@ const { title, description, ...attributes } = Astro.props;
 			color: var(--sl-color-white);
 			font-weight: 600;
 			font-size: var(--sl-text-lg);
+		}
+
+		.title-wrapper {
+			align-items: center;
+			gap: 0.5rem;
+			color: var(--sl-color-white);
+		}
+
+		.title-wrapper :global(svg) {
+			flex-shrink: 0;
 		}
 
 		.description {
