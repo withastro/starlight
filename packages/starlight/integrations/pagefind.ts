@@ -1,12 +1,13 @@
 import type { HookParameters } from 'astro';
 import { fileURLToPath } from 'node:url';
 import * as pagefind from 'pagefind';
+import type { StarlightConfig } from '../types';
 
 /** Run Pagefind to generate search index files based on the build output directory. */
-export async function starlightPagefind({
-	dir,
-	logger: starlightLogger,
-}: PagefindIntegrationOptions) {
+export async function starlightPagefind(
+	{ dir, logger: starlightLogger }: PagefindIntegrationOptions,
+	userConfig: Pick<Extract<StarlightConfig['pagefind'], object>, 'index'>
+) {
 	const logger = starlightLogger.fork('starlight:pagefind');
 	const options = { dir, logger };
 
@@ -14,7 +15,7 @@ export async function starlightPagefind({
 		const now = performance.now();
 		logger.info('Building search index with Pagefind...');
 
-		const newIndexResponse = await pagefind.createIndex();
+		const newIndexResponse = await pagefind.createIndex(userConfig.index);
 
 		const { index } = assertPagefindResponse<pagefind.NewIndexResponse>(newIndexResponse, options);
 
