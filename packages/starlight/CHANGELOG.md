@@ -1,5 +1,15 @@
 # @astrojs/starlight
 
+## 0.38.3
+
+### Patch Changes
+
+- [#3799](https://github.com/withastro/starlight/pull/3799) [`313611b`](https://github.com/withastro/starlight/commit/313611b1cd9c1f38688cb98cc103ddd758e80ec2) Thanks [@JosefJezek](https://github.com/JosefJezek)! - Improves Czech UI translations
+
+- [#3770](https://github.com/withastro/starlight/pull/3770) [`6e7bed1`](https://github.com/withastro/starlight/commit/6e7bed1e6b3b586b9719c620924f60d3678a1f83) Thanks [@gameroman](https://github.com/gameroman)! - Adds examples to the inline documentation for `title` in the Starlight configuration object
+
+- [#3801](https://github.com/withastro/starlight/pull/3801) [`fedd48b`](https://github.com/withastro/starlight/commit/fedd48b701ea9ca764b19139404c744099565f4c) Thanks [@delucis](https://github.com/delucis)! - Fixes missing draft content warning in dev on pages using the hero layout
+
 ## 0.38.2
 
 ### Patch Changes
