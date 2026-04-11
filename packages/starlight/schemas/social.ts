@@ -2,7 +2,7 @@ import { z } from 'astro/zod';
 import { IconSchema } from './icon';
 
 const LinksSchema = z
-	.object({ icon: IconSchema(), label: z.string().min(1), href: z.string() })
+	.object({ icon: IconSchema(), label: z.string().min(1), href: z.string(), target: z.string().optional() })
 	.array()
 	.optional();
 
