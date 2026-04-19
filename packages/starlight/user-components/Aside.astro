@@ -34,7 +34,9 @@ if (!title) {
 	<p class="starlight-aside__title" aria-hidden="true">
 		<Icon name={icon || icons[type]} class="starlight-aside__icon" />{title}
 	</p>
-	<div class="starlight-aside__content">
-		<slot />
-	</div>
+	{/* 
+		The slot is intentionally not wrapped in newlines/whitespace to ensure CSS `:empty` 
+		can match when no content is provided. 
+	*/}
+	<div class="starlight-aside__content"><slot /></div>
 </aside>
